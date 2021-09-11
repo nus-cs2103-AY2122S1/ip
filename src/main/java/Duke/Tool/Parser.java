@@ -31,7 +31,8 @@ public class Parser {
     }
 
     /**
-     * the method isInteger to judge whether input is integer
+     * Is the integer method to judge whether input is integer
+     *
      * @param input
      * @return boolean
      */
@@ -49,17 +50,19 @@ public class Parser {
     }
 
     /**
-     * The method for done command task process
+     * Done command task process
+     *
      * @param cmd
-     * @param task
+     * @param tasks
      * @return Task object
      * @throws EmptyTaskListException
      * @throws NoDescriptionException
      * @throws NoCommandException
+     * @return the task of done operation
      */
-    public static Task done(String cmd, TaskList task) throws EmptyTaskListException, NoDescriptionException, NoCommandException {
+    public static Task done(String cmd, TaskList tasks) throws EmptyTaskListException, NoDescriptionException, NoCommandException {
 
-        int order = task.size();
+        int order = tasks.size();
         if (cmd.split(" ").length == 1) {
             throw new NoDescriptionException("Done");
 
@@ -78,17 +81,19 @@ public class Parser {
     }
 
     /**
-     * The method for delete command task process
+     * Deletes the task process
+     *
      * @param cmd
-     * @param task
+     * @param tasks
      * @return Task object
      * @throws DeleteWrongIndexException
      * @throws NoDescriptionException
      * @throws NoCommandException
+     * @return Task of delete operation
      */
-    public static Task delete(String cmd, TaskList task) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException {
+    public static Task delete(String cmd, TaskList tasks) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException {
 
-        int order = task.size();
+        int order = tasks.size();
         if (cmd.split(" ").length == 1)  {
             throw new NoDescriptionException("Delete");
 
@@ -107,20 +112,22 @@ public class Parser {
     }
 
     /**
-     * The method for Todo, Deadline, Event command task process
+     * Add tass like Todo, Deadline, Event command task process
+     *
      * @param cmd
-     * @param task
+     * @param tasks
      * @return Task object
      * @throws NoDescriptionException
      * @throws NoTimeException
      * @throws NoCommandException
      * @throws WrongTimeFormatException
+     * @return Task
      */
-    public static Task addTask(String cmd, TaskList task) throws NoDescriptionException, NoTimeException,
+    public static Task addTask(String cmd, TaskList tasks) throws NoDescriptionException, NoTimeException,
             NoCommandException, WrongTimeFormatException {
 
         Parser.Operation instruction = Parser.Operation.valueOf(cmd.toUpperCase().split(" ")[0]);
-        int order = task.size();
+        int order = tasks.size();
         if (cmd.split(" ").length != 1) {
             switch (instruction) {
             case TODO:
@@ -182,15 +189,17 @@ public class Parser {
     }
 
     /**
-     * The method of find: give users a way to find a task by searching for a keyword.
+     * Finds tasks by searching for a keyword.
+     *
      * @param cmd
-     * @param task
+     * @param tasks
      * @return Find Object
      * @throws NoDescriptionException
      * @throws NoCommandException
+     * @return Find task
      */
-    public static Find find(String cmd, TaskList task) throws NoDescriptionException {
-        int order = task.size();
+    public static Find find(String cmd, TaskList tasks) throws NoDescriptionException {
+        int order = tasks.size();
         if (cmd.split(" ").length == 1) {
             throw new NoDescriptionException("Find");
         } else {
@@ -199,12 +208,13 @@ public class Parser {
     }
 
     /**
-     * The method for parse
+     * Parses the input in specific command
+     *
      * @param cmd
-     * @param task
+     * @param tasks
      * @return Task object
      */
-    public static Task parse(String cmd, TaskList task) {
+    public static Task parse(String cmd, TaskList tasks) {
 
         Operation operation;
 
@@ -224,22 +234,22 @@ public class Parser {
                 return new List();
 
             case DONE:
-                return done(cmd, task);
+                return done(cmd, tasks);
 
             case DELETE:
-                return delete(cmd, task);
+                return delete(cmd, tasks);
 
             case TODO:
-                return addTask(cmd, task);
+                return addTask(cmd, tasks);
 
             case DEADLINE:
-                return addTask(cmd, task);
+                return addTask(cmd, tasks);
 
             case EVENT:
-                return addTask(cmd, task);
+                return addTask(cmd, tasks);
 
             case FIND:
-                return find(cmd, task);
+                return find(cmd, tasks);
 
             default:
                 throw new NoCommandException(cmd);

@@ -14,7 +14,8 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Thw contructor for Deadline Task
+     * Constructs Deadline class
+     *
      * @param description
      * @param by
      * @param isDone
@@ -25,7 +26,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * the markDone method for marking the task as done
+     * Marks down the deadline task
+     *
      * @return Deadline task
      */
     @Override
@@ -35,34 +37,37 @@ public class Deadline extends Task {
     }
 
     /**
-     * The formatChange method for change the done x -> 1 in Writing record tasks.txt version
-     * @return String
+     * Changes the format let "X" -> 1 and record to tasks.txt version
+     *
+     * @return String changed format of deadline task in record
      */
     @Override
-    public String formatChange() {
+    public String changeFormat() {
         String mark = isDone ? "1" : "0";
         return "D | " + mark + " | " + this.description + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     /**
-     * The execute version to process given deadline task
-     * @param task
+     * Executes input deadline task
+     *
+     * @param tasks
      * @param ui
      * @param storage
-     * @return
+     * @return String the details of deadline task
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        int numOfBeforeTask = task.size();
-        task.add(this);
-        assert task.size() - numOfBeforeTask == 1 : "Add Deadline task not successful";
-        storage.writeData(task.getTasks());
-        return ui.showAddOnTask(task, task.size() - 1);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int numOfBeforeTask = tasks.size();
+        tasks.add(this);
+        assert tasks.size() - numOfBeforeTask == 1 : "Add Deadline task not successful";
+        storage.writeData(tasks.getTasks());
+        return ui.showAddOnTask(tasks, tasks.size() - 1);
     }
 
     /**
-     * Overridden toString method to print deadline task details
-     * @return String
+     * Overrides toString method to print deadline task details
+     *
+     * @return String of deadline task details
      */
     @Override
     public String toString() {

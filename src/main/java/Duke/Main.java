@@ -18,7 +18,8 @@ public class Main extends Application {
     private Duke duke = new Duke();
 
     /**
-     * The Method of start the MainWindow Scene
+     * Starts the MainWindow Scene
+     *
      * @param stage
      * @throws IOException
      */

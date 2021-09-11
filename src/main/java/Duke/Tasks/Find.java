@@ -10,8 +10,9 @@ import Duke.Ui.Ui;
 public class Find extends Task {
 
     protected String description;
+
     /**
-     * The constructor for Find task
+     * Constructs Find class
      */
     public Find(String description) {
         super("find", false);
@@ -20,13 +21,15 @@ public class Find extends Task {
 
     /**
      * Executes the input find task
-     * @param task
+     *
+     * @param tasks
      * @param ui
      * @param storage
+     * @return String of find task details
      */
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        return ui.showFindDetails(task, this.description);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showFindDetails(tasks, this.description);
     }
 
 }
