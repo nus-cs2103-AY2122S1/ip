@@ -64,6 +64,21 @@ Got it, I have added this task:
 [E][ ] project meeting (at: August 08 2021, 1630)
 ```
 
+### `recurring` - Adds a recurring task
+
+Example of usage:
+
+`recurring weekly, 3, deadline do assignment /by 2021-08-08 16:30`
+
+Expected outcome: Adds the recurring event task with the date attached to it with the specified frequency and number of times.
+
+Description of the outcome.
+
+```
+Got it, I have added this task: 
+[D][ ] do assignment (by: August 08 2021, 1630)
+weekly for 3 times
+```
 ### `done` - Mark a task as done
 
 Example of usage:
