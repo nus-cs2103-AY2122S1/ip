@@ -20,8 +20,8 @@ The features offered are:
 - [Finding a task](#finding-a-task)
 - [Clearing all tasks](#clearing-all-tasks)
 - [Listing all tasks](#listing-all-tasks)
+- [Searching by priority](#searching-by-priority)
 - [Exiting the app](#exiting-the-app)
-- Searching by priority (to be implemented)
 
 Some advanced features include
 - [Substitutable keywords](#substitutable-keywords)
@@ -167,6 +167,18 @@ Expected outcome:
 3. [D] [L] Graph theory assignment (by 2022-11-21 14:25)
 ```
 > Substitutable keywords: `ls`. 
+
+### Searching by priority
+Other than listing all tasks, Tiger can help you search tasks based on a certain priority. The usage is `priority [L|M|H]`. **If the task is already marked as done, it won't show up in the search**.
+
+Example: `priority H` - lists all tasks with high priority.
+
+Expected outcome:
+```
+1. [T] [H] Type out homework
+2. [E] [H] Feed fish (at 2021-09-01 16:00)
+3. [D] [H] Graph theory assignment (by 2022-11-21 14:25)
+```
 ________
 ### Exiting the app
 To quit the app, the usage is `bye`. 
