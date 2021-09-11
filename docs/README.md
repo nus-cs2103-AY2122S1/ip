@@ -287,4 +287,4 @@ Please enter Y or N only
 ```
 At this point, the user has tried to alter Tiger's data files and is not following simple instructions. Tiger is clearly pissed and does not bother put in a full-stop at the end of its sentences anymore.
 
-### **And that's all! Tiger is ready for the user to enter in all the *wrong* commands!**
+### **And that's all! Tiger is ready for you to use!**
