@@ -13,6 +13,11 @@ public class TaskList {
 
     private TaskList() {}
 
+    /**
+     * Returns the tasklist object
+     *
+     * @return TaskList An ArrayList of all the tasks
+     */
     public static TaskList getTaskList() {
         if( MainList == null) {
             MainList = new TaskList();
@@ -21,6 +26,11 @@ public class TaskList {
         return MainList;
     }
 
+    /**
+     * Returns a list of tasks
+     *
+     * @return TaskList An ArrayList of all the tasks
+     */
     public List<? extends Task> getTasks() {
         if(MainList == null) {
             MainList = new TaskList();
@@ -28,6 +38,12 @@ public class TaskList {
 
         return this.taskList;
     }
+
+    /**
+     * Adds a task to the list of tasks
+     *
+     * @return int size of the list of tasks
+     */
     public int addTask(Task task) {
         if( MainList == null) {
             MainList = new TaskList();
@@ -36,6 +52,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Returns the number of tasks in the list
+     * @return int size of the list of tasks
+     */
     public int getSize() {
         return this.taskList.size();
     }

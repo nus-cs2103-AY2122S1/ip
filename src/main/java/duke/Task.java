@@ -6,7 +6,7 @@ public abstract class Task {
      */
     public abstract void markAsDone();
     /**
-     * Return Marks the task as done.
+     * Marks the task as done.
      *
      * @return A string representing the task
      */
