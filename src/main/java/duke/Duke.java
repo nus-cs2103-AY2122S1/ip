@@ -14,6 +14,6 @@ public class Duke {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        Application.launch(DukeChatbot.class, args);
+        Application.launch(ChadChatbot.class, args);
     }
 }

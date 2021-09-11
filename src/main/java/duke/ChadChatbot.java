@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -20,7 +21,9 @@ import javafx.stage.Stage;
  *
  * @author Jay Aljelo Saez Ting
  */
-public class DukeChatbot extends Application {
+public class ChadChatbot extends Application {
+
+    private static final String APP_WINDOW_TITLE = "ChadBot";
 
     private Ui ui;
     private CommandParser commandParser;
@@ -52,11 +55,11 @@ public class DukeChatbot extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(DukeChatbot.class.getResource("/view/Ui.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(ChadChatbot.class.getResource("/view/Ui.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            initialise(fxmlLoader);
+            initialiseStage(stage, scene);
+            initialiseComponents(fxmlLoader);
             stage.show();
             ui.printGreeting();
         } catch (IOException e) {
@@ -68,7 +71,7 @@ public class DukeChatbot extends Application {
         }
     }
 
-    private void initialise(FXMLLoader fxmlLoader) throws IOException {
+    private void initialiseComponents(FXMLLoader fxmlLoader) throws IOException {
         ui = fxmlLoader.getController();
         ui.setDukeChatbot(this);
         commandParser = new CommandParser();
@@ -82,5 +85,12 @@ public class DukeChatbot extends Application {
             }
         });
         hasErrorOnSave = false;
+    }
+
+    private void initialiseStage(Stage stage, Scene scene) {
+        stage.setTitle(APP_WINDOW_TITLE);
+        Image appIcon = new Image("/images/yeschad_toleft.png");
+        stage.getIcons().add(appIcon);
+        stage.setScene(scene);
     }
 }

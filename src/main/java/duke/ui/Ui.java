@@ -3,15 +3,20 @@ package duke.ui;
 import java.util.List;
 import java.util.Map;
 
-import duke.DukeChatbot;
+import duke.ChadChatbot;
 import duke.command.Command;
 import duke.task.Task;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -105,16 +110,18 @@ public class Ui extends AnchorPane {
          */
         public void printFormatted() {
             String message = messageSb.toString().stripTrailing();
-            printFormattedMessage(message);
+            displayMessage(message);
         }
     }
 
-    private static final String GREETING_MESSAGE = "Hello! I'm Duke!\n"
-            + "What can I do for you?";
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String GREETING_MESSAGE = "Hello there! My name is Chad!\n"
+            + "What can I help you with?";
+    private static final String EXIT_MESSAGE = "Goodbye. Hope we see each other again soon.";
     private static final String UNEXPECTED_ERROR_MESSAGE = "An unexpected error has occurred.";
     private static final String INVALID_COMMAND_ERROR_TEMPLATE = "This command is invalid.\n%s\nPlease try again.";
 
+    @FXML
+    private GridPane gridPane;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -124,31 +131,41 @@ public class Ui extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage;
+    private Image botNormalImage;
+    private Image botErrorImage;
+    private boolean isAtBottom;
+    private boolean wasAtBottom;
+    private boolean hasNewDialog;
 
-    private DukeChatbot dukeChatbot;
+    private ChadChatbot chadChatbot;
     private MessageFormatter messageFormatter;
 
     /**
      * Creates a Ui instance.
      */
     public Ui() {
-        this.messageFormatter = MessageFormatter.getInstance();
+        messageFormatter = MessageFormatter.getInstance();
+        userImage = new Image(this.getClass().getResourceAsStream("/images/yeschad_toleft.png"));
+        botNormalImage = new Image(this.getClass().getResourceAsStream("/images/gigachad_toright.png"));
+        botErrorImage = new Image(this.getClass().getResourceAsStream("/images/gigachad_error_toright.png"));
+        isAtBottom = true;
+        wasAtBottom = true;
+        hasNewDialog = false;
     }
 
     /**
      * Displays the greeting.
      */
     public void printGreeting() {
-        printFormattedMessage(GREETING_MESSAGE);
+        displayMessage(GREETING_MESSAGE);
     }
 
     /**
      * Displays the generic error message for unexpected errors.
      */
     public void printUnexpectedErrorMessage() {
-        printFormattedMessage(UNEXPECTED_ERROR_MESSAGE);
+        displayErrorMessage(UNEXPECTED_ERROR_MESSAGE);
     }
 
     /**
@@ -157,14 +174,14 @@ public class Ui extends AnchorPane {
      * @param message The error message.
      */
     public void printInvalidCommandErrorMessage(String message) {
-        printFormattedMessage(String.format(INVALID_COMMAND_ERROR_TEMPLATE, message));
+        displayErrorMessage(String.format(INVALID_COMMAND_ERROR_TEMPLATE, message));
     }
 
     /**
      * Displays the exit message.
      */
     public void printExitMessage() {
-        printFormattedMessage(EXIT_MESSAGE);
+        displayMessage(EXIT_MESSAGE);
     }
 
     /**
@@ -176,13 +193,65 @@ public class Ui extends AnchorPane {
         return new MessageBuilder();
     }
 
-    public void setDukeChatbot(DukeChatbot dukeChatbot) {
-        this.dukeChatbot = dukeChatbot;
+    public void setDukeChatbot(ChadChatbot chadChatbot) {
+        this.chadChatbot = chadChatbot;
     }
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        initialiseScrollPane();
+        initialiseDialogContainer();
+    }
+
+    private void initialiseScrollPane() {
+        makeScrollPaneCheckIfItWasScrolledToBottom();
+    }
+
+    private void initialiseDialogContainer() {
+        makeDialogContainerTellScrollPaneToScrollToBottomAppropriately();
+        makeDialogContainerCheckIfNewDialogsAdded();
+    }
+
+    private void makeScrollPaneCheckIfItWasScrolledToBottom() {
+        scrollPane.vvalueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                wasAtBottom = isAtBottom;
+                double vValue = newValue.doubleValue();
+                double maxVValue = scrollPane.getVmax();
+                boolean isNotAtBottom = vValue < maxVValue;
+                isAtBottom = !isNotAtBottom;
+            }
+        });
+    }
+
+    private void makeDialogContainerTellScrollPaneToScrollToBottomAppropriately() {
+        dialogContainer.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (wasAtBottom) {
+                    scrollToBottom();
+                } else if (hasNewDialog) {
+                    scrollToBottom();
+                    hasNewDialog = false;
+                }
+            }
+        });
+    }
+
+    private void makeDialogContainerCheckIfNewDialogsAdded() {
+        dialogContainer.getChildren().addListener(new ListChangeListener<Node>() {
+            @Override
+            public void onChanged(Change<? extends Node> c) {
+                while (c.next() && c.wasAdded()) {
+                    hasNewDialog = true;
+                }
+            }
+        });
+    }
+
+    private void scrollToBottom() {
+        scrollPane.setVvalue(scrollPane.getVmax());
     }
 
     /**
@@ -193,11 +262,11 @@ public class Ui extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox userDialog = DialogBox.getCommandDialog(input, userImage);
         dialogContainer.getChildren()
                 .add(userDialog);
         userInput.clear();
-        dukeChatbot.readInput(input);
+        chadChatbot.readInput(input);
     }
 
     private String getListLengthMessage(int listLength) {
@@ -209,9 +278,16 @@ public class Ui extends AnchorPane {
         }
     }
 
-    private void printFormattedMessage(String message) {
+    private void displayMessage(String message) {
         String formattedMessage = messageFormatter.getFormattedMessage(message);
-        DialogBox dukeDialog = DialogBox.getDukeDialog(formattedMessage, dukeImage);
+        DialogBox dukeDialog = DialogBox.getNormalResponseDialog(formattedMessage, botNormalImage);
+        dialogContainer.getChildren()
+                .add(dukeDialog);
+    }
+
+    private void displayErrorMessage(String message) {
+        String formattedMessage = messageFormatter.getFormattedMessage(message);
+        DialogBox dukeDialog = DialogBox.getErrorResponseDialog(formattedMessage, botErrorImage);
         dialogContainer.getChildren()
                 .add(dukeDialog);
     }
