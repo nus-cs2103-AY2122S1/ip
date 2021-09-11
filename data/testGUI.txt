@@ -1,6 +1,8 @@
 T;;0;;task2
 NM;;
-E;;0;;CS2103T Lecture;;2021-09-10 1600
+E;;1;;CS2103T Lecture;;2021-09-10 1600
 
-D;;0;;CS2100 Assignment;;2021-09-15
+D;;0;;task;;2020-05-23
+
+E;;0;;task;;mon
 
