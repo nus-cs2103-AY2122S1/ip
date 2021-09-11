@@ -3,32 +3,46 @@ package TiTi.util;
 import TiTi.task.Task;
 
 /**
- * Represent the response required for Ui to deliver.
- * Contain a Cue of what event to preform.
- * Contain the task to be printed (if needed).
+ * Represents the response required for Ui to deliver.
+ * Contains a Cue of what event to preform.
+ * Contains the task to be printed (if needed).
  */
 public class Response {
-    public enum Cue {EXIT, LIST, DONE, DELETE, TASKERROR, TODO, DEADLINE,
-            EVENT, MISSINGDESCRIPTION, UNRECOGNISED, FIND};
+    public enum Cue {EXIT, LIST, DONE, DELETE, TASK_ERROR, TODO, DEADLINE,
+            EVENT, MISSING_DESCRIPTION, UNRECOGNISED, FIND};
     public Cue cue;
     public TaskList taskList;
 
+    /**
+     * Initialises a Deadline instance.
+     *
+     * @param cue type of event
+     */
     public Response(Cue cue) {
         this.cue = cue;
     }
 
+
     /**
-     * Constructor for Response class.
+     * Initialises a Deadline instance.
      *
      * @param cue type of event
-     * @param task task modified
+     * @param tasks tasks modified
      */
-    public Response(Cue cue, Task task) {
+    public Response(Cue cue, Task ... tasks) {
         this.cue = cue;
         taskList = new TaskList();
-        taskList.add(task);
+        for (Task task: tasks) {
+            taskList.add(task);
+        }
     }
 
+    /**
+     * Initialises a Deadline instance.
+     *
+     * @param cue type of event
+     * @param taskList tasks modified
+     */
     public Response(Cue cue, TaskList taskList) {
         this.cue = cue;
         this.taskList = taskList;

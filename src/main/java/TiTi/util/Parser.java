@@ -6,15 +6,15 @@ import TiTi.task.Deadline;
 import TiTi.task.ToDo;
 
 /**
- * Make sense of user command, and return Response
- * to tell Ui how to interact with user.
+ * Represents an interpreter to make sense of user command,
+ * and return Response object to tell Ui how to interact with user.
  */
 public class Parser {
     private SavedHistory savedHistory;
     private TaskList taskList;
 
     /**
-     * Constructor for Parser class.
+     * Initialises a Parser instance.
      *
      * @param savedHistory loads and writes to the saved data
      * @param taskList list of current tasks
@@ -25,95 +25,125 @@ public class Parser {
     }
 
     /**
-     * Ask and interpret user command, and update list as required.
+     * Interprets user command, and update task list as required.
      *
-     * @return Response object to tell Ui how to respons to user command
+     * @param input user input to be interpreted
+     * @return Response object to tell Ui how to respond to user command
      */
-    public Response cue(String input) {
+    public Response parse(String input) {
 
         String cue = input.split(" ", 2)[0];
 
+        // check if description is needed
+        boolean isNeedDescription = (cue.equals("todo") || cue.equals("deadline")
+                || cue.equals("event") || cue.equals("find"));
+
         // handle missing description
-        if ((cue.equals("todo") || cue.equals("deadline")
-                || cue.equals("event") || cue.equals("find"))
-                && input.split(" ", 2).length == 1) {
-            return new Response(Response.Cue.MISSINGDESCRIPTION);
+        if (isNeedDescription && input.split(" ", 2).length == 1) {
+            return new Response(Response.Cue.MISSING_DESCRIPTION);
         }
 
-        int taskNumber;
-        int numberOfTasks = taskList.size();
-        String[] temp;
-        String description;
-        String time;
-
+        // parse each type of user input
         switch (cue) {
         case "bye":
-            savedHistory.saveHistory(taskList);
-            return new Response(Response.Cue.EXIT);
+            return parseBye();
 
         case "list":
-            return new Response(Response.Cue.LIST);
+            return parseList();
 
         case "done":
-            taskNumber = Integer.parseInt("" + input.charAt(5));
-            if (taskNumber > numberOfTasks) {
-                return new Response(Response.Cue.TASKERROR);
-            } else {
-                Task task = taskList.get(taskNumber - 1);
-                task.complete();
-                return new Response(Response.Cue.DONE, task);
-            }
+            return parseDone(input);
 
         case "delete":
-            taskNumber = Integer.parseInt("" + input.charAt(7));
-            if (taskNumber > numberOfTasks) {
-                return new Response(Response.Cue.TASKERROR);
-            } else {
-                Task task = taskList.get(taskNumber - 1);
-                taskList.remove(taskNumber - 1);
-                return new Response(Response.Cue.DELETE, task);
-            }
+            return parseDelete(input);
 
         case "todo":
-            description = input.split(" ", 2)[1];
-            ToDo todo = new ToDo(description);
-            taskList.add(todo);
-            return new Response(Response.Cue.TODO, todo);
+            return parseTodo(input);
 
         case "deadline":
-            temp = input.split(" ", 2)[1].split(" /by ", 2);
-            description = temp[0];
-            time = temp[1];
-            Deadline deadline = new Deadline(description, time);
-            taskList.add(deadline);
-            return new Response(Response.Cue.DEADLINE, deadline);
+            return parseDeadline(input);
 
         case "event":
-            temp = input.split(" ", 2)[1].split(" /at ", 2);
-            description = temp[0];
-            time = temp[1];
-            Event event = new Event(description, time);
-            taskList.add(event);
-            return new Response(Response.Cue.EVENT, event);
+            return parseEvent(input);
 
         case "find":
-            description = input.split(" ", 2)[1];
-            TaskList tempList = new TaskList();
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
-                if (task.checkString(description)) {
-                    tempList.add(task);
-                }
-            }
-            if (tempList.size() == 0) {
-                return new Response(Response.Cue.UNRECOGNISED);
-            } else {
-                return new Response(Response.Cue.FIND, tempList);
-            }
+            return parseFind(input);
 
         default:
             return new Response(Response.Cue.UNRECOGNISED);
         }
     }
 
+
+    private Response parseBye() {
+        savedHistory.saveHistory(taskList);
+        return new Response(Response.Cue.EXIT);
+    }
+
+    private Response parseList() {
+        return new Response(Response.Cue.LIST);
+    }
+
+    private Response parseDone(String input) {
+        int numberOfTasks = taskList.size();
+        int taskNumber = Integer.parseInt("" + input.charAt(5));
+        if (taskNumber > numberOfTasks) {
+            return new Response(Response.Cue.TASK_ERROR);
+        }
+        Task task = taskList.get(taskNumber - 1);
+        task.complete();
+        return new Response(Response.Cue.DONE, task);
+    }
+
+    private Response parseDelete(String input) {
+        int numberOfTasks = taskList.size();
+        int taskNumber = Integer.parseInt("" + input.charAt(7));
+        if (taskNumber > numberOfTasks) {
+            return new Response(Response.Cue.TASK_ERROR);
+        }
+        Task task = taskList.get(taskNumber - 1);
+        taskList.remove(taskNumber - 1);
+        return new Response(Response.Cue.DELETE, task);
+    }
+
+    private Response parseTodo(String input) {
+        String description = input.split(" ", 2)[1];
+        ToDo todo = new ToDo(description);
+        taskList.add(todo);
+        return new Response(Response.Cue.TODO, todo);
+    }
+
+    private Response parseDeadline(String input) {
+        String[] temp = input.split(" ", 2)[1].split(" /by ", 2);
+        String description = temp[0];
+        String time = temp[1];
+        Deadline deadline = new Deadline(description, time);
+        taskList.add(deadline);
+        return new Response(Response.Cue.DEADLINE, deadline);
+    }
+
+    private Response parseEvent(String input) {
+        String[] temp = input.split(" ", 2)[1].split(" /at ", 2);
+        String description = temp[0];
+        String time = temp[1];
+        Event event = new Event(description, time);
+        taskList.add(event);
+        return new Response(Response.Cue.EVENT, event);
+    }
+
+    private Response parseFind(String input) {
+        String description = input.split(" ", 2)[1];
+        TaskList tempList = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.isContain(description)) {
+                tempList.add(task);
+            }
+        }
+        if (tempList.size() == 0) {
+            return new Response(Response.Cue.UNRECOGNISED);
+        } else {
+            return new Response(Response.Cue.FIND, tempList);
+        }
+    }
 }

@@ -2,15 +2,15 @@ package TiTi.task;
 
 /**
  * Represents a Task.
- * Contain String description of the task.
- * Contain boolean value of whether the task has been completed.
+ * Contains String description of the task.
+ * Contains boolean value of whether the task has been completed.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for Task class.
+     * Initialises a Task instance.
      *
      * @param description description of the task.
      */
@@ -19,28 +19,32 @@ public class Task {
         this.isDone = false;
     }
 
-
     private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
-     * Mark the task as completed.
+     * Marks the task as completed.
      */
     public void complete() {
         this.isDone = true;
     }
 
     /**
-     * Determine if the task description contain the string in question.
+     * Determines if the task description contain the string in question.
      *
      * @param str string to search for
      * @return boolean value of whether the substring is found
      */
-    public boolean checkString(String str) {
+    public boolean isContain(String str) {
         return description.contains(str);
     }
 
+    /**
+     * Returns string representation of the task.
+     *
+     * @return string representation of task
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

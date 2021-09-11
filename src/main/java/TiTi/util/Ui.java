@@ -1,12 +1,9 @@
 package TiTi.util;
 
-import TiTi.task.Task;
-
 import java.util.Scanner;
 
 /**
- * Control the interaction with the user.
- * Prints to the user interface.
+ * Represents the control for the user interface interaction.
  */
 public class Ui {
     private static final String STARTER_NORMAL =   "(=^ ･ｪ･^=) < ";
@@ -15,20 +12,18 @@ public class Ui {
     private static final String STARTER_CONFUSED = "(=^ ･x･^=)? < ";
     private static final String STARTER_HAPPY =    "(=^ ･ω･^=)❀ < ";
 
-    private SavedHistory savedHistory;
     private TaskList taskList;
     private Parser parser;
     private boolean isContinue;
     private Scanner sc;
 
     /**
-     * Constructor for Ui class.
+     * Initialises an Ui instance.
      *
      * @param savedHistory loads and writes to the saved data
      * @param taskList list of current tasks
      */
     public Ui(SavedHistory savedHistory, TaskList taskList) {
-        this.savedHistory = savedHistory;
         this.taskList = taskList;
         this.parser = new Parser(savedHistory, taskList);
         isContinue = true;
@@ -39,18 +34,21 @@ public class Ui {
      * Prints Welcome message when user first run programme.
      */
     public void welcome() {
-        System.out.println(welcomeMessage());
+        System.out.println(getWelcomeMessage());
     }
 
-    public String welcomeMessage() {
+    /**
+     * Returns string representation of welcome message
+     *
+     * @return Welcome message when user first run programme
+     */
+    public String getWelcomeMessage() {
         return STARTER_NORMAL + "Hello! I'm TiTi~ \n" +
                 STARTER_BUFFER + "What would you like to do nya? \n";
     }
 
-
-
     /**
-     * Return false if programme has terminated. True if otherwise.
+     * Returns false if programme has terminated. True if otherwise.
      *
      * @return if continue with programme
      */
@@ -58,92 +56,153 @@ public class Ui {
         return isContinue;
     }
 
-
-    public void UserCommand() {
+    /**
+     * Scans for user command input, and print response to terminal.
+     */
+    public void cueUserCommand() {
         String input = sc.nextLine();
         System.out.println(getResponse(input));
     }
 
     /**
-     * Prints the response for the user command onto the user interface.
+     * Returns string representation of the response for the user command
+     * onto the user interface.
+     *
+     * @return response to user input
      */
     public String getResponse(String input) {
-        Response response = parser.cue(input);
+        Response response = parser.parse(input);
         TaskList tempTaskList = response.taskList;
-        String result = "";
 
+        // Formulate response
         switch(response.cue) {
         case EXIT:
-            result += STARTER_SLEEPY + "Already done? Come back again soon nya~ \n";
-            isContinue = false;
-            break;
+            return getExitResponse();
 
         case LIST:
-            if (taskList.size() == 0) {
-                result += STARTER_NORMAL + "Looks like you have no tasks nya~ \n";
-                break;
-            }
-            result += STARTER_NORMAL + "Have you competed these tasks nya? \n";
-            for (int i = 0; i < taskList.size(); i++) {
-                result += STARTER_BUFFER + (i + 1) + ". " + taskList.get(i) + " \n";
-            }
-            break;
+            return getListResponse();
 
-        case TASKERROR:
-            result += STARTER_CONFUSED + "Nya?... I can't find the task... \n";
-            break;
+        case TASK_ERROR:
+            return getTaskErrorResponse();
 
         case DONE:
-            result += STARTER_HAPPY + "Nya! You've worked hard haven't you! \n";
-            result += STARTER_BUFFER + "I'll mark this task as done: \n";
-            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
-            break;
+            return getDoneResponse(tempTaskList);
 
         case DELETE:
-            result += STARTER_NORMAL + "Nya! This task shall be removed: \n";
-            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
-            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
-            break;
+            return getDeleteResponse(tempTaskList);
 
-        case MISSINGDESCRIPTION:
-            result += STARTER_CONFUSED + "Nya? Give me a description of the task pwease. \n";
-            break;
+        case MISSING_DESCRIPTION:
+            return getMissingDescriptionResponse();
             
         case TODO:
-            result += STARTER_NORMAL + "A new task? I'll add this to the list: \n";
-            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
-            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
-            result += STARTER_BUFFER + "Don't forget to complete it nya~ \n";
-            break;
+            return getToDoResponse(tempTaskList);
 
         case DEADLINE:
-            result += STARTER_NORMAL + "A new deadline? Sounds tough nya... \n";
-            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
-            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
-            result += STARTER_BUFFER + "Gambatte nya~ \n";
-            break;
+            return getDeadlineResponse(tempTaskList);
 
         case EVENT:
-            result += STARTER_NORMAL + "A new event? Let me record it down: \n";
-            result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
-            result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
-            result += STARTER_BUFFER + "I'll be waiting nya~ \n";
-            break;
+            return getEventResponse(tempTaskList);
 
         case FIND:
-            result += STARTER_NORMAL + "Found it! Here you go! \n";
-            for (int i = 0; i < tempTaskList.size(); i++) {
-                result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
-            }
-            break;
+            return getFindResponse(tempTaskList);
 
         default:
-            result += STARTER_CONFUSED + "Nya?... I can't find what you are looking for... \n";
+            return getDefaultResponse();
         }
+    }
 
+    private String getExitResponse() {
+        String result = "";
+        isContinue = false;
+        result += STARTER_SLEEPY + "Already done? Come back again soon nya~ \n";
         return result;
     }
 
+    private String getListResponse() {
+        String result = "";
+        if (taskList.size() == 0) {
+            result += STARTER_NORMAL + "Looks like you have no tasks nya~ \n";
+            return result;
+        }
+        result += STARTER_NORMAL + "Have you competed these tasks nya? \n";
+        for (int i = 0; i < taskList.size(); i++) {
+            result += STARTER_BUFFER + (i + 1) + ". " + taskList.get(i) + " \n";
+        }
+        return result;
+    }
+
+    private String getTaskErrorResponse() {
+        String result = "";
+        result += STARTER_CONFUSED + "Nya?... I can't find the task... \n";
+        return result;
+    }
+
+
+    private String getDoneResponse(TaskList tempTaskList) {
+        String result = "";
+        result += STARTER_HAPPY + "Nya! You've worked hard haven't you! \n";
+        result += STARTER_BUFFER + "I'll mark this task as done: \n";
+        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+        return result;
+    }
+
+
+    private String getDeleteResponse(TaskList tempTaskList) {
+        String result = "";
+        result += STARTER_NORMAL + "Nya! This task shall be removed: \n";
+        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+        result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+        return result;
+    }
+
+
+    private String getMissingDescriptionResponse() {
+        String result = "";
+        result += STARTER_CONFUSED + "Nya? Give me a description of the task pwease. \n";
+        return result;
+    }
+
+    private String getToDoResponse(TaskList tempTaskList) {
+        String result = "";
+        result += STARTER_NORMAL + "A new task? I'll add this to the list: \n";
+        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+        result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+        result += STARTER_BUFFER + "Don't forget to complete it nya~ \n";
+        return result;
+    }
+
+    private String getDeadlineResponse(TaskList tempTaskList) {
+        String result = "";
+        result += STARTER_NORMAL + "A new deadline? Sounds tough nya... \n";
+        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+        result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+        result += STARTER_BUFFER + "Gambatte nya~ \n";
+        return result;
+    }
+
+    private String getEventResponse(TaskList tempTaskList) {
+        String result = "";
+        result += STARTER_NORMAL + "A new event? Let me record it down: \n";
+        result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
+        result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
+        result += STARTER_BUFFER + "I'll be waiting nya~ \n";
+        return result;
+    }
+
+    private String getFindResponse(TaskList tempTaskList) {
+        String result = "";
+        result += STARTER_NORMAL + "Found it! Here you go! \n";
+        for (int i = 0; i < tempTaskList.size(); i++) {
+            result += STARTER_BUFFER + (i + 1) + ". " + tempTaskList.get(i) + " \n";
+        }
+        return result;
+    }
+
+    private String getDefaultResponse() {
+        String result = "";
+        result = STARTER_CONFUSED + "Nya?... I can't find what you are looking for... \n";
+        return result;
+    }
 
     private String printTaskCount(TaskList taskList) {
         if (taskList.size() == 1) {

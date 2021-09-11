@@ -5,14 +5,17 @@ import TiTi.util.TaskList;
 import TiTi.util.Ui;
 
 /**
- * TiTi is a Personal Assistant Chatbot that helps you keep track of various things
+ * TiTi is a Personal Assistant Chatbot that helps you keep track of various things.
+ * Represents launcher for text interface version of program.
  */
 public class TiTi{
     private SavedHistory savedHistory;
     private TaskList taskList;
     private Ui ui;
 
-
+    /**
+     * Initialises a TiTi instance.
+     */
     public TiTi() {
         savedHistory = new SavedHistory();
         taskList = new TaskList(savedHistory.readHistory());
@@ -22,7 +25,7 @@ public class TiTi{
     private void run() {
         ui.welcome();
         while (ui.isContinue()) {
-            ui.UserCommand();
+            ui.cueUserCommand();
         }
     }
 

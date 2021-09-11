@@ -2,20 +2,25 @@ package TiTi.task;
 
 /**
  * Represents the ToDo task.
- * Contain String description of the task.
- * Contain boolean value of whether the task has been completed.
+ * Contains String description of the task.
+ * Contains boolean value of whether the task has been completed.
  */
 public class ToDo extends Task {
 
     /**
-     * Constructor for TODO class.
+     * Initialises a ToDO instance.
      *
-     * @param description description of the task.
+     * @param description description of the task
      */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Returns string representation of the task.
+     *
+     * @return string representation of task
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

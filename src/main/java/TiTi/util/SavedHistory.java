@@ -1,18 +1,20 @@
 package TiTi.util;
 
-import TiTi.task.Task;
-import TiTi.task.Event;
-import TiTi.task.Deadline;
-import TiTi.task.ToDo;
-
 import java.io.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import TiTi.task.Task;
+import TiTi.task.Event;
+import TiTi.task.Deadline;
+import TiTi.task.ToDo;
+
+
 /**
- * Loads and tasks from the file when programme starts
- * and save tasks to the file when programme terminates.
+ * Represents interface with saved data history.
+ * Loads task from the file when programme starts,
+ * and saves task to the file when programme terminates.
  */
 public class SavedHistory {
 
@@ -21,8 +23,8 @@ public class SavedHistory {
     protected ArrayList<Task> savedTasks = new ArrayList<>();
 
     /**
-     * Constructor for SavedHistory class.
-     * Load tasks from data file.
+     * Initialises a SaveHistory instance.
+     * Loads task from data file.
      */
     public SavedHistory() {
         checkFile();
@@ -40,7 +42,9 @@ public class SavedHistory {
     }
 
 
-    // check and create necessary folder and file if needed
+    /**
+     * Checks and creates necessary folder and file if needed
+     */
     private void checkFile() {
         if (!TXT_FILE.exists()) {
             if (!DATA_FOLDER.exists()) {
@@ -54,7 +58,9 @@ public class SavedHistory {
         }
     }
 
-
+    /**
+     * Interprets a line in stored data
+     */
     private Task read(String string) {
         char type = string.charAt(1);
         char status = string.charAt(4);
@@ -100,7 +106,7 @@ public class SavedHistory {
 
 
     /**
-     * Produce the list of tasks loaded from the data file.
+     * Produces the list of tasks loaded from the data file.
      *
      * @return list of tasks
      */
@@ -110,7 +116,7 @@ public class SavedHistory {
 
 
     /**
-     * Write the new list of tasks into data history file.
+     * Writes the new list of tasks into data history file.
      *
      * @param newTasks list of tasks to be recorded
      */
