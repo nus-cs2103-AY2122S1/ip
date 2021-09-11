@@ -74,10 +74,10 @@ public class Storage {
         // Checks if file exists, creates if it doesn't
         if (!this.isFileCreated) {
             File file = new File(FILE_PATH);
-            boolean result;
+            boolean isCreationSuccess;
             try {
-                result = file.createNewFile();
-                this.isFileCreated = result;
+                isCreationSuccess = file.createNewFile();
+                this.isFileCreated = isCreationSuccess;
             } catch (IOException e) {
                 System.out.println("Something went wrong:  " + e.getMessage());
             }
