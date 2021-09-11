@@ -10,7 +10,6 @@ import java.time.format.DateTimeParseException;
 public class StringManipulator {
     /**
      * Separates the string by the first instance of the given character.
-     *
      * @param str The input string.
      * @param character The character to partition the string by.
      * @return The pair of string, separated by the partition character.
@@ -34,7 +33,6 @@ public class StringManipulator {
 
     /**
      * Partitions the string into 2, seperated by the first '/'.
-     *
      * @param str The input string
      * @return The pair of strings.
      */
@@ -44,7 +42,6 @@ public class StringManipulator {
 
     /**
      * Returns the first word and everything after the first ' ' of the String.
-     *
      * @param input The input word.
      * @return The pair of strings
      */
@@ -53,10 +50,9 @@ public class StringManipulator {
     }
 
     /**
-     * A function that returns everything after the first instance of '.'.
-     *
+     * Returns everything after the first instance of a period.
      * @param str The input string.
-     * @return The substring of str after the first '.'.
+     * @return The string after the first period.
      */
     public static String everythingAfterDot(String str) {
         int index = str.indexOf('.');
@@ -70,7 +66,6 @@ public class StringManipulator {
 
     /**
      * Converts the input string from 24-hour time to 12-hour time representation.
-     *
      * @param timeString The input string
      * @return The converted string.
      */
@@ -131,7 +126,6 @@ public class StringManipulator {
 
     /**
      * Converts the inputString into DD MMM YYYY format, or 12-hour time representation if applicable.
-     *
      * @param inputString The input string.
      * @return A string in DD MMM YYYY TIME format if inputString is in "YYYY-MM-DD TIME" format.
      */

@@ -35,7 +35,6 @@ public class TaskList {
 
     /**
      * A function that writes an input string to TASK_LIST_STORAGE.
-     *
      * @param text The input string to write into the file.
      */
     private static void updateFile(String text) throws VirushadeException {
@@ -189,7 +188,6 @@ public class TaskList {
 
     /**
      * Returns a string representation of all the tasks that have input text as a substring.
-     *
      * @param text The input search text
      * @return All results matching the input.
      */

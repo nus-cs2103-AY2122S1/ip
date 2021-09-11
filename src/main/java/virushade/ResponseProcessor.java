@@ -22,6 +22,7 @@ public class ResponseProcessor {
 
     /**
      * Virushade first says goodbye before exiting.
+     * @return The exit message.
      */
     private static String exitMessage() {
         return "Bye. Hope to see you again soon!";
@@ -62,7 +63,6 @@ public class ResponseProcessor {
 
     /**
      * Determines what Virushade should do with given string str.
-     *
      * @param str The input instructional string.
      */
     private static String assignTask(String str) throws VirushadeException {
@@ -98,7 +98,6 @@ public class ResponseProcessor {
 
     /**
      * Returns a string according to the input string str.
-     *
      * @param str The input string.
      * @return The resultant string message.
      */
