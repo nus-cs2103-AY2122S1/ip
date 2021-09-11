@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.zip.DataFormatException;
 
 import duke.util.DukeException;
 import duke.util.Utility;
@@ -57,9 +59,14 @@ public class Deadline extends Task {
         checkFormat(formattedString);
 
         int byIndex = formattedString.indexOf("/by");
-        LocalDate time = LocalDate.parse(
+        LocalDate time;
+        try {
+            time = LocalDate.parse(
                 formattedString.substring(byIndex + 4),
                 Utility.DATE_SHORT_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("are you following the correct date format (DD/MM/YYYY)?");
+        }
 
         return new Deadline(formattedString.substring(9, byIndex).trim(), time);
     }

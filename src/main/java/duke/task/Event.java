@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.util.DukeException;
 import duke.util.Utility;
@@ -55,9 +56,14 @@ public class Event extends Task {
         checkFormat(formattedString);
 
         int onIndex = formattedString.indexOf("/on ");
-        LocalDate time = LocalDate.parse(
+        LocalDate time;
+        try {
+            time = LocalDate.parse(
                 formattedString.substring(onIndex + 4),
                 Utility.DATE_SHORT_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("are you following the correct date format (DD/MM/YYYY)?");
+        }
 
         return new Event(formattedString.substring(6, onIndex).trim(), time);
     }
