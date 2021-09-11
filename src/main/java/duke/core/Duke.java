@@ -286,7 +286,7 @@ public class Duke extends Application {
                     s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
                 } else if (task.get(num) instanceof RecurringTask) {
                     s += (task.get(num).getIndex() + 1) + "." + " [R]";
-                    s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
+                    s2 = task.get(num).getName() + " " + "(" + " " + ((RecurringTask) task.get(num)).getTime() + " )";
                 }
                 if (task.get(num).isDone() == false) {
                     s += "[ ]" + s2;
