@@ -29,7 +29,7 @@ public class PersistentStorageHandler {
      *
      * @param fileName name that the storage handler will read and write to.
      */
-    public PersistentStorageHandler(String fileName) {
+    public PersistentStorageHandler(String dirName, String fileName) {
         assert fileName.contains(".txt") : "We should read and write to a .txt file only";
         //Name the file
         File storedDir = new File(dirName);
