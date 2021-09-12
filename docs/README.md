@@ -30,13 +30,10 @@ You may tell duke what to do for you using the following commands:
 
 * `list`
   list current tasks in the list
-
 * `delete index`
   remove the task of the corresponding `index` from the list
-
 * `find keyword`
   find tasks with `keyword` in its name
-
 * `done index`
   mark the task of corresponding index as done
 
