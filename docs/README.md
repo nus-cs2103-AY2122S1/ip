@@ -52,9 +52,9 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 - Extra leading and trailing spaces inside commands will be ignored.
 
-  e.g. if the command specifies `‎‎‎      todo              return     book		‎`, it will be interpreted as `todo return     book`.
+  e.g. if the command specifies `‎‎‎‎‎‎ todo              return     book ‎‎‎‎`, it will be interpreted as `todo return     book`.
 
-  e.g. if the command specifies `‎‎‎   done              1     2	3	‎`, it will be interpreted as `done 1 2 3`.
+  e.g. if the command specifies `‎‎‎‎‎‎ done              1     2	3 ‎‎‎‎`, it will be interpreted as `done 1 2 3`.
 
 - Extraneous parameters for commands that do not take in parameters (such as `list`, `bye`) will make the command invalid.
 
@@ -113,7 +113,7 @@ Examples:
 - `done 2 3 4` marks the 2nd task and the 3rd task and the 4th task in the task list as done.
 - `done 4 2 3` marks the 2nd task and the 3rd task and the 4th task in the task list as done.
 - `done 0` will show an error since there will never be a task at `index 0`.
-- `done 0 1` only marks the 1st task in the task list as done.
+- `done 0 1` marks only the 1st task in the task list as done.
 
 ### Deleting tasks: `delete`
 
@@ -130,18 +130,18 @@ Examples:
 - `delete 2 3 4` deletes the 2nd task and the 3rd task and the 4th task in the task list.
 - `delete 4 2 3` deletes the 2nd task and the 3rd task and the 4th task in the task list.
 - `delete 0` will show an error since there will never be a task at `index 0`.
-- `delete 0 1` only deletes the 1st task in the task list.
+- `delete 0 1` deletes only the 1st task in the task list.
 
 ### Locating tasks by description: `find`
 
-Finds tasks whose descriptions contain any of the given keywords.
+Finds tasks whose descriptions contain the given keyword.
 
 Format: `find KEYWORD`
 
 - The search is case-insensitive e.g. `Return book` will match `return book`
 - Only the description is searched, i.e., not the deadline of a Deadline task or the period of an Event task.
 - Partial words can be matched e.g. `return` will match `return book`
-- Spaces **except** leading and trailing spaces of the `KEYWORD` will be treated as part of the `KEYWORD` e.g. `find    return book	‎` will return tasks whose descriptions contain "return book" but not "return" or "book" or "return       book".
+- Spaces **except** leading and trailing spaces of the `KEYWORD` will be treated as part of the `KEYWORD` e.g. `find ‎‎‎‎ return book ‎‎‎` will return tasks whose descriptions contain "return book" but not "return" or "book" or "return       book".
 
 ### Exiting the program: `bye`
 
@@ -170,13 +170,13 @@ If your changes to the data file makes its format invalid, Duke will discard all
 ## FAQ
 
 1. **Q**: Why doesn't double-clicking the file `duke.jar` start the app?<br>
-   **A**: This could be due to your system configuration for the default application to use to open any `.jar` file. If you are on Windows, firstly set the default application to open a `.jar` file to **Java(TM) Platform SE Binary** and then double-clicking `duke.jar` should be able to start the app properly. Alternatively, you can open a terminal on your computer and navigate to the folder where `duke.jar` is stored. Then run command `java -jar duke.jar`.
+   **A**: This could be due to your system configuration for the default application to open any `.jar` file. If you are on Windows, firstly set the default application to open a `.jar` file to **Java(TM) Platform SE Binary** and then double-clicking `duke.jar` should be able to start the app properly. Alternatively, you can open a terminal on your computer and navigate to the folder where `duke.jar` is stored. Then run command `java -jar duke.jar`.
 
    **NOTE:**
 
-    1. If you are on Windows, please do **NOT** start the app by right-clicking `duke.jar` and using "open with **Java(TM) Platform SE Binary**". You should change the default application to open any `.jar` file first and use double-clicking to start the app. Otherwise, the app may not run properly.
+    1. If you are on Windows, please do **NOT** start the app by right-clicking `duke.jar` and using "open with **Java(TM) Platform SE Binary**". You should change the default application to open any `.jar` file first and use double-click to start the app. Otherwise, the app may not run properly.
 
-2. **Q**: How do I transfer my data to another Computer?<br>
+2. **Q**: How do I transfer my data to another computer?<br>
    **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke home folder.
 
 ------
@@ -185,9 +185,9 @@ If your changes to the data file makes its format invalid, Duke will discard all
 
 | Action                | Format, Examples                                             |
 | --------------------- | ------------------------------------------------------------ |
-| **Add Todo task**     | `todo TASK_DESCRIPTION`<br>e.g., `todo return book`          |
 | **Add Deadline task** | `deadline TASK_DESCRIPTION /by TASK_DEADLINE`<br>e.g., `deadline return book /by 2021-09-12` |
 | **Add Event task**    | `event TASK_DESCRIPTION /at TASK_PERIOD`<br>e.g., `event team meeting /at Sat 2-3pm` |
+| **Add Todo task**     | `todo TASK_DESCRIPTION`<br>e.g., `todo return book`          |
 | **Delete task**       | `delete INDEX1 [INDEX2] ...`<br>e.g., `delete 2`, `delete 2 3 4` |
 | **Done task**         | `done INDEX1 [INDEX2] ...`<br/>e.g., `done 2`, `done 2 3 4`  |
 | **Exit**              | `bye`                                                        |
