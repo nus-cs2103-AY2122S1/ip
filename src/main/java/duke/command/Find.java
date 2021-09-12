@@ -31,7 +31,6 @@ public class Find extends Command {
                 temp.add(tasks.get(i));
             }
         }
-        return "Here are the matching tasks in your list:\n"
-                + new List().exec(temp, ui, storage);
+        return "Here are the matching tasks in your list:\n" + new List().exec(temp, ui, storage);
     }
 }

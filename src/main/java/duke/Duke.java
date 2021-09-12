@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * initialises the Duke bot.
+     * Initialises the Duke bot.
      */
     public void run() {
         ui.showWelcome();

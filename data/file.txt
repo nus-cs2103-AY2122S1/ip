@@ -1,5 +1,4 @@
 T | 1 | H | bread
-D | 0 | H | return book | 12/12/2021 1800 p=H
-E | 1 | M | pingpong | Friday p=M
-E | 0 | L | bowling | friday 
-D | 0 | H | buy beer | 12/12/2021 0600 
+D | 1 | H | return book | 12/12/2021 1800 p=H
+E | 0 | L | bowling | friday
+D | 1 | H | buy beer | 12/12/2021 0600
