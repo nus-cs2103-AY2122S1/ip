@@ -22,12 +22,14 @@ public class Storage {
     private final File txt;
 
     public Storage(TaskList db) throws DukeException {
-        this(db, "build/resources/main/duke/bin/duke.txt");
+        // this(db, "build/resources/main/duke/bin/duke2.txt");
+        this(db, "duke2.txt");
     }
     
     public Storage(TaskList db, String filename) throws DukeException {
         try {
             txt = new File(filename);
+            String log = txt.getAbsolutePath();
             raf = new RandomAccessFile(txt, "rwd");
             assert txt != null && raf != null;
             while (raf.getFilePointer() < raf.length()) {
@@ -74,7 +76,7 @@ public class Storage {
                 raf.writeBytes(System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new DukeException("Error in writing to duke.txt.");
+            throw new DukeException("Error in writing to duke2.txt.");
         }
     }
 
@@ -115,7 +117,7 @@ public class Storage {
             }
             return sb.toString();
         } catch (FileNotFoundException e) {
-            return "Error: duke.txt not found";
+            return "Error: duke2.txt not found";
         }
     }
 }

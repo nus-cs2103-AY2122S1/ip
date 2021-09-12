@@ -31,7 +31,7 @@ public class Ui {
     public static String help() throws DukeException {
         try {
             if (HELP == null) {
-                String filename = Main.class.getResource("bin/help.txt").getPath();
+                String filename = Ui.class.getResource("/duke/bin/help.txt").getPath();
                 HELP = new File(filename);
             }
             StringBuilder sb = new StringBuilder();
