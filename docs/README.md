@@ -15,6 +15,7 @@ installed on your computer
 3. Open command prompt/terminal and change directory to taubot.jar's
 directory. Replace ```TAUBOT_JAR_DIRECTORY``` with your corresponding taubot.jar's
 directory in the following command.
+
 ```
 cd TAUBOT_JAR_DIRECTORY
 ```
