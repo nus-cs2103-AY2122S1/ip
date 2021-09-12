@@ -1,12 +1,15 @@
 package duke;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.tasks.InvalidTaskException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import javafx.application.Platform;
 
 
 /**
@@ -35,6 +38,12 @@ public class Parser {
      */
     public String takeInput(String input) {
         if (matches("bye", input)) {
+            new Timer().schedule(new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 1600);
             return "Goodbye!";
         } else if (matches("", input)) {
             return "";
