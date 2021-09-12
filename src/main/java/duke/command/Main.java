@@ -22,6 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("LOTTERY-A");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             duke.setMainWindow(fxmlLoader.<MainWindow>getController());
             stage.show();
