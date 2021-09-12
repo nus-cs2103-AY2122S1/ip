@@ -1,4 +1,4 @@
-# User Guide
+# Duke User Guide
 Duke is a Personal Assistant CLIbot with a simple GUI system that helps a person to keep track of various things.
 
 ## Quick Start
@@ -7,7 +7,9 @@ Duke is a Personal Assistant CLIbot with a simple GUI system that helps a person
 2. Download the latest Duke.jar from [here](https://github.com/KT27Learn/ip/releases).
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   
    ![Image of Duke](ReadmeScreenshot.png)
+   
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. Some example commands you can try:
     - **`list`**: Lists all tasks.
     - `todo test123`: Adds a task named test123 to the task list.
