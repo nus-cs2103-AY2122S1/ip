@@ -34,9 +34,10 @@ public class Parser {
             throw new InvalidTaskException("Invalid command! Please enter the following commands only:\n"
                                            + "list\ndone (task number)\n"
                                            + "delete (task number)\ntodo (description)\n"
-                                           + "deadline (description) /by (time)\nevent (description) /at (time)"
-                                           + "find (keyword)"
-                                           + "edit (task number) description/time /to (edited task)");
+                                           + "deadline (description) /by (time)\n"
+                                           + "event (description) /at (time)\n"
+                                           + "find (keyword)\n"
+                                           + "edit (task number) 'description'/'time' /to (edited task)");
         } else {
             return parsedCommand;
         }

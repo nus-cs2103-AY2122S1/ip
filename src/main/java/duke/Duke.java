@@ -7,11 +7,10 @@ import duke.gui.Main;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskWithTime;
 import duke.task.Todo;
 import exception.DukeException;
 import javafx.application.Application;
-
-
 
 /**
  * Personal Assistant Chat bot to keep track of tasks
@@ -111,7 +110,8 @@ public class Duke {
                 if (parsedContent[0].equals("description")) {
                     this.tasks.get(taskNo).setDescription(parsedContent[1]);
                 } else {
-                    this.tasks.get(taskNo).setDateTime(LocalDateTime.parse(parsedContent[1], inputFormatter));
+                    TaskWithTime task = (TaskWithTime) this.tasks.get(taskNo);
+                    task.setDateTime(LocalDateTime.parse(parsedContent[1], inputFormatter));
                 }
                 Task newTask = this.tasks.get(taskNo);
                 this.storage.editTask(oldTask, newTask.toString());

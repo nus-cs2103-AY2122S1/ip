@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
  * Represents a task with deadline
  */
 public class Deadline extends TaskWithTime {
-    protected LocalDateTime by;
-
     /**
      * Class Constructor
      *
@@ -15,8 +13,7 @@ public class Deadline extends TaskWithTime {
      * @param by the deadline of the task
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
+        super(description, by);
     }
 
     /**
@@ -26,11 +23,6 @@ public class Deadline extends TaskWithTime {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(super.outputFormatter) + ")";
-    }
-
-    @Override
-    public void setDateTime(LocalDateTime dateTime) {
-        this.by = dateTime;
+        return "[D]" + super.toString() + " (by: " + super.dateTime.format(super.outputFormatter) + ")";
     }
 }

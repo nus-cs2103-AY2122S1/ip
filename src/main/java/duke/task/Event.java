@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
  * Represents an event
  */
 public class Event extends TaskWithTime {
-    protected LocalDateTime at;
-
     /**
      * Class Constructor
      *
@@ -16,8 +14,7 @@ public class Event extends TaskWithTime {
      * @param at time of event
      */
     public Event(String description, LocalDateTime at) {
-        super(description);
-        this.at = at;
+        super(description, at);
     }
 
     /**
@@ -27,11 +24,6 @@ public class Event extends TaskWithTime {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(super.outputFormatter) + ")";
-    }
-
-    @Override
-    public void setDateTime(LocalDateTime dateTime) {
-        this.at = dateTime;
+        return "[E]" + super.toString() + " (at: " + super.dateTime.format(super.outputFormatter) + ")";
     }
 }
