@@ -133,23 +133,23 @@ public class Duke {
     }
 
     private String dealWithInput(String input) {
-        ArrayList<String> messages;
+        ArrayList<String> parsedMessages;
         String operationType, task, time;
         String dukeResponse;
         int index;
 
         try {
-            messages = ui.returnSplitComponent(input);
+            parsedMessages = ui.returnSplitComponent(input);
         } catch (DukeException e) {
             return e.getMessage();
         }
 
-        assert messages.size() == 4 : "Error in Parser, should produce 4 key value for duke to execute!!";
+        assert parsedMessages.size() == 4 : "Error in Parser, should produce 4 key value for duke to execute!!";
 
-        operationType = messages.get(0);
-        task = messages.get(1);
-        time = messages.get(2);
-        index = Integer.parseInt(messages.get(3));
+        operationType = parsedMessages.get(0);
+        task = parsedMessages.get(1);
+        time = parsedMessages.get(2);
+        index = Integer.parseInt(parsedMessages.get(3));
         dukeResponse = operationForDuke(index, operationType, task, time);
         return dukeResponse;
     }

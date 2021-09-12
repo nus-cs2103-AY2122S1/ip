@@ -68,6 +68,40 @@ public class Events extends Task {
         return parsedTime;
     }
 
+    private String getUnknownTime() {
+        String specificTime;
+        specificTime = "I don't know the time";
+        return specificTime;
+    }
+
+    private String getDate() {
+        String specificDate;
+        specificDate = this.time.getDayOfMonth() + "/"
+                + this.time.getMonthValue() + "/" + this.time.getYear() + " ";
+        return specificDate;
+    }
+
+    private String getHour() {
+        String specificTime;
+        if (this.time.getHour() < 10) {
+            specificTime = "0" + this.time.getHour();
+        } else {
+            specificTime = "" + this.time.getHour();
+        }
+        return  specificTime;
+    }
+
+    private String getMinute(){
+        String specificTime;
+        if (this.time.getMinute() < 10) {
+            specificTime = "0" + this.time.getMinute();
+        } else {
+            specificTime = "" + this.time.getMinute();
+        }
+        return specificTime;
+
+    }
+
     /**
      * Returns the Parsed time info in the format of "dd/mm/yy hhmm".
      * Note: This method is only applicable for "event" and "deadline" type task,
@@ -79,22 +113,15 @@ public class Events extends Task {
         String saveDataTime = "";
         String specificDate;
         String specificTime;
+
         if (this.time == null) {
-            return "I don't know the time";
+            saveDataTime = getUnknownTime();
+            return saveDataTime;
         }
 
-        specificDate = this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " ";
-        if (this.time.getHour() < 10) {
-            specificTime = "0" + this.time.getHour();
-        } else {
-            specificTime = "" + this.time.getHour();
-        }
+        specificDate = getDate();
 
-        if (this.time.getMinute() < 10) {
-            specificTime += "0" + this.time.getMinute();
-        } else {
-            specificTime += this.time.getMinute();
-        }
+        specificTime = getHour() + getMinute();
 
         saveDataTime += specificDate + specificTime;
         return saveDataTime;
