@@ -7,7 +7,7 @@ import duke.core.Ui;
 public class ListCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "Here is your task list!\n\n" + tasks.printTasks();
+        return tasks.printTasks();
     }
 
     @Override
