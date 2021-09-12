@@ -61,7 +61,7 @@ public class DialogBox extends HBox {
     }
 
     private DialogBox(String text, Image img) {
-        this(text, Paint.valueOf("000000"), img);
+        this(text, Paint.valueOf(Color.TEXT_DEFAULT), img);
     }
 
     /**
@@ -79,10 +79,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, boolean isException, Image img) {
-        //
-        Paint color = isException ? Paint.valueOf("d9004c") : Paint.valueOf("000000");
-        var db = new DialogBox(text, color, img);
-        Paint dukeBackgroundColor = Paint.valueOf("C5C5C5");
+        Paint textColor = isException
+                ? Paint.valueOf(Color.TEXT_EXCEPTION)
+                : Paint.valueOf(Color.TEXT_DEFAULT);
+        var db = new DialogBox(text, textColor, img);
+
+        Paint dukeBackgroundColor = Paint.valueOf(Color.BACKGROUND_DUKE);
         BackgroundFill dukeBackgroundFill = new BackgroundFill(dukeBackgroundColor, null, null);
         Background dukeBackground = new Background(dukeBackgroundFill);
         db.setBackground(dukeBackground);
