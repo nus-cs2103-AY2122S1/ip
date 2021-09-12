@@ -1,3 +1,1 @@
-D, false, borrow book /by 2021-02-06T18:00
-T, true, join sport club
-E, true, borrow book /from 2021-02-06T18:00 /to 2021-02-06T23:00
+E, true, add me /from 2020-02-21T23:59 /to 2020-03-12T12:23

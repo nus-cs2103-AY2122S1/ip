@@ -42,7 +42,7 @@ public class Duke {
      * Runs the Duke chat bot program until user input the exit command.
      */
     public void run(String input) {
-        Ui.welcome();
+        ui.welcome();
         commandExecutor.execute(input);
     }
 
@@ -62,12 +62,21 @@ public class Duke {
      * @return String representation of Duke's response.
      */
     public String getResponse(String input) {
-        String response = "";
+        String response;
         try {
             response = commandExecutor.execute(input);
         } catch (DukeException e) {
             response = e.getMessage();
         }
         return response;
+    }
+
+    /**
+     * Returns welcome message from Duke.
+     *
+     * @return String representation of Duke's welcome message.
+     */
+    public String getWelcome() {
+        return ui.welcome();
     }
 }

@@ -42,7 +42,7 @@ public class CommandExecutor {
         String command = parser.getCommandWord();
 
         if (command.equals("bye")) {
-            return ui.showBye();
+            return new ByeCommand(tasks, parser, storage, ui).bye();
         } else if (command.equals("list")) {
             return new ListCommand(tasks, parser, storage, ui).list();
         } else if (command.equals("find")) {
@@ -57,6 +57,8 @@ public class CommandExecutor {
             return new AddCommand(tasks, parser, storage, ui).addDeadline();
         } else if (command.equals("event")) {
             return new AddCommand(tasks, parser, storage, ui).addEvent();
+        } else if (command.equals("help")) {
+            return new HelpCommand(tasks, parser, storage, ui).help();
         } else {
             throw new DukeException("Command is not valid!");
         }

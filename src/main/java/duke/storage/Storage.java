@@ -134,7 +134,7 @@ public class Storage {
     public void addTask(Task t) {
         try {
             File file = new File(PATH);
-            String str = t.getType() + ", " + t.isDone() + ", " + t.getDescription();
+            String str = '\n' + t.getType() + ", " + t.isDone() + ", " + t.getDescription();
             //@@author hsiaotingluv-reused
             //Reused from https://stackoverflow.com/a/37674446 with minor modifications
             Files.write(file.toPath(), str.getBytes(), StandardOpenOption.APPEND);
@@ -160,6 +160,23 @@ public class Storage {
                     .collect(Collectors.toList());
             Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
             //@@author
+
+            //@@author hsiaotingluv-reused
+            //Reused from https://stackoverflow.com/a/35811028
+            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+            byte b;
+            long length = randomAccessFile.length() ;
+            if (length != 0) {
+                do {
+                    length -= 1;
+                    randomAccessFile.seek(length);
+                    b = randomAccessFile.readByte();
+                } while (b != 10 && length > 0);
+                randomAccessFile.setLength(length);
+                randomAccessFile.close();
+            }
+            //@@author
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
