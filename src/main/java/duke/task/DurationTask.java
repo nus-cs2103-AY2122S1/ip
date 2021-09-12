@@ -20,7 +20,7 @@ public class DurationTask extends Task {
     /**
      * Constructs a task with a fixed duration with a boolean of whether the task is
      * completed.
-     * 
+     *
      * @param name        of the task
      * @param duration    in minutes
      * @param isCompleted whether the task is completed
