@@ -16,17 +16,17 @@
 
 List of features:
   1. [todo](#adding-a-todo)
-  2. deadline
-  3. event
-  4. delete
-  5. list
-  6. find
-  7. remind
-  8. format
-  9. setFormat
-  10. clear 
-  11. bye
-  12. help
+  2. [deadline](#adding-a-deadline)
+  3. [event](#adding-an-event)
+  4. [delete](#delete-a-task)
+  5. [list](#display-the-list)
+  6. [find](#find-a-task)
+  7. [remind](#remind-deadlines)
+  8. [format](#check-the-current-date-format-in-use)
+  9. [setFormat](#setformat-to-change-the-current-date-format-in-use)
+  10. [clear](#clear-the-entire-list) 
+  11. [bye](#exit-the-application-with-bye)
+  12. [help](#list-all-possible-commands-with-help)
 
 ## Adding a task: todo/deadline/event
 Duke allows you to categorise your tasks into 3 types: todo, deadline and event
@@ -76,7 +76,7 @@ Examples:
 
 `event event project meeting /at Mon 2-4pm`
 
-## Deleting a task: `delete`
+## `delete` a task
 
 Deletes the task at the specified index of the list.
 
@@ -89,13 +89,13 @@ Example:
 
 `delete 3`
 
-## Display the list: `list`
+## Display the `list` 
 
 Displays the whole list
 
 Format: `list`
 
-## Find a task: `find`
+## `find` a task: 
 
 Format: find {keyword}
   * Searches for tasks with that keyword
@@ -106,7 +106,7 @@ Examples:
 `find hello`: looks for any task with the subtring hello
 `find NKN`: looks for any task with the substring nkn
 
-## Get deadline reminders: `remind`
+## `remind` deadlines
 
 Format: `remind {days}`
   * Lists out any overdue deadlines and deadlines within {days} days
@@ -115,7 +115,7 @@ Example:
 
 `remind 5`
 
-## Check the cuurent date format in use: `format`
+## Check the current date `format` in use
 
 Displays the current date format used.
 
@@ -125,7 +125,7 @@ Example:
 
 `format`
 
-## Change the current date format in use: `setFormat`
+## `setFormat` to change the current date format in use: 
 
 Format: `setFormat {new format}`
   * The new format has to be an acceptable format by [DateTimeFormatter](https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html)
@@ -135,7 +135,7 @@ Examples:
 `setFormat dd-MM-yy`
 `setFormat dd MM yy`
 
-## Clear the entire list: `clear`
+## `clear` the entire list: 
 
 Removes every task in the list.
 
@@ -145,7 +145,7 @@ Example:
 
 `clear`
 
-## Exit the application: `bye`
+## Exit the application with `bye`
 
 Closes the GUI. 
 
@@ -157,7 +157,7 @@ Example:
 
 `bye`
 
-## List all possible commands: `help`
+## List all possible commands with `help`
 
 Generate the list of commands supported by Duke.
 
