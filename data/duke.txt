@@ -1,2 +1,3 @@
 [T][X] return book
 [D][ ] borrow book (by: Sun, 06 Jun 2021 2359)
+[D][ ] return book (by: Sun, 06 Jun 2021 2359)
