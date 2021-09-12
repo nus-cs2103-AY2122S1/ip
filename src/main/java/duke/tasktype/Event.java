@@ -30,22 +30,11 @@ public class Event implements Task {
     public Event(String description, boolean isDone) throws WrongCommandFormatException {
         this.command = description;
         Scanner s = new Scanner(description);
+
         while (s.hasNext()) {
-            String next = s.next();
-            if (next.equals("/by")) {
-                throw new WrongCommandFormatException("Wrong keyword used. Please try again with /at");
-            } else if (next.equals("/at")) {
-                if (s.hasNextLine()) {
-                    this.timeframe = s.nextLine();
-                } else {
-                    throw new WrongCommandFormatException(
-                            "No timeframe specified. Please specify a deadline after `/at`"
-                    );
-                }
-            } else {
-                this.description += next;
-            }
+            readCommand(s);
         }
+
         if (this.description.equals(" ")) {
             throw new WrongCommandFormatException(
                     "No task specified. Please specify a task before `/at`"
@@ -54,10 +43,37 @@ public class Event implements Task {
             throw new WrongCommandFormatException(
                     "No timeframe specified. Please specify a timeframe after `/at`"
             );
+        } else {
+            this.isDone = isDone;
         }
-        this.isDone = isDone;
     }
 
+    /**
+     * Reads the event command passed into the constructor
+     * @param s The scanner containing the command
+     * @throws WrongCommandFormatException
+     */
+    public void readCommand(Scanner s) throws WrongCommandFormatException {
+        String next = s.next();
+        if (next.equals("/by")) {
+            throw new WrongCommandFormatException("Wrong keyword used. Please try again with /at");
+        } else if (next.equals("/at")) {
+            if (s.hasNextLine()) {
+                this.timeframe = s.nextLine();
+            } else {
+                throw new WrongCommandFormatException(
+                        "No timeframe specified. Please specify a deadline after `/at`"
+                );
+            }
+        } else {
+            this.description += next + " ";
+        }
+    }
+
+    /**
+     * Returns the timeframe of this event.
+     * @return The timeframe of this event.
+     */
     public String getTimeframe() {
         return this.timeframe;
     }

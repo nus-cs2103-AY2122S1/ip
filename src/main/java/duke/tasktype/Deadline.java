@@ -40,37 +40,13 @@ public class Deadline implements Task {
             if (next.equals("/at")) {
                 throw new WrongCommandFormatException("Wrong keyword used. Please try again with /by");
             } else if (next.equals("/by")) {
-                try {
-                    if (s.hasNext()) {
-                        String date = s.next();
-                        if (s.hasNext()) {
-                            String formatter = s.next();
-                            DateTimeFormatter format = DateTimeFormatter.ofPattern(formatter);
-                            this.deadline = LocalDate.parse(date, format);
-                        } else {
-                            this.command += " " + Duke.getFormat();
-                            this.deadline = LocalDate.parse(date, currentFormat);
-                        }
-                    } else {
-                        throw new WrongCommandFormatException(
-                                "No deadline specified. Please specify a deadline after `/by`"
-                        );
-                    }
-                } catch (DateTimeParseException ex) {
-                    throw new WrongCommandFormatException(
-                            "Wrong deadline format specified. \n"
-                            + "Current format setting: "
-                            + Duke.getFormat()
-                            + "\n"
-                            + "Please try again or consider changing the format "
-                            + "settings by using the command `setFormat`"
-
-                    );
-                }
+                checkTimeframe(s);
             } else {
-                this.description += next;
+                this.description += next + " ";
             }
-        } if (this.description.equals(" ")) {
+        }
+
+        if (this.description.equals(" ")) {
             throw new WrongCommandFormatException(
                     "No task specified. Please specify a task before `/by`"
             );
@@ -78,8 +54,48 @@ public class Deadline implements Task {
             throw new WrongCommandFormatException(
                     "No deadline specified. Please specify a deadline after `/by`"
             );
+        } else {
+            this.isDone = isDone;
         }
-        this.isDone = isDone;
+    }
+
+    /**
+     * Checks if the timeframe specified after the "/by" keyword is correct.
+     * In the case of reading from the data file, this method also checks for
+     * the format of the date when the data file was written and saves the date accordingly.
+     * @param s The scanner containing the timeframe component of the command
+     * @throws WrongCommandFormatException
+     */
+    public void checkTimeframe(Scanner s) throws WrongCommandFormatException {
+        String date;
+        if (s.hasNext()) {
+            date = s.next();
+        } else {
+            throw new WrongCommandFormatException(
+                    "No deadline specified. Please specify a deadline after `/by`"
+            );
+        }
+
+        try {
+            if (s.hasNext()) {
+                String formatter = s.next();
+                DateTimeFormatter format = DateTimeFormatter.ofPattern(formatter);
+                this.deadline = LocalDate.parse(date, format);
+            } else {
+                this.command += " " + Duke.getFormat();
+                this.deadline = LocalDate.parse(date, currentFormat);
+            }
+        } catch (DateTimeParseException ex) {
+            throw new WrongCommandFormatException(
+                    "Wrong deadline format specified. \n"
+                            + "Current format setting: "
+                            + Duke.getFormat()
+                            + "\n"
+                            + "Please try again or consider changing the format "
+                            + "settings by using the command `setFormat`"
+
+            );
+        }
     }
 
     /**
