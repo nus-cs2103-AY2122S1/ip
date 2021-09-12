@@ -4,7 +4,7 @@ Duke is a personal chatbot that helps you to manage your tasks. Its text-based w
 
 ## Quick Start
 
-1. Download the latest `duke.jar` from [here.](https://github.com/YoYoCiti/ip/releases/tag/v0.1)
+1. Download the latest `duke.jar` from [here.](https://github.com/YoYoCiti/ip/releases/tag/v0.2)
 2. Copy the file to the folder you want to use as the *home folder* for Duke to store its data in.
 3. Double click the file to start the app.  
 
