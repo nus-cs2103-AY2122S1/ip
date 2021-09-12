@@ -33,9 +33,12 @@ public class DialogBox extends HBox {
 
     private static final Background ERROR_BACKGROUND = new Background(
             new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY));
+
     private static final Background USER_BACKGROUND = new Background(
             new BackgroundFill(Color.GAINSBORO, CornerRadii.EMPTY, Insets.EMPTY));
+
     private static final Font USER_FONT = Font.font("Arial", FontWeight.BOLD, 14);
+
     private static final Font DUKE_FONT = new Font("Arial", 14);
 
 
@@ -76,17 +79,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public void setUserStyle() {
+    /**
+     * A method to set styles for user's dialog box.
+     */
+    private void setUserStyle() {
         setBackground(USER_BACKGROUND);
         dialog.setFont(USER_FONT);
     }
-    
-    public void setDukeStyle(boolean isError) {
+
+    /**
+     * A method to set styles for duke's dialog box.
+     *
+     * @param isError Boolean indicating whether dialog displays an error.
+     */
+    private void setDukeStyle(boolean isError) {
         if (isError) {
             setBackground(ERROR_BACKGROUND);
         }
         dialog.setFont(DUKE_FONT);
     }
+
     /**
      * Formats the user input into a dialog box.
      *
@@ -105,6 +117,7 @@ public class DialogBox extends HBox {
      *
      * @param text The response.
      * @param img The profile image for Duke.
+     * @param isError Boolean indicating whether error dialog should be shown.
      * @return DialogBox containing the response from Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img, boolean isError) {

@@ -22,6 +22,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method that indicates whether duke has responded with an error message.
+     *
+     * @return Boolean indicating whether response is an error message.
+     */
     public boolean hasError() {
         return hasError;
     }
