@@ -11,11 +11,11 @@ public class TaskDateAndTimeTest {
     }
 
     @Test
-    public void isValidTestMethod_aDateInputInStringFormat_success() {
-        assertEquals(true, new TaskDateAndTime("23/08/2021").isValidDate());
+    public void toString_aDateInputInStringFormat_success() {
+        assertEquals("Aug 23 2021", new TaskDateAndTime("23/08/2021").toString());
     }
 
-    @Test void isValidTestMethod_aDateWronglyFormatted_success() {
-        assertEquals(false, new TaskDateAndTime("21 Jan 2001").isValidDate());
+    @Test void toString_aDateWronglyFormatted_success() {
+        assertEquals("Jan 21 2001", new TaskDateAndTime("21/01/2001").toString());
     }
 }
