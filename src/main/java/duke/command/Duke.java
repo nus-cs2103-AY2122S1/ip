@@ -150,6 +150,7 @@ public class Duke {
     protected void executeEditDescriptionCommand(String desc, int i) throws DukeException {
         listOfTasks.editDescription(desc, i);
         executeSave();
+        mainWindow.showEditTaskMessage(listOfTasks.getStringDes(i));
     }
 
     /**
@@ -161,6 +162,7 @@ public class Duke {
     protected void executeEditTimeCommand(Calendar cal, int i) throws DukeException {
         listOfTasks.editTime(cal, i);
         executeSave();
+        mainWindow.showEditTaskMessage(listOfTasks.getStringDes(i));
     }
 
     /**

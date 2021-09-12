@@ -166,4 +166,17 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /** Shows that task has been edited.
+     *
+     * @param taskDesc String representing list of tasks
+     */
+    public void showEditTaskMessage(String taskDesc) {
+        String addTaskMessage = DOTTED_LINES
+                + "\nGot it. I've edited this task to:\n"
+                + taskDesc
+                + "\n"
+                + DOTTED_LINES;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(addTaskMessage, dukeThumbsUpImg));
+    }
+
 }
