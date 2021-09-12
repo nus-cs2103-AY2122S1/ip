@@ -31,7 +31,7 @@ public class Event extends Task {
      * @return Returns the format a user should use to creating this task with Duke.
      */
     public String getFormat() {
-        return "event {description} /at {event period}";
+        return "event <description> /at <event period>";
     }
 
     /**
