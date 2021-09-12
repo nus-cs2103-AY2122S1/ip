@@ -1,4 +1,1 @@
-D | 0 | iP | 2021-09-17
-T | 1 | clean room
-D | 0 | CS3241 Lab | 2021-09-26
-T | 0 | eat duck
+
