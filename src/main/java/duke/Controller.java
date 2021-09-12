@@ -11,8 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
+@SuppressWarnings("checkstyle:Regexp")
 public class Controller {
     @FXML
     private VBox dialogContainer;
@@ -36,12 +38,20 @@ public class Controller {
             dukeIcon = new Image(String.valueOf(dukeUrl));
             URL userUrl = new File("C:\\Users\\65915\\ip\\src\\main\\userIcon.png").toURI().toURL();
             userIcon = new Image(String.valueOf(userUrl));
+
         } catch (Exception ee) {
-            System.out.println("rip image");
+            System.out.println("rip welcome message");
         }
         this.list = new MyList();
         this.storage = new Storage(this.list, "./Data.txt");
         storage.load();
+    }
+
+    /**
+     * Adds the welcome message as soon as duke is started.
+     */
+    public void initialize() {
+        addWelcomeMessage();
     }
 
     /**
@@ -51,6 +61,11 @@ public class Controller {
     public void handleUserInput(ActionEvent e) {
         this.command = this.userInput.getText();
         this.userInput.setText("");
+
+        if (this.command.equals("bye")) {
+            closeGui();
+        }
+
         if (!this.command.equals("")) {
             dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
             this.dialogContainer.getChildren().addAll(
@@ -72,6 +87,32 @@ public class Controller {
         Label textToAdd = new Label(response);
         return textToAdd;
 
+    }
+
+    /**
+     * Creates the welcome message to be displayed on the GUI everytime duke is started.
+     * @return The label to be added to the scene.
+     */
+    public Label getWelcomeMessage() {
+        Label textToAdd = new Label(Ui.welcomeMessage());
+        return textToAdd;
+    }
+
+    /**
+     * Adds the welcome message dialog box into the gui.
+     */
+    public void addWelcomeMessage() {
+        this.dialogContainer.getChildren().addAll(
+                new DialogBox(getWelcomeMessage(), new ImageView(dukeIcon), false)
+        );
+    }
+
+    /**
+     * Closes the GUI.
+     */
+    public void closeGui() {
+        Stage stage = (Stage) this.scrollPane.getScene().getWindow();
+        stage.close();
     }
 
 }

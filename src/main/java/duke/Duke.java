@@ -7,8 +7,12 @@ import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
@@ -54,7 +58,7 @@ public class Duke extends Application {
 
 
     /**
-     * Overidden start method from application.
+     * Overridden start method from application.
      * Used to start up the duke GUI.
      * @param stage The stage for the GUI
      * @throws Exception
@@ -74,7 +78,7 @@ public class Duke extends Application {
      */
     public void startCli() {
 
-        Ui.welcomeMessage();
+        System.out.println(Ui.welcomeMessage());
 
         this.storage.load();
 

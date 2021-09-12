@@ -18,12 +18,15 @@ public class Ui {
     /**
      * Method to print out the welcome message when the bot starts.
      */
-    public static void welcomeMessage() {
+    public static String welcomeMessage() {
         System.out.println(
                 "Yo! duke.Duke here \n"
                         + "What did you call me for? \n"
                         + "It better be something useful or else... \n"
         );
+        return "Yo! duke.Duke here \n"
+                + "What did you call me for? \n"
+                + "It better be something useful or else... \n";
     }
 
     /**
@@ -304,10 +307,10 @@ public class Ui {
      */
     public static String getRemindHeader(int noOfDeadlines, int days) {
         if (noOfDeadlines == 0) {
-            //System.out.printf("You have no upcoming deadlines within %d days", days);
             return "You have no upcoming deadlines within " + days + " days\n";
+        } else if (days == 1) {
+            return "These are the deadlines due within " + days + " day\n";
         } else {
-            //System.out.printf("These are the deadlines within %d days", days);
             return "These are the deadlines due within " + days + " days\n";
         }
     }
