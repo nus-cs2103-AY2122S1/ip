@@ -18,7 +18,7 @@
 
 <fx:root alignment="CENTER_RIGHT" maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" minHeight="200" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" contentDisplay="CENTER" text="Label" wrapText="false">
+        <Label fx:id="dialog" contentDisplay="CENTER" text="Label" wrapText="true">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>

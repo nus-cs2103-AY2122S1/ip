@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
+        
         String input = userInput.getText();
         String response = duke.getResponse(input);
         
@@ -50,7 +51,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
-        if (response.contains("Bye")) {
+        if (response.contains("bye")) {
 //            TimeUnit.SECONDS.sleep(1);
 //            Platform.exit();
             exit();

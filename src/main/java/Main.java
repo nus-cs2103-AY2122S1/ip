@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+//            DialogBox db = new DialogBox(text)
         } catch (IOException e) {
             e.printStackTrace();
         }
