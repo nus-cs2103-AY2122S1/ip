@@ -141,84 +141,23 @@ public class Parser {
             return new ListCommand(tdl);
 
         } else if (command.startsWith(Commands.DONE.asLowerCase())) {
-            try {
-                formatChecker(command);
-                String substring = command.substring(Commands.DONE.offsetValue());
-                int index = Integer.parseInt(substring);
-                return new DoneCommand(tdl, index);
-            } catch (NumberFormatException e) {
-                return new TipCommand("Dude, the format is done <index>");
-            } catch (DukeException e) {
-                return new TipCommand(e.getMessage());
-            }
+            return generateDoneCommand(command, tdl);
 
         } else if (command.startsWith(Commands.TODO.asLowerCase())) {
-            try {
-                formatChecker(command);
-                String substring = command.substring(Commands.TODO.offsetValue());
-                return new ToDoCommand(tdl, substring);
-            } catch (DukeException e) {
-                return new TipCommand(e.getMessage());
-            }
+            return generateToDoCommand(command, tdl);
 
         } else if (command.startsWith(Commands.EVENT.asLowerCase())) {
-            try {
-                formatChecker(command);
-                String substring = command.substring(Commands.EVENT.offsetValue());
-                String item = substring.substring(0, substring.indexOf("/"));
-                String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
-                return new EventCommand(tdl, item, duration);
-            } catch (StringIndexOutOfBoundsException e) {
-                return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
-                        + "be <event> <name> /at <duration>");
-            } catch (DukeException e) {
-                return new TipCommand(e.getMessage());
-            }
+            return generateEventCommand(command, tdl);
 
         } else if (command.startsWith(Commands.DEADLINE.asLowerCase())) {
-            try {
-                formatChecker(command);
-                String substring = command.substring(Commands.DEADLINE.offsetValue());
-                String item = substring.substring(0, substring.indexOf("/"));
-                String deadline = substring.substring(substring.indexOf("/") + 1).substring(2);
-                if (deadline.startsWith(" ")) {
-                    deadline = deadline.substring(1);
-                }
-                LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
-                        DateTimeFormatter.ISO_DATE_TIME);
-                return new DeadlineCommand(tdl, item, dl);
-
-            } catch (StringIndexOutOfBoundsException e) {
-                return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
-                        + "be <deadline> <name> /by <dueDate>");
-            } catch (DateTimeParseException e) {
-                return new TipCommand("Doesn't hurt to key in the date time as YYYY-MM-dd HH:mm right..?");
-            } catch (DukeException e) {
-                return new TipCommand(e.getMessage());
-            }
+            return generateDeadlineCommand(command, tdl);
 
         } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
-            try {
-                formatChecker(command);
-                String substring = command.substring(Commands.DELETE.offsetValue());
-                int index = Integer.parseInt(substring);
-                return new DeleteCommand(tdl, index);
-            } catch (StringIndexOutOfBoundsException e) {
-                return new TipCommand("And which item do you want to delete...?");
-            } catch (NumberFormatException e) {
-                return new TipCommand("Dude, the format is delete <index>");
-            } catch (DukeException e) {
-                return new TipCommand(e.getMessage());
-            }
+            return generateDeleteCommand(command, tdl);
 
         } else if (command.startsWith(Commands.FIND.asLowerCase())) {
-            try {
-                formatChecker(command);
-                String substring = command.substring(Commands.FIND.offsetValue());
-                return new FindCommand(tdl, substring);
-            } catch (DukeException e) {
-                return new TipCommand(e.getMessage());
-            }
+            return generateFindCommand(command, tdl);
+
         } else {
             return new ConfusedCommand();
         }
@@ -260,6 +199,92 @@ public class Parser {
             } else if (command.substring(8).isBlank()) {
                 throw new DukeException("Y'know.. last i checked, doing nothing has no deadline");
             }
+        }
+    }
+
+    private Command generateDoneCommand(String command, ToDoList tdl) {
+        try {
+            formatChecker(command);
+            String substring = command.substring(Commands.DONE.offsetValue());
+            int index = Integer.parseInt(substring);
+            return new DoneCommand(tdl, index);
+        } catch (NumberFormatException e) {
+            return new TipCommand("Dude, the format is done <index>");
+        } catch (DukeException e) {
+            return new TipCommand(e.getMessage());
+        }
+    }
+
+    private Command generateToDoCommand(String command, ToDoList tdl) {
+        try {
+            formatChecker(command);
+            String substring = command.substring(Commands.TODO.offsetValue());
+            return new ToDoCommand(tdl, substring);
+        } catch (DukeException e) {
+            return new TipCommand(e.getMessage());
+        }
+    }
+
+    private Command generateEventCommand(String command, ToDoList tdl) {
+        try {
+            formatChecker(command);
+            String substring = command.substring(Commands.EVENT.offsetValue());
+            String item = substring.substring(0, substring.indexOf("/"));
+            String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
+            return new EventCommand(tdl, item, duration);
+        } catch (StringIndexOutOfBoundsException e) {
+            return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
+                    + "be <event> <name> /at <duration>");
+        } catch (DukeException e) {
+            return new TipCommand(e.getMessage());
+        }
+    }
+
+    private Command generateDeadlineCommand(String command, ToDoList tdl) {
+        try {
+            formatChecker(command);
+            String substring = command.substring(Commands.DEADLINE.offsetValue());
+            String item = substring.substring(0, substring.indexOf("/"));
+            String deadline = substring.substring(substring.indexOf("/") + 1).substring(2);
+            if (deadline.startsWith(" ")) {
+                deadline = deadline.substring(1);
+            }
+            LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
+                    DateTimeFormatter.ISO_DATE_TIME);
+            return new DeadlineCommand(tdl, item, dl);
+
+        } catch (StringIndexOutOfBoundsException e) {
+            return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
+                    + "be <deadline> <name> /by <dueDate>");
+        } catch (DateTimeParseException e) {
+            return new TipCommand("Doesn't hurt to key in the date time as YYYY-MM-dd HH:mm right..?");
+        } catch (DukeException e) {
+            return new TipCommand(e.getMessage());
+        }
+    }
+
+    private Command generateDeleteCommand(String command, ToDoList tdl) {
+        try {
+            formatChecker(command);
+            String substring = command.substring(Commands.DELETE.offsetValue());
+            int index = Integer.parseInt(substring);
+            return new DeleteCommand(tdl, index);
+        } catch (StringIndexOutOfBoundsException e) {
+            return new TipCommand("And which item do you want to delete...?");
+        } catch (NumberFormatException e) {
+            return new TipCommand("Dude, the format is delete <index>");
+        } catch (DukeException e) {
+            return new TipCommand(e.getMessage());
+        }
+    }
+
+    private Command generateFindCommand(String command, ToDoList tdl) {
+        try {
+            formatChecker(command);
+            String substring = command.substring(Commands.FIND.offsetValue());
+            return new FindCommand(tdl, substring);
+        } catch (DukeException e) {
+            return new TipCommand(e.getMessage());
         }
     }
 }

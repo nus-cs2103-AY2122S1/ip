@@ -1,5 +1,6 @@
-1.[E][X] conference (at:  thursday 4pm)
-2.[T][ ] swim
-3.[E][X] concert (at:  monday 12-2am)
-4.[D][ ] renew (by: 2021-09-23 18:00)
-5.[D][X] register (by: 2021-10-12 16:00)
+1.[T][X] swim
+2.[D][ ] renew (by: 2021-09-23 18:00)
+3.[D][X] register (by: 2021-10-12 16:00)
+4.[E][X] conference (at: thursday 4pm)
+5.[E][ ] concert (at: monday 12-2am)
+6.[T][ ] run

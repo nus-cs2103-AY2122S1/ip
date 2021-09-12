@@ -69,44 +69,16 @@ public class Storage {
                 char type = str.charAt(typeIndex); //retrieves the logo to identify the type of Task
                 char status = str.charAt(statusIndex); //retrieves task status "X" (completed), " " (not done)
                 if (type == 'T') {
-                    String item = str.substring(offset); //retrieves name of ToDo
-                    this.tdl.addToDo(item);
-                    if (status == 'X') {
-                        this.tdl.getTask(counter).setCompleted();
-                    }
+                    loadToDo(str, offset, status, counter);
                     counter++;
+
                 } else if (type == 'E') {
-                    try {
-                        //ignores content from the start of the entry up to the start of the name
-                        String filtered = str.substring(offset);
-                        String item = filtered.substring(0, filtered.indexOf(" ")); //name
-                        String temp = filtered.substring(filtered.indexOf("("));
-                        String duration = temp.substring(5, temp.length() - 1);
-                        this.tdl.addEvent(item, duration);
-                        if (status == 'X') {
-                            this.tdl.getTask(counter).setCompleted();
-                        }
-                        counter++;
-                    } catch (StringIndexOutOfBoundsException e) {
-                        System.out.println("Oops file is corrupted");
-                    }
+                    loadEvent(str, offset, status, counter);
+                    counter++;
+
                 } else {
-                    try {
-                        //ignores content from the start of the entry up to the start of the name
-                        String filtered = str.substring(offset);
-                        String item = filtered.substring(0, filtered.indexOf(" ")); //name
-                        String temp = filtered.substring(filtered.indexOf("("));
-                        String deadline = temp.substring(5, temp.length() - 1);
-                        LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
-                                DateTimeFormatter.ISO_DATE_TIME);
-                        this.tdl.addDeadline(item, dl);
-                        if (status == 'X') {
-                            this.tdl.getTask(counter).setCompleted();
-                        }
-                        counter++;
-                    } catch (StringIndexOutOfBoundsException e) {
-                        System.out.println("Oops file is corrupted");
-                    }
+                    loadDeadline(str, offset, status, counter);
+                    counter++;
                 }
             }
             System.out.println("Everything is in order now!\n");
@@ -150,6 +122,48 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             System.out.println("Something's wrong.. I can't find the file..");
+        }
+    }
+
+    private void loadToDo(String str, int offset, char status, int counter) {
+        String item = str.substring(offset); //retrieves name of ToDo
+        this.tdl.addToDo(item);
+        if (status == 'X') {
+            this.tdl.getTask(counter).setCompleted();
+        }
+    }
+
+    private void loadEvent(String str, int offset, char status, int counter) {
+        try {
+            //ignores content from the start of the entry up to the start of the name
+            String filtered = str.substring(offset);
+            String item = filtered.substring(0, filtered.indexOf(" ")); //name
+            String temp = filtered.substring(filtered.indexOf("("));
+            String duration = temp.substring(4, temp.length() - 1);
+            this.tdl.addEvent(item, duration);
+            if (status == 'X') {
+                this.tdl.getTask(counter).setCompleted();
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Oops file is corrupted");
+        }
+    }
+
+    private void loadDeadline(String str, int offset, char status, int counter) {
+        try {
+            //ignores content from the start of the entry up to the start of the name
+            String filtered = str.substring(offset);
+            String item = filtered.substring(0, filtered.indexOf(" ")); //name
+            String temp = filtered.substring(filtered.indexOf("("));
+            String deadline = temp.substring(5, temp.length() - 1);
+            LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
+                    DateTimeFormatter.ISO_DATE_TIME);
+            this.tdl.addDeadline(item, dl);
+            if (status == 'X') {
+                this.tdl.getTask(counter).setCompleted();
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Oops file is corrupted");
         }
     }
 }
