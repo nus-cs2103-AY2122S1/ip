@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     public String execute(Storage storage, TaskList taskList) throws DukeException {
         taskList.addTask(task);
         storage.writeToDisk(taskList.compileTasks());
-        return String.format("Caan Do!\n  added: %s\nLook at me! %d tasks in the list now!",
+        return String.format("Can Do!\n  added: %s\nLook at me! %d tasks in the list now!",
                 this.task,
                 taskList.getSize());
     }

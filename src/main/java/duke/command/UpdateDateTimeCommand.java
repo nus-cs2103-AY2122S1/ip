@@ -38,7 +38,7 @@ public class UpdateDateTimeCommand extends Command {
         try {
             Task task = taskList.updateTaskDateTime(this.taskNumber, this.dateTime);
             storage.writeToDisk(taskList.compileTasks());
-            return String.format("Can do! task updated\n  %s", task);
+            return String.format("Can do! Task updated\n  %s", task);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(String.format("Task number %d invalid.", taskNumber));
         }
