@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import tokio.commands.AddDeadlineCommand;
+import tokio.commands.AddEventCommand;
 import tokio.commands.AddTodoCommand;
 import tokio.commands.ByeCommand;
 import tokio.commands.Command;
@@ -17,6 +18,9 @@ public class CommandsTest {
         
         Command userInput2 = Parser.parse("deadline quiz 1 /by 2021-11-10");
         assertEquals(userInput2.getClass(), AddDeadlineCommand.class);
+
+        Command userInput3 = Parser.parse("event meeting 1 /at 2021-11-10 12:00");
+        assertEquals(userInput3.getClass(), AddEventCommand.class);
     }
     
     @Test
