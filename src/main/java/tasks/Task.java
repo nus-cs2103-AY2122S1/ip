@@ -58,7 +58,7 @@ public class Task {
      * @return the String representation to be written into the file
      */
     public String toStringForFile() {
-        return String.format("%d - %s", this.getStatusNumber(), this.description);
+        return String.format("%d - %s / " + priority, this.getStatusNumber(), this.description);
     }
 
     /**

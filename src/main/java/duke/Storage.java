@@ -46,32 +46,43 @@ public class Storage {
     public static TaskList readFile() throws IOException {
         checkForFile(Storage.PATH);
         Scanner sc = new Scanner(new File(Storage.PATH));
-        sc.useDelimiter(Pattern.compile("(\\n)| - "));
+        
+        sc.useDelimiter(Pattern.compile("-"));
         ArrayList<Task> tasks = new ArrayList();
 
         while(sc.hasNext()) {
-            String t = sc.next();
+            String data = sc.nextLine();
+            int dashIndex = data.indexOf("-");
+            int slashIndex = data.indexOf("/");
+            int lineIndex = data.indexOf("|");
+            
+            String t = data.substring(0, dashIndex - 1);
+            String desc = data.substring(dashIndex + 2, lineIndex - 1);
+            String date = data.substring(lineIndex + 2, slashIndex - 1);
+            String p = data.substring(slashIndex);
+            
+//            String t = sc.next();
             int i = Integer.parseInt(sc.next());
-            String desc = sc.next();
+//            String desc = sc.next();
             Task.Priority priority;
-            int descLen = desc.length();
-            String newDesc;
+//            int descLen = desc.length();
+//            String newDesc;
 
             switch(t) {
             case "T":
-                String p = sc.next();
+//                String p = sc.next();
                 p.toUpperCase();
-                if (p.contains("H")) {
+                if (p.contains("HIGH")) {
                     priority = Task.Priority.HIGH;
-                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("M")) {
+//                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("MEDIUM")) {
                     priority = Task.Priority.MEDIUM;
-                    newDesc = desc.substring(0, descLen - 6);
+//                    newDesc = desc.substring(0, descLen - 6);
                 } else {
                     priority = Task.Priority.LOW;
-                    newDesc = desc.substring(0, descLen);
+//                    newDesc = desc.substring(0, descLen);
                 }
-                Task task = new Todo(newDesc, priority);
+                Task task = new Todo(desc, priority);
                 if (i == 1) {
                     task.taskDone();
                 }
@@ -81,17 +92,17 @@ public class Storage {
                 String by = sc.next();
                 p = sc.next();
                 p.toUpperCase();
-                if (p.contains("H")) {
+                if (p.contains("HIGH")) {
                     priority = Task.Priority.HIGH;
-                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("M")) {
+//                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("MEDIUM")) {
                     priority = Task.Priority.MEDIUM;
-                    newDesc = desc.substring(0, descLen - 6);
+//                    newDesc = desc.substring(0, descLen - 6);
                 } else {
                     priority = Task.Priority.LOW;
-                    newDesc = desc.substring(0, descLen);
+//                    newDesc = desc.substring(0, descLen);
                 }
-                task = new Deadline(newDesc, by, priority);
+                task = new Deadline(desc, data, priority);
                 if (i == 1) {
                     task.taskDone();
                 }
@@ -101,17 +112,17 @@ public class Storage {
                 String at = sc.next();
                 p = sc.next();
                 p.toUpperCase();
-                if (p.contains("H")) {
+                if (p.contains("HIGH")) {
                     priority = Task.Priority.HIGH;
-                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("M")) {
+//                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("MEDIUM")) {
                     priority = Task.Priority.MEDIUM;
-                    newDesc = desc.substring(0, descLen - 6);
+//                    newDesc = desc.substring(0, descLen - 6);
                 } else {
                     priority = Task.Priority.LOW;
-                    newDesc = desc.substring(0, descLen);
+//                    newDesc = desc.substring(0, descLen);
                 }
-                task = new Events(newDesc, at, priority);
+                task = new Events(desc, date, priority);
                 if (i == 1) {
                     task.taskDone();
                 }

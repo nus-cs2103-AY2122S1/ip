@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @return the String representation of Deadline, to be written into the file
      */
     public String toStringForFile() {
-        return "D - " + super.toStringForFile() + " - " + by;
+        return "D - " + super.getStatusNumber() + " " + super.description + " | " + by + " / " + priority;
     }
 
     /**

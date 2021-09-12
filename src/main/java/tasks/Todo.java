@@ -8,17 +8,11 @@ public class Todo extends Task {
         super(description, priority);
     }
 
-    /**
-     * A method that overwrites the toStringForFile() method
-     * in tasks
-     * 
-     * @return the String representation of a to-do task, to be written into the file
-     */
-    @Override
-    public String toStringForFile() {
-        return "T - " + super.toStringForFile();
-    }
 
+    public String toStringForFile() {
+        return "T - " + super.getStatusNumber() + " " + super.description + " | " + " / " + priority;
+    }
+    
     /**
      * @return the String representation of a to do task
      */
