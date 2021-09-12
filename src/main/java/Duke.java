@@ -32,6 +32,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in the input of the user and returns the relevant
+     * response message.
+     *
+     * @param input User input.
+     * @return The relevant response message.
+     */
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

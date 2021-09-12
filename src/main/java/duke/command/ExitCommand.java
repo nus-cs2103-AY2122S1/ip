@@ -22,6 +22,7 @@ public class ExitCommand extends Command {
      *
      * @param tasks The given TaskList.
      * @param storage The given Storage to save changes to.
+     * @return The response to the user.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {

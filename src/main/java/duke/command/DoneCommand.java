@@ -26,6 +26,7 @@ public class DoneCommand extends Command {
      *
      * @param tasks The given TaskList to be updated.
      * @param storage The given Storage to save changes to.
+     * @return The response to the user.
      * @throws DukeException When the given index does not exist.
      */
     @Override

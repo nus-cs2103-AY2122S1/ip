@@ -31,10 +31,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the command to add a Task.
+     * Executes the Command to add a Task.
      *
      * @param tasks The given TaskList to be updated.
      * @param storage The given Storage to save changes to.
+     * @return The response to the user.
      * @throws DukeException When the user input does not adhere to the format.
      */
     @Override

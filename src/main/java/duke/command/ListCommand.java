@@ -20,6 +20,7 @@ public class ListCommand extends Command {
      *
      * @param tasks The given TaskList to be referred to.
      * @param storage The given Storage to save changes to.
+     * @return The response to the user.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
