@@ -2,9 +2,15 @@ package duke;
 
 import java.time.LocalDate;
 
-import duke.command.*;
-
-import javax.swing.text.html.HTML;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.OnCommand;
+import duke.command.TagCommand;
 
 /**
  * Parser class deals with making sense of the user command.
