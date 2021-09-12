@@ -8,7 +8,7 @@ If you are someone constantly seeking for tasks to be done, it might be difficul
 Duke is:
 * text based
 * simple and easy
-* ~~helpful~~ really helpful 
+* ~~helpful~~ *really* helpful 
 
 ## Getting Started
 1. Download it [here](https://github.com/wanyu-l/ip/releases/download/v0.1/Duke.java.jar)
