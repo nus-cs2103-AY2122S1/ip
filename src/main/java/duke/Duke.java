@@ -38,6 +38,9 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
+        //@@author Jeffry Lum-reused
+        //Reused from https://se-education.org/guides/tutorials/javaFx.html
+        // with minor modifications
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -87,6 +90,9 @@ public class Duke extends Application {
      * Add Duke setups after initial GUI setups.
      */
     public void addDuke() {
+        //@@author Jeffry Lum-reused
+        //Reused from https://se-education.org/guides/tutorials/javaFx.html
+        // with minor modifications
         Duke dukeBot = new Duke();
         Parser parser = new Parser();
         File myObj = new File(Storage.FILENAME);
@@ -123,6 +129,9 @@ public class Duke extends Application {
      * @param data The data used for storage.
      */
     private void handleUserInput(Duke dukeBot, Parser parser, Storage data) {
+        //@@author Jeffry Lum-reused
+        //Reused from https://se-education.org/guides/tutorials/javaFx.html
+        // with minor modifications
         if (userInput.getText().equals(QUIT_COMMAND)) {
             System.exit(0);
         }
