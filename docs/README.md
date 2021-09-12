@@ -130,6 +130,13 @@ Finds a list of tasks that match the keyword.
 
 Format: `find [keyword]`
 
+Note:
+
+1. Only description and type of task is searched (e.g. `deadline` will match all tasks of
+   type [`Deadline`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline) and tasks
+   containing `deadline` in their description)
+2. Partial matching of description is possible (e.g. `t` will match tasks with description of `task` and `test`)
+
 <br/>
 
 ### Sorting the list of tasks: `sort`
@@ -137,3 +144,13 @@ Format: `find [keyword]`
 Sorts the list by date and time.
 
 Format: `sort [-r]`
+
+Note:
+
+1. The sort is done by date and time, with the earliest on top
+2. Since [`Todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) does not have a time, it will
+   be the last
+    1. Note that supplying a `-r` flag will
+       cause [`Todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) tasks to be at the top
+3. To sort by reverse order, input the `-r` flag
+4. The `-r` flag is optional
