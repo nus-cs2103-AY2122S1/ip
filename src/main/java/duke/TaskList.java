@@ -115,10 +115,15 @@ public class TaskList {
      * Updates the dukeList.
      * @throws DukeException if cannot be updated.
      */
-    public static void update() throws DukeException{
+    public static void update() throws DukeException {
         Data.updateData(dukeList);
     }
 
+    /**
+     * Checks if task is in the list that Duke has.
+     * @param task Task that is to be checked with.
+     * @return A boolean that will equal true should the task be found.
+     */
     public static boolean contains(Task task) {
         for (Task t : dukeList) {
             if (t.toString().equals(task.toString())) {
