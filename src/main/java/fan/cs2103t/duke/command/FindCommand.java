@@ -49,7 +49,7 @@ public class FindCommand extends Command {
         taskList.getTasks().stream()
                 .forEachOrdered(t -> {
                     count.set(0, count.get(0) + 1);
-                    if (t.getDescription().contains(searchQuery)) {
+                    if (t.getDescription().toLowerCase().contains(searchQuery.toLowerCase())) {
                         isFound.set(true);
                         result.append(count.get(0))
                                 .append(".")
