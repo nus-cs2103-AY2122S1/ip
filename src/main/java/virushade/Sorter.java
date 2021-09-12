@@ -21,19 +21,35 @@ public class Sorter {
         // Load in the first task before starting the sort.
         sortedTasks.add(tasks.get(0));
         for (int pointer = 1; pointer < numberOfTasks; pointer++) {
-            // Note that pointer can be both the pointer to the index of the task to be inserted into sortedTask,
-            // and the size of sortedTask before addition of the task to be inserted.
-            Task taskToBeInserted = tasks.get(pointer);
-
-            // Put task to be inserted into sortedTasks. This inserted task has index pointer.
-            sortedTasks.add(taskToBeInserted);
-            String insertedName = convertTaskToName(taskToBeInserted);
-            insertTaskAndSortArray(sortedTasks, pointer, insertedName);
+            insertTaskIntoPosition(tasks, sortedTasks, pointer);
         }
 
         // Replace the array with the sorted array.
         tasks.clear();
         tasks.addAll(sortedTasks);
+    }
+
+    private static void insertTaskIntoPosition(ArrayList<Task> tasks, ArrayList<Task> sortedTasks, int pointer) {
+        // Note that pointer can be both the pointer to the index of the task to be inserted into sortedTask,
+        // and the size of sortedTask before addition of the task to be inserted.
+        Task taskToBeInserted = tasks.get(pointer);
+
+        // Put task to be inserted into sortedTasks. This inserted task has index pointer.
+        sortedTasks.add(taskToBeInserted);
+        String insertedName = convertTaskToName(taskToBeInserted);
+
+        for (int i = pointer - 1; i > -1; i--) {
+            Task comparedTask = sortedTasks.get(i);
+            String comparedName = convertTaskToName(comparedTask);
+            int compareResult = StringManipulator.compareString(insertedName, comparedName);
+
+            // If the insertedName is larger than compared Name, no need to bubble swap anymore.
+            if (compareResult < 1) {
+                break;
+            } else {
+                swapTask(sortedTasks, i, i + 1);
+            }
+        }
     }
 
     /**
@@ -81,21 +97,6 @@ public class Sorter {
 
             default:
                 throw new VirushadeException("Some problem occurred when sorting!");
-            }
-        }
-    }
-
-    private static void insertTaskAndSortArray(ArrayList<Task> sortedTasks, int pointer, String insertedName) {
-        for (int i = pointer - 1; i > -1; i--) {
-            Task comparedTask = sortedTasks.get(i);
-            String comparedName = convertTaskToName(comparedTask);
-            int compareResult = StringManipulator.compareString(insertedName, comparedName);
-
-            // If the insertedName is larger than compared Name, no need to swap anymore.
-            if (compareResult < 1) {
-                break;
-            } else {
-                swapTask(sortedTasks, i, pointer);
             }
         }
     }
