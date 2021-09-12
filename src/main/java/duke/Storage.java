@@ -12,6 +12,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Class to encapsulate a Storage
+ */
 public class Storage {
     protected Path filePath;
     protected Ui ui;

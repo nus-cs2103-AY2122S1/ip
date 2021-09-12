@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Class to encapsulate a FindCommand
+ */
 public class FindCommand extends Command {
     public static final String INSTRUCTION_FIND = "find";
     protected String description;

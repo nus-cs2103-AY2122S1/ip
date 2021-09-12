@@ -31,12 +31,23 @@ public class MainWindow extends AnchorPane {
     protected Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     protected Image victorImage = new Image(this.getClass().getResourceAsStream("/images/victor.png"));
 
+    /**
+     * Initializes the scroll pane, set the background and sendButton style and set greetings.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Code adapted from https://github.com/yunpeng1234/ip
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        sendButton.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white");
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.getGreetings(), victorImage));
     }
 
+    /**
+     * Initializes an instance of Duke
+     *
+     * @param d an instance of Duke
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

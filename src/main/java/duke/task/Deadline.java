@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class to encapsulate a Deadline
+ */
 public class Deadline extends Task implements Achievable {
 
     protected String by;

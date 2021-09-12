@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
 
+/**
+ * Class to encapsulate a EventCommand
+ */
 public class EventCommand extends Command {
     public static final String INSTRUCTION_EVENT = "event";
     protected Event event;

@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Class to encapsulate a ListCommand
+ */
 public class ListCommand extends Command {
     public static final String INSTRUCTION_LIST = "list";
 

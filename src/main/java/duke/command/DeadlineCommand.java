@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
 
+/**
+ * Class to encapsulate a DeadlineCommand
+ */
 public class DeadlineCommand extends Command {
     public static final String INSTRUCTION_DEADLINE = "deadline";
     protected Deadline deadline;

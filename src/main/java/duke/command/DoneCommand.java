@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Class to encapsulate a DoneCommand
+ */
 public class DoneCommand extends Command {
     public static final String INSTRUCTION_DONE = "done";
     protected int taskNumber;

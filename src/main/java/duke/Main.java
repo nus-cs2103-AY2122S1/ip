@@ -15,6 +15,11 @@ public class Main extends Application {
 
     protected Duke duke = new Duke();
 
+    /**
+     * Initializes the Stage of the application.
+     *
+     * @param stage the stage of the application
+     */
     @Override
     public void start(Stage stage) {
         try {

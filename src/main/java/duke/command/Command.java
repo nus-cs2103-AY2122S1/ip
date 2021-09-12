@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Abstract Class to encapsulate a Command
+ */
 public abstract class Command {
     /**
      * Execute the command

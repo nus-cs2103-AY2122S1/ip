@@ -12,7 +12,9 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UpdateCommand;
 
-
+/**
+ * Class to encapsulate a Parser
+ */
 public class Parser {
     /**
      * Parses a string to a Command

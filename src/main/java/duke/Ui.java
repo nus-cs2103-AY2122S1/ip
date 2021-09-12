@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
+/**
+ * Class to encapsulate Ui
+ */
 public class Ui {
     protected Scanner sc;
 

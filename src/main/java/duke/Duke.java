@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import duke.command.Command;
 import duke.task.Task;
 
+/**
+ * A chat bot to keep track of tasks.
+ */
 public class Duke {
-
     protected Storage storage;
     protected TaskList tasks;
     protected Ui ui;

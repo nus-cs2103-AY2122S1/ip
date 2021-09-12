@@ -3,6 +3,9 @@ package duke.command;
 import duke.*;
 import duke.task.Task;
 
+/**
+ * Class to encapsulate a UpdateCommand
+ */
 public class UpdateCommand extends Command {
     public static final String INSTRUCTION_UPDATE = "update";
     protected int taskNumber;

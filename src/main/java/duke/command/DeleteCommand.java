@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Class to encapsulate a DeleteCommand
+ */
 public class DeleteCommand extends Command {
     public static final String INSTRUCTION_DELETE = "delete";
     protected int taskNumber;

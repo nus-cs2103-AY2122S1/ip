@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import duke.task.Achievable;
 import duke.task.Task;
 
+/**
+ * Class to encapsulate a TaskList
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 

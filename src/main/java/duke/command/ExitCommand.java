@@ -3,6 +3,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Class to encapsulate a ExitCommand
+ */
 public class ExitCommand extends Command {
     public static final String INSTRUCTION_EXIT = "bye";
 

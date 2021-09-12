@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Todo;
 
+/**
+ * Class to encapsulate a TodoCommand
+ */
 public class TodoCommand extends Command {
     public static final String INSTRUCTION_TODO = "todo";
     protected Todo todo;

@@ -3,6 +3,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Class to encapsulate a IncorrectCommand
+ */
 public class IncorrectCommand extends Command {
     protected String errorMessage;
 
