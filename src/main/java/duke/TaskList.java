@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Mark task in tasklist as done via task description.
+     * Marks task in tasklist as done via task description.
      *
      * @param description Task description
      * @param tt          Type of Task

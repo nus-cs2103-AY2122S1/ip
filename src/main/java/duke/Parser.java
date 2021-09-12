@@ -184,7 +184,7 @@ public class Parser {
     }
 
     /**
-     * Parse input arguments and assign parser class variables to corresponding input.
+     * Parses input arguments and assign parser class variables to corresponding input.
      *
      * @param argument Input string
      * @param duke     Duke instance that called this method

@@ -97,7 +97,7 @@ public class Storage {
     }
 
     /**
-     * Create text file and directories to that text file if any of them do not exist.
+     * Creates text file and directories to that text file if any of them do not exist.
      *
      * @param dir  Directory that file is contained in
      * @param file Name of text file
