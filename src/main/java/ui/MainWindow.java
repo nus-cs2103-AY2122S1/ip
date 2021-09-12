@@ -96,7 +96,7 @@ public final class MainWindow extends AnchorPane {
         checkForDue.add("due");
         checkForDue.add(today);
         String tasksDue = new DueCommand(checkForDue).execute(duke.getLst(), duke.getUi(), duke.getStorage());
-        if (!tasksDue.equals("     No tasks due!")) {
+        if (!tasksDue.equals("     No task due!")) {
             getDueTasksMessage(tasksDue);
         }
     }
