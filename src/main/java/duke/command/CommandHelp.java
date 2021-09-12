@@ -6,7 +6,7 @@ package duke.command;
 public class CommandHelp extends Command {
 
     /**
-     * Constructor.
+     * Constructor for this command.
      */
     public CommandHelp() {
         this.commandName = "help";

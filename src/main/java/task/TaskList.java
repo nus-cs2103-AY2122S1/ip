@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Constructor, takes in and uses existing task lists.
      *
-     * @param tasks Existing task list to use
+     * @param tasks Existing task list to use.
      */
     public TaskList(ArrayList<Task> tasks) {
         assert tasks != null: "Tasks must be an arraylist, not null";
@@ -42,7 +42,7 @@ public class TaskList {
     /**
      * Adds a task into the task list.
      *
-     * @param task Task to add
+     * @param task Task to add.
      */
     public String add(Task task) {
         if (task == null) {
@@ -59,8 +59,8 @@ public class TaskList {
     /**
      * Marks the task as complete (or incomplete if it is already complete).
      *
-     * @param index Index of the task displayed by the list command
-     *              Actual index is (index - 1)
+     * @param index Index of the task displayed by the list command.
+     *              Actual index is (index - 1).
      */
     public String toggleDone(int index) {
         try {
@@ -76,8 +76,8 @@ public class TaskList {
     /**
      * Deletes a task from the task list.
      *
-     * @param index Index of the task displayed by the list command
-     *              Actual index is (index - 1)
+     * @param index Index of the task displayed by the list command.
+     *              Actual index is (index - 1).
      */
     public String delete(int index) {
         try {
@@ -94,7 +94,7 @@ public class TaskList {
     /**
      * Displays the list of tasks based on predicate filter.
      *
-     * @param filters Predicates to filter; return true to display task
+     * @param filters Predicates to filter; return true to display task.
      */
     public String displayList(ArrayList<Predicate<Task>> filters) {
         if (tasks.size() == 0) {

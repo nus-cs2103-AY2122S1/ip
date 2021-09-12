@@ -14,10 +14,10 @@ public class CommandAddEvent extends Command {
     private final String[] input;
 
     /**
-     * Constructor.
+     * Constructor for this command.
      *
-     * @param taskList Task list to add to
-     * @param input Array with info needed to create the class
+     * @param taskList Task list to add to.
+     * @param input Array with info needed to create the class.
      */
     public CommandAddEvent(TaskList taskList, String[] input) {
         this.commandName = "event <string> /at DD/MM/YYYY xxxxH";

@@ -19,9 +19,9 @@ public abstract class Command {
     /**
      * Takes in a String date and returns its corresponding LocalDate object.
      *
-     * @param date String date in format DD/MM/YYYY, with 1-2 digits from Day and Month
-     * @return LocalDate object with the corresponding day, month and year
-     * @throws DateTimeParseException Thrown if date passed is an invalid one
+     * @param date String date in format DD/MM/YYYY, with 1-2 digits from Day and Month.
+     * @return LocalDate object with the corresponding day, month and year.
+     * @throws DateTimeParseException Thrown if date passed is an invalid one.
      */
     protected static LocalDate getDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -29,9 +29,9 @@ public abstract class Command {
     }
 
     /**
-     * String representation of a Command.
+     * Represent Command as a string.
      *
-     * @return Command name, description, as well as its arguments on newlines
+     * @return Command name, description, as well as its arguments on newlines.
      */
     @Override
     public String toString() {

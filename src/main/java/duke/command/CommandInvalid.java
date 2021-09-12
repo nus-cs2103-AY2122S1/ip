@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.ui.Ui;
+
 /**
  * Invalid command.
  */
@@ -8,9 +10,9 @@ public class CommandInvalid extends Command {
     private final String input;
 
     /**
-     * Constructor.
+     * Constructor for an invalid command.
      *
-     * @param input Input that caused the error to occur
+     * @param input Input that caused the error to occur.
      */
     public CommandInvalid(String input) {
         this.description = "";
@@ -24,6 +26,6 @@ public class CommandInvalid extends Command {
      */
     @Override
     public String execute() {
-        return "eeeeeee~dameda!!\n" + input + " isn't a valid command!";
+        return Ui.messageInvalidCommand(input);
     }
 }

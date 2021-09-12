@@ -10,17 +10,17 @@ public class TaskTodo extends Task {
     /**
      * Constructor.
      *
-     * @param description Description of task
-     * @param done Completion status
+     * @param description Description of task.
+     * @param done Completion status.
      */
     public TaskTodo(String description, boolean done) {
         super(description, done);
     }
 
     /**
-     * String representation of to-do.
+     * Returns the string representation of to-do.
      *
-     * @return To-do display
+     * @return To-do display.
      */
     @Override
     public String toString() {
@@ -31,9 +31,9 @@ public class TaskTodo extends Task {
     }
 
     /**
-     * The string representation of Task to be used for saving.
+     * Returns the string representation of Task to be used for saving.
      *
-     * @return Save string
+     * @return Save string.
      */
     @Override
     public String saveString() {
@@ -45,8 +45,8 @@ public class TaskTodo extends Task {
     /**
      * Checks if the task falls on a given date.
      *
-     * @param date Date to check
-     * @return False (To-dos have no date)
+     * @param date Date to check.
+     * @return False (To-dos have no date).
      */
     @Override
     public boolean isDate(LocalDate date) {

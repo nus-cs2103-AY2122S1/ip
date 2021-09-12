@@ -2,9 +2,7 @@ package duke.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
+import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 class DukeParserTest {
@@ -15,7 +13,7 @@ class DukeParserTest {
         String input = "TEST_STRING_DOES_NOTHING";
         String actualOutput = testParser.parseInput(input).execute();
 
-        String expectedOutput = "eeeeeee~dameda!!\n" + input + " isn't a valid command!";
+        String expectedOutput = Ui.messageInvalidCommand(input);
         assertEquals(expectedOutput, actualOutput);
     }
 }

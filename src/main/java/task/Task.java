@@ -14,8 +14,8 @@ public abstract class Task {
     /**
      * Constructor.
      *
-     * @param input Description of task
-     * @param isDone Whether the task is complete
+     * @param input Description of task.
+     * @param isDone Whether the task is complete.
      */
     public Task(String input, boolean isDone) {
         description = input;
@@ -25,7 +25,7 @@ public abstract class Task {
     /**
      * Toggles completion of Task.
      *
-     * @return New status of Task
+     * @return New status of Task.
      */
     public String toggleDone() {
         isDone = !isDone;
@@ -36,18 +36,18 @@ public abstract class Task {
     }
 
     /**
-     * Obtain the description of the task.
+     * Obtains the description of the task.
      *
-     * @return Task Description
+     * @return Task Description.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * String representation of Task.
+     * Represents string of Task.
      *
-     * @return Task display
+     * @return Task display.
      */
     @Override
     public String toString() {
@@ -58,17 +58,17 @@ public abstract class Task {
     }
 
     /**
-     * The string representation of Task to be used for saving.
+     * Returns the string representation of Task to be used for saving.
      *
-     * @return Save string
+     * @return Save string.
      */
     public abstract String saveString();
 
     /**
      * Checks if the task falls on a given date (if applicable).
      *
-     * @param date Date to check
-     * @return Whether task is tagged to the passed date
+     * @param date Date to check.
+     * @return Whether task is tagged to the passed date.
      */
     public abstract boolean isDate(LocalDate date);
 }

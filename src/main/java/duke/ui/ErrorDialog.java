@@ -15,14 +15,18 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an error message to be displayed
+ * more prominently than a normal message.
  */
 public class ErrorDialog extends HBox {
     @FXML
     private Label dialog;
 
+    /**
+     * Private constructor to create an error dialog.
+     *
+     * @param text Text to display.
+     */
     private ErrorDialog(String text) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/ErrorDialog.fxml"));
@@ -36,6 +40,12 @@ public class ErrorDialog extends HBox {
         dialog.setText(text);
     }
 
+    /**
+     * Creates an ErrorDialog object. Factory method for ErrorDialog.
+     *
+     * @param text Text to display.
+     * @return New ErrorDialog object.
+     */
     public static ErrorDialog getErrorDialog(String text) {
         var db = new ErrorDialog(text);
         return db;

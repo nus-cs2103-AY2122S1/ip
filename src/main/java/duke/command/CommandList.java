@@ -18,10 +18,10 @@ public class CommandList extends Command {
     private final String args;
 
     /**
-     * Constructor.
+     * Constructor for this command.
      *
-     * @param taskList Task list to list
-     * @param args Un-parsed list of filters
+     * @param taskList Task list to list.
+     * @param args Un-parsed list of filters.
      */
     public CommandList(TaskList taskList, String args) {
         this.commandName = "list /name <name> /date DD/MM/YYYY";
@@ -62,10 +62,10 @@ public class CommandList extends Command {
     /**
      * Gets arguments from a multi-argument string.
      *
-     * @param stringToParse String to parse
-     * @return Arraylist with all filters to use to display list
-     * @throws DateTimeParseException Thrown if error in parsing dates
-     * @throws IllegalArgumentException Thrown if an argument is in a wrong format
+     * @param stringToParse String to parse.
+     * @return Arraylist with all filters to use to display list.
+     * @throws DateTimeParseException Thrown if error in parsing dates.
+     * @throws IllegalArgumentException Thrown if an argument is in a wrong format.
      */
     public static ArrayList<Predicate<Task>> listStringToFilter(String stringToParse)
             throws DateTimeParseException, IllegalArgumentException {

@@ -39,7 +39,7 @@ public class DukeParser {
     /**
      * Constructor; Instantiates the task list to be edited.
      *
-     * @param tasks Task list to edit using this Parser object
+     * @param tasks Task list to edit using this Parser object.
      */
     public DukeParser(TaskList tasks) {
         this.taskList = tasks;
@@ -48,7 +48,7 @@ public class DukeParser {
     /**
      * Matches input with any regex, and passes the matching command.
      *
-     * @param input String input from the Listener given by the User
+     * @param input String input from the Listener given by the User.
      */
     public Command parseInput(String input) {
         assert input != null: "Input to parse cannot be null";

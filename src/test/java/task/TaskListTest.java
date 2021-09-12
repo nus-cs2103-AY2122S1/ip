@@ -8,10 +8,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 class TaskListTest {
-
 
     @Test
     void printSize_emptyTaskList_noTaskDisplayed() {
@@ -19,7 +19,7 @@ class TaskListTest {
         TaskList testList = new TaskList(list);
         String actualOutput = testList.getSize();
 
-        String expectedOutput = "There are 0 tasks in your list";
+        String expectedOutput = Ui.messageListSize(0);
         assertEquals(expectedOutput, actualOutput);
     }
 
@@ -56,7 +56,7 @@ class TaskListTest {
         filter.add((x) -> true);
         String actualOutput = testList.displayList(filter);
 
-        String expectedOutput = "There is nothing to display! :angery:";
+        String expectedOutput = Ui.MESSAGE_NOTHING_TO_DISPLAY;
         assertEquals(expectedOutput, actualOutput);
     }
 }

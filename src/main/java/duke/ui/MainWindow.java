@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage;
 
     /**
-     * Initialise the main window.
+     * Initialises the main window.
      */
     @FXML
     public void initialize() {
@@ -67,6 +67,11 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Displays an error message should the command be invalid.
+     *
+     * @param displayText Text inputted, to be displayed.
+     */
     private void displayError(String displayText) {
         dialogContainer
                 .getChildren()
@@ -75,6 +80,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Display response should the command be valid.
+     *
+     * @param input Text inputted.
+     * @param displayText Text to display.
+     */
     private void displayResponse(String input, String displayText) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -84,7 +95,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Display the welcome message upon startup of the app.
+     * Displays the welcome message upon startup of the app.
      */
     private void startUp() {
         dialogContainer

@@ -10,10 +10,10 @@ public class CommandDone extends Command {
     private final int index;
 
     /**
-     * Constructor.
+     * Constructor for this command.
      *
-     * @param taskList Task list to toggle completion from
-     * @param index Index to toggle completion
+     * @param taskList Task list to toggle completion from.
+     * @param index Index to toggle completion.
      */
     public CommandDone(TaskList taskList, int index) {
         this.commandName = "done <index>";

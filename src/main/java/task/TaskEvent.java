@@ -13,10 +13,10 @@ public class TaskEvent extends Task {
     /**
      * Constructor.
      *
-     * @param description Description of task
-     * @param date Date of Event
-     * @param time Time of Event. Optional, "" otherwise
-     * @param done Completion status
+     * @param description Description of task.
+     * @param date Date of Event.
+     * @param time Time of Event. Optional, "" otherwise.
+     * @param done Completion status.
      */
     public TaskEvent(String description, LocalDate date, String time, boolean done) {
         super(description, done);
@@ -27,9 +27,9 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * String representation of Event.
+     * Return string representation of Event.
      *
-     * @return Event display
+     * @return Event display.
      */
     @Override
     public String toString() {
@@ -42,9 +42,9 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * The string representation of Task to be used for saving.
+     * Returns the string representation of Task to be used for saving.
      *
-     * @return Save string
+     * @return Save string.
      */
     @Override
     public String saveString() {
@@ -58,8 +58,8 @@ public class TaskEvent extends Task {
     /**
      * Checks if the task falls on a given date (if applicable).
      *
-     * @param date Date to check
-     * @return Whether task is tagged to the passed date
+     * @param date Date to check.
+     * @return Whether task is tagged to the passed date.
      */
     @Override
     public boolean isDate(LocalDate date) {

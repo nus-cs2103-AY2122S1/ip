@@ -10,10 +10,13 @@
     <children>
         <Label fx:id="dialog" text="Label" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Courier New" size="12.0" />
+            <Font name="Courier New" size="13.0" />
          </font>
       </Label>
-        <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="15.0" top="15.0" />

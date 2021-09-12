@@ -8,7 +8,7 @@ import duke.ui.Ui;
 public class CommandExit extends Command {
 
     /**
-     * Constructor.
+     * Constructor for this command.
      */
     public CommandExit() {
         this.commandName = "gubbai";

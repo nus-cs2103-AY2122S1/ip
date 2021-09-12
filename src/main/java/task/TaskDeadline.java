@@ -13,10 +13,10 @@ public class TaskDeadline extends Task {
     /**
      * Constructor.
      *
-     * @param description Description of task
-     * @param date Date of task
-     * @param time Time of task (Optional argument), saved as "" otherwise
-     * @param done Completion status
+     * @param description Description of task.
+     * @param date Date of task.
+     * @param time Time of task (Optional argument), saved as "" otherwise.
+     * @param done Completion status.
      */
     public TaskDeadline(String description, LocalDate date, String time, boolean done) {
         super(description, done);
@@ -26,9 +26,9 @@ public class TaskDeadline extends Task {
                 .orElse("");
     }
     /**
-     * String representation of Deadline.
+     * Return string representation of Deadline.
      *
-     * @return Deadline display
+     * @return Deadline display.
      */
     @Override
     public String toString() {
@@ -41,9 +41,9 @@ public class TaskDeadline extends Task {
     }
 
     /**
-     * The string representation of Task to be used for saving.
+     * Returns the string representation of Task to be used for saving.
      *
-     * @return Save string
+     * @return Save string.
      */
     @Override
     public String saveString() {
@@ -57,8 +57,8 @@ public class TaskDeadline extends Task {
     /**
      * Checks if the task falls on a given date (if applicable).
      *
-     * @param date Date to check
-     * @return Whether task is tagged to the passed date
+     * @param date Date to check.
+     * @return Whether task is tagged to the passed date.
      */
     @Override
     public boolean isDate(LocalDate date) {

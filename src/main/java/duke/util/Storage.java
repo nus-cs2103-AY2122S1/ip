@@ -25,10 +25,9 @@ public class Storage {
     private static final String PATH_LOCATION = "data";
 
     /**
-     * Saves the task list to a .txt file whose path
-     * is specified as FILE_LOCATION.
+     * Saves the task list to a .txt file whose path is specified as FILE_LOCATION.
      *
-     * @param tasks task list to save
+     * @param tasks task list to save.
      */
     public static void saveList(ArrayList<Task> tasks) {
         try {
@@ -44,10 +43,9 @@ public class Storage {
     }
 
     /**
-     * Loads a .txt file from the path
-     * specified as FILE_LOCATION.
+     * Loads a .txt file from the path specified as FILE_LOCATION.
      *
-     * @return Loaded task list
+     * @return Loaded task list.
      */
     public static TaskList loadList() {
         try {
@@ -75,7 +73,7 @@ public class Storage {
     }
 
     /**
-     * Create a directory for the save file if non-existent.
+     * Creates a directory for the save file if non-existent.
      */
     private static void createDirectory() {
         File directory = new File(PATH_LOCATION);
@@ -87,9 +85,9 @@ public class Storage {
     /**
      * Converts a given string for the txt save file to a valid Task.
      *
-     * @param task String from txt save file
-     * @return task.Task corresponding to the string
-     * @throws ParseException Thrown if string from file contains errors
+     * @param task String from txt save file.
+     * @return task.Task corresponding to the string.
+     * @throws ParseException Thrown if string from file contains errors.
      */
     private static Task stringToTask(String task) throws ParseException {
         String[] args = task.split("\\t");

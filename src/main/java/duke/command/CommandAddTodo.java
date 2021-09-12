@@ -12,10 +12,10 @@ public class CommandAddTodo extends Command {
     private final String desc;
 
     /**
-     * Constructor.
+     * Constructor for this command.
      *
-     * @param taskList Task list to add to
-     * @param desc Description of task
+     * @param taskList Task list to add to.
+     * @param desc Description of task.
      */
     public CommandAddTodo(TaskList taskList, String desc) {
         this.commandName = "todo <string>";

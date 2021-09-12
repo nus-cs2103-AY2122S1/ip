@@ -21,9 +21,9 @@ public class Duke {
     }
 
     /**
-     * Get response from duke from the GUI.
+     * Gets response from duke from the GUI.
      *
-     * @param input String input from user
+     * @param input String input from user.
      */
     public Command getResponse(String input) {
         return parser.parseInput(input);

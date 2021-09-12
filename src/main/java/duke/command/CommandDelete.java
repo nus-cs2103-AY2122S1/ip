@@ -10,10 +10,10 @@ public class CommandDelete extends Command {
     private final int index;
 
     /**
-     * Constructor.
+     * Constructor for this command.
      *
-     * @param taskList Task list to delete from
-     * @param index Index to delete
+     * @param taskList Task list to delete from.
+     * @param index Index to delete.
      */
     public CommandDelete(TaskList taskList, int index) {
         this.commandName = "delete <index>";

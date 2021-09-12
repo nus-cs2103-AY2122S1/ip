@@ -2,6 +2,9 @@ package task;
 
 import java.time.LocalDate;
 
+/**
+ * Stub of a standard task.
+ */
 public class TaskStub extends Task {
 
     public TaskStub(String input, boolean done) {
@@ -17,9 +20,9 @@ public class TaskStub extends Task {
     }
 
     /**
-     * Returns a string representation to be saved
+     * Returns a string representation to be saved.
      *
-     * @return string to be saved in text file
+     * @return string to be saved in text file.
      */
     public String saveString() {
         String checkBox = isDone

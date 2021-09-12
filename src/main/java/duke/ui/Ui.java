@@ -17,35 +17,40 @@ public class Ui {
     public static final String MESSAGE_NOTHING_TO_DISPLAY = "There is nothing to display! :angery:";
 
     /**
-     * Message to display when Duke wants to tell user that they input an invalid index in
+     * Displays message when Duke wants to tell user that they input an invalid index in
      * a command.
      *
-     * @param index Index to display
-     * @return String to display
+     * @param index Index to display.
+     * @return String to display.
      */
     public static String messageNoTaskAtIndex(int index) {
         return "There's no task at index " + index + "!!";
     }
 
     /**
-     * Message to display when the user removes any task successfully.
+     * Displays message when the user removes any task successfully.
      *
-     * @param removedTask Task removed
-     * @param sizeString String to display new size of tasklist
-     * @return Corresponding message string
+     * @param removedTask Task removed.
+     * @param sizeString String to display new size of task list.
+     * @return Corresponding message string.
      */
     public static String messageRemoveTask(Task removedTask, String sizeString) {
-        return "Noted. Duke-san removed this task:"
-                + removedTask
+        return "Noted. Duke-san removed this task:\n"
+                + Ui.OUTPUT_SPACES
+                + removedTask + '\n'
                 + sizeString;
     }
 
+    public static String messageInvalidCommand(String input) {
+        return "eeeeeee~dameda!!\n" + input + " isn't a valid command!";
+    }
+
     /**
-     * Message to display when the user adds any task successfully.
+     * Displays message when the user adds any task successfully.
      *
-     * @param addedTask Task added
-     * @param sizeString String to display new size of tasklist
-     * @return Corresponding message string
+     * @param addedTask Task added.
+     * @param sizeString String to display new size of task list.
+     * @return Corresponding message string.
      */
     public static String messageAddTask(Task addedTask, String sizeString) {
         return "Got it. I've added this task:\n"
@@ -55,10 +60,10 @@ public class Ui {
     }
 
     /**
-     * Message to display when getting size of list.
+     * Displays message when getting size of list.
      *
-     * @param size Size of list
-     * @return Corresponding message string
+     * @param size Size of list.
+     * @return Corresponding message string.
      */
     public static String messageListSize(int size) {
         return size == 1
@@ -67,7 +72,7 @@ public class Ui {
     }
 
     /**
-     * Welcome text to display when Duke starts up.
+     * Displays welcome text when Duke starts up.
      */
     public static String introMessage() {
         String welcomeText = "    When the Duke is sus";
@@ -103,7 +108,7 @@ public class Ui {
     }
 
     /**
-     * Text to display when user exits (via gubbai command).
+     * Displays text when user exits (via gubbai command).
      */
     public static String goodByeMessage() {
         return "kimi no unmei no hito wa boku jyanai";

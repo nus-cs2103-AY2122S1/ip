@@ -14,10 +14,10 @@ public class CommandAddDeadline extends Command {
     private final String[] input;
 
     /**
-     * Constructor.
+     * Constructor for this command.
      *
-     * @param taskList Task list to add to
-     * @param input Array with info needed to create the class
+     * @param taskList Task list to add to.
+     * @param input Array with info needed to create the class.
      */
     public CommandAddDeadline(TaskList taskList, String[] input) {
         this.commandName = "deadline <string> /by DD/MM/YYYY xxxx";
