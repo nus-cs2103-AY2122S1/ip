@@ -67,9 +67,10 @@ public class Duke {
         if (storage.hasSave()) {
             try {
                 tasks = storage.load();
+                this.mw.printMessage("I've fetched your tasks from " + filePath);
             } catch (DukeException e) {
                 tasks = new TaskList();
-                this.mw.printMessage(e.toString());
+                this.mw.printMessage(e.getMessage());
             }
         } else {
             tasks = new TaskList();

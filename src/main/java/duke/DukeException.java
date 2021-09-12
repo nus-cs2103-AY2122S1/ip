@@ -136,11 +136,21 @@ class DateTimeFormatException extends DukeException {
 }
 
 /**
- * Throws exception when load file is corrupted or does not exist.
+ * Throws exception when load file is corrupted.
  */
 class LoadFileCorrupted extends DukeException {
 
     LoadFileCorrupted() {
         super("Meow? File could not be loaded as file was corrupted.");
+    }
+}
+
+/**
+ * Throws exception when load file does not exist.
+ */
+class LoadFileMissing extends DukeException {
+
+    LoadFileMissing() {
+        super("Meow? File to load does not exist.");
     }
 }
