@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
         assert index >= 0 : "index cannot be < 0";
         if (index < 1) {
             throw new DukeException("Oh no Rio, this index does not exist!\n"
-                    + "Please make sure that index < size of tasks");
+                    + "Please make sure that index > 0");
         }
         int maxIndex = tasks.getSize();
         int deleteIndex = index - 1;
@@ -47,8 +47,8 @@ public class DeleteCommand extends Command {
                     + "Please make sure that index < size of tasks");
         }
         Task deleteTask = tasks.getTask(deleteIndex);
-        tasks.deleteTask(deleteIndex);
         storage.editTask(deleteTask, "");
+        tasks.deleteTask(deleteIndex);
         return ui.printDeleteCommand(deleteTask, tasks);
     }
 

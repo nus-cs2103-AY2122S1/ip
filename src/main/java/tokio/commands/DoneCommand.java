@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
         assert index >= 0 : "index cannot be < 0";
         if (index < 1) {
             throw new DukeException("Oh no Rio, this index does not exist!\n"
-                    + "Please make sure that index < size of tasks");
+                    + "Please make sure that index > 0");
         }
         int maxIndex = tasks.getSize();
         int doneIndex = index - 1;
@@ -47,7 +47,7 @@ public class DoneCommand extends Command {
                     + "Please make sure that index < size of tasks");
         }
         Task doneTask = tasks.getTask(doneIndex);
-        storage.editTask(doneTask, doneTask.toString());
+        storage.editTask(doneTask, doneTask.formatToStorage());
         tasks.doneTask(doneIndex);
         return ui.printDoneCommand(doneTask, tasks);
     }
