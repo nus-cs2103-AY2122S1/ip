@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
-        String key = input.substring(5);
+        String key = input.substring(5).trim();
         if (key.length() == 0) {
             throw new DukeException("You have not provided an input to search your list with. Please try again!");
         } else {

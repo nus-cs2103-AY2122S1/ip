@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class DeadlineTask extends Task {
 
     protected LocalDateTime time;
-    protected String storedTime;
+    protected String storedTime = "";
 
     /**
      * Constructor for the DeadlineTask class.
