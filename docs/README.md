@@ -1,3 +1,5 @@
+
+![Duke](Ui.png)
 # User Guide
 
 Duke is a **desktop app** for tracking your everyday tasks. Implemented as a **chatbot**, its
@@ -6,14 +8,16 @@ types of tasks, its versatile nature makes it perfect for people of all ages who
 to get their life on track.
 
 ## Getting Started
+Method 1 - Double-click: 
 1. Install `Java 11` or above
 2. Download the latest release of `duke.jar` from [here](https://github.com/moreTriangles/ip/releases)
 3. Place `duke.jar` in an empty folder
-
-Method 1 - Double-click: 
 4. Double-click `duke.jar` to start Duke
 
 Method 2 - Command Line:
+1. Install `Java 11` or above
+2. Download the latest release of `duke.jar` from [here](https://github.com/moreTriangles/ip/releases)
+3. Place `duke.jar` in an empty folder
 4. Open your terminal or command prompt
 5. Navigate to the folder containing `duke.jar`
 6. Execute `java -jar duke.jar`
@@ -131,7 +135,7 @@ Here are your current tasks:
 Duke will mark the corresponding task with a tick symbol to indicate that it is done.
 
 ### `delete` - Delete a task
-After a task is done, you can choose to delete it
+After a task is done, you can choose to delete it.
 
 Format: `delete [task number]`
 
@@ -179,7 +183,7 @@ Format: `bye`
 
 ## Command Summary
 Action | Format, Examples
------------- | -------------
+-------| ----------------
 Add Todo | `todo [task name]` <br/> e.g. `todo Walk the dog`
 Add Deadline | `deadline [task name] /by [yyyy-mm-dd]` <br/> e.g. `d Submit CS2103T iP /by 2021-09-17`
 Add Event | `event [task name] /at [yyyy-mm-dd]` <br/> e.g. `event Guitar lesson /at 2021-09-13`
