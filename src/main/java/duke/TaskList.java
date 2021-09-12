@@ -115,7 +115,9 @@ public class TaskList {
      */
     public void saveTasksToStorage() {
         // Empty file if there are no tasks
-        storage.writeToDataFile("");
+        if (tasks.isEmpty()) {
+            storage.writeToDataFile("");
+        }
 
         // Stores each tasks to the data file
         for (int i = 0; i < tasks.size(); i++) {
