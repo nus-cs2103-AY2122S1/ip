@@ -49,7 +49,7 @@ public class Storage {
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            java.nio.file.Path directoryPath = Paths.get(System.getProperty("user.home"), "data");
+            java.nio.file.Path directoryPath = Paths.get("data");
             if (!Files.exists(directoryPath)) {
                 File directory = new File(String.valueOf(String.valueOf(directoryPath)));
                 directory.mkdir();
@@ -92,8 +92,9 @@ public class Storage {
      * Saves the current tasks to the hard drive.
      *
      * @param taskList The task list.
+     * @throws IOException If the data cannot be saved in the file.
      */
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws IOException {
         // Format the task list into a String
         String textToAdd = "";
         ArrayList<Task> tasksList = taskList.getTaskList();
@@ -102,14 +103,11 @@ public class Storage {
         }
 
         // Write to the hard disk
-        try {
-            assert Files.exists(Paths.get(this.filePath)) : "File path should exist";
-            FileWriter fileWriter = new FileWriter(this.filePath);
-            fileWriter.write(textToAdd);
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Unable to write to ./data/dukeFile.txt");
-        }
+        File dukeFile = new File(this.filePath);
+        dukeFile.createNewFile();
+        FileWriter fileWriter = new FileWriter(this.filePath);
+        fileWriter.write(textToAdd);
+        fileWriter.close();
     }
 
     private String translateTaskToString(Task task) {

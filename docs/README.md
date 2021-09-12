@@ -36,7 +36,7 @@ Users are able to tag a specific task to allow for categorization of tasks in th
 ### Saving the Data
 
 The data are automatically saved in the hard disk after any command that changes the data has been executed.
-There is no need for users to save manually. The data are saved as a TXT file `/data/dukeFile.txt`.
+There is no need for users to save manually. The data are saved as a TXT file `[JAR file location]/data/dukeFile.txt`.
 
 ## Usage
 

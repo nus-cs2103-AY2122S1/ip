@@ -6,6 +6,8 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.IOException;
+
 /**
  * This DoneCommand class represents a command to mark a task as done.
  */
@@ -30,10 +32,11 @@ public class DoneCommand extends Command {
      * @return Completion message of this command.
      * @throws TaskIndexOutOfBoundsException If the task list is accessed with an illegal index.
      * @throws TaskAlreadyDoneException If the task has already been marked as done.
+     * @throws IOException If the data cannot be saved in the file.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws TaskIndexOutOfBoundsException,
-            TaskAlreadyDoneException {
+            TaskAlreadyDoneException, IOException {
         Task completedTask = tasks.markAsDone(this.taskId);
         assert completedTask != null : "The task should be marked as done and returned accordingly";
 

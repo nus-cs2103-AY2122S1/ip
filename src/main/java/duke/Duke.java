@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 
@@ -15,8 +16,7 @@ import duke.task.TaskList;
  */
 public class Duke {
 
-    private static final String FILE_PATH = String.valueOf(Paths.get(
-            System.getProperty("user.home"), "data", "dukeFile.txt"));
+    private static final String FILE_PATH = String.valueOf(Paths.get("data", "dukeFile.txt"));
 
     private Storage storage;
     private TaskList tasks;
@@ -47,6 +47,8 @@ public class Duke {
             return e.getMessage();
         } catch (DateTimeParseException e) {
             return "Please specify the date in this format: yyyy-mm-dd";
+        } catch (IOException e) {
+            return "Unable to write data to file";
         }
     }
 }

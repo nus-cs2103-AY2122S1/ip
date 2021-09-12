@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import duke.storage.Storage;
@@ -48,9 +49,10 @@ public class AddCommand extends Command {
      * @param tasks The task list.
      * @param storage The storage system of the application.
      * @return Completion message of this command.
+     * @throws IOException If the data cannot be saved in the file.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         // Adds the correct Task instance to the TaskList instance
         Task taskToBeAdded;
         if (taskType.equals("todo")) {

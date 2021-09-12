@@ -5,6 +5,8 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.IOException;
+
 /**
  * This TagCommand class represents a command to tag a task in the task list.
  */
@@ -31,9 +33,11 @@ public class TagCommand extends Command {
      * @param storage The storage system of the application.
      * @return Completion message of this command.
      * @throws TaskIndexOutOfBoundsException If the task list is accessed with an illegal index.
+     * @throws IOException If the data cannot be saved in the file.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws TaskIndexOutOfBoundsException {
+    public String execute(TaskList tasks, Storage storage) throws TaskIndexOutOfBoundsException,
+            IOException {
         Task taggedTask = tasks.tagTask(taskId, tagName);
         assert taggedTask != null : "The task should be tagged and returned accordingly";
 
