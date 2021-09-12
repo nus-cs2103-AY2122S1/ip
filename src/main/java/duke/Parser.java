@@ -84,6 +84,9 @@ public class Parser {
         case "remind":
             response = getReminderResponse();
             break;
+        case "clear":
+            response = getClearResponse();
+            break;
         default:
             response = Ui.getUnrecognisedCmdMessage();
         }
@@ -234,5 +237,11 @@ public class Parser {
             response = Ui.noDaySpecifiedMessage();
         }
         return response;
+    }
+
+    private String getClearResponse() {
+        this.list.clearList();
+        this.storage.writeToFile();
+        return Ui.getClearMessage();
     }
 }

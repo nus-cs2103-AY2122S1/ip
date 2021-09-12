@@ -314,4 +314,12 @@ public class Ui {
             return "These are the deadlines due within " + days + " days\n";
         }
     }
+
+    /**
+     * Duke's reply when the user inputs the clear command.
+     * @return Duke's reply
+     */
+    public static String getClearMessage() {
+        return "Your list has been cleared.";
+    }
 }

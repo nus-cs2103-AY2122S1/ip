@@ -152,4 +152,11 @@ public class MyList {
         System.out.println(result);
         return result;
     }
+
+    /**
+     * Clears all items in the list.
+     */
+    public void clearList() {
+        this.myList.clear();
+    }
 }
