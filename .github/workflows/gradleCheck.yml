@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'src/**'
+      - 'build.gradle'
   pull_request:
     branches:
       - master
+    paths:
+      - 'src/**'
+      - 'build.gradle'
 
 jobs:
   build:
