@@ -4,7 +4,7 @@ import dialog.Dialog;
 import dialog.exceptions.DialogException;
 import dialog.TaskDialog;
 
-import task.TaskList;
+import model.task.TaskList;
 
 /**
  * The Ui class dealing with user interacting with the application and its system.
@@ -105,20 +105,20 @@ public class Ui {
         } else {
             Dialog commandsList = Dialog.generate(dialogId);
             commandsList.add("This is the following commands, I can perform:\n");
-            commandsList.add("1. 'todo <task description>' - add a todo task to the list");
-            commandsList.add("2. 'deadline <task description> /by <by when>' "
-                    + "- add a deadline task with specific deadline");
-            commandsList.add("3. 'event <task description> /at <at when>' "
-                    + "- add an event task with specific time");
+            commandsList.add("1. 'todo <models.task description>' - add a todo models.task to the list");
+            commandsList.add("2. 'deadline <models.task description> /by <by when>' "
+                    + "- add a deadline models.task with specific deadline");
+            commandsList.add("3. 'event <models.task description> /at <at when>' "
+                    + "- add an event models.task with specific time");
             commandsList.add("4. 'date <yyyy-mm-dd>' "
                     + "- list all todos and all the deadlines and events before specified time");
-            commandsList.add("5. 'list' - show the current task list");
-            commandsList.add("6. 'find <keyword>' - list the task with specific keywords");
-            commandsList.add("7. 'done <task index>' - mark that task as done");
-            commandsList.add("8. 'delete <task index>' - delete that task from the list");
+            commandsList.add("5. 'list' - show the current models.task list");
+            commandsList.add("6. 'find <keyword>' - list the models.task with specific keywords");
+            commandsList.add("7. 'done <models.task index>' - mark that models.task as done");
+            commandsList.add("8. 'delete <models.task index>' - delete that models.task from the list");
             commandsList.add("9. 'learn <vocab to learn> - prompt the user with process to learn a vocab");
             commandsList.add("10. 'commands' - show this current command window");
-            commandsList.add("11.'bye' - end session and save your task list");
+            commandsList.add("11.'bye' - end session and save your models.task list");
             return commandsList.toString();
         }
     }

@@ -1,4 +1,4 @@
-package task;
+package model.task;
 
 import java.time.format.DateTimeFormatter;
 
@@ -36,7 +36,7 @@ public class Event extends TimeTask {
 
     /**
      * Template: "[E][x] description (at: Month DD YYYY)" or "[E][ ] description (at: Month DD YYYY)" for done
-     * and not done task respectively.
+     * and not done models.task respectively.
      *
      * @return the template above for Event
      */

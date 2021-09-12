@@ -1,11 +1,11 @@
-package task;
+package model.task;
 
 import parser.Parser;
 
 import java.time.LocalDate;
 
 /**
- * The abstract for task which has association with time.
+ * The abstract for models.task which has association with time.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
@@ -32,7 +32,7 @@ public abstract class TimeTask extends Task {
      * Adapted constructor for TimeTask.
      *
      * @param description the description of the TimeTask
-     * @param isDone      whether the task is done
+     * @param isDone      whether the models.task is done
      * @param timeString  the time of the TimeTask with yyyy-MM-dd format
      */
     public TimeTask(String description, boolean isDone, String timeString) {

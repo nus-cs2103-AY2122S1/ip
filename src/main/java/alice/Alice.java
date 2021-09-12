@@ -41,7 +41,7 @@ public class Alice {
     public Alice(String fileName) throws IOException {
         ui = new Ui();
         storage = new Storage(fileName);
-        // import the task from what the storage manage to load
+        // import the models.task from what the storage manage to load
         ui.setTaskList(storage.loadTaskList());
         // set the current taskDialog of alice.Alice to the one ui fetch from the storage
     }

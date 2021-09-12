@@ -14,9 +14,9 @@ import parser.Parser;
 
 import storage.Storage;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import model.task.Deadline;
+import model.task.Event;
+import model.task.Todo;
 
 
 import ui.ChatPage;

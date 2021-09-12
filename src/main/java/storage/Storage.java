@@ -1,7 +1,7 @@
 package storage;
 
 import parser.Parser;
-import task.TaskList;
+import model.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
