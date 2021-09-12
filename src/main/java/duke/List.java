@@ -48,7 +48,8 @@ public class List {
     public String addTask(String input, Parser parser) throws IOException {
         if (input.equals(DISPLAY_LIST_COMMAND)) {
             return showList();
-        } if (input.equals(HELP_COMMAND)) {
+        }
+        if (input.equals(HELP_COMMAND)) {
             return helpPage();
         } else {
             try {
