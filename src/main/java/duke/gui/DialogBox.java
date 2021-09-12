@@ -33,9 +33,10 @@ public class DialogBox extends HBox {
      * Initializes a new DialogBox.
      *
      * @param text Text in the DialogBox.
+     * @param textColor Color of the text in the dialog box
      * @param img Image of the DialogBox.
      */
-    private DialogBox(String text, Paint color, Image img) {
+    private DialogBox(String text, Paint textColor, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -47,7 +48,7 @@ public class DialogBox extends HBox {
 
         // General layout of a Dialog Box
         dialog.setText(text);
-        dialog.setTextFill(color);
+        dialog.setTextFill(textColor);
         dialog.setWrapText(true);
         dialog.setPadding(new Insets(5));
         displayPicture.setImage(img);
