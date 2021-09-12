@@ -1,15 +1,25 @@
 package seedu.duke.timetable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import seedu.duke.tasks.ScheduledTask;
+import seedu.duke.tasks.Task;
 
 public class Timetable {
     private final HashMap<String, DayPlan> timetable;
 
     public Timetable() {
         this.timetable = new HashMap<String, DayPlan>();
+    }
+
+    public void initialise(ArrayList<Task> savedTasks) {
+        ArrayList<Task> savedTasksList = new ArrayList<Task>((savedTasks));
+        savedTasksList.removeIf(task -> !task.getSymbol().equals("ST"));
+        savedTasksList.forEach(task -> {
+            this.addPlanToDay((ScheduledTask) task);
+        });
     }
 
     public String addPlanToDay(ScheduledTask currTask) {

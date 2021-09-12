@@ -6,7 +6,6 @@ import seedu.duke.timetable.Timetable;
 
 public abstract class Command {
     protected static final String DATA_STORAGE_ISDONE_FALSE = " | 0 | ";
-    protected static final String DATA_STORAGE_TASK_SYMBOL = "T";
 
     /**
      * Executes the command.

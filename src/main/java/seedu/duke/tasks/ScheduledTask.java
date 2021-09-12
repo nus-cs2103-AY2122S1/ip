@@ -55,9 +55,8 @@ public class ScheduledTask extends Task {
 
     @Override
     public String toString() {
-        return "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on "
-                + this.getTaskDate().format(DateTimeFormatter.ofPattern("dd/MM/yy")) + " at " + this.getTimeFrom()
-                + " to " + this.getTimeTo();
+        return "[ST][" + this.getStatusIcon() + "] " + this.getDescription() + " on " + this.getDate() + " at "
+                + this.getTimeFrom() + " to " + this.getTimeTo();
     }
 
 }

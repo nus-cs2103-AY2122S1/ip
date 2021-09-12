@@ -10,9 +10,6 @@ public class PeriodTask extends Task {
     public PeriodTask(String description, String from, String to) {
         super(description);
 
-        System.out.println(from);
-        System.out.println(to);
-
         this.from = LocalDate.of(Integer.parseInt(from.split("-")[2]), Integer.parseInt(from.split("-")[1]),
                 Integer.parseInt(from.split("-")[0]));
 
@@ -24,6 +21,14 @@ public class PeriodTask extends Task {
         super(description, isDone);
         this.from = from;
         this.to = to;
+    }
+
+    public String getFrom() {
+        return this.from.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    public String getTo() {
+        return this.to.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     @Override
@@ -38,8 +43,7 @@ public class PeriodTask extends Task {
 
     @Override
     public String toString() {
-        return "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between "
-                + from.format(DateTimeFormatter.ofPattern("dd/MM/yy")) + " and "
-                + to.format(DateTimeFormatter.ofPattern("dd/MM/yy"));
+        return "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
+                + this.getTo();
     }
 }

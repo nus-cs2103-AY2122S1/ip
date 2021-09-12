@@ -26,14 +26,12 @@ public class Duke {
     }
 
     public void loadDataFromStorage() {
-        ArrayList<Task> savedTasks = storage.loadData();
-        taskList.loadFromStorage(savedTasks);
+        ArrayList<Task> savedTasks = this.storage.loadData();
+        this.taskList.loadFromStorage(savedTasks);
+        this.timetable.initialise(savedTasks);
     }
 
     public String getResponse(String userInput) {
-
-        // Ui.printIntro();
-
         try {
             Parser parser = new Parser();
 
