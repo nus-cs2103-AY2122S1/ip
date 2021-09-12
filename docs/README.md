@@ -22,6 +22,11 @@
 4. Click `OK`.
 5. You are done!
 
+## Running Dukebro
+1. In the project directory, click `src` > `main` > `java` > `dukegui` > `Launcher`.
+2. Inside `Launcher.java`, click on the green play button on the leftside of the class.
+3. Finally, click on `Run 'Launcher.main()'`
+
 ## Commands
 1. `list` - list all the tasks you have currently.
 2. `delete {task number}` - deletes the task from your list corresponding to its task number.
