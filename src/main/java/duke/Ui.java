@@ -85,6 +85,11 @@ public class Ui {
         System.out.println(END_LINE);
     }
 
+    /**
+     * Returns the help text.
+     *
+     * @return a string containing guidance on how to use the bot.
+     */
     public String getHelpMenu() {
         String helpMessage = welcomeToHelpSectionMessage + "\n\n"
                 + byeCommandDescription + "\n" + byeCommandExample + "\n\n"
