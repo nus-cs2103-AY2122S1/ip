@@ -1,5 +1,5 @@
+<img src="/Ui.png" alt="Duke" width="200"/>
 
-![Duke](Ui.png)
 # User Guide
 
 Duke is a **desktop app** for tracking your everyday tasks. Implemented as a **chatbot**, its
@@ -182,16 +182,17 @@ Format: `bye`
 **A**: Yes, you can. E.g. `find amily` will return a task named `eat with family`
 
 ## Command Summary
-Action | Format, Examples
--------| ----------------
-Add Todo | `todo [task name]` <br/> e.g. `todo Walk the dog`
-Add Deadline | `deadline [task name] /by [yyyy-mm-dd]` <br/> e.g. `d Submit CS2103T iP /by 2021-09-17`
-Add Event | `event [task name] /at [yyyy-mm-dd]` <br/> e.g. `event Guitar lesson /at 2021-09-13`
-List | `list`, `l`
-Mark Done | `done [task number]` <br/> e.g. `done 2`
-Delete | `delete [task number]` <br/> e.g. `delete 3`
-Find | `find [string to match]` <br/> e.g. `find family`
-Bye | `bye`
+
+|Action | Format, Examples|
+|-------| ----------------|
+|Add Todo | `todo [task name]` <br/> e.g. `todo Walk the dog`|
+|Add Deadline | `deadline [task name] /by [yyyy-mm-dd]` <br/> e.g. `d Submit CS2103T iP /by 2021-09-17`|
+|Add Event | `event [task name] /at [yyyy-mm-dd]` <br/> e.g. `event Guitar lesson /at 2021-09-13`|
+|List | `list`, `l`|
+|Mark Done | `done [task number]` <br/> e.g. `done 2`|
+|Delete | `delete [task number]` <br/> e.g. `delete 3`|
+|Find | `find [string to match]` <br/> e.g. `find family`|
+|Bye | `bye`|
 
 ## Acknowledgements
 Dwayne "The Rock" Johnson Profile picture from [Podchaser](https://www.podchaser.com/creators/dwayne-johnson-107ZzsApFJ/about)
