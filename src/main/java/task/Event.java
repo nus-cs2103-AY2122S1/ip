@@ -1,6 +1,5 @@
 package task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,41 +7,10 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.01
- * @since 0.00
+ * @version 0.03
+ * @since 0.01
  */
 public class Event extends TimeTask {
-    /**
-     * Default constructor for Event.
-     * isDone is set to false and time is set to null.
-     *
-     * @param description the description fo the event
-     */
-    public Event(String description) {
-        super(description);
-    }
-
-    /**
-     * Default constructor for Event.
-     * time is set to null.
-     *
-     * @param description the description of the event
-     * @param isDone      whether the event is done
-     */
-    public Event(String description, boolean isDone) {
-        super(description, isDone);
-    }
-
-    /**
-     * Default constructor for Event.
-     *
-     * @param description the description of the event
-     * @param isDone      whether the event is done
-     * @param time        LocalDate object time of the event
-     */
-    public Event(String description, boolean isDone, LocalDate time) {
-        super(description, isDone, time);
-    }
 
     /**
      * Adapted constructor for Event.

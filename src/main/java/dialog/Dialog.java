@@ -41,15 +41,6 @@ public class Dialog {
     }
 
     /**
-     * Return number of sentences stored in the Dialog
-     *
-     * @return the length of ArrayList sentences
-     */
-    public int length() {
-        return sentences.size();
-    }
-
-    /**
      * Generate dialog of specified Id.
      * Dialog is not to have the same Id to avoid duplication
      *

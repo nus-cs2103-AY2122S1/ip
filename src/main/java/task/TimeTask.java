@@ -9,45 +9,12 @@ import java.time.LocalDate;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.01
- * @since 0.00
+ * @version 0.03
+ * @since 0.01
  */
 public abstract class TimeTask extends Task {
     /** LocalDate time of the timeTask */
-    private LocalDate time;
-
-    /**
-     * Default constructor for TimeTask.
-     * isDone is set to false and time is set to null.
-     *
-     * @param description the description of the TimeTask
-     */
-    public TimeTask(String description) {
-        super(description);
-    }
-
-    /**
-     * Default constructor for TimeTask.
-     * time is set to null.
-     *
-     * @param description the description of the TimeTask
-     * @param isDone      whether the task is done
-     */
-    public TimeTask(String description, boolean isDone) {
-        super(description, isDone);
-    }
-
-    /**
-     * Default constructor for TimeTask.
-     *
-     * @param description the description of the TimeTask
-     * @param isDone      whether the task is done
-     * @param time        the LocalDate time for the TimeTask
-     */
-    public TimeTask(String description, boolean isDone, LocalDate time) {
-        super(description, isDone);
-        this.time = time;
-    }
+    private final LocalDate time;
 
     /**
      * Adapted constructor for TimeTask.
@@ -80,14 +47,5 @@ public abstract class TimeTask extends Task {
      */
     public LocalDate getTime() {
         return this.time;
-    }
-
-    /**
-     * Setter for time.
-     *
-     * @param time the LocalDate time for the TimeTask to be set to
-     */
-    public void setTime(LocalDate time) {
-        this.time = time;
     }
 }

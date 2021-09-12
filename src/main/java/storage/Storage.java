@@ -1,6 +1,5 @@
 package storage;
 
-import dialog.exceptions.DialogException;
 import parser.Parser;
 import task.TaskList;
 
@@ -38,20 +37,20 @@ public class Storage {
     private static final String DEFAULT_FILE_NAME = "task_list";
 
     /** the filePath for the save file */
-    private String filePath;
+    protected String filePath;
     /** the taskList read from the save file */
     private TaskList taskListRead;
 
 
     /** writer for writing to file */
-    public static BufferedWriter WRITER;
+    protected static BufferedWriter WRITER;
     /** reader for reading the file */
-    public static BufferedReader READER;
+    protected static BufferedReader READER;
 
     /**
      * Constructor using default file location to use as storage
      *
-     * @throws DialogException dialog cannot have the same id while the app is running
+     * @throws IOException when there is error registering writer and reader to certain file location
      */
     public Storage() throws IOException {
         this(DEFAULT_FILE_NAME);

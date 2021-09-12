@@ -8,11 +8,11 @@ import java.util.Objects;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
+ * @version 0.03
  * @since 0.01
  */
 public abstract class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**
