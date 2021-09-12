@@ -123,10 +123,15 @@ public abstract class Task {
      */
     @Override
     public String toString() {
+        return this.taskTypeToString() + this.getCompletedIcon() + this.taskDescription();
+    }
+
+    private String getCompletedIcon() {
         if (this.isDone) {
-            return taskTypeToString() + "[X] " + this.taskDescription();
+            return "[" + "\u2713" + "] ";
+        } else {
+            return "[" + "\u2718" + "] ";
         }
-        return taskTypeToString() + "[] " + this.taskDescription();
     }
 
     public String getTaskName() {
