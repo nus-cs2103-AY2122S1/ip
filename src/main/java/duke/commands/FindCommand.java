@@ -1,16 +1,20 @@
 package duke.commands;
 
-import duke.PersistentStorage;
-import duke.Response;
-import duke.Tasklist;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 
 /**
  * Class encapsulating a "find" command by the user.
  */
 public class FindCommand extends Command {
 
+    /** Starting index of search term(s) */
+    public static final int SEARCH_TERM_START_IDX = 5;
+
     /** String containing the desired search terms */
     private String searchTerms;
+
 
     /**
      * A constructor for a FindCommand

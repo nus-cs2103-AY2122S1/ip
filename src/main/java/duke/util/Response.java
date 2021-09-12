@@ -1,5 +1,6 @@
-package duke;
+package duke.util;
 
+import duke.DukeException;
 import duke.tasks.Task;
 
 /**
@@ -19,8 +20,7 @@ public class Response {
      * @return A String detailing an error in loading data from the persistent storage file.
      */
     public String showLoadError() {
-        String msg = "Could not read your file :(";
-        return msg;
+        return "Could not read your file :(";
     }
 
     /**
@@ -29,8 +29,7 @@ public class Response {
      * @return A String containing a welcome message to the user.
      */
     public String showStartMsg() {
-        String msg = "Hello there, I'm Duke!\nWhat can I do for you?";
-        return msg;
+        return "Hello there, I'm Duke!\nWhat can I do for you?";
     }
 
     /**
@@ -39,8 +38,7 @@ public class Response {
      * @return A String containing an exit message for the user.
      */
     public String showExitMsg() {
-        String msg = "Bye! Come back again!";
-        return msg;
+        return "Bye! Come back again!";
     }
 
     /**
@@ -68,8 +66,7 @@ public class Response {
      * @return A String detailing all the Tasks in the current Tasklist.
      */
     public String listAllTasks(Tasklist taskList) {
-        String msg = "Here are the items in your list:\n" + taskList.toString();
-        return msg;
+        return ("Here are the items in your list:\n" + taskList.toString());
     }
 
     /**
@@ -79,9 +76,8 @@ public class Response {
      * @return A String detailing the Task that was marked as complete.
      */
     public String showCompletedTask(Task task) {
-        String msg = "Nice! I've marked this task as done:\n"
-                + task.toString();
-        return msg;
+        return ("Nice! I've marked this task as done:\n"
+                + task.toString());
     }
 
     /**

@@ -2,6 +2,10 @@ package duke;
 
 import duke.commands.Command;
 import duke.commands.CommandResult;
+import duke.util.Parser;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 
 /**
  * Class that encapsulates the Duke application
@@ -41,7 +45,7 @@ public class Duke {
             CommandResult output = command.executeCommand(taskList, response, storage);
             return output;
         } catch (DukeException e) {
-            return new CommandResult(e.getMessage());
+            return new CommandResult(response.showErrorMsg(e));
         }
     }
 }

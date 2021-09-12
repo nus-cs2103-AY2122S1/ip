@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.PersistentStorage;
-import duke.Response;
-import duke.Tasklist;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;

@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.PersistentStorage;
-import duke.Response;
-import duke.Tasklist;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 
 /**
  * Class encapsulating a "list" command by the user

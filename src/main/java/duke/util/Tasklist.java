@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.util.ArrayList;
 
@@ -29,8 +29,9 @@ public class Tasklist {
      * @return The completed task
      */
     public Task markAsDone(int index) {
-        this.taskList.get(index - 1).completeTask();
-        return this.taskList.get(index - 1);
+        Task task = this.taskList.get(index - 1);
+        task.completeTask();
+        return task;
     }
 
     /**
