@@ -19,7 +19,6 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList filteredList = new TaskList();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         for (Task task : tasks) {
             if (task.getDescription().contains(toFind)) {
                 filteredList.add(task);
@@ -27,8 +26,8 @@ public class FindCommand extends Command {
         }
         storage.write(tasks);
 
-        String output = "Here are the tasks containing the word : \n" + toFind
-                + ui.tasklistToString(filteredList);
+        String output = "Here are the tasks containing the word : " + toFind
+                + "\n" + ui.tasklistToString(filteredList);
         setCommandOutput(output);
     }
 }

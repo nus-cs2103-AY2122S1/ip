@@ -8,3 +8,16 @@ D | 0 | wish bday | 04/10/2021 11:59PM
 
 == ARCHIVE FROM: Sep 6 2021 15:00:55 ==
 T | 0 | submit iP
+== ARCHIVE FROM: Sep 13 2021 03:51:02 ==
+D | 0 | my birthday | 05/10/1999 6:00AM
+
+E | 1 | baby shower | 24/08/2021 5:30PM
+
+T | 0 | join sports club
+
+T | 0 | study for CS2103
+
+T | 0 | Study for CS2103
+
+D | 0 | CS2103 iP | 16/09/2021 11:59PM
+

@@ -1,5 +1,0 @@
-T | 1 | something
-D | 0 | my birthday | 05/10/1999 6:00AM
-E | 0 | baby shower | 24/08/2021 5:30PM
-T | 0 | join sports club
-T | 0 | study for CS2103

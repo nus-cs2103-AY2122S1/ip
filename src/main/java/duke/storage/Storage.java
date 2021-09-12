@@ -134,8 +134,8 @@ public class Storage {
             for (int i = 0; i < tasks.size(); i++) {
                 outputWriter.write(tasks.get(i).getData());
                 outputWriter.newLine();
-                outputWriter.write("\n");
             }
+            outputWriter.write("\n");
             outputWriter.flush();
             outputWriter.close();
         } catch (IOException e) {
