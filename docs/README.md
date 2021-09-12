@@ -17,7 +17,7 @@ Duke supports finve versions of tasks:
 
 To use Duke, you simply need to type commands in the following command list.
 
-##Commad List
+## Commad List
 You may tell duke what to do for you using the following commands:
 
 **Formats Supported**
@@ -72,5 +72,5 @@ You may tell duke what to do for you using the following commands:
 
 * `doafter task_name /after time_string`
 
-##Reminders
+## Reminders
 Please follow the above command format strictly, including the spaces, for duke to understand you.
