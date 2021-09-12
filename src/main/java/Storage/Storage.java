@@ -46,9 +46,17 @@ public class Storage {
                     }
                     lst.getTaskList().add(curTask);
                 } catch (Exception e) {
+
+                    System.out.println(e.getLocalizedMessage());
                 }
             }
         }catch (FileNotFoundException f) {
+            System.out.println(f.getLocalizedMessage());
+
+                }
+            }
+        }catch (FileNotFoundException f) {
+
         }catch(IOException io){
             System.out.println(io.getLocalizedMessage());
         }
@@ -109,6 +117,26 @@ class Parser {
         String separator = "";
         String keyword = "";
         taskInfo = Arrays.copyOfRange(taskInfo, 1, taskInfo.length);
+
+        switch (task.getType()) {
+            case Todo:
+                output = "Todo";
+
+            case Deadline: {
+                output = "Deadline";
+                separator = "(by:";
+                keyword = "by";
+                break;
+            }
+
+            case Events: {
+                output = "Events";
+                separator = "(at:";
+                keyword = "at";
+                break;
+            }
+            default: return "error type";
+
         if (task.getType().equals(TaskTypes.Todo)) {
             output = "Todo";
         } else if (task.getType().equals(TaskTypes.Deadline)) {
@@ -119,6 +147,7 @@ class Parser {
             output = "Events";
             separator = "(at:";
             keyword = "at";
+
         }
         for (String str : taskInfo) {
             if (!str.equals(")") && !str.equals("")) {
@@ -161,6 +190,16 @@ class Parser {
         String[] dataOfAction = action.split("/")[0].split(" ");
         String type = dataOfAction[0];
         //decide the correct header
+
+        switch (type) {
+            case ("Todo"): return new TodoTasks(action);
+
+            case ("Deadline"): return new DeadlineTask(action);
+
+            case ("Events") : return new EventsTask(action);
+
+            default: throw new Exception("Error type");
+
         if (type.equals("Todo")) {
             return new TodoTasks(action);
         } else {
@@ -173,6 +212,7 @@ class Parser {
             } else {
                 throw new Exception("Error type");
             }
+
         }
     }
 }
@@ -203,7 +243,12 @@ class DeadlineTask extends Task{
         super(action, "[D][] ", TaskTypes.Deadline);
         if (action.split("/").length < 2) {
             throw new DeadlineException("incorrect format for deadline task");
+
+        }
+        if (action.split("/")[1].split(" ").length < 2) {
+
         } else if (action.split("/")[1].split(" ").length < 2) {
+
             throw new DeadlineException("incorrect date format for Deadline task");
         }
     }
