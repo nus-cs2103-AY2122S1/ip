@@ -85,9 +85,12 @@ public class Parser {
         if (words.length == 1) {
             throw new MissingTaskNumberException("Missing task number");
         }
-        int taskNumber = Integer.parseInt(words[1]);
+        int taskNumber;
         try {
+            taskNumber = Integer.parseInt(words[1]);
             taskList.get(taskNumber).setDone(true);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Wrong format");
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
@@ -235,9 +238,12 @@ public class Parser {
         if (words.length == 1) {
             throw new MissingTaskNumberException("Missing task number");
         }
-        int deleteTaskNumber = Integer.parseInt(words[1]);
+        int deleteTaskNumber;
         try {
+            deleteTaskNumber = Integer.parseInt(words[1]);
             taskList.remove(deleteTaskNumber);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Wrong format");
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
