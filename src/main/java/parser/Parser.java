@@ -1,14 +1,13 @@
 package parser;
 
 import alice.exceptions.AliceException;
-
 import command.Command;
 import command.exceptions.InvalidTimeFormatException;
-
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
+import model.task.Deadline;
+import model.task.Event;
+import model.task.Task;
+import model.task.TaskList;
+import model.vocab.Vocab;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,6 +47,10 @@ public class Parser {
             return Command.CommandType.DONE;
         case "delete":
             return Command.CommandType.DELETE;
+        case "learn":
+            return Command.CommandType.LEARN;
+        case "unlearn":
+            return Command.CommandType.UNLEARN;
         case "commands":
         case "?":
         case "help":
@@ -64,7 +67,7 @@ public class Parser {
      *
      * @param s the string
      * @return TaskType of the tasks
-     * @throws AliceException invalid task string representation is parsed into the method
+     * @throws AliceException invalid models.task string representation is parsed into the method
      */
     public static TaskList.TaskType stringToTaskType(String s) throws AliceException {
         switch (s) {
@@ -80,7 +83,7 @@ public class Parser {
     }
 
     /**
-     * Static method for converting a className of a task to the TaskType enum
+     * Static method for converting a className of a models.task to the TaskType enum
      *
      * @param cn class name
      * @return taskType of the classname passed
@@ -88,13 +91,13 @@ public class Parser {
      */
     public static TaskList.TaskType classNameToTaskType(String cn) throws AliceException {
         switch (cn) {
-        case "task.Todo":
+        case "model.task.Todo":
         case "Todo":
             return TaskList.TaskType.TODO;
-        case "task.Deadline":
+        case "model.task.Deadline":
         case "Deadline":
             return TaskList.TaskType.DEADLINE;
-        case "task.Event":
+        case "model.task.Event":
         case "Event":
             return TaskList.TaskType.EVENT;
         default:
@@ -123,10 +126,10 @@ public class Parser {
     }
 
     /**
-     * Static method for converting the task to a save format string representation
+     * Static method for converting the models.task to a save format string representation
      *
-     * @param task the task
-     * @return string representation to be seen in the save file of the task
+     * @param task the models.task
+     * @return string representation to be seen in the save file of the models.task
      */
     public static String taskToSaveFormat(Task task) {
         TaskList.TaskType type = classNameToTaskType(task.getClass().getName());
@@ -144,6 +147,10 @@ public class Parser {
             break;
         }
         return s;
+    }
+
+    public static String vocabToSaveFormat(Vocab vocab) {
+        return vocab.getPhrase() + " | " + vocab.getFeedback();
     }
 
     /**

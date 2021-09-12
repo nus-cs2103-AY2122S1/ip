@@ -1,4 +1,3 @@
-import alice.Alice;
 import javafx.application.Application;
 
 /**

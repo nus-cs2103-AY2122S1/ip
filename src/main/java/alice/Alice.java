@@ -1,12 +1,14 @@
 package alice;
 
 import alice.exceptions.AliceException;
+import command.Command;
 import dialog.exceptions.DialogException;
-import dialog.TaskDialog;
-
+import model.vocab.Vocab;
+import model.vocab.VocabList;
 import parser.Parser;
 import storage.Storage;
-import command.Command;
+import storage.VocabularyStorage;
+import ui.ChatPage;
 import ui.Ui;
 
 import java.io.IOException;
@@ -24,11 +26,12 @@ import java.io.IOException;
 public class Alice {
     /** storage for alice.Alice */
     private final Storage storage;
-    /** taskDialog dealing with the task that the bot wants to communicate back to the user */
-    private final TaskDialog taskDialog;
+    private VocabList vocabList;
+
     /** ui of alice.Alice interacting with the user from inputting command and showing the ui back to the user */
     private final Ui ui;
 
+    private String phraseToLearn = "";
 
     public Alice() throws DialogException, IOException {
         this("test");
@@ -38,25 +41,16 @@ public class Alice {
      * Constructor of alice.Alice.
      *
      * @param fileName the filename without the suffix .txt, .TXT, etc.
-     * @throws DialogException dialog cannot have the same id: same task with the same property (i.e. name, isDone)
-     *                         cannot coexist while the app is running
+     * @throws IOException if there is issue loading taskList from storage
      */
     public Alice(String fileName) throws IOException {
         ui = new Ui();
         storage = new Storage(fileName);
-        // import the task from what the storage manage to load
-        ui.importTaskList(storage.loadTaskList());
+        // import the models.task from what the storage manage to load
+        ui.setTaskList(storage.loadTaskList());
         // set the current taskDialog of alice.Alice to the one ui fetch from the storage
-        taskDialog = ui.getTaskDialog();
-    }
+        vocabList = new VocabularyStorage().loadVocabList();
 
-    /**
-     * Getter for the storage of Alice
-     *
-     * @return storage
-     */
-    public Storage getStorage() {
-        return this.storage;
     }
 
     /**
@@ -68,27 +62,6 @@ public class Alice {
         return this.ui;
     }
 
-    public TaskDialog getTaskDialog() {
-        return this.taskDialog;
-    }
-
-    /**
-     * The method for running the personal assistant Alice.
-     * ALice will take what she receives from the Ui before parsing it to command
-     * and finally execute it and exit accordingly.
-     *
-     * @throws DialogException dialog cannot have the same id while the app is running
-     */
-    public void run() throws DialogException {
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
-            c.execute(taskDialog, storage);
-            isExit = c.isExit();
-
-        }
-    }
 
 
     /**
@@ -100,10 +73,45 @@ public class Alice {
      */
     public void execute(String fullCommand) {
         try {
-            Command c = Parser.parse(fullCommand);
-            c.execute(taskDialog, storage);
+
+            if (VocabList.isDefaultPhrase(fullCommand.split(" ")[0])) {
+                // check first if it is a default command
+                Command c = Parser.parse(fullCommand);
+                c.execute(ui, storage);
+            } else if (vocabList.containsPhrase(fullCommand)){
+                // check if Alice has learned this phrase before
+                ui.getChatPage().printWithAlice(vocabList.getFeedBack(fullCommand));
+            } else {
+                // else try executing the command
+                Command c = Parser.parse(fullCommand);
+                c.execute(ui, storage);
+            }
+
         } catch (AliceException e) {
-            taskDialog.getChatPage().printError(e);
+            ui.getChatPage().printError(e);
         }
     }
+
+    public VocabList getVocabList() {
+        return vocabList;
+    }
+
+    public void setPhraseToLearn(String phraseToLearn) {
+        this.phraseToLearn = phraseToLearn;
+    }
+
+    public void learn(String fullFeedback) {
+        try {
+            Vocab vocabToLearn = Vocab.of(this.phraseToLearn, fullFeedback);
+            VocabularyStorage vocabularyStorage = new VocabularyStorage();
+            vocabList.add(vocabToLearn);
+            vocabularyStorage.save(vocabList);
+            ui.getChatPage().setMode(ChatPage.Mode.DEFAULT);
+            ui.getChatPage().printWithAlice("Got it! Alice will remember that.");
+        } catch (IOException e) {
+            ui.getChatPage().printError(e);
+        }
+
+    }
+
 }

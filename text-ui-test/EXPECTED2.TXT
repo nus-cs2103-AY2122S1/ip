@@ -25,11 +25,11 @@
     6.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
-    Nice! I've marked this task as done:
+    Nice! I've marked this model.task as done:
       [D][X] commit (by: Aug 24 2020)
     ____________________________________________________________
 >     ____________________________________________________________
-    Noted. I've removed this task:
+    Noted. I've removed this model.task:
       [D][X] return book (by: Jun 6 2020)
     Now you have 5 tasks in the list.
     ____________________________________________________________

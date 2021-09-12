@@ -12,7 +12,7 @@ then
     rm ACTUAL.TXT
 fi
 
-# remove previous task record to make testing consistent
+# remove previous models.task record to make testing consistent
 if [ -e "./data/task_list.txt" ]
 then
     rm ./data/task_list.txt
