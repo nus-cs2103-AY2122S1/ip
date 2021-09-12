@@ -1,6 +1,8 @@
 package model.vocab;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class for dealing with a list of tasks object or its subclasses alternatives.
@@ -11,16 +13,27 @@ import java.util.ArrayList;
  * @since 0.00
  */
 public class VocabList {
+
+    /** to be added as more commands are introduced */
+    public static final List<String> DEFAULT_PHRASE = List.of("list", "date", "find", "todo", "deadline", "event",
+            "done", "delete", "learn", "unlearn", "commands", "?", "help", "bye");
+
     /** ArrayList containing the tasks */
-    private final ArrayList<Vocab> vocabs;
+    private ArrayList<Vocab> vocabs =
+            new ArrayList<>(DEFAULT_PHRASE.stream().map(command -> Vocab.of(command, "ALICE_DEFAULT_VOCAB")).collect(Collectors.toList()));
+    ;
 
     public VocabList() {
-        this.vocabs = new ArrayList<>();
+
+    }
+
+    public static boolean isDefaultPhrase(String phrase) {
+        return DEFAULT_PHRASE.contains(phrase);
     }
 
 
-    public VocabList(ArrayList<Vocab> tasks) {
-        this.vocabs = tasks;
+    public VocabList(ArrayList<Vocab> vocabs) {
+        this.vocabs.addAll(vocabs);
     }
 
     /**
@@ -52,12 +65,30 @@ public class VocabList {
         return vocabs.get(index);
     }
 
+    public String getFeedBack(String phrase) {
+        return vocabs.stream().filter(vocab -> vocab.getPhrase().equals(phrase)).findFirst().get().getFeedback();
+    }
+
+    public void removePhrase(String phrase) {
+        if (!containsPhrase(phrase)) {
+            return;
+        }
+
+        vocabs = new ArrayList<>(vocabs.stream()
+                .filter(vocab -> !vocab.getPhrase().equals(phrase)).collect(Collectors.toList()));
+    }
+
+    public boolean containsPhrase(String phrase) {
+        return vocabs.stream().map(Vocab::getPhrase).anyMatch(p -> p.equals(phrase));
+    }
+
+
     /**
      * Getter for the array list of tasks
      *
      * @return ArrayList of Task objects or its alternatives
      */
-    public ArrayList<Vocab> getTasks() {
+    public ArrayList<Vocab> getVocabs() {
         return this.vocabs;
     }
 
@@ -77,10 +108,10 @@ public class VocabList {
      */
     @Override
     public String toString() {
-        StringBuilder tasksDialog = new StringBuilder();
+        StringBuilder vocabDialog = new StringBuilder();
         for (int i = 0; i < vocabs.size(); i++) {
-            tasksDialog.append("    ").append(i + 1).append(".").append(vocabs.get(i).toString()).append("\n");
+            vocabDialog.append("    ").append(i + 1).append(".").append(vocabs.get(i).toString()).append("\n");
         }
-        return tasksDialog.toString();
+        return vocabDialog.toString();
     }
 }

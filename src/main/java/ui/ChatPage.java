@@ -26,7 +26,9 @@ import java.io.IOException;
  */
 public class ChatPage extends AnchorPane {
 
-    private Alice alice;
+    public enum Mode {
+        DEFAULT, LEARN
+    }
 
     @FXML
     private ScrollPane scrollPane = new ScrollPane();
@@ -39,6 +41,8 @@ public class ChatPage extends AnchorPane {
     @FXML
     private AnchorPane anchorPaneReference;
 
+    private Alice alice;
+    private Mode mode;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
     private final Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/alice.png"));
@@ -49,6 +53,7 @@ public class ChatPage extends AnchorPane {
      */
     public ChatPage() {
         setActionToElements();
+        mode = Mode.DEFAULT;
     }
 
     /**
@@ -60,6 +65,7 @@ public class ChatPage extends AnchorPane {
     ChatPage(String fileName) throws IOException {
         this.alice = new Alice(fileName);
         alice.getUi().setChatPage(this);
+        mode = Mode.DEFAULT;
         setActionToElements();
         printWelcomeText();
     }
@@ -110,7 +116,6 @@ public class ChatPage extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -133,6 +138,10 @@ public class ChatPage extends AnchorPane {
         }
     }
 
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
+
     /**
      * Create label from String
      *
@@ -153,7 +162,13 @@ public class ChatPage extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(userInput.getText(), userImage)
         );
-        this.alice.execute(userInput.getText());
+        if (this.mode == Mode.DEFAULT) {
+            this.alice.execute(userInput.getText());
+        } else if (this.mode == Mode.LEARN) {
+            this.alice.learn(userInput.getText());
+        } else {
+            // MORE MODE IN FUTURE IMPLEMENTATION
+        }
         userInput.clear();
     }
 

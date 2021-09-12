@@ -1,11 +1,14 @@
 package alice;
 
 import alice.exceptions.AliceException;
+import command.Command;
 import dialog.exceptions.DialogException;
-
+import model.vocab.Vocab;
+import model.vocab.VocabList;
 import parser.Parser;
 import storage.Storage;
-import command.Command;
+import storage.VocabularyStorage;
+import ui.ChatPage;
 import ui.Ui;
 
 import java.io.IOException;
@@ -23,10 +26,12 @@ import java.io.IOException;
 public class Alice {
     /** storage for alice.Alice */
     private final Storage storage;
+    private VocabList vocabList;
 
     /** ui of alice.Alice interacting with the user from inputting command and showing the ui back to the user */
     private final Ui ui;
 
+    private String phraseToLearn = "";
 
     public Alice() throws DialogException, IOException {
         this("test");
@@ -44,6 +49,8 @@ public class Alice {
         // import the models.task from what the storage manage to load
         ui.setTaskList(storage.loadTaskList());
         // set the current taskDialog of alice.Alice to the one ui fetch from the storage
+        vocabList = new VocabularyStorage().loadVocabList();
+
     }
 
     /**
@@ -55,6 +62,8 @@ public class Alice {
         return this.ui;
     }
 
+
+
     /**
      * Execute the fullCommand.
      * Execute the fullCommand by parsing the command
@@ -64,12 +73,45 @@ public class Alice {
      */
     public void execute(String fullCommand) {
         try {
-            Command c = Parser.parse(fullCommand);
-            c.execute(ui, storage);
+
+            if (VocabList.isDefaultPhrase(fullCommand.split(" ")[0])) {
+                // check first if it is a default command
+                Command c = Parser.parse(fullCommand);
+                c.execute(ui, storage);
+            } else if (vocabList.containsPhrase(fullCommand)){
+                // check if Alice has learned this phrase before
+                ui.getChatPage().printWithAlice(vocabList.getFeedBack(fullCommand));
+            } else {
+                // else try executing the command
+                Command c = Parser.parse(fullCommand);
+                c.execute(ui, storage);
+            }
 
         } catch (AliceException e) {
             ui.getChatPage().printError(e);
         }
+    }
+
+    public VocabList getVocabList() {
+        return vocabList;
+    }
+
+    public void setPhraseToLearn(String phraseToLearn) {
+        this.phraseToLearn = phraseToLearn;
+    }
+
+    public void learn(String fullFeedback) {
+        try {
+            Vocab vocabToLearn = Vocab.of(this.phraseToLearn, fullFeedback);
+            VocabularyStorage vocabularyStorage = new VocabularyStorage();
+            vocabList.add(vocabToLearn);
+            vocabularyStorage.save(vocabList);
+            ui.getChatPage().setMode(ChatPage.Mode.DEFAULT);
+            ui.getChatPage().printWithAlice("Got it! Alice will remember that.");
+        } catch (IOException e) {
+            ui.getChatPage().printError(e);
+        }
+
     }
 
 }

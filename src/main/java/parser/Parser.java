@@ -3,11 +3,11 @@ package parser;
 import alice.exceptions.AliceException;
 import command.Command;
 import command.exceptions.InvalidTimeFormatException;
-
 import model.task.Deadline;
 import model.task.Event;
 import model.task.Task;
 import model.task.TaskList;
+import model.vocab.Vocab;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +47,10 @@ public class Parser {
             return Command.CommandType.DONE;
         case "delete":
             return Command.CommandType.DELETE;
+        case "learn":
+            return Command.CommandType.LEARN;
+        case "unlearn":
+            return Command.CommandType.UNLEARN;
         case "commands":
         case "?":
         case "help":
@@ -143,6 +147,10 @@ public class Parser {
             break;
         }
         return s;
+    }
+
+    public static String vocabToSaveFormat(Vocab vocab) {
+        return vocab.getPhrase() + " | " + vocab.getFeedback();
     }
 
     /**

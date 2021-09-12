@@ -103,23 +103,51 @@ public class Ui {
         if (Dialog.containsId(dialogId)) {
             return Dialog.get(dialogId).toString();
         } else {
-            Dialog commandsList = Dialog.generate(dialogId);
-            commandsList.add("This is the following commands, I can perform:\n");
-            commandsList.add("1. 'todo <models.task description>' - add a todo models.task to the list");
-            commandsList.add("2. 'deadline <models.task description> /by <by when>' "
+            Dialog commandsListDialog = Dialog.generate(dialogId);
+            commandsListDialog.add("This is the following commands, I can perform:\n");
+            commandsListDialog.add("1. 'todo <models.task description>' - add a todo models.task to the list");
+            commandsListDialog.add("2. 'deadline <models.task description> /by <by when>' "
                     + "- add a deadline models.task with specific deadline");
-            commandsList.add("3. 'event <models.task description> /at <at when>' "
+            commandsListDialog.add("3. 'event <models.task description> /at <at when>' "
                     + "- add an event models.task with specific time");
-            commandsList.add("4. 'date <yyyy-mm-dd>' "
+            commandsListDialog.add("4. 'date <yyyy-mm-dd>' "
                     + "- list all todos and all the deadlines and events before specified time");
-            commandsList.add("5. 'list' - show the current models.task list");
-            commandsList.add("6. 'find <keyword>' - list the models.task with specific keywords");
-            commandsList.add("7. 'done <models.task index>' - mark that models.task as done");
-            commandsList.add("8. 'delete <models.task index>' - delete that models.task from the list");
-            commandsList.add("9. 'learn <vocab to learn> - prompt the user with process to learn a vocab");
-            commandsList.add("10. 'commands' - show this current command window");
-            commandsList.add("11.'bye' - end session and save your models.task list");
-            return commandsList.toString();
+            commandsListDialog.add("5. 'list' - show the current models.task list");
+            commandsListDialog.add("6. 'find <keyword>' - list the models.task with specific keywords");
+            commandsListDialog.add("7. 'done <models.task index>' - mark that models.task as done");
+            commandsListDialog.add("8. 'delete <models.task index>' - delete that models.task from the list");
+            commandsListDialog.add("9. 'learn <vocab to learn>' - prompt the user with process to learn a vocab");
+            commandsListDialog.add("10.'unlearn <vocab to unlearn>' - unlearn specific vocabulary taught by the user");
+            commandsListDialog.add("10.'commands' - show this current command window");
+            commandsListDialog.add("11.'bye' - end session and save your models.task list");
+            return commandsListDialog.toString();
+        }
+    }
+
+    public static String getAskForFeedbackText(String phraseToLearn) throws DialogException {
+        String dialogId = "learn " + phraseToLearn;
+        if (Dialog.containsId(dialogId)) {
+            return Dialog.get(dialogId).toString();
+        } else {
+            Dialog learnPhraseDialog = Dialog.generate(dialogId);
+            learnPhraseDialog.add("What should be my feedback to ...");
+            learnPhraseDialog.add(phraseToLearn);
+            learnPhraseDialog.add("I will recite every words you put down");
+            return learnPhraseDialog.toString();
+        }
+    }
+
+    public static String getUnlearnText(String phraseToUnlearn) throws DialogException {
+        String dialogId = "unlearn " + phraseToUnlearn;
+        if (Dialog.containsId(dialogId)) {
+            return Dialog.get(dialogId).toString();
+        } else {
+            Dialog learnPhraseDialog = Dialog.generate(dialogId);
+            learnPhraseDialog.add("Alice will unlearn the following:");
+            learnPhraseDialog.add(phraseToUnlearn);
+            learnPhraseDialog.add("Alice won't be able to recognize the phrase anymore ...");
+
+            return learnPhraseDialog.toString();
         }
     }
 

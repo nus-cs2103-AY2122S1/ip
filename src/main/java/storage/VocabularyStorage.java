@@ -1,38 +1,34 @@
 package storage;
 
+import model.vocab.Vocab;
 import model.vocab.VocabList;
+import parser.Parser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class VocabularyStorage extends Storage {
 
-    public static final String VOCAB_PATH = "/vocab";
+    public static final String VOCAB_PATH = "/vocab.txt";
 
     private VocabList vocabListRead;
 
-    public VocabularyStorage(String fileName) throws IOException {
-        this.filePath = DIRECTORY_PATH + VOCAB_PATH + "/" + fileName + ".txt";
+    public VocabularyStorage() throws IOException {
+        this.filePath = DIRECTORY_PATH + VOCAB_PATH;
         WRITER = new BufferedWriter(new FileWriter(filePath, true));
         READER = new BufferedReader(new FileReader(filePath));
     }
 
-    public static boolean contains(String fileName) throws IOException {
-        String full_file_name = fileName + ".txt";
 
-        if (!haveSaveLocation()) {
-            createSaveLocation();
-        }
-        return new ArrayList<>(Arrays.stream(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH + VOCAB_PATH))
-                .map(File::getName).collect(Collectors.toList())).contains(full_file_name);
-    }
 
     /**
      * load taskList from where the reader and writer is currently at
@@ -44,10 +40,31 @@ public class VocabularyStorage extends Storage {
         vocabListRead = new VocabList();
 
         READER.lines().forEach((line) -> {
-
+            vocabListRead.add(Vocab.of(line.substring(0, line.indexOf(" |")), line.substring(line.indexOf("| ") + 2)));
         });
 
         return vocabListRead;
+    }
+
+    /**
+     * Store the taskList into the save file the reader and writer are currently at
+     *
+     * @param vocabList the taskList to be stored
+     * @throws IOException if there is any error dealing with the system IO
+     */
+    public void save(VocabList vocabList) throws IOException {
+        Path path = Paths.get(filePath);
+        List<String> fileContent =
+                vocabList.getVocabs().stream().filter(vocab -> !VocabList.DEFAULT_PHRASE.contains(vocab.getPhrase()))
+                        .map(Parser::vocabToSaveFormat).collect(Collectors.toList());
+        Files.write(path, fileContent, StandardCharsets.UTF_8);
+        READER.close();
+        WRITER.close();
+    }
+
+    public void close() throws IOException {
+        READER.close();
+        WRITER.close();
     }
 
 }
