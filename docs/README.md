@@ -46,7 +46,6 @@ Currently Duke supports date inputs in the form `YYYY-MM-DD`. You can also optio
 todo get a book
 deadline Visit com 3 when it is completed /by 2040-10-10
 event Enjoy this duke bot /at 2021-08-01 - 2021-12-31
-
 ```
 
 #### Expected outcome:
@@ -57,7 +56,6 @@ Each of the commands will result in its own line of output:
 added: [T] [ ] get a book
 added: [D] [ ] Visit com 3 when it is completed (by: 10 Oct 2040, 12:00 AM)
 added: [E] [ ] Enjoy this duke bot (at: 01 Aug 2021, 12:00 AM - 31 Dec 2021, 12:00 AM)
-
 ```
 
 ### List tasks
@@ -73,7 +71,6 @@ For user convenience, the dates are displayed in a more natural format (e.g. 12 
 
 ```
 list
-
 ```
 
 #### Expected outcome:
@@ -95,7 +92,6 @@ Duke will search through all your tasks and present you with the tasks that even
 
 ```
 find duke
-
 ```
 
 #### Expected outcome:
@@ -115,7 +111,6 @@ The task index can be identified by running the list command first.
 
 ```
 done 1
-
 ```
 
 #### Expected outcome:
@@ -125,7 +120,6 @@ With the inputs from the [Create Task section](#create-tasks):
 ```
 Great! I've marked this task as done:
   [T] [x] get a book
-
 ```
 
 ### Delete Tasks
@@ -139,7 +133,6 @@ Beware that there is no recover function or backup copy.
 
 ```
 delete 1
-
 ```
 
 #### Expected outcome:
