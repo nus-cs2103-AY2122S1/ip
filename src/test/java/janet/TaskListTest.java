@@ -1,11 +1,9 @@
-package janetTest;
-
-import janet.Task;
-import janet.TaskList;
-import org.junit.jupiter.api.Test;
+package janet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
 
