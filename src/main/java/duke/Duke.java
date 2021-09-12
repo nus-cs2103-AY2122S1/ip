@@ -19,6 +19,9 @@ public class Duke {
     /** A class to keep track of all tasks of the Duke instance. **/
     private final TaskList taskList = new TaskList("data/duke.txt");
 
+    /** A boolean keeping track of whether the current reply is an exception. **/
+    private boolean isException = false;
+
     /**
      * Gets a response from Duke.
      *
@@ -26,8 +29,10 @@ public class Duke {
      */
     public String getResponse(String input) {
         String dukeResponse;
+        isException = true;
         try {
             dukeResponse = Parser.handle(input, taskList);
+            isException = false;
         } catch (InvalidCommandException e) {
             dukeResponse = "I'm afraid I don't recognise that, please try again!";
         } catch (MissingTaskNameException e) {
@@ -46,6 +51,10 @@ public class Duke {
             dukeResponse = Ui.dukeException();
         }
         return dukeResponse;
+    }
+
+    public boolean isException() {
+        return isException;
     }
 }
 

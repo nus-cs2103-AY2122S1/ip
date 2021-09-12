@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
      * @param text Text in the DialogBox.
      * @param img Image of the DialogBox.
      */
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Paint color, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -46,6 +46,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTextFill(color);
         dialog.setWrapText(true);
         dialog.setPadding(new Insets(5));
         displayPicture.setImage(img);
@@ -57,6 +58,10 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.setPadding(new Insets(10));
         this.setMinHeight(Region.USE_PREF_SIZE);
+    }
+
+    private DialogBox(String text, Image img) {
+        this(text, Paint.valueOf("000000"), img);
     }
 
     /**
@@ -73,10 +78,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        Paint dukeColor = Paint.valueOf("C5C5C5");
-        BackgroundFill dukeBackgroundFill = new BackgroundFill(dukeColor, null, null);
+    public static DialogBox getDukeDialog(String text, boolean isException, Image img) {
+        //
+        Paint color = isException ? Paint.valueOf("d9004c") : Paint.valueOf("000000");
+        var db = new DialogBox(text, color, img);
+        Paint dukeBackgroundColor = Paint.valueOf("C5C5C5");
+        BackgroundFill dukeBackgroundFill = new BackgroundFill(dukeBackgroundColor, null, null);
         Background dukeBackground = new Background(dukeBackgroundFill);
         db.setBackground(dukeBackground);
         db.flip();
