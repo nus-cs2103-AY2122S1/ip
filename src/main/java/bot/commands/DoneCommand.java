@@ -27,9 +27,9 @@ public class DoneCommand extends Command {
     public String execute() {
         Task toBeDone = TaskList.showTasks().get(index);
         if (toBeDone.getStatusIcon().equals("X")) {
-            return "\t This task has been marked as done";
+            return " This task has been marked as done";
         }
         toBeDone.markAsDone();
-        return "\n\t Nice! I've marked this task as done:\n\t\t" + toBeDone;
+        return "\nNice! I've marked this task as done:\n" + TAB_SPACES + toBeDone;
     }
 }

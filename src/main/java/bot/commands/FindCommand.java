@@ -9,6 +9,7 @@ import bot.utility.TaskList;
  * Represents a command to find tasks.
  */
 public class FindCommand extends Command {
+    private static final String LIST_TASK_FORMAT = "\n" + TAB_SPACES + " %d. %s";
     private final String keyWord;
 
     /**
@@ -28,11 +29,11 @@ public class FindCommand extends Command {
     @Override
     public String execute() {
         message = new StringBuilder();
-        message.append("\n\t Here are the matching tasks in your list:");
+        message.append("\nHere are the matching tasks in your list:");
         List<Task> tasks = TaskList.showTasks();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).toString().contains(keyWord)) {
-                message.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
+                message.append(String.format(LIST_TASK_FORMAT, (i + 1), tasks.get(i)));
             }
         }
         return message.toString();

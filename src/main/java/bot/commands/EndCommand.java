@@ -20,7 +20,11 @@ public class EndCommand extends Command {
     public String execute() {
         List<Task> tasks = TaskList.showTasks();
         Logger.write(tasks);
-        this.canExit = true;
-        return "\n\t Peace out!";
+        return "\nPeace out!";
+    }
+
+    @Override
+    public boolean canEnd() {
+        return true;
     }
 }

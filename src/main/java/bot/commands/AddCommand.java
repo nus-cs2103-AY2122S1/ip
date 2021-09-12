@@ -12,7 +12,7 @@ import bot.utility.TaskList;
  * Represents a command to add tasks to the TaskList;
  */
 public class AddCommand extends Command {
-    protected static final String TASK_FORMAT = "\n\t Got it. I've added this task:\n\t\t%s\n\t ";
+    private static final String ADD_TASK_FORMAT = "Got it. I've added this task:\n" + TAB_SPACES + "%s\n";
     private final String keyWord;
     private final String info;
 
@@ -57,6 +57,6 @@ public class AddCommand extends Command {
     }
 
     private String formatMessage(String objectString, int size) {
-        return String.format(TASK_FORMAT, objectString) + String.format(INFORM_FORMAT, size);
+        return String.format(ADD_TASK_FORMAT, objectString) + String.format(INFORM_FORMAT, size);
     }
 }

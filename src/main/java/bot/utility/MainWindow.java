@@ -2,12 +2,15 @@ package bot.utility;
 
 import java.util.Objects;
 
+import bot.commands.Command;
+import bot.error.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -23,13 +26,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Ui ui;
+    private Parser parser;
 
     private final Image userImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png"))
     );
-    private final Image dukeImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png"))
+    private final Image botImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/brain.png"))
+    );
+    private final Image angryBotImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/angry.png"))
     );
 
     /**
@@ -37,16 +44,24 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
+        userInput.setOnAction((event) -> handleUserInput());
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greet(), botImage));
     }
 
     /**
      * Initializes the Duke Chatbot.
      *
-     * @param d The Duke Chatbot to be used for the MainWindow.
+     * @param parser The Parser to be used for evaluating user input.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setUp(Ui ui, Parser parser) {
+        this.ui = ui;
+        this.parser = parser;
     }
 
     /**
@@ -56,11 +71,35 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        String response = getResponse(input);
+        if (parser.canUnderstand(input)) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, botImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, angryBotImage)
+            );
+        }
         userInput.clear();
+    }
+
+    /**
+     * Generate a response to user input.
+     */
+    protected String getResponse(String input) {
+        Command command = parser.parse(input);
+        if (command.canEnd()) {
+            ui.close();
+        }
+        String response;
+        try {
+            response = command.execute();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return response;
     }
 }

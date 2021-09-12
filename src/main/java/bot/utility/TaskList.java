@@ -22,4 +22,8 @@ public class TaskList {
     public static List<Task> showTasks() {
         return tasks;
     }
+
+    protected static boolean isShorterOrEqualTo(int size) {
+        return size >= tasks.size();
+    }
 }

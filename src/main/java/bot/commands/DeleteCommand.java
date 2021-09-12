@@ -10,7 +10,7 @@ import bot.utility.TaskList;
  * Represents a command to delete tasks.
  */
 public class DeleteCommand extends Command {
-    private static final String DELETE_FORMAT = "\n\t Noted. I've removed this task:\n\t\t%s";
+    private static final String DELETE_FORMAT = "\nNoted. I've removed this task:\n" + TAB_SPACES + "%s\n";
     private final int index;
 
     /**

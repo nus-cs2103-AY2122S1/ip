@@ -4,8 +4,7 @@ package bot.commands;
  * Represents a command to report errors.
  */
 public class ErrorCommand extends Command {
-    private static final String DEFAULT_ERROR_MESSAGE = "\n\t My dictionary does not contain this sophisticated "
-            + "language.\n\t Maybe someday :)";
+    private static final String DEFAULT_ERROR_MESSAGE = "\nERROR ERROR CANNOT COMPUTE";
     private final String errorMessage;
 
     /**

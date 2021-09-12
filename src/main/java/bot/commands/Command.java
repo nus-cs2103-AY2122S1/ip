@@ -1,5 +1,6 @@
 package bot.commands;
 
+import bot.constants.GlobalStringFormats;
 import bot.error.DukeException;
 
 /**
@@ -7,8 +8,8 @@ import bot.error.DukeException;
  */
 public class Command {
     protected static final String INFORM_FORMAT = "Now you have %d tasks in the list.";
+    protected static final String TAB_SPACES = GlobalStringFormats.TAB_SPACES;
     protected static StringBuilder message;
-    protected boolean canExit = false;
 
     /**
      * Returns a String, the contents of which are to implemented by subclasses.
@@ -25,6 +26,6 @@ public class Command {
      * @return A boolean to indicate end of the program.
      */
     public boolean canEnd() {
-        return this.canExit;
+        return false;
     }
 }
