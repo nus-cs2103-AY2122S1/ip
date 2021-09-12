@@ -24,6 +24,8 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
+    private HBox dialogContainer;
+    @FXML
     private Label dialog;
     @FXML
     private Circle displayPicture;
@@ -39,6 +41,7 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setFill(new ImagePattern(img));
+        setDialogContainer("USER");
 
     }
 
@@ -50,8 +53,8 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#d4d4d4"), null, null)));
         dialog.setMinHeight(Region.USE_PREF_SIZE);
+        setDialogContainer("DUKE");
     }
 
     /**
@@ -63,6 +66,24 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
+    }
+
+    private void setDialogContainer(String user) {
+        switch (user) {
+        case "USER":
+            dialogContainer.setStyle("-fx-background-radius: 1.5em 1.5em 1.5em 1.5em;"
+                    + "-fx-background-color: #ffa3d0;");
+            break;
+
+        case "DUKE":
+            dialogContainer.setStyle("-fx-background-radius: 1.5em 1.5em 1.5em 1.5em;"
+                    + "-fx-background-color: #a3ffb7;");
+            break;
+
+        default:
+            // Should not reach here
+            break;
+        }
     }
 
     /**
