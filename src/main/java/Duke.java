@@ -1,6 +1,5 @@
 import duke.Parser;
 import duke.Storage;
-import javafx.application.Platform;
 import tasks.TaskList;
 
 import java.io.IOException;
@@ -19,7 +18,6 @@ public class Duke {
         parser = new Parser(taskList);
         System.out.println("Duke constructor called");
     }
-
     
     /**
      * Generate a response to the user input
@@ -27,15 +25,13 @@ public class Duke {
      * @param input Input provided by user.
      * @return Response message by system.
      */
-    String getResponse(String input) { 
+    String getResponse(String input) {
         String output;
         if (input.equals("bye")) {
             output = "Bye. Hope to see you again soon!";
-            Platform.exit();
-        }
-        else {
+        } else {
             output = parser.run(input);
-        }
+        } 
         return output;
     }
 }

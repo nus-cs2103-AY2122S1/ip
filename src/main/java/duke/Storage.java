@@ -44,20 +44,17 @@ public class Storage {
      * @throws IOException Handles any errors that can occur when interacting with the file.
      */
     public static TaskList readFile() throws IOException {
-
         checkForFile(Storage.PATH);
         Scanner sc = new Scanner(new File(Storage.PATH));
         sc.useDelimiter(Pattern.compile("(\\n)| - "));
-        
         ArrayList<Task> tasks = new ArrayList();
 
         while(sc.hasNext()) {
             String t = sc.next();
-            
+            int i = Integer.parseInt(sc.next());
+            String desc = sc.next();
             switch(t) { 
             case "T":
-                int i = Integer.parseInt(sc.next());
-                String desc = sc.next();
                 Task task = new Todo(desc);
                 if (i == 1) {
                     task.taskDone();
@@ -65,8 +62,6 @@ public class Storage {
                 tasks.add(task);
                 break;
             case "D":
-                i = Integer.parseInt(sc.next());
-                desc = sc.next();
                 String by = sc.next();
                 task = new Deadline(desc, by);
                 if (i == 1) {
@@ -75,8 +70,6 @@ public class Storage {
                 tasks.add(task);
                 break;
             case "E":
-                i = Integer.parseInt(sc.next());
-                desc = sc.next();
                 String at = sc.next();
                 task = new Events(desc, at);
                 if (i == 1) {
@@ -151,6 +144,7 @@ public class Storage {
     }
 
     /**
+     * Method that reformats the date input by the user.
      * 
      * @param unformattedDate The Date to format
      * @return Formatted version of the date
