@@ -40,8 +40,8 @@ public class Parser {
     /**
      * Checks whether the required key word is in user input or not.
      *
-     * @param response The user input.
-     * @param splitIndex The index where string splits apart.
+     * @param response    The user input.
+     * @param splitIndex  The index where string splits apart.
      * @param splitString The string specifies how to split.
      * @return The content part.
      * @throws MismatchedFormException Deadline doesn't contain /by and event doesn't contain /at.
@@ -67,29 +67,30 @@ public class Parser {
      * @throws DukeException The exception related to duke.
      */
     public static Command parse(String response) throws DukeException {
-            if (response.equals("bye")) {
-                return new ExitCommand();
-            } else if (response.equals("list")) {
-                return new ListCommand();
-            } else if (isEmpty(response)) {
-                throw new EmptyInputException(response);
-            } else if (response.matches("^todo( .*)?")) {
-                return new AddCommand(response, Operation.TODO, 5);
-            } else if (response.matches("^deadline( .*)?")) {
-                return new AddCommand(response, Operation.DEADLINE, 9, " /by ");
-            } else if (response.matches("^event( .*)?")) {
-                return new AddCommand(response, Operation.EVENT, 6, " /at ");
-            } else if (response.matches("^done( .*)?")) {
-                return new MarkCommand(response, 5);
-            } else if (response.matches("^delete( .*)?")) {
-                return new DeleteCommand(response, 7);
-            } else if (response.matches("^find( .*)?")) {
-                return new SearchCommand(response, Operation.FIND, 5);
-            } else if (response.matches("^date( .*)?")) {
-                return new SearchCommand(response, Operation.DATE, 5);
-            } else {
-                throw new NotRecognizeException();
-            }
+        //Solution below adapted from https://github.com/nus-cs2103-AY2122S1/ip/pull/13/files
+        if (response.equals("bye")) {
+            return new ExitCommand();
+        } else if (response.equals("list")) {
+            return new ListCommand();
+        } else if (isEmpty(response)) {
+            throw new EmptyInputException(response);
+        } else if (response.matches("^todo( .*)?")) {
+            return new AddCommand(response, Operation.TODO, 5);
+        } else if (response.matches("^deadline( .*)?")) {
+            return new AddCommand(response, Operation.DEADLINE, 9, " /by ");
+        } else if (response.matches("^event( .*)?")) {
+            return new AddCommand(response, Operation.EVENT, 6, " /at ");
+        } else if (response.matches("^done( .*)?")) {
+            return new MarkCommand(response, 5);
+        } else if (response.matches("^delete( .*)?")) {
+            return new DeleteCommand(response, 7);
+        } else if (response.matches("^find( .*)?")) {
+            return new SearchCommand(response, Operation.FIND, 5);
+        } else if (response.matches("^date( .*)?")) {
+            return new SearchCommand(response, Operation.DATE, 5);
+        } else {
+            throw new NotRecognizeException();
+        }
     }
 
     public static boolean isEmpty(String response) {
