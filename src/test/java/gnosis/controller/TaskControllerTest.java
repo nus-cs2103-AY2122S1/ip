@@ -1,7 +1,6 @@
 package gnosis.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +9,6 @@ import gnosis.util.GnosisException;
 
 
 public class TaskControllerTest {
-    @Test
-    public void getTasksNullListNullPointerExceptionThrown() {
-        TaskController taskCommandManager = new TaskController();
-        assertNull(taskCommandManager.getTasks(), "ERROR: There is tasks");
-    }
 
     @Test
     public void addTodoToTaskManager_someValue_success() throws GnosisException {
