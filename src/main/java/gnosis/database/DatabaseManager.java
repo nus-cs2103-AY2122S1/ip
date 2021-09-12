@@ -17,12 +17,15 @@ public class DatabaseManager {
     private String filePath;
     private File file;
 
+    /**
+     * Constructor initialise database.
+     * @param fileName name to file to initialise.
+     * */
     public DatabaseManager(String fileName) {
-        StringBuilder sb = new StringBuilder(DIRECTORY_PATH);
-        sb.append("/");
-        sb.append(fileName);
-        sb.append("." + FILE_TYPE);
-        this.filePath = sb.toString();
+        this.filePath = DIRECTORY_PATH
+                + "/"
+                + fileName
+                + "." + FILE_TYPE;
         this.file = new File(filePath);
     }
 

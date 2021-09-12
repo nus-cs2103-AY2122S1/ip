@@ -1,8 +1,6 @@
 package gnosis.model;
 
-import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
-import gnosis.util.GnosisException;
 
 /**
  * This enum specifies the different commands
@@ -22,6 +20,11 @@ public enum Command {
     VISITED,
     BYE;
 
+    /**
+     * Retrieves Identifier of specified command.
+     * @param command to determine indentifier.
+     * @return Command Identifier.
+     * */
     public static String getCommandIdentifier(Command command) {
         String identifier;
         switch (command) {

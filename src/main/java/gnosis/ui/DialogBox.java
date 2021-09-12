@@ -2,6 +2,7 @@ package gnosis.ui;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +22,10 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
-    private static Image user = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
-    private static Image bot = new Image(DialogBox.class.getResourceAsStream("/images/robot.png"));
+    private static final Image USER = new Image(Objects.requireNonNull(
+            DialogBox.class.getResourceAsStream("/images/user.png")));
+    private static final Image BOT = new Image(Objects.requireNonNull(
+            DialogBox.class.getResourceAsStream("/images/robot.png")));
 
     @FXML
     private Label dialog;
@@ -61,14 +64,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text) {
-        var db = new DialogBox(text, user);
-        db.setStyle("-container-color: yellow");
+        var db = new DialogBox(text, USER);
+        db.setStyle("-container-color: #F6A93F; -chat-color: black");
+        //db.setStyle("-fx-min-width: 25em;");
         return db;
     }
 
     public static DialogBox getGnosisDialog(String text) {
-        var db = new DialogBox(text, bot);
-        db.setStyle("-container-color: cyan");
+        var db = new DialogBox(text, BOT);
+        db.setStyle("-container-color: #22B3F5;-chat-color: white");
         db.flip();
         return db;
     }

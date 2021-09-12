@@ -1,0 +1,12 @@
+.dialogContainer {
+
+}
+
+#dialog {
+    -fx-background-radius: 10%;
+    -fx-background-insets: 0,1;
+    -fx-padding: 5;
+    -fx-background-color: -container-color;
+    -fx-text-fill: -chat-color;
+}
+

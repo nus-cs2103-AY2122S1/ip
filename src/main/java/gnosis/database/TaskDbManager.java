@@ -22,6 +22,10 @@ public class TaskDbManager extends DatabaseManager {
         super(fileName);
     }
 
+    /**
+     * Load Tasks from database.
+     * @return Loaded tasks from database.
+     * */
     public List<Task> loadTasks() {
         //check if user has folder:
         // if no folder -> means no data found -> create one from scratch

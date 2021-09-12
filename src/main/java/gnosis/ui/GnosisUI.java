@@ -2,23 +2,26 @@ package gnosis.ui;
 
 import java.io.File;
 import java.util.List;
-import java.util.Scanner;
 
 import gnosis.controller.GnosisController;
+import gnosis.model.Command;
 import gnosis.model.Place;
 import gnosis.model.Task;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 /**
  * The GnosisUI handles the user interaction with user.
@@ -44,26 +47,51 @@ public class GnosisUI extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    @FXML
+    private ComboBox<Command> commandComboBox;
+
 
     @FXML
     private MenuItem closeMenu;
 
+
+    /**
+     * Initialises Gnosis UI before displaying to user.
+     * */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        commandComboBox.getItems().addAll(Command.values());
+        commandComboBox.setPromptText("Select Command");
+    }
+
+    /**
+     * Handle command ComboBox when user selects it.
+     * */
+    public void commandComboBoxHandler() {
+        Command command = commandComboBox.getValue();
+        System.out.println(command);
+        switch (command) {
+        case BYE:
+        case LIST:
+            userInput.setEditable(false);
+            userInput.setVisible(false);
+            break;
+        default:
+            userInput.setVisible(true);
+            userInput.setEditable(true);
+        }
     }
 
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Gnosis's reply and then appends them to
-     * the dialog container. Clears user input after processing.
-     */
     @FXML
     private void handleUserInput() {
-
         String input = userInput.getText();
-        assert !input.trim().equals("") : "user input should not be empty";
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
+        Command command = commandComboBox.getValue();
+        if (command == null) {
+            return;
+        }
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(command + " " + input));
         this.parseInput(input);
         userInput.clear();
     }
@@ -84,18 +112,8 @@ public class GnosisUI extends AnchorPane {
      * @param input User input to parse.
      */
     public void parseInput(String input) {
-        assert input != null : "input should not be null";
-
-        Scanner sc = new Scanner(input);
         try {
-            String command = sc.next();
-            String action = "";
-            if (sc.hasNext()) {
-                action = sc.nextLine();
-            }
-
-            this.gnosisController.executeUserCommand(command, action);
-
+            this.gnosisController.executeUserCommand(commandComboBox.getValue(), input);
         } catch (GnosisException ge) {
             displayMessage(ge.toString());
         } catch (NumberFormatException nfe) {
@@ -212,13 +230,18 @@ public class GnosisUI extends AnchorPane {
         }
     }
 
+
+
+
     /**
      * Displays bye message to user.
      *
      */
     public void displayByeMessage() {
         displayMessage(GnosisConstants.BYE_MESSAGE);
-        Platform.exit();
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
     }
 
     /**
@@ -252,12 +275,8 @@ public class GnosisUI extends AnchorPane {
         MenuItem exportItem = (MenuItem) event.getTarget();
         File file = fileChooser.showSaveDialog(exportItem.getParentPopup().getOwnerWindow());
 
-        //TODO: IMPLEMENT EXPORTING
-        boolean isExportSuccess = false;
-        if (file != null) {
-            isExportSuccess = gnosisController.export(exportItem.getText(), file);
-        }
-
+        //check for
+        boolean isExportSuccess = gnosisController.export(exportItem.getText(), file);
         if (!isExportSuccess) {
             displayMessage("File not exported");
         } else {

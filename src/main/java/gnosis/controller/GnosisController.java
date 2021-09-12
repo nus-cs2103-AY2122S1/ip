@@ -1,11 +1,13 @@
 package gnosis.controller;
 
+import java.io.File;
+
 import gnosis.model.Command;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
 
-import java.io.File;
+
 
 /**
  * Represents Logic flow of interaction of user input and, to specified
@@ -20,7 +22,6 @@ public class GnosisController {
 
     /** Place Controller to handle place commands */
     private PlaceController placeController;
-
 
     /** UI view of Gnosis */
     private GnosisUI view;
@@ -40,16 +41,16 @@ public class GnosisController {
     /**
      * Executes specified command from input.
      *
-     * @param strCommand Command specified by user.
+     * @param commandToExecute Command specified by user.
      * @param commandInput input to perform from command.
      * @throws GnosisException If command not found.
      */
-    public void executeUserCommand(String strCommand, String commandInput) throws GnosisException {
-        Command command;
+    public void executeUserCommand(Command commandToExecute, String commandInput) throws GnosisException {
+        //Command command;
         String commandIdentifier;
         try {
-            command = Command.valueOf(strCommand.toUpperCase().trim());
-            commandIdentifier = Command.getCommandIdentifier(command);
+            //command = Command.valueOf(strCommand.toUpperCase().trim());
+            commandIdentifier = Command.getCommandIdentifier(commandToExecute);
         } catch (IllegalArgumentException e) {
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
@@ -57,9 +58,9 @@ public class GnosisController {
         if (commandIdentifier.equalsIgnoreCase(GnosisConstants.SYSTEM_EXIT_IDENTIFER)) {
             view.displayByeMessage();
         } else if (commandIdentifier.equalsIgnoreCase(GnosisConstants.TASK_COMMAND_IDENTIFIER)) {
-            this.executeTaskCommand(command, commandInput);
+            this.executeTaskCommand(commandToExecute, commandInput);
         } else if (commandIdentifier.equalsIgnoreCase(GnosisConstants.PLACE_COMMAND_IDENTIFIER)) {
-            this.executePlaceCommand(command, commandInput);
+            this.executePlaceCommand(commandToExecute, commandInput);
         } else {
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
@@ -87,9 +88,10 @@ public class GnosisController {
      * @param input input to perform from place command.
      * @throws GnosisException If command not found.
      */
-    public void executePlaceCommand(Command gc, String input ) throws GnosisException {
+    public void executePlaceCommand(Command gc, String input) throws GnosisException {
         this.placeController.executeCommand(gc, input, this.view);
     }
+
 
     /**
      * loads Gnosis greeting message to UI.
@@ -99,8 +101,16 @@ public class GnosisController {
         view.displayGreetMessage(taskController.isTaskLoaded(), placeController.isPlacesLoaded());
     }
 
+    /**
+     * Exports file to specified path.
+     * @param fileName Name of file to export.
+     * @param pathToExport Path to export file.
+     * @return Boolean value determining whether export was sucessful.
+     * */
     public boolean export(String fileName, File pathToExport) {
-        //TODO: improve implementation
+        if (pathToExport == null) {
+            return false;
+        }
         if (fileName.equalsIgnoreCase("tasks")) {
             return taskController.exportFile(pathToExport);
         } else if (fileName.equalsIgnoreCase("places")) {
