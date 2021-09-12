@@ -24,6 +24,8 @@ public class DialogBox extends HBox {
         this.displayPicture = iv;
         this.isUser = isUser;
 
+        this.setStyle("-fx-border-color: black;");
+
         this.text.setWrapText(true);
         this.text.setFont(new Font(15));
         this.text.setPadding(new Insets(10));
@@ -31,6 +33,7 @@ public class DialogBox extends HBox {
 
         this.displayPicture.setFitWidth(100.0);
         this.displayPicture.setFitHeight(100.0);
+
         this.setAlignment(Pos.TOP_RIGHT);
         this.setPadding(new Insets(10));
 
