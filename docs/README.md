@@ -19,13 +19,12 @@ directory in the following command.
 ```
 cd TAUBOT_JAR_DIRECTORY
 ```
-
-5. (Continuing from 4) In the same command prompt/terminal, run this command to start Duke
+4. (Continuing from 4) In the same command prompt/terminal, run this command to start Duke
 
 ```
 java -jar Duke.jar
 ```
-6. Taubot will run and you should see this:
+5. Taubot will run and you should see this:
 
 ![Screenshot 2021-09-12 at 12 39 56 PM](https://user-images.githubusercontent.com/61085398/132972393-841cfde1-c4aa-4f4a-b18f-adfa6d86ee3d.png)
 
