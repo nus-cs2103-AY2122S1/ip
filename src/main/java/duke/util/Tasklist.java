@@ -29,6 +29,9 @@ public class Tasklist {
      * @return The completed task
      */
     public Task markAsDone(int index) {
+        // index should be at least 1
+        assert index >= 1 : "Target index for markAsDone should be at least 1!";
+
         Task task = this.taskList.get(index - 1);
         task.completeTask();
         return task;
@@ -60,9 +63,15 @@ public class Tasklist {
      * @return The deleted task
      */
     public Task deleteTask(int index) {
+        // index should be at least 1
+        assert index >= 1 : "Target index for deleteTask should be at least 1!";
+
         Task removed = this.taskList.get(index - 1);
         this.taskList.remove(index - 1);
         this.lastItem--;
+
+        assert this.lastItem >= 0 : "Index of last item cannot be less than 0!";
+
         return removed;
     }
 
@@ -102,6 +111,8 @@ public class Tasklist {
      */
     public Tasklist findAllTasksWith(String searchTerms) {
         Tasklist result = new Tasklist();
+
+        assert !searchTerms.equals("") : "Search terms cannot be empty!";
 
         // Parse searchTerms
         String[] searchTokens = searchTerms.strip().split(" ");
