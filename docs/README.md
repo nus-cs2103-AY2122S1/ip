@@ -207,16 +207,16 @@ Alright. I've tagged the following task (Event):
 
 ### Exiting Duke: `bye`
 
-Description of the feature.
+Exits the Duke app. The list of tasks is automatically saved in the user's hard drive whenever a new task is added, and will load this save file when starting up again.
 
 Example of usage:
 
-`keyword (optional arguments)`
+`bye`
 
 Expected outcome:
 
 ```
-expected output
+Bye... Hope to see you again soon!
 ```
 
 ---
