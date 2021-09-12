@@ -128,8 +128,8 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        String end = "\n   ";
-        String begin = "   Here are the tasks in your list:\n   ";
+        String end = "\n";
+        String begin = "Here are the tasks in your list:\n";
         sb.append(begin);
         for (int i = 0; i < count; i++) {
             if (i == count - 1) {

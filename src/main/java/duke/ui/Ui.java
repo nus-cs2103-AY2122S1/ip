@@ -25,8 +25,8 @@ public class Ui {
      * @return The desirable output string related to task.
      */
     public String getOutputFrame(String task, int count) {
-        String title = "   Got it. I've added this task:\n   ";
-        String middle = "  " + task + "\n   ";
+        String title = "Got it. I've added this task:\n";
+        String middle = task + "\n";
         String end = "Now you have " + count + " tasks in the list.";
         return title + middle + end;
     }
@@ -37,7 +37,7 @@ public class Ui {
      * @param message
      */
     public String showError(String message) {
-        return "   " + message;
+        return message;
     }
 
 
@@ -49,8 +49,8 @@ public class Ui {
      * @param tasks The list of tasks.
      */
     public String showDelete(Task shouldDelete, TaskList tasks) {
-        String title = "   Noted. I've removed this task: \n";
-        String out = "     " + shouldDelete.toString() + "\n   ";
+        String title = "Noted. I've removed this task:\n";
+        String out = shouldDelete.toString() + "\n";
         String end = "Now you have " + tasks.getSize() + " tasks in the list.";
         return title + out + end;
     }
@@ -79,19 +79,19 @@ public class Ui {
      * @param stringForm The string form of that task.
      */
     public String showDone(String stringForm) {
-        String title = "   Nice! I've marked this task as done: \n";
-        String out = "     " + stringForm;
+        String title = "Nice! I've marked this task as done:\n";
+        String out = stringForm;
         return title + out;
     }
 
     public String showBye() {
-        return "   " + "Bye, see you soon. ^-^";
+        return "Bye, see you soon. ^-^";
     }
 
     public String showComings(TaskList taskListMonth, TaskList taskListDay) {
-        String titleMonth = "   <<Coming tasks within same month>> \n";
+        String titleMonth = "<<Coming tasks within same month>> \n";
         String listInMonth = taskListMonth.toString() + "\n";
-        String titleDay = "   <<Coming tasks within the same day>> \n";
+        String titleDay = "<<Coming tasks within the same day>> \n";
         String listInDay = taskListDay.toString() + "\n";
         return titleMonth + listInMonth + titleDay + listInDay;
     }

@@ -60,8 +60,4 @@ public class Duke {
             assert taskListDay != null;
             return ui.showComings(taskListMonth, taskListDay);
     }
-
-    public static String showList() {
-        return tasks.toString();
-    }
 }
