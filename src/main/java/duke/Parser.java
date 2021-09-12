@@ -28,17 +28,6 @@ public class Parser {
     }
 
     /**
-     * Returns true if input string is "bye"
-     *
-     * @param input Received string from scanner
-     * @return Boolean based on checking if input is "bye"
-     */
-    public boolean isExit(String input) {
-        return input.equals("bye");
-    }
-
-
-    /**
      * Parses the input given and returns the responses given the input.
      *
      * @param input Received string from scanner
@@ -47,7 +36,7 @@ public class Parser {
     public String[] parseInput(String input) {
         try {
             if (input.startsWith("done")) {
-                return new String[]{setTaskAsDone(input)};
+                return setTaskAsDone(input);
             } else if (input.startsWith("delete")) {
                 return new String[]{deleteTask(input)};
             } else if (input.startsWith("list")) {
@@ -86,29 +75,24 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new String[]{"OOPS!!! You didn't enter a valid index"};
         }
-        if (taskIndex - 1 > tasks.size()) {
+        if (taskIndex > tasks.size()) {
             return new String[]{"OOPS!!! You didn't enter a valid index"};
         }
         Task task = tasks.get(taskIndex - 1);
         results.add("\tYou have snoozed this task: ");
         results.add(task.toString() + " to:\n");
-        if (splitSnooze.length == 1) {
-            return new String[]{"OOPS!!! Please enter a time"};
-        }
         LocalDateTime newDate;
         try {
             newDate = LocalDateTime.parse(splitSnooze[1].trim(), fmt);
         } catch (DateTimeParseException e) {
-            return new String[]{"OOPS!!! You have entered an invalid date or time!"};
+            return displayDateFormatError();
         }
         if (task instanceof Todo) {
             return new String[]{"OOPS!!! Todos don't have schedules"};
         }
-
         results.addAll(snoozeTask(task, taskIndex, newDate));
         return results.toArray(new String[0]);
     }
-
     private ArrayList<String> snoozeTask(Task task, int taskIndex, LocalDateTime newDate) {
         ArrayList<String> results = new ArrayList<>();
         try {
@@ -145,25 +129,29 @@ public class Parser {
         Task task;
         switch (type) {
         case "todo":
-            String[] splitTask = processTask(splitString);
-            if (splitTask.length == 1) {
-                return splitTask;
+            try {
+                task = processTask(splitString);
+            } catch (DukeException e) {
+                return new String[]{e.getMessage()};
             }
-            task = new Todo(splitTask[1]);
             break;
         case "deadline":
-            String[] splitDeadline = processDeadline(splitString);
-            if (splitDeadline.length == 1) {
-                return splitDeadline;
+            try {
+                task = processDeadline(splitString);
+            } catch (DukeException e) {
+                return new String[]{e.getMessage()};
+            } catch (DateTimeParseException e) {
+                return displayDateFormatError();
             }
-            task = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             break;
         case "event":
-            String[] splitEvent = processEvent(splitString);
-            if (splitEvent.length == 1) {
-                return splitEvent;
+            try {
+                task = processEvent(splitString);
+            } catch (DukeException e) {
+                return new String[]{e.getMessage()};
+            } catch (DateTimeParseException e) {
+                return displayDateFormatError();
             }
-            task = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
             break;
         default:
             return new String[]{"OOPS!!! I'm sorry, but I don't know what that means :-("};
@@ -173,34 +161,46 @@ public class Parser {
         return displayTasks();
     }
 
-    String[] processTask(String[] input) {
+    Todo processTask(String[] input) throws DukeException {
         if (input.length == 1) {
-            return new String[]{"OOPS!!! The description of a todo cannot be empty.\n"};
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
         }
-        return input;
+        return new Todo(input[1]);
     }
-    String[] processDeadline(String[] input) {
+    Deadline processDeadline(String[] input) throws DukeException, DateTimeParseException {
         if (input.length == 1) {
-            return new String[]{"OOPS!!! The description of a deadline cannot be empty.\n"};
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
         }
         String[] splitDeadline = input[1].split(" /by ", 2);
         if (splitDeadline.length == 1) {
-            return new String[]{"OOPS!!! The description or deadline can't be empty or it must be after a '/'"};
+            throw new DukeException("OOPS!!! Please follow this format: deadline <description> "
+                    + "/by <date (DD/MM/YYYY HHMM)>");
         }
-        return splitDeadline;
+
+        LocalDateTime deadline = processDate(splitDeadline[1].trim());
+        return new Deadline(splitDeadline[0], deadline);
     }
-    String[] processEvent(String[] input) {
+
+    Event processEvent(String[] input) throws DukeException, DateTimeParseException {
         if (input.length == 1) {
-            return new String[]{"OOPS! The description of an event cannot be empty.\n"};
+            throw new DukeException("OOPS! The description of an event cannot be empty.\n");
         }
         String[] splitEvent = input[1].split(" /at ", 2);
         if (splitEvent.length == 1) {
-            return new String[]{"\tOOPS!!! The description or duration can't be empty or it must be after a '/'"};
+            throw new DukeException("OOPS!!! Please follow this format: event <description> "
+                    + "/at <date (DD/MM/YYYY HHMM)>");
         }
-        return splitEvent;
+        LocalDateTime deadline = processDate(splitEvent[1].trim());
+        return new Event(splitEvent[0], deadline);
     }
 
+    private LocalDateTime processDate(String stringDate) throws DateTimeParseException {
+        return LocalDateTime.parse(stringDate, fmt);
+    }
 
+    private String[] displayDateFormatError() {
+        return new String[]{"OOPS!!! Input your date in the following format: DD/MM/YYYY HHMM"};
+    }
     private String[] displayTasks() {
         ArrayList<String> results = new ArrayList<>();
         results.add("\tGot it. I've added this task:\n\t\t" + tasks.get(tasks.size() - 1).toString()
@@ -227,11 +227,11 @@ public class Parser {
                 + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
-    private String setTaskAsDone(String input) {
+    private String[] setTaskAsDone(String input) {
         String[] splitString = input.split(" ", 2);
         int i = Integer.parseInt(splitString[1]) - 1;
         if (i + 1 <= 0 || i + 1 > tasks.size()) {
-            return "\tOOPS!!! Task not found!";
+            return new String[]{"\tOOPS!!! Task not found!"};
         }
         tasks.get(i).markAsDone();
         try {
@@ -239,7 +239,7 @@ public class Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "\tNice! I've marked this task as done:\n\t\t" + tasks.get(i).toString();
+        return new String[]{"\tNice! I've marked this task as done:\n\t\t" + tasks.get(i).toString()};
     }
 
     private String[] list() {

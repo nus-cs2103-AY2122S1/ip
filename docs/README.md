@@ -10,8 +10,8 @@
     * [List all tasks](#list)
     * [Delete task](#delete)
     * [Complete task](#done)
-    * [Find task with keyword](#find)
-    * [Reschedule task](#snooze)
+    * [Find task with keyword](#findtask)
+    * [Reschedule task](#snoozetask)
     * [Exit Duke](#bye)
 - [Command Summary](#summary)
 
@@ -146,7 +146,7 @@ Nice! I've marked this task as done:
     [D][X] homework (by: 2/2/2022 22:22)
 ```
 
-### `find` - Finds tasks with the keyword<a name="find"></a>
+### `find` - Finds tasks with the keyword <a name="findtask"></a>
 
 Format: `find {keyword}`
 
@@ -159,7 +159,7 @@ Here are the matching tasks in your list:
     1. [D][X] homework (by: 2/2/2022 22:22)
 ```
 
-### `snooze` - Reschedules your task to a different time<a name="snooze"></a>
+### `snooze` - Reschedules your task to a different time <a name="snoozetask"></a>
 
 Format: `snooze {index of task} /to {time with format: dd/mm/yyyy hhmm}`
 `hhmm is optional.`
