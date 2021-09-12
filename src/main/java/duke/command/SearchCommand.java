@@ -29,7 +29,7 @@ public class SearchCommand extends Command {
         if (searchString.length() > 5 && searchString.split(" ").length >= 2) {
             TaskList.search(searchString.substring(5));
         } else {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid keyword, such as find book");
+            Ui.printWarning("☹ OOPS!!! Please enter a valid keyword, such as find book");
         }
 
     }

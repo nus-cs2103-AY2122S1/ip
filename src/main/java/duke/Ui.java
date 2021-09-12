@@ -50,13 +50,24 @@ public class Ui {
     }
 
     /**
+     * Prints a warning message on screen
+     *
+     * @param s string to be printed
+     */
+    public static void printWarning(String s) {
+        if (mainWindow != null) {
+            mainWindow.sendDukeWarning(s);
+        }
+    }
+
+    /**
      * Prints an error message
      *
      * @param e takes in the exception
      */
     public static void showError(DukeException e) {
         if (mainWindow != null) {
-            mainWindow.sendDukeResponse(e.toString());
+            mainWindow.sendDukeWarning(e.toString());
         }
     }
 
@@ -88,10 +99,9 @@ public class Ui {
      * @param sOrNot  check use "task" or "tasks" in the sentence.
      */
     public static void sayDelete(Task deleted, int total, String sOrNot) {
-        String s = DIV + "\n" + IND_2 + "Noted. I've removed this task: " + "\n"
+        String s = "Noted. I've removed this task: " + "\n"
                 + IND_2 + " " + deleted + "\n"
-                + IND_2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
-                + DIV + "\n";
+                + "Now you have " + total + " " + sOrNot + " in the list." + "\n";
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(s);
         }
@@ -105,10 +115,9 @@ public class Ui {
      * @param sOrNot check use "task" or "tasks" in the sentence.
      */
     public static void sayAdd(Task t, int total, String sOrNot) {
-        String s = DIV + "\n" + IND_2 + "Got it. I've added this task: " + "\n"
+        String s = "Got it. I've added this task: " + "\n"
                 + IND_2 + " " + t + "\n"
-                + IND_2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
-                + DIV + "\n";
+                + "Now you have " + total + " " + sOrNot + " in the list." + "\n";
 
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(s);
@@ -121,8 +130,8 @@ public class Ui {
      * @param p takes in the String of the task
      */
     public static void sayDone(String p) {
-        String s = DIV + "\n" + IND_2 + "Nice! I've marked this task as done: " + "\n"
-                + IND_2 + IND_2 + p + "\n" + DIV + "\n";
+        String s = "Nice! I've marked this task as done: " + "\n"
+                + p + "\n" + DIV + "\n";
 
         if (mainWindow != null) {
             mainWindow.sendDukeResponse(s);

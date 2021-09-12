@@ -31,7 +31,7 @@ public class GetDayCommand extends Command {
         //14 for general date, 9 for "get today"
         boolean checkLength = next.length() == 14 || next.length() == 9;
         if (!checkLength) {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy or 'get today'");
+            Ui.printWarning("☹ OOPS!!! Please enter a valid date, such as get dd/MM/yyyy or 'get today'");
         }
         try {
             ArrayList<Task> tasks = TaskList.getOnADay(next.substring(4));

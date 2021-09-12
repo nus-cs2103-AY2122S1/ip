@@ -321,7 +321,7 @@ public class TaskList {
     public void getDone(String next) {
         String emp = next.substring(4, 5);
         if (!emp.equals(" ")) {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as done 3");
+            Ui.printWarning("☹ OOPS!!! Please enter a valid number, such as done 3");
         }
         String index = next.substring(5);
         try {
@@ -332,7 +332,7 @@ public class TaskList {
                 Ui.showError(dukeException);
             }
         } catch (NumberFormatException numberFormatException) {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as done 3");
+            Ui.printWarning("☹ OOPS!!! Please enter a valid number, such as done 3");
         }
     }
 
@@ -344,7 +344,7 @@ public class TaskList {
     public void getDelete(String next) {
         String emp = next.substring(6, 7);
         if (!emp.equals(" ")) {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as delete 3");
+            Ui.printWarning("☹ OOPS!!! Please enter a valid number, such as delete 3");
         }
         String index = next.substring(7);
         try {
@@ -355,7 +355,7 @@ public class TaskList {
                 Ui.showError(dukeException);
             }
         } catch (NumberFormatException numberFormatException) {
-            Ui.printDuke("☹ OOPS!!! Please enter a valid number, such as delete 3");
+            Ui.printWarning("☹ OOPS!!! Please enter a valid number, such as delete 3");
         }
     }
 

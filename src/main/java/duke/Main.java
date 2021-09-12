@@ -19,6 +19,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setMain(this, dukeApplication);
+            stage.setTitle("TaskBot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
