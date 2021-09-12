@@ -25,8 +25,9 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            scene.getRoot().setStyle("-fx-font-family: 'Arial'"); // Fixes font issues
+            scene.getRoot().setStyle("-fx-font-family: 'Arial'"); // Fix font issues on Mac
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
