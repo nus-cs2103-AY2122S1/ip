@@ -57,16 +57,24 @@ public class DialogBox extends HBox {
         HBox db = DialogBox.getDialog(text, img);
         ObservableList<Node> tmp = FXCollections.observableArrayList(db.getChildren());
         tmp.forEach(child -> {
-                    if (child instanceof Label) {
-                        ((Label) child).setStyle("-fx-background-color: #90ee90; -fx-background-radius: 5");
-                    }
-                });
+                if (child instanceof Label) {
+                    ((Label) child).setStyle("-fx-background-color: #90ee90; -fx-background-radius: 5");
+                }
+        });
         return db;
     }
 
-    public static HBox getDukeDialog(String text, Image img) {
+    public static HBox getDukeDialog(String text, Image img, boolean isExceptionReply) {
         HBox db = DialogBox.getDialog(text, img);
         db = DialogBox.flip(db);
+        if (isExceptionReply) {
+            ObservableList<Node> tmp = FXCollections.observableArrayList(db.getChildren());
+            tmp.forEach(child -> {
+                    if (child instanceof Label) {
+                        ((Label) child).setStyle("-fx-background-color: #fa8072; -fx-background-radius: 5");
+                    }
+            });
+        }
         return db;
     }
 
