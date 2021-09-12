@@ -26,7 +26,7 @@ public class Task {
     }
 
     /**
-     * Sets Duke.util.Duke.task.Task Completion Status to true and returns true if successfully marked
+     * Sets Task Completion Status to true and returns true if successfully marked
      *
      * @return boolean returns true if task successfully marked and false if task
      *                 already marked
@@ -82,7 +82,7 @@ public class Task {
     public boolean checkTerm(String searchTerm) {
         String[] descriptionArr = this.description.split(" ");
         for (String word : descriptionArr) {
-            if (word.equals(searchTerm)) {
+            if (word.toLowerCase().equals(searchTerm.toLowerCase())) {
                 return true;
             }
         }
