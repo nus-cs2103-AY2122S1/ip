@@ -1,4 +1,21 @@
 # User Guide
+- [User Guide](#user-guide)
+    * [Quick Start](#quick-start)
+    * [Features](#features)
+        + [Viewing help: `help`](#viewing-help-help)
+        + [Adding a Todo Task: `todo`](#adding-a-todo-task-todo)
+        + [Adding a Deadline Task: `deadline`](#adding-a-deadline-task-deadline)
+        + [Adding an Event Task: `event`](#adding-an-event-task-event)
+        + [Listing all tasks: `list`](#listing-all-tasks-list)
+        + [Marking a task as done: `done`](#marking-a-task-as-done-done)
+        + [Deleting a task: `delete`](#deleting-a-task-delete)
+        + [Finding a task by description: `find`](#finding-a-task-by-description-find)
+        + [Viewing scheduled tasks: `schedule`](#viewing-scheduled-tasks-schedule)
+        + [Sort tasks: `sort`](#sort-tasks-sort)
+        + [Exiting the program: `bye`](#exiting-the-program-bye)
+        + [Saving the data](#saving-the-data)
+    * [Command Summary](#command-summary)
+
 
 > “In order to seek one’s own direction, one must simplify the mechanics of ordinary, everyday life.” - Plato ([source](https://www.minimalray.com/blog/minimalist-quotes))
 
@@ -22,9 +39,11 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
     - `bye`: Exits the app.
 6. Refer to the [Features](#Features) below for details of each command.
 
+
+
 ## Features
 
-### Viewing help: `help`
+### Viewing hellp - `help`
 
 Displays a list of available commands with example usage.
 
