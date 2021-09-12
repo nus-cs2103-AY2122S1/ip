@@ -34,7 +34,7 @@ Edits task
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Describe action
 
 Describe the action and its outcome.
 
