@@ -46,6 +46,13 @@ public abstract class TaskListIndexCommand extends UndoableCommand {
         return listOfIndex.split(" ");
     }
 
+    /**
+     * Converts a String array that contains numbers as Strings into an integer array.
+     * Used to process an array containing a list of indexes provided by the user.
+     *
+     * @param listOfIndex The list of indexes to be converted to to an integer array.
+     * @return The integer array.
+     */
     protected int[] convertStringArrayToIntArray(String[] listOfIndex) {
         int[] result = new int[listOfIndex.length];
         for (int i = 0; i < listOfIndex.length; i++) {

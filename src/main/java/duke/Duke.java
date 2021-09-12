@@ -30,9 +30,11 @@ public class Duke extends Application {
             fxmlLoader.<MainWindow>getController().setMainWindow(dukeUi);
             primaryStage.show();
             primaryStage.setTitle("Duke");
+            primaryStage.setResizable(false);
         } catch (IOException e) {
             System.out.println("Error message: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 }

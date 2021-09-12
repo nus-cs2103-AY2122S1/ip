@@ -54,6 +54,7 @@ public class FindCommand extends Command {
         StringBuilder message;
         if (searchResults.isEmpty()) {
             message = new StringBuilder("Sorry I could not find any matching tasks.\n");
+            this.setExecutionMessage(message.toString());
             return;
         }
         message = new StringBuilder(Ui.DASHES);

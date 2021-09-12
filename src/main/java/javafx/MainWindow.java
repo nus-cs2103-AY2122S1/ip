@@ -82,6 +82,8 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input) {
-        return this.dukeUi.readUserInput(input.strip());
+        String response = this.dukeUi.readUserInput(input.strip());
+        assert response != null : "An error occurred while getting a response from Duke";
+        return response;
     }
 }

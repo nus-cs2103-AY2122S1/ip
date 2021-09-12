@@ -24,8 +24,9 @@ public abstract class AddCommand extends UndoableCommand {
      *
      * @param userInput The user input that triggers the command.
      * @param typeToAdd The type of task that should be added.
+     * @param taskList The taskList to add the task to.
      */
-    public AddCommand(String userInput, Task.Type typeToAdd, TaskList taskList) {
+    protected AddCommand(String userInput, Task.Type typeToAdd, TaskList taskList) {
         this.userInput = userInput;
         this.type = typeToAdd;
         this.taskList = taskList;
@@ -62,7 +63,7 @@ public abstract class AddCommand extends UndoableCommand {
      *
      * @return The details of an add task command.
      */
-    public String removeFirstWordFromInput() {
+    protected String removeFirstWordFromInput() {
         try {
             return this.userInput.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {

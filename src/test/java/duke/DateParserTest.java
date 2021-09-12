@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DateParserTest {
 
-    private static LocalDate testDate = LocalDate.of(2021, 8, 5);
+    private static final LocalDate testDate = LocalDate.of(2021, 8, 5);
 
     @Test
     public void nonExistentDate() {
