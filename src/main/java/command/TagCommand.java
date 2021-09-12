@@ -32,7 +32,7 @@ public class TagCommand extends Command {
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
             int index = Integer.parseInt(input.trim().substring(4)) - 1;
-            if (index > list.getSize() || index <= 0) {
+            if (index >= list.getSize() || index < 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
             }
             Task newTask = list.getTask(index);

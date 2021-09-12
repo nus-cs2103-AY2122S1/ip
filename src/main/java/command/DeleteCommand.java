@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
         try {
 
             int index = Integer.parseInt(input.trim().substring(7)) - 1;
-            if (index > list.getSize() || index <= 0) {
+            if (index >= list.getSize() || index < 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
             }
             Task removedTask = list.getTask(index);

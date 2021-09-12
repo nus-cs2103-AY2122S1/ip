@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
         try {
 
             int index = Integer.parseInt(input.trim().substring(5)) - 1;
-            if (index > list.getSize() || index <= 0) {
+            if (index >= list.getSize() || index < 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
             }
             Task newTask = list.getTask(index);
