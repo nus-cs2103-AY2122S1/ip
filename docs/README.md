@@ -161,6 +161,7 @@ Upon launch of application, Duke checks for tasks due on the day itself and resu
 ![Image of UI](https://github.com/wanyu-l/ip/blob/master/docs/TasksDueToday.png)
 
 `Snooze` results in relevant tasks to be rescheduled to the subsequent day.
+
 `Confirm` does not result in any further changes, choose this to manually reschedule later or to ignore the alert.
 
 
