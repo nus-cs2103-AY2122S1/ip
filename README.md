@@ -47,13 +47,16 @@ In Taubot, there are 3 different tasks, `todo`, `event`, `deadline`.
 
 ### Adding a `todo` task
 Format: `todo TASK_DESCRIPTION`  
+
+Examples:
 * `todo cook lunch`
 * `todo mop the floor :-(`
 
 ### Adding a `event` task
 Format: `event TASK_DESCRIPTION /at DATE TIME`  
 * The date must be in yyyy-mm-dd format.
-* The time must be in hhmm format.
+* The time must be in hhmm format.  
+
 Examples: 
 * `event charity run /at 2021-09-17 0600`
 * `event khai's wedding /at 2024-12-12 0900`
@@ -61,7 +64,8 @@ Examples:
 ### Adding a `deadline` task
 Format: `deadline TASK_DESCRIPTION /by DATE TIME`    
 * The date must be in yyyy-mm-dd format.
-* The time must be in hhmm format.
+* The time must be in hhmm format.  
+
 Examples: 
 * `deadline CS2103 project /by 2021-09-17 2359`
 * `deadline maths homework /by 2021-09-13 1300`
@@ -75,6 +79,7 @@ Format: `done INDEX`
 * Marks a task as done at the speficied index from the list.
 * The index refers to the index number shown in the displayed tasks list.
 * The index **must be a positive integer 1,2,3...**
+
 Example: `done 1`
 
 ### `delete` a task 
@@ -82,13 +87,15 @@ Format: `delete INDEX`
 * Deletes a task at the specified index from the list. 
 * The index refers to the index number shown in the displayed tasks list.
 * The index **must be a positive integer 1,2,3...**
+
 Example: `delete 1`
 
 ### `find` a task by keyword
 Finds tasks containing a single keyword.  
 Format: `find KEYWORD`  
 * The search is case-insensitive e.g. `Homework` will match `homework`
-* Only full words will be matched e.g. `home` will not match `homework`
+* Only full words will be matched e.g. `home` will not match `homework`  
+
 Examples:
 * `find homework` returns:
 <img width="683" alt="Screenshot 2021-09-12 at 1 07 59 PM" src="https://user-images.githubusercontent.com/61085398/132972966-e4b2437b-e00f-42df-965b-96faa7c64417.png">
@@ -109,3 +116,17 @@ Examples:
 
 ### Exit the program `bye`
 Format: `bye`
+
+## Command Summary
+
+Action | Format | Examples
+------------ | ------------- | -------------
+todo | `todo TASK_DESCRIPTION` | `todo eat apple`
+event | `event TASK_DESCRIPTION /at DATE TIME` | `event khai's wedding /at 2024-12-12 0900`
+deadline | `deadline TASK_DESCRIPTION /by DATE TIME` | `deadline maths homework /by 2021-09-13 1300`
+list | `list` | ~
+done | `done INDEX` | `done 1`
+delete | `delete INDEX` | `delete 1`
+find | `find KEYWORD` | `find homework`
+schedule | `schedule` or `schedule DATE` | `schedule` `schedule 2021-09-12`
+bye | `bye` | ~
