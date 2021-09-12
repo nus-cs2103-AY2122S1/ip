@@ -3,7 +3,6 @@ package duke;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * This class contains the main Duke class that runs the chat bot.

@@ -40,6 +40,7 @@ public class DukeStorageManager {
     /**
      * Loads storage file from the provided path.
      * If failed then calls the method to create a new blank file instead.
+     *
      * @param savePath the path to the save file.
      * @throws DukeExceptionBase when there are errors while loading the save file.
      */
@@ -80,6 +81,7 @@ public class DukeStorageManager {
 
     /**
      * Runs when an exception is thrown while trying to load or parse the XML Save File.
+     *
      * @throws DukeExceptionBase as the Save File cannot be loaded.
      */
     private void failedToLoadSaveFile() throws DukeExceptionBase {
@@ -143,6 +145,7 @@ public class DukeStorageManager {
 
     /**
      * Processes individual Task Node from XML Save File.
+     *
      * @param currTaskAsset the relevant Task Node Object.
      */
     private void processTaskNode(Node currTaskAsset) {
@@ -241,6 +244,7 @@ public class DukeStorageManager {
 
     /**
      * Gets the first node in the XML heirarchy with the given tag name.
+     *
      * @param parentEle the Parent Element Node to search.
      * @param tagName the tag to search for.
      * @return the first Node found in the Parent Element Node with the corresponding tagName.

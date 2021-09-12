@@ -40,7 +40,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         BackgroundSize bkgSize = new BackgroundSize(552, 388, true, true, false, true);
-        BackgroundImage bkgImg = new BackgroundImage(mountainsPic, BackgroundRepeat.NO_REPEAT, null, BackgroundPosition.CENTER, bkgSize);
+        BackgroundImage bkgImg = new BackgroundImage(mountainsPic, BackgroundRepeat.NO_REPEAT, null,
+                BackgroundPosition.CENTER, bkgSize);
         Background bkg = new Background(bkgImg);
         dialogContainer.setBackground(bkg);
 
