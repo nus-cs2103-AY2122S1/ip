@@ -47,29 +47,21 @@ You may tell duke what to do for you using the following commands:
 **For Adding Event**
 
 * `event task_name /at start_date`
-
 * `event task_name /at start_date start_time`
-
 * `event task_name /at start_date /to end_date`
-
 * `event task_name /at start_date start_time /to end_date end_time`
-
 * `event task_name /at time_string`
 
 **For Adding Deadline**
 
 * `deadline task_name /by end_date`
-
 * `deadline taek_name /by end_date end_time`
-
 * `deadline task_name /by time_string`
 
 **For Adding Doafter**
 
 * `doafter task_name /after start_date`
-
 * `doafter task_name /after start_date start_time`
-
 * `doafter task_name /after time_string`
 
 ## Reminders
