@@ -14,7 +14,7 @@ public class Response {
         this.message = message;
     }
 
-    protected boolean isContinue() {
+    public boolean isContinue() {
         return isContinue;
     }
 

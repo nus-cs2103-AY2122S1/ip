@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -50,6 +51,21 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response.toString(), dukeImage)
         );
+
+        if (!response.isContinue()) {
+            closeStage();
+        }
+
         userInput.clear();
+    }
+
+    /**
+     * Close the window
+     */
+    @FXML
+    private void closeStage() {
+        // Solution below adapted from https://github.com/chiamyunqing/ip/blob/master/src/main/java/MainWindow.java
+        Stage stage = (Stage) userInput.getScene().getWindow();
+        stage.close();
     }
 }
