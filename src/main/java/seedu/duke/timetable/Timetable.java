@@ -1,8 +1,11 @@
 package seedu.duke.timetable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
@@ -53,8 +56,19 @@ public class Timetable {
         if (this.timetable.size() == 0) {
             return "You have not set any schedule yet!";
         }
+        Map<String, DayPlan> sortedMap = new TreeMap<>(new Comparator<String>() {
+            @Override
+            public int compare(String firstDate, String secondDate) {
+                String[] firstDateArr = firstDate.split("-");
+                String[] secondDateArr = secondDate.split("-");
+                int firstIntDate = Integer.parseInt(firstDateArr[0] + firstDateArr[1] + firstDateArr[2]);
+                int secondIntDate = Integer.parseInt(secondDateArr[0] + secondDateArr[1] + secondDateArr[2]);
+                return (firstIntDate > secondIntDate) ? 1 : -1;
+            }
+        });
+        sortedMap.putAll(this.timetable);
         String allScheduledTasks = "";
-        Iterator<String> activeDates = this.timetable.keySet().iterator();
+        Iterator<String> activeDates = sortedMap.keySet().iterator();
 
         while (activeDates.hasNext()) {
             String currDate = activeDates.next();

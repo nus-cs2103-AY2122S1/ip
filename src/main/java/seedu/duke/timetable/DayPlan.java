@@ -1,6 +1,7 @@
 package seedu.duke.timetable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import seedu.duke.tasks.ScheduledTask;
 
@@ -21,7 +22,10 @@ public class DayPlan {
 
         ArrayList<ScheduledTask> clashList = new ArrayList<ScheduledTask>();
 
-        this.scheduledTasks.stream().filter(task -> task.getTimeFrom() < currTimeTo || task.getTimeTo() > currTimeFrom)
+        this.scheduledTasks.stream()
+                .filter(task -> (currTimeFrom > task.getTimeFrom() && currTimeFrom < task.getTimeTo())
+                        || (currTimeTo > task.getTimeFrom() && currTimeTo < task.getTimeTo())
+                        || (task.getTimeFrom() == currTimeFrom) || (task.getTimeTo() == currTimeTo))
                 .forEach(task -> clashList.add(task));
         return clashList.size() != 0;
     }
@@ -48,7 +52,13 @@ public class DayPlan {
         if (this.scheduledTasks.size() == 0) {
             return "You have no scheduled tasks today!";
         }
+        this.scheduledTasks.sort(new Comparator<ScheduledTask>() {
 
+            @Override
+            public int compare(ScheduledTask firstTask, ScheduledTask secondTask) {
+                return (firstTask.getTimeFrom() > secondTask.getTimeFrom()) ? 1 : -1;
+            }
+        });
         String dayPlans = "";
         for (int i = 0; i < this.scheduledTasks.size(); i++) {
             dayPlans += this.scheduledTasks.get(i).toString() + "\n";
@@ -69,7 +79,7 @@ public class DayPlan {
     }
 
     public void markeDone(ScheduledTask currTask) {
-        int  index = isExist(currTask);
+        int index = isExist(currTask);
         if (index < 0) {
             return;
         }
