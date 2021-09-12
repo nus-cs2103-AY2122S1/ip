@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.command.DukeException;
-
 import java.util.Calendar;
+
+import duke.command.DukeException;
 
 /**
  * This class implements a Task with a description and completion status

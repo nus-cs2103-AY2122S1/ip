@@ -116,6 +116,7 @@ public class TaskList {
      * Marks task at index i as done.
      *
      * @param i Index of tasks to be marked.
+     * @throws DukeException when index is out of bounds.
      */
     public void markAsDone(int i) throws DukeException {
         if (i > toDoList.size() || i < 1) {
@@ -176,6 +177,13 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Edits description of task at index i.
+     *
+     * @param newDescription New description provided for task.
+     * @param i Index of tasks to be edited.
+     * @throws DukeException when index is out of bounds.
+     */
     public void editDescription (String newDescription, int i) throws DukeException {
         if (i > toDoList.size() || i < 1) {
             throw new DukeException("OOPS!!! Invalid task number");
@@ -183,6 +191,13 @@ public class TaskList {
         toDoList.get(i - 1).editDescription(newDescription);
     }
 
+    /**
+     * Edits time of task at index i.
+     *
+     * @param cal Calendar set to new date of task.
+     * @param i Index of tasks to be edited.
+     * @throws DukeException when index is out of bounds.
+     */
     public void editTime (Calendar cal, int i) throws DukeException {
         if (i > toDoList.size() || i < 1) {
             throw new DukeException("OOPS!!! Invalid task number");

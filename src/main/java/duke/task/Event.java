@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.command.DukeException;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

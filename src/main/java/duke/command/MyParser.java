@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Kishendran Vendar Kon (Group G05)
  */
 public class MyParser {
-    private final SimpleDateFormat DEADLINE_TIME_FORMAT = new SimpleDateFormat("d/MM/yyyy HHmm");
+    private static final SimpleDateFormat DEADLINE_TIME_FORMAT = new SimpleDateFormat("d/MM/yyyy HHmm");
     /**
      * Deals with making sense of user commands.
      *
@@ -158,7 +158,7 @@ public class MyParser {
         int editDescIndex = userDescription.indexOf("/desc ");
         int editTimeIndex = userDescription.indexOf("/time ");
 
-        if (userDescription.isBlank() || (editDescIndex == 0  && editTimeIndex == 0)) {
+        if (userDescription.isBlank() || (editDescIndex == 0 && editTimeIndex == 0)) {
             throw new DukeException("OOPS!!! The index of edit cannot be empty");
         }
 

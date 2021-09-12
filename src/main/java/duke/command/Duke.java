@@ -147,7 +147,7 @@ public class Duke {
      * @param desc New description.
      * @param i Index of tasks to be edited.
      */
-    protected void executeEditDescriptionCommand(String desc, int i) throws DukeException{
+    protected void executeEditDescriptionCommand(String desc, int i) throws DukeException {
         listOfTasks.editDescription(desc, i);
         executeSave();
     }
