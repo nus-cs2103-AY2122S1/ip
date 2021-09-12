@@ -30,8 +30,8 @@ public class UI {
      */
     public String getStartUpMessage() {
         add("Hello! I'm Duke :D");
-        add("\nI can help you keep track of tasks!");
-        add(getHelpMessage());
+        add("I can help you keep track of tasks!");
+        add("\nType 'help' to see a list of command I can perform!");
         return getOutput();
     }
 

@@ -114,7 +114,7 @@ public class Parser {
 
         int index = -1;
         try {
-            index = Integer.parseInt(tokens[1]);
+            index = Integer.parseInt(tokens[1]) - 1;
         } catch (NumberFormatException ex) {
             throw new UnknownCommandException(line);
         }
