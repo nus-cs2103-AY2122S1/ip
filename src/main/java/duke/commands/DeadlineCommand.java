@@ -48,10 +48,10 @@ public class DeadlineCommand extends Command {
 
     private String getDeadline(String input) throws DukeException {
         String[] splitInput = input.split("/by");
-        String deadlineInput = splitInput[1].strip();
-        if (deadlineInput.length() == 0) {
+        if (splitInput.length < 2) {
             throw new DukeException("Please specify a deadline for this task");
         } else {
+            String deadlineInput = splitInput[1].strip();
             assert deadlineInput.length() > 0 : "Improper input length for deadline";
             return deadlineInput;
         }

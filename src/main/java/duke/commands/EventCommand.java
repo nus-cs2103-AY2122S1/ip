@@ -48,10 +48,10 @@ public class EventCommand extends Command {
 
     private String getTime(String input) throws DukeException {
         String[] splitInput = input.split("/at");
-        String timeInput = splitInput[1].strip();
-        if (timeInput.length() == 0) {
+        if (splitInput.length < 2) {
             throw new DukeException("Please specify a time for this task");
         } else {
+            String timeInput = splitInput[1].strip();
             assert timeInput.length() > 0 : "Improper input length for event time";
             return timeInput;
         }
