@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke can help you management tasks faster than traditional GUI apps.
+Duke is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke can help you manage tasks faster than traditional GUI apps.
 
 - [Quick start](#quick-start)
 - [Features](#features)
@@ -25,21 +25,23 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `duke.jar` from [here](https://github.com/fans2619/ip/releases/download/A-Release/duke.jar).
 3. Copy the file to the folder you want to use as the *home folder* for Duke.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. See [FAQ](#FAQ) if double-click does not work.
-   ![Start interface](https://github.com/fans2619/ip/blob/master/docs/Start.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. See [FAQ](#faq) if double-click does not work.<br>
+   ![Start interface](Start.png)
 5. Type the command in the command box and press Enter or Send to execute it.
    Some example commands you can try:
     - **`list`** : Lists all tasks.
     - **`todo`**`return book` : Adds a Todo task with the description "return book".
     - **`delete`**`3` : Deletes the 3rd task shown in the current list.
     - **`bye`** : Exits the app.
-6. Refer to the [Features](#Features) below for more commands and details of each command.
+6. Refer to the [Features](#features) below for more commands and details of each command.
 
 ------
 
 ## Features
 
-**![:information_source:](https://github.githubassets.com/images/icons/emoji/unicode/2139.png) Notes about the command format:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo return book`.
@@ -51,6 +53,8 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
   e.g. if the command specifies `‎‎‎   done              1     2	3	‎`, it will be interpreted as `done 1 2 3`.
 
 - Extraneous parameters for commands that do not take in parameters (such as `list`, `bye`) will make the command invalid.
+
+</div>
 
 ### Adding a Todo task: `todo`
 
@@ -149,20 +153,22 @@ Duke data are saved in the hard disk automatically after any command. There is n
 
 Duke data are saved as a text file `[JAR file location]/data/duke.txt`. Advanced users are welcome to update data directly by editing that data file.
 
-![:exclamation:](https://github.githubassets.com/images/icons/emoji/unicode/2757.png) **Caution:** If your changes to the data file makes its format invalid, Duke will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Duke will discard all data and start with an empty data file at the next run.
+</div>
 
 ------
 
 ## FAQ
 
-1. **Q**: Why doesn't double-clicking the file `duke.jar` start the app?
+1. **Q**: Why doesn't double-clicking the file `duke.jar` start the app?<br>
    **A**: This could be due to your system configuration for the default application to use to open any `.jar` file. If you are on Windows, firstly set the default application to open a `.jar` file to **Java(TM) Platform SE Binary** and then double-clicking `duke.jar` should be able to start the app properly. Alternatively, you can open a terminal on your computer and navigate to the folder where `duke.jar` is stored. Then run command `java -jar duke.jar`.
 
    **NOTE:**
 
     1. If you are on Windows, please do **NOT** start the app by right-clicking `duke.jar` and using "open with **Java(TM) Platform SE Binary**". You should change the default application to open any `.jar` file first and use double-clicking to start the app. Otherwise, the app may not run properly.
 
-2. **Q**: How do I transfer my data to another Computer?
+2. **Q**: How do I transfer my data to another Computer?<br>
    **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke home folder.
 
 ------
