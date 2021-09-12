@@ -70,7 +70,7 @@ public class CompilationOfFiles {
     }
 
     /**
-     * This is the method for updating list of files due to changes.
+     * This is the method for updating the list of files due to changes.
      *
      * @param list list of tasks
      */
