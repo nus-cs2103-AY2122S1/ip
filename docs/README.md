@@ -1,7 +1,7 @@
 <img align="left" height="119" width="119" src="src/main/resources/images/bird.png">
 
 # Augury User Guide
-*Jefferson LIM ([(@qreoct](https://github.com/qreoct))*
+*Jefferson LIM ([@qreoct](https://github.com/qreoct))*
 
 ![Augury](Ui-2.png)
 
@@ -217,7 +217,7 @@ Closes Augury, saving your tasks.
 
 ### Themes
 
-![Themmes](Ui-platforms.png)
+![Themes](Ui-platforms.png)
 
 Augury comes with various colour themes.
 
