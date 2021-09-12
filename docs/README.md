@@ -1,4 +1,4 @@
-# User Guide
+# User Guide - in progress
 
 DukeAgain is a desktop app for managing your tasks.
 
@@ -19,8 +19,6 @@ The following are the recognized formats for 3 different types of tasks (items i
 - `event [description] /by [(yyyy-MM-dd) (HH:mm)] ~ [(yyyy-MM-dd) (HH:mm)] (/ details)`
 - `find [keyword(s)]`
 - ℹ️ `help` to learn other commands! 
-
-## 
 
 ## Features 
 
