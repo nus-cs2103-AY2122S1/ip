@@ -21,7 +21,7 @@ import sora.task.Task;
 import sora.task.Todo;
 
 /**
- * Manage the load and save from and to the data file.
+ * Manages the load and save from and to the data file.
  *
  * @author Zhang Shi Chen
  */

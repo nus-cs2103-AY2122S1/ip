@@ -1,7 +1,7 @@
 package sora.exception;
 
 /**
- * Thrown when user inputs a task number that is out of range.
+ * Throws when user inputs a task number that is out of range.
  *
  * @author Zhang Shi Chen
  */

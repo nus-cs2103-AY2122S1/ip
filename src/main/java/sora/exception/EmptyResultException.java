@@ -1,7 +1,7 @@
 package sora.exception;
 
 /**
- * Thrown when the search result is empty.
+ * Throws when the search result is empty.
  *
  * @author Zhang Shi Chen
  */

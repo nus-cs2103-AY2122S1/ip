@@ -1,7 +1,7 @@
 package sora.exception;
 
 /**
- * Thrown when user's input does not follow the given format.
+ * Throws when user's input does not follow the given format.
  *
  * @author Zhang Shi Chen
  */

@@ -15,7 +15,7 @@ public class Sora {
     private TaskList taskList;
 
     /**
-     * Initialize each component of the program.
+     * Initializes each component of the program.
      * Loads any data available from filePath.
      *
      * @param isCli Enable cli output
@@ -39,7 +39,7 @@ public class Sora {
     }
 
     /**
-     * Initialize and start the program in CLI interface.
+     * Initializes and starts the program in CLI interface.
      *
      * @param args Not used
      */

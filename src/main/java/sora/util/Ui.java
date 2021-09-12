@@ -3,7 +3,7 @@ package sora.util;
 import java.util.Scanner;
 
 /**
- * Handle the input and output from and to the user.
+ * Handles the input and output from and to the user.
  *
  * @author Zhang Shi Chen
  */
@@ -65,7 +65,7 @@ public class Ui {
         printMessage(message.toString());
     }
 
-    /** Close the scanner and print exit message. */
+    /** Closes the scanner and prints exit message. */
     public void exit() {
         sc.close();
         printMessage(Message.EXIT);

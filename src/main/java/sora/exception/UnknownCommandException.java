@@ -1,13 +1,13 @@
 package sora.exception;
 
 /**
- * Thrown when user inputs an unknown / invalid command.
+ * Throws when user inputs an unknown / invalid command.
  *
  * @author Zhang Shi Chen
  */
 public class UnknownCommandException extends SoraException {
     /**
-     * Thrown when user inputs an unknown / invalid command.
+     * Throws when user inputs an unknown / invalid command.
      * Redirects them to help function.
      */
     public UnknownCommandException() {

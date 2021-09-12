@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     private Sora sora;
 
-    /** Initialize components of the Main Window. */
+    /** Initializes components of the Main Window. */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

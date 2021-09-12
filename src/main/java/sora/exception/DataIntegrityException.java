@@ -1,7 +1,7 @@
 package sora.exception;
 
 /**
- * Thrown when data integrity of the storage file is compromised.
+ * Throws when data integrity of the storage file is compromised.
  *
  * @author Zhang Shi Chen
  */

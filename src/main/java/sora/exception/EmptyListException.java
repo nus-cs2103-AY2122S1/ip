@@ -1,7 +1,7 @@
 package sora.exception;
 
 /**
- * Thrown when the list is empty.
+ * Throws when the list is empty.
  *
  * @author Zhang Shi Chen
  */
