@@ -40,7 +40,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String isDone = isDone() ? "x" : " ";
+        String isDone = isDone() ? "✔" : " ";
         String prettyDate = eventDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
         return String.format("[E][%s] %s (at: %s)", isDone, getName(), prettyDate);
     }

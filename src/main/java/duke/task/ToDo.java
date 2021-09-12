@@ -25,7 +25,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String isDone = isDone() ? "x" : " ";
+        String isDone = isDone() ? "✔" : " ";
         return String.format("[T][%s] %s", isDone, getName());
     }
 }

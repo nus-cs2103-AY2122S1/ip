@@ -40,7 +40,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String isDone = isDone() ? "x" : " ";
+        String isDone = isDone() ? "✔" : " ";
         String prettyDate = endDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
         return String.format("[D][%s] %s (by: %s)", isDone, getName(), prettyDate);
     }
