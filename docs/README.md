@@ -2,6 +2,13 @@
 
 ## Duke is an easy to use app that allows you to track your various tasks
 
+## Quickstart
+
+1. Ensure you have java 11 or above on your PC.
+2. Download the latest `Duke.jar` from here
+3. Copy the file to the folder you want to use as the home folder for Duke.
+4. Double click the file to start the app. You should see a GUI similar to the one below. 
+
 ## Features 
 
 List of features:
