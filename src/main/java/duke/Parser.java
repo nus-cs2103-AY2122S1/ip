@@ -87,6 +87,9 @@ public class Parser {
         case "clear":
             response = getClearResponse();
             break;
+        case "help":
+            response = getHelpResponse();
+            break;
         default:
             response = Ui.getUnrecognisedCmdMessage();
         }
@@ -247,5 +250,9 @@ public class Parser {
         this.list.clearList();
         this.storage.writeToFile();
         return Ui.getClearMessage();
+    }
+
+    private String getHelpResponse() {
+        return Ui.getHelp();
     }
 }

@@ -323,4 +323,22 @@ public class Ui {
     public static String getClearMessage() {
         return "Your list has been cleared.";
     }
+
+    public static String getHelp() {
+        return "Here are the commands duke supports:\n"
+                + "1. todo {description}\n"
+                + "2. deadline {description} /by {date}\n"
+                + "3. event {description} /at {date/location}\n"
+                + "4. delete {Index}\n"
+                + "5. list\n"
+                + "6. find {Index}\n"
+                + "7. remind {days}\n"
+                + "8. format\n"
+                + "9. setFormat {new format}\n"
+                + "10. clear\n"
+                + "11. bye\n"
+                + "12. help\n"
+                + "Refer to the user guide for more information";
+
+    }
 }
