@@ -2,12 +2,10 @@ package duke.tasks;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.regex.Pattern;
 
 import duke.exceptions.UserInputError;
-import duke.util.Ui;
 
 /**
  * The abstract Task class representing a task.
@@ -21,8 +19,7 @@ public abstract class Task {
         TODO, EVENT, DEADLINE,
     }
 
-    private static final String SEPARATE = " ~#~ ";
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+    private static final String DELIMITER = " ~#~ ";
 
     private final String description;
     private final Type type;
@@ -106,9 +103,9 @@ public abstract class Task {
      * @param dataString String containing Task details.
      * @return A Task object with task type and details.
      */
-    public static Task stringToTask(String dataString) {
-        Task newTask = null;
-        String[] infoArr = dataString.split(SEPARATE);
+    public static Task stringToTask(String dataString) throws UserInputError {
+        Task newTask;
+        String[] infoArr = dataString.split(DELIMITER);
 
         String type = infoArr[0];
         boolean isDone = infoArr[1].equals("1");
@@ -120,18 +117,10 @@ public abstract class Task {
             newTask = new Todo(desc, isDone);
             break;
         case "D":
-            try {
-                newTask = new Deadline(desc, date, isDone);
-            } catch (UserInputError e) {
-                Ui.formatOutput(e.getMessage());
-            }
+            newTask = new Deadline(desc, date, isDone);
             break;
         case "E":
-            try {
-                newTask = new Event(desc, date, isDone);
-            } catch (UserInputError e) {
-                Ui.formatOutput(e.getMessage());
-            }
+            newTask = new Event(desc, date, isDone);
             break;
         default:
             newTask = null;
@@ -182,11 +171,11 @@ public abstract class Task {
         return String.format(
             "%s%s%s%s%s%s",
             type,
-            SEPARATE,
+                DELIMITER,
             done,
-            SEPARATE,
+                DELIMITER,
             this.description,
-            SEPARATE
+                DELIMITER
         );
     }
 
@@ -211,7 +200,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark task as done.
+     * Mark the task as done.
      */
     public void markDone() {
         isDone = true;

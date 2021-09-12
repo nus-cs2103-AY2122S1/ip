@@ -12,21 +12,21 @@ import duke.util.Ui;
  */
 public class Duke {
 
-    private static final String LINE =
-        "     ____________________________________________________________\n";
     public final TaskList taskList = new TaskList(Storage.readDatabase());
     private final Ui ui = new Ui(taskList);
 
     public String getResponse(String input) {
         Parser parser = new Parser(input, taskList);
         String output;
+
         try {
             Command command = parser.parse();
             output = command.execute(taskList, ui);
         } catch (UserInputError e) {
-            output = ui.formatOutput(e.getMessage());
+            output = e.getMessage();
         }
+
         assert !output.equals("");
-        return output;
+        return ui.formatOutput(output);
     }
 }

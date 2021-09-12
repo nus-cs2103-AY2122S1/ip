@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.UserInputError;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -29,15 +30,17 @@ public class Storage {
                 return tasks;
             }
 
-            Scanner reader = new Scanner(filePath);
-            while (reader.hasNextLine()) {
-                String data = reader.nextLine();
+            Scanner sc = new Scanner(filePath);
+            while (sc.hasNextLine()) {
+                String data = sc.nextLine();
                 Task task = Task.stringToTask(data);
                 tasks.add(task);
             }
-            reader.close();
+            sc.close();
         } catch (IOException e) {
             System.out.println("read file error");
+        } catch (UserInputError e) {
+            System.out.println("error in task conversion");
         }
 
         return tasks;

@@ -13,7 +13,7 @@ public abstract class Command {
      * @param tasks Current tasklist.
      * @param ui User interface of Duke.
      * @return String output result of user's command.
-     * @throws UserInputError
+     * @throws UserInputError Throws error msg when input is of wrong format and unrecognised by Duke.
      */
     public abstract String execute(TaskList tasks, Ui ui) throws UserInputError;
 }
