@@ -2,8 +2,8 @@ package duke.misc;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;

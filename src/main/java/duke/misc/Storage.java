@@ -42,21 +42,21 @@ public class Storage {
             String[] args = data.split(" // ");
             Boolean isTaskDone = Integer.parseInt(args[1]) != 0;
             switch(args[0]) {
-                case "Todo":
-                    assert args.length == 3;
-                    al.add(new Todo(args[2], isTaskDone));
-                    break;
-                case "Event":
-                    assert args.length == 4;
-                    al.add(new Event(args[2], args[3], isTaskDone));
-                    break;
-                case "Deadline":
-                    assert args.length == 4;
-                    al.add(new Deadline(args[2], args[3], isTaskDone));
-                    break;
-                default:
-                    assert false : "Wrote data wrongly";
-                    break;
+            case "Todo":
+                assert args.length == 3;
+                al.add(new Todo(args[2], isTaskDone));
+                break;
+            case "Event":
+                assert args.length == 4;
+                al.add(new Event(args[2], args[3], isTaskDone));
+                break;
+            case "Deadline":
+                assert args.length == 4;
+                al.add(new Deadline(args[2], args[3], isTaskDone));
+                break;
+            default:
+                assert false : "Wrote data wrongly";
+                break;
             }
         }
         return al;
