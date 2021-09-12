@@ -14,52 +14,66 @@ Graphical User Interface (GUI) to show the output.
 
 ## Features
 
-### help
+### Viewing Help: `help`
 
-Description of the feature.
+Show the help message, which contains some information about the app.
 
-### bye
+Format: `help`
 
-Description of the feature.
+### Exiting the program : `bye`
 
-### list
+Exits the program.
 
-Description of the feature.
+Format: `bye`
 
-### todo, deadline, event
+### Listing all tasks : `list`
 
-Description of the feature.
+Shows a list of all tasks, and details regarding the tasks.
 
-### done
+Format: `list`
 
-Description of the feature.
+### Adding a task
 
-### delete
+Adds any task of the following types into the list of tasks.
 
-Description of the feature.
+#### Todo: `todo`
 
-### find
+Adds a todo to the list of tasks.
 
-Description of the feature.
+Format: `todo [description]`
 
-### sort
+#### Deadline: `deadline`
 
-Description of the feature.
+Adds a deadline to the list of tasks.
 
-## Usage
+Format: `deadline [description] /by [dd/MM/yy] [HHmm]`
 
-### `Keyword` - Describe action
+#### Event: `event`
 
-Describe the action and its outcome.
+Adds an event to the list of tasks.
 
-Example of usage:
+Format: `event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]`
 
-`keyword (optional arguments)`
+### Marking a task as done: `done`
 
-Expected outcome:
+Marks a task as done.
 
-Description of the outcome.
+Format: `done [task number]`
 
-```
-expected output
-```
+### Deleting a task: `delete`
+
+Deletes a task.
+
+Format: `delete [task number]`
+
+### Finding a task: `find`
+
+Finds a list of tasks that match the keyword.
+
+Format: `find [keyword]`
+
+### Sorting the list of tasks: `sort`
+
+Sorts the list by date and time.
+
+Format: `sort [-r]`
