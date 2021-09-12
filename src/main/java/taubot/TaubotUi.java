@@ -18,13 +18,16 @@ public class TaubotUi {
      * Greets user on startup.
      */
     public void greetUser() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String firstLine = "Hello from \n" + logo + "\n";
-        String secondLine = "What can I do for you?";
+        String logo = "████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ████████╗\n" +
+                "╚══██╔══╝██╔══██╗██║   ██║██╔══██╗██╔═══██╗╚══██╔══╝\n" +
+                "   ██║   ███████║██║   ██║██████╔╝██║   ██║   ██║   \n" +
+                "   ██║   ██╔══██║██║   ██║██╔══██╗██║   ██║   ██║   \n" +
+                "   ██║   ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   \n" +
+                "   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   \n" +
+                "                                                    \n" +
+                "\n";
+        String firstLine = "hey, i'm \n" + logo + "\n";
+        String secondLine = "what do you want?";
         System.out.println(firstLine + secondLine);
     }
 
@@ -35,7 +38,7 @@ public class TaubotUi {
      * @param task The task that was marked as done.
      */
     public String markTaskDone(Task task) {
-        return "Nice! I've marked this task as done: \n" + task;
+        return "ok this is done: \n" + task;
     }
 
     public String showError(Exception e) {
@@ -49,10 +52,12 @@ public class TaubotUi {
      * @return String containing a line-separated list of all the tasks.
      */
     public String showSchedule(ArrayList<Task> tasks, String date) {
+        String response = "this is what you have on " + date + ": \n";
         if (tasks.size() == 0) {
-            return "You don't have any tasks on that day! Yay!";
+            return "you got nothing on that day :-)";
+        } else if (date.equals("")) {
+            response = "these are the deadlines and events: \n";
         }
-        String response = "Here are the tasks you have on " + date + ": \n";
         for (int i = 0; i < tasks.size(); i++) {
             response += tasks.get(i).toString() + "\n";
         }
@@ -66,8 +71,8 @@ public class TaubotUi {
      * @param tasksLength The number of tasks left after deletion.
      */
     public String showDeleteTaskMessage(int tasksLength) {
-        return "Noted. I've removed this task: \n"
-                + "Now you have " + tasksLength + " tasks in the list.";
+        return "ok, i've removed this task: \n"
+                + "now you have " + tasksLength + " tasks in the list.";
     }
 
     /**
@@ -78,8 +83,8 @@ public class TaubotUi {
      * @param task The task that was added.
      */
     public String showTaskAddedMessage(int tasksLength, String task) {
-        return "Got it. I've added this task: \n"
-                + task + "\n Now you have "
+        return "ok, i've added this task: \n"
+                + task + "\n now you have "
                 + tasksLength + " tasks in the list.";
     }
 
@@ -89,7 +94,7 @@ public class TaubotUi {
      * @param tasks The tasks.
      */
     public String showTasksWithKeyword(ArrayList<Task> tasks) {
-        String response = "Here are the matching tasks in your list: \n";
+        String response = "these are the tasks you were looking for: \n";
         for (int i = 0; i < tasks.size(); i++) {
             response += tasks.get(i).toString() + "\n";
         }

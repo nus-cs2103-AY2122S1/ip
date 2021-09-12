@@ -26,7 +26,7 @@ public class MessageContainer extends HBox {
     private static final Color blackColour = Color.color(0, 0, 0);
     private static final CornerRadii messageCornerRadius = new CornerRadii(10.0);
     private static final Insets messageInset = new Insets(-5.0);
-    private static final String errorMessagePrefix = "SORRY!";
+    private static final String errorMessagePrefix = "sorry,";
     @FXML
     private Label textMessage;
     private MessageContainer(String text) {

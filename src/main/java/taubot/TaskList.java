@@ -140,26 +140,34 @@ public class TaskList {
      */
     public ArrayList<Task> findTasksUsingDate(LocalDate ...dates) {
         ArrayList<Task> tasksWithDate = new ArrayList<>();
-        if (tasks.size() != 0) {
-            for (int i = 0; i < tasks.size(); i++) {
-                Task currentTask = tasks.get(i);
-                if (dates.length == 0) {
+        if (tasks.size() == 0) {
+            return tasksWithDate;
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (dates.length == 0 && (isDeadline(currentTask) || isEvent(currentTask))) {
+                tasksWithDate.add(currentTask);
+            } else if (isDeadline(currentTask)) {
+                LocalDate date = dates[0];
+                LocalDate deadlineDate = ((Deadline) currentTask).getDate();
+                if (deadlineDate.equals(date)) {
                     tasksWithDate.add(currentTask);
-                } else if (currentTask.getType() == Task.TaskType.DEADLINE) {
-                    LocalDate date = dates[0];
-                    LocalDate deadlineDate = ((Deadline) currentTask).getDate();
-                    if (deadlineDate.equals(date)) {
-                        tasksWithDate.add(currentTask);
-                    }
-                } else if (currentTask.getType() == Task.TaskType.EVENT) {
-                    LocalDate date = dates[0];
-                    LocalDate eventDate = ((Event) currentTask).getDate();
-                    if (eventDate.equals(date)) {
-                        tasksWithDate.add(currentTask);
-                    }
+                }
+            } else if (isEvent(currentTask)) {
+                LocalDate date = dates[0];
+                LocalDate eventDate = ((Event) currentTask).getDate();
+                if (eventDate.equals(date)) {
+                    tasksWithDate.add(currentTask);
                 }
             }
         }
         return tasksWithDate;
+    }
+
+    public boolean isDeadline(Task task) {
+        return task.getType() == Task.TaskType.DEADLINE;
+    }
+    public boolean isEvent(Task task) {
+        return task.getType() == Task.TaskType.EVENT;
     }
 }

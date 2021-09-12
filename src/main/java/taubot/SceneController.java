@@ -32,8 +32,8 @@ public class SceneController extends AnchorPane {
     public void intialiseChat(Taubot tauBot) {
         this.tauBot = tauBot;
         taubotAvatar.setImage(new Image(this.getClass().getResourceAsStream("/images/taubot.png")));
-        MessageContainer helloMessage = MessageContainer.getDukeDialog("Hi there, I'm Taubot! I can help you manage "
-                + "your tasks! How can I help you today :-)?");
+        MessageContainer helloMessage = MessageContainer.getDukeDialog("hey, i'm taubot. how can i help you manage " +
+                "your tasks?");
         conversationBox.getChildren().add(helloMessage);
     }
 

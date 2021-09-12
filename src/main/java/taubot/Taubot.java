@@ -104,14 +104,14 @@ public class Taubot {
                 try {
                     tasksWithDate = tasks.findTasksUsingDate(LocalDate.parse(date));
                 } catch (DateTimeParseException e) {
-                    throw new TaubotException("SORRY! Wrong format for date! Use yyyy-mm-dd format!");
+                    throw new TaubotException("sorry, wrong format for date, use yyyy-mm-dd format");
                 }
                 return ui.showSchedule(tasksWithDate, date);
             }
             tasksWithDate = tasks.findTasksUsingDate();
             return ui.showSchedule(tasksWithDate, date);
         default:
-            throw new TaubotException("SORRY! I'm sorry, but I don't know what that means :-(");
+            throw new TaubotException("sorry, i don't know what that means");
         }
     }
 
@@ -127,9 +127,9 @@ public class Taubot {
             writeDataToDuke();
             return ui.showDeleteTaskMessage(tasks.getTasksLength());
         } catch (IndexOutOfBoundsException e) {
-            throw new TaubotException("SORRY! Index out of range!");
+            throw new TaubotException("sorry, index out of range");
         } catch (NumberFormatException e) {
-            throw new TaubotException("SORRY! Put a number after 'delete'!");
+            throw new TaubotException("sorry, put a number after delete");
         }
     }
 
@@ -150,9 +150,9 @@ public class Taubot {
         String date = parser.findDateInCommand();
         String taskDesc = parser.findTaskDescription();
         if (taskDesc.equals("")) {
-            throw new TaubotException("SORRY! The description cannot be empty.");
+            throw new TaubotException("sorry, description cannot be empty");
         } else if (date.equals("") && taskType != Task.TaskType.TODO) {
-            throw new TaubotException("SORRY! The date cannot be empty.");
+            throw new TaubotException("sorry, date cannot be empty");
         } else if (taskType == Task.TaskType.DEADLINE
                 || taskType == Task.TaskType.EVENT) {
             if (isInDateFormat(date)) {
@@ -166,7 +166,7 @@ public class Taubot {
                 writeDataToDuke();
                 return confirmAdditionOfTask();
             } else {
-                throw new TaubotException("SORRY! You need to put the date in yyyy-mm-dd hhmm format!");
+                throw new TaubotException("sorry, you need to put the date in yyyy-mm-dd hhmm format");
             }
         } else {
             tasks.addTask(taskDesc);
@@ -200,9 +200,9 @@ public class Taubot {
             writeDataToDuke();
             return ui.markTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaubotException("SORRY! The number you gave is out of range!");
+            throw new TaubotException("sorry, the number you gave is out of range");
         } catch (NumberFormatException e) {
-            throw new TaubotException("SORRY! Put a number after 'done'!");
+            throw new TaubotException("sorry, put a number after 'done'");
         }
     }
 
