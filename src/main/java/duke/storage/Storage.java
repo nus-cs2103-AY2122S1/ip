@@ -98,14 +98,12 @@ public class Storage {
             boolean dirCreated = dir.mkdir();
             assert dirCreated;
         }
-        System.out.println("directory created " + dir.toString());
     }
 
     private void createFileAtPath(String path) throws IOException {
         File f = new File(path);
         boolean fileCreated = f.createNewFile();
         assert fileCreated;
-        System.out.println("file created " + f.toString());
     }
 
     private String convertTaskListToString(TaskList xs) {
