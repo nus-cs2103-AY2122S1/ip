@@ -23,4 +23,4 @@ bin/
 /text-ui-test/EXPECTED-UNIX.TXT
 
 # Ignore database
-data/duke.txt
+data/tauBot.txt

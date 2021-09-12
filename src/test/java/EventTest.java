@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Event;
+import taubot.Event;
 
 class EventTest {
 

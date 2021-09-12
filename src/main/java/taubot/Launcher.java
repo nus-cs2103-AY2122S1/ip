@@ -1,4 +1,4 @@
-package duke;
+package taubot;
 
 import javafx.application.Application;
 

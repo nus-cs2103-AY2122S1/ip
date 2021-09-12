@@ -1,4 +1,4 @@
-package duke;
+package taubot;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -8,24 +8,24 @@ import java.util.regex.Pattern;
 
 
 /**
- * Represents the Duke chatbot to store different types of tasks,
+ * Represents the Taubot chatbot to store different types of tasks,
  * todos, deadlines and events.
  */
-public class Duke {
+public class Taubot {
     private static final String DATABASE_PATH = "data/duke.txt";
     private static final Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-"
             + "(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
     private final TaskList tasks;
-    private final DukeUi ui;
+    private final TaubotUi ui;
     private final Storage storage;
     private final Parser parser;
     private boolean isRunning;
 
     /**
-     * Create a <code>Duke</code> object that can reply to commands.
+     * Create a <code>Taubot</code> object that can reply to commands.
      */
-    public Duke() {
-        ui = new DukeUi();
+    public Taubot() {
+        ui = new TaubotUi();
         storage = new Storage(DATABASE_PATH);
         parser = new Parser();
         isRunning = false;
@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke, to respond to commands. The functional
+     * Runs Taubot, to respond to commands. The functional
      * commands are: bye, done, deadline, todo, event
      * delete, list, schedule. Other commands are ignored.
      */
@@ -50,17 +50,17 @@ public class Duke {
             assert firstCommand != null;
             try {
                 ui.respondToUser(respondToFirstCommand(firstCommand));
-            } catch (DukeException e) {
+            } catch (TaubotException e) {
                 System.out.println(ui.showError(e));
             }
         }
     }
 
     /**
-     * Runs Duke when launched from the GUI
+     * Runs Taubot when launched from the GUI
      *
-     * @param command The command for Duke to handle.
-     * @return Response from Duke.
+     * @param command The command for Taubot to handle.
+     * @return Response from Taubot.
      */
     public String runGui(String command) {
         try {
@@ -69,7 +69,7 @@ public class Duke {
             String firstCommand = parser.getFirstCommand();
             assert firstCommand != null;
             return respondToFirstCommand(firstCommand);
-        } catch (DukeException e) {
+        } catch (TaubotException e) {
             return e.getMessage();
         }
     }
@@ -104,32 +104,32 @@ public class Duke {
                 try {
                     tasksWithDate = tasks.findTasksUsingDate(LocalDate.parse(date));
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("SORRY! Wrong format for date! Use yyyy-mm-dd format!");
+                    throw new TaubotException("SORRY! Wrong format for date! Use yyyy-mm-dd format!");
                 }
                 return ui.showSchedule(tasksWithDate, date);
             }
             tasksWithDate = tasks.findTasksUsingDate();
             return ui.showSchedule(tasksWithDate, date);
         default:
-            throw new DukeException("SORRY! I'm sorry, but I don't know what that means :-(");
+            throw new TaubotException("SORRY! I'm sorry, but I don't know what that means :-(");
         }
     }
 
     /**
-     * Delete task from Duke.
+     * Delete task from Taubot.
      *
-     * @throws DukeException Thrown whenever user requests delete of a
+     * @throws TaubotException Thrown whenever user requests delete of a
      * task out of range or not a number. e.g. <code>delete hi</code>
      */
-    public String deleteTask() throws DukeException {
+    public String deleteTask() throws TaubotException {
         try {
             tasks.deleteTask(parser.findCommandIndex());
             writeDataToDuke();
             return ui.showDeleteTaskMessage(tasks.getTasksLength());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("SORRY! Index out of range!");
+            throw new TaubotException("SORRY! Index out of range!");
         } catch (NumberFormatException e) {
-            throw new DukeException("SORRY! Put a number after 'delete'!");
+            throw new TaubotException("SORRY! Put a number after 'delete'!");
         }
     }
 
@@ -138,21 +138,21 @@ public class Duke {
     }
 
     /**
-     * Method to add task to duke.Duke.
+     * Method to add task to duke.Taubot.
      *
-     * @throws DukeException Thrown when the task is not given a description
+     * @throws TaubotException Thrown when the task is not given a description
      * or when the user does not give a date for an event or deadline task,
      * or when the user formats the date wrongly.
      */
-    public String addTask() throws DukeException {
+    public String addTask() throws TaubotException {
         String firstCommand = parser.getFirstCommand();
         Task.TaskType taskType = convertToTaskType(firstCommand);
         String date = parser.findDateInCommand();
         String taskDesc = parser.findTaskDescription();
         if (taskDesc.equals("")) {
-            throw new DukeException("SORRY! The description cannot be empty.");
+            throw new TaubotException("SORRY! The description cannot be empty.");
         } else if (date.equals("") && taskType != Task.TaskType.TODO) {
-            throw new DukeException("SORRY! The date cannot be empty.");
+            throw new TaubotException("SORRY! The date cannot be empty.");
         } else if (taskType == Task.TaskType.DEADLINE
                 || taskType == Task.TaskType.EVENT) {
             if (isInDateFormat(date)) {
@@ -166,7 +166,7 @@ public class Duke {
                 writeDataToDuke();
                 return confirmAdditionOfTask();
             } else {
-                throw new DukeException("SORRY! You need to put the date in yyyy-mm-dd hhmm format!");
+                throw new TaubotException("SORRY! You need to put the date in yyyy-mm-dd hhmm format!");
             }
         } else {
             tasks.addTask(taskDesc);
@@ -186,12 +186,12 @@ public class Duke {
     }
 
     /**
-     * Method for duke.Duke to mark a task done.
+     * Method for duke.Taubot to mark a task done.
      *
-     * @throws DukeException Thrown when user gives an index out of range
+     * @throws TaubotException Thrown when user gives an index out of range
      * or not a number after the command done.
      */
-    private String markDone() throws DukeException {
+    private String markDone() throws TaubotException {
         try {
             int taskIndex = parser.findCommandIndex();
             assert taskIndex >= 0;
@@ -200,14 +200,14 @@ public class Duke {
             writeDataToDuke();
             return ui.markTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("SORRY! The number you gave is out of range!");
+            throw new TaubotException("SORRY! The number you gave is out of range!");
         } catch (NumberFormatException e) {
-            throw new DukeException("SORRY! Put a number after 'done'!");
+            throw new TaubotException("SORRY! Put a number after 'done'!");
         }
     }
 
     /**
-     * Method used by Duke to convert task commands
+     * Method used by Taubot to convert task commands
      * into the TaskType enum.
      *
      * @param command The command to be converted.
@@ -231,13 +231,13 @@ public class Duke {
     }
 
     /**
-     * Main method for Duke.
+     * Main method for Taubot.
      *
      * @param args Optional arguments for CLI.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.ui.greetUser();
-        duke.run();
+        Taubot tauBot = new Taubot();
+        tauBot.ui.greetUser();
+        tauBot.run();
     }
 }

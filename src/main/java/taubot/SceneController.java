@@ -1,4 +1,4 @@
-package duke;
+package taubot;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,18 +21,18 @@ public class SceneController extends AnchorPane {
     @FXML
     private Button sendButton;
     @FXML
-    private ImageView dukeAvatar = new ImageView();
-    private Duke duke;
+    private ImageView taubotAvatar = new ImageView();
+    private Taubot tauBot;
 
     /**
      * Initialise chat when user launches GUI.
      *
-     * @param duke The Duke object interacting with the user.
+     * @param tauBot The Taubot object interacting with the user.
      */
-    public void intialiseChat(Duke duke) {
-        this.duke = duke;
-        dukeAvatar.setImage(new Image(this.getClass().getResourceAsStream("/images/duke.png")));
-        MessageContainer helloMessage = MessageContainer.getDukeDialog("Hi there, I'm Duke! I can help you manage "
+    public void intialiseChat(Taubot tauBot) {
+        this.tauBot = tauBot;
+        taubotAvatar.setImage(new Image(this.getClass().getResourceAsStream("/images/taubot.png")));
+        MessageContainer helloMessage = MessageContainer.getDukeDialog("Hi there, I'm Taubot! I can help you manage "
                 + "your tasks! How can I help you today :-)?");
         conversationBox.getChildren().add(helloMessage);
     }
@@ -40,7 +40,7 @@ public class SceneController extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.runGui(input);
+        String response = tauBot.runGui(input);
         if (response.equals("Goodbye!")) {
             Platform.exit();
             return;

@@ -1,10 +1,10 @@
-package duke;
+package taubot;
 import java.util.ArrayList;
 
 /**
  * Represents the DukeUI to interact with the user.
  */
-public class DukeUi {
+public class TaubotUi {
 
     public void respondToUser(String response) {
         System.out.println(response);

@@ -1,7 +1,7 @@
-package duke;
+package taubot;
 
 /**
- * Represents the Duke parser to interpret user commands.
+ * Represents the Taubot parser to interpret user commands.
  */
 public class Parser {
 
@@ -52,9 +52,9 @@ public class Parser {
         int startingIndexOfDate = -1;
         for (int i = 0; i < currentLine.length; i++) {
             if (currentLine[i].equals("/by") && currentLine[0].equals("event")) {
-                throw new DukeException("Error: Use /at for events!");
+                throw new TaubotException("Error: Use /at for events!");
             } else if (currentLine[0].equals("deadline") && currentLine[i].equals("/at")) {
-                throw new DukeException("Error: Use /by for deadlines!");
+                throw new TaubotException("Error: Use /by for deadlines!");
             } else if (currentLine[i].equals("/by") || currentLine[i].equals("/at")) {
                 startingIndexOfDate = i + 1;
                 break;

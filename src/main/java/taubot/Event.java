@@ -1,4 +1,4 @@
-package duke;
+package taubot;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,8 +12,8 @@ public class Event extends Task {
     protected final LocalDate date;
     protected final String time;
     /**
-     * Returns a <code>Duke</code> object that can reply to
-     * commands. Duke can save the tasks at the specified <code>filePath</code>.
+     * Returns a <code>Taubot</code> object that can reply to
+     * commands. Taubot can save the tasks at the specified <code>filePath</code>.
      *
      * @param description The description of the event task.
      * @param ld The <code>LocalDate</code> object to represent

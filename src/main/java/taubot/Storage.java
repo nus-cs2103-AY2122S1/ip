@@ -1,4 +1,4 @@
-package duke;
+package taubot;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,14 +8,14 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * Represents Duke's storage to store the list.
+ * Represents Taubot's storage to store the list.
  */
 public class Storage {
     private final String filePath;
 
     /**
      * Returns a <code>Storage</code> object that can store tasks.
-     * Duke stores the tasks at the specified <code>filePath</code>.
+     * Taubot stores the tasks at the specified <code>filePath</code>.
      * @param filePath The file path to store the data.
      */
     public Storage(String filePath) {
@@ -40,7 +40,7 @@ public class Storage {
             while (s.hasNext()) {
                 String currentLine = s.nextLine();
                 String[] commands = currentLine.split(",");
-                Task.TaskType type = Duke.convertToTaskType(commands[0]);
+                Task.TaskType type = Taubot.convertToTaskType(commands[0]);
                 switch (type) {
                 case TODO:
                     tasks.addTask(commands[2]);
@@ -64,9 +64,9 @@ public class Storage {
     /**
      * Creates the file if file does not exist at the <code>filePath</code>.
      *
-     * @throws DukeException Thrown if there is an <code>IOException</code>
+     * @throws TaubotException Thrown if there is an <code>IOException</code>
      */
-    public void createFileIfNotFound() throws DukeException {
+    public void createFileIfNotFound() throws TaubotException {
         String[] fileSplit = this.filePath.split("/");
         StringBuilder directory = new StringBuilder();
         for (int i = 0; i < fileSplit.length - 1; i++) {
@@ -78,7 +78,7 @@ public class Storage {
         try {
             yourFile.createNewFile();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new TaubotException(e.getMessage());
         }
     }
 
@@ -86,9 +86,9 @@ public class Storage {
      * Writes the data to the hard disk.
      *
      * @param tasks The task list to write to the hard disk.
-     * @throws DukeException Thrown when <code>IOException</code> is encountered.
+     * @throws TaubotException Thrown when <code>IOException</code> is encountered.
      */
-    public void writeData(TaskList tasks) throws DukeException {
+    public void writeData(TaskList tasks) throws TaubotException {
         try {
             this.createFileIfNotFound();
             FileWriter fw = new FileWriter(this.filePath);
@@ -114,7 +114,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new TaubotException(e.getMessage());
         }
 
     }
