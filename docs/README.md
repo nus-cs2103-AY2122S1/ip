@@ -1,6 +1,6 @@
 # User Guide
 
-![UI Screenshot](./Ui.png)
+<img src="Ui.png" alt="UI Screenshot" width="144"/>
 
 Duke is a task manager in the form of a chat bot.
 It can keep track of all your to-dos, events, and deadlines.
