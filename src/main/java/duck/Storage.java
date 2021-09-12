@@ -61,34 +61,34 @@ public class Storage {
 
             // Read through all saved tasks
             while (currLine != null) {
-                String[] taskString = currLine.split(" \\| ", 3);
+                String[] taskString = currLine.split(" \\| ", 4);
                 Task newTask;
 
                 // Current task is a Deadline
                 if (taskString[0].equals("D")) {
-                    String[] deadlineDetails = taskString[2].split(" ");
-                    if (deadlineDetails.length == 2) {
-                        newTask = new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
-                    } else if (deadlineDetails.length == 3) {
-                        newTask = new Deadline(deadlineDetails[0],
-                                LocalDate.parse(deadlineDetails[1]), LocalTime.parse(deadlineDetails[2]));
+                    String[] deadlineDetails = taskString[3].split(" ");
+                    if (deadlineDetails.length == 1) {
+                        newTask = new Deadline(taskString[2], LocalDate.parse(deadlineDetails[0]));
+                    } else if (deadlineDetails.length == 2) {
+                        newTask = new Deadline(taskString[2],
+                                LocalDate.parse(deadlineDetails[0]), LocalTime.parse(deadlineDetails[1]));
                     } else {
                         throw new DuckException(DuckExceptionType.DB_READ);
                     }
 
                 // Current task is an Event
                 } else if (taskString[0].equals("E")) {
-                    String[] periodDetails = taskString[2].split(" ");
-                    if (periodDetails.length == 3) {
-                        newTask = new Event(periodDetails[0],
-                                LocalDate.parse(periodDetails[1]), LocalDate.parse(periodDetails[2]));
+                    String[] periodDetails = taskString[3].split(" ");
+                    if (periodDetails.length == 2) {
+                        newTask = new Event(taskString[2],
+                                LocalDate.parse(periodDetails[0]), LocalDate.parse(periodDetails[1]));
+                    } else if (periodDetails.length == 3) {
+                        newTask = new Event(taskString[2], LocalDate.parse(periodDetails[0]),
+                                LocalTime.parse(periodDetails[1]), LocalTime.parse(periodDetails[2]));
                     } else if (periodDetails.length == 4) {
-                        newTask = new Event(periodDetails[0], LocalDate.parse(periodDetails[1]),
-                                LocalTime.parse(periodDetails[2]), LocalTime.parse(periodDetails[3]));
-                    } else if (periodDetails.length == 5) {
-                        newTask = new Event(periodDetails[0],
-                                LocalDate.parse(periodDetails[1]), LocalTime.parse(periodDetails[2]),
-                                LocalDate.parse(periodDetails[3]), LocalTime.parse(periodDetails[4]));
+                        newTask = new Event(taskString[2],
+                                LocalDate.parse(periodDetails[0]), LocalTime.parse(periodDetails[1]),
+                                LocalDate.parse(periodDetails[2]), LocalTime.parse(periodDetails[3]));
                     } else {
                         throw new DuckException(DuckExceptionType.DB_READ);
                     }
