@@ -16,7 +16,7 @@ public class Duke {
     protected TaskList taskList;
 
     /**
-     * Constructor initialise storage, task list and ui instances to be used
+     * Initialises storage, task list and ui instances to be used
      * when duke is running.
      */
     public Duke() {

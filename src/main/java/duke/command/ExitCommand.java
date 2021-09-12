@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Save task list data to local storage
+     * Saves task list data to local storage
      *
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.

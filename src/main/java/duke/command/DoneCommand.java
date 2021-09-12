@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     private final int taskNumber;
 
     /**
-     * Construct a command that marks a task as complete.
+     * Constructs a command that marks a task as complete.
      *
      * @param taskNumber task to be marked as complete.
      */

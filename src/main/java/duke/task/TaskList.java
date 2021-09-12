@@ -139,7 +139,7 @@ public class TaskList {
     }
 
     /**
-     * Filter tasks in the task list with name that includes the search term.
+     * Filters tasks in the task list with name that includes the search term.
      *
      * @param searchTerm search term that user wants to extract.
      * @return Task array comprising of all tasks with search term in task name.

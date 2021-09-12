@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 public class Launcher {
     /**
-     * Launch javafx application.
+     * Launches javafx application.
      *
      * @param args command line arguments passed into application.
      */
