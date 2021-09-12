@@ -1,37 +1,14 @@
 # User Guide
 TauBot is a desktop app for managing your tasks, which can be used through the Command Line Interface (CLI) or the Graphical User Interface (GUI) for a more familiar chatting experience!
+<img width="704" alt="Ui" src="https://user-images.githubusercontent.com/61085398/132985278-c504b348-da99-41f1-bdf7-d764a8f32b3e.png">
 
-## Setting up in Intellij
-
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/taubot.Taubot.java` file, right-click it, and choose `Run tauBot.Taubot.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-```
-hey, i'm
-████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ████████╗
-╚══██╔══╝██╔══██╗██║   ██║██╔══██╗██╔═══██╗╚══██╔══╝
-   ██║   ███████║██║   ██║██████╔╝██║   ██║   ██║   
-   ██║   ██╔══██║██║   ██║██╔══██╗██║   ██║   ██║   
-   ██║   ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   
-   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   
-                                                    
-what do you want?
-```
+## Content
+1. [Quick Start](#quick-start)
+2. [Command Summary](#command-summary)
+3. [Features](#features) 
 
 ## Quick Start
-### CLI
-1. To run the CLI app, run `tauBot.Taubot.main()`.
-2. Type the command in the CLI and press Enter to execute it. Try adding your first task!
 
-### GUI
-1. To run the GUI, run `tauBot.Launcher.main()`. The GUI similar to this should appear in a few seconds:
 ![Screenshot 2021-09-12 at 12 39 56 PM](https://user-images.githubusercontent.com/61085398/132972393-841cfde1-c4aa-4f4a-b18f-adfa6d86ee3d.png)
 2. Type the command in the GUI message field and press Enter to execute it. Try adding your first task! 
 
@@ -42,17 +19,32 @@ what do you want?
 4. `delete 1` Deletes the first task from the list.
 5. `bye` Exits the program.
 
+## Command Summary
+
+Action | Format | Examples
+------------ | ------------- | -------------
+[todo](#adding-a-todo) | `todo TASK_DESCRIPTION` | `todo eat apple`
+[event](#adding-an-event) | `event TASK_DESCRIPTION /at DATE TIME` | `event khai's wedding /at 2024-12-12 0900`
+[deadline](#adding-a-deadline) | `deadline TASK_DESCRIPTION /by DATE TIME` | `deadline maths homework /by 2021-09-13 1300`
+[list](#list-all-your-tasks) | `list` | ~
+[done](#marking-a-task-as-done) | `done INDEX` | `done 1`
+[delete](#delete-a-task) | `delete INDEX` | `delete 1`
+[find](#find-a-task-by-keyword) | `find KEYWORD` | `find homework`
+[schedule](#view-the-schedule-on-a-certain-date) | `schedule` or `schedule DATE` | `schedule` `schedule 2021-09-12`
+[bye](#exit-the-program-bye) | `bye` | ~
+
+
 ## Features
 In Taubot, there are 3 different tasks, `todo`, `event`, `deadline`.
 
-### Adding a `todo` task
+### Adding a `todo`
 Format: `todo TASK_DESCRIPTION`  
 
 Examples:
 * `todo cook lunch`
 * `todo mop the floor :-(`
 
-### Adding a `event` task
+### Adding an `event`
 Format: `event TASK_DESCRIPTION /at DATE TIME`  
 * The date must be in yyyy-mm-dd format.
 * The time must be in hhmm format.  
@@ -61,7 +53,7 @@ Examples:
 * `event charity run /at 2021-09-17 0600`
 * `event khai's wedding /at 2024-12-12 0900`
 
-### Adding a `deadline` task
+### Adding a `deadline`
 Format: `deadline TASK_DESCRIPTION /by DATE TIME`    
 * The date must be in yyyy-mm-dd format.
 * The time must be in hhmm format.  
@@ -116,20 +108,6 @@ Examples:
 
 ### Exit the program `bye`
 Format: `bye`
-
-## Command Summary
-
-Action | Format | Examples
------------- | ------------- | -------------
-todo | `todo TASK_DESCRIPTION` | `todo eat apple`
-event | `event TASK_DESCRIPTION /at DATE TIME` | `event khai's wedding /at 2024-12-12 0900`
-deadline | `deadline TASK_DESCRIPTION /by DATE TIME` | `deadline maths homework /by 2021-09-13 1300`
-list | `list` | ~
-done | `done INDEX` | `done 1`
-delete | `delete INDEX` | `delete 1`
-find | `find KEYWORD` | `find homework`
-schedule | `schedule` or `schedule DATE` | `schedule` `schedule 2021-09-12`
-bye | `bye` | ~
 
 ## Acknowledgements
 The GUI was designed with inspiration from Apple's Messages app interace.
