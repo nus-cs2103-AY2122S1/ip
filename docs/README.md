@@ -3,6 +3,7 @@
 > "just keep swimming" - dory
 
 dory is a chatbot that handles your queries and helps you to remember everything so that you don't have to!
+
 ___
 ___
 
@@ -13,7 +14,9 @@ ___
 -   mark tasks as done
 -   find tasks  
 -   delete tasks
+
 ___
+
 ## ⌨️ how to use
 
 ### `todo` - Adding a 'ToDo' task
@@ -142,5 +145,6 @@ ___
 1.  download it from  [_here_](https://github.com/kvihashini/ip/releases/tag/v0.2)
 2.  double-click it
 3.  have fun!
+
 ___
 ___
