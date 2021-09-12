@@ -12,7 +12,8 @@ public class ParserTest {
             Parser.parseInputs(" ");
             fail();
         } catch (DukeException e) {
-            assertEquals("Say something I can understand!! >:(", e.getMessage());
+            assertEquals("Meeseeks are not born fumbling in this world for meaning Jerry! \n"
+                    + "Say something I can understand!! >:(", e.getMessage());
         }
     }
 }
