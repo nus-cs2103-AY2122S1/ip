@@ -74,7 +74,6 @@ public class Parser {
      * @throws IOException If can't write to file.
      */
     private String[] snooze(String input) throws IOException {
-        //format: snooze 1 /to 2/2/2022 2222
         String[] splitString = input.split(" ", 2);
         ArrayList<String> results = new ArrayList<>();
         if (splitString.length == 1) {
@@ -102,26 +101,34 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return new String[]{"OOPS!!! You have entered an invalid date or time!"};
         }
-
         if (task instanceof Todo) {
             return new String[]{"OOPS!!! Todos don't have schedules"};
         }
-        if (task instanceof Deadline) {
-            Deadline newDeadline = new Deadline(task.description, newDate);
-            tasks.set(taskIndex - 1, newDeadline);
-            storage.writeEntireFile();
-            results.add(newDeadline.toString());
-        }
-        if (task instanceof Event) {
-            Event newEvent = new Event(task.description, newDate);
-            tasks.set(taskIndex - 1, newEvent);
-            storage.writeEntireFile();
-            results.add(newEvent.toString());
-        }
 
+        results.addAll(snoozeTask(task, taskIndex, newDate));
         return results.toArray(new String[0]);
     }
 
+    private ArrayList<String> snoozeTask(Task task, int taskIndex, LocalDateTime newDate) {
+        ArrayList<String> results = new ArrayList<>();
+        try {
+            if (task instanceof Deadline) {
+                Deadline newDeadline = new Deadline(task.description, newDate);
+                tasks.set(taskIndex - 1, newDeadline);
+                storage.writeEntireFile();
+                results.add(newDeadline.toString());
+            }
+            if (task instanceof Event) {
+                Event newEvent = new Event(task.description, newDate);
+                tasks.set(taskIndex - 1, newEvent);
+                storage.writeEntireFile();
+                results.add(newEvent.toString());
+            }
+        } catch (IOException e) {
+            results.add("OOPS!!! There was an error processing your input. Please try again!");
+        }
+        return results;
+    }
     /**
      * Adds task to file
      * Format (todo): todo {description}
@@ -204,7 +211,7 @@ public class Parser {
         String[] splitString = input.split(" ", 2);
         int index = Integer.parseInt(splitString[1]) - 1;
         Task removedTask;
-        if (index > tasks.size() + 1) {
+        if (index >= tasks.size() || index <= 0) {
             return "OOPS!!! The task doesn't exist!\n";
         } else {
             removedTask = tasks.remove(index);
@@ -220,11 +227,11 @@ public class Parser {
                 + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
-    private String setTaskAsDone(String input) throws DukeException {
+    private String setTaskAsDone(String input) {
         String[] splitString = input.split(" ", 2);
         int i = Integer.parseInt(splitString[1]) - 1;
         if (i + 1 <= 0 || i + 1 > tasks.size()) {
-            throw new DukeException("Task not found!");
+            return "\tOOPS!!! Task not found!";
         }
         tasks.get(i).markAsDone();
         try {
