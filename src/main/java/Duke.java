@@ -28,7 +28,7 @@ public class Duke {
     String getResponse(String input) {
         String output;
         if (input.equals("bye")) {
-            output = "Bye. Hope to see you again soon!";
+            output = "Goodbye Aladdin! \nIf you need anything, just rub the lamp. \nOh btw, atb getting Jasmine, that I can't help you.";
         } else {
             output = parser.run(input);
         } 
