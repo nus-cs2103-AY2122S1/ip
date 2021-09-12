@@ -21,8 +21,8 @@ tasks quicker than traditional GUI apps.
 
 ### Add a ToDo task: `todo`
 
-Adds a task that you intend to do later to Duke's list.</br>
-Format: `todo (DESCRIPTION)`</br>
+Adds a task that you intend to do later to Duke's list.  
+Format: `todo (DESCRIPTION)`  
 Examples:
 * `todo borrow book`
 * `todo buy bread from store`
@@ -33,33 +33,33 @@ Adds a task that has a known deadline to Duke's list.</br>
 Specify the date and time of the deadline in the following format:
 YYYY-MM-DD, HH:mm<br/>
 If no time is specified, Duke will automatically set midnight of the date to be
-the time.</br>
-Format: `deadline (DESCRIPTION) /by (DATETIME)`</br>
+the time.  
+Format: `deadline (DESCRIPTION) /by (DATETIME)`  
 Examples:
 * `deadline finish homework /by 2021-09-11, 13:00`
 * `deadline return book /by 2021-08-20`
 
 ### Add an Event task: `event`
 
-Adds a task that has a duration to Duke's list.</br>
+Adds a task that has a duration to Duke's list.  
 Specify the date and time of the event in the following format:
 YYYY-MM-DD, HH:mm<br/>
-A start and end time must be specified for the event.</br>
-Format: `deadline (DESCRIPTION) /at (STARTTIME) - (ENDTIME)`</br>
+A start and end time must be specified for the event.  
+Format: `event (DESCRIPTION) /at (STARTTIME) - (ENDTIME)`  
 Examples:
 * `event group meeting /at 2021-10-06, 13:00 - 14:00`
 * `event class reunion /at 2021-09-25, 14:00 - 17:00`
 
 ### Lists all tasks: `list`
 
-Lists all the tasks that you have added to Duke's list.</br>
-Format: `list`</br>
+Lists all the tasks that you have added to Duke's list.  
+Format: `list`  
 
 ### Mark a task as done: `done`
 
 Marks a task in Duke's list as done. Please supply the number of the task to be
-marked as done. The task number is its position in Duke's list.</br>
-Format: `done (TASKNUMBER)`</br>
+marked as done. The task number is its position in Duke's list.  
+Format: `done (TASKNUMBER)`  
 Examples:
 * `done 1`
 * `done 5`
@@ -67,16 +67,16 @@ Examples:
 ### Delete a task: `delete`
 
 Deletes a task in Duke's list. Please supply the number of the task to be deleted.
-The task number is its position in Duke's list.</br>
-Format: `delete (TASKNUMBER)`</br>
+The task number is its position in Duke's list.  
+Format: `delete (TASKNUMBER)`  
 Examples:
 * `delete 1`
 * `delete 5`
 
 ### Find a task: `find`
 
-Locates a task in Duke's list with a given keyword.</br>
-Format: `find (KEYWORD)`</br>
+Locates a task in Duke's list with a given keyword.  
+Format: `find (KEYWORD)`  
 Examples:
 * `find book`
 * `find group meeting`
@@ -85,12 +85,12 @@ Examples:
 
 Updates a task in Duke's list by changing its description or its date and time.
 You cannot change tasks between types e.g. changing a ToDo task to a Deadline
-task is not allowed etc. </br>
+task is not allowed etc.   
 You may choose to change only the description, only the date and time or both.
 Please supply the number of the task to be updated. The task number is its position
 in Duke's list.
-</br>
-Format: `update (TASKNUMBER) /d (DESCRIPTION) /t (DATETIME)`</br>
+  
+Format: `update (TASKNUMBER) /d (DESCRIPTION) /t (DATETIME)`  
 Examples:
 * `update 1 /d throw out the trash`
 * `update 3 /t 2021-09-15, 12:00`
@@ -98,8 +98,8 @@ Examples:
 
 ### Close Duke: `bye`
 
-Closes Duke.</br>
-Format: `bye`</br>
+Closes Duke.  
+Format: `bye`  
 
 ### Saving the data
 
