@@ -45,8 +45,11 @@ public class Parser {
         commandList.put("done", this::done);
         commandList.put("delete", this::delete);
         commandList.put("todo", this::todo);
+        commandList.put("t", this::todo);
         commandList.put("deadline", this::deadline);
+        commandList.put("d", this::deadline);
         commandList.put("event", this::event);
+        commandList.put("e", this::event);
         commandList.put("help", this::help);
         commandList.put("clear", this::clear);
         commandList.put("find", this::find);
