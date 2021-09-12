@@ -31,7 +31,7 @@ public class TagCommand extends Command {
     @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
-            int index = Integer.parseInt(input.substring(4)) - 1;
+            int index = Integer.parseInt(input.trim().substring(4)) - 1;
             if (index > list.getSize() || index <= 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
             }

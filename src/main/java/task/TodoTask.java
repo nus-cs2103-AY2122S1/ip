@@ -52,7 +52,7 @@ public class TodoTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[T]" + super.getTaskState() + "\n" + this.tags.toString();
+        return "[T]" + super.getTaskState() + "\n" + this.tags.toString().trim();
     }
 
     /**
@@ -66,6 +66,7 @@ public class TodoTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + (tags.toString());
+                + tags.toString()
+                + ",";
     }
 }

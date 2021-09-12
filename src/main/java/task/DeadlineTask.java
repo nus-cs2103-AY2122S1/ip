@@ -77,7 +77,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + super.getTaskState() + " (By: " + this.getTime() + ")" + "\n" + this.tags.toString();
+        return "[D]" + super.getTaskState() + " (By: " + this.getTime() + ")" + "\n" + this.tags.toString().trim();
     }
 
     /**
@@ -91,8 +91,9 @@ public class DeadlineTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + this.getTime()
+                + tags.toString()
                 + ","
-                + (tags.toString());
+                + this.getTime()
+                + ",";
     }
 }

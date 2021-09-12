@@ -118,16 +118,18 @@ public class Task {
      * @return A new Task object initialised from given local data.
      */
     public static Task parseFromStorage(String task) {
+        System.out.println(task);
         String[] splitTask = task.split(",");
+        System.out.println(splitTask.length);
         String taskType = splitTask[0];
 
         switch (taskType) {
         case "T":
             return new TodoTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
         case "D":
-            return new DeadlineTask(splitTask[2], splitTask[3], splitTask[4], splitTask[1].equals("1"));
+            return new DeadlineTask(splitTask[2], splitTask[4], splitTask[3], splitTask[1].equals("1"));
         case "E":
-            return new EventTask(splitTask[2], splitTask[3], splitTask[4], splitTask[1].equals("1"));
+            return new EventTask(splitTask[2], splitTask[4], splitTask[3], splitTask[1].equals("1"));
         default:
             return new Task("");
         }

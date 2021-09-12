@@ -41,7 +41,7 @@ public class TagList {
      */
     @Override
     public String toString() {
-        String result = "";
+        String result = " ";
         for (int i = 0; i < getSize(); i++) {
             result += this.tags.get(i).toString() + " ";
         }

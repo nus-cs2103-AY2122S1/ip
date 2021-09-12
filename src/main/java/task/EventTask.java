@@ -77,7 +77,7 @@ public class EventTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + super.getTaskState() + " (At: " + this.getTime() + ")" + "\n" + this.tags.toString();
+        return "[E]" + super.getTaskState() + " (At: " + this.getTime() + ")" + "\n" + this.tags.toString().trim();
     }
 
     /**
@@ -91,8 +91,9 @@ public class EventTask extends Task {
                 + (isDone ? "1," : "0,")
                 + task
                 + ","
-                + this.getTime()
+                + tags.toString()
                 + ","
-                + (tags.toString());
+                + this.getTime()
+                + ",";
     }
 }
