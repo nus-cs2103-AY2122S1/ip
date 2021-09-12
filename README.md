@@ -225,6 +225,7 @@ Peace out!
 ```
 
 ## Command Summary
+
 | Command           | Formats                       |
 | :---------------- | :----------:                  |
 | todo              | `todo` [task]                   |
