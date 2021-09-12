@@ -2,6 +2,7 @@ package virushade.tasks;
 
 import java.util.ArrayList;
 
+import virushade.Sorter;
 import virushade.Storage;
 import virushade.StringManipulator;
 import virushade.VirushadeException;
@@ -15,7 +16,7 @@ public class TaskList {
     /**
      * This is the file name of our file that stores data on TaskList.
      */
-    private static Storage TASK_LIST_STORAGE;
+    private static Storage taskListStorage;
 
     /**
      * This variable keeps track of the size of the TaskList.
@@ -28,7 +29,7 @@ public class TaskList {
      * @throws VirushadeException Thrown when there is trouble parsing the data file in storage.
      */
     public TaskList(Storage storage) throws VirushadeException {
-        TASK_LIST_STORAGE = storage;
+        taskListStorage = storage;
         storage.load(TASKS);
         listCount = TASKS.size();
     }
@@ -38,7 +39,7 @@ public class TaskList {
      * @param text The input string to write into the file.
      */
     private static void updateFile(String text) throws VirushadeException {
-        TASK_LIST_STORAGE.update(text);
+        taskListStorage.update(text);
     }
 
     /**
@@ -86,7 +87,7 @@ public class TaskList {
 
             // The add function would not reach this line at all.
             default:
-                addedTask = new Task(addedTaskDescription, false);
+                throw new VirushadeException("ERROR!!! Something happened when adding task!!!");
             }
 
             TASKS.add(addedTask);
@@ -163,6 +164,24 @@ public class TaskList {
         } catch (NumberFormatException e) {
             // Tells the user that he did not enter a number.
             throw new VirushadeException("Please enter an integer after 'done ' instead.");
+        }
+    }
+
+    /**
+     * Sorts the tasks according to the keyword provided.
+     * @param sortType The keyword which determines how the sorting is to be done.
+     * @return A string notification on successful sorting.
+     * @throws VirushadeException If there are problems with the input string.
+     */
+    public static String sort(String sortType) throws VirushadeException {
+        if (sortType.equals("task")) {
+            Sorter.sortByTask(TASKS);
+            return "Tasks sorted by each category successfully.";
+        } else if (sortType.equals("name")) {
+            Sorter.sortByName(TASKS);
+            return "Tasks sorted by name successfully.";
+        } else {
+            throw new VirushadeException("Please specify what you want to sort by. (e.g. 'task' or 'name')");
         }
     }
 
