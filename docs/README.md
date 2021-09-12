@@ -24,6 +24,7 @@ Graphical User Interface (GUI) to show the output.
     * [Deleting a task: `delete`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deleting-a-task-delete)
     * [Finding a task: `find`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#finding-a-task-find)
     * [Sorting the list of tasks: `sort`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#sorting-the-list-of-tasks-sort)
+* [Command Summary](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#command-summary)
 
 ## Features
 
@@ -178,3 +179,18 @@ Note:
        cause [`Todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) tasks to be at the top
 3. To sort by reverse order, input the `-r` flag
 4. The `-r` flag is optional
+
+## Command Summary
+
+Command | Format
+------- | ------
+[List](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list) | `list`
+[Add Todo](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) | `todo [description]`
+[Add Deadline](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline) | `deadline [description] /by [dd/MM/yy] [HHmm]`
+[Add Event](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#event-event) | `event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]`
+[Done](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#marking-a-task-as-done-done) | `done [task number]`
+[Delete](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deleting-a-task-delete) | `delete [task number]`
+[Find](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#finding-a-task-find) | `find [keyword]`
+[Sort](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#sorting-the-list-of-tasks-sort) | `sort <-r>`
+[Exit](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#exiting-the-program--bye) | `bye`
+[Help](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#viewing-help-help) | `help`
