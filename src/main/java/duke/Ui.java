@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Class handles printing message to user
  */
 public class Ui {
-    Scanner myScanner;
+    private Scanner myScanner;
 
     public Ui() {
         myScanner = new Scanner(System.in);
@@ -21,15 +21,6 @@ public class Ui {
      */
     public static String printLine() {
         return "--------------------------------------------------";
-    }
-
-    public static String printBigIcon() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + "\n" + Ui.printLine();
     }
 
     /**

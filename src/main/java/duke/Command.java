@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public abstract class Command {
@@ -33,8 +32,15 @@ public abstract class Command {
         return new Add(t);
     }
 
+    /**
+     * Get response from UserInput
+     *
+     * @param userInput
+     * @return Response including message and information
+     * @throws DukeException
+     */
     public static Response process(UserInput userInput) throws DukeException {
-        switch (userInput.pre_command) {
+        switch (userInput.preCommand) {
         case NULL_COMMAND:
             return NOTHING.execute();
         case BYE_COMMAND:
@@ -42,17 +48,17 @@ public abstract class Command {
         case LIST_COMMAND:
             return LIST.execute();
         case FIND_COMMAND:
-            return find(userInput.body_command).execute();
+            return find(userInput.bodyCommand).execute();
         case DONE_COMMAND:
-            return done(userInput.body_command).execute();
+            return done(userInput.bodyCommand).execute();
         case DELETE_COMMAND:
-            return delete(userInput.body_command).execute();
+            return delete(userInput.bodyCommand).execute();
         case TODO_COMMAND:
-            return add(Task.todo(userInput.body_command)).execute();
+            return add(Task.todo(userInput.bodyCommand)).execute();
         case DEADLINE_COMMAND:
-            return add(Task.deadline(userInput.body_command)).execute();
+            return add(Task.deadline(userInput.bodyCommand)).execute();
         case EVENT_COMMAND:
-            return add(Task.event(userInput.body_command)).execute();
+            return add(Task.event(userInput.bodyCommand)).execute();
         default:
             throw new DukeException.DukeIllegalArgumentException(userInput);
         }
@@ -68,8 +74,8 @@ public abstract class Command {
 
         // The case there is no body_command.
         if (parts.length == 1) {
-            String pre_command = parts[0].equals("") ? NULL_COMMAND : parts[0];
-            return new UserInput(pre_command, NULL_COMMAND);
+            String preCommand = parts[0].equals("") ? NULL_COMMAND : parts[0];
+            return new UserInput(preCommand, NULL_COMMAND);
         }
 
         return new UserInput(parts[0], parts[1]);
@@ -82,7 +88,7 @@ public abstract class Command {
         @Override
         protected Response execute() {
             ResponseMessage message = new ResponseMessage("Say something to me :(");
-            return new Response(true,  message);
+            return new Response(true, message);
         }
 
         @Override
@@ -121,7 +127,10 @@ public abstract class Command {
                 throw new DukeException.DukeEmptyNote(t.taskKind());
             }
 
-            java.util.List<Task> matchingList = Duke.todoList.stream().filter(task -> task.getTaskName().equals(this.t.getTaskName())).collect(Collectors.toList());
+            java.util.List<Task> matchingList = Duke.todoList
+                    .stream()
+                    .filter(task -> task.getTaskName().equals(this.t.getTaskName()))
+                    .collect(Collectors.toList());
             if (!matchingList.isEmpty()) {
                 responseMessage.appendMessage("Seem like you have already had the task with the same name:\n    "
                         + matchingList.get(0) + "\n"
@@ -170,7 +179,10 @@ public abstract class Command {
         @Override
         protected Response execute() {
             ResponseMessage responseMessage = new ResponseMessage("Here are the matching tasks in your list:");
-            java.util.List<Task> matchingList = Duke.todoList.stream().filter(task -> task.getTaskName().contains(search)).collect(Collectors.toList());
+            java.util.List<Task> matchingList = Duke.todoList
+                    .stream()
+                    .filter(task -> task.getTaskName().contains(search))
+                    .collect(Collectors.toList());
             for (int i = 0; i < matchingList.size(); i++) {
                 responseMessage.appendMessage(i + 1 + ". " + matchingList.get(i).toString());
             }
@@ -191,7 +203,8 @@ public abstract class Command {
         }
 
         @Override
-        protected Response execute() throws DukeException.DukeIndexOutOfBoundsException, DukeException.DukeParseCommandException {
+        protected Response execute() throws DukeException.DukeIndexOutOfBoundsException,
+                DukeException.DukeParseCommandException {
             ResponseMessage responseMessage = new ResponseMessage();
             try {
                 int taskIndex = Integer.parseInt(index) - 1;
@@ -200,10 +213,11 @@ public abstract class Command {
                 Task task = Duke.todoList.get(taskIndex);
                 if (task.isDone()) {
                     responseMessage.appendMessage("OOPS!!! Seems like you marked the task done already:\n    " + task);
+                } else {
+                    // Make the task done
+                    task.done();
+                    responseMessage.appendMessage("Nice! I've marked this task as done:\n    " + task);
                 }
-                // Make the task done
-                task.done();
-                responseMessage.appendMessage("Nice! I've marked this task as done:\n    " + task);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException.DukeIndexOutOfBoundsException();
             } catch (NumberFormatException e) {
@@ -226,7 +240,8 @@ public abstract class Command {
         }
 
         @Override
-        protected Response execute() throws DukeException.DukeParseCommandException, DukeException.DukeIndexOutOfBoundsException {
+        protected Response execute() throws DukeException.DukeParseCommandException,
+                DukeException.DukeIndexOutOfBoundsException {
             ResponseMessage responseMessage = new ResponseMessage();
             try {
                 int taskIndex = Integer.parseInt(index) - 1;

@@ -13,8 +13,8 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! The description of a " + t + " cannot be empty." +
-                    "\nTry something like: \"" + t.getExample() + "\"";
+            return "OOPS!!! The description of a " + t + " cannot be empty."
+                    + "\nTry something like: \"" + t.getExample() + "\"";
         }
     }
 
@@ -30,8 +30,8 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! The description of a " + t + " need to have keyword " + t.note() +
-                    "\nTry something like: \"" + t.getExample() + "\"";
+            return "OOPS!!! The description of a " + t + " need to have keyword " + t.note()
+                    + "\nTry something like: \"" + t.getExample() + "\"";
         }
     }
 
@@ -47,8 +47,8 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! Something went wrong with " + t + " that I cannot understand" +
-                    "\nTry something like: \"" + t.getExample() + "\"";
+            return "OOPS!!! Something went wrong with " + t + " that I cannot understand"
+                    + "\nTry something like: \"" + t.getExample() + "\"";
         }
     }
 
@@ -64,7 +64,8 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! Something went wrong with command " + "\"" + command.getCommandName() +"\"" + " that I cannot understand";
+            return "OOPS!!! Something went wrong with command " + "\"" + command.getCommandName()
+                    + "\"" + " that I cannot understand";
         }
     }
 
@@ -72,7 +73,7 @@ public class DukeException extends Exception {
      * Class handles if the task Deadline or Event doesn't specify the date
      */
     public static class DukeIllegalArgumentException extends DukeException {
-        UserInput input;
+        private UserInput input;
 
         protected DukeIllegalArgumentException(UserInput input) {
             this.input = input;
@@ -80,7 +81,7 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! I don't understand: " + input.pre_command;
+            return "OOPS!!! I don't understand: " + input.preCommand;
         }
     }
 
@@ -93,8 +94,8 @@ public class DukeException extends Exception {
 
         @Override
         public String toString() {
-            return "OOPS!!! Seem like you only have " + Duke.todoList.size() + " task(s) :)\n" +
-                    "Try with number from 1 to " +  Duke.todoList.size();
+            return "OOPS!!! Seem like you only have " + Duke.todoList.size() + " task(s) :)\n"
+                    + "Try with number from 1 to " + Duke.todoList.size();
         }
     }
 

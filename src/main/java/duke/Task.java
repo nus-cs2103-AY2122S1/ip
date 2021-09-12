@@ -7,7 +7,7 @@ import java.time.format.FormatStyle;
 import java.util.Optional;
 
 public abstract class Task {
-    final static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final String taskName;
     private final LocalDate date;
     private boolean isDone;
@@ -59,7 +59,7 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyTask
      * @throws DukeException.DukeEmptyNote
      */
-    protected static Task deadline(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeParseTaskException {
+    protected static Task deadline(String bodyCommand) throws DukeException {
         if (bodyCommand == Command.NULL_COMMAND) {
             throw new DukeException.DukeEmptyTask(TaskKind.DEADLINE);
         }
@@ -72,7 +72,7 @@ public abstract class Task {
 
         try {
             String date = parts[1];
-            LocalDate localDate = LocalDate.parse(date, dtf);
+            LocalDate localDate = LocalDate.parse(date, DTF);
             return new Deadline(taskName, localDate, false);
         } catch (DateTimeParseException e) {
             throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
@@ -87,7 +87,7 @@ public abstract class Task {
      * @throws DukeException.DukeEmptyTask
      * @throws DukeException.DukeEmptyNote
      */
-    protected static Task event(String bodyCommand) throws DukeException.DukeEmptyTask, DukeException.DukeEmptyNote, DukeException.DukeParseTaskException {
+    protected static Task event(String bodyCommand) throws DukeException {
         if (bodyCommand == Command.NULL_COMMAND) {
             throw new DukeException.DukeEmptyTask(TaskKind.EVENT);
         }
@@ -98,9 +98,9 @@ public abstract class Task {
             throw new DukeException.DukeEmptyNote(TaskKind.EVENT);
         }
 
-        try{
+        try {
             String date = parts[1];
-            LocalDate localDate = LocalDate.parse(date, dtf);
+            LocalDate localDate = LocalDate.parse(date, DTF);
             return new Event(taskName, localDate, false);
         } catch (DateTimeParseException e) {
             throw new DukeException.DukeParseTaskException(TaskKind.DEADLINE);
@@ -142,7 +142,7 @@ public abstract class Task {
                 date = null;
                 break;
             default:
-                date = LocalDate.parse(parts[3], dtf);
+                date = LocalDate.parse(parts[3], DTF);
             }
 
             return Task.of(taskKind, isDone, taskName, date);
@@ -179,8 +179,8 @@ public abstract class Task {
      * @return Encoded string
      */
     public String encode() {
-        return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName +
-                " , " + Optional.ofNullable(this.date).map(date -> date.format(dtf)).orElse("null");
+        return this.taskKind().shortName + " , " + this.isDone + " , " + this.taskName
+                + " , " + Optional.ofNullable(this.date).map(date -> date.format(DTF)).orElse("null");
     }
 
     /**
@@ -276,8 +276,6 @@ public abstract class Task {
             return shortName + " " + isDone + " " + super.taskName + "" + deadline;
         }
     }
-
-    ;
 
     private static class Event extends Task {
         private Event(String taskName, LocalDate date, boolean isDone) {

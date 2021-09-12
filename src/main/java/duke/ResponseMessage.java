@@ -1,7 +1,7 @@
 package duke;
 
 public class ResponseMessage {
-    private final static String NULL_STRING = "";
+    private static final String NULL_STRING = "";
     private String message;
 
     ResponseMessage() {
@@ -12,12 +12,12 @@ public class ResponseMessage {
         this.message = message;
     }
 
-    public void appendMessage(String s) {
+    protected void appendMessage(String s) {
         if (message.equals(NULL_STRING)) {
-            this.message += s ;
+            this.message += s;
             return;
         }
-        this.message += "\n" + s ;
+        this.message += "\n" + s;
     }
 
     @Override

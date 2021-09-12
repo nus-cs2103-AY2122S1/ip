@@ -30,6 +30,11 @@ public class Duke {
         storage.downloadDataToTodoList();
     }
 
+    /**
+     * Run Duke with CLI (Command Line Interface)
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
         duke.run();

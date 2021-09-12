@@ -16,7 +16,7 @@ public class DukeTest {
     }
 
     @Test
-    public void DukeDummyTest() {
+    public void dukeDummyTest() {
         try {
             new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
             assertTrue(true);
@@ -26,13 +26,13 @@ public class DukeTest {
     }
 
     @Test
-    public void Hi_Test() {
+    public void hiTest() {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         String input = "hi";
         String expected =
-                "--------------------------------------------------\n" +
-                "OOPS!!! I don't understand: hi\n" +
-                "--------------------------------------------------";
+                "--------------------------------------------------\n"
+                        + "OOPS!!! I don't understand: hi\n"
+                        + "--------------------------------------------------";
         System.out.println(duke.getResponse(input));
         System.out.println(expected);
         System.out.println(Objects.equals(duke.getResponse(input), expected));
@@ -40,16 +40,16 @@ public class DukeTest {
     }
 
     @Test
-    public void AddDeadline_Test() {
+    public void addDeadlineTest() {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
-        String expected = "--------------------------------------------------\n" +
-                "OOPS!!! I don't understand: hi\n" +
-                "--------------------------------------------------";
+        String expected = "--------------------------------------------------\n"
+                + "OOPS!!! I don't understand: hi\n"
+                + "--------------------------------------------------";
         assertEquals(duke.getResponse("\"return book /by 2022-02-18\""), expected);
     }
 
     @Test
-    public void DoneCommandTest() {
+    public void doneCommandTest() {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         Storage storage = duke.storage;
         try {
@@ -69,7 +69,7 @@ public class DukeTest {
     }
 
     @Test
-    public void DeleteTodo_StorageTest() {
+    public void deleteTodoTest() {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         Storage storage = duke.storage;
         try {
@@ -89,7 +89,7 @@ public class DukeTest {
     }
 
     @Test
-    public void Find_Test() {
+    public void findTest() {
         Duke duke = new Duke("/Users/hungkhoaitay/Duke/data/dukeTest.txt");
         Storage storage = duke.storage;
         try {
@@ -101,10 +101,10 @@ public class DukeTest {
             duke.getResponse("todo these");
             duke.getResponse("todo hasagi");
 
-            String expected = "Here are the matching tasks in your list:\n" +
-                    "1. [T] [ ] this\n" +
-                    "2. [T] [ ] that\n" +
-                    "3. [T] [ ] these";
+            String expected = "Here are the matching tasks in your list:\n"
+                    + "1. [T] [ ] this\n"
+                    + "2. [T] [ ] that\n"
+                    + "3. [T] [ ] these";
 
             assertEquals(expected, duke.getResponse("find th").toString());
             // assertTrue(expected.equals(duke.getResponse("find th")));
