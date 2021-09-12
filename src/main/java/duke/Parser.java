@@ -38,7 +38,7 @@ public class Parser {
             if (input.startsWith("done")) {
                 return setTaskAsDone(input);
             } else if (input.startsWith("delete")) {
-                return new String[]{deleteTask(input)};
+                return deleteTask(input);
             } else if (input.startsWith("list")) {
                 return list();
             } else if (input.startsWith("find")) {
@@ -207,12 +207,21 @@ public class Parser {
                 + "\n\tNow you have " + tasks.size() + " tasks in the list.");
         return results.toArray(new String[0]);
     }
-    private String deleteTask(String input) {
+    private String[] deleteTask(String input) {
         String[] splitString = input.split(" ", 2);
-        int index = Integer.parseInt(splitString[1]) - 1;
+        if (splitString.length == 1) {
+            return new String[]{"OOPS!!! Please enter a valid index"};
+        }
+        int index;
+        try {
+            index = Integer.parseInt(splitString[1]) - 1;
+        } catch (NumberFormatException e) {
+            return new String[]{"OOPS!!! Please enter a valid index"};
+        }
+
         Task removedTask;
         if (index >= tasks.size() || index < 0) {
-            return "OOPS!!! The task doesn't exist!\n";
+            return new String[]{"OOPS!!! The task doesn't exist!\n"};
         } else {
             removedTask = tasks.remove(index);
         }
@@ -223,8 +232,8 @@ public class Parser {
             e.printStackTrace();
         }
 
-        return "\tNoted. I've removed this task:\n" + "\t\t" + removedTask.toString()
-                + "\n" + "\tNow you have " + tasks.size() + " tasks in the list.";
+        return new String[]{"\tNoted. I've removed this task:\n" + "\t\t" + removedTask.toString()
+                + "\n" + "\tNow you have " + tasks.size() + " tasks in the list."};
     }
 
     private String[] setTaskAsDone(String input) {

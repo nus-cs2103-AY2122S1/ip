@@ -17,7 +17,7 @@ public class Storage {
     }
 
     void write(String line) throws IOException {
-        FileWriter writer = new FileWriter(this.filename, true);
+        FileWriter writer = new FileWriter("./" + this.filename, true);
         writer.write(line + "\n");
         writer.close();
     }
@@ -83,7 +83,7 @@ public class Storage {
      * @throws IOException If unable to create write to file
      */
     public void writeEntireFile() throws IOException {
-        FileWriter writer = new FileWriter(this.filename);
+        FileWriter writer = new FileWriter("./" + this.filename, true);
         for (Task task : tasks) {
             writer.write(task.save() + "\n");
         }
