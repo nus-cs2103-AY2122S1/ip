@@ -23,6 +23,7 @@ List of features:
   9. setFormat
   10. clear 
   11. bye
+  12. help
 
 ## Adding a task: todo/deadline/event
 Duke allows you to categorise your tasks into 3 types: todo, deadline and event
@@ -152,3 +153,13 @@ Format: `bye`
 Example:
 
 `bye`
+
+## List all possible commands: `help`
+
+Generate the list of commands supported by Duke.
+
+Format `help`
+
+Example:
+
+`help`
