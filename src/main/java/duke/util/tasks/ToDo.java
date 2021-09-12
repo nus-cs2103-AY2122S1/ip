@@ -36,4 +36,15 @@ public class ToDo extends Task {
 
         return Task.Label.T + Task.DELIMITER + d + Task.DELIMITER + this.name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj instanceof ToDo) {
+            ToDo t = (ToDo) obj;
+            return t.name.equals(this.name);
+        }
+        return false;
+
+    }
 }

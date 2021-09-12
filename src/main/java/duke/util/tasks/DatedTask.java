@@ -98,4 +98,14 @@ public abstract class DatedTask extends Task {
     public LocalDate getDate() {
         return this.localDate;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof DatedTask) {
+            DatedTask dt = (DatedTask) o;
+            return dt.localDate.equals(this.localDate) && dt.name.equals(this.name);
+        }
+        return false;
+    }
 }
