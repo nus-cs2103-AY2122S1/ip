@@ -16,7 +16,7 @@ public class TaskList {
     /**
      * This is the file name of our file that stores data on TaskList.
      */
-    private static Storage TASK_LIST_STORAGE;
+    private static Storage taskListStorage;
 
     /**
      * This variable keeps track of the size of the TaskList.
@@ -29,7 +29,7 @@ public class TaskList {
      * @throws VirushadeException Thrown when there is trouble parsing the data file in storage.
      */
     public TaskList(Storage storage) throws VirushadeException {
-        TASK_LIST_STORAGE = storage;
+        taskListStorage = storage;
         storage.load(TASKS);
         listCount = TASKS.size();
     }
@@ -39,7 +39,7 @@ public class TaskList {
      * @param text The input string to write into the file.
      */
     private static void updateFile(String text) throws VirushadeException {
-        TASK_LIST_STORAGE.update(text);
+        taskListStorage.update(text);
     }
 
     /**

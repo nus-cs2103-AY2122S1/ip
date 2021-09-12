@@ -75,7 +75,8 @@ public class StringManipulator {
             int hours = timeIn24hRepresentation / 100;
             int minutes = timeIn24hRepresentation % 100;
             boolean isOutOfBounds = hours < 0 || hours > 24 || minutes < 0 || minutes > 60;
-            boolean cannotConvertToTime = Integer.parseInt(timeString.substring(2, 3)) > 5;
+        //    boolean cannotConvertToTime = Integer.parseInt(timeString.substring(2, 3)) > 5;
+            boolean cannotConvertToTime = timeString.length() != 4;
 
             if (isOutOfBounds || cannotConvertToTime) {
                 return timeString;
@@ -147,5 +148,51 @@ public class StringManipulator {
         } catch (DateTimeParseException e) {
             return inputString;
         }
+    }
+
+    /**
+     * Compares two string by their ASCII values, and returns either 0, -1, or 1.
+     * @param firstString The first string.
+     * @param secondString The second string.
+     * @return 0 if both strings are of the same value.
+     *         1 if the second string is considered larger than the first.
+     *         -1 if the second string is considered smaller than the first.
+     */
+    public static int compareString(String firstString, String secondString) {
+        if (isEmptyString(firstString) || isEmptyString(secondString)) {
+            if (isEmptyString(firstString) && isEmptyString(secondString)) {
+                return 0;
+            } else if (isEmptyString(firstString)) {
+                return 1;
+            } else if (isEmptyString(secondString)) {
+                return -1;
+            }
+        }
+
+        char charOfFirst = firstString.charAt(0);
+        char charOfSecond = secondString.charAt(0);
+        int result = compareChar(charOfFirst, charOfSecond);
+
+        if (result == 0) {
+            return compareString(firstString.substring(1), secondString.substring(1));
+        }
+
+        return result;
+    }
+
+    /**
+     * Compares two characters by their ASCII values, and returns either 0, -1 or 1.
+     * @param firstChar The first character
+     * @param secondChar The second character
+     * @return 0 if both characters have the same value.
+     *         1 if the second character has a larger value.
+     *         -1 if the second character has a smaller value.
+     */
+    public static int compareChar(char firstChar, char secondChar) {
+        return Character.compare(secondChar, firstChar);
+    }
+
+    private static boolean isEmptyString(String string) {
+        return string.equals("");
     }
 }
