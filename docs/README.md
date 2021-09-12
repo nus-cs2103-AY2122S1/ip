@@ -173,4 +173,5 @@ Expected input format: bye
 `reschedule 2 21/09/2021`
 
 **Will result in the following dialog box:**
+
 ![Image of UI](https://github.com/wanyu-l/ip/blob/master/docs/ByeWindow.png)
