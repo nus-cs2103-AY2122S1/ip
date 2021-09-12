@@ -1,6 +1,0 @@
-T - 0 - read mag
-T - 0 - eat
-T - 0 - homework
-T - 0 - help
-T - 0 - eat book
-T - 0 - eat e

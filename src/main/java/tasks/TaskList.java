@@ -21,6 +21,8 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
     }
+    
+    
 
     /**
      * The output that will be shown when the input command is list.
@@ -62,8 +64,20 @@ public class TaskList {
     public String todoTask(String str) throws DukeException {
         try {
             assert str.length() >= 5;
-            str = str.substring(5);
-            Task task = new Todo(str);
+            Task.Priority priority;
+            
+            if (str.contains("HIGH") || str.contains("high")) {
+                priority = Task.Priority.HIGH;
+                str = str.substring(5, str.length() - 4);
+            } else if (str.contains("MEDIUM") || str.contains("medium")) {
+                priority = Task.Priority.MEDIUM;
+                str = str.substring(5, str.length() - 6);
+            } else {
+                priority = Task.Priority.LOW;
+                str = str.substring(5);
+            }
+            
+            Task task = new Todo(str, priority);
             tasks.add(task);
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
@@ -85,17 +99,25 @@ public class TaskList {
     public String deadlineTask(String str) {
         try {
             int slashIndex = str.indexOf("/");
-            assert slashIndex >= 0 && slashIndex <= str.length();
+            //assert slashIndex >= 0 && slashIndex <= str.length();
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             String time = str.substring(slashIndex + 14);
-            Task task = new Deadline(str.substring(0, slashIndex), Storage.formatDate(day) + time);
+            Task.Priority priority;
+            if (str.contains("HIGH") || str.contains("high")) {
+                priority = Task.Priority.HIGH;
+            } else if (str.contains("MEDIUM") || str.contains("medium")) {
+                priority = Task.Priority.MEDIUM;
+            } else {
+                priority = Task.Priority.LOW;
+            }
+            Task task = new Deadline(str.substring(0, slashIndex), Storage.formatDate(day) + time, priority);
             tasks.add(task);
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
                     + task
                     + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
-            return "☹ OOPS!!! The description of a deadline cannot be empty.\n" + 
+            return "☹ OOPS!!! The description of a event cannot be empty.\n" + 
                     "If you have entered a day instead of a date, please enter a date in the format: yyyy-mm-dd.";
         } catch (DateTimeParseException e) {
             return "☹ OOPS!!! Please use the date format: yyyy-mm-dd.";
@@ -114,7 +136,15 @@ public class TaskList {
             int slashIndex = str.indexOf("/");
             assert slashIndex >= 0;
             String day = str.substring(slashIndex + 4, slashIndex + 14);
-            Task task = new Events(str.substring(0, slashIndex), day);
+            Task.Priority priority;
+            if (str.contains("HIGH") || str.contains("high")) {
+                priority = Task.Priority.HIGH;
+            } else if (str.contains("MEDIUM") || str.contains("medium")) {
+                priority = Task.Priority.MEDIUM;
+            } else {
+                priority = Task.Priority.LOW;
+            }
+            Task task = new Events(str.substring(0, slashIndex), day, priority);
             tasks.add(task);
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"

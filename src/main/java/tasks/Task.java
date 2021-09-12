@@ -6,11 +6,17 @@ package tasks;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
+    
+    public enum Priority {
+        HIGH, MEDIUM, LOW
+    }
 
 
-    public Task(String description) {
+    public Task(String description, Priority priority) {
         this.description = description;
         this.isDone = false;
+        this.priority = priority;
     }
 
     /**
@@ -28,6 +34,14 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
+    /**
+     * Method to retrieve the priority of an task.
+     * @return The priority level of a task.
+     */
+    public Priority getPriority() {
+        return priority;
+    } 
 
     /**
      * A method to get the number that indicated the status of a task
@@ -52,6 +66,6 @@ public class Task {
      * @return the String representation of a Deadline
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return " [" + this.getStatusIcon() + "] " + this.description;
     }
 }
