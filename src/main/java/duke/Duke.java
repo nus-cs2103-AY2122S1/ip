@@ -170,8 +170,8 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(true);
-        stage.setMinHeight(700.0);
-        stage.setMinWidth(500.0);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
         stage.show();
 
         formatStage(mainLayout);
@@ -183,9 +183,9 @@ public class Duke extends Application {
      * @param mainLayout the AnchorPane from the stage used in Duke.
      */
     private void formatStage(AnchorPane mainLayout) {
-        mainLayout.setPrefSize(500.0, 700.0);
+        mainLayout.setPrefSize(400.0, 700.0);
 
-        scrollPane.setPrefSize(415, 565);
+        scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -194,7 +194,7 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(375.0);
+        userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
