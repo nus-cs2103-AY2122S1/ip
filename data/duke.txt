@@ -1,5 +1,4 @@
-T | 1 | do not join sports club
-D | 0 | gym | Aug 25 2021, 8 am
-T | 0 | something
-T | 0 | something else
-T | 0 | one more thing
+T | 1 | read book
+D | 0 | return book | Jun 6 2021, 8 am
+E | 0 | project meeting | Aug 6 2021, 2 pm
+T | 1 | join sports club
