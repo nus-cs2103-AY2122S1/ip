@@ -49,6 +49,26 @@ Shows a list of all tasks, and details regarding the tasks.
 
 Format: `list`
 
+Sample output:
+
+```
+[T][X] read book
+[D][ ] return book (by: Jun 6 2021, 5:12 PM)
+[E][ ] project meeting (at: Aug 6 2021, 2:00 PM - 6:00 PM)
+```
+
+Interpretation
+
+* First `[ ]` bracket
+    * `[T]` refers to a `Todo`
+    * `[D]` refers to a `Deadline`
+    * `[E]` refers to a `Event`
+* Second `[ ]` bracket
+    * `[X]` refers to a task which is done
+    * `[ ]` refers to a task which is not done
+* Task description
+* (Optional) Any date/time specified by the user
+
 <br/>
 
 ### Adding a task
