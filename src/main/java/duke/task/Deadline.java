@@ -53,6 +53,19 @@ public class Deadline extends Task {
     }
 
     /**
+     * Makes a deep copy of itself
+     * @return Deadline deep copy of itself
+     */
+    @Override
+    public Task duplicate() {
+        Task t = new Deadline(getName(), this.by);
+        if (getCompletion().equals("X")) {
+            t.toggleCompleted();
+        }
+        return t;
+    }
+
+    /**
      * Converts the deadline object into a string
      * @return A string containing the type (duke.task.Deadline), completion status and time
      * of the deadline to be done by.

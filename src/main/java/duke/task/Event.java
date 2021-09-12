@@ -36,6 +36,19 @@ public class Event extends Task {
     }
 
     /**
+     * Makes deep copy of itself
+     * @return Event deep copy of itself
+     */
+    @Override
+    public Task duplicate() {
+        Task t = new Event(getName(), this.at);
+        if (getCompletion().equals("X")) {
+            t.toggleCompleted();
+        }
+        return t;
+    }
+
+    /**
      * Converts the event object into a string.
      * @return A string containing the type (event), completion status and time
      * at which event is held.

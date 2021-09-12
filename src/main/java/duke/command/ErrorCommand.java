@@ -19,4 +19,9 @@ public class ErrorCommand extends Command implements Revertible{
     public String revert(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
         return "Already at the initial state!!";
     }
+
+    @Override
+    public String histDesc() {
+        return "No description for error";
+    }
 }

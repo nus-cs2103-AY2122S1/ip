@@ -64,6 +64,8 @@ public abstract class Task {
      */
     public abstract String getInfo();
 
+    public abstract Task duplicate();
+
     /**
      * Converts task into a string
      * @return String containing completion status and name.

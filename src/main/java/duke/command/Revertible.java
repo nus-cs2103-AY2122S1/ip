@@ -7,4 +7,6 @@ import duke.general.Ui;
 
 public interface Revertible {
     String revert(Tasklist tasks, Storage storage, Ui ui) throws DukeException;
+
+    String histDesc();
 }

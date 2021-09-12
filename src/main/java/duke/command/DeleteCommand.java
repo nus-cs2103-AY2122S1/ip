@@ -16,6 +16,7 @@ public class DeleteCommand extends Command implements Revertible{
     private String[] input;
     private TaskType type;
     private ArrayList<Task> state;
+    private Task task;
 
     public DeleteCommand(String[] input) {
         assert(input != null) : "Input into command was null!";
@@ -28,6 +29,7 @@ public class DeleteCommand extends Command implements Revertible{
         this.state = tasks.copyList();
 
         Task t = tasks.deleteTask(this.input);
+        task = t;
         type = t.getTaskType();
         storage.modifySave(tasks.getList());
         tasks.addHistory(this);
@@ -39,6 +41,11 @@ public class DeleteCommand extends Command implements Revertible{
         assert(type != null) : "Tasktype of Command not initialized during execution!";
         tasks.replaceList(state);
         storage.modifySave(tasks.getList());
-        return "Successfully undone delete";
+        return "Successfully undone delete on: " + task;
+    }
+
+    @Override
+    public String histDesc() {
+        return "Delete Task: " + task;
     }
 }

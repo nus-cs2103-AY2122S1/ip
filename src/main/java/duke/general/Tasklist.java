@@ -122,7 +122,11 @@ public class Tasklist {
     }
 
     public ArrayList<Task> copyList() {
-        return new ArrayList<>(list);
+        ArrayList<Task> copy = new ArrayList<>();
+        for (Task t : list) {
+            copy.add(t.duplicate());
+        }
+        return copy;
     }
 
     public void replaceList(ArrayList<Task> lst) {

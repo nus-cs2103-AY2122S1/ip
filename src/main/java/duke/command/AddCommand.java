@@ -16,6 +16,8 @@ public class AddCommand extends Command implements Revertible {
     private TaskType type;
     private String[] input;
     private ArrayList<Task> state;
+    private Task task;
+
 
     /**
      * Constructs the AddCommand object
@@ -25,7 +27,6 @@ public class AddCommand extends Command implements Revertible {
     public AddCommand(TaskType t, String[] inputSplit) {
         this.type = t;
         this.input = inputSplit;
-
     }
 
     @Override
@@ -35,6 +36,7 @@ public class AddCommand extends Command implements Revertible {
 
         // main execution
         Task t = tasks.addTask(this.type, this.input);
+        task = t;
         storage.appendSave(t);
 
         tasks.addHistory(this);
@@ -46,6 +48,11 @@ public class AddCommand extends Command implements Revertible {
         // replace with previous state
         tasks.replaceList(this.state);
         storage.modifySave(tasks.getList());
-        return "Successfully undone add!";
+        return "Successfully undone add on: " + task;
+    }
+
+    @Override
+    public String histDesc() {
+        return "Added Task: " + task;
     }
 }

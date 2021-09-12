@@ -31,6 +31,19 @@ public class ToDo extends Task {
     }
 
     /**
+     * Makes a deep copy of the ToDo object
+     * @return ToDo deep copy
+     */
+    @Override
+    public Task duplicate() {
+        Task t = new ToDo(getName());
+        if (getCompletion().equals("X")) {
+            t.toggleCompleted();
+        }
+        return t;
+    }
+
+    /**
      * Converts the duke.task.ToDo task into a string
      * @return String with the type of the task (todo) and the name of the task.
      */
