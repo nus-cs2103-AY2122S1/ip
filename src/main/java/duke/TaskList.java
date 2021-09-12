@@ -30,6 +30,7 @@ public class TaskList {
      * @param task The task to be added to tasklist
      */
     public void add(Task task) {
+        assert getTaskList() != null : "taskList not inititialized";
         if (!taskList.contains(task)) {
             this.taskList.add(task);
             this.counter++;
@@ -43,6 +44,7 @@ public class TaskList {
      * @return Deleted task
      */
     public Task delete(int index) {
+        assert getTaskList() != null : "taskList not inititialized";
         Task deletedTask = this.taskList.get(index - 1);
         this.taskList.remove(index - 1);
         this.counter--;
@@ -56,6 +58,7 @@ public class TaskList {
      * @return The required task
      */
     public Task get(int index) {
+        assert getTaskList() != null : "taskList not inititialized";
         return this.taskList.get(index);
     }
 
@@ -84,6 +87,7 @@ public class TaskList {
      * @return The task set as done
      */
     public Task setDone(int index) {
+        assert getTaskList() != null : "taskList not inititialized";
         this.taskList.get(index - 1).setDone();
         return this.taskList.get(index - 1);
     }
@@ -95,6 +99,7 @@ public class TaskList {
      * @return Tasklist of all tasks whose description match input string
      */
     public TaskList findTasks(String searchedString) {
+        assert getTaskList() != null : "taskList not inititialized";
         String[] searchedStrArr = searchedString.split(" ");
         TaskList tasksFound = new TaskList();
 
