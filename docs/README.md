@@ -20,7 +20,7 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
     - `done 1`: Marks the first item on the list as done.
     - `delete 1`: Deletes the first item on the list.
     - `bye`: Exits the app.
-6. Refer to the Features below for details of each command.
+6. Refer to the [Features](#Features) below for details of each command.
 
 ## Features
 
