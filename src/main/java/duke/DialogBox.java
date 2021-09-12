@@ -24,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String person) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,6 +36,13 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        if (person.equals("dory")) {
+            dialog.setStyle("-fx-background-color: #fff1f2 ;\n"
+                    + "-fx-padding: 10 10 10 10;\n"
+                    + "-fx-background-radius: 15;\n"
+                    + "-fx-label-padding: 3\n"
+                    + "-fx-text-fill: black");
+        }
     }
 
     /**
@@ -49,11 +56,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "user");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "dory");
         db.flip();
         return db;
     }

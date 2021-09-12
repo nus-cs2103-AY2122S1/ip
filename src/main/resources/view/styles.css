@@ -1,0 +1,11 @@
+#dialogContainer {
+    -fx-background-color: #36454f;
+}
+
+.button {
+    -fx-background-color: #708090;
+}
+
+.label {
+    -fx-border-radius: 10 10 0 0;
+}
