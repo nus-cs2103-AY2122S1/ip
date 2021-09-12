@@ -14,12 +14,21 @@ import java.util.stream.Stream;
  */
 public class Ui {
     /**
+     * Displays the program welcome message.
+     *
+     * @return The program welcome message.
+     */
+    public String showWelcome() {
+        return "Welcome to Duke!";
+    }
+
+    /**
      * Displays the program closing message.
      *
      * @return The program closing message.
      */
     public String showBye() {
-        return "See you next time!";
+        return "See you next time! Program closing...";
     }
 
     /**
