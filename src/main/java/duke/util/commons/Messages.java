@@ -3,15 +3,25 @@ package duke.util.commons;
 public class Messages {
 
 
-    public static final String LOGO = " ____        _        \n"
+    public static final String OLDLOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String GREETINGS = "Greetings! I'm Duke\n\tWhat can I do for you?";
+    public static final String GREETINGS = "Greetings! I'm Sariel\nWhat can I do for you?";
     public static final String HLINE = "\t----------------------------";
 
 
+
+    public static final String LOGO = "\n" +
+            " _____            _      _ \n" +
+            "/  ___|          (_)    | |\n" +
+            "\\ `--.  __ _ _ __ _  ___| |\n" +
+            " `--. \\/ _` | '__| |/ _ \\ |\n" +
+            "/\\__/ / (_| | |  | |  __/ |\n" +
+            "\\____/ \\__,_|_|  |_|\\___|_|\n" +
+            "                           \n" +
+            "                           \n";
 
 
     //Messages that have to be formatted to include tasks
@@ -44,5 +54,6 @@ public class Messages {
 
     public static final String EXPECTED_DATE_FORMAT = "Expected date format YYYY MM DD";
     public static final String NO_DATE_SELECTED = "Please select a date.";
+
 
 }

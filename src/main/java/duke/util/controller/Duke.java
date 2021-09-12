@@ -18,6 +18,7 @@ import duke.util.tasks.Task;
 import duke.util.tasks.TaskList;
 import duke.util.tasks.ToDo;
 import duke.util.ui.Ui;
+import duke.util.windows.DialogBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
@@ -75,11 +76,13 @@ public class Duke {
      */
     public String getResponse(String inpt) {
         try {
+            DialogBox.setLabelColor(DialogBox.Color.BLACK);
             CommandList cmds = parser.inputsParser(inpt);
             String result = cmds.executeAll();
             this.storage.write(this.tasks);
             return result;
         } catch (DukeException | IOException e) {
+            DialogBox.setLabelColor(DialogBox.Color.RED);
             return e.getMessage();
         } catch (DateTimeParseException e) {
             return Messages.EXPECTED_DATE_FORMAT;
@@ -89,7 +92,7 @@ public class Duke {
 
 
     /**
-     * Function to add a todo task
+     * Adds a todo task
      * from just taking in a String.
      *
      * @param string
@@ -106,7 +109,7 @@ public class Duke {
     }
 
     /**
-     * Function to add a deadline task
+     * Adds a deadline task.
      *
      * @param description The description of the input deadline
      * @param date The date the deadline is by.

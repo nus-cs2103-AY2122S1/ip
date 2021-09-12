@@ -2,6 +2,7 @@ package duke.util.windows;
 
 import java.io.IOException;
 
+import duke.util.commons.Messages;
 import duke.util.controller.Duke;
 import duke.util.tasks.Task;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -61,6 +63,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPanePropertyInit();
         listSetSelectMultiple();
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(Messages.LOGO + Messages.GREETINGS, dukeImage)
+        );
+
     }
 
     private void scrollPanePropertyInit() {
@@ -86,6 +92,7 @@ public class MainWindow extends AnchorPane {
         duke.printList();
     }
 
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -94,10 +101,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        DialogBox inputDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox outputDialog = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                inputDialog,
+                outputDialog
         );
+        dialogContainer.setVgrow(inputDialog, Priority.ALWAYS);
+        dialogContainer.setVgrow(outputDialog, Priority.ALWAYS);
         duke.printList();
         userInput.clear();
     }

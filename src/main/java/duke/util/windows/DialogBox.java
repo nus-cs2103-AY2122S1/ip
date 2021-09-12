@@ -13,8 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-
+import javafx.scene.paint.Paint;
 
 /**
  * An example of a custom control using FXML.
@@ -22,10 +21,35 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    public enum Color {
+        RED,
+        BLACK,
+        GREEN
+    };
+
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
+    private static Paint textColor = Paint.valueOf("black");
+
+    public static void setLabelColor(Color color) {
+        switch (color) {
+        case RED:
+            textColor = Paint.valueOf("Red");
+            break;
+        case BLACK:
+            textColor = Paint.valueOf("black");
+            break;
+        case GREEN:
+            textColor = Paint.valueOf("green");
+            break;
+        }
+    }
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -36,7 +60,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -59,7 +82,12 @@ public class DialogBox extends HBox {
      * @return DialogBox representing the dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setTextFill(textColor);
+        db.dialog.setOpacity(1.0);
+        db.dialog.setStyle("-fx-background-color:Azure");
+        db.setStyle("-fx-background-color:Azure");
+        return db;
     }
 
     /**
@@ -71,7 +99,14 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setTextFill(textColor);
+        db.dialog.setOpacity(1.0);
+        db.setHeight(db.dialog.getHeight());
         db.flip();
+        db.dialog.setStyle("-fx-background-color:LightCyan");
+        db.setStyle("-fx-background-color:LightCyan");
         return db;
     }
+
+
 }

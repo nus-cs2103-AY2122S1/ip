@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="770.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.util.windows.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="770.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.util.windows.MainWindow">
     <children>
       <ToolBar prefHeight="25.0" prefWidth="770.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -29,7 +29,7 @@
          <top>
               <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="284.0" prefWidth="770.0" vvalue="1.0" BorderPane.alignment="CENTER">
                <content>
-                      <VBox fx:id="dialogContainer" alignment="CENTER" disable="true" prefHeight="281.0" prefWidth="771.0" style="-fx-background-color: white;" />
+                      <VBox fx:id="dialogContainer" alignment="CENTER" disable="true" prefHeight="281.0" prefWidth="771.0" style="-fx-background-color: LightCyan;" />
                </content>
               </ScrollPane>
          </top>
