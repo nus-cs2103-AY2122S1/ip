@@ -75,7 +75,12 @@ public class Janet {
     }
 
     private String handleTaskDone(Command command) throws IOException {
-        Task task = tasks.get(command.getIndex() - 1);
+        int taskIndex = command.getIndex() - 1;
+        System.out.println(tasks.size());
+        if (taskIndex >= tasks.size()) {
+            return Ui.formatOutOfBoundsString(command.getIndex());
+        }
+        Task task = tasks.get(taskIndex);
         task.setDone(true);
         storage.writeSave(tasks);
         return Ui.formatTaskDoneString(task);
