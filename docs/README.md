@@ -12,18 +12,10 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/taubot.Taubot.java` file, right-click it, and choose `Run tauBot.Taubot.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-```
-hey, i'm
-████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ████████╗
-╚══██╔══╝██╔══██╗██║   ██║██╔══██╗██╔═══██╗╚══██╔══╝
-   ██║   ███████║██║   ██║██████╔╝██║   ██║   ██║   
-   ██║   ██╔══██║██║   ██║██╔══██╗██║   ██║   ██║   
-   ██║   ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   
-   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   
-                                                    
-what do you want?
-```
+3. After that, locate the `src/main/java/taubot.Taubot.java` file, right-click it, and choose `Run tauBot.Taubot.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:  
+
+![Screenshot 2021-09-12 at 1 41 32 PM](https://user-images.githubusercontent.com/61085398/132973595-e8e93f33-e5a9-4744-92fe-17596b667e87.png)
+
 
 ## Quick Start
 ### CLI
