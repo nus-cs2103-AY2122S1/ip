@@ -130,3 +130,7 @@ delete | `delete INDEX` | `delete 1`
 find | `find KEYWORD` | `find homework`
 schedule | `schedule` or `schedule DATE` | `schedule` `schedule 2021-09-12`
 bye | `bye` | ~
+
+## Acknowledgements
+The GUI was designed with inspiration from Apple's Messages app interace.
+This user guide was written following the structure of [AB3's User Guide](https://se-education.org/addressbook-level3/UserGuide.html).
