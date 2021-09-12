@@ -101,8 +101,12 @@ class Ui {
                 return findAction(newInput);
             } else {
                 try {
-                    Task newTask = store.createTask(input);
-                    return taskList.addTask(newTask);
+                    if(store.isTaskDuplicate(input, taskList)) {
+                        return "Input task has already been created!";
+                    } else {
+                        Task newTask = store.createTask(input);
+                        return taskList.addTask(newTask);
+                    }
                 } catch (TodoException | DeadlineException | EventsException tx) {
                     return tx.getLocalizedMessage();
                 } catch (Exception e) {

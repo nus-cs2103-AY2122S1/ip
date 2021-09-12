@@ -83,6 +83,16 @@ public class Storage {
     public Task createTask(String input) throws Exception{
         return parser.createTask(input);
     }
+    /**
+     * Function detects if the possible Task created by the input is
+     * already presented in the current TaskList
+     * @param action is a string contains the command.
+     * @param curTaskList is the current TaskList object in the main Duke
+     * @return a boolean value shows if the action creates a duplicate task
+     */
+    public boolean isTaskDuplicate(String action, TaskList curTaskList) {
+        return parser.isTaskDuplicate(action, curTaskList);
+    }
 }
 
 // deals with making sense of the user command
@@ -122,6 +132,22 @@ class Parser {
             output += " done";
         }
         return output + "\n";
+    }
+
+    /**
+     * Function detects if the possible Task created by the input is
+     * already presented in the current TaskList
+     * @param action is a string contains the command.
+     * @param curTaskList is the current TaskList object in the main Duke
+     * @return a boolean value shows if the action creates a duplicate task
+     */
+    public boolean isTaskDuplicate(String action, TaskList curTaskList) {
+        for (Task curTask : curTaskList.getTaskList()) {
+            if (formatTaskIntoCommands(curTask).equals(action)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
