@@ -26,12 +26,20 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = new TaskList();
+        filterTasks(tasks, filteredTasks);
+        return ui.printList(filteredTasks);
+    }
+
+    private void filterTasks(TaskList tasks, TaskList filteredTasks) {
         for (int i = 0; i < tasks.getSize(); i++) {
             Task toFilter = tasks.get(i);
-            if (toFilter.toString().contains(keyword)) {
-                filteredTasks.add(toFilter);
-            }
+            addTasks(filteredTasks, toFilter);
         }
-        return ui.printList(filteredTasks);
+    }
+
+    private void addTasks(TaskList filteredTasks, Task toFilter) {
+        if (toFilter.toString().contains(keyword)) {
+            filteredTasks.add(toFilter);
+        }
     }
 }

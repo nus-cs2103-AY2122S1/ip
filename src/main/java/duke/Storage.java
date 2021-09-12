@@ -22,6 +22,9 @@ import duke.task.ToDo;
 
 public class Storage {
     private String filePath;
+    private final String WRITEPATH = "/data";
+    private final String DATEFORMAT = "MMM dd yyyy";
+    private final String TIMEFORMAT = "hh:mm a";
 
     /**
      * Creates a Storage Object containing the file path of where the user wishes to store the TaskList.
@@ -39,44 +42,8 @@ public class Storage {
      * @throws FileNotFoundException if file path does not exist.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        ArrayList<Task> list = new ArrayList<Task>();
         File f = new File(filePath);
-        if (f.exists()) {
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String toRead = s.nextLine();
-                String[] strSplit = toRead.split(" \\| ");
-                if (strSplit[0].equals("T")) {
-                    ToDo toDo = new ToDo(strSplit[2]);
-                    if (strSplit[1].equals("1")) {
-                        toDo.complete();
-                    }
-                    list.add(toDo);
-                } else if (strSplit[0].equals("D")) {
-                    String[] dateTime = strSplit[3].split(", ");
-                    LocalDate date = LocalDate.parse(dateTime[0], DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("hh:mm a"));
-                    Deadline deadline = new Deadline(strSplit[2], date, time);
-                    if (strSplit[1].equals("1")) {
-                        deadline.complete();
-                    }
-                    list.add(deadline);
-                } else if (strSplit[0].equals("E")) {
-                    String[] dateTime = strSplit[3].split(", ");
-                    LocalDate date = LocalDate.parse(dateTime[0], DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("hh:mm a"));
-                    Event event = new Event(strSplit[2], date, time);
-                    if (strSplit[1].equals("1")) {
-                        event.complete();
-                    }
-                    list.add(event);
-                }
-            }
-            s.close();
-        } else {
-            throw new FileNotFoundException();
-        }
-        return list;
+        return parseFile(f);
     }
 
     /**
@@ -86,16 +53,101 @@ public class Storage {
      * @throws IOException On Output Error.
      */
     public void write(TaskList tasks) throws IOException {
-        File toWrite = new File("/data");
-        if (!toWrite.exists()) {
-            toWrite.mkdir();
-        }
+        File toWrite = new File(WRITEPATH);
+        checkFilePath(toWrite);
         FileWriter fw = new FileWriter(filePath);
+        writeToFile(fw, tasks);
+        fw.close();
+    }
+
+    private ArrayList<Task> parseFile(File f) throws FileNotFoundException {
+        if (!f.exists()) {
+            throw new FileNotFoundException();
+        }
+        Scanner s = new Scanner(f);
+        return retrieveList(s);
+    }
+
+    private ArrayList<Task> retrieveList(Scanner s) {
+        ArrayList<Task> list = new ArrayList<Task>();
+        addToList(s, list);
+        s.close();
+        return list;
+    }
+
+    private void addToList(Scanner s, ArrayList<Task> list) {
+        while (s.hasNext()) {
+            String toRead = s.nextLine();
+            list.add(parseLine(toRead));
+        }
+    }
+
+    private Task parseLine(String toRead) {
+        String[] strSplit = toRead.split(" \\| ");
+        return createTask(strSplit);
+    }
+
+    private Task createTask(String[] strSplit) {
+        if (strSplit[0].equals("T")) {
+            return createToDo(strSplit);
+        } else if (strSplit[0].equals("D")) {
+            return createDeadline(strSplit);
+        }
+        return createEvent(strSplit);
+    }
+
+    private Task createToDo(String[] strSplit) {
+        ToDo toDo = new ToDo(strSplit[2]);
+        return checkCompletion(toDo, strSplit);
+    }
+
+    private Task createDeadline(String[] strSplit) {
+        Task deadline = parseCommand("Deadline", strSplit);
+        return checkCompletion(deadline, strSplit);
+    }
+
+    private Task createEvent(String[] strSplit) {
+        Task event = parseCommand("Event", strSplit);
+        return checkCompletion(event, strSplit);
+    }
+
+    private Task parseCommand(String type, String[] strSplit) {
+        String[] dateTime = strSplit[3].split(", ");
+        LocalDate date = LocalDate.parse(dateTime[0], DateTimeFormatter.ofPattern(DATEFORMAT));
+        LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern(TIMEFORMAT));
+        String task = strSplit[2];
+        return createTaskWithDateTime(type, task, date, time);
+    }
+
+    private Task createTaskWithDateTime(String type, String task, LocalDate date, LocalTime time) {
+        if (type.equals("Deadline")) {
+            return new Deadline(task, date, time);
+        }
+        return new Event(task, date, time);
+    }
+
+    private Task checkCompletion(Task task, String[] strSplit) {
+        if (strSplit[1].equals("1")) {
+            task.complete();
+        }
+        return task;
+    }
+
+    private void checkFilePath(File f) {
+        if (!f.exists()) {
+            f.mkdir();
+        }
+    }
+
+    private void writeToFile(FileWriter fw, TaskList tasks) throws IOException {
         for (int i = 0; i < tasks.getSize(); i++) {
             Task t = tasks.get(i);
-            fw.write(t.getToWrite());
-            fw.write(System.getProperty("line.separator"));
+            writeTasks(fw, t);
         }
-        fw.close();
+    }
+
+    private void writeTasks(FileWriter fw, Task t) throws IOException {
+        fw.write(t.getToWrite());
+        fw.write(System.getProperty("line.separator"));
     }
 }

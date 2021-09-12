@@ -1,12 +1,10 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
-import duke.exception.FolderNotFoundException;
 
 /**
  * <h1> Duke TaskList ChatBot! </h1>
@@ -31,35 +29,9 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        tasks = loadTaskList(storage);
     }
 
-    /**
-     * Starts the Program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                String output = c.execute(tasks, ui, storage);
-                System.out.println(output);
-                isExit = c.isExit();
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
 
     public String getResponse(String input) {
         try {
@@ -71,15 +43,14 @@ public class Duke {
         }
     }
 
-    /**
-     * Main method which starts the Duke bot.
-     * @param args user input
-     * @throws FileNotFoundException when filepath does not exist.
-     * @throws FolderNotFoundException when filepath folder does not exist.
-     * @throws IOException On input error.
-     * @see IOException
-     */
-    public static void main(String[] args) throws FileNotFoundException, FolderNotFoundException, IOException {
-        new Duke("/data/tasks.txt").run();
+    private TaskList loadTaskList(Storage storage) {
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+        return tasks;
     }
+
 }
