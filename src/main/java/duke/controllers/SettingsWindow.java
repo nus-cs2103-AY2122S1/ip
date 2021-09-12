@@ -1,6 +1,7 @@
 package duke.controllers;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import duke.exceptions.AuguryException;
 import duke.storage.Settings;
@@ -45,8 +46,10 @@ public class SettingsWindow extends Application {
             s.initModality(Modality.APPLICATION_MODAL);
             s.getScene().getStylesheets().add("/styles/augury_" + SettingsWindow.settings.getTheme() + ".css");
 
-            choiceBox.getItems().addAll("Light theme", "Dark theme");
-            choiceBox.setValue("Light theme");
+            choiceBox.getItems().addAll( "Apollo", "Dark", "Light", "Orca", "Solarised", "Sonicpi", "Tape");
+            String currentTheme = SettingsWindow.settings.getTheme().substring(0,1).toUpperCase()
+                    + SettingsWindow.settings.getTheme().substring(1);
+            choiceBox.setValue(currentTheme);
 
             s.showAndWait();
         } catch (IOException e) {
@@ -67,22 +70,8 @@ public class SettingsWindow extends Application {
      */
     @FXML
     private void handleSettingsSave() throws AuguryException {
-        String choice;
-        String userChoice = choiceBox.getValue();
-
-        switch (userChoice) {
-        case "Light theme":
-            choice = "light";
-            break;
-        case "Dark theme":
-            choice = "dark";
-            break;
-        default:
-            choice = "light";
-            break;
-        }
-
-        settings.setTheme(choice);
+        String userChoice = choiceBox.getValue().toLowerCase();
+        settings.setTheme(userChoice);
         Stage stage = (Stage) choiceBox.getScene().getWindow();
         stage.close();
     }

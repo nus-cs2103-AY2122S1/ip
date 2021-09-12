@@ -117,7 +117,7 @@ public class AppWindow extends VBox {
     private void handleSettingsButton() {
         SettingsWindow.showSettingsWindow(augury.getSettings());
 
-        scrollPane.getScene().getStylesheets().clear();
+        scrollPane.getScene().getStylesheets().remove(1);
         scrollPane.getScene().getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
     }
 
@@ -144,6 +144,6 @@ public class AppWindow extends VBox {
         userInput.setText(lastCommand);
         userInput.positionCaret(lastCommand.length());
         this.lastCommand = temp;
-        
+
     }
 }

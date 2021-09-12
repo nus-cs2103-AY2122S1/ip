@@ -25,7 +25,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private static final String VER = "v1.2.0"; // A-BetterGui
+    private static final String VER = "v1.3.0"; // A-Release, More Themes, More Functionality, QOL Fixes
     private static final String WELCOME =
             "\t+-------------------------------+\n"
           + "\t| *                 *         * |\n"
