@@ -33,7 +33,10 @@ public class Duke {
     }
 
     /**
-     * Method to run Duke
+     * Gets Duke's response based on user input
+     *
+     * @param input The user input
+     * @return The response from Duke
      */
     public String getResponse(String input) {
         Parser parser = new Parser();

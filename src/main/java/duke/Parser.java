@@ -21,16 +21,16 @@ public class Parser {
      */
     public Command parseCommand(String input) throws InvalidTaskException {
         String parsed = input.split(" ", 2)[0];
-        boolean validCommand = false;
+        boolean isValidCommand = false;
         Command parsedCommand = null;
         for (Command command: Command.values()) {
             if (command.command.equals(parsed)) {
-                validCommand = true;
+                isValidCommand = true;
                 parsedCommand = command;
             }
         }
 
-        if (!validCommand) {
+        if (!isValidCommand) {
             throw new InvalidTaskException("Invalid command! Please enter the following commands only:\n"
                                            + "list\ndone (task number)\n"
                                            + "delete (task number)\ntodo (description)\n"
