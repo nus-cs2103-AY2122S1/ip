@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duck.getResponse(userInput.getText());
-        boolean isExceptionThrown = response.split("\\s+", 2)[0].equals("OOPS!!!");
+        boolean isExceptionThrown = response.split("\\s+", 2)[0].equals("QUACK!!!");
         if (isExceptionThrown) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
