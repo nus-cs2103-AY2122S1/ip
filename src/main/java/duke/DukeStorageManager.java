@@ -114,7 +114,7 @@ public class DukeStorageManager {
      */
     public void reloadSaveFromXmlDoc() {
         if (this.xmlSaveFileDoc == null) {
-            Duke.dukeLaterSay("No save file to load from.");
+            System.out.println("No save file to load from.");
             return;
         }
 
@@ -123,8 +123,8 @@ public class DukeStorageManager {
 
         // There should be only 1 taskList node
         if (taskList.getLength() > 1) {
-            Duke.dukeLaterSay("Loaded XML file contains more than 1 task list."
-                    + " Only first one will be loaded.");
+            System.out.println("Loaded XML file contains more than 1 task list."
+                      + " Only first one will be loaded.");
         }
 
         Node firstTaskList = taskList.item(0);
@@ -290,7 +290,7 @@ public class DukeStorageManager {
             // Now write the file to local storage
             this.writeCurrXmlDocToDisk();
         } catch (ParserConfigurationException e) {
-            Duke.dukeLaterSay("Document builder cannot be created. (List not saved)");
+            System.out.println("Document builder cannot be created. (List not saved)");
         }
     }
 
@@ -347,7 +347,7 @@ public class DukeStorageManager {
         case NONE:
             // Fallthrough
         default:
-            Duke.dukeLaterSay("Unidentified task type expected,"
+            System.out.println("Unidentified task type expected,"
                     + " cannot save this task: " + currTask.toString());
             createdTaskElement = null;
         }
