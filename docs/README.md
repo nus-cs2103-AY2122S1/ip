@@ -2,28 +2,150 @@
 
 ## Features 
 
-### Feature-ABC
+### Create Task
 
-Description of the feature.
+Tasks are categorised into 3 different types: `todo`, `deadline`, `event`.
+`todo` contains a description of the task to be done. `deadline` contains a description and a deadline of the task.
+`event` contains a description, and the time the event is happening.
 
-### Feature-XYZ
+### Delete Tasks
 
-Description of the feature.
+Delete any task that you no longer want to keep.
 
-## Usage
+### Complete your tasks
 
-### `Keyword` - Describe action
+You can set a task as `done`.
 
-Describe the action and its outcome.
+### Find
+You can `find` tasks that contains the input you have typed.
 
-Example of usage: 
+### List all the tasks stored
+You can `list` all the tasks that you have recorded.
 
-`keyword (optional arguments)`
+### Snooze
+
+You can `snooze` a task to reschedule it to a different period. 
+
+## Commands and Usage
+
+
+### `todo` - Creates a todo task
+
+Format: `todo {description of the task}`
+
+Example of usage:
+
+`todo homework`
 
 Expected outcome:
-
-Description of the outcome.
-
 ```
-expected output
+Got it. I've added this task:
+    [T][ ] homework 
+Now you have 1 tasks in your list.    
 ```
+
+### `deadline` - Creates a task with a deadline
+
+Format: `deadline {description} /by {time with format: dd/mm/yyyy hhmm}`
+`hhmm is optional.`
+
+Example of usage:
+
+`deadline homework /by 2/2/2022 2222`
+
+Expected outcome:
+```
+Got it. I've added this task:
+    [D][ ] homework (by: 02 Feb 2022 22:22)
+Now you have 2 tasks in your list.    
+```
+### `event` - Creates an event
+
+Format: `event {description} /at {time with format: dd/mm/yyyy hhmm}`
+`hhmm is optional.`
+
+Example of usage:
+
+`event party /by 2/2/2022 2222`
+
+Expected outcome:
+```
+Got it. I've added this task:
+    [E][ ] party (at: 02 Feb 2022 22:22)
+Now you have 3 tasks in your list.    
+```
+
+### `delete` - Deletes a task
+
+Format: `delete {index of task}`
+
+Example of usage:
+`delete 3`
+
+Expected outcome:
+```
+Noted. I've removed this task:
+    [E][ ] party (at: 02 Feb 2022 22:22)
+Now you have 2 tasks in your list.
+```
+
+### `done` - Sets a task as completed
+
+Format: `done {index of task}`
+
+Example of usage:
+`done 2`
+
+Expected outcome:
+```
+Nice! I've marked this task as done: 
+    [D][X] homework (by: 2/2/2022 22:22)
+```
+
+### `find` - Finds tasks with the keyword
+
+Format: `find {keyword}`
+
+Example of usage:
+`find homework`
+
+Expected outcome:
+```
+Here are the matching tasks in your list:
+    1. [D][X] homework (by: 2/2/2022 22:22)
+```
+
+### `snooze` - Reschedules your task to a different time
+
+Format: `snooze {index of task} /to {time with format: dd/mm/yyyy hhmm}`
+`hhmm is optional.`
+
+Example of usage:
+`snooze 1 /to 2/2/2122`
+
+Expected outcome:
+```
+You have snoozed this task:
+    [D][ ] homework (by: 2/2/2022 22:22) to:
+    [D][ ] homework (by: 2/2/2122 00:00)
+```
+### `bye` - Exit Duke
+
+Format: `bye`
+
+Example of usage: `bye`
+
+Expected outcome: Duke terminates.
+
+Command Summary
+
+Feature | Command
+------------ | -------------
+Create a `todo` task | `todo {description of the task}`
+Create a `deadline` task | `deadline {description} /by {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
+Create an `event` task | `event {description} /at {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
+Delete a task | `delete {index of task}`
+Complete a task | `done {index of tasks}`
+Find tasks using keyword | `find {keyword}`
+Reschedule a task | `snooze {index of task} /to {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
+Exit Duke | `bye`
