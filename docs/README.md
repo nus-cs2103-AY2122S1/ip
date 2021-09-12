@@ -33,7 +33,7 @@ Show the help message, which contains some information about the app.
 
 Format: `help`
 
-###
+<br/>
 
 ### Exiting the program : `bye`
 
@@ -41,7 +41,7 @@ Exits the program.
 
 Format: `bye`
 
-###
+<br/>
 
 ### Listing all tasks : `list`
 
@@ -49,7 +49,7 @@ Shows a list of all tasks, and details regarding the tasks.
 
 Format: `list`
 
-###
+<br/>
 
 ### Adding a task
 
@@ -73,7 +73,7 @@ Adds an event to the list of tasks.
 
 Format: `event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]`
 
-###
+<br/>
 
 ### Marking a task as done: `done`
 
@@ -81,7 +81,7 @@ Marks a task as done.
 
 Format: `done [task number]`
 
-###
+<br/>
 
 ### Deleting a task: `delete`
 
@@ -89,7 +89,7 @@ Deletes a task.
 
 Format: `delete [task number]`
 
-###
+<br/>
 
 ### Finding a task: `find`
 
@@ -97,7 +97,7 @@ Finds a list of tasks that match the keyword.
 
 Format: `find [keyword]`
 
-###
+<br/>
 
 ### Sorting the list of tasks: `sort`
 
