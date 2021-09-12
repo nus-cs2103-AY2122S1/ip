@@ -127,6 +127,7 @@ Example of usage: `done 2`
 
 Expected outcome:
 ```
+Solid work! I've marked task 2 as done.
 Here are your current tasks:
 1. [T][ ] Buy breakfast for family
 2. [D][✔] Submit CS2103T iP (by: Friday, 17 September 2021)
@@ -143,6 +144,9 @@ Example of usage: `delete 2`
 
 Expected outcome:
 ```
+Got it! I've removed task 2.
+You currently have 2 tasks.
+
 Here are your current tasks:
 1. [T][ ] Buy breakfast for family
 2. [E][ ] Guitar Lesson (at: Monday, 13 September 2021)
