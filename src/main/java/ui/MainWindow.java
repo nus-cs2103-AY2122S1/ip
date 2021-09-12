@@ -1,7 +1,5 @@
 package ui;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,27 +47,9 @@ public final class MainWindow extends AnchorPane {
 
     @FXML
     private void initialize() {
-        FileInputStream daDuke;
-        try {
-            daDuke = new FileInputStream("src/main/resources/images/DaDuke.png");
-            dukeImage = new Image(daDuke);
-        } catch (FileNotFoundException e) {
-            System.out.println("daDuke image not found");
-        }
-        FileInputStream daUser;
-        try {
-            daUser = new FileInputStream("src/main/resources/images/DaUser.png");
-            userImage = new Image(daUser);
-        } catch (FileNotFoundException e) {
-            System.out.println("daUser image not found");
-        }
-        FileInputStream dukeMascot;
-        try {
-            dukeMascot = new FileInputStream("src/main/resources/images/DukeMascot.png");
-            icon = new Image(dukeMascot);
-        } catch (FileNotFoundException e) {
-            System.out.println("daUser image not found");
-        }
+        userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
+        dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+        icon = new Image(getClass().getResourceAsStream("/images/DukeMascot.png"));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         //@@author
 

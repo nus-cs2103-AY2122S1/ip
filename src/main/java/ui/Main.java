@@ -1,8 +1,8 @@
 package ui;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ public final class Main extends Application {
         initializeIcon();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            FileInputStream inputStream = new FileInputStream("src/main/resources/view/MainWindow.fxml");
+            InputStream inputStream = getClass().getResourceAsStream("/view/MainWindow.fxml");
             AnchorPane ap = fxmlLoader.load(inputStream);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
@@ -39,12 +39,7 @@ public final class Main extends Application {
     }
 
     private void initializeIcon() {
-        FileInputStream dukeMascot;
-        try {
-            dukeMascot = new FileInputStream("src/main/resources/images/DukeMascot.png");
-            icon = new Image(dukeMascot);
-        } catch (FileNotFoundException e) {
-            System.out.println(getClass() + ": dukeMascot image not found");
-        }
+        InputStream dukeMascot = getClass().getResourceAsStream("/images/DukeMascot.png");
+        icon = new Image(dukeMascot);
     }
 }

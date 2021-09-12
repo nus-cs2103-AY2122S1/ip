@@ -1,6 +1,5 @@
 package ui;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -42,7 +41,7 @@ public final class DialogBox extends HBox {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
-            fxmlLoader.load(new FileInputStream("src/main/resources/view/DialogBox.fxml"));
+            fxmlLoader.load(getClass().getResourceAsStream("/view/DialogBox.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
