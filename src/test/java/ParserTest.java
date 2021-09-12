@@ -10,7 +10,7 @@ public class ParserTest {
     /**
      * Tests if Parser parses "bye" into Exit command.
      *
-     * @throws DukeException
+     * @throws DukeException If parse error
      */
     @Test
     public void testExit() throws DukeException {
@@ -22,7 +22,7 @@ public class ParserTest {
     /**
      * Tests if parser does not parse "todo read" into Exit command.
      *
-     * @throws DukeException
+     * @throws DukeException If parse error
      */
     @Test
     public void testAddTodo() throws DukeException {
