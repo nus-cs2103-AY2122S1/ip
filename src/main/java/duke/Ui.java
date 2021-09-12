@@ -14,7 +14,7 @@ public class Ui {
      *
      * @return A String, the logo of duke.
      */
-    public String printLogo() {
+    public static String printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -28,7 +28,7 @@ public class Ui {
      *
      * @return A String, the greeting message of duke.
      */
-    public String greet() {
+    public static String greet() {
         return generateDukeResponse(
             "Hello! I'm Duke",
             "What can I do for you?");
@@ -41,7 +41,7 @@ public class Ui {
      *                 result of execution, or the exception message.
      * @return A String, the duke response.
      */
-    public String generateDukeResponse(String ...messages) {
+    public static String generateDukeResponse(String ...messages) {
         String dukeResponse = new String("");
         int n = messages.length;
         for (int i = 0; i < n; i++) {

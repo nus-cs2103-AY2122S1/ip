@@ -24,7 +24,7 @@ public class Storage {
     private final File file;
 
     /**
-     * A public constructor to initialized the Storage.
+     * A public constructor to initialized the Storage
      *
      * @param filePath The given filePath.
      */

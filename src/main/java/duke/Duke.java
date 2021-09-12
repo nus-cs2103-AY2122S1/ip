@@ -62,4 +62,12 @@ public class Duke {
             return ui.generateDukeResponse(e.getMessage());
         }
     }
+
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
 }
