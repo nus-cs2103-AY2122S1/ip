@@ -86,7 +86,7 @@ public class Duke {
             }
 
             case EVENT: {
-                String[] parsed = parser.parseDescription(input, "by");
+                String[] parsed = parser.parseDescription(input, "at");
                 LocalDateTime dateTime = LocalDateTime.parse(parsed[1], inputFormatter);
                 Task newTask = new Event(parsed[0], dateTime);
                 this.tasks.add(newTask);

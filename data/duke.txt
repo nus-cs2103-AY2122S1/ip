@@ -1,2 +1,2 @@
-[T][X] return book
-[D][ ] borrow book (by: Tue, 08 Jun 2021 2359)
+[D][ ] return book (by: Tue, 08 Jun 2021 2359)
+[E][ ] project meeting (at: Tue, 08 Jun 2021 1200)
