@@ -204,3 +204,7 @@ Kills the chatbot.
 ```
 Bye. Hope to see you again soon!
 ```
+
+### Screenshot of ChatBot
+
+![alt text](https://github.com/ramapriyan912001/ip/blob/master/docs/Ui.png?raw=true)
