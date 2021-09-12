@@ -4,7 +4,7 @@ Duke is a desktop app to manage your tasks. Interact with Duke via a Command Lin
 
 ## Features
 
-###📃 Listing all tasks - `list`
+### 📃 Listing all tasks - `list`
 
 Displays a list of all tasks saved in Duke.
 
@@ -14,7 +14,7 @@ Duke will respond by displaying the task list:
 
 ![Demo for list](./ListExample.png)
 
-###➕ Add a todo task - `todo`
+### ➕ Add a todo task - `todo`
 
 Adds a new todo task to the task list.
 
@@ -28,7 +28,7 @@ Duke will respond by displaying the new task and the total number of tasks in th
 
 ![Demo for todo](./TodoExample.png)
 
-###⏳ Add a deadline task - `deadline`
+### ⏳ Add a deadline task - `deadline`
 
 Adds a new deadline task to the task list.
 
@@ -44,7 +44,7 @@ Duke will respond by displaying the new task and the total number of tasks in th
 
 ![Demo for deadline](./DeadlineExample.png)
 
-###🕙 Add an event task - `event`
+### 🕙 Add an event task - `event`
 
 Adds a new event task to the task list.
 
@@ -60,7 +60,7 @@ Duke will respond by displaying the new task and the total number of tasks in th
 
 ![Demo for event](./EventExample.png)
 
-###✅️ Mark a task as done - `done`
+### ✅️ Mark a task as done - `done`
 
 Marks the task at the specified index as done in the task list.
 
@@ -75,7 +75,7 @@ Duke will respond by displaying the task marked done:
 
 ![Demo for done](./DoneExample.png)
 
-###🗑 Delete a task - `delete`
+### 🗑 Delete a task - `delete`
 
 Deletes the task at the specified index from task list.
 
@@ -90,7 +90,7 @@ Duke will respond by displaying the task deleted and the total number of tasks i
 
 ![Demo for delete](./DeleteExample.png)
 
-###🔎 Find tasks by keyword - `find`
+### 🔎 Find tasks by keyword - `find`
 
 Finds all tasks containing the specified keyword.
 
@@ -104,7 +104,7 @@ Duke will respond by displaying any matching tasks:
 
 ![Demo for find](./FindExample.png)
 
-###🔠 Sort tasks - `sort`
+### 🔠 Sort tasks - `sort`
 
 Sorts the task list in the following order: deadlines, events, todos.
 
