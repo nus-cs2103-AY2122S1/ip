@@ -73,6 +73,7 @@ public class GnosisUI extends AnchorPane {
         System.out.println(command);
         switch (command) {
         case BYE:
+        case PLACE:
         case LIST:
             userInput.setEditable(false);
             userInput.setVisible(false);
