@@ -24,9 +24,9 @@ public class Parser {
      */
     public Parser(String input) throws DukeException {
         this.input = input.strip();
-        
+
         checkForEmptyInput();
-        
+
         this.inputArr = input.split(" ");
         this.command = inputArr[0];
     }

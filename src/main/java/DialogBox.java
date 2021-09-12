@@ -26,11 +26,6 @@ import javafx.scene.text.Text;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    @FXML
-    private Text dialog;
-    @FXML
-    private ImageView displayPicture;
-
     private static final Background ERROR_BACKGROUND = new Background(
             new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY));
 
@@ -41,6 +36,10 @@ public class DialogBox extends HBox {
 
     private static final Font DUKE_FONT = new Font("Arial", 14);
 
+    @FXML
+    private Text dialog;
+    @FXML
+    private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -57,13 +56,13 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
         cropDisplayPicture(img);
     }
-    
+
     private void cropDisplayPicture(Image img) {
         boolean hasSmallerWidth = img.getWidth() < img.getHeight();
         double newMeasure = hasSmallerWidth ? img.getWidth() : img.getHeight();
         double x = (img.getWidth() - newMeasure) / 2;
         double y = (img.getHeight() - newMeasure) / 2;
-        
+
         Rectangle2D rect = new Rectangle2D(x, y, newMeasure, newMeasure);
         displayPicture.setViewport(rect);
         displayPicture.setSmooth(true);
