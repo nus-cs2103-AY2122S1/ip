@@ -16,7 +16,7 @@ public class Todo extends Task {
      */
     @Override
     public String toStringForFile() {
-        return " T - " + super.toStringForFile();
+        return "T - " + super.toStringForFile();
     }
 
     /**

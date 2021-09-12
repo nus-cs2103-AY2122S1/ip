@@ -59,6 +59,10 @@ public class Parser {
             } 
             else if (str.contains("help")) {
                 return Message.HELPCOMMANDS;
+            } 
+            else if (str.contains("show")) {
+                output = taskList.showPriority(str);
+                return output;
             }
             else {
                 throw new DukeException("Command is not valid!");

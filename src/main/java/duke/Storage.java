@@ -14,7 +14,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Storage {
-    private static final String DIRECTORY = "src/data";
+    private static final String DIRECTORY = "src/main/data";
     private static final String FILENAME = "duke.txt";
     private static final String PATH = DIRECTORY + "/" + FILENAME;
 

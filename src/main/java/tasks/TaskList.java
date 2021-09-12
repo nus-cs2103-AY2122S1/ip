@@ -22,8 +22,6 @@ public class TaskList {
         tasks.add(task);
     }
     
-    
-
     /**
      * The output that will be shown when the input command is list.
      * 
@@ -31,6 +29,10 @@ public class TaskList {
      * @return a String with all the existing tasks shown in a list view. 
      */
     public String showList(String str) {
+//        int listLen = tasks.size();
+//        if (listLen == 0) {
+//            str = "You have no tasks!\nNow that you are done with all your work, go after Jasmine!";
+//        }
         for (int i = 0; i < tasks.size(); i++) {
             str += (i+1) + ". " + tasks.get(i);
             if (i != tasks.size() - 1) {
@@ -65,11 +67,11 @@ public class TaskList {
         try {
             assert str.length() >= 5;
             Task.Priority priority;
-            
-            if (str.contains("HIGH") || str.contains("high")) {
+
+            if (str.toUpperCase().contains("HIGH")) {
                 priority = Task.Priority.HIGH;
                 str = str.substring(5, str.length() - 4);
-            } else if (str.contains("MEDIUM") || str.contains("medium")) {
+            } else if (str.toUpperCase().contains("MEDIUM")) {
                 priority = Task.Priority.MEDIUM;
                 str = str.substring(5, str.length() - 6);
             } else {
@@ -103,9 +105,9 @@ public class TaskList {
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             String time = str.substring(slashIndex + 14);
             Task.Priority priority;
-            if (str.contains("HIGH") || str.contains("high")) {
+            if (str.toUpperCase().contains("HIGH")) {
                 priority = Task.Priority.HIGH;
-            } else if (str.contains("MEDIUM") || str.contains("medium")) {
+            } else if (str.toUpperCase().contains("MEDIUM")) {
                 priority = Task.Priority.MEDIUM;
             } else {
                 priority = Task.Priority.LOW;
@@ -137,9 +139,9 @@ public class TaskList {
             assert slashIndex >= 0;
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             Task.Priority priority;
-            if (str.contains("HIGH") || str.contains("high")) {
+            if (str.toUpperCase().contains("HIGH")) {
                 priority = Task.Priority.HIGH;
-            } else if (str.contains("MEDIUM") || str.contains("medium")) {
+            } else if (str.toUpperCase().contains("MEDIUM")) {
                 priority = Task.Priority.MEDIUM;
             } else {
                 priority = Task.Priority.LOW;
@@ -191,5 +193,27 @@ public class TaskList {
             }
         }
         return results;
-    } 
+    }
+    
+    public String showPriority(String str) {
+        Task.Priority priority;
+        if (str.toUpperCase().contains("HIGH")) {
+            priority = Task.Priority.HIGH;
+        } else if (str.toUpperCase().contains("MEDIUM")) {
+            priority = Task.Priority.MEDIUM;
+        } else {
+            priority = Task.Priority.LOW;
+        }
+        int j = 1;
+        String results = "Here are the matching tasks in your list: \n";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).priority == priority) {
+                results += (j) + ". " + tasks.get(i) + "\n";
+                j++;
+            } 
+//            if (i > tasks.size() - 1) {
+//                results += "\n";
+//            }
+        } return results;
+    }
 }

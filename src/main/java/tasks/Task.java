@@ -66,6 +66,6 @@ public class Task {
      * @return the String representation of a Deadline
      */
     public String toString() {
-        return " [" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

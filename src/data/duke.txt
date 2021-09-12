@@ -1,0 +1,15 @@
+ T - 0 - finish CS2103 iP 
+ T - 0 - eat dinner 
+ T - 0 - sleep low
+ T - 0 - rest
+ T - 0 - ip High
+ T - 0 - dinner 
+ T - 0 - sleep low
+ T - 0 - rest low
+ T - 0 - ip 
+ T - 0 - eat low
+ T - 0 - sleep low
+ T - 0 - ip 
+ T - 0 - m 
+ T - 0 - l low
+ T - 0 - f low
