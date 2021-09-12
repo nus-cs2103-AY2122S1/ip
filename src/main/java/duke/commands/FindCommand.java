@@ -22,12 +22,12 @@ public class FindCommand extends Command {
         if (rest.isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        this.filter = rest;
+        this.filter = rest.toLowerCase();
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        TaskList filteredList = tasks.filter(task -> task.getDescription().contains(filter));
+        TaskList filteredList = tasks.filter(task -> task.getDescription().toLowerCase().contains(filter));
         return ui.print(String.format(
                 "Here are the matching tasks in your list:%s",
                 filteredList.printList()));
