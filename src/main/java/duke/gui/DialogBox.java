@@ -27,13 +27,14 @@ import java.util.Collections;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     private static final Color DUKE_COLOR = Color.valueOf("#160e3c");
     private static final CornerRadii DUKE_CORNER = new CornerRadii(0, 10, 10, 10, false);
-    private static final Background DUKE_BG = new Background(new BackgroundFill(DUKE_COLOR, DUKE_CORNER, Insets.EMPTY));
+    private static final Background DUKE_BACKGROUND = new Background(new BackgroundFill(DUKE_COLOR, DUKE_CORNER, Insets.EMPTY));
 
     private static final Color USER_COLOR = Color.valueOf("#3c317c");
     private static final CornerRadii USER_CORNER = new CornerRadii(10, 0, 10, 10, false);
-    private static final Background USER_BG = new Background(new BackgroundFill(USER_COLOR, USER_CORNER, Insets.EMPTY));
+    private static final Background USER_BACKGROUND = new Background(new BackgroundFill(USER_COLOR, USER_CORNER, Insets.EMPTY));
 
     @FXML
     private Label dialog;
@@ -55,9 +56,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setStyle("-fx-text-fill: white");
-//        dialog.setAlignment(Pos.CENTER_LEFT);
         dialog.setPadding(new Insets(0,0,0,20));
-//        displayPicture.setImage(img);
         avatarIcon.setFill(new ImagePattern(img));
     }
 
@@ -73,14 +72,14 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.dialog.setBackground(USER_BG);
+        db.dialog.setBackground(USER_BACKGROUND);
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.dialog.setBackground(DUKE_BG);
+        db.dialog.setBackground(DUKE_BACKGROUND);
         return db;
     }
 }

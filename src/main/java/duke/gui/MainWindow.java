@@ -46,6 +46,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
 
+        //@@author erinmayg-reused
+        //Reused from https://github.com/erinmayg/ip/blob/master/src/main/java/duke/gui/MainWindow.java
+        // with minor modifications
         // Background
         BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, false);
         BackgroundImage bg = new BackgroundImage(bgImage,
@@ -54,6 +57,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.setBackground(new Background(bg));
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //@@author
+
         sendIntroMessage();
     }
 

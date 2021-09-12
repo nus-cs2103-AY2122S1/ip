@@ -29,11 +29,9 @@ public class Parser {
         "M/y", "d/M/y", "d-M-y", "M/y HHmm", "d/M/y HHmm", "d-M-y HHmm"
     };
 
-    /**
-     * The following methods shouldIgnore, isCommentLine and the string COMMENT_LINE_FORMAT_REGEX
-     * were taken from addressbook-level2(https://github.com/se-edu/addressbook-level2) and edited slightly
-     * to fit into iP
-     */
+    //@@author addressbook-level2-reused
+    //Reused from https://github.com/se-edu/addressbook-level2
+    // with minor modifications
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
@@ -57,6 +55,7 @@ public class Parser {
     private static boolean isCommentLine(String rawInputLine) {
         return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
     }
+    //@@author
 
     /**
      * Checks the keyword of the input and return the corresponding command.
