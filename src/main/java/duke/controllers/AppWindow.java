@@ -48,7 +48,7 @@ public class AppWindow extends VBox {
             e.printStackTrace();
         }
 
-        String welcomeMessage = "Welcome to Augury!";
+        String welcomeMessage = "Hello! How may I help you?";
         dialogContainer.getChildren().add(
             DialogBox.getAuguryDialog(welcomeMessage, img)
         );
