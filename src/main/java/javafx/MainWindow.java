@@ -28,6 +28,9 @@ public class MainWindow extends AnchorPane {
 
     private Ui dukeUi;
 
+    /**
+     * Initialises the application.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

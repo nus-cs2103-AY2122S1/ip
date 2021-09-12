@@ -9,6 +9,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -21,11 +23,18 @@ import java.util.Collections;
 public class DialogBox extends HBox {
 
     /** RGB values for dialog box background color */
-    private static final Color DUKE_COLOR = Color.rgb(57, 255, 90, 0.7);
-    private static final Color USER_COLOR = Color.rgb(236, 229, 221, 0.7);
+    private static final Color USER_COLOR = Color.rgb(57, 255, 90, 0.7);
+    private static final Color DUKE_COLOR = Color.rgb(236, 229, 221, 0.7);
+
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @FXML
     private Label dialog;
+
+    @FXML
+    private ImageView displayPicture;
 
     private DialogBox(String text, boolean isUser) {
         try {
@@ -38,10 +47,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
+        assert userImage != null && dukeImage != null : "An error occurred while loading the images";
         if (isUser) {
             this.setStyle(USER_COLOR);
+            this.displayPicture.setImage(userImage);
         } else {
             this.setStyle(DUKE_COLOR);
+            this.displayPicture.setImage(dukeImage);
         }
     }
 
