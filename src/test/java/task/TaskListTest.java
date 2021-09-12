@@ -15,15 +15,12 @@ class TaskListTest {
 
     @Test
     void printSize_emptyTaskList_noTaskDisplayed() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         ArrayList<Task> list = new ArrayList<>();
         TaskList testList = new TaskList(list);
-        testList.printSize();
+        String actualOutput = testList.getSize();
 
-        String expectedOutput = "  →   " + "There are 0 tasks in your list\r\n";
-        assertEquals(expectedOutput, outContent.toString());
+        String expectedOutput = "There are 0 tasks in your list";
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -57,9 +54,9 @@ class TaskListTest {
         TaskList testList = new TaskList(list);
         ArrayList<Predicate<Task>> filter = new ArrayList<>();
         filter.add((x) -> true);
-        testList.displayList(filter);
+        String actualOutput = testList.displayList(filter);
 
-        String expectedOutput = "  →   There is nothing to display! :angery:\r\n";
-        assertEquals(expectedOutput, outContent.toString());
+        String expectedOutput = "There is nothing to display! :angery:";
+        assertEquals(expectedOutput, actualOutput);
     }
 }

@@ -8,16 +8,6 @@ public class TaskStub extends Task {
         super(input, done);
     }
 
-    /**
-     * Toggle task completion, simple execution
-     *
-     * @return Current done status
-     */
-    public boolean toggleDone() {
-        isDone = !isDone;
-        return isDone;
-    }
-
     @Override
     public String toString() {
         String checkBox = isDone

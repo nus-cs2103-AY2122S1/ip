@@ -25,8 +25,7 @@ public class Duke {
      *
      * @param input String input from user
      */
-    public String getResponse(String input) {
-        Command cmd = parser.parseInput(input);
-        return cmd.execute();
+    public Command getResponse(String input) {
+        return parser.parseInput(input);
     }
 }
