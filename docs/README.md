@@ -7,7 +7,7 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `.jar` file from [here]().
+2. Download the latest `.jar` file from [here](https://github.com/Xiaoyunnn/ip/releases/tag/V1.1).
 3. Copy the file to the folder you want to use as the home folder for your task list.
 4. Double-click the file to start the app. The GUI should be similar to below.
 
@@ -24,7 +24,7 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
 
 ## Features
 
-### Viewing hellp - `help`
+### Viewing help: `help`
 
 Displays a list of available commands with example usage.
 
