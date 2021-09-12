@@ -13,6 +13,7 @@ e.g. in `todo TASK`, `TASK` is a parameter which can be used as `todo english ho
 Adds a todo to the task list.
 
 *Format:* `todo TASK` / `t TASK`
+
 *Examples:*
 * `todo math homework`
 * `t math homework`
@@ -22,6 +23,7 @@ Adds a todo to the task list.
 Adds a deadline to the task list.
 
 *Format:* `deadline TASK /by DATE` / `d TASK /by DATE`
+
 *Examples:*
 * `deadline apply for scholarship /by 2020-09-20`
 * `d apply for scholarship /by 2020-09-20`
@@ -31,6 +33,7 @@ Adds a deadline to the task list.
 Adds an event to the task list.
 
 *Format:* `event EVENT /at DATE` / `e EVENT /at DATE`
+
 *Examples:*
 * `event club meeting /at 2020-10-01`
 * `e club meeting /at 2020-10-01`
