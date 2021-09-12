@@ -3,6 +3,8 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.utils.*;
 
+import java.io.IOException;
+
 /**
  * Abstract class that represents a Command in the application
  */
@@ -15,7 +17,7 @@ public abstract class Command {
      * @param storage the Storage object that is being used in the app
      * @throws DukeException
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
      * Returns whether or not this command is an exit command

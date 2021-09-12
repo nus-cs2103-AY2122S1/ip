@@ -37,14 +37,14 @@ public class Storage {
         File f = new File(dataFilePath);
         ArrayList<Task> taskList = new ArrayList<Task>();
 
-        if(!f.exists()){
+        if (!f.exists()) {
             return new TaskList(new ArrayList<Task>());
         }
 
-        try{
+        try {
             Scanner dataReader = new Scanner(f);
 
-            while(dataReader.hasNextLine()){
+            while (dataReader.hasNextLine()) {
                 // convert saved info to Task
                 String currLine = dataReader.nextLine();
                 Task currTask = convertStringToTask(currLine);
@@ -52,7 +52,7 @@ public class Storage {
             }
             dataReader.close();
 
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File unable to load");
         }
 
@@ -67,34 +67,36 @@ public class Storage {
      * @param taskList tasklist
      * @throws IOException
      */
-    public void saveTaskListToDisk(TaskList taskList) throws IOException{
-
+    public void saveTaskListToDisk(TaskList taskList) throws IOException {
         File f = new File(dataFilePath);
-        if(!f.exists()) {
-            try{
+        if (!f.exists()) {
+            try {
                 boolean created = f.createNewFile();
             } catch (IOException e) {
                 System.out.println("Error creating file");
             }
         }
 
-        try{
+        try {
             FileWriter writeTasks = new FileWriter(dataFilePath);
             String allTasksString = "";
 
-            for(int i = 0; i < taskList.numberOfTasks(); i++){
+            for (int i = 0; i < taskList.numberOfTasks(); i++) {
                 Task currTask = taskList.getTask(i);
                 String taskString = convertTaskToString(currTask);
                allTasksString += taskString + "\n";
+                System.out.println("written" + taskString);
 
             }
 
             writeTasks.write(allTasksString);
             writeTasks.flush();
             writeTasks.close();
+            System.out.println("I have saved your tasks.");
 
 
-        } catch (IOException e){
+
+        } catch (IOException e) {
             System.out.println("Error creating file");
         }
 
@@ -157,7 +159,7 @@ public class Storage {
 
         Task currTask;
 
-        switch (taskType){
+        switch (taskType) {
             case TODO:
                 currTask = new TodoTask(lineSplit[2]);
                 break;
