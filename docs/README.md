@@ -19,7 +19,7 @@ directory in the following command.
 ```
 cd TAUBOT_JAR_DIRECTORY
 ```
-4. (Continuing from 4) In the same command prompt/terminal, run this command to start Duke
+4. In the same command prompt/terminal, run this command to start Duke
 
 ```
 java -jar Duke.jar
