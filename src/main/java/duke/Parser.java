@@ -13,10 +13,12 @@ public class Parser {
     /**
      * Method that is called and runs until the bye command in inputted. 
      * Listens for all the commands input and responds accordingly.
+     * 
+     * @param str Input string by user.
+     * @return Response message by system.
      */
     public String run(String str) {
-        
-        String helpCommands = "These are the services I can provide you:\n" +
+        String HELPCOMMANDS = "These are the services I can provide you:\n" +
                 "todo           [description]- Make a todo task\n" +
                 "deadline       [description] /at YYYY-MM-DD xxxx  - Make a new deadline event\n" +
                 "event          [description] /at YYYY-MM-DD xxxx  - Make a event\n" +
@@ -64,7 +66,7 @@ public class Parser {
                 return output;
             } 
             else if (str.contains("help")) {
-                return helpCommands;
+                return HELPCOMMANDS;
             }
             else {
                 throw new DukeException("Command is not valid!");
@@ -72,6 +74,6 @@ public class Parser {
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return "Victoria heard:" + str;
+        return "Genie heard: " + str + "\n Enter 'help' to see what I can do for you.";
     }
 }
