@@ -147,9 +147,9 @@ public class TaskList {
      * @throws DukeException the TaskList is full
      */
     public String record(Task task) throws DukeException {
-        final boolean overTaskLimitCapacity = currentIdx >= TASKS_LIMIT;
+        final boolean isOverTaskLimitCapacity = currentIdx >= TASKS_LIMIT;
         try {
-            if (overTaskLimitCapacity) {
+            if (isOverTaskLimitCapacity) {
                 throw new IndexOutOfBoundsException(
                         String.format("I can only record maximum of %d tasks.:(\n"
                                 + "Maybe remove your expired or done task?", TASKS_LIMIT));
