@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Method to execute find command
+     * Executes find command
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke

@@ -12,7 +12,7 @@ import duke.Ui;
 public abstract class Command {
 
     /**
-     * Method to execute the command that is called
+     * Executes the command that is called
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke

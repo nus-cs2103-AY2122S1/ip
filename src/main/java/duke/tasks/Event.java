@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * Method that returns the string representation of
+     * Returns the string representation of
      * the task data to be written into the storage file
      *
      * @return String representation of data to be written into storage file
@@ -33,7 +33,7 @@ public class Event extends Task {
     }
 
     /**
-     * Method that returns the string representation of
+     * Returns the string representation of
      * the task data to be outputted
      *
      * @return String representation of data to be outputted

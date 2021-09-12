@@ -1,8 +1,8 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Class that contains the list of tasks
@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Method to add task to tasklist
+     * Adds task to tasklist
      *
      * @param task The task to be added to tasklist
      */
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Method to delete task from tasklist
+     * Deletes task from tasklist
      *
      * @param index The index of the task in the tasklist
      * @return Deleted task
@@ -52,7 +52,7 @@ public class TaskList {
     }
 
     /**
-     * Method to get task from tasklist given the index
+     * Returns task from tasklist given the index
      *
      * @param index The index of the task in tasklist
      * @return The required task
@@ -63,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * Method to get size of tasklist
+     * Returns size of tasklist
      *
      * @return Integer size of the tasklist
      */
@@ -72,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Method to get the tasklist
+     * Returns the tasklist
      *
      * @return The tasklist
      */
@@ -81,7 +81,7 @@ public class TaskList {
     }
 
     /**
-     * Method to set specified task as done
+     * Sets specified task as done
      *
      * @param index The index of the task to be set as done in tasklist
      * @return The task set as done
@@ -93,7 +93,7 @@ public class TaskList {
     }
 
     /**
-     * Method to find all tasks whose description match the input string
+     * Finds all tasks whose description match the input string
      *
      * @param searchedString The input string
      * @return Tasklist of all tasks whose description match input string

@@ -1,10 +1,10 @@
-import duke.tasks.Todo;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
 
 public class TaskTest {
     @Test
@@ -21,7 +21,7 @@ public class TaskTest {
 
     @Test
     public void eventTest() {
-        Event event = new Event("test event","Jan 12 2021 01:00");
+        Event event = new Event("test event", "Jan 12 2021 01:00");
         assertEquals("E | 0 | test event | Jan 12 2021 01:00", event.getFileString());
     }
 }

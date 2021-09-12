@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
     public ExitCommand(){}
 
     /**
-     * Method that executes the exit command
+     * Executes the exit command
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke
