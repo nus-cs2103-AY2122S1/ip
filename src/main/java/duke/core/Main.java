@@ -24,7 +24,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().greetUser();
-            stage.setTitle("TaskList Maid | Tohru");
+            stage.setTitle("Task Maid | Tohru");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
