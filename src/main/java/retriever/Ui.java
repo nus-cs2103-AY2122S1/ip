@@ -43,11 +43,19 @@ public class Ui {
     private static String viewCommandFormat = "-> view DD/MM/YYYY";
 
     // Predetermined strings.
+    private String welcomeMessage = "Hello, I am Retriever\nHow Can I Help You Today?";
+    private String goodByeMessage = "-> Sad To See You Go!";
     private String emptyListMessage = "My Memory Is Empty, Please Feed Items!";
     private String printListMessage = "-> Your Tasks, My Master:";
     private String goodBoyMessage = "Woof! Whose a Good Boy?";
     private String badBoyMessage = "Woof! Whose a Bad Boy?";
     private String scheduleMessage = "Master, You are Busy For The Day...";
+    private String logo = "\t  __      ^\n"
+            + "\to'')}____//\n"
+            + "\t`_'      )\n"
+            + "\t(_(_/-(_/\n";
+
+
 
     /**
      * Sets up the scanner to take in user input.
@@ -79,6 +87,21 @@ public class Ui {
      */
     public void printMessage(String message) {
         retrieverResponse = message;
+    }
+
+    /**
+     * Prints the welcome message.
+     */
+    public void printWelcomeMessage() {
+        retrieverResponse = welcomeMessage + "\n" + logo + "\n"
+                + "Need Help? Type 'help'" + "\n" + "in the text field below." ;
+    }
+
+    /**
+     * Prints the goodbye message.
+     */
+    public void printGoodByeMessage() {
+        retrieverResponse = goodByeMessage;
     }
 
     /**

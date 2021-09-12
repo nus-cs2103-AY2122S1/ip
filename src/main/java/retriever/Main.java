@@ -39,7 +39,9 @@ public class Main extends Application {
 
             // To show a welcome splash screen
             Stage welcomeStage = new Stage();
-            Label welcomeLabel = new Label("Welcome to Retreiver the Chatbot! \n Type in a Command Below...");
+            Ui ui = new Ui();
+            ui.printWelcomeMessage();
+            Label welcomeLabel = new Label(ui.getRetrieverResponse());
             welcomeLabel.setFont(new Font("Courier New", 20));
             welcomeLabel.setPadding(new Insets(25, 25, 25, 25));
             Scene welcomeScene = new Scene(welcomeLabel);
