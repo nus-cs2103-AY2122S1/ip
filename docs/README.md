@@ -1,4 +1,11 @@
 # Duke Bot User Guide
+This is a greenfield Java project. It's named after the Java mascot Duke. Given below are instructions on how to use it.
+
+## Quick Start
+1. Download `duke.jar` [here](http://github.com/dt-td/ip/releases) 
+2. Move `duke.jar` to the directory you want to run it.
+3. Go to your terminal and run the command `java -jar duke.jar`.
+4. If you see an external window pop out, you are good to go!   
 
 ## Features 
 
