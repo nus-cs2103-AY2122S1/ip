@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -41,21 +42,21 @@ public class Storage {
             String[] args = data.split(" // ");
             Boolean isTaskDone = Integer.parseInt(args[1]) != 0;
             switch(args[0]) {
-            case "Todo":
-                assert args.length == 3;
-                al.add(new Todo(args[2], isTaskDone));
-                break;
-            case "Event":
-                assert args.length == 4;
-                al.add(new Event(args[2], args[3], isTaskDone));
-                break;
-            case "Deadline":
-                assert args.length == 4;
-                al.add(new Deadline(args[2], args[3], isTaskDone));
-                break;
-            default:
-                assert false : "Wrote data wrongly";
-                break;
+                case "Todo":
+                    assert args.length == 3;
+                    al.add(new Todo(args[2], isTaskDone));
+                    break;
+                case "Event":
+                    assert args.length == 4;
+                    al.add(new Event(args[2], args[3], isTaskDone));
+                    break;
+                case "Deadline":
+                    assert args.length == 4;
+                    al.add(new Deadline(args[2], args[3], isTaskDone));
+                    break;
+                default:
+                    assert false : "Wrote data wrongly";
+                    break;
             }
         }
         return al;
@@ -74,10 +75,10 @@ public class Storage {
             parentDir.mkdir();
         }
         FileWriter fw = new FileWriter(filePath.toFile());
-        for (Task task : al) {
-            String taskData = task.getData() + "\n";
-            fw.write(taskData);
-        }
+        String data = al.stream()
+                .map(Task::getData)
+                .collect(Collectors.joining("\n"));
+        fw.write(data);
         fw.close();
     }
 }
