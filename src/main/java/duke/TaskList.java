@@ -114,6 +114,9 @@ public class TaskList {
      * Saves the current list of tasks to data/duke.txt to be used in future sessions.
      */
     public void saveTasksToStorage() {
+        // Empty file if there are no tasks
+        storage.writeToDataFile("");
+
         // Stores each tasks to the data file
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
