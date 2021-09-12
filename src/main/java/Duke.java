@@ -6,6 +6,14 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.awt.*;
+import java.io.FileNotFoundException;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 
 /**
  * Command Line Task Manager called Duke
@@ -13,12 +21,23 @@ import duke.utils.Ui;
  * @author Rama Venkatesh
  */
 
-public class Duke {
+public class Duke extends Application {
 
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
     private Storage storage;
+
+    @Override
+    public void start(Stage stage){
+        Label helloWorld = new Label("Hello World"); //Creating a new label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our label
+
+//        ui = new Ui();
+//        ui.init();
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage
+    }
 
     /**
      * Constructor that instantiates Duke
