@@ -47,11 +47,24 @@ public class Storage {
             this.filePath = relativePath + dirName + "/" + fileName;
             this.file = new File(filePath);
             /* case when file does not exist */
-            this.file.createNewFile();
+            if (this.file.createNewFile()) {
+                writeDefaultTasks();
+            }
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void writeDefaultTasks() throws IOException {
+        List<Task> tasks = new ArrayList<>();
+        Task deadlineTask = new Deadline("buy turkey", "2021-09-10");
+        deadlineTask.markDone();
+        tasks.add(deadlineTask);
+        tasks.add(new ToDo("buy stuffing for turkey"));
+        tasks.add(new Event("josh coming over", "tmr night"));
+        tasks.add(new ToDo("decorate the place"));
+        saveTasks(tasks);
     }
 
     /**
