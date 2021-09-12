@@ -47,6 +47,8 @@ public class Parser {
             desc = splitDate[0];
             int dateSeparator = copy.indexOf("/");
             date = copy.substring(dateSeparator + DATE_SPACING);
+        } else {
+            desc = copy;
         }
 
         result[0] = command;
@@ -96,7 +98,7 @@ public class Parser {
     @SuppressWarnings("checkstyle:CommentsIndentation")
     public static void main(String[] args) {
         Parser p = new Parser();
-        String s = "todo";
+        String s = "delete-task 4";
         String[] test = p.parse(s);
         System.out.println(Arrays.toString(test));
     }

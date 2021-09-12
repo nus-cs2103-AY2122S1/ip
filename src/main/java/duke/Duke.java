@@ -73,13 +73,22 @@ public class Duke {
     /**
      * Gets the task from duke given an index.
      *
-     * @param index Index of duke.Task.
-     * @return duke.Task of the given index.
+     * @param index Index of Task.
+     * @return Task of the given index.
      */
     public Task getTaskByIndex(int index) {
         return this.taskList.getTaskByIndex(index);
     }
 
+    /**
+     * Gets the place from duke given an index.
+     *
+     * @param index Index of Place.
+     * @return Place of the given index.
+     */
+    public Place getPlaceByIndex(int index) {
+        return this.placeList.getPlaceByIndex(index);
+    }
     /**
      * Marks a task as done given its position in the list.
      *
@@ -95,18 +104,39 @@ public class Duke {
      * Deletes a task from the list.
      *
      * @param items Parsed delete command from user.
+     * @return String for deleting task.
      * @throws DukeException Exception for wrong user inputs.
      */
     public String deleteTask(String[] items) throws DukeException {
         if (items[1].equals("")) {
-            throw new DukeException("The task's number cannot be empty");
+            throw new DukeException("The task's index cannot be empty");
         } else {
             int itemNum = Integer.parseInt(items[1]);
             Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
             assert toBeDeleted != null;
             this.taskList.deleteTask(itemNum - 1);
             this.storage.write(this.taskList, this.placeList);
-            return this.ui.showDeleteMessage(toBeDeleted, this.taskList);
+            return this.ui.showDeleteTaskMessage(toBeDeleted, this.taskList);
+        }
+    }
+
+    /**
+     * Deletes a place from the list.
+     *
+     * @param items Parsed delete command from user.
+     * @return String for deleting task.
+     * @throws DukeException Exception for wrong user inputs.
+     */
+    public String deletePlace(String[] items) throws DukeException {
+        if (items[1].equals("")) {
+            throw new DukeException("This place's index cannot be empty");
+        } else {
+            int itemNum = Integer.parseInt(items[1]);
+            Place toBeDeleted = this.getPlaceByIndex(itemNum - 1);
+            assert toBeDeleted != null;
+            this.placeList.deletePlace(itemNum - 1);
+            this.storage.write(this.taskList, this.placeList);
+            return this.ui.showDeletePlaceMessage(toBeDeleted, this.placeList);
         }
     }
 
@@ -148,8 +178,10 @@ public class Duke {
                 //Fallthrough
             case "event":
                 return this.add(parsedInput);
-            case "delete":
+            case "delete-task":
                 return this.deleteTask(parsedInput);
+            case "delete-place":
+                return this.deletePlace(parsedInput);
             case "find":
                 String result = this.taskList.find(parsedInput[1]);
                 return this.ui.showSearchResults(result);

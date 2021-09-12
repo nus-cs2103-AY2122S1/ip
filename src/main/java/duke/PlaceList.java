@@ -28,6 +28,15 @@ public class PlaceList {
     }
 
     /**
+     * Deletes a place from the list.
+     *
+     * @param index Index of place to remove 0-indexed.
+     */
+    public void deletePlace(int index) {
+        this.places.remove(index);
+    }
+
+    /**
      * Gets the number of places.
      *
      * @return Number of places.
