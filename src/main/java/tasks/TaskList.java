@@ -85,7 +85,7 @@ public class TaskList {
     public String deadlineTask(String str) {
         try {
             int slashIndex = str.indexOf("/");
-            assert slashIndex >= 0;
+            assert slashIndex >= 0 && slashIndex <= str.length();
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             String time = str.substring(slashIndex + 14);
             Task task = new Deadline(str.substring(0, slashIndex), Storage.formatDate(day) + time);

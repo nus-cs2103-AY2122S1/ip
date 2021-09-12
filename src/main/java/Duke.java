@@ -1,6 +1,8 @@
 import duke.Parser;
 import duke.Storage;
+
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -94,10 +96,12 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
+    String getResponse(String input) { 
         String output;
         if (input.equals("bye")) {
             output = "Bye. Hope to see you again soon!";
+            
+            Platform.exit();
         }
         else {
             output = parser.run(input);
