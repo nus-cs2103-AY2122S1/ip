@@ -27,6 +27,10 @@ public class Parser {
         this(new TaskList(loadFromStorage));
     }
 
+    public Parser(boolean loadFromStorage, String fileName) throws DukeException {
+        this(new TaskList(loadFromStorage, fileName));
+    }
+
     /**
      * Creates a Parser with TaskList db and with the recognized commands.
      *
@@ -75,19 +79,14 @@ public class Parser {
     }
 
     private Record greet(String args) {
-        return new Record("Hello! I'm Duke\n\t What can I do for you?" +
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String tag = "Hello from\n " + logo;
+        return new Record(tag + "\n\t What can I do for you?" +
                 "\n\t (Tip: type help [COMMAND] to get help with my functions!)");
-    }
-
-    private boolean verify() {
-        System.out.println("WARNING: This procedure is irreversible." + "\n\t Are you sure about proceeding? [y/n]");
-        Scanner sc = new Scanner(System.in);
-        char response = sc.hasNext() ? sc.next().charAt(0) : 'x';
-        while (response != 'y' || response != 'n') {
-            System.out.println("Are you sure about proceeding? [y/n]");
-            response = sc.hasNext() ? sc.next().charAt(0) : 'x';
-        }
-        return response == 'y';
     }
 
     private Record bye(String args) throws DukeException {
@@ -180,13 +179,6 @@ public class Parser {
     private Record clear(String raw) throws DukeException {
         database.clear();
         return new Record("Task list was cleared.");
-        /*
-        if (verify()) {
-            db.clear();
-            return new Record("Task list was cleared.");
-        }
-        else return new Record("No worries! No changes were made.");
-         */
     }
 
     private Record find(String raw) throws DukeException {

@@ -10,9 +10,14 @@ public class Duke {
     private Parser inputH;
 
     public Duke() {
+        this("");
+    }
+    
+    public Duke(String dbFileName) {
         try {
             sc = new Scanner(System.in);
-            inputH = new Parser(true);
+            inputH = dbFileName.equals("") ? new Parser(true) : 
+                    new Parser(true, dbFileName);
             Ui.reply("Loading Duke...");
         } catch (DukeException e) {
             Ui.reply(e.getMessage());
@@ -48,12 +53,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n" 
-                + "|  _ \\ _   _| | _____ \n" 
-                + "| | | | | | | |/ / _ \\\n" 
-                + "| |_| | |_| |   <  __/\n" 
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         Duke duke = new Duke();
         Ui.reply(duke.getResponse("greet").msg());
 

@@ -56,7 +56,6 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.setMaxHeight(100000.0);
         db.flip();
         return db;
     }

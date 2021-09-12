@@ -25,6 +25,12 @@ public class TaskList {
             this.storage = new Storage(this);
         }
     }
+    
+    public TaskList(boolean loadFromStorage, String fileName) throws DukeException {
+        if (loadFromStorage) {
+            this.storage = new Storage(this, fileName);
+        }
+    }
 
     /**
      * Adds a Task to the list.
