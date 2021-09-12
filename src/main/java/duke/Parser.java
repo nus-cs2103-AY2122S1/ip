@@ -15,14 +15,7 @@ import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
 import duke.command.LoadArchiveCommand;
 import duke.command.NewArchiveCommand;
-import duke.errors.ArchiveException;
-import duke.errors.DukeException;
-import duke.errors.InvalidDeadlineException;
-import duke.errors.InvalidDeleteException;
-import duke.errors.InvalidDoneException;
-import duke.errors.InvalidEventException;
-import duke.errors.InvalidTodoException;
-import duke.errors.InvalidUserInputException;
+import duke.errors.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -56,7 +49,6 @@ public class Parser {
      * @throws InvalidUserInputException
      */
     public duke.command.Command parse(String input) throws DukeException {
-
         assert input != null : "input to parse is null";
         Command caseId = findCase(input);
         duke.command.Command c = new InvalidCommand();
@@ -70,14 +62,11 @@ public class Parser {
             break;
         case Done:
             isValidDone(input);
-
             int donePos = Integer.valueOf(input.substring(5));
             c = new DoneCommand(donePos);
             break;
-
         case Delete:
             isValidDelete(input);
-
             int deletePos = Integer.valueOf(input.substring(7));
             c = new DeleteCommand(deletePos);
             break;
@@ -86,87 +75,29 @@ public class Parser {
             break;
         case Todo:
             isValidTodo(input);
-
             Todo todo = new Todo(input.substring(5));
             c = new AddCommand(todo);
             break;
-
         case Deadline:
             isValidDeadline(input);
-
-            String by = input.split(" /by ")[1];
-            try {
-                LocalDate deadlineDate = LocalDate.parse(by);
-                String deadlineDescription = input.split(" /by ")[0].substring(9);
-
-                Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
-                c = new AddCommand(deadline);
-
-            } catch (DateTimeParseException dateTimeParseException) {
-                throw new DukeException("Invalid date/time input. Format: yyyy-mm-dd");
-            }
+            c = getDeadlineCommand(input);
             break;
-
         case Event:
             isValidEvent(input);
-
-            String at = input.split(" /at ")[1];
-            try {
-                LocalDate eventDate = LocalDate.parse(at);
-                String eventDescription = input.split(" /at ")[0].substring(6);
-
-                Event event = new Event(eventDescription, eventDate);
-                c = new AddCommand(event);
-
-            } catch (DateTimeParseException dateTimeParseException) {
-                throw new DukeException("Invalid date/time input. Format: yyyy-mm-dd");
-            }
-
+            c = getEventCommand(input);
             break;
-
         case CheckDate:
             String date = input.substring(6);
             LocalDate parsedDate = LocalDate.parse(date);
-
             c = new CheckDateCommand(parsedDate);
             break;
-
         case Find:
             String word = input.substring(5);
             c = new FindCommand(word);
             break;
-
         case Archive:
-            if (input.contains("/delete")) {
-                if (input.split(" /delete ").length == 1) {
-                    throw new ArchiveException(": missing file name of Archive to delete.");
-                }
-                String fileName = input.split(" /delete ")[1];
-
-                c = new DeleteArchiveCommand(fileName);
-
-            } else if (input.contains("/load")) {
-
-                if (input.split(" /load ").length == 1) {
-                    throw new ArchiveException(": missing file name of Archive to load.");
-                }
-                String fileName = input.split(" /load ")[1];
-                c = new LoadArchiveCommand(fileName);
-
-            } else if (input.contains("/saveAs")) {
-
-                if (input.split(" /saveAs ").length == 1) {
-                    throw new ArchiveException(": missing file name of Archive to save as.");
-                }
-                String fileName = input.split(" /saveAs ")[1];
-                c = new NewArchiveCommand(fileName);
-
-            } else if (input.equals("archive /list")) {
-                c = new ListArchiveCommand();
-
-            } else {
-                throw new ArchiveException(": Archive command is invalid.");
-            }
+            isValidArchive(input);
+            c = getArchiveCommand(input);
             break;
         default:
             throw new InvalidUserInputException("invalid command");
@@ -308,5 +239,78 @@ public class Parser {
         if (input.split(" /at ")[0].equals("event")) {
             throw new InvalidEventException("Missing description.");
         }
+    }
+
+    private void isValidArchive(String input) throws ArchiveException {
+        if (input.contains("/delete")) {
+            if (input.split(" /delete ").length == 1) {
+                throw new ArchiveException(": missing file name of Archive to delete.");
+            }
+        } else if (input.contains("/load")) {
+            if (input.split(" /load ").length == 1) {
+                throw new ArchiveException(": missing file name of Archive to load.");
+            }
+        } else if (input.contains("/saveAs")) {
+            if (input.split(" /saveAs ").length == 1) {
+                throw new ArchiveException(": missing file name of Archive to save as.");
+            }
+        } else {
+            if (!input.equals("archive /list")) {
+                throw new ArchiveException(": Archive command is invalid.");
+            }
+        }
+    }
+
+    private duke.command.Command getDeadlineCommand(String input) throws InvalidDateException {
+        String by = input.split(" /by ")[1];
+        duke.command.Command c = new InvalidCommand();
+        try {
+            LocalDate deadlineDate = LocalDate.parse(by);
+            String deadlineDescription = input.split(" /by ")[0].substring(9);
+
+            Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
+            c = new AddCommand(deadline);
+
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new InvalidDateException("Please use yyyy-mm-dd formatting.");
+        }
+        return c;
+    }
+
+    private duke.command.Command getEventCommand(String input) throws InvalidDateException {
+        String at = input.split(" /at ")[1];
+        duke.command.Command c = new InvalidCommand();
+        try {
+            LocalDate eventDate = LocalDate.parse(at);
+            String eventDescription = input.split(" /at ")[0].substring(6);
+
+            Event event = new Event(eventDescription, eventDate);
+            c = new AddCommand(event);
+
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new InvalidDateException("Invalid date/time input. Format: yyyy-mm-dd");
+        }
+        return c;
+    }
+
+    private duke.command.Command getArchiveCommand(String input) {
+        duke.command.Command c = new InvalidCommand();
+
+        if (input.contains("/delete")) {
+            String fileName = input.split(" /delete ")[1];
+            c = new DeleteArchiveCommand(fileName);
+
+        } else if (input.contains("/load")) {
+            String fileName = input.split(" /load ")[1];
+            c = new LoadArchiveCommand(fileName);
+        } else if (input.contains("/saveAs")) {
+            String fileName = input.split(" /saveAs ")[1];
+            c = new NewArchiveCommand(fileName);
+        } else {
+            if (input.equals("archive /list")) {
+                c = new ListArchiveCommand();
+            }
+        }
+        return c;
     }
 }

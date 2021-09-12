@@ -94,7 +94,7 @@ public class Duke {
     }
 
     /**
-     * Display Duke's response to the user input, entered from the Command Line.
+     * Displays Duke's response to the user input, entered from the Command Line.
      */
     private void chat() throws DukeException {
         ui.showWelcome();
