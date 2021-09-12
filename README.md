@@ -6,7 +6,7 @@ Dog-and-Cat (DaC) is a chat-bot that keeps track of a list of tasks.
 Prerequisites: JDK 11.
 Download here: https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html.
 
-Download the JAR file from: https://github.com/Joel-Sung/ip/releases/tag/A-Release
+Download the JAR file from: https://github.com/Joel-Sung/ip/releases/tag/untagged-4bf189d5aa367392752c
 
 Run the JAR file from any file that does not require administrator access, and you are **DONE**!!!
 
