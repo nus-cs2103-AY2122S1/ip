@@ -41,7 +41,7 @@ public class HelpCommand extends Command {
                 + "delete - deletes a task in the task list, type 'delete' followed by an integer\n"
                 + "update -Update a task in the task list, etc 'update 2 desc <newdescription>, "
                 + "fields: desc, sdt, edt\n"
-                + "filter - filter task lists for tasks through searching for a keyword\n"
+                + "find - filter task lists for tasks through searching for a keyword\n"
                 + "bye - exits the duke chat bot and saves all task in the task list to the hard disk";
 
         return helpString;

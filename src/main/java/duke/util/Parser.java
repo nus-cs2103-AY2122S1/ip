@@ -183,7 +183,7 @@ public class Parser {
         case "list":
             currentCommand = new ListCommand(currentTaskList);
             break;
-        case "filter":
+        case "find":
             currentCommand = new FindCommand(currentTaskList, checkSearchTerm(command.split(" "), "filter"));
             break;
         case "help":
