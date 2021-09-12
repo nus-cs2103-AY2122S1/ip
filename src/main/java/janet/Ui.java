@@ -26,31 +26,13 @@ public class Ui {
     static final String INDEX_OUT_OF_BOUNDS_STRING = "Sorry, there is no task with the index number ";
 
     /**
-     * Returns a string representation of the tasks in the list.
-     *
-     * @param taskList Janet's list of tasks
-     * @return String representation of list
-     */
-    public static String taskListString(TaskList taskList) {
-        assert(taskList != null);
-        if (taskList.size() == 0) {
-            return "I did not find any tasks.";
-        }
-        String output = "Here's what I found:\n";
-        for (int i = 0; i < taskList.size(); i++) {
-            output += String.format("%d. %s\n", i + 1, taskList.get(i));
-        }
-        return output;
-    }
-
-    /**
      * Returns a string to confirm that a task has been added to the list.
      *
      * @param task Task that has been added
      * @param size Total number of tasks in the list
      * @return String confirming that the task has been added
      */
-    public static String addedString(Task task, int size) {
+    public static String formatTaskAddedString(Task task, int size) {
         assert(task != null);
         return String.format("Alright, I've added this task: \n"
                         + "\t%s\n"
@@ -64,7 +46,7 @@ public class Ui {
      * @param task The task that has been marked as complete
      * @return String confirming that the task has been marked as complete
      */
-    public static String doneString(Task task) {
+    public static String formatTaskDoneString(Task task) {
         assert(task != null);
         return String.format("Certainly, I've marked this task as done: \n"
                         + "\t%s\n",
@@ -78,7 +60,7 @@ public class Ui {
      * @param size Total number of tasks left in the list
      * @return String confirming that the task has been deleted
      */
-    public static String deletedString(Task task, int size) {
+    public static String formatTaskDeletedString(Task task, int size) {
         assert(task != null);
         return String.format("Certainly, I've deleted this task: \n"
                         + "\t%s"
@@ -91,7 +73,7 @@ public class Ui {
      * @param index The index of the non-existent task that the user tried to access
      * @return String to inform the user of index out of bounds error
      */
-    public static String outOfBoundsString(int index) {
+    public static String formatOutOfBoundsString(int index) {
         return INDEX_OUT_OF_BOUNDS_STRING + index + ".";
     }
 }

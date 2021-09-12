@@ -52,7 +52,7 @@ public class Janet {
             Platform.exit();
             return "";
         case "list":
-            return Ui.taskListString(tasks);
+            return tasks.toString();
         case "done":
             return handleTaskDone(command);
         case "todo":
@@ -78,28 +78,28 @@ public class Janet {
         Task task = tasks.get(command.getIndex() - 1);
         task.setDone(true);
         storage.writeSave(tasks);
-        return Ui.doneString(task);
+        return Ui.formatTaskDoneString(task);
     }
 
     private String handleNewToDo(Command command) throws IOException {
         ToDo task = new ToDo(command.getDescription());
         tasks.add(task);
         storage.writeSave(tasks);
-        return Ui.addedString(task, tasks.size());
+        return Ui.formatTaskAddedString(task, tasks.size());
     }
 
     private String handleNewDeadline(Command command) throws IOException {
         Deadline task = new Deadline(command.getDescription(), command.getTime());
         tasks.add(task);
         storage.writeSave(tasks);
-        return Ui.addedString(task, tasks.size());
+        return Ui.formatTaskAddedString(task, tasks.size());
     }
 
     private String handleNewEvent(Command command) throws IOException {
         Event task = new Event(command.getDescription(), command.getTime());
         tasks.add(task);
         storage.writeSave(tasks);
-        return Ui.addedString(task, tasks.size());
+        return Ui.formatTaskAddedString(task, tasks.size());
     }
 
     private String handleDelete(Command command) throws IOException {
@@ -107,20 +107,20 @@ public class Janet {
         try {
             task = tasks.get(command.getIndex() - 1);
         } catch (IndexOutOfBoundsException e) {
-            return Ui.outOfBoundsString(command.getIndex());
+            return Ui.formatOutOfBoundsString(command.getIndex());
         }
         tasks.delete(command.getIndex() - 1);
         storage.writeSave(tasks);
-        return Ui.deletedString(task, tasks.size());
+        return Ui.formatTaskDeletedString(task, tasks.size());
     }
 
     private String handleFind(Command command) {
         TaskList filteredTasks = tasks.find(command.getDescription());
-        return Ui.taskListString(filteredTasks);
+        return filteredTasks.toString();
     }
 
     private String handleSchedule(Command command) {
         TaskList filteredTasks = tasks.findByDate(command.getDescription());
-        return Ui.taskListString(filteredTasks);
+        return filteredTasks.toString();
     }
 }

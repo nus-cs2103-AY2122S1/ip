@@ -97,4 +97,16 @@ public class TaskList implements Serializable {
         }
         return output;
     }
+
+    @Override
+    public String toString() {
+        if (this.size() == 0) {
+            return "I did not find any tasks.";
+        }
+        String output = "Here's what I found:\n";
+        for (int i = 0; i < this.size(); i++) {
+            output += String.format("%d. %s\n", i + 1, this.get(i));
+        }
+        return output;
+    }
 }
