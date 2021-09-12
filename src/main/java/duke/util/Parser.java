@@ -81,6 +81,7 @@ public class Parser {
     public String findKeyword(String input) {
         try {
             String lowerCase = input.toLowerCase();
+            assert lowerCase.length() > 0 : "The input should not be empty!";
             String keyword = lowerCase.substring(5).trim();
             ArrayList<Task> results = new ArrayList<>();
             for (int i = 0; i < taskList.length(); i++) {
@@ -95,34 +96,45 @@ public class Parser {
     }
 
     private String commandDeadline(String input) {
-        int indexOfTime = input.indexOf("/by");
-        if (indexOfTime == -1) {
-            throw new DukeException("OOPS!!! The timeline of a deadline cannot be empty.");
+        try {
+            int indexOfTime = input.indexOf("/by");
+            if (indexOfTime == -1) {
+                throw new DukeException("OOPS!!! The timeline of a deadline cannot be empty.");
+            }
+            String item = input.substring(9, indexOfTime);
+            String by = input.substring(indexOfTime + 4);
+            assert input.length() >= 20 : "The Deadline command should be like 'deadline description /by dd/mm/yyyy (hhmm)'";
+            Task deadline = new Deadline(item, by);
+            taskList.add(deadline);
+            storage.add(deadline);
+            return ui.showNewTask(deadline);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS! You didn't follow the input format: 'deadline description /by dd/mm/yyyy (hhmm)'");
         }
-        String item = input.substring(9, indexOfTime);
-        String by = input.substring(indexOfTime + 4);
-        Task deadline = new Deadline(item, by);
-        taskList.add(deadline);
-        storage.add(deadline);
-        return ui.showNewTask(deadline);
     }
 
     private String commandEvent(String input) {
-        int indexOfTime = input.indexOf("/at");
-        if (indexOfTime == -1) {
-            throw new DukeException("OOPS!!! The timeline of a event cannot be empty.");
+        try {
+            int indexOfTime = input.indexOf("/at");
+            if (indexOfTime == -1) {
+                throw new DukeException("OOPS!!! The timeline of a event cannot be empty.");
+            }
+            String item = input.substring(6, indexOfTime);
+            String at = input.substring(indexOfTime + 4);
+            assert input.length() >= 17 : "The Event command should be like 'event description /at dd/mm/yyyy (hhmm)'";
+            Task event = new Event(item, at);
+            taskList.add(event);
+            storage.add(event);
+            return ui.showNewTask(event);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS! You didn't follow the input format: 'event description /at dd/mm/yyyy (hhmm)'");
         }
-        String item = input.substring(6, indexOfTime);
-        String at = input.substring(indexOfTime + 4);
-        Task event = new Event(item, at);
-        taskList.add(event);
-        storage.add(event);
-        return ui.showNewTask(event);
     }
 
     private String commandTodo(String input) {
         try {
             String item = input.substring(5);
+            assert input.length() >= 6 : "The Todo command should be like 'todo description'";
             Task todo = new Todo(item);
             taskList.add(todo);
             storage.add(todo);
@@ -135,6 +147,7 @@ public class Parser {
     private String commandDone(String input) {
         try {
             int item = Integer.parseInt(input.substring(5, 6));
+            assert input.length() >= 6 : "The length of input should be longer than 5";
             taskList.done(item - 1);
             storage.done(item - 1);
             return ui.showDone(taskList.get(item - 1));
@@ -148,6 +161,7 @@ public class Parser {
     private String commandDelete(String input) {
         try {
             int item = Integer.parseInt(input.substring(7, 8));
+            assert input.length() >= 8 : "The length of input should be longer than 7";
             Task task = taskList.get(item - 1);
             taskList.delete(item - 1);
             storage.delete(item - 1);
