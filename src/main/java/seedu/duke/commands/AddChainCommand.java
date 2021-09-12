@@ -18,6 +18,7 @@ public class AddChainCommand extends Command {
     public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
         taskList.getTaskList().get(index).setAfterTask(new AfterTask(this.description));
+        storage.updateAfterTask(index, description);
         return getReplyMessage();
     }
 

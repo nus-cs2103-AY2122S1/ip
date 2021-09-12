@@ -38,8 +38,10 @@ public class DoneCommand extends Command {
             }
             if (currTask.hasAfterTask()) {
                 String afterTaskDescription = currTask.getAfterTask().getDescription();
+                String inputToStorage = "T" + Command.DATA_STORAGE_ISDONE_FALSE + afterTaskDescription;
                 taskList.addTask(currTask.getAfterTask().getTask());
                 storage.updateDone(index);
+                storage.appendToData(inputToStorage);
                 return getReplyMessageWithAfterTask(taskList, updatedTask, afterTaskDescription);
             }
             storage.updateDone(index);
