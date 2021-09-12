@@ -7,12 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -26,11 +29,16 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            this.setStyle("-fx-background-color: #E1C699");
+            this.dialog.setPadding(new Insets(10, 20, 0, 0));
+            final Circle clip = new Circle(50, 50, 48);
+            this.displayPicture.setClip(clip);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,6 +55,8 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        this.setStyle("-fx-background-color: #4b5320;");
+        this.dialog.setTextFill(Color.color(0.8, 0.8, 0.8));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

@@ -8,7 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,13 +28,19 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    /**
+     * Initializes the MainWindow front-end.
+     *
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userInput.setPromptText("Enter your command here...");
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -71,9 +78,4 @@ public class MainWindow extends AnchorPane {
 
         return textToAdd;
     }
-
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
 }

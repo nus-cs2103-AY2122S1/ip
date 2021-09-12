@@ -1,11 +1,5 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-done 2
-todo
-blah
-deadline
-deadline by Sun
-list
-delete 1
-list
+event hehe /at 2/2/2021 2222
+snooze 1 /to 3/3/2021
+snooze 2 /to 3/3/2021
+deadline wat /by 2/3/2022 1231

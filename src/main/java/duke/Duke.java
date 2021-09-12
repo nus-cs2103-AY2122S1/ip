@@ -13,11 +13,10 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private static Parser parser;
     private static Storage storage;
-
-
     /**
-     * Creates Duke object
+     * Creates Duke object.
      *
+     * @param fileName name of the file that stores all the tasks
      */
     public Duke(String fileName) {
         storage = new Storage(fileName);
@@ -28,7 +27,11 @@ public class Duke extends Application {
         }
         parser = new Parser(storage.getTasks(), storage);
     }
-
+    /**
+     * Starts the program.
+     *
+     * @param stage the UI of the program
+     */
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
@@ -38,7 +41,7 @@ public class Duke extends Application {
         stage.show(); // Render the stage.
     }
     /**
-     * Runs the main logic of program
+     * Runs the main logic of program.
      *
      */
     public void run() {
