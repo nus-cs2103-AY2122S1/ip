@@ -8,22 +8,54 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<javafx.scene.layout.HBox alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="1.7976931348623157E308" minWidth="0" prefWidth="0" spacing="10.0" style="-fx-background-color: #1b262c;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.DialogBox">
-  <children>
-    <Region prefWidth="200" HBox.hgrow="ALWAYS" />
-    <Label fx:id="dialog" maxWidth="800" minHeight="40.0" minWidth="20" prefWidth="200" style="-fx-background-color: #bbe1fa; -fx-background-radius: 5;" text="Lorem ipsum." wrapText="false" HBox.hgrow="ALWAYS">
-         <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </padding>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin></Label>
-    <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" smooth="false" HBox.hgrow="NEVER">
-         <image>
-            <Image url="images/DaUser.png" />
-         </image></ImageView>
-  </children>
-  <padding>
-    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-  </padding>
+<javafx.scene.layout.HBox
+    alignment="TOP_RIGHT"
+    maxWidth="Infinity"
+    minWidth="-Infinity"
+    maxHeight="Infinity"
+    prefWidth="0"
+    spacing="10.0"
+    style="-fx-background-color: #1b262c;"
+    xmlns="http://javafx.com/javafx/11"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="duke.gui.DialogBox">
+
+    <children>
+        
+        <Region
+            prefWidth="200"
+            HBox.hgrow="ALWAYS"/>
+
+        <Label
+            fx:id="dialog"
+            text="Label"
+            wrapText="true"
+            minHeight="-Infinity"
+            maxHeight="Infinity"
+            style="-fx-background-color: #bbe1fa; -fx-background-radius: 5;">
+
+            <padding>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+            </padding>
+
+        </Label>
+
+        <ImageView
+            fx:id="displayPicture"
+            fitHeight="60.0"
+            fitWidth="60.0"
+            pickOnBounds="true"
+            preserveRatio="true"
+            smooth="false"
+            HBox.hgrow="NEVER">
+            <image>
+                <Image url="images/DaUser.png" />
+            </image>
+        </ImageView>
+    </children>
+  
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+
 </javafx.scene.layout.HBox>

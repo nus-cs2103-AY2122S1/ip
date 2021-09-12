@@ -56,12 +56,6 @@ public class DialogBox extends HBox {
     public static HBox getUserDialog(String text, Image img) {
         HBox db = DialogBox.getDialog(text, img);
         ObservableList<Node> tmp = FXCollections.observableArrayList(db.getChildren());
-        tmp.forEach(child -> {
-                    if (child instanceof Label) {
-                        ((Label) child).setAlignment(Pos.TOP_RIGHT);
-                        ((Region) child).setPadding(new Insets(15.0, 15.0, 15.0, 15.0));
-                    }
-                });
         return db;
     }
 
