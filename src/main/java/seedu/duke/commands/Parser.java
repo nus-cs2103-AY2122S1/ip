@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import seedu.duke.tasks.Deadline;
 import seedu.duke.tasks.Events;
 import seedu.duke.tasks.PeriodTask;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.TimedTask;
 import seedu.duke.tasks.ToDos;
 
@@ -73,8 +74,28 @@ public class Parser {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
             PeriodTask periodTask = new PeriodTask(getOnlyDescription(descriptions), periodTaskGetFrom(descriptions),
-            periodTaskGetTo(descriptions));
-            return new AddCommand(periodTask);
+                    periodTaskGetTo(descriptions));
+            return new AddCommand(periodTask); 
+
+        case CHAINTASK:
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            return new AddChainCommand(getOnlyDescription(descriptions), getAfterIndex(descriptions));
+
+        case SCHEDULETASK:
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            ScheduledTask scheduledTask = new ScheduledTask(getOnlyDescription(descriptions),
+                    getScheduledTaskDate(descriptions), getScheduledTimeFrom(descriptions),
+                    getScheduledTimeTo(descriptions));
+            return new AddCommand(scheduledTask);
+        
+        case VIEWSCHEDULE:
+            return new ViewScheduleCommand();
 
         case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
@@ -132,13 +153,27 @@ public class Parser {
 
     private String periodTaskGetFrom(String descriptions) {
         String period = descriptions.split(" /between ")[1];
-        System.out.println(period);
         return period.split(" and ")[0];
     }
-    
+
     private String periodTaskGetTo(String descriptions) {
         String period = descriptions.split(" /between ")[1];
-        System.out.println(period);
         return period.split(" and ")[1];
+    }
+
+    private String getAfterIndex(String descriptions) {
+        return descriptions.split(" /after ")[1];
+    }
+
+    private String getScheduledTaskDate(String descriptions) {
+        return descriptions.split(" /on ")[1].split(" ")[0];
+    }
+
+    private int getScheduledTimeFrom(String descriptions) {
+        return Integer.parseInt(descriptions.split(" /from ")[1].split(" ")[0]);
+    }
+
+    private int getScheduledTimeTo(String descriptions) {
+        return Integer.parseInt(descriptions.split(" /to ")[1].split(" ")[0]);
     }
 }

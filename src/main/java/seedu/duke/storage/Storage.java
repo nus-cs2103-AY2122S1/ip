@@ -12,9 +12,13 @@ import seedu.duke.exceptions.storage.DukeStorageDeleteException;
 import seedu.duke.exceptions.storage.DukeStorageLoadException;
 import seedu.duke.exceptions.storage.DukeStorageSaveException;
 import seedu.duke.exceptions.storage.DukeStorageUpdateException;
+import seedu.duke.tasks.AfterTask;
 import seedu.duke.tasks.Deadline;
 import seedu.duke.tasks.Events;
+import seedu.duke.tasks.PeriodTask;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
+import seedu.duke.tasks.TimedTask;
 import seedu.duke.tasks.ToDos;
 
 public class Storage {
@@ -50,26 +54,68 @@ public class Storage {
             while (sc.hasNext()) {
                 currLine = sc.nextLine();
                 storageDataArray = currLine.replace("|", "/").split(" / ");
-                eventType = currLine.split("")[0];
+                eventType = currLine.split(" ")[0];
                 storageIsDone = storageDataArray[1];
                 switch (eventType) {
 
                 case "T":
                     ToDos todos = new ToDos(getDescriptions(storageDataArray), getIsDoneFromStorage(storageIsDone));
+                    if (currLine.contains(" | after")) {
+                        String afterTaskDescription = currLine.split(" /| after ")[1];
+                        todos.setAfterTask(new AfterTask(afterTaskDescription));
+                    }
                     currList.add(todos);
                     break;
 
                 case "D":
                     Deadline deadline = new Deadline(getDescriptions(storageDataArray),
                             getDateTimeLocation(storageDataArray), getIsDoneFromStorage(storageIsDone));
+                    if (currLine.contains(" | after")) {
+                        String afterTaskDescription = currLine.split(" /| after ")[1];
+                        deadline.setAfterTask(new AfterTask(afterTaskDescription));
+                    }
                     currList.add(deadline);
                     break;
 
                 case "E":
-
                     Events event = new Events(getDescriptions(storageDataArray), getDateTimeLocation(storageDataArray),
                             getIsDoneFromStorage(storageIsDone));
+                    if (currLine.contains(" | after")) {
+                        String afterTaskDescription = currLine.split(" /| after ")[1];
+                        event.setAfterTask(new AfterTask(afterTaskDescription));
+                    }
                     currList.add(event);
+                    break;
+
+                case "TT":
+                    TimedTask timedTask = new TimedTask(getDescriptions(storageDataArray),
+                            getDateTimeLocation(storageDataArray), getIsDoneFromStorage(storageIsDone));
+                    if (currLine.contains(" | after")) {
+                        String afterTaskDescription = currLine.split(" /| after ")[1];
+                        timedTask.setAfterTask(new AfterTask(afterTaskDescription));
+                    }
+                    currList.add(timedTask);
+                    break;
+
+                case "PT":
+                    PeriodTask periodTask = new PeriodTask(getDescriptions(storageDataArray),
+                            periodTaskGetFrom(storageDataArray), periodTaskGetTo(storageDataArray));
+                    if (currLine.contains(" | after")) {
+                        String afterTaskDescription = currLine.split(" /| after ")[1];
+                        periodTask.setAfterTask(new AfterTask(afterTaskDescription));
+                    }
+                    currList.add(periodTask);
+                    break;
+
+                case "ST":
+                    ScheduledTask scheduledTask = new ScheduledTask(getDescriptions(storageDataArray),
+                            scheduledTaskGetDate(storageDataArray), scheduledTaskGetFrom(storageDataArray),
+                            scheduledTaskGetTo(storageDataArray));
+                    if (currLine.contains(" | after")) {
+                        String afterTaskDescription = currLine.split(" /| after ")[1];
+                        scheduledTask.setAfterTask(new AfterTask(afterTaskDescription));
+                    }
+                    currList.add(scheduledTask);
                     break;
 
                 default:
@@ -119,11 +165,36 @@ public class Storage {
             Scanner sc = new Scanner(this.data);
             while (sc.hasNextLine()) {
                 currLine = sc.nextLine();
-                count++;
                 if (count == index) {
                     currLine = currLine.replace(Storage.STORAGE_ISDONE_FALSE, Storage.STORAGE_ISDONE_TRUE);
+                    if (currLine.contains(" | after")) {
+                        currLine = currLine.split(" \\| after")[0];
+                    }
                 }
                 stringToAppend += currLine + "\n";
+                count++;
+            }
+            clearsFileAndWrite(stringToAppend);
+            sc.close();
+        } catch (IOException err) {
+            throw new DukeStorageUpdateException(err.toString());
+        }
+    }
+
+    public void updateAfterTask(int index, String description) {
+        int count = 0;
+        String currLine;
+        String stringToAppend = "";
+
+        try {
+            Scanner sc = new Scanner(this.data);
+            while (sc.hasNextLine()) {
+                currLine = sc.nextLine();
+                if (count == index) {
+                    currLine += " | after " + description;
+                }
+                stringToAppend += currLine + "\n";
+                count++;
             }
             clearsFileAndWrite(stringToAppend);
             sc.close();
@@ -195,5 +266,30 @@ public class Storage {
         } catch (IOException err) {
             throw new DukeStorageDeleteException(err.toString());
         }
+    }
+
+    private String periodTaskGetFrom(String[] storageDataArray) {
+        String periodDate = storageDataArray[3];
+        return periodDate.split(" and ")[0];
+    }
+
+    private String periodTaskGetTo(String[] storageDataArray) {
+        String periodDate = storageDataArray[3];
+        return periodDate.split(" and ")[1];
+    }
+
+    private String scheduledTaskGetDate(String[] storageDataArray) {
+        String dateTime = storageDataArray[3];
+        return dateTime.split(" ")[0];
+    }
+
+    private int scheduledTaskGetFrom(String[] storageDataArray) {
+        String dateTime = storageDataArray[3];
+        return Integer.parseInt(dateTime.split(" ")[2]);
+    }
+
+    private int scheduledTaskGetTo(String[] storageDataArray) {
+        String dateTime = storageDataArray[3];
+        return Integer.parseInt(dateTime.split(" ")[4]);
     }
 }

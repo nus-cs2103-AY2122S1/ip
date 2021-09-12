@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.timetable.Timetable;
 
 public class EmptyCommand extends Command {
 
@@ -12,7 +13,7 @@ public class EmptyCommand extends Command {
      *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         return Ui.EMPTY_COMMAND_REPLY;
     }
 

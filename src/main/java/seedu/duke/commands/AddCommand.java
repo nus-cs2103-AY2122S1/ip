@@ -3,7 +3,10 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.storage.DukeStorageSaveException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.PeriodTask;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
+import seedu.duke.timetable.Timetable;
 
 public class AddCommand extends Command {
     private final Task task;
@@ -26,13 +29,18 @@ public class AddCommand extends Command {
      * @param storage  the database where the tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         try {
+            String timetableMessage = "";
+            if (this.task.getSymbol().equals("ST")) {
+                if (timetable.isClash((ScheduledTask) this.task)) {
+                    return ("\n" + timetable.addPlanToDay((ScheduledTask) this.task));
+                }
+                timetableMessage = "\n" + timetable.addPlanToDay((ScheduledTask) this.task);
+            }
             taskList.addTask(this.task);
-
             storage.appendToData(getInputStorageDescription());
-
-            return getReplyMessage(taskList);
+            return getReplyMessage(taskList) + timetableMessage;
 
         } catch (DukeStorageSaveException err) {
             throw new DukeStorageSaveException(err.toString());
@@ -41,8 +49,24 @@ public class AddCommand extends Command {
 
     private String getInputStorageDescription() {
         String inputToStorage = this.task.getSymbol() + Command.DATA_STORAGE_ISDONE_FALSE + this.task.getDescription();
-        if (!this.task.getSymbol().equals(Command.DATA_STORAGE_TASK_SYMBOL)) {
+        switch (this.task.getSymbol()) {
+        case "T":
+            break;
+
+        case "ST":
+            ScheduledTask scheduledTask = (ScheduledTask) this.task;
+            inputToStorage += " | " + scheduledTask.getDate() + " at " + scheduledTask.getTimeFrom() + " to "
+                    + scheduledTask.getTimeTo();
+            break;
+
+        case "PT":
+            PeriodTask periodTask = (PeriodTask) this.task;
+            inputToStorage += " | " + periodTask.getFrom() + " and " + periodTask.getTo();
+            break;
+
+        default:
             inputToStorage += " | " + this.task.getDateTime();
+            break;
         }
         return inputToStorage;
     }

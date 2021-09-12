@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.timetable.Timetable;
 
 public class ListCommand extends Command {
 
@@ -13,7 +14,7 @@ public class ListCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         return Ui.printList(taskList.getTaskList(), Ui.NO_TASK_MESSAGE, Ui.LIST_MESSAGE);
     }
 

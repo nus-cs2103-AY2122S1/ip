@@ -3,7 +3,9 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.storage.DukeStorageUpdateException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
+import seedu.duke.timetable.Timetable;
 
 public class DoneCommand extends Command {
     private final String taskId;
@@ -26,10 +28,22 @@ public class DoneCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
         try {
+            Task currTask = taskList.getTaskList().get(index);
             Task updatedTask = taskList.doneItem(index);
+            if (currTask.getSymbol().equals("ST")) {
+                timetable.markDone((ScheduledTask) currTask);
+            }
+            if (currTask.hasAfterTask()) {
+                String afterTaskDescription = currTask.getAfterTask().getDescription();
+                String inputToStorage = "T" + Command.DATA_STORAGE_ISDONE_FALSE + afterTaskDescription;
+                taskList.addTask(currTask.getAfterTask().getTask());
+                storage.updateDone(index);
+                storage.appendToData(inputToStorage);
+                return getReplyMessageWithAfterTask(taskList, updatedTask, afterTaskDescription);
+            }
             storage.updateDone(index);
 
             return getReplyMessage(taskList, updatedTask);
@@ -41,6 +55,12 @@ public class DoneCommand extends Command {
 
     private String getReplyMessage(TaskList taskList, Task updatedTask) {
         return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + updatedTask.toString());
+    }
+
+    private String getReplyMessageWithAfterTask(TaskList taskList, Task updatedTask, String afterTaskDescription) {
+        String message = getReplyMessage(taskList, updatedTask);
+        message += "Added new task: " + afterTaskDescription;
+        return message;
     }
 
     /**

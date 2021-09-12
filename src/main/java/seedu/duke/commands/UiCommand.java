@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.timetable.Timetable;
 
 public class UiCommand extends Command {
     private final String uiMsg;
@@ -23,7 +24,7 @@ public class UiCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Timetable timetable, Storage storage) {
         return Ui.printMessage(this.uiMsg);
     }
 
