@@ -7,7 +7,6 @@ import dino.util.Parser;
 import dino.util.Storage;
 import dino.util.Ui;
 
-
 /**
  * Represents a Personal Assistant ChatBot name Dino
  * It helps the user to keep track of various things
@@ -39,7 +38,6 @@ public class Dino {
             return e.getMessage();
         }
     }
-
 
     /**
      * Processes the input command after parsing and returns the output message

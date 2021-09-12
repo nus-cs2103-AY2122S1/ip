@@ -1,7 +1,5 @@
 package dino.util;
 
-import dino.exception.InvalidInputException;
-
 /**
  * Deals with making sense of the user command
  */
@@ -34,16 +32,11 @@ public class Parser {
      */
     public static String getFirstWord(String s) {
         String firstWord;
-        try {
-            if (s.contains(" ")) {
-                firstWord = s.substring(0, s.indexOf(" "));
-                return firstWord;
-            } else {
-                throw new InvalidInputException();
-            }
-        } catch (InvalidInputException e) {
-            return e.getMessage();
+        if (s.contains(" ")) {
+            firstWord = s.substring(0, s.indexOf(" "));
+            return firstWord;
+        } else {
+            return s;
         }
     }
-
 }
