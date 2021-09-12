@@ -52,6 +52,14 @@ shadowJar {
     archiveClassifier = null
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources" 
+        }
+    }
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'duke.Launcher'
@@ -67,6 +75,6 @@ javafx {
     version = "8.0.171"
 }
 
-run{
+run {
     standardInput = System.in
 }
