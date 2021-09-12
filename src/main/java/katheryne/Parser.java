@@ -24,10 +24,22 @@ public class Parser {
      * @throws KatheryneException An exception thrown due to wrong user input.
      */
     public static Command parse(String input) throws KatheryneException {
-        String[] inputArr = input.split(" ", 2);
-        String commandWord = inputArr[0].toUpperCase(Locale.ROOT);
+        String[] commandWordSplitOut = splitCommandWordOut(input);
+        String commandWord = commandWordSplitOut[0];
         String[] processedRemainingText = Parser.parseRemainingText(commandWord, input);
         return Command.initialiseCommand(commandWord, processedRemainingText);
+    }
+
+    /**
+     * Returns a string array where the first item is the command word
+     * 
+     * @param input
+     * @return
+     */
+    private static String[] splitCommandWordOut(String input) {
+        String[] inputArr = input.split(" ", 2);
+        inputArr[0] = inputArr[0].toUpperCase(Locale.ROOT);
+        return inputArr;
     }
 
     /**
@@ -41,20 +53,19 @@ public class Parser {
      */
     private static String[] parseRemainingText(String commandWord, String input) throws KatheryneException {
         // Separate out the command word, and initialise processedRemainingText
-        String[] processedRemainingText = input.split(" ", 2);
+        String[] processedRemainingText = splitCommandWordOut(input);
         try {
             // Process as needed per command, throw errors if command format is wrong
             switch (commandWord) {
             case ExitCommand.COMMAND:
             case ListCommand.COMMAND:
                 return new String[0];
-                // No break, as returning early will break the switch statement
             case DoneCommand.COMMAND:
             case DeleteCommand.COMMAND:
-                processedRemainingText = new String[]{input.split(" ", 2)[1]};
-                if (processedRemainingText[0].split(" ").length > 1) {
+                if (processedRemainingText.length == 1 || processedRemainingText[1].split(" ").length > 1) {
                     throw new KatheryneException("Just tell me the command and what index, nothing else.");
                 }
+                processedRemainingText = new String[]{input.split(" ", 2)[1]};
                 break;
             case TodoCommand.COMMAND:
                 processedRemainingText = new String[]{ processedRemainingText[1] };
@@ -68,7 +79,7 @@ public class Parser {
                 }
                 break;
             case DeadlineCommand.COMMAND:
-                processedRemainingText = input.split(" ", 2)[1].split("/by");
+                processedRemainingText = processedRemainingText[1].split("/by");
                 if (processedRemainingText.length != 2) {
                     throw new KatheryneException(
                             "A deadline needs a description and a /by time in the format 2007-12-03.");

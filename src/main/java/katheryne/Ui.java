@@ -19,10 +19,12 @@ public class Ui {
      * @param lst
      */
     void greet(TaskList lst) {
-        System.out.println("Ad astra abyssosque! I am Katheryne, the receptionist here at the Adventurers' Guild.");
+        System.out.println("Ad astra abyssosque! " 
+                + "I am Katheryne, the receptionist here at the Adventurers' Guild.");
         System.out.println("How may I assist?");
         if (!lst.isEmpty()) {
-            System.out.println("I still have your list of tasks from last time, it has " + lst.getSize() + " items.");
+            System.out.println("I still have your list of tasks from last time." +
+                            "The number of tasks you have is " + lst.getSize() + ".");
         }
     }
 
@@ -45,6 +47,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out a statement which states the number of tasks in the list
+     * 
+     * @param lst
+     */
     public void countTasksInList(TaskList lst) {
         String statement = lst.getSize() == 1
                 ? "There is currently 1 item in your list."

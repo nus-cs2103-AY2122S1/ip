@@ -46,6 +46,7 @@ application {
 shadowJar {
     archiveBaseName = "katheryne"
     archiveClassifier = null
+    archiveVersion.set('v0.1-w3')
 }
 
 checkstyle {

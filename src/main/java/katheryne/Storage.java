@@ -14,13 +14,16 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import katheryne.task.Task;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private final ObjectMapper mapper;
     private final ObjectWriter writer;
 
     /**
-     * Deals with loading tasks from the file and saving tasks in the file.
+     * Basic constructor for storage
      */
     public Storage() {
         mapper = new ObjectMapper().enableDefaultTyping();
