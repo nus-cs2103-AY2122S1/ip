@@ -1,2 +1,0 @@
-T, false, read me
-E, true, this is an event /from 2020-02-18T15:56 /to 2021-02-19T11:12
