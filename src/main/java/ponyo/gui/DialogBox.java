@@ -27,7 +27,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private final Circle clip = new Circle(50, 50, 50);
+    private final Circle clip = new Circle(35, 35, 35);
 
     private DialogBox(String text, Image img) {
         try {
@@ -56,14 +56,14 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialogBox = new DialogBox(text, img);
-        userDialogBox.setStyle("-fx-background-color: lavender;");
+        userDialogBox.lookup(".label").setStyle("-fx-background-color: #239981");
         return userDialogBox;
     }
 
     public static DialogBox getPonyoDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: aliceblue;");
-        db.flip();
-        return db;
+        DialogBox ponyoDialogBox = new DialogBox(text, img);
+        ponyoDialogBox.lookup(".label").setStyle("-fx-background-color: #234099");
+        ponyoDialogBox.flip();
+        return ponyoDialogBox;
     }
 }

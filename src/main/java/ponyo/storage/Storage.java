@@ -132,8 +132,6 @@ public class Storage {
         String description = taskDetails[1];
         String date = taskDetails.length > 2 ? taskDetails[2] : null;
 
-        System.out.println(taskCode);
-
         switch (taskCode) {
         case Prefixes.PREFIX_TODO:
             Task task = new Todo(description);

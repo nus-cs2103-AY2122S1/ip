@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import ponyo.Ponyo;
+import ponyo.common.Messages;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,9 +29,17 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/jia.jpeg"));
     private Image ponyoImage = new Image(this.getClass().getResourceAsStream("/images/sally.jpeg"));
 
+
+    /**
+     * Initialise the GUI's main window with a welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getPonyoDialog(Messages.MESSAGE_WELCOME, ponyoImage),
+                DialogBox.getPonyoDialog(Messages.MESSAGE_INSTRUCTIONS, ponyoImage)
+        );
     }
 
     public void setPonyo(Ponyo p) {
