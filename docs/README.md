@@ -3,17 +3,18 @@
 
 ## Gnosis Feature(s)
 
-### gnosis.main.model.gnosis.task Manager
+### Gnosis
 
 Gnosis provides the ability to create, retrieve and delete different variety of tasks
-to manage.</br>
+to manage as well as manage places visited.</br>
+
 Different types of tasks includes: todos, deadlines and events.
 
-## Usage
+## Commands
 
-### `todo` - Creates a todo gnosis.task
+### `todo` - Creates a todo
 
-Creates a todo gnosis.task without any date/time.
+Creates a todo without any date/time.
 
 Example of usage: 
 
@@ -21,17 +22,17 @@ Example of usage:
 
 Expected outcome:
 
-Displays todo gnosis.task added.<br/>
-[T] - denotes as a Todo gnosis.task.<br/>
+Displays task added.<br/>
+[T] - denotes as a Todo<br/>
 [&nbsp;&nbsp;] - denotes a todo that is not marked done.
 ```
 Todo added:
 [T][ ] read book
 ```
 ***
-### `deadline` - Creates a deadline gnosis.task
+### `deadline` - Creates a deadline
 
-Creates a deadline gnosis.task with a specified date/time.
+Creates a deadline with a specified date/time.
 
 Example of usage:
 
@@ -39,17 +40,17 @@ Example of usage:
 
 Expected outcome:
 
-Displays deadline gnosis.task added.<br/>
-[D] - denotes as a deadline gnosis.task.<br/>
+Displays deadline task added.<br/>
+[D] - denotes as a deadline.<br/>
 [&nbsp;&nbsp;] - denotes a deadline that is not marked done.
 ```
 Deadline added:
 [D][ ] return book  (by:  Sunday)
 ```
 ***
-### `event` - Creates an event gnosis.task
+### `event` - Creates an event
 
-Creates an event gnosis.task with a specified schedule.
+Creates an event with a specified schedule.
 
 Example of usage:
 
@@ -57,8 +58,8 @@ Example of usage:
 
 Expected outcome:
 
-Displays event gnosis.task added.<br/>
-[E] - denotes as an event gnosis.task.<br/>
+Displays event added.<br/>
+[E] - denotes as an event.<br/>
 [&nbsp;&nbsp;] - denotes an event that is not marked done.
 ```
 Event added:
@@ -75,11 +76,11 @@ Example of usage:
 
 Expected outcome:
 
-Displays all gnosis.task with gnosis.task number added.<br/>
+Displays all task with task number added.<br/>
 [T] - denotes as a todo gnosis.task.<br/>
 [D] - denotes as a deadline gnosis.task.<br/>
 [E] - denotes as an event gnosis.task.<br/>
-[&nbsp;&nbsp;] - denotes a gnosis.task that is not marked done.
+[&nbsp;&nbsp;] - denotes a task that is not marked done.
 ```
 Listing all tasks in your list:
 1. [T][ ] read book
@@ -87,9 +88,9 @@ Listing all tasks in your list:
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
-### `done` - Mark specified gnosis.task done
+### `done` - Mark specified task done
 
-Marks specified gnosis.task has done.
+Marks specified task has done.
 
 Example of usage:
 
@@ -97,16 +98,16 @@ Example of usage:
 
 Expected outcome:
 
-Marks specified gnosis.task done.<br/>
-[X] - denotes a gnosis.task that is marked has done<br/>
+Marks specified task done.<br/>
+[X] - denotes a task that is marked has done<br/>
 ```
 gnosis.main.model.gnosis.task 2 marked as done:
 [D][X] return book  (by: Sunday)
 ```
 ***
-### `delete` - Deletes gnosis.task from list
+### `delete` - Deletes task from list
 
-Deletes gnosis.task from gnosis.task gnosis.task list.
+Deletes task from task task list.
 
 Example of usage:
 
@@ -114,11 +115,63 @@ Example of usage:
 
 Expected outcome:
 
-Displays deleted gnosis.task.<br/>
+Displays deleted task.<br/>
 ```
-Understood. gnosis.main.model.gnosis.task has been deleted:
+Understood. task has been deleted:
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 ```
+***
+### `find` - find task from list
+
+find task matching a keyword
+
+Example of usage:
+
+`find cs2103`
+
+Expected outcome:
+
+Displays matching tasks with ``cs2103``.<br/>
+
+```
+Listing all tasks with matching keyword: cs2103
+1. [E][ ] CS2103 Lecture  (at: Sep 17 2021, 04:00PM)
+2. [D][ ] CS2103 Quiz  (by: Sep 13 2021, 23:59PM)
+```
+
+***
+***
+### `place` - list all places visited
+
+displays all places visited
+
+example of usage: 
+
+`place`
+
+Expected outcome:
+displays all place visited
+```
+Listing all places visited:
+1. visited SOC at NUS on Sep 13 2021, 02:30PM
+2. visited Fine Foods at U-Town on Sep 13 2021, 05:30PM
+```
+
+***
+***
+### `visited` - add place visited
+
+add specific place visited
+
+example of usage:
+
+`visited SOC /at NUS /on Sep 13 2021, 02:30PM`
+
+Expected outcome: displays place visited
+```
+visited : SOC /at NUS /on Sep 13 2021, 02:30PM
+```
+
 ***
 ### `bye` - Exits Gnosis
 
