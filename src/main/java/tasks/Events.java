@@ -3,8 +3,8 @@ package tasks;
 public class Events extends Task {
     protected String at;
 
-    public Events(String description, String at) {
-        super(description);
+    public Events(String description, String at, Priority priority) {
+        super(description, priority);
         this.at = at;
     }
 
@@ -16,7 +16,7 @@ public class Events extends Task {
      */
     @Override
     public String toStringForFile() {
-        return "E - " + super.toStringForFile() + " - " + at;
+        return " E - " + super.toStringForFile() + " - " + at;
     }
 
     /**
@@ -25,6 +25,6 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        return priority + " [E]" + super.toString() + "(at: " + at + ")";
     }
 }

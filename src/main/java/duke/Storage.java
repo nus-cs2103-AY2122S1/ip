@@ -53,9 +53,25 @@ public class Storage {
             String t = sc.next();
             int i = Integer.parseInt(sc.next());
             String desc = sc.next();
-            switch(t) { 
+            Task.Priority priority;
+            int descLen = desc.length();
+            String newDesc;
+
+            switch(t) {
             case "T":
-                Task task = new Todo(desc);
+                String p = sc.next();
+                p.toUpperCase();
+                if (p.contains("H")) {
+                    priority = Task.Priority.HIGH;
+                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("M")) {
+                    priority = Task.Priority.MEDIUM;
+                    newDesc = desc.substring(0, descLen - 6);
+                } else {
+                    priority = Task.Priority.LOW;
+                    newDesc = desc.substring(0, descLen);
+                }
+                Task task = new Todo(newDesc, priority);
                 if (i == 1) {
                     task.taskDone();
                 }
@@ -63,7 +79,19 @@ public class Storage {
                 break;
             case "D":
                 String by = sc.next();
-                task = new Deadline(desc, by);
+                p = sc.next();
+                p.toUpperCase();
+                if (p.contains("H")) {
+                    priority = Task.Priority.HIGH;
+                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("M")) {
+                    priority = Task.Priority.MEDIUM;
+                    newDesc = desc.substring(0, descLen - 6);
+                } else {
+                    priority = Task.Priority.LOW;
+                    newDesc = desc.substring(0, descLen);
+                }
+                task = new Deadline(newDesc, by, priority);
                 if (i == 1) {
                     task.taskDone();
                 }
@@ -71,7 +99,19 @@ public class Storage {
                 break;
             case "E":
                 String at = sc.next();
-                task = new Events(desc, at);
+                p = sc.next();
+                p.toUpperCase();
+                if (p.contains("H")) {
+                    priority = Task.Priority.HIGH;
+                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("M")) {
+                    priority = Task.Priority.MEDIUM;
+                    newDesc = desc.substring(0, descLen - 6);
+                } else {
+                    priority = Task.Priority.LOW;
+                    newDesc = desc.substring(0, descLen);
+                }
+                task = new Events(newDesc, at, priority);
                 if (i == 1) {
                     task.taskDone();
                 }
@@ -153,6 +193,6 @@ public class Storage {
      */
     public static String formatDate(String unformattedDate) throws DateTimeParseException {
         LocalDate date = LocalDate.parse(unformattedDate);
-        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("d MMM uuu"));
     }
 }

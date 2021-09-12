@@ -4,8 +4,8 @@ package tasks;
  * A To-do class that is a subclass of Tasks. 
  */
 public class Todo extends Task {
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, Priority priority) {
+        super(description, priority);
     }
 
     /**
@@ -16,14 +16,14 @@ public class Todo extends Task {
      */
     @Override
     public String toStringForFile() {
-        return "T - " + super.toStringForFile();
+        return " T - " + super.toStringForFile();
     }
 
     /**
-     * @return the String representation of a Deadline
+     * @return the String representation of a to do task
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return priority + " [T]" + super.toString();
     }
 }
