@@ -22,7 +22,7 @@ public class Task {
     /**
      * Checks if task description contains string.
      *
-     * @param searchKey Serach string
+     * @param searchKey Search string
      * @return true if contains string
      */
     public boolean containsString(String searchKey) {
@@ -85,6 +85,7 @@ public class Task {
         }
     }
 
+    /* List of task types */
     public enum TaskTypes {
         TODO,
         DEADLINE,

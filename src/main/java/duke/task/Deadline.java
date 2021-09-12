@@ -1,14 +1,11 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.Locale;
-
 
 /**
  * A task that has to be done by a specified time.

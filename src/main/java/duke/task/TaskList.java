@@ -107,7 +107,7 @@ public class TaskList {
     }
 
     /**
-     * Format list of tasks into savable string
+     * Formats list of tasks into savable string
      *
      * @return String to save
      */
@@ -118,7 +118,7 @@ public class TaskList {
     }
 
     /**
-     * Return index of task by task description.
+     * Returns index of task by task description.
      *
      * @param description Task description
      * @param tt          Type of Task
@@ -138,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * Search task list for tasks that matches search key.
+     * Searches task list for tasks that matches search key.
      * Returns new TaskList object of matching tasks.
      *
      * @param searchKey Search string to match
