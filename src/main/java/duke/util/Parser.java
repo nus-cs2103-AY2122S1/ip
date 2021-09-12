@@ -12,6 +12,7 @@ import duke.command.AddCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.SortCommand;
+import duke.command.HelpCommand;
 import duke.command.DeleteCommand;
 import duke.command.DisplayCommand;
 import duke.command.MarkDoneCommand;
@@ -141,6 +142,9 @@ public class Parser {
 
         } else if (line.equals("bye")) {
             return new ExitCommand();
+
+        } else if (line.equals("help")) {
+            return new HelpCommand();
 
         } else if (line.split(" ")[0].equals("done")) {
             return Parser.parseIndexCommand(line);
