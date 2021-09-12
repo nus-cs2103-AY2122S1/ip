@@ -40,7 +40,7 @@ public final class Parser {
             }
             command = generateCommand(words);
         } catch (DukeException e) {
-            Ui.showHelperMessage();
+            new Ui().showHelperMessage();
         }
         return command;
     }

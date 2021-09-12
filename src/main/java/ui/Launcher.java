@@ -11,6 +11,9 @@ public final class Launcher {
         new Launcher().launch();
     }
 
+    /**
+     * Launches the GUI for Duke implemented in Main and other classes.
+     */
     public void launch() {
         Application.launch(Main.class, "");
     }

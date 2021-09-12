@@ -11,7 +11,6 @@ import ui.Ui;
  * The ToDoCommand Class inherits Command and is
  * a specific type of executable command.
  */
-
 public final class ToDoCommand extends Command {
 
     /**
@@ -27,22 +26,21 @@ public final class ToDoCommand extends Command {
      * Executes the command.
      *
      * @param list the TaskList object that stores the list of tasks
-     * @param ui the ui.Ui object that interacts with the user
+     * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         assert list != null : "invalid TaskList object detected";
-        assert ui != null : "invalid ui.Ui object detected";
+        assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
         if (getInput().size() < 2) {
             return "     Oops, you have left out the task description for todo!";
-        } else {
-            ToDoTask task = new ToDoTask(list.filterInfo(getInput()));
-            String result = list.addTask(task);
-            storage.resetFile(list.getTasks());
-            return result;
         }
+        ToDoTask task = new ToDoTask(list.filterInfo(getInput()));
+        String result = list.addTask(task);
+        storage.resetFile(list.getTasks());
+        return result;
     }
 }

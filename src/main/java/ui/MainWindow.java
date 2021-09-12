@@ -29,7 +29,7 @@ import parser.Parser;
 //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
 // with minor modifications
 /**
- * Controller for ui.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public final class MainWindow extends AnchorPane {
     @FXML
@@ -73,7 +73,7 @@ public final class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         //@@author
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Ui().getWelcomeMessage(), dukeImage));
         checkAnyDueToday();
     }
 
@@ -96,7 +96,7 @@ public final class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(dukeText, dukeImage));
         } else {
             dialogContainer.getChildren().addAll(DialogBox.getUserDialog(inputText, userImage),
-                    DialogBox.getDukeDialog(Ui.getHelperMessage(), dukeImage));
+                    DialogBox.getDukeDialog(new Ui().getHelperMessage(), dukeImage));
         }
         userInput.clear();
     }

@@ -6,8 +6,6 @@ import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.DukeException;
-
 /**
  * The EventTask Class inherits Task Class
  * to support different specificities of a task
@@ -31,7 +29,6 @@ public final class EventTask extends Task {
      *
      * @param description the input string to describe the Event task
      * @param date the date of the event
-     * @throws DukeException thrown when date input format is not supported
      */
     public EventTask(String description, String date) {
         super(description);

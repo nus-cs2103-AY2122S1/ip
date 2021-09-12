@@ -161,15 +161,13 @@ public final class TaskList {
     /**
      * Checks if any tasks are due on a particular day.
      *
-     * @param userInput the date which user wants to check
+     * @param date the date which user wants to check
      */
-    public ArrayList<Task> findTasksDue(String userInput) {
-        String[] date = userInput.split("/");
-        LocalDate localDate = LocalDate.parse(date[2] + "-" + date[1] + "-" + date[0]);
+    public ArrayList<Task> findTasksDue(LocalDate date) {
         ArrayList<Task> excludeIrrelevantTasks = (ArrayList<Task>) tasks.stream()
                 .filter(task -> task.getLocalDate() != null).collect(Collectors.toList());
         return (ArrayList<Task>) excludeIrrelevantTasks.stream().filter(
-            task -> task.getLocalDate().equals(localDate)).collect(Collectors.toList());
+            task -> task.getLocalDate().equals(date)).collect(Collectors.toList());
     }
 
     /**
@@ -192,7 +190,8 @@ public final class TaskList {
      */
     public String reschedule(LocalDate localDate, int index, String date) {
         if (index < 0 || index >= tasks.size()) {
-            return " Please use a valid index!";
+            return "     Please use a valid index!\n"
+                    + "     Note: 'list' can be used to see the current tasks.";
         }
         if (tasks.get(index) instanceof ToDoTask) {
             return "     I cannot reschedule a todo Task!";

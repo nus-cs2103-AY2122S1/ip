@@ -3,13 +3,13 @@ package ui;
 import java.util.Scanner;
 
 /**
- * The ui.Ui Class is responsible for interactions with
+ * The Ui Class is responsible for interactions with
  * the user directly and displays various dialog prompts
  * to help user with input.
  */
 public final class Ui {
 
-    private static final String LOGO = "      ____        _        \n"
+    private final String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
             + "     | |_| | |_| |   <  __/\n"
@@ -17,12 +17,12 @@ public final class Ui {
 
     private final Scanner sc;
 
-    private static final String WELCOME_MESSAGE =
-            "     Hello from\n" + LOGO + "\n" + "\n"
+    private final String welcomeMessage =
+            "     Hello from\n" + logo + "\n" + "\n"
             + "     Hi! I am Duke!\n" + "     What can I do for you?\n";
 
 
-    private static final String HELPER_MESSAGE =
+    private final String helperMessage =
             "     The following can be used:\n" + "     Types of tasks: 'todo', 'deadline', 'event'\n"
             + "     If you wish to add a task, please input in the form: '<Type of Task> <Name of Task>'"
             + " and include keyword '/at' OR '/by' followed by <Date> if relevant.\n"
@@ -35,10 +35,10 @@ public final class Ui {
             + "     If you wish to reschedule a task, please input 'reschedule <index> <new date> \n"
             + "     Please kindly avoid unnecessary spaces and note that date is best in 'DD/MM/YYYY' form.\n";
 
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private final String exitMessage = "Bye. Hope to see you again soon!";
 
     /**
-     * Constructs an ui.Ui.
+     * Constructs an Ui object.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -48,8 +48,8 @@ public final class Ui {
      * Returns the welcome message upon start of application.
      * @return the welcome message to be shown to user
      */
-    public static String getWelcomeMessage() {
-        return WELCOME_MESSAGE;
+    public String getWelcomeMessage() {
+        return welcomeMessage;
     }
 
     /**
@@ -57,7 +57,7 @@ public final class Ui {
      *
      * @param s the words to be displayed
      */
-    public static void showInput(String ... s) {
+    public void showInput(String ... s) {
         System.out.println();
         for (String str : s) {
             System.out.println("     " + str);
@@ -68,23 +68,23 @@ public final class Ui {
     /**
      * Displays commands to help user with input as much as possible
      */
-    public static void showHelperMessage() {
-        System.out.println(HELPER_MESSAGE);
+    public void showHelperMessage() {
+        System.out.println(helperMessage);
     }
 
     /**
      * Returns the helper message to be shown to the user.
      * @return message consisting of commands that can be used
      */
-    public static String getHelperMessage() {
-        return HELPER_MESSAGE;
+    public String getHelperMessage() {
+        return helperMessage;
     }
 
     /**
      * Returns the exit message upon termination of application.
      * @return the exit message to be shown to user
      */
-    public static String getExitMessage() {
-        return EXIT_MESSAGE;
+    public String getExitMessage() {
+        return exitMessage;
     }
 }

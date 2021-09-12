@@ -30,12 +30,16 @@ public final class RescheduleCommand extends Command {
      * Executes the command.
      *
      * @param list    the TaskList object that stores the list of tasks
-     * @param ui      the ui.Ui object that interacts with the user
+     * @param ui      the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+        if (getInput().size() > 3) {
+            return "     Please input in the form 'reschedule <index> <date>'\n"
+                    + "     Date should be in 'DD/MM/YYYY' form.";
+        }
         try {
             int index = Integer.parseInt(getInput().get(1)) - 1;
             LocalDate localDate = getDate(getInput().get(2));
@@ -48,7 +52,8 @@ public final class RescheduleCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             return "     Please input index and date!";
         } catch (NullPointerException e) {
-            return "     Please input a valid date!";
+            return "     Please input a valid date!\n"
+                    + "     Date should be in 'DD/MM/YYYY' form.";
         }
     }
 

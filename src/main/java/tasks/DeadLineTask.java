@@ -6,8 +6,6 @@ import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.DukeException;
-
 /**
  * The DeadlineTask Class inherits Task Class
  * to support different specificities of a task
@@ -31,7 +29,6 @@ public final class DeadLineTask extends Task {
      *
      * @param description the input string to describe the Deadline task
      * @param date the do-by-date
-     * @throws DukeException thrown when date input format is not supported
      */
     public DeadLineTask(String description, String date) {
         super(description);

@@ -31,7 +31,7 @@ public class Task {
      * @return the message in response to the action
      */
     public String setIsDone() {
-        String result = "";
+        String result;
         if (this.isDone.equals("[ ]")) {
             this.isDone = "[X]";
             result = "Well done! The task is completed!";

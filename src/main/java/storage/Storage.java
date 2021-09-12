@@ -42,7 +42,7 @@ public final class Storage {
                 saves.createNewFile();
             }
         } catch (IOException e) {
-            Ui.showInput(e.getMessage());
+            new Ui().showInput(e.getMessage());
             throw new DukeException("Unexpected issue encountered");
         }
     }
@@ -65,10 +65,10 @@ public final class Storage {
                 }
                 writer.close();
             } catch (IOException e) {
-                Ui.showInput("Unable to write, something went wrong");
+                new Ui().showInput("Unable to write, something went wrong");
             }
         } else {
-            Ui.showInput("Something went wrong... could not overwrite");
+            new Ui().showInput("Something went wrong... could not overwrite");
         }
     }
 
@@ -109,7 +109,7 @@ public final class Storage {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            Ui.showInput(e.getMessage());
+            new Ui().showInput(e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }

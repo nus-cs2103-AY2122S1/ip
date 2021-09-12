@@ -26,7 +26,7 @@ final class UserPrompts {
         exitWindow.setResizable(false);
         exitWindow.setAlwaysOnTop(true);
 
-        Label exitLabel = new Label(Ui.getExitMessage());
+        Label exitLabel = new Label(new Ui().getExitMessage());
 
         Button closeButton = new Button("Confirm");
         closeButton.setOnAction(event -> exitWindow.close());
