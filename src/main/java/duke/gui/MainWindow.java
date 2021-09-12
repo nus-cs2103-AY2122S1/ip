@@ -10,6 +10,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -30,6 +35,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PaperFace.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/CoffeeSip.png"));
+    private Image bgImage = new Image(this.getClass().getResourceAsStream("/images/Wallpaper.jpg"));
+
 
     @FXML
     private void sendIntroMessage() {
@@ -38,6 +45,14 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+
+        // Background
+        BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage bg = new BackgroundImage(bgImage,
+            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+            BackgroundPosition.DEFAULT, bgSize);
+        dialogContainer.setBackground(new Background(bg));
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         sendIntroMessage();
     }
