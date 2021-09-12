@@ -13,25 +13,6 @@ public class Duke {
     private final Ui ui;
     private final MainWindow mw;
 
-    public enum Commands {
-        LIST,
-        DONE,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DELETE,
-        SAVE,
-        BYE,
-        FIND,
-        LOAD
-    }
-
-    public enum TaskTypes {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-
     /**
      * Constructor without GUI reference for testing purposes.
      *
@@ -120,7 +101,7 @@ public class Duke {
         try {
             Parser parser = new Parser();
             ParsedInput parsedInput = parser.parse(input, this);
-            Commands command = parsedInput.command;
+            Commands.CommandTypes command = parsedInput.command;
 
             switch (command) {
             case BYE:
@@ -136,6 +117,7 @@ public class Duke {
                 } else {
                     return ui.showMarkedDoneMessage(tasks.markDone(parsedInput.description, parsedInput.taskType));
                 }
+
             case DELETE:
                 if (parsedInput.description == null) {
                     return ui.showDeletedMessage(
@@ -154,8 +136,8 @@ public class Duke {
 
             case TODO:
                 // Extra Functionality: No duplicate tasks
-                if (tasks.getTaskIndex(parsedInput.description, TaskTypes.TODO) != -1) {
-                    throw new TaskExistsException(TaskTypes.TODO, parsedInput.description);
+                if (tasks.getTaskIndex(parsedInput.description, Task.TaskTypes.TODO) != -1) {
+                    throw new TaskExistsException(Task.TaskTypes.TODO, parsedInput.description);
                 }
 
                 Task todo = new Todo(parsedInput.description);
@@ -164,8 +146,8 @@ public class Duke {
 
             case DEADLINE:
                 // Extra Functionality: No duplicate tasks
-                if (tasks.getTaskIndex(parsedInput.description, TaskTypes.DEADLINE) != -1) {
-                    throw new TaskExistsException(TaskTypes.DEADLINE, parsedInput.description);
+                if (tasks.getTaskIndex(parsedInput.description, Task.TaskTypes.DEADLINE) != -1) {
+                    throw new TaskExistsException(Task.TaskTypes.DEADLINE, parsedInput.description);
                 }
 
                 Task deadline = new Deadline(parsedInput.description, parsedInput.dateTime);
@@ -174,8 +156,8 @@ public class Duke {
 
             case EVENT:
                 // Extra Functionality: No duplicate tasks
-                if (tasks.getTaskIndex(parsedInput.description, TaskTypes.EVENT) != -1) {
-                    throw new TaskExistsException(TaskTypes.EVENT, parsedInput.description);
+                if (tasks.getTaskIndex(parsedInput.description, Task.TaskTypes.EVENT) != -1) {
+                    throw new TaskExistsException(Task.TaskTypes.EVENT, parsedInput.description);
                 }
 
                 Task event = new Event(parsedInput.description, parsedInput.dateTime);
@@ -197,6 +179,8 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+
+
 
     }
 }

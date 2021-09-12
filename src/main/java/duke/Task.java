@@ -84,4 +84,10 @@ public class Task {
             }
         }
     }
+
+    public enum TaskTypes {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 }

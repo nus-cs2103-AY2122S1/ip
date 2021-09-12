@@ -25,10 +25,10 @@ import com.zoho.hawking.language.english.model.ParserOutput;
  */
 public class Parser {
 
-    private Duke.Commands command;
+    private Commands.CommandTypes command;
     private int index = -1;
     private String description;
-    private Duke.TaskTypes taskType;
+    private Task.TaskTypes taskType;
     private Temporal datetime;
     private String searchKey;
 
@@ -244,9 +244,9 @@ public class Parser {
      * @return Command type
      * @throws IllegalCommandException Not a command
      */
-    private Duke.Commands parseCommand(String commandStr) throws IllegalCommandException {
+    private Commands.CommandTypes parseCommand(String commandStr) throws IllegalCommandException {
         try {
-            return Duke.Commands.valueOf(commandStr);
+            return Commands.CommandTypes.valueOf(commandStr);
         } catch (IllegalArgumentException e) {
             throw new IllegalCommandException(commandStr);
         }
@@ -330,7 +330,7 @@ public class Parser {
             }
             String taskType = s[0].toUpperCase();
             try {
-                this.taskType = Duke.TaskTypes.valueOf(taskType);
+                this.taskType = Task.TaskTypes.valueOf(taskType);
             } catch (IllegalArgumentException e) {
                 throw new IllegalTaskTypeException(taskType);
             }

@@ -40,7 +40,7 @@ class TaskNotFound extends DukeException {
  */
 class TaskExistsException extends DukeException {
 
-    TaskExistsException(Duke.TaskTypes taskTypes, String taskStr) {
+    TaskExistsException(Task.TaskTypes taskTypes, String taskStr) {
         super("Meow? " + taskTypes + " " + taskStr + " already exists.");
     }
 
@@ -73,7 +73,7 @@ class MissingParams extends DukeException {
  */
 class NothingAfterCommand extends DukeException {
 
-    NothingAfterCommand(Duke.Commands command) {
+    NothingAfterCommand(Commands.CommandTypes command) {
         super("Meow? There's nothing after your command " + command.toString() + "... Meow meow meow?");
     }
 
@@ -84,7 +84,7 @@ class NothingAfterCommand extends DukeException {
  */
 class MissingArguments extends DukeException {
 
-    MissingArguments(Duke.Commands command) {
+    MissingArguments(Commands.CommandTypes command) {
         super("Meow? There's missing arguments in your command " + command.toString() + "... Meow meow meow?");
     }
 
@@ -95,7 +95,7 @@ class MissingArguments extends DukeException {
  */
 class EmptyListException extends DukeException {
 
-    EmptyListException(Duke.Commands command) {
+    EmptyListException(Commands.CommandTypes command) {
         super("You have nothing in your list to " + command.toString() + ", meow!");
     }
 

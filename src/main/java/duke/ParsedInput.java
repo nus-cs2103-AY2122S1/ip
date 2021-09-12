@@ -8,11 +8,11 @@ import java.time.temporal.Temporal;
  */
 public class ParsedInput implements Serializable {
 
-    final Duke.Commands command;
+    final Commands.CommandTypes command;
     final String description;
     final Temporal dateTime;
     final int index;
-    final Duke.TaskTypes taskType;
+    final Task.TaskTypes taskType;
 
     /* Search key for find method */
     final String searchKey;
@@ -28,11 +28,11 @@ public class ParsedInput implements Serializable {
      * @param searchKey Searchkey to find if applicable
      */
     public ParsedInput(
-            Duke.Commands command,
+            Commands.CommandTypes command,
             String description,
             Temporal dateTime,
             int index,
-            Duke.TaskTypes taskType,
+            Task.TaskTypes taskType,
             String searchKey) {
         this.command = command;
         this.description = description;

@@ -25,7 +25,7 @@ public class TaskList {
      * @return Task marked as done
      * @throws DukeException Task not found
      */
-    public Task markDone(String description, Duke.TaskTypes tt) throws DukeException {
+    public Task markDone(String description, Task.TaskTypes tt) throws DukeException {
         int index = getTaskIndex(description, tt);
         if (index == -1) {
             throw new TaskNotFound(tt + ": " + description);
@@ -92,7 +92,7 @@ public class TaskList {
      * @return Task removed
      * @throws DukeException Task not found
      */
-    public Task remove(String description, Duke.TaskTypes tt) throws DukeException {
+    public Task remove(String description, Task.TaskTypes tt) throws DukeException {
         int index = getTaskIndex(description, tt);
         if (index == -1) {
             throw new TaskNotFound(tt + ": " + description);
@@ -119,7 +119,7 @@ public class TaskList {
      * @param tt          Type of Task
      * @return Index of task if found else -1
      */
-    public int getTaskIndex(String description, Duke.TaskTypes tt) {
+    public int getTaskIndex(String description, Task.TaskTypes tt) {
         switch (tt) {
         case TODO:
             return taskList.indexOf(new Todo(description));
