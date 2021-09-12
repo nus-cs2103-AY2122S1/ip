@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
         try {
             Task task = taskList.markAsDone(this.taskNumber);
             storage.writeToDisk(taskList.compileTasks());
-            return String.format("Ooh yeah! Task %d marked as done:\n  %s",
+            return String.format("Can do! Task %d marked as done:\n  %s",
                     taskNumber,
                     task);
         } catch (IndexOutOfBoundsException | NullPointerException e) {

@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             Task task = taskList.deleteTask(taskNumber);
             storage.writeToDisk(taskList.compileTasks());
             return String
-                    .format("Ooh yeah! Task %d deleted:\n  %s\nNow you have %d tasks in the list.",
+                    .format("Can do! Task %d deleted:\n  %s\nNow you have %d tasks in the list.",
                             taskNumber,
                             task,
                             taskList.getSize());

@@ -52,7 +52,8 @@ public class Parser {
         case "update":
             return getUpdateCommand(userInput, indexOfSpace);
         default:
-            throw new DukeException("Say something I can understand!! >:(");
+            throw new DukeException("Meeseeks are not born fumbling in this world for meaning Jerry! \n"
+                    + "Say something I can understand!! >:(");
         }
     }
 

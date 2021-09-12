@@ -23,6 +23,6 @@ public class DoneCommandTest {
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        assertEquals("Ooh yeah! Task 1 marked as done:\n  [T][X] test", response);
+        assertEquals("Can do! Task 1 marked as done:\n  [T][X] test", response);
     }
 }
