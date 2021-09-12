@@ -1,0 +1,24 @@
+.text-field{
+    -fx-text-fill: #50ff30;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: grey;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical{
+    -fx-background-color:black;
+}
+
+.background {
+    -fx-background-image:url("../images/background.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: repeat url("../images/background.png");
+    -fx-padding: 0;
+    -fx-spacing: 10;
+}

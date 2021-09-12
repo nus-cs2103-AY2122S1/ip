@@ -49,6 +49,21 @@ public class Storage {
      * @throws LoadingException The exception related to loading.
      */
     public ArrayList<Task> load() throws LoadingException, IOException {
+        Scanner s = buildFileAndScanner();
+       // StringBuilder sb = new StringBuilder();
+        ArrayList<Task> taskList = new ArrayList<>();
+        while (s.hasNextLine()) {
+            String task = s.nextLine();
+            int lens = task.length();
+            //String oneLine = task + System.lineSeparator();
+            //sb.append(oneLine);
+            addRelatedTasks(task, taskList, lens);// Judge data input to add tasks.
+        }
+       // upDateContent(sb);//Update the content.
+        return taskList;
+    }
+
+    public Scanner buildFileAndScanner() throws LoadingException, IOException{
         String dir = System.getProperty("user.dir");
         java.nio.file.Path path = java.nio.file.Paths.get(dir, "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
@@ -59,21 +74,11 @@ public class Storage {
         Scanner s;
         try {
             s = new Scanner(f);
+            return s;
         } catch (FileNotFoundException e) {
             f.createNewFile();
             throw new LoadingException();
         }
-        StringBuilder sb = new StringBuilder();
-        ArrayList<Task> taskList = new ArrayList<>();
-        while (s.hasNextLine()) {
-            String task = s.nextLine();
-            int lens = task.length();
-            String oneLine = task + System.lineSeparator();
-            sb.append(oneLine);
-            addRelatedTasks(task, taskList, lens);// Judge data input to add tasks.
-        }
-        content = sb.toString();//Update the content.
-        return taskList;
     }
 
     /**
@@ -161,8 +166,12 @@ public class Storage {
     public void store(String task) throws IOException{
         String dataFile = dir + "/data" + file;
         String data = transformToData(task);
+      /*  StringBuilder sb = new StringBuilder();
+        sb.append(content);
+        sb.append(data);
+        sb.append(System.lineSeparator());*/
         appendToFile(dataFile, data + System.lineSeparator());
-        content = content + data + System.lineSeparator();
+        //content = content + data + System.lineSeparator();
     }
 
     /**
@@ -238,11 +247,15 @@ public class Storage {
             temp = temp + System.lineSeparator();
             sb.append(temp);
         }
-        content = sb.toString();
+        upDateContent(sb);
         try{
             writeToFile(dataFile, content);
         } catch (IOException e) {
             System.out.println("Delete failed.");
         }
+    }
+
+    public void upDateContent(StringBuilder sb) {
+        content = sb.toString();
     }
 }

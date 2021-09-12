@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 import duke.exception.OutOfRangeException;
 
@@ -113,12 +114,10 @@ public class TaskList {
 
     public TaskList tasksWithinMonthOrDay(String type) {
         TaskList currList = new TaskList();
-        LocalDate dateNow = LocalDate.now();
-        String now = dateNow.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
-
+        String now = currentTime();
         taskList.stream()
                 .filter(currTask -> !(currTask instanceof Todo))
-                .filter(currTask -> currTask.isWithinMonthOrDay(now) == type)
+                .filter(currTask -> currTask.isWithinMonthOrDay(now).equals(type))
                 .forEach(currList::addElement);
         return currList;
     }
@@ -140,6 +139,15 @@ public class TaskList {
             sb.append(out);
         }
         return sb.toString();
+    }
+
+    public String currentTime() {
+        LocalDate dateNow = LocalDate.now();
+        return dateNow.format(formatForm());
+    }
+
+    public DateTimeFormatter formatForm() {
+        return DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
     }
 }
 

@@ -60,6 +60,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        //@@author qinguorui2001-reused
+        //Reused from https://github.com/nus-cs2103-AY2122S1/ip/pull/13/files
+        // with minor modifications
         if (input.trim().equals("bye")) {
             userInput.setDisable(true);
             sendButton.setDisable(true);
@@ -70,6 +73,7 @@ public class MainWindow extends AnchorPane {
                 }
             }, 1500);
         }
+        //@@author
     }
 
     @FXML
