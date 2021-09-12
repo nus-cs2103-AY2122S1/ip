@@ -30,9 +30,6 @@ public class Duke {
 
     private String deletedTask;
 
-    private ArrayList<String> undoTaskList;
-
-
     /**
      * Duke Constructor
      */
@@ -47,7 +44,6 @@ public class Duke {
             items = new Items();
         }
         this.undo = new Undo(this.items);
-        this.undoTaskList = new ArrayList<>();
     }
 
     /**
@@ -135,6 +131,10 @@ public class Duke {
                 } else {
                     output = undoLogic(prevCommand);
                 }
+                break;
+            case "help":
+                output = ui.getHelpMenu();
+                isUndoable = false;
                 break;
             default:
                 isUndoable = false;

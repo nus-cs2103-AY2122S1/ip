@@ -99,10 +99,11 @@ public class Parser {
         case "find":
             return new String[] {input[1]};
         case "undo":
+        case "help":
             return new String[] {commandEntered};
         default:
             throw new DukeException("I don't recognise this command\n"
-                    + "Try 'list', 'todo', 'event', 'deadline', 'done', 'bye' or 'undo'.");
+                    + "Try 'list', 'todo', 'event', 'deadline', 'done', 'bye', 'help' or 'undo'.");
         }
     }
 
