@@ -53,6 +53,7 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
+        scene.getRoot().setStyle("-fx-font-family: 'Courier New'");
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Duke");
