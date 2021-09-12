@@ -95,6 +95,9 @@ public class TaubotUi {
      */
     public String showTasksWithKeyword(ArrayList<Task> tasks) {
         String response = "these are the tasks you were looking for: \n";
+        if (tasks.size() == 0) {
+            response = "there are no tasks matching that keyword";
+        }
         for (int i = 0; i < tasks.size(); i++) {
             response += tasks.get(i).toString() + "\n";
         }
