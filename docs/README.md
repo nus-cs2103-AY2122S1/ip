@@ -7,7 +7,10 @@
 1. Ensure you have java 11 or above on your PC.
 2. Download the latest `Duke.jar` from here
 3. Copy the file to the folder you want to use as the home folder for Duke.
-4. Double click the file to start the app. You should see a GUI similar to the one below. 
+4. Double click the file to start the app. You should see a GUI similar to the one below. ![image](https://user-images.githubusercontent.com/77191381/132985807-ec41ad85-1584-4e2f-921f-7f34276489e8.png)
+
+5. Type the command in the command box and press Enter to execute it. You can try typing `help` to list all the commands that duke supports to get started quikly. You can refer below for more details on each feature.
+
 
 ## Features 
 
