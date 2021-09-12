@@ -9,6 +9,21 @@ To get started, ensure that you have the following installed:
 2. The .jar file for [Duii v0.2](https://github.com/boonhaii/ip/releases/tag/v0.2).
 
 To start up the application, navigate to the folder with the which the .jar file is in, and execute the file.
+The application should display the following startup message if it is your first time using the application,
+```
+Hello! I'm Duii, your personal assistant!
+Type in '/help' for the full list of supported commands.
+You have no outstanding tasks from the previous session.
+What do you need help with?
+```
+or something similar to the following if you have used the application and had a saved file prior.
+```
+Hello! I'm Duii, your personal assistant!
+Type in '/help' for the full list of supported commands.
+These tasks are from the previous session:
+1. [T] [] Homework
+What do you need help with?
+```
 
 ## Features 
 Listed below is a summary of the features available in Duii.
