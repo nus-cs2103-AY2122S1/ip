@@ -70,7 +70,7 @@ public class DukeUi {
     public String printWelcomeMessage() {
         String returnThis;
 
-        String logo = "The DUKE SEAGULL";
+        String logo = "The SEAGULL TASKER";
         returnThis = "Hello from\n" + logo;
         returnThis = returnThis + "\nGive me something to do!";
 
@@ -84,7 +84,7 @@ public class DukeUi {
      * Add the help screen for Duke into the UI buffer.
      */
     public void showHelpScreen() {
-        addToDukeBuffer("Welcome to Duke Help!!!");
+        addToDukeBuffer("Welcome to Seagull Help!!!");
         addToDukeBuffer("");
         addToDukeBuffer("Command Summary:");
         addToDukeBuffer("");
@@ -110,7 +110,7 @@ public class DukeUi {
         addToDukeBuffer("find <thing> >> Searches task list for thing.");
         addToDukeBuffer("");
         addToDukeBuffer("");
-        addToDukeBuffer("bye    >> Closes Duke :(");
+        addToDukeBuffer("bye    >> Closes me :(");
         addToDukeBuffer("help OR help <anything>  >> Shows this help screen.");
 
 
