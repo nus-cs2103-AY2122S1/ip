@@ -43,12 +43,13 @@ public class AddCommand extends Command {
      *
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
+     * @return A String The duke's response after executing this command.
      * @param storage The given Duke Storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = taskList.add(this.type, this.description, this.date, this.time);
-        ui.printMessage(
+        return ui.generateDukeResponse(
             "Got it. I've added this task:",
             "  " + newTask.toString(),
             "Now you have " + taskList.amountOfTasks() + " tasks in the list.");

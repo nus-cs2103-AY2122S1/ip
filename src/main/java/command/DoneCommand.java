@@ -30,9 +30,9 @@ public class DoneCommand extends Command {
      * @throws DukeException Exception thrown when execute the DoneCommand.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task doneTask = taskList.markAsDone(this.taskIndex);
-        ui.printMessage(
+        return ui.generateDukeResponse(
             "Nice! I've marked this task as done:",
             doneTask.toString());
     }

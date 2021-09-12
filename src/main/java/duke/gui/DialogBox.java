@@ -1,65 +1,76 @@
 package duke.gui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+
 public class DialogBox extends HBox {
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
     /**
-     * A public constructor to initialize the DialogBox.
+     * A private constructor to initialize a DialogBox.
      *
-     * @param l The given Label.
-     * @param iv The given ImageView.
+     * @param text The given text to be shown in the DialogBox.
+     * @param img The given image to be shown in the DialogBox.
      */
-    public DialogBox(Label l, ImageView iv) {
-        this.text = l;
-        this.displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("../../view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitHeight(100.0);
-        displayPicture.setFitWidth(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
-     * A public factory method to get user's dialog.
+     * A public factory method to get use dialog.
      *
-     * @param l The given user's Label.
-     * @param iv The given user's Image.
-     * @return The user's DialogBox.
+     * @param text The given user input.
+     * @param img The user's profile picture.
+     * @return A DialogBox.
      */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
     /**
-     * A public factory method to get Duke's dialog.
+     * A public factory method to get duke dialog.
      *
-     * @param l The given Duke's Label.
-     * @param iv The given Duke's Image.
-     * @return The Duke's DialogBox.
+     * @param text The given duke response.
+     * @param img Duke's profile picture.
+     * @return A DialogBox.
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

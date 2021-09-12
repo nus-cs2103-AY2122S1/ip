@@ -2,12 +2,12 @@ package duke;
 
 import command.Command;
 import duke.exception.DukeException;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-public class Duke extends Application {
+
+
+public class Duke {
     /** Duke's Storage. Deals with loading tasks from the file and saving tasks in the file. **/
-    private final Storage storage;
+    private Storage storage;
 
     /** Duke's TaskList. Containing the data structure for storing tasks. **/
     private TaskList taskList;
@@ -19,13 +19,13 @@ public class Duke extends Application {
      * A public constructor to initialized Duke.
      */
     public Duke() {
-        ui = new Ui(this);
-        storage = new Storage("data/taskList.txt");
+        this.ui = new Ui(this);
         try {
-            taskList = new TaskList(storage.loadTaskList());
+            this.storage = new Storage("data/taskList.txt");
+            this.taskList = new TaskList(storage.loadTaskList());
         } catch (DukeException e) {
-            ui.showDukeException(e);
-            taskList = new TaskList();
+            this.ui.generateDukeResponse(e.getMessage());
+            this.taskList = new TaskList();
         }
     }
 
@@ -36,42 +36,13 @@ public class Duke extends Application {
      */
     public Duke(String filePath) {
         ui = new Ui(this);
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             taskList = new TaskList(storage.loadTaskList());
         } catch (DukeException e) {
-            ui.showDukeException(e);
+            ui.generateDukeResponse(e.getMessage());
             taskList = new TaskList();
         }
-    }
-
-    /**
-     * The method to execute Duke.
-     */
-    public void run() {
-        ui.printLogo();
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showDukeException(e);
-            }
-        }
-    }
-
-    /**
-     * Main method of Duke.
-     *
-     * @param args Arguments.
-     */
-    public static void main(String[] args) {
-        System.out.println("main");
-        new Duke("data/taskList.txt").run();
     }
 
     /**
@@ -79,21 +50,16 @@ public class Duke extends Application {
      *
      * @param input The given user input.
      */
-    protected void getResponse(String input) throws DukeException {
-        Command c = Parser.parse(input);
-        c.execute(taskList, ui, storage);
-        if (c.isExit()) {
-            System.exit(0);
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String executionMessage = c.execute(taskList, ui, storage);
+            if (c.isExit()) {
+                return ui.generateDukeResponse(executionMessage);
+            }
+            return ui.generateDukeResponse(executionMessage);
+        } catch (DukeException e) {
+            return ui.generateDukeResponse(e.getMessage());
         }
-    }
-
-    /**
-     * A method to start Duke.
-     *
-     * @param stage The given stage.
-     */
-    @Override
-    public void start(Stage stage) {
-        ui.start(stage);
     }
 }

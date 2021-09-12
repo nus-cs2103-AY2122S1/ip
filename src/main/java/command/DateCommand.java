@@ -2,8 +2,6 @@ package command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -11,7 +9,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
-import task.Task;
 
 public class DateCommand extends Command {
     /** The date to be queried. **/
@@ -37,7 +34,7 @@ public class DateCommand extends Command {
      * @throws DukeException Exception thrown when execute the DateCommand.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String result = taskList.getTaskList()
                 .stream()
                 .parallel()
@@ -50,7 +47,6 @@ public class DateCommand extends Command {
                                 + " is:\n        ",
                         ""
                         ));
-
-        ui.printMessage(result);
+        return ui.generateDukeResponse(result);
     }
 }

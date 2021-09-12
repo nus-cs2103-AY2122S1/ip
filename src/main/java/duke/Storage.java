@@ -20,13 +20,38 @@ public class Storage {
     /** The filePath to load and save the tasks. **/
     private final String filePath;
 
+    /** The file to load and save the tasks. **/
+    private final File file;
+
     /**
      * A public constructor to initialized the Storage.
      *
      * @param filePath The given filePath.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
+        this.file = createFile(filePath);
+    }
+
+    /**
+     * A private method to open or create a file for storage.
+     *
+     * @throws DukeException Throw DukeException if cannot open and create such file.
+     */
+    private File createFile(String filePath) throws DukeException {
+        try {
+            File f = new File(filePath);
+            if (!f.getParentFile().exists()) {
+                boolean hasDir = f.getParentFile().mkdir();
+                assert hasDir : "hasDir should be true";
+            }
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            return f;
+        } catch (IOException e) {
+            throw new DukeException("Cannot find or create such file.");
+        }
     }
 
     /**
@@ -38,16 +63,7 @@ public class Storage {
      */
     public ArrayList<Task> loadTaskList() throws DukeException {
         try {
-            File f = new File(filePath);
-            if (!f.getParentFile().exists()) {
-                boolean hasDir = f.getParentFile().mkdir();
-                assert hasDir == true : "hasDir should be true";
-            }
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-
-            Scanner sc = new Scanner(f);
+            Scanner sc = new Scanner(this.file);
             int n = sc.nextInt();
             ArrayList<Task> result = new ArrayList<>();
 

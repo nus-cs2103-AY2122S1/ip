@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * @param storage The given Duke Storage.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printMessage(taskList.listAllTasks());
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.generateDukeResponse(taskList.listAllTasks());
     }
 }

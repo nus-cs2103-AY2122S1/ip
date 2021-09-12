@@ -34,7 +34,7 @@ public class FindCommand extends Command {
      * @throws DukeException Exception thrown when execute the FindCommand.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> findResult = new ArrayList<>();
         Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
         for (int i = 0; i < taskList.amountOfTasks(); i++) {
@@ -48,14 +48,14 @@ public class FindCommand extends Command {
         }
 
         if (findResult.size() == 0) {
-            ui.printMessage("Sorry, no matching task found.");
+            return ui.generateDukeResponse("Sorry, no matching task found.");
         } else {
             String[] findResultString = new String[findResult.size() + 1];
             findResultString[0] = "Here are the matching task found:";
             for (int i = 0; i < findResult.size(); i++) {
                 findResultString[i + 1] = "  " + (i + 1) + ". " + findResult.get(i).toString();
             }
-            ui.printMessage(findResultString);
+            return ui.generateDukeResponse(findResultString);
         }
     }
 }

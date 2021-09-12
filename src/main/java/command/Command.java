@@ -21,7 +21,8 @@ public abstract class Command {
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
      * @param storage The given Duke Storage.
+     * @return A String The duke's response after executing this command.
      * @throws DukeException Exception thrown when execute the command.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

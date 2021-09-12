@@ -26,8 +26,8 @@ public class ExitCommand extends Command {
      * @throws DukeException Exception thrown when execute the ExitCommand.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.saveTaskList(taskList.getTaskList());
-        ui.printMessage("Bye. Hope to see you again soon!");
+        return ui.generateDukeResponse("Bye. Hope to see you again soon!");
     }
 }
