@@ -50,13 +50,24 @@ public class Events extends Task {
     }
 
     /**
-     * Formats string output.
+     * Formats events for user display.
      *
-     * @return String output with the correct event format.
+     * @return Formatted Events task for user display.
      */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " " + time + ")";
+    }
+
+    /**
+     * Formats events for storage purposes.
+     *
+     * @return Formatted Events task for storage purposes.
+     */
+    @Override
+    public String formatToStorage() {
+        return "[E]" + super.formatToStorage() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time + ")";
     }
 

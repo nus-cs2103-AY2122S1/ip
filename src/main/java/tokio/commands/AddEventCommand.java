@@ -38,13 +38,13 @@ public class AddEventCommand extends Command {
         String[] descTimeArray = description.split("/at ");
         if (descTimeArray.length < 2) {
             throw new DukeException("Something is missing from this event\n" + "Rio, please follow this format:\n"
-                    + "deadline {name} /by {yyyy-MM-dd}");
+                    + "event {name} /at {yyyy-MM-dd} {HH:mm}");
         }
         String eventDesc = descTimeArray[0].trim();
         String[] dateTimeArray = descTimeArray[1].split(" ");
         if (dateTimeArray.length < 2) {
             throw new DukeException("Something is missing from this event\n" + "Rio, please follow this format:\n"
-                    + "deadline {name} /by {yyyy-MM-dd}");
+                    + "event {name} /by {yyyy-MM-dd} {HH:mm}");
         }
         String eventDate = dateTimeArray[0].trim();
         String eventTime = dateTimeArray[1].trim();

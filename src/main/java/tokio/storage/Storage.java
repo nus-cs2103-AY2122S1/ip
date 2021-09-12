@@ -110,7 +110,7 @@ public class Storage {
      */
     public void writeTask(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
-        fw.write(task.toString() + System.lineSeparator());
+        fw.write(task.formatToStorage() + System.lineSeparator());
         fw.close();
     }
 
@@ -125,7 +125,7 @@ public class Storage {
         File tempFile = File.createTempFile("temp", ".txt", file.getParentFile());
         FileWriter fw = new FileWriter(tempFile, true);
         Scanner sc = new Scanner(file);
-        String lineDone = task.toString();
+        String lineDone = task.formatToStorage();
         boolean isDelete = replace.isBlank();
         while (sc.hasNextLine()) {
             String currLine = sc.nextLine();
@@ -136,7 +136,7 @@ public class Storage {
                 fw.write(replace);
             } else {
                 task.setDone();
-                fw.write(task + System.lineSeparator());
+                fw.write(task.formatToStorage() + System.lineSeparator());
             }
         }
         fw.close();

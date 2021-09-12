@@ -27,7 +27,7 @@ public class Task {
      * @return X if true, " " if false
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "✓" : "✗"); // mark done task with X
     }
 
     /**
@@ -45,5 +45,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+    
+    public String formatToStorage() {
+        return "[" + (this.isDone ? "X" : " ") + "] " + description;
     }
 }

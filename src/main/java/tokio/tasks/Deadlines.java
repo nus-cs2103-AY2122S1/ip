@@ -28,13 +28,12 @@ public class Deadlines extends Task {
             throw new DukeException("I do not understand this format...\n" + "Rio, please follow this format:\n"
                     + "deadline {name} /at {yyyy-MM-dd}");
         }
-        
     }
 
     /**
-     * Formats string output.
+     * Formats deadline for user display.
      *
-     * @return String output with the correct deadline format.
+     * @return Formatted deadline for user display..
      */
     @Override
     public String toString() {
@@ -42,6 +41,17 @@ public class Deadlines extends Task {
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
+    /**
+     * Formats deadline for storage purposes..
+     *
+     * @return Formatted deadline for storage purposes.
+     */
+    @Override
+    public String formatToStorage() {
+        return "[D]" + super.formatToStorage() + " (by: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+    }
+    
     /**
      * Compares two objects, if both objects are Deadlines and have the same name and date,
      * then they will be considered equal.

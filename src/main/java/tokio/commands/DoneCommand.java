@@ -47,7 +47,6 @@ public class DoneCommand extends Command {
                     + "Please make sure that index < size of tasks");
         }
         Task doneTask = tasks.getTask(doneIndex);
-        doneTask.setDone();
         storage.editTask(doneTask, doneTask.toString());
         tasks.doneTask(doneIndex);
         return ui.printDoneCommand(doneTask, tasks);

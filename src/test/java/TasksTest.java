@@ -17,7 +17,7 @@ public class TasksTest {
     }
     
     @Test
-    public void addDeadlinesTest() {
+    public void addDeadlinesTest() throws DukeException {
         Deadlines userInput3 = new Deadlines("project submission", "2021-09-23");
         assertEquals("[D][ ] project submission (by: Sep 23 2021)", userInput3.toString());
 

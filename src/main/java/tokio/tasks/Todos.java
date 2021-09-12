@@ -17,11 +17,25 @@ public class Todos extends Task {
         super(description, Instruction.TODO);
         this.description = description;
     }
-    
-    
+
+    /**
+     * Formats tasks for user display.
+     *
+     * @return Formatted todo task for user display.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    /**
+     * Formats tasks for storage purposes.
+     *
+     * @return Formatted todo task for storage purposes.
+     */
+    @Override
+    public String formatToStorage() {
+        return "[T]" + super.formatToStorage();
     }
 
     /**
