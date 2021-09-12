@@ -161,6 +161,7 @@ Note:
    type [`Deadline`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline) and tasks
    containing `deadline` in their description)
 2. Partial matching of description is possible (e.g. `t` will match tasks with description of `task` and `test`)
+3. `keyword` is _case-insensitive_
 
 <br/>
 
