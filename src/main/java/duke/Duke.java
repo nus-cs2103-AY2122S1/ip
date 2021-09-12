@@ -1,9 +1,9 @@
 package duke;
 
 import duke.util.DukeException;
-import duke.util.TaskList;
-import duke.util.Storage;
 import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
@@ -32,7 +32,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("./data/tasks.txt");
+        storage = new Storage("./data/duke.txt");
         taskList = new TaskList(storage.load());
         parser = new Parser(taskList, ui, storage);
     }

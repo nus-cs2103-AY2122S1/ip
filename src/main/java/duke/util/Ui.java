@@ -1,10 +1,7 @@
 package duke.util;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.task.Task;
-
-
 
 /**
  * Represents the User Interface of Duke.
@@ -44,6 +41,16 @@ public class Ui {
     }
 
     /**
+     * Shows the markPriority operation.
+     *
+     * @param task the task to be marked with priority.
+     * @return result content
+     */
+    public String showPriority(Task task) {
+        String words = " Nice! I've marked this duke.task with corresponding priority:\n";
+        return words + task.toString();
+    }
+    /**
      * Prints the delete operation.
      *
      * @param task a task to be deleted
@@ -80,5 +87,6 @@ public class Ui {
         }
         return words;
     }
+
 
 }

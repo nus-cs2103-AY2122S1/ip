@@ -6,6 +6,10 @@ package duke.task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected enum Priority {
+        HIGH, MEDIUM, LOW;
+    }
+    protected Priority priority;
 
     /**
      * Represents a general Task concept.
@@ -14,6 +18,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.markAsMediumPriority();
     }
 
     /**
@@ -52,8 +57,50 @@ public abstract class Task {
     }
 
 
+    /**
+     * Marks a Task as High Priority.
+     */
+    public void markAsHighPriority() {
+        this.priority = Priority.HIGH;
+    }
+
+    /**
+     * Marks a Task as Medium Priority.
+     */
+    public void markAsMediumPriority() {
+        this.priority = Priority.MEDIUM;
+    }
+
+    /**
+     * Marks a Task as Low Priority.
+     */
+    public void markAsLowPriority() {
+        this.priority = Priority.LOW;
+    }
+
+    public boolean isHighPriority() {
+        return this.priority.equals(Priority.HIGH);
+    }
+
+    public boolean isMediumPriority() {
+        return this.priority.equals(Priority.MEDIUM);
+    }
+
+    public boolean isLowPriority() {
+        return this.priority.equals(Priority.LOW);
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        String result = "[" + this.getStatusIcon() + "] ";
+        if (isHighPriority()) {
+            result += "!! ";
+        } else if (isMediumPriority()) {
+            result += "!  ";
+        } else {
+            result += " ";
+        }
+        result += this.description;
+        return result;
     }
 }
