@@ -21,8 +21,6 @@ public class Task {
         this.isCompleted = false;
     }
 
-    // Constructor for a completed Task
-
     /**
      * An alternate constructor for a Task that
      * specifies if it has been completed or not.

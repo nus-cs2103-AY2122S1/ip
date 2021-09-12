@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.DukeException;
-import duke.PersistentStorage;
-import duke.Response;
-import duke.Tasklist;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 
 /**
  * A class encapsulating a "bye" command from the user.
