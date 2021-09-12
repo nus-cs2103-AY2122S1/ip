@@ -33,6 +33,7 @@ public class Parser {
             case "l":
                 return new ListCommand();
             case "bye":
+            case "exit":
                 return new ExitCommand();
             case "done":
                 assert commandArg != null;

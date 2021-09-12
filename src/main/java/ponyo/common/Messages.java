@@ -7,7 +7,7 @@ public class Messages {
             + "...or a deadline: deadline / d [t] /by [date]\n"
             + "...or an event:\t  event / e [ev] /at [date]\n"
             + "List all tasks:\t  list / l\n"
-            + "Mark task done:\t  done [id] / d [id]\n"
+            + "Mark task done:\t  done [id]\n"
             + "Delete a task:\t  delete / del [id]\n"
             + "Locate task:\t  find / f [name]\n"
             + "Exit the program: exit / bye";
