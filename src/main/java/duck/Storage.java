@@ -1,11 +1,11 @@
-package duke;
+package duck;
 
-import exception.DukeException;
-import exception.DukeExceptionType;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duck.exception.DuckException;
+import duck.exception.DuckExceptionType;
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.Task;
+import duck.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class Storage {
     private final String filePath;
     private final File direc;
-    private final File duke;
+    private final File duck;
     private final Ui ui;
 
     /**
@@ -38,13 +38,13 @@ public class Storage {
         ui = new Ui();
 
         direc = new File(fileDirectory);
-        duke = new File(filePath);
+        duck = new File(filePath);
     }
 
     /**
      * Loads the saved tasks from the hard disk to the Duke TaskList.
      *
-     * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duke.
+     * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duck.
      */
     public ArrayList<Task> load() {
         // Initialise task list
@@ -53,44 +53,44 @@ public class Storage {
         try {
             // Display initialisation message
             direc.mkdirs();
-            duke.createNewFile();
+            duck.createNewFile();
 
             // Initialise file reader
-            BufferedReader reader = new BufferedReader(new FileReader(duke));
+            BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
             // Read through all saved tasks
             while (currLine != null) {
-                String[] taskString = currLine.split(" \\| ", 3);
+                String[] taskString = currLine.split(" \\| ", 4);
                 Task newTask;
 
                 // Current task is a Deadline
                 if (taskString[0].equals("D")) {
-                    String[] deadlineDetails = taskString[2].split(" ");
-                    if (deadlineDetails.length == 2) {
-                        newTask = new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
-                    } else if (deadlineDetails.length == 3) {
-                        newTask = new Deadline(deadlineDetails[0],
-                                LocalDate.parse(deadlineDetails[1]), LocalTime.parse(deadlineDetails[2]));
+                    String[] deadlineDetails = taskString[3].split(" ");
+                    if (deadlineDetails.length == 1) {
+                        newTask = new Deadline(taskString[2], LocalDate.parse(deadlineDetails[0]));
+                    } else if (deadlineDetails.length == 2) {
+                        newTask = new Deadline(taskString[2],
+                                LocalDate.parse(deadlineDetails[0]), LocalTime.parse(deadlineDetails[1]));
                     } else {
-                        throw new DukeException(DukeExceptionType.DB_READ);
+                        throw new DuckException(DuckExceptionType.DB_READ);
                     }
 
                 // Current task is an Event
                 } else if (taskString[0].equals("E")) {
-                    String[] periodDetails = taskString[2].split(" ");
-                    if (periodDetails.length == 3) {
-                        newTask = new Event(periodDetails[0],
-                                LocalDate.parse(periodDetails[1]), LocalDate.parse(periodDetails[2]));
+                    String[] periodDetails = taskString[3].split(" ");
+                    if (periodDetails.length == 2) {
+                        newTask = new Event(taskString[2],
+                                LocalDate.parse(periodDetails[0]), LocalDate.parse(periodDetails[1]));
+                    } else if (periodDetails.length == 3) {
+                        newTask = new Event(taskString[2], LocalDate.parse(periodDetails[0]),
+                                LocalTime.parse(periodDetails[1]), LocalTime.parse(periodDetails[2]));
                     } else if (periodDetails.length == 4) {
-                        newTask = new Event(periodDetails[0], LocalDate.parse(periodDetails[1]),
-                                LocalTime.parse(periodDetails[2]), LocalTime.parse(periodDetails[3]));
-                    } else if (periodDetails.length == 5) {
-                        newTask = new Event(periodDetails[0],
-                                LocalDate.parse(periodDetails[1]), LocalTime.parse(periodDetails[2]),
-                                LocalDate.parse(periodDetails[3]), LocalTime.parse(periodDetails[4]));
+                        newTask = new Event(taskString[2],
+                                LocalDate.parse(periodDetails[0]), LocalTime.parse(periodDetails[1]),
+                                LocalDate.parse(periodDetails[2]), LocalTime.parse(periodDetails[3]));
                     } else {
-                        throw new DukeException(DukeExceptionType.DB_READ);
+                        throw new DuckException(DuckExceptionType.DB_READ);
                     }
 
                 // Current task is a Todo
@@ -99,7 +99,7 @@ public class Storage {
 
                 // Current task is in invalid format
                 } else {
-                    throw new DukeException(DukeExceptionType.DB_READ);
+                    throw new DuckException(DuckExceptionType.DB_READ);
                 }
 
                 // Handles whether or not Task is done
@@ -112,11 +112,11 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
-        } catch (DukeException e) {
+        } catch (DuckException e) {
             ui.showException(e);
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_LAUNCH));
+            ui.showException(new DuckException(DuckExceptionType.DB_LAUNCH));
         }
 
         return savedTasks;
@@ -129,12 +129,12 @@ public class Storage {
      */
     public void addDbEntry(String s) {
         try {
-            FileWriter writer = new FileWriter(duke, true);
+            FileWriter writer = new FileWriter(duck, true);
             writer.write(s + "\n");
             writer.close();
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_ADD));
+            ui.showException(new DuckException(DuckExceptionType.DB_ADD));
         }
     }
 
@@ -152,7 +152,7 @@ public class Storage {
 
             // Initialise file reader and writer
             FileWriter writer = new FileWriter(updated, true);
-            BufferedReader reader = new BufferedReader(new FileReader(duke));
+            BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
             // Read through file, finds and sets specified task to done
@@ -170,11 +170,11 @@ public class Storage {
             writer.close();
 
             // Replace duke with the updated file
-            duke.delete();
-            updated.renameTo(duke);
+            duck.delete();
+            updated.renameTo(duck);
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_DONE));
+            ui.showException(new DuckException(DuckExceptionType.DB_DONE));
         }
     }
 
@@ -192,7 +192,7 @@ public class Storage {
 
             // Initialise file reader and writer
             FileWriter writer = new FileWriter(updated, true);
-            BufferedReader reader = new BufferedReader(new FileReader(duke));
+            BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
             // Read through file, finds and excludes entry to delete
@@ -207,11 +207,11 @@ public class Storage {
             writer.close();
 
             // Replace duke with the updated file
-            duke.delete();
-            updated.renameTo(duke);
+            duck.delete();
+            updated.renameTo(duck);
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_DELETE));
+            ui.showException(new DuckException(DuckExceptionType.DB_DELETE));
         }
     }
 }

@@ -1,4 +1,4 @@
-package task;
+package duck.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -63,9 +63,9 @@ public class Deadline extends Task {
     @Override
     public String databaseEntry() {
         if (isTimeGiven) {
-            return "D" + super.databaseEntry() + " " + deadlineDate + " " + deadlineTime;
+            return "D" + super.databaseEntry() + " | " + deadlineDate + " " + deadlineTime;
         } else {
-            return "D" + super.databaseEntry() + " " + deadlineDate;
+            return "D" + super.databaseEntry() + " | " + deadlineDate;
         }
     }
 

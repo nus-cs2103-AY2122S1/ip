@@ -1,6 +1,6 @@
-package command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 /**
  * Represents the command that deletes a task from the task list.

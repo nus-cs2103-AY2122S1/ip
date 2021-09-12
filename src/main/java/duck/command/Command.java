@@ -1,6 +1,6 @@
-package command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 /**
  * Represents a command to be executed on the task list.

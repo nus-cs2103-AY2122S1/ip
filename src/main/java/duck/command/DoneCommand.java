@@ -1,6 +1,6 @@
-package command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 /**
  * Represents the command that sets a task on the task list to done.

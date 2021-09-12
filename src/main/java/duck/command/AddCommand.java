@@ -1,7 +1,7 @@
-package command;
+package duck.command;
 
-import duke.TaskList;
-import task.Task;
+import duck.TaskList;
+import duck.task.Task;
 
 /**
  * Represents the command that adds a task to the task list.

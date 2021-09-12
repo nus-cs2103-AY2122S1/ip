@@ -1,6 +1,6 @@
-package duke;
+package duck;
 
-import task.Task;
+import duck.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package duke;
+package duck;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -66,7 +66,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeDefaultDialog(String text, Image img) {
+    public static DialogBox getDuckDefaultDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.setBackground(new Background(
@@ -75,7 +75,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeExceptionDialog(String text, Image img) {
+    public static DialogBox getDuckExceptionDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.setBackground(new Background(

@@ -1,7 +1,7 @@
-package command;
+package duck.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duck.TaskList;
+import duck.Ui;
 
 /**
  * Represents the command that closes the program.

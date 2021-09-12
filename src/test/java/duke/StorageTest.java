@@ -1,8 +1,9 @@
 package duke;
 
+import duck.Storage;
 import org.junit.jupiter.api.Test;
 
-import task.Task;
+import duck.task.Task;
 
 
 import java.io.ByteArrayOutputStream;

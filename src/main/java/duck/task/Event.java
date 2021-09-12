@@ -1,4 +1,4 @@
-package task;
+package duck.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -104,12 +104,12 @@ public class Event extends Task {
     public String databaseEntry() {
         if (hasTime) {
             if (hasEndDate) {
-                return "E" + super.databaseEntry() + " " + startDate + " " + startTime + " " + endDate + " " + endTime;
+                return "E" + super.databaseEntry() + " | " + startDate + " " + startTime + " " + endDate + " " + endTime;
             } else {
-                return "E" + super.databaseEntry() + " " + startDate + " " + startTime + " " + endTime;
+                return "E" + super.databaseEntry() + " | " + startDate + " " + startTime + " " + endTime;
             }
         } else {
-            return "E" + super.databaseEntry() + " " + startDate + " " + endDate;
+            return "E" + super.databaseEntry() + " | " + startDate + " " + endDate;
         }
     }
 

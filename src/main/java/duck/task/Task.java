@@ -1,4 +1,4 @@
-package task;
+package duck.task;
 
 import java.time.LocalDate;
 
