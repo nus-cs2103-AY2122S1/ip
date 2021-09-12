@@ -1,12 +1,10 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
-import duke.exception.FolderNotFoundException;
 
 /**
  * <h1> Duke TaskList ChatBot! </h1>
