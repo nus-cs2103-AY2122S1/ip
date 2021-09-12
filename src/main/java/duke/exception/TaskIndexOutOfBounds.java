@@ -6,7 +6,7 @@ package duke.exception;
 public class TaskIndexOutOfBounds extends DukeException {
 
     public TaskIndexOutOfBounds(int i, int length) {
-        super("Meow? I can't find task " + i + "... Please enter a task number between 1 and " + length);
+        super("Meow? I can't find task " + (i + 1) + "... Please enter a task number between 1 and " + length);
     }
 
 }
