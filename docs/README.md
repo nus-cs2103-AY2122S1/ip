@@ -1,8 +1,17 @@
 # User Guide
 
+Duke is a GUI application to help you **easily** manage your tasks!
+
 Sample Screenshot of Duke:
 
 <img src="https://raw.github.com/JunWei3112/ip/master/docs/Ui.png" width="300">
+
+## Quick Start
+
+1. Download `duke.jar` from [here](https://github.com/JunWei3112/ip/releases/tag/v0.2)!
+2. Move `duke.jar` to the folder you want to use as the home folder for Duke.
+3. Double click the file to start Duke.
+4. Go ahead and start adding your tasks! :smile:
 
 ## Features 
 
@@ -111,7 +120,7 @@ Format: `find KEYWORD`
 
 Example of usage:
 
-<img src="https://raw.github.com/JunWei3112/ip/master/docs/FindResult.png" width="200">
+<img src="https://raw.github.com/JunWei3112/ip/master/docs/FindResult.png" width="250">
 
 ### `tag` - Tagging a task
 
