@@ -35,11 +35,6 @@ public class Duke {
         parser = new Parser(tasks);
     }
 
-    /**
-     * Driver code for Duke
-     *
-     * @param args arguments for main method.
-     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
