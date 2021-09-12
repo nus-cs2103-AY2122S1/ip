@@ -63,8 +63,6 @@ public class DialogBox extends HBox {
         
         Rectangle2D rect = new Rectangle2D(x, y, newMeasure, newMeasure);
         displayPicture.setViewport(rect);
-        displayPicture.setFitWidth(99);
-        displayPicture.setFitHeight(99);
         displayPicture.setSmooth(true);
     }
 
