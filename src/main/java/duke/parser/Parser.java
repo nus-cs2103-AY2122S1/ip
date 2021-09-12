@@ -28,38 +28,7 @@ public class Parser {
         // return command based on user input
         switch (first) {
         case "list": {
-<<<<<<< HEAD
             assert rest.length() == 0;
-            return new ListCommand();
-        }
-        case "done": {
-            assert rest.length() == 1;
-            return new UpdateCommand(rest);
-        }
-        case "deadline": {
-            assert rest.length() == 1;
-            return new AddCommand(TaskType.DEADLINE, rest);
-        }
-        case "todo": {
-            assert rest.length() == 1;
-            return new AddCommand(TaskType.TO_DO, rest);
-        }
-        case "event": {
-            assert rest.length() == 1;
-            return new AddCommand(TaskType.EVENT, rest);
-        }
-        case "date" : {
-            assert rest.length() == 1;
-            return new FindCommand(TaskType.FIND_BY_DATE, rest);
-        }
-        case "find": {
-            assert rest.length() == 1;
-            return new FindCommand(TaskType.FIND, rest);
-        }
-        case "delete": {
-            assert rest.length() == 1;
-=======
-            assert rest.length() == 0 : "list should have 1 argument.";
             return new ListCommand();
         }
         case "done": {
@@ -88,7 +57,6 @@ public class Parser {
         }
         case "delete": {
             assert rest.length() == 1 : "Specify index to delete";
->>>>>>> branch-A-Assertions
             return new DeleteCommand(rest);
         }
         case "bye": {

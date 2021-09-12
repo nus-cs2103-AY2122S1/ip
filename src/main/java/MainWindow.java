@@ -49,11 +49,20 @@ public class MainWindow extends AnchorPane {
 
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        String[] dukeResponse = response.split(" ");
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDialog;
+        if (dukeResponse[0].equals("☹")) {
+            dukeDialog = DialogBox.getErrorDialog(response, dukeImage);
+        } else {
+            dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
+        }
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
+            userDialog,
+            dukeDialog
         );
         userInput.clear();
+
         if (response.equals("Bye. Hope to see you again soon!")) {
             isExit = true;
         }

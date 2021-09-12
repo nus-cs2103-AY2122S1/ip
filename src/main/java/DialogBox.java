@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -28,7 +30,10 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTextFill(Color.DARKGREEN);
         displayPicture.setImage(img);
+        Circle circle = new Circle(50, 50, 50);
+        displayPicture.setClip(circle);
     }
 
     /**
@@ -39,6 +44,11 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
+        dialog.setTextFill(Color.DARKBLUE);
+    }
+
+    public void setErrorDialog() {
+        dialog.setTextFill(Color.DARKRED);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -48,6 +58,12 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        DialogBox db = getDukeDialog(text, img);
+        db.setErrorDialog();
         return db;
     }
 }
