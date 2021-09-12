@@ -12,6 +12,19 @@
 Sora is a desktop application for managing Tasks. The main mode of input is via Command Line Interface (CLI) with a
 Graphical User Interface (GUI) to show the output.
 
+* [Features](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#features)
+    * [Viewing Help: `help`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#viewing-help-help)
+    * [Exiting the program : `bye`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#exiting-the-program--bye)
+    * [Listing all tasks : `list`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list)
+    * [Adding a task](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#adding-a-task)
+        * [Todo: `todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo)
+        * [Deadline: `deadline`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline)
+        * [Event: `event`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#event-event)
+    * [Marking a task as done: `done`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#marking-a-task-as-done-done)
+    * [Deleting a task: `delete`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deleting-a-task-delete)
+    * [Finding a task: `find`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#finding-a-task-find)
+    * [Sorting the list of tasks: `sort`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#sorting-the-list-of-tasks-sort)
+
 ## Features
 
 ### Viewing Help: `help`
