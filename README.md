@@ -107,7 +107,7 @@ Example:
 
 
 
-### Quit the application: `exit`
+### Quit the application: `bye`
 
 Quits the application.
 
