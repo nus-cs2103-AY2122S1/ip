@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * todos, deadlines and events.
  */
 public class Taubot {
-    private static final String DATABASE_PATH = "data/duke.txt";
+    private static final String DATABASE_PATH = "data/taubot.txt";
     private static final Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-"
             + "(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
     private final TaskList tasks;
@@ -22,7 +22,7 @@ public class Taubot {
     private boolean isRunning;
 
     /**
-     * Create a <code>Taubot</code> object that can reply to commands.
+     * Creates a Taubot object that can reply commands.
      */
     public Taubot() {
         ui = new TaubotUi();
@@ -74,14 +74,14 @@ public class Taubot {
         }
     }
 
-    public void stopRunningDuke() {
+    public void stopRunningTaubot() {
         isRunning = false;
     }
 
     private String respondToFirstCommand(String firstCommand) {
         switch (firstCommand) {
         case "bye":
-            stopRunningDuke();
+            stopRunningTaubot();
             return ui.goodBye();
         case "done":
             return markDone();
@@ -116,15 +116,15 @@ public class Taubot {
     }
 
     /**
-     * Delete task from Taubot.
+     * Deletes task from Taubot.
      *
      * @throws TaubotException Thrown whenever user requests delete of a
-     * task out of range or not a number. e.g. <code>delete hi</code>
+     * task out of range or not a number. e.g. delete hi
      */
     public String deleteTask() throws TaubotException {
         try {
             tasks.deleteTask(parser.findCommandIndex());
-            writeDataToDuke();
+            writeDataToTaubot();
             return ui.showDeleteTaskMessage(tasks.getTasksLength());
         } catch (IndexOutOfBoundsException e) {
             throw new TaubotException("sorry, index out of range");
@@ -133,12 +133,12 @@ public class Taubot {
         }
     }
 
-    private void writeDataToDuke() {
+    private void writeDataToTaubot() {
         storage.writeData(tasks);
     }
 
     /**
-     * Method to add task to duke.Taubot.
+     * Adds a task to Taubot when user enters a task command.
      *
      * @throws TaubotException Thrown when the task is not given a description
      * or when the user does not give a date for an event or deadline task,
@@ -163,14 +163,14 @@ public class Taubot {
                 assert !dateString.equals("");
                 assert !timeString.equals("");
                 tasks.addTask(taskDesc, convertToTaskType(firstCommand), ld, timeString);
-                writeDataToDuke();
+                writeDataToTaubot();
                 return confirmAdditionOfTask();
             } else {
                 throw new TaubotException("sorry, you need to put the date in yyyy-mm-dd hhmm format");
             }
         } else {
             tasks.addTask(taskDesc);
-            writeDataToDuke();
+            writeDataToTaubot();
             return confirmAdditionOfTask();
         }
 
@@ -186,7 +186,7 @@ public class Taubot {
     }
 
     /**
-     * Method for duke.Taubot to mark a task done.
+     * Method for Taubot to mark a task done.
      *
      * @throws TaubotException Thrown when user gives an index out of range
      * or not a number after the command done.
@@ -197,7 +197,7 @@ public class Taubot {
             assert taskIndex >= 0;
             tasks.markTaskDone(taskIndex);
             Task task = tasks.getTask(taskIndex);
-            writeDataToDuke();
+            writeDataToTaubot();
             return ui.markTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new TaubotException("sorry, the number you gave is out of range");

@@ -2,7 +2,7 @@ package taubot;
 import java.util.ArrayList;
 
 /**
- * Represents the DukeUI to interact with the user.
+ * Represents the TaubotUI to interact with the user.
  */
 public class TaubotUi {
 

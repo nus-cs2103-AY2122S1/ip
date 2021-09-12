@@ -19,7 +19,7 @@ public class TaskList {
     private int taskIndex;
 
     /**
-     * Constructor for duke.TaskList.
+     * Constructor for TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>(100);

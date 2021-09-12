@@ -31,7 +31,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Constructor for duke.Task object, takes in taskDescription string.`
+     * Constructor for Task object, takes in taskDescription string.`
      *
      * @param taskDescription Description of the task.
      */
@@ -58,9 +58,9 @@ public class Task {
     }
 
     /**
-     * Returns string representation of duke.Task object.
+     * Returns string representation of Task object.
      *
-     * @return String representation of duke.Task.
+     * @return String representation of Task.
      */
     @Override
     public String toString() {

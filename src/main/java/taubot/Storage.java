@@ -30,6 +30,7 @@ public class Storage {
     public void loadTasksFromFile(TaskList tasks) {
         if (tasks.getTasksLength() == 0) {
             File f = new File(filePath);
+            createFileIfNotFound();
             Scanner s = null;
             try {
                 s = new Scanner(f);

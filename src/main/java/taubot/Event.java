@@ -42,7 +42,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns at property of duke.Event object.
+     * Returns at property of Event object.
      *
      * @return The date and time of the event.
      */

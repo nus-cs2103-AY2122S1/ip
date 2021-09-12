@@ -2,18 +2,18 @@ package taubot;
 
 public class Todo extends Task {
     /**
-     * Constructor for duke.Todo object.
+     * Constructor for Todo object.
      *
-     * @param description Description of duke.Todo.
+     * @param description Description of Todo.
      */
     public Todo(String description) {
         super(TaskType.TODO, description);
     }
 
     /**
-     * Returns string representation of duke.Todo object.
+     * Returns string representation of Todo object.
      *
-     * @return String representation of duke.Todo.
+     * @return String representation of Todo.
      */
     @Override
     public String toString() {

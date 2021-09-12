@@ -50,24 +50,24 @@ public class MessageContainer extends HBox {
 
     private void reverseMessageDirection() {
         ObservableList<Node> text = FXCollections.observableArrayList(getChildren());
-        Label dukeReply = (Label) text.get(0);
+        Label taubotReply = (Label) text.get(0);
         if (textMessage.getText().split(" ")[0].equals(errorMessagePrefix)) {
-            dukeReply.setBackground(new Background(new BackgroundFill(dukeErrorMessageColour, messageCornerRadius,
+            taubotReply.setBackground(new Background(new BackgroundFill(dukeErrorMessageColour, messageCornerRadius,
                     messageInset)));
         } else {
-            dukeReply.setBackground(new Background(new BackgroundFill(dukeTextMessageColour, messageCornerRadius,
+            taubotReply.setBackground(new Background(new BackgroundFill(dukeTextMessageColour, messageCornerRadius,
                     messageInset)));
 
         }
-        dukeReply.setTextFill(blackColour);
+        taubotReply.setTextFill(blackColour);
         Collections.reverse(text);
         getChildren().setAll(text);
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static MessageContainer getDukeDialog(String text) {
-        MessageContainer dukeReply = new MessageContainer(text);
-        dukeReply.reverseMessageDirection();
-        return dukeReply;
+    public static MessageContainer getTaubotDialog(String text) {
+        MessageContainer taubotReply = new MessageContainer(text);
+        taubotReply.reverseMessageDirection();
+        return taubotReply;
     }
 }
