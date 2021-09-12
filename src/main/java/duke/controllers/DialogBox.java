@@ -11,13 +11,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -28,7 +30,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Rectangle profilePhotoRect;
 
     private DialogBox(String text, Image img) {
         try {
@@ -41,7 +43,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+
+        profilePhotoRect.setArcWidth(30.0); // Corner radius
+        profilePhotoRect.setArcHeight(30.0);
+        profilePhotoRect.setFill(new ImagePattern(img));
+        profilePhotoRect.setEffect(new DropShadow(20, Color.BLACK)); // Shadow
     }
 
     /**

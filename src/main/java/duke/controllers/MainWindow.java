@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserPortrait.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukePortrait.png"));
 
     @FXML
     public void initialize() {
@@ -48,6 +48,9 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.trim().equalsIgnoreCase("bye")) {
+            userInput.setEditable(false);
+        }
     }
 }
 
