@@ -17,11 +17,12 @@ import duke.tasktype.Todo;
  * Class that represents the storage.
  *
  * @author Houten Teo
- * @version CS2103T week 3
+ * @version CS2103T week 6
  */
 public class Storage {
     private MyList list;
     private String filePath;
+
     /**
      * Constructor for the storage class
      * @param list the list to load the storage data into
@@ -32,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Method to load the data from Data.txt file into the list if any.
+     * Loads the data from Data.txt file into the list if any.
      */
     public void load() {
         try {
@@ -98,7 +99,7 @@ public class Storage {
     }
 
     /**
-     * Method to store the string representation of a task into the Data.txt file.
+     * Stores the string representation of a task into the Data.txt file.
      */
     public void writeToFile() {
         try {

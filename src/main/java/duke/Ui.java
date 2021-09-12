@@ -16,7 +16,8 @@ import duke.tasktype.Todo;
 public class Ui {
 
     /**
-     * Method to print out the welcome message when the bot starts.
+     * Returns the welcome message.
+     * @return The welcome message.
      */
     public static String welcomeMessage() {
         System.out.println(
@@ -30,14 +31,14 @@ public class Ui {
     }
 
     /**
-     * Method to print out the error message when loading of tasks fails
+     * Prints out the error message when loading of tasks fails
      */
     public static void loadingError() {
         System.out.println("Error loading duke.tasks");
     }
 
     /**
-     * Method to print out the error message when user keys in an invalid index.
+     * Prints out the error message when user keys in an invalid index.
      * @return the error message.
      */
     public static String invalidIndexMessage() {
@@ -46,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message from the wrongCommandFormatException.
+     * Prints out the message from the wrongCommandFormatException.
      * @param e the exception to get the message from.
      * @return the error message.
      */
@@ -56,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message when the user updates the date format.
+     * Prints out the message when the user updates the date format.
      * @return The message.
      */
     public static String formatUpdatedMessage() {
@@ -65,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message when the user tries to update into and invalid date format.
+     * Prints and returns the message when the user tries to update into and invalid date format.
      * @return the message.
      */
     public static String unacceptableFormatMessage() {
@@ -74,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the current date format.
+     * Prints and returns the current date format.
      * @return the message.
      */
     public static String currentDateFormatMessage() {
@@ -83,7 +84,7 @@ public class Ui {
     }
 
     /**
-     * Method to print and return the message when the user inputs an unrecognised command.
+     * Prints and returns the message when the user inputs an unrecognised command.
      * @return The message.
      */
     public static String noFormatSpecifiedMessage() {
@@ -92,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * Method when the user keys in and unrecognisable command.
+     * Returns the message when there is an unrecognised command.
      * @return the message.
      */
     public static String getUnrecognisedCmdMessage() {
@@ -101,7 +102,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the goodbye message.
+     * Prints out the goodbye message.
      * @return the message.
      */
     public static String botShutdownMessage() {
@@ -110,7 +111,7 @@ public class Ui {
     }
 
     /**
-     * Method to inform the user what taks has been added and the number of items in the list.
+     * Informs the user what task has been added and the number of items in the list.
      * @param t the task that the user added.
      * @param list the list that the task is added to.
      * @return the message.
@@ -130,7 +131,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out all the items in the list.
+     * Prints out all the items in the list.
      * @param list the list that contains the items to be printed out.
      * @return the message.
      */
@@ -151,7 +152,7 @@ public class Ui {
     }
 
     /**
-     * Method to inform the user what task has been deleted.
+     * Informs the user what task has been deleted.
      * @param t The task that has been deleted.
      * @param list The list that the task has been deleted from.
      * @return the message.
@@ -171,7 +172,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message when the user tries to complete a task
+     * Prints out the message when the user tries to complete a task
      * that has already been completed.
      * @param t The completed task that the user tries to mark as complete
      * @return the message
@@ -183,7 +184,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message when the user marks an event as completed.
+     * Prints out the message when the user marks an event as completed.
      * @param e The task that was marked as completed.
      * @return the message
      */
@@ -199,7 +200,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message when the user marks a to do as completed.
+     * Prints out the message when the user marks a to do as completed.
      * @param t The to do that was marked completed.
      * @return the message.
      */
@@ -209,7 +210,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the message when the user marks a deadline as completed.
+     * Prints out the message when the user marks a deadline as completed.
      * @param d The deadline that was marked as completed.
      * @return the message.
      */
@@ -224,7 +225,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the number of matching tasks.
+     * Prints out the number of matching tasks.
      * @param counter The number of matching tasks.
      * @return the message.
      */
@@ -245,7 +246,7 @@ public class Ui {
     }
 
     /**
-     * Method to print out the string representations of all the matching tasks.
+     * Prints out the string representations of all the matching tasks.
      * @param matchingList The array containing the matching tasks.
      * @return the message.
      */
@@ -264,7 +265,7 @@ public class Ui {
     }
 
     /**
-     * Method to inform the user that he has not input a keyword after the find command.
+     * Informs the user that he has not input a keyword after the find command.
      * @return the message.
      */
     public static String noKeywordSpecifiedMessage() {
@@ -273,7 +274,7 @@ public class Ui {
     }
 
     /**
-     * Method to inform the user that the number of days specified for the 'remind'
+     * Informs the user that the number of days specified for the 'remind'
      * command is not accepted.
      * @return The message.
      */
@@ -316,7 +317,7 @@ public class Ui {
     }
 
     /**
-     * Duke's reply when the user inputs the clear command.
+     * Returns Duke's reply when the user inputs the clear command.
      * @return Duke's reply
      */
     public static String getClearMessage() {

@@ -12,7 +12,7 @@ import duke.tasktype.Todo;
  * Class to handle all the user inputs.
  *
  * @author Houten Teo
- * @version CS2103T week 3
+ * @version CS2103T week 6
  */
 public class Parser {
     private boolean isRunning;
@@ -32,7 +32,7 @@ public class Parser {
     }
 
     /**
-     * Method to check if the parser is still running.
+     * Checks if the parser is still running.
      * @return true if its running and false otherwise.
      */
     public boolean isRunning() {
@@ -40,7 +40,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate Dukes response based on the user command.
+     * Generates Dukes response based on the user command.
      * @param command The command the user enters.
      * @return The String representing Duke's response.
      */
@@ -94,7 +94,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate duke's response to a 'done' command.
+     * Generates duke's response to a 'done' command.
      * @return Duke's response
      */
     private String getDoneResponse() {
@@ -114,7 +114,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate duke's response to a 'todo' command.
+     * Generates duke's response to a 'todo' command.
      * @return Duke's response.
      */
     private String getTodoResponse() {
@@ -134,7 +134,7 @@ public class Parser {
     }
 
     /**
-     * Method to return duke's response to a 'deadline' command.
+     * Generates duke's response to a 'deadline' command.
      * @return Duke's response.
      */
     private String getDeadlineResponse() {
@@ -154,7 +154,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate Duke's response to an 'event' command.
+     * Generates Duke's response to an 'event' command.
      * @return Duke's response.
      */
     private String getEventResponse() {
@@ -174,7 +174,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate duke's response to a 'delete' command.
+     * Generates duke's response to a 'delete' command.
      * @return Duke's response.
      */
     private String getDeleteResponse() {
@@ -190,7 +190,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate Duke's reponse to a 'setFormat' command.
+     * Generates Duke's response to a 'setFormat' command.
      * @return Duke's response.
      */
     private String getSetFormatResponse() {
@@ -210,7 +210,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate Duke's response to a 'find' command.
+     * Generates Duke's response to a 'find' command.
      * @return Duke's response.
      */
     private String getFindResponse() {
@@ -224,7 +224,7 @@ public class Parser {
     }
 
     /**
-     * Method to generate Duke's response to the 'remind' command.
+     * Generates Duke's response to the 'remind' command.
      * @return Duke's response.
      */
     private String getReminderResponse() {
@@ -239,6 +239,10 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Generates duke's response to the 'clear' command.
+     * @return Duke's response.
+     */
     private String getClearResponse() {
         this.list.clearList();
         this.storage.writeToFile();

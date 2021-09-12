@@ -6,7 +6,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Main method to launch duke
+     * Launches duke
      * @param args
      */
     public static void main(String[] args) {

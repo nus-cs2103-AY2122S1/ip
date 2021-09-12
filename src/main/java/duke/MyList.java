@@ -8,10 +8,10 @@ import duke.tasktype.Deadline;
 import duke.tasktype.Task;
 
 /**
- * duke.MyList class that encapsulates the bot list object and functionalities.
+ * Class that represents the list that stores the user's tasks.
  *
  * @author Houten Teo
- * @version CS2103T week 3
+ * @version CS2103T week 6
  */
 public class MyList {
 
@@ -34,7 +34,7 @@ public class MyList {
     }
 
     /**
-     * Method to return the size of the list
+     * Returns the size of the list
      * @return The number of items in the list.
      */
     public int getListSize() {
@@ -42,7 +42,7 @@ public class MyList {
     }
 
     /**
-     * Method the return the task at the specified index.
+     * Returns the task at the specified index.
      * @param index The specified index.
      * @return The task at the specified index.
      */
@@ -51,7 +51,7 @@ public class MyList {
     }
 
     /**
-     * Method to add an item into the list
+     * Adds an item into the list
      * Subsequently prints out the total number of items in the list.
      * @param t the duke.tasks.Task to be added into the list
      */
@@ -61,14 +61,14 @@ public class MyList {
     }
 
     /**
-     * Method to list out all the items in the list.
+     * Lists out all the items in the list.
      */
     public String listAll() {
         return Ui.listAllMessage(this);
     }
 
     /**
-     * Method to mark a certain task in the list as completed.
+     * Marks a certain task in the list as completed.
      * @param index The index of the item in the list to be completed.
      *              If the index specified is invalid, prompt the user
      *              for another input.
@@ -82,7 +82,7 @@ public class MyList {
     }
 
     /**
-     * Method to delete a certain task from the list.
+     * Deletes a certain task from the list.
      * @param index The index of the item in the list to be deleted.
      *              If the index specified is invalid, prompt the user
      *              for another input.
@@ -94,7 +94,7 @@ public class MyList {
     }
 
     /**
-     * Method to find all tasks with a description containing the keyword.
+     * Finds all tasks with a description containing the keyword.
      * Not case-sensitive.
      * @param keyword The keyword to be looking for.
      */
@@ -115,7 +115,7 @@ public class MyList {
     }
 
     /**
-     * Method to load a task into the list.
+     * Loads a task into the list.
      * This method does not print anything to the screen.
      * Used in conjuntion with the load method in storage.
      * @param t The task to be laaded into the list.
@@ -125,7 +125,7 @@ public class MyList {
     }
 
     /**
-     * Method to help generate Duke's response to the remind command.
+     * Generates Duke's response to the 'remind' command.
      * @param noOfDays The number of days specified by the user.
      * @return Duke's response.
      */

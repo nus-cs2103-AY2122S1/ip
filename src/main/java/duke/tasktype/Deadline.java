@@ -14,7 +14,7 @@ import duke.exception.WrongCommandFormatException;
  * Has an additional component of a deadline.
  *
  * @author Houten Teo
- * @version CS2103T week 3
+ * @version CS2103T week 6
  */
 public class Deadline implements Task {
 
@@ -26,7 +26,7 @@ public class Deadline implements Task {
     private DateTimeFormatter currentFormat = DateTimeFormatter.ofPattern(Duke.getFormat());
 
     /**
-     * constructor for the deadline class.
+     * Constructor for the deadline class.
      * @param description the description of the task.
      * @param isDone whether the task is completed .
      * @throws WrongCommandFormatException Thrown when the user enters the
@@ -99,7 +99,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Method to return the current date format.
+     * Returns the current date format.
      * @return The current format.
      */
     public DateTimeFormatter getCurrentFormat() {
@@ -107,7 +107,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Method to return the deadline.
+     * Returns the deadline.
      * @return The deadline.
      */
     public LocalDate getDeadline() {
@@ -124,7 +124,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Overridden method to get the type icon.
+     * Returns the type icon.
      * @return The String representation of the icon.
      */
     @Override
@@ -133,7 +133,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Overridden method to get the type icon.
+     * Returns the type icon.
      * @return The String representation of the icon.
      */
     @Override
@@ -146,7 +146,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Method to return the description of the deadline.
+     * Returns the description of the deadline.
      * @return The description of the deadline.
      */
     @Override
@@ -154,8 +154,8 @@ public class Deadline implements Task {
         return this.description;
     }
     /**
-     * Overridden toString method
-     * @return The String representation of the deadline object
+     * Returns the string representation of the deadline task.
+     * @return The String representation of the deadline task.
      *          The type icon, status icon and description arranged
      *          in a line.
      */
@@ -173,7 +173,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Overridden markComplete method to mark the deadline task as complete.
+     * Marks the deadline task as complete.
      * If the task has already been completed, inform the user.
      * Else indicate that the task has been correctly marked.
      */
@@ -188,7 +188,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Method to return the String representation of the deadline to be stored in Data.txt.
+     * Returns the String representation of the deadline to be stored in Data.txt.
      * @return The string representation of the deadline.
      */
     @Override
@@ -201,7 +201,7 @@ public class Deadline implements Task {
         return data;
     }
     /**
-     * Method to check if the task has been marked as completed.
+     * Checks if the task has been marked as completed.
      * @return True if the task is completed and false otherwise.
      */
     @Override

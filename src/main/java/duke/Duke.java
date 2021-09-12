@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * The main class for the bot
  *
  * @author Houten Teo
- * @version CS2103T week 3
+ * @version CS2103T week 6
  */
 public class Duke extends Application {
     private static String format = "yyyy-MM-dd"; //default date
@@ -34,7 +34,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Method to get the current format setting.
+     * Returns the current date format setting.
      * @return the DateTimeFormatter
      */
     public static String getFormat() {
@@ -42,7 +42,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Method to allow the user to change the date format.
+     * Changes the date format.
      * @param newFormat The desired format
      * @throws IllegalArgumentException Thrown if the format is not accepted by
      *                                  DateTimeFormatter
@@ -54,8 +54,7 @@ public class Duke extends Application {
 
 
     /**
-     * Overridden start method from application.
-     * Used to start up the duke GUI.
+     * Starts up the duke GUI.
      * @param stage The stage for the GUI
      * @throws Exception
      */
@@ -71,7 +70,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Method to start the bot and waits for the user's input.
+     * Starts the bot and waits for the user's input.
      */
     public void startCli() {
 

@@ -10,7 +10,7 @@ import duke.exception.WrongCommandFormatException;
  * An event has an additional component of a date.
  *
  * @author Houten Teo
- * @version CS2103T week 2
+ * @version CS2103T week 6
  */
 public class Event implements Task {
 
@@ -79,7 +79,7 @@ public class Event implements Task {
     }
 
     /**
-     * Overridden method to get the specific type icon.
+     * Returns the specific type icon.
      * @return The String representation of the icon.
      */
     @Override
@@ -88,7 +88,7 @@ public class Event implements Task {
     }
 
     /**
-     * Overriden method to get the status icon.
+     * Returns the status icon.
      * @return The String representation of the icon.
      */
     @Override
@@ -100,13 +100,17 @@ public class Event implements Task {
         }
     }
 
+    /**
+     * Returns the event description.
+     * @return The event description.
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Overridden toString method.
-     * @return The string representation of the event object.
+     * Returns the string representation of the event task.
+     * @return The string representation of the event task.
      *         The type icon, status icon and decription arranged
      *         in a line.
      */
@@ -124,7 +128,7 @@ public class Event implements Task {
     }
 
     /**
-     * Overridden markComplete method.
+     * Marks the task as completed
      * If the task has already been completed, inform the user.
      * Else indicate that the task has been correctly marked.
      */
@@ -139,7 +143,7 @@ public class Event implements Task {
     }
 
     /**
-     * Method to convert the task into string format to be stored in Data.txt
+     * Converts the task into string format to be stored in Data.txt
      * @return The string representation of the task
      */
     @Override
@@ -153,7 +157,7 @@ public class Event implements Task {
     }
 
     /**
-     * Method to return the task type.
+     * Returns the task type.
      * @return The string representation of the task type.
      */
     @Override
@@ -162,7 +166,7 @@ public class Event implements Task {
     }
 
     /**
-     * Method to check if the task has been marked as completed.
+     * Checks if the task has been marked as completed.
      * @return True if the task is completed and false otherwise.
      */
     @Override

@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-@SuppressWarnings("checkstyle:Regexp")
 public class Controller {
     @FXML
     private VBox dialogContainer;
@@ -55,7 +53,7 @@ public class Controller {
     }
 
     /**
-     * Method to handle the user input when pressing enter or clicking the send button.
+     * Handles the user input when pressing enter or clicking the send button.
      * @param e
      */
     public void handleUserInput(ActionEvent e) {
@@ -76,11 +74,19 @@ public class Controller {
 
     }
 
+    /**
+     * Returns the label containing the user's input.
+     * @return The label containing the user's input.
+     */
     public Label getUserDialog() {
         Label textToAdd = new Label(this.command);
         return textToAdd;
     }
 
+    /**
+     * Returns the label containing duke's response.
+     * @return The label containing duke's response.
+     */
     public Label getDukeDialog() {
         Parser p = new Parser(this.list, this.storage);
         String response = p.getDukeResponse(this.command);
