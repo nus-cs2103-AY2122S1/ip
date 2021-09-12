@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  * Container for Duke program.
  */
 public class Duke {
-    private static final String FILE_PATH = "data/tasks";
+    private static final String FILE_PATH = "data/tasks.txt";
 
     private TaskList tasks;
     private Ui ui;

@@ -30,6 +30,9 @@ public class Parser {
         String[] words = userCommand.strip().split(" ");
 
         switch (words[0].toLowerCase()) {
+        // Solution below adapted from AB3:
+        // https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/parser
+        // /AddressBookParser.java
         case WelcomeCommand.COMMAND_WORD:
             return new WelcomeCommand();
 

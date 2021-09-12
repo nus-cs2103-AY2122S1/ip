@@ -61,6 +61,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        // Solution below adapted from: https://github.com/nus-cs2103-AY2021S1/ip/pull/87/files
         if (text.startsWith("(*´д｀*)")) {
             db.setStyle("-fx-background-color: #FFCBCB");
         } else {

@@ -17,7 +17,7 @@ public class ScheduleCommand extends Command {
 
     /** Guide on how to use this command. */
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " <date> - finds a list of tasks at scheduled at the <date> in yyyy/MM/dd HHmm format.\n"
+            + " <date> - finds a list of tasks at scheduled at the <date> in yyyy/MM/dd format.\n"
             + "    📍 Example: " + COMMAND_WORD + " 2021/08/24";
 
     /**
