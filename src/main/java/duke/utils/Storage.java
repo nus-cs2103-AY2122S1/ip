@@ -109,9 +109,7 @@ public class Storage {
      * @param task
      * @return String representation of the task
      */
-    public String convertTaskToString(Task task) {
-
-
+    public String convertTaskToString(Task task){
         // Example storage in file:
         // T;0;readbook
         // D;0;return book ;2/12/2019 1800
@@ -154,7 +152,6 @@ public class Storage {
 
 
         String[] lineSplit = line.split(DELIMITER);
-        //System.out.println(lineSplit.length);
         Task.TaskType taskType = lineSplit[0].equals("T") ? Task.TaskType.TODO :
                 lineSplit[0].equals("D") ? Task.TaskType.DEADLINE : Task.TaskType.EVENT;
 
