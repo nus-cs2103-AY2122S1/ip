@@ -39,10 +39,13 @@ public class Storage {
         File file = new File(filePath);
         try {
             if (!file.exists()) {
+                //@@author kaushikkrdy-reused
+                //Reused from https://stackoverflow.com/a/27058578
                 if (!file.getParentFile().exists()) {
                     file.getParentFile().mkdirs();
                 }
                 file.createNewFile();
+                //@@author
             } else {
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
@@ -63,7 +66,7 @@ public class Storage {
      * @param textToAdd new text that will be added to the file.
      */
     public void appendToFile(String textToAdd) {
-        assert !textToAdd.isEmpty(): "Text to add cannot be blank!";
+        assert !textToAdd.isEmpty() : "Text to add cannot be blank!";
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(textToAdd);
@@ -81,12 +84,15 @@ public class Storage {
      * @param lineNumber denotes the line number of the line that needs to be replaced.
      */
     public void replaceFileLine(String textToReplaceWith, int lineNumber) {
-        assert !textToReplaceWith.isEmpty(): "Text to replace with cannot be blank!";
+        assert !textToReplaceWith.isEmpty() : "Text to replace with cannot be blank!";
         try {
+            //@@author kaushikkrdy-reused
+            //Reused from https://stackoverflow.com/a/31376173
             Path path = Paths.get(filePath);
             List<String> lines = Files.readAllLines(path);
             lines.set(lineNumber, textToReplaceWith);
             Files.write(path, lines, StandardCharsets.UTF_8);
+            //@@author
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -100,6 +106,7 @@ public class Storage {
      */
     public void deleteFileLine(int lineNumber) {
         try {
+            //Solution below adapted from https://stackoverflow.com/a/31376173
             Path path = Paths.get(filePath);
             List<String> lines = Files.readAllLines(path);
             lines.remove(lineNumber);

@@ -25,16 +25,16 @@ public class Ui {
      */
     public String showHelpMessage() {
 
-        String helpMessage = String.join("\n"
-                , "The available commands are list, bye, find, delete, done, todo, event, deadline."
-                , "Enter list to get a list of all the tasks you have."
-                , "Enter bye to exit the program."
-                , "Enter find in the format: find  <search term> to get a list of all tasks that contain that term."
-                , "Enter delete in the format: delete  <task number> to delete the task from the list."
-                , "Enter done in the format: done  <task number> to mark the task done in the list."
-                , "Enter todo in the format: todo  <description> to enter a Todo task."
-                , "Enter event in the format: event  <description>  <date and time> to enter an Event task."
-                , "Enter deadline in the format: deadline  <deadline>  <date and time> to enter a Deadline task."
+        String helpMessage = String.join("\n",
+                "The available commands are list, bye, find, delete, done, todo, event, deadline.",
+                "Enter list to get a list of all the tasks you have.",
+                "Enter bye to exit the program.",
+                "Enter find in the format: find  <search term> to get a list of all tasks that contain that term.",
+                "Enter delete in the format: delete  <task number> to delete the task from the list.",
+                "Enter done in the format: done  <task number> to mark the task done in the list.",
+                "Enter todo in the format: todo  <description> to enter a Todo task.",
+                "Enter event in the format: event  <description>  <date and time> to enter an Event task.",
+                "Enter deadline in the format: deadline  <deadline>  <date and time> to enter a Deadline task."
         );
 
         return helpMessage;
@@ -107,7 +107,7 @@ public class Ui {
             sb.append("Here are the matching tasks in your list:\n");
 
             IntStream.range(0, matchingTaskList.size())
-                    .forEach(i -> sb.append(String.format("%d.%s%n", i+1, matchingTaskList.get(i))));
+                    .forEach(i -> sb.append(String.format("%d.%s%n", i + 1, matchingTaskList.get(i))));
 
             return sb.toString();
         }
@@ -127,7 +127,7 @@ public class Ui {
             sb.append("Here are tasks in your list:\n");
 
             IntStream.range(0, taskList.size())
-                    .forEach(i -> sb.append(String.format("%d.%s%n", i+1, taskList.get(i))));
+                    .forEach(i -> sb.append(String.format("%d.%s%n", i + 1, taskList.get(i))));
 
             return sb.toString();
         }

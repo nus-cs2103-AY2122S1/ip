@@ -10,7 +10,6 @@ public class Event extends Task {
 
     private LocalDateTime dateTimeAt;
     private String at;
-
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     /**

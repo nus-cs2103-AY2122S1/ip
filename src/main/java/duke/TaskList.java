@@ -43,9 +43,12 @@ public class TaskList {
                     + " find searchterm");
         }
         try {
+            //@@author kaushikkrdy-reused
+            //Reused from https://stackoverflow.com/a/46074920
             List<Task> matchingTaskList = this.taskList.stream()
                     .filter(task -> task.toString().contains(searchTerm))
                     .collect(Collectors.toList());
+            //@@author
             return ui.showMatchingTasks(new ArrayList<Task>(matchingTaskList));
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Please provide a search term after the find command in the following format:"
@@ -196,7 +199,7 @@ public class TaskList {
             String[] tsData = ts.split(" \\| ");
             String taskType = tsData[0];
 
-            assert taskType.equals("T")|| taskType.equals("D") || taskType.equals("E"): "Invalid task type!";
+            assert taskType.equals("T") || taskType.equals("D") || taskType.equals("E") : "Invalid task type!";
 
             switch (taskType) {
             case "T":

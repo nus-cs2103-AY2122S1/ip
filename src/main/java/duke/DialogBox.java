@@ -60,7 +60,8 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
         dialog.setTranslateX(DUKE_BOX_AND_IMAGE_DISTANCE);
         dialog.setPadding(new Insets(TOP_PADDING, RIGHT_PADDING, BOTTOM_PADDING, LEFT_PADDING));
-        String style = String.format("-fx-background-color: %s; -fx-background-radius:%d", DUKE_BG_COLOR, DUKE_BG_RADIUS);
+        String style = String.format("-fx-background-color: %s;"
+                + " -fx-background-radius:%d", DUKE_BG_COLOR, DUKE_BG_RADIUS);
         dialog.setStyle(style);
     }
 

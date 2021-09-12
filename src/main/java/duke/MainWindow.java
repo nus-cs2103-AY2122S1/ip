@@ -67,6 +67,9 @@ public class MainWindow extends AnchorPane {
 
     private void handleByeInput(String input) {
         if (input.equals("bye")) {
+            //@@author kaushikkrdy-reused
+            //Reused from https://stackoverflow.com/a/21996863
+            //with minor modifications
             new Timer().schedule(
                     new TimerTask() {
                         public void run() {
@@ -74,6 +77,7 @@ public class MainWindow extends AnchorPane {
                             System.exit(0);
                         }
                     }, TIMER_DELAY);
+            //@@author
         }
     }
 }
