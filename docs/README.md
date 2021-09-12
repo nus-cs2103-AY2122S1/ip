@@ -77,6 +77,23 @@ Got it. I've added this task:
 Now you have 1 tasks in your list.    
 ```
 
+### `event` - Creates an event<a name="event"></a>
+
+Format: `event {description} /at {time with format: dd/mm/yyyy hhmm}`
+`hhmm is optional.`
+
+Example of usage:
+
+`event party /by 2/2/2022 2222`
+
+Expected outcome:
+```
+Got it. I've added this task:
+    [E][ ] party (at: 02 Feb 2022 22:22)
+Now you have 3 tasks in your list.    
+```
+
+
 ### `deadline` - Creates a task with a deadline<a name="deadline"></a>
 
 Format: `deadline {description} /by {time with format: dd/mm/yyyy hhmm}`
@@ -92,20 +109,22 @@ Got it. I've added this task:
     [D][ ] homework (by: 02 Feb 2022 22:22)
 Now you have 2 tasks in your list.    
 ```
-### `event` - Creates an event<a name="event"></a>
 
-Format: `event {description} /at {time with format: dd/mm/yyyy hhmm}`
-`hhmm is optional.`
+
+### `list` - Lists all tasks added<a name="list"></a>
+
+Format: `list`
 
 Example of usage:
 
-`event party /by 2/2/2022 2222`
+`list`
 
 Expected outcome:
 ```
-Got it. I've added this task:
-    [E][ ] party (at: 02 Feb 2022 22:22)
-Now you have 3 tasks in your list.    
+Here are the tasks in your list:
+   1. [T][ ] homework 
+   2. [E][ ] party (at: 02 Feb 2022 22:22)
+   3. [D][ ] homework (by: 02 Feb 2022 22:22)
 ```
 
 ### `delete` - Deletes a task<a name="delete"></a>
