@@ -19,27 +19,28 @@ import duke.task.ToDo;
  */
 public class Parser {
     /** TaskList object used by Duke **/
-    private static TaskList taskList;
+    private TaskList taskList;
 
     /** Current user string **/
-    private static String userString;
+    private String userString;
 
     /** Current user string split into words **/
-    private static String[] words;
+    private String[] words;
 
+    public Parser(TaskList taskList) {
+        this.taskList = taskList;
+    }
     /**
      * Handles user input, and allowing interactions with tasks
      *
      * @param userString String that users enter
-     * @param taskList TaskList object used by Duke
      * @throws DukeException If Duke does not recognize the format provided
      */
-    public static String handle(String userString, TaskList taskList) throws DukeException {
-        Parser.userString = userString;
-        Parser.taskList = taskList;
+    public String handle(String userString) throws DukeException {
+        userString = userString;
         String[] arr = userString.split(" ");
         String firstWord = arr[0].toLowerCase();
-        Parser.words = arr;
+        words = arr;
 
         switch (firstWord) {
         case "hi": // fallthrough
@@ -79,7 +80,7 @@ public class Parser {
      * @return Duke response for handling done
      * @throws DukeException If there is no task number or wrong task number
      */
-    public static String handleDone() throws DukeException {
+    public String handleDone() throws DukeException {
         assert words[0].toLowerCase().equals("done") : "wrong method";
         if (words.length == 1) {
             throw new MissingTaskNumberException("Missing task number");
@@ -103,7 +104,7 @@ public class Parser {
      * @retyrn Duke response for handling ToDo
      * @throws DukeException If no name is provided
      */
-    public static String handleTodo() throws DukeException {
+    public String handleTodo() throws DukeException {
         assert words[0].toLowerCase().equals("todo") : "wrong method";
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");
@@ -124,7 +125,7 @@ public class Parser {
      * @return Duke response for handling Deadline
      * @throws DukeException If no name or no deadline is provided
      */
-    public static String handleDeadline() throws DukeException {
+    public String handleDeadline() throws DukeException {
         assert words[0].toLowerCase().equals("deadline") : "wrong method";
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");
@@ -144,7 +145,7 @@ public class Parser {
      * @return Name of deadline task
      * @throws MissingDeadlineException If no due date is provided
      */
-    public static String getDeadlineNameFromString(String userString) throws MissingDeadlineException {
+    public String getDeadlineNameFromString(String userString) throws MissingDeadlineException {
         int indexOfBy = userString.indexOf("/by");
         if (indexOfBy == -1) {
             throw new MissingDeadlineException("Missing deadline");
@@ -160,7 +161,7 @@ public class Parser {
      * @return LocalDate object of the due date
      * @throws MissingDeadlineException If no due date is provided
      */
-    public static LocalDate getDueDateFromString(String userString) throws MissingDeadlineException {
+    public LocalDate getDueDateFromString(String userString) throws MissingDeadlineException {
         int indexOfBy = userString.indexOf("/by");
         if (indexOfBy == -1) {
             throw new MissingDeadlineException("Missing deadline");
@@ -177,7 +178,7 @@ public class Parser {
      * @return Duke response for handling Event
      * @throws DukeException If no task name or event date is provided
      */
-    public static String handleEvent() throws DukeException {
+    public String handleEvent() throws DukeException {
         assert words[0].toLowerCase().equals("event") : "wrong method";
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");
@@ -197,7 +198,7 @@ public class Parser {
      * @return Name of event task
      * @throws MissingEventTimeException If the event date is not provided
      */
-    public static String getEventNameFromString(String userString) throws MissingEventTimeException {
+    public String getEventNameFromString(String userString) throws MissingEventTimeException {
         int indexOfAt = userString.indexOf("/at");
         if (indexOfAt == -1) {
             throw new MissingEventTimeException("Missing event time");
@@ -213,7 +214,7 @@ public class Parser {
      * @return Date of the event task
      * @throws MissingEventTimeException If the event date is not provided
      */
-    public static LocalDate getEventDateFromString(String userString) throws MissingEventTimeException {
+    public LocalDate getEventDateFromString(String userString) throws MissingEventTimeException {
         int indexOfAt = userString.indexOf("/at");
         if (indexOfAt == -1) {
             throw new MissingEventTimeException("Missing event time");
@@ -229,7 +230,7 @@ public class Parser {
      * @return Duke response for handling delete
      * @throws DukeException If there is none or invalid task number provided
      */
-    public static String handleDelete() throws DukeException {
+    public String handleDelete() throws DukeException {
         assert words[0].toLowerCase().equals("delete") : "wrong method";
         if (words.length == 1) {
             throw new MissingTaskNumberException("Missing task number");
@@ -253,7 +254,7 @@ public class Parser {
      * @return Duke response for handling find
      * @throws MissingTaskNameException If no task name provided
      */
-    public static String handleFind() throws MissingTaskNameException {
+    public String handleFind() throws MissingTaskNameException {
         assert words[0].toLowerCase().equals("find") : "wrong method";
         if (words.length == 1) {
             throw new MissingTaskNameException("Missing task name");

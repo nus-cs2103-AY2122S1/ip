@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     /** Current instance of Duke **/
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("data/duke.txt");
 
     /**
      * Starts the GUI in MainWindow.fxml and links it to the current instance of Duke.

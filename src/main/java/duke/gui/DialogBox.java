@@ -45,6 +45,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // General layout of a Dialog Box
         dialog.setText(text);
         dialog.setTextFill(color);
         dialog.setWrapText(true);
@@ -54,7 +55,6 @@ public class DialogBox extends HBox {
         circle.setCenterX(displayPicture.getFitWidth() / 2);
         circle.setCenterY(displayPicture.getFitWidth() / 2);
         displayPicture.setClip(circle);
-
         this.setAlignment(Pos.TOP_RIGHT);
         this.setPadding(new Insets(10));
         this.setMinHeight(Region.USE_PREF_SIZE);
@@ -79,11 +79,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, boolean isException, Image img) {
+        // Set text color to red if it is an Exception
         Paint textColor = isException
                 ? Paint.valueOf(Color.TEXT_EXCEPTION)
                 : Paint.valueOf(Color.TEXT_DEFAULT);
         var db = new DialogBox(text, textColor, img);
 
+        // Set background color to grey
         Paint dukeBackgroundColor = Paint.valueOf(Color.BACKGROUND_DUKE);
         BackgroundFill dukeBackgroundFill = new BackgroundFill(dukeBackgroundColor, null, null);
         Background dukeBackground = new Background(dukeBackgroundFill);

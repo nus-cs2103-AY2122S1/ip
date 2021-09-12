@@ -17,10 +17,23 @@ import duke.exceptions.MissingTaskNumberException;
  */
 public class Duke {
     /** A class to keep track of all tasks of the Duke instance. **/
-    private final TaskList taskList = new TaskList("data/duke.txt");
+    private final TaskList taskList;
 
-    /** A boolean keeping track of whether the current reply is an exception. **/
+    /** Parses the user's strings **/
+    private final Parser parser;
+
+    /** Keeps track of whether the current reply is an exception. **/
     private boolean isException = false;
+
+    /**
+     * Initializes a new Duke chatbot with respective file path
+     *
+     * @param filePath Path to data file
+     */
+    public Duke(String filePath) {
+        this.taskList = new TaskList(filePath);
+        this.parser = new Parser(taskList);
+    }
 
     /**
      * Gets a response from Duke.
@@ -31,7 +44,7 @@ public class Duke {
         String dukeResponse;
         isException = true;
         try {
-            dukeResponse = Parser.handle(input, taskList);
+            dukeResponse = parser.handle(input);
             isException = false;
         } catch (InvalidCommandException e) {
             dukeResponse = "I'm afraid I don't recognise that, please try again!";

@@ -78,6 +78,7 @@ public class TaskList {
      * Parses and adds tasks line by line to taskArrayList.
      */
     public void getTasksFromStorage() {
+        // Get or create data file if it doesn't exist
         File dataFile = storage.getFile();
         Scanner sc;
         try {
@@ -85,6 +86,7 @@ public class TaskList {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        // Parses file line by line and add into tasks
         while (sc.hasNext()) {
             String[] commandArr = sc.nextLine().split("\\|");
             boolean isDone = commandArr[1].equals("1");
@@ -112,6 +114,7 @@ public class TaskList {
      * Saves the current list of tasks to data/duke.txt to be used in future sessions.
      */
     public void saveTasksToStorage() {
+        // Stores each tasks to the data file
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String taskString;
