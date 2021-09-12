@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
         Task removed = dukeList.removeTask(itemNumber - 1);
         try {
             dukeList.update();
-        }catch (DukeException e) {
+        } catch (DukeException e) {
             return "Oops!, we are unable to update your list! Try again!";
         }
         return "Noted. I've removed this task:\n"
