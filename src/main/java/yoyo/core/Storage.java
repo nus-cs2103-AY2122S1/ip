@@ -149,7 +149,7 @@ public class Storage {
 
     private String[] getTagsArray(TaskType currType, String[] currTokenArr) {
         String[] tagsArray;
-        if (currType.equals(TaskType.TODO)) { //deadline name time t1 t2
+        if (currType.equals(TaskType.TODO)) {
             assert currTokenArr.length > 1 : "Error in storage formatting code";
             tagsArray = skipArray(2, currTokenArr);
         } else {
