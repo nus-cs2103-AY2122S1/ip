@@ -4,7 +4,8 @@ package bot.commands;
  * Represents a command to report errors.
  */
 public class ErrorCommand extends Command {
-    private static final String DEFAULT_ERROR_MESSAGE = "\nERROR ERROR CANNOT COMPUTE";
+    private static final String DEFAULT_ERROR_MESSAGE = "\nWhat is this abomination?!? This language is too " +
+            "sophisticated! Please refer to the \"help\" instruction for something I can do.";
     private final String errorMessage;
 
     /**
@@ -26,7 +27,7 @@ public class ErrorCommand extends Command {
     /**
      * Executes the Command and returns a String.
      *
-     * @return A String to show to the user after execution of the Command.
+     * @return A String to show to the user after execution of the ErrorCommand.
      */
     @Override
     public String execute() {

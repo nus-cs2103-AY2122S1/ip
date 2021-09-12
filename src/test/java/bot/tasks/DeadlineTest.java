@@ -18,9 +18,9 @@ public class DeadlineTest {
     }
 
     @Test
-    public void byTest() {
-        assertEquals("22 August 2021, 6pm", d1.getBy());
-        assertEquals("22 August 2021, 6pm", d2.getBy());
+    public void timingTest() {
+        assertEquals("22 August 2021, 6pm", d1.getTiming());
+        assertEquals("22 August 2021, 6pm", d2.getTiming());
     }
 
     @Test

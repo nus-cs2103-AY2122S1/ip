@@ -14,7 +14,7 @@ public class EndCommand extends Command {
     /**
      * Executes the Command and returns a String.
      *
-     * @return A String to show to the user after execution of the Command.
+     * @return A String to show to the user after execution of the EndCommand.
      */
     @Override
     public String execute() {
@@ -23,6 +23,11 @@ public class EndCommand extends Command {
         return "\nPeace out!";
     }
 
+    /**
+     * Tells the MainWindow when IntelliBot can close.
+     *
+     * @return A boolean that says whether IntelliBot should close.
+     */
     @Override
     public boolean canEnd() {
         return true;

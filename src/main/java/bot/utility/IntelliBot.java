@@ -30,8 +30,4 @@ public class IntelliBot extends Application {
         init();
         ui.start(stage, parser);
     }
-
-    protected void close() {
-        ui.close();
-    }
 }

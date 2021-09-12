@@ -27,7 +27,10 @@ public class Logger {
         Path path = Paths.get("tasks.txt");
         try {
             if (!Files.exists(path)) {
-                File file = new File("tasks.txt");
+                String newPath = System.getProperty("user.dir");
+                newPath = newPath.replace("\\", "/");
+                newPath += "/tasks.txt";
+                File file = new File(newPath);
                 file.createNewFile();
             }
             bufferedReader = Files.newBufferedReader(path);
@@ -78,7 +81,7 @@ public class Logger {
         return list;
     }
 
-    private static void markAndAddTask(String line, List<Task> list) throws IOException {
+    private static void markAndAddTask(String line, List<Task> list) {
         String[] words = line.split("[|]");
         switch (words[0].trim()) {
         case "T":

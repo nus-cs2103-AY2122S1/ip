@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
     /**
      * Executes the Command and returns a String.
      *
-     * @return A String to show to the user after execution of the Command.
+     * @return A String to show to the user after execution of the DoneCommand.
      */
     @Override
     public String execute() {

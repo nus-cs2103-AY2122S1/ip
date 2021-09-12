@@ -10,17 +10,20 @@ import bot.utility.TaskList;
  */
 public class ListCommand extends Command {
     private static final String LIST_TASK_FORMAT = "\n" + TAB_SPACES + " %d. %s";
-
+    private static final String EMPTY_LIST_MESSAGE = "\nOh, it seems there are no tasks. You must be very lucky today!";
     /**
      * Executes the Command and returns a String.
      *
-     * @return A String to show to the user after execution of the Command.
+     * @return A String to show to the user after execution of the ListCommand.
      */
     @Override
     public String execute() {
+        List<Task> tasks = TaskList.showTasks();
+        if (tasks.size() == 0) {
+            return EMPTY_LIST_MESSAGE;
+        }
         message = new StringBuilder();
         message.append("Here are the tasks in your list:");
-        List<Task> tasks = TaskList.showTasks();
         for (int i = 0; i < tasks.size(); i++) {
             message.append(String.format(LIST_TASK_FORMAT, (i + 1), tasks.get(i)));
         }

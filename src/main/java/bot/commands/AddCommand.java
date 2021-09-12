@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     /**
      * Executes the Command and returns a String.
      *
-     * @return A String to show to the user after execution of the Command.
+     * @return A String to show to the user after execution of the AddCommand.
      */
     @Override
     public String execute() {

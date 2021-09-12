@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Parser parser;
 
     private final Image userImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png"))
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/steve.png"))
     );
     private final Image botImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/brain.png"))

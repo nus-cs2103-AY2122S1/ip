@@ -19,13 +19,13 @@ public class DeleteCommand extends Command {
      * @param indexString A String containing an integer value;
      */
     public DeleteCommand(String indexString) {
-        this.index = Integer.parseInt(indexString);
+        this.index = Integer.parseInt(indexString) - 1;
     }
 
     /**
      * Executes the Command and returns a String.
      *
-     * @return A String to show to the user after execution of the Command.
+     * @return A String to show to the user after execution of the DeleteCommand.
      */
     @Override
     public String execute() {

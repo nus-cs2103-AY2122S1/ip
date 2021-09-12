@@ -23,7 +23,7 @@ public class TaskList {
         return tasks;
     }
 
-    protected static boolean isShorterOrEqualTo(int size) {
-        return size >= tasks.size();
+    protected static boolean isShorterThan(int size) {
+        return size > tasks.size();
     }
 }

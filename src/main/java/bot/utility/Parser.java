@@ -1,13 +1,6 @@
 package bot.utility;
 
-import bot.commands.AddCommand;
-import bot.commands.Command;
-import bot.commands.DeleteCommand;
-import bot.commands.DoneCommand;
-import bot.commands.EndCommand;
-import bot.commands.ErrorCommand;
-import bot.commands.FindCommand;
-import bot.commands.ListCommand;
+import bot.commands.*;
 import bot.error.DukeException;
 
 /**
@@ -42,6 +35,8 @@ public class Parser {
             return new AddCommand("deadline", words[1]);
         case "event":
             return new AddCommand("event", words[1]);
+        case "help":
+            return new HelpCommand();
         default:
             return new ErrorCommand();
         }
@@ -83,10 +78,12 @@ public class Parser {
                 break;
             case "done":
             case "delete":
-                if (TaskList.isShorterOrEqualTo(Integer.parseInt(log[1]))) {
+                if (TaskList.isShorterThan(Integer.parseInt(log[1]))) {
                     throw new DukeException("\nI don't have that many tasks!");
                 }
                 break;
+            case "help":
+                throw new DukeException("\nHmm, did you mean \"help\"?");
             default:
                 break;
             }
@@ -96,6 +93,6 @@ public class Parser {
     protected boolean canUnderstand(String input) {
         return input.startsWith("bye") || input.startsWith("list") || input.startsWith("done")
                 || input.startsWith("delete") || input.startsWith("find") || input.startsWith("todo")
-                || input.startsWith("deadline") || input.startsWith("event");
+                || input.startsWith("deadline") || input.startsWith("event") || input.startsWith("help");
     }
 }
