@@ -2,3 +2,6 @@
 [T][X] task 1
 [T][X] task 2
 [D][ ] deadline 1 (by: Sep 01 2021)
+[T][ ] task 3
+[E][ ] event 2 (at: Oct 10 2021 20:00)
+[D][ ] deadline 2 (by: Dec 01 2021)

@@ -18,11 +18,19 @@ public class Todos extends Task {
         this.description = description;
     }
     
+    
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
-    
+
+    /**
+     * Compares two objects, if both objects are Todos and have the same name,
+     * then they will be considered equal.
+     *
+     * @param obj Object to be compared to.
+     * @return True is objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

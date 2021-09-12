@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tokio.exceptions.DukeException;
 
 /**
  * A GUI for Duke using FXML.
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Duke duke = new Duke();
 
-    public Main() throws IOException {
+    public Main() throws IOException, DukeException {
     }
 
     @Override

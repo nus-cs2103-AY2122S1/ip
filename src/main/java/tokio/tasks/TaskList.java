@@ -1,8 +1,6 @@
 package tokio.tasks;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Contains the list of tasks and methods for the list.

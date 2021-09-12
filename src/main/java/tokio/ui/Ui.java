@@ -1,6 +1,6 @@
 package tokio.ui;
 
-import java.util.*;
+import java.util.Scanner;
 
 import tokio.tasks.Task;
 import tokio.tasks.TaskList;
@@ -31,20 +31,6 @@ public class Ui {
      */
     public String printBye() {
         return "Come back soon Rio! \n" + "I'll miss you <3";
-    }
-
-    /**
-     * Prints invalid type error, to be shown when Type command is not included in Instructions enum.
-     */
-    public String printDuplicateTask() {
-        return "Oops Rio, this task already exists!\n";
-    }
-
-    /**
-     * Prints invalid index error, to be shown when index does not exist/is more than size of task list.
-     */
-    public String printInvalidIndexError() {
-        return "Oh no Rio, this index does not exist!\n" + "Please make sure that index < size of tasks";
     }
 
     /**
@@ -94,7 +80,7 @@ public class Ui {
      */
     public String printAddCommand(Task task, TaskList taskList) {
         return "Sure Rio! I Have added \"" + task.toString() + "\" to your list.\n"
-                + "You have a total of " + taskList.getSize() + " tasks!";
+                + "You have a total of " + taskList.getSize() + " tasks on your list!";
     }
 
     /**
@@ -106,7 +92,7 @@ public class Ui {
      */
     public String printDoneCommand(Task task, TaskList taskList) {
         return "Good job on completing your task Rio!\n" + "I have marked this task as done: \""
-                + task.toString() + "\"\n" + "Now you have " + taskList.getSize() + " task(s) left.";
+                + task.toString() + "\"\n" + "You have " + taskList.getSize() + " task(s) left on your list.";
     }
 
     /**
@@ -128,30 +114,7 @@ public class Ui {
      */
     public String printDeleteCommand(Task task, TaskList taskList) {
         return "Okay Rio, I have deleted this task from your list:\n" + task.toString()
-                + "\nYou have " + taskList.getSize() + " task(s) left.";
+                + "\nYou have " + taskList.getSize() + " task(s) left on your list.";
     }
 
-    /**
-     * Prints warning message to indicate that command did not execute properly.
-     *
-     * @param cmdType Type of command.
-     * @return Warning message.
-     */
-    public String printSomethingMissing(String cmdType) {
-        return "Oh no Rio, I think something is missing from this " + cmdType + " command";
-    }
-
-    /**
-     * Prints loading error message, to be shown during start of Duke.
-     */
-    public void printLoadingError() {
-        System.out.println("Oh no, there was a problem loading this file...\n" + "Wanna try another file instead?");
-    }
-
-    /**
-     * Prints file not found error message, to be shown during start of Duke.
-     */
-    public void printFileNotFoundError() {
-        System.out.println("Oh no, I cannot find this file...\n" + "Wanna try another file instead?");
-    }
 }

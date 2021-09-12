@@ -8,7 +8,7 @@ import tokio.tasks.TaskList;
 import tokio.ui.Ui;
 
 /**
- * Represents user input
+ * Represents user input.
  */
 public abstract class Command {
     /**
@@ -17,13 +17,14 @@ public abstract class Command {
      * @param tasks Existing tasks in the task list.
      * @param ui User input format.
      * @param storage Stores created command into the txt file
-     * @throws IOException If is no user input
+     * @throws IOException If task cannot be written to the storage file.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException;
 
     /**
-     * Represents the end of program
-     * @return true if program should exit, otherwise do not exit program
+     * Indicates the end of program.
+     *
+     * @return true if program should exit, otherwise do not exit program.
      */
     public abstract boolean isExit();
 
