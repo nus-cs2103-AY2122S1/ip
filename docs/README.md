@@ -1,9 +1,9 @@
 ## User Guide
 ### Table of contents
-1. [Introduction](#introduction)
-2. [Quick Start](#quick-start)
-3. [Features](#features)
-4. [Commands and Usage](#commands)
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Commands and Usage](#commands)
     * [Create a todo](#todo)
     * [Create an event](#event)
     * [Create a deadline](#deadline)
@@ -13,7 +13,7 @@
     * [Find task with keyword](#find)
     * [Reschedule task](#snooze)
     * [Exit Duke](#bye)
-5. [Command Summary](#summary)
+- [Command Summary](#summary)
 
 ## Introduction<a name="introduction"></a>
 Duke is a task management desktop application to track your tasks. It has a variety of features to help you better manage your tasks. 
@@ -21,7 +21,7 @@ Duke is optimized for users who prefer to type out their commands rather than
 
 ## Quick Start<a name="quick-start"></a>
 Ensure you have Java 11 or above installed in your Computer.
-Download the jar file [here](www.google.com)!
+Download the jar file [here](https://www.google.com)!
 Copy the file to the folder you want to use as the home folder for your todo list.
 Double-click the file to start the app. The GUI should appear in a few seconds.
 
