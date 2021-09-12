@@ -1,4 +1,4 @@
-<img src="/Ui.png" alt="Duke" width="200"/>
+<img src="/Ui.png" alt="Duke" width="300"/>
 
 # User Guide
 
