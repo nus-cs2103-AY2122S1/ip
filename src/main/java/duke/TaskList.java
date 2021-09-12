@@ -32,6 +32,7 @@ public class TaskList {
      * @param index index of the task to be deleted.
      */
     public void delete(int index) {
+        assert index < getSize() : "index should be within range";
         tasks.remove(index);
     }
 
@@ -49,6 +50,7 @@ public class TaskList {
      * @return Task stored at the index.
      */
     public Task get(int index) {
+        assert index < getSize() : "index should be within range";
         return tasks.get(index);
     }
 

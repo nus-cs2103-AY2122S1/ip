@@ -48,6 +48,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
+                assert !fullCommand.equals("") : "There should be a command";
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 String output = c.execute(tasks, ui, storage);
@@ -65,6 +66,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             String output = c.execute(tasks, ui, storage);
+            assert !output.equals(""): "There should be an output";
             return output;
         } catch (Exception e) {
             return e.getMessage();

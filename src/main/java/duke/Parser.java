@@ -69,7 +69,9 @@ public class Parser {
         case "deadline": {
             String[] taskDate = fullCommand.replaceFirst("deadline ", "").split("/by ");
             String task = taskDate[0];
+            assert !task.equals("") : "There should be a task";
             String date = taskDate[1];
+            assert !date.equals("") : "There should be a date";
             String[] splitDateTime = date.split(" ");
             String[] splitDate = splitDateTime[0].split("/");
             LocalDate localDate;
@@ -87,7 +89,9 @@ public class Parser {
         case "event": {
             String[] taskDate = fullCommand.replaceFirst("event ", "").split("/at ");
             String task = taskDate[0];
+            assert !task.equals("") : "There should be a task";
             String date = taskDate[1];
+            assert !date.equals("") : "There should be a date";
             String[] splitDateTime = date.split(" ");
             String[] splitDate = splitDateTime[0].split("/");
             LocalDate localDate;

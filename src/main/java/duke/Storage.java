@@ -90,6 +90,7 @@ public class Storage {
         if (!toWrite.exists()) {
             toWrite.mkdir();
         }
+        assert toWrite.exists() : "File path should exist";
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.getSize(); i++) {
             Task t = tasks.get(i);
