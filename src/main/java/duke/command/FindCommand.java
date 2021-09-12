@@ -28,12 +28,12 @@ public class FindCommand extends Command {
         Integer number = 1;
         String response = "";
         if (result.length > 0) {
-            response += "Here are the matching tasks in your list: \n";
+            response += "Here's what I've found: \n";
             for (Task t : result) {
                 if (t.isCompleted()) {
-                    response += number.toString() + "." + t.logo() + "[X] " + t.toString() + "\n";
+                    response += number.toString() + ". " + t.logo() + "[X] " + t.toString() + "\n";
                 } else {
-                    response += number.toString() + "." + t.logo() + "[ ] " + t.toString() + "\n";
+                    response += number.toString() + ". " + t.logo() + "[ ] " + t.toString() + "\n";
                 }
                 number++;
             }
