@@ -53,7 +53,6 @@ public class Storage {
             lines = Files.readAllLines(Paths.get(fileName));
 
             for (String line : lines) {
-                //System.out.println(line);
                 String[] tokens = line.trim().split("\\s\\|\\s", 3); // max range 2
                 String taskIdentifier = tokens[0];
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
