@@ -2,6 +2,8 @@ package duke.misc;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;
@@ -38,12 +40,9 @@ public class TaskList {
      * @return String of all task information.
      */
     public String displayList() {
-        StringBuilder sb = new StringBuilder("");
-        int idx = 0;
-        for (Task task : tasks) {
-            sb.append(String.format("%d. %s", ++idx, task.toString()));
-        }
-        return sb.toString();
+        return IntStream.range(0, tasks.size())
+                .mapToObj(idx -> String.format("%d. %s", idx + 1, tasks.get(idx).toString()))
+                .collect(Collectors.joining());
     }
 
     /**
@@ -127,13 +126,9 @@ public class TaskList {
      * @return String of all tasks found appended in rows.
      */
     public String findTasks(String key) {
-        StringBuilder sb = new StringBuilder();
-        int idx = 0;
-        for (Task task: tasks) {
-            if (isSubSequence(task.getDescription(), key)) {
-                sb.append(String.format("%d.%s\n", ++idx, task));
-            }
-        }
-        return sb.toString();
+        return tasks.stream()
+                .map(Task::getDescription)
+                .filter(description -> isSubSequence(description, key))
+                .collect(Collectors.joining("\n"));
     }
 }

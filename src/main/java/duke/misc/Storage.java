@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -74,10 +75,10 @@ public class Storage {
             parentDir.mkdir();
         }
         FileWriter fw = new FileWriter(filePath.toFile());
-        for (Task task : al) {
-            String taskData = task.getData() + "\n";
-            fw.write(taskData);
-        }
+        String data = al.stream()
+                .map(Task::getData)
+                .collect(Collectors.joining("\n"));
+        fw.write(data);
         fw.close();
     }
 }

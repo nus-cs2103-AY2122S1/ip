@@ -1,6 +1,7 @@
 package duke.misc;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
@@ -31,11 +32,9 @@ public class Parser {
         if (idx >= 0) {
             commandType = input.substring(0, idx).trim();
             args = input.substring(idx + 1).split("/");
-            for (int i = 0; i < args.length; i++) {
-                args[i] = args[i].trim();
-            }
+            Arrays.stream(args).forEach(String::trim);
         }
-        switch(commandType) {
+        switch (commandType) {
         case "todo":
             return new Todo(args[0]);
         case "event":
