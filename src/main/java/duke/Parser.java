@@ -19,10 +19,10 @@ import duke.task.ToDo;
  */
 public class Parser {
     /** TaskList object used by Duke **/
-    private TaskList taskList;
+    private final TaskList taskList;
 
     /** Current user string **/
-    private String userString;
+    private String userString = "";
 
     /** Current user string split into words **/
     private String[] words;
@@ -37,7 +37,7 @@ public class Parser {
      * @throws DukeException If Duke does not recognize the format provided
      */
     public String handle(String userString) throws DukeException {
-        userString = userString;
+        this.userString = userString;
         String[] arr = userString.split(" ");
         String firstWord = arr[0].toLowerCase();
         words = arr;
@@ -104,7 +104,7 @@ public class Parser {
      * Adds a new ToDo object to the TaskList
      * Triggered when the todo command is identified
      *
-     * @retyrn Duke response for handling ToDo
+     * @return Duke response for handling ToDo
      * @throws DukeException If no name is provided
      */
     public String handleTodo() throws DukeException {

@@ -16,8 +16,6 @@ import duke.exceptions.MissingTaskNumberException;
  * @author Adam Oh Zhi Hong
  */
 public class Duke {
-    /** A class to keep track of all tasks of the Duke instance. **/
-    private final TaskList taskList;
 
     /** Parses the user's strings **/
     private final Parser parser;
@@ -31,7 +29,10 @@ public class Duke {
      * @param filePath Path to data file
      */
     public Duke(String filePath) {
-        this.taskList = new TaskList(filePath);
+        // Creates a new tasklist with the file path
+        TaskList taskList = new TaskList(filePath);
+
+        // Creates a Parser object to parse user strings
         this.parser = new Parser(taskList);
     }
 
