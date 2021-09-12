@@ -53,16 +53,8 @@ public class Storage {
      * @throws IOException On Output Error.
      */
     public void write(TaskList tasks) throws IOException {
-<<<<<<< HEAD
-        File toWrite = new File("/data");
-        if (!toWrite.exists()) {
-            toWrite.mkdir();
-        }
-        assert toWrite.exists() : "File path should exist";
-=======
         File toWrite = new File(WRITEPATH);
         checkFilePath(toWrite);
->>>>>>> master
         FileWriter fw = new FileWriter(filePath);
         writeToFile(fw, tasks);
         fw.close();

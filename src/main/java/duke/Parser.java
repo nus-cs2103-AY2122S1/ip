@@ -61,51 +61,10 @@ public class Parser {
             return createToDo(fullCommand);
         }
         case "deadline": {
-<<<<<<< HEAD
-            String[] taskDate = fullCommand.replaceFirst("deadline ", "").split("/by ");
-            String task = taskDate[0];
-            assert !task.equals("") : "There should be a task";
-            String date = taskDate[1];
-            assert !date.equals("") : "There should be a date";
-            String[] splitDateTime = date.split(" ");
-            String[] splitDate = splitDateTime[0].split("/");
-            LocalDate localDate;
-            if (splitDate[1].length() == 1) {
-                localDate = LocalDate.parse(splitDate[2] + "-0" + splitDate[1] + "-" + splitDate[0]);
-            } else if (splitDate[0].length() == 1) {
-                localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-0" + splitDate[0]);
-            } else {
-                localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]);
-            }
-            LocalTime localTime;
-            localTime = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
-            return new AddCommand(new Deadline(task, localDate, localTime));
-        }
-        case "event": {
-            String[] taskDate = fullCommand.replaceFirst("event ", "").split("/at ");
-            String task = taskDate[0];
-            assert !task.equals("") : "There should be a task";
-            String date = taskDate[1];
-            assert !date.equals("") : "There should be a date";
-            String[] splitDateTime = date.split(" ");
-            String[] splitDate = splitDateTime[0].split("/");
-            LocalDate localDate;
-            if (splitDate[1].length() == 1) {
-                localDate = LocalDate.parse(splitDate[2] + "-0" + splitDate[1] + "-" + splitDate[0]);
-            } else if (splitDate[0].length() == 1) {
-                localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-0" + splitDate[0]);
-            } else {
-                localDate = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]);
-            }
-            LocalTime localTime;
-            localTime = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
-            return new AddCommand(new Event(task, localDate, localTime));
-=======
             return createDeadline(fullCommand);
         }
         case "event": {
             return createEvent(fullCommand);
->>>>>>> master
         }
         case "find" : {
             return createFindCommand(fullCommand);
