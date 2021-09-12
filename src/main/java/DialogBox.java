@@ -9,12 +9,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
@@ -68,6 +65,11 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Sets the color and radius of dialog container
+     *
+     * @param user The type of user for the dialog box. Limited to DUKE and USER
+     */
     private void setDialogContainer(String user) {
         switch (user) {
         case "USER":
@@ -81,7 +83,7 @@ public class DialogBox extends HBox {
             break;
 
         default:
-            // Should not reach here
+            // Will not reach here
             break;
         }
     }
