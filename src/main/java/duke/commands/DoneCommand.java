@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.DukeException;
-import duke.PersistentStorage;
-import duke.Response;
-import duke.Tasklist;
 import duke.tasks.Task;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 
 /**
  * Class encapsulating a "done" command from the user

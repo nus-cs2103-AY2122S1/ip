@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -46,8 +47,6 @@ public class PersistentStorage {
     public Tasklist loadTasks() throws DukeException {
         File file = new File(this.filepath);
         if (!file.exists()) {
-
-            // File doesn't exist
             // Create the necessary files and load an empty Tasklist
             file.getParentFile().mkdirs();
             return new Tasklist();
@@ -77,7 +76,7 @@ public class PersistentStorage {
                     String[] tokens = task.split(" \\| ");
 
                     String taskType = tokens[0];
-                    boolean isDone = (tokens[1].equals("1") ? true : false);
+                    boolean isDone = tokens[1].equals("1");
                     String description = tokens[2];
                     String rawDateTimeInfo;
 

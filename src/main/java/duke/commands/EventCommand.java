@@ -2,10 +2,10 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
-import duke.PersistentStorage;
-import duke.Response;
-import duke.Tasklist;
 import duke.tasks.Event;
+import duke.util.PersistentStorage;
+import duke.util.Response;
+import duke.util.Tasklist;
 
 /**
  * Class encapsulating an "event" command from the user
