@@ -1,27 +1,27 @@
-package duke;
+package duck;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindKeywordCommand;
-import duke.command.ListCommand;
-import duke.command.ShowScheduleCommand;
+import duck.command.AddCommand;
+import duck.command.ByeCommand;
+import duck.command.Command;
+import duck.command.DeleteCommand;
+import duck.command.DoneCommand;
+import duck.command.FindKeywordCommand;
+import duck.command.ListCommand;
+import duck.command.ShowScheduleCommand;
 
-import duke.exception.DukeException;
-import duke.exception.DukeExceptionType;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duck.exception.DuckException;
+import duck.exception.DuckExceptionType;
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.Task;
+import duck.task.Todo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deals with making sense of the user duke.command. Static method parse parses the user duke.command and returns a Command
- * object.
+ * Deals with making sense of the user command. Static method parse parses the user command and returns a
+ * Command object.
  */
 public class Parser {
 
@@ -31,39 +31,39 @@ public class Parser {
      * @param fullCommand The full user input string for parsing.
      * @param taskList The list of currently saved tasks.
      * @return A Command object based on the parsed user input.
-     * @throws DukeException If the parser encounters an invalid duke.command.
+     * @throws DuckException If the parser encounters an invalid command.
      */
-    public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
-        // Find case based on first word of duke.command
+    public static Command parse(String fullCommand, TaskList taskList) throws DuckException {
+        // Find case based on first word of command
         String[] parsedCommand = fullCommand.split("\\s+", 3);
         assert parsedCommand.length < 4 : "initial split is not done properly.";
         switch (parsedCommand[0]) {
 
-        // "bye" duke.command given
+        // "bye" command given
         case "bye":
             return new ByeCommand();
 
-        // "list" duke.command given
+        // "list" command given
         case "list":
             return new ListCommand();
 
-        // "done" duke.command given
+        // "done" command given
         case "done":
             return parseDone(parsedCommand, taskList);
 
-        // "delete" duke.command given
+        // "delete" command given
         case "delete":
             return parseDelete(parsedCommand, taskList);
 
-        // "find" duke.command given
+        // "find" command given
         case "find":
             return parseFind(parsedCommand);
 
-        // "schedule" duke.command given
+        // "schedule" command given
         case "schedule":
             return parseSchedule(parsedCommand);
 
-        // Task duke.command given
+        // Task command given
         default:
             return parseAdd(fullCommand);
         }
@@ -75,18 +75,18 @@ public class Parser {
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @param taskList Task list where task to set to done is located.
      * @return DoneCommand based on user input.
-     * @throws DukeException if invalid duke.command is given.
+     * @throws DuckException if invalid command is given.
      */
-    public static DoneCommand parseDone(String[] parsedCommand, TaskList taskList) throws DukeException {
+    public static DoneCommand parseDone(String[] parsedCommand, TaskList taskList) throws DuckException {
         if (parsedCommand.length == 1) {
-            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+            throw new DuckException(DuckExceptionType.INVALID_TASK_INDEX);
         }
 
         String indexString = parsedCommand[1];
         int toSet = Integer.parseInt(indexString);
 
         if (taskList.isInvalidIndex(toSet)) {
-            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+            throw new DuckException(DuckExceptionType.INVALID_TASK_INDEX);
         }
 
         int doneIndex = toSet - 1;
@@ -99,18 +99,18 @@ public class Parser {
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @param taskList Task list where task to delete is located.
      * @return DeleteCommand based on user input.
-     * @throws DukeException if invalid duke.command is given.
+     * @throws DuckException if invalid command is given.
      */
-    public static DeleteCommand parseDelete(String[] parsedCommand, TaskList taskList) throws DukeException {
+    public static DeleteCommand parseDelete(String[] parsedCommand, TaskList taskList) throws DuckException {
         if (parsedCommand.length == 1) {
-            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+            throw new DuckException(DuckExceptionType.INVALID_TASK_INDEX);
         }
 
         String indexString = parsedCommand[1];
         int toDelete = Integer.parseInt(indexString);
 
         if (taskList.isInvalidIndex(toDelete)) {
-            throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
+            throw new DuckException(DuckExceptionType.INVALID_TASK_INDEX);
         }
 
         int deleteIndex = toDelete - 1;
@@ -122,11 +122,11 @@ public class Parser {
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @return FindKeywordCommand based on user input.
-     * @throws DukeException if invalid duke.command is given.
+     * @throws DuckException if invalid command is given.
      */
-    public static Command parseFind(String[] parsedCommand) throws DukeException {
+    public static Command parseFind(String[] parsedCommand) throws DuckException {
         if (parsedCommand.length == 1) {
-            throw new DukeException(DukeExceptionType.INVALID_FIND);
+            throw new DuckException(DuckExceptionType.INVALID_FIND);
         }
 
         String keyword = parsedCommand[1];
@@ -138,11 +138,11 @@ public class Parser {
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @return ShowScheduleCommand based on user input.
-     * @throws DukeException if invalid duke.command is given.
+     * @throws DuckException if invalid command is given.
      */
-    public static Command parseSchedule(String[] parsedCommand) throws DukeException {
+    public static Command parseSchedule(String[] parsedCommand) throws DuckException {
         if (parsedCommand.length == 1) {
-            throw new DukeException(DukeExceptionType.INVALID_SCHEDULE);
+            throw new DuckException(DuckExceptionType.INVALID_SCHEDULE);
         }
 
         String desiredDateString = parsedCommand[1];
@@ -155,26 +155,26 @@ public class Parser {
      *
      * @param fullCommand User input string in its entirety.
      * @return AddCommand based on user input.
-     * @throws DukeException if invalid duke.command is given.
+     * @throws DuckException if invalid command is given.
      */
-    public static Command parseAdd(String fullCommand) throws DukeException {
+    public static Command parseAdd(String fullCommand) throws DuckException {
         String[] parsedCommand = fullCommand.split("\\s+", 2);
         String taskName = parsedCommand[0];
 
-        // Incomplete or invalid duke.command
+        // Incomplete or invalid duck.command
         if (parsedCommand.length == 1) {
             switch (taskName) {
             case "deadline":
-                throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DESC);
+                throw new DuckException(DuckExceptionType.MISSING_DEADLINE_DESC);
 
             case "event":
-                throw new DukeException(DukeExceptionType.MISSING_EVENT_DESC);
+                throw new DuckException(DuckExceptionType.MISSING_EVENT_DESC);
 
             case "todo":
-                throw new DukeException(DukeExceptionType.MISSING_TODO_DESC);
+                throw new DuckException(DuckExceptionType.MISSING_TODO_DESC);
 
             default:
-                throw new DukeException(DukeExceptionType.INVALID_INPUT);
+                throw new DuckException(DuckExceptionType.INVALID_INPUT);
             }
         }
 
@@ -183,26 +183,26 @@ public class Parser {
 
         switch (taskName) {
 
-        // "deadline" duke.command given
+        // "deadline" command given
         case "deadline": {
             newTask = parseDeadline(taskDetails);
             break;
         }
 
-        // "event" duke.command given
+        // "event" command given
         case "event": {
             newTask = parseEvent(taskDetails);
             break;
         }
 
-        // "todo" duke.command given
+        // "todo" command given
         case "todo":
             newTask = new Todo(taskDetails);
             break;
 
-        // Invalid duke.command
+        // Invalid command
         default:
-            throw new DukeException(DukeExceptionType.INVALID_INPUT);
+            throw new DuckException(DuckExceptionType.INVALID_INPUT);
         }
 
         return new AddCommand(newTask);
@@ -213,14 +213,14 @@ public class Parser {
      *
      * @param taskDetails String containing concatenated task details.
      * @return Deadline based on user input.
-     * @throws DukeException if invalid taskDetails string is given.
+     * @throws DuckException if invalid taskDetails string is given.
      */
-    public static Deadline parseDeadline(String taskDetails) throws DukeException {
+    public static Deadline parseDeadline(String taskDetails) throws DuckException {
         String[] details = taskDetails.split(" /by ");
         String deadlineDescription = details[0];
 
         if (details.length == 1) {
-            throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DATETIME);
+            throw new DuckException(DuckExceptionType.MISSING_DEADLINE_DATETIME);
         }
 
         String[] deadline = details[1].split(" ");
@@ -232,7 +232,7 @@ public class Parser {
             return new Deadline(deadlineDescription, LocalDate.parse(deadlineDate),
                     LocalTime.parse(deadlineTime));
         } else {
-            throw new DukeException(DukeExceptionType.INVALID_DATETIME);
+            throw new DuckException(DuckExceptionType.INVALID_DATETIME);
         }
     }
 
@@ -241,14 +241,14 @@ public class Parser {
      *
      * @param taskDetails String containing concatenated task details.
      * @return Event based on user input.
-     * @throws DukeException if invalid taskDetails string is given.
+     * @throws DuckException if invalid taskDetails string is given.
      */
-    public static Event parseEvent(String taskDetails) throws DukeException {
+    public static Event parseEvent(String taskDetails) throws DuckException {
         String[] details = taskDetails.split(" /at ");
         String eventDescription = details[0];
 
         if (details.length == 1) {
-            throw new DukeException(DukeExceptionType.MISSING_EVENT_PERIOD);
+            throw new DuckException(DuckExceptionType.MISSING_EVENT_PERIOD);
         }
 
         String[] periodRange = details[1].split(" ");
@@ -276,7 +276,7 @@ public class Parser {
                     LocalDate.parse(endDate), LocalTime.parse(endTime));
 
         } else {
-            throw new DukeException(DukeExceptionType.INVALID_PERIOD);
+            throw new DuckException(DuckExceptionType.INVALID_PERIOD);
         }
     }
 }

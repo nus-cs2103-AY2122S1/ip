@@ -1,9 +1,9 @@
-package duke.command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 /**
- * Represents a duke.command to be executed on the task list.
+ * Represents a command to be executed on the task list.
  */
 public abstract class Command {
 
@@ -11,9 +11,9 @@ public abstract class Command {
     }
 
     /**
-     * Executes the duke.command.
+     * Executes the command.
      *
-     * @param taskList The TaskList used in the duke.command.
+     * @param taskList The TaskList used in the command.
      * @return String representing the task being executed.
      */
     public abstract String execute(TaskList taskList);

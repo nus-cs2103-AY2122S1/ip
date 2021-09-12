@@ -1,11 +1,11 @@
-package duke.command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 import java.time.LocalDate;
 
 /**
- * Represents the duke.command that displays a schedule of tasks on a given date.
+ * Represents the command that displays a schedule of tasks on a given date.
  */
 public class ShowScheduleCommand extends Command {
     private final LocalDate desiredDate;
@@ -21,7 +21,7 @@ public class ShowScheduleCommand extends Command {
     }
 
     /**
-     * Executes the duke.command of showing the schedule of tasks on the given date.
+     * Executes the command of showing the schedule of tasks on the given date.
      *
      * @param taskList The task list from which tasks taking place on the given date are taken to be listed.
      * @return String representing the list of tasks found.

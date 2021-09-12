@@ -16,7 +16,7 @@ public class Duck {
 
     /**
      * Default constructor for the Duck program.
-     * Uses filepath data/duke.txt by default.
+     * Uses filepath data/duck.txt by default.
      */
     public Duck() {
         ui = new Ui();

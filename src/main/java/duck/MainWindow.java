@@ -1,4 +1,4 @@
-package duke;
+package duck;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -29,10 +29,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duck duck;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/chicken.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duck.png"));
+    private final Image duckImage = new Image(this.getClass().getResourceAsStream("/images/duck.png"));
 
     /**
      * Initialises GUI window.
@@ -45,32 +45,32 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuck(Duck d) {
+        duck = d;
         Ui ui = new Ui();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDefaultDialog(ui.showWelcome(), dukeImage)
+                DialogBox.getDuckDefaultDialog(ui.showWelcome(), duckImage)
         );
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Duck's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(userInput.getText());
+        String response = duck.getResponse(userInput.getText());
         boolean isExceptionThrown = response.split("\\s+", 2)[0].equals("OOPS!!!");
         if (isExceptionThrown) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeExceptionDialog(response, dukeImage)
+                    DialogBox.getDuckExceptionDialog(response, duckImage)
             );
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDefaultDialog(response, dukeImage)
+                    DialogBox.getDuckDefaultDialog(response, duckImage)
             );
         }
         userInput.clear();

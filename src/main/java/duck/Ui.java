@@ -1,7 +1,7 @@
-package duke;
+package duck;
 
-import duke.exception.DukeException;
-import duke.task.Task;
+import duck.exception.DuckException;
+import duck.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Ui {
      * @return The program welcome message.
      */
     public String showWelcome() {
-        return "Welcome to Duke!";
+        return "Welcome to Duck!";
     }
 
     /**
@@ -124,12 +124,12 @@ public class Ui {
     }
 
     /**
-     * Displays the error message of the given DukeException.
+     * Displays the error message of the given DuckException.
      *
-     * @param e The DukeException whose error message is to be displayed.
-     * @return The DukeException error message.
+     * @param e The DuckException whose error message is to be displayed.
+     * @return The DuckException error message.
      */
-    public String showException(DukeException e) {
+    public String showException(DuckException e) {
         return e.getMessage();
     }
 }

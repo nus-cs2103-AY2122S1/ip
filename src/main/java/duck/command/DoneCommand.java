@@ -1,9 +1,9 @@
-package duke.command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 /**
- * Represents the duke.command that sets a task on the task list to done.
+ * Represents the command that sets a task on the task list to done.
  */
 public class DoneCommand extends Command {
     private final int index;
@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the duke.command of setting the given task to done.
+     * Executes the command of setting the given task to done.
      *
      * @param taskList The task list containing the task to be set to done.
      * @return String representing the setting of the task to done.

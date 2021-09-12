@@ -1,10 +1,10 @@
-package duke.command;
+package duck.command;
 
-import duke.TaskList;
-import duke.task.Task;
+import duck.TaskList;
+import duck.task.Task;
 
 /**
- * Represents the duke.command that adds a task to the task list.
+ * Represents the command that adds a task to the task list.
  */
 public class AddCommand extends Command {
     private final Task newTask;
@@ -20,7 +20,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the duke.command of adding the task to the given task list.
+     * Executes the command of adding the task to the given task list.
      *
      * @param taskList The task list to which the task is added.
      * @return String representing the task being added to the list.

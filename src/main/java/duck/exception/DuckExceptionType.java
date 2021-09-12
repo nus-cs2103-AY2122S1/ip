@@ -1,7 +1,7 @@
 package duck.exception;
 
 /**
- * An enumeration of all possible DukeExceptions.
+ * An enumeration of all possible DuckExceptions.
  */
 public enum DuckExceptionType {
     CLOSE_INTERRUPT, DB_ADD, DB_DELETE, DB_DONE, DB_LAUNCH, DB_READ, INVALID_DATETIME, INVALID_FIND, INVALID_INPUT,

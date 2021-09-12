@@ -1,11 +1,11 @@
-package duke;
+package duck;
 
-import duke.exception.DukeException;
-import duke.exception.DukeExceptionType;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duck.exception.DuckException;
+import duck.exception.DuckExceptionType;
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.Task;
+import duck.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class Storage {
     private final String filePath;
     private final File direc;
-    private final File duke;
+    private final File duck;
     private final Ui ui;
 
     /**
@@ -38,13 +38,13 @@ public class Storage {
         ui = new Ui();
 
         direc = new File(fileDirectory);
-        duke = new File(filePath);
+        duck = new File(filePath);
     }
 
     /**
      * Loads the saved tasks from the hard disk to the Duke TaskList.
      *
-     * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duke.
+     * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duck.
      */
     public ArrayList<Task> load() {
         // Initialise task list
@@ -53,10 +53,10 @@ public class Storage {
         try {
             // Display initialisation message
             direc.mkdirs();
-            duke.createNewFile();
+            duck.createNewFile();
 
             // Initialise file reader
-            BufferedReader reader = new BufferedReader(new FileReader(duke));
+            BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
             // Read through all saved tasks
@@ -73,7 +73,7 @@ public class Storage {
                         newTask = new Deadline(deadlineDetails[0],
                                 LocalDate.parse(deadlineDetails[1]), LocalTime.parse(deadlineDetails[2]));
                     } else {
-                        throw new DukeException(DukeExceptionType.DB_READ);
+                        throw new DuckException(DuckExceptionType.DB_READ);
                     }
 
                 // Current task is an Event
@@ -90,7 +90,7 @@ public class Storage {
                                 LocalDate.parse(periodDetails[1]), LocalTime.parse(periodDetails[2]),
                                 LocalDate.parse(periodDetails[3]), LocalTime.parse(periodDetails[4]));
                     } else {
-                        throw new DukeException(DukeExceptionType.DB_READ);
+                        throw new DuckException(DuckExceptionType.DB_READ);
                     }
 
                 // Current task is a Todo
@@ -99,7 +99,7 @@ public class Storage {
 
                 // Current task is in invalid format
                 } else {
-                    throw new DukeException(DukeExceptionType.DB_READ);
+                    throw new DuckException(DuckExceptionType.DB_READ);
                 }
 
                 // Handles whether or not Task is done
@@ -112,11 +112,11 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
-        } catch (DukeException e) {
+        } catch (DuckException e) {
             ui.showException(e);
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_LAUNCH));
+            ui.showException(new DuckException(DuckExceptionType.DB_LAUNCH));
         }
 
         return savedTasks;
@@ -129,12 +129,12 @@ public class Storage {
      */
     public void addDbEntry(String s) {
         try {
-            FileWriter writer = new FileWriter(duke, true);
+            FileWriter writer = new FileWriter(duck, true);
             writer.write(s + "\n");
             writer.close();
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_ADD));
+            ui.showException(new DuckException(DuckExceptionType.DB_ADD));
         }
     }
 
@@ -152,7 +152,7 @@ public class Storage {
 
             // Initialise file reader and writer
             FileWriter writer = new FileWriter(updated, true);
-            BufferedReader reader = new BufferedReader(new FileReader(duke));
+            BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
             // Read through file, finds and sets specified task to done
@@ -170,11 +170,11 @@ public class Storage {
             writer.close();
 
             // Replace duke with the updated file
-            duke.delete();
-            updated.renameTo(duke);
+            duck.delete();
+            updated.renameTo(duck);
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_DONE));
+            ui.showException(new DuckException(DuckExceptionType.DB_DONE));
         }
     }
 
@@ -192,7 +192,7 @@ public class Storage {
 
             // Initialise file reader and writer
             FileWriter writer = new FileWriter(updated, true);
-            BufferedReader reader = new BufferedReader(new FileReader(duke));
+            BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
             // Read through file, finds and excludes entry to delete
@@ -207,11 +207,11 @@ public class Storage {
             writer.close();
 
             // Replace duke with the updated file
-            duke.delete();
-            updated.renameTo(duke);
+            duck.delete();
+            updated.renameTo(duck);
 
         } catch (IOException e) {
-            ui.showException(new DukeException(DukeExceptionType.DB_DELETE));
+            ui.showException(new DuckException(DuckExceptionType.DB_DELETE));
         }
     }
 }

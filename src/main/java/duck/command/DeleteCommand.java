@@ -1,9 +1,9 @@
-package duke.command;
+package duck.command;
 
-import duke.TaskList;
+import duck.TaskList;
 
 /**
- * Represents the duke.command that deletes a task from the task list.
+ * Represents the command that deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
     private final int index;
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the duke.command of deleting the task from the given task list.
+     * Executes the command of deleting the task from the given task list.
      *
      * @param taskList The task list from which the task is deleted.
      * @return String representing the task being deleted.
