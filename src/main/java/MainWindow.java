@@ -23,6 +23,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/new_passport_photo_2020_Nov.jpg"));
 
+
     /**
      * Creates the initial local and prompt.
      */
@@ -32,6 +33,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Duke.greet(), dukeImage)
         );
+
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
     }
 
     public void setDuke(Duke d) {
