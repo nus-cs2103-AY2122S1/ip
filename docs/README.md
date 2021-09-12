@@ -12,9 +12,9 @@
 * Find Tasks
 * Archive Tasks
 
-### 1.1 Adding Tasks
+## 1.1 Adding Tasks
 
-#### 1.1.1 Todo `todo`
+### 1.1.1 Todo `todo`
 
 Adds a task to your list of tasks.
 
@@ -33,7 +33,7 @@ Alright! I added this task:
 You have 1 task(s) at the moment!
 ```
 
-#### 1.1.2 Deadline `deadline .. /by`
+### 1.1.2 Deadline `deadline .. /by`
 
 Adds a task to your list of tasks with a set deadline.
 
@@ -52,7 +52,7 @@ Alright! I added this task:
 You have 1 task(s) at the moment!
 ```
 
-#### 1.1.3 Event `event .. /at`
+### 1.1.3 Event `event .. /at`
 
 Adds a task to your list of tasks with a start time.
 
@@ -71,7 +71,7 @@ Alright! I added this task:
 You have 1 task(s) at the moment!
 ```
 
-### 1.2 Deleting Tasks `delete`
+## 1.2 Deleting Tasks `delete`
 
 Deletes a task to your list of tasks.
 
@@ -90,7 +90,7 @@ This item will be removed:
 You have 1 task(s) at the moment!
 ```
 
-### 1.3 Completing Tasks `done`
+## 1.3 Completing Tasks `done`
 
 Marks a task in your list as done.
 
@@ -109,7 +109,7 @@ Awesome! I marked this as done:
 You have 1 task(s) at the moment!
 ```
 
-### 1.4 Displaying Tasks `list`
+## 1.4 Displaying Tasks `list`
 
 Displays list of all your tasks.
 
@@ -129,7 +129,7 @@ Expected outcome:
 4: [D][X]: CS2100 assm (by: Sep 12 2021 11:59PM)
 ```
 
-### 1.5 Finding Tasks `find`
+## 1.5 Finding Tasks `find`
 
 Find all tasks with a keyword in its description.
 
@@ -150,7 +150,7 @@ Here are the tasks containing the word : CS2103
 3: [E][]: CS2103 exam (at: Sep 16 2021 4:00PM)
 ```
 
-### 1.6 Archiving Tasks `archive-all`
+## 1.6 Archiving Tasks `archive-all`
 
 Archives all tasks to a textfile.
 
@@ -181,7 +181,7 @@ D | 0 | CS2103 iP | 16/09/2021 11:59PM
 E | 0 | CS2103 exam | 16/09/2021 4:00PM
 ```
 
-### Exiting the Program `bye`
+## 2. Exiting the Program `bye`
 
 Immediately exits the program
 
