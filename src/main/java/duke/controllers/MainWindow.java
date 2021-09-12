@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Initialise the MainWindow and send a welcome message.
@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMessage = "Hi, I'm Duke, your Personal Assistant Chatbot\n"
+        String welcomeMessage = "*Woof* I'm Shiro, your Personal Assistant Chatbot\n"
                 + "What can I do for you today?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
