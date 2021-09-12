@@ -102,5 +102,4 @@ Example usage:
 `bye`
 
 Expected outcome:
-The application closed.
-```
+The application closes.
