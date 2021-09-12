@@ -35,4 +35,3 @@ Below are a few examples of using the listed commands above. Note they are not e
 
 ![Screenshot 2021-09-12 at 10 34 54 PM](https://user-images.githubusercontent.com/59001819/132991787-22a6bba8-0416-45c2-a523-8cfe2f2a392c.png)
 
-##
