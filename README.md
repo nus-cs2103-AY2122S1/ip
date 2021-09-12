@@ -31,7 +31,7 @@ What it can do:
 - [x] **Find** tasks by **Due** dates or keywords
 - [ ] **Reschedule** tasks to new dates (coming soon)
 
-Here's a part of the program, maybe it can be of help in practising coding in Java, the `main` method:
+Here's a part of the program, maybe it can be of help in practising coding in Java, the `<main>` method:
 ```java
 public static void main(String[] args) {
     new Duke().run();
