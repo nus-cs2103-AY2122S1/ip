@@ -31,6 +31,8 @@ public class AppWindow extends VBox {
 
     private Image img = new Image(this.getClass().getResourceAsStream("/images/bird.png"));
 
+    private String lastCommand = "";
+
     /**
      * Main window of the {@code Augury} GUI.
      *
@@ -44,6 +46,7 @@ public class AppWindow extends VBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            handleKeyboardCommands();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,6 +87,7 @@ public class AppWindow extends VBox {
                 DialogBox.getUserDialog(input),
                 auguryDialogBox
         );
+        this.lastCommand = input;
         userInput.clear();
 
         if (response.equals("The readiness is all.")) {
@@ -115,5 +119,31 @@ public class AppWindow extends VBox {
 
         scrollPane.getScene().getStylesheets().clear();
         scrollPane.getScene().getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
+    }
+
+    private void handleKeyboardCommands() {
+        userInput.setOnKeyReleased(event -> {
+            String key = event.getCode().toString();
+            if (key.equals("UP")) {
+                toggleLastCommand();
+            }
+        });
+    }
+
+    private void toggleLastCommand() {
+        String input = userInput.getText();
+        String temp = lastCommand;
+
+        if (lastCommand.equals("")) {
+            return;
+        } else if (!input.isBlank()) {
+            temp = input;
+        }
+
+        userInput.clear();
+        userInput.setText(lastCommand);
+        userInput.positionCaret(lastCommand.length());
+        this.lastCommand = temp;
+        
     }
 }
