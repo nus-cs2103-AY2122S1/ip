@@ -43,9 +43,7 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo return book`.
@@ -57,8 +55,6 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
   e.g. if the command specifies `‎‎‎‎‎‎ done              1     2	3 ‎‎‎‎`, it will be interpreted as `done 1 2 3`.
 
 - Extraneous parameters for commands that do not take in parameters (such as `list`, `bye`) will make the command invalid.
-
-</div>
 
 ### Adding a Todo task: `todo`
 
@@ -157,13 +153,7 @@ Duke data are saved in the hard disk automatically after any command. There is n
 
 Duke data are saved as a text file `[JAR file location]/data/duke.txt`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
-
-**:exclamation: Caution:**
-
-If your changes to the data file makes its format invalid, Duke will discard all data and start with an empty data file at the next run.
-
-</div>
+**Caution:** If your changes to the data file makes its format invalid, Duke will discard all data and start with an empty data file at the next run.
 
 ------
 
