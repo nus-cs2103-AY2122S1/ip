@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     public ListCommand(){};
 
     /**
-     * Method that executes the list command
+     * Executes the list command
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke

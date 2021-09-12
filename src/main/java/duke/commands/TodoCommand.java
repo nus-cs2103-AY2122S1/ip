@@ -24,7 +24,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Method to execute the to-do command
+     * Executes the to-do command
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke

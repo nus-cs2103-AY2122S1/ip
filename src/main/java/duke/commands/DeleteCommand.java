@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Method to execute the delete command
+     * Executes the delete command
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke

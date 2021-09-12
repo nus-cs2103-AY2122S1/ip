@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
@@ -10,9 +13,6 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Class that parses incoming input
  *
@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
 
     /**
-     * Method that parses incoming input and returns relevant commands
+     * Parses incoming input and returns relevant commands
      *
      * @param inputString The input from Duke user
      * @return Command to be executed

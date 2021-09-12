@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Method to get task description
+     * Gets task description
      *
      * @return Task description string
      */
@@ -40,7 +40,7 @@ public class Task {
     }
 
     /**
-     * Method that returns whether the task has been done or not
+     * Returns whether the task has been done or not
      *
      * @return String "X" if task is done and " " if it is not done
      */
@@ -49,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Method that returns the string representation of
+     * Returns the string representation of
      * the task data to be written into the storage file
      *
      * @return String representation of data to be written into storage file
@@ -60,7 +60,7 @@ public class Task {
     }
 
     /**
-     * Method that returns the string representation of
+     * Returns the string representation of
      * the task data to be outputted
      *
      * @return String representation of data to be outputted

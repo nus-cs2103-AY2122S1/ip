@@ -7,9 +7,6 @@ import duke.tasks.Task;
  *
  */
 public class Ui {
-
-    private static String DIVIDER = "_______________________________________________\n";
-
     /**
      * Constructor that initializes ui
      *
@@ -17,7 +14,7 @@ public class Ui {
     public Ui(){}
 
     /**
-     * Method that prints the start message
+     * Returns the start message
      *
      * @return Duke's String response
      */
@@ -27,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints the exit message
+     * Returns the exit message
      *
      * @return Duke's String response
      */
@@ -36,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints message stating that task has been added
+     * Returns message stating that task has been added
      *
      * @param taskList The tasklist that the task has been added to
      * @param task The task added
@@ -53,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints message stating that task has been deleted
+     * Returns message stating that task has been deleted
      *
      * @param taskList The tasklist that the task has been deleted from
      * @param task The task deleted
@@ -70,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints message stating that task has been set as done
+     * Returns message stating that task has been set as done
      *
      * @param task The task set as done
      * @return Duke's String response
@@ -83,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints out all tasks
+     * Returns all tasks
      *
      * @param taskList The list of tasks to be printed
      * @return Duke's String response
@@ -93,7 +90,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints the list of tasks matching input string
+     * Returns the list of tasks matching input string
      *
      * @param taskList List of tasks matching input string
      * @return Duke's String response
@@ -104,7 +101,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints file load error message
+     * Returns file load error message
      *
      * @return Duke's String response
      */
@@ -113,7 +110,7 @@ public class Ui {
     }
 
     /**
-     * Method that prints error message
+     * Returns error message
      *
      * @param error Error whose message needs to be printed
      * @return Duke's String response

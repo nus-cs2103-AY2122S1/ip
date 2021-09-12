@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.DukeStorage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Event;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Class that contains the event command
@@ -32,7 +32,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Method that executes the event command
+     * Executes the event command
      *
      * @param taskList The list of tasks that is associated with the instance of Duke
      * @param ui The UI that is associated with the instance of Duke

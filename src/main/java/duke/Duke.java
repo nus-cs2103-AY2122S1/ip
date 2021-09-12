@@ -32,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Method that returns a String to be displayed as duke's response
+     * Returns a String to be displayed as duke's response
      *
      * @param input The input string that the user enters
      * @return The response string that duke gives to be displayed

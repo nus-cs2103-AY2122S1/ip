@@ -1,15 +1,15 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Class that defines the storage for the data needed for Duke
@@ -30,7 +30,7 @@ public class DukeStorage {
     }
 
     /**
-     * Method to read tasks from storage
+     * Reads tasks from storage
      *
      * @return List of tasks read from storage
      * @throws DukeException Error thrown if file cannot be read
@@ -64,7 +64,7 @@ public class DukeStorage {
     }
 
     /**
-     * Method that parses the text read from the file to return the task it represents
+     * Parses the text read from the file to return the task it represents
      *
      * @param input String read from text file
      * @return Task that the text represents
@@ -81,32 +81,33 @@ public class DukeStorage {
         assert taskType == "T" || taskType == "D" || taskType == "E" : "Invalid task type";
 
         switch (taskType) {
-            case "T":
-                task = new Todo(taskDescr);
-                if (isDone) {
-                    task.setDone();
-                }
-                break;
-            case "D":
-                task = new Deadline(taskDescr, parseTask[3]);
-                if (isDone) {
-                    task.setDone();
-                }
-                break;
-            case "E":
-                task = new Event(taskDescr, parseTask[3]);
-                if (isDone) {
-                    task.setDone();
-                }
-                break;
-            default:
-                throw new DukeException("Invalid task type! :(");
+
+        case "T":
+            task = new Todo(taskDescr);
+            if (isDone) {
+                task.setDone();
+            }
+            break;
+        case "D":
+            task = new Deadline(taskDescr, parseTask[3]);
+            if (isDone) {
+                task.setDone();
+            }
+            break;
+        case "E":
+            task = new Event(taskDescr, parseTask[3]);
+            if (isDone) {
+                task.setDone();
+            }
+            break;
+        default:
+            throw new DukeException("Invalid task type! :(");
         }
         return task;
     }
 
     /**
-     * Method to write task data into storage
+     * Writes task data into storage
      *
      * @param taskList The list of tasks to be written
      * @throws DukeException Error thrown if file cannot be written
