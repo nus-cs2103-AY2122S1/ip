@@ -50,9 +50,9 @@ public final class DueCommand extends Command {
         }
         ArrayList<Task> tasksDue = list.findTasksDue(dueDate);
         if (tasksDue.isEmpty()) {
-            return "     No tasks due!";
+            return "     No task due!";
         }
-        String result = "     The tasks due are: \n";
+        String result = "     The task(s) due are: \n";
         for (int i = 0; i < tasksDue.size(); i++) {
             if (i + 1 < tasksDue.size()) {
                 result += "     " + (i + 1) + "." + tasksDue.get(i).getType()

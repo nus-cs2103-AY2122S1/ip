@@ -48,9 +48,9 @@ public final class FindCommand extends Command {
         }
         ArrayList<Task> tasksFound = list.findTask(keyword);
         if (tasksFound.isEmpty()) {
-            return "     No task tasks found!";
+            return "     No task task found!";
         }
-        String result = "     The tasks found are: \n";
+        String result = "     The task(s) found are: \n";
         for (int i = 0; i < tasksFound.size(); i++) {
             if (i + 1 < tasksFound.size()) {
                 result += "     " + (i + 1) + "." + tasksFound.get(i).getType()
