@@ -4,7 +4,7 @@ Iron Bot (also known as Your Friendly Neighbourhood Chat Bot) is a task organise
 ## Getting Started
 1. Ensure that you have `Java 11` or above installed.
 2. Download the `ironbot.jar` file from `Releases`.
-3. Double click on the `ironbot.jar` file.
+3. Double-click on the `ironbot.jar` file.
 4. Start using the application.
 
 Alternatively, you can: 
@@ -29,6 +29,7 @@ Alternatively, you can:
 ### `todo` - Add a todo task to your tasklist
 
 Adds a new todo task to your tasklist, with the specified title/description.
+
 Format: `todo <title/description>` 
 
 Example of usage: 
@@ -48,6 +49,7 @@ Roger. I've added this task:
 ### `deadline` - Add a deadline task to your tasklist
 
 Adds a new deadline task to your tasklist, with the specified title/description and due date.
+
 Format: `deadline <title/description> /by <yyyy-mm-dd>` 
 
 Example of usage: 
@@ -64,9 +66,10 @@ Roger. I've added this task:
 2 task(s) are in your list now!
 ```
 
-### `event` - Add a event task to your tasklist
+### `event` - Add an event task to your tasklist
 
 Adds a new event task to your tasklist, with the specified title/description and due date.
+
 Format: `event <title/description> /at <yyyy-mm-dd>` 
 
 Example of usage: 
@@ -86,6 +89,7 @@ Roger. I've added this task:
 ### `list` - Shows the all the tasks in the tasklist
 
 Displays all the tasks in your tasklist.
+
 Format: `list` 
 
 Example of usage: 
@@ -108,6 +112,7 @@ These are the task(s) you have:
 Deletes an existing task from your tasklist, with the specified task id.
 The task id follows the numbering shown when you enter the `list` command.
 A valid id is required for this action to be executed by Iron Bot.
+
 Format: `delete <id>` 
 
 Example of usage: 
@@ -129,6 +134,7 @@ Roger. I've deleted this task:
 Marks an existing task in your tasklist as completed, with the specified task id.
 The task id follows the numbering shown when you enter the `list` command.
 A valid id is required for this action to be executed by Iron Bot.
+
 Format: `done <id>` 
 
 Example of usage: 
@@ -148,6 +154,7 @@ Well done! You have completed"
 
 Gives a list of tasks that contains the specified keyword.
 A valid keyword is required for this action to be executed by Iron Bot. (i.e. keyword cannot be blank)
+
 Format: `find <keyword>` 
 
 Example of usage: 
@@ -168,6 +175,7 @@ These are the task(s) you have:
 Updates the task, as specified by the id, in the tasklist.
 The task id follows the numbering shown when you enter the `list` command.
 A valid id is required for this action to be executed by Iron Bot.
+
 Format: `update <id> <tag> <info>`
 
 There are 3 update options for you to choose from:
