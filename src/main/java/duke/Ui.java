@@ -50,4 +50,13 @@ public class Ui {
         }
         return str.toString();
     }
+
+    /**
+     * Returns Victor's default greeting
+     *
+     * @return       Victor's default greeting
+     */
+    public static String getGreetings() {
+        return "Howdy, pardner! Is there anything old Vic can do you for?";
+    }
 }

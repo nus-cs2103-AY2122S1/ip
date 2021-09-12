@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.remove(taskNumber - 1);
         storage.update(taskNumber, task, "d");
-        return "Noted. I've removed this task:" + "  " + task.toString() + tasks.toString();
+        return "Noted. I've removed this task:\n" + "  " + task.toString() + "\n" + tasks.toString();
     }
 
     /**

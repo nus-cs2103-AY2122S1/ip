@@ -1,5 +1,2 @@
-D | 0 | buy book | Sep 27 2021, 9 am
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 0 | do not join sports club
+T | 1 | do not join sports club
 D | 0 | gym | Aug 25 2021, 8 am
