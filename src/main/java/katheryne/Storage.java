@@ -16,20 +16,30 @@ import katheryne.task.Task;
 
 public class Storage {
 
-    private ObjectMapper mapper;
-    private ObjectWriter writer;
+    private final ObjectMapper mapper;
+    private final ObjectWriter writer;
 
+    /**
+     * Deals with loading tasks from the file and saving tasks in the file.
+     */
     public Storage() {
         mapper = new ObjectMapper().enableDefaultTyping();
         mapper.registerModule(new JavaTimeModule());
-        
+
         // give object mapper the ability to write the properties of tasks to json
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         writer = mapper.writer(new DefaultPrettyPrinter());
     }
-    
-    void loadTasks(TaskList lst, String pathName) throws KatheryneException{
-        if (Files.isReadable(Paths.get("tasks.json"))) {
+
+    /**
+     * Loads tasks from a given file, provided that said file exists and is readable.
+     *
+     * @param lst The TaskList to load the tasks into
+     * @param pathName The path name relative to Katheryne of the saved file
+     * @throws KatheryneException
+     */
+    void loadTasks(TaskList lst, String pathName) throws KatheryneException {
+        if (Files.isReadable(Paths.get(pathName))) {
             try {
                 lst.addAll(Arrays.asList(this.mapper.readValue(
                         Paths.get("tasks.json").toFile(),
@@ -42,10 +52,11 @@ public class Storage {
 
     /**
      * Tries to save the tasks to a file.
+     *
      * @param lst TaskList
      * @param pathName Location to store tasks.
      */
-    void saveTasks(TaskList lst, String pathName) throws KatheryneException {
+    public void saveTasks(TaskList lst, String pathName) throws KatheryneException {
         try {
             Files.write(Paths.get(pathName), writer.writeValueAsString(lst.getList()).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {

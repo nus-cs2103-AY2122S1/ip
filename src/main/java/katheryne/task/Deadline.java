@@ -6,18 +6,24 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected String stringDueBy;
     protected LocalDate dateDueBy;
-    
+
     // dummy constructor for Jackson
     public Deadline() {
         super();
     }
+
     public Deadline(String description, LocalDate dateDueBy) {
         super(description);
         this.stringDueBy = dateDueBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.dateDueBy = dateDueBy;
     }
-    
+
     // getters & setters (needed for jackson)
+
+    public String getStringDueBy() {
+        return stringDueBy;
+    }
+
     protected void setDateDueBy(LocalDate dateDueBy) {
         this.dateDueBy = dateDueBy;
     }
@@ -25,7 +31,7 @@ public class Deadline extends Task {
     protected void setStringDueBy(String stringDueBy) {
         this.stringDueBy = stringDueBy;
     }
-    
+
     @Override
     public String toString() {
         return "[Deadline] " + super.toString() + " (by: " + stringDueBy + ")";

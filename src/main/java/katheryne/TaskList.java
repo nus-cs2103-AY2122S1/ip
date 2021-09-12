@@ -1,60 +1,77 @@
 package katheryne;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-
-import katheryne.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import katheryne.task.Task;
+
+/**
+ * A container for tasks which contains Katheryne's tasks.
+ */
 public class TaskList {
-    private ArrayList<Task> lst = new ArrayList<>();
+    private final ArrayList<Task> lst = new ArrayList<>();
 
     public TaskList() {
-        
+
     }
 
-    void addAll( List<Task> tasks) {
+    void addAll(List<Task> tasks) {
         lst.addAll(tasks);
     }
 
-    public void printList() {
-        System.out.println("Here's the list I've stored for you:");
-        for (int i = 1; i <= lst.size(); i++) {
-            System.out.println(i + ") " + lst.get(i - 1));
-        };
-    }
+    /**
+     * Add a task to this list
+     *
+     * @param t
+     */
     public void add(Task t) {
         lst.add(t);
     }
 
     /**
+     * Returns true if you are able to mark the task as done, and false if index is out of bounds
+     *
+     * @param index to mark as done
+     * @return
+     */
+    public boolean doTask(int index) {
+        if (index >= getSize() || index < 0) {
+            return false;
+        }
+
+        lst.get(index).markAsDone();
+        return true;
+    }
+
+    /**
      * Removes task from your list
-     * 
+     *
      * @param index of the task to delete.
      * @return the task which was deleted.
      */
-    public Task deleteTask(int index) {
-        return lst.remove(index);
+    public boolean deleteTask(int index) {
+        if (index >= getSize() || index < 0) {
+            return false;
+        }
+
+        lst.remove(index);
+        return true;
     }
-    
-    public void doTask(int index) {
-        lst.get(index).markAsDone();
-    }
-    
+
     public Task getTask(int index) {
         return lst.get(index);
     }
-    
-    public ArrayList<Task> getList() {
-        return lst;
-    }
 
-    public boolean isEmpty() {
+    protected boolean isEmpty() {
         return lst.isEmpty();
     }
 
-    public int getSize() {
+    protected int getSize() {
         return lst.size();
+    }
+
+    // for Jackson to deserialize
+    protected ArrayList<Task> getList() {
+        return lst;
     }
 }
