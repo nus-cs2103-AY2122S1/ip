@@ -9,14 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-
-    public LocalDate getDate() {
-        return date;
-    }
-
     protected final LocalDate date;
     protected final String time;
-
     /**
      * Constructor for <code>Deadline</code> object.
      *
@@ -28,6 +22,9 @@ public class Deadline extends Task {
         super(TaskType.DEADLINE, description);
         this.date = ld;
         this.time = time;
+    }
+    public LocalDate getDate() {
+        return date;
     }
 
     /**

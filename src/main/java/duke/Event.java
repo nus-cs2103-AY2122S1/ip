@@ -9,13 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    public LocalDate getDate() {
-        return date;
-    }
-
     protected final LocalDate date;
     protected final String time;
-
     /**
      * Returns a <code>Duke</code> object that can reply to
      * commands. Duke can save the tasks at the specified <code>filePath</code>.
@@ -29,6 +24,9 @@ public class Event extends Task {
         super(TaskType.EVENT, description);
         this.date = ld;
         this.time = time;
+    }
+    public LocalDate getDate() {
+        return date;
     }
 
     /**

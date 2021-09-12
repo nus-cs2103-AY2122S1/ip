@@ -20,10 +20,13 @@ import javafx.scene.paint.Color;
 
 
 public class MessageContainer extends HBox {
+    private static final Color userTextMessageColour = Color.rgb(44, 130, 201, 1);
+    private static final Color dukeTextMessageColour = Color.rgb(255, 165, 0, 1);
+    private static final CornerRadii messageCornerRadius = new CornerRadii(10.0);
+    private static final Insets messageInset = new Insets(-5.0);
     @FXML
     private Label textMessage;
-
-    MessageContainer(String text) {
+    private MessageContainer(String text) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MessageContainer.class.getResource("/message.fxml"));
             fxmlLoader.setController(this);
@@ -34,8 +37,8 @@ public class MessageContainer extends HBox {
         }
         textMessage.setText(text);
         textMessage.setEffect(new DropShadow(2.0, Color.BLACK));
-        textMessage.setBackground(new Background(new BackgroundFill(Color.rgb(44, 130, 201, 1), new CornerRadii(10.0),
-                new Insets(-5.0))));
+        textMessage.setBackground(new Background(new BackgroundFill(userTextMessageColour, messageCornerRadius,
+                messageInset)));
     }
 
     public static MessageContainer getUserDialog(String text) {
@@ -45,8 +48,8 @@ public class MessageContainer extends HBox {
     private void reverseMessageDirection() {
         ObservableList<Node> text = FXCollections.observableArrayList(getChildren());
         Label dukeReply = (Label) text.get(0);
-        dukeReply.setBackground(new Background(new BackgroundFill(Color.rgb(255, 165, 0, 1), new CornerRadii(10.0),
-                new Insets(-5.0))));
+        dukeReply.setBackground(new Background(new BackgroundFill(dukeTextMessageColour, messageCornerRadius,
+                messageInset)));
         Collections.reverse(text);
         getChildren().setAll(text);
         setAlignment(Pos.TOP_LEFT);

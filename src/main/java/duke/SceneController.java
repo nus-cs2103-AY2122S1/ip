@@ -1,9 +1,7 @@
 package duke;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -11,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 
 public class SceneController extends AnchorPane {
 
@@ -44,7 +41,6 @@ public class SceneController extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.runGui(input);
-        scrollPane.setVvalue(1D);
         if (response.equals("Goodbye!")) {
             Platform.exit();
             return;
@@ -53,8 +49,7 @@ public class SceneController extends AnchorPane {
                 MessageContainer.getUserDialog(input),
                 MessageContainer.getDukeDialog(response)
         );
-        ObservableList<Node> children = conversationBox.getChildren();
-        int nodeListSize = children.size();
+        conversationBox.heightProperty().addListener(observable -> scrollPane.setVvalue(1D));
         userInput.clear();
     }
 

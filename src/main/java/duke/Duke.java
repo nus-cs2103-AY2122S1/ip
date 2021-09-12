@@ -104,14 +104,14 @@ public class Duke {
                 try {
                     tasksWithDate = tasks.findTasksUsingDate(LocalDate.parse(date));
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("Wrong format for date! Use yyyy-mm-dd format!");
+                    throw new DukeException("Error: Wrong format for date! Use yyyy-mm-dd format!");
                 }
                 return ui.showSchedule(tasksWithDate, date);
             }
             tasksWithDate = tasks.findTasksUsingDate();
             return ui.showSchedule(tasksWithDate, date);
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Error: I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -127,9 +127,9 @@ public class Duke {
             writeDataToDuke();
             return ui.showDeleteTaskMessage(tasks.getTasksLength());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! Index out of range!");
+            throw new DukeException("Error: Index out of range!");
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! Put a number after 'delete'!");
+            throw new DukeException("Error: Put a number after 'delete'!");
         }
     }
 
@@ -150,9 +150,9 @@ public class Duke {
         String date = parser.findDateInCommand();
         String taskDesc = parser.findTaskDescription();
         if (taskDesc.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+            throw new DukeException("Error: The description cannot be empty.");
         } else if (date.equals("") && taskType != Task.TaskType.TODO) {
-            throw new DukeException("☹ OOPS!!! The date cannot be empty.");
+            throw new DukeException("Error: The date cannot be empty.");
         } else if (taskType == Task.TaskType.DEADLINE
                 || taskType == Task.TaskType.EVENT) {
             if (isInDateFormat(date)) {
@@ -166,7 +166,7 @@ public class Duke {
                 writeDataToDuke();
                 return confirmAdditionOfTask();
             } else {
-                throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
+                throw new DukeException("Error: You need to put the date in yyyy-mm-dd hhmm format!");
             }
         } else {
             tasks.addTask(taskDesc);
@@ -200,9 +200,9 @@ public class Duke {
             writeDataToDuke();
             return ui.markTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
+            throw new DukeException("Error: The number you gave is out of range!");
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! Put a number after 'done'!");
+            throw new DukeException("Error: Put a number after 'done'!");
         }
     }
 

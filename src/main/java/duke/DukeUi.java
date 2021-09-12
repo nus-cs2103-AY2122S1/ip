@@ -42,6 +42,12 @@ public class DukeUi {
         return e.getMessage();
     }
 
+    /**
+     * Shows schedule on a certain date.
+     * @param tasks The lists of tasks on that date.
+     * @param date The date to find the tasks.
+     * @return String containing a line-separated list of all the tasks.
+     */
     public String showSchedule(ArrayList<Task> tasks, String date) {
         if (tasks.size() == 0) {
             return "You don't have any tasks on that day! Yay!";
