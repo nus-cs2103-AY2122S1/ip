@@ -33,9 +33,7 @@
               </rowConstraints>
                <children>
                   <Label text="Theme" GridPane.rowIndex="1" />
-                  <Label text="File location" GridPane.rowIndex="2" />
                   <ChoiceBox fx:id="choiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Settings">
                      <font>
                         <Font size="18.0" />
@@ -53,7 +51,7 @@
                <children>
                   <Button text="Save"
                           fx:id="saveButton"
-                          onAction="#handleSettingsCancel"/>
+                          onAction="#handleSettingsSave"/>
                   <Button text="Cancel"
                           fx:id="cancelButton"
                           onAction="#handleSettingsCancel"/>

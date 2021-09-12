@@ -77,4 +77,11 @@ public class DialogBox extends HBox {
         auguryDialog.flip();
         return auguryDialog;
     }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        DialogBox auguryDialog = new DialogBox(text, img);
+        auguryDialog.getStyleClass().add("dialog--error");
+        auguryDialog.flip();
+        return auguryDialog;
+    }
 }

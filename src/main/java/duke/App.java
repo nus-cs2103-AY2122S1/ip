@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private final Augury augury = new Augury("data/tasks.txt");
+    private final Augury augury = new Augury("data");
 
     /**
      * Creates the GUI for {@code Augury}.
@@ -22,7 +22,7 @@ public class App extends Application {
         augury.init();
         AppWindow app = new AppWindow(augury);
         Scene scene = new Scene(app);
-        scene.getStylesheets().add("/styles/augury.css");
+        scene.getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/images/icon.png")));
         stage.setScene(scene);
         stage.setTitle("Augury");

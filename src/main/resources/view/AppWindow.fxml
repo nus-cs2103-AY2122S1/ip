@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Hyperlink?>
 
 <fx:root prefHeight="640.0"
-         prefWidth="400.0"
+         prefWidth="450.0"
          type="VBox"
          xmlns="http://javafx.com/javafx/8.0.17"
          xmlns:fx="http://javafx.com/fxml/1">

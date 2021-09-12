@@ -70,14 +70,19 @@ public class AppWindow extends VBox {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = augury.getResponse(input);
+        DialogBox auguryDialogBox;
 
         if (input.trim().equals("")) {
             return;
+        } else if (response.startsWith("ERR")) {
+            auguryDialogBox = DialogBox.getErrorDialog(response.substring(3), img);
+        } else {
+            auguryDialogBox = DialogBox.getAuguryDialog(response, img);
         }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input),
-                DialogBox.getAuguryDialog(response, img)
+                auguryDialogBox
         );
         userInput.clear();
 
@@ -96,6 +101,7 @@ public class AppWindow extends VBox {
         alert.setTitle("About Augury");
         alert.setHeaderText(null);
         alert.setContentText(Augury.HELP_MESSAGE);
+        alert.getDialogPane().getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
 
         alert.showAndWait();
     }
@@ -105,6 +111,9 @@ public class AppWindow extends VBox {
      */
     @FXML
     private void handleSettingsButton() {
-        SettingsWindow.showSettingsWindow();
+        SettingsWindow.showSettingsWindow(augury.getSettings());
+
+        scrollPane.getScene().getStylesheets().clear();
+        scrollPane.getScene().getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
     }
 }

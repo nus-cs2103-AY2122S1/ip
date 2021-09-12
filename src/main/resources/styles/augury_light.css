@@ -4,6 +4,14 @@
     fg-text: #494b53;
     fg-low: #ebebeb;
     fg-high: #abb2bf;
+    fg-accent: #56b6c2;
+    fg-high: fg-accent;
+    -fx-text-base-color: fg-text;
+
+    -fx-base: #fafafa;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+    -fx-default-button: #f0f0f0;
 }
 
 .button {
@@ -32,8 +40,11 @@
 }
 
 .dialog__text {
-    -fx-text-fill: fg-text;
     -fx-font-size: 14px;
+}
+
+.dialog--error {
+    -fx-font-weight: bold;
 }
 
 .dialog--augury {

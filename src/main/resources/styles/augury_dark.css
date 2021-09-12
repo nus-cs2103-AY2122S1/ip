@@ -1,14 +1,31 @@
+/* gleaned from https://stackoverflow.com/questions/49159286/make-a-dark-mode-with-javafx/58441758 */
+
 .root {
     -fx-focus-color: transparent;
-     -fx-faint-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    fg-text: #c2c2c3;
+    fg-low: #3e4452;
+    fg-accent: #e45649;
+    fg-high: #5c6370;
+    fg-high: fg-accent;
+    -fx-text-base-color: fg-text;
+
+    -fx-base: #181a1f;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+    -fx-default-button: #282c34;
+}
+
+.text-field {
+    -fx-prompt-text-fill: fg-text;
 }
 
 .button {
-    -fx-text-fill: #494b53;
+    -fx-text-fill: fg-text;
 }
 
 .hyperlink {
-    -fx-text-fill: #494b53;
+    -fx-text-fill: fg-text;
 }
 
 .hyperlink:visited {
@@ -16,11 +33,11 @@
 }
 
 .hyperlink:hover {
-    -fx-text-fill: #444444;
+    -fx-text-fill: fg-text;
 }
 
 .dialog {
-    -fx-background-color: #ABB2BF;
+    -fx-background-color: fg-high;
     -fx-border-insets: 10px;
     -fx-background-insets: 10px;
     -fx-padding: 20px;
@@ -29,12 +46,15 @@
 }
 
 .dialog__text {
-    -fx-text-fill: #494b53;
     -fx-font-size: 14px;
 }
 
+.dialog--error {
+    -fx-font-weight: bold;
+}
+
 .dialog--augury {
-    -fx-background-color: #ebebeb;
+    -fx-background-color: fg-low;
 }
 
 /*
