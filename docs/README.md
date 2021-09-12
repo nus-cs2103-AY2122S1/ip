@@ -25,8 +25,12 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `duke.jar` from [here](https://github.com/fans2619/ip/releases/download/A-Release/duke.jar).
 3. Copy the file to the folder you want to use as the *home folder* for Duke.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. See [FAQ](#faq) if double-click does not work.<br>
-   ![Start interface](Start.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. See [FAQ](#faq) if double-click does not work.<br><br>
+
+   <img src="Start.png" width="500" alt="Start interface">
+   
+   <br>
+
 5. Type the command in the command box and press Enter or Send to execute it.
    Some example commands you can try:
     - **`list`** : Lists all tasks.
@@ -153,8 +157,12 @@ Duke data are saved in the hard disk automatically after any command. There is n
 
 Duke data are saved as a text file `[JAR file location]/data/duke.txt`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+**:exclamation: Caution:**
+
 If your changes to the data file makes its format invalid, Duke will discard all data and start with an empty data file at the next run.
+
 </div>
 
 ------
