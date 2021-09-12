@@ -14,6 +14,12 @@ public class Main extends Application {
 
     private Duke duke = new Duke(".\\src\\main\\resources\\data\\data.txt");
 
+    /**
+     * Main method used to start the duke program.
+     * Sets the scene for the duke application
+     *
+     * @param stage The stage that will be used for the application
+     */
     @Override
     public void start(Stage stage) {
         try {

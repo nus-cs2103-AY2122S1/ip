@@ -18,15 +18,27 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/chad.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/surge.jpg"));
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Setter method for Duke d.
+     *
+     * @param d Duke object to be set.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Method used to handle the command given by the user.
+     * This method will render the correct response to the given command.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
