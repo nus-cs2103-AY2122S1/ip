@@ -97,11 +97,25 @@ Adds a deadline to the list of tasks.
 
 Format: `deadline [description] /by [dd/MM/yy] [HHmm]`
 
+Note:
+
+1. `[dd/MM/yy]` refers to `day/month/year`
+    1. Please keep the `/`
+    2. You can input both single or double digits (e.g. `1/5/21` is the same as `01/05/21`)
+2. `[HHmm]` refers to `hour` followed by `minute`
+
 #### Event: `event`
 
 Adds an event to the list of tasks.
 
 Format: `event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]`
+
+Note:
+
+1. `[dd/MM/yy]` refers to `day/month/year`
+    1. Please keep the `/`
+    2. You can input both single or double digits (e.g. `1/5/21` is the same as `01/05/21`)
+2. `[HHmm]` refers to `hour` followed by `minute`
 
 <br/>
 
