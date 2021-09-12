@@ -34,31 +34,36 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
+        if (input.trim().length() == 5) {
+            throw new DukeException("The description of an event cannot be empty. Please try again!");
+        } else if (!input.contains(" /at ")) {
+            throw new DukeException(
+                    "The date of an event must be given in the format \"/at DD/MM/YYYY HHMM\". Please try again!");
+        }
 
         int position = input.indexOf(" /at");
         String newEvent = input.substring(6, position);
-        String newTime = input.substring(position + 5);
 
-        if (newEvent.length() == 0) {
-            throw new DukeException("The description of an event cannot be empty. Please try again!");
-        } else if (newTime.length() == 0) {
+        if (input.substring(position).length() <= 5) {
             throw new DukeException("The date of an event cannot be empty. Please try again!");
-        } else {
-            try {
-                LocalDateTime time = LocalDateTime.parse(newTime.trim(), INPUT_FORMATTER);
-                EventTask newTask;
-                if (!tags.isEmpty()) {
-                    newTask = new EventTask(newEvent, time, tags);
-                } else {
-                    newTask = new EventTask(newEvent, time);
-                }
-                list.addTask(newTask);
-                Storage.save(list);
-                return ui.showTaskAdded(newTask, list.getSize() - 1);
-            } catch (DateTimeParseException e) {
-                throw new DukeException(
-                        "Your time format is wrong. Please enter the time in the format DD/MM/YYYY HHMM and try again!");
+        }
+
+        try {
+            String newTime = input.substring(position + 5);
+            LocalDateTime time = LocalDateTime.parse(newTime.trim(), INPUT_FORMATTER);
+            EventTask newTask;
+            if (!tags.isEmpty()) {
+                newTask = new EventTask(newEvent, time, tags);
+            } else {
+                newTask = new EventTask(newEvent, time);
             }
+            list.addTask(newTask);
+            Storage.save(list);
+            return ui.showTaskAdded(newTask, list.getSize() - 1);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(
+                    "Your time format is wrong.\n"
+                    + "Please enter the time in the format \"/at DD/MM/YYYY HHMM\" and try again!");
         }
     }
 }

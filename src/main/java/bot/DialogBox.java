@@ -2,11 +2,15 @@ package bot;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * A class that encapsulates a single Dialogue Box.
@@ -28,6 +32,7 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
+        text.setPadding(new Insets(10));
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
@@ -54,7 +59,10 @@ public class DialogBox extends HBox {
      * @return A DialogBox containing the given parameters.
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        DialogBox userDialogBox = new DialogBox(l, iv);
+        userDialogBox.setBackground(new Background(new BackgroundFill(Color.rgb(232, 220, 255), null, null)));
+        userDialogBox.setPadding(new Insets(10, 10, 10, 10));
+        return userDialogBox;
     }
 
     /**
@@ -67,8 +75,10 @@ public class DialogBox extends HBox {
      * @return A DialogBox containing the given parameters.
      */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
+        DialogBox dukeDialogBox = new DialogBox(l, iv);
+        dukeDialogBox.flip();
+        dukeDialogBox.setBackground(new Background(new BackgroundFill(Color.rgb(240, 232, 255), null, null)));
+        dukeDialogBox.setPadding(new Insets(10, 10, 10, 10));
+        return dukeDialogBox;
     }
 }

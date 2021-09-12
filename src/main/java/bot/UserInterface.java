@@ -45,13 +45,19 @@ public class UserInterface {
      * @return A String representation of the Welcome message.
      */
     public String showWelcomeMessage() {
-        return "Hello! My name is Duke!\n\n"
-                + " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n\n"
-                + "What can I do for you today?\n";
+        return "Hello! My name is DUKE!\n\n"
+                + "░▄▀▄▀▀▀▀▄▀▄░░░░░░░░░\n"
+                + "░█░░░░░░░░▀▄░░░░░░▄░\n"
+                + "█░░▀░░▀░░░░░▀▄▄░░█░█\n"
+                + "█░▄░█▀░▄░░░░░░░▀▀░░█\n"
+                + "█░░▀▀▀▀░░░░░░░░░░░░█\n"
+                + "█░░░░░░░░░░░░░░░░░░█\n"
+                + "█░░░░░░░░░░░░░░░░░░█\n"
+                + "░█░░▄▄░░▄▄▄▄░░▄▄░░█░\n"
+                + "░█░▄▀█░▄▀░░█░▄▀█░▄▀░\n"
+                + "░░▀░░░▀░░░░░▀░░░▀░░░\n\n"
+                + "What can I do for you today?\n\n"
+                + "(Please refer to our user guide at https://lhw-1.github.io/ip/ for more information on how to use the bot.)";
     }
 
     /**

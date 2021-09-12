@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import command.Command;
@@ -112,6 +113,10 @@ public class Bot extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Part 4. Display welcome message.
+        Label welcomeText = new Label(ui.showWelcomeMessage());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeText, new ImageView(duke)));
     }
 
     /**

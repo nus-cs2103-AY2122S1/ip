@@ -11,6 +11,6 @@ public class DukeException extends Exception {
      * @param errorMessage The error message given to the DukeException object, to be displayed to the user.
      */
     public DukeException(String errorMessage) {
-        super("☹ OOPS!!! It looks like there was an error handling your request!\nThe error is as follows:\n>>>" + errorMessage);
+        super("☹ OOPS!!! There was an error handling your request!\n\n" + errorMessage);
     }
 }
