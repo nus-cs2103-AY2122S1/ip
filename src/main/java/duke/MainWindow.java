@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jerry.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Meeseeks.png"));
 
     @FXML
     public void initialize() {
@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(" You said: \n " + input, userImage),
-                DialogBox.getDukeDialog("=========== Duke says =============\n  "
+                DialogBox.getDukeDialog("======= Oooo yeah! ========\n  "
                         + response
                         + "\n" , dukeImage)
         );

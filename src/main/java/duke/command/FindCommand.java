@@ -24,7 +24,7 @@ public class FindCommand extends Command {
         if (tasks.length < 1) {
             return String.format("No task found with search term %s", this.searchTerm);
         } else {
-            StringBuilder res = new StringBuilder();
+            StringBuilder res = new StringBuilder("Can do! \n");
             res.append("Found ").append(tasks.length).append(" tasks");
             for (Task task : tasks) {
                 res.append("\n").append(task.toString());

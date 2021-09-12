@@ -43,7 +43,7 @@ public class Duke {
     protected String initDuke() {
         try {
             taskList.readFile(storage.loadDataFile());
-            return "How can I help?";
+            return "Im Mr Meeseeks! \n LOOK AT ME!";
         } catch (DukeException e) {
             return e.getMessage();
         }

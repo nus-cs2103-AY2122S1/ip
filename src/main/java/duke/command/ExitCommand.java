@@ -30,6 +30,6 @@ public class ExitCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList taskList) throws DukeException {
         storage.writeToDisk(taskList.compileTasks());
-        return "Ooooh yeah! Can do!";
+        return "Existence is a pain to a Meeseeks Jerry";
     }
 }

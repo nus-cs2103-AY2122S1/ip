@@ -33,7 +33,7 @@ public class UpdateNameCommand extends Command {
         try {
             Task task = taskList.updateTaskName(this.taskNumber, this.newName);
             storage.writeToDisk(taskList.compileTasks());
-            return String.format("OOooo YEAH! task updated\n  %s", task);
+            return String.format("Can do! task updated\n  %s", task);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(String.format("Task number %d invalid.", taskNumber));
         }
