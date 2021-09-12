@@ -26,30 +26,10 @@ public class Ui {
     }
 
     /**
-     * Prints the greeting message the user sees when the Bot is started up.
-     *
-     */
-    public String showWelcome() {
-
-        return "Hello from\n"
-                + logo
-                + "\n"
-                + "What can I do for you?";
-    }
-
-    /**
      * Prints the error message in the case the file path that the Storage is supposed to read from does not exist.
      */
     public void showLoadingError() {
         System.out.println("File Not Found");
-    }
-
-    /**
-     * Prints the error message when an Exception is thrown.
-     * @param error error message given by the Exception.
-     */
-    public void showError(String error) {
-        System.out.println(error);
     }
 
     /**
@@ -99,13 +79,6 @@ public class Ui {
     }
 
     /**
-     * Prints the line between each output.
-     */
-    public void showLine() {
-        System.out.println("_______");
-    }
-
-    /**
      * Prints out the list of Tasks stored in the TaskList.
      * @param tasks TaskList to be printed.
      */
@@ -117,12 +90,4 @@ public class Ui {
         return output;
     }
 
-    /**
-     * Returns the input given by the user.
-     * @return String containing input of the user.
-     */
-    public String readCommand() {
-        String input = sc.nextLine();
-        return input;
-    }
 }

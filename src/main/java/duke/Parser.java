@@ -38,6 +38,7 @@ import duke.task.ToDo;
  */
 public class Parser {
 
+    private static final String TIMEFORMAT = "HHmm";
     /**
      * Parses the input received by the UI.
      * Dates should be input in the format dd/mm/yyyy HHmm
@@ -53,20 +54,14 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            int toComplete = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
-            return new DoneCommand(toComplete);
+            return createDoneCommand(fullCommand);
         case "delete":
-            int toDelete = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
-            return new DeleteCommand(toDelete);
+            return createDeleteCommand(fullCommand);
         case "todo": {
-            String task = fullCommand.replaceFirst("todo ", "");
-            if (task.equals("todo")) {
-                throw new IllegalTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
-            } else {
-                return new AddCommand(new ToDo(task));
-            }
+            return createToDo(fullCommand);
         }
         case "deadline": {
+<<<<<<< HEAD
             String[] taskDate = fullCommand.replaceFirst("deadline ", "").split("/by ");
             String task = taskDate[0];
             assert !task.equals("") : "There should be a task";
@@ -105,10 +100,15 @@ public class Parser {
             LocalTime localTime;
             localTime = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
             return new AddCommand(new Event(task, localDate, localTime));
+=======
+            return createDeadline(fullCommand);
+        }
+        case "event": {
+            return createEvent(fullCommand);
+>>>>>>> master
         }
         case "find" : {
-            String keyword = fullCommand.replaceFirst("find ", "");
-            return new FindCommand(keyword);
+            return createFindCommand(fullCommand);
         }
         case "bye": {
             return new ExitCommand();
@@ -119,4 +119,89 @@ public class Parser {
         }
     }
 
+    private static DoneCommand createDoneCommand(String fullCommand) {
+        int toComplete = getCommandIndex(fullCommand);
+        return new DoneCommand(toComplete);
+    }
+
+    private static DeleteCommand createDeleteCommand(String fullCommand) {
+        int toDelete = getCommandIndex(fullCommand);
+        return new DeleteCommand(toDelete);
+    }
+
+    private static AddCommand createToDo(String fullCommand) throws IllegalTaskException {
+        String task = fullCommand.replaceFirst("todo ", "");
+        if (task.equals("todo")) {
+            throw new IllegalTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        return new AddCommand(new ToDo(task));
+    }
+
+    private static AddCommand createDeadline(String fullCommand) {
+        String[] taskDate = getTaskDate(fullCommand, "deadline ", "/by ");
+        return parseCommand("Deadline", taskDate);
+    }
+
+    private static AddCommand createEvent(String fullCommand) {
+        String[] taskDate = getTaskDate(fullCommand, "event ", "/at ");
+        return parseCommand("Event", taskDate);
+    }
+
+    private static FindCommand createFindCommand(String fullCommand) {
+        String keyword = fullCommand.replaceFirst("find ", "");
+        return new FindCommand(keyword);
+    }
+
+    private static AddCommand parseCommand(String type, String[] taskDate) {
+        String task = taskDate[0];
+        String fullDateTime = taskDate[1];
+        LocalDate localDate = getLocalDate(fullDateTime);
+        LocalTime localTime = getLocalTime(fullDateTime);
+        return createAddCommandWithDateTime(type, task, localDate, localTime);
+    }
+
+    private static AddCommand createAddCommandWithDateTime(String type, String task, LocalDate localDate,
+                                                           LocalTime localTime) {
+        if (type.equals("Event")) {
+            return new AddCommand(new Event(task, localDate, localTime));
+        }
+        return new AddCommand(new Deadline(task, localDate, localTime));
+    }
+
+    private static String[] getTaskDate(String fullCommand, String type, String splitter) {
+        return fullCommand.replaceFirst(type, "").split(splitter);
+    }
+
+    private static LocalDate getLocalDate (String fullDateTime) {
+        String formattedDate = formatDate(fullDateTime);
+        return LocalDate.parse(formattedDate);
+    }
+
+    private static LocalTime getLocalTime (String fullDateTime) {
+        String time = getTime(fullDateTime);
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern(TIMEFORMAT));
+    }
+
+    private static String getTime(String fullDateTime) {
+        return fullDateTime.split(" ")[1];
+    }
+
+    private static String formatDate(String fullDateTime) {
+        String fullDate = fullDateTime.split(" ")[0];
+        String[] splitDate = fullDate.split("/");
+        return rewriteDate(splitDate);
+    }
+
+    private static String rewriteDate(String[] splitDate) {
+        if (splitDate[1].length() == 1) {
+            return splitDate[2] + "-0" + splitDate[1] + "-" + splitDate[0];
+        } else if (splitDate[0].length() == 1) {
+            return splitDate[2] + "-" + splitDate[1] + "-0" + splitDate[0];
+        }
+        return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
+    }
+
+    private static Integer getCommandIndex(String fullCommand) {
+        return Integer.parseInt(fullCommand.split(" ")[1]) - 1;
+    }
 }
