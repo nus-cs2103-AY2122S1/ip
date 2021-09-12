@@ -45,7 +45,6 @@ public class Bot extends Application {
         try {
             tasks = Storage.load();
         } catch (DukeException e) {
-            ui.showStorageLoadingError();
             tasks = new TaskList();
         }
     }
