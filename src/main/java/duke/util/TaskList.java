@@ -53,6 +53,39 @@ public class TaskList {
     }
 
     /**
+     * Marks a task in the Task List with high priority
+     *
+     * @param index the index of task to be marked
+     */
+    public void markAsHighPriority(int index) {
+        Task temp = tasks.get(index);
+        temp.markAsHighPriority();
+        tasks.set(index, temp);
+    }
+
+    /**
+     * Marks a task in the Task List with medium priority
+     *
+     * @param index the index of task to be marked
+     */
+    public void markAsMediumPriority(int index) {
+        Task temp = tasks.get(index);
+        temp.markAsMediumPriority();
+        tasks.set(index, temp);
+    }
+
+    /**
+     * Marks a task in the Task List with low priority
+     *
+     * @param index the index of task to be marked
+     */
+    public void markAsLowPriority(int index) {
+        Task temp = tasks.get(index);
+        temp.markAsLowPriority();
+        tasks.set(index, temp);
+    }
+
+    /**
      * Deletes a task in the Task List.
      *
      * @param index the index of task to be deleted

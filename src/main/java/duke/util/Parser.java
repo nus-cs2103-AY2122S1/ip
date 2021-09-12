@@ -48,6 +48,8 @@ public class Parser {
             return commandTodo(input);
         } else if (lowerCase.startsWith("done")) {
             return commandDone(input);
+        } else if (lowerCase.startsWith("mark")) {
+            return commandMarkPriority(input);
         } else if (lowerCase.startsWith("delete")) {
             return commandDelete(input);
         } else if (lowerCase.startsWith("find")) {
@@ -103,13 +105,13 @@ public class Parser {
             }
             String item = input.substring(9, indexOfTime);
             String by = input.substring(indexOfTime + 4);
-            assert input.length() >= 20 : "The Deadline command should be like 'deadline description /by dd/mm/yyyy (hhmm)'";
+            assert input.length() >= 20 : "The Deadline command should be 'deadline description /by dd/mm/yyyy hhmm'";
             Task deadline = new Deadline(item, by);
             taskList.add(deadline);
             storage.add(deadline);
             return ui.showNewTask(deadline);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS! You didn't follow the input format: 'deadline description /by dd/mm/yyyy (hhmm)'");
+            throw new DukeException("OOPS! You didn't follow the format: 'deadline description /by dd/mm/yyyy hhmm'");
         }
     }
 
@@ -127,7 +129,7 @@ public class Parser {
             storage.add(event);
             return ui.showNewTask(event);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS! You didn't follow the input format: 'event description /at dd/mm/yyyy (hhmm)'");
+            throw new DukeException("OOPS! You didn't follow the format: 'event description /at dd/mm/yyyy hhmm'");
         }
     }
 
@@ -170,6 +172,32 @@ public class Parser {
             throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! The format of input is wrong. It should be like 'delete 5'");
+        }
+    }
+
+    private String commandMarkPriority(String input) {
+        try {
+            int item = Integer.parseInt(input.substring(5, 6));
+            String priority = input.split("&")[1].trim();
+            if (priority.equals("important")) {
+                taskList.markAsHighPriority(item - 1);
+                storage.markAsHighPriority(item - 1);
+            } else if (priority.equals("unimportant")) {
+                taskList.markAsLowPriority(item - 1);
+                storage.markAsLowPriority(item - 1);
+            } else if (priority.equals("ordinary")) {
+                taskList.markAsMediumPriority(item - 1);
+                storage.markAsLowPriority(item - 1);
+            } else {
+                throw new DukeException("OOPS!!! If you want to mark a task with priority, "
+                        + "Please command 'mark taskIndex &important/&ordinary/&unimportant'."
+                        + "\nFor example, command 'mark 15 &important' to mark fifteenth task with high priority");
+            }
+            return ui.showPriority(taskList.get(item - 1));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! If you want to mark a task with priority, "
+                    + "Please command 'mark taskIndex &important/&ordinary/&unimportant'."
+                    + "\nFor example, command 'mark 15 &important' to mark fifteenth task with high priority");
         }
     }
 

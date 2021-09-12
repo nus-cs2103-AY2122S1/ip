@@ -11,6 +11,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
 /**
  * Represents a hard disk.
  */
@@ -61,31 +62,20 @@ public class Database {
         try {
             FileWriter fileWriter = new FileWriter(file, true);
             String out = "\n";
-            if (task instanceof Deadline) {
-                out += "D &";
-            } else if (task instanceof Todo) {
-                out += "T &";
-            } else if (task instanceof Event) {
-                out += "E &";
-            }
-            if (task.isDone()) {
-                out += " 1 & ";
-            } else {
-                out += " 0 & ";
-            }
-            out += task.getDescription();
-            if (task instanceof Deadline) {
-                out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
-            }
-            if (task instanceof Event) {
-                out += " & " + ((Event) task).getAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
-            }
+
+            out += addTaskName(task);
+            out += addDoneString(task);
+            out += addPriorityString(task);
+            out += addDescription(task);
+            out += addTimeline(task);
+
             fileWriter.write(out);
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * Rewrite the entire file.
@@ -103,31 +93,70 @@ public class Database {
                 } else {
                     out = "";
                 }
-                if (task instanceof Deadline) {
-                    out += "D &";
-                } else if (task instanceof Todo) {
-                    out += "T &";
-                } else if (task instanceof Event) {
-                    out += "E &";
-                }
-                if (task.isDone()) {
-                    out += " 1 & ";
-                } else {
-                    out += " 0 & ";
-                }
-                out += task.getDescription();
-                if (task instanceof Deadline) {
-                    out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
-                }
-                if (task instanceof Event) {
-                    out += " & " + ((Event) task).getAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
-                }
+                out += addTaskName(task);
+                out += addDoneString(task);
+                out += addPriorityString(task);
+                out += addDescription(task);
+                out += addTimeline(task);
                 fileWriter.write(out);
             }
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String addTaskName(Task task) {
+        String taskName;
+        if (task instanceof Deadline) {
+            taskName = "D &";
+        } else if (task instanceof Todo) {
+            taskName = "T &";
+        } else if (task instanceof Event) {
+            taskName = "E &";
+        } else {
+            throw new DukeException("OOPS!!! Ths task isn't any of the three types!");
+        }
+        return taskName;
+    }
+
+    private String addDoneString(Task task) {
+        String doneString;
+        if (task.isDone()) {
+            doneString = " 1 & ";
+        } else {
+            doneString = " 0 & ";
+        }
+        return doneString;
+    }
+
+    private String addPriorityString(Task task) {
+        String priorityString;
+        if (task.isHighPriority()) {
+            priorityString = " 0 & ";
+        } else if (task.isMediumPriority()) {
+            priorityString = " 1 & ";
+        } else if (task.isLowPriority()) {
+            priorityString = " 2 & ";
+        } else {
+            throw new DukeException("OOPS!!! The task doesn't have a Priority tag!");
+        }
+        return priorityString;
+    }
+
+    private String addDescription(Task task) {
+        return task.getDescription();
+    }
+
+    private String addTimeline(Task task) {
+        String timeline = "";
+        if (task instanceof Deadline) {
+            timeline += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+        }
+        if (task instanceof Event) {
+            timeline += " & " + ((Event) task).getAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
+        }
+        return timeline;
     }
 
     /**
@@ -144,6 +173,45 @@ public class Database {
     }
 
     /**
+     * Marks a task with high priority
+     *
+     * @param index the index of task that is marked
+     */
+    public void markAsHighPriority(int index) {
+        ArrayList<Task> readOut = readData();
+        Task temp = readOut.get(index);
+        temp.markAsHighPriority();
+        readOut.set(index, temp);
+        entireWriteData(readOut);
+    }
+
+    /**
+     * Marks a task with medium priority
+     *
+     * @param index the index of task that is marked
+     */
+    public void markAsMediumPriority(int index) {
+        ArrayList<Task> readOut = readData();
+        Task temp = readOut.get(index);
+        temp.markAsMediumPriority();
+        readOut.set(index, temp);
+        entireWriteData(readOut);
+    }
+
+    /**
+     * Marks a task with low priority
+     *
+     * @param index the index of task that is marked
+     */
+    public void markAsLowPriority(int index) {
+        ArrayList<Task> readOut = readData();
+        Task temp = readOut.get(index);
+        temp.markAsLowPriority();
+        readOut.set(index, temp);
+        entireWriteData(readOut);
+    }
+
+    /**
      * Deletes a task from the hard disk.
      *
      * @param index the index of task that is deleted
@@ -155,8 +223,8 @@ public class Database {
     }
 
     /**
-     * Parses a full command into a Task object,
-     * example of command should be like: E & 0 & project meeting & 6/8/2021 1400 .
+     * Parses a full input line into a Task object,
+     * example of input line should be like: E & 0 & 1 & project meeting & 6/8/2021 1400 .
      *
      * @param string the original full command
      * @return Task
@@ -167,41 +235,52 @@ public class Database {
         for (int i = 0; i < str.length; i++) {
             str[i] = str[i].trim();
         }
-        boolean isDone = isDone(str);
+
         String item;
         String time;
         switch (str[0]) {
         case "T":
-            item = str[2];
+            item = str[3];
             task = new Todo(item);
-            if (isDone) {
-                task.markAsDone();
-            }
+            markDone(task, str);
+            markPriority(task, str);
             break;
         case "E":
-            item = str[2];
-            time = str[3];
+            item = str[3];
+            time = str[4];
             task = new Event(item, time);
-            if (isDone) {
-                task.markAsDone();
-            }
+            markDone(task, str);
+            markPriority(task, str);
             break;
         case "D":
-            item = str[2];
-            time = str[3];
+            item = str[3];
+            time = str[4];
             task = new Deadline(item, time);
-            if (isDone) {
-                task.markAsDone();
-            }
+            markDone(task, str);
+            markPriority(task, str);
             break;
         default:
             task = null;
         }
         return task;
     }
-  
-    private boolean isDone(String[] str){
-        return (str[1].equals("1"));
+
+    private void markDone(Task task, String[] str) {
+        if (str[1].equals("1")) {
+            task.markAsDone();
+        }
     }
 
+    private void markPriority(Task task, String[] str) {
+        switch (str[2]) {
+        case "0" :
+            task.markAsHighPriority();
+            break;
+        case "2":
+            task.markAsLowPriority();
+            break;
+        default:
+            task.markAsMediumPriority();
+        }
+    }
 }

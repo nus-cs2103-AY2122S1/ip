@@ -41,6 +41,18 @@ public class Storage {
         database.doneData(index);
     }
 
+    public void markAsHighPriority(int index) {
+        database.markAsHighPriority(index);
+    }
+
+    public void markAsMediumPriority(int index) {
+        database.markAsMediumPriority(index);
+    }
+
+    public void markAsLowPriority(int index) {
+        database.markAsLowPriority(index);
+    }
+
     /**
      * Deletes a task from the hard disk.
      *
