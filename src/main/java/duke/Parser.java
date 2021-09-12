@@ -55,11 +55,11 @@ public class Parser {
     }
 
     /**
-     * Changes the time of the deadline or event
+     * Changes the time of the deadline or event.
      * Format: snooze {index} /to {time}
      *
-     * @param input user command
-     * @return replies
+     * @param input User command.
+     * @return Replies from duke bot.
      * @throws IOException If can't write to file.
      */
     private String[] snooze(String input) throws IOException {
@@ -73,10 +73,10 @@ public class Parser {
         try {
             taskIndex = Integer.parseInt(splitSnooze[0].trim());
         } catch (NumberFormatException e) {
-            return new String[]{"OOPS!!! You didn't enter a valid index"};
+            return displayIncorrectIndex();
         }
         if (taskIndex > tasks.size()) {
-            return new String[]{"OOPS!!! You didn't enter a valid index"};
+            return displayIncorrectIndex();
         }
         Task task = tasks.get(taskIndex - 1);
         results.add("\tYou have snoozed this task: ");
@@ -114,13 +114,13 @@ public class Parser {
         return results;
     }
     /**
-     * Adds task to file
+     * Adds task to file.
      * Format (todo): todo {description}
      * Format (deadline): deadline {description} /by {time}
      * Format (event): event {description} /at {time}
      *
-     * @param input user command
-     * @return replies
+     * @param input User command.
+     * @return Replies from duke bot.
      * @throws IOException If can't write to file.
      */
     private String[] addTask(String input) throws DukeException, IOException {
@@ -201,6 +201,12 @@ public class Parser {
     private String[] displayDateFormatError() {
         return new String[]{"OOPS!!! Input your date in the following format: DD/MM/YYYY HHMM"};
     }
+    private String[] displayTaskNotFound() {
+        return new String[]{"OOPS!!! Task not found!"};
+    }
+    private String[] displayIncorrectIndex() {
+        return new String[]{"OOPS!!! Please enter a valid index."};
+    }
     private String[] displayTasks() {
         ArrayList<String> results = new ArrayList<>();
         results.add("\tGot it. I've added this task:\n\t\t" + tasks.get(tasks.size() - 1).toString()
@@ -210,18 +216,18 @@ public class Parser {
     private String[] deleteTask(String input) {
         String[] splitString = input.split(" ", 2);
         if (splitString.length == 1) {
-            return new String[]{"OOPS!!! Please enter a valid index"};
+            return displayIncorrectIndex();
         }
         int index;
         try {
             index = Integer.parseInt(splitString[1]) - 1;
         } catch (NumberFormatException e) {
-            return new String[]{"OOPS!!! Please enter a valid index"};
+            return displayIncorrectIndex();
         }
 
         Task removedTask;
         if (index >= tasks.size() || index < 0) {
-            return new String[]{"OOPS!!! The task doesn't exist!\n"};
+            return displayTaskNotFound();
         } else {
             removedTask = tasks.remove(index);
         }
@@ -238,17 +244,26 @@ public class Parser {
 
     private String[] setTaskAsDone(String input) {
         String[] splitString = input.split(" ", 2);
-        int i = Integer.parseInt(splitString[1]) - 1;
-        if (i + 1 <= 0 || i + 1 > tasks.size()) {
-            return new String[]{"\tOOPS!!! Task not found!"};
+        if (splitString.length == 1) {
+            return displayIncorrectIndex();
         }
-        tasks.get(i).markAsDone();
+        int index;
+        try {
+            index = Integer.parseInt(splitString[1]) - 1;
+        } catch (NumberFormatException e) {
+            return displayIncorrectIndex();
+        }
+
+        if (index + 1 <= 0 || index + 1 > tasks.size()) {
+            return displayTaskNotFound();
+        }
+        tasks.get(index).markAsDone();
         try {
             storage.writeEntireFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new String[]{"\tNice! I've marked this task as done:\n\t\t" + tasks.get(i).toString()};
+        return new String[]{"\tNice! I've marked this task as done:\n\t\t" + tasks.get(index).toString()};
     }
 
     private String[] list() {

@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -13,11 +14,11 @@ public class Storage {
     private final TaskList tasks = new TaskList(new ArrayList<>());
 
     Storage(String filename) {
-        this.filename = filename;
+        this.filename = "data/" + filename;
     }
 
     void write(String line) throws IOException {
-        FileWriter writer = new FileWriter("./" + this.filename, true);
+        FileWriter writer = new FileWriter(this.filename, true);
         writer.write(line + "\n");
         writer.close();
     }
@@ -26,18 +27,25 @@ public class Storage {
      * Loads all the tasks from the given file name and add it to task list.
      * If the position is unset, NaN is returned.
      *
-     * @throws IOException If unable to create new file
+     * @throws IOException If unable to create new file.
      */
     public void loadTasks() throws IOException {
-        Scanner scanner;
-        File file = new File("./" + filename);
-        file.createNewFile();
-        scanner = new Scanner(file);
-        while (scanner.hasNext()) {
-            Task task = parseTask(scanner.nextLine());
-            if (task != null) {
-                tasks.add(task);
+        try {
+            Scanner scanner;
+            File file = new File(filename);
+            scanner = new Scanner(file);
+            while (scanner.hasNext()) {
+                Task task = parseTask(scanner.nextLine());
+                if (task != null) {
+                    tasks.add(task);
+                }
             }
+        } catch (FileNotFoundException e) {
+            new File("data").mkdir();
+            FileWriter newFile = new FileWriter(filename);
+            newFile.write("");
+            newFile.close();
+            loadTasks();
         }
     }
 
@@ -71,7 +79,7 @@ public class Storage {
     /**
      * Returns tasks.
      *
-     * @return Tasks loaded from file
+     * @return All tasks loaded from file.
      */
     public TaskList getTasks() {
         return tasks;
@@ -83,7 +91,7 @@ public class Storage {
      * @throws IOException If unable to create write to file
      */
     public void writeEntireFile() throws IOException {
-        FileWriter writer = new FileWriter("./" + this.filename, true);
+        FileWriter writer = new FileWriter(this.filename);
         for (Task task : tasks) {
             writer.write(task.save() + "\n");
         }

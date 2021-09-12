@@ -16,7 +16,7 @@ public class Duke extends Application {
     /**
      * Creates Duke object.
      *
-     * @param fileName name of the file that stores all the tasks
+     * @param fileName name of the file that stores all the tasks.
      */
     public Duke(String fileName) {
         storage = new Storage(fileName);
@@ -30,7 +30,7 @@ public class Duke extends Application {
     /**
      * Starts the program.
      *
-     * @param stage the UI of the program
+     * @param stage the UI of the program.
      */
     @Override
     public void start(Stage stage) {

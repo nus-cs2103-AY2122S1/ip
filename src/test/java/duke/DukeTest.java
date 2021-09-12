@@ -16,7 +16,6 @@ public class DukeTest {
         Parser parser = new Parser(tasks, storage);
 
         parser.parseInput("event meeting /at 22/2/2022 2222");
-
         assertEquals("[E][ ] meeting (at: 22 Feb 2022 22:22)", tasks.get(0).toString());
     }
 
@@ -60,6 +59,17 @@ public class DukeTest {
     }
 
     @Test
+    public void deleteTask_event_fail() {
+        TaskList tasks = new TaskList(new ArrayList<Task>());
+        File file = new File("dukeTest.txt");
+        file.delete();
+        Storage storage = new Storage("dukeTest.txt");
+        Parser parser = new Parser(tasks, storage);
+        parser.parseInput("event meeting /at 22/2/2022 2222");
+        assertEquals("OOPS!!! Task not found!", parser.parseInput("delete 3")[0]);
+    }
+
+    @Test
     public void doneTask_event_sucess() {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         File file = new File("dukeTest.txt");
@@ -69,6 +79,17 @@ public class DukeTest {
         parser.parseInput("event meeting /at 22/2/2022 2222");
         parser.parseInput("done 1");
         assertEquals(true, tasks.get(0).isDone);
+    }
+
+    @Test
+    public void doneTask_event_fail() {
+        TaskList tasks = new TaskList(new ArrayList<Task>());
+        File file = new File("dukeTest.txt");
+        file.delete();
+        Storage storage = new Storage("dukeTest.txt");
+        Parser parser = new Parser(tasks, storage);
+        parser.parseInput("event meeting /at 22/2/2022 2222");
+        assertEquals("OOPS!!! Task not found!", parser.parseInput("done 3")[0]);
     }
 
     @Test
@@ -97,10 +118,10 @@ public class DukeTest {
         parser.parseInput("snooze 1 /to 23/2/2022 22:22");
 
         assertEquals("OOPS!!! Input your date in the following format: DD/MM/YYYY HHMM", parser.parseInput("snooze 1 /to 2-2-2222")[0]);
-        assertEquals("OOPS!!! You didn't enter a valid index", parser.parseInput("snooze /to 2/2/2222 2222")[0]);
-        assertEquals("OOPS!!! You didn't enter a valid index", parser.parseInput("snooze wat /to 2/2/2222 2222")[0]);
-        assertEquals("OOPS!!! You didn't enter a valid index", parser.parseInput("snooze wat /to 2/2/2222 2222")[0]);
-        assertEquals("OOPS!!! You didn't enter a valid index", parser.parseInput("snooze 3 /to 2/2/2222 2222")[0]);
+        assertEquals("OOPS!!! Please enter a valid index.", parser.parseInput("snooze /to 2/2/2222 2222")[0]);
+        assertEquals("OOPS!!! Please enter a valid index.", parser.parseInput("snooze wat /to 2/2/2222 2222")[0]);
+        assertEquals("OOPS!!! Please enter a valid index.", parser.parseInput("snooze wat /to 2/2/2222 2222")[0]);
+        assertEquals("OOPS!!! Please enter a valid index.", parser.parseInput("snooze 3 /to 2/2/2222 2222")[0]);
         assertEquals("OOPS!!! Input your date in the following format: DD/MM/YYYY HHMM", parser.parseInput("snooze 1 /to ")[0]);
         assertEquals("OOPS!!! Input your date in the following format: DD/MM/YYYY HHMM", parser.parseInput("snooze 1 /to")[0]);
     }

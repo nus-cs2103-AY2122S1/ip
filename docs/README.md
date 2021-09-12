@@ -24,6 +24,8 @@ Ensure you have Java 11 or above installed in your Computer.
 Download the jar file [here](https://github.com/ChuangZheQuan/ip/releases/tag/A-Release)!
 Copy the file to the folder you want to use as the home folder for your todo list.
 Double-click the file to start the app. The GUI should appear in a few seconds.
+Alternatively (or if double-clicking doesn't work), you can open your terminal/console, move to the directory of the file. To run the file,
+type `java -jar duke.jar`
 
 ## Features<a name="features"></a>
 

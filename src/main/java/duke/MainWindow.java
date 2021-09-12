@@ -53,13 +53,19 @@ public class MainWindow extends AnchorPane {
             return;
         }
         assert !input.isBlank() : "Input has to be not empty!";
-        if (input.trim().equals("bye")) {
+        String trimmedInput = input.trim();
+        if (trimmedInput.equals("bye")) {
             Platform.exit();
         }
-        String[] responses = duke.getResponse(input);
+        String[] responses;
+        try {
+            responses = duke.getResponse(trimmedInput);
+        } catch (Exception e) {
+            responses = null;
+        }
         if (responses == null) {
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog("OOPS!!! I don't understand your command.", dukeImage)
+                    DialogBox.getDukeDialog("OOPS!!! I don't understand your command: " + trimmedInput, dukeImage)
             );
             userInput.clear();
             return;
