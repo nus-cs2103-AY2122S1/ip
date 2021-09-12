@@ -61,8 +61,8 @@ public class Timetable {
             public int compare(String firstDate, String secondDate) {
                 String[] firstDateArr = firstDate.split("-");
                 String[] secondDateArr = secondDate.split("-");
-                int firstIntDate = Integer.parseInt(firstDateArr[0] + firstDateArr[1] + firstDateArr[2]);
-                int secondIntDate = Integer.parseInt(secondDateArr[0] + secondDateArr[1] + secondDateArr[2]);
+                int firstIntDate = Integer.parseInt(firstDateArr[2] + firstDateArr[1] + firstDateArr[1]);
+                int secondIntDate = Integer.parseInt(secondDateArr[2] + secondDateArr[1] + secondDateArr[1]);
                 return (firstIntDate > secondIntDate) ? 1 : -1;
             }
         });
