@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
 
     public void printStartUpMessage() {
         dialogContainer.getChildren()
-                .addAll(DialogBox.getDukeDialog(duke.getUI().getStartUpMessage(), dukeImage));
+                .addAll(DialogBox.getDukeDialog(duke.getUI().getStartUpMessage(), dukeImage, false));
     }
 
     /**
@@ -55,9 +55,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isExceptionReply = duke.getIsExceptionReply();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, isExceptionReply)
         );
         userInput.clear();
         if (duke.getIsExit()) {

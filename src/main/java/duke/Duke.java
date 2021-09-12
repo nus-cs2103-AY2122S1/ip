@@ -20,6 +20,7 @@ public class Duke {
     private final Storage storage;
     private final UI ui;
     private boolean isExit;
+    private boolean isExceptionReply;
 
     /**
      * Constructs an instance of Duke.
@@ -35,6 +36,7 @@ public class Duke {
         this.taskList = new TaskList(storage.loadTasks());
         this.ui = new UI();
         this.isExit = false;
+        this.isExceptionReply = false;
     }
 
     /**
@@ -44,6 +46,15 @@ public class Duke {
      */
     public boolean getIsExit() {
         return this.isExit;
+    }
+
+    /**
+     * Returns true if the most recent reply by duke was an error message.
+     * 
+     * @return Returns true if the most recent reply by duke was an error message.
+     */
+    public boolean getIsExceptionReply() {
+        return this.isExceptionReply;
     }
 
     /**
@@ -60,10 +71,12 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        isExceptionReply = true;
         try {
             Command command = Parser.parse(input);
             command.execute(taskList, ui, storage);
             isExit = command.isExit();
+            isExceptionReply = false;
             return command.getOutput();
         } catch (DukeException ex) {
             return ui.getErrorMessage(ex);

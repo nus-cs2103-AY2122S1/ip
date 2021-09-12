@@ -25,6 +25,6 @@ public class ToDo extends Task {
      * @return Returns the format a user should use to creating this task with Duke.
      */
     public String getFormat() {
-        return "todo {description}";
+        return "todo <description>";
     }
 }

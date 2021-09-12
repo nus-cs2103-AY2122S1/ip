@@ -35,7 +35,13 @@ public class UI {
         return getOutput();
     }
 
-    private String getHelpMessage() {
+    /**
+     * Returns the help message of Duke. This includes the list
+     * of useful commands Duke offers.
+     * 
+     * @return Return the String help message of Duke.
+     */    
+    public String getHelpMessage() {
         return "These are some of the commands I support:\n"
                 + "\nTask creation commands:\n"
                 + "    todo <description>\n"
@@ -48,6 +54,7 @@ public class UI {
                 + "    delete <index>\n"
                 + "    sort\n"
                 + "    bye\n"
+                + "    help\n"
                 + "\nFor a more comprehensive guild,\nplease visit the user guide!";
     }
 

@@ -43,7 +43,7 @@ public class Deadline extends Task {
      * @return Returns the format a user should use to creating this task with Duke.
      */
     public String getFormat() {
-        return "deadline {description} /by {by when?}";
+        return "deadline <description> /by <deadline>";
     }
 
     /**

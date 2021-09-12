@@ -34,9 +34,8 @@ public class TaskException extends DukeException {
      */
     public List<String> getHelpMessages() {
         List<String> list = new ArrayList<>();
-        list.add(String.format("  Use the following format to create %s tasks.", task.getType()));
-        list.add("  \"" + task.getFormat() + "\"");
-        list.add("  Replace {}-values with suitable non-empty descriptors.");
+        list.add(String.format("Use the following format to create %s tasks.", task.getType()));
+        list.add("\n  " + task.getFormat() + "\n");
         return list;
     }
 }
