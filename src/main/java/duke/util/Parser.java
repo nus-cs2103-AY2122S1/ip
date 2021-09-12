@@ -61,8 +61,11 @@ public class Parser {
         if (userInput.matches("^update name [0-9]+ .+")) {
             String[] inputDetails = userInput.split(" ");
             int taskNumber = Integer.parseInt(inputDetails[2]);
-            String newName = inputDetails[3];
-            return new UpdateNameCommand(taskNumber, newName);
+            StringBuilder newName = new StringBuilder();
+            for (int i = 3; i < inputDetails.length; i++) {
+                newName.append(inputDetails[i]).append(" ");
+            }
+            return new UpdateNameCommand(taskNumber, newName.toString());
         } else if (userInput.matches("^update datetime [0-9]+ .+ .+")) {
             String[] inputDetails = userInput.split(" ");
             int taskNumber = Integer.parseInt(inputDetails[2]);
