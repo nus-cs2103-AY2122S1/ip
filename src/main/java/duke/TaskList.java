@@ -73,8 +73,8 @@ public class TaskList {
             String input = scanner.nextLine();
             try {
                 Parser.interpretInput(input, this.tasks);
-            } catch (DukeException dukeException) {
-                System.out.println(dukeException.getMessage());
+            } catch (Exception err) {
+                System.out.println(err.getMessage());
                 run(scanner);
             }
             if (input.equals("bye")) {
