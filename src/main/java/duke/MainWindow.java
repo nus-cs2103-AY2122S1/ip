@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private String dukeGreeting = "Hello! I'm Duke\nWhat can I do for you?";
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private final int TIMER_DELAY = 700;
