@@ -9,10 +9,28 @@ TauBot is a desktop app for managing your tasks, which can be used through the C
 
 ## Quick Start
 
-![Screenshot 2021-09-12 at 12 39 56 PM](https://user-images.githubusercontent.com/61085398/132972393-841cfde1-c4aa-4f4a-b18f-adfa6d86ee3d.png)
-2. Type the command in the GUI message field and press Enter to execute it. Try adding your first task! 
+1. Ensure you have [Java 11](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) 
+installed on your computer
+2. Download and extract the Duke.jar file to your desired location
+3. Open command prompt/terminal and change directory to taubot.jar's
+directory. Replace ```TAUBOT_JAR_DIRECTORY``` with your corresponding taubot.jar's
+directory in the following command.
+```
+cd TAUBOT_JAR_DIRECTORY
+```
 
-### Example of tasks you can try adding:
+5. (Continuing from 4) In the same command prompt/terminal, run this command to start Duke
+
+```
+java -jar Duke.jar
+```
+6. Taubot will run and you should see this:
+
+![Screenshot 2021-09-12 at 12 39 56 PM](https://user-images.githubusercontent.com/61085398/132972393-841cfde1-c4aa-4f4a-b18f-adfa6d86ee3d.png)
+
+Try running your first command!
+
+### Example of commands you can try:
 1. `todo eat apple` Adds eat apple to the list of tasks.
 2. `list` Shows the tasks you have.
 3. `done 1` Marks the first task as done.
