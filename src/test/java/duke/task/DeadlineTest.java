@@ -24,13 +24,13 @@ public class DeadlineTest {
     @Test
     public void testFileFormatConversion() {
         Deadline deadline = new Deadline("project", LocalDate.of(2021, 9, 1));
-        assertEquals("D / 0 / project / 2021-09-01", deadline.convertToFileFormat());
+        assertEquals("D // 0 // project // 2021-09-01 // ", deadline.convertToFileFormat());
     }
 
     @Test
     public void fileFormatConversion_doneTask_indicated() {
         Deadline deadline = new Deadline("project", LocalDate.of(2021, 9, 1));
         deadline.markAsDone();
-        assertEquals("D / 1 / project / 2021-09-01", deadline.convertToFileFormat());
+        assertEquals("D // 1 // project // 2021-09-01 // ", deadline.convertToFileFormat());
     }
 }

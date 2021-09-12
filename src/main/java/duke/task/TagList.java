@@ -22,7 +22,7 @@ public class TagList {
         if (tags.isEmpty()) {
             return "";
         } else {
-            StringBuilder result = new StringBuilder("{");
+            StringBuilder result = new StringBuilder(" {");
             for (String tag : tags) {
                 result.append(tag).append(", ");
             }

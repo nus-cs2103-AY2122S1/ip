@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
-    static final String EVENT_STRING_FORMAT = "[E]%s (at: %s) %s";
+    static final String EVENT_STRING_FORMAT = "[E]%s (at: %s)%s";
     static final String EVENT_FILE_FORMAT = "E // %s // %s // %s";
     protected LocalDate time;
 

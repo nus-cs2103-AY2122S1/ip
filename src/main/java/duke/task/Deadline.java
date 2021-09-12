@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
-    static final String DEADLINE_STRING_FORMAT = "[D]%s (by: %s) %s";
+    static final String DEADLINE_STRING_FORMAT = "[D]%s (by: %s)%s";
     static final String DEADLINE_FILE_FORMAT = "D // %s // %s // %s";
     protected LocalDate by;
 

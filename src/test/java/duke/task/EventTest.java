@@ -24,13 +24,13 @@ public class EventTest {
     @Test
     public void testFileFormatConversion() {
         Event event = new Event("orientation", LocalDate.of(2021, 9, 1));
-        assertEquals("E / 0 / orientation / 2021-09-01", event.convertToFileFormat());
+        assertEquals("E // 0 // orientation // 2021-09-01 // ", event.convertToFileFormat());
     }
 
     @Test
     public void fileFormatConversion_doneTask_indicated() {
         Event event = new Event("orientation", LocalDate.of(2021, 9, 1));
         event.markAsDone();
-        assertEquals("E / 1 / orientation / 2021-09-01", event.convertToFileFormat());
+        assertEquals("E // 1 // orientation // 2021-09-01 // ", event.convertToFileFormat());
     }
 }

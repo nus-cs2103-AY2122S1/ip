@@ -49,21 +49,15 @@ public class Storage {
                     switch (parameters[0]) {
                     case "T":
                         ToDo toDo = new ToDo(parameters[2]);
-                        toDo.setDoneStatus(Integer.parseInt(parameters[1]));
-                        toDo.addTags(getTagsFromFile(parameters, 3));
-                        taskList.add(toDo);
+                        setParameters(toDo, parameters, 3, taskList);
                         break;
                     case "D":
                         Deadline deadline = new Deadline(parameters[2], LocalDate.parse(parameters[3]));
-                        deadline.setDoneStatus(Integer.parseInt(parameters[1]));
-                        deadline.addTags(getTagsFromFile(parameters, 4));
-                        taskList.add(deadline);
+                        setParameters(deadline, parameters, 4, taskList);
                         break;
                     case "E":
                         Event event = new Event(parameters[2], LocalDate.parse(parameters[3]));
-                        event.setDoneStatus(Integer.parseInt(parameters[1]));
-                        event.addTags(getTagsFromFile(parameters, 4));
-                        taskList.add(event);
+                        setParameters(event, parameters, 4, taskList);
                         break;
                     default:
                         break;
@@ -100,5 +94,10 @@ public class Storage {
         } else {
             return null;
         }
+    }
+    private void setParameters(Task task, String[] parameters, int tagsIndex, ArrayList<Task> taskList) {
+        task.setDoneStatus(Integer.parseInt(parameters[1]));
+        task.addTags(getTagsFromFile(parameters, tagsIndex));
+        taskList.add(task);
     }
 }
