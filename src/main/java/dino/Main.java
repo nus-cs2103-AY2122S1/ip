@@ -23,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDino(dino);
+            stage.setTitle("Manage your tasks with the help of Dino :D");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
