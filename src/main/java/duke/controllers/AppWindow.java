@@ -7,9 +7,11 @@ import duke.Augury;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
@@ -26,6 +28,8 @@ public class AppWindow extends VBox {
     private Button sendButton;
 
     private Augury augury;
+
+    private Image img = new Image(this.getClass().getResourceAsStream("/images/bird.png"));
 
     /**
      * Main window of the {@code Augury} GUI.
@@ -46,7 +50,7 @@ public class AppWindow extends VBox {
 
         String welcomeMessage = "Welcome to Augury!";
         dialogContainer.getChildren().add(
-                DialogBox.getAuguryDialog(welcomeMessage)
+            DialogBox.getAuguryDialog(welcomeMessage, img)
         );
     }
 
@@ -66,13 +70,50 @@ public class AppWindow extends VBox {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = augury.getResponse(input);
+        DialogBox auguryDialogBox;
+
+        if (input.trim().equals("")) {
+            return;
+        } else if (response.startsWith("ERR")) {
+            auguryDialogBox = DialogBox.getErrorDialog(response.substring(3), img);
+        } else {
+            auguryDialogBox = DialogBox.getAuguryDialog(response, img);
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input),
-                DialogBox.getAuguryDialog(response)
+                auguryDialogBox
         );
         userInput.clear();
+
         if (response.equals("The readiness is all.")) {
             Platform.exit();
         }
+    }
+
+    /**
+     * Creates a dialog box to display information about {@code Augury}.
+     * https://code.makery.ch/blog/javafx-dialogs-official/
+     */
+    @FXML
+    private void handleHelpButton() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About Augury");
+        alert.setHeaderText(null);
+        alert.setContentText(Augury.HELP_MESSAGE);
+        alert.getDialogPane().getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Creates a dialog box to handle settings of {@code Augury}.
+     */
+    @FXML
+    private void handleSettingsButton() {
+        SettingsWindow.showSettingsWindow(augury.getSettings());
+
+        scrollPane.getScene().getStylesheets().clear();
+        scrollPane.getScene().getStylesheets().add("/styles/augury_" + augury.getSettings().getTheme() + ".css");
     }
 }

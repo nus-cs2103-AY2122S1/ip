@@ -18,6 +18,8 @@ import duke.tasks.TaskList;
 public class Storage {
 
     private String path;
+    private String dataPath;
+    private String settingsPath;
 
     /**
      * Initializes a {@code Storage} instance to have a {@code String path}.
@@ -26,6 +28,8 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
+        this.dataPath = path + "/tasks.txt";
+        this.settingsPath = path + "/settings.txt";
     }
 
     /**
@@ -36,17 +40,22 @@ public class Storage {
      * @throws IOException If file cannot be found or written to
      */
     public void initializeTaskList(TaskList tasks) throws IOException {
-        String directory = "data";
-        File dir = new File(directory);
-        if (!dir.exists()) {
-            boolean dirCreated = dir.mkdir();
-            assert dirCreated;
-        }
-        File f = new File(path);
-        boolean fileCreated = f.createNewFile();
-        assert fileCreated;
-
+        createDirectory();
+        createFileAtPath(dataPath);
         loadTaskListFromStorage(tasks);
+    }
+
+    /**
+     * Initializes user {@code Settings} using data from the settings file.
+     * If settings file does not exist, {@code Storage} will attempt to create the directory and file.
+     *
+     * @param settings {@code Settings} instance to write data to
+     * @throws IOException If file cannot be found or written to
+     */
+    public void initializeSettings(Settings settings) throws IOException, AuguryException {
+        createDirectory();
+        createFileAtPath(settingsPath);
+        loadSettingsFromStorage(settings);
     }
 
     /**
@@ -57,13 +66,44 @@ public class Storage {
      */
     public void saveTaskListToStorage(TaskList tasks) throws AuguryException {
         try {
-            File f = new File(path);
+            File f = new File(dataPath);
             String s = convertTaskListToString(tasks);
-            writeStringToStorage(s);
+            writeStringToStorage(s, dataPath);
         } catch (IOException e) {
             e.printStackTrace();
             throw new FileIoException("File error occured");
         }
+    }
+
+    /**
+     * Saves the given {@code Settings} into the save file.
+     *
+     * @param settings {@code Settings} to read data from.
+     * @throws FileIoException If file cannot be found or written to
+     */
+    public void saveSettingsToStorage(Settings settings) throws AuguryException {
+        try {
+            File f = new File(settingsPath);
+            writeStringToStorage(settings.toString(), settingsPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new FileIoException("File error occured");
+        }
+    }
+
+    private void createDirectory() {
+        String directory = this.path;
+        File dir = new File(directory);
+        if (!dir.exists()) {
+            boolean dirCreated = dir.mkdir();
+            assert dirCreated;
+        }
+    }
+
+    private void createFileAtPath(String path) throws IOException {
+        File f = new File(path);
+        boolean fileCreated = f.createNewFile();
+        assert fileCreated;
     }
 
     private String convertTaskListToString(TaskList xs) {
@@ -80,7 +120,7 @@ public class Storage {
 
     private void loadTaskListFromStorage(TaskList t) throws IOException {
         // read tasks.txt
-        Scanner s = new Scanner(new File(path));
+        Scanner s = new Scanner(new File(dataPath));
         ArrayList<String> tasks = new ArrayList<>();
         while (s.hasNext()) {
             tasks.add(s.nextLine());
@@ -94,7 +134,17 @@ public class Storage {
         }
     }
 
-    private void writeStringToStorage(String s) throws IOException {
+    private void loadSettingsFromStorage(Settings settings) throws IOException, AuguryException {
+        // read settings.txt
+        Scanner s = new Scanner(new File(settingsPath));
+        String theme = "light";
+        while (s.hasNext()) {
+            theme = s.nextLine();
+        }
+        settings.setTheme(theme);
+    }
+
+    private void writeStringToStorage(String s, String path) throws IOException {
         FileWriter fw = new FileWriter(path);
         fw.write(s);
         fw.close();

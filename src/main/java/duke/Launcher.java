@@ -37,7 +37,7 @@ public class Launcher {
      * Initializes the {@code Augury} application in console mode.
      */
     private static void runConsole() throws AuguryException {
-        Augury a = new Augury("data/tasks.txt");
+        Augury a = new Augury("data");
         a.init();
         a.greet();
         a.loop();

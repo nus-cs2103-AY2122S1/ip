@@ -8,6 +8,7 @@ import duke.commands.ExitCommand;
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIoException;
 import duke.io.Parser;
+import duke.storage.Settings;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -24,19 +25,25 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private static final String VER = "v1.1.0"; // C-Friendlier-Syntax
+    private static final String VER = "v1.2.0"; // A-BetterGui
     private static final String WELCOME =
             "\t+-------------------------------+\n"
           + "\t| *                 *         * |\n"
-          + "\t|   (`<       augury     *      |\n"
+          + "\t|   ('<       augury     *      |\n"
           + "\t| __/_)_______________________  |\n"
           + "\t|   ||                      *   |\n"
           + "\t|   ||   a task manager         |\n"
           + "\t|      *             *          |\n"
           + "\t|             *         " + VER + "  |\n"
           + "\t+-------------------------------+";
+    public static final String HELP_MESSAGE =
+            "Augury is a task management application\n\n"
+          + "Type in your commands, such as 'list' to show all tasks, or 'todo shopping' to add a new task.\n\n"
+          + "To view full documentation of commands, please visit https://github.com/qreoct/ip\n\n"
+          + VER;
     private final TaskList taskList = new TaskList();
     private final Storage storage;
+    private final Settings settings;
     private final Ui ui;
     private final Parser parser;
 
@@ -50,6 +57,7 @@ public class Augury {
         ui = new Ui();
         this.storage = new Storage(path);
         this.parser = new Parser();
+        this.settings = new Settings(this.storage);
     }
 
     /**
@@ -61,6 +69,7 @@ public class Augury {
     public void init() throws AuguryException {
         try {
             this.storage.initializeTaskList(this.taskList);
+            this.storage.initializeSettings(settings);
         } catch (IOException e) {
             throw new FileIoException(e.getMessage());
         }
@@ -111,7 +120,24 @@ public class Augury {
             String result = command.execute(taskList, storage);
             return result;
         } catch (AuguryException e) {
-            return e.getMessage() + "\n\t Please try again.";
+            return "ERR" + e.getMessage() + "\n\t Please try again.";
         }
+    }
+
+    /**
+     * Returns the current Version of {@code Augury}, for debugging purposes.
+     *
+     * @return {@code String} representing version of {@code Augury}
+     */
+    public String getVer() {
+        return Augury.VER;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Settings getSettings() {
+        return this.settings;
     }
 }

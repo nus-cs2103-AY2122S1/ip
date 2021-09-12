@@ -12,7 +12,8 @@ public enum CommandTypes {
     MARKDONE("done"),
     DELETE("delete", "del", "rm"),
     MAKE("todo", "deadline", "event"),
-    FIND("find", "f");
+    FIND("find", "f"),
+    HELP("help", "faq", "h", "?");
 
     private final List<String> aliases;
 
