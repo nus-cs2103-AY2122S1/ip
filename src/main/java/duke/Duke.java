@@ -11,7 +11,7 @@ import duke.util.Ui;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-UserGuide. Add a User Guide to the project
+ * Current Progress: A-Release. Release Duke
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
