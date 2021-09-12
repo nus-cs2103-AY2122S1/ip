@@ -7,18 +7,17 @@ import command.exceptions.EmptyTaggerException;
 import command.exceptions.InvalidArgumentException;
 import command.exceptions.InvalidIndexException;
 import command.exceptions.InvalidTimeFormatException;
-import dialog.exceptions.DialogException;
 import dialog.TaskDialog;
-
+import dialog.exceptions.DialogException;
+import model.task.Deadline;
+import model.task.Event;
+import model.task.Todo;
+import model.vocab.DuplicateVocabException;
+import model.vocab.Vocab;
+import model.vocab.VocabList;
 import parser.Parser;
-
 import storage.Storage;
-
-import task.Deadline;
-import task.Event;
-import task.Todo;
-
-
+import storage.VocabularyStorage;
 import ui.ChatPage;
 import ui.Ui;
 
@@ -37,12 +36,11 @@ public class Command {
      * Different type of Command available
      */
     public enum CommandType {
-        TODO, DEADLINE, EVENT, LIST, DATE, FIND, DONE, DELETE, COMMANDS, BYE
+        TODO, DEADLINE, EVENT, LIST, DATE, FIND, DONE, DELETE, LEARN, UNLEARN, COMMANDS, BYE
     }
 
-    private String fullCommand;
-    private CommandType commandType;
-    private boolean isExit;
+    private final String fullCommand;
+    private final CommandType commandType;
 
     /**
      * Default constructor for Command.
@@ -54,84 +52,76 @@ public class Command {
     public Command(String fullCommand) {
         this.fullCommand = fullCommand;
         commandType = Parser.stringToCommand(fullCommand.split(" ")[0]);
-        isExit = commandType == CommandType.BYE;
-    }
-
-    /**
-     * Return whether the command given is of type Bye.
-     * The program is expected to exit if it runs on command line console.
-     *
-     * @return if the command is bye or not
-     */
-    public boolean isExit() {
-        return this.isExit;
     }
 
     /**
      * Execute the command according to its type
      *
-     * @param taskDialog taskDialog for the command to interact with
-     * @param storage    the storage for the command to interact with
-     * @throws DialogException dialog cannot have the same id while the app is running
-     * @throws IOException     if there is any error dealing with the system IO
+     * @param ui      the ui in which the command object is going to use to print output
+     * @param storage the storage for the command to save progress
      */
-    public void execute(TaskDialog taskDialog, Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         switch (commandType) {
         case LIST:
-            executeList(taskDialog);
+            executeList(ui);
             break;
         case DATE:
-            executeDate(taskDialog);
+            executeDate(ui);
             break;
         case FIND:
-            executeFind(taskDialog);
+            executeFind(ui);
             break;
         case TODO:
-            executeTodo(taskDialog);
+            executeTodo(ui);
             break;
         case DEADLINE:
-            executeDeadline(taskDialog);
+            executeDeadline(ui);
             break;
         case EVENT:
-            executeEvent(taskDialog);
+            executeEvent(ui);
             break;
         case DONE:
-            executeDone(taskDialog);
+            executeDone(ui);
             break;
         case DELETE:
-            executeDelete(taskDialog);
+            executeDelete(ui);
+            break;
+        case LEARN:
+            executeLearn(ui);
+            break;
+        case UNLEARN:
+            executeUnlearn(ui);
             break;
         case COMMANDS:
-            executeCommands(taskDialog);
+            executeCommands(ui);
             break;
         case BYE:
-            executeBye(taskDialog, storage);
+            executeBye(ui, storage);
         default:
             // UNREACHABLE: already checked via StringToCommand
             break;
         }
     }
 
-    private void executeList(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
-        chatPage.showCurrentList();
+    private void executeList(Ui ui) {
+        ui.getChatPage().showCurrentList();
     }
 
-    private void executeDate(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeDate(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
         try {
             if (fullCommand.split(" ").length == 1) {
                 throw new EmptyDescriptionException("The date of deadline cannot be empty.");
             }
             String dlString = fullCommand.substring(("date ").length());
-            chatPage.printAlicely(taskDialog.getFromDeadline(dlString).toString());
+            chatPage.printWithAlice(ui.getTaskDialog().getFromDeadline(dlString).toString());
         } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeFind(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeFind(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
         try {
             if (fullCommand.split(" ").length == 1) {
                 throw new EmptyDescriptionException("The keyword of find cannot be empty. Try using command " +
@@ -139,26 +129,26 @@ public class Command {
             }
             String kwString = fullCommand.substring(("find ").length());
 
-            chatPage.printAlicely(taskDialog.getFromKeyword(kwString).toString());
+            chatPage.printWithAlice(ui.getTaskDialog().getFromKeyword(kwString).toString());
         } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeTodo(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeTodo(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
         try {
             if (fullCommand.split(" ").length == 1) {
                 throw new EmptyDescriptionException("The description of a todo cannot be empty.");
             }
-            taskDialog.addTask(new Todo(fullCommand.substring(("todo ").length())));
+            chatPage.printWithAlice(ui.getTaskDialog().addTask(new Todo(fullCommand.substring(("todo ").length()))));
         } catch (DialogException | EmptyDescriptionException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeDeadline(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeDeadline(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
         try {
             if (fullCommand.split(" ").length == 1) {
                 throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
@@ -167,15 +157,15 @@ public class Command {
             }
             String dDescription = fullCommand.substring(("deadline ").length(), fullCommand.indexOf("/"));
             String by = fullCommand.substring(fullCommand.indexOf("/by ") + "/by ".length());
-            taskDialog.addTask(new Deadline(dDescription, by));
+            chatPage.printWithAlice(ui.getTaskDialog().addTask(new Deadline(dDescription, by)));
         } catch (DialogException | EmptyDescriptionException
                 | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeEvent(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeEvent(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
         try {
             if (fullCommand.split(" ").length == 1) {
                 throw new EmptyDescriptionException("The description of an event cannot be empty.");
@@ -184,70 +174,117 @@ public class Command {
             }
             String eDescription = fullCommand.substring(("event ").length(), fullCommand.indexOf("/"));
             String at = fullCommand.substring(fullCommand.indexOf("/at ") + "/at ".length());
-            taskDialog.addTask(new Event(eDescription, at));
+            chatPage.printWithAlice(ui.getTaskDialog().addTask(new Event(eDescription, at)));
         } catch (DialogException | EmptyDescriptionException
                 | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeDone(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
-        try {
-            if (fullCommand.split(" ").length == 1) {
-                throw new EmptyIndexException("The index of done cannot be empty.");
-            } else if (Integer.parseInt(fullCommand.split(" ")[1]) <= 0 ||
-                    Integer.parseInt(fullCommand.split(" ")[1]) > taskDialog.getTaskList().length()) {
-                if (taskDialog.getTaskList().length() == 0) {
-                    throw new InvalidIndexException("Looks like your list is currently empty.");
-                } else {
-                    throw new InvalidIndexException("Your list index can only be from 1 to "
-                            + taskDialog.getTaskList().length() + ".");
-                }
-            } else if (fullCommand.split(" ").length > 2) {
-                throw new InvalidArgumentException("The number of arguments seems to exceed for command done.");
+    private boolean isValidListIndexFormat(String fullCommand, TaskDialog taskDialog) {
+        if (fullCommand.split(" ").length == 1) {
+            throw new EmptyIndexException("The index of done cannot be empty.");
+        } else if (Integer.parseInt(fullCommand.split(" ")[1]) <= 0 ||
+                Integer.parseInt(fullCommand.split(" ")[1]) > taskDialog.getTaskList().length()) {
+            if (taskDialog.getTaskList().length() == 0) {
+                throw new InvalidIndexException("Looks like your list is currently empty.");
+            } else {
+                throw new InvalidIndexException("Your list index can only be from 1 to "
+                        + taskDialog.getTaskList().length() + ".");
             }
-            taskDialog.markTaskAsDone(Integer.parseInt(fullCommand.substring(("done ").length())) - 1);
+        } else if (fullCommand.split(" ").length > 2) {
+            throw new InvalidArgumentException("The number of arguments seems to exceed for command done.");
+        }
+        return true;
+    }
+
+    private void executeDone(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
+        TaskDialog taskDialog = ui.getTaskDialog();
+        try {
+            if (isValidListIndexFormat(fullCommand, taskDialog)) {
+                chatPage.printWithAlice(taskDialog.markTaskAsDone(Integer.parseInt(
+                        fullCommand.substring(("done ").length())) - 1));
+            }
         } catch (EmptyIndexException | InvalidArgumentException | DialogException | InvalidIndexException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeDelete(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeDelete(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
+        TaskDialog taskDialog = ui.getTaskDialog();
         try {
-            if (fullCommand.split(" ").length == 1) {
-                throw new EmptyIndexException("The index of delete cannot be empty.");
-            } else if (Integer.parseInt(fullCommand.split(" ")[1]) <= 0
-                    || Integer.parseInt(fullCommand.split(" ")[1]) > taskDialog.getTaskList().length()) {
-                if (taskDialog.getTaskList().length() == 0) {
-                    throw new InvalidIndexException("Looks like your list is currently empty.");
-                } else {
-                    throw new InvalidIndexException("Your list index can only be from 1 to "
-                            + taskDialog.getTaskList().length() + ".");
-                }
-            } else if (fullCommand.split(" ").length > 2) {
-                throw new InvalidArgumentException("The number of arguments seems to exceed for command delete.");
+            if (isValidListIndexFormat(fullCommand, taskDialog)) {
+                chatPage.printWithAlice(taskDialog.deleteTaskByIndex(Integer.parseInt(
+                        fullCommand.substring(("delete ").length())) - 1));
             }
-            taskDialog.deleteTaskByIndex(Integer.parseInt(fullCommand.substring(("delete ").length())) - 1);
         } catch (EmptyIndexException | InvalidArgumentException | DialogException | InvalidIndexException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeCommands(TaskDialog taskDialog) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeLearn(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
         try {
-            chatPage.printAlicely(Ui.getCommandListText());
+            if (fullCommand.split(" ").length == 1) {
+                throw new EmptyDescriptionException("The phrase for me to learn cannot be empty");
+            }
+            String phraseString = fullCommand.substring(("learn ").length());
+            VocabList vocabList = chatPage.getAlice().getVocabList();
+            if (VocabList.isDefaultPhrase(phraseString)) {
+                throw new DuplicateVocabException(phraseString + " is Alice's untouchable phrase!!, please choose "
+                        + "other phrase for Alice to learn");
+            } else if (vocabList.containsPhrase(phraseString)) {
+                throw new DuplicateVocabException(phraseString + " is what Alice already know!!, please choose "
+                        + "other phrase for Alice to learn");
+            }
+
+            chatPage.printWithAlice(Ui.getAskForFeedbackText(phraseString));
+            chatPage.getAlice().setPhraseToLearn(phraseString);
+            chatPage.setMode(ChatPage.Mode.LEARN);
+        } catch (EmptyDescriptionException | DialogException | DuplicateVocabException  e) {
+            chatPage.printError(e);
+        }
+    }
+
+    private void executeUnlearn(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
+        try {
+            if (fullCommand.split(" ").length == 1) {
+                throw new EmptyDescriptionException("The phrase for me to unlearn cannot be empty");
+            }
+            String phraseString = fullCommand.substring(("unlearn ").length());
+            VocabList vocabList = chatPage.getAlice().getVocabList();
+            if (VocabList.isDefaultPhrase(phraseString)) {
+                throw new DuplicateVocabException(phraseString + " is Alice's untouchable phrase!!, please choose "
+                        + "other phrase for Alice to unlearn");
+            } else if (!vocabList.containsPhrase(phraseString)) {
+                throw new DuplicateVocabException(phraseString + " is what Alice doesn't know!!, please choose "
+                        + "other phrase for Alice to unlearn");
+            }
+
+            vocabList.removePhrase(phraseString);
+            chatPage.printWithAlice(Ui.getUnlearnText(phraseString));
+
+        } catch (EmptyDescriptionException | DialogException | DuplicateVocabException  e) {
+            chatPage.printError(e);
+        }
+    }
+
+    private void executeCommands(Ui ui) {
+        ChatPage chatPage = ui.getChatPage();
+        try {
+            chatPage.printWithAlice(Ui.getCommandListText());
         } catch (DialogException e) {
             chatPage.printError(e);
         }
     }
 
-    private void executeBye(TaskDialog taskDialog, Storage storage) {
-        ChatPage chatPage = taskDialog.getChatPage();
+    private void executeBye(Ui ui, Storage storage) {
+        ChatPage chatPage = ui.getChatPage();
         try {
-            storage.save(taskDialog.getTaskList());
+            storage.save(ui.getTaskDialog().getTaskList());
             chatPage.exit();
         } catch (IOException e) {
             chatPage.printError(e);

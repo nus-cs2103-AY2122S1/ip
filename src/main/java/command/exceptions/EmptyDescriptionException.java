@@ -2,7 +2,7 @@ package command.exceptions;
 
 /**
  * Exception to do with Command to be thrown when the user does not input
- * a description when trying to create a task
+ * a description when trying to create a models.task
  */
 public class EmptyDescriptionException extends RuntimeException {
     /**

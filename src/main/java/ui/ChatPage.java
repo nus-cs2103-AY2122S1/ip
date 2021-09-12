@@ -26,8 +26,9 @@ import java.io.IOException;
  */
 public class ChatPage extends AnchorPane {
 
-    private Alice alice;
-    private String fileName;
+    public enum Mode {
+        DEFAULT, LEARN
+    }
 
     @FXML
     private ScrollPane scrollPane = new ScrollPane();
@@ -40,6 +41,8 @@ public class ChatPage extends AnchorPane {
     @FXML
     private AnchorPane anchorPaneReference;
 
+    private Alice alice;
+    private Mode mode;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
     private final Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/alice.png"));
@@ -50,32 +53,27 @@ public class ChatPage extends AnchorPane {
      */
     public ChatPage() {
         setActionToElements();
+        mode = Mode.DEFAULT;
     }
 
     /**
      * Constructor for the chat page.
      *
      * @param fileName the filename that the user has chosen
-     * @throws IOException     if there is anything wrong with the IO
-     * @throws DialogException Dialog with the sameId cannot exist at the same time while
-     *                         the app is running
+     * @throws IOException if there is anything wrong with the IO
      */
     ChatPage(String fileName) throws IOException {
-        this.fileName = fileName;
         this.alice = new Alice(fileName);
-        alice.getUi().getTaskDialog().setChatPage(this);
+        alice.getUi().setChatPage(this);
+        mode = Mode.DEFAULT;
         setActionToElements();
         printWelcomeText();
     }
 
     private void setActionToElements() {
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
         dialogContainer.heightProperty().addListener((observable)
                 -> scrollPane.setVvalue(1.0));
@@ -106,28 +104,18 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Setter for fileName of the chat page
-     *
-     * @param fileName name of file
-     */
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    /**
      * Setter for alice using a file name to automatically link alice
      * to the specified file.
      *
      * @param fileName name of file
      */
-    public void setAliceByFilename(String fileName) {
+    public void setUpByFileName(String fileName) {
         try {
             this.alice = new Alice(fileName);
-            alice.getTaskDialog().setChatPage(this);
+            alice.getUi().setChatPage(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -150,6 +138,10 @@ public class ChatPage extends AnchorPane {
         }
     }
 
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
+
     /**
      * Create label from String
      *
@@ -170,7 +162,13 @@ public class ChatPage extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(userInput.getText(), userImage)
         );
-        this.alice.execute(userInput.getText());
+        if (this.mode == Mode.DEFAULT) {
+            this.alice.execute(userInput.getText());
+        } else if (this.mode == Mode.LEARN) {
+            this.alice.learn(userInput.getText());
+        } else {
+            // MORE MODE IN FUTURE IMPLEMENTATION
+        }
         userInput.clear();
     }
 
@@ -187,7 +185,12 @@ public class ChatPage extends AnchorPane {
      * @param e exception to be print
      */
     public void printError(Exception e) {
-        dialogContainer.getChildren().add(DialogBox.getAliceDialog(Ui.getErrorText(e), aliceImage));
+        try {
+            dialogContainer.getChildren().add(DialogBox.getAliceDialog(Ui.getErrorText(e), aliceImage));
+        } catch (DialogException unexpectedException) {
+            dialogContainer.getChildren().add(DialogBox.getAliceDialog(unexpectedException.getMessage(), aliceImage));
+        }
+
     }
 
     /**
@@ -195,7 +198,7 @@ public class ChatPage extends AnchorPane {
      *
      * @param input string input to be printed
      */
-    public void printAlicely(String input) {
+    public void printWithAlice(String input) {
         dialogContainer.getChildren().add(DialogBox.getAliceDialog(input, aliceImage));
     }
 

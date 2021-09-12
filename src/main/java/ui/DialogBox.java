@@ -22,9 +22,9 @@ import java.util.Collections;
 public class DialogBox extends HBox {
 
     @FXML
-    private Label dialog;
+    private Label dialog = new Label();
     @FXML
-    private ImageView displayPicture;
+    private ImageView displayPicture = new ImageView();
 
     /**
      * Constructor for the dialog box
@@ -58,11 +58,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return a DialogBox object for user.
+     * Factory method for producing DialogBox
      *
-     * @param l  label to print as the message.
-     * @param iv image to use as the avatar.
-     * @return DialogBox for user.
+     * @param text the message to be printed in the DialogBox
+     * @param img  image to use as the avatar.
+     * @return DialogBox with message to the left and avatar to the right
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);

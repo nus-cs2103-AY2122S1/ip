@@ -1,4 +1,4 @@
-package task;
+package model.task;
 
 import java.util.ArrayList;
 
@@ -38,28 +38,28 @@ public class TaskList {
     }
 
     /**
-     * Add the task to the taskList
+     * Add the models.task to the taskList
      *
-     * @param task the task to be added.
+     * @param task the models.task to be added.
      */
     public void add(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Remove the task at given index
+     * Remove the models.task at given index
      *
-     * @param index index of the task to be removed
+     * @param index index of the models.task to be removed
      */
     public void remove(int index) {
         tasks.remove(index);
     }
 
     /**
-     * Return the task at specific index.
+     * Return the models.task at specific index.
      *
-     * @param index index of the task
-     * @return the task at that index
+     * @param index index of the models.task
+     * @return the models.task at that index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     public Task get(int index) throws IndexOutOfBoundsException {
@@ -85,14 +85,14 @@ public class TaskList {
     }
 
     /**
-     * Static helper method for manually adding the task to the specified taskList.
+     * Static helper method for manually adding the models.task to the specified taskList.
      *
-     * @param taskList    the taskList to add the task to
-     * @param type        the type of the task to be added to the taskList
-     * @param isDone      whether the task should be done or not
-     * @param description the description of the task
-     * @param time        if the task is subclass of time task specify the time in yyyy-MM-dd or put empty string or null for
-     *                    non time task
+     * @param taskList    the taskList to add the models.task to
+     * @param type        the type of the models.task to be added to the taskList
+     * @param isDone      whether the models.task should be done or not
+     * @param description the description of the models.task
+     * @param time        if the models.task is subclass of time models.task specify the time in yyyy-MM-dd or put empty string or null for
+     *                    non time models.task
      */
     public static void addTaskByType(TaskList taskList, TaskType type, boolean isDone, String description, String time) {
         switch (type) {
@@ -111,7 +111,7 @@ public class TaskList {
     }
 
     /**
-     * A list representation of the tasks numbered from 1 to the last task in the list
+     * A list representation of the tasks numbered from 1 to the last models.task in the list
      *
      * @return string representation of the list of tasks
      */

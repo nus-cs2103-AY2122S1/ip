@@ -1,4 +1,4 @@
-package task;
+package model.task;
 
 import java.util.Objects;
 
@@ -8,11 +8,11 @@ import java.util.Objects;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
+ * @version 0.03
  * @since 0.01
  */
 public abstract class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**
@@ -20,7 +20,7 @@ public abstract class Task {
      * Abstract Task cannot be created.
      * isDone is set to false by default.
      *
-     * @param description the description of the task
+     * @param description the description of the models.task
      */
     public Task(String description) {
         this.description = description;
@@ -31,8 +31,8 @@ public abstract class Task {
      * Default constructor for Task to be used by its subclasses for convenience.
      * Abstract Task cannot be created.
      *
-     * @param description the description of the task
-     * @param isDone      whether the task is done
+     * @param description the description of the models.task
+     * @param isDone      whether the models.task is done
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -42,7 +42,7 @@ public abstract class Task {
     /**
      * Getter for isDone.
      *
-     * @return isDone boolean of the task
+     * @return isDone boolean of the models.task
      */
     public boolean isDone() {
         return this.isDone;
@@ -51,7 +51,7 @@ public abstract class Task {
     /**
      * Getter for description.
      *
-     * @return description of the task
+     * @return description of the models.task
      */
     public String getDescription() {
         return this.description;
@@ -66,7 +66,7 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
-    /** mark the current task as done. */
+    /** mark the current models.task as done. */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -77,9 +77,9 @@ public abstract class Task {
     }
 
     /**
-     * Template: "[x] description" or "[ ] description" for done and not done task respectively.
+     * Template: "[x] description" or "[ ] description" for done and not done models.task respectively.
      *
-     * @return the template of the string representation of task
+     * @return the template of the string representation of models.task
      */
     @Override
     public String toString() {

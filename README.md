@@ -2,7 +2,7 @@
 ## _The Last Virtual Assistant You will ever need, Ever_
 
 
-alice.Alice is a virtual assistant started off as Duke task manager before evolving in to her own form.
+Alice is a virtual assistant started off as Duke task manager before evolving in to her own form.
 
 - Choose a save file by typing the save file name in
 - See your current task
