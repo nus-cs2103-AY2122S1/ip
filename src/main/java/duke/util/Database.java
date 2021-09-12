@@ -163,14 +163,11 @@ public class Database {
      */
     public Task parse(String string) {
         Task task;
-        boolean isDone = false;
         String[] str = string.split("&");
         for (int i = 0; i < str.length; i++) {
             str[i] = str[i].trim();
         }
-        if (str[1].equals("1")) {
-            isDone = true;
-        }
+        boolean isDone = isDone(str);
         String item;
         String time;
         switch (str[0]) {
@@ -202,5 +199,9 @@ public class Database {
         }
         return task;
     }
-    
+  
+    private boolean isDone(String[] str){
+        return (str[1].equals("1"));
+    }
+
 }
