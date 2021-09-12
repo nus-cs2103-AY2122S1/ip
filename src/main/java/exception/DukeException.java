@@ -69,12 +69,6 @@ public class DukeException extends Exception {
             customMessage = "OOPS!!! The period of an event cannot be empty!\n"
                     + "Remember to use the /at keyword.";
             break;
-        case MISSING_FIND_DATE:
-            customMessage = "OOPS!!! You need to specify a date!";
-            break;
-        case MISSING_FIND_KEYWORD:
-            customMessage = "OOPS!!! You need to specify a keyword!";
-            break;
         case MISSING_TODO_DESC:
             customMessage = "OOPS!!! The description of a todo cannot be empty!";
             break;
