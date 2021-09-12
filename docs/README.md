@@ -1,4 +1,4 @@
-<img src="/Ui.png" alt="Duke" width="300"/>
+![Duke](Ui.png)
 
 # User Guide
 
