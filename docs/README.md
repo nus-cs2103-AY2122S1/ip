@@ -1,6 +1,39 @@
-# User Guide
+###Table of contents
+1. [Introduction](#introduction)
+2. [Quick Start](#quick-start)
+3. [Features](#features)
+4. [Commands and Usage](#commands)
+    
+    4.1. [Create a todo](#todo)
+   
+    4.2. [Create an event](#event)
+   
+    4.3. [Create a deadline](#deadline)
+   
+    4.4. [List all tasks](#list)
+   
+    4.5. [Delete task](#delete)
+   
+    4.6. [Complete task](#done)
+   
+    4.7. [Find task with keyword](#find)
+   
+    4.8. [Reschedule task](#snooze)
 
-## Features 
+    4.9. [Exit Duke](#bye)
+5. [Command Summary](#summary)
+
+##Introduction<a name="introduction"></a>
+Duke is a task management desktop application to track your tasks. It has a variety of features to help you better manage your tasks. 
+Duke is optimized for users who prefer to type out their commands rather than 
+
+##Quick Start<a name="quick-start"></a>
+Ensure you have Java 11 or above installed in your Computer.
+Download the jar file [here](www.google.com)!
+Copy the file to the folder you want to use as the home folder for your todo list.
+Double-click the file to start the app. The GUI should appear in a few seconds.
+
+## Features<a name="features"></a>
 
 ### Create Task
 
@@ -26,10 +59,10 @@ You can `list` all the tasks that you have recorded.
 
 You can `snooze` a task to reschedule it to a different period. 
 
-## Commands and Usage
+## Commands and Usage<a name="commands"></a>
 
 
-### `todo` - Creates a todo task
+### `todo` - Creates a todo task<a name="todo"></a>
 
 Format: `todo {description of the task}`
 
@@ -44,7 +77,7 @@ Got it. I've added this task:
 Now you have 1 tasks in your list.    
 ```
 
-### `deadline` - Creates a task with a deadline
+### `deadline` - Creates a task with a deadline<a name="deadline"></a>
 
 Format: `deadline {description} /by {time with format: dd/mm/yyyy hhmm}`
 `hhmm is optional.`
@@ -59,7 +92,7 @@ Got it. I've added this task:
     [D][ ] homework (by: 02 Feb 2022 22:22)
 Now you have 2 tasks in your list.    
 ```
-### `event` - Creates an event
+### `event` - Creates an event<a name="event"></a>
 
 Format: `event {description} /at {time with format: dd/mm/yyyy hhmm}`
 `hhmm is optional.`
@@ -75,7 +108,7 @@ Got it. I've added this task:
 Now you have 3 tasks in your list.    
 ```
 
-### `delete` - Deletes a task
+### `delete` - Deletes a task<a name="delete"></a>
 
 Format: `delete {index of task}`
 
@@ -89,7 +122,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in your list.
 ```
 
-### `done` - Sets a task as completed
+### `done` - Sets a task as completed<a name="done"></a>
 
 Format: `done {index of task}`
 
@@ -102,7 +135,7 @@ Nice! I've marked this task as done:
     [D][X] homework (by: 2/2/2022 22:22)
 ```
 
-### `find` - Finds tasks with the keyword
+### `find` - Finds tasks with the keyword<a name="find"></a>
 
 Format: `find {keyword}`
 
@@ -115,7 +148,7 @@ Here are the matching tasks in your list:
     1. [D][X] homework (by: 2/2/2022 22:22)
 ```
 
-### `snooze` - Reschedules your task to a different time
+### `snooze` - Reschedules your task to a different time<a name="snooze"></a>
 
 Format: `snooze {index of task} /to {time with format: dd/mm/yyyy hhmm}`
 `hhmm is optional.`
@@ -129,7 +162,7 @@ You have snoozed this task:
     [D][ ] homework (by: 2/2/2022 22:22) to:
     [D][ ] homework (by: 2/2/2122 00:00)
 ```
-### `bye` - Exit Duke
+### `bye` - Exit Duke<a name="bye"></a>
 
 Format: `bye`
 
@@ -137,13 +170,13 @@ Example of usage: `bye`
 
 Expected outcome: Duke terminates.
 
-Command Summary
+Command Summary<a name="summary"></a>
 
 Feature | Command
 ------------ | -------------
-Create a `todo` task | `todo {description of the task}`
-Create a `deadline` task | `deadline {description} /by {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
-Create an `event` task | `event {description} /at {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
+Create a todo task | `todo {description of the task}`
+Create a deadline task | `deadline {description} /by {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
+Create an event task | `event {description} /at {time with format: dd/mm/yyyy hhmm} hhmm is optional.`
 Delete a task | `delete {index of task}`
 Complete a task | `done {index of tasks}`
 Find tasks using keyword | `find {keyword}`
