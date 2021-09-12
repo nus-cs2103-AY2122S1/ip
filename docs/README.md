@@ -27,6 +27,16 @@ Graphical User Interface (GUI) to show the output.
 
 ## Features
 
+Note:
+
+* Please follow the exact format given
+* Items in `[]` bracket are for user inputs
+    * e.g. for `deadline [description] /by [dd/MM/yy] [HHmm]`, user can input `deadline test deadline /by 1/5/20 1658`
+* Items in `<>` bracket are optional user inputs
+    * e.g. for `sort <-r>`, user can either input `sort` or `sort -r`
+
+<br/>
+
 ### Viewing Help: `help`
 
 Show the help message, which contains some information about the app.
@@ -143,7 +153,7 @@ Note:
 
 Sorts the list by date and time.
 
-Format: `sort [-r]`
+Format: `sort <-r>`
 
 Note:
 
