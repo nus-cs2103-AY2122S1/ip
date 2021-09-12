@@ -37,6 +37,10 @@ public abstract class Task {
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     protected void setIsDone(Boolean done) {
         this.isDone = done;
     }
@@ -48,5 +52,21 @@ public abstract class Task {
         } else {
             return "[ ] " + description;
         }
+    }
+    
+    /**
+     * Checks if an object is equal to this task.
+     * The object is equal if and only if it is a task of the same type, with the same description
+     *
+     * @param obj Object to compare to this task.
+     * @return Whether object is equal to this task.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            Task other = (Task) obj;
+            return description.equals(other.getDescription());
+        }
+        return false;
     }
 }

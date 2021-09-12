@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import katheryne.task.Task;
+import katheryne.task.Todo;
 
 /**
  * A container for tasks which contains Katheryne's tasks.
@@ -20,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Add a task to this list
+     * Adds a task to this list
      *
      * @param t
      */
@@ -58,6 +59,13 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Gets the task at the index given in the task list. Note that this method may
+     * throw errors if index is out of bounds.
+     * 
+     * @param index
+     * @return
+     */
     public Task getTask(int index) {
         return lst.get(index);
     }
@@ -70,8 +78,17 @@ public class TaskList {
         return lst.size();
     }
 
-    // for Jackson to deserialize
+    // for Jackson to deserialize the task list
     protected ArrayList<Task> getList() {
         return lst;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TaskList) {
+            TaskList taskList = (TaskList) obj;
+            return this.lst.equals(taskList.getList());
+        }
+        return false;
     }
 }

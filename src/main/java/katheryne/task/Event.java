@@ -31,6 +31,10 @@ public class Event extends Task {
         this.dateAt = dateAt;
     }
 
+    public LocalDate getDateAt() {
+        return dateAt;
+    }
+
     /**
      * Returns a formatted string for the date of the event in the pattern MMM D YYYY
      *
@@ -47,5 +51,21 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[Event]    " + super.toString() + " (at: " + stringAt + ")";
+    }
+
+    /**
+     * Checks if an object is equal to this event. It is equal if and only if it is an event with
+     * the same description and date at
+     *      
+     * @param obj Object to compare to this task.
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event o = (Event) obj;
+            return this.dateAt.equals(o.getDateAt()) ? super.equals(obj) : false;
+        }
+        return false;
     }
 }
