@@ -23,7 +23,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 2. Type the command in the CLI and press Enter to execute it. Try adding your first task!
 
 ### GUI
-1. To run the GUI, run `tauBot.Launcher.main()`. The GUI similar to this should appear in a few seconds:
+1. To run the GUI, run `tauBot.Launcher.main()`. The GUI similar to this should appear in a few seconds:  
+
 ![Screenshot 2021-09-12 at 12 39 56 PM](https://user-images.githubusercontent.com/61085398/132972393-841cfde1-c4aa-4f4a-b18f-adfa6d86ee3d.png)
 2. Type the command in the GUI message field and press Enter to execute it. Try adding your first task! 
 
