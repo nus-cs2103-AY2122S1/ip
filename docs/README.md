@@ -11,7 +11,7 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
 3. Copy the file to the folder you want to use as the home folder for your task list.
 4. Double-click the file to start the app. The GUI should be similar to below.
 
-<img src="/Users/xiaoyunwu/Library/Application Support/typora-user-images/image-20210912130909497.png" alt="image-20210912130909497" style="zoom: 33%;" />
+<img src="https://github.com/Xiaoyunnn/ip/blob/master/docs/DefaultGUI.png?raw=true" style="zoom: 33%;" />
 
 5. Type the command in the command box and press Enter to execute it. You can try the follow example commands:
     -  `help`: Shows the list of available command and example usages.
@@ -30,7 +30,7 @@ Displays a list of available commands with example usage.
 
 Format: `help`
 
-<img src="/Users/xiaoyunwu/Documents/NUS/CS2103T/ip/docs/HelpGUI.png" alt="HelpGUI" style="zoom:33%;" />
+<img src="https://github.com/Xiaoyunnn/ip/blob/master/docs/HelpGUI.png?raw=true" alt="HelpGUI" style="zoom:33%;" />
 
 
 
@@ -162,7 +162,7 @@ Example:
 
 - `find meeting`
 
-<img src="/Users/xiaoyunwu/Documents/NUS/CS2103T/ip/docs/FindGUI.png" alt="FindGUI" style="zoom:33%;" />
+<img src="https://github.com/Xiaoyunnn/ip/blob/master/docs/FindGUI.png?raw=true" alt="FindGUI" style="zoom:33%;" />
 
 
 
