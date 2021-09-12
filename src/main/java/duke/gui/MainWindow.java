@@ -69,6 +69,7 @@ public class MainWindow extends AnchorPane {
             });
             pause.play();
         }
+        //@@author
         userInput.clear();
     }
 }
