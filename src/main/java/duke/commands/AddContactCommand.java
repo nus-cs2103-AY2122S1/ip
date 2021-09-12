@@ -1,15 +1,18 @@
 package main.java.duke.commands;
 
-import main.java.duke.*;
-import main.java.duke.extensions.Contact;
-
 import java.io.IOException;
+
+import main.java.duke.DukeException;
+import main.java.duke.MainWindow;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.extensions.Contact;
 
 /**
  * A command that adds a new contact to the contact list.
  */
 public class AddContactCommand extends ContactCommand {
-    private Contact contact;
+    private final Contact contact;
 
     /**
      * Constructs a new add contact command with the given contact.

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 //Reused from https://se-education.org/guides/tutorials/javaFx.html
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/data/tasks.txt", "src/main/data/contacts.txt");
+    private final Duke duke = new Duke("src/main/data/tasks.txt", "src/main/data/contacts.txt");
 
     @Override
     public void start(Stage stage) {

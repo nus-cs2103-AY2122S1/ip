@@ -33,7 +33,7 @@ public class Storage {
      */
     private Task stringToTask(String s) {
         boolean isDone = false;
-        if (s.substring(4, 7).equals("[X]")) {
+        if (s.startsWith("[X]", 4)) {
             isDone = true;
         }
         Task task;
@@ -43,7 +43,7 @@ public class Storage {
             String name = s.split(":")[0].substring(8);
             String date = s.split(":")[1];
             task = new Deadline(name, date);
-        } else if (s.startsWith("[E]")){
+        } else if (s.startsWith("[E]")) {
             String name = s.split(":")[0].substring(8);
             String time = s.split(":")[1];
             task = new Event(name, time);
@@ -62,8 +62,8 @@ public class Storage {
      * Loads stored tasks from text file
      *
      * @return the list of tasks stored in file
-     * @throws DukeException
-     * @throws IOException
+     * @throws DukeException duke exception
+     * @throws IOException IO exception
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -87,10 +87,10 @@ public class Storage {
      * Writes a task to the text file
      *
      * @param taskString content of the task
-     * @throws IOException
+     * @throws IOException IO exception
      */
     public void saveTaskToFile(String taskString) throws IOException {
-        FileWriter writer = new FileWriter(new File(this.filePath), true);
+        FileWriter writer = new FileWriter(this.filePath, true);
         writer.append(taskString);
         writer.flush();
         writer.close();
@@ -102,19 +102,19 @@ public class Storage {
      * @param num the index of the task in the list
      * @param scanner scanner for the text file
      * @param tasks the task list
-     * @throws IOException
+     * @throws IOException IO exception
      */
     public void deleteTaskFromFile(int num, Scanner scanner, TaskList tasks) throws IOException {
 
         Task task = tasks.taskList.get(num - 1);
-        String fileString = "";
+        StringBuilder fileString = new StringBuilder();
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            fileString += input + "\n";
+            fileString.append(input).append("\n");
         }
         System.out.println(task.toString());
-        String newFile = fileString.replace(task.toString(), "");
-        FileWriter writer = new FileWriter(new File(this.filePath));
+        String newFile = fileString.toString().replace(task.toString(), "");
+        FileWriter writer = new FileWriter(this.filePath);
         writer.write(newFile);
         writer.flush();
         writer.close();
@@ -125,18 +125,18 @@ public class Storage {
      * @param num the index of the task in the list
      * @param scanner scanner for the file
      * @param tasks the given tasks list
-     * @throws IOException
+     * @throws IOException IO exception
      */
     public void markAsDoneInFile(int num, Scanner scanner, TaskList tasks) throws IOException {
         Task task = tasks.taskList.get(num - 1);
-        String fileString = "";
+        StringBuilder fileString = new StringBuilder();
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            fileString += input + "\n";
+            fileString.append(input).append("\n");
         }
         System.out.println(task.toString());
-        String newFile = fileString.replace(task.toString(), task.toString().replace("[ ]", "[X]"));
-        FileWriter writer = new FileWriter(new File(this.filePath));
+        String newFile = fileString.toString().replace(task.toString(), task.toString().replace("[ ]", "[X]"));
+        FileWriter writer = new FileWriter(this.filePath);
         writer.write(newFile);
         writer.flush();
         writer.close();

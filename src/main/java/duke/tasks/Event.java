@@ -51,27 +51,6 @@ public class Event extends Task {
     }
 
     /**
-     * Shows the prefix of the event
-     * @return the prefix
-     */
-    @Override
-    public String showPrefix() {
-        return this.prefix;
-    }
-
-    /**
-     * Prints out the relevant info of the event
-     */
-    @Override
-    public void showThisTask() {
-        if (canBeFormattedDateTime(this.time)) {
-            System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.timeFormatted + ")");
-        } else {
-            System.out.println(this.prefix + super.showStatus() + this.name + "(at:" + this.time + ")");
-        }
-    }
-
-    /**
      * Marks an event as done and print out relevant information.
      */
     @Override

@@ -1,8 +1,11 @@
 package main.java.duke.commands;
-import main.java.duke.*;
 
 import java.io.IOException;
-import javafx.application.Platform;
+
+import main.java.duke.DukeException;
+import main.java.duke.MainWindow;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
 
 /**
  * A command that says bye to user.
@@ -25,9 +28,5 @@ public class ExitCommand extends Command {
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         return ("Bye! Neko wishes to see you again soon!\n");
-    }
-
-    public boolean isExit() {
-        return true;
     }
 }

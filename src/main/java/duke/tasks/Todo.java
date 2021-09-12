@@ -15,25 +15,9 @@ public class Todo extends Task {
         this.prefix = "[T]";
     }
 
-    /**
-     * Shows the prefix of the todo
-     * @return the prefix
-     */
-    @Override
-    public String showPrefix() {
-        return this.prefix;
-    }
-
     @Override
     public String toString() {
         return (this.prefix + " " + super.showStatus() + this.name + "\n");
     }
 
-    /**
-     * print out the relevant info of the todo
-     */
-    @Override
-    public void showThisTask() {
-        System.out.println(this.prefix + super.showStatus() + this.name);
-    }
 }

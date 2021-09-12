@@ -1,5 +1,7 @@
 package main.java.duke;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +14,6 @@ import javafx.scene.layout.VBox;
 import main.java.duke.commands.Command;
 import main.java.duke.commands.ContactCommand;
 import main.java.duke.commands.ExitCommand;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -74,26 +74,25 @@ public class MainWindow extends AnchorPane {
     //Reused from https://se-education.org/guides/tutorials/javaFx.html
     protected String getResponse(String input) throws DukeException, IOException {
         String response = "";
-            try {
-                String fullCommand = readCommand();
-                Command c = Parser.parse(fullCommand);
-                if (c instanceof ExitCommand) {
-                    System.exit(0);
-                } else if (c instanceof ContactCommand) {
-                    response = c.execute(duke.contacts, duke.gui, duke.contactsStorage);
-                } else {
-                    response = c.execute(duke.tasks, duke.gui, duke.tasksStorage);
-                }
-            }  catch (IOException e) {
-                e.printStackTrace();
+        try {
+            String fullCommand = readCommand();
+            Command c = Parser.parse(fullCommand);
+            if (c instanceof ExitCommand) {
+                System.exit(0);
+            } else if (c instanceof ContactCommand) {
+                response = c.execute(duke.contacts, duke.gui, duke.contactsStorage);
+            } else {
+                response = c.execute(duke.tasks, duke.gui, duke.tasksStorage);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return response;
     }
 
     /**
      * Shows welcome message and creates scanner for user input.
-     * @return the welcome message
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
@@ -104,7 +103,6 @@ public class MainWindow extends AnchorPane {
     /**
      * Displays the error message.
      * @param error the error message
-     * @return the error message
      */
     public void showError(String error, String input) {
         dialogContainer.getChildren().addAll(

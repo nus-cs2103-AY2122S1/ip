@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import main.java.duke.*;
+import main.java.duke.DukeException;
+import main.java.duke.MainWindow;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
 import main.java.duke.tasks.Task;
 
 /**
@@ -38,10 +41,6 @@ public class DoneCommand extends Command {
             storage.markAsDoneInFile(taskNum, newSc, tasks);
             return completeTask(taskList.get(taskNum - 1));
         }
-    }
-
-    public boolean isExit() {
-        return false;
     }
 
     /**

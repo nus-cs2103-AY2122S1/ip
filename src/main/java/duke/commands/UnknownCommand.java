@@ -1,6 +1,9 @@
 package main.java.duke.commands;
 
-import main.java.duke.*;
+import main.java.duke.DukeException;
+import main.java.duke.MainWindow;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
 
 /**
  * An unknown command that will be responded with a sorry message.
@@ -24,9 +27,5 @@ public class UnknownCommand extends Command {
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws DukeException {
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
-
-    public boolean isExit() {
-        return false;
     }
 }

@@ -51,16 +51,6 @@ public class Deadline extends Task {
         return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
-    /**
-     * Shows the prefix of the deadline
-     *
-     * @return the prefix
-     */
-    @Override
-    public String showPrefix() {
-        return this.prefix;
-    }
-
     @Override
     public String toString() {
         if (canBeFormattedDate(this.date)) {
@@ -69,19 +59,6 @@ public class Deadline extends Task {
             return (this.prefix + super.showStatus() + this.name + ":" + this.date + "\n");
         }
 
-    }
-
-    /**
-     * Prints out the relevant info of the deadline task
-     */
-    @Override
-    public void showThisTask() {
-        if (canBeFormattedDate(this.date)) {
-            System.out.println(this.prefix + super.showStatus()
-                    + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM dd uuuu")) + ")");
-        } else {
-            System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
-        }
     }
 
     /**

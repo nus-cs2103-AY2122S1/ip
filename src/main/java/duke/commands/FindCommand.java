@@ -1,14 +1,14 @@
 package main.java.duke.commands;
 
-import main.java.duke.MainWindow;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import main.java.duke.MainWindow;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.tasks.Task;
 
 /**
  * A command that looks for tasks with keyword given from the task list.

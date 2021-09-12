@@ -1,5 +1,17 @@
 package main.java.duke;
-import main.java.duke.commands.*;
+import main.java.duke.commands.AddCommand;
+import main.java.duke.commands.AddContactCommand;
+import main.java.duke.commands.Command;
+import main.java.duke.commands.DeleteCommand;
+import main.java.duke.commands.DeleteContactCommand;
+import main.java.duke.commands.DoneCommand;
+import main.java.duke.commands.ExitCommand;
+import main.java.duke.commands.FindCommand;
+import main.java.duke.commands.FindContactCommand;
+import main.java.duke.commands.ListCommand;
+import main.java.duke.commands.ListContactsCommand;
+import main.java.duke.commands.OnDateCommand;
+import main.java.duke.commands.UnknownCommand;
 import main.java.duke.extensions.Contact;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
@@ -24,7 +36,7 @@ public class Parser {
         int firstBlankIndex = userInput.indexOf(" ");
         String commandWord; if (firstBlankIndex == -1) {
             commandWord = userInput;
-        }  else {
+        } else {
             commandWord = userInput.substring(0, firstBlankIndex);
         }
         switch (commandWord) {

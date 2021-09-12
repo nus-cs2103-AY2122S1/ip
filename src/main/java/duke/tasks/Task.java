@@ -38,21 +38,6 @@ public class Task {
         }
     }
 
-    /**
-     * show the prefix of the task
-     * @return the prefix
-     */
-    public String showPrefix() {
-        return this.prefix;
-    }
-
-    /**
-     * print out the relevant info of the task
-     */
-    public void showThisTask() {
-        System.out.println(this.prefix + showStatus() + this.name);
-    }
-
     public String getName() {
         return this.name;
     }

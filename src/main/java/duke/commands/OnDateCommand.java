@@ -3,7 +3,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import main.java.duke.*;
+import main.java.duke.MainWindow;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
@@ -31,7 +33,7 @@ public class OnDateCommand extends Command {
      * @param storage given storage object
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) {
-            return identifyTasksByDate(dateString, tasks);
+        return identifyTasksByDate(dateString, tasks);
     }
 
     private String identifyTasksByDate(String dateString, TaskList tasks) {
@@ -61,9 +63,5 @@ public class OnDateCommand extends Command {
             message.append(task.toString());
         }
         return message.toString();
-    }
-
-    public boolean isExit() {
-        return false;
     }
 }
