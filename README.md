@@ -16,9 +16,7 @@ Track tasks like never before with its checklist and categorical system.
 1. Simply double click the jar file to get started!
 
 ## New Updates
-Updates that you can look forward to! 😉
+Latest updates! 😉
 - [x] New updated GUI
 - [x] Profile Pictures
-- [ ] Reminders
-
-That's all for now, watch this space for more updates!
+- [x] Shorthand Notation
