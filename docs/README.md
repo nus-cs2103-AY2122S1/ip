@@ -15,7 +15,7 @@
 ## Features 
 
 List of features:
-  1. [todo](#quickstart)
+  1. [todo](#adding-a-todo)
   2. deadline
   3. event
   4. delete
