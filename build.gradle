@@ -33,7 +33,6 @@ dependencies {
 
 javafx {
     version = "15.0.1"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 test {
@@ -51,12 +50,12 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "dac.DaC"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "2.0"
+    archiveBaseName = "dac"
+    archiveVersion = "3.0"
     archiveClassifier = null
 }
 

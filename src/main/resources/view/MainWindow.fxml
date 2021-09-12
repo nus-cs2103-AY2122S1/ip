@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="duke.gui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="dac.gui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="1.0" layoutY="756.0" onAction="#handleUserInput" prefHeight="40.0" prefWidth="432.0" AnchorPane.bottomAnchor="4.0" />
-        <Button fx:id="sendButton" layoutX="440.0" layoutY="756.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: black; -fx-font-weight: bold; -fx-background-color: white;" text="Send" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="503.0">
+        <TextField fx:id="userInput" layoutX="1.0" layoutY="756.0" onAction="#handleUserInput" prefHeight="40.0" prefWidth="432.0" style="-fx-font-family: Arial; -fx-font-size: 12;" AnchorPane.bottomAnchor="4.0" />
+        <Button fx:id="sendButton" layoutX="440.0" layoutY="756.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: black; -fx-font-weight: bold; -fx-background-color: white; -fx-font-family: Arial;" text="Send" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="503.0">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor></Button>

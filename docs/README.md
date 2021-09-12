@@ -1,11 +1,10 @@
 # User Guide
 
-Dog-and-Cat (DaC) is a chat-bot that keeps track of a list of tasks.
 
-GUI contains 2 columns:
+Dog-and-Cat (DaC) consists of 2 columns:
 * Left column is the chat screen
   * Input your instructions here
-* Right column is the list of tasks
+* Right column is your list of tasks
   * Displays all the tasks in the task list unless otherwise stated
 in the feature description
 
@@ -19,16 +18,18 @@ DaC would automatically create the file if it does not exist.
 #### Notes:
 * (): brackets mean that you are free to write anything you want,
 but it must not be empty and must follow the input format if 
-specified
-* []: square brackets mean that these parts are optional
+specified.
+* []: square brackets mean that these parts are optional.
 * All commands must follow the examples given aside from text in
-()
+().
 * Commonly used input formats:
   * YYYY-MM-DD: input is in the form of (year)-(month)-(days)
   and each letter represents a numerical value. Note that
   the dashes are required.
   * HHmm: input is in the 24hr format where HH is the hour and
   mm is the minutes
+
+
 ### 1. Adding tasks
 
 Adds a task to the task list.
@@ -101,5 +102,5 @@ in a specific order and format.
 not be saved.
 
 
-Hope you enjoy using DaC!!! :-) 
+__*Hope you enjoy using DaC!!!*__
 
