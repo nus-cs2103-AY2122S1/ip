@@ -20,11 +20,11 @@ public class Ui {
      */
     public static String welcomeMessage() {
         System.out.println(
-                "Yo! duke.Duke here \n"
+                "Yo! Duke here \n"
                         + "What did you call me for? \n"
                         + "It better be something useful or else... \n"
         );
-        return "Yo! duke.Duke here \n"
+        return "Yo! Duke here \n"
                 + "What did you call me for? \n"
                 + "It better be something useful or else... \n";
     }
