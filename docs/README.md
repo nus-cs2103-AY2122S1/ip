@@ -1,5 +1,16 @@
 # User Guide
 
+FullOfBugs is a desktop app for you to manage tasks using a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface. (GUI) If you can type fast, FullOfBugs will help you organise your tasks quicker than traditional GUI apps.
+
+## Quick Start
+
+1. Ensure you have Java 11 installed on your computer for your operating system. If you do not have Java 11 installed, you may visit the following link to do so: https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html
+2. Download FullOfBugs.jar from [here](https://github.com/XXJJXJ/ip/releases).
+3. Copy FullOfBugs.jar to a folder you want.
+4. Double-click on FullOfBugs.jar to start FullOfBugs.
+5. Type in commands into the text box and hit Enter or Send to start using FullOfBugs.
+6. Refer to the Features section below to learn what commands you can use in FullOfBugs.
+
 ## Features 
 
 ### Todo
@@ -26,6 +37,10 @@ Marks a task at specified index as done.
 
 Deletes a tasks at specified index.
 
+### Find
+
+Finds a task based on keywords provided
+
 ### Sort
 
 Sorts all tasks in chronological order with the earliest at the top and latest at the bottom.
@@ -44,7 +59,7 @@ Exits the program
 
 Example of usage: 
 
-`todo <Description>`
+`todo (Description of task)`
 
 Examples:
 
@@ -64,7 +79,7 @@ Now you have 1 task in the list.
 
 Example usage:
 
-`deadline <Description> /by <Date> <Time>` - Date must be in YYYY-MM-DD format and Time in 24h format.
+`deadline (Description of task) /by (Date) (Time)` - Date must be in YYYY-MM-DD format and Time in 24h format.
 
 Examples:
 
@@ -87,7 +102,9 @@ Now you have 2 tasks in the list.
 
 Example usage:
 
-`event <Description> /at <Date> <Time>` - Date must be in YYYY-MM-DD format and Time in 24h format.
+`event (Description of task) /at (Date) (Time)` - Date must be in YYYY-MM-DD format and Time in 24h format.
+
+Examples:
 
 `event John's birthday /at 2021-08-21 0800` - Adds an event for "John's birthday" at 21st Aug 2021 8am
 
@@ -122,7 +139,7 @@ Your current tasks are:
 
 Example usage:
 
-`done <Number>` - Number should be a valid number shown on the list.
+`done (Number)` - Number should be a valid number shown on the list.
 
 Example:
 
@@ -141,7 +158,7 @@ Nice! I've marked this task as done:
 
 Example usage:
 
-`delete <Number>` - Number should be a valid number shown on the list.
+`delete (Number)` - Number should be a valid number shown on the list.
 
 Example:
 
@@ -163,6 +180,25 @@ Using `list` again gives the following outcome:
 Your current tasks are:
 1. [T][ ] Go jogging
 2. [E][ ] John's birthday (at: Aug 21 2021 8:00AM)
+```
+
+### `f` or `find` - Finds the task(s) that contains the keywords provided
+
+Example Usage:
+
+`find (Keyword)` - Finds the task that contains the <Keyword> in the description 
+
+Examples: 
+
+`find jogging` - Finds the task that contains "jogging" in the description.
+
+`f jogging` - Returns the same output as the command above.
+
+Expected outcome:
+
+```
+Here are the matching tasks in your list:
+1. [T][ ] Go jogging
 ```
 
 ### `sort` - Sorts the task list chronologically
