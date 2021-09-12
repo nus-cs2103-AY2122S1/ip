@@ -1,7 +1,6 @@
 package duke.gui;
 
 import duke.Duke;
-import duke.TaskList;
 import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
