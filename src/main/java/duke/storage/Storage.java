@@ -46,9 +46,11 @@ public class Storage {
     }
 
     /**
+     * Initializes user {@code Settings} using data from the settings file.
+     * If settings file does not exist, {@code Storage} will attempt to create the directory and file.
      *
-     * @param settings
-     * @throws IOException
+     * @param settings {@code Settings} instance to write data to
+     * @throws IOException If file cannot be found or written to
      */
     public void initializeSettings(Settings settings) throws IOException, AuguryException {
         createDirectory();
@@ -96,12 +98,14 @@ public class Storage {
             boolean dirCreated = dir.mkdir();
             assert dirCreated;
         }
+        System.out.println("directory created " + dir.toString());
     }
 
     private void createFileAtPath(String path) throws IOException {
         File f = new File(path);
         boolean fileCreated = f.createNewFile();
         assert fileCreated;
+        System.out.println("file created " + f.toString());
     }
 
     private String convertTaskListToString(TaskList xs) {
