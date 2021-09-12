@@ -18,7 +18,7 @@ import com.zoho.hawking.language.english.model.DatesFound;
 import com.zoho.hawking.language.english.model.ParserOutput;
 
 import duke.Duke;
-import duke.command.Commands;
+import duke.command.Command;
 import duke.exception.DateTimeFormatException;
 import duke.exception.DukeException;
 import duke.exception.EmptyListException;
@@ -37,7 +37,7 @@ import duke.task.Task;
  */
 public class Parser {
 
-    private Commands.CommandTypes command;
+    private Command.CommandTypes command;
     private int index = -1;
     private String description;
     private Task.TaskTypes taskType;
@@ -256,9 +256,9 @@ public class Parser {
      * @return Command type
      * @throws IllegalCommandException Not a command
      */
-    private Commands.CommandTypes parseCommand(String commandStr) throws IllegalCommandException {
+    private Command.CommandTypes parseCommand(String commandStr) throws IllegalCommandException {
         try {
-            return Commands.CommandTypes.valueOf(commandStr);
+            return Command.CommandTypes.valueOf(commandStr);
         } catch (IllegalArgumentException e) {
             throw new IllegalCommandException(commandStr);
         }

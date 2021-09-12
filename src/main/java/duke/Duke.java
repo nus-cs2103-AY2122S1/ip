@@ -1,17 +1,20 @@
 package duke;
 
-import duke.command.Commands;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.SaveCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.IllegalCommandException;
-import duke.exception.TaskExistsException;
 import duke.gui.MainWindow;
 import duke.parser.ParsedInput;
 import duke.parser.Parser;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 
 /**
  * Duke is a chatbot that responds to user input.
@@ -35,18 +38,9 @@ public class Duke {
         this.mw = null;
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        if (storage.hasSave()) {
-            try {
-                tasks = storage.load();
-            } catch (DukeException e) {
-                tasks = new TaskList();
-            }
-        } else {
-            tasks = new TaskList();
-        }
-        assert(tasks != null);
+        load(filePath);
+        assert tasks != null;
     }
-
 
     /**
      * Constructor to create Duke instance.
@@ -58,18 +52,8 @@ public class Duke {
         this.mw = mw;
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        if (storage.hasSave()) {
-            try {
-                tasks = storage.load();
-                this.mw.printMessage("I've fetched your tasks from " + filePath);
-            } catch (DukeException e) {
-                tasks = new TaskList();
-                this.mw.printMessage(e.getMessage());
-            }
-        } else {
-            tasks = new TaskList();
-        }
-        assert(tasks != null);
+        this.mw.printMessage(load(filePath));
+        assert tasks != null;
     }
 
     /**
@@ -100,6 +84,28 @@ public class Duke {
     }
 
     /**
+     * Load tasks from file.
+     *
+     * @param filePath Load file location
+     * @return Success message
+     */
+    public String load(String filePath) {
+        if (storage.hasSave()) {
+            try {
+                tasks = storage.load();
+                return ui.showLoadedMessage(filePath) + getResponse("");
+            } catch (DukeException e) {
+                tasks = new TaskList();
+                return e.getMessage();
+            }
+        } else {
+            tasks = new TaskList();
+            return "I could not find your load file found at " + filePath + "!";
+        }
+    }
+
+
+    /**
      * Gets response to user input.
      *
      * @param input String input
@@ -114,86 +120,35 @@ public class Duke {
         try {
             Parser parser = new Parser();
             ParsedInput parsedInput = parser.parse(input, this);
-            Commands.CommandTypes command = parsedInput.command;
+            Command.CommandTypes command = parsedInput.command;
 
             switch (command) {
             case BYE:
                 hasQuit = true;
                 return ui.showExitMessage();
-
             case LIST:
-                return tasks.toString();
-
+                return new ListCommand(tasks).run();
             case DONE:
-                if (parsedInput.description == null) {
-                    return ui.showMarkedDoneMessage(tasks.markDone(parsedInput.index));
-                } else {
-                    return ui.showMarkedDoneMessage(tasks.markDone(parsedInput.description, parsedInput.taskType));
-                }
-
+                return new DoneCommand(parsedInput, tasks, ui).run();
             case DELETE:
-                if (parsedInput.description == null) {
-                    return ui.showDeletedMessage(
-                            tasks.remove(parsedInput.index),
-                            tasks.size());
-                } else {
-                    return ui.showDeletedMessage(
-                            tasks.remove(parsedInput.description, parsedInput.taskType),
-                            tasks.size());
-                }
-
+                return new DeleteCommand(parsedInput, tasks, ui).run();
             case FIND:
-                return tasks.find(parsedInput.searchKey).toString().replace(
-                        "Here are the tasks in your list, meow:",
-                        "Here are the matching tasks found, meow:");
-
+                return new FindCommand(parsedInput, tasks).run();
             case TODO:
-                // Extra Functionality: No duplicate tasks
-                if (tasks.getTaskIndex(parsedInput.description, Task.TaskTypes.TODO) != -1) {
-                    throw new TaskExistsException(Task.TaskTypes.TODO, parsedInput.description);
-                }
-
-                Task todo = new Todo(parsedInput.description);
-                tasks.add(todo);
-                return ui.showAddedMessage(todo, tasks.size());
-
+                return new TodoCommand(parsedInput, tasks, ui).run();
             case DEADLINE:
-                // Extra Functionality: No duplicate tasks
-                if (tasks.getTaskIndex(parsedInput.description, Task.TaskTypes.DEADLINE) != -1) {
-                    throw new TaskExistsException(Task.TaskTypes.DEADLINE, parsedInput.description);
-                }
-
-                Task deadline = new Deadline(parsedInput.description, parsedInput.dateTime);
-                tasks.add(deadline);
-                return ui.showAddedMessage(deadline, tasks.size());
-
+                return new DeadlineCommand(parsedInput, tasks, ui).run();
             case EVENT:
-                // Extra Functionality: No duplicate tasks
-                if (tasks.getTaskIndex(parsedInput.description, Task.TaskTypes.EVENT) != -1) {
-                    throw new TaskExistsException(Task.TaskTypes.EVENT, parsedInput.description);
-                }
-
-                Task event = new Event(parsedInput.description, parsedInput.dateTime);
-                tasks.add(event);
-                return ui.showAddedMessage(event, tasks.size());
-
+                return new EventCommand(parsedInput, tasks, ui).run();
             case SAVE:
-                storage.save(tasks);
-                return ui.showSavedMessage();
-
+                return new SaveCommand(storage, tasks, ui).run();
             case LOAD:
-                tasks = storage.load();
-                return ui.showLoadedMessage() + " " + getResponse("LIST");
-
+                return load(storage.toString());
             default:
                 throw new IllegalCommandException(""); // should be unreachable by design
             }
-
         } catch (DukeException e) {
             return e.getMessage();
         }
-
-
-
     }
 }

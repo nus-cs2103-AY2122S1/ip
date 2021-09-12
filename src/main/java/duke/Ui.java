@@ -17,26 +17,26 @@ public class Ui {
         return GREET;
     }
 
-    String showSavedMessage() {
+    public String showSavedMessage() {
         return SAVE;
     }
 
-    String showMarkedDoneMessage(Task task) {
+    public String showMarkedDoneMessage(Task task) {
         return DONE + task;
     }
 
-    String showDeletedMessage(Task task, int size) {
+    public String showDeletedMessage(Task task, int size) {
         return "Understood, meow! Deleted this task:\n   "
                 + task + "\n" + "Now you have " + size + " tasks in the list.";
     }
 
-    String showAddedMessage(Task task, int size) {
+    public String showAddedMessage(Task task, int size) {
         return "Meow. I've added this task:\n   "
                 + task + "\n" + "Now you have " + size + " tasks in the list.";
     }
 
-    String showLoadedMessage() {
-        return "Meow. Your tasks have been loaded.";
+    public String showLoadedMessage(String filePath) {
+        return "I've fetched your tasks from " + filePath + "!\n";
     }
 
     String showExitMessage() {

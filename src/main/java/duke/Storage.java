@@ -138,4 +138,14 @@ public class Storage {
     public boolean hasSave() {
         return !(Files.notExists(filePath.getParent()) || Files.notExists(filePath));
     }
+
+    /**
+     * String representation of file path where save files are stored.
+     *
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return filePath.toString();
+    }
 }

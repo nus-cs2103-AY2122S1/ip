@@ -3,7 +3,7 @@ package duke.parser;
 import java.io.Serializable;
 import java.time.temporal.Temporal;
 
-import duke.command.Commands;
+import duke.command.Command;
 import duke.task.Task;
 
 /**
@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class ParsedInput implements Serializable {
 
-    public final Commands.CommandTypes command;
+    public final Command.CommandTypes command;
     public final String description;
     public final Temporal dateTime;
     public final int index;
@@ -31,7 +31,7 @@ public class ParsedInput implements Serializable {
      * @param searchKey Search key to find if applicable
      */
     public ParsedInput(
-            Commands.CommandTypes command,
+            Command.CommandTypes command,
             String description,
             Temporal dateTime,
             int index,
