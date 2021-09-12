@@ -101,6 +101,13 @@ Marks a task as done.
 
 Format: `done [task number]`
 
+Note:
+
+1. `task number` **must be a positive integer** 1, 2, 3, ...
+2. The `task number` refers to the `task number` shown by
+   the [`list`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list) command
+3. This command has no effect on a `Task` that is already marked as `done`
+
 <br/>
 
 ### Deleting a task: `delete`
@@ -108,6 +115,12 @@ Format: `done [task number]`
 Deletes a task.
 
 Format: `delete [task number]`
+
+Note:
+
+1. `task number` **must be a positive integer** 1, 2, 3, ...
+2. The `task number` refers to the `task number` shown by
+   the [`list`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list) command
 
 <br/>
 
