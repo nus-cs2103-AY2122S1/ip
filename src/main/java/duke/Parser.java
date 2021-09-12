@@ -211,7 +211,7 @@ public class Parser {
         String[] splitString = input.split(" ", 2);
         int index = Integer.parseInt(splitString[1]) - 1;
         Task removedTask;
-        if (index >= tasks.size() || index <= 0) {
+        if (index >= tasks.size() || index < 0) {
             return "OOPS!!! The task doesn't exist!\n";
         } else {
             removedTask = tasks.remove(index);

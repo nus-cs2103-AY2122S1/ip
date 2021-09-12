@@ -40,39 +40,6 @@ public class Duke extends Application {
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
-    /**
-     * Runs the main logic of program.
-     *
-     */
-    public void run() {
-        Ui.welcome();
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            String input = sc.nextLine();
-            if (parser.isExit(input)) {
-                Ui.bye();
-                break;
-            } else {
-                try {
-                    String[] results = parser.parseInput(input);
-                    Ui.printAll(results);
-                } catch (Exception e) {
-                    continue;
-                }
-            }
-        }
-    }
-
-
-    /**
-     * Runs program
-     *
-     */
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
-
-    }
 
     public String[] getResponse(String input) {
         String[] results = parser.parseInput(input);
