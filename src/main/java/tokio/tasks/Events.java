@@ -11,9 +11,24 @@ import tokio.exceptions.DukeException;
  * Represents an event task that takes in date and time.
  */
 public class Events extends Task {
+    protected String description;
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Initialises Events with description, date and time.
+     *
+     * @param description Description of event.
+     * @param date Date of event in LocalDate type.
+     * @param time Time of event in LocalTime type.
+     */
+    public Events(String description, LocalDate date, LocalTime time) {
+        super(description, Instruction.EVENT);
+        this.description = description;
+        this.date = date;
+        this.time = time;
+    }
+    
     /**
      * Initialises Events with description, date and time.
      *
@@ -24,18 +39,43 @@ public class Events extends Task {
      */
     public Events(String description, String date, String time) throws DukeException {
         super(description, Instruction.EVENT);
+        this.description = description;
         try {
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
         } catch (Exception e) {
-            throw new DukeException("Sorry, I do not understand what you are saying... Please follow the format:\n"
-                    + "event presentation /at 2021-09-09 14:15");
+            throw new DukeException("I do not understand this format...\n" + "Rio, please follow this format:\n"
+                    + "event {name} /at {yyyy-MM-dd} {HH:mm}");
         }
     }
 
+    /**
+     * Formats string output.
+     *
+     * @return String output with the correct event format.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time + ")";
+    }
+
+    /**
+     * Compares two objects, if both objects are Events and have the same name, date and time,
+     * then they will be considered equal.
+     *
+     * @param obj Object to be compared to.
+     * @return True if objects are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Events) {
+            Events e = (Events) obj;
+            return this.description.equals(e.description) && this.date.equals(e.date) && this.time.equals(e.time);
+        } else {
+            return false;
+        }
     }
 }

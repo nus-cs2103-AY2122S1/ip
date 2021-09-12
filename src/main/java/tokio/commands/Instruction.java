@@ -15,14 +15,21 @@ public enum Instruction {
     FIND("find");
 
     private final String name;
+
+    /**
+     * Constructor for Instruction.
+     *
+     * @param name Name of instruction.
+     */
     Instruction(String name) {
         this.name = name;
     }
 
     /**
      * Compares Instruction with string.
+     *
      * @param str Input string.
-     * @return Instruction if such an instruction exist, otherwise invalid
+     * @return Instruction if such an instruction exist, otherwise invalid.
      */
     public static Instruction comparesTo(String str) {
         for (Instruction i : Instruction.values()) {

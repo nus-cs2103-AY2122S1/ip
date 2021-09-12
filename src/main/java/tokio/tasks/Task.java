@@ -37,6 +37,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Formats each task to indicate its type.
+     *
+     * @return String message with Type and description.
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;

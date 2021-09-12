@@ -1,6 +1,5 @@
 package tokio.tasks;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -30,10 +29,13 @@ public class TaskList {
      * Adds newTask into the current task list.
      *
      * @param newTask Task to be added.
-     * @throws IOException If new task cannot be added.
      */
-    public void addTask(Task newTask) throws IOException {
+    public boolean addTask(Task newTask) {
+        if (tasks.contains(newTask)) {
+            return false;
+        }
         tasks.add(newTask);
+        return true;
     }
 
     /**
@@ -61,9 +63,7 @@ public class TaskList {
      * @param index Index of task in task list.
      */
     public void deleteTask(int index) {
-        if (index < tasks.size()) {
-            tasks.remove(index);
-        }
+        tasks.remove(index);
     }
 
     /**

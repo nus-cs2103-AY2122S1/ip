@@ -14,7 +14,7 @@ import tokio.exceptions.DukeException;
 import tokio.ui.Ui;
 
 /**
- * deals with making sense of the user command.
+ * Makes sense of the user command.
  */
 public class Parser {
     protected static Ui ui = new Ui();

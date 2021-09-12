@@ -40,7 +40,7 @@ public class Storage {
     /**
      * Reads lines from txt file, convert to respective tasks and add to task list.
      *
-     * @return list of Tasks.
+     * @return List of Tasks.
      * @throws FileNotFoundException If txt file does not exist.
      * @throws DukeException If line read is missing any information.
      * @throws ParseException If string cannot be parsed to date.
@@ -103,10 +103,10 @@ public class Storage {
     }
 
     /**
-     * Adds a line in the txt file.
+     * Adds a line with the task description in the txt file.
      *
      * @param task Task to be added.
-     * @throws IOException If the task is invalid.
+     * @throws IOException If file does not exist in filePath.
      */
     public void writeTask(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
@@ -115,45 +115,29 @@ public class Storage {
     }
 
     /**
-     * Removes line in the txt file.
+     * Edits given task in storage file.
      *
-     * @param task Task to be deleted.
-     * @throws IOException If the task is invalid.
+     * @param task Task that requires changes.
+     * @param replace String to be updated to in the storage file.
+     * @throws IOException If temp file could not be created or temp file is a directory
      */
-    public void deleteTask(Task task) throws IOException {
+    public void editTask(Task task, String replace) throws IOException {
         File tempFile = File.createTempFile("temp", ".txt", file.getParentFile());
         FileWriter fw = new FileWriter(tempFile, true);
         Scanner sc = new Scanner(file);
         String lineDone = task.toString();
+        boolean isDelete = replace.isBlank();
         while (sc.hasNextLine()) {
             String currLine = sc.nextLine();
-            if (currLine.equals(lineDone)) {
-                fw.write("");
-            }
-            fw.write(currLine + System.lineSeparator());
-        }
-        fw.close();
-        tempFile.renameTo(file);
-    }
-
-    /**
-     * Marks task as done.
-     *
-     * @param task Task to be marked done.
-     * @throws IOException If the task is invalid.
-     */
-    public void doneTask(Task task) throws IOException {
-        File tempFile = File.createTempFile("temp", ".txt", file.getParentFile());
-        FileWriter fw = new FileWriter(tempFile, true);
-        Scanner sc = new Scanner(file);
-        String lineDone = task.toString();
-        while (sc.hasNextLine()) {
-            String currLine = sc.nextLine();
-            if (currLine.equals(lineDone)) {
+            boolean isTask = currLine.equals(lineDone);
+            if (!isTask) {
+                fw.write(currLine + System.lineSeparator());
+            } else if (isDelete) {
+                fw.write(replace);
+            } else {
                 task.setDone();
                 fw.write(task + System.lineSeparator());
             }
-            fw.write(currLine + System.lineSeparator());
         }
         fw.close();
         tempFile.renameTo(file);

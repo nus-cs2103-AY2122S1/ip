@@ -28,15 +28,16 @@ public class Duke {
      *
      * @param path File path of storage.
      * @throws IOException If file cannot be loaded.
+     * @throws DukeException If user input is unknown.
      */
-    public Duke() throws IOException {
+    public Duke() throws IOException, DukeException {
         ui = new Ui();
         storage = new Storage(path);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException | DukeException | ParseException e) {
-            ui.printLoadingError();
             tasks = new TaskList();
+            throw new DukeException("Oh no, there seems to be a problem...");
         }
     }
 
@@ -45,22 +46,25 @@ public class Duke {
      *
      * @param filePath File path of storage.
      * @throws IOException If file cannot be loaded.
+     * @throws DukeException If user input is unknown.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) throws IOException, DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException | DukeException | ParseException e) {
-            ui.printLoadingError();
             tasks = new TaskList();
+            throw new DukeException("Oh no, there seems to be a problem...");
         }
     }
 
     /**
      * Starts duke.
+     * 
+     * @throws DukeException If user input is unknown.
      */
-    public void run() {
+    public void run() throws DukeException {
         ui.printWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -70,22 +74,27 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | IOException e) {
-                ui.printFileNotFoundError();
+                throw new DukeException("Oh no, there was a problem loading this file...");
             }
         }
     }
 
     /**
      * Main function for Duke.
+     * 
+     * @throws IOException If file cannot be loaded.
+     * @throws DukeException If user input is unknown.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         Duke duke = new Duke("data/tasks.txt");
         duke.run();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * To generate a response to user input.
+     *
+     * @param input User input in string.
+     * @return Tokio's output to user input.
      */
     public String getResponse(String input) {
         try {
