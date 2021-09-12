@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 
 /**
@@ -37,9 +38,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setPadding(new Insets(10, 10, 10 ,10));
-        dialog.setStyle("-fx-background-color: #c4d8de;");
+        dialog.setStyle("-fx-background-color: #c4d8de; -fx-background-insets: 5; -fx-background-radius: 15;");
 
         displayPicture.setImage(img);
+        displayPicture.setStyle("-fx-border-image-insets: 10;");
     }
 
     /**
