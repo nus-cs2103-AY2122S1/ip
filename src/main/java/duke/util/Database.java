@@ -61,7 +61,6 @@ public class Database {
         try {
             FileWriter fileWriter = new FileWriter(file, true);
             String out = "\n";
-
             if (task instanceof Deadline) {
                 out += "D &";
             } else if (task instanceof Todo) {
@@ -69,13 +68,11 @@ public class Database {
             } else if (task instanceof Event) {
                 out += "E &";
             }
-
             if (task.isDone()) {
                 out += " 1 & ";
             } else {
                 out += " 0 & ";
             }
-
             out += task.getDescription();
             if (task instanceof Deadline) {
                 out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
@@ -88,7 +85,6 @@ public class Database {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -172,11 +168,9 @@ public class Database {
         for (int i = 0; i < str.length; i++) {
             str[i] = str[i].trim();
         }
-
         if (str[1].equals("1")) {
             isDone = true;
         }
-
         String item;
         String time;
         switch (str[0]) {
@@ -206,24 +200,7 @@ public class Database {
         default:
             task = null;
         }
-
         return task;
     }
-
-//    /**
-//     * Tests Task class.
-//     * @param args
-//     * @throws IOException
-//     */
-//    public static void main(String[] args) throws IOException {
-//        Database data = new Database("data/tasks.txt");
-//
-//        data.addData(new Todo("hahaha"));
-//        ArrayList<Task> lst = data.readData();
-//        for (int i = 0; i < lst.size(); i++) {
-//            System.out.println(lst.get(i));
-//        }
-//        data.deleteData(1);
-//        data.doneData(0);
-//    }
+    
 }
