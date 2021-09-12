@@ -1,5 +1,6 @@
 package duke;
 
+import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
@@ -43,46 +44,10 @@ public class DukeStorage {
 
                 String data = "";
                 while (sc.hasNext()) {
-                    data += sc.nextLine() + "\n";
+                    data = sc.nextLine();
+                    taskList.add(parseInput(data));
                 }
 
-                if (data.equals("")) {
-                    sc.close();
-                    return new TaskList();
-                }
-
-                String[] strArray = data.split("\n");
-
-                for (String str : strArray) {
-                    String[] parseTask = str.split(" \\| ");
-
-                    String taskType = parseTask[0];
-                    boolean isDone = parseTask[1].equals("1") ? true : false;
-                    String taskDescr = parseTask[2];
-
-                    if (taskType.equals("T")) {
-                        Todo task = new Todo(taskDescr);
-                        if (isDone) {
-                            task.setDone();
-                        }
-
-                        taskList.add(task);
-                    } else if (taskType.equals("D")) {
-                        Deadline task = new Deadline(taskDescr, parseTask[3]);
-                        if (isDone) {
-                            task.setDone();
-                        }
-
-                        taskList.add(task);
-                    } else {
-                        Event task = new Event(taskDescr, parseTask[3]);
-                        if (isDone) {
-                            task.setDone();
-                        }
-
-                        taskList.add(task);
-                    }
-                }
                 sc.close();
                 return taskList;
             } catch (FileNotFoundException e) {
@@ -96,6 +61,48 @@ public class DukeStorage {
                 throw new DukeException("File error! Please try again.");
             }
         }
+    }
+
+    /**
+     * Method that parses the text read from the file to return the task it represents
+     *
+     * @param input String read from text file
+     * @return Task that the text represents
+     * @throws DukeException Exception thrown if the task read is an invalid task
+     */
+    public Task parseInput(String input) throws DukeException {
+        String[] parseTask = input.split(" \\| ");
+
+        String taskType = parseTask[0];
+        boolean isDone = parseTask[1].equals("1") ? true : false;
+        String taskDescr = parseTask[2];
+        Task task;
+
+        assert taskType == "T" || taskType == "D" || taskType == "E" : "Invalid task type";
+
+        switch (taskType) {
+            case "T":
+                task = new Todo(taskDescr);
+                if (isDone) {
+                    task.setDone();
+                }
+                break;
+            case "D":
+                task = new Deadline(taskDescr, parseTask[3]);
+                if (isDone) {
+                    task.setDone();
+                }
+                break;
+            case "E":
+                task = new Event(taskDescr, parseTask[3]);
+                if (isDone) {
+                    task.setDone();
+                }
+                break;
+            default:
+                throw new DukeException("Invalid task type! :(");
+        }
+        return task;
     }
 
     /**
