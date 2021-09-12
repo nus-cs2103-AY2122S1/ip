@@ -1,30 +1,34 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-public class Undo {
-    private Items items;
 
-    public Undo(Items items) {
+public class Undo {
+    private TaskList items;
+
+    public Undo(TaskList items) {
         this.items = items;
     }
 
-    public String undoDelete(int index, String task) throws DukeException {
+    public String undoDelete(int index, String task) throws DukeException, IOException {
         String[] parseTask = task.split(" \\| ");
         String taskType = parseTask[0];
         String output = "";
         switch (taskType) {
         case "D":
-            System.out.println("entered deadline");
-            output = items.addDeletedTask(index, new Deadline(parseTask[2], parseTask[3]));
+            Deadline deadline = new Deadline(parseTask[2], parseTask[3]);
+            output = items.addDeletedTask(index, deadline);
             break;
         case "E":
-            System.out.println("entered event");
-            output = items.addDeletedTask(index, new Event(parseTask[2], parseTask[3]));
+            Event event = new Event(parseTask[2], parseTask[3]);
+            output = items.addDeletedTask(index, event);
             break;
         case "T":
-            output = items.addDeletedTask(index, new Todo(parseTask[2]));
+            Todo todo = new Todo(parseTask[2]);
+            output = items.addDeletedTask(index, todo);
             break;
         }
         if (parseTask[1].equals("1")) {
@@ -34,11 +38,11 @@ public class Undo {
         return output;
     }
 
-    public String undoDone(int index) {
+    public String undoDone(int index) throws DukeException {
         return items.markUndone(index);
     }
 
-    public String deleteTask() {
+    public String deleteTask() throws DukeException {
         return items.deleteLatestTask();
     }
 }

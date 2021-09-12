@@ -26,6 +26,86 @@ public class Parser {
         return result;
     }
 
+    private String[] parseDeadline(StringBuilder result) throws DukeException {
+        String date;
+        String[] output = result.toString().split(" /by ");
+        if (output.length < 2) {
+            throw new DukeException("Please provide both description and date. Use '/by'. "
+                    + "(eg. deadline submit project /by 2021-08-24)");
+        }
+        date = parseDate(output[1]);
+        String[] parsed = new String[] {output[0], date};
+        return parsed;
+    }
+
+    private String[] parseEvent(StringBuilder result) throws DukeException {
+        String[] output = result.toString().split(" /at ");
+        if (output.length < 2) {
+            throw new DukeException("Please provide both description and time. Use '/at'. "
+                    + "(eg. event fix hair /at 1pm)");
+        }
+        String[] parsed = new String[] {output[0], output[1]};
+        return parsed;
+    }
+
+    private String[] parseTodo(StringBuilder result, String[] input) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException("Please specify the task you want to do");
+        } else {
+            String[] output =  new String[] {result.toString()};
+            return output;
+        }
+    }
+
+    private String[] parseDone(String[] input) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException("Please specify which task you have done");
+        } else if (input.length != 2) {
+            throw new DukeException("'done' command requires exactly 1 argument. (eg. done 12)");
+        }
+        try {
+            Integer.parseInt(input[1]);
+        } catch (Exception e) {
+            throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
+        }
+
+        String[] result =  new String[] {input[1]};
+        return result;
+    }
+
+    private String[] parseList(String[] input) throws DukeException {
+        if (input.length != 1) {
+            throw new DukeException("'list' command doesn't require any arguments.");
+        } else {
+            String[] result = new String[] {input[0]};
+            return result;
+        }
+    }
+
+    private String[] parseBye(String[] input) throws DukeException {
+        if (input.length != 1) {
+            throw new DukeException("'bye' command doesn't require any arguments.");
+        } else {
+            String[] result = new String[] {input[0]};
+            return result;
+        }
+    }
+
+    private String[] parseDelete(String[] input) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException("Please specify which task you want to delete");
+        } else if (input.length != 2) {
+            throw new DukeException("'delete' command requires exactly 1 argument. (eg. done 12)");
+        }
+        try {
+            Integer.parseInt(input[1]);
+        } catch (Exception e) {
+            throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
+        }
+        String[] result = new String[] {input[1]};
+        return result;
+    }
+
     /**
      * Converts the user input string into meaningful commands.
      *
@@ -34,70 +114,28 @@ public class Parser {
      */
     public String[] compileInput(String... input) throws DukeException {
         StringBuilder result = combineInputArray(input);
-        String date;
+
         String commandEntered = input[0];
         assert commandEntered != null : "Command is NULL";
 
         switch (commandEntered) {
         case "deadline":
-            String[] output = result.toString().split(" /by ");
-            if (output.length < 2) {
-                throw new DukeException("Please provide both description and date. Use '/by'. "
-                        + "(eg. deadline submit project /by 2021-08-24)");
-            }
-            date = parseDate(output[1]);
-            return new String[] {output[0], date};
+            return parseDeadline(result);
         case "event":
-            String[] output1 = result.toString().split(" /at ");
-            if (output1.length < 2) {
-                throw new DukeException("Please provide both description and time. Use '/at'. "
-                        + "(eg. event fix hair /at 1pm)");
-            }
-            return new String[] {output1[0], output1[1]};
+            return parseEvent(result);
         case "todo":
-            if (input.length < 2) {
-                throw new DukeException("Please specify the task you want to do");
-            } else {
-                return new String[] {result.toString()};
-            }
+            return parseTodo(result, input);
         case "done":
-            if (input.length < 2) {
-                throw new DukeException("Please specify which task you have done");
-            } else if (input.length != 2) {
-                throw new DukeException("'done' command requires exactly 1 argument. (eg. done 12)");
-            }
-            try {
-                Integer.parseInt(input[1]);
-            } catch (Exception e) {
-                throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
-            }
-            return new String[] {input[1]};
+            return parseDone(input);
         case "list":
-            if (input.length != 1) {
-                throw new DukeException("'list' command doesn't require any arguments.");
-            } else {
-                return new String[] {input[0]};
-            }
+            return parseList(input);
         case "bye":
-            if (input.length != 1) {
-                throw new DukeException("'bye' command doesn't require any arguments.");
-            } else {
-                return new String[] {input[0]};
-            }
+            return parseBye(input);
         case "delete":
-            if (input.length < 2) {
-                throw new DukeException("Please specify which task you want to delete");
-            } else if (input.length != 2) {
-                throw new DukeException("'delete' command requires exactly 1 argument. (eg. done 12)");
-            }
-            try {
-                Integer.parseInt(input[1]);
-            } catch (Exception e) {
-                throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
-            }
-            return new String[] {input[1]};
+            return parseDelete(input);
         case "find":
-            return new String[] {input[1]};
+            String[] parsedString = new String[] {input[1]};
+            return parsedString;
         case "undo":
         case "help":
             return new String[] {commandEntered};

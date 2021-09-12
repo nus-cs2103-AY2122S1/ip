@@ -2,14 +2,16 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 import duke.task.Todo;
 
 public class TaskTest {
     @Test
-    public void addItemTest() {
-        Items item = new Items();
+    public void addItemTest() throws DukeException, IOException {
+        TaskList item = new TaskList();
         String msg;
         msg = item.addItem(new Todo("abc"));
         assertEquals("Got it, I've added this task:\n"
@@ -19,12 +21,12 @@ public class TaskTest {
 
     @Test
     public void doneTaskTest() {
-        Items item = new Items();
+        TaskList item = new TaskList();
         String msg;
         try {
             msg = item.addItem(new Todo("abc"));
             msg = item.markDone(1);
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             msg = "";
         }
         assertEquals("Nice! I've marked this task as done: \n"
@@ -33,12 +35,12 @@ public class TaskTest {
 
     @Test
     public void listTaskTest() {
-        Items item = new Items();
+        TaskList item = new TaskList();
         String msg;
         try {
             msg = item.addItem(new Todo("abc"));
             msg = item.printList();
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             msg = "";
         }
         assertEquals("These are your tasks: \n"

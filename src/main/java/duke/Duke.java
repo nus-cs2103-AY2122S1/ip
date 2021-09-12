@@ -20,7 +20,7 @@ public class Duke {
     // All user input related functionality
     private final Parser parser;
     // the list of items
-    private Items items;
+    private TaskList items;
     // checking if user still wants to input
     private boolean isRunning;
     private Undo undo;
@@ -39,20 +39,17 @@ public class Duke {
         parser = new Parser();
         isRunning = true;
         try {
-            items = new Items(storage.loadData());
+            items = new TaskList(storage.loadData(), storage);
         } catch (DukeException e) {
-            items = new Items();
+            items = new TaskList();
         }
         this.undo = new Undo(this.items);
     }
 
     /**
      * Runs the duke chatbot.
-     *
-     * @throws DukeException in case any unexpected input is passed.
-     * @throws IOException in case of file issues.
      */
-    public void run() throws DukeException, IOException {
+    public void run() {
         ui.greet();
         while (isRunning) {
             getResponse(ui.getInput());

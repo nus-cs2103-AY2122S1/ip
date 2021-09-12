@@ -128,9 +128,36 @@ public class Storage {
      * @param id The line to be removed.
      * @throws DukeException When saving the file fails.
      */
-    public void deleteFromFile(int id) throws DukeException, IOException {
+    public void deleteFromFile(int id) throws DukeException {
         fileTasks.remove(id - 1);
         saveToFile();
+    }
+
+    /**
+     * Marks the task at given index as done.
+     *
+     * @param id index at which task is to be marked done.
+     * @throws DukeException when a task is not found
+     */
+    public void markTaskDone(int id) throws DukeException {
+        int doneIndex = 4;
+        String task = this.getFileLine(id);
+        String newTask = task.substring(0, doneIndex) + "1" + task.substring(doneIndex + 1);
+        this.updateListTask(id, newTask);
+    }
+
+    /**
+     * Marks the task at given index as undone.
+     * Used to implement the undo functionality.
+     *
+     * @param id index at which task is to be marked done.
+     * @throws DukeException when a task is not found
+     */
+    public void markTaskUndone(int id) throws DukeException {
+        int doneIndex = 4;
+        String task = this.getFileLine(id);
+        String newTask = task.substring(0, doneIndex) + "0" + task.substring(doneIndex + 1);
+        this.updateListTask(id, newTask);
     }
 
     /**
@@ -140,7 +167,7 @@ public class Storage {
      * @param task new task to be updated.
      * @throws DukeException when saving file fails.
      */
-    public void updateListTask(int id, String task) throws DukeException, IOException {
+    public void updateListTask(int id, String task) throws DukeException {
         fileTasks.set(id - 1, task);
         saveToFile();
     }

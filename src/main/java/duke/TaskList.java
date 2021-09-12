@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -9,18 +10,21 @@ import duke.task.Task;
  * Responsible for adding things to the list of items.
  */
 
-public class Items {
+public class TaskList {
 
     /**
      * items to be stored in the list.
      */
     private ArrayList<Task> tasks;
 
+    private Storage storage;
+
     /**
      * Instantiates an Items object.
      */
-    public Items() {
+    public TaskList() {
         tasks = new ArrayList<>();
+        this.storage = new Storage("./data", "duke.txt");
     }
 
     /**
@@ -28,8 +32,14 @@ public class Items {
      *
      * @param tasks An ArrayList of Tasks.
      */
-    public Items(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
+        this.storage = storage;
+    }
+
+    public TaskList(Storage storage) {
+        this.tasks = new ArrayList<>();
+        this.storage = storage;
     }
 
     /**
@@ -38,7 +48,7 @@ public class Items {
      * @param task A task to represent the item added.
      * @return A status message to be displayed.
      */
-    public String addItem(Task task) {
+    public String addItem(Task task) throws DukeException, IOException {
         tasks.add(task);
         String output = "Got it, I've added this task:\n" + task.toString();
         if (tasks.size() == 1) {
@@ -46,6 +56,7 @@ public class Items {
         } else {
             output += "\nNow you have " + tasks.size() + " tasks in the list.";
         }
+        storage.addToFile(task.toString());
         return output;
     }
 
@@ -66,6 +77,7 @@ public class Items {
             throw new DukeException("You don't have these many tasks!");
         }
         Task task = tasks.get(index - 1);
+        storage.markTaskDone(index - 1);
         return task.doneTask();
     }
 
@@ -75,9 +87,10 @@ public class Items {
      * @param index the index at which the task is.
      * @return string representation of changed task
      */
-    public String markUndone(int index) {
+    public String markUndone(int index) throws DukeException {
         Task task = tasks.get(index - 1);
         task.undoTask();
+        storage.markTaskUndone(index - 1);
         return task.toString();
     }
 
@@ -101,11 +114,13 @@ public class Items {
         if (index < tasks.size()) {
             System.out.println("index is less should delete fine");
         }
-        Task task = tasks.get(index - 1);
-        System.out.println(task.toString());
-        tasks.remove(index - 1);
-        return "Noted. I have removed this task:\n" + task.toString()
+        int listIndex = index - 1;
+        Task task = tasks.get(listIndex);
+        tasks.remove(listIndex);
+        storage.deleteFromFile(listIndex);
+        String output =  "Noted. I have removed this task:\n" + task.toString()
                 + "\n Number of tasks remaining: " + tasks.size();
+        return output;
 
     }
 
@@ -164,10 +179,11 @@ public class Items {
      *
      * @return output message stating the last task has been deleted.
      */
-    public String deleteLatestTask() {
-        int lastIndex = tasks.size();
-        Task task = tasks.get(lastIndex - 1);
-        tasks.remove(lastIndex - 1);
+    public String deleteLatestTask() throws DukeException {
+        int lastIndex = tasks.size() - 1;
+        Task task = tasks.get(lastIndex);
+        tasks.remove(lastIndex);
+        storage.deleteFromFile(lastIndex);
         return task.toString();
     }
 
@@ -179,11 +195,15 @@ public class Items {
      * @param task task to be added
      * @return output after adding task
      */
-    public String addDeletedTask(int index, Task task) {
-        if ((index - 1) >= tasks.size()) {
+    public String addDeletedTask(int index, Task task) throws DukeException, IOException {
+        String fileTask = task.toString();
+        if ((index - 1) >= getListSize()) {
             tasks.add(task);
+            storage.addToFile(fileTask);
         } else {
-            tasks.add(index - 1, task);
+            int indexToAdd = index - 1;
+            tasks.add(indexToAdd, task);
+            storage.addToFile(indexToAdd, fileTask);
         }
         String output = "The following task has been re-added at position: " + index;
         return output;
