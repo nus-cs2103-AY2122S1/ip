@@ -2,7 +2,6 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.command.Command;
 
 /**
@@ -12,54 +11,34 @@ import duke.command.Command;
  */
 public class Duke {
 
+    private static final String FILE_PATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private Parser parser;
+
 
     /**
      * The constructor for a Duke object.
      *
-     * @param filePath The path to the file for storage.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        storage = new Storage(FILE_PATH);
+        parser = new Parser();
 
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the main logic of the program.
-     * Displays the welcome message upon start up and exits the program when
-     * the condition is met.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-    /**
-     * Starts the Duke program.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
 }

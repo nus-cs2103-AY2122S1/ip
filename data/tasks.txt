@@ -1,3 +1,5 @@
-T | 0 | read some stuff
+T | 1 | read some stuff
 T | 1 | read book
-T | 0 | read a story
+T | 1 | sleep
+T | 0 | read a book
+T | 0 | go to school

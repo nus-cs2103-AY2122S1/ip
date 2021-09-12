@@ -2,18 +2,18 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 public class FindCommand extends Command {
 
     private String query;
+    private String reply;
 
     public FindCommand(String query) {
         this.query = query;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String results = "Here are the matching tasks in your list:";
         boolean hasMatches = false;
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -28,9 +28,10 @@ public class FindCommand extends Command {
         }
 
         if (hasMatches) {
-            ui.printTemplate(results);
+            return results;
         } else {
-            ui.printTemplate("No matches found.");
+            reply = "No matches found.";
+            return reply;
         }
     }
 }
