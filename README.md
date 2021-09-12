@@ -26,7 +26,7 @@ Follow these steps to get your own DukePro:
 - [X] Save, Delete, Filters and many more!
 - [ ] More features to be added
 
-### Code SneakPeaks
+# Code SneakPeaks
 This is the code in DukePro that can be found in its `Task` class:
 ```java
 /**
