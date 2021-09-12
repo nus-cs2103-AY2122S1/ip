@@ -8,7 +8,7 @@ public class ListCommand extends Command {
     public static final String INSTRUCTION_LIST = "list";
 
     /**
-     * Execute the command
+     * Executes the command
      *
      * @param tasks    the TaskList
      * @param ui       the Ui
@@ -22,7 +22,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Check if the command is an ExitCommand
+     * Checks if the command is an ExitCommand
      *
      * @return           boolean stating if command is ExitCommand
      */
@@ -32,7 +32,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Return the toString of the class
+     * Returns the toString of the class
      *
      * @return           toString of the class
      */

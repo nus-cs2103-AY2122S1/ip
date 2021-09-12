@@ -25,7 +25,7 @@ public class Storage {
     }
 
     /**
-     * Return an ArrayList of tasks loaded from data source
+     * Returns an ArrayList of tasks loaded from data source
      *
      * @return           an arraylist of tasks
      */
@@ -49,7 +49,7 @@ public class Storage {
     }
 
     /**
-     * Save the given task to the data source
+     * Saves the given task to the data source
      *
      * @param task the given task to save
      */

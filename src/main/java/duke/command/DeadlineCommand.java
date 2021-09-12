@@ -1,6 +1,5 @@
 package duke.command;
 
-
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -22,7 +21,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Execute the command
+     * Executes the command
      *
      * @param tasks    the TaskList
      * @param ui       the Ui
@@ -34,12 +33,11 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(this.deadline);
         tasks.add(this.deadline);
-//        ui.formatPrint("Got it. I've added this task:", "  " + this.deadline.toString(), tasks.toString());
         return "Got it. I've added this task:\n" + "  " + this.deadline.toString() + "\n" + tasks.toString();
     }
 
     /**
-     * Check if the command is an ExitCommand
+     * Checks if the command is an ExitCommand
      *
      * @return           boolean stating if command is ExitCommand
      */
@@ -49,7 +47,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Return the toString of the class
+     * Returns the toString of the class
      *
      * @return           toString of the class
      */

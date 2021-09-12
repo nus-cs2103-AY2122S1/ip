@@ -14,7 +14,7 @@ public class IncorrectCommand extends Command {
     }
 
     /**
-     * Execute the command
+     * Executes the command
      *
      * @param tasks    the TaskList
      * @param ui       the Ui
@@ -24,12 +24,11 @@ public class IncorrectCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-//        ui.showError(errorMessage);
         return errorMessage;
     }
 
     /**
-     * Check if the command is an ExitCommand
+     * Checks if the command is an ExitCommand
      *
      * @return           boolean stating if command is ExitCommand
      */
@@ -39,7 +38,7 @@ public class IncorrectCommand extends Command {
     }
 
     /**
-     * Return the toString of the class
+     * Returns the toString of the class
      *
      * @return           toString of the class
      */

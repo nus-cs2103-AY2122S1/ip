@@ -55,6 +55,20 @@ public class Task {
     }
 
     /**
+     * Mark the task as incomplete
+     */
+    public void markAsIncomplete() {
+        this.isDone = false;
+    }
+
+    /**
+     * Change the description of the task
+     */
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Return the toString of the class
      *
      * @return           toString of the class

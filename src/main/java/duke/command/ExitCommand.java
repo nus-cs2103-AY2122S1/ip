@@ -7,7 +7,7 @@ public class ExitCommand extends Command {
     public static final String INSTRUCTION_EXIT = "bye";
 
     /**
-     * Execute the command
+     * Executes the command
      *
      * @param tasks    the TaskList
      * @param ui       the Ui
@@ -17,12 +17,11 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-//        ui.showFarewell();
         return "See ya round, buckaroo.";
     }
 
     /**
-     * Check if the command is an ExitCommand
+     * Checks if the command is an ExitCommand
      *
      * @return           boolean stating if command is ExitCommand
      */
@@ -32,7 +31,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Return the toString of the class
+     * Returns the toString of the class
      *
      * @return           toString of the class
      */
