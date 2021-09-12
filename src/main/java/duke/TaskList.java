@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -9,7 +8,6 @@ import duke.task.Task;
  * The items in the bot.
  * Responsible for adding things to the list of items.
  */
-
 public class TaskList {
 
     /**
@@ -48,13 +46,13 @@ public class TaskList {
      * @param task A task to represent the item added.
      * @return A status message to be displayed.
      */
-    public String addItem(Task task) throws DukeException, IOException {
+    public String addItem(Task task) throws DukeException {
         tasks.add(task);
         String output = "Got it, I've added this task:\n" + task.toString();
         if (tasks.size() == 1) {
             output += "\nNow you have 1 task in the list.";
         } else {
-            output += "\nNow you have " + tasks.size() + " tasks in the list.";
+            output += "\nNow you have " + getListSize() + " tasks in the list.";
         }
         storage.addToFile(task.toString());
         return output;
@@ -76,8 +74,9 @@ public class TaskList {
         if (index > tasks.size()) {
             throw new DukeException("You don't have these many tasks!");
         }
-        Task task = tasks.get(index - 1);
-        storage.markTaskDone(index - 1);
+        int taskIndex = index - 1;
+        Task task = tasks.get(taskIndex);
+        storage.markTaskDone(taskIndex);
         return task.doneTask();
     }
 
@@ -105,21 +104,19 @@ public class TaskList {
         if (index < 0) {
             throw new DukeException("Invalid index. Only positive values are accepted.");
         }
-        if (tasks.size() == 0) {
+        if (getListSize() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
         }
-        if (index > tasks.size()) {
+        if (index > getListSize()) {
             throw new DukeException("You don't have these many tasks!");
-        }
-        if (index < tasks.size()) {
-            System.out.println("index is less should delete fine");
         }
         int listIndex = index - 1;
         Task task = tasks.get(listIndex);
         tasks.remove(listIndex);
         storage.deleteFromFile(listIndex);
-        String output =  "Noted. I have removed this task:\n" + task.toString()
-                + "\n Number of tasks remaining: " + tasks.size();
+        DukeConstants.deleteTask = task.toString();
+        String output =  "Noted. I have removed this task:\n" + task
+                + "\n Number of tasks remaining: " + getListSize();
         return output;
 
     }
@@ -134,10 +131,10 @@ public class TaskList {
             throw new DukeException("You have 0 items in your list");
         }
         StringBuilder output = new StringBuilder("These are your tasks: \n");
-
-        for (int i = 0; i < tasks.size(); i++) {
-            if (i < tasks.size() - 1) {
-                output.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+        System.out.println(getTaskAtIndex(0));
+        for (int i = 0; i < getListSize(); i++) {
+            if (i < getListSize() - 1) {
+                output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i)).append("\n");
             } else {
                 output.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString());
             }
@@ -180,7 +177,7 @@ public class TaskList {
      * @return output message stating the last task has been deleted.
      */
     public String deleteLatestTask() throws DukeException {
-        int lastIndex = tasks.size() - 1;
+        int lastIndex = getListSize() - 1;
         Task task = tasks.get(lastIndex);
         tasks.remove(lastIndex);
         storage.deleteFromFile(lastIndex);
@@ -195,7 +192,7 @@ public class TaskList {
      * @param task task to be added
      * @return output after adding task
      */
-    public String addDeletedTask(int index, Task task) throws DukeException, IOException {
+    public String addDeletedTask(int index, Task task) throws DukeException {
         String fileTask = task.toString();
         if ((index - 1) >= getListSize()) {
             tasks.add(task);
@@ -217,7 +214,7 @@ public class TaskList {
      * @return string representation of the task
      */
     public String getTaskAtIndex(int index) {
-        Task task = tasks.get(index - 1);
+        Task task = tasks.get(index);
         return task.toString();
     }
 

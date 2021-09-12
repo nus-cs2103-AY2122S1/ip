@@ -65,7 +65,6 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
                 fileTasks.add(rawData);
-                System.out.println(rawData);
                 String[] data = rawData.split(" \\| ");
                 String taskType = data[0];
                 boolean isDone = data[1].equals("1");
@@ -104,7 +103,7 @@ public class Storage {
      * @param task The task as a String.
      * @throws DukeException When saving the file fails.
      */
-    public void addToFile(String task) throws DukeException, IOException {
+    public void addToFile(String task) throws DukeException {
         fileTasks.add(task);
         saveToFile();
     }
@@ -117,7 +116,7 @@ public class Storage {
      * @param task The task as a String.
      * @throws DukeException When saving the file fails.
      */
-    public void addToFile(int index, String task) throws DukeException, IOException {
+    public void addToFile(int index, String task) throws DukeException {
         fileTasks.add(index - 1, task);
         saveToFile();
     }

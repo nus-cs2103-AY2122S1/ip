@@ -17,7 +17,7 @@ public class Ui {
             + "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n"
             + "██─▄─▀█─▄─██─██─████─████─██─██\n"
             + "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
-    private Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     // Help Section Strings.
     private static final String welcomeToHelpSectionMessage = "Welcome to the help section. I will help you find what you desire";
@@ -48,6 +48,7 @@ public class Ui {
     private static final String todoCommandFormat = "-> todo TASK_DESCRIPTION";
     private static final String undoCommandDescription = "Use the undo command to undo the latest action you performed.";
     private static final String undoCommandExample = "Command Example: undo";
+    private static final String goodbyeMessage = "Going so soon? Hope to see you again!";
 
     /**
      * Greets the user.
@@ -62,15 +63,15 @@ public class Ui {
      *
      * @return The string representation of the user input.
      */
-    public String getInput() {
+    public static String getInput() {
         return sc.nextLine();
     }
 
     /**
      * Prints the goodbye text.
      */
-    public void printGoodBye() {
-        printMessage("Going so soon? Hope to see you again!");
+    public static String printGoodBye() {
+        return goodbyeMessage;
     }
 
     /**
@@ -90,7 +91,7 @@ public class Ui {
      *
      * @return a string containing guidance on how to use the bot.
      */
-    public String getHelpMenu() {
+    public static String getHelpMenu() {
         String helpMessage = welcomeToHelpSectionMessage + "\n\n"
                 + byeCommandDescription + "\n" + byeCommandExample + "\n\n"
                 + deadlineCommandDescription + "\n" + deadlineCommandFormat + "\n" + deadlineCommandExample + "\n\n"

@@ -13,7 +13,46 @@ public class Undo {
         this.items = items;
     }
 
-    public String undoDelete(int index, String task) throws DukeException, IOException {
+    public String undo() throws DukeException, IOException {
+        return undoLogic(DukeConstants.prevCommand);
+    }
+
+    /**
+     * Undoes the last command
+     *
+     * @param command the command to be undone.
+     * @return output after undoing the latest task.
+     */
+    private String undoLogic(String command) throws DukeException {
+        String output;
+        String fileTask;
+        String[] undoCommand = command.split("\\s+");
+        String inputCommand = undoCommand[0];
+        switch (inputCommand) {
+        case "delete":
+            String deletedTask = DukeConstants.deleteTask;
+            int index = Integer.parseInt(undoCommand[1]);
+            output = undoDelete(index, deletedTask);
+            break;
+        case "done":
+            int taskIndex = Integer.parseInt(undoCommand[1]);
+            fileTask = undoDone(taskIndex);
+            output = "The following task has been marked as 'Not Done':\n" + fileTask;
+            break;
+        case "deadline":
+        case "event":
+        case "todo":
+            fileTask = deleteTask();
+            output = "Following task has been removed:\n" + fileTask;
+            break;
+        default:
+            output = "Only undo has been implemented";
+        }
+        DukeConstants.isUndoable = false;
+        return output;
+    }
+
+    public String undoDelete(int index, String task) throws DukeException {
         String[] parseTask = task.split(" \\| ");
         String taskType = parseTask[0];
         String output = "";
