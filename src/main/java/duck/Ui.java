@@ -1,7 +1,7 @@
 package duke;
 
-import exception.DukeException;
-import task.Task;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

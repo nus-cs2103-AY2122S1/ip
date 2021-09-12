@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
 import duke.TaskList;
 
 /**
- * Represents the command that lists all the tasks on the task list.
+ * Represents the duke.command that lists all the tasks on the task list.
  */
 public class ListCommand extends Command {
 
@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the command of displaying the given task list.
+     * Executes the duke.command of displaying the given task list.
      *
      * @param taskList The task list to be displayed.
      * @return String representing the given list.

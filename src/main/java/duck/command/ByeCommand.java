@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
 import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents the command that closes the program.
+ * Represents the duke.command that closes the program.
  */
 public class ByeCommand extends Command {
     private final Ui ui;
@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Executes the command of closing the program.
+     * Executes the duke.command of closing the program.
      *
      * @param taskList TaskList not used in this execution.
      * @return String representing the closing of the program.

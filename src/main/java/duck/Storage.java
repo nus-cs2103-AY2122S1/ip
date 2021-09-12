@@ -1,11 +1,11 @@
 package duke;
 
-import exception.DukeException;
-import exception.DukeExceptionType;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.File;

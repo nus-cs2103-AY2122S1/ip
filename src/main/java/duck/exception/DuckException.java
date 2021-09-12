@@ -1,17 +1,17 @@
-package exception;
+package duck.exception;
 
 /**
- * Handles error messages whenever the Duke program throws an exception.
+ * Handles error messages whenever the Duck program throws an exception.
  */
-public class DukeException extends Exception {
+public class DuckException extends Exception {
     private final String customMessage;
 
     /**
-     * Constructor for a DukeException object.
+     * Constructor for a DuckException object.
      *
-     * @param err The type of DukeException thrown.
+     * @param err The type of DuckException thrown.
      */
-    public DukeException(DukeExceptionType err) {
+    public DuckException(DuckExceptionType err) {
         switch (err) {
         case CLOSE_INTERRUPT:
             customMessage = "OOPS!!! There was a problem closing the program!";
@@ -40,7 +40,7 @@ public class DukeException extends Exception {
             customMessage = "OOPS!!! You need to specify a keyword!";
             break;
         case INVALID_INPUT:
-            customMessage = "OOPS!!! I don't recognise the command you've given me.";
+            customMessage = "OOPS!!! I don't recognise the duck.command you've given me.";
             break;
         case INVALID_PERIOD:
             customMessage = "OOPS!!! The event period you provided is not in a correct format!\n"
@@ -73,13 +73,13 @@ public class DukeException extends Exception {
             customMessage = "OOPS!!! The description of a todo cannot be empty!";
             break;
         default:
-            customMessage = "OOPS!!! Duke has run into an unspecified error!";
+            customMessage = "OOPS!!! Duck has run into an unspecified error!";
             break;
         }
     }
 
     /**
-     * Returns a string representation of the DukeException.
+     * Returns a string representation of the DuckException.
      *
      * @return a string representing the exception.
      */

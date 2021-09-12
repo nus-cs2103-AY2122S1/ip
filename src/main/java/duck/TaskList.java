@@ -1,6 +1,6 @@
 package duke;
 
-import task.Task;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

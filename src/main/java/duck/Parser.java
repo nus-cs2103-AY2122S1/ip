@@ -1,26 +1,26 @@
 package duke;
 
-import command.AddCommand;
-import command.ByeCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.FindKeywordCommand;
-import command.ListCommand;
-import command.ShowScheduleCommand;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindKeywordCommand;
+import duke.command.ListCommand;
+import duke.command.ShowScheduleCommand;
 
-import exception.DukeException;
-import exception.DukeExceptionType;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deals with making sense of the user command. Static method parse parses the user command and returns a Command
+ * Deals with making sense of the user duke.command. Static method parse parses the user duke.command and returns a Command
  * object.
  */
 public class Parser {
@@ -31,39 +31,39 @@ public class Parser {
      * @param fullCommand The full user input string for parsing.
      * @param taskList The list of currently saved tasks.
      * @return A Command object based on the parsed user input.
-     * @throws DukeException If the parser encounters an invalid command.
+     * @throws DukeException If the parser encounters an invalid duke.command.
      */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
-        // Find case based on first word of command
+        // Find case based on first word of duke.command
         String[] parsedCommand = fullCommand.split("\\s+", 3);
         assert parsedCommand.length < 4 : "initial split is not done properly.";
         switch (parsedCommand[0]) {
 
-        // "bye" command given
+        // "bye" duke.command given
         case "bye":
             return new ByeCommand();
 
-        // "list" command given
+        // "list" duke.command given
         case "list":
             return new ListCommand();
 
-        // "done" command given
+        // "done" duke.command given
         case "done":
             return parseDone(parsedCommand, taskList);
 
-        // "delete" command given
+        // "delete" duke.command given
         case "delete":
             return parseDelete(parsedCommand, taskList);
 
-        // "find" command given
+        // "find" duke.command given
         case "find":
             return parseFind(parsedCommand);
 
-        // "schedule" command given
+        // "schedule" duke.command given
         case "schedule":
             return parseSchedule(parsedCommand);
 
-        // Task command given
+        // Task duke.command given
         default:
             return parseAdd(fullCommand);
         }
@@ -75,7 +75,7 @@ public class Parser {
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @param taskList Task list where task to set to done is located.
      * @return DoneCommand based on user input.
-     * @throws DukeException if invalid command is given.
+     * @throws DukeException if invalid duke.command is given.
      */
     public static DoneCommand parseDone(String[] parsedCommand, TaskList taskList) throws DukeException {
         if (parsedCommand.length == 1) {
@@ -99,7 +99,7 @@ public class Parser {
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @param taskList Task list where task to delete is located.
      * @return DeleteCommand based on user input.
-     * @throws DukeException if invalid command is given.
+     * @throws DukeException if invalid duke.command is given.
      */
     public static DeleteCommand parseDelete(String[] parsedCommand, TaskList taskList) throws DukeException {
         if (parsedCommand.length == 1) {
@@ -122,7 +122,7 @@ public class Parser {
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @return FindKeywordCommand based on user input.
-     * @throws DukeException if invalid command is given.
+     * @throws DukeException if invalid duke.command is given.
      */
     public static Command parseFind(String[] parsedCommand) throws DukeException {
         if (parsedCommand.length == 1) {
@@ -138,7 +138,7 @@ public class Parser {
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @return ShowScheduleCommand based on user input.
-     * @throws DukeException if invalid command is given.
+     * @throws DukeException if invalid duke.command is given.
      */
     public static Command parseSchedule(String[] parsedCommand) throws DukeException {
         if (parsedCommand.length == 1) {
@@ -155,13 +155,13 @@ public class Parser {
      *
      * @param fullCommand User input string in its entirety.
      * @return AddCommand based on user input.
-     * @throws DukeException if invalid command is given.
+     * @throws DukeException if invalid duke.command is given.
      */
     public static Command parseAdd(String fullCommand) throws DukeException {
         String[] parsedCommand = fullCommand.split("\\s+", 2);
         String taskName = parsedCommand[0];
 
-        // Incomplete or invalid command
+        // Incomplete or invalid duke.command
         if (parsedCommand.length == 1) {
             switch (taskName) {
             case "deadline":
@@ -183,24 +183,24 @@ public class Parser {
 
         switch (taskName) {
 
-        // "deadline" command given
+        // "deadline" duke.command given
         case "deadline": {
             newTask = parseDeadline(taskDetails);
             break;
         }
 
-        // "event" command given
+        // "event" duke.command given
         case "event": {
             newTask = parseEvent(taskDetails);
             break;
         }
 
-        // "todo" command given
+        // "todo" duke.command given
         case "todo":
             newTask = new Todo(taskDetails);
             break;
 
-        // Invalid command
+        // Invalid duke.command
         default:
             throw new DukeException(DukeExceptionType.INVALID_INPUT);
         }

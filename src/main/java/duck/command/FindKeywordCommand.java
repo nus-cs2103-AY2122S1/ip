@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
 import duke.TaskList;
 
 /**
- * Represents the command that finds tasks on the task list that contains a specific keyword.
+ * Represents the duke.command that finds tasks on the task list that contains a specific keyword.
  */
 public class FindKeywordCommand extends Command {
     private final String keyword;
@@ -19,9 +19,9 @@ public class FindKeywordCommand extends Command {
     }
 
     /**
-     * Executes the command of finding tasks containing the given keyword.
+     * Executes the duke.command of finding tasks containing the given keyword.
      *
-     * @param taskList The TaskList used in the command.
+     * @param taskList The TaskList used in the duke.command.
      * @return String representing the list of tasks containing the given keyword.
      */
     @Override
