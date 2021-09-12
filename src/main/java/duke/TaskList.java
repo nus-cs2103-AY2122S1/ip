@@ -132,7 +132,7 @@ public class TaskList {
         }
         
         IntStream.range(0, database.size())
-                .forEach(x -> sb.append(String.format("\n\t %d. %s", x + 1, database.get(x))));
+                .forEach(x -> sb.append(String.format("\n%d. %s", x + 1, database.get(x))));
         return sb.substring(1);
     }
 }
