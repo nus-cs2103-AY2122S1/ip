@@ -3,6 +3,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
+import duke.Duke;
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
 import duke.Storage;
@@ -18,8 +20,17 @@ public class DukeTest {
     // Deadline
     @Test
     public void toString_newDeadline_correctString() {
-        assertEquals("[D][x] homework (by: Thursday, 11 November 2021)",
+        assertEquals(
+                "[D][✔] homework (by: Thursday, 11 November 2021)",
                 new Deadline("homework", LocalDate.of(2021, 11, 11), true).toString());
+    }
+
+    // Event
+    @Test
+    public void eventDate_newEvent_correctDate() {
+        assertEquals(
+                LocalDate.of(2021, 11, 11),
+                new Event("Walk the dog", LocalDate.of(2021, 11, 11)).getEventDate());
     }
 
     // ToDo
@@ -37,5 +48,13 @@ public class DukeTest {
         assertEquals("duke.txt", storage.getFile().getName());
     }
 
-
+    // Duke
+    @Test
+    public void dukeGetResponse_noTaskName_missingTaskName() {
+        Duke duke = new Duke("data/duke.txt");
+        assertEquals(
+                "Task name cannot be empty!",
+                duke.getResponse("todo")
+        );
+    }
 }
