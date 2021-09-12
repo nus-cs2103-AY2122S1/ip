@@ -1,6 +1,8 @@
 # Duke User Guide
 Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind from having to remember all your important tasks in a day. Duke is able to save all your tasks on your local computer so that you can easily access and update it even when you are offline.
 
+![Duke](sample.png)
+
 ## Features 
 
 ### Add Different types of tasks
