@@ -59,7 +59,7 @@ public class Duke {
     }
 
     /**
-     * Main method.
+     * Starts the Dory program.
      *
      * @param args arguments.
      */
