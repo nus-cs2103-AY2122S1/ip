@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 /**
  * A task that has no specified date and time.

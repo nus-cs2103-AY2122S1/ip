@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Parent class of tasks that have a description and can be marked as done.

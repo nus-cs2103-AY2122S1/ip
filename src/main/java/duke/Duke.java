@@ -1,5 +1,18 @@
 package duke;
 
+import duke.command.Commands;
+import duke.exception.DukeException;
+import duke.exception.IllegalCommandException;
+import duke.exception.TaskExistsException;
+import duke.gui.MainWindow;
+import duke.parser.ParsedInput;
+import duke.parser.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 /**
  * Duke is a chatbot that responds to user input.
  *

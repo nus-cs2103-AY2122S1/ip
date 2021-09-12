@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,66 +9,66 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.util.Locale;
 
-
 /**
- * A task that has to be done by a specified time.
+ * A task that happens at a specified time.
  *
  * @author Gabriel Goh
  */
-public class Deadline extends Task {
+public class Event extends Task {
 
     protected LocalDate date;
     protected LocalTime time;
 
     /**
-     * Empty constructor for comparing deadline objects by description.
+     * Empty constructor for comparing event objects by description.
      * To find duplicate tasks.
      *
-     * @param description Deadline description
+     * @param description Event description
      */
-    public Deadline(String description) {
+    public Event(String description) {
         super(description);
     }
 
     /**
-     * Constructor of Deadline instance.
+     * Constructor of Event instance.
      *
-     * @param description Deadline description
-     * @param by          When it is due
+     * @param description Event description
+     * @param at          When event occurs
      */
-    public Deadline(String description, Temporal by) {
+    public Event(String description, Temporal at) {
         super(description);
-        if (by instanceof LocalDateTime) {
-            LocalDateTime b = (LocalDateTime) by;
-            date = b.toLocalDate();
-            time = b.toLocalTime();
-        } else if (by instanceof LocalDate) {
-            date = (LocalDate) by;
+        if (at instanceof LocalDateTime) {
+            LocalDateTime a = (LocalDateTime) at;
+            date = a.toLocalDate();
+            time = a.toLocalTime();
+        } else if (at instanceof LocalDate) {
+            date = (LocalDate) at;
             time = null;
         }
+
     }
 
+
     /**
-     * Converts deadline into savable format.
+     * Converts event into savable format.
      *
      * @return String to save
      */
-    @Override
     public String saveString() {
-        return "D | " + super.saveString() + " | "
+        return "E | " + super.saveString() + " | "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
                 + " " + (time == null ? "All day"
                 : time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH)));
     }
 
     /**
-     * Returns string representation of deadline for printing.
+     * Returns string representation of event for printing
      *
      * @return String to print
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return "[E]" + super.toString() + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
                 + " " + (time == null ? "All day"
                 : time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH))) + ")";

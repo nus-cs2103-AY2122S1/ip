@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  * Ui handles printing messages to UI interface.
  *
@@ -11,7 +13,7 @@ public class Ui {
     private static final String SAVE = "Your list has been saved to DATA/DUKE.TXT";
     private static final String DONE = "Good job, meow! Marked this task as done:\n   ";
 
-    String showGreet() {
+    public String showGreet() {
         return GREET;
     }
 

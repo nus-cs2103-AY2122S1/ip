@@ -1,21 +1,24 @@
-package duke;
+package duke.parser;
 
 import java.io.Serializable;
 import java.time.temporal.Temporal;
+
+import duke.command.Commands;
+import duke.task.Task;
 
 /**
  * Data class of parsed input with no behaviour.
  */
 public class ParsedInput implements Serializable {
 
-    final Commands.CommandTypes command;
-    final String description;
-    final Temporal dateTime;
-    final int index;
-    final Task.TaskTypes taskType;
+    public final Commands.CommandTypes command;
+    public final String description;
+    public final Temporal dateTime;
+    public final int index;
+    public final Task.TaskTypes taskType;
 
     /* Search key for find method */
-    final String searchKey;
+    public final String searchKey;
 
     /**
      * Constructor for ParsedInput instance.
@@ -25,7 +28,7 @@ public class ParsedInput implements Serializable {
      * @param dateTime Date-time if applicable
      * @param index Index of item if applicable
      * @param taskType Type of Task to create or find if applicable
-     * @param searchKey Searchkey to find if applicable
+     * @param searchKey Search key to find if applicable
      */
     public ParsedInput(
             Commands.CommandTypes command,

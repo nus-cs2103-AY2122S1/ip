@@ -1,6 +1,11 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.exception.TaskIndexOutOfBounds;
+import duke.exception.TaskNotFound;
+
 
 /**
  * TaskList represents a list of tasks and the methods to modify that list.
@@ -18,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * Marks task in tasklist as done via task description.
+     * Marks task in task list as done via task description.
      *
      * @param description Task description
      * @param tt          Type of Task
@@ -35,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Mark task in tasklist as done via index.
+     * Marks task in task list as done via index.
      *
      * @param index Index of task in list
      * @return Task marked as done
@@ -133,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * Search tasklist for tasks that matches search key.
+     * Search task list for tasks that matches search key.
      * Returns new TaskList object of matching tasks.
      *
      * @param searchKey Search string to match
@@ -150,7 +155,7 @@ public class TaskList {
     }
 
     /**
-     * String representation of Tasklist
+     * String representation of task list
      *
      * @return String to print
      */

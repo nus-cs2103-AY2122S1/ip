@@ -1,5 +1,6 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -33,7 +34,7 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mafu.png"));
 
     /**
-     * Initializes the height of the scrollpane to adjust to the height of dialog container.
+     * Initializes the height of the scroll pane to adjust to the height of dialog container.
      */
     @FXML
     public void initialize() {
