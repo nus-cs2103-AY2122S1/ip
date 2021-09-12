@@ -23,7 +23,7 @@
     <children>
         
         <Region
-            prefWidth="200"
+            prefWidth="100"
             HBox.hgrow="ALWAYS"/>
 
         <Label
@@ -32,6 +32,7 @@
             wrapText="true"
             minHeight="-Infinity"
             maxHeight="Infinity"
+            maxWidth="500"
             style="-fx-background-color: #bbe1fa; -fx-background-radius: 5;">
 
             <padding>

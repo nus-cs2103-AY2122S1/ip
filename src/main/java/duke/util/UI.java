@@ -14,14 +14,12 @@ import duke.exception.DukeException;
  * @version CS2103 AY21/22 Sem 1 iP
  */
 public class UI {
-    private final String tab;
     private final List<String> outputLines;
 
     /**
      * Creates and initalizes a new UI instance.
      */
     public UI() {
-        this.tab = " ".repeat(4);
         this.outputLines = new ArrayList<>();
     }
 
@@ -31,9 +29,26 @@ public class UI {
      * @return Return the String start-up message of Duke.
      */
     public String getStartUpMessage() {
-        add("Hello! I'm Duke");
-        add("What can I do for you?");
+        add("Hello! I'm Duke :D");
+        add("\nI can help you keep track of tasks!");
+        add(getHelpMessage());
         return getOutput();
+    }
+
+    private String getHelpMessage() {
+        return "These are some of the commands I support:\n"
+                + "\nTask creation commands:\n"
+                + "    todo <description>\n"
+                + "    deadline <description> /by <deadline>\n"
+                + "    event <description> /at <period>\n"
+                + "\nOther commands include:\n"
+                + "    list\n"
+                + "    find <keyword>\n"
+                + "    done <index>\n"
+                + "    delete <index>\n"
+                + "    sort\n"
+                + "    bye\n"
+                + "\nFor a more comprehensive guild,\nplease visit the user guide!";
     }
 
     /**
@@ -72,7 +87,7 @@ public class UI {
      */
     public String getOutput() {
         String output = outputLines.stream()
-                .map(line -> tab + " " + line + "\n")
+                .map(line -> line + "\n")
                 .reduce("", (x, y) -> x + y);
         clear();
         return output;
