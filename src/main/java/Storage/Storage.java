@@ -83,6 +83,18 @@ public class Storage {
     public Task createTask(String input) throws Exception{
         return parser.createTask(input);
     }
+
+    /**
+     * Function checks if there is the input command will create a Task that
+     * is already present in the TaskList of program.
+     * @param action contains the input command.
+     * @param currentTaskList the TaskList object that holds the list of currently
+     *                        recorded Task.
+     * @return boolean value of whether the input command creates a duplicate Task.
+     */
+    public boolean isTaskDuplicate(String action, TaskList currentTaskList) {
+        return parser.isTaskDuplicate(action, currentTaskList);
+    }
 }
 
 // deals with making sense of the user command
@@ -125,6 +137,23 @@ class Parser {
     }
 
     /**
+     * Function checks if there is the input command will create a Task that
+     * is already present in the TaskList of program.
+     * @param action contains the input command.
+     * @param currentTaskList the TaskList object that holds the list of currently
+     *                        recorded Task.
+     * @return boolean value of whether the input command creates a duplicate Task.
+     */
+    public boolean isTaskDuplicate(String action, TaskList currentTaskList) {
+        for (Task curTask : currentTaskList.getTaskList()) {
+            if (formatTaskIntoCommands(curTask).equals(action)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Function able to read the input the judge which Task to use.
      * @param action contains information for what task to be created.
      * @return the task created.
@@ -135,6 +164,7 @@ class Parser {
         String[] dataOfAction = action.split("/")[0].split(" ");
         String type = dataOfAction[0];
         //decide the correct header
+
         if (type.equals("Todo")) {
             return new TodoTasks(action);
         } else {
@@ -155,6 +185,7 @@ class Parser {
             }
         }
     }
+
 }
 
 class TodoTasks extends Task{

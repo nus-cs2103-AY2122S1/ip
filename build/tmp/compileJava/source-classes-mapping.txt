@@ -4,12 +4,8 @@ Launcher.java
  Launcher
 Task/TaskList.java
  Task.TaskList
-Storage/Storage.java
- Storage.DeadlineTask
- Storage.EventsTask
- Storage.Parser
- Storage.Storage
- Storage.TodoTasks
+DialogBox.java
+ DialogBox
 Task/EventsException.java
  Task.EventsException
 Task/TodoException.java
@@ -23,6 +19,12 @@ Duke.java
  Ui
 Main.java
  Main
+Storage/Storage.java
+ Storage.DeadlineTask
+ Storage.EventsTask
+ Storage.Parser
+ Storage.Storage
+ Storage.TodoTasks
 MainWindow.java
  MainWindow
 DialogBox.java
