@@ -37,102 +37,105 @@ public class Storage {
         }
     }
 
+    public static String[] parseTaskDetails(Scanner lineScanner) {
+        int size = 0;
+        String[] taskDetails = new String[4];
+        while (lineScanner.hasNext()) {
+            taskDetails[size] = lineScanner.next();
+            size++;
+        }
+        lineScanner.close();
+        return taskDetails;
+    }
+
+
     /**
      * Reads the file to retrieve all the tasks.
      * 
      * @return The TaskList with all the tasks present in the file.
      * @throws IOException Handles any errors that can occur when interacting with the file.
      */
+
     public static TaskList readFile() throws IOException {
+        ArrayList<Task> tasks = new ArrayList<>();
         checkForFile(Storage.PATH);
-        Scanner sc = new Scanner(new File(Storage.PATH));
-        
-        sc.useDelimiter(Pattern.compile("-"));
-        ArrayList<Task> tasks = new ArrayList();
 
-        while(sc.hasNext()) {
-            String data = sc.nextLine();
-            int dashIndex = data.indexOf("-");
-            int slashIndex = data.indexOf("/");
-            int lineIndex = data.indexOf("|");
-            
-            String t = data.substring(0, dashIndex - 1);
-            String desc = data.substring(dashIndex + 2, lineIndex - 1);
-            String date = data.substring(lineIndex + 2, slashIndex - 1);
-            String p = data.substring(slashIndex);
-            
-//            String t = sc.next();
-            int i = Integer.parseInt(sc.next());
-//            String desc = sc.next();
-            Task.Priority priority;
-//            int descLen = desc.length();
-//            String newDesc;
-
-            switch(t) {
-            case "T":
-//                String p = sc.next();
-                p.toUpperCase();
-                if (p.contains("HIGH")) {
-                    priority = Task.Priority.HIGH;
-//                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("MEDIUM")) {
-                    priority = Task.Priority.MEDIUM;
-//                    newDesc = desc.substring(0, descLen - 6);
-                } else {
-                    priority = Task.Priority.LOW;
-//                    newDesc = desc.substring(0, descLen);
-                }
-                Task task = new Todo(desc, priority);
-                if (i == 1) {
-                    task.taskDone();
-                }
-                tasks.add(task);
-                break;
-            case "D":
-                String by = sc.next();
-                p = sc.next();
-                p.toUpperCase();
-                if (p.contains("HIGH")) {
-                    priority = Task.Priority.HIGH;
-//                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("MEDIUM")) {
-                    priority = Task.Priority.MEDIUM;
-//                    newDesc = desc.substring(0, descLen - 6);
-                } else {
-                    priority = Task.Priority.LOW;
-//                    newDesc = desc.substring(0, descLen);
-                }
-                task = new Deadline(desc, data, priority);
-                if (i == 1) {
-                    task.taskDone();
-                }
-                tasks.add(task);
-                break;
-            case "E":
-                String at = sc.next();
-                p = sc.next();
-                p.toUpperCase();
-                if (p.contains("HIGH")) {
-                    priority = Task.Priority.HIGH;
-//                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("MEDIUM")) {
-                    priority = Task.Priority.MEDIUM;
-//                    newDesc = desc.substring(0, descLen - 6);
-                } else {
-                    priority = Task.Priority.LOW;
-//                    newDesc = desc.substring(0, descLen);
-                }
-                task = new Events(desc, date, priority);
-                if (i == 1) {
-                    task.taskDone();
-                }
-                tasks.add(task);
-                break;
-            }
+        Scanner fileScanner = new Scanner(new File(PATH));
+        while (fileScanner.hasNext()) {
+            tasks.add(readEachTask(fileScanner));
         }
-        sc.close();
+        fileScanner.close();
         return new TaskList(tasks);
     }
+    
+    public static Task readEachTask(Scanner fileScanner) throws IOException {
+        Scanner lineScanner = new Scanner(fileScanner.nextLine());
+        lineScanner.useDelimiter(Pattern.compile("(\\n)| - "));
+
+        String taskCode = lineScanner.next();
+
+        String[] taskDetails = parseTaskDetails(lineScanner);
+        boolean isMarkedDone = taskDetails[0].equals("1");
+        String description = taskDetails[1];
+        String p = taskDetails[2];
+        String date = taskDetails.length > 3 ? taskDetails[3] : null;
+        
+            Task.Priority priority;
+
+            switch(taskCode) {
+            case "T":
+                p.toUpperCase();
+                if (p.contains("HIGH")) {
+                    priority = Task.Priority.HIGH;
+                } else if (p.contains("MEDIUM")) {
+                    priority = Task.Priority.MEDIUM;
+                } else {
+                    priority = Task.Priority.LOW;
+                }
+                Task task = new Todo(description, priority);
+                if (isMarkedDone) {
+                    task.taskDone();
+                }
+                return task;
+            case "D":
+                p.toUpperCase();
+                if (p.contains("HIGH")) {
+                    priority = Task.Priority.HIGH;
+//                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("MEDIUM")) {
+                    priority = Task.Priority.MEDIUM;
+//                    newDesc = desc.substring(0, descLen - 6);
+                } else {
+                    priority = Task.Priority.LOW;
+//                    newDesc = desc.substring(0, descLen);
+                }
+                task = new Deadline(description, date, priority);
+                if (isMarkedDone) {
+                    task.taskDone();
+                }
+                return task;
+            case "E":
+                p.toUpperCase();
+                if (p.contains("HIGH")) {
+                    priority = Task.Priority.HIGH;
+//                    newDesc = desc.substring(0, descLen - 4);
+                } else if (p.contains("MEDIUM")) {
+                    priority = Task.Priority.MEDIUM;
+//                    newDesc = desc.substring(0, descLen - 6);
+                } else {
+                    priority = Task.Priority.LOW;
+//                    newDesc = desc.substring(0, descLen);
+                }
+                task = new Events(description, date, priority);
+                if (isMarkedDone) {
+                    task.taskDone();
+                }
+                return task;
+            }
+        
+        return new Task("", Task.Priority.HIGH);
+    }
+
 
     /**
      * Retrieve all the existing tasks in TaskList and write it to the file. 

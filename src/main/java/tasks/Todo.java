@@ -10,7 +10,7 @@ public class Todo extends Task {
 
 
     public String toStringForFile() {
-        return "T - " + super.getStatusNumber() + " " + super.description + " | " + " / " + priority;
+        return "T - " + super.getStatusNumber() + " - " + super.description + " - " + priority;
     }
     
     /**

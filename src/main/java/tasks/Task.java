@@ -39,8 +39,18 @@ public class Task {
      * Method to retrieve the priority of an task.
      * @return The priority level of a task.
      */
-    public Priority getPriority() {
-        return priority;
+    public String getPriority() {
+        String priorityAsString;
+        
+        if (this.priority == Priority.HIGH) {
+            priorityAsString = "HIGH";
+        } else if (this.priority == Priority.MEDIUM) {
+            priorityAsString = "MEDIUM";
+        } else {
+            priorityAsString = "LOW";
+        }
+        return priorityAsString;
+        
     } 
 
     /**

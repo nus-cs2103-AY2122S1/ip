@@ -16,7 +16,7 @@ public class Events extends Task {
      */
     @Override
     public String toStringForFile() {
-        return "E - " + super.getStatusNumber() + " " + super.description + " | " + at + " / " + priority;
+        return "E - " + super.getStatusNumber() + " - " + super.description + " - " + priority + " - " + at;
     }
 
     /**

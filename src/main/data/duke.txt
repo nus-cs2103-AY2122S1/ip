@@ -1,3 +1,2 @@
-T - 0 hello |  / LOW
-D - 0 deadline eat  | 2 Feb 2000 / LOW
-E - 0 event eat  | 2000-02-02 / LOW
+T - 0 - eat - LOW
+D - 0 - deadline eat  - LOW - 2 Feb 2000
