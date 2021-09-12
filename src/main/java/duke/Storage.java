@@ -30,7 +30,7 @@ public class Storage {
      */
     public void loadTasks() throws IOException {
         Scanner scanner;
-        File file = new File(filename);
+        File file = new File("./" + filename);
         file.createNewFile();
         scanner = new Scanner(file);
         while (scanner.hasNext()) {

@@ -6,10 +6,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-
-
-
-
 public class DukeTest {
     @Test
     public void addTask_event_success() {
