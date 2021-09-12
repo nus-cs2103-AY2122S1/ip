@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.ArrayList;
 import duke.main.DukeException;
 
 /**
@@ -11,6 +12,7 @@ import duke.main.DukeException;
 
 public class Task {
     protected boolean isDone;
+    private ArrayList<String> taskTag;
 
     /**
      * Class constructor for Duke.Task class.
@@ -18,7 +20,7 @@ public class Task {
      */
     public Task() {
         this.isDone = false;
-        assert !isSameDate("") : false;
+        this.taskTag = new ArrayList<>();
     }
 
     /**

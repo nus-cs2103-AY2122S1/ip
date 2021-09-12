@@ -22,7 +22,7 @@ public class Deadline extends Task {
     private String deadlineDescription;
     private TaskDate deadlineDate;
     private String dateString;
-
+    private TaskTag deadlineTag;
     /**
      * Class constructor.
      *
@@ -33,11 +33,14 @@ public class Deadline extends Task {
         int startOfDescriptionIndex = getStartingIndexAfter(description, DEADLINE_KEYWORD);
         int startOfTimingIndex = getStartingIndexAfter(description, BY_CONNECTOR);
         deadlineDescription = getSubString(description, startOfDescriptionIndex,
-                startOfTimingIndex - BY_CONNECTOR.length());
+            startOfTimingIndex - BY_CONNECTOR.length());
         String descriptionDate = getSubString(description, startOfTimingIndex);
         deadlineDate = new TaskDate(descriptionDate);
         dateString = getDateString();
-	assert !isDone : false;
+        int startOfDeadlineTag = getStartingIndexAfter(description, TaskTag.getTagSymbol());
+        String tag = getSubString(description, startOfDeadlineTag - TaskTag.getTagSymbol().length());
+        deadlineTag = new TaskTag(tag);
+	    assert !isDone : false;
     }
 
     /**
@@ -45,13 +48,15 @@ public class Deadline extends Task {
      *
      * @param deadlineDescription description of deadline duke.task.
      * @param dateOfTask          date of the deadline duke.task.
+     * @param tag variable number of tags used to tag this task.
      * @throws ParseException due to improper date format.
      */
-    public Deadline(String deadlineDescription, String dateOfTask) throws DukeException {
+    public Deadline(String deadlineDescription, String dateOfTask, String tag) throws DukeException {
         super();
         this.deadlineDescription = deadlineDescription;
         this.deadlineDate = TaskDate.convertDateStringToDate(dateOfTask);
         dateString = getDateString();
+        this.deadlineTag = new TaskTag(tag);
     }
     private String getDateString() {
         return deadlineDate.toString();
@@ -64,8 +69,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s %s (by: %s)", DEADLINE_MARKER, super.toString(), deadlineDescription,
-            dateString);
+        return String.format("[%s]%s %s (by: %s) %s", DEADLINE_MARKER, super.toString(), deadlineDescription,
+            dateString, deadlineTag.getTag());
     }
 
     /**
@@ -74,8 +79,8 @@ public class Deadline extends Task {
      * @return storage format of the duke.task.
      */
     public String formatToStore() {
-        return String.format("%s | %s | %s | %s", DEADLINE_MARKER, getStatusIcon() == " " ? 1 : 0,
-            deadlineDescription, dateString);
+        return String.format("%s | %s | %s | %s | %s", DEADLINE_MARKER, getStatusIcon() == " " ? 1 : 0,
+            deadlineDescription, dateString, deadlineTag.getTagInStoreFormat());
     }
     /**
      * Checks if given datetime matches the tasks date time.
