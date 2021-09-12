@@ -41,8 +41,8 @@ public class Parser {
         /**
          * Gets the type of command corresponding to its String token.
          *
-         * @param label of command enum
-         * @return command enum
+         * @param label String to match to its enum container
+         * @return Appropriate command enum.
          */
         public static CommandEnum valueOfLabel(String label) {
             for (CommandEnum e : values()) {

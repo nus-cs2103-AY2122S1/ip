@@ -28,6 +28,12 @@ public class Storage {
     private String fileName;
     private String archiveFileName;
 
+    /**
+     * Default constructor for a Storage object.
+     *
+     * @param fileName Filepath to the main task list text file.
+     * @param archiveFileName Filepath to the archive of past tasks.
+     */
     public Storage(String fileName, String archiveFileName) {
         this.fileName = fileName;
         this.archiveFileName = archiveFileName;
@@ -37,7 +43,7 @@ public class Storage {
      * Loads the task list data from this storage file, and then returns it.
      * Returns an empty task list if the file does not exist, or is not a regular file.
      *
-     * @throws IOException if there were errors reading and/or converting data from file.
+     * @throws IOException If there were errors reading and/or converting data from file.
      */
     public ArrayList<Task> load() throws IOException {
 
@@ -116,7 +122,7 @@ public class Storage {
     /**
      * Archives the task list data to the storage file.
      *
-     * @throws IOException if there were errors reading and/or converting data from file.
+     * @throws IOException If there were errors reading and/or converting data from file.
      */
     public void archive(ArrayList<Task> tasks) {
         BufferedWriter outputWriter = null;

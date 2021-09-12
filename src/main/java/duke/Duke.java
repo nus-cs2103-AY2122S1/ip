@@ -77,7 +77,7 @@ public class Duke {
     /**
      * Checks whether the duke application is supposed to be running.
      *
-     * @return true if application is meant to be running, false otherwise
+     * @return true If application is meant to be running, false otherwise.
      */
     public boolean getActiveStatus() {
         return this.isRunning;
