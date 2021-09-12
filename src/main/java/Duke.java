@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import duke.commands.Command;
 import duke.utils.Parser;
 import duke.utils.Storage;
@@ -40,24 +42,27 @@ public class Duke extends Application {
     /**
      * Constructor that instantiates Duke
      */
-    public Duke(){
+    public Duke() {
         ui = new Ui();
         parser = new Parser();
         this.storage = new Storage();
-        try{
+        try {
             taskList = storage.loadTaskList();
-        } catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
     }
 
-    public void run(){
+    /**
+     * Method to start running the application
+     */
+    public void run() {
         ui.start();
         boolean isExit = false;
 
-        while(!isExit){
-            try{
+        while (!isExit) {
+            try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = parser.parseInput(fullCommand);
@@ -65,7 +70,7 @@ public class Duke extends Application {
                 isExit = c.isExit();
 
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 ui.showError(e);
             } finally {
                 ui.showLine();
@@ -79,7 +84,7 @@ public class Duke extends Application {
      * Commences Duke
      * @param args CLI arguments
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         new Duke().run();
 
