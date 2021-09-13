@@ -2,9 +2,10 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 import duke.io.DukeParser;
 import duke.type.DukeCommand;
-import org.junit.jupiter.api.Test;
 
 public class DukeParserTest {
     @Test
