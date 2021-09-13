@@ -52,6 +52,6 @@ public class Ui {
 
     /** Shows messages */
     public void showMessage(String message) {
-        System.out.println(getDashes() + message + getDashes());
+        System.out.println(getDashes() + "    " + message + "\n" + getDashes());
     }
 }
