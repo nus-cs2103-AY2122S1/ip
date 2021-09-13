@@ -45,7 +45,7 @@ public class Duke {
             String commandString = this.ui.getCommand();
             Command command;
             try {
-                command = Parser.parse(commandString);
+                command = Parser.parse(commandString.strip());
                 command.execute(this.tasks, this.storage);
                 this.ui.showCommandOutput(command);
                 isRunning = command.isRunning();
@@ -68,7 +68,7 @@ public class Duke {
     public String getResponse(String input) {
         Command command;
         try {
-            command = Parser.parse(input);
+            command = Parser.parse(input.strip());
             command.execute(this.tasks, this.storage);
             return command.toString();
         } catch (DukeException dukeException) {
