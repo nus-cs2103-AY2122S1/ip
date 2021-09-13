@@ -34,7 +34,7 @@ Adds a new `deadline` task to your task list.
 
 Format: `deadline <task_description> /by <time>`
 *  Time can be entered in any format convenient for you. 
-*  Time can also be entered in the format `YYY-MM-DD`. 
+*  Time can also be entered in the format `YYYY-MM-DD`. 
 
 Examples: 
 *  `deadline math homework /by today 9pm`
@@ -48,7 +48,7 @@ Adds a new `event` task to your task list.
 
 Format: `event <task_description> /at <time>`
 *  Time can be entered in any format convenient for you.
-*  Time can also be entered in the format `YYY-MM-DD`.
+*  Time can also be entered in the format `YYYY-MM-DD`.
 
 Examples:
 *  `event team meeting /at Saturday 9pm`
@@ -58,7 +58,7 @@ Examples:
 
 ### ❀ Listing all tasks: `list` 
 
-Shows a list of all tasks in your task list.
+Shows a list of all current tasks.
 
 Format: `list`
 
