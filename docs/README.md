@@ -5,7 +5,7 @@ This will teach you all you need to know about Duke so you can start using it.
 
 Here are is a summary of commands that Duke responds to: (You can find the detailed usage guide below)
 
-Command | Format | What they do
+Command | Format | What it does
 ------- | ------ | ------------
 `list` | `list` | Displays a list of your current tasks.
 `todo` | `todo {task description}` | Adds a todo to your task list.
@@ -70,7 +70,8 @@ Are all acceptable.
 
 Expected outcome (using example 2):
 
-  <img width="400" alt="Screenshot 2021-09-13 at 5 06 27 PM" src="https://user-images.githubusercontent.com/85099754/133056429-8feb9237-fa24-47ad-9841-404247ba7bd1.png">
+  <img width="400" alt="Screenshot 2021-09-13 at 5 41 03 PM" src="https://user-images.githubusercontent.com/85099754/133061750-5b17daf2-6d15-4dd9-bcd4-c348a68eb041.png">
+
 
 
 ### 4. `event`: Adds an event task 
