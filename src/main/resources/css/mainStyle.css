@@ -1,0 +1,16 @@
+.root {
+    -fx-base: #3D4855;
+    -fx-background: #3D4855;
+    -fx-focus-color: #3D4855;
+    -fx-font-family: "Roboto";
+}
+
+.text-input {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #04B5CD;
+    -fx-border-width: 2;
+}
+
+.button {
+    -fx-background-color: #04B5CD;
+}

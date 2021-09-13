@@ -24,6 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Image icon = new Image("/images/icon.png");
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("/css/mainStyle.css");
             stage.getIcons().add(icon);
             stage.setTitle("JoJoBot");
             stage.setScene(scene);

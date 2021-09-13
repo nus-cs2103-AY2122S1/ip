@@ -5,11 +5,11 @@ package duke.util;
  */
 public class Ui {
 
-    protected static final String LOGO = "\t\t          __      __      ___        \n"
-            + "\t\t         |  _ \\   |   |  /   _   \\\n"
-            + "\t\t         | | |  |  |   |  |  /  \\  |\n"
-            + "\t\t         | |_|  |  |   |  |  \\_/  |\n"
-            + "WRYYYY, Kono |___/   |__|   \\___/   da!\n";
+    protected static final String LOGO = "\t\t            __      __      ___        \n"
+            + "\t\t           |  _ \\   |   |  /   _   \\\n"
+            + "\t\t           | | |  |  |   |  |  /  \\  |\n"
+            + "\t\t           | |_|  |  |   |  |  \\_/  |\n"
+            + "WRYYYY, Kono   |___/   |__|   \\____/   da!\n";
 
     /**
      * Constructs an Ui that deals with interactions with the user.
