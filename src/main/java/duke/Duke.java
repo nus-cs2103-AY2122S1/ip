@@ -10,7 +10,6 @@ public class Duke {
     private Storage notesStorage;
     private TaskList tasks;
     private NoteList notes;
-    private Ui ui;
 
     /**
      * Retrieves all the tasks stored by Jarvis in the hard disk upon running the main method.
@@ -19,23 +18,22 @@ public class Duke {
      * @param noteFilePath The file in which the notes are stored
      */
     public Duke(String taskFilePath, String noteFilePath) {
-        //ui = new Ui();
-        taskStorage = new Storage(taskFilePath); //To load user tasks
-        notesStorage = new Storage(noteFilePath); //To load user notes as well
+        taskStorage = new Storage(taskFilePath); // To load user tasks
+        notesStorage = new Storage(noteFilePath); // To load user notes as well
 
         tasks = new TaskList();
         notes = new NoteList();
 
         try {
-            taskStorage.retrieveFileContents();
-            notesStorage.retrieveFileContents();
+            taskStorage.retrieveFileContents(); // Retrieves contents from the jarvis.txt file in user's hard disk
+            notesStorage.retrieveFileContents(); // Retrieves contents from the notes.txt file in user's hard disk
         } catch (FileNotFoundException e) {
             System.err.println(e);
         }
     }
 
     /**
-     * Returns the response to be given by Jarvis to the user upon receiving a command
+     * Returns the response to be given by Jarvis to the user upon receiving a command.
      *
      * @param input the command given by the user
      */
@@ -45,12 +43,7 @@ public class Duke {
             case "list":
                 return Ui.listTasks();
             case "notes":
-                // If there are no tasks in the task list
-                if (NoteList.getCounter() == 0) {
-                    return "\t" + Ui.NO_NOTES;
-                } else {
-                    return Parser.parseNoteList();
-                }
+                return Ui.listNotes();
             case "done":
                 return Parser.parseDone(input);
             case "delete":
