@@ -1,7 +1,11 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.DukeDoneIncorrectArgument;
+import duke.exception.DukeFindIncorrectArgument;
+import duke.exception.DukeIncorrectCommandWord;
+import duke.exception.DukeIncorrectInputs;
 
 import java.io.IOException;
 

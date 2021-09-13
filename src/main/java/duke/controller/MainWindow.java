@@ -1,8 +1,8 @@
 package duke.controller;
 
 import duke.Duke;
-import duke.GUI;
 import duke.exception.DukeException;
+import duke.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InterruptedException {
+    private void handleUserInput() {
         String input = userInput.getText().strip();
         String response = " ";
 
@@ -67,6 +67,8 @@ public class MainWindow extends AnchorPane {
             userDb = DialogBox.getUserDialog(input, userImage);
             dukeDb = DialogBox.getDukeDialog(response, dukeImage);
         } catch (DukeException e) {
+            userDb = DialogBox.getUserDialog(input, userImage);
+            dukeDb = DialogBox.getDukeDialog(GUI.sendErrorMessage(e), dukeImage);
             dukeDb.modifyColorForError();
         }
 
@@ -90,14 +92,14 @@ public class MainWindow extends AnchorPane {
      */
     private String getResponse(String input) throws DukeException {
         String toReturn = "";
+
         try {
             toReturn = duke.getResponse(input);
         } catch (DukeException e) {
-            toReturn = GUI.sendErrorMessage(e);
             throw e;
-        } finally {
-            return toReturn;
         }
+
+        return toReturn;
     }
 
     /**

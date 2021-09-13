@@ -8,7 +8,6 @@ import duke.task.Event;
  * that is thrown when the user does not enter description
  * after wanting to add a task according to the format.
  */
-
 public class DukeIncorrectTaskDescription extends DukeIncorrectInputs {
     private static final String PREFIX = "To log a";
     private static final String SUFFIX = ", you have to log the "

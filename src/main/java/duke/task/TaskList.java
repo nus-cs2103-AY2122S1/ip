@@ -5,7 +5,6 @@ import duke.exception.DukeNoSuchTask;
 import duke.exception.DukeUnableToFind;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Represents a Task List that stores the log of

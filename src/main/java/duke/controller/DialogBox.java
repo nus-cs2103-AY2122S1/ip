@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +12,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -108,7 +108,7 @@ public class DialogBox extends HBox {
      */
     public void modifyColorForError() {
         this.dialog.setTextFill(color(1, 1, 1));
-        this.setBackground(new Background(new BackgroundFill(color(1, 0, 0),
+        this.message.setBackground(new Background(new BackgroundFill(color(1, 0, 0),
                 new CornerRadii(15),
                 null)));
     }

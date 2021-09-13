@@ -11,9 +11,8 @@ public class DukeUnableToFind extends DukeIncorrectInputs {
      * Constructor for the DukeDoneIncorrectArgument Exception.
      */
     public DukeUnableToFind() {
-        super("⚠️ Sorry! I am unable to find any task with this keyword!\n" +
-                        "Do note that there should only be ONE keyword after the\n" +
-                        "command 'find'.",
+        super("⚠️ Sorry! I am unable to find any task with this keyword!\n"
+                        + "Do note that there should only be ONE keyword after the command 'find'.",
                 new IllegalArgumentException());
     }
 }

@@ -3,9 +3,9 @@ package duke.task;
 import duke.exception.DukeException;
 import duke.exception.DukeIncorrectTaskDescription;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 /**
  * Represents an Event object that can be added

@@ -1,6 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -50,14 +49,8 @@ public class GUI {
      * Sends the error messages when Duke chatBot catches an exception.
      * @param e exception that is thrown.
      */
-    public static String sendErrorMessage(Exception e) throws Exception {
-        try {
-
-        } catch (DukeException dukeException){
-            throw dukeException;
-        } finally {
-            return GUI.formatDukeMessage(e.getMessage() + "\n"); // Error in red
-        }
+    public static String sendErrorMessage(Exception e) {
+        return GUI.formatDukeMessage(e.getMessage() + "\n");
 
     }
 

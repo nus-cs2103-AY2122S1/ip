@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Duke;
 import duke.exception.DukeException;
+import duke.GUI;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.GUI;
 
 import java.io.IOException;
 
