@@ -6,22 +6,43 @@ import duke.exceptions.DukeException;
 import javafx.application.Platform;
 
 /**
- * Duke object class. Contains methods to run the duke bot.
+ * Duke object class,
+ * contains methods to run the duke bot.
  */
 public class Duke {
+
+    /**
+     * Helps convert string input by user
+     * to commands.
+     */
     private final Parser parser;
+
+    /**
+     * Helps in storing tasks and retrieving
+     * when required by user.
+     */
     private Storage storage;
+
+    /**
+     * Helps in displaying tasks to user.
+     */
     private Ui ui;
+
+    /**
+     * Keeps track of tasks while duke
+     * program is running.
+     */
     private TaskList tasks;
 
 
     /**
-     * Instantiates Parser, Storage, Ui and Tasklist and passes the filepath to storage class
-     * catches both exceptions from storage class. If either 1 exception happens,
-     * Tasklist is initialized as empty, with no tasks in it.
-     * 
-     * @param filePath String containing the relative file path 
-     * that storage class takes in to store and read tasks
+     * Instantiates Parser, Storage, Ui and
+     * taskList and passes the filepath to storage class.
+     * Catches both exceptions from storage class.
+     * If either 1 exception happens, taskList is
+     * initialized as empty, with no tasks in it.
+     * @param filePath String containing the relative file path
+     * that storage class takes in to store and read tasks.
      */
     public Duke(String filePath) {
         parser = new Parser();
@@ -36,18 +57,24 @@ public class Duke {
     }
 
     /**
-     * gives the starting welcome message
-     * @return String welcome message
+     * Gives the starting welcome message.
+     * @return String welcome message.
      */
     public String getWelcomeMessage() {
         return ui.showWelcomeMsg();
     }
 
     /**
-     * Retrieves the response of the bot given the input command by user.
-     * Interacts with the different classes to achieve the bot behaviour.
-     * Run stops when a "bye" command is entered and ends the bot processes.
-     * 
+     * Retrieves the response of the bot
+     * given the input command by user.
+     * Interacts with the different classes
+     * to achieve the bot behaviour.
+     * Run stops when a "bye" command is
+     * entered and ends the bot processes.
+     * @param fullCommand String of command given
+     * by user.
+     * @return String of output to be displayed
+     * to user via UI.
      */
     public String run(String fullCommand) {
         try {
@@ -61,6 +88,4 @@ public class Duke {
             return ui.displayErrorMessage(e.getMessage());
         }
     }
-
-
 }

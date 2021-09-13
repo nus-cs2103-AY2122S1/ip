@@ -7,16 +7,20 @@ import duke.exceptions.DeleteOutOfBoundsException;
 
 
 /**
- * Class that keeps track of all the tasks given by the user.
+ * Class that keeps track of all the
+ * tasks given by the user.
  */
 public class TaskList {
+
+    /**
+     * Keeps track of all the taskk that has been stored.
+     */
     private final ArrayList<Task> allTasks;
 
     /**
      * Initializes the TaskList class with
      * arraylist to store tasks in future.
-     *
-     * @param allTasks arraylist of tasks to be stored
+     * @param allTasks arraylist of tasks to be stored.
      */
     public TaskList(ArrayList<Task> allTasks) {
         this.allTasks = allTasks;
@@ -34,7 +38,6 @@ public class TaskList {
     /**
      * Adds a newly input task by user into the
      * task arraylist for keeping track.
-     *
      * @param newTask Task object of the new task to be added
      * @return boolean whether a new task has been added to the task arraylist
      */
@@ -44,7 +47,6 @@ public class TaskList {
 
     /**
      * Returns all the tasks that users have input thus far.
-     *
      * @return ArrayList of all the tasks
      */
     public ArrayList<Task> getTaskList() {
@@ -53,7 +55,6 @@ public class TaskList {
 
     /**
      * Returns the task that user wishes to mark as completed.
-     *
      * @param taskNumber Integer of the position
      * of task to be marked as completed
      * @return Task that is marked as completed
@@ -75,7 +76,6 @@ public class TaskList {
 
     /**
      * Returns the task that user wishes to remove.
-     *
      * @param taskNumber Integer of the position of
      * task to be removed from tracking arraylist.
      * @return Task that is going to be removed from tracking arraylist
@@ -83,7 +83,6 @@ public class TaskList {
      * number to be deleted is greater than the total tasks
      * in the tracking arraylist
      */
-
     public Task deleteTask(
             int taskNumber) throws DeleteOutOfBoundsException {
         if (taskNumber > allTasks.size()) {
@@ -94,7 +93,6 @@ public class TaskList {
 
     /**
      * returns length of arraylist of tasks that are stored.
-     *
      * @return Integer of the length of all the tasks user has input
      */
     public int getTaskListLength() {

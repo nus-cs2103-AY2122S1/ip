@@ -5,10 +5,8 @@ package duke.exceptions;
  * number greater than number of task available as done.
  */
 public class DoneOutOfBoundsException extends DukeException {
-    
     /**
-     * Instantiates a done exception
-     * 
+     * Instantiates a done exception.
      * @param taskLength Integer of the length of the tasklist
      */
     public DoneOutOfBoundsException(int taskLength) {

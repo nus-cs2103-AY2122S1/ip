@@ -7,12 +7,10 @@ package duke.exceptions;
 public class DeleteOutOfBoundsException extends DukeException {
 
     /**
-     * Instantiates a deleting exception
-     * 
-     * @param taskLength Integer of the length of the tasklist
+     * Instantiates a deleting exception.
+     * @param taskLength Integer of the length of the taskList
      */
     public DeleteOutOfBoundsException(int taskLength) {
         super("You only have " + taskLength + " tasks! Cannot delete task!");
     }
-    
 }

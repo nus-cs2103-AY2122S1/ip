@@ -10,30 +10,44 @@ import java.util.Optional;
  * Class that specifies the properties of event task.
  */
 public class Event extends Task {
-    private static final String taskDirectivePoint = "at";
-    private static final String assignmentType = AssignmentType.
+
+    /**
+     * Indicates the expected input of a
+     * event task when input by user.
+     */
+    private static final String TASK_DIRECTIVE = "at";
+
+    /**
+     * Displays the type of task assignment of
+     * event task in this case [E].
+     */
+    private static final String ASSIGNMENT_TYPE = AssignmentType.
             EVENT.
             getStatus();
-    private static final boolean hasDateTime = true;
+
+    /**
+     * Indicates whether event task has a date
+     * and time element to it.
+     */
+    private static final boolean HAS_DATE_TIME = true;
 
     /**
      * Initializes event class with a description given by user.
-     *
-     * @param desc String of user input
-     * @throws WrongDateFormatException if format of date in event is wrong
-     * @throws WrongTimeFormatException if format of time in event is wrong
+     * @param desc String of user input.
+     * @throws WrongDateFormatException if format of date in
+     * event is wrong.
+     * @throws WrongTimeFormatException if format of time in
+     * event is wrong.
      */
-
     public Event(
             String desc) throws WrongDateFormatException,
             WrongTimeFormatException,
             WrongEventOrDeadlineFormatException {
-        super(desc, hasDateTime, taskDirectivePoint);
+        super(desc, HAS_DATE_TIME, TASK_DIRECTIVE);
     }
 
     /**
      * Initializes a new event class with a change of the completion status.
-     *
      * @param desc String of the user input
      * @param newStatus String updated status of the task
      * @param date Optional date if date exist
@@ -43,9 +57,10 @@ public class Event extends Task {
     }
 
     /**
-     * returns new event task with its completion status updated.
-     *
-     * @param newStatus String new completion status of the event task
+     * Returns new event task with
+     * its completion status updated.
+     * @param newStatus String new completion
+     * status of the event task.
      */
     @Override
     public Event updateStatus(String newStatus) {
@@ -53,11 +68,12 @@ public class Event extends Task {
     }
 
     /**
-     * returns the string of the event task to be stored in storage
+     * Returns the string of the event
+     * task to be stored in storage.
      */
     @Override
     public String getOriginalFormatForStorage() {
-        return assignmentType
+        return ASSIGNMENT_TYPE
                 + this.status
                 + " "
                 + this.getOutputMessage(
@@ -72,7 +88,7 @@ public class Event extends Task {
                 this.date.
                         get().
                         toString());
-        String assignmentProg = assignmentType
+        String assignmentProg = ASSIGNMENT_TYPE
                 + this.status
                 + " "
                 + outputString;
@@ -84,14 +100,14 @@ public class Event extends Task {
         String[] updatedDesc = this.taskDescription.split(" ");
         for (int i = 0; i < updatedDesc.length; i++) {
             String item = updatedDesc[i];
-            if (item.contains("/" + taskDirectivePoint)) {
+            if (item.contains("/" + TASK_DIRECTIVE)) {
                 break;
             }
             sb.append(item + " ");
         }
         return sb.toString()
                 + "("
-                + taskDirectivePoint
+                + TASK_DIRECTIVE
                 + ": "
                 + dateExpression
                 + ")";

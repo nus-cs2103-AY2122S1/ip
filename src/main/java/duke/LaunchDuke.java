@@ -10,17 +10,35 @@ import javafx.stage.Stage;
 
 
 /**
- * A Class to initialize Duke Object and run the entire program.
+ * A Class to initialize Duke Object and
+ * run the entire program.
  * @author Jia Rong
  */
 public class LaunchDuke extends Application {
-    private static final String path = "./data/duke.txt";
-    private Duke duke = new Duke(path);
+    /**
+     * Specifies the relative path of where to
+     * write user stored tasks to.
+     */
+    private static final String PATH = "./data/duke.txt";
 
+    /**
+     * Initializes a new duke to kickstart the
+     * run of the program.
+     */
+    private Duke duke = new Duke(PATH);
+
+    /**
+     * Loads the FXML for display of GUI.
+     * @param stage displays tasks to user
+     * via the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LaunchDuke.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    LaunchDuke.
+                            class.
+                            getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

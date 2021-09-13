@@ -11,33 +11,71 @@ import duke.commands.FindCommand;
 import duke.commands.ScheduleCommand;
 
 /**
- * Class that converts inputs by user to Command Object to be used.
+ * Class that converts inputs by user
+ * to Command Object to be used.
  */
 public class Parser {
+    /**
+     * Bye command string structure.
+     */
     private static final String BYE_COMMAND = "bye";
+
+    /**
+     * List command string structure.
+     */
     private static final String LIST_COMMAND = "list";
+
+    /**
+     * Done command string structure.
+     */
     private static final String DONE_COMMAND = "done";
+
+    /**
+     * To do command string structure.
+     */
     private static final String TODO_COMMAND = "todo";
+
+    /**
+     * DeadLine command string structure.
+     */
     private static final String DEADLINE_COMMAND = "deadline";
+
+    /**
+     * Event command string structure.
+     */
     private static final String EVENT_COMMAND = "event";
+
+    /**
+     * Delete command string structure.
+     */
     private static final String DELETE_COMMAND = "delete";
+
+    /**
+     * Find command string structure.
+     */
     private static final String FIND_COMMAND = "find";
+
+    /**
+     * Schedule command string structure.
+     */
     private static final String SCHEDULE_COMMAND = "schedule";
 
     /**
      * Instantiates a new Parser class.
      */
-    public Parser() { }
-
+    public Parser() {
+    }
 
     /**
-     * Reads the given string by the user and checks what type of command is it.
-     * Returns the matching Command Object.
-     *
-     * @param input String instructions given by the user
-     * @return Command object of the relating to the input given by user
-     * @throws NoSuchCommandException If command do not fulfill
-     * the requirements of the bot and thus not recognized
+     * Reads the given string by the user and
+     * checks what type of command is it and
+     * returns the matching Command Object.
+     * @param input String instructions given by the user.
+     * @return Command object of the relating to
+     * the input given by user.
+     * @throws NoSuchCommandException If command do
+     * not fulfill the requirements of the bot and thus
+     * not recognized.
      */
     Command parse(String input) throws NoSuchCommandException {
         String formattedInput = input.trim();
@@ -46,14 +84,16 @@ public class Parser {
         if (this.isNormalCommandType(commandInput)) {
             return this.extractNormalCommand(commandInput, formattedInput);
         }
-        return this.extractSpecialCommand(commandInput, formattedInput, commandItems);
-
+        return this.extractSpecialCommand(
+                commandInput,
+                formattedInput,
+                commandItems);
     }
 
     private Command extractSpecialCommand(
-        String commandName,
-        String fullCommandInput,
-        String[] commandList)
+            String commandName,
+            String fullCommandInput,
+            String[] commandList)
             throws NoSuchCommandException {
         if (commandList.length == 1) {
             String errorMessage = "☹ OOPS!!! The description of a "
@@ -67,17 +107,19 @@ public class Parser {
 
 
     /**
-     * returns the respective command of the user as a Command object.
-     *
-     * @param commandName String of the name of the type of the command given
-     * @param fullCommandInput String of the full instructions given by user
-     * @return Command of the correct type
-     * @throws NoSuchCommandException if the command given by user is not
-     * something that this bot is supposed to handle
+     * Returns the respective command of
+     * the user as a Command object.
+     * @param commandName String of the name of
+     * the type of the command given.
+     * @param fullCommandInput String of the
+     * full instructions given by user.
+     * @return Command of the correct type.
+     * @throws NoSuchCommandException if the command given
+     * by user is not something that this bot is supposed to handle.
      */
     private Command extractNormalCommand(
-        String commandName,
-        String fullCommandInput) throws NoSuchCommandException {
+            String commandName,
+            String fullCommandInput) throws NoSuchCommandException {
         if (commandName.equals(DELETE_COMMAND)) {
             return new DeleteCommand(fullCommandInput);
         } else if (commandName.equals(LIST_COMMAND)) {
@@ -97,8 +139,9 @@ public class Parser {
     }
 
     /**
-     * Checks if the respective command is of todo, deadline or event
-     * to distinguish how the command Object is to be initialized.
+     * Checks if the respective command is
+     * of todo, deadline or event to distinguish
+     * how the command Object is to be initialized.
      *
      * @param commandName String of the command
      * @return boolean to indicate if the command given
@@ -110,5 +153,4 @@ public class Parser {
         boolean isEvent = !commandName.equals(EVENT_COMMAND);
         return isToDo && isDeadLine && isEvent;
     }
-    
 }

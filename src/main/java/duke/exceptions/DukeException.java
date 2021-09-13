@@ -5,12 +5,10 @@ package duke.exceptions;
  * occur in the running of duke bot.
  */
 public class DukeException extends Exception {
-
     /**
-     * Instantiates a duke exception 
+     * Instantiates a duke exception
      * capturing all errors that may occur in duke.
-     * 
-     * @param exceptionMsg String error message 
+     * @param exceptionMsg String error message.
      */
     public DukeException(String exceptionMsg) {
         super(exceptionMsg);

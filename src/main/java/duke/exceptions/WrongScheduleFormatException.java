@@ -1,8 +1,8 @@
 package duke.exceptions;
 
 /**
- * Class of exception that handles 
- * invalid schedule format .
+ * Class of exception that handles
+ * invalid schedule format.
  */
 public class WrongScheduleFormatException extends DukeException {
 

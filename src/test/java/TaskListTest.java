@@ -20,7 +20,9 @@ public class TaskListTest {
         tasks.add(new ToDo("read book"));
         tasks.add(new Event("return book /at 2/12/2019 1725"));
         TaskList tasklist = new TaskList(tasks);
-        String expectedString = "1. [T][] read book" + "\n" + "2. return book (at: DECEMBER 2 2019 5.25pm";
+        String expectedString = "1. [T][] read book"
+                + "\n"
+                + "2. return book (at: DECEMBER 2 2019 5.25pm";
         assertEquals(expectedString, tasklist.toString());
     }
 
@@ -57,7 +59,9 @@ public class TaskListTest {
         tasks.add(new Event("return book /at 2/12/2019 1725"));
         TaskList tasklist = new TaskList(tasks);
         Task doneTask = tasklist.markTaskAsDone(2);
-        assertEquals("[E][X] return book (at: DECEMBER 2 2019 5.25pm)", doneTask,toString());
+        assertEquals(
+                "[E][X] return book (at: DECEMBER 2 2019 5.25pm)",
+                doneTask, toString());
     }
 
     @Test

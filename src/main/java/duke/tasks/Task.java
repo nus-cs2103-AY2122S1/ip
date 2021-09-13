@@ -8,13 +8,24 @@ import java.util.Optional;
 import duke.status.Status;
 
 /**
- * Abstract class that outlines the base structure of a task.
+ * Abstract class that outlines the
+ * base structure of a task.
  */
 public abstract class Task {
+    /**
+     * Displays the task description as string.
+     */
     protected final String taskDescription;
-    protected final String status;
-    protected final Optional<Date> date;
 
+    /**
+     * Completed or uncompleted status.
+     */
+    protected final String status;
+
+    /**
+     * Optional date if it exists.
+     */
+    protected final Optional<Date> date;
 
     /**
      * Initializes a new task object with description
@@ -56,12 +67,10 @@ public abstract class Task {
     /**
      * Overloaded task constructor to update
      * completion status of a task.
-     *
      * @param desc String description of the task
      * @param newStatus String updated status of task
      * @param date Optional date attribute of task
      */
-
     public Task(
             String desc, String newStatus,
             Optional<Date> date) {
@@ -72,7 +81,6 @@ public abstract class Task {
 
     /**
      * Converts to appropriate format for storing of tasks.
-     * 
      * @return String format of tasks.
      */
     public abstract String getOriginalFormatForStorage();
@@ -80,15 +88,13 @@ public abstract class Task {
     /**
      * Changes the status of a task if it is marked
      * completed by the user.
-     * 
      * @param newStatus String of new status task should be changed to.
      * @return Task with a status changed if its completed or not.
      */
     public abstract Task updateStatus(String newStatus);
 
     /**
-     *rreturns an optional date object.
-     * 
+     * Returns an optional date object.
      * @return Optional date
      */
     public Optional<Date> getOptionalDate() {

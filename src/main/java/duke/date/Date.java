@@ -2,32 +2,56 @@ package duke.date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.lang.NumberFormatException;
 import java.time.format.DateTimeParseException;
 import duke.exceptions.WrongDateFormatException;
 import duke.exceptions.WrongTimeFormatException;
 
 
 /**
- * Class that stores and format date time values
+ * Class that stores and format date time values.
  */
 public class Date {
+
+    /**
+     * Indicates morning time before 12pm.
+     */
     private static final String MORNING_INDICATOR = "am";
+
+    /**
+     * Indicates afternoon to evening time after 12pm
+     * and before 12am.
+     */
     private static final String EVENING_INDICATOR = "pm";
+
+    /**
+     * Indicates exact noon timing of 12.00pm.
+     */
     private static final int NOON = 12;
+
+    /**
+     * Indicates universal date length of 3
+     * with date, month and year.
+     */
+    private static final int LENGTH_OF_DATE = 3;
+
+    /**
+     * Keeps track of date of event or deadline task.
+     */
     private final LocalDate globalDate;
+
+    /**
+     * Keeps track of time of event or deadline task.
+     */
     private final LocalTime globalTime;
 
-    
     /**
-     * Initializes the date class with 
-     * a given string form of date and time 
-     * 
-     * @param dateAndTime String of the date and time user input
+     * Initializes the date class with
+     * a given string form of date and time.
+     * @param dateAndTime String of the date and time user input.
      * @throws WrongTimeFormatException if the expected time
-     * format given by user is wrong
+     * format given by user is wrong.
      * @throws WrongDateFormatException if the expected date
-     * format given by user is wrong
+     * format given by user is wrong.
      */
     public Date(
             String dateAndTime) throws WrongTimeFormatException,
@@ -43,13 +67,12 @@ public class Date {
 
     /**
      * Utilized by the the schedule command class
-     * to have compare dates against all the task in tasklist.
-     * 
-     * @param commandWithDate Array of string that
+     * to have compare dates against all the task in taskList.
+     * @param commandWithDate Array of string that.
      * consists of command name and the date input from user.
-     * @throws WrongDateFormatException throws error when the date
+     * @throws WrongDateFormatException throws error when the date.
      * format is not in the standards acceptable of 12:12:2020,
-     * 12-12-2020 or 12/12/2020
+     * 12-12-2020 or 12/12/2020.
      */
     public Date(String[] commandWithDate) throws WrongDateFormatException {
         String actualDate = commandWithDate[1];
@@ -61,18 +84,18 @@ public class Date {
     private LocalTime formatTime(
             String timeString) throws NumberFormatException,
             WrongTimeFormatException, DateTimeParseException {
-        String[] hhmm = timeString.split("[-/:]+");
+        String[] hourAndMinutes = timeString.split("[-/:]+");
         LocalTime time;
-        if (hhmm.length == 1) {
+        if (hourAndMinutes.length == 1) {
             DateTimeFormatter timeFormatter = DateTimeFormatter.
                     ofPattern("HHmm");
             time = LocalTime.parse(timeString, timeFormatter);
-        } else if (hhmm.length > 2) {
+        } else if (hourAndMinutes.length > 2) {
             throw new WrongTimeFormatException();
         } else {
-            int hours = Integer.valueOf(hhmm[0]);
-            int mins = Integer.valueOf(hhmm[1]);
-            time = LocalTime.of(hours, mins);
+            int hours = Integer.valueOf(hourAndMinutes[0]);
+            int minutes = Integer.valueOf(hourAndMinutes[1]);
+            time = LocalTime.of(hours, minutes);
         }
         return time;
     }
@@ -80,27 +103,26 @@ public class Date {
     private LocalDate formatDate(
             String dateString) throws NumberFormatException,
             WrongDateFormatException {
-        String[] ddmmyyyy = dateString.split("[-/:]+");
-        if (ddmmyyyy.length != 3) {
+        String[] dateMonthYear = dateString.split("[-/:]+");
+        if (dateMonthYear.length != LENGTH_OF_DATE) {
             throw new WrongDateFormatException();
         }
-        int year = Integer.valueOf(ddmmyyyy[2]);
-        int month = Integer.valueOf(ddmmyyyy[1]);
-        int date = Integer.valueOf(ddmmyyyy[0]);
+        int year = Integer.valueOf(dateMonthYear[2]);
+        int month = Integer.valueOf(dateMonthYear[1]);
+        int date = Integer.valueOf(dateMonthYear[0]);
         LocalDate currentDate = LocalDate.of(year, month, date);
         return currentDate;
     }
 
     /**.
      * returns the proper format of date
-     * and time used for ONLY storing
-     *
-     * @return String of date and time format
+     * and time used for ONLY storing.
+     * @return String of date and time format.
      */
     public String getOriginalFormat() {
-        DateTimeFormatter Dateformat = DateTimeFormatter.
+        DateTimeFormatter dateFormat = DateTimeFormatter.
                 ofPattern("dd-MM-yyyy");
-        return this.globalDate.format(Dateformat)
+        return this.globalDate.format(dateFormat)
                 + " "
                 + this.globalTime.toString();
     }
@@ -118,9 +140,8 @@ public class Date {
 
     /**
      * checks if 2 dates are equivalent.
-     * 
-     * @param otherDate Another date object to be compared
-     * @return boolean if 2 dates are equivalent
+     * @param otherDate Another date object to be compared.
+     * @return boolean if 2 dates are equivalent.
      */
     public boolean isEquivalentDate(Date otherDate) {
         return this.globalDate.equals(otherDate.globalDate);
@@ -128,34 +149,34 @@ public class Date {
 
     private String getStringTime() {
         int timeInHours = this.globalTime.getHour();
-        int timeInMins = this.globalTime.getMinute();
+        int timeInMinutes = this.globalTime.getMinute();
         if (timeInHours == NOON) {
             return this.getStringHelper(
-                (timeInMins > 0),
-                timeInMins,
+                (timeInMinutes > 0),
+                    timeInMinutes,
                 String.valueOf(timeInHours),
                 EVENING_INDICATOR);
         } else if (timeInHours > NOON) {
             return this.getStringHelper(
-                (timeInMins > 0),
-                timeInMins,
+                (timeInMinutes > 0),
+                timeInMinutes,
                 String.valueOf(timeInHours - NOON),
                 EVENING_INDICATOR);
         }
         return this.getStringHelper(
-            (timeInMins > 0),
-            timeInMins,
+            (timeInMinutes > 0),
+            timeInMinutes,
             String.valueOf(timeInHours),
             MORNING_INDICATOR);
     }
 
     private String getStringHelper(
-            boolean hasMins,
-            int timeInMins,
+            boolean hasMinutes,
+            int timeInMinutes,
             String timeString,
             String indicator) {
-        if (hasMins) {
-            return timeString + "." + timeInMins + indicator;
+        if (hasMinutes) {
+            return timeString + "." + timeInMinutes + indicator;
         }
         return timeString + indicator;
     }

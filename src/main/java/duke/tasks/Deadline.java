@@ -10,34 +10,45 @@ import duke.exceptions.WrongTimeFormatException;
  * Class that specifies the properties of deadline task.
  */
 public class Deadline extends Task {
-    private static final String taskDirectivePoint = "by";
-    private static final String assignmentType = AssignmentType.
+
+    /**
+     * Indicates the expected input of a
+     * deadline task when input by user.
+     */
+    private static final String TASK_DIRECTIVE = "by";
+
+    /**
+     * Displays the type of task assignment of
+     * deadline task in this case [D].
+     */
+    private static final String ASSIGNMENT_TYPE = AssignmentType.
             DEADLINE.
             getStatus();
-    private static final boolean hasDateTime = true;
+    /**
+     * Indicates whether deadline task has a date
+     * and time element to it.
+     */
+    private static final boolean HAS_DATE_TIME = true;
 
 
     /**
      * Initializes deadline class with a description given by user.
-     *
-     * @param desc String of the user input
-     * @throws WrongDateFormatException if format of date in deadline is wrong
-     * @throws WrongTimeFormatException if format of time in deadline is wrong
+     * @param desc String of the user input.
+     * @throws WrongDateFormatException if format of date in deadline is wrong.
+     * @throws WrongTimeFormatException if format of time in deadline is wrong.
      */
     public Deadline(
             String desc) throws WrongDateFormatException,
             WrongTimeFormatException,
             WrongEventOrDeadlineFormatException {
-
-        super(desc, hasDateTime, taskDirectivePoint);
+        super(desc, HAS_DATE_TIME, TASK_DIRECTIVE);
     }
 
     /**
      * Initializes a new deadline class with a change of the completion status.
-     *
-     * @param desc String of the user input
-     * @param newStatus String updated status of the task
-     * @param date Optional date if date exist
+     * @param desc String of the user input.
+     * @param newStatus String updated status of the task.
+     * @param date Optional date if date exist.
      */
     public Deadline(String desc, String newStatus, Optional<Date> date) {
         super(desc, newStatus, date);
@@ -45,8 +56,7 @@ public class Deadline extends Task {
 
     /**
      * returns new deadline task with its completion status updated.
-     *
-     * @param newStatus String new completion status of the deadline task
+     * @param newStatus String new completion status of the deadline task.
      */
     @Override
     public Deadline updateStatus(String newStatus) {
@@ -58,7 +68,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getOriginalFormatForStorage() {
-        return assignmentType
+        return ASSIGNMENT_TYPE
                 + this.status
                 + " "
                 + this.getOutputMessage(
@@ -73,7 +83,7 @@ public class Deadline extends Task {
                 this.date.
                         get().
                         toString());
-        String assignmentProg = assignmentType
+        String assignmentProg = ASSIGNMENT_TYPE
                 + this.status
                 + " "
                 + outputString;
@@ -85,14 +95,14 @@ public class Deadline extends Task {
         String[] updatedDesc = this.taskDescription.split(" ");
         for (int i = 0; i < updatedDesc.length; i++) {
             String item = updatedDesc[i];
-            if (item.contains("/" + taskDirectivePoint)) {
+            if (item.contains("/" + TASK_DIRECTIVE)) {
                 break;
             }
             sb.append(item + " ");
         }
         return sb.toString()
                 + "("
-                + taskDirectivePoint
+                + TASK_DIRECTIVE
                 + ": "
                 + dateExpression
                 + ")";

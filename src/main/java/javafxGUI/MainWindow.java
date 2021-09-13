@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -22,21 +21,33 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/thanos.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ironman.png"));
+    private Image userImage = new Image(
+            this.getClass().
+                    getResourceAsStream("/images/thanos.png"));
+    private Image dukeImage = new Image(
+            this.getClass().
+                    getResourceAsStream("/images/ironman.png"));
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.
+                vvalueProperty().
+                bind(dialogContainer.heightProperty());
     }
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
+        dialogContainer.
+                getChildren().
+                add(DialogBox.
+                        getDukeDialog(
+                                duke.getWelcomeMessage(),
+                                dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input
+     * and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

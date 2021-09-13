@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import duke.exceptions.DukeException;
 import duke.status.Status;
-import duke.status.typeTask;
+import duke.status.TypeTask;
 import java.util.HashMap;
 import duke.tasks.Task;
 import duke.tasks.Deadline;
@@ -24,26 +24,72 @@ import java.nio.file.Files;
  * writing to local files in the local directory.
  */
 public class Storage {
+    /**
+     * To do task identifier.
+     */
     private static final String TODO_IDENTIFIER = "T";
+
+    /**
+     * Event task identifier.
+     */
     private static final String EVENT_IDENTIFIER = "E";
+
+    /**
+     * Deadline task identifier.
+     */
     private static final String DEADLINE_IDENTIFIER = "D";
 
-    private static final String TODO_FULL_IDEN = typeTask.TODO.getTask();
-    private static final String EVENT_FULL_IDEN = typeTask.EVENT.getTask();
-    private static final String DEADLINE_FULL_IDEN = typeTask.DEADLINE.getTask();
+    /**
+     * Full identity of to do task.
+     */
+    private static final String TODO_FULL_IDEN =
+            TypeTask.TODO.getTask();
 
+    /**
+     * Full identity of event task.
+     */
+    private static final String EVENT_FULL_IDEN =
+            TypeTask.EVENT.getTask();
+    /**
+     * Full identity of deadline task.
+     */
+    private static final String DEADLINE_FULL_IDEN =
+            TypeTask.DEADLINE.getTask();
+
+    /**
+     * Tasks represented as complete in storage file.
+     */
     private static final String INDICATOR_COMPLETE = "1";
-    private static final String INDICATOR_EVENT = "/at";
-    private static final String INDICATOR_DEADLINE = "/by";
-    // private static final String INDICATOR_INCOMPLETE = "0";
 
+    /**
+     * Event task indicator of date and time.
+     */
+    private static final String INDICATOR_EVENT = "/at";
+
+    /**
+     * Deadline task indicator of date and time.
+     */
+    private static final String INDICATOR_DEADLINE = "/by";
+
+    /**
+     * The file source in which tasks are stored
+     * and retrieved from.
+     */
     private final File fileSource;
+
+    /**
+     * All the tasks are stored while processing.
+     */
     private List<String> allStringTasks = new ArrayList<>();
+
+    /**
+     * Index of the array to modify.
+     */
+    private static final int INDEX_TO_MODIFY = 3;
 
 
     /**
      * Initializes a new storage class.
-     *
      * @param filePath String indicating the path of
      * the local file to write to or read from.
      */
@@ -63,12 +109,13 @@ public class Storage {
     }
 
     /**
-     * returns all the tasks stored in the local directory as an arraylist.
-     *
-     * @return Arraylist of Task object 
+     * Returns all the tasks stored in
+     * the local directory as an arraylist.
+     * @return Arraylist of Task object
      * @throws FileNotFoundException if local file directory does not exist
-     * @throws DukeException if either the Todo, Event, Deadline task is not
-     * initialized because of a wrong input given by the user
+     * @throws DukeException if either the Todo, Event,
+     * Deadline task is not initialized because of a
+     * wrong input given by the user.
      */
     protected ArrayList<Task> load() throws FileNotFoundException,
             DukeException {
@@ -139,7 +186,6 @@ public class Storage {
      * and writes it to the local directory file.
      * catches exception if the file does not
      * exist and hence cannot be written to.
-     *
      * @param storageTaskList arraylist of task
      */
     public void updateStorageList(ArrayList<Task> storageTaskList) {
@@ -162,7 +208,7 @@ public class Storage {
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error occured while updating file storage");
+            System.out.println("Error occurred while updating file storage");
         }
     }
 
@@ -209,7 +255,7 @@ public class Storage {
             output = taskIdentifier
             + " | 1 | "
             + toModify;
-        } else { 
+        } else {
             output = taskIdentifier
             + " | 0 | "
             + toModify;
@@ -251,7 +297,6 @@ public class Storage {
     private String[] updateToCommandConverterReadableFormat(
             String identifier,
             String[] finalFormatted) {
-        int INDEX_TO_MODIFY = 3;
         if (identifier.equals(TODO_IDENTIFIER)) {
             finalFormatted[0] = "todo";
             return finalFormatted;
