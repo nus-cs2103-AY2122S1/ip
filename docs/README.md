@@ -1,8 +1,16 @@
-# User Guide for Project Xiri
+---
+layout: page
+title: User Guide
+---
 
-Project Xiri is a **Command Line Interface (CLI) 
-Java Desktop Application** dedicated to managing 
+Project Xiri is a **Command Line Interface (CLI)
+Java Desktop Application** dedicated to managing
 your todo tasks, your deadlines and events.
+
+* Table of Contents
+  {:toc}
+
+# User Guide for Project Xiri
 
 ## Features
 
@@ -101,7 +109,7 @@ Example of usage:
 deadline cs2106 lab im dying /by 2021-09-22 1400
 ```
 
-Expected outcome:  
+Expected outcome:
 Deadline is added to the list
 
 Description of outcome:
