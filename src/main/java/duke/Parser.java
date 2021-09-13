@@ -71,15 +71,16 @@ public class Parser {
             throw new NoNumberException(command);
         }
 
-        if (command.equals("done")) {
+        switch(command) {
+        case "done":
             return new DoneCommand(index);
-        }
 
-        if (command.equals("delete")) {
+        case "delete":
             return new DeleteCommand(index);
-        }
 
-        throw new DukeException("An unknown error has occurred.");
+        default:
+            throw new AssertionError(command);
+        }
     }
 
     private static Command checkList(String[] strArr) throws DukeException {

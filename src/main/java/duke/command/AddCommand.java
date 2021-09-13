@@ -47,7 +47,7 @@ public class AddCommand extends Command {
         case "event":
             return handleEvent(tasks, storage);
         default:
-            throw new DukeException("An error has occurred while executing an AddCommand.");
+            throw new AssertionError(taskType);
         }
     }
 
