@@ -7,7 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 
 import java.util.Objects;
@@ -23,14 +26,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
+    private ImageView sendButton;
 
     private Duke duke;
 
     private Command command = new Command();
 
-    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
+    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/TheRealUser.png")));
+    private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/TheRealDuke.png")));
 
     @FXML
     public void initialize() {
@@ -38,6 +41,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(command.interpretCommand("greet", ""), dukeImage)
         );
+        dialogContainer.setStyle("-fx-background-image: url(\"images/hexagonal%20background.jpg\");");
     }
 
     public void setDuke(Duke d) {
