@@ -2,73 +2,39 @@ package duke.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UiTest {
     private static final String SEPARATOR = "\t-------------------------------------------------------";
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
+    @Test
+    void testGetIntroMessage() {
+        String expected = "Hello! I'm Duke, your personal CLI bot!\n"
+                + "I function as a simple TodoList.\n"
+                + "I can keep track of 3 types of tasks:\n\n"
+                + "1. Todo:"
+                + "\n\tTo add a new todo task, enter\n\t'todo <task>'.\n\n"
+                + "2. Deadline:"
+                + "\n\tTo add a new deadline, enter\n\t'deadline <task> /by \n\t<date-time>'.\n\n"
+                + "3. Event:"
+                + "\n\tTo add a new event, enter\n\t 'event <event-name> /at \n\t<date-time>'.\n\n"
+                + "* For deadline and event tasks, you can specify the time "
+                + "by using the format:\n'YYYY-MM-DD' or 'YYYY-MM-DD hhmm',"
+                + " where 'hhmm' represents the 24 hour clock.\n"
+                + "e.g. event dinner /at 2021-12-26 1830\n\n"
+                + "- To see all your tasks, enter 'list'.\n\n"
+                + "- To sort task list in chronological order, enter 'sort'\n"
+                + "  To reverse order of list, enter 'sort reverse'.\n\n"
+                + "- To delete a task, enter\n 'delete <task-id>' e.g. 'delete 2'.\n\n"
+                + "- To mark task as done, enter\n 'done <task-id>' e.g. 'done 2'.\n\n"
+                + "- Once you are done, just enter 'bye' to quit the program.\n\n"
+                + "Have fun! ^_^";
+        assertEquals(expected, Ui.getIntroMessage());
     }
 
     @Test
-    void testPrintIntroMessage() {
-        Ui ui = new Ui();
-        ui.printIntroMessage();
-        String expected = String.format("%s\n\t%s\n%s\n",
-                SEPARATOR,
-                "Hello! I'm Duke, your personal CLI bot! :D\n\t"
-                        + "I function as a simple TodoList.\n\t"
-                        + "I can keep track of 3 types of tasks:\n\t"
-                        + "\t> Todo: To add a new todo task, enter 'todo <task>' e.g. 'todo quiz'.\n\t"
-                        + "\t> Deadline: To add a new deadline, enter 'deadline <task> /by <date-time>'.\n\t"
-                        + "\t> Event: To add a new event, enter 'event <event-name> /at <date-time>'.\n\t"
-                        + "\t  * For deadline and event tasks, you can specify the time "
-                        + "by using the format 'YYYY-MM-DD' or 'YYYY-MM-DD hhmm'\n\t\t"
-                        + "    where 'hhmm' represents the 24 hour clock.\n\t\t"
-                        + "    e.g. event dinner /at 2021-12-26 1830\n\t"
-                        + "- To see all your tasks, enter 'list'.\n\t"
-                        + "- To filter task list by keyword, enter 'find <keyword>' e.g. 'find quiz'.\n\t"
-                        + "- To delete a task, enter 'delete <task-id>' e.g. 'delete 2'.\n\t"
-                        + "- You can also mark tasks as done by typing 'done <task-id>' e.g. 'done 2'.\n\t"
-                        + "- Once you are done, just enter 'bye' to quit the program.\n\t"
-                        + "Have fun! ^_^",
-                SEPARATOR);
-        assertEquals(expected, outputStreamCaptor.toString());
-    }
-
-    @Test
-    void testPrintExitMessage() {
-        Ui ui = new Ui();
-        ui.printExitMessage();
-        String expected = String.format("%s\n\t%s\n%s\n",
-                                        SEPARATOR,
-                                        "Goodbyeeee! Hope to see you again soon! :>",
-                                        SEPARATOR);
-        assertEquals(expected, outputStreamCaptor.toString());
-    }
-
-    @Test
-    void testPrompt() {
-        Ui ui = new Ui();
-        ui.prompt();
-        String expected = String.format("%s\n\t%s\n%s\n",
-                SEPARATOR,
-                "Enter a command ^_^",
-                SEPARATOR);
-        assertEquals(expected, outputStreamCaptor.toString());
+    void testGetExitMessage() {
+        String expected = "Goodbyeeee! Hope to see you again soon! :>";
+        assertEquals(expected, Ui.getExitMessage());
     }
 }
