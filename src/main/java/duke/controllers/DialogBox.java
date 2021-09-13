@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -38,6 +39,7 @@ public class DialogBox extends HBox {
 
         textBox.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 50));
     }
 
     /**
