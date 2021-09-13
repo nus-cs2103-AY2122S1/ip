@@ -1,4 +1,4 @@
-package duke.exception;
+package workdone.exception;
 
 /**
  * Represents an exception thrown when an invalid task number is given. A subclass of DukeException.

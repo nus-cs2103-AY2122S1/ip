@@ -1,6 +1,6 @@
-package duke.exception;
+package workdone.exception;
 
-import duke.ui.Ui;
+import workdone.ui.Ui;
 
 /**
  * Represents an exception thrown when some details in a command are missing. A subclass of DukeException.

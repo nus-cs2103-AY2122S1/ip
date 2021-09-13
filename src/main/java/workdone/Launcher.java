@@ -1,4 +1,4 @@
-package duke;
+package workdone;
 
 import javafx.application.Application;
 

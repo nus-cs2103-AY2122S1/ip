@@ -1,9 +1,9 @@
-package duke;
+package workdone;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import duke.ui.MainWindow;
+import workdone.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -1,8 +1,8 @@
-package duke.command;
+package workdone.command;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.task.Task;
+import workdone.data.Storage;
+import workdone.data.TaskList;
+import workdone.task.Task;
 
 /**
  * Represents a command that adds a task to the task list. A subclass of the Command class.

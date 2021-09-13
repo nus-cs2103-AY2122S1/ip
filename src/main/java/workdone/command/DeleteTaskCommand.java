@@ -1,9 +1,9 @@
-package duke.command;
+package workdone.command;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.exception.InvalidTaskNoException;
-import duke.ui.Parser;
+import workdone.data.Storage;
+import workdone.data.TaskList;
+import workdone.exception.InvalidTaskNoException;
+import workdone.ui.Parser;
 
 /**
  * Represents a command that deletes a task from the task list. A subclass of the Command class.

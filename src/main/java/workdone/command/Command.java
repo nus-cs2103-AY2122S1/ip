@@ -1,9 +1,9 @@
-package duke.command;
+package workdone.command;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.exception.DukeException;
-import duke.task.Task;
+import workdone.data.Storage;
+import workdone.data.TaskList;
+import workdone.exception.DukeException;
+import workdone.task.Task;
 
 /**
  * Represents a command that can be executed.

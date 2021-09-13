@@ -1,4 +1,4 @@
-package duke.command;
+package workdone.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import workdone.data.Storage;
+import workdone.data.TaskList;
+import workdone.task.Deadline;
+import workdone.task.Event;
+import workdone.task.Task;
+import workdone.task.ToDo;
 
 public class AddTaskCommandTest {
     private TaskList taskList1 = new TaskList();

@@ -1,4 +1,4 @@
-package duke.data;
+package workdone.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,11 +10,11 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.ui.Ui;
+import workdone.task.Deadline;
+import workdone.task.Event;
+import workdone.task.Task;
+import workdone.task.ToDo;
+import workdone.ui.Ui;
 
 /**
  * Represents storage that can store data into a file and read data from a file.

@@ -1,7 +1,7 @@
-package duke.command;
+package workdone.command;
 
-import duke.data.Storage;
-import duke.data.TaskList;
+import workdone.data.Storage;
+import workdone.data.TaskList;
 
 /**
  * Represents a command that retrieves the task list. A subclass of the Command class.

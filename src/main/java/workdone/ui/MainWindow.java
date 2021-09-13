@@ -1,6 +1,6 @@
-package duke.ui;
+package workdone.ui;
 
-import duke.WorkDone;
+import workdone.WorkDone;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

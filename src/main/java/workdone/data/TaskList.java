@@ -1,9 +1,9 @@
-package duke.data;
+package workdone.data;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import duke.task.Task;
+import workdone.task.Task;
 
 /**
  * Represents a temporary list of tasks.

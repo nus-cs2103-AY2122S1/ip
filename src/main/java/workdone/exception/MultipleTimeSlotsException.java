@@ -1,4 +1,4 @@
-package duke.exception;
+package workdone.exception;
 
 /**
  * Represents an exception thrown when more than one time slots are given. A subclass of DukeException.

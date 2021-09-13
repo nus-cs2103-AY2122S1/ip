@@ -1,4 +1,4 @@
-package duke.exception;
+package workdone.exception;
 
 /**
  * Represents an exception thrown when the given time is in an invalid format. A subclass of DukeException.

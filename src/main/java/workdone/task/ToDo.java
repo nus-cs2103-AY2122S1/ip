@@ -1,4 +1,4 @@
-package duke.task;
+package workdone.task;
 
 /**
  * Represents a task to be completed with unspecified time.

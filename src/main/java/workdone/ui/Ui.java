@@ -1,9 +1,9 @@
-package duke.ui;
+package workdone.ui;
 
 import java.util.Scanner;
 
-import duke.command.Command;
-import duke.exception.DukeException;
+import workdone.command.Command;
+import workdone.exception.DukeException;
 
 /**
  * Represents UI of the Duke program.

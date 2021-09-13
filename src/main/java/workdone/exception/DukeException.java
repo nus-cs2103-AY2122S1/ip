@@ -1,4 +1,4 @@
-package duke.exception;
+package workdone.exception;
 
 /**
  * Represents an exception thrown when commands are invalid.
