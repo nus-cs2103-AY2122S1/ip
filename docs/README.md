@@ -27,11 +27,16 @@ Shows all of your current tasks
 ### Find Task(s):
 Finds all task that contains given keyword
 
+### Quit Applcation:
+Quits the application and closes windows
+
 ## Usage
 
-### 1. `todo <description>` - Adds a todo task
+### 1. Adds a todo task: `todo` 
 
 Adds a todo task to your task list.
+
+Format: `todo <description>` 
 
 Example of usage: 
 
@@ -45,9 +50,11 @@ Got it. I've added this task:
 Now you have 1 task in your list.
 ```
 
-### 2. `event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>` - Adds an event task
+### 2. Adds an event task: `event`
 
 Adds an event task to your task list.
+
+Format: `event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>`
 
 Example of usage:
 
@@ -61,9 +68,11 @@ Got it. I've added this task:
 Now you have 2 tasks in your list.
 ```
 
-### 3. `deadline <deadline description> /by <dd/MM/yy> <HHmm>` - Adds a deadline task
+### 3. Adds a deadline task: `deadline` 
 
 Adds a deadline task to your task list.
+
+Format: `deadline <deadline description> /by <dd/MM/yy> <HHmm>`
 
 Example of usage:
 
@@ -76,9 +85,11 @@ Got it. I've added this task:
 [D][] Math Assignment (by: Sep 14 2021 11:59PM)
 Now you have 3 tasks in your list.
 ```
-### 4. `done <task index>` - Marks task as done
+### 4. Marks task as done: `done` 
 
 Marks the task at this index as done
+
+Format: `done <task index>` 
 
 Example of usage:
 
@@ -93,9 +104,11 @@ Nice! I've marked this task as done:
 3. [D][] Math Assignment (by: Sep 14 2021 11:59PM)
 ```
 
-### 5. `delete <task index>` - Deletes a task
+### 5. Deletes a task: `delete` 
 
 Deletes a task with this index from your task list.
+
+Format: `delete <task index>` 
 
 Example of usage:
 
@@ -109,9 +122,11 @@ Got it. I've removed the following task:
 Now you have 2 tasks in your list.
 ```
 
-### 6. `list` - Shows all tasks
+### 6. Shows all tasks: `list` 
 
 Shows all your current tasks
+
+Format: `list`
 
 Example of usage:
 
@@ -125,9 +140,11 @@ Here are the tasks in your list:
 2. [D][] Math Assignment (by: Sep 14 2021 11:59PM)
 ```
 
-### 7. `find <keyword>` - Find task(s) containing keyword
+### 7. Find task(s) containing keyword: `find`
 
 Find task(s) that has this keyword
+
+Format: `find <keyword>`
 
 Example of usage:
 
@@ -139,4 +156,20 @@ Expected outcome:
 Here are the tasks in your list:
 1. [E][] Math Exam (at: Nov 23 2021 5:00PM-6:30PM)
 2. [D][] Math Assignment (by: Sep 14 2021 11:59PM)
+```
+
+### 8. Quits the application: `bye` 
+
+Quits the application and closes the window
+
+Format: `bye`
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again!
 ```
