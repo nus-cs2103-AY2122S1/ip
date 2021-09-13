@@ -1,9 +1,11 @@
 package duke.task;
 
 public class Todo extends Task {
+    protected String priority;
 
-    public Todo(String description) {
+    public Todo(String description, String priority) {
         super(description);
+        this.priority = priority;
     }
 
     /**
@@ -20,8 +22,10 @@ public class Todo extends Task {
      */
     public String getDescription() { return this.description; }
 
+    public String getPriority() {return this.priority;}
+
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + " [Priority " + this.priority + "]";
     }
 }

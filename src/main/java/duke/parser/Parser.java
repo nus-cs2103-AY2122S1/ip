@@ -113,8 +113,12 @@ public class Parser {
         if (input.length() == 4) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
         }
-        String taskDesc = input.substring(5);
-        return new Todo(taskDesc);
+        int pIndex = input.indexOf("/p");
+        String taskDesc = input.substring(5, pIndex - 1);
+
+        String priority = input.substring(pIndex + 3);
+
+        return new Todo(taskDesc, priority);
     }
 
     /**
@@ -129,10 +133,16 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
         }
         assert input.length() != 0 : "Input length shouldn't be 0";
+
         int byIndex = input.indexOf("/");
-        String by = input.substring(byIndex+4);
+        int pIndex = input.indexOf("/p");
+
+        String by = input.substring(byIndex+4, pIndex - 1);
         String taskDesc = input.substring(9, byIndex-1);
-        return new Deadline(taskDesc, by);
+
+        String priority = input.substring(pIndex + 3);
+
+        return new Deadline(taskDesc, by, priority);
     }
 
     /**
@@ -146,9 +156,13 @@ public class Parser {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.\n");
         }
+
         int byIndex = input.indexOf("/");
-        String by = input.substring(byIndex+4);
+        int pIndex = input.indexOf("/p");
+
+        String by = input.substring(byIndex+4, pIndex - 1);
         String taskDesc = input.substring(6, byIndex-1);
-        return new Event(taskDesc,by);
+        String priority = input.substring(pIndex + 3);
+        return new Event(taskDesc,by, priority);
     }
 }

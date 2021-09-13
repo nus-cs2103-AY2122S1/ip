@@ -3,6 +3,7 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String priority;
 
     public Task(String description) {
         this.description = description;
@@ -30,6 +31,7 @@ public class Task {
      * @return the string description of the task
      */
     public String getDescription() { return this.description; }
+    public String getPriority() { return this.priority;}
 
     @Override
     public String toString() {

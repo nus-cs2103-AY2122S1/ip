@@ -54,11 +54,11 @@ public class Storage {
 
                     Task currTask;
                     if (taskType.equals("D")) {
-                        currTask = new Deadline(taskDesc, parts[3]);
+                        currTask = new Deadline(taskDesc, parts[3], parts[4]);
                     } else if (taskType.equals("E")) {
-                        currTask = new Event(taskDesc, parts[3]);
+                        currTask = new Event(taskDesc, parts[3], parts[4]);
                     } else {
-                        currTask = new Todo(taskDesc);
+                        currTask = new Todo(taskDesc, parts[3]);
                     }
 
                     if (taskDone.equals("1")) {
@@ -112,6 +112,9 @@ public class Storage {
                 currLine += " | ";
                 currLine += ((Event)t).getAt();
             }
+
+            // Add in the task priority
+            currLine += t.getPriority();
             allLines += currLine;
             allLines += System.lineSeparator();
         }
