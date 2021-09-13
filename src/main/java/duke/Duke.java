@@ -3,7 +3,9 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.command.Command;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.task.TaskList;
 
 
@@ -52,7 +54,8 @@ public class Duke {
                 storage.save(tasks);
             } else {
                 try {
-                    String message = parser.parse(command);
+                    Command commandObject = parser.parse(command);
+                    String message = commandObject.execute(tasks, storage);
                     ui.printMessage(message);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
@@ -71,16 +74,12 @@ public class Duke {
     public String getResponse(String command) {
         Parser parser = new Parser(tasks);
 
-        if (command.equalsIgnoreCase("bye")) {
-            return "Bye. Hope to see you again soon!";
-        }
-        String message;
         try {
-            message = parser.parse(command);
+            Command commandObject = parser.parse(command);
+            return commandObject.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
-        return message;
     }
 
     public static void main(String[] args) {

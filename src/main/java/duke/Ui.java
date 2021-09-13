@@ -29,18 +29,18 @@ public class Ui {
      * Prints the welcome message when Duke is ran.
      */
     public void printWelcomeMessage() {
-        printLine();
-        System.out.println("Hello I'm duke\nWhat can I do for you?");
-        printLine();
+        printMessage("Hello I'm duke\nWhat can I do for you?");
     }
 
     /**
      * Prints the goodbye message when the user exits the program.
      */
     public void printGoodbyeMessage() {
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        printMessage("Bye. Hope to see you again soon!");
+    }
+
+    public static String getGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

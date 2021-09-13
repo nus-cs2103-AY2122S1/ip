@@ -2,13 +2,13 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.Ui;
-
 
 /**
  * Class that contains the task list and operations on the task list.
  */
 public class TaskList {
+    private static final String INVALID_TASK_NUMBER_MESSAGE =
+            "This is not a valid task number.";
 
     /** The ArrayList that represents the list of Tasks */
     private ArrayList<Task> tasks;
@@ -36,18 +36,10 @@ public class TaskList {
      * @return A String containing the message to be shown to the user when a task is
      * marked as done.
      */
-    public String markDone(int taskNumber) {
-        String message = "";
-
-        try {
-            Task completedTask = tasks.get(taskNumber);
-            assert completedTask != null;
-            completedTask.markDone();
-            message = Ui.getDoneMessage(completedTask);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("OOPS!!! This is not a valid task number.");
-        }
-        return message;
+    public Task markDone(int taskNumber) throws IndexOutOfBoundsException {
+        Task completedTask = tasks.get(taskNumber);
+        completedTask.markDone();
+        return completedTask;
     }
 
     /**
@@ -58,10 +50,9 @@ public class TaskList {
      * tasks, the String returned will inform the user accordingly.
      */
     public String listTasks() {
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new StringBuilder("Here are the tasks in your list:");
 
         if (!tasks.isEmpty()) {
-            message.append("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 message.append("\n")
                         .append(i + 1)
@@ -81,27 +72,14 @@ public class TaskList {
      * @return A String containing the message to be shown to the user when a task
      * is added into the task list.
      */
-    public String addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
-        return Ui.getAddedMessage(task, tasks.size());
     }
 
-    /**
-     * Deletes a specified Task from the TaskList.
-     *
-     * @param taskNumber The task number of the Task that is to be deleted.
-     * @return A String containing the message to be shown to the user when a task
-     * is removed from the task list.
-     */
-    public String deleteTask(int taskNumber) {
-        try {
-            Task removedTask = tasks.get(taskNumber);
-            assert removedTask != null;
-            tasks.remove(taskNumber);
-            return Ui.getDeleteMessage(removedTask, tasks.size());
-        } catch (IndexOutOfBoundsException e) {
-            return "OOPS!!! This is not a valid task number.";
-        }
+    public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {
+        Task removedTask = tasks.get(taskNumber);
+        tasks.remove(taskNumber);
+        return removedTask;
     }
 
     /**
@@ -111,20 +89,18 @@ public class TaskList {
      * @return A String of the list of tasks found using the keyword.
      */
     public String findTask(String keyword) {
-        boolean canFindMatch = false;
-        StringBuilder message = new StringBuilder();
+        boolean hasFoundMatch = false;
+        StringBuilder message = new StringBuilder("Here are the matching tasks in your list:");
 
         for (int i = 0; i < tasks.size(); i++) {
             String currentTask = tasks.get(i).toString();
-            if (currentTask.substring(7).matches("(?i)(.*)" + keyword + "(.*)")) {
-                if (!canFindMatch) {
-                    canFindMatch = true;
-                    message.append("Here are the matching tasks in your list:");
-                }
+            boolean isFound = currentTask.substring(7).matches("(?i)(.*)" + keyword + "(.*)");
+            if (isFound) {
+                hasFoundMatch = true;
                 message.append("\n").append(i + 1).append(". ").append(currentTask);
             }
         }
-        if (!canFindMatch) {
+        if (!hasFoundMatch) {
             return "Sorry!, I couldn't find any tasks with that keyword.";
         }
         return message.toString();
