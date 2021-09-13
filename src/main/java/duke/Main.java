@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -11,9 +12,13 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private Duke jarvis = new Duke("data/jarvis.txt", "data/notes.txt"); // Instantiating Jarvis
 
-    private Duke duke = new Duke("data/jarvis.txt", "data/notes.txt");
-
+    /**
+     * Sets up the GUI for Jarvis
+     *
+     * @param stage The space to which additional scenes and panes are added for the GUI
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -21,7 +26,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(jarvis);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
