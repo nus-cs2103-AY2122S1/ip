@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-
 /**
  * Represents a chat bot assistant to keep track of tasks.
  * @author Nikki
@@ -9,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    private Storage storage;
+    private Storage storage = new Storage();
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
@@ -18,10 +16,8 @@ public class Duke {
      * Creates Duke Chat Bot instance.
      */
     public Duke() {
-        storage = new Storage();
-        ArrayList<Task> readList = storage.fileReader();
         ui = new Ui();
-        taskList = new TaskList(readList, ui);
+        taskList = new TaskList(storage.fileReader(), ui);
         parser = new Parser(ui, storage);
     }
 
