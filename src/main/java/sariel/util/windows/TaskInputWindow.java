@@ -2,8 +2,6 @@ package sariel.util.windows;
 
 import java.time.LocalDate;
 
-import sariel.util.commons.Messages;
-import sariel.util.controller.Sariel;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
@@ -12,7 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import sariel.util.commons.Messages;
+import sariel.util.controller.Sariel;
 
 /**
  * Input window for tasks to be sent to the Duke.

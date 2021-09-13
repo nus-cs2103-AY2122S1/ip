@@ -2,13 +2,13 @@ package sariel.util.windows;
 
 import java.io.IOException;
 
-import sariel.util.commons.Messages;
-import sariel.util.controller.Sariel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sariel.util.commons.Messages;
+import sariel.util.controller.Sariel;
 
 
 /**

@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 import sariel.util.commands.AddCommand;
 import sariel.util.commands.CommandList;
 import sariel.util.commons.Messages;
@@ -19,10 +23,6 @@ import sariel.util.tasks.TaskList;
 import sariel.util.tasks.ToDo;
 import sariel.util.ui.Ui;
 import sariel.util.windows.DialogBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
 
 
 

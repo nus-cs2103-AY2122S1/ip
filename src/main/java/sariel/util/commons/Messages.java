@@ -1,7 +1,7 @@
 package sariel.util.commons;
 
-import sariel.util.windows.Main;
 import javafx.scene.image.Image;
+import sariel.util.windows.Main;
 
 public class Messages {
 

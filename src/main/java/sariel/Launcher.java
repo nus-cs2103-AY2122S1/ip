@@ -1,7 +1,7 @@
 package sariel;
 
-import sariel.util.windows.Main;
 import javafx.application.Application;
+import sariel.util.windows.Main;
 
 
 public class Launcher {

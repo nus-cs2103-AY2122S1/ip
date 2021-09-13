@@ -2,9 +2,6 @@ package sariel.util.windows;
 
 import java.io.IOException;
 
-import sariel.util.commons.Messages;
-import sariel.util.controller.Sariel;
-import sariel.util.tasks.Task;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +18,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import sariel.util.commons.Messages;
+import sariel.util.controller.Sariel;
+import sariel.util.tasks.Task;
 
 
 
