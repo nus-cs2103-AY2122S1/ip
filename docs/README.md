@@ -35,7 +35,7 @@ Example of usage:
 
 Expected outcome:
 
-![Help command](/docs/Help.png)
+![Help command](Help.png)
 
 Example of usage:
 
@@ -43,7 +43,7 @@ Example of usage:
 
 Expected outcome:
 
-![Help deadline command](/docs/HelpDeadline.png)
+![Help deadline command](HelpDeadline.png)
 
 ### Adding a task: `todo`
 
@@ -59,7 +59,7 @@ Example of usage:
 
 Expected outcome:
 
-![Todo command](/docs/Todo.png)
+![Todo command](Todo.png)
 
 ### Adding a task with a deadline: `deadline`
 
@@ -75,7 +75,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline command](/docs/Deadline.png)
+![Deadline command](Deadline.png)
 
 ### Adding an event: `event`
 
@@ -91,7 +91,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event Command](/docs/Event.png)
+![Event Command](Event.png)
 
 ### Listing out all tasks: `list`
 
@@ -107,7 +107,7 @@ Example of usage:
 
 Expected outcome:
 
-![List command](/docs/List.png)
+![List command](List.png)
 
 ### Marking a task as complete: `done`
 
@@ -123,7 +123,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done command](/docs/Done.png)
+![Done command](Done.png)
 
 ### Deleting a task: `delete`
 
@@ -139,11 +139,11 @@ Example of usage:
 
 Expected outcome:
 
-![Delete command](/docs/Delete.png)
+![Delete command](Delete.png)
 
 ### Searching for tasks: `find`
 
-Searched for task(s) from the task list which contains the keyword.
+Searches for tasks from the task list that contain the keyword.
 
 Format:
 
@@ -155,7 +155,7 @@ Example of usage:
 
 Expected outcome:
 
-![Find command](/docs/Find.png)
+![Find command](Find.png)
 
 ### Exiting Duke: `bye`
 
@@ -171,7 +171,7 @@ Example of usage:
 
 Expected outcome:
 
-![Bye command](/docs/Bye.png)
+![Bye command](Bye.png)
 
 ### Saving the data
 
@@ -181,5 +181,5 @@ Your data is saved to a file each time you execute a command that modifies data.
 
 Your data is saved in a text file in the following path: `/[JAR_file_location]/data/duke.txt`.
 It is recommended that you do not modify the data unless you are familiar with the data's save format.</br>
-:exclamation: If your data format is invalid, Duke will create a temporary session for you. No data will be saved to
+:heavy_exclamation_mark: If your data format is invalid, Duke will create a temporary session for you. No data will be saved to
 `duke.txt`.
