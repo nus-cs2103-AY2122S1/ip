@@ -21,11 +21,6 @@ import java.util.logging.Logger;
 // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
 // with minor modifications
 
-// @author xyliew
-// Reused from https://github.com/xyliew25/ip/blob/master/src/main/resources/view/DialogBox.fxml
-// with major modification
-// Thanks xyliew for his inspiring way to get the chat bubble and removing the box entirely
-
 /**
  * DialogBox view inside the MainWindow.
  */

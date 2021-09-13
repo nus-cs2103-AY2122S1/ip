@@ -1,5 +1,6 @@
 package parser;
 
+import logic.CommandArgument;
 import logic.CommandLogicUnitStub;
 import logic.ICommandLogicUnit;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,8 +36,8 @@ public class ParserImplTest {
         
         try (Scanner scanner = new Scanner(System.in)) {
             String input = scanner.nextLine();
-            System.out.println(input);
-            assertDoesNotThrow(() -> parserImpl.processInput(input));
+            CommandArgument command = parserImpl.parseInput(input);
+            assertDoesNotThrow(() -> parserImpl.processCommand(command));
         }
     }
     
@@ -48,8 +49,8 @@ public class ParserImplTest {
         
         try (Scanner scanner = new Scanner(System.in)) {
             String input = scanner.nextLine();
-            System.out.println(input);
-            assertDoesNotThrow(() -> parserImpl.processInput(input));
+            CommandArgument command = parserImpl.parseInput(input);
+            assertDoesNotThrow(() -> parserImpl.processCommand(command));
         }
     }
 }

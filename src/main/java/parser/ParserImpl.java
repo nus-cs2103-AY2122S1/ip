@@ -218,12 +218,18 @@ public class ParserImpl implements IParser {
         return Integer.parseInt(parsedCommands.get(1)) - 1;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void processCommand(CommandArgument argument) {
         Command command = argument.getCommand();
         commandLogicUnit.processCommand(command, argument);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CommandArgument parseInput(String input) {
         // take the next command within a line, inputted using enter
@@ -254,8 +260,10 @@ public class ParserImpl implements IParser {
             CommandArgument argument = new CommandArgument();
             argument.setCommand(Command.INVALID);
             
-            if (stackTraceElements[2].getMethodName().equals("canProcessResponse")) return argument;
-    
+            if (stackTraceElements[2].getMethodName().equals("canProcessResponse")) {
+                return argument;
+            }
+            
             logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
             IllegalCallerException illegalCallerException =
                     new IllegalCallerException("I'm sorry, but I don't know what that means :-(");
