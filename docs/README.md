@@ -1,5 +1,8 @@
 # User Guide
 
+## Interface
+![Image of Interface](https://octodex.github.com/images/yaktocat.png)
+
 ## Features 
 
 ### Feature-ABC

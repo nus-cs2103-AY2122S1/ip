@@ -53,7 +53,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox result = new DialogBox(text, img);
         result.setStyle("-fx-background-color: #c9ebff; -fx-padding:5px; -fx-background-radius:15px");
-        result.dialog.setTranslateX(-15);
+        result.dialog.setTranslateX(-5);
         return result;
     }
 

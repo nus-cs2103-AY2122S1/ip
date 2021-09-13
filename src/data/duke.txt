@@ -1,4 +1,4 @@
-deadline--false--2--2021-09-09--HSS--0
-event--false--3--2021-09-09--HSS--0
-todo--false--4--0--COM1--0
-todo--false--5--0--HSS--0
+todo--false--CS2100 Assignment--0--COM1--0
+deadline--false--CS2103 iP--2021-09-15--HSS--0
+event--false--ST2334 Tutorial--2021-09-15--Central--0
+event--false--CS2103 Meeting--2021-09-20--Home--0
