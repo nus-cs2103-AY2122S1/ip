@@ -39,14 +39,24 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         bot = d;
+        sendButton.setStyle("-fx-background-color: #52be80; -fx-background-radius:80");
+        displayCredits();
         start();
+    }
+
+    /**
+     * Displays credits to third party resources used.
+     */
+    public void displayCredits() {
+        String credits = "Display pictures taken from Pinterest, original author: 不觉晓晓";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(credits, dukeImage));
     }
 
     /**
      * Starts up the Main Window of the GUI.
      */
     public void start() {
-        sendButton.setStyle("-fx-background-color: #52be80; -fx-background-radius:80");
         Ui userInterface = bot.getUi();
         String greetings = userInterface.greet(bot.getTasks());
         dialogContainer.getChildren().addAll(
