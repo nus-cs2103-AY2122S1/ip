@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
         scrollPanePropertyInit();
         listSetSelectMultiple();
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(Messages.LOGO + Messages.GREETINGS, dukeImage)
+            DialogBox.getDukeDialog(Messages.GREETINGS, dukeImage)
         );
 
     }
