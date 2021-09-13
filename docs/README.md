@@ -1,6 +1,8 @@
-<img align="left" width="80" height="80" src="docs/img/WhoBot_Face.jpg">
+<div align = "center">
+<img align="center" width="80" height="80" src="/img/Main_Logo.jpg">
 
 # User Guide For WhoBot
+</div>
 
 ## Features 
 
