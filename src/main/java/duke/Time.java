@@ -21,8 +21,7 @@ public class Time {
 
         try {
             Date javaDate = sdfrmt.parse(strDate);
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             return false;
         }
         return true;

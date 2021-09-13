@@ -26,7 +26,7 @@ public class Storage {
     }
 
     /**
-     * It loads existing task lists (If there is one) or creates a new empty task list if a previous one does not exist.
+     * Loads existing task lists (If there is one) or creates a new empty task list if a previous one does not exist.
      * @return an ArrayList that acts as a storage for the Tasks.
      * @throws DukeException if you have no pending tasks (list was empty when Duke is started).
      */
