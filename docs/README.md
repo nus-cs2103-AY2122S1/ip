@@ -21,7 +21,7 @@ Please be patient with him as he's kind of slow and stupid, and sometimes he doe
 
 
 ---
-# Features✔️
+# Features ✔️
 
 InferiorDuke is a task list bot that can help you track up to 3 different types of tasks: ToDos, Events and Deadlines.
 
@@ -30,19 +30,19 @@ InferiorDuke is a task list bot that can help you track up to 3 different types 
 
 As mentioned above, there are three types of tasks and each will be added to your task list differently!
 
-### ToDo
+### ToDo 🗒️
 
 A task without a set date for completion and can be added with the following command:
 
     todo <Description>
 
-### Deadline
+### Deadline ⏰
 
 A task with a set date for completion and can be added with the following command:
     
     deadline <Description> /by <Date>
 
-### Event
+### Event 🥳
 
 An event is an occurrence at a certain time and can be added with the following command:
 
@@ -76,7 +76,7 @@ You can mark a task as undone with the following command:
 
 ### Delete Task
 
-You can delete a task frp, the task list with the following command:
+You can delete a task from the task list with the following command:
 
 
     delete <Index>
