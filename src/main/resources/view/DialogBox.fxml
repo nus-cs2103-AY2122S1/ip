@@ -13,7 +13,7 @@
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity" maxHeight="Infinity">
             <padding>
-                <Insets left="10" right="10" />
+                <Insets left="30" right="30" top="10" bottom="10" />
             </padding>
          <font>
             <Font name="Avenir Book" size="14.0" />

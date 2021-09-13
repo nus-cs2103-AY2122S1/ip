@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -48,6 +53,26 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
     }
 
+    private DialogBox(String text, Image img, Color color, Background background) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        if (color != null) {
+            dialog.setTextFill(color);
+        }
+        dialog.setBackground(background);
+        displayPicture.setImage(img);
+        Circle clip = new Circle(40, 40, 40);
+        displayPicture.setClip(clip);
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -77,7 +102,27 @@ public class DialogBox extends HBox {
      * @return DialogBox of WorkDone.
      */
     public static DialogBox getWorkDoneDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        Color backgroundColor = new Color(0.125490196, 0.870588235, 0.82745098, 0.1);
+        Background background = new Background(new BackgroundFill(
+                backgroundColor, new CornerRadii(10), new Insets(0, 10, 0, 10)));
+        var db = new DialogBox(text, img, null, background);
+        db.flip();
+        return db;
+    }
+
+    /**
+     * Creates and returns a dialog with error message.
+     *
+     * @param text Error message generated from a command.
+     * @param img Avatar of WorkDone.
+     * @return DialogBox showing Error.
+     */
+    public static DialogBox getErrorDialog(String text, Image img) {
+        Color textColor = new Color(0.74117647, 0.309803921, 0.423529411, 1);
+        Color backgroundColor = new Color(1, 0.572549019, 0.545098039, 0.2);
+        Background background = new Background(new BackgroundFill(
+                backgroundColor, new CornerRadii(10), new Insets(0, 10, 0, 10)));
+        var db = new DialogBox(text, img, textColor, background);
         db.flip();
         return db;
     }

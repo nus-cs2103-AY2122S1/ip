@@ -46,7 +46,9 @@ public class MainWindow extends AnchorPane {
         String response = workDone.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getWorkDoneDialog(response, workDoneImage)
+                response.contains("☹")
+                        ? DialogBox.getErrorDialog(response, workDoneImage)
+                        : DialogBox.getWorkDoneDialog(response, workDoneImage)
         );
         userInput.clear();
         if (input.equals("bye")) {

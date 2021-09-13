@@ -10,11 +10,8 @@ import workdone.exception.WorkDoneException;
  */
 public class Ui {
     /** Greeting message to be printed when the program starts */
-    private static final String GREETING_MESSAGE =
-            "____________________________________________________________\n"
-                    + "Hello! I'm WorkDone\n"
-                    + "What can I do for you?\n"
-                    + "____________________________________________________________\n";
+    private static final String GREETING_MESSAGE = "Hello! I'm WorkDone\nWhat can I do for you?";
+
     /** Scanner used to read commands */
     private final Scanner input;
 
