@@ -45,6 +45,10 @@ public abstract class Task {
         return this.taskType;
     }
 
+    public String getCheckBox() {
+        return "[" + (getCompleted() ? "X" : " ") + "]";
+    }
+
     @Override
     public String toString() {
         return getDetails();

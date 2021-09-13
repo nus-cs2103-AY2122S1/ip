@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.commandresult.CommandResult;
-import duke.exception.DukeException;
 import duke.tasklist.TaskList;
 
 /**
@@ -29,10 +28,9 @@ public class FindCommand extends Command {
      * Overrides execute() from Command and returns a CommandResult which stores the feedback string
      * to be returned to the UserInterface.
      * @return CommandResult to be rendered by UserInterface.
-     * @throws DukeException for any incorrect commands input by the user.
      */
     @Override
-    public CommandResult execute() throws DukeException {
+    public CommandResult execute() {
         TaskList taskList = super.getTaskList();
         TaskList filtered = taskList.filter(this.searchInput);
         String feedback = "Here are the matching tasks in your list:\n" + filtered.toString();

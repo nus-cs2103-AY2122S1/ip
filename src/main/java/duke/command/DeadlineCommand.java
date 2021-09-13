@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.commandresult.CommandResult;
-import duke.exception.DukeException;
+import duke.exception.IncorrectDeadlineParameterException;
+import duke.exception.TimedTaskDateInputException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -31,20 +32,19 @@ public class DeadlineCommand extends Command implements TaskListAddable {
      * Overrides execute() from Command and returns a CommandResult which stores the feedback string
      * to be returned to the UserInterface.
      * @return CommandResult to be rendered by UserInterface.
-     * @throws DukeException for any incorrect commands input by the user.
+     * @throws IncorrectDeadlineParameterException for any incorrect commands input by the user.
+     * @throws TimedTaskDateInputException if the date given was wrong.
      */
     @Override
-    public CommandResult execute() throws DukeException {
+    public CommandResult execute() throws IncorrectDeadlineParameterException, TimedTaskDateInputException {
         TaskList taskList = super.getTaskList();
         int numOfTasks = taskList.size();
-        String[] eventList = this.command.split(" /by ");
-        if (eventList.length != 2) {
-            throw new DukeException("Incorrect command was given for deadline. "
-                    + "Try this: deadline name_here"
-                    + " /by date_here");
+        String[] deadlineList = this.command.split(" /by ");
+        if (deadlineList.length != 2) {
+            throw new IncorrectDeadlineParameterException();
         }
-        Task event = new Deadline(eventList[0], eventList[1], false);
-        String feedback = addTaskToTaskList(taskList, event);
+        Task deadline = new Deadline(deadlineList[0], deadlineList[1], false);
+        String feedback = addTaskToTaskList(taskList, deadline);
         assert numOfTasks + 1 == taskList.size();
         return new CommandResult(feedback, false);
     }

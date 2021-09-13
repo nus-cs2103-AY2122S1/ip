@@ -2,6 +2,8 @@ package duke.command;
 
 import duke.commandresult.CommandResult;
 import duke.exception.DukeException;
+import duke.exception.IncorrectIndexException;
+import duke.exception.IncorrectUpdateParameterException;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.tasklist.TaskList;
@@ -10,107 +12,115 @@ public class UpdateCommand extends Command {
 
     public static final String COMMAND_WORD = "update";
 
-    private final String restOfWords;
+    public static final String FEEDBACK_STRING = "I've updated this task in your list from\n";
+
+    private final String commandStringParams;
 
     private int id;
 
-    private String updatedName;
+    private String nameToUpdateTo;
 
-    private String updatedDate;
+    private String dateToUpdateTo;
 
     /**
      * Abstract constructor that will have to be implemented by all classes that extend Command.
      *
      * @param taskList that is passed by Duke.
+     * @param commandStringParams the rest of the parameters input by User.
      */
-    public UpdateCommand(TaskList taskList, String rest) {
+    public UpdateCommand(TaskList taskList, String commandStringParams) {
         super(taskList);
-        this.restOfWords = rest;
+        this.commandStringParams = commandStringParams;
     }
 
-    public void setUpdatedName(String updatedName) {
-        this.updatedName = updatedName;
+    public void setUpdatedName(String nameToUpdateTo) {
+        this.nameToUpdateTo = nameToUpdateTo;
     }
 
-    public void setUpdatedDate(String updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setUpdatedDate(String dateToUpdateTo) {
+        this.dateToUpdateTo = dateToUpdateTo;
     }
 
     @Override
     public CommandResult execute() throws DukeException {
-        parseThroughRest();
+        parseThroughCommandStringParams();
         Task task = this.getTaskList().get(this.id);
-        String feedback = "I've updated this task in your list from\n";
-        if (task.getTaskType().equals(TaskType.T)) {
-            if (!checkIfUpdatedDateIsNull()) {
-                throw new DukeException("This task is a Todo task, and can only accept a change in name.");
-            }
-            if (checkIfUpdatedNameIsNull()) {
-                throw new DukeException("This task is a Todo task, and no updated name was supplied.");
-            }
-            Task updatedTask = task.updateName(this.updatedName);
-            Task oldTask = this.getTaskList().updateTask(updatedTask, this.id);
-            feedback = feedback + "\n" + oldTask.toString() + "\n to" + "\n" + updatedTask.toString();
-            return new CommandResult(feedback, false);
+        if (!isATodoTask(task.getTaskType()) && checkIfNameAndDateToUpdateToAreNull()) {
+            throw new IncorrectUpdateParameterException();
         }
-        if (checkIfUpdatedNameIsNull() && checkIfUpdatedDateIsNull()) {
-            throw new DukeException("This is a Timed Task. You have to supply either an updated name OR a date.");
-        }
-        Task updatedTask = updateNameOfTask(task);
-        Task updatedTask1 = updateDateOfTask(updatedTask);
-        Task oldTask = this.getTaskList().updateTask(updatedTask1, this.id);
-        feedback = feedback + "\n" + oldTask.toString() + "\n to" + "\n" + updatedTask1.toString();
+        Task updatedTask = updateTask(task);
+        Task oldTask = this.getTaskList().updateTask(updatedTask, this.id);
+        String feedback = getFeedbackString(oldTask, updatedTask);
         return new CommandResult(feedback, false);
     }
 
-    private boolean checkIfUpdatedNameIsNull() {
-        return this.updatedName == null;
+    private boolean isATodoTask(TaskType taskType) {
+        return taskType.equals(TaskType.T);
     }
 
-    private boolean checkIfUpdatedDateIsNull() {
-        return this.updatedDate == null;
+    private boolean checkIfNameToUpdateToIsNull() {
+        return this.nameToUpdateTo == null;
+    }
+
+    private boolean checkIfDateToUpdateToIsNull() {
+        return this.dateToUpdateTo == null;
+    }
+
+    private boolean checkIfNameAndDateToUpdateToAreNull() {
+        return checkIfNameToUpdateToIsNull() && checkIfDateToUpdateToIsNull();
     }
 
     private Task updateNameOfTask(Task task) throws DukeException {
-        if (checkIfUpdatedNameIsNull()) {
+        if (checkIfNameToUpdateToIsNull() && isATodoTask(task.getTaskType())) {
+            throw new IncorrectUpdateParameterException();
+        }
+        if (checkIfNameToUpdateToIsNull()) {
             return task;
         }
-        return task.updateName(this.updatedName);
+        return task.updateName(this.nameToUpdateTo);
     }
 
     private Task updateDateOfTask(Task task) throws DukeException {
-        if (checkIfUpdatedDateIsNull()) {
+        if (checkIfDateToUpdateToIsNull()) {
             return task;
         }
-        return task.updateDateTime(this.updatedDate);
+        return task.updateDateTime(this.dateToUpdateTo);
     }
 
-    private void parseThroughRest() throws DukeException {
-        String[] split = this.restOfWords.split("(?=/)");
+    private Task updateTask(Task task) throws DukeException {
+        if (isATodoTask(task.getTaskType())) {
+            return updateNameOfTask(task);
+        }
+        return updateDateOfTask(updateNameOfTask(task));
+    }
+
+    private void parseThroughCommandStringParams() throws IncorrectUpdateParameterException, IncorrectIndexException {
+        String[] split = this.commandStringParams.split("(?=/)");
         lookForAndSetId(split);
         lookForAndSetName(split);
         lookForAndSetDateTime(split);
     }
 
-    private void lookForAndSetId(String[] splitString) throws DukeException {
+    private void lookForAndSetId(String[] splitString) throws IncorrectUpdateParameterException, IncorrectIndexException {
         for (String s: splitString) {
-            System.out.println(s);
             if (s.startsWith("/i")) {
                 String res = s.substring(2);
-                this.id = Integer.parseInt(res.trim());
+                try {
+                    this.id = Integer.parseInt(res.trim());
+                } catch (NumberFormatException e) {
+                    throw new IncorrectIndexException();
+                }
                 return;
             }
         }
-        throw new DukeException(
-                "Id was not passed when updating. Please try this format\n"
-                        + "update /i (the id of the task to update) /n (the new name of the task) /d (the new date of the task)"
-        );
+        throw new IncorrectUpdateParameterException();
     }
 
     private void lookForAndSetName(String[] splitString) {
         for (String s: splitString) {
             if (s.startsWith("/n")) {
                 setUpdatedName(s.substring(2).trim());
+                return;
             }
         }
     }
@@ -121,5 +131,9 @@ public class UpdateCommand extends Command {
                 setUpdatedDate(s.substring(2).trim());
             }
         }
+    }
+
+    private String getFeedbackString(Task oldTask, Task updatedTask) {
+        return FEEDBACK_STRING + "\n" + oldTask.toString() + "\n to" + "\n" + updatedTask.toString();
     }
 }

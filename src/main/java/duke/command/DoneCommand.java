@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.commandresult.CommandResult;
-import duke.exception.DukeException;
+import duke.exception.IncorrectIndexException;
+import duke.exception.TimedTaskDateInputException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -30,10 +31,11 @@ public class DoneCommand extends Command {
      * Overrides execute() from Command and returns a CommandResult which stores the feedback string
      * to be returned to the UserInterface.
      * @return CommandResult to be rendered by UserInterface.
-     * @throws DukeException for any incorrect commands input by the user.
+     * @throws IncorrectIndexException for any incorrect index supplied by user.
+     * @throws TimedTaskDateInputException for any incorrect date supplied.
      */
     @Override
-    public CommandResult execute() throws DukeException {
+    public CommandResult execute() throws IncorrectIndexException, TimedTaskDateInputException {
         TaskList taskList = super.getTaskList();
         int numOfTasks = taskList.size();
         Task completedTask = taskList.markAsCompleted(this.taskId);

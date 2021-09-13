@@ -9,6 +9,10 @@ import duke.formatter.DateTimeFormatCreator;
 
 public abstract class TimedTask extends Task {
 
+    public static final String TIMED_TASK_YEAR_FORMAT = "yyyy-MM-dd";
+
+    public static final String TIMED_TASK_MONTH_FORMAT = "MMM d yyyy";
+
     private final LocalDateTime dateTime;
 
     TimedTask(String name,
@@ -26,13 +30,13 @@ public abstract class TimedTask extends Task {
     protected abstract String getDateTimeString();
 
     protected String getDateTimeInternal() {
-        return this.dateTime.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        return this.dateTime.toLocalDate().format(DateTimeFormatter.ofPattern(TIMED_TASK_YEAR_FORMAT))
                 + " "
                 + this.dateTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 
     public String getDateTime() {
-        return this.dateTime.toLocalDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+        return this.dateTime.toLocalDate().format(DateTimeFormatter.ofPattern(TIMED_TASK_MONTH_FORMAT))
                 + " "
                 + this.dateTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
@@ -44,7 +48,7 @@ public abstract class TimedTask extends Task {
 
     @Override
     public String getDetails() {
-        String checkbox = "[" + (getCompleted() ? "X" : " ") + "]";
+        String checkbox = getCheckBox();
         String details = getTaskTypeString() + checkbox + " " + this.getName();
         return details + getDateTimeString();
     }

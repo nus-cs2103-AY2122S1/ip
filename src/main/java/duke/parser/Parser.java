@@ -10,7 +10,10 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UpdateCommand;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.FindCommandWordSuppliedException;
+import duke.exception.IncorrectCommandWordException;
+import duke.exception.TooLittleParametersSuppliedException;
 import duke.tasklist.TaskList;
 
 /**
@@ -38,29 +41,36 @@ public class Parser {
     public Command parse(String input) throws DukeException {
         String[] words = input.split(" ");
         String commandWord = words[0];
-        String rest;
-        switch (commandWord) {
-        case ListCommand.COMMAND_WORD:
+        if (checkCommandWordWithCommand(commandWord, ListCommand.COMMAND_WORD)) {
             return new ListCommand(taskList);
-        case DoneCommand.COMMAND_WORD:
+        }
+        if (checkCommandWordWithCommand(commandWord, DoneCommand.COMMAND_WORD)) {
             return new DoneCommand(taskList, Integer.parseInt(words[1]));
-        case DeleteCommand.COMMAND_WORD:
+        }
+        if (checkCommandWordWithCommand(commandWord, DeleteCommand.COMMAND_WORD)) {
             return new DeleteCommand(taskList, Integer.parseInt(words[1]));
-        case TodoCommand.COMMAND_WORD:
-        case DeadlineCommand.COMMAND_WORD:
-        case EventCommand.COMMAND_WORD:
-        case UpdateCommand.COMMAND_WORD:
-            rest = combine(words, words.length);
+        }
+        if (checkIfCommandWordEqualsAddOrUpdateCommand(commandWord)) {
+            String rest = combine(words, words.length);
             return convertAddOrUpdateCommandStringToCommand(commandWord, rest, taskList);
-        case FindCommand.COMMAND_WORD:
-            if (words.length != 2) {
-                throw new FindCommandWordSuppliedException();
-            }
+        }
+        if (checkCommandWordWithCommand(commandWord, FindCommand.COMMAND_WORD)) {
+            throwFindExceptionIfLengthDoesNotMatch(words);
             return new FindCommand(taskList, words[1]);
-        case ExitCommand.COMMAND_WORD:
+        }
+        if (checkCommandWordWithCommand(commandWord, ExitCommand.COMMAND_WORD)) {
             return new ExitCommand(taskList);
-        default:
-            throw new IncorrectCommandWordException();
+        }
+        throw new IncorrectCommandWordException();
+    }
+
+    private boolean checkCommandWordWithCommand(String commandWord, String command) {
+        return commandWord.equals(command);
+    }
+
+    private void throwFindExceptionIfLengthDoesNotMatch(String[] words) throws FindCommandWordSuppliedException {
+        if (words.length != 2) {
+            throw new FindCommandWordSuppliedException();
         }
     }
 
@@ -76,15 +86,23 @@ public class Parser {
         return result.substring(0, result.length() - 1);
     }
 
-    private Command convertAddOrUpdateCommandStringToCommand(String commandWord, String commandOption,
-                                                           TaskList taskList) {
-        if (commandWord.equals(TodoCommand.COMMAND_WORD)) {
+    private boolean checkIfCommandWordEqualsAddOrUpdateCommand(String commandWord) {
+        return checkCommandWordWithCommand(commandWord, TodoCommand.COMMAND_WORD)
+                || checkCommandWordWithCommand(commandWord, DeadlineCommand.COMMAND_WORD)
+                || checkCommandWordWithCommand(commandWord, UpdateCommand.COMMAND_WORD)
+                || checkCommandWordWithCommand(commandWord, EventCommand.COMMAND_WORD);
+    }
+
+    private Command convertAddOrUpdateCommandStringToCommand(String commandWord
+            , String commandOption
+            , TaskList taskList) {
+        if (checkCommandWordWithCommand(commandWord, TodoCommand.COMMAND_WORD)) {
             return new TodoCommand(taskList, commandOption);
         }
-        if (commandWord.equals(DeadlineCommand.COMMAND_WORD)) {
+        if (checkCommandWordWithCommand(commandWord, DeadlineCommand.COMMAND_WORD)) {
             return new DeadlineCommand(taskList, commandOption);
         }
-        if (commandWord.equals(UpdateCommand.COMMAND_WORD)) {
+        if (checkCommandWordWithCommand(commandWord, UpdateCommand.COMMAND_WORD)) {
             return new UpdateCommand(taskList, commandOption);
         }
         return new EventCommand(taskList, commandOption);

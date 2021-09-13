@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.commandresult.CommandResult;
-import duke.exception.DukeException;
+import duke.exception.IncorrectIndexException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -30,10 +30,10 @@ public class DeleteCommand extends Command implements ListNumberPrintable {
      * Overrides execute() from Command and returns a CommandResult which stores the feedback string
      * to be returned to the UserInterface.
      * @return CommandResult to be rendered by UserInterface.
-     * @throws DukeException for any incorrect commands input by the user.
+     * @throws IncorrectIndexException for incorrect index supplied by user.
      */
     @Override
-    public CommandResult execute() throws DukeException {
+    public CommandResult execute() throws IncorrectIndexException {
         TaskList taskList = super.getTaskList();
         int numOfTasks = taskList.size();
         Task deletedTask = taskList.deleteTask(this.taskId);

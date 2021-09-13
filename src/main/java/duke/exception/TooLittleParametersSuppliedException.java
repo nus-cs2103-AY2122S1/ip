@@ -1,10 +1,10 @@
 package duke.exception;
 
-public class TooLittleParametersSuppliedException extends DukeException {
+public class TooLittleParametersSuppliedException extends IncorrectParameterSuppliedException {
     /**
      * The constructor method for DukeException.
      */
     public TooLittleParametersSuppliedException() {
-        super("Too little parameters were supplied. Please add other words after the Command Word.");
+        super("task", new String[]{"adding more parameters to specify the task."});
     }
 }

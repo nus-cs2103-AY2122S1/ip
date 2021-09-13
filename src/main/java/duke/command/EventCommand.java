@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.commandresult.CommandResult;
-import duke.exception.DukeException;
+import duke.exception.IncorrectEventParameterException;
+import duke.exception.TimedTaskDateInputException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -31,17 +32,16 @@ public class EventCommand extends Command implements TaskListAddable {
      * Overrides execute() from Command and returns a CommandResult which stores the feedback string
      * to be returned to the UserInterface.
      * @return CommandResult to be rendered by UserInterface.
-     * @throws DukeException for any incorrect commands input by the user.
+     * @throws IncorrectEventParameterException for any incorrect event params input by the user.
+     * @throws TimedTaskDateInputException if the date given was the wrong format.
      */
     @Override
-    public CommandResult execute() throws DukeException {
+    public CommandResult execute() throws IncorrectEventParameterException, TimedTaskDateInputException {
         TaskList taskList = super.getTaskList();
         int numOfTasks = taskList.size();
         String[] eventList = this.command.split(" /at ");
         if (eventList.length != 2) {
-            throw new DukeException("Incorrect command was given for event. "
-                    + "Try this: event name_here"
-                    + " /at date_here");
+            throw new IncorrectEventParameterException();
         }
         Task event = new Event(eventList[0], eventList[1], false);
         String feedback = addTaskToTaskList(taskList, event);
