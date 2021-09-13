@@ -27,6 +27,9 @@ public class Parser {
     /** Current user string split into words **/
     private String[] words;
 
+    /** Whether the current command is bye **/
+    private boolean isBye = false;
+
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
@@ -47,6 +50,7 @@ public class Parser {
         case "hello":
             return Ui.hi();
         case "bye":
+            isBye = true;
             taskList.saveTasksToStorage();
             return Ui.bye();
         case "l": // fallthrough
@@ -266,5 +270,9 @@ public class Parser {
             throw new MissingTaskNameException("Missing task name");
         }
         return taskList.find(words[1]);
+    }
+
+    public boolean isBye() {
+        return isBye;
     }
 }

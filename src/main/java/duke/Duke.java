@@ -23,6 +23,9 @@ public class Duke {
     /** Keeps track of whether the current reply is an exception. **/
     private boolean isException = false;
 
+    /** Whether Duke is currently running **/
+    private boolean isRunning = true;
+
     /**
      * Initializes a new Duke chatbot with respective file path
      *
@@ -47,6 +50,7 @@ public class Duke {
         try {
             dukeResponse = parser.handle(input);
             isException = false;
+            isRunning = !parser.isBye();
         } catch (InvalidCommandException e) {
             dukeResponse = "I'm afraid I don't recognise that, please try again!";
         } catch (MissingTaskNameException e) {
@@ -69,6 +73,10 @@ public class Duke {
 
     public boolean isException() {
         return isException;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }
 
