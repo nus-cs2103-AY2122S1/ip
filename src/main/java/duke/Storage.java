@@ -139,6 +139,7 @@ public class Storage {
             throw new DukeException("File corrupted. Please create a new file or check your existing file.");
         }
 
+        assert newTask != null;
         return newTask;
     }
 }

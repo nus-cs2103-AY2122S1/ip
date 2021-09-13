@@ -42,7 +42,8 @@ public class FindCommand extends Command {
         }
 
         if (hasMatches) {
-            return results;
+            reply = results;
+            return reply;
         } else {
             reply = "No matches found.";
             return reply;
