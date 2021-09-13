@@ -24,7 +24,7 @@ public class UndoCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to undo a most recent task.
+     * Returns Duke's response when user wants to undo a most recent task.
      *
      * @return Duke's response.
      */

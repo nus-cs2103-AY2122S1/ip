@@ -57,7 +57,7 @@ public class LastExecution {
     }
 
     /**
-     * Returns a undo Message and help user to undo their previous work.
+     * Returns a message in undo to help user to undo their previous work.
      *
      * @return String message showing that duke has helped user to undo his previous operation.
      */

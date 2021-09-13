@@ -25,8 +25,7 @@ public class Duke {
     private final TextUi textUi;
 
     /**
-     * initialize Ui, storage and load TaskLists from specific filePath for Duke
-     *
+     * Initializes Ui, storage and load TaskLists from specific filePath for Duke.
      */
     public Duke() {
         textUi = new TextUi();
@@ -42,12 +41,14 @@ public class Duke {
     /**
      * Updates a save data every time a round of execution is done.
      */
-    public void updateSaveData() {
+    public String updateSaveData() {
+        String text = "";
         try {
             storage.saveListDataToFile(tasks);
         } catch (IOException e) {
-            textUi.showSavingError();
+            text = textUi.showSavingError();
         }
+        return text;
     }
 
     /**
@@ -65,7 +66,7 @@ public class Duke {
         String dukeResponse;
 
         dukeResponse = execution.ExecutionResponse();
-        updateSaveData(); //Update the SaveData every time a round of operation is done.
+        dukeResponse += updateSaveData(); //Update the SaveData every time a round of operation is done.
 
         return dukeResponse;
     }

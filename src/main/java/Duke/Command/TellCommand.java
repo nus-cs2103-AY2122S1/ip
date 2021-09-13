@@ -27,7 +27,7 @@ public class TellCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to search tasks by time that user takes in.
+     * Returns Duke's response when user wants to search tasks by time that user takes in.
      *
      * @return Duke's response.
      */

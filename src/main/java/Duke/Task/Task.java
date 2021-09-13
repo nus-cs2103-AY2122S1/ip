@@ -3,19 +3,19 @@ package duke.task;
 /**
  * @@author Hang Zelin
  *
- * An abstract class that encapsulates the info basic for a task
+ * An abstract class that encapsulates the info basic for a task.
  */
 public abstract class Task {
 
     /**
-     * Returns the task info in the format of "[type][] task info (/by ...)"
+     * Returns the task info in the format of "[type][] task info ..."
      *
      * @return Task info parsed in the format duke executes.
      */
     public abstract String getTaskStatus();
 
     /**
-     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
+     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm".
      * Noted: This method is only applicable for "event" and "deadline" type task.
      *
      * @return Return the parsed time in the format duke can understand.
@@ -39,9 +39,12 @@ public abstract class Task {
     public abstract String getSaveDataInfo();
 
     /**
-     * Mark this task as done.
+     * Marks this task as done.
      */
     public abstract void markDone();
 
+    /**
+     * Resets this task as undone.
+     */
     public abstract void resetDone();
 }

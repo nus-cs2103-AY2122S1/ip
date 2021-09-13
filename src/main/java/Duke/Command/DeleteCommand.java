@@ -28,7 +28,7 @@ public class DeleteCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to delete a task.
+     * Returns Duke's response when user wants to delete a task.
      *
      * @return Duke's response.
      */

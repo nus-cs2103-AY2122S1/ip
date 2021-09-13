@@ -28,7 +28,7 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to mark a task as done.
+     * Returns Duke's response when user wants to mark a task as done.
      *
      * @return Duke's response.
      */

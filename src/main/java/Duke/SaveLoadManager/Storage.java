@@ -26,7 +26,7 @@ public class Storage {
     private final ArrayList<Task> list;
 
     /**
-     * Initialize filePath and the TaskList for Storage to read data.
+     * Initializes filePath and the TaskList for Storage to read data.
      *
      * @param filePath FilePath of the duke data storage.
      */

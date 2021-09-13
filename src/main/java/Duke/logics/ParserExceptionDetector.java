@@ -27,7 +27,7 @@ public class ParserExceptionDetector {
     private final String message;
 
     /**
-     * Takes in the message and will configure it later.
+     * Constructor that takes in the message and will configure it later.
      *
      * @param message Message to be parsed.
      */
@@ -63,7 +63,7 @@ public class ParserExceptionDetector {
     /**
      * Determines whether there is no task info.
      *
-     * @throws DukeException Exception is thrown when task cannot be read
+     * @throws DukeException Exception is thrown when task cannot be read.
      */
     public void detectGetTaskException() throws DukeException {
         boolean isCorrectType = message.startsWith(DEADLINE) || message.startsWith(EVENT)

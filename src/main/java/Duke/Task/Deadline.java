@@ -7,32 +7,32 @@ import java.util.Locale;
 /**
  * @@author Hang Zelin
  *
- * Events class that extends Task class. It is one of the types in 3 tasks.
- * Will contain a time in the form of "/by"
+ * Deadlines class that extends Task class. It is one of the types in 3 tasks.
+ * Will contain a time in the form of "/by".
  */
-public class Events extends Task {
+public class Deadline extends Task {
 
     private boolean isDone;
     private final String task;
     private final LocalDateTime time;
-    private static final String TASKTYPE = "E";
+    private static final String TASKTYPE = "D";
 
     /**
-     * Constructor for Events containing boolean value if the task is done, the
+     * Constructor for Deadlines containing boolean value if the task is done, the
      * specific task info, and the time for the task.
      *
-     * @param isDone Indicates if the task is done or not.
-     * @param task Specific task info.
-     * @param time Specific time info.
+     * @param isDone Indicates if the task is done.
+     * @param task Task info.
+     * @param time Time info.
      */
-    public Events(boolean isDone, String task, LocalDateTime time) {
+    public Deadline(boolean isDone, String task, LocalDateTime time) {
         this.isDone = isDone;
         this.task = task;
         this.time = time;
     }
 
     /**
-     * Returns the task info in the format of "[type][] task info (/by ...)"
+     * Returns the task info in the format of "[type][] task info (/by ...)".
      *
      * @return Task info parsed in the format duke executes.
      */
@@ -51,7 +51,7 @@ public class Events extends Task {
     }
 
     /**
-     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
+     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm".
      * Note: This method is only applicable for "event" and "deadline" type task.
      *
      * @return Return the parsed time in the format duke can understand.
@@ -143,12 +143,12 @@ public class Events extends Task {
         } else {
             value = 0;
         }
-        dataInfo = TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
+        dataInfo =  TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
         return dataInfo;
     }
 
     /**
-     * Mark this task as done.
+     * Marks this task as done.
      */
     @Override
     public void markDone() {
@@ -156,12 +156,10 @@ public class Events extends Task {
     }
 
     /**
-     * Reset this task as undone.
+     * Resets this task as undone.
      */
     @Override
     public void resetDone() {
         this.isDone = false;
     }
-
-
 }

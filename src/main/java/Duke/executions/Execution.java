@@ -92,7 +92,7 @@ public class Execution {
     }
 
     /**
-     * Chooses a specific task to execute via tasks type and add to the tasklists.
+     * Returns a command to execute with info of index, operation type, task info and time info.
      * Every time an execution is done, the task will be stored to the local file called tasks.txt
      * via Storage.
      *

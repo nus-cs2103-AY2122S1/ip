@@ -27,7 +27,7 @@ public class FindCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to find tasks by keyword.
+     * Returns Duke's response when user wants to find tasks by keyword.
      *
      * @return Duke's response.
      */

@@ -34,7 +34,7 @@ public class AddCommand extends Command{
     }
 
     /**
-     * Return Duke's response when adding a task to list.
+     * Returns Duke's response when adding a task to list.
      *
      * @return Duke's response.
      */

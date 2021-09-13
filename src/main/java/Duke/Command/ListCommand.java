@@ -20,7 +20,7 @@ public class ListCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to see all tasks in list.
+     * Returns Duke's response when user wants to see all tasks in list.
      *
      * @return Duke's response.
      */

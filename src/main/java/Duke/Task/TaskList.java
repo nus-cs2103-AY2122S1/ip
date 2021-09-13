@@ -88,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Undo last duke operation.
+     * Undoes last duke operation.
      *
      * @return Duke's response for undo message.
      */
@@ -123,7 +123,7 @@ public class TaskList {
     /**
      * Marks a specific task as done.
      *
-     * @param index Integer indicates the index for the task
+     * @param index Integer indicates the index for the task.
      */
     public void markDone(int index) {
         Task task = this.tasks.get(index);
@@ -134,7 +134,7 @@ public class TaskList {
     /**
      * Deletes a specific task.
      *
-     * @param index Integer indicates the index for the task
+     * @param index Integer indicates the index for the task.
      */
     public void delete(int index) {
         Task task = this.tasks.get(index);
@@ -175,7 +175,7 @@ public class TaskList {
      * Returns a specific task users refer to.
      *
      * @param index An integer indicates the index of the task.
-     * @return Task users refer to
+     * @return Task users refer to.
      * */
     public Task get(int index) {
         return this.tasks.get(index);
@@ -183,7 +183,7 @@ public class TaskList {
 
 
     /**
-     * Returns the size of the TaskList
+     * Returns the size of the TaskList.
      *
      * @return Integer indicates the size of the TaskList.
      */
@@ -220,9 +220,9 @@ public class TaskList {
          */
         public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
             return switch (type) {
-                   case TODO -> new ToDos(false, task);
-                   case DEADLINE -> new Deadlines(false, task, time);
-                   case EVENT -> new Events(false, task, time);
+                   case TODO -> new ToDo(false, task);
+                   case DEADLINE -> new Deadline(false, task, time);
+                   case EVENT -> new Event(false, task, time);
                    default -> null;
             };
         }

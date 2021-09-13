@@ -20,7 +20,7 @@ public class ByeCommand extends Command{
     }
 
     /**
-     * Return Duke's response when user wants to say goodbye.
+     * Returns Duke's response when user wants to say goodbye.
      *
      * @return Duke's response.
      */

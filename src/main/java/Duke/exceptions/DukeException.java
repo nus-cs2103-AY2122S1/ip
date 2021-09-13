@@ -17,6 +17,11 @@ public class DukeException extends Exception {
         this.type = type;
     }
 
+    /**
+     * Returns Duke's response for an exception issue.
+     *
+     * @return ErrorMessage for a specific DukeException Type.
+     */
     public String getErrorMessage() {
         String errorMessage;
         errorMessage = switch (type){

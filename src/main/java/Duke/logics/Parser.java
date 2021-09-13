@@ -95,7 +95,7 @@ public class Parser {
      * 2. yyyy-mm-dd
      *
      * @param time Time User takes in to be parsed.
-     * @return Parsed time converted in the type of LocalDateTime
+     * @return Parsed time converted in the type of LocalDateTime.
      */
     public LocalDateTime parseTime(String time) {
         LocalDateTime parsedTime;
@@ -233,7 +233,7 @@ public class Parser {
     }
 
     /**
-     * return a String which is index info in a line of command.
+     * Returns a String which is index info in a line of command.
      * Noted: It is possible that index does not exist. This method will only be applicable for "tell", "find",
      * "done" and "delete" operation type.
      *

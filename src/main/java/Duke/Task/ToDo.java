@@ -5,7 +5,7 @@ package duke.task;
  *
  * ToDos class that extends Task class. It is one of the types in 3 tasks.
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
 
     private boolean isDone;
     private final String task;
@@ -18,13 +18,13 @@ public class ToDos extends Task {
      * @param isDone Indicates if the task is done or not.
      * @param task Specifc task info.
      */
-    public ToDos(boolean isDone, String task) {
+    public ToDo(boolean isDone, String task) {
         this.isDone = isDone;
         this.task = task;
     }
 
     /**
-     * Returns the task info in the format of "[type][] task info (/by ...)"
+     * Returns the task info in the format of "[type][] task info".
      *
      * @return Task info parsed in the format duke executes.
      */
@@ -43,7 +43,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
+     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm".
      * Note: This method is only applicable for "event" and "deadline" type task.
      *
      * @return Return the parsed time in the format duke can understand.
@@ -84,7 +84,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * Mark this task as done.
+     * Marks this task as done.
      */
     @Override
     public void markDone() {
@@ -92,7 +92,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * Reset this task as undone.
+     * Resets this task as undone.
      */
     @Override
     public void resetDone() {

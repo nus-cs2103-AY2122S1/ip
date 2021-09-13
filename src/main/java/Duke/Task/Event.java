@@ -1,4 +1,3 @@
-
 package duke.task;
 
 import java.time.LocalDateTime;
@@ -8,32 +7,32 @@ import java.util.Locale;
 /**
  * @@author Hang Zelin
  *
- * Deadlines class that extends Task class. It is one of the types in 3 tasks.
- * Will contain a time in the form of "/by"
+ * Events class that extends Task class. It is one of the types in 3 tasks.
+ * Will contain a time in the form of "/at".
  */
-public class Deadlines extends Task {
+public class Event extends Task {
 
     private boolean isDone;
     private final String task;
     private final LocalDateTime time;
-    private static final String TASKTYPE = "D";
+    private static final String TASKTYPE = "E";
 
     /**
-     * Constructor for Deadlines containing boolean value if the task is done, the
+     * Constructor for Events containing boolean value if the task is done, the
      * specific task info, and the time for the task.
      *
-     * @param isDone Indicates if the task is done.
-     * @param task Task info.
-     * @param time Time info.
+     * @param isDone Indicates if the task is done or not.
+     * @param task Specific task info.
+     * @param time Specific time info.
      */
-    public Deadlines(boolean isDone, String task, LocalDateTime time) {
+    public Event(boolean isDone, String task, LocalDateTime time) {
         this.isDone = isDone;
         this.task = task;
         this.time = time;
     }
 
     /**
-     * Returns the task info in the format of "[type][] task info (/by ...)"
+     * Returns the task info in the format of "[type][] task info (/at ...)".
      *
      * @return Task info parsed in the format duke executes.
      */
@@ -144,12 +143,12 @@ public class Deadlines extends Task {
         } else {
             value = 0;
         }
-        dataInfo =  TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
+        dataInfo = TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
         return dataInfo;
     }
 
     /**
-     * Mark this task as done.
+     * Marks this task as done.
      */
     @Override
     public void markDone() {
@@ -157,10 +156,12 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Reset this task as undone.
+     * Resets this task as undone.
      */
     @Override
     public void resetDone() {
         this.isDone = false;
     }
+
+
 }

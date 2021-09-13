@@ -33,7 +33,7 @@ public class TextUi {
     }
 
     /**
-     * Returns the Ui info for the MarkDone method in TaskList.
+     * Returns the Ui info for the MarkDone method in taskList.
      *
      * @param parsedTask Detailed info for a task that is parsed into a specific format.
      * @return Ui message when markDone is invoked.
@@ -47,9 +47,9 @@ public class TextUi {
     }
 
     /**
-     * Returns the Ui info for the Delete method in TaskList.
+     * Returns the Ui info for the Delete method in taskList.
      *
-     * @param parsedTask Detailed info for a task that is parsed into a specific format
+     * @param parsedTask Detailed info for a task that is parsed into a specific format.
      * @param size Size of the TaskList.
      * @return Ui message when delete is invoked.
      */
@@ -62,9 +62,9 @@ public class TextUi {
     }
 
     /**
-     * Returns the Ui info for the add method in Tasklists.
+     * Returns the Ui info for the add method in taskList.
      *
-     * @param parsedTask Detailed info for a task that is parsed into a specific format
+     * @param parsedTask Detailed info for a task that is parsed into a specific format.
      * @param size Size of the TaskList.
      * @return Ui message when add is invoked.
      */
@@ -88,7 +88,7 @@ public class TextUi {
     }
 
     /**
-     * Returns the Ui info for the FindTask method in Tasklists.
+     * Returns the Ui info for the FindTask method in taskList.
      *
      * @return Ui message when findTask is invoked.
      */
