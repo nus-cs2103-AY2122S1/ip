@@ -2,25 +2,25 @@
 
 ## Features 
 
-### Adding a To-Do task `<t>`
+### Adding a To-Do task `t`
 
 Adds a to-do task to the list.
 
-Format: '<t NAME>'
+Format: 't NAME'
 
-### Adding a Deadline task `<d>`
+### Adding a Deadline task `d`
 
 Adds a deadline task to the list.
 
-Format: '<d NAME /by DATE>'
+Format: 'd NAME /by DATE'
 
 * Date should be entered in YYYY-MM-DD format.
 
-### Adding an Event task `<e>`
+### Adding an Event task `e`
 
 Adds an event task to the list.
 
-Format: '<e NAME /at DATE>'
+Format: 'e NAME /at DATE'
 
 * Date should be entered in YYYY-MM-DD format.
 
