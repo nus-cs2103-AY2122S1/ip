@@ -145,7 +145,7 @@ Example of usage:
 
 with the state of tasks:
 
-![listExample](images/sampleList2.png)
+![listExample](images/sampleListTwo.png)
 
 Input:
 ```markdown
