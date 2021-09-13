@@ -1,9 +1,9 @@
-package duke;
+package memocat;
 
-import duke.task.Task;
-import duke.task.TaskList;
+import memocat.task.Task;
+import memocat.task.TaskList;
 
-public class Duke {
+public class MemoCat {
 
     /**
      * storage instance to handle task list storage.
@@ -16,7 +16,7 @@ public class Duke {
     private final TaskList tasks;
 
     /**
-     * Ui instance to handle Duke ui.
+     * Ui instance to handle memocat ui.
      */
     private final Ui ui;
 
@@ -25,12 +25,12 @@ public class Duke {
      */
     private final Parser parser;
     /**
-     * Construct a Duke instance to run Duke.
+     * Construct a memocat instance to run memocat.
      *
      * @param filePath Path to the data save file directory
      * @param fileName File name of the data save file
      */
-    public Duke(String filePath, String fileName) {
+    public MemoCat(String filePath, String fileName) {
         this.storage = new Storage(filePath, fileName);
         this.tasks = this.storage.readData();
         this.ui = new Ui();
@@ -38,7 +38,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/", "duke.txt").run();
+        new MemoCat("./data/", "memocat.txt").run();
     }
     /**
      * Find tasks from task list that contains a given pattern and print the tasks.
@@ -69,7 +69,7 @@ public class Duke {
                 try {
                     // save all data
                     storage.writeTasksToData(tasks);
-                } catch (DukeException e) {
+                } catch (MemoCatException e) {
                     ui.printMessage(e.getMessage());
                 }
                 break;
@@ -107,7 +107,7 @@ public class Duke {
     }
 
     /**
-     * Duke response message for done command.
+     * memocat response message for done command.
      *
      * @param command The command entered to console.
      */
@@ -127,13 +127,13 @@ public class Duke {
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command done is not followed by a number
             ui.printMessage("☹ OOPS!!! The index of a task done must be an integer.");
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
         }
     }
 
     /**
-     * Duke response message for todo command.
+     * memocat response message for todo command.
      *
      * @param command The command entered to console.
      */
@@ -141,14 +141,14 @@ public class Duke {
         Task todo;
         try {
             todo = parser.commandToTask(command);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
             return;
         }
         tasks.add(todo);
         try {
             storage.writeTasksToData(tasks);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
         }
         ui.printMessage("Got it. I've added this task:\n\t" + todo
@@ -156,7 +156,7 @@ public class Duke {
     }
 
     /**
-     * Duke response message for event command.
+     * memocat response message for event command.
      *
      * @param command The command entered to console.
      */
@@ -164,14 +164,14 @@ public class Duke {
         Task event;
         try {
             event = parser.commandToTask(command);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
             return;
         }
         tasks.add(event);
         try {
             storage.writeTasksToData(tasks);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
         }
         ui.printMessage("Got it. I've added this task:\n\t" + event
@@ -180,7 +180,7 @@ public class Duke {
     }
 
     /**
-     * Duke response message for deadline command.
+     * memocat response message for deadline command.
      *
      * @param command The command entered to console.
      */
@@ -188,14 +188,14 @@ public class Duke {
         Task deadline;
         try {
             deadline = parser.commandToTask(command);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
             return;
         }
         tasks.add(deadline);
         try {
             storage.writeTasksToData(tasks);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
         }
         ui.printMessage("Got it. I've added this task:\n\t" + deadline
@@ -203,7 +203,7 @@ public class Duke {
     }
 
     /**
-     * Duke response message for delete command.
+     * memocat response message for delete command.
      *
      * @param command The command entered to console.
      */
@@ -222,7 +222,7 @@ public class Duke {
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command delete is not followed by a number
             ui.printMessage("☹ OOPS!!! The index of a task to be deleted must be an integer.");
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             ui.printMessage(e.getMessage());
         }
     }

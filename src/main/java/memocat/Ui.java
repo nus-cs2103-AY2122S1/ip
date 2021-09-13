@@ -1,4 +1,4 @@
-package duke;
+package memocat;
 
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Greeting message of Duke.
+     * Greeting message of memocat.
      */
     public void greet() {
         String logo = " ____        _\n"
@@ -28,7 +28,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        printMessage(logo + "\nWelcome! I'm Duke\nWhat can I do for you?");
+        printMessage(logo + "\nWelcome! I'm memocat\nWhat can I do for you?");
     }
 
     /**

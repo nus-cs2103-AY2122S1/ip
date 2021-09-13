@@ -1,17 +1,17 @@
-package duke;
+package memocat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import memocat.task.Deadline;
+import memocat.task.Event;
+import memocat.task.Task;
+import memocat.task.Todo;
 
 
 /**
- * A parser to parse Duke commands.
+ * A parser to parse memocat commands.
  */
 public class Parser {
     /**
@@ -32,14 +32,14 @@ public class Parser {
      * @param command The command to be parsed.
      * @return The index of the task of the command, -1 if is invalid action.
      */
-    public int getCommandActionIndex(String command) throws DukeException {
+    public int getCommandActionIndex(String command) throws MemoCatException {
         switch (getCommandAction(command)) {
         case "done":
             return Integer.parseInt(command.substring(5));
         case "delete":
             return Integer.parseInt(command.substring(7));
         default:
-            throw new DukeException("Invalid action. Index cannot be parsed from the command.");
+            throw new MemoCatException("Invalid action. Index cannot be parsed from the command.");
         }
     }
 
@@ -49,7 +49,7 @@ public class Parser {
      * @param command The command to be parsed.
      * @return A map of task information from the command.
      */
-    public Task commandToTask(String command) throws DukeException {
+    public Task commandToTask(String command) throws MemoCatException {
         switch (getCommandAction(command)) {
         case "todo":
             String[] todoDetails = command.split(" ", 2);
@@ -61,7 +61,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no description
                 String message = "☹ OOPS!!! The description of a todo cannot be empty.";
-                throw new DukeException(message);
+                throw new MemoCatException(message);
             }
 
             return new Todo(todoDescription);
@@ -75,7 +75,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no /at found in command
                 String message = "☹ OOPS!!! The time of an event cannot be empty.";
-                throw new DukeException(message);
+                throw new MemoCatException(message);
             }
 
             String eventDescription;
@@ -84,7 +84,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no event description
                 String message = "☹ OOPS!!! The description of an event cannot be empty.";
-                throw new DukeException(message);
+                throw new MemoCatException(message);
             }
 
             return new Event(eventDescription, at);
@@ -98,7 +98,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no /by found in command
                 String message = "☹ OOPS!!! The time of a deadline cannot be empty.";
-                throw new DukeException(message);
+                throw new MemoCatException(message);
             }
 
             String deadlineDescription;
@@ -107,12 +107,12 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // no deadline description
                 String message = "☹ OOPS!!! The description of a deadline cannot be empty.";
-                throw new DukeException(message);
+                throw new MemoCatException(message);
             }
 
             return new Deadline(deadlineDescription, by);
         default:
-            throw new DukeException("Invalid action. Task cannot be parsed from the command.");
+            throw new MemoCatException("Invalid action. Task cannot be parsed from the command.");
         }
     }
 
@@ -121,14 +121,14 @@ public class Parser {
      *
      * @param str The time string.
      * @return The LocalDate corresponding to the string.
-     * @throws DukeException The exception that contains the message to be printed.
+     * @throws MemoCatException The exception that contains the message to be printed.
      */
-    public LocalDate stringToLocalDate(String str) throws DukeException {
+    public LocalDate stringToLocalDate(String str) throws MemoCatException {
         try {
             return LocalDate.parse(str);
         } catch (DateTimeParseException e) {
             String message = "The time format is invalid. Please use the format YYYY-MM-DD";
-            throw new DukeException(message);
+            throw new MemoCatException(message);
         }
     }
 

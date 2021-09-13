@@ -3,9 +3,9 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.task.Deadline;
+import memocat.MemoCatException;
+import memocat.Parser;
+import memocat.task.Deadline;
 
 public class ParserTest {
 
@@ -26,7 +26,7 @@ public class ParserTest {
     }
 
     @Test
-    public void getCommandActionIndex_validCommand_indexReturned() throws DukeException {
+    public void getCommandActionIndex_validCommand_indexReturned() throws MemoCatException {
         String command1 = "done 7";
         String command2 = "delete 3";
 
@@ -35,10 +35,10 @@ public class ParserTest {
     }
 
     @Test
-    public void getCommandActionIndex_invalidAction_throwDukeException() {
+    public void getCommandActionIndex_invalidAction_throwmemoCatException() {
         String command = "invalid command";
 
-        Assertions.assertThrows(DukeException.class, () -> p.getCommandActionIndex(command));
+        Assertions.assertThrows(MemoCatException.class, () -> p.getCommandActionIndex(command));
 
     }
 
@@ -49,7 +49,7 @@ public class ParserTest {
         try {
             Assertions.assertEquals(new Deadline("cs2103t ip", p.stringToLocalDate("2021-08-24")),
                     p.commandToTask(command));
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             Assertions.fail();
         }
 

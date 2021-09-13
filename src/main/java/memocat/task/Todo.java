@@ -1,7 +1,7 @@
-package duke.task;
+package memocat.task;
 
 /**
- * A Todo type task representation for Duke.
+ * A Todo type task representation for memocat.
  */
 public class Todo extends Task {
 

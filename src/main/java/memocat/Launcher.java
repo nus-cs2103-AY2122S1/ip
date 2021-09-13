@@ -1,4 +1,4 @@
-package duke;
+package memocat;
 
 import javafx.application.Application;
 
@@ -7,6 +7,6 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(DukeFx.class, args);
+        Application.launch(MemoCatFx.class, args);
     }
 }

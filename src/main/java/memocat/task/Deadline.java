@@ -1,11 +1,11 @@
-package duke.task;
+package memocat.task;
 
 import java.time.LocalDate;
 
-import duke.Parser;
+import memocat.Parser;
 
 /**
- * A Deadline type task representation for Duke.
+ * A Deadline type task representation for memocat.
  */
 
 public class Deadline extends Task {

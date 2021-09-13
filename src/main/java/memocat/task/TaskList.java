@@ -1,4 +1,4 @@
-package duke.task;
+package memocat.task;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,7 +83,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Convert a data string read from duke.txt into task.
+     * Convert a data string read from memocat.txt into task.
      *
      * @return The task represented by the string.
      */

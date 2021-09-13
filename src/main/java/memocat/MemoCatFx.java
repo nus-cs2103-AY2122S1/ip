@@ -1,7 +1,5 @@
-package duke;
+package memocat;
 
-import duke.task.Task;
-import duke.task.TaskList;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,8 +16,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import memocat.task.Task;
+import memocat.task.TaskList;
 
-public class DukeFx extends Application {
+public class MemoCatFx extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -28,12 +28,12 @@ public class DukeFx extends Application {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/UserCat.jpeg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DukeCat.jpg"));
+    private Image memocat = new Image(this.getClass().getResourceAsStream("/images/MemoCat.jpg"));
 
     /**
      * storage instance to handle task list storage.
      */
-    private final Storage storage = new Storage("./data/", "duke.txt");
+    private final Storage storage = new Storage("./data/", "memocat.txt");
 
     /**
      * task list instance to store tasks.
@@ -70,7 +70,7 @@ public class DukeFx extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("DukePlus");
+        stage.setTitle("MemoCat");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -128,9 +128,9 @@ public class DukeFx extends Application {
     }
 
     private void greet(VBox dialogContainer) {
-        Label greetMessage = new Label("Greetings!\nThis is MemoCat.\nHow can I help you?");
+        Label greetMessage = new Label("Greetings!\nThis is memocat.\nHow can I help you?");
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(greetMessage, new ImageView(duke)));
+                DialogBox.getmemocatDialog(greetMessage, new ImageView(memocat)));
     }
 
     /**
@@ -150,18 +150,18 @@ public class DukeFx extends Application {
 
     /**
      * Iteration 3:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     * Flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
+     * Creates two dialog boxes, one echoing user input and the other containing memocat's reply and then appends them
+     * to the dialog container. Clears the user input after processing.
+     * Flip a dialog box such that the image on the left to differentiate between user input and memocat’s output.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label memocatText = new Label(getResponse(userInput.getText()));
 
         ImageView userImageView = new ImageView(user);
-        ImageView dukeImageView = new ImageView(duke);
+        ImageView memocatImageView = new ImageView(memocat);
         userImageView.setClip(new Circle());
-        dukeImageView.setClip(new Circle());
+        memocatImageView.setClip(new Circle());
 
         if (userInput.getText().equals("bye")) {
             exitApp();
@@ -170,20 +170,20 @@ public class DukeFx extends Application {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getmemocatDialog(memocatText, new ImageView(memocat))
         );
         userInput.clear();
     }
 
     /**
-     * Add user and Duke dialog for bye.
+     * Add user and memocat dialog for bye.
      *
      * @param dialogContainer The dialog container.
      */
     private void addByeDialog(VBox dialogContainer) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(new Label("bye"), new ImageView(user)),
-                DialogBox.getDukeDialog(new Label("Bye. See you next time!"), new ImageView(duke))
+                DialogBox.getmemocatDialog(new Label("Bye. See you next time!"), new ImageView(memocat))
         );
     }
 
@@ -219,7 +219,7 @@ public class DukeFx extends Application {
                 // save all data
                 storage.writeTasksToData(tasks);
                 return "Bye. See you next time!";
-            } catch (DukeException e) {
+            } catch (MemoCatException e) {
                 return e.getMessage();
             }
         }
@@ -250,7 +250,7 @@ public class DukeFx extends Application {
     }
 
     /**
-     * Duke response message for done command.
+     * memocat response message for done command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -273,13 +273,13 @@ public class DukeFx extends Application {
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command done is not followed by a number
             return "OH NO!!! The index of a task done must be an integer.";
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
     }
 
     /**
-     * Duke response message for todo command.
+     * memocat response message for todo command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -288,13 +288,13 @@ public class DukeFx extends Application {
         Task todo;
         try {
             todo = parser.commandToTask(input);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
         tasks.add(todo);
         try {
             storage.writeTasksToData(tasks);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
         return "Got it. I've added this task:\n\t" + todo
@@ -302,7 +302,7 @@ public class DukeFx extends Application {
     }
 
     /**
-     * Duke response message for event command.
+     * memocat response message for event command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -312,7 +312,7 @@ public class DukeFx extends Application {
 
         try {
             event = parser.commandToTask(input);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
 
@@ -320,7 +320,7 @@ public class DukeFx extends Application {
 
         try {
             storage.writeTasksToData(tasks);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
 
@@ -329,7 +329,7 @@ public class DukeFx extends Application {
     }
 
     /**
-     * Duke response message for deadline command.
+     * memocat response message for deadline command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -339,7 +339,7 @@ public class DukeFx extends Application {
 
         try {
             deadline = parser.commandToTask(input);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
 
@@ -347,7 +347,7 @@ public class DukeFx extends Application {
 
         try {
             storage.writeTasksToData(tasks);
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
 
@@ -356,7 +356,7 @@ public class DukeFx extends Application {
     }
 
     /**
-     * Duke response message for delete command.
+     * memocat response message for delete command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -378,7 +378,7 @@ public class DukeFx extends Application {
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command delete is not followed by a number
             return "OH NO!!! The index of a task to be deleted must be an integer.";
-        } catch (DukeException e) {
+        } catch (MemoCatException e) {
             return e.getMessage();
         }
     }

@@ -1,8 +1,8 @@
-package duke.task;
+package memocat.task;
 
 import java.time.LocalDate;
 
-import duke.Parser;
+import memocat.Parser;
 
 /**
  * A Todo type task representation for Duke.

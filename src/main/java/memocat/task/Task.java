@@ -1,7 +1,7 @@
-package duke.task;
+package memocat.task;
 
 /**
- * A task representation for Duke.
+ * A task representation for memocat.
  */
 public abstract class Task implements Comparable<Task> {
     protected String description;

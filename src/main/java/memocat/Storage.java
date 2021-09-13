@@ -1,20 +1,19 @@
-package duke;
+package memocat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
+import memocat.task.Deadline;
+import memocat.task.Event;
+import memocat.task.Task;
+import memocat.task.TaskList;
+import memocat.task.Todo;
 
 /**
  * A collection of storage io methods.
@@ -48,7 +47,7 @@ public class Storage {
     }
 
     /**
-     * Read data from the data file duke.txt.
+     * Read data from the data file memocat.txt.
      *
      * @return A TaskList of tasks read.
      */
@@ -71,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Convert a data string read from duke.txt into task.
+     * Convert a data string read from memocat.txt into task.
      *
      * @return The task represented by the string.
      */
@@ -95,7 +94,7 @@ public class Storage {
             LocalDate by;
             try {
                 by = parser.stringToLocalDate(taskInfo[3]);
-            } catch (DukeException e) {
+            } catch (MemoCatException e) {
                 by = LocalDate.now();
             }
             task = new Deadline(taskInfo[2], by);
@@ -107,7 +106,7 @@ public class Storage {
             LocalDate at;
             try {
                 at = parser.stringToLocalDate(taskInfo[3]);
-            } catch (DukeException e) {
+            } catch (MemoCatException e) {
                 at = LocalDate.now();
             }
             task = new Event(taskInfo[2], at);
@@ -125,11 +124,11 @@ public class Storage {
     }
 
     /**
-     * Write a list of tasks to the duke.txt data file.
+     * Write a list of tasks to the memocat.txt data file.
      *
      * @param tasks The list of tasks to be written.
      */
-    public void writeTasksToData(TaskList tasks) throws DukeException {
+    public void writeTasksToData(TaskList tasks) throws MemoCatException {
         Path dataFileFullPath = Path.of(this.filePath + this.fileName);
         try {
             ArrayList<String> tasksString = tasks.toDataString();
@@ -141,7 +140,7 @@ public class Storage {
                 Files.createDirectories(dataFileDirectory);
                 Files.createFile(dataFileFullPath);
             } catch (IOException ioExp) {
-                throw new DukeException("Failed to create Directories/File: " + ioExp.getMessage());
+                throw new MemoCatException("Failed to create Directories/File: " + ioExp.getMessage());
             }
         }
     }

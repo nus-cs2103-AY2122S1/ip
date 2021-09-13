@@ -47,5 +47,5 @@ test {
 }
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "memocat.Launcher"
 }

@@ -1,4 +1,4 @@
-package duke;
+package memocat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * A dialog box for user and duke messages in GUI.
+ * A dialog box for user and memocat messages in GUI.
  */
 public class DialogBox extends HBox {
 
@@ -81,19 +81,19 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Gets a dialog box for duke response.
+     * Gets a dialog box for memocat response.
      *
-     * @param l  Label of duke response.
-     * @param iv ImageView of duke avatar.
-     * @return Dialog box for duke.
+     * @param l  Label of memocat response.
+     * @param iv ImageView of memocat avatar.
+     * @return Dialog box for memocat.
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    public static DialogBox getmemocatDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
-        // set duke dialog background color
-        Color dukeDialogColor = Color.rgb(255, 231, 186);
+        // set memocat dialog background color
+        Color memocatDialogColor = Color.rgb(255, 231, 186);
         db.setBackground(new Background(new BackgroundFill(
-                dukeDialogColor, new CornerRadii(20), new Insets(10))));
+                memocatDialogColor, new CornerRadii(20), new Insets(10))));
         return db;
     }
 }
