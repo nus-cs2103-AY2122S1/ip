@@ -196,7 +196,7 @@ Format: `bye`
 |Mark Done | `done [task number]` <br/> e.g. `done 2`|
 |Delete | `delete [task number]` <br/> e.g. `delete 3`|
 |Find | `find [string to match]` <br/> e.g. `find family`|
-|Bye | `bye`|
+|Exit | `bye`|
 
 ## Acknowledgements
 Dwayne "The Rock" Johnson Profile picture from [Podchaser](https://www.podchaser.com/creators/dwayne-johnson-107ZzsApFJ/about)
