@@ -31,8 +31,8 @@ public class MainWindow extends Stage {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/boh.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kaonashi.gif"));
 
     @FXML
     public void initialize() {
@@ -65,6 +65,7 @@ public class MainWindow extends Stage {
 
         if (duke.getExit()) {
             Platform.exit();
+            System.exit(0);
         }
     }
 

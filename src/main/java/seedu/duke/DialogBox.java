@@ -47,10 +47,13 @@ public class DialogBox extends HBox {
         this.setBackground(new Background(
                 new BackgroundFill(
                         Color.valueOf("#8acae7"), CornerRadii.EMPTY, Insets.EMPTY)));
-        displayPicture.setClip(new Circle(25, 25, 25));
+
+        displayPicture.setClip(new Circle(25, 25, 25)); // Clip to a circle
+        displayPicture.setFitWidth(50); // Center image
+        displayPicture.setImage(img);
+
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
-        displayPicture.setImage(img);
     }
 
     /**
