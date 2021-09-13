@@ -2,7 +2,7 @@
 
 ## Features of StuDo
 
-### Add tasks
+### 1. Add tasks
 StuDo can add your tasks to its list of tasks which you need to do for you.
 These tasks come in different
 types:
@@ -11,33 +11,33 @@ types:
 2. **event** - an event task which happens at a certain time or date.
 3. **deadline** - a deadline task which has a deadline to complete by.
 
-### Mark as done
+### 2. Mark as done
 StuDo is able to mark your tasks as done once you complete them.
 
-### Remove tasks
+### 3. Remove tasks
 StuDo is able to remove tasks from your list anytime.
 
-### Find tasks
+### 4. Find tasks
 StuDo is able to find your tasks with a given keyword for you from your list when you cannot find them.
 
-### List tasks
+### 5. List tasks
 StuDo is able to show you your list of tasks and their details, such as the type of task and if they are complete or not.
 
-### Archive tasks
+### 6. Archive tasks
 StuDo is able to archive your tasks if you do not want to show them on your list and also do not want to delete them.
 
-### Unarchive tasks
+### 7. Unarchive tasks
 StuDo is able to unarchive your tasks if you want to move them back from your archive into your list of tasks.
 
-### List archived tasks
+### 8. List archived tasks
 StuDo is able to show you the tasks you have archived.
 
-### Remove archived tasks
+### 9. Remove archived tasks
 StuDo is able to remove tasks from your list of archived tasks anytime.
 
 ## Usage
 
-### `list` - displays the list of tasks
+### 1. `list` - displays the list of tasks
 
 The `list` command displays the list of tasks to the user.
 
@@ -52,7 +52,7 @@ Shows the list of tasks to the user.
 ![listImage](./userGuideDemo/list.png)
 
 
-### `todo <task name>` - adds a todo task
+### 2. `todo <task name>` - adds a todo task
 
 Adds a todo task to StuDo's list of tasks.
 
@@ -66,7 +66,7 @@ Adds a todo task called `sleep` to the list of task.
 
 ![todoImage](./userGuideDemo/todo.png)
 
-### `event <task name> /at <date/time>` - adds an event task
+### 3. `event <task name> /at <date/time>` - adds an event task
 
 Adds an event task to StuDo's list of tasks.
 
@@ -81,7 +81,7 @@ Adds an event task called `Manchester Derby (at: Nov 6 2021 11:00 PM)` to the li
 ![eventImage](./userGuideDemo/event.png)
 
 
-### `deadline <task name> /by <date/time>` - adds a deadline task
+### 4. `deadline <task name> /by <date/time>` - adds a deadline task
 
 Adds a deadline task to StuDo's list of tasks.
 
@@ -96,7 +96,7 @@ Adds a deadline task called `Buy ronaldo jersey (by: Nov 6 2021 11:00 PM)` to th
 ![deadlineImage](./userGuideDemo/deadline.png)
 
 
-### `find <keyword>` - finds a task with specified keyword
+### 5. `find <keyword>` - finds a task with specified keyword
 
 Finds task with specified keyword from StuDo's list of tasks.
 
@@ -111,7 +111,7 @@ Find tasks with keyword `eat` from StuDo's list of tasks.
 ![findImage](./userGuideDemo/find.png)
 
 
-### `done <task index number>` - marks task at given index number as done
+### 6. `done <task index number>` - marks task at given index number as done
 
 Marks task at given index number as done from StuDo's list of tasks.
 
@@ -126,7 +126,7 @@ Marks task at index `1` as done from StuDo's list of tasks.
 ![doneImage](./userGuideDemo/done.png)
 
 
-### `remove <task index number>` - removes task at given index number
+### 7. `remove <task index number>` - removes task at given index number
 
 Removes task at given index number from StuDo's list of tasks.
 
@@ -141,7 +141,7 @@ Removes task at index `1` from StuDo's list of tasks.
 ![removeImage](./userGuideDemo/remove.png)
 
 
-### `archive <task index number>` - archives task at given index number
+### 8. `archive <task index number>` - archives task at given index number
 
 Archives task at given index number from StuDo's list of tasks.
 
@@ -156,7 +156,7 @@ Archives task at index `1` from StuDo's list of tasks.
 ![archiveImage](./userGuideDemo/archive.png)
 
 
-### `list archive` - displays the list of archived tasks
+### 9. `list archive` - displays the list of archived tasks
 
 The `list archive` command displays the list of archived tasks to the user.
 
@@ -171,7 +171,7 @@ Shows the list of archived tasks to the user.
 ![listArchiveImage](./userGuideDemo/listArchive.png)
 
 
-### `unarchive <task index number>` - unarchives task at given index number
+### 10. `unarchive <task index number>` - unarchives task at given index number
 
 Unarchives task at given index number from StuDo's list of archived tasks, adding it back to StuDo's list of tasks.
 
