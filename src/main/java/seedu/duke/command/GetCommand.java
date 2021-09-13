@@ -39,7 +39,7 @@ public class GetCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        return String.format("%s\n%s\n%s",
+        return String.format("%s\n%s\n",
                 GET_MESSAGE,
                 dateTasks.getOrDefault(date, new ArrayList<>())
                         .toString());

@@ -69,7 +69,7 @@ public class Duke {
                 return new FindCommand(ui, taskList, arrOfCommandWords[1]);
             case GET:
                 // arrOfCommandWords = {"get", "dateString"}
-                parseGetTasksOnDate(arrOfCommandWords[1]);
+                return parseGetTasksOnDate(arrOfCommandWords[1]);
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
             }

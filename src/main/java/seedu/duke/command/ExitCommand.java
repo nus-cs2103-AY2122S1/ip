@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String getUsageMessage() {
-        return "exit  | quit the chat bot";
+        return "bye | quit the chat bot";
     }
 
     /**
