@@ -10,27 +10,35 @@ public class Ui {
     public static final String NO_TASKS = "There are currently no tasks on your list :)";
     public static final String NO_NOTES = "There are currently no notes on your list!";
 
-    public static final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
-
     public static final String BYE = "Bye! Hope to see you soon :)";
 
+    // Error messages by Jarvis for todo task related errors
     public static final String EMPTY_TODO_DESCRIPTION = "Oops! The description of a todo cannot be empty.";
 
+    // Error messages by Jarvis for deadline task related errors
     public static final String EMPTY_DEADLINE_DESCRIPTION = "Oops! The description of a deadline cannot be empty.";
     public static final String INCOMPLETE_DEADLINE = "I think you forgot to key in your deadline! Please key it" +
             " in as dd/mm/yyyy hh:mm (in 24 hours format)";
     public static final String WRONGLY_FORMATTED_DEADLINE_TIME = "Please include the time in the 24 hour format " +
             "(e.g. 15:00)";
 
+    // Error messages by Jarvis for event task related errors
     public static final String EMPTY_EVENT_DESCRIPTION = "Oops! The description of an event cannot be empty.";
     public static final String INCOMPLETE_EVENT_TIMINGS = "I think you forgot to key in your event timings!";
     public static final String WRONGLY_FORMATTED_EVENT_TIMINGS = "Please include the start and end times in the 24 " +
             "hour format (e.g. 15:00-16:00)";
 
+    // Error messages by Jarvis for other errors
+    public static final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
     public static final String WRONGLY_FORMATTED_DATE = "Please format the date as dd/mm/yyy";
 
+    // Error messages by Jarvis for notes related errors
+    public static final String WRONGLY_FORMATTED_NOTE = "Oops, the note is formatted incorrectly! Please write it as " +
+            "title /body";
+
     /**
-     * Displays Jarvis' first greeting when user opens the application
+     * Displays Jarvis' first greeting when user opens the application.
+     *
      * @return Jarvis' greeting to the user
      */
     public static String firstGreeting() {
@@ -39,6 +47,7 @@ public class Ui {
 
     /**
      * Displays the error message when the task number keyed in by the user is invalid.
+     *
      * @param userInput The task number keyed in by the user
      * @return The error message
      */
@@ -47,6 +56,12 @@ public class Ui {
                 "view your list of tasks again!";
     }
 
+    /**
+     * Displays the response by Jarvis when a task has been successfully added.
+     *
+     * @param newTask The newly added task
+     * @return The confirmation message
+     */
     public static String taskAdded(Task newTask) {
         String response = "";
         response += "Got it! I've added this task:\n";
@@ -54,10 +69,12 @@ public class Ui {
         response += "Now you have " + TaskList.getCounter() + " task(s) in the list.\n";
         return response;
     }
+
     /**
      * Displays the response by Jarvis when the task is done.
-     * @param taskNum The number of the task that was completed.
-     * @return The message to be displayed when a task is done.
+     *
+     * @param taskNum The number of the task that was completed
+     * @return The message to be displayed when a task is done
      */
     public static String taskDone(int taskNum) {
         String response = "";
@@ -68,8 +85,9 @@ public class Ui {
 
     /**
      * Displays the response by Jarvis when the task is deleted.
-     * @param task The task that was deleted.
-     * @return The message to be displayed when a task is deleted.
+     *
+     * @param task The task that was deleted
+     * @return The message to be displayed when a task is deleted
      */
     public static String taskDeleted(Task task) {
         String response = "";
@@ -127,7 +145,6 @@ public class Ui {
                 // If it is a deadline task
                 if (TaskList.getTaskList().get(i) instanceof Deadline) {
                     //Check if the deadline is after the day starts
-                    //TODO: Does this work if the time is 12am?
                     boolean deadlineIsAfterDayStarts =
                             (((Deadline) TaskList.getTaskList().get(i)).getDeadline()).isAfter(start);
                     // Check if the deadline is before the day end
@@ -165,7 +182,8 @@ public class Ui {
     }
 
     /**
-     * Returns the list of tasks that matches the searchPhrase
+     * Returns the list of tasks that matches the searchPhrase.
+     *
      * @param searchPhrase The key word/phrase that the user inputs for the search
      * @return list of tasks that matches the searchPhrase
      */
@@ -189,5 +207,62 @@ public class Ui {
             result += "\tNo matching results found!\n";
         }
         return result;
+    }
+
+    /**
+     * Displays the error message when the note number keyed in by the user is invalid.
+     *
+     * @param userInput The note number keyed in by the user
+     * @return The error message
+     */
+    public static String invalidNoteNum(int userInput) {
+        return "Hmm, I don't have note " + (userInput + 1) + " in my list. Please key in 'notes' if you'd like to " +
+                "view your list of notes again!";
+    }
+
+    /**
+     * Prints out the list of notes saved by Jarvis.
+     */
+    public static String listNotes() {
+        int num = 1;
+        String result = "\t" + Ui.NO_NOTES;
+
+        for (int i = 0; i < NoteList.getNoteList().size(); i++) {
+            if (i == 0) {
+                result = "";
+            }
+            result += num + ". " + NoteList.getNoteList().get(i).toString() + "\n";
+            num++;
+        }
+
+        return result;
+    }
+
+    /**
+     * Displays the response by Jarvis when the note is added.
+     *
+     * @param newNote The note that was added
+     * @return The message to be displayed when a note is added
+     */
+    public static String noteAdded(Note newNote) {
+        String response = "";
+        response += "Got it! I've added this note:\n";
+        response += "\t" + newNote.toString() + "\n";
+        response += "Now you have " + NoteList.getCounter() + " note(s) in the list.\n";
+        return response;
+    }
+
+    /**
+     * Displays the response by Jarvis when the note is deleted.
+     *
+     * @param note The note that was deleted
+     * @return The message to be displayed when a note is deleted
+     */
+    public static String noteDeleted(Note note) {
+        String response = "";
+        response += "Noted. I've removed this note from your notes list:\n";
+        response += "\t" + note.toString() + "\n";
+        response += "Now you have " + NoteList.getCounter() + " notes(s) in the notes list.\n";
+        return response;
     }
 }
