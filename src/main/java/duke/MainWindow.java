@@ -45,15 +45,6 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates a dialog box containing the user's upcoming Deadlines as retrieved by Storage and appends it to the
-     * dialog container.
-     */
-    public void displayUpcomingTasks() {
-        dialogContainer.getChildren()
-                .add(DialogBox.getDukeDialog(duke.getUpcomingDeadlinesString(), dukeImage));
-    }
-
-    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

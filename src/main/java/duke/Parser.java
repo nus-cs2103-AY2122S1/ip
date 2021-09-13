@@ -57,6 +57,8 @@ public class Parser {
                 throw new DukeException("Please specify a task number.");
             case "find":
                 throw new DukeException("Please specify a keyword.");
+            case "upcoming":
+                return tasks.getUpcomingDeadlinesString();
             case "deadline":
                 // Fallthrough
             case "event":

@@ -113,7 +113,7 @@ public class TaskList {
      *
      * @return A formatted String representation of upcoming incomplete Deadlines.
      */
-    public String getUpcomingTasksString() {
+    public String getUpcomingDeadlinesString() {
         ArrayList<Task> upcomingTaskList = new ArrayList<>(tasks);
         upcomingTaskList.removeIf(task -> {
             if (task instanceof Deadline) {

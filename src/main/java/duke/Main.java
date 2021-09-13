@@ -30,7 +30,6 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().displayGreeting();
-            fxmlLoader.<MainWindow>getController().displayUpcomingTasks();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
