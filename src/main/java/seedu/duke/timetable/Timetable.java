@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import seedu.duke.commands.Ui;
 import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
 
@@ -50,7 +51,7 @@ public class Timetable {
             DayPlan dayPlan = new DayPlan();
             dayPlan.addSchedule(currTask);
             this.timetable.put(currTask.getDate(), dayPlan);
-            return "Task added to schedule";
+            return Ui.TIMETABLE_TASK_ADDED;
         }
         return this.timetable.get(currTask.getDate()).addSchedule(currTask);
     }
@@ -90,7 +91,7 @@ public class Timetable {
      */
     public String clearDayPlan(String date) {
         this.timetable.remove(date);
-        return "Plans for the day is cleared";
+        return Ui.TIMETABLE_CLEARED_DAY_PLAN;
     }
 
     /**
@@ -102,18 +103,9 @@ public class Timetable {
      */
     public String viewAllScheduledTasks() {
         if (this.timetable.size() == 0) {
-            return "You have not set any schedule yet!";
+            return Ui.TIMETABLE_NO_SCEDULE_SET;
         }
-        Map<String, DayPlan> sortedMap = new TreeMap<>(new Comparator<String>() {
-            @Override
-            public int compare(String firstDate, String secondDate) {
-                String[] firstDateArr = firstDate.split("-");
-                String[] secondDateArr = secondDate.split("-");
-                int firstIntDate = Integer.parseInt(firstDateArr[2] + firstDateArr[1] + firstDateArr[1]);
-                int secondIntDate = Integer.parseInt(secondDateArr[2] + secondDateArr[1] + secondDateArr[1]);
-                return (firstIntDate > secondIntDate) ? 1 : -1;
-            }
-        });
+        Map<String, DayPlan> sortedMap = new TreeMap<>(this.getComparator());
         sortedMap.putAll(this.timetable);
         String allScheduledTasks = "";
         Iterator<String> activeDates = sortedMap.keySet().iterator();
@@ -148,5 +140,18 @@ public class Timetable {
      */
     public void markDone(ScheduledTask currTask) {
         this.timetable.get(currTask.getDate()).markeDone(currTask);
+    }
+
+    private Comparator<String> getComparator() {
+        return new Comparator<String>() {
+            @Override
+            public int compare(String firstDate, String secondDate) {
+                String[] firstDateArr = firstDate.split("-");
+                String[] secondDateArr = secondDate.split("-");
+                int firstIntDate = Integer.parseInt(firstDateArr[2] + firstDateArr[1] + firstDateArr[1]);
+                int secondIntDate = Integer.parseInt(secondDateArr[2] + secondDateArr[1] + secondDateArr[1]);
+                return (firstIntDate > secondIntDate) ? -1 : 1;
+            }
+        };
     }
 }

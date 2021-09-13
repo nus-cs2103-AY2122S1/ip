@@ -3,6 +3,7 @@ package seedu.duke.timetable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import seedu.duke.commands.Ui;
 import seedu.duke.tasks.ScheduledTask;
 
 /**
@@ -62,7 +63,7 @@ public class DayPlan {
      */
     public String addSchedule(ScheduledTask currTask) {
         if (this.isClash(currTask)) {
-            return "Timetable clash, unable to add" + currTask.toString();
+            return "Timetable clash, unable to add " + currTask.toString();
         }
         scheduledTasks.add(currTask);
         return currTask.toString() + " is added into the timetable";
@@ -95,15 +96,9 @@ public class DayPlan {
      */
     public String viewDayPlan() {
         if (this.scheduledTasks.size() == 0) {
-            return "You have no scheduled tasks today!";
+            return Ui.DAYPLAN_NO_SCHEDULED_TASKS;
         }
-        this.scheduledTasks.sort(new Comparator<ScheduledTask>() {
-
-            @Override
-            public int compare(ScheduledTask firstTask, ScheduledTask secondTask) {
-                return (firstTask.getTimeFrom() > secondTask.getTimeFrom()) ? 1 : -1;
-            }
-        });
+        this.scheduledTasks.sort(getComparatorEarlyToLate());
         String dayPlans = "";
         for (int i = 0; i < this.scheduledTasks.size(); i++) {
             dayPlans += this.scheduledTasks.get(i).toString() + "\n";
@@ -120,15 +115,15 @@ public class DayPlan {
      *         successfully changed.
      */
     public String moveSchedule(ScheduledTask from, ScheduledTask to) {
-        DayPlan copy = new DayPlan(new ArrayList<>(this.scheduledTasks));
-        copy.removeSchedule(from);
+        DayPlan copyScheduledTasks = new DayPlan(new ArrayList<>(this.scheduledTasks));
+        copyScheduledTasks.removeSchedule(from);
 
-        if (copy.isClash(to)) {
-            return "Unable to make changes to the Timetable due to clashes. Please try again.";
+        if (copyScheduledTasks.isClash(to)) {
+            return Ui.DAYPLAN_EDIT_FAILED;
         }
         this.removeSchedule(from);
         this.addSchedule(to);
-        return "Changes have been made successfully.";
+        return Ui.DAYPLAN_EDIT_SUCCESSFULLY;
     }
 
     /**
@@ -141,7 +136,7 @@ public class DayPlan {
         if (index < 0) {
             return;
         }
-        scheduledTasks.set(index, currTask.markAsDone());
+        this.scheduledTasks.set(index, currTask.markAsDone());
     }
 
     /**
@@ -178,8 +173,16 @@ public class DayPlan {
         int pointerFrom = pointerTask.getTimeFrom();
         int pointerTo = pointerTask.getTimeTo();
         String pointerDescription = pointerTask.getDescription();
-
         return (pointerFrom == currTimeFrom && currTimeTo == pointerTo && description.equals(pointerDescription));
+    }
+
+    private Comparator<ScheduledTask> getComparatorEarlyToLate() {
+        return new Comparator<ScheduledTask>() {
+            @Override
+            public int compare(ScheduledTask firstTask, ScheduledTask secondTask) {
+                return (firstTask.getTimeFrom() > secondTask.getTimeFrom()) ? 1 : -1;
+            }
+        };
     }
 
 }

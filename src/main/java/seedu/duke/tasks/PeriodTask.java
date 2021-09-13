@@ -22,12 +22,8 @@ public class PeriodTask extends Task {
      */
     public PeriodTask(String description, String from, String to) {
         super(description);
-
-        this.from = LocalDate.of(Integer.parseInt(from.split("-")[2]), Integer.parseInt(from.split("-")[1]),
-                Integer.parseInt(from.split("-")[0]));
-
-        this.to = LocalDate.of(Integer.parseInt(to.split("-")[2]), Integer.parseInt(to.split("-")[1]),
-                Integer.parseInt(to.split("-")[0]));
+        this.from = getLocalDateFromString(from);
+        this.to = getLocalDateFromString(to);
     }
 
     private PeriodTask(String description, LocalDate from, LocalDate to, boolean isDone) {
@@ -86,5 +82,10 @@ public class PeriodTask extends Task {
     public String toString() {
         return "[PT][" + this.getStatusIcon() + "] " + this.getDescription() + " between " + this.getFrom() + " and "
                 + this.getTo();
+    }
+
+    private LocalDate getLocalDateFromString(String date) {
+        return LocalDate.of(Integer.parseInt(date.split("-")[2]), Integer.parseInt(date.split("-")[1]),
+                Integer.parseInt(date.split("-")[0]));
     }
 }
