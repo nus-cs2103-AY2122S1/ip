@@ -23,3 +23,6 @@
     <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
   </padding>
 </fx:root>
+
+<!--Copy from https://github.com/chiamyunqing/ip/blob/master/src/main/resources/view/DialogBox.fxml-->
+
