@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             Task task = taskList.get(taskNumber);
             taskList.delete(taskNumber);
             storage.save(taskList);
-            ui.showMessage("Okay then, I've removed this from the list:\n" + task +
+            ui.setMessage("Okay then, I've removed this from the list:\n" + task +
                     "\nNumber of tasks in list: " + taskList.getSize());
         } catch (IOException e) {
             ui.showError("Error: Unable to Save\n" + e.getMessage());

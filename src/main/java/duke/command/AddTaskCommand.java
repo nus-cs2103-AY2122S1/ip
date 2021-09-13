@@ -38,7 +38,7 @@ public class AddTaskCommand extends Command {
         } catch (IOException e) {
             ui.showError("Error: Unable to Save\n" + e.getMessage());
         }
-        ui.showMessage("Sure thing. Added to list:\n" + task + "\nNumber of tasks in list: " + taskList.getSize());
+        ui.setMessage("Sure thing. Added to list:\n" + task + "\nNumber of tasks in list: " + taskList.getSize());
     }
 
 }

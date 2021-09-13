@@ -35,7 +35,7 @@ public class MarkDoneCommand extends Command {
         try {
             taskList.setDone(taskNumber);
             storage.save(taskList);
-            ui.showMessage("Alrighty, marking this task as done:\n" + taskList.get(taskNumber));
+            ui.setMessage("Alrighty, marking this task as done:\n" + taskList.get(taskNumber));
         } catch (IOException e) {
             ui.showError("Error: Unable to Save\n" + e.getMessage());
         } catch (IndexOutOfBoundsException e) {

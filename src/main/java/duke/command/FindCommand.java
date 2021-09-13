@@ -50,7 +50,7 @@ public class FindCommand extends Command {
                 }
             }
         }
-        ui.showMessage(result + resultList);
+        ui.setMessage(result + resultList);
     }
 
 }

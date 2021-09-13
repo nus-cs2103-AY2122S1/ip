@@ -4,14 +4,13 @@ import duke.command.Command;
 import duke.task.TaskList;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-
+    private Parser parser;
     private boolean isExit;
 
     /**
@@ -27,28 +26,20 @@ public class Duke {
         } catch (FileNotFoundException e) {
             taskList = new TaskList();
         }
+        this.parser = new Parser(this, taskList, storage, ui);
     }
 
-    /**
-     * Runs the Duke instance by taking user input and running it through Parser.
-     * Will loop continuously until user enters the exit command.
-     */
-    public void run() {
-        Parser parser = new Parser(this, taskList, storage, ui);
-        ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
-
-        while (!isExit) {
-            if (sc.hasNextLine()) {
-                Command cmd = parser.parse(sc.nextLine());
-                if (cmd != null) {
-                    cmd.execute();
-                }
+    public String getResponse(String input) {
+        if (!isExit) {
+            Command cmd = parser.parse(input);
+            if (cmd != null) {
+                cmd.execute();
             }
+        } else {
+            ui.setMessage("We're closed.");
         }
 
-        sc.close();
-
+        return ui.getMessage();
     }
 
     /**
@@ -56,13 +47,5 @@ public class Duke {
      */
     public void triggerExit() {
         isExit = true;
-    }
-
-    /**
-     * Main function.
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("task-list.txt").run();
     }
 }
