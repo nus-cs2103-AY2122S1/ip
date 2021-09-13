@@ -24,16 +24,16 @@ public class DoneCommand extends Command{
         try {
             int taskNumberDone = Integer.parseInt(commandArr[1]);
             if (taskNumberDone > taskList.numberOfTasks()){
-                System.out.println("Invalid number");
+                ui.printResponse("Invalid number");
                 return;
             } else {
                 int taskDoneIndex = taskNumberDone-1;
                 taskList.getTask(taskDoneIndex).makeDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(taskList.getTask(taskDoneIndex).toString());
+                ui.printResponse("Nice! I've marked this task as done: ");
+                ui.printResponse(taskList.getTask(taskDoneIndex).toString());
             }
         } catch (Exception e){
-            System.out.println("Invalid input");
+            ui.printResponse("Invalid input");
         }
 
     }

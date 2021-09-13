@@ -25,18 +25,18 @@ public class DeleteCommand extends Command{
         try {
             int taskNumberToDelete = Integer.parseInt(commandArr[1]);
             if (taskNumberToDelete > taskList.numberOfTasks()){
-                System.out.println("Invalid number");
+                ui.printResponse("Invalid number");
                 return;
             } else {
                 int taskToDeleteIndex = taskNumberToDelete-1;
                 Task tasktoDel = taskList.getTask(taskToDeleteIndex);
                 taskList.removeTask(taskToDeleteIndex);
-                System.out.println("Noted. I've removed this task: ");
-                System.out.println("  " + tasktoDel.toString());
+                ui.printResponse("Noted. I've removed this task: ");
+                ui.printResponse("  " + tasktoDel.toString());
 
             }
         } catch (Exception e){
-            System.out.println("Invalid input");
+            ui.printResponse("Invalid input");
         }
 
     }

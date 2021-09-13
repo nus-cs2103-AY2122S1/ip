@@ -22,8 +22,8 @@ public class TodoCommand extends Command{
         //duke.tasks.add(newTask);
         taskList.addTask(newTodo);
         //taskCounter++;
-        System.out.println("Got it. I've added this task: ");
-        System.out.print("  " + newTodo.toString());
+        ui.printResponse("Got it. I've added this task: ");
+        ui.printResponse("  " + newTodo.toString());
     }
 
     @Override
