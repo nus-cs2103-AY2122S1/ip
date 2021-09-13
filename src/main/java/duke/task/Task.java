@@ -1,13 +1,12 @@
 package duke.task;
 
-
 /**
  * Task class which encapsulates task description and status of completion.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    
+    private String description;
+    private boolean isDone;
+
     /**
      * Constructor method of Task.
      *
@@ -15,63 +14,57 @@ public class Task {
      */
     public Task(String description) {
         assert description != null : "Task description should not be null";
-        
         this.description = description;
         this.isDone = false;
-
     }
 
     /**
-     * Constructor method of Task.
+     * Returns the description of a task.
      *
-     * @param description Description of a task.
-     * @param isDone Done status of a task.                   
+     * @return Description of a task.
      */
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    /**
-     * Returns doneIndicator as "1" or "0".
-     *
-     * @return task doneIndicator.
-     */
-    public String getDoneIndicator() {
-        String doneIndicator;
-        if (isDone == false) {
-            doneIndicator = "0";
-        } else {
-            doneIndicator = "1";
-        }
-        return doneIndicator;
-    }
-
-
     public String getDescription() {
         return this.description;
     }
 
-
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+    /**
+     * Returns true if the task is completed and false otherwise.
+     *
+     * @return Boolean indicator for whether a task is done or not.
+     */
+    public boolean isDone() {
+        return isDone;
     }
-    
 
-    public String toFileString() {
-        return "/" + this.description + "/" + this.getDoneIndicator();
-    }
-    
     /**
      * Marks task status as done.
      */
-    public void maskAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
-    
+
+    /**
+     * Returns the task in array format.
+     *
+     * @return Task in string array format.
+     */
+    public String[] formatTaskInArray() { 
+        String doneIndicator; 
+        if (isDone) {
+            doneIndicator = "1";
+        } else {
+            doneIndicator = "0";
+        }
+        String[] str = new String[]{"Task", doneIndicator, description};
+        return str;
+    }
+
+    @Override
+    public String toString() {
+        if (!isDone) {
+            return "[ ] " + description;
+        } else {
+            return "[X] " + description;
+        }
+    }
 }

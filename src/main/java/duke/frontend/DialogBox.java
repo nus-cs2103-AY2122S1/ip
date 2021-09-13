@@ -1,7 +1,10 @@
-package duke;
+package duke.frontend;
 
 import java.io.IOException;
+
 import java.util.Collections;
+
+import duke.MainWindow;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +41,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        changePicture();
     }
 
     /**
@@ -49,13 +54,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Makes the profile picture appear like circle.
+     */
+    private void changePicture() {
+        Circle profileCircle = new Circle(48, 48, 48);
+        displayPicture.setClip(profileCircle);
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_RIGHT);
+        db.setStyle("-fx-background-color: #dae8b6");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
+        db.setAlignment(Pos.CENTER_LEFT);
+        db.setStyle("-fx-background-color: #f9ebcd");
         return db;
     }
 }

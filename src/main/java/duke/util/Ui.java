@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
     /**
-     * Constructor method of Deadline.
+     * Constructor method of Ui.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -17,21 +17,16 @@ public class Ui {
     public String readNextLine() {
         return sc.nextLine().trim();
     }
-    
-    public static String displayError(String error) {
-        return error;
-    }
 
-    public void exit() {
+    public String exit() {
         sc.close();
-        bye();
+        return bye();
     }
     
-
     public static String greet() {
-        return "Hiiii~ I'm Duke! Just so you know I'm not a real human...\n" +
-                "I'm created by Tianyue to assist you in simple task management.\n" +
-                "How can I help you? :)";
+        return "Hiiii~ I'm Laa-Laa! Just so you know I'm not a real human...\n" 
+                + "I'm here to assist you in simple task management.\n" 
+                + "How can I help you? :)";
     }
 
     public static String bye() {

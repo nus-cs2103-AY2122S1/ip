@@ -1,13 +1,9 @@
 package duke.task;
 
-
 /**
  * Todo class to represent a class without a deadline.
  */
 public class Todo extends Task {
-
-    protected String by;
-
     /**
      * Constructor method of Todo.
      *
@@ -18,24 +14,25 @@ public class Todo extends Task {
     }
 
     /**
-     * Another constructor method of Todo.
+     * Returns the todo in array form.
      *
-     * @param isDone Done status of a Todo.
-     * @param description Description of a Todo.
+     * @return String array.
      */
-    public Todo(String isDone, String description) {
-        super(description, isDone.equals("1"));
+    @Override
+    public String[] formatTaskInArray() {
+        String doneIndicator; 
+        if (this.isDone()) {
+            doneIndicator = "1";
+        } else {
+            doneIndicator = "0";
+        }
+        String[] str;
+        str = new String[]{"T", doneIndicator, this.getDescription()};
+        return str;
     }
-
-    
 
     @Override
     public String toString() {
         return "[T]" + super.toString();
-    }
-
-    @Override
-    public String toFileString() {
-        return "T" + super.toFileString();
     }
 }

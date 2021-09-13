@@ -1,16 +1,10 @@
 package duke.task;
 
-import duke.exceptions.UnclearInstructionException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Deadline class which encapsulates task's deadline.
  */
 public class Deadline extends Task {
-    private String byString;
-    private LocalDate byDate;
+    private String byDate;
 
     /**
      * Constructor method of Deadline.
@@ -20,29 +14,28 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.byDate = LocalDate.parse(by);
+        this.byDate = by;
     }
 
     /**
-     * Another constructor method of Deadline.
+     * Returns the deadline in array form.
      *
-     * @param isDone Done indicator of a deadline.  
-     * @param description Description of a deadline.
-     * @param by Due time of a deadline.                   
+     * @return Deadline in array format.
      */
-    public Deadline(String isDone, String description, String by) {
-        super(description, isDone.equals("1"));
-        this.byDate = LocalDate.parse(by);
+    @Override
+    public String[] formatTaskInArray() {
+        String doneIndicator;
+        if (this.isDone()) {
+            doneIndicator = "1";
+        } else {
+            doneIndicator = "0";
+        }
+        String[] string = new String[]{"D", doneIndicator, this.getDescription()};
+        return string;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString()
-                + String.format(" (by: %s)", this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-    }
-
-    @Override
-    public String toFileString() {
-        return "D" + super.toFileString() + "/" + byDate;
+        return "[D]" + super.toString() + " (by: " + byDate + ")";
     }
 }

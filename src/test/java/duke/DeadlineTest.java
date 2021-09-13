@@ -9,8 +9,8 @@ import duke.task.Deadline;
 public class DeadlineTest {
     @Test
     public void deadline_toString_success() {
-        assertEquals("[D][ ] assignment (by: Aug 29 2021)",
-                new Deadline("0", "assignment", "2021-08-29").toString());
+        assertEquals("[D][ ] assignment (by: 2021-08-29)",
+                new Deadline("assignment", "2021-08-29").toString());
     }
     
 }

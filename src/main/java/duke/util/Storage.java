@@ -1,7 +1,7 @@
 package duke.util;
 
-import duke.exceptions.UnclearInstructionException;
-import duke.exceptions.UnknownException;
+import duke.exceptions.DukeException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -12,8 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.Scanner;
 
 /**
@@ -24,7 +25,7 @@ public class Storage {
 
     /**
      * Constructor method of Storage.
-     * 
+     *
      * @param filePath file path for data storage.
      */
     public Storage(String filePath) {
@@ -32,98 +33,110 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from data storage.
-     *
-     * @return List of tasks.
-     */
-    public List<Task> loadStorage() {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            createEmptyFile(file);
-            return new ArrayList<>();
-        }
-
-        try {
-            return readFromFile(file);
-        } catch (FileNotFoundException e) {
-            System.out.println("Something went wrong: cannot find the file");
-            return new ArrayList<>();
-        }
-    }
-
-    /**
      * Reads tasks from file.
      *
-     * @return List of tasks.
-     * @throws UnknownException  If task type from the file is not "T", "E" or "D".
+     * @throws DukeException If the file cannot be found.
      */
-    public List<Task> readFromFile(File file) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
-        List<Task> tasks = new ArrayList<>();
-
-
+    public static void loadFromFile(TaskList taskList) throws DukeException {
         try {
+            File file = setupStorage();
+            Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                String text = sc.nextLine();
-                String[] itemDetails = text.split("/");
-
-                Task task;
-                String task_type = itemDetails[0];
-
-                if (task_type.equals("T")) {
-                    task = new Todo(itemDetails[2], itemDetails[1]);
-                } else if (task_type.equals("D")) {
-                    task = new Deadline(itemDetails[2], itemDetails[1], itemDetails[3]);
-                } else if (task_type.equals("E")) {
-                    task = new Event(itemDetails[2], itemDetails[1], itemDetails[3]);
-                } else {
-                    throw new UnknownException();
-                }
-                tasks.add(task);
+                String row = sc.nextLine();
+                String[] itemDetails = row.split("/");
+                handleData(itemDetails, taskList);
             }
-        } catch (UnknownException e) {
-            System.out.println(e.getMessage());
+            sc.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Something went wrong: cannot find the file");
         }
-
-        return tasks;
     }
 
     /**
-     * Creates empty file.
+     * Returns file for storage.
+     *
+     * @return File.
+     * @throws DukeException Duke exception.
      */
-    public void createEmptyFile(File file) {
+    public static File setupStorage() throws DukeException {
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+
+        Path path = Paths.get(s, "data", "Duke.txt");
+        File file = new File(String.valueOf(path));
         try {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            if (!file.exists()) {
+                File directory = new File(file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                file.createNewFile();
+            }
         } catch (IOException e) {
-            System.out.println("Something went wrong: cannot create an empty file for Storage.");
+            throw new DukeException("Error loading from storage");
+        }
+        return file;
+    }
+
+
+    /**
+     * Processes data from itemDetails and add them into taskList.
+     *
+     * @param itemDetails Task details in string array.
+     * @param taskList    TaskList that manages tasks.
+     */
+    public static void handleData(String[] itemDetails, TaskList taskList) throws DukeException {
+        String task_type = itemDetails[0];
+        switch (task_type) {
+            case "T":
+                Todo todo = new Todo(itemDetails[2]);
+                if (itemDetails[1].equals("1")) {
+                    todo.markAsDone();
+                }
+                taskList.addTask(todo);
+                break;
+            case "D":
+                Deadline deadline = new Deadline(itemDetails[2], itemDetails[3]);
+                if (itemDetails[1].equals("1")) {
+                    deadline.markAsDone();
+                }
+                taskList.addTask(deadline);
+                break;
+            case "E":
+                Event event = new Event(itemDetails[2], itemDetails[3]);
+                if (itemDetails[1].equals("1")) {
+                    event.markAsDone();
+                }
+                taskList.addTask(event);
+                break;
+            default:
+                throw new DukeException("Something went wrong: cannot process the data.");
         }
     }
+
 
     /**
      * Writes to file.
-     * 
-     * @param list The list of tasks to write from.
-     * @throws IOException In case of Invalid directory.
+     *
+     * @param tasks The list of tasks to write from.
+     * @throws IOException In case of invalid directory.
      */
-    public void writeToFile(List<Task> list) throws IOException {
-        assert list != null : "List has not been initialized";
-        
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task : list) {
-            fw.write(task.toFileString() + System.lineSeparator());
-        }
-        fw.close();
-    }
-
-    /**
-     * Stores list of tasks.
-     */
-    public void saveToStorage(List<Task> tasks) {
+    public static void writeToFile(TaskList tasks) throws DukeException {
+        assert tasks != null : "Task list has not been initialized";
         try {
-            writeToFile(tasks);
+            File file = setupStorage();
+            FileWriter fw = new FileWriter(file);
+            for (Task task : tasks.getTasks()) {
+                String[] data = task.formatTaskInArray();
+                if (data.length == 3) {
+                    fw.write(data[0] + "/" + data[1] + "/" + data[2] + System.lineSeparator());
+                } else if (data.length == 4) {
+                    fw.write(data[0] + "/" + data[1] + "/" + data[2] + "/" + data[3] + System.lineSeparator());
+                }
+            }
+            fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong: cannot save to Storage.");
+            throw new DukeException("Something went wrong: cannot load from Storage.");
         }
     }
 }

@@ -1,92 +1,95 @@
 package duke;
 
-import duke.command.Command;
-import duke.exceptions.UnknownException;
+import duke.exceptions.DukeException;
+
 import duke.util.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 import duke.util.Storage;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
-import java.util.List;
-import java.util.ArrayList;
-
 public class Duke {
-    protected Storage storage;
-    protected TaskList tasks;
-    protected Ui ui;
+    private boolean isExit;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    
-    protected static final String FILE_URL = "data/Duke.txt";
-
+    /**
+     * Initializes Duke.
+     */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage(FILE_URL);
-        tasks = new TaskList(storage.loadStorage());
+        TaskList taskList = new TaskList();
+        loadFile(taskList);
+        this.isExit = false;
+        Parser.setTaskList(taskList);
     }
 
     public static void main(String[] args) {
         new Duke().run();
     }
-    
+
     /**
      * Returns an appropriate text reply for duke in the dialog box according
      * to user's input message.
-     *      
+     * 
      * @param input The user's input.
      * @return A text that duke should reply with.
      */
-    public BotOutput getBotOutput (String input) {
+    public String getBotOutput(String input) {
         assert input != null : "User input should not be null";
-        
-        List<String> botOutputs = new ArrayList<>();
-        boolean isExit = false;
-
-        try {
-            Command c = Parser.parse(input);
-            botOutputs.addAll(c.execute(tasks, ui, storage));
-            isExit = c.isExit();
-        } catch (UnknownException e) {
-            ui.displayError(e.getMessage());
+        try { 
+            String response = Parser.parse(input);
+            if (Parser.isExit()) {
+                this.isExit = true;
+            }
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-
-        return new BotOutput(String.join("\n", botOutputs), isExit);
     }
 
-    public String greetToGui() {
-        return ui.greet();
+
+    /**
+     * Returns whether the program should exit.
+     *
+     * @return A boolean.
+     */
+    public boolean isExit() {
+        return this.isExit;
     }
 
+    /**
+     * Retrieves file from the saved tasks.
+     *
+     * @param taskList Task list.
+     */
+    public void loadFile(TaskList taskList) {
+        try {
+            Storage.loadFromFile(taskList);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * Runs the program with the correct components and storage file set-ups.
      */
     public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
+        TaskList taskList = new TaskList();
+        loadFile(taskList);
+        Ui ui = new Ui();
+        System.out.print(Ui.greet());
+        Parser.setTaskList(taskList);
+        while (!this.isExit) {
             try {
                 String fullCommand = ui.readNextLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (UnknownException e) {
-                ui.displayError(e.getMessage());
+                if (Parser.shouldExit(fullCommand)) {
+                    this.isExit = true;
+                    Storage.writeToFile(taskList);
+                    System.out.print(ui.exit());
+                } else {
+                    String msg = Parser.parse(fullCommand);
+                    System.out.print(msg);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
 }
-
