@@ -163,7 +163,7 @@ public class Parser {
         if (deadlineDetails.length < 2 | deadlineDetails[1].isEmpty()) {
             throw new DukeDeadlineMissingDateException();
         } else {
-            deadlineDetails[0].replace("deadline", "").trim();
+            deadlineDetails[0] = deadlineDetails[0].replace("deadline", "").trim();
             return deadlineDetails;
         }
     }
@@ -186,7 +186,7 @@ public class Parser {
         if (eventDetails.length < 2 || eventDetails[1].isEmpty()) {
             throw new DukeEventMissingDateException();
         } else {
-            eventDetails[0].replace("event", "").trim();
+            eventDetails[0] = eventDetails[0].replace("event", "").trim();
             return eventDetails;
         }
     }
