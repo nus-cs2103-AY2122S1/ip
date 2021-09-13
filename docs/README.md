@@ -62,8 +62,7 @@ A task can be a todo, deadline, or an event.
 ### Listing all tasks: `list`
 Lists all your tasks.\
 Example: `list`\
-Expected output:
-
+Expected output: <br />
 ```
 Here are the tasks in your list:
     1. [T][] buy milk
@@ -157,7 +156,7 @@ You now have 2 tasks in the list.
 ### Finding a task by description: `find`
 Finds a task whose description partially matches the query string.\
 Format: `find <query>`
-* The query string is case sensitive.
+* The query string is case-sensitive.
 
 Example: `find team`\
 Expected output:
