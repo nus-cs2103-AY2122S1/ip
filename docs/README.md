@@ -18,8 +18,6 @@ Petal has the following abetments:
 
 A logical thing you might do is wonder—_how do I install Petal_?
 
-### [](https://github.com/wowsiddanth/ip/blob/master/README.md#2-run-the-jar-file)
-
 1. Download the .jar release under the Releases section
 2.   Go to this  [link](https://github.com/wowsiddanth/ip).
 3.  Under the  **Releases**  tab, open  **A-Release**  and download the .jar file.
