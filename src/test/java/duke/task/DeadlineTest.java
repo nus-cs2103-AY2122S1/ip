@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.exception.MismatchedFormException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
@@ -18,7 +17,6 @@ public class DeadlineTest {
     public void markAsDone_success() {
         Deadline deadline = new Deadline("test deadline", "Dec 12 1122");
         deadline.markAsDone();
-
         String expected = "[D][X] test deadline (by: Dec 12 1122)";
         assertEquals(expected, deadline.toString());
     }

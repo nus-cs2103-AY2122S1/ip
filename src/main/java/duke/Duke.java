@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -7,17 +9,15 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
-
 /**
  * Represents the robot which has corresponding reaction to the user inputs.
  *
  * @author QIN GUORUI
  */
 public class Duke {
-    private Storage storage;
     private static TaskList tasks;
     private static Ui ui;
+    private Storage storage;
 
     /**
      * Sets up duke instance dealing with file path.
@@ -53,11 +53,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the string representing tasks within a month or a day in Ui.
+     *
+     * @return The string representation of tasks within day or month in Ui.
+     */
     public static String showComings() {
-            TaskList taskListMonth = tasks.tasksWithinMonthOrDay("month");
-            assert taskListMonth != null;
-            TaskList taskListDay = tasks.tasksWithinMonthOrDay("day");
-            assert taskListDay != null;
-            return ui.showComings(taskListMonth, taskListDay);
+        TaskList taskListMonth = tasks.tasksWithinMonthOrDay("month");
+        assert taskListMonth != null;
+        TaskList taskListDay = tasks.tasksWithinMonthOrDay("day");
+        assert taskListDay != null;
+        return ui.showComings(taskListMonth, taskListDay);
     }
 }

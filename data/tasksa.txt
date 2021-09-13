@@ -1,4 +1,0 @@
-D | 1 | meeting ~ Nov 11 2021 6.44 pm
-E | 0 | eating ~ Sep 7 2021
-T | 0 | afdsa
-T | 0 | dsafas

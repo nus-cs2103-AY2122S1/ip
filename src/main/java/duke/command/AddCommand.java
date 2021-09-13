@@ -25,14 +25,23 @@ public class AddCommand extends Command {
     /**
      * Adds the command.
      *
-     * @param response The content of user input.
-     * @param type The type of adding command.
+     * @param response The users input.
+     * @param type The type of operation.
+     * @param splitIndex The index where the response is split.
+     * @param splitString The string used to split the response.
      */
-    public AddCommand(String response, Operation type,int splitIndex, String splitString) {
+    public AddCommand(String response, Operation type, int splitIndex, String splitString) {
         this(response, type, splitIndex);
         this.splitString = splitString;
     }
 
+    /**
+     * Overloads the definition of adding command.
+     *
+     * @param response The user input.
+     * @param type The type of command.
+     * @param splitIndex The index where the command splits.
+     */
     public AddCommand(String response, Operation type, int splitIndex) {
         this.response = response;
         this.type = type;
@@ -45,6 +54,8 @@ public class AddCommand extends Command {
      * @param tasks The list of tasks.
      * @param ui The user interaction instance.
      * @param storage The instance to store data.
+     * @throws DukeException The exception that covers the whole runtime exceptions in duke.
+     * @throws IOException The exception occurred during write to file.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
@@ -76,14 +87,14 @@ public class AddCommand extends Command {
     /**
      * Provides required parameter for deadline or event.
      *
-      * @return The string array that contains their required parameter.
+     * @return The string array that contains their required parameter.
      * @throws MismatchedFormException The exception inherit from checkContent.
      */
     public String[] partsForEventOrDeadline() throws MismatchedFormException {
-        String LaterPart = Parser.checkContent(response, splitIndex, splitString);
-        String[] Parts = LaterPart.split(splitString);
-        String Content = Parts[0];
-        String Time = Task.formatOutputDateAndTime(Parts[1]);
-        return new String[] {Content, Time};
+        String laterPart = Parser.checkContent(response, splitIndex, splitString);
+        String[] parts = laterPart.split(splitString);
+        String content = parts[0];
+        String time = Task.formatOutputDateAndTime(parts[1]);
+        return new String[] {content, time};
     }
 }

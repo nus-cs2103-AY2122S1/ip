@@ -13,6 +13,9 @@ import duke.exception.EmptyInputException;
 import duke.exception.MismatchedFormException;
 import duke.exception.NotRecognizeException;
 
+/**
+ * Represents the class dealing with all types of command.
+ */
 public class Parser {
     /**
      * Returns boolean value which checks whether
@@ -93,6 +96,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether the command is empty with only part of command.
+     *
+     * @param response The user input.
+     * @return Whether the command is empty or not.
+     */
     public static boolean isEmpty(String response) {
         return response.equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")

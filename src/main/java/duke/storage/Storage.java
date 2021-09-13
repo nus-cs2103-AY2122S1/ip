@@ -23,11 +23,11 @@ public class Storage {
     /** The recommended working directory path. */
     private static String dir = System.getProperty("user.dir");
 
-    /** The content in the data file. */
-    private String content = "";
+    /** The content stored in the file. */
+    private String fileContent;
 
     /** Relative file path. */
-    private String filePath;
+    private String relativeFilePath;
 
     /** The actual file name. */
     private String file;
@@ -35,11 +35,11 @@ public class Storage {
     /**
      * Sets up the store for data.
      *
-     * @param filePath Where to store data.
+     * @param relativeFilePath Where to store data.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-        this.file = filePath.substring(4);
+    public Storage(String relativeFilePath) {
+        this.relativeFilePath = relativeFilePath;
+        this.file = relativeFilePath.substring(4);
     }
 
     /**
@@ -47,24 +47,31 @@ public class Storage {
      *
      * @return The task list.
      * @throws LoadingException The exception related to loading.
+     * @throws IOException The exception occurred when setting up the scanner.
      */
     public ArrayList<Task> load() throws LoadingException, IOException {
         Scanner s = buildFileAndScanner();
-       // StringBuilder sb = new StringBuilder();
         ArrayList<Task> taskList = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         while (s.hasNextLine()) {
             String task = s.nextLine();
             int lens = task.length();
-            //String oneLine = task + System.lineSeparator();
-            //sb.append(oneLine);
-            addRelatedTasks(task, taskList, lens);// Judge data input to add tasks.
+            String oneLine = task + System.lineSeparator();
+            sb.append(oneLine);
+            addRelatedTasks(task, taskList, lens); // Judge data input to add tasks.
         }
-       // upDateContent(sb);//Update the content.
+        upDateContent(sb); //Update the content.
         return taskList;
     }
 
-    public Scanner buildFileAndScanner() throws LoadingException, IOException{
-        String dir = System.getProperty("user.dir");
+    /**
+     * Builds the file and scanner required to read input.
+     *
+     * @return The scanner that takes in the file content input.
+     * @throws LoadingException The exception happens during creating the file.
+     * @throws IOException The exception occurred during setting up the scanner.
+     */
+    public Scanner buildFileAndScanner() throws LoadingException, IOException {
         java.nio.file.Path path = java.nio.file.Paths.get(dir, "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
         if (!directoryExists) {
@@ -159,19 +166,20 @@ public class Storage {
     }
 
     /**
-     * Stores the task to data file.
+     * Adds the task to data file.
      *
      * @param task The string format of task representation.
+     * @throws IOException The exception happened during write to file.
      */
-    public void store(String task) throws IOException{
-        String dataFile = dir + "/data" + file;
+    public void store(String task) throws IOException {
+        String dataFilePath = dir + "/" + relativeFilePath;
         String data = transformToData(task);
-      /*  StringBuilder sb = new StringBuilder();
-        sb.append(content);
+        StringBuilder sb = new StringBuilder();
+        sb.append(fileContent);
         sb.append(data);
-        sb.append(System.lineSeparator());*/
-        appendToFile(dataFile, data + System.lineSeparator());
-        //content = content + data + System.lineSeparator();
+        sb.append(System.lineSeparator());
+        appendToFile(dataFilePath, data + System.lineSeparator());
+        upDateContent(sb);
     }
 
     /**
@@ -182,12 +190,13 @@ public class Storage {
      */
     public static String transformToData(String task) {
         int lens = task.length();
-        char type = task.charAt(1);//char at index 1 represents type.
-        char done = task.charAt(4);//char at index 4 represents status of done.
+        char type = task.charAt(1); //char at index 1 represents type.
+        char done = task.charAt(4); //char at index 4 represents status of done.
         int splitIndex = 7;
         String splitString = "by: ";
         String prefix = "0";
         String dataForm;
+        //Transform to different data form according to the type of task.
         if (type == 'E') {
             splitString = "at: ";
         }
@@ -198,13 +207,13 @@ public class Storage {
             dataForm = "T | " + prefix + " | " + task.substring(splitIndex, lens);
         } else {
             String[] parts = task.substring(splitIndex, lens).split(splitString);
-            String content = parts[0];
-            int lensContent = content.length();
-            content = content.substring(0, lensContent - 2);//Just avoding
-            String time = parts[1];
-            int lensBy = time.length();
-            time = time.substring(0, lensBy - 1);
-            dataForm = type + " | " + prefix + " | " + content + " ~ " + time;
+            String contentPart = parts[0];
+            int lensContentPart = contentPart.length();
+            String actualContent = contentPart.substring(0, lensContentPart - 2); //Just extract the content.
+            String timePart = parts[1];
+            int lensTimePart = timePart.length();
+            String actualTime = timePart.substring(0, lensTimePart - 1); //extract out the time representation.
+            dataForm = type + " | " + prefix + " | " + actualContent + " ~ " + actualTime;
         }
         return dataForm;
     }
@@ -229,8 +238,8 @@ public class Storage {
      * @param tasks The task list.
      */
     public void replace(int place, TaskList tasks) {
-        String dataFile = dir + "/data" + file;
-        String[] parts = content.split(System.lineSeparator());
+        String dataFilePath = dir + "/" + relativeFilePath;
+        String[] parts = fileContent.split(System.lineSeparator());
         int lens = parts.length;
         String newData = "";
         if (tasks != null) {
@@ -248,14 +257,19 @@ public class Storage {
             sb.append(temp);
         }
         upDateContent(sb);
-        try{
-            writeToFile(dataFile, content);
+        try {
+            writeToFile(dataFilePath, fileContent);
         } catch (IOException e) {
             System.out.println("Delete failed.");
         }
     }
 
+    /**
+     * Updates the data stored in content variable.
+     *
+     * @param sb The string builder that holds the content to be updated.
+     */
     public void upDateContent(StringBuilder sb) {
-        content = sb.toString();
+        fileContent = sb.toString();
     }
 }

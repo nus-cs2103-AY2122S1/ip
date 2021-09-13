@@ -19,6 +19,7 @@ public class SearchCommand extends Command {
      *
      * @param response The user input.
      * @param type The type of search command.
+     * @param splitIndex The index where the command is split.
      */
     public SearchCommand(String response, Operation type, int splitIndex) {
         this.response = response;
@@ -32,6 +33,7 @@ public class SearchCommand extends Command {
      * @param tasks The list of tasks.
      * @param ui The user interaction instance.
      * @param storage The instance to store data.
+     * @throws MismatchedFormException The exceptions that happen when no match happens.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MismatchedFormException {

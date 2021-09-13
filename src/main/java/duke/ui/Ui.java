@@ -40,8 +40,6 @@ public class Ui {
         return message;
     }
 
-
-
     /**
      * Shows the deleted task.
      *
@@ -88,6 +86,13 @@ public class Ui {
         return "Bye, see you soon. ^-^";
     }
 
+    /**
+     * Shows the coming tasks in string representation.
+     *
+     * @param taskListMonth The tasks happened within a month.
+     * @param taskListDay The tasks happened within a day.
+     * @return The string showing coming tasks.
+     */
     public String showComings(TaskList taskListMonth, TaskList taskListDay) {
         String titleMonth = "<<Coming tasks within same month>> \n";
         String listInMonth = taskListMonth.toString() + "\n";

@@ -1,19 +1,18 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
     public void constructor_success() {
-        Task task1 = new Event("test event", "7/9/2021");
+        Task task1 = new Event("test event", "Sep 7 2021");
         Task task2 = new Todo("test todo");
         String expected = "Sep 7 2021";
         assertEquals(expected, task1.atOrBy);
@@ -21,14 +20,13 @@ public class TaskTest {
     }
 
     @Test
-    public void isWithinMonthOrDay_success() {
-        Task task1 = new Event("test event", "7/9/2021");
-        Task task2 = new Todo("test todo");
-        int expected = 1;
+    public void withinMonthOrDay_day_success() {
         LocalDate dateNow = LocalDate.now();
         String now = dateNow.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
-        assertEquals("Sep 7 2021", now);
-        assertEquals(expected, task1.isWithinMonthOrDay(now));
+        Task task1 = new Event("test event", now);
+        Task task2 = new Todo("test todo");
+        String expected = "day";
+        assertEquals(expected, task1.withinMonthOrDay(now));
         assertNull(task2.atOrBy);
     }
 }

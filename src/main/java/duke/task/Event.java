@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.MismatchedFormException;
-
 /**
  * Represents the event that has time. .
  *
@@ -11,7 +9,7 @@ public class Event extends Task {
     /**
      * The time to do the event.
      */
-    protected String at;
+    private String at;
 
     /**
      * Sets up the event task.
@@ -22,17 +20,6 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description, at);
         this.at = at;
-    }
-
-    /**
-     * Returns whether the two times are equal.
-     *
-     * @param time The time's string representation.
-     * @return A boolean.
-     */
-    @Override
-    public boolean isTimeSame(String time) {
-        return at.equals(time);
     }
 
     @Override

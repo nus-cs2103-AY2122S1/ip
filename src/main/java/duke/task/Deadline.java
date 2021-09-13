@@ -7,7 +7,7 @@ package duke.task;
  */
 public class Deadline extends Task {
     /** Stores the deadline. */
-    protected String by;
+    private String by;
 
     /**
      * Creates a deadline task.
@@ -18,18 +18,6 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description, by);
         this.by = by;
-    }
-
-    /**
-     * Returns whether the two times are equal.
-     *
-     * @param time The time's string representation.
-     * @return A boolean.
-     */
-
-    @Override
-    public boolean isTimeSame(String time) {
-        return by.equals(time);
     }
 
     @Override

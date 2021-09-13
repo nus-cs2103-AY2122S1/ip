@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import duke.storage.Storage;
-import javafx.application.Platform;
+import duke.Duke;
+//
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -14,13 +14,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import duke.Duke;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     private static final String GREETING = "Hello! I'm Duke, what can I do for you?";
+    private static Duke duke;
 
     @FXML
     private ScrollPane scrollPane;
@@ -31,11 +30,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private static Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    /**
+     * Initialises the gui.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

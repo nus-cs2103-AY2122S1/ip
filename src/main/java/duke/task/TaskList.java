@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Objects;
 
 import duke.exception.OutOfRangeException;
 
 public class TaskList {
     /** The data structure used to store the tasks. */
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
+
     /** Number of tasks stored. */
     private int count;
 
@@ -112,12 +112,18 @@ public class TaskList {
         return currList;
     }
 
+    /**
+     * Returns the tasks within a month or a day according to type input.
+     *
+     * @param type The string specified month or day.
+     * @return The tasks that within a month or a day.
+     */
     public TaskList tasksWithinMonthOrDay(String type) {
         TaskList currList = new TaskList();
         String now = currentTime();
         taskList.stream()
                 .filter(currTask -> !(currTask instanceof Todo))
-                .filter(currTask -> currTask.isWithinMonthOrDay(now).equals(type))
+                .filter(currTask -> currTask.withinMonthOrDay(now).equals(type))
                 .forEach(currList::addElement);
         return currList;
     }
@@ -141,11 +147,21 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Returns the currentTime of your zone.
+     *
+     * @return The time representation.
+     */
     public String currentTime() {
         LocalDate dateNow = LocalDate.now();
         return dateNow.format(formatForm());
     }
 
+    /**
+     * Returns the pattern that time should be.
+     *
+     * @return The english format of the time.
+     */
     public DateTimeFormatter formatForm() {
         return DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
     }
