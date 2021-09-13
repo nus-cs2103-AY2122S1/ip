@@ -1,29 +1,182 @@
-# User Guide
+# When the Duke is Sus - A User Guide
 
 ## Features 
 
-### Feature-ABC
+### Keep track of different tasks
 
-Description of the feature.
+1. Todos - Simple tasks you plan to do.
+2. Deadlines - Tasks that have to be completed `by` a certain date.
+3. Events - Tasks that occur `at` a certain time.
 
-### Feature-XYZ
+### List out or filter your tasks.
+See what tasks you currently have
 
-Description of the feature.
+### Toggle completion or delete tasks
+Mark your tasks as complete
+
+### Load and save your task list
+Saving and loading are done automatically onto your local hard drive
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Creates a todo task
 
-Describe the action and its outcome.
+Adds a todo into your task list. 
 
-Example of usage: 
+####Example of usage: 
 
-`keyword (optional arguments)`
+`todo taskname`
+
+* `taskname` - Name of todo
+
+####Expected outcome:
+
+A confirmation response would be sent by Duke.
+
+```
+Got it. I've added this task:
+        [T][ ] Example task
+There are ___ tasks in your list
+```
+
+### `deadline` - Creates a deadline task
+
+Adds a deadline into your task list.
+
+####Example of usage:
+
+`deadline taskname /by DD/MM/YYYY xxxxH`
+
+* `taskname` - Name of deadline
+* `DD/MM/YYYY` - Date and month can be 1-2 digits long
+* `xxxxH` - Time in 24-hour format *[Optional]*
+
+####Expected outcome:
+
+A confirmation response would be sent by Duke.
+
+```
+Got it. I've added this task:
+        [D][ ] Example task
+There are ___ tasks in your list
+```
+
+### `event` - Creates an event task
+
+Adds an event into your task list.
+
+####Example of usage:
+
+`event taskname /at DD/MM/YYYY xxxxH`
+
+* `taskname` - Name of deadline
+* `DD/MM/YYYY` - Date and month can be 1-2 digits long
+* `xxxxH` - Time in 24-hour format *[Optional]*
+
+####Expected outcome:
+
+A confirmation response would be sent by Duke.
+
+```
+Got it. I've added this task:
+        [D][ ] Example task
+There are ___ tasks in your list
+```
+
+### `list` - Lists or filters your tasks
+
+Lists out or filters your tasks based on the optional arguments provided (if any).
+Using the command with no arguments displays the index numbers of all tasks, to be used for `done` and `delete`.
+
+####Example of usage:
+
+`list` - Standard list command (no arguments)
+
+Optional arguments:
+
+`list /date DD/MM/YYYY` - Search for tasks at date
+
+`list /name taskname` - Search for tasks with name
+
+Arguments can be stacked, order of arguments does not matter.
+
+`list /name taskname /date DD/MM/YYYY` - Search for tasks with specified name AND date
+
+
+* `DD/MM/YYYY` - Date and month can be 1-2 digits long
+* `taskname` - Name to search for
+
+####Expected outcome:
+
+A list of all your tasks (if any) would be sent by Duke.
+
+
+
+### `done` - Mark as complete
+
+Toggles completion of task. If task is already done, it will mark it as not done.
+
+####Example of usage:
+
+`done index`
+
+* `index` - Index number as shown in `list`
+
+####Expected outcome:
+
+A confirmation response would be sent by Duke.
+
+```
+Sugoi! Duke-san marked this task as done!
+        [D][X] Example task
+```
+
+```
+Duke-san marked this task as not done!
+        [D][ ] Example task
+```
+
+### `delete` - Delete task
+
+Deletes a task in the list **permanently**.
+
+####Example of usage:
+
+`delete index`
+
+* `index` - Index number as shown in `list`
+
+####Expected outcome:
+
+A confirmation response would be sent by Duke.
+
+```
+Noted. Duke-san removed this task!
+        [D][X] Example task
+There are ___ tasks in your list
+```
+
+
+### `help` - Display list of commands
+In-built command to display the list of possible commands and arguments within the app.
+
+Example of usage:
+
+`help`
 
 Expected outcome:
 
-Description of the outcome.
+A list of possible commands with their arguments would be sent by Duke.
 
-```
-expected output
-```
+### `gubbai` - Goodbye
+Exits the app (with a delay of 2 seconds)
+
+Example of usage:
+
+`gubbai`
+
+Expected outcome:
+
+The following goodbye message will be displayed, and the app would close automatically 2 seconds later.
+
+`kimi no unmei no hito wa boku jyanai`

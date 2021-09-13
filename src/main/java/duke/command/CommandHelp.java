@@ -27,12 +27,13 @@ public class CommandHelp extends Command {
      * Lists out all possible commands.
      */
     private String displayHelp() {
-        return new CommandAddTodo(null, null).toString()
-                + new CommandAddDeadline(null, null)
-                + new CommandAddEvent(null, null)
-                + new CommandDone(null, 0)
-                + new CommandDelete(null, 0)
-                + new CommandList(null, null)
+        return new CommandAddTodo(null, null).toString() + '\n'
+                + new CommandAddDeadline(null, null) + '\n'
+                + new CommandAddEvent(null, null) + '\n'
+                + new CommandDone(null, 0) + '\n'
+                + new CommandDelete(null, 0) + '\n'
+                + new CommandList(null, null) + '\n'
+                + new CommandHelp() + '\n'
                 + new CommandExit();
     }
 }
