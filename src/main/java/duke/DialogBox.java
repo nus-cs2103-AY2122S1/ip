@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     private String resourceName = "/view/DialogBox.fxml";
+    private int profileDetails = 35;
     @FXML
     private Label dialog;
     @FXML
@@ -37,9 +39,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
+        dialog.getStyleClass().add("message");
+        dialog.getStyleClass().add("layout");
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(profileDetails, profileDetails, profileDetails));
     }
 
     /**
@@ -53,7 +57,8 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
