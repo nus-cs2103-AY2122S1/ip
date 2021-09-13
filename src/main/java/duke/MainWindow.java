@@ -37,12 +37,20 @@ public class MainWindow extends AnchorPane {
         return new Image(inputStream);
     }
 
+    /**
+     * Initialise the JavaFX window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         userInput.setPromptText("Type your message here...");
     }
 
+    /**
+     * Set the callback to handle input.
+     *
+     * @param handler input handler callback
+     */
     public void setInputHandler(Consumer<String> handler) {
         this.inputHandler = handler;
     }
