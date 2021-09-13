@@ -24,7 +24,7 @@ public class CommandTodo extends Command {
         boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
 
         if (hasWrongArgumentCount) {
-            throw new DukeException(Todo.USAGE_TEXT);
+            throw new DukeException(HELP_USAGE);
         }
 
         Task toAdd = new Todo(cmdArgsArr[1]);

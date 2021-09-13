@@ -58,7 +58,7 @@ public class CommandHelp extends Command {
             return CommandEvent.HELP_USAGE;
         default:
             // invalid data defaults to base help
-            return CommandHelp.getAllHelp();
+            throw new DukeException(CommandHelp.getAllHelp());
         }
     }
 

@@ -58,4 +58,11 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    public static DialogBox getDukeDialogError(String userName, String text) {
+        var db = new DialogBox(userName, text);
+        db.getStyleClass().add("dukeBoxError");
+        db.flip();
+        return db;
+    }
 }

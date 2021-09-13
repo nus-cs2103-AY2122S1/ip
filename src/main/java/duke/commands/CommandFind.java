@@ -24,7 +24,7 @@ public class CommandFind extends Command {
         boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
 
         if (hasWrongArgumentCount) {
-            throw new DukeException(TaskArrayList.FIND_USAGE_TEXT);
+            throw new DukeException(HELP_USAGE);
         }
 
         return taskList.find(cmdArgsArr[1]);

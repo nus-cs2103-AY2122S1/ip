@@ -50,13 +50,13 @@ public class Duke {
      * @return Message to print on screen for user
      * @throws DukeExitException when response is an exit signal, caught by caller to prepare teardown
      */
-    public String getResponse(String userInput) throws DukeExitException {
+    public String getResponse(String userInput) throws DukeException {
         try {
             return parser.run(userInput);
         } catch (DukeExitException e) {
             throw e;
         } catch (DukeException e) {
-            return e.getMessage();
+            throw e;
         } finally {
             Storage.dump(taskList, storagePath);
         }

@@ -61,8 +61,8 @@ public class Parser {
         case ("todo"):
             return new CommandTodo(cmdArgsArr, taskList).run();
         default:
-            return "Unrecognised Command\n"
-                    + new CommandHelp(cmdArgsArr, taskList).run();
+            throw new DukeException("Unrecognised Command\n"
+                    + new CommandHelp(cmdArgsArr, taskList).run());
         }
     }
 

@@ -28,7 +28,7 @@ public class CommandEvent extends Command {
         Supplier<Boolean> isMissingAtArgument = () -> (cmdArgsArr[1].split("/at", 2).length != 2);
 
         if (hasWrongArgumentCount || isMissingAtArgument.get()) {
-            throw new DukeException(Event.USAGE_TEXT);
+            throw new DukeException(HELP_USAGE);
         }
 
         String[] nameAtPair = cmdArgsArr[1].split("/at", 2);

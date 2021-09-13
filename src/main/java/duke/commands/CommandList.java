@@ -22,7 +22,7 @@ public class CommandList extends Command {
         boolean hasWrongArgumentCount = cmdArgsArr.length > 1;
 
         if (hasWrongArgumentCount) {
-            throw new DukeException("command list takes no arguments.");
+            throw new DukeException(HELP_USAGE);
         }
 
         return taskList.enumerate();

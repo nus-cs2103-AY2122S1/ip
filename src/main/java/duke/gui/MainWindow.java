@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeExitException;
 
 import javafx.application.Platform;
@@ -8,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -52,8 +52,10 @@ public class MainWindow extends AnchorPane {
             makeDialogBox(input, response);
         } catch (DukeExitException e) {
             String response = "Bye bye!";
-            makeDialogBox(input, response);
+            makeDialogBoxError(input, response);
             Platform.exit();
+        } catch (DukeException e) {
+            makeDialogBoxError(input, e.getMessage());
         }
 
         userInput.clear();
@@ -68,6 +70,12 @@ public class MainWindow extends AnchorPane {
     private void makeDialogBox(String input, String response) {
         DialogBox userBox = DialogBox.getUserDialog("User", input);
         DialogBox dukeBox = DialogBox.getDukeDialog("Duke", response);
+        dialogContainer.getChildren().addAll(userBox, dukeBox);
+    }
+
+    private void makeDialogBoxError(String input, String response) {
+        DialogBox userBox = DialogBox.getUserDialog("User", input);
+        DialogBox dukeBox = DialogBox.getDukeDialogError("Duke", response);
         dialogContainer.getChildren().addAll(userBox, dukeBox);
     }
 
