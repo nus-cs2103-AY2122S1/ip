@@ -38,23 +38,12 @@ public class Parser {
         case "done":
             hasIndex(fullCommand);
 
-            ArrayList<Integer> doneIndexes = new ArrayList<>();
-            for (int i = 1; i < fullCommand.length; i++) {
-                int index = Integer.parseInt(fullCommand[i]);
-                isValidIndex(index, tasks.size());
-                doneIndexes.add(index);
-            }
+            ArrayList<Integer> doneIndexes = parseIndexes(fullCommand, tasks.size());
             return new DoneCommand("done", doneIndexes);
         case "delete":
             hasIndex(fullCommand);
 
-            ArrayList<Integer> deleteIndexes = new ArrayList<>();
-            for (int i = 1; i < fullCommand.length; i++) {
-                int index = Integer.parseInt(fullCommand[i]);
-                isValidIndex(index, tasks.size());
-                deleteIndexes.add(index);
-            }
-
+            ArrayList<Integer> deleteIndexes = parseIndexes(fullCommand, tasks.size());
             return new DeleteCommand("delete", deleteIndexes);
         case "todo":
             desc = commandLine.replace("todo", "").trim();
@@ -66,7 +55,6 @@ public class Parser {
             return new AddTodoCommand(desc);
         case "deadline":
             String by;
-
             String[] deadlineArgs = commandLine.replace("deadline ", "").split("/by ");
 
             if (deadlineArgs.length != 2) {
@@ -107,11 +95,11 @@ public class Parser {
     /**
      * Checks if a done/delete command has an index.
      *
-     * @param commandline the commandline input by the user
+     * @param fullCommand the full commandline input by the user
      * @throws DukeException If there is no index number
      */
-    public static void hasIndex(String[] commandline) throws DukeException {
-        if (commandline.length == 1) {
+    public static void hasIndex(String[] fullCommand) throws DukeException {
+        if (fullCommand.length == 1) {
             throw new DukeException("Please give an index number");
         }
     }
@@ -132,7 +120,7 @@ public class Parser {
     }
 
     /**
-     * Parses the date
+     * Parses the date.
      *
      * @param date The date of the task in String format.
      * @return LocalDateTime of the task.
@@ -149,5 +137,27 @@ public class Parser {
                     + "Day/Month/Year H:mm, in 24-hour format\n"
                     + "e.g 24/9/21 16:30\n");
         }
+    }
+
+    /**
+     * Parses the indexes passed into done/delete command.
+     *
+     * @param fullCommand The full commandline input by the user
+     * @param taskSize    The size of the task list
+     * @return An ArrayList containing the indexes
+     * @throws DukeException If there is an invalid index
+     */
+    public ArrayList<Integer> parseIndexes(String[] fullCommand, int taskSize) throws DukeException {
+        ArrayList<Integer> temp = new ArrayList<>();
+        for (int i = 1; i < fullCommand.length; i++) {
+            int index = Integer.parseInt(fullCommand[i]);
+            isValidIndex(index, taskSize);
+            System.out.println(temp);
+            if (temp.contains(index)) {
+                throw new DukeException("No duplicate indexes allowed");
+            }
+            temp.add(index);
+        }
+        return temp;
     }
 }

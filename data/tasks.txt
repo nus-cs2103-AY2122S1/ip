@@ -1,8 +1,8 @@
 T | 1 | read book
 T | 1 | fix code
 T | 1 | skdmakdma
-T | 0 | sdkjadjasbdadbsahdbadsadjdsjdasdhasdasda
-E | 0 | meeting | 2021-10-05T23:40
+T | 1 | sdkjadjasbdadbsahdbadsadjdsjdasdhasdasda
+E | 1 | meeting | 2021-10-05T23:40
 D | 0 | cs2103T project | 2021-09-14T13:00
 D | 0 | lab | 2021-09-16T01:00
-T | 0 | do work
+T | 1 | do work
