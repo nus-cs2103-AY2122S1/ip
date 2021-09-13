@@ -5,7 +5,7 @@ This repo contains the code for the `JarVIS` chatbot as part of **CS2103: Softwa
 ## The name
 The chatbot is fully programmed in Java and packaged as a `.jar` file, hence the name.
 
-<img src="./assets/chatui.png" height="400" />
+<img src="./docs/Ui.png" height="400" />
 
 ## Setting up in Intellij
 Prerequisites: JDK 11, update Intellij to the most recent version.
