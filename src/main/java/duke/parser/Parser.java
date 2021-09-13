@@ -61,14 +61,14 @@ public class Parser {
      */
     private String addItem(String input) throws DukeException {
         Task newItem = null;
-        if (input.contains("todo")) {
+        if (input.startsWith("todo")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [todo, ...]
             if (isIncomplete(parsedInput)) {
                 throw new ToDoException();
             }
 
             newItem = new ToDo(parsedInput[1]);
-        } else if (input.contains("deadline")) {
+        } else if (input.startsWith("deadline")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [deadline, ...]
             if (isIncomplete(parsedInput)) {
                 throw new DeadlineException();
@@ -82,7 +82,7 @@ public class Parser {
             String name = description[0];
             String deadline = description[1].split(" ")[1];
             newItem = new Deadline(name, LocalDate.parse(deadline));
-        } else if (input.contains("event")) {
+        } else if (input.startsWith("event")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [event, ...]
             if (isIncomplete(parsedInput)) {
                 throw new EventException();

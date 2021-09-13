@@ -7,3 +7,4 @@
 [T][X] sleep
 [T][ ] drink water
 [T][ ] study
+[T][ ] eat

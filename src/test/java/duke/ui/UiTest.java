@@ -34,6 +34,6 @@ public class UiTest {
     @Test
     public void print_invalidFormat_exceptionThrown() throws Exception {
         Ui ui = new Ui();
-        assertThrows(Exception.class, () -> ui.print("%d",  "two"));
+        assertThrows(Exception.class, () -> ui.print("%d", "two"));
     }
 }
