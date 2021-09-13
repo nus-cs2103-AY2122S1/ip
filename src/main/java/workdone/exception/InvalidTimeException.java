@@ -1,9 +1,9 @@
 package workdone.exception;
 
 /**
- * Represents an exception thrown when the given time is in an invalid format. A subclass of DukeException.
+ * Represents an exception thrown when the given time is in an invalid format. A subclass of WorkDoneException.
  */
-public class InvalidTimeException extends DukeException {
+public class InvalidTimeException extends WorkDoneException {
     /**
      * Constructor of the class `InvalidTimeException`.
      *

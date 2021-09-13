@@ -3,9 +3,9 @@ package workdone.exception;
 import workdone.ui.Ui;
 
 /**
- * Represents an exception thrown when some details in a command are missing. A subclass of DukeException.
+ * Represents an exception thrown when some details in a command are missing. A subclass of WorkDoneException.
  */
-public class MissingCommandDetailException extends DukeException {
+public class MissingCommandDetailException extends WorkDoneException {
     /**
      * Constructor of the class `MissingCommandDetailException`.
      *

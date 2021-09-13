@@ -3,13 +3,13 @@ package workdone.exception;
 /**
  * Represents an exception thrown when commands are invalid.
  */
-public class DukeException extends Exception {
+public class WorkDoneException extends Exception {
     /**
-     * Constructor of the class `DukeException`.
+     * Constructor of the class `WorkDoneException`.
      *
      * @param message Error message.
      */
-    public DukeException(String message) {
+    public WorkDoneException(String message) {
         super("____________________________________________________________\n"
                 + message
                 + "\n____________________________________________________________\n");
