@@ -18,8 +18,8 @@ public class DoneCommand implements Executable {
     }
     
     /**
-     * Execute the command to mark a task as done. 
-     * 
+     * Returns the name if the task after marking a task as done.
+     *
      * @param taskList Current list of tasks.
      */
     public String execute(TaskList taskList) {

@@ -16,7 +16,7 @@ public class FindCommand implements Executable {
     }
     
     /**
-     * Find the print the task when executed.
+     * Returns the tasks found after finding the tasks with the keyword.
      * 
      * @param taskList current taskList
      */

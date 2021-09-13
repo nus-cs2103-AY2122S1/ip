@@ -16,7 +16,7 @@ public class DeleteCommand implements Executable {
     }
     
     /**
-     * Execute the delete command. 
+     * Returns the message to be displayed by the bot after removing the task from the list.
      * 
      * @param tasklist current list of tasks.
      */
