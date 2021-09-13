@@ -1,20 +1,21 @@
 package pika.command;
 
 import pika.exception.PikaException;
+import pika.task.TaskList;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
  * FindCommand Class for the find commands.
  */
 public class FindCommand extends Command {
-    private String string;
+    private final String string;
 
     /**
      * FindCommand Constructor.
      *
      * @param string is the string to be searched
+     * @throws PikaException if the pattern is not given
      */
     public FindCommand(String string) throws PikaException {
         super(true);

@@ -21,7 +21,12 @@ public class Todo extends Task {
      */
     @Override
     public String write() {
-        return "T " + super.write() + " |" + getTags();
+        String tags = " |" + getTags();
+        if (tags.equals(" |")) {
+            return "D " + super.write();
+        } else {
+            return "T " + super.write() + " |" + getTags();
+        }
     }
 
     /**

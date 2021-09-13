@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import pika.task.TaskList;
+
 public class Storage { //Storage class used to handle the writing of the file after each actions
     private static Path listPath;
 
@@ -36,10 +38,6 @@ public class Storage { //Storage class used to handle the writing of the file af
      */
 
     public BufferedReader loadTasks() throws FileNotFoundException {
-        return new BufferedReader(new FileReader(listPath.toString()));
-    }
-
-    public BufferedReader loadNotes() throws FileNotFoundException {
         return new BufferedReader(new FileReader(listPath.toString()));
     }
 

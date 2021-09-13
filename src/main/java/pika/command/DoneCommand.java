@@ -3,15 +3,15 @@ package pika.command;
 import java.io.IOException;
 
 import pika.exception.PikaException;
+import pika.task.TaskList;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
  * DoneCommand Class to handle the done command.
  */
 public class DoneCommand extends Command { //DoneCommand to handle the updating of list
-    private int index;
+    private final int index;
 
     /**
      * Constructor for the DoneCommand Class.

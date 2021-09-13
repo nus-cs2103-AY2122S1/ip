@@ -1,20 +1,14 @@
-package pika.ui;
+package pika.task;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import pika.exception.PikaException;
-import pika.task.Deadline;
-import pika.task.Event;
-import pika.task.Tag;
-import pika.task.Task;
-import pika.task.TaskTime;
-import pika.task.Todo;
 
 public class TaskList { //TaskList class used to store the tasks and will be updated from the Command class
     protected int count;
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList.

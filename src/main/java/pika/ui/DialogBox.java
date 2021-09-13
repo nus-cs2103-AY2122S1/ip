@@ -36,6 +36,24 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private void setPikaStyle() {
+        dialog.setStyle("-fx-background-color: #ffd700;"
+                + "-fx-background-radius: 10;"
+                + "-fx-padding: 10;");
+    }
+
+    private void setErrorStyle() {
+        dialog.setStyle("-fx-background-color: #ff3300;"
+                + "-fx-background-radius: 15;"
+                + "-fx-padding: 15;");
+    }
+
+    private void setUserStyle() {
+        dialog.setStyle("-fx-background-color: #ffefd5;"
+                + "-fx-background-radius: 15;"
+                + "-fx-padding: 15;");
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -48,13 +66,23 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #ffefd5");
+        db.setAlignment(Pos.CENTER_RIGHT);
+        db.setUserStyle();
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getPikaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #ffd700");
+        db.setAlignment(Pos.CENTER_LEFT);
+        db.setPikaStyle();
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_LEFT);
+        db.setErrorStyle();
         db.flip();
         return db;
     }

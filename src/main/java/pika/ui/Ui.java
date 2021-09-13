@@ -1,6 +1,7 @@
 package pika.ui;
 
 import pika.task.Task;
+import pika.task.TaskList;
 
 public class Ui { //IU Class used to handle the interactions with the user.
 
@@ -10,7 +11,7 @@ public class Ui { //IU Class used to handle the interactions with the user.
      * @return Goodbye message
      */
     public static String goodByeMessage() {
-        return "Pika...chuuuuu.... Pika is sad that you are leaving";
+        return "Pika...chuuuuu....";
     }
 
 

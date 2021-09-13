@@ -1,8 +1,8 @@
 package pika.command;
 
 import pika.exception.PikaException;
+import pika.task.TaskList;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
@@ -11,7 +11,10 @@ import pika.ui.Ui;
 public class ExitCommand extends Command { //ExitCommand to handle the shutting down of bots
 
     /**
-     * Constructor for the ExitCommand Class.
+     * Constructor for ExitCommand.
+     *
+     * @param details any other input by the user apart from the exit command
+     * @throws PikaException if the user inputs anything extra
      */
     public ExitCommand(String details) throws PikaException {
         super(false);
