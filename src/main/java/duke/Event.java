@@ -18,7 +18,7 @@ public class Event extends Task {
         try {
             parseDate(date);
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("the event date has to be in format yyyy-mm-dd.");
+            throw new DukeException("the event date has to be in format: \nyyyy-mm-dd.");
         } catch (NullPointerException e) {
             throw new DukeException("the dates are invalid.");
         }

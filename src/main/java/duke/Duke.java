@@ -69,7 +69,7 @@ public class Duke {
         // split input into command and text
         String[] elements = input.split(" ", 2);
         if (elements.length == 1) {
-            throw new DukeException("you need to describe the todo in format: todo (description)!");
+            throw new DukeException("you need to describe the todo in format:\n todo (description)!");
         }
         String textDescription = elements[1];
         Task todo = new Todo(textDescription);
@@ -87,12 +87,12 @@ public class Duke {
     private String addAsEvent(String input) throws DukeException {
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
-            throw new DukeException("you need to describe your event to me in format: event (description)!");
+            throw new DukeException("you need to describe your event to me in format:\n event (description)!");
         }
         // split input into command and text
         String[] elements = keywords[1].split(" /at ", 2);
         if (elements.length == 1) {
-            throw new DukeException("you need to tell me the time in format: (task) /at (time)!");
+            throw new DukeException("you need to tell me the time in format:\n (task) /at (time)!");
         }
         String time = elements[1];
         String textDescription = elements[0];
@@ -111,11 +111,11 @@ public class Duke {
     private String addAsDeadline(String input) throws DukeException {
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
-            throw new DukeException("you need to describe your deadline to me in format: deadline (description)!");
+            throw new DukeException("you need to describe your deadline to me in format:\n deadline (description)!");
         }
         String[] elements = keywords[1].split(" /by ", 2);
         if (elements.length == 1) {
-            throw new DukeException("you need to tell me the time in format: (task) /by (time)!");
+            throw new DukeException("you need to tell me the time in format:\n (task) /by (time)!");
         }
         String time = elements[1];
         String textDescription = elements[0];
@@ -157,7 +157,7 @@ public class Duke {
             Tasklist validItems = listOfItems.findAllBy(keyword);
             return ui.listToPrintableString(validItems);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("please input a keyword in the format: [find] (keyword)");
+            throw new DukeException("please input a keyword in the format:\n[find] (keyword)");
         } catch (NullPointerException e) {
             throw new DukeException("no tasks match your given keyword!");
         }
