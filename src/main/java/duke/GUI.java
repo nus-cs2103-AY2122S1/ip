@@ -43,7 +43,7 @@ public class GUI {
      * Sends the closing message when Duke chatBot is closed.
      */
     public static String sendClosingMessage() {
-        return GUI.formatDukeMessage("Bye. Hope to see you again soon!\n");
+        return GUI.formatDukeMessage("Bye!\n");
     }
 
     /**

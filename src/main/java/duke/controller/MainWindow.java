@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText().strip();
         String response = " ";
 
@@ -76,6 +76,11 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
+
+        // Exit window once duke chatbot is closed
+        if (isClosed(response)) {
+            System.exit(0);
+        }
     }
 
     /**
@@ -89,7 +94,6 @@ public class MainWindow extends AnchorPane {
             toReturn = duke.getResponse(input);
         } catch (DukeException e) {
             toReturn = GUI.sendErrorMessage(e);
-            System.out.println("here");
             throw e;
         } finally {
             return toReturn;
@@ -102,5 +106,9 @@ public class MainWindow extends AnchorPane {
      */
     private String displayGreeting() {
         return Duke.getGreeting();
+    }
+
+    private boolean isClosed(String response) {
+        return response.equals(GUI.sendClosingMessage());
     }
 }
