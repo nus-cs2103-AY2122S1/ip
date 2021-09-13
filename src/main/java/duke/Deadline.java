@@ -11,7 +11,7 @@ public class Deadline extends Task {
     protected LocalDateTime deadline;
 
     /**
-     * To create a task with a deadline
+     * Creates a task with a deadline
      *
      * @param description The name/description of the task
      * @param by The deadline for the task (in the format dd/mm/yyyy hh:mm - in 24 hours format)
@@ -23,7 +23,7 @@ public class Deadline extends Task {
         assert (by.length() == 16) : "Timestamp is incorrect.";
         this.by = by;
 
-        //Extracting the date, month and year numbers from the 'by' string
+        // Extracting the date, month and year numbers from the 'by' string
         int date = Integer.parseInt(by.substring(0, 2));
         assert (date > 0 && date < 32) : "Date is not valid";
 
@@ -33,17 +33,17 @@ public class Deadline extends Task {
         int year = Integer.parseInt(by.substring(6, 10));
         assert (year > 0) : "Year is not valid";
 
-        //Extracting the event 'by' hour and minute numbers from the 'time' string
+        // Extracting the event 'by' hour and minute numbers from the 'time' string
         int hour = Integer.parseInt(by.substring(11, 13));
         assert (hour >= 0 && hour < 24) : "Hour is not valid";
 
         int min = Integer.parseInt(by.substring(14, 16));
         assert (min >= 0 && min < 60) : "Minute is not valid";
 
-        //Creating LocalDateTime objects for the 'by' of the deadline so that its format can be changed later
+        // Creating LocalDateTime objects for the 'by' of the deadline so that its format can be changed later
         LocalDateTime taskDate = LocalDateTime.of(year, month, date, hour, min);
 
-        //Formatting the deadline to be displayed to users
+        // Formatting the deadline to be displayed to users
         this.timeToDisplay = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
         deadline = taskDate;
     }
