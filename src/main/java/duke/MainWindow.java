@@ -2,6 +2,8 @@ package duke;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+
+import duke.command.ExitCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,12 +13,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import duke.command.ExitCommand;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    protected Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    protected Image victorImage = new Image(this.getClass().getResourceAsStream("/images/victor.png"));
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,9 +32,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    protected Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    protected Image victorImage = new Image(this.getClass().getResourceAsStream("/images/victor.png"));
 
     /**
      * Initializes the scroll pane, set the background and sendButton style and set greetings.

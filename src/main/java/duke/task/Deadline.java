@@ -16,22 +16,7 @@ public class Deadline extends Task implements Achievable {
      */
     public Deadline(String description, String by) {
         super(description);
-
-        String[] dateTime = by.split(" ");
-
-        String rawDate = dateTime[0];
-        String[] dayMonthYear = rawDate.split("/");
-        LocalDate date = LocalDate.of(Integer.parseInt(dayMonthYear[2]), Integer.parseInt(dayMonthYear[1]),
-                Integer.parseInt(dayMonthYear[0]));
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
-        assert dateTime.length > 1;
-        String rawTime = dateTime[1];
-        String processedRawTime = rawTime.substring(0, 2) + ":" + rawTime.substring(2);
-        LocalTime time = LocalTime.parse(processedRawTime);
-        String formattedTime = time.format(DateTimeFormatter.ofPattern("h a"));
-
-        this.by = formattedDate + ", " + formattedTime;
+        changeDate(by);
     }
 
     /**
@@ -42,6 +27,11 @@ public class Deadline extends Task implements Achievable {
         this.by = by;
     }
 
+    /**
+     * Changes the datetime of the Deadline.
+     *
+     * @param by the dateTime of the Deadline
+     */
     @Override
     public void changeDate(String by) {
         String[] dateTime = by.split(" ");

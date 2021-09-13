@@ -16,23 +16,7 @@ public class Event extends Task implements Achievable {
      */
     public Event(String description, String at) {
         super(description);
-
-        String[] dateTime = at.split(" ");
-
-        String rawDate = dateTime[0];
-        String[] dayMonthYear = rawDate.split("/");
-        LocalDate date = LocalDate.of(Integer.parseInt(dayMonthYear[2]), Integer.parseInt(dayMonthYear[1]),
-                Integer.parseInt(dayMonthYear[0]));
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
-        assert dateTime.length > 1;
-        // store date and time
-        String rawTime = dateTime[1];
-        String processedRawTime = rawTime.substring(0, 2) + ":" + rawTime.substring(2);
-        LocalTime time = LocalTime.parse(processedRawTime);
-        String formattedTime = time.format(DateTimeFormatter.ofPattern("h a"));
-
-        this.at = formattedDate + ", " + formattedTime;
+        changeDate(at);
     }
 
     /**
@@ -43,6 +27,11 @@ public class Event extends Task implements Achievable {
         this.at = at;
     }
 
+    /**
+     * Changes the datetime of the Event.
+     *
+     * @param at the dateTime of the Event
+     */
     @Override
     public void changeDate(String at) {
         String[] dateTime = at.split(" ");
