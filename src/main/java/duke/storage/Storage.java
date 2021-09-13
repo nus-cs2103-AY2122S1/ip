@@ -94,6 +94,14 @@ public class Storage {
      * a warning if the file is not found in the specified path.
      */
     public void loadFile() {
+        if (!(file.exists())) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {

@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "src/main/java/duke/DukeLauncher.java"
+    mainClassName = "duke.DukeLauncher"
 }
 
 checkstyle {
