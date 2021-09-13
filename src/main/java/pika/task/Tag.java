@@ -8,9 +8,8 @@ public class Tag {
 
     /**
      * Constructor for tags.
-     * @param tagName Name of the tag
+     * @param tagName Name of the tag.
      */
-
     public Tag(String tagName) {
         this.tagName = tagName;
     }

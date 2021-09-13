@@ -14,8 +14,8 @@ public class TaskTime { //TaskTime used to handle the timings
     /**
      * Converts a fixed input of YYYY-MM-DD and HH:MM to MMM dd yyyy and hhmma.
      *
-     * @param inputTime String of input date or date AND time in YYY-MM-DD and HH:MM
-     * @return Time in the converted format
+     * @param inputTime String of input date or date AND time in YYY-MM-DD and HH:MM.
+     * @return Time in the converted format.
      */
     public static String convertDateTimeFormat(String inputTime) {
         assert inputTime != null : "Pika Pi, this is not valid!";
@@ -33,8 +33,8 @@ public class TaskTime { //TaskTime used to handle the timings
      * Converts a fixed input of MMM dd yyyy and hhmma to YYY-MM-DD and HH:MM.
      * Used for reading an already made txt file.
      *
-     * @param inputTime String of input date or date AND time in MMM dd yyyy and hhmma
-     * @return Time in the converted format
+     * @param inputTime String of input date or date AND time in MMM dd yyyy and hhmma.
+     * @return Time in the converted format.
      */
     public static String unconvertDateTime(String inputTime) {
         assert inputTime != null : "Pika Pi, this is not valid!";

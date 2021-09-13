@@ -20,7 +20,7 @@ public class Pika {
     /**
      * Constructor for the duke class.
      *
-     * @param filePath The path where the txt file is located/to be created
+     * @param filePath The path where the txt file is located/to be created.
      */
     public Pika(String filePath) {
         storage = new Storage(filePath);
@@ -45,6 +45,14 @@ public class Pika {
         }
     }
 
+    /**
+     * Returns the message the bot will say after parsing the response.
+     *
+     * @param input User input.
+     * @return The message the bot will reply to the user.
+     * @throws PikaException if there are any errors with the input.
+     * @throws IOException if there are any errors when loading the file.
+     */
     public String getResponse(String input) throws PikaException, IOException {
         Command c = Parser.parse(input);
         String output;

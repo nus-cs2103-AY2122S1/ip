@@ -13,9 +13,9 @@ public class Event extends Task {
     /**
      * Constructor for the event class.
      *
-     * @param name      Name of the event Task
-     * @param eventTime Date or Date and Time for the event Task
-     * @throws PikaException If the date or time input is not valid
+     * @param name      Name of the event Task.
+     * @param eventTime Date or Date and Time for the event Task.
+     * @throws PikaException If the date or time input is not valid.
      */
     public Event(String name, String eventTime) throws PikaException { //Event class to handle Event task
         super(name);
@@ -29,7 +29,7 @@ public class Event extends Task {
     /**
      * Returns the string to be written in the txt file.
      *
-     * @return txt format of the task for storage
+     * @return txt format of the task for storage.
      */
     @Override
     public String write() {
@@ -44,7 +44,7 @@ public class Event extends Task {
     /**
      * Returns the list format of the task.
      *
-     * @return list format of the task
+     * @return list format of the task.
      */
     @Override
     public String toString() {

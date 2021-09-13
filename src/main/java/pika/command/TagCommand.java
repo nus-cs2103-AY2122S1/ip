@@ -18,7 +18,7 @@ public class TagCommand extends Command {
      * Constructor for TagCommand.
      *
      * @param details the index of the task to be tagged and name of the tag.
-     * @throws PikaException Throws this is there are anything wrong with the inputs
+     * @throws PikaException Throws this is there are anything wrong with the inputs.
      */
     public TagCommand(String details) throws PikaException {
         super(true);
@@ -38,11 +38,11 @@ public class TagCommand extends Command {
     /**
      * Executes the TagCommand to update the list, and returns the tag.
      *
-     * @param taskList The current list of tasks
-     * @param storage  The current storage class to handle the txt file
-     * @return The add tag string for the Pikabot to say
-     * @throws IOException   if the filepath has any issues
-     * @throws PikaException if there are any other format/input issues
+     * @param taskList The current list of tasks.
+     * @param storage  The current storage class to handle the txt file.
+     * @return The add tag string for the Pikabot to say.
+     * @throws IOException   if the filepath has any issues.
+     * @throws PikaException if there are any other format/input issues.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws IOException, PikaException {
