@@ -1,7 +1,11 @@
 package duke.commands;
 
+import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
+/**
+ * Command to execute when user types "help"
+ */
 public class CommandHelp extends Command {
     public static final String HELP_COMMAND = "help";
     public static final String HELP_DESCRIPTION = "Provide help information for Duke commands";
@@ -9,6 +13,15 @@ public class CommandHelp extends Command {
             + "Display this help message\n"
             + "Options:\n"
             + "\tCommand (optional) - displays help information on that command";
+
+    public CommandHelp(String[] cmdArgsArr, TaskArrayList taskList) {
+        super(cmdArgsArr, taskList);
+    }
+
+    @Override
+    public String run() throws DukeException {
+        return CommandHelp.parse(cmdArgsArr);
+    }
 
     /**
      * Parse the help command arguments and return appropriate response
@@ -67,33 +80,5 @@ public class CommandHelp extends Command {
                 + CommandDeadline.HELP_COMMAND + "\t" + CommandDeadline.HELP_DESCRIPTION + "\n"
                 + CommandEvent.HELP_COMMAND + "\t" + CommandEvent.HELP_DESCRIPTION + "\n"
                 + "";
-    }
-
-    //Each command's help string can be defined here
-    private static String helpBye() {
-        return CommandBye.HELP_USAGE;
-    }
-    private static String helpList() {
-        return CommandList.HELP_USAGE;
-    }
-    private static String helpDone() {
-        return CommandBye.HELP_USAGE;
-    }
-    private static String helpDelete() {
-        return CommandDelete.HELP_USAGE;
-    }
-    private static String helpFind() {
-        return CommandFind.HELP_USAGE;
-    }
-
-    // new tasks
-    private static String helpTodo() {
-        return CommandTodo.HELP_USAGE;
-    }
-    private static String helpDeadline() {
-        return CommandDeadline.HELP_USAGE;
-    }
-    private static String helpEvent() {
-        return CommandEvent.HELP_USAGE;
     }
 }

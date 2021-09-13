@@ -8,6 +8,7 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeExitException;
 import duke.gui.Main;
 import duke.storage.Storage;
+
 import javafx.application.Application;
 
 
@@ -30,7 +31,7 @@ public class Duke {
         } catch (DukeException | IOException e) {
             this.taskList = new TaskArrayList();
         }
-        this.parser = new Parser(taskList, storagePath);
+        this.parser = new Parser(taskList);
     }
 
     /**
