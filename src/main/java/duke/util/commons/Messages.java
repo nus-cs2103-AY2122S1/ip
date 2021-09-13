@@ -16,15 +16,15 @@ public class Messages {
 
 
 
-    public static final String LOGO = "\n" +
-            " _____            _      _ \n" +
-            "/  ___|          (_)    | |\n" +
-            "\\ `--.  __ _ _ __ _  ___| |\n" +
-            " `--. \\/ _` | '__| |/ _ \\ |\n" +
-            "/\\__/ / (_| | |  | |  __/ |\n" +
-            "\\____/ \\__,_|_|  |_|\\___|_|\n" +
-            "                           \n" +
-            "                           \n";
+    public static final String LOGO = "\n"
+            + " _____            _      _ \n"
+            + "/  ___|          (_)    | |\n"
+            + "\\ `--.  __ _ _ __ _  ___| |\n"
+            + " `--. \\/ _` | '__| |/ _ \\ |\n"
+            + "/\\__/ / (_| | |  | |  __/ |\n"
+            + "\\____/ \\__,_|_|  |_|\\___|_|\n"
+            + "                           \n"
+            + "                           \n";
 
 
     //Messages that have to be formatted to include tasks

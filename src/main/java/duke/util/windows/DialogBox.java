@@ -27,29 +27,12 @@ public class DialogBox extends HBox {
         BLACK,
         GREEN
     };
-
+    private static Paint textColor = Paint.valueOf("black");
 
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private static Paint textColor = Paint.valueOf("black");
-
-    public static void setLabelColor(Color color) {
-        switch (color) {
-        case RED:
-            textColor = Paint.valueOf("Red");
-            break;
-        case BLACK:
-            textColor = Paint.valueOf("black");
-            break;
-        case GREEN:
-            textColor = Paint.valueOf("green");
-            break;
-        }
-    }
-
 
     private DialogBox(String text, Image img) {
         try {
@@ -63,6 +46,29 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
     }
+
+    /**
+     * Sets the color of the text for the dialog box to use.
+     *
+     * @param color The color used.
+     */
+    public static void setLabelColor(Color color) {
+        switch (color) {
+        case RED:
+            textColor = Paint.valueOf("Red");
+            break;
+        case BLACK:
+            textColor = Paint.valueOf("black");
+            break;
+        case GREEN:
+            textColor = Paint.valueOf("green");
+            break;
+        default:
+        }
+    }
+
+
+
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
