@@ -51,6 +51,8 @@ Shows the list of tasks to the user.
 
 ![listImage](./userGuideDemo/list.png)
 
+<img src="userGuideDemo/list.png" width="495" height="300">
+
 
 ### 2. `todo <task name>` - adds a todo task
 
@@ -65,6 +67,8 @@ Expected outcome:
 Adds a todo task called `sleep` to the list of task.
 
 ![todoImage](./userGuideDemo/todo.png)
+
+<img src="userGuideDemo/todo.png" width="491" height="250">
 
 
 ### 3. `event <task name> /at <date/time>` - adds an event task
@@ -81,6 +85,8 @@ Adds an event task called `Manchester Derby (at: Nov 6 2021 11:00 PM)` to the li
 
 ![eventImage](./userGuideDemo/event.png)
 
+<img src="userGuideDemo/event.png" width="482" height="250">
+
 
 ### 4. `deadline <task name> /by <date/time>` - adds a deadline task
 
@@ -95,6 +101,8 @@ Expected outcome:
 Adds a deadline task called `Buy ronaldo jersey (by: Nov 6 2021 11:00 PM)` to the list of task.
 
 ![deadlineImage](./userGuideDemo/deadline.png)
+
+<img src="userGuideDemo/deadline.png" width="488" height="250">
 
 
 ### 5. `find <keyword>` - finds a task with specified keyword
@@ -111,6 +119,8 @@ Find tasks with keyword `eat` from StuDo's list of tasks.
 
 ![findImage](./userGuideDemo/find.png)
 
+<img src="userGuideDemo/find.png" width="296" height="400">
+
 
 ### 6. `done <task index number>` - marks task at given index number as done
 
@@ -125,6 +135,9 @@ Expected outcome:
 Marks task at index `1` as done from StuDo's list of tasks.
 
 ![doneImage](./userGuideDemo/done.png)
+
+<img src="userGuideDemo/done.png" width="307" height="400">
+
 
 
 ### 7. `remove <task index number>` - removes task at given index number
@@ -141,6 +154,8 @@ Removes task at index `1` from StuDo's list of tasks.
 
 ![removeImage](./userGuideDemo/remove.png)
 
+<img src="userGuideDemo/remove.png" width="317" height="400">
+
 
 ### 8. `archive <task index number>` - archives task at given index number
 
@@ -155,6 +170,9 @@ Expected outcome:
 Archives task at index `1` from StuDo's list of tasks.
 
 ![archiveImage](./userGuideDemo/archive.png)
+
+<img src="userGuideDemo/archive.png" width="341" height="400">
+
 
 
 ### 9. `unarchive <task index number>` - unarchives task at given index number
@@ -171,6 +189,9 @@ Unarchives task at index `1` from StuDo's list of archived tasks, adding back to
 
 ![unarchiveImage](./userGuideDemo/unarchive.png)
 
+<img src="userGuideDemo/unarchive.png" width="343" height="350">
+
+
 
 ### 10. `list archive` - displays the list of archived tasks
 
@@ -186,7 +207,7 @@ Shows the list of archived tasks to the user.
 
 ![listArchiveImage](./userGuideDemo/listArchive.png)
 
-<img src="userGuideDemo/listArchive.png" width="292" height="150">
+<img src="userGuideDemo/listArchive.png" width="487" height="250">
 
 ### 11. `remove archive <task index number>` - removes task at task index number from list of archived tasks
 
@@ -201,3 +222,6 @@ Expected outcome:
 List of archived tasks does not contain the task which we removed.
 
 ![removeArchiveImage](./userGuideDemo/removeArchive.png)
+
+<img src="userGuideDemo/removeArchive.png" width="323" height="350">
+
