@@ -1,2 +1,1 @@
-1.E|NotDone formal dinner (on: Monday)
-2.T|NotDone cs2100 
+1.T|NotDone math homework 

@@ -222,6 +222,7 @@ public class Parser {
                 String str = ui.printRemove() + "\n";
                 str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
                 taskList.removeTask(parseInt(arr[1]) - 1);
+                str += "Now you have " + taskList.getSize() + " tasks in the list. \n";
                 return str;
             }
         }
