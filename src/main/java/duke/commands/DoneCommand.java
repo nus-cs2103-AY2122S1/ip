@@ -10,18 +10,18 @@ import duke.TaskList;
  * Command that marks task.
  */
 public class DoneCommand extends Command {
-    private ArrayList<Integer> doneIndex;
+    private ArrayList<Integer> doneIndexes;
 
     /**
      * Constructor for DoneCommand
      *
-     * @param desc
-     * @param doneIndex
+     * @param desc of Command.
+     * @param doneIndexes the indexes of tasks to be marked.
      */
-    public DoneCommand(String desc, ArrayList<Integer> doneIndex) {
+    public DoneCommand(String desc, ArrayList<Integer> doneIndexes) {
         super(desc);
-        Collections.sort(doneIndex);
-        this.doneIndex = doneIndex;
+        Collections.sort(doneIndexes);
+        this.doneIndexes = doneIndexes;
     }
 
     /**
@@ -32,15 +32,16 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws IOException {
         StringBuilder replyBuilder = new StringBuilder();
-        if (doneIndex.size() == 1) {
-            replyBuilder.append("Very well. This task has been marked as per your request.\n");
+        int numberOfTasksDone = doneIndexes.size();
+        if (numberOfTasksDone == 1) {
+            replyBuilder.append("Very well. This task has been marked.\n");
         } else {
-            replyBuilder.append("Very well. This tasks have been marked as per your request.\n");
+            replyBuilder.append("Very well. This tasks have been marked.\n");
         }
 
-        for (Integer index : doneIndex) {
+        for (int index : doneIndexes) {
             tasks.markAsDone(index);
-            replyBuilder.append(index + ". " + tasks.get(index) + "\n"); //actual index is index - 1
+            replyBuilder.append(index + ". " + tasks.get(index) + "\n");
         }
 
         return replyBuilder.toString();

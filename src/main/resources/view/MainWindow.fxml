@@ -22,11 +22,11 @@
          </font>
         </Button>
 
-        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background: #17212B; -fx-border-color: #17212B;" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="557.0" prefWidth="400.0" style="-fx-background: #17212B; -fx-border-color: #17212B;" vvalue="1.0">
 
             <content>
 
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" spacing="5.0" style="-fx-background-color: #0e1621;" />
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="400.0" spacing="5.0" style="-fx-background-color: #0e1621;" />
 
             </content>
         </ScrollPane>

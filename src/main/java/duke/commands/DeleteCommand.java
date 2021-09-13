@@ -33,9 +33,9 @@ public class DeleteCommand extends Command {
         StringBuilder replyBuilder = new StringBuilder();
 
         if (deleteIndexes.size() == 1) {
-            replyBuilder.append("Very well. This task has been deleted as per your request.\n");
+            replyBuilder.append("Very well. This task has been deleted.\n");
         } else {
-            replyBuilder.append("Very well. This tasks have been deleted as per your request.\n");
+            replyBuilder.append("Very well. This tasks have been deleted.\n");
         }
 
         int buffer = 0;

@@ -27,7 +27,9 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().displayWelcome();
             stage.show();
-            stage.setTitle("DukeNukem");
+            stage.setResizable(false);
+            stage.setTitle("Duke");
+            stage.sizeToScene();
         } catch (IOException e) {
             e.printStackTrace();
         }

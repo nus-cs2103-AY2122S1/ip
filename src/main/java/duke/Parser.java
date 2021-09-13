@@ -24,7 +24,7 @@ public class Parser {
      *
      * @param commandLine the user's input.
      * @param tasks       the TaskList that contains all the user's tasks.
-     * @return Command command deciphered from the user input.
+     * @return Command deciphered from the user input.
      * @throws DukeException If the user gives a bad input.
      */
     public Command getCommand(String commandLine, TaskList tasks) throws DukeException {
@@ -35,7 +35,6 @@ public class Parser {
         switch (command) {
         case "list":
             return new ListCommand("list");
-
         case "done":
             hasIndex(fullCommand);
 
@@ -46,7 +45,6 @@ public class Parser {
                 doneIndexes.add(index);
             }
             return new DoneCommand("done", doneIndexes);
-
         case "delete":
             hasIndex(fullCommand);
 
@@ -58,7 +56,6 @@ public class Parser {
             }
 
             return new DeleteCommand("delete", deleteIndexes);
-
         case "todo":
             desc = commandLine.replace("todo", "").trim();
 
@@ -67,7 +64,6 @@ public class Parser {
             }
 
             return new AddTodoCommand(desc);
-
         case "deadline":
             String by;
 
@@ -82,7 +78,6 @@ public class Parser {
 
             LocalDateTime deadlineDate = this.parseDate(by);
             return new AddDeadlineCommand(desc, deadlineDate);
-
         case "event":
             String at;
 
@@ -101,16 +96,20 @@ public class Parser {
 
             LocalDateTime eventDate = this.parseDate(at);
             return new AddEventCommand(desc, eventDate);
-
         case "find":
             desc = commandLine.replace("find", "").trim();
             return new FindCommand("find", desc);
-
         default:
             throw new DukeException("I do not understand that command");
         }
     }
 
+    /**
+     * Checks if a done/delete command has an index.
+     *
+     * @param commandline the commandline input by the user
+     * @throws DukeException If there is no index number
+     */
     public static void hasIndex(String[] commandline) throws DukeException {
         if (commandline.length == 1) {
             throw new DukeException("Please give an index number");
@@ -149,7 +148,7 @@ public class Parser {
                     + "Please format date as the following:\n"
                     + "Day/Month/Year H:mm or\n"
                     + "Day-Month-Year H:mm, in 24-hour format\n"
-                    + "Month can be 3-letter word or a number "
+                    + "Month can be 3-letter word or a number\n"
                     + "(e.g Jul or 7 or 07)");
         }
     }

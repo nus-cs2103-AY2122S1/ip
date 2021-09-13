@@ -1,0 +1,9 @@
+E | 1 | meeting | 2021-09-24T21:30
+T | 1 | return book
+D | 0 | orbital | 2021-09-24T18:30
+T | 1 | go for tutorial
+T | 1 | read book
+T | 1 | fix code
+T | 1 | skdmakdma
+T | 0 | sdkjadjasbdadbsahdbadsadjdsjdasdhasdasda
+T | 1 | enmdajksdnsjdnddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
