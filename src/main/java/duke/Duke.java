@@ -29,7 +29,7 @@ public class Duke {
      * @return
      */
     public String getResponse(String input) throws InputError {
-        int caseNum = parser.caseChecker(input);
-        return parser.caseHandler(caseNum, input, taskList);
+        String caseType = parser.caseChecker(input);
+        return parser.caseHandler(caseType, input, taskList);
     }
 }

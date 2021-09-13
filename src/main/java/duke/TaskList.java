@@ -10,10 +10,8 @@ public class TaskList implements Serializable {
     static final int DEADLINE_TASK = 9;
     static final int EVENT_TASK = 6;
     static final int EVENT_TIMING = 4;
-    private ArrayList<Task> taskList;
-    private Ui ui;
-    private int currIndex = 1;
-    private String stringList = "";
+    private final ArrayList<Task> taskList;
+    private final Ui ui;
 
     /**
      * Creates a task list object.
@@ -41,30 +39,18 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Prints the Task in the current index of the TaskList.
+     * Prints all the tasks in the task list in the order they were added.
      *
-     * @param task Task object to be printed.
-     */
-    private void printItem(Task task) {
-        if (stringList.equals("")) {
-            stringList = currIndex + "." + task.printTask();
-        } else {
-            stringList = stringList + "\n" + currIndex + "." + task.printTask();
-        }
-        currIndex++;
-    }
-
-    /**
-     * Prints all the tasks in the TaskList in order of how they were added.
-     *
-     * @return String representation of the tasks inside the TaskList.
+     * @return String representation of the task list.
      */
     public String printList() {
         assert(taskList.size() >= 0);
-        taskList.forEach((task) -> printItem(task));
-        String response = stringList;
-        currIndex = 1;
-        stringList = "";
+        String response = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            int currIndex = i + 1;
+            Task currTask = taskList.get(i);
+            response = response + "\n" + currIndex + "." + currTask.printTask();
+        }
         return response;
     }
 
@@ -104,7 +90,7 @@ public class TaskList implements Serializable {
      * @return String message indicating that the DeadLine task has been added to the TaskList.
      */
     public String addDeadline(String str) {
-        String response = "";
+        String response;
         int slashIndex = str.indexOf("/");
         DeadLine deadlineTask = new DeadLine(str.substring(DEADLINE_TASK, slashIndex - 1),
                 str.substring(slashIndex + 4));

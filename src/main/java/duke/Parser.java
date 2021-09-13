@@ -16,16 +16,6 @@ public class Parser extends Application {
     static final int DELETE_LENGTH = 6;
     static final int FIND_LENGTH = 4;
     static final int HELP_LENGTH = 4;
-    static final int INVALID_INPUT = 0;
-    static final int BYE_INPUT = 1;
-    static final int LIST_INPUT = 2;
-    static final int DONE_INPUT = 3;
-    static final int TODO_INPUT = 4;
-    static final int DEADLINE_INPUT = 5;
-    static final int EVENT_INPUT = 6;
-    static final int DELETE_INPUT = 7;
-    static final int FIND_INPUT = 8;
-    static final int HELP_INPUT = 9;
     private final Ui ui;
     private final Storage storage;
     /**
@@ -171,29 +161,29 @@ public class Parser extends Application {
      * @param input User input.
      * @return Case number of command.
      */
-    public int caseChecker(String input) {
-        int caseNum = INVALID_INPUT;
+    public String caseChecker(String input) {
+        String caseType = "invalid input";
 
         if (byeChecker(input)) {
-            caseNum = BYE_INPUT;
+            caseType = "bye";
         } else if (listChecker(input)) {
-            caseNum = LIST_INPUT;
+            caseType = "list";
         } else if (doneChecker(input)) {
-            caseNum = DONE_INPUT;
+            caseType = "done";
         } else if (todoChecker(input)) {
-            caseNum = TODO_INPUT;
+            caseType = "todo";
         } else if (deadlineChecker(input)) {
-            caseNum = DEADLINE_INPUT;
+            caseType = "deadline";
         } else if (eventChecker(input)) {
-            caseNum = EVENT_INPUT;
+            caseType = "event";
         } else if (deleteChecker(input)) {
-            caseNum = DELETE_INPUT;
+            caseType = "delete";
         } else if (findChecker(input)) {
-            caseNum = FIND_INPUT;
+            caseType = "find";
         } else if (helpChecker(input)) {
-            caseNum = HELP_INPUT;
+            caseType = "help";
         }
-        return caseNum;
+        return caseType;
     }
 
     private String listInput(TaskList taskList) throws InputError {
@@ -321,45 +311,45 @@ public class Parser extends Application {
     /**
      * Handles the logic for different command cases.
      *
-     * @param caseNum Case Number of the command.
+     * @param caseType Case type of the command.
      * @param input Current user input.
      * @param taskList Current TaskList being used.
      * @throws InputError If user input is invalid or unrecognised.
      */
-    public String caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
+    public String caseHandler(String caseType, String input, TaskList taskList) throws InputError {
         String response = "";
-        switch (caseNum) {
-        case BYE_INPUT:
+        switch (caseType) {
+        case "bye":
             response = ui.byeMessage();
             Platform.exit();
             break;
-        case LIST_INPUT:
+        case "list":
             response = listInput(taskList);
             break;
-        case DONE_INPUT:
+        case "done":
             response = doneInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case TODO_INPUT:
+        case "todo":
             response = todoInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case DEADLINE_INPUT:
+        case "deadline":
             response = deadlineInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case EVENT_INPUT:
+        case "event":
             response = eventInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case DELETE_INPUT:
+        case "delete":
             response = deleteInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
-        case FIND_INPUT:
+        case "find":
             response = findInput(input, taskList);
             break;
-        case HELP_INPUT:
+        case "help":
             response = helpInput();
             break;
         default:
