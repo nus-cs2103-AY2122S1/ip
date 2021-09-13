@@ -66,6 +66,7 @@ Adds a todo task called `sleep` to the list of task.
 
 ![todoImage](./userGuideDemo/todo.png)
 
+
 ### 3. `event <task name> /at <date/time>` - adds an event task
 
 Adds an event task to StuDo's list of tasks.
@@ -156,22 +157,7 @@ Archives task at index `1` from StuDo's list of tasks.
 ![archiveImage](./userGuideDemo/archive.png)
 
 
-### 9. `list archive` - displays the list of archived tasks
-
-The `list archive` command displays the list of archived tasks to the user.
-
-Example of usage:
-
-`list archive`
-
-Expected outcome:
-
-Shows the list of archived tasks to the user.
-
-![listArchiveImage](./userGuideDemo/listArchive.png)
-
-
-### 10. `unarchive <task index number>` - unarchives task at given index number
+### 9. `unarchive <task index number>` - unarchives task at given index number
 
 Unarchives task at given index number from StuDo's list of archived tasks, adding it back to StuDo's list of tasks.
 
@@ -185,3 +171,33 @@ Unarchives task at index `1` from StuDo's list of archived tasks, adding back to
 
 ![unarchiveImage](./userGuideDemo/unarchive.png)
 
+
+### 10. `list archive` - displays the list of archived tasks
+
+The `list archive` command displays the list of archived tasks to the user.
+
+Example of usage:
+
+`list archive`
+
+Expected outcome:
+
+Shows the list of archived tasks to the user.
+
+![listArchiveImage](./userGuideDemo/listArchive.png)
+
+<img src="userGuideDemo/listArchive.png" width="100" height="100">
+
+### 11. `remove archive <task index number>` - removes task at task index number from list of archived tasks
+
+Removes task at task index number from StuDo's list of archived tasks.
+
+Example of usage:
+
+`remove archive 1`
+
+Expected outcome:
+
+List of archived tasks does not contain the task which we removed.
+
+![removeArchiveImage](./userGuideDemo/removeArchive.png)
