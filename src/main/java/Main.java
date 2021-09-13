@@ -7,7 +7,7 @@ import kayu.KayuInterface;
 public class Main {
 
     /**
-     * Driver function for main logic using {@link kayu.Kayu} and JavaFX through {@link KayuInterface}.
+     * Runs main logic using {@link kayu.Kayu} and JavaFX through {@link KayuInterface}.
      *
      * @param args Command line arguments fed.
      */

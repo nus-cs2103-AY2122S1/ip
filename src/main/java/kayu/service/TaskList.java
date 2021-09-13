@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * Update a {@link kayu.task.Task} to 'done' based on the input <code>taskNumber</code>
+     * Updates a {@link kayu.task.Task} to 'done' based on the input <code>taskNumber</code>
      * number fed as a String. Provides an output message on return.
      *
      * @param taskNumber String format of the {@link kayu.task.Task} number to delete.
