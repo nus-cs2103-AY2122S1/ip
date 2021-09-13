@@ -1,4 +1,0 @@
-D | 0 | deadline cs2100 assignment | 15 Sep 2021, 1.00 PM
-E | 0 | event hhrdr | g
-D | 0 | cs2100 assgnment | 15 Sep 2021, 1.00 PM
-E | 0 | hehe | 6

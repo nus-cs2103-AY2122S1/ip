@@ -16,7 +16,7 @@ import duke.task.Task;
  * @version CS2103T AY21/22 Semester 1
  */
 public class TaskHandler {
-    private static final String NO_TASKS_FOUND = "Nothing in the list... :("
+    private static final String NO_TASKS_FOUND = "Nothing in the list... :(\n"
             + "Use todo/event/deadline to add something first! :^)";
     private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n"
             + "- %s\nYou currently have %d undone task(s) in the list.";
@@ -27,7 +27,7 @@ public class TaskHandler {
     private static final String TASK_LIST = "Here are the task(s) in your list! ^_^\n";
     private static final String MATCHING_TASK_LIST = "Here are the matching task(s) in your list!\n";
     private static final String NO_MATCHING_TASKS = "No matching tasks found :<";
-    private static final String SORT_TASK_LIST = "Task list is sorted! Enter list to view sorted task list :)";
+    private static final String SORT_TASK_LIST = "Task list is sorted!";
 
     private final ArrayList<Task> taskList;
 
@@ -182,6 +182,6 @@ public class TaskHandler {
                 ? t1.compareTo(t2) * -1
                 : t1.compareTo(t2);
         taskList.sort(cmp);
-        return SORT_TASK_LIST;
+        return SORT_TASK_LIST + '\n' + generateList();
     }
 }
