@@ -2,7 +2,6 @@ package command;
 
 import java.util.List;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import task.Task;
@@ -32,7 +31,7 @@ public class FindCommand extends Command {
      * @param storage Handles the saving and loading of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) {
         List<Task> matches = tasks.findTask(this.keyword);
         for (int i = 0; i < matches.size(); i++) {
             sb.append(String.format(" %d. %s%n", i + 1, matches.get(i)));

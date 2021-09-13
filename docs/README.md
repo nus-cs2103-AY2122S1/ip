@@ -89,7 +89,7 @@ Task should be removed from storage.
 
 ### `find` - Finds Tasks by keyword
 
-Finds Tasks for which the description matches the keyword.
+Find Tasks for which the description matches the keyword.
 
 Example of usage:
 

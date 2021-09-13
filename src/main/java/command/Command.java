@@ -15,6 +15,7 @@ public abstract class Command {
      *
      * @param tasks Handles the list of tasks.
      * @param storage Handles the saving and loading of tasks.
+     * @throws DukeException If there is error during execution.
      */
     public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
 

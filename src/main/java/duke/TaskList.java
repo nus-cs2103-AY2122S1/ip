@@ -55,6 +55,7 @@ public class TaskList {
      *
      * @param storage The storage object to handle saving tasks.
      * @param task The task to be added to the list of tasks.
+     * @throws DukeException If there is error saving data.
      */
     public void addTask(Storage storage, Task task) throws DukeException {
         this.tasks.add(task);
