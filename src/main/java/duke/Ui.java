@@ -39,12 +39,17 @@ public class Ui {
         printMessage("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Returns the goodbye message to be shown to the user.
+     *
+     * @return The goodbye message.
+     */
     public static String getGoodbyeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints a message that informs the user which task has been marked as done.
+     * Returns a message that informs the user which task has been marked as done.
      *
      * @param task The task that the user has marked as done.
      */
@@ -53,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Prints a message that informs the user which task has been deleted.
+     * Returns a message that informs the user which task has been deleted.
      *
      * @param task The task that the user deletes from the task list.
      * @param taskCount The number of tasks left in the task list.
@@ -64,9 +69,9 @@ public class Ui {
     }
 
     /**
-     * Prints a message that informs the user which task has been added.
+     * Returns a message that informs the user which task has been added.
      *
-     * @param task The task that the user adds to the task list.
+     * @param task The task that the user has added to the task list.
      * @param taskCount The number of tasks in the list after adding.
      */
     public static String getAddedMessage(Task task, int taskCount) {
@@ -74,6 +79,13 @@ public class Ui {
                 + "\n" + getTaskCountMessage(taskCount);
     }
 
+    /**
+     * returns a message that informs the user which task has been updated.
+     *
+     * @param task The task that the user has updated.
+     * @param taskNumber The task number of the task that has been updated.
+     * @return
+     */
     public static String getUpdatedMessage(Task task, int taskNumber) {
         return "Got it. I've updated task " + taskNumber + " to: "
                 + task;

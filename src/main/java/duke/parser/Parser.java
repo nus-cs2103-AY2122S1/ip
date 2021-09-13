@@ -47,6 +47,15 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    /**
+     * Parses the description of the user's command when he wants to add a
+     * new todo to the task list.
+     *
+     * @param desc The description of the user's command
+     * @return A TodoCommand object that will be used to execute the command.
+     * @throws DukeException If the user enters an empty description, a DukeException
+     * will be thrown.
+     */
     public ToDoCommand toDoParse(String desc) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException(MISSING_TASK_DESCRIPTION_MESSAGE);
@@ -54,6 +63,15 @@ public class Parser {
         return new ToDoCommand(desc);
     }
 
+    /**
+     * Parses the description of the user's command when he wants to add a
+     * new deadline to the task list.
+     *
+     * @param desc The description of the user's command
+     * @return A DeadlineCommand object that will be used to execute the command.
+     * @throws DukeException If the user enters an empty description or enters the
+     * description in an invalid format, a DukeException will be thrown.
+     */
     public DeadlineCommand deadlineParse(String desc) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException(MISSING_TASK_DESCRIPTION_MESSAGE);
@@ -70,6 +88,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the description of the user's command when he wants to add a
+     * new event to the task list.
+     *
+     * @param desc The description of the user's command
+     * @return An EventCommand object that will be used to execute the command.
+     * @throws DukeException If the user enters an empty description or enters the
+     * description in an invalid format, a DukeException will be thrown.
+     */
     public EventCommand eventParse(String desc) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException(MISSING_TASK_DESCRIPTION_MESSAGE);
@@ -83,6 +110,14 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the description of the user's command when he wants to delete a task.
+     *
+     * @param desc The description of the user's command
+     * @return A DeleteCommand object that will be used to execute the command.
+     * @throws DukeException If the user enters an empty description or a non-number
+     * as the description, a DukeException will be thrown.
+     */
     public DeleteCommand deleteParse(String desc) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException(MISSING_TASK_NUMBER_MESSAGE);
@@ -95,6 +130,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the description of the user's command when he wants to mark a task as done.
+     *
+     * @param desc The description of the user's command
+     * @return A DoneCommand object that will be used to execute the command.
+     * @throws DukeException If the user enters an empty description or a non-number
+     * as the description, a DukeException will be thrown.
+     */
     public DoneCommand doneParse(String desc) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException(MISSING_TASK_NUMBER_MESSAGE);

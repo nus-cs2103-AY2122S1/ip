@@ -13,12 +13,26 @@ public class UpdateParser {
 
     private static final String INCORRECT_UPDATE_FORMAT_MESSAGE =
             "It seems like your format for the update command is incorrect.";
-    private String parseContent;
 
+    /** The user's input to parse */
+    private final String parseContent;
+
+    /**
+     * Constructor for a UpdateParser object
+     *
+     * @param parseContent The input of the user that is to be parsed.
+     */
     public UpdateParser(String parseContent) {
         this.parseContent = parseContent;
     }
 
+    /**
+     * Parses the user's input.
+     *
+     * @return An UpdateCommand object that will be used to carry out the updating of the task.
+     * @throws DukeException If the user enters the command in an invalid format, a
+     * DukeException will be thrown.
+     */
     public UpdateCommand parse() throws DukeException {
         try {
             String[] contentSplit = parseContent.split("\\s+", 2);
@@ -42,7 +56,16 @@ public class UpdateParser {
 
     }
 
-    public UpdateCommand updateDateTimeParse(String updateContent) throws DukeException {
+    /**
+     * Parses the user's input, knowing that the user wants to update the date
+     * and time of the task.
+     *
+     * @param updateContent The user input that will be used to update the date and time.
+     * @return An UpdateDateTimeCommand object that will be used to carry out the updating of the task.
+     * @throws DukeException If the user enters the command in an invalid format, a
+     * DukeException will be thrown.
+     */
+    private UpdateDateTimeCommand updateDateTimeParse(String updateContent) throws DukeException {
         Pattern updatePattern = Pattern.compile("(?<taskNumber>\\S+)(\\s+)(?<date>\\S+)(\\s+)(?<time>\\S+)");
         Matcher matcher = updatePattern.matcher(updateContent);
         if (!matcher.matches()) {
@@ -60,7 +83,16 @@ public class UpdateParser {
         }
     }
 
-    public UpdateCommand updateDescriptionParse(String updateContent) throws DukeException {
+    /**
+     * Parses the user's input, knowing that the user wants to update the description
+     * of the task.
+     *
+     * @param updateContent The user input that will be used to update the description.
+     * @return An UpdateDescriptionCommand object that will be used to carry out the updating of the task.
+     * @throws DukeException If the user enters the command in an invalid format, a
+     * DukeException will be thrown.
+     */
+    private UpdateDescriptionCommand updateDescriptionParse(String updateContent) throws DukeException {
         Pattern updatePattern = Pattern.compile("(?<taskNumber>\\S+)(\\s+)(?<description>.+)");
         Matcher matcher = updatePattern.matcher(updateContent);
         if (!matcher.matches()) {
@@ -77,7 +109,17 @@ public class UpdateParser {
         }
     }
 
-    public UpdateCommand updateFullParse(String updateContent) throws DukeException {
+    /**
+     * Parses the user's input, knowing that the user wants to update the description,
+     * date and time of the task.
+     *
+     * @param updateContent The user input that will be used to update description,
+     *                      date and time.
+     * @return An UpdateDateTimeCommand object that will be used to carry out the updating of the task.
+     * @throws DukeException If the user enters the command in an invalid format, a
+     * DukeException will be thrown.
+     */
+    private UpdateFullCommand updateFullParse(String updateContent) throws DukeException {
         Pattern updatePattern = Pattern.compile(
                 "(?<taskNumber>\\S+)(\\s+)(?<description>.+)/by(\\s+)(?<date>\\S+)(\\s+)(?<time>\\S+)");
         Matcher matcher = updatePattern.matcher(updateContent);
