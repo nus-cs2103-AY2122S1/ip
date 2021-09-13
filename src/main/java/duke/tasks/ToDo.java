@@ -6,9 +6,6 @@ package duke.tasks;
  */
 public class ToDo extends Task {
 
-    /** Starting index of a ToDo description */
-    public static final int TODO_DESC_START = 5;
-
     /**
      * A Constructor for a ToDo.
      *

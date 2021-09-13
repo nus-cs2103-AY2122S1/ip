@@ -12,6 +12,9 @@ import duke.util.Tasklist;
  */
 public class DeadlineCommand extends Command {
 
+    /** Starting index of the description for a Deadline. */
+    public static final int DEADLINE_DESC_START = 9;
+
     /** The String description of the Deadline provided by the user */
     private String description;
 
