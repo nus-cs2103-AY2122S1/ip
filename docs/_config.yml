@@ -1,1 +1,13 @@
+title: "Sariel"
+
 theme: jekyll-theme-minimal
+
+header_pages:
+  -UserGuide.md
+
+markdown: kramdown
+
+
+repository: "Gabau/ip"
+github_icon: "images/github-icon.png"
+
