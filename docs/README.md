@@ -1,7 +1,7 @@
 # My Duke Bot - DukeJR :smile:
 
 ### DukeJR accelerates your workflow by tracking your daily tasks.
-> No other apps better than this - Elon Musk
+> No other apps better than this - Elon Musk.
 #### User Guide :sunglasses: :sunglasses: :
 1. List Command (list) 
    * Displays all the tasks you have previously stored with completion status denoted by [X] or [].
