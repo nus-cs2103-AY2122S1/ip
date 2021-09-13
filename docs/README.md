@@ -80,9 +80,10 @@ A confirmation response would be sent by Duke:
 
 ```
 Got it. I've added this task:
-        [D][ ] Example task
+        [E][ ] Example task
 There are ___ tasks in your list
 ```
+
 <br/><br/>
 
 ### `list` - Lists or filters your tasks
@@ -90,11 +91,9 @@ There are ___ tasks in your list
 Lists out or filters your tasks based on the optional arguments provided (if any).
 Using the command with no arguments displays the index numbers of all tasks, to be used for `done` and `delete`.
 
-**Example usage:**
+**Example usage (with and without optional arguments):**
 
 `list` - Standard list command (no arguments)
-
-Example usage with optional arguments:
 
 `list /date DD/MM/YYYY` - Search for tasks at date
 
@@ -171,12 +170,12 @@ In-built command to display the list of possible commands and arguments within t
 
 **Expected outcome:**
 
-A list of possible commands with their arguments would be sent by Duke.
+An in-built list of possible commands with their arguments would be sent by Duke.
 
 <br/><br/>
 
 ### `gubbai` - Goodbye
-Exits the app (with a delay of 2 seconds)
+Exits the app
 
 **Example usage:**
 
@@ -184,6 +183,6 @@ Exits the app (with a delay of 2 seconds)
 
 **Expected outcome:**
 
-The following goodbye message will be displayed, and the app would close automatically 2 seconds later.
+The following goodbye message will be displayed. The app would close automatically 2 seconds later.
 
 `kimi no unmei no hito wa boku jyanai`
