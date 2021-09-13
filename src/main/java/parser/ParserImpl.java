@@ -203,10 +203,10 @@ public class ParserImpl implements IParser {
     }
     
     private LocalDateTime parseStringToLocalDateTime(String localDateTimeString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         
         try {
-            return LocalDateTime.parse(localDateTimeString, formatter);
+            return LocalDateTime.parse(localDateTimeString + " 00:00", formatter);
         } catch (DateTimeParseException e) {
             processException(new IllegalArgumentException("Invalid date time format, please follow dd/MM/yyyy"));
         }

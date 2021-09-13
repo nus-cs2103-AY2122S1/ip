@@ -48,6 +48,10 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
             processList(localDate);
             break;
         case DEADLINE:
+            if (argument.getTiming() == null) {
+                return;
+            }
+            
             Deadline deadline = new Deadline(
                     argument.getDescription(),
                     argument.getTiming()

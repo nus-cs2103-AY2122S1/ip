@@ -31,7 +31,7 @@ public class Deadline extends Task implements TimedItem {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
     }
     

@@ -30,7 +30,7 @@ public class Event extends Task implements TimedItem {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return "[E]" + super.toString() + " (at : " + time.format(formatter) + ")";
     }
     

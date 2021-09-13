@@ -37,6 +37,8 @@ public class ReminderTask implements Runnable {
         if (!tasks.isEmpty()) {
             ui.printSentence(reminderMessage);
             ui.printIndexedList(tasks);
+        } else {
+            ui.printSentence("There is no events for today! Good job lad");
         }
     }
     
