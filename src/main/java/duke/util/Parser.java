@@ -1,11 +1,10 @@
 package duke.util;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.TaskExecution;
+import duke.command.Command;
+import duke.command.TaskExecution;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.UnknownCommandException;
@@ -22,65 +21,23 @@ public class Parser {
      */
     public static TaskExecution parse(String command) throws DukeException {
         if (command.equals("list")) {
-            return (tasks, mainStorage, archiveStorage) -> tasks.list();
+            return (tasks, mainStorage, archiveStorage) -> Command.list(tasks);
         } else if (command.matches("^done -?[0-9]+$")) {
-            return (tasks, mainStorage, archiveStorage) -> {
-                String output = tasks.done(command);
-                mainStorage.save(tasks.toSaveFormat());
-                return output;
-            };
+            return (tasks, mainStorage, archiveStorage) -> Command.done(tasks, mainStorage, command);
         } else if (command.matches("^todo( .*)?")) {
-            return (tasks, mainStorage, archiveStorage) -> {
-                String output = tasks.todo(command);
-                mainStorage.save(tasks.toSaveFormat());
-                return output;
-            };
+            return (tasks, mainStorage, archiveStorage) -> Command.todo(tasks, mainStorage, command);
         } else if (command.matches("^deadline( .*)?")) {
-            return (tasks, mainStorage, archiveStorage) -> {
-                String output = tasks.deadline(command);
-                mainStorage.save(tasks.toSaveFormat());
-                return output;
-            };
+            return (tasks, mainStorage, archiveStorage) -> Command.deadline(tasks, mainStorage, command);
         } else if (command.matches("^event( .*)?")) {
-            return (tasks, mainStorage, archiveStorage) -> {
-                String output = tasks.event(command);
-                mainStorage.save(tasks.toSaveFormat());
-                return output;
-            };
+            return (tasks, mainStorage, archiveStorage) -> Command.event(tasks, mainStorage, command);
         } else if (command.matches("^delete -?[0-9]+$")) {
-            return (tasks, mainStorage, archiveStorage) -> {
-                String output = tasks.delete(command);
-                mainStorage.save(tasks.toSaveFormat());
-                return output;
-            };
+            return (tasks, mainStorage, archiveStorage) -> Command.delete(tasks, mainStorage, command);
         } else if (command.matches("^find( .*)?")) {
-            return (tasks, mainStorage, archiveStorage) -> {
-                String output = tasks.find(command);
-                mainStorage.save(tasks.toSaveFormat());
-                return output;
-            };
+            return (tasks, mainStorage, archiveStorage) -> Command.find(tasks, command);
         } else if (command.equals("archive")) {
-            String successMessage = "Successfully archived!";
-            return (tasks, mainStorage, archiveStorage) -> {
-                archiveStorage.save(tasks.toSaveFormat());
-                tasks.clearAllTasks();
-                mainStorage.save(tasks.toSaveFormat());
-                return successMessage;
-            };
+            return Command::archive;
         } else if (command.equals("loadArchive")) {
-            String successMessage = "Successfully loaded archive!";
-            String errorMessage = "Error while loading archive file! Does it exist?";
-            return (tasks, mainStorage, archiveStorage) -> {
-                List<String> fileContents;
-                try {
-                    fileContents = archiveStorage.load();
-                } catch (IOException e) {
-                    return errorMessage;
-                }
-                tasks.appendListOfStrings(fileContents);
-                mainStorage.save(tasks.toSaveFormat());
-                return successMessage;
-            };
+            return Command::loadArchive;
         } else {
             throw new UnknownCommandException();
         }
