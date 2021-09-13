@@ -54,9 +54,7 @@ Exits the App.
 
 Format: `todo <DESCRIPTION>`
 
-Example of usage: 
-
-`todo borrow a book`
+Example of usage:  `todo borrow a book`
 
 Expected outcome:
 
@@ -71,9 +69,7 @@ Now you have 1 task in the list.
 
 Format: `deadline <DESCRIPTION> /by yyyy-MM-dd HH:mm`
 
-Example of usage: 
-
-`deadline return book /by 2021-08-12 18:30`
+Example of usage:  `deadline return book /by 2021-08-12 18:30`
 
 Expected outcome:
 
@@ -88,9 +84,7 @@ Now you have 1 task in the list.
 
 Format: `event <DESCRIPTION> /at yyyy-MM-dd HH:mm`
 
-Example of usage: 
-
-`event concert /at 2021-12-12 18:30`
+Example of usage:  `event concert /at 2021-12-12 18:30`
 
 Expected outcome:
 
@@ -105,9 +99,7 @@ Now you have 1 task in the list.
 
 Format: `list`
 
-Example of usage: 
-
-`list`
+Example of usage:  `list`
 
 Expected outcome:
 
@@ -122,9 +114,7 @@ Here are the tasks in your list:
 
 Format: `find <DESCRIPTION>`
 
-Example of usage: 
-
-`find book`
+Example of usage:  `find book`
 
 Expected outcome:
 
@@ -139,9 +129,7 @@ Here are the matching tasks in your list:
 
 Format: `done <INDEX>`
 
-Example of usage: 
-
-`done 1`
+Example of usage:  `done 1`
 
 Expected outcome:
 
@@ -155,9 +143,7 @@ Nice! I've marked this task as done:
 
 Format: `delete <INDEX>`
 
-Example of usage: 
-
-`delete 1`
+Example of usage:  `delete 1`
 
 Expected outcome:
 
@@ -172,9 +158,7 @@ Now you have 0 tasks in the list.
 
 Format: `update`
 
-Example of usage: 
-
-`update`
+Example of usage:  `update`
 
 Expected outcome:
 
@@ -191,9 +175,7 @@ edit-D/(Task Index) (New Task Date and Time)
 
 Format: `edit-N/<INDEX> <NEW DESCRIPTION>`
 
-Example of usage: 
-
-`edit-N/1 do homework`
+Example of usage:  `edit-N/1 do homework`
 
 Expected outcome:
 
@@ -207,9 +189,7 @@ T |0| do homework
 
 Format: `edit-D/<INDEX> <NEW DURATION>`
 
-Example of usage: 
-
-`edit-D/1 2021-11-14 18:00`
+Example of usage:  `edit-D/1 2021-11-14 18:00`
 
 Expected outcome:
 
@@ -223,9 +203,7 @@ D |0| concert | 14 Nov 2021 6.00PM
 
 Format: `bye`
 
-Example of usage: 
-
-`bye`
+Example of usage:  `bye`
 
 Expected outcome:
 
