@@ -58,6 +58,12 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Initialises an {@code AfterTask} into this {@code Task}.
+     * 
+     * @param afterTask is a following {@code ToDos} which will be available only
+     *                  when the current {@code Task} is marked as done.
+     */
     public void setAfterTask(AfterTask afterTask) {
         this.afterTask = afterTask;
     }

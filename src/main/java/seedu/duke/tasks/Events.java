@@ -1,9 +1,14 @@
 package seedu.duke.tasks;
 
+/**
+ * Is a subclass of {@code Task} which emphasises the location of this
+ * {@code Events}.
+ */
 public class Events extends Task {
 
     /**
-     * Constructor. Default having the isDone parameter to be set as false.
+     * Constructor. Default having the {@code isDone} parameter to be set as
+     * {@code false}.
      * 
      * @param description description of the current {@code Events} object.
      * @param dateTime    is the description of the location and time for the event.
@@ -13,20 +18,19 @@ public class Events extends Task {
     }
 
     /**
-     * Second Constructor. Initialising the parameters of the Events.
+     * Second Constructor. Initialising the parameters of this {@code Events}.
      * 
      * @param description is the description of the {@code Events}.
      * @param dateTime    is the description of the location and time for the
      *                    {@code Events}.
-     * @param isDone      determine whether the current {@code Events} is completed
-     *                    or not.
+     * @param isDone      determine whether this {@code Events} is completed or not.
      */
     public Events(String description, String dateTime, boolean isDone) {
         super(description, dateTime, isDone);
     }
 
     /**
-     * Retrieves the symbol of the current object. Different object and child have
+     * Retrieves the symbol of the current object. Different {@code Task} have
      * different symbols that represents them.
      * 
      * @return a fixed parent symbol "E".
@@ -39,8 +43,9 @@ public class Events extends Task {
     /**
      * Marks the current {@code Events} as done.
      * 
-     * @return a new {@code Events} object with the same description and dayTime,
-     *         but setting isDone property to be true
+     * @return a new {@code Events} object with the same {@code description} and
+     *         {@code dayTime}, but setting {@code isDone} property to be
+     *         {@code true}.
      */
     @Override
     public Events markAsDone() {
@@ -50,7 +55,7 @@ public class Events extends Task {
     /**
      * Describes the current {@code Events} object.
      * 
-     * @return a description of the current {@code Events} object.
+     * @return a description of this {@code Events} object.
      */
     @Override
     public String toString() {

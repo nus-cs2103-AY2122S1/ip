@@ -9,9 +9,13 @@ public class ExitCommand extends Command {
     /**
      * Replies with an Exit message when this function is triggered.
      * 
-     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
-     *                 stored.
-     * @param storage  the database where the Tasks are being saved for progression.
+     * @param taskList  contains an {@code ArrayList<Task>} where all {@code Task}
+     *                  is stored.
+     * @param timetable it contains the entire schedule of the
+     *                  {@code ScheduledTask}.
+     * @param storage   the database where the Tasks are being saved for
+     *                  progression.
+     * @return a reply message or information from {@code Duke}.
      */
     @Override
     public String execute(TaskList taskList, Timetable timetable, Storage storage) {

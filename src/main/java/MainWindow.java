@@ -33,6 +33,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initialises Duke for this application to run functionally.
+     * 
+     * @param duke is the main functionality for this application.
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         this.duke.loadDataFromStorage();

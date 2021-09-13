@@ -57,10 +57,28 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * A component of the user dialog, which displays user side of the conversation
+     * {@code Stage}.
+     * 
+     * @param text is the text message which is written by the user.
+     * @param img  is the user display picture.
+     * @return a component which displays the user side of the component, where the
+     *         display picture is on the right-hand side.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * A component of the user dialog, which displays {@code Duke} side of the
+     * conversation {@code Stage}.
+     * 
+     * @param text is the text message which is replied by {@code Duke}.
+     * @param img  is {@code Duke} display picture.
+     * @return a component which displays the {@code Duke} side of the component,
+     *         where the display picture is on the left-hand side.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

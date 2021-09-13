@@ -10,9 +10,13 @@ public abstract class Command {
     /**
      * Executes the command.
      * 
-     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
-     *                 stored.
-     * @param storage  the database where the Tasks are being saved for progression.
+     * @param taskList  contains an {@code ArrayList<Task>} where all {@code Task}
+     *                  is stored.
+     * @param timetable it contains the entire schedule of the
+     *                  {@code ScheduledTask}.
+     * @param storage   the database where the Tasks are being saved for
+     *                  progression.
+     * @return a reply message or information from {@code Duke}.
      */
     public abstract String execute(TaskList taskList, Timetable timetable, Storage storage);
 

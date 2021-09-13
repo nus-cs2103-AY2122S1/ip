@@ -37,7 +37,8 @@ public class Storage {
     /**
      * Loads the saved Tasks from the txt file.
      * 
-     * @return an {@code ArrayList<Task>} that contains all the previous Tasks.
+     * @return an {@code ArrayList<Task>} that contains all the previous
+     *         {@code Tasks} saved.
      * @throws DukeStorageLoadException when {@code File} is not found in the given
      *                                  location.
      * @see java.util.ArrayList
@@ -135,8 +136,8 @@ public class Storage {
      * Appends a new line in the txt file which saves all the Task.
      * 
      * @param textToAppend {@code String} to append into the txt file.
-     * @throws DukeStorageSaveException when FileWriter is not able to read or
-     *                                  locate the file from the given file path.
+     * @throws DukeStorageSaveException when {@code FileWriter} is not able to read
+     *                                  or locate the file from the given file path.
      */
     public void appendToData(String textToAppend) throws DukeStorageSaveException {
         try {
@@ -151,7 +152,7 @@ public class Storage {
     /**
      * Updates the done status in the txt file.
      * 
-     * @param number is the {@code Task} id.
+     * @param index is the {@code Task} id.
      * @throws DukeStorageUpdateException when {@code Scanner} is not able to read
      *                                    or locate the {@code File} from the given
      *                                    file path.
@@ -181,6 +182,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates a {@code Task} into a {@code Task} with an {@code AfterTask} tied to
+     * it.
+     * 
+     * @param index       is the index of the {@code Task}.
+     * @param description is the description of the {@code AfterTask}.
+     */
     public void updateAfterTask(int index, String description) {
         int count = 0;
         String currLine;

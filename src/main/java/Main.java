@@ -11,6 +11,11 @@ import seedu.duke.Duke;
 public class Main extends Application {
     private Duke duke = new Duke();
 
+    /**
+     * Starts and initialise the application in a {@code Stage}.
+     * 
+     * @param stage a platform to display all the components of the application.
+     */
     @Override
     public void start(Stage stage) {
         try {

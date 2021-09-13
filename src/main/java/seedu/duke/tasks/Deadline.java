@@ -1,11 +1,15 @@
 package seedu.duke.tasks;
 
+/**
+ * Is a subclass of {@code Task} which emphasises due date in {@code Deadline}.
+ */
 public class Deadline extends Task {
 
     /**
-     * Constructor. Default having the isDone parameter to be set as false.
+     * Constructor. Default having the {@code isDone} parameter to be set as
+     * {@code false}.
      * 
-     * @param description description of the current {@code Deadline} object.
+     * @param description description of this {@code Deadline} object.
      * @param dateTime    is the description of the location and time for the
      *                    {@code Deadline}.
      */
@@ -18,17 +22,17 @@ public class Deadline extends Task {
      * initial boolean status.
      * 
      * @param description is the description of the {@code Deadline}.
-     * @param dateTime    is the description of the location and time for the
-     *                    current {@code Deadline}.
-     * @param isDone      determine whether the current {@code Deadline} is
-     *                    completed or not.
+     * @param dateTime    is the description of the location and time for this
+     *                    {@code Deadline}.
+     * @param isDone      determine whether this {@code Deadline} is completed or
+     *                    not.
      */
     public Deadline(String description, String dateTime, boolean isDone) {
         super(description, dateTime, isDone);
     }
 
     /**
-     * Retrieves the symbol of the current object. Different object and child have
+     * Retrieves the symbol of this {@code Deadline}. Different {@code Task} have
      * different symbols that represents them.
      * 
      * @return a fixed parent symbol "D".
@@ -39,10 +43,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Marks the current {@code Deadline} as done.
+     * Marks this {@code Deadline} as done.
      * 
-     * @return a new {@code Deadline} object with the same description and by, but
-     *         setting isDone property to be true
+     * @return a new {@code Deadline} with the same description and by, but setting
+     *         {@code isDone} property to be true
      */
     @Override
     public Deadline markAsDone() {
@@ -50,9 +54,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Describes the current {@code Deadline}.
+     * Describes this {@code Deadline}.
      * 
-     * @return a description of the current {@code Deadline}.
+     * @return a description of this {@code Deadline}.
      */
     @Override
     public String toString() {

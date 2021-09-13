@@ -6,6 +6,9 @@ import seedu.duke.commands.Ui;
 import seedu.duke.exceptions.action.DukeActionOutOfBoundException;
 import seedu.duke.tasks.Task;
 
+/**
+ * A Class which helps to store all the {@code Task}.
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
 
@@ -29,8 +32,8 @@ public class TaskList {
     }
 
     /**
-     * Loads previous saved Tasks from a txt file. Save it in this current
-     * {@code TaskList} in an {@code ArrayList<Task>}.
+     * Loads previous saved Tasks from a txt file. Save it in this {@code TaskList}
+     * in an {@code ArrayList<Task>}.
      * 
      * @param savedTasks this is the {@code ArrayList<Task>} coming from the txt
      *                   file.
@@ -57,9 +60,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a particular {@code Task} given by the user into the {@code TaskList}.
+     * Adds a particular {@code Task} given by the user into this {@code TaskList}.
      * 
-     * @param task is the {@code Task} that is to be added into the
+     * @param task is the {@code Task} that is to be added into this
      *             {@code TaskList}.
      */
     public void addTask(Task task) {
@@ -67,7 +70,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a particular task that is present in the {@code TaskList}.
+     * Deletes a particular {@code Task} that is present in this {@code TaskList}.
      * 
      * @param number is the {@code Task} id.
      */
@@ -80,11 +83,12 @@ public class TaskList {
     }
 
     /**
-     * Finds the specific {@code Task} from the {@code ArrayList<Task>} in
+     * Finds the specific {@code Task} from the {@code ArrayList<Task>} in this
      * {@code TaskList} based on the description given.
      * 
-     * @param find is the description coming from the user, which the list of
-     *             {@code Task} they would like to find.
+     * @param find is the description from the user, which they would like to find
+     *             the {@code Task} from this {@code TaskList}.
+     * 
      */
     public ArrayList<Task> find(String find) {
         ArrayList<Task> foundList = new ArrayList<>();

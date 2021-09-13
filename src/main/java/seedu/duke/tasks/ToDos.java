@@ -24,7 +24,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * Get the symbol of this {@code ToDos} object. The symbol for {@code ToDos}
+     * Gets the symbol of this {@code ToDos} object. The symbol for {@code ToDos}
      * object is "T".
      * 
      * @return "T"
@@ -37,8 +37,8 @@ public class ToDos extends Task {
     /**
      * Marks the current {@code ToDos} as done.
      * 
-     * @return a new ToDos object with the same description, but setting isDone
-     *         property to be true
+     * @return a new {@code ToDos} object with the same description, but setting
+     *         {@code isDone} property to be true.
      */
     @Override
     public ToDos markAsDone() {

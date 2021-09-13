@@ -25,22 +25,29 @@ public class Duke {
         this.timetable = new Timetable();
     }
 
+    /**
+     * Initialises all saved data into the application from previous saves.
+     */
     public void loadDataFromStorage() {
         ArrayList<Task> savedTasks = this.storage.loadData();
         this.taskList.loadFromStorage(savedTasks);
         this.timetable.initialise(savedTasks);
     }
 
+    /**
+     * Retrieves {@code Duke} response based on the user input.
+     * 
+     * @param userInput the sentence which is sent by the user.
+     * @return a sentence which represents the reply from {@code Duke}.
+     */
     public String getResponse(String userInput) {
         try {
             Parser parser = new Parser();
-
             Command command = parser.parseCommands(userInput);
             this.response = command.execute(taskList, timetable, storage);
             return this.response;
         } catch (ArrayIndexOutOfBoundsException e) {
             return Ui.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
         }
-
     }
 }
