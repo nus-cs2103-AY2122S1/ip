@@ -9,6 +9,7 @@ import static lifeline.util.ErrorString.ERROR_EVENT_MISSING_DETAILS;
 import static lifeline.util.ErrorString.ERROR_FIND_MISSING_KEYWORD;
 import static lifeline.util.ErrorString.ERROR_INDEX_OUT_OF_BOUNDS;
 import static lifeline.util.ErrorString.ERROR_INVALID_COMMAND;
+import static lifeline.util.ErrorString.ERROR_MISSING_INDEX;
 import static lifeline.util.ErrorString.ERROR_NON_INTEGER_INDEX;
 import static lifeline.util.ErrorString.ERROR_TODO_MISSING_DETAILS;
 
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import lifeline.exception.LifelineException;
 import lifeline.parser.DateTimeParser;
@@ -211,7 +213,14 @@ public class CommandHandler {
     private static ArrayList<Integer> getIndicesFromCommand(String command) throws LifelineException {
         String[] commands = splitCommands(command);
         String indices = commands[1];
-        String[] splitIndices = indices.split("\\s*,\\s*");
+        String[] splitIndices =
+                Arrays.stream(indices.split("\\s*,\\s*"))
+                        .filter(index -> index.length() > 0)
+                        .toArray(String[]::new);
+
+        if (splitIndices.length == 0) {
+            throw new LifelineException(ERROR_MISSING_INDEX);
+        }
 
         ArrayList<Integer> indicesAsInteger = new ArrayList<>();
         for (int i = 0; i < splitIndices.length; i++) {

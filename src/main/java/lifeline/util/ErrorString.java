@@ -8,6 +8,7 @@ public class ErrorString {
     public static final String ERROR_DONE_MISSING_INDEX = "You did not specify an integer! Please use done <number>";
     public static final String ERROR_DELETE_MISSING_INDEX = "You did not specify an integer! Please use delete "
             + "<number>";
+    public static final String ERROR_MISSING_INDEX = "You did not specify an integer!";
     public static final String ERROR_TODO_MISSING_DETAILS = "Details of todo cannot be blank!";
     public static final String ERROR_DEADLINE_MISSING_DETAILS = "Details of deadline cannot be blank!";
     public static final String ERROR_EVENT_MISSING_DETAILS = "Details of event cannot be blank!";
