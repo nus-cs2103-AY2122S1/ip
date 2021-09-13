@@ -15,7 +15,7 @@ import java.util.Locale;
  */
 public class TaskList {
 
-    private static ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private static final DateTimeFormatter FORMAT_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMAT_NO_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
