@@ -121,7 +121,7 @@ public class TaskList {
     }
 
     /**
-     * Sort filtered tasks.
+     * Sorts filtered tasks.
      *
      * @param taskType The type of tasks to work on.
      * @param condition The conditions for filtering relevant tasks to sort.
