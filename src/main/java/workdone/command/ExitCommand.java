@@ -4,7 +4,7 @@ import workdone.data.Storage;
 import workdone.data.TaskList;
 
 /**
- * Represents a command that stops the duke program.
+ * Represents a command that stops the WorkDone program.
  */
 public class ExitCommand extends Command {
     /** Message to be printed when the program exits */
@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns false because the duke program stops.
+     * Returns false because the WorkDone program stops.
      *
      * @return Whether the program is running.
      */

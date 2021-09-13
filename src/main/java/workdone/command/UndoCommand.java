@@ -2,20 +2,29 @@ package workdone.command;
 
 import workdone.data.Storage;
 import workdone.data.TaskList;
-import workdone.exception.DukeException;
 import workdone.exception.InvalidTaskNoException;
 import workdone.exception.UnableToUndoException;
+import workdone.exception.WorkDoneException;
 
+/**
+ * Represents a command that undoes the previous command if possible. A subclass of the Command class.
+ */
 public class UndoCommand extends Command {
+    /** Last command in the stack */
     private Command lastCommand;
 
+    /**
+     * Constructor of the class `UndoCommand`.
+     *
+     * @param lastCommand Last command in the stack.
+     */
     public UndoCommand(Command lastCommand) {
         super("undo");
         this.lastCommand = lastCommand;
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws WorkDoneException {
         if (this.lastCommand instanceof AddTaskCommand) {
             // delete the last task
             int index = tasks.getNumOfTasks() - 1;

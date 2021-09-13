@@ -16,7 +16,7 @@ public class WorkDoneException extends Exception {
     }
 
     /**
-     * Returns the error message of the DukeException.
+     * Returns the error message of the WorkDoneException.
      *
      * @return String representation of the exception.
      */

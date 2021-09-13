@@ -30,7 +30,7 @@ public class DialogBox extends HBox {
      * Constructor of the class `DialogBox`.
      *
      * @param text Text to be displayed.
-     * @param img Avatar of duke or the user.
+     * @param img Avatar of WorkDone or the user.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -70,13 +70,13 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates and returns a duke dialog.
+     * Creates and returns a WorkDone dialog.
      *
      * @param text Response generated from a command.
-     * @param img Avatar of Duke.
-     * @return DialogBox of Duke.
+     * @param img Avatar of WorkDone.
+     * @return DialogBox of WorkDone.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getWorkDoneDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

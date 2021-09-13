@@ -2,7 +2,7 @@ package workdone.command;
 
 import workdone.data.Storage;
 import workdone.data.TaskList;
-import workdone.exception.DukeException;
+import workdone.exception.WorkDoneException;
 import workdone.task.Task;
 
 /**
@@ -30,9 +30,9 @@ public abstract class Command {
      *
      * @param tasks A list of tasks.
      * @param storage An instance of Storage that can read from and write to the hard disk.
-     * @throws DukeException If error occurs while executing the command.
+     * @throws WorkDoneException If error occurs while executing the command.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws WorkDoneException {
         this.message = this.content;
     }
 

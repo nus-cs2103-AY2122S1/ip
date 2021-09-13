@@ -23,23 +23,23 @@ public class HelpCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {
         // Update message
-        this.message = "All Commands:\n" +
-                "Add a task:\n" +
-                "todo {task description} - add a task to be completed\n" +
-                "deadline {task description} /by yyyy-MM-dd HH:mm - add a task with a deadline\n" +
-                "event {event description} /at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm - add an event\n" +
-                "Finish a task:\n" +
-                "done {task no.} - mark a task as done\n" +
-                "undone {task no.} - mark a task as undone\n" +
-                "Delete a task:\n" +
-                "delete {task no.} - delete a task by specifying its task number\n" +
-                "View all tasks:\n" +
-                "list - list all tasks added\n" +
-                "Find a task:\n" +
-                "find {keyword} - find a task containing `keyword`\n" +
-                "Undo:\n" +
-                "undo - undo the last command\n" +
-                "Exit:\n" +
-                "bye - exit the program\n";
+        this.message = "All Commands:\n"
+                + "Add a task:\n"
+                + "todo {task description} - add a task to be completed\n"
+                + "deadline {task description} /by yyyy-MM-dd HH:mm - add a task with a deadline\n"
+                + "event {event description} /at yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm - add an event\n"
+                + "Finish a task:\n"
+                + "done {task no.} - mark a task as done\n"
+                + "undone {task no.} - mark a task as undone\n"
+                + "Delete a task:\n"
+                + "delete {task no.} - delete a task by specifying its task number\n"
+                + "View all tasks:\n"
+                + "list - list all tasks added\n"
+                + "Find a task:\n"
+                + "find {keyword} - find a task containing `keyword`\n"
+                + "Undo:\n"
+                + "undo - undo the last command\n"
+                + "Exit:\n"
+                + "bye - exit the program\n";
     }
 }

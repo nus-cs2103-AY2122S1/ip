@@ -3,16 +3,16 @@ package workdone.ui;
 import java.util.Scanner;
 
 import workdone.command.Command;
-import workdone.exception.DukeException;
+import workdone.exception.WorkDoneException;
 
 /**
- * Represents UI of the Duke program.
+ * Represents UI of the WorkDone program.
  */
 public class Ui {
     /** Greeting message to be printed when the program starts */
     private static final String GREETING_MESSAGE =
             "____________________________________________________________\n"
-                    + "Hello! I'm Duke\n"
+                    + "Hello! I'm WorkDone\n"
                     + "What can I do for you?\n"
                     + "____________________________________________________________\n";
     /** Scanner used to read commands */
@@ -68,18 +68,18 @@ public class Ui {
     /**
      * Prints the given exception.
      *
-     * @param dukeException The given exception.
+     * @param workDoneException The given exception.
      */
-    public void showError(DukeException dukeException) {
-        System.out.println(dukeException);
+    public void showError(WorkDoneException workDoneException) {
+        System.out.println(workDoneException);
     }
 
     /**
      * Prints out error message indicating that file containing data is not found.
      */
     public static void showFileNotFoundError() {
-        DukeException dukeException = new DukeException(
+        WorkDoneException workDoneException = new WorkDoneException(
                 "☹ OOPS!!! The file cannot be found. A new file has been created, please try again!");
-        System.out.println(dukeException);
+        System.out.println(workDoneException);
     }
 }

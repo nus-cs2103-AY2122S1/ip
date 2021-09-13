@@ -13,13 +13,13 @@ import workdone.command.HelpCommand;
 import workdone.command.TaskDoneCommand;
 import workdone.command.TaskUndoneCommand;
 import workdone.command.UndoCommand;
-import workdone.exception.DukeException;
 import workdone.exception.InvalidCommandException;
 import workdone.exception.InvalidTaskNoException;
 import workdone.exception.InvalidTimeException;
 import workdone.exception.MissingCommandDetailException;
 import workdone.exception.MultipleTimeSlotsException;
 import workdone.exception.UnableToUndoException;
+import workdone.exception.WorkDoneException;
 import workdone.task.Deadline;
 import workdone.task.Event;
 import workdone.task.Task;
@@ -38,9 +38,9 @@ public class Parser {
      * @param words An array of words in the command.
      * @param isEvent Whether the command is an `event` command.
      * @return Parsed command.
-     * @throws DukeException If command is invalid.
+     * @throws WorkDoneException If command is invalid.
      */
-    private static Command parseCommandWithTime(String[] words, boolean isEvent) throws DukeException {
+    private static Command parseCommandWithTime(String[] words, boolean isEvent) throws WorkDoneException {
         // Determine key information based on type of the task
         String timeFormat = isEvent ? "yyyy-MM-dd HH:mm to yyyy-MM-dd HH:mm" : "yyyy-MM-dd HH:mm";
         String regex = isEvent ? "/at" : "/by";
@@ -122,7 +122,7 @@ public class Parser {
         return new UndoCommand(Parser.commands.pop());
     }
 
-    private static Command parseCommandWithTwoOrMoreWords(String[] words) throws DukeException {
+    private static Command parseCommandWithTwoOrMoreWords(String[] words) throws WorkDoneException {
         String leadingWord = words[0];
         if (leadingWord.equals("done")) {
             return Parser.parseCommandWithTaskNo(words);
@@ -148,9 +148,9 @@ public class Parser {
      *
      * @param command Command received from keyboard.
      * @return Parsed command.
-     * @throws DukeException If command is invalid.
+     * @throws WorkDoneException If command is invalid.
      */
-    public static Command parse(String command) throws DukeException {
+    public static Command parse(String command) throws WorkDoneException {
         // Determine type of the command and return corresponding command instance
         if (command.equals("bye")) {
             return new ExitCommand();

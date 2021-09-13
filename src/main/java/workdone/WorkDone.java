@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import workdone.command.Command;
 import workdone.data.Storage;
 import workdone.data.TaskList;
-import workdone.exception.DukeException;
+import workdone.exception.WorkDoneException;
 import workdone.ui.Parser;
 import workdone.ui.Ui;
 
@@ -49,8 +49,8 @@ public class WorkDone {
                 command.execute(this.tasks, this.storage);
                 this.ui.showCommandOutput(command);
                 isRunning = command.isRunning();
-            } catch (DukeException dukeException) {
-                this.ui.showError(dukeException);
+            } catch (WorkDoneException workDoneException) {
+                this.ui.showError(workDoneException);
             }
         }
     }
@@ -71,8 +71,8 @@ public class WorkDone {
             command = Parser.parse(input.strip());
             command.execute(this.tasks, this.storage);
             return command.toString();
-        } catch (DukeException dukeException) {
-            return dukeException.toString();
+        } catch (WorkDoneException workDoneException) {
+            return workDoneException.toString();
         }
     }
 

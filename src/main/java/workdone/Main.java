@@ -3,12 +3,12 @@ package workdone;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import workdone.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import workdone.ui.MainWindow;
 
 /**
  * A GUI for WorkDone using FXML.
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private final String filePath = System.getProperty("user.dir");
-    private final WorkDone WorkDone = new WorkDone(Paths.get(filePath, "data", "duke1.txt"));
+    private final WorkDone workDone = new WorkDone(Paths.get(filePath, "data", "duke1.txt"));
 
     @Override
     public void start(Stage stage) {
@@ -25,7 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(WorkDone);
+            fxmlLoader.<MainWindow>getController().setWorkDone(workDone);
             stage.show();
             fxmlLoader.<MainWindow>getController().greetTheUser();
         } catch (IOException e) {
