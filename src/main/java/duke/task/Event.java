@@ -11,7 +11,7 @@ public class Event extends Task {
     private LocalDateTime dateTime;
 
     /**
-     * Construct event with date time.
+     * Constructs event with date time.
      *
      * @param done task is completed.
      * @param taskName name of task.
@@ -23,7 +23,7 @@ public class Event extends Task {
     }
 
     /**
-     * Turn Event into a string for saving to memory.
+     * Turns Event into a string for saving to memory.
      *
      * @return concise string representation of Event.
      */
@@ -33,7 +33,7 @@ public class Event extends Task {
     }
 
     /**
-     * Turn task into a human readable string form.
+     * Turns task into a human readable string form.
      *
      * @return string representation of Event.
      */
@@ -44,7 +44,7 @@ public class Event extends Task {
     }
 
     /**
-     * Change datetime value of Event.
+     * Changes datetime value of Event.
      *
      * @param dateTime date time value to be changed to.
      */

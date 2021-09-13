@@ -12,18 +12,18 @@ public abstract class Task {
     /** Task name */
     private String taskName;
     /** Indicates if task is complete*/
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Task constructor initialises Task with completed status and
      * task name.
      *
-     * @param done task is completed.
+     * @param isDone task is completed.
      * @param taskName name of task.
      */
-    public Task(boolean done, String taskName) {
+    public Task(boolean isDone, String taskName) {
         this.taskName = taskName;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public String getTaskName() {
@@ -34,7 +34,7 @@ public abstract class Task {
      * Sets done to true.
      */
     protected void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class Task {
      * @return concise string representation of task to be saved into memory
      */
     protected String encode() {
-        return done
+        return isDone
             ? String.format("1|%s", this.taskName)
             : String.format("0|%s", this.taskName);
     }
@@ -55,7 +55,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return done
+        return isDone
             ? String.format("[X] %s", this.taskName)
             : String.format("[ ] %s", this.taskName);
     }

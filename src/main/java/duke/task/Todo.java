@@ -13,7 +13,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Turn todo into a string for saving to memory.
+     * Turns todo into a string for saving to memory.
      *
      * @return concise string representation of todo.
      */
@@ -23,7 +23,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Turn task into a human readable string form.
+     * Turns task into a human readable string form.
      *
      * @return string representation of todo.
      */

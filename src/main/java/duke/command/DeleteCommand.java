@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete tasks associated to task number. Task number is equivalent to the index
+     * Deletes task associated to task number. Task number is equivalent to the index
      * of the task in task list + 1.
      *
      * @param storage storage instance initialised when duke is created.

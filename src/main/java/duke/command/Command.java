@@ -9,7 +9,7 @@ import duke.util.Storage;
  */
 public abstract class Command {
     /**
-     * Abstract method that performs a series of action to change the state of Duke
+     * Performs a series of action to change the state of Duke
      * and returns a message depending on the command type.
      *
      * @param storage storage instance initialised when duke is created.
@@ -20,7 +20,7 @@ public abstract class Command {
     public abstract String execute(Storage storage, TaskList taskList) throws DukeException;
 
     /**
-     * Verify if the user has instructed the duke to exit.
+     * Verifies if the user has instructed the duke to exit.
      *
      * @return is the command an exit command.
      */

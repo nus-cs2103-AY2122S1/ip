@@ -39,7 +39,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add the appropriate task to the task list and return a string
+     * Adds the appropriate task to the task list and return a string
      *  confirmation response.
      *
      * @param storage storage instance initialised when duke is created.
