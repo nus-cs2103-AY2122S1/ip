@@ -32,12 +32,12 @@ public class FindCommand extends Command{
             for(int word = 1; word < commandArr.length; word++){
                 if(taskList.getTask(i).getName().contains(commandArr[word])) {
                     if (!foundAnyMatch) {
-                        System.out.println("Here are the matching tasks:");
+                        ui.printResponse("Here are the matching tasks:");
                     }
                     foundAnyMatch = true;
                     numberofMatches++;
                     if(!currTaskPrinted){
-                        System.out.println((numberofMatches) + "." + taskList.getTask(i).toString());
+                        ui.printResponse((numberofMatches) + "." + taskList.getTask(i).toString());
                         currTaskPrinted = true;
                     }
 
@@ -45,7 +45,7 @@ public class FindCommand extends Command{
             }
         }
         if (!foundAnyMatch){
-            System.out.println("Sorry, we are unable to find any matching tasks");
+            ui.printResponse("Sorry, we are unable to find any matching tasks");
         }
 
 
