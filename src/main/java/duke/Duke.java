@@ -42,6 +42,7 @@ public class Duke extends Application {
     public static final String DONE_COMMAND = "do ";
     public static final String LIST_COMMAND = "l";
     public static final String BYE_COMMAND = "bye";
+    public static final String HELLO_COMMAND = "hi";
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -132,6 +133,10 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(getResponse(HELLO_COMMAND)), new ImageView(duke))
+        );
     }
 
     private void handleUserInput() {
@@ -167,10 +172,15 @@ public class Duke extends Application {
     public String getResponse(String command) {
 
         taskListInternal.initialise(file, storage);
+
+        duke = initialiseDefaultExpression();
+
         if (command.equals(BYE_COMMAND)) {
+            duke = initialiseLaughingExpression();
             return "Have a SPARKELOUS day.";
         } else if (command.equals(LIST_COMMAND)) {
 
+            duke = initialiseChillExpression();
             return listStringForm();
 
         } else if (command.startsWith(DONE_COMMAND) && command.length()>DONE_COMMAND.length()) {
@@ -181,6 +191,7 @@ public class Duke extends Application {
                 int taskNo = Integer.parseInt(numbers);
             } catch (NumberFormatException notANumber) {
                 System.err.println(notANumber);
+                duke = initialiseNervousExpression();
                 return "HELLO SIR I REQUIRE A NUMBER";
             }
 
@@ -188,13 +199,16 @@ public class Duke extends Application {
 
             //Exception handling for numbers that are too big or small
             if (TaskListInternal.lines.size() < taskNo) {
+                duke = initialiseFrustratedExpression();
                 return "HELLO SIR THAT'S TOO MUCH";
             }
             if (taskNo <= 0) {
+                duke = initialiseFrustratedExpression();
                 return "HI SIR NO NON-POSITIVE INTEGERS ALLOWED";
             }
 
             int targetIndex = taskNo-1;
+            duke = initialiseLaughingExpression();
             return markedAsDoneString(targetIndex);
 
         } else if ((command.startsWith(DELETE_COMMAND) || command.startsWith(DELETE_COMMAND_ALTERNATE))
@@ -206,6 +220,7 @@ public class Duke extends Application {
                 int taskNo = Integer.parseInt(numbers);
             } catch (NumberFormatException notANumber) {
                 System.err.println(notANumber);
+                duke = initialiseNervousExpression();
                 return "THAT'S NOT A NUMBER";
             }
 
@@ -213,13 +228,16 @@ public class Duke extends Application {
 
             //Exception handling for numbers that are too big or small
             if (TaskListInternal.lines.size() < taskNo) {
+                duke = initialiseFrustratedExpression();
                 return "THAT'S TOO MUCH";
             }
             if (taskNo <= 0) {
+                duke = initialiseFrustratedExpression();
                 return "HI SIR NO NON-POSITIVE INTEGERS ALLOWED";
             }
 
             int targetIndex = taskNo-1;
+            duke = initialiseLaughingExpression();
             return taskDeletedString(targetIndex);
 
         } else if (command.startsWith(TODO_COMMAND) && command.length()>TODO_COMMAND.length()) {
@@ -227,9 +245,10 @@ public class Duke extends Application {
 
             //Exception handling for missing name
             if (task.equals("")) {
+                duke = initialiseFrustratedExpression();
                 return "I NEED A NAME SIR!!!";
             }
-
+            duke = initialiseChillExpression();
             return todoTaskAddedString(task);
 
 
@@ -238,6 +257,7 @@ public class Duke extends Application {
 
             //Exception handling for missing date
             if (!(taskNDate.contains("/by"))) {
+                duke = initialiseFrustratedExpression();
                 return "BY WHEN? I DONT KNOW AHHHHHHHHHHH";
             }
 
@@ -247,6 +267,7 @@ public class Duke extends Application {
                 String task = taskNDate.substring(0, splitIndex - 1);
                 String date = taskNDate.substring(splitIndex + 4);
             }catch(StringIndexOutOfBoundsException error){
+                duke = initialiseNervousExpression();
                 return "THERES NO NAME or DATE OF the TASK!!!! Oh no.";
             }
 
@@ -256,6 +277,7 @@ public class Duke extends Application {
 
             //Exception handling for missing name
             if (task.equals("")) {
+                duke = initialiseFrustratedExpression();
                 return "WHATS THE NAME OF THE THING SIR";
             }
 
@@ -267,6 +289,7 @@ public class Duke extends Application {
                         "So sorry to inconvenience you.";
             }
 
+            duke = initialiseChillExpression();
             return deadlineTaskAddedString(task, date);
 
         } else if (command.startsWith(EVENT_COMMAND) && command.length()>EVENT_COMMAND.length()) {
@@ -284,6 +307,7 @@ public class Duke extends Application {
                 String task = taskNDate.substring(0, splitIndex - 1);
                 String date = taskNDate.substring(splitIndex + 4);
             }catch(StringIndexOutOfBoundsException error){
+                duke = initialiseNervousExpression();
                 return "THERES NO NAME or DATE OF the TASK!!!! Oh no.";
             }
 
@@ -293,6 +317,7 @@ public class Duke extends Application {
 
             //Exception handling for missing name
             if (task.equals("")) {
+                duke = initialiseFrustratedExpression();
                 return "WHATS THE NAME OF THE THING";
             }
 
@@ -300,21 +325,89 @@ public class Duke extends Application {
             try {
                 LocalDate test = LocalDate.parse(date);
             } catch (DateTimeException error) {
+                duke = initialiseFrustratedExpression();
                 return "WHATS THE DATE WHAT HAPPENED";
             }
 
+            duke = initialiseChillExpression();
             return eventTaskAddedString(task, date);
 
         } else if ((command.startsWith(FIND_COMMAND) || command.startsWith(FIND_COMMAND_ALTERNATE))
                 && command.length()>FIND_COMMAND.length()) {
             String searchQuery = command.substring(FIND_COMMAND.length());
+            duke = initialiseHappyExpression();
             return searchResultsString(searchQuery);
 
         } else if (command.equals(WIPE_COMMAND)) {
+            duke = initialiseChillExpression();
             return listWipedString();
+        } else if (command.equals(HELLO_COMMAND)) {
+            return "Hello. Welcome to the home of DukeyJukey, a.k.a The Dukester. " +
+                    "Sparkle up your day(TM).";
         } else {
+            duke = initialiseFrustratedExpression();
             return "(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)";
         }
+    }
+
+    /**
+     * Initialises Duke's nervous expression.
+     * Images are taken from Undertale, all rights are reserved by Toby Fox.
+     *
+     * @return Image for Duke's nervous expression.
+     */
+    Image initialiseNervousExpression(){
+        return new Image("https://static.wikia.nocookie.net/undertale/images/d/d5/Burgerpants_face_4.gif/revision/latest/scale-to-width-down/97?cb=20151103104906");
+    }
+
+    /**
+     * Initialises Duke's happy expression.
+     * Images are taken from Undertale, all rights are reserved by Toby Fox.
+     *
+     * @return Image for Duke's happy expression.
+     */
+    Image initialiseHappyExpression(){
+        return new Image("https://static.wikia.nocookie.net/undertale/images/5/55/Burgerpants_face_3.gif/revision/latest/scale-to-width-down/102?cb=20151103103710");
+    }
+
+    /**
+     * Initialises Duke's frustrated expression.
+     * Images are taken from Undertale, all rights are reserved by Toby Fox.
+     *
+     * @return Image for Duke's frustrated expression.
+     */
+    Image initialiseFrustratedExpression(){
+        return new Image("https://static.wikia.nocookie.net/undertale/images/6/65/Burgerpants_face_2.gif/revision/latest/scale-to-width-down/250?cb=20151103105419");
+    }
+
+    /**
+     * Initialises Duke's chill expression.
+     * Images are taken from Undertale, all rights are reserved by Toby Fox.
+     *
+     * @return Image for Duke's chill expression.
+     */
+    Image initialiseChillExpression(){
+        return new Image("https://static.wikia.nocookie.net/undertale/images/f/fd/Burgerpants_face_smoking.gif/revision/latest/scale-to-width-down/250?cb=20151026050528");
+    }
+
+    /**
+     * Initialises Duke's laughing expression.
+     * Images are taken from Undertale, all rights are reserved by Toby Fox.
+     *
+     * @return Image for Duke's laughing expression.
+     */
+    Image initialiseLaughingExpression(){
+        return new Image("https://static.wikia.nocookie.net/undertale/images/1/14/Burgerpants_face_%22sparkular%22.gif/revision/latest/scale-to-width-down/245?cb=20151109034748");
+    }
+
+    /**
+     * Initialises Duke's default expression.
+     * Images are taken from Undertale, all rights are reserved by Toby Fox.
+     *
+     * @return Image for Duke's default expression.
+     */
+    Image initialiseDefaultExpression(){
+        return new Image("https://static.wikia.nocookie.net/undertale/images/0/0b/Burgerpants_face_1.png/revision/latest/smart/width/250/height/250?cb=20160103175652");
     }
 
     /**
