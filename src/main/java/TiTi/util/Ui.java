@@ -142,7 +142,7 @@ public class Ui {
         String result = "";
         result += STARTER_HAPPY + "Nya! You've worked hard haven't you! \n";
 
-        if (taskList.size() == 0) {
+        if (tempTaskList.size() == 1) {
             result += STARTER_BUFFER + "I'll mark this task as done: \n";
             result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
             return result;
@@ -158,7 +158,7 @@ public class Ui {
 
     private String getDeleteResponse(TaskList tempTaskList) {
         String result = "";
-        if (taskList.size() == 0) {
+        if (tempTaskList.size() == 1) {
             result += STARTER_NORMAL + "Nya! This task shall be removed: \n";
             result += STARTER_BUFFER + "  " + tempTaskList.get(0) + " \n";
             result += STARTER_BUFFER + printTaskCount(taskList) + " \n";
