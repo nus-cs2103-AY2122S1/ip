@@ -24,7 +24,7 @@ public class TaskListDecoder {
     private static final int eventDoneIndexEnd = 5;
     private static final int taskDescriptionIndexStart = 7;
     /**
-     * * Decodes the list of string into a TaskList object.
+     * Decodes the list of string into a TaskList object.
      * @param encodedTaskList the tasks when read directly from the file
      * @return a TaskList object for further tasks operations
      */

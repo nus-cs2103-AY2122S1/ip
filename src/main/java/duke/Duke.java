@@ -62,11 +62,10 @@ public class Duke extends Application {
     }
 
     /**
-     * duke.Main function to initialise duke.Duke.
+     * Initialises duke.Duke.
      * @param args None required
      */
     public static void main(String[] args) {
-        //new duke.Duke("data/tasks.txt").run();
     }
 
     @Override
@@ -155,8 +154,8 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response from Duke.
+     * @param input the input string from the user
      */
     public String getResponse(String input) {
         String fullCommand = input;
