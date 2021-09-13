@@ -147,7 +147,7 @@ Expected outcome:
 
 ### `find` - Find tasks matching input
 
-Tasks with specified words will be added.
+Tasks that match the string given will be shown.
 
 Example of usage:
 
