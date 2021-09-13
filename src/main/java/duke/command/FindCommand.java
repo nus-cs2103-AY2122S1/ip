@@ -13,12 +13,12 @@ import duke.ui.Ui;
  * @author Benjamin Lui
  */
 public class FindCommand extends Command {
-    private String[] keyword;
+    private String keyword;
     /**
      * Constructor for the find command.
      * @param keyword the keyword to search for
      */
-    public FindCommand(String ... keyword) {
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
@@ -28,16 +28,15 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> res = new ArrayList<Task>();
-        for (String keyword : this.keyword) {
-            tasks.getAllTasks()
-                    .stream()
-                    .forEach((tsk) -> {
-                        String currTask = tsk.toString();
-                        if (currTask.contains(keyword)) {
-                            res.add(tsk);
-                        }
-                    });
-        }
-        return ui.matchingTasks() + ui.listView(res);
+        tasks
+            .getAllTasks()
+            .stream()
+            .forEach((task -> {
+                if (task.toString().contains(keyword)) {
+                    res.add(task);
+                }
+            }));
+
+        return ui.matchingTasks() + ui.list(res);
     }
 }

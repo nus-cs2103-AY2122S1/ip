@@ -85,17 +85,27 @@ public class Ui {
     }
 
     /**
-     * Displays a list view of the tasks that duke.Duke has.
+     * Displays a list view of the tasks that duke.Duke has with a header
      * @param lst the list of tasks to be displayed
      */
     public String listView(ArrayList<Task> lst) {
-        String list = "";
+        return "Here are the tasks in your list:\n" + list(lst);
+    }
+
+    /**
+     * Displays only the list view of tasks that duke.Duke has.
+     * @param lst the list of tasks to be displayed
+     * @return the list view of the tasks in the list of tasks
+     */
+
+    public String list(ArrayList<Task> lst) {
+        String listOfTasks = "";
         int counter = 1;
         for (Task tsk : lst) {
-            list += counter + ". " + tsk.toString() + System.lineSeparator();
+            listOfTasks += counter + ". " + tsk.toString() + System.lineSeparator();
             counter++;
         }
-        return "Here are the tasks in your list:\n" + list;
+        return listOfTasks;
     }
 
     /**
@@ -118,6 +128,6 @@ public class Ui {
      * Displays a message for the matching tasks.
      */
     public String matchingTasks() {
-        return "Here are the matching tasks in your list:";
+        return "Here are the matching tasks in your list:\n";
     }
 }
