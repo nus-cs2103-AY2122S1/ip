@@ -14,7 +14,7 @@ public class ParserTest {
          } catch (DukeExcpetion e) {
              System.out.println(e);
          }
-         assertEquals(out, "[D][ ] finish CS2103T code (by: Mon., 23 Aug. 2021)");
+         assertEquals("[D][ ] finish CS2103T code (by: Mon, 23 Aug 2021)", out);
     }
 
     @Test
@@ -26,6 +26,6 @@ public class ParserTest {
          } catch (DukeExcpetion e) {
              System.out.println(e);
          }
-         assertEquals(out, "[E][ ] finish CS2103T code (at: Mon., 23 Aug. 2021)");
+         assertEquals("[E][ ] finish CS2103T code (at: Mon, 23 Aug 2021)", out);
     }
 }

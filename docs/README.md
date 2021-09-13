@@ -16,6 +16,7 @@ Duke supports finve versions of tasks:
 * **Doafter** is a task to be done after a certain time.
 
 To use Duke, you simply need to type commands in the following command list.
+If you want to exit duke, you may click on the cross button on the right corner. 
 
 ## Commad List
 You may tell duke what to do for you using the following commands:
