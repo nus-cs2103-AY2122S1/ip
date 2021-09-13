@@ -1,6 +1,7 @@
 package duke.main;
 
 import duke.uimanager.Main;
+
 import javafx.application.Application;
 
 public class Launcher {

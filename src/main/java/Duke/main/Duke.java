@@ -1,12 +1,13 @@
 package duke.main;
 
 import duke.exceptions.DukeException;
+import duke.executions.Execution;
+import duke.logics.Parser;
 import duke.saveloadmanager.Storage;
 import duke.task.TaskList;
-import duke.uimanager.Ui;
+import duke.uimanager.TextUi;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * @@author Hang Zelin
@@ -21,104 +22,21 @@ public class Duke {
     private final static String FILEPATH = "data/tasks.txt";
     private final Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private final TextUi textUi;
 
     /**
      * initialize Ui, storage and load TaskLists from specific filePath for Duke
      *
      */
     public Duke() {
-        ui = new Ui();
+        textUi = new TextUi();
         storage = new Storage(FILEPATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
+            e.getErrorMessage();
         }
-    }
-
-    private String goodbye() {
-        return ui.goodbyeMessage();
-    }
-
-    private String printList() {
-        return tasks.printListUi();
-    }
-
-    private String markDone(int index) {
-        String text;
-        try {
-            tasks.detectIndex(index);
-            text = ui.markDoneUi(tasks.get(index).getTaskStatus());
-            tasks.markDone(index);
-        } catch (DukeException e) {
-            text = e.getMessage();
-        }
-        return text;
-    }
-
-    private String delete(int index) {
-        String text;
-        try {
-            tasks.detectIndex(index);
-            text = ui.deleteUi(tasks.get(index).getTaskStatus(), tasks.size() - 1);
-            tasks.delete(index);
-        } catch (DukeException e) {
-            text = e.getMessage();
-        }
-        return text;
-    }
-
-    private String tell(String time) {
-        return ui.getSpecificDateEventUi() + tasks.getSpecificDateEvent(time);
-    }
-
-    private String find(String task) {
-        return ui.findTasksUi() + tasks.findTasks(task);
-    }
-
-    private String add(String ... commands) {
-        String text;
-        try {
-            tasks.add(commands[0], commands[1], commands[2]);
-            text = ui.addUi(tasks.get(tasks.size() - 1).getTaskStatus(), tasks.size());
-        } catch (DukeException e) {
-            text = e.getMessage();
-        }
-        return text;
-    }
-
-    private String undo() {
-        String text;
-        text = ui.undoUi() + tasks.undo();
-        return text;
-    }
-
-    /**
-     * Chooses a specific task to execute via tasks type and add to the tasklists.
-     * Every time an execution is done, the task will be stored to the local file called tasks.txt
-     * via Storage.
-     *
-     * @param index Index of the task users input.
-     * @param commands JavaVarargs Commands users input.
-     */
-    public String operationForDuke(int index, String... commands) {
-        String text;
-        String operationType = commands[0], task = commands[1], time = commands[2];
-
-        text = switch (operationType) {
-               case "bye" -> goodbye();
-               case "list" -> printList();
-               case "done" -> markDone(index);
-               case "delete" -> delete(index);
-               case "tell" -> tell(time);
-               case "find" -> find(task);
-               case "undo" -> undo();
-               default -> add(operationType, task, time);
-        };
-        assert text.equals("") : "OOPS, Duke stops responding!";
-        return text;
     }
 
     /**
@@ -128,30 +46,8 @@ public class Duke {
         try {
             storage.saveListDataToFile(tasks);
         } catch (IOException e) {
-            ui.showSavingError();
+            textUi.showSavingError();
         }
-    }
-
-    private String dealWithInput(String input) {
-        ArrayList<String> parsedMessages;
-        String operationType, task, time;
-        String dukeResponse;
-        int index;
-
-        try {
-            parsedMessages = ui.returnSplitComponent(input);
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
-
-        assert parsedMessages.size() == 4 : "Error in Parser, should produce 4 key value for duke to execute!!";
-
-        operationType = parsedMessages.get(0);
-        task = parsedMessages.get(1);
-        time = parsedMessages.get(2);
-        index = Integer.parseInt(parsedMessages.get(3));
-        dukeResponse = operationForDuke(index, operationType, task, time);
-        return dukeResponse;
     }
 
     /**
@@ -164,8 +60,11 @@ public class Duke {
      * @return Response Duke gives.
      */
     public String getResponse(String input) {
-        String dukeResponse = dealWithInput(input);
+        Parser parser = new Parser(input);
+        Execution execution = new Execution(tasks, textUi, parser);
+        String dukeResponse;
 
+        dukeResponse = execution.ExecutionResponse();
         updateSaveData(); //Update the SaveData every time a round of operation is done.
 
         return dukeResponse;

@@ -1,14 +1,24 @@
-package duke.command;
+package duke.executions;
 
 import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class LastCommand {
-    private String lastOperation;
-    private Task lastTask;
-    private int lastIndex;
-    private ArrayList<Task> tasks;
+/**
+ * @@author Hang Zelin
+ *
+ * It stores previous operation info and methods to undo previous operation.
+ */
+public class LastExecution {
+    //Constant values
+    private final static String ADD = "add";
+    private final static String DELETE = "delete";
+    private final static String DONE = "done";
+
+    private final String lastOperation;
+    private final Task lastTask;
+    private final int lastIndex;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor containing all last tasks.
@@ -18,7 +28,7 @@ public class LastCommand {
      * @param lastIndex user's previous index
      * @param tasks user's taskList.
      */
-    public LastCommand(String lastOperation, Task lastTask, int lastIndex, ArrayList<Task> tasks) {
+    public LastExecution(String lastOperation, Task lastTask, int lastIndex, ArrayList<Task> tasks) {
         this.lastOperation = lastOperation;
         this.lastTask = lastTask;
         this.lastIndex = lastIndex;
@@ -45,15 +55,15 @@ public class LastCommand {
     public String undo() {
         String text;
         switch (lastOperation) {
-        case "add" -> {
+        case ADD -> {
             undoAdd();
             text = "Good! I have undone your newly added task!\n";
         }
-        case "delete" -> {
+        case DELETE -> {
             undoDelete();
             text = "Good! I have helped recovered your deleted task!\n";
         }
-        case "done" -> {
+        case DONE -> {
             resetDone();
             text = "Good! I have recovered your task to undone again!\n";
         }

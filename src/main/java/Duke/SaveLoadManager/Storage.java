@@ -1,6 +1,7 @@
 package duke.saveloadmanager;
 
-import duke.command.Parser;
+import duke.exceptions.ExceptionType;
+import duke.logics.Parser;
 import duke.exceptions.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -44,7 +45,7 @@ public class Storage {
         try {
             readDataFromFile();
         } catch (FileNotFoundException e) {
-            throw new DukeException("Cannot Read From Data.");
+            throw new DukeException(ExceptionType.FILE_READ_ERROR);
         }
 
         return this.list;
@@ -106,9 +107,6 @@ public class Storage {
                 this.list.add(newTask);
             }
         }
-
-
-
     }
 
     /**

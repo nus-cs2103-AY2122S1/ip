@@ -1,13 +1,18 @@
 package duke.uimanager;
 
 import duke.main.Duke;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+
 
 /**
  * @@author Hang Zelin
@@ -24,15 +29,30 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Duke duke;
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private BackgroundImage backgroundImage;
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+
+
+    private void setBackgroundImage() {
+        BackgroundSize backgroundSize;
+
+        backgroundSize = new BackgroundSize(900, 700,
+                true, true, true, true);
+        backgroundImage = new BackgroundImage(new Image("/background/background.jpg")
+                ,null,null, null, backgroundSize);
+    }
 
     /**
      * Initialize DialogBox and MainWindow stuff.
      */
     @FXML
     public void initialize() {
+        //Set scrollPane
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //Set background
+        this.setBackgroundImage();
+        dialogContainer.setBackground(new Background(backgroundImage));
     }
 
     /**
@@ -42,8 +62,8 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
-        Ui ui = new Ui();
-        String response = ui.helloMessage();
+        TextUi textUi = new TextUi();
+        String response = textUi.helloMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );

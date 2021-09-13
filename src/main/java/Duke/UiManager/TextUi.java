@@ -1,10 +1,5 @@
 package duke.uimanager;
 
-import duke.command.Parser;
-import duke.exceptions.DukeException;
-
-import java.util.ArrayList;
-
 /**
  * @@author Hang Zelin
  *
@@ -12,7 +7,7 @@ import java.util.ArrayList;
  * It will print out the information for each type of operation execution. And it will also accept users'
  * input for each round of task execution.
  */
-public class Ui {
+public class TextUi {
 
     /**
      * Returns Hello Message to users.
@@ -104,37 +99,6 @@ public class Ui {
 
     public String undoUi() {
         String text = "Okay, I have helped undo your most recent command!\n";
-        return text;
-    }
-
-    /**
-     * Returns the key 4 information from users' input encapsulated in a ArrayList of String.
-     * They are: operationType, task, time, index. They will be useful when executing in Duke programme.
-     *
-     * @return Size of 4 ArrayList contains Message of operationType, task, time and index.
-     * @throws DukeException Throws when the input cannot be parsed.
-     */
-    public ArrayList<String> returnSplitComponent(String input) throws DukeException {
-        Parser parser;
-        ArrayList<String> parsedMessageList = new ArrayList<>();
-
-        parser = new Parser(input);
-
-        parsedMessageList.add(parser.getOperationType());
-        parsedMessageList.add(parser.getTask());
-        parsedMessageList.add(parser.getTime());
-        parsedMessageList.add(parser.getIndex().toString());
-
-        return parsedMessageList;
-    }
-
-    /**
-     * Returns the Loading Error Text.
-     *
-     * @return Error Message in loading.
-     */
-    public String showLoadingError() {
-        String text = "Cannot Load From Data.\n";
         return text;
     }
 

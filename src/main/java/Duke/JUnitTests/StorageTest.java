@@ -44,6 +44,4 @@ public class StorageTest {
             assertEquals("Cannot Read From Data.", e.getMessage());
         }
     }
-
-
 }

@@ -1,10 +1,11 @@
-package duke.command;
+package duke.logics;
 
 import duke.exceptions.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * @@author Hang Zelin
@@ -16,8 +17,22 @@ import java.time.format.DateTimeParseException;
  * Some invalid input Messages may cause throwing DukeException.
  */
 public class Parser {
+    //Constant values
+    private final static String EMPTY = "";
+    private final static String SLASH = "/";
+    private final static String SPACE = " ";
+    private final static String DASH = "-";
+    private final static String PIPE = "|";
+    private final static String BY = "/by";
+    private final static String AT = "/at";
+    private final static String DEADLINE = "deadline";
+    private final static String EVENT = "event";
+    private final static String TELL = "tell";
+    private final static char FIRST_LETTER_DEADLINE = 'D';
+    private final static char FIRST_LETTER_EVENT = 'E';
     private final String message;
     private final ParserExceptionDetector parserExceptionDetector;
+
 
     /**
      * @param message Message users take in to be parsed.
@@ -48,11 +63,11 @@ public class Parser {
 
     private LocalDateTime parseTimeInFormat1(String time) {
         int day, month, year, hour, minute;
-        int endIndex1 = time.indexOf("/");
-        int endIndex2 = time.lastIndexOf(" ");
+        int endIndex1 = time.indexOf(SLASH);
+        int endIndex2 = time.lastIndexOf(SPACE);
         day = Integer.parseInt(time.substring(0, endIndex1));
         int dayInteger = day;
-        int endIndex3 = time.indexOf("/", Integer.toString(dayInteger).length() + 1);
+        int endIndex3 = time.indexOf(SLASH, Integer.toString(dayInteger).length() + 1);
 
         month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
         year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
@@ -84,9 +99,9 @@ public class Parser {
      */
     public LocalDateTime parseTime(String time) {
         LocalDateTime parsedTime;
-        boolean isFormat1 = time.contains("/") && time.indexOf("/", 3) != -1
-                && time.contains(" ") && !time.contains("-");
-        boolean isFormat2 = time.contains("-");
+        boolean isFormat1 = time.contains(SLASH) && time.indexOf(SLASH, 3) != -1
+                && time.contains(SPACE) && !time.contains(DASH);
+        boolean isFormat2 = time.contains(DASH);
 
         if (isFormat1) {
             parsedTime = parseTimeInFormat1(time);
@@ -99,6 +114,24 @@ public class Parser {
     }
 
     /**
+     * Returns the key 4 information from users' input encapsulated in a ArrayList of String.
+     * They are: operationType, task, time, index. They will be useful when executing in Duke programme.
+     *
+     * @return Size of 4 ArrayList contains Message of operationType, task, time and index.
+     * @throws DukeException Throws when the input cannot be parsed.
+     */
+    public ArrayList<String> returnSplitComponent() throws DukeException {
+        ArrayList<String> parsedMessageList = new ArrayList<>();
+
+        parsedMessageList.add(getOperationType());
+        parsedMessageList.add(getTask());
+        parsedMessageList.add(getTime());
+        parsedMessageList.add(getIndex().toString());
+
+        return parsedMessageList;
+    }
+
+    /**
      * Returns a String which is a task info in a local save data.
      * Note: you must specify it as local data, otherwise it can go wrong.
      *
@@ -108,8 +141,8 @@ public class Parser {
         String task;
         char taskType = message.charAt(0);
         //Save Data taskType is in the form of 'D', 'E' or 'T'
-        if (taskType == 'D' || taskType == 'E') {
-            task = message.substring(8, message.indexOf("|", 8) - 1);
+        if (taskType == FIRST_LETTER_DEADLINE || taskType == FIRST_LETTER_EVENT) {
+            task = message.substring(8, message.indexOf(PIPE, 8) - 1);
         } else {
             task = message.substring(8);
         }
@@ -128,10 +161,10 @@ public class Parser {
 
         char taskType = message.charAt(0);
         //Save Data taskType is in the form of 'D', 'E' or 'T'
-        if ((taskType == 'D' || taskType == 'E') && message.contains("/")) {
-            time = message.substring(message.lastIndexOf("|") + 2);
+        if ((taskType == FIRST_LETTER_DEADLINE || taskType == FIRST_LETTER_EVENT) && message.contains(SLASH)) {
+            time = message.substring(message.lastIndexOf(PIPE) + 2);
         } else {
-            time = "";
+            time = EMPTY;
         }
         return time;
     }
@@ -146,8 +179,8 @@ public class Parser {
     public String getOperationType() throws DukeException {
         String operationType;
 
-        if (message.contains(" ")) {
-            operationType = message.substring(0, message.indexOf(" "));
+        if (message.contains(SPACE)) {
+            operationType = message.substring(0, message.indexOf(SPACE));
         } else {
             operationType = message;
         }
@@ -168,10 +201,10 @@ public class Parser {
 
         parserExceptionDetector.detectGetTaskException();
 
-        if (message.contains("/")) {
-            task = message.substring(message.indexOf(" ") + 1, message.indexOf("/") - 1);
+        if (message.contains(SLASH)) {
+            task = message.substring(message.indexOf(SPACE) + 1, message.indexOf(SLASH) - 1);
         } else {
-            task = message.substring(message.indexOf(" ") + 1);
+            task = message.substring(message.indexOf(SPACE) + 1);
         }
         return task;
     }
@@ -184,16 +217,16 @@ public class Parser {
      * fit the format for a specific task type.
      */
     public String getTime() throws DukeException {
-        String time = "";
+        String time = EMPTY;
 
         parserExceptionDetector.detectGetTimeException();
 
-        if (message.startsWith("deadline")) {
-            time = message.substring(message.indexOf("/by") + 4);
-        } else if (message.startsWith("event")) {
-            time = message.substring(message.indexOf("/at") + 4);
-        } else if (message.startsWith("tell")) {
-            time = message.substring(message.indexOf(" ") + 1);
+        if (message.startsWith(DEADLINE)) {
+            time = message.substring(message.indexOf(BY) + 4);
+        } else if (message.startsWith(EVENT)) {
+            time = message.substring(message.indexOf(AT) + 4);
+        } else if (message.startsWith(TELL)) {
+            time = message.substring(message.indexOf(SPACE) + 1);
         }
 
         return time;
@@ -212,7 +245,7 @@ public class Parser {
             return -1;
         }
 
-        index = Integer.parseInt(message.substring(message.indexOf(" ") + 1)) - 1;
+        index = Integer.parseInt(message.substring(message.indexOf(SPACE) + 1)) - 1;
 
         return index;
     }

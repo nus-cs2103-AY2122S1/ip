@@ -1,6 +1,7 @@
-package duke.command;
+package duke.logics;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.ExceptionType;
 import duke.task.TaskList;
 
 /**
@@ -10,6 +11,18 @@ import duke.task.TaskList;
  * command inside.
  */
 public class ParserExceptionDetector {
+    //Constant values
+    private final static String SLASH = "/";
+    private final static String SPACE = " ";
+    private final static String BY = "/by";
+    private final static String AT = "/at";
+    private final static String TODO = "todo";
+    private final static String DEADLINE = "deadline";
+    private final static String DONE = "done";
+    private final static String DELETE = "delete";
+    private final static String EVENT = "event";
+    private final static String FIND = "find";
+    private final static String TELL = "tell";
     private final String message;
 
     /**
@@ -37,7 +50,7 @@ public class ParserExceptionDetector {
                 return;
             }
         }
-        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException(ExceptionType.UNKNOWN_OPERATION);
     }
 
     /**
@@ -46,16 +59,16 @@ public class ParserExceptionDetector {
      * @throws DukeException Exception is thrown when task cannot be read
      */
     public void detectGetTaskException() throws DukeException {
-        boolean isCorrectType = message.startsWith("deadline") || message.startsWith("event")
-                || message.startsWith("todo") || message.startsWith("find");
-        boolean isInCorrectFormat = message.contains(" ");
+        boolean isCorrectType = message.startsWith(DEADLINE) || message.startsWith(EVENT)
+                || message.startsWith(TODO) || message.startsWith(FIND);
+        boolean isInCorrectFormat = message.contains(SPACE);
 
         if (!isCorrectType) {
             return;
         }
 
         if (!isInCorrectFormat) {
-            throw new DukeException("OOPS!!! The description of a " + message + " cannot be empty.");
+            throw new DukeException(ExceptionType.NO_TASK_ERROR);
         }
     }
 
@@ -65,27 +78,27 @@ public class ParserExceptionDetector {
      * @throws DukeException Exception is thrown when the format of time is wrong or time info is missing.
      */
     public void detectGetTimeException() throws DukeException {
-        boolean isContainTime = message.startsWith("todo") || message.startsWith("deadline")
-                || message.startsWith("event") || message.startsWith("tell");
-        boolean isDeadlineFormat = message.contains("/") && message.contains("/by");
-        boolean isEventFormat = message.contains("/") && message.contains("/at");
-        boolean isTellFormat = message.contains(" ");
+        boolean isContainTime = message.startsWith(TODO) || message.startsWith(DEADLINE)
+                || message.startsWith(EVENT) || message.startsWith(TELL);
+        boolean isDeadlineFormat = message.contains(SLASH) && message.contains(BY);
+        boolean isEventFormat = message.contains(SLASH) && message.contains(AT);
+        boolean isTellFormat = message.contains(SPACE);
 
-        //throw exceptions for deadline or events' format.
         if (!isContainTime) {
             return;
         }
 
-        if (message.startsWith("deadline") && !isDeadlineFormat) {
-            throw new DukeException("OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
+        //throw exceptions for deadline or events' format.
+        if (message.startsWith(DEADLINE) && !isDeadlineFormat) {
+            throw new DukeException(ExceptionType.DEADLINE_FORMAT_ERROR);
         }
 
-        if (message.startsWith("event") && !isEventFormat) {
-            throw new DukeException("OOPS!!! I'm sorry, but the format of event is wrong :-(");
+        if (message.startsWith(EVENT) && !isEventFormat) {
+            throw new DukeException(ExceptionType.EVENT_FORMAT_ERROR);
         }
 
-        if (message.startsWith("tell") && !isTellFormat) {
-            throw new DukeException("OOPS!!! I'm sorry, but the format of tell is wrong :-(");
+        if (message.startsWith(TELL) && !isTellFormat) {
+            throw new DukeException(ExceptionType.EVENT_FORMAT_ERROR);
         }
     }
 
@@ -95,7 +108,7 @@ public class ParserExceptionDetector {
      * @return Boolean value indicates whether there is no value for index.
      */
     public boolean detectIndexException() {
-        boolean isCorrectFormat = message.contains(" ") && (message.startsWith("done") || message.startsWith("delete"));
+        boolean isCorrectFormat = message.contains(SPACE) && (message.startsWith(DONE) || message.startsWith(DELETE));
 
         return isCorrectFormat;
     }

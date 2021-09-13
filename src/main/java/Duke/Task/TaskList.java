@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.command.LastCommand;
-import duke.command.Parser;
+import duke.exceptions.ExceptionType;
+import duke.executions.LastExecution;
+import duke.logics.Parser;
 import duke.exceptions.DukeException;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ import java.util.Locale;
 public class TaskList {
 
     private final ArrayList<Task> tasks;
-    private LastCommand lastCommand;
+    private LastExecution lastExecution;
 
     /**
      * Constructor to store all the tasks in a Generic ArrayList.
@@ -27,7 +28,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        this.lastCommand = new LastCommand("Null", null, 0, null);
+        this.lastExecution = new LastExecution("Null", null, 0, null);
     }
 
     /**
@@ -92,8 +93,8 @@ public class TaskList {
      * @return Duke's response for undo message.
      */
     public String undo() {
-        String text = lastCommand.undo();
-        this.lastCommand = new LastCommand("Null", null, 0, null);
+        String text = lastExecution.undo();
+        this.lastExecution = new LastExecution("Null", null, 0, null);
         return text;
     }
 
@@ -127,7 +128,7 @@ public class TaskList {
     public void markDone(int index) {
         Task task = this.tasks.get(index);
         task.markDone();
-        lastCommand = new LastCommand("done", task, index, tasks);
+        lastExecution = new LastExecution("done", task, index, tasks);
     }
 
     /**
@@ -138,7 +139,7 @@ public class TaskList {
     public void delete(int index) {
         Task task = this.tasks.get(index);
         this.tasks.remove(index);
-        lastCommand = new LastCommand("delete", task, index, tasks);
+        lastExecution = new LastExecution("delete", task, index, tasks);
     }
 
     private void createNewTask(String taskType, String task, LocalDateTime parsedTime) {
@@ -148,7 +149,7 @@ public class TaskList {
             if (isMatch) {
                 Task newTask = t.assignTaskType(t, task, parsedTime);
                 tasks.add(newTask);
-                lastCommand = new LastCommand("add", newTask, tasks.size() - 1, tasks);
+                lastExecution = new LastExecution("add", newTask, tasks.size() - 1, tasks);
                 break;
             }
         }
@@ -198,7 +199,7 @@ public class TaskList {
      */
     public void detectIndex(int index) throws DukeException {
         if (index < 0 || index >= this.tasks.size()) {
-            throw new DukeException("OOPS!!! I'm sorry, but the index is invalid :-(");
+            throw new DukeException(ExceptionType.WRONG_INDEX_ERROR);
         }
     }
 

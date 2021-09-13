@@ -1,6 +1,6 @@
 package duke.junittests;
 
-import duke.command.Parser;
+import duke.logics.Parser;
 import duke.exceptions.DukeException;
 import org.testng.annotations.Test;
 
@@ -85,6 +85,4 @@ public class ParserTest {
         assertEquals(14, new Parser("done 15").getIndex());
         assertEquals(20312130, new Parser("done 20312131").getIndex());
     }
-
-
 }
