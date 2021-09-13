@@ -2,11 +2,11 @@ package duke.util.windows;
 
 import java.io.IOException;
 
-import duke.util.controller.Duke;
+import duke.util.commons.Messages;
+import duke.util.controller.Sariel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -18,7 +18,7 @@ public class Main extends Application {
 
     private static final String saveFilePath = "save.txt";
     private static final String tempFilePath = "temp.txt";
-    private Duke duke = new Duke(saveFilePath, tempFilePath);
+    private Sariel sariel = new Sariel(saveFilePath, tempFilePath);
 
     @Override
     public void start(Stage stage) {
@@ -29,9 +29,11 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(590);
             stage.setMinWidth(770);
-            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/daUser.png")));
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            TaskInputWindow.setDuke(duke);
+            stage.getIcons().add(Messages.ICON);
+            fxmlLoader.<MainWindow>getController().setSariel(sariel);
+            TaskInputWindow.setDuke(sariel);
+            stage.setTitle("Sariel");
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

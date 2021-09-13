@@ -21,7 +21,7 @@ import duke.util.ui.Ui;
 
 
 
-public class DukeTester {
+public class SarielTester {
 
     /**
      * Function to test the dated task table.

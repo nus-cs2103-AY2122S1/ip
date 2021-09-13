@@ -3,12 +3,13 @@ package duke.util.windows;
 import java.time.LocalDate;
 
 import duke.util.commons.Messages;
-import duke.util.controller.Duke;
+import duke.util.controller.Sariel;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,7 +23,7 @@ public class TaskInputWindow extends AnchorPane {
 
     private static final int ERROR_WRAPPING_WIDTH = 200;
     private static Stage currentStage;
-    private static Duke duke;
+    private static Sariel sariel;
 
     @FXML
     private TabPane tabs;
@@ -54,6 +55,7 @@ public class TaskInputWindow extends AnchorPane {
     public void initialize() {
         deadlineErrorMessage.setWrappingWidth(ERROR_WRAPPING_WIDTH);
         eventErrorMessage.setWrappingWidth(ERROR_WRAPPING_WIDTH);
+
     }
 
 
@@ -64,6 +66,8 @@ public class TaskInputWindow extends AnchorPane {
      */
     public static void setStage(Stage stage) {
         TaskInputWindow.currentStage = stage;
+        stage.setTitle("Task Input Window");
+        stage.getIcons().add(Messages.ICON);
         //make the input form not resizable
         stage.setResizable(false);
     }
@@ -71,10 +75,10 @@ public class TaskInputWindow extends AnchorPane {
     /**
      * Sets the Duke for the input window.
      *
-     * @param duke The duke to put input via.
+     * @param sariel The duke to put input via.
      */
-    public static void setDuke(Duke duke) {
-        TaskInputWindow.duke = duke;
+    public static void setDuke(Sariel sariel) {
+        TaskInputWindow.sariel = sariel;
     }
 
 
@@ -84,8 +88,8 @@ public class TaskInputWindow extends AnchorPane {
     @FXML
     private void handleAddTodo() {
         String val = todoDescription.getText();
-        duke.addTodo(val);
-        duke.printList();
+        sariel.addTodo(val);
+        sariel.printList();
         this.clearContent();
 
     }
@@ -101,8 +105,8 @@ public class TaskInputWindow extends AnchorPane {
         }
         String val = deadlineDescription.getText();
         LocalDate date = deadlineDate.getValue();
-        duke.addDeadline(val, date);
-        duke.printList();
+        sariel.addDeadline(val, date);
+        sariel.printList();
         this.clearContent();
     }
 
@@ -119,8 +123,8 @@ public class TaskInputWindow extends AnchorPane {
 
         String val = eventDescription.getText();
         LocalDate date = eventDate.getValue();
-        duke.addEvent(val, date);
-        duke.printList();
+        sariel.addEvent(val, date);
+        sariel.printList();
         this.clearContent();
     }
 

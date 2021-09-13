@@ -31,7 +31,7 @@ import javafx.scene.text.Text;
  *
  *
  */
-public class Duke {
+public class Sariel {
     private static final String saveDirectory = "data/";
     private static final String saveFilePath = "save.txt";
     private static final String tempFilePath = "temp.txt";
@@ -51,7 +51,7 @@ public class Duke {
      * @param filename The file to save at.
      * @param tempFilePath The tempfile name to use.
      */
-    public Duke(String filename, String tempFilePath) {
+    public Sariel(String filename, String tempFilePath) {
         this.tasks = new TaskList();
         this.dateTaskTable = new DateTaskTable();
         this.parser = new Parser(this.ui, this.tasks, this.dateTaskTable);
@@ -197,12 +197,12 @@ public class Duke {
      * this method call not used?
      */
     public void printList() {
-        Duke.out.setItems(FXCollections.observableArrayList(this.displayTasks));
+        Sariel.out.setItems(FXCollections.observableArrayList(this.displayTasks));
     }
 
 
     public static void setOut(ListView<Task> viewer) {
-        Duke.out = viewer;
+        Sariel.out = viewer;
     }
 
 

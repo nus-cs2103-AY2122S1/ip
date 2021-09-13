@@ -3,7 +3,7 @@ package duke.util.windows;
 import java.io.IOException;
 
 import duke.util.commons.Messages;
-import duke.util.controller.Duke;
+import duke.util.controller.Sariel;
 import duke.util.tasks.Task;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,11 +49,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField searchField;
 
-    private Duke duke;
+    private Sariel sariel;
 
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = Messages.USER;
+    private Image dukeImage = Messages.SARIEL;
 
 
     /**
@@ -68,6 +68,7 @@ public class MainWindow extends AnchorPane {
         );
 
     }
+
 
     private void scrollPanePropertyInit() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -85,11 +86,12 @@ public class MainWindow extends AnchorPane {
      *
      * @param d The duke to be used.
      */
-    public void setDuke(Duke d) {
+    public void setSariel(Sariel d) {
         assert d != null : "Duke that is set is null";
-        duke = d;
-        duke.setOut(listOfTasks);
-        duke.printList();
+        sariel = d;
+        sariel.setOut(listOfTasks);
+
+        sariel.printList();
     }
 
 
@@ -100,7 +102,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = sariel.getResponse(input);
         DialogBox inputDialog = DialogBox.getUserDialog(input, userImage);
         DialogBox outputDialog = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(
@@ -109,7 +111,7 @@ public class MainWindow extends AnchorPane {
         );
         dialogContainer.setVgrow(inputDialog, Priority.ALWAYS);
         dialogContainer.setVgrow(outputDialog, Priority.ALWAYS);
-        duke.printList();
+        sariel.printList();
         userInput.clear();
     }
 
@@ -148,8 +150,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleRemoveEvent() {
-        duke.removeHandler(this.listOfTasks.getSelectionModel().getSelectedItems());
-        duke.printList();
+        sariel.removeHandler(this.listOfTasks.getSelectionModel().getSelectedItems());
+        sariel.printList();
     }
 
     /**
@@ -162,7 +164,7 @@ public class MainWindow extends AnchorPane {
         for (int i = 0; i < tasks.size(); i++) {
             tasks.get(i).done();
         }
-        duke.printList();
+        sariel.printList();
     }
 
     @FXML
@@ -172,13 +174,13 @@ public class MainWindow extends AnchorPane {
             handleClearButton();
             return;
         }
-        duke.filterDisplayList(task -> task.containsPattern(searchField.getText()));
+        sariel.filterDisplayList(task -> task.containsPattern(searchField.getText()));
 
     }
 
     @FXML
     private void handleClearButton() {
-        duke.filterDisplayList(task -> true);
+        sariel.filterDisplayList(task -> true);
     }
 
 

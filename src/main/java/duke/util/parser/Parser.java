@@ -102,6 +102,8 @@ public class Parser {
         case LIST:
             listCommandFromArray(commands, this.taskList);
             break;
+        case DELETE:
+            //fallthrough
         case DLIST:
             //fallthrough
         case DONE:
