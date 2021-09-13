@@ -30,6 +30,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             scene.getRoot().setStyle("-fx-font-family: 'Arial'"); //fix
+            stage.setTitle("StuDo");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
