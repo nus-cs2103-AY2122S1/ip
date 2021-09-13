@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents a DukeException, which is a subtype of Exception.
  * Encapsulates numerous errors which could occur during runtime
- * due to invalid user input.
+ * due to invalid user input or other reasons.
  *
  * @author Joshua Yong
  */

@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an event which is a subtype of Task.
- * An event encapsulates an additional LocalDateTime
- * which represents the timing of the event.
+ * Represents an Event which is a subtype of Task.
+ * An Event encapsulates an additional LocalDateTime
+ * which represents the timing of the Event.
  *
  * @author Joshua Yong
  */
@@ -17,8 +17,8 @@ public class Event extends Task {
     /**
      * Class constructor.
      *
-     * @param description The given event description.
-     * @param at The timing of the event.
+     * @param description The given Event description.
+     * @param at The timing of the Event.
      */
     public Event(String description, LocalDateTime at) {
         super(description);
@@ -27,9 +27,9 @@ public class Event extends Task {
 
 
     /**
-     * Outputs this event as a String.
+     * Returns this Event as a String.
      *
-     * @return String representation of the event.
+     * @return String representation of the Event.
      */
     @Override
     public String toString() {

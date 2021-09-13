@@ -28,10 +28,11 @@ public class Duke {
     }
 
     /**
-     * Gets the appropriate response to be shown to the user given a user input.
+     * Returns the appropriate String response to be shown to the user given
+     * a user input.
      *
      * @param input The user input.
-     * @return The response to be shown to the user.
+     * @return The String response to be shown to the user.
      */
     public String getResponse(String input) {
         Parser parser = new Parser(tasks);

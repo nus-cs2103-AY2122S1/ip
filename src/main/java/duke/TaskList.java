@@ -23,9 +23,9 @@ public class TaskList {
     }
 
     /**
-     * Overloaded class constructor which initializes the TaskList with existing tasks.
+     * Overloaded class constructor which initializes the TaskList with existing Tasks.
      *
-     * @param tasks An ArrayList of tasks to be stored in the TaskList.
+     * @param tasks An ArrayList of Tasks to be stored in the TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Sets the specified task from the TaskList as done.
+     * Sets the specified Task from the TaskList as done.
      *
      * @param i Index of the Task to be set as done.
      */
@@ -45,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Removes the specified task from the TaskList.
+     * Removes the specified Task from the TaskList.
      *
      * @param i Index of the Task to be removed.
      */
@@ -54,7 +54,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the given task to the TaskList.
+     * Adds the given Task to the TaskList.
      *
      * @param task The Task to be added.
      */
@@ -72,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a formatted String of all tasks in the TaskList.
+     * Returns a formatted String of all Tasks in the TaskList.
      * The String contains all Tasks in the TaskList with their task number.
      *
      * @return A formatted String representation of the TaskList.
@@ -87,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a formatted String of all tasks in the TaskList matching a given keyword.
+     * Returns a formatted String of all Tasks in the TaskList matching a given keyword.
      * The String contains all Tasks in the TaskList with numbering.
      *
      * @param keyword The keyword which is filtered for.
@@ -107,7 +107,7 @@ public class TaskList {
     /**
      * Returns a formatted String of all Deadlines in the TaskList which
      * <ul>
-     *     <li>are not done, and</li>
+     *     <li> are not done, and</li>
      *     <li> are due within 1 week of the current date.</li>
      * </ul>
      *

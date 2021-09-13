@@ -44,6 +44,10 @@ public class MainWindow extends AnchorPane {
                 .add(DialogBox.getDukeDialog("Hello! I'm Duke.\nWhat can I do for you?", dukeImage));
     }
 
+    /**
+     * Creates a dialog box containing the user's upcoming Deadlines as retrieved by Storage and appends it to the
+     * dialog container.
+     */
     public void displayUpcomingTasks() {
         dialogContainer.getChildren()
                 .add(DialogBox.getDukeDialog(duke.getUpcomingDeadlinesString(), dukeImage));

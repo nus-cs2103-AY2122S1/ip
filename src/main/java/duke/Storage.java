@@ -37,7 +37,7 @@ public class Storage {
      * Parses the associated file, returning a collection of Tasks.
      *
      * @return An ArrayList of Tasks corresponding to the data in the file.
-     * @throws DukeException If the file is formatted incorrectly or cannot be found
+     * @throws DukeException If the file is formatted incorrectly or cannot be found.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -84,11 +84,11 @@ public class Storage {
     }
 
     /**
-     * Writes task data to the associated file.
+     * Writes Task data from a TaskList to the associated file.
      *
      * @param tasks The given TaskList.
      */
-    public void save(TaskList tasks) { // TODO: Tidy this
+    public void save(TaskList tasks) {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         try {

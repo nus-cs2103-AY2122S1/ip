@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a deadline which is a subtype of Task.
- * A deadline encapsulates an additional LocalDate
- * which represents the date of the deadline.
+ * Represents a Deadline which is a subtype of Task.
+ * A Deadline encapsulates an additional LocalDate
+ * which represents the due date of the Deadline.
  *
  * @author Joshua Yong
  */
@@ -17,8 +17,8 @@ public class Deadline extends Task {
     /**
      * Class constructor.
      *
-     * @param description The given deadline description.
-     * @param by The deadline date.
+     * @param description The given Deadline description.
+     * @param by The Deadline LocalDate.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -30,9 +30,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Outputs this deadline as a String.
+     * Returns this Deadline as a String.
      *
-     * @return String representation of the deadline.
+     * @return String representation of the Deadline.
      */
     @Override
     public String toString() {

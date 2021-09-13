@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a todo which is a subtype of Task.
+ * Represents a Todo which is a subtype of Task.
  *
  * @author Joshua Yong
  */
@@ -10,16 +10,16 @@ public class ToDo extends Task {
     /**
      * Class constructor.
      *
-     * @param description The description of the todo.
+     * @param description The description of the Todo.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * Outputs this todo as a String.
+     * Outputs this Todo as a String.
      *
-     * @return String representation of the event.
+     * @return String representation of the ToDo.
      */
     @Override
     public String toString() {

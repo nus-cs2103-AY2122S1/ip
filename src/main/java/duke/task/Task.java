@@ -1,8 +1,8 @@
 package duke.task;
 
 /**
- * Represents a task which encapsulates a description
- * and a boolean flag indicating if the task is complete.
+ * Represents a Task which encapsulates a description
+ * and a boolean flag indicating if the Task is complete.
  *
  * @author Joshua Yong
  */
@@ -27,7 +27,8 @@ public class Task {
      * @return String representation of the Task.
      */
     public String toString() {
-        String statusIcon = this.isDone ? "[X]" : "[ ]"; // mark done task with X
+        // Mark done task with X
+        String statusIcon = this.isDone ? "[X]" : "[ ]";
         return statusIcon + " " + description;
     }
 
@@ -46,9 +47,9 @@ public class Task {
     }
 
     /**
-     * Gets the description of the task.
+     * Gets the description of the Task.
      *
-     * @return Description of the task.
+     * @return Description of the Task.
      */
     public String getDescription() {
         return this.description;
