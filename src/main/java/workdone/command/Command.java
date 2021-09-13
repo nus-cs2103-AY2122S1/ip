@@ -52,8 +52,6 @@ public abstract class Command {
      */
     @Override
     public String toString() {
-        return "____________________________________________________________\n"
-                + this.message
-                + "____________________________________________________________\n";
+        return this.message;
     }
 }
