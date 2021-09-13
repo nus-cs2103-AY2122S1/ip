@@ -45,7 +45,7 @@ public class TaskList implements Serializable {
      */
     public String printList() {
         assert(taskList.size() >= 0);
-        String response = "";
+        String response = "Here are the items in your list";
         for (int i = 0; i < taskList.size(); i++) {
             int currIndex = i + 1;
             Task currTask = taskList.get(i);

@@ -17,7 +17,7 @@ public class Ui {
      * @return String message containing all the commands.
      */
     public String helpMessage() {
-        String helpIntro = "Here are the list of commands you can use!\n\n";
+        String helpIntro = "List of commands you can use you dummy!\n\n";
         String todoHelp = "todo - 'todo <insert task name>'\n\n";
         String deadlineHelp = "deadline - 'deadline <insert task name> /by <dd/mm/yyyy> <HHmm>'\n\n";
         String eventHelp = "event - 'event <insert task name> /at <time of event>'\n\n";
