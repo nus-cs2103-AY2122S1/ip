@@ -7,7 +7,6 @@ public class Launcher {
 
     /**
      * Main method for Duke.
-     *
      * @param args Ignored and unused command line arguments.
      */
     public static void main(String[] args) {

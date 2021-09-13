@@ -55,8 +55,7 @@ public class Storage {
                     task.markAsDone();
                 }
                 arr.add(task);
-            }
-            else if (readLine.contains("[D]")) {
+            } else if (readLine.contains("[D]")) {
                 String[] spl = readLine.split("/");
 
                 LocalDate date = LocalDate.parse(spl[1].substring(3, 13));
@@ -66,8 +65,7 @@ public class Storage {
                     task.markAsDone();
                 }
                 arr.add(task);
-            }
-            else {
+            } else {
                 String[] spl = readLine.split("/");
 
                 LocalDate startDate = LocalDate.parse(spl[1].substring(3 , 13));
@@ -92,7 +90,7 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> arr) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        for(Task str: arr) {
+        for (Task str: arr) {
             fw.write(str.toStore() + System.lineSeparator());
         }
         fw.close();
