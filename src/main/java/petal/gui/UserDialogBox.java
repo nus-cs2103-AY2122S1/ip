@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -22,11 +21,10 @@ public class UserDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private Circle circle;
+    private Circle profilePicture;
 
-    private final Image img = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/user.png")));
-
+    private final Image userPicture = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/lauren_tsai.png")));
     /**
      * Constructs a UserDialogBox instance
      *
@@ -43,10 +41,11 @@ public class UserDialogBox extends HBox {
         }
         dialog.setText(text);
 
-        circle.setStroke(Color.CYAN);
-        circle.setFill(new ImagePattern(img));
-    }
+        PictureEditor.setGlow(profilePicture, PictureEditor.COLOR_TEAL, 60);
+        PictureEditor.setOutline(profilePicture, PictureEditor.COLOR_TEAL);
 
+        profilePicture.setFill(new ImagePattern(userPicture));
+    }
     /**
      * Returns a UserDialogBox instance with the input
      *

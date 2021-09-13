@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import petal.components.TaskList;
-import petal.task.Task;
 
 public class TaskListStub extends TaskList {
 
@@ -36,17 +35,6 @@ public class TaskListStub extends TaskList {
     public String deleteTask(String index) {
         TaskStub toBeDeleted = new TaskStub();
         return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have 1 task(s)!";
-    }
-
-    @Override
-    public String addTask(Task task) {
-        return "Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + " task!";
-    }
-
-    @Override
-    public String handleTask(String type, String message) {
-        Task task = new TaskStub();
-        return addTask(task);
     }
 
     @Override

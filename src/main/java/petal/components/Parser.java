@@ -69,7 +69,8 @@ public class Parser {
      * @throws DateTimeParseException Thrown if string cannot be represented as a time object
      */
     public static LocalTime parseTime(String time) throws DateTimeParseException {
-        String formattedTime = time.indexOf(":") > 0 ? time
+        String formattedTime = time.indexOf(":") > 0
+                ? time
                : time.substring(0, 2) + ":" + time.substring(2);
         return LocalTime.parse(formattedTime);
     }

@@ -38,14 +38,14 @@ public class Storage {
      */
     public Storage(TaskList taskList) {
         this.taskList = taskList;
-        this.folderPath = System.getProperty("user.dir") + "/PetalData";
-        this.saveFilePath = folderPath + "/Tasks.txt";
-        this.archiveFilePath = folderPath + "/Archive.txt";
+        folderPath = System.getProperty("user.home") + File.separator + "PetalData";
+        saveFilePath = folderPath + File.separator + "Tasks.txt";
+        archiveFilePath = folderPath + File.separator + "Archive.txt";
         isFolderAndFilePresent = true;
     }
 
     /**
-     * Creates the main PetalData folder, containing Tasks.txt
+     * Creates the main PetalData folder, containing Tasks.txt and Archive.txt
      *
      * @return String greeting the user
      */
@@ -55,13 +55,12 @@ public class Storage {
         }
         try {
             Path path = Paths.get(folderPath);
-            Files.createDirectories(path);
-
             File petalData = new File(saveFilePath);
             File archiveData = new File(archiveFilePath);
 
-            assert petalData.createNewFile();
-            assert archiveData.createNewFile();
+            Files.createDirectories(path);
+            petalData.createNewFile();
+            archiveData.createNewFile();
         } catch (IOException e) {
             isFolderAndFilePresent = false;
         }
@@ -99,6 +98,7 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String taskLine = sc.nextLine();
+
             String[] components = taskLine.split("\\|");
             String typeOfTask = components[0];
             String descOfTask = components[2];

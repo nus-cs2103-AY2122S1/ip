@@ -10,9 +10,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="petal.gui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="14.0" layoutY="554.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="673.0" promptText="Ask me anything!" style="-fx-background-color: black;" AnchorPane.bottomAnchor="5.0">
+        <TextField fx:id="userInput" layoutX="14.0" layoutY="554.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="673.0" promptText="Ask me anything!" style="-fx-background-color: black; -fx-text-fill: #b7fff1;" AnchorPane.bottomAnchor="5.0">
          <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="Segoe UI Bold" size="18.0" />
          </font></TextField>
         <Button fx:id="sendButton" layoutX="719.0" layoutY="555.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="67.0" style="-fx-background-color: #ffb7c5;" text="🌸" textFill="#ff5ea1">
          <font>
@@ -21,10 +21,8 @@
          <effect>
             <Glow />
          </effect></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="554.0" prefWidth="800.0" style="-fx-background-color: blue;" vvalue="1.0">
-            <content>
-                <VBox fx:id="dialogContainer" prefWidth="795.0" style="-fx-background-color: black;" />
-            </content>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="548.0" prefWidth="800.0" style="-fx-background-color: black;" vvalue="1.0">
+            <VBox fx:id="dialogContainer" minHeight="552.0" prefWidth="784.0" style="-fx-background-color: black;" />
         </ScrollPane>
     </children>
 </AnchorPane>

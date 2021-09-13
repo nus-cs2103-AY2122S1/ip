@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -22,7 +21,10 @@ public class PetalDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private Circle circle;
+    private Circle profilePicture;
+
+    private final Image petalPicture = new Image(Objects.requireNonNull(this.getClass()
+                .getResourceAsStream("/images/petal.jpg")));
 
     /**
      * Constructs a PetalDialogBox instance
@@ -40,10 +42,10 @@ public class PetalDialogBox extends HBox {
         }
         dialog.setText(text);
 
-        circle.setStroke(Color.CYAN);
-        Image img = new Image(Objects.requireNonNull(this.getClass()
-                .getResourceAsStream("/images/petal.jpg")));
-        circle.setFill(new ImagePattern(img));
+        PictureEditor.setGlow(profilePicture, PictureEditor.COLOR_SAKURA_PINK, 60);
+        PictureEditor.setOutline(profilePicture, PictureEditor.COLOR_SAKURA_PINK);
+
+        profilePicture.setFill(new ImagePattern(petalPicture));
     }
 
     /**

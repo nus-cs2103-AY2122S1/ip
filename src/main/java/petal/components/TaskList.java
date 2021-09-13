@@ -22,13 +22,19 @@ public class TaskList {
     private final List<Task> archivedTasks;
     private final Calendar calendar;
 
+    public enum Action {
+        TASK_ADD,
+        TASK_DELETE,
+        TASK_ARCHIVE;
+    }
+
     /**
      * Constructs a TaskList instance
      */
     public TaskList() {
-        this.currentTasks = new ArrayList<>();
-        this.calendar = new Calendar();
-        this.archivedTasks = new ArrayList<>();
+        currentTasks = new ArrayList<>();
+        calendar = new Calendar();
+        archivedTasks = new ArrayList<>();
     }
 
     /**
@@ -43,40 +49,6 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list of tasks
-     *
-     * @param task The task to be added
-     */
-    public String addTask(Task task) {
-        currentTasks.add(task);
-        String plural = (currentTasks.size()) > 1 ? " tasks!" : " task!";
-        return "Okay. I've added this task:\n" + task + "\nYou now have " + currentTasks.size() + plural;
-    }
-
-    /**
-     * Deletes a task from the list of tasks
-     *
-     * @param index The message given by the user input
-     * @throws InvalidInputException Thrown if no index inputted by the user or
-     *                               when index is out-of-bounds/not valid int or when
-     *                               desc is empty
-     */
-    public String deleteTask(String index) throws InvalidInputException {
-        try {
-            int indexOfTask = Integer.parseInt(index) - 1;
-            Task toBeDeleted = currentTasks.remove(indexOfTask);
-            if (toBeDeleted.isTimeable()) {
-                calendar.updateCalendar(currentTasks);
-            }
-            String plural = (currentTasks.size()) != 1 ? " tasks!" : " task!";
-            return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + currentTasks.size()
-                    + plural;
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
-        }
-    }
-
-    /**
      * Handles the task, depending on the command given
      *
      * @param type The type of task: To.Do, deadline, event
@@ -84,62 +56,14 @@ public class TaskList {
      * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
      */
     public String handleTask(String type, String description) throws EmptyDescException, InvalidInputException {
-        String[] deadlineEvent = (type.equals("deadline")) ? description.split("/by")
-                                                           : description.split("/at");
+        String[] deadlineEvent = (type.equals("deadline"))
+                ? description.split("/by")
+                : description.split("/at");
         checkIfValidFormat(type, description, deadlineEvent);
-
         if (type.equals("todo")) {
             return handleToDo(description);
         } else {
             return handleTimeable(type, deadlineEvent);
-        }
-    }
-
-    /**
-     * Handles a To.Do task
-     *
-     * @param message The description
-     * @return The string representing that the task was added
-     */
-    private String handleToDo(String message) {
-        Task todo = new ToDo(message, false);
-        return addTask(todo);
-    }
-
-    /**
-     * Handles a Timeable (Deadline or Event)
-     *
-     * @param type The type of task (Deadline or Event)
-     * @param deadlineEvent The array that contains the description and date of the task
-     * @return The string representing that the task was added
-     */
-    private String handleTimeable(String type, String[] deadlineEvent) throws InvalidInputException {
-        try {
-            Task timeable = (type.equals("deadline")) ? new Deadline(deadlineEvent[0], deadlineEvent[1], false)
-                                                      : new Event(deadlineEvent[0], deadlineEvent[1], false);
-            calendar.addToCalendar((Timeable) timeable);
-            return addTask(timeable);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-            throw new InvalidInputException(Responses.INVALID_DATE_TIME);
-        }
-    }
-
-    /**
-     * Adds the task to the list of archived task
-     *
-     * @param index The index of the index
-     * @throws InvalidInputException If index is invalid
-     */
-    public String archiveTask(String index) throws InvalidInputException {
-        try {
-            int indexOfTask = Integer.parseInt(index) - 1;
-            Task toArchive = currentTasks.get(indexOfTask);
-            deleteTask(index);
-            archivedTasks.add(toArchive);
-            String plural = (archivedTasks.size()) > 1 ? " tasks in your archives!" : " task in your archives!";
-            return "Okay. I've added this task:\n" + toArchive + "\nYou now have " + archivedTasks.size() + plural;
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException(Responses.INVALID_TASK_NO);
         }
     }
 
@@ -154,13 +78,133 @@ public class TaskList {
      */
     private void checkIfValidFormat(String type, String message, String[] deadlineEvent) throws EmptyDescException,
             InvalidInputException {
-        if (message.isBlank() || deadlineEvent[0].isBlank()) {
+        boolean emptyDesc = message.isBlank() || deadlineEvent[0].isBlank();
+        boolean invalidTimeableFormat = type.equals("deadline") || type.equals("event") && deadlineEvent.length < 2;
+
+        if (emptyDesc) {
             throw new EmptyDescException(Responses.EMPTY_DESCRIPTION);
         }
-        if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
+        if (invalidTimeableFormat) {
             throw new InvalidInputException(Responses.INVALID_FORMAT);
         }
     }
+
+    /**
+     * Handles a To.Do task
+     *
+     * @param message The description
+     * @return The string representing that the task was added
+     */
+    private String handleToDo(String message) {
+        Task todo = new ToDo(message, false);
+        return addTask(todo, false);
+    }
+
+    /**
+     * Handles a Timeable (Deadline or Event)
+
+     * @param type The type of task (Deadline or Event)
+     * @param deadlineEvent The array that contains the description and date of the task
+     * @return The string representing that the task was added
+     */
+    private String handleTimeable(String type, String[] deadlineEvent) throws InvalidInputException {
+        try {
+            Task timeable = (type.equals("deadline"))
+                    ? new Deadline(deadlineEvent[0], deadlineEvent[1], false)
+                    : new Event(deadlineEvent[0], deadlineEvent[1], false);
+            return addTask(timeable, true);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInputException(Responses.INVALID_DATE_TIME);
+        }
+    }
+
+    /**
+     * Adds a task to the list of tasks
+     *
+     * @param task The task to be added
+     */
+    private String addTask(Task task, boolean isTimeable) {
+        if (isTimeable) {
+            calendar.addToCalendar((Timeable) task);
+        }
+        currentTasks.add(task);
+        return replyForTaskActions(task, Action.TASK_ADD);
+    }
+
+    /**
+     * Deletes a task from the list of tasks
+     *
+     * @param index The message given by the user input
+     * @throws InvalidInputException Thrown if no index inputted by the user or
+     *                               when index is out-of-bounds/not valid int or when
+     *                               desc is empty
+     */
+    public String deleteTask(String index) throws InvalidInputException {
+        try {
+            int indexOfTask = Integer.parseInt(index) - 1;
+            Task toBeDeleted = currentTasks.remove(indexOfTask);
+
+            if (toBeDeleted.isTimeable()) {
+                calendar.updateCalendar(currentTasks);
+            }
+
+            return replyForTaskActions(toBeDeleted, Action.TASK_DELETE);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
+        }
+    }
+
+    /**
+     * Adds the task to the list of archived task
+     *
+     * @param index The index of the index
+     * @throws InvalidInputException If index is invalid
+     */
+    public String archiveTask(String index) throws InvalidInputException {
+        try {
+            int indexOfTask = Integer.parseInt(index) - 1;
+            Task toArchive = currentTasks.get(indexOfTask);
+
+            deleteTask(index);
+            archivedTasks.add(toArchive);
+
+            return replyForTaskActions(toArchive, Action.TASK_ARCHIVE);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException(Responses.INVALID_TASK_NO);
+        }
+    }
+
+    /**
+     * Returns the reply for a certain action relating to a task has been
+     * completed
+     *
+     * @param task The task the action modified
+     * @param typeOfAction The type of action, e.g. add/delete/archive
+     * @return String, which represents the reply
+     */
+    public String replyForTaskActions(Task task, Action typeOfAction) {
+        String reply = "";
+        String pluralCurrTasks = (currentTasks.size()) != 1 ? " tasks!" : " task!";
+        String pluralArchivedTasks = (archivedTasks.size()) > 1
+                ? " tasks in your archives!"
+                : " task in your archives!";
+        switch (typeOfAction) {
+        case TASK_ADD:
+            reply = "Okay. I've added this task:\n" + task + "\nYou now have " + currentTasks.size() + pluralCurrTasks;
+            break;
+        case TASK_DELETE:
+            reply = "Okay. I've deleted this task:\n" + task + "\nYou now have " + currentTasks.size()
+                    + pluralCurrTasks;
+            break;
+        case TASK_ARCHIVE:
+            reply = "Okay. I've added this task:\n" + task
+                    + "\nYou now have " + archivedTasks.size() + pluralArchivedTasks;
+            break;
+        default: //All cases handled
+        }
+        return reply;
+    }
+
 
     /**
      * Marks a particular task as done
@@ -171,8 +215,10 @@ public class TaskList {
      */
     public String markTaskAsDone(String indexOfTask) throws InvalidInputException {
         try {
-            Task taskToBeCompleted = currentTasks.get(Integer.parseInt(indexOfTask) - 1);
-            return taskToBeCompleted.taskDone();
+            int index = Integer.parseInt(indexOfTask) - 1;
+            Task taskToBeCompleted = currentTasks.get(index);
+            String taskDoneMessage = taskToBeCompleted.taskDone();
+            return taskDoneMessage;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NO);
         }
@@ -198,6 +244,7 @@ public class TaskList {
 
     /**
      * Returns a string representation of the tasks in the given list
+     * e.g 1. [T][ ] Go for a run etc
      *
      * @param tasks The given list of tasks
      * @return String containing, the number, type, and description of the archived tasks
@@ -206,6 +253,7 @@ public class TaskList {
         if (tasks.size() == 0) {
             return "No items in list yet!";
         }
+
         int count = 1;
         StringBuilder list = new StringBuilder();
         for (Task t : tasks) {
@@ -237,7 +285,10 @@ public class TaskList {
         final int[] count = {1};
         StringBuilder result = new StringBuilder("Here are the tasks:");
         currentTasks.stream().filter(x -> x.isKeyWordPresent(keyword))
-                .forEach(x -> result.append('\n').append(count[0]++).append(". ").append(x));
+                             .forEach(x -> result.append('\n')
+                                                 .append(count[0]++)
+                                                 .append(". ")
+                                                 .append(x));
         if (count[0] == 1) {
             return "No tasks!";
         }

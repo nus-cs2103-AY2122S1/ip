@@ -28,19 +28,24 @@ public class TaskListTest {
 
     @Test
     public void addTask_todo_taskAddOutput() {
+        String output = "";
         ToDo todo = new ToDo("go for a run", false);
-        String output = taskList.addTask(todo);
+        try {
+            output = taskList.handleTask("todo", "Go for a run");
+        } catch (InvalidInputException | EmptyDescException e) {
+            //Don't do anything here
+        }
         assertEquals("Okay. I've added this task:\n[T][ ] Go for a run\nYou now have 1 task!", output);
     }
 
     @Test
     public void deleteTheTask_todo_taskAddOutput() {
         ToDo todo = new ToDo("go for a run", false);
-        taskList.addTask(todo);
         String output = "";
         try {
+            taskList.handleTask("todo", "Go for a run");
             output = taskList.deleteTask("1");
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | EmptyDescException e) {
             //Do not do anything here
         } finally {
             assertEquals("Okay. I've deleted this task:\n[T][ ] Go for a run\nYou now have 0 tasks!", output);
@@ -51,10 +56,10 @@ public class TaskListTest {
     public void archiveTask_index_taskArchived() {
         ToDo todo = new ToDo("go for a run", false);
         String output = "";
-        taskList.addTask(todo);
         try {
+            taskList.handleTask("todo", "Go for a run");
             output = taskList.archiveTask("1");
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | EmptyDescException e) {
             //Don't do anything here
         } finally {
             assertEquals("Okay. I've added this task:\n[T][ ] Go for a run\nYou now have"
@@ -66,13 +71,13 @@ public class TaskListTest {
     public void markTaskAsDone_todo_taskMarkedAsDone() {
         ToDo todo = new ToDo("go for a run", false);
         String output = "";
-        taskList.addTask(todo);
         try {
+            taskList.handleTask("todo", "Go for a run");
             output = taskList.markTaskAsDone("1");
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | EmptyDescException e) {
             //Don't do anything here
         } finally {
-            assertEquals("\nYou have completed the task: '" + "Go for a run" + "'!"
+            assertEquals("You have completed the task: '" + "Go for a run" + "'!"
                     + "\nI am so happy for you!\n", output);
         }
     }
@@ -80,15 +85,23 @@ public class TaskListTest {
     @Test
     public void printCurrTasks_todo_printCurrTasks() {
         ToDo todo = new ToDo("go for a run", false);
-        taskList.addTask(todo);
-        String output = taskList.printCurrTasks();
-        assertEquals("1. [T][ ] Go for a run", output);
+        try {
+            taskList.handleTask("todo", "Go for a run");
+        } catch (InvalidInputException | EmptyDescException e) {
+            //Don't do anything here
+        }
+        String result = taskList.printCurrTasks();
+        assertEquals("1. [T][ ] Go for a run", result);
     }
 
     @Test
     public void printArchive_todo_printArchive() {
         ToDo todo = new ToDo("go for a run", false);
-        taskList.addTask(todo);
+        try {
+            taskList.handleTask("todo", "Go for a run");
+        } catch (InvalidInputException | EmptyDescException e) {
+            //Don't do anything here
+        }
         String output = taskList.printArchive();
         assertEquals("No items in list yet!", output);
     }
