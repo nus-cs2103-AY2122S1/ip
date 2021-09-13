@@ -14,7 +14,7 @@ public class InvalidCommandFormatException extends DukeException {
     public InvalidCommandFormatException(CommandTypeEnum commandType) {
         super(
                 String.format(
-                        "A $s command should have be in this format: %s",
+                        "A %s command should have be in this format: %s",
                         commandType.toString(),
                         commandType.getFormat()
                 )
