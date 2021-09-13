@@ -140,16 +140,14 @@ public class Parser {
      */
     public LocalDateTime parseDate(String date) throws DukeException {
         DateTimeFormatter dtf = DateTimeFormatter
-                .ofPattern("[d/M/[uuuu][uu] H:mm][d-MMM-[uuuu][uu] H:mm][d-M-[uuuu][uu] H:mm][d/MMM/[uuuu][uu] H:mm]");
+                .ofPattern("[d/M/[uuuu][uu] H:mm]");
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
             throw new DukeException("Invalid date format\n"
                     + "Please format date as the following:\n"
-                    + "Day/Month/Year H:mm or\n"
-                    + "Day-Month-Year H:mm, in 24-hour format\n"
-                    + "Month can be 3-letter word or a number\n"
-                    + "(e.g Jul or 7 or 07)");
+                    + "Day/Month/Year H:mm, in 24-hour format\n"
+                    + "e.g 24/9/21 16:30\n");
         }
     }
 }

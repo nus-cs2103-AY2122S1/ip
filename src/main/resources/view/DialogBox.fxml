@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Label?>
 
 <fx:root alignment="TOP_RIGHT" minWidth="-Infinity" prefHeight="130.0" prefWidth="400.0" spacing="5.0"
          style="-fx-background-color: #2b5278; -fx-background-radius: 20px; -fx-border-radius: 20px;"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-
-        <Label fx:id="dialog" textFill="WHITE" minHeight="-Infinity" wrapText="true">
+        <Label fx:id="dialog" minHeight="-Infinity" textFill="WHITE" wrapText="true">
             <HBox.margin>
                 <Insets top="10.0"/>
             </HBox.margin>
-            <font>
-                <Font name="Roboto" size="12.0"/>
-            </font>
         </Label>
 
         <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-            <HBox.margin>
-                <Insets/>
-            </HBox.margin>
         </ImageView>
-
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
