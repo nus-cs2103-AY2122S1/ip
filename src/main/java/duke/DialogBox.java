@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates the dialog box where the profile picture of the responder and the reponse is contained.
+     *
+     * @param text The response given by the responder
+     * @param img The profile picture of the responder
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -35,8 +41,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setText(text); // Set the given text into the dialog box
+        displayPicture.setImage(img); // Set the given image into the dialog box and display it
     }
 
     /**
@@ -49,13 +55,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a new dialog box containing the user's response and profile picture.
+     *
+     * @param text Response of the user
+     * @param img Profile picture of the user
+     * @return The dialog box containing the user's response and profile picture
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a new dialog box containing the Jarvis' response and profile picture.
+     *
+     * @param text Response of Jarvis
+     * @param img Profile picture of Jarvis
+     * @return The dialog box containing the Jarvis' response and profile picture
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flip(); // Flips Jarvis' dialog box such that its response is on the left of the user's response
         return db;
     }
 }
