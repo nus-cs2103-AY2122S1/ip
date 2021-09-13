@@ -16,6 +16,14 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the FindCommand and find task matching the keyword.
+     *
+     * @param tasks The collection of tasks.
+     * @param storage The storage manager that deals with loading from and
+     *                saving into a file.
+     * @return The message represent the response.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         TaskList filteredTasks = tasks.filter(keyword);

@@ -29,6 +29,7 @@ public class AddCommand extends Command {
      * @param tasks The collection of tasks.
      * @param storage The storage manager that deals with loading from and
      *               saving into a file.
+     * @return The message representing the response.
      * @throws DukeException If the file that act as storage can not be found.
      */
     @Override

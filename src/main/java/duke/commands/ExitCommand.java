@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      * @param tasks The collection of tasks.
      * @param storage The storage manager that deals with loading from and
      *               saving into a file.
+     * @return The message representing the response.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {

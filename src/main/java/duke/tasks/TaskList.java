@@ -78,7 +78,7 @@ public class TaskList {
     }
 
     /**
-     * Remove from the list all the tasks whose index is between fromIndex, inclusive,
+     * Removes from the list all the tasks whose index is between fromIndex, inclusive,
      * and toIndex, exclusive.
      *
      * @param fromIndex Index of the first task to be removed.

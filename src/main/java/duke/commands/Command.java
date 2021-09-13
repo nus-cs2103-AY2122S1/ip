@@ -31,12 +31,13 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command which either leads to a state change,
-     * an output or exit of the program.
+     * Executes the command and returns the string message representing
+     * the response.
      *
      * @param tasks The collection of tasks.
      * @param storage The storage manager that deals with loading from and
-     *               saving into a file.
+     *                saving into a file.
+     * @return The message representing the response.
      * @throws DukeException If there is an error.
      */
     public abstract String execute(TaskList tasks, Storage storage) throws DukeException;

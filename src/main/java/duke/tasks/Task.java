@@ -41,7 +41,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the Task as completed.
+     * Marks the Task as completed.
      *
      * @return The completed Task.
      */
