@@ -77,7 +77,7 @@ public class Ui {
     /**
      * Prints all the strings added.
      */
-    public String list(ArrayList<? extends Task> ls) throws DukeException {
+    public String list(ArrayList<? extends Task> ls) {
         String output = "";
         if (ls.size() == 0) {
             return output;
