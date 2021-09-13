@@ -78,7 +78,7 @@ public class Ui {
     }
 
     public String parsingFormatErrorMsg() {
-        return "Please check the formatting of your input!";
+        return "   ☹ OOPS!!! Please check the formatting of your input!";
     }
 
     /**
@@ -96,7 +96,7 @@ public class Ui {
         case 3:
             return "   ☹ OOPS!!! The description of an event cannot be empty.";
         case 4:
-            return "   ☹ OOPS!!! index out of bounds";
+            return "   ☹ OOPS!!! Index out of bounds";
         default:
             return "   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }

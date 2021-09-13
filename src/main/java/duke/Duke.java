@@ -49,7 +49,7 @@ public class Duke extends Application {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/spongebob.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/marvel vision.jpg"));
 
     public Duke() {}
 
@@ -66,84 +66,80 @@ public class Duke extends Application {
         SL = new StorageList(storage.load());
     }
 
-
-    public static void main(String[] args) {
-    }
-
     @Override
     public void start(Stage stage) {
 
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        dialogContainer.setPadding(new Insets(20, 20, 20, 20));
-        dialogContainer.setSpacing(10);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(700.0);
-        stage.setMinWidth(800.0);
-
-        mainLayout.setPrefSize(800.0, 700.0);
-
-        scrollPane.setPrefSize(785, 635);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(725.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox();
+//        scrollPane.setContent(dialogContainer);
+//
+//        dialogContainer.setPadding(new Insets(20, 20, 20, 20));
+//        dialogContainer.setSpacing(10);
+//
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+//
+//        stage.setScene(scene);
+//        stage.show();
+//
+//        stage.setTitle("Duke");
+//        stage.setResizable(false);
+//        stage.setMinHeight(700.0);
+//        stage.setMinWidth(800.0);
+//
+//        mainLayout.setPrefSize(800.0, 700.0);
+//
+//        scrollPane.setPrefSize(785, 635);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//
+//        scrollPane.setVvalue(1.0);
+//        scrollPane.setFitToWidth(true);
+//
+//        // You will need to import `javafx.scene.layout.Region` for this.
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(725.0);
+//
+//        sendButton.setPrefWidth(55.0);
+//
+//        AnchorPane.setTopAnchor(scrollPane, 1.0);
+//
+//        AnchorPane.setBottomAnchor(sendButton, 1.0);
+//        AnchorPane.setRightAnchor(sendButton, 1.0);
+//
+//        AnchorPane.setLeftAnchor(userInput , 1.0);
+//        AnchorPane.setBottomAnchor(userInput, 1.0);
+//
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
+//
+//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
 
-    private void handleUserInput() {
-        assert user != null && duke != null : "User and duke images should not be null";
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
+//    private void handleUserInput() {
+//        assert user != null && duke != null : "User and duke images should not be null";
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, new ImageView(user)),
+//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//        );
+//        userInput.clear();
+//    }
 
-    String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             return new Duke("data/duketest.txt").run(input);
         } catch (FileNotFoundException e) {
@@ -221,7 +217,6 @@ public class Duke extends Application {
                 case "list":
                     return ui.displayListContents(SL);
                 default:
-                    assert false : input + "is not a valid command";
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
             }
