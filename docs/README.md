@@ -2,6 +2,9 @@
 Duke is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 ## Quick Start
+
+---
+
 1. Ensure you have Java 11 or above installed in your Computer.
 
 2. Download the latest duke.jar from [here](https://github.com/limdanqi/ip/releases).
@@ -12,7 +15,11 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 [comment]: <> (![Ui Screenshot] &#40;&#41;)
 
+&nbsp;
+
 ## Features 
+
+---
 
 ### *Record your tasks*
 
