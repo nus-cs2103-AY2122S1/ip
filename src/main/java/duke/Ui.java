@@ -8,7 +8,8 @@ import java.util.Scanner;
  * @author Sherman Ng Wei Sheng
  */
 public class Ui {
-    private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String MESSAGE_GREETING =
+            "Hello! I'm Duke\nWhat can I do for you?\nType 'help' to see the wonders that I can do!";
     private static final String HORIZONTAL_LINE_WITH_BREAK =
             "        ____________________________________________________________\n";
     private Scanner sc;
@@ -76,11 +77,11 @@ public class Ui {
      * @return The printed message.
      */
     public String printAndReturnMessage(String content) {
-        String format =
+        String formatString =
                 HORIZONTAL_LINE_WITH_BREAK
                 + "        %s\n"
                 + HORIZONTAL_LINE_WITH_BREAK;
-        System.out.printf(format, content.replaceAll("\n", "\n        "));
-        return format.format(content.replaceAll("\n", "\n        "));
+        System.out.printf(formatString, content.replaceAll("\n", "\n        "));
+        return content;
     }
 }

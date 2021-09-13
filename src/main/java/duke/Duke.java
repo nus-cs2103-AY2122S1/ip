@@ -25,6 +25,7 @@ public class Duke {
             this.list = new TaskList();
         }
     }
+
     /**
      * Starts the Chatbot, listens for user input and executes the command accordingly.
      */
@@ -52,11 +53,16 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    public String getGreetingMessage() {
+        return ui.printAndReturnGreetingsString();
+    }
     /**
      * Initializes a Duke object and runs the program.
      *
      * @param args The command line arguments.
      */
+
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.start();
