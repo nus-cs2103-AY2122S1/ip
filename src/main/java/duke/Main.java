@@ -24,6 +24,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(dukeChatbot);
             stage.setTitle("Your friendly Duke Chatbot");
+            stage.setResizable(false);
             stage.show();
         } catch (IOException | DukeException e) {
             e.printStackTrace();
