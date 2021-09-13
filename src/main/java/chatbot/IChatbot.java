@@ -17,6 +17,14 @@ public interface IChatbot {
     void processResponse(String s);
     
     /**
+     * Checks whether the response can be processed or not.
+     *
+     * @param s String.
+     * @return Boolean.
+     */
+    Boolean canProcessResponse(String s);
+    
+    /**
      * Kills and cleans up the Chatbot.
      */
     void shutdown();

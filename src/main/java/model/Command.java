@@ -43,4 +43,6 @@ public enum Command {
     TODOS,
     DELETE,
     DONE,
+    MAN,
+    INVALID,
 }

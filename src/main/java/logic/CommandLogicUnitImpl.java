@@ -25,7 +25,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
     
     /**
      * Constructor of CommandLogicUnitImpl that processes all the available commands.
-     * This will also starts the reminder tasks.
+     * This will also start the reminder tasks.
      *
      * @param taskDao TaskDao.
      */
@@ -44,7 +44,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
             processBye();
             break;
         case LIST:
-            LocalDate localDate = argument.getTiming().toLocalDate();
+            LocalDate localDate = argument.getTiming() != null ? argument.getTiming().toLocalDate() : null;
             processList(localDate);
             break;
         case DEADLINE:
@@ -83,7 +83,7 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
             processFind(argument.getDescription());
             break;
         default:
-            ui.printSentence("command not recognized by processor");
+            System.out.println("command not recognized by processor");
         }
     }
     
@@ -94,7 +94,12 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
     
     private void processList(LocalDate localDate) {
         if (localDate == null) {
-            ui.printIndexedList(taskDao.getAll());
+            List<Task> tasks = taskDao.getAll();
+            if (tasks.isEmpty()) {
+                ui.printSentence("Good job! You don't have any tasks currently!");
+            } else {
+                ui.printIndexedList(tasks);
+            }
             return;
         }
         

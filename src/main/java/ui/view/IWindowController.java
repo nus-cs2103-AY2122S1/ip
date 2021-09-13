@@ -17,4 +17,11 @@ public interface IWindowController {
      * @param s String to be displayed.
      */
     void addUserDialog(String s);
+    
+    /**
+     * Displays the error for user dialog.
+     *
+     * @param s String to be displayed.
+     */
+    void addUserDialogError(String s);
 }

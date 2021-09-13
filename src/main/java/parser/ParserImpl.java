@@ -38,7 +38,7 @@ public class ParserImpl implements IParser {
     private final Logger logger = Logger.getLogger(TaskDaoImpl.class.getName());
     
     /**
-     * CommandProcessorImplementation that would parse the inputs into commands.
+     * Creates CommandProcessorImplementation that would parse the inputs into commands.
      *
      * @param commandLogicUnit CommandLogicUnit that would process the parsed input.
      * @param ui UI.
@@ -48,68 +48,15 @@ public class ParserImpl implements IParser {
         this.ui = ui;
     }
     
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void processInput(String input) {
-        // take the next command within a line, inputted using enter
-        List<String> parsedCommands = Arrays.asList(input.split(" "));
-        
-        processInputHelper(parsedCommands);
-    }
-    
-    /**
-     * Processes the input as list of strings into commands.
-     * Helper method for processInput method.
-     *
-     * @param parsedCommands List of string from user inputs.
-     */
-    private void processInputHelper(List<String> parsedCommands) {
-        switch (parsedCommands.get(0)) {
-        case "bye":
-            parseBye();
-            break;
-        case "list":
-            parseList(parsedCommands);
-            break;
-        case "done":
-            parseDone(parsedCommands);
-            break;
-        case "deadline":
-            parseDeadline(parsedCommands);
-            break;
-        case "todo":
-            parseTodo(parsedCommands);
-            break;
-        case "event":
-            parseEvent(parsedCommands);
-            break;
-        case "delete":
-            parseDelete(parsedCommands);
-            break;
-        case "find":
-            parseFind(parsedCommands);
-            break;
-        case "man":
-            parseMan();
-            break;
-        default:
-            logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
-            IllegalCallerException illegalCallerException =
-                    new IllegalCallerException("I'm sorry, but I don't know what that means :-(");
-            processException(illegalCallerException);
-            break;
-        }
-    }
-    
-    private void parseBye() {
+    private CommandArgument parseBye() {
         CommandArgument arguments = new CommandArgument();
         
-        commandLogicUnit.processCommand(Command.BYE, arguments);
+        arguments.setCommand(Command.BYE);
+        
+        return arguments;
     }
     
-    private void parseList(List<String> parsedCommands) {
+    private CommandArgument parseList(List<String> parsedCommands) {
         CommandArgument arguments = new CommandArgument();
         
         if (parsedCommands.size() > 1) {
@@ -117,32 +64,39 @@ public class ParserImpl implements IParser {
             LocalDateTime localDateTime = parseStringToLocalDateTime(date);
             
             if (localDateTime == null) {
-                return;
+                return arguments;
             }
             
             arguments.setTiming(localDateTime);
         }
         
-        commandLogicUnit.processCommand(Command.LIST, arguments);
+        arguments.setCommand(Command.LIST);
+        return arguments;
     }
     
-    private void parseDone(List<String> parsedCommands) {
+    private CommandArgument parseDone(List<String> parsedCommands) {
         CommandArgument arguments = new CommandArgument();
-    
+        
         try {
             Integer index = parseIndexStringToInt(parsedCommands);
             arguments.setIndex(index);
-            commandLogicUnit.processCommand(Command.DONE, arguments);
+            arguments.setCommand(Command.DONE);
+            
+            return arguments;
         } catch (IndexOutOfBoundsException e) {
             processException(e);
         }
+        
+        arguments.setCommand(Command.INVALID);
+        return arguments;
     }
     
-    private void parseDeadline(List<String> parsedCommands) {
+    private CommandArgument parseDeadline(List<String> parsedCommands) {
         String timingSeparator = "/by";
         CommandArgument arguments = parseTimedTaskArguments(parsedCommands, timingSeparator);
         
-        commandLogicUnit.processCommand(Command.DEADLINE, arguments);
+        arguments.setCommand(Command.DEADLINE);
+        return arguments;
     }
     
     private CommandArgument parseTimedTaskArguments(List<String> parsedCommands, String timingSeparator) {
@@ -174,60 +128,72 @@ public class ParserImpl implements IParser {
         return arguments;
     }
     
-    private void parseTodo(List<String> parsedCommands) {
+    private CommandArgument parseTodo(List<String> parsedCommands) {
         CommandArgument arguments = new CommandArgument();
-    
+        
         String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
-    
+        
         if (desc.isBlank()) {
             logger.warning("Empty Todo desc being supplied");
             throw new IllegalArgumentException("todo desc cannot be empty");
         }
-    
+        
         arguments.setDescription(desc);
-    
-        commandLogicUnit.processCommand(Command.TODOS, arguments);
+        arguments.setCommand(Command.TODOS);
+        
+        return arguments;
     }
     
-    private void parseEvent(List<String> parsedCommands) {
+    private CommandArgument parseEvent(List<String> parsedCommands) {
         String timingSeparator = "/at";
         CommandArgument arguments = parseTimedTaskArguments(parsedCommands, timingSeparator);
-    
-        commandLogicUnit.processCommand(Command.EVENT, arguments);
+        arguments.setCommand(Command.EVENT);
+        return arguments;
     }
     
-    private void parseDelete(List<String> parsedCommands) {
+    private CommandArgument parseDelete(List<String> parsedCommands) {
         CommandArgument arguments = new CommandArgument();
-    
+        
         try {
             int index = parseIndexStringToInt(parsedCommands);
             arguments.setIndex(index);
-        
-            commandLogicUnit.processCommand(Command.DELETE, arguments);
+            arguments.setCommand(Command.DELETE);
+            
+            return arguments;
         } catch (IndexOutOfBoundsException e) {
             processException(e);
         }
+        arguments.setCommand(Command.INVALID);
+        return arguments;
     }
     
-    private void parseFind(List<String> parsedCommands) {
+    private CommandArgument parseFind(List<String> parsedCommands) {
         CommandArgument arguments = new CommandArgument();
-    
+        
         if (parsedCommands.size() < 2) {
             IllegalArgumentException illegalArgumentException = new IllegalArgumentException("keyword cannot be empty");
             processException(illegalArgumentException);
-            return;
+            
+            arguments.setCommand(Command.INVALID);
+            return arguments;
         }
-    
+        
         String keyword = parsedCommands.get(1);
         arguments.setDescription(keyword);
-    
-        commandLogicUnit.processCommand(Command.FIND, arguments);
+        arguments.setCommand(Command.FIND);
+        
+        return arguments;
     }
     
-    private void parseMan() {
+    private CommandArgument parseMan() {
         ui.printSentence("() -> optional parameter or format of date time\n"
                 + "# -> the parameter of the commands");
         ui.printIndexedList(availableCommands);
+        
+        CommandArgument argument = new CommandArgument();
+        argument.setCommand(Command.MAN);
+        
+        return argument;
     }
     
     private void processException(Exception e) {
@@ -250,5 +216,52 @@ public class ParserImpl implements IParser {
     
     private int parseIndexStringToInt(List<String> parsedCommands) {
         return Integer.parseInt(parsedCommands.get(1)) - 1;
+    }
+    
+    @Override
+    public void processCommand(CommandArgument argument) {
+        Command command = argument.getCommand();
+        commandLogicUnit.processCommand(command, argument);
+    }
+    
+    @Override
+    public CommandArgument parseInput(String input) {
+        // take the next command within a line, inputted using enter
+        List<String> parsedCommands = Arrays.asList(input.split(" "));
+        
+        switch (parsedCommands.get(0)) {
+        case "bye":
+            return parseBye();
+        case "list":
+            return parseList(parsedCommands);
+        case "done":
+            return parseDone(parsedCommands);
+        case "deadline":
+            return parseDeadline(parsedCommands);
+        case "todo":
+            return parseTodo(parsedCommands);
+        case "event":
+            return parseEvent(parsedCommands);
+        case "delete":
+            return parseDelete(parsedCommands);
+        case "find":
+            return parseFind(parsedCommands);
+        case "man":
+            return parseMan();
+        default:
+            StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+            
+            CommandArgument argument = new CommandArgument();
+            argument.setCommand(Command.INVALID);
+            
+            if (stackTraceElements[2].getMethodName().equals("canProcessResponse")) return argument;
+    
+            logger.warning("Unknown command : " + parsedCommands.get(0) + "being parsed");
+            IllegalCallerException illegalCallerException =
+                    new IllegalCallerException("I'm sorry, but I don't know what that means :-(");
+            processException(illegalCallerException);
+            
+            return argument;
+        }
     }
 }

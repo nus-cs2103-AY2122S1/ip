@@ -50,6 +50,7 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setSpacing(20);
     }
     
     /**
@@ -60,10 +61,18 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     private void handleUserInput() {
         try {
             String input = userInput.getText();
-            addUserDialog(input);
-            if (chatbot != null) {
-                chatbot.processResponse(input);
+            
+            if (chatbot == null) {
+                return;
             }
+            
+            if (!chatbot.canProcessResponse(input)) {
+                addUserDialogError(input);
+            } else {
+                addUserDialog(input);
+            }
+    
+            chatbot.processResponse(input);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -77,7 +86,7 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     @Override
     public void addBotDialog(String s) {
         assert s != null;
-    
+        
         dialogContainer.getChildren()
                 .addAll(DialogBox.getBotDialog(s, chatbotImage));
     }
@@ -88,8 +97,16 @@ public class MainWindowController extends AnchorPane implements IWindowControlle
     @Override
     public void addUserDialog(String s) {
         assert s != null;
-    
+        
         dialogContainer.getChildren()
                 .addAll(DialogBox.getUserDialog(s, userImage));
+    }
+    
+    @Override
+    public void addUserDialogError(String s) {
+        assert s != null;
+        
+        dialogContainer.getChildren()
+                .addAll(DialogBox.getUserDialogError(s, userImage));
     }
 }

@@ -1,8 +1,10 @@
 package chatbot;
 
 import dao.TaskDao;
+import logic.CommandArgument;
 import logic.ICommandLogicUnit;
 import logic.ReminderTask;
+import model.Command;
 import parser.IParser;
 import parser.ParserImpl;
 import ui.IUi;
@@ -52,7 +54,13 @@ public class Dude implements IChatbot {
     @Override
     public void processResponse(String s) {
         assert s != null;
-        commandParser.processInput(s);
+        CommandArgument argument = commandParser.parseInput(s);
+        commandParser.processCommand(argument);
+    }
+    
+    @Override
+    public Boolean canProcessResponse(String s) {
+        return commandParser.parseInput(s).getCommand() != Command.INVALID;
     }
     
     /**

@@ -1,5 +1,7 @@
 package logic;
 
+import model.Command;
+
 import java.time.LocalDateTime;
 
 /**
@@ -12,6 +14,7 @@ public class CommandArgument {
     private Integer index = null;
     private String description = null;
     private LocalDateTime timing = null;
+    private Command command = null;
     
     /**
      * Gets Index and by convention 0-indexed.
@@ -29,6 +32,22 @@ public class CommandArgument {
      */
     public void setIndex(Integer index) {
         this.index = index;
+    }
+    
+    /**
+     * Gets the command
+     *
+     * @return Command
+     */
+    public Command getCommand() {
+        return command;
+    }
+    
+    /**
+     * Sets the command
+     */
+    public void setCommand(Command command) {
+        this.command = command;
     }
     
     /**

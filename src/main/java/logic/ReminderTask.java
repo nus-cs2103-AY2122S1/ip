@@ -17,7 +17,7 @@ public class ReminderTask implements Runnable {
     private LocalDate currentDate = LocalDate.now();
     
     /**
-     * Create A Task that display reminders.
+     * Creates A Task that display reminders.
      *
      * @param taskDao TaskDao.
      * @param ui IUi.
@@ -42,7 +42,7 @@ public class ReminderTask implements Runnable {
     
     /**
      * {@inheritDoc}
-     * <p> Run the task as a runnable. </p>
+     * <p> Runs the task as a runnable. </p>
      */
     @Override
     @SuppressWarnings("InfiniteLoopStatement")
