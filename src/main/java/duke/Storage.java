@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -80,6 +81,12 @@ public class Storage {
      */
     public void saveFile(TaskList tasks) {
         try {
+            File f = new File(this.path);
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+
             FileWriter fileWriter = new FileWriter(this.path);
             fileWriter.write(tasks.toString());
             fileWriter.close();
