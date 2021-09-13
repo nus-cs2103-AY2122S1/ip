@@ -7,22 +7,20 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 public class TaskList {
-    List<Task> tasks;
-    Utility utility;
+    private final List<Task> tasks;
+    private final Utility utility;
 
-
+    /**
+     * Constructor for TaskList.
+     *
+     * @param tasks List of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
-        utility = new Utility();
-    }
-
-    public TaskList() {
-        this.tasks = new ArrayList<Task>(100);
         utility = new Utility();
     }
 
@@ -39,7 +37,7 @@ public class TaskList {
         String taskType = input[0].toLowerCase();
         int taskIndex = input[0].length() + 1;
 
-        try{
+        try {
             if (taskType.equals("todo")) {
                 taskToAdd = new ToDo(userInput.substring(5));
             } else {
@@ -47,20 +45,28 @@ public class TaskList {
             }
             return saveTask(taskToAdd, dataPath);
 
-        } catch(IllegalArgumentException | IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
-            return("Error : Invalid instruction\ntaskType task /by or /at yyyy-MM-dd HHmm");
+        } catch (IllegalArgumentException | IOException | StringIndexOutOfBoundsException | DateTimeParseException e) {
+            return ("Error : Invalid instruction\ntaskType task /by or /at yyyy-MM-dd HHmm");
         }
     }
 
+    /**
+     * Add an evemt od deadline where there is a date tagged to the task.
+     *
+     * @param userInput Task to add.
+     * @param taskType Type of task being added.
+     * @param taskIndex Position in the userInput string where the task begins.
+     * @return Task to be added.
+     */
     public Task addDatedTask(String userInput, String taskType, int taskIndex) {
         Task taskToAdd;
         int dateIndex = taskType.equals("event") ? userInput.indexOf("/at") : userInput.indexOf("/by");
-        String[] dateAndTask = utility.seperateDateFromTask(dateIndex,taskIndex, userInput);
+        String[] dateAndTask = utility.seperateDateFromTask(dateIndex, taskIndex, userInput);
         String task = dateAndTask[0];
         String dateString = dateAndTask[1];
         LocalDateTime dateTime = utility.stringToDate(dateString);
 
-        if (taskType.equals("deadline")){
+        if (taskType.equals("deadline")) {
             taskToAdd = new Deadline(task, dateTime);
         } else if (taskType.equals("event")) {
             taskToAdd = new Event(task, dateTime);
@@ -86,8 +92,8 @@ public class TaskList {
         // Add task To arrayList
         this.tasks.add(task);
 
-        return(String.format("Got it. I've added this task:\n" +
-                "%s\nNumber of tasks: %s", task.toString(), tasks.size()));
+        return (String.format("Got it. I've added this task:\n"
+                + "%s\nNumber of tasks: %s", task.toString(), tasks.size()));
     }
 
     /**
@@ -105,26 +111,25 @@ public class TaskList {
 
             String returnMessage = "Noted. I've removed these tasks:\n";
 
-            for(int i = 0; i < len; i++) {
+            for (int i = 0; i < len; i++) {
                 int taskToDel = Integer.parseInt(tasksString[i]) - 1;
                 assert taskToDel >= 0;
                 Task task = this.tasks.get(taskToDel);
                 tasksToDel.add(task);
             }
 
-            for(int i = 0; i < len; i++) {
+            for (int i = 0; i < len; i++) {
                 returnMessage += tasksToDel.get(i).toString() + "\n";
                 this.tasks.remove(tasksToDel.get(i));
             }
 
-
             return String.format("%s\nYou now have %s tasks left", returnMessage, this.tasks.size());
         } catch (StringIndexOutOfBoundsException e) {
-            return("Error : You cannot delete nothing!");
+            return ("Error : You cannot delete nothing!");
         } catch (NumberFormatException e) {
-            return("Error : Must be a number bodoh");
+            return ("Error : Must be a number bodoh");
         } catch (IndexOutOfBoundsException e) {
-            return("Error : Number doesnt exist");
+            return ("Error : Number doesnt exist");
         }
     }
 
@@ -141,7 +146,7 @@ public class TaskList {
 
             String returnMessage = "Noted. I've marked these tasks:\n";
 
-            for(int i = 0; i < arrayOfTasks.length; i++) {
+            for (int i = 0; i < arrayOfTasks.length; i++) {
                 int taskToMark = Integer.parseInt(arrayOfTasks[i]) - 1;
                 assert taskToMark >= 0;
                 Task task = this.tasks.get(taskToMark);
@@ -152,11 +157,11 @@ public class TaskList {
             return returnMessage;
 
         } catch (StringIndexOutOfBoundsException e) {
-            return("OOPS!!! You cannot mark nothing as done!");
+            return ("Error : You cannot mark nothing as done!");
         } catch (NumberFormatException e) {
-            return("OOPS!!! Must be a number bodoh");
+            return ("Error : Must be a number bodoh");
         } catch (IndexOutOfBoundsException e) {
-            return("OOPS!!! NUmber doesnt exist");
+            return ("Error : Number doesnt exist");
         }
     }
 
@@ -178,14 +183,21 @@ public class TaskList {
         return str.toString();
     }
 
+    /**
+     * Finds task form stored tasks.
+     *
+     * @param tasks Current list of tasks.
+     * @param userInput Search keyWord.
+     * @return Tasks related to keyWord.
+     */
     public String findTask(List<Task> tasks, String userInput) {
         String keyWord = userInput.substring(5);
         List<Task> tempList = new ArrayList<>();
 
         tasks.forEach(task -> {
-            if(task.toString().toLowerCase(Locale.ROOT).contains(keyWord.toLowerCase(Locale.ROOT))) {
+            if (task.toString().toLowerCase(Locale.ROOT).contains(keyWord.toLowerCase())) {
                 tempList.add(task);
-            };
+            }
         });
         return showTasks(tempList);
     }

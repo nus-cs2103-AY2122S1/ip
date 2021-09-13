@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,7 +40,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        if(text.toLowerCase().startsWith("error")) {
+        if (text.toLowerCase().startsWith("error")) {
             dialog.setTextFill(Color.web("red"));
         } else {
             dialog.setTextFill(Color.web("#0076a3"));

@@ -1,11 +1,16 @@
 package duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDateTime date;
 
+    /**
+     * Constuctor for deadline.
+     *
+     * @param deadline User inputted event.
+     * @param date User inputted date of event.
+     */
     public Deadline(String deadline, LocalDateTime date) {
         super(deadline, "D", date);
         this.date = date;
@@ -19,6 +24,6 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return String.format("[%s] %s (by: %s)",
-                super.getTaskSymbol(), super.toString(),dateToString(this.date));
+                super.getTaskSymbol(), super.toString(), dateToString(this.date));
     }
 }

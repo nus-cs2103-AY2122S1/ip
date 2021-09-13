@@ -56,7 +56,8 @@ public class Task {
         if (this.taskSymbol.equals("T")) {
             data = String.format("%s,%s,%s", this.getTaskType(), status, this.task);
         } else {
-            data = String.format("%s,%s,%s,%s", this.getTaskType(), status, this.task,utility.dateToInputString(this.date));
+            data = String.format("%s,%s,%s,%s", this.getTaskType(), status,
+                    this.task, utility.dateToInputString(this.date));
         }
         return data;
     }
@@ -110,7 +111,7 @@ public class Task {
      * @return String of the task and its status.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[%s] %s", this.statusIcon, this.task);
     }
 }

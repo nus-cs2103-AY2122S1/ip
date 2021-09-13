@@ -7,6 +7,9 @@ public class Utility {
     private DateTimeFormatter inputFormat;
     private DateTimeFormatter outputFormat;
 
+    /**
+     * Constructor for Utility.
+     */
     public Utility() {
         inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         outputFormat = DateTimeFormatter.ofPattern("dd MM yyyy | HHmm");

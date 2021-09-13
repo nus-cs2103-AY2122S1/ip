@@ -1,8 +1,8 @@
 package duke;
 
 public class Parser {
-    Storage storage;
-    TaskList taskList;
+    private final Storage storage;
+    private final TaskList taskList;
 
     /**
      * Constructor for parser which requires Storage and TaskList Objects.
@@ -42,5 +42,3 @@ public class Parser {
         return toReply;
     }
 }
-
-
