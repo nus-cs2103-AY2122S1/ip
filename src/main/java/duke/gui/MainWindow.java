@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -36,6 +37,8 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PaperFace.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/CoffeeSip.png"));
     private Image bgImage = new Image(this.getClass().getResourceAsStream("/images/Wallpaper.jpg"));
+    private Image sendIcon = new Image(this.getClass().getResourceAsStream("/images/Send.jpg"));
+    private ImageView view = new ImageView(sendIcon);
 
 
     @FXML
@@ -47,7 +50,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
 
         //@@author erinmayg-reused
-        //Reused from https://github.com/erinmayg/ip/blob/master/src/main/java/duke/gui/MainWindow.java
+        //Reused from https://github.com/erinmayg/ip/blob/master/src/main/java/duke/gui/MainWindow.java (For initialize)
+        //Reused from https://github.com/erinmayg/ip/blob/master/src/main/resources/view/scrollbar.css (For css)
         // with minor modifications
         // Background
         BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, false);
@@ -56,7 +60,14 @@ public class MainWindow extends AnchorPane {
             BackgroundPosition.DEFAULT, bgSize);
         dialogContainer.setBackground(new Background(bg));
 
+        // Scroll Pane and Scroll Bar
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.getStylesheets().add(this.getClass().getResource("/view/scrollbar.css").toString());
+
+        // Button
+        view.setFitHeight(25);
+        view.setFitWidth(55);
+        sendButton.setGraphic(view);
         //@@author
 
         sendIntroMessage();
