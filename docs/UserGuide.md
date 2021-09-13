@@ -79,6 +79,12 @@ tasks button. To remove a task using the remove task
 button, the user has to select the task(s) to remove and  
 click on the remove task button.
 
+### [Marking Tasks]
+
+Tasks can be marked as done through the `done` command or  
+through the list view, selecting the task to be done and marking  
+it as done.
+
 ## Usage
 
 ### `todo` - Add a todo task
@@ -87,7 +93,7 @@ Describe the action and its outcome.
 
 Example of usage: 
 
-`todo Sample description`
+    todo Sample description
 
 Outcome expected:
 
@@ -182,7 +188,15 @@ The following task has been removed
 Now you have 2 tasks remaining
 ```
 
+### `done` - Mark the task as done
 
+Input, `done` {index of task to mark}, one indexed. 
+
+```markdown
+done 1
+```
+
+Marks the first task as done.
 
 ## Resources used
 
