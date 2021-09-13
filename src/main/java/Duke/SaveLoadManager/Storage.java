@@ -1,11 +1,5 @@
 package duke.saveloadmanager;
 
-import duke.exceptions.ExceptionType;
-import duke.logics.Parser;
-import duke.exceptions.DukeException;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.ExceptionType;
+import duke.logics.Parser;
+import duke.task.Task;
+import duke.task.TaskList;
 /**
  * @@author Hang Zelin
  *
@@ -21,8 +20,8 @@ import java.util.Scanner;
  * In other words, programme allows Duke to save and read data from a file.
  */
 public class Storage {
-    private final String filePath;
 
+    private final String filePath;
     private final ArrayList<Task> list;
 
     /**

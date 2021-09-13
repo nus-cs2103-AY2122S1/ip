@@ -3,7 +3,6 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
 /**
  * @@author Hang Zelin
  *
@@ -12,10 +11,10 @@ import java.util.Locale;
  */
 public class Deadline extends Task {
 
+    private static final String TASKTYPE = "D";
     private boolean isDone;
     private final String task;
     private final LocalDateTime time;
-    private static final String TASKTYPE = "D";
 
     /**
      * Constructor for Deadlines containing boolean value if the task is done, the
@@ -88,10 +87,10 @@ public class Deadline extends Task {
         } else {
             specificTime = "" + this.time.getHour();
         }
-        return  specificTime;
+        return specificTime;
     }
 
-    private String getMinute(){
+    private String getMinute() {
         String specificTime;
         if (this.time.getMinute() < 10) {
             specificTime = "0" + this.time.getMinute();
@@ -143,7 +142,7 @@ public class Deadline extends Task {
         } else {
             value = 0;
         }
-        dataInfo =  TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
+        dataInfo = TASKTYPE + " | " + value + " | " + task + " | " + getTimeForSaveData();
         return dataInfo;
     }
 

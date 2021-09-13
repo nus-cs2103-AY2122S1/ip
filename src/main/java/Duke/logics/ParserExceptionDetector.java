@@ -12,18 +12,18 @@ import duke.task.TaskList;
  */
 public class ParserExceptionDetector {
     //Constant values
-    private final static String EMPTY = "";
-    private final static String SLASH = "/";
-    private final static String SPACE = " ";
-    private final static String BY = "/by";
-    private final static String AT = "/at";
-    private final static String TODO = "todo";
-    private final static String DEADLINE = "deadline";
-    private final static String DONE = "done";
-    private final static String DELETE = "delete";
-    private final static String EVENT = "event";
-    private final static String FIND = "find";
-    private final static String TELL = "tell";
+    private static final String EMPTY = "";
+    private static final String SLASH = "/";
+    private static final String SPACE = " ";
+    private static final String BY = "/by";
+    private static final String AT = "/at";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String EVENT = "event";
+    private static final String FIND = "find";
+    private static final String TELL = "tell";
     private final String message;
 
     /**

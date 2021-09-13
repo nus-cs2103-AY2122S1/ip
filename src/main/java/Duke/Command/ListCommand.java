@@ -7,7 +7,7 @@ import duke.task.TaskList;
  *
  * ListCommand will handle the situation when a user wants to see all the tasks in the list.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     private final TaskList taskList;
 
     /**

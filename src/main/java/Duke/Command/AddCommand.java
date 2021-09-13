@@ -9,7 +9,7 @@ import duke.uimanager.TextUi;
  *
  * AddCommand will handle the situation when a user wants to add a task.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final TaskList taskList;
     private final TextUi textUi;
     private final String taskType;
@@ -25,7 +25,7 @@ public class AddCommand extends Command{
      * @param taskInfo TaskInfo user takes in.
      * @param timeInfo TimeInfo user takes in.
      */
-    public AddCommand(TaskList taskList, TextUi textUi, String taskType, String taskInfo, String timeInfo){
+    public AddCommand(TaskList taskList, TextUi textUi, String taskType, String taskInfo, String timeInfo) {
         this.taskList = taskList;
         this.textUi = textUi;
         this.taskType = taskType;

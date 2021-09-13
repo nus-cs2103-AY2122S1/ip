@@ -1,15 +1,14 @@
 package duke.task;
 
-import duke.exceptions.ExceptionType;
-import duke.executions.LastExecution;
-import duke.logics.Parser;
-import duke.exceptions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.ExceptionType;
+import duke.executions.LastExecution;
+import duke.logics.Parser;
 /**
  * @@author Hang Zelin
  *
@@ -55,12 +54,12 @@ public class TaskList {
         Parser parser = new Parser("");
 
         String timeInFormat = (parser.parseTime(time) != null)
-                ? parser.parseTime(time).format(DateTimeFormatter.
-                ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
+                ? parser.parseTime(time).format(DateTimeFormatter
+                .ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
                 : "Null time Info";
         boolean isMessageContains = task.contains(time)
                 || task.contains(timeInFormat);
-        boolean isUnparsedInfoContains =  unparsedInfo != null && (unparsedInfo.contains(time)
+        boolean isUnparsedInfoContains = unparsedInfo != null && (unparsedInfo.contains(time)
                 || unparsedInfo.contains(timeInFormat));
 
         return isMessageContains || isUnparsedInfoContains;
@@ -76,8 +75,8 @@ public class TaskList {
         StringBuilder text = new StringBuilder();
         final int[] count = {0}; //count the number of the events happen on the time.
         tasks.stream()
-                .filter(task -> returnIsFound(time
-                        , task.getTimeForSaveData(), task.getTaskStatus()))
+                .filter(task -> returnIsFound(time,
+                        task.getTimeForSaveData(), task.getTaskStatus()))
                 .forEach(task -> text.append(++count[0])
                         .append(".").append(task.getTaskStatus()).append("\n"));
 
@@ -219,12 +218,18 @@ public class TaskList {
          * @return Task in a specific operationType. It can be either todo, deadline or event.
          */
         public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
-            return switch (type) {
-                   case TODO -> new ToDo(false, task);
-                   case DEADLINE -> new Deadline(false, task, time);
-                   case EVENT -> new Event(false, task, time);
-                   default -> null;
-            };
+            Task newTask;
+            switch (type) {
+            case TODO: newTask = new ToDo(false, task);
+            break;
+            case DEADLINE: newTask = new Deadline(false, task, time);
+            break;
+            case EVENT: newTask = new Event(false, task, time);
+            break;
+            default: newTask = null;
+            }
+
+            return newTask;
         }
     }
 }

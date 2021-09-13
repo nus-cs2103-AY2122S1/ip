@@ -7,7 +7,7 @@ import duke.uimanager.TextUi;
  *
  * ByeCommand will handle the situation when a user wants to end the dialog.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     private final TextUi textUi;
 
     /**

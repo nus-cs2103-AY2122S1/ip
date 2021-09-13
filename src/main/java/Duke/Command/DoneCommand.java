@@ -9,7 +9,7 @@ import duke.uimanager.TextUi;
  *
  * DoneCommand will handle the situation when a user wants to mark a task as done.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final TaskList taskList;
     private final TextUi textUi;
     private final int index;
@@ -21,7 +21,7 @@ public class DoneCommand extends Command{
      * @param textUi Duke's UI.
      * @param index Index of the specific task.
      */
-    public DoneCommand(TaskList taskList, TextUi textUi, int index){
+    public DoneCommand(TaskList taskList, TextUi textUi, int index) {
         this.taskList = taskList;
         this.textUi = textUi;
         this.index = index;

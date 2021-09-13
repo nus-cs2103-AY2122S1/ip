@@ -1,5 +1,4 @@
 package duke.uimanager;
-
 /**
  * @@author Hang Zelin
  *
@@ -15,10 +14,9 @@ public class TextUi {
      * @return Default helloMessage.
      */
     public String helloMessage() {
-        String text = """
-                Hello! Welcome to your best task manager Duke!
-                What can I do for you?
-                """;
+        String text = "Hello! Welcome to your best task manager Duke!"
+               + "What can I do for you?";
+
         return text;
     }
 
@@ -41,7 +39,7 @@ public class TextUi {
     public String markDoneUi(String parsedTask) {
         String text = "";
         text += "Nice! I've marked this task as done:\n"
-                + " " + parsedTask +"\n";
+                + " " + parsedTask + "\n";
 
         return text;
     }
@@ -97,6 +95,11 @@ public class TextUi {
         return text;
     }
 
+    /**
+     * Returns the Ui info for the undo method in taskList.
+     *
+     * @return Ui message when undo is invoked.
+     */
     public String undoUi() {
         String text = "Okay, I have helped undo your most recent command!\n";
         return text;

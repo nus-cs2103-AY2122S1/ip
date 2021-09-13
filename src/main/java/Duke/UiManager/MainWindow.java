@@ -6,11 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
-
 /**
  * @@author Hang Zelin
  *
@@ -37,8 +39,8 @@ public class MainWindow extends AnchorPane {
 
         backgroundSize = new BackgroundSize(900, 700,
                 true, true, true, true);
-        backgroundImage = new BackgroundImage(new Image("/background/background.jpg")
-                ,null,null, null, backgroundSize);
+        backgroundImage = new BackgroundImage(new Image("/background/background.jpg"),
+                null, null, null, backgroundSize);
     }
 
     private Rectangle setEmptySpace() {

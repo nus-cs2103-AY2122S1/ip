@@ -8,7 +8,7 @@ import duke.uimanager.TextUi;
  *
  * FindCommand will handle the situation when a user wants to find a task using keywords.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private final TaskList taskList;
     private final TextUi textUi;
     private final String keyword;
@@ -20,7 +20,7 @@ public class FindCommand extends Command{
      * @param textUi Duke's UI.
      * @param keyword String value for the keyword.
      */
-    public FindCommand(TaskList taskList, TextUi textUi, String keyword){
+    public FindCommand(TaskList taskList, TextUi textUi, String keyword) {
         this.taskList = taskList;
         this.textUi = textUi;
         this.keyword = keyword;

@@ -1,9 +1,8 @@
 package duke.executions;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.task.Task;
 /**
  * @@author Hang Zelin
  *
@@ -11,9 +10,9 @@ import java.util.ArrayList;
  */
 public class LastExecution {
     //Constant values
-    private final static String ADD = "add";
-    private final static String DELETE = "delete";
-    private final static String DONE = "done";
+    private static final String ADD = "add";
+    private static final String DELETE = "delete";
+    private static final String DONE = "done";
 
     private final String lastOperation;
     private final Task lastTask;
@@ -64,12 +63,15 @@ public class LastExecution {
     public String undo() {
         String text;
 
-        text = switch (lastOperation) {
-        case ADD -> undoAdd();
-        case DELETE -> undoDelete();
-        case DONE -> resetDone();
-        default -> "OOPs! There is no previous operation!\n";
-        };
+        switch (lastOperation) {
+        case ADD: text = undoAdd();
+        break;
+        case DELETE: text = undoDelete();
+        break;
+        case DONE: text = resetDone();
+        break;
+        default: text = "OOPs! There is no previous operation!\n";
+        }
         return text;
     }
 }

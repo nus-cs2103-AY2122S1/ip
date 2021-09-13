@@ -8,7 +8,7 @@ import duke.uimanager.TextUi;
  *
  * TellCommand will handle the situation when a user wants to search a task by specific time.
  */
-public class TellCommand extends Command{
+public class TellCommand extends Command {
     private final TaskList taskList;
     private final TextUi textUi;
     private final String time;
@@ -20,7 +20,7 @@ public class TellCommand extends Command{
      * @param textUi Duke's UI.
      * @param time String value for the time users take in.
      */
-    public TellCommand(TaskList taskList, TextUi textUi, String time){
+    public TellCommand(TaskList taskList, TextUi textUi, String time) {
         this.taskList = taskList;
         this.textUi = textUi;
         this.time = time;

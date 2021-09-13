@@ -8,7 +8,7 @@ import duke.uimanager.TextUi;
  *
  * UndoCommand will handle the situation when a user wants to Undo a most recent task.
  */
-public class UndoCommand extends Command{
+public class UndoCommand extends Command {
     private final TaskList taskList;
     private final TextUi textUi;
 

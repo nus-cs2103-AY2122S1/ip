@@ -1,14 +1,13 @@
 package duke.main;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.executions.Execution;
 import duke.logics.Parser;
 import duke.saveloadmanager.Storage;
 import duke.task.TaskList;
 import duke.uimanager.TextUi;
-
-import java.io.IOException;
-
 /**
  * @@author Hang Zelin
  * Main Programme to execute the Duke Project
@@ -19,10 +18,10 @@ import java.io.IOException;
  */
 public class Duke {
 
-    private final static String FILEPATH = "data/tasks.txt";
+    private static final String FILEPATH = "data/tasks.txt";
     private final Storage storage;
-    private TaskList tasks;
     private final TextUi textUi;
+    private TaskList tasks;
 
     /**
      * Initializes Ui, storage and load TaskLists from specific filePath for Duke.
@@ -65,7 +64,7 @@ public class Duke {
         Execution execution = new Execution(tasks, textUi, parser);
         String dukeResponse;
 
-        dukeResponse = execution.ExecutionResponse();
+        dukeResponse = execution.executionResponse();
         dukeResponse += updateSaveData(); //Update the SaveData every time a round of operation is done.
 
         return dukeResponse;

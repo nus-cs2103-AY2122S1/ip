@@ -1,5 +1,8 @@
 package duke.uimanager;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-import java.io.IOException;
-import java.util.Collections;
-
 /**
  * @@author Hang Zelin
  *
@@ -59,10 +58,10 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-radius:12px;" +
-                "-fx-border-style: solid; -fx-border-width: 1em");
-        dialogBox.dialog.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-width:3;" +
-                "-fx-border-radius:10px; -fx-background-color: #FFADAD; -fx-background-radius: 12px;");
+        dialogBox.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-radius:12px;"
+                + "-fx-border-style: solid; -fx-border-width: 1em");
+        dialogBox.dialog.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-width:3;"
+                + "-fx-border-radius:10px; -fx-background-color: #FFADAD; -fx-background-radius: 12px;");
         return dialogBox;
     }
 
@@ -75,10 +74,10 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-radius:12px;" +
-                "-fx-border-style: solid; -fx-border-width: 1em;");
-        dialogBox.dialog.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-width:3;" +
-                "-fx-border-radius:10px; -fx-background-color:  #3DB2FF; -fx-background-radius: 12px;");
+        dialogBox.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-radius:12px;"
+                + "-fx-border-style: solid; -fx-border-width: 1em;");
+        dialogBox.dialog.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-width:3;"
+                + "-fx-border-radius:10px; -fx-background-color:  #3DB2FF; -fx-background-radius: 12px;");
         dialogBox.flip();
         return dialogBox;
     }

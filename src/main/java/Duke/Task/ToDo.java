@@ -1,5 +1,4 @@
 package duke.task;
-
 /**
  * @@author Hang Zelin
  *
@@ -7,9 +6,9 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    private static final String TASKTYPE = "T";
     private boolean isDone;
     private final String task;
-    private static final String TASKTYPE = "T";
 
     /**
      * Constructor for ToDos containing boolean value if the task is done, the

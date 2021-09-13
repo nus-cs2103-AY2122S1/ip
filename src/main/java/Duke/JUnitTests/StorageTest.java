@@ -1,14 +1,14 @@
 package duke.junittests;
 
-import duke.exceptions.DukeException;
-import duke.saveloadmanager.Storage;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
+import org.testng.annotations.Test;
+
+import duke.exceptions.DukeException;
+import duke.saveloadmanager.Storage;
 /**
  * @author Hang Zelin
  *
