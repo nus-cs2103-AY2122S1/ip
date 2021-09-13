@@ -75,4 +75,19 @@ public class TaskList {
     public void removeTask(int val) {
         userList.remove(val);
     }
+
+    /**
+     * Checks if the specified task is present in the task list.
+     *
+     * @param task Task object;
+     * @return true or false
+     */
+    public boolean isTaskPresent(Task task) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).equals(task)) {
+                return true;
+            }        
+        }
+        return false;
+    }
 }

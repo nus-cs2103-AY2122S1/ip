@@ -54,7 +54,7 @@ public class Parser {
     /**
      * Checks if the user types the command 'bye' or the user clicks enter without typing any command.
      *
-     * @return True or False.
+     * @return true or false.
      */
     public boolean isExit() {
         if (command.equals("bye") || command.equals("")) {

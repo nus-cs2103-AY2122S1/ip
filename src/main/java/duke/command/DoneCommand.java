@@ -56,11 +56,12 @@ public class DoneCommand extends Command {
             throw new TaskNotFoundException();
         }
         
-        Task t = taskList.getTask(value - 1);
-        t.markAsDone();
+        Task task = taskList.getTask(value - 1);
+        task.markAsDone();
+        assert task.getStatusIcon().equals("X"): "Since the task is marked as done, the status icon returned should be X";
         storage.writeToFile("./duke.txt", taskList);
         Ui ui = new Ui(taskList, storage);
-        String response = ui.doneResponse(t);
+        String response = ui.doneResponse(task);
         return response;
         
     }

@@ -153,6 +153,7 @@ public class Ui {
             }
         }
         
+        assert count > 0: "count should be greater than 0";
         if (count == 1) {
             String message = Ui.printMessage("Sorry, there are no matching tasks in your list :/");
             return message;

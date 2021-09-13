@@ -59,6 +59,8 @@ public class DeleteCommand extends Command {
         
         Task task = taskList.getTask(value-1);
         taskList.removeTask(value-1);
+        boolean isTaskPresent = taskList.isTaskPresent(task);
+        assert isTaskPresent == false: "isTaskPresent should be false since the task is removed from the task list";
         storage.writeToFile("./duke.txt", taskList);
         Ui ui = new Ui(taskList, storage);
         String response = ui.deleteResponse(task);

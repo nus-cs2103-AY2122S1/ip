@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+
 import duke.task.TaskList;
 
 import duke.command.Command;
@@ -40,6 +41,7 @@ public class Duke {
     public String getResponse(String input) throws DukeException {
         Parser parser = new Parser(input);
         if (parser.isExit()) {
+            assert (input.equals("bye") || input.equals("")): "input should be either bye or an empty string";
             String response = Ui.sayBye();
             return response;
         } 
