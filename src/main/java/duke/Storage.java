@@ -214,6 +214,7 @@ public class Storage {
             for (Task t : temp) {
                 taskList.addTask(t);
             }
+            archiveScanner.close();
 
         } catch (IOException ioException) {
             throw new ArchiveException("to save a new Archive.");

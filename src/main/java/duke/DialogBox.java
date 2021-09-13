@@ -26,10 +26,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    // sets the minimum height of Dialog Panel
-    private final int MIN_HEIGHT;
-
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -40,11 +36,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // Min_Height of DialogBox is the number of lines that Duke's response will return to the User and
-        // multiplied by the height for each line (18)
-        MIN_HEIGHT = (text.split("\n").length + 1) * 20;
-
-        dialog.setMinHeight(MIN_HEIGHT);
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
         dialog.setText(text);
         dialog.setStyle("-fx-border-color: #897caa; -fx-border-image-insets: 5; -fx-border-radius: 8; "
                 + "-fx-border-width: 2; -fx-label-padding: 7");

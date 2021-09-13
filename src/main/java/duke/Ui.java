@@ -208,6 +208,31 @@ public class Ui {
     }
 
     /**
+     * Returns a message to display all available commands that he user can use.
+     *
+     * @return message with all available commands.
+     */
+    public String help() {
+        String helpMessage = "(Note – date format: yyyy/mm/dd)\n"
+                + "Commands you can run:\n"
+                + " * todo (DESC) – creates a todo task\n"
+                + " * deadline (DESC) /by (DATE) – creates a deadline task\n"
+                + " * event (DESC) /at (DATE) – creates an event task\n"
+                + " * list – lists all tasks\n"
+                + " * done (INDEX) – mark a task as done \n"
+                + " * delete (INDEX) – deletes a task\n"
+                + " * find (KEYWORD) – finds all tasks that contain the keyword\n"
+                + " * check (DATE) – finds all tasks with matching date\n"
+                + " * clear – clears task list and hard disk\n"
+                + " * archive /saveAs (FILENAME) – creates new archive file\n"
+                + " * archive /load (FILENAME) – loads an archive file\n"
+                + " * archive /delete (FILENAME) – deletes an archive file\n"
+                + " * archive /list – lists all archive files";
+
+        return helpMessage;
+    }
+
+    /**
      * Prints Duke's response to the console.
      *
      * @param response to print.

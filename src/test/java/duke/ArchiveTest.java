@@ -6,10 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import duke.errors.ArchiveException;
-import duke.errors.DukeException;
 import org.junit.jupiter.api.Test;
 
+import duke.errors.ArchiveException;
 
 class ArchiveTest {
 

@@ -10,12 +10,21 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
 import duke.command.LoadArchiveCommand;
 import duke.command.NewArchiveCommand;
-import duke.errors.*;
+import duke.errors.ArchiveException;
+import duke.errors.DukeException;
+import duke.errors.InvalidDateException;
+import duke.errors.InvalidDeadlineException;
+import duke.errors.InvalidDeleteException;
+import duke.errors.InvalidDoneException;
+import duke.errors.InvalidEventException;
+import duke.errors.InvalidTodoException;
+import duke.errors.InvalidUserInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -29,7 +38,8 @@ import duke.testinginterface.TaskListInterface;
  */
 public class Parser {
     private TaskListInterface taskList;
-    private enum Command { Exit, List, Done, Delete, Clear, Todo, Deadline, Event, CheckDate, Find, Archive, Invalid };
+    private enum Command { Exit, List, Help, Done, Delete, Clear, Todo, Deadline, Event,
+        CheckDate, Find, Archive, Invalid };
 
     /**
      * Constructor.
@@ -59,6 +69,9 @@ public class Parser {
             break;
         case List:
             c = new ListCommand();
+            break;
+        case Help:
+            c = new HelpCommand();
             break;
         case Done:
             isValidDone(input);
@@ -116,6 +129,8 @@ public class Parser {
             return Command.Exit;
         } else if (input.equals("list")) {
             return Command.List;
+        } else if (input.equals("help")) {
+            return Command.Help;
         } else if (input.startsWith("done")) {
             return Command.Done;
         } else if (input.startsWith("delete")) {
@@ -152,7 +167,13 @@ public class Parser {
         if (input.length() == 5) {
             throw new InvalidDoneException("Missing number (following 'done').");
         }
-        int donePos = Integer.valueOf(input.substring(5));
+
+        int donePos = 0;
+        try {
+            donePos = Integer.valueOf(input.substring(5));
+        } catch (NumberFormatException numberFormatException) {
+            throw new InvalidDoneException("Number must be an integer.");
+        }
 
         //checks if the task to be marked as done is within the range of the list
         if (donePos <= 0 || donePos > taskList.getTasks().size()) {
@@ -173,7 +194,12 @@ public class Parser {
         if (input.length() == 7) {
             throw new InvalidDeleteException("Missing number (following 'delete').");
         }
-        int deletePos = Integer.valueOf(input.substring(7));
+        int deletePos = 0;
+        try {
+            deletePos = Integer.valueOf(input.substring(7));
+        } catch (NumberFormatException numberFormatException) {
+            throw new InvalidDeleteException("Number must be an integer.");
+        }
         if (deletePos <= 0 || deletePos > this.taskList.getTasks().size()) {
             throw new InvalidDeleteException("Task to delete is not within the range of the list.");
         }

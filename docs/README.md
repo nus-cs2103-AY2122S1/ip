@@ -82,6 +82,35 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
+### `help` - List all available commands
+
+Displays all available commands to the user.
+
+Example of usage:
+
+`help`
+
+Expected outcome:
+
+list of all available commands to the user.
+```
+(Note – date format: yyyy/mm/dd)
+Commands you can run:
+* todo (DESC) – creates a todo task
+* deadline (DESC) /by (DATE) – creates a deadline task
+* event (DESC) /at (DATE) – creates an event task
+* list – lists all tasks
+* done (INDEX) – mark a task as done
+* delete (INDEX) – deletes a task
+* find (KEYWORD) – finds all tasks that contain the keyword
+* check (DATE) – finds all tasks with matching date
+* clear – clears task list and hard disk
+* archive /saveAs (FILENAME) – creates new archive file
+* archive /load (FILENAME) – loads an archive file
+* archive /delete (FILENAME) – deletes an archive file
+* archive /list – lists all archive files
+```
+
 ### `list` - List all tasks
 
 Displays all tasks in the task list to the user.
