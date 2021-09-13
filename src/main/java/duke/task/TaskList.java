@@ -58,7 +58,7 @@ public class TaskList {
     }
 
     /**
-     * Get a task by its id.
+     * Retrieves a task by its id.
      *
      * @param id The id of the task.
      * @return The resulting task.

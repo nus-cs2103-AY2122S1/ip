@@ -87,8 +87,8 @@ public class Storage {
     }
 
     /**
-     * Solution adapted from https://stackoverflow.com/a/37624091 with modifications.
      * Updates the corresponding task's data.
+     * Solution adapted from https://stackoverflow.com/a/37624091 with modifications.
      *
      * @param index the line number to overwrite
      * @param task the new task
@@ -111,6 +111,7 @@ public class Storage {
     }
 
     /**
+     * Deletes the corresponding task in storage.
      * Solution adapted from https://stackoverflow.com/a/37624091 with modifications.
      *
      * @param taskId Id of the task to delete.
