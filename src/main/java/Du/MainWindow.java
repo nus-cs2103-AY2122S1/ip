@@ -40,8 +40,6 @@ public class MainWindow extends AnchorPane {
     }
 
     public void start() throws IOException {
-//        Text t = new Text("This is a text sample");
-//        t.setFont(Font.font ("Verdana", 20));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(du.getUi().greet(), dukeImage),
                 DialogBox.getDukeDialog("Previous records (if there are any):\n" +
