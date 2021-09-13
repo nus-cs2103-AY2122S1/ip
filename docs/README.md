@@ -1,6 +1,6 @@
 <div align = "center">
-<img align="center" width="80" height="80" src="/img/Main_Logo.jpg">
-
+<img align="center" width="100" height="100" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_Logo.png">
+  
 # User Guide For WhoBot
 </div>
 
