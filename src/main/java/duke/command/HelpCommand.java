@@ -5,12 +5,12 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Command to mark a task as done.
+ * Command to display the help message.
  */
 public class HelpCommand extends Command {
 
     /**
-     * Marks the task as done.
+     * Displays the help message.
      * @param tasks Optional, nullable.
      * @param ui Ui to display help message to.
      * @param storage Optional, nullable.
@@ -21,9 +21,9 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Message to be displayed while performing the task.
+     * Returns the message to be displayed while performing the task.
      *
-     * @param tasks Optional, nullable.
+     * @param tasks TaskList of current tasks.
      * @return Message to display to the user.
      */
     @Override

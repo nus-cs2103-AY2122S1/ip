@@ -21,7 +21,7 @@ public class CommandStub extends Command {
     }
 
     /**
-     * Message to be displayed while performing the task.
+     * Returns the message to be displayed while performing the task.
      *
      * @param tasks TaskList of current tasks.
      * @return Message to display to the user.

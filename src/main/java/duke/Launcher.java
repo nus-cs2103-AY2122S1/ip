@@ -3,7 +3,7 @@ package duke;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Resolves classpath issues as a workaround.
  */
 public class Launcher {
     public static void main(String[] args) {

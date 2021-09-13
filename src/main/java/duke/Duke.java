@@ -35,7 +35,7 @@ public class Duke extends Application {
     private TextField userInput;
 
     /**
-     * Empty constructor for javafx.
+     * Class constructor for javafx.
      * Ui initialization is delayed to accept dialogContainer.
      */
     public Duke() {
@@ -46,7 +46,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Private constructor to initialize other components.
+     * Class constructor to initialize with file path.
      *
      * @param filePath path to the log file to be read by Storage.
      */
@@ -57,7 +57,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Main method.
+     * Starts Duk as a command line program.
      *
      * @param args Command line arguments.
      */
@@ -68,7 +68,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Main body to loop through reading commands and displaying outputs.
+     * Loops infinitely between user input and display output.
      */
     private void run() {
         assert storage != null : "Storage not properly initialized";
@@ -130,6 +130,11 @@ public class Duke extends Application {
         ui.showWelcome();
     }
 
+    /**
+     * Sets the background of the ui.
+     *
+     * @param anchorPane Ui element to be set.
+     */
     private void setBackground(AnchorPane anchorPane) {
         Image image = new Image(this.getClass().getResourceAsStream("/images/bg.jpg"));
         BackgroundSize size = new BackgroundSize(STAGE_WIDTH,
@@ -187,7 +192,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Event handler to process user input from GUI.
+     * Processes user input from GUI.
      *
      * @param stringInput String supplied by user.
      */

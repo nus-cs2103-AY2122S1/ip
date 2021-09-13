@@ -65,6 +65,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an event string.
+     *
+     * @param input Input to be parsed.
+     * @return Event representing input.
+     */
     private static Command parseEvent(String input) {
         String[] params;
         params = input.split("/at");
@@ -75,6 +81,12 @@ public class Parser {
                 LocalDate.parse(params[1])));
     }
 
+    /**
+     * Parses a deadline string.
+     *
+     * @param input Input to be parsed.
+     * @return Deadline representing input.
+     */
     private static Command parseDeadline(String input) {
         String[] params;
         params = input.split("/by");
@@ -85,6 +97,13 @@ public class Parser {
                 LocalDate.parse(params[1])));
     }
 
+    /**
+     * Parses a todo string.
+     *
+     * @param input Input to be parsed.
+     * @return Todo representing input.
+     * @throws DukeException If the string has an empty description.
+     */
     private static Command parseTodo(String input) throws DukeException {
         try {
             String name = input.substring(COMMAND_TODO_LENGTH);

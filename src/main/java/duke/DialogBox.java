@@ -10,12 +10,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 /**
- * Dialog box containing text and profile image
+ * DialogBox represents a UI container for text and profile images
  */
 public class DialogBox extends HBox {
 
     /**
-     * Private constructor for dialog box.
+     * Sole constructor for dialog box.
+     *
      * @param l label to display.
      * @param iv picture to display.
      */

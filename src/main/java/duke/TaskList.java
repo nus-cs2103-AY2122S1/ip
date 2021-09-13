@@ -21,6 +21,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     *
      * @param task Task to be added.
      */
     public void add(Task task) {
@@ -28,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * String representation of the tasklist.
+     * Returns string representation of the tasklist.
      *
      * @return String containing all tasks separated by a newline character.
      */
@@ -76,6 +77,7 @@ public class TaskList {
 
     /**
      * Finds all tasks with description matching the regex.
+     *
      * @param regex Regex to match to.
      * @return TaskList containing all matching tasks.
      */

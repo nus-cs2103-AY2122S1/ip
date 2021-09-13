@@ -19,8 +19,10 @@ public class FindCommand extends Command {
     public FindCommand(String regex) {
         this.regex = regex;
     }
+
     /**
      * Finds the task.
+     *
      * @param tasks TaskList to be searched.
      * @param ui Ui to display the results in.
      * @param storage Storage to interact with, not necessary.
@@ -32,9 +34,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns the text representation of the found results.
-     * @param tasks TaskList to be displayed.
-     * @return Text representation of the found results.
+     * Returns the message to be displayed while performing the task.
+     *
+     * @param tasks TaskList of current tasks.
+     * @return Message to display to the user.
      */
     @Override
     public String getMessage(TaskList tasks) {
