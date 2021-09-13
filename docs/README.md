@@ -5,10 +5,10 @@
 __TiTi Catbot__ is a Personal Assistant Chatbot that helps you keep track of your upcoming tasks!
 TiTi Catbot frees your mind of having to remember things you need to do.
 
-TiTi can manage three types of tasks: 
-1. `Todo`: simple tasks to be completed
-2. `Deadline`: tasks that need to be completed before a specified time
-3. `Event`: scheduled tasks for at specified time
+TiTi can manage three types of tasks:
+*  `Todo`: simple tasks to be completed
+*  `Deadline`: tasks that need to be completed before a specified time
+*  `Event`: scheduled tasks for at specified time
 
 TiTi can help you keep track of which tasks have been completed 
 and praise you for your hard work!  (=^ ･ω･^=)❀
@@ -56,7 +56,7 @@ Examples:
 
 <br>
 
-### Listing all tasks: `list` 
+### ❀ Listing all tasks: `list` 
 
 Shows a list of all tasks in your task list.
 
@@ -64,7 +64,7 @@ Format: `list`
 
 <br>
 
-### Marking a task as complete: `done`
+### ❀ Marking a task as complete: `done`
 
 Marks specified tasks as done. 
 
@@ -75,7 +75,7 @@ Example: `done 2 3`
 
 <br>
 
-### Deleting a task: `delete`
+### ❀ Deleting a task: `delete`
 
 Deletes specified tasks from task list.
 
@@ -86,7 +86,7 @@ Example: `delete 2 3`
 
 <br>
 
-### Finding a task: `find`
+### ❀ Finding a task: `find`
 
 Finds specified tasks from task list.
 
@@ -96,7 +96,7 @@ Example: `find homework`
 
 <br>
 
-### Exiting the program: `exit`
+### ❀ Exiting the program: `exit`
 
 Exits the program. 
 
@@ -105,8 +105,8 @@ Format: `exit`
 <br>
 <hr>
 
-> <h3>"Come play with me soon! ฅ^•ω•^ฅ " – TiTi  </h3>
+> <h2>"Come play with me soon! ฅ^•ω•^ฅ " – TiTi  </h2>
 
 Hope you enjoy your time with TiTi!
 
-
+<br>
