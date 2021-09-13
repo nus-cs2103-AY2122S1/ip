@@ -88,6 +88,7 @@ public class Duke {
 
                 // Case where user wants to add a new event task
             } else if (command.equals("event")) {
+
                 tasks.addTask(new Event(parsedInputString[1], parsedInputString[2]));
                 taskListIsAddedTo = true;
 

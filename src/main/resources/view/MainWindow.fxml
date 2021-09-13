@@ -13,7 +13,7 @@
     <Button fx:id="helpButton" alignment="CENTER" layoutX="356.0" layoutY="550.0" mnemonicParsing="false" onAction="#openHelpPopup" prefHeight="49.0" prefWidth="44.0" text="Help" />
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="547.0" prefWidth="400.0" vvalue="1.0">
       <content>
-        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" styleClass="mainWindowBg" stylesheets="@../style.css" />
       </content>
     </ScrollPane>
 

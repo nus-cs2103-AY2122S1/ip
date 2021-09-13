@@ -62,7 +62,7 @@ public class Parser {
             parsedInput = checkEvent(input);
 
             extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
-                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex]};
+                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskDateIndex]};
             return extractedInfo;
 
         case "deadline":
