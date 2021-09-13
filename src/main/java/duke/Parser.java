@@ -18,8 +18,8 @@ import duke.task.ToDo;
  */
 public class Parser {
 
-    private static final String dateTimeFormat = "ddMMyy HHmm";
-    private static final String dateFormat = "ddMMyy";
+    private static final String dateTimeInputFormat = "ddMMyy HHmm";
+    private static final String dateInputFormat = "ddMMyy";
 
     /**
      * The TaskList which the Parser updates.
@@ -114,12 +114,12 @@ public class Parser {
         }
 
         try {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateInputFormat);
             LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
             Deadline newDeadline = new Deadline(deadlineInfo[0], by);
             return newDeadline;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date with format " + dateFormat + ".");
+            throw new DukeException("Please enter a valid date with format " + dateInputFormat + ".");
         }
     }
 
@@ -130,12 +130,12 @@ public class Parser {
         }
 
         try {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeInputFormat);
             LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
             Event newEvent = new Event(eventInfo[0], at);
             return newEvent;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date with format " + dateFormat + ".");
+            throw new DukeException("Please enter a valid date with format " + dateTimeInputFormat + ".");
         }
     }
 

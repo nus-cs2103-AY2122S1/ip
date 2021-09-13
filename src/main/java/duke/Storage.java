@@ -22,6 +22,9 @@ import duke.task.ToDo;
  */
 public class Storage {
 
+    private static final String dateTimePrintFormat = "EEE dd MMM yyyy hh:mma";
+    private static final String datePrintFormat = "EEE dd MMM yyyy";
+
     private final String filePath;
 
     /**
@@ -52,13 +55,13 @@ public class Storage {
                     switch (line.charAt(1)) {
                     case 'D':
                         String[] deadlineInfo = taskInfo.split(" \\| by: ");
-                        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE dd MMM yyyy");
+                        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePrintFormat);
                         LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
                         newTask = new Deadline(deadlineInfo[0], by);
                         break;
                     case 'E':
                         String[] eventInfo = taskInfo.split(" \\| at: ");
-                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEE dd MMM yyyy HH:mma");
+                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimePrintFormat);
                         LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
                         newTask = new Event(eventInfo[0], at);
                         break;

@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    private static final String dateTimePrintFormat = "EEE dd MMM yyyy hh:mma";
+
     protected LocalDateTime at;
 
     /**
@@ -33,7 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter printFormat = DateTimeFormatter.ofPattern("EEE dd MMM yyyy hh:mma");
+        DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(dateTimePrintFormat);
         return "[E]" + super.toString() + " | at: " + at.format(printFormat);
     }
 

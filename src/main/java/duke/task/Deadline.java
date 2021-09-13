@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    private static final String datePrintFormat = "EEE dd MMM yyyy";
+
     protected LocalDate by;
 
     /**
@@ -36,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter printFormat = DateTimeFormatter.ofPattern("EEE dd MMM yyyy");
+        DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(datePrintFormat);
         return "[D]" + super.toString() + " | by: " + by.format(printFormat);
     }
 
