@@ -7,7 +7,7 @@ package duke;
  */
 public class Duke {
 
-    private Storage storage = new Storage();
+    private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
@@ -16,6 +16,7 @@ public class Duke {
      * Creates Duke Chat Bot instance.
      */
     public Duke() {
+        storage = new Storage();
         ui = new Ui();
         taskList = new TaskList(storage.fileReader(), ui);
         parser = new Parser(ui, storage);

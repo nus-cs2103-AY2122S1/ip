@@ -3,14 +3,6 @@ package duke;
 public class Ui {
 
     /**
-     * Displays start message.
-     */
-    public void startMessage() {
-        String greeting = "Why hello there! It's Duke here!\n" + "How can I help you today master?";
-        System.out.println(greeting);
-    }
-
-    /**
      * Displays bye message.
      *
      * @return String message for the bye sequence.
