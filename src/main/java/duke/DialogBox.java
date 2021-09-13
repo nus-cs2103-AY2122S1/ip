@@ -57,12 +57,24 @@ public class DialogBox extends HBox {
         this.dialog.setTextAlignment(TextAlignment.RIGHT);
     }
 
+    /**
+     * Formats for user dialog
+     * @param text text to be displayed
+     * @param img image to be displayed
+     * @return Formatted user dialog
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setRight();
         return db;
     }
 
+    /**
+     * Formats for Duke dialog
+     * @param text text to be displayed
+     * @param img image to be displayed
+     * @return Formatted Duke dialog
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

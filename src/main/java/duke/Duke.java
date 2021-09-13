@@ -24,7 +24,7 @@ public class Duke {
 
     /**
      * Returns appropriate response based on input
-     * @param input
+     * @param input input of user
      * @return <code>String</code> response message
      */
     String getResponse(String input) {
@@ -41,5 +41,13 @@ public class Duke {
             return e.toString();
         }
         return "Duke heard: " + input + "\n" + message;
+    }
+
+    /**
+     * Returns welcome message
+     * @return welcome message
+     */
+    String getWelcomeMessage() {
+        return "Welcome to Duke!\nEnter *help* for commands!";
     }
 }

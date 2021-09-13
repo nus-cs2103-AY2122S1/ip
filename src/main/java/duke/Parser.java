@@ -8,16 +8,17 @@ import java.time.LocalDate;
 public class Parser {
 
     public static final String INVALID_DATE_ERROR = "Please enter a valid date (yyyy-mm-dd) :(";
+    public static final String INVALID_FORMAT_ERROR = "Please enter a valid number :(";
 
     /**
      * Returns corresponding <code>Command</code> based on input supplied
      * @param input User input
      * @return <code>Command</code> object
-     * @throws DukeException
+     * @throws DukeException when an exception is caught
      */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");
-        String body = "";
+        StringBuilder body = new StringBuilder();
         String date = inputArr[inputArr.length - 1];
         boolean hasDate = false;
         for (int i = 1; i < inputArr.length; i++) {
@@ -26,7 +27,7 @@ public class Parser {
                 hasDate = true;
                 break;
             }
-            body += " " + inputArr[i];
+            body.append(" ").append(inputArr[i]);
         }
         String lowerCaseInput = inputArr[0].toLowerCase();
         switch (lowerCaseInput) {
@@ -37,11 +38,11 @@ public class Parser {
         case "done":
             return getDoneCommand(inputArr);
         case "todo":
-            return getAddTodoCommand(body);
+            return getAddTodoCommand(body.toString());
         case "deadline":
-            return getAddDeadlineCommand(body, date, hasDate);
+            return getAddDeadlineCommand(body.toString(), date, hasDate);
         case "event":
-            return getAddEventCommand(body, date, hasDate);
+            return getAddEventCommand(body.toString(), date, hasDate);
         case "delete":
             return getDeleteCommand(inputArr);
         case "get":
@@ -80,6 +81,9 @@ public class Parser {
             throw new DukeException("Please enter a date!");
         }
         String[] dateArr = inputArr[1].split("-");
+        if (dateArr.length < 3) {
+            throw new DukeException(INVALID_DATE_ERROR);
+        }
         int year = Integer.parseInt(dateArr[0]);
         int month = Integer.parseInt(dateArr[1]);
         int day = Integer.parseInt(dateArr[2]);
@@ -100,7 +104,13 @@ public class Parser {
         if (inputArr.length < 2) {
             throw new DukeException("Please enter a number!");
         }
-        return new DeleteCommand(Integer.parseInt(inputArr[1]));
+        int index;
+        try {
+            index = Integer.parseInt(inputArr[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(INVALID_FORMAT_ERROR);
+        }
+        return new DeleteCommand(index);
     }
 
     /**
@@ -182,6 +192,12 @@ public class Parser {
         if (inputArr.length < 2) {
             throw new DukeException("Please enter a number!");
         }
-        return new DoneCommand(Integer.parseInt(inputArr[1]));
+        int index;
+        try {
+            index = Integer.parseInt(inputArr[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(INVALID_FORMAT_ERROR);
+        }
+        return new DoneCommand(index);
     }
 }

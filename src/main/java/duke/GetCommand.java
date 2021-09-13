@@ -28,17 +28,17 @@ public class GetCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
         int counter = 0;
-        String message = "Here are the matching tasks in your list:\n";
+        StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task i : savedTasks) {
             if (i instanceof Event) {
                 if (((Event) i).getDate().equals(this.date)) {
-                    message += i + "\n";
+                    message.append(i).append("\n");
                     counter++;
                 }
             }
             if (i instanceof Deadline) {
                 if (((Deadline) i).getDeadline().equals(this.date)) {
-                    message += i + "\n";
+                    message.append(i).append("\n");
                     counter++;
                 }
             }
@@ -46,6 +46,6 @@ public class GetCommand extends Command {
         if (counter == 0) {
             return "No tasks found!";
         }
-        return message;
+        return message.toString();
     }
 }
