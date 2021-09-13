@@ -46,9 +46,9 @@ public class Parser {
      */
     public String parse(String userInput) throws DukeException {
         String[] inputStringArray = userInput.split(" ", 2);
-        String firstWord = inputStringArray[0];
+        String firstWordOfInput = inputStringArray[0];
         if (inputStringArray.length == 1) {
-            switch (firstWord) {
+            switch (firstWordOfInput) {
             case "list":
                 return tasks.getAllTasksString();
             case "done":
@@ -67,10 +67,11 @@ public class Parser {
                 throw new DukeException("Sorry, I don't know what that means.");
             }
         } else {
-            switch (firstWord) {
+            String restOfInput = inputStringArray[1];
+            switch (firstWordOfInput) {
             case "done":
                 try {
-                    int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
+                    int taskIndex = Integer.parseInt(restOfInput) - 1;
                     tasks.setTaskAsDone(taskIndex);
                     return "Nice! I've marked this task as done:\n "
                             + tasks.getTask(taskIndex).toString();
@@ -79,7 +80,7 @@ public class Parser {
                 }
             case "delete":
                 try {
-                    int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
+                    int taskIndex = Integer.parseInt(restOfInput) - 1;
                     Task deletedTask = tasks.getTask(taskIndex);
                     tasks.deleteTask(taskIndex);
                     return "Noted. I've deleted this task:\n " + deletedTask.toString();
@@ -87,17 +88,17 @@ public class Parser {
                     throw new DukeException("Please specify a valid task number.");
                 }
             case "find":
-                return tasks.getMatchingTasksString(inputStringArray[1]);
+                return tasks.getMatchingTasksString(restOfInput);
             case "deadline":
-                Deadline newDeadline = createDeadline(inputStringArray[1]);
+                Deadline newDeadline = createDeadline(restOfInput);
                 tasks.addTask(newDeadline);
                 return "Got it. I've added this task:\n " + newDeadline.toString();
             case "event":
-                Event newEvent = createEvent(inputStringArray[1]);
+                Event newEvent = createEvent(restOfInput);
                 tasks.addTask(newEvent);
                 return "Got it. I've added this task:\n " + newEvent.toString();
             case "todo":
-                Task newToDo = new ToDo(inputStringArray[1]);
+                Task newToDo = createToDo(restOfInput);
                 tasks.addTask(newToDo);
                 return "Got it. I've added this task:\n " + newToDo.toString();
             default:
