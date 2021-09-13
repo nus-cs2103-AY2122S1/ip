@@ -7,11 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -20,6 +25,8 @@ import javafx.scene.text.Text;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    @FXML
+    private HBox textBox;
     @FXML
     private Text dialog;
     @FXML
@@ -35,6 +42,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        BackgroundFill bf = new BackgroundFill(
+                Color.LIGHTSKYBLUE,
+                new CornerRadii(10, 0, 10, 10, false),
+                new Insets(5)
+        );
+        textBox.setBackground(new Background(bf));
+
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -47,6 +61,14 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+
+        BackgroundFill bf = new BackgroundFill(
+                Color.BLANCHEDALMOND,
+                new CornerRadii(0, 10, 10, 10, false),
+                new Insets(5)
+        );
+        textBox.setBackground(new Background(bf));
+        dialog.setWrappingWidth(250);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
