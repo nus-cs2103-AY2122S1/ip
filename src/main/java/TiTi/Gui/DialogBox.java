@@ -1,4 +1,4 @@
-package TiTi.Gui;
+package titi.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

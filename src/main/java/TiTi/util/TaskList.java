@@ -1,8 +1,8 @@
-package TiTi.util;
+package titi.util;
 
 import java.util.ArrayList;
 
-import TiTi.task.Task;
+import titi.task.Task;
 
 
 /**

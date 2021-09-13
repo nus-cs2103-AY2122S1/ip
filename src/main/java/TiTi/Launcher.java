@@ -1,8 +1,8 @@
-package TiTi;
+package titi;
 
 import javafx.application.Application;
 
-import TiTi.Gui.Main;
+import titi.gui.Main;
 
 /**
  * Represents main launcher for GUI version of program.

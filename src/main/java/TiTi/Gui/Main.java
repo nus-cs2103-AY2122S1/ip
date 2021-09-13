@@ -1,7 +1,6 @@
-package TiTi.Gui;
+package titi.gui;
 
 import javafx.application.Application;
-import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,12 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
 import javafx.stage.Stage;
 
-import TiTi.util.SavedHistory;
-import TiTi.util.TaskList;
-import TiTi.util.Ui;
+import titi.util.SavedHistory;
+import titi.util.TaskList;
+import titi.util.Ui;
 
 
 /**

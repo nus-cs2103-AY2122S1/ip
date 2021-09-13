@@ -1,14 +1,14 @@
-package TiTi.util;
+package titi.util;
 
 import java.io.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-import TiTi.task.Task;
-import TiTi.task.Event;
-import TiTi.task.Deadline;
-import TiTi.task.ToDo;
+import titi.task.Task;
+import titi.task.Event;
+import titi.task.Deadline;
+import titi.task.ToDo;
 
 
 /**

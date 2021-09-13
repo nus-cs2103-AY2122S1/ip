@@ -1,4 +1,4 @@
-package TiTi.util;
+package titi.util;
 
 import java.util.Scanner;
 

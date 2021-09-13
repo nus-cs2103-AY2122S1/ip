@@ -1,9 +1,9 @@
-package TiTi.util;
+package titi.util;
 
-import TiTi.task.Task;
-import TiTi.task.Event;
-import TiTi.task.Deadline;
-import TiTi.task.ToDo;
+import titi.task.Task;
+import titi.task.Event;
+import titi.task.Deadline;
+import titi.task.ToDo;
 
 /**
  * Represents an interpreter to make sense of user command,

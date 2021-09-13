@@ -1,6 +1,6 @@
-package TiTi.util;
+package titi.util;
 
-import TiTi.task.Task;
+import titi.task.Task;
 
 /**
  * Represents the response required for Ui to deliver.

@@ -1,8 +1,8 @@
-package TiTi;
+package titi;
 
-import TiTi.util.SavedHistory;
-import TiTi.util.TaskList;
-import TiTi.util.Ui;
+import titi.util.SavedHistory;
+import titi.util.TaskList;
+import titi.util.Ui;
 
 /**
  * TiTi is a Personal Assistant Chatbot that helps you keep track of various things.
@@ -30,7 +30,7 @@ public class TiTi{
     }
 
     /**
-     * Main method in program TiTi.
+     * Represents the main method in program TiTi.
      *
      * @param args The command line arguments
      */

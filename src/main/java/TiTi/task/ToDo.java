@@ -1,4 +1,4 @@
-package TiTi.task;
+package titi.task;
 
 /**
  * Represents the ToDo task.

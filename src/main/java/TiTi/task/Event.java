@@ -1,4 +1,4 @@
-package TiTi.task;
+package titi.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
