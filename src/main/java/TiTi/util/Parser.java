@@ -1,8 +1,8 @@
 package titi.util;
 
-import titi.task.Task;
-import titi.task.Event;
 import titi.task.Deadline;
+import titi.task.Event;
+import titi.task.Task;
 import titi.task.ToDo;
 
 /**

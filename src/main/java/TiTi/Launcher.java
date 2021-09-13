@@ -1,7 +1,6 @@
 package titi;
 
 import javafx.application.Application;
-
 import titi.gui.Main;
 
 /**

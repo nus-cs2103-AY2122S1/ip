@@ -8,9 +8,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import titi.util.SavedHistory;
 import titi.util.TaskList;
 import titi.util.Ui;
@@ -119,12 +120,11 @@ public class Main extends Application {
      * Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label("\n" + userInput.getText() + "\n" );
+        Label userText = new Label("\n" + userInput.getText() + "\n");
         Label tiTiText = new Label("\n" + getResponse(userInput.getText()) + "\n");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi))
-        );
+                DialogBox.getTiTiDialog(tiTiText, new ImageView(tiTi)));
         userInput.clear();
     }
 

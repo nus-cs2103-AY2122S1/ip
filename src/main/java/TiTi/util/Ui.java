@@ -6,11 +6,11 @@ import java.util.Scanner;
  * Represents the control for the user interface interaction.
  */
 public class Ui {
-    private static final String STARTER_NORMAL =   "(=^ ･ｪ･^=) < ";
-    private static final String STARTER_BUFFER =   "       ";
-    private static final String STARTER_SLEEPY =   "(=^ ‐ｪ‐^=) < ";
+    private static final String STARTER_NORMAL = "(=^ ･ｪ･^=) < ";
+    private static final String STARTER_BUFFER = "       ";
+    private static final String STARTER_SLEEPY = "(=^ ‐ｪ‐^=) < ";
     private static final String STARTER_CONFUSED = "(=^ ･x･^=)? < ";
-    private static final String STARTER_HAPPY =    "(=^ ･ω･^=)❀ < ";
+    private static final String STARTER_HAPPY = "(=^ ･ω･^=)❀ < ";
 
     private TaskList taskList;
     private Parser parser;
@@ -43,8 +43,8 @@ public class Ui {
      * @return Welcome message when user first run programme
      */
     public String getWelcomeMessage() {
-        return STARTER_NORMAL + "Hello! I'm TiTi~ \n" +
-                STARTER_BUFFER + "What would you like to do nya? \n";
+        return STARTER_NORMAL + "Hello! I'm TiTi~ \n"
+                + STARTER_BUFFER + "What would you like to do nya? \n";
     }
 
     /**
@@ -72,10 +72,10 @@ public class Ui {
      */
     public String getResponse(String input) {
         Response response = parser.parse(input);
-        TaskList tempTaskList = response.taskList;
+        TaskList tempTaskList = response.getTaskList();
 
         // Formulate response
-        switch(response.cue) {
+        switch(response.getCue()) {
         case EXIT:
             return getExitResponse();
 
@@ -93,7 +93,7 @@ public class Ui {
 
         case MISSING_DESCRIPTION:
             return getMissingDescriptionResponse();
-            
+
         case TODO:
             return getToDoResponse(tempTaskList);
 

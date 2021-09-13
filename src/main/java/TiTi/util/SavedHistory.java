@@ -1,13 +1,15 @@
 package titi.util;
 
-import java.io.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import titi.task.Task;
-import titi.task.Event;
 import titi.task.Deadline;
+import titi.task.Event;
+import titi.task.Task;
 import titi.task.ToDo;
 
 
@@ -18,8 +20,8 @@ import titi.task.ToDo;
  */
 public class SavedHistory {
 
-    protected static File DATA_FOLDER = new File("./src/main/data");
-    protected static File TXT_FILE = new File("./src/main/data/TiTi.txt");
+    protected static final File DATA_FOLDER = new File("./src/main/data");
+    protected static final File DATA_FILE = new File("./src/main/data/TiTi.txt");
     protected ArrayList<Task> savedTasks = new ArrayList<>();
 
     /**
@@ -29,7 +31,7 @@ public class SavedHistory {
     public SavedHistory() {
         checkFile();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(TXT_FILE));
+            BufferedReader reader = new BufferedReader(new FileReader(DATA_FILE));
             String line = reader.readLine();
             while (line != null) {
                 savedTasks.add(read(line));
@@ -46,12 +48,12 @@ public class SavedHistory {
      * Checks and creates necessary folder and file if needed
      */
     private void checkFile() {
-        if (!TXT_FILE.exists()) {
+        if (!DATA_FILE.exists()) {
             if (!DATA_FOLDER.exists()) {
                 DATA_FOLDER.mkdirs();
             }
             try {
-                TXT_FILE.createNewFile();
+                DATA_FILE.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -122,7 +124,7 @@ public class SavedHistory {
      */
     public void saveHistory(TaskList newTasks) {
         try {
-            FileWriter fileWriter = new FileWriter(TXT_FILE);
+            FileWriter fileWriter = new FileWriter(DATA_FILE);
             String tasks = "";
             for (int i = 0; i < newTasks.size(); i++) {
                 tasks += newTasks.get(i) + System.lineSeparator();

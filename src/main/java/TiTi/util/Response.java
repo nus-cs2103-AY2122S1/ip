@@ -8,10 +8,10 @@ import titi.task.Task;
  * Contains the task to be printed (if needed).
  */
 public class Response {
-    public enum Cue {EXIT, LIST, DONE, DELETE, TASK_ERROR, TODO, DEADLINE,
-            EVENT, MISSING_DESCRIPTION, UNRECOGNISED, FIND};
-    public Cue cue;
-    public TaskList taskList;
+    public enum Cue { EXIT, LIST, DONE, DELETE, TASK_ERROR, TODO, DEADLINE,
+            EVENT, MISSING_DESCRIPTION, UNRECOGNISED, FIND };
+    private Cue cue;
+    private TaskList taskList;
 
     /**
      * Initialises a Deadline instance.
@@ -46,5 +46,13 @@ public class Response {
     public Response(Cue cue, TaskList taskList) {
         this.cue = cue;
         this.taskList = taskList;
+    }
+
+    public Cue getCue() {
+        return cue;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 }

@@ -8,7 +8,7 @@ import titi.util.Ui;
  * TiTi is a Personal Assistant Chatbot that helps you keep track of various things.
  * Represents launcher for text interface version of program.
  */
-public class TiTi{
+public class TiTi {
     private SavedHistory savedHistory;
     private TaskList taskList;
     private Ui ui;

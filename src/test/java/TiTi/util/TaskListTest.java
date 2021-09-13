@@ -1,25 +1,25 @@
-package TiTi.util;
+package titi.util;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import TiTi.task.ToDo;
+import titi.task.ToDo;
 
 
 public class TaskListTest {
 
     @Test
-    public void addTest(){
+    public void addTest() {
         TaskList testTaskList = new TaskList(new ArrayList<>());
         testTaskList.add(new ToDo("revision"));
         assertEquals(testTaskList.get(0).toString(), "[T][ ] revision");
     }
 
     @Test
-    public void sizeTest(){
+    public void sizeTest() {
         TaskList testTaskList = new TaskList(new ArrayList<>());
         testTaskList.add(new ToDo("revision"));
         testTaskList.add(new ToDo("revision"));
@@ -29,7 +29,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void removeTest(){
+    public void removeTest() {
         TaskList testTaskList = new TaskList(new ArrayList<>());
         ToDo todo = new ToDo("delete");
         testTaskList.add(todo);
