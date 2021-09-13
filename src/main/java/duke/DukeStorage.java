@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeArgumentException;
@@ -32,9 +31,7 @@ public class DukeStorage {
         File f = new File(DATA_FOLDER);
         if (!f.exists()) {
             try {
-                if (!f.createNewFile()) {
-                    throw new DukeFileException("Failed to create data file. Not too sure why this happened.");
-                };
+                f.createNewFile();
             } catch (IOException e) {
                 throw new DukeFileException(
                         "Something went wrong while creating data file, with error message:",

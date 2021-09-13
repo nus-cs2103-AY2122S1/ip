@@ -11,12 +11,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
@@ -25,6 +22,8 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    @FXML
+    private HBox dialogContainer;
     @FXML
     private Label dialog;
     @FXML
@@ -43,6 +42,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setFill(new ImagePattern(img));
         dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialogContainer.setStyle("-fx-background-radius: 1.5em 1.5em 1.5em 1.5em;"
+                + "-fx-background-color: #34b7eb;");
     }
 
     /**
@@ -53,15 +54,17 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#897e96"), null, null)));
+        dialogContainer.setStyle("-fx-background-radius: 1.5em 1.5em 1.5em 1.5em;"
+                + "-fx-background-color: #3483eb;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
         return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
