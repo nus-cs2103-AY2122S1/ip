@@ -67,8 +67,6 @@ public class Event extends Task {
      * @return String representing this event in database format.
      */
     public String toDatabaseFormat() {
-        DateTimeFormatter d = DateTimeFormatter.ofPattern("HH:mm");
-        // return String.format("E | %d | %s | %s", super.done ? 1 : 0, super.desc, time);
         return String.format("E | %d | %s | %s | %s | %s", super.done ? 1 : 0, super.desc,
                 dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME),
                 end.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.TIME), details);

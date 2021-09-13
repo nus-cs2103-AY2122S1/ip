@@ -32,8 +32,6 @@ public class Ui {
     public static String help() throws DukeException {
         try {
             if (HELP == null) {
-                // String filename = Ui.class.getResource("/duke/bin/help.txt").getPath();
-                // HELP = new File(filename);
                 HELP = new File(DEFAULT_HELP_PATH);
             }
             StringBuilder sb = new StringBuilder();
@@ -62,17 +60,17 @@ public class Ui {
             }
             StringBuilder sb = new StringBuilder();
             Scanner sc = new Scanner(HELP);
-            boolean found = false;
+            boolean isFound = false;
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 if (line.contains("> " + cmd)) {
-                    found = true;
+                    isFound = true;
                     sb.append(line);
                     break;
                 }
             }
             String sep = BORDERS.substring(1);
-            while (found && sc.hasNext()) {
+            while (isFound && sc.hasNext()) {
                 String line = sc.nextLine();
                 if (line.contains(sep)) {
                     break;
@@ -80,7 +78,7 @@ public class Ui {
                 sb.append("\n   ");
                 sb.append(line);
             }
-            if (!found) {
+            if (!isFound) {
                 return String.format("I don't have a manual entry for ` %s `!", cmd);
             }
             return sb.toString();

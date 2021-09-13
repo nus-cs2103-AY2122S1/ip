@@ -2,17 +2,17 @@ package duke.utils;
 
 public class Record {
     private final String message;
-    private final boolean terminate;
+    private final boolean isTerminated;
 
     /**
      * Creates a new record.
      *
      * @param message Message Duke returns.
-     * @param terminate Is Duke supposed to terminate after this?
+     * @param isTerminated Is Duke supposed to terminate after this?
      */
-    public Record(String message, boolean terminate) {
+    public Record(String message, boolean isTerminated) {
         this.message = message;
-        this.terminate = terminate;
+        this.isTerminated = isTerminated;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Record {
      * @return Is Duke supposed to terminate after this?
      */
     public boolean bye() {
-        return terminate;
+        return isTerminated;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Record {
         }
         if (obj instanceof Record) {
             Record that = (Record) obj;
-            return this.message.equals(that.message) && this.terminate == that.terminate;
+            return this.message.equals(that.message) && this.isTerminated == that.isTerminated;
         } else {
             return false;
         }

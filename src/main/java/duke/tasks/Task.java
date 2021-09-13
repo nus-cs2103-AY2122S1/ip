@@ -24,9 +24,9 @@ public abstract class Task {
     /**
      * Instantiates an Event based on a database entry.
      */
-    public Task(String desc, boolean done) {
+    public Task(String desc, boolean isDone) {
         this.desc = desc;
-        this.done = done;
+        this.done = isDone;
     }
 
     /**

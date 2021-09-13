@@ -78,7 +78,7 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
     }
 
     /**
-     * Default formatting of this DukeDateTime.
+     * Returns default formatting of this DukeDateTime.
      *
      * @return String formatting of this DukeDateTime.
      */
@@ -88,7 +88,7 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
     }
 
     /**
-     * Formatting of this DukeDateTime according to f.
+     * Returns String of this DukeDateTime according to f.
      *
      * @param f Format desired.
      * @return String formatting of this DukeDateTime.
@@ -107,7 +107,7 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
     }
 
     /**
-     * Formatting of this DukeDateTime according to f1, f2.
+     * Returns String of this DukeDateTime according to f1, f2.
      * Separated by a single blank space.
      *
      * @param f1 Format desired.

@@ -60,7 +60,6 @@ public class Deadline extends Task {
      * @return String representing this deadline in database format.
      */
     public String toDatabaseFormat() {
-        // return String.format("D | %d | %s | %s", super.done ? 1 : 0, super.desc, dl);
         return String.format("D | %d | %s | %s | %s", super.done ? 1 : 0, super.desc,
                 dateTime.format(DukeDateTime.Format.DATE_LONG, DukeDateTime.Format.PRINT_TIME), details);
     }

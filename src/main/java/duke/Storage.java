@@ -22,14 +22,12 @@ public class Storage {
     private final File txt;
 
     public Storage(TaskList db) throws DukeException {
-        // this(db, "build/resources/main/duke/bin/duke2.txt");
         this(db, "duke2.txt");
     }
     
     public Storage(TaskList db, String filename) throws DukeException {
         try {
             txt = new File(filename);
-            String log = txt.getAbsolutePath();
             raf = new RandomAccessFile(txt, "rwd");
             assert txt != null && raf != null;
             while (raf.getFilePointer() < raf.length()) {
