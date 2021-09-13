@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Ui {
     private static File HELP;
+    private static String DEFAULT_HELP_PATH = "help.txt";
     private final static String BORDERS = "\t____________________________________________________________";
 
     /**
@@ -31,8 +32,9 @@ public class Ui {
     public static String help() throws DukeException {
         try {
             if (HELP == null) {
-                String filename = Ui.class.getResource("/duke/bin/help.txt").getPath();
-                HELP = new File(filename);
+                // String filename = Ui.class.getResource("/duke/bin/help.txt").getPath();
+                // HELP = new File(filename);
+                HELP = new File(DEFAULT_HELP_PATH);
             }
             StringBuilder sb = new StringBuilder();
             Scanner sc = new Scanner(HELP);
@@ -56,8 +58,7 @@ public class Ui {
     public static String help(String cmd) throws DukeException {
         try {
             if (HELP == null) {
-                String filename = Main.class.getResource("bin/help.txt").getPath();
-                HELP = new File(filename);
+                HELP = new File(DEFAULT_HELP_PATH);
             }
             StringBuilder sb = new StringBuilder();
             Scanner sc = new Scanner(HELP);

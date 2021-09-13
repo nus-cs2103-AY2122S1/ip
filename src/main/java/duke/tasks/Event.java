@@ -87,7 +87,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String timeSeq = dateTime.format() + " to " + end.format();
+        String timeSeq = dateTime.format() + 
+                (DukeDateTime.isEmpty(end) ? "" : " to " + end.format());
         String detailsAdd = (details.equals("") ? details : " -- " + details);
         return "[E]" + super.toString() + String.format(" (at: %s%s)", timeSeq, detailsAdd);
     }

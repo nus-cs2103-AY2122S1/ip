@@ -125,6 +125,10 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         }
         return s1 + " " + s2;
     }
+    
+    public static boolean isEmpty(DukeDateTime that) {
+        return that.equals(new DukeDateTime());
+    }
 
     public int compareTo(DukeDateTime that) {
         if (this.dateTime != null && that.dateTime != null) {

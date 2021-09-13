@@ -1,4 +1,6 @@
-T | 0 | listall my tasks                      
+T | 0 | listall my tasks                               
 D | 0 | MA1231 | 2308-12-12 19:00 | 
 D | 0 | iP Week 6 | 2021-09-21 19:00 | 
+E | 0 | minimal event | 12:00 |  | 
+E | 0 | be happy | 04:20 | 06:09 | 
 
