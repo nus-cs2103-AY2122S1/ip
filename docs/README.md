@@ -10,7 +10,7 @@ Welcome to Duke. Duke is a chatbot that helps you keep track of your tasks.
    3. [Date & Time](#Date-&-Time)
    4. [Done & Delete](#Done-&-Delete)
    5. [Search](#Search)
-3. [Setting up](#Setting up)
+3. [Setting up](#Setting-up)
 4. [Usage](#Usage)
 5. [Command summary](#Command-summary)
 
@@ -20,7 +20,9 @@ Duke helps you to get a hang of your life. It is
 * easy to learn
 * SUPER FAST to use
 
-<img src="Ui.png" alt="Ui" width="200"/>
+<p align="center">
+   <img src="Ui.png" alt="Ui" width="25%"/>
+</p>
 
 [Back to Table of Contents](#Table-of-Contents)
 
