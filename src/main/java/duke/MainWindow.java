@@ -2,7 +2,6 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,8 +13,6 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    private Label firstGreeting;
-    @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
@@ -24,12 +21,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-
-    private Storage storage;
+    private Duke jarvis;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image jarvisImage = new Image(this.getClass().getResourceAsStream("/images/DaJarvis.png"));
 
     /**
      * Opens up the chat box with a greeting.
@@ -38,16 +33,18 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.firstGreeting(), dukeImage)
+                // Jarvis greets user upon opening the application
+                DialogBox.getDukeDialog(Ui.firstGreeting(), jarvisImage)
         );
     }
 
     /**
-     * Sets up Duke.
+     * Sets up Jarvis.
+     *
      * @param d The duke object to be set up.
      */
     public void setDuke(Duke d) {
-        duke = d;
+        jarvis = d;
     }
 
     /**
@@ -57,10 +54,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = jarvis.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage), // User's dialog box
+                DialogBox.getDukeDialog(response, jarvisImage) // Jarvis' dialog box
         );
         userInput.clear();
     }
