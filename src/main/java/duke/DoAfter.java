@@ -29,6 +29,6 @@ public class DoAfter extends Task {
 
     @Override
     public String toString() {
-        return "[DA]" + super.toString() + "(by:" + after + ")";
+        return "[DA]" + super.toString() + "(DoAfter:" + after + ")";
     }
 }

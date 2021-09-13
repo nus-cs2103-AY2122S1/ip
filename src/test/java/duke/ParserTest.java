@@ -10,4 +10,10 @@ public class ParserTest {
         String test = "BYE";
         assertEquals("bye", Parser.parseCommand(test));
     }
+
+    @Test
+    public void Test2(){
+        String test = "LiSt";
+        assertEquals("list", Parser.parseCommand(test));
+    }
 }

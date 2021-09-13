@@ -93,6 +93,13 @@ public class Storage {
                 }
                 list.add(event);
                 break;
+            case "DA":
+                String[] doAfterArr = s.nextLine().trim().split("\\|");
+                Task doAfter = new DoAfter(doAfterArr[2].trim(), doAfterArr[3].trim());
+                if (Integer.parseInt(doAfterArr[1].trim()) == 1) {
+                    doAfter.markAsDone();
+                }
+                list.add(doAfter);
             default:
                 break;
             }
@@ -119,6 +126,11 @@ public class Storage {
             Event e = (Event) t;
             mes += "E" + statusIcon(t) + t.description + " | " + e.getAt() + "\n";
         }
+        if (t instanceof DoAfter) {
+            DoAfter da = (DoAfter) t;
+            mes += "DA" + statusIcon(t) + t.description + " | " + da.getAfter() + "\n";
+        }
+
         return mes;
     }
 
