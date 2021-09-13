@@ -78,4 +78,8 @@ public class Ui {
                 + task
                 + "\nNow you have " + size + " tasks left!";
     }
+
+    public static String getDeleteError() {
+        return "Sorry! That task could not be deleted.";
+    }
 }

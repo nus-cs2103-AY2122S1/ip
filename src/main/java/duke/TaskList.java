@@ -63,7 +63,12 @@ public class TaskList {
      * @return a message
      */
     public String deleteTask(int index) {
-        Task task = myTasks.remove(index);
+        Task task;
+        try {
+            task = myTasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.getDeleteError();
+        }
         return Ui.getRemoveTaskMsg(task, myTasks.size());
     }
 
