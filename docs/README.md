@@ -6,7 +6,7 @@
 
 Access and plan your day-to-day tasks with Duke. 
 You may add, delete and view your tasks with a simple command! 
-Track your work with us today:star_struck:! 
+Track your work with us today ^_^! 
 
 ### Search Your Tasks
 
@@ -14,7 +14,7 @@ Find tasks with specific keyword you are thinking of and Duke will show you all 
 
 ### Natural Dates
 
-Duke accepts natural date formats such as 'mon', 'sun' and 'tmr':partying_face:.
+Duke accepts natural date formats such as 'mon', 'sun' and 'tmr' U_U.
 
 ## Usage
 
