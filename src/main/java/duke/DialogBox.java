@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -42,6 +43,25 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text); // Set the given text into the dialog box
+        dialog.setPadding(new Insets(10, 10, 10, 10));
+
+        boolean isAnErrorMessage = dialog.getText().equals(Ui.EMPTY_TODO_DESCRIPTION) ||
+                dialog.getText().equals(Ui.EMPTY_DEADLINE_DESCRIPTION) ||
+                dialog.getText().equals(Ui.INCOMPLETE_DEADLINE) ||
+                dialog.getText().equals(Ui.WRONGLY_FORMATTED_DEADLINE_TIME) ||
+                dialog.getText().equals(Ui.EMPTY_EVENT_DESCRIPTION) ||
+                dialog.getText().equals(Ui.INCOMPLETE_EVENT_TIMINGS) ||
+                dialog.getText().equals(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS) ||
+                dialog.getText().equals(Ui.UNRECOGNISED_COMMAND) ||
+                dialog.getText().equals(Ui.WRONGLY_FORMATTED_DATE) ||
+                dialog.getText().equals(Ui.WRONGLY_FORMATTED_NOTE);
+        
+        if (isAnErrorMessage) {
+            dialog.setStyle("-fx-text-fill: BROWN; -fx-background-color: SKYBLUE;");
+        } else {
+            dialog.setStyle("-fx-background-color: SKYBLUE;");
+        }
+
         displayPicture.setImage(img); // Set the given image into the dialog box and display it
     }
 
