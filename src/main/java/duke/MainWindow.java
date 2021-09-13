@@ -23,9 +23,10 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/clown.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pepeok.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private final String userColor = "DarkOrange";
+    private final String dukeColor = "DodgerBlue";
 
     @FXML
     public void initialize() {
@@ -36,7 +37,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.initialize(), dukeImage)
+                DialogBox.getDukeDialog(duke.initialize(), dukeImage, dukeColor)
         );
     }
 
@@ -56,8 +57,8 @@ public class MainWindow extends AnchorPane {
         }
         // Otherwise, add new dialog boxes.
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage, userColor),
+                DialogBox.getDukeDialog(response, dukeImage, dukeColor)
         );
         userInput.clear();
     }

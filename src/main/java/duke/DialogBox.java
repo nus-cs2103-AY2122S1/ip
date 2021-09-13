@@ -25,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String backgroundColor) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -34,6 +34,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setStyle("-fx-background-color: " + backgroundColor + ";");
 
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -56,8 +57,8 @@ public class DialogBox extends HBox {
      * @param img Image to be included.
      * @return A dialog box with the message and the image.
      */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text, Image img, String backgroundColor) {
+        return new DialogBox(text, img, backgroundColor);
     }
 
     /**
@@ -67,8 +68,8 @@ public class DialogBox extends HBox {
      * @param img Image to be included.
      * @return A dialog box with the message and the image.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image img, String backgroundColor) {
+        var db = new DialogBox(text, img, backgroundColor);
         db.flip();
         return db;
     }
