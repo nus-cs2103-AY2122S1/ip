@@ -75,7 +75,7 @@ public class UiTest {
         sampleTasks.add(new Deadline("Testing", new TaskDateAndTime("12/09/2021")));
         uiTest.printTasksFoundByKeyword(sampleTasks);
         String retrieverResponse = uiTest.getRetrieverResponse();
-        String expectedOutput = "Woof! Look What I Found: /n" + "1. [T][ ] Testing\n"
+        String expectedOutput = "Woof! Look What I Found: \n" + "1. [T][ ] Testing\n"
                 + "2. [D][ ] Testing (by: Sep 12 2021)\n" + "You Owe Me " + sampleTasks.size() + " Treat(s), Master!";
         assertEquals(expectedOutput, retrieverResponse);
     }
