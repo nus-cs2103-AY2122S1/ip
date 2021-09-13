@@ -23,10 +23,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("PikaBot");
             fxmlLoader.<MainWindow>getController().setPika(pika);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
