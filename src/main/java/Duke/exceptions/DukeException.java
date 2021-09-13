@@ -26,6 +26,7 @@ public class DukeException extends Exception {
             case WRONG_INDEX_ERROR -> "OOPS!!! I'm sorry, but the index is invalid :-(";
             case EVENT_FORMAT_ERROR -> "OOPS!!! I'm sorry, but the format of event is wrong :-(";
             case TELL_FORMAT_ERROR -> "OOPS!!! I'm sorry, but the format of tell is wrong :-(";
+            case EMPTY_COMMAND_ERROR -> "Hello? Sorry but I can't receive anything from you!!!";
             case FILE_WRITE_ERROR -> "OOPS!!! Cannot write in data into Duke!!!";
             case FILE_READ_ERROR -> "OOPS!!! Cannot Read From Data!!!";
             default -> "OOPS!!! There is Something wrong in Duke!!!";
