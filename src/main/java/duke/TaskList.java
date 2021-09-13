@@ -48,7 +48,7 @@ public class TaskList {
             return saveTask(taskToAdd, dataPath);
 
         } catch(IllegalArgumentException | IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
-            return("taskType task /by or /at yyyy-MM-dd HHmm");
+            return("Error : Invalid instruction\ntaskType task /by or /at yyyy-MM-dd HHmm");
         }
     }
 
@@ -65,7 +65,7 @@ public class TaskList {
         } else if (taskType.equals("event")) {
             taskToAdd = new Event(task, dateTime);
         } else {
-            throw new IllegalArgumentException("Please specify type of task");
+            throw new IllegalArgumentException("Error : Please specify type of task");
         }
         return taskToAdd;
     }
@@ -120,11 +120,11 @@ public class TaskList {
 
             return String.format("%s\nYou now have %s tasks left", returnMessage, this.tasks.size());
         } catch (StringIndexOutOfBoundsException e) {
-            return("OOPS!!! You cannot delete nothing!");
+            return("Error : You cannot delete nothing!");
         } catch (NumberFormatException e) {
-            return("OOPS!!! Must be a number bodoh");
+            return("Error : Must be a number bodoh");
         } catch (IndexOutOfBoundsException e) {
-            return("OOPS!!! Number doesnt exist");
+            return("Error : Number doesnt exist");
         }
     }
 
