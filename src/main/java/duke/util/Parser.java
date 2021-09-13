@@ -68,7 +68,7 @@ public class Parser {
         case "event":
             return new AddCommand(infos);
         default:
-            throw new DukeException("The input cannot be recognized.");
+            throw new DukeException("I'm sorry, but I don't know what that means.");
         }
     }
 

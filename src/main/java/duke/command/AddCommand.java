@@ -43,13 +43,13 @@ public class AddCommand implements Command {
             String content = inputs[1];
             addTask(type, content, tasks);
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
 
         try {
             storage.saveData(taskList);
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
 
         String output = "     Got it. I've added this task: \n"
@@ -65,13 +65,13 @@ public class AddCommand implements Command {
         } else if (type.equals("deadline")) {
             String[] strings = content.split(" /by ");
             if (strings.length != 2) {
-                throw new DukeException("Please check the format of your deadline.");
+                throw new DukeException("I'm sorry, but I don't know what that means. Please check the format of your deadline.");
             }
             tasks.add(new Deadline(content.split(" /by ")[0], content.split(" /by ")[1]));
         } else if (type.equals("event")) {
             String[] strings = content.split(" /at ");
             if (strings.length != 2) {
-                throw new DukeException("Please check the format of your event.");
+                throw new DukeException("I'm sorry, but I don't know what that means. Please check the format of your event.");
             }
             tasks.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
         } else {

@@ -38,7 +38,7 @@ public class DeleteCommand implements Command {
             idx = Integer.parseInt(index);
             tasks.get(idx - 1);
         } catch (NumberFormatException nfe) {
-            return "Please check the format of the index.";
+            return "I'm sorry, but I don't know what that means. Please check the format of the index.";
         } catch (IndexOutOfBoundsException e) {
             return "The task does not exist in task list.";
         }
@@ -49,7 +49,7 @@ public class DeleteCommand implements Command {
         try {
             storage.saveData(taskList);
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
 
         String output = "     Noted. I've removed this task: \n"

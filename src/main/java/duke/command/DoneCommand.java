@@ -55,7 +55,7 @@ public class DoneCommand implements Command {
         try {
             storage.saveData(taskList);
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
 
         return s.toString();

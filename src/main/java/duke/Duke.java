@@ -26,7 +26,7 @@ public class Duke {
         try {
             taskList = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            ui.showLoadingError(e.toString());
+            ui.showLoadingError(e.getMessage());
             taskList = new TaskList();
         }
     }
@@ -41,7 +41,7 @@ public class Duke {
         try {
             command = Parser.parseInput(input);
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
         String output = command.execute(taskList, ui, storage);
         if (output.equals("bye")) {
