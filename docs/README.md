@@ -23,16 +23,21 @@ Iris uses a calming blue interface to soothe your soul while you look at your li
 There are three types of tasks in Iris: todos, deadlines and events.
 
 Format
-* `todo TASK_NAME`
-* `deadline DEADLINE_NAME /by EVENT_DATE`
-* `event EVENT_NAME /at EVENT_DATE`
+* `todo[PRIORITY] TASK_NAME`
+* `deadline[PRIORITY] DEADLINE_NAME /by EVENT_DATE`
+* `event[PRIORITY] EVENT_NAME /at EVENT_DATE`
+
+There are 3 different levels of priority: high, medium and low.
+* High priority: `!!`
+* Medium priority: `!`
+* Low priority (default)
 
 Dates are expected to be in `YYYY-MM-DD` format.
 
 Example(s)
-* `todo write user guide`
-* `deadline submit individual project /by 2021-09-17`
-* `event birthday celebration /at 2021-09-18`
+* `todo! write user guide` (medium priority todo)
+* `deadline!! submit individual project /by 2021-09-17` (high priority deadline)
+* `event birthday celebration /at 2021-09-18` (low priority event)
 
 ### Viewing tasks: `list`
 
