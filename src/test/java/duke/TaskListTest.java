@@ -1,6 +1,5 @@
 package duke;
 
-import duke.exception.DukeExcpetion;
 import duke.processor.TaskList;
 import duke.task.Deadline;
 import org.junit.jupiter.api.Test;
