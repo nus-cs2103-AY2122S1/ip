@@ -28,10 +28,10 @@ public class DukeParser {
     private static final Pattern DELETE_PATTERN = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern TODO_PATTERN = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern DEADLINE_PATTERN = Pattern.compile(
-            "deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
+            "deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+H)?",
             Pattern.CASE_INSENSITIVE);
     private static final Pattern EVENT_PATTERN = Pattern.compile(
-            "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
+            "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+H)?",
             Pattern.CASE_INSENSITIVE);
 
     private final TaskList taskList;

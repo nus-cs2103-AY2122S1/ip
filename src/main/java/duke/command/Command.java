@@ -14,6 +14,11 @@ public abstract class Command {
     protected String description;
     protected String[] arguments;
 
+    /**
+     * Executes the action that the command represents
+     *
+     * @return String to display as a response
+     */
     public abstract String execute();
 
     /**
@@ -29,7 +34,7 @@ public abstract class Command {
     }
 
     /**
-     * Represent Command as a string.
+     * Represents Command as a string.
      *
      * @return Command name, description, as well as its arguments on newlines.
      */

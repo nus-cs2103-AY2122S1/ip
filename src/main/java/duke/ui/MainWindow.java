@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 import duke.command.Command;
+import duke.command.CommandExit;
 import duke.command.CommandInvalid;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -62,6 +63,8 @@ public class MainWindow extends AnchorPane {
 
         if (command instanceof CommandInvalid) {
             displayError(command.execute());
+        } else if (command instanceof CommandExit) {
+            displayResponse(input, command.execute());
         } else {
             displayResponse(input, command.execute());
         }
@@ -81,7 +84,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Display response should the command be valid.
+     * Displays response should the command be valid.
      *
      * @param input Text inputted.
      * @param displayText Text to display.

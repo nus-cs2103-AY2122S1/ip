@@ -42,7 +42,7 @@ public class Ui {
     }
 
     public static String messageInvalidCommand(String input) {
-        return "eeeeeee~dameda!!\n" + input + " isn't a valid command!";
+        return "OH NO!!\n" + input + " isn't a valid command!";
     }
 
     /**
@@ -70,6 +70,15 @@ public class Ui {
                 ? "There is 1 task in your list"
                 : "There are " + size + " tasks in your list";
     }
+
+    public static String messageToggleDone(boolean isDone, Task task) {
+        return (isDone
+                ? "Sugoi! Duke-san marked this task as done!"
+                : "Duke-san marked this task as not done!")
+                + '\n' + Ui.OUTPUT_SPACES + task;
+    }
+
+
 
     /**
      * Displays welcome text when Duke starts up.

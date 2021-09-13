@@ -20,7 +20,7 @@ public class CommandAddDeadline extends Command {
      * @param input Array with info needed to create the class.
      */
     public CommandAddDeadline(TaskList taskList, String[] input) {
-        this.commandName = "deadline <string> /by DD/MM/YYYY xxxx";
+        this.commandName = "deadline <string> /by DD/MM/YYYY xxxxH";
         this.description = "Creates a deadline task";
         this.arguments = new String[]{
             "<string> Description of Deadline",

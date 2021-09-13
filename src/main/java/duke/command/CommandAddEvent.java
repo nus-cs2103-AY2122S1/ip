@@ -33,7 +33,7 @@ public class CommandAddEvent extends Command {
     }
 
     /**
-     * Add an event to the task list if valid.
+     * Adds an event to the task list if valid.
      */
     @Override
     public String execute() {

@@ -29,7 +29,7 @@ public class CommandAddTodo extends Command {
     }
 
     /**
-     * Add To-do to task list if valid.
+     * Adds To-do to task list if valid.
      */
     @Override
     public String execute() {

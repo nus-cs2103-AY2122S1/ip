@@ -25,7 +25,7 @@ public class CommandList extends Command {
      */
     public CommandList(TaskList taskList, String args) {
         this.commandName = "list /name <name> /date DD/MM/YYYY";
-        this.description = "Toggles completion of task";
+        this.description = "Toggles completion of task. Order of arguments does not matter";
         this.arguments = new String[]{
             "/name Optional argument to search for particular name",
             "/date Optional date argument in DAY/MONTH/YEAR, "
@@ -67,7 +67,7 @@ public class CommandList extends Command {
      * @throws DateTimeParseException Thrown if error in parsing dates.
      * @throws IllegalArgumentException Thrown if an argument is in a wrong format.
      */
-    public static ArrayList<Predicate<Task>> listStringToFilter(String stringToParse)
+    private ArrayList<Predicate<Task>> listStringToFilter(String stringToParse)
             throws DateTimeParseException, IllegalArgumentException {
 
         // Separate individual commands

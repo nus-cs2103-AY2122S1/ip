@@ -29,10 +29,7 @@ public abstract class Task {
      */
     public String toggleDone() {
         isDone = !isDone;
-        return (isDone
-                ? "sugoi! Duke-san marked this task as done!"
-                : "Duke-san marked this task as not done!")
-                + '\n' + Ui.OUTPUT_SPACES + this;
+        return Ui.messageToggleDone(isDone, this);
     }
 
     /**
