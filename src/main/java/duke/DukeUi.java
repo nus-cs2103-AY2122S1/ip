@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -45,6 +46,8 @@ public class DukeUi extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Duck");
+            primaryStage.getIcons().add(new Image(DukeUi.class.getResourceAsStream("/images/logo.jpg")));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
