@@ -19,6 +19,7 @@ Before you get started with Duke Bot, here is an introduction of the components 
       1. Deletes task: `delete <task index>` 
       1. Shows all tasks: `list`
       1. Find task(s): `find <keyword>`
+      1. Quit application: `bye`
 
 ## Setting up in Intellij
 
