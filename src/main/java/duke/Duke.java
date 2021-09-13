@@ -311,7 +311,7 @@ public class Duke extends Application {
                 return "THERES NO NAME or DATE OF the TASK!!!! Oh no.";
             }
 
-            int splitIndex = taskNDate.indexOf("/by");
+            int splitIndex = taskNDate.indexOf("/at");
             String task = taskNDate.substring(0, splitIndex - 1);
             String date = taskNDate.substring(splitIndex + 4);
 
