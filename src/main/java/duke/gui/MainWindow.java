@@ -3,6 +3,7 @@ package duke.gui;
 import duke.Duke;
 import duke.exceptions.DukeExitException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,9 +26,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userProfilePic.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukeProfilePic.png"));
 
     /**
      * Initialize the window with welcome dialog
@@ -57,8 +53,7 @@ public class MainWindow extends AnchorPane {
         } catch (DukeExitException e) {
             String response = "Bye bye!";
             makeDialogBox(input, response);
-            //TODO: Add a delay here so this message is visible
-            System.exit(1);
+            Platform.exit();
         }
 
         userInput.clear();
@@ -67,23 +62,18 @@ public class MainWindow extends AnchorPane {
     /**
      * Format user dialog and dike response
      *
-     * @param input user input String
+     * @param input    user input String
      * @param response duke response String
      */
     private void makeDialogBox(String input, String response) {
-        DialogBox userBox = DialogBox.getUserDialog("User", input, userImage);
-        DialogBox dukeBox = DialogBox.getDukeDialog("Duke", response, dukeImage);
+        DialogBox userBox = DialogBox.getUserDialog("User", input);
+        DialogBox dukeBox = DialogBox.getDukeDialog("Duke", response);
         dialogContainer.getChildren().addAll(userBox, dukeBox);
     }
 
-    private void displayWelcomeDialog () {
+    private void displayWelcomeDialog() {
         String welcomeMessage = "Welcome to Duke\nType list to see all current tasks\nType help for help";
-        DialogBox dukeBox = DialogBox.getDukeDialog("Duke", welcomeMessage, dukeImage);
+        DialogBox dukeBox = DialogBox.getDukeDialog("Duke", welcomeMessage);
         dialogContainer.getChildren().addAll(dukeBox);
     }
-
-
-
-
-
 }

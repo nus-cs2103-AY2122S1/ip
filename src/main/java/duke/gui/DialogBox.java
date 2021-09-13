@@ -10,8 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -24,10 +22,8 @@ public class DialogBox extends HBox {
     private Label userName;
     @FXML
     private Label dialog;
-    @FXML
-    private ImageView displayPicture;
 
-    private DialogBox(String userNameText, String text, Image img) {
+    private DialogBox(String userNameText, String text) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,7 +34,6 @@ public class DialogBox extends HBox {
         }
         userName.setText(userNameText);
         dialog.setText(text);
-        displayPicture.setImage(img);
     }
 
     /**
@@ -51,14 +46,14 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String userName, String text, Image img) {
-        DialogBox db = new DialogBox(userName, text, img);
+    public static DialogBox getUserDialog(String userName, String text) {
+        DialogBox db = new DialogBox(userName, text);
         db.getStyleClass().add("userBox");
         return db;
     }
 
-    public static DialogBox getDukeDialog(String userName, String text, Image img) {
-        var db = new DialogBox(userName, text, img);
+    public static DialogBox getDukeDialog(String userName, String text) {
+        var db = new DialogBox(userName, text);
         db.getStyleClass().add("dukeBox");
         db.flip();
         return db;
