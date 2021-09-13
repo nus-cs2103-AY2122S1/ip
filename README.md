@@ -8,7 +8,7 @@ If you are someone constantly seeking for tasks to be done, it might be difficul
 Duke is:
 * text based
 * simple and easy
-* ~~helpful~~ *really* helpful 
+* ~~helpful~~ *REALLY* helpful 
 
 ## Getting Started
 1. Download it [here](https://github.com/wanyu-l/ip/releases/download/v0.1/Duke.java.jar)
@@ -22,16 +22,16 @@ Duke is:
    | | | | | | | |/ / _ \
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
-   ```
-4. Let it remember the tasks for you 😄
+   ```   
+Let it remember the tasks for you 😄
 
-What it can do:
+##What it can do:
 - [x] store a **List** of tasks to be done
 - [x] add, **Delete** and mark tasks as **Done**
 - [x] **Find** tasks by **Due** dates or keywords
 - [ ] **Reschedule** tasks to new dates (coming soon)
 
-Here's a part of the program, maybe it can be of help in practising coding in Java, the `<main>` method:
+**Here's a part of the program, maybe it can be of help in practising coding in Java, the `<main>` method:**
 ```java
 public static void main(String[] args) {
     new Duke().run();
