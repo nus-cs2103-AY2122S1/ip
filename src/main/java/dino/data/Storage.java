@@ -1,4 +1,4 @@
-package duke.data;
+package dino.data;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,15 +8,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.user.DukeException;
-import duke.user.Ui;
+import dino.task.Deadline;
+import dino.task.Event;
+import dino.task.Task;
+import dino.task.Todo;
+import dino.user.DinoException;
+import dino.user.Ui;
 
 /**
- * Represents the storage portion of the Duke program.
+ * Represents the storage portion of the Dino program.
  * Handles saving the task list to a file, and loading from the file upon program execution
  */
 public class Storage {
@@ -30,7 +30,7 @@ public class Storage {
     /**
      * Basic constructor for a Storage object.
      *
-     * @param fileName the string of the file name (e.g. "Duke.txt")
+     * @param fileName the string of the file name (e.g. "Dino.txt")
      */
     public Storage(String fileName) {
         this.dataFile = new File(fileName);
@@ -97,11 +97,11 @@ public class Storage {
                             !taskDetails.split(Ui.SPLIT_DELIMITER)[isDoneFlagIndex].equals("0")));
 
                 } else {
-                    throw new DukeException("Unknown command type loaded from saved file!");
+                    throw new DinoException("Unknown command type loaded from saved file!");
                 }
             }
 
-        } catch (IOException | DukeException e) {
+        } catch (IOException | DinoException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }

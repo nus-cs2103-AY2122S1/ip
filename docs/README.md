@@ -1,5 +1,5 @@
 
-# DukeLite User Guide
+# Dino User Guide
 
 ## Features 
 

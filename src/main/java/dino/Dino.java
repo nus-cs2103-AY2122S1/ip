@@ -1,22 +1,22 @@
-package duke;
+package dino;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.user.DukeException;
-import duke.user.Parser;
-import duke.user.Ui;
+import dino.data.Storage;
+import dino.data.TaskList;
+import dino.task.Deadline;
+import dino.task.Event;
+import dino.task.Task;
+import dino.task.Todo;
+import dino.user.DinoException;
+import dino.user.Parser;
+import dino.user.Ui;
 
 /**
- * Main class for the Duke program.
+ * Main class for the Dino program.
  */
-public class Duke {
+public class Dino {
 
     private Storage storage;
     private TaskList tasks;
@@ -24,11 +24,11 @@ public class Duke {
 
 
     /**
-     * Constructor for the Duke instance.
+     * Constructor for the Dino instance.
      *
      * @param filePath the String representing the path of the file where the data is saved
      */
-    public Duke(String filePath) {
+    public Dino(String filePath) {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFromFile());
         ui = new Ui();
@@ -36,11 +36,11 @@ public class Duke {
     }
 
     /**
-     * Default constructor for Duke.
+     * Default constructor for Dino.
      * Required for JavaFX GUI
      */
-    public Duke() {
-        this("data/Duke.txt");
+    public Dino() {
+        this("data/Dino.txt");
     }
 
     /**
@@ -109,7 +109,7 @@ public class Duke {
 
                 // Else case for all non-recognised user inputs
             } else {
-                throw new DukeException("Please enter a valid command");
+                throw new DinoException("Please enter a valid command");
             }
 
             // If the program reaches this point, meaning no continue or break was hit, it means
@@ -121,8 +121,8 @@ public class Duke {
             }
 
             // catch all the custom exceptions and displays the message
-        } catch (DukeException e) {
-            return output + ui.displayDukeExceptionMessage(e);
+        } catch (DinoException e) {
+            return output + ui.displayDinoExceptionMessage(e);
 
             // catch the remaining exceptions
         } catch (Exception e) {
@@ -145,6 +145,6 @@ public class Duke {
      * @param args NIL
      */
     public static void main(String[] args) {
-        new Duke("data/Duke.txt").run();
+        new Dino("data/Dino.txt").run();
     }
 }

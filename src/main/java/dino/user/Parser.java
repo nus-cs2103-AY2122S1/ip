@@ -1,10 +1,10 @@
-package duke.user;
+package dino.user;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import duke.data.TaskList;
+import dino.data.TaskList;
 
 /**
  * Represents a parser which reads the user input and performs the checks to verify that the inputs are valid.
@@ -28,9 +28,9 @@ public class Parser {
      *
      * @param input The String entered by the user
      * @return A String[] with each index storing the key information after the input is parsed
-     * @throws DukeException if the command is misused or none of the command words was used
+     * @throws DinoException if the command is misused or none of the command words was used
      */
-    public String[] checkInput(String input) throws DukeException {
+    public String[] checkInput(String input) throws DinoException {
 
         // Get the first word of the input String
         assert input != null;
@@ -86,7 +86,7 @@ public class Parser {
         // If none of the command words was used as the first word, throw an exception
 
         default:
-            throw new DukeException("Please enter a valid command");
+            throw new DinoException("Please enter a valid command");
         }
     }
 
@@ -95,16 +95,16 @@ public class Parser {
      *
      * @param input The input String
      * @return The parsed output of the input with only the task number left (no formatting)
-     * @throws DukeException if the task number is invalid
+     * @throws DinoException if the task number is invalid
      */
-    public String checkDone(String input) throws DukeException {
+    public String checkDone(String input) throws DinoException {
         int lenOfDoneCommand = 4;
 
         if (input.length() == lenOfDoneCommand) {
-            throw new DukeException("Please use this format: 'done (task number)'");
+            throw new DinoException("Please use this format: 'done (task number)'");
         } else if (Integer.parseInt(input.split(" ")[1]) < 0
                 || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
-            throw new DukeException("Invalid task number!");
+            throw new DinoException("Invalid task number!");
         }
         return input.split(" ")[1];
     }
@@ -114,16 +114,16 @@ public class Parser {
      *
      * @param input The input String
      * @return The parsed output of the input with only the task number left (no formatting)
-     * @throws DukeException if the task number is invalid
+     * @throws DinoException if the task number is invalid
      */
-    public String checkDelete(String input) throws DukeException {
+    public String checkDelete(String input) throws DinoException {
         int lenOfDeleteCommand = 6;
 
         if (input.length() == lenOfDeleteCommand) {
-            throw new DukeException("Please use this format: 'delete (task number)'");
+            throw new DinoException("Please use this format: 'delete (task number)'");
         } else if (Integer.parseInt(input.split(" ")[1]) < 0
                 || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
-            throw new DukeException("Invalid task number!");
+            throw new DinoException("Invalid task number!");
         }
         return input.split(" ")[1];
     }
@@ -133,14 +133,14 @@ public class Parser {
      *
      * @param input The input String
      * @return The parsed output of the input with only the to do description left (no formatting)
-     * @throws DukeException if the task number is invalid
+     * @throws DinoException if the task number is invalid
      */
-    public String checkTodo(String input) throws DukeException {
+    public String checkTodo(String input) throws DinoException {
 
         int lenOfTodoCommand = 5;
 
         if (input.length() <= lenOfTodoCommand || input.charAt(lenOfTodoCommand) == ' ') {
-            throw new DukeException("The description of a todo cannot be empty!");
+            throw new DinoException("The description of a todo cannot be empty!");
         }
         return input.substring(lenOfTodoCommand);
     }
@@ -150,9 +150,9 @@ public class Parser {
      *
      * @param input The input String
      * @return The parsed output of the input with only the event description and date left (no formatting)
-     * @throws DukeException if the format is not followed
+     * @throws DinoException if the format is not followed
      */
-    public String checkEvent(String input) throws DukeException {
+    public String checkEvent(String input) throws DinoException {
 
         int lenOfEventCommand = 6;
         int lenOfAtKeyword = 4;
@@ -160,13 +160,13 @@ public class Parser {
 
         // need to check that for event they use the /at properly else reject
         if (input.length() <= lenOfEventCommand || !input.contains("/at ")) {
-            throw new DukeException("Please use this format: 'event <task> /at <date and time>' "
+            throw new DinoException("Please use this format: 'event <task> /at <date and time>' "
                     + "to specify the date and time!");
         }
 
         String eventDesc = input.substring(lenOfEventCommand, eventDateIndex - lenOfAtKeyword);
         if (input.charAt(lenOfEventCommand) == ' ' || input.charAt(lenOfEventCommand) == '/') {
-            throw new DukeException("The description cannot be empty!");
+            throw new DinoException("The description cannot be empty!");
         }
 
         String eventDate = input.substring(eventDateIndex);
@@ -178,9 +178,9 @@ public class Parser {
      *
      * @param input The input String
      * @return The parsed output of the input with only the deadline description, date and time left (no formatting)
-     * @throws DukeException if format is not followed
+     * @throws DinoException if format is not followed
      */
-    public String checkDeadline(String input) throws DukeException {
+    public String checkDeadline(String input) throws DinoException {
 
         int lengthOfByKeyword = 4;
         int deadlineDateIndex = input.indexOf("/by ") + lengthOfByKeyword;
@@ -190,7 +190,7 @@ public class Parser {
 
         // need to check that for deadline they use the /by properly else reject
         if (!input.contains("/by ")) {
-            throw new DukeException("Please use this format: 'deadline <task> /by YYYY-MM-DD HH:MM' "
+            throw new DinoException("Please use this format: 'deadline <task> /by YYYY-MM-DD HH:MM' "
                     + "to specify the date and time!");
         }
 
@@ -205,13 +205,13 @@ public class Parser {
 
 
             if (input.charAt(indexAfterDeadlineCommand) == ' ' || input.charAt(indexAfterDeadlineCommand) == '/') {
-                throw new DukeException("The description cannot be empty!");
+                throw new DinoException("The description cannot be empty!");
             }
             String deadlineDesc = input.substring(indexAfterDeadlineCommand, deadlineDateIndex - lengthOfByKeyword);
             return deadlineDesc + Ui.DELIMITER + date + Ui.DELIMITER + time;
 
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
-            throw new DukeException("Invalid date or time format! Use: YYYY-MM-DD HH:MM");
+            throw new DinoException("Invalid date or time format! Use: YYYY-MM-DD HH:MM");
         }
 
     }
@@ -221,15 +221,15 @@ public class Parser {
      *
      * @param input The input String
      * @return The parsed output of the input with the keyword to be searched for
-     * @throws DukeException only one keyword was not used
+     * @throws DinoException only one keyword was not used
      */
-    public String checkFind(String input) throws DukeException {
+    public String checkFind(String input) throws DinoException {
         int lenOfFindCommand = 4;
 
         if (input.length() == lenOfFindCommand) {
-            throw new DukeException("Please enter a keyword!");
+            throw new DinoException("Please enter a keyword!");
         } else if (input.split(" ").length > 2) {
-            throw new DukeException("Please enter ONLY 1 keyword!");
+            throw new DinoException("Please enter ONLY 1 keyword!");
         }
         return input.split(" ")[1];
     }

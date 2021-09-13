@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Deadline;
+import dino.task.Deadline;
 
 public class DeadlineTest {
     private Deadline test = new Deadline("homework", LocalDate.parse("2021-08-24"), LocalTime.parse("12:31"));

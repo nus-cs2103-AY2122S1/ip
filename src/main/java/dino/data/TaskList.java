@@ -1,8 +1,8 @@
-package duke.data;
+package dino.data;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
+import dino.task.Task;
 
 /**
  * Represents the list of tasks that the user writes to.

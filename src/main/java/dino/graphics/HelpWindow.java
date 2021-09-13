@@ -1,16 +1,9 @@
-package duke.graphics;
-
-import duke.Duke;
-import java.io.IOException;
-import java.util.Collections;
+package dino.graphics;
 
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 
 public class HelpWindow extends AnchorPane{
@@ -19,7 +12,7 @@ public class HelpWindow extends AnchorPane{
     @FXML
     public Label helpText;
 
-    private String generalHelp = "Welcome to Duke! Here are all the commands available!";
+    private String generalHelp = "Welcome to Dino! Here are all the commands available!";
     private String toDoHelp = "todo: creates a new todo task \n     Format: todo <enter the task here!>";
     private String eventHelp = "event: creates a new event task \n      Format: event <enter the event description here!> /at <enter the location here!>";
     private String deadlineHelp = "deadline: creates a new deadline task \n     Format: deadline <enter the deadline description here!> /by <YYYY-MM-DD HH:MM>";;

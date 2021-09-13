@@ -1,4 +1,4 @@
-package duke.graphics;
+package dino.graphics;
 
 import javafx.application.Application;
 

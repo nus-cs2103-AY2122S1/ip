@@ -1,6 +1,6 @@
-package duke.user;
+package dino.user;
 
-import duke.data.TaskList;
+import dino.data.TaskList;
 
 /**
  * Represents the class which handles all the output by the program and prompts the user for input
@@ -90,7 +90,7 @@ public class Ui {
                 + "now you have: " + tasks.getLength() + " tasks! type 'list' to see them!" + "\n" + DIVIDER;
     }
 
-    public static String displayDukeExceptionMessage(DukeException e) {
+    public static String displayDinoExceptionMessage(DinoException e) {
         return DIVIDER + "\n" + e.getMessage() + "\n" + DIVIDER;
     }
 

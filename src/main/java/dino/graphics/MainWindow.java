@@ -1,7 +1,7 @@
-package duke.graphics;
+package dino.graphics;
 
-import duke.Duke;
-import duke.user.Ui;
+import dino.Dino;
+import dino.user.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -38,10 +38,10 @@ public class MainWindow extends AnchorPane {
     private Popup helpPopup;
 
 
-    private Duke duke;
+    private Dino dino;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Lunch-min.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Dinner.jpg"));
+    private Image dinoImage = new Image(this.getClass().getResourceAsStream("/images/Dinner.jpg"));
 
     /**
      * Runs when the MainWindow is initialized.
@@ -53,29 +53,29 @@ public class MainWindow extends AnchorPane {
 
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDino(Dino d) {
+        dino = d;
     }
 
     @FXML
     private void sendIntroMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke!\nYour friendly task manager!", dukeImage)
+                DialogBox.getDinoDialog("Hello! I'm Dino!\nYour friendly task manager!", dinoImage)
         );
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Dino's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
 
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = dino.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDinoDialog(response, dinoImage)
         );
 
         // @@author CheyanneSim-reused

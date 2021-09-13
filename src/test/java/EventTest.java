@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Event;
+import dino.task.Event;
 
 public class EventTest {
     private Event test = new Event("homework", "29/01/1999 1pm");

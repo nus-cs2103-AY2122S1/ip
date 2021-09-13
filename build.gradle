@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.graphics.Launcher"
+    mainClassName = "dino.graphics.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "dino"
     archiveClassifier = null
 }
 
