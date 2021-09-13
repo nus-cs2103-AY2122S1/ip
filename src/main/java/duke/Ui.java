@@ -36,8 +36,8 @@ public class Ui {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userPhoto = new Image(this.getClass().getResourceAsStream("/images/UserDisplayPhoto.jpg"));
+    private Image botPhoto = new Image(this.getClass().getResourceAsStream("/images/BotDisplayPhoto.jpg"));
 
 
     /**
@@ -102,7 +102,7 @@ public class Ui {
      * Gives greetings to users as they log into Duke.
      */
     protected void greet() {
-        String message = "Good Day Sir/Mdm, I am Duke.\nWhat can I do for you?\n";
+        String message = "Good Day Sir/Mdm, I am 2Butler.\nWhat can I do for you?\n";
         displayDukeReply(message);
 
     }
@@ -242,7 +242,7 @@ public class Ui {
         String userInputText = userInput.getText();
         Label userTextLabel = new Label(userInputText);
         userTextLabel.setPadding(new Insets(0, 10, 0, 0));
-        ImageView userImage = new ImageView(user);
+        ImageView userImage = new ImageView(userPhoto);
         clipImageViewToCircle(userImage, 100);
         DialogBox userDialogBox = DialogBox.getUserDialog(userTextLabel, userImage);
         userDialogBox.setPadding(new Insets(0, 0, 30, 0));
@@ -266,7 +266,7 @@ public class Ui {
         Label dukeTextLabel = new Label(dukeReply);
         dukeTextLabel.setPadding(new Insets(0, 0, 0, 10));
 
-        ImageView dukeImage = new ImageView(duke);
+        ImageView dukeImage = new ImageView(botPhoto);
         clipImageViewToCircle(dukeImage, 100);
 
         DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeTextLabel, dukeImage);
