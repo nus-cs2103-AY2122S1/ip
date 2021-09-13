@@ -136,19 +136,34 @@ Prints out all tasks in your task list.
 
 ### `find` - Search for tasks
 
-Search for all tasks with description matching a search query.
+Search for all tasks matching a search query.
 
-**Command syntax:** `find [query]`
+**Command syntax:** `find (status) (time) (type) (query)`
+
+Arguments are optional, but at least one is required.
+Including multiple arguments will filter the search to match all the arguments provided.
+
+`status` represents whether tasks are done. Either `[X]` for done or `[]` for not done.
+
+`time` represents the *date* of tasks. Use `YYYY-MM-DD` format.
+
+`type` represents the *type* of tasks. One of `[T]` (Todo), `[E]` (Event), `[D]` (Deadline).
+
+`query` is a single word that you want to search for in the task description.
 
 **Example usage:**
 
-`find mortal coil`
+The following searches will return the same result:
+- `find 2021-12-31`
+- `find [] coil`
+- `find mortal [E]`
+- `f shuffle 2021-12-31 [E] []`
 
 **Expected outcome:**
 
 ```
-Your search matches these tasks:
- 3. [E][ ] shuffle off the mortal coil (at: 31 Dec 2021, Fri, 23:59)
+Your search matched these tasks:
+ [E][ ] shuffle off the mortal coil (at: 31 Dec 2021, Fri, 23:59)
 ```
 
 **Command aliases:** `f`
@@ -222,6 +237,8 @@ Closes Augury, saving your tasks.
 Augury comes with various colour themes.
 
 From the menu-bar, click on `Settings > Theme` in order to select your theme.
+
+Themes are based off [Hundred Rabbits' Theme Framework](https://github.com/hundredrabbits/Themes).
 
 ## Command Summary
 

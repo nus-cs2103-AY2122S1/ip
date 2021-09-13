@@ -1,12 +1,13 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * The {@code Task} parent class contains abstractions for tasks.
  */
 public abstract class Task {
-    protected static final DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
+    public static final DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
     protected String description;
     protected boolean isDone = false;
 
@@ -50,4 +51,41 @@ public abstract class Task {
         String checkbox = isDone ? "[X]" : "[ ]";
         return checkbox + " " + description;
     }
+
+    /**
+     * Checks if given {@code String} query matches this {@code Task}.
+     *
+     * @param queryString {@code String} to be compared against this {@code Task}'s description.
+     * @return {@code boolean} value representing a match
+     */
+    public boolean isMatch(String queryString) {
+        return this.description.contains(queryString);
+    }
+
+    /**
+     * Checks if given {@code TaskStatuses} query matches this {@code Task}.
+     *
+     * @param queryStatus {@code String} to be compared against this {@code Task}'s {@code isDone} status.
+     * @return {@code boolean} value representing a match
+     */
+    public boolean isMatch(TaskStatuses queryStatus) {
+        return (queryStatus.equals(TaskStatuses.ISDONE) && this.isDone)
+                || (queryStatus.equals(TaskStatuses.ISNOTDONE) && !this.isDone);
+    }
+
+    /**
+     * Checks if given {@code String} query matches this {@code LocalDateTime}.
+     * Since {@code Task}s have no time, false is returned by default.
+     *
+     * @param queryDateTime {@code LocalDateTime} to be compared against this {@code Task}.
+     * @return {@code false}, since {@code Task} objects have no time to be compared against.
+     */
+    public boolean isMatch(LocalDateTime queryDateTime) {
+        return false;
+    };
+
+    /**
+     * Checks if given {@code TaskTypes} matches this {@code Task}.
+     */
+    public abstract boolean isMatch(TaskTypes queryTaskType);
 }

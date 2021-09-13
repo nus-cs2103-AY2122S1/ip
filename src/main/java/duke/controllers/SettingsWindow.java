@@ -1,7 +1,6 @@
 package duke.controllers;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import duke.exceptions.AuguryException;
 import duke.storage.Settings;
@@ -46,8 +45,8 @@ public class SettingsWindow extends Application {
             s.initModality(Modality.APPLICATION_MODAL);
             s.getScene().getStylesheets().add("/styles/augury_" + SettingsWindow.settings.getTheme() + ".css");
 
-            choiceBox.getItems().addAll( "Apollo", "Dark", "Light", "Orca", "Solarised", "Sonicpi", "Tape");
-            String currentTheme = SettingsWindow.settings.getTheme().substring(0,1).toUpperCase()
+            choiceBox.getItems().addAll("Apollo", "Dark", "Light", "Orca", "Solarised", "Sonicpi", "Tape");
+            String currentTheme = SettingsWindow.settings.getTheme().substring(0, 1).toUpperCase()
                     + SettingsWindow.settings.getTheme().substring(1);
             choiceBox.setValue(currentTheme);
 

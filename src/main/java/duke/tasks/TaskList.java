@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import duke.io.Parser;
+import duke.util.Query;
 
 /**
  * The {@code TaskList} contains and has methods for interacting with {@code Task}s.
@@ -123,21 +128,23 @@ public class TaskList {
      * Returns a {@code String} containing the {@code Task}s that match the given
      * {@code String query}.
      *
-     * @param query {@code String} search query of the user.
+     * @param userQueries {@code String} search query of the user.
      * @returns {@code String} - Newlined list of {@code Task}s.
      */
-    public String findAndAnnounce(String query) {
-        StringBuilder res = new StringBuilder("Your search matched these tasks:\n\t ");
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(query)) {
-                res.append(i + 1).append(". ").append(tasks.get(i));
-                if (i != tasks.size() - 1) {
-                    // do not append a newline to the last item
-                    res.append("\n\t ");
-                }
-            }
+    public String findAndAnnounce(String userQueries) {
+        ArrayList<Query> queries = Parser.parseFindQueries(userQueries);
+        Stream<Task> matchedTasks = tasks.stream();
+
+        String resultTasks = matchedTasks.filter(t -> queries.stream().allMatch(q -> q.isMatch(t)))
+            .map(t -> t.toString()).collect(Collectors.joining("\n\t  "));
+
+        if (resultTasks.length() == 0) {
+            return "Your search didn't match any tasks.";
+        } else {
+            StringBuilder res = new StringBuilder("Your search matched these tasks:\n\t  ");
+            res.append(resultTasks);
+            return res.toString();
         }
-        return res.toString();
     }
 
     /**

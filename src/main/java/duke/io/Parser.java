@@ -1,10 +1,19 @@
 package duke.io;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.commands.Command;
 import duke.commands.CommandTypes;
 import duke.exceptions.AuguryException;
 import duke.exceptions.InvalidActionException;
 import duke.exceptions.UnknownCommandException;
+import duke.tasks.TaskStatuses;
+import duke.tasks.TaskTypes;
+import duke.util.Query;
 
 /**
  * The {@code Parser} class handles command parsing.
@@ -36,6 +45,46 @@ public class Parser {
             }
         }
         throw new UnknownCommandException("Unknown command entered");
+    }
+
+    /**
+     * Creates an {@code ArrayList} of {@code Query} objects representing the items that the user wants to find.
+     *
+     * @param query {@code String} containing search items. Example: {@code [X] school 2021-01-31}
+     * @return {@code ArrayList} of {@code Query} objects
+     */
+    public static ArrayList<Query> parseFindQueries(String query) {
+        ArrayList<Query> res = new ArrayList<>();
+        String[] queries = query.split(" ");
+        for (String q : queries) {
+            switch (q) {
+            case "[x]":
+                res.add(new Query("status", TaskStatuses.ISDONE));
+                break;
+            case "[]":
+                res.add(new Query("status", TaskStatuses.ISNOTDONE));
+                break;
+            case "[t]":
+                res.add(new Query("type", TaskTypes.TODO));
+                break;
+            case "[e]":
+                res.add(new Query("type", TaskTypes.EVENT));
+                break;
+            case "[d]":
+                res.add(new Query("type", TaskTypes.DEADLINE));
+                break;
+            default:
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDateTime d = LocalDate.parse(q, formatter).atStartOfDay();
+                    res.add(new Query("datetime", d));
+                } catch (DateTimeParseException e) {
+                    res.add(new Query("string", q));
+                }
+
+            }
+        }
+        return res;
     }
 
     private String cleanCommandArguments(String input,

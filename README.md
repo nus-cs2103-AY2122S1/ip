@@ -30,9 +30,10 @@ Turn your future tasks into omens of good fortune, today!
   ![App screenshot](docs/Ui-2.png)
 
 ## Features
-### 1. **Responsive UI built with JavaFX**
+### 1. **Customizable UI built with JavaFX**
    
-Augury supports screens of various sizes! Switch between your favourite themes within the app!
+Augury is fully responsive, supporting fullscreen and windows of various sizes!
+Love customization? Switch between your favourite colour themes within the app!
 
 This was my first time working on JavaFX, and I sought to create the best UI I could.
 Overall, it was a great learning experience.
@@ -65,7 +66,7 @@ Gradle is used in conjunction with Github Continuous Integration (CI) to ensure 
 Augury provides a super-intuitive way to manage your tasks -- just create a task, include the relevant details, and mark as done once completed!
 
 Additional features included:
-- **Search** - Blazing fast search to find tasks
+- **Search** - Blazing fast search to find tasks, with clever built-in search filters.
 - **Batch operations** - Delete or Mark multiple tasks at once!
 - **Manage date & time** - Create Deadline or Event tasks that have a time associated with them!
 - **Command aliases** - Less keystrokes to type, more time for productivity!
@@ -107,4 +108,5 @@ Here are some commands to get you started. For more information, read the [User 
 
 ## Acknowledgements
 - [Pigeon image](https://www.irasutoya.com/2018/01/blog-post_419.html) from [Irastoya](https://www.irasutoya.com/p/terms.html)
-- [Windy Cloudy Icon](https://www.s-ings.com/typicons/) from Typicons
+- [Windy Cloudy Icon](https://www.s-ings.com/typicons/) from Typicons 
+- Themes are based off [Hundred Rabbits' Theme Framework](https://github.com/hundredrabbits/Themes).

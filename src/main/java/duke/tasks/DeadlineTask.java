@@ -3,10 +3,9 @@ package duke.tasks;
 import java.time.LocalDateTime;
 
 /**
- * The {@code DeadlineTask} class extends from {@code Task} to contain an additional
- * {@code LocalDateTime time} field.
+ * The {@code DeadlineTask} class extends from {@code TaskWithTime}.
  */
-public class DeadlineTask extends Task {
+public class DeadlineTask extends TaskWithTime {
     protected LocalDateTime time;
 
     /**
@@ -16,7 +15,7 @@ public class DeadlineTask extends Task {
      * @param time {@code LocalDateTime} Time that the task is due by.
      */
     public DeadlineTask(String description, LocalDateTime time) {
-        super(description);
+        super(description, time);
         this.time = time;
     }
 
@@ -29,8 +28,18 @@ public class DeadlineTask extends Task {
      * @param isDone {@code boolean} Done status of task.
      */
     public DeadlineTask(String description, LocalDateTime time, boolean isDone) {
-        super(description, isDone);
+        super(description, time, isDone);
         this.time = time;
+    }
+
+    /**
+     * Checks if given {@code TaskTypes} query matches this {@code Task}.
+     *
+     * @param query {@code TaskTypes} to be compared against this {@code Task}
+     * @return {@code boolean} value representing a match
+     */
+    public boolean isMatch(TaskTypes query) {
+        return query.equals(TaskTypes.DEADLINE);
     }
 
     /**

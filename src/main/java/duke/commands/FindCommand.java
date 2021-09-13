@@ -32,7 +32,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws InvalidActionException {
-        String query = this.args[0];
-        return tasks.findAndAnnounce(query);
+        String userQueries = this.args[0];
+        return tasks.findAndAnnounce(userQueries);
     }
 }

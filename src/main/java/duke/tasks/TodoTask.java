@@ -25,6 +25,16 @@ public class TodoTask extends Task {
     }
 
     /**
+     * Checks if given {@code TaskTypes} query matches this {@code Task}.
+     *
+     * @param query {@code TaskTypes} to be compared against this {@code Task}
+     * @return {@code boolean} value representing a match
+     */
+    public boolean isMatch(TaskTypes query) {
+        return query.equals(TaskTypes.TODO);
+    }
+
+    /**
      * Prints {@code TodoTask} description with the prefix [T].
      */
     @Override
