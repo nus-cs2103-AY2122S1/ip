@@ -16,7 +16,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            fxmlLoader.<MainWindow>getController().setDuke(new Sora(false));
+            fxmlLoader.<MainWindow>getController().setData(new Sora(false), stage);
 
             stage.setScene(scene);
             stage.setResizable(false);
