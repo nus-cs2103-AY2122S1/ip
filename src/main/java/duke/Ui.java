@@ -57,24 +57,15 @@ public class Ui {
     }
 
     /**
-     * Shows error message for 'done' command when index is out of bound
+     * Shows error message when index is out of bound
      *
      * @return a String representing the error message
      */
-    public String showDoneError() {
+    public String showNoSuchTaskError() {
         return "\n" + line
-                + "\nOOPS!!! No such task to be done.\n" + line;
+                + "\nOOPS!!! No such task.\n" + line;
     }
 
-    /**
-     * Shows error message for 'delete' command when index is out of bound
-     *
-     * @return a String representing the error message
-     */
-    public String showDeleteError() {
-        return "\n" + line
-                + "\nOOPS!!! No such task to be deleted.\n" + line;
-    }
 
     /**
      * Shows a response when user uses the 'todo' command
@@ -107,7 +98,7 @@ public class Ui {
      */
     public String showDeadlineError() {
         return "\n" + line
-                + "\nOOPS!!! The time must be in the format YYYY-MM-DD\n" + line;
+                + "\nOOPS!!! The date must be in the format YYYY-MM-DD\n" + line;
     }
 
     /**

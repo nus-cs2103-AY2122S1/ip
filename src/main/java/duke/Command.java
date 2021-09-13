@@ -23,34 +23,30 @@ public class Command {
      * @param save Storage object to store the TaskList
      */
     public String execute(TaskList tasks, Ui ui, Storage save) {
-        Scanner sc = new Scanner(input);
-        String filePath = "data/duke.txt";
-        String command = Parser.parseCommand(sc.next());
-        switch(command) {
-        case "bye":
-            return ui.showBye();
-        case "list":
-            String list = "";
-            int listNum = 1;
-            for (int i = 0; i < tasks.size(); i++) {
-                list += listNum + "." + tasks.get(i) + "\n";
-                listNum++;
-            }
-            assert listNum == tasks.size()
-                    : "listNum and tasks size should be the same";
-            return ui.list(list);
-        case "done":
-            int doneNum = sc.nextInt() - 1;
-            try {
+        try {
+            Scanner sc = new Scanner(input);
+            String filePath = "data/duke.txt";
+            String command = Parser.parseCommand(sc.next());
+            switch(command) {
+            case "bye":
+                return ui.showBye();
+            case "list":
+                String list = "";
+                int listNum = 1;
+                for (int i = 0; i < tasks.size(); i++) {
+                    list += listNum + "." + tasks.get(i) + "\n";
+                    listNum++;
+                }
+                assert listNum == tasks.size()
+                        : "listNum and tasks size should be the same";
+                return ui.list(list);
+            case "done":
+                int doneNum = sc.nextInt() - 1;
+                assert doneNum < tasks.size() && doneNum > -1
+                        : "Task number should be in range";
                 tasks.get(doneNum).markAsDone();
                 return ui.done(tasks.get(doneNum));
-            } catch (IndexOutOfBoundsException e) {
-                assert doneNum >= tasks.size() && doneNum <= -1
-                        : "Task number should be out of range";
-                return ui.showDoneError();
-            }
-        case "todo":
-            try {
+            case "todo":
                 String todoDescription = sc.nextLine().trim();
                 Task todo = new Todo(todoDescription);
                 if (todoDescription.isEmpty()) {
@@ -59,23 +55,15 @@ public class Command {
                 tasks.add(todo);
                 save.writeToFile(filePath, tasks);
                 return ui.todo(tasks, todo);
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-        case "delete":
-            int delNum = sc.nextInt() - 1;
-            try {
+            case "delete":
+                int delNum = sc.nextInt() - 1;
+                assert delNum < tasks.size() && delNum > -1
+                        : "Task number should be in range";
                 Task delete = tasks.get(delNum);
                 tasks.remove(delNum);
                 save.writeToFile(filePath, tasks);
                 return ui.delete(tasks, delete);
-            } catch (IndexOutOfBoundsException e) {
-                assert delNum >= tasks.size() && delNum <= -1
-                        : "Task number should be out of range";
-                return ui.showDeleteError();
-            }
-        case "deadline":
-            try {
+            case "deadline":
                 String[] deadlineArr = sc.nextLine().split("/by");
                 if (deadlineArr[0].strip().isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
@@ -86,13 +74,7 @@ public class Command {
                 tasks.add(deadline);
                 save.writeToFile(filePath, tasks);
                 return ui.deadline(tasks, deadline);
-            } catch (DateTimeParseException e) {
-                return ui.showDeadlineError();
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-        case "event":
-            try {
+            case "event":
                 String[] eventArr = sc.nextLine().split("/at");
                 if (eventArr[0].strip().isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
@@ -101,11 +83,7 @@ public class Command {
                 tasks.add(event);
                 save.writeToFile(filePath, tasks);
                 return ui.event(tasks, event);
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-        case "find":
-            try {
+            case "find":
                 String keyword = sc.nextLine().trim();
                 String findList = "\n";
                 if (keyword.strip().isEmpty()) {
@@ -117,11 +95,7 @@ public class Command {
                     }
                 }
                 return ui.find(findList);
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-        case "doafter":
-            try {
+            case "doafter":
                 String[] afterArr = sc.nextLine().split("/after");
                 if (afterArr[0].strip().isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
@@ -130,11 +104,15 @@ public class Command {
                 tasks.add(doAfter);
                 save.writeToFile(filePath, tasks);
                 return ui.after(tasks, doAfter);
-            } catch (DukeException e) {
-                return e.getMessage();
+            default:
+                return ui.defaultError();
             }
-        default:
-            return ui.defaultError();
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return ui.showDeadlineError();
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showNoSuchTaskError();
         }
     }
 }

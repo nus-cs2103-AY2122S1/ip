@@ -100,6 +100,7 @@ public class Storage {
                     doAfter.markAsDone();
                 }
                 list.add(doAfter);
+                break;
             default:
                 break;
             }
