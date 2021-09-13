@@ -19,11 +19,7 @@ public class FileManager {
      */
     public FileManager() {
         try {
-            if (DATA_FILE.createNewFile()) {
-                System.out.println("A new save file has been created!");
-            } else {
-                System.out.println("Using an existing save file...");
-            }
+            DATA_FILE.createNewFile();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
