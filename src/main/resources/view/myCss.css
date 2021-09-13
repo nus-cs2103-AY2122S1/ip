@@ -1,12 +1,10 @@
-* {
-    -fx-base: #404040
+.root {
+    -fx-base: #1c1c1c
 }
 
 .send-button {
-    -fx-background-color: #FFFFFF; -fx-background-radius: 15px;
-
-
-
+    -fx-background-color: #85efff; -fx-background-radius: 30;
+    -fx-text-fill: black;
 }
 
 .text-field {
@@ -18,6 +16,5 @@
 .textBox {
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
-
 
 }

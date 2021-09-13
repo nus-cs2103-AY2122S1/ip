@@ -7,22 +7,11 @@ import duke.task.ToDo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-public class Duke extends Application {
+public class Duke {
 
     enum TaskType{
         TODO,
@@ -42,14 +31,13 @@ public class Duke extends Application {
     private static final int ERROR_OUTOFBOUNDS = 4;
     private static final int ERROR_UNKNOWN = 5;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/spongebob.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/marvel vision.jpg"));
+    private static final int VALIDLENGTH_DONE = 6;
+    private static final int VALIDLENGTH_TODO = 6;
+    private static final int VALIDLENGTH_DEADLINE = 10;
+    private static final int VALIDLENGTH_EVENT = 7;
+    private static final int VALIDLENGTH_DELETE = 8;
+    private static final int VALIDLENGTH_FIND = 6;
+    private static final int VALIDLENGTH_VIEW = 6;
 
     public Duke() {}
 
@@ -66,86 +54,12 @@ public class Duke extends Application {
         SL = new StorageList(storage.load());
     }
 
-    @Override
-    public void start(Stage stage) {
-
-//        scrollPane = new ScrollPane();
-//        dialogContainer = new VBox();
-//        scrollPane.setContent(dialogContainer);
-//
-//        dialogContainer.setPadding(new Insets(20, 20, 20, 20));
-//        dialogContainer.setSpacing(10);
-//
-//        userInput = new TextField();
-//        sendButton = new Button("Send");
-//
-//        AnchorPane mainLayout = new AnchorPane();
-//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-//
-//        scene = new Scene(mainLayout);
-//
-//        stage.setScene(scene);
-//        stage.show();
-//
-//        stage.setTitle("Duke");
-//        stage.setResizable(false);
-//        stage.setMinHeight(700.0);
-//        stage.setMinWidth(800.0);
-//
-//        mainLayout.setPrefSize(800.0, 700.0);
-//
-//        scrollPane.setPrefSize(785, 635);
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//
-//        scrollPane.setVvalue(1.0);
-//        scrollPane.setFitToWidth(true);
-//
-//        // You will need to import `javafx.scene.layout.Region` for this.
-//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//
-//        userInput.setPrefWidth(725.0);
-//
-//        sendButton.setPrefWidth(55.0);
-//
-//        AnchorPane.setTopAnchor(scrollPane, 1.0);
-//
-//        AnchorPane.setBottomAnchor(sendButton, 1.0);
-//        AnchorPane.setRightAnchor(sendButton, 1.0);
-//
-//        AnchorPane.setLeftAnchor(userInput , 1.0);
-//        AnchorPane.setBottomAnchor(userInput, 1.0);
-//
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
-//
-//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-
-//    private void handleUserInput() {
-//        assert user != null && duke != null : "User and duke images should not be null";
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
-
     public String getResponse(String input) {
         try {
             return new Duke("data/duketest.txt").run(input);
         } catch (FileNotFoundException e) {
             return ui.fileNotFoundMsg();
         }
-
     }
 
     /**
@@ -155,61 +69,51 @@ public class Duke extends Application {
      * @return The confirmation message depending on what the user inputted.
      */
     private String run(String input) {
-
         try {
             if (parser.isDoneCmd(input)) {
                 return marking(input);
 
             } else if (parser.isValidTodo(input)) {
-                if(input.length() == 4) {
+                if(input.length() < VALIDLENGTH_TODO) {
                     throw new DukeException(ui.taskErrorMsg(TASK_TODO));
                 }
                 return putTaskInList(TaskType.TODO, input);
 
-
             } else if (parser.isValidDeadline(input)) {
-                if (input.length() == 8) {
+                if (input.length() < VALIDLENGTH_DEADLINE) {
                     throw new DukeException(ui.taskErrorMsg(TASK_DEADLINE));
                 }
-
                 return putTaskInList(TaskType.DEADLINE, input);
 
-
             } else if (parser.isValidEvent(input)) {
-                if (input.length() == 5) {
+                if (input.length() < VALIDLENGTH_EVENT) {
                     throw new DukeException(ui.taskErrorMsg(TASK_EVENT));
                 }
                 return putTaskInList(TaskType.EVENT, input);
 
-
             } else if (parser.isDeleteCmd(input)) {
-                if (input.length() == 6) {
+                if (input.length() < VALIDLENGTH_DELETE) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
-                assert input.substring(7).length() == 1 : "There should be an index";
-
                 int idx = parser.getDeleteIdx(input);
                 String desc = SL.get(idx).getDescription();
-                SL.delete(idx);
-                storage.save(SL);
-                return ui.taskDeleteMsg(desc, SL.size());
+                return deleteFromList(idx, desc);
 
             } else if (parser.isFindCmd(input)) {
-                if (input.length() == 4) {
+                if (input.length() < VALIDLENGTH_FIND) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
-
                 String keyword = input.substring(5);
                 return SL.findAndReturn(keyword);
 
             } else if(parser.isViewCmd(input)) {
-                if (input.length() == 4) {
+                if (input.length() < VALIDLENGTH_VIEW) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
                 String dateQuery = parser.getDateTime(input);
                 return SL.viewSchedule(dateQuery);
-            } else {
 
+            } else {
                 switch (input) {
                 case "bye":
                     ui.bye();
@@ -225,22 +129,34 @@ public class Duke extends Application {
             return e.getMessage();
         } catch (IOException e) {
             return ui.ioErrorMsg();
+        } catch (DateTimeParseException e) {
+            return ui.parsingFormatErrorMsg();
         }
     }
 
-    private String putTaskInList(TaskType taskType, String input) throws IOException {
+    private String putTaskInList(TaskType taskType, String input)
+            throws IOException, DukeException, DateTimeParseException {
         Task task = null;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         switch (taskType) {
         case TODO:
             task = new ToDo(parser.getTodoDescription(input));
             break;
         case EVENT:
-            String at = parser.getEventTime(input);
-            task = new Event(parser.getEventDescription(input), at);
+            if (!input.contains("/at ")) {
+                throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
+            }
+            String at = parser.getTaskTime(input);
+            LocalDateTime eventTime = parser.parseLocalDateTime(at);
+            task = new Event(parser.getEventDescription(input), eventTime.format(dateTimeFormatter));
             break;
         case DEADLINE:
-            String by = parser.getDeadlineTime(input);
-            task = new Deadline(parser.getDeadlineDescription(input), by);
+            if (!input.contains("/by ")) {
+                throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
+            }
+            String by = parser.getTaskTime(input);
+            LocalDateTime deadlineTime = parser.parseLocalDateTime(by);
+            task = new Deadline(parser.getDeadlineDescription(input), deadlineTime.format(dateTimeFormatter));
             break;
         default:
             // code should not come into here
@@ -251,10 +167,16 @@ public class Duke extends Application {
         return ui.taskAddedMsg(task.toString(), SL.size());
     }
 
+    private String deleteFromList(int idx, String desc) throws IOException {
+        SL.delete(idx);
+        storage.save(SL);
+        return ui.taskDeleteMsg(desc, SL.size());
+    }
+
 
 
     private String marking(String input) throws DukeException, IOException {
-        if (input.length() >= 6 && input.substring(5).matches("[0-9]+")) {
+        if (input.length() >= VALIDLENGTH_DONE && input.substring(5).matches("[0-9]+")) {
             int taskNum = parser.getDoneIdx(input);
             if (parser.hasValidInteger(taskNum, SL.size())) {
                 SL.get(taskNum).markAsDone();
@@ -263,10 +185,8 @@ public class Duke extends Application {
                 return ui.taskDoneConfirmation();
             } else {
                 throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
-
             }
         }
         throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
-
     }
 }

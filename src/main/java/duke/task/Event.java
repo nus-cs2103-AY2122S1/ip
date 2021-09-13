@@ -1,14 +1,7 @@
 package duke.task;
 
-import duke.Parser;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Event extends Task {
     protected String at;
-    protected LocalDateTime localDateTime;
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     public Event(String description, String at) {
         super(description);
@@ -33,7 +26,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         assert at != null : "at variable should not be null";
-        localDateTime = new Parser().parseLocalDateTime(at);
-        return "[E]" + super.toString() + " (at: " + localDateTime.format(dateTimeFormatter) + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
+
+
     }
 }

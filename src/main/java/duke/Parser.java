@@ -2,8 +2,11 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
+    private Ui ui = new Ui();
+    private static final int ERROR_UNKNOWN = 5;
 
     public Parser() {}
 
@@ -92,22 +95,12 @@ public class Parser {
     }
 
     /**
-     * Returns the deadline associated with the deadline task.
+     * Returns the time associated with the deadline or event task.
      *
      * @param input User command.
-     * @return The deadline of the task.
+     * @return The deadline or event time of the task.
      */
-    public String getDeadlineTime(String input) {
-        return input.substring(input.indexOf("/") + 4);
-    }
-
-    /**
-     * Returns the event date and time associated with the event task.
-     *
-     * @param input User command.
-     * @return The event date and time of the task.
-     */
-    public String getEventTime(String input) {
+    public String getTaskTime(String input){
         return input.substring(input.indexOf("/") + 4);
     }
 
@@ -146,7 +139,7 @@ public class Parser {
      * @param time The event time/deadline.
      * @return A LocalDateTime object holding the time information.
      */
-    public LocalDateTime parseLocalDateTime(String time) {
+    public LocalDateTime parseLocalDateTime(String time) throws DateTimeParseException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         if (time.substring(0, 1).matches("[0-9]+")) {
             DateTimeFormatter anotherDtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -155,6 +148,7 @@ public class Parser {
             return LocalDateTime.parse(time, dtf);
         }
     }
+
 
     public boolean isFindCmd(String input) {
         return input.length() >= 4 && input.substring(0, 4).equals("find");
