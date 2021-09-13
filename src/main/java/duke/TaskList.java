@@ -65,6 +65,7 @@ public class TaskList {
      * @return error message if index is greater than the length of list, else completion message.
      */
     public String markDone(int index) throws DukeException {
+        System.out.println("Reached tasklist. index is: " + index);
         if (index <= 0) {
             throw new DukeException("Invalid index. Only non-negative values are accepted.");
         }

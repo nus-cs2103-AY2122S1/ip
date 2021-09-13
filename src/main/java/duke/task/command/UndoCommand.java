@@ -9,7 +9,6 @@ import duke.Undo;
 public class UndoCommand extends Command {
 
     private Undo undo;
-
     /**
      * Executes the command.
      *

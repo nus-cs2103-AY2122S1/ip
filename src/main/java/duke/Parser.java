@@ -31,48 +31,50 @@ public class Parser {
         this.taskList = taskList;
     }
 
-    private Command parseDeadline(String... inputWords) throws DukeException {
+    private Command parseDeadline(String input) throws DukeException {
         String date;
+        String[] inputWords = input.split("\\s+");
         if (inputWords.length < 4) {
             throw new DukeException("Please provide both description and date. Use '/by'. "
                     + "(eg. deadline submit project /by 2021-08-24)");
         }
         date = parseDate(inputWords[3]);
-        return new DeadlineCommand(taskList, inputWords[1], date);
+        return new DeadlineCommand(taskList, inputWords[1], date, input);
     }
 
-    private Command parseEvent(String... inputWords) throws DukeException {
+    private Command parseEvent(String input) throws DukeException {
+        String[] inputWords = input.split("\\s+");
         if (inputWords.length < 4) {
             throw new DukeException("Please provide both description and time. Use '/at'. "
                     + "(eg. event fix hair /at 1pm)");
         }
-        return new EventCommand(taskList, inputWords[1], inputWords[3]);
+        return new EventCommand(taskList, inputWords[1], inputWords[3], input);
     }
 
-    private Command parseTodo(String... input) throws DukeException {
-        for (String s : input) {
-            System.out.println("s: " + s);
-        }
-        if (input.length < 2) {
+    private Command parseTodo(String input) throws DukeException {
+        String[] inputWords = input.split("\\s+");
+        if (inputWords.length < 2) {
             throw new DukeException("Please specify the task you want to do");
         } else {
-            return new TodoCommand(taskList, input[1]);
+            return new TodoCommand(taskList, inputWords[1], input);
         }
     }
 
-    private Command parseDone(String[] input) throws DukeException {
+    private Command parseDone(String input) throws DukeException {
         int index;
-        if (input.length < 2) {
+        String[] inputWords = input.split("\\s+");
+        if (inputWords.length < 2) {
             throw new DukeException("Please specify which task you have done");
-        } else if (input.length != 2) {
+        } else if (inputWords.length != 2) {
             throw new DukeException("'done' command requires exactly 1 argument. (eg. done 12)");
         }
         try {
-            index = Integer.parseInt(input[1]);
+            index = Integer.parseInt(inputWords[1]);
+            System.out.println("Reached parseDone, index is:  " + index);
         } catch (Exception e) {
             throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
         }
-        return new DoneCommand(taskList, index);
+        return new DoneCommand(taskList, index, input);
     }
 
     private Command parseList(String[] input) throws DukeException {
@@ -91,19 +93,20 @@ public class Parser {
         }
     }
 
-    private Command parseDelete(String[] input) throws DukeException {
+    private Command parseDelete(String input) throws DukeException {
         int index;
-        if (input.length < 2) {
+        String[] inputWords = input.split("\\s+");
+        if (inputWords.length < 2) {
             throw new DukeException("Please specify which task you want to delete");
-        } else if (input.length != 2) {
+        } else if (inputWords.length != 2) {
             throw new DukeException("'delete' command requires exactly 1 argument. (eg. done 12)");
         }
         try {
-            index = Integer.parseInt(input[1]);
+            index = Integer.parseInt(inputWords[1]);
         } catch (Exception e) {
             throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
         }
-        return new DeleteCommand(taskList, index);
+        return new DeleteCommand(taskList, index, input);
     }
 
     /**
@@ -126,19 +129,19 @@ public class Parser {
 
         switch (commandEntered) {
         case "deadline":
-            return parseDeadline(inputWords);
+            return parseDeadline(input);
         case "event":
-            return parseEvent(inputWords);
+            return parseEvent(input);
         case "todo":
-            return parseTodo(inputWords);
+            return parseTodo(input);
         case "done":
-            return parseDone(inputWords);
+            return parseDone(input);
         case "list":
             return parseList(inputWords);
         case "bye":
             return parseBye(inputWords);
         case "delete":
-            return parseDelete(inputWords);
+            return parseDelete(input);
         case "find":
             return new FindCommand(taskList, inputWords[1]);
         case "undo":

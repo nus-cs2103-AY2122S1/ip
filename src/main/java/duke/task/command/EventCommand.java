@@ -20,11 +20,12 @@ public class EventCommand extends Command {
      * @param description the description of the event
      * @param at the time of the event
      */
-    public EventCommand(TaskList taskList, String description, String at) {
+    public EventCommand(TaskList taskList, String description, String at, String prevCommand) {
         this.taskList = taskList;
         this.description = description;
         this.at = at;
         DukeConstants.isUndoable = true;
+        DukeConstants.prevCommand = prevCommand;
     }
 
     /**

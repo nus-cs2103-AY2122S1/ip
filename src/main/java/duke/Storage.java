@@ -117,7 +117,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void addToFile(int index, String task) throws DukeException {
-        fileTasks.add(index - 1, task);
+        fileTasks.add(index, task);
         saveToFile();
     }
 
@@ -128,7 +128,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void deleteFromFile(int id) throws DukeException {
-        fileTasks.remove(id - 1);
+        fileTasks.remove(id);
         saveToFile();
     }
 
@@ -167,7 +167,7 @@ public class Storage {
      * @throws DukeException when saving file fails.
      */
     public void updateListTask(int id, String task) throws DukeException {
-        fileTasks.set(id - 1, task);
+        fileTasks.set(id, task);
         saveToFile();
     }
 
@@ -180,7 +180,7 @@ public class Storage {
      */
     public String getFileLine(int index) throws DukeException {
         try {
-            return fileTasks.get(index - 1);
+            return fileTasks.get(index);
         } catch (Exception e) {
             throw new DukeException("Task doesn't exist"
                     + "\nAre you sure you have entered the correct index?");

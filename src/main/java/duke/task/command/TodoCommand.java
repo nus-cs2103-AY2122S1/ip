@@ -13,10 +13,11 @@ public class TodoCommand extends Command {
     private TaskList taskList;
     private String description;
 
-    public TodoCommand(TaskList taskList, String description) {
+    public TodoCommand(TaskList taskList, String description, String prevCommand) {
         this.taskList = taskList;
         this.description = description;
         DukeConstants.isUndoable = true;
+        DukeConstants.prevCommand = prevCommand;
     }
 
     /**

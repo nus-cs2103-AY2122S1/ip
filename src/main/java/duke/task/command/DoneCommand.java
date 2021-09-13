@@ -18,10 +18,11 @@ public class DoneCommand extends Command {
      * @param taskList the list of tasks.
      * @param index index at which task to be marked done is.
      */
-    public DoneCommand(TaskList taskList, int index) {
+    public DoneCommand(TaskList taskList, int index, String prevCommand) {
         this.taskList = taskList;
         this.index = index;
         DukeConstants.isUndoable = true;
+        DukeConstants.prevCommand = prevCommand;
     }
 
     /**
