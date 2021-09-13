@@ -1,9 +1,10 @@
 package workdone.ui;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -52,7 +53,16 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
-            exit();
+            // exit the program after 1s
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    timer.cancel();
+                }
+            };
+            timer.schedule(task, 1000);
         }
     }
 
@@ -64,18 +74,5 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getWorkDoneDialog(greetingMessage, workDoneImage)
         );
-    }
-
-    /**
-     * Alerts the user and terminates the WorkDone program.
-     */
-    public void exit() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Exit");
-        alert.setHeaderText(null);
-        alert.setContentText("Bye. Hope to see you again soon!");
-        alert.getButtonTypes().setAll(new ButtonType("See ya!"));
-        alert.showAndWait();
-        Platform.exit();
     }
 }

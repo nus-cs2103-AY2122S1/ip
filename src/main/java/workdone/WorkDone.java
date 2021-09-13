@@ -62,7 +62,7 @@ public class WorkDone {
      */
     public static void main(String[] args) {
         String filePath = System.getProperty("user.dir");
-        new WorkDone(Paths.get(filePath, "data", "duke1.txt")).run();
+        new WorkDone(Paths.get(filePath, "data", "tasks.txt")).run();
     }
 
     public String getResponse(String input) {

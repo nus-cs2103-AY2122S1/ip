@@ -16,7 +16,7 @@ import workdone.ui.MainWindow;
 public class Main extends Application {
 
     private final String filePath = System.getProperty("user.dir");
-    private final WorkDone workDone = new WorkDone(Paths.get(filePath, "data", "duke1.txt"));
+    private final WorkDone workDone = new WorkDone(Paths.get(filePath, "data", "tasks.txt"));
 
     @Override
     public void start(Stage stage) {
