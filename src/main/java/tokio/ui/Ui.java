@@ -23,7 +23,7 @@ public class Ui {
      * Prints welcome message, to be shown when Duke starts up at the beginning.
      */
     public String printWelcome() {
-        return "Hola Rio!\n" + "I am your chatbot, Tokio.\n" + "Let me know what do you need help in!";
+        return "Hola Rio!\n" + "I am your Tokio.\n" + "What would you like to do now?";
     }
 
     /**

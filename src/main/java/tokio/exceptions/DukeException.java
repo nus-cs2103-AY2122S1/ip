@@ -10,7 +10,7 @@ public class DukeException extends Exception {
      * @param str Error message for DukeException.
      */
     public DukeException (String str) {
-        super(str);
+        super("===== ERROR =====\n" + str);
     }
 
     @Override

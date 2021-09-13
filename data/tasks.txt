@@ -1,3 +1,4 @@
 [T][X] task 1
 [E][X] event 1 (at: Sep 18 2021 10:00)
 [T][ ] task 2
+[T][ ] task 3
