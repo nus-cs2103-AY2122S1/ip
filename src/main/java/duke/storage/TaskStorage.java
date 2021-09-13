@@ -34,7 +34,7 @@ public class TaskStorage {
     private File initializeDataFile() throws IOException {
         File dataFile = new File(DATA_FILE_PATH);
         File dataDir = new File(dataFile.getParent());
-        if (!dataFile.exists()) {
+        if (!dataDir.exists()) {
             dataDir.mkdirs();
         }
         if (!dataFile.exists()) {
@@ -66,7 +66,7 @@ public class TaskStorage {
     }
 
     private Task parseTask(String taskString) throws DukeException {
-        String[] tokens = taskString.split(" ");
+        String[] tokens = taskString.split("/");
         switch (tokens[0]) {
         case "todo":
             return new TodoTask(
@@ -92,14 +92,14 @@ public class TaskStorage {
             @SuppressWarnings("unchecked")
             TodoTask todoTask = (TodoTask) task;
             return String.format(
-                    "todo %s %b",
+                    "todo/%s/%b",
                     todoTask.getContent(),
                     todoTask.isDone());
         } else if (task instanceof EventTask) {
             @SuppressWarnings("unchecked")
             EventTask eventTask = (EventTask) task;
             return String.format(
-                    "event %s %b %s",
+                    "event/%s/%b/%s",
                     eventTask.getContent(),
                     eventTask.isDone(),
                     eventTask.getDate().toString());
@@ -107,7 +107,7 @@ public class TaskStorage {
             @SuppressWarnings("unchecked")
             DeadlineTask deadlineTask = (DeadlineTask) task;
             return String.format(
-                    "deadline %s %b %s",
+                    "deadline/%s/%b/%s",
                     deadlineTask.getContent(),
                     deadlineTask.isDone(),
                     deadlineTask.getDeadline().toString());
