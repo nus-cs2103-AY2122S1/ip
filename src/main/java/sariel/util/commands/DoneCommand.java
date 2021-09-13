@@ -1,8 +1,8 @@
-package duke.util.commands;
+package sariel.util.commands;
 
-import duke.util.commons.Messages;
-import duke.util.tasks.Task;
-import duke.util.ui.Ui;
+import sariel.util.commons.Messages;
+import sariel.util.tasks.Task;
+import sariel.util.ui.Ui;
 
 
 /**

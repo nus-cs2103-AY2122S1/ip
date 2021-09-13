@@ -1,6 +1,6 @@
-package duke;
+package sariel;
 
-import duke.util.windows.Main;
+import sariel.util.windows.Main;
 import javafx.application.Application;
 
 

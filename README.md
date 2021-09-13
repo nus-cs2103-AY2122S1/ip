@@ -30,11 +30,12 @@ If you are a Java prorammer, you can use it to practice java too.
 Heres the main method:   
 
 ```java
-public class Main {
-   public static void main(String[] args) {
-        Application.launch(MainApp.class, args);
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }
+
 ```
 
 ```

@@ -1,4 +1,4 @@
-package duke.util.tasks;
+package sariel.util.tasks;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;

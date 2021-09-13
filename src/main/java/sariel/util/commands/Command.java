@@ -1,7 +1,7 @@
-package duke.util.commands;
+package sariel.util.commands;
 
 
-import duke.util.tasks.DukeException;
+import sariel.util.tasks.DukeException;
 
 
 @FunctionalInterface

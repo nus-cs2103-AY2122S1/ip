@@ -1,8 +1,8 @@
-package duke.util.commands;
+package sariel.util.commands;
 
 import java.util.ArrayList;
 
-import duke.util.tasks.DukeException;
+import sariel.util.tasks.DukeException;
 
 
 

@@ -1,10 +1,10 @@
-package duke.util.commands;
+package sariel.util.commands;
 
-import duke.util.tasks.DateTaskTable;
-import duke.util.tasks.DatedTask;
-import duke.util.tasks.Task;
-import duke.util.tasks.TaskList;
-import duke.util.ui.Ui;
+import sariel.util.tasks.DateTaskTable;
+import sariel.util.tasks.DatedTask;
+import sariel.util.tasks.Task;
+import sariel.util.tasks.TaskList;
+import sariel.util.ui.Ui;
 
 /**
  * The class representing the delete command.

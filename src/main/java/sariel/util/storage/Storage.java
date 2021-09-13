@@ -1,4 +1,4 @@
-package duke.util.storage;
+package sariel.util.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.util.tasks.DateTaskTable;
-import duke.util.tasks.DatedTask;
-import duke.util.tasks.DukeException;
-import duke.util.tasks.Task;
-import duke.util.tasks.TaskList;
+import sariel.util.tasks.DateTaskTable;
+import sariel.util.tasks.DatedTask;
+import sariel.util.tasks.DukeException;
+import sariel.util.tasks.Task;
+import sariel.util.tasks.TaskList;
 
 
 

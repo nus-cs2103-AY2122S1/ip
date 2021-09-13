@@ -1,6 +1,6 @@
-package duke.util.commons;
+package sariel.util.commons;
 
-import duke.util.windows.Main;
+import sariel.util.windows.Main;
 import javafx.scene.image.Image;
 
 public class Messages {

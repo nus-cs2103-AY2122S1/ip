@@ -1,6 +1,6 @@
-package duke.util.tasks;
+package sariel.util.tasks;
 
-import duke.util.commons.Messages;
+import sariel.util.commons.Messages;
 
 
 /**

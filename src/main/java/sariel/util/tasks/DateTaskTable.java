@@ -1,4 +1,4 @@
-package duke.util.tasks;
+package sariel.util.tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package duke.util.ui;
+package sariel.util.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.util.commons.Messages;
-import duke.util.tasks.DukeException;
-import duke.util.tasks.Task;
+import sariel.util.commons.Messages;
+import sariel.util.tasks.DukeException;
+import sariel.util.tasks.Task;
 
 
 

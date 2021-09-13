@@ -1,9 +1,9 @@
-package duke.util.windows;
+package sariel.util.windows;
 
 import java.io.IOException;
 
-import duke.util.commons.Messages;
-import duke.util.controller.Sariel;
+import sariel.util.commons.Messages;
+import sariel.util.controller.Sariel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -1,11 +1,11 @@
-package duke.util.tasks;
+package sariel.util.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import duke.util.parser.Parser;
+import sariel.util.parser.Parser;
 
 
 

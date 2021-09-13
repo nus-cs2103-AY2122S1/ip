@@ -1,4 +1,4 @@
-package duke.util.windows;
+package sariel.util.windows;
 
 import java.io.IOException;
 import java.util.Collections;

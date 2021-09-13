@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.util.commands.DelCommand;
-import duke.util.commands.ExitCommand;
-import duke.util.parser.Parser;
-import duke.util.tasks.DateTaskTable;
-import duke.util.tasks.DatedTask;
-import duke.util.tasks.Deadline;
-import duke.util.tasks.DukeException;
-import duke.util.tasks.TaskList;
-import duke.util.ui.Ui;
+import sariel.util.commands.DelCommand;
+import sariel.util.commands.ExitCommand;
+import sariel.util.parser.Parser;
+import sariel.util.tasks.DateTaskTable;
+import sariel.util.tasks.DatedTask;
+import sariel.util.tasks.Deadline;
+import sariel.util.tasks.DukeException;
+import sariel.util.tasks.TaskList;
+import sariel.util.ui.Ui;
 
 
 

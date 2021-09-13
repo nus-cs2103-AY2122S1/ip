@@ -1,4 +1,4 @@
-package duke.util.tasks;
+package sariel.util.tasks;
 
 /**
  * DukeException, an exception that arose from inaccurate input.

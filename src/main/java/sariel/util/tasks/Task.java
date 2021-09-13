@@ -2,7 +2,7 @@
  * Class of a task to be done.
  *
  */
-package duke.util.tasks;
+package sariel.util.tasks;
 
 import java.time.LocalDate;
 

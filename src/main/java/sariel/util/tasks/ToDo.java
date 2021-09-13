@@ -1,4 +1,4 @@
-package duke.util.tasks;
+package sariel.util.tasks;
 
 public class ToDo extends Task {
 

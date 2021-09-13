@@ -44,12 +44,12 @@ test {
 }
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "sariel.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "v0.2"
+    archiveBaseName = "sariel"
+    archiveVersion = "v0.3"
     archiveClassifier = null
 }
 

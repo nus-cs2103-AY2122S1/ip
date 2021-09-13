@@ -1,4 +1,4 @@
-package duke.util.commands;
+package sariel.util.commands;
 
 
 /**
