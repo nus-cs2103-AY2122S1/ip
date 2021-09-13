@@ -23,6 +23,7 @@ public class DoneCommand extends Command {
      *
      * @param tasks Handles the list of tasks.
      * @param storage Handles the saving and loading of tasks.
+     * @throws DukeException If there is error marking a task as done.
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {

@@ -23,6 +23,7 @@ public class AddCommand extends Command {
      *
      * @param tasks Handles the list of tasks.
      * @param storage Handles the saving and loading of tasks.
+     * @throws DukeException If there is error adding a task.
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {

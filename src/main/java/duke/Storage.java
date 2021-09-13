@@ -31,7 +31,8 @@ public class Storage {
      * Returns the list of tasks saved if the directory and file exists.
      * If not, creates the directory and file as necessary and returns an empty list.
      *
-     * @return List of saved tasks
+     * @return List of saved tasks.
+     * @throws DukeException If there is error loading data.
      */
     public List<Task> loadData() throws DukeException {
         List<Task> tasks = new ArrayList<>();
@@ -75,9 +76,10 @@ public class Storage {
     }
 
     /**
-     * Save the list of tasks in the hard disk.
+     * Saves the list of tasks in the hard disk.
      *
      * @param tasks The list of tasks to be saved.
+     * @throws DukeException If IOException.
      */
     public void saveData(List<Task> tasks) throws DukeException {
         try {
