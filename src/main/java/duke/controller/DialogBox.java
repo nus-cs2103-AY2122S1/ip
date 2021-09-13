@@ -68,7 +68,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text) {
         DialogBox userDialog = new DialogBox(text, userImage);
-        userDialog.dialog.setBackground(new Background(new BackgroundFill(Color.web("#56c5e0"), new CornerRadii(35), null)));
+        userDialog.dialog.setBackground(new Background(new BackgroundFill(Color.web("#56c5e0"), new CornerRadii(20), null)));
         return userDialog;
     }
 
@@ -81,7 +81,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text) {
         DialogBox dukeDialog = new DialogBox(text, dukeImage);
         dukeDialog.flip();
-        dukeDialog.dialog.setBackground(new Background(new BackgroundFill(Color.GRAY, new CornerRadii(35), null)));
+        dukeDialog.dialog.setBackground(new Background(new BackgroundFill(Color.GRAY, new CornerRadii(20), null)));
         return dukeDialog;
     }
 }
