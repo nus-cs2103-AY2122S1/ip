@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -20,12 +21,14 @@ import javafx.stage.Stage;
  * @author Kleon Ang
  */
 public class Ui {
-    public static final double STAGE_MIN_HEIGHT = 600.0;
-    public static final double STAGE_MIN_WIDTH = 400.0;
-    public static final int SCROLL_PANE_WIDTH = 385;
-    public static final int SCROLL_PANE_HEIGHT = 535;
-    public static final double TEXT_FIELD_WIDTH = 325.0;
-    public static final double SEND_BUTTON_WIDTH = 55.0;
+    private static final double STAGE_MIN_HEIGHT = 600.0;
+    private static final double STAGE_MIN_WIDTH = 400.0;
+    private static final int SCROLL_PANE_WIDTH = 385;
+    private static final int SCROLL_PANE_HEIGHT = 535;
+    private static final double TEXT_FIELD_WIDTH = 325.0;
+    private static final double SEND_BUTTON_WIDTH = 70.0;
+    private static final Font DUKE_FONT = new Font("Courier New", 12);
+    private static final Font USER_FONT = new Font("Comic Sans MS", 12);
     private final ScrollPane scrollPane;
     private final VBox dialogContainer;
     private final TextField userInput;
@@ -83,6 +86,7 @@ public class Ui {
 
         // Greet user
         Label greeting = new Label("Hello, I'm Duke!\nWhat can I do for you?");
+        greeting.setFont(DUKE_FONT);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, new ImageView(duke)));
 
         // Add functionality to handle user input
@@ -121,12 +125,14 @@ public class Ui {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
+        userText.setFont(USER_FONT);
         Label dukeText;
         try {
             dukeText = new Label(Duke.getResponse(userInput.getText()));
         } catch (DukeException e) {
             dukeText = new Label(e.getMessage());
         }
+        dukeText.setFont(DUKE_FONT);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -141,6 +147,7 @@ public class Ui {
      */
     public void printReply(String string) {
         Label reply = new Label(string);
+        reply.setFont(DUKE_FONT);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(reply, new ImageView(duke)));
     }
 
@@ -159,6 +166,6 @@ public class Ui {
      * @param fileName The name of the file that does not exist.
      */
     public void showLoadingSuccess(String fileName) {
-        printReply("I found a " + fileName + " file! Your tasks have been imported.");
+        printReply("I found a " + fileName + " file!\nYour tasks have been imported.");
     }
 }

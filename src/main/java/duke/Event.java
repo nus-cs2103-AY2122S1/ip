@@ -42,6 +42,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
-        return taskBadge + super.toString() + " (at: " + this.at.format(formatter) + ")";
+        return taskBadge + super.toString() + "\n  (at: " + this.at.format(formatter) + ")";
     }
 }
