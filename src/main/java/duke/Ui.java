@@ -74,6 +74,11 @@ public class Ui {
                 + "\n" + getTaskCountMessage(taskCount);
     }
 
+    public static String getUpdatedMessage(Task task, int taskNumber) {
+        return "Got it. I've updated task " + taskNumber + " to: "
+                + task;
+    }
+
     /**
      * Prints a message that informs user how many tasks they have in the task list
      *

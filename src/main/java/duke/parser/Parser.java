@@ -10,6 +10,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -141,9 +142,10 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return deleteParse(desc);
 
-        case FindCommand.COMMAND_WORD :
+        case FindCommand.COMMAND_WORD:
             return new FindCommand(desc);
-
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateParser(desc).parse();
         default:
             throw new DukeException(INVALID_COMMAND_MESSAGE);
         }

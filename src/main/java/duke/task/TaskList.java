@@ -37,7 +37,7 @@ public class TaskList {
      * marked as done.
      */
     public Task markDone(int taskNumber) throws IndexOutOfBoundsException {
-        Task completedTask = tasks.get(taskNumber);
+        Task completedTask = tasks.get(taskNumber - 1);
         completedTask.markDone();
         return completedTask;
     }
@@ -77,7 +77,7 @@ public class TaskList {
     }
 
     public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {
-        Task removedTask = tasks.get(taskNumber);
+        Task removedTask = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber);
         return removedTask;
     }

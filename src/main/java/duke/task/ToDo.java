@@ -22,6 +22,10 @@ public class ToDo extends Task {
         return "T";
     }
 
+    public void setDateAndTime(String date, String time) {
+        //Empty method. No date and time to set.
+    }
+
     /**
      * Returns the String representation of the ToDo.
      *

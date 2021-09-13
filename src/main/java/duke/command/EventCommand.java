@@ -17,6 +17,7 @@ public class EventCommand extends Command {
 
     public EventCommand(String description, String dateAndTime) {
         this.description = description;
+        this.dateAndTime = dateAndTime;
     }
 
     @Override

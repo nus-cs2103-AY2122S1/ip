@@ -36,6 +36,10 @@ public abstract class Task {
         return taskDetails;
     }
 
+    public void setTaskDetails(String details) {
+        this.taskDetails = details;
+    }
+
     /**
      * Returns an integer depending on if the task is done.
      *
@@ -51,6 +55,8 @@ public abstract class Task {
      * @return A letter as a String that represents the task type.
      */
     public abstract String taskType();
+
+    public abstract void setDateAndTime(String date, String time);
 
     /**
      * Returns the String representation of the task.
