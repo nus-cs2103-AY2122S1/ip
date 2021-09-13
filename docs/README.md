@@ -2,18 +2,6 @@
 
 Welcome to Duke. Duke is a chatbot that helps you keep track of your tasks.
 
-## Table of Contents
-1. [Introduction](#Introduction)
-2. [Features](#Features)
-   1. [Tasks](#Tasks)
-   2. [Priorities](#Priorities)
-   3. [Date & Time](#Date--Time)
-   4. [Done & Delete](#Done--Delete)
-   5. [Search](#Search)
-3. [Setting up](#Setting-up)
-4. [Usage](#Usage)
-5. [Command summary](#Command-summary)
-
 ## Introduction
 Duke helps you to get a hang of your life. It is
 * text-based
@@ -23,8 +11,6 @@ Duke helps you to get a hang of your life. It is
 <p align="center">
    <img src="Ui.png" alt="Ui" width="25%"/>
 </p>
-
-[Back to Table of Contents](#Table-of-Contents)
 
 ## Features 
 
@@ -64,8 +50,6 @@ You can also delete a task to de-clutter your list.
 
 You can search for tasks with a particular word / phrase / part thereof.
 
-[Back to Table of Contents](#Table-of-Contents)
-
 ## Setting up
 
 1. Ensure you have JDK 11 installed.
@@ -75,8 +59,6 @@ You can search for tasks with a particular word / phrase / part thereof.
 3. Copy the jar file into an empty folder.
 4. Open a command window (command prompt, terminal, etc.) in that folder
 5. Run the command java -jar {filename}.jar e.g., java -jar Duke.jar (i.e., run the command in the same folder as the jar file)
-
-[Back to Table of Contents](#Table-of-Contents)
 
 ## Usage
 
@@ -244,8 +226,6 @@ Duke and application window closed.
 Bye! Hope to see you again!
 ```
 
-[Back to Table of Contents](#Table-of-Contents)
-
 ## Command summary
 
 Description <br /> `Command` | Example | Duke's Response
@@ -259,5 +239,3 @@ Description <br /> `Command` | Example | Duke's Response
 **Mark task as done** <br /> `done` `<<index of task>>` | `done 1` | Nice! I've marked this task as done: <br /> \[T]\[X]\[! ] CS2100 Tutorial
 **Find task with the given words** <br /> `find` `<<word(s)>>` | `find finals` | Here are the tasks in your list: <br /> 1.\[E]\[ ]\[!!!] cs2100 Finals (at: 20 Nov 2021 9.00am)
 **Exit the application** <br /> `bye` | `bye` | Bye! Hope to see you again!
-
-[Back to Table of Contents](#Table-of-Contents)
