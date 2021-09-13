@@ -29,19 +29,19 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
 
         //image styles
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-        final Circle clip = new Circle(50.0, 50.0, 50.0); //if cannot add padding just change radius to 40
+        displayPicture.setFitWidth(50.0);
+        displayPicture.setFitHeight(50.0);
+        final Circle clip = new Circle(25.0, 25.0, 25.0); //if cannot add padding just change radius to 40
         displayPicture.setClip(clip);
 
         //DialogBox styles
         this.setAlignment(Pos.CENTER_RIGHT);
-        this.setPadding(new Insets(5)); //TODO
+        this.setPadding(new Insets(5));
         this.setMargin(iv, new Insets(5));
         this.setMargin(l, new Insets(5));
         this.getChildren().addAll(text, displayPicture);
         this.setStyle("-fx-background-radius: 20px, 20px, 20px, 20px;"
-                + "-fx-background-color: #ffffff;"
+                + "-fx-background-color: #e6e6fa;"
                 + "-fx-margin: 20px;");
     }
 
@@ -53,7 +53,7 @@ public class DialogBox extends HBox {
         //styles
         this.setAlignment(Pos.CENTER_LEFT);
         this.setStyle("-fx-background-radius: 20px, 20px, 20px, 20px;"
-                + "-fx-background-color: #e6e6fa;"
+                + "-fx-background-color: #f4f4f4;"
                 + "-fx-margin: 20px;");
     }
 
