@@ -9,11 +9,9 @@ import retriever.task.Task;
  * user and the chatbot.
  */
 public class Ui {
-    // Response would be stored here
-    private static String retrieverResponse;
-
     // Help Section Strings.
-    private static final String WELCOME_TO_HELP_SECTION_MESSAGE = "Master, I shall guide you to my best ability to smell.";
+    private static final String WELCOME_TO_HELP_SECTION_MESSAGE = "Master, I shall guide you to my best "
+            + "ability to smell.";
     private static final String BYE_COMMAND_MESSAGE = "Use the bye command to end the session.";
     private static final String BYE_COMMAND_EXAMPLE = "Command Example: bye";
     private static final String DEADLINE_COMMAND_MESSAGE = "Use the deadline command to add a deadline type task.";
@@ -62,6 +60,10 @@ public class Ui {
             + "\t`_'      )\n"
             + "\t(_(_/-(_/\n";
 
+    // Response would be stored here
+    private static String retrieverResponse;
+
+
     /**
      * Initializes the Ui class.
      */
@@ -99,7 +101,7 @@ public class Ui {
      */
     public void printWelcomeMessage() {
         retrieverResponse = WELCOME_MESSAGE + "\n" + LOGO + "\n"
-                + "Need Help? Type 'help'" + "\n" + "in the text field below." ;
+                + "Need Help? Type 'help'" + "\n" + "in the text field below.";
     }
 
     /**
