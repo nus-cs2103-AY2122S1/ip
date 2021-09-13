@@ -8,10 +8,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Main class of Duke
+ */
 public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Starts Duke application
+     * @param stage stage of application
+     */
     @Override
     public void start(Stage stage) {
         try {
