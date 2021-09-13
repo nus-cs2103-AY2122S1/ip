@@ -149,6 +149,63 @@ public class Duke extends Application {
         return textToAdd;
     }
 
+    private void taskUnknown() throws DukeException {
+        throw new DukeException("Unknown input");
+    }
+
+    private String listTask() {
+        return taskList.listTasks();
+    }
+
+    private String todoTask(String currentParameter) throws IOException {
+        if (currentParameter == "") {
+            throw new DukeException("TODO cannot have empty parameter.");
+        }
+        String output = taskList.addTask(Command.TODO, currentParameter);
+        Storage.updateLocalFile(taskList);
+        return output;
+    }
+
+    private String eventTask(String currentParameter) throws IOException {
+        if (currentParameter.equals("")) {
+            throw new DukeException("The description of a event cannot be empty.");
+        } else if (!currentParameter.contains(" /at ")) {
+            throw new DukeException("Missing /at command");
+        }
+        System.out.println(currentParameter);
+        String[] descriptionAndTimeParts = Parser.dateParameterParser(Command.EVENT, currentParameter);
+        System.out.println(descriptionAndTimeParts);
+        String output = taskList.addTask(Command.EVENT, descriptionAndTimeParts[0], descriptionAndTimeParts[1]);
+        Storage.updateLocalFile(taskList);
+        return output;
+    }
+
+    private String deadlineTask(String currentParameter) throws IOException {
+        if (currentParameter.equals("")) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        } else if (!currentParameter.contains(" /by ")) {
+            throw new DukeException("Missing /by command");
+        }
+        String[] descriptionAndTimeParts = Parser.dateParameterParser(Command.DEADLINE, currentParameter);
+        String output = taskList.addTask(Command.DEADLINE, descriptionAndTimeParts[0], descriptionAndTimeParts[1]);
+        Storage.updateLocalFile(taskList);
+        return output;
+    }
+
+    private String deleteTask(String currentParameter) throws IOException {
+        if (currentParameter.equals("")) {
+            throw new DukeException("Please indicate item to be deleted.");
+        }
+        int index = Integer.parseInt(currentParameter) - 1;
+        if (index > taskList.getSize() - 1) {
+            throw new DukeException("Item does not exist.");
+        }
+
+        String output = taskList.removeTask(index);
+        Storage.updateLocalFile(taskList);
+        return output;
+    }
+
     private String run(String input) {
         int prevSize = taskList.getSize(); //for debug use, keeps track of the size of the tasklist before operation
         String[] commandAndParameter = Parser.inputParser(input);
@@ -161,55 +218,18 @@ public class Duke extends Application {
             String[] descriptionAndTimeParts;
             switch (currentCommand) {
             case UNKNOWN:
-                assert (taskList.getSize() == prevSize);
-                throw new DukeException("Unknown input");
+                taskUnknown();
+                break;
             case LIST:
-                return taskList.listTasks();
+                return listTask();
             case TODO:
-                if (currentParameter == "") {
-                    throw new DukeException("TODO cannot have empty parameter.");
-                }
-                output = taskList.addTask(Command.TODO, currentParameter);
-                Storage.updateLocalFile(taskList);
-                assert (taskList.getSize() - prevSize == 1);
-                return output;
+                return todoTask(currentParameter);
             case EVENT:
-                if (currentParameter.equals("")) {
-                    throw new DukeException("The description of a event cannot be empty.");
-                } else if (!currentParameter.contains(" /at ")) {
-                    throw new DukeException("Missing /at command");
-                }
-                System.out.println(currentParameter);
-                descriptionAndTimeParts = Parser.dateParameterParser(Command.EVENT, currentParameter);
-                System.out.println(descriptionAndTimeParts);
-                output = taskList.addTask(Command.EVENT, descriptionAndTimeParts[0], descriptionAndTimeParts[1]);
-                Storage.updateLocalFile(taskList);
-                assert (taskList.getSize() - prevSize == 1);
-                return output;
+                return eventTask(currentParameter);
             case DEADLINE:
-                if (currentParameter.equals("")) {
-                    throw new DukeException("The description of a deadline cannot be empty.");
-                } else if (!currentParameter.contains(" /by ")) {
-                    throw new DukeException("Missing /by command");
-                }
-                descriptionAndTimeParts = Parser.dateParameterParser(Command.DEADLINE, currentParameter);
-                output = taskList.addTask(Command.DEADLINE, descriptionAndTimeParts[0], descriptionAndTimeParts[1]);
-                Storage.updateLocalFile(taskList);
-                assert (taskList.getSize() - prevSize == 1);
-                return output;
+                return deadlineTask(currentParameter);
             case DELETE:
-                if (currentParameter.equals("")) {
-                    throw new DukeException("Please indicate item to be deleted.");
-                }
-                int index = Integer.parseInt(currentParameter) - 1;
-                if (index > taskList.getSize() - 1) {
-                    throw new DukeException("Item does not exist.");
-                }
-
-                output = taskList.removeTask(index);
-                Storage.updateLocalFile(taskList);
-                assert (taskList.getSize() - prevSize == -1);
-                return output;
+                return deleteTask(currentParameter);
             case DONE:
                 if (currentParameter.equals("")) {
                     throw new DukeException("Please indicate item to be completed.");
