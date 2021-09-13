@@ -1,4 +1,4 @@
-package addon;
+package head;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
