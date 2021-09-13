@@ -1,5 +1,2 @@
-1: [T][ ] more code
-2: [D][X] eat food (by: Apr 8 2021 09:30 PM)
-3: [E][ ] code again (at: Apr 7 2021)
-4: [T][ ] finish UI
-5: [E][ ] eat dinner (at: Aug 31 2021 06:00 PM)
+1: [T][ ] code
+2: [D][ ] finish ip project (by: Sep 15 2021)

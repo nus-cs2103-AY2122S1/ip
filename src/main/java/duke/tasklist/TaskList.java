@@ -99,8 +99,6 @@ public class TaskList {
             throw new DukeException("Please provide a task ID that exists.");
         }
         tasks.get(taskId - 1).setIsDone(true);
-        System.out.println("Nice! I've marked this task as done.");
-        System.out.println("   " + tasks.get(taskId - 1));
         return "Nice! I've marked this task as done.\n" + "    " + tasks.get(taskId - 1);
     }
 
@@ -184,9 +182,6 @@ public class TaskList {
         String result = "Got it. I've added this task:\n";
         result += "   " + tasks.get(tasks.size() - 1) + "\n";
         result += "Now you have " + tasks.size() + " task(s) in the list.";
-        System.out.println("Got it. I've added this task:");
-        System.out.println("   " + tasks.get(tasks.size() - 1));
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
         return result;
     }
 
@@ -202,11 +197,8 @@ public class TaskList {
         }
         String output = "Noted. I have removed this task:\n";
         output += "   " + tasks.get((taskId - 1)) + "\n";
-        System.out.println("Noted. I have removed this task:");
-        System.out.println("   " + tasks.get(taskId - 1));
         tasks.remove(taskId - 1);
         output += "Now you have " + tasks.size() + " task(s) in the list.";
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
         return output;
     }
 
@@ -227,10 +219,8 @@ public class TaskList {
         }
         if (taskIndexes.isEmpty()) {
             output += "No matches found!";
-            System.out.println("No matches found!");
         } else {
             output += "Here are the matching items in your list:";
-            System.out.println("Here are the matching tasks in your list:");
             for (int i : taskIndexes) {
                 output += "\n" + getTaskString(i);
             }
