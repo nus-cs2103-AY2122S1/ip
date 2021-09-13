@@ -28,61 +28,21 @@ public class Parser {
 
         switch(parsedArr[0]) {
         case "list":
-            if (parsedArr.length > 1) {
-                throw new DukeException();
-            }
-
-            return new ListCommand();
+            return checkList(parsedArr);
         case "todo":
-            if (parsedArr.length < 2) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-
-            return new AddCommand(parsedArr[0], parsedArr[1]);
+            return checkTodo(parsedArr);
         case "deadline":
-            if (parsedArr.length < 2) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-
-            if (!parsedArr[1].contains("/by")) {
-                throw new DukeException("Please specify a date using the /by keyword.");
-            }
-
-            return new AddCommand(parsedArr[0], parsedArr[1]);
+            return checkDeadline(parsedArr);
         case "event":
-            if (parsedArr.length < 2) {
-                throw new DukeException("The description of an event cannot be empty.");
-            }
-
-            if (!parsedArr[1].contains("/at")) {
-                throw new DukeException("Please specify a date using the /at keyword.");
-            }
-
-            return new AddCommand(parsedArr[0], parsedArr[1]);
+            return checkEvent(parsedArr);
         case "delete":
-            if (parsedArr.length < 2) {
-                throw new DukeException("Please enter a number after delete!");
-            }
-
-            return parseFurther(parsedArr[0], parsedArr[1]);
+            return checkDelete(parsedArr);
         case "done":
-            if (parsedArr.length < 2) {
-                throw new DukeException("Please enter a number after done!");
-            }
-
-            return parseFurther(parsedArr[0], parsedArr[1]);
+            return checkDone(parsedArr);
         case "find":
-            if (parsedArr.length < 2 || parsedArr[1].isBlank()) {
-                throw new DukeException("Your search query cannot be empty!");
-            }
-
-            return new FindCommand(parsedArr[1]);
+            return checkFind(parsedArr);
         case "bye":
-            if (parsedArr.length > 1) {
-                throw new DukeException();
-            }
-
-            return new ExitCommand();
+            return checkExit(parsedArr);
         default:
             throw new DukeException();
         }
@@ -105,10 +65,10 @@ public class Parser {
             index = Integer.parseInt(rest) - 1;
 
             if (index < 0) {
-                throw new DukeException("This entry does not exist!");
+                throw new InvalidIndexException();
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Please enter a number after " + command + "!");
+            throw new NoNumberException(command);
         }
 
         if (command.equals("done")) {
@@ -120,5 +80,77 @@ public class Parser {
         }
 
         throw new DukeException("An unknown error has occurred.");
+    }
+
+    private static Command checkList(String[] strArr) throws DukeException {
+        if (strArr.length > 1) {
+            throw new DukeException();
+        }
+
+        return new ListCommand();
+    }
+
+    private static Command checkTodo(String[] strArr) throws DukeException {
+        if (strArr.length < 2) {
+            throw new NoDescriptionException(strArr[0]);
+        }
+
+        return new AddCommand(strArr[0], strArr[1]);
+    }
+
+    private static Command checkDeadline(String[] strArr) throws DukeException {
+        if (strArr.length < 2) {
+            throw new NoDescriptionException(strArr[0]);
+        }
+
+        if (!strArr[1].contains("/by")) {
+            throw new NoKeywordException("/by");
+        }
+
+        return new AddCommand(strArr[0], strArr[1]);
+    }
+
+    private static Command checkEvent(String[] strArr) throws DukeException {
+        if (strArr.length < 2) {
+            throw new NoDescriptionException(strArr[0]);
+        }
+
+        if (!strArr[1].contains("/at")) {
+            throw new NoKeywordException("/at");
+        }
+
+        return new AddCommand(strArr[0], strArr[1]);
+    }
+
+    private static Command checkDelete(String[] strArr) throws DukeException {
+        if (strArr.length < 2) {
+            throw new NoNumberException(strArr[0]);
+        }
+
+        return parseFurther(strArr[0], strArr[1]);
+    }
+
+    private static Command checkDone(String[] strArr) throws DukeException {
+        if (strArr.length < 2) {
+            throw new NoNumberException(strArr[0]);
+        }
+
+        return parseFurther(strArr[0], strArr[1]);
+    }
+
+    private static Command checkFind(String[] strArr) throws DukeException {
+        if (strArr.length < 2 || strArr[1].isBlank()) {
+            throw new EmptySearchQueryException();
+        }
+
+        return new FindCommand(strArr[1]);
+    }
+
+    private static Command checkExit(String[] strArr) throws DukeException {
+        if (strArr.length > 1) {
+            throw new DukeException();
+        }
+
+        return new ExitCommand();
     }
 }

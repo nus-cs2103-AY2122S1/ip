@@ -14,7 +14,6 @@ public class Duke {
     private static final String FILE_PATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
-    private Parser parser;
 
 
     /**
@@ -23,7 +22,6 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage(FILE_PATH);
-        parser = new Parser();
 
         try {
             tasks = new TaskList(storage.load());

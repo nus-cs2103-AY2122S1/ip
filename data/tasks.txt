@@ -3,3 +3,5 @@ T | 1 | read book
 T | 1 | sleep
 T | 0 | read a book
 T | 0 | go to school
+T | 0 | new task
+D | 0 | homework | 2021-06-05

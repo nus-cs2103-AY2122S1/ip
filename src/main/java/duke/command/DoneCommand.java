@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.InvalidIndexException;
 import duke.Storage;
 import duke.TaskList;
 
@@ -32,7 +33,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (index > tasks.getSize()) {
-            throw new DukeException("This entry does not exist!");
+            throw new InvalidIndexException();
         }
 
         tasks.doneTask(index);
