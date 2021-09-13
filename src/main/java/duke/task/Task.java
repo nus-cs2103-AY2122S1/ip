@@ -5,6 +5,7 @@ package duke.task;
  */
 public class Task {
     private String taskName;
+    private String dateAndTime;
     private boolean isDone;
 
     public Task() {}
@@ -19,6 +20,12 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String taskName, String dateAndTime) {
+        this.taskName = taskName;
+        this.dateAndTime = dateAndTime;
+        this.isDone = false;
+    }
+
     /**
      * Marks a Task object as completed.
      */
@@ -28,6 +35,19 @@ public class Task {
 
     public String getTaskName() {
         return taskName;
+    }
+
+    public String getDateAndTime() {
+        assert !dateAndTime.isEmpty();
+        return dateAndTime;
+    }
+
+    public void editTaskName(String newTaskName) {
+        this.taskName = newTaskName;
+    }
+
+    public void editDateAndTime(String newDateAndTime) {
+        this.dateAndTime = newDateAndTime;
     }
 
     /**

@@ -17,6 +17,7 @@ public abstract class Command {
         DONE,
         DELETE,
         FIND,
+        EDIT,
         EXIT
     }
 

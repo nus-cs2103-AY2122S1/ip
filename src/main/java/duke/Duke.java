@@ -22,13 +22,10 @@ public class Duke {
 
     private File dataFile;
 
-    public Duke() {} //needed for Application.launch() to work
-
-    public Duke(String storageFile) {
-        this.storageFile = storageFile;
-        this.dataFile = new File("data/duke.txt");
+    public Duke() { //needed for Application.launch() to work
+        this.dataFile = new File(STORAGE_DIRECTORY_PATH);
         ui = new Ui();
-        storage = new Storage(STORAGE_DIRECTORY + storageFile);
+        storage = new Storage(STORAGE_DIRECTORY_PATH);
         //try {
 //            if (!this.dataFile.exists()) {
 //                boolean isFileCreated = dataFile.createNewFile();
@@ -62,7 +59,10 @@ public class Duke {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            } catch (DukeException e){
+            e.printStackTrace();
+        }
+        }
 
 
 //    } catch (IOException e) {
@@ -70,7 +70,7 @@ public class Duke {
 //            //todo do we need to involve the case whereby this error occurs and show the error message to the user?
 //        }
 //    }
-        }
+
 
     /**
      * Returns a string representing the response from Duke based on the user input.

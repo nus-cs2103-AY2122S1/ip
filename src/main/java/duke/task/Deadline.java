@@ -2,8 +2,6 @@ package duke.task;
 
 public class Deadline extends Task {
     private String taskType = "[D]";
-    private String taskName;
-    private String deadline;
 
     /**
      * Initialises a Deadline object.
@@ -12,9 +10,7 @@ public class Deadline extends Task {
      * @param deadline the deadline
      */
     public Deadline(String taskName, String deadline) {
-        super(taskName);
-        this.taskName = taskName;
-        this.deadline = deadline;
+        super(taskName, deadline);
     }
 
     /**
@@ -25,22 +21,20 @@ public class Deadline extends Task {
      * @param isDone the status of the deadline task
      */
     public Deadline(String taskName, String deadline, boolean isDone) {
-        super(taskName);
-        this.taskName = taskName;
-        this.deadline = deadline;
+        super(taskName, deadline);
         if (isDone) {
             this.markAsDone();
         }
     }
 
     public String getDeadline() {
-        return String.format("(by: %s)", deadline);
+        return String.format("(by: %s)", this.getDateAndTime());
     }
 
     @Override
     public String toString() {
         String result = taskType + this.getCheckBox()
-                + " " + this.taskName + " "
+                + " " + this.getTaskName() + " "
                 + getDeadline();
         return result;
     }

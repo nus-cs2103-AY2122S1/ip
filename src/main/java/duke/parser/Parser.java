@@ -13,6 +13,7 @@ import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
@@ -69,10 +70,62 @@ public class Parser {
         case FIND:
             String searchTerm = getSearchTerm(command);
             return new FindCommand(searchTerm);
+        case EDIT:
+            int updatedTaskNumber = getTaskNumberForEdit(command);
+            EditCommand.EditType editType = getEditType(command);
+            String updatedField = getUpdatedField(command, editType);
+            return new EditCommand(updatedTaskNumber, editType, updatedField);
         default:
             throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
         }
 
+    }
+
+    private int getTaskNumberForEdit(String command) throws EmptyCommandInformationException, InvalidInputException {
+        String[] splitArray = command.split("/");
+
+        if (splitArray.length == 1) {
+            throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_EDIT);
+        }
+        return getTaskNumber(splitArray[0]);
+    }
+
+    private String getUpdatedField(String command, EditCommand.EditType editType) throws EmptyCommandInformationException,
+            InvalidInputException, InvalidDateAndTimeException {
+        switch (editType) {
+        case NAME:
+            int nameStartingIndex = command.indexOf(Tag.NAME) + 2;
+
+            if (nameStartingIndex > command.length() - 1) {
+                throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_EDIT);
+            }
+
+            return command.substring(nameStartingIndex);
+        case DATE_AND_TIME:
+            int dateStartingIndex = command.indexOf(Tag.BY) + 2; //todo change to tag.date
+            DateAndTime dateAndTime = new DateAndTime(command.substring(dateStartingIndex));
+            return dateAndTime.getReformattedDateAndTime();
+        default:
+            throw new InvalidInputException(Message.MESSAGE_ERROR_OCCURRED);
+        }
+    }
+
+    private EditCommand.EditType getEditType(String command) throws InvalidInputException, EmptyCommandInformationException {
+        int slashIndex = command.indexOf("/");
+
+        if (slashIndex < 0) {
+            throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_EDIT);
+        }
+
+        char editTypeChar = command.charAt(slashIndex - 1);
+        switch (editTypeChar) {
+        case 'n':
+            return EditCommand.EditType.NAME;
+        case 'd':
+            return EditCommand.EditType.DATE_AND_TIME;
+        default:
+            throw new InvalidInputException(Message.MESSAGE_INVALID_EDIT_TYPE);
+        }
     }
 
     private String getTaskName(String command, Command.CommandType commandType) throws InvalidInputException,
@@ -131,7 +184,7 @@ public class Parser {
         return dateAndTime.getReformattedDateAndTime();
     }
 
-    private static int getTaskNumber (String message) throws InvalidInputException {
+    private int getTaskNumber (String message) throws InvalidInputException {
         String taskNumberString = "";
         for (int i = 0; i < message.length(); i++) {
             char currentChar = message.charAt(i);
@@ -178,6 +231,8 @@ public class Parser {
             return Command.CommandType.FIND;
         case DONE:
             return Command.CommandType.DONE;
+        case EDIT:
+            return Command.CommandType.EDIT;
         default:
             throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
         }
@@ -219,6 +274,8 @@ public class Parser {
             throw new EmptyCommandInformationException(Message.MESSAGE_INVALID_TASK_NUMBER);
         case FIND:
             throw new EmptyCommandInformationException(Message.MESSAGE_INVALID_FIND);
+        case EDIT:
+            throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_EDIT);
         default:
             throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
         }
