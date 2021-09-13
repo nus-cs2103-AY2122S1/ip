@@ -49,6 +49,7 @@ public class AddCommand extends Command {
             storage.update(tasks);
             break;
         case "deadline":
+            assert description.equals("/by");
             try {
                 String[] parsedAdd = description.split(" /by ", 2);
                 LocalDate date = LocalDate.parse(parsedAdd[1]);
@@ -64,6 +65,7 @@ public class AddCommand extends Command {
                 throw new DukeException("Please specify a description for this deadline.");
             }
         case "event":
+            assert description.equals("/at");
             try {
                 String[] parsedAdd = description.split(" /at ", 2);
                 LocalDate date = LocalDate.parse(parsedAdd[1]);
@@ -79,7 +81,7 @@ public class AddCommand extends Command {
                 throw new DukeException("Please specify a description for this event.");
             }
         default:
-            throw new DukeException("An error has occurred while executing an AddCommand.");
+            throw new AssertionError(taskType);
         }
         return reply;
     }
