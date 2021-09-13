@@ -121,7 +121,7 @@ public class TaskList {
     }
 
     /**
-     * Sort the task list according to the date and time.
+     * Sorts the task list according to the date and time.
      */
     public void sortTaskList(boolean isReverse) {
         for (int i = 0; i < list.size(); i++) {

@@ -34,10 +34,11 @@ public class Duke {
     }
 
     /**
-     * Currently a stub, to be replaced.
+     * Takes in the user's input and returns the response
+     * that duke is going to display on the GUI.
      *
-     * @param input The user's input
-     * @return A string containing the response to be displayed under duke
+     * @param input The user's input.
+     * @return A string containing the response to be displayed under duke.
      */
     public String getResponse(String input) {
         if (isActive) {

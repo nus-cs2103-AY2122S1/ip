@@ -26,13 +26,13 @@ public class Storage {
      */
     public void createFile() {
         File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
-        boolean created = false;
+        boolean isCreated = false;
         try {
-            created = file.createNewFile();
+            isCreated = file.createNewFile();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         } finally {
-            if (created) {
+            if (isCreated) {
                 System.out.println("New data file has been created.");
             } else {
                 System.out.println("Data file already exist.");
