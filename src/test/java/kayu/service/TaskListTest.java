@@ -44,9 +44,8 @@ public class TaskListTest {
         Task newTask = new Todo("new todo here");
         taskList.addTask(newTask);
         assertEquals(prevSize + 1, taskList.getCurrentCapacity());
-
     }
-    
+
     @Test
     public void testDeleteValidTask() {
         int taskNumber = 5;
@@ -54,7 +53,7 @@ public class TaskListTest {
             String expectedDesc = "mock " + taskNumber;
             Task deletedTask = taskList.deleteTask(taskNumber);
             assertEquals(expectedDesc, deletedTask.getDescription());
-            
+
         } catch (KayuException exception) {
             System.out.println(exception.getMessage());
             fail();
@@ -67,7 +66,7 @@ public class TaskListTest {
         try {
             Task updatedTask = taskList.updateTaskAsDone(taskNumber);
             assertTrue(updatedTask.isDone());
-            
+
         } catch (KayuException exception) {
             System.out.println(exception.getMessage());
             fail();

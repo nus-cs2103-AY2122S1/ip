@@ -18,9 +18,9 @@ import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
 
 public class ParserTest {
-    
+
     private final Parser parser = new Parser();
-    
+
     @Test
     public void testParseWithBye() {
         String input = ByeCommand.COMMAND_WORD;
@@ -29,7 +29,7 @@ public class ParserTest {
         assertTrue(command instanceof ByeCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
-    
+
     @Test
     public void testParseWithList() {
         String input = ListCommand.COMMAND_WORD;
@@ -38,7 +38,7 @@ public class ParserTest {
         assertTrue(command instanceof ListCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
-    
+
     @Test
     public void testParseWithDone() {
         String numberString = String.format("%d", 10);
@@ -58,7 +58,7 @@ public class ParserTest {
         assertTrue(command instanceof FindCommand);
         assertEquals(keyword, command.getCommandParams());
     }
-    
+
     @Test
     public void testParseWithDelete() {
         String numberString = String.format("%d", 10);
@@ -68,7 +68,7 @@ public class ParserTest {
         assertTrue(command instanceof DeleteCommand);
         assertEquals(numberString, command.getCommandParams());
     }
-    
+
     @Test
     public void testParseWithTodo() {
         String params = "mock something";
@@ -98,7 +98,7 @@ public class ParserTest {
         assertTrue(command instanceof DeadlineCommand);
         assertEquals(params, command.getCommandParams());
     }
-    
+
     @Test
     public void testParseWithEmptyInput() {
         String input = "";

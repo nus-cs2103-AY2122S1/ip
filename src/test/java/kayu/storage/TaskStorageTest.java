@@ -30,7 +30,7 @@ public class TaskStorageTest {
     private static final String RESOURCE_PATH = "src/test/resources";
     private static final String TASK_FILE_PATH = RESOURCE_PATH + "/task_storage_test_default.txt";
     private static final List<Task> TASKS = new ArrayList<>();
-    
+
     private TaskStorage taskStorage;
 
     @BeforeAll
@@ -47,9 +47,9 @@ public class TaskStorageTest {
                 LocalDate.parse("2020-10-16"),
                 LocalTime.parse("21:30")));
     }
-    
+
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setUp() {
         taskStorage = TaskStorage.generate(TASK_FILE_PATH);
     }
 
@@ -97,7 +97,7 @@ public class TaskStorageTest {
         String newFilePath = RESOURCE_PATH + "/task_storage_test_incorrect.txt";
         String problematicLine = "T # 1 ? test this program";
         taskStorage = TaskStorage.generate(newFilePath);
-        
+
         try {
             taskStorage.load();
             fail();
