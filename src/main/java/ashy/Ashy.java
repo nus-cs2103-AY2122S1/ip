@@ -193,8 +193,4 @@ public class Ashy {
         }
         return response;
     }
-
-    public static void main(String[] args) {
-        //new Duke().run();
-    }
 }

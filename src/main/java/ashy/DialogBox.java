@@ -39,7 +39,7 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    private void setRedBackground() {
+    private void setErrorBackground() {
         dialog.setStyle("-fx-padding: 10 10 10 10; -fx-background-color: #f76f6f; -fx-background-radius: 10 10 10 10;");
     }
 
@@ -62,7 +62,7 @@ public class DialogBox extends HBox {
         DialogBox ashyDialogBox = new DialogBox(text, img);
         ashyDialogBox.flip();
         if (text.contains("Oh no! ")) {
-            ashyDialogBox.setRedBackground();
+            ashyDialogBox.setErrorBackground();
         }
         return ashyDialogBox;
     }

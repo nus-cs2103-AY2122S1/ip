@@ -22,6 +22,9 @@ public class Storage {
      * @param duke The current instance of the Duke class
      */
     public void loadCommands(Ashy duke) {
+        // @author nicolej2122-reused
+        // Reused from https://github.com/VimuthM/ip
+        // with minor modifications
         String directory = System.getProperty("user.dir");
         Path path = Paths.get(directory, "data/taskList.txt");
         boolean exists = Files.exists(path);
@@ -54,8 +57,13 @@ public class Storage {
      * Saves task list to hard-disk
      *
      * @param commands list of tasks to be saved
+     * @@author nicolej2122-reused
+     * Reused from https://github.com/VimuthM/ip with minor modifications
      */
     public void saveCommands(ArrayList<Task> commands) {
+        // @author nicolej2122-reused
+        // Reused from https://github.com/VimuthM/ip
+        // with minor modifications
         String directory = System.getProperty("user.dir");
         StringBuilder text = new StringBuilder();
         for (Task command : commands) {
