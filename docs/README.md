@@ -105,7 +105,7 @@ Format: `exit`
 <br>
 <hr>
 
-> <h2>__"Come play with me soon! ฅ^•ω•^ฅ " – TiTi  </h2>__
+> <h2>"Come play with me soon! ฅ^•ω•^ฅ " – TiTi  </h2>
 
 Hope you enjoy your time with TiTi!
 
