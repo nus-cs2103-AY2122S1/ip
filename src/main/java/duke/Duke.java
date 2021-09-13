@@ -36,7 +36,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("/Users/hungkhoaitay/Duke.Duke/data/duke.txt");
+        Duke duke = new Duke("data/duke.txt");
         duke.run();
         duke.finish();
     }
