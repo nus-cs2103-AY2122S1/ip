@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
+    private final String windowTitle = "Duke - Your Personal Assistant";
 
     /**
      * Starts the GUI for Duke.
@@ -31,6 +32,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle(windowTitle);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
