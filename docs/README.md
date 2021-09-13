@@ -176,4 +176,5 @@ Expected input format: bye
 **Will result in the following dialog box:**
 
 ![Image of UI](https://github.com/wanyu-l/ip/blob/master/docs/ByeWindow.png)
+
 Click `confirm` or `X` at the top right corner to proceed to close the program.
