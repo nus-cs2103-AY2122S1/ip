@@ -42,33 +42,49 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void flip(boolean isError) {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        setStyle(isError);
+    }
+
+    private void setStyle(boolean isError) {
+        if (isError){
+            dialog.setStyle("-fx-background-color: #FF0000;" +
+                    "-fx-background-radius: 15;" +
+                    "-fx-padding: 15;" +
+                    "-fx-border-radius: 15;");
+
+
+        } else {
+            dialog.setStyle("-fx-background-color: #0EFFC7;" +
+                    "-fx-background-radius: 15;" +
+                    "-fx-padding: 15;" +
+                    "-fx-border-radius: 15;");
+        }
     }
 
     static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setAlignment(Pos.CENTER_RIGHT);
-        db.setStyle("-fx-background-color: #fff648");
         return db;
     }
 
     static DialogBox getNyxDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.flip();
-        db.setStyle("-fx-background-color: #0EFFC7");
+        db.flip(false);
         db.setAlignment(Pos.CENTER_LEFT);
         return db;
     }
 
     static DialogBox getErrorDialog(String error, Image img) {
         DialogBox db = new DialogBox(error, img);
-        db.flip();
-        db.setStyle("-fx-background-color: #FF0000");
+        db.flip(true);
         db.setAlignment(Pos.CENTER_LEFT);
         return db;
     }
 }
+
+
