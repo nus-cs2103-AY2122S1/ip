@@ -1,19 +1,19 @@
-package duke;
+package workdone;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.command.Command;
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.exception.DukeException;
-import duke.ui.Parser;
-import duke.ui.Ui;
+import workdone.command.Command;
+import workdone.data.Storage;
+import workdone.data.TaskList;
+import workdone.exception.DukeException;
+import workdone.ui.Parser;
+import workdone.ui.Ui;
 
 /**
- * Represents the Duke program. Manages tasks based on commands received.
+ * Represents the WorkDone program. Manages tasks based on commands received.
  */
-public class Duke {
+public class WorkDone {
     /** Storage that can write to or retrieve data from a file on hard disk */
     private final Storage storage;
     /** List of tasks added */
@@ -22,18 +22,18 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructor of the class 'Duke'.
+     * Constructor of the class 'WorkDone'.
      *
      * @param filePath Path of the file to retrieve data.
      */
-    public Duke(Path filePath) {
+    public WorkDone(Path filePath) {
         this.ui = new Ui();
         this.tasks = new TaskList();
         this.storage = new Storage(filePath, this.tasks);
     }
 
     /**
-     * Runs the duke program.
+     * Runs the WorkDone program.
      */
     public void run() {
         // Print welcome message, start running
@@ -56,13 +56,13 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke program, prints out messages based on commands received.
+     * Runs the WorkDone program, prints out messages based on commands received.
      *
      * @param args The command line parameters.
      */
     public static void main(String[] args) {
         String filePath = System.getProperty("user.dir");
-        new Duke(Paths.get(filePath, "data", "duke1.txt")).run();
+        new WorkDone(Paths.get(filePath, "data", "duke1.txt")).run();
     }
 
     public String getResponse(String input) {

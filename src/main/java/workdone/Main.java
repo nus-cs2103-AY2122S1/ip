@@ -11,12 +11,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for WorkDone using FXML.
  */
 public class Main extends Application {
 
     private final String filePath = System.getProperty("user.dir");
-    private final Duke duke = new Duke(Paths.get(filePath, "data", "duke1.txt"));
+    private final WorkDone WorkDone = new WorkDone(Paths.get(filePath, "data", "duke1.txt"));
 
     @Override
     public void start(Stage stage) {
@@ -25,7 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(WorkDone);
             stage.show();
             fxmlLoader.<MainWindow>getController().greetTheUser();
         } catch (IOException e) {
