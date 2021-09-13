@@ -4,7 +4,7 @@ package pika.task;
  * Tag class.
  */
 public class Tag {
-    private String tagName;
+    private final String tagName;
 
     /**
      * Constructor for tags.

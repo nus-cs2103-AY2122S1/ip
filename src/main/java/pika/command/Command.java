@@ -3,14 +3,14 @@ package pika.command;
 import java.io.IOException;
 
 import pika.exception.PikaException;
+import pika.task.TaskList;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 
 /**
  * Base Command Class for the other Command classes.
  */
 public class Command {
-    private boolean isRunning;
+    private final boolean isRunning;
 
     /**
      * Constructor for the command class.

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Task { //Base Task Class
     protected boolean isDone;
-    private String name;
+    private final String name;
     private ArrayList<Tag> tags;
 
     /**
@@ -23,6 +23,8 @@ public class Task { //Base Task Class
 
     /**
      * Marks the task as done when called and return it.
+     *
+     * @return the task's completed message
      */
     public String markAsDone() {
         this.isDone = true;

@@ -4,15 +4,15 @@ import java.io.IOException;
 
 import pika.exception.PikaException;
 import pika.task.Task;
+import pika.task.TaskList;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
  * DeleteCommand class to handle the deletion of task from the list.
  */
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
 
     /**

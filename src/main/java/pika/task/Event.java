@@ -1,5 +1,9 @@
 package pika.task;
 
+import java.time.format.DateTimeParseException;
+
+import pika.exception.PikaException;
+
 /**
  * Event Class to handle event tasks.
  */
@@ -11,10 +15,15 @@ public class Event extends Task {
      *
      * @param name      Name of the event Task
      * @param eventTime Date or Date and Time for the event Task
+     * @throws PikaException If the date or time input is not valid
      */
-    public Event(String name, String eventTime) { //Event class to handle Event task
+    public Event(String name, String eventTime) throws PikaException { //Event class to handle Event task
         super(name);
-        this.eventTime = TaskTime.convertDateTimeFormat(eventTime);
+        try {
+            this.eventTime = TaskTime.convertDateTimeFormat(eventTime);
+        } catch (DateTimeParseException e) {
+            throw new PikaException("Pika pi!! Your event date input format is not valid!");
+        }
     }
 
     /**
@@ -24,7 +33,12 @@ public class Event extends Task {
      */
     @Override
     public String write() {
-        return "E " + super.write() + " | " + this.eventTime + " |" + getTags();
+        String tags = " |" + getTags();
+        if (tags.equals(" |")) {
+            return "E " + super.write() + " | " + this.eventTime;
+        } else {
+            return "E " + super.write() + " | " + this.eventTime + " |" + getTags();
+        }
     }
 
     /**

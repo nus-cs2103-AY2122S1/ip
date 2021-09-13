@@ -13,7 +13,8 @@ Pika Bot is an app that is for managing and keeping track of task.
 3. Copy the file to the folder you want to use as the ~~home folder~~ for your Pika Bot.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Do note that the GUI shown below has already ran some commands.
 
-![GUI](../data/Ui.png)
+![GUI](Ui.png)
+![GUI](https://random689.github.io/ip/Ui.png)
 
 ----
 
@@ -119,7 +120,7 @@ Syntax: `bye`
 
 ----
 
-## Date Time Format
+### Date Time Format
 
 This application only allows 1 type of date time format.
 > Time is optional, and will be omitted if not specified.

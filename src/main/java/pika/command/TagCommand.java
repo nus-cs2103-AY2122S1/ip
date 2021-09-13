@@ -3,16 +3,16 @@ package pika.command;
 import java.io.IOException;
 
 import pika.exception.PikaException;
+import pika.task.TaskList;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
  * TagCommand Class for tagging.
  */
 public class TagCommand extends Command {
-    private int index;
-    private String tagName;
+    private final int index;
+    private final String tagName;
 
     /**
      * Constructor for TagCommand.

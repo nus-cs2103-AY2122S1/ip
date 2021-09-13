@@ -6,16 +6,16 @@ import pika.exception.PikaException;
 import pika.task.Deadline;
 import pika.task.Event;
 import pika.task.Task;
+import pika.task.TaskList;
 import pika.task.Todo;
 import pika.ui.Storage;
-import pika.ui.TaskList;
 import pika.ui.Ui;
 
 /**
  * AddCommand class to handle all the adding of events to the list.
  */
 public class AddCommand extends Command {
-    private Task inputTask;
+    private final Task inputTask;
 
     /**
      * Constructor for AddCommand.

@@ -1,5 +1,9 @@
 package pika.task;
 
+import java.time.format.DateTimeParseException;
+
+import pika.exception.PikaException;
+
 /**
  * Deadline Class to handle Deadline Tasks.
  */
@@ -11,10 +15,15 @@ public class Deadline extends Task {
      *
      * @param name    name of the task
      * @param dueDate Due date of the task. Can be Date or Date/Time
+     * @throws PikaException If the date or time input is not valid
      */
-    public Deadline(String name, String dueDate) {
+    public Deadline(String name, String dueDate) throws PikaException {
         super(name);
-        this.dueDate = TaskTime.convertDateTimeFormat(dueDate);
+        try {
+            this.dueDate = TaskTime.convertDateTimeFormat(dueDate);
+        } catch (DateTimeParseException e) {
+            throw new PikaException("Pika pi!! Your event date input format is not valid!");
+        }
     }
 
     /**
@@ -24,7 +33,12 @@ public class Deadline extends Task {
      */
     @Override
     public String write() {
-        return "D " + super.write() + " | " + this.dueDate + " |" + getTags();
+        String tags = " |" + getTags();
+        if (tags.equals(" |")) {
+            return "D " + super.write() + " | " + this.dueDate;
+        } else {
+            return "D " + super.write() + " | " + this.dueDate + " |" + getTags();
+        }
     }
 
     /**

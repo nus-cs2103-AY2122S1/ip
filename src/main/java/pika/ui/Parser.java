@@ -13,7 +13,7 @@ import pika.exception.PikaException;
 public class Parser { //The Parser to handle the inputs from the terminal
 
     /**
-     * The below function converts the input to the proper command and returns an error if the input is not valid.
+     * Converts the input to the proper command and returns an error if the input is not valid.
      *
      * @param input User input
      * @return the new Command
