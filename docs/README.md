@@ -1,7 +1,15 @@
 # User Guide
 
-## Features 
+## *Quick Start*
+___
+1. Ensure that you have Java 11 installed on your computer.
+2. Download the latest duke.jar file [here](https://github.com/tanruiquan/ip/releases)
+3. Copy the file to the directory that you want to use as the home directory for Duke.
+4. Double-click the file to start the app. The GUI similar to the picture below should appear in a few seconds. ![Example GUI](Example.png)
+5. Refer below to the features and usage of the program.
 
+## *Features*
+___
 ### Record your tasks
 
 Record 3 different types of task: todo, event and deadline.
@@ -22,7 +30,8 @@ Mark completed task as done. Supports mass operation.
 
 Delete tasks that you no longer want to record. Supports mass operation.
 
-## Usage
+## *Usage*
+___
 
 Arguments in `<>` are compulsory while those in `[]` are optional.
 

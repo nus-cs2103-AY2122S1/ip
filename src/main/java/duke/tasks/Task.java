@@ -37,7 +37,7 @@ public abstract class Task {
      * @return "X" if the task is completed and an empty string if it is not.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : "  ");
+        return (isDone ? "X" : " ");
     }
 
     /**
