@@ -1,24 +1,31 @@
-# Duke project template
+### Duke
+> “The best thing about Duke is that it's the best app ever made.” - Albert Einstein ([source](https://www.goodreads.com/quotes))
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This duke is:
+- simple
+- **really fast** at processing inputs
+- ~~easy~~ *wonderful* to use
 
-## Setting up in Intellij
+So why not,
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+1. Download it
+2. Double-click it
+3. Enjoy! :star_struck:
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Here's the `main` method:
+```javascript
+public static void main(String[] args) {
+    Application.launch(Main.class, args);
+}
+```
+
+You can try:
+- listing all tasks using "list"
+- adding a todo task using "todo [description]"
+- adding an event using "event [description] /at YYYY-MM-DD"
+- adding a deadline using "deadline [description] /by YYYY-MM-DD"
+- marking a task as completed using "done [task number]"
+- deleting a task as completed using "delete [task number]"
+- finding a task using "find [search query]"
+- getting a date's schedule using "schedule YYYY-MM-DD"
+- exiting Duke using "bye"

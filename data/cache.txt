@@ -7,3 +7,4 @@ todo Try deleting a task as completed using "delete [task number]"
 todo Try finding a task using "find [search query]"
 todo Try getting a date's schedule using "schedule YYYY-MM-DD"
 todo Try exiting Duke using "bye"
+list
