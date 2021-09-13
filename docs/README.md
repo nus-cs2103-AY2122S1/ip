@@ -1,6 +1,11 @@
 # User Guide
 Duke is a cross-platform desktop app for manging your tasks (todos, deadlines, events) via a Command Line Interface (CLI),
-while still having the comfort of a Graphical User Interface (GUI).
+while still having the comfort of a Graphical User Interface (GUI).\
+\
+**Latest release** <ins> [here](https://github.com/cyyeu/ip/releases/tag/A-Release) </ins>\
+***Note for Mac users***: Run using `java -jar duke.jar`
+
+
 
 ## Features
 1. [Adding a task](#adding-a-task):
