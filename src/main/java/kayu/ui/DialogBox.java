@@ -22,10 +22,10 @@ public class DialogBox extends HBox {
 
     // Resource path (starting from /src/main/java/resources).
     private static final String FXML_PATH = "/view/DialogBox.fxml";
-    
+
     @FXML
     private Label dialog;
-    
+
     @FXML
     private ImageView displayPicture;
 
@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
             fxmlLoader.load();
             dialog.setText(text);
             displayPicture.setImage(img);
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }

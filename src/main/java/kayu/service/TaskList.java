@@ -19,7 +19,7 @@ public class TaskList {
     protected static final String ERROR_INVALID_TASK = "Task number '%d' is invalid.";
     protected static final String ERROR_EMPTY_LIST = "Unable to execute as list is empty.";
     protected static final String ERROR_TASK_ALREADY_DONE = "Task number '%d' is already done.";
-    
+
     private final List<Task> tasks = new ArrayList<>();
 
     /**
@@ -118,18 +118,18 @@ public class TaskList {
      */
     public Map<Integer, Task> findTasksByKeywords(String... keywords) {
         SortedMap<Integer, Task> taskMap = new TreeMap<>();
-        
+
         for (String key: keywords) {
             addTasksToSearchMap(taskMap, key);
         }
         return taskMap;
     }
-    
+
     private void addTasksToSearchMap(Map<Integer, Task> taskMap, String key) {
         if (key.isBlank()) {
             return; // in case parsed keywords has blanks
         }
-        
+
         key = key.toLowerCase(Locale.ROOT);
         for (int idx = 0; idx < tasks.size(); idx++) {
             Task task = tasks.get(idx);

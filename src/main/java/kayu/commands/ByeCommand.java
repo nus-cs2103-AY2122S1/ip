@@ -32,7 +32,7 @@ public class ByeCommand extends Command {
                           NoteList noteList,
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
-        
+
         return CommandMessage.MESSAGE_BYE;
     }
 }

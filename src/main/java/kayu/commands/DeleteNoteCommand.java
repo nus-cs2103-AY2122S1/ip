@@ -16,7 +16,7 @@ import kayu.storage.TaskStorage;
  * in {@link NoteList}.
  */
 public class DeleteNoteCommand extends Command {
-    
+
     /** Keyword for command. */
     public static final String COMMAND_WORD = "delete-note";
 

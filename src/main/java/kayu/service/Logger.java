@@ -17,7 +17,7 @@ public class Logger {
 
     private static final String LINE_SPLIT = "____________________________________"
             + "_______________________________________";
-    
+
     /**
      * Prints logo.
      */

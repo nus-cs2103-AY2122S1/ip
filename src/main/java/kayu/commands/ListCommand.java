@@ -1,13 +1,11 @@
 package kayu.commands;
 
-import static kayu.commands.CommandMessage.MESSAGE_EMPTY_NOTE_LIST;
 import static kayu.commands.CommandMessage.MESSAGE_EMPTY_TASK_LIST;
 
 import java.util.List;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
-import kayu.note.Note;
 import kayu.service.NoteList;
 import kayu.service.TaskList;
 import kayu.storage.NoteStorage;
@@ -19,7 +17,7 @@ import kayu.task.Task;
  * that are present in {@link TaskList}.
  */
 public class ListCommand extends Command {
-    
+
     /** Keyword for command. */
     public static final String COMMAND_WORD = "list";
 
@@ -42,15 +40,7 @@ public class ListCommand extends Command {
 
         return listTasks(taskList);
     }
-    
-    private String listNotes(NoteList noteList) {
-        List<Note> notes = noteList.getNotes();
-        if (notes.isEmpty()) {
-            return MESSAGE_EMPTY_NOTE_LIST;
-        }
-        return CommandUtils.generateFormattedItemListResponse(notes);
-    }
-    
+
     private String listTasks(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {

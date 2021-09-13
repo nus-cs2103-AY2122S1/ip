@@ -42,13 +42,13 @@ public class DeadlineCommand extends Command {
                           NoteList noteList,
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
-        
+
         Task deadline = createTask();
         updateTasks(taskList, taskStorage, deadline);
-        
+
         return String.format(MESSAGE_CREATED_DEADLINE, deadline, taskList.getCurrentCapacity());
     }
-    
+
     private Task createTask() throws KayuException {
         String[] paramArray = getParamArray();
         String desc = CommandUtils.extractDesc(paramArray, COMMAND_WORD);
@@ -57,7 +57,7 @@ public class DeadlineCommand extends Command {
 
         return new Deadline(desc, byDate, byTime);
     }
-    
+
     private String[] getParamArray() throws KayuException {
         return CommandUtils.splitUserParams(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
     }

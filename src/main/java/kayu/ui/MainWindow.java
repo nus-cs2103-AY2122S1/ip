@@ -21,16 +21,16 @@ public class MainWindow extends AnchorPane {
     // Image paths (starting from /src/main/java/resources).
     private static final String KAYU_IMAGE_PATH = "/images/duke.png";
     private static final String USER_IMAGE_PATH = "/images/user.png";
-    
+
     @FXML
     private ScrollPane scrollPane;
-    
+
     @FXML
     private VBox dialogContainer;
-    
+
     @FXML
     private TextField userInput;
-    
+
     @FXML
     private Button sendButton;
 
@@ -47,15 +47,15 @@ public class MainWindow extends AnchorPane {
         fixWindowHeight();
         initialiseKayu();
     }
-    
+
     private void fixWindowHeight() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
-    
+
     private void setImages() {
         InputStream kayuImageStream = this.getClass().getResourceAsStream(KAYU_IMAGE_PATH);
         InputStream userImageStream = this.getClass().getResourceAsStream(USER_IMAGE_PATH);
-        
+
         assert (kayuImageStream != null) : String.format(ASSERT_FAIL_ABSENT_IMAGE, KAYU_IMAGE_PATH);
         assert (userImageStream != null) : String.format(ASSERT_FAIL_ABSENT_IMAGE, USER_IMAGE_PATH);
 
@@ -80,21 +80,21 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = kayu.executeAndRespond(input);
-        
+
         createUserDialog(input);
         createKayuDialog(response);
-        
+
         if (kayu.isRecentCommandBye()) {
             kayu.exit();
         }
     }
-    
+
     private void createUserDialog(String input) {
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
         dialogContainer.getChildren().add(userDialog);
         userInput.clear();
     }
-    
+
     private void createKayuDialog(String response) {
         DialogBox kayuDialog = DialogBox.getKayuDialog(response, kayuImage);
         dialogContainer.getChildren().add(kayuDialog);

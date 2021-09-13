@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
     /** Keyword for command. */
     public static final String COMMAND_WORD = "delete";
-    
+
     /**
      * Initializes a Delete- {@link kayu.commands.Command}.
      *
@@ -38,13 +38,13 @@ public class DeleteCommand extends Command {
                           NoteList noteList,
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
-        
+
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
             super.updateTaskFileStorage(taskList, taskStorage);
             return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCurrentCapacity());
-            
+
         } catch (NumberFormatException exception) {
             throw new KayuException(String.format(ERROR_NOT_AN_INT_PARAM, commandParams));
         }

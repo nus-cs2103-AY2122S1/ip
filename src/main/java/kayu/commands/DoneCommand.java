@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
                           NoteList noteList,
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
-        
+
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.updateTaskAsDone(taskNumber);

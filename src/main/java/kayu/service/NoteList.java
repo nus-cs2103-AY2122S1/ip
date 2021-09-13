@@ -17,7 +17,7 @@ public class NoteList {
 
     // Assertion format.
     protected static final String ASSERT_FAIL_DESC_EMPTY = "Note cannot be empty";
-    
+
     private final List<Note> notes = new ArrayList<>();
 
     /**

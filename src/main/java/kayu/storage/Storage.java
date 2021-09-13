@@ -38,11 +38,11 @@ public abstract class Storage<T> {
         this.directoryPath = directoryPath;
         this.filePath = filePath;
     }
-    
+
     protected static String extractDirectoryPath(String fullPath) {
         assert (fullPath.contains("/")) : ASSERT_FAIL_IMPROPER_FILEPATH;
         int splitIdx = fullPath.lastIndexOf('/');
-        
+
         return fullPath.substring(0, splitIdx + 1); // exclusive end
     }
 
@@ -68,14 +68,14 @@ public abstract class Storage<T> {
             throw new StorageException(String.format(ERROR_UNABLE_TO_LOAD_PATH, filePath));
         }
     }
-    
+
     private void initializeDirectory() throws StorageException {
         File directory = new File(directoryPath);
         if (!directory.exists() && !directory.mkdir()) {
             throw new StorageException(String.format(ERROR_UNABLE_TO_CREATE_DIRECTORY, directoryPath));
         }
     }
-    
+
     private void initializeFile() throws StorageException, IOException {
         File file = new File(filePath);
         if (!file.exists() && !file.createNewFile()) {
@@ -87,7 +87,7 @@ public abstract class Storage<T> {
         try {
             Path filePath = Paths.get(this.filePath);
             return Files.readAllLines(filePath);
-            
+
         } catch (IOException exception) {
             throw new StorageException(String.format(ERROR_UNABLE_TO_LOAD_PATH, filePath));
         }
@@ -98,7 +98,7 @@ public abstract class Storage<T> {
                 .map(this::decode)
                 .collect(Collectors.toList());
     }
-    
+
     protected abstract T decode(String encoded) throws StorageException;
 
     private List<String> encodeAll(List<T> list) {
@@ -106,7 +106,7 @@ public abstract class Storage<T> {
                 .map(this::encode)
                 .collect(Collectors.toList());
     }
-    
+
     protected abstract String encode(T decoded);
 
     /**
@@ -120,7 +120,7 @@ public abstract class Storage<T> {
             Path filePath = Paths.get(this.filePath);
             List<String> lines = this.encodeAll(list);
             Files.write(filePath, lines);
-            
+
         } catch (IOException exception) {
             throw new StorageException(ERROR_UNABLE_TO_SAVE);
         }

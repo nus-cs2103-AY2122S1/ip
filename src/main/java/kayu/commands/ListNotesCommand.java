@@ -17,7 +17,7 @@ import kayu.storage.TaskStorage;
  * that are present in {@link NoteList}.
  */
 public class ListNotesCommand extends Command {
-    
+
     /** Keyword for command. */
     public static final String COMMAND_WORD = "list-notes";
 

@@ -42,7 +42,7 @@ public class TodoCommand extends Command {
 
         Task todo = createTask();
         updateTasks(taskList, taskStorage, todo);
-        
+
         return String.format(MESSAGE_CREATED_TODO, todo, taskList.getCurrentCapacity());
     }
 

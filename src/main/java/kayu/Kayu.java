@@ -26,14 +26,14 @@ public class Kayu {
     private static final String GREETING = "Hello!\n"
             + "I'm Kayu, your alternative personal task management to Duke!\n"
             + "What can I do for you?";
-    
+
     private final Parser parser = new Parser();
     private final TaskList taskList = new TaskList();
     private final NoteList noteList = new NoteList();
     private final Logger logger = new Logger();
     private final TaskStorage taskStorage = TaskStorage.generate();
     private final NoteStorage noteStorage = NoteStorage.generate();
-    
+
     private boolean isRecentCommandBye = false;
 
     /**
@@ -62,14 +62,14 @@ public class Kayu {
             logger.printLogo();
             logger.printMessage(GREETING);
             initializeTasks();
-            
+
         } catch (StorageException exception) {
             logger.printError(exception.getMessage());
             exception.printStackTrace();
             exit(); // force terminate
         }
     }
-    
+
     private void initializeTasks() throws StorageException {
         List<Task> tasks = taskStorage.load();
         List<Note> notes = noteStorage.load();
@@ -87,7 +87,7 @@ public class Kayu {
         String feedback;
         Command command = parser.parseToCommand(userInput);
         isRecentCommandBye = (command.isBye()); // updates internally as a field
-        
+
         try {
             feedback = command.execute(taskList, taskStorage, noteList, noteStorage);
             logger.printMessage(feedback);

@@ -16,7 +16,7 @@ public class NoteStorage extends Storage<Note> {
     private NoteStorage(String directoryPath, String filePath) {
         super(directoryPath, filePath);
     }
-    
+
     /**
      * Generates a {@link kayu.storage.NoteStorage} instance based on the default path.
      *

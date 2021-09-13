@@ -45,7 +45,7 @@ public class EventCommand extends Command {
 
         Task event = createTask();
         updateTasks(taskList, taskStorage, event);
-        
+
         return String.format(MESSAGE_CREATED_EVENT, event, taskList.getCurrentCapacity());
     }
 

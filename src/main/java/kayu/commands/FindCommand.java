@@ -43,14 +43,14 @@ public class FindCommand extends Command {
                           NoteList noteList,
                           NoteStorage noteStorage)
             throws KayuException, StorageException {
-        
+
         String[] keywords = extractKeywords();
         String formattedParameters = generateFormattedParameters(keywords); // for message
         Map<Integer, Task> taskMap = taskList.findTasksByKeywords(keywords);
-        
+
         return generateResponse(formattedParameters, taskMap);
     }
-    
+
     private String[] extractKeywords() throws KayuException {
         String keyword = commandParams.trim();
         if (keyword.isEmpty()) {
@@ -73,14 +73,14 @@ public class FindCommand extends Command {
         String body = generateFormattedTaskListResponse(taskMap);
         return header.concat(body);
     }
-    
+
     private String generateFormattedTaskListResponse(Map<Integer, Task> taskMap) {
         return taskMap.entrySet()
                 .stream()
                 .map(this::convertToTaskString)
                 .collect(Collectors.joining("\n"));
     }
-    
+
     private String convertToTaskString(Map.Entry<Integer, Task> entry) {
         int number = entry.getKey() + 1; // for 1-indexing
         String taskAsString = entry.getValue().toString();

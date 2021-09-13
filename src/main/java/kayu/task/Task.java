@@ -13,7 +13,7 @@ public abstract class Task {
 
     /** Not done state for encoding/decoding. */
     public static final String NOT_DONE = "0";
-    
+
     private final String description;
     private boolean isDone;
 
