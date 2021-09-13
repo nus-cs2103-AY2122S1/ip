@@ -1,5 +1,8 @@
 package task;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * A type of task that has no additional arguments and extends from Task
  *
@@ -8,6 +11,7 @@ package task;
 public class Todo extends Task {
 
     private static final String TASK_CAT = "todo";
+    private ArrayList<Tag> tags;
 
     /**
      * Constructor to create a TODO task
@@ -15,6 +19,12 @@ public class Todo extends Task {
      */
     public Todo(String name, boolean isDone) {
         super(name, TASK_CAT, isDone);
+        this.tags = new ArrayList<>();
+    }
+
+    public Todo(String name, boolean isDone, ArrayList<Tag> tags) {
+        super(name, TASK_CAT, isDone);
+        this.tags = tags;
     }
 
     /**

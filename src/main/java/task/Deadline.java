@@ -1,5 +1,7 @@
 package task;
 
+import java.util.ArrayList;
+
 /**
  * A type of task that requires a deadline that extends from Task
  *
@@ -9,6 +11,7 @@ public class Deadline extends Task {
 
     private static final String TASK_CAT = "deadline";
     private String deadline;
+    private ArrayList<Tag> tags;
 
     /**
      *  Constructor to create an DEADLINE task
@@ -17,6 +20,12 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String deadline, boolean isDone) {
         super(name, TASK_CAT, isDone);
+        this.deadline = deadline.trim();
+        this.tags = new ArrayList<>();
+    }
+
+    public Deadline(String name, String deadline, boolean isDone, ArrayList<Tag> tags) {
+        super(name, TASK_CAT, isDone, tags);
         this.deadline = deadline.trim();
     }
 

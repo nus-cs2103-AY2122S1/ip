@@ -2,6 +2,7 @@ package task;
 
 import java.util.ArrayList;
 
+import duke.Duke;
 import duke.DukeException;
 import ui.LogMessage;
 import ui.Ui;
@@ -119,18 +120,77 @@ public class Tasklist {
 
     /**
      * Check if string is found in tasklist
-     * @param item key to search for
+     * @param keyword key to search for
      */
-    public LogMessage findString(String item) {
-        assert(item != "");
+    public LogMessage findString(String keyword) {
+        assert(keyword != "");
         Tasklist filteredList = new Tasklist(new ArrayList<>());
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            if (task.getName().contains(item)) {
+            if (task.getName().contains(keyword)) {
                 filteredList.add(task);
             }
         }
         LogMessage msg = filteredList.list();
+        return msg;
+    }
+
+    public LogMessage findTag(String keyword) {
+        Tasklist filteredList = new Tasklist(new ArrayList<>());
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            ArrayList<Tag> tags = task.getTagList();
+            for(int j = 0; j < tags.size(); j++) {
+                if(tags.get(j).compareTagName(keyword)) {
+                    filteredList.add(task);
+                    break;
+                }
+            }
+        }
+        LogMessage msg = filteredList.list();
+        msg.printAllMessages();
+        return msg;
+    }
+
+    public LogMessage addTagToTask(String input) {
+        String[] inputs = input.split(" ");
+        LogMessage msg = new LogMessage();
+        try {
+            if (inputs.length != 3) {
+                throw new DukeException("Wrong number of fields");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            msg.add(e.getMessage());
+            return msg;
+        }
+
+        int idx = Integer.parseInt(inputs[1]) - 1;
+        String tagName = inputs[2];
+        Task task = taskList.get(idx);
+        task.addTag(tagName);
+        msg.add(String.format("Tag %s was added to task %d", tagName.toString(), idx));
+        return msg;
+    }
+
+    public LogMessage viewTagOfTask(String input) {
+        String[] inputs = input.split(" ");
+        LogMessage msg = new LogMessage();
+        try {
+            if (inputs.length != 2) {
+                throw new DukeException("Wrong number of fields");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            msg.add(e.getMessage());
+            return msg;
+        }
+
+        int idx = Integer.parseInt(inputs[1]) - 1;
+        Task task = taskList.get(idx);
+        msg.add(task.viewTags());
+        msg.printAllMessages();
+        Ui.printBreakline();
         return msg;
     }
 

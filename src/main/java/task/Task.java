@@ -2,6 +2,8 @@ package task;
 
 import ui.Ui;
 
+import java.util.ArrayList;
+
 /**
  * Encapsulates the creation of tasks found in the to-do list
  *
@@ -12,16 +14,26 @@ public class Task {
     private String name;
     private boolean isDone;
     private String taskCat;
+    private ArrayList<Tag> tags;
 
     /**
      * Construct a generic task yet to be completed
      * @param name The name of the task
      */
+    public Task(String name, String taskCat, boolean isDone, ArrayList<Tag> tags) {
+        this.name = name.trim();
+        assert(name != "");
+        this.isDone = isDone;
+        this.taskCat = taskCat;
+        this.tags = tags;
+    }
+
     public Task(String name, String taskCat, boolean isDone) {
         this.name = name.trim();
         assert(name != "");
         this.isDone = isDone;
         this.taskCat = taskCat;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -68,6 +80,13 @@ public class Task {
     }
 
     /**
+     * @return List of tags
+     */
+    public ArrayList<Tag> getTagList() {
+        return this.tags;
+    }
+
+    /**
      * @return Whether the two task share the same name
      */
     @Override
@@ -83,6 +102,21 @@ public class Task {
         Task task = (Task) o;
         // Compare the data members and return accordingly
         return this.name.equals(task.getName());
+    }
+
+    public void addTag(String tagName) {
+        System.out.println("Tag added successfully");
+        this.tags.add(new Tag(tagName));
+        System.out.println("Current tags: " + viewTags());
+        Ui.printBreakline();
+    }
+
+    public String viewTags() {
+        String allTags = "";
+        for(int i = 0; i < tags.size(); i++) {
+            allTags += tags.get(i) + " ";
+        }
+        return allTags;
     }
 
 }

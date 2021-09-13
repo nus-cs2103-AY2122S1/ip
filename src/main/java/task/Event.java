@@ -1,6 +1,8 @@
 package task;
 
 
+import java.util.ArrayList;
+
 /**
  * A type of task that requires event details and extends from Task
  *
@@ -10,6 +12,7 @@ public class Event extends Task {
 
     private static final String TASK_CAT = "event";
     private String eventDetails;
+    private ArrayList<Tag> tags;
 
     /**
      *  Constructor to create an EVENT task
@@ -19,6 +22,13 @@ public class Event extends Task {
     public Event(String name, String eventDetails, boolean isDone) {
         super(name, TASK_CAT, isDone);
         this.eventDetails = eventDetails;
+        this.tags = new ArrayList<>();
+    }
+
+    public Event(String name, String eventDetails, boolean isDone, ArrayList<Tag> tags) {
+        super(name, TASK_CAT, isDone, tags);
+        this.eventDetails = eventDetails;
+        this.tags = new ArrayList<>();
     }
 
     /**

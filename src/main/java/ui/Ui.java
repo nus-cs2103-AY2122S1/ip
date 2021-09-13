@@ -86,6 +86,15 @@ public class Ui {
         case "find":
             tasklist.findString(input.trim());
             break;
+        case "addTag":
+            tasklist.addTagToTask(input);
+            break;
+        case "findTag":
+            tasklist.findTag(input);
+            break;
+        case "viewTag":
+            tasklist.viewTagOfTask(input);
+            break;
         default:
             try {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
