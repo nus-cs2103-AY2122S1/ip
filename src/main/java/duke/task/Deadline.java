@@ -19,6 +19,10 @@ public class Deadline extends Task{
         this.due = due;
     }
 
+    public void setDuration(LocalDateTime due) {
+        this.due = due;
+    }
+
     /**
      * Prints the task in specified format
      *

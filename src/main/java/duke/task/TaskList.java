@@ -1,7 +1,9 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import duke.exception.TaskNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -32,33 +34,9 @@ public class TaskList {
      * @param task new input task
      */
     public String addTask(Task task) {
-        assert tasks != null : "Task List should be created before adding";
-
         tasks.add(task);
         return "Got it. I've added this task:\n "+ task.displayTask()
                 + "\n Now you have " + tasks.size() +  " tasks in the list.";
-    }
-
-    /**
-     *  Gets the index of the Task to delete
-     *
-     * @param message the input command to delete a task
-     * @return the list index for the task to be checked
-     */
-    public int taskToDelete(String message) {
-        StringBuilder number;
-        if (message.length() > 6 && message.startsWith("delete")) {
-            char firstNumber = message.charAt(7);
-            number = new StringBuilder(Character.toString(firstNumber));
-            int counter = 8;
-            while (counter < message.length()) {
-                char next = message.charAt(counter);
-                number.append(next);
-                counter++;
-            }
-            return Integer.parseInt(number.toString());
-        }
-        return 0;
     }
 
     /**
@@ -78,41 +56,34 @@ public class TaskList {
         }
     }
 
-    /**
-     * Gets the index of the Task to check
-     *
-     * @param message the input command to check a task
-     * @return the list index for the task to be checked
-     */
-    public int taskToCheck(String message) {
-        StringBuilder number;
-        if (message.length() > 5 && message.startsWith("done")) {
-            char firstNumber = message.charAt(5);
-            number = new StringBuilder(Character.toString(firstNumber));
-            int counter = 6;
-            while (counter < message.length()) {
-                char next = message.charAt(counter);
-                number.append(next);
-                counter++;
-            }
-            return Integer.parseInt(number.toString());
-        }
-        return 0;
+    public String updatePrompt() {
+        return "To update Task Name input:\n  edit-N/(Task Index) (New Task Name)\n"
+                + "\nTo update Task Duration input:\n  edit-D/(Task Index) (New Task Date and Time)";
     }
 
-    /**
-     * Mark the task as completed
-     *
-     * @param item the list index of the task to be mark as done
-     * @throws TaskNotFoundException if the list index is not valid
-     */
-    public String markAsCheckedTask(int item) throws TaskNotFoundException {
-        if (item > tasks.size()) {
+    public String updateTaskName(int item, String newData) throws DukeException {
+        if (item > tasks.size() || item <= 0) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         } else {
-            Task t = tasks.get(item -1);
-            t.checkOffTask();
-            return "Nice! I've marked this task as done:\n  " + t.displayTask();
+            Task taskToUpdate = tasks.get(item - 1);
+            taskToUpdate.setTaskName(newData);
+            return "Got it. I've updated this task:\n "+ taskToUpdate.displayTask();
+        }
+    }
+
+    public String updateTaskDuration(int item, LocalDateTime newData) throws DukeException {
+        if (item > tasks.size() || item <= 0) {
+            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
+        } else {
+            Task taskToUpdate = tasks.get(item - 1);
+            if (taskToUpdate instanceof Deadline) {
+                ((Deadline) taskToUpdate).setDuration(newData);
+            } else if (taskToUpdate instanceof Event) {
+                ((Event) taskToUpdate).setDuration(newData);
+            } else {
+                throw new DukeException("This Task type does not have a Duration tied to it!");
+            }
+            return "Got it. I've updated this task:\n "+ taskToUpdate.displayTask();
         }
     }
 
@@ -141,6 +112,82 @@ public class TaskList {
                 return tasksToPrint.toString();
             }
         }
+    }
+
+    /**
+     * Gets the index of the Task to check
+     *
+     * @param message the input command to check a task
+     * @return the list index for the task to be checked
+     */
+    public int getTaskIndex(String message) {
+        StringBuilder number;
+        if (message.startsWith("done") && message.length() > 5) {
+            char firstNumber = message.charAt(5);
+            number = new StringBuilder(Character.toString(firstNumber));
+            int counter = 6;
+            while (counter < message.length()) {
+                char next = message.charAt(counter);
+                number.append(next);
+                counter++;
+            }
+            return Integer.parseInt(number.toString());
+
+        } else if (message.startsWith("edit") && message.length() > 7) {
+            char firstNumber = message.charAt(7);
+            number = new StringBuilder(Character.toString(firstNumber));
+            int len = message.substring(0, message.indexOf(" ")).length();
+            int counter = 8;
+            while (counter < len) {
+                char next = message.charAt(counter);
+                number.append(next);
+                counter++;
+            }
+            return Integer.parseInt(number.toString());
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Mark the task as completed
+     *
+     * @param item the list index of the task to be mark as done
+     * @throws TaskNotFoundException if the list index is not valid
+     */
+    public String markAsCheckedTask(int item) throws TaskNotFoundException {
+        if (item > tasks.size()) {
+            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
+        } else {
+            Task t = tasks.get(item -1);
+            t.checkOffTask();
+            return "Nice! I've marked this task as done:\n  " + t.displayTask();
+        }
+    }
+
+    /**
+     *  Gets the index of the Task to delete
+     *
+     * @param message the input command to delete a task
+     * @return the list index for the task to be checked
+     */
+    public int taskToDelete(String message) {
+        StringBuilder number;
+        if (message.length() > 6) {
+            String check = message.substring(0, 6);
+            if (check.equals("delete")) {
+                char firstNumber = message.charAt(7);
+                number = new StringBuilder(Character.toString(firstNumber));
+                int counter = 8;
+                while (counter < message.length()) {
+                    char next = message.charAt(counter);
+                    number.append(next);
+                    counter++;
+                }
+                return Integer.parseInt(number.toString());
+            }
+        }
+        return 0;
     }
 
     /**
