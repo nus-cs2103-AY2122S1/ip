@@ -28,9 +28,13 @@ public class Deadline extends Task {
         try {
             String[] arr = checkDateTimeFormat(when.trim());
             this.date = getDateFromString(arr[0].trim().toLowerCase());
-            this.time = arr[1];
+            if (arr.length == 2) {
+                this.time = arr[1];
+            } else {
+                this.time = "";
+            }
         } catch (DateTimeException e) {
-            throw new UserInputError("Wrong datetime format");
+            throw new UserInputError("Invalid datetime format. Please check user guide for more info!");
         }
     }
 
@@ -43,21 +47,14 @@ public class Deadline extends Task {
      */
     private String[] checkDateTimeFormat(String datetime) throws UserInputError {
         String[] arr = datetime.split(" ");
-        if (arr.length != 2) {
-            throw new UserInputError("Invalid datetime format. " +
-                    "Please ensure you leave a space between date and time");
+        if (arr.length > 2 || arr.length < 1) {
+            throw new UserInputError("Invalid datetime format. "
+                    + "Please ensure you leave a space between date and time");
         }
 
-        String time = arr[1];
-        if (time.length() != 4) { //checks that string adheres to 24h format
-            throw new UserInputError("Invalid time input. Please ensure it is in 24h format");
-        }
-
-        int hour = Integer.parseInt(time.substring(0,2));
-        int min = Integer.parseInt(time.substring(2,4));
-
-        if (hour < 0 || hour > 23 || min < 0 || min > 59) { //checks hour and min are valid
-            throw new UserInputError("Your hour/minute input is invalid. Please check and try again!");
+        if (arr.length == 2) { //if there exists time input, check time format
+            String time = arr[1];
+            checkTimeFormat(time);
         }
         return arr;
     }
@@ -75,6 +72,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + super.toString() + " (by: " + formattedDate + " " + time + ")";
+        String formatTime = time.equals("") ? "" : ", " + time;
+        return "[D]" + super.toString() + " (by: " + formattedDate + formatTime + ")";
     }
 }

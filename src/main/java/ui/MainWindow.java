@@ -15,13 +15,9 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
+ * Referenced from https://se-education.org/guides/tutorials/javaFx.html
  */
 public class MainWindow extends AnchorPane {
-    private static final String LOGO = " ____            _        \n"
-            + "|     _   \\ _   _|  | _____ \n"
-            + "|    |   |  |   |    | | |/ / _ \\\n"
-            + "|    |_|   |   |_|  |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String FAREWELL = "Bye! Hope to see you soon!";
 
     @FXML

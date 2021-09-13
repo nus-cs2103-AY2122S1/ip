@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.UserInputError;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.util.Storage;
@@ -14,7 +13,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui) throws UserInputError {
+    public String execute(TaskList tasks, Ui ui) {
         assert index < tasks.getNumOfTasks();
         assert index > 0;
 

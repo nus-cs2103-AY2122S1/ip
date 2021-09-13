@@ -7,16 +7,8 @@ import duke.tasks.TaskList;
  * The Ui class that deals with interactions with the user.
  */
 public class Ui {
-    private static final String INDENT = "      ";
-    private static final String LINE =
-            "     _______________________________________\n";
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String INDENT = "   ";
     private final TaskList taskList;
-
     public Ui(TaskList tasklist) {
         this.taskList = tasklist;
     }
@@ -26,11 +18,9 @@ public class Ui {
      *
      * @param str String representing Duke output.
      */
-    public static String formatOutput(String str) {
+    public String formatOutput(String str) {
         StringBuilder sb = new StringBuilder();
-        sb.append(LINE);
-        str.lines().forEach(line -> sb.append("         ").append(line).append('\n'));
-        sb.append(LINE);
+        str.lines().forEach(line -> sb.append(INDENT).append(line).append('\n'));
         return sb.toString();
     }
 
@@ -40,14 +30,12 @@ public class Ui {
      * @param task Task just added.
      */
     public String addTaskOutput(Task task) {
-        String output =
-                "Got it. I've added this task:\n"
-                        + INDENT
-                        + task.toString()
-                        + "\nNow you have "
-                        + taskList.getNumOfTasks()
-                        + " tasks in the list.";
-        return formatOutput(output);
+        return "Got it. I've added this task:\n"
+                + INDENT
+                + task.toString()
+                + "\nNow you have "
+                + taskList.getNumOfTasks()
+                + " tasks in the list.";
     }
 
     /**
@@ -56,13 +44,11 @@ public class Ui {
      * @param task Task just deleted.
      */
     public String deleteTaskOutput(Task task) {
-        String output =
-                "Noted. I've removed this task:\n"
-                        + INDENT
-                        + task.toString()
-                        + "\nNow you have "
-                        + taskList.getNumOfTasks()
-                        + " tasks in the list.";
-        return formatOutput(output);
+        return "Noted. I've removed this task:\n"
+                + INDENT
+                + task.toString()
+                + "\nNow you have "
+                + taskList.getNumOfTasks()
+                + " tasks in the list.";
     }
 }

@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.UserInputError;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.util.Storage;
@@ -14,17 +13,17 @@ public class CompleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui) throws UserInputError {
+    public String execute(TaskList tasks, Ui ui) {
         assert index < tasks.getNumOfTasks();
         assert index > 0;
 
         Task task = tasks.getTask(index);
         if (task.isDone()) {
-            return ui.formatOutput("Great! But you have already completed this task!");
+            return "Great! But you have already completed this task!";
         } else {
             task.markDone();
             Storage.writeDatabase(tasks);
-            return ui.formatOutput("Nice! I've marked this task as done: \n" + task);
+            return "Nice! I've marked this task as done: \n" + task;
         }
     }
 }
