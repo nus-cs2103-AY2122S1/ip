@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -8,8 +7,8 @@ import java.util.ArrayList;
  * Contains the note list and all relevant list methods
  */
 public class NoteList {
-    private static ArrayList<Note> noteList;
-    private static int counter;
+    private static ArrayList<Note> noteList; // The array list containing all the user's notes
+    private static int counter; // Keeps track of the total number of tasks
 
     /**
      * Creates the noteList and a counter to keep track of the number of notes saved in the user's
@@ -21,7 +20,7 @@ public class NoteList {
     }
 
     /**
-     * Returns the noteList
+     * Returns the noteList.
      *
      * @return the noteList
      */
@@ -30,7 +29,7 @@ public class NoteList {
     }
 
     /**
-     * Returns the number of notes currently save in user's hard disk
+     * Returns the number of notes currently save in user's hard disk.
      *
      * @return the number of notes currently save in user's hard disk (counter member)
      */
@@ -39,7 +38,7 @@ public class NoteList {
     }
 
     /**
-     * Adds a note to the noteList
+     * Adds a note to the noteList and increments the total number of notes by 1.
      *
      * @param note the note that is to be added to the noteList
      */
@@ -49,29 +48,38 @@ public class NoteList {
     }
 
     /**
-     * Adds a note to the noteList and update the list of notes in user's hard disk
+     * Adds a note to the noteList and update the list of notes in user's hard disk.
      *
      * @param currNote the note that is to be added
      * @throws IOException if there is an error in appending the note to the list of notes
      * in user's hard disk
      */
-    public static void addNoteAndUpdate(Note currNote) throws IOException {
+    public static String addNoteAndUpdate(Note currNote) throws IOException {
+        // Add a note to the noteList and increments the total number of notes by 1
         NoteList.noteList.add(currNote);
         NoteList.counter++;
-        Storage.appendToNoteFile();
+
+        Storage.appendToNoteFile(); // Add the new note to the note file in user's hard disk
+
+        return Ui.noteAdded(currNote); // Display Jarvis' response after adding the note
     }
 
     /**
-     * Deletes a note to the noteList and update the list of notes in user's hard disk
+     * Deletes a note to the noteList and update the list of notes in user's hard disk.
      *
-     * @param currNote the note that is to be deleted
+     * @param noteNum the index of the note that is to be deleted
      * @throws IOException if there is an error in re-writing the list of notes without the
      * deleted note
      */
-    public static void deleteNoteAndUpdate(Note currNote) throws IOException {
-        NoteList.noteList.remove(currNote);
-        counter--;
-        Storage.rewriteNoteFile();
+    public static String deleteNoteAndUpdate(int noteNum) throws IOException {
+        // Delete the note from the noteList and decrement the total number of notes by 1
+        Note currNote = NoteList.getNoteList().get(noteNum);
+        NoteList.getNoteList().remove(currNote);
+        NoteList.counter--;
+
+        Storage.rewriteNoteFile(); // Delete the new note from the note file in user's hard disk
+
+        return Ui.noteDeleted(currNote); // Display Jarvis' response after deleting the note
     }
 
 }
