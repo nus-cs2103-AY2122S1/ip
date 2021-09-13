@@ -23,7 +23,7 @@ public enum Message {
             + "Version: The creator lost count...\n"
             + "Supported Features: help, bye, list, todo, deadline, event, done, delete, find, sort");
 
-    private String message;
+    private final String message;
 
     Message(String message) {
         this.message = message;
