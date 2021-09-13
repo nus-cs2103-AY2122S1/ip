@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Class that contains the task list and operations on the task list.
  */
 public class TaskList {
+
     private static final String INVALID_TASK_NUMBER_MESSAGE =
             "This is not a valid task number.";
 
@@ -33,11 +34,13 @@ public class TaskList {
      * Marks a specified task in the TaskList as done.
      *
      * @param taskNumber The task number that is used to specify which task to mark as done.
-     * @return A String containing the message to be shown to the user when a task is
-     * marked as done.
+     * @return The task that has just been marked as done.
+     * @throws IndexOutOfBoundsException If the number specified by the user is
+     * larger than the size of the Tasklist or is less than 0, an IndexOutOfBoundsException
+     * will be thrown.
      */
     public Task markDone(int taskNumber) throws IndexOutOfBoundsException {
-        Task completedTask = tasks.get(taskNumber);
+        Task completedTask = tasks.get(taskNumber - 1);
         completedTask.markDone();
         return completedTask;
     }
@@ -69,15 +72,22 @@ public class TaskList {
      * Adds a specified Task into the TaskList.
      *
      * @param task The specified Task to add into the TaskList.
-     * @return A String containing the message to be shown to the user when a task
-     * is added into the task list.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Deletes a specified Task from the Tasklist.
+     *
+     * @param taskNumber The specified Task to delete from the TaskList.
+     * @return The deleted Task.
+     * @throws IndexOutOfBoundsException If the number specified by the user is
+     * larger than the size of the Tasklist or is less than 0, an IndexOutOfBoundsException
+     * will be thrown.
+     */
     public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {
-        Task removedTask = tasks.get(taskNumber);
+        Task removedTask = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber);
         return removedTask;
     }

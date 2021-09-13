@@ -27,6 +27,11 @@ public class Event extends Task {
         return "E";
     }
 
+    @Override
+    public void setDateAndTime(String date, String time) {
+        this.at = date + " " + time;
+    }
+
     /**
      * Returns the String representation of the task details and timing of the Event.
      * This String will be used to save to the data file.

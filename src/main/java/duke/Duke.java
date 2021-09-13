@@ -32,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Used to run Duke using the CLI.
+     * Runs Duke using the CLI.
      */
     private void run() {
         //Welcome message

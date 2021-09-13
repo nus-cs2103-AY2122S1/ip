@@ -36,6 +36,11 @@ public class Deadline extends Task {
         return "D";
     }
 
+    public void setDateAndTime(String date, String time) {
+        this.byDate = LocalDate.parse(date);
+        this.byTime = LocalTime.parse(time);
+    }
+
     /**
      * Returns the String representation of the task details, date and time of the Deadline.
      * This String will be used to save to the data file.
