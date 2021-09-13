@@ -68,6 +68,7 @@ Here are the tasks in your list:
     2. [D][] ip (by: Sep 17 2021)
     3. [E][] team meeting (at: monday 7-8pm)
 ```
+
 ---
 ### Updating a task: `update`
 Updates a task according to the task id in the list.
