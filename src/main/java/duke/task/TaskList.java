@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieve value from a file on local storage to initialise a copy
+     * Retrieves value from a file on local storage to initialise a copy
      * of all the tasks saved in the file.
      *
      * @param file file which stores data about task from previous run session.

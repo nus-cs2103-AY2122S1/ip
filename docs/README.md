@@ -1,11 +1,12 @@
 # User Guide
 
-## Mr. Meeseeks 
-Meeseeks has features of a task manager. Existence is a pain for Meeseeks
-and they will complete their task as a task manager to 
-remove themselves from existence. Meeseeks can add, delete, modify, 
-find tasks and mark tasks as complete. It can also differentiate 
-3 types of task, deadlines, events and todos.
+## Meeseeks 
+Meeseeks is a task manager with the personality of [Mr. Meeseks](https://rickandmorty.fandom.com/wiki/Mr._Meeseeks), 
+a fictional character from the television series Rick and Morty. 
+Existence is a pain for Meeseeks and they will complete their 
+task as a task manager to remove themselves from existence. Meeseeks 
+can add, delete, modify, find tasks and mark tasks as complete. 
+It can also differentiate 3 types of task, deadlines, events and todos.
 
 ## Usage
 ### `todo <Task Name>` - Adds a todo
