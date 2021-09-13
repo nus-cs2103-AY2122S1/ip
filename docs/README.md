@@ -84,7 +84,7 @@ Updates a task according to the task id in the list.
     [T][] buy egg
    ```
 * #### Updating a deadline:
-  Format: `update <id> <description> /by <date>`
+  Format: `update <id> <updated description> /by <updated date>`
   * Please use the date format as such:`YYYY-MM-DD`
   * You can also update only the description or only the date, by omitting the field you do not want to change.
 
