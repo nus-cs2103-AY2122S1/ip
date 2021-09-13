@@ -46,6 +46,10 @@ public class Event extends Task {
         return "E | " + super.saveToFile() + "| " + this.dateOfEvent;
     }
 
+    /**
+     * Gets the date of the event.
+     * @return date of the event.
+     */
     public LocalDate getDate() {
         return this.dateOfEvent;
     }

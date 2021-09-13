@@ -17,7 +17,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * String representation of the ToDo object
+     * String representation of the ToDo object.
      */
     @Override
     public String toString() {

@@ -8,12 +8,12 @@ import duke.GUI;
 import java.io.IOException;
 
 /**
- * Represents the general delete command.
+ * Represents the general sort command.
  */
 public class SortCommand extends Command {
 
-    /** Constructor for the Delete command.
-     *
+    /**
+     * Constructor for the Sort command.
      * @param duke Duke chatbot that is in use.
      */
     public SortCommand(Duke duke) {

@@ -25,14 +25,14 @@ public class Duke {
     /**
      * Constructor for Duke chatbot.
      */
-    public Duke() {
+    public Duke() throws Exception {
         this.listOfTasks = TaskList.makeNewTaskList();
         this.storage = new Storage(Duke.FILE_PATH);
 
         try {
             this.loadSavedTasks();
         } catch (IOException | DukeUnableLoadTask e) {
-            System.err.println(GUI.sendErrorMessage(e));
+            throw e;
         }
 
     }
@@ -95,7 +95,6 @@ public class Duke {
      * @throws IOException if there is an error in writing the file.
      */
     public void saveTasks() throws IOException {
-        System.out.println("Saving tasks");
         this.storage.saveTasks(this.listOfTasks);
     }
 

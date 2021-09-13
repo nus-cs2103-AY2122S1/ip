@@ -13,8 +13,8 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     private final int INDEX;
 
-    /** Constructor for the Delete command.
-     *
+    /**
+     * Constructor for the Delete command.
      * @param duke Duke chatbot that is in use.
      * @param index index of the task to be deleted.
      */

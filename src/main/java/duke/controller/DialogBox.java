@@ -21,9 +21,9 @@ import java.util.Collections;
 import static javafx.scene.paint.Color.color;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Represents the controller for the DialogBox, which consists of an ImageView
+ * to show the persona's display picture and a label containing text from the
+ * persona speaking.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -73,7 +73,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Gets the duke response adn transforms it into a text bubble.
+     * Gets the duke response and transforms it into a text bubble.
      * @param s duke response based on user input.
      * @param iv pre-loaded picture of Duke.
      * @return DialogBox that encompasses duke response and duke picture.
@@ -87,6 +87,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Gets the opening message of Duke and transforms it into a text bubble.
+     * @param s duke's opening message.
+     * @param iv pre-loaded picture of Duke.
+     * @return DialogBox that encompasses duke opening message and picture.
+     */
     public static DialogBox getOpeningMessage(String s, Image iv) {
         DialogBox db = new DialogBox(s, iv);
         db.flip();
@@ -97,11 +103,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Transform error messages from Duke into a brighter colour to get attention
+     * Transforms error messages from Duke into a brighter colour to get attention
      * of user.
      */
     public void modifyColorForError() {
-        this.dialog.setTextFill(color(1,1,1));
+        this.dialog.setTextFill(color(1, 1, 1));
         this.setBackground(new Background(new BackgroundFill(color(1, 0, 0),
                 new CornerRadii(15),
                 null)));

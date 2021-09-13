@@ -18,8 +18,8 @@ public class DukeMissingTaskDescription extends DukeIncorrectInputs {
      * runtime polymorphism to deduce that the task is a todo.
      */
     public DukeMissingTaskDescription(ToDo todo, Throwable err) {
-        super(DukeMissingTaskDescription.PREFIX + " todo" +
-                DukeMissingTaskDescription.SUFFIX, err);
+        super(DukeMissingTaskDescription.PREFIX + " todo"
+                + DukeMissingTaskDescription.SUFFIX, err);
     }
 
     /**
@@ -27,8 +27,8 @@ public class DukeMissingTaskDescription extends DukeIncorrectInputs {
      * runtime polymorphism to deduce that the task is a deadline.
      */
     public DukeMissingTaskDescription(Deadline deadline, Throwable err) {
-        super(DukeMissingTaskDescription.PREFIX + " deadline" +
-                DukeMissingTaskDescription.SUFFIX, err);
+        super(DukeMissingTaskDescription.PREFIX + " deadline"
+                + DukeMissingTaskDescription.SUFFIX, err);
     }
 
     /**
@@ -36,7 +36,7 @@ public class DukeMissingTaskDescription extends DukeIncorrectInputs {
      * runtime polymorphism to deduce that the task is an event.
      */
     public DukeMissingTaskDescription(Event event, Throwable err) {
-        super(DukeMissingTaskDescription.PREFIX + "n event" +
-                DukeMissingTaskDescription.SUFFIX, err);
+        super(DukeMissingTaskDescription.PREFIX + "n event"
+                + DukeMissingTaskDescription.SUFFIX, err);
     }
 }

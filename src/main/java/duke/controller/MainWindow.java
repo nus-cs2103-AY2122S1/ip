@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -58,21 +59,20 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText().strip();
         String response = " ";
 
-        DialogBox userDB = null;
-        DialogBox dukeDB = null;
+        DialogBox userDb = null;
+        DialogBox dukeDb = null;
 
         try {
             response = this.getResponse(input);
-            userDB = DialogBox.getUserDialog(input, userImage);
-            dukeDB = DialogBox.getDukeDialog(response, dukeImage);
+            userDb = DialogBox.getUserDialog(input, userImage);
+            dukeDb = DialogBox.getDukeDialog(response, dukeImage);
         } catch (DukeException e) {
-            System.out.println("here");
-            dukeDB.modifyColorForError();
+            dukeDb.modifyColorForError();
         }
 
         dialogContainer.getChildren().addAll(
-                userDB,
-                dukeDB
+                userDb,
+                dukeDb
         );
 
         userInput.clear();
@@ -83,12 +83,13 @@ public class MainWindow extends AnchorPane {
      * @param input user input from keying into the TextField.
      * @return response from Duke.
      */
-    private String getResponse(String input) {
+    private String getResponse(String input) throws DukeException {
         String toReturn = "";
         try {
             toReturn = duke.getResponse(input);
         } catch (DukeException e) {
             toReturn = GUI.sendErrorMessage(e);
+            System.out.println("here");
             throw e;
         } finally {
             return toReturn;

@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Add a task into the list of tasks.
+     * Adds a task into the list of tasks.
      *
      * @param task the task to be added into the list of tasks.
      */
@@ -45,7 +45,7 @@ public class TaskList {
     }
 
     /**
-     * Create a TaskList object.
+     * Creates a TaskList object.
      *
      * @return a new TaskList that has no tasks stored.
      */
@@ -114,7 +114,7 @@ public class TaskList {
     }
 
     /**
-     * String representation of the TaskList object.
+     * Represents TaskList object in string.
      */
     @Override
     public String toString() {

@@ -1,6 +1,9 @@
 package duke.task;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.DukeIncorrectCommandWord;
+import duke.exception.DukeIncorrectTaskDescription;
+import duke.exception.DukeMissingTaskDescription;
 
 /**
  * Represents a Task object that can be added
@@ -72,13 +75,13 @@ public abstract class Task implements Comparable<Task> {
     private static void checkFormat(String firstWord, String[] taskArr) {
         switch (firstWord) {
         case "deadline":
-            if (taskArr[1].split("/by", 2).length < 2){
+            if (taskArr[1].split("/by", 2).length < 2) {
                 String[] emptyString = new String[2];
                 throw new DukeIncorrectTaskDescription(new Deadline(emptyString), new IllegalArgumentException());
             }
             return;
         case "event":
-            if (taskArr[1].split("/at", 2).length < 2){
+            if (taskArr[1].split("/at", 2).length < 2) {
                 String[] emptyString = new String[2];
                 throw new DukeIncorrectTaskDescription(new Event(emptyString), new IllegalArgumentException());
             }
@@ -111,6 +114,4 @@ public abstract class Task implements Comparable<Task> {
         String checker = this.isDone ? "X" : " ";
         return "[" + checker + "]" + " " + this.task;
     }
-
-    public abstract int compareTo(Task task);
 }
