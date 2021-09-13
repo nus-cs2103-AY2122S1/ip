@@ -6,9 +6,8 @@ DukeAgain is a desktop app for managing your tasks.
 To run DukeAgain, 
 
 1. Ensure Java Runtime Environment (JRE) `11` or above is installed on your device.
-2. Download and extract`duke_again.zip` from [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
-3. Copy the `.jar` file to the folder you want to use as the home folder for your DukeAgain
-4. Double-click the file to start the app, or run `duke -jar duke_again.jar` in the terminal to start DukeAgain.
+2. Download and extract `duke_again.zip` from [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+4. Double-click the `duke.jar` to start the app, or run `duke -jar duke.jar` in the terminal to start DukeAgain.
 
 ### Essential commands
 
@@ -30,7 +29,7 @@ You tasks are automatically saved to disk in the file `duke.txt`.
 
 ### Use aliases
 
-You tasks are automatically saved to disk in the file `duke.txt`.
+Shorthands to create todos, deadlines, and events.
 
 ## Usage
 
@@ -139,3 +138,57 @@ Here are the tasks in your list:
 3. [E][ ] Festival Meeting (at: 18 Sep 2021 16:00 to 18:00 -- bring dongle)
 ```
 
+### `done` - Marks task as done
+
+Marks task at `INDEX` in task list as complete.
+
+**Usage**: `done INDEX`
+
+**Example outcome:**
+
+```
+> done 2
+
+Nice! I've marked this task as done:
+[T][X] marked todo
+```
+
+### `delete` - Deletes task
+
+Deletes task at `INDEX`. **This process is irreversible.**
+
+**Usage**: `delete INDEX`
+
+**Example outcome:**
+
+```
+> delete 10
+
+Noted. I've removed this task:
+[D][ ] Assignment (by: 18 Sep 2021 16:00), check submission
+ Now you have 1 task in the list.
+```
+
+### `clear` - Deletes all tasks
+
+Deletes all tasks. **This process is irreversible**.
+
+**Usage**: `clear`
+
+**Example outcome**:
+
+```
+Task list was cleared.
+```
+
+### `greet` - Greets the user again
+
+Say hi to Duke.
+
+**Usage**: `greet`
+
+### `bye` - Quit DukeAgain
+
+Quits DukeAgain
+
+**Usage**: `bye`
