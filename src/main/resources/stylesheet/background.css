@@ -1,0 +1,6 @@
+.bodybg{
+    -fx-background-image: url("/image/background1.png");
+    -fx-background-size: 600 600;
+    -fx-background-attachment: fixed;
+    -fx-background-position: center;
+    }

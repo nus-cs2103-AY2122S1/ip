@@ -85,7 +85,7 @@ public class Ui {
     }
 
     public String helpMsg() {
-        return "Available commands:"
+        return "Available commands: "
                 + "todo, "
                 + "deadline, "
                 + "event, "
@@ -93,7 +93,7 @@ public class Ui {
                 + "done, "
                 + "delete, "
                 + "find\n"
-                + "for more format of commands input:\n"
+                + "for format of specific commands input:\n"
                 + "help {command}";
     }
 

@@ -44,3 +44,6 @@ src/main/out/production/main/duke/TaskList.class
 src/main/out/production/main/duke/Todo.class
 src/main/out/production/main/duke/Ui.class
 src/main/out/production/main/duke/WrongInputException.class
+src/main/resources/image/background.png
+src/main/resources/image/pokeball.png
+src/main/resources/image/textbox.png
