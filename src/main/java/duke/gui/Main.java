@@ -36,6 +36,7 @@ public class Main extends Application {
             Scene scene = new Scene(anchorPane);
             primaryStage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            primaryStage.setTitle("Naruto Nine-Tailed Jinchuriki");
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
