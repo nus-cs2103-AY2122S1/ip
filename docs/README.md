@@ -1,29 +1,42 @@
 # User Guide
 
-## Features 
+## Introduction
 
-### Feature-ABC
+This is a very simple program. It supports all essential features of a CS2103T iP project. You can use it to store some todo list, events and deadlines if you wish.
 
-Description of the feature.
+## Installation
 
-### Feature-XYZ
+Refer to our latest release on the [Github Page](https://github.com/zhenghanlee/ip) for download. Once you have downloaded the jar file, you can open the application via one of the following:
 
-Description of the feature.
+1. Double click the jar file.
+2. Run `java -jar Duke.jar` at the directory that the jar file is located.
 
-## Usage
+## Commands
 
-### `Keyword` - Describe action
+### `todo <name>`
 
-Describe the action and its outcome.
+Adds a todo task.
 
-Example of usage: 
+### `deadline <name> /by <yyyy-mm-dd>`
 
-`keyword (optional arguments)`
+Adds a task with a deadline.
 
-Expected outcome:
+### `event <name> /at <yyyy-mm-dd>`
 
-Description of the outcome.
+Adds an event with a date.
 
-```
-expected output
-```
+### `duration <name> /dura <minutes>`
+
+Adds an event/task with a duration (in minutes).
+
+### `list`
+
+List all the tasks/events.
+
+### `done <index>`
+
+Mark a task as done based on its index shown in the output of `list`.
+
+### `delete <index>`
+
+Deletes a task **forever** based on its index shown in the output of `list`.
