@@ -10,14 +10,12 @@ import duke.commands.Command;
 import duke.commands.CommandType;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
+import duke.commands.DoAfterCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListAllCommand;
 import duke.commands.TodoCommand;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
 
 /**
  * Class that represents a Parser object for parsing Strings to Commands
@@ -52,8 +50,8 @@ public class Parser {
 
                 // Determine index of task to delete
                 int index = Integer.parseInt(fullCommand.split(" ")[1]);
-                return new DeleteCommand(index);
 
+                return new DeleteCommand(index);
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
             }
@@ -84,7 +82,7 @@ public class Parser {
                 LocalDateTime dueDateTime = Parser.parseDateTime(fullCommand, CommandType.DEADLINE);
                 String deadlineDescription = Parser.parseDescription(fullCommand, CommandType.DEADLINE);
 
-                assert  !deadlineDescription.equals("") : "Description provided for Deadline cannot be empty!";
+                assert !deadlineDescription.equals("") : "Description provided for Deadline cannot be empty!";
 
                 return new DeadlineCommand(deadlineDescription, dueDateTime);
             } catch (DateTimeParseException e) {
@@ -106,6 +104,16 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
             }
+        case "doafter":
+            try {
+                Parser.validateInput(fullCommand, CommandType.DOAFTER);
+
+                LocalDateTime doAfterDateTime = Parser.parseDateTime(fullCommand, CommandType.DOAFTER);
+                String doAfterDescription = Parser.parseDescription(fullCommand, CommandType.DOAFTER);
+                return new DoAfterCommand(doAfterDescription, doAfterDateTime);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("☹ OOPS!!! Please provide a valid date.");
+            }
         case "find":
             Parser.validateInput(fullCommand, CommandType.FIND);
 
@@ -123,11 +131,13 @@ public class Parser {
     private static String parseDescription(String inputCommand, CommandType commandType) throws DukeException {
         switch (commandType) {
         case TODO:
-            return inputCommand.substring(ToDo.TODO_DESC_START);
+            return inputCommand.substring(TodoCommand.TODO_DESC_START);
         case EVENT:
-            return inputCommand.split("/at")[0].strip().substring(Event.EVENT_DESC_START);
+            return inputCommand.split("/at")[0].strip().substring(EventCommand.EVENT_DESC_START);
         case DEADLINE:
-            return inputCommand.split("/by")[0].strip().substring(Deadline.DEADLINE_DESC_START);
+            return inputCommand.split("/by")[0].strip().substring(DeadlineCommand.DEADLINE_DESC_START);
+        case DOAFTER:
+            return inputCommand.split(" /after ")[0].strip().substring(DoAfterCommand.DOAFTER_DESC_START);
         default:
             throw new DukeException("An error occurred in parsing the command! :(");
         }
@@ -141,6 +151,9 @@ public class Parser {
             break;
         case DEADLINE:
             rawDateTime = inputCommand.split("/by")[1].strip();
+            break;
+        case DOAFTER:
+            rawDateTime = inputCommand.split(" /after ")[1].strip();
             break;
         default:
             throw new DukeException("An error occurred in parsing the command! :(");
@@ -161,6 +174,16 @@ public class Parser {
         case TODO:
             if (inputCommand.split(" ").length <= 1) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            break;
+        case DOAFTER:
+            // Check for valid description provided
+            if (inputCommand.split(" /after ")[0].split(" ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
+            }
+            // Check for valid doAfter date provided
+            if (inputCommand.split(" /after ").length != 2) {
+                throw new DukeException("☹ OOPS!!! Please provide a valid do after date.");
             }
             break;
         case DEADLINE:

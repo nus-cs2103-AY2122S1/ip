@@ -12,6 +12,9 @@ import duke.util.Tasklist;
  */
 public class EventCommand extends Command {
 
+    /** Starting index of the description for an Event */
+    public static final int EVENT_DESC_START = 6;
+
     /** A String description of the Event by the user */
     private String description;
 

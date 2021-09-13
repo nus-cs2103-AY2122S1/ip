@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import duke.DukeException;
 import duke.tasks.Deadline;
+import duke.tasks.DoAfter;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
@@ -51,7 +52,6 @@ public class PersistentStorage {
             file.getParentFile().mkdirs();
             return new Tasklist();
         } else {
-            // File exists
             // Read data from file
             try {
                 Scanner fileReader = new Scanner(file);
@@ -72,31 +72,40 @@ public class PersistentStorage {
                 String[] allTasks = fileData.split("\n");
 
                 for (String task : allTasks) {
-                    //Split task string into tokens
+                    // Split task string into tokens
                     String[] tokens = task.split(" \\| ");
 
                     String taskType = tokens[0];
                     boolean isDone = tokens[1].equals("1");
                     String description = tokens[2];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                     String rawDateTimeInfo;
 
-                    if (tokens.length == 3) {
-                        ToDo item = new ToDo(description, isDone);
-                        storedTasks.addTask(item);
-                    } else {
+                    switch(taskType) {
+                    case "D":
                         rawDateTimeInfo = tokens[3];
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                        LocalDateTime dateTimeInfo = LocalDateTime.parse(rawDateTimeInfo, formatter);
-
-                        if (taskType.equals("D")) {
-                            // Task is a Deadline
-                            Deadline item = new Deadline(description, dateTimeInfo, isDone);
-                            storedTasks.addTask(item);
-                        } else {
-                            // Task is an Event
-                            Event item = new Event(description, dateTimeInfo, isDone);
-                            storedTasks.addTask(item);
-                        }
+                        LocalDateTime deadlineDateTime = LocalDateTime.parse(rawDateTimeInfo, formatter);
+                        Deadline deadline = new Deadline(description, deadlineDateTime, isDone);
+                        storedTasks.addTask(deadline);
+                        break;
+                    case "E":
+                        rawDateTimeInfo = tokens[3];
+                        LocalDateTime eventDateTime = LocalDateTime.parse(rawDateTimeInfo, formatter);
+                        Event event = new Event(description, eventDateTime, isDone);
+                        storedTasks.addTask(event);
+                        break;
+                    case "T":
+                        ToDo toDo = new ToDo(description, isDone);
+                        storedTasks.addTask(toDo);
+                        break;
+                    case "DA":
+                        rawDateTimeInfo = tokens[3];
+                        LocalDateTime doAfterDateTime = LocalDateTime.parse(rawDateTimeInfo, formatter);
+                        DoAfter doAfter = new DoAfter(description, doAfterDateTime, isDone);
+                        storedTasks.addTask(doAfter);
+                        break;
+                    default:
+                        throw new DukeException("There was an error in reading your file! :(");
                     }
                 }
                 fileReader.close();
@@ -110,10 +119,9 @@ public class PersistentStorage {
     /**
      * Saves tasks to the text file at the provided filepath.
      *
-     * @return True if the operation was successful and false otherwise
      * @throws DukeException if no such file found at the provided filepath
      */
-    public boolean saveTasks(Tasklist tasklist) throws DukeException {
+    public void saveTasks(Tasklist tasklist) throws DukeException {
         File file = new File(this.filepath);
         try {
             if (!file.exists()) {
@@ -134,8 +142,6 @@ public class PersistentStorage {
             FileWriter writer = new FileWriter(file);
             writer.write(taskData);
             writer.close();
-
-            return true;
         } catch (IOException e) {
             throw new DukeException("An error occurred while trying to save data to your file :(");
         }

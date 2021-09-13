@@ -9,9 +9,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** Starting index of the description for an Event */
-    public static final int EVENT_DESC_START = 6;
-
     private LocalDateTime eventTime;
 
     /**

@@ -11,6 +11,9 @@ import duke.util.Tasklist;
  */
 public class TodoCommand extends Command {
 
+    /** Starting index of a ToDo description */
+    public static final int TODO_DESC_START = 5;
+
     /** A String description of the ToDo */
     private String description;
 

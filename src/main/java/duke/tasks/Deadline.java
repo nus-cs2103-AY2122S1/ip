@@ -9,9 +9,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    /** Starting index of the description for a Deadline. */
-    public static final int DEADLINE_DESC_START = 9;
-
     /** A LocalDateTime object representing the due datetime. */
     private LocalDateTime dueDate;
 
