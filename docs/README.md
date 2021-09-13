@@ -15,10 +15,12 @@ To run DukeAgain,
 The following are the recognized formats for 3 different types of tasks (items in brackets are optional:
 
 - `todo DESCRIPTION`
-- `deadline DESCRIPTION /by [(yyyy-MM-dd) (HH:mm)] [/ DETAILS]`
-- `event DESCRIPTION /at [(yyyy-MM-dd) (HH:mm) ~ (yyyy-MM-dd) (HH:mm)] [(]/ DETAILS]`
+- `deadline DESCRIPTION /by START [/ OTHER_INFO]`
+- `event DESCRIPTION /at START [~ END] [/ OTHER_INFO]`
 - `find KEYWORDS`
 - ℹ️ `help` to learn other commands! 
+
+**Note**: Start and end dates and times can be represented as just a date, just a time, or both. See below for examples.
 
 ## Features 
 
@@ -77,14 +79,18 @@ Got it. I've added this task:
 
 Adds an event task with a *description*, optional start and end date and/or time, and optional extra descriptions.
 
-Examples of usage:
+**Usage**: `event DESCRIPTION /at START [~ END] [/ OTHER_INFO]`
+
+*Note*: `START` , `END` can be formatted as `yyyy-MM-dd` or time `HH:mm` or both `yyyy-MM-dd HH:mm`.
+
+**Examples of usage**:
 
 - `event Camp /at 2021-09-18 16:00 ~ 2021-09-20 18:00`
 - `event Festival Meeting /at 2021-09-18 16:00 ~ 18:00 / bring dongle`
 - `event Short Meeting /at 2021-09-11 19:00 / bring dongle`
 - `event minimal event /at 12:00`
 
-Example outcome:
+**Example outcome**:
 
 ```
 > event Festival Meeting /at 2021-09-18 16:00 ~ 18:00 / bring dongle
@@ -98,19 +104,38 @@ Got it. I've added this task:
 
 Adds an deadline task with a *description*, optional start and end date and/or time, and optional extra descriptions.
 
-Examples of usage:
+**Usage**: `deadline DESCRIPTION /by START [/ OTHER_INFO]`
+
+*Note*: `START` can be formatted as `yyyy-MM-dd` or time `HH:mm` or both `yyyy-MM-dd HH:mm`.
+
+**Examples of usage**:
 
 - `deadline Assignment /by 2021-09-18 16:00 / check submission`
 - `deadline Script /by 23:59 / email Jess`
 - `event minimal deadline /by 12:00`
 
-Example outcome:
+**Example outcome**:
 
 ```
-> deadline Festival Meeting /at 2021-09-18 16:00 ~ 18:00 / bring dongle
+> deadline Assignment /by 2021-09-18 16:00 / check submission
 
 Got it. I've added this task:
-[E][ ] Festival Meeting (at: 18 Sep 2021 16:00 to 18:00 -- bring dongle)
+[D][ ] Assignment (by: 18 Sep 2021 16:00), check submission
  Now you have 8 tasks in the list.
+```
+
+### `list` - Prints all tasks
+
+Prints all tasks.
+
+**Usage**: `list`
+
+**Example outcome**:
+
+```
+Here are the tasks in your list:
+1. [T][ ] sample task
+2. [D][ ] Assignment (by: 18 Sep 2021 16:00), check submission
+3. [E][ ] Festival Meeting (at: 18 Sep 2021 16:00 to 18:00 -- bring dongle)
 ```
 
