@@ -120,7 +120,17 @@ public class DukeFx extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        // initial greeting message
+        greet(dialogContainer);
+
         // more code to be added here later
+    }
+
+    private void greet(VBox dialogContainer) {
+        Label greetMessage = new Label("Greetings!\nThis is MemoCat.\nHow can I help you?");
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(greetMessage, new ImageView(duke)));
     }
 
     /**
@@ -168,10 +178,10 @@ public class DukeFx extends Application {
     /**
      * Add user and Duke dialog for bye.
      *
-     * @param vBox The dialog container.
+     * @param dialogContainer The dialog container.
      */
-    private void addByeDialog(VBox vBox) {
-        vBox.getChildren().addAll(
+    private void addByeDialog(VBox dialogContainer) {
+        dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(new Label("bye"), new ImageView(user)),
                 DialogBox.getDukeDialog(new Label("Bye. See you next time!"), new ImageView(duke))
         );
@@ -192,6 +202,7 @@ public class DukeFx extends Application {
      * Exit the app after 1 second.
      */
     private void exitApp() {
+        userInput.clear();
         addByeDialog(dialogContainer);
         exitAfter(1);
     }
