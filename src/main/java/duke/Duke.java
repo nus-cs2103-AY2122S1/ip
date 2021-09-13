@@ -40,16 +40,16 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks);
-        boolean didUserEnd = false;
+        boolean hasUserEnd = false;
 
         //Main functionality of Duke
-        while (!didUserEnd) {
+        while (!hasUserEnd) {
             String command = "";
             if (sc.hasNextLine()) {
                 command = sc.nextLine().trim();
             }
             if (command.equalsIgnoreCase("bye")) {
-                didUserEnd = true;
+                hasUserEnd = true;
                 ui.printGoodbyeMessage();
                 storage.save(tasks);
             } else {
