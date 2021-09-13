@@ -9,11 +9,17 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class BotDialogBox extends HBox {
@@ -43,6 +49,18 @@ public class BotDialogBox extends HBox {
         }
         if (isContinued) {
             displayPicture.setVisible(false);
+        } else {
+            Circle clip = new Circle();
+            clip.setRadius(120);
+            displayPicture.setClip(clip);
+
+            SnapshotParameters snapshotParameters = new SnapshotParameters();
+            snapshotParameters.setFill(Color.TRANSPARENT);
+            WritableImage img = displayPicture.snapshot(snapshotParameters, null);
+
+            displayPicture.setClip(null);
+            displayPicture.setEffect(new DropShadow(20, Color.BLACK));
+            displayPicture.setImage(img);
         }
         displayText(text, delay);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
