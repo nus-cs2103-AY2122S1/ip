@@ -34,7 +34,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final String filePath = "data/tasks.txt";
+    private final String filePath = "tasks.txt";
     private final double vValue = 1.0;
     private final double stageMinHeight = 600.0;
     private final double stageMinWidth = 400.0;
