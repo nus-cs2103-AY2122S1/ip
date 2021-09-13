@@ -2,7 +2,9 @@ package duke;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class DukeFx extends Application {
 
@@ -144,15 +147,53 @@ public class DukeFx extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
         ImageView userImageView = new ImageView(user);
         ImageView dukeImageView = new ImageView(duke);
         userImageView.setClip(new Circle());
         dukeImageView.setClip(new Circle());
+
+        if (userInput.getText().equals("bye")) {
+            exitApp();
+            return;
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+    }
+
+    /**
+     * Add user and Duke dialog for bye.
+     *
+     * @param vBox The dialog container.
+     */
+    private void addByeDialog(VBox vBox) {
+        vBox.getChildren().addAll(
+                DialogBox.getUserDialog(new Label("bye"), new ImageView(user)),
+                DialogBox.getDukeDialog(new Label("Bye. See you next time!"), new ImageView(duke))
+        );
+    }
+
+    /**
+     * Exit app after the stated seconds.
+     *
+     * @param seconds Number of seconds before exiting.
+     */
+    private void exitAfter(int seconds) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(seconds));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
+    }
+
+    /**
+     * Exit the app after 1 second.
+     */
+    private void exitApp() {
+        addByeDialog(dialogContainer);
+        exitAfter(1);
     }
 
     /**
@@ -193,7 +234,7 @@ public class DukeFx extends Application {
             return "Your tasks have been sorted.\n" + tasks.toString();
         default:
             // Message for unrecognised task type
-            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "OH NO !!! I'm sorry, but I don't know what that means :-(";
         }
     }
 
@@ -220,7 +261,7 @@ public class DukeFx extends Application {
             }
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command done is not followed by a number
-            return "☹ OOPS!!! The index of a task done must be an integer.";
+            return "OH NO!!! The index of a task done must be an integer.";
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -325,7 +366,7 @@ public class DukeFx extends Application {
             }
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             // command delete is not followed by a number
-            return "☹ OOPS!!! The index of a task to be deleted must be an integer.";
+            return "OH NO!!! The index of a task to be deleted must be an integer.";
         } catch (DukeException e) {
             return e.getMessage();
         }
