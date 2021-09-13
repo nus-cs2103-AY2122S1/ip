@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     /** Initializes */
     @FXML
     public void initialize() {
-        String output = "     Hello! I'm duke.Duke\n"
+        String output = "     Hello! I'm duke\n"
                 + "     What can I do for you?\n";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
