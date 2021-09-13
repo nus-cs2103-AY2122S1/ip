@@ -9,56 +9,61 @@ import retriever.task.Task;
  * user and the chatbot.
  */
 public class Ui {
+    // Response would be stored here
     private static String retrieverResponse;
 
     // Help Section Strings.
-    private static String welcomeToHelpSectionMessage = "Master, I shall guide you to my best ability to smell.";
-    private static String byeCommandMessage = "Use the bye command to end the session.";
-    private static String byeCommandExample = "Command Example: bye";
-    private static String deadlineCommandMessage = "Use the deadline command to add a deadline type task.";
-    private static String deadlineCommandExample = "Command Example: deadline CS2103T iP /by 23/09/2021";
-    private static String deadlineCommandFormat = "-> deadline TASK_DESCRIPTION /by DD/MM/YYYY";
-    private static String deleteCommandMessage = "Use the delete command to delete a task.";
-    private static String deleteCommandExample = "Command Example: delete 4";
-    private static String deleteCommandFormat = "-> delete TASK_NUMBER";
-    private static String doneCommandMessage = "Use the done command to mark a task as done.";
-    private static String doneCommandExample = "Command Example: done 3";
-    private static String doneCommandFormat = "-> done TASK_NUMBER";
-    private static String eventCommandMessage = "Use the event command to add an event type task.";
-    private static String eventCommandExample = "Command Example: event Apple iPhone 13 /at 14/09/2021";
-    private static String eventCommandFormat = "-> event TASK_DESCRIPTION /at DD/MM/YYYY";
-    private static String findCommandMessage = "Use the find command to find tasks.";
-    private static String findCommandExample = "Command Example: find notes";
-    private static String findCommandFormat = "-> find KEYWORD";
-    private static String helpCommandMessage = "Use the help command to open the help section.";
-    private static String helpCommandExample = "Command Example: help";
-    private static String listCommandMessage = "Use the list command to view the tasks "
+    private static final String WELCOME_TO_HELP_SECTION_MESSAGE = "Master, I shall guide you to my best ability to smell.";
+    private static final String BYE_COMMAND_MESSAGE = "Use the bye command to end the session.";
+    private static final String BYE_COMMAND_EXAMPLE = "Command Example: bye";
+    private static final String DEADLINE_COMMAND_MESSAGE = "Use the deadline command to add a deadline type task.";
+    private static final String DEADLINE_COMMAND_EXAMPLE = "Command Example: deadline CS2103T iP /by 23/09/2021";
+    private static final String DEADLINE_COMMAND_FORMAT = "-> deadline TASK_DESCRIPTION /by DD/MM/YYYY";
+    private static final String DELETE_COMMAND_MESSAGE = "Use the delete command to delete a task.";
+    private static final String DELETE_COMMAND_EXAMPLE = "Command Example: delete 4";
+    private static final String DELETE_COMMAND_FORMAT = "-> delete TASK_NUMBER";
+    private static final String DONE_COMMAND_MESSAGE = "Use the done command to mark a task as done.";
+    private static final String DONE_COMMAND_EXAMPLE = "Command Example: done 3";
+    private static final String DONE_COMMAND_FORMAT = "-> done TASK_NUMBER";
+    private static final String EVENT_COMMAND_MESSAGE = "Use the event command to add an event type task.";
+    private static final String EVENT_COMMAND_EXAMPLE = "Command Example: event Apple iPhone 13 /at 14/09/2021";
+    private static final String EVENT_COMMAND_FORMAT = "-> event TASK_DESCRIPTION /at DD/MM/YYYY";
+    private static final String FIND_COMMAND_MESSAGE = "Use the find command to find tasks.";
+    private static final String FIND_COMMAND_EXAMPLE = "Command Example: find notes";
+    private static final String FIND_COMMAND_FORMAT = "-> find KEYWORD";
+    private static final String HELP_COMMAND_MESSAGE = "Use the help command to open the help section.";
+    private static final String HELP_COMMAND_EXAMPLE = "Command Example: help";
+    private static final String LIST_COMMAND_MESSAGE = "Use the list command to view the tasks "
             + "currently present in the task list.";
-    private static String listCommandExample = "Command Example: list";
-    private static String todoCommandMessage = "Use the todo command to add a todo type task.";
-    private static String todoCommandExample = "Command Example: todo laundry";
-    private static String todoCommandFormat = "-> todo TASK_DESCRIPTION";
-    private static String viewCommandMessage = "Use the view command to view scheduled tasks for a day.";
-    private static String viewCommandExample = "Command Example: view 23/09/2021";
-    private static String viewCommandFormat = "-> view DD/MM/YYYY";
+    private static final String LIST_COMMAND_EXAMPLE = "Command Example: list";
+    private static final String TODO_COMMAND_MESSAGE = "Use the todo command to add a todo type task.";
+    private static final String TODO_COMMAND_EXAMPLE = "Command Example: todo laundry";
+    private static final String TODO_COMMAND_FORMAT = "-> todo TASK_DESCRIPTION";
+    private static final String VIEW_COMMAND_MESSAGE = "Use the view command to view scheduled tasks for a day.";
+    private static final String VIEW_COMMAND_EXAMPLE = "Command Example: view 23/09/2021";
+    private static final String VIEW_COMMAND_FORMAT = "-> view DD/MM/YYYY";
 
     // Predetermined strings.
-    private String welcomeMessage = "Hello, I am Retriever\nHow Can I Help You Today?";
-    private String goodByeMessage = "-> Sad To See You Go!";
-    private String emptyListMessage = "My Memory Is Empty, Please Feed Items!";
-    private String printListMessage = "-> Your Tasks, My Master:";
-    private String goodBoyMessage = "Woof! Whose a Good Boy?";
-    private String badBoyMessage = "Woof! Whose a Bad Boy?";
-    private String scheduleMessage = "Master, You are Busy For The Day...";
-    private String logo = "\t  __      ^\n"
+    private final String WELCOME_MESSAGE = "Hello, I am Retriever\nHow Can I Help You Today?";
+    private final String GOOD_BYE_MESSAGE = "-> Sad To See You Go!";
+    private final String EMPTY_LIST_MESSAGE = "My Memory Is Empty, Please Feed Items!";
+    private final String NO_TASK_FOUND_MESSAGE = "Sorry Master, I Couldn't Smell And Find What You Asked For!"
+            + "\n (Task With the Given Keyword Does Not Exist)\n";
+    private final String PRINT_LIST_MESSAGE = "-> Your Tasks, My Master:";
+    private final String GOOD_BOY_MESSAGE = "Woof! Whose a Good Boy?";
+    private final String BAD_BOY_MESSAGE = "Woof! Whose a Bad Boy?";
+    private final String SCHEDULE_EMPTY_MESSAGE = "Master, You Can Play With Me, No Scheduled Tasks For The "
+            + "Day, Woooof!";
+    private final String SCHEDULE_MESSAGE = "Master, You are Busy For The Day...";
+
+    // Dog Logo
+    private final String LOGO = "\t  __      ^\n"
             + "\to'')}____//\n"
             + "\t`_'      )\n"
             + "\t(_(_/-(_/\n";
 
-
-
     /**
-     * Sets up the scanner to take in user input.
+     * Initializes the Ui class.
      */
     public Ui() {
     }
@@ -67,17 +72,17 @@ public class Ui {
      * Prints the help section.
      */
     public static void printHelpSection() {
-        retrieverResponse = welcomeToHelpSectionMessage + "\n\n"
-                + byeCommandMessage + "\n" + byeCommandExample + "\n\n"
-                + deadlineCommandMessage + "\n" + deadlineCommandFormat + "\n" + deadlineCommandExample + "\n\n"
-                + eventCommandMessage + "\n" + eventCommandFormat + "\n" + eventCommandExample + "\n\n"
-                + todoCommandMessage + "\n" + todoCommandFormat + "\n" + todoCommandExample + "\n\n"
-                + deleteCommandMessage + "\n" + deleteCommandFormat + "\n" + deleteCommandExample + "\n\n"
-                + doneCommandMessage + "\n" + doneCommandFormat + "\n" + doneCommandExample + "\n\n"
-                + findCommandMessage + "\n" + findCommandFormat + "\n" + findCommandExample + "\n\n"
-                + listCommandMessage + "\n" + listCommandExample + "\n\n"
-                + helpCommandMessage + "\n" + helpCommandExample + "\n\n"
-                + viewCommandMessage + "\n" + viewCommandFormat + "\n" + viewCommandExample + "\n\n";
+        retrieverResponse = WELCOME_TO_HELP_SECTION_MESSAGE + "\n\n"
+                + BYE_COMMAND_MESSAGE + "\n" + BYE_COMMAND_EXAMPLE + "\n\n"
+                + DEADLINE_COMMAND_MESSAGE + "\n" + DEADLINE_COMMAND_FORMAT + "\n" + DEADLINE_COMMAND_EXAMPLE + "\n\n"
+                + EVENT_COMMAND_MESSAGE + "\n" + EVENT_COMMAND_FORMAT + "\n" + EVENT_COMMAND_EXAMPLE + "\n\n"
+                + TODO_COMMAND_MESSAGE + "\n" + TODO_COMMAND_FORMAT + "\n" + TODO_COMMAND_EXAMPLE + "\n\n"
+                + DELETE_COMMAND_MESSAGE + "\n" + DELETE_COMMAND_FORMAT + "\n" + DELETE_COMMAND_EXAMPLE + "\n\n"
+                + DONE_COMMAND_MESSAGE + "\n" + DONE_COMMAND_FORMAT + "\n" + DONE_COMMAND_EXAMPLE + "\n\n"
+                + FIND_COMMAND_MESSAGE + "\n" + FIND_COMMAND_FORMAT + "\n" + FIND_COMMAND_EXAMPLE + "\n\n"
+                + LIST_COMMAND_MESSAGE + "\n" + LIST_COMMAND_EXAMPLE + "\n\n"
+                + HELP_COMMAND_MESSAGE + "\n" + HELP_COMMAND_EXAMPLE + "\n\n"
+                + VIEW_COMMAND_MESSAGE + "\n" + VIEW_COMMAND_FORMAT + "\n" + VIEW_COMMAND_EXAMPLE + "\n\n";
     }
 
     /**
@@ -93,7 +98,7 @@ public class Ui {
      * Prints the welcome message.
      */
     public void printWelcomeMessage() {
-        retrieverResponse = welcomeMessage + "\n" + logo + "\n"
+        retrieverResponse = WELCOME_MESSAGE + "\n" + LOGO + "\n"
                 + "Need Help? Type 'help'" + "\n" + "in the text field below." ;
     }
 
@@ -101,7 +106,7 @@ public class Ui {
      * Prints the goodbye message.
      */
     public void printGoodByeMessage() {
-        retrieverResponse = goodByeMessage;
+        retrieverResponse = GOOD_BYE_MESSAGE;
     }
 
     /**
@@ -131,7 +136,7 @@ public class Ui {
      * @param taskListLength The length of the task list, after deleting the task.
      */
     public void printTaskDeleted(Task task, int taskListLength) {
-        retrieverResponse = badBoyMessage + "\n"
+        retrieverResponse = BAD_BOY_MESSAGE + "\n"
                 + "Task Deleted!\n"
                 + task
                 + "\nYou Owe Me " + taskListLength + " Treat(s), Master!";
@@ -143,7 +148,7 @@ public class Ui {
      * @param task The task that has been done.
      */
     public void printTaskMarkedAsDone(Task task) {
-        retrieverResponse = goodBoyMessage + "\n"
+        retrieverResponse = GOOD_BOY_MESSAGE + "\n"
                 + "Task Done!\n"
                 + task;
     }
@@ -155,8 +160,7 @@ public class Ui {
      */
     public void printTasksFoundByKeyword(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            retrieverResponse = "Sorry Master, I Couldn't Smell And Find What You Asked For!"
-                    + "\n (Task With the Given Keyword Does Not Exist)\n";
+            retrieverResponse = NO_TASK_FOUND_MESSAGE;
             return;
         }
 
@@ -176,11 +180,12 @@ public class Ui {
      */
     public void printTasksScheduledForTheDay(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            retrieverResponse = "Master, You Can Play With Me, No Scheduled Tasks For The Day, Woooof!";
+            retrieverResponse = SCHEDULE_EMPTY_MESSAGE;
             return;
         }
 
-        retrieverResponse = scheduleMessage + "\n";
+        retrieverResponse = SCHEDULE_MESSAGE + "\n";
+
         for (int i = 0; i < taskList.size(); i++) {
             retrieverResponse += (i + 1) + ". " + taskList.get(i) + "\n";
         }
@@ -194,9 +199,9 @@ public class Ui {
     public void printTaskList(ArrayList<Task> taskList) {
         // If the list is empty
         if (taskList.size() == 0) {
-            retrieverResponse = emptyListMessage;
+            retrieverResponse = EMPTY_LIST_MESSAGE;
         } else {
-            retrieverResponse = printListMessage + "\n";
+            retrieverResponse = PRINT_LIST_MESSAGE + "\n";
             for (int i = 0; i < taskList.size(); i++) {
                 retrieverResponse += ((i + 1) + ". " + taskList.get(i)) + "\n";
             }
