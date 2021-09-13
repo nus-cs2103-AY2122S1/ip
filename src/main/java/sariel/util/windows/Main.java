@@ -33,7 +33,6 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setSariel(sariel);
             TaskInputWindow.setDuke(sariel);
             stage.setTitle("Sariel");
-            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
