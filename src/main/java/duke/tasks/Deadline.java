@@ -66,6 +66,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        if (!by.equals("")) {
+            return "[D]" + super.toString() + " (by:" + by + ")";
+        } else {
+            return "[D]" + super.toString();
+        }
     }
 }

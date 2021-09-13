@@ -82,6 +82,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        if (!at.equals("")) {
+            return "[E]" + super.toString() + " (at:" + at + ")";
+        } else {
+            return "[E]" + super.toString();
+        }
     }
 }

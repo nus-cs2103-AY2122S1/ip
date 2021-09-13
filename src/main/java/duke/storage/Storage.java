@@ -116,7 +116,8 @@ public class Storage {
                     Event e = (Event) t;
                     bw.write(e + "\n");
                 } else {
-                    bw.write(t + "\n");
+                    Todo todo = (Todo) t;
+                    bw.write(todo + "\n");
                 }
             }
             bw.close();

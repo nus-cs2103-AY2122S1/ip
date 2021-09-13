@@ -68,7 +68,7 @@ public class Duke {
         System.out.flush();
         System.setOut(old);
 
-        return "Uncle says:\n" + stream.toString();
+        return stream.toString();
     }
 
     public String introduceDuke() {
@@ -81,7 +81,7 @@ public class Duke {
         System.out.flush();
         System.setOut(old);
 
-        return "Uncle says:\n" + stream.toString();
+        return stream.toString();
     }
 
     /**
