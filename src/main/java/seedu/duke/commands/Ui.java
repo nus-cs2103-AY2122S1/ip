@@ -26,6 +26,14 @@ public class Ui {
     public static final String ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND = "DukeStorageLoadException: Data must have saved in a wrong format.";
     public static final String ERROR_MESSAGE_ACTION_OUT_OF_BOUND = "DukeActionOutOfBoundException: There is no such index from the storage.";
 
+    public static final String TIMETABLE_NO_SCEDULE_SET = "You have not set any schedule yet!";
+    public static final String TIMETABLE_CLEARED_DAY_PLAN = "Plans for the day is cleared";
+    public static final String TIMETABLE_TASK_ADDED = "Task added to schedule";
+
+    public static final String DAYPLAN_EDIT_SUCCESSFULLY = "Changes have been made successfully.";
+    public static final String DAYPLAN_EDIT_FAILED = "Unable to make changes to the Timetable due to clashes. Please try again.";
+    public static final String DAYPLAN_NO_SCHEDULED_TASKS = "You have no scheduled tasks today!";
+
     /**
      * Prints out the common Ui Messages with proper formatting.
      * 

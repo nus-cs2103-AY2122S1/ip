@@ -53,7 +53,6 @@ public class TaskList {
             Task doneTask = this.taskList.get(index).markAsDone();
             this.taskList.set(index, doneTask);
             return doneTask;
-
         } catch (IndexOutOfBoundsException err) {
             throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_ACTION_OUT_OF_BOUND);
         }

@@ -7,19 +7,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import seedu.duke.commands.Ui;
-import seedu.duke.exceptions.action.DukeActionOutOfBoundException;
 import seedu.duke.exceptions.storage.DukeStorageDeleteException;
 import seedu.duke.exceptions.storage.DukeStorageLoadException;
 import seedu.duke.exceptions.storage.DukeStorageSaveException;
 import seedu.duke.exceptions.storage.DukeStorageUpdateException;
-import seedu.duke.tasks.AfterTask;
-import seedu.duke.tasks.Deadline;
-import seedu.duke.tasks.Events;
-import seedu.duke.tasks.PeriodTask;
-import seedu.duke.tasks.ScheduledTask;
 import seedu.duke.tasks.Task;
-import seedu.duke.tasks.TimedTask;
-import seedu.duke.tasks.ToDos;
 
 public class Storage {
     private static final String STORAGE_ISDONE_FALSE = "| 0 |";
@@ -60,63 +52,33 @@ public class Storage {
                 switch (eventType) {
 
                 case "T":
-                    ToDos todos = new ToDos(getDescriptions(storageDataArray), getIsDoneFromStorage(storageIsDone));
-                    if (currLine.contains(" | after")) {
-                        String afterTaskDescription = currLine.split(" /| after ")[1];
-                        todos.setAfterTask(new AfterTask(afterTaskDescription));
-                    }
-                    currList.add(todos);
+                    StorageAddToDos getToDosCommand = new StorageAddToDos();
+                    currList.add(getToDosCommand.execute(currLine, storageDataArray, storageIsDone));
                     break;
 
                 case "D":
-                    Deadline deadline = new Deadline(getDescriptions(storageDataArray),
-                            getDateTimeLocation(storageDataArray), getIsDoneFromStorage(storageIsDone));
-                    if (currLine.contains(" | after")) {
-                        String afterTaskDescription = currLine.split(" /| after ")[1];
-                        deadline.setAfterTask(new AfterTask(afterTaskDescription));
-                    }
-                    currList.add(deadline);
+                    StorageAddDeadline getDeadlineCommand = new StorageAddDeadline();
+                    currList.add(getDeadlineCommand.execute(currLine, storageDataArray, storageIsDone));
                     break;
 
                 case "E":
-                    Events event = new Events(getDescriptions(storageDataArray), getDateTimeLocation(storageDataArray),
-                            getIsDoneFromStorage(storageIsDone));
-                    if (currLine.contains(" | after")) {
-                        String afterTaskDescription = currLine.split(" /| after ")[1];
-                        event.setAfterTask(new AfterTask(afterTaskDescription));
-                    }
-                    currList.add(event);
+                    StorageAddEvents getEventsCommand = new StorageAddEvents();
+                    currList.add(getEventsCommand.execute(currLine, storageDataArray, storageIsDone));
                     break;
 
                 case "TT":
-                    TimedTask timedTask = new TimedTask(getDescriptions(storageDataArray),
-                            getDateTimeLocation(storageDataArray), getIsDoneFromStorage(storageIsDone));
-                    if (currLine.contains(" | after")) {
-                        String afterTaskDescription = currLine.split(" /| after ")[1];
-                        timedTask.setAfterTask(new AfterTask(afterTaskDescription));
-                    }
-                    currList.add(timedTask);
+                    StorageAddTimedTask getTimedTaskCommand = new StorageAddTimedTask();
+                    currList.add(getTimedTaskCommand.execute(currLine, storageDataArray, storageIsDone));
                     break;
 
                 case "PT":
-                    PeriodTask periodTask = new PeriodTask(getDescriptions(storageDataArray),
-                            periodTaskGetFrom(storageDataArray), periodTaskGetTo(storageDataArray));
-                    if (currLine.contains(" | after")) {
-                        String afterTaskDescription = currLine.split(" /| after ")[1];
-                        periodTask.setAfterTask(new AfterTask(afterTaskDescription));
-                    }
-                    currList.add(periodTask);
+                    StorageAddPeriodTask getPeriodTaskCommand = new StorageAddPeriodTask();
+                    currList.add(getPeriodTaskCommand.execute(currLine, storageDataArray, storageIsDone));
                     break;
 
                 case "ST":
-                    ScheduledTask scheduledTask = new ScheduledTask(getDescriptions(storageDataArray),
-                            scheduledTaskGetDate(storageDataArray), scheduledTaskGetFrom(storageDataArray),
-                            scheduledTaskGetTo(storageDataArray));
-                    if (currLine.contains(" | after")) {
-                        String afterTaskDescription = currLine.split(" /| after ")[1];
-                        scheduledTask.setAfterTask(new AfterTask(afterTaskDescription));
-                    }
-                    currList.add(scheduledTask);
+                    StorageAddScheduledTask getScheduledTaskCommand = new StorageAddScheduledTask();
+                    currList.add(getScheduledTaskCommand.execute(currLine, storageDataArray, storageIsDone));
                     break;
 
                 default:
@@ -166,16 +128,11 @@ public class Storage {
             Scanner sc = new Scanner(this.data);
             while (sc.hasNextLine()) {
                 currLine = sc.nextLine();
-                if (count == index) {
-                    currLine = currLine.replace(Storage.STORAGE_ISDONE_FALSE, Storage.STORAGE_ISDONE_TRUE);
-                    if (currLine.contains(" | after")) {
-                        currLine = currLine.split(" \\| after")[0];
-                    }
-                }
+                currLine = updateStringIfIsTheCurrentIndex(count, index, currLine);
                 stringToAppend += currLine + "\n";
                 count++;
             }
-            clearsFileAndWrite(stringToAppend);
+            this.clearsFileAndWrite(stringToAppend);
             sc.close();
         } catch (IOException err) {
             throw new DukeStorageUpdateException(err.toString());
@@ -198,9 +155,7 @@ public class Storage {
             Scanner sc = new Scanner(this.data);
             while (sc.hasNextLine()) {
                 currLine = sc.nextLine();
-                if (count == index) {
-                    currLine += " | after " + description;
-                }
+                currLine = amendIfIsToUpdateAfterTask(count, index, currLine, description);
                 stringToAppend += currLine + "\n";
                 count++;
             }
@@ -228,41 +183,13 @@ public class Storage {
             Scanner sc = new Scanner(this.data);
             while (sc.hasNextLine()) {
                 currLine = sc.nextLine();
-                if (count != index) {
-                    stringToAppend += currLine + "\n";
-                }
+                stringToAppend = amendStringIfCountNotIndex(count, index, stringToAppend, currLine);
                 count++;
             }
             clearsFileAndWrite(stringToAppend);
             sc.close();
         } catch (IOException err) {
             throw new DukeStorageLoadException(Ui.ERROR_MESSAGE_FILE_NOT_FOUND);
-        }
-    }
-
-    private boolean getIsDoneFromStorage(String storageIsDone) {
-        assert !storageIsDone.equals(null) : "Storage isDone value should not be null";
-        if (storageIsDone.contains("1")) {
-            return true;
-        }
-        return false;
-    }
-
-    private String getDescriptions(String[] storageDataArray) {
-        assert storageDataArray.length > 1 : "storageDataArray length should be greater than 1";
-        try {
-            return storageDataArray[2];
-        } catch (ArrayIndexOutOfBoundsException err) {
-            throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND);
-        }
-    }
-
-    private String getDateTimeLocation(String[] storageDataArray) {
-        assert storageDataArray.length > 2 : "storageDataArray length should be greater than 2";
-        try {
-            return storageDataArray[3];
-        } catch (ArrayIndexOutOfBoundsException err) {
-            throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND);
         }
     }
 
@@ -276,28 +203,38 @@ public class Storage {
         }
     }
 
-    private String periodTaskGetFrom(String[] storageDataArray) {
-        String periodDate = storageDataArray[3];
-        return periodDate.split(" and ")[0];
+    private String updateStringIfIsTheCurrentIndex(int count, int index, String curr) {
+        String currLine = curr;
+        if (count == index) {
+            currLine = currLine.replace(Storage.STORAGE_ISDONE_FALSE, Storage.STORAGE_ISDONE_TRUE);
+            currLine = amendStringIfHasAfterTask(currLine);
+        }
+        return currLine;
     }
 
-    private String periodTaskGetTo(String[] storageDataArray) {
-        String periodDate = storageDataArray[3];
-        return periodDate.split(" and ")[1];
+    private String amendStringIfHasAfterTask(String curr) {
+        String currLine = curr;
+        if (currLine.contains(" | after")) {
+            currLine = currLine.split(" \\| after")[0];
+        }
+        return currLine;
     }
 
-    private String scheduledTaskGetDate(String[] storageDataArray) {
-        String dateTime = storageDataArray[3];
-        return dateTime.split(" ")[0];
+    private String amendIfIsToUpdateAfterTask(int count, int index, String curr, String description) {
+        String currLine = curr;
+        if (count == index) {
+            currLine += " | after " + description;
+        }
+        return currLine;
     }
 
-    private int scheduledTaskGetFrom(String[] storageDataArray) {
-        String dateTime = storageDataArray[3];
-        return Integer.parseInt(dateTime.split(" ")[2]);
-    }
+    private String amendStringIfCountNotIndex(int count, int index, String stringToAppend, String curr) {
+        String currLine = curr;
+        String currStringToAppend = stringToAppend;
 
-    private int scheduledTaskGetTo(String[] storageDataArray) {
-        String dateTime = storageDataArray[3];
-        return Integer.parseInt(dateTime.split(" ")[4]);
+        if (count != index) {
+            currStringToAppend += currLine + "\n";
+        }
+        return currStringToAppend;
     }
 }
