@@ -10,9 +10,7 @@ public class WorkDoneException extends Exception {
      * @param message Error message.
      */
     public WorkDoneException(String message) {
-        super("____________________________________________________________\n"
-                + message
-                + "\n____________________________________________________________\n");
+        super(message);
     }
 
     /**
