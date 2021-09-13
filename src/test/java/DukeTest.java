@@ -24,8 +24,8 @@ public class DukeTest {
      */
     @Test
     public void eventCreation_eventTask_success(){
-        assertEquals(new Event(" return book", "23/08/2021 17:00").toString(),
-                "[E][ ] return book (at: 23 Aug 2021 17:00)");
+        assertEquals(new Event(" return book", "23/08/2021 16:00-20:00").toString(),
+                "[E][ ] return book (at: 23 Aug 2021 16:00 to 20:00)");
     }
 
     /**

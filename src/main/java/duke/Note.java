@@ -8,7 +8,8 @@ public class Note {
     private String body;
 
     /**
-     * Creates a note
+     * Creates a note.
+     *
      * @param title the title of the note
      * @param body the content to be stored in the note
      */
@@ -18,7 +19,8 @@ public class Note {
     }
 
     /**
-     * Returns the note as a string that is to be displayed to the user
+     * Returns the note as a string that is to be displayed to the user.
+     *
      * @return the given note as a string that is to be displayed to the user
      */
     public String toString() {
@@ -27,7 +29,8 @@ public class Note {
 
     /**
      * Returns the note as a string that is to be appended to the contents of the list of
-     * notes in user's hard disk
+     * notes in user's hard disk.
+     *
      * @return the note as a string that is to be appended to the contents of the list of
      * notes in user's hard disk
      */

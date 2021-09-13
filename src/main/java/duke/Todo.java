@@ -5,7 +5,8 @@ package duke;
  */
 public class Todo extends Task {
     /**
-     * To create a todo task
+     * Creates a todo task.
+     *
      * @param description the name/description of the task
      */
     public Todo(String description) {
@@ -14,7 +15,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the task as a string that is to be displayed to the user
+     * Returns the task as a string that is to be displayed to the user.
+     *
      * @return the given task as a string that is to be displayed to the user
      */
     @Override
@@ -24,7 +26,8 @@ public class Todo extends Task {
 
     /**
      * Returns the task as a string that is to be appended to the contents of the list of
-     * tasks in user's hard disk
+     * tasks in user's hard disk.
+     *
      * @return the task as a string that is to be appended to the contents of the list of
      * tasks in user's hard disk
      */

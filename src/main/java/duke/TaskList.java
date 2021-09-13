@@ -1,5 +1,5 @@
 package duke;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class TaskList {
 
     /**
      * Creates the taskList and a counter to keep track of the number of tasks saved in the user's
-     * hard disk at any point in time
+     * hard disk at any point in time.
      */
     public TaskList() {
         taskList = new ArrayList<Task>(100);
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the taskList
+     * Returns the taskList.
      *
      * @return the taskList
      */
@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks currently save in user's hard disk
+     * Returns the number of tasks currently save in user's hard disk.
      *
      * @return the number of tasks currently save in user's hard disk (counter member)
      */
@@ -40,84 +40,68 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the taskList
+     * Adds a task to the taskList.
      *
      * @param currTask the task that is to be added to the taskList
      */
     public static void addTask(Task currTask) {
         assert (taskList.size() == 100) : "Task list array has not been created.";
+
+        // Add the new task to the task list and increment the number of tasks by 1
         TaskList.taskList.add(currTask);
         TaskList.counter++;
     }
 
     /**
-     * Adds a task to the taskList and update the list of tasks in user's hard disk
+     * Adds a task to the taskList and update the list of tasks in user's hard disk.
      *
      * @param currTask the task that is to be added
      * @throws IOException if there is an error in appending the task to the list of tasks
      * in user's hard disk
      */
-    public static void addTaskAndUpdate(Task currTask) throws IOException {
+    public static String addTaskAndUpdate(Task currTask) throws IOException {
         assert (taskList.size() == 100) : "Task list array has not been created.";
+
+        // Add the new task to the task list and increment the number of tasks by 1
         TaskList.taskList.add(currTask);
         TaskList.counter++;
-        appendToFile("data/jarvis.txt", (counter) + "." +
-                TaskList.getTaskList().get(counter - 1).toPrintToFile()
-                + System.lineSeparator());
+
+        Storage.appendToTaskFile(); //Append the new task to the task file
+        return Ui.taskAdded(currTask); //Output to be printed to the user by Jarvis
     }
 
     /**
-     * Deletes a task to the taskList and update the list of tasks in user's hard disk
+     * Deletes a task to the taskList and update the list of tasks in user's hard disk.
      *
-     * @param currTask the task that is to be deleted
+     * @param taskNum Number of the task that is to be deleted
      * @throws IOException if there is an error in re-writing the list of tasks without the
      * deleted task
      */
-    public static void deleteTaskAndUpdate(Task currTask) throws IOException {
+    public static String deleteTaskAndUpdate(int taskNum) throws IOException {
         assert (taskList.size() == 100) : "Task list array has not been created.";
-        TaskList.taskList.remove(currTask);
-        counter--;
-        if (TaskList.getTaskList().size() == 0) {
-            writeToFile("data/jarvis.txt", "");
-        } else {
-            for (int i = 0; i < TaskList.getTaskList().size(); i++) {
-                if (i == 0) {
-                    writeToFile("data/jarvis.txt", (i + 1) + "." +
-                            TaskList.getTaskList().get(i).toPrintToFile()
-                            + System.lineSeparator());
-                } else {
-                    appendToFile("data/jarvis.txt", (i + 1) + "." +
-                            TaskList.getTaskList().get(i).toPrintToFile()
-                            + System.lineSeparator());
-                }
-            }
-        }
+
+        // Delete the task and decrement the number of tasks in the task list by 1
+        Task currTask = TaskList.getTaskList().get(taskNum);
+        TaskList.getTaskList().remove(currTask);
+        TaskList.counter--;
+
+        Storage.rewriteTaskFile(); // Rewrite the task file to remove the deleted task
+
+        return Ui.taskDeleted(currTask);
     }
 
     /**
-     * Writes to the file in user's hard disk that stores a list of tasks or to overwrite
-     * the contents of this file
+     * Marks a given task as completed and to update its status icon in the list of tasks
+     * in user's hard disk.
      *
-     * @param filePath the relative path to the file
-     * @param textToAdd the content that is to be written
-     * @throws IOException if there is an error in writing to/overwriting the file
+     * @throws IOException if there is an error when overwriting/appending to the contents of
+     * the file
      */
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
+    public static String markAsDoneAndUpdate(int taskNum) throws IOException{
+        TaskList.getTaskList().get(taskNum).isDone = true; // Mark the task as done
 
-    /**
-     * Appends content to the file in user's hard disk that stores a list of tasks
-     *
-     * @param filePath the relative path to the file
-     * @param textToAppend the content that is to be appended
-     * @throws IOException if there is an error in appending to existing content of the file
-     */
-    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
+        Storage.rewriteTaskFile(); // Rewrite the task file to store the newly done task
+
+        return Ui.taskDone(taskNum); // Display output by Jarvis
     }
 }
