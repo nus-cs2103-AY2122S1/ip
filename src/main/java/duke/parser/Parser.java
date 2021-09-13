@@ -48,6 +48,7 @@ public class Parser {
         } catch (DukeException e) {
             ui.print(e.getMessage());
         }
+        assert !response.equals("");
 
         return response;
     }
@@ -97,6 +98,7 @@ public class Parser {
         } else {
             throw new DukeException("I'm sorry, but I do not quite understand what that means :(");
         }
+        assert newItem != null;
 
         return taskList.add(newItem);
     }
@@ -130,6 +132,8 @@ public class Parser {
         }
 
         String keyword = parsedInput[1];
+        assert keyword != null;
+
         return taskList.find(keyword);
     }
 
