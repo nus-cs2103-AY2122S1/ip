@@ -20,10 +20,11 @@ public class Yoyo {
      */
     public Yoyo() {
         dialogHandler = new DialogHandler();
-        storage = new Storage("data/yoyo.txt");
+        storage = new Storage("yoyo.txt");
         try {
             tasks = storage.load();
         } catch (YoyoException e) {
+            //Any invalid format in storage file will result in a new task list being created
             tasks = new TaskList();
         }
     }

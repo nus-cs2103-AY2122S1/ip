@@ -45,7 +45,7 @@ public class Parser {
         }
 
         String[] inputTokens = fullCommand.split(" ", 2);
-        String commandKeyword = inputTokens[0];
+        String commandKeyword = inputTokens[0].toLowerCase();
 
         switch (commandKeyword) {
         case COMMAND_BYE:

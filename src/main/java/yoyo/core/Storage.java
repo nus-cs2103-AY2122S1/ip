@@ -1,5 +1,6 @@
 package yoyo.core;
 
+import static yoyo.exception.YoyoException.YoyoStorageException;
 import static yoyo.utility.Constant.COMMA_SEPARATOR;
 import static yoyo.utility.Constant.NEWLINE_CHAR;
 
@@ -28,6 +29,7 @@ public class Storage {
     private static final Character CHAR_CROSS = 'X';
     private static final Character CHAR_TODO = 'T';
     private static final Character CHAR_DEADLINE = 'D';
+    private static final Character CHAR_EVENT = 'E';
 
     private final String dataPath;
     private final File file;
@@ -35,7 +37,8 @@ public class Storage {
     private enum TaskType {
         TODO,
         EVENT,
-        DEADLINE
+        DEADLINE,
+        INVALID
     }
 
     /**
@@ -88,11 +91,11 @@ public class Storage {
      * @return A TaskList instance consisting of tasks listed in the file.
      * @throws YoyoException
      */
-    public TaskList load() throws YoyoException {
+    public TaskList load() throws YoyoStorageException {
         return readExistingTasks(this.file);
     }
 
-    private TaskList readExistingTasks(File f) throws YoyoException {
+    private TaskList readExistingTasks(File f) throws YoyoStorageException {
         TaskList tasks = new TaskList();
         try {
             Scanner s = new Scanner(f);
@@ -103,11 +106,11 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new YoyoException("Critical Error! File exists but could not be found.");
+            throw new YoyoStorageException("Critical Error! File exists but could not be found.");
         }
     }
 
-    private void addTaskFromLine(TaskList tasks, String currLine) {
+    private void addTaskFromLine(TaskList tasks, String currLine) throws YoyoStorageException {
         String[] currTokenArr = currLine.split(COMMA_SEPARATOR);
 
         //get type of task
@@ -147,14 +150,23 @@ public class Storage {
         }
     }
 
-    private String[] getTagsArray(TaskType currType, String[] currTokenArr) {
+    private String[] getTagsArray(TaskType currType, String[] currTokenArr)
+            throws YoyoStorageException {
+        final int todoSkipCount = 2;
+        final int otherTaskSkipCount = 3;
+        int len = currTokenArr.length;
         String[] tagsArray;
+
         if (currType.equals(TaskType.TODO)) {
-            assert currTokenArr.length > 1 : "Error in storage formatting code";
-            tagsArray = skipArray(2, currTokenArr);
+            if (len < todoSkipCount) {
+                throw new YoyoStorageException("Corrupted storage file! Please check your storage file.");
+            }
+            tagsArray = skipArray(todoSkipCount, currTokenArr);
         } else {
-            assert currTokenArr.length > 2 : "Error in storage formatting code";
-            tagsArray = skipArray(3, currTokenArr);
+            if (len < otherTaskSkipCount) {
+                throw new YoyoStorageException("Corrupted storage file! Please check your storage file.");
+            }
+            tagsArray = skipArray(otherTaskSkipCount, currTokenArr);
         }
         return tagsArray;
     }
@@ -166,12 +178,18 @@ public class Storage {
         return result;
     }
 
-    private TaskType getTaskType(char typeChar) {
+    private TaskType getTaskType(char typeChar) throws YoyoStorageException {
         TaskType currType = typeChar == CHAR_TODO
                 ? TaskType.TODO
                 : typeChar == CHAR_DEADLINE
                 ? TaskType.DEADLINE
-                : TaskType.EVENT;
+                : typeChar == CHAR_EVENT
+                ? TaskType.EVENT
+                : TaskType.INVALID;
+
+        if (currType.equals(TaskType.INVALID)) {
+            throw new YoyoStorageException("Corrupted storage file! Please check your storage file.");
+        }
         return currType;
     }
 }

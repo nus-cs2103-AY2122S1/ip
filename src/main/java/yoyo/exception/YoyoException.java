@@ -60,4 +60,13 @@ public class YoyoException extends IOException {
             super(message);
         }
     }
+
+    /**
+     * Exception class for storage errors.
+     */
+    public static class YoyoStorageException extends YoyoException {
+        public YoyoStorageException(String message) {
+            super(message);
+        }
+    }
 }

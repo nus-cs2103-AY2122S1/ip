@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import yoyo.Yoyo;
 
 /**
@@ -40,6 +41,7 @@ public class MainWindow extends AnchorPane {
             e.printStackTrace();
         }
         this.yoyo = yoyo;
+        userInput.setFont(Font.font ("serif", 14));
     }
 
 
