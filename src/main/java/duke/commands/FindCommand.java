@@ -42,7 +42,7 @@ public class FindCommand extends Command {
     }
 
     private String findByDate(TaskList tasks, Storage storage) throws DukeException {
-        String response = "";
+        String response = "Here are the tasks on that date:\n";
         try {
             Task[] tasksOnDate = tasks.tasksOnDate(commands);
             for (Task task : tasksOnDate) {
@@ -55,7 +55,7 @@ public class FindCommand extends Command {
     }
 
     private String findByKeyword(TaskList tasks, Storage storage) {
-        String response = "";
+        String response = "Here are the matching results:\n";
         Task[] searchResults = tasks.findByKeyword(commands);
         for (Task task : searchResults) {
             response += task + "\n";

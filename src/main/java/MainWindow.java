@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainWindow extends AnchorPane {
@@ -17,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private ArchDuke duke;
     private boolean isExit = false;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
@@ -32,7 +36,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(showWelcome(), dukeImage));
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(ArchDuke d) {
         duke = d;
     }
 
@@ -46,11 +50,11 @@ public class MainWindow extends AnchorPane {
         if (isExit) {
             return;
         }
-
         String input = userInput.getText();
         String response = duke.getResponse(input);
         String[] dukeResponse = response.split(" ");
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        // checks if error message thrown
         DialogBox dukeDialog;
         if (dukeResponse[0].equals("☹")) {
             dukeDialog = DialogBox.getErrorDialog(response, dukeImage);
@@ -63,10 +67,23 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        // printe bye message and close app
         if (response.equals("Bye. Hope to see you again soon!")) {
             isExit = true;
+            exit();
         }
 
+    }
+
+    private void exit() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        }, 2000);
     }
 
     /**
@@ -75,8 +92,7 @@ public class MainWindow extends AnchorPane {
      * @return Weclome message.
      */
     public String showWelcome() {
-        String logo = "DUKE!";
-        return "Hello! I'm " + logo + "\nHow can I help?";
+        String name = "ARCHDUKE!";
+        return "Hello! I'm " + name + "\nHow can I help?";
     }
-
 }

@@ -4,7 +4,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-public class Duke {
+public class ArchDuke {
 
     private TaskList tasks;
     private Storage storage;
@@ -13,7 +13,7 @@ public class Duke {
     /**
      * Constructor for Duke. Initialises tasklist and storage
      */
-    public Duke() {
+    public ArchDuke() {
         storage = new Storage();
         try {
             tasks = new TaskList(storage.load());

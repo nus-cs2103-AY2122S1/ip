@@ -29,7 +29,7 @@ public class Task {
      */
     public String completeItem() {
         this.completed = true;
-        return "Nice I've marked this task as done!\n" + this.toString();
+        return "Nice! I've marked this task as done:\n" + this.toString();
     }
 
     /**
