@@ -16,6 +16,7 @@ public class ListCommand extends Command {
      * @param taskHandler TaskHandler of Duke.
      * @param ui User interface.
      * @param storage Storage for Duke.
+     * @return Task list.
      */
     @Override
     public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {

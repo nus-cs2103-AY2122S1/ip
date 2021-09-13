@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class encapsulates a deadline
- * (an event that needs to be done before a specific time)
- * e.g., submit IP by 19/8/21 2359
+ * This class encapsulates a deadline.
  *
  * @author Teo Sin Yee
  * @version CS2103T AY21/22 Semester 1
@@ -50,14 +48,15 @@ public class Deadline extends Task {
         return date;
     }
 
+    @Override
     public String formatToSave() {
         return String.format("D | %s | %s", super.formatToSave(), dueDate);
     }
 
     /**
-     * String representation of a deadline.
+     * String representation of a Deadline.
      *
-     * @return String representation of a deadline
+     * @return String representation of a Deadline.
      */
     @Override
     public String toString() {

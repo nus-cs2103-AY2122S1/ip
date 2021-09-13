@@ -44,17 +44,14 @@ public class Storage {
 
     /**
      * Creates a new file to store data
-     *
-     * @return String message informing user that new file is created.
      **/
-    private static String createNewFile() {
+    private void createNewFile() {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            return new DukeIoException("Error creating directory/file. Your data were not saved. :_(").getMessage();
+            System.err.println("Error creating directory/file. Your data were not saved. :_(");
         }
-        return "New file created!";
     }
 
     /**
@@ -63,7 +60,7 @@ public class Storage {
      * @param task Task to be saved to the storage file.
      * @throws DukeIoException If there is error writing to the storage file.
      */
-    public static void writeToFile(Task task) throws DukeIoException {
+    public void writeToFile(Task task) throws DukeIoException {
         if (!file.exists()) {
             createNewFile();
         }
@@ -80,10 +77,9 @@ public class Storage {
      * Updates storage file after changes are made to the task list.
      *
      * @param tasks Edited task list.
-     * @return String message informing user of successful update,
-     * informs user of unsuccessful update if there is an error.
+     * @throws DukeIoException If there is an error updating storage file.
      */
-    public static String updateData(ArrayList<Task> tasks) {
+    public static void updateData(ArrayList<Task> tasks) throws DukeIoException {
         assert file.exists() : "The tasks.txt file does not exist.";
         try {
             FileWriter fw = new FileWriter(FILE_NAME);
@@ -92,9 +88,9 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            return new DukeIoException("Error: Unable to write to data file. Your data were not saved. :_(").getMessage();
+            throw new DukeIoException("Error: Unable to write to data file."
+                    + "Your data were not saved. :_(");
         }
-        return "Data was updated successfully!";
     }
 
     /**

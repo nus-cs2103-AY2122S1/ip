@@ -17,13 +17,13 @@ import duke.task.Task;
  */
 public class TaskHandler {
     private static final String NO_TASKS_FOUND = "Nothing in the list... :("
-            + "Type todo/event/deadline to add something first! :^)";
+            + "Use todo/event/deadline to add something first! :^)";
     private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n"
             + "- %s\nYou currently have %d undone task(s) in the list.";
     private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n"
             + "- %s\nYou currently have %d undone task(s) in the list.";
     private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n"
-            + "- %s\nYou currently have %d undone task(s) in the list.";
+            + "- %s\nYou currently have %d task(s) in the list.";
     private static final String TASK_LIST = "Here are the task(s) in your list! ^_^\n";
     private static final String MATCHING_TASK_LIST = "Here are the matching task(s) in your list!\n";
     private static final String NO_MATCHING_TASKS = "No matching tasks found :<";
@@ -79,7 +79,8 @@ public class TaskHandler {
     /**
      * Marks tasks as done.
      *
-     * @param taskNumber The index of the task to be mark as done
+     * @param taskNumber The index of the task to be mark as done.
+     * @return Message informing user task is marked as done.
      * @throws DukeException For invalid task indexes given by the user.
      */
     public String markTaskAsDone(int taskNumber) throws DukeException {
@@ -101,7 +102,8 @@ public class TaskHandler {
      * Deletes tasks at index specified by user.
      *
      * @param taskNumber The index of the task to be deleted.
-     * @throws DukeIoException For invalid task indexes given by the user.
+     * @return Message informing user task is deleted.
+     * @throws DukeIoException For invalid task index given by the user.
      */
     public String deleteTask(int taskNumber) throws DukeIoException {
         if (taskNumber < 1) {
@@ -120,7 +122,7 @@ public class TaskHandler {
     /**
      * Updates the storage after changes to the list.
      */
-    private void updateData() {
+    private void updateData() throws DukeIoException {
         Storage.updateData(taskList);
     }
 
@@ -173,13 +175,12 @@ public class TaskHandler {
      * Sorts the task list in chronological order
      *
      * @param isReverse Reverse chronological order of task list if true.
+     * @return Sorted task list.
      */
     public String sortTaskList(boolean isReverse) {
-        Comparator<Task> cmp = (Task t1, Task t2) -> {
-            return isReverse
-                    ? t1.compareTo(t2) * -1
-                    : t1.compareTo(t2);
-        };
+        Comparator<Task> cmp = (Task t1, Task t2) -> isReverse
+                ? t1.compareTo(t2) * -1
+                : t1.compareTo(t2);
         taskList.sort(cmp);
         return SORT_TASK_LIST;
     }

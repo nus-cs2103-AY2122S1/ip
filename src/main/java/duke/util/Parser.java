@@ -74,9 +74,9 @@ public class Parser {
     /**
      * Extracts the index for commands that modify tasks.
      *
-     * @param input Raw user input
+     * @param input Raw user input.
      * @return Index of task to be modified.
-     * @throws DukeMissingIndexException If user does not input index
+     * @throws DukeMissingIndexException If user does not input index.
      * @throws DukeInvalidIndexException If user inputs a number smaller than 1.
      */
     private static int parseIndex(String input) throws DukeMissingIndexException, DukeInvalidIndexException {
@@ -94,7 +94,7 @@ public class Parser {
     /**
      * Extracts the details for the todo command.
      *
-     * @param input Raw user input
+     * @param input Raw user input.
      * @return Todo details.
      * @throws DukeMissingDescriptionException If the user does not specify the description.
      */
@@ -128,7 +128,7 @@ public class Parser {
     /**
      * Checks if 'reverse' is entered by user.
      *
-     * @param input Raw user input
+     * @param input Raw user input.
      * @return True if 'reverse' is entered, false otherwise.
      * @throws DukeSortException If there is an unexpected character.
      */
@@ -172,7 +172,7 @@ public class Parser {
      * Extracts the details for the event command.
      *
      * @param input Raw user input.
-     * @return Details for event command
+     * @return Details for event command.
      * @throws DukeMissingDescriptionException If the description is missing.
      * @throws DukeEventMissingDateException If the event date is missing.
      */

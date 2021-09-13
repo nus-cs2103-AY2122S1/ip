@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class encapsulates an Event
- * (a task that happens at a specific time)
- * e.g. team project meeting at 2pm.
+ * This class encapsulates an Event.
  *
  * @author Teo Sin Yee
  * @version CS2103T AY21/22 Semester 1
@@ -50,18 +48,15 @@ public class Event extends Task {
         return date;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String formatToSave() {
         return String.format("E | %s | %s", super.formatToSave(), time);
     }
 
     /**
-     * String representation of the event.
+     * String representation of an Event.
      *
-     * @return string representation of the event.
+     * @return String representation of an Event.
      */
     @Override
     public String toString() {
@@ -69,7 +64,10 @@ public class Event extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Checks if two events are equal.
+     *
+     * @param o The other object to be compared to.
+     * @return True if the events have same name and time, false otherwise.
      */
     @Override
     public boolean equals(Object o) {
