@@ -73,6 +73,25 @@ public abstract class Task {
     }
 
     /**
+     * Function to check if the format of time (i.e. 24h format) and if time given is valid (i.e. 1260 is rejected).
+     *
+     * @param time String of time that is being checked.
+     * @throws UserInputError Throws error if time String is not valid.
+     */
+    public void checkTimeFormat(String time) throws UserInputError {
+        if (time.length() != 4) { //checks that string adheres to 24h format
+            throw new UserInputError("Invalid time input. Please ensure it is in 24h format");
+        }
+
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int min = Integer.parseInt(time.substring(2, 4));
+
+        if (hour < 0 || hour > 23 || min < 0 || min > 59) { //checks hour and min are valid
+            throw new UserInputError("Your hour/minute input is invalid. Please check and try again!");
+        }
+    }
+
+    /**
      * Creates a new task according task type.
      *
      * @param input String containing task details.
