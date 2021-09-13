@@ -9,10 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -26,7 +30,7 @@ public class DialogBox extends HBox {
 
     /** Label containing text from the speaker. */
     @FXML
-    private Text dialog;
+    private Label dialog;
 
     /** ImageView containing the speaker's avatar. */
     @FXML
@@ -53,7 +57,6 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        dialog.setTextAlignment(TextAlignment.LEFT);
         setAlignment(Pos.TOP_LEFT);
     }
 
@@ -64,7 +67,9 @@ public class DialogBox extends HBox {
      * @return A dialog box of text entered by the user to be displayed on the GUI.
      */
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, userImage);
+        DialogBox userDialog = new DialogBox(text, userImage);
+        userDialog.dialog.setBackground(new Background(new BackgroundFill(Color.web("#56c5e0"), new CornerRadii(35), null)));
+        return userDialog;
     }
 
     /**
@@ -74,8 +79,9 @@ public class DialogBox extends HBox {
      * @return A dialog box of text from Duke to be displayed on the GUI.
      */
     public static DialogBox getDukeDialog(String text) {
-        var db = new DialogBox(text, dukeImage);
-        db.flip();
-        return db;
+        DialogBox dukeDialog = new DialogBox(text, dukeImage);
+        dukeDialog.flip();
+        dukeDialog.dialog.setBackground(new Background(new BackgroundFill(Color.GRAY, new CornerRadii(35), null)));
+        return dukeDialog;
     }
 }
