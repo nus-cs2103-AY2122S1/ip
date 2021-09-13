@@ -21,9 +21,9 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Constructor, Creates the Tasklist from the existing file.
      *
-     * @param file Input existing file
-     * @throws IOException Catches if the filepath or file has issue
-     * @throws PikaException Catches if the file content is incorrect to be parsed
+     * @param file Input existing file.
+     * @throws IOException Catches if the filepath or file has issue.
+     * @throws PikaException Catches if the file content is incorrect to be parsed.
      */
     public TaskList(BufferedReader file) throws IOException, PikaException {
         String line = file.readLine();
@@ -39,9 +39,9 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Parses each line of the file and creates the task accordingly.
      *
-     * @param line input line of file
-     * @return the tasks for the constructor
-     * @throws PikaException if the file content is not of the right format to be parsed
+     * @param line input line of file.
+     * @return the tasks for the constructor.
+     * @throws PikaException if the file content is not of the right format to be parsed.
      */
     public Task parseLine(String line) throws PikaException {
         String[] splits;
@@ -82,10 +82,10 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     }
 
     /**
-     * Parses the line for tags into an arrayList of tags
+     * Parses the line for tags into an arrayList of tags.
      *
-     * @param line The line of tags from the laoded txt file
-     * @return The arrayList of tags to be added to the task
+     * @param line The line of tags from the laoded txt file.
+     * @return The arrayList of tags to be added to the task.
      */
     public ArrayList<Tag> parseAsTag(String line) {
         ArrayList<Tag> tags = new ArrayList<>(30);
@@ -99,7 +99,7 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Adds the tasks to the list.
      *
-     * @param t task to be added
+     * @param t task to be added.
      */
     public void add(Task t) {
         assert t != null : "Pika Pi, this is not valid!";
@@ -120,7 +120,7 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Gets the number of task in the list.
      *
-     * @return the number of task in the list
+     * @return the number of task in the list.
      */
     public int getCount() {
         return count;
@@ -129,8 +129,8 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Deletes the task at the given index.
      *
-     * @param i the index that the task to be deleted is at
-     * @return the deleted task
+     * @param i the index that the task to be deleted is at.
+     * @return the deleted task.
      */
     public Task delete(int i) {
         assert i != 0 : "Pika Pi, this is not valid!";
@@ -141,8 +141,8 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Searches the list for any task with the given string.
      *
-     * @param string Input string pattern to find
-     * @return The list of task with the term in the task details
+     * @param string Input string pattern to find.
+     * @return The list of task with the term in the task details.
      */
     public String searchList(String string) {
         assert string != null : "Pika Pi, this is not valid!";
@@ -163,7 +163,7 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     /**
      * Returns the list of task for the user.
      *
-     * @return The list of task
+     * @return The list of task.
      */
     public String printList() {
         if (count == 0) {

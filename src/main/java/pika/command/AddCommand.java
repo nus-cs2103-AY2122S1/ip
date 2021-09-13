@@ -20,9 +20,9 @@ public class AddCommand extends Command {
     /**
      * Constructor for AddCommand.
      *
-     * @param taskType Task type
-     * @param details The name/date/time of the task
-     * @throws PikaException Throws this if there are anything wrong with the inputs
+     * @param taskType Task type.
+     * @param details The name/date/time of the task.
+     * @throws PikaException Throws this if there are anything wrong with the inputs.
      */
     public AddCommand(String taskType, String details) throws PikaException {
         super(true);
@@ -65,10 +65,10 @@ public class AddCommand extends Command {
     /**
      * Executes the AddCommand to update the list, update the txt, and print the returns to the user.
      *
-     * @param taskList The current list of tasks
-     * @param storage  The current storage class to handle the txt file
-     * @return The add task string for the Pikabot to say
-     * @throws IOException if the filepath has any issues
+     * @param taskList The current list of tasks.
+     * @param storage  The current storage class to handle the txt file.
+     * @return The add task string for the Pikabot to say.
+     * @throws IOException if the filepath has any issues.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws IOException {

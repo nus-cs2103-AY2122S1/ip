@@ -13,7 +13,7 @@ public class Task { //Base Task Class
     /**
      * Constructor of Task class.
      *
-     * @param name Name of Task
+     * @param name Name of Task.
      */
     public Task(String name) {
         this.name = name;
@@ -24,7 +24,7 @@ public class Task { //Base Task Class
     /**
      * Marks the task as done when called and return it.
      *
-     * @return the task's completed message
+     * @return the task's completed message.
      */
     public String markAsDone() {
         this.isDone = true;
@@ -34,7 +34,7 @@ public class Task { //Base Task Class
     /**
      * Checks if the task is already completed.
      *
-     * @return if the task has been completed
+     * @return if the task has been completed.
      */
     public boolean isDone() {
         return this.isDone;
@@ -43,7 +43,7 @@ public class Task { //Base Task Class
     /**
      * Returns the string to be written in the txt file.
      *
-     * @return txt format of the task for storage
+     * @return txt format of the task for storage.
      */
     public String write() {
         if (this.isDone) {
@@ -56,7 +56,7 @@ public class Task { //Base Task Class
     /**
      * Returns the name of the task.
      *
-     * @return name of the task
+     * @return name of the task.
      */
     public String getName() {
         return this.name;
@@ -65,8 +65,8 @@ public class Task { //Base Task Class
     /**
      * Adds the tag to the task.
      *
-     * @param tagName Name of the tag to be added
-     * @return the tag added
+     * @param tagName Name of the tag to be added.
+     * @return the tag added.
      */
     public String addTag(String tagName) {
         assert tagName != null : "Pika Pi, this is not valid!";
@@ -78,7 +78,7 @@ public class Task { //Base Task Class
     /**
      * Adds an arrayList of tag to the task when loading.
      *
-     * @param tags Arraylist of tags to be added
+     * @param tags Arraylist of tags to be added.
      */
     public void addTag(ArrayList<Tag> tags) {
         this.tags = tags;
@@ -101,7 +101,7 @@ public class Task { //Base Task Class
     /**
      * Returns the task as String.
      *
-     * @return list format of the task
+     * @return list format of the task.
      */
     @Override
     public String toString() {

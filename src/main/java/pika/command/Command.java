@@ -15,7 +15,7 @@ public class Command {
     /**
      * Constructor for the command class.
      *
-     * @param isRunning boolean to indicate if the bot still runs after this function
+     * @param isRunning boolean to indicate if the bot still runs after this function.
      */
     public Command(boolean isRunning) {
         this.isRunning = isRunning;
@@ -24,7 +24,7 @@ public class Command {
     /**
      * Checks if the bot still runs after this command.
      *
-     * @return the boolean depending if the bot should still run
+     * @return the boolean depending if the bot should still run.
      */
     public boolean isRunning() {
         return this.isRunning;
@@ -33,11 +33,11 @@ public class Command {
     /**
      * Executes the command.
      *
-     * @param taskList The current list of tasks
-     * @param storage  The current storage class to handle the txt file
-     * @return the string that the bot will say once the command is executed
-     * @throws IOException   if the filepath has any issues
-     * @throws PikaException to handle any other input/format error
+     * @param taskList The current list of tasks.
+     * @param storage  The current storage class to handle the txt file.
+     * @return the string that the bot will say once the command is executed.
+     * @throws IOException   if the filepath has any issues.
+     * @throws PikaException to handle any other input/format error.
      */
     public String execute(TaskList taskList, Storage storage) throws IOException, PikaException {
         return "";

@@ -18,8 +18,8 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for the DeleteCommand.
      *
-     * @param input The index of the task to be deleted
-     * @throws PikaException catches if the input is invalid
+     * @param input The index of the task to be deleted.
+     * @throws PikaException catches if the input is invalid.
      */
     public DeleteCommand(String input) throws PikaException {
         super(true);
@@ -34,11 +34,11 @@ public class DeleteCommand extends Command {
      * Executes the DeleteCommand to delete the task from the list,
      * update the respective list and txt file.
      *
-     * @param taskList The current list of tasks
-     * @param storage  The current storage class to handle the txt file
-     * @return the string that the bot will say once the delete command is executed
-     * @throws IOException   if the filepath has any issues
-     * @throws PikaException if there are any other format/input issues
+     * @param taskList The current list of tasks.
+     * @param storage  The current storage class to handle the txt file.
+     * @return the string that the bot will say once the delete command is executed.
+     * @throws IOException   if the filepath has any issues.
+     * @throws PikaException if there are any other format/input issues.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws IOException, PikaException {

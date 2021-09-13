@@ -16,10 +16,9 @@ public class DoneCommand extends Command { //DoneCommand to handle the updating 
     /**
      * Constructor for the DoneCommand Class.
      *
-     * @param input index for the task that is to be marked as done
-     * @throws PikaException Catches if the input is invalid
+     * @param input index for the task that is to be marked as done.
+     * @throws PikaException Catches if the input is invalid.
      */
-
     public DoneCommand(String input) throws PikaException {
         super(true);
         if (input == null) {
@@ -33,11 +32,11 @@ public class DoneCommand extends Command { //DoneCommand to handle the updating 
      * Executes the DoneCommand to update the task in the list as done.
      * Also updates the list and txt files accordingly.
      *
-     * @param taskList The current list of tasks
-     * @param storage  The current storage class to handle the txt file
-     * @return the string that the bot will say once the done command is executed
-     * @throws IOException   If the filepath has issue
-     * @throws PikaException catches if the input/format is wrong
+     * @param taskList The current list of tasks.
+     * @param storage  The current storage class to handle the txt file.
+     * @return the string that the bot will say once the done command is executed.
+     * @throws IOException   If the filepath has issue.
+     * @throws PikaException catches if the input/format is wrong.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws IOException, PikaException {

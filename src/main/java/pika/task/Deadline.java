@@ -13,9 +13,9 @@ public class Deadline extends Task {
     /**
      * Constructor for Deadline Class.
      *
-     * @param name    name of the task
-     * @param dueDate Due date of the task. Can be Date or Date/Time
-     * @throws PikaException If the date or time input is not valid
+     * @param name    name of the task.
+     * @param dueDate Due date of the task. Can be Date or Date/Time.
+     * @throws PikaException If the date or time input is not valid.
      */
     public Deadline(String name, String dueDate) throws PikaException {
         super(name);
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     /**
      * Returns the string to be written in the txt file.
      *
-     * @return txt format of the task for storage
+     * @return txt format of the task for storage.
      */
     @Override
     public String write() {
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     /**
      * Returns the task for the list format.
      *
-     * @return The task in string format
+     * @return The task in string format.
      */
     @Override
     public String toString() {
