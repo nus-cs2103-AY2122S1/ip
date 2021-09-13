@@ -139,9 +139,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2: Creates two dialog boxes, one echoing user input and the other
-     * containing Duke's reply and then appends them to the dialog container. Clears
-     * the user input after processing.
+     * Creates a dialog box for echoing user input and then appends them to the
+     * dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         String input = userInput.getText();
