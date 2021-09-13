@@ -1,4 +1,4 @@
-package javafxGUI;
+package javafxgui;
 
 import duke.Duke;
 import javafx.fxml.FXML;

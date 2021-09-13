@@ -1,6 +1,6 @@
 package duke;
 
-import javafxGUI.MainWindow;
+import javafxgui.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

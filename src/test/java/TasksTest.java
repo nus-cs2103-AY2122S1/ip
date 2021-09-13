@@ -51,26 +51,26 @@ public class TasksTest {
 
     @Test
     public void eventTask_success() {
-        boolean willFail = false;
+        boolean isFailure = false;
         try {
             Task eventTask = new Event("return book /at 12/12/2019 18:00");
-            assertFalse(willFail, "Event task is indeed a success!");
+            assertFalse(isFailure, "Event task is indeed a success!");
         } catch (WrongTimeFormatException | WrongDateFormatException e) {
-            willFail = true;
-            assertFalse(willFail, "Shouldn't be failing");
+            isFailure = true;
+            assertFalse(isFailure, "Shouldn't be failing");
         }
     }
 
 
     @Test
     public void toDo_success() {
-        boolean willFail = false;
+        boolean isFailure = false;
         try {
             Task todoTask = new ToDo("read book");
-            assertFalse(willFail, "To Do task is a success");
+            assertFalse(isFailure, "To Do task is a success");
         } catch (WrongTimeFormatException | WrongDateFormatException e) {
-            willFail = true;
-            assertFalse(willFail, "Shouldn't be failing");
+            isFailure = true;
+            assertFalse(isFailure, "Shouldn't be failing");
         }
     }
 
@@ -96,14 +96,14 @@ public class TasksTest {
 
     @Test
     public void deadlineTask_Success() {
-        boolean willFail = false;
+        boolean isFailure = false;
         try {
             Task deadlineTask = new Deadline(
                     "return book /by 12/12/2019 18:00");
-            assertFalse(willFail, "Deadline task is a success");
+            assertFalse(isFailure, "Deadline task is a success");
         } catch (WrongTimeFormatException | WrongDateFormatException e) {
-            willFail = true;
-            assertFalse(willFail, "Shouldn't be failing");
+            isFailure = true;
+            assertFalse(isFailure, "Shouldn't be failing");
         }
     }
 
