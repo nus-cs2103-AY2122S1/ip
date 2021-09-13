@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
- * Deals with making sense of the user commands
+ * Deals with making sense of the user's commands
  */
 public class Parser {
     /**
@@ -44,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * Identifies the task that is completed and passes it to markASDoneAndUpdate() method
+     * Checks if the task done command keyed in by the user is correct before calling the markAsDoneAndUpdate() method.
      *
      * @param instruction User's input that followed the "done" command word
      * @throws DukeException if there is no task that has the index keyed in by the user
@@ -52,18 +52,15 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseDone(String instruction) throws DukeException, IOException {
-        String result = "";
         int taskNum = Integer.parseInt(instruction.substring(5)) - 1;
+
+        // If the task number is invalid
         if (taskNum >= TaskList.getCounter()) {
-            throw new DukeException("Hmm, I don't have task " + (taskNum + 1) +
-                    " in my list. Please key in 'list' if you'd like to " +
-                    "view your list of tasks again!");
+            throw new DukeException(Ui.invalidTaskNum(taskNum));
+        // If the task number is valid, update the task to done
         } else {
-            TaskList.getTaskList().get(taskNum).markAsDoneAndUpdate();
-            result += "Good job! I've marked this task as done:\n";
-            result += "\t" + TaskList.getTaskList().get(taskNum).toString() + "\n";
+            return TaskList.markAsDoneAndUpdate(taskNum);
         }
-        return result;
     }
 
     /**
@@ -75,29 +72,15 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseDelete(String instruction) throws DukeException, IOException {
-        String result = "";
-
         int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
 
         //If the task number keyed in by the user is invalid
         if (taskNum >= TaskList.getCounter()) {
-            throw new DukeException("Hmm, I don't have task " + (taskNum + 1) +
-                    " in my list. Please key in 'list' if you'd like to " +
-                    "view your list of tasks again!");
-
+            throw new DukeException(Ui.invalidTaskNum(taskNum));
         //If the task number keyed in by the user is valid
         } else {
-            //Output to be printed to the user by Jarvis
-            result += "Noted. I've removed this task from your main list:\n";
-            result += "\t" + TaskList.getTaskList().get(taskNum).toString() + "\n";
-
-            //The task is to be deleted from the taskList array and added to the document saved in the user's computer
-            TaskList.deleteTaskAndUpdate(TaskList.getTaskList().get(taskNum));
-
-            //Output to be printed to the user by Jarvis
-            result += "Now you have " + TaskList.getCounter() + " task(s) in the list.\n";
+            return TaskList.deleteTaskAndUpdate(taskNum);
         }
-        return result;
     }
 
     /**
@@ -110,25 +93,18 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseTodo(String instruction) throws DukeException, IOException {
-        String result = "";
-
         //If the description of the todo task is empty
         if (instruction.length() < 5) {
-            throw new DukeException("Oops! The description of a todo cannot be empty.");
+            throw new DukeException(Ui.EMPTY_TODO_DESCRIPTION);
 
         //If the description of the todo task is not empty
         } else {
             String taskDescription = instruction.substring(4);
             Todo newTodo = new Todo(taskDescription);
-            //Add the task to the taskList array and update the document save in the user's local computer
-            TaskList.addTaskAndUpdate(newTodo);
 
-            //Output to be printed to the user by Jarvis
-            result += "Got it! I've added this task:\n";
-            result += "\t" + newTodo.toString() + "\n";
-            result += "Now you have " + TaskList.getCounter() + " task(s) in the list.\n";
+            //Add the task to the taskList array and update the document save in the user's local computer
+            return TaskList.addTaskAndUpdate(newTodo);
         }
-        return result;
     }
 
     /**
@@ -142,11 +118,9 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseDeadline(String instruction) throws DukeException, IOException {
-        String result = "";
-
         //If the description of the deadline task is empty
         if (instruction.length() < 10) {
-            throw new DukeException("Oops! The description of a deadline cannot be empty.");
+            throw new DukeException(Ui.EMPTY_DEADLINE_DESCRIPTION);
 
         //If the description of the deadline task is not empty
         } else {
@@ -163,32 +137,24 @@ public class Parser {
             //If the extracted deadline is too short to contain all of the relevant details
             if (currIndex == instruction.length() ||
                     currIndex + 5 >= instruction.length()) {
-                throw new DukeException("I think you forgot to key in your deadline! Please key it" +
-                        " in as dd/mm/yyyy hh:mm (in 24 hours format)");
+                throw new DukeException(Ui.INCOMPLETE_DEADLINE);
 
             //If the date keyed in by the user is formatted wrongly
             } else if (instruction.charAt(currIndex + 7) != '/' &&
                     instruction.charAt(currIndex + 10) != '/') {
-                throw new DukeException("Please format the date as dd/mm/yyy");
+                throw new DukeException(Ui.WRONGLY_FORMATTED_DATE);
 
             //If the time keyed in by the suer is formatted wrongly
             } else if (instruction.substring(currIndex).length() < 20){
-                throw new DukeException("Please include the time in the 24 hour " +
-                        "format (e.g. 15:00)");
+                throw new DukeException(Ui.WRONGLY_FORMATTED_DEADLINE_TIME);
 
             //If the deadline is formatted correctly overall
             } else {
                 String by = instruction.substring(currIndex + 5);
                 Task newDeadline = new Deadline(taskDescription, by);
-                //Add the task to the taskList array and update the document save in the user's local computer
-                TaskList.addTaskAndUpdate(newDeadline);
 
-                //Output to be printed to the user by Jarvis
-                result += "Got it! I've added this task:\n";
-                result += "\t" + newDeadline.toString() + "\n";
-                result += "Now you have " + TaskList.getCounter() +
-                        " task(s) in the list.\n";
-                return result;
+                //Add the task to the taskList array and update the document save in the user's local computer
+                return TaskList.addTaskAndUpdate(newDeadline);
             }
         }
     }
@@ -204,11 +170,9 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseEvent(String instruction) throws DukeException, IOException {
-        String result = "";
-
         //If the description of the deadline task is empty
         if (instruction.length() < 7) {
-            throw new DukeException("Oops!!! The description of a event cannot be empty.");
+            throw new DukeException(Ui.EMPTY_EVENT_DESCRIPTION);
         } else {
             String taskDescription = "";
             int currIndex = 5;
@@ -223,142 +187,32 @@ public class Parser {
             //If the extracted timestamp is too short to contain all of the relevant details
             if (currIndex == instruction.length() ||
                     currIndex + 5 >= instruction.length()) {
-                throw new DukeException("I think you forgot to key in your event timing!");
+                throw new DukeException(Ui.INCOMPLETE_EVENT_TIMINGS);
 
             //If the date keyed in by the user is formatted wrongly
             } else if (instruction.charAt(currIndex + 7) != '/' &&
                     instruction.charAt(currIndex + 10) != '/') {
-                throw new DukeException("Please format the date as dd/mm/yyy");
+                throw new DukeException(Ui.WRONGLY_FORMATTED_DATE);
 
             //If the timings keyed in by the suer is formatted wrongly
             } else if (instruction.substring(currIndex).length() < 25){
-                throw new DukeException("Please include the start and end times in the 24 hour " +
-                        "format (e.g. 15:00-16:00)");
+                throw new DukeException(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS);
 
             //If the timestamp is formatted correctly overall
             } else {
                 String by = instruction.substring(currIndex + 5);
                 Task newEvent = new Event(taskDescription, by);
+
                 //Add the task to the taskList array and update the document save in the user's local computer
-                TaskList.addTaskAndUpdate(newEvent);
-
-                //Output to be printed to the user by Jarvis
-                result += "Got it! I've added this task:\n";
-                result += "\t" + newEvent.toString() + "\n";
-                result += "Now you have " + TaskList.getCounter() +
-                        " task(s) in the list.\n";
-                return result;
+                return TaskList.addTaskAndUpdate(newEvent);
             }
         }
-    }
-
-    /**
-     * Returns a list of tasks saved by Jarvis
-     *
-     * @return a list of tasks save by Jarvis
-     */
-    public static String parseList() {
-        int num = 1;
-        String result = "";
-
-        for (int i = 0; i < TaskList.getTaskList().size(); i++) {
-            result += num + "." + TaskList.getTaskList().get(i).toString() + "\n";//Print the task
-            num++;
-        }
-
-        return result;
-    }
-
-    /**
-     * Returns the list of tasks set for/due today and all todo tasks
-     *
-     * @return the list of tasks set for/due today and all todo tasks
-     */
-    public static String parseToday() {
-        String result = "";
-        result += "Tasks scheduled for today are: \n";
-        int num = 1;
-
-        for (int i = 0; i < TaskList.getTaskList().size(); i++) {
-            //If the task is a todo, include it in today's list of tasks
-            if (TaskList.getTaskList().get(i) instanceof Todo) {
-                result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
-                num++;
-            } else {
-                //Retrieve the current year, month and date
-                int currYear = LocalDateTime.now().getYear();
-                int currMonth = LocalDateTime.now().getMonthValue();
-                int currDate = LocalDateTime.now().getDayOfMonth();
-
-                //Create a LocalDateTime object to represent start and end times of the day
-                LocalDateTime start = LocalDateTime.of(currYear, currMonth, currDate, 0, 0);
-                LocalDateTime end = LocalDateTime.of(currYear, currMonth, currDate, 23, 59);
-
-                //If it is a deadline task
-                if (TaskList.getTaskList().get(i) instanceof Deadline) {
-                    //Check if the deadline is after the day starts
-                    //TODO: Does this work if the time is 12am?
-                    boolean deadlineIsAfterDayStarts =
-                            (((Deadline) TaskList.getTaskList().get(i)).getDeadline()).isAfter(start);
-                    //Check if the deadline is before the day end
-                    boolean deadlineIsBeforeDayEnds =
-                            (((Deadline) TaskList.getTaskList().get(i)).getDeadline()).isBefore(end);
-
-                    if (deadlineIsAfterDayStarts && deadlineIsBeforeDayEnds) {
-                        result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
-                        num++;
-                    }
-
-                //If the event start and end times fall in between the start and end times of the day, add it to the
-                //list of tasks for the day
-                } else if (TaskList.getTaskList().get(i) instanceof Event) {
-                    //Check if the event starts after the day starts
-                    boolean eventIsAfterDayStarts =
-                            (((Event) TaskList.getTaskList().get(i)).getEventStart()).isAfter(start);
-                    //Check if the event ends before the day end
-                    boolean eventIsBeforeDayEnds =
-                            (((Event) TaskList.getTaskList().get(i)).getEventEnd()).isBefore(end);
-
-                    if (eventIsAfterDayStarts && eventIsBeforeDayEnds) {
-                        result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
-                        num++;
-                    }
-                }
-            }
-        }
-
-        //If there are no tasks for today
-        if (num == 1) {
-            result += "\tLooks like there is nothing due today!\n";
-        }
-        return result;
-    }
-
-    public static String parseFind(String search) {
-        String result = "";
-        result += "Here are the matching tasks in your list:\n";
-        int num = 1;
-
-        //Extract the search word/phrase
-        search = search.substring(5);
-
-        for (int i = 0; i < TaskList.getTaskList().size(); i++) {
-            //Check if the search word/phrase is contained in the task description
-            if (TaskList.getTaskList().get(i).getDescription().contains(search)) {
-                result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
-                num++;
-            }
-        }
-        //If there are no matching results
-        if (num == 1) {
-            result += "\tNo matching results found!\n";
-        }
-        return result;
     }
 
     /**
      * Identifies the title and body of the note that is to be added and passes it to
      * addNoteAndUpdate() method
+     *
      * @param instruction User's input that followed the "note" command word
      * @throws DukeException if there is no note title/no body/wrongly formatted note
      * keyed in
@@ -414,6 +268,7 @@ public class Parser {
 
     /**
      * Identifies the note that is to be deleted and passes it to deleteNoteAndUpdate() method
+     *
      * @param instruction User's input that followed the "delete" command word
      * @throws DukeException if there is no note that has the index keyed in by the user
      * @throws IOException if there is an error in updated the list of note saved in the user's
