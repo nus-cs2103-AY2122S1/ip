@@ -31,6 +31,9 @@ public class Duke {
     /**
      * The main program. Takes in user input and returns the relevant
      * response from the bot.
+     *
+     * @param string the user input.
+     * @return the relevant string to display.
      */
     public String getResponse(String string) {
         if (Objects.equals(string.charAt(0), '/')) {
@@ -71,7 +74,7 @@ public class Duke {
 
             case "deadline":
                 try {
-                    Task deadline = Parser.check(description, "/by ");
+                    Task deadline = Parser.getTask(description, "/by ");
                     return list.add(deadline);
 
                 } catch (DukeException e) {
@@ -80,7 +83,7 @@ public class Duke {
 
             case "event":
                 try {
-                    Task event = Parser.check(description, "/at ");
+                    Task event = Parser.getTask(description, "/at ");
                     return list.add(event);
 
                 } catch (DukeException e) {

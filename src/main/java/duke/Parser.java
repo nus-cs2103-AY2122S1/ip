@@ -24,7 +24,7 @@ public class Parser {
      * @param check used to verify what task to create.
      * @return the relevant task from the strings provided.
      */
-    public static Task check(String str, String check) throws DukeException {
+    public static Task getTask(String str, String check) throws DukeException {
         int partition = str.indexOf(check);
         if (partition < 0 || partition + check.length() > str.length()) {
             throw new DukeException("☹ OOPS!!! The task is formatted wrongly.");
@@ -84,12 +84,12 @@ public class Parser {
 
         case "[D]":
             String dlLabel = string.substring(7, string.length() - 1);
-            task = Parser.check(dlLabel, " (by: ");
+            task = Parser.getTask(dlLabel, " (by: ");
             break;
 
         case "[E]":
             String eLabel = string.substring(7, string.length() - 1);
-            task = Parser.check(eLabel, " (at: ");
+            task = Parser.getTask(eLabel, " (at: ");
             break;
 
         default:

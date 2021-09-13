@@ -7,7 +7,7 @@ package duke;
  * @author meerian
  */
 public class Task {
-    private boolean done = false;
+    private boolean isDone = false;
     private final String name;
 
     /**
@@ -27,7 +27,7 @@ public class Task {
      * Sets the task as done.
      */
     public void done() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[X] " + name;
         } else {
             return "[ ] " + name;

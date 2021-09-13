@@ -46,11 +46,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //dialogContainer.getChildren().add(DialogBox.getStartScreen(dukeImage));
     }
 
     /**
      * Set duke and loads up the saved list to display and display the welcome message.
+     *
+     * @param d the duke object to set
      */
     public void setDuke(Duke d) {
         duke = d;
