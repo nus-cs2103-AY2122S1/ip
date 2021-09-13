@@ -2,6 +2,6 @@ package ashy.exceptions;
 
 public class TaskDoneAlreadyException extends AshyException {
     public TaskDoneAlreadyException() {
-        super("You have completed this task already!");
+        super("Oh no! You have completed this task already!");
     }
 }

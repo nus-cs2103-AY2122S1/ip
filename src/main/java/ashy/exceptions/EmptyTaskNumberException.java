@@ -2,6 +2,6 @@ package ashy.exceptions;
 
 public class EmptyTaskNumberException extends AshyException {
     public EmptyTaskNumberException() {
-        super("You haven't mentioned the task number! ☹");
+        super("Oh no! You haven't mentioned the task number! ☹");
     }
 }

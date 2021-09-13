@@ -127,15 +127,18 @@ public class Ashy {
                 break;
             case UPDATE:
                 if (input.equals("")) {
-                    throw new EmptyTaskDescriptionException();
-                }
-                String [] update = input.split(":", 2);
-                String description = update[0];
-                if (update.length < 2) {
                     throw new EmptyTaskNumberException();
                 }
-                int taskNumber = Integer.parseInt(update[1].trim());
+                String [] update = input.split(":", 2);
+                int taskNumber = Integer.parseInt(update[0].trim());
+                if (update.length < 2) {
+                    throw new EmptyTaskDescriptionException();
+                }
+                String description = update[1].trim();
                 response = taskList.updateDescription(commands, description, taskNumber - 1);
+                break;
+            case HELP:
+                response = ui.helpOutput();
                 break;
             default:
                 throw new UnknownInputException();
@@ -186,7 +189,7 @@ public class Ashy {
             AshyCommands dukeCommand = parser.parseCommand(command);
             response = execute(dukeCommand, description, 0);
         } catch (IllegalArgumentException e) {
-            response = "I'm sorry, I don't know what that means! ☹";
+            response = "I'm sorry, I don't know what that means! ☹\nUse the help command to learn my commands!";
         }
         return response;
     }

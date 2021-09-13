@@ -29,7 +29,6 @@ public class TaskList {
         }
         return response;
     }
-
     /**
      * Deletes a task from the list
      * @param listNumber index of task to be deleted
@@ -50,7 +49,6 @@ public class TaskList {
         storage.saveCommands(commands);
         return response;
     }
-
     /**
      * Finds tasks related to a certain keyword
      *
@@ -78,17 +76,13 @@ public class TaskList {
             if (!matchFound) {
                 throw new NoMatchFoundException();
             }
-            response = "Here are " + (matchingTasks.size()) + " matching tasks in your list: \n";
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                response += (i + 1) + ". " + matchingTasks.get(i) + "\n";
-            }
+            response = ui.findOutput(matchingTasks, matchingTasks.size());
         } catch (AshyException e) {
             response = e.getMessage();
         }
         storage.saveCommands(commands);
         return response;
     }
-
     /**
      * Updates the description of a given task
      * @param commands
@@ -103,7 +97,7 @@ public class TaskList {
                 throw new InvalidTaskException();
             }
             commands.get(listNumber).updateDescription(updatedDescription);
-            response = "I have updated the task description for you!";
+            response = ui.updateOutput(commands.get(listNumber));
         } catch (AshyException e) {
             response = e.getMessage();
         }

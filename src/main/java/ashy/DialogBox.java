@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +20,6 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    private final Circle crop = new Circle(50, 50, 50);
     @FXML
     private Label dialog;
     @FXML
@@ -33,13 +31,16 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-            displayPicture.setClip(crop);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         dialog.setText(text);
         displayPicture.setImage(img);
+    }
+
+    private void setRedBackground() {
+        dialog.setStyle("-fx-padding: 10 10 10 10; -fx-background-color: #f76f6f; -fx-background-radius: 10 10 10 10;");
     }
 
     /**
@@ -54,16 +55,15 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialogBox = new DialogBox(text, img);
-        userDialogBox.setStyle("-fx-background-color: #CABAE6");
-        userDialogBox.setAlignment(Pos.CENTER_RIGHT);
         return userDialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox ashyDialogBox = new DialogBox(text, img);
         ashyDialogBox.flip();
-        ashyDialogBox.setStyle("-fx-background-color: #E6BAE5");
-        ashyDialogBox.setAlignment(Pos.CENTER_LEFT);
+        if (text.contains("Oh no! ")) {
+            ashyDialogBox.setRedBackground();
+        }
         return ashyDialogBox;
     }
 }

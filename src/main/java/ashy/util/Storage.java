@@ -50,7 +50,6 @@ public class Storage {
         }
 
     }
-
     /**
      * Saves task list to hard-disk
      *

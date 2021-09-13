@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Ashy duke;
     private Ui ui = new Ui();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpeg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ashy.png"));
 
 
