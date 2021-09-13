@@ -22,7 +22,6 @@ import javafx.scene.shape.Circle;
  * Referenced from https://se-education.org/guides/tutorials/javaFx.html
  */
 public class DialogBox extends HBox {
-    private static final Circle CLIP = new Circle(49, 50, 49);
 
     @FXML
     private Label dialog;
@@ -38,10 +37,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
+
+        Circle clip = new Circle(49, 50, 48);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
-        displayPicture.setClip(CLIP);
     }
 
     /**
