@@ -3,11 +3,10 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
+import duke.*;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 /**
@@ -42,47 +41,60 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         switch(taskType) {
         case "todo":
-            Todo newTodo = new Todo(description);
-            tasks.addTask(newTodo);
-            reply = "Got it. I've added this task:\n" + "  " + newTodo
-                    + System.lineSeparator() + "Now you have " + tasks.getSize() + " tasks in the list.";
-            storage.update(tasks);
-            break;
+            return handleTodo(tasks, storage);
         case "deadline":
-            assert description.equals("/by");
-            try {
-                String[] parsedAdd = description.split(" /by ", 2);
-                LocalDate date = LocalDate.parse(parsedAdd[1]);
-                Deadline newDeadline = new Deadline(parsedAdd[0], date);
-                tasks.addTask(newDeadline);
-                reply = "Got it. I've added this task:\n" + "  " + newDeadline
-                        + System.lineSeparator() + "Now you have " + tasks.getSize() + " tasks in the list.";
-                storage.update(tasks);
-                break;
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please use the specified date format (YYYY-MM-DD)!");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please specify a description for this deadline.");
-            }
+            return handleDeadline(tasks, storage);
         case "event":
-            assert description.equals("/at");
-            try {
-                String[] parsedAdd = description.split(" /at ", 2);
-                LocalDate date = LocalDate.parse(parsedAdd[1]);
-                Event newEvent = new Event(parsedAdd[0], date);
-                tasks.addTask(newEvent);
-                reply = "Got it. I've added this task:\n" + "  " + newEvent
-                        + System.lineSeparator() + "Now you have " + tasks.getSize() + " tasks in the list.";
-                storage.update(tasks);
-                break;
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please use the specified date format (YYYY-MM-DD)!");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please specify a description for this event.");
-            }
+            return handleEvent(tasks, storage);
         default:
             throw new AssertionError(taskType);
         }
+    }
+
+    private static String createReply(Task task, int size) {
+        return "Got it. I've added this task:\n" + "  " + task
+                + System.lineSeparator() + "Now you have " + size + " tasks in the list.";
+    }
+
+    private String handleTodo(TaskList tasks, Storage storage) throws DukeException {
+        Todo newTodo = new Todo(description);
+        tasks.addTask(newTodo);
+        reply = createReply(newTodo, tasks.getSize());
+        storage.update(tasks);
+        return reply;
+    }
+
+    private String handleDeadline(TaskList tasks, Storage storage) throws DukeException {
+        try {
+            String[] parsedAdd = description.split(" /by ", 2);
+            LocalDate date = LocalDate.parse(parsedAdd[1]);
+            Deadline newDeadline = new Deadline(parsedAdd[0], date);
+            tasks.addTask(newDeadline);
+            reply = createReply(newDeadline, tasks.getSize());
+            storage.update(tasks);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoDescriptionException(taskType);
+        }
+
+        return reply;
+    }
+
+    private String handleEvent(TaskList tasks, Storage storage) throws DukeException {
+        try {
+            String[] parsedAdd = description.split(" /at ", 2);
+            LocalDate date = LocalDate.parse(parsedAdd[1]);
+            Event newEvent = new Event(parsedAdd[0], date);
+            tasks.addTask(newEvent);
+            reply = createReply(newEvent, tasks.getSize());
+            storage.update(tasks);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoDescriptionException(taskType);
+        }
+
         return reply;
     }
 }

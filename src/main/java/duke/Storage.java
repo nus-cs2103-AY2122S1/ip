@@ -105,41 +105,46 @@ public class Storage {
     private static Task parseInput(String str) throws DukeException {
 
         String[] taskArr = str.split(" \\| ");
-        Task newTask;
 
         switch (taskArr[0]) {
         case "T":
-            Todo todo = new Todo(taskArr[2]);
-
-            if (taskArr[1].equals("1")) {
-                todo.setDone();
-            }
-
-            newTask = todo;
-            break;
-        case "E":
-            Event event = new Event(taskArr[2], LocalDate.parse(taskArr[3]));
-
-            if (taskArr[1].equals("1")) {
-                event.setDone();
-            }
-
-            newTask = event;
-            break;
+            return parseTodo(taskArr);
         case "D":
-            Deadline deadline = new Deadline(taskArr[2], LocalDate.parse(taskArr[3]));
-
-            if (taskArr[1].equals("1")) {
-                deadline.setDone();
-            }
-
-            newTask = deadline;
-            break;
+            return parseDeadline(taskArr);
+        case "E":
+            return parseEvent(taskArr);
         default:
             throw new DukeException("File corrupted. Please create a new file or check your existing file.");
         }
+    }
 
-        assert newTask != null;
-        return newTask;
+    private static Task parseTodo(String[] strArr) {
+        Todo todo = new Todo(strArr[2]);
+
+        if (strArr[1].equals("1")) {
+            todo.setDone();
+        }
+
+        return todo;
+    }
+
+    private static Task parseDeadline(String[] strArr) {
+        Deadline deadline = new Deadline(strArr[2], LocalDate.parse(strArr[3]));
+
+        if (strArr[1].equals("1")) {
+            deadline.setDone();
+        }
+
+        return deadline;
+    }
+
+    private static Task parseEvent(String[] strArr) {
+        Event event = new Event(strArr[2], LocalDate.parse(strArr[3]));
+
+        if (strArr[1].equals("1")) {
+            event.setDone();
+        }
+
+        return event;
     }
 }
