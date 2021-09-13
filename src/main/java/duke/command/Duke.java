@@ -43,7 +43,7 @@ public class Duke {
     }
 
     /**
-     * Set the mainWindow of this instance of duke.
+     * Sets the mainWindow of this instance of duke.
      *
      * @param mainWindow GUI viewController.
      */

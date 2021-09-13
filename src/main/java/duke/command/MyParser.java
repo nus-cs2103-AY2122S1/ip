@@ -16,7 +16,7 @@ import java.util.Date;
 public class MyParser {
     private static final SimpleDateFormat DEADLINE_TIME_FORMAT = new SimpleDateFormat("d/MM/yyyy HHmm");
     /**
-     * Deals with making sense of user commands.
+     * Makes sense of user commands.
      *
      * @param command First word of line inputted by user to decide command.
      * @param description Following words of line inputted by user.
