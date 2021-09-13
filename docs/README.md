@@ -108,7 +108,7 @@ Expected outcome:
 Aliases: `l`, `ls`, `list`
 
 List all the tasks you have added. This command also lets you know which tasks are already completed and the type of 
-the tasks.
+the tasks. Any subsequent arguments after `list` will be ignored.
 
 Example of usage:
 
@@ -123,7 +123,7 @@ Expected outcome:
 Aliases: `complete`, `done`
 
 Marks tasks as completed. You can specify a single index or multiple indices separated by commas. You cannot mark a 
-task as completed more than once.
+task as completed more than once. If no value is specified between commas, it will be ignored.
 
 Example of usage:
 
@@ -137,7 +137,7 @@ Expected outcome:
 
 Aliases: `del`, `rm`, `delete` 
 
-Delete tasks. You can specify a single index or multiple indices separated by commas.
+Delete tasks. You can specify a single index or multiple indices separated by commas. If no value is specified between commas, it will be ignored.
 
 Example of usage:
 
@@ -151,7 +151,7 @@ Expected outcome:
 
 Aliases: `h`, `help`
 
-The help message includes all available commands and how to use them
+The help message includes all available commands and how to use them. Any subsequent arguments after `help` will be ignored.
 
 Example of usage:
 
@@ -165,7 +165,7 @@ Expected outcome:
 
 Aliases: `a`, `al`, `alias`
 
-The aliases allows users to type lesser characters to achieve the same results.
+The aliases allows users to type lesser characters to achieve the same results. Any subsequent arguments after `alias` will be ignored.
 
 Example of usage:
 
@@ -179,7 +179,7 @@ Expected outcome:
 
 Aliases: `b`, `bb`, `goodbye`, `bye`
 
-This command exits the program and prints a farewell message
+This command exits the program and prints a farewell message. Any subsequent arguments after `bye` will be ignored.
 
 Example of usage:
 
