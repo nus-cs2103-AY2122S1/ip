@@ -10,7 +10,7 @@
 
 <fx:root maxWidth="500.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="500.0" snapToPixel="false" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <HBox maxWidth="-Infinity" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0" spacing="25.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #A9FFF7;">
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: #A9FFF7;">
          <children>
             <Circle fx:id="displayPicture" fill="#1f93ff00" radius="30.0" stroke="#011627" strokeType="INSIDE" />
             <VBox fx:id="chatVBox" maxWidth="300.0" spacing="10.0">
@@ -20,7 +20,7 @@
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Text fx:id="dialog" fill="#011627" stroke="#3b11f5" strokeType="OUTSIDE" strokeWidth="0.0" text="4ifhjgoiegoiegjoijgoipegjigjeirgjoipejrgoiejrgpjoigjoigjoiegjioerwjgiwer" textOrigin="TOP" wrappingWidth="275.0" VBox.vgrow="ALWAYS">
+                  <Text fx:id="dialog" fill="#011627" strokeType="OUTSIDE" strokeWidth="0.0" text="4ifhjgoiegoiegjoijgoipegjigjeirgjoipejrgoiejrgpjoigjoigjoiegjioerwjgiwer" textOrigin="TOP" wrappingWidth="275.0" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
