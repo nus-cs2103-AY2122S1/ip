@@ -86,10 +86,13 @@ public class MainWindow extends AnchorPane {
         assert duke != null : "Duke should have been initialised first!";
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
-        );
+        //Does not show a visual response when a user enters nothing
+        if (!input.isEmpty()) {
+            dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
 
         // Referenced from https://github.com/zihaooo9/ip/commit/a9528849baeb23011b8225029e4ed8ea2b17235e
         // @@author CheyanneSim-reused
