@@ -13,6 +13,8 @@ public class Ui {
 
     /**
      * Generates and prints the welcome message upon the start of the application.
+     *
+     * @return Duke's default welcome message
      */
     public static String showWelcomeMessage() {
         return "Hello from Duke! \n"
@@ -30,6 +32,7 @@ public class Ui {
      * Shows the list of tasks to user, formatted as an indexed list.
      *
      * @param list the tasklist to show
+     * @return indexed list of tasks
      */
     public static String showTaskList(TaskList list) {
         return list.toDisplay();
@@ -41,6 +44,7 @@ public class Ui {
      * Shows the last task added to the tasklist upon successful addition of a task.
      *
      * @param list the tasklist that is added unto
+     * @return description of the newly added task
      */
     public static String showAddedTask(TaskList list) {
         return String.format("added: %s\n", list.getTask(list.count()));
@@ -50,6 +54,7 @@ public class Ui {
      * Shows the task deleted to the tasklist upon successful deletion of a task.
      *
      * @param task the deleted task
+     * @return description of task deleted
      */
     public static String showDeletedTask(Task task) {
         return "Got it! I've removed this task: \n" + task + "\n";
@@ -59,6 +64,7 @@ public class Ui {
      * Shows the task completed to the tasklist upon successful marking of a task as Done.
      *
      * @param task the completed task
+     * @return description of task marked done
      */
     public static String showDoneTask(Task task) {
         return "Good job! I've marked this task as done: \n" + task;
@@ -68,6 +74,7 @@ public class Ui {
      * Shows the number of tasks in the tasklist.
      *
      * @param tasks the tasklist
+     * @return description of current number of tasks in list
      */
     public static String showTaskCount(TaskList tasks) {
         return String.format("Now you have %d tasks in your list.%n%n", tasks.count());
@@ -78,6 +85,7 @@ public class Ui {
      * Shows the description of error when an operation fails.
      *
      * @param e the exception that caused the error
+     * @return description of error
      */
     public static String showErrorMessage(DukeException e) {
         return e.getMessage();
@@ -88,6 +96,7 @@ public class Ui {
      * an indexed list.
      *
      * @param results ArrayList of matching tasks
+     * @return indexed list of matching tasks
      */
     public static String showFindResults(ArrayList<Task> results) {
         if (results.isEmpty()) {
@@ -104,7 +113,7 @@ public class Ui {
     }
 
     /**
-     * Generates and prints the help message.
+     * Generates and returns the help message.
      * @return list of commands to use
      */
     public static String showHelpMessage() {
