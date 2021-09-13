@@ -25,7 +25,7 @@ public class Sqlite extends Database {
 
     @Override
     public Connection getSqlConnection() {
-        File dataFile = this.createOrOpenDataFile();
+        File dataFile = this.getDataFile();
         try {
             if (connection != null && !connection.isClosed()) {
                 return connection;

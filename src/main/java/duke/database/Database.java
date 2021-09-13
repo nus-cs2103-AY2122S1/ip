@@ -176,16 +176,16 @@ public abstract class Database {
         return dataFolder;
     }
 
-    protected File createOrOpenDataFile() {
-        File dataFolder = new File(this.getDataFolder(), DATABASE_NAME + ".db");
-        if (!dataFolder.exists()) {
+    protected File getDataFile() {
+        File dataFile = new File(this.getDataFolder(), DATABASE_NAME + ".db");
+        if (!dataFile.exists()) {
             try {
-                dataFolder.createNewFile();
+                dataFile.createNewFile();
             } catch (IOException e) {
                 throw new DatabaseFileException("Unable to create data file!");
             }
         }
-        return dataFolder;
+        return dataFile;
     }
 
 }
