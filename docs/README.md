@@ -10,7 +10,7 @@ Pika Bot is an app that is for managing and keeping track of task.
 
 1. Ensure that you have Java 11 or above installed in your computer.
 2. Download the latest version from [here](https://github.com/random689/ip/releases/tag/A-Release).
-3. Copy the file to the folder you want to use as the ~~home folder~~ for your Pika Bot.
+3. Copy the file to the folder you want to use as the home folder for your Pika Bot.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Do note that the GUI shown below has already ran some commands.
 
 ![GUI](https://random689.github.io/ip/Ui.png)
