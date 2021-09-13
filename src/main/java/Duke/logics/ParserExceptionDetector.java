@@ -12,7 +12,6 @@ import duke.task.TaskList;
  */
 public class ParserExceptionDetector {
     //Constant values
-    private final static String EMPTY = "";
     private final static String SLASH = "/";
     private final static String SPACE = " ";
     private final static String BY = "/by";
@@ -43,11 +42,6 @@ public class ParserExceptionDetector {
      * of the given type list.
      */
     public void detectOperationTypeException() throws DukeException {
-        //If Input is empty throw empty error.
-        if (message.equals(EMPTY) || message.startsWith(SPACE)) {
-            throw new DukeException(ExceptionType.EMPTY_COMMAND_ERROR);
-        }
-
         //If the task type does not belong to the three types, throw an error.
         TaskList.OperationType[] operationTypes = TaskList.OperationType.values();
         for (TaskList.OperationType o : operationTypes) {
@@ -56,7 +50,6 @@ public class ParserExceptionDetector {
                 return;
             }
         }
-
         throw new DukeException(ExceptionType.UNKNOWN_OPERATION);
     }
 

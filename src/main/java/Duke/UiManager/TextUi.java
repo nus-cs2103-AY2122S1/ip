@@ -16,7 +16,7 @@ public class TextUi {
      */
     public String helloMessage() {
         String text = """
-                Hello! Welcome to your best task manager Duke!
+                Hello! I'm Duke
                 What can I do for you?
                 """;
         return text;

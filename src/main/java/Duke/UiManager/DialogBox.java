@@ -58,12 +58,7 @@ public class DialogBox extends HBox {
      * @return DialogBox for user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-radius:12px;" +
-                "-fx-border-style: solid; -fx-border-width: 1em");
-        dialogBox.dialog.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-width:3;" +
-                "-fx-border-radius:10px; -fx-background-color: #FFADAD; -fx-background-radius: 12px;");
-        return dialogBox;
+        return new DialogBox(text, img);
     }
 
     /**
@@ -74,12 +69,8 @@ public class DialogBox extends HBox {
      * @return DialogBox for Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-radius:12px;" +
-                "-fx-border-style: solid; -fx-border-width: 1em;");
-        dialogBox.dialog.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-width:3;" +
-                "-fx-border-radius:10px; -fx-background-color:  #3DB2FF; -fx-background-radius: 12px;");
-        dialogBox.flip();
-        return dialogBox;
+        var db = new DialogBox(text, img);
+        db.flip();
+        return db;
     }
 }
