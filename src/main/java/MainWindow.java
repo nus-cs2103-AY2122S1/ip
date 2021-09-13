@@ -50,6 +50,7 @@ public class MainWindow extends AnchorPane {
         );
 
         if (!response.isContinue()) {
+            duke.finish();
             closeStage();
         }
 
