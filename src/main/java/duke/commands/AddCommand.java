@@ -14,7 +14,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand
-     * 
+     *
      * @param t the task to be added
      */
     public AddCommand(Task t) {
@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         if (isDuplicate) {
             return ui.print(String.format("You already have this task in the list:\n %s", this.t.toString()));
         }
-        
+
         storage.saveData(tasks.add(this.t));
         return ui.print(String.format(
                 "Got it. I've added this task:\n %s\nNow you have %d task(s) in the list",

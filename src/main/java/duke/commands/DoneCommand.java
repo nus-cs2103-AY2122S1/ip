@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand
-     * 
+     *
      * @param rest the user input after the command
      */
     public DoneCommand(String rest) throws InvalidIndexFormatException {

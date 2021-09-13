@@ -14,7 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for FindCommand
-     * 
+     *
      * @param rest the user input after the command
      * @throws EmptyDescriptionException if input is empty
      */

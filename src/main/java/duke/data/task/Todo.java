@@ -3,15 +3,15 @@ package duke.data.task;
 import duke.data.exception.EmptyDescriptionException;
 
 /**
- * Encapsulates Todo 
+ * Encapsulates Todo
  */
 public class Todo extends Task {
     /** The identifier for this task */
-    protected static String IDENTIFIER = "T";
-    
+    protected static final String IDENTIFIER = "T";
+
     /**
      * Constructor for Todo
-     * 
+     *
      * @param description the description of the task
      * @throws EmptyDescriptionException if description is empty
      */
@@ -21,7 +21,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for Todo specifying isDone
-     * 
+     *
      * @param description the description of the task
      * @param isDone the status of the task
      */
@@ -36,7 +36,7 @@ public class Todo extends Task {
 
     /**
      * Returns string representation of Todo
-     * 
+     *
      * @return string representation of Todo
      */
     @Override

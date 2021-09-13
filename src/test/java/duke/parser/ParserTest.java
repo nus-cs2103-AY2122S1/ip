@@ -1,9 +1,9 @@
 package duke.parser;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 
 public class ParserTest {
@@ -16,7 +16,7 @@ public class ParserTest {
             assertEquals("OOPS!!! I'm sorry, but I don't know what that means :(", e.toString());
         }
     }
-    
+
     @Test
     public void parseInput_emptyDescription_exceptionThrown() {
         try {

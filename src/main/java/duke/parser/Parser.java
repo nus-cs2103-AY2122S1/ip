@@ -21,12 +21,12 @@ public class Parser {
 
     /** All Possible commands */
     private enum Commands {
-        LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND, HELP 
+        LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND, HELP
     }
 
     /**
      * Converts user input into a Command
-     * 
+     *
      * @param fullCommand the user input
      * @return the Command encapsulating the given user input
      * @throws InvalidCommandException if command is invalid
@@ -38,10 +38,10 @@ public class Parser {
         try {
             Commands cmd = Commands.valueOf(
                     isSingleWordInput
-                    ? fullCommand.toUpperCase() 
+                    ? fullCommand.toUpperCase()
                     : fullCommand.substring(0, i).toUpperCase());
             String rest = isSingleWordInput ? "" : fullCommand.substring(i).strip();
-            
+
             switch (cmd) {
             case LIST:
                 return new ListCommand();

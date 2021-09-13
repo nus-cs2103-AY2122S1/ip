@@ -1,13 +1,13 @@
 package duke;
 
+import java.nio.file.Path;
+
 import duke.commands.Command;
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.nio.file.Path;
 
 /**
  * Describes chatbot Duke
@@ -19,7 +19,7 @@ public class Duke {
 
     /**
      * Constructor for Duke
-     * 
+     *
      * @param filePath the path for the file where data is stored
      */
     public Duke(Path filePath) {
@@ -27,14 +27,14 @@ public class Duke {
         this.tasks = new TaskList(storage.loadData());
         this.ui = new Ui();
     }
-    
+
     protected String getWelcome() {
         return ui.greet();
     }
 
     /**
      * Returns Duke's response to a given input
-     * 
+     *
      * @param input the input given by user
      * @return Duke's response
      */

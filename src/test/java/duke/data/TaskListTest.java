@@ -1,15 +1,15 @@
 package duke.data;
 
-import duke.Duke;
-import duke.data.exception.DukeException;
-import duke.data.task.Task;
-import duke.data.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.data.exception.DukeException;
+import duke.data.task.Task;
+import duke.data.task.Todo;
 
 public class TaskListTest {
     @Test
@@ -24,7 +24,7 @@ public class TaskListTest {
             fail();
         }
     }
-    
+
     @Test
     public void testDeleteTask() {
         TaskList tasks = new TaskList(new ArrayList<>());
@@ -39,7 +39,7 @@ public class TaskListTest {
             fail();
         }
     }
-    
+
     @Test
     public void getTask_invalidIndex_exceptionThrown() {
         TaskList tasks = new TaskList(new ArrayList<>());

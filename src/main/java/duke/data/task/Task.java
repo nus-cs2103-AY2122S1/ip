@@ -6,25 +6,18 @@ import duke.data.exception.EmptyDescriptionException;
  * Encapsulates tasks
  */
 public abstract class Task {
+    /** Format pattern of user input for date time */
+    protected static final String INPUT_DATE_TIME_FORMAT_PATTERN = "d/MM/yyyy HHmm";
+    /** Format pattern of output for date time */
+    protected static final String OUTPUT_DATE_TIME_FORMAT_PATTERN = "d MMM yyyy h:mma";
     /** Description of task */
     protected String description;
     /** Status of task */
     protected boolean isDone;
-    /** Format pattern of user input for date time */
-    protected static String INPUT_DATE_TIME_FORMAT_PATTERN = "d/MM/yyyy HHmm";
-    /** Format pattern of output for date time */
-    protected static String OUTPUT_DATE_TIME_FORMAT_PATTERN = "d MMM yyyy h:mma";
 
     /**
-     * Converts content to formatted text to save into storage
-     * 
-     * @return formatted text to save into storage
-     */
-    public abstract String convertToData();
-    
-    /**
      * Constructor for Task
-     * 
+     *
      * @param description the description of the task
      * @throws EmptyDescriptionException if description is empty
      */
@@ -38,7 +31,7 @@ public abstract class Task {
 
     /**
      * Constructor for Task specifying isDone
-     * 
+     *
      * @param description the description of the task
      * @param isDone the status of the task
      */
@@ -49,18 +42,25 @@ public abstract class Task {
     }
 
     /**
+     * Converts content to formatted text to save into storage
+     *
+     * @return formatted text to save into storage
+     */
+    public abstract String convertToData();
+
+    /**
      * Returns icon indicating status of this task
-     * 
+     *
      * @return X if done, empty if otherwise
      */
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }
-    
+
     public String getDescription() {
         return this.description;
     }
-    
+
     public static String getInputDateTimeFormatPattern() {
         return INPUT_DATE_TIME_FORMAT_PATTERN;
     }
@@ -74,7 +74,7 @@ public abstract class Task {
 
     /**
      * Returns string representation of this task
-     * 
+     *
      * @return string representation of task
      */
     @Override

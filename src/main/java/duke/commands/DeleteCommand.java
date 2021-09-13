@@ -16,10 +16,10 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand
-     * 
+     *
      * @param rest the user input after the command
      */
-    public DeleteCommand(String rest) throws InvalidIndexFormatException{
+    public DeleteCommand(String rest) throws InvalidIndexFormatException {
         try {
             this.index = Integer.parseInt(rest.strip());
         } catch (NumberFormatException e) {

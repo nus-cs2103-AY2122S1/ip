@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public abstract class Command {
     /**
      * Executes the given command and returns reply
-     * 
+     *
      * @param tasks the list of tasks
      * @param ui the user interface
      * @param storage the location of saved data

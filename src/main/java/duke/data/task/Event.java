@@ -1,26 +1,26 @@
 package duke.data.task;
 
-import duke.data.exception.EmptyDescriptionException;
-import duke.data.exception.EmptyTimeException;
-import duke.data.exception.InvalidTimeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.data.exception.EmptyDescriptionException;
+import duke.data.exception.EmptyTimeException;
+import duke.data.exception.InvalidTimeException;
 
 /**
  * Encapsulates event task
  */
 public class Event extends Task {
+    /** The identifier of this task */
+    protected static final String IDENTIFIER = "E";
+
     /** Time of the event */
     protected LocalDateTime at;
-    
-    /** The identifier of this task */
-    protected static String IDENTIFIER = "E";
 
     /**
      * Constructor for Event
-     * 
+     *
      * @param input the input array consisting of description and date/time
      * @throws EmptyDescriptionException if description is empty
      * @throws EmptyTimeException if time is empty
@@ -33,7 +33,7 @@ public class Event extends Task {
         if (isEmptyTimeInput) {
             throw new EmptyTimeException();
         }
-        
+
         String time = input[1];
         try {
             this.at = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(INPUT_DATE_TIME_FORMAT_PATTERN));
@@ -44,7 +44,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event specifying isDone
-     * 
+     *
      * @param input the input array consisting of description and date/time
      * @param isDone event's status from saved data
      */
@@ -53,7 +53,7 @@ public class Event extends Task {
         assert(!input[1].isEmpty());
         this.at = LocalDateTime.parse(input[1]);
     }
-    
+
     @Override
     public String convertToData() {
         return String.format("%s/%s/%s/%s", IDENTIFIER, this.isDone ? "1" : "0", this.description, this.at);
@@ -65,8 +65,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (at: %s)", 
-                IDENTIFIER, 
+        return String.format("[%s]%s (at: %s)",
+                IDENTIFIER,
                 super.toString(),
                 this.at.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)));
     }

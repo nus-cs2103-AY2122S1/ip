@@ -1,19 +1,19 @@
 package duke.storage;
 
-import duke.data.task.Deadline;
-import duke.data.task.Event;
-import duke.data.task.Task;
-import duke.data.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.Todo;
 
 /**
  * Deals with loading tasks form the file and saving tasks in the file
@@ -24,7 +24,7 @@ public class Storage {
 
     /**
      * Constructor for Storage
-     * 
+     *
      * @param filePath the path where data is to be stored
      */
     public Storage(Path filePath) {
@@ -36,7 +36,7 @@ public class Storage {
 
     /**
      * Creates file from given path
-     * 
+     *
      * @param filePath the path to create file at
      */
     private void createFile(Path filePath) {
@@ -52,14 +52,14 @@ public class Storage {
 
     /**
      * Fetches saved tasks and loads them into ArrayList
-     * 
+     *
      * @return list of saved tasks
      */
     public ArrayList<Task> loadData() {
         try {
             ArrayList<Task> lst = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(this.filePath.toFile()));
-            
+
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 String[] txt = line.split("/");
                 boolean isDone = txt[1].equals("1");
@@ -77,7 +77,7 @@ public class Storage {
                     assert false; //Stored data should be in the correct format
                 }
             }
-            
+
             return lst;
         } catch (IOException e) {
             System.out.println("Can't load data");
@@ -87,7 +87,7 @@ public class Storage {
 
     /**
      * Saves the given list into data folder
-     * 
+     *
      * @param lst the list of tasks to save
      */
     public void saveData(ArrayList<Task> lst) {
@@ -102,6 +102,6 @@ public class Storage {
             bf.close();
         } catch (IOException e) {
             System.out.println("Can't save data");
-        } 
+        }
     }
 }
