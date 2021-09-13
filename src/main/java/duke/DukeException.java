@@ -4,6 +4,7 @@ package duke;
  * Exception specifically for the Duke class.
  */
 public class DukeException extends Exception {
+
     /**
      * Constructor for DukeException
      *

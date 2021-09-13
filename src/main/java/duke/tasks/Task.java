@@ -4,14 +4,14 @@ package duke.tasks;
  * Class representing the Task type.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task.
      *
-     * @param description of the Task.
-     * @param isDone      if the task is done or not.
+     * @param description Description of the task.
+     * @param isDone      If the task is done or not.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -21,7 +21,7 @@ public class Task {
     /**
      * Returns the status icon of the task depending on if it is done or not.
      *
-     * @return the status icon of the task.
+     * @return The status icon of the task.
      */
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[  ]"); // mark done task with X
@@ -34,11 +34,6 @@ public class Task {
         isDone = true;
     }
 
-    /**
-     * Returns the description of the task.
-     *
-     * @return description of the task.
-     */
     public String getDescription() {
         return this.description;
     }

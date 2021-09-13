@@ -10,16 +10,17 @@ public class ListCommand extends Command {
     /**
      * Constructor for ListCommand.
      *
-     * @param desc
+     * @param desc Description of command.
      */
     public ListCommand(String desc) {
         super(desc);
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command. Lists the tasks in the task list.
      *
      * @param tasks the task list.
+     * @return The reply of Duke to the user.
      */
     @Override
     public String execute(TaskList tasks) {

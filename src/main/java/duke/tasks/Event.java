@@ -8,14 +8,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    private LocalDateTime at;
+    private final LocalDateTime at;
 
     /**
      * Constructor for Event task.
      *
-     * @param description of the event.
-     * @param at          when the event is.
-     * @param isDone      if the task is done or not.
+     * @param description Description of the event.
+     * @param at          When the event is.
+     * @param isDone      If the task is done or not.
      */
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
@@ -28,7 +28,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"))
-                + ")";
+        return "[E]" + super.toString() + "(at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a")) + ")";
     }
 }

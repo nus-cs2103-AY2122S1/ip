@@ -22,8 +22,8 @@ public class Parser {
     /**
      * Method to parse and make sense what the user typed in.
      *
-     * @param commandLine the user's input.
-     * @param tasks       the TaskList that contains all the user's tasks.
+     * @param commandLine The user's input.
+     * @param tasks       The TaskList that contains all the user's tasks.
      * @return Command deciphered from the user input.
      * @throws DukeException If the user gives a bad input.
      */
@@ -95,7 +95,7 @@ public class Parser {
     /**
      * Checks if a done/delete command has an index.
      *
-     * @param fullCommand the full commandline input by the user
+     * @param fullCommand The full commandline input by the user
      * @throws DukeException If there is no index number
      */
     public static void hasIndex(String[] fullCommand) throws DukeException {
@@ -107,8 +107,8 @@ public class Parser {
     /**
      * Checks if the index number that the user input is valid.
      *
-     * @param i            the index number that the user input.
-     * @param lengthOfList the length of the user's TaskList.
+     * @param i            The index number that the user input.
+     * @param lengthOfList The length of the user's TaskList.
      * @throws DukeException If the index number is negative or more than length of the TaskList.
      */
     public static void isValidIndex(int i, int lengthOfList) throws DukeException {
@@ -127,8 +127,7 @@ public class Parser {
      * @throws DukeException If the date format is invalid
      */
     public LocalDateTime parseDate(String date) throws DukeException {
-        DateTimeFormatter dtf = DateTimeFormatter
-                .ofPattern("[d/M/[uuuu][uu] H:mm]");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("[d/M/[uuuu][uu] H:mm]");
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
@@ -152,7 +151,7 @@ public class Parser {
         for (int i = 1; i < fullCommand.length; i++) {
             int index = Integer.parseInt(fullCommand[i]);
             isValidIndex(index, taskSize);
-            System.out.println(temp);
+
             if (temp.contains(index)) {
                 throw new DukeException("No duplicate indexes allowed");
             }

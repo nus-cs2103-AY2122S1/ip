@@ -5,7 +5,7 @@ import java.io.IOException;
 import duke.commands.Command;
 
 /**
- * Represents the chatbot Duke.
+ * Represents the chatbot, Duke.
  */
 public class Duke {
 

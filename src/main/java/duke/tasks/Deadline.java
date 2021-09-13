@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a deadline task.
+ * Represents a Deadline task.
  */
 public class Deadline extends Task {
 
@@ -13,9 +13,9 @@ public class Deadline extends Task {
     /**
      * Constructor for Deadline.
      *
-     * @param description of the deadline.
-     * @param by          when the deadline is.
-     * @param isDone      if the task is done or not.
+     * @param description Description of the deadline.
+     * @param by          When the deadline is.
+     * @param isDone      If the task is done or not.
      */
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
@@ -24,10 +24,6 @@ public class Deadline extends Task {
 
     public String getBy() {
         return by.toString();
-    }
-
-    public LocalDateTime getDate() {
-        return by;
     }
 
     @Override

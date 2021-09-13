@@ -30,7 +30,10 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command.
+     *
+     * @param tasks The task list.
+     * @return The reply of Duke to the user.
      */
     public abstract String execute(TaskList tasks) throws IOException;
 }

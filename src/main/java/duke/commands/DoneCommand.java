@@ -15,8 +15,8 @@ public class DoneCommand extends Command {
     /**
      * Constructor for DoneCommand
      *
-     * @param desc of Command.
-     * @param doneIndexes the indexes of tasks to be marked.
+     * @param desc        Description of command.
+     * @param doneIndexes The indexes of tasks to be marked.
      */
     public DoneCommand(String desc, ArrayList<Integer> doneIndexes) {
         super(desc);
@@ -25,14 +25,16 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command. Mark tasks as done.
      *
-     * @param tasks the task list.
+     * @param tasks The Task list.
+     * @return The reply of Duke to the user.
      */
     @Override
     public String execute(TaskList tasks) throws IOException {
         StringBuilder replyBuilder = new StringBuilder();
         int numberOfTasksDone = doneIndexes.size();
+
         if (numberOfTasksDone == 1) {
             replyBuilder.append("Very well. This task has been marked.\n");
         } else {

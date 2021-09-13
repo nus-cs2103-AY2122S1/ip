@@ -26,8 +26,8 @@ public class Storage {
     /**
      * Constructor for Storage.
      *
-     * @param pathname of the save file.
-     * @param dir      directory of the save file.
+     * @param pathname Pathname of the save file.
+     * @param dir      Directory of the save file.
      * @throws IOException when an IO operations fails.
      */
     public Storage(String pathname, String dir) throws IOException {
@@ -45,7 +45,7 @@ public class Storage {
     /**
      * Reads the file data into an ArrayList.
      *
-     * @return the ArrayList containing the saved tasks.
+     * @return The ArrayList containing the saved tasks.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -57,6 +57,7 @@ public class Storage {
             String taskType = args[0].trim();
             boolean taskDone = args[1].trim().equals("1"); //if taskDone = 1, task was done
             String desc;
+
             switch (taskType) {
             case "T":
                 desc = args[2];
@@ -85,7 +86,7 @@ public class Storage {
     /**
      * Adds a task to the save file.
      *
-     * @param task the task to be added to the save file.
+     * @param task The task to be added to the save file.
      * @throws IOException when an IO operation fails.
      */
     public void save(Task task) throws IOException {
@@ -107,11 +108,12 @@ public class Storage {
     /**
      * Deletes task from save file.
      *
-     * @param deleteIndex the index of the task to be deleted.
+     * @param deleteIndex The index of the task to be deleted.
      * @throws IOException when an IO operation fails.
      */
     public void delete(int deleteIndex) throws IOException {
-        List<String> content = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
+        List<String> content = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"),
+                StandardCharsets.UTF_8));
         content.remove(deleteIndex - 1);
         Files.write(Path.of("data/tasks.txt"), content, StandardCharsets.UTF_8);
     }
@@ -119,7 +121,7 @@ public class Storage {
     /**
      * Marks a task in the save file as done.
      *
-     * @param doneIndex the index of the task to be marked as done.
+     * @param doneIndex The index of the task to be marked as done.
      * @throws IOException when an IO operation fails.
      */
     public void markAsDone(int doneIndex) throws IOException {

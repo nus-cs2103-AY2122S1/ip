@@ -6,24 +6,24 @@ import duke.TaskList;
 import duke.tasks.Todo;
 
 /**
- * Command that adds todo to task list.
+ * Command that adds to-do to task list.
  */
 public class AddTodoCommand extends Command {
-
 
     /**
      * Constructor for AddTodoCommand.
      *
-     * @param desc description for todo.
+     * @param desc Description for to-do.
      */
     public AddTodoCommand(String desc) {
         super(desc);
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command. Adds to-do to task list.
      *
-     * @param tasks the task list.
+     * @param tasks The task list.
+     * @return The reply of Duke to the user.
      */
     @Override
     public String execute(TaskList tasks) throws IOException {

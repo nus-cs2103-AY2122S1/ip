@@ -1,14 +1,15 @@
 package duke.tasks;
 
 /**
- * Represents Todo task.
+ * Represents To-do task.
  */
 public class Todo extends Task {
+
     /**
-     * Constructor for Todo.
+     * Constructor for To-do.
      *
-     * @param description of the Todo.
-     * @param isDone      if the task is done or not.
+     * @param description Description of the To-do.
+     * @param isDone      If the task is done or not.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

@@ -15,27 +15,23 @@ public class AddEventCommand extends Command {
     /**
      * Constructor for AddEventCommand.
      *
-     * @param desc description of event.
-     * @param at   when the event is.
+     * @param desc Description of event.
+     * @param at   When the event is.
      */
     public AddEventCommand(String desc, LocalDateTime at) {
         super(desc);
         this.at = at;
     }
 
-    /**
-     * returns when the event is.
-     *
-     * @return when the event is.
-     */
     public String getAt() {
         return this.at.toString();
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command. Adds event to task list.
      *
-     * @param tasks the task list.
+     * @param tasks The task list.
+     * @return The reply of Duke to the user.
      */
     @Override
     public String execute(TaskList tasks) throws IOException {

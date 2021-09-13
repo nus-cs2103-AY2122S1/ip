@@ -16,7 +16,7 @@ public class AddDeadlineCommand extends Command {
      * Constructor for AddDeadlineCommand.
      *
      * @param desc The description of the deadline.
-     * @param by   when the deadline is.
+     * @param by   When the deadline is.
      */
     public AddDeadlineCommand(String desc, LocalDateTime by) {
         super(desc);
@@ -24,9 +24,10 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command. Adds deadline to task list.
      *
-     * @param tasks the task list.
+     * @param tasks The task list.
+     * @return The reply of Duke to the user.
      */
     @Override
     public String execute(TaskList tasks) throws IOException {

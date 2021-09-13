@@ -28,8 +28,8 @@ public class TaskList {
     /**
      * Returns the task in the task list at the index passed in.
      *
-     * @param index index of the desired task.
-     * @return the task at that index.
+     * @param index Index of the desired task.
+     * @return The task at that index.
      */
     public Task get(int index) {
         return list.get(index - 1);
@@ -38,7 +38,7 @@ public class TaskList {
     /**
      * Returns the size of the task list.
      *
-     * @return size of the task list.
+     * @return Size of the task list.
      */
     public int size() {
         return list.size();
@@ -47,7 +47,7 @@ public class TaskList {
     /**
      * Removes the task at the index passed in.
      *
-     * @param index the index of the task to be removed.
+     * @param index The index of the task to be removed.
      */
     public void remove(int index) throws IOException {
         list.remove(index - 1);
@@ -57,7 +57,7 @@ public class TaskList {
     /**
      * Adds a task to the task list.
      *
-     * @param task the task to be added.
+     * @param task The task to be added.
      */
     public void add(Task task) throws IOException {
         list.add(task);
@@ -67,7 +67,7 @@ public class TaskList {
     /**
      * Marks a task as done and reflects it in the storage.
      *
-     * @param index of task to be marked as done.
+     * @param index Index of task to be marked as done.
      * @throws IOException
      */
     public void markAsDone(int index) throws IOException {
@@ -78,7 +78,7 @@ public class TaskList {
     /**
      * Returns a list of task whose description includes the keyword.
      *
-     * @param keyword the keyword to be searched
+     * @param keyword The keyword to be searched
      * @return ArrayList containing tasks whose description contains the keyword.
      */
     public ArrayList<Task> filter(String keyword) {

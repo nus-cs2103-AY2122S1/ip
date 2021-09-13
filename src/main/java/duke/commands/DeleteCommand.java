@@ -15,8 +15,8 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand.
      *
-     * @param desc          description of the delete command.
-     * @param deleteIndexes the index of the task to be deleted.
+     * @param desc          Description of the delete command.
+     * @param deleteIndexes The indexes of the tasks to be deleted.
      */
     public DeleteCommand(String desc, ArrayList<Integer> deleteIndexes) {
         super(desc);
@@ -26,7 +26,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command. Adds deadline to task list. Updates the save file.
+     * Executes the command. Deletes the tasks.
+     *
+     * @param tasks The task list.
+     * @return The reply of Duke to the user.
      */
     @Override
     public String execute(TaskList tasks) throws IOException {

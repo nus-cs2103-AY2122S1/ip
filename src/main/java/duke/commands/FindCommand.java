@@ -5,19 +5,28 @@ import java.util.ArrayList;
 import duke.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Command that searches for tasks containing the keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Constructor for Command.
+     * Constructor for FindCommand.
      *
-     * @param keyword the keywords entered.
+     * @param keyword The keyword entered.
      */
     public FindCommand(String desc, String keyword) {
         super(desc);
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the command. Returns the tasks that match the keyword.
+     *
+     * @param tasks The task list.
+     * @return The reply of Duke to the user.
+     */
     @Override
     public String execute(TaskList tasks) {
         ArrayList<Task> filtered = tasks.filter(keyword);
