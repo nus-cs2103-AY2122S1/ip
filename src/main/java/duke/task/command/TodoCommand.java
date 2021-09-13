@@ -3,6 +3,7 @@ package duke.task.command;
 import duke.DukeConstants;
 import duke.DukeException;
 import duke.TaskList;
+import duke.Undo;
 import duke.task.Todo;
 
 /**
@@ -13,11 +14,10 @@ public class TodoCommand extends Command {
     private TaskList taskList;
     private String description;
 
-    public TodoCommand(TaskList taskList, String description, String prevCommand) {
+    public TodoCommand(TaskList taskList, String description) {
         this.taskList = taskList;
         this.description = description;
         DukeConstants.isUndoable = true;
-        DukeConstants.prevCommand = prevCommand;
     }
 
     /**

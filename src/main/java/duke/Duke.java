@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -28,18 +29,14 @@ public class Duke {
     /**
      * Duke Constructor
      */
-    public Duke(String directory, String file) {
+    public Duke(String directory, String file) throws DukeException {
         ui = new Ui();
         storage = new Storage(directory, file);
         DukeConstants.isRunning = true;
-        try {
-            items = new TaskList(storage.loadData(), storage);
-        } catch (DukeException e) {
-            items = new TaskList();
-        }
+        items = new TaskList(storage);
         parser = new Parser(this.items);
         undo = new Undo(this.items);
-        DukeConstants.isUndoable = false;
+        Undo.state = new LinkedList<>();
     }
 
     /**
@@ -92,7 +89,7 @@ public class Duke {
      *
      * @param args The command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         new Duke("./data", "duke.txt").run();
     }
 }

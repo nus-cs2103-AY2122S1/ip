@@ -18,11 +18,10 @@ public class DeleteCommand extends Command {
      * @param taskList the list of tasks.
      * @param index the index at which item is to be deleted.
      */
-    public DeleteCommand(TaskList taskList, int index, String prevCommand) {
+    public DeleteCommand(TaskList taskList, int index) {
         this.taskList = taskList;
         this.index = index;
         DukeConstants.isUndoable = true;
-        DukeConstants.prevCommand = prevCommand;
     }
 
     /**

@@ -20,12 +20,11 @@ public class DeadlineCommand extends Command {
      * @param description the description of the event
      * @param at the time of the event
      */
-    public DeadlineCommand(TaskList taskList, String description, String at, String prevCommand) {
+    public DeadlineCommand(TaskList taskList, String description, String at) {
         this.taskList = taskList;
         this.description = description;
         this.at = at;
         DukeConstants.isUndoable = true;
-        DukeConstants.prevCommand = prevCommand;
     }
 
     /**
@@ -37,7 +36,6 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute() throws DukeException {
         Deadline deadline = new Deadline(description, at);
-
         return taskList.addItem(deadline);
     }
 }

@@ -26,6 +26,14 @@ public class TaskList {
     }
 
     /**
+     * Instantiates an Items object.
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+        this.storage = new Storage("./data", "duke.txt");
+    }
+
+    /**
      * Constructor for Items.
      *
      * @param tasks An ArrayList of Tasks.
@@ -35,8 +43,8 @@ public class TaskList {
         this.storage = storage;
     }
 
-    public TaskList(Storage storage) {
-        this.tasks = new ArrayList<>();
+    public TaskList(Storage storage) throws DukeException {
+        storage.loadData();
         this.storage = storage;
     }
 
@@ -47,14 +55,15 @@ public class TaskList {
      * @return A status message to be displayed.
      */
     public String addItem(Task task) throws DukeException {
-        tasks.add(task);
+        ArrayList<Task> currList = Undo.state.get(0);
+        currList.add(task);
         String output = "Got it, I've added this task:\n" + task.toString();
-        if (tasks.size() == 1) {
+        if (currList.size() == 1) {
             output += "\nNow you have 1 task in the list.";
         } else {
             output += "\nNow you have " + getListSize() + " tasks in the list.";
         }
-        storage.addToFile(task.toString());
+        Undo.state.add(currList);
         return output;
     }
 
@@ -65,20 +74,22 @@ public class TaskList {
      * @return error message if index is greater than the length of list, else completion message.
      */
     public String markDone(int index) throws DukeException {
-        System.out.println("Reached tasklist. index is: " + index);
         if (index <= 0) {
             throw new DukeException("Invalid index. Only non-negative values are accepted.");
         }
-        if (tasks.size() == 0) {
+        ArrayList<Task> currList = Undo.state.get(0);
+        if (currList.size() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
         }
-        if (index > tasks.size()) {
+        if (index > currList.size()) {
             throw new DukeException("You don't have these many tasks!");
         }
         int taskIndex = index - 1;
-        Task task = tasks.get(taskIndex);
-        storage.markTaskDone(taskIndex);
-        return task.doneTask();
+        ArrayList<Task> newList = Undo.state.get(0);
+        Task task = newList.get(taskIndex);
+        String output = task.doneTask();
+        Undo.state.add(newList);
+        return output;
     }
 
     /**
@@ -90,7 +101,7 @@ public class TaskList {
     public String markUndone(int index) throws DukeException {
         Task task = tasks.get(index - 1);
         task.undoTask();
-        storage.markTaskUndone(index - 1);
+//        storage.markTaskUndone(index - 1);
         return task.toString();
     }
 
@@ -112,10 +123,10 @@ public class TaskList {
             throw new DukeException("You don't have these many tasks!");
         }
         int listIndex = index - 1;
-        Task task = tasks.get(listIndex);
-        tasks.remove(listIndex);
-        storage.deleteFromFile(listIndex);
-        DukeConstants.deleteTask = task.toString();
+        ArrayList<Task> newList = Undo.state.get(0);
+        Task task = newList.get(listIndex);
+        newList.remove(listIndex);
+        Undo.state.add(newList);
         String output =  "Noted. I have removed this task:\n" + task
                 + "\n Number of tasks remaining: " + getListSize();
         return output;
@@ -128,21 +139,31 @@ public class TaskList {
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
-        if (tasks.size() == 0) {
+        ArrayList<Task> currList = Undo.state.get(0);
+        if (currList.size() == 0) {
             throw new DukeException("You have 0 items in your list");
         }
         StringBuilder output = new StringBuilder("These are your tasks: \n");
-        System.out.println(getTaskAtIndex(0));
-        for (int i = 0; i < getListSize(); i++) {
-            if (i < getListSize() - 1) {
+        ArrayList<Task> newList = Undo.state.get(0);
+        for (int i = 0; i < newList.size(); i++) {
+            if (i < newList.size() - 1) {
                 output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i)).append("\n");
             } else {
-                output.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString());
+                output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i));
             }
         }
 
         assert !output.toString().equals("") : "Unforseen error: Unable to print the tasks. Please try again later.";
         return output.toString();
+    }
+
+    public static ArrayList<String> getStringList() {
+        ArrayList<Task> newList = Undo.state.get(0);
+        ArrayList<String> fileList = new ArrayList<>();
+        for (Task task : newList) {
+            fileList.add(task.toString());
+        }
+        return fileList;
     }
 
     /**
@@ -153,10 +174,11 @@ public class TaskList {
      * @throws DukeException thrown if the task list is empty.
      */
     public String findTask(String keyword) throws DukeException {
+        ArrayList<Task> newList = Undo.state.get(0);
         StringBuilder output = new StringBuilder();
         output.append("Here are the matching tasks in your list: ");
         int ctr = 0;
-        for (Task task : tasks) {
+        for (Task task : newList) {
             String[] splitString = task.toString().split("\\s");
             for (String word : splitString) {
                 if (word.equals(keyword)) {
@@ -172,42 +194,6 @@ public class TaskList {
     }
 
     /**
-     * Deletes the last added task in the list.
-     * Used for the undo functionality.
-     *
-     * @return output message stating the last task has been deleted.
-     */
-    public String deleteLatestTask() throws DukeException {
-        int lastIndex = getListSize() - 1;
-        Task task = tasks.get(lastIndex);
-        tasks.remove(lastIndex);
-        storage.deleteFromFile(lastIndex);
-        return task.toString();
-    }
-
-    /**
-     * Adds a recently deleted task back to the task list.
-     * Implements undo functionality
-     *
-     * @param index index at which task will be added
-     * @param task task to be added
-     * @return output after adding task
-     */
-    public String addDeletedTask(int index, Task task) throws DukeException {
-        String fileTask = task.toString();
-        if ((index - 1) >= getListSize()) {
-            tasks.add(task);
-            storage.addToFile(fileTask);
-        } else {
-            int indexToAdd = index - 1;
-            tasks.add(indexToAdd, task);
-            storage.addToFile(indexToAdd, fileTask);
-        }
-        String output = "The following task has been re-added at position: " + index;
-        return output;
-    }
-
-    /**
      * Retrieves the task at given index.
      * Used for undo functionality
      *
@@ -215,7 +201,8 @@ public class TaskList {
      * @return string representation of the task
      */
     public String getTaskAtIndex(int index) {
-        Task task = tasks.get(index);
+        ArrayList<Task> newList = Undo.state.get(0);
+        Task task = newList.get(index);
         return task.toString();
     }
 
@@ -226,6 +213,7 @@ public class TaskList {
      * @return the size of the array list.
      */
     public int getListSize() {
-        return tasks.size();
+        ArrayList<Task> newList = Undo.state.get(0);
+        return newList.size();
     }
 }

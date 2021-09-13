@@ -16,6 +16,7 @@ public class ByeCommand extends Command {
     @Override
     public String execute() {
         DukeConstants.isUndoable = false;
+
         return Ui.printGoodBye();
     }
 }

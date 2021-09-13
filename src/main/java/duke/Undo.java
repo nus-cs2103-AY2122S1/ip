@@ -1,9 +1,12 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
 
 public class Undo {
@@ -13,8 +16,18 @@ public class Undo {
         this.items = items;
     }
 
-    public String undo() throws DukeException, IOException {
-        return undoLogic(DukeConstants.prevCommand);
+    public static LinkedList<ArrayList<Task>> state = new LinkedList<>();
+
+    public String undo() throws DukeException {
+        String output;
+        if (state.size() == 0) {
+            throw new DukeException("No more tasks left to undo");
+        } else {
+            state.pop();
+            output = "Got it. I have undone the task.";
+            output += items.printList();
+            return output;
+        }
     }
 
     /**
@@ -23,11 +36,14 @@ public class Undo {
      * @param command the command to be undone.
      * @return output after undoing the latest task.
      */
+    /*
     private String undoLogic(String command) throws DukeException {
         String output;
         String fileTask;
+        System.out.println("Reached undoLogic. Command: " + command);
         String[] undoCommand = command.split("\\s+");
         String inputCommand = undoCommand[0];
+        System.out.println("input command is: " + inputCommand);
         switch (inputCommand) {
         case "delete":
             String deletedTask = DukeConstants.deleteTask;
@@ -42,6 +58,7 @@ public class Undo {
         case "deadline":
         case "event":
         case "todo":
+            System.out.println("calling delete task");
             fileTask = deleteTask();
             output = "Following task has been removed:\n" + fileTask;
             break;
@@ -51,6 +68,7 @@ public class Undo {
         DukeConstants.isUndoable = false;
         return output;
     }
+
 
     public String undoDelete(int index, String task) throws DukeException {
         String[] parseTask = task.split(" \\| ");
@@ -84,4 +102,5 @@ public class Undo {
     public String deleteTask() throws DukeException {
         return items.deleteLatestTask();
     }
+     */
 }

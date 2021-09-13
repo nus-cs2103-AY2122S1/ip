@@ -33,22 +33,34 @@ public class Parser {
 
     private Command parseDeadline(String input) throws DukeException {
         String date;
-        String[] inputWords = input.split("\\s+");
-        if (inputWords.length < 4) {
+        String[] inputWords = input.split(" /by ");
+        if (inputWords.length < 2) {
             throw new DukeException("Please provide both description and date. Use '/by'. "
                     + "(eg. deadline submit project /by 2021-08-24)");
         }
-        date = parseDate(inputWords[3]);
-        return new DeadlineCommand(taskList, inputWords[1], date, input);
+        String description = "";
+        String[] parseDescription = inputWords[0].split("\\s+");
+        for (int i = 1; i < parseDescription.length; i++) {
+            String s = parseDescription[i];
+            description += s + " ";
+        }
+        date = parseDate(inputWords[1]);
+        return new DeadlineCommand(taskList, description, date);
     }
 
     private Command parseEvent(String input) throws DukeException {
-        String[] inputWords = input.split("\\s+");
-        if (inputWords.length < 4) {
+        String[] inputWords = input.split(" /at ");
+        if (inputWords.length < 2) {
             throw new DukeException("Please provide both description and time. Use '/at'. "
                     + "(eg. event fix hair /at 1pm)");
         }
-        return new EventCommand(taskList, inputWords[1], inputWords[3], input);
+        String description = "";
+        String[] parseDescription = inputWords[0].split("\\s+");
+        for (int i = 1; i < parseDescription.length; i++) {
+            String s = parseDescription[i];
+            description += s + " ";
+        }
+        return new EventCommand(taskList, description, inputWords[1]);
     }
 
     private Command parseTodo(String input) throws DukeException {
@@ -56,7 +68,12 @@ public class Parser {
         if (inputWords.length < 2) {
             throw new DukeException("Please specify the task you want to do");
         } else {
-            return new TodoCommand(taskList, inputWords[1], input);
+            String description = "";
+            for (int i = 1; i < inputWords.length; i++) {
+                String s = inputWords[i];
+                description += s + " ";
+            }
+            return new TodoCommand(taskList, description);
         }
     }
 
@@ -70,11 +87,10 @@ public class Parser {
         }
         try {
             index = Integer.parseInt(inputWords[1]);
-            System.out.println("Reached parseDone, index is:  " + index);
         } catch (Exception e) {
             throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
         }
-        return new DoneCommand(taskList, index, input);
+        return new DoneCommand(taskList, index);
     }
 
     private Command parseList(String[] input) throws DukeException {
@@ -106,7 +122,7 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
         }
-        return new DeleteCommand(taskList, index, input);
+        return new DeleteCommand(taskList, index);
     }
 
     /**

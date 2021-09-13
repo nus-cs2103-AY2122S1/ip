@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+import duke.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +17,9 @@ import duke.Duke;
 public class Main extends Application {
 
     private Duke duke = new Duke("./data", "duke.txt");
+
+    public Main() throws DukeException {
+    }
 
     /**
      * Entry point for the GUI.

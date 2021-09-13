@@ -45,7 +45,7 @@ public class Storage {
      *
      * @return List containing all tasks in file originally.
      */
-    public ArrayList<Task> loadData() throws DukeException {
+    public void loadData() throws DukeException {
         // Make directory and/or file if they don't exist
         File dataFolder = new File(directory);
         dataFolder.mkdirs();
@@ -54,7 +54,6 @@ public class Storage {
             dataFile.createNewFile();
         } catch (IOException e) {
             System.out.println("Failed to create a new file");
-            return null;
         }
 
         // list to contain all tasks ass understood by bot.
@@ -94,7 +93,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("No saved data found");
         }
-        return fileList;
+        Undo.state.add(fileList);
     }
 
     /**
@@ -180,7 +179,8 @@ public class Storage {
      */
     public String getFileLine(int index) throws DukeException {
         try {
-            return fileTasks.get(index);
+            ArrayList<String> fileList = TaskList.getStringList();
+            return fileList.get(index);
         } catch (Exception e) {
             throw new DukeException("Task doesn't exist"
                     + "\nAre you sure you have entered the correct index?");
@@ -195,7 +195,8 @@ public class Storage {
      */
     private void saveToFile() throws DukeException {
         try {
-            Files.write(Paths.get(directory + "/" + file), fileTasks, StandardCharsets.UTF_8);
+            ArrayList<String> fileList = TaskList.getStringList();
+            Files.write(Paths.get(directory + "/" + file), fileList, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException("Error: could not save to file.");
         }
