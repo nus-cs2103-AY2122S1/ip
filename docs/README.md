@@ -12,23 +12,25 @@
 
 ### Add Your Tasks 
 
-Add 3 different tasks: `todo`, `deadline`, `event` to your tasklist. 
+&nbsp;&nbsp;&nbsp;&nbsp;Add 3 different tasks: `todo`, `deadline`, `event` to your tasklist. 
+
 
 ### Mark Your Tasks As Done
 
-Checks off the task on the list. 
+&nbsp;&nbsp;&nbsp;&nbsp;Checks off the task on the list. 
+
 
 ### List Your Tasks
 
-List all the tasks you have. 
+&nbsp;&nbsp;&nbsp;&nbsp;List all the tasks you have. 
 
 ### Find Your Tasks
 
-Search for your tasks by using keywords. 
+&nbsp;&nbsp;&nbsp;&nbsp;Search for your tasks by using keywords. 
 
 ### Delete Your Tasks 
 
-Delete task on the list. 
+&nbsp;&nbsp;&nbsp;&nbsp;Delete task on the list. 
 
 
 
@@ -44,7 +46,7 @@ Example of usage: `help`
 
 Expected outcome: A list of commands would be shown. 
 
-
+<br>
 
 ### `todo` - Create a ToDo task
 
@@ -61,6 +63,7 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
+<br>
 
 ### `deadline` - Create a Deadline task
 
@@ -77,6 +80,7 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
+<br>
 
 ### `event` - Create an Event task
 
@@ -93,6 +97,7 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
+<br>
 
 ### `list` - Show All Tasks
 
@@ -108,6 +113,7 @@ Here are the tasks in your list:
     3. [E][ ] lecture (by: Sep 18 2021 11:59am)
 ````
 
+<br>
 
 ### `done` - Mark Task as Done
 
@@ -123,6 +129,7 @@ Nice! I've marked this task as done:
   [D][X] finish assignment (by: Sep 15 2021 11:59pm) 
 ```
 
+<br>
 
 ### `delete` - Delete A Task
 
@@ -139,6 +146,7 @@ Noted, I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
+<br>
 
 ### `find` - Find A Task 
 
@@ -153,6 +161,8 @@ Expected output:
 Here are the tasks that matches your keyword: 
   1.[T][ ] eat lunch
 ```
+
+<br>
 
 ### `bye` - Exit Duke
 
