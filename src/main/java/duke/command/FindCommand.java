@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        String searchString = DESCRIPTION.trim();
+        String searchString = DESCRIPTION.trim().toLowerCase();
         if (searchString.equals("")) {
             return tasks.printList();
         } else {

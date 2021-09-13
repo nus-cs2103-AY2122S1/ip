@@ -1,4 +1,4 @@
-package duke;
+package duke.utils;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -25,7 +25,7 @@ public class Parser {
      * @param fullCommand the fullCommand
      * @return the relevant command
      */
-    protected static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) {
         String[] commandPair = fullCommand.split(" ", 2);
         String description = commandPair.length == 1 ? "" : commandPair[1];
         switch (commandPair[0]) {

@@ -2,7 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.DukeException;
+import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
@@ -35,7 +35,10 @@ public class ToDoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            String[] info = DESCRIPTION.split("/by|/p", 2);
+            String[] info = DESCRIPTION.split("/p", 2);
+            if (info.length < 2) {
+                throw new DukeException("Your add todo command is incomplete.");
+            }
             String desc = info[0].trim();
             String priority = info[1].trim();
             if (desc.equals("") || priority.equals("")) {

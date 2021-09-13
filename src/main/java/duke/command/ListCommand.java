@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.DateTimeException;
 
-import duke.DukeException;
+import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 

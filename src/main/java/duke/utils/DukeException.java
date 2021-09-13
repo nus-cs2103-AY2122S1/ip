@@ -1,4 +1,4 @@
-package duke;
+package duke.utils;
 
 /**
  * DukeException encapsulates all the exceptions that could occur from Duke.

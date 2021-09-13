@@ -5,7 +5,7 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.DukeException;
+import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;

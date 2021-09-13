@@ -100,7 +100,8 @@ public class StorageDuke implements Storage {
      */
     @Override
     public void add(String type, String description, String date, int priority) throws IOException {
-        fileContent.add(type + "|0|" + description + "|" + date + "|" + priority);
+        String updatedDate = date.equals("") ? "" : "|" + date;
+        fileContent.add(type + "|0|" + description + updatedDate + "|" + priority);
         Files.write(Paths.get(this.filepath), fileContent, StandardCharsets.UTF_8);
     }
 

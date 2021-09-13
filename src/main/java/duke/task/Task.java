@@ -87,6 +87,6 @@ public abstract class Task {
      * @return true if the task's description contains the string
      */
     public boolean containString(String str) {
-        return this.DESCRIPTION.contains(str);
+        return this.DESCRIPTION.toLowerCase().contains(str);
     }
 }

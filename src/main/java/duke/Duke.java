@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import duke.command.Command;
 import duke.storage.StorageDuke;
 import duke.tasklist.TaskListDuke;
+import duke.utils.DukeException;
+import duke.utils.Parser;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person
@@ -35,7 +37,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             if (c.isExit()) {
@@ -55,7 +57,7 @@ public class Duke {
         }
     }
 
-    protected String getWelcome() {
+    public String getWelcome() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 }
