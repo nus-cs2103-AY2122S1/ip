@@ -18,12 +18,8 @@ import duke.exceptions.UnknownInputException;
 
 public class ParserTest {
     @Test
-    public void testEmptyDescriptionError_forMultipleDifferentCommands_exceptionThrown() {
+    public void testEmptyDescriptionError_forDifferentCommands_exceptionThrown1() {
         String cmdOne = "This is a random command that should throw an exception";
-        String cmdTwo = "deadline";
-        String cmdThree = "todo";
-        String cmdFour = "event";
-        String cmdFive = "sdjkhgkdjl";
 
         try {
             Parser.parse(cmdOne);
@@ -33,52 +29,37 @@ public class ParserTest {
         } catch (EmptyTaskDescriptionException e1) {
             fail();
         }
+    }
 
+    @Test
+    public void testEmptyDescriptionError_forDifferentCommands_exceptionThrown2() {
+        String cmdOne = "event";
         try {
-            Parser.parse(cmdTwo);
-            fail();
-        } catch (EmptyTaskDescriptionException e) {
-            assertEquals("Rasengan!! The description of a deadline cannot be empty!", e.getMessage());
-        } catch (UnknownInputException e1) {
-            fail();
-        }
-
-        try {
-            Parser.parse(cmdThree);
-            fail();
-        } catch (EmptyTaskDescriptionException e) {
-            assertEquals("Rasengan!! The description of a todo cannot be empty!", e.getMessage());
-        } catch (UnknownInputException e1) {
-            fail();
-        }
-
-        try {
-            Parser.parse(cmdFour);
+            Parser.parse(cmdOne);
             fail();
         } catch (EmptyTaskDescriptionException e) {
             assertEquals("Rasengan!! The description of a event cannot be empty!", e.getMessage());
         } catch (UnknownInputException e1) {
             fail();
         }
-
-        try {
-            Parser.parse(cmdFive);
-            fail();
-        } catch (EmptyTaskDescriptionException e) {
-            fail();
-        } catch (UnknownInputException e1) {
-            assertEquals("Rasengan!! I don't know what that means :-(", e1.getMessage());
-        }
-
     }
 
     @Test
-    public void testCorrectCommandReturnedFromParser_success() {
+    public void testEmptyDescriptionError_forDifferentCommands_exceptionThrown3() {
+        String cmdOne = "todo";
+        try {
+            Parser.parse(cmdOne);
+            fail();
+        } catch (EmptyTaskDescriptionException e) {
+            assertEquals("Rasengan!! The description of a todo cannot be empty!", e.getMessage());
+        } catch (UnknownInputException e1) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testCorrectCommandReturnedFromParser_success1() {
         String cmdOne = "todo read book";
-        String cmdTwo = "deadline return book /by 2021-10-11";
-        String cmdThree = "list";
-        String cmdFour = "bye";
-        String cmdFive = "event project meeting /at Aug 6th 2-4pm";
 
         try {
             Command c = Parser.parse(cmdOne);
@@ -87,33 +68,49 @@ public class ParserTest {
             fail();
         }
 
+    }
+
+    @Test
+    public void testCorrectCommandReturnedFromParser_success2() {
+        String cmdTwo = "deadline return book /by 2021-10-11";
         try {
             Command c = Parser.parse(cmdTwo);
             assertTrue(c instanceof DeadlineCommand);
         } catch (DukeException e) {
             fail();
         }
+    }
 
+    @Test
+    public void testCorrectCommandReturnedFromParser_success3() {
+        String cmdThree = "list";
         try {
             Command c = Parser.parse(cmdThree);
             assertTrue(c instanceof ListAllCommand);
         } catch (DukeException e) {
             fail();
         }
+    }
 
+    @Test
+    public void testCorrectCommandReturnedFromParser_success4() {
+        String cmdFour = "bye";
         try {
             Command c = Parser.parse(cmdFour);
             assertTrue(c instanceof ExitCommand);
         } catch (DukeException e) {
             fail();
         }
+    }
 
+    @Test
+    public void testCorrectCommandReturnedFromParser_success5() {
+        String cmdFive = "event project meeting /at Aug 6th 2-4pm";
         try {
             Command c = Parser.parse(cmdFive);
             assertTrue(c instanceof EventCommand);
         } catch (DukeException e) {
             fail();
         }
-
     }
 }
