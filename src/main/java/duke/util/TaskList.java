@@ -57,7 +57,7 @@ public class TaskList {
                     + newDl
                     + "Now you have " + list.size() + " tasks in the list. \n";
         } catch (DukeException | DateTimeParseException e) {
-            return "Please input your date and time in dd/mm/yyyy hhmm format, eg. 28/08/2021 2359";
+            return "OOPS!!! Please input your date and time in dd/mm/yyyy hhmm format, eg. 28/08/2021 2359";
         }
 
     }
@@ -78,7 +78,7 @@ public class TaskList {
                     + newEvent
                     + "Now you have " + list.size() + " tasks in the list. \n";
         } catch (DukeException | DateTimeParseException e) {
-            return "Please input your date and time in dd/mm/yyyy hhmm format, eg. 28/08/2021 2359";
+            return "OOPS!!! Please input your date and time in dd/mm/yyyy hhmm format, eg. 28/08/2021 2359";
         }
     }
 
@@ -144,7 +144,7 @@ public class TaskList {
             task.setDescription(replacement);
             break;
         default:
-            throw new DukeException("Edit type unclear, please specify either /date, /time, /description");
+            throw new DukeException("OOPS!!! Edit type unclear, please specify either /date, /time, /description");
         }
         store.writeToFile(list);
         return "Noted. I've edited this task: \n"

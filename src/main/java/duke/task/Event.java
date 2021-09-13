@@ -38,6 +38,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + Date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                + " " + Time + ")";
+                + " " + Time + ") \n";
     }
 }
