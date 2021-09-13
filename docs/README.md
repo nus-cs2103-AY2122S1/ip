@@ -1,14 +1,28 @@
-# User Guide
+<img align="left" width="80" height="80" src="docs/img/WhoBot_Face.jpg">
+
+# User Guide For WhoBot
 
 ## Features 
 
-### Feature-ABC
+### Maintain ToDos
 
-Description of the feature.
+You can Add and Delete your ToDos
 
-### Feature-XYZ
+### Maintain Deadlines
 
-Description of the feature.
+You can Add and Delete your Tasks with Deadline
+
+### Maintain Events
+
+You can Add and Delete your Events that have specific timings
+
+### Search Tasks by Name
+
+You have the Ability to Search for Different Tasks by using just a part of their Name
+
+### Search Tasks by Date
+
+You also have the Ability to 
 
 ## Usage
 
