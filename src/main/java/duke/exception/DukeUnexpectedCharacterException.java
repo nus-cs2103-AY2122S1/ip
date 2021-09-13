@@ -12,6 +12,6 @@ public class DukeUnexpectedCharacterException extends DukeException {
      * @param symbol Unexpected symbol.
      */
     public DukeUnexpectedCharacterException(String symbol) {
-        super(String.format("Unexpected symbol: %s ", symbol));
+        super(String.format("Error: Unexpected symbol: %s ", symbol));
     }
 }

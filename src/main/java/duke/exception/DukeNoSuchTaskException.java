@@ -10,6 +10,6 @@ public class DukeNoSuchTaskException extends DukeException {
      * Constructor for DukeNoSuchTaskException.
      */
     public DukeNoSuchTaskException() {
-        super("Task doesn't exist! :o Check your index input ~");
+        super("Error: Task doesn't exist! :o Check your index input ~");
     }
 }

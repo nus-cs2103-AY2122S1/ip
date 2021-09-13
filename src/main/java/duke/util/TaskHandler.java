@@ -18,14 +18,14 @@ import duke.task.Task;
 public class TaskHandler {
     private static final String NO_TASKS_FOUND = "Nothing in the list... :("
             + "Type todo/event/deadline to add something first! :^)";
-    private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n\t"
-            + "%s\n\tYou currently have %d task(s) in the list.";
-    private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n\t"
-            + "  %s\n\tYou currently have %d undone task(s) in the list.";
-    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n\t"
-            + " %s\n\tYou currently have %d task(s) in the list.";
-    private static final String TASK_LIST = "Here are the task(s) in your list! ^_^\n\t";
-    private static final String MATCHING_TASK_LIST = "Here are the matching task(s) in your list! ^_^:\n\t";
+    private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n"
+            + "- %s\nYou currently have %d undone task(s) in the list.";
+    private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n"
+            + "- %s\nYou currently have %d undone task(s) in the list.";
+    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n"
+            + "- %s\nYou currently have %d undone task(s) in the list.";
+    private static final String TASK_LIST = "Here are the task(s) in your list! ^_^\n";
+    private static final String MATCHING_TASK_LIST = "Here are the matching task(s) in your list!\n";
     private static final String NO_MATCHING_TASKS = "No matching tasks found :<";
     private static final String SORT_TASK_LIST = "Task list is sorted! Enter list to view sorted task list :)";
 
@@ -137,7 +137,7 @@ public class TaskHandler {
             for (int i = 0; i < taskList.size(); i++) {
                 int taskIndex = i + 1;
                 String task = taskList.get(i).toString();
-                allTasks.append(String.format("\t%d. %s\n\t", taskIndex, task));
+                allTasks.append(String.format("\n%d. %s", taskIndex, task));
             }
             return allTasks.toString();
         }
@@ -157,7 +157,7 @@ public class TaskHandler {
             int index = 1;
             for (Task t : taskList) {
                 if (t.toString().contains(keyword)) {
-                    matchingTasks.append(String.format("\t%d. %s\n\t", index, t.toString()));
+                    matchingTasks.append(String.format("\n%d. %s", index, t.toString()));
                     index++;
                 }
             }

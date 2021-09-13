@@ -72,7 +72,7 @@ public class Storage {
             fw.write(task.formatToSave() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeIoException("Unable to write to data file. Your data were not saved. :_(");
+            throw new DukeIoException("Error: Unable to write to data file. Your data were not saved. :_(");
         }
     }
 
@@ -80,7 +80,7 @@ public class Storage {
      * Updates storage file after changes are made to the task list.
      *
      * @param tasks Edited task list.
-     * @return String message infroming user of successful update,
+     * @return String message informing user of successful update,
      * informs user of unsuccessful update if there is an error.
      */
     public static String updateData(ArrayList<Task> tasks) {
@@ -92,7 +92,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            return new DukeIoException("Unable to write to data file. Your data were not saved. :_(").getMessage();
+            return new DukeIoException("Error: Unable to write to data file. Your data were not saved. :_(").getMessage();
         }
         return "Data was updated successfully!";
     }
@@ -118,7 +118,7 @@ public class Storage {
             task = new Event(details[2], details[3]);
             break;
         default:
-            throw new IllegalStateException("Unexpected character: " + details[0]);
+            throw new IllegalStateException("Error: Unexpected character: " + details[0]);
         }
         if (details[1].equals("1")) {
             task.markAsDone();

@@ -20,6 +20,7 @@ import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeMissingDescriptionException;
 import duke.exception.DukeMissingIndexException;
 import duke.exception.DukeNoSuchCommandException;
+import duke.exception.DukeSortException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -41,42 +42,31 @@ public class Parser {
     public Command parseRawInput(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
         String commandWord = splitInput[0];
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
         case "list":
             return new ListCommand();
         case "sort":
-            return (splitInput.length == 2)
-                ? new SortCommand(true)
-                : new SortCommand(false);
+            return new SortCommand(parseSortDetails(input));
         case "done":
-            int doneIndex = parseIndex(input);
-            return new DoneCommand(doneIndex);
+            return new DoneCommand(parseIndex(input));
         case "find":
-            String keyword = parseFindKeyword(input);
-            return new FindCommand(keyword);
+            return new FindCommand(parseFindKeyword(input));
         case "delete":
-            int deleteIndex = parseIndex(input);
-            return new DeleteCommand(deleteIndex);
+            return new DeleteCommand(parseIndex(input));
         case "todo":
-            String todoDetails = parseTodoDetails(input);
-            Todo todo = new Todo(todoDetails);
-            return new AddTaskCommand(todo);
+            return new AddTaskCommand(new Todo(parseTodoDetails(input)));
         case "deadline":
             String[] deadlineDetails = parseDeadlineDetails(input);
             String dueDate = parseDateToString(deadlineDetails[1]);
-            String deadlineName = deadlineDetails[0].replace("deadline", "").trim();
-            Deadline deadline = new Deadline(deadlineName, dueDate);
-            return new AddTaskCommand(deadline);
+            return new AddTaskCommand(new Deadline(deadlineDetails[0], dueDate));
         case "event":
             String[] eventDetails = parseEventDetails(input);
             String eventDate = parseDateToString(eventDetails[1]);
-            String eventName = eventDetails[0].replace("event", "").trim();
-            Event event = new Event(eventName, eventDate);
-            return new AddTaskCommand(event);
+            return new AddTaskCommand(new Event(eventDetails[0], eventDate));
         case "bye":
             return new ExitCommand();
         default:
-            assert !commandWord.matches("list|done|find|delete|todo|deadline|event|bye");
+            assert !commandWord.matches("list|sort|done|find|delete|todo|deadline|event|bye");
             throw new DukeNoSuchCommandException();
         }
     }
@@ -136,6 +126,26 @@ public class Parser {
     }
 
     /**
+     * Checks if 'reverse' is entered by user.
+     *
+     * @param input Raw user input
+     * @return True if 'reverse' is entered, false otherwise.
+     * @throws DukeSortException If there is an unexpected character.
+     */
+    private static boolean parseSortDetails(String input) throws DukeSortException {
+        String[] splitInput = input.split("\\s+");
+        boolean isReverse;
+        if (splitInput.length == 1) {
+            isReverse = false;
+        } else if (splitInput.length == 2 && splitInput[1].matches("reverse")) {
+            isReverse = true;
+        } else {
+            throw new DukeSortException();
+        }
+        return isReverse;
+    }
+
+    /**
      * Extracts the details for the deadline command.
      *
      * @param input Raw user input.
@@ -149,10 +159,11 @@ public class Parser {
         if (splitInput.length < 2) {
             throw new DukeMissingDescriptionException(splitInput[0]);
         }
-        String[] deadlineDetails = input.split("\\s+/by\\s+", 2);
+        String[] deadlineDetails = input.split("\\s+/by\\s+");
         if (deadlineDetails.length < 2 | deadlineDetails[1].isEmpty()) {
             throw new DukeDeadlineMissingDateException();
         } else {
+            deadlineDetails[0].replace("deadline", "").trim();
             return deadlineDetails;
         }
     }
@@ -175,6 +186,7 @@ public class Parser {
         if (eventDetails.length < 2 || eventDetails[1].isEmpty()) {
             throw new DukeEventMissingDateException();
         } else {
+            eventDetails[0].replace("event", "").trim();
             return eventDetails;
         }
     }
@@ -187,21 +199,21 @@ public class Parser {
      * @return String representation of reformatted date.
      */
     private String parseDateToString(String dateInput) {
-        DateFormat sdf;
-        DateFormat reformattedSdf;
+        DateFormat inputSdf;
+        DateFormat outputSdf;
         Date date;
         if (dateInput.split("\\s+").length == 2) {
-            sdf = new SimpleDateFormat("yyyy-MM-dd hhmm");
-            reformattedSdf = new SimpleDateFormat("dd MMM yyyy, h.mm aa");
+            inputSdf = new SimpleDateFormat("yyyy-MM-dd hhmm");
+            outputSdf = new SimpleDateFormat("dd MMM yyyy, h.mm aa");
         } else {
-            sdf = new SimpleDateFormat("yyyy-MM-dd");
-            reformattedSdf = new SimpleDateFormat("dd MMM yyyy");
+            inputSdf = new SimpleDateFormat("yyyy-MM-dd");
+            outputSdf = new SimpleDateFormat("dd MMM yyyy");
         }
         try {
-            date = sdf.parse(dateInput);
+            date = inputSdf.parse(dateInput);
         } catch (ParseException e) {
             return dateInput;
         }
-        return reformattedSdf.format(date);
+        return outputSdf.format(date);
     }
 }

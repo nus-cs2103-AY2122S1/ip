@@ -10,7 +10,7 @@ public class DukeEventMissingDateException extends DukeException {
      * Constructor for DukeEventMissingDateException.
      */
     public DukeEventMissingDateException() {
-        super("Invalid use of 'event' command!! @_@\n\t"
+        super("Error: Invalid use of 'event' command!! @_@\n\t"
                 + "To add a new deadline, use 'event <task> /by <event-time>'.");
     }
 }

@@ -1,4 +1,1 @@
-T | 0 | shopping
-D | 0 | internship application | 26 Dec 2021
-T | 0 | quiz
-T | 0 | eat
+T | 1 | shopping

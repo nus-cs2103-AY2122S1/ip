@@ -1,3 +1,4 @@
+
 package duke.gui;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -27,7 +29,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String textBoxColor) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -39,8 +41,14 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
-        dialog.setBackground(new Background(new BackgroundFill(Color.web("#bb96d9"),
-                new CornerRadii(5), Insets.EMPTY)));
+        displayPicture.setClip(new Circle(45, 45, 45));
+        dialog.setStyle(
+                "-fx-background-color: " + textBoxColor + "; "
+                + "-fx-font-family: Verdana;"
+                + "-fx-font-size: 12;"
+                + (text.contains("Error")
+                        ? "-fx-border-style: solid;" + "-fx-border-color: black;" + "-fx-border-width: 3;"
+                        : ""));
         dialog.setPadding(new Insets(10));
     }
 
@@ -55,18 +63,22 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "#ffd0cf");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db;
+        if (text.contains("Error")) {
+            db = new DialogBox(text, img, "#fdab9f");
+        } else {
+            db = new DialogBox(text, img, "#a5c5c3");
+        }
         db.flip();
         return db;
     }
 
     public static DialogBox getIntroDialog(Image dukeImage) {
         String introMessage = Ui.getIntroMessage();
-        var db = getDukeDialog(introMessage, dukeImage);
-        return db;
+        return getDukeDialog(introMessage, dukeImage);
     }
 }

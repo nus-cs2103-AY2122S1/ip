@@ -14,8 +14,8 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Duke {
-    private Storage storage;
-    private TaskHandler taskHandler;
+    private final Storage storage;
+    private final TaskHandler taskHandler;
     private final Ui ui;
     private final Parser parser;
 

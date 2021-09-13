@@ -10,6 +10,6 @@ public class DukeInvalidIndexException extends DukeException {
      * Constructor for DukeInvalidIndexException.
      */
     public DukeInvalidIndexException() {
-        super("Please enter a positive number starting from 1!");
+        super("Error: Please enter a positive number starting from 1!");
     }
 }

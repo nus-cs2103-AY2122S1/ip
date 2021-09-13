@@ -10,6 +10,6 @@ public class DukeNoSuchCommandException extends DukeException {
      * Constructor for DukeNoSuchCommandException.
      */
     public DukeNoSuchCommandException() {
-        super("I don't quite understand you. :-(");
+        super("Error: I don't quite understand you. :-(");
     }
 }

@@ -42,7 +42,7 @@ public abstract class Task implements Comparable<Task> {
      * @return "X" if completed and "" otherwise
      */
     private String getIcon() {
-        return isDone ? "X" : "";
+        return isDone ? "✓" : " ";
     }
 
     /**
@@ -80,6 +80,17 @@ public abstract class Task implements Comparable<Task> {
         return String.format("[%s] %s", this.getIcon(), taskName);
     }
 
+    /**
+     * Compares this task to another task by date.
+     * A task without a date is smaller than a task with a date.
+     * A completed task is smaller than an incomplete task.
+     * A task with an earlier date is smaller than a task with a later date.
+     *
+     * @param t The other task to be compared to.
+     * @return -1 if this task is smaller,
+     * -0 if the tasks are equal in priority,
+     * 1 if this task is larger.
+     */
     @Override
     public int compareTo(Task t) {
         if (!this.isComplete() | !t.isComplete()) {
