@@ -28,10 +28,9 @@ public class Duke {
     public Duke() throws Exception {
         this.listOfTasks = TaskList.makeNewTaskList();
         this.storage = new Storage(Duke.FILE_PATH);
-        
+
         createFileIfNoFile();
         this.loadSavedTasks();
-
     }
 
     /**
