@@ -3,7 +3,7 @@
 ## Features 
 
 * Add tasks
-* Delete tasks
+* [Delete tasks](#delete-tasks-delete)
 * List out tasks
 * Mark multiple tasks as done
 * Delete multiple tasks
