@@ -88,6 +88,8 @@ Got it. I've added this task:
 Adds a deadline.
 
 Format: `deadline TASK DESCRIPTION /by DATE AND TIME`
+* `DATE AND TIME` has to in this format: `DD/MM/YYYY HHmm`.
+* `HHmm` is in 24 hours format.
 
 Example: 
 * `deadline return book /by 06/06/2021 2359` 
@@ -98,6 +100,25 @@ Expected outcome:
 ```
 Got it. I've added this task:
   [D][ ] return book (by: Sun, 06 Jun 2021 2359)
+Now you have 2 task(s) in the list.
+```
+
+### Add an event task: `event`
+Adds an event.
+
+Format: `event TASK DESCRIPTION /at DATE AND TIME`
+* `DATE AND TIME` has to in this format: `DD/MM/YYYY HHmm`.
+* `HHmm` is in 24 hours format.
+
+Example:
+* `event project meeting /at 06/06/2021 2359`
+  adds an event with description 'project meeting' and
+  date and time '06/06/2021 2359'.
+
+Expected outcome:
+```
+Got it. I've added this task:
+  [E][ ] project meeting (at: Sun, 06 Jun 2021 2359)
 Now you have 2 task(s) in the list.
 ```
 
