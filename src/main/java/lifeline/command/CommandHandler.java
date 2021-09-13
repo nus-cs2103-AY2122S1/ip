@@ -42,7 +42,7 @@ public class CommandHandler {
      * @return String to represent all tasks.
      */
     public static String handleList(String command, Storage storage, TaskList taskList, Ui ui) {
-        assert Command.LIST.hasCommand(command);
+        assert Command.LIST.hasCommand(command.split("\\s")[0]);
         return ui.showTaskList(taskList);
     }
 
@@ -56,7 +56,7 @@ public class CommandHandler {
      * @return Available alias to user.
      */
     public static String handleAlias(String command, Storage storage, TaskList taskList, Ui ui) {
-        assert Command.ALIAS.hasCommand(command);
+        assert Command.ALIAS.hasCommand(command.split("\\s")[0]);
         return ui.showAlias();
     }
 
@@ -70,7 +70,7 @@ public class CommandHandler {
      * @return Goodbye message.
      */
     public static String handleBye(String command, Storage storage, TaskList taskList, Ui ui) {
-        assert Command.BYE.hasCommand(command);
+        assert Command.BYE.hasCommand(command.split("\\s")[0]);
         return ui.exit();
     }
 
@@ -83,7 +83,7 @@ public class CommandHandler {
      * @return Help message to inform users on available commands and its usage.
      */
     public static String handleHelp(String command, Storage storage, TaskList taskList, Ui ui) {
-        assert Command.HELP.hasCommand(command);
+        assert Command.HELP.hasCommand(command.split("\\s")[0]);
         return ui.showHelpMessage();
     }
 
