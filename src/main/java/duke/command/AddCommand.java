@@ -11,7 +11,6 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TodoTask;
-import duke.ui.Ui;
 
 import java.util.Map;
 
@@ -62,7 +61,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String[] commands = COMMAND.split(DELIMITER, 2);
         if (commands.length < 2) {
             throw new DukeException(MESSAGE_USAGE);
@@ -103,7 +102,7 @@ public class AddCommand extends Command {
             throw new DukeException(errorMessage);
         }
 
-        ui.print(String.format(MESSAGE_SUCCESS, task.toString(), tasks.length()));
+        return String.format(MESSAGE_SUCCESS, task.toString(), tasks.length());
     }
 
     @Override

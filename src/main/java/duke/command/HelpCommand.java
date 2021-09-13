@@ -9,7 +9,6 @@ import static duke.parser.Parser.COMMAND_TODO;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class HelpCommand extends Command {
     private static final String MESSAGE_HELP = "Try out these commands to get started!\n"
@@ -21,8 +20,8 @@ public class HelpCommand extends Command {
             + COMMAND_FIND + "\n";
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print(MESSAGE_HELP);
+    public String execute(TaskList tasks, Storage storage) {
+        return MESSAGE_HELP;
     }
 
     @Override
