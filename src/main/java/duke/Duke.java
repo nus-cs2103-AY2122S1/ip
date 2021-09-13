@@ -57,11 +57,9 @@ public class Duke {
                 } else {
                     taskList = new TaskList(storage.load());
                 }
-            } catch (IOException e) {
+            } catch (IOException | DukeException e) {
                 e.printStackTrace();
-            } catch (DukeException e){
-            e.printStackTrace();
-        }
+            }
         }
 
 
@@ -87,6 +85,7 @@ public class Duke {
         } catch (DukeException e) {
 //            e.printStackTrace();
             response = ui.showErrorMessage(e.getMessage());
+            //timer
         }
         return response;
     }

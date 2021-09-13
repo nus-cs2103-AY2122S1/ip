@@ -14,4 +14,5 @@ public class Tag {
     public static final String DONE = "done";
     public static final String DELETE = "delete";
     public static final String FIND = "find";
+    public static final String EDIT = "edit";
 }

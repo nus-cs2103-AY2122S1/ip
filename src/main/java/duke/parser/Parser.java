@@ -3,6 +3,7 @@ package duke.parser;
 import static duke.ui.Tag.DEADLINE;
 import static duke.ui.Tag.DELETE;
 import static duke.ui.Tag.DONE;
+import static duke.ui.Tag.EDIT;
 import static duke.ui.Tag.EVENT;
 import static duke.ui.Tag.EXIT;
 import static duke.ui.Tag.FIND;
@@ -102,7 +103,7 @@ public class Parser {
 
             return command.substring(nameStartingIndex);
         case DATE_AND_TIME:
-            int dateStartingIndex = command.indexOf(Tag.BY) + 2; //todo change to tag.date
+            int dateStartingIndex = command.indexOf(Tag.DATE_AND_TIME) + 2; //todo change to tag.date
             DateAndTime dateAndTime = new DateAndTime(command.substring(dateStartingIndex));
             return dateAndTime.getReformattedDateAndTime();
         default:
