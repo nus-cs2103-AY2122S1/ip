@@ -8,7 +8,7 @@ package duke;
 public abstract class Command {
 
     /**
-     * Returns true if the command is a programme terminating command.
+     * Returns true if the command is a program terminating command.
      *
      * @return True if it is a terminating command and false otherwise.
      */

@@ -27,23 +27,11 @@ public class Duke {
     }
 
     /**
-     * Starts the Chatbot, listens for user input and executes the command accordingly.
+     * Returns the response given a String input.
+     *
+     * @param input The input String given.
+     * @return The String that represents the response to the input.
      */
-    public void start() {
-        ui.printAndReturnGreetingsString();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.getInput();
-                Command c = Parser.parse(input);
-                c.execute(list, ui, storage);
-                isExit = c.isAExitCommand();
-            } catch (DukeException e) {
-                ui.printAndReturnMessage(e.getMessage());
-            }
-        }
-    }
-
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -54,18 +42,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the greeting message as a String.
+     *
+     * @return The message to greet users as a String.
+     */
     public String getGreetingMessage() {
         return ui.printAndReturnGreetingsString();
-    }
-    /**
-     * Initializes a Duke object and runs the program.
-     *
-     * @param args The command line arguments.
-     */
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.start();
     }
 }
 

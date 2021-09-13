@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * GUI for Duke using FXML.
  *
  * @author Sherman Ng Wei Sheng
  */
@@ -22,6 +22,7 @@ public class Main extends Application {
      *
      * @param stage JavaFX stage object.
      */
+
     @Override
     public void start(Stage stage) {
         try {

@@ -2,7 +2,6 @@ package duke;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -11,7 +10,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class MainWindow extends AnchorPane {
@@ -32,17 +31,26 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the duke instance for the program.
+     *
+     * @param d The Duke instance to be set.
+     */
     public void setDuke(Duke d) {
         duke = d;
         printGreetings();
     }
 
+    /**
+     * Creates one dialog box from the Duke with the greeting message.
+     */
     private void printGreetings() {
         String response = duke.getGreetingMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
     }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

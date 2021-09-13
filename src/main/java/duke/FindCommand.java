@@ -18,6 +18,7 @@ public class FindCommand extends Command {
         this.isExit = false;
         this.keyword = keyword;
     }
+
     /**
      * Returns true if the command is a programme terminating command.
      *

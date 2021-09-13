@@ -42,6 +42,7 @@ public class Ui {
      *
      * @return The string that is entered by the user.
      */
+
     public String getInput() {
         return sc.nextLine();
     }
@@ -50,6 +51,7 @@ public class Ui {
      *
      * @return The formatted string of the message.
      */
+
     public String printAndReturnListString(TaskList list) {
         String message = list.generateMessage();
         return printAndReturnMessage(message);

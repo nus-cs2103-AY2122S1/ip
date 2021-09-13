@@ -55,6 +55,7 @@ public class Parser {
         }
         throw new UnknownCommandException();
     }
+
     private static int getTaskToBeMarkedDoneIndex(String input) throws IllegalFormatException {
         String[] splitCommand = input.split(" ");
         if (splitCommand.length != 2) {
@@ -67,6 +68,7 @@ public class Parser {
         }
         return Integer.parseInt(secondWord) - 1;
     }
+
     private static Task getTodoToBeAdded(String input) throws IllegalFormatException {
         String[] splitCommand = input.split(" ", 2);
         if (splitCommand.length == 1) {
@@ -78,6 +80,7 @@ public class Parser {
         }
         return new ToDo(toDoDescription);
     }
+
     private static Task getDeadlineToBeAdded(String input) throws IllegalFormatException {
         String[] splitCommand = input.split(" ", 2);
         if (splitCommand.length == 1) {
@@ -102,6 +105,7 @@ public class Parser {
 
         return new Deadline(deadlineDescription, deadlineDateTime);
     }
+
     private static Task getEventToBeAdded(String input) throws IllegalFormatException {
         String[] splitCommand = input.split(" ", 2);
         if (splitCommand.length == 1) {
@@ -125,6 +129,7 @@ public class Parser {
         }
         return new Event(eventDescription, eventDateTime);
     }
+
     private static int getTaskToBeDeletedIndex(String input) throws IllegalFormatException {
         String[] splitCommand = input.split(" ");
         if (splitCommand.length != 2) {
@@ -138,6 +143,7 @@ public class Parser {
         }
         return Integer.parseInt(secondWord) - 1;
     }
+
     private static String getKeyword(String input) throws IllegalFormatException {
         String[] splitCommand = input.split(" ");
         if (splitCommand.length != 2) {
@@ -146,6 +152,7 @@ public class Parser {
         String keyword = splitCommand[1];
         return keyword;
     }
+
     private static boolean checkIfAllDigit(String s) {
         for (int i = 0; i < s.length(); i++) {
             if (!Character.isDigit(s.charAt(i))) {
