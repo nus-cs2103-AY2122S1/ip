@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         if (numberOfTasksDone == 1) {
             replyBuilder.append("Very well. This task has been marked.\n");
         } else {
-            replyBuilder.append("Very well. This tasks have been marked.\n");
+            replyBuilder.append("Very well. These tasks have been marked.\n");
         }
 
         for (int index : doneIndexes) {

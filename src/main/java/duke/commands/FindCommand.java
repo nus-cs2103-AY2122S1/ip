@@ -27,7 +27,7 @@ public class FindCommand extends Command {
         if (filtered.size() == 0) {
             replyBuilder.append("Unfortunately, no match can be found.\n");
         } else {
-            replyBuilder.append("Here are the matching tasks in your list:\n");
+            replyBuilder.append("Here are the tasks you were looking for:\n");
             for (int i = 0; i < filtered.size(); i++) {
                 replyBuilder.append((i + 1) + ". " + filtered.get(i) + "\n");
             }

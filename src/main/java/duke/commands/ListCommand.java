@@ -27,6 +27,7 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             return "You have not added anything to the list.";
         } else {
+            replyBuilder.append("Here are your tasks:\n");
             for (int i = 1; i < tasks.size() + 1; i++) {
                 Task task = tasks.get(i);
                 if (i < 10) {

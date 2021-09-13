@@ -30,7 +30,7 @@ public class Duke {
             assert c != null : "Command c should not be null";
             return c.execute(tasks);
         } catch (DukeException | IOException e) {
-            return "***WARNING*** An error has occurred:\n" + e.getMessage();
+            return "An error has occurred:\n" + e.getMessage();
         }
     }
 

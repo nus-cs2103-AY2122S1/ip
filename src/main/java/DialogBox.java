@@ -36,7 +36,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        if (text.contains("***WARNING***")) {
+        if (text.contains("An error has occurred:\n")) {
             dialog.setTextFill(Color.ORANGERED);
         }
 
