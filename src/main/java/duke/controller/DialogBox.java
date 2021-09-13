@@ -17,7 +17,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 
 /**
  * The DialogBox class is a controller class that represents a dialog box consisting of
@@ -68,7 +67,8 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text) {
         DialogBox userDialog = new DialogBox(text, userImage);
-        userDialog.dialog.setBackground(new Background(new BackgroundFill(Color.web("#56c5e0"), new CornerRadii(20), null)));
+        userDialog.dialog.setBackground(new Background(
+                new BackgroundFill(Color.web("#56c5e0"), new CornerRadii(20), null)));
         return userDialog;
     }
 

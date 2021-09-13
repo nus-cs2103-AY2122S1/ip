@@ -26,9 +26,9 @@ public class UiTest {
                 new Event("Team meeting", "2021-09-02")
         ));
         assertEquals("Here are the tasks in your list:\n"
-                + "1.[T][ ] Read book\n"
-                + "2.[D][X] Math assignment (by: 21 August 2021)\n"
-                + "3.[E][ ] Team meeting (at: 2 September 2021)\n",
+                + "1. [T][ ] Read book\n"
+                + "2. [D][X] Math assignment (by: 21 August 2021)\n"
+                + "3. [E][ ] Team meeting (at: 2 September 2021)\n",
                 ui.formatTaskList(taskList));
     }
 
