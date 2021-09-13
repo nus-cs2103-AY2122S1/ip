@@ -92,7 +92,7 @@ Example of usage:
 
 * `find boo` lists tasks that has description containing `boo`.
 
-### Undo operation: `Undo`
+### Undo operation: `undo`
 Undoes the last operation.
 
 Format: `undo`
@@ -103,7 +103,7 @@ Example of usage:
 
 * `undo` undoes the last operation.
 
-### Redo operation: `Redo`
+### Redo operation: `redo`
 Redoes the last operation.
 
 Format: `redo`
