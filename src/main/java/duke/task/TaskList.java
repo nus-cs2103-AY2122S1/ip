@@ -13,7 +13,7 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Initialize the task list.
+     * Initializes the task list.
      *
      * @param tasks The initial task list.
      */

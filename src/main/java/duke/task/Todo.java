@@ -4,7 +4,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Initialize the description of the task.
+     * Initializes the description of the task.
      *
      * @param description The description of the task.
      */

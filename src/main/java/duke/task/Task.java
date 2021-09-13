@@ -30,7 +30,7 @@ public class Task {
         return this.description;
     }
 
-    /** Mark the task as done. */
+    /** Marks the task as done. */
     public void markAsDone() {
         this.isDone = true;
     }

@@ -10,7 +10,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Initialize the keyword query.
+     * Initializes the keyword query.
      *
      * @param keyword The keyword query.
      */

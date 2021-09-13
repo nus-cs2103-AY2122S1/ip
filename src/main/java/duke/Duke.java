@@ -19,7 +19,7 @@ public class Duke {
     private ResponseLogic responseLogic;
 
     /**
-     * The main Duke class that will be run.
+     * Initializes the Duke object.
      *
      * @param filePath The filepath of the saved file
      */

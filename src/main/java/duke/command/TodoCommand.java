@@ -12,7 +12,7 @@ public class TodoCommand extends Command {
     private String description;
 
     /**
-     * Initialize the description of the task.
+     * Initializes the description of the task.
      *
      * @param description The description of the task.
      */

@@ -18,7 +18,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Initialize the Storage object with a filepath.
+     * Initializes the Storage object with a filepath.
      *
      * @param filePath The filePath of the data file.
      */

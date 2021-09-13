@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     private int taskNumber;
 
     /**
-     * Initialize the task number of the task to be deleted.
+     * Initializes the task number of the task to be deleted.
      *
      * @param taskNumber The task number of the task to be deleted.
      */

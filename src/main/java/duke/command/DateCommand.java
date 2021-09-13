@@ -10,7 +10,7 @@ public class DateCommand extends Command {
     private String date;
 
     /**
-     * Initialize the query date.
+     * Initializes the query date.
      *
      * @param date The query date.
      */
