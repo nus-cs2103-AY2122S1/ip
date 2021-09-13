@@ -90,56 +90,56 @@ Updates a task according to the task id in the list.
 
   Example: `update 2 individual project` (updating only the description)\
   Expected output:
-    ```
-    Your task has been updated from:
-        [D][] ip (by: Sep 17 2021)
+  ```
+  Your task has been updated from:
+      [D][] ip (by: Sep 17 2021)
   to:
-        [D][] individual project (by: Sep 17 2021)
-    ```
+      [D][] individual project (by: Sep 17 2021)
+  ```
   Example: `update 2 /by 2021-09-18` (updating only the date) \
   Expected output:
-    ```
-    Your task has been updated from:
-        [D][] individual project (by: Sep 17 2021)
+  ```
+  Your task has been updated from:
+      [D][] individual project (by: Sep 17 2021)
   to:
-        [D][] individual project (by: Sep 18 2021)
-    ```
+      [D][] individual project (by: Sep 18 2021)
+  ```
   Example: `update 2 indiv proj /by 2019-09-22` (updating description and date at the same time) \
   Expected output:
-    ```
-    Your task has been updated from:
-        [D][] individual project (by: Sep 18 2021)
+  ```
+  Your task has been updated from:
+      [D][] individual project (by: Sep 18 2021)
   to:
-        [D][] indiv proj (by: Sep 22 2021)
-    ```
+      [D][] indiv proj (by: Sep 22 2021)
+  ```
 * #### Updating an event:
   Format: `update <id> <updated description> /at <updated time period>`
   * You can also update only the description or only the time period, by omitting the field you do not want to change.
 
   Example: `update 3 meeting` (updating only the description)\
   Expected output:
-    ```
-    Your task has been updated from:
-        [E][] team meeting (at: monday 7-8pm)
+  ```
+  Your task has been updated from:
+      [E][] team meeting (at: monday 7-8pm)
   to:
-        [E][] meeting (at: monday 7-8pm)
-    ```
+      [E][] meeting (at: monday 7-8pm)
+  ```
   Example: `update 3 /at monday 5-6pm` (updating only the time period) \
   Expected output:
-    ```
-    Your task has been updated from:
-        [E][] meeting (at: monday 7-8pm)
+  ```
+  Your task has been updated from:
+      [E][] meeting (at: monday 7-8pm)
   to:
-        [E][] meeting (at: monday 5-6pm)
-    ```
+      [E][] meeting (at: monday 5-6pm)
+  ```
   Example: `update 3 team cohesion /at tuesday 9-10pm` (updating description and time period at the same time) \
   Expected output:
-    ```
-    Your task has been updated from:
-        [E][] meeting (at: monday 5-6pm)
+  ```
+  Your task has been updated from:
+      [E][] meeting (at: monday 5-6pm)
   to:
-        [E][] team cohesion (at: tuesday 9-10pm)
-    ```
+      [E][] team cohesion (at: tuesday 9-10pm)
+  ```
 
 ---
 ### Deleting a task: `delete`
