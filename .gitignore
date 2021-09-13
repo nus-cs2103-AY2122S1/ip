@@ -16,6 +16,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+/data/*.txt
 
 #text files
 /src/main/data/

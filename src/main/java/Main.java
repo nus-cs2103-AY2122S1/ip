@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final String FILEPATH = "/data/tasks.txt";
+    private final String FILEPATH = "./data/tasks.txt";
 
     private Duke duke = new Duke(FILEPATH);
 

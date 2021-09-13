@@ -22,7 +22,7 @@ import duke.task.ToDo;
 
 public class Storage {
     private String filePath;
-    private final String WRITEPATH = "/data";
+    private final String WRITEPATH = "./data";
     private final String DATEFORMAT = "MMM dd yyyy";
     private final String TIMEFORMAT = "hh:mm a";
 
@@ -113,17 +113,21 @@ public class Storage {
 
     private Task parseCommand(String type, String[] strSplit) {
         String[] dateTime = strSplit[3].split(", ");
+        String frequency = strSplit[4];
         LocalDate date = LocalDate.parse(dateTime[0], DateTimeFormatter.ofPattern(DATEFORMAT));
+        LocalDate updatedDate = checkDate(date, frequency);
+        boolean isUpdated = !date.isEqual(updatedDate);
         LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern(TIMEFORMAT));
         String task = strSplit[2];
-        return createTaskWithDateTime(type, task, date, time);
+        return createTaskWithDateTime(type, task, updatedDate, time, frequency, isUpdated);
     }
 
-    private Task createTaskWithDateTime(String type, String task, LocalDate date, LocalTime time) {
+    private Task createTaskWithDateTime(String type, String task, LocalDate date, LocalTime time, String frequency,
+                                        boolean isUpdated) {
         if (type.equals("Deadline")) {
-            return new Deadline(task, date, time);
+            return new Deadline(task, date, time, frequency, isUpdated);
         }
-        return new Event(task, date, time);
+        return new Event(task, date, time, frequency, isUpdated);
     }
 
     private Task checkCompletion(Task task, String[] strSplit) {
@@ -131,6 +135,22 @@ public class Storage {
             task.complete();
         }
         return task;
+    }
+
+    private LocalDate checkDate(LocalDate date, String frequency) {
+        if (date.compareTo(LocalDate.now()) > 0) {
+            return date;
+        }
+        return updateDate(date, frequency);
+    }
+
+    private LocalDate updateDate(LocalDate date, String frequency) {
+        if (frequency.equals("weekly")) {
+            return date.plusWeeks(1);
+        } else if (frequency.equals("monthly")) {
+            return date.plusMonths(1);
+        }
+        return date;
     }
 
     private void checkFilePath(File f) {

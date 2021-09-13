@@ -12,6 +12,12 @@ public class Deadline extends Task {
 
     private LocalDate date;
     private LocalTime time;
+    private String frequency;
+    private boolean isUpdated;
+
+    public Deadline(String toDo, LocalDate date, LocalTime time, String frequency) {
+        this(toDo, date, time, frequency, false);
+    }
 
     /**
      * Creates a Deadline object
@@ -20,10 +26,12 @@ public class Deadline extends Task {
      * @param date deadline date of the task
      * @param time deadline time of the task
      */
-    public Deadline(String toDo, LocalDate date, LocalTime time) {
+    public Deadline(String toDo, LocalDate date, LocalTime time, String frequency, boolean isUpdated) {
         super(toDo);
         this.date = date;
         this.time = time;
+        this.frequency = frequency;
+        this.isUpdated = isUpdated;
     }
 
     String getType() {
@@ -43,7 +51,19 @@ public class Deadline extends Task {
      * @return string with the format "[D] | status | task | date and time of deadline"
      */
     public String getToWrite() {
-        return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString();
+        return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString() + " | " + frequency;
+    }
+
+    /**
+     * checks if Event Date was recently updated. Only updates isDone if Event Date was not recently updated, then
+     * resets isUpdated
+     */
+    @Override
+    public void complete() {
+        if (!this.isUpdated) {
+            super.complete();
+        }
+        this.isUpdated = false;
     }
 
     /**
@@ -51,12 +71,14 @@ public class Deadline extends Task {
      * Date will have the format MMM dd yyyy
      * Time will have the format hh:mm AM/PM
      *
-     * @return string with the format "[D] status and task (by: deadline)
+     * @return string with the format "[D] status and task (by: deadline) frequency
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " "
-                + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+                + time.format(DateTimeFormatter.ofPattern("hh:mm a"))
+                + ") "
+                + frequency;
     }
 }

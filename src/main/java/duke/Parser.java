@@ -116,15 +116,16 @@ public class Parser {
         String fullDateTime = taskDate[1];
         LocalDate localDate = getLocalDate(fullDateTime);
         LocalTime localTime = getLocalTime(fullDateTime);
-        return createAddCommandWithDateTime(type, task, localDate, localTime);
+        String frequency = getFrequency(fullDateTime);
+        return createAddCommandWithDateTime(type, task, localDate, localTime, frequency);
     }
 
     private static AddCommand createAddCommandWithDateTime(String type, String task, LocalDate localDate,
-                                                           LocalTime localTime) {
+                                                           LocalTime localTime, String frequency) {
         if (type.equals("Event")) {
-            return new AddCommand(new Event(task, localDate, localTime));
+            return new AddCommand(new Event(task, localDate, localTime, frequency));
         }
-        return new AddCommand(new Deadline(task, localDate, localTime));
+        return new AddCommand(new Deadline(task, localDate, localTime, frequency));
     }
 
     private static String[] getTaskDate(String fullCommand, String type, String splitter) {
@@ -158,6 +159,13 @@ public class Parser {
             return splitDate[2] + "-" + splitDate[1] + "-0" + splitDate[0];
         }
         return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
+    }
+
+    private static String getFrequency(String fullDateTime) {
+        if (fullDateTime.split(" ").length == 2) {
+            return "once";
+        }
+        return fullDateTime.split(" ")[2];
     }
 
     private static Integer getCommandIndex(String fullCommand) {
