@@ -1,4 +1,4 @@
-# Duke the Memo Assistant
+# Memo-Assistant Duke
 > “Work gives you meaning and purpose and life is empty without it.”  – Stephen Hawking ([source](https://dansilvestre.com/productivity-quotes/))
 
 If you are someone constantly seeking for tasks to be done, it might be difficult to remember all of them.
@@ -23,15 +23,18 @@ Duke is:
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```   
+   
 Let it remember the tasks for you 😄
 
-##What it can do:
+## What it can do:
+
 - [x] store a **List** of tasks to be done
 - [x] add, **Delete** and mark tasks as **Done**
 - [x] **Find** tasks by **Due** dates or keywords
 - [ ] **Reschedule** tasks to new dates (coming soon)
 
 **Here's a part of the program, maybe it can be of help in practising coding in Java, the `<main>` method:**
+
 ```java
 public static void main(String[] args) {
     new Duke().run();
