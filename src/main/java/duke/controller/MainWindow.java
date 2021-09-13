@@ -63,6 +63,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleHelpButtonPress() {
+        String response = duke.getResponse("help");
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(response));
         dialogContainer.getChildren().add(new HelpMenu(duke, dialogContainer));
     }
 }
