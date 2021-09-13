@@ -1,10 +1,12 @@
 package bot.commands;
 
-import java.util.List;
-
 import bot.tasks.Task;
 import bot.utility.Logger;
 import bot.utility.TaskList;
+
+import java.util.List;
+
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
 
 /**
  * Represents a command to end the program.
@@ -20,7 +22,7 @@ public class EndCommand extends Command {
     public String execute() {
         List<Task> tasks = TaskList.showTasks();
         Logger.write(tasks);
-        return "\nPeace out!";
+        return LINE_BREAK + "Peace out!";
     }
 
     /**

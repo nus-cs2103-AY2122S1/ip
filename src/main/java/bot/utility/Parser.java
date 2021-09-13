@@ -50,17 +50,17 @@ public class Parser {
         if (log.length == 1) {
             switch (log[0]) {
             case "done":
-                throw new DukeException("\nWhat do you wish to mark as done?");
+                throw new DukeException("What do you wish to mark as done?");
             case "todo":
-                throw new DukeException("\nOh dear!. The description of a todo cannot be empty!");
+                throw new DukeException("Oh dear!. The description of a todo cannot be empty!");
             case "deadline":
-                throw new DukeException("\nOh lord!. I need some description and a time limit!");
+                throw new DukeException("Oh lord!. I need some description and a time limit!");
             case "event":
-                throw new DukeException("\nBy the heavens!. I need some description and a timing!");
+                throw new DukeException("By the heavens!. I need some description and a timing!");
             case "find":
-                throw new DukeException("\nI need something to search for!");
+                throw new DukeException("I need something to search for!");
             case "delete":
-                throw new DukeException("\nI need something to delete!");
+                throw new DukeException("I need something to delete!");
             default:
                 break;
             }
@@ -68,22 +68,22 @@ public class Parser {
             switch (log[0]) {
             case "deadline":
                 if (log[1].split(" /by ", 2).length != 2) {
-                    throw new DukeException("\nBlimey! Did you forget to type \"/by\" or a time limit?");
+                    throw new DukeException("Blimey! Did you forget to type \"/by\" or a time limit?");
                 }
                 break;
             case "event":
                 if (log[1].split(" /at ", 2).length != 2) {
-                    throw new DukeException("\nWait! Did you forget to type \"/at\" or a timing?");
+                    throw new DukeException("Wait! Did you forget to type \"/at\" or a timing?");
                 }
                 break;
             case "done":
             case "delete":
                 if (TaskList.isShorterThan(Integer.parseInt(log[1]))) {
-                    throw new DukeException("\nI don't have that many tasks!");
+                    throw new DukeException("I don't have that many tasks!");
                 }
                 break;
             case "help":
-                throw new DukeException("\nHmm, did you mean \"help\"?");
+                throw new DukeException("Hmm, did you mean \"help\"?");
             default:
                 break;
             }

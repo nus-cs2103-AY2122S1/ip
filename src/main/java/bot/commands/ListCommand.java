@@ -1,5 +1,8 @@
 package bot.commands;
 
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
+import static bot.constants.GlobalStringFormats.TAB_SPACES;
+
 import java.util.List;
 
 import bot.tasks.Task;
@@ -9,8 +12,9 @@ import bot.utility.TaskList;
  * Represents a command to show the list of tasks.
  */
 public class ListCommand extends Command {
-    private static final String LIST_TASK_FORMAT = "\n" + TAB_SPACES + " %d. %s";
-    private static final String EMPTY_LIST_MESSAGE = "\nOh, it seems there are no tasks. You must be very lucky today!";
+    private static final String LIST_TASK_FORMAT = LINE_BREAK + TAB_SPACES + " %d. %s";
+    private static final String EMPTY_LIST_MESSAGE = LINE_BREAK
+            + "Oh, it seems there are no tasks. You must be very lucky today!";
     /**
      * Executes the Command and returns a String.
      *

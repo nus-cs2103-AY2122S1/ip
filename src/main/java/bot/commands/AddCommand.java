@@ -2,6 +2,9 @@ package bot.commands;
 
 import java.util.List;
 
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
+import static bot.constants.GlobalStringFormats.TAB_SPACES;
+
 import bot.tasks.Deadline;
 import bot.tasks.Event;
 import bot.tasks.Task;
@@ -12,7 +15,8 @@ import bot.utility.TaskList;
  * Represents a command to add tasks to the TaskList;
  */
 public class AddCommand extends Command {
-    private static final String ADD_TASK_FORMAT = "Got it. I've added this task:\n" + TAB_SPACES + "%s\n";
+    private static final String ADD_TASK_FORMAT =
+            "Got it. I've added this task:" + LINE_BREAK + TAB_SPACES + "%s" + LINE_BREAK;
     private final String keyWord;
     private final String info;
 

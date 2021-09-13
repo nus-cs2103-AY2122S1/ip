@@ -1,5 +1,8 @@
 package bot.commands;
 
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
+import static bot.constants.GlobalStringFormats.TAB_SPACES;
+
 import bot.tasks.Task;
 import bot.utility.TaskList;
 
@@ -30,6 +33,6 @@ public class DoneCommand extends Command {
             return " This task has been marked as done";
         }
         toBeDone.markAsDone();
-        return "\nNice! I've marked this task as done:\n" + TAB_SPACES + toBeDone;
+        return LINE_BREAK + "Nice! I've marked this task as done:" + LINE_BREAK + TAB_SPACES + toBeDone;
     }
 }

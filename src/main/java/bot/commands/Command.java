@@ -1,6 +1,5 @@
 package bot.commands;
 
-import bot.constants.GlobalStringFormats;
 import bot.error.DukeException;
 
 /**
@@ -8,7 +7,6 @@ import bot.error.DukeException;
  */
 public class Command {
     protected static final String INFORM_FORMAT = "Now you have %d task(s) in the list.";
-    protected static final String TAB_SPACES = GlobalStringFormats.TAB_SPACES;
     protected static StringBuilder message;
 
     /**

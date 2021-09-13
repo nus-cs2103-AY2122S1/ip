@@ -1,5 +1,8 @@
 package bot.commands;
 
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
+import static bot.constants.GlobalStringFormats.TAB_SPACES;
+
 import java.util.List;
 
 import bot.tasks.Task;
@@ -9,7 +12,7 @@ import bot.utility.TaskList;
  * Represents a command to find tasks.
  */
 public class FindCommand extends Command {
-    private static final String LIST_TASK_FORMAT = "\n" + TAB_SPACES + " %d. %s";
+    private static final String LIST_TASK_FORMAT = LINE_BREAK + TAB_SPACES + " %d. %s";
     private final String keyWord;
 
     /**
@@ -29,7 +32,7 @@ public class FindCommand extends Command {
     @Override
     public String execute() {
         message = new StringBuilder();
-        message.append("\nHere are the matching tasks in your list:");
+        message.append(LINE_BREAK).append("Here are the matching tasks in your list:");
         List<Task> tasks = TaskList.showTasks();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).toString().contains(keyWord)) {

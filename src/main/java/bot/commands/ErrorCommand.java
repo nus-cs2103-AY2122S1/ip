@@ -1,11 +1,13 @@
 package bot.commands;
 
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
+
 /**
  * Represents a command to report errors.
  */
 public class ErrorCommand extends Command {
-    private static final String DEFAULT_ERROR_MESSAGE = "\nWhat is this abomination?!? This language is too " +
-            "sophisticated! Please refer to the \"help\" instruction for something I can do.";
+    private static final String DEFAULT_ERROR_MESSAGE = LINE_BREAK + "What is this abomination?!? This language is too "
+            + "sophisticated! Please refer to the \"help\" instruction for something I can do.";
     private final String errorMessage;
 
     /**

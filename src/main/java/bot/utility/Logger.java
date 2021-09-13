@@ -24,15 +24,9 @@ public class Logger {
     private static BufferedReader bufferedReader;
 
     protected static void initialize() {
-        Path path = Paths.get("tasks.txt");
         try {
-            if (!Files.exists(path)) {
-                String newPath = System.getProperty("user.dir");
-                newPath = newPath.replace("\\", "/");
-                newPath += "/tasks.txt";
-                File file = new File(newPath);
-                file.createNewFile();
-            }
+            ensureTasksExist();
+            Path path = Paths.get("tasks.txt");
             bufferedReader = Files.newBufferedReader(path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,6 +40,7 @@ public class Logger {
      */
     public static void write(List<Task> tasks) {
         try {
+            ensureTasksExist();
             BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"));
             StringBuilder builder = new StringBuilder();
 
@@ -68,6 +63,7 @@ public class Logger {
     public static List<Task> loadList() {
         List<Task> list = new ArrayList<>();
         try {
+            ensureTasksExist();
             bufferedReader = new BufferedReader(new FileReader("tasks.txt"));
             String line = bufferedReader.readLine();
 
@@ -79,6 +75,17 @@ public class Logger {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private static void ensureTasksExist() throws IOException {
+        Path path = Paths.get("tasks.txt");
+        if (!Files.exists(path)) {
+            String newPath = System.getProperty("user.dir");
+            newPath = newPath.replace("\\", "/");
+            newPath += "/tasks.txt";
+            File file = new File(newPath);
+            file.createNewFile();
+        }
     }
 
     private static void markAndAddTask(String line, List<Task> list) {

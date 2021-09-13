@@ -1,20 +1,20 @@
 package bot.utility;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
 
-import bot.constants.GlobalStringFormats;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents a UI that the user interacts with.
  */
 public class Ui {
-    private static final String TAB_SPACES = GlobalStringFormats.TAB_SPACES;
     private Stage stage;
 
     protected static String greet() {
@@ -24,11 +24,11 @@ public class Ui {
         String msg = "I'm IntelliBot. What can I do for you today?";
 
         if ("05:00:00".compareTo(localTime) <= 0 && localTime.compareTo("12:00:00") < 0) {
-            return "\nGood morning!\n" + msg;
+            return LINE_BREAK + "Good morning!" + LINE_BREAK + msg;
         } else if ("12:00:00".compareTo(localTime) <= 0 && localTime.compareTo("18:00:00") < 0) {
-            return "\nGood afternoon!\n" + msg;
+            return LINE_BREAK + "Good afternoon!" + LINE_BREAK + msg;
         } else {
-            return "\nGood evening!\n" + msg;
+            return LINE_BREAK + "Good evening!" + LINE_BREAK + msg;
         }
     }
 

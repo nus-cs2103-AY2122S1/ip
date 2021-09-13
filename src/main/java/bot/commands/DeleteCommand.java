@@ -1,5 +1,8 @@
 package bot.commands;
 
+import static bot.constants.GlobalStringFormats.LINE_BREAK;
+import static bot.constants.GlobalStringFormats.TAB_SPACES;
+
 import java.util.List;
 
 import bot.tasks.Task;
@@ -10,7 +13,8 @@ import bot.utility.TaskList;
  * Represents a command to delete tasks.
  */
 public class DeleteCommand extends Command {
-    private static final String DELETE_FORMAT = "\nNoted. I've removed this task:\n" + TAB_SPACES + "%s\n";
+    private static final String DELETE_FORMAT =
+            LINE_BREAK + "Noted. I've removed this task:" + LINE_BREAK + TAB_SPACES + "%s" + LINE_BREAK;
     private final int index;
 
     /**
