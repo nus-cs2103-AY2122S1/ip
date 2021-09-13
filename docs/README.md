@@ -42,8 +42,10 @@ Delete unwanted tasks.
 
 Exit the Duke app.
 
-&NewLine;
-&NewLine;
+$~$
+&nbsp;
+&nbsp
+<br />
 
 ## Usage
 
