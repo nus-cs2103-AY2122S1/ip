@@ -22,7 +22,7 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     /**
      * Class constructor.

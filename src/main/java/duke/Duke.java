@@ -11,7 +11,7 @@ import javafx.application.Application;
 public class Duke {
 
     private static final String STORAGE_FILE_PATH = "./data/duke.txt";
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
 
     /**

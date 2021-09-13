@@ -18,13 +18,13 @@ import duke.task.ToDo;
  */
 public class Parser {
 
-    private static String dateTimeFormat = "ddMMyy HHmm";
-    private static String dateFormat = "ddMMyy";
+    private static final String dateTimeFormat = "ddMMyy HHmm";
+    private static final String dateFormat = "ddMMyy";
 
     /**
      * The TaskList which the Parser updates.
      */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Class constructor.

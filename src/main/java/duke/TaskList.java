@@ -13,7 +13,7 @@ import duke.task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Class constructor.
