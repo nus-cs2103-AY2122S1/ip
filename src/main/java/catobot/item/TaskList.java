@@ -52,7 +52,7 @@ public class TaskList {
         this.taskList.add(item);
         String front = "Got it meow! I've added this task:";
         String back = checkSize();
-        return String.format("%s\n      %s\n    %s", front, item, back);
+        return String.format("%s\n      %s\n%s", front, item, back);
     }
 
     /**
@@ -95,7 +95,7 @@ public class TaskList {
         Task temp = taskList.get(index - 1);
         taskList.remove(temp);
         return String.format(
-                "Noted. I've removed this task:\n      %s\n      %s", temp, checkSize());
+                "Noted. I've removed this task:\n      %s\n%s", temp, checkSize());
     }
 
     /**
