@@ -1,9 +1,17 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.EmptyTodoDescriptionException;
+import duke.exception.InvalidFileFormatException;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidTaskIndexException;
+import duke.storage.Event;
+import duke.util.Parser;
+import duke.util.Ui;
 
 /**
  * This class encapsulates a list of Tasks.

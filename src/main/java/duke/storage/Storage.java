@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.IOException;
 import java.util.List;

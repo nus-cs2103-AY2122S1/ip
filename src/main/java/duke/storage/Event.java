@@ -1,4 +1,6 @@
-package duke;
+package duke.storage;
+
+import duke.task.Task;
 
 /**
  * This class encapsulates an event task in the Duke Application.

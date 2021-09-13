@@ -2,6 +2,13 @@ package duke;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
+import duke.storage.ArchiveStorage;
+import duke.storage.MainStorage;
+import duke.task.TaskList;
+import duke.util.Parser;
+import duke.util.Ui;
+
 /**
  * This class encapsulates the Duke application.
  */

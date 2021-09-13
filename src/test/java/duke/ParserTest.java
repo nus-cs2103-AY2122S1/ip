@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.InvalidFormatException;
+import duke.exception.UnknownCommandException;
+import duke.util.Parser;
+
 public class ParserTest {
     @Test
     void parse_validCommands_success() {

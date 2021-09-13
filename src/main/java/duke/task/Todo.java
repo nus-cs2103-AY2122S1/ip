@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * This class encapsulates a todo task in the Duke Application.
