@@ -247,7 +247,9 @@ Example of usage:
 
 Expected outcome:
 
-Chad will show what task was just marked as done. `[X]` indicates the task is marked as done.
+Chad will show what task was just marked as done.
+
+`[X]` indicates the task is marked as done.
 
 ```
 Nice! I've marked this task as done:
@@ -262,7 +264,7 @@ Deletes a task from the tasks list.
 
 Format:
 
-`delete {tasks list task number of the task to be marked as done}`
+`delete {tasks list task number of the task to be deleted}`
 
 Example of usage:
 
@@ -346,10 +348,10 @@ There is no need to create the file or folder, this is created automatically for
 
 ## About
 
-ChadBot is an individual project for CS2103T Software Engineering, a module that was a part of the Computer Science
-curriculum of the National University of Singapore (NUS) for those who matriculated in the NUS Academic Year (AY) 19/20.
-ChadBot was done in the AY 21/22 Semester 1 version of CS2103T Software Engineering. ChadBot was written in Java, using
-the JavaFX library for its GUI, and JUnit for its unit tests. ChadBot is based off of
+ChadBot is a greenfield individual project for CS2103T Software Engineering, a module that was a part of the Computer
+Science curriculum of the National University of Singapore (NUS) for those who matriculated in the NUS Academic Year
+(AY) 19/20. ChadBot was done in the AY 21/22 Semester 1 version of CS2103T Software Engineering. ChadBot was written in
+Java, using the JavaFX library for its GUI, and JUnit for its unit tests. ChadBot is based off of
 [Project Duke](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/projectDuke/index.html). ChadBot's GitHub
 repository can be found [here](https://github.com/jayasting98/ip).
 
