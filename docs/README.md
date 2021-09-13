@@ -180,6 +180,6 @@ Your data is saved to a file each time you execute a command that modifies data.
 ### Editing the data file
 
 Your data is saved in a text file in the following path: `/[JAR_file_location]/data/duke.txt`.
-It is recommended that you do not modify the data unless you are familiar with the data's save format.</br>
+It is recommended that you do not modify the data unless you are familiar with the data's save format.<br/>
 :heavy_exclamation_mark: If your data format is invalid, Duke will create a temporary session for you. No data will be saved to
 `duke.txt`.
