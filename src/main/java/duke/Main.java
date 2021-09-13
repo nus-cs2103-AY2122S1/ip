@@ -27,6 +27,7 @@ public class Main extends Application {
             stage.getIcons().add(icon);
             stage.setTitle("JoJoBot");
             stage.setScene(scene);
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
