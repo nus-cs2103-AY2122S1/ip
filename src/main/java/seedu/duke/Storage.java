@@ -24,72 +24,127 @@ import java.util.HashMap;
  */
 public class Storage {
     private String filePath;
+    private HashMap<LocalDate, ArrayList<Task>> dateTasks;
+    private static DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
+
+    private enum Letter {
+        TODO('T'),
+        DEADLINE('D'),
+        EVENT('E'),
+        INVALID('/');
+
+        private final char type;
+
+        Letter(char type) {
+            this.type = type;
+        }
+
+        private static Letter parseLetter(char type) {
+            switch (type) {
+            case 'T':
+                return TODO;
+            case 'D':
+                return DEADLINE;
+            case 'E':
+                return EVENT;
+            default:
+                return INVALID;
+            }
+        }
+
+        private Task updateTaskListWithToDo(String description, boolean isCompleted) {
+            return new ToDo(description, isCompleted);
+        }
+
+        private Task updateTaskListWithDeadline(String description, LocalDate time, boolean isCompleted,
+                                                HashMap<LocalDate, ArrayList<Task>> dateTasks) {
+            Task task = new Deadline(description, time, isCompleted);
+            manager.updateDateTasks(dateTasks, time, task);
+            return task;
+        }
+
+        private Task updateTaskListWithEvent(String description, LocalDate time, boolean isCompleted,
+                                             HashMap<LocalDate, ArrayList<Task>> dateTasks) {
+            Task task = new Event(description, time, isCompleted);
+            manager.updateDateTasks(dateTasks, time, task);
+            return task;
+        }
+
+    }
 
     /**
      * Public constructor for a Storage object.
      *
      * @param filePath The filepath of the file object to be handled.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, HashMap<LocalDate, ArrayList<Task>> dateTasks) {
         this.filePath = filePath;
+        this.dateTasks = dateTasks;
     }
 
     /**
      * Load data from the file per the filepath.
      *
-     * @param dateTasks A HashMap to keep track of tasks happening on specific
-     *                  dates.
      * @param taskList The tasklist to be updated as the file content is read.
      * @return The updated tasklist.
      */
-    public TaskList loadData(HashMap<LocalDate, ArrayList<Task>> dateTasks,
-                             TaskList taskList) {
+    public TaskList loadData(TaskList taskList) {
+        try {
+            checkFileExists();
+            taskList = parseData(taskList);
+        } catch (IOException | DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            return taskList;
+        }
+    }
+
+    private void checkFileExists() {
         try {
             File file = new File(filePath);
             // Create a new file if it does not already exist
             file.createNewFile();
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private TaskList parseData(TaskList taskList) throws IOException, DukeException {
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String task = "";
             while ((task = reader.readLine()) != null) {
                 char type = task.charAt(1);
+                Letter taskType = Letter.parseLetter(type);
                 boolean isCompleted = task.charAt(4) == 'X';
-
-                DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
-
                 String description = parseDescription(task);
 
                 // Dummy objects initialised.
                 Task newTask = new Task("");
                 LocalDate time = LocalDate.now();
 
-                switch (type) {
-                case 'T':
-                    newTask = new ToDo(description, isCompleted);
-                    taskList = taskList.add(newTask);
+                switch (taskType) {
+                case TODO:
+                    newTask = taskType.updateTaskListWithToDo(description, isCompleted);
                     break;
-                case 'D':
+                case DEADLINE:
                     time = parseTime(task, "by: ");
-                    newTask = new Deadline(description, time, isCompleted);
-                    taskList = taskList.add(newTask);
-                    manager.updateDateTasks(dateTasks, time, newTask);
+                    newTask = taskType.updateTaskListWithDeadline(description, time,
+                            isCompleted, this.dateTasks);
                     break;
-                case 'E':
+                case EVENT:
                     time = parseTime(task, "at: ");
-                    newTask = new Event(description, time, isCompleted);
-                    taskList = taskList.add(newTask);
-                    manager.updateDateTasks(dateTasks, time, newTask);
+                    newTask = taskType.updateTaskListWithEvent(description, time,
+                            isCompleted, this.dateTasks);
                     break;
                 default:
                     throw new DukeException("Invalid task.");
                 }
-                System.out.println(description);
+                System.out.println(newTask);
+                taskList = taskList.add(newTask);
             }
             reader.close();
-        } catch (IOException | DukeException e) {
-            System.out.println(e.getMessage());
-        } finally {
             return taskList;
-        }
     }
 
     private LocalDate parseTime(String task, String command) throws DukeException {

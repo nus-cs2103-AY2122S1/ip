@@ -233,13 +233,14 @@ public class Duke {
 
     private boolean isExit = false;
 
-    /**
-     * Storage to handle file manipulation.
-     */
-    private final Storage storage = new Storage("./data/duke.text");
     private final Ui ui = new Ui();
     private final Parser parser = new Parser();
     private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
+
+    /**
+     * Storage to handle file manipulation.
+     */
+    private final Storage storage = new Storage("./data/duke.text", dateTasks);
 
     public void init() {
         String directoryPath = "./data";
@@ -255,7 +256,7 @@ public class Duke {
             }
         }
 
-        taskList = storage.loadData(dateTasks, taskList);
+        taskList = storage.loadData(taskList);
     }
 
     /**

@@ -27,11 +27,11 @@ public class StorageTest {
 
     @Test
     public void loadData_fileNotFound_doesNotThrowException() {
-        String filePath = "./data/temp.text";
-        Storage storage = new Storage(filePath);
+        String filePath = tempFolder.getPath() + "/temp.text";
         TaskList taskList = new TaskList();
         HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
-        assertDoesNotThrow(() -> storage.loadData(dateTasks, taskList));
+        Storage storage = new Storage(filePath, dateTasks);
+        assertDoesNotThrow(() -> storage.loadData(taskList));
     }
 
     @Test
@@ -40,8 +40,8 @@ public class StorageTest {
         HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
         String filePath = tempFolder.getPath() + "/temp.text";
-        Storage storage = new Storage(filePath);
-        storage.loadData(dateTasks, taskList);
+        Storage storage = new Storage(filePath, dateTasks);
+        storage.loadData(taskList);
 
         File file = new File(filePath);
         assertTrue(file.exists());
@@ -51,7 +51,8 @@ public class StorageTest {
     public void addTask_validTask_updateFile() {
         Task toAdd = new ToDo("eat lunch");
         String filePath = tempFolder.getPath() + "/temp.text";
-        Storage storage = new Storage(filePath);
+        HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
+        Storage storage = new Storage(filePath, dateTasks);
         storage.addTaskToFile(toAdd);
         String lastLine = "";
         String line;
