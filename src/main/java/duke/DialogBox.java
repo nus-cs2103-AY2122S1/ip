@@ -52,8 +52,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox result = new DialogBox(text, img);
-        result.setStyle("-fx-padding:5px");
-        result.dialog.setTranslateY(40);
+        result.setStyle("-fx-background-color: #c9ebff; -fx-padding:5px; -fx-background-radius:15px");
         result.dialog.setTranslateX(-15);
         return result;
     }
@@ -61,8 +60,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setStyle("-fx-background-color: #d9d9d9; -fx-padding:5px");
-        db.dialog.setTranslateY(15);
+        db.setStyle("-fx-background-color: #fdffc2; -fx-padding:5px; -fx-background-radius:15px");
         db.dialog.setTranslateX(15);
         return db;
     }

@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greeting = "I'm Duke. How can I help you?";
+        dialogContainer.setStyle("-fx-background-color: #3d3d3d");
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage));
     }
 
