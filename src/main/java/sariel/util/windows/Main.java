@@ -27,8 +27,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setMinHeight(590);
-            stage.setMinWidth(770);
+            stage.setMinHeight(600);
+            stage.setMinWidth(780);
             stage.getIcons().add(Messages.ICON);
             fxmlLoader.<MainWindow>getController().setSariel(sariel);
             TaskInputWindow.setDuke(sariel);
