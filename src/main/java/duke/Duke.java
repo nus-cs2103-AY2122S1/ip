@@ -16,10 +16,10 @@ import duke.utils.Ui;
  * A chat-bot called Naruto that acts as a task list.
  */
 public class Duke {
+    private static final String NARUTO_REPLY_PREFIX = "Sage Mode On! \n";
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
-    private final String NARUTO_REPLY_PREFIX = "Sage Mode On! \n";
 
     /**
      * Constructor for the Duke chat-bot.
@@ -36,9 +36,9 @@ public class Duke {
         // Create a stream to hold the output
         ByteArrayOutputStream narutoStream = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(narutoStream);
-        // IMPORTANT: Save the old System.out!
+        // IMPORTANT: Save the old System.out
         PrintStream oldPrintStream = System.out;
-        // Tell Java to use your special stream
+        // Tell Java to use the special stream
         System.setOut(ps);
 
         // Now execute the entire command from user. It goes to my special stream
@@ -54,8 +54,6 @@ public class Duke {
         // Put things back. Important!
         System.out.flush();
         System.setOut(oldPrintStream);
-        // Show what happened in the terminal on IntelliJ
-        // System.out.println("Here: " + narutoStream.toString());
 
         return NARUTO_REPLY_PREFIX + narutoStream.toString();
     }
@@ -80,8 +78,6 @@ public class Duke {
         // Put things back. Important!
         System.out.flush();
         System.setOut(old);
-        // Show what happened in the terminal on IntelliJ if needed
-        // System.out.println("Here: " + narutoStream.toString());
 
         return NARUTO_REPLY_PREFIX + narutoStream.toString();
     }

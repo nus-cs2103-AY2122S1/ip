@@ -7,6 +7,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListAllCommand;
+import duke.commands.ToDoCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.UnknownInputException;
@@ -77,35 +82,35 @@ public class ParserTest {
 
         try {
             Command c = Parser.parse(cmdOne);
-            assertTrue(c instanceof Command.ToDoCommand);
+            assertTrue(c instanceof ToDoCommand);
         } catch (DukeException e) {
             fail();
         }
 
         try {
             Command c = Parser.parse(cmdTwo);
-            assertTrue(c instanceof Command.DeadlineCommand);
+            assertTrue(c instanceof DeadlineCommand);
         } catch (DukeException e) {
             fail();
         }
 
         try {
             Command c = Parser.parse(cmdThree);
-            assertTrue(c instanceof Command.ListAllCommand);
+            assertTrue(c instanceof ListAllCommand);
         } catch (DukeException e) {
             fail();
         }
 
         try {
             Command c = Parser.parse(cmdFour);
-            assertTrue(c instanceof Command.ExitCommand);
+            assertTrue(c instanceof ExitCommand);
         } catch (DukeException e) {
             fail();
         }
 
         try {
             Command c = Parser.parse(cmdFive);
-            assertTrue(c instanceof Command.EventCommand);
+            assertTrue(c instanceof EventCommand);
         } catch (DukeException e) {
             fail();
         }

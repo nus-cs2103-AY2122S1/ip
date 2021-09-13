@@ -1,6 +1,15 @@
 package duke.utils;
 
 import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListAllCommand;
+import duke.commands.SortDeadlinesCommand;
+import duke.commands.ToDoCommand;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.UnknownInputException;
 
@@ -20,16 +29,16 @@ public class Parser {
     public static Command parse(String fullCommand) throws UnknownInputException, EmptyTaskDescriptionException {
         int taskNum;
         if (true == fullCommand.startsWith("bye")) {
-            return new Command.ExitCommand();
+            return new ExitCommand();
         } else if (true == fullCommand.startsWith("list")) {
-            return new Command.ListAllCommand();
+            return new ListAllCommand();
         } else if (true == fullCommand.startsWith("done")) {
             taskNum = Integer.parseInt(fullCommand.substring(5)) - 1;
-            return new Command.DoneCommand(taskNum);
+            return new DoneCommand(taskNum);
         } else if (true == fullCommand.startsWith("todo")) {
             try {
                 String description = fullCommand.substring(5);
-                return new Command.ToDoCommand(description);
+                return new ToDoCommand(description);
             } catch (StringIndexOutOfBoundsException strE) {
                 throw new EmptyTaskDescriptionException("todo");
             }
@@ -38,7 +47,7 @@ public class Parser {
                 int sep = fullCommand.indexOf('/', 9);
                 String descPart = fullCommand.substring(9, sep - 1);
                 String byPart = fullCommand.substring(sep + 4);
-                return new Command.DeadlineCommand(descPart, byPart);
+                return new DeadlineCommand(descPart, byPart);
             } catch (StringIndexOutOfBoundsException strE) {
                 throw new EmptyTaskDescriptionException("deadline");
             }
@@ -47,18 +56,18 @@ public class Parser {
                 int sep = fullCommand.indexOf('/', 6);
                 String descPart = fullCommand.substring(6, sep - 1);
                 String atPart = fullCommand.substring(sep + 1);
-                return new Command.EventCommand(descPart, atPart);
+                return new EventCommand(descPart, atPart);
             } catch (StringIndexOutOfBoundsException strE) {
                 throw new EmptyTaskDescriptionException("event");
             }
         } else if (true == fullCommand.startsWith("delete")) {
             taskNum = Integer.parseInt(fullCommand.substring(7)) - 1;
-            return new Command.DeleteCommand(taskNum);
+            return new DeleteCommand(taskNum);
         } else if (true == fullCommand.startsWith("find")) {
             String keyword = fullCommand.substring(5);
-            return new Command.FindCommand(keyword);
+            return new FindCommand(keyword);
         } else if (true == fullCommand.startsWith("chrono deadlines")) {
-            return new Command.SortDeadlinesCommand();
+            return new SortDeadlinesCommand();
         } else {
             UnknownInputException e = new UnknownInputException();
             throw e;
