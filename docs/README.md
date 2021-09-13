@@ -21,7 +21,7 @@ ___________________________________________________________________________
 
 **Kayu** is a project template for a greenfield Java project. It's renamed after the Java mascot _Duke_.
 
-![Screenshot](https://muhammad-khair.github.com/ip/Ui.png)
+![Screenshot](Ui.png)
 
 ## Features
 
@@ -47,7 +47,7 @@ ___________________________________________________________________________
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 4. Double click to run the app. This is how you should be greeted with by the app.
 
-![Screenshot](https://muhammad-khair.github.com/ip/start_up.png)
+![Screenshot](start_up.png)
 
 ## Features
 
