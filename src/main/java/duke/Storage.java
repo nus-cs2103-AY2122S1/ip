@@ -1,6 +1,7 @@
 package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class Storage {
                 dirName.append(filePath.charAt(index));
                 index++;
             }
-            //If directory and file name can be extract successfully
+            //If directory and file name can be extracted successfully
             String txtFileName = filePath.substring(index + 1);
             File dir = new File(dirName.toString());
             dir.mkdirs();
@@ -119,6 +120,103 @@ public class Storage {
                 body = currLine.substring(index + 1);
                 Note newNote = new Note(title, body);
                 NoteList.addNote(newNote);
+            }
+        }
+    }
+
+    /**
+     * Writes to the file in user's hard disk that stores a list of tasks or to overwrite
+     * the contents of this file
+     *
+     * @param filePath the relative path to the file
+     * @param textToAdd the content that is to be written
+     * @throws IOException if there is an error in writing to/overwriting the file
+     */
+    public static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    /**
+     * Appends content to the file in user's hard disk
+     *
+     * @param filePath the relative path to the file
+     * @param textToAppend the content that is to be appended
+     * @throws IOException if there is an error in appending to existing content of the file
+     */
+    public static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    /**
+     * Appends a task to the end of a task file stored in the user's hard disk
+     *
+     * @throws IOException if there is an error in appending to existing content of the file
+     */
+    public static void appendToTaskFile() throws IOException {
+        Storage.appendToFile("data/jarvis.txt", (TaskList.getCounter()) + "." +
+                TaskList.getTaskList().get(TaskList.getCounter() - 1).toPrintToFile()
+                + System.lineSeparator());
+    }
+
+    /**
+     * Appends a task to the end of a task file stored in the user's hard disk
+     *
+     * @throws IOException if there is an error in appending to existing content of the file
+     */
+    public static void appendToNoteFile() throws IOException {
+        Storage.appendToFile("data/notes.txt", (NoteList.getCounter()) + "." +
+                NoteList.getNoteList().get(NoteList.getCounter() - 1).toPrintToFile()
+                + System.lineSeparator());
+    }
+
+    /**
+     * Rewrites the task file after any changes made to the TaskList.
+     *
+     * @throws IOException if there is an error in re-writing the list of tasks without the
+     * deleted task
+     */
+    public static void rewriteTaskFile() throws IOException{
+        if (TaskList.getTaskList().size() == 0) {
+            Storage.writeToFile("data/jarvis.txt", "");
+        } else {
+            for (int i = 0; i < TaskList.getTaskList().size(); i++) {
+                if (i == 0) {
+                    Storage.writeToFile("data/jarvis.txt", (i + 1) + "." +
+                            TaskList.getTaskList().get(i).toPrintToFile()
+                            + System.lineSeparator());
+                } else {
+                    Storage.appendToFile("data/jarvis.txt", (i + 1) + "." +
+                            TaskList.getTaskList().get(i).toPrintToFile()
+                            + System.lineSeparator());
+                }
+            }
+        }
+    }
+
+    /**
+     * Rewrites the task file after any changes made to the TaskList.
+     *
+     * @throws IOException if there is an error in re-writing the list of tasks without the
+     * deleted task
+     */
+    public static void rewriteNoteFile() throws IOException{
+        if (NoteList.getNoteList().size() == 0) {
+            Storage.writeToFile("data/notes.txt", "");
+        } else {
+            for (int i = 0; i < NoteList.getNoteList().size(); i++) {
+                if (i == 0) {
+                    Storage.writeToFile("data/notes.txt", (i + 1) + "." +
+                            NoteList.getNoteList().get(i).toPrintToFile()
+                            + System.lineSeparator());
+                } else {
+                    Storage.appendToFile("data/notes.txt", (i + 1) + "." +
+                            NoteList.getNoteList().get(i).toPrintToFile()
+                            + System.lineSeparator());
+                }
             }
         }
     }
