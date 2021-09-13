@@ -7,7 +7,7 @@
     
 # Sariel
 
-![UI](ui.png)
+![UI](Ui.png)
 
 Sariel is a desktop application for managing tasks through  
 its GUI or command line.
