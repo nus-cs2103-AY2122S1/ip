@@ -154,7 +154,8 @@ public class Parser {
 
         String[] argArr = details.split("/by");
         if (argArr.length <= 1) {
-            throw new DukeException("Please provide both the deadline description and date");
+            throw new DukeException("Please provide both the deadline description and date"
+                    + " Format: deadline <DESCRIPTION> /by <DATE:YYYY-MM-DD>");
         }
 
         String description = argArr[0].trim();
@@ -162,7 +163,7 @@ public class Parser {
             LocalDate date = LocalDate.parse(argArr[1].trim());
             return new AddCommand(new Deadline(description, date));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date must be in the form YYYY-MM-DD");
+            throw new DukeException("Date must be in the format: YYYY-MM-DD");
         }
     }
 
@@ -173,7 +174,8 @@ public class Parser {
 
         String[] argArr = details.split("/at");
         if (argArr.length <= 1) {
-            throw new DukeException("Please provide both the event description and date");
+            throw new DukeException("Please provide both the event description and date."
+                    + " Format: event <DESCRIPTION> /at <DATE:YYYY-MM-DD>");
         }
 
         String description = argArr[0].trim();
@@ -181,7 +183,7 @@ public class Parser {
             LocalDate date = LocalDate.parse(argArr[1].trim());
             return new AddCommand(new Event(description, date));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date must be in the format YYYY-MM-DD");
+            throw new DukeException("Date must be in the format: YYYY-MM-DD");
         }
     }
 
@@ -191,7 +193,7 @@ public class Parser {
         try {
             indices = Arrays.stream(argArr).map(Integer::parseInt).collect(Collectors.toSet());
         } catch (NumberFormatException e) {
-            throw new DukeException("Must be in the format: done {index 1} {index 2} ...");
+            throw new DukeException("Must be in the format: done <INDEX_1> <INDEX_2> ...");
         }
         return new DoneCommand(indices);
     }
@@ -207,10 +209,10 @@ public class Parser {
                 int toIndex = Integer.parseInt(argArr[1]);
                 return new DeleteCommand(fromIndex, toIndex);
             } else {
-                throw new DukeException("Must be in the format: delete {index} or delete {fromIndex} {toIndex}");
+                throw new DukeException("Must be in the format: delete <INDEX> or delete <FROM_INDEX> <TO_INDEX>");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Must be in the format: delete {index} or delete {fromIndex} {toIndex}");
+            throw new DukeException("Must be in the format: delete <INDEX> or delete <FROM_INDEX> <TO_INDEX>");
         }
     }
 

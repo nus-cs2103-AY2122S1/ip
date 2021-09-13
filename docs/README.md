@@ -106,11 +106,11 @@ Here are the matching tasks in your list:
 
 Format:
 
-`done <INDEX 1> [INDEX 2] ...` 
+`done <INDEX_1> [INDEX_2] ...` 
 
-`finish <INDEX 1> [INDEX 2] ...` 
+`finish <INDEX_1> [INDEX_2] ...` 
 
-`complete <INDEX 1> [INDEX 2] ...`
+`complete <INDEX_1> [INDEX_2] ...`
 
 Example of usage: `done 1 2 3`
 
@@ -126,9 +126,9 @@ Nice! I've marked these tasks as done:
 
 Format: 
 
-`delete <FROM INDEX> [TO INDEX]`
+`delete <FROM_INDEX> [TO_INDEX]`
 
-`remove <FROM INDEX> [TO INDEX]`
+`remove <FROM_INDEX> [TO_INDEX]`
 
 Example of usage: `delete 1 3`
 
