@@ -12,7 +12,6 @@ import java.io.IOException;
  * Represents Duke's storage system and handles file operations.
  */
 public class Storage {
-    //private static List<String> lines;
     public Storage() {
 
     }

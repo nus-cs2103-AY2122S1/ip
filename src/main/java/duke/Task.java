@@ -5,25 +5,25 @@ package duke;
  */
 public class Task {
     String name;
-    boolean done;
+    boolean isDone;
 
     public Task(String name) {
         this.name = name;
-        done = false;
+        isDone = false;
     }
 
     /**
      * Marks the task as done.
      */
     public void makeDone() {
-        done = true;
+        isDone = true;
     }
 
     /**
      * Marks the task as undone.
      */
     public void makeUndone() {
-        done = false;
+        isDone = false;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (done == true) {
+        if (isDone == true) {
             return "[X] " + name;
         } else {
             return "[ ] " + name;

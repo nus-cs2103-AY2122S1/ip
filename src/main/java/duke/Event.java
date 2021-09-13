@@ -58,7 +58,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (done == true) {
+        if (isDone == true) {
             return "[E][X] " + name + " (at: " + dateString + ")";
         } else {
             return "[E][ ] " + name + " (at: " + dateString + ")";

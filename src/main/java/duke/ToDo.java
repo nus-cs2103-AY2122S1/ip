@@ -16,7 +16,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        if (done == true) {
+        if (isDone == true) {
             return "[T][X] " + name;
         } else {
             return "[T][ ] " + name;

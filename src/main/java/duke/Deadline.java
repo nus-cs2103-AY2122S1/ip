@@ -59,7 +59,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (done == true) {
+        if (isDone == true) {
             return "[D][X] " + name + " (by: " + dateString + ")";
         } else {
             return "[D][ ] " + name + " (by: " + dateString + ")";
