@@ -32,36 +32,38 @@ A task can be a todo, deadline, or an event.
   Format: `todo <description>`\
   Example: `todo buy milk`\
   Expected output:
-   ```
+  ```
   Got it. I've added this task:
-        [T][] buy milk
+      [T][] buy milk
   You now have 1 task in the list.
-   ```
+  ```
 * #### Adding a deadline: `deadline`
   Format: `deadline <description> /by <date>`
   * Please use the date format as such:`YYYY-MM-DD`
 
   Example: `deadline ip /by 2021-09-17`\
   Expected output:
-    ```
-    Got it. I've added this task:
-        [D][] ip (by: Sep 17 2021)
-    You now have 2 tasks in the list.
-    ```
+  ```
+  Got it. I've added this task:
+      [D][] ip (by: Sep 17 2021)
+  You now have 2 tasks in the list.
+  ```
 * #### Adding an event: `event`
   Format: `event <description> /at <time period>`\
   Example: `event team meeting /at monday 7-8pm`\
   Expected output:
-    ```
-    Got it. I've added this task:
-        [E][] team meeting (at: monday 7-8pm)
-    You now have 3 tasks in the list.
-    ```
+  ```
+  Got it. I've added this task:
+      [E][] team meeting (at: monday 7-8pm)
+  You now have 3 tasks in the list.
+  ```
 ---
+
 ### Listing all tasks: `list`
 Lists all your tasks.\
 Example: `list`\
 Expected output:
+
 ```
 Here are the tasks in your list:
     1. [T][] buy milk
