@@ -9,6 +9,9 @@ import retriever.task.Task;
  * user and the chatbot.
  */
 public class Ui {
+    // Response would be stored here
+    private static String retrieverResponse;
+
     // Help Section Strings.
     private static final String WELCOME_TO_HELP_SECTION_MESSAGE = "Master, I shall guide you to my best "
             + "ability to smell.";
@@ -59,10 +62,6 @@ public class Ui {
             + "\to'')}____//\n"
             + "\t`_'      )\n"
             + "\t(_(_/-(_/\n";
-
-    // Response would be stored here
-    private static String retrieverResponse;
-
 
     /**
      * Initializes the Ui class.

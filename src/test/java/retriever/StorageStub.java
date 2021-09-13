@@ -1,8 +1,8 @@
 package retriever;
 
-import retriever.task.Task;
-
 import java.util.ArrayList;
+
+import retriever.task.Task;
 
 public class StorageStub extends Storage {
     public StorageStub(String filePath) {

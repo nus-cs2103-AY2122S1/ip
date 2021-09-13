@@ -1,7 +1,8 @@
 package retriever.task;
 
-import retriever.Storage;
+import java.util.ArrayList;
 
+import retriever.Storage;
 import retriever.Ui;
 import retriever.exception.IllegalDateFormatException;
 import retriever.exception.IllegalDeadlineFormatException;
@@ -10,9 +11,6 @@ import retriever.exception.IllegalTaskNumberException;
 import retriever.exception.IllegalTodoFormatException;
 import retriever.exception.RetrieverException;
 import retriever.exception.TaskNotFoundException;
-
-import java.util.ArrayList;
-
 
 public class TaskListStub extends TaskList {
     private Ui ui = new Ui();

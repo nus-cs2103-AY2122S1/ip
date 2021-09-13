@@ -1,16 +1,19 @@
 package retriever;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
+
 import retriever.exception.IllegalCommandException;
 import retriever.exception.RetrieverException;
 import retriever.task.TaskListStub;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class parserTest {
-    Ui uiTest = new Ui();
-    StorageStub storageStub = new StorageStub("tasksListStub.txt");
-    TaskListStub taskListStub = new TaskListStub(storageStub);
+public class ParserTest {
+    private Ui uiTest = new Ui();
+    private StorageStub storageStub = new StorageStub("tasksListStub.txt");
+    private TaskListStub taskListStub = new TaskListStub(storageStub);
 
     @Test
     public void parseUserInput_aStringWithViewKeyword_success() {
@@ -19,7 +22,7 @@ public class parserTest {
         try {
             parserTest.parseUserInput("view 21/09/2021");
             retrieverResponse = uiTest.getRetrieverResponse();
-            assertEquals( "Master, You Can Play With Me, No Scheduled Tasks For The Day, Woooof!", retrieverResponse);
+            assertEquals("Master, You Can Play With Me, No Scheduled Tasks For The Day, Woooof!", retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }
@@ -32,7 +35,7 @@ public class parserTest {
         try {
             parserTest.parseUserInput("find String");
             retrieverResponse = uiTest.getRetrieverResponse();
-            assertEquals( "Sorry Master, I Couldn't Smell And Find What You Asked For!\n "
+            assertEquals("Sorry Master, I Couldn't Smell And Find What You Asked For!\n "
                     + "(Task With the Given Keyword Does Not Exist)\n", retrieverResponse);
         } catch (RetrieverException e) {
             fail();
@@ -46,7 +49,7 @@ public class parserTest {
         try {
             parserTest.parseUserInput("list");
             retrieverResponse = uiTest.getRetrieverResponse();
-            assertEquals( "My Memory Is Empty, Please Feed Items!", retrieverResponse);
+            assertEquals("My Memory Is Empty, Please Feed Items!", retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }
@@ -63,7 +66,7 @@ public class parserTest {
                     + "Task Deleted!\n"
                     + "[T][ ] Testing"
                     + "\nYou Owe Me 0 Treat(s), Master!";
-            assertEquals( expectedOutput, retrieverResponse);
+            assertEquals(expectedOutput, retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }
@@ -79,7 +82,7 @@ public class parserTest {
             String expectedOutput = "Woof! Whose a Good Boy?\n"
                     + "Task Done!\n"
                     + "[T][X] Testing";
-            assertEquals( expectedOutput, retrieverResponse);
+            assertEquals(expectedOutput, retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }
@@ -95,7 +98,7 @@ public class parserTest {
             String expectedOutput = "Where's My Treat? I Added:\n"
                     + "[D][ ] Testing (by: Sep 12 2021)"
                     + "\nYou Owe Me 1 Treat(s), Master!";
-            assertEquals( expectedOutput, retrieverResponse);
+            assertEquals(expectedOutput, retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }
@@ -111,7 +114,7 @@ public class parserTest {
             String expectedOutput = "Where's My Treat? I Added:\n"
                     + "[E][ ] Testing (at: Sep 12 2021)"
                     + "\nYou Owe Me 1 Treat(s), Master!";
-            assertEquals( expectedOutput, retrieverResponse);
+            assertEquals(expectedOutput, retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }
@@ -127,7 +130,7 @@ public class parserTest {
             String expectedOutput = "Where's My Treat? I Added:\n"
                     + "[T][ ] Testing"
                     + "\nYou Owe Me 1 Treat(s), Master!";
-            assertEquals( expectedOutput, retrieverResponse);
+            assertEquals(expectedOutput, retrieverResponse);
         } catch (RetrieverException e) {
             fail();
         }

@@ -2,6 +2,8 @@ package retriever;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import retriever.task.Deadline;
@@ -9,8 +11,6 @@ import retriever.task.Event;
 import retriever.task.Task;
 import retriever.task.TaskDateAndTime;
 import retriever.task.Todo;
-
-import java.util.ArrayList;
 
 public class UiTest {
     @Test
