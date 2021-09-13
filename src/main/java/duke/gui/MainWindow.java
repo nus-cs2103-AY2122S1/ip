@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
 
         // Button
         view.setFitHeight(25);
-        view.setFitWidth(55);
+        view.setFitWidth(25);
         sendButton.setGraphic(view);
         //@@author
 

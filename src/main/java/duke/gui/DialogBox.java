@@ -80,6 +80,10 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         db.dialog.setBackground(DUKE_BACKGROUND);
+
+        if (text.contains("ERROR:")) {
+            db.dialog.setStyle("-fx-text-fill: #ad0204;");
+        }
         return db;
     }
 }

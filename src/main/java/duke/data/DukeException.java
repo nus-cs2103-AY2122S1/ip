@@ -5,6 +5,6 @@ package duke.data;
  */
 public class DukeException extends RuntimeException{
     public DukeException(String message) {
-        super(message);
+        super("ERROR: \n" + message);
     }
 }
