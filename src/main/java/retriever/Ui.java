@@ -165,7 +165,7 @@ public class Ui {
             return;
         }
 
-        retrieverResponse = "Woof! Look What I Found: /n";
+        retrieverResponse = "Woof! Look What I Found: \n";
 
         for (int i = 0; i < taskList.size(); i++) {
             retrieverResponse += (i + 1) + ". " + taskList.get(i) + "\n";
