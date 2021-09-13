@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Stack;
 
 import workdone.command.AddTaskCommand;
+import workdone.command.ClearCommand;
 import workdone.command.Command;
 import workdone.command.DeleteTaskCommand;
 import workdone.command.ExitCommand;
@@ -160,6 +161,8 @@ public class Parser {
             return Parser.parseUndo();
         } else if (command.equals("help")) {
             return new HelpCommand();
+        } else if (command.equals("clear")) {
+            return new ClearCommand();
         } else {
             // Split the command into two phrases
             String[] words = command.split(" ", 2);
