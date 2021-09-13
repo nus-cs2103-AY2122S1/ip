@@ -1,4 +1,2 @@
-1.E|NotDone swim (at: )
-2.E|NotDone swim swim (at: )
-3.T|NotDone bring back 
-4.T|NotDone swim swim swim 
+1.E|NotDone formal dinner (on: Monday)
+2.T|NotDone cs2100 
