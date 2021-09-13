@@ -99,7 +99,8 @@ public class TaskList {
     public String search(String keyword, Ui ui) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
-            if (get(i).getDescription().contains(keyword)) {
+            String taskString = get(i).toString();
+            if (taskString.contains(keyword)) {
                 temp.add(get(i));
             }
         }
