@@ -25,8 +25,8 @@ public class Duke {
         notes = new NoteList();
 
         try {
-            taskStorage.retrieveFileContents(); // Retrieves contents from the jarvis.txt file in user's hard disk
-            notesStorage.retrieveFileContents(); // Retrieves contents from the notes.txt file in user's hard disk
+            taskStorage.retrieveTaskFileContents(); // Retrieves contents from the jarvis.txt file in user's hard disk
+            notesStorage.retrieveNotesFileContents(); // Retrieves contents from the notes.txt file in user's hard disk
         } catch (FileNotFoundException e) {
             System.err.println(e);
         }
