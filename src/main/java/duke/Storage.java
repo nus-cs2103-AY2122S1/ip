@@ -1,8 +1,10 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
@@ -13,22 +15,25 @@ public class Storage {
 
     /**
      * Creates the 'data' directory and 'jarvis.txt' file in user's hard disk to store user's
-     * list of tasks (if the directory and file don't already exit)
+     * list of tasks (if the directory and file don't already exit).
+     *
      * @param filePath the relative path to location in which the file is to be created
      */
     public Storage(String filePath) {
-        this.filePath = filePath; //Format: directory/file
+        this.filePath = filePath; // Format: directory/file
         try {
             StringBuilder dirName = new StringBuilder();
             int index = 0;
-            //Extracting the directory and file name
+
+            // Extracting the directory and file name
             while (index < filePath.length() && !filePath.substring(index).startsWith("/")) {
                 assert !(index == filePath.length() - 1): "Filepath is invalid";
 
                 dirName.append(filePath.charAt(index));
                 index++;
             }
-            //If directory and file name can be extracted successfully
+
+            // If directory and file name can be extracted successfully
             String txtFileName = filePath.substring(index + 1);
             File dir = new File(dirName.toString());
             dir.mkdirs();
@@ -42,70 +47,116 @@ public class Storage {
     }
 
     /**
-     * Retrieves the list of tasks from the user's hard disk and displays it to the user
+     * Retrieves the list of tasks from the user's hard disk and displays it to the user.
+     *
      * @throws FileNotFoundException if the file ('jarvis.txt') containing the list of tasks
      * cannot be found
      */
-    public void retrieveFileContents() throws FileNotFoundException {
-        File f = new File(this.filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+    public void retrieveTaskFileContents() throws FileNotFoundException {
+        File f = new File(this.filePath); // Create a File for the given file path
+        Scanner s = new Scanner(f); // Create a Scanner using the File as the source
 
-        //If retrieving user tasks
+        // If retrieving user tasks
         if (this.filePath.equals("data/jarvis.txt")) {
             while (s.hasNext()) {
                 String currLine = s.nextLine();
                 currLine = currLine.substring(2);
-                //If the task is a todo task
+
+                // If the task is a todo task
                 if (currLine.startsWith("[T]")) {
-                    String description = " " + currLine.substring(7);
-                    Todo newTodo = new Todo(description);
-                    TaskList.addTask(newTodo);
-                    if (currLine.charAt(4) == 'X') {
-                        newTodo.markAsDone();
-                    }
-                //If the task is a deadline task
+                    this.retrieveTodo(currLine);
+
+                // If the task is a deadline task
                 } else if (currLine.startsWith("[D]")) {
-                    int currIndex = 7;
+                    this.retrieveDeadline(currLine);
 
-                    //Find 'by: ' which separated the task description and the deadline
-                    while (!currLine.substring(currIndex).startsWith("by: ")) {
-                        assert !(currIndex == filePath.length() - 1) : "Filepath is invalid"; //If 'by: ' not found
-                        currIndex++;
-                    }
-
-                    String description = " " + currLine.substring(7, currIndex - 2);
-                    String by = currLine.substring(currIndex + 4, currLine.length() - 1);
-                    Task newDeadline = new Deadline(description, by);
-                    TaskList.addTask(newDeadline);
-                    if (currLine.charAt(4) == 'X') {
-                        newDeadline.markAsDone();
-                    }
-                //If the task is an event task
+                // If the task is an event task
                 } else if (currLine.startsWith("[E]")) {
-                    int currIndex = 7;
-
-                    //Find 'at: ' which separates the task description and timings
-                    while (!currLine.substring(currIndex).startsWith("at: ")) {
-                        assert !(currIndex == filePath.length() - 1) : "Filepath is invalid"; //If 'at: ' not found
-                        currIndex++;
-                    }
-
-                    String description = " " + currLine.substring(7, currIndex - 2);
-                    String by = currLine.substring(currIndex + 4, currLine.length() - 1);
-                    Task newEvent = new Event(description, by);
-                    TaskList.addTask(newEvent);
-                    if (currLine.charAt(4) == 'X') {
-                        newEvent.markAsDone();
-                    }
+                    this.retrieveEvent(currLine);
                 }
             }
-        //If retrieving user notes
-        } else if (this.filePath.equals("data/notes.txt")) {
+        }
+    }
+
+    /**
+     * Interprets the string from the user's task file that represents the todo task and adds it to the task list.
+     *
+     * @param todoString the string from the user's task file that represents the todo task
+     */
+    public void retrieveTodo(String todoString) {
+        String description = " " + todoString.substring(7);
+        Todo newTodo = new Todo(description);
+        TaskList.addTask(newTodo);
+        if (todoString.charAt(4) == 'X') {
+            newTodo.markAsDone();
+        }
+    }
+
+    /**
+     * Interprets the string from the user's task file that represents the deadline task and adds it to the task list.
+     *
+     * @param deadlineString the string from the user's task file that represents the deadline task
+     */
+    public void retrieveDeadline(String deadlineString) {
+        int currIndex = 7;
+
+        // Find 'by: ' which separated the task description and the deadline
+        while (!deadlineString.substring(currIndex).startsWith("by: ")) {
+            assert !(currIndex == this.filePath.length() - 1) : "Filepath is invalid"; //If 'by: ' not found
+            currIndex++;
+        }
+
+        String description = " " + deadlineString.substring(7, currIndex - 2);
+        String by = deadlineString.substring(currIndex + 4, deadlineString.length() - 1);
+
+        Task newDeadline = new Deadline(description, by); // Create new deadline task
+        TaskList.addTask(newDeadline); // Add the deadline task to the task list
+        if (deadlineString.charAt(4) == 'X') {
+            newDeadline.markAsDone(); // Mark the task as done if it has been completed
+        }
+    }
+
+    /**
+     * Interprets the string from the user's task file that represents the event task and adds it to the task list.
+     *
+     * @param eventString the string from the user's task file that represents the event task
+     */
+    public void retrieveEvent(String eventString) {
+        int currIndex = 7;
+
+        // Find 'at: ' which separates the task description and timings
+        while (!eventString.substring(currIndex).startsWith("at: ")) {
+            assert !(currIndex == this.filePath.length() - 1) : "Filepath is invalid"; // If 'at: ' not found
+            currIndex++;
+        }
+
+        String description = " " + eventString.substring(7, currIndex - 2);
+        String by = eventString.substring(currIndex + 4, eventString.length() - 1);
+
+        Task newEvent = new Event(description, by); // Create new event task
+        TaskList.addTask(newEvent); // Add the event task to the task list
+        if (eventString.charAt(4) == 'X') {
+            newEvent.markAsDone(); // Mark the task as done if it has been completed
+        }
+    }
+
+    /**
+     * Retrieves the list of notes from the user's hard disk and displays it to the user.
+     *
+     * @throws FileNotFoundException if the file ('notes.txt') containing the list of tasks
+     * cannot be found
+     */
+    public void retrieveNotesFileContents() throws FileNotFoundException {
+        File f = new File(this.filePath); // Create a File for the given file path
+        Scanner s = new Scanner(f); // Create a Scanner using the File as the source
+
+        // If retrieving user tasks
+        if (this.filePath.equals("data/notes.txt")) {
             while (s.hasNext()) {
                 String currLine = s.nextLine();
                 currLine = currLine.substring(2);
 
-                String title = "";
+                StringBuilder title = new StringBuilder();
                 String body;
 
                 int index = 0;
@@ -113,12 +164,13 @@ public class Storage {
                 while (index < currLine.length() &&
                         !currLine.substring(index).startsWith(":")) {
                     assert !(index == filePath.length() - 1) : "Filepath is invalid"; //If ':' not found
-                    title += currLine.substring(index, index + 1);
+                    title.append(currLine.substring(index, index + 1));
                     index++;
                 }
+
                 //If title and body can be extracted successfully
                 body = currLine.substring(index + 1);
-                Note newNote = new Note(title, body);
+                Note newNote = new Note(title.toString(), body);
                 NoteList.addNote(newNote);
             }
         }
@@ -126,7 +178,7 @@ public class Storage {
 
     /**
      * Writes to the file in user's hard disk that stores a list of tasks or to overwrite
-     * the contents of this file
+     * the contents of this file.
      *
      * @param filePath the relative path to the file
      * @param textToAdd the content that is to be written
@@ -139,7 +191,7 @@ public class Storage {
     }
 
     /**
-     * Appends content to the file in user's hard disk
+     * Appends content to the file in user's hard disk.
      *
      * @param filePath the relative path to the file
      * @param textToAppend the content that is to be appended
@@ -152,7 +204,7 @@ public class Storage {
     }
 
     /**
-     * Appends a task to the end of a task file stored in the user's hard disk
+     * Appends a task to the end of a task file stored in the user's hard disk.
      *
      * @throws IOException if there is an error in appending to existing content of the file
      */
@@ -163,7 +215,7 @@ public class Storage {
     }
 
     /**
-     * Appends a task to the end of a task file stored in the user's hard disk
+     * Appends a note to the end of a task file stored in the user's hard disk.
      *
      * @throws IOException if there is an error in appending to existing content of the file
      */
@@ -198,7 +250,7 @@ public class Storage {
     }
 
     /**
-     * Rewrites the task file after any changes made to the TaskList.
+     * Rewrites the note file after any changes made to the NoteList.
      *
      * @throws IOException if there is an error in re-writing the list of tasks without the
      * deleted task
