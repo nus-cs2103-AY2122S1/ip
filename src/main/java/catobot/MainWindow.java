@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Objects;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,8 +22,10 @@ public class MainWindow extends AnchorPane {
 
     private Catobot catobot;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/image/kuma-1.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/image/neko-1.png"));
+    private final Image userImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/image/kuma-2.png")));
+    private final Image dukeImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/image/neko-2.png")));
 
     /**
      * Initializes the displaying window.
@@ -30,7 +34,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getBotDialog(Catobot.WELCOME, dukeImage)
+                BotDialogBox.getBotDialog(Catobot.WELCOME, dukeImage)
         );
     }
 
@@ -43,17 +47,12 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = catobot.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBotDialog(response, dukeImage)
+                UserDialogBox.getUserDialog(input, userImage),
+                BotDialogBox.getBotDialog(response, dukeImage)
         );
         userInput.clear();
     }
 
-    /**
-     * Sets the Catobot.
-     *
-     * @param c The instance of Catobot.
-     */
     public void setCatobot(Catobot c) {
         catobot = c;
     }

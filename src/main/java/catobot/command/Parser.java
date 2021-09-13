@@ -3,7 +3,6 @@ package catobot.command;
 import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
 import catobot.exception.InvalidCommandException;
-import catobot.exception.InvalidDeadlineException;
 
 /**
  * Represents the processor of raw input content into commands.
@@ -43,7 +42,7 @@ public class Parser {
     }
 
     protected static String[] parseMultipleArgument(
-            String content, CommandType type, String indicator) throws BotException {
+            String content, CommandType type, String indicator, BotException exception) throws BotException {
         String name = type.getValue();
         // If the command is empty
         if (content.split(" ").length == 1) {
@@ -53,13 +52,13 @@ public class Parser {
 
         // If the command does not have "/indicator"
         if (!rawInputs.contains(indicator)) {
-            throw new InvalidDeadlineException();
+            throw exception;
         }
         String[] details = rawInputs.split(indicator);
 
         // if there is no description or date
         if (details.length < 2) {
-            throw new InvalidDeadlineException();
+            throw exception;
         }
         return details;
     }

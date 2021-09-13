@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import catobot.Storage;
 import catobot.exception.BotException;
 import catobot.exception.InvalidDateTimeException;
+import catobot.exception.InvalidDeadlineException;
 import catobot.item.Deadline;
 import catobot.item.TaskList;
 
@@ -27,7 +28,7 @@ public class DeadlineCommand extends Command {
      */
     protected DeadlineCommand(String content) throws BotException {
         String[] details = Parser.parseMultipleArgument(
-                content, CommandType.DEADLINE, DEADLINE_INDICATOR);
+                content, CommandType.DEADLINE, DEADLINE_INDICATOR, new InvalidDeadlineException());
         String description = details[0].trim();
         String rawDate = details[1].trim();
         this.description = description;

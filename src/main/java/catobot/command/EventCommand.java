@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import catobot.Storage;
 import catobot.exception.BotException;
 import catobot.exception.InvalidDateTimeException;
+import catobot.exception.InvalidEventException;
 import catobot.item.Event;
 import catobot.item.TaskList;
 
@@ -29,7 +30,7 @@ public class EventCommand extends Command {
      */
     protected EventCommand(String content) throws BotException {
         String[] details = Parser.parseMultipleArgument(
-                content, CommandType.EVENT, EVENT_INDICATOR);
+                content, CommandType.EVENT, EVENT_INDICATOR, new InvalidEventException());
         String description = details[0].trim();
         String rawDate = details[1].trim();
         this.description = description;

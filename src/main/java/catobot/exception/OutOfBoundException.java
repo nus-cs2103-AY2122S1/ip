@@ -11,6 +11,6 @@ public class OutOfBoundException extends BotException {
      * @param actual The actual value.
      */
     public OutOfBoundException(String expected, String actual) {
-        super(String.format("OOPS!!! The expected value is %s but you give me %s", expected, actual));
+        super(String.format("Expect %s but you give me %s", expected, actual));
     }
 }

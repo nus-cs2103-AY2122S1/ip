@@ -4,6 +4,10 @@ package catobot.exception;
  * Represents exceptions thrown by Catobot classes.
  */
 public class BotException extends Exception {
+
+    /** String indicator of error message. */
+    public static final String INDICATOR = "Meow! ";
+
     /**
      * Constructor for BotException.
      *
@@ -20,6 +24,6 @@ public class BotException extends Exception {
      */
     @Override
     public String getMessage() {
-        return super.getMessage();
+        return INDICATOR + super.getMessage();
     }
 }

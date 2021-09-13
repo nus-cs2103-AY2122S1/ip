@@ -8,7 +8,7 @@ public class InvalidCommandException extends BotException {
      * Constructor for InvalidCommandException.
      */
     public InvalidCommandException() {
-        super("Meow I don't understand this command >.<");
+        super("I don't understand this command >.<");
     }
 
 }

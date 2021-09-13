@@ -1,8 +1,11 @@
+// Solution below are adapted from https://se-education.org/guides/tutorials/javaFx.html
+// Solution below are adapted from https://github.com/lll-jy/ip/blob/master/src/main/java/DialogBox.java
 package catobot;
 
 import java.io.IOException;
 import java.util.Collections;
 
+import catobot.exception.BotException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,19 +18,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Represents the User Dialog Box.
  */
-public class DialogBox extends HBox {
+public class BotDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private BotDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/BotDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -37,6 +38,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        if (text.startsWith(BotException.INDICATOR)) {
+            setExceptionStyle();
+        }
     }
 
     /**
@@ -49,17 +54,11 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    /**
-     * Gets the user dialog box.
-     *
-     * @param text The text to be displayed.
-     * @param img The profile image of user.
-     * @return The dialog box for user input.
-     */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    private void setExceptionStyle() {
+        String backgroundSetting = "-fx-background-color: #FCD5CB; -fx-text-fill: #8C062B;";
+        String otherSetting = "-fx-label-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5";
+        dialog.setStyle(backgroundSetting + otherSetting);
     }
-
     /**
      * Gets the bot dialog box.
      *
@@ -67,8 +66,8 @@ public class DialogBox extends HBox {
      * @param img The profile image of bot.
      * @return The dialog box for bot response.
      */
-    public static DialogBox getBotDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static BotDialogBox getBotDialog(String text, Image img) {
+        var db = new BotDialogBox(text, img);
         db.flip();
         return db;
     }
