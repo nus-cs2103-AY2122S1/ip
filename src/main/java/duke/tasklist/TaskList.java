@@ -119,6 +119,21 @@ public class TaskList {
         return response;
     }
 
+    public String tag(int index, String tag) {
+        String response = "";
+        Task taggedItem = list.get(index - 1);
+        taggedItem.addTag(tag);
+
+        response += ("Got it. I've tagging the following task:\n");
+        response += String.format("    %s%n", taggedItem);
+
+        saveData();
+
+        assert !response.equals("");
+
+        return response;
+    }
+
     String printSize() {
         return String.format("Total tasks: %d%n", list.size());
     }

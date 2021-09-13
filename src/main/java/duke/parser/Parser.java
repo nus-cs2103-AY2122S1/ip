@@ -36,12 +36,14 @@ public class Parser {
                 response += "Goodbye human. See you soon!\n";
             } else if (input.equals("list")) {
                 response += taskList.printItems();
-            } else if (input.contains("done")) {
+            } else if (input.startsWith("done")) {
                 response += markAsDone(input);
-            } else if (input.contains("delete")) {
+            } else if (input.startsWith("delete")) {
                 response += deleteItem(input);
-            } else if (input.contains("find")) {
+            } else if (input.startsWith("find")) {
                 response += findItem(input);
+            } else if (input.startsWith("tag")) {
+                response += tagItem(input);
             } else {
                 response += addItem(input);
             }
@@ -137,6 +139,13 @@ public class Parser {
         return taskList.find(keyword);
     }
 
+    private String tagItem(String input) throws DukeException {
+        int index = getIndexFromInput(input);
+        String tag = getTagFromInput(input);
+
+        return taskList.tag(index, tag);
+    }
+
     /**
      * Retrieves the number from user input.
      *
@@ -149,6 +158,14 @@ public class Parser {
             throw new DukeException("I do not know which task you are referring to. Please provide a number.");
         }
         return Integer.parseInt(parsedInput[1]);
+    }
+
+    private String getTagFromInput(String input) throws DukeException {
+        String[] parsedInput = input.split("#");
+        if (isIncomplete(parsedInput)) {
+            throw new DukeException("Invalid format. Please prefix your tag with #");
+        }
+        return parsedInput[1];
     }
 
     private boolean isIncomplete(String[] arr) {

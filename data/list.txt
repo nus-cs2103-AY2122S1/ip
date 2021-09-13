@@ -1,10 +1,10 @@
-[T][X] read book
-[D][X] return book (deadline: Dec 1 2021)
-[T][ ] join sports club
-[T][ ] borrow book
-[D][ ] finish homework (deadline: Sep 14 2021)
-[T][ ] eat
-[T][X] sleep
-[T][ ] drink water
-[T][ ] study
-[T][ ] eat
+[T][X] read book   (tags: #urgent #impt)
+[D][X] return book (tags: #very urgent) (deadline: Dec 1 2021)
+[T][ ] join sports club     
+[T][ ] borrow book     
+[D][ ] finish homework  (deadline: Sep 14 2021)
+[T][ ] eat     
+[T][X] sleep     
+[T][ ] drink water     (tags: #mandatory)
+[T][ ] study     
+[T][ ] eat     

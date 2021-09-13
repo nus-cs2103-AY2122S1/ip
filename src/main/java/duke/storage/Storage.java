@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -44,21 +46,27 @@ public class Storage {
             while (line != null) {
                 String type = Character.toString(line.charAt(line.indexOf("[") + 1));
                 boolean isDone = Character.toString(line.charAt(line.indexOf("[", 2) + 1)).equals("X");
-                String name = line.substring(line.indexOf("]", line.indexOf("]") + 1) + 2);
+
+                int endOfNameIdx = line.contains("(") ? line.indexOf("(") : line.length();
+                String name = line.substring(line.indexOf("]",
+                        line.indexOf("]") + 1) + 2, endOfNameIdx).stripTrailing();
+
+                String tags = line.contains("tags") ? line.substring(line.indexOf("tags:"), line.indexOf(")")) : "";
+                List<String> tagsList = parseTags(tags);
 
                 if (type.equals("T")) {
-                    loadedTasks.add(new ToDo(name, isDone));
+                    loadedTasks.add(new ToDo(name, isDone, tagsList));
                 } else if (type.equals("D")) {
                     name = name.split("\\(")[0].stripTrailing();
                     String parsedInput = line.split("deadline:")[1];
                     String deadline = parsedInput.substring(1, parsedInput.length() - 1);
-                    loadedTasks.add(new Deadline(name, isDone,
+                    loadedTasks.add(new Deadline(name, isDone, tagsList,
                             LocalDate.parse(deadline, Deadline.DATE_TIME_FORMATTER)));
                 } else {
                     name = name.split("\\(")[0].stripTrailing();
                     String parsedInput = line.split("at:")[1];
                     String at = parsedInput.substring(1, parsedInput.length() - 1);
-                    loadedTasks.add(new Event(name, isDone, at));
+                    loadedTasks.add(new Event(name, isDone, tagsList, at));
                 }
 
                 line = br.readLine();
@@ -69,6 +77,12 @@ public class Storage {
         }
 
         return loadedTasks;
+    }
+
+    public List<String> parseTags (String tags) {
+        String[] splitTags = tags.split("#");
+        return Arrays.stream(Arrays.copyOfRange(splitTags, 1, splitTags.length))
+                .map(String::stripTrailing).collect(Collectors.toList());
     }
 
     /**
