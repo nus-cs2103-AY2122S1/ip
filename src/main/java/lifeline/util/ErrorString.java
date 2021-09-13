@@ -4,7 +4,7 @@ public class ErrorString {
     public static final String ERROR_DEADLINE_INCORRECT_FORMAT = "Deadline is not of the correct format! "
             + "Please use deadline <name> /by <dd/MM/yy HHmm>";
     public static final String ERROR_EVENT_INCORRECT_FORMAT = "Event date/time not in proper format! Please use event"
-            + " <name> /at <dd/MM/yy> <HHmm>-<HHmm>";
+            + " <name> /at <dd/MM/yy> <HHmm> <HHmm>";
     public static final String ERROR_DONE_MISSING_INDEX = "You did not specify an integer! Please use done <number>";
     public static final String ERROR_DELETE_MISSING_INDEX = "You did not specify an integer! Please use delete "
             + "<number>";
