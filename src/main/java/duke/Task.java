@@ -37,28 +37,6 @@ public class Task {
     }
 
     /**
-     * Marks a given task as completed and to update its status icon in the list of tasks
-     * in user's hard disk
-     *
-     * @throws IOException if there is an error when overwriting/appending to the contents of
-     * the file
-     */
-    public void markAsDoneAndUpdate() throws IOException{
-        this.isDone = true;
-        for (int i = 0; i < TaskList.getTaskList().size(); i++) {
-            if (i == 0) {
-                writeToFile("data/jarvis.txt", (i + 1) + "." +
-                        TaskList.getTaskList().get(i).toPrintToFile()
-                        + System.lineSeparator());
-            } else {
-                appendToFile("data/jarvis.txt", (i + 1) + "." +
-                        TaskList.getTaskList().get(i).toPrintToFile()
-                        + System.lineSeparator());
-            }
-        }
-    }
-
-    /**
      * Returns the task as a string that is to be displayed to the user
      *
      * @return the given task as a string that is to be displayed to the user
