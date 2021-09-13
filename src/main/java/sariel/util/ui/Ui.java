@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import sariel.util.commons.Messages;
-import sariel.util.tasks.DukeException;
 import sariel.util.tasks.Task;
 
 
