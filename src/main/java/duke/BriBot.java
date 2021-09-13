@@ -11,7 +11,7 @@ import duke.ui.Ui;
 /**
  * Represents the main class that the program runs from.
  */
-public class Duke {
+public class BriBot {
 
     private Storage storage;
     private TaskList tasks;
@@ -20,7 +20,7 @@ public class Duke {
     /**
      * Initialises the program
      */
-    public Duke() {
+    public BriBot() {
         this.ui = new Ui();
         this.storage = new Storage("src/main/data/tasks.txt");
         try {
