@@ -21,17 +21,17 @@ Saving and loading are done automatically onto your local hard drive
 
 ### `todo` - Creates a todo task
 
-Adds a todo into your task list. 
+Adds a todo into your task list.
 
-####Example of usage: 
+**Example usage:**
 
 `todo taskname`
 
 * `taskname` - Name of todo
 
-####Expected outcome:
+**Expected outcome:**
 
-A confirmation response would be sent by Duke.
+A confirmation response would be sent by Duke:
 
 ```
 Got it. I've added this task:
@@ -39,11 +39,13 @@ Got it. I've added this task:
 There are ___ tasks in your list
 ```
 
+<br/><br/>
+
 ### `deadline` - Creates a deadline task
 
 Adds a deadline into your task list.
 
-####Example of usage:
+**Example usage:**
 
 `deadline taskname /by DD/MM/YYYY xxxxH`
 
@@ -51,21 +53,22 @@ Adds a deadline into your task list.
 * `DD/MM/YYYY` - Date and month can be 1-2 digits long
 * `xxxxH` - Time in 24-hour format *[Optional]*
 
-####Expected outcome:
+**Expected outcome:**
 
-A confirmation response would be sent by Duke.
+A confirmation response would be sent by Duke:
 
 ```
 Got it. I've added this task:
         [D][ ] Example task
 There are ___ tasks in your list
 ```
+<br/><br/>
 
 ### `event` - Creates an event task
 
 Adds an event into your task list.
 
-####Example of usage:
+**Example usage:**
 
 `event taskname /at DD/MM/YYYY xxxxH`
 
@@ -73,26 +76,25 @@ Adds an event into your task list.
 * `DD/MM/YYYY` - Date and month can be 1-2 digits long
 * `xxxxH` - Time in 24-hour format *[Optional]*
 
-####Expected outcome:
-
-A confirmation response would be sent by Duke.
+A confirmation response would be sent by Duke:
 
 ```
 Got it. I've added this task:
         [D][ ] Example task
 There are ___ tasks in your list
 ```
+<br/><br/>
 
 ### `list` - Lists or filters your tasks
 
 Lists out or filters your tasks based on the optional arguments provided (if any).
 Using the command with no arguments displays the index numbers of all tasks, to be used for `done` and `delete`.
 
-####Example of usage:
+**Example usage:**
 
 `list` - Standard list command (no arguments)
 
-Optional arguments:
+Example usage with optional arguments:
 
 `list /date DD/MM/YYYY` - Search for tasks at date
 
@@ -106,23 +108,23 @@ Arguments can be stacked, order of arguments does not matter.
 * `DD/MM/YYYY` - Date and month can be 1-2 digits long
 * `taskname` - Name to search for
 
-####Expected outcome:
+**Expected outcome:**
 
 A list of all your tasks (if any) would be sent by Duke.
 
-
+<br/><br/>
 
 ### `done` - Mark as complete
 
 Toggles completion of task. If task is already done, it will mark it as not done.
 
-####Example of usage:
+**Example usage:**
 
 `done index`
 
 * `index` - Index number as shown in `list`
 
-####Expected outcome:
+**Expected outcome:**
 
 A confirmation response would be sent by Duke.
 
@@ -136,17 +138,19 @@ Duke-san marked this task as not done!
         [D][ ] Example task
 ```
 
+<br/><br/>
+
 ### `delete` - Delete task
 
 Deletes a task in the list **permanently**.
 
-####Example of usage:
+**Example usage:**
 
 `delete index`
 
 * `index` - Index number as shown in `list`
 
-####Expected outcome:
+**Expected outcome:**
 
 A confirmation response would be sent by Duke.
 
@@ -156,26 +160,29 @@ Noted. Duke-san removed this task!
 There are ___ tasks in your list
 ```
 
+<br/><br/>
 
 ### `help` - Display list of commands
 In-built command to display the list of possible commands and arguments within the app.
 
-Example of usage:
+**Example usage:**
 
 `help`
 
-Expected outcome:
+**Expected outcome:**
 
 A list of possible commands with their arguments would be sent by Duke.
+
+<br/><br/>
 
 ### `gubbai` - Goodbye
 Exits the app (with a delay of 2 seconds)
 
-Example of usage:
+**Example usage:**
 
 `gubbai`
 
-Expected outcome:
+**Expected outcome:**
 
 The following goodbye message will be displayed, and the app would close automatically 2 seconds later.
 
