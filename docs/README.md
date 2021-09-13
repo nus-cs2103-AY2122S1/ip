@@ -2,12 +2,14 @@
 
 ## Features 
 
-* Add tasks
+* [Add to-dos](#add-to-do-todo)
+* [Add deadlines](#add-deadline-deadline)
+* [Add events](#add-event-event)
 * [Delete tasks](#delete-tasks-delete)
-* List out tasks
-* Mark multiple tasks as done
-* Delete multiple tasks
-* Search for tasks
+* [List out tasks](#list-tasks-list)
+* [Mark multiple tasks as done](#mark-tasks-done)
+* [Delete multiple tasks](#delete-tasks-delete)
+* [Search for tasks](#search-for-tasks-find)
 
 ## How to use
 
