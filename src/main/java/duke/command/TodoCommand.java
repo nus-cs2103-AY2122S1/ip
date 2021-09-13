@@ -52,6 +52,8 @@ public class TodoCommand extends Command {
         
         Task task = new Todo(command.substring(5));
         taskList.addTask(task);
+        assert taskList.getTask(taskList.getSize() - 1).equals(task): "last element in the task list should be " 
+                + "equivalent to the most recently added task";
         storage.writeToFile("./duke.txt", taskList);
         Ui ui = new Ui(taskList, storage);
         String response = ui.taskResponse(task);

@@ -9,6 +9,7 @@ import duke.Storage;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidTaskCommandException;
 
 import duke.Ui;
 
@@ -48,19 +49,29 @@ public class DeadlineCommand extends Command {
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
      * @return String representation of the new deadline task as well as the number of tasks in the task list.
-     * @throws DukeException If user doesn't provide a description for the command or enters the date in invalid format.
+     * @throws DukeException If user doesn't provide a description for the command or enters the command in invalid format.
      */
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (command.trim().length() <= 8) {
             throw new EmptyDescriptionException();
+        }
+            
+        String[] parts = command.split("/", 2);
+        if (parts.length <= 1) {
+            throw new InvalidTaskCommandException();
+        }
+        
+        if (parts[1].trim().equals("") || !parts[1].startsWith("by ")) {
+            throw new InvalidTaskCommandException();
         } 
         
-        String[] parts = command.split("/", 2);
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
             Task task = new Deadline(parts[0].substring(9), dateTime);
             taskList.addTask(task);
+            assert taskList.getTask(taskList.getSize() - 1).equals(task): "last element in the task list should be " 
+                    + "equivalent to the most recently added task";    
             storage.writeToFile("./duke.txt", taskList);
             Ui ui = new Ui(taskList, storage);
             String response = ui.taskResponse(task);
