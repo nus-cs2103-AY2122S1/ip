@@ -2,7 +2,7 @@
 
 ## Features 
 
-__TiTi Catbot__ is a Personal Assistant Chatbot that helps you keep track of your upcoming tasks!
+__TiTi Catbot__ is a _Personal Assistant Chatbot_ that helps you keep track of your upcoming tasks!
 TiTi Catbot frees your mind of having to remember things you need to do.
 
 TiTi can manage three types of tasks:
@@ -105,8 +105,7 @@ Format: `exit`
 <br>
 <hr>
 
-> <h2>"Come play with me soon! ฅ^•ω•^ฅ " – TiTi  </h2>
+> <h2>__"Come play with me soon! ฅ^•ω•^ฅ " – TiTi  </h2>__
 
 Hope you enjoy your time with TiTi!
 
-<br>
