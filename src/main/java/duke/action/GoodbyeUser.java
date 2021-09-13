@@ -8,8 +8,10 @@ public class GoodbyeUser implements Action {
      * @return The duke.Response.
      */
     public Response execute() {
-        return new Response(new String[]{
+        Response goodbyeResponse = new Response(new String[]{
             "Bye. Hope to see you again soon!",
         });
+        goodbyeResponse.setExitResponse();
+        return goodbyeResponse;
     }
 }

@@ -1,13 +1,12 @@
 package duke.task;
 
-import duke.Response;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskTest {
-    private static String TASK_NOT_DONE_SYMBOL = " ";
-    private static String TASK_DONE_SYMBOL = "X";
+    private static final String TASK_NOT_DONE_SYMBOL = " ";
+    private static final String TASK_DONE_SYMBOL = "X";
 
     @Test
     public void toString_success() {

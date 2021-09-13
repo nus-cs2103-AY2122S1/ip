@@ -14,44 +14,39 @@ import duke.task.TaskCollection;
  * Duke is the class that represents the entire command line application.
  */
 public class Duke {
-
+    private static final String TASK_COLLECTION_STORAGE_PATH = "./data/duke.txt";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final Ui userInterface = new Ui();
-    private static final String TASK_COLLECTION_STORAGE_PATH = "./data/duke.txt";
-    private static final TaskCollection tasks = new TaskCollection(TASK_COLLECTION_STORAGE_PATH);
-    private static final Queue<Action> actions = new LinkedList<>();
+    private final TaskCollection tasks = new TaskCollection(TASK_COLLECTION_STORAGE_PATH);
 
     /**
-     * Starts the Duke application.
-     * @param args Arguments passed when running the function using java.
+     * Returns the string response.
+     * @return
      */
-    public static void main(String[] args) {
-        Duke.actions.add(new WelcomeUser());
+    public static String greetUser() {
+        Action welcomeUser = new WelcomeUser();
+        Response response = welcomeUser.execute();
+        return response.toString();
+    }
 
-        while (true) {
-            try {
-                if (Duke.actions.isEmpty()) {
-                    String input = Duke.userInterface.getUserInput();
-                    Request request = Request.create(Duke.tasks, input);
-                    Duke.actions.add(request.action());
-                }
-
-                Action action = Duke.actions.remove();
-                Response response = action.execute();
-                Duke.tasks.saveTasks();
-                Duke.userInterface.printResponse(response);
-
-                if (action instanceof GoodbyeUser) {
-                    break;
-                }
-            } catch (UserException exception) {
-                Duke.userInterface.printResponse(exception.toResponse());
-            }
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    public Response handleUserInput(String userInput) {
+        try {
+            Request request = Request.create(tasks, userInput);
+            Action action = request.action();
+            Response response = action.execute();
+            tasks.saveTasks();
+            return response;
+        } catch (UserException exception) {
+            return exception.toResponse();
         }
     }
 }

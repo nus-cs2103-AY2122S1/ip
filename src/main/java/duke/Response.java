@@ -5,11 +5,9 @@ package duke;
  */
 public class Response {
     private static final String BASE_INDENT = "    ";
-    private static final String MESSAGE_INDENT = " ";
-
-    private static final String LINE = "____________________________________________________________";
 
     private String message;
+    private boolean isExitResponse = false;
 
     /**
      * Creates a response with an empty String message.
@@ -51,18 +49,27 @@ public class Response {
     @Override
     public String toString() {
         String[] messageLines = this.message.split(System.lineSeparator());
-
-        int numberOfOutputLines = messageLines.length + 2;
-        String[] outputLines = new String[numberOfOutputLines];
-
-        int messageOffset = 1;
-        outputLines[0] = Response.BASE_INDENT + Response.LINE;
-        outputLines[numberOfOutputLines - 1] = Response.BASE_INDENT + Response.LINE;
+        String[] outputLines = new String[messageLines.length];
 
         for (int index = 0; index < messageLines.length; index++) {
-            outputLines[index + messageOffset] = Response.BASE_INDENT + Response.MESSAGE_INDENT + messageLines[index];
+            outputLines[index] = Response.BASE_INDENT + messageLines[index];
         }
 
         return String.join(System.lineSeparator(), outputLines);
+    }
+
+    /**
+     * Sets the response to an Exit Response.
+     */
+    public void setExitResponse() {
+        isExitResponse = true;
+    }
+
+    /**
+     * Returns a boolean indicating whether to exit the Duke window.
+     * @return
+     */
+    public boolean isExitResponse() {
+        return isExitResponse;
     }
 }

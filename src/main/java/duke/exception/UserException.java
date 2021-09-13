@@ -20,6 +20,6 @@ public class UserException extends Exception {
      * Returns the duke.Response to be printed to the console of this duke.exception.UserException.
      */
     public Response toResponse() {
-        return new Response(new String[]{ "☹ OOPS!!!", this.message });
+        return new Response(new String[]{ "OOPS!!!", this.message });
     }
 }
