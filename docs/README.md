@@ -51,8 +51,7 @@ ___________________________________________________________________________
 
 ## Features
 
----
-### Note:
+### _Note:_
 - Tasks here includes To-dos, Events, and Deadlines.
 - Parameters with all caps, for example `COMPULSORY-PARAMTER`, are required for the command to process and execute.
 - Commands with no parameters, such as `help`, `list` and `bye`, are sufficient commands to be inputted. Hence, any other words inputted together with this command statement will be ignored.
@@ -79,7 +78,8 @@ ___________________________________________________________________________
     `HHmm`    | `1530`
     `hh:mm a` | `3:30 pm` or `3:30 PM`
     `hhmm a`  | `330 pm` or `330 PM`
----
+
+<br>
 
 ### Viewing help: `help`
 
