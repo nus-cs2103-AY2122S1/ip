@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -42,24 +44,20 @@ public class Storage {
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             while (line != null) {
-                String type = Character.toString(line.charAt(line.indexOf("[") + 1));
-                boolean isDone = Character.toString(line.charAt(line.indexOf("[", 2) + 1)).equals("X");
-                String name = line.substring(line.indexOf("]", line.indexOf("]") + 1) + 2);
+                String type = parseType(line);
+                boolean isDone = parseStatus(line);
+                String name = parseName(line);
+                List<String> tagsList = parseTags(line);
+                Task task;
 
                 if (type.equals("T")) {
-                    loadedTasks.add(new ToDo(name, isDone));
+                    task = new ToDo(name, isDone, tagsList);
                 } else if (type.equals("D")) {
-                    name = name.split("\\(")[0].stripTrailing();
-                    String parsedInput = line.split("deadline:")[1];
-                    String deadline = parsedInput.substring(1, parsedInput.length() - 1);
-                    loadedTasks.add(new Deadline(name, isDone,
-                            LocalDate.parse(deadline, Deadline.DATE_TIME_FORMATTER)));
+                    task = parseDeadline(line, name, isDone, tagsList);
                 } else {
-                    name = name.split("\\(")[0].stripTrailing();
-                    String parsedInput = line.split("at:")[1];
-                    String at = parsedInput.substring(1, parsedInput.length() - 1);
-                    loadedTasks.add(new Event(name, isDone, at));
+                    task = parseEvent(line, name, isDone, tagsList);
                 }
+                loadedTasks.add(task);
 
                 line = br.readLine();
             }
@@ -69,6 +67,44 @@ public class Storage {
         }
 
         return loadedTasks;
+    }
+
+    Task parseDeadline(String line, String name, boolean isDone, List<String> tagsList) {
+        name = name.split("\\(")[0].stripTrailing();
+        String parsedInput = line.split("deadline:")[1];
+        String deadline = parsedInput.substring(1, parsedInput.length() - 1);
+
+        return new Deadline(name, isDone, tagsList,
+                LocalDate.parse(deadline, Deadline.DATE_TIME_FORMATTER));
+    }
+
+    Task parseEvent(String line, String name, boolean isDone, List<String> tagsList) {
+        name = name.split("\\(")[0].stripTrailing();
+        String parsedInput = line.split("at:")[1];
+        String at = parsedInput.substring(1, parsedInput.length() - 1);
+
+        return new Event(name, isDone, tagsList, at);
+    }
+
+    String parseType(String line) {
+        return Character.toString(line.charAt(line.indexOf("[") + 1));
+    }
+
+    boolean parseStatus(String line) {
+        return Character.toString(line.charAt(line.indexOf("[", 2) + 1)).equals("X");
+    }
+
+    String parseName(String line) {
+        int endOfNameIdx = line.contains("(") ? line.indexOf("(") : line.length();
+        return line.substring(line.indexOf("]",
+                line.indexOf("]") + 1) + 2, endOfNameIdx).stripTrailing();
+    }
+
+    List<String> parseTags(String line) {
+        String tags = line.contains("tags") ? line.substring(line.indexOf("tags:"), line.indexOf(")")) : "";
+        String[] splitTags = tags.split("#");
+        return Arrays.stream(Arrays.copyOfRange(splitTags, 1, splitTags.length))
+                .map(String::stripTrailing).collect(Collectors.toList());
     }
 
     /**

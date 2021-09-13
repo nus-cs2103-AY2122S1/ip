@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.List;
+
 public class Event extends Task {
     protected final String time;
 
@@ -10,6 +12,11 @@ public class Event extends Task {
 
     public Event(String name, boolean isDone, String time) {
         super(name, isDone);
+        this.time = time;
+    }
+
+    public Event(String name, boolean isDone, List<String> tags, String time) {
+        super(name, isDone, tags);
         this.time = time;
     }
 
