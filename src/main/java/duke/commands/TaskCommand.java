@@ -66,6 +66,7 @@ public class TaskCommand extends Command {
             WrongEventOrDeadlineFormatException,
             NoSuchCommandException {
         String[] instructions = this.commandDescription.split(" ");
+        assert (instructions.length >= 2) : "Task should have descriptions!";
         String importantInstructions = String.join(" ",
                 Arrays.copyOfRange(instructions,
                         1, instructions.length));

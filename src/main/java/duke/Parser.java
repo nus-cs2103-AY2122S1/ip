@@ -101,6 +101,7 @@ public class Parser {
                     + " cannot be empty.";
             throw new NoSuchCommandException(errorMessage);
         }
+        assert (commandList.length > 1) : "Commands should have at least a description!";
         String actualInputs = String.join(" ", commandList);
         return new TaskCommand(actualInputs);
     }

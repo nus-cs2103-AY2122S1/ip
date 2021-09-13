@@ -66,6 +66,7 @@ public class TaskList {
         if (taskNumber > allTasks.size()) {
             throw new DoneOutOfBoundsException(allTasks.size());
         }
+        assert (taskNumber >= 1) : "Number provided should not be 0!";
         Task updatedTask = allTasks.
         get(taskNumber - 1).
         updateStatus(Status.COMPLETED.getStatus());
@@ -88,6 +89,7 @@ public class TaskList {
         if (taskNumber > allTasks.size()) {
             throw new DeleteOutOfBoundsException(allTasks.size());
         }
+        assert (taskNumber >= 1) : "Number provided should not be 0!";
         return allTasks.remove(taskNumber - 1);
     }
 
