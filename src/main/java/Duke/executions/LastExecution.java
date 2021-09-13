@@ -35,16 +35,25 @@ public class LastExecution {
         this.tasks = tasks;
     }
 
-    private void resetDone() {
+    private String resetDone() {
+        String text;
         this.tasks.get(lastIndex).resetDone();
+        text = "Good! I have undone your newly added task!\n";
+        return text;
     }
 
-    private void undoDelete() {
+    private String undoDelete() {
+        String text;
         this.tasks.add(lastIndex, lastTask);
+        text = "Good! I have helped recovered your deleted task!\n";;
+        return text;
     }
 
-    private void undoAdd() {
+    private String undoAdd() {
+        String text;
         this.tasks.remove(tasks.size() - 1);
+        text = "Good! I have recovered your task to undone again!\n";;
+        return text;
     }
 
     /**
@@ -54,21 +63,13 @@ public class LastExecution {
      */
     public String undo() {
         String text;
-        switch (lastOperation) {
-        case ADD -> {
-            undoAdd();
-            text = "Good! I have undone your newly added task!\n";
-        }
-        case DELETE -> {
-            undoDelete();
-            text = "Good! I have helped recovered your deleted task!\n";
-        }
-        case DONE -> {
-            resetDone();
-            text = "Good! I have recovered your task to undone again!\n";
-        }
-        default -> text = "OOPs! There is no previous operation!\n";
-        }
+
+        text = switch (lastOperation) {
+        case ADD -> undoAdd();
+        case DELETE -> undoDelete();
+        case DONE -> resetDone();
+        default -> "OOPs! There is no previous operation!\n";
+        };
         return text;
     }
 }

@@ -1,17 +1,14 @@
 package duke.uimanager;
 
 import duke.main.Duke;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 
 /**
@@ -28,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    private Rectangle emptySpace;
     private Duke duke;
     private BackgroundImage backgroundImage;
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
@@ -41,6 +39,13 @@ public class MainWindow extends AnchorPane {
                 true, true, true, true);
         backgroundImage = new BackgroundImage(new Image("/background/background.jpg")
                 ,null,null, null, backgroundSize);
+    }
+
+    private Rectangle setEmptySpace() {
+        //Set empty space between dialogs.
+        emptySpace = new Rectangle(400, 20);
+        emptySpace.setFill(Color.TRANSPARENT);
+        return emptySpace;
     }
 
     /**
@@ -78,7 +83,9 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
+                setEmptySpace(),
                 DialogBox.getUserDialog(input, userImage),
+                setEmptySpace(),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
