@@ -4,7 +4,6 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private final String COMMAND;
@@ -19,14 +18,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String[] commands = COMMAND.split(DELIMITER, 2);
         if (commands.length < 2) {
             throw new DukeException(MESSAGE_USAGE);
         }
 
         String matchingTasks = tasks.findTasksContainingString(commands[1]).toString();
-        ui.print(String.format(MESSAGE_SUCCESS, matchingTasks));
+        return String.format(MESSAGE_SUCCESS, matchingTasks);
     }
 
     @Override

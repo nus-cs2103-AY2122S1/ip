@@ -1,19 +1,16 @@
 package duke;
 
+import duke.command.Command;
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-public class Duke extends Application {
+public class Duke {
     private final String DEFAULT_FILEPATH = "data/tasks.txt";
 
     private final Storage STORAGE;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Constructor for Duke.
@@ -26,16 +23,18 @@ public class Duke extends Application {
         try {
             tasks = new TaskList(STORAGE.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    @Override
-    public void start(Stage stage) {
-        ui = new Ui(stage, STORAGE, tasks);
-
-        // Initialize the UI and start the program
-        ui.init();
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String message = command.execute(this.tasks, this.STORAGE);
+            this.STORAGE.writeTasksToFile(this.tasks);
+            return message;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

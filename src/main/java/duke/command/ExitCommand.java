@@ -2,13 +2,14 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class ExitCommand extends Command {
+    public static final String MESSAGE_OUTRO = "Bye. Come back soon!";
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(TaskList tasks, Storage storage) {
+        System.exit(0);
+        return MESSAGE_OUTRO;
     }
 
     /**
