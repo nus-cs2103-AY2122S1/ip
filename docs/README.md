@@ -4,14 +4,14 @@ while still having the comfort of a Graphical User Interface (GUI).
 
 ## Features
 1. [Adding a task](#adding-a-task):
-  1. [Adding a todo: `todo`](#adding-a-todo-todo)
-  1. [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
-  1. [Adding an event: `event`](#adding-an-event-event)
+    1. [Adding a todo: `todo`](#adding-a-todo-todo)
+    1. [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
+    1. [Adding an event: `event`](#adding-an-event-event)
 1. [Listing all tasks: `list`](#listing-all-tasks-list)
 1. [Updating a task: `update`](#updating-a-task-update)
-  1. [Updating a todo](#updating-a-todo)
-  1. [Updating a deadline](#updating-a-deadline)
-  1. [Updating an event](#updating-an-event)
+    1. [Updating a todo](#updating-a-todo)
+    1. [Updating a deadline](#updating-a-deadline)
+    1. [Updating an event](#updating-an-event)
 1. [Deleting a task: `delete`](#deleting-a-task-delete)
 1. [Finding a task by description: `find`](#finding-a-task-by-description-find)
 1. [Marking a task as done: `done`](#marking-a-task-as-done-done)
