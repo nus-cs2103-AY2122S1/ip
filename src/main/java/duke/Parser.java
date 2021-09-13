@@ -29,21 +29,13 @@ public class Parser {
         if (isQuitDuke) {
             TaskList.markTasksSaved();
             return Ui.goodbyeMessage();
-        }
-
-        if (isListRequest) {
+        } else if (isListRequest) {
             return TaskList.printList();
-        }
-
-        if (isTaskCompleted) {
+        } else if (isTaskCompleted) {
             return TaskList.markTaskDone(userInput);
-        }
-
-        if (isRemoveTask) {
+        } else if (isRemoveTask) {
             return TaskList.removeTask(userInput);
-        }
-
-        if (isFindTask) {
+        } else if (isFindTask) {
             return TaskList.findTask(userInput);
         }
 
