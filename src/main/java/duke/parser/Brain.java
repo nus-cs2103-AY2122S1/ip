@@ -33,7 +33,7 @@ public class Brain {
      */
     public String listItems(DataStore dataStore) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Here are your tasks: \n");
+        builder.append("A list of tasks for you to totally ignore: \n");
         for (int i = 0; i < dataStore.length(); i++) {
             Task task = dataStore.get(i);
 
@@ -107,7 +107,7 @@ public class Brain {
         dataStore.add(deadlineTask);
 
         StringBuilder builder = new StringBuilder();
-        String message = "Got it. I've added this task: \n"
+        String message = "Awesome! I've added this task: \n"
                           + "\t" + deadlineTask + "\n"
                           + "Now you have " + dataStore.length() + " tasks in the list.\n";
         builder.append(message);
@@ -140,7 +140,7 @@ public class Brain {
         StringBuilder builder = new StringBuilder();
         String message = "Got it. I've added this task: \n"
                 + "\t" + eventTask + "\n"
-                + "Now you have " + dataStore.length() + " tasks in the list.\n";
+                + "Now you have " + dataStore.length() + " tasks to complete.\n";
         builder.append(message);
 
         int newNumTasks = dataStore.length();
@@ -198,7 +198,7 @@ public class Brain {
             builder.append("OOPS!!! There was a problem saving your tasks. \n");
         }
 
-        builder.append("Bye. Hope to see you again soon!\n");
+        builder.append("Goodbye! As always, a pleasure working with you.\n");
         System.exit(0);
 
         return builder.toString();
@@ -219,7 +219,7 @@ public class Brain {
 
         StringBuilder builder = new StringBuilder();
 
-        String message = "Noted. I've removed this task: \n" + "\t" + task.toString() + "\n";
+        String message = "Understood. I've removed, \n" + "\t" + task.toString() + "\n";
         builder.append(message);
 
         dataStore.remove(idx-1); // actual deletion
@@ -227,7 +227,7 @@ public class Brain {
 
         assert prevNumTasks - newNumTasks == 1 : "Data Store task count is not functioning as expected; Task increment not observed.";
 
-        builder.append(String.format("Now you have %d tasks in the list.\n", dataStore.length()));
+        builder.append(String.format("You now have %d tasks to totally ignore.\n", dataStore.length()));
 
         return builder.toString();
     }
@@ -243,7 +243,7 @@ public class Brain {
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Here are the matching tasks in your list: \n");
+        builder.append("My search of the Oracle Cloud reveals these records: \n");
         for (int i = 0; i < dataStore.length(); i++) {
             Task record = dataStore.get(i);
             String message = record.toString();

@@ -66,11 +66,12 @@ public class Parser {
         } else if (command.contains("find")) {
             result = brain.find(command, dataStore);
         } else {
-            try {
-                errorHandle(command);
-            } catch (BotException e) {
-                result = UNRECOGNISED;
-            }
+            result = "I don't seem to understand. Come again?";
+//            try {
+//                errorHandle(command);
+//            } catch (BotException e) {
+//                result = UNRECOGNISED;
+//            }
         }
 
         return result;

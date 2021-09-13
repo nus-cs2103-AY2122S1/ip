@@ -9,8 +9,6 @@ package duke;
  */
 
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.io.IOException;
-
 import duke.datastore.DataStore;
 import duke.membuffer.MemoryBuffer;
 import duke.parser.Parser;
