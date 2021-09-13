@@ -26,7 +26,6 @@ public class Parser {
         String data = scan.next();
         switch (data.toLowerCase()) {
         case "bye":
-
             return Ui.getGoodbyeMessage();
         case "list":
             if (taskList.getSize() == 0) {
