@@ -47,9 +47,8 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "kayu"
+    archiveBaseName = "Kayu"
     archiveClassifier = null
-    archiveVersion = "v0.1"
 }
 
 checkstyle {
