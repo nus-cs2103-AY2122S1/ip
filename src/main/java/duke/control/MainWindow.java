@@ -73,7 +73,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
         delayedExit(input);
     }
 }
