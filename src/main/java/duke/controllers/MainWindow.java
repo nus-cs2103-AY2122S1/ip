@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMessage = "*Woof* I'm Shiro, your Personal Assistant Chatbot\n"
+        String welcomeMessage = "*Woof* I'm Shiro, your Personal Assistant Chatbot. "
                 + "What can I do for you today?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)

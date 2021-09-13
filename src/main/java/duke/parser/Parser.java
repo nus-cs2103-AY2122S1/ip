@@ -74,7 +74,7 @@ public class Parser {
         } else if (isFindCommand(command)) {
             return handleFind(details);
         } else {
-            String message = String.format("I'm sorry but I don't know what is %s", input);
+            String message = String.format("*groan* I'm sorry but I don't know what is %s", input);
             throw new DukeException(message);
         }
     }
@@ -112,11 +112,11 @@ public class Parser {
     }
 
     private String extractCommand(String input) throws DukeException {
-        String[] inputArr = input.split(" ");
-        if (inputArr.length <= 0) {
-            throw new DukeException("Please don't give me an empty input. My life is already empty enough.");
+        if (input.trim().equals("")) {
+            throw new DukeException("*growl* Input cannot be empty");
         }
 
+        String[] inputArr = input.split(" ");
         return inputArr[0].toLowerCase().trim();
     }
 
@@ -141,49 +141,43 @@ public class Parser {
 
     private Command handleToDo(String details) throws DukeException {
         if (details.equals("")) {
-            throw new DukeException("Dude, the description of a todo cannot be empty la");
+            throw new DukeException("*growl* The description of todo cannot be empty");
         }
 
         return new AddCommand(new ToDo(details));
     }
 
     private Command handleDeadline(String details) throws DukeException {
-        if (details.equals("")) {
-            throw new DukeException("Dude, the details of a deadline cannot be empty la");
-        }
-
         String[] argArr = details.split("/by");
-        if (argArr.length <= 1) {
-            throw new DukeException("Please provide both the deadline description and date"
-                    + " Format: deadline <DESCRIPTION> /by <DATE:YYYY-MM-DD>");
+        String description = argArr[0].trim();
+        if (description.equals("")) {
+            throw new DukeException("*growl* The description of deadline cannot be empty. "
+                    + "Format: deadline <DESCRIPTION> /by <DATE:YYYY-MM-DD>");
         }
 
-        String description = argArr[0].trim();
         try {
             LocalDate date = LocalDate.parse(argArr[1].trim());
             return new AddCommand(new Deadline(description, date));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date must be in the format: YYYY-MM-DD");
+            throw new DukeException("*growl* Date must be in the format: YYYY-MM-DD. "
+                    + "Format: deadline <DESCRIPTION> /by <DATE:YYYY-MM-DD>");
         }
     }
 
     private Command handleEvent(String details) throws DukeException {
-        if (details.equals("")) {
-            throw new DukeException("Dude, the details of an event cannot be empty la");
-        }
-
         String[] argArr = details.split("/at");
-        if (argArr.length <= 1) {
-            throw new DukeException("Please provide both the event description and date."
-                    + " Format: event <DESCRIPTION> /at <DATE:YYYY-MM-DD>");
+        String description = argArr[0].trim();
+        if (description.equals("")) {
+            throw new DukeException("*growl* The description of event cannot be empty. "
+                    + "Format: event <DESCRIPTION> /at <DATE:YYYY-MM-DD>");
         }
 
-        String description = argArr[0].trim();
         try {
             LocalDate date = LocalDate.parse(argArr[1].trim());
             return new AddCommand(new Event(description, date));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Date must be in the format: YYYY-MM-DD");
+            throw new DukeException("*growl* Date must be in the format: YYYY-MM-DD. "
+                    + "Format: event <DESCRIPTION> /at <DATE:YYYY-MM-DD>");
         }
     }
 
@@ -193,7 +187,7 @@ public class Parser {
         try {
             indices = Arrays.stream(argArr).map(Integer::parseInt).collect(Collectors.toSet());
         } catch (NumberFormatException e) {
-            throw new DukeException("Must be in the format: done <INDEX_1> <INDEX_2> ...");
+            throw new DukeException("*growl* The index entered is not valid. Format: done <INDEX_1> [INDEX_2] ...");
         }
         return new DoneCommand(indices);
     }
@@ -209,16 +203,18 @@ public class Parser {
                 int toIndex = Integer.parseInt(argArr[1]);
                 return new DeleteCommand(fromIndex, toIndex);
             } else {
-                throw new DukeException("Must be in the format: delete <INDEX> or delete <FROM_INDEX> <TO_INDEX>");
+                throw new DukeException("*growl* The index entered is not valid. "
+                        + "Format: delete <INDEX> or delete <FROM_INDEX> <TO_INDEX>");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Must be in the format: delete <INDEX> or delete <FROM_INDEX> <TO_INDEX>");
+            throw new DukeException("*growl* The index entered is not valid. "
+                    + "Format: delete <INDEX> or delete <FROM_INDEX> <TO_INDEX>");
         }
     }
 
     private Command handleFind(String details) throws DukeException {
         if (details.equals("")) {
-            throw new DukeException("Dude, the search query cannot be empty la");
+            throw new DukeException("*growl* The search query cannot be empty");
         }
 
         return new FindCommand(details);
