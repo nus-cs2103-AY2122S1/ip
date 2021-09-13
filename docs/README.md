@@ -186,7 +186,7 @@ Shows the list of archived tasks to the user.
 
 ![listArchiveImage](./userGuideDemo/listArchive.png)
 
-<img src="userGuideDemo/listArchive.png" width="100" height="100">
+<img src="userGuideDemo/listArchive.png" width="292" height="150">
 
 ### 11. `remove archive <task index number>` - removes task at task index number from list of archived tasks
 
