@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="400.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml" fx:controller="duke.MainWindow">
+            xmlns:fx="http://javafx.com/fxml" fx:controller="iris.MainWindow">
     <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0"
                promptText="Type here"
                style="-fx-background-color: black; -fx-border-color: cyan; -fx-border-width: 3; -fx-text-fill: cyan;"

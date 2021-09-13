@@ -5,10 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskType;
-import duke.task.ToDo;
+import iris.task.Deadline;
+import iris.task.Event;
+import iris.task.TaskType;
+import iris.task.ToDo;
 
 public class TaskTypeTest {
 

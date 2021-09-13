@@ -5,11 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import iris.exception.IrisException;
+import iris.exception.NoSuchTaskException;
+import iris.task.Deadline;
+import iris.task.Event;
+import iris.task.TaskList;
+import iris.task.ToDo;
 
 public class TaskListTest {
 
@@ -70,7 +71,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskListAddTask() {
+    public void taskListAddTask() throws NoSuchTaskException {
         ToDo toDo = new ToDo("run", false);
 
         String commandDetails = "return book /by 2021-08-31 15:00";
@@ -99,7 +100,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskListGetTask() {
+    public void taskListGetTask() throws NoSuchTaskException {
         ToDo toDo = new ToDo("run", false);
 
         String commandDetails = "return book /by 2021-08-31 15:00";
@@ -127,7 +128,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskListDeleteTask() {
+    public void taskListDeleteTask() throws NoSuchTaskException {
         ToDo toDo = new ToDo("run", false);
 
         String commandDetails = "return book /by 2021-08-31 15:00";
@@ -155,7 +156,7 @@ public class TaskListTest {
 
         try {
             taskList.deleteTask(2);
-        } catch (DukeException e) {
+        } catch (IrisException e) {
             System.out.println(e.getMessage());
         }
 
@@ -196,7 +197,7 @@ public class TaskListTest {
             taskList.markAsDone(1);
             taskList.markAsDone(2);
             taskList.markAsDone(3);
-        } catch (DukeException e) {
+        } catch (IrisException e) {
             System.out.println(e.getMessage());
         }
 
@@ -238,7 +239,7 @@ public class TaskListTest {
 
         try {
             taskList.deleteTask(3);
-        } catch (DukeException e) {
+        } catch (IrisException e) {
             System.out.println(e.getMessage());
         }
 

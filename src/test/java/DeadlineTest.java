@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Deadline;
+import iris.task.Deadline;
 
 public class DeadlineTest {
 

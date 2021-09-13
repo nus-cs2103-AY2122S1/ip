@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Event;
+import iris.task.Event;
 
 public class EventTest {
 

@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.ToDo;
+import iris.task.ToDo;
 
 public class ToDoTest {
 
