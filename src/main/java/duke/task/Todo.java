@@ -6,7 +6,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Constructor for the duke.task.Task class.
+     * Constructs a duke.task.Task object.
      *
      * @param description Description of the task at hand.
      */
@@ -24,13 +24,12 @@ public class Todo extends Task {
     }
 
     /**
-     * Todo does not have a date.
+     * Produces no effect as Todos do not have dates.
      *
      * @param days Number of days to increase by.
      */
     @Override
     public void increaseDateByDays(int days) {
-
     }
 
 

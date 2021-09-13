@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A task that the user wants to complete by a certain point in time.
+ * Represents a task that the user wants to complete by a certain point in time.
  */
 public class Deadline extends Task {
     protected boolean hasTime;
@@ -16,7 +16,7 @@ public class Deadline extends Task {
     protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
-     * Constructor for the Deadline class.
+     * Constructs a Deadline object.
      *
      * @param description Description of the task.
      * @param dateString  Date and time of the deadline.

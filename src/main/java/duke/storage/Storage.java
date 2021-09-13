@@ -28,7 +28,7 @@ public class Storage {
     }
 
     /**
-     * Constructor for the Storage class.
+     * Constructs a Storage object.
      *
      * @param dirPath  Path of the directory the file is in.
      * @param fileName Name of the file.
@@ -53,7 +53,8 @@ public class Storage {
                 String line = s.nextLine();
                 boolean isDone = line.charAt(7) == 'X';
                 assert line.charAt(3) == '[';
-                switch (line.charAt(4)) {
+                char taskType = line.charAt(4);
+                switch (taskType) {
                 case 'T':
                     tasks.add(new Todo(line.substring(10), isDone));
                     break;

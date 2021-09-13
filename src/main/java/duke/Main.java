@@ -17,7 +17,7 @@ public class Main extends Application {
     private Duke duke = new Duke();
 
     /**
-     * Starting function for JavaFX.
+     * Starts JavaFX.
      *
      * @param stage Stage for JavaFX.
      */

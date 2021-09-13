@@ -3,7 +3,7 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * Class containing methods for showing text to the user.
+ * Contains methods for showing text to the user.
  */
 public class Ui {
     private static final Scanner in = new Scanner(System.in);

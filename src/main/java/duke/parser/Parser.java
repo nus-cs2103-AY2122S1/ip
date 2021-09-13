@@ -4,8 +4,9 @@ package duke.parser;
  * Contains methods which parse the user's input.
  */
 public class Parser {
+
     /**
-     * Parse the user's input
+     * Parses the user's input.
      *
      * @param command Command from the user.
      * @return An array with the first element being the instruction.

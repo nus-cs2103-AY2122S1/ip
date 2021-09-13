@@ -17,7 +17,7 @@ public class Event extends Task {
     protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
-     * Constructor for event.
+     * Constructs an Event object.
      *
      * @param description Description of the task.
      * @param dateString  Date and time of the event.

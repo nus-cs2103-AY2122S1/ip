@@ -16,7 +16,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Constructor for duke.Duke class.
+     * Constructs a duke.Duke object.
      *
      * @param dirPath  Directory path of the file.
      * @param fileName Name of the file.
@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * Constructor for duke.Duke class.
+     * Constructs a duke.Duke object.
      */
     public Duke() {
         this("./data/", "duke.txt");

@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for TaskList.
+     * Constructs a TaskList object.
      *
      * @param tasks ArrayList of Tasks.
      */
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * String of all the tasks.
+     * Returns string of all the tasks.
      *
      * @return Returns a list of all tasks.
      */
@@ -51,14 +51,13 @@ public class TaskList {
     }
 
     /**
-     * String of a task with the index specified.
+     * Returns string of a task with the index specified.
      *
      * @param taskId Id of the task to print.
      * @return Task with the specified index.
      */
     public String getTaskString(int taskId) {
         String taskNumberPrefix = (taskId + 1) + ": ";
-        System.out.println(taskNumberPrefix + tasks.get(taskId));
         return taskNumberPrefix + tasks.get(taskId);
     }
 
@@ -89,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      *
      * @param taskId ID of the task we are marking as done.
      * @return Response to the task being marked as done.
@@ -158,7 +157,6 @@ public class TaskList {
         String[] dateTaskArray = dateTime.split(" ");
         if (type == TaskType.Deadline) {
             if (dateTaskArray.length == 2) {
-                System.out.println(dateTime);
                 tasks.add(new Deadline(description, dateTime, FORMAT_TIME, true, false));
             } else {
                 tasks.add(new Deadline(description, dateTime, FORMAT_NO_TIME, false, false));
@@ -203,7 +201,7 @@ public class TaskList {
     }
 
     /**
-     * Find tasks that match a certain keyword.
+     * Finds tasks that match a certain keyword.
      *
      * @param keyword Keyword supplied by the user.
      * @return String of tasks that match the keyword.
