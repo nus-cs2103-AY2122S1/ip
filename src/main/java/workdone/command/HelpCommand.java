@@ -37,7 +37,7 @@ public class HelpCommand extends Command {
                 + "View all tasks:\n"
                 + "list - list all tasks added\n"
                 + "Find a task:\n"
-                + "find {keyword} - find a task containing `keyword`\n"
+                + "find {keyword} - find tasks containing `keyword`\n"
                 + "Undo:\n"
                 + "undo - undo the last command\n"
                 + "Exit:\n"
