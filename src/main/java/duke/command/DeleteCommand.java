@@ -28,6 +28,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        if (index < 0 || index >= tasks.getSize()) {
+            ui.showError("Index error: please select the correct index");
+            return;
+        }
         ui.showMessage(this.getMessage(tasks));
         tasks.removeIndex(index);
     }

@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Dialog box containing text and profile image
@@ -22,9 +23,12 @@ public class DialogBox extends HBox {
         assert l != null : "Label should not be null.";
         assert iv != null : "Image should not be null.";
 
+        final Circle clip = new Circle(40, 40, 40);
+        iv.setClip(clip);
+
         l.setWrapText(true);
-        iv.setFitWidth(100.0);
-        iv.setFitHeight(100.0);
+        iv.setFitWidth(80.0);
+        iv.setFitHeight(80.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(l, iv);
@@ -48,6 +52,10 @@ public class DialogBox extends HBox {
      * @return dialog box for user inputs
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
+        l.setStyle("-fx-background-color: #4cc5e2; "
+                + "-fx-text-fill: #122448;"
+                + "-fx-background-radius: 5; "
+                + "-fx-padding: 5;");
         var db = new DialogBox(l, iv);
         db.flip();
         return db;
@@ -61,6 +69,11 @@ public class DialogBox extends HBox {
      * @return dialog box for Duk responses
      */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        l.setStyle("-fx-background-color: #122448; "
+                + "-fx-background-radius: 5;"
+                + "-fx-padding: 5; "
+                + "-fx-text-fill: #4cc5e2;");
+        var db = new DialogBox(l, iv);
+        return db;
     }
 }

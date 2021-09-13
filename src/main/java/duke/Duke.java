@@ -8,8 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -113,11 +116,34 @@ public class Duke extends Application {
         sendButton.setOnMouseClicked((event) -> processInput(userInput.getText()));
         userInput.setOnAction((event) -> processInput(userInput.getText()));
 
+        // Set theme
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        dialogContainer.setStyle("-fx-background-color: transparent; -fx-base: transparent;");
+        sendButton.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white");
+        mainLayout.setStyle("-fx-control-inner-background: #2b2b2b;");
+        setBackground(mainLayout);
+
         // Starts display loop
         primaryStage.setScene(scene);
         primaryStage.show();
 
         ui.showWelcome();
+    }
+
+    private void setBackground(AnchorPane anchorPane) {
+        Image image = new Image(this.getClass().getResourceAsStream("/images/bg.jpg"));
+        BackgroundSize size = new BackgroundSize(STAGE_WIDTH,
+                STAGE_HEIGHT,
+                true,
+                true,
+                false,
+                true);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                null,
+                null,
+                null,
+                size);
+        anchorPane.setBackground(new Background(backgroundImage));
     }
 
     /**
@@ -147,17 +173,17 @@ public class Duke extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setPrefHeight(-1);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.setPadding(new Insets(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING));
         dialogContainer.setSpacing(DEFAULT_PADDING);
         userInput.setPrefWidth(INPUT_WIDTH);
         sendButton.setPrefWidth(BUTTON_WIDTH);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 10.0);
+        AnchorPane.setRightAnchor(sendButton, 5.0);
+        AnchorPane.setLeftAnchor(userInput , 5.0);
+        AnchorPane.setBottomAnchor(userInput, 10.0);
     }
 
     /**

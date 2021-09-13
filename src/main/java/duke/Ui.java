@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * User interface class for controlling user interaction.
@@ -81,6 +82,8 @@ public class Ui {
      */
     public void exit() {
         inputReader.close();
+        Stage stage = (Stage) dialogContainer.getScene().getWindow();
+        stage.close();
     }
 
     /**
