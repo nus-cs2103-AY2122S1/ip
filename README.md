@@ -1,6 +1,6 @@
-# DukePlus
+# MemoCat
 
-### DukePlus helps you sort out your daily tasks. It is,
+### MemoCat helps you sort out your daily tasks. It is,
 
 * Text-based
 * Easy to learn
