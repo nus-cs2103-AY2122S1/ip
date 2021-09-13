@@ -44,6 +44,8 @@ Exit the Duke app.
 
 ## Usage
 
+---
+
 ### `todo` - Add a Todo task
 
 Adds a Todo task to the task list.
