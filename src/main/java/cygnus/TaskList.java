@@ -1,10 +1,10 @@
-package duke;
+package cygnus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import duke.task.Deadline;
-import duke.task.Task;
+import cygnus.task.Deadline;
+import cygnus.task.Task;
 
 /**
  * Represents a list of Tasks.

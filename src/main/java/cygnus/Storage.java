@@ -1,4 +1,4 @@
-package duke;
+package cygnus;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,10 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import cygnus.task.Deadline;
+import cygnus.task.Event;
+import cygnus.task.Task;
+import cygnus.task.ToDo;
 
 /**
  * Representation of a storage file which can be read from and written to.
@@ -40,9 +40,9 @@ public class Storage {
      * Parses the associated file, returning a collection of Tasks.
      *
      * @return An ArrayList of Tasks corresponding to the data in the file.
-     * @throws DukeException If the file is formatted incorrectly or cannot be found.
+     * @throws CygnusException If the file is formatted incorrectly or cannot be found.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws CygnusException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
@@ -69,10 +69,10 @@ public class Storage {
                         newTask = new ToDo(taskInfo);
                         break;
                     default:
-                        throw new DukeException("Error: Data is formatted incorrectly in storage file.");
+                        throw new CygnusException("Error: Data is formatted incorrectly in storage file.");
                     }
                 } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-                    throw new DukeException("Error: Data is formatted incorrectly in storage file.");
+                    throw new CygnusException("Error: Data is formatted incorrectly in storage file.");
                 }
                 if (line.charAt(4) == 'X') {
                     newTask.setDone();
@@ -81,7 +81,7 @@ public class Storage {
                 line = br.readLine();
             }
         } catch (java.io.IOException e) {
-            throw new DukeException("Error: The specified file path for storage cannot be resolved.");
+            throw new CygnusException("Error: The specified file path for storage cannot be resolved.");
         }
         return tasks;
     }

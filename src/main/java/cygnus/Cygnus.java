@@ -1,28 +1,28 @@
-package duke;
+package cygnus;
 
 import javafx.application.Application;
 
 /**
- * Represents Duke, a text-based Java chatbot that helps to
+ * Represents Cygnus, a text-based Java chatbot that helps to
  * keep track of various tasks.
  *
  * @author Joshua Yong
  */
-public class Duke {
+public class Cygnus {
 
-    private static final String STORAGE_FILE_PATH = "./data/duke.txt";
+    private static final String STORAGE_FILE_PATH = "./data/cygnus.txt";
     private final Storage storage;
     private TaskList tasks;
 
     /**
      * Class constructor.
      */
-    public Duke() {
+    public Cygnus() {
         this.storage = new Storage(STORAGE_FILE_PATH);
         try {
             this.tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            System.out.println(e.getMessage() + "\nStarting Duke without saved tasks...");
+        } catch (CygnusException e) {
+            System.out.println(e.getMessage() + "\nStarting Cygnus without saved tasks...");
             tasks = new TaskList();
         }
     }
@@ -43,7 +43,7 @@ public class Duke {
             String response = parser.parse(input);
             storage.save(tasks);
             return response;
-        } catch (DukeException e) {
+        } catch (CygnusException e) {
             return e.getMessage();
         }
     }

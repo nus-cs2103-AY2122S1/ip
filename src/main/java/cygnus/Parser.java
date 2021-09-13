@@ -1,17 +1,17 @@
-package duke;
+package cygnus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import cygnus.task.Deadline;
+import cygnus.task.Event;
+import cygnus.task.Task;
+import cygnus.task.ToDo;
 
 /**
- * Represents the text parser for Duke. When parsing a user input, the parser
+ * Represents the text parser for Cygnus. When parsing a user input, the parser
  * also handles the updating of the associated TaskList.
  *
  * @author Joshua Yong
@@ -42,9 +42,9 @@ public class Parser {
      *
      * @param userInput The String inputted by the user.
      * @return A String to be displayed to the user.
-     * @throws DukeException If the user input is invalid.
+     * @throws CygnusException If the user input is invalid.
      */
-    public String parse(String userInput) throws DukeException {
+    public String parse(String userInput) throws CygnusException {
         String[] inputStringArray = userInput.split(" ", 2);
         String firstWordOfInput = inputStringArray[0];
         if (inputStringArray.length == 1) {
@@ -54,9 +54,9 @@ public class Parser {
             case "done":
                 // Fallthrough
             case "delete":
-                throw new DukeException("Please specify a task number.");
+                throw new CygnusException("Please specify a task number.");
             case "find":
-                throw new DukeException("Please specify a keyword.");
+                throw new CygnusException("Please specify a keyword.");
             case "upcoming":
                 return tasks.getUpcomingDeadlinesString();
             case "deadline":
@@ -64,9 +64,9 @@ public class Parser {
             case "event":
                 // Fallthrough
             case "todo":
-                throw new DukeException("Please specify the task info.");
+                throw new CygnusException("Please specify the task info.");
             default:
-                throw new DukeException("Sorry, I don't know what that means.");
+                throw new CygnusException("Sorry, I don't know what that means.");
             }
         } else {
             String restOfInput = inputStringArray[1];
@@ -78,7 +78,7 @@ public class Parser {
                     return "Nice! I've marked this task as done:\n "
                             + tasks.getTask(taskIndex).toString();
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new DukeException("Please specify a valid task number.");
+                    throw new CygnusException("Please specify a valid task number.");
                 }
             case "delete":
                 try {
@@ -87,7 +87,7 @@ public class Parser {
                     tasks.deleteTask(taskIndex);
                     return "Noted. I've deleted this task:\n " + deletedTask.toString();
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new DukeException("Please specify a valid task number.");
+                    throw new CygnusException("Please specify a valid task number.");
                 }
             case "find":
                 return tasks.getMatchingTasksString(restOfInput);
@@ -104,15 +104,15 @@ public class Parser {
                 tasks.addTask(newToDo);
                 return "Got it. I've added this task:\n " + newToDo.toString();
             default:
-                throw new DukeException("Sorry, I don't know what that means.");
+                throw new CygnusException("Sorry, I don't know what that means.");
             }
         }
     }
 
-    private Deadline createDeadline(String taskInfo) throws DukeException {
+    private Deadline createDeadline(String taskInfo) throws CygnusException {
         String[] deadlineInfo = taskInfo.split(" /by ", 2);
         if (deadlineInfo.length < 2) {
-            throw new DukeException("Please enter a valid deadline format.");
+            throw new CygnusException("Please enter a valid deadline format.");
         }
 
         try {
@@ -121,14 +121,14 @@ public class Parser {
             Deadline newDeadline = new Deadline(deadlineInfo[0], by);
             return newDeadline;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date with format " + dateInputFormat + ".");
+            throw new CygnusException("Please enter a valid date with format " + dateInputFormat + ".");
         }
     }
 
-    private Event createEvent(String taskInfo) throws DukeException {
+    private Event createEvent(String taskInfo) throws CygnusException {
         String[] eventInfo = taskInfo.split(" /at ", 2);
         if (eventInfo.length < 2) {
-            throw new DukeException("Please enter a valid event format.");
+            throw new CygnusException("Please enter a valid event format.");
         }
 
         try {
@@ -137,11 +137,11 @@ public class Parser {
             Event newEvent = new Event(eventInfo[0], at);
             return newEvent;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date with format " + dateTimeInputFormat + ".");
+            throw new CygnusException("Please enter a valid date with format " + dateTimeInputFormat + ".");
         }
     }
 
-    private ToDo createToDo(String taskInfo) throws DukeException {
+    private ToDo createToDo(String taskInfo) throws CygnusException {
         ToDo newToDo = new ToDo(taskInfo);
         return newToDo;
     }

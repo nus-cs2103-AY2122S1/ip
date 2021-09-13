@@ -1,4 +1,4 @@
-package duke.task;
+package cygnus.task;
 
 /**
  * Represents a Task which encapsulates a description

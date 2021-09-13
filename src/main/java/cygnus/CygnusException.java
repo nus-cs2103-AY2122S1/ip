@@ -1,20 +1,20 @@
-package duke;
+package cygnus;
 
 /**
- * Represents a DukeException, which is a subtype of Exception.
+ * Represents a CygnusException, which is a subtype of Exception.
  * Encapsulates numerous errors which could occur during runtime
  * due to invalid user input or other reasons.
  *
  * @author Joshua Yong
  */
-public class DukeException extends Exception {
+class CygnusException extends Exception {
 
     /**
      * Class constructor.
      *
      * @param message The error message.
      */
-    public DukeException(String message) {
+    public CygnusException(String message) {
         super(message);
     }
 

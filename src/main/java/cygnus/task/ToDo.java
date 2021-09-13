@@ -1,4 +1,4 @@
-package duke.task;
+package cygnus.task;
 
 /**
  * Represents a Todo which is a subtype of Task.

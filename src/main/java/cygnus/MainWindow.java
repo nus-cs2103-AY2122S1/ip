@@ -1,4 +1,4 @@
-package duke;
+package cygnus;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,18 +22,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Cygnus cygnus;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImage.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeImage.png"));
+    private final Image cygnusImage = new Image(this.getClass().getResourceAsStream("/images/CygnusImage.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setCygnus(Cygnus d) {
+        cygnus = d;
     }
 
     /**
@@ -41,21 +41,21 @@ public class MainWindow extends AnchorPane {
      */
     public void displayGreeting() {
         dialogContainer.getChildren()
-                .add(DialogBox.getDukeDialog("Hello! I'm Duke.\nWhat can I do for you?", dukeImage));
+                .add(DialogBox.getCygnusDialog("Hello! I'm Cygnus.\nWhat can I do for you?", cygnusImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Cygnus's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         assert userInput != null : "Text field is not initialized";
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = cygnus.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getCygnusDialog(response, cygnusImage)
         );
         userInput.clear();
     }
