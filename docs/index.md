@@ -12,6 +12,8 @@
 Sariel is a desktop application for managing tasks through  
 its GUI or command line.
 
+## User guide [here](UserGuide.md)
+
  
 __Acknowledgements__
 
