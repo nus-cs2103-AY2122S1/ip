@@ -36,7 +36,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
+        StringBuilder response = new StringBuilder("Oh? You're approaching me?\n"
+                + "Here are the matching tasks in your list:\n");
         int index = 1;
         for (Task task : tasks.getTasks()) {
             String taskString = task.toString();

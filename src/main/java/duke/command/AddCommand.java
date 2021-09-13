@@ -171,7 +171,7 @@ public class AddCommand extends Command {
 
     // Returns a response telling the user that the task has been successfully added and stored.
     private String createResponse(TaskList tasks, Task task) {
-        String prefix = "Got it. I've added this task:\n ";
+        String prefix = "HOHOHO. I've added this task:\n ";
         int taskNum = tasks.getTaskNum();
         String summary = "\nNow you have " + taskNum + " tasks in the list.";
 

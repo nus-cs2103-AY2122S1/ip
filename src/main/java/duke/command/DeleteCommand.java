@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
     // Returns a response telling the user that the task has been successfully deleted.
     private String createResponse(TaskList tasks, Task task) {
-        String prefix = "Noted. I've deleted this task:\n ";
+        String prefix = "Hinjaku! Hinjaku!\nI've deleted this task:\n ";
         int taskNum = tasks.getTaskNum();
         String summary = "\nNow you have " + taskNum + " tasks in the list.";
 

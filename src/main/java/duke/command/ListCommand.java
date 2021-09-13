@@ -35,7 +35,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        StringBuilder response = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder response = new StringBuilder("Toki yo tomare!\nHere are the tasks in your list:");
         int currentIndex = 1;
         appendToResponse(response, tasks, currentIndex);
 
