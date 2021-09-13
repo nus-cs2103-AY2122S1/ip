@@ -1,29 +1,216 @@
 # User Guide
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest release from [here](https://github.com/willyamped/ip/releases/tag/A-Release).
+3. Copy the file to the folder you want to use as the home folder for your Duke.
+4. Double-click the .jar file to start the app. The GUI should look similar to the screenshot below.<br>![Screenshot](Ui.png)
+5. Type in a command in the command box and press Enter to execute it. <br>
 
-## Features 
+## Features
 
-### Feature-ABC
 
-Description of the feature.
+### Adding a task : `todo/deadline/event`
 
-### Feature-XYZ
+Adds a task to the list. <br><br>
+A todo is a task with a description and needs to be done before a specific deadline. <br>
+A deadline is a task with a description and starts at a specific deadline. <br>
 
-Description of the feature.
+Format: [task] [description] /[deadline]
+
+
+
+
+### Viewing all tasks: `list`
+
+Views all tasks in the list.
+
+Format: list
+
+
+### Finding a task based on a keyword that exactly matches a description: `find`
+
+Finds a task based on a search term.
+
+Format: find [keyword]
+
+
+### Finding a task based on a keyword that partially/ exactly matches a description: `search`
+
+Finds a task based on a keyword that partially/exactly matches a task.
+
+Format: search [keyword]
+
+
+### Marking a task as done: `done`
+
+Marks a task as done as shown by the symbol 'X'.
+
+Format: done [number]
+
+
+### Deleting a task: `delete`
+
+Deletes a particular task in the list.
+
+Format: done [number]
+
+
+
+### Exiting the program: `bye`
+
+Exits the whole program.
+
+Format: bye
+
 
 ## Usage
+`todo`
 
-### `Keyword` - Describe action
+Creates a todo task.
 
-Describe the action and its outcome.
+Example:
+- todo math homework
 
-Example of usage: 
+Expected outcome:
 
-`keyword (optional arguments)`
+Returns an acknowledgement message and outputs the number of tasks in the list.
+
+```
+Duke says: Got it. I've added this task:
+[T][] math homework
+Now you have 3 tasks in the list.
+```
+
+
+`deadline`
+
+Creates a deadline task.
+
+Example:
+- deadline math homework /by Sunday
+
+Expected outcome:
+
+Returns an acknowledgement message and outputs the number of tasks in the list.
+
+```
+Duke says: Got it. I've added this task:
+[D][] math homework (by: Sunday)
+Now you have 3 tasks in the list.
+```
+
+
+`event`
+
+Creates an event task.
+
+Example:
+- event formal dinner /on Monday
+
+Expected outcome:
+
+Returns an acknowledgement message and outputs the number of tasks in the list.
+
+```
+Duke says: Got it. I've added this task:
+[E][] formal dinner (on: Monday)
+Now you have 3 tasks in the list.
+```
+
+`list`
+
+Shows all tasks in the list
+
+Example:
+- list
+
+Expected outcome:
+
+Outputs all tasks in the list.
+
+```
+Duke says: Here are the tasks in your list:
+1.[E][] formal dinner (on: Monday)
+2.[T][] cs2100
+3.[T][] math homework
+```
+
+`find`
+
+Finds a task based on a search term.
+
+Example:
+- find swimming
+
+Expected outcome:
+
+Returns tasks that match the keyword.
+
+```
+Duke says: Here are the matching task(s) in your list:
+1.[E][] swimming (on: Monday)
+```
+
+`search`
+
+Finds a task based on a keyword that partially/exactly matches a task.
+
+Example:
+- find swim
+
+Expected outcome:
+
+Returns tasks that contain the keyword in the description.
+
+```
+Duke says: Here are the matching keyword(s) in your list:
+1.[E][] swimming (on: Monday)
+2.[E][] swim (on: Sunday)
+```
+
+`done`
+
+Marks a task as done as shown by the symbol 'X'.
+
+Example:
+- done 2
+
+Expected outcome:
+
+Returns an acknowledgement message.
+
+```
+Duke says: Nice! I've marked this task as done:
+[E][X] swimming (on: Monday)
+```
+
+`delete`
+
+Deletes a particular task in the list.
+
+Example:
+- delete 1
+
+Expected outcome:
+
+Returns an acknowledgement message and outputs the number of tasks in the list.
+
+```
+Duke says: Noted. I've removed this task:
+[E][X] swimming (on: Monday)
+Now you have 3 tasks in the list.
+```
+
+`bye`
+
+Exits the program
+
+Example:
+- bye
 
 Expected outcome:
 
 Description of the outcome.
 
 ```
-expected output
+Duke says: Good Bye. Have a nice day!
 ```
