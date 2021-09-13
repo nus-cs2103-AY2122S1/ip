@@ -1,5 +1,5 @@
 package duke;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class TaskList {
 
     /**
      * Creates the taskList and a counter to keep track of the number of tasks saved in the user's
-     * hard disk at any point in time
+     * hard disk at any point in time.
      */
     public TaskList() {
         taskList = new ArrayList<Task>(100);
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the taskList
+     * Returns the taskList.
      *
      * @return the taskList
      */
@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks currently save in user's hard disk
+     * Returns the number of tasks currently save in user's hard disk.
      *
      * @return the number of tasks currently save in user's hard disk (counter member)
      */
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the taskList
+     * Adds a task to the taskList.
      *
      * @param currTask the task that is to be added to the taskList
      */
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the taskList and update the list of tasks in user's hard disk
+     * Adds a task to the taskList and update the list of tasks in user's hard disk.
      *
      * @param currTask the task that is to be added
      * @throws IOException if there is an error in appending the task to the list of tasks
@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task to the taskList and update the list of tasks in user's hard disk
+     * Deletes a task to the taskList and update the list of tasks in user's hard disk.
      *
      * @param taskNum Number of the task that is to be deleted
      * @throws IOException if there is an error in re-writing the list of tasks without the
@@ -92,14 +92,16 @@ public class TaskList {
 
     /**
      * Marks a given task as completed and to update its status icon in the list of tasks
-     * in user's hard disk
+     * in user's hard disk.
      *
      * @throws IOException if there is an error when overwriting/appending to the contents of
      * the file
      */
     public static String markAsDoneAndUpdate(int taskNum) throws IOException{
         TaskList.getTaskList().get(taskNum).isDone = true; // Mark the task as done
+
         Storage.rewriteTaskFile(); // Rewrite the task file to store the newly done task
+
         return Ui.taskDone(taskNum); // Display output by Jarvis
     }
 }
