@@ -31,6 +31,10 @@ You tasks are automatically saved to disk in the file `duke.txt`.
 
 Shorthands to create todos, deadlines, and events.
 
+### Help (not yet supported on MacOS)
+
+Gives help.
+
 ## Usage
 
 ### `help` - View help
