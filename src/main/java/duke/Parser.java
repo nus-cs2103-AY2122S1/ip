@@ -13,6 +13,7 @@ public class Parser {
     public static final String BYE_STRING = "Bye. Hope to see you again soon!";
     public static final String DEADLINE_STRING = "deadline";
     public static final String TODO_STRING = "todo";
+    private static final String EVENT_STRING = "event";
 
     /**
      * Loads task once files contents are read raw.
@@ -113,7 +114,8 @@ public class Parser {
             } else if (input.startsWith(addWhiteSpace(DEADLINE_STRING))
                     || (input.startsWith(DEADLINE_STRING))) {
                 response = deadlineResponse(input, tasks);
-            } else if (input.startsWith("event ")) {
+            } else if (input.startsWith(addWhiteSpace(EVENT_STRING))
+                    || input.startsWith(EVENT_STRING)) {
                 response = eventResponse(input, tasks);
             } else if (input.startsWith("delete ")) {
                 response = deleteResponse(input, tasks);
@@ -164,7 +166,11 @@ public class Parser {
         return Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
     }
 
-    private static String eventResponse(String input, List<Task> tasks) {
+    private static String eventResponse(String input, List<Task> tasks) throws EmptyEventException {
+        String testInput = input.replaceAll("\\s+", "");
+        if (testInput.equals("event")) {
+            throw new EmptyEventException();
+        }
         String task = input.substring(6);
         Type type = Type.EVENT;
         String[] tokens = task.split(" /at ");
