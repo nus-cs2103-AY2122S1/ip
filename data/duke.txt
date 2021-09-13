@@ -1,2 +1,3 @@
-T | 0 | hello
-T | 0 | bye
+D | 1 | sign up for challenge | 2021-09-20
+E | 0 | Google Day | 2021-09-15
+T | 0 | finish proposal for ILP
