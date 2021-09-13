@@ -69,6 +69,8 @@ public class TaskList {
         response += String.format("    %s%n", item.toString());
         response += printSize();
 
+        assert !response.equals("");
+
         return response;
     }
 
@@ -92,6 +94,8 @@ public class TaskList {
 
         saveData();
 
+        assert !response.equals("");
+
         return response;
     }
 
@@ -110,6 +114,8 @@ public class TaskList {
         } else {
             response += ("No tasks found.\n");
         }
+        assert !response.equals("");
+
         return response;
     }
 
