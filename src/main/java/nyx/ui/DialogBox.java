@@ -51,18 +51,18 @@ public class DialogBox extends HBox {
     }
 
     private void setStyle(boolean isError) {
-        if (isError){
-            dialog.setStyle("-fx-background-color: #FF0000;" +
-                    "-fx-background-radius: 15;" +
-                    "-fx-padding: 15;" +
-                    "-fx-border-radius: 15;");
+        if (isError) {
+            dialog.setStyle("-fx-background-color: #FF0000;"
+                    + "-fx-background-radius: 15;"
+                    + "-fx-padding: 15;"
+                    + "-fx-border-radius: 15;");
 
 
         } else {
-            dialog.setStyle("-fx-background-color: #0EFFC7;" +
-                    "-fx-background-radius: 15;" +
-                    "-fx-padding: 15;" +
-                    "-fx-border-radius: 15;");
+            dialog.setStyle("-fx-background-color: #0EFFC7;"
+                    + "-fx-background-radius: 15;"
+                    + "-fx-padding: 15;"
+                    + "-fx-border-radius: 15;");
         }
     }
 
