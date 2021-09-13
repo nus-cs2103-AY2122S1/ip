@@ -9,6 +9,7 @@ import duke.command.DeleteTaskCommand;
 import duke.command.ExitCommand;
 import duke.command.FindTaskCommand;
 import duke.command.GetListCommand;
+import duke.command.HelpCommand;
 import duke.command.TaskDoneCommand;
 import duke.command.TaskUndoneCommand;
 import duke.command.UndoCommand;
@@ -157,6 +158,8 @@ public class Parser {
             return new GetListCommand();
         } else if (command.equals("undo")) {
             return Parser.parseUndo();
+        } else if (command.equals("help")) {
+            return new HelpCommand();
         } else {
             // Split the command into two phrases
             String[] words = command.split(" ", 2);
