@@ -5,9 +5,6 @@ import java.text.ParseException;
 import duke.main.DukeException;
 import duke.main.TaskDate;
 
-import duke.main.Date;
-import duke.main.DukeException;
-
 /**
  * Represents tasks with specific timing.
  *
@@ -24,6 +21,7 @@ public class Event extends Task {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String AT_CONNECTOR = "at ";
     private String dateString;
+    private TaskTag eventTag;
     /**
      * Class constructor.
      *
@@ -38,20 +36,25 @@ public class Event extends Task {
         String descriptionDate = getSubString(description, startOfTimeIndex);
         eventDate = new TaskDate(descriptionDate);
         dateString = getDateString();
-	assert !isDone : false;
+        int startOfEventTags = getStartingIndexAfter(description, TaskTag.getTagSymbol());
+        String tag = getSubString(description, startOfEventTags - TaskTag.getTagSymbol().length());
+        eventTag = new TaskTag(tag);
+	    assert !isDone : false;
     }
     /**
      * Class constructor for loading tasks from storage file.
      *
      * @param eventDescription description of event task.
      * @param dateOfTask date of the event task.
+     * @param tag tag used to tag the task.
      * @throws ParseException due to improper date format.
      */
-    public Event(String eventDescription, String dateOfTask) throws DukeException {
+    public Event(String eventDescription, String dateOfTask, String tag) throws DukeException {
         super();
         this.eventDescription = eventDescription;
         eventDate = TaskDate.convertDateStringToDate(dateOfTask);
         dateString = getDateString();
+        this.eventTag = new TaskTag(tag);
     }
 
     private String getDateString() {
@@ -86,7 +89,7 @@ public class Event extends Task {
      */
     @Override
     public boolean isSameDateAs(String dateString) throws DukeException {
-        assert evenDate != null : "even date must not be unassigned";
+        assert eventDate != null : "even date must not be unassigned";
 	return eventDate.equals(dateString);
     }
 

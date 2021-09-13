@@ -47,7 +47,7 @@ public class Parser {
             case "todo" :
                     return new AddCommand(userInput);
             default:
-                assert action != "bye" : "action is not bye";
+                assert commandAction != "bye" : "action is not bye";
                 throw new IllegalArgumentException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {

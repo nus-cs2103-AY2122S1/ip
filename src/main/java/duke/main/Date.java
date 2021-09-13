@@ -26,9 +26,9 @@ public class Date {
             localDate = LocalDate.parse(String.format("%s-%s-%s", "2021", dateComponents[1], dateComponents[0]));
             assert localDate != null : "localDate must not be null";
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.ArrayIndexOutOfBoundsException);
         } catch (DateTimeParseException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.DateTimeParseException);
         }
     }
 
@@ -76,7 +76,7 @@ public class Date {
             assert dateFormat != null : "dateFormat cannot be null";
             return new Date(dateFormat.format(monthDayDate));
         } catch (ParseException e) {
-            throw new DukeException(e);
+            throw new DukeException(DukeException.Exceptions.DateTimeParseException);
         }
     }
 }
