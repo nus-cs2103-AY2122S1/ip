@@ -8,7 +8,7 @@ Duke helps you keep track of your tasks.
 4. Double-click the file to start the app.
 5. Refer to the features below for details on each command.
 
-#
+
 ## Features 
 
 
@@ -47,7 +47,7 @@ Update information of existing task.
 
 Exits the App.
 
-#
+
 ## Usage
 
 ### `todo` - Add todo task to Duke to keep track of
@@ -65,7 +65,7 @@ Got it. I've added this task:
  T |0| borrow a book
 Now you have 1 task in the list.
 ```
-#
+
 
 ### `deadline` - Add deadline task to Duke to keep track of
 
@@ -82,7 +82,7 @@ Got it. I've added this task:
  D |0| return book | 12 Aug 2021 6.30PM
 Now you have 1 task in the list.
 ```
-#
+
 
 ### `event` - Add event task to Duke to keep track of
 
@@ -99,7 +99,7 @@ Got it. I've added this task:
  E |0| concert | 12 Dec 2021 6.30PM
 Now you have 1 task in the list.
 ```
-#
+
 
 ### `list` - List all existing events
 
@@ -116,7 +116,7 @@ Here are the tasks in your list:
 1.T |0| borrow a book
 2.D |0| return book | 12 Aug 2021 6.30PM
 ```
-#
+
 
 ### `find` - Locating task by description
 
@@ -133,7 +133,7 @@ Here are the matching tasks in your list:
 1.T |0| borrow a book
 2.D |0| return book | 12 Aug 2021 6.30PM
 ```
-#
+
 
 ### `done` - Check Off Task when completed
 
@@ -149,7 +149,7 @@ Expected outcome:
 Nice! I've marked this task as done:
  T |1| borrow a book
 ```
-#
+
 
 ### `delete` - Delete task from list
 
@@ -166,7 +166,7 @@ Noted. I've removed this task:
  T |1| borrow a book
 Now you have 0 tasks in the list.
 ```
-#
+
 
 ### `update` - Provide instructions for update
 
@@ -185,7 +185,7 @@ edit-N/(Task Index) (New Task Name)
 To update Task Duration input:
 edit-D/(Task Index) (New Task Date and Time)
 ```
-#
+
 
 ### `edit-N` - Update Task Description
 
@@ -201,7 +201,7 @@ Expected outcome:
 Got it. I've updated this task:
 T |0| do homework
 ```
-#
+
 
 ### `edit-D` - Update Task Duration
 
@@ -217,7 +217,7 @@ Expected outcome:
 Got it. I've updated this task:
 D |0| concert | 14 Nov 2021 6.00PM
 ```
-#
+
 
 ### `bye` - Exits Duke
 
