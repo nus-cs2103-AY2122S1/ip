@@ -3,15 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 
 /**
  * Class that parses incoming input
@@ -31,6 +23,8 @@ public class Parser {
 
         if (inputString.equals("bye")) {
             return new ExitCommand();
+        } else if (inputString.equals("help")) {
+            return new HelpCommand();
         } else if (inputString.equals("list")) {
             return new ListCommand();
         } else if (command.equals("done")) {
