@@ -6,7 +6,7 @@ import duke.Ui;
 import duke.task.Task;
 
 /**
- * Represents a Command that finds a Task to the TaskList.
+ * Represents a Command that finds a Task in the TaskList.
  * An FindCommand consists of a keyword.
  *
  */

@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IndexOutOfBoundsException;
 
 /**
  * Command is the abstract base class for all Commands.
@@ -19,7 +20,8 @@ public abstract class Command {
      * @throws IOException On Input error.
      * @see IOException
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException,
+            IndexOutOfBoundsException;
 
     /**
      * Indicates whether a Command is an ExitCommand or not.

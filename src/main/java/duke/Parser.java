@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -12,7 +13,12 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDateException;
+import duke.exception.IllegalFrequencyException;
 import duke.exception.IllegalTaskException;
+import duke.exception.IllegalTimeException;
+import duke.exception.MissingIndexException;
+import duke.exception.MissingSyntaxException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -48,7 +54,9 @@ public class Parser {
      * @throws IllegalCommandException in the case no task is given after "todo".
      * @throws IllegalTaskException in the case an invalid task is given.
      */
-    public static Command parse(String fullCommand) throws IllegalCommandException, IllegalTaskException {
+    public static Command parse(String fullCommand) throws IllegalCommandException, IllegalTaskException,
+            MissingIndexException, MissingSyntaxException, IllegalTimeException, IllegalDateException,
+            IllegalFrequencyException {
         String command = fullCommand.split(" ")[0];
         switch (command) {
         case "list":
@@ -78,12 +86,12 @@ public class Parser {
         }
     }
 
-    private static DoneCommand createDoneCommand(String fullCommand) {
+    private static DoneCommand createDoneCommand(String fullCommand) throws MissingIndexException {
         int toComplete = getCommandIndex(fullCommand);
         return new DoneCommand(toComplete);
     }
 
-    private static DeleteCommand createDeleteCommand(String fullCommand) {
+    private static DeleteCommand createDeleteCommand(String fullCommand) throws MissingIndexException {
         int toDelete = getCommandIndex(fullCommand);
         return new DeleteCommand(toDelete);
     }
@@ -96,27 +104,55 @@ public class Parser {
         return new AddCommand(new ToDo(task));
     }
 
-    private static AddCommand createDeadline(String fullCommand) {
+    private static AddCommand createDeadline(String fullCommand) throws MissingSyntaxException, IllegalTimeException,
+            IllegalDateException, IllegalTaskException, IllegalCommandException, IllegalFrequencyException {
+        if (!fullCommand.contains("/by")) {
+            throw new MissingSyntaxException("Deadline commands must be split by a \"/by\"");
+        }
         String[] taskDate = getTaskDate(fullCommand, "deadline ", "/by ");
+        if (taskDate[0].equals("")) {
+            throw new IllegalTaskException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (taskDate.length > 2) {
+            throw new IllegalCommandException("Deadline commands should only be split by 1 \"/by\"");
+        }
         return parseCommand("Deadline", taskDate);
     }
 
-    private static AddCommand createEvent(String fullCommand) {
+    private static AddCommand createEvent(String fullCommand) throws MissingSyntaxException, IllegalTimeException,
+            IllegalDateException, IllegalTaskException, IllegalCommandException, IllegalFrequencyException {
+        if (!fullCommand.contains("/at")) {
+            throw new MissingSyntaxException("Event commands must be split by a \"/at\"");
+        }
         String[] taskDate = getTaskDate(fullCommand, "event ", "/at ");
+        if (taskDate.length == 0 || taskDate[0].equals("")) {
+            throw new IllegalTaskException("☹ OOPS!!! The description of an event cannot be empty.");
+        } else if (taskDate.length > 2) {
+            throw new IllegalCommandException("Event commands should only be split by 1 \"/at\"");
+        }
         return parseCommand("Event", taskDate);
     }
 
-    private static FindCommand createFindCommand(String fullCommand) {
+    private static FindCommand createFindCommand(String fullCommand) throws IllegalTaskException {
         String keyword = fullCommand.replaceFirst("find ", "");
+        if (keyword.equals("") || keyword.equals(fullCommand)) {
+            throw new IllegalTaskException("Missing keyword!");
+        }
         return new FindCommand(keyword);
     }
 
-    private static AddCommand parseCommand(String type, String[] taskDate) {
+    private static AddCommand parseCommand(String type, String[] taskDate) throws IllegalTimeException,
+            IllegalDateException, IllegalTaskException, IllegalFrequencyException {
         String task = taskDate[0];
         String fullDateTime = taskDate[1];
+        if (fullDateTime.split(" ").length < 2 || fullDateTime.split(" ").length > 3) {
+            throw new IllegalTaskException("Date and time must be given in the format \"dd/mm/yyyy HHmm\"!");
+        }
         LocalDate localDate = getLocalDate(fullDateTime);
         LocalTime localTime = getLocalTime(fullDateTime);
         String frequency = getFrequency(fullDateTime);
+        if (!frequency.equals("monthly") && !frequency.equals("weekly") && !frequency.equals("once")) {
+            throw new IllegalFrequencyException("Frequency of task can only either be \"weekly\" or \"monthly\"");
+        }
         return createAddCommandWithDateTime(type, task, localDate, localTime, frequency);
     }
 
@@ -132,23 +168,34 @@ public class Parser {
         return fullCommand.replaceFirst(type, "").split(splitter);
     }
 
-    private static LocalDate getLocalDate (String fullDateTime) {
+    private static LocalDate getLocalDate (String fullDateTime) throws IllegalDateException {
         String formattedDate = formatDate(fullDateTime);
-        return LocalDate.parse(formattedDate);
+        try {
+            return LocalDate.parse(formattedDate);
+        } catch (DateTimeParseException e) {
+            throw new IllegalDateException("Date given must be in format \"dd/mm/yyyy\"!");
+        }
     }
 
-    private static LocalTime getLocalTime (String fullDateTime) {
+    private static LocalTime getLocalTime (String fullDateTime) throws IllegalTimeException {
         String time = getTime(fullDateTime);
-        return LocalTime.parse(time, DateTimeFormatter.ofPattern(TIMEFORMAT));
+        try {
+            return LocalTime.parse(time, DateTimeFormatter.ofPattern(TIMEFORMAT));
+        } catch (DateTimeParseException e) {
+            throw new IllegalTimeException("Time given must be in format \"HHmm\"!");
+        }
     }
 
     private static String getTime(String fullDateTime) {
         return fullDateTime.split(" ")[1];
     }
 
-    private static String formatDate(String fullDateTime) {
+    private static String formatDate(String fullDateTime) throws IllegalDateException {
         String fullDate = fullDateTime.split(" ")[0];
         String[] splitDate = fullDate.split("/");
+        if (splitDate.length != 3) {
+            throw new IllegalDateException("Date given must be in format \"dd/mm/yyyy\"!");
+        }
         return rewriteDate(splitDate);
     }
 
@@ -168,7 +215,10 @@ public class Parser {
         return fullDateTime.split(" ")[2];
     }
 
-    private static Integer getCommandIndex(String fullCommand) {
+    private static Integer getCommandIndex(String fullCommand) throws MissingIndexException {
+        if (fullCommand.split(" ").length < 2) {
+            throw new MissingIndexException("Command requires an Index!");
+        }
         return Integer.parseInt(fullCommand.split(" ")[1]) - 1;
     }
 }
