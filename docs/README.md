@@ -12,17 +12,21 @@ To run DukeAgain,
 
 ### Essential commands
 
-The following are the recognized formats for 3 different types of tasks (items in round brackets are optional:
+The following are the recognized formats for 3 different types of tasks (items in brackets are optional:
 
-- `todo [description]`
-- `deadline [description] /by [(yyyy-MM-dd) (HH:mm)] (/ details)`
-- `event [description] /by [(yyyy-MM-dd) (HH:mm)] ~ [(yyyy-MM-dd) (HH:mm)] (/ details)`
-- `find [keyword(s)]`
+- `todo DESCRIPTION`
+- `deadline DESCRIPTION /by [(yyyy-MM-dd) (HH:mm)] [/ DETAILS]`
+- `event DESCRIPTION /at [(yyyy-MM-dd) (HH:mm) ~ (yyyy-MM-dd) (HH:mm)] [(]/ DETAILS]`
+- `find KEYWORDS`
 - ℹ️ `help` to learn other commands! 
 
 ## Features 
 
 ### Autosave
+
+You tasks are automatically saved to disk in the file `duke.txt`.
+
+### Use aliases
 
 You tasks are automatically saved to disk in the file `duke.txt`.
 
@@ -32,24 +36,81 @@ You tasks are automatically saved to disk in the file `duke.txt`.
 
 Prints the help manual, with details on usage.
 
-Example of usage: `help [command]`
+**Usage**: `help [command]`
+
+**Examples of usage**:
+
+- `help deadline`
+- `help d`
+- `help`
+
+### `greet` - Duke welcomes you
+
+Duke welcomes you to use DukeAgain.
+
+**Usage**: `greet`
 
 ### `todo` or `t` - Add todo
 
-Adds a todo task with a description 
+Adds an todo task with a *description*.
 
-### `Keyword` - Describe action
+**Usage**: `todo DESCRIPTION`
 
-Describe the action and its outcome.
+**Examples of usage**:
 
-Example of usage: 
+- `todo clean the dishes`
+- `todo Exercise 5.1`
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
+**Example outcome**:
 
 ```
-expected output
+> todo clean the dishes
+
+Got it. I've added this task:
+[T][ ] clean the dishes
+ Now you have 8 tasks in the list.
 ```
+
+ Now you have 8 tasks in the list.
+
+### `event` or `e` - Add event
+
+Adds an event task with a *description*, optional start and end date and/or time, and optional extra descriptions.
+
+Examples of usage:
+
+- `event Camp /at 2021-09-18 16:00 ~ 2021-09-20 18:00`
+- `event Festival Meeting /at 2021-09-18 16:00 ~ 18:00 / bring dongle`
+- `event Short Meeting /at 2021-09-11 19:00 / bring dongle`
+- `event minimal event /at 12:00`
+
+Example outcome:
+
+```
+> event Festival Meeting /at 2021-09-18 16:00 ~ 18:00 / bring dongle
+
+Got it. I've added this task:
+[E][ ] Festival Meeting (at: 18 Sep 2021 16:00 to 18:00 -- bring dongle)
+ Now you have 8 tasks in the list.
+```
+
+### `deadline` or `d` - Add deadline
+
+Adds an deadline task with a *description*, optional start and end date and/or time, and optional extra descriptions.
+
+Examples of usage:
+
+- `deadline Assignment /by 2021-09-18 16:00 / check submission`
+- `deadline Script /by 23:59 / email Jess`
+- `event minimal deadline /by 12:00`
+
+Example outcome:
+
+```
+> deadline Festival Meeting /at 2021-09-18 16:00 ~ 18:00 / bring dongle
+
+Got it. I've added this task:
+[E][ ] Festival Meeting (at: 18 Sep 2021 16:00 to 18:00 -- bring dongle)
+ Now you have 8 tasks in the list.
+```
+

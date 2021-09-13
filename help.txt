@@ -1,9 +1,9 @@
-Command List
+**Command List**
 > clear
 DESCRIPTION
  Clears the current task list.
 ____________________________________________________________
-> deadline DESCRIPTION /by DATE_TIME [ / OTHER_INFORMATION ]
+> deadline DESC /by DATE_TIME [ / OTHER_INFO ]
 ALIAS
 > d ...
 DESCRIPTION
@@ -22,11 +22,11 @@ ____________________________________________________________
 DESCRIPTION
  Marks the task at index as complete.
 ____________________________________________________________
-> event DESCRIPTION /at START_DATE_TIME ~ END_DATE_TIME [ / OTHER_INFORMATION ]
+> event DESC /at START ~ END [ / OTHER_INFO ]
 ALIAS
 > e ...
 DESCRIPTION
- Set a event task. START_DATE_TIME and END_DATE_TIME must be 
+ Set a event task. START and END must be 
  formatted as a date (yyyy-MM-dd) or time (HH:mm) or both, 
  separated by a space (yyyy-MM-dd HH:mm).
 EXAMPLES
@@ -37,7 +37,7 @@ ____________________________________________________________
 DESCRIPTION
  Displays the whole list of tasks.
 ____________________________________________________________
-> todo DESCRIPTION
+> todo DESC
 ALIAS
 > t ...
 DESCRIPTION

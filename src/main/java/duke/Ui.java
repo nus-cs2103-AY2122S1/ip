@@ -77,7 +77,7 @@ public class Ui {
                 if (line.contains(sep)) {
                     break;
                 }
-                sb.append("\n\t ");
+                sb.append("\n   ");
                 sb.append(line);
             }
             if (!found) {

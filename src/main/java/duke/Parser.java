@@ -189,6 +189,6 @@ public class Parser {
         if (filtered.size() == 0) {
             return new Record("No matching tasks found.");
         }
-        return new Record("Here are the matching tasks in your list:\n " + filtered);
+        return new Record("Here are the matching tasks in your list:\n" + filtered);
     }
 }
