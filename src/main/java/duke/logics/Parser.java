@@ -29,16 +29,17 @@ public class Parser {
     private static final String TELL = "tell";
     private static final char FIRST_LETTER_DEADLINE = 'D';
     private static final char FIRST_LETTER_EVENT = 'E';
-    private final String message;
+    private final String input;
     private final ParserExceptionDetector parserExceptionDetector;
 
-
     /**
-     * @param message Message users take in to be parsed.
+     * Constructor for Parser that takes in an input from user.
+     *
+     * @param input Input messsage user takes in to be parsed.
      */
-    public Parser(String message) {
-        this.message = message;
-        this.parserExceptionDetector = new ParserExceptionDetector(message);
+    public Parser(String input) {
+        this.input = input;
+        this.parserExceptionDetector = new ParserExceptionDetector(input);
     }
 
     private static boolean isValidDate(int day, int month, int year, int hour, int minute) {
@@ -125,18 +126,18 @@ public class Parser {
      * Returns the key 4 information from users' input encapsulated in a ArrayList of String.
      * They are: operationType, task, time, index. They will be useful when executing in Duke programme.
      *
-     * @return Size of 4 ArrayList contains Message of operationType, task, time and index.
+     * @return Size of 4 ArrayList contains Input of operationType, task, time and index.
      * @throws DukeException Throws when the input cannot be parsed.
      */
     public ArrayList<String> returnSplitComponent() throws DukeException {
-        ArrayList<String> parsedMessageList = new ArrayList<>();
+        ArrayList<String> parsedInputList = new ArrayList<>();
 
-        parsedMessageList.add(getOperationType());
-        parsedMessageList.add(getTask());
-        parsedMessageList.add(getTime());
-        parsedMessageList.add(getIndex().toString());
+        parsedInputList.add(getOperationType());
+        parsedInputList.add(getTask());
+        parsedInputList.add(getTime());
+        parsedInputList.add(getIndex().toString());
 
-        return parsedMessageList;
+        return parsedInputList;
     }
 
     /**
@@ -147,12 +148,12 @@ public class Parser {
      */
     public String getSaveTask() {
         String task;
-        char taskType = message.charAt(0);
+        char taskType = input.charAt(0);
         //Save Data taskType is in the form of 'D', 'E' or 'T'
         if (taskType == FIRST_LETTER_DEADLINE || taskType == FIRST_LETTER_EVENT) {
-            task = message.substring(8, message.indexOf(PIPE, 8) - 1);
+            task = input.substring(8, input.indexOf(PIPE, 8) - 1);
         } else {
-            task = message.substring(8);
+            task = input.substring(8);
         }
 
         return task;
@@ -167,10 +168,10 @@ public class Parser {
     public String getSaveTime() {
         String time;
 
-        char taskType = message.charAt(0);
+        char taskType = input.charAt(0);
         //Save Data taskType is in the form of 'D', 'E' or 'T'
-        if ((taskType == FIRST_LETTER_DEADLINE || taskType == FIRST_LETTER_EVENT) && message.contains(SLASH)) {
-            time = message.substring(message.lastIndexOf(PIPE) + 2);
+        if ((taskType == FIRST_LETTER_DEADLINE || taskType == FIRST_LETTER_EVENT) && input.contains(SLASH)) {
+            time = input.substring(input.lastIndexOf(PIPE) + 2);
         } else {
             time = EMPTY;
         }
@@ -187,10 +188,10 @@ public class Parser {
     public String getOperationType() throws DukeException {
         String operationType;
 
-        if (message.contains(SPACE)) {
-            operationType = message.substring(0, message.indexOf(SPACE));
+        if (input.contains(SPACE)) {
+            operationType = input.substring(0, input.indexOf(SPACE));
         } else {
-            operationType = message;
+            operationType = input;
         }
 
         parserExceptionDetector.detectOperationTypeException();
@@ -209,10 +210,10 @@ public class Parser {
 
         parserExceptionDetector.detectGetTaskException();
 
-        if (message.contains(SLASH)) {
-            task = message.substring(message.indexOf(SPACE) + 1, message.indexOf(SLASH) - 1);
+        if (input.contains(SLASH)) {
+            task = input.substring(input.indexOf(SPACE) + 1, input.indexOf(SLASH) - 1);
         } else {
-            task = message.substring(message.indexOf(SPACE) + 1);
+            task = input.substring(input.indexOf(SPACE) + 1);
         }
         return task;
     }
@@ -229,12 +230,12 @@ public class Parser {
 
         parserExceptionDetector.detectGetTimeException();
 
-        if (message.startsWith(DEADLINE)) {
-            time = message.substring(message.indexOf(BY) + 4);
-        } else if (message.startsWith(EVENT)) {
-            time = message.substring(message.indexOf(AT) + 4);
-        } else if (message.startsWith(TELL)) {
-            time = message.substring(message.indexOf(SPACE) + 1);
+        if (input.startsWith(DEADLINE)) {
+            time = input.substring(input.indexOf(BY) + 4);
+        } else if (input.startsWith(EVENT)) {
+            time = input.substring(input.indexOf(AT) + 4);
+        } else if (input.startsWith(TELL)) {
+            time = input.substring(input.indexOf(SPACE) + 1);
         }
 
         return time;
@@ -253,7 +254,7 @@ public class Parser {
             return -1;
         }
 
-        index = Integer.parseInt(message.substring(message.indexOf(SPACE) + 1)) - 1;
+        index = Integer.parseInt(input.substring(input.indexOf(SPACE) + 1)) - 1;
 
         return index;
     }

@@ -17,6 +17,9 @@ import javafx.scene.shape.Rectangle;
  * @@author Hang Zelin
  *
  * Controller for MainWindow. Provides the layout for the other controls.
+ * Note: All images, including user's profile, Duke's profile, background image
+ * are free to use. They are available in https://www.zhihu.com/, where people
+ * are happy to share nice images with one another.
  */
 public class MainWindow extends AnchorPane {
     @FXML
