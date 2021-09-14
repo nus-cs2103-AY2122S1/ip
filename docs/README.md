@@ -26,11 +26,11 @@ Format: `todo TASK_DESCRIPTION`
 
 Example: `todo Watching TV`
 
-Expected Outcome: (if you have 6 previous tasks)
+Expected Outcome: (if you have 0 previous tasks)
 ```
 Got it. I have added this task:
   [T][ ] Watching TV
-Now you have 7 task(s) in the list.
+Now you have 1 task(s) in the list.
 ```
 
 
@@ -43,11 +43,11 @@ Format: `event TASK_DESCRIPTION /at yyyy-MM-dd HH:mm`
 
 Example: `event Final Exam /at 2021-11-20 09:00`
 
-Expected Outcome: (if you have 6 previous tasks)
+Expected Outcome: (if you have 1 previous tasks)
 ```
 Got it. I have added this task:
   [E][ ] Final Exam (at: Nov 20 2021 09:00)
-Now you have 7 task(s) in the list.
+Now you have 2 task(s) in the list.
 ```
 
 
@@ -60,11 +60,11 @@ Format: `deadline TASK_DESCRIPTION /by yyyy-MM-dd HH:mm`
 
 Example: `deadline Assignment /by 2021-11-20 12:00`
 
-Expected Outcome: (if you have 6 previous tasks)
+Expected Outcome: (if you have 2 previous tasks)
 ```
 Got it. I have added this task:
-  [E][ ] Assignment (by: Nov 20 2021 12:00)
-Now you have 7 task(s) in the list.
+  [D][ ] Assignment (by: Nov 20 2021 12:00)
+Now you have 3 task(s) in the list.
 ```
 
 
@@ -75,7 +75,20 @@ Lists all the tasks in your list of tasks in the order of when they were added.
 
 Format: `list`
 
+Example: `list`
 
+Expected Outcome 1: (if no task)
+```
+There is no task in your list
+```
+
+Expected Outcome 2: (if we go by the previous examples)
+```
+Here are the tasks in your list:
+1.[T][ ] Watching TV
+2.[E][ ] Final Exam (at: Nov 20 2021 09:00)
+3.[D][ ] Assignment (by: Nov 20 2021 12:00)
+```
 
 ### `done` - Mark a task as done
 
@@ -85,6 +98,14 @@ Format: `done TASK_INDEX`
 
 Example: `done 2`
 
+Expected Outcome:
+```
+Here are the tasks in your list:
+1.[T][ ] Watching TV
+2.[E][X] Final Exam (at: Nov 20 2021 09:00)
+3.[D][ ] Assignment (by: Nov 20 2021 12:00)
+```
+
 
 
 ### `delete` - Delete a task
@@ -93,32 +114,104 @@ Deletes a task in your list of tasks as done. The `TASK_INDEX` will be the numbe
 
 Format: `delete TASK_INDEX`
 
-Example: `delete 2`
+Example: `delete 1`
+
+Expected Outcome:
+```
+Here are the tasks in your list:
+1.[E][X] Final Exam (at: Nov 20 2021 09:00)
+2.[D][ ] Assignment (by: Nov 20 2021 12:00)
+```
 
 
 
 ### `find` - Find a task
 
-Finds tasks that contain the string that you input
+Finds tasks that contain the specified keyword.
 
+Format: `find KEYWORD`
 
+Example: `find Exam`
 
-
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
+Expected Outcome 1: (if not found)
 ```
-expected output
+There is no matching task
 ```
+
+Expected Outcome 2: (if found)
+```
+Here are the matching tasks in your list:
+1.[E][X] Final Exam (at: Nov 20 2021 09:00)
+```
+
+
+
+### `do ... after task ...` - Set a task to be started after another task
+
+Sets the task to be done after another task using the task numbers `TASK_INDEX` assigned by the `list` command.
+
+Format: `do TASK_INDEX_1 after task TASK_INDEX_2`
+
+Example: `do 2 after task 1`
+
+Expected Outcome:
+```
+Got it. I have set this task:
+  [D][ ] Assignment (by: Nov 20 2021 12:00)
+After this task:
+  [E][X] Final Exam (at: Nov 20 2021 09:00)
+```
+
+
+
+### `do ... after ...` - Set a task to be started after a time
+
+Sets the task to be done after a time.
+
+Format: `do TASK_INDEX after yyyy-MM-dd HH:mm`
+
+Example: `do 1 after 2021-11-19 12:00`
+
+Expected Outcome:
+```
+Got it. I have set this task:
+  [E][X] Final Exam (at: Nov 20 2021 09:00)
+After Nov 19 2021 12:00
+```
+
+
+
+### `after task` - Get a list of tasks to start doing after another task
+
+Gets a list of tasks to be started after another task with the number `TASK_INDEX` given by the command `list`.
+
+Format: `after TASK_INDEX`
+
+Example: `after task 1`
+
+Expected Outcome: 
+```
+After this task:
+  [E][X] Final Exam (at: Nov 20 2021 09:00)
+You need to do the following tasks:
+1.[D][ ] Assignment (by: Nov 20 2021 12:00)
+```
+
+
+
+### `after` - Get a list of tasks to start doing after a time
+
+Gets a list of tasks to be started after a time.
+
+Format: `after yyyy-MM-dd HH:mm`
+
+Example: `after 2021-11-19 13:00`
+
+Expected Outcome: 
+```
+After:
+  Nov 19 2021 13:00
+You need to do the following tasks:
+1.[E][X] Final Exam (at: Nov 20 2021 09:00)
+```
+
