@@ -35,6 +35,8 @@ public abstract class Command {
             return new EventCommand(userInputWithoutCommandPrefix);
         case FIND:
             return new FindCommand(userInputWithoutCommandPrefix);
+        case HELP:
+            return new HelpCommand();
         case LIST:
             return new ListCommand();
         case TODO:

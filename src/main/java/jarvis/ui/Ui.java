@@ -2,6 +2,7 @@ package jarvis.ui;
 
 import java.util.Scanner;
 
+import jarvis.command.CommandTypeEnum;
 import jarvis.exception.JarvisException;
 import jarvis.message.ExitMessage;
 import jarvis.message.GreetingMessage;
@@ -143,6 +144,27 @@ public class Ui {
                 "Undo protocol complete! %s command(s) reverted!",
                 numberOfUndos
         ));
+    }
+
+    /**
+     * Gets the help message that is to be shown to user.
+     *
+     * @return A OutputMessage containing the help message.
+     */
+    public OutputMessage getHelpMessage() {
+        StringBuilder stringBuilder = new StringBuilder();
+        String heading = "These are the valid commands in the Stark Industries Database:\n\n";
+        stringBuilder.append(heading);
+
+        CommandTypeEnum[] commandTypeEnums = CommandTypeEnum.values();
+
+        for (int i = 0; i < commandTypeEnums.length; i++) {
+            stringBuilder.append(String.format("%s. ", i + 1));
+            stringBuilder.append(commandTypeEnums[i].getHelpTextForCommand());
+            stringBuilder.append("\n\n");
+        }
+
+        return new OutputMessage(stringBuilder.toString());
     }
 
     /**

@@ -81,6 +81,16 @@ public class Parser {
     }
 
     /**
+     * Returns all details needed by the event tasks to determine event date, start time and end time.
+     *
+     * @param eventDateTime User input without command trigger and event description.
+     * @return An array of strings containing the datetime details.
+     */
+    public static String[] getEventDateTimeArray(String eventDateTime) {
+        return eventDateTime.split(" ", 3);
+    }
+
+    /**
      * Gets the task index number from user input.
      *
      * @param userInputWithoutCommandTrigger User input without command trigger.
