@@ -86,6 +86,16 @@ list [#tagname]
 
 <br>
 
+<div align = "center">
+  <img height = "300" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "600" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+
+<br>
+
 <h3 id = 'help'></h3> 
 
 ### `help` - Prints out Command specific help page.
