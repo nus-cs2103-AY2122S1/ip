@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Gui;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
@@ -34,14 +33,13 @@ public class AddCommand extends Command{
     /**
      * A method to execute a command.
      * @param taskList The task list to execute the command on.
-     * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      * @throws DukeException error when adding a task.
+     * @return The response.
      */
     @Override
-    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        assert gui != null : "gui should not be null.";
         String[] parameter;
         LocalDateTime ldt;
         Task task = null;
@@ -80,9 +78,8 @@ public class AddCommand extends Command{
         }
         taskList.addTask(task);
         storage.save(taskList);
-        gui.showResponse(
-                String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
-                        task.getStatusIcon(), task.getDescription(), taskList.size()));
+        return String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
+                        task.getStatusIcon(), task.getDescription(), taskList.size());
     }
 
     /**

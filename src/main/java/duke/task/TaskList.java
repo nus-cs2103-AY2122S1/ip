@@ -49,7 +49,7 @@ public class TaskList {
      * @param taskNo The task number to be removed.
      */
     public void deleteTask(int taskNo) throws DukeException {
-        if (isValidTask(taskNo)) {
+        if (!   isValidTask(taskNo)) {
             // Task does not exist
             throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
         }
@@ -81,7 +81,7 @@ public class TaskList {
      * @param taskNo The task to be marked.
      */
     public void markAsDone(int taskNo) throws DukeException {
-        if (isValidTask(taskNo)) {
+        if (!isValidTask(taskNo)) {
             // Task does not exist
             throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
         }
@@ -93,7 +93,7 @@ public class TaskList {
      * @param taskNo The task to be tagged.
      */
     public void tagTask(int taskNo, String tagDescription) throws DukeException {
-        if (isValidTask(taskNo)) {
+        if (!isValidTask(taskNo)) {
             // Task does not exist
             throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
         }

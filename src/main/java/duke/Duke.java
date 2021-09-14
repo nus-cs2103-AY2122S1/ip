@@ -1,77 +1,50 @@
 package duke;
 
 import duke.command.Command;
-
-import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.ui.Gui;
+import duke.task.TaskList;
 import duke.exception.DukeException;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
 /**
  * A chatbot based on Project Duke
  * @author KelvinSoo
  * @version Level-10
  */
-public class Duke extends Application{
+public class Duke {
 
     private final Storage storage;
-    private TaskList taskList;
     private final Gui gui;
+    private TaskList taskList;
     private final String FILE_PATH = "./data/duke.txt";
 
     /**
      * A constructor to initialize a chatbot.
      */
     public Duke() {
-        gui = new Gui();
+        this.gui = new Gui();
         storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            gui.showResponse(e.getMessage());
+            //gui.showResponse(e.getMessage());
             taskList = new TaskList();
         }
     }
 
-    /**
-     * Start a new chatbot session.
-     * @param stage the stage.
-     */
-    @Override
-    public void start(Stage stage) {
-
-        gui.start(stage);
-        Button sendButton = gui.getButton();
-        TextField userTextField = gui.getUserTextField();
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleOnClickEvent();
-        });
-
-        userTextField.setOnAction((event) -> {
-            handleOnClickEvent();
-        });
-    }
-
-    /**
-     * Handle the event where user press return or clicks on enter button.
-     */
-    private void handleOnClickEvent() {
+    public String getResponse(String input) {
         try {
-            String fullCommand = gui.getCommand();
-            Command c = Parser.parse(fullCommand);
-            c.execute(taskList, gui, storage);
+            Command c = Parser.parse(input);
+            return c.execute(taskList, storage);
         } catch (DukeException e) {
-            gui.showResponse(e.getMessage());
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
+    public Gui getGui() {
+        return gui;
     }
+
 }

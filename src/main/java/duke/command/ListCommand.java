@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Gui;
 import duke.task.TaskList;
 import duke.exception.DukeException;
 
@@ -22,14 +21,13 @@ public class ListCommand extends Command{
     /**
      * Method to execute a list command.
      * @param taskList The task list to execute the command on.
-     * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      * @throws DukeException task list is empty.
+     * @return The response.
      */
     @Override
-    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        assert gui != null : "gui should not be null.";
         boolean isEmptyList = taskList.size() == 0;
         if (isEmptyList) {
             throw new DukeException("It seems that your task list is empty.\n"
@@ -38,7 +36,7 @@ public class ListCommand extends Command{
         StringBuilder sb = new StringBuilder();
         sb.append("Here is your task list:\n");
         sb.append(taskList.toString());
-        gui.showResponse(sb.toString());
+        return sb.toString();
     }
 
     /**

@@ -1,10 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.ui.Gui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.exception.DukeException;
 
 
 /**
@@ -28,14 +27,13 @@ public class DoneCommand extends Command{
      * Execute a done command.
      * Mark a task from the task list as done.
      * @param taskList The task list to execute the command on.
-     * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      * @throws DukeException task does not exist.
+     * @return The response
      */
     @Override
-    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        assert gui != null : "gui should not be null.";
         boolean isValidNumber = parameter.matches("\\d+");
         if (!isValidNumber) {
             // Invalid parameter
@@ -44,8 +42,8 @@ public class DoneCommand extends Command{
         Task task = taskList.getTask(Integer.parseInt(parameter));
         taskList.markAsDone(Integer.parseInt(parameter));
         storage.save(taskList);
-        gui.showResponse(String.format("Nice! I've marked this task as done:\n  %s %s",
-                task.getStatusIcon(), task.getDescription()));
+        return String.format("Nice! I've marked this task as done:\n  %s %s",
+                task.getStatusIcon(), task.getDescription());
     }
 
     /**

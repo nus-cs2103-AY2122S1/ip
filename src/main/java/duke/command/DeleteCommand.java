@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Gui;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.exception.DukeException;
@@ -28,14 +27,13 @@ public class DeleteCommand extends Command{
      * Execute a delete command.
      * Delete a task from the task list.
      * @param taskList The task list to execute the command on.
-     * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      * @throws DukeException invalid task number.
+     * @return The response
      */
     @Override
-    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        assert gui != null : "gui should not be null.";
         boolean isValidNumber = parameter.matches("\\d+");
         if (!isValidNumber) {
             // Invalid parameter
@@ -44,9 +42,8 @@ public class DeleteCommand extends Command{
         Task task = taskList.getTask(Integer.parseInt(parameter));
         taskList.deleteTask(Integer.parseInt(parameter));
         storage.save(taskList);
-        gui.showResponse(
-                String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
-                        task.getStatusIcon(), task.getDescription(), taskList.size()));
+        return String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
+                        task.getStatusIcon(), task.getDescription(), taskList.size());
     }
 
     /**

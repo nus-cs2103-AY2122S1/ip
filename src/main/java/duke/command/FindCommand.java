@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.ui.Gui;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -27,14 +26,13 @@ public class FindCommand extends Command{
      * Execute a find command.
      * find matching tasks from the task list.
      * @param taskList The task list to search.
-     * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
      * @throws DukeException no matching task found.
+     * @return The response.
      */
     @Override
-    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        assert gui != null : "gui should not be null.";
         TaskList searchList = new TaskList();
 
         for (Task t:taskList.getTaskList()) {
@@ -52,7 +50,7 @@ public class FindCommand extends Command{
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
         sb.append(searchList.toString());
-        gui.showResponse(sb.toString());
+        return sb.toString();
     }
 
     /**

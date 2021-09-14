@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.ui.Gui;
 import duke.task.TaskList;
 
 
@@ -12,6 +11,8 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command{
 
+    private String EXIT_MESSAGE = "Bye!";
+
     /**
      * An empty constructor to initialize an exit command.
      */
@@ -21,12 +22,12 @@ public class ExitCommand extends Command{
     /**
      * a method to execute a command.
      * @param taskList The task list to execute the command on.
-     * @param gui The user interface to display the reply.
      * @param storage The place to store the session.
+     * @return the exit message.
      */
     @Override
-    public void execute(TaskList taskList, Gui gui, Storage storage) {
-        gui.exit();
+    public String execute(TaskList taskList, Storage storage) {
+        return EXIT_MESSAGE;
     }
 
     /**
