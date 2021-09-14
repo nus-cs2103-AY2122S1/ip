@@ -2,9 +2,9 @@ package chad;
 
 import java.io.IOException;
 
+import chad.command.ChadInvalidCommandException;
 import chad.command.Command;
 import chad.command.CommandParser;
-import chad.command.ChadInvalidCommandException;
 import chad.storage.StorageHandler;
 import chad.task.TaskHandler;
 import chad.ui.Ui;
