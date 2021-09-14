@@ -26,7 +26,14 @@ public class GUI{
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you? :)");
 
-        return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)";
+        return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)\n" +
+                "Please enter :\n"+ "'list' to see your list of tasks \n" + "'todo {your todo}' to add a todo\n" +
+                "'event {event description} /at YYYY-MM-DD hhmm' to add an event\n" +
+                "'deadline {deadline description} /by YYYY-MM-DD hhmm' to add a deadline\n" +
+                "'delete {INDEX}' to delete a task of specified INDEX\n" +
+                "'find {KEYWORD}' to display all the tasks which have specified KEYWORD\n" +
+                "'done INDEX' to mark a task of specified INDEX as done\n" +
+                "'bye' to save your current task list\n";
     }
 
     /**
