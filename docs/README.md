@@ -14,10 +14,10 @@ All you need to do is,
 And it is **FREE!**
 
 ## Features 
-*[x] Manages tasks
-*[x] User-friendly GUI
-*[ ] Manages deadlines (Coming soon)
-*[ ] Sends reminders (Coming soon)
+* [x] Manages tasks
+* [x] User-friendly GUI
+* [ ] Manages deadlines (Coming soon)
+* [ ] Sends reminders (Coming soon)
 
 ### Manages tasks
 Winston is able to help you manage your tasks through commands fed in through text. The commands to use Winston can be found under the header Usage.
