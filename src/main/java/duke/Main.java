@@ -1,4 +1,4 @@
-import duke.Duke;
+package duke;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
