@@ -60,7 +60,7 @@ public class Ui {
 
         // setup styling/formatting
         stage.setScene(scene);
-        stage.setTitle("Duke");
+        stage.setTitle("2Butler");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

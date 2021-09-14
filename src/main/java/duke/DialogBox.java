@@ -14,6 +14,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextFlow;
 
 
@@ -47,6 +49,7 @@ public class DialogBox extends HBox {
         textLabel.setStyle("-fx-text-fill: white;");
         textLabel.setWrapText(true);
         textLabel.setMaxWidth(250);
+        textLabel.setFont(Font.font("Courier New", FontWeight.NORMAL, 10));
         textFlow.getChildren().add(textLabel);
         this.setPadding(new Insets(0, 0, 30, 0));
         this.setAlignment(Pos.TOP_RIGHT);
@@ -89,7 +92,7 @@ public class DialogBox extends HBox {
         botDialogBox.displayPicture.setTranslateY(10);
         clipImageViewToCircle(botDialogBox.displayPicture, 100);
         botDialogBox.setPadding(new Insets(0, 0, 30, 0));
-        botDialogBox.setDialogBoxBackgroundColor(200, 200, 200);
+        botDialogBox.setDialogBoxBackgroundColor(150, 150, 150);
         botDialogBox.flip();
         return botDialogBox;
     }
@@ -97,7 +100,7 @@ public class DialogBox extends HBox {
     /**
      * Factory method to produce dialogue boxes given the dialogue type and input text.
      *
-     * @param text Input text to be printed as dialogue.
+     * @param text          Input text to be printed as dialogue.
      * @param dialogBoxType Type of the dialogue box.
      * @return
      */
@@ -127,7 +130,7 @@ public class DialogBox extends HBox {
 
     private void setDialogBoxBackgroundColor(int red, int green, int blue) {
         this.setBackground(
-            new Background(new BackgroundFill(Color.rgb(red, green, blue, 0.75), new CornerRadii(35),
+            new Background(new BackgroundFill(Color.rgb(red, green, blue, 0.75), new CornerRadii(30),
                 null)));
     }
 
