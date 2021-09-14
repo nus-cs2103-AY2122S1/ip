@@ -56,7 +56,7 @@ public class Storage {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(dukeData));
         String line = bufferedReader.readLine();
         while (line != null) {
-            String status = line.substring(1, 2);
+            String status = line.substring(3, 4);
             if (line.startsWith("T")) {
                 Task newTask = new Todo(line.substring(5), status.equals("1"));
                 list.add(newTask);

@@ -1,5 +1,6 @@
 D |0| return book | 14 Nov 2021 6.00PM
 T |0| submit homework
 T |1| do homework
-E |0| go to funfair | 09 Oct 2021 5.45PM
+E |0| go to career fair| 09 Oct 2021 5.45PM
 T |0| buy coffee
+T |0| buy christmas decorations
