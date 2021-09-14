@@ -37,6 +37,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        TaskList copyOfTaskListBeforeChange = tasks.clone();
         Task newTask;
         switch (taskType) {
         case "todo":
@@ -54,6 +55,12 @@ public class AddCommand extends Command {
         tasks.addTask(newTask);
         assert tasks.doesContain(newTask) : "Should have added new task into TaskList";
         storage.updateTasks(tasks);
+        storage.setHistory(copyOfTaskListBeforeChange, this);
         ui.showAddedNewTask(newTask, tasks);
+    }
+
+    @Override
+    public String toString() {
+        return "Add Tasks Command";
     }
 }

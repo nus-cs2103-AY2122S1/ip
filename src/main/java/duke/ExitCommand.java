@@ -19,4 +19,9 @@ public class ExitCommand extends Command {
         ui.showGoodbye();
         Platform.exit();
     }
+
+    @Override
+    public String toString() {
+        return "Exit Program Command";
+    }
 }

@@ -1,6 +1,6 @@
 package duke;
 
-public class Task {
+public class Task implements Cloneable {
     protected String description;
     protected boolean isDone;
 
@@ -46,5 +46,14 @@ public class Task {
 
     public boolean matches(String query) {
         return description.contains(query);
+    }
+
+    @Override
+    public Task clone() {
+        try {
+            return (Task) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new DukeException("Task cannot be cloned.");
+        }
     }
 }

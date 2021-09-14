@@ -24,12 +24,20 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
-        if (tasks.getLength() < taskIndex || 0 >= taskIndex) {
+        TaskList copyOfTaskListBeforeChange = tasks.clone();
+        if (tasks.getLength() <= taskIndex || 0 > taskIndex) {
             throw new DukeException("Invalid task index provided!");
         }
+        storage.setHistory(tasks, this);
         Task removedTask = tasks.removeTask(taskIndex);
         assert !tasks.doesContain(removedTask) : "Should have removed new task from TaskList";
         storage.updateTasks(tasks);
+        storage.setHistory(copyOfTaskListBeforeChange, this);
         ui.showRemovedTask(removedTask, tasks);
+    }
+
+    @Override
+    public String toString() {
+        return "Delete Task Command";
     }
 }

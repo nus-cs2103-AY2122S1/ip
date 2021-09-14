@@ -91,6 +91,14 @@ public class Ui {
         );
     }
 
+    public void showUndone(HistoryState lastHistoryState) {
+        Command previousCommand = lastHistoryState.getCommand();
+        TaskList previousTaskList = lastHistoryState.getTaskList();
+        showResponse("Successfully undone previous command: " + previousCommand);
+        showResponse("Task List after undoing: ");
+        showTaskList(previousTaskList);
+    }
+
     public void clearInput() {
         userInput.clear();
         assert readCommand().equals("") : "Should have cleared input field";

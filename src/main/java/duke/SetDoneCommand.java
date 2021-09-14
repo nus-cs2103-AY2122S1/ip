@@ -25,13 +25,21 @@ public class SetDoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        TaskList copyOfTaskListBeforeChange = tasks.clone();
         if (tasks.getLength() <= taskIndex || 0 > taskIndex) {
             throw new DukeException("Invalid task index provided!");
         }
         Task currTask = tasks.getTask(taskIndex);
+        storage.setHistory(tasks, this);
         currTask.markAsDone();
         assert currTask.getDoneStatus() : "Task should have been marked as done";
         storage.updateTasks(tasks);
+        storage.setHistory(copyOfTaskListBeforeChange, this);
         ui.showMarkedAsDone(currTask);
+    }
+
+    @Override
+    public String toString() {
+        return "Set Tasks to Done Command";
     }
 }
