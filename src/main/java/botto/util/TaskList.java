@@ -41,15 +41,6 @@ public class TaskList {
     }
 
     /**
-     * add the new task to the user's task list.
-     *
-     * @param task new task to be added.
-     */
-    public void addTask(Task task) {
-        this.tasks.add(task);
-    }
-
-    /**
      * Mark the task at the specific position as done.
      *
      * @param index index of the task to be marked as done.
@@ -67,6 +58,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * add the new task to the user's task list.
+     *
+     * @param task new task to be added.
+     */
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
 
     /**
      * Delete the task at the specific position.

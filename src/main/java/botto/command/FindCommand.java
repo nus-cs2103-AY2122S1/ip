@@ -10,7 +10,7 @@ import botto.util.Storage;
 import botto.util.TaskList;
 
 /**
- * Command for finding a keyword
+ * Command for finding a keyword.
  */
 public class FindCommand implements Command {
     private String command;

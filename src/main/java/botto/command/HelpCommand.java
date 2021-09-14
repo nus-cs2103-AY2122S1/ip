@@ -5,7 +5,7 @@ import botto.util.Storage;
 import botto.util.TaskList;
 
 /**
- * Command for printing help manual
+ * Command for printing help manual.
  */
 public class HelpCommand implements Command {
 

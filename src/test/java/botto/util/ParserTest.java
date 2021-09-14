@@ -11,6 +11,8 @@ import botto.command.AddEventCommand;
 import botto.command.AddToDoCommand;
 import botto.command.DeleteCommand;
 import botto.command.ExitCommand;
+import botto.command.FindCommand;
+import botto.command.HelpCommand;
 import botto.command.MarkDoneCommand;
 import botto.command.ShowListCommand;
 
@@ -18,7 +20,7 @@ public class ParserTest {
 
     @Test
     public void parse_allCommands_success() throws BottoException {
-        String command = "list     ";
+        String command = "list";
         assertEquals(ShowListCommand.class, Parser.parse(command).getClass());
         command = "done 5";
         assertEquals(MarkDoneCommand.class, Parser.parse(command).getClass());
@@ -32,20 +34,24 @@ public class ParserTest {
         assertEquals(DeleteCommand.class, Parser.parse(command).getClass());
         command = "bye";
         assertEquals(ExitCommand.class, Parser.parse(command).getClass());
+        command = "find book";
+        assertEquals(FindCommand.class, Parser.parse(command).getClass());
+        command = "help";
+        assertEquals(HelpCommand.class, Parser.parse(command).getClass());
     }
 
     @Test
     public void parse_undefinedCommands_exceptionThrown() {
         try {
             String command = "";
-            assertEquals(ShowListCommand.class, Parser.parse(command).getClass());
+            Parser.parse(command);
         } catch (BottoException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
 
         try {
             String command = "I want a bowl";
-            assertEquals(DeleteCommand.class, Parser.parse(command).getClass());
+            Parser.parse(command);
         } catch (BottoException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
