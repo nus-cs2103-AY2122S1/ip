@@ -17,11 +17,9 @@ public class CommandParser {
     private static final String EMPTY_INPUT_MESSAGE = "Input is empty. Type \"help\" for more information.";
     private static final String TOO_LITTLE_ARGUMENTS_MESSAGE = "Too little arguments. Type \"help\" "
         + "followed by the command for more information.";
-    private static final String FULL_TASKLIST_MESSAGE = "Unable to add task. List is full. Consider deleting"
-        + " some tasks";
     private static final String INVALID_NUMBER_MESSAGE = "Please input a valid task number after the command.";
     private final String output;
-    private boolean willExit;
+    private boolean isExiting;
 
     /**
      * Creates a new command parser for the input.
@@ -39,12 +37,12 @@ public class CommandParser {
         CommandsEnum commandEnum;
         try {
             commandEnum = CommandsEnum.valueOf(inputArr[0].toUpperCase());
-            this.willExit = false;
+            this.isExiting = false;
             switch (commandEnum) {
             // Single word commands
             case BYE:
                 output = ui.getGoodByeMessage();
-                willExit = true;
+                isExiting = true;
                 return;
             case LIST:
                 output = ui.getAllTasksMessage(taskList.getAllTasks(), taskList.size());
@@ -60,7 +58,7 @@ public class CommandParser {
                 if (inputArr.length < 2) {
                     throw new InvalidCommandException(TOO_LITTLE_ARGUMENTS_MESSAGE);
                 }
-                output = parseMultiword(inputArr[1], commandEnum, taskList, ui);
+                output = parseMultiWord(inputArr[1], commandEnum, taskList, ui);
             }
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException(INVALID_COMMAND);
@@ -81,7 +79,7 @@ public class CommandParser {
      * @param ui           The user interface generating the output messages.
      * @return The output string from ui.
      */
-    private static String parseMultiword(String inputWords, CommandsEnum commandsEnum, TaskList taskList, Ui ui) {
+    private static String parseMultiWord(String inputWords, CommandsEnum commandsEnum, TaskList taskList, Ui ui) {
         switch (commandsEnum) {
         case FIND:
             return ui.getTasksWithPatternMessage(inputWords,
@@ -145,7 +143,7 @@ public class CommandParser {
      * @return true if and only if the command is to exit
      */
     public boolean willExit() {
-        return willExit;
+        return isExiting;
     }
 
 }

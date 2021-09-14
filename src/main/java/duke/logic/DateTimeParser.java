@@ -56,14 +56,6 @@ public class DateTimeParser {
         }
     }
 
-    private LocalDate parseDate(String date) {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
-    }
-
-    private LocalTime parseTime(String time) {
-        return LocalTime.parse(time, DateTimeFormatter.ofPattern("H:m"));
-    }
-
     /**
      * Returns the LocalDateTime object associated with the date and time represented in the data string.
      *
@@ -72,6 +64,14 @@ public class DateTimeParser {
      */
     public static LocalDateTime getDateTimeFromDataString(String data) {
         return LocalDateTime.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    private LocalDate parseDate(String date) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
+    }
+
+    private LocalTime parseTime(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern("H:m"));
     }
 
     /**

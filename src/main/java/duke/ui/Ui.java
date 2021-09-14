@@ -19,7 +19,7 @@ import duke.task.TaskList;
  */
 public class Ui {
     private final String name;
-    private boolean willExit = false;
+    private boolean isExiting = false;
 
     /**
      * Creates a new instance of a user interface by creating a new scanner and querying for the user's name.
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     public boolean willExit() {
-        return willExit;
+        return isExiting;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Ui {
         CommandParser cmdParser;
         try {
             cmdParser = new CommandParser(userInput, taskList, storage, this);
-            willExit = cmdParser.willExit();
+            isExiting = cmdParser.willExit();
             output += cmdParser.getOutput() + "\n";
         } catch (DukeException e) {
             output += e.getMessage() + "\n";
@@ -59,15 +59,16 @@ public class Ui {
     }
 
     /**
-     * Called when the user wants to exit the program.
+     * Returns the goodbye message. Called when the user wants to exit the program.
      *
      * @return the output string
      */
     public String getGoodByeMessage() {
-        return ("Bye, " + name + "! Hope to see you again soon.");
+        return "Bye, " + name + "! Hope to see you again soon.";
     }
 
     /**
+     * Returns the successful add task message.
      * Called when the user successfully adds the task to tasklist.
      *
      * @param task       the task that is added
@@ -82,6 +83,7 @@ public class Ui {
     }
 
     /**
+     * Returns the successful remove task message.
      * Called when the user removes a task from the task list.
      *
      * @param task the task that is removed or deleted

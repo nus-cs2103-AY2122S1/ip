@@ -13,15 +13,16 @@ import duke.task.TaskList;
 public class TextCliUi {
     private final Scanner sc;
     private final Ui ui;
-    private boolean willExit;
+    private boolean isExiting;
 
     /**
-     * Creates a new instance of a user interface by creating a new scanner and querying for the user's name.
+     * Creates a new instance of a user interface by creating a new scanner and
+     * querying for the user's name.
      */
     public TextCliUi() {
         sc = new Scanner(System.in);
         String name = "";
-        willExit = false;
+        isExiting = false;
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -39,7 +40,7 @@ public class TextCliUi {
     }
 
     public boolean willExit() {
-        return willExit;
+        return isExiting;
     }
 
     /**
@@ -52,7 +53,7 @@ public class TextCliUi {
         String userInput = sc.nextLine();
         try {
             CommandParser cmdParser = new CommandParser(userInput, taskList, storage, ui);
-            willExit = cmdParser.willExit();
+            isExiting = cmdParser.willExit();
             System.out.println(cmdParser.getOutput());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
