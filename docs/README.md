@@ -43,7 +43,7 @@ Expected outcome:
 Now you have 1 tasks in the list.`
 
 
-### `deadline (description) /by (date)` - Adds a Deadline task
+### Adds a Deadline task - `deadline (description) /by (date)`
 
 Adds a Deadline task with the task name (description) and (date).
 
@@ -95,11 +95,9 @@ Example of usage:
 
 Expected outcome:
 
-`
-1.[T][] read book
+`1.[T][] read book
 2.[D][] return book(by:Sep 30 2021)
 3.[E][] team meeting(at:Aug 6th 2-4pm)
-4.[DA][] return book(DoAfter:return book)
-`
+4.[DA][] return book(DoAfter:return book)`
 
 
