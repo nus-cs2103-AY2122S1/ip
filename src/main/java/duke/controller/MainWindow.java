@@ -1,7 +1,6 @@
 package duke.controller;
 
 import duke.Duke;
-import duke.HelpPage;
 import duke.Main;
 
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;

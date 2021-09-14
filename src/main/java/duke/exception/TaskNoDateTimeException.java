@@ -17,6 +17,11 @@ public class TaskNoDateTimeException extends DukeException {
         this.error = String.format("OOPS!!! Please enter a date/time for your %s!\n", task);
     }
 
+    /**
+     * Returns error message
+     *
+     * @return error message
+     */
     @Override
     public String getError() {
         return this.error;

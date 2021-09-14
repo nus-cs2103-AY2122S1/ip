@@ -1,6 +1,8 @@
-package duke;
+package duke.controller;
 
+import duke.Main;
 import duke.command.Command;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +16,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for Help Page.
+ */
 public class HelpPage extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -63,7 +68,7 @@ public class HelpPage extends AnchorPane {
         tableView.getColumns().add(function);
         tableView.getColumns().add(format);
 
-        ObservableList data = FXCollections.observableArrayList(
+        ObservableList<Command> data = FXCollections.observableArrayList(
                 new Command("bye", "exit app", "bye"),
                 new Command("list", "list all functions", "list"),
                 new Command("todo", "add tasks without any date/time attached",

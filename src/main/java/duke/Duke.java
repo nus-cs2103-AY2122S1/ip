@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * A Personal Assistant Chat bot that helps to keep track of tasks

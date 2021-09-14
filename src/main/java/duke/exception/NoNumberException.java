@@ -14,6 +14,11 @@ public class NoNumberException extends DukeException {
         super(msg);
     }
 
+    /**
+     * Returns error message
+     *
+     * @return error message
+     */
     @Override
     public String getError() {
         String error = "OOPS!!! Please enter a task number!";

@@ -14,6 +14,11 @@ public class InvalidEntryException extends DukeException {
         super(msg);
     }
 
+    /**
+     * Returns error message
+     *
+     * @return error message
+     */
     @Override
     public String getError() {
         String error = "OOPS!!! I'm sorry, but I don't know what that means :-(";
