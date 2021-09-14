@@ -1,4 +1,17 @@
 # Jarvis User Guide
+> “Your mind is for having ideas, not holding them.” – David Allen
+
+* Have you always wanted your own personal assistant?
+* Are you tired of manually keeping track of your ever-changing tasks?
+
+Then Jarvis is perfect for you :wink:
+
+Jarvis is an **ABSOLUTELY FREE** and easy-to-use chatbot that can manage your tasks for you!
+
+## Quick Start
+1. Ensure that Java 11 is installed.
+2. Download the latest JAR file from [here]()
+3. Open duke.jar 
 
 ## Features
 * Adding a todo task: `todo`
@@ -19,9 +32,8 @@
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. 
   (e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter that can be used as `todo upload assignment`.)
 * Parameters must be in the given fixed order.
-
 <br/><br/>
-  
+
 ### Adding a todo task: `todo`
 Adds a todo task to the task list.
 
@@ -29,6 +41,7 @@ Format: `todo TASK_DESCRIPTION`
 * `TASK_DESCRIPTION` can include spaces.
 
 Example(s): `todo upload assignment`
+
 <br/><br/>
 
 ### Adding a deadline task: `deadline`
@@ -131,3 +144,9 @@ Format: `notes`
 Exits the program.
 
 Format: `bye`
+<br/><br/>
+
+## Acknowledgements
+### Reused from [James_D](https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx) with some modifications
+1. `Main::end()`
+
