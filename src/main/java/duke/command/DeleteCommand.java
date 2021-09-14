@@ -35,10 +35,10 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws MalformedCommandException {
+    public String execute(TaskList tasks, Ui ui) throws MalformedCommandException {
         Task taskDeleted = tasks.delete(taskIndex - 1);
         int numTasksRemaining = tasks.numTasks();
-        ui.showTaskDeletedMessage(taskDeleted, numTasksRemaining);
+        return ui.showTaskDeletedMessage(taskDeleted, numTasksRemaining);
     }
 
     @Override

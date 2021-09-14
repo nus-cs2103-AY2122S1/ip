@@ -31,15 +31,15 @@ public class Ui {
     /**
      * Prints welcome message
      */
-    public void showWelcomeMessage() {
-        display(WELCOME_MESSAGE);
+    public String showWelcomeMessage() {
+        return WELCOME_MESSAGE;
     }
 
     /**
      * Prints exit message
      */
-    public void showExitMessage() {
-        display(EXIT_MESSAGE);
+    public String showExitMessage() {
+        return EXIT_MESSAGE;
     }
 
     /**
@@ -47,8 +47,9 @@ public class Ui {
      *
      * @param tasks List of tasks user currently has
      */
-    public void showTaskList(TaskList tasks) {
-        display("Here are the tasks in your list:\n" + tasks);
+    public String showTaskList(TaskList tasks) {
+        System.out.println("Here are the tasks in your list:\n" + tasks);
+        return "Here are the tasks in your list:\n" + tasks;
     }
 
     /**
@@ -57,9 +58,9 @@ public class Ui {
      * @param task Task added
      * @param numRemainingTasks Total number of tasks user has
      */
-    public void showTaskAddedMessage(Task task, int numRemainingTasks) {
-        display("Got it. I've added this task:\n  " + task + '\n'
-                + "You have " + numRemainingTasks + " tasks in the list\n");
+    public String showTaskAddedMessage(Task task, int numRemainingTasks) {
+        return "Got it. I've added this task:\n  " + task + '\n'
+            + "You have " + numRemainingTasks + " tasks in the list\n";
     }
 
     /**
@@ -68,9 +69,9 @@ public class Ui {
      * @param task Task deleted
      * @param numRemainingTasks Total number of tasks user has
      */
-    public void showTaskDeletedMessage(Task task, int numRemainingTasks) {
-        display("Noted. I've removed this task:\n " + task + '\n'
-                + "You have " + numRemainingTasks + " tasks in the list\n");
+    public String showTaskDeletedMessage(Task task, int numRemainingTasks) {
+        return "Noted. I've removed this task:\n " + task + '\n'
+            + "You have " + numRemainingTasks + " tasks in the list\n";
     }
 
     /**
@@ -78,8 +79,8 @@ public class Ui {
      *
      * @param task Task marked done
      */
-    public void showTaskDoneMessage(Task task) {
-        display("Nice! this task has been marked done:\n  " + task + "\n");
+    public String showTaskDoneMessage(Task task) {
+        return "Nice! this task has been marked done:\n  " + task + "\n";
     }
 
     /**
@@ -87,8 +88,8 @@ public class Ui {
      *
      * @param tasks List of filtered tasks
      */
-    public void showFilteredTaskList(TaskList tasks) {
-        display("Here are the matching tasks in your list:\n" + tasks);
+    public String showFilteredTaskList(TaskList tasks) {
+        return "Here are the matching tasks in your list:\n" + tasks;
     }
 
     /**
@@ -96,8 +97,8 @@ public class Ui {
      *
      * @param e Exception object.
      */
-    public void showErrorMessage(Exception e) {
-        display(e.getMessage());
+    public String showErrorMessage(Exception e) {
+        return e.getMessage();
     }
 
     /**

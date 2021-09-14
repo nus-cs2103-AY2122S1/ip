@@ -24,9 +24,9 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         TaskList filteredTasks = tasks.findTasks(searchTerm);
-        ui.showFilteredTaskList(filteredTasks);
+        return ui.showFilteredTaskList(filteredTasks);
     }
 
     @Override
