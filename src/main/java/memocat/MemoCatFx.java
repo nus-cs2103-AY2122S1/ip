@@ -52,7 +52,34 @@ public class MemoCatFx extends Application {
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
+        AnchorPane mainLayout = setUpComponents(stage);
 
+        //Step 2. Formatting the window to look as expected
+        setUpAppSize(stage, mainLayout);
+        setUpScrollAndSend();
+
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        // initial greeting message
+        greet(dialogContainer);
+
+        // more code to be added here later
+    }
+
+    /**
+     * Sets up initial components of the stage.
+     *
+     * @param stage The stage of the app.
+     * @return The main layout of the app.
+     */
+    private AnchorPane setUpComponents(Stage stage) {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -69,7 +96,16 @@ public class MemoCatFx extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //Step 2. Formatting the window to look as expected
+        return mainLayout;
+    }
+
+    /**
+     * Sets up sizes of the app.
+     *
+     * @param stage      The stage of the app.
+     * @param mainLayout The main layout of the app.
+     */
+    private void setUpAppSize(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("MemoCat");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -86,9 +122,13 @@ public class MemoCatFx extends Application {
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    }
 
+    /**
+     * Sets up scroll bar and send button of the app.
+     */
+    private void setUpScrollAndSend() {
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -111,20 +151,6 @@ public class MemoCatFx extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        // initial greeting message
-        greet(dialogContainer);
-
-        // more code to be added here later
     }
 
     /**
