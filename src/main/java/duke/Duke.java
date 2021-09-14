@@ -28,6 +28,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the input data
+     *
+     * @param input the input message by user
+     * @return String to be shown to user
+     */
     public String getResponse(String input) {
         if (input.equals("start")) {
             return Ui.startBot();

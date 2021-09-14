@@ -26,6 +26,13 @@ public class DialogBox extends HBox {
     private static final String[] dukeStyleClasses = {"duke-dialog-background"};
     private static final String[] userStyleClasses = {"user-dialog-background"};
 
+    /**
+     * Constructor fo DialogBox
+     *
+     * @param text the input text
+     * @param img the image to be attached
+     * @param styleClass the style to follow
+     */
     private DialogBox(String text, Image img, String... styleClass) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -52,10 +59,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the DialogBox for user
+     *
+     * @param text the input message form user
+     * @param img the user image
+     * @return the DialogBox with a String and Image
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, userStyleClasses);
     }
 
+    /**
+     * Gets the DialogBox for Duke to respond
+     *
+     * @param text the response duke will give
+     * @param img the image of duke
+     * @return the DialogBox with duke response and the image
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, dukeStyleClasses);
         db.flip();

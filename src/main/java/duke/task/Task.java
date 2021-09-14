@@ -26,6 +26,11 @@ public class Task {
         return taskName;
     }
 
+    /**
+     * Sets the name of teh task
+     *
+     * @param taskName the input name of the task
+     */
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
@@ -61,6 +66,9 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Marks the task as incomplete
+     */
     public void uncheckTask() {
         isDone = false;
     }

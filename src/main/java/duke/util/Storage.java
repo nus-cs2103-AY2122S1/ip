@@ -73,10 +73,22 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Gets the name of the task
+     *
+     * @param line the input String
+     * @return the task name
+     */
     private String getTaskName(String line) {
         return line.substring(5, line.substring(5).indexOf("|") + 5);
     }
 
+    /**
+     * Gets the Duration of the task
+     *
+     * @param line the input String
+     * @return the LocalDateTime of the task
+     */
     private LocalDateTime getDuration(String line) {
         String due = line.substring(line.indexOf("|") + 2);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");

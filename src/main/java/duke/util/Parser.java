@@ -110,6 +110,12 @@ public class Parser {
         return UNKNOWN_COMMAND_MESSAGE;
     }
 
+    /**
+     * Gets the name of the task
+     *
+     * @param message the input message by the user
+     * @return a String that represents the name of the task
+     */
     private String getTaskName(String message) {
         if (message.startsWith("todo")) {
             return message.substring(message.indexOf(" "));
@@ -118,6 +124,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the duration of the task
+     *
+     * @param message the input message by the user
+     * @return a LocalDateTime that represents the Date and Time specified by user
+     */
     private LocalDateTime getDuration(String message) {
         String temp = message.substring(message.indexOf("/") + 1);
         String due = temp.substring(temp.indexOf(" ") + 1);
@@ -126,12 +138,26 @@ public class Parser {
 
     }
 
+    /**
+     * Checks if the input by user is valid
+     *
+     * @param message input message by the user
+     * @param type the type of task
+     * @throws DescriptionEmptyException if the task description is empty
+     */
     public void isValidEntry(String message, String type) throws DescriptionEmptyException {
         if (message.length() <= type.length() || message.substring(message.indexOf(" ")).isBlank()) {
             throw new DescriptionEmptyException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
         }
     }
 
+    /**
+     * Checks if the input has the correct format
+     *
+     * @param message input message by the user
+     * @param type the type of task
+     * @throws IncorrectFormatException if the format the user input is wrong
+     */
     public static void isFormatCorrect(String message, String type) throws IncorrectFormatException {
         if (type.equals("deadline")) {
             if (!message.contains("/by")) {

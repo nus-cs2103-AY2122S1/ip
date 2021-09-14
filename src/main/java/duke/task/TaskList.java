@@ -56,26 +56,48 @@ public class TaskList {
         }
     }
 
+    /**
+     * Provides the Prompt to update task
+     *
+     * @return a String of how to update task information
+     */
     public String updatePrompt() {
         return "To update Task Name input:\n  edit-N/(Task Index) (New Task Name)\n"
                 + "\nTo update Task Duration input:\n  edit-D/(Task Index) (New Task Date and Time)";
     }
 
-    public String updateTaskName(int item, String newData) throws DukeException {
-        if (item > tasks.size() || item <= 0) {
+    /**
+     * Updates the Name of the specified task
+     *
+     * @param index The index of the task
+     * @param newData The new name of the task
+     * @return a String to show that the task has been updated
+     * @throws DukeException if the task cannot be found
+     */
+    public String updateTaskName(int index, String newData) throws DukeException {
+        if (index > tasks.size() || index <= 0) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         } else {
-            Task taskToUpdate = tasks.get(item - 1);
+            Task taskToUpdate = tasks.get(index - 1);
             taskToUpdate.setTaskName(newData);
+            taskToUpdate.uncheckTask();
             return "Got it. I've updated this task:\n "+ taskToUpdate.displayTask();
         }
     }
 
-    public String updateTaskDuration(int item, LocalDateTime newData) throws DukeException {
-        if (item > tasks.size() || item <= 0) {
+    /**
+     * Updates the Date and Time of the task
+     *
+     * @param index The index of the task
+     * @param newData The new date and time of the task
+     * @return a String to show that the task has been updated
+     * @throws DukeException if the task cannot be found
+     */
+    public String updateTaskDuration(int index, LocalDateTime newData) throws DukeException {
+        if (index > tasks.size() || index <= 0) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         } else {
-            Task taskToUpdate = tasks.get(item - 1);
+            Task taskToUpdate = tasks.get(index- 1);
             if (taskToUpdate instanceof Deadline) {
                 ((Deadline) taskToUpdate).setDuration(newData);
             } else if (taskToUpdate instanceof Event) {
@@ -83,6 +105,7 @@ public class TaskList {
             } else {
                 throw new DukeException("This Task type does not have a Duration tied to it!");
             }
+            taskToUpdate.uncheckTask();
             return "Got it. I've updated this task:\n "+ taskToUpdate.displayTask();
         }
     }
@@ -115,10 +138,10 @@ public class TaskList {
     }
 
     /**
-     * Gets the index of the Task to check
+     * Gets the index of the Task
      *
      * @param message the input command to check a task
-     * @return the list index for the task to be checked
+     * @return the index for the task in the list
      */
     public int getTaskIndex(String message) {
         StringBuilder number;
