@@ -4,8 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import duke.Duke;
+import duke.command.HelpCommand;
 import duke.commandresult.CommandResult;
 import duke.exception.DukeException;
+import duke.tasklist.TaskList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,6 +47,15 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello! Welcome to Duke!", dukeImage)
         );
+        dialogContainer.getChildren().addAll(
+                getDialogBoxWithHelpCommand()
+        );
+    }
+
+    private DialogBox getDialogBoxWithHelpCommand() {
+        HelpCommand helpCommand = new HelpCommand(new TaskList());
+        CommandResult executedHelpCommand = helpCommand.execute();
+        return DialogBox.getDukeDialog(executedHelpCommand.getFeedbackResult(), dukeImage);
     }
 
     /**
