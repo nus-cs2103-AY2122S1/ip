@@ -1,29 +1,87 @@
-# User Guide
+# User Guide to DUKE
 
 ## Features 
 
-### Feature-ABC
+### Adding a task: `todo`, `event`, `deadline`
+Adds a task to the task list.
 
-Description of the feature.
+There are 3 types of tasks: todo, event, and deadline, each with a
+different format.
 
-### Feature-XYZ
+Format:
+*  Todo:
+    * `todo TASK_DESCRIPTION`
+*  Event:
+    * `event TASK_DESCRIPTION /at TIME`
+*  Deadline:
+    * `deadline TASK_DESCRIPTION /by TIME`
+    
+TASK_DESCRIPTION refers to the description of the task.
 
-Description of the feature.
+TIME refers to the time in which an event occurs or a deadline is 
+due. TIME has a format of 'YYY-MM-DD hh-mm'
 
-## Usage
+Examples:
+- deadline finalise IP /by 2021-09-15 2359
+- todo eat breakfast
 
-### `Keyword` - Describe action
+### Display tasks: `list`
 
-Describe the action and its outcome.
+Displays all tasks in the list.
 
-Example of usage: 
+Format: list
 
-`keyword (optional arguments)`
+## Delete task: `delete`
 
-Expected outcome:
+Deletes a specified task.
 
-Description of the outcome.
+Format: `delete INDEX`
 
-```
-expected output
-```
+- Deletes a task of specified INDEX
+- INDEX refers to the ordering of the tasks in the list
+- INDEX has to be an integer greater than 0
+
+Examples:
+- `delete 1` Deletes the first task on the list
+
+## Complete task: `done`
+
+Marks a task as completed.
+
+Format: `done INDEX`
+- Marks a task of the specified INDEX as completed
+- INDEX refers to the ordering of the tasks in the list
+- INDEX has to be an integer greater than 0
+
+Examples:
+- `done 3` Marks the 3rd task on the list as completed
+
+## Find task: `find`
+
+Finds tasks which contain a specified keyword.
+
+Format: `find KEYWORD`
+- displays a list of tasks which contain KEYWORD
+
+Example:
+- `find eat` displays all tasks which contain the word 'eat'
+
+## Sort task: `sort`
+
+Sorts the tasks in specified order
+
+Format:
+* order by date
+   * `sort by date`
+* order by date in reverse 
+   * `sort by date reverse`
+* order by type of task
+   * `sort by type`
+   
+## Save task: `bye`
+
+Saves the list of task to /data/Duke.txt
+
+Format: `bye`
+
+
