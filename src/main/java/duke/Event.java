@@ -6,6 +6,7 @@ package duke;
 public class Event extends Task {
     private String description;
     private String time;
+    private final String TASK_ICON = "E";
 
     /**
      * Constructor for the event task
@@ -25,7 +26,7 @@ public class Event extends Task {
      * @return Task icon
      */
     public String getTaskIcon() {
-        return "E";
+        return this.TASK_ICON;
     }
 
     /**

@@ -4,14 +4,8 @@ package duke;
  * Represents a todo task
  */
 public class ToDo extends Task {
-
-    /**
-     * Constructor for the todo task
-     *
-     * @param description
-     */
-
     private String description;
+    private final String TASK_ICON = "T";
 
     /**
      * Constructor for the ToDo task
@@ -28,7 +22,7 @@ public class ToDo extends Task {
      * @return The task icon that represents the todo task
      */
     public String getTaskIcon() {
-        return "T";
+        return this.TASK_ICON;
     }
 
     /**
