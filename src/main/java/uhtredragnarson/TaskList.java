@@ -1,7 +1,7 @@
 package uhtredragnarson;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import java.util.List;
 public class TaskList {
 
     private final List<Task> tasks;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     protected TaskList() {
         tasks = new ArrayList<>();
@@ -61,9 +62,9 @@ public class TaskList {
         }
         int index = userInput.indexOf('/');
         String by = userInput.substring(index + 4);
-        LocalDate localDate = LocalDate.parse(by);
+        LocalDateTime localDateTime = LocalDateTime.parse(by, formatter);
         Deadline deadline = new Deadline(userInput.substring(9, index),
-                localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+                localDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
         tasks.add(deadline);
         storage.appendToFile(deadline.toString());
         return ui.showDeadlineMessage(deadline, tasks);

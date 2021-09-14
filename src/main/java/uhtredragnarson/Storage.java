@@ -39,7 +39,7 @@ public class Storage {
             }
             newFileText.append(line).append("\n");
         }
-        FileWriter fw = new FileWriter("src/main/java/data/Lawbringer.txt");
+        FileWriter fw = new FileWriter(filePath);
         fw.write(newFileText.toString());
         fw.close();
     }
