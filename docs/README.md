@@ -1,6 +1,8 @@
 # User Guide
 Welcome to Nee, your pocket task manager!
 
+<p align="center"><img src="docs/Ui.png" width="50%"/></p>
+
 <br>
 
 ## Features 
@@ -35,6 +37,15 @@ Lastly, events are tasks with a description, time it is at, and completion statu
 ### View your tasks
 
 Forgot what you added? Nee tracks them for you. You can even mark them as completed.
+
+<br>
+
+### Prefer CLI to GUI?
+
+`java -jar ip-0.2.jar -mode cli` to switch to CLI mode.
+
+`java -jar ip-0.2.jar -mode gui` or simply `java -jar ip-0.2.jar` to use the GUI instead.
+
 
 <br>
 

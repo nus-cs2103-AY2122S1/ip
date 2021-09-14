@@ -82,6 +82,8 @@ public class Duke {
         assert ui != null : "Ui should not be null";
         assert storage != null : "Storage should not be null";
 
+        ui.print(ui.getGreeting());
+
         while (!(input = ui.getCommand()).equals("bye")) {
             try {
                 String output = input.equals("help")

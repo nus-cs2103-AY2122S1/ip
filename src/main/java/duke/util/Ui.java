@@ -16,7 +16,6 @@ public class Ui {
      */
     public Ui() {
         sc = new Scanner(System.in);
-        print(GREET);
     }
 
     /**
@@ -38,8 +37,20 @@ public class Ui {
         System.out.printf(s, input.replaceAll("\n", "\n\t"));
     }
 
+    /**
+     * Getter for help string.
+     * @return String containing help message.
+     */
     public String getHelp() {
         return HELP;
+    }
+
+    /**
+     * Getter for greeting string.
+     * @return String containing greeting message.
+     */
+    public String getGreeting() {
+        return GREET;
     }
 
     /**
