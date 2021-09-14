@@ -1,0 +1,12 @@
+#dialog{
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: #00aaaa;
+}
+#chatBackground{
+    -fx-padding: 20 10 30 10;
+}
+#dialogContainer{
+    -fx-padding: 10, 0, 0, 0;
+}
+#displayPicture{
+}
