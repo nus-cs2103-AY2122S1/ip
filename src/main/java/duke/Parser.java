@@ -194,13 +194,11 @@ public class Parser {
         case "list":
             taskList.listItems();
             return Response.showList(taskList);
-        case "bye":
-            return Response.showGoodbyeMessage();
         case "delete":
             int num = Parser.taskNumber(action);
             Task taskToDelete = taskList.getIndividualTask(num - 1);
             Storage.markAsDeleted(file, taskToDelete);
-            taskList.deleteTask(num); 
+            taskList.deleteTask(num);
             return Response.showSuccessfulDelete(taskToDelete, taskList.getLength());
         case "find":
             String keyword = getKeyword(action);

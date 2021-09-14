@@ -27,7 +27,7 @@ public class Ui {
             + "To find tasks by keyword, type 'find' followed by keywords.\n"
             + "E.g. If your keyword is run, type 'find run'.\n"
             + "\n"
-            + "To exit, type 'bye', then close the window to quit the application.";
+            + "To exit, type 'bye'.";
 
 
     public Ui() {}

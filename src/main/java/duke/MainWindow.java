@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -52,6 +53,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String command = Parser.getCommand(input);
+
+        if (command.equals("bye")) {
+            Platform.exit();
+            System.exit(0);
+        }
 
         if (command.equals("help")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

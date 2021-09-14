@@ -42,15 +42,6 @@ public class Response {
     }
 
     /**
-     * Method to show goodbye message when user exits programme with command bye.
-     *
-     * @return The goodbye message.
-     */
-    public static String showGoodbyeMessage() {
-        return "Bye. Hope to see you again soon!";
-    }
-
-    /**
      * Method to show message prompting user that command is invalid or wrong.
      *
      * @return The message when a user provides an invalid input.
