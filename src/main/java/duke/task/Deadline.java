@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.exceptions.InvalidDescriptionException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Subclass of Task that needs to be done by a specific date/time.
@@ -18,9 +21,13 @@ public class Deadline extends Task {
      * @param description Description of the Deadline.
      * @param date Date of the deadline.
      */
-    public Deadline(String description, String date) {
+    public Deadline(String description, String date) throws InvalidDescriptionException {
         super(description);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDescriptionException("Time Format is wrong, please specify as YYYY-MM-DD");
+        }
     }
 
     /**
