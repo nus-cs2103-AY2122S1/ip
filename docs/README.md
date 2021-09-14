@@ -153,4 +153,3 @@ Example of usage:
 Expected outcome:
 
 `Bye. Hope to see you again soon!`
-
