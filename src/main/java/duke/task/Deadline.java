@@ -23,10 +23,4 @@ public class Deadline extends Task {
     public String toDataString() {
         return String.format("D | %d | %s | %s", isDone ? 1 : 0, this.description, this.date);
     }
-
-    @Override
-    public String toString() {
-        return String.format("[D]%s (by: %s %d %d)", super.toString(), date.getMonth(), date.getDayOfMonth(),
-                date.getYear());
-    }
 }

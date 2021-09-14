@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.parser.Parser;
+import duke.parser.CommandParser;
+import duke.parser.GlobalParser;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.ui.UiPane;
@@ -36,7 +37,7 @@ public class Duke extends Application {
     /**
      * The parser for the commands.
      */
-    private Parser parser;
+    private CommandParser<?> commandParser;
 
     /**
      * Constructs a Duke class.
@@ -44,7 +45,7 @@ public class Duke extends Application {
     public Duke() {
         this.storage = new Storage(filePath);
         this.uiPane = new UiPane(this);
-        this.parser = new Parser();
+        this.commandParser = new GlobalParser();
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -60,7 +61,7 @@ public class Duke extends Application {
      */
     public void executeCommand(String cmd) {
         try {
-            Command command = parser.parse(cmd);
+            Command command = commandParser.parse(cmd);
             command.execute(taskList, storage, uiPane);
         } catch (DukeException e) {
             uiPane.showErrorMessage(e.getMessage());

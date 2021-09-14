@@ -6,14 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
     @Test
-    public void toStringUI() {
-        ToDo todo = new ToDo("brush teeth", false);
-        assertEquals("[T][ ] brush teeth", todo.toString());
-        todo.markAsDone();
-        assertEquals("[T][X] brush teeth", todo.toString());
-    }
-
-    @Test
     public void toDataString() {
         ToDo todo = new ToDo("brush teeth", false);
         assertEquals("T | 0 | brush teeth", todo.toDataString());
