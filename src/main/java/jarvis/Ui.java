@@ -30,10 +30,15 @@ public class Ui {
     // Error messages by Jarvis for other errors
     public static final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
     public static final String WRONGLY_FORMATTED_DATE = "Please format the date as dd/mm/yyy";
+    public static String EMPTY_TASK_DELETE = "Please state the number of the task that you wish to delete! Please key " +
+            "in 'list' if you'd like to view your list of tasks again!";
+    public static String INVALID_INDEX = "";
 
     // Error messages by Jarvis for notes related errors
     public static final String WRONGLY_FORMATTED_NOTE = "Oops, the note is formatted incorrectly! Please write it as " +
             "title /body";
+    public static String EMPTY_NOTE_DELETE = "Please state the number of the note that you wish to delete! Please key " +
+            "in 'notes' if you'd like to view your list of tasks again!";
 
     /**
      * Displays Jarvis' first greeting when user opens the application.
@@ -51,8 +56,9 @@ public class Ui {
      * @return The error message
      */
     public static String invalidTaskNum(int userInput) {
-        return "Hmm, I don't have task " + (userInput + 1) + " in my list. Please key in 'list' if you'd like to " +
-                "view your list of tasks again!";
+        Ui.INVALID_INDEX = "Hmm, I don't have task " + (userInput + 1) + " in my list. " +
+                "Please key in 'list' if you'd like to view your list of tasks again!";
+        return Ui.INVALID_INDEX;
     }
 
     /**
@@ -215,8 +221,9 @@ public class Ui {
      * @return The error message
      */
     public static String invalidNoteNum(int userInput) {
-        return "Hmm, I don't have note " + (userInput + 1) + " in my list. Please key in 'notes' if you'd like to " +
+        Ui.INVALID_INDEX = "Hmm, I don't have note " + (userInput + 1) + " in my list. Please key in 'notes' if you'd like to " +
                 "view your list of notes again!";
+        return Ui.INVALID_INDEX;
     }
 
     /**
