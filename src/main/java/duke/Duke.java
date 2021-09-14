@@ -1,5 +1,7 @@
 package duke;
 import duke.exceptions.DukeException;
+import duke.Storage;
+import duke.TaskList;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +17,8 @@ import java.nio.file.Paths;
  */
 public class Duke {
 
-    private duke.Storage storage;
-    private duke.TaskList taskList;
+    private Storage storage;
+    private TaskList taskList;
     private PrintWriter writer;
 
     /**
@@ -26,9 +28,9 @@ public class Duke {
      * @return Instance of Duke class.
      */
     public Duke(File file) {
-        this.storage = new duke.Storage(file);
+        this.storage = new Storage(file);
         try {
-            this.taskList = new duke.TaskList();
+            this.taskList = new TaskList();
             this.writer = this.storage.load();
         } catch (IOException e) {
 

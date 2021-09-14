@@ -38,7 +38,7 @@ public class Task {
     }
 
     /**
-     * String representation of a task instance.
+     * Gets string representation of a task instance.
      *
      * @return String representation of a task instance.
      */
