@@ -6,7 +6,6 @@ package duke;
  * @author Sherman Ng Wei Sheng
  */
 public class HelpCommand extends Command {
-    private static final String FILE_NAME = "documentation.txt";
     private final boolean isExit;
 
     /**
@@ -37,7 +36,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws StorageLoadingException {
-        String data = storage.loadTextFileData(FILE_NAME);
+        String data = HelpProvider.getContent();
         return ui.printAndReturnMessage(data);
     }
 }

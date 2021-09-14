@@ -69,29 +69,4 @@ public class Storage {
             throw new StorageSavingException();
         }
     }
-
-    /**
-     * Loads the content of the file in the path "[fileDir]/[fileName]".
-     *
-     * @param filename The name of the file to be loaded.
-     * @return The string content in the file.
-     * @throws StorageLoadingException If error encountered during loading.
-     */
-    public String loadTextFileData(String filename) throws StorageLoadingException {
-        try {
-            File textFile = new File(fileDir + filename);
-            boolean isFileExistent = textFile.exists();
-            if (!isFileExistent) {
-                throw new StorageLoadingException();
-            }
-            Scanner scanner = new Scanner(textFile);
-            StringBuilder data = new StringBuilder();
-            while (scanner.hasNext()) {
-                data.append(scanner.nextLine()).append("\n");
-            }
-            return data.toString();
-        } catch (IOException e) {
-            throw new StorageLoadingException();
-        }
-    }
 }
