@@ -13,7 +13,7 @@ import static duke.Parser.taskParse;
 
 public class Controller {
 
-    private static Storage storage = new Storage("src/main/resources/duke.txt");
+    private static final Storage storage = new Storage("src/main/resources/duke.txt");
     private static TaskList tasks;
 
     @FXML
@@ -104,7 +104,7 @@ public class Controller {
             tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
             this.load();
             assert addTaskError.getText().equals("");
-        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase( "E")) {
+        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase("E")) {
             if (taskDate.getValue() == null) {
                 addTaskError.setText("Add a Date!");
             } else {
@@ -121,14 +121,14 @@ public class Controller {
     }
 
     /**
-     * Mark a task as done on the list when done button is pressed
+     * Marks a task as done on the list when the done button is pressed
      *
-     * @param a action of press add button
+     * @param a action of press done button
      */
     public void done(ActionEvent a) {
         try {
             int doneIndex = Integer.parseInt(doneText.getText()) - 1;
-            if(doneIndex > tasks.size() - 1 || doneIndex < 0) {
+            if (doneIndex > tasks.size() - 1 || doneIndex < 0) {
                 doneError.setText("Please enter a number in the list");
             } else {
                 tasks.markAsDone(doneIndex);
@@ -145,10 +145,10 @@ public class Controller {
      *
      * @param a action of press delete button
      */
-    public void delete(ActionEvent a){
+    public void delete(ActionEvent a) {
         try {
             int deleteIndex = Integer.parseInt(deleteText.getText()) - 1;
-            if(deleteIndex > tasks.size() - 1 || deleteIndex < 0) {
+            if (deleteIndex > tasks.size() - 1 || deleteIndex < 0) {
                 deleteError.setText("Please enter a number in the list");
             } else {
                 tasks.removeTask(deleteIndex);
@@ -169,7 +169,7 @@ public class Controller {
     public void update(ActionEvent a) {
         try {
             int index = Integer.parseInt(updateIndex.getText()) - 1;
-            if(index > tasks.size() - 1 || index < 0) {
+            if (index > tasks.size() - 1 || index < 0) {
                 updateError.setText("Please enter a number in the list");
             } else {
                 tasks.updateTask(index, updateDescription.getText(), updateDate.getValue());
