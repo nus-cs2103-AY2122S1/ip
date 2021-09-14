@@ -2,7 +2,6 @@ package bot.assembly.function;
 
 import java.util.List;
 
-import bot.assembly.error.EmptyTaskListException;
 import bot.assembly.memory.BotDynamicMemoryUnit;
 import bot.assembly.memory.BotStaticMemoryUnit;
 import bot.assembly.task.Task;
