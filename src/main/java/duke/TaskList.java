@@ -1,9 +1,11 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -133,9 +135,12 @@ public class TaskList {
         if (!doesEventDescriptionExist) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
-
-        return new Event(userInput.substring("event".length() + 1, indexOfAt - 1),
-                userInput.substring(indexOfAt + "/at".length() + 1));
+        try {
+            return new Event(userInput.substring("event".length() + 1, indexOfAt - 1),
+                    userInput.substring(indexOfAt + "/at".length() + 1));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The date format should be dd/mm/yyyy. Please try again!");
+        }
     }
 
     /**
@@ -163,8 +168,11 @@ public class TaskList {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         String stringDate = userInput.substring(indexOfBy + "/by".length() + 1);
-        return new Deadline(userInput.substring("deadline".length() + 1, indexOfBy - 1), stringDate);
-
+        try {
+            return new Deadline(userInput.substring("deadline".length() + 1, indexOfBy - 1), stringDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The date format should be dd/mm/yyyy. Please try again!");
+        }
     }
 
     /**
