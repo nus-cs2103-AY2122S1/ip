@@ -8,7 +8,7 @@ Tiger is a personal assistant that helps you manage the tasks you're too lazy to
 
 ### <ins>Font Credits:</ins> [Victor Mono](https://rubjo.github.io/victor-mono/)
 
-Tiger classifies tasks into three categories: Todos, Events, and Deadlines. Events and deadlines are tasks associated with a date or time. Each task can be either marked as completed or not completed. A task also has a priority: low, medium, or high.
+Tasks are classified into three categories: Todos, Events, and Deadlines. Events and deadlines are tasks associated with a date or time. Each task can be either marked as completed or not completed. A task also has a priority: low, medium, or high.
 
 Commands include a keyword, some mandatory arguments, and some optional arguments. The keyword comes first, then the mandatory arguments, followed by the optional arguments, ie. `[keyword] [mandatory arguments] [optional arguments].`
 
