@@ -98,18 +98,9 @@ public class Parser {
             return ui.listMessageToString(tasks);
         }
         case TODO: {
-            String desc = command.substring(4);
-
-            if (desc.isEmpty()) {
-                throw new DukeException("todo", "'todo borrow book'");
-            }
-            assert desc.substring(1).length() > 0 : "Description should be present";
-
+            ToDo todo = new ToDo(command, storage, tasks, ui);
             setNewLists(storage, tasks, ui);
-            ToDo toDo = new ToDo(command.substring(5));
-            tasks.add(toDo);
-            storage.save(tasks);
-            return ui.taskMessageToString(toDo, tasks);
+            return todo.execute();
         }
         case EVENT: {
             String desc = command.substring(5);
