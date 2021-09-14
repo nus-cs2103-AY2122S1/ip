@@ -19,7 +19,9 @@
   <p align = "center"> GUI Interface </p>
 </div>
 
-<br><hr><br>
+<br> 
+<hr>
+<br>
 
 ## Features 
 
@@ -55,7 +57,9 @@ You have the Power to Tag Tasks based on their different categories
 
 You can List all Tasks or even List Tasks belonging to a speicific Tag
 
-<br><hr><br>
+<br> 
+<hr>
+<br>
 
 ## Usage
 
