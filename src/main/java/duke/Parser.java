@@ -123,13 +123,13 @@ public class Parser {
     }
 
     /**
-     * Checks whether a done command has a valid index.
+     * Checks whether a done or delete command has a valid index.
      *
-     * @param taskNum The index of the task to be marked as done.
+     * @param taskNum The index of the task to be marked as done or to be deleted.
      * @param size The size of the list.
-     * @return Whether index is valid integer.
+     * @return Whether index is valid.
      */
-    public boolean hasValidInteger(int taskNum, int size) {
+    public boolean hasValidIdx(int taskNum, int size) {
         return taskNum < size && taskNum >= 0;
     }
 

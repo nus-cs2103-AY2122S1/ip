@@ -96,8 +96,7 @@ public class Duke {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
                 int idx = parser.getDeleteIdx(input);
-                String desc = SL.get(idx).getDescription();
-                return deleteFromList(idx, desc);
+                return deleteFromList(idx);
 
             } else if (parser.isFindCmd(input)) {
                 if (input.length() < VALIDLENGTH_FIND) {
@@ -167,10 +166,16 @@ public class Duke {
         return ui.taskAddedMsg(task.toString(), SL.size());
     }
 
-    private String deleteFromList(int idx, String desc) throws IOException {
-        SL.delete(idx);
-        storage.save(SL);
-        return ui.taskDeleteMsg(desc, SL.size());
+    private String deleteFromList(int idx) throws IOException, DukeException {
+        if (!parser.hasValidIdx(idx, SL.size())) {
+            throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
+        } else {
+            String desc = SL.get(idx).getDescription();
+            SL.delete(idx);
+            storage.save(SL);
+            return ui.taskDeleteMsg(desc, SL.size());
+        }
+
     }
 
 
@@ -178,7 +183,7 @@ public class Duke {
     private String marking(String input) throws DukeException, IOException {
         if (input.length() >= VALIDLENGTH_DONE && input.substring(5).matches("[0-9]+")) {
             int taskNum = parser.getDoneIdx(input);
-            if (parser.hasValidInteger(taskNum, SL.size())) {
+            if (parser.hasValidIdx(taskNum, SL.size())) {
                 SL.get(taskNum).markAsDone();
                 ui.taskDoneConfirmation();
                 storage.save(SL);
