@@ -1,6 +1,7 @@
-# Duke project template
+<h1 align="center">Nee</h1>
+<h3 align="center">A JavaFX-Powered Task Manager App</h3>
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+
 
 ## Setting up in Intellij
 
