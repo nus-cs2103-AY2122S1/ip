@@ -1,7 +1,7 @@
 # User Guide
 Welcome to Nee, your pocket task manager!
 
-<p align="center"><img src="docs/Ui.png" width="50%"/></p>
+<p align="center"><img src="Ui.png" width="50%"/></p>
 
 <br>
 
