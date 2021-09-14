@@ -1,29 +1,69 @@
 # User Guide
 
+Jo is a **desktop app** for managing your tasks. A frog wannabe chat bot, 
+she is hungry for the tasks that you have in store for her!
+
 ## Features 
+Notes about the command format: <br/>
+- Words in `UPPER_CASE` are the parameters to be supplied by the user. <br/>
+e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo work`
 
-### Feature-ABC
+### Adding a "ToDo" task: `todo`
+A ToDo is a task without any date/time attached to it _e.g., visit new theme park_
 
-Description of the feature.
+Format: `todo TASK_DESCRIPTION`
 
-### Feature-XYZ
+### Adding a "Deadline" task: `deadline`
+A Deadline is a task that needs to be done before a specific date/time _e.g., submit CS2103T iP before tutorial_
 
-Description of the feature.
+Format: `deadline TASK_DESCRIPTION /by DEADLINE`
 
-## Usage
+### Adding an "Event" task: `event`
+An Event is a task that start at a specific time and ends at a specific time _e.g., team meeting on 11/09/2021 9-10pm_
 
-### `Keyword` - Describe action
+Format: `event TASK_DESCRIPTION /at DATE_AND_TIME`
 
-Describe the action and its outcome.
+### Listing all tasks: `list`
+Shows a list of tasks in the task list
 
-Example of usage: 
+Format: `list`
 
-`keyword (optional arguments)`
+### Mark task as done: `done`
+Marks the given task as _done_
 
-Expected outcome:
+Format: `done TASK_INDEX`
 
-Description of the outcome.
+### Delete a task: `delete`
+Deletes the given task from the task list
 
-```
-expected output
-```
+Format: `delete TASK_INDEX`
+
+### Locating tasks by name: `find`
+Find tasks whose description contain the given keyword
+
+Format: `find KEYWORD`
+
+### Exiting the program: `bye`
+Exits the program by saying bye to Jo
+
+Format: `bye`
+
+### Saving the data
+Jo's data are saved in the hard disk automatically after the program has exited. 
+There is no need to save manually.
+
+### Editing the data file
+Jo's data are saved as a txt file `data/duke.txt`. Advanced users are welcome to update data directly by editing that data file.
+
+## Command Summary
+Action | Format, Examples
+-------|------------------
+Add ToDo | `todo TASK_DESCRIPTION`<br/> e.g.,`todo work`
+Add Deadline |  `deadline TASK_DESCRIPTION /by DEADLINE`<br/> e.g.,`deadline submit CS2103T /by tutorial`
+Add Event | `event TASK_DESCRIPTION /at DATE_AND_TIME`<br/> e.g.,`event team meeting /at 11/09/2021 9-10pm`
+List | `list`
+Done | `done TASK_INDEX` <br/> e.g., `done 2`
+Delete | `delete TASK_INDEX` <br/> e.g., `delete 3`
+Find | `find KEYWORD` <br/> e.g., `find book`
+Exit | `bye`
+
