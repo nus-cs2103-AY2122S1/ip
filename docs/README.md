@@ -25,7 +25,7 @@ If you can type fast, UhtredRagnarson can get your task management done faster t
 
 1. Copy the file to the folder you want to use as the _home folder_ for the app.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+1. Double-click the file to start the app. A GUI should appear in a few seconds.
 
 1. Type the command in the command box and press Enter to execute it.
 
