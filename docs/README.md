@@ -1,9 +1,10 @@
-
 # Petal🌸
 > _In joy or sadness, flowers are our constant friends._  
 > **Okakura Kakuzo**
+![2560x1440 Cherry Blossom Wallpapers - Top Free 2560x1440 Cherry Blossom  Backgrounds - WallpaperAccess](https://wallpaperaccess.com/full/2400172.jpg)
+*Image credits: Wallpaper Access*
 
-It's okay. Petal is here. Drop your worries and sink into the petals of relief; Petal is here for you.
+*It's okay. Petal is here. Drop your worries and sink into the petals of relief; Petal is here for you.*
 
 Petal has the following abetments:
 
@@ -23,13 +24,7 @@ A logical thing you might do is wonder—_how do I install Petal_?
 3.  Under the  **Releases**  tab, open  **A-Release**  and download the .jar file.
 4.  Create a new folder, and place the .jar file into it.
 5.  Now, double-click the .jar file.
-7. Voila! You are now running Petal!
-
-####  Important for Mac users!
-1. You have to install the **Segoe UI** font from Microsoft's [website](https://developer.microsoft.com/en-us/fluentui#/resources).
-2. Scroll down to **Fonts** and click **Download Segoe UI and MDL2 external font**
-3. Open Font Book and install the fonts.
-4. For more information on adding fonts on  MacOS, please refer to [this](https://support.apple.com/en-sg/guide/font-book/fntbk1000/mac).
+6. Voila! You are now running Petal!. 
 
 ## [](https://github.com/wowsiddanth/ip/blob/master/README.md#features)Features
 
@@ -39,8 +34,11 @@ Petal can:
 -   Keep track of the dates of tasks, including deadlines and events.
 -  Archive tasks
 
-## Commands
+## [](https://github.com/wowsiddanth/ip/blob/master/README.md#features) Commands
 The following is an exhaustive list of commands you can use with Petal.
+
+For commands that use an index, please use **_list_** first and check the task's corresponding
+index.
 
 *__Disclaimer__: Please use **bye** to exit the bot, or else your changes won't be saved!*
 1. **todo (todo *description*)**
@@ -52,11 +50,13 @@ The following is an exhaustive list of commands you can use with Petal.
     ``
     deadline Go for a run /by 2/12/2021 1800
     ``
+     *The time must be given in 24-hour format as shown above.*
     _Add a deadline with a date to be completed by._
 3. **event**
     ``
     event Go for a run /at 2/12/2021 1800 2100
     ``
+    *The time must be given in 24-hour format as shown above.*
     _Add an event with a date, and start/end time._
 4.  **list** 
     ``
@@ -77,6 +77,7 @@ The following is an exhaustive list of commands you can use with Petal.
 ``
     date 2/12/2021
     ``
+    _The date has to be in the given form: **D/MM/YYYY**_
     _Shows all tasks on the given date._
 9.  **done (done *number*)** 
     ``
@@ -93,3 +94,18 @@ The following is an exhaustive list of commands you can use with Petal.
     bye
     ``
     _Exits the bot._
+
+
+## [](https://github.com/wowsiddanth/ip/blob/master/README.md#Uninstallation)Uninstallation
+
+Uninstalling the Petal bot is very simple as well. 
+
+There are two main steps:
+
+1. Firstly, delete the .jar file itself from your system.
+2. Secondly, you need to delete the **PetalData** file that contains all the save data.
+It is stored at the __home directory__ of your OS.
+The location of this file is OS-dependant.
+	- For Windows, the file is usually stored in __C:\Users\User__.
+	- For Mac users, the file is usually stored at __MacintoshHD/Users/__.
+	- For Linux users, check the home directory.
