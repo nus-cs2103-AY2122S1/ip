@@ -1,10 +1,5 @@
 package duke;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -33,6 +28,12 @@ public class Duke extends Application {
     /** Boolean to check if first time using Duke. **/
     private static boolean isFirstTime = false;
 
+    private static final String USER_IMAGE = "/Images/DaUser.png";
+    private static final String DUKE_IMAGE = "/Images/Baba.jpg";
+
+    private Image userImage;
+    private Image dukeImage;
+
     /** Fields for GUI **/
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -40,38 +41,17 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Baba.jpg"));
-
     /**
      * Constructor for Duke.
-     *
-     * @param filePath Path of the file to be used when starting Duke.
      */
-    public Duke(String filePath) {
+    protected Duke() {
+        assert this.getClass().getResourceAsStream(USER_IMAGE) != null : " User Image not found";
+        assert this.getClass().getResourceAsStream(DUKE_IMAGE) != null : " Duke Image not found";
 
-        storage = new Storage(filePath);
-        try {
-            Path storagePath = Paths.get(".", filePath);
-
-            // Creating new parent directory if does not exist
-            File dukeFile = new File(filePath);
-            File parentDir = dukeFile.getParentFile();
-            if (!parentDir.exists()) {
-                parentDir.mkdirs();
-            }
-
-            if (!Files.exists(storagePath)) {
-                isFirstTime = true;
-                Files.createFile(storagePath);
-            }
-
-            tasks = new TaskList(Storage.load());
-        } catch (IOException e) {
-            System.out.println("Failed to create storage file: "
-                    + e.getMessage());
-        }
-
+        userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE));
+        dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE));
+        storage = new Storage();
+        tasks = storage.load();
     }
 
     /**
@@ -206,7 +186,7 @@ public class Duke extends Application {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
+                DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
