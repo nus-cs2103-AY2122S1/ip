@@ -1,6 +1,11 @@
 
 # Dino User Guide
 
+This is a greenfield Java project based on the generic project called
+[***Project Duke***](https://nus-cs2103-ay2021s1.github.io/website/se-book-adapted/projectDuke/index.html).
+<br>
+The result of this project is a personal assistant chat-bot named *Dino*
+capable of keeping track of tasks given by the user.
 ## Features 
 
 ### Manages 3 types of tasks!

@@ -1,5 +1,7 @@
 package dino.graphics;
 
+import java.io.IOException;
+
 import dino.Dino;
 import dino.user.Ui;
 import javafx.animation.PauseTransition;
@@ -17,7 +19,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -93,18 +95,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void openHelpPopup() {
 
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/view/HelpWindow.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
-                stage.setTitle("Command List");
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        //HelpPopup.display();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/HelpWindow.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Command List");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

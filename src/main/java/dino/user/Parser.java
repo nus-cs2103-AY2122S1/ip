@@ -32,10 +32,8 @@ public class Parser {
      */
     public String[] checkInput(String input) throws DinoException {
 
-        // Get the first word of the input String
         assert input != null;
-        String command = input.split(" ")[0];
-        String[] extractedInfo;
+        String command = input.split(" ")[0]; //Gets the first word in the input
         String parsedInput;
         int taskDescIndex = 0;
         int taskDateIndex = 1;
@@ -45,53 +43,75 @@ public class Parser {
         switch (command) {
         case "done":
             parsedInput = checkDone(input);
-            extractedInfo = new String[]{command, parsedInput};
-            return extractedInfo;
-
+            return formatDone(command, parsedInput);
         case "delete":
             parsedInput = checkDelete(input);
-            extractedInfo = new String[]{command, parsedInput};
-            return extractedInfo;
-
+            return formatDelete(command, parsedInput);
         case "todo":
             parsedInput = checkTodo(input);
-            extractedInfo = new String[]{command, parsedInput};
-            return extractedInfo;
-
+            return formatTodo(command, parsedInput);
         case "event":
             parsedInput = checkEvent(input);
-
-            extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
-                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskDateIndex]};
-            return extractedInfo;
-
+            return formatEvent(command, parsedInput, taskDescIndex, taskDateIndex);
         case "deadline":
             parsedInput = checkDeadline(input);
-            extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
-                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskDateIndex],
-                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskTimeIndex]};
-            return extractedInfo;
+            return formatDeadline(command, parsedInput, taskDescIndex, taskDateIndex, taskTimeIndex);
 
         // bye and list can be combined as these are meant to be one-word commands
         case "bye":
             // Fallthrough
         case "list":
             return new String[]{command};
-
         case "find":
             parsedInput = checkFind(input);
-            extractedInfo = new String[]{command, parsedInput};
-            return extractedInfo;
-
-        // If none of the command words was used as the first word, throw an exception
+            return formatFind(command, parsedInput);
 
         default:
             throw new DinoException("Please enter a valid command");
         }
     }
 
+    // Formats the input into [Command, description].
+    private String[] formatGeneral(String command, String parsedInput) {
+        String[] extractedInfo;
+        extractedInfo = new String[]{command, parsedInput};
+        return extractedInfo;
+    }
+
+    private String[] formatFind(String command, String parsedInput) {
+        return formatGeneral(command, parsedInput);
+    }
+
+    private String[] formatDeadline(String command, String parsedInput, int taskDescIndex,
+                                    int taskDateIndex, int taskTimeIndex) {
+        String[] extractedInfo;
+        extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                parsedInput.split(Ui.SPLIT_DELIMITER)[taskDateIndex],
+                parsedInput.split(Ui.SPLIT_DELIMITER)[taskTimeIndex]};
+        return extractedInfo;
+    }
+
+    private String[] formatEvent(String command, String parsedInput, int taskDescIndex, int taskDateIndex) {
+        String[] extractedInfo;
+        extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                parsedInput.split(Ui.SPLIT_DELIMITER)[taskDateIndex]};
+        return extractedInfo;
+    }
+
+    private String[] formatTodo(String command, String parsedInput) {
+        return formatGeneral(command, parsedInput);
+    }
+
+    private String[] formatDone(String command, String parsedInput) {
+        return formatGeneral(command, parsedInput);
+    }
+
+    private String[] formatDelete(String command, String parsedInput) {
+        return formatGeneral(command, parsedInput);
+    }
+
     /**
-     * Axillary function to check that the done command word is used correctly.
+     * Checks that the done command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the task number left (no formatting)
@@ -102,7 +122,7 @@ public class Parser {
 
         if (input.length() == lenOfDoneCommand) {
             throw new DinoException("Please use this format: 'done (task number)'");
-        } else if (Integer.parseInt(input.split(" ")[1]) < 0
+        } else if (Integer.parseInt(input.split(" ")[1]) <= 0
                 || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
             throw new DinoException("Invalid task number!");
         }
@@ -110,7 +130,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the delete command word is used correctly.
+     * Checks that the delete command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the task number left (no formatting)
@@ -121,7 +141,7 @@ public class Parser {
 
         if (input.length() == lenOfDeleteCommand) {
             throw new DinoException("Please use this format: 'delete (task number)'");
-        } else if (Integer.parseInt(input.split(" ")[1]) < 0
+        } else if (Integer.parseInt(input.split(" ")[1]) <= 0
                 || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
             throw new DinoException("Invalid task number!");
         }
@@ -129,7 +149,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the to do command word is used correctly.
+     * Checks that the to do command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the to do description left (no formatting)
@@ -146,7 +166,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the event command word is used correctly.
+     * Checks that the event command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the event description and date left (no formatting)
@@ -174,7 +194,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the deadline command word is used correctly.
+     * Checks that the deadline command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the deadline description, date and time left (no formatting)
@@ -217,7 +237,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the find command word is used correctly.
+     * Checks that the find command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with the keyword to be searched for
