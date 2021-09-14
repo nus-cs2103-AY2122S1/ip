@@ -67,7 +67,7 @@ public class BotCommandResponderUnit {
         completedTask.markAsDone();
 
         String output = String.format(
-                "%s\n\t\t%s%s\n\t%s",
+                "%s\n%s%s\n%s",
                 botStaticMemoryUnit.MESSAGE_TASK_COMPLETE, (index) + ". ",
                 completedTask,
                 botStaticMemoryUnit.MESSAGE_CHEERING);
@@ -91,7 +91,7 @@ public class BotCommandResponderUnit {
         Task removedTask = taskTracker.get(index - 1);
 
         String output = String.format(
-                "%s\n\t\t%s%s\n\t",
+                "%s\n%s%s\n",
                 botStaticMemoryUnit.MESSAGE_REMOVE_TASK, (index) + ". ",
                 removedTask);
         output += String.format(botStaticMemoryUnit.MESSAGE_ADD_TASK_SUMMARY, taskTracker.size() - 1);
@@ -139,7 +139,7 @@ public class BotCommandResponderUnit {
             break;
 
         default:
-            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
+            throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
@@ -213,9 +213,7 @@ public class BotCommandResponderUnit {
     public String findTaskFromList(String input) throws InvalidCommandFormatException {
 
         botCommandChecker.checkFindTaskFormat(input);
-        // fun joy happy
         String keyword = tokenize(input)[1];
-        // [fun, joy, happy]
         String[] keywordToken = keyword.split(" ");
 
         List<String> taskToStringList = new ArrayList<String>();
@@ -226,14 +224,14 @@ public class BotCommandResponderUnit {
         for (String eachKeyword : keywordToken) {
             for (String eachTaskString : taskToStringList) {
                 if (eachTaskString.contains(eachKeyword) && !searchResultList.contains(eachTaskString)) {
-                    searchResultList.add("\t\t" + eachTaskString + "\n");
+                    searchResultList.add("\t" + eachTaskString + "\n");
                 }
             }
         }
 
         String keywordOutput = "";
         for (String eachKeyword : keywordToken) {
-            keywordOutput += "\t\t" + eachKeyword + "\n";
+            keywordOutput += "\t" + eachKeyword + "\n";
         }
 
         if (searchResultList.isEmpty()) {

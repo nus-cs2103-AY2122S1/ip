@@ -27,7 +27,7 @@ public class BotTaskStatusGeneratorUnit {
     public String generateAddTaskFeedback() {
 
         String output = String.format(
-                "%s\n\t\t%s\n\t",
+                "%s\n%s\n",
                 botStaticMemoryUnit.MESSAGE_ADD_TASK_NOTICE,
                 taskTracker.get(taskTracker.size() - 1).toString()
         );
@@ -52,10 +52,10 @@ public class BotTaskStatusGeneratorUnit {
         }
 
         StringBuilder formattedTask = new StringBuilder();
-        formattedTask.append(botStaticMemoryUnit.MESSAGE_TASK_REPORT + "\n\t");
+        formattedTask.append(botStaticMemoryUnit.MESSAGE_TASK_REPORT + "\n");
 
         taskTracker.stream()
-                .forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
+                .forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n"));
 
         formattedTask.append("(end)");
 

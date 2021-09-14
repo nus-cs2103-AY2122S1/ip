@@ -80,7 +80,7 @@ public class BotCommandChecker {
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
 
         // throw TaskOutOfRangeException if the index entered is out of task list's range or when the task list is empty
-        if (index - 1 > taskTracker.size() || taskTracker.size() == 0) {
+        if (index - 1 >= taskTracker.size() || taskTracker.size() == 0) {
             throw new TaskOutOfRangeException(botStaticMemoryUnit.ERROR_MESSAGE_TASK_OUT_OF_RANGE);
         }
     }
