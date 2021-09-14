@@ -1,4 +1,4 @@
 T | 1 | eat dinner
-E | 0 | birthday | at 2021-09-22
 D | 0 | geq1000 forum participation | by 2021-09-22
 E | 0 | bowling with 24th mc | at 2021-09-22
+T | 0 | read a book
