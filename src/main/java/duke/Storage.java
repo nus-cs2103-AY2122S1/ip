@@ -33,6 +33,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         File f = getDataFile();
+        assert f.exists() : "Data File should be present";
         Scanner s = getScanner(f);
         ArrayList<Task> tasks = getStoredTasks(s);
         return tasks;
@@ -40,7 +41,9 @@ public class Storage {
 
     private ArrayList<Task> getStoredTasks(Scanner s) {
         ArrayList<Task> tasks = new ArrayList<>();
+        int count = 0;
         while (s.hasNext()) {
+            count++;
             String l = s.nextLine();
             String[] taskEntry = l.split("\\|");
             switch(taskEntry[0]) {
@@ -61,6 +64,7 @@ public class Storage {
                 tasks.get(tasks.size() - 1).markAsDone();
             }
         }
+        assert count == tasks.size() : "Should have the same number of tasks as lines in data file";
         return tasks;
     }
 
