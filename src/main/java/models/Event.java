@@ -62,10 +62,10 @@ public class Event extends Task {
     public String toString() {
         String timeString = time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.isDone) {
-            return "[E][X] " + this.description + " (by: "
+            return "[E][X] " + this.description + " (at: "
                     + timeString + ")";
         }
-        return "[E][ ] " + this.description + " (by: "
+        return "[E][ ] " + this.description + " (at: "
                 + timeString + ")";
     }
 }

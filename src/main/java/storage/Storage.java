@@ -174,11 +174,19 @@ public class Storage implements IStorage {
         return list.getNext();
     }
 
+    /**
+     * Undo the previous command.
+     */
     public void undo() {
         list = getPrevious();
+        writeTaskListToFile();
     }
 
+    /**
+     * Redo the previous command.
+     */
     public void redo() {
         list = getNext();
+        writeTaskListToFile();
     }
 }
