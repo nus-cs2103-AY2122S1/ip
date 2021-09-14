@@ -39,9 +39,12 @@ public class Parser {
      * @throws DukeException When the input is empty String or the command is invalid
      */
     public static Command parseCommand(String input) throws DukeException {
-        // todo {description} [-p {priority}]
-        // deadline {description} /by {yyyy/MM/dd} [{HH:mm}] -p {priority}
-        // event {description} /at {yyyy/MM/dd} {HH:mm} [{yyyy/MM/dd}] {HH:mm} -p {priority}
+        /*
+        Format of commands:
+        todo {description} [-p {priority}]
+        deadline {description} /by {yyyy/MM/dd} [{HH:mm}] -p {priority}
+        event {description} /at {yyyy/MM/dd} {HH:mm} [{yyyy/MM/dd}] {HH:mm} -p {priority}
+        */
 
         String[] splitInput = input.strip().split(DEFAULT_DELIMITER);
         if (splitInput.length < 1) {

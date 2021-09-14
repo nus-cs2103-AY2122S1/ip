@@ -74,8 +74,7 @@ public class Event extends Task {
     }
 
     /**
-     * Encode Event in format
-     * "taskType isDone description startDateTime endDateTime"
+     * Encodes Event in the format of `taskType isDone description startDateTime endDateTime`
      *
      * @return encoded event string
      */

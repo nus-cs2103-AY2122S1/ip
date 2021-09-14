@@ -78,8 +78,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Encode Deadline in format
-     * "taskType isDone description dateTime"
+     * Encodes Deadline in the format of `taskType isDone description dateTime`
      *
      * @return encoded event string
      */
@@ -93,7 +92,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of Deadlines.
+     * Returns the string representation of Deadlines.
      *
      * @return String representation of the deadline.
      */
