@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextFlow;
 
 /**
  * Class that represent a dialog made in the GUI.
@@ -17,6 +18,7 @@ public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
+    private TextFlow textFlow = new TextFlow();
 
     /**
      * Instantiates a DialogBox object.
@@ -29,11 +31,18 @@ public class DialogBox extends HBox {
         displayPicture = imageView;
 
         text.setWrapText(true);
+        text.setPrefWidth(250);
+
+        textFlow.getChildren().add(text);
+
+
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
+
+
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.getChildren().addAll(textFlow, displayPicture);
     }
 
 

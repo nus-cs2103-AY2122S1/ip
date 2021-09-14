@@ -15,9 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -38,7 +39,7 @@ public class Ui {
     private Scene scene;
     private Image userPhoto = new Image(this.getClass().getResourceAsStream("/images/UserDisplayPhoto.jpg"));
     private Image botPhoto = new Image(this.getClass().getResourceAsStream("/images/BotDisplayPhoto.jpg"));
-
+    private Image botErrorPhoto = new Image(this.getClass().getResourceAsStream("/images/BotErrorDisplayPhoto.jpg"));
 
     /**
      * Constructor for jUnit testing
@@ -56,6 +57,8 @@ public class Ui {
         // setting variables
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+
+
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -75,7 +78,8 @@ public class Ui {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setStyle("-fx-background-image: url('/images/BackgroundImage.jpg')");
+        dialogContainer.setPrefHeight(535);
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -93,7 +97,7 @@ public class Ui {
      */
     protected void showException(DukeException e) {
         String message = e.getMessage() + "\n";
-        displayDukeReply(message);
+        displayDukeErrorReply(message);
 
     }
 
@@ -241,12 +245,15 @@ public class Ui {
 
         String userInputText = userInput.getText();
         Label userTextLabel = new Label(userInputText);
-        userTextLabel.setPadding(new Insets(0, 10, 0, 0));
+        userTextLabel.setPadding(new Insets(20, 10, 0, 0));
+        userTextLabel.setStyle("-fx-text-fill: white;");
+
         ImageView userImage = new ImageView(userPhoto);
+        userImage.setTranslateY(10);
         clipImageViewToCircle(userImage, 100);
         DialogBox userDialogBox = DialogBox.getUserDialog(userTextLabel, userImage);
         userDialogBox.setPadding(new Insets(0, 0, 30, 0));
-        setDialogBoxBackgroundColor(userDialogBox, "#1FDA12");
+        setDialogBoxBackgroundColor(userDialogBox, 70, 70, 70);
 
         dialogContainer.getChildren().add(
             userDialogBox
@@ -264,15 +271,44 @@ public class Ui {
 
     private void displayDukeReply(String dukeReply) {
         Label dukeTextLabel = new Label(dukeReply);
-        dukeTextLabel.setPadding(new Insets(0, 0, 0, 10));
+        dukeTextLabel.setPadding(new Insets(20, 0, 0, 10));
+        dukeTextLabel.setStyle("-fx-text-fill: white;");
+
 
         ImageView dukeImage = new ImageView(botPhoto);
+        dukeImage.setTranslateY(10);
+
         clipImageViewToCircle(dukeImage, 100);
 
         DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeTextLabel, dukeImage);
         dukeDialogBox.setPadding(new Insets(0, 0, 30, 0));
+        dukeDialogBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dukeDialogBox.setFillHeight(true);
 
-        setDialogBoxBackgroundColor(dukeDialogBox, "#12B1DA");
+
+        setDialogBoxBackgroundColor(dukeDialogBox, 200, 200, 200);
+
+        dialogContainer.getChildren().add(dukeDialogBox);
+    }
+
+    private void displayDukeErrorReply(String errorReply) {
+        Label dukeTextLabel = new Label(errorReply);
+
+        dukeTextLabel.setPadding(new Insets(20, 0, 0, 10));
+        dukeTextLabel.setStyle("-fx-text-fill: white;");
+
+
+        ImageView dukeImage = new ImageView(botErrorPhoto);
+        dukeImage.setTranslateY(10);
+
+        clipImageViewToCircle(dukeImage, 100);
+
+        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeTextLabel, dukeImage);
+
+
+        dukeDialogBox.setPadding(new Insets(0, 0, 30, 0));
+
+        setDialogBoxBackgroundColor(dukeDialogBox, 191, 63, 63);
 
         dialogContainer.getChildren().add(dukeDialogBox);
     }
@@ -284,8 +320,10 @@ public class Ui {
         imageView.setClip(circle);
     }
 
-    private void setDialogBoxBackgroundColor(DialogBox dialogBox, String hexValue) {
-        dialogBox.setBackground(new Background(new BackgroundFill(Paint.valueOf(hexValue), null, null)));
+    private void setDialogBoxBackgroundColor(DialogBox dialogBox, int red, int green, int blue) {
+        dialogBox.setBackground(
+            new Background(new BackgroundFill(Color.rgb(red, green, blue, 0.75), new CornerRadii(35),
+                null)));
     }
 
 
