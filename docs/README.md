@@ -21,6 +21,8 @@
  - Your tasks are saved locally
  - Quickly add a new task anytime!
 
+### View a help window from just a click away!
+
 ## Usage
 
 ### `todo` - Add a new todo task
