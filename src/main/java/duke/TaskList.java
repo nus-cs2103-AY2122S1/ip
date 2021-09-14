@@ -226,7 +226,7 @@ public class TaskList {
     }
 
     /**
-     * Auxiliary method that adds specified task to TaskList and returns success message.
+     * Adds specified task to TaskList and returns success message.
      *
      * @param task Task input provided by method.
      * @return Success message upon addition of Task.
