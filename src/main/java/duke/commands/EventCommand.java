@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exceptions.InvalidDescriptionException;
 import duke.exceptions.MissingTimeCommandException;
 import duke.exceptions.NoDescriptionException;
 import duke.task.Event;
@@ -18,18 +19,41 @@ public class EventCommand extends Command {
     private Task taskToAdd;
 
     public static final String MESSAGE_SUCCESS = "Task successfully added: %1$s";
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "The description of a event cannot be empty.";
 
-    public EventCommand(String fullCommand) throws NoDescriptionException, MissingTimeCommandException {
-        if (fullCommand.equals("deadline")) {
-            throw new NoDescriptionException("The description of a deadline cannot be empty.");
+    public EventCommand(String fullCommand) throws NoDescriptionException, MissingTimeCommandException, InvalidDescriptionException {
+        if (fullCommand.equals(COMMAND_WORD)) {
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
+
         if (!fullCommand.contains("/at")) {
             throw new MissingTimeCommandException("Missing Time Command: add '/at' in the command.");
         }
+
         String[] splitCommand = fullCommand.split(" ", 2);
-        String[] body = splitCommand[1].split(" /at ", 2);
-        String desc = body[0];
-        String date = body[1];
+
+        // Remove all white space.
+        String trimmedBody = splitCommand[1].replaceAll("\\s+", "");
+
+        // Only /at provided in command
+        if (trimmedBody.equals("/at")) {
+            throw new NoDescriptionException("Please add a description and time.");
+        }
+
+        String[] splitTrimmedBody = trimmedBody.split("/at", 2);
+        if (splitTrimmedBody[0].equals("") || splitTrimmedBody[1].equals("")) {
+            throw new InvalidDescriptionException("Missing description or time.");
+        }
+
+        // If /at is not properly used
+        if (!fullCommand.contains(" /at ")) {
+            throw new MissingTimeCommandException("Missing Time Command: add spaces before and after '/at'.");
+        }
+
+        //Split full command by /at.
+        String[] splitBody = splitCommand[1].split(" /at ", 2);
+        String desc = splitBody[0];
+        String date = splitBody[1];
         taskToAdd = new Event(desc, date);
     }
 
