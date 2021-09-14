@@ -1,1 +1,8 @@
-theme: jekyll-theme-cayman
+title: "Duke"
+
+theme: minima
+
+markdown: kramdown
+
+plugins:
+  - jemoji
