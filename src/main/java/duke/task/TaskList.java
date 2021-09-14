@@ -73,6 +73,11 @@ public class TaskList {
      */
     public String getSpecificDateEvent(String time) {
         StringBuilder text = new StringBuilder();
+
+        //@@author Hang Zelin-reused
+        //Reused from:
+        //https://github.com/nus-cs2103-AY2122S1/ip/pull/60/commits/7f61b2b2976ae38932af343a7c8c3b71405cc6aa
+        //Inspired by his stream method.
         final int[] count = {0}; //count the number of the events happen on the time.
         tasks.stream()
                 .filter(task -> returnIsFound(time,
@@ -107,6 +112,10 @@ public class TaskList {
         StringBuilder text = new StringBuilder();
         final int[] count = {0};
 
+        //@@author Hang Zelin-reused
+        //Reused from:
+        //https://github.com/nus-cs2103-AY2122S1/ip/pull/60/commits/7f61b2b2976ae38932af343a7c8c3b71405cc6aa
+        //Inspired by his stream method.
         tasks.stream()
                 .filter(task -> task.getTaskStatus().contains(keyword))
                 .forEach(task -> text.append(++count[0]).append(".")

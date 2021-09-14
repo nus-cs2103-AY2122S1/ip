@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
 
+    //@@author Hang Zelin-reused
+    //Reused from https://edencoding.com/scene-background/
+    // with minor modifications
     private void setBackgroundImage() {
         BackgroundSize backgroundSize;
 
