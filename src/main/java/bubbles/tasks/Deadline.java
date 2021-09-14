@@ -70,7 +70,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String date = this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String date = this.dueDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         String due = "(by: " + date + ")";
         String res = "[D] [" + this.getStatus() + "] " + this.description + " " + due;
 

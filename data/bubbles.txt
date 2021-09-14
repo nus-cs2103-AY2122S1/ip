@@ -1,5 +1,4 @@
-T | 1 | go for lunch in utown
-T | 0 | eat dinner
-D | 0 | complete 2103t | by 2021-08-30
+T | 1 | eat dinner
 E | 0 | birthday | at 2021-09-22
 D | 0 | geq1000 forum participation | by 2021-09-22
+E | 0 | bowling with 24th mc | at 2021-09-22

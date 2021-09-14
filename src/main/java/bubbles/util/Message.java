@@ -19,11 +19,19 @@ public enum Message {
     REMIND("Need a reminder? Bubbles' got you!\n"),
     WELCOME("You should do what you want to do!\n"
             + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?"),
-    HELP("Don't worry, Bubbles is here to help!\n\n"
-            + "Supported commands: todo, deadline, event, list, done, delete, find, remind, help, bye;\n\n"
-            + "Note: You must include `/by` for deadlines, and `/at` for events"
-            + "after your task description! The date must be entered in the form"
-            + "of yyyy-mm-dd, or else I won't be able to understand your command. ☹"),
+    HELP("Don't worry, Bubbles is here to help!\n\n" +
+            "Below is a list of supported commands and format:\n" +
+            "help       /help\n" +
+            "todo       /todo [description]\n" +
+            "deadline   /deadline [description] /by yyyy-mm-dd\n" +
+            "event      /event [description] /at yyyy-mm-dd\n" +
+            "list       /list\n" +
+            "done       /done [index]\n" +
+            "delete     /delete [index]\n" +
+            "find       /find [word]\n" +
+            "remind     /remind\n" +
+            "bye        /bye\n\n" +
+            "I will not understand your command if it is not in the right format. ☹"),
     EXIT("Bye-bye! Hope to see you again soon!");
 
     private String message;
@@ -32,6 +40,12 @@ public enum Message {
         this.message = message;
     }
 
+    /**
+     * Separates each chunk of message using the separator line.
+     *
+     * @param message The message to be kept within the separator lines.
+     * @return A String representing the message and two separator lines around it.
+     */
     public static String separateMessage(String message) {
         return FORMAT_LINE + "\n" + message + "\n" + FORMAT_LINE;
     }

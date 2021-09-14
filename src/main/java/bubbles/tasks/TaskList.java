@@ -328,6 +328,19 @@ public class TaskList {
                     + "(containing matching keywords) did not increment as expected;";
         }
 
+        List<Task> overdueTasks = findOverdueTasks();
+
+        if (overdueTasks.size() > 0) {
+            message.append("But umm... you have a few overdue tasks...\n");
+
+            int n = 1;
+            for (Task t : overdueTasks) {
+                message.append((n) + ". " + t + "\n");
+
+                n++;
+            }
+        }
+
         return message.toString();
     }
 

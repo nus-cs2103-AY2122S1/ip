@@ -39,6 +39,9 @@ public class Bubbles {
         new Bubbles().run();
     }
 
+    /**
+     * Runs the program.
+     */
     private void run() {
         System.out.println(Message.WELCOME);
 
@@ -50,6 +53,13 @@ public class Bubbles {
         ui.exit();
     }
 
+    /**
+     * Handles the command from the user and returns the message that is the result
+     * of executing the command.
+     *
+     * @param input Input command from the user.
+     * @return Response message from the command, could be an error message.
+     */
     public String getResponse(String input) {
         if (input.equals("bye")) {
             storage.writeTasks();

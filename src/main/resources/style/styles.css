@@ -4,3 +4,25 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
+
+.userInput {
+    -fx-background-color: WHITE;
+    -fx-border-color: rgb(209, 240, 255);
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+
+.sendBtn {
+    -fx-background-color: rgb(209, 240, 255);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.textBox {
+    -fx-background-color: rgba(219, 233, 238, 0.4);
+    -fx-border-color: rgb(209, 240, 255);
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
