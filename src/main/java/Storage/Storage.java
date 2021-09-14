@@ -114,6 +114,7 @@ class Parser {
         switch (task.getType()) {
             case Todo:
                 output = "Todo";
+                break;
 
             case Deadline: {
                 output = "Deadline";
@@ -153,7 +154,9 @@ class Parser {
      */
     public boolean isTaskDuplicate(String action, TaskList curTaskList) {
         for (Task curTask : curTaskList.getTaskList()) {
-            if (formatTaskIntoCommands(curTask).equals(action)) {
+            String s = formatTaskIntoCommands(curTask);
+            String d = action.concat("\n");
+            if (formatTaskIntoCommands(curTask).equals(action.concat("\n"))) {
                 return true;
             }
         }
