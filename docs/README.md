@@ -1,5 +1,5 @@
 <div align = "center">
-<img align="center" height="120" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_Logo.png?raw=true">
+<img align="center" height="150" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_Logo.png?raw=true">
 </div>
 
 <div align = "center">
