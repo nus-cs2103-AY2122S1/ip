@@ -41,4 +41,19 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Event)) {
+            return false;
+        }
+
+        Event c = (Event) o;
+
+        return c.description.equals(description) && c.date.equals(date);
+    }
 }

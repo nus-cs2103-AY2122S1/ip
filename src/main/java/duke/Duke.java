@@ -44,33 +44,6 @@ public class Duke {
     }
 
     /**
-     * Runs Duke chatbot until termination.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showLoadingError(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Launches Duke chatbot with specified file path.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
      * Returns a response to user input.
      *
      * @param input User input to respond to.
