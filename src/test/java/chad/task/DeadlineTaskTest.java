@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTaskTest {
+
     @Test
     public void getFileRepresentation_notDoneDeadlineTask_success() {
         String taskDescription = "Task description";

@@ -18,7 +18,7 @@ public class AddDeadlineTaskCommand extends AddTemporalTaskCommand {
      *
      * @param command The command represented by the instance.
      */
-    public AddDeadlineTaskCommand(String command) {
+    public AddDeadlineTaskCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 

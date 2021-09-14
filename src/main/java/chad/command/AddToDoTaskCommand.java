@@ -17,7 +17,7 @@ public class AddToDoTaskCommand extends AddTaskCommand {
      *
      * @param command The command represented by the instance.
      */
-    public AddToDoTaskCommand(String command) {
+    public AddToDoTaskCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 

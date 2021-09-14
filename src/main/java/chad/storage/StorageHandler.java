@@ -30,6 +30,8 @@ public class StorageHandler {
     private static final Charset DEFAULT_ENCODING = StandardCharsets.UTF_8;
     private static final String DATE_TIME_FORMAT_PATTERN = "yyyyMMddHHmm";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_PATTERN);
+    private static final String DEADLINE_TASK_TIME_RELATION_TOKEN = "/by";
+    private static final String EVENT_TASK_TIME_RELATION_TOKEN = "/at";
 
     private static StorageHandler instance;
 
@@ -155,7 +157,7 @@ public class StorageHandler {
     }
 
     private DeadlineTask parseDeadlineTask(String[] tokens) {
-        int timeRelationIndex = findTokenIndex("/by", tokens, 2, tokens.length);
+        int timeRelationIndex = findTokenIndex(DEADLINE_TASK_TIME_RELATION_TOKEN, tokens, 2, tokens.length);
         int timeStartIndex = timeRelationIndex + 1;
         String taskDescription = getTokenSequence(tokens, 2, timeRelationIndex);
         String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);
@@ -166,7 +168,7 @@ public class StorageHandler {
     }
 
     private EventTask parseEventTask(String[] tokens) {
-        int timeRelationIndex = findTokenIndex("/at", tokens, 2, tokens.length);
+        int timeRelationIndex = findTokenIndex(EVENT_TASK_TIME_RELATION_TOKEN, tokens, 2, tokens.length);
         int timeStartIndex = timeRelationIndex + 1;
         String taskDescription = getTokenSequence(tokens, 2, timeRelationIndex);
         String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);

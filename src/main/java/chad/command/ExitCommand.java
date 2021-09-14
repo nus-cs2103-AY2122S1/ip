@@ -18,19 +18,17 @@ public class ExitCommand extends Command {
      *
      * @param command The command represented by the instance.
      */
-    public ExitCommand(String command) {
+    public ExitCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
-        ui.printExitMessage();
+    public void execute(TaskHandler taskHandler, Ui ui) throws ChadInvalidCommandException {
+        ui.displayExitMessage();
     }
 
     @Override
-    void parseCommand(String[] tokens) {
-
-    }
+    void parseCommand(String[] tokens) throws ChadInvalidCommandException {}
 
     @Override
     CommandType getCommandType() {

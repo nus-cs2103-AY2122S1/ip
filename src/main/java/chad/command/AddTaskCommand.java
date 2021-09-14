@@ -20,7 +20,7 @@ public abstract class AddTaskCommand extends Command implements UndoableCommand 
      *
      * @param command The command represented by the instance.
      */
-    public AddTaskCommand(String command) {
+    public AddTaskCommand(String command) throws ChadInvalidCommandException {
         super(command);
     }
 
@@ -32,7 +32,7 @@ public abstract class AddTaskCommand extends Command implements UndoableCommand 
     abstract Task createTask();
 
     @Override
-    public void execute(TaskHandler taskHandler, Ui ui) {
+    public void execute(TaskHandler taskHandler, Ui ui) throws ChadInvalidCommandException {
         assert task != null : "Task to be added must be created; it cannot be null.";
         taskHandler.addTask(task);
         int numberOfTasks = taskHandler.getNumberOfTasks();
@@ -40,14 +40,14 @@ public abstract class AddTaskCommand extends Command implements UndoableCommand 
                 .addLine("Got it. I've added this task:")
                 .addTask(task)
                 .addTasksListLength(numberOfTasks)
-                .printFormatted();
+                .displayMessage();
         taskIndex = numberOfTasks - 1;
         CommandHandler commandHandler = CommandHandler.getInstance();
         commandHandler.addToUndoableCommands(this);
     }
 
     @Override
-    void parseCommand(String[] tokens) {
+    void parseCommand(String[] tokens) throws ChadInvalidCommandException {
         String taskDescription = parseTaskDescription(tokens);
         checkTaskDescriptionLength(taskDescription);
         setTaskDescription(taskDescription);
@@ -75,7 +75,7 @@ public abstract class AddTaskCommand extends Command implements UndoableCommand 
         return getTokenSequence(tokens, 1, tokens.length);
     }
 
-    private void checkTaskDescriptionLength(String taskDescription) {
+    private void checkTaskDescriptionLength(String taskDescription) throws ChadInvalidCommandException {
         if (taskDescription.length() == 0) {
             throw new ChadInvalidCommandException(String.format("A description is required for \"%s\" commands.",
                     getCommandType().getCommandDescription()));
