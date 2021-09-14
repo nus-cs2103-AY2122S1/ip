@@ -186,4 +186,4 @@ done | `done <index>`
 ## Acknowledgements
 
 This project is done as part of a NUS academic module, CS2103. My sincere gratitude goes out to the 
-Professor, Tutors and everyone who has supported me in one way or another.
+Professor, Tutors and everyone who has supported me in one way or another. Thank you!
