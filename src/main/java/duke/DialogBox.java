@@ -24,6 +24,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Label name;
 
     private DialogBox(String text, Image img) {
         try {
@@ -61,5 +63,11 @@ public class DialogBox extends HBox {
 
     public void setUserId() {
         this.dialog.setId("userDialog");
+    }
+    public void setName(String name) {
+        this.name.setText(name);
+    }
+    public void setBackgroundColor(String colorHex) {
+        this.dialog.setStyle("-fx-background-color: #" + colorHex);
     }
 }

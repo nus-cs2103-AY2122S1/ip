@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<?import java.net.URL?>
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox fx:id="chatBackground">
-        <Label fx:id="dialog" text="Label" wrapText="true">
-        </Label>
+            <VBox>
+                <Label fx:id="name" text="label" />
+                <Label fx:id="dialog" text="Label" wrapText="true">
+                </Label>
+            </VBox>
+
         </HBox>
         <ImageView fx:id="displayPicture" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
          <effect>
-            <DropShadow></DropShadow>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color></DropShadow>
          </effect></ImageView>
     </children>
     <stylesheets>
