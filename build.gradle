@@ -58,6 +58,6 @@ run{
 
 shadowJar {
     archiveBaseName = "botto"
-    archiveVersion = "1.0"
+    archiveVersion = "1.1"
     archiveClassifier = null
 }
