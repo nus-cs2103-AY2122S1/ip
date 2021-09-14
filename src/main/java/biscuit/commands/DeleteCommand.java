@@ -58,7 +58,7 @@ public class DeleteCommand extends Command {
             }
             return message.append("\nNow you have ").append(taskList.size()).append(" tasks in the list.").toString();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter valid numbers"
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!!\n Please enter valid numbers"
                     + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
         }
     }

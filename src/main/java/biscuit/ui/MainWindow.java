@@ -36,12 +36,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String logo = "\n  \u2588\u2584\u2584\u2003\u2588\u2003\u2588\u2580\u2003\u2588\u2580"
+        String logo = "\u2588\u2584\u2584\u2003\u2588\u2003\u2588\u2580\u2003\u2588\u2580"
                 + "\u2580\u2003\u2588\u2591\u2588\u2003\u2588\u2003\u2580\u2588\u2580\n"
-                + "  \u2588\u2584\u2588\u2003\u2588\u2003\u2584\u2588\u2003\u2588\u2584\u2584"
-                + "\u2003\u2588\u2584\u2588\u2003\u2588\u2003\u2591\u2588\u2591\n\n";
+                + "\u2588\u2584\u2588\u2003\u2588\u2003\u2584\u2588\u2003\u2588\u2584\u2584"
+                + "\u2003\u2588\u2584\u2588\u2003\u2588\u2003\u2591\u2588\u2591\n";
         dialogContainer.getChildren().addAll(
-                DialogBox.getBiscuitDialog(logo + "Woof! I'm Biscuit.\nWhat can I do for you?", biscuitImage)
+                DialogBox.getBiscuitDialog("Woof! I'm Biscuit.\nWhat can I do for you?\n 8==8", biscuitImage)
         );
     }
 
