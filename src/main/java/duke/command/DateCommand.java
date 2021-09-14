@@ -43,34 +43,20 @@ public class DateCommand extends Command {
      * @throws DukeException If underlying methods or checks fail.
      */
     private String getTaskAtDate(TaskList tasks, Ui ui) throws DukeException {
-        // Initialize counters to track number of tasks, events, deadlines and periods.
         int counter = 0;
         int events = 0;
         int deadlines = 0;
         int periods = 0;
 
-        // Check if anything is provided 1 space after date command.
-        if (this.userInput.length() <= (UserCommands.DATE.getLength() + 1)) {
-            // If nothing is provided, date to search for is not provided.
-            // Unlike other commands, a single character following after command without space is an invalid date.
-            throw new MissingDateException();
-        }
-
-        // Check for space after date command.
-        // This prevents wrong date being read by reminding user to add space.
-        if (this.userInput.charAt(UserCommands.DATE.getLength()) != ' ') {
-            throw new MissingSpaceAfterCommandException(UserCommands.DATE);
-        }
+        checkDateInputValidity();
 
         // Parses user input into LocalDate. User input for date will follow "date" command.
         String dateString = this.userInput.substring(UserCommands.DATE.getLength() + 1);
-
         LocalDate localDate = Parser.dateToLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 
         StringBuilder datesBuilder = new StringBuilder();
-        // finds Deadlines and Events with LocalDate that matches date input from user.
-
+        // find tasks with LocalDate that matches date input from user.
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             // Increment by 1 to change index to be 1-based.
@@ -96,12 +82,7 @@ public class DateCommand extends Command {
 
             if (task instanceof Period) {
                 Period period = (Period) task;
-                LocalDate[] startEndDates = period.getPeriod();
-                LocalDate startDate = startEndDates[0];
-                LocalDate endDate = startEndDates[1];
-
-                boolean laterThanStartDate = localDate.compareTo(startDate) >= 0;
-                if (laterThanStartDate && localDate.compareTo(endDate) <= 0) {
+                if (checkWithinPeriod(localDate, period)) {
                     counter++;
                     periods++;
                     datesBuilder.append(idx).append(".").append(period).append("\n");
@@ -112,6 +93,45 @@ public class DateCommand extends Command {
         return ui.getDateListSuccessMessage(formattedDateString,
                 counter, deadlines, events, periods, datesBuilder.toString());
     }
+
+    /**
+     * Checks if localDate is within period represented by Period task.
+     *
+     * @param localDate Date to be checked.
+     * @param period Period task whose time period is to be checked against.
+     * @return Boolean indicating if localDate is within period represented by Period task.
+     */
+    private boolean checkWithinPeriod(LocalDate localDate, Period period) {
+        LocalDate[] startEndDates = period.getPeriod();
+        LocalDate startDate = startEndDates[0];
+        LocalDate endDate = startEndDates[1];
+
+        boolean isLaterThanEqualsStartDate = localDate.compareTo(startDate) >= 0;
+        boolean isEarlierThanEqualsEndDate = localDate.compareTo(endDate) <= 0;
+        return isLaterThanEqualsStartDate && isEarlierThanEqualsEndDate;
+    }
+
+    /**
+     * Checks if Date input is of an acceptable format.
+     *
+     * @throws MissingDateException
+     * @throws MissingSpaceAfterCommandException
+     */
+    private void checkDateInputValidity() throws MissingDateException, MissingSpaceAfterCommandException {
+        // Check if anything is provided 1 space after date command.
+        if (this.userInput.length() <= (UserCommands.DATE.getLength() + 1)) {
+            // If nothing is provided, date to search for is not provided.
+            // Unlike other commands, a single character following after command without space is an invalid date.
+            throw new MissingDateException();
+        }
+
+        // Check for space after date command.
+        // This prevents wrong date being read by reminding user to add space.
+        if (this.userInput.charAt(UserCommands.DATE.getLength()) != ' ') {
+            throw new MissingSpaceAfterCommandException(UserCommands.DATE);
+        }
+    }
+
 
     /**
      * Finds and returns String describing tasks falling on user specified date.
