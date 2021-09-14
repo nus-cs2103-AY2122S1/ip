@@ -1,11 +1,12 @@
 package ailurus.task;
 
-import ailurus.AilurusException;
-
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Todo extends Task{
+import ailurus.AilurusException;
+
+
+public class Todo extends Task {
     /**
      * Constructor for Todo
      *

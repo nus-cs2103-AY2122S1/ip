@@ -1,14 +1,12 @@
 package ailurus;
 
+import java.util.ArrayList;
+
 import ailurus.task.Task;
 import ailurus.task.TaskList;
-import javafx.scene.image.Image;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
-    private final String CHATBOT = "Ailurus";
+    private final String chatbot = "Ailurus";
 
     /**
      * Welcomes user to use the chatbot
@@ -16,14 +14,14 @@ public class Ui {
      * @return welcome message string
      */
     public String showWelcome() {
-        return this.say(String.format("Hello! I'm %s. These are your available commands:\n" +
-                "todo <description>\n\t- add todo task\n" +
-                "deadline <description> /by <yyyy-mm-dd>\n\t- add deadline task with date\n" +
-                "event <description> /at <yyyy-mm-dd>\n\t- add event task with date\n" +
-                "list\n\t- list all tasks and their task number\n" +
-                "done <task number(s)>\n\t- mark task(s) as done (e.g. done 1 2 3)\n" +
-                "delete <task number(s)>\n\t- delete task(s) (e.g. delete 1 2 3)\n" +
-                "find <matching word>\n\t- find all tasks with matching word", this.CHATBOT));
+        return this.say(String.format("Hello! I'm %s. These are your available commands:\n"
+                + "todo <description>\n\t- add todo task\n"
+                + "deadline <description> /by <yyyy-mm-dd>\n\t- add deadline task with date\n"
+                + "event <description> /at <yyyy-mm-dd>\n\t- add event task with date\n"
+                + "list\n\t- list all tasks and their task number\n"
+                + "done <task number(s)>\n\t- mark task(s) as done (e.g. done 1 2 3)\n"
+                + "delete <task number(s)>\n\t- delete task(s) (e.g. delete 1 2 3)\n"
+                + "find <matching word>\n\t- find all tasks with matching word", this.chatbot));
     }
 
     /**
@@ -43,7 +41,7 @@ public class Ui {
      * @return message to be said
      */
     public String say(String message) {
-        System.out.println(String.format("%s: %s", this.CHATBOT, message));
+        System.out.println(String.format("%s: %s", this.chatbot, message));
         return message;
     }
 
@@ -60,7 +58,7 @@ public class Ui {
         }
         this.say("");
         String message = "";
-        for(int i = 0; i < list.length(); i++) {
+        for (int i = 0; i < list.length(); i++) {
             message += String.format("%d.%s\n", i + 1, list.getIndexString(i));
 
         }

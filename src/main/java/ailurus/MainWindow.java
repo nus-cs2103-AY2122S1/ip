@@ -1,5 +1,6 @@
 package ailurus;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.application.Platform;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pixel.png"));
     private Image ailurusImage = new Image(this.getClass().getResourceAsStream("/images/Ailurus.jpg"));
 
+    /**
+     * Initialise FXML window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -57,7 +61,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getAilurusDialog(response, ailurusImage)
         );
-        if (Ailurus.isExit) {
+        if (Ailurus.isExit()) {
             Platform.exit();
         }
         userInput.clear();

@@ -1,9 +1,9 @@
 package ailurus.task;
 
+import java.util.ArrayList;
+
 import ailurus.AilurusException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> list;

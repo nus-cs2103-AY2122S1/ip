@@ -56,7 +56,10 @@ public class DialogBox extends HBox {
      * @return DialogBox of user
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color:#ffc300; -fx-padding:10px; -fx-background-radius: 10;"
+                + "-fx-border-color:#000000; -fx-border-radius:10");
+        return db;
     }
 
     /**
@@ -67,6 +70,8 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getAilurusDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color:#f0b6b1; -fx-padding:10px; -fx-background-radius: 10;"
+                + "-fx-border-color:#000000; -fx-border-radius:10");
         db.flip();
         return db;
     }

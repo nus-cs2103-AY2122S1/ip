@@ -9,10 +9,10 @@ import javafx.application.Application;
  * @author Leeroy Liu
  */
 public class Ailurus {
+    private static boolean isExit = false;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    public static boolean isExit = false;
 
     /**
      * Constructor for Ailurus Chatbot
@@ -36,6 +36,15 @@ public class Ailurus {
      */
     public static void exit() {
         isExit = true;
+    }
+
+    /**
+     * Checks if program can be exited
+     *
+     * @return isExit boolean
+     */
+    public static boolean isExit() {
+        return isExit;
     }
 
     /**

@@ -1,10 +1,11 @@
 package ailurus.task;
 
-import ailurus.AilurusException;
-
 import java.io.FileWriter;
 
-abstract public class Task {
+import ailurus.AilurusException;
+
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -39,7 +40,7 @@ abstract public class Task {
      *
      * @param writer FileWriter to be written into.
      */
-    abstract public void log(FileWriter writer);
+    public abstract void log(FileWriter writer);
 
     /**
      * Get the description of the task
