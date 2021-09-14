@@ -35,12 +35,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
-        //dialogContainer.getChildren().add(DialogBox.getAilurusDialog(ui.showWelcome(), ailurusImage));
     }
 
     /**
      * Set and initalise Ailurus bot
+     *
      * @param d Ailurus object to be initialised with
      */
     public void setAilurus(Ailurus d) {

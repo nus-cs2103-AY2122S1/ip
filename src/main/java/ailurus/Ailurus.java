@@ -33,6 +33,7 @@ public class Ailurus {
 
     /**
      * Exit JavaFX program
+     *
      */
     public static void exit() {
         isExit = true;
@@ -49,6 +50,7 @@ public class Ailurus {
 
     /**
      * Get message and handle response
+     *
      * @param message message to be parsed
      * @return response to message
      */
