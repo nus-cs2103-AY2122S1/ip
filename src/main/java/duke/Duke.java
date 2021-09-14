@@ -2,6 +2,11 @@ package duke;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * This class encapsulates Duke, an interactive task management chat-bot.
@@ -44,15 +49,25 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        Ui ui = new Ui(stage);
-        storage = new Storage(DATA_FILENAME);
         try {
-            tasks = new TaskList(storage.load());
-            ui.showLoadingSuccess(DATA_FILENAME);
-        } catch (DukeException e) {
-            tasks = new TaskList();
-            ui.showLoadingError(DATA_FILENAME);
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.setTitle("Duke™ – Your Task Management Assistant");
+            fxmlLoader.<Ui>getController().printReply("Hello, I'm Duke!\nWhat can I do for you?");
+            storage = new Storage(DATA_FILENAME);
+            try {
+                tasks = new TaskList(storage.load());
+                fxmlLoader.<Ui>getController().showLoadingSuccess(DATA_FILENAME);
+            } catch (DukeException e) {
+                tasks = new TaskList();
+                fxmlLoader.<Ui>getController().showLoadingError(DATA_FILENAME);
+            }
+            parser = new Parser(tasks);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        parser = new Parser(tasks);
     }
 }

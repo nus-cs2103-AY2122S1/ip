@@ -1,10 +1,9 @@
 package duke;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
+import java.io.IOException;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -15,57 +14,50 @@ import javafx.scene.layout.HBox;
  * @author Kleon Ang
  */
 public class DialogBox extends HBox {
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Constructor for a DialogBox.
      *
-     * @param l The Label containing the dialog text.
-     * @param iv The ImageView containing the picture of Duke or the user.
+     * @param text The Label containing the dialog text.
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.setPadding(new Insets(10, 10, 10, 10));
-        this.getChildren().addAll(text, displayPicture);
-        this.setSpacing(10);
-    }
-
-    private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tempList = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tempList);
-        this.getChildren().setAll(tempList);
+    private DialogBox(String text, boolean isDuke) {
+        try {
+            FXMLLoader fxmlLoader;
+            if (isDuke) {
+                fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/DukeDialogBox.fxml"));
+            } else {
+                fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/UserDialogBox.fxml"));
+            }
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialog.setText(text);
     }
 
     /**
      * Gets a DialogBox containing user dialog.
      *
-     * @param l The Label containing the user dialog.
-     * @param iv The ImageView containing the image of the user.
+     * @param text The string containing the user dialog.
      * @return A DialogBox with the user dialog.
      */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text) {
+        return new DialogBox(text, false);
     }
 
     /**
      * Gets a DialogBox containing Duke's dialog.
      *
-     * @param l The Label containing Duke's dialog.
-     * @param iv The ImageView containing the image of Duke.
+     * @param text The string containing Duke's dialog.
      * @return A DialogBox with Duke's dialog.
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        DialogBox db = new DialogBox(l, iv);
-        db.flip();
-        return db;
+    public static DialogBox getDukeDialog(String text) {
+        return new DialogBox(text, true);
     }
 }
