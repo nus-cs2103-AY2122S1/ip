@@ -19,6 +19,7 @@ public class Parser {
      * then if so executes action associated with provided string input and returns a string response for UI to pass
      * back to the user.
      *
+     * @param ui intermediary text processor between parser and Duke's response output,
      * @param input    command associated with an action
      * @param taskList storage used to carry out actions
      * @return whether Duke has completed executing

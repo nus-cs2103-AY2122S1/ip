@@ -23,6 +23,7 @@ public class TaskList implements Serializable {
      * General-purpose method that stores any task created by Duke.
      *
      * @param task the task to be stored
+     * @return confirmation that task has been stored.
      */
     public String addCustom(Task task) {
         tasks.add(task);
@@ -34,6 +35,8 @@ public class TaskList implements Serializable {
 
     /**
      * Retrieves all stored tasks and displays them.
+     *
+     * @return formatted list of stored tasks
      */
     public String list() {
         String result = "";
@@ -47,6 +50,7 @@ public class TaskList implements Serializable {
      * Marks a task as done, represented in the future with a cross in the associated column.
      *
      * @param taskNumber position of task in the TaskList
+     * @return confirmation that task has been marked as done.
      */
     public String done(int taskNumber) {
         tasks.get(taskNumber - 1).complete();
@@ -58,7 +62,7 @@ public class TaskList implements Serializable {
      * Removes target task.
      *
      * @param taskNumber position of target task
-     * @return Duke response indicating if task was successful
+     * @return confirmation that task has been deleted.
      */
     public String delete(int taskNumber) {
         String result = "";
@@ -80,7 +84,7 @@ public class TaskList implements Serializable {
      * @param taskField target field of task
      * @param newItem new user-provided value for target field
      * @return Duke response indicating if task was successful
-     * @throws Duke.DukeException
+     * @throws Duke.DukeException indicates that a field that does not exist was requested to be updated.
      */
     public String update(int taskNumber, TaskField taskField, String newItem) throws Duke.DukeException {
         if (taskNumber > this.tasks.size() || taskNumber <= 0) {

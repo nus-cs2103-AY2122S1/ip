@@ -28,7 +28,7 @@ public class Task implements Serializable {
      * @param taskField target field of task
      * @param newItem new user-provided value for target field
      * @return string representation of updated item
-     * @throws Duke.DukeException
+     * @throws Duke.DukeException indicates that a field that does not exist was requested to be updated.
      */
     public String update(TaskField taskField, String newItem) throws Duke.DukeException {
         if (taskField != TaskField.DESCRIPTION) {
