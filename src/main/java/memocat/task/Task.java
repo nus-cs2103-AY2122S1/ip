@@ -8,7 +8,7 @@ public abstract class Task implements Comparable<Task> {
     protected boolean isDone;
 
     /**
-     * Create a Task.
+     * Creates a Task.
      *
      * @param description Description of the task.
      */
@@ -18,7 +18,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Get status icon of this task.
+     * Gets status icon of this task.
      *
      * @return "X" if this task is done, otherwise " ".
      */
@@ -27,7 +27,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Mark this task as done.
+     * Marks this task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -39,7 +39,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Get the done status of this task.
+     * Gets the done status of this task.
      *
      * @return True if this task is done, false otherwise.
      */

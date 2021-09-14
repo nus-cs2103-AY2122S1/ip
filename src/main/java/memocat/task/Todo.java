@@ -6,7 +6,7 @@ package memocat.task;
 public class Todo extends Task {
 
     /**
-     * Create a Todo task.
+     * Creates a Todo task.
      *
      * @param description Description of the todo.
      */

@@ -36,7 +36,7 @@ public class Storage {
     private final Parser parser = new Parser();
 
     /**
-     * Construct a storage instance to handle task storage.
+     * Constructs a storage instance to handle task storage.
      *
      * @param filePath Path to the data save file directory.
      * @param fileName File name of the data save file.
@@ -47,7 +47,7 @@ public class Storage {
     }
 
     /**
-     * Read data from the data file memocat.txt.
+     * Reads data from the data file memocat.txt.
      *
      * @return A TaskList of tasks read.
      */
@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Convert a data string read from memocat.txt into task.
+     * Converts a data string read from memocat.txt into task.
      *
      * @return The task represented by the string.
      */
@@ -124,7 +124,7 @@ public class Storage {
     }
 
     /**
-     * Write a list of tasks to the memocat.txt data file.
+     * Writes a list of tasks to the memocat.txt data file.
      *
      * @param tasks The list of tasks to be written.
      */

@@ -24,8 +24,9 @@ public class MemoCat {
      * Parser instance to handle parsing.
      */
     private final Parser parser;
+
     /**
-     * Construct a memocat instance to run memocat.
+     * Constructs a memocat instance to run memocat.
      *
      * @param filePath Path to the data save file directory
      * @param fileName File name of the data save file
@@ -40,8 +41,9 @@ public class MemoCat {
     public static void main(String[] args) {
         new MemoCat("./data/", "memocat.txt").run();
     }
+
     /**
-     * Find tasks from task list that contains a given pattern and print the tasks.
+     * Finds tasks from task list that contains a given pattern and print the tasks.
      *
      * @param command The command entered to the console.
      */
@@ -58,7 +60,7 @@ public class MemoCat {
     }
 
     /**
-     * Add and store tasks entered and display them back with complete status when requested.
+     * Adds and stores tasks entered and display them back with complete status when requested.
      */
     private void add() {
         String command;
@@ -107,7 +109,7 @@ public class MemoCat {
     }
 
     /**
-     * memocat response message for done command.
+     * Responses for done command.
      *
      * @param command The command entered to console.
      */
@@ -133,7 +135,7 @@ public class MemoCat {
     }
 
     /**
-     * memocat response message for todo command.
+     * Responses for todo command.
      *
      * @param command The command entered to console.
      */
@@ -156,7 +158,7 @@ public class MemoCat {
     }
 
     /**
-     * memocat response message for event command.
+     * Responses for event command.
      *
      * @param command The command entered to console.
      */
@@ -180,7 +182,7 @@ public class MemoCat {
     }
 
     /**
-     * memocat response message for deadline command.
+     * Responses for deadline command.
      *
      * @param command The command entered to console.
      */
@@ -203,7 +205,7 @@ public class MemoCat {
     }
 
     /**
-     * memocat response message for delete command.
+     * Responses for delete command.
      *
      * @param command The command entered to console.
      */

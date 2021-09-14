@@ -10,7 +10,7 @@ public class Ui {
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Print a message that is enclosed by 2 horizontal lines.
+     * Prints a message that is enclosed by 2 horizontal lines.
      *
      * @param message The message to be printed between 2 horizontal lines.
      */
@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Greeting message of memocat.
+     * Prints greeting message of MemoCat.
      */
     public void greet() {
         String logo = " ____        _\n"
@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * Get the next line of input.
+     * Gets the next line of input.
      *
      * @return The next line of input.
      */
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Exit message of ui.
+     * Exits message of ui.
      */
     public void bye() {
         this.scanner.close();

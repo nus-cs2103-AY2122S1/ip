@@ -15,8 +15,8 @@ import memocat.task.Todo;
  */
 public class Parser {
     /**
-     * Get the action specified by the command.
-     * <p>
+     * Gets the action specified by the command.
+     *
      * A valid action can be list, done, todo, event, deadline, delete.
      *
      * @param command The command to be parsed.
@@ -27,7 +27,7 @@ public class Parser {
     }
 
     /**
-     * Get the task index of done and delete action.
+     * Gets the task index of done and delete action.
      *
      * @param command The command to be parsed.
      * @return The index of the task of the command, -1 if is invalid action.
@@ -44,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * Get the relevant task information from the command.
+     * Gets the relevant task information from the command.
      *
      * @param command The command to be parsed.
      * @return A map of task information from the command.
@@ -117,7 +117,7 @@ public class Parser {
     }
 
     /**
-     * Parse a string of time into LocalDate.
+     * Parses a string of time into LocalDate.
      *
      * @param str The time string.
      * @return The LocalDate corresponding to the string.
@@ -133,7 +133,7 @@ public class Parser {
     }
 
     /**
-     * Format LocalDate into MMMM d yyyy format.
+     * Formats LocalDate into MMMM d yyyy format.
      *
      * @param localDate The LocalDate to be formatted.
      * @return The formatted LocalDate string.

@@ -10,13 +10,13 @@ public class TaskList extends ArrayList<Task> {
     private ArrayList<Task> list = new ArrayList<>();
 
     /**
-     * Create an empty list of task.
+     * Creates an empty list of task.
      */
     public TaskList() {
     }
 
     /**
-     * Create a list of tasks.
+     * Creates a list of tasks.
      *
      * @param tasks ArrayList of Tasks to create the task list from.
      */
@@ -70,7 +70,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Convert the task list into array list of string.
+     * Converts the task list into array list of string.
      *
      * @return Array list of task strings.
      */
@@ -83,7 +83,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Convert a data string read from memocat.txt into task.
+     * Converts a data string read from memocat.txt into task.
      *
      * @return The task represented by the string.
      */
@@ -119,7 +119,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Get a string of tasks matching the pattern.
+     * Gets a string of tasks matching the pattern.
      *
      * @param pattern The pattern to match.
      * @return A string of tasks matching the patter.
@@ -151,7 +151,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Sort the tasks by time.
+     * Sorts the tasks by time.
      *
      * Todo tasks are not sorted and always put in front.
      */

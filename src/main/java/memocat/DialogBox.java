@@ -23,10 +23,10 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructor of DialogBox.
+     * Constructs a DialogBox.
      *
      * @param l  Label.
-     * @param iv ImageView
+     * @param iv ImageView.
      */
     public DialogBox(Label l, ImageView iv) {
         text = l;

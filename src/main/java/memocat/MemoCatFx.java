@@ -127,6 +127,11 @@ public class MemoCatFx extends Application {
         // more code to be added here later
     }
 
+    /**
+     * Sends greeting message of MemoCat.
+     *
+     * @param dialogContainer Dialog container of the chat.
+     */
     private void greet(VBox dialogContainer) {
         Label greetMessage = new Label("Greetings!\nThis is memocat.\nHow can I help you?");
         dialogContainer.getChildren().add(
@@ -176,7 +181,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * Add user and memocat dialog for bye.
+     * Adds user and MemoCat dialog for bye.
      *
      * @param dialogContainer The dialog container.
      */
@@ -188,7 +193,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * Exit app after the stated seconds.
+     * Exits app after the stated seconds.
      *
      * @param seconds Number of seconds before exiting.
      */
@@ -199,7 +204,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * Exit the app after 1 second.
+     * Exits the app after 1 second.
      */
     private void exitApp() {
         userInput.clear();
@@ -208,7 +213,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      *
      * @param input String of user input.
      */
@@ -250,7 +255,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * memocat response message for done command.
+     * Responses for done command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -279,7 +284,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * memocat response message for todo command.
+     * Responses for todo command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -302,7 +307,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * memocat response message for event command.
+     * Responses for event command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -329,7 +334,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * memocat response message for deadline command.
+     * Responses for deadline command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -356,7 +361,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * memocat response message for delete command.
+     * Responses for delete command.
      *
      * @param input Input command string.
      * @return String of response.
@@ -384,7 +389,7 @@ public class MemoCatFx extends Application {
     }
 
     /**
-     * Find tasks from task list that contains a given pattern and print the tasks.
+     * Finds tasks from task list that contains a given pattern and print the tasks.
      *
      * @param input Input command string.
      * @return String of response.
