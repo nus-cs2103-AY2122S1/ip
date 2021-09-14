@@ -22,5 +22,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 /src/out/test
 /src/out/production
 
-#duke task file
+#duke task files
 /duke.txt
+/src/duke.txt
