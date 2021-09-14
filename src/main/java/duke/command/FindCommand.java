@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents the command to find tasks containing a particular keyword.
@@ -10,7 +16,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Constructor for the command object.
+     * Constructor for the find command.
      *
      * @param keyword The keyword to be searched for.
      */

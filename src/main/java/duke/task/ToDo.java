@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a ToDo Task which inherits from Task.

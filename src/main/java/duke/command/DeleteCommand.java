@@ -1,4 +1,11 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents a command to delete a task.

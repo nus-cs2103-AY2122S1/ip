@@ -1,4 +1,4 @@
-package duke;
+package duke.command;
 
 /**
  * Represents the class that provide the necessary data for the help command.

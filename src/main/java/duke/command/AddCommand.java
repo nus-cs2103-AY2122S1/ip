@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents a command class that adds a task.
@@ -6,8 +12,8 @@ package duke;
  * @author Sherman Ng Wei Sheng
  */
 public class AddCommand extends Command {
-    private boolean isExit;
-    private Task task;
+    private final boolean isExit;
+    private final Task task;
 
     /**
      * Constructor for AddCommand.
@@ -30,7 +36,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a task to the TaskList provided, logs the action on console and updates the data in the local storage.
+     * Adds a task to the TaskList provided and updates the data in the local storage.
      *
      * @param list TaskList before addition of the task.
      * @param ui Ui object to log the execution of the command.

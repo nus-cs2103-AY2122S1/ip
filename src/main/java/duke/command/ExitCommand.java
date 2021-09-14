@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.exception.StorageSavingException;
+import duke.task.TaskList;
+import duke.ui.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents a command to exit the program.

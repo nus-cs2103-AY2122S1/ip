@@ -1,7 +1,23 @@
-package duke;
+package duke.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.MarkDoneCommand;
+import duke.command.PrintCommand;
+import duke.exception.DukeException;
+import duke.exception.IllegalFormatException;
+import duke.exception.UnknownCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Represents the parser that could interpret the user input.

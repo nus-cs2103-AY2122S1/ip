@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.task.TaskList;
+import duke.ui.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents a command to mark a task as done.

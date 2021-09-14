@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents an abstract Command class.

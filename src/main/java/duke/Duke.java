@@ -1,5 +1,12 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Parser;
+import duke.ui.Storage;
+import duke.ui.Ui;
+
 /**
  * Represents a Personal Assistant Chatbot that helps a person keeps track of various things.
  *

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a Task which contains a String description and a boolean status.

@@ -1,10 +1,12 @@
-package duke;
+package duke.ui;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.exception.StorageLoadingException;
+import duke.exception.StorageSavingException;
 
 /**
  * Represents the class that deals with loading tasks from file and saving tasks to file.
