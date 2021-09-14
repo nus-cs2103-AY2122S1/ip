@@ -3,18 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.TagCommand;
-import duke.command.ToDoCommand;
-import duke.command.UnexpectedCommand;
-import duke.command.WelcomeCommand;
+import duke.command.*;
 
 /**
  * This class represents a Parser, which parses the input given by the user.
@@ -30,102 +19,112 @@ public class Parser {
     public static Command parse(String input) {
         String[] splitText = input.trim().split("\\s+", 2);
         String command = splitText[0];
-        Command output;
-        switch (command) {
-        case "welcome":
+        Command output = new EmptyCommand();
+        if (command.equals("welcome")) {
             output = new WelcomeCommand();
-            break;
-        case "todo":
-            try {
-                String toDoTask = splitText[1];
-                output = new ToDoCommand(toDoTask);
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception, todo");
-                break;
-            }
-        case "event":
-            try {
-                String[] furtherSplitEvent = splitText[1].trim().split("/at ");
-                String eventTask = furtherSplitEvent[0];
-                LocalDateTime eventTime = LocalDateTime.parse(furtherSplitEvent[1], Ui.TIME_FORMATTER);
-                output = new EventCommand(eventTask, eventTime);
-                break;
-            } catch (DateTimeParseException e) {
-                output = new UnexpectedCommand("date time parse exception");
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception, event");
-                break;
-            }
-        case "deadline":
-            try {
-                String[] furtherSplitDeadline = splitText[1].trim().split("/by ");
-                String deadlineTask = furtherSplitDeadline[0];
-                LocalDateTime deadlineBy = LocalDateTime.parse(furtherSplitDeadline[1], Ui.TIME_FORMATTER);
-                output = new DeadlineCommand(deadlineTask, deadlineBy);
-                break;
-            } catch (DateTimeParseException e) {
-                output = new UnexpectedCommand("date time parse exception");
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception, deadline");
-                break;
-            }
-        case "list":
+        }
+        if (command.equals("todo")) {
+            output = handleToDo(splitText[1]);
+        }
+        if (command.equals("event")) {
+            output = handleEvent(splitText[1]);
+        }
+        if (command.equals("deadline")) {
+            output = handleDeadline(splitText[1]);
+        }
+        if (command.equals("list")) {
             output = new ListCommand();
-            break;
-        case "done":
-            try {
-                int index = Integer.parseInt(splitText[1]);
-                output = new DoneCommand(index);
-                break;
-            } catch (NumberFormatException e) {
-                output = new UnexpectedCommand("number format exception");
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception");
-                break;
-            }
-        case "delete":
-            try {
-                int index = Integer.parseInt(splitText[1]);
-                output = new DeleteCommand(index);
-                break;
-            } catch (NumberFormatException e) {
-                output = new UnexpectedCommand("number format exception");
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception");
-                break;
-            }
-        case "find":
-            try {
-                String keyword = splitText[1];
-                output = new FindCommand(keyword);
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception, find");
-                break;
-            }
-        case "tag":
-            try {
-                String[] furtherSplitTag = splitText[1].trim().split("#");
-                int index = Integer.parseInt(furtherSplitTag[0].substring(0, 1));
-                output = new TagCommand(index, furtherSplitTag);
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                output = new UnexpectedCommand("array out of bounds exception, tag");
-                break;
-            }
-        case "bye":
+        }
+        if ("done".equals(command)) {
+            output = handleDone(splitText[1]);
+        }
+        if ("delete".equals(command)) {
+            output = handleDelete(splitText[1]);
+        }
+        if ("find".equals(command)) {
+            output = handleFind(splitText[1]);
+        }
+        if ("tag".equals(command)) {
+            output = handleTag(splitText[1]);
+        }
+        if ("bye".equals(command)) {
             output = new ByeCommand();
-            break;
-        default:
-            output = new UnexpectedCommand("");
-            break;
         }
         assert !output.equals(null): "output should not be null";
         return output;
+    }
+
+    private static Command handleToDo(String name) {
+        try {
+            return new ToDoCommand(name);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception, todo");
+        }
+    }
+
+    private static Command handleEvent(String task) {
+        try {
+            String[] furtherSplitEvent = task.trim().split("/at ");
+            String eventTask = furtherSplitEvent[0];
+            LocalDateTime eventTime = LocalDateTime.parse(furtherSplitEvent[1], Ui.TIME_FORMATTER);
+            return new EventCommand(eventTask, eventTime);
+        } catch (DateTimeParseException e) {
+            return new UnexpectedCommand("date time parse exception");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception, event");
+        }
+    }
+
+    private static Command handleDeadline(String task) {
+        try {
+            String[] furtherSplitDeadline = task.trim().split("/by ");
+            String deadlineTask = furtherSplitDeadline[0];
+            LocalDateTime deadlineBy = LocalDateTime.parse(furtherSplitDeadline[1], Ui.TIME_FORMATTER);
+            return new DeadlineCommand(deadlineTask, deadlineBy);
+        } catch (DateTimeParseException e) {
+            return new UnexpectedCommand("date time parse exception");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception, deadline");
+        }
+    }
+
+    private static Command handleDone(String indexStr) {
+        try {
+            int index = Integer.parseInt(indexStr);
+            return new DoneCommand(index);
+        } catch (NumberFormatException e) {
+            return new UnexpectedCommand("number format exception");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception");
+        }
+    }
+
+    private static Command handleDelete(String indexStr) {
+        try {
+            int index = Integer.parseInt(indexStr);
+            return new DeleteCommand(index);
+        } catch (NumberFormatException e) {
+            return new UnexpectedCommand("number format exception");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception");
+        }
+    }
+
+    private static Command handleFind(String keyword) {
+        try {
+            return new FindCommand(keyword);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception, find");
+        }
+    }
+
+    private static Command handleTag(String tag) {
+        try {
+            String[] furtherSplitTag = tag.trim().split("#");
+            int index = Integer.parseInt(furtherSplitTag[0].substring(0, 1));
+            return new TagCommand(index, furtherSplitTag);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new UnexpectedCommand("array out of bounds exception, tag");
+        }
     }
 }

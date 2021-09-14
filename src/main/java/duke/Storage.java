@@ -61,7 +61,8 @@ public class Storage {
     }
 
     /**
-     * Saved file should be structured in this manner:
+     * Loads a saved file.
+     * The data file should be structured in this manner:
      * - In each line, start with a T(odo), D(eadline), E(vent)
      * - Space out each detail with a "|'
      * - If empty line, assume end of file
@@ -83,45 +84,13 @@ public class Storage {
 
             switch (type) {
             case "T":
-                Task eventTodo = new ToDo(taskName);
-                if (isDone.contains("1")) {
-                    eventTodo.doneTask(false);
-                }
-                if (isTagged.contains("1")) {
-                    String[] tags = data[4].split("#");
-                    for (int i = 1; i < tags.length; i++) {
-                        eventTodo.tag(tags[i]);
-                    }
-                }
-                lst.add(eventTodo, false);
+                handleTodo(lst, taskName, isDone, isTagged, data);
                 break;
             case "D":
-                String deadline = data[5].substring(1);
-                Deadline eventDeadline = new Deadline(taskName, LocalDateTime.parse(deadline, formatter));
-                if (isDone.contains("1")) {
-                    eventDeadline.doneTask(false);
-                }
-                if (isTagged.contains("1")) {
-                    String[] tags = data[4].split("#");
-                    for (int i = 1; i < tags.length; i++) {
-                        eventDeadline.tag(tags[i]);
-                    }
-                }
-                lst.add(eventDeadline, false);
+                handleDeadline(lst, taskName, isDone, isTagged, data);
                 break;
             case "E":
-                String time = data[5].substring(1);
-                Event eventEvent = new Event(taskName, LocalDateTime.parse(time, formatter));
-                if (isDone.contains("1")) {
-                    eventEvent.doneTask(false);
-                }
-                if (isTagged.contains("1")) {
-                    String[] tags = data[4].split("#");
-                    for (int i = 1; i < tags.length; i++) {
-                        eventEvent.tag(tags[i]);
-                    }
-                }
-                lst.add(eventEvent, false);
+                handleEvent(lst, taskName, isDone, isTagged, data);
                 break;
             }
         }
@@ -141,5 +110,49 @@ public class Storage {
         } catch (FileNotFoundException e) {
             Ui.fileNotFoundError();
         }
+    }
+
+    private void handleTodo(TaskList lst, String taskName, String isDone, String isTagged, String[] data) {
+        Task eventTodo = new ToDo(taskName);
+        if (isDone.contains("1")) {
+            eventTodo.doneTask(false);
+        }
+        if (isTagged.contains("1")) {
+            String[] tags = data[4].split("#");
+            for (int i = 1; i < tags.length; i++) {
+                eventTodo.tag(tags[i]);
+            }
+        }
+        lst.add(eventTodo, false);
+    }
+
+    private void handleEvent(TaskList lst, String taskName, String isDone, String isTagged, String[] data) {
+        String time = data[5].substring(1);
+        Event eventEvent = new Event(taskName, LocalDateTime.parse(time, formatter));
+        if (isDone.contains("1")) {
+            eventEvent.doneTask(false);
+        }
+        if (isTagged.contains("1")) {
+            String[] tags = data[4].split("#");
+            for (int i = 1; i < tags.length; i++) {
+                eventEvent.tag(tags[i]);
+            }
+        }
+        lst.add(eventEvent, false);
+    }
+
+    private void handleDeadline(TaskList lst, String taskName, String isDone, String isTagged, String[] data) {
+        String deadline = data[5].substring(1);
+        Deadline eventDeadline = new Deadline(taskName, LocalDateTime.parse(deadline, formatter));
+        if (isDone.contains("1")) {
+            eventDeadline.doneTask(false);
+        }
+        if (isTagged.contains("1")) {
+            String[] tags = data[4].split("#");
+            for (int i = 1; i < tags.length; i++) {
+                eventDeadline.tag(tags[i]);
+            }
+        }
+        lst.add(eventDeadline, false);
     }
 }
