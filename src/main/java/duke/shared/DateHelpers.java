@@ -8,9 +8,13 @@ import java.time.temporal.TemporalAccessor;
 import duke.constants.Constants;
 
 public class DateHelpers {
+    //@@author sunjc826-reused
+    //Reused from https://stackoverflow.com/questions/48280447/java-8-datetimeformatter-with-optional-part
+
     /**
-     * Reference
-     * https://stackoverflow.com/questions/48280447/java-8-datetimeformatter-with-optional-part
+     * Parses and creates a datetime object.
+     * @param input String formatted to represent a date and time.
+     * @return LocalDateTime object.
      */
     public static LocalDateTime parseDateString(String input) {
         try {
@@ -26,4 +30,5 @@ public class DateHelpers {
             throw new InvalidDateException("Formatting not recognized.");
         }
     }
+    //@@author
 }

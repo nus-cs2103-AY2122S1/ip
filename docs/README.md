@@ -119,6 +119,6 @@ For context, these are the tasks currently registered in Duke.<br>
     - Of the 2 events, only the event that spans from the year 2000 to 2003 matches.
 
 ### `bye` - Exits the app.
-Quits the program and saves your tasks to local storage.
+Quits the program and saves your tasks to local storage. Note that tasks will **not** be saved during execution of other commands. 
 
 Format: `bye`

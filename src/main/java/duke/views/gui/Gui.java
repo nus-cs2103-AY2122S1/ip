@@ -1,12 +1,12 @@
 package duke.views.gui;
 
+import duke.utils.Storage;
+import duke.views.Greeter;
 import duke.views.InteractionLayer;
-import duke.views.cli.Greeter;
-import duke.views.cli.Loader;
 import duke.views.strategies.RespondWith;
 
 public class Gui implements InteractionLayer {
-    protected Loader loader;
+    protected Storage storage;
     protected Greeter greeter;
     protected RespondWith responder;
 
@@ -17,7 +17,7 @@ public class Gui implements InteractionLayer {
      *                  when fed input.
      */
     public Gui(RespondWith responder) {
-        loader = new Loader();
+        storage = new Storage();
         greeter = new Greeter();
         this.responder = responder;
     }
@@ -28,8 +28,8 @@ public class Gui implements InteractionLayer {
     }
 
     @Override
-    public Loader getLoader() {
-        return loader;
+    public Storage getStorage() {
+        return storage;
     }
 
     @Override

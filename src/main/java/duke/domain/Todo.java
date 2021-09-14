@@ -12,7 +12,6 @@ public class Todo extends Task {
      */
     public Todo(String name) {
         super(name);
-        // typeString = TYPE_STRING;
     }
 
     /**
@@ -22,7 +21,6 @@ public class Todo extends Task {
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
-        // typeString = TYPE_STRING;
     }
 
     /**

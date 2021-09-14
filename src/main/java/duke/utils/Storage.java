@@ -1,4 +1,4 @@
-package duke.views.cli;
+package duke.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Class encapsulating the interface between local storage and the application logic.
  * Has methods for loading from local storage and writing to local storage.
  */
-public class Loader {
+public class Storage {
 
     /**
      * Returns a list of strings for each line read in a text file located at the given relative path.

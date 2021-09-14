@@ -22,7 +22,6 @@ public class Event extends Task {
      */
     public Event(String name, String dateRange) {
         super(name);
-        // typeString = TYPE_STRING;
         this.dateRange = DateRange.createFromRange(dateRange);
     }
 

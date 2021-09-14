@@ -24,14 +24,14 @@ import duke.views.strategies.commands.OccurringOnCommand;
 /**
  * A responder that is able to handle tasks with CRUD functionality.
  */
-public class MultiType extends RespondWith {
+public class Parser extends RespondWith {
 
     private final TaskList userTasks;
 
     /**
      * Creates a responder that handles multiple types of tasks.
      */
-    public MultiType() {
+    public Parser() {
         userTasks = new TaskList();
         commands.put(Command.LIST, ListCommand.getInstance(userTasks));
         commands.put(Command.DONE, MarkDoneCommand.getInstance(userTasks));

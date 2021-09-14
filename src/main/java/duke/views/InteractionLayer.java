@@ -3,15 +3,14 @@ package duke.views;
 import java.util.List;
 
 import duke.constants.Constants;
-import duke.views.cli.Greeter;
-import duke.views.cli.Loader;
+import duke.utils.Storage;
 import duke.views.strategies.RespondWith;
 
 public interface InteractionLayer {
 
     Greeter getGreeter();
 
-    Loader getLoader();
+    Storage getStorage();
 
     RespondWith getResponder();
 
@@ -28,7 +27,7 @@ public interface InteractionLayer {
      * Runs before the application becomes responsive to user input.
      */
     default void initCallbacks() {
-        List<String> dataList = getLoader().loadRelative(Constants.Storage.PERSISTENCE_LOCATION);
+        List<String> dataList = getStorage().loadRelative(Constants.Storage.PERSISTENCE_LOCATION);
         getResponder().load(dataList);
         init();
     }
@@ -60,7 +59,7 @@ public interface InteractionLayer {
      */
     default void endCallbacks() {
         end();
-        getLoader().storeRelative(getResponder().persistToStore(), Constants.Storage.PERSISTENCE_LOCATION);
+        getStorage().storeRelative(getResponder().persistToStore(), Constants.Storage.PERSISTENCE_LOCATION);
     }
 
     /**

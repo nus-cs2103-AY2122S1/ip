@@ -3,6 +3,8 @@ package duke.views.cli;
 import java.util.Scanner;
 
 import duke.interfaces.PrintableMixin;
+import duke.utils.Storage;
+import duke.views.Greeter;
 import duke.views.InteractionLayer;
 import duke.views.strategies.RespondWith;
 
@@ -11,7 +13,7 @@ import duke.views.strategies.RespondWith;
  * user input via the terminal.
  */
 public class Cli implements InteractionLayer, PrintableMixin {
-    protected Loader loader;
+    protected Storage storage;
     protected Greeter greeter;
     protected RespondWith responder;
     protected Scanner sc;
@@ -23,7 +25,7 @@ public class Cli implements InteractionLayer, PrintableMixin {
      *                  when fed input.
      */
     public Cli(RespondWith responder) {
-        loader = new Loader();
+        storage = new Storage();
         greeter = new Greeter();
         this.responder = responder;
         sc = new Scanner(System.in);
@@ -35,8 +37,8 @@ public class Cli implements InteractionLayer, PrintableMixin {
     }
 
     @Override
-    public Loader getLoader() {
-        return loader;
+    public Storage getStorage() {
+        return storage;
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface PrintableMixin {
     }
 
     /**
-     * Shortened version of System.out.println
+     * Prints to console.
      * @param s String to be printed.
      */
     default void print(String s) {
