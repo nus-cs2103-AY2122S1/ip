@@ -17,7 +17,8 @@ done faster than traditional GUI apps.
 * [FAQ](#faq)
 * [Command summary](#command-summary)
 
----
+<hr />
+
 ##  <span style="color:orangered">Quick start</span>
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -60,13 +61,13 @@ Refer to the [Features](#features) below for details of each command.
 deemed as unknown command.\
 >e.g. if the command specifies `list 123`, it will be unrecognizable by JoJoBot.
 
-### <span style="color:orange"> Listing all tasks: `list`</span>
+### <span style="color:orange">Listing all tasks: `list`</span>
 
 Shows a list of all tasks in the task list.
 
 Format: `list`
 
-### <span style="color:orange"> Adding a todo task: `todo` </span>
+### <span style="color:orange">Adding a todo task: `todo`</span>
 
 Adds a Todo task, with the given task description, to the task list.
 
@@ -76,7 +77,7 @@ Examples:
 
 * `todo read book`
 
-### <span style="color:orange"> Adding an event task: `event` </span>
+### <span style="color:orange">Adding an event task: `event`</span>
 Adds an Event task, with the given task description and date, to the task list.
 
 Format: `event TASK_DESCRIPTION /at AT`
@@ -87,7 +88,7 @@ Examples:
 * `event go party /at midnight`
 * `event attend wedding /at 2021-08-31`
 
-### <span style="color:orange"> Adding a deadline task: `deadline` </span>
+### <span style="color:orange">Adding a deadline task: `deadline`</span>
 Adds a Deadline task, with the given task description and date, to the task list.
 
 Format: `deadline TASK_DESCRIPTION /by BY`
@@ -97,7 +98,7 @@ The `BY` must be in **YYYY-MM-DD** format.
 Example:
 * `deadline submit assignment /by 2021-09-16`
 
-### <span style="color:orange"> Marking a task as done: `done` </span>
+### <span style="color:orange">Marking a task as done: `done`</span>
 Marks the task with the given index in the task list as done.
 
 Format: `done INDEX`
@@ -109,7 +110,7 @@ The `INDEX` must be **in the range of number of existing task in the list.**
 Examples:
 * `done 2` marks 2nd task in the list as done.
 
-### <span style="color:orange"> Deleting a task: `delete` </span>
+### <span style="color:orange">Deleting a task: `delete`</span>
 Deletes the task with the given index from the task list.
 
 Format: `delete INDEX`
@@ -124,7 +125,7 @@ Examples:
 Finding task(s) by keyword: find
 Finds task(s) which contain(s) the given keyword.
 
-### <span style="color:orange">Finding task(s) by keyword:  `find` </span>
+### <span style="color:orange">Finding task(s) by keyword: `find`</span>
 The search is **case-sensitive** e.g. `read` will **NOT** match `Read`.
 
 Format: `find KEYWORD`
