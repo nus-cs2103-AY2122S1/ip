@@ -1,7 +1,11 @@
 package bubbles.tasks;
 
+import bubbles.exceptions.EmptyTaskException;
+import bubbles.exceptions.InvalidFormatException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * A child class of Task, representing the tasks that need to be
@@ -10,9 +14,15 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate dueDate;
 
-    private Deadline(String description, boolean isDone, String dueDate) {
+    private Deadline(String description, boolean isDone, String dueDate) throws InvalidFormatException {
         super(description, isDone);
-        this.dueDate = Task.formatDate(dueDate);
+
+        try {
+            this.dueDate = Task.formatDate(dueDate);
+        } catch (DateTimeParseException e) {
+            throw new InvalidFormatException("The date you've entered should be in the format of yyyy-mm-dd.");
+        }
+
     }
 
     /**
@@ -22,10 +32,20 @@ public class Deadline extends Task {
      * @param isDone Whether the Deadline is done/completed.
      * @return The created Deadline Object.
      */
-    public static Deadline addDeadline(String input, boolean isDone) {
+    public static Deadline addDeadline(String input, boolean isDone) throws EmptyTaskException, InvalidFormatException {
+        if (input.equals("")) {
+            throw new EmptyTaskException("deadline");
+        }
+
         String[] arr = input.split(" /by ");
 
-        Deadline item = new Deadline(arr[0], isDone, arr[1]);
+        Deadline item;
+
+        try {
+            item = new Deadline(arr[0], isDone, arr[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidFormatException("When adding a deadline to the task list, the date field cannot be empty.");
+        }
 
         return item;
     }

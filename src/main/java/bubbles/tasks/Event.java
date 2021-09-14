@@ -1,7 +1,11 @@
 package bubbles.tasks;
 
+import bubbles.exceptions.EmptyTaskException;
+import bubbles.exceptions.InvalidFormatException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * A child class of Task, representing the tasks that start at
@@ -10,9 +14,14 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate eventTime;
 
-    private Event(String description, boolean isDone, String eventTime) {
+    private Event(String description, boolean isDone, String eventTime) throws InvalidFormatException {
         super(description, isDone);
-        this.eventTime = Task.formatDate(eventTime);
+
+        try {
+            this.eventTime = Task.formatDate(eventTime);
+        } catch (DateTimeParseException e) {
+            throw new InvalidFormatException("The date you've entered should be in the format of yyyy-mm-dd.");
+        }
     }
 
     /**
@@ -22,10 +31,21 @@ public class Event extends Task {
      * @param isDone Whether the Event is done/completed.
      * @return The created Event Object.
      */
-    public static Event addEvent(String input, boolean isDone) {
+    public static Event addEvent(String input, boolean isDone) throws EmptyTaskException, InvalidFormatException {
+        if (input.equals("")) {
+            throw new EmptyTaskException("event");
+        }
+
         String[] arr = input.split(" /at ");
 
-        Event item = new Event(arr[0], isDone, arr[1]);
+        Event item;
+
+        try {
+            item = new Event(arr[0], isDone, arr[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidFormatException("When adding an event to the task list, the date field cannot be empty.");
+        }
+
 
         return item;
     }

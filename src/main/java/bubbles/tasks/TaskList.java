@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import bubbles.exceptions.EmptyTaskException;
 import bubbles.exceptions.IndexOutOfBoundsException;
 import bubbles.exceptions.InvalidCommandException;
+import bubbles.exceptions.InvalidFormatException;
 import bubbles.util.Message;
 
 /**
@@ -107,20 +108,17 @@ public class TaskList {
 
         try {
             Task recentlyAdded = null;
+            String description = arr.length < 2 ? "" : arr[1];
 
             switch (t) {
             case TODO:
-                if (arr.length == 1) {
-                    ToDo.addToDo("", false);
-                }
-
-                recentlyAdded = ToDo.addToDo(arr[1], false);
+                recentlyAdded = ToDo.addToDo(description, false);
                 break;
             case DEADLINE:
-                recentlyAdded = Deadline.addDeadline(arr[1], false);
+                recentlyAdded = Deadline.addDeadline(description, false);
                 break;
             case EVENT:
-                recentlyAdded = Event.addEvent(arr[1], false);
+                recentlyAdded = Event.addEvent(description, false);
                 break;
             default:
                 assert false : "taskType is not one of the expected;";
@@ -135,7 +133,7 @@ public class TaskList {
             String taskCount = "Now you have " + this.count + " task(s) in the list!";
 
             return (Message.ADD + "     " + recentlyAdded + "\n" + taskCount);
-        } catch (EmptyTaskException e) {
+        } catch (EmptyTaskException | InvalidFormatException e) {
             return e.toString();
         }
     }
@@ -184,7 +182,11 @@ public class TaskList {
      * @param isDone Whether the Deadline is done/completed.
      */
     public void addDeadline(String input, boolean isDone) {
-        this.tasks.add(Deadline.addDeadline(input, isDone));
+        try {
+            this.tasks.add(Deadline.addDeadline(input, isDone));
+        } catch (EmptyTaskException | InvalidFormatException e) {
+            System.out.println(e);
+        }
 
         int previousCount = this.count;
         this.count++;
@@ -199,7 +201,11 @@ public class TaskList {
      * @param isDone Whether the Event is done/completed.
      */
     public void addEvent(String input, boolean isDone) {
-        this.tasks.add(Event.addEvent(input, isDone));
+        try {
+            this.tasks.add(Event.addEvent(input, isDone));
+        } catch (EmptyTaskException | InvalidFormatException e) {
+            System.out.println(e);
+        }
 
         int previousCount = this.count;
         this.count++;
