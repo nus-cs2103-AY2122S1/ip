@@ -3,20 +3,19 @@ JoJoBot is a desktop app for **managing tasks, optimized for use via a Command L
 the benefits of a Graphical User Interface (GUI). If you can type fast, JoJoBot can get your contact management tasks 
 done faster than traditional GUI apps.
 
-* Quick start
-* Features
-  * Viewing help : help
-  * Adding a person: add
-  * Listing all persons : list
-  * Editing a person : edit
-  * Locating persons by name: find
-  * Deleting a person : delete
-  * Clearing all entries : clear
-  * Exiting the program : exit
-  * Saving the data
-  * Editing the data file
-* FAQ
-* Command summary
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Listing all tasks: ```list```](#listing-all-tasks:-```list```)
+  * [Adding a todo task: ```todo```](#adding-a-todo-task:-```todo```)
+  * [Adding an event task: ```event```](#adding-an-event-task:-```event```)
+  * [Adding a deadline task: ```deadline```](#adding-a-deadline-task:-```deadline```)
+  * [Marking a task as done: ```done```](#marking-a-task-as-done:-```done```)
+  * [Deleting a task: ```delete```](#deleting-a-task:-```delete```)
+  * [Finding task(s) by keyword: ```find```](#finding-task(s)-by-keyword:-```find```)
+  * [Tagging a task: ```tag```](#tagging-a-task:-```tag```)
+  * [Exiting the program: ```bye```](#exiting-the-program:-```bye```)
+* [FAQ](#faq)
+* [Command summary](#command-summary)
 
 ---
 ##  <span style="color:orangered">Quick start</span>
@@ -125,7 +124,7 @@ Examples:
 Finding task(s) by keyword: find
 Finds task(s) which contain(s) the given keyword.
 
-### <span style="color:orange">Finding a task: ```find``` </span>
+### <span style="color:orange">Finding task(s) by keyword:  ```find``` </span>
 The search is **case-sensitive** e.g. ```read``` will **NOT** match ```Read```.
 
 Format: ```find KEYWORD```
