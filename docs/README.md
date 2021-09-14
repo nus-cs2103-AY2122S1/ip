@@ -1,29 +1,119 @@
-# User Guide
+# Jarvis User Guide
 
-## Features 
+## Features
+* Adding a todo task: `todo`
+* Adding a deadline task: `deadline`
+* Adding an event task: `event`
+* Deleting a task: `delete`
+* Marking a task as completed: `done`
+* Listing all tasks: `list`
+* Listing all tasks due today: `today`
+* Finding a specific task: `find`
+* Adding a note: `note`
+* Deleting a note: `delete note`
+* Listing all notes: `notes`
+* Exiting the program: `bye`
 
-### Feature-ABC
+#### Notes about the command format:
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. 
+  (e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter that can be used as `todo upload assignment`.)
+* Parameters must be in the given fixed order.
 
-Description of the feature.
+### Adding a todo task: `todo`
+Adds a todo task to the task list.
 
-### Feature-XYZ
+Format: `todo TASK_DESCRIPTION`
+* `TASK_DESCRIPTION` can include spaces.
 
-Description of the feature.
+Example(s): `todo upload assignment`
 
-## Usage
+### Adding a deadline task: `deadline`
+Adds a deadline task to the task list.
 
-### `Keyword` - Describe action
+Format: `deadline TASK_DESCRIPTION /by DATE TIME`
+* `TASK_DESCRIPTION` can include spaces.
+* The format for `DATE` is dd/mm/yyyy.
+* The format for `TIME` is hh:mm (24h format)
 
-Describe the action and its outcome.
+Example(s):
+deadline return book /by 15/09/2021 17:00
 
-Example of usage: 
+### Adding an event task: `event`
+Adds an event task to the task list.
 
-`keyword (optional arguments)`
+Format: `event TASK_DESCRIPTION /at DATE START_TIME-END_TIME`
+*  `TASK_DESCRIPTION` can include spaces.
+* The format for `DATE` is dd/mm/yyyy.
+* The format for `START_TIME` and `END_TIME` is hh:mm (24h format)
 
-Expected outcome:
+Example(s):
+`event party /at 15/09/2021 17:00-20:00`
 
-Description of the outcome.
+### Deleting a task: `delete`
+Deletes a todo/deadline/event task from the task list.
 
-```
-expected output
-```
+Format: delete `TASK_INDEX`
+* `TASK_INDEX` is the index of the task based on the list of tasks that is generated when entering the list command.
+* The index must be a positive integer 1,2,3, …
+
+Example(s):
+`delete 2` deletes the 2nd task in the task list
+
+### Marking a task as completed: `done`
+Marks a todo, deadline or an event task as done.
+
+Format: `done TASK_INDEX`
+* `TASK_INDEX` is the index of the task based on the list of tasks that is generated when entering the list command.
+* The index must be a positive integer 1,2,3, …
+
+Examples:
+`done 2` marks the 2nd task in the task list as done
+
+### Listing all tasks: `list`
+Displays all the tasks in the task list in the order in which they were added.
+
+Format: `list`
+
+### Listing all tasks due today: `today`
+Displays all the tasks in the task list that are due today. Within this list, tasks are in the order in which they 
+were added.
+
+Format: `today`
+
+### Finding a specific task: `find`
+Displays a list of tasks that have task descriptions that matches the search keywords/phrases.
+
+Format: `find KEY_WORDS`
+* `KEY_WORDS` can include spaces.
+* Search is case-sensitive (e.g `book` will not match with `Book`)
+* Partial words can be matched (e.g. `book` can match with a task description `return book`)
+
+Examples:
+`find web` displays a list of tasks with the word ‘web’ in the task description.
+
+### Adding a note: `note`
+Adds a note to the notes list.
+
+Format: `note NOTE_TITLE /NOTE_BODY`
+* `NOTE_TITLE` can include spaces.
+
+Examples: `note grocery list /tomatoes, milk`
+
+### Deleting a note: `delete note`
+Deletes a note from the notes list.
+
+Format: `delete note NOTE_INDEX`
+* `NOTE_INDEX` is the index of the note based on the list of notes that is generated when entering the notes command.
+* The index must be a positive integer 1,2,3, …
+
+Examples: `delete note 2` deletes the 2nd note in the notes list.
+
+### Listing all notes: `notes`
+Displays all the notes in the notes list in the order in which they were added.
+
+Format: `notes`
+
+### Exiting the program: `bye`
+Exits the program.
+
+Format: `bye`
