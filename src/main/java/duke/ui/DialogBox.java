@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setFill(new ImagePattern(img));
+        dialog.setTextFill(Color.BLACK);
         dialog.setBackground(new Background(new BackgroundFill(backgroundColour, CornerRadii.EMPTY, Insets.EMPTY)));
 
     }
@@ -78,7 +79,7 @@ public class DialogBox extends HBox {
      * @return DialogBox returns dialog box containing Duke image and Duke text
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, Color.LIGHTGREEN);
+        var db = new DialogBox(text, img, Color.LIGHTBLUE);
         db.flip();
         return db;
     }

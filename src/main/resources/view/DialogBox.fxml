@@ -13,7 +13,7 @@
     maxWidth="1.7976931348623157E308"
     prefWidth="400.0"
     type="javafx.scene.layout.HBox"
-    xmlns="http://javafx.com/javafx/16"
+    xmlns="http://javafx.com/javafx/11"
     xmlns:fx="http://javafx.com/fxml/1"
 >
     <children>
@@ -25,7 +25,10 @@
             wrapText="true"
         >
             <font>
-                <Font size="15.0" />
+                <Font
+                    name="Monospaced Regular"
+                    size="15.0"
+                />
             </font>
          <HBox.margin>
             <Insets
