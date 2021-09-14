@@ -75,7 +75,7 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         Task item = this.tasks.remove(index - 1);
-        String str = Ui.deleteTask(item);
+        String str = Ui.deleteTask(item) + "\n";
         str += Ui.remainingTasks(tasks);
         return str;
     }
