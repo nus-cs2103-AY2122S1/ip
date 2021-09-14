@@ -131,7 +131,7 @@ Example of usage:
 
 Expected outcome:
 
-<img src="done.png" alt=Lifeline response to done">
+<img src="done.png" alt=Lifeline response to done>
 
 ### `delete <index>` - Delete tasks
 
