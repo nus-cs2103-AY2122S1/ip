@@ -4,13 +4,13 @@
 
 Tiger is a personal assistant that helps you manage the tasks you're too lazy to do right now. 
 
-![Screenshot](./images/Ui.png)
+![Screenshot](./Ui.png)
 
 ### <ins>Font Credits:</ins> [Victor Mono](https://rubjo.github.io/victor-mono/)
 
-Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Events and deadlines are tasks associated with a date/time, and hence the user is required to enter in the date/time parameter. Tasks can be either marked as completed, or not completed and are classified into 3 priorities: low, medium and high. 
+Tiger classifies tasks into three categories: Todos, Events, and Deadlines. Events and deadlines are tasks associated with a date or time. Each task can be either marked as completed or not completed. A task also has a priority: low, medium, or high.
 
-Commands include a keyword, some mandatory arguments, and some optional arguments. The general usage is that the keyword comes first, then the mandatory arguments, then the optional arguments, ie. `[keyword] [mandatory arguments] [optional arguments].`
+Commands include a keyword, some mandatory arguments, and some optional arguments. The keyword comes first, then the mandatory arguments, followed by the optional arguments, ie. `[keyword] [mandatory arguments] [optional arguments].`
 
 ## Setting up
 **For all platforms:** `cd` to the directory containing `Tiger.jar,` and run:
@@ -38,16 +38,18 @@ Some advanced features include:
 
 ## Usage
 
+**Due to the way data is stored, users are not allowed to input semicolons (;).**
+
 ### Adding tasks
-Tiger can help you keep track of 3 types of tasks: Todos, Events and Deadlines. When a task is added, Tiger will display a string representation of the task, as such:
+The string representation of a task is as such:
 ```
 [T|E|D] [H|M|L|X] [task description] [task date]
 ```
-`T, E, D` denotes a Todo, Event or Deadline respectively, and `H, M, L` denotes a tasks of high, medium or low priority respectively. `X` marks completed tasks.
+`T, E, D` denotes a Todo, Event or Deadline tasks respectively. `H, M, L` denotes a tasks of high, medium or low priority respectively. `X` marks completed tasks.
 
 _________________________
 
-To add a new Todo, the usage is: `todo [task description] /priority [H|M|L].` The `/priority` command is optional.
+To add a new Todo, enter `todo [task description] /priority [H|M|L].` The `/priority` command is optional.
 
 Example: `todo homework` adds a new Todo named "Homework".
 
@@ -65,11 +67,11 @@ Expected outcome:
 Excellent! I've added this task:
 [T] [H] Homework
 ```
-Tiger autocapitalises the first letter of `homework` for the user. This is because Tiger has noticed that users tend to input all tasks in lower case, making the tasks look ugly. There is no way to disable this; free will is a lie.
+The first letter of the task description is capitalized automatically. There is no way to disable this; free will is a lie.
 
 _________________________
 
-To add a new Event, the usage is: `event [event description] /at [event time] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
+To add a new Event, enter: `event [event description] /at [event time] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and all other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
 Example: `event eat dinner /at 2021-05-21 16:00` creates a new Event named "eat dinner" at 2021-05-21 16:00.
 
@@ -78,16 +80,16 @@ Expected outcome:
 Excellent! I've added this event:
 [E] [M] Eat dinner (at 2021-05-21 16:00)
 ```
-**If the user only specifies the time, but not the date, Tiger guesses that the date is today.**
+**If the user only specifies the time, but not the date, today's date will be used instead.**
 
 Example: `event eat dinner /at 16:00` creates a new Event named "eat dinner" at [today's date] 16:00.
 
-Expected outcome: (assume today's date is 2021-08-31).
+Expected outcome:
 ```
 Excellent! I've added this event:
 [E] [M] Eat dinner (at 2021-08-31 16:00)
 ```
-Much like Todos, you can also specify a priority for your events.
+Much like Todos, events can be assigned different priorities:
 
 Example: `event eat dinner /at 15:29 /priority L` creates a new event named "eat dinner" at [today's date] 16:00 of low priority.
 
@@ -98,7 +100,7 @@ Excellent! I've added this event:
 ```
 _________________________
 
-To add a new Deadline, the usage is: `deadline [deadline description] /by [deadline due date] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
+To add a new Deadline, enter: `deadline [deadline description] /by [deadline due date] /priority [H|M|L].` The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm.` The year input string should be **exactly** 4 characters, and all other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
 Example: `deadline eat dinner /by 16:00` creates a new Deadline named "eat dinner" at [today's date] 16:00.
 
@@ -107,23 +109,22 @@ Expected outcome: (assume today's date is 2021-08-31).
 Excellent! I've added this event: 
 [D] [M] Eat dinner (by 2021-08-31 16:00)
 ```
-Much like Todos, you can also specify a priority for your deadlines.
 
 Example: `deadline eat dinner /by 15:29 /priority L` creates a new Deadline named "eat dinner" at [today's date] 16:00 of low priority.
 
-Expected outcome: (assume today's date is 2021-08-31).
+Expected outcome:
 ```
 Excellent! I've added this event:
 [D] [L] Eat dinner (by 2021-08-31 16:00)
 ```
 > Substitutable keywords: `dateline`
 
-**Due to the way data is stored, Tiger bans users from inputting semicolons (;).**
+
 
 _________________________
 
 ### Deleting a task
-Deletes the task at the specified index. Use `list` to get the list of tasks and indicies. The usage is `delete [task index].`
+Deletes the task at the specified index. Use the command `list` to get the list of tasks and indicies. The usage is `delete [task index].`
 
 Example: `delete 1` deletes the task at index 1.
 
@@ -137,7 +138,7 @@ Feeling lazy today? I've deleted:
 _________
 
 ### Marking a task as done
-Marks the task at a specified index as done. `list` to get the list of tasks and indicies. The usage is `done [task index].`
+Marks the task at a specified index as done.  Use the command `list` to get the list of tasks and indicies. The usage is `done [task index].`
 
 Example: `done 1` marks the task at index 1 as done.
 
@@ -149,7 +150,7 @@ Nice! I've marked this tasks as done:
 _________________________
 
 ### Finding a task
-Tiger can also help find tasks based on a specific keyword. The search is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring].`
+Find tasks based on a specific keyword. The search is not case sensitive, ie. `search woodlands` and `search Woodlands` gives the same result. The usage is `search [substring].`
 
 Example: `search Woodlands` searches for tasks with task description containing the string "Woodlands".
 
@@ -162,7 +163,7 @@ Expected outcome:
 _________________________
 
 ### Clearing all tasks
-If for some reason the list of tasks is too full, or the user is too lazy, the user can clear all the tasks at one go. The usage is `clear.`
+Clears all tasks. The usage is `clear.`
 
 Example: `clear` clears all tasks.
 
@@ -173,7 +174,7 @@ I've cleared all your tasks!
 _________________________
 
 ### Listing all tasks
-Tiger can help list tasks. (After all, that's the whole point of a Todo app right?) The usage is `list.`
+Lists all tasks. (After all, that's the whole point of a todo app right?) The usage is `list.`
 
 Example: `list` lists all tasks.
 
@@ -188,7 +189,7 @@ Expected outcome:
 _________________________
 
 ### Searching by priority
-Other than listing all tasks, Tiger can help you search tasks based on a certain priority. The usage is `priority [L|M|H]`. **If the task is already marked as done, it won't show up in the search**.
+Search tasks based on a certain priority. The usage is `priority [L|M|H].` **If the task is already marked as done, it won't show up in the search**.
 
 Example: `priority H` lists all tasks with high priority.
 
@@ -201,7 +202,7 @@ Expected outcome:
 _________________________
 
 ### Exiting the app
-To quit the app, the usage is `bye`. 
+Exits the app. The usage is `bye.`
 
 Example: `bye` quits the app.
 
@@ -213,10 +214,12 @@ Note that the window waits a second to close.
 
 > Substitutable keywords: `exit, quit`
 
+_____________________________
+
 ## Advanced features
 
 ### Substitutable keywords
-Tiger understands that some users are just bad at reading user manuals, so some commands can be substituted in place of regular commands and Tiger will act as if the regular command was keyed instead. This is indicated by the "Substitutable keywords" at the bottom of each section on command usage. 
+Some commands can be substituted in place of regular commands. This is indicated by the **Substitutable keywords** section at the bottom of command. 
 
 For instance, `find` performs the same action as `search`. 
 
@@ -240,11 +243,9 @@ Expected outcome:
 _________________________
 
 ### Automatic date correction
-On top of interpreting the current date as today if the user doesn't specify the date, Tiger will do some minor corrections if the user inputs an invalid date by accident. 
+If the user inputs an invalid date by accident, the date is "rounded off" to the nearest valid date.
 
-For example, Tiger "rounds off" the date if the day number is between 1 and 31. 
-
-Example: `event Event /at 2021-09-31 15:00`
+Example: `event Event /at 2021-09-31 15:00.`
 
 Expected outcome:
 ```
@@ -260,9 +261,9 @@ Excellent! I've added this event:
 [E] [M] Event (at 2021-02-28 15:00)
 ```
 
-However, if Tiger detects that the user is trying to be malicious in entering the date, it starts screaming at the user:
+If the input date is too far from a valid date, the user needs to re-enter the command.
 
-Example: `event Event /at 2021-02-32 15:00` (this works for 30 and 31 as well).
+Example: `event Event /at 2021-02-32 15:00.`
 
 Expected outcome:
 ```
@@ -271,7 +272,7 @@ Please ensure you key in dates in the input specified.
 _________________________
 
 ### Partial loading
-Tiger knows that users love to mess around with its data files, sometimes corrupting it in the process. As such, Tiger is equipped with a mechanism called partial loading. If the data file is corrupted for _some reason_ (ahem ahem, the users), it tries to recover what it can. When Tiger detects it's data has been corrupted, it starts up with the following accusatory message:
+If for some reason, the file storing user tasks is corrupted, the user can try to recover some tasks. When the data file has been corrupted, the app starts up with a different welcome message:
 
 ```
 Error encountered in loading the file! Did you alter my memory directly?
@@ -280,7 +281,7 @@ If you didn't backup my memory, would you like to try a partial load to see what
 
 Pressing N will wipe data currently stored.
 ```
-At this point, the user is expected to enter in `Y` or `N` (lower case accepted). `Y` will attempt a partial load of the data files, and Tiger will load the subset of tasks which can be recovered.
+At this point, the user is expected to enter in `Y` or `N` (lower case accepted). `Y` will attempt to load the subset of tasks which can be recovered.
 
 Example: `Y`
 
@@ -288,8 +289,6 @@ Expected outcome:
 ```
 Hello, I'm Tiger, your personal assistant. I've recovered 5 tasks from my memory.
 ```
-Some tasks might be lost.
-
 
 `N` will clear all tasks.
 
@@ -299,15 +298,14 @@ Expected outcome:
 ```
 Hello, I'm Tiger, your personal assistant. I've recovered 0 tasks from my memory.
 ```
-If the user keys in any other input, he/she is clearly incapable of reading. Tiger will prompt the user to input `Y` or `N` until either one of them is keyed in.
+If the user keys in any other input, the user is clearly incapable of reading. Tiger will prompt the user to input `Y` or `N` until either one of them is keyed in.
 
 Example: `g`
 
 Expected outcome:
 ```
-Please enter Y or N only
+Please enter Y or N only.
 ```
-At this point, the user has tried to alter Tiger's data files and is not following simple instructions. Tiger is clearly pissed and does not bother put in a full-stop at the end of its sentences anymore.
 
 ## Uninstallation
-To uninstall, simply delete the `data` and `Tiger.jar.`
+To uninstall, simply delete the `data` folder and `Tiger.jar` in the directory containing `Tiger.jar.`
