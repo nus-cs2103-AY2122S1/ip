@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 /**
  * Duke is an application to help store and track tasks.
  * Users are able to add and delete various types of tasks such as deadlines, events, and things to do.
@@ -43,10 +44,11 @@ public class Duke {
     }
 
     /**
-     * Main function to handle the flow of application
+     * Main function that does the main flow of the application
      *
      * @param args
      */
+
     public static void main(String[] args) {
         Duke bot = new Duke("data/Duke.txt");
         Scanner scanObj = new Scanner(System.in);
