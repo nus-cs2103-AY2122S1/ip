@@ -26,7 +26,6 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         assert new File(filePath).exists();
-        File tempFile = new File("c:/temp/temp.txt");
         tasks = new TaskList(storage.loadFile());
     }
 

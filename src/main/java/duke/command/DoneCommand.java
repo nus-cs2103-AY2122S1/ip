@@ -3,7 +3,9 @@ package duke.command;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
+/**
+ * Represents the command to mark task as done.
+ */
 public class DoneCommand extends Command {
 
     private final int taskNo;

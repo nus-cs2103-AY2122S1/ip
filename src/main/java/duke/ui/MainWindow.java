@@ -52,6 +52,14 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    private void exit() {
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                Platform.exit();
+            }
+        }, 1000);
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -66,11 +74,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.equals(duke.getFarewellMessage())) {
-            new Timer().schedule(new TimerTask() {
-                public void run () {
-                    Platform.exit();
-                }
-            }, 1000);
+            exit();
         }
     }
 }

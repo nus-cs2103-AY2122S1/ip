@@ -54,6 +54,7 @@ public class TaskList {
      * Marks the task with taskNo specified.
      *
      * @param taskNo the taskNo of the task to be marked as done.
+     * @return the string representing the success message.
      */
     public String markTaskAsDone(Ui ui, int taskNo) {
         Task task = this.tasks.get(taskNo - 1);

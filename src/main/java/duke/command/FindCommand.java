@@ -4,7 +4,9 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
+/**
+ * Represents the command to find the task.
+ */
 public class FindCommand extends Command {
     protected String keyword;
 
@@ -20,7 +22,7 @@ public class FindCommand extends Command {
         int index = 1;
         for (Task task : taskList.getAllTasks()) {
             if (task.isMatchingTask(this.keyword)) {
-                output.append(ui.returnMessage(String.format("%d.%s", index++, task)));
+                output.append(ui.returnMessage(String.format("%d.%s%n", index++, task)));
             }
         }
         return output.toString();

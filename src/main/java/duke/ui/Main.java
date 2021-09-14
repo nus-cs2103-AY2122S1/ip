@@ -1,8 +1,8 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
-import duke.ui.MainWindow;
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +17,7 @@ public class Main extends Application {
     private final Duke duke = new Duke("data/tasks.txt");
 
     /**
-     * Starts the application.
+     * Loads the GUI.
      *
      * @param stage The stage that will be used.
      */

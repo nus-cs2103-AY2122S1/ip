@@ -10,7 +10,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents the command of adding a task.
+ * Represents the command of updating a task.
  */
 public class UpdateCommand extends Command {
 

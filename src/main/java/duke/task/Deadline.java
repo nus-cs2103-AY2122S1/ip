@@ -45,6 +45,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Updates the deadline with the new deadline provided.
+     *
+     * @param updatedDeadline the deadline object which contains the updated information of deadline.
+     */
     public void updateDeadline(Deadline updatedDeadline) {
         this.description = updatedDeadline.description;
         this.date = updatedDeadline.date;

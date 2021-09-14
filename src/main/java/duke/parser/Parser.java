@@ -151,7 +151,6 @@ public class Parser {
         case "find":
             return new FindCommand(fullCommand.substring(4).trim());
         case "update":
-            System.out.println(String.join(" ", Arrays.copyOfRange(splitInput, 2, splitInput.length)));
             return new UpdateCommand(Integer.parseInt(splitInput[1]),
                     createTask(String.join(" ", Arrays.copyOfRange(splitInput, 2, splitInput.length))));
         case "bye":

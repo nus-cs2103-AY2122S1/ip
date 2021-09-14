@@ -45,6 +45,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Updates the event with the new event object provided.
+     *
+     * @param updatedEvent the event object which contains the updated information of event.
+     */
     public void updateEvent(Event updatedEvent) {
         this.description = updatedEvent.description;
         this.date = updatedEvent.date;
