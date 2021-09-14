@@ -93,11 +93,11 @@ public class DukeUi {
         addToDukeBuffer("");
         addToDukeBuffer("todo <taskName>  >> Adds a todo task.");
         addToDukeBuffer("");
-        addToDukeBuffer("deadline <taskName> \\by <date> ");
+        addToDukeBuffer("deadline <taskName> /by <date> ");
         addToDukeBuffer("    >> Adds a Deadline Task.");
         addToDukeBuffer("    Date must be in format: 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY'.");
         addToDukeBuffer("");
-        addToDukeBuffer("event <taskName> \\at <eventLocation>.");
+        addToDukeBuffer("event <taskName> /at <eventLocation>.");
         addToDukeBuffer("");
         addToDukeBuffer("");
         addToDukeBuffer("Task Processing:");
