@@ -108,7 +108,7 @@ public class Ui {
 
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {
             if (i == 0) {
-                result = "";
+                result = "Your tasks are: \n";
             }
             result += num + "." + TaskList.getTaskList().get(i).toString() + "\n"; //Print the task
             num++;
@@ -229,7 +229,7 @@ public class Ui {
 
         for (int i = 0; i < NoteList.getNoteList().size(); i++) {
             if (i == 0) {
-                result = "";
+                result = "Your notes are: \n";
             }
             result += num + ". " + NoteList.getNoteList().get(i).toString() + "\n";
             num++;
