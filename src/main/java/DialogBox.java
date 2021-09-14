@@ -56,6 +56,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         db.setMinHeight(Region.USE_PREF_SIZE);
+        db.setStyle("-fx-background-color: #c4d8de;");
         return db;
     }
 }
