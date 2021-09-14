@@ -115,6 +115,12 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description + " " + formatTagsToString();
+        String result = "[" + getStatusIcon() + "] " + this.description;
+        String tags = formatTagsToString();
+        if (tags.equals("")) {
+            return result;
+        } else {
+            return result + " " + tags;
+        }
     }
 }
