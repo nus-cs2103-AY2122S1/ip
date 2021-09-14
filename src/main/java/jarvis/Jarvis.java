@@ -47,6 +47,8 @@ public class Jarvis {
                 return Ui.listNotes();
             case "done":
                 return Parser.parseDone(input);
+            case "delete note":
+                return Parser.parseDeleteNote(input);
             case "delete":
                 return Parser.parseDelete(input);
             case "todo":
@@ -61,8 +63,6 @@ public class Jarvis {
                 return Ui.findTasks(input);
             case "note":
                 return Parser.parseNote(input);
-            case "delete note":
-                return Parser.parseDeleteNote(input);
             case "bye":
                 return Ui.BYE;
             default:
