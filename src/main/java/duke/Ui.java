@@ -32,6 +32,11 @@ public class Ui {
 
     public Ui() {}
 
+    /**
+     * Gets the help message.
+     *
+     * @return the help message.
+     */
     public static String getHelpMessage() {
         return HELP_MESSAGE;
     }
