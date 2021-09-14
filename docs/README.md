@@ -30,6 +30,7 @@ _Pib auto-saves everytime you make a change and when you quit!_
       - _eg. output:_ `Bye! See you next time!`
 
 ---
+
 ### Create tasks
 - `todo`
     - **Adds a new _todo_ task to your list**
@@ -47,7 +48,9 @@ _Pib auto-saves everytime you make a change and when you quit!_
     - Format: `event <task description> /at <YYYY-MM-DD> <HHMM>`
         - _eg. input:_ `event Swab test /at 2021-09-25 1230`
         - _eg. output:_ `Added: Swab test. There are 3 task(s) in the list`
+
 ---
+
 ### Handle tasks
 - `done`
     - **Marks the indicated task as done**
@@ -73,4 +76,5 @@ _Pib auto-saves everytime you make a change and when you quit!_
     - Format: `find <query>`
         - _eg. input:_ `find Swab`
         - _eg. output:_ `These tasks contain the word: Swab. 1. [E][ ] Swab test (at: 25 Sep 2021, 12:30 PM)`
+
 ---
