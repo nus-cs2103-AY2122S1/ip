@@ -1,5 +1,6 @@
 package winston;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
@@ -89,8 +90,13 @@ public class UpdateCommand extends Command{
      */
     @Override
     public String run() {
-        String updateInstructions = userInput.substring(9);
-        Task task = updateTask(updateInstructions);
+        Task task = null;
+        try{
+            String updateInstructions = userInput.substring(9);
+            task = updateTask(updateInstructions);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.invalidTask("Invalid Task");
+        }
         if (task == null) {
             return Ui.invalidTask("Invalid Task");
         } else {

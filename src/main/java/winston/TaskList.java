@@ -114,8 +114,9 @@ public class TaskList {
     public TaskList findString(String str) {
         ArrayList<Task> arrList = new ArrayList<>();
         this.list.stream()
-                .takeWhile(x -> x.isSubString(str))
+                .filter(x -> x.isSubString(str))
                 .forEach(y -> arrList.add(y));
+        System.out.println(arrList.size());
         return new TaskList(arrList);
     }
 }

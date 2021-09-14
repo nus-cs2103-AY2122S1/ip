@@ -12,7 +12,7 @@ public class Ui {
     }
     
     public static String printTasksLeft(int tasksLeft) {
-        return tasksLeft + " Tasks Left\n";
+        return tasksLeft + " Uncompleted Tasks Left\n";
     }
     
     public static String printList(TaskList taskList) {
@@ -41,7 +41,7 @@ public class Ui {
     }
     
     public static String updateMessage(int messageNumber) {
-        return "Task " + messageNumber + "updated";
+        return "Task " + messageNumber + " updated";
     }
     
     public static String emptyListMessage() {

@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     public String run() {
         TaskList tList = taskList.findString(this.str);
         String result = Ui.printMatchingTasks() + Ui.printList(tList);
-        assert(!result.equals(""));
+//        assert(!result.equals(""));
         return result;
     }
 }
