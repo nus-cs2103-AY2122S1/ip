@@ -8,17 +8,14 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" >
     <children>
-        <Label fx:id="dialog" minHeight="-Infinity" wrapText="true">
+        <Label fx:id="dialog" maxWidth="260" minHeight="-Infinity" translateX="-5" wrapText="true" style="-fx-border-radius: 10; -fx-border-style: solid; -fx-border-color: #ffefd5; -fx-padding: 10 10 10 10; -fx-text-fill: #ffefd5;">
             <font>
                 <Font name="Yu Gothic Regular" size="14.0" />
             </font>
-            <padding>
-                <Insets left="10.0" right="10.0" />
-            </padding>
         </Label>
         <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
     </padding>
 </fx:root>
