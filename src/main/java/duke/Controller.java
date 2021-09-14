@@ -13,7 +13,7 @@ import static duke.Parser.taskParse;
 
 public class Controller {
 
-    private static final Storage storage = new Storage("src/main/resources/duke.txt");
+    private static final Storage storage = new Storage("duke.txt");
     private static TaskList tasks;
 
     @FXML
