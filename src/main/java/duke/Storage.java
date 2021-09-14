@@ -48,11 +48,11 @@ public class Storage {
                     newTask = new Todo(taskString);
                 } else if (data.startsWith("D |")) {
                     int dividerPosition = taskString.indexOf("|");
-                    newTask = new Deadline(taskString.substring(0, dividerPosition - 2),
+                    newTask = new Deadline(taskString.substring(0, dividerPosition - 1),
                             taskString.substring(dividerPosition + 2));
                 } else if (data.startsWith("E |")) {
                     int dividerPosition = taskString.indexOf("|");
-                    newTask = new Event(taskString.substring(0, dividerPosition - 2),
+                    newTask = new Event(taskString.substring(0, dividerPosition - 1),
                             taskString.substring(dividerPosition + 2));
                 } else {
                     throw new DukeException("Save file corrupted.");
