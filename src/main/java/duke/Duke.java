@@ -2,9 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Parser;
-import duke.ui.Storage;
 import duke.ui.Ui;
 
 /**

@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;
+import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Storage;
 import duke.ui.Ui;
 
 /**

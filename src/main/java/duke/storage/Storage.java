@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
