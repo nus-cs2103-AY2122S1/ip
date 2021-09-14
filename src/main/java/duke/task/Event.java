@@ -28,10 +28,11 @@ public class Event extends Task {
             String[] dateTime = at.split(" ");
             this.eventDate = LocalDate.parse(dateTime[0].trim());
             this.eventTime = LocalTime.parse(dateTime[1].trim());
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!! Event date and time are formatted incorrectly."
-                    + "\n\t Please format them as: [yyyy-mm-dd HH:MM]");
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!! Event date and time are invalid."
+                    + " Please format them as:\n\t[yyyy-mm-dd HH:MM]");
         }
+        this.at = at;
     }
 
     /**

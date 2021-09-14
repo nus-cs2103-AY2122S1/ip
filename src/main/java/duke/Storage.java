@@ -76,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * Writes new data to file on exit.
+     * Writes new data to file.
      *
      * @param tasks List of tasks to be saved.
      */

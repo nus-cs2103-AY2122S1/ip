@@ -52,7 +52,6 @@ public class Duke extends Application {
         userInput = new TextField();
 
         sendButton = new Button("Send");
-        //sendButton.setGraphic(new ImageView(getClass().getResource("/images/Icon.png").toExternalForm()));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -113,7 +112,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -125,12 +123,9 @@ public class Duke extends Application {
         String response;
         try {
             Command cmd = Parser.parse(input);
-            if (cmd.isExit()) {
-                taskStorage.writeTasksToFile(taskList.getTasks());
-                archiveStorage.writeTasksToFile(taskList.getArchives());
-                response = ui.getGoodbyeMsg();
-            }
             response = cmd.execute(taskList, ui);
+            taskStorage.writeTasksToFile(taskList.getTasks());
+            archiveStorage.writeTasksToFile(taskList.getArchives());
         } catch (DukeException | IOException e) {
             return e.toString();
         }

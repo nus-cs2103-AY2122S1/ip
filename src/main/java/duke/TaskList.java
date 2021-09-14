@@ -11,6 +11,8 @@ import duke.task.Task;
 public class TaskList {
     private List<Task> tasks;
     private List<Task> archives;
+    //For the secret hp command
+    private int hpCount = 0;
 
     /**
      * Creates new TaskList instance.
@@ -28,6 +30,14 @@ public class TaskList {
     public TaskList(List<Task> existingTasks, List<Task> existingArchives) {
         this.tasks = (existingTasks == null ? new ArrayList<>() : existingTasks);
         this.archives = existingArchives;
+    }
+
+    public void addHp() {
+        hpCount++;
+    }
+
+    public int getHp() {
+        return hpCount;
     }
 
     public int getSize() {

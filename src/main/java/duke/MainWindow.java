@@ -50,13 +50,19 @@ public class MainWindow extends AnchorPane {
     }
 
     private Image getDukeImage(String dukeResponse) {
-        if (dukeResponse.startsWith("OOPS")) {
-            return new Image(this.getClass().getResourceAsStream("/images/DaDukeConfused.gif"));
-        } else if (dukeResponse.startsWith("Your tasks have been saved")) {
-            return new Image(this.getClass().getResourceAsStream("/images/DaDukeBye.gif"));
+        String imagePath;
+        if (dukeResponse.startsWith("OOPS!!! I'm sorry")) {
+            imagePath = "/images/DaDukeConfused.gif";
+        } else if (dukeResponse.startsWith("OOPS")) {
+            imagePath = "/images/DaDukeOops.gif";
+        } else if (dukeResponse.startsWith("See you")) {
+            imagePath = "/images/DaDukeBye.gif";
+        } else if (dukeResponse.startsWith("...")) {
+            imagePath = "/images/pigeon-fluffy.gif";
         } else {
-            return new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
+            imagePath = "/images/DaDuke.gif";
         }
+        return new Image(this.getClass().getResourceAsStream(imagePath));
     }
 
     /**

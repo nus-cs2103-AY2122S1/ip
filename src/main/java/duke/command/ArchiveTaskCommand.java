@@ -37,7 +37,7 @@ public class ArchiveTaskCommand implements Command {
         assert tasks != null;
         Task t = tasks.get(idx);
         tasks.archive(idx);
-        return "Nice! I've archived the task: \n\t" + t;
+        return "Ok. I've archived the task: \n\t" + t;
     }
 
     /**

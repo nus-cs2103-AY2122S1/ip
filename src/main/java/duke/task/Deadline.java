@@ -24,8 +24,8 @@ public class Deadline extends Task {
         try {
             this.date = LocalDate.parse(by.trim());
         } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!! Deadline date is formatted incorrectly."
-                    + "\n\t Please format it as: [yyyy-mm-dd])");
+            throw new DukeException("OOPS!! Deadline date is invalid."
+                    + " Please format it as: \n\t[yyyy-mm-dd])");
         }
         this.by = by;
     }
@@ -62,7 +62,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileRecord() {
-        return String.format("E | %d | %s | %s",
+        return String.format("D | %d | %s | %s",
                 this.isDone ? 1 : 0 , this.description, this.by);
     }
 

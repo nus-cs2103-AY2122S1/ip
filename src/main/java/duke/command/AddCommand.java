@@ -33,13 +33,15 @@ public class AddCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException {
         if (params.length == 1) {
-            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a task cannot be empty. \uD83D\uDEAB");
         }
         Task t;
         String taskType = params[0];
         String taskInfo = params[1];
         switch (taskType) {
         case "event":
+        //fallthrough
+        case "e":
             if (taskInfo.startsWith("/at")) {
                 throw new DukeException("OOPS!!! You are missing the name of the event."
                         + "\nThe correct format is:"
@@ -53,6 +55,8 @@ public class AddCommand implements Command {
             t = new Event(eventInfo[0], eventInfo[1]);
             break;
         case "deadline":
+        //fallthrough
+        case "dl":
             if (taskInfo.startsWith("/by")) {
                 throw new DukeException("OOPS!!! You are missing the name of the deadline."
                         + "\nThe correct format is:"
@@ -66,6 +70,8 @@ public class AddCommand implements Command {
             t = new Deadline(deadlineInfo[0], deadlineInfo[1]);
             break;
         case "todo":
+        //fallthrough
+        case "t":
             t = new ToDo(taskInfo);
             break;
         default:

@@ -1,12 +1,14 @@
 package duke;
 
+import java.util.Base64;
 import java.util.Scanner;
 
 public class Ui {
     private static String line =
             "*･゜ﾟ･*･゜ﾟ･*:.｡..｡.:*･'(*ﾟ▽ﾟ*)'･*:.｡. .｡.:*･゜ﾟ･*゜ﾟ･*";
-    private static String welcomeMsg = "Hello! I'm Duke\nWhat can I do for you?";
-    private static String goodbyeMsg = "Your tasks have been saved.\nSee you next time!";
+    private static String welcomeMsg = "Hello! I'm Duke\nSay 'help' to see how you can use me.";
+    private static String goodbyeMsg = "See you next time!";
+    private static String secretCmdKey = new String(Base64.getDecoder().decode("aGVhZHBhdA=="));
     private static Scanner sc = new Scanner(System.in);
 
     public static String format(String msg) {
@@ -16,7 +18,6 @@ public class Ui {
     public String readCommand() {
         return sc.nextLine();
     }
-
 
     public String getWelcomeMsg() {
         return welcomeMsg;
@@ -28,6 +29,17 @@ public class Ui {
 
     public String getGoodbyeMsg() {
         return goodbyeMsg;
+    }
+
+    public String getSecretCmdKey() {
+        return secretCmdKey;
+    }
+
+    public String getHpMsg(int hpCount) {
+        if (hpCount == 1) {
+            return String.format("1 %s given", secretCmdKey);
+        }
+        return String.format("%d %ss given", hpCount, secretCmdKey);
     }
 
     /**
