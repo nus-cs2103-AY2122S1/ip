@@ -49,6 +49,7 @@ public class Duke extends Application {
      * @param filePath Path of the file to be used when starting Duke.
      */
     public Duke(String filePath) {
+
         storage = new Storage(filePath);
         try {
             Path storagePath = Paths.get(".", filePath);

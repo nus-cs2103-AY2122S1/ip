@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String USER_IMAGE = "/images/DaUser.png";
+    private static final String DUKE_IMAGE = "/images/Baba.jpg";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,14 +25,20 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Baba.jpg"));
+    private Image userImage;
+    private Image dukeImage;
 
     /**
      * Initialises the scroll pane and dialog container.
      */
     @FXML
     public void initialize() {
+        assert this.getClass().getResourceAsStream(USER_IMAGE) != null : " User Image not found";
+        assert this.getClass().getResourceAsStream(DUKE_IMAGE) != null : " Duke Image not found";
+
+        userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE));
+        dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE));
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcomeMessage = Ui.welcomeMessage();
         dialogContainer.getChildren().addAll(
