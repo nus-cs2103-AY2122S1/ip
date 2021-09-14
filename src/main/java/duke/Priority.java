@@ -10,7 +10,7 @@ public class Priority {
     /**
      * The different levels of priority assignable to a Task.
      */
-    protected enum PriorityLevel { LOW, MEDIUM, HIGH, ASAP }
+    public enum PriorityLevel { LOW, MEDIUM, HIGH, ASAP }
 
     /**
      * Returns the String representation of a priority level.

@@ -1,8 +1,21 @@
 package duke;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EmptyCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.SetPriorityCommand;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.TaskCreator;
+import duke.task.Todos;
 
 import javafx.application.Platform;
 
@@ -12,11 +25,6 @@ import javafx.application.Platform;
  * @author Toh Wang Bin
  */
 public class Parser {
-
-    private static final int MIN_LENGTH_ARRAY = 2;
-    private static final int MIN_LENGTH_ARRAY_FOR_SETPR = 3;
-    private static final int ARRAY_INDEX_OF_TASK_INDEX = 1;
-    private static final int ARRAY_INDEX_OF_PRIORITY = 2;
 
     /**
      * Parses a string into a LocalDate object.
@@ -84,120 +92,48 @@ public class Parser {
      * @return A string indicating the response to the user.
      */
     public static String parseInput(TaskList taskList, Storage storage, String firstString, String[] inputArray) {
-        //case if nothing is entered
-        if (firstString.equals("")) {
-            return Ui.getEmptyInputError();
-        }
 
-        //case if user wants to exit
-        if (firstString.equals("bye")) {
+        switch (firstString) {
+        case "":
+            //case if nothing is entered
+            return new EmptyCommand().execute();
+
+        case "bye":
             Platform.exit();
-            return Ui.getEndMessage();
-        }
+            return new ExitCommand().execute();
 
-        if (firstString.equals("help")) {
-            return Ui.getHelpMessage();
-        }
+        case "help":
+            return new HelpCommand().execute();
 
-        //below are cases for specified keywords:
-        //case if user wants to view the list
-        if (firstString.equals("list")) {
-            //if list is empty
-            if (taskList.getTotalTasks() == 0) {
-                return Ui.getNoTaskError();
-            }
-            //repeatedly append tasks then return them
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < taskList.getTotalTasks(); i++) {
-                int listNumber = i + 1;
-                String taskString = listNumber + ". " + taskList.getTask(i).toString() + "\n";
-                str.append(taskString);
-            }
-            return str.toString();
-        }
+        case "list":
+            return new ListCommand(taskList).execute();
 
-        //case if user wants to delete a task or mark a task as done or set priority
-        boolean isValidCommand = firstString.equals("done") || firstString.equals("delete")
-                                   || firstString.equals("setpr");
-        if (isValidCommand) {
-            //case if no number is entered
-            if (inputArray.length < MIN_LENGTH_ARRAY) {
-                return Ui.getNumberError();
-            }
+        case "done":
+            return new DoneCommand(taskList, inputArray, storage).execute();
 
-            try {
-                StringBuilder str = new StringBuilder();
-                int index = Integer.parseInt(inputArray[ARRAY_INDEX_OF_TASK_INDEX]);
-                int arrayIndex = index - 1;
-                //case if entered index does not correspond to a task
-                boolean isInvalidIndex = index > taskList.getTotalTasks() || index < 1;
-                if (isInvalidIndex) {
-                    return Ui.getTaskError();
-                }
-                //retrieve the task
-                Task currentTask = taskList.getTask(arrayIndex);
-                switch (firstString) {
-                case "done":
-                    currentTask.setCompleted();
-                    str.append(Ui.getTaskCompleted(currentTask));
-                    break;
-                case "delete":
-                    taskList.deleteTask(currentTask);
-                    str.append(Ui.getTaskDeleted(currentTask));
-                    break;
-                default:
-                    //last case is to set priority
-                    if (inputArray.length < MIN_LENGTH_ARRAY_FOR_SETPR) {
-                        return Ui.getBadInputError();
-                    }
-                    try {
-                        currentTask.setPriorityLevel(inputArray[ARRAY_INDEX_OF_PRIORITY]);
-                    } catch (IllegalArgumentException e) {
-                        return Ui.getInvalidPriorityLevel();
-                    }
-                    str.append(Ui.getTaskPrioritised(currentTask));
-                }
-                str.append(Ui.getTaskNumberReminder(taskList.getTotalTasks()));
-                try {
-                    storage.saveData();
-                } catch (IOException e) {
-                    return Ui.getFileError();
-                }
-                return str.toString();
+        case "delete":
+            return new DeleteCommand(taskList, inputArray, storage).execute();
 
-            } catch (NumberFormatException exception) {
-                //case if string entered was not a number
-                return Ui.getNumberError();
-            }
-        }
+        case "setpr":
+            return new SetPriorityCommand(taskList, inputArray, storage).execute();
 
-        //cases for the 3 task types
-        if (firstString.equals("todo")) {
+        case "find":
+            return new FindCommand(inputArray, taskList).execute();
+
+        //following cases are task creation
+        case "todo":
             return TaskCreator.createTask(Task.Tasks.TODO, inputArray, storage, taskList);
-        }
 
-        if (firstString.equals("deadline")) {
+        case "deadline":
             return TaskCreator.createTask(Task.Tasks.DEADLINE, inputArray, storage, taskList);
-        }
 
-        if (firstString.equals("event")) {
+        case "event":
             return TaskCreator.createTask(Task.Tasks.EVENT, inputArray, storage, taskList);
-        }
 
-        if (firstString.equals("find")) {
-            if (inputArray.length < MIN_LENGTH_ARRAY) {
-                //case if no number is entered
-                return Ui.getNumberError();
-            }
-            StringBuilder str = new StringBuilder();
-            for (int i = 1; i < inputArray.length; i++) {
-                str.append(inputArray[i]).append(" ");
-            }
-            return taskList.find(str.toString());
+        default:
+            //case if first string input is not a keyword
+            return Ui.getBadInputError();
         }
-
-        //case if first string input is not a keyword
-        return Ui.getBadInputError();
     }
 
 }

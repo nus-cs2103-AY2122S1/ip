@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  * A class containing methods that return messages in response
  * to user inputs and errors.

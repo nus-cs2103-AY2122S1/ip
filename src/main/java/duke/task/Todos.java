@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.Priority;
 
 /**
  * A class encapsulating a Todo variant of a Task.

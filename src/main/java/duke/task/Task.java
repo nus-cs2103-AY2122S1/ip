@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.Priority;
 
 /**
  * An abstract class encapsulating a Task.
@@ -10,7 +12,7 @@ public abstract class Task {
     /**
      * The variants of the Tasks handled by Duke
      */
-    enum Tasks { DEADLINE, EVENT, TODO }
+    public enum Tasks { DEADLINE, EVENT, TODO }
 
     //A description of the task
     private String name;

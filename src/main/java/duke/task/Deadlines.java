@@ -1,7 +1,9 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.Priority;
 
 /**
  * A class encapsulating a Deadline variant of a Task.

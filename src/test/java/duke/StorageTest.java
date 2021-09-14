@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 
+import duke.task.Task;
+import duke.task.TaskCreator;
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {
