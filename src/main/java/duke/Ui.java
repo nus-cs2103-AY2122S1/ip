@@ -22,11 +22,10 @@ public class Ui {
     /**
      * Prints out the welcome message upon starting Duke.
      */
-    public static String welcomeMessage() {
+    public static String welcomeMessage(boolean isFirstTime) {
         final String startOfWelcomeMessage = "Welcome to Ben's. How may I help you?\n";
-        String filePath = "data/duke.txt";
-        Path storagePath = Paths.get(".", filePath);
-        if (!Files.exists(storagePath)) {
+
+        if (isFirstTime) {
             return startOfWelcomeMessage + firstTimeMessage()
                     + importantMessage();
         } else {
@@ -223,5 +222,13 @@ public class Ui {
      */
     public static String invalidFindInput() {
         return "Invalid input. Requires a number after find (e.g. find 1).";
+    }
+
+    /**
+     * Displays an error message when user has invalid Date Time input.
+     */
+    public static String invalidDateTimeInput() {
+        return "For Deadlines and Events, the date and time must be of format 'YYYY-MM-DD TIME'\n" +
+                "and TIME must follow the 24hr format (e.g. 2pm = 1400).";
     }
 }

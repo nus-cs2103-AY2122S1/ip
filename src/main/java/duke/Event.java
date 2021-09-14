@@ -35,6 +35,8 @@ public class Event extends Task {
 
         // Obtain the time and date of the Event
         String oldDate = temp.substring(temp.lastIndexOf("at") + 3);
+
+
         DateTimeConverter converter = new DateTimeConverter();
         String newDate = converter.convertDateAndTime(oldDate);
         temp = temp.replace(oldDate, newDate);

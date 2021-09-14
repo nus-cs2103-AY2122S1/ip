@@ -42,6 +42,9 @@ public class Duke extends Application {
     /** The list of tasks given to Duke (if any). **/
     private static TaskList TASKS;
 
+    /** Boolean to check if first time using Duke. **/
+    private boolean isFirstTime = false;
+
     /**
      * Constructor for Duke.
      *
@@ -60,6 +63,7 @@ public class Duke extends Application {
             }
 
             if (!Files.exists(storagePath)) {
+                isFirstTime = true;
                 Files.createFile(storagePath);
             }
 
@@ -69,14 +73,6 @@ public class Duke extends Application {
                     e.getMessage());
         }
 
-    }
-
-    /**
-     * Method used to begin processing of Duke.
-     */
-    public void run() {
-        Scanner newScan = new Scanner(System.in);
-        Parser.evaluateUserInput(Duke.getResponse(newScan.toString()));
     }
 
     /**
@@ -99,12 +95,8 @@ public class Duke extends Application {
     public void start(Stage stage) {
         // Setting up stage and formatting window to look as expected
         setUpStage(stage);
-
-        // Display welcome message upon starting Duke
-        String openingMessage = Ui.welcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(openingMessage, DUKE));
-
-        // Functionality to handle user input.
+        
+        // Handles user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -115,38 +107,12 @@ public class Duke extends Application {
             userInput.clear();
         });
 
-        // Allows scrolling to the end every time dialogContainer's height changes.
+        // Allows scrolling to the end if text interactions exceed window height.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         // Functionality for handling user input.
         sendButton.setOnMouseClicked((event) -> handleUserInput());
         userInput.setOnAction((event) -> handleUserInput());
-    }
-
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, USER),
-                DialogBox.getDukeDialog(dukeText, DUKE)
-        );
-        userInput.clear();
     }
 
     /**
@@ -203,4 +169,40 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
+
+    /**
+     * Method used to begin processing of Duke.
+     */
+    public void run() {
+        Scanner newScan = new Scanner(System.in);
+        Parser.evaluateUserInput(Duke.getResponse(newScan.toString()));
+    }
+
+    /**
+     * Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        return textToAdd;
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, USER),
+                DialogBox.getDukeDialog(dukeText, DUKE)
+        );
+        userInput.clear();
+    }
+
+
 }

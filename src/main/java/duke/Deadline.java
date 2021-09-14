@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * This class simulates a special type of Task which has a date and time
  * for which it is to be completed by, using the word 'by'.
@@ -20,7 +22,7 @@ public class Deadline extends Task {
      * @return Description of the current deadline task.
      */
     @Override
-    public String getDescription() {
+    public String getDescription() throws DateTimeParseException{
         String temp = super.getDescription();
         if (temp.endsWith(")")) {
             return temp;
@@ -35,6 +37,7 @@ public class Deadline extends Task {
         // Obtain the time and date of the deadline
         String oldDate = temp.substring(temp.lastIndexOf("by") + 3);
         DateTimeConverter converter = new DateTimeConverter();
+
         String newDate = converter.convertDateAndTime(oldDate);
         temp = temp.replace(oldDate, newDate);
 
