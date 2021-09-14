@@ -36,9 +36,9 @@ public class MainWindow extends AnchorPane {
     /** The instance of the Duke application */
     private Duke duke;
     /** The image of the user to be displayed in the GUI */
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DSC_0352.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/loading_cat.png"));
     /** The image of Duke to be displayed in the GUI */
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Timetable.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/thumbs_up_cat.png"));
 
     /**
      * Initialize the MainWindow.
