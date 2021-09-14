@@ -28,7 +28,6 @@ public class Parser {
         case("remind"):
             return Command.REMIND;
         default:
-            System.out.println("Checkpoint 1");
             throw new DukeException("Sorry I don't know what that means");
         }
     }

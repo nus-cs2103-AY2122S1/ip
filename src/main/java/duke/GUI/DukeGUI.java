@@ -45,7 +45,7 @@ public class DukeGUI extends Application {
 
 
         // Part 2 - Styling
-        stage.setTitle("Duke");
+        stage.setTitle("Bot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
