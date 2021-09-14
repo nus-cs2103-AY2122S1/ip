@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    private boolean isEnded = false;
     private Rectangle emptySpace;
     private Duke duke;
     private BackgroundImage backgroundImage;
@@ -83,6 +84,20 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    private boolean checkIfEnded(String input) {
+        boolean isEnded;
+        isEnded = input.contains("bye");
+        return isEnded;
+    }
+
+
+    private void checkIfQuit() {
+        //Successfully exit the application
+        if (isEnded) {
+            System.exit(0);
+        }
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -91,12 +106,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        checkIfQuit();
         dialogContainer.getChildren().addAll(
                 setEmptySpace(),
                 DialogBox.getUserDialog(input, userImage),
                 setEmptySpace(),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        isEnded = checkIfEnded(input);
         userInput.clear();
     }
+
 }
