@@ -220,7 +220,7 @@ public class Storage implements Storable {
         boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
 
         try {
-            // If save file does not exist, create save file;
+            // If save file does not exist, create save file.
             if (!isSaveFileExist) {
                 saveTasksToData(new TaskList(tasks));
             }

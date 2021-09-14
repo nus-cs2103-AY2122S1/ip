@@ -21,7 +21,6 @@ class AddCommandTest {
 
     private static final LocalDate localDate = LocalDate.parse("2020-01-01");
 
-    // Ui returns largely constants. No need for stub;
     private final Ui ui = new Ui();
 
     private static TaskList getTaskListTodo() {
