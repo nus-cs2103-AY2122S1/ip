@@ -127,6 +127,7 @@ Example of usage:
 ```
 todo #description
 ```
+
 <br>
 
 <div align = "center">
@@ -150,6 +151,7 @@ Example of usage:
 ```
 event #description /at #timing
 ```
+
 <br>
 
 <div align = "center">
@@ -173,6 +175,7 @@ Example of usage:
 ```
 deadline #description /by #deadline
 ```
+
 <br>
 
 <div align = "center">
@@ -199,6 +202,15 @@ show /on #date
 
 <br>
 
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/show_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/show_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+<br>
+
 <h3 id = 'find'></h3> 
 
 ### `find` - Prints out the List of Tasks containing String.
@@ -211,6 +223,15 @@ Example of usage:
 ```
 find #string
 ```
+
+<br>
+
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/find_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/find_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
 
 <br>
 
@@ -227,6 +248,15 @@ done #index
 
 <br>
 
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/done_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/done_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+<br>
+
 <h3 id = 'undo'></h3>
 
 ### `undo` - Marks Task at #index in the List as incomplete.
@@ -240,6 +270,15 @@ undo #index
 
 <br>
 
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/undo_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/undo_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+<br>
+
 ### `delete` - Delete Task at #index in the List.
 This command will delete the task at #index. #index is required.
 
@@ -248,6 +287,15 @@ Example of usage:
 ```
 delete #index
 ```
+
+<br>
+
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/delete_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/delete_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
 
 <br>
 
@@ -266,6 +314,15 @@ tag #index /as #tagname
 
 <br>
 
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/tag_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/tag_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+<br>
+
 ### `untag` - Untags Task at #index in the List.
 This command will untag the task at #index. #index is required.
 
@@ -279,6 +336,15 @@ untag #index
 
 <br>
 
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/untag_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/untag_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+<br>
+
 ### `bye` - Quits the ChatBot.
 This command will exit the ChatBot and the tasks will be saved to memory for later use.
 
@@ -288,5 +354,15 @@ Example of usage:
 bye
 ```
 
+<br>
+
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/bye_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/bye_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
+
+<br>
 
 
