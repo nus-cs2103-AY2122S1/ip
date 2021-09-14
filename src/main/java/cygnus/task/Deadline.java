@@ -38,8 +38,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(datePrintFormat);
-        return "[D]" + super.toString() + " | by: " + by.format(printFormat);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePrintFormat);
+        return "[D]" + super.toString() + " | by: " + by.format(dateFormatter);
     }
 
 }

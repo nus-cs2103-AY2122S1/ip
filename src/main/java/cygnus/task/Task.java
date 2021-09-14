@@ -18,7 +18,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Task {
      */
     public String toString() {
         // Mark done task with X
-        String statusIcon = this.isDone ? "[X]" : "[ ]";
+        String statusIcon = isDone ? "[X]" : "[ ]";
         return statusIcon + " " + description;
     }
 
@@ -36,7 +36,7 @@ public class Task {
      * Sets the isDone boolean flag of the Task to true.
      */
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -52,6 +52,6 @@ public class Task {
      * @return Description of the Task.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 }

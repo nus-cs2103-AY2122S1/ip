@@ -19,7 +19,7 @@ public class TaskList {
      * Class constructor.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -81,7 +81,10 @@ public class TaskList {
         StringBuilder result = new StringBuilder("Here are the tasks in your list:");
         int taskCount = tasks.size();
         for (int i = 0; i < taskCount; i++) {
-            result.append("\n" + (i + 1) + ". " + tasks.get(i).toString());
+            result.append("\n")
+                    .append(i + 1)
+                    .append(". ")
+                    .append(tasks.get(i).toString());
         }
         return result.toString();
     }
@@ -99,7 +102,10 @@ public class TaskList {
         StringBuilder result = new StringBuilder("Here are the matching tasks in your list:");
         int taskCount = matchingTaskList.size();
         for (int i = 0; i < taskCount; i++) {
-            result.append("\n" + (i + 1) + ". " + matchingTaskList.get(i).toString());
+            result.append("\n")
+                    .append(i + 1)
+                    .append(". ")
+                    .append(matchingTaskList.get(i).toString());
         }
         return result.toString();
     }
@@ -125,7 +131,10 @@ public class TaskList {
         StringBuilder result = new StringBuilder("Here are your upcoming deadlines:");
         int taskCount = upcomingTaskList.size();
         for (int i = 0; i < taskCount; i++) {
-            result.append("\n" + (i + 1) + ". " + upcomingTaskList.get(i).toString());
+            result.append("\n")
+                    .append(i + 1)
+                    .append(". ")
+                    .append(upcomingTaskList.get(i).toString());
         }
         return result.toString();
     }

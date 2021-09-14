@@ -19,9 +19,9 @@ public class Cygnus {
      * Class constructor.
      */
     public Cygnus() {
-        this.storage = new Storage(STORAGE_FILE_PATH);
+        storage = new Storage(STORAGE_FILE_PATH);
         try {
-            this.tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (CygnusException e) {
             System.out.println(e.getMessage() + "\nStarting Cygnus without saved tasks...");
             tasks = new TaskList();
@@ -41,8 +41,12 @@ public class Cygnus {
             System.exit(0);
         }
         try {
+            // Parser returns appropriate response to a given input
             String response = parser.parse(input);
+
+            // Save updated TaskList to storage
             storage.save(tasks);
+
             return response;
         } catch (CygnusException e) {
             return e.getMessage();

@@ -32,7 +32,7 @@ public class Parser {
      * @param tasks The TaskList to be updated during parsing.
      */
     public Parser(TaskList tasks) {
-        assert tasks != null : "taskList is not initialized";
+        assert tasks != null : "TaskList passed into Parser constructor is not initialized";
         this.tasks = tasks;
     }
 
@@ -118,8 +118,7 @@ public class Parser {
         try {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateInputFormat);
             LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
-            Deadline newDeadline = new Deadline(deadlineInfo[0], by);
-            return newDeadline;
+            return new Deadline(deadlineInfo[0], by);
         } catch (DateTimeParseException e) {
             throw new CygnusException("Please enter a valid date with format " + dateInputFormat + ".");
         }
@@ -134,16 +133,14 @@ public class Parser {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeInputFormat);
             LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
-            Event newEvent = new Event(eventInfo[0], at);
-            return newEvent;
+            return new Event(eventInfo[0], at);
         } catch (DateTimeParseException e) {
             throw new CygnusException("Please enter a valid date with format " + dateTimeInputFormat + ".");
         }
     }
 
-    private ToDo createToDo(String taskInfo) throws CygnusException {
-        ToDo newToDo = new ToDo(taskInfo);
-        return newToDo;
+    private ToDo createToDo(String taskInfo) {
+        return new ToDo(taskInfo);
     }
 
 }
