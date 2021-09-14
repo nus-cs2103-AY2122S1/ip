@@ -2,6 +2,7 @@ package duke.controllers;
 
 import duke.main.Duke;
 import duke.ui.Ui;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -36,9 +37,11 @@ public class MainWindow extends AnchorPane {
     /** The instance of the Duke application */
     private Duke duke;
     /** The image of the user to be displayed in the GUI */
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DSC_0352.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/loading_cat.png"));
     /** The image of Duke to be displayed in the GUI */
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Timetable.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/thumbs_up_cat.png"));
+    /** Bye response for Duke */
+    private final String byeResponse = "bye";
 
     /**
      * Initialize the MainWindow.
@@ -80,5 +83,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals(this.byeResponse)) {
+            Platform.exit();
+        }
     }
 }

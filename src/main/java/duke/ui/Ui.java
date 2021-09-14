@@ -13,12 +13,10 @@ import duke.data.TaskList;
 public class Ui {
     /** The introductory message to be printed for the start of the program */
     private static final String INTRO = "Hello from\n"
-                                        +  " ____        _        \n"
-                                        + "|  _ \\ _   _| | _____ \n"
-                                        + "| | | | | | | |/ / _ \\\n"
-                                        + "| |_| | |_| |   <  __/\n"
-                                        + "|____/ \\__,_|_|\\_\\___|\n"
-                                        + "Im Duke\nWhat can I do for you?";
+                                        +  "  /\\_/\\\n"
+                                        + "( o.o )\n"
+                                        + " > ^ <\n\n"
+                                        + "I am task CATcher\nWhat can I do for you?";
 
     /**
      * Returns the introductory message for Duke

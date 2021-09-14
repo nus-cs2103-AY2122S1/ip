@@ -12,7 +12,6 @@ import duke.data.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
-import javafx.application.Platform;
 
 /**
  * Encapsulates the entire Duke program.
@@ -33,6 +32,7 @@ public class Duke {
     private Parser parser;
     /** Find component for Duke */
     private Find finder;
+
 
     /**
      * Constructor for a Duke object.
@@ -124,7 +124,6 @@ public class Duke {
             storage.save(taskList);
         } else {
             response = ui.formatMessage("Bye. Hope to see you again soon!");
-            Platform.exit();
         }
         return response;
     }
