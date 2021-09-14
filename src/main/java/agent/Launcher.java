@@ -8,7 +8,7 @@ import javafx.application.Application;
 public class Launcher {
 
     /**
-     * Main method which launches the Duke chat bot and its GUI.
+     * Launches the Butler chat bot and its GUI.
      *
      * @param args accepts a single String argument for image file name placed in
      *             /resources/images for use a background picture.
