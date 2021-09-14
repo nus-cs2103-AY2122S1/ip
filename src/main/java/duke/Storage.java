@@ -68,13 +68,13 @@ public class Storage {
                 if (command.equals("D")) {
                     DeadlineCommand d = new DeadlineCommand("deadline "
                             + descAndTime[0]
-                            + " /by"
+                            + " /by "
                             + descAndTime[1]);
                     storedTaskList.add(d.getTaskToAdd());
                 } else {
                     EventCommand e = new EventCommand("event "
                             + descAndTime[0]
-                            + " /at"
+                            + " /at "
                             + descAndTime[1]);
                     storedTaskList.add(e.getTaskToAdd());
                 }
