@@ -278,7 +278,7 @@ public class Parser {
      * @param taskList TaskList object from Duke class.
      * @param archiveList ArchiveList object from Duke class.
      * @return Command to execute.
-     * @throws DukeException If incorrect values are passed for remove or done commands.
+     * @throws DukeException If invalid commands or incomplete commands are entered by the user.
      */
     public static Command parse(
             String userInput, Ui ui, TaskList taskList, ArchiveList archiveList) throws DukeException {
