@@ -12,6 +12,9 @@ public class DukeException extends IllegalArgumentException {
      * @param errorType String to specify which error is thrown.
      */
     public DukeException(String errorType) {
+        //@@author muhammad-faruq-reused
+        //Reused from https://github.com/muhammad-faruq/ip/blob/master/src/main/java/duke/DukeException.java
+        // with modifications to suit current exception cases
         switch (errorType) {
         case "invalid input":
             errorString = "I don't understand, come again?";
