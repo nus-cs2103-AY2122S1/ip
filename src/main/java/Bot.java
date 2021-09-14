@@ -1,4 +1,5 @@
 import bot.assembly.BotBrain;
+import javafx.application.Platform;
 
 // A class that represents the Bot itself
 public class Bot {
@@ -19,6 +20,9 @@ public class Bot {
      * @return feedbacks corresponding to the specific commands
      */
     public String getResponse(String input) {
+        if (botBrain.getIsTerminated()) {
+            Platform.exit();
+        }
         return botBrain.interact(input);
     }
 
@@ -38,4 +42,6 @@ public class Bot {
     public String checkMem() {
         return botBrain.wakeUpMemory();
     }
+
+
 }

@@ -101,4 +101,12 @@ public class BotBrain {
         String output = botStaticMemoryUnit.MESSAGE_GREETING;
         return output;
     }
+
+    /**
+     *
+     * @return
+     */
+    public boolean getIsTerminated() {
+        return this.isTerminated;
+    }
 }
