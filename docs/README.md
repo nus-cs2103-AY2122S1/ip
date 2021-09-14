@@ -1,6 +1,6 @@
 # User Guide
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest release from [here](https://github.com/willyamped/ip/releases/tag/A-Release).
+2. Download the latest release from [here](https://github.com/willyamped/ip/releases/download/v0.3/duke.jar).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Double-click the .jar file to start the app. The GUI should look similar to the screenshot below.<br>![Screenshot](Ui.png)
 5. Type in a command in the command box and press Enter to execute it. <br>
@@ -10,8 +10,10 @@
 
 ### Adding a task : `todo/deadline/event`
 
-Adds a task to the list. <br><br>
-A todo is a task with a description and needs to be done before a specific deadline. <br>
+Adds a task to the list. <br>
+
+A todo is a task with a description and no deadline. <br>
+An event is a task with a description and needs to be done before a specific deadline.<br>
 A deadline is a task with a description and starts at a specific deadline. <br>
 
 Format: [task] [description] /[deadline]
@@ -30,7 +32,8 @@ Format: list
 
 Finds a task based on a search term.
 
-Format: find [keyword]
+Format: find [keyword] 
+
 
 
 ### Finding a task based on a keyword that partially/ exactly matches a description: `search`
