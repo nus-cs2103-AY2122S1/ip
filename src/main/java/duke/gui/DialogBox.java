@@ -28,6 +28,9 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
 
+    //@@author erinmayg-reused
+    //Reused from https://github.com/erinmayg/ip/blob/master/src/main/java/duke/gui/DialogBox.java
+    // with minor modifications
     private static final Color DUKE_COLOR = Color.valueOf("#33383b");
     private static final CornerRadii DUKE_CORNER = new CornerRadii(0, 10, 10, 10, false);
     private static final Background DUKE_BACKGROUND = new Background(new BackgroundFill(DUKE_COLOR, DUKE_CORNER, Insets.EMPTY));
@@ -35,6 +38,7 @@ public class DialogBox extends HBox {
     private static final Color USER_COLOR = Color.valueOf("#000640");
     private static final CornerRadii USER_CORNER = new CornerRadii(10, 0, 10, 10, false);
     private static final Background USER_BACKGROUND = new Background(new BackgroundFill(USER_COLOR, USER_CORNER, Insets.EMPTY));
+    //@@author
 
     @FXML
     private Label dialog;
@@ -56,7 +60,6 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setStyle("-fx-text-fill: white");
-//        dialog.setPadding(new Insets(0,0,0,20));
         avatarIcon.setFill(new ImagePattern(img));
     }
 
