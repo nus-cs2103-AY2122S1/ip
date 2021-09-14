@@ -23,6 +23,17 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a copy of the current task.
+     *
+     * @return A copy of the task.
+     */
+    public Deadline copyTask() {
+        Deadline task = new Deadline(description, time);
+        task.isDone = isDone;
+        return task;
+    }
+
+    /**
      * Returns true if two objects are equal.
      *
      * @param obj Object that will be compared.

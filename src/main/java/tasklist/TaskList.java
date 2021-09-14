@@ -34,7 +34,7 @@ public class TaskList implements Serializable {
      */
     public void addTask(Task task) {
         assert task != null;
-        next = new TaskList(new ArrayList<>(list));
+        next = copyTaskList();
         next.list.add(task);
         next.previous = this;
     }
@@ -50,7 +50,7 @@ public class TaskList implements Serializable {
             if (index < 0 || index >= list.size()) {
                 throw new IndexOutOfBoundsException();
             }
-            next = new TaskList(new ArrayList<>(list));
+            next = copyTaskList();
             next.list.get(index).setDone();
             next.previous = this;
         } catch (IndexOutOfBoundsException e) {
@@ -98,7 +98,7 @@ public class TaskList implements Serializable {
             if (index < 0 || index >= list.size()) {
                 throw new IndexOutOfBoundsException();
             }
-            next = new TaskList(new ArrayList<>(list));
+            next = copyTaskList();
             String result = next.list.remove(index).toString();
             next.previous = this;
             return result;
@@ -123,6 +123,20 @@ public class TaskList implements Serializable {
             }
         }
         return result;
+    }
+
+
+    /**
+     * Returns an exact copy of the current TaskList.
+     *
+     * @return A copy of the current TaskList.
+     */
+    public TaskList copyTaskList() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (Task task: list) {
+            tasks.add(task.copyTask());
+        }
+        return new TaskList(tasks);
     }
 
     /**

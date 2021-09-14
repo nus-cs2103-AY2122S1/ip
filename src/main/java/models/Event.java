@@ -23,6 +23,17 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a copy of the current task.
+     *
+     * @return A copy of the task.
+     */
+    public Event copyTask() {
+        Event task = new Event(description, time);
+        task.isDone = isDone;
+        return task;
+    }
+
+    /**
      * Returns true if two objects are equal.
      *
      * @param obj Object that will be compared.

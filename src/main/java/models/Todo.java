@@ -15,6 +15,17 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns a copy of the current task.
+     *
+     * @return A copy of the task.
+     */
+    public Todo copyTask() {
+        Todo task = new Todo(description);
+        task.isDone = isDone;
+        return task;
+    }
+
+    /**
      * Returns true if two objects are equal.
      *
      * @param obj Object that will be compared.
