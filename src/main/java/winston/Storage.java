@@ -94,7 +94,9 @@ public class Storage {
             Files.deleteIfExists(this.path);
             PrintWriter out = new PrintWriter("data/winston.txt");
             String dataToSave = tList.listSaveDataFormatter();
-            out.println(dataToSave);
+            if (dataToSave != "") {
+                out.println(dataToSave);
+            }
             out.close();
             return true;
         } catch (IOException e) {

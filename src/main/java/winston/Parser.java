@@ -35,13 +35,23 @@ public class Parser {
             return new ShowListCommand(this.taskList);
         } else if (cmd.equals("done")) {
             try {
-                return new DoneCommand(this.taskList, Integer.parseInt(splitBySpace[1]));
+                int index = Integer.parseInt(splitBySpace[1]);
+                if (index <= taskList.size() && index > 0) {
+                    return new DoneCommand(this.taskList, index);
+                } else {
+                    return new InvalidCommand(taskList);
+                }
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
         } else if (cmd.equals("delete")) {
             try {
-                return new DeleteCommand(taskList, Integer.parseInt(splitBySpace[1]));
+                int index = Integer.parseInt(splitBySpace[1]);
+                if (index <= taskList.size() && index > 0) {
+                    return new DeleteCommand(this.taskList, index);
+                } else {
+                    return new InvalidCommand(taskList);
+                }
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }

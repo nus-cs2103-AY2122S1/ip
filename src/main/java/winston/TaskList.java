@@ -48,6 +48,10 @@ public class TaskList {
     }
 
 
+    public int size() {
+        return this.list.size();
+    }
+    
     /**
      * Marks the Task of given (position - 1) as completed.
      *
@@ -80,16 +84,17 @@ public class TaskList {
         int size = list.size();
         if (size == 0) {
             return Ui.emptyListMessage();
+        } else {
+            int counter = 1;
+            StringBuilder result = new StringBuilder(Ui.hiYaMessage());
+            assert(counter > size);
+            for (Task task : this.list) {
+                result.append(counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
+                counter += 1;
+            }
+            result.setLength(result.length() - 1);
+            return result.toString();
         }
-        int counter = 1;
-        StringBuilder result = new StringBuilder(Ui.hiYaMessage());
-        assert(counter > size);
-        for (Task task : this.list) {
-            result.append(counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
-            counter += 1;
-        }
-        result.setLength(result.length() - 1);
-        return result.toString();
     }
 
     /**
@@ -102,7 +107,11 @@ public class TaskList {
         for (Task task : this.list) {
             result.append(task.saveFormat()).append("\n");
         }
-        return result.substring(0, result.length() - 1);
+        if (result.length() == 0) {
+            return "";
+        } else {
+            return result.substring(0, result.length() - 1);
+        }
     }
 
     /**
