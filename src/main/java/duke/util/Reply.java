@@ -10,19 +10,11 @@ public class Reply {
      * Constructor of Reply class.
      */
     private Reply() { }
-
-    /**
-     * Shows a loading error.
-     */
-    public void showLoadingError() {
-        System.out.println("Sorry. We could not load your save file. We are created a new save file.");
-    }
-
     /**
      * Shows the welcome text.
      */
-    public void showWelcome() {
-        System.out.println("Hello, I am Duke. What can I do for you?");
+    public static String showWelcome() {
+        return "Hello, I am Duke. What can I do for you?";
     }
 
     /**
