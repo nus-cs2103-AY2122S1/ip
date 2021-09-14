@@ -10,6 +10,8 @@
 * [Mark multiple tasks as done](#mark-tasks-done)
 * [Delete multiple tasks](#delete-tasks-delete)
 * [Search for tasks](#search-for-tasks-find)
+* [Clear chat](#clear-chat-clear)
+* [Exiting the program](#exiting-the-program-exit)
 
 ## How to use
 
@@ -126,6 +128,17 @@ Here are the tasks you were looking for:
 2.  [D][ ] return book (by: Jun 6 2021 4:30 PM)
 3.  [T][ ] read book
 ```
+
+### Clear chat: `clear`
+Clear the chatbox.
+
+Format : `clear`
+
+### Exiting the program: `exit`
+Exits the program.
+
+Format : `exit`
+
 
 ### Saving the data
 Data is saved in the hard disk automatically after a command that changes the data. 
