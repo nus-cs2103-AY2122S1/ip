@@ -33,9 +33,9 @@ public class Duke {
         return true;
     }
 
-    public Duke() {
+    public Duke(String filePath) {
         closed = false;
-        this.filePath = "./data/duke.txt" ;
+        this.filePath = "duke.txt" ;
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFile());
     }

@@ -27,7 +27,7 @@ public class Main extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("./data/duke.txt");
 
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.

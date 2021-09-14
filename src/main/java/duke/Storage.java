@@ -22,7 +22,7 @@ public class Storage {
     public ArrayList loadFile() {
         ArrayList<Task> storedList = new ArrayList<Task>();
         try {
-            File taskList = new File("./data/duke.txt");
+            File taskList = new File("duke.txt");
             Scanner taskReader = new Scanner(taskList);
             while (taskReader.hasNextLine()) {
                 String item = taskReader.nextLine();
@@ -61,7 +61,7 @@ public class Storage {
      * @param taskList
      */
     public void saveFile(TaskList taskList) {
-        File items = new File("./data/duke.txt");
+        File items = new File("duke.txt");
         try {
             if (items.createNewFile()) {
                 System.out.println("Tasklist created and saved");
@@ -72,7 +72,7 @@ public class Storage {
             System.out.println("File could not be created");
         }
         try {
-            FileWriter listEditor = new FileWriter("./data/duke.txt");
+            FileWriter listEditor = new FileWriter("duke.txt");
             for (Task item: taskList.getTasks()) {
                 if (item != null) {
                     listEditor.write(item.toString());
