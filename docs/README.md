@@ -38,8 +38,7 @@ can be displayed to the user.
 ### Undo Changes
 
 The most recent change made to the task list
-(such as deleting a task, adding a new task) can be
-undone.
+can be undone.
 
 ## Usage
 
@@ -147,8 +146,7 @@ Nice! I've marked this task as done:
 Expected outcome:
 
 Prints the correct statement (shows
-all the tasks and whether they have been
-completed or not):
+all tasks and states):
 
 ```
 Here are the tasks in your list:
@@ -165,8 +163,8 @@ Expected outcome:
 Reverts the change made and prints the
 correct statement:
 
-(For example, if delete 3 is performed,
-followed by undo, the output is shown below:)
+(For example, if delete 3 was performed,
+the output is shown below:)
 
 ```
 Undid delete on task 3
