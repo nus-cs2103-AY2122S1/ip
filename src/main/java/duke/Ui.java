@@ -82,7 +82,7 @@ public class Ui {
      * @throws IllegalArgumentException If the command keyword is invalid.
      */
     public Command readCommand(String input) throws InvalidCommandException {
-        String[] stringArr = input.split(" ", 2);
+        String[] stringArr = input.trim().split(" ", 2);
         String commandName = stringArr[0].toUpperCase();
         CommandKeyword keyword = this.listOfCommands.get(commandName);
         if (keyword == null) {
