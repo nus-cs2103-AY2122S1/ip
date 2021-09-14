@@ -9,18 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 
 import java.io.IOException;
-import java.util.Collections;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 
 
 public class DialogBox extends HBox {
@@ -47,19 +38,6 @@ public class DialogBox extends HBox {
     }
 
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-    }
-
-
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
@@ -70,7 +48,6 @@ public class DialogBox extends HBox {
         return db;
     }
 
-
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -78,14 +55,5 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
-    }
-
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
-    }
 
 }
