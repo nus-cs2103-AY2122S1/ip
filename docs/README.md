@@ -2,8 +2,8 @@
 Duke helps you keep track of your tasks.
 
 ## Quick Start
-1. Ensure you have `Java 11` installed on your computer.
-2. Download the latest duke.jar file.
+1. Ensure you have Java `11` installed on your computer.
+2. Download the latest `duke.jar` file [here](https://github.com/driip-ddrop/ip/releases)
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file to start the app.
 5. Refer to the features below for details on each command.
