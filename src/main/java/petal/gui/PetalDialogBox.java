@@ -22,7 +22,6 @@ public class PetalDialogBox extends HBox {
     private Label dialog;
     @FXML
     private Circle profilePicture;
-
     private final Image petalPicture = new Image(Objects.requireNonNull(this.getClass()
                 .getResourceAsStream("/images/petal.jpg")));
 

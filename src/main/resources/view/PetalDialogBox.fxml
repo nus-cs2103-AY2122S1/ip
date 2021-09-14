@@ -12,7 +12,7 @@
         <Circle fx:id="profilePicture" fill="DODGERBLUE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
         <Label fx:id="dialog" alignment="CENTER" text="Label" textFill="#ffb7c5" translateX="8.0" translateY="20.0" wrapText="true">
             <font>
-                <Font name="Segoe UI Bold" size="21.0" />
+                <Font name="Helvetica Neue" size="21.0" />
             </font>
             <effect>
                 <Glow level="0.6" />

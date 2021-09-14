@@ -14,6 +14,7 @@ import petal.components.Parser;
 public class Event extends Task implements Timeable {
 
     private final String description;
+    //dateTime represents the original string passed in of the date and time, used for saving
     private final String dateTime;
     private final LocalDate date;
     private final LocalTime startTime;
@@ -28,13 +29,14 @@ public class Event extends Task implements Timeable {
      */
     public Event(String description, String dateTime, boolean isDone) {
         super(description.trim(), isDone);
-        this.description = description.trim();
-        this.dateTime = (dateTime = dateTime.trim());
 
-        String[] splitByWhiteSpace = dateTime.split(" ");
-        this.date = Parser.parseDate(splitByWhiteSpace[0]);
-        this.startTime = Parser.parseTime(splitByWhiteSpace[1]);
-        this.endTime = Parser.parseTime(splitByWhiteSpace[2]);
+        this.description = description.trim();
+        this.dateTime = dateTime.trim();
+
+        String[] splitByWhiteSpace = this.dateTime.split(" ");
+        date = Parser.parseDate(splitByWhiteSpace[0]);
+        startTime = Parser.parseTime(splitByWhiteSpace[1]);
+        endTime = Parser.parseTime(splitByWhiteSpace[2]);
     }
 
     @Override
@@ -55,7 +57,8 @@ public class Event extends Task implements Timeable {
     @Override
     public String toString() {
         String formatDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date);
-        return "[E]" + super.toString() + " (at " + formatDate + " " + this.startTime + " to "
-                + this.endTime + ")";
+        String startToEndTime = this.startTime + " to " + this.endTime + ")";
+        String dateOfEvent = " (at " + formatDate + " ";
+        return "[E]" + super.toString() + dateOfEvent + startToEndTime;
     }
 }

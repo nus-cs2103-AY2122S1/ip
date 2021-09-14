@@ -79,7 +79,7 @@ public class TaskList {
     private void checkIfValidFormat(String type, String message, String[] deadlineEvent) throws EmptyDescException,
             InvalidInputException {
         boolean emptyDesc = message.isBlank() || deadlineEvent[0].isBlank();
-        boolean invalidTimeableFormat = type.equals("deadline") || type.equals("event") && deadlineEvent.length < 2;
+        boolean invalidTimeableFormat = (type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2;
 
         if (emptyDesc) {
             throw new EmptyDescException(Responses.EMPTY_DESCRIPTION);

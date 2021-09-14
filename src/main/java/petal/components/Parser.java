@@ -62,7 +62,7 @@ public class Parser {
 
     /**
      * Parses a given string (if given correctly), creating a LocalTime object
-     * It is static as it is available to any object that wants to parse time
+     * It is static as it is available to any object that wants to parse time.
      *
      * @param time The given String
      * @return LocalTime object
@@ -77,7 +77,7 @@ public class Parser {
 
     /**
      * Parses a given string (if given correctly), creating a LocalDate
-     * It is static as it is available to any object that wants to parse time
+     * It is static as it is available to any object that wants to parse time.
      *
      * @param date The given String
      * @return LocalDate Object
@@ -85,11 +85,12 @@ public class Parser {
      */
     public static LocalDate parseDate(String date) {
         String[] dayMonthYear = date.split("/");
+        //This is done if the user inputs the day as 1 digit, rather than 2
         if (dayMonthYear[0].length() == 1) {
-            //This is done if the user inputs the day as 1 digit, rather than 2
             dayMonthYear[0] = "0" + dayMonthYear[0];
         }
-        return LocalDate.parse(dayMonthYear[2] + "-" + dayMonthYear[1] + "-" + dayMonthYear[0]);
+        LocalDate parsedDate = LocalDate.parse(dayMonthYear[2] + "-" + dayMonthYear[1] + "-" + dayMonthYear[0]);
+        return parsedDate;
     }
 
 }

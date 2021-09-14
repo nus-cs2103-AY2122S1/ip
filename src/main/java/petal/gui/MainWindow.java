@@ -22,12 +22,8 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-
     private Ui ui;
 
-    /**
-     * Initializes the nodes
-     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -53,7 +49,6 @@ public class MainWindow extends AnchorPane {
                 UserDialogBox.getUserDialog(input),
                 PetalDialogBox.getPetalDialog(output)
         );
-        userInput.clear();
     }
 
     /**
@@ -67,7 +62,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 PetalDialogBox.getPetalDialog(output)
         );
-        userInput.clear();
     }
 
     /**
@@ -85,5 +79,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException {
         String input = userInput.getText().trim();
         ui.readCommand(input);
+        userInput.clear();
     }
 }

@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 /**
- * The PictureEditor class encompasses method that help to add
- * certain effects to a picture, like a glow and outline
+ * The PictureEditor class encompasses methods that help to add
+ * certain effects to an Image within a Shape, like a glow and outline
+ * Picture refers to an Image within a shape.
  */
 public class PictureEditor {
 

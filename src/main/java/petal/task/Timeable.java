@@ -3,7 +3,7 @@ package petal.task;
 import java.time.LocalDate;
 
 /**
- * The Timeable interface represents Tasks that have a date/time components,
+ * The Timeable interface represents Tasks that have date/time components,
  * mainly the Deadline/Event tasks
  */
 public interface Timeable {

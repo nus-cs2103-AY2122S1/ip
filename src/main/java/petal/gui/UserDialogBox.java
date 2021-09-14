@@ -22,9 +22,9 @@ public class UserDialogBox extends HBox {
     private Label dialog;
     @FXML
     private Circle profilePicture;
-
     private final Image userPicture = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/lauren_tsai.png")));
+
     /**
      * Constructs a UserDialogBox instance
      *
@@ -46,6 +46,7 @@ public class UserDialogBox extends HBox {
 
         profilePicture.setFill(new ImagePattern(userPicture));
     }
+
     /**
      * Returns a UserDialogBox instance with the input
      *

@@ -11,7 +11,7 @@
     <children>
         <Label fx:id="dialog" alignment="CENTER" text="Label" textFill="#b7fff1" translateX="-4.0" translateY="20.0" wrapText="true">
             <font>
-                <Font name="Segoe UI Bold" size="21.0" />
+                <Font name="Helvetica Neue" size="21.0" />
             </font>
             <effect>
                 <Glow level="0.6" />

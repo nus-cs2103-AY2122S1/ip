@@ -1,5 +1,6 @@
 package petal.command;
 
+import petal.components.Responses;
 import petal.components.Storage;
 import petal.components.TaskList;
 import petal.exception.InvalidInputException;
@@ -31,8 +32,8 @@ public class DateCommand implements Command {
     public String execute(TaskList taskList, Storage storage) {
         try {
             return taskList.showTaskOnDate(input);
-        } catch (InvalidInputException e) {
-            return e.getMessage();
+        } catch (InvalidInputException | ArrayIndexOutOfBoundsException e) {
+            return Responses.INVALID_DATE_TIME.toString();
         }
     }
 }
