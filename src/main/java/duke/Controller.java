@@ -2,18 +2,21 @@ package duke;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static duke.Parser.taskParse;
 
 
-public class Controller {
+public class Controller implements Initializable {
 
-    private static final Storage storage = new Storage("duke.txt");
+    private static Storage storage;
     private static TaskList tasks;
 
     @FXML
@@ -58,31 +61,36 @@ public class Controller {
     @FXML
     private DatePicker updateDate;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        storage = new Storage("duke.txt");
+        this.load();
+    }
+
     /**
      * Loads the tasklist when the load button is pressed
      *
      * @param a action of pressing load button
      */
     public void load(ActionEvent a) {
-        {
-            try {
-                tasks = new TaskList(storage.load());
-            } catch (IOException | DukeException e) {
-                tasks = new TaskList();
-            }
-            listLabel.setText(tasks.toString());
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException | DukeException e) {
+            tasks = new TaskList();
         }
+        listLabel.setText(tasks.toString());
     }
 
     /**
      * Loads updated tasklist when other buttons are pressed
      */
     public void load() {
-        String listContent = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException | DukeException e) {
+            tasks = new TaskList();
         }
-        listLabel.setText("Here are the tasks in your list:\n" + listContent);
+        listLabel.setText(tasks.toString());
         try {
             storage.save(tasks);
         } catch (IOException e) {
@@ -190,4 +198,6 @@ public class Controller {
     public void find(ActionEvent a) {
         listLabel.setText(tasks.findTask(findText.getText()) + "Press load to go back!");
     }
+
+
 }
