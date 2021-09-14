@@ -1,24 +1,63 @@
-# Duke project template
+# Pib Task Tracker
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Quick start
 
-## Setting up in Intellij
+Download the executable jar file `pib.jar` and double-click to start the app!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+---
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## What is Pib?
+
+Pib is a simple and lightweight task-tracker for you!
+
+You will be able to use it both from the CLI and the GUI.
+
+_Pib auto-saves everytime you make a change and when you quit!_
+
+---
+
+## Commands
+
+
+### General
+- `list`
+  - **Display the list of all your tasks**
+- `bye`
+   - **Exits the application**
+---
+### Create tasks
+- `todo`
+  - **Adds a new _todo_ task to your list**
+  - Format: `todo <task description>`
+    - _eg._ `todo wash the dishes`
+- `deadline`
+  - **Adds a new _deadline_ task to your list**
+  - Format: `deadline <task description> /by <YYYY-MM-DD> <HHMM>`
+    - _eg._ `deadline CS2103 Quiz /by 2021-09-19 2359`
+- `event`
+  - **Adds a new _event_ task to your list**
+  - Format: `event <task description> /at <YYYY-MM-DD> <HHMM>`
+    - _eg._ `event swab test /at 2021-09-25 1230`
+---
+### Handle tasks
+- `done`
+  - **Marks the indicated task as done**
+  - Format: `done <task number>`
+    - _eg._ `done 1`
+- `delete`
+  - **Deletes the indicated task from the list**
+  - Format: `delete <task number>`
+    - _eg._ `delete 2`
+- `edit`
+  - **Edits the indicated task and the indicated part**
+  - Format: `edit <task number> <part indicator> <new value to replace with>`
+    - For `<part indicator>`
+      - `/i` replaces the task _Information_ with the new value
+      - `/d` replaces the task _Date_ with the new value _(formatted YYYY-MM-DD) (NA for todo)_
+      - `/t` replaces the task _Time_ with the new value _(formatted HHMM) (NA for todo)_
+    - _eg._ `edit 3 /i study`
+- `find`
+   - **Displays all tasks which contain the indicated word (case-sensitive)**
+   - Format: `find <query>`
+      - _eg._ `find CS21`
+---

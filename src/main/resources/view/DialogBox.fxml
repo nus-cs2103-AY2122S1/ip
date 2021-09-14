@@ -10,7 +10,7 @@
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true"
                style="-fx-padding: 15; -fx-background-color: #53d769; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #000000;"/>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"
+        <ImageView fx:id="displayPicture" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true"
                    style="-fx-background-radius: 10;"/>
     </children>
     <padding>
