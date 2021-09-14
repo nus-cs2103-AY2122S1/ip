@@ -66,6 +66,13 @@ public class TaskList {
         }
     }
 
+    /**
+     *
+     * @param task the new task to be placed in the right position.
+     * @param taskId the position of the task to be replaced
+     * @return the previous task which was replaced by the new task
+     * @throws IncorrectIndexException if the taskId was invalid
+     */
     public Task updateTask(Task task, int taskId) throws IncorrectIndexException {
         Task taskRetrieved;
         try {
@@ -121,8 +128,8 @@ public class TaskList {
         StringBuilder result = new StringBuilder();
         int indexOfLastElement = this.size() - 1;
         for (int j = 0; j <= indexOfLastElement; j++) {
-            int correctIDNumber = j + 1;
-            String line = correctIDNumber + "." + tasks.get(j).toString();
+            int correctIdNumber = j + 1;
+            String line = correctIdNumber + "." + tasks.get(j).toString();
             result.append(line);
             if (j < indexOfLastElement) {
                 result.append("\n");

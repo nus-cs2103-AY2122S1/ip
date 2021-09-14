@@ -9,8 +9,7 @@ public class IncorrectEventParameterException extends IncorrectParameterSupplied
      *
      */
     public IncorrectEventParameterException() {
-        super(EventCommand.COMMAND_WORD, new String[]{
-                EventCommand.COMMAND_WORD + " name_here"
-                , "/at date_here"});
+        super(EventCommand.COMMAND_WORD, new String[]{EventCommand.COMMAND_WORD + " name_here",
+            "/at date_here"});
     }
 }

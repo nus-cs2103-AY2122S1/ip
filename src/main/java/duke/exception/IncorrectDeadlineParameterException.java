@@ -9,8 +9,7 @@ public class IncorrectDeadlineParameterException extends IncorrectParameterSuppl
      *
      */
     public IncorrectDeadlineParameterException() {
-        super(DeadlineCommand.COMMAND_WORD, new String[]{
-                DeadlineCommand.COMMAND_WORD + " name_here"
-                , "/by date_here"});
+        super(DeadlineCommand.COMMAND_WORD, new String[]{DeadlineCommand.COMMAND_WORD + " name_here",
+            "/by date_here"});
     }
 }

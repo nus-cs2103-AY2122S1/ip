@@ -101,7 +101,8 @@ public class UpdateCommand extends Command {
         lookForAndSetDateTime(split);
     }
 
-    private void lookForAndSetId(String[] splitString) throws IncorrectUpdateParameterException, IncorrectIndexException {
+    private void lookForAndSetId(String[] splitString) throws IncorrectUpdateParameterException,
+            IncorrectIndexException {
         for (String s: splitString) {
             if (s.startsWith("/i")) {
                 String res = s.substring(2);

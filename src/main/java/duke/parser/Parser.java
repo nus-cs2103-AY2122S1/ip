@@ -93,9 +93,9 @@ public class Parser {
                 || checkCommandWordWithCommand(commandWord, EventCommand.COMMAND_WORD);
     }
 
-    private Command convertAddOrUpdateCommandStringToCommand(String commandWord
-            , String commandOption
-            , TaskList taskList) {
+    private Command convertAddOrUpdateCommandStringToCommand(String commandWord,
+                                                             String commandOption,
+                                                             TaskList taskList) {
         if (checkCommandWordWithCommand(commandWord, TodoCommand.COMMAND_WORD)) {
             return new TodoCommand(taskList, commandOption);
         }

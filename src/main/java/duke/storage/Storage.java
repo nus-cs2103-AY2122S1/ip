@@ -111,19 +111,20 @@ public class Storage {
         printMessage("Saving your list now!");
         saveTasksInTaskList(taskList);
         try {
-           this.writer.close();
+            this.writer.close();
         } catch (IOException e) {
             printExceptionError(e, "Exception occurred while closing writer.");
         }
     }
 
-    private void saveTasksInTaskList(TaskList taskList)  {
+    private void saveTasksInTaskList(TaskList taskList) {
         for (int i = 1; i <= taskList.size(); i++) {
             try {
                 writeTaskToWriterDestination(taskList.get(i));
             } catch (IOException e) {
                 printExceptionError(e, "Exception occurred while writing");
-            } catch (IncorrectIndexException ignored) {
+            } catch (IncorrectIndexException e) {
+                printExceptionError(e, "Exception occurred while saving task due to incorrect index");
             }
         }
     }
@@ -181,7 +182,7 @@ public class Storage {
         return line == null || line.isEmpty();
     }
 
-    private void printExceptionError(IOException e, String message) {
+    private void printExceptionError(Exception e, String message) {
         System.out.println(message + "\n" + e.getMessage());
     }
 
