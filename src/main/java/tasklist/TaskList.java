@@ -156,10 +156,20 @@ public class TaskList implements Serializable {
         return result;
     }
 
+    /**
+     * Gets the previous state of the TaskList.
+     *
+     * @return The previous state of the TaskList object.
+     */
     public TaskList getPrevious() {
         return previous;
     }
 
+    /**
+     * Gets the next state of the TaskList.
+     *
+     * @return The next state of the TaskList object.
+     */
     public TaskList getNext() {
         return next;
     }

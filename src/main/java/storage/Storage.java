@@ -145,6 +145,12 @@ public class Storage implements IStorage {
         return this.list.getSize();
     }
 
+    /**
+     * Returns TaskList with all the tasks that has the keyword.
+     *
+     * @param keywords Keywords to be found in the TaskList.
+     * @return
+     */
     public TaskList findKeyword(String ... keywords) {
         return this.list.findKeyword(keywords);
     }
@@ -159,18 +165,31 @@ public class Storage implements IStorage {
         return this.list.toString();
     }
 
+    /**
+     * Returns the previous state of the TaskList.
+     *
+     * @return Previous TaskList.
+     */
     @Override
     public TaskList getPrevious() {
         if (list.getPrevious() == null) {
             return list;
         }
+        assert list.getPrevious() != null;
         return list.getPrevious();
     }
 
+    /**
+     * Returns the next state of the TaskList.
+     *
+     * @return Next TaskList.
+     */
+    @Override
     public TaskList getNext() {
         if (list.getNext() == null) {
             return list;
         }
+        assert list.getNext() != null;
         return list.getNext();
     }
 
