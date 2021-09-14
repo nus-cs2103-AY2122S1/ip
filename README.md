@@ -1,7 +1,7 @@
-### Duke
+### duke
 > *“You can do anything, but not everything.” – David Allen* [(source)](https://dansilvestre.com/productivity-quotes/)
 
-Duke frees you from worry of taking care of everything. You can ask Duke to help you remember things. It's
+duke frees you from worry of taking care of everything. You can ask duke to help you remember things. It's
 * Text-based!
 * Easy to understand!
 * Super Fast to use! :grin:
@@ -9,8 +9,8 @@ Duke frees you from worry of taking care of everything. You can ask Duke to help
 All you need is: :wink:
    1. Click this [link](https://github.com/HangZelin/ip) to **download**!
    2. Double-click to open it.
-   3. Tell Duke tasks to add.
-   4. Let Duke manage your tasks for you!
+   3. Tell duke tasks to add.
+   4. Let duke manage your tasks for you!
   
 It is **FREE** to use!!!
 
@@ -26,6 +26,6 @@ Features:
 If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 ```java
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new duke("data/tasks.txt").run();
     }
 ```

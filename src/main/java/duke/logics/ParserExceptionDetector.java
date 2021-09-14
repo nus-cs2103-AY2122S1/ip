@@ -12,21 +12,22 @@ import duke.task.TaskList;
  */
 public class ParserExceptionDetector {
     //Constant values
-    private final static String SLASH = "/";
-    private final static String SPACE = " ";
-    private final static String BY = "/by";
-    private final static String AT = "/at";
-    private final static String TODO = "todo";
-    private final static String DEADLINE = "deadline";
-    private final static String DONE = "done";
-    private final static String DELETE = "delete";
-    private final static String EVENT = "event";
-    private final static String FIND = "find";
-    private final static String TELL = "tell";
+    private static final String EMPTY = "";
+    private static final String SLASH = "/";
+    private static final String SPACE = " ";
+    private static final String BY = "/by";
+    private static final String AT = "/at";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String EVENT = "event";
+    private static final String FIND = "find";
+    private static final String TELL = "tell";
     private final String message;
 
     /**
-     * Takes in the message and will configure it later.
+     * Constructor that takes in the message and will configure it later.
      *
      * @param message Message to be parsed.
      */
@@ -42,6 +43,11 @@ public class ParserExceptionDetector {
      * of the given type list.
      */
     public void detectOperationTypeException() throws DukeException {
+        //If Input is empty throw empty error.
+        if (message.equals(EMPTY) || message.startsWith(SPACE)) {
+            throw new DukeException(ExceptionType.EMPTY_COMMAND_ERROR);
+        }
+
         //If the task type does not belong to the three types, throw an error.
         TaskList.OperationType[] operationTypes = TaskList.OperationType.values();
         for (TaskList.OperationType o : operationTypes) {
@@ -50,13 +56,14 @@ public class ParserExceptionDetector {
                 return;
             }
         }
+
         throw new DukeException(ExceptionType.UNKNOWN_OPERATION);
     }
 
     /**
      * Determines whether there is no task info.
      *
-     * @throws DukeException Exception is thrown when task cannot be read
+     * @throws DukeException Exception is thrown when task cannot be read.
      */
     public void detectGetTaskException() throws DukeException {
         boolean isCorrectType = message.startsWith(DEADLINE) || message.startsWith(EVENT)

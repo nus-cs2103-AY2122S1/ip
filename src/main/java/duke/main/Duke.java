@@ -1,14 +1,13 @@
 package duke.main;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.executions.Execution;
 import duke.logics.Parser;
 import duke.saveloadmanager.Storage;
 import duke.task.TaskList;
 import duke.uimanager.TextUi;
-
-import java.io.IOException;
-
 /**
  * @@author Hang Zelin
  * Main Programme to execute the Duke Project
@@ -19,14 +18,13 @@ import java.io.IOException;
  */
 public class Duke {
 
-    private final static String FILEPATH = "data/tasks.txt";
+    private static final String FILEPATH = "data/tasks.txt";
     private final Storage storage;
-    private TaskList tasks;
     private final TextUi textUi;
+    private TaskList tasks;
 
     /**
-     * initialize Ui, storage and load TaskLists from specific filePath for Duke
-     *
+     * Initializes Ui, storage and load TaskLists from specific filePath for Duke.
      */
     public Duke() {
         textUi = new TextUi();
@@ -42,19 +40,21 @@ public class Duke {
     /**
      * Updates a save data every time a round of execution is done.
      */
-    public void updateSaveData() {
+    public String updateSaveData() {
+        String text = "";
         try {
             storage.saveListDataToFile(tasks);
         } catch (IOException e) {
-            textUi.showSavingError();
+            text = textUi.showSavingError();
         }
+        return text;
     }
 
     /**
      * Runs the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
      * users and filter out key commands, then call OperationForDuke to execute a task by commands.
      * The process will not stop until users enter "goodbye".
-     * Noted: Every time an execution is done, the savedata will be updated.
+     * Noted: Every time an execution is done, the saveData will be updated.
      *
      * @param input Input user take in.
      * @return Response Duke gives.
@@ -64,8 +64,8 @@ public class Duke {
         Execution execution = new Execution(tasks, textUi, parser);
         String dukeResponse;
 
-        dukeResponse = execution.ExecutionResponse();
-        updateSaveData(); //Update the SaveData every time a round of operation is done.
+        dukeResponse = execution.executionResponse();
+        dukeResponse += updateSaveData(); //Update the SaveData every time a round of operation is done.
 
         return dukeResponse;
     }

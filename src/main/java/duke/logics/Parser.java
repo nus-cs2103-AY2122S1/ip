@@ -1,12 +1,11 @@
 package duke.logics;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.exceptions.DukeException;
 /**
  * @@author Hang Zelin
  *
@@ -18,18 +17,18 @@ import java.util.ArrayList;
  */
 public class Parser {
     //Constant values
-    private final static String EMPTY = "";
-    private final static String SLASH = "/";
-    private final static String SPACE = " ";
-    private final static String DASH = "-";
-    private final static String PIPE = "|";
-    private final static String BY = "/by";
-    private final static String AT = "/at";
-    private final static String DEADLINE = "deadline";
-    private final static String EVENT = "event";
-    private final static String TELL = "tell";
-    private final static char FIRST_LETTER_DEADLINE = 'D';
-    private final static char FIRST_LETTER_EVENT = 'E';
+    private static final String EMPTY = "";
+    private static final String SLASH = "/";
+    private static final String SPACE = " ";
+    private static final String DASH = "-";
+    private static final String PIPE = "|";
+    private static final String BY = "/by";
+    private static final String AT = "/at";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String TELL = "tell";
+    private static final char FIRST_LETTER_DEADLINE = 'D';
+    private static final char FIRST_LETTER_EVENT = 'E';
     private final String message;
     private final ParserExceptionDetector parserExceptionDetector;
 
@@ -46,9 +45,9 @@ public class Parser {
 
         boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0) && month == 2;
         boolean isValidLeapYearFeb = day <= 29 && day > 0;
-        boolean isValidFeb =  day <= 28 && day > 0;
+        boolean isValidFeb = day <= 28 && day > 0;
         boolean isValidMonth = month > 0 && month <= 12;
-        boolean isValidDay =  day <= 31 && day > 0; //Is day valid for the month has 31 days.
+        boolean isValidDay = day <= 31 && day > 0; //Is day valid for the month has 31 days.
         boolean isValidDay2 = (month == 4 || month == 6 || month == 9
                 || month == 11) && day <= 30; //Is day valid for specific months.
         boolean isValidHour = hour <= 24 && hour >= 0;
@@ -62,7 +61,11 @@ public class Parser {
     }
 
     private LocalDateTime parseTimeInFormat1(String time) {
-        int day, month, year, hour, minute;
+        int day;
+        int month;
+        int year;
+        int hour;
+        int minute;
         int endIndex1 = time.indexOf(SLASH);
         int endIndex2 = time.lastIndexOf(SPACE);
         day = Integer.parseInt(time.substring(0, endIndex1));
@@ -95,7 +98,7 @@ public class Parser {
      * 2. yyyy-mm-dd
      *
      * @param time Time User takes in to be parsed.
-     * @return Parsed time converted in the type of LocalDateTime
+     * @return Parsed time converted in the type of LocalDateTime.
      */
     public LocalDateTime parseTime(String time) {
         LocalDateTime parsedTime;
@@ -196,7 +199,7 @@ public class Parser {
      * @return Operation type parsed from users' one line of command.
      * @throws DukeException Throws when the task info cannot be retrieved from users' one line of command.
      */
-    public String getTask() throws DukeException{
+    public String getTask() throws DukeException {
         String task;
 
         parserExceptionDetector.detectGetTaskException();
@@ -233,7 +236,7 @@ public class Parser {
     }
 
     /**
-     * return a String which is index info in a line of command.
+     * Returns a String which is index info in a line of command.
      * Noted: It is possible that index does not exist. This method will only be applicable for "tell", "find",
      * "done" and "delete" operation type.
      *

@@ -1,13 +1,13 @@
-package duke.junittests;
-
-import duke.logics.Parser;
-import duke.exceptions.DukeException;
-import org.testng.annotations.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import duke.exceptions.DukeException;
+import duke.logics.Parser;
 /**
  * @author Hang Zelin
  *
