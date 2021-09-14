@@ -56,6 +56,7 @@ There is no need to save manually.
 Jo's data are saved as a txt file `data/duke.txt`. Advanced users are welcome to update data directly by editing that data file.
 
 ## Command Summary
+
 Action | Format, Examples
 -------|------------------
 Add ToDo | `todo TASK_DESCRIPTION`<br/> e.g.,`todo work`
