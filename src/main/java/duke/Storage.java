@@ -61,7 +61,8 @@ public class Storage {
     }
 
     /**
-     * Saved file should be structured in this manner:
+     * Loads a saved file.
+     * The data file should be structured in this manner:
      * - In each line, start with a T(odo), D(eadline), E(vent)
      * - Space out each detail with a "|'
      * - If empty line, assume end of file

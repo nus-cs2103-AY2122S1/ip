@@ -220,7 +220,7 @@ public class Ui {
     }
 
     /**
-     * Given a task list which is the result of a search operation, prints out the results.
+     * Prints out the results given a task list which is the result of a search operation.
      *
      * @param taskList task list comprising matching search terms.
      * @return lists search results.
