@@ -8,17 +8,24 @@ import duke.task.Task;
 import duke.task.TaskType;
 import duke.tasklist.TaskList;
 
+/**
+ * A command that can update and replace a task at the i-th position.
+ */
 public class UpdateCommand extends Command {
 
+    /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "update";
 
+    /** Class level constant that represents the action taken by the command. */
     public static final String DESCRIPTION = "Update a task.";
 
-    public static final String FORMAT = COMMAND_WORD +
-            "/i id_of_the_task " +
-            "/n new_name_of_task " +
-            "/d new_date_of_task";
+    /** Class level constant that represents the format needed to successfully complete command. */
+    public static final String FORMAT = COMMAND_WORD
+            + "/i id_of_the_task "
+            + "/n new_name_of_task "
+            + "/d new_date_of_task";
 
+    /** Class level constant which represents the feedback string to be returned. */
     public static final String FEEDBACK_STRING = "I've updated this task in your list from\n";
 
     private final String commandStringParams;
@@ -40,18 +47,36 @@ public class UpdateCommand extends Command {
         this.commandStringParams = commandStringParams;
     }
 
+    /**
+     * Returns the string representation of the command description and format.
+     * @return String that represents the command description and format.
+     */
     public static String formatAndDescription() {
         return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
+    /**
+     * Sets the name of the task to update to.
+     * @param nameToUpdateTo the new name of the task.
+     */
     public void setUpdatedName(String nameToUpdateTo) {
         this.nameToUpdateTo = nameToUpdateTo;
     }
 
+    /**
+     * Sets the date of the task to update to.
+     * @param dateToUpdateTo the new date of the task.
+     */
     public void setUpdatedDate(String dateToUpdateTo) {
         this.dateToUpdateTo = dateToUpdateTo;
     }
 
+    /**
+     * Overrides execute() from Command and returns a CommandResult which stores the feedback string
+     * to be returned to the UserInterface.
+     * @return CommandResult to be rendered by UserInterface.
+     * @throws DukeException if any errors are found with the format of the update command.
+     */
     @Override
     public CommandResult execute() throws DukeException {
         parseThroughCommandStringParams();
@@ -107,12 +132,12 @@ public class UpdateCommand extends Command {
 
     private void parseThroughCommandStringParams() throws IncorrectUpdateParameterException, IncorrectIndexException {
         String[] split = this.commandStringParams.split("(?=/)");
-        lookForAndSetId(split);
-        lookForAndSetName(split);
-        lookForAndSetDateTime(split);
+        lookForIdAndSetId(split);
+        lookForNameAndSetName(split);
+        lookForDateAndSetDateTime(split);
     }
 
-    private void lookForAndSetId(String[] splitString) throws IncorrectUpdateParameterException,
+    private void lookForIdAndSetId(String[] splitString) throws IncorrectUpdateParameterException,
             IncorrectIndexException {
         for (String s: splitString) {
             if (s.startsWith("/i")) {
@@ -128,7 +153,7 @@ public class UpdateCommand extends Command {
         throw new IncorrectUpdateParameterException();
     }
 
-    private void lookForAndSetName(String[] splitString) {
+    private void lookForNameAndSetName(String[] splitString) {
         for (String s: splitString) {
             if (s.startsWith("/n")) {
                 setUpdatedName(s.substring(2).trim());
@@ -137,7 +162,7 @@ public class UpdateCommand extends Command {
         }
     }
 
-    private void lookForAndSetDateTime(String[] splitString) {
+    private void lookForDateAndSetDateTime(String[] splitString) {
         for (String s: splitString) {
             if (s.startsWith("/d")) {
                 setUpdatedDate(s.substring(2).trim());

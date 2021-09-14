@@ -14,8 +14,10 @@ public class DoneCommand extends Command {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "done";
 
+    /** Class level constant that represents the action taken by the command. */
     public static final String DESCRIPTION = "Complete a task from the taskList";
 
+    /** Class level constant that represents the format needed to successfully complete command. */
     public static final String FORMAT = COMMAND_WORD + " id_of_task_to_be_completed";
 
     /** The id of the task to marked as completed from the list. */
@@ -31,6 +33,10 @@ public class DoneCommand extends Command {
         this.taskId = taskId;
     }
 
+    /**
+     * Returns the string representation of the command description and format.
+     * @return String that represents the command description and format.
+     */
     public static String formatAndDescription() {
         return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }

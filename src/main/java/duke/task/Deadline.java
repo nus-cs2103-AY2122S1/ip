@@ -23,16 +23,33 @@ public class Deadline extends TimedTask {
         return " (by: " + this.getDateTime() + ")";
     }
 
+    /**
+     * Returns a new Deadline with the updated datetime.
+     * @param dateTime the new dateTime string to be provided.
+     * @return new Deadline with the updated dateTime
+     * @throws TimedTaskDateInputException if the datetime string is not of the correct format.
+     */
     @Override
     public Task updateDateTime(String dateTime) throws TimedTaskDateInputException {
         return new Deadline(this.getName(), dateTime, this.getCompleted());
     }
 
+    /**
+     * Returns a new Deadline with the updated name.
+     * @param name the new string to be provided.
+     * @return new Deadline with the updated name
+     * @throws TimedTaskDateInputException if the datetime string is not of the correct format.
+     */
     @Override
-    public Task updateName(String input) throws TimedTaskDateInputException {
-        return new Deadline(input, this.getDateTimeInternal(), this.getCompleted());
+    public Task updateName(String name) throws TimedTaskDateInputException {
+        return new Deadline(name, this.getDateTimeInternal(), this.getCompleted());
     }
 
+    /**
+     * Returns a new Deadline which is completed.
+     * @return new Deadline which is completed.
+     * @throws TimedTaskDateInputException if the datetime string is not of the correct format.
+     */
     @Override
     public Task complete() throws TimedTaskDateInputException {
         return new Deadline(this.getName(), this.getDateTimeInternal(), true);

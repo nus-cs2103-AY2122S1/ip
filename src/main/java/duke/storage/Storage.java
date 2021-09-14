@@ -29,6 +29,7 @@ public class Storage {
     /** The default file path **/
     public static final String DEFAULT_FILE_PATH = "data/duke.txt";
 
+    /** Constant representing a load issue message. */
     public static final String LOAD_ISSUE_MESSAGE = "DB file is corrupted.\n";
 
     private BufferedReader reader;

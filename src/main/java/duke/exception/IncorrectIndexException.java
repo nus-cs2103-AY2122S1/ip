@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * An exception to indicate the incorrect index number supplied by user.
+ */
 public class IncorrectIndexException extends DukeException {
 
     /**

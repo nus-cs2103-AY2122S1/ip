@@ -45,14 +45,19 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets command from parser and executes the command.
+     * @param input passed by user interface
+     * @return CommandResult
+     * @throws DukeException if parse is unsuccessful.
      */
     @FXML
     public CommandResult getResponse(String input) throws DukeException {
         return new Parser(this.list).parse(input).execute();
     }
 
+    /**
+     * Saves the taskList to disk.
+     */
     public void save() {
         this.storage.save(this.list);
     }

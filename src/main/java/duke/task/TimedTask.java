@@ -7,13 +7,19 @@ import java.time.format.DateTimeParseException;
 import duke.exception.TimedTaskDateInputException;
 import duke.formatter.DateTimeFormatCreator;
 
+/**
+ * A type of Task which represents Tasks which can store a datetime string.
+ */
 public abstract class TimedTask extends Task {
 
+    /** A class level constant to represent the input date format accepted by Duke. */
     public static final String TIMED_TASK_YEAR_FORMAT = "yyyy-MM-dd";
 
-    public static final String TIMED_TASK_MONTH_FORMAT = "MMM d yyyy";
-
+    /** A class level constant to represent the input time format accepted by Duke. */
     public static final String TIMED_TASK_TIME_FORMAT = "HH:mm";
+
+    /** A class level constant to represent the output date format which will be stored by Duke. */
+    public static final String TIMED_TASK_MONTH_FORMAT = "MMM d yyyy";
 
     private final LocalDateTime dateTime;
 
@@ -37,17 +43,29 @@ public abstract class TimedTask extends Task {
                 + this.dateTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 
+    /**
+     * Returns the datetime formatted to use the output format as indicated by TIMED_TASK_MONTH_FORMAT.
+     * @return a datetime string.
+     */
     public String getDateTime() {
         return this.dateTime.toLocalDate().format(DateTimeFormatter.ofPattern(TIMED_TASK_MONTH_FORMAT))
                 + " "
                 + this.dateTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 
+    /**
+     * Returns a label which will be used to store the task after the application has exited.
+     * @return a label
+     */
     @Override
     public String getLabel() {
         return this.getName() + "|" + this.getDateTimeInternal();
     }
 
+    /**
+     * Returns the details of the Timed Task which will be displayed to the User Interface.
+     * @return the Timed Task details.
+     */
     @Override
     public String getDetails() {
         String checkbox = getCheckBox();

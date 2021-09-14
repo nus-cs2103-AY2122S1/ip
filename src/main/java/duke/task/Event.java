@@ -23,16 +23,33 @@ public class Event extends TimedTask {
         return " (at: " + this.getDateTime() + ")";
     }
 
+    /**
+     * Returns a new Event with the updated datetime.
+     * @param dateTime the new dateTime string to be provided.
+     * @return new Event with the updated dateTime
+     * @throws TimedTaskDateInputException if the datetime string is not of the correct format.
+     */
     @Override
     public Task updateDateTime(String dateTime) throws TimedTaskDateInputException {
         return new Event(this.getName(), dateTime, this.getCompleted());
     }
 
+    /**
+     * Returns a new Event with the updated name.
+     * @param name the new string to be provided.
+     * @return new Event with the updated name
+     * @throws TimedTaskDateInputException if the datetime string is not of the correct format.
+     */
     @Override
-    public Task updateName(String input) throws TimedTaskDateInputException {
-        return new Event(input, this.getDateTimeInternal(), this.getCompleted());
+    public Task updateName(String name) throws TimedTaskDateInputException {
+        return new Event(name, this.getDateTimeInternal(), this.getCompleted());
     }
 
+    /**
+     * Returns a new Event which is completed.
+     * @return new Event which is completed.
+     * @throws TimedTaskDateInputException if the datetime string is not of the correct format.
+     */
     @Override
     public Task complete() throws TimedTaskDateInputException {
         return new Event(this.getName(), this.getDateTimeInternal(), true);

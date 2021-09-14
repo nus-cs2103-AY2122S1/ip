@@ -22,7 +22,14 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
+    /** Class level constant which represents the path of the .fxml file. */
     public static final String FXML_STRING_PATH = "/view/MainWindow.fxml";
+
+    /** Class level constant which represents the DaUser image file path. */
+    public static final String DA_USER_IMAGE_PATH = "/images/DaUser.png";
+
+    /** Class level constant which represents the DaDuke image file path. */
+    public static final String DA_DUKE_IMAGE_PATH = "/images/DaDuke.png";
 
     @FXML
     private ScrollPane scrollPane;
@@ -35,8 +42,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(DA_USER_IMAGE_PATH));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream(DA_DUKE_IMAGE_PATH));
 
     /**
      * Initializes the main window.

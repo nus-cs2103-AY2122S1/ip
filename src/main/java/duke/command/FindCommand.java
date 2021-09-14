@@ -11,8 +11,10 @@ public class FindCommand extends Command {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "find";
 
+    /** Class level constant that represents the action taken by the command. */
     public static final String DESCRIPTION = "Find a task using a search string";
 
+    /** Class level constant that represents the format needed to successfully complete command. */
     public static final String FORMAT = COMMAND_WORD + " the_search_string";
 
     /** The word to search by the user passed on by Duke*/
@@ -28,6 +30,10 @@ public class FindCommand extends Command {
         this.searchInput = searchInput;
     }
 
+    /**
+     * Returns the string representation of the command description and format.
+     * @return String that represents the command description and format.
+     */
     public static String formatAndDescription() {
         return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }

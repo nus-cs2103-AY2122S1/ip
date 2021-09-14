@@ -11,8 +11,10 @@ public class ExitCommand extends Command {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "bye";
 
+    /** Class level constant that represents the action taken by the command. */
     public static final String DESCRIPTION = "Exit Duke";
 
+    /** Class level constant that represents the format needed to successfully complete command. */
     public static final String FORMAT = COMMAND_WORD;
 
     /**
@@ -23,6 +25,10 @@ public class ExitCommand extends Command {
         super(taskList);
     }
 
+    /**
+     * Returns the string representation of the command description and format.
+     * @return String that represents the command description and format.
+     */
     public static String formatAndDescription() {
         return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }

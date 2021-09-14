@@ -14,9 +14,14 @@ public class Todo extends Task {
         super(name, TaskType.T, isCompleted);
     }
 
+    /**
+     * Updates the name of the Todo.
+     * @param name of the updated task
+     * @return a new Todo with the updated name.
+     */
     @Override
-    public Task updateName(String input) {
-        return new Todo(input, this.getCompleted());
+    public Task updateName(String name) {
+        return new Todo(name, this.getCompleted());
     }
 
     @Override
@@ -24,6 +29,10 @@ public class Todo extends Task {
         return new Todo(this.getName(), this.getCompleted());
     }
 
+    /**
+     * Marks Todo as completed.
+     * @return a completed Todo.
+     */
     @Override
     public Task complete() {
         return new Todo(this.getName(), true);

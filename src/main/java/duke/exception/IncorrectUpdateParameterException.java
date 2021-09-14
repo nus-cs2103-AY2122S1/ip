@@ -2,6 +2,9 @@ package duke.exception;
 
 import duke.command.UpdateCommand;
 
+/**
+ * An exception to indicate the incorrect Update parameters supplied by user.
+ */
 public class IncorrectUpdateParameterException extends IncorrectParameterSuppliedException {
 
     /**

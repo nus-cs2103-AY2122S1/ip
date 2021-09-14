@@ -16,14 +16,16 @@ public class DeadlineCommand extends Command implements TaskListAddable {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "deadline";
 
+    /** Class level constant that represents the action taken by the command. */
     public static final String DESCRIPTION = "Add a deadline task and specify the date to complete it by.";
 
-    public static final String FORMAT = COMMAND_WORD +
-            " name_here /by datetime_here (" +
-            TimedTask.TIMED_TASK_YEAR_FORMAT +
-            " " +
-            TimedTask.TIMED_TASK_TIME_FORMAT +
-            ")";
+    /** Class level constant that represents the format needed to successfully complete command. */
+    public static final String FORMAT = COMMAND_WORD
+            + " name_here /by datetime_here ("
+            + TimedTask.TIMED_TASK_YEAR_FORMAT
+            + " "
+            + TimedTask.TIMED_TASK_TIME_FORMAT
+            + ")";
 
     /** The rest of the command input by the user passed on by duke*/
     private final String command;
@@ -59,6 +61,10 @@ public class DeadlineCommand extends Command implements TaskListAddable {
         return new CommandResult(feedback, false);
     }
 
+    /**
+     * Returns the string representation of the command description and format.
+     * @return String that represents the command description and format.
+     */
     public static String formatAndDescription() {
         return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }

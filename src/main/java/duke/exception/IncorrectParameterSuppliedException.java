@@ -1,7 +1,11 @@
 package duke.exception;
 
+/**
+ * An exception for any incorrect parameters supplied.
+ */
 public class IncorrectParameterSuppliedException extends DukeException {
 
+    /** A class level constant to represent the prefix of the message.*/
     public static final String INCORRECT_PARAMETER_PREFIX = "Incorrect parameters were supplied for ";
 
     /**

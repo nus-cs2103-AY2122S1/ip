@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.commandresult.CommandResult;
 import duke.task.Task;
-import duke.task.TimedTask;
 import duke.task.Todo;
 import duke.tasklist.TaskList;
 
@@ -14,10 +13,12 @@ public class TodoCommand extends Command implements TaskListAddable {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "todo";
 
+    /** Class level constant that represents the action taken by the command. */
     public static final String DESCRIPTION = "Add a Todo task.";
 
-    public static final String FORMAT = COMMAND_WORD +
-            " name_here";
+    /** Class level constant that represents the format needed to successfully complete command. */
+    public static final String FORMAT = COMMAND_WORD
+            + " name_here";
 
     /** The rest of the command input by the user passed on by duke*/
     private final String command;
@@ -32,6 +33,10 @@ public class TodoCommand extends Command implements TaskListAddable {
         this.command = command;
     }
 
+    /**
+     * Returns the string representation of the command description and format.
+     * @return String that represents the command description and format.
+     */
     public static String formatAndDescription() {
         return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }

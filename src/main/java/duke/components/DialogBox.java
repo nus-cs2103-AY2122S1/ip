@@ -20,6 +20,7 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
 
+    /** Class level constant which represents the path of the .fxml file. */
     public static final String FXML_STRING_PATH = "/view/DialogBox.fxml";
 
     @FXML
@@ -68,7 +69,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #ADD8E6;");
+        db.setStyle("-fx-background-color: #adb2e6;");
         return db;
     }
 
@@ -82,7 +83,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
-        db.setStyle("-fx-background-color: #FFB6C1;");
+        db.setStyle("-fx-background-color: #b6ffbd;");
         return db;
     }
 }

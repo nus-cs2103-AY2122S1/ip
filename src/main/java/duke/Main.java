@@ -17,6 +17,10 @@ public class Main extends Application {
 
     private final Duke duke = new Duke(Storage.DEFAULT_FILE_PATH);
 
+    /**
+     * Starts Application
+     * @param stage to start application
+     */
     @Override
     public void start(Stage stage) {
         try {
