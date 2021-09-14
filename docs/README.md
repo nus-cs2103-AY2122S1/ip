@@ -22,8 +22,10 @@ Or you can
 1. Download the code of this file.
 2. Open the project in IDE (i.e. IntelliJ)
 3. Run DukeCML.java which is located at src/main/java/duke/cml
+
 ## Instructions
 In order to let Duke understand your instructions, your instructions should follow the format below:
+
 ### Get help message:
 
 `help`
