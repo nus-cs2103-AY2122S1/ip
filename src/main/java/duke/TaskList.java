@@ -258,7 +258,7 @@ public class TaskList {
      * Alerts user to an invalid command.
      */
     public String displayError() throws DukeException {
-        throw new DukeException("OOPS!! I don't know how to respond to this command!"
+        throw new DukeException("OOPS!! I don't know how to respond to this command! "
                 + "Type 'help' to view list of commands available.");
     }
 
