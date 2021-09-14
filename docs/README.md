@@ -99,6 +99,7 @@ Example of usage:
 `list`
 
 Expected outcome:
+
 A list of all the tasks that you have saved and their current completion status
 
 ### `findstring` - Finds all tasks that have the given string as part of its description
@@ -121,6 +122,7 @@ Example of usage:
 `done 3`
 
 Expected outcome:
+
 The task will show [X] instead of [ ]
 
 Winston will give a confirmation that he has marked the task
@@ -143,6 +145,7 @@ Updates a task with another task to the list
 Example of usage: 
 
 `update (list index) (task)`
+
 task: Either todo, event or deadline. With their respective syntax as shown in the other parts of the UG
 
 list index: The position of the desired update
