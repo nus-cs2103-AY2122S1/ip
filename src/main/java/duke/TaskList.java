@@ -247,10 +247,19 @@ public class TaskList {
      * @return Guide for users to adhere to when using Duke.
      */
     public String getHelp() {
-        String result = "Here are the commands you can give Duke:\n";
-        result += "Create tasks: todo, deadline, event\n";
-        result += "Manage tasks: list, delete, done, find\n";
-        result += "Exit: bye";
+        String result = "Here are the commands you can give Duke:\n\n";
+        result += "<DESC> denotes task description\n\n";
+        result += "To create tasks:\n";
+        result += "* todo <DESC>\n";
+        result += "* deadline <DESC> /by <YYYY-MM-DD>\n";
+        result += "* event <DESC> /at <WHEN>\n\n";
+        result += "To manage tasks:\n";
+        result += "* list\n";
+        result += "* delete <TASK INDEX>\n";
+        result += "* done <TASK INDEX>\n";
+        result += "* find <KEYWORD>\n\n";
+        result += "To exit:\n";
+        result += "* bye";
         return result;
     }
 
