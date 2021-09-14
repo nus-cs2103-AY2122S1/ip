@@ -29,13 +29,13 @@ Format: `deadline TASK_DESCRIPTION /by dd/MM/YYYY`
 
 ### Deleting tasks: `delete`
 
-Delete task/s by task number/s which is/are based on the order of task added.
+Delete task/s by task number/s which is based on the order of task added.
 
 Format: `delete TASK_NUMBER..`
 
 ### Marking tasks as done: `done`
 
-Mark task/s as done by task number/s which is/are based on the order of task added.
+Mark task/s as done by task number/s which is based on the order of task added.
 
 Format: `done TASK_NUMBER..`
 
@@ -50,7 +50,7 @@ Exits from the app.
 
 Type the command in the command box and press Enter to execute it. e.g. typing
 
-###Examples
+### Examples
 **`list`** : Lists all tasks.
 
 Expected Output: 
