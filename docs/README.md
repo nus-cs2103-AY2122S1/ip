@@ -44,7 +44,6 @@ Format: `todo TASK_DESCRIPTION`
 * `TASK_DESCRIPTION` can include spaces.
 
 Example(s): `todo upload assignment`
-
 <br/><br/>
 
 ### Adding a deadline task: `deadline`
