@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
 
@@ -43,12 +43,18 @@ public class Recieve {
                     return parser.helpMessage();
                 } else if (input.equals("sort")) {
                     return parser.sort();
+                } else if (input.startsWith("todo ") || input.equals("todo")) {
+                    return parser.addTodo(input);
+                } else if (input.startsWith("deadline ") || input.equals("deadline")) {
+                    return parser.addDeadline(input);
+                } else if (input.startsWith("event ") || input.equals("event")) {
+                    return parser.addEvent(input);
                 } else {
-                    return parser.add(input);
+                    return parser.invalidInputMessage();
                 }
             } catch (DukeException | InvalidTaskIndexException |
                     InvalidFormatException | IOException e) {
-                return e.toString();
+                return e.getMessage();
             }
         }
 

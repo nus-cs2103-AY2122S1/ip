@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -40,6 +40,7 @@ public class Parser {
      * @return Farewell message to the user.
      */
     public String endSession() {
+        isFirstCommand = true;
         return "Bye. Hope to see you again soon!";
     }
 
@@ -57,7 +58,7 @@ public class Parser {
                 "To delete a task, type -> delete <Task list index> \n" +
                 "To search for a task, type -> find <Keyword> \n" +
                 "To see all of your tasks, type -> list\n" +
-                "Date and Time should be written in yyyy-mm-dd and HHMM formats respectively \n" +
+                "Date and Time should be written in yyyy-mm-dd and HH:MM formats respectively \n" +
                 "To end session, type -> bye\n";
     }
 
@@ -131,101 +132,120 @@ public class Parser {
     }
 
     /**
-     * Adds a new task to the task list.
+     * Adds a new Todo task to the task list.
      * @param input The details of the user's input.
-     * @throws InvalidFormatException Thrown when the input format is invalid.
-     * @throws DukeException Thrown when Duke encounters errors.
-     * @throws InvalidTaskIndexException Thrown when the task index is invalid.
      */
-    public String add(String input) throws InvalidFormatException, DukeException, InvalidTaskIndexException {
+    public String addTodo(String input) {
         try {
-            if (input.startsWith("todo ") || input.equals("todo")) {
-                if (input.length() <= 5) {
-                    throw new InvalidFormatException("OOPS!!! The description of a todo cannot be empty.");
-                }
-
-                String response = tasks.addTodo(input.substring(5));
-                storage.writeToFile(tasks.inArrayList());
-                return response;
-
-
-            } else if (input.startsWith("deadline ") || input.equals("deadline")) {
-                if (!input.contains(" /by ") || !input.contains("/by")) {
-                    throw new InvalidFormatException("OOPS!! To add a Deadline, " +
-                            "type -> deadline <Description> /by <Date> <Time>!");
-                }
-                if (input.length() <= 12) {
-                    throw new InvalidFormatException("OOPS!!! The descriptions of a deadline cannot be empty.");
-                }
-
-                String[] spl = input.substring(9).split("/");
-                if (spl[0].length() < 2 || spl[1].length() < 19) {
-                    throw new InvalidFormatException("OOPS!!! The descriptions of a deadline cannot be incomplete.");
-                }
-
-                LocalDate date = LocalDate.parse(spl[1].substring(3 , 13));
-                LocalTime time = LocalTime.parse(spl[1].substring(14));
-                if (date.isBefore(LocalDate.now())) {
-                    throw new DukeException("The deadline was in the past!");
-                }
-
-                if (date.isEqual(LocalDate.now()) && time.isBefore(LocalTime.now())) {
-                    throw new DukeException("The deadline was in the past!");
-                }
-
-                String response = tasks.addDeadline(spl[0], date, time);
-                storage.writeToFile(tasks.inArrayList());
-                return response;
-
-
-            } else if (input.startsWith("event ") || input.equals("event")) {
-                if (!input.contains(" /at ") || !input.contains("/at")) {
-                    throw new InvalidTaskIndexException("OOPS!! To add an Event, " +
-                            "type -> event <Description> /at <Start Date> <Start Time> <End Date> <End Time>!");
-                }
-                if (input.length() <= 9) {
-                    throw new InvalidFormatException("OOPS!!! The descriptions of an event cannot be empty.");
-                }
-
-                String[] spl = input.substring(6).split("/");
-                if (spl[0].length() < 2 || spl[1].length() < 35) {
-                        throw new InvalidFormatException("OOPS!!! The descriptions of an event cannot be incomplete.");
-                }
-
-                LocalDate startDate = LocalDate.parse(spl[1].substring(3 , 13));
-                LocalTime startTime = LocalTime.parse(spl[1].substring(14, 19));
-                LocalDate endDate = LocalDate.parse(spl[1].substring(20 , 30));
-                LocalTime endTime = LocalTime.parse(spl[1].substring(31));
-                if (startDate.isAfter(endDate)) {
-                    throw new DukeException("Start date should come before End date!");
-                }
-                if (startDate.isEqual(endDate) && startTime.isAfter(endTime)) {
-                    throw new DukeException("Start time should come before End time!");
-                }
-                if (endDate.isBefore(LocalDate.now())) {
-                    throw new DukeException("The event has ended already!");
-                }
-                if (endDate.isEqual(LocalDate.now()) && endTime.isBefore(LocalTime.now())) {
-                    throw new DukeException("The event has ended already!");
-                }
-
-                String response = tasks.addEvent(spl[0], startDate, startTime, endDate, endTime);
-                storage.writeToFile(tasks.inArrayList());
-                return response;
-
-
-            } else {
-                if (isFirstCommand) {
-                    isFirstCommand = false;
-                    return helpMessage();
-                } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
+            if (input.length() <= 5) {
+                throw new InvalidFormatException("OOPS!!! The description of a todo cannot be empty.");
             }
-        } catch (IOException e) {
-            return "Something went wrong: " + e.getMessage();
+
+            String response = tasks.addTodo(input.substring(5));
+            storage.writeToFile(tasks.inArrayList());
+            return response;
+
+        } catch (IOException | InvalidFormatException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Adds a new Deadline task to the task list.
+     * @param input The details of the user's input.
+     */
+    public String addDeadline(String input) {
+        try {
+            if (!input.contains(" /by ") || !input.contains("/by")) {
+                throw new InvalidFormatException("OOPS!! To add a Deadline, " +
+                        "type -> deadline <Description> /by <Date> <Time>!");
+            }
+            if (input.length() <= 12) {
+                throw new InvalidFormatException("OOPS!!! The descriptions of a deadline cannot be empty.");
+            }
+
+            String[] spl = input.substring(9).split("/");
+            if (spl[0].length() < 2 || spl[1].length() < 19) {
+                throw new InvalidFormatException("OOPS!!! The descriptions of a deadline cannot be incomplete.");
+            }
+
+            LocalDate date = LocalDate.parse(spl[1].substring(3, 13));
+            LocalTime time = LocalTime.parse(spl[1].substring(14));
+            if (date.isBefore(LocalDate.now())) {
+                throw new DukeException("The deadline was in the past!");
+            }
+
+            if (date.isEqual(LocalDate.now()) && time.isBefore(LocalTime.now())) {
+                throw new DukeException("The deadline was in the past!");
+            }
+
+            String response = tasks.addDeadline(spl[0], date, time);
+            storage.writeToFile(tasks.inArrayList());
+            return response;
+        } catch (DukeException | IOException | InvalidFormatException e) {
+            return e.getMessage();
         } catch (DateTimeParseException e) {
-            return "Please enter the date in the format of yyyy-mm-dd and time in the format of HH:MM!";
+            return "Please enter the date in the format of yyyy-MM-dd and time in the format of HH:mm!";
+        }
+    }
+
+
+    /**
+     * Adds a new Event task to the task list.
+     * @param input The details of the user's input.
+     */
+    public String addEvent(String input) {
+        try {
+            if (!input.contains(" /at ") || !input.contains("/at")) {
+                throw new InvalidTaskIndexException("OOPS!! To add an Event, " +
+                        "type -> event <Description> /at <Start Date> <Start Time> <End Date> <End Time>!");
+            }
+            if (input.length() <= 9) {
+                throw new InvalidFormatException("OOPS!!! The descriptions of an event cannot be empty.");
+            }
+
+            String[] spl = input.substring(6).split("/");
+            if (spl[0].length() < 2 || spl[1].length() < 35) {
+                throw new InvalidFormatException("OOPS!!! The descriptions of an event cannot be incomplete.");
+            }
+
+            LocalDate startDate = LocalDate.parse(spl[1].substring(3, 13));
+            LocalTime startTime = LocalTime.parse(spl[1].substring(14, 19));
+            LocalDate endDate = LocalDate.parse(spl[1].substring(20, 30));
+            LocalTime endTime = LocalTime.parse(spl[1].substring(31));
+            if (startDate.isAfter(endDate)) {
+                throw new DukeException("Start date should come before End date!");
+            }
+            if (startDate.isEqual(endDate) && startTime.isAfter(endTime)) {
+                throw new DukeException("Start time should come before End time!");
+            }
+            if (endDate.isBefore(LocalDate.now())) {
+                throw new DukeException("The event has ended already!");
+            }
+            if (endDate.isEqual(LocalDate.now()) && endTime.isBefore(LocalTime.now())) {
+                throw new DukeException("The event has ended already!");
+            }
+
+            String response = tasks.addEvent(spl[0], startDate, startTime, endDate, endTime);
+            storage.writeToFile(tasks.inArrayList());
+            return response;
+        } catch (DukeException | InvalidTaskIndexException | IOException | InvalidFormatException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Please enter the date in the format of yyyy-MM-dd and time in the format of HH:mm!";
+        }
+    }
+
+    /**
+     * Returns help message for the first error input and error message for subsequent errors.
+     * @throws DukeException Thrown when the input is invalid after the first invalid input.
+     */
+    public String invalidInputMessage() throws DukeException {
+        if (isFirstCommand) {
+            isFirstCommand = false;
+            return helpMessage();
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * A Parent class for Exceptions thrown in Duke.

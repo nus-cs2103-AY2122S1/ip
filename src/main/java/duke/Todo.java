@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * A Task that can be added to the Task List

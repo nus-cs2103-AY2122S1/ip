@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 /**
  * An exception thrown in Duke when
  * the format of the user's input is invalid.

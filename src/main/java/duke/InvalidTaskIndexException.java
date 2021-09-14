@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * An exception thrown in Duke when
