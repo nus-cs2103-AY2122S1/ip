@@ -10,6 +10,6 @@ public class DukeException extends Exception {
      * @param error The error message.
      */
     public DukeException(String error) {
-        super("Invalid command! " + error);
+        super("ERROR - " + error);
     }
 }

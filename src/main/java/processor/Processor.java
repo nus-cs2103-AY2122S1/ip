@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import exception.DukeException;
+import exception.InvalidCommandException;
+import exception.InvalidInputException;
 import models.Command;
 import models.Deadline;
 import models.Event;
@@ -45,7 +47,7 @@ public class Processor implements IProcessor {
         case DONE:
             try {
                 if (arguments.size() != 2) {
-                    throw new DukeException("Done command only takes one number argument");
+                    throw new InvalidInputException("Done command only takes one number argument");
                 }
                 return processDone(arguments.get(1));
             } catch (DukeException e) {
@@ -55,10 +57,10 @@ public class Processor implements IProcessor {
         case DELETE:
             try {
                 if (arguments.size() != 2) {
-                    throw new DukeException("Done command only takes one number argument");
+                    throw new InvalidInputException("Delete command only takes one number argument");
                 }
                 return processDelete(arguments.get(1));
-            } catch (DukeException e) {
+            } catch (InvalidInputException e) {
                 Ui.print(e.getMessage());
                 return e.getMessage();
             }
@@ -86,35 +88,35 @@ public class Processor implements IProcessor {
             if (type.equals("todo")) {
                 arguments.remove(0);
                 if (arguments.size() == 0) {
-                    throw new DukeException("Todo description cannot be empty");
+                    throw new InvalidInputException("Todo description cannot be empty");
                 }
                 this.storage.addTask(new Todo(String.join(" ", arguments)));
             } else if (type.equals("deadline")) {
                 arguments.remove(0);
                 if (arguments.size() == 0) {
-                    throw new DukeException("Deadline description cannot be empty");
+                    throw new InvalidInputException("Deadline description cannot be empty");
                 }
                 String line = String.join(" ", arguments);
                 String[] input = line.split(" /by ");
                 if (input.length == 1) {
-                    throw new DukeException("Deadline command must have /by specified");
+                    throw new InvalidInputException("Deadline command must have /by specified");
                 }
                 LocalDate time = LocalDate.parse(input[1].trim());
                 this.storage.addTask(new Deadline(input[0], time));
             } else if (type.equals("event")) {
                 arguments.remove(0);
                 if (arguments.size() == 0) {
-                    throw new DukeException("Event description cannot be empty");
+                    throw new InvalidInputException("Event description cannot be empty");
                 }
                 String line = String.join(" ", arguments);
                 String[] input = line.split(" /at ");
                 if (input.length == 1) {
-                    throw new DukeException("Event command must have /at specified");
+                    throw new InvalidInputException("Event command must have /at specified");
                 }
                 LocalDate time = LocalDate.parse(input[1].trim());
                 this.storage.addTask(new Event(input[0], time));
             } else {
-                throw new DukeException("I don't understand :(");
+                throw new InvalidCommandException("I don't understand :(");
             }
             String response = "Got it. I've added this task:\n   " + this.storage.getLastTask()
                     + "\nNow you have " + this.storage.getSize() + " tasks in the list.";
