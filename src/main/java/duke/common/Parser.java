@@ -102,7 +102,7 @@ public class Parser {
         }
 
         // Identify reason for mis-input
-        if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+        if (input.length() >= 4 && input.startsWith("todo")) {
             return ui.printResponse("OOPS!!! The description of a todo cannot be empty.");
         }
         return ui.fail();
