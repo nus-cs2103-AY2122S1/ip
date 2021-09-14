@@ -70,7 +70,7 @@ public class Ui {
      */
     public String getFoundTasks(TaskList tasks) {
         if (tasks.numOfTasks() == 0) {
-            return "There is no matched task";
+            return "There is no matching task";
         } else {
             return "Here are the matching tasks in your list:" + tasks.toString();
         }
