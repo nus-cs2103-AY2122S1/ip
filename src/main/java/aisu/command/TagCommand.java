@@ -36,7 +36,8 @@ public class TagCommand extends Command {
     public void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException {
         Task taggedTask = tasklist.tagTask(this.parseInt, this.tagName);
         storage.save(tasklist);
-        this.uiText = Ui.formatText(" Noted~ I've added the tag " + this.tagName + " to this task:", " - " + taggedTask);
+        this.uiText = Ui.formatText(" Noted~ I've added the tag " + this.tagName + " to this task:", " - "
+                + taggedTask);
     }
 
     @Override

@@ -1,10 +1,6 @@
 package aisu.task;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import aisu.exception.AisuException;
-import aisu.tag.Tag;
 import aisu.taglist.TagList;
 
 /**
