@@ -19,8 +19,12 @@ public class Ui {
         return taskList.getList() + "\n";
     }
     
+    public static String deleteItem() {
+        return "IT GOT DELETED SIA!\n";
+    }
+    
     public static String printDontWorry() {
-        return "Don't worry, I've got you. Task Marked!\n";
+        return "Time to raise my APM!\nTASK IS MARKED!\n";
     }
     
     public static String printMatchingTasks() {
@@ -28,7 +32,7 @@ public class Ui {
     }
     
     public static String welcomeMessage() {
-        return "Hi there! Winston reporting.\nWhat can I do for you?\n" 
+        return "Winston reporting!\nWhat can I do for you? \n" 
                 + "Available Commands: done, list, todo, deadline, event, bye, delete, findstring, update";
     }
     
@@ -38,5 +42,13 @@ public class Ui {
     
     public static String updateMessage(int messageNumber) {
         return "Task " + messageNumber + "updated";
+    }
+    
+    public static String emptyListMessage() {
+        return "The list is empty!";
+    }
+    
+    public static String hiYaMessage() {
+        return "Hiya! These are your tasks!\n";
     }
 }

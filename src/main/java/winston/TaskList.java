@@ -77,14 +77,18 @@ public class TaskList {
      * @return A string of the arraylist of tasks.
      */
     public String getList() {
+        int size = list.size();
+        if (size == 0) {
+            return Ui.emptyListMessage();
+        }
         int counter = 1;
-        StringBuilder result = new StringBuilder("List of things to do:\n\n");
-        assert(counter > list.size());
+        StringBuilder result = new StringBuilder(Ui.hiYaMessage());
+        assert(counter > size);
         for (Task task : this.list) {
             result.append("\t" + counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
             counter += 1;
         }
-        result.append("End");
+        result.setLength(result.length() - 1);
         return result.toString();
     }
 
