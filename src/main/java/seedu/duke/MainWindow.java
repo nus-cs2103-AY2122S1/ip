@@ -85,6 +85,7 @@ public class MainWindow extends Stage {
                 DialogBox.getDukeDialog(greeting, dukeImage),
                 DialogBox.getDukeDialog(currentList, dukeImage)
         );
+        handleReminder();
     }
 
 }
