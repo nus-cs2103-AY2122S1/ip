@@ -197,6 +197,9 @@ public class Ui extends AnchorPane {
         this.chadChatBot = chadChatBot;
     }
 
+    /**
+     * Initialises the JavaFX nodes of the chatbot GUI.
+     */
     @FXML
     public void initialize() {
         initialiseScrollPane();
@@ -229,11 +232,11 @@ public class Ui extends AnchorPane {
         dialogContainer.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (wasAtBottom) {
-                    scrollToBottom();
-                } else if (hasNewDialog) {
+                if (hasNewDialog) {
                     scrollToBottom();
                     hasNewDialog = false;
+                } else if (wasAtBottom) {
+                    scrollToBottom();
                 }
             }
         });
