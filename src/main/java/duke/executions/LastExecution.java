@@ -38,7 +38,7 @@ public class LastExecution {
     private String resetDone() {
         String text;
         this.tasks.get(lastIndex).resetDone();
-        text = "Good! I have undone your newly added task!\n";
+        text = "Good! I have recovered your task to undone again!\n";
         return text;
     }
 
@@ -52,7 +52,7 @@ public class LastExecution {
     private String undoAdd() {
         String text;
         this.tasks.remove(tasks.size() - 1);
-        text = "Good! I have recovered your task to undone again!\n";;
+        text = "Good! I have undone your newly added task!\n";;
         return text;
     }
 
