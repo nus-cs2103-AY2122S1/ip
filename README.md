@@ -70,9 +70,9 @@ public class Launcher {
 }
 ```
 
-5. If the setup is correct, you should see something like the below as the output:
+5. If the setup is correct, you should see something like this:
 
-![Ui](https://user-images.githubusercontent.com/62177572/133307156-919379c3-9f32-49cb-b56f-eab48a70f2b8.png)
+![Capture](https://user-images.githubusercontent.com/62177572/133310535-bbe24a56-d93f-4369-848f-3038a859208d.PNG)
 
 ## 5. Credits
 - [Brian Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Brian_Griffin.png)
