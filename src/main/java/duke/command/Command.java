@@ -10,7 +10,7 @@ import duke.ui.Ui;
  */
 public abstract class Command {
     /**
-     * Abstract method meant to indicate the actions taken for different command.
+     * Indicates the actions taken for different command.
      *
      * @param taskList The TaskList that is saved in Duke.
      * @param ui The Ui of Duke.

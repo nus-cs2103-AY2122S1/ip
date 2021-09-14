@@ -25,14 +25,14 @@ public class Todo extends Task {
 
     @Override
     public boolean checkIfAlreadyAdded(ArrayList<Task> list) {
-        boolean alreadyAdded = false;
+        boolean hasBeenAdded = false;
 
         for (Task task : list) {
             if (this.equals(task)) {
-                alreadyAdded = true;
+                hasBeenAdded = true;
                 break;
             }
         }
-        return alreadyAdded;
+        return hasBeenAdded;
     }
 }
