@@ -33,6 +33,7 @@ public class Storage {
         this.pathname = pathname;
         try {
             userData = new File(pathname);
+            userData.getParentFile().mkdirs();
             userData.createNewFile();
             assert userData != null : "User's file data should not be null!";
         } catch (IOException e) {

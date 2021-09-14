@@ -7,9 +7,9 @@ capable of keeping track of tasks and contacts given by the user.
 
 ## Features 
 
-- [x] Managing tasks(todo, deadline, event)
-- [x] Autosave
-- [x] Manage contacts
+- [x]  Managing tasks(todo, deadline, event)
+- [x]  Autosave
+- [x]  Manage contacts
 
 ## Usage
 <hr>
