@@ -244,7 +244,9 @@ Hope you enjoy your experience in Duke!
 
 ## Points to note: ✋
 * Duke only supports time format of: 
+
   **1. yy-mm-dd.**
+  
   **2. dd/mm/yy hhmm(minute).**
 * Deadline should have "/by" as prefix.
 * Event should have "/at" as prefix. 
