@@ -18,25 +18,15 @@ import javafx.stage.Stage;
  * Represents the main Duke application.
  */
 public class Duke extends Application {
-    /**
-     * The file path for storing task data
-     */
+    /* The file path for storing task data */
     private static final String filePath = "duke.txt";
-    /**
-     * The storage for the application
-     */
+    /* The storage for the application */
     private Storage storage;
-    /**
-     * The task list for the application
-     */
+    /* The task list for the application */
     private TaskList taskList;
-    /**
-     * The UI for the application
-     */
+    /* The UI for the application */
     private UiPane uiPane;
-    /**
-     * The parser for the commands.
-     */
+    /* The parser for the commands. */
     private CommandParser<?> commandParser;
 
     /**
