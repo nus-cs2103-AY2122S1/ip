@@ -6,7 +6,7 @@ package duke.exception;
 public class InvalidTaskException extends DukeException {
 
     /**
-     * Initialise constructor for {@code InvalidTaskException}.
+     * Initialises constructor for the exception {@code InvalidTaskException}.
      */
     public InvalidTaskException() {
         super("Nee doesn't know what task you've done! "

@@ -7,7 +7,7 @@ package duke.exception;
 public class TaskNotFoundException extends DukeException {
 
     /**
-     * Initialise constructor for {@code TaskNotFoundException}.
+     * Initialises constructor for the exception {@code TaskNotFoundException}.
      */
     public TaskNotFoundException() {
         super("Invalid task number, please try again.");

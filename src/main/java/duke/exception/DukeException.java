@@ -6,8 +6,9 @@ package duke.exception;
 public class DukeException extends Exception {
 
     /**
-     * Parent exception class.
-     * @param e Error thrown.
+     * Parent for all Exceptions to be thrown.
+     *
+     * @param e The error thrown.
      */
     public DukeException(String e) {
         super(e);

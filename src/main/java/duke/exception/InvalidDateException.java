@@ -6,7 +6,7 @@ package duke.exception;
 public class InvalidDateException extends DukeException {
 
     /**
-     * Initialise constructor for {@code InvalidDateException}.
+     * Initialises constructor for the exception {@code InvalidDateException}.
      */
     public InvalidDateException() {
         super("Invalid date format, should be [dd/MM/yy] [HHmm]");

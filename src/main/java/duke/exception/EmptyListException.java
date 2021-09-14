@@ -6,7 +6,7 @@ package duke.exception;
 public class EmptyListException extends DukeException {
 
     /**
-     * Initialise constructor for {@code EmptyListException}.
+     * Initialise constructor for the exception {@code EmptyListException}.
      */
     public EmptyListException() {
         super("Nee's list is empty! Add some tasks?");

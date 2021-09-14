@@ -74,7 +74,7 @@ public class Duke {
     }
 
     /**
-     * Run main body of a {@code Duke} object.
+     * Runs the main body of Duke.
      */
     public void run() {
         String input;
@@ -101,7 +101,8 @@ public class Duke {
     }
 
     /**
-     * Main class that Duke builds from.
+     * Initialises and starts Duke in CLI.
+     *
      * @param args Unused string array of args.
      */
     public static void main(String[] args) {

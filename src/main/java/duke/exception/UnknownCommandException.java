@@ -6,7 +6,7 @@ package duke.exception;
 public class UnknownCommandException extends DukeException {
 
     /**
-     * Initialise constructor for {@code UnknownCommandException}.
+     * Initialises constructor for the exception {@code UnknownCommandException}.
      */
     public UnknownCommandException() {
         super("Nee doesn't understand your command!");
