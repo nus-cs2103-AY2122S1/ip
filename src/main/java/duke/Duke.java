@@ -25,14 +25,11 @@ public class Duke extends Application {
     /** The list of tasks given to Duke (if any). **/
     private static TaskList tasks;
 
-    /** Boolean to check if first time using Duke. **/
-    private static boolean isFirstTime = false;
-
     private static final String USER_IMAGE = "/Images/DaUser.png";
     private static final String DUKE_IMAGE = "/Images/Baba.jpg";
 
-    private Image userImage;
-    private Image dukeImage;
+    private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE));
 
     /** Fields for GUI **/
     private ScrollPane scrollPane;
@@ -45,22 +42,8 @@ public class Duke extends Application {
      * Constructor for Duke.
      */
     protected Duke() {
-        assert this.getClass().getResourceAsStream(USER_IMAGE) != null : " User Image not found";
-        assert this.getClass().getResourceAsStream(DUKE_IMAGE) != null : " Duke Image not found";
-
-        userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE));
-        dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE));
         storage = new Storage();
         tasks = storage.load();
-    }
-
-    /**
-     * Returns true if user runs Duke for the first time, false otherwise.
-     *
-     * @return True if user runs Duke for the first time, false otherwise.
-     */
-    public static boolean isFirstTimeCreation() {
-        return isFirstTime;
     }
 
     /**

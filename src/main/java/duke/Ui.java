@@ -24,14 +24,8 @@ public class Ui {
      */
     public static String welcomeMessage() {
         final String startOfWelcomeMessage = "Welcome to Ben's. How may I help you?\n";
-
-        if (Duke.isFirstTimeCreation()) {
-            return startOfWelcomeMessage + firstTimeMessage()
+        return startOfWelcomeMessage + Storage.printStartingFileContents() + "\n"
                     + importantMessage();
-        } else {
-            return startOfWelcomeMessage + Storage.printStartingFileContents() + "\n"
-                    + importantMessage();
-        }
     }
 
     /**
@@ -59,7 +53,7 @@ public class Ui {
      */
     public static String firstTimeMessage() {
         return "\nNote: This is your first time using Duke. "
-                + "We will now create a new file for you.\n";
+                + "We will now create a new file for you.";
     }
 
     /**

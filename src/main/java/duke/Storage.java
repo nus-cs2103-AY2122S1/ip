@@ -52,7 +52,7 @@ public class Storage {
             s = new Scanner(testFile);
             return Ui.displayTasksOnLoad(s);
         } catch (FileNotFoundException e) {
-            return Ui.emptyListMessage();
+            return Ui.firstTimeMessage();
         }
     }
 
