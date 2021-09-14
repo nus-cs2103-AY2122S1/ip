@@ -36,8 +36,11 @@ public class Storage {
      */
     public TaskList loadTaskList() throws FileNotFoundException {
 
+        assert(dataFilePath != null);
+
         File f = new File(dataFilePath);
         ArrayList<Task> taskList = new ArrayList<Task>();
+        assert(taskList != null);
 
         if (!f.exists()) {
             return new TaskList(new ArrayList<Task>());
@@ -70,6 +73,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveTaskListToDisk(TaskList taskList) throws IOException {
+        assert (dataFilePath != null);
         File f = new File(dataFilePath);
         if (!f.exists()) {
             try {
@@ -115,6 +119,7 @@ public class Storage {
         // Example storage in file:
         // T;0;readbook
         // D;0;return book ;2/12/2019 1800
+        assert (task != null);
 
         String taskType = task.getType() == Task.TaskType.TODO ? "T" :
                 task.getType() == Task.TaskType.EVENT ? "E" : "D";

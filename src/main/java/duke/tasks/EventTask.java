@@ -8,7 +8,7 @@ import java.util.Date;
  * date or datetime
  */
 public class EventTask extends Task {
-    String dateLiteral;
+    private String dateLiteral;
     Date dateFormatted;
     String dateReadable;
 
@@ -19,6 +19,7 @@ public class EventTask extends Task {
      */
     public EventTask(String description, String at) {
         super(description, TaskType.EVENT);
+        assert (!at.equals(""));
         this.dateLiteral = at;
         this.dateFormatted = DukeDate.formatDate(at);
         this.dateReadable = DukeDate.parseDateToString(dateFormatted);
