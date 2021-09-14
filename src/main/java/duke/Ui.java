@@ -93,6 +93,7 @@ public class Ui {
 
     public void clearInput() {
         userInput.clear();
+        assert readCommand().equals("") : "Should have cleared input field";
     }
 
     public Button getSendButton() {
@@ -120,14 +121,17 @@ public class Ui {
     }
 
     public void showAddedNewTask(Task task, TaskList tasks) {
+        assert tasks.doesContain(task) : "Task should be in the TaskList";
         showResponse("Got it. I've added this task:", task.toString(), numberOfTasksToString(tasks));
     }
 
     public void showRemovedTask(Task task, TaskList tasks) {
+        assert !tasks.doesContain(task) : "Task should have been removed from the TaskList";
         showResponse("Noted. I've removed this task:", task.toString(), numberOfTasksToString(tasks));
     }
 
     public void showMarkedAsDone(Task task) {
+        assert task.getDoneStatus() : "Task should have been done";
         showResponse("Nice! I've marked this task as done:", task.toString());
     }
 

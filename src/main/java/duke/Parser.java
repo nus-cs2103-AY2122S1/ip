@@ -29,12 +29,20 @@ public class Parser {
                 if (inputList.length != 2) {
                     throw new DukeException("Please provide the target task index!");
                 }
-                return new DeleteCommand(Integer.parseInt(inputList[1]));
+                try {
+                    return new DeleteCommand(Integer.parseInt(inputList[1]));
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please provide a valid target task index integer!");
+                }
             case "done":
                 if (inputList.length != 2) {
                     throw new DukeException("Please provide the target task index!");
                 }
-                return new SetDoneCommand(Integer.parseInt(inputList[1]) - 1);
+                try {
+                    return new SetDoneCommand(Integer.parseInt(inputList[1]) - 1);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please provide a valid target task index integer!");
+                }
             case "todo":
                 return new AddCommand("todo",
                         input.replaceFirst(Pattern.quote("todo"), "").trim(),

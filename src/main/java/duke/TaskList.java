@@ -17,6 +17,7 @@ public class TaskList {
     }
 
     public Task removeTask(int index) {
+        assert tasks.size() > index && index >= 0 : "index should have been valididated";
         return tasks.remove(index);
     }
 
@@ -43,5 +44,9 @@ public class TaskList {
         ArrayList<Task> matchingTasks = new ArrayList<>(tasks);
         matchingTasks.removeIf(task -> !task.matches(query));
         return matchingTasks;
+    }
+
+    public boolean doesContain(Task task) {
+        return tasks.contains(task);
     }
 }
