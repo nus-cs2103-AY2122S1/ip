@@ -1,6 +1,6 @@
 title: "Duke"
 
-theme: minima
+theme: jekyll-theme-minimal
 
 markdown: kramdown
 
