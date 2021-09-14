@@ -16,7 +16,7 @@
 ### Add to-do: `todo`
 Adds a to-do task to the list of tasks.
 
-Format : `todo <TASK_NAME>`
+Format : `todo TASK_NAME`
 
 Example:
 
@@ -126,3 +126,7 @@ Here are the tasks you were looking for:
 2.  [D][ ] return book (by: Jun 6 2021 4:30 PM)
 3.  [T][ ] read book
 ```
+
+### Saving the data
+Data is saved in the hard disk automatically after a command that changes the data. 
+There is no need to save manually.
