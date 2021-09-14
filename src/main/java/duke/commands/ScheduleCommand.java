@@ -51,7 +51,7 @@ public class ScheduleCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (userCommand.length() <= COMMAND_LENGTH) {
-                throw new IllegalArgumentException("Please add a date to find your scheduled tasks!");
+                throw new IllegalArgumentException(MESSAGE_INVALID_DATE);
             }
 
             String dateStr = userCommand.substring(COMMAND_LENGTH).strip();
@@ -62,7 +62,7 @@ public class ScheduleCommand extends Command {
         } catch (IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeException e) {
-            return ui.printError("Please add a date of format yyyy/MM/dd!");
+            return ui.printError(MESSAGE_INVALID_DATE);
         }
     }
 }

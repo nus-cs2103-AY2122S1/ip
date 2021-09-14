@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (this.userCommand.length() <= COMMAND_LENGTH) {
-                throw new IllegalArgumentException(INVALID_NUM_ERR);
+                throw new IllegalArgumentException(MESSAGE_INVALID_NUM);
             }
 
             String indexStr = this.userCommand.substring(COMMAND_LENGTH).strip();
@@ -55,7 +55,7 @@ public class DoneCommand extends Command {
             return ui.printTaskDone(tasks.getTask(index));
         } catch (NumberFormatException e) {
             // error encountered when command followed by done is not Number e.g. done one
-            return ui.printError(INVALID_NUM_ERR);
+            return ui.printError(MESSAGE_INVALID_NUM);
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (IndexOutOfBoundsException e) {

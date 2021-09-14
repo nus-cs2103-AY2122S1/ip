@@ -21,8 +21,6 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - displays all task with <description>\n"
             + "    📍 Example: " + COMMAND_WORD + " book";
 
-    private static final String MISSING_DESC_ERR = "Please add a description for the task you want to find!";
-
     /**
      * Instantiates FindCommand object.
      *
@@ -53,7 +51,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (userCommand.length() <= COMMAND_LENGTH) {
-                throw new IllegalArgumentException(MISSING_DESC_ERR);
+                throw new IllegalArgumentException(MESSAGE_MISSING_DESC);
             }
             String description = userCommand.substring(COMMAND_LENGTH).strip();
             return tasks.findTask(description);

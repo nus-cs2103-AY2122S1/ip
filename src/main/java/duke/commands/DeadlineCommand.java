@@ -58,9 +58,9 @@ public class DeadlineCommand extends Command {
             boolean isMultipleDeadlineAdded = splitCommand.length > 2;
 
             if (isMultipleDeadlineAdded) {
-                throw new IllegalArgumentException(MULTIPLE_DATE_ERR);
+                throw new IllegalArgumentException(MESSAGE_MULTIPLE_DATE);
             } else if (!isDescAdded || !isOneDeadlineAdded) {
-                throw new IllegalArgumentException(MISSING_DESC_DATE_ERR);
+                throw new IllegalArgumentException(MESSAGE_MISSING_DESC_DATE);
             }
 
             String description = splitCommand[0].substring(COMMAND_LENGTH).strip();
@@ -75,7 +75,7 @@ public class DeadlineCommand extends Command {
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeException e) {
-            return ui.printError(INVALID_DATE_ERR);
+            return ui.printError(MESSAGE_INVALID_DATE);
         }
     }
 }

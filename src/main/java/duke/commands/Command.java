@@ -16,16 +16,19 @@ public abstract class Command {
     public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
     /** Error message to output when invalid date format is input. */
-    static final String INVALID_DATE_ERR = "Please add a valid date of format yyyy/MM/dd HHmm (24-hour format)!";
+    static final String MESSAGE_INVALID_DATE = "Please add a valid date of format yyyy/MM/dd HHmm (24-hour format)!";
 
     /** Error message to output when invalid number is input. */
-    static final String INVALID_NUM_ERR = "Please enter a numeric character!";
+    static final String MESSAGE_INVALID_NUM = "Please enter a numeric character!";
 
     /** Error message when multiple date is input. */
-    static final String MULTIPLE_DATE_ERR = "Please only add ONE deadline!";
+    static final String MESSAGE_MULTIPLE_DATE = "Please only add ONE date!";
 
     /** Error message if there is missing description or date for deadline or event tasks. */
-    static final String MISSING_DESC_DATE_ERR = "Please add a description and/or date for your task!";
+    static final String MESSAGE_MISSING_DESC_DATE = "Please add a description and/or date for your task!";
+
+    /** Error message if there is missing description for the task. */
+    static final String MESSAGE_MISSING_DESC = "Please add a description for your task!";
 
     protected String userCommand;
 

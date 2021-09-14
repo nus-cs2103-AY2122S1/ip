@@ -58,9 +58,9 @@ public class EventCommand extends Command {
             boolean isMultipleDateAdded = splitCommand.length > 2;
 
             if (isMultipleDateAdded) {
-                throw new IllegalArgumentException(MULTIPLE_DATE_ERR);
+                throw new IllegalArgumentException(MESSAGE_MULTIPLE_DATE);
             } else if (!isDescAdded || !isOneDateAdded) {
-                throw new IllegalArgumentException(MISSING_DESC_DATE_ERR);
+                throw new IllegalArgumentException(MESSAGE_MISSING_DESC_DATE);
             }
 
             String dateStr = splitCommand[1].strip();
@@ -76,7 +76,7 @@ public class EventCommand extends Command {
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeException e) {
-            return ui.printError(INVALID_DATE_ERR);
+            return ui.printError(MESSAGE_INVALID_DATE);
         }
     }
 }
