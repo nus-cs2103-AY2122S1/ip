@@ -1,5 +1,11 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
 import java.time.format.DateTimeFormatter;
 
 import java.nio.file.Path;
@@ -8,7 +14,7 @@ import java.nio.file.Paths;
 /**
  * Represents a runner for the Duke program.
  */
-public class Duke {
+public class Duke extends Application {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -30,6 +36,15 @@ public class Duke {
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
         storage = new Storage(dukePath);
         taskList = storage.load(ui);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Label helloWorld = new Label("Hello World!");
+        helloWorld.setFont(Font.font("Ariel", 50));
+        Scene scene = new Scene(helloWorld);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**
