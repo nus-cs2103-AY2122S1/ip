@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -14,10 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
+
 
 /**
  * An example of a custom control using FXML.
