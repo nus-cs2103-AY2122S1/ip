@@ -168,7 +168,7 @@ public class TaskList {
             return "There are no matching tasks in your list";
         } else {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Here are the matching tasks in your list: ");
+            stringBuilder.append("Here are the matching tasks in your list: \n");
             for (int i = 0; i < listOfHits.size(); i++) { //print out matches
                 stringBuilder.append((i + 1) + "." + list.get(i).toString());
             }
