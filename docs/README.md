@@ -1,6 +1,6 @@
 # User Guide
 Winston *frees* your mind of having to remember things you need to do. It's,
-* text-based
+* text-based with a GUI
 * easy to learn
 * Fast to use
 
@@ -15,6 +15,7 @@ And it is **FREE!**
 
 ## Features 
 *[x] Manages tasks
+*[x] User-friendly GUI
 *[ ] Manages deadlines (Coming soon)
 *[ ] Sends reminders (Coming soon)
 
