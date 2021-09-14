@@ -3,6 +3,34 @@
 UhtredRagnarson is a **desktop app for managing your tasks, optimized for use via only a keyboard** while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, UhtredRagnarson can get your task management done faster than traditional GUI apps.
 
+* [Quick Start](#quick-start)<br>
+* [Features](#features)
+  - [Viewing help](#viewing-help-help)
+  - [Listing all tasks](#listing-all-tasks-list)
+  - [Adding a to-do task](#adding-a-to-do-task-todo)
+  - [Adding a deadline task](#adding-a-deadline-task-deadline)
+  - [Adding an event task](#adding-an-event-task-event)
+  - [Marking a task as done](#marking-a-task-as-done-done)
+  - [Deleting a task](#deleting-a-task-delete)
+  - [Finding a task](#finding-a-task-in-the-list-find)
+* [Command summary](#command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start
+
+1. Ensure you have Java `11` or above installed in your Computer.
+
+1. Download the latest `ip.jar` from [here](https://github.com/tetrerox/ip/releases).
+
+1. Copy the file to the folder you want to use as the _home folder_ for the app.
+
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+
+1. Type the command in the command box and press Enter to execute it.
+
+1. Refer to the [Features](#features) below for details of each command.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
