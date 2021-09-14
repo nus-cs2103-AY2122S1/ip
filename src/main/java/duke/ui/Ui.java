@@ -36,6 +36,6 @@ public class Ui {
         for (int i = 0; i < taskList.getAllTasks().size(); i++) {
             output.append(String.format("%d. %s%n", i + 1, taskList.getAllTasks().get(i)));
         }
-        return output.toString();
+        return output.toString().trim();
     }
 }

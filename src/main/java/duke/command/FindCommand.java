@@ -25,6 +25,6 @@ public class FindCommand extends Command {
                 output.append(ui.returnMessage(String.format("%d.%s%n", index++, task)));
             }
         }
-        return output.toString();
+        return output.toString().trim();
     }
 }
