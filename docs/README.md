@@ -12,9 +12,10 @@ Users can classify their tasks according to:
 Duke will assist the user in storing the above events for his/her
 convenience.
 
-### Feature-XYZ
+### Locates task
 
-Description of the feature.
+Can't remember if you've got an outstanding task? 
+Simply search for the task with our `find` function or use `list` to view all your tasks.
 
 ## Usage
 
