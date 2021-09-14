@@ -13,6 +13,7 @@
     </HBox>
     <Label fx:id="dialog" text="Label" minHeight="-Infinity"
            style="
+           -fx-font-family: 'Arial';
            -fx-wrap-text: true;
            -fx-background-color: #58ffff;
            -fx-background-radius: 15 15 15 0;
