@@ -29,7 +29,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")) + ")" + super.getTags();
+        return super.toString()
+                + " (by: "
+                + deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"))
+                + ")" + super.getTags();
     }
 
     @Override

@@ -29,7 +29,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")) + ")" + super.getTags();
+        return super.toString()
+                + " (at: "
+                + startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"))
+                + ")" + super.getTags();
     }
 
     @Override
