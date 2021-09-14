@@ -28,11 +28,9 @@ Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy
 ### **Here's what you're gonna do!**
 
 1. Download this [`Bot.jar`](https://github.com/Timothyoung97/ip/releases/download/A-Jar/Bot.jar) file.
-2. Open up your preferred terminal.
-3. Navigate to the directory where you save `Bot.jar`.
-4. Run the following command to start using me!
-   - `java -jar Bot.jar`
-5. Enjoy and have fun!
+2. Navigate to the directory where you save `Bot.jar`.
+3. Double Click!
+4. Enjoy and have fun!
 
 ## 3. Features Development 👩‍💻
 
@@ -46,10 +44,8 @@ list                                                                            
 done        Integer (A task indexed in the task list)                            -> Mark a task as completed
 delete      Integer (A task indexed in the task list)                            -> Delete a task from the task list
 find        keywords (eg find homework play)                                     -> Find tasks that contain the respective keywords
+massops     delete / done							 -> Mark all task as done / delete all tasks
 ```
-- [ ] Accept more date time format
-- [ ] Reminders
-- [ ] Filter, Sorting
 
 ## 4. Make me better? 📈
 
@@ -62,85 +58,24 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 3. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-4. After that, locate the `src/main/java/Bot.java` file, right-click it, and choose `Run Bot.main()` (if the code editor is showing compile errors, try restarting the IDE). 
+4. After that, locate the `src/main/java/Launcher.java` file, right-click it, and choose `Run Launcher.main()` (if the code editor is showing compile errors, try restarting the IDE). 
 
 ```java
-Bot.java
+Launcher.java
 
-public class Bot {
+public class Launcher {
     public static void main(String[] args) {
-        new BotBrain().initiate();
+        Application.launch(Main.class, args);
     }
 }
 ```
 
 5. If the setup is correct, you should see something like the below as the output:
 
-```ruby
-	                                    ,wpp@@ppwa,
-	                                ,p@R@@@@@@@@@MMM@p,
-	                              a@@@MMMM%MDZ"|||,p[]g,
-	                            ,@K"@@N;j**""`"uww- x   U,
-	                           )TK*`""* {; "   [ +*"**,zH;..`>
-	                          ,TR|       Yq,,,4-       H    ;  V
-	                          BKH       .w;     "KWwwK"`      ; U
-	                         ]KR          ``*+<a,JJ,aw~o`      ;"
-	                         BKH                       ;;N       U
-	                        jTK|                      .A-        {
-	                        {KR                      -D;        |j
-	                        [KR                        ;`p       J
-	                        lKm            ]|            {       J
-	                       z@KR            'M.|  ,AQm.|,aH       J
-	                      Aj`%K             '*TT"'|`"''          J<
-	                 ,~Q;KEMkK"v-                               .C Y.
-	             ,wCmKK*"''"KC  `*;                            y" ,U  `>.
-	          ,mTmKK'        'Y,   "<;                       ,4  ,-       *.
-	        wEmKK"              "y    '*E-                 )*   A           `>
-	      mTKKKP                  `*u     "*VL;         ,W`   z"    [          V`y
-	   ,Am**"""**<,                   "~,      `"*~v; yPw,  x`      1          { j*
-	 ,BjKK*"''      `*,                  `"~,    A   *H  `Y`         @         U A 1
-	 2Ek6,gpwwwww,     ".                     '"*    "n               Mm     ,G    C
-	[I$mTKKR"|    -Ey    \   /                         "               \K,,aP    ,CE
-	`4KKKKR          |\   [z`                           "p              'B;Jw ,mE  H
-	  mKKR            ;" 1/                              "p              '@R"'    ]
-	  {KKH              \]                              "*?pz-~            @m     H
-	   @KH               U                                  y               M|   /
-	   `@R              ;`                                   \               H  j
-	     VM               $                                   \              J- H
-	      \m|              U                                 UUU              H;]
-	       B%|      `      [                                   ]              E j
-	    ,@R"*KM   lR|      ]                                   J              H CX
-	     %@wK&"*@pE$m      [                                   J             ]`j ]
-	       `BH iB| ]B`"p   U                                 -,I         z  w;|,A
-	        `@mKBpl$[  ( ,B.                                 `,U       ,(g@`
-	         1@@M@@@@ppa@@@@pp@Kp.     V.                    z"    ,aw@@@@M
-	          %@@@@@M@@@@@@@@@@@@@@@@@ppE*@pp,,.     .,,pww%T%K@@@@@M@@M@@R
-	           M@@@@@@@@@MMM@@@@@@@@@@M@@@@@@@@@@@@@@@KKKKKKKKj@@@MMM@@@MM
-	            %@@@@@@@@@@@@@@@@@MMMMM@@MM@@@@@@@@@MMMppkpp@@@@@@@@@@@MR
-	             "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@P
-	               %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@R
-	                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@M*
-	                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@M@@@@@@@@@@@@@@]
-	                ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%
-	                @@@@@@@@@@@@@@@@@@@@@@@@@@M@@@@@@@@@@@@@@@@@@R
-	               ]@@@@@@@@@@@@@@@@@@@@@@@@@MM@@@@@@@@@@@@@@@@@@@U
-	               $@@@@@@@@@@@@@@@@@@@@@@@@@MM@@@@@@@@@@@@@@@@@@@@
-	               @@@@@@@@@@@@@@@@@@@@@@@@@@@M@@@@@@@@@@@@@@@@@@@R
-	               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@M@@@U
-	               8@@@@@@@@@@@@@@@@@@@@@@@@@@$@@@@@@@@@@@@@@@@@@@@@@W
-	               1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@N
-	                %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	                [@@@@@@@@@@@@@@@@@@@@@@@@@@@@@R@@@@@@@@@@@@@@@@@@@@@M
-	                1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MM*`
-	                  `"%MM@@@@@@@@@@@@@@@@@@@@@MM"   `'"````"'-
-	                         """"**PMMMMMP**"`-
-	  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-	:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-	'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
-	Hallo! My name's Peter!
-	How may I be of service to you?
-	  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-	:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-	'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
-```
+![Ui](https://user-images.githubusercontent.com/62177572/133307156-919379c3-9f32-49cb-b56f-eab48a70f2b8.png)
+
+## 5. Credits
+- [Brian Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Brian_Griffin.png)
+- [Peter Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Peter_Griffin.png)
+- [Peter Griffin Dancing Picture Resource](https://www.nicepng.com/ourpic/u2q8a9t4u2a9q8u2_peter-griffin-family-guy-29-by-frasier-and/)
+- [Peter Griffin Head Icon Picture Resource](https://www.kindpng.com/imgv/hJTimxi_family-guy-peter-face-hd-png-download/)
