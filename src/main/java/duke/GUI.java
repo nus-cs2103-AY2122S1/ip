@@ -33,6 +33,9 @@ public class GUI{
                 "'delete {INDEX}' to delete a task of specified INDEX\n" +
                 "'find {KEYWORD}' to display all the tasks which have specified KEYWORD\n" +
                 "'done INDEX' to mark a task of specified INDEX as done\n" +
+                "'sort by date' to sort your tasks by date\n" +
+                "'sort by date reverse' to sort your tasks by date in reverse order\n" +
+                "'sort by type' to sort your tasks by type (todos, events, deadlines)\n" +
                 "'bye' to save your current task list\n";
     }
 
