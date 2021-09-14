@@ -14,9 +14,9 @@ public class Parser {
      */
     public static String parseCommand(String command) {
         String keyWord = "";
-        if (command.equals("list")) {
+        if (command.startsWith("list")) {
             keyWord = "list";
-        } else if (command.equals("notes")) {
+        } else if (command.startsWith("notes")) {
             keyWord = "notes";
         } else if (command.startsWith("done")) {
             keyWord = "done";
@@ -72,15 +72,23 @@ public class Parser {
      * @throws IOException if there is an error in updated the list of tasks saved in the user's
      * hard disk after marking a task as completed
      */
-    public static String parseDelete(String instruction) throws JarvisException, IOException {
-        int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
-
-        // If the task number keyed in by the user is invalid
-        if (taskNum >= TaskList.getCounter()) {
-            throw new JarvisException(Ui.invalidTaskNum(taskNum));
-        // If the task number keyed in by the user is valid
+    public static String parseDelete(String instruction) throws JarvisException, IOException, NumberFormatException {
+        if (instruction.length() < 8) {
+            throw new JarvisException(Ui.EMPTY_TASK_DELETE);
         } else {
-            return TaskList.deleteTaskAndUpdate(taskNum);
+            try {
+                int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
+
+                // If the task number keyed in by the user is invalid
+                if (taskNum >= TaskList.getCounter() || taskNum < 0) {
+                    throw new JarvisException(Ui.invalidTaskNum(taskNum));
+                // If the task number keyed in by the user is valid
+                } else {
+                    return TaskList.deleteTaskAndUpdate(taskNum);
+                }
+            } catch (NumberFormatException | IOException e) {
+                throw new JarvisException(Ui.UNRECOGNISED_COMMAND);
+            }
         }
     }
 
@@ -254,16 +262,25 @@ public class Parser {
      * @throws IOException if there is an error in updated the list of note saved in the user's
      * hard disk
      */
-    public static String parseDeleteNote(String instruction) throws JarvisException, IOException {
-        int noteNum = Integer.parseInt(instruction.substring(13)) - 1;
-
-        // If there is no corresponding note to the number keyed in by the user
-        if (noteNum >= TaskList.getCounter()) {
-            throw new JarvisException(Ui.invalidNoteNum(noteNum));
-        // If there is a corresponding note to the number keyed in by the user
+    public static String parseDeleteNote(String instruction) throws JarvisException, IOException,
+            NumberFormatException {
+        if (instruction.length() < 13) {
+            throw new JarvisException(Ui.EMPTY_NOTE_DELETE);
         } else {
-            // Delete the note from the noteList array and update the note file in the user's hard disk
-            return NoteList.deleteNoteAndUpdate(noteNum);
+            try {
+                int noteNum = Integer.parseInt(instruction.substring(12)) - 1;
+                // If there is no corresponding note to the number keyed in by the user
+                if (noteNum >= TaskList.getCounter() || noteNum < 0) {
+                    throw new JarvisException(Ui.invalidNoteNum(noteNum));
+                    // If there is a corresponding note to the number keyed in by the user
+                } else {
+                    // Delete the note from the noteList array and update the note file in the user's hard disk
+                    return NoteList.deleteNoteAndUpdate(noteNum);
+                }
+            } catch (NumberFormatException | IOException e) {
+                throw new JarvisException(Ui.UNRECOGNISED_COMMAND);
+            }
+
         }
     }
 }
