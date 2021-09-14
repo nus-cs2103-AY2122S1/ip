@@ -27,8 +27,8 @@ Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy
 
 ### **Here's what you're gonna do!**
 
-1. Download this [`Bot.jar`](https://github.com/Timothyoung97/ip/releases/download/A-Jar/Bot.jar) file.
-2. Navigate to the directory where you save `Bot.jar`.
+1. Download this [`Bot-2.0.jar`](https://github.com/Timothyoung97/ip/releases/download/A-Release/Bot-2.0.jar) file.
+2. Navigate to the directory where you save `Bot-2.0.jar`.
 3. Double Click!
 4. Enjoy and have fun!
 
