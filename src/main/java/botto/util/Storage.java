@@ -7,9 +7,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import botto.BottoException;
+import botto.task.Deadline;
 import botto.task.Event;
 import botto.task.Task;
 import botto.task.Todo;
@@ -64,7 +66,7 @@ public class Storage {
 
             boolean isDone = nextLine.charAt(4) == 'X';
             String[] info = nextLine.substring(7).split(" [(]..: ");
-            DateTimeFormatter taskFormatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+            DateTimeFormatter taskFormatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.UK);
 
             switch (nextLine.charAt(1)) {
             case 'T' :
@@ -72,8 +74,10 @@ public class Storage {
                 task = new Todo(description);
                 break;
             case 'D' :
+                task = getDeadlineOrEvent(info, taskFormatter, 'D');
+                break;
             case 'E' :
-                task = getDeadlineOrEvent(info, taskFormatter);
+                task = getDeadlineOrEvent(info, taskFormatter, 'E');
                 break;
             default:
                 continue;
@@ -87,12 +91,16 @@ public class Storage {
         }
     }
 
-    private Task getDeadlineOrEvent(String[] info, DateTimeFormatter taskFormatter) {
+    private Task getDeadlineOrEvent(String[] info, DateTimeFormatter taskFormatter, char type) {
         String description = info[0];
         String timeBeforeFormat = info[1].substring(0, info[1].length() - 1);
         LocalDateTime dateTime = LocalDateTime.parse(timeBeforeFormat, taskFormatter);
 
-        return new Event(description, dateTime);
+        if (type == 'D') {
+            return new Deadline(description, dateTime);
+        } else {
+            return new Event(description, dateTime);
+        }
     }
 
     /**

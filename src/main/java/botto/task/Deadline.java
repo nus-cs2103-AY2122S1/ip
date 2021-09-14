@@ -30,7 +30,7 @@ public class Deadline extends Task implements Comparable<Deadline> {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.getDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.UK);
         return "[D]" + super.toString() + " (by: " + formatter.format(dateTime) + ")";
     }
 

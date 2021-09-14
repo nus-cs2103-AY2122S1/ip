@@ -28,7 +28,7 @@ public class Event extends Task implements Comparable<Event> {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.getDefault());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.UK);
         return "[E]" + super.toString() + " (at: " + formatter.format(this.dateTime) + ")";
     }
 

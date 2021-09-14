@@ -2,6 +2,7 @@ package botto.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import botto.BottoException;
 import botto.task.Deadline;
@@ -46,7 +47,7 @@ public class AddDeadlineCommand implements Command {
         // split the informations segment into different part
         String[] informations = detail.split(" /.. ", 2);
         // formatter that fits the format of the datetime info in the command
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.UK);
 
         try {
             // information required to create a deadline

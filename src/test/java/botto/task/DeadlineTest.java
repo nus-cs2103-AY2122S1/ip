@@ -17,7 +17,7 @@ public class DeadlineTest {
 
     @BeforeEach
     public void setUp() {
-        formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.getDefault());
+        formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.UK);
     }
 
     @Test

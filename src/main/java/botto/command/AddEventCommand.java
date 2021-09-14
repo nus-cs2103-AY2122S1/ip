@@ -2,6 +2,7 @@ package botto.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import botto.BottoException;
 import botto.task.Event;
@@ -47,7 +48,7 @@ public class AddEventCommand implements Command {
 
         // split the informations segment into different part
         String[] informations = detail.split(" /.. ", 2);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.UK);
 
         try {
             // information required to create a deadline
