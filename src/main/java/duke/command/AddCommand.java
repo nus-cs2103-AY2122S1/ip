@@ -1,15 +1,22 @@
 package duke.command;
 
 import duke.ArchiveList;
+import duke.Parser;
 import duke.Storage;
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
+
+import duke.task.Task;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Representation for the add command of Duke.
  */
 public class AddCommand extends Command {
+
     private final Task toAdd;
 
     /**
@@ -59,5 +66,56 @@ public class AddCommand extends Command {
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         taskList.add(this.toAdd);
         return ui.formatPrintAddString(this.toAdd, taskList.getSize());
+    }
+
+    /**
+     * Gets the deadline from an array of words.
+     *
+     * @param words Array which deadline will be derived from.
+     * @return The deadline.
+     */
+    public static String getDeadline(String[] words) {
+        String deadline = "";
+
+        for (int i = 0; i < words.length; i++) {
+            if (Parser.isValidDate(words[i], DateTimeFormatter.ISO_LOCAL_DATE)) {
+                deadline += LocalDate.parse(words[i], DateTimeFormatter.ISO_LOCAL_DATE)
+                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } else if (Parser.isValidTime(words[i], DateTimeFormatter.ISO_LOCAL_TIME)) {
+                deadline += LocalTime.parse(words[i], DateTimeFormatter.ISO_LOCAL_TIME)
+                        .format(DateTimeFormatter.ofPattern("hh:mm a"));
+            } else {
+                deadline += words[i];
+            }
+
+            if (!(i == 0 && words[i].equals("")) && i != words.length - 1) {
+                deadline += SPACE;
+            }
+        }
+
+        if (deadline.equals("")) {
+            deadline += " ";
+        }
+
+        return deadline;
+    }
+
+    /**
+     * Gets the description from an array of strings.
+     *
+     * @param words Array which description would be derived from.
+     * @return The description.
+     */
+    public static String getDescription(String[] words) {
+        String description = "";
+
+        for (int i = 1; i < words.length; i++) {
+            description += words[i];
+            if (i != words.length - 1) {
+                description += SPACE;
+            }
+        }
+
+        return description;
     }
 }

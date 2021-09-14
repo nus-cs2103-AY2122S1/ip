@@ -1,9 +1,12 @@
 package duke.command;
 
 import duke.ArchiveList;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IncompleteRemoveException;
+import duke.exception.InvalidCommandException;
 
 /**
  * Representation for the remove archive command on duke.
@@ -17,6 +20,31 @@ public class RemoveArchiveCommand extends RemoveCommand {
      */
     public RemoveArchiveCommand(int indexToRemove) {
         super(indexToRemove);
+    }
+
+    /**
+     * Factory method which generates the RemoveArchiveCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the RemoveArchiveCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return RemoveArchiveCommand to be executed.
+     * @throws IncompleteRemoveException if insufficient values are passed in.
+     * @throws InvalidCommandException if invalid command passed in.
+     */
+    public static RemoveArchiveCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList)
+            throws IncompleteRemoveException, InvalidCommandException {
+        String[] separated = userInput.split(SPACE);
+
+        if (!Parser.isIntegerOrAll(separated[2]) || Parser.isOutOfRange(archiveList, separated[2])) {
+            throw new IncompleteRemoveException();
+        } else if (Parser.isPositiveInteger(separated[2])) {
+            return new RemoveArchiveCommand(Integer.valueOf(separated[2]) - 1);
+        } else if (Parser.isAll(separated[2])) {
+            return new RemoveArchiveCommand(ALL);
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     /**

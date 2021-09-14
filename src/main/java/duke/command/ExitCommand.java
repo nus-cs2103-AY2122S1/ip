@@ -11,6 +11,18 @@ import duke.Ui;
 public class ExitCommand extends Command {
 
     /**
+     * Factory method which generates the ExitCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the ExitCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return ExitCommand to be executed.
+     */
+    public static ExitCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList) {
+        return new ExitCommand();
+    }
+
+    /**
      * Checks if this is an exit command.
      *
      * @return true.

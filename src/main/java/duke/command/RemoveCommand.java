@@ -2,9 +2,12 @@ package duke.command;
 
 import duke.ArchiveList;
 import duke.DukeList;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IncompleteRemoveException;
+import duke.exception.InvalidCommandException;
 import duke.task.Task;
 
 /**
@@ -13,7 +16,6 @@ import duke.task.Task;
 public class RemoveCommand extends Command {
 
     private final int indexToRemove;
-
     private final boolean isRemoveAll;
 
     /**
@@ -23,7 +25,33 @@ public class RemoveCommand extends Command {
      */
     public RemoveCommand(int indexToRemove) {
         this.indexToRemove = indexToRemove;
-        this.isRemoveAll = indexToRemove == -1;
+        this.isRemoveAll = indexToRemove == ALL;
+    }
+
+    /**
+     * Factory method which generates the RemoveCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the RemoveCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return RemoveCommand to be executed.
+     * @throws IncompleteRemoveException if insufficient values are passed in.
+     * @throws InvalidCommandException if invalid command passed in.
+     */
+    public static RemoveCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList)
+            throws IncompleteRemoveException, InvalidCommandException {
+        String[] separated = userInput.split(SPACE);
+
+        if (Parser.isLengthLessThanTwo(separated) || !Parser.isIntegerOrAll(separated[1])
+                || Parser.isOutOfRange(taskList, separated[1])) {
+            throw new IncompleteRemoveException();
+        } else if (Parser.isPositiveInteger(separated[1])) {
+            return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
+        } else if (Parser.isAll(separated[1])) {
+            return new RemoveCommand(ALL);
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     /**

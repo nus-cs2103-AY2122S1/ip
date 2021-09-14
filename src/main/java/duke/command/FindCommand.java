@@ -4,6 +4,7 @@ import duke.ArchiveList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IncompleteFindException;
 
 /**
  * Representation for the find command of Duke.
@@ -19,6 +20,28 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
+    }
+
+    /**
+     * Factory method which generates the FindCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the FindCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return FindCommand to be executed.
+     * @throws IncompleteFindException if insufficient values are passed in.
+     */
+    public static FindCommand generateCommand(
+            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteFindException {
+        String[] separated = userInput.split(SPACE);
+
+        if (separated.length == 1) {
+            throw new IncompleteFindException();
+        }
+
+        String keyword = separated[1];
+
+        return new FindCommand(keyword);
     }
 
     /**

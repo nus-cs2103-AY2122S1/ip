@@ -9,6 +9,19 @@ import duke.Ui;
  * Representation for the list archive command on duke.
  */
 public class ListArchiveCommand extends ListCommand {
+
+    /**
+     * Factory method which generates the ListArchiveCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the ListArchiveCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return ListArchiveCommand to be executed.
+     */
+    public static ListArchiveCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList) {
+        return new ListArchiveCommand();
+    }
+
     /**
      * Executes the ListArchiveCommand.
      *

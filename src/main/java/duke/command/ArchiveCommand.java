@@ -1,15 +1,18 @@
 package duke.command;
 
 import duke.ArchiveList;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IncompleteArchiveException;
 import duke.task.Task;
 
 /**
  * Representation for the Archive Command of Duke.
  */
 public class ArchiveCommand extends Command {
+
     private final int indexToArchive;
     private final boolean isArchiveAll;
 
@@ -20,7 +23,33 @@ public class ArchiveCommand extends Command {
      */
     public ArchiveCommand(int indexToArchive) {
         this.indexToArchive = indexToArchive;
-        this.isArchiveAll = indexToArchive == -1;
+        this.isArchiveAll = indexToArchive == ALL;
+    }
+
+    /**
+     * Factory method which generates the ArchiveCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the ArchiveCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return ArchiveCommand to be executed.
+     * @throws IncompleteArchiveException if insufficient values are passed in.
+     */
+    public static ArchiveCommand generateCommand(
+            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteArchiveException {
+        String[] separated = userInput.split(" ");
+
+        if (separated.length == 1) {
+            throw new IncompleteArchiveException();
+        }
+
+        if (Parser.isPositiveInteger(separated[1]) && !Parser.isOutOfRange(taskList, separated[1])) {
+            return new ArchiveCommand(Integer.valueOf(separated[1]) - 1);
+        } else if (Parser.isAll(separated[1])) {
+            return new ArchiveCommand(ALL);
+        } else {
+            throw new IncompleteArchiveException();
+        }
     }
 
     /**

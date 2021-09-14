@@ -53,12 +53,16 @@ public class Ui {
      * @return String representation of what gets printed out of print method.
      */
     public String formatPrintString(DukeList dukeList) {
-        String output = "Here are the tasks in your " + dukeList.type() + ":";
+        if (dukeList.getSize() == 0) {
+            return "You do not have any tasks in your " + dukeList.type() + ".";
+        } else {
+            String output = "Here are the tasks in your " + dukeList.type() + ":";
 
-        for (int i = 0; i < dukeList.getSize(); i++) {
-            output += "\n" + (i + 1) + "." + dukeList.taskToString(i);
+            for (int i = 0; i < dukeList.getSize(); i++) {
+                output += "\n" + (i + 1) + "." + dukeList.taskToString(i);
+            }
+            return output;
         }
-        return output;
     }
 
     /**

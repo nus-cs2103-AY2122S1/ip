@@ -1,14 +1,18 @@
 package duke.command;
 
 import duke.ArchiveList;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IncompleteDoneException;
+import duke.exception.InvalidCommandException;
 
 /**
  * Representation for the done command of Duke.
  */
 public class DoneCommand extends Command {
+
     private final int indexToMarkAsDone;
     private final boolean isMarkAll;
 
@@ -19,7 +23,37 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int indexToMarkAsDone) {
         this.indexToMarkAsDone = indexToMarkAsDone;
-        this.isMarkAll = indexToMarkAsDone == -1;
+        this.isMarkAll = indexToMarkAsDone == ALL;
+    }
+
+    /**
+     * Factory method which generates the DoneCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the DoneCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return DoneCommand to be executed.
+     * @throws IncompleteDoneException if insufficient values are passed in.
+     * @throws InvalidCommandException if invalid command passed in.
+     */
+    public static DoneCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList)
+            throws IncompleteDoneException, InvalidCommandException {
+        String[] separated = userInput.split(SPACE);
+
+        if (Parser.isLengthLessThanTwo(separated) || !Parser.isIntegerOrAll(separated[1])
+                || Parser.isOutOfRange(taskList, separated[1])) {
+            throw new IncompleteDoneException();
+        } else if (Parser.isPositiveInteger(separated[1])) {
+            int index = Integer.valueOf(separated[1]) - 1;
+
+            assert index >= 0 && index < taskList.getSize();
+
+            return new DoneCommand(index);
+        } else if (Parser.isAll(separated[1])) {
+            return new DoneCommand(ALL);
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     /**

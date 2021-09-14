@@ -1,15 +1,18 @@
 package duke.command;
 
 import duke.ArchiveList;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.IncompleteUnarchiveException;
 import duke.task.Task;
 
 /**
  * Representation for the unarchive command on duke.
  */
 public class UnarchiveCommand extends Command {
+
     private final int indexToUnarchive;
     private final boolean isUnarchiveAll;
 
@@ -20,7 +23,33 @@ public class UnarchiveCommand extends Command {
      */
     public UnarchiveCommand(int indexToUnarchive) {
         this.indexToUnarchive = indexToUnarchive;
-        this.isUnarchiveAll = indexToUnarchive == -1;
+        this.isUnarchiveAll = indexToUnarchive == ALL;
+    }
+
+    /**
+     * Factory method which generates the UnarchiveCommand from the userInput.
+     *
+     * @param userInput User Input which is used to generate the UnarchiveCommand.
+     * @param taskList taskList of duke.
+     * @param archiveList archiveList of duke.
+     * @return UnarchiveCommand to be executed.
+     * @throws IncompleteUnarchiveException if insufficient values are passed in.
+     */
+    public static UnarchiveCommand generateCommand(
+            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteUnarchiveException {
+        String[] separated = userInput.split(" ");
+
+        if (separated.length == 1) {
+            throw new IncompleteUnarchiveException();
+        }
+
+        if (Parser.isPositiveInteger(separated[1]) && !Parser.isOutOfRange(archiveList, separated[1])) {
+            return new UnarchiveCommand(Integer.valueOf(separated[1]) - 1);
+        } else if (Parser.isAll(separated[1])) {
+            return new UnarchiveCommand(ALL);
+        } else {
+            throw new IncompleteUnarchiveException();
+        }
     }
 
     /**
@@ -54,6 +83,7 @@ public class UnarchiveCommand extends Command {
         }
         ui.print(message);
     }
+
     /**
      * Gets the String representation of the things printed in the
      * execute method as well as execute the unarchiving of the task at
