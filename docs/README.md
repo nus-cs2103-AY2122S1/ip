@@ -14,7 +14,11 @@ Welcome to DukePro. This app houses Duke, a friendly chat bot who can help you m
 
 ## Features
 
-### Add a to-do task `todo`
+
+
+## Usage
+
+### `todo` - Add a to-do task
 
 Adds a to-do task into your list of tasks.
 
@@ -22,9 +26,16 @@ Format: `todo TASK_DESCRIPTION`
 
 Example: `todo Watching TV`
 
+Expected Outcome: (if you have 6 previous tasks)
+```
+Got it. I have added this task:
+  [T][ ] Watching TV
+Now you have 7 task(s) in the list.
+```
 
 
-### Add an event task `event`
+
+### `event` - Add an event task
 
 Adds an event task into your list of tasks. An event task has a time at which it will happen.
 
@@ -32,9 +43,16 @@ Format: `event TASK_DESCRIPTION /at yyyy-MM-dd HH:mm`
 
 Example: `event Final Exam /at 2021-11-20 09:00`
 
+Expected Outcome: (if you have 6 previous tasks)
+```
+Got it. I have added this task:
+  [E][ ] Final Exam (at: Nov 20 2021 09:00)
+Now you have 7 task(s) in the list.
+```
 
 
-### Add a deadline task `deadline`
+
+### `deadline` - Add a deadline task `deadline`
 
 Adds a deadline task into your list of tasks. A deadline task has a time before which the task must be completed.
 
@@ -42,9 +60,16 @@ Format: `deadline TASK_DESCRIPTION /by yyyy-MM-dd HH:mm`
 
 Example: `deadline Assignment /by 2021-11-20 12:00`
 
+Expected Outcome: (if you have 6 previous tasks)
+```
+Got it. I have added this task:
+  [E][ ] Assignment (by: Nov 20 2021 12:00)
+Now you have 7 task(s) in the list.
+```
 
 
-### List all your tasks `list`
+
+### `list` - List all your tasks
 
 Lists all the tasks in your list of tasks in the order of when they were added. 
 
@@ -52,7 +77,7 @@ Format: `list`
 
 
 
-### Mark a task as done `done`
+### `done` - Mark a task as done
 
 Marks a task in your list of tasks as done. The `TASK_INDEX` will be the number assigned to the task by the `list` command.
 
@@ -62,13 +87,21 @@ Example: `done 2`
 
 
 
-### Delete a task `delete`
+### `delete` - Delete a task
 
 Deletes a task in your list of tasks as done. The `TASK_INDEX` will be the number assigned to the task by the `list` command.
 
 Format: `delete TASK_INDEX`
 
 Example: `delete 2`
+
+
+
+### `find` - Find a task
+
+Finds tasks that contain the string that you input
+
+
 
 
 
