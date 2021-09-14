@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     private String description;
@@ -48,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Returns the information about this task.
+     * Returns the user-friendly information about this task.
      *
      * @return this task's information
      */
@@ -57,12 +58,38 @@ public class Task {
     }
 
     /**
+     * Returns the full information about this task.
+     *
+     * @param tasks the TaskList that contains all current tasks
+     * @return this task's full information
+     */
+    public String toStorageString(TaskList tasks) {
+        return this.toString()
+                + " / "
+                + doAfterDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                + " / tasks"
+                + afterTasksNums(tasks, doAfterTasks);
+    }
+
+    private String afterTasksNums(TaskList tasks, TaskList afterTasks) {
+        String taskNumsToReturn = "";
+        for (int i = 0; i < afterTasks.numOfTasks(); i++) {
+            taskNumsToReturn = taskNumsToReturn + " " + tasks.getTaskNum(afterTasks.getTask(i));
+        }
+        return taskNumsToReturn;
+    }
+
+    /**
      * Sets this task to be done after a specific task.
      *
      * @param task task that precedes this task
      */
-    public void setDoAfterTask(Task task) {
-        this.doAfterTasks.addTask(task);
+    public void setDoAfterTask(Task task) throws DukeException {
+        if (this != task) {
+            this.doAfterTasks.addTask(task);
+        } else {
+            throw new DukeException("");
+        }
     }
 
     /**

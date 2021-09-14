@@ -22,6 +22,7 @@ public class DoneCommand implements Command {
             int taskNum = Integer.parseInt(userInput.substring(5));
             Task curr = tasks.getTask(taskNum - 1);
             curr.markAsDone();
+            storage.saveTasks(tasks);
             return ui.getTasksDone(curr);
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'done'!");

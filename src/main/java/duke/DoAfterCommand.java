@@ -30,12 +30,14 @@ public class DoAfterCommand implements Command {
                 int taskBeforeNum = Integer.parseInt(words[4]);
                 Task taskToDoBefore = tasks.getTask(taskBeforeNum - 1);
                 taskToDoAfter.setDoAfterTask(taskToDoBefore);
+                storage.saveTasks(tasks);
                 return ui.getSetAfterTaskMessage(taskToDoAfter, taskToDoBefore);
             } else {
                 LocalDateTime refDateTime = LocalDateTime.parse(
                         words[3] + " " + words[4],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 taskToDoAfter.setDoAfterDateTime(refDateTime);
+                storage.saveTasks(tasks);
                 return ui.getSetAfterDateTimeMessage(taskToDoAfter, refDateTime);
             }
         } catch (NumberFormatException nfe) {
@@ -45,34 +47,6 @@ public class DoAfterCommand implements Command {
         } catch (DateTimeParseException e) {
             throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
         }
-    }
-
-    private TaskList tasksAfterTask(TaskList tasks, Task refTask) {
-        TaskList tasksToDoAfter = new TaskList();
-
-        for (int i = 0; i < tasks.numOfTasks(); i++) {
-            Task curr = tasks.getTask(i);
-
-            if (curr.isAfterTask(refTask)) {
-                tasksToDoAfter.addTask(curr);
-            }
-        }
-
-        return tasksToDoAfter;
-    }
-
-    private TaskList tasksAfterDateTime(TaskList tasks, LocalDateTime dateTime) {
-        TaskList tasksToDoAfter = new TaskList();
-
-        for (int i = 0; i < tasks.numOfTasks(); i++) {
-            Task curr = tasks.getTask(i);
-
-            if (curr.isAfterDateTime(dateTime)) {
-                tasksToDoAfter.addTask(curr);
-            }
-        }
-
-        return tasksToDoAfter;
     }
 
     @Override

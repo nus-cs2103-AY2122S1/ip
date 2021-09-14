@@ -36,7 +36,7 @@ public class TaskList {
     /**
      * Gets a task from this TaskList.
      *
-     * @param i the task number
+     * @param i the task index (task number -1)
      */
     public Task getTask(int i) {
         return tasks.get(i);
@@ -69,6 +69,16 @@ public class TaskList {
      */
     public int numOfTasks() {
         return tasks.size();
+    }
+
+    public int getTaskNum(Task task) {
+        int taskNum = -1;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (task == tasks.get(i)) {
+                taskNum = i + 1;
+            }
+        }
+        return taskNum;
     }
 
     /**

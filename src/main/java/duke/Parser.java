@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Platform;
+
 /**
  * A class to analyze user input and return the relevant Commands.
  */
@@ -13,6 +15,7 @@ public class Parser {
      */
     public static Command parse(String userInput) {
         if (userInput.equals("bye")) {
+            Platform.exit();
             return new ExitCommand();
         } else if (userInput.equals("list")) {
             return new ListCommand();

@@ -56,7 +56,11 @@ public class Ui {
      * @return the list of tasks
      */
     public String getTaskList(TaskList tasks) {
-        return "Here are the tasks in your list:" + tasks.toString();
+        if (tasks.numOfTasks() == 0) {
+            return "There is no task in your list";
+        } else {
+            return "Here are the tasks in your list:" + tasks.toString();
+        }
     }
 
     /**
@@ -65,7 +69,11 @@ public class Ui {
      * @return the matched tasks
      */
     public String getFoundTasks(TaskList tasks) {
-        return "Here are the matching tasks in your list:" + tasks.toString();
+        if (tasks.numOfTasks() == 0) {
+            return "There is no matched task";
+        } else {
+            return "Here are the matching tasks in your list:" + tasks.toString();
+        }
     }
 
     /**
