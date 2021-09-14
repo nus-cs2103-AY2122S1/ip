@@ -1,0 +1,6 @@
+
+.gradle/6.7/executionHistory/executionHistory.lock
+.gradle/6.7/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/checksums/checksums.lock
+*.lock
