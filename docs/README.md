@@ -96,3 +96,12 @@ Task 1 in the list will be deleted
 ```
 There are no task in your list
 ```
+## FAQ
+
+What if I want to change the type of task?
+
+`As changing the type of task is a large change I believe that user should delete the task completely and add a new one!`
+
+How will I know if I entered some fields wrongly?
+
+`The GUI will automatically show error fields if there are errors in the input!`

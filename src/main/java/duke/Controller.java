@@ -7,14 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static duke.Parser.taskParse;
 
 
 public class Controller {
 
-    private static Storage storage = new Storage("C:\\Users\\65906\\IdeaProjects\\ip\\duke.txt");
+    private static Storage storage = new Storage("src/main/resources/duke.txt");
     private static TaskList tasks;
 
     @FXML
@@ -71,11 +70,7 @@ public class Controller {
             } catch (IOException | DukeException e) {
                 tasks = new TaskList();
             }
-            String listContent = "";
-            for (int i = 0; i < tasks.size(); i++) {
-                listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
-            }
-            listLabel.setText("Here are the tasks in your list:\n" + listContent);
+            listLabel.setText(tasks.toString());
         }
     }
 
@@ -110,12 +105,17 @@ public class Controller {
             this.load();
             assert addTaskError.getText().equals("");
         } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase( "E")) {
-            tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(),
-                    taskDate.getValue().toString()));
-            this.load();
-            assert addTaskError.getText().equals("");
+            if (taskDate.getValue() == null) {
+                addTaskError.setText("Add a Date!");
+            } else {
+                tasks.addTask(taskParse(taskType.getText(),
+                        taskDescription.getText(),
+                        taskDate.getValue().toString()));
+                this.load();
+                assert addTaskError.getText().equals("");
+            }
         } else {
-            addTaskError.setText("Wrong Format");
+            addTaskError.setText("Task type to be T, D or E");
         }
 
     }
