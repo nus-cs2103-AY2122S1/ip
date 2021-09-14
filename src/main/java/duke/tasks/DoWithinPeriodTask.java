@@ -9,7 +9,7 @@ public class DoWithinPeriodTask extends Task {
     protected LocalDate endOfPeriod;
 
     /**
-     * Construct a new DoWithinPeriodTask with description, startOfperiod, endOfPeriod and default isDone is false
+     * Constructs a new DoWithinPeriodTask with description, startOfperiod, endOfPeriod and default isDone is false.
      *
      * @param description Describes the Task
      * @param startOfPeriod The start of the time period that the task is supposed to be done
@@ -22,7 +22,7 @@ public class DoWithinPeriodTask extends Task {
     }
 
     /**
-     * Construct a new DoWithinPeriodTask with description, startOfPeriod, endOfPeriod and given isDone boolean
+     * Constructs a new DoWithinPeriodTask with description, startOfPeriod, endOfPeriod and given isDone boolean.
      *
      * @param description Describes the Task
      * @param startOfPeriod The start of the time period that the task is supposed to be done

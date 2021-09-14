@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected LocalDate deadline;
 
     /**
-     * Constructs a Deadline Task with given description, deadline date & time and uncompleted flag by default
+     * Constructs a Deadline Task with given description, deadline date & time and uncompleted flag by default.
      *
      * @param description Description of the deadline
      * @param deadline Date & time of the due date of this Deadline Task
@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs a Deadline Task with given description, deadline date & time and completion flag
+     * Constructs a Deadline Task with given description, deadline date & time and completion flag.
      *
      * @param description Description of the deadline
      * @param deadline Date & time of the due date of this Deadline Task
