@@ -20,7 +20,7 @@
          </font></Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="536.0" prefWidth="400.0" stylesheets="@../images/scrollbar.css" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="532.0" prefWidth="397.0" styleClass="bodybg" stylesheets="@../images/PeterBackground.css" />
+                <VBox fx:id="dialogContainer" prefHeight="532.0" prefWidth="397.0" style="-fx-background-color: black;" />
             </content>
          <styleClass>
             <String fx:value="decrement-button" />
