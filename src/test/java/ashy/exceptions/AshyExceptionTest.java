@@ -1,12 +1,12 @@
 package ashy.exceptions;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class EmptyTaskListExceptionTest {
+
+public class AshyExceptionTest {
     @Test
     public void constructor_success() {
-        assertEquals("Oh no! There are no tasks in your to-do list! ☹", new EmptyTaskListException().getMessage());
+        assertEquals("message", new AshyException("message").getMessage());
     }
 }

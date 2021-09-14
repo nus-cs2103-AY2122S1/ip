@@ -1,13 +1,13 @@
 package ashy.exceptions;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EmptyTaskNumberExceptionTest {
     @Test
     public void constructor_success() {
-        assertEquals("You haven't mentioned the task number! ☹", new EmptyTaskNumberException().getMessage());
+        assertEquals("Oh no! You haven't mentioned the task number! ☹", new EmptyTaskNumberException().getMessage());
     }
 }
 

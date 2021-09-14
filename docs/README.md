@@ -2,7 +2,7 @@
 
 ## About
 Ashy is your friendly chatbot that helps you keep track of to-dos, events and deadlines! Ashy will make sure you stay organised and productive! 
-<p style="text-align: center"> <img  width="500" src="Ui.png"/></p>
+<p style="text-align: center"> <img  width="350" src="Ui.png"/></p>
 
 ## Features 
 
@@ -36,6 +36,7 @@ The tasks you create in the Ashy ChatBot are saved to the hard-disk automaticall
 
 ### Error Handling
 If you enter a wrong command by mistake, dont worry! The Ashy ChatBot has various error handling messages that are highlighted in red to guide you through!
+<p> <img width="200" src="ErrorHandling.png"/></p>
 
 ### Help
 New to the Ashy ChatBot? You can use the help command to find out various features and how to implement them! 

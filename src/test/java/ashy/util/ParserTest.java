@@ -1,34 +1,18 @@
 package ashy.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
     void parseCommand_success() {
-        String[] inputs = {
-                "todo",
-                "DeadLine",
-                "TODO",
-                "LIST",
-                "bYe",
-                "DoNe",
-                "LisT",
-                "event"
-        };
-        DukeCommands[] expected = {
-                DukeCommands.TODO,
-                DukeCommands.DEADLINE,
-                DukeCommands.TODO,
-                DukeCommands.LIST,
-                DukeCommands.BYE,
-                DukeCommands.DONE,
-                DukeCommands.LIST,
-                DukeCommands.EVENT
-        };
+        String[] inputs = {"todo", "DeadLine", "TODO", "LIST", "DoNe", "LisT", "event"};
+        AshyCommands[] expected = {AshyCommands.TODO, AshyCommands.DEADLINE,
+            AshyCommands.TODO, AshyCommands.LIST, AshyCommands.DONE, AshyCommands.LIST, AshyCommands.EVENT};
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++) {
             assertEquals(expected[i], Parser.parseCommand(inputs[i]));
         }
 
