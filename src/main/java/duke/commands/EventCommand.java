@@ -50,7 +50,7 @@ public class EventCommand extends Command {
             throw new MissingTimeCommandException("Missing Time Command: add spaces before and after '/at'.");
         }
 
-        //Split full command by /at.
+        //If no errors, create a new Event.
         String[] splitBody = splitCommand[1].split(" /at ", 2);
         String desc = splitBody[0];
         String date = splitBody[1];

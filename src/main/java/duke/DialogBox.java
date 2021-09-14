@@ -9,12 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * An example of a custom control using FXML.
@@ -29,6 +33,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private static final String FX_BACKGROUND_COLOR_WHITE = "-fx-background-color:WHITE;";
+    private static final String FX_BORDER_RADIUS = "-fx-background-radius: 15px";
+
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -39,7 +46,19 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        dialog.setStyle(FX_BACKGROUND_COLOR_WHITE + " " + FX_BORDER_RADIUS);
+        dialog.setPadding(new Insets(5));
+        dialog.setFont(Font.font("Verdana"));
+        dialog.setAlignment(Pos.TOP_RIGHT);
+
+        // Make the profile picture a circle
+        Circle clip = new Circle();
+        clip.setCenterX(50.0f);
+        clip.setCenterY(50.0f);
+        clip.setRadius(45.0f);
+
         displayPicture.setImage(img);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -50,6 +69,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
