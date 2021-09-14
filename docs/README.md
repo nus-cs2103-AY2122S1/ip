@@ -1,7 +1,7 @@
 # Cygnus User Guide
 
 Cygnus is a __chatbot__ for __task management__. It supports creation of three types of 
-tasks: _Deadlines_, _Events_, and _ToDos_. These tasks can be marked as done or 
+tasks: _deadlines_, _events_, and _todos_. These tasks can be marked as done or 
 deleted. The list of tasks is maintained locally and is __saved between uses of
 Cygnus__. This list can be filtered by keyword or to show upcoming deadlines.
 
@@ -15,6 +15,7 @@ Cygnus__. This list can be filtered by keyword or to show upcoming deadlines.
 ## Commands
 
 ### Summary
+
 Action | Format
 -------|-------
 __Create deadline__ | `deadline DEADLINE_INFO /by DDMMYY`
@@ -25,6 +26,7 @@ __Set task done__ | `done TASK_NUMBER`
 __Delete task__ | `delete TASK_NUMBER`
 __List matching tasks__ | `find KEYWORD`
 __List upcoming deadlines__ | `upcoming`
+__Refer user to user guide__ | `help`
 
 ### Creating a deadline: `deadline`
 
@@ -64,7 +66,7 @@ Format: `todo TODO_INFO`
 
 Usage example: `todo Revise OOP`
 
-Expected outcome: 
+Expected outcome - an incomplete todo is created: 
 ```
 Got it. I've added this task:
 [T][ ] Revise OOP
@@ -78,14 +80,15 @@ Format: `list`
 
 Usage example: `list`
 
-Expected outcome: 
+Expected outcome - all tasks are displayed: 
 
 ```
 Here are the tasks in your list:
-1. [D][X] iP | by: Wed 15 Sep 2021
-2. [D][ ] CS2100 Tutorial | by: 16 Sep 2021
-3. [D][ ] CS2100 Lab | by: 16 Sep 2021
+1. [D][ ] iP | by: Wed 15 Sep 2021
+2. [D][ ] CS2100 Tutorial | by: Thu 16 Sep 2021
+3. [D][ ] CS2100 Lab | by: Thu 16 Sep 2021
 4. [E][ ] Dinner | at: Sun 26 Sep 2021 06:30PM
+5. [T][ ] Revise OOP
 ```
 
 ### Setting a task as done: `done`
@@ -94,16 +97,13 @@ Sets a task as done.
 
 Format: `done TASK_NUMBER`
 
-Usage example: `done 2`
+Usage example: `done 1`
 
-Expected outcome: 
+Expected outcome - the specified task is set as done: 
 
 ```
-Here are the tasks in your list:
-1. [D][X] iP | by: Wed 15 Sep 2021
-2. [D][X] CS2100 Tutorial | by: 16 Sep 2021
-3. [D][ ] CS2100 Lab | by: 16 Sep 2021
-4. [E][ ] Dinner | at: Sun 26 Sep 2021 06:30PM
+Nice! I've marked this task as done:
+ [D][X] iP | by: Wed 15 Sep 2021
 ```
 
 ### Deleting a task: `delete`
@@ -112,15 +112,13 @@ Deletes a task.
 
 Format: `delete TASK_NUMBER`
 
-Usage example: `delete 4`
+Usage example: `delete 2`
 
-Expected outcome: 
+Expected outcome - the specified task is deleted: 
 
 ```
-Here are the tasks in your list:
-1. [D][X] iP | by: Wed 15 Sep 2021
-2. [D][X] CS2100 Tutorial | by: 16 Sep 2021
-3. [D][ ] CS2100 Lab | by: 16 Sep 2021
+Noted. I've deleted this task: 
+ [D][ ] CS2100 Tutorial | by: Thu 16 Sep 2021
 ```
 
 ### List all tasks matching a keyword: `find`
@@ -131,12 +129,11 @@ Format: `find KEYWORD`
 
 Usage example: `find CS2100`
 
-Expected outcome: 
+Expected outcome - the matching tasks are displayed: 
 
 ```
 Here are the tasks in your list:
-1. [D][X] CS2100 Tutorial | by: 16 Sep 2021
-2. [D][ ] CS2100 Lab | by: 16 Sep 2021
+1. [D][ ] CS2100 Lab | by: Thu 16 Sep 2021
 ```
 
 ### List all upcoming deadlines: `upcoming`
@@ -147,8 +144,21 @@ Format: `upcoming`
 
 Usage example: `upcoming`
 
-Expected outcome:
+Expected outcome - all upcoming incomplete deadlines are displayed:
 ```
 Here are the tasks in your list:
-1. [D][ ] CS2100 Lab | by: 16 Sep 2021
+1. [D][ ] CS2100 Lab | by: Thu 16 Sep 2021
+```
+
+### Refer user to user guide: `help`
+
+Refers user to this page.
+
+Format: `help`
+
+Usage example: `help`
+
+Expected outcome - a link to this page is displayed:
+```
+Refer to https://jyrw.github.io/ip/ for a full list of commands.
 ```
