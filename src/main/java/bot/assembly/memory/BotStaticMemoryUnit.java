@@ -5,7 +5,16 @@ package bot.assembly.memory;
  */
 public class BotStaticMemoryUnit {
 
-    public final String MESSAGE_GREETING = "Hallo! My name's Peter!\nHow may I be of service to you?";
+    public final String MESSAGE_GREETING = "Hallo! My name's Peter!\nHow may I be of service to you?\n\nBelow are all the command formats to follow:\n"
+            + "\ntodo taskDesc"
+            + "\ndeadline taskDesc /by 2021-09-15T18:00:59"
+            + "\nevent taskDesc /at 2021-09-15T18:00:59"
+            + "\ndelete Index"
+            + "\ndone Index"
+            + "\nfind ...keywords"
+            + "\nlist"
+            + "\nmassops delete"
+            + "\nmassops done";
     public final String MESSAGE_GOODBYE = "Good day! I'm gonna find Lois if you're not using me!";
     public final String MESSAGE_TASK_REPORT = "Here are all your tasks! No Procrastination!";
     public final String MESSAGE_TASK_COMPLETE = "Task Completed:";
