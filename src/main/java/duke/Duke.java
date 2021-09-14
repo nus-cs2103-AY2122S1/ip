@@ -67,7 +67,7 @@ public class Duke {
     public String getResponse(String userInput) {
         while (true) {
             try {
-                Command command = Parser.parse(userInput);
+                Command command = Parser.parse(userInput.trim());
 
                 switch (command.getCommand()) {
                 case BYE:

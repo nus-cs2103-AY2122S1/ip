@@ -2,6 +2,7 @@ package duke.io;
 
 import java.util.Scanner;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.io.Command.CommandName;
 
@@ -61,7 +62,7 @@ public class Parser {
             return parseFind(userInput);
         } else {
             // Unknown command
-            throw new DukeException(("I'm sorry, but I don't know what that means :-("));
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -91,7 +92,14 @@ public class Parser {
      * @param userInput A line of characters from the user
      * @return A command representing the DONE command
      */
-    protected static Command parseDone(String userInput) {
+    protected static Command parseDone(String userInput) throws DukeException {
+        if (userInput.length() == 4) {
+            throw new DukeException("A Done command should be accompanied by the index of the Task to mark as done.");
+        } else if (!userInput.startsWith("done ")) {
+            // If it does not start with "done " after trimming, it is an invalid word
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+
         int index = Integer.parseInt(userInput.substring(5));
         return new Command(CommandName.DONE, new String[]{String.valueOf(index)});
     }
@@ -102,7 +110,14 @@ public class Parser {
      * @param userInput A line of characters from the user
      * @return A command representing the DELETE command
      */
-    protected static Command parseDelete(String userInput) {
+    protected static Command parseDelete(String userInput) throws DukeException {
+        if (userInput.length() == 6) {
+            throw new DukeException("A Delete command should be accompanied by the index of the Task to delete.");
+        } else if (!userInput.startsWith("delete ")) {
+            // If it does not start with "done " after trimming, it is an invalid word
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+
         int index = Integer.parseInt(userInput.substring(7));
         return new Command(CommandName.DELETE, new String[]{String.valueOf(index)});
     }
