@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private static final String MESSAGE_WELCOME = "Hello, welcome to DukePro!\n" +
+    private static final String MESSAGE_WELCOME = "Hello, welcome to QuestPro!\n" +
             "Press 'help' for more commands.";
 
     @FXML

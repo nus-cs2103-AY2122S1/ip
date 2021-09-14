@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private static final String WINDOW_TITLE = "DukePro";
+    private static final String WINDOW_TITLE = "QuestPro";
 
     private Duke duke = new Duke();
 
