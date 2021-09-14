@@ -71,7 +71,11 @@ public class TaskList {
     public String[] deleteTask(int i) throws InvalidTaskNumberException {
         Task task = getTask(i);
         boolean removed = tasks.remove(task);
-        return new String[] {"I have deleted this task:", "    " + task.toString()};
+        return new String[] {
+            "I have deleted this task:",
+            "    " + task.toString(),
+            String.format("Now you have %d tasks in the list.", tasks.size())
+        };
     }
 
     /**
