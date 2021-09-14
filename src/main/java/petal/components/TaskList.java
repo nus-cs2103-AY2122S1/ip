@@ -25,7 +25,7 @@ public class TaskList {
     public enum Action {
         TASK_ADD,
         TASK_DELETE,
-        TASK_ARCHIVE;
+        TASK_ARCHIVE
     }
 
     /**
