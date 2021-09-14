@@ -37,6 +37,15 @@ public class Task {
     }
 
     /**
+     * Gets the completion status of the Task.
+     *
+     * @return True if task is completed or False if it is not completed.
+     */
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    /**
      * Converts the task's information into a string.
      * To be stored in the user's dedicated txt file.
      *
