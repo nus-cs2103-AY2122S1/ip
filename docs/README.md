@@ -64,7 +64,7 @@ Format: `done [index shown by the list command]`
 Example:
 * `done 2`
 
-## Deleting a task: `delete`
+### Deleting a task: `delete`
 
 Deletes a task from the list of tasks.
 
@@ -73,7 +73,7 @@ Format: `delete [index shown by the list command]`
 Example:
 * `delete 1`
 
-## Finding a task in the list: `find`
+### Finding a task in the list: `find`
 
 Finds a task in the task list which contains the **EXACT** keyword. If the keyword is `books`,
 it will find tasks with descriptions that at least contain the keyword `books`.
