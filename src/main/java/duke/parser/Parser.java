@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 import duke.command.AddCommand;
@@ -39,20 +40,28 @@ public class Parser {
         return new Todo(description);
     }
 
-    private static LocalDate parseDateOfDeadline(String[] splitInput) {
-        String by = splitInput[1];
-        String[] splitDateTime = by.split(" ");
-        return LocalDate.parse(splitDateTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
+    private static LocalDate parseDateOfDeadline(String[] splitInput) throws DukeException {
+        try {
+            String by = splitInput[1];
+            String[] splitDateTime = by.split(" ");
+            return LocalDate.parse(splitDateTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The date must be in d/M/yyyy format");
+        }
     }
 
-    private static LocalTime parseTimeOfDeadline(String[] splitInput) {
-        LocalTime time = null;
-        String by = splitInput[1];
-        String[] splitDateTime = by.split(" ");
-        if (splitDateTime.length == 2) {
-            time = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+    private static LocalTime parseTimeOfDeadline(String[] splitInput) throws DukeException {
+        try {
+            LocalTime time = null;
+            String by = splitInput[1];
+            String[] splitDateTime = by.split(" ");
+            if (splitDateTime.length == 2) {
+                time = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+            }
+            return time;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The time must be in HHmm format (e.g., 2359).");
         }
-        return time;
     }
 
     /**
@@ -77,20 +86,28 @@ public class Parser {
         return new Deadline(description, parseDateOfDeadline(splitInput), parseTimeOfDeadline(splitInput));
     }
 
-    private static LocalDate parseDateOfEvent(String[] splitInput) {
-        String dayTime = splitInput[1];
-        String[] splitDateTime = dayTime.split(" ");
-        return LocalDate.parse(splitDateTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
+    private static LocalDate parseDateOfEvent(String[] splitInput) throws DukeException {
+        try {
+            String dayTime = splitInput[1];
+            String[] splitDateTime = dayTime.split(" ");
+            return LocalDate.parse(splitDateTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The date must be in d/M/yyyy format");
+        }
     }
 
-    private static LocalTime parseTimeOfEvent(String[] splitInput) {
-        String dayTime = splitInput[1];
-        String[] splitDateTime = dayTime.split(" ");
-        LocalTime time = null;
-        if (splitDateTime.length == 2) {
-            time = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+    private static LocalTime parseTimeOfEvent(String[] splitInput) throws DukeException {
+        try {
+            String dayTime = splitInput[1];
+            String[] splitDateTime = dayTime.split(" ");
+            LocalTime time = null;
+            if (splitDateTime.length == 2) {
+                time = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+            }
+            return time;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The time must be in HHmm format (e.g., 2359).");
         }
-        return time;
     }
 
     /**
