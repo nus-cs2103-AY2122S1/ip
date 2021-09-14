@@ -45,7 +45,8 @@ public class DialogBox extends HBox {
         dialog.setText(text); // Set the given text into the dialog box
         dialog.setPadding(new Insets(10, 10, 10, 10));
 
-        boolean isAnErrorMessage = dialog.getText().equals(Ui.EMPTY_TODO_DESCRIPTION) ||
+        boolean isAnErrorMessage =
+                dialog.getText().equals(Ui.EMPTY_TODO_DESCRIPTION) ||
                 dialog.getText().equals(Ui.EMPTY_DEADLINE_DESCRIPTION) ||
                 dialog.getText().equals(Ui.INCOMPLETE_DEADLINE) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_DEADLINE_TIME) ||
@@ -54,7 +55,10 @@ public class DialogBox extends HBox {
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS) ||
                 dialog.getText().equals(Ui.UNRECOGNISED_COMMAND) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_DATE) ||
-                dialog.getText().equals(Ui.WRONGLY_FORMATTED_NOTE);
+                dialog.getText().equals(Ui.WRONGLY_FORMATTED_NOTE) ||
+                dialog.getText().equals(Ui.INVALID_INDEX) ||
+                dialog.getText().equals(Ui.EMPTY_TASK_DELETE) ||
+                dialog.getText().equals(Ui.EMPTY_NOTE_DELETE);
         
         if (isAnErrorMessage) {
             //Error message to be displayed in brown to alert user
