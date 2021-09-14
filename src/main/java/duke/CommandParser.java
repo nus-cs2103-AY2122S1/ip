@@ -34,7 +34,7 @@ public class CommandParser {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
-     * Check if a string input represents an exit command
+     * Checks if a string input represents an exit command
      *
      * @param commandString string input
      * @return true if <code>commandString</code> represents an exit command, else false
@@ -44,7 +44,7 @@ public class CommandParser {
     }
 
     /**
-     * Parse a string input into a corresponding command
+     * Parses a string input into a corresponding command
      *
      * @param commandString string input
      * @return the corresponding command

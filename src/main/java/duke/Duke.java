@@ -56,11 +56,6 @@ public class Duke {
         return "Yo, I'm Xiri.\nHow can I help you?\nType `help` to see all available commands";
     }
 
-    /**
-     * The main method. A Duke instance is instantiated and run.
-     *
-     * @param args the command line arguments (ignored)
-     */
     public static void main(String[] args) {
         new Duke().run();
     }
