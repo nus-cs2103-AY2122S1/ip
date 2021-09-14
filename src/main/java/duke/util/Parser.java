@@ -42,7 +42,7 @@ public class Parser {
      * @throws DukeException If there is/are missing or invalid argument(s).
      */
     public static Command parse(String fullCommand) throws DukeException {
-        String[] commandComponents = fullCommand.split(" ");
+        String[] commandComponents = fullCommand.trim().split(" ");
         String command = commandComponents[0];
 
         // Command arguments
