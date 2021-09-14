@@ -11,7 +11,7 @@
       <Circle fx:id="avatarImageFrame" fill="#feffff" radius="54.0" stroke="#e5e5ea" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" />
         <Label fx:id="dialogLabel" graphicTextGap="6.0" maxHeight="-Infinity" minHeight="-Infinity" style="-fx-border-color: #e5e5ea; -fx-border-width: 2; -fx-border-radius: 5;" text="Label" textOverrun="WORD_ELLIPSIS" wrapText="true">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font>
          <HBox.margin>
             <Insets />

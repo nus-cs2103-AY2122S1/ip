@@ -29,7 +29,7 @@ public class TaskFindListMessage extends Message {
             listMessageBuilder
                     .append("\n")
                     .append(index + 1)
-                    .append(".")
+                    .append(". ")
                     .append(tasks.get(index).toString());
         }
         return listMessageBuilder.toString();
