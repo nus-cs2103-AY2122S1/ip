@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,12 +9,15 @@ import java.time.format.DateTimeFormatter;
  * "deadline <deadline name> /by <deadline date>".
  *
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements GeneralCommand {
     protected boolean isDone;
     private final String DEADLINE = "[D]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     /**
      * Constructs a deadline.
@@ -25,6 +29,32 @@ public class Deadline extends Task {
         super(description);
         this.isDone = false;
         this.dateAndTime = dateAndTime;
+    }
+
+    /**
+     * Constructs a deadline.
+     *
+     * @param command Parsed command.
+     * @param storage Storage to be updated.
+     * @param tasks TaskList of current tasks.
+     * @param ui Ui to return String.
+     * @throws DukeException If deadline command is empty.
+     */
+    public Deadline(String command, Storage storage, TaskList tasks, Ui ui) throws DukeException {
+        super(command);
+        String desc = command.substring(8);
+
+        if (desc.isEmpty()) {
+            throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
+        }
+        assert desc.substring(1).length() > 0 : "Description should be present";
+
+        int escapeIndex = command.lastIndexOf("/");
+        this.description = command.substring(9, escapeIndex - 1);
+        this.storage = storage;
+        this.tasks = tasks;
+        this.ui = ui;
+        this.dateAndTime = command.substring(escapeIndex + 4);
     }
 
     /**
@@ -63,6 +93,11 @@ public class Deadline extends Task {
                 + localDateTime.format(dtf) + ")";
     }
 
+    /**
+     * Returns new Task with the same description as this, but an opposite status.
+     *
+     * @return Copy of this task object.
+     */
     @Override
     public Task getToggledDone() {
         Deadline toggledDeadline = new Deadline(description, dateAndTime);
@@ -86,5 +121,18 @@ public class Deadline extends Task {
             return deadline.isDone == this.isDone && deadline.description.equals(this.description);
         }
         return false;
+    }
+
+    /**
+     * Executes Deadline and returns a String to be printed.
+     *
+     * @return String to be printed on Gui.
+     * @throws IOException If an input or output operation is failed or interpreted.
+     */
+    @Override
+    public String execute() throws IOException {
+        tasks.add(this);
+        storage.save(tasks);
+        return ui.taskMessageToString(this, tasks);
     }
 }

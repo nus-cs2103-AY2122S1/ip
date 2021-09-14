@@ -28,6 +28,15 @@ public class Event extends Task implements GeneralCommand {
         this.dateAndTime = dateAndTime;
     }
 
+    /**
+     * Constructs an event.
+     *
+     * @param command Parsed command.
+     * @param storage Storage to be updated.
+     * @param tasks TaskList of current tasks.
+     * @param ui Ui to return String.
+     * @throws DukeException If event command is empty.
+     */
     public Event(String command, Storage storage, TaskList tasks, Ui ui) throws DukeException {
         super(command);
         this.storage = storage;
@@ -108,6 +117,12 @@ public class Event extends Task implements GeneralCommand {
         return false;
     }
 
+    /**
+     * Executes Event and returns a String to be printed.
+     *
+     * @return String to be printed on Gui.
+     * @throws IOException If an input or output operation is failed or interpreted.
+     */
     @Override
     public String execute() throws IOException {
         tasks.add(this);

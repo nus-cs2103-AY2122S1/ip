@@ -119,20 +119,9 @@ public class Parser {
             return new Delete(index, tasks, storage, ui).execute();
         }
         case DEADLINE: {
-            String desc = command.substring(8);
-
-            if (desc.isEmpty()) {
-                throw new DukeException("deadline", "'deadline return book /by 2021-08-27 14:15'");
-            }
-            assert desc.substring(1).length() > 0 : "Description should be present";
-
+            Deadline deadline = new Deadline(command, storage, tasks, ui);
             setNewLists(storage, tasks, ui);
-            int escapeIndex = command.lastIndexOf("/");
-            String dateAndTime = command.substring(escapeIndex + 4);
-            Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
-            tasks.add(deadline);
-            storage.save(tasks);
-            return ui.taskMessageToString(deadline, tasks);
+            return deadline.execute();
         }
         case FIND: {
             TaskList matchingTasks = new TaskList();

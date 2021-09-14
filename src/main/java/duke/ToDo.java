@@ -53,6 +53,11 @@ public class ToDo extends Task implements GeneralCommand {
         return TODO + this.getStatusIcon() + " " + this.getDescription();
     }
 
+    /**
+     * Returns new Task with the same description as this, but an opposite status.
+     *
+     * @return Copy of this task object.
+     */
     @Override
     public Task getToggledDone() {
         ToDo toggledTodo = new ToDo(description);
