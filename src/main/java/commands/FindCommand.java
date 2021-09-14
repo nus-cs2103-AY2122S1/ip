@@ -38,17 +38,17 @@ public class FindCommand extends Command {
     /**
      * Returns a list of tasks containing the specified keyword.
      * @param tasks The existing list of tasks.
+     * @param storage The storage object to store task data.
      * @return The list of tasks containing the specified keyword.
+     * @throws MorganException If there is no matching task found.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
         assert tasks != null && storage != null;
         TaskList foundTasks = tasks.findTasks(keyTerm);
         boolean isMatchingTaskFound = !foundTasks.isEmpty();
         if (!isMatchingTaskFound) {
-
             throw new MorganException(NOT_FOUND_ERROR);
         }
-
         String output = "Here are the matching tasks in your list:\n";
         output += foundTasks.toString();
         return output;

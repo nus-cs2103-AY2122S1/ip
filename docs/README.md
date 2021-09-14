@@ -6,7 +6,7 @@ speed and convenience in managing your day-to-day tasks.
 Equipped with a simple Graphical User Interface (GUI), 
 Morgan is optimized for use via a Command Line Interface (CLI).
 
-![image](Ui.png)
+![image](Ui.png) 
 
 Download Morgan [here](https://github.com/jennibearduit/ip/releases) 
 and you'll never have to worry about missing a single deadline!

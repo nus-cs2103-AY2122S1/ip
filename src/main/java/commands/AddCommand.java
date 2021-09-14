@@ -15,7 +15,9 @@ public abstract class AddCommand extends Command {
     /**
      * Add a task to the task list.
      * @param tasks The existing list where the task will be added to.
+     * @param storage The storage object to store task data.
      * @return The completion message after execution.
+     * @throws MorganException If input format is invalid.
      */
     public String execute(TaskList tasks, Storage storage) throws MorganException {
         assert tasks != null && storage != null;

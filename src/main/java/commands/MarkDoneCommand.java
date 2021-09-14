@@ -40,6 +40,7 @@ public class MarkDoneCommand extends Command {
     /**
      * Mark a task as done.
      * @param tasks The existing list where the task is.
+     * @param storage The storage object to store task data.
      * @return The completion message after execution.
      * @throws MorganException If input format is invalid.
      */
