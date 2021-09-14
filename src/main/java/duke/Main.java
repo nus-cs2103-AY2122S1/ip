@@ -13,11 +13,9 @@ import duke.exceptions.DukeDataLoadException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import duke.ui.Ui;
 
 public class Main extends Application {
 
@@ -43,6 +41,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.getIcons().add(new Image("/images/DaUser.png"));
+            stage.setTitle("Notaro");
             fxmlLoader.<duke.ui.MainWindow>getController().setDuke(DUKE);
             stage.show();
 
