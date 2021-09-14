@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import exception.InvalidCommandFormatException;
-import exception.InvalidDateTimeException;
+import exception.InvalidDateTimeFormatException;
 import exception.InvalidFormatInStorageException;
 import exception.InvalidNumOfStringPartsException;
 import parser.CommandParser;
@@ -34,11 +34,11 @@ public class DeadlineTask extends Task {
      *
      * @param description Description including action and deadline information.
      * @return Deadline task.
-     * @throws InvalidDateTimeException If the description has an invalid datetime format.
+     * @throws InvalidDateTimeFormatException If the description has an invalid datetime format.
      * @throws InvalidCommandFormatException If the description has an invalid format.
      */
     public static DeadlineTask createTask(String description)
-            throws InvalidDateTimeException, InvalidCommandFormatException {
+            throws InvalidDateTimeFormatException, InvalidCommandFormatException {
         try {
             String[] actionAndDateTimeDescriptions = CommandParser.splitStringBySplitter(
                     description, SPLITTER_ACTION_TIME);
@@ -123,7 +123,7 @@ public class DeadlineTask extends Task {
             LocalTime time = DateTimeParser.changeTimeStringToTime(dateTimeDescriptions[1], timeFormat);
 
             return new DeadlineTask(actionDescription, isDone, date, time);
-        } catch (InvalidDateTimeException | InvalidNumOfStringPartsException e) {
+        } catch (InvalidDateTimeFormatException | InvalidNumOfStringPartsException e) {
             String expectedFormat = String.format("[ ] <description> %s %s %s",
                     SPLITTER_ACTION_TIME, dateFormat, timeFormat);
             throw new InvalidFormatInStorageException(description, expectedFormat);

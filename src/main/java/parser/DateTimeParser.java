@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import exception.InvalidDateTimeException;
+import exception.InvalidDateTimeFormatException;
 
 /**
  * Encapsulates a parser for date time.
@@ -17,16 +17,16 @@ public class DateTimeParser {
      * @param dateString Date string.
      * @param dateFormat Format of date string.
      * @return `LocalDate`.
-     * @throws InvalidDateTimeException If there is an error parsing a string to a date.
+     * @throws InvalidDateTimeFormatException If there is an error parsing a string to a date.
      */
     public static LocalDate changeDateStringToDate(String dateString, String dateFormat)
-            throws InvalidDateTimeException {
+            throws InvalidDateTimeFormatException {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
 
         try {
             return LocalDate.parse(dateString, dateFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("Date", dateFormat);
+            throw new InvalidDateTimeFormatException("Date", dateFormat);
         }
     }
 
@@ -36,16 +36,16 @@ public class DateTimeParser {
      * @param timeString Time string.
      * @param timeFormat Format of time string.
      * @return `LocalTime`.
-     * @throws InvalidDateTimeException If there is an error parsing a string to a time.
+     * @throws InvalidDateTimeFormatException If there is an error parsing a string to a time.
      */
     public static LocalTime changeTimeStringToTime(String timeString, String timeFormat)
-            throws InvalidDateTimeException {
+            throws InvalidDateTimeFormatException {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(timeFormat);
 
         try {
             return LocalTime.parse(timeString, timeFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException("Time", timeFormat);
+            throw new InvalidDateTimeFormatException("Time", timeFormat);
         }
     }
 

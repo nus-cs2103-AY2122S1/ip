@@ -3,9 +3,10 @@ package tasklist;
 import java.util.Arrays;
 
 import exception.InvalidCommandFormatException;
-import exception.InvalidDateTimeException;
+import exception.InvalidDateTimeFormatException;
 import exception.InvalidFormatInStorageException;
 import exception.InvalidTaskTypeException;
+import exception.InvalidTimePeriodException;
 import type.CommandTypeEnum;
 import type.TaskIconTypeEnum;
 
@@ -38,10 +39,14 @@ public abstract class Task {
      * @return `Task`.
      * @throws InvalidTaskTypeException If the type of task is not recognised.
      * @throws InvalidCommandFormatException If the command is incorrectly formatted.
-     * @throws InvalidDateTimeException If there is an invalid date time.
+     * @throws InvalidDateTimeFormatException If there is an invalid date time.
+     * @throws InvalidTimePeriodException If the start time is after the end time.
      */
-    public static Task createTask(String description, CommandTypeEnum commandType)
-            throws InvalidTaskTypeException, InvalidCommandFormatException, InvalidDateTimeException {
+    public static Task createTask(String description, CommandTypeEnum commandType) throws
+            InvalidTaskTypeException,
+            InvalidCommandFormatException,
+            InvalidDateTimeFormatException,
+            InvalidTimePeriodException {
         switch (commandType) {
         case TODO:
             return TodoTask.createTask(description);

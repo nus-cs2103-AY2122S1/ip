@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import exception.InvalidCommandFormatException;
-import exception.InvalidDateTimeException;
+import exception.InvalidDateTimeFormatException;
 import exception.InvalidFormatInStorageException;
 import exception.InvalidNumOfStringPartsException;
+import exception.InvalidTimePeriodException;
 import parser.CommandParser;
 import parser.DateTimeParser;
 import type.CommandTypeEnum;
@@ -36,11 +37,14 @@ public class EventTask extends Task {
      *
      * @param description Description including action, date and time information.
      * @return Event task.
-     * @throws InvalidDateTimeException If the description has an invalid datetime format.
+     * @throws InvalidDateTimeFormatException If the description has an invalid datetime format.
      * @throws InvalidCommandFormatException If the description has an invalid format.
+     * @throws InvalidTimePeriodException If the start time is after the end time.
      */
-    public static EventTask createTask (String description)
-            throws InvalidDateTimeException, InvalidCommandFormatException {
+    public static EventTask createTask (String description) throws
+            InvalidDateTimeFormatException,
+            InvalidCommandFormatException,
+            InvalidTimePeriodException {
         try {
             String[] actionAndTimeDescriptions = CommandParser.splitStringBySplitter(
                     description,
@@ -59,6 +63,7 @@ public class EventTask extends Task {
                     dateTimeDescriptions[1], TimeFormatTypeEnum.INPUT.toString());
             LocalTime endTime = DateTimeParser.changeTimeStringToTime(
                     dateTimeDescriptions[2], TimeFormatTypeEnum.INPUT.toString());
+            validateStartTimeBeforeOrAtEndTime(startTime, endTime);
 
             return new EventTask(actionDescription, false, date, startTime, endTime);
         } catch (InvalidNumOfStringPartsException e) {
@@ -131,7 +136,7 @@ public class EventTask extends Task {
             LocalTime endTime = DateTimeParser.changeTimeStringToTime(dateTimeDescriptions[2], timeFormat);
 
             return new EventTask(actionDescription, isDone, date, startTime, endTime);
-        } catch (InvalidNumOfStringPartsException | InvalidDateTimeException e) {
+        } catch (InvalidNumOfStringPartsException | InvalidDateTimeFormatException e) {
             String expectedFormat = String.format("[ ] <description> %s %s %s",
                     SPLITTER_ACTION_TIME, dateFormat, timeFormat);
             throw new InvalidFormatInStorageException(description, expectedFormat);
@@ -161,5 +166,12 @@ public class EventTask extends Task {
         }
 
         return this.endTime.equals(eventTask.endTime);
+    }
+
+    private static void validateStartTimeBeforeOrAtEndTime(LocalTime startTime, LocalTime endTime)
+            throws InvalidTimePeriodException {
+        if (startTime.compareTo(endTime) > 0) {
+            throw new InvalidTimePeriodException();
+        }
     }
 }

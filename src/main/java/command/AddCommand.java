@@ -3,8 +3,9 @@ package command;
 import exception.DuplicateTaskException;
 import exception.ErrorAccessingFileException;
 import exception.InvalidCommandFormatException;
-import exception.InvalidDateTimeException;
+import exception.InvalidDateTimeFormatException;
 import exception.InvalidTaskTypeException;
+import exception.InvalidTimePeriodException;
 import exception.MissingCommandDescriptionException;
 import message.Message;
 import tasklist.Task;
@@ -46,16 +47,18 @@ public class AddCommand extends Command {
      * @return Message representing the command is executed.
      * @throws InvalidTaskTypeException If the task type is not valid.
      * @throws ErrorAccessingFileException If there is an error accessing the storage file.
-     * @throws InvalidDateTimeException If a task meant to contain time information has an invalid datetime format.
+     * @throws InvalidDateTimeFormatException If a task meant to contain datetime has an invalid datetime format.
      * @throws DuplicateTaskException If there is an attempt to add a duplicate task.
      * @throws InvalidCommandFormatException If the task has an incorrect format.
+     * @throws InvalidTimePeriodException If the start time is after the end time.
      */
     public Message execute(TaskList list) throws
             InvalidTaskTypeException,
             ErrorAccessingFileException,
-            InvalidDateTimeException,
+            InvalidDateTimeFormatException,
             DuplicateTaskException,
-            InvalidCommandFormatException {
+            InvalidCommandFormatException,
+            InvalidTimePeriodException {
         Task task = addTask(list);
         Message message = getOutputMessage(list, task);
         return message;
@@ -63,10 +66,11 @@ public class AddCommand extends Command {
 
     private Task addTask(TaskList list) throws
             InvalidTaskTypeException,
-            InvalidDateTimeException,
+            InvalidDateTimeFormatException,
             DuplicateTaskException,
             ErrorAccessingFileException,
-            InvalidCommandFormatException {
+            InvalidCommandFormatException,
+            InvalidTimePeriodException {
         Task task = Task.createTask(this.description, this.commandType);
 
         list.validateTaskNotDuplicate(task);
