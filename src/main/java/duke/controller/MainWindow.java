@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
@@ -36,8 +37,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/horse.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pug.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/winnie.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
 
     public MainWindow(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

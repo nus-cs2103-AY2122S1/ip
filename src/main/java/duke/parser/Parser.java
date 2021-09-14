@@ -169,7 +169,7 @@ public class Parser {
     private boolean checkDescriptionIsValid(String description, String pre, String task)
             throws TaskNoDateTimeException, TaskNoNameException, InvalidDescriptionException, MissingPreException {
 
-        boolean hasPreposition = description.contains("pre");
+        boolean hasPreposition = description.contains(pre);
         boolean hasNameOrDateTime = !description.equals("") && !description.equals(pre);
         boolean isMissingName = description.startsWith(pre);
         boolean isMissingDateTime = description.endsWith(pre);
