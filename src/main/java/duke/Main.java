@@ -12,6 +12,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private static final String TITLE = "Laa-Laa Bot";
+    private static final boolean IS_RESIZABLE = false;
 
     private Duke duke = new Duke();
 
@@ -22,6 +24,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle(TITLE);
+            stage.setResizable(IS_RESIZABLE);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
