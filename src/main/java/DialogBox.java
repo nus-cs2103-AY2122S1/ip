@@ -49,13 +49,11 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialogBox = new DialogBox(text, img);
-        userDialogBox.setStyle("-fx-background-color: lavender;");
         return userDialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: lightblue;");
         db.flip();
         return db;
     }
