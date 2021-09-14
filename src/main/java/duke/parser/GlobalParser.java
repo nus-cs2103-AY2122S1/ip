@@ -5,7 +5,14 @@ import java.util.Map;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Represents a global parser to parse all commands in the application.
+ */
 public class GlobalParser extends CommandParser<Command> {
+
+    /**
+     * Constructs a global parser class and registers all parsers.
+     */
     public GlobalParser() {
         super(null);
         registerParsers(

@@ -3,7 +3,6 @@ package duke.parser;
 import java.util.Map;
 
 import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
 import duke.exception.DukeException;
 
 public class DeleteParser extends CommandParser<DeleteCommand> {
