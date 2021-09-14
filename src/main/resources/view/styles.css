@@ -11,4 +11,5 @@
 }
 #dialogContainer{
     -fx-padding: 10, 0, 0, 0;
+    -fx-background-color: linear-gradient(to bottom, #cdf9f9 5%, #8bafcf 100%);
 }
