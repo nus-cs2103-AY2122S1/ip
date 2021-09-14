@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -30,13 +29,16 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/avatar.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/robot-head.png"));
 
+    /**
+     * Initializes and show dialogue box for Duke's greetings.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Separator separator = new Separator();
-        separator.setPadding(new Insets(10, 0, 10, 0));
+        Insets insets = new Insets(20, 0, 0, 0);
+        dialogContainer.setPadding(insets);
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.greet(), dukeImage), separator);
+                DialogBox.getDukeDialog(Ui.greet(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -44,20 +46,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
+     * then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        Separator separator = new Separator();
-        Separator separator2 = new Separator();
-        separator.setPadding(new Insets(10, 0, 10, 0));
-        separator2.setPadding(new Insets(10, 0, 10, 0));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage), separator,
-                DialogBox.getDukeDialog(response, dukeImage), separator2
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
         if (input.equals("bye")) {

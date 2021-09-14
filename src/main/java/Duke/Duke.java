@@ -8,7 +8,7 @@ package duke;
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
-    private Parser parser;
+    private final Parser parser;
 
     /**
      * Constructs an instance of Duke.

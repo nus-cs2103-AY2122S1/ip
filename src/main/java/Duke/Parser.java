@@ -8,7 +8,6 @@ import duke.task.Task;
  */
 public class Parser {
     private final TaskList tasks;
-    private boolean isExit;
 
     /**
      * Constructs a parser class that parsers user input.
@@ -17,7 +16,6 @@ public class Parser {
      */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
-        this.isExit = false;
     }
 
     /**
@@ -49,7 +47,6 @@ public class Parser {
                 if (tokens.length > 1) {
                     throw new DukeException("Invalid command! Try again.");
                 }
-                this.isExit = true;
                 return Ui.bye();
             case "list":
                 if (tokens.length > 1) {
@@ -58,8 +55,6 @@ public class Parser {
                 return tasks.listToString();
             case "find":
                 return tasks.findTasks(userInput);
-            case "undo":
-
             default:
                 throw new DukeException("Invalid command! Try again.");
             }
@@ -71,13 +66,5 @@ public class Parser {
         tasks.addTask(newTask);
         return "You have added this following task to the list: \n" + newTask.toString() + "\n"
                 + "You have " + tasks.noOfTasks() + " tasks now.";
-    }
-    /**
-     * Return true if parser read user input of "bye".
-     *
-     * @return true if parser has exited else false
-     */
-    public boolean isExit() {
-        return this.isExit;
     }
 }

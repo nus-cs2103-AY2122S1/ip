@@ -50,19 +50,11 @@ public class Task {
      *
      * @return the string representation for storing in text file
      */
-    public String toStringSave() {
+    public String toEncodedString() {
         int completeBinary = 0;
         if (this.isComplete) {
             completeBinary = 1;
         }
         return "G" + " | " + completeBinary + " | " + this.taskDetails + " | ";
-    }
-
-    /**
-     * Returns TaskDetails
-     * @return taskDetails
-     */
-    public String getTaskDetails() {
-        return this.taskDetails;
     }
 }

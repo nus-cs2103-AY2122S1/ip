@@ -16,9 +16,9 @@ import duke.task.ToDo;
  * Storage saves tasks added by user and save it in a file as indicated by filepath.
  */
 public class Storage {
-    private static final int startOfTaskDes = 8;
-    private static final int taskTypeIndex = 0;
-    private static final int taskStatusIndex = 4;
+    private static final int START_OF_TASK_DES = 8;
+    private static final int TASK_TYPE_INDEX = 0;
+    private static final int TASK_STATUS_INDEX = 4;
     private final String filePath;
 
     /**
@@ -50,10 +50,10 @@ public class Storage {
     }
 
     private Event decodeEvent(String encodedEvent) {
-        int taskDescIdentifier = encodedEvent.indexOf('|', startOfTaskDes);
-        char taskStatus = encodedEvent.charAt(taskStatusIndex);
+        int taskDescIdentifier = encodedEvent.indexOf('|', START_OF_TASK_DES);
+        char taskStatus = encodedEvent.charAt(TASK_STATUS_INDEX);
         String date = encodedEvent.substring(taskDescIdentifier + 2);
-        String taskDesc = encodedEvent.substring(startOfTaskDes, taskDescIdentifier - 1);
+        String taskDesc = encodedEvent.substring(START_OF_TASK_DES, taskDescIdentifier - 1);
         Event event = new Event(taskDesc, date);
         if (taskStatus == '1') {
             event.completeTask();
@@ -62,10 +62,10 @@ public class Storage {
     }
 
     private Deadline decodeDeadline(String encodedDeadline) {
-        int taskDescIdentifier = encodedDeadline.indexOf('|', startOfTaskDes);
-        char taskStatus = encodedDeadline.charAt(taskStatusIndex);
+        int taskDescIdentifier = encodedDeadline.indexOf('|', START_OF_TASK_DES);
+        char taskStatus = encodedDeadline.charAt(TASK_STATUS_INDEX);
         String date = encodedDeadline.substring(taskDescIdentifier + 2);
-        String taskDesc = encodedDeadline.substring(startOfTaskDes, taskDescIdentifier - 1);
+        String taskDesc = encodedDeadline.substring(START_OF_TASK_DES, taskDescIdentifier - 1);
         Deadline deadline = new Deadline(taskDesc, date);
         if (taskStatus == '1') {
             deadline.completeTask();
@@ -74,9 +74,9 @@ public class Storage {
     }
 
     private ToDo decodeToDo(String encodeToDo) {
-        int taskDescIdentifier = encodeToDo.indexOf('|', startOfTaskDes);
-        char taskStatus = encodeToDo.charAt(taskStatusIndex);
-        String taskDesc = encodeToDo.substring(startOfTaskDes, taskDescIdentifier - 1);
+        int taskDescIdentifier = encodeToDo.indexOf('|', START_OF_TASK_DES);
+        char taskStatus = encodeToDo.charAt(TASK_STATUS_INDEX);
+        String taskDesc = encodeToDo.substring(START_OF_TASK_DES, taskDescIdentifier - 1);
         ToDo toDo = new ToDo(taskDesc);
         if (taskStatus == '1') {
             toDo.completeTask();
@@ -93,7 +93,7 @@ public class Storage {
             Scanner s = new Scanner(initStorageFile());
             while (s.hasNext()) {
                 String line = s.nextLine();
-                char taskType = line.charAt(taskTypeIndex);
+                char taskType = line.charAt(TASK_TYPE_INDEX);
                 if (taskType == 'E') {
                     Event event = decodeEvent(line);
                     tasks.addTask(event);

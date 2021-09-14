@@ -19,7 +19,7 @@ public class TaskList {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
     /**
-     * Add task to list.
+     * Adds task to list.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     /**
-     * Delete all tasks specified by userInput and return string message for deleting tasks,
+     * Deletes all tasks specified by userInput and return string message for deleting tasks,
      * else return error message if done command is not properly formatted.
      *
      * @param userInput the index of the task in list
@@ -182,14 +182,14 @@ public class TaskList {
     public List<String> encodeTasks() {
         ArrayList<String> encodedTasks = new ArrayList<>();
         for (Task task : tasks) {
-            encodedTasks.add(task.toStringSave());
+            encodedTasks.add(task.toEncodedString());
         }
         return encodedTasks;
     }
 
 
     /**
-     * Return string representation of the tasks matching the searched description,
+     * Returns string representation of the tasks matching the searched description,
      * if searching description is empty, it will throw an error.
      *
      * @param userInput user input String

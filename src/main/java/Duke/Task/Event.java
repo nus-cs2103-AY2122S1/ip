@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A Event-type Task consisting of event details, day and time.
+ * A Event-type Task is a task consisting of event details, day and time.
  */
 public class Event extends Task {
     private static final DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -43,7 +43,7 @@ public class Event extends Task {
      * @return the string representation for storing in text file
      */
     @Override
-    public String toStringSave() {
+    public String toEncodedString() {
         int completeBinary = 0;
         if (this.isComplete) {
             completeBinary = 1;

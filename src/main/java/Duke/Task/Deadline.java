@@ -41,7 +41,7 @@ public class Deadline extends Task {
      * @return the string representation for storing in text file
      */
     @Override
-    public String toStringSave() {
+    public String toEncodedString() {
         int completeBinary = 0;
         if (this.isComplete) {
             completeBinary = 1;

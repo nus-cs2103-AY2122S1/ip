@@ -1,16 +1,11 @@
 package duke;
 
-import java.util.Scanner;
 
 /**
  * Ui for Duke.
  */
 public class Ui {
-    private final Scanner myScanner;
 
-    public Ui() {
-        this.myScanner = new Scanner(System.in);
-    }
     /**
      * Prints greeting text of the robotFriend.
      */
