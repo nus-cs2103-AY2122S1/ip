@@ -29,8 +29,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the string based on a user's input.
+     *
+     * @param input user input string in the application.
+     * @return string response based on what the user input.
      */
     public String getResponse(String input) {
         assert(input != null);

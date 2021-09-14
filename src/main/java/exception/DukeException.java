@@ -9,6 +9,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructs a new DukeException.
+     *
      * @param message error message to be shown.
      */
     public DukeException(String message) {
@@ -18,6 +19,7 @@ public class DukeException extends Exception {
 
     /**
      * Returns a string description of exception.
+     *
      * @return a string description of exception.
      */
     @Override

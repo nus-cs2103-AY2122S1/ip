@@ -55,6 +55,10 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Retrieves the tag's name as a string.
+     * @return
+     */
     public String getTagName() {
         return this.tagName;
     }

@@ -222,6 +222,7 @@ public class Ui {
 
     /**
      * Displays all the tasks with the keywords.
+     *
      * @param taskList the list containing filtered tasks.
      */
     public void displayFilteredTasks(List<Task> taskList) {
@@ -241,6 +242,7 @@ public class Ui {
 
     /**
      * Displays all the tasks with the keywords.
+     *
      * @param taskList the list containing filtered tasks.
      * @return response showing all the tasks in the list that fit the filter criteria.
      */
