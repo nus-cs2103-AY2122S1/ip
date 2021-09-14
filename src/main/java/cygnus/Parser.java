@@ -49,6 +49,8 @@ public class Parser {
         String firstWordOfInput = inputStringArray[0];
         if (inputStringArray.length == 1) {
             switch (firstWordOfInput) {
+            case "help":
+                return "Refer to https://jyrw.github.io/ip/ for a full list of commands.";
             case "list":
                 return tasks.getAllTasksString();
             case "done":
