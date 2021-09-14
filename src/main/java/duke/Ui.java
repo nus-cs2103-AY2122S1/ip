@@ -39,8 +39,9 @@ public class Ui {
      * @param input The input to be shown.
      */
     public void showInput(String input) {
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(input, userImage));
+        DialogBox dialog = DialogBox.getUserDialog(input, userImage);
+        dialog.setUserId();
+        dialogContainer.getChildren().add(dialog);
     }
 
     /**
@@ -48,7 +49,7 @@ public class Ui {
      */
     public void greetUser() {
         String greetMessage = "Hello! I'm Saitama\nI do 100 sit-ups, 100 push-ups,"
-                + " 100 squats and a 10 kilometer run every day! No cap";
+                + " 100 squats \nand a 10 kilometer run every day! No cap";
         this.formatMessage(greetMessage);
     }
 

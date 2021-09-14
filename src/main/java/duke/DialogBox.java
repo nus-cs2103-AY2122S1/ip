@@ -58,4 +58,8 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    public void setUserId() {
+        this.dialog.setId("userDialog");
+    }
 }
