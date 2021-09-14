@@ -1,7 +1,7 @@
 User Guide
 ---
 
-Duke is  a **desktop app for keep tracking of tasks ranging from task types such as todo, event and deadline.**
+duke is  a **desktop app for keep tracking of tasks ranging from task types such as todo, event and deadline.**
 
 ## Features 
 
@@ -40,7 +40,7 @@ Mark task/s as done by task number/s which is based on the order of task added.
 Format: `done TASK_NUMBER..`
 
 ### Saving the data
-By default, Duke automatically saved and store the tasks at `/data/Duke.txt`.
+By default, duke automatically saved and store the tasks at `/data/duke.txt`.
 
 ### Exiting: `bye`
 

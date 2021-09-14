@@ -37,7 +37,7 @@ public class Storage {
      * @return File to write
      */
     private File initStorageFile() {
-        String dirName = filePath.split("/duke.txt")[0];
+        String dirName = filePath.split("/Duke.txt")[0];
         File directory = new File(dirName);
         directory.mkdir();
         File storageFile = new File(filePath);
