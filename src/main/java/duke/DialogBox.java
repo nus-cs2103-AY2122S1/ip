@@ -21,14 +21,14 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String USER_SPEECH_BUBBLE_CLASS = "user-speech-bubble";
+
     @FXML
     private HBox speechBubble;
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private static final String USER_SPEECH_BUBBLE_CLASS = "user-speech-bubble";
 
     private DialogBox(String text, Image img) {
         try {

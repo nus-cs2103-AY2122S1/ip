@@ -1,7 +1,9 @@
 <h1 align="center">Nee</h1>
-<h3 align="center">A JavaFX-Powered Task Manager App</h3>
+<h3 align="center">A JavaFX Pocket Task Manager</h3>
 
+<p align="center"><a href="https://app.travis-ci.com/github/rebeccacxy/ip" target="_blank"><img src="https://app.travis-ci.com/rebeccacxy/ip.svg?branch=master" alt="Travis Build Status"/></a>&nbsp
 
+<p align="center"><img src="docs/Ui.png" width="70%"/></p>
 
 ## Setting up in Intellij
 

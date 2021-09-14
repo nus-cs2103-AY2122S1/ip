@@ -48,14 +48,12 @@
     -fx-background-color: derive(-fx-base, 50%);
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-border-width:5;
 }
 
 .user-speech-bubble {
-    -fx-background-color: green;
+    -fx-background-color: #3a6ea2;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-border-width:5;
 }
 
 .window-top-bar {

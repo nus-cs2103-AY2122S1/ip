@@ -6,8 +6,8 @@ public class Ui {
     private static final String LINE = "\t_________________________________________________\n";
     private static final String GREET = "Hi, my name is Nee ´･ᴗ･`. How can I help you?";
     private static final String EXIT = "Goodbye!~";
-    private static final String HELP = "Supported commands:\n" +
-            "todo, deadline, event, done, delete, find, list, bye, undo";
+    private static final String HELP = "Supported commands:\n"
+            + "todo, deadline, event, done, delete, find, list, bye, undo";
 
     private final Scanner sc;
 

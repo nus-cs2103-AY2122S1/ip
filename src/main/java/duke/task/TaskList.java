@@ -213,6 +213,9 @@ public class TaskList {
         return FIND + "\n" + res;
     }
 
+    /**
+     * Adds a task list to the stack of task lists.
+     */
     public void addToStack() {
         // Make a deep copy of task list
         ArrayList<Task> newList = new ArrayList<>(tasks);
@@ -253,5 +256,4 @@ public class TaskList {
         res.append(tasks.size() + ".\t" + tasks.get(tasks.size() - 1));
         return UNDO + "\n" + res;
     }
-
 }
