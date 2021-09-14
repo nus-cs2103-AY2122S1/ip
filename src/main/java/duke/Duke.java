@@ -25,8 +25,8 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        assert new File(filePath).exists();
         tasks = new TaskList(storage.loadFile());
+        assert new File(filePath).exists();
     }
 
     public String getFarewellMessage() {
