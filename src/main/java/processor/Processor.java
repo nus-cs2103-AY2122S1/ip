@@ -30,7 +30,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Process command implementation based on the type.
+     * Processes command implementation based on the type.
      *
      * @param command Type of command.
      * @param arguments Other arguments for the command.
@@ -74,7 +74,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Process command implementation ith type DEFAULT.
+     * Processes command implementation ith type DEFAULT.
      *
      * @param arguments List of arguments related to the command.
      * @return Response from the chatbot.
@@ -130,7 +130,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Process command implementation with type LIST.
+     * Processes command implementation with type LIST.
      *
      * @return Response from the chatbot.
      */
@@ -141,7 +141,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Process command implementation with type DONE.
+     * Processes command implementation with type DONE.
      *
      * @param index Index that specify which Task is done.
      * @return Response from the chatbot.
@@ -164,7 +164,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Process command implementation with type DELETE.
+     * Processes command implementation with type DELETE.
      *
      * @param index Index that specify which tASK
      * @return Response from the chatbot.
@@ -188,7 +188,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Process command implementation with type BYE.
+     * Processes command implementation with type BYE.
      *
      * @return Response from the chatbot.
      */
@@ -199,6 +199,11 @@ public class Processor implements IProcessor {
         return response;
     }
 
+    /**
+     * Processes the Bye command.
+     *
+     * @return String to be shown to the user.
+     */
     @Override
     public String processBye() {
         String response = "Bye. Please meet me again later!";
@@ -206,6 +211,11 @@ public class Processor implements IProcessor {
         return response;
     }
 
+    /**
+     * Processes the undo command.
+     *
+     * @return String to be shown to the user.
+     */
     @Override
     public String processUndo() {
         storage.undo();
