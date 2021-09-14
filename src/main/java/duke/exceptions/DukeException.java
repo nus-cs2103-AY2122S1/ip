@@ -6,7 +6,7 @@ package duke.exceptions;
  * Exception class which deals with invalid input or errors.
  */
 public class DukeException extends Exception {
-    private ExceptionType type;
+    private final ExceptionType type;
 
     /**
      * Constructor that stores the ErrorMessage encountered in Duke programme.
