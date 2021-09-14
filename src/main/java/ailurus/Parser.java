@@ -118,8 +118,8 @@ public class Parser {
         TaskList newList = new TaskList();
         for (int i = 0; i < tasks.length(); i++) {
             Task task = tasks.getTask(i);
-            String desc = task.getDescription();
-            if (desc.contains(match)) {
+            String desc = task.getDescription().toUpperCase();
+            if (desc.contains(match.toUpperCase())) {
                 newList.addTask(task);
             }
         }
