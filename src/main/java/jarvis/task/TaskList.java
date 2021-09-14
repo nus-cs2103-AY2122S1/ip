@@ -52,15 +52,19 @@ public class TaskList {
     }
 
     /**
-     * Adds an event with given description and event time
+     * Adds an event with given description and event time.
      *
-     * @param eventDescription The event description
-     * @param eventTime The event time
+     * @param eventDescription The event description.
+     * @param eventDate The event date.
+     * @param eventStartTime The event start time.
+     * @param eventEndTime The event end time.
      * @return The new Event object
+     * @throws InvalidDateTimeInputException If there is an error parsing the date and time.
      */
-    public Event addEvent(String eventDescription, String eventTime) {
+    public Event addEvent(String eventDescription, String eventDate, String eventStartTime, String eventEndTime)
+            throws InvalidDateTimeInputException {
         addToVersionHistory();
-        Event event = new Event(eventDescription, eventTime);
+        Event event = new Event(eventDescription, eventDate, eventStartTime, eventEndTime);
         taskList.add(event);
         return event;
     }

@@ -61,7 +61,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
 
         while (s.hasNextLine()) {
-            String[] readLine = s.nextLine().split(";;;", 4);
+            String[] readLine = s.nextLine().split(";;;");
             if (readLine.length < 3) {
                 throw new StorageFileException("Storage file has improper format!");
             }
@@ -78,7 +78,7 @@ public class Storage {
                 task = new Deadline(readLine[2], readLine[3]);
                 break;
             case "E":
-                task = new Event(readLine[2], readLine[3]);
+                task = new Event(readLine[2], readLine[3], readLine[4], readLine[5]);
                 break;
             default:
                 throw new InvalidStorageTaskException();
