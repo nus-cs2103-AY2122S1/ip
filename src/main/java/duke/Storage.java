@@ -58,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Scan and parse commands from cache to edit a TaskList.
+     * Scans and parses commands from cache to edit a TaskList.
      *
      * @param cache File containing previous commands.
      * @param tasks TaskList to be edited.
@@ -89,7 +89,7 @@ public class Storage {
     }
 
     /**
-     * Create the file for the cache.
+     * Creates the file for the cache.
      *
      * @param cache Path where cache will be stored.
      * @throws DukeException if cache file cannot be created.
@@ -106,7 +106,7 @@ public class Storage {
     }
 
     /**
-     * Write a command to the cache.
+     * Writes a command to the cache.
      *
      * @param command String representation of a command.
      * @throws DukeException if FileWriter fails to append to cache.

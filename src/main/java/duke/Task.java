@@ -14,7 +14,7 @@ public class Task {
     protected TaskType category;
     private final String description;
     private final LocalDate time;
-    private boolean completed;
+    private boolean isCompleted;
 
     /**
      * Constructs a Task with a specified time.
@@ -25,14 +25,14 @@ public class Task {
     public Task(String description, LocalDate time) {
         this.description = description;
         this.time = time;
-        completed = false;
+        isCompleted = false;
     }
 
     /**
      * Marks a task as completed.
      */
     public void setCompleted() {
-        completed = true;
+        isCompleted = true;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Task {
      * @return A string representing status of task.
      */
     private String getStatus() {
-        return "[" + (completed ? "X" : " ") + "]";
+        return "[" + (isCompleted ? "X" : " ") + "]";
     }
 
     /**

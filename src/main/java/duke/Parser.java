@@ -23,30 +23,45 @@ public class Parser {
      *
      * @param command String representation of command.
      * @return An array of message strings.
-     * @throws DukeException Thrown when an invalid command is given.
+     * @throws DukeException If an invalid command is given.
      */
     public String[] parseCommand(String command) throws DukeException {
-        if (command.equals("bye")) {
+        switch(getFirstWord(command)) {
+        case "bye":
             return parseByeCommand();
-        } else if (command.equals("list")) {
+        case "list":
             return parseListCommand();
-        } else if (command.startsWith("find ")) {
+        case "find":
             return parseFindCommand(command);
-        } else if (command.startsWith("schedule ")) {
+        case "schedule":
             return parseScheduleCommand(command);
-        } else if (command.startsWith("done ")) {
+        case "done":
             return parseDoneCommand(command);
-        } else if (command.startsWith("delete ")) {
+        case "delete":
             return parseDeleteCommand(command);
-        } else if (command.startsWith("todo")) {
+        case "todo":
             return parseTodoCommand(command);
-        } else if (command.startsWith("deadline")) {
+        case "deadline":
             return parseDeadlineCommand(command);
-        } else if (command.startsWith("event")) {
+        case "event":
             return parseEventCommand(command);
-        } else {
+        default:
             return parseUnknownCommand();
         }
+    }
+
+    /**
+     * Retrieves the first word of a command.
+     *
+     * @param command Command as string.
+     * @return String representing first word.
+     */
+    private String getFirstWord(String command) {
+        int index = command.indexOf(' ');
+        if (index == -1) {
+            return command;
+        }
+        return command.substring(0, index);
     }
 
     /**
@@ -72,9 +87,13 @@ public class Parser {
      *
      * @param command Input from user.
      * @return String array of matching tasks.
+     * @throws DukeException If query not specified properly.
      */
-    private String[] parseFindCommand(String command) {
+    private String[] parseFindCommand(String command) throws DukeException {
         int cutOffIndex = "find ".length();
+        if (command.length() <= cutOffIndex) {
+            throw new DukeException("Invalid find command! Use find [search query]!");
+        }
         return tasks.findMatchingTasks(command.substring(cutOffIndex));
     }
 
@@ -83,10 +102,13 @@ public class Parser {
      *
      * @param command Input from user.
      * @return String array of matching tasks.
-     * @throws DukeException if date cannot be parsed.
+     * @throws DukeException If command not formatted properly.
      */
     private String[] parseScheduleCommand(String command) throws DukeException {
         int cutOffIndex = "schedule ".length();
+        if (command.length() <= cutOffIndex) {
+            throw new DukeException("Invalid schedule command!");
+        }
         return tasks.getSchedule(parseTimeString(command.substring(cutOffIndex)));
     }
 
@@ -95,10 +117,13 @@ public class Parser {
      *
      * @param command Input from user.
      * @return Affirmation of completion of task.
-     * @throws DukeException If index out of range.
+     * @throws DukeException If index out of range or not specified properly.
      */
     private String[] parseDoneCommand(String command) throws DukeException {
         int cutOffIndex = "done ".length();
+        if (command.length() <= cutOffIndex) {
+            throw new DukeException("Invalid done command!");
+        }
         return tasks.markTask(Integer.parseInt(command.substring(cutOffIndex)) - 1);
     }
 
@@ -107,10 +132,13 @@ public class Parser {
      *
      * @param command Input from user.
      * @return Affirmation of deletion of task.
-     * @throws DukeException If index out of range.
+     * @throws DukeException If index out of range or not specified properly.
      */
     private String[] parseDeleteCommand(String command) throws DukeException {
         int cutOffIndex = "delete ".length();
+        if (command.length() <= cutOffIndex) {
+            throw new DukeException("Invalid delete command!");
+        }
         return tasks.deleteTask(Integer.parseInt(command.substring(cutOffIndex)) - 1);
     }
 
@@ -119,7 +147,7 @@ public class Parser {
      *
      * @param command Input from user.
      * @return Affirmation of todo created.
-     * @throws DukeException if invalid description.
+     * @throws DukeException if invalid description given.
      */
     private String[] parseTodoCommand(String command) throws DukeException {
         int cutOffIndex = "todo ".length();
@@ -155,7 +183,7 @@ public class Parser {
      * Parses an event command.
      * @param command Input from user.
      * @return Affirmation of event created.
-     * @throws DukeException if invalid description or time.
+     * @throws DukeException If invalid description or time.
      */
     private String[] parseEventCommand(String command) throws DukeException {
         int cutOffIndex = "event ".length();

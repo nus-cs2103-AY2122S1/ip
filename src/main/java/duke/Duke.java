@@ -17,7 +17,7 @@ public class Duke {
     }
 
     /**
-     * Initialize the Duke program
+     * Initializes the Duke program
      *
      * @return A string describing the response.
      */
