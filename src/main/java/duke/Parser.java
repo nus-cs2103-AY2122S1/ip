@@ -181,26 +181,26 @@ public class Parser {
         case "done":
             int taskNum = Parser.taskNumber(action);
             String oldDescription = taskList.getIndividualTask(taskNum - 1).toString();
-            taskList.completeTask(taskNum); //todo
-            Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription); //todo
+            taskList.completeTask(taskNum);
+            Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription);
             return Response.showCompletedMessage(taskList.getIndividualTask(taskNum - 1));
         case "todo":
         case "deadline":
         case "event":
             Task task = identifyType(action);
-            taskList.addTask(task); //todo
+            taskList.addTask(task);
             Storage.addData(writer, identifyType(action));
             return Response.showAddedTask(task, taskList.getLength());
         case "list":
-            taskList.listItems(); //todo
+            taskList.listItems();
             return Response.showList(taskList);
         case "bye":
             return Response.showGoodbyeMessage();
         case "delete":
             int num = Parser.taskNumber(action);
             Task taskToDelete = taskList.getIndividualTask(num - 1);
-            Storage.markAsDeleted(file, taskToDelete); //todo
-            taskList.deleteTask(num); //todo
+            Storage.markAsDeleted(file, taskToDelete);
+            taskList.deleteTask(num); 
             return Response.showSuccessfulDelete(taskToDelete, taskList.getLength());
         case "find":
             String keyword = getKeyword(action);
