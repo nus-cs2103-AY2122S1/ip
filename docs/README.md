@@ -10,7 +10,7 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
   * [Todos](#todo--add-todo-tasks)
   * [List](#list--view-all-tasks)
   * [Done](#done--mark-tasks-as-done)
-  * [Dlete](#delete--delete-tasks)
+  * [Delete](#delete--delete-tasks)
   * [Find](#find--search-for-a-task)
   * [Undo](#undo--undo-a-previous-change)
   * [Bye](#bye--exits-the-programme)
