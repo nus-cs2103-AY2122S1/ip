@@ -12,9 +12,7 @@ Bruh is a **chatbot assistant for task management, optimized for use via a Comma
 
 ## Usage
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo Do Homework`.
@@ -29,9 +27,7 @@ Bruh is a **chatbot assistant for task management, optimized for use via a Comma
 
   Otherwise, it is treated as a plaintext string.
 
-- 
 
-</div>
 
 ### Adding a to-do task: `todo`
 
