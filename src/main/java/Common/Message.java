@@ -24,4 +24,8 @@ public class Message {
                 "\nI am the Genie & I can do lots of things. " +
                 "\nTo find out what I can do, say help.";
     }
+    
+    public static final String WELCOMEMESSAGE = "HELLOOOO Aladdin! I am the Genie. \n" +
+            "What can I do for you today?\n " +
+            "Say 'help' and I can show you what I can do.";
 }
