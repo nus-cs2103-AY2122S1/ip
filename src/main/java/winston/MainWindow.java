@@ -23,13 +23,13 @@ public class MainWindow extends AnchorPane {
 
     private Winston winston;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/tracer.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/tracer.png"));
     private final Image winstonImage = new Image(this.getClass().getResourceAsStream("/images/winston.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.welcomeMessage(), winstonImage));
+        dialogContainer.getChildren().add(DialogBox.getWinstonDialog(Ui.welcomeMessage(), winstonImage));
     }
 
     public void setWinston(Winston d) {
@@ -43,11 +43,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = winston.getResponse(input, winston);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, winstonImage)
-        );
-        userInput.clear();
+        if (!input.equals("")) {
+            String response = winston.getResponse(input, winston);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getWinstonDialog(response, winstonImage)
+            );
+            userInput.clear();
+        }
     }
 }

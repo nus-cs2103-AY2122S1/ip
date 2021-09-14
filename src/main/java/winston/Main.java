@@ -21,7 +21,10 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("/css/stylesheet.css");
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Winston");
             fxmlLoader.<MainWindow>getController().setWinston(winston);
             stage.show();
         } catch (IOException e) {
