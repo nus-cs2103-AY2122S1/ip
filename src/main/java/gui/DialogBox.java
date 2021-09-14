@@ -13,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+
+// @@author Jeffry Lum
+// Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+// with minor modifications
 
 /**
  * An example of a custom control using FXML.
@@ -36,6 +41,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        Circle clip = new Circle(35, 35, 35);
+        displayPicture.setClip(clip);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
