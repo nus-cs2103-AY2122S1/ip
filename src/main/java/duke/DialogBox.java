@@ -57,12 +57,17 @@ public class DialogBox extends HBox {
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_NOTE);
         
         if (isAnErrorMessage) {
-            dialog.setStyle("-fx-text-fill: BROWN; -fx-background-color: SKYBLUE;");
+            //Error message to be displayed in brown to alert user
+            dialog.setStyle("-fx-text-fill: CRIMSON; -fx-background-color: LIGHTBLUE;");
         } else {
-            dialog.setStyle("-fx-background-color: SKYBLUE;");
+            dialog.setStyle("-fx-background-color: LIGHTBLUE;");
         }
 
         displayPicture.setImage(img); // Set the given image into the dialog box and display it
+
+        if (dialog.getText().equals(Ui.BYE)) {
+            Main.end();
+        }
     }
 
     /**
