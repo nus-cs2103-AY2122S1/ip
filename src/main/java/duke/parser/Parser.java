@@ -1,15 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
-import duke.command.UpdateCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.FindCommandWordSuppliedException;
 import duke.exception.IncorrectCommandWordException;
@@ -57,6 +48,9 @@ public class Parser {
         if (checkCommandWordWithCommand(commandWord, FindCommand.COMMAND_WORD)) {
             throwFindExceptionIfLengthDoesNotMatch(words);
             return new FindCommand(taskList, words[1]);
+        }
+        if (checkCommandWordWithCommand(commandWord, HelpCommand.COMMAND_WORD)) {
+            return new HelpCommand(taskList);
         }
         if (checkCommandWordWithCommand(commandWord, ExitCommand.COMMAND_WORD)) {
             return new ExitCommand(taskList);

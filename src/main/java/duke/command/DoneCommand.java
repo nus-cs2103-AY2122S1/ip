@@ -14,6 +14,10 @@ public class DoneCommand extends Command {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "done";
 
+    public static final String DESCRIPTION = "Complete a task from the taskList";
+
+    public static final String FORMAT = COMMAND_WORD + " id_of_task_to_be_completed";
+
     /** The id of the task to marked as completed from the list. */
     private final int taskId;
 
@@ -25,6 +29,10 @@ public class DoneCommand extends Command {
     public DoneCommand(TaskList taskList, int taskId) {
         super(taskList);
         this.taskId = taskId;
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     /**

@@ -5,6 +5,7 @@ import duke.exception.IncorrectEventParameterException;
 import duke.exception.TimedTaskDateInputException;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TimedTask;
 import duke.tasklist.TaskList;
 
 /**
@@ -14,6 +15,15 @@ public class EventCommand extends Command implements TaskListAddable {
 
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "event";
+
+    public static final String DESCRIPTION = "Add an event task and specify the date to complete it by.";
+
+    public static final String FORMAT = COMMAND_WORD +
+            " name_here /at datetime_here (" +
+            TimedTask.TIMED_TASK_YEAR_FORMAT +
+            " " +
+            TimedTask.TIMED_TASK_TIME_FORMAT +
+            ")";
 
     /** The rest of the command input by the user passed on by duke*/
     private final String command;
@@ -26,6 +36,10 @@ public class EventCommand extends Command implements TaskListAddable {
     public EventCommand(TaskList taskList, String command) {
         super(taskList);
         this.command = command;
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     /**

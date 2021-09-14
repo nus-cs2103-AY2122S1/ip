@@ -5,6 +5,7 @@ import duke.exception.IncorrectDeadlineParameterException;
 import duke.exception.TimedTaskDateInputException;
 import duke.task.Deadline;
 import duke.task.Task;
+import duke.task.TimedTask;
 import duke.tasklist.TaskList;
 
 /**
@@ -14,6 +15,15 @@ public class DeadlineCommand extends Command implements TaskListAddable {
 
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "deadline";
+
+    public static final String DESCRIPTION = "Add a deadline task and specify the date to complete it by.";
+
+    public static final String FORMAT = COMMAND_WORD +
+            " name_here /by datetime_here (" +
+            TimedTask.TIMED_TASK_YEAR_FORMAT +
+            " " +
+            TimedTask.TIMED_TASK_TIME_FORMAT +
+            ")";
 
     /** The rest of the command input by the user passed on by duke*/
     private final String command;
@@ -47,6 +57,10 @@ public class DeadlineCommand extends Command implements TaskListAddable {
         String feedback = addTaskToTaskList(taskList, deadline);
         assert numOfTasks + 1 == taskList.size();
         return new CommandResult(feedback, false);
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     /**

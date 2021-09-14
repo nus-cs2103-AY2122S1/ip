@@ -11,6 +11,10 @@ public class FindCommand extends Command {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "find";
 
+    public static final String DESCRIPTION = "Find a task using a search string";
+
+    public static final String FORMAT = COMMAND_WORD + " the_search_string";
+
     /** The word to search by the user passed on by Duke*/
     private final String searchInput;
 
@@ -22,6 +26,10 @@ public class FindCommand extends Command {
     public FindCommand(TaskList taskList, String searchInput) {
         super(taskList);
         this.searchInput = searchInput;
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     /**

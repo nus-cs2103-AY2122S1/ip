@@ -13,6 +13,10 @@ public class DeleteCommand extends Command implements ListNumberPrintable {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "delete";
 
+    public static final String DESCRIPTION = "Delete a task from the taskList";
+
+    public static final String FORMAT = COMMAND_WORD + " id_of_task_to_be_deleted";
+
     /** The id of the task to delete from the list. */
     private final int taskId;
 
@@ -24,6 +28,10 @@ public class DeleteCommand extends Command implements ListNumberPrintable {
     public DeleteCommand(TaskList taskList, int taskId) {
         super(taskList);
         this.taskId = taskId;
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     /**

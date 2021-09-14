@@ -13,6 +13,8 @@ public abstract class TimedTask extends Task {
 
     public static final String TIMED_TASK_MONTH_FORMAT = "MMM d yyyy";
 
+    public static final String TIMED_TASK_TIME_FORMAT = "HH:mm";
+
     private final LocalDateTime dateTime;
 
     TimedTask(String name,

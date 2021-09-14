@@ -11,12 +11,20 @@ public class ListCommand extends Command {
     /** Class level constant that signifies the command used to invoke this. */
     public static final String COMMAND_WORD = "list";
 
+    public static final String DESCRIPTION = "List the tasks in your Task List";
+
+    public static final String FORMAT = COMMAND_WORD;
+
     /**
      * Constructor that creates ListCommand.
      * @param taskList The TaskList to be given by Duke.
      */
     public ListCommand(TaskList taskList) {
         super(taskList);
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     /**

@@ -12,6 +12,13 @@ public class UpdateCommand extends Command {
 
     public static final String COMMAND_WORD = "update";
 
+    public static final String DESCRIPTION = "Update a task.";
+
+    public static final String FORMAT = COMMAND_WORD +
+            "/i id_of_the_task " +
+            "/n new_name_of_task " +
+            "/d new_date_of_task";
+
     public static final String FEEDBACK_STRING = "I've updated this task in your list from\n";
 
     private final String commandStringParams;
@@ -31,6 +38,10 @@ public class UpdateCommand extends Command {
     public UpdateCommand(TaskList taskList, String commandStringParams) {
         super(taskList);
         this.commandStringParams = commandStringParams;
+    }
+
+    public static String formatAndDescription() {
+        return COMMAND_WORD + ": " + DESCRIPTION + "\n" + FORMAT;
     }
 
     public void setUpdatedName(String nameToUpdateTo) {
