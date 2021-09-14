@@ -1,5 +1,6 @@
 package cygnus;
 
+import cygnus.gui.Main;
 import javafx.application.Application;
 
 /**

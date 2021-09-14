@@ -1,4 +1,4 @@
-package cygnus;
+package cygnus.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -18,8 +18,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-
-import static javax.swing.text.StyleConstants.Background;
 
 /**
  * An example of a custom control using FXML.

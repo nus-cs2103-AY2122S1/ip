@@ -1,7 +1,8 @@
-package cygnus;
+package cygnus.gui;
 
 import java.io.IOException;
 
+import cygnus.Cygnus;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
