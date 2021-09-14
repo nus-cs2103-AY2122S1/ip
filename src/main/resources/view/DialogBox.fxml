@@ -12,7 +12,7 @@
          style="-fx-padding: 10; -fx-background-color: white; -fx-opacity: 0.8; -fx-border-color: orchid;
          -fx-border-style: solid inside;-fx-border-insets: 5;-fx-border-radius: 15px; -fx-font-family: Verdana;">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" style="-fx-padding: 20"/>
+        <Label fx:id="dialog" text="Label" wrapText="true" style="-fx-padding: 10"/>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
     </children>
     <padding>

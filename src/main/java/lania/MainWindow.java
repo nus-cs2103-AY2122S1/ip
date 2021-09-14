@@ -1,6 +1,8 @@
 package lania;
 
 import java.time.format.DateTimeParseException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -63,7 +65,9 @@ public class MainWindow extends AnchorPane {
             Command c = parser.parse(userInput.getText());
             String laniaText = c.execute(tasks, storage, ui, log);
             if (c instanceof ExitCommand) {
-                Platform.exit();
+                new Timer().schedule(new TimerTask() {
+                    public void run () { Platform.exit(); }
+                }, 5000);
             }
             generateDialog(input, laniaText, userImage, laniaImage);
         } catch (LaniaException e) {

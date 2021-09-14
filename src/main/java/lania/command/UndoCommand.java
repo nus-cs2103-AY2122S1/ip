@@ -33,14 +33,13 @@ public class UndoCommand extends Command {
         // checks the type of command of the most recent command
         // and does the corresponding actions
         if (command.equals("add")) {
-            System.out.println(tasks.size());
             Task deletedTask = tasks.remove(tasks.size());
             message = ui.showRemoveMessage(tasks, deletedTask);
         } else if (command.equals("delete")) {
             Pair<Task, Integer> removedTask = log.getDeletedTask();
             tasks.update(removedTask.getKey(), removedTask.getValue());
             message = ui.showUpdateMessage(tasks, removedTask.getKey());
-        } else if (command.equals("undo")) {
+        } else if (command.equals("done")) {
             int markedIndex = log.getMarkedTask();
             tasks.unComplete(markedIndex);
             message = ui.showIncompleteMessage(tasks, markedIndex - 1);
