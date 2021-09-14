@@ -20,7 +20,7 @@
 1. download [CLI](https://github.com/HolmesJJ/ip/releases/tag/v0.4) or [GUI](https://github.com/HolmesJJ/ip/releases/tag/v0.5) version.
 2. Open terminal.
 3. Use `cd` command to navigate to the directory of jar file.
-4. Enter `java -jar duke.jar` (Prerequisites: [jdk](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) installed).
+4. Enter `java -jar duke-cli.jar` for CLI or `java -jar duke-gui.jar` for GUI (Prerequisites: [jdk](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) installed).
 5. add your tasks.
 6. let it manage your tasks for you 😉
 
@@ -32,7 +32,7 @@ And it is **FREE!**
     1. [**`todo`**](#1.1): adds a todo task that without any date/time attached to it.
     2. [**`deadline`**](#1.2): adds a deadline task that need to be done before a specific date/time.
     3. [**`event`**](#1.3): adds an event task that start at a specific time and ends at a specific time.
-2. [**`list`**](#2): **lists** all tasks in the system.
+2. [**`list`**](#2): lists all tasks in the system.
 3. [**`done`**](#3): marks a task as done by task number of the full tasks list.
 4. [**`find`**](#4): lists all tasks by searching for a keyword.
 5. [**`coming`**](#5): lists all coming tasks within 3 hours.
