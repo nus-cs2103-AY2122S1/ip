@@ -4,7 +4,7 @@
 
 <div align = "center">
 
-# User Guide For WhoBot
+  <h1> User Guide For WhoBot </h1>
 
 </div>
 
