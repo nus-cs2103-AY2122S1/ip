@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 /**
@@ -45,6 +46,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        double radius = Math.max(displayPicture.getFitWidth(), displayPicture.getFitHeight()) / 2;
+        Circle clip = new Circle(radius);
+        clip.setCenterX(displayPicture.getFitWidth() / 2);
+        clip.setCenterY(displayPicture.getFitWidth() / 2);
+        displayPicture.setClip(clip);
     }
 
     /**
