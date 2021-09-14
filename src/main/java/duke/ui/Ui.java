@@ -26,6 +26,7 @@ public class Ui {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             primaryStage.show();
         } catch (IOException e) {
