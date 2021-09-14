@@ -11,17 +11,13 @@ public class ListCommand extends Command {
     /**
      * Displays a user's saved tasks and contacts.
      *
-     * @param tasks The list of tasks that a user has.
-     * @param ui The ui that sends InformationList as a string to the user.
+     * @param tasks   The list of tasks that a user has.
+     * @param ui      The ui that sends InformationList as a string to the user.
      * @param storage Not used for this command.
      * @return The message produced by ui.
      */
     @Override
     public String execute(InformationList tasks, Ui ui, Storage storage) {
-        if (tasks.getTotalSize() == 0) {
-            return ui.showMessage("You have no tasks saved!");
-        } else {
-            return ui.showTasks(tasks.searchTaskByKeyword("")) + ui.showContacts(tasks.searchContactByKeyword(""));
-        }
+        return ui.showTasks(tasks.searchTaskByKeyword("")) + ui.showContacts(tasks.searchContactByKeyword(""));
     }
 }

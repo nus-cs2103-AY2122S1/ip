@@ -5,7 +5,9 @@ package duke.data;
  */
 public class Ui {
     /** Statement to show the user upon exit */
-    private static final String MESSAGE_WELCOME = "Hello! I'm Duke\n" + "What can I do for you?";
+    private static final String MESSAGE_WELCOME = "Hello! I'm Cynthius\n"
+            + "What can I do for you?\n"
+            + "Type 'help' for the list of commands";
 
     /** Statement to show the user upon running Duke */
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
@@ -64,6 +66,9 @@ public class Ui {
      * @return A string of the user's saved task(s).
      */
     public static String showTasks(String tasks) {
+        if (tasks.isEmpty()) {
+            return showToUser("No tasks found!\n");
+        }
         return showToUser("Here are your tasks:\n" + tasks);
     }
 
@@ -74,6 +79,9 @@ public class Ui {
      * @return A string of the user's saved task(s).
      */
     public static String showContacts(String contacts) {
+        if (contacts.isEmpty()) {
+            return showToUser("No contacts found!\n");
+        }
         return showToUser("Here are your contacts:\n" + contacts);
     }
 }

@@ -20,7 +20,7 @@
                 <Insets right="10.0"/>
             </HBox.margin>
             <padding>
-                <Insets left="20.0" top="5.0" bottom="5.0"/>
+                <Insets left="10.0" top="5.0" bottom="5.0" right="5.0"/>
             </padding>
         </Label>
         <Circle fx:id="avatarIcon" fill="DODGERBLUE" radius="35.0" stroke="TRANSPARENT" strokeType="INSIDE">
