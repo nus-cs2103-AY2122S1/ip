@@ -25,3 +25,6 @@ T & 0 & buy books
 D & 0 &  1 & return book & 02/02/2019 0600
 T & 0 &  1 & buy milk
 E & 0 &  1 & meeting & 02/12/2020 1200
+D & 0 &  1 & return book & 02/02/2019 0600
+T & 0 &  1 & buy milk
+E & 0 &  1 & meeting & 02/12/2020 1200
