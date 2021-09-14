@@ -7,7 +7,7 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 * [Features](#features)
   * [Deadline](#deadline--add-deadline-tasks)
   * [Event](#event--add-event-tasks)
-  * [Todos](#todos--add-todo-tasks)
+  * [Todos](#todo--add-todo-tasks)
   * [List](#list--view-all-tasks)
   * [Done](#done--mark-tasks-as-done)
   * [Dlete](#delete--delete-tasks)
@@ -155,7 +155,7 @@ Delete task 1, 4 and 6: `delete 1 4 6`
 ![Delete](deleteExample.png)
 <br>
 <br>
-### `Find` : Seach for a task
+### `Find` : Search for a task
 
 Find a task in the task list whose name matches the provided keywords. The search is case insensetive but the order of the word matters.
 
