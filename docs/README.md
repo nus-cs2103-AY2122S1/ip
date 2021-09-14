@@ -14,6 +14,46 @@ Welcome to DukePro. This app houses Duke, a friendly chat bot who can help you m
 
 ## Features
 
+### Add and Delete tasks
+
+The user can add the following types of tasks:
+`todo` - a generic task
+`event` - a task that happens at a specific time
+`deadline` - a task that needs to be done before a specific time
+
+The user can also delete tasks.
+
+### Mark as done
+
+The user can mark tasks as done.
+
+### List all tasks
+
+The user can list all the existing tasks in their list of tasks.
+
+### Find a task
+
+The user can find tasks that contain a specific keyword.
+
+### Set a task to be started after another task/time
+
+The user can set a task that they want to start after another task or after a specified time.
+
+### List all tasks that should be started after a task/time
+
+The user can list all the tasks to be started after another task or a specified time.
+
+### Automatic save
+
+All the information changes will be stored immediately.
+
+### Automatic reload
+
+All the stored information will be loaded before the app starts.
+
+### Exit the app
+
+The user can exit the app with a command.
 
 
 ## Usage
@@ -118,9 +158,9 @@ Example: `delete 1`
 
 Expected Outcome:
 ```
-Here are the tasks in your list:
-1.[E][X] Final Exam (at: Nov 20 2021 09:00)
-2.[D][ ] Assignment (by: Nov 20 2021 12:00)
+Noted. I've removed this task:
+  [T][ ] Watching TV
+Now you have 2 task(s) in the list.
 ```
 
 
@@ -215,3 +255,15 @@ You need to do the following tasks:
 1.[E][X] Final Exam (at: Nov 20 2021 09:00)
 ```
 
+
+
+### `bye` - Quit the app
+
+Exits the app immediately.
+
+Format: `bye`
+
+Expected Outcome:
+```
+poof!
+```
