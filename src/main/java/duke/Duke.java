@@ -45,7 +45,7 @@ public class Duke {
             try {
                 if (parser.isList()) {
                     // Run based on list command
-                    ui.list(this.tasks);
+                    ui.listAll(this.tasks);
 
                     // Scan for next command
                     parser = new Parser(sc.nextLine());
@@ -135,7 +135,7 @@ public class Duke {
                     }
                 } else if (parser.isFind()) {
                     try {
-                        TaskList taskList = this.tasks.find(parser.secondPart());
+                        TaskList taskList = this.tasks.find(parser.getSecondPart());
                         ui.findTask(taskList);
 
                         parser = new Parser(sc.nextLine());

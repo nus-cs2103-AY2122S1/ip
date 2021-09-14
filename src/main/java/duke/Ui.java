@@ -44,9 +44,9 @@ public class Ui {
     /**
      * Displays the tasks in the TaskList.
      *
-     * @param tasklist TaskList to be displayed.
+     * @param taskList TaskList to be displayed.
      */
-    public void list(TaskList taskList) {
+    public void listAll(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         System.out.println(taskList);
     }
@@ -65,7 +65,7 @@ public class Ui {
      * Displays message that a task is added and also informs how many tasks are in the list after.
      *
      * @param task The task that is added.
-     * @param tasklist TaskList that the task is added to.
+     * @param taskList TaskList that the task is added to.
      */
     public void addTask(Task task, TaskList taskList) {
         int length = taskList.noOfTask();
@@ -79,7 +79,7 @@ public class Ui {
      * Displays message that a task is deleted and also informs how many tasks are in the list after.
      *
      * @param task The task that is deleted.
-     * @param tasklist TaskList that the task is deleted from.
+     * @param taskList TaskList that the task is deleted from.
      */
     public void deleteTask(Task task, TaskList taskList) {
         int length = taskList.noOfTask();
