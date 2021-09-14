@@ -103,20 +103,9 @@ public class Parser {
             return todo.execute();
         }
         case EVENT: {
-            String desc = command.substring(5);
-
-            if (desc.isEmpty()) {
-                throw new DukeException("event", "'event project meeting /at Aug 26 2021 19:15'");
-            }
-            assert desc.substring(1).length() > 0 : "Description should be present";
-
+            Event event = new Event(command, storage, tasks, ui);
             setNewLists(storage, tasks, ui);
-            int escapeIndex = command.lastIndexOf("/");
-            String dateAndTime = command.substring(escapeIndex + 4);
-            Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
-            tasks.add(event);
-            storage.save(tasks);
-            return ui.taskMessageToString(event, tasks);
+            return event.execute();
         }
         case DELETE: {
             int index;

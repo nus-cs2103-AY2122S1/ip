@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,11 +8,14 @@ import java.time.format.DateTimeFormatter;
  * Event class is a task. The input must be in such a format
  * "Event <event name> /at <event date>".
  */
-public class Event extends Task {
+public class Event extends Task implements GeneralCommand {
     private final String EVENT = "[E]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     /**
      * Constructs an event.
@@ -22,6 +26,22 @@ public class Event extends Task {
     public Event(String description, String dateAndTime) {
         super(description);
         this.dateAndTime = dateAndTime;
+    }
+
+    public Event(String command, Storage storage, TaskList tasks, Ui ui) throws DukeException {
+        super(command);
+        this.storage = storage;
+        this.tasks = tasks;
+        this.ui = ui;
+        String desc = command.substring(5);
+
+        if (desc.isEmpty()) {
+            throw new DukeException("event", "'event project meeting /at 2021-08-27 19:15'");
+        }
+        assert desc.substring(1).length() > 0 : "Description should be present";
+        int escapeIndex = command.lastIndexOf("/");
+        this.description = command.substring(6, escapeIndex - 1);
+        this.dateAndTime = command.substring(escapeIndex + 4);
     }
 
     /**
@@ -86,5 +106,12 @@ public class Event extends Task {
             return (event.getDone() == this.getDone()) && event.description.equals(this.description);
         }
         return false;
+    }
+
+    @Override
+    public String execute() throws IOException {
+        tasks.add(this);
+        storage.save(tasks);
+        return ui.taskMessageToString(this, tasks);
     }
 }
