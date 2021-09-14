@@ -9,7 +9,7 @@ public class InvalidDateTimeException extends DukeException {
      *
      * @param format Required datetime format.
      */
-    public InvalidDateTimeException(String format) {
-        super(String.format("Date/time should be in the form of <%s>", format));
+    public InvalidDateTimeException(String dateOrTime, String format) {
+        super(String.format("%s should be in the form of <%s>", dateOrTime, format));
     }
 }

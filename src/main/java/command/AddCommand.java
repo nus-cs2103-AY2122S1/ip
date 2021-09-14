@@ -83,7 +83,7 @@ public class AddCommand extends Command {
 
         int numOfTasks = list.getNumberOfTasks();
         String taskWord = numOfTasks == 1 ? "task" : "tasks";
-        String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
+        String suffix = String.format("Now you have %d %s in the entire list", list.getNumberOfTasks(), taskWord);
 
         return new Message(prefix, task.toString(), suffix);
     }

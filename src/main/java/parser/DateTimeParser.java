@@ -26,7 +26,7 @@ public class DateTimeParser {
         try {
             return LocalDate.parse(dateString, dateFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException(dateFormat);
+            throw new InvalidDateTimeException("Date", dateFormat);
         }
     }
 
@@ -45,7 +45,7 @@ public class DateTimeParser {
         try {
             return LocalTime.parse(timeString, timeFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException(timeFormat);
+            throw new InvalidDateTimeException("Time", timeFormat);
         }
     }
 
