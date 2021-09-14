@@ -47,7 +47,7 @@ public class Response {
      * @return The goodbye message.
      */
     public static String showGoodbyeMessage() {
-        return "     Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

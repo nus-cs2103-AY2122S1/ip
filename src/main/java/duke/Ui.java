@@ -13,8 +13,8 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String WELCOME_MESSAGE = "      Hello! I'm Duke, your personal task manager!\n"
-            + "      What can I do for you?";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke, your personal task manager!\n"
+            + "What can I do for you?";
 
     private static final String HELP_MESSAGE = "Add tasks by commands: todo, deadline, event\n"
             + "E.g. todo run, deadline hw /by yyyy-mm-dd {time}, event meeting /at {date and/or time}\n"
