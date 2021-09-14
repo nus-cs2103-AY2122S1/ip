@@ -66,7 +66,7 @@ public class Ui {
     }
 
     public static String printQueryFound(String query) {
-        String s = "These task contains the word: " + query;
+        String s = "These tasks contains the word: " + query;
         System.out.println(s);
         return s;
     }
