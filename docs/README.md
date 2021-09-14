@@ -1,6 +1,8 @@
 # User Guide
 Welcome to Nee, your pocket task manager!
 
+<br>
+
 ## Features 
 
 ### Help
