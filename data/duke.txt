@@ -1,4 +1,0 @@
-T|false|a thing
-D|false|task|19/12/2020 1800
-T|true|task lol
-T|true|task
