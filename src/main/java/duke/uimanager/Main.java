@@ -32,7 +32,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.getIcons().add(new Image("/images/icon.png"));
-            stage.setTitle("Duke. Your best task manager!");
+            stage.setTitle("Duke: Your best task manager!");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

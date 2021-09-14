@@ -18,9 +18,7 @@ Features:
 - [x] Managing tasks: deadline, event, todo. 
 - [x] Marking finished tasks.
 - [x] Deleting certain tasks.
-- [x] Searching certain tasks by key word or time.  
-- [ ] Recognizing time for tasks (Not all format supported)
-- [ ] Reminding users when ddl for certain task is approaching. (Coming soon)
+- [x] Searching certain tasks by keyword of time or taskInfo.
 
 ****
 If you Java programmer, you can use it to practice Java too. Here's the `main` method:
