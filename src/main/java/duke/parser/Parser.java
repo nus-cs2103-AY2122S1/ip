@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
@@ -83,8 +82,8 @@ public class Parser {
      * @param tasks The current list of tasks.
      * @param ui The current user interface.
      * @param storage The storage to store/load data from.
-     * @throws DukeException If there is a parsing error from the commands.
      * @return A String that contains the corresponding texts associated with the command.
+     * @throws DukeException If there is a parsing error from the commands.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String str;
@@ -164,8 +163,8 @@ public class Parser {
      *
      * @param tasks A TaskList object containing all user's tasks.
      * @param ui The current user interface by the user.
-     * @throws DukeException If task index is out of range.
      * @return A String that contains texts to be printed out by "done" command.
+     * @throws DukeException If task index is out of range.
      */
     public String doneCommand(TaskList tasks, Ui ui) throws DukeException {
         // format is "done x", for any positive integer x
@@ -187,8 +186,8 @@ public class Parser {
      *
      * @param tasks A TaskList object containing all user's tasks.
      * @param ui The current user interface by the user.
-     * @throws DukeException If task index is out of range.
      * @return A String that contains texts to be printed out by "delete" command.
+     * @throws DukeException If task index is out of range.
      */
     public String deleteCommand(TaskList tasks, Ui ui) throws DukeException {
         // format is "delete x", for any positive integer x
@@ -219,8 +218,8 @@ public class Parser {
     /**
      * Returns a Deadline object with the corresponding deadline item.
      *
-     * @throws DukeException If date or time is wrongly formatted.
      * @return A Deadline object.
+     * @throws DukeException If date or time is wrongly formatted.
      */
     public Deadline deadlineCommand() throws DukeException {
         try {
@@ -239,8 +238,8 @@ public class Parser {
     /**
      * Returns a Event object with the corresponding event item.
      *
-     * @throws DukeException If date or time is in the wrong format.
      * @return A Event object.
+     * @throws DukeException If date or time is in the wrong format.
      */
     public Event eventCommand() throws DukeException {
         try {
