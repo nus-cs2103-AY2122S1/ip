@@ -76,8 +76,4 @@ public class Duke extends Application {
         uiPane.showMessage("Hello boss. What would you like to do today?");
         uiPane.showTaskList(taskList.getTasks());
     }
-
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
 }
