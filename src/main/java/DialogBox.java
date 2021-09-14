@@ -7,11 +7,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  * An example of a custom control using FXML.
@@ -20,9 +28,13 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
+    @FXML
+    private TextFlow textFlow;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Button copyButton;
 
     /**
      * Constructs a dialog box.
@@ -30,7 +42,7 @@ public class DialogBox extends HBox {
      * @param text Text to show in dialog box.
      * @param img  Image to show in dialog box.
      */
-    public DialogBox(String text, Image img) {
+    public DialogBox(String text, Image img, Color color) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -42,7 +54,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 50));
+        displayPicture.setClip(new Circle(40, 40, 40));
+        textFlow.setBackground(new Background(new BackgroundFill(color, new CornerRadii(15), null)));
+
+        hideActions();
     }
 
     /**
@@ -53,7 +68,7 @@ public class DialogBox extends HBox {
      * @return A user dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, Color.POWDERBLUE);
     }
 
     /**
@@ -64,7 +79,7 @@ public class DialogBox extends HBox {
      * @return A duke dialog box.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, Color.PEACHPUFF);
         db.flip();
         return db;
     }
@@ -77,5 +92,33 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
+     * Shows actions for this dialog box.
+     */
+    @FXML
+    private void showActions() {
+        copyButton.setVisible(true);
+    }
+
+    /**
+     * Hides actions for this dialog box.
+     */
+    @FXML
+    private void hideActions() {
+        copyButton.setVisible(false);
+    }
+
+    /**
+     * Copies dialog text to clipboard.
+     */
+    @FXML
+    private void onClckCopy() {
+        System.out.println("click copy");
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent textContent = new ClipboardContent();
+        textContent.putString(this.dialog.getText());
+        clipboard.setContent(textContent);
     }
 }
