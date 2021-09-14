@@ -70,8 +70,8 @@ public class Storage {
                 }
             assert statisticsArr.size() == 3: "Incorrect Statistic Length";
             statistics = convertToStats(statisticsArr);
-
-
+            return statistics;
+            
         } catch (FileNotFoundException e) {
             System.out.println("No saved statistics found. Creating new file.");
             createFile(f);
@@ -81,9 +81,11 @@ public class Storage {
             System.out.println(e.getMessage());
             statistics = new Statistics();
             return statistics;
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            statistics = new Statistics();
+            return statistics;
         }
-        
-        return statistics;
     }
 
     public Statistics convertToStats(ArrayList<Integer> statisticArr) throws ParseException {
