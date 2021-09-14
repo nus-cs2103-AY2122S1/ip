@@ -13,7 +13,7 @@ public interface Command {
      * @param ui Ui object to handle display of message to user.
      * @throws MalformedCommandException If command could not be executed successfully.
      */
-    void execute(TaskList tasks, Ui ui) throws MalformedCommandException;
+    String execute(TaskList tasks, Ui ui) throws MalformedCommandException;
 
     /**
      * Returns true if command should stop the chatbot.

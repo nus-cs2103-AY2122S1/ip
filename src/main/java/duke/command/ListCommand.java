@@ -19,8 +19,8 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.showTaskList(tasks);
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.showTaskList(tasks);
     }
 
     @Override

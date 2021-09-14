@@ -35,9 +35,9 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws MalformedCommandException {
+    public String execute(TaskList tasks, Ui ui) throws MalformedCommandException {
         Task taskMarkedDone = tasks.markTaskDone(taskIndex - 1);
-        ui.showTaskDoneMessage(taskMarkedDone);
+        return ui.showTaskDoneMessage(taskMarkedDone);
     }
 
     @Override
