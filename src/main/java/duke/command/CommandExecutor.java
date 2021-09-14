@@ -74,13 +74,13 @@ public class CommandExecutor {
             // Else, an item has been added to the chat bot
             // Commands are either todo, deadline or event
         } else if (cmd.equals("todo")) {
-            return command.addTodo(userCommand, cmd, taskList);
+            return command.addTodo(userCommand, taskList);
 
         } else if (cmd.equals("deadline")) {
-            return command.addDeadline(userCommand, cmd, taskList);
+            return command.addDeadline(userCommand, taskList);
 
         } else if (cmd.equals("event")) {
-            return command.addEvent(userCommand, cmd, taskList);
+            return command.addEvent(userCommand, taskList);
 
             // If the command did not match the previous commands, throw an error
         } else {

@@ -75,7 +75,7 @@ public class TaskList {
 
         for (Task t : tasks) {
             if (t.toString().toLowerCase().contains(word)) {
-                wordList.add((tasks.indexOf(t) + 1) + " ." + t.toString());
+                wordList.add((tasks.indexOf(t) + 1) + ". " + t.toString());
             }
         }
         return wordList;

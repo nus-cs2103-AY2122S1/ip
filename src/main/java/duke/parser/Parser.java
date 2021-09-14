@@ -82,7 +82,7 @@ public class Parser {
             throw new EmptyDescriptionException("todo");
         }
 
-        return this.commandWords[1];
+        return this.command.split(" ", 2)[1];
     }
 
     /**

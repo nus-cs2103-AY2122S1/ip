@@ -41,59 +41,59 @@ public class Command {
      * Adds a deadline to the task list.
      *
      * @param userCommand The command inputted from the user
-     * @param cmd The type of task added to the task list
      * @param taskList The task list which contains the tasks
      * @throws EmptyDescriptionException
      * @throws IOException
      */
-    public String addDeadline(String userCommand, String cmd, TaskList taskList)
+    public String addDeadline(String userCommand, TaskList taskList)
             throws EmptyDescriptionException, IOException, DateNotAcceptedException {
         Parser parser = new Parser(userCommand);
         String deadlineInfo = parser.getDeadlineInfo();
         LocalDate date = parser.getDeadlineDate();
+        Deadline deadline = new Deadline(deadlineInfo, date);
 
-        taskList.add(new Deadline(deadlineInfo, date));
+        taskList.add(deadline);
         storage.addTask(taskList.getLastStatusString());
-        return ui.showAddition(cmd, userCommand);
+        return ui.showAddition(deadline.toString(), taskList.size());
     }
 
     /**
      * Adds an event to the task list.
      *
      * @param userCommand The command inputted from the user
-     * @param cmd The type of task added to the task list
      * @param taskList The task list which contains the tasks
      * @throws EmptyDescriptionException
      * @throws IOException
      */
-    public String addEvent(String userCommand, String cmd, TaskList taskList)
+    public String addEvent(String userCommand, TaskList taskList)
             throws EmptyDescriptionException, IOException {
         Parser parser = new Parser(userCommand);
         String eventInfo = parser.getEventInfo();
         String eventDetails = parser.getEventLocation();
+        Event event = new Event(eventInfo, eventDetails);
 
-        taskList.add(new Event(eventInfo, eventDetails));
+        taskList.add(event);
         storage.addTask(taskList.getLastStatusString());
-        return ui.showAddition(cmd, userCommand);
+        return ui.showAddition(event.toString(), taskList.size());
     }
 
     /**
      * Adds a todo to the task list.
      *
      * @param userCommand The command inputted from the user
-     * @param cmd The type of task added to the task list
      * @param taskList The task list which contains the tasks
      * @throws EmptyDescriptionException
      * @throws IOException
      */
-    public String addTodo(String userCommand, String cmd, TaskList taskList)
+    public String addTodo(String userCommand, TaskList taskList)
             throws EmptyDescriptionException, IOException {
         Parser parser = new Parser(userCommand);
         String taskInfo = parser.getTodoInfo();
+        Todo todo = new Todo(taskInfo);
 
-        taskList.add(new Todo(taskInfo));
+        taskList.add(todo);
         storage.addTask(taskList.getLastStatusString());
-        return ui.showAddition(cmd, userCommand);
+        return ui.showAddition(todo.toString(), taskList.size());
     }
 
     /**
@@ -120,7 +120,7 @@ public class Command {
         String taskRemoved = taskList.get(ref).toString();
         taskList.remove(ref);
         storage.removeTask(ref);
-        return ui.showRemoval(taskRemoved, taskList.size());
+        return ui.showDeletion(taskRemoved, taskList.size());
     }
 
     /**

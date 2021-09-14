@@ -24,32 +24,9 @@ public class Ui {
      *
      * @return The welcome message.
      */
-    public String showWelcome1() {
-        return "Haro, I'm Taro! Taro is short for Notaro because I'm Not-a-ro-bot!!\n"
-                + "There are three special tasks you can add:\nDeadline, Event and Todo\n"
-                + "Here are some special keywords! :";
-    }
-
-    /**
-     * Prints out a welcome message when a user starts using the chatbot, and prints the possible order
-     *
-     * @return The welcome message.
-     */
-    public String showWelcome2() {
-        return "bye : End our conversation :(\n"
-                + "list : Adds stuff into your todo list :(\n"
-                + "done [number] : Marks the item corresponding the number in the todo list as complete!\n"
-                + "find [word] : Searches the todo list for the word inputted and shows all matches\n"
-                + "delete [number] : Deletes the item corresponding the number in the todo list";
-    }
-
-    /**
-     * Prints out a welcome message when a user starts using the chatbot, and prints the possible order
-     *
-     * @return The welcome message.
-     */
-    public String showWelcome3() {
-        return "What can I do for you today? :>";
+    public String showWelcome() {
+        return "Haro, I'm Taro! Taro is short for Notaro because I'm Not-a-ro-bot!! \n"
+                + "What can I do for you today? :>";
     }
 
     /**
@@ -64,12 +41,13 @@ public class Ui {
     /**
      * Logs the addition of a Task.
      *
-     * @param taskType The type of task which has been added (Deadline, Todo or Event).
-     * @param command The command the user inputted.
+     * @param taskAdded The string representation of the task which has been added.
+     * @param taskListSize The size of the current list of tasks.
      * @return The bot's output for the done command.
      */
-    public String showAddition(String taskType, String command) {
-        return "added: " + command;
+    public String showAddition(String taskAdded, int taskListSize) {
+        return String.format("Okay! I've added the following: \n%s\n" + "%d more tasks to go!",
+                taskAdded, taskListSize);
     }
 
     /**
@@ -79,10 +57,10 @@ public class Ui {
      * @param taskListSize The size of the current list of tasks
      * @return The bot's output for the delete command.
      */
-    public String showRemoval(String taskRemoved, int taskListSize) {
-            return String.format("Oki! I have removed this task: %s \n %d more tasks to go!",
+    public String showDeletion(String taskRemoved, int taskListSize) {
+            return String.format("Oki! I have removed this task:\n%s\n%d more tasks to go!",
                     taskRemoved,
-                    taskListSize); //TODO linebreak
+                    taskListSize);
     }
 
     /**
@@ -99,7 +77,7 @@ public class Ui {
             for (int count = 0; count < tasks.size(); count++) {
                 tasksString.append((count + 1) + ". " + tasks.get(count).toString() + "\n");
             }
-            return tasksString.toString();
+            return "Here are your tasks:\n" + tasksString.toString();
         }
     }
 
@@ -129,7 +107,7 @@ public class Ui {
             for (String s : wordList) {
                 words.append(s).append("\n");
             }
-            return String.format("Here are the matching tasks in your list: %s Good luck!", words.toString());
+            return String.format("Here are the matching tasks in your list:\n%sGood luck!", words.toString());
         }
     }
 
