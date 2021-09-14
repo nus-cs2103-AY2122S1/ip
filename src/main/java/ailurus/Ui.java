@@ -42,7 +42,6 @@ public class Ui {
      * @return message to be said
      */
     public String say(String message) {
-        System.out.println(String.format("%s: %s", this.chatbot, message));
         return message;
     }
 
@@ -63,7 +62,6 @@ public class Ui {
             message += String.format("%d.%s\n", i + 1, list.getIndexString(i));
 
         }
-        System.out.println(message);
         return message;
     }
 
