@@ -31,7 +31,7 @@ public class Parser {
         try {
             switch (cmd) {
                 case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
+                    return new ListCommand(fullCommand);
 
                 case ToDoCommand.COMMAND_WORD:
                     return new ToDoCommand(fullCommand);
