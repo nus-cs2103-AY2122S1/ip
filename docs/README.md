@@ -107,16 +107,27 @@ Format: `bye`
 Expected outcome:
 Closes and exits the application.
 
+### Saving the data
+Duke data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
+
+### Editing the data file
+Duke data is saved as a text file at `[JAR file location]/data/duke.txt`. Advanced users are welcome to update data
+directly by editing that data file.
+
+Archived data is saved as a text file at `[JAR file location]/data/archive.txt`.
+
 ## Command Summary
- Action | Format | Example 
-|--------|--------|---------|
+
+Action | Format | Example 
+-------|--------|--------
 List   | `list` | `list` 
-Add todo| `todo TASK_DESCRIPTION` |`todo CS2103T assignment`
-Add deadline| `deadline TASK_DESCRIPTION /by DATE` | `deadline assignment 1 /by 2021-09-15`
-Add event| `event TASK_DESCRIPTION /at TIME` | `event dinner with friends /at 6pm`
-Mark as done| `done TASK_INDEX` | `done 1`
-Delete task| `delete TASK_INDEX` | `delete 1`
-Find task| `find SEARCH_STRING` | `find dinner`
-Archive all tasks| `archive` | `archive`
-Load archived tasks| `loadArchive` | `loadArchive`
-Exit application| `bye` | `bye`
+Add todo | `todo TASK_DESCRIPTION` |`todo CS2103T assignment`
+Add deadline | `deadline TASK_DESCRIPTION /by DATE` | `deadline assignment 1 /by 2021-09-15`
+Add event | `event TASK_DESCRIPTION /at TIME` | `event dinner with friends /at 6pm`
+Mark as done | `done TASK_INDEX` | `done 1`
+Delete task | `delete TASK_INDEX` | `delete 1`
+Find task | `find SEARCH_STRING` | `find dinner`
+Archive all tasks | `archive` | `archive`
+Load archived tasks | `loadArchive` | `loadArchive`
+Exit application | `bye` | `bye`
