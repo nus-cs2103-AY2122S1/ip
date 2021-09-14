@@ -50,47 +50,58 @@ public class Storage {
      */
     public ArrayList<Task> loadTasksFromFile()
             throws InvalidStorageTaskException, StorageFileException, InvalidDateTimeInputException {
-        Scanner s;
-
-        try {
-            s = new Scanner(this.file);
-        } catch (FileNotFoundException e) {
-            throw new StorageFileException("Storage file not found!");
-        }
-
+        Scanner s = getScannerForStorageFile();
         ArrayList<Task> taskList = new ArrayList<>();
+        addTasksToList(s, taskList);
+        s.close();
+        return taskList;
+    }
 
+    private void addTasksToList(Scanner s, ArrayList<Task> taskList)
+            throws StorageFileException, InvalidDateTimeInputException, InvalidStorageTaskException {
         while (s.hasNextLine()) {
             String[] readLine = s.nextLine().split(";;;");
             if (readLine.length < 3) {
                 throw new StorageFileException("Storage file has improper format!");
             }
-
             String taskType = readLine[0];
-            boolean isDone = readLine[1].equals("1");
-            Task task;
-
-            switch (taskType) {
-            case "T":
-                task = new Todo(readLine[2]);
-                break;
-            case "D":
-                task = new Deadline(readLine[2], readLine[3]);
-                break;
-            case "E":
-                task = new Event(readLine[2], readLine[3], readLine[4], readLine[5]);
-                break;
-            default:
-                throw new InvalidStorageTaskException();
-            }
-
-            if (isDone) {
-                task.markAsDone();
-            }
+            Task task = createTaskAccordingToType(readLine, taskType);
             taskList.add(task);
         }
+    }
 
-        return taskList;
+    private Task createTaskAccordingToType(String[] readLine, String taskType)
+            throws InvalidDateTimeInputException, InvalidStorageTaskException {
+        Task task;
+        boolean isDone = readLine[1].equals("1");
+
+        switch (taskType) {
+        case "T":
+            task = new Todo(readLine[2]);
+            break;
+        case "D":
+            task = new Deadline(readLine[2], readLine[3]);
+            break;
+        case "E":
+            task = new Event(readLine[2], readLine[3], readLine[4], readLine[5]);
+            break;
+        default:
+            throw new InvalidStorageTaskException();
+        }
+        if (isDone) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    private Scanner getScannerForStorageFile() throws StorageFileException {
+        Scanner s;
+        try {
+            s = new Scanner(this.file);
+        } catch (FileNotFoundException e) {
+            throw new StorageFileException("Storage file not found!");
+        }
+        return s;
     }
 
     /**
