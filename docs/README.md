@@ -4,7 +4,7 @@ Hello, welcome to a very unpolished chatbot! Due to current time issues (god ble
 I am considering working on this (and adding obscure easter eggs that little people will understand) after this semester, but it all depends
 I guess. Anyways, here are the features currently available on this chatbot:
 
-##Acknowledgements
+## Acknowledgements
 
 A large portion of code used for the JavaFX GUI was adapted from SE-EDU:
 https://se-education.org/guides/tutorials/javaFx.html
@@ -12,6 +12,7 @@ https://se-education.org/guides/tutorials/javaFx.html
 Images used for the GUI can also be found here:
 
 Hagrid: https://64.media.tumblr.com/7fe67a781662f959c9e9e33ad85306bc/tumblr_p95s2cou6l1wkf3ifo1_500.jpg
+
 Snape: https://i.ytimg.com/vi/hXyxGvCZsxk/maxresdefault.jpg
 
 
