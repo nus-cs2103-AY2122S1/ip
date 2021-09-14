@@ -24,6 +24,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage.setTitle("Duke");
+            stage.setResizable(false);
+            stage.setMinHeight(600.0);
+            stage.setMinWidth(400.0);
+
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

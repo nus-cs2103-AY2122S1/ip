@@ -145,13 +145,7 @@ public class TaskList {
      * @throws DukeException If formatting is wrong.
      */
     public void addTask(String fullDescription, int sepIndex, TaskType type) throws DukeException {
-        boolean hasSpaceBefore = fullDescription.charAt(sepIndex + 3) != ' ';
-        boolean hasSeparator = sepIndex != -1;
-        boolean hasSpaceAfter = fullDescription.charAt(sepIndex - 1) != ' ';
-        if (!hasSeparator || hasSpaceBefore || hasSpaceAfter) {
-            throw new DukeException("Please input with the correct format e.g. event read books" +
-                    " /at 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
-        }
+        checkFormatting(fullDescription, sepIndex, type);
         String description = fullDescription.substring(0, sepIndex - 1);
         String dateTime = fullDescription.substring(sepIndex + 4);
         String[] dateTaskArray = dateTime.split(" ");
@@ -167,6 +161,30 @@ public class TaskList {
             } else {
                 tasks.add(new Event(description, dateTime, FORMAT_NO_TIME, false, false));
             }
+        }
+    }
+
+    private void checkFormatting(String fullDescription, int sepIndex, TaskType type) throws DukeException {
+        String taskType;
+        String separator;
+        if (type == TaskType.Deadline) {
+            taskType = "deadline";
+            separator = "/by";
+        } else {
+            // TaskType is Event
+            taskType = "event";
+            separator = "/at";
+        }
+        boolean hasSeparator = sepIndex != -1;
+        if (!hasSeparator) {
+            throw new DukeException("Please input with the correct format e.g. " + taskType + " read books" +
+                    " " + separator + " 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
+        }
+        boolean hasSpaceBefore = fullDescription.charAt(sepIndex + 3) != ' ';
+        boolean hasSpaceAfter = fullDescription.charAt(sepIndex - 1) != ' ';
+        if (hasSpaceBefore || hasSpaceAfter) {
+            throw new DukeException("Please input with the correct format e.g. " + taskType + " read books" +
+                    " " + separator + " 2021-09-08 09:30 (yyyy-mm-dd hh:mm, where time is optional)");
         }
     }
 
