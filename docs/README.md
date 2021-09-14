@@ -56,6 +56,8 @@ Adding a deadline task with a formatted date:
 
 Adding a deadline task with a formatted date and time:
 `deadline CS2103T quiz /by 18/09/2021 2300`
+
+![Deadline](deadlineExample.png)
 <br>
 <br>
 ### `Event` - Add event tasks
@@ -77,6 +79,8 @@ Adding a deadline task with a formatted date:
 
 Adding a deadline task with a formatted date and time:
 `event Dinner with family /at 18/09/2021 1930`
+
+![Event](eventExample.png)
 <br>
 <br>
 ### `Todo` - Add todo tasks
@@ -96,6 +100,8 @@ Displays all your added task in the task list along with the appropriate details
 
 #### Format:
 `list`
+
+![List](listExample.png
 <br>
 <br>
 ### `Done` - Mark tasks as done
@@ -109,6 +115,8 @@ Mark a task in the task list as completed using its index. The index can be obta
 Mark task 1 as completed: `done 1`
 
 Mark task 1, 4 and 6 as completed: `done 1 4 6`
+
+![Done](doneExample.png)
 <br>
 <br>
 ### `Delete` - Delete tasks
@@ -122,6 +130,8 @@ Delete a task in the task list using its index. The index can be obtained by usi
 Delete task 1: `delete 1`
 
 Delete task 1, 4 and 6: `delete 1 4 6`
+
+![Delete](deleteExample.png)
 <br>
 <br>
 ### `Find` - Seach for a task
@@ -133,6 +143,8 @@ Find a task in the task list whose name matches the provided keywords. The searc
 
 #### Examples of usages:
 `Find CS2100` will find tasks that has the keyword "CS2100" in its name.
+
+![Find](findExample.png)
 <br>
 <br>
 ### `Undo` - Undo a previous change
