@@ -65,7 +65,7 @@ public class Execution {
      * @return String value from a specifc Command.
      */
     private String dealWithInput() {
-        ArrayList<String> parsedMessages;
+        ArrayList<String> parsedInputs;
         Command command;
         String operationType;
         String task;
@@ -74,17 +74,17 @@ public class Execution {
         int index;
 
         try {
-            parsedMessages = parser.returnSplitComponent();
+            parsedInputs = parser.returnSplitComponent();
         } catch (DukeException e) {
             return e.getErrorMessage();
         }
 
-        assert parsedMessages.size() == 4 : "Error in Parser, should produce 4 key value for duke to execute!!";
+        assert parsedInputs.size() == 4 : "Error in Parser, should produce 4 key value for duke to execute!!";
 
-        operationType = parsedMessages.get(0);
-        task = parsedMessages.get(1);
-        time = parsedMessages.get(2);
-        index = Integer.parseInt(parsedMessages.get(3));
+        operationType = parsedInputs.get(0);
+        task = parsedInputs.get(1);
+        time = parsedInputs.get(2);
+        index = Integer.parseInt(parsedInputs.get(3));
         command = operationForDuke(index, operationType, task, time);
 
         dukeResponse = command.returnResponse();
@@ -124,7 +124,6 @@ public class Execution {
         default: command = new AddCommand(taskList, textUi, operationType, task, time);
         break;
         }
-
         return command;
     }
 }

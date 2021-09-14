@@ -45,8 +45,7 @@ public class DukeException extends Exception {
         break;
         default: errorMessage = "OOPS!!! There is Something wrong in Duke!!!";
         break;
-        };
-
+        }
         return errorMessage;
     }
 
