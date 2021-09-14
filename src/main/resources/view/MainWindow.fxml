@@ -12,11 +12,11 @@
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="40.0" prefWidth="324.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="85.0">
          <font>
-            <Font name="Consolas" size="14.0" />
+            <Font name="Open Sans Regular" size="14.0" />
          </font></TextField>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="40.0" prefWidth="76.0" style="-fx-background-color: #0275d8;" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+        <Button id="sendButton" fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="40.0" prefWidth="76.0" stylesheets="@Theme.css" text="Send" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <font>
-            <Font name="Consolas" size="14.0" />
+            <Font name="Open Sans Bold" size="14.0" />
          </font></Button>
         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="550.0" prefWidth="600.0" vvalue="1.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
