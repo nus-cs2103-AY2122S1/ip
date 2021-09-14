@@ -32,6 +32,10 @@ public class Ui {
         return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
+    public String printUpdateFail() {
+        return "Sorry, there does not seem to be such a field in this task.";
+    }
+
     /**
      * Prints tasks found from find query
      *
@@ -56,4 +60,6 @@ public class Ui {
     public String printResponse(String response) {
         return response;
     }
+
+
 }

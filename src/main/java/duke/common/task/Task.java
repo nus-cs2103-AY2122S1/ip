@@ -2,6 +2,9 @@ package duke.common.task;
 
 import java.io.Serializable;
 
+import duke.common.Duke;
+import duke.common.enums.TaskField;
+
 public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
@@ -19,6 +22,22 @@ public class Task implements Serializable {
 
     protected String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    /**
+     * Updates corresponding field of task to new user-provided value.
+     *
+     * @param taskField target field of task
+     * @param newItem new user-provided value for target field
+     * @return string representation of updated item
+     * @throws Duke.DukeException
+     */
+    public String update(TaskField taskField, String newItem) throws Duke.DukeException {
+        if (taskField != TaskField.DESCRIPTION) {
+            throw new Duke.DukeException("Sorry, there does not seem to be such a field in this task.");
+        }
+        this.description = newItem;
+        return this.toString();
     }
 
     @Override

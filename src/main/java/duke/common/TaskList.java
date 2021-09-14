@@ -3,6 +3,7 @@ package duke.common;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import duke.common.enums.TaskField;
 import duke.common.task.Task;
 
 /**
@@ -57,6 +58,7 @@ public class TaskList implements Serializable {
      * Removes target task.
      *
      * @param taskNumber position of target task
+     * @return Duke response indicating if task was successful
      */
     public String delete(int taskNumber) {
         String result = "";
@@ -72,9 +74,26 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Finds stored tasks by keyword
+     * Updates corresponding field of target task to new user-provided value.
+     *
+     * @param taskNumber rank of target task.
+     * @param taskField target field of task
+     * @param newItem new user-provided value for target field
+     * @return Duke response indicating if task was successful
+     * @throws Duke.DukeException
+     */
+    public String update(int taskNumber, TaskField taskField, String newItem) throws Duke.DukeException {
+        if (taskNumber > this.tasks.size() || taskNumber <= 0) {
+            return "Sorry, that task does not exist!\n";
+        }
+        return "Updated task\n " + tasks.get(taskNumber - 1).update(taskField, newItem) + "\n";
+    }
+
+    /**
+     * Finds stored tasks by keyword.
      *
      * @param query keywords for task-finding
+     * @return list of tasks that contain the keyword
      */
     public ArrayList<Task> find(String query) {
         ArrayList<Task> results = new ArrayList<>();

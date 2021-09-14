@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.common.enums.TaskField;
 import duke.common.task.Deadline;
 import duke.common.task.Event;
 import duke.common.task.Task;
@@ -28,7 +29,7 @@ public class Parser {
         Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
         Pattern findPattern = Pattern.compile("find (.*)");
 
-        Pattern updatePattern = Pattern.compile("update (/.*) (.*)");
+        Pattern updatePattern = Pattern.compile("update (\\d) (/.*) (.*)");
 
         // Print out list
         if (input.equals("list")) {
@@ -52,6 +53,26 @@ public class Parser {
         if (Pattern.matches("delete \\d", input)) {
             String[] items = input.split(" ");
             return ui.printResponse(taskList.delete(Integer.parseInt(items[1])));
+        }
+
+        // Update a task
+        Matcher updateMatcher = updatePattern.matcher(input);
+        if (updateMatcher.find()) {
+            try {
+                int taskNumber = Integer.parseInt(updateMatcher.group(1));
+                if (updateMatcher.group(2).equals("/desc")) {
+                    return ui.printResponse(taskList.update(taskNumber, TaskField.DESCRIPTION, updateMatcher.group(3)));
+                }
+                if (updateMatcher.group(2).equals("/by")) {
+                    return ui.printResponse(taskList.update(taskNumber, TaskField.DEADLINE, updateMatcher.group(3)));
+                }
+                if (updateMatcher.group(2).equals("/at")) {
+                    return ui.printResponse(taskList.update(taskNumber, TaskField.EVENT_START, updateMatcher.group(3)));
+                }
+            } catch (Duke.DukeException e) {
+                return ui.printResponse(e.getLocalizedMessage());
+            }
+            return ui.printUpdateFail();
         }
 
         // Add a Todo type task
