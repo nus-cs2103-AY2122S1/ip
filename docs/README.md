@@ -10,7 +10,7 @@ Jarvis is an **ABSOLUTELY FREE** and easy-to-use chatbot that can manage your ta
 
 ## Quick Start
 1. Ensure that **Java 11** is installed.
-2. Download the latest **jarvis.jar** file from [here](https://github.com/Preshita01/ip/releases)
+2. Download the latest **jarvis.jar** file from [here](https://github.com/Preshita01/ip/releases/tag/A-Release)
 3. Move **jarvis.jar** to your preferred location in the computer.
 4. Open terminal and navigate to the directory in which you have placed `jarvis.jar`
    (e.g. if **jarvis.jar** is in **Desktop**, run the command `cd Desktop`)
