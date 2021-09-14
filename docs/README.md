@@ -28,10 +28,12 @@ Easily delete any task that have expired/done
 
 This bot allows for simple entries in the correct text field
 
-Example of add Task: 
+### Example of add Task: 
 
 type: `T`
+
 description: `Cook Lunch`
+
 date:
 
 Expected outcome:
@@ -42,7 +44,7 @@ Todo task of description cook lunch added to the list
 Here are the tasks in your list:
 1. [T][ ] Cook Lunch
 ```
-Example of Complete Task: 
+### Example of Complete Task: 
 
 index: `1`
 
@@ -54,7 +56,7 @@ Task marked with 1 marked as completed
 Here are the tasks in your list:
 1. [T][X] Cook Lunch
 ```
-Example of find Task: 
+### Example of find Task: 
 
 filter word: `cook`
 
@@ -67,10 +69,12 @@ Here are the matching tasks in your list:
 1. [T][X] Cook Lunch
 Press load to go back!
 ```
-Example of Update Task: 
+### Example of Update Task: 
 
 index: `1`
+
 new description: `Eat Lunch`
+
 new date: 
 
 Expected outcome:
@@ -81,7 +85,7 @@ Task at index 1 has been updated, and marked as undone.
 Here are the tasks in your list:
 1. [T][ ] Eat Lunch
 ```
-Example of Delete Task: 
+### Example of Delete Task: 
 
 index: `1`
 
