@@ -11,7 +11,7 @@ import jarvis.ui.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Constructor for ListCommand.
+     * Shows the list of tasks to the user.
      *
      * @param taskList The list in which the tasks are stored.
      * @param storage Storage to save or load tasks to hard-disk.

@@ -10,7 +10,10 @@ import jarvis.exception.InvalidDateTimeInputException;
  * Encapsulates the deadline task which contains a description and a deadline.
  */
 public class Deadline extends Task {
-    private static final String INPUT_FORMAT = "dd-MM-yyyy HHmm";
+    /**
+     * Input format for the task deadline.
+     */
+    public static final String INPUT_FORMAT = "dd-MM-yyyy HHmm";
     private static final String OUTPUT_FORMAT = "MMM d yyyy HHmm";
     private LocalDateTime deadline;
 

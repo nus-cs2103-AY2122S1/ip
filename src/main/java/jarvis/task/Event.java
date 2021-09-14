@@ -11,8 +11,14 @@ import jarvis.exception.InvalidDateTimeInputException;
  * Encapsulates the event task which contains a description and event time.
  */
 public class Event extends Task {
-    private static final String INPUT_DATE_FORMAT = "dd-MM-yyyy";
-    private static final String INPUT_TIME_FORMAT = "HHmm";
+    /**
+     * Input format for the event date.
+     */
+    public static final String INPUT_DATE_FORMAT = "dd-MM-yyyy";
+    /**
+     * Input format for the event start and end time.
+     */
+    public static final String INPUT_TIME_FORMAT = "HHmm";
     private static final String OUTPUT_DATE_FORMAT = "MMM d yyyy";
     private static final String OUTPUT_TIME_FORMAT = "h:mm a";
     private LocalDate eventDate;
