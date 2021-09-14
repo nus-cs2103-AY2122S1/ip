@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
 
-    enum TaskType{
+    enum TaskType {
         TODO,
         EVENT,
         DEADLINE,
@@ -68,7 +68,7 @@ public class Duke {
      * @param input The input given to the program.
      * @return The confirmation message depending on what the user inputted.
      */
-    private String run(String input) {
+    public String run(String input) {
         try {
             if (parser.isDoneCmd(input)) {
                 return marking(input);
@@ -105,7 +105,7 @@ public class Duke {
                 String keyword = input.substring(5);
                 return SL.findAndReturn(keyword);
 
-            } else if(parser.isViewCmd(input)) {
+            } else if (parser.isViewCmd(input)) {
                 if (input.length() < VALIDLENGTH_VIEW) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
@@ -115,7 +115,6 @@ public class Duke {
             } else {
                 switch (input) {
                 case "bye":
-                    ui.bye();
                     return ui.bye();
                 case "list":
                     return ui.displayListContents(SL);
@@ -177,8 +176,6 @@ public class Duke {
         }
 
     }
-
-
 
     private String marking(String input) throws DukeException, IOException {
         if (input.length() >= VALIDLENGTH_DONE && input.substring(5).matches("[0-9]+")) {

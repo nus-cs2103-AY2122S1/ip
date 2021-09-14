@@ -22,6 +22,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private static final String FORMAT_RED_TEXT_BUBBLE = "-fx-background-color: ff4d4d; -fx-text-fill: black;";
+    private static final String FORMAT_GREEN_TEXT_BUBBLE = "-fx-background-color: #9bf396; -fx-text-fill: black;";
+    private static final String FORMAT_WHITE_TEXT_BUBBLE = "-fx-background-color: #FFFFFF; -fx-text-fill: black;";
 
     private DialogBox(String text, Image img) {
         try {
@@ -48,16 +51,16 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.dialog.setStyle("-fx-background-color: #FFFFFF; -fx-text-fill: black;");
+        db.dialog.setStyle(FORMAT_WHITE_TEXT_BUBBLE);
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         if (text.contains("☹ OOPS!!!")) {
-            db.dialog.setStyle("-fx-background-color: ff4d4d; -fx-text-fill: black;");
+            db.dialog.setStyle(FORMAT_RED_TEXT_BUBBLE);
         } else {
-            db.dialog.setStyle("-fx-background-color: #9bf396; -fx-text-fill: black;");
+            db.dialog.setStyle(FORMAT_GREEN_TEXT_BUBBLE);
         }
         db.flip();
         return db;

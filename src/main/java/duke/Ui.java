@@ -7,6 +7,15 @@ public class Ui {
     public Ui() {}
 
     /**
+     * Returns a greeting message.
+     *
+     * @return Greeting message
+     */
+    public String greeting() {
+        return "    Hello! I am Vision. How can I be of assistance?";
+    }
+
+    /**
      * Returns a farewell message.
      *
      * @return Farewell message
