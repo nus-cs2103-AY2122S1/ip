@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ *Command to list the current Statistics .
+ */
 public class StatisticsCommand extends Command{
 
 

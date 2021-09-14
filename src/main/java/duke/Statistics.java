@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Deals with the management of statistics such as,
+ * total tasks done, total tasks added, and total tasks deleted.
+ */
 public class Statistics {
 
     int totalTasksDone;
@@ -17,27 +21,51 @@ public class Statistics {
         this.totalTasksAdded = added;
         this.totalTasksDeleted = deleted;
     }
-    
+
+    /**
+     * Increments the totalTasksDone statistic by 1.
+     */
     public void incrementTaskDone() {
         this.totalTasksDone++;
     }
 
+    /**
+     * Increments the totalTasksAdded statistic by 1.
+     */
     public void incrementTaskAdded() {
         this.totalTasksAdded++;
     }
 
+    /**
+     * Increments the totalTasksDeleted statistic by 1.
+     */
     public void incrementTaskDeleted() {
         this.totalTasksDeleted++;
     }
-    
+
+    /**
+     * Returns the totalTasksDone statistic.
+     * 
+     * @return
+     */
     public String getTasksDone() {
         return "" + this.totalTasksDone;
     }
-    
+
+    /**
+     * Returns the totalTasksAdded statistic.
+     *
+     * @return
+     */
     public String getTasksAdded() {
         return "" + this.totalTasksAdded;
     }
-    
+
+    /**
+     * Returns the totalTasksDeleted statistic.
+     *
+     * @return
+     */
     public String getTasksDeleted() {
         return "" + this.totalTasksDeleted;
     }
