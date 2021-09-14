@@ -42,7 +42,7 @@ Format: `done TASK_NUMBER..`
 ### Saving the data
 By default, Duke automatically saved and store the tasks at `/data/Duke.txt`.
 
-### Exiting: `exit`
+### Exiting: `bye`
 
 Exits from the app.
 
