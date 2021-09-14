@@ -1,7 +1,7 @@
 # User Guide
 
 ## Features 
-There are three types of tasks that you can add into this chatbot-task manager. :label:
+There are three types of tasks that you can add into this chatbot-task manager.
 * ToDos
 * Deadlines
 * Events
@@ -10,27 +10,27 @@ There are commands/features that you can perform in order to improve your produc
 
 ### Adding tasks
 
-Add a new task to the task list. :heavy_plus_sign:
+Add a new task to the task list.
 
 ### Marking tasks as done
 
-Mark a certain task as done. :heavy_check_mark:
+Mark a certain task as done.
 
 ### Deleting tasks
 
-Delete a task from the task list. :x:
+Delete a task from the task list.
 
 ### Finding tasks using keyword search
 
-Retrieve all tasks that contain a particular keyword. :key:
+Retrieve all tasks that contain a particular keyword.
 
 ### Displaying all existing tasks
 
-View all the tasks in the task list at once. :page_with_curl:
+View all the tasks in the task list at once.
 
 ### View all Deadlines in chronological order
 
-View all the Deadlines you have, in chronological order. :hourglass_flowing_sand:
+View all the Deadlines you have, in chronological order.
 
 ## Usage
 
