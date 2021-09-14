@@ -1,0 +1,21 @@
+not a command
+list
+todo
+todo test 1
+event
+event /at 1pm today
+event test 2 /at 1pm today
+deadline
+deadline /by 9am tmr
+deadline test 3 /by 9am tmr
+done
+done abc
+done 123
+done 99
+done 3
+delete
+delete abc
+delete 123
+delete 2
+list
+bye
