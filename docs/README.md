@@ -52,13 +52,9 @@ Immediately closes the app.
 Use this command to add a task that you have to do without a hard deadline.
 - The description of the todo can contain an arbitrary amount of words (at least 1 word).
 
-Example of usage: 
-
-`todo return book`
+Example of usage: `todo return book`
 
 Expected outcome:
-
-Description of the outcome.
 
 <img width="408" alt="todo" src="https://user-images.githubusercontent.com/65549665/133202878-54b4553d-ff4e-40cd-8483-2c20c7b580f2.png">
 
@@ -74,15 +70,11 @@ Use this command to add an event that you have to do attend with a specified dat
 - The description of the event can contain an arbitrary amount of words (at least 1 word).
 - Time and date follows the format dd/mm/yyyy and hhmm (24h format) respectively.
 
-Example of usage: 
-
-`event carnival /at 2/12/2021 0930`
+Example of usage: `event carnival /at 2/12/2021 0930`
 
 Expected outcome:
 
 <img width="408" alt="event" src="https://user-images.githubusercontent.com/65549665/133203145-634352ee-f11e-494c-b589-07ff4dcf1d92.png">
-
-Description of the outcome.
 
 ```
 Got it. I've added this task:
@@ -96,15 +88,11 @@ Use this command to add a deadline that you have to meet with a specified date a
 - The description of the deadline can contain an arbitrary amount of words (at least 1 word).
 - Time and date follows the format dd/mm/yyyy and hhmm (24h format) respectively.
 
-Example of usage: 
-
-`deadline CS2100 Tut 1 /at 2/12/2021 1200`
+Example of usage: `deadline CS2100 Tut 1 /at 2/12/2021 1200`
 
 Expected outcome:
 
 <img width="407" alt="deadline" src="https://user-images.githubusercontent.com/65549665/133203198-96adf05a-c82e-4c20-8bdb-7d90216ad94c.png">
-
-Description of the outcome.
 
 ```
 Got it. I've added this task:
@@ -114,9 +102,7 @@ Now you have 3 tasks in the list.
 
 ### `list`
 
-Example of usage: 
-
-`list`
+Example of usage: `list`
 
 Expected outcome:
 
@@ -135,15 +121,11 @@ Here are the tasks in your list:
 Use this command if you want to view all your tasks on a specific date by hour.
 - Date follows the format dd/mm/yyyy.
 
-Example of usage: 
-
-`schedule 2/12/2021`
+Example of usage: `schedule 2/12/2021`
 
 Expected outcome:
 
 <img width="412" alt="schedule" src="https://user-images.githubusercontent.com/65549665/133203253-53aa5551-abf9-4b37-be5a-07ff78073b23.png">
-
-Description of the outcome.
 
 ```
 Here are the tasks for 2 Dec 2021:
@@ -162,15 +144,11 @@ You can choose to mark a task as done by specifying the INDEX of the task.
 - The index **must be a positive integer** 1, 2, 3, ...!!!
 - You can check if a task is done by using `list` again. There should be a cross to the left of the task name.
 
-Example of usage: 
-
-`done 2`
+Example of usage: `done 2`
 
 Expected outcome:
 
 <img width="411" alt="done" src="https://user-images.githubusercontent.com/65549665/133203284-ac2dbbc1-6ddc-4427-bc2c-bed489d68e70.png">
-
-Description of the outcome.
 
 ```
 Nice! I've marked this task as done:
@@ -184,15 +162,11 @@ You can choose to delete a task by specifying the INDEX of the task.
 - The index **must be a positive integer** 1, 2, 3, ...!!!
 - You can check if a task is deleted by using `list` again. The task should be gone.
 
-Example of usage: 
-
-`delete 1`
+Example of usage: `delete 1`
 
 Expected outcome:
 
 <img width="409" alt="delete" src="https://user-images.githubusercontent.com/65549665/133203318-04ac033a-9b51-4f24-ace2-cb47931531f3.png">
-
-Description of the outcome.
 
 ```
 Noted! I've removed this task:
@@ -204,15 +178,11 @@ Now you have 2 tasks in the list.
 
 Find all tasks that contain your specified keyword (case-insensitive).
 
-Example of usage: 
-
-`find tut`
+Example of usage: `find tut`
 
 Expected outcome:
 
 <img width="409" alt="find" src="https://user-images.githubusercontent.com/65549665/133203447-0d8c0863-aa19-4f28-8a18-ae749940b7a9.png">
-
-Description of the outcome.
 
 ```
 Here are the matching tasks in your list:
@@ -223,9 +193,7 @@ Here are the matching tasks in your list:
 
 Exits the program immediately.
 
-Example of usage:
-
-`bye`
+Example of usage:`bye`
 
 ### `save` - Saving data to local drive
 
