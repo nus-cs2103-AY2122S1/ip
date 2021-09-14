@@ -182,9 +182,8 @@ public class Duke {
             int taskNum = parser.getDoneIdx(input);
             if (parser.hasValidIdx(taskNum, SL.size())) {
                 SL.get(taskNum).markAsDone();
-                ui.taskDoneConfirmation();
                 storage.save(SL);
-                return ui.taskDoneConfirmation();
+                return ui.taskDoneConfirmation(SL.get(taskNum).getDescription());
             } else {
                 throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
             }
