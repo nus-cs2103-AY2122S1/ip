@@ -13,7 +13,7 @@ public class Parser {
      *
      * @param userInput Input provided by user.
      */
-    public String parseCommand(String userInput) {
+    public String parseCommand(String userInput) throws DukeException {
 
         if (userInput.matches("list")) {
 

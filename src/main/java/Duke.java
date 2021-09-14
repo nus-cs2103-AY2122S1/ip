@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -27,7 +28,7 @@ public class Duke {
      * @param input User input.
      * @return Duke's response.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
 
         if (input.matches("bye")) {
             try {
@@ -37,8 +38,13 @@ public class Duke {
                 return "No tasks saved. Start by creating a new task.";
             }
         } else {
-            String result = parser.parseCommand(input);
-            return result;
+            try {
+                String result = parser.parseCommand(input);
+                return result;
+            } catch (DukeException e) {
+                return e.toString();
+            }
+
         }
     }
 

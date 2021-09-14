@@ -58,10 +58,10 @@ public class TaskList {
      * @param userInput Index of task according to the list displayed.
      * @return String output of completed task.
      */
-    public String markDone(String userInput) {
+    public String markDone(String userInput) throws DukeException {
         if (userInput.substring(DONE_LENGTH).length() == EMPTY) {
-            // throw new DukeException("User has not indicated task to mark as complete.");
-            return "Sorry, which task do you wish to mark as completed?\nType 'done <TASK NO.>'";
+            String errorMsg = "Sorry, which task do you wish to mark as completed? Type 'done <TASK NO.>'";
+            throw new DukeException(errorMsg);
 
         } else {
             int index = Integer.parseInt(userInput.substring(DONE_LENGTH + 1));
@@ -91,10 +91,10 @@ public class TaskList {
      * @param userInput Index of task according to the list displayed.
      * @return String output of deleted task.
      */
-    public String delete(String userInput) {
+    public String delete(String userInput) throws DukeException {
         if (userInput.substring(DELETE_LENGTH).length() == EMPTY) {
-            // throw new DukeException("User has not indicated task to delete.");
-            return "Sorry, which task do you wish to delete?\nType 'delete <TASK NO.>'";
+            String errorMsg = "Sorry, which task do you wish to delete? Type 'delete <TASK NO.>'";
+            throw new DukeException(errorMsg);
 
         } else {
             int index = Integer.parseInt(userInput.substring(DELETE_LENGTH + 1));
@@ -115,10 +115,10 @@ public class TaskList {
      * @param userInput Description of task.
      * @return String output of ToDo task.
      */
-    public String makeTodo(String userInput) {
+    public String makeTodo(String userInput) throws DukeException {
         if (userInput.substring(TODO_LENGTH).length() == EMPTY) {
-            // throw new DukeException("YIKES!! The description of a todo cannot be empty!");
-            return "YIKES!! The description of a todo cannot be empty!\nType 'todo <description>'";
+            String errorMsg = "YIKES!! The description of a todo cannot be empty! Type 'todo <description>'";
+            throw new DukeException(errorMsg);
         } else {
             return makeTask(new ToDo(userInput.substring(TODO_LENGTH + 1)));
         }
@@ -141,12 +141,11 @@ public class TaskList {
      * @param userInput Details of the Event.
      * @return String output of Event task.
      */
-    public String makeEvent(String userInput) {
+    public String makeEvent(String userInput) throws DukeException {
         if (userInput.substring(EVENT_LENGTH).length() == EMPTY) {
-            // throw new DukeException("YIKES!! The description of an Event cannot be empty!");
-            String result = "YIKES!! The description of an Event cannot be empty!\n";
-            result += "Type 'event <description> /at <date/time>'";
-            return result;
+            String errorMsg = "YIKES!! The description of an Event cannot be empty! "
+                + "Type 'event <description> /at <date/time>'";
+            throw new DukeException(errorMsg);
         } else {
             String output = userInput.substring(EVENT_LENGTH + 1);
             String[] info = output.split("/");
@@ -172,12 +171,11 @@ public class TaskList {
      * @param userInput Details of the Deadline task.
      * @return String output of Deadline task.
      */
-    public String makeDeadline(String userInput) {
+    public String makeDeadline(String userInput) throws DukeException {
         if (userInput.substring(DEADLINE_LENGTH).length() == EMPTY) {
-            // throw new DukeException("YIKES!! The description of a Deadline cannot be empty!");
-            String result = "YIKES!! The description of a Deadline cannot be empty!\n";
-            result += "Type 'deadline <description> /by <YYYY-MM-DD>'";
-            return result;
+            String errorMsg = "YIKES!! The description of a Deadline cannot be empty! "
+                    + "Type 'deadline <description> /by <YYYY-MM-DD>'";
+            throw new DukeException(errorMsg);
         } else {
             String output = userInput.substring(DEADLINE_LENGTH + 1);
             String[] info = output.split("/");
@@ -204,11 +202,10 @@ public class TaskList {
      * @param userInput Keyword provided by user.
      * @return List of tasks that fit user's criteria.
      */
-    public String find(String userInput) {
+    public String find(String userInput) throws DukeException {
         if (userInput.substring(FIND_LENGTH).length() == EMPTY) {
-            String result = "Uh Oh!! Please specify the keyword of a task!\n";
-            result += "Type 'find <keyword>'";
-            return result;
+            String errorMsg = "Uh Oh!! Please specify the keyword of a task! Type 'find <keyword>'";
+            throw new DukeException(errorMsg);
 
         } else {
             String keyword = userInput.substring(FIND_LENGTH + 1);
@@ -260,10 +257,9 @@ public class TaskList {
     /**
      * Alerts user to an invalid command.
      */
-    public String displayError() {
-        String result = "OOPS!! I don't know how to respond to this command! :-(\n";
-        result += "Type 'help' to view list of commands available.";
-        return result;
+    public String displayError() throws DukeException {
+        throw new DukeException("OOPS!! I don't know how to respond to this command!"
+                + "Type 'help' to view list of commands available.");
     }
 
 }
