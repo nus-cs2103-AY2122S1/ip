@@ -37,7 +37,7 @@ public class Ui {
     }
 
     /**
-     * To show the input as a dialog in the GUI.
+     * Shows the input as a dialog in the GUI.
      *
      * @param input The input to be shown.
      */
@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /**
-     * A welcome message to display to user when Duke starts.
+     * Displays a welcome message to user when Duke starts.
      */
     public void greetUser() {
         String greetMessage = "Hello! I'm Saitama\nI do 100 sit-ups, 100 push-ups,"
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * An error message to display to user according to the exception.
+     * Displays an error message to user according to the exception.
      *
      * @param e An exception thrown due to various reasons such as incorrect user command.
      */
@@ -67,21 +67,21 @@ public class Ui {
     }
 
     /**
-     * A farewell message to display to user before ending the program.
+     * Displays a farewell message to user before ending the program.
      */
     public void showFarewell() {
         this.formatMessage("Hope to see you again!! ^_^", false);
     }
 
     /**
-     * A message that will display to user if there is an error loading tasks from the file.
+     * Displays a message to user if there is an error loading tasks from the file.
      */
     public void showLoadingError() {
         this.formatMessage("There is an error while loading tasks or commands.", true);
     }
 
     /**
-     * Read user command and create a command object to represent it.
+     * Reads user command and create a command object to represent it.
      *
      * @return A command object that consists of keyword and rest of the command.
      * @throws IllegalArgumentException If the command keyword is invalid.
@@ -98,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * A message to display to user after user successfully added a task.
+     * Diplays a message to user after user successfully added a task.
      *
      * @param task Task that is added.
      * @param totalTasks Total number of tasks in the list after the task is added.
@@ -110,7 +110,7 @@ public class Ui {
     }
 
     /**
-     * Display to user the list of tasks.
+     * Displays to user the list of tasks.
      *
      * @param tasks The list of tasks.
      */
@@ -133,7 +133,7 @@ public class Ui {
     }
 
     /**
-     * A message to display to user after user try to mark a task.
+     * Displays a message to user after user try to mark a task.
      * Message displayed depends on the successfulness of the mark operation.
      *
      * @param task The task to mark.
@@ -147,7 +147,7 @@ public class Ui {
     }
 
     /**
-     * A message to display to user after user try to delete a task.
+     * Displays a message to user after user try to delete a task.
      * Message displayed depends on the successfulness of the delete operation.
      *
      * @param task The task to delete.
@@ -163,14 +163,14 @@ public class Ui {
     }
 
     /**
-     * A message to display to user if user did not include keywored when using the command find.
+     * Displays a message to user if user did not include keywored when using the command find.
      */
     public void showNoKeyword() {
         this.formatMessage("There is no keyword to search for!", true);
     }
 
     /**
-     * A message to display the filtered tasks to user based on the search.
+     * Displays the filtered tasks as a message to user based on the search.
      *
      * @param tasks The arraylist of filtered tasks.
      */

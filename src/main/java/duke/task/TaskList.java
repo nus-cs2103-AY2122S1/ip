@@ -18,7 +18,7 @@ public class TaskList {
     private Ui ui;
 
     /**
-     * Constructor for TaskList.
+     * Constructs a taskList.
      *
      * @param tasksInfo Arraylist of tasks loaded from storage.
      * @param ui An Ui instance to deal with interactions with the user.
@@ -30,14 +30,14 @@ public class TaskList {
     }
 
     /**
-     * Display the list of tasks to the user.
+     * Displays the list of tasks to the user.
      */
     public void display() {
         ui.showTasks(this.tasks);
     }
 
     /**
-     * Mark the task at the given index.
+     * Marks the task at the given index.
      *
      * @param index The index of the arraylist that contains the task.
      * @param storage The storage to update the task marked.
@@ -55,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Add the task to the task list.
+     * Adds the task to the task list.
      *
      * @param description The description of the task.
      * @param keyword The command keyword to identify the type of task to be added.
@@ -85,7 +85,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at the given index.
+     * Deletes the task at the given index.
      * @param index The index of the arraylist that contains the task.
      * @param storage The storage to update the task marked.
      */
@@ -102,7 +102,7 @@ public class TaskList {
     }
 
     /**
-     * Find tasks by searching for a keyword.
+     * Finds tasks by searching for a keyword.
      *
      * @param keyword The keyword to match to.
      */

@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Get the response of Duke based on the user input.
+     * Gets the response of Duke based on the user input.
      *
      * @param input The input entered by the user.
      * @return A boolean to represent the continuation of the application.

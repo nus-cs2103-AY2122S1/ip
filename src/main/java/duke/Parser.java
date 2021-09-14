@@ -12,7 +12,7 @@ import duke.task.TaskList;
 public class Parser {
 
     /**
-     * Execute user command and returns a boolean that represents the continuation of the program.
+     * Executes user command and returns a boolean that represents the continuation of the program.
      * Does not check for validity of user command.
      *
      * @param command Command inputted by user.
@@ -57,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Convert a type String of an integer to type int.
+     * Converts a type String of an integer to type int.
      * Returns the integer that is converted.
      *
      * @param description The string that is to be converted.

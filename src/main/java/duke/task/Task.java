@@ -33,7 +33,7 @@ public abstract class Task {
     }
 
     /**
-     * To mark a task as done.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -51,7 +51,7 @@ public abstract class Task {
 
 
     /**
-     * Convert the task info loaded from storage to its corresponding task object.
+     * Converts the task info loaded from storage to its corresponding task object.
      *
      * @param taskInfo The information of the task loaded from storage.
      * @return The corresponding task.
@@ -77,7 +77,7 @@ public abstract class Task {
     }
 
     /**
-     * Convert the task to a string that can be saved to a file and converted back to itself.
+     * Converts the task to a string that can be saved to a file and converted back to itself.
      *
      * @return The string to be stored.
      */

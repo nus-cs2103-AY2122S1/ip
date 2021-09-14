@@ -56,7 +56,7 @@ public class Storage {
     }
 
     /**
-     * Load tasks from the file and add each line to an arraylist.
+     * Loads tasks from the file and add each line to an arraylist.
      *
      * @return An arraylist of strings, each representing a task information.
      */
@@ -74,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Save tasks in the file according to the arraylist of tasks given.
+     * Saves tasks in the file according to the arraylist of tasks given.
      *
      * @param tasks An arraylist of tasks to be saved.
      */
@@ -97,7 +97,7 @@ public class Storage {
     }
 
     /**
-     * Create a file with a hashmap with default commands.
+     * Creates a file with a hashmap with default commands.
      *
      * @param file The file to store the hashmap of commands.
      */
@@ -131,7 +131,7 @@ public class Storage {
     }
 
     /**
-     * Load the commands from the file and return the hashmap.
+     * Loads the commands from the file and return the hashmap.
      *
      * @return The hashmap containing keys of the commands user can input.
      */

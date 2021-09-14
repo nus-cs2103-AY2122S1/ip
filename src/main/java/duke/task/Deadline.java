@@ -41,7 +41,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Convert the deadline to a string that can be saved to a file and converted back to itself.
+     * Converts the deadline to a string that can be saved to a file and converted back to itself.
      *
      * @return The string to be stored.
      */
