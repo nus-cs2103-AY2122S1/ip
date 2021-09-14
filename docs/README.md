@@ -18,19 +18,15 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 
 ## Quick start
 
+### **Download and try the project**
+1. Using terminal, navigate to the directory where you want to
+2. Enter the command `git clone`
+3. Configure intellij according to [setting up intellij guide](README.md)
+4. Locate the src/main/java/duke/launcher.java file, right click it and run the main method of the file
+
 ## Features 
 
-* [Deadline](#deadline--add-deadline-tasks)
-* [Event](#event--add-event-tasks)
-* [Todos](#todos--add-todo-tasks)
-* [List](#list--view-all-tasks)
-* [Done](#done--mark-tasks-as-done)
-* [Dlete](#delete--delete-tasks)
-* [Find](#find--search-for-a-task)
-* [Undo](#undo--undo-a-previous-change)
-* [Bye](#bye--exits-the-programme)
-
-### Add Different types of tasks
+### **Add Different types of tasks**
 
 Duke allows you to add three different types of tasks to a task list that saves all your tasks.
 
@@ -39,7 +35,7 @@ The three tasks supported by duke are:
 * `Deadlines`: Tasks that needs to be done before a specific date/time *e.g., Submit an assignment by Monday*
 * `Events`: Tasks that start at a specific date/time *e.g., Dinner tomorrow night at 7pm*
 ####
-### Keep track of tasks
+### **Keep track of tasks**
 
 Duke allows you to easily keep track of tasks.
 
