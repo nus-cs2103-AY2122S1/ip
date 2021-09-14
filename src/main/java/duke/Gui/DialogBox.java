@@ -1,7 +1,8 @@
+package duke.Gui;
+
 import java.io.IOException;
 import java.util.Collections;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.shape.Circle;
+
 
 /**
  * An example of a custom control using FXML.
@@ -29,9 +30,9 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     //@@author Ongzl-reused
-    //Reused from GeNiaaz / ip ... DialogBox.java
+    //Reused from GeNiaaz / ip ... duke.Gui.DialogBox.java
     /**
-     * Constructor for DialogBox instance
+     * Constructor for duke.Gui.DialogBox instance
      * @param text message to be shown to user
      * @param img image of user to be shown in display window
      * @param isDuke boolean to check if is assistant or user
@@ -57,7 +58,7 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
 
         //@@author GeNiaaz-reused
-        //Reused from lll-jy / ip ... DialogBox.java
+        //Reused from lll-jy / ip ... duke.Gui.DialogBox.java
 
         this.setBorder(new Border(new BorderStroke(Color.DARKBLUE,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -71,7 +72,7 @@ public class DialogBox extends HBox {
         String[] stringList = dialog.getText().split("\n");
         count += stringList.length + 1;
         for (String substring : stringList) {
-            count += substring.length() / 32;
+            count += substring.length() / 50;
         }
         this.setMinHeight(count * 15 + 30);
 

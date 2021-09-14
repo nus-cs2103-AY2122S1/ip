@@ -9,7 +9,7 @@ public class DukeException extends Exception {
      * Constructs a DukeException.
      */
     public DukeException() {
-        super(" OOPS!!! I'm sorry, I don't quite understand what you mean :)");
+        super("OOPS!!! I'm sorry, I don't quite understand what you mean :)");
     }
 
     /**

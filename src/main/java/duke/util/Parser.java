@@ -1,7 +1,5 @@
 package duke.util;
 
-import java.util.Locale;
-
 import duke.exception.DukeException;
 
 /**
@@ -34,7 +32,7 @@ public class Parser {
      * Parses the input and then executes the instructions.
      *
      * @param input String of instructions.
-     * @return The response from Duke.
+     * @return The response from duke.Duke.
      */
     public String parseAndExecute(String input) {
         try {

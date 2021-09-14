@@ -1,6 +1,9 @@
+package duke;
+
 import duke.util.Parser;
 import duke.util.TaskList;
 import duke.util.Ui;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 
 public class Duke {
@@ -10,7 +13,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor of Duke.
+     * Constructor of duke.Duke.
      */
     public Duke(String fileName) {
         this.ui = new Ui();
@@ -19,14 +22,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("list.ser").run();
+        new Duke("list.ser");
+        Application.launch(Main.class, args);
     }
 
     /**
-     * Gets response from Duke with the input being the prompt.
+     * Gets response from duke.Duke with the input being the prompt.
      *
-     * @param input Prompt for Duke, Users input.
-     * @return Duke's reponse as a String.
+     * @param input Prompt for duke.Duke, Users input.
+     * @return duke.Duke's reponse as a String.
      */
     @FXML
     public String getResponse(String input) {
@@ -34,9 +38,11 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke program, prints out welcome statement and starts accepting input.
+     * Runs the duke.Duke program, prints out welcome statement and starts accepting input.
+     * @return
      */
-    public void run() {
-        ui.welcome();
+    public String run() {
+        return ui.welcome();
+
     }
 }
