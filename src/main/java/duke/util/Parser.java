@@ -83,7 +83,7 @@ public class Parser {
             return new CommandAdd(new Deadline(description, dateTime));
         }
         case "event": {
-            int datetimeFlagIndex = findIndex(splitInput, DEADLINE_DATETIME_FLAG);
+            int datetimeFlagIndex = findIndex(splitInput, EVENT_DATETIME_FLAG);
             String description = parseDescription(splitInput, datetimeFlagIndex);
             int priorityFlagIndex = findIndex(splitInput, PRIORITY_FLAG);
             LocalDateTime[] dateTimes = parseEventDateTime(splitInput, datetimeFlagIndex, priorityFlagIndex);
