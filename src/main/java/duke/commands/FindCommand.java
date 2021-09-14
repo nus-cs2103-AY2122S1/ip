@@ -5,6 +5,8 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.Locale;
+
 /**
  * Class that is a subclass of Command class
  * and handles the behaviour of the Command for
@@ -30,7 +32,7 @@ public class FindCommand extends Command{
 
             // loop again for each keyword in input
             for(int word = 1; word < commandArr.length; word++){
-                if(taskList.getTask(i).getName().contains(commandArr[word])) {
+                if(taskList.getTask(i).getName().toLowerCase().contains(commandArr[word].toLowerCase())) {
                     if (!foundAnyMatch) {
                         ui.printResponse("Here are the matching tasks:");
                     }
