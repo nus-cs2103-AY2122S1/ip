@@ -1,4 +1,0 @@
-T | 1 | sdfgad | 
-T | 0 | do smt | 
-T | 0 | smt | 
-T | 0 | delet tis | 
