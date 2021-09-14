@@ -1,6 +1,8 @@
 # User Guide
 Duke is a **Personal Assistant Chatbot** that helps you to keep track of various things. You can think of it as a digital task list, where you can add and delete tasks.
 
+<img width="427" alt="Hello, I'm Duke" src="https://user-images.githubusercontent.com/65549665/133202028-9bd38670-12c3-43c4-9f5e-be9c5be4d005.png">
+
 ## Features 
 Listed below are Duke's features:
 1. Add a task to the task list
@@ -58,6 +60,8 @@ Expected outcome:
 
 Description of the outcome.
 
+<img width="408" alt="todo" src="https://user-images.githubusercontent.com/65549665/133202878-54b4553d-ff4e-40cd-8483-2c20c7b580f2.png">
+
 ```
 Got it. I've added this task:
   [T][] return book
@@ -75,6 +79,8 @@ Example of usage:
 `event carnival /at 2/12/2021 0930`
 
 Expected outcome:
+
+<img width="408" alt="event" src="https://user-images.githubusercontent.com/65549665/133203145-634352ee-f11e-494c-b589-07ff4dcf1d92.png">
 
 Description of the outcome.
 
@@ -96,6 +102,8 @@ Example of usage:
 
 Expected outcome:
 
+<img width="407" alt="deadline" src="https://user-images.githubusercontent.com/65549665/133203198-96adf05a-c82e-4c20-8bdb-7d90216ad94c.png">
+
 Description of the outcome.
 
 ```
@@ -112,6 +120,7 @@ Example of usage:
 
 Expected outcome:
 
+<img width="412" alt="list" src="https://user-images.githubusercontent.com/65549665/133203214-91d226b5-8626-4d11-8e5f-d42fe403aa8b.png">
 Description of the outcome.
 
 ```
@@ -130,6 +139,8 @@ Example of usage:
 `schedule 2/12/2021`
 
 Expected outcome:
+
+<img width="412" alt="schedule" src="https://user-images.githubusercontent.com/65549665/133203253-53aa5551-abf9-4b37-be5a-07ff78073b23.png">
 
 Description of the outcome.
 
@@ -156,6 +167,8 @@ Example of usage:
 
 Expected outcome:
 
+<img width="411" alt="done" src="https://user-images.githubusercontent.com/65549665/133203284-ac2dbbc1-6ddc-4427-bc2c-bed489d68e70.png">
+
 Description of the outcome.
 
 ```
@@ -176,6 +189,8 @@ Example of usage:
 
 Expected outcome:
 
+<img width="409" alt="delete" src="https://user-images.githubusercontent.com/65549665/133203318-04ac033a-9b51-4f24-ace2-cb47931531f3.png">
+
 Description of the outcome.
 
 ```
@@ -194,6 +209,8 @@ Example of usage:
 
 Expected outcome:
 
+<img width="409" alt="find" src="https://user-images.githubusercontent.com/65549665/133203447-0d8c0863-aa19-4f28-8a18-ae749940b7a9.png">
+
 Description of the outcome.
 
 ```
@@ -208,3 +225,7 @@ Exits the program immediately.
 Example of usage:
 
 `bye`
+
+### `save` - Saving data to local drive
+
+For every new task that had been added or deleted from Duke, Duke will perform an auto-save to the *data.txt* file in the same directory as the *jar* file. Closing the app will not cause Duke to lose track of the tasks that had been previously added. Restarting the app should load previously added tasks and performing the command `list` should display these tasks.
