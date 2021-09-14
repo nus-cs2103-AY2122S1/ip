@@ -1,8 +1,4 @@
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-
 import duke.Duke;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,6 +24,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private HelpWindow helpWindow;
+
+    private Stage primaryStage;
 
     private Duke duke;
 
@@ -51,6 +50,15 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Sets the primary stage object.
+     *
+     * @param s Stage object.
+     */
+    public void setPrimaryStage(Stage s) {
+        primaryStage = s;
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -70,7 +78,8 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (duke.hasExit()) {
-            CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(Platform::exit);
+            primaryStage.hide();
+            helpWindow.hide();
         }
     }
 

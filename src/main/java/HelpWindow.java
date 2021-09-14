@@ -68,4 +68,11 @@ public class HelpWindow extends AnchorPane {
         window.requestFocus();
     }
 
+    /**
+     * Hides the opened help window.
+     */
+    public void hide() {
+        window.hide();
+    }
+
 }
