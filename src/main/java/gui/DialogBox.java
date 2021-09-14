@@ -22,10 +22,7 @@ import javafx.scene.shape.Circle;
 // with minor modifications
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView
- * to represent the speaker's face and a label
- * containing text from the speaker.
+ * DialogBox for each dialog inside MainWindow.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -59,6 +56,14 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+
+    /**
+     * Returns a DialogBox for the user.
+     *
+     * @param text Text for the DialogBox.
+     * @param img Image for the DialogBox.
+     * @return DialogBox with the correct text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox box = new DialogBox(text, img);
         DropShadow shadow = new DropShadow();
@@ -69,6 +74,14 @@ public class DialogBox extends HBox {
         return box;
     }
 
+
+    /**
+     * Returns a DialogBox for the duke.
+     *
+     * @param text Text for the DialogBox.
+     * @param img Image for the DialogBox.
+     * @return DialogBox with the correct text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox box = new DialogBox(text, img);
         DropShadow shadow = new DropShadow();
