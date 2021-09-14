@@ -3,7 +3,7 @@ Duke is a cross-platform desktop app for managing your tasks (todos, deadlines, 
 while still having the comfort of a Graphical User Interface (GUI).\
 \
 **Latest release** <ins> [here](https://github.com/cyyeu/ip/releases/tag/A-Release) </ins>\
-***Note for Mac users***: Run using `java -jar duke.jar`
+***Run using `java -jar duke.jar`
 
 
 
