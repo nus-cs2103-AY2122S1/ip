@@ -38,8 +38,10 @@ public class DisplayBuffer {
             text = text.replace(UI.COLOR_RESET, "");
             text = text.replace(UI.COLOR_CYAN, "");
             text = text.replace(UI.COLOR_RED, "");
-            charCount += text.length();
-            buffer.addAll(Arrays.asList(text.split("\n")));
+            if (!text.isBlank()) {
+                charCount += text.length();
+                buffer.addAll(Arrays.asList(text.split("\n")));
+            }
         });
     }
 

@@ -39,17 +39,19 @@ public class Helper {
                 + " -> Adds a Deadline Task to the List.\n";
         helpString += "\t\t\t 6. " + UI.COLOR_PURPLE + "show /on #date" + UI.COLOR_RESET
                 + " -> Prints out the List of Tasks on Given Date.\n";
-        helpString += "\t\t\t 7. " + UI.COLOR_PURPLE + "done #index" + UI.COLOR_RESET
+        helpString += "\t\t\t 7. " + UI.COLOR_PURPLE + "find #string" + UI.COLOR_RESET
+                + " -> Prints out the List of Tasks containing the Search String.\n";
+        helpString += "\t\t\t 8. " + UI.COLOR_PURPLE + "done #index" + UI.COLOR_RESET
                 + " -> Marks Task at #index in the List as completed.\n";
-        helpString += "\t\t\t 8. " + UI.COLOR_PURPLE + "undo #index" + UI.COLOR_RESET
+        helpString += "\t\t\t 9. " + UI.COLOR_PURPLE + "undo #index" + UI.COLOR_RESET
                 + " -> Marks Task at #index in the List as incomplete.\n";
-        helpString += "\t\t\t 9. " + UI.COLOR_PURPLE + "delete #index" + UI.COLOR_RESET
+        helpString += "\t\t\t 10. " + UI.COLOR_PURPLE + "delete #index" + UI.COLOR_RESET
                 + " -> Delete Task at #index in the List.\n";
-        helpString += "\t\t\t 10. " + UI.COLOR_PURPLE + "tag #index /as #tagname" + UI.COLOR_RESET
+        helpString += "\t\t\t 11. " + UI.COLOR_PURPLE + "tag #index /as #tagname" + UI.COLOR_RESET
                 + " -> Tags Task at #index in the List with the given #tagname.\n";
-        helpString += "\t\t\t 11. " + UI.COLOR_PURPLE + "untag #index" + UI.COLOR_RESET
+        helpString += "\t\t\t 12. " + UI.COLOR_PURPLE + "untag #index" + UI.COLOR_RESET
                 + " -> Untags Task at #index in the List.\n";
-        helpString += "\t\t\t 12. " + UI.COLOR_PURPLE + "bye/goodbye" + UI.COLOR_RESET
+        helpString += "\t\t\t 13. " + UI.COLOR_PURPLE + "bye/goodbye" + UI.COLOR_RESET
                 + " -> Quits the ChatBot.";
         ui.echo(helpString, UI.Type.COMPLETE);
     }
@@ -107,6 +109,16 @@ public class Helper {
                 + "\n\t\t\tThis command will show you on tasks on given date. "
                 + "\n\t\t\t#date is required and must be in the format d/m/yyyy"
                 + "\n\t\t\tFor example: show /on 28/9/2021", UI.Type.COMPLETE);
+    }
+
+    /***
+     * Shows the Help Page for "find" Command
+     */
+    private void showFindHelp() {
+        ui.echo(UI.COLOR_PURPLE + "find #string:" + UI.COLOR_RESET
+                + "\n\t\t\tThis command will show you on tasks that contain the given search string. "
+                + "\n\t\t\t#string is required."
+                + "\n\t\t\tFor example: find meeting", UI.Type.COMPLETE);
     }
 
     /***
@@ -170,7 +182,7 @@ public class Helper {
      */
     public void showCommandHelp(String command) {
         List<String> commandList = Arrays.asList("list", "todo", "event", "deadline", "show",
-                "done", "undo", "delete", "tag", "untag");
+                "done", "undo", "delete", "tag", "untag", "find");
         int ind = commandList.indexOf(command);
         switch (ind) {
         case 0: showListHelp();
@@ -192,6 +204,8 @@ public class Helper {
         case 8: showTagHelp();
             break;
         case 9: showUntagHelp();
+            break;
+        case 10: showFindHelp();
             break;
         default: showDefaultHelp();
             break;

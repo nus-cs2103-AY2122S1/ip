@@ -74,14 +74,14 @@ public class TaskList {
                 continue;
             }
             ArrayList<Task> tagTasks = taggedList.get(tag);
-            listString = listString.concat((char) i + ". " + tag + ":\n");
+            listString = listString.concat("\t\t\t" + (char) i + ". " + tag + ":\n");
             for (Task t : tagTasks) {
                 listString = listString.concat("\t\t\t  " + (list.indexOf(t) + 1) + ". " + t + "\n");
             }
             i += 1;
         }
         if (taggedList.get(NO_TAG).size() > 0) {
-            listString = listString.concat("Others:\n");
+            listString = listString.concat("\t\t\tOthers:\n");
             for (Task t : taggedList.get(NO_TAG)) {
                 listString = listString.concat("\t\t\t  " + (list.indexOf(t) + 1) + ". " + t + "\n");
             }
