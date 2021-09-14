@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.util;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import uhtredragnarson.task.Deadline;
+import uhtredragnarson.task.Event;
+import uhtredragnarson.task.Task;
+import uhtredragnarson.task.ToDo;
 
 /**
  * Storage handles the .txt file that stores the user's tasks.
@@ -50,7 +55,7 @@ public class Storage {
      * @return List of tasks
      * @throws IOException Throws an exception if the I/O operations failed or are interrupted.
      */
-    protected List<Task> createTaskList() throws IOException {
+    public List<Task> createTaskList() throws IOException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
         if (!file.exists()) {

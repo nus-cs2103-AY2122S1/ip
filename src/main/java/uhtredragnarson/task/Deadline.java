@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.task;
 
 /**
  * The Deadline class extends the Task class and represents a deadline that has a specific

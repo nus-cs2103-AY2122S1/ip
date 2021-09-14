@@ -1,6 +1,11 @@
-package uhtredragnarson;
+package uhtredragnarson.util;
 
 import java.util.List;
+
+import uhtredragnarson.task.Deadline;
+import uhtredragnarson.task.Event;
+import uhtredragnarson.task.Task;
+import uhtredragnarson.task.ToDo;
 
 /**
  * This class handles all the messages the UhtredRagnarson bot will show to the user.
@@ -15,7 +20,7 @@ public class Ui {
      *
      * @return The String message.
      */
-    protected String showWelcomeMessage() {
+    public String showWelcomeMessage() {
         return "Hello! My name is Uhtred Ragnarson, son of Uhtred, of Bebbanburg!\n"
                 + "What can i do for you?\n"
                 + "\n(type 'help' for a full list of commands and instructions on how to use them)";
@@ -28,7 +33,7 @@ public class Ui {
      * @param tasks List of tasks.
      * @return The String message.
      */
-    protected String showTodoMessage(ToDo todo, List<Task> tasks) {
+    public String showTodoMessage(ToDo todo, List<Task> tasks) {
         return "Got it. I've added this task:\n" + "  "
                 + todo + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
@@ -41,7 +46,7 @@ public class Ui {
      * @param tasks    List of tasks.
      * @return The String message.
      */
-    protected String showDeadlineMessage(Deadline deadline, List<Task> tasks) {
+    public String showDeadlineMessage(Deadline deadline, List<Task> tasks) {
         return "Got it. I've added this task:\n" + "  "
                 + deadline + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
@@ -54,7 +59,7 @@ public class Ui {
      * @param tasks List of tasks.
      * @return The String message.
      */
-    protected String showEventMessage(Event event, List<Task> tasks) {
+    public String showEventMessage(Event event, List<Task> tasks) {
         return "Got it. I've added this task:\n" + "  "
                 + event + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
@@ -66,7 +71,7 @@ public class Ui {
      * @param task The task to be marked as done.
      * @return The String message.
      */
-    protected String showDoneMessage(Task task) {
+    public String showDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n"
                 + "  " + task.toString();
     }
@@ -78,7 +83,7 @@ public class Ui {
      * @param tasks List of tasks.
      * @return The String message.
      */
-    protected String showDeleteMessage(Task task, List<Task> tasks) {
+    public String showDeleteMessage(Task task, List<Task> tasks) {
         return "Noted. I've removed this task:\n"
                 + "  " + task + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
@@ -90,7 +95,7 @@ public class Ui {
      * @param tasks List of tasks.
      * @return The String message.
      */
-    protected String showMatchingTasks(List<Task> tasks) {
+    public String showMatchingTasks(List<Task> tasks) {
         if (tasks.size() == 0) {
             return "I can't find any matching tasks in your list! :(";
         }
@@ -103,7 +108,11 @@ public class Ui {
         return result.toString();
     }
 
-    protected String showHelpMessage() {
+    /**
+     * Returns a help message with a list of commands and instructions on how to use them.
+     * @return The help message.
+     */
+    public String showHelpMessage() {
         return "Uhtred is a chat bot that helps you organise your tasks. You can add "
                 + "different types of tasks such as todos, deadlines and events.\n"
                 + "To add todos, type 'todo (description)'\n\n"

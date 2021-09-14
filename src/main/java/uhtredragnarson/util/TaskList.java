@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.util;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -6,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import uhtredragnarson.task.Deadline;
+import uhtredragnarson.task.Event;
+import uhtredragnarson.task.Task;
+import uhtredragnarson.task.ToDo;
 
 /**
  * This class stores the user tasks and has methods to manipulate them.
@@ -15,11 +20,11 @@ public class TaskList {
     private final List<Task> tasks;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    protected TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    protected TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         tasks = taskList;
     }
 
@@ -27,7 +32,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    protected List<Task> getList() {
+    public List<Task> getList() {
         return tasks;
     }
 
@@ -38,7 +43,7 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String addTodoTask(String userInput, Ui ui, Storage storage) throws IOException {
+    public String addTodoTask(String userInput, Ui ui, Storage storage) throws IOException {
         if (userInput.equals("todo")) {
             return "☹ OOPS!!! You need to enter a description of the task!";
         }
@@ -55,7 +60,7 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String addDeadlineTask(String userInput, Ui ui, Storage storage) throws DateTimeParseException,
+    public String addDeadlineTask(String userInput, Ui ui, Storage storage) throws DateTimeParseException,
             IOException {
         if (userInput.equals("deadline")) {
             return "☹ OOPS!!! You need to enter a description along with the deadline!";
@@ -74,7 +79,7 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String addEventTask(String userInput, Ui ui, Storage storage) throws IOException {
+    public String addEventTask(String userInput, Ui ui, Storage storage) throws IOException {
         if (userInput.equals("event")) {
             return "☹ OOPS!!! You need to enter a description along with the event timings!";
         }
@@ -164,7 +169,7 @@ public class TaskList {
         String keyword = userInput.split(" ")[1];
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
-            for (String s : task.title.split(" ")) {
+            for (String s : task.getTitle().split(" ")) {
                 if (keyword.equals(s)) {
                     matchingTasks.add(task);
                 }

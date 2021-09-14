@@ -1,7 +1,9 @@
-package uhtredragnarson;
+package uhtredragnarson.util;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+
+import uhtredragnarson.exception.UhtredRagnarsonException;
 
 /**
  * Parser parses the user input into a command and executes it.
@@ -17,7 +19,7 @@ public class Parser {
      * @param ui        Ui class to print messages.
      * @throws UhtredRagnarsonException Throws this exception if the user inputs an invalid command.
      */
-    protected static String parse(String userInput, TaskList taskList, Ui ui, Storage storage)
+    public static String parse(String userInput, TaskList taskList, Ui ui, Storage storage)
             throws UhtredRagnarsonException, IOException {
         String result;
         String commandType = userInput.split(" ")[0];

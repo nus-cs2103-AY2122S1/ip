@@ -2,6 +2,12 @@ package uhtredragnarson;
 
 import java.io.IOException;
 
+import uhtredragnarson.exception.UhtredRagnarsonException;
+import uhtredragnarson.util.Parser;
+import uhtredragnarson.util.Storage;
+import uhtredragnarson.util.TaskList;
+import uhtredragnarson.util.Ui;
+
 /**
  * UhtredRagnarson is a chat bot that help users to manage their to-dos, deadlines and events.
  */
@@ -15,7 +21,7 @@ public class UhtredRagnarson {
      * The constructor for UhtredRagnarson.
      */
     public UhtredRagnarson() {
-        String filePath = "src/main/java/data/UhtredRagnarson.txt";
+        String filePath = "data/UhtredRagnarson.txt";
         storage = new Storage(filePath);
         ui = new Ui();
         try {
@@ -26,7 +32,7 @@ public class UhtredRagnarson {
         }
     }
 
-    protected String showWelcomeMessage() {
+    public String showWelcomeMessage() {
         return ui.showWelcomeMessage();
     }
 
@@ -35,7 +41,7 @@ public class UhtredRagnarson {
      * @param userInput The command text that the user inputs.
      * @return The message to be printed to the user.
      */
-    protected String getResponse(String userInput) {
+    public String getResponse(String userInput) {
         String result;
         try {
             result = Parser.parse(userInput, taskList, ui, storage);

@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.ui;
 
 import java.util.Objects;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import uhtredragnarson.UhtredRagnarson;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

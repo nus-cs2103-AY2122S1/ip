@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.exception;
 
 /**
  * This class represents a custom exception to use in the UhtredRagnarson class.

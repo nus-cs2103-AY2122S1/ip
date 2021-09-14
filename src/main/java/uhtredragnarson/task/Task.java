@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.task;
 
 /**
  * This is an abstract class in which the ToDo, Deadline and Event class will extend from.
@@ -16,6 +16,14 @@ public abstract class Task {
     public Task(String title) {
         this.title = title;
         this.isDone = false;
+    }
+
+    /**
+     * Returns the description of the task.
+     * @return Description of the task.
+     */
+    public String getTitle() {
+        return title;
     }
 
     /**

@@ -1,4 +1,4 @@
-package uhtredragnarson;
+package uhtredragnarson.ui;
 
 import java.io.IOException;
 import java.util.Collections;
