@@ -6,8 +6,6 @@
 
 Download the executable jar file `pib.jar` and double-click to start the app!
 
----
-
 ## What is Pib?
 
 Pib is a simple and lightweight task-tracker for you!
@@ -15,8 +13,6 @@ Pib is a simple and lightweight task-tracker for you!
 You will be able to use it both from the CLI and the GUI.
 
 _Pib auto-saves everytime you make a change and when you quit!_
-
----
 
 ## Commands
 
@@ -28,8 +24,6 @@ _Pib auto-saves everytime you make a change and when you quit!_
 - `bye`
     - **Exits the application**
       - _eg. output:_ `Bye! See you next time!`
-
----
 
 ### Create tasks
 - `todo`
@@ -48,8 +42,6 @@ _Pib auto-saves everytime you make a change and when you quit!_
     - Format: `event <task description> /at <YYYY-MM-DD> <HHMM>`
         - _eg. input:_ `event Swab test /at 2021-09-25 1230`
         - _eg. output:_ `Added: Swab test. There are 3 task(s) in the list`
-
----
 
 ### Handle tasks
 - `done`
