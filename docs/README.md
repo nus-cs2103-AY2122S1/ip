@@ -87,7 +87,7 @@ list [#tagname]
 <br>
 
 <div align = "center">
-  <img height = "300" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_CLI.png?raw=true">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_CLI.png?raw=true">
   <p align = "center"> CLI Interface </p>
   <div float="left">
     <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_GUI1.png?raw=true">
@@ -127,6 +127,14 @@ Example of usage:
 ```
 todo #description
 ```
+<br>
+
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/todo_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/todo_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
 
 <br>
 
@@ -142,6 +150,14 @@ Example of usage:
 ```
 event #description /at #timing
 ```
+<br>
+
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/event_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/event_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
 
 <br>
 
@@ -157,6 +173,14 @@ Example of usage:
 ```
 deadline #description /by #deadline
 ```
+<br>
+
+<div align = "center">
+  <img width = "1000" src="https://github.com/crypto-code/ip/blob/master/docs/img/deadline_CLI.png?raw=true">
+  <p align = "center"> CLI Interface </p>
+  <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/deadline_GUI.png?raw=true">
+  <p align = "center"> GUI Interface </p>
+</div>
 
 <br>
 
