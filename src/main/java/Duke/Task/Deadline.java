@@ -45,7 +45,7 @@ public class Deadline extends Task {
             doneStatus = "X";
         }
 
-        taskStatus = "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task + " (at: " + parsedTime() + ")";
+        taskStatus = "[" + TASKTYPE + "]" + "[" + doneStatus + "] " + task + " (by: " + parsedTime() + ")";
         return taskStatus;
     }
 

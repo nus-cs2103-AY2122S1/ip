@@ -30,15 +30,20 @@ public class MainWindow extends AnchorPane {
     private Rectangle emptySpace;
     private Duke duke;
     private BackgroundImage backgroundImage;
+    //
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
 
+    //@@author HangZelin-reused
+    //Reused from https://edencoding.com/scene-background/
+    //with minor modifications
     private void setBackgroundImage() {
         BackgroundSize backgroundSize;
 
         backgroundSize = new BackgroundSize(400, 600,
                 true, true, true, true);
+        //Background image source from
         backgroundImage = new BackgroundImage(new Image("/background/background.jpg"),
                 null, null, null, backgroundSize);
     }
