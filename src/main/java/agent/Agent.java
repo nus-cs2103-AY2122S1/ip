@@ -10,7 +10,7 @@ import agent.parser.Parser;
 import agent.tasks.TaskList;
 
 /**
- * Main class representing the chat bot agent.
+ * Represents the chat bot agent.
  *
  * @author kevin9foong
  */
