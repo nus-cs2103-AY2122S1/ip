@@ -1,3 +1,6 @@
-T | 1 | sleep
-D | 1 | eat brekfast | 1888-11-11 1200
 E | 0 | sleep | 1818-10-15 1200
+D | 1 | eat brekfast | 1888-11-11 1200
+T | 0 | eat dinner
+T | 0 | eat lunch
+T | 1 | sleep
+D | 0 | swim | 2020-11-11 1000

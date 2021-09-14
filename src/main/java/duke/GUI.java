@@ -61,6 +61,12 @@ public class GUI{
             return lst.find(s.substring(5));
         } else if(s.contains("bye")){
             return "I have updated your task list file! thankyou and see you soon!";
+        } else if(s.contains("sort by type")){
+            return lst.sortByType();
+        } else if(s.contains("sort by date reverse")){
+            return lst.sortByDateReversed();
+        } else if(s.contains("sort by date")){
+            return lst.sortByDate();
         } else {
             return "I don't know what you're saying!";
         }
