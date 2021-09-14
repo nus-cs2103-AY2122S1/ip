@@ -34,9 +34,11 @@ Example of usage: `list`
 
 Example outcome:
 
-`Here are the tasks in your list:
+```
+Here are the tasks in your list:
 1. [T][] Read book
-2. [D][] Complete IP (by: Sep 15 2021)`
+2. [D][] Complete IP (by: Sep 15 2021)
+```
 
 ### `done` - Sets a task to DONE status
 
@@ -48,8 +50,10 @@ Example of usage: `done 2`
 
 Example outcome:
 
-`Nice! I've marked this task as done:
-  [D][X] Complete IP (by: Sep 15 2021)`
+```
+Nice! I've marked this task as done:
+  [D][X] Complete IP (by: Sep 15 2021)
+```
 
 ### `delete` - Deletes a task from the task list
 
@@ -61,9 +65,11 @@ Example of usage: `delete 2`
 
 Example outcome:
 
-`Noted. I've removed this task:
+```
+Noted. I've removed this task:
   [D][X] Complete IP (by: Sep 15 2021)
-Now you have 1 tasks in the list.`
+Now you have 1 tasks in the list.
+```
 
 ### `todo` - Creates a new Todo Task
 
@@ -75,9 +81,11 @@ Example of usage: `todo Read a book`
 
 Example outcome:
 
-`Got it. I've added this task:
+```
+Got it. I've added this task:
   [T][] Read a book
-Now you have 2 tasks in the list.`
+Now you have 2 tasks in the list.
+```
 
 ### `deadline` - Creates a new Task with a deadline
 
@@ -89,9 +97,11 @@ Example of usage: `deadline Read a book /by 2021-09-14`
 
 Example outcome:
 
-`Got it. I've added this task:
+```
+Got it. I've added this task:
   [D][] Read a book (by: Sep 14 2021)
-Now you have 3 tasks in the list.`
+Now you have 3 tasks in the list.
+```
 
 ### `event` - Creates a new Task with a specific date
 
@@ -103,9 +113,11 @@ Example of usage: `event Attend book event /at 2021-09-14`
 
 Example outcome:
 
-`Got it. I've added this task:
+```
+Got it. I've added this task:
   [E][] Attend book event (at: Sep 14 2021)
-Now you have 4 tasks in the list.`
+Now you have 4 tasks in the list.
+```
 
 ### `dowithinperiod` - Creates a new Task that should be completed within a time period
 
@@ -117,9 +129,11 @@ Example of usage: `dowithinperiod Complete CS2103T IP /between 2021-09-10 /and 2
 
 Example outcome:
 
-`Got it. I've added this task:
+```
+Got it. I've added this task:
   [P][] Complete CS2103T IP (between: Sep 10 2021 and Sep 15 2021)
-Now you have 5 tasks in the list.`
+Now you have 5 tasks in the list.
+```
 
 ### `date` - Filters and returns tasks that are due on the given date
 
@@ -131,9 +145,11 @@ Example of usage: `date 2021-09-14`
 
 Example outcome:
 
-`Here are the tasks in your list that are due on Sep 14 2021:
+```
+Here are the tasks in your list that are due on Sep 14 2021:
 1. [D][] Read a book (by: Sep 14 2021)
-2. [E][] Attend book event (at: Sep 14 2021)`
+2. [E][] Attend book event (at: Sep 14 2021)
+```
 
 ### `find` - Finds and returns all tasks that have the given string in its description
 
@@ -145,7 +161,9 @@ Example of usage: `find book`
 
 Example outcome:
 
-`Here are the tasks in your list:
+```
+Here are the tasks in your list:
 1. [T][] Read a book
 2. [D][] Read a book (by: Sep 14 2021)
-3. [E][] Attend a book event (at: Sep 14 2021)`
+3. [E][] Attend a book event (at: Sep 14 2021)
+```
