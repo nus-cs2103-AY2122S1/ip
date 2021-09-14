@@ -135,7 +135,7 @@ public class Parser {
         }
         String addTaskText = "Got it. I've added this task:  \n"
                 + "       ";
-        String taskNumberText = "\n     "
+        String taskNumberText = "\n"
                 + "Now you have " + Integer.toString(tasks.getSize())
                 + " tasks in the list.";
         return addTaskText + tasks.getTask(
@@ -165,7 +165,7 @@ public class Parser {
         }
         String addTaskText = "Got it. I've added this task:  \n"
                 + "       ";
-        String taskNumberText = "\n     "
+        String taskNumberText = "\n"
                 + "Now you have " + Integer.toString(tasks.getSize())
                 + " tasks in the list.";
         return addTaskText + tasks.getTask(
@@ -182,13 +182,13 @@ public class Parser {
      */
     public void exceptionCommand(TaskList tasks) throws DukeException {
         if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else if (input.equals("done")) {
-            throw new DukeException("☹ OOPS!!! The completed task number must be given.");
+            throw new DukeException("OOPS!!! The completed task number must be given.");
         } else if (input.equals("delete")) {
-            throw new DukeException("☹ OOPS!!! You need to specify which task you want to delete.");
+            throw new DukeException("OOPS!!! You need to specify which task you want to delete.");
         } else if (input.equals("blah")) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -205,7 +205,7 @@ public class Parser {
         tasks.removeTask(deletedTask);
         String removeTaskText = "Noted. I've removed this task:  \n"
                 + "       ";
-        String taskNumberText = "\n     "
+        String taskNumberText = "\n"
                 + "Now you have " + Integer.toString(tasks.getSize())
                 + " tasks in the list.";
         return removeTaskText + deletedTask.toString()
