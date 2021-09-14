@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import javafx.application.Application;
 

@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.io.IOException;
 
@@ -13,10 +13,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Jarvis using FXML.
  */
 public class Main extends Application {
-    private Duke jarvis = new Duke("data/jarvis.txt", "data/notes.txt"); // Instantiating Jarvis
+    private Jarvis jarvis = new Jarvis("data/jarvis.txt", "data/notes.txt"); // Instantiating Jarvis
 
     private static Stage currStage;
     /**
@@ -32,16 +32,21 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(jarvis);
+            fxmlLoader.<MainWindow>getController().setJarvis(jarvis);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Closes the chat bot window when the user is done using the application
+     */
     public static void end() {
+        // The chat bot window closes 1 second after the user keys in 'bye' so that they are able to see
+        // Jarvis' response
         PauseTransition durationToWaitBeforeClosing = new PauseTransition(Duration.seconds(1));
-        durationToWaitBeforeClosing.setOnFinished(event -> Main.currStage.close());
+        durationToWaitBeforeClosing.setOnFinished(event -> Main.currStage.close()); // Chat bot window closes
         durationToWaitBeforeClosing.play();
     }
 }

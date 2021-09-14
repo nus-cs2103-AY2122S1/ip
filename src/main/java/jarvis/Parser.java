@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 import java.io.IOException;
 
 /**
@@ -47,16 +47,16 @@ public class Parser {
      * markAsDoneAndUpdate() method.
      *
      * @param instruction User's input that followed the "done" command word
-     * @throws DukeException if there is no task that has the index keyed in by the user
+     * @throws JarvisException if there is no task that has the index keyed in by the user
      * @throws IOException if there is an error in updated the list of tasks saved in the user's
      * hard disk after marking a task as completed
      */
-    public static String parseDone(String instruction) throws DukeException, IOException {
+    public static String parseDone(String instruction) throws JarvisException, IOException {
         int taskNum = Integer.parseInt(instruction.substring(5)) - 1;
 
         // If the task number is invalid
         if (taskNum >= TaskList.getCounter()) {
-            throw new DukeException(Ui.invalidTaskNum(taskNum));
+            throw new JarvisException(Ui.invalidTaskNum(taskNum));
         // If the task number is valid, update the task to done
         } else {
             return TaskList.markAsDoneAndUpdate(taskNum);
@@ -68,16 +68,16 @@ public class Parser {
      * deleteTaskAndUpdate() method.
      *
      * @param instruction User's input that followed the "delete" command word
-     * @throws DukeException if there is no task that has the index keyed in by the user
+     * @throws JarvisException if there is no task that has the index keyed in by the user
      * @throws IOException if there is an error in updated the list of tasks saved in the user's
      * hard disk after marking a task as completed
      */
-    public static String parseDelete(String instruction) throws DukeException, IOException {
+    public static String parseDelete(String instruction) throws JarvisException, IOException {
         int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
 
         // If the task number keyed in by the user is invalid
         if (taskNum >= TaskList.getCounter()) {
-            throw new DukeException(Ui.invalidTaskNum(taskNum));
+            throw new JarvisException(Ui.invalidTaskNum(taskNum));
         // If the task number keyed in by the user is valid
         } else {
             return TaskList.deleteTaskAndUpdate(taskNum);
@@ -89,14 +89,14 @@ public class Parser {
      * addTaskAndUpdate() method.
      *
      * @param instruction User's input that followed the "todo" command word
-     * @throws DukeException if there is no task description keyed in
+     * @throws JarvisException if there is no task description keyed in
      * @throws IOException if there is an error in updated the list of tasks saved in the user's
      * hard disk after marking a task as completed
      */
-    public static String parseTodo(String instruction) throws DukeException, IOException {
+    public static String parseTodo(String instruction) throws JarvisException, IOException {
         // If the description of the todo task is empty
         if (instruction.length() < 5) {
-            throw new DukeException(Ui.EMPTY_TODO_DESCRIPTION);
+            throw new JarvisException(Ui.EMPTY_TODO_DESCRIPTION);
 
         // If the description of the todo task is not empty
         } else {
@@ -113,15 +113,15 @@ public class Parser {
      * addTaskAndUpdate() method.
      *
      * @param instruction User's input that followed the "deadline" command word
-     * @throws DukeException if there is no task description/no deadline/wrongly formatted deadline
+     * @throws JarvisException if there is no task description/no deadline/wrongly formatted deadline
      * keyed in
      * @throws IOException if there is an error in updated the list of tasks saved in the user's
      * hard disk after marking a task as completed
      */
-    public static String parseDeadline(String instruction) throws DukeException, IOException {
+    public static String parseDeadline(String instruction) throws JarvisException, IOException {
         // If the description of the deadline task is empty
         if (instruction.length() < 10) {
-            throw new DukeException(Ui.EMPTY_DEADLINE_DESCRIPTION);
+            throw new JarvisException(Ui.EMPTY_DEADLINE_DESCRIPTION);
 
         // If the description of the deadline task is not empty
         } else {
@@ -138,16 +138,16 @@ public class Parser {
             // If the extracted deadline is too short to contain all of the relevant details
             if (currIndex == instruction.length() ||
                     currIndex + 5 >= instruction.length()) {
-                throw new DukeException(Ui.INCOMPLETE_DEADLINE);
+                throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
 
             // If the date keyed in by the user is formatted wrongly
             } else if (instruction.charAt(currIndex + 7) != '/' &&
                     instruction.charAt(currIndex + 10) != '/') {
-                throw new DukeException(Ui.WRONGLY_FORMATTED_DATE);
+                throw new JarvisException(Ui.WRONGLY_FORMATTED_DATE);
 
             // If the time keyed in by the suer is formatted wrongly
             } else if (instruction.substring(currIndex).length() < 20){
-                throw new DukeException(Ui.WRONGLY_FORMATTED_DEADLINE_TIME);
+                throw new JarvisException(Ui.WRONGLY_FORMATTED_DEADLINE_TIME);
 
             // If the deadline is formatted correctly overall
             } else {
@@ -165,15 +165,15 @@ public class Parser {
      * addTaskAndUpdate() method.
      *
      * @param instruction User's input that followed the "event" command word
-     * @throws DukeException if there is no task description/no deadline/wrongly formatted deadline
+     * @throws JarvisException if there is no task description/no deadline/wrongly formatted deadline
      * keyed in
      * @throws IOException if there is an error in updated the list of tasks saved in the user's
      * hard disk after marking a task as completed
      */
-    public static String parseEvent(String instruction) throws DukeException, IOException {
+    public static String parseEvent(String instruction) throws JarvisException, IOException {
         // If the description of the deadline task is empty
         if (instruction.length() < 7) {
-            throw new DukeException(Ui.EMPTY_EVENT_DESCRIPTION);
+            throw new JarvisException(Ui.EMPTY_EVENT_DESCRIPTION);
         } else {
             String taskDescription = "";
             int currIndex = 5;
@@ -188,16 +188,16 @@ public class Parser {
             // If the extracted timestamp is too short to contain all of the relevant details
             if (currIndex == instruction.length() ||
                     currIndex + 5 >= instruction.length()) {
-                throw new DukeException(Ui.INCOMPLETE_EVENT_TIMINGS);
+                throw new JarvisException(Ui.INCOMPLETE_EVENT_TIMINGS);
 
             // If the date keyed in by the user is formatted wrongly
             } else if (instruction.charAt(currIndex + 7) != '/' &&
                     instruction.charAt(currIndex + 10) != '/') {
-                throw new DukeException(Ui.WRONGLY_FORMATTED_DATE);
+                throw new JarvisException(Ui.WRONGLY_FORMATTED_DATE);
 
             // If the timings keyed in by the suer is formatted wrongly
             } else if (instruction.substring(currIndex).length() < 25){
-                throw new DukeException(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS);
+                throw new JarvisException(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS);
 
             // If the timestamp is formatted correctly overall
             } else {
@@ -215,12 +215,12 @@ public class Parser {
      * addNoteAndUpdate() method.
      *
      * @param instruction User's input that followed the "note" command word
-     * @throws DukeException if there is no note title/no body/wrongly formatted note
+     * @throws JarvisException if there is no note title/no body/wrongly formatted note
      * keyed in
      * @throws IOException if there is an error in updated the list of notes saved in the user's
      * hard disk
      */
-    public static String parseNote(String instruction) throws IOException, DukeException {
+    public static String parseNote(String instruction) throws IOException, JarvisException {
         StringBuilder noteTitle = new StringBuilder();
         String noteBody;
 
@@ -234,7 +234,7 @@ public class Parser {
 
         // If the '/' cannot be found, note is formatted wrongly
         if (currIndex == instruction.length()) {
-            throw new DukeException(Ui.WRONGLY_FORMATTED_NOTE);
+            throw new JarvisException(Ui.WRONGLY_FORMATTED_NOTE);
         // If the note is formatted correctly
         } else {
             noteBody = instruction.substring(currIndex + 2); //Extracting the note body
@@ -250,16 +250,16 @@ public class Parser {
      * deleteNoteAndUpdate() method.
      *
      * @param instruction User's input that followed the "delete" command word
-     * @throws DukeException if there is no note that has the index keyed in by the user
+     * @throws JarvisException if there is no note that has the index keyed in by the user
      * @throws IOException if there is an error in updated the list of note saved in the user's
      * hard disk
      */
-    public static String parseDeleteNote(String instruction) throws DukeException, IOException {
+    public static String parseDeleteNote(String instruction) throws JarvisException, IOException {
         int noteNum = Integer.parseInt(instruction.substring(13)) - 1;
 
         // If there is no corresponding note to the number keyed in by the user
         if (noteNum >= TaskList.getCounter()) {
-            throw new DukeException(Ui.invalidNoteNum(noteNum));
+            throw new JarvisException(Ui.invalidNoteNum(noteNum));
         // If there is a corresponding note to the number keyed in by the user
         } else {
             // Delete the note from the noteList array and update the note file in the user's hard disk

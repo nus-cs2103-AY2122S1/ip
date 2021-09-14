@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.io.File;
 import java.io.FileNotFoundException;

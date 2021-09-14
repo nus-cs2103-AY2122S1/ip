@@ -1,9 +1,9 @@
-package duke;
+package jarvis;
 
 /**
  * Class that throws exceptions specific to Jarvis
  */
-public class DukeException extends Exception {
+public class JarvisException extends Exception {
 
     protected String message;
 
@@ -12,7 +12,7 @@ public class DukeException extends Exception {
      *
      * @param message The error message to be printed
      */
-    public DukeException(String message) {
+    public JarvisException(String message) {
         super(message);
         this.message = message;
         assert !this.message.equals("") : "Error message is empty!";

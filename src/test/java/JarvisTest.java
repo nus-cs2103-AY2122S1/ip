@@ -1,7 +1,7 @@
-import duke.Deadline;
-import duke.Event;
-import duke.Parser;
-import duke.Todo;
+import jarvis.Deadline;
+import jarvis.Event;
+import jarvis.Parser;
+import jarvis.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Class containing tests to check the correctness of the program.
  */
-public class DukeTest {
+public class JarvisTest {
 
     /**
      * Checks if todo tasks are created correctly

@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke jarvis;
+    private Jarvis jarvis;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image jarvisImage = new Image(this.getClass().getResourceAsStream("/images/DaJarvis.png"));
@@ -34,21 +34,21 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 // Jarvis greets user upon opening the application
-                DialogBox.getDukeDialog(Ui.firstGreeting(), jarvisImage)
+                DialogBox.getJarvisDialog(Ui.firstGreeting(), jarvisImage)
         );
     }
 
     /**
      * Sets up Jarvis.
      *
-     * @param d The duke object to be set up.
+     * @param d The Jarvis object to be set up.
      */
-    public void setDuke(Duke d) {
+    public void setJarvis(Jarvis d) {
         jarvis = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Jarvis' reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
         String response = jarvis.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage), // User's dialog box
-                DialogBox.getDukeDialog(response, jarvisImage) // Jarvis' dialog box
+                DialogBox.getJarvisDialog(response, jarvisImage) // Jarvis' dialog box
         );
         userInput.clear();
     }

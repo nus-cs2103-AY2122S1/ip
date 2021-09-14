@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 /**
  * Class to create notes

@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.io.IOException;
 import java.util.ArrayList;

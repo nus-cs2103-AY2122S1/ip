@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 /**
  * Class to create todo tasks (tasks with no specific deadline)

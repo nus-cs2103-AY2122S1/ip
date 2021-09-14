@@ -1,11 +1,12 @@
-package duke;
+package jarvis;
+
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
 /**
  * Class which operates Jarvis the chat-bot
  */
-public class Duke {
+public class Jarvis {
     private Storage taskStorage;
     private Storage notesStorage;
     private TaskList tasks;
@@ -17,7 +18,7 @@ public class Duke {
      * @param taskFilePath The file in which the tasks are stored
      * @param noteFilePath The file in which the notes are stored
      */
-    public Duke(String taskFilePath, String noteFilePath) {
+    public Jarvis(String taskFilePath, String noteFilePath) {
         taskStorage = new Storage(taskFilePath); // To load user tasks
         notesStorage = new Storage(noteFilePath); // To load user notes as well
 
@@ -65,9 +66,9 @@ public class Duke {
             case "bye":
                 return Ui.BYE;
             default:
-                throw new DukeException(Ui.UNRECOGNISED_COMMAND);
+                throw new JarvisException(Ui.UNRECOGNISED_COMMAND);
             }
-        } catch (DukeException | IOException e) {
+        } catch (JarvisException | IOException e) {
             return "" + e;
         }
     }

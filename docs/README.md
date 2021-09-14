@@ -9,9 +9,12 @@ Then Jarvis is perfect for you 😉
 Jarvis is an **ABSOLUTELY FREE** and easy-to-use chatbot that can manage your tasks for you!
 
 ## Quick Start
-1. Ensure that Java 11 is installed.
-2. Download the latest JAR file from [here](https://github.com/Preshita01/ip/releases)
-3. Open duke.jar 
+1. Ensure that **Java 11** is installed.
+2. Download the latest **jarvis.jar** file from [here](https://github.com/Preshita01/ip/releases)
+3. Move **jarvis.jar** to your preferred location in the computer.
+4. Open terminal and navigate to the directory in which you have placed `jarvis.jar`
+   (e.g. if **jarvis.jar** is in **Desktop**, run the command `cd Desktop`)
+5. Once in the right directory, run the command `java -jar jarvis.jar` to start using Jarvis!
 
 ## Features
 * Adding a todo task: `todo`

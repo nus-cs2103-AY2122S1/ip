@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -98,7 +98,7 @@ public class DialogBox extends HBox {
      * @param img Profile picture of Jarvis
      * @return The dialog box containing the Jarvis' response and profile picture
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getJarvisDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip(); // Flips Jarvis' dialog box such that its response is on the left of the user's response
         return db;
