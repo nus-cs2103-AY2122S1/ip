@@ -35,14 +35,18 @@ public class Command {
     }
 
     /**
-     * Ask storage to load tasks in the txt file.
+     * Asks storage to load tasks in the txt file.
+     *
+     * @throws DuplicateException Throws when there are duplicate tasks detected.
+     * @throws InvalidTaskException Throws when the task format is invalid.
+     * @throws IOException Throws when there is something wrong during the IO process.
      */
     public void loadSavedTasks() throws DuplicateException, InvalidTaskException, IOException {
         storage.loadSavedTasks();
     }
 
     /**
-     * Get the welcome message.
+     * Gets the welcome message.
      *
      * @return A StringBuilder containing the welcome message.
      */
@@ -51,7 +55,7 @@ public class Command {
     }
 
     /**
-     * Get the GoodBye message.
+     * Gets the GoodBye message.
      *
      * @return A StringBuilder containing the GoodBye message.
      */
@@ -60,7 +64,7 @@ public class Command {
     }
 
     /**
-     * Get the Corresponding message with the input String.
+     * Gets the Corresponding message with the input String.
      *
      * @param task The input String containing the task user want Duke do.
      * @return A StringBuilder containing the task information.
