@@ -48,16 +48,21 @@ public class Parser {
         boolean isValidFeb = day <= 28 && day > 0;
         boolean isValidMonth = month > 0 && month <= 12;
         boolean isValidDay = day <= 31 && day > 0; //Is day valid for the month has 31 days.
-        boolean isValidDay2 = (month == 4 || month == 6 || month == 9
-                || month == 11) && day <= 30; //Is day valid for specific months.
+        boolean isInValidDay = (month == 4 || month == 6 || month == 9
+                || month == 11) && day > 30; //Is day valid for specific months.
         boolean isValidHour = hour <= 24 && hour >= 0;
         boolean isValidMinute = minute <= 60 && minute >= 0;
 
-        if ((isLeapYear && !isValidLeapYearFeb) || (month == 2 && !isValidFeb)) {
+        if ((isLeapYear && month == 2 && !isValidLeapYearFeb)
+                || (!isLeapYear && month == 2 && !isValidFeb)) {
             return false;
         }
 
-        return isValidMonth && isValidDay && isValidDay2 && isValidHour && isValidMinute;
+        if (isInValidDay) {
+            return false;
+        }
+
+        return isValidMonth && isValidDay && isValidHour && isValidMinute;
     }
 
     private LocalDateTime parseTimeInFormat1(String time) {
