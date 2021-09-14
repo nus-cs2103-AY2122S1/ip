@@ -14,6 +14,7 @@ import javafx.stage.Stage;
  * Bridge between Launcher i.e. entry point and MainWindow i.e. the controller class.
  */
 public class Main extends Application {
+    private static final String WINDOW_TITLE = "DukeBot";
     private final Duke duke = Duke.init();
 
     @Override
@@ -24,10 +25,15 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(Main.class.getResource("/view/styles.css").toExternalForm());
             primaryStage.setScene(scene);
+            setWindowTitle(primaryStage);
             fxmlLoader.<MainWindow>getController().setUpDuke(duke);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void setWindowTitle(Stage primaryStage) {
+        primaryStage.setTitle(WINDOW_TITLE);
     }
 }

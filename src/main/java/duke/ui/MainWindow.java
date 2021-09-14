@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
 
     public void setUpDuke(Duke d) {
         duke = d;
-        String initMessage = "Hello! What can I do for you?";
+        String initMessage = "Hello! I am Duke the Java mascot.\nWhat can I do for you?";
         DialogBox initDialog = DialogBox.getDukeDialog(initMessage, dukeImage);
         dialogContainer.getChildren().add(initDialog);
     }
