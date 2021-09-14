@@ -28,11 +28,20 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
 
+    /**
+     * Initializes JavaFx.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Welcome to Duke!", dukeImage));
     }
 
+    /**
+     * Set the Duke instance in the JavaFx application.
+     *
+     * @param d The Duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
