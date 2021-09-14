@@ -82,6 +82,7 @@ Then shows how many existing task in the list
 Got it, I've added this task:
 	[D][] *input action* *inpute date* *input day*
 Now you have *1* tasks in the list.
+```
 
 ### `Keyword` - list
 
@@ -97,6 +98,7 @@ A list of all the task in their displayed format
 ###expected output
 
 1. [D][] *input action* *inpute date*
+```
 
 ### `Keyword` - done *input index*
 
@@ -114,7 +116,7 @@ Specific task will have its second box crossed to indicate done.
 
 Nice! I've marked this task as done: [D][*X*] *input action* *inpute date*
 
-
+```
 ### `Keyword` - delete *input index*
 
 ###Expected outcome:
@@ -130,6 +132,7 @@ Specific task will no longer be present in the list
 ###expected output
 
 Now you have *n* tasks in the list. 
+```
 
 ### `Keyword` - bye
 
@@ -145,4 +148,5 @@ Duke wishes goodbye.
 ###expected output
 
 bye. Hope to see you again soon!
+```
 
