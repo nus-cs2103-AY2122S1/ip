@@ -10,7 +10,6 @@ Duke helps you keep track of your tasks.
 
 
 ## Features 
-<br />
 
 ### Add Tasks
 
@@ -57,10 +56,10 @@ Update information of existing task.
 ### Exit Duke
 
 Exits the App.
+
 <br />
 
 ## Usage
-
 ### `todo` - Add todo task to Duke to keep track of
 
 Format: `todo <DESCRIPTION>`
