@@ -14,9 +14,6 @@ Mark a task at a specified index in the list as done.
 ### Delete tasks from the list
 Delete a task at a specified index in the list.
 
-### Delete tasks from the list
-Delete a task at a specified index in the list.
-
 ### Find specific tasks from the list
 Shows tasks that match the given keyword.
 
