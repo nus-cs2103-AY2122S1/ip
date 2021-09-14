@@ -9,16 +9,16 @@ import botto.util.TaskList;
 
 
 /**
- * Command for stopping the bot
+ * Command for stopping the bot.
  */
 public class ExitCommand implements Command {
 
     /**
-     * print goodBye message
+     * Print goodBye message.
      *
-     * @param taskList the task list involved
-     * @param dialog the ui of the Botto bot
-     * @param storage storage of the Botto bot
+     * @param taskList the task list involved.
+     * @param dialog the ui of the Botto bot.
+     * @param storage storage of the Botto bot.
      */
     @Override
     public void execute(TaskList taskList, Dialog dialog, Storage storage) {
@@ -34,9 +34,9 @@ public class ExitCommand implements Command {
     }
 
     /**
-     * return true
+     * Return true.
      *
-     * @return true
+     * @return true.
      */
     @Override
     public boolean isExit() {

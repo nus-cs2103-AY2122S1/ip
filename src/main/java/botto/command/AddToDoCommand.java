@@ -8,28 +8,28 @@ import botto.util.Storage;
 import botto.util.TaskList;
 
 /**
- * Command for adding an event
+ * Command for adding an event.
  */
 public class AddToDoCommand implements Command {
 
     private String command;
 
     /**
-     * Constructor for an AddEventCommand
+     * Constructor for an AddEventCommand.
      *
-     * @param command user command
+     * @param command user command.
      */
     public AddToDoCommand(String command) {
         this.command = command;
     }
 
     /**
-     * add task to the tasklist, update the storage and print relevant messages
+     * Add task to the tasklist, update the storage and print relevant messages.
      *
-     * @param taskList the task list involved
-     * @param dialog the ui of the Botto bot
-     * @param storage storage of the Botto bot
-     * @throws BottoException when the there is no description inserted
+     * @param taskList the task list involved.
+     * @param dialog the ui of the Botto bot.
+     * @param storage storage of the Botto bot.
+     * @throws BottoException when the there is no description inserted.
      */
     @Override
     public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {

@@ -10,7 +10,7 @@ import javafx.application.Application;
 import javafx.scene.layout.VBox;
 
 /**
- * A task tracking bot
+ * A task tracking bot.
  */
 public class Botto {
     private Storage storage;
@@ -18,7 +18,7 @@ public class Botto {
     private Dialog dialog;
 
     /**
-     * Constructor for a Botto bot
+     * Constructor for a Botto bot.
      */
     public Botto() {
         dialog = new Dialog();
@@ -31,8 +31,9 @@ public class Botto {
     }
 
     /**
-     * evaluate user input and execute necessary action
-     * @param input user input
+     * evaluate user input and execute necessary action.
+     *
+     * @param input user input.
      */
     public void handleUserInput(String input) {
         try {
@@ -45,7 +46,8 @@ public class Botto {
 
     /**
      * set up dialog container in the ui
-     * @param container dialog container
+     *
+     * @param container dialog container.
      */
     public void setUpDialogContainer(VBox container) {
         dialog.setUp(container);
@@ -53,7 +55,7 @@ public class Botto {
     }
 
     /**
-     * This method will instantiate the Botto bot
+     * This method will instantiate the Botto bot.
      *
      * @param args sequence of characters (Strings) that are passed to the function.
      */

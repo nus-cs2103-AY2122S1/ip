@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Format for the Botto bot's deadline task
+ * Format for the Botto bot's deadline task.
  */
 public class Deadline extends Task implements Comparable<Deadline> {
 
@@ -13,10 +13,10 @@ public class Deadline extends Task implements Comparable<Deadline> {
 
 
     /**
-     * Constructor of a deadline task
+     * Constructor of a deadline task.
      *
-     * @param description description of the deadline task
-     * @param dateTime dateTime for the deadline task
+     * @param description description of the deadline task.
+     * @param dateTime dateTime for the deadline task.
      */
     public Deadline(String description, LocalDateTime dateTime) {
         super(description);
@@ -24,9 +24,9 @@ public class Deadline extends Task implements Comparable<Deadline> {
     }
 
     /**
-     * return string representation of the task
+     * Return string representation of the task.
      *
-     * @return string representation of the task
+     * @return string representation of the task.
      */
     @Override
     public String toString() {
@@ -35,6 +35,12 @@ public class Deadline extends Task implements Comparable<Deadline> {
     }
 
 
+    /**
+     * Compare the two deadlines.
+     *
+     * @param o another deadline.
+     * @return the value of this deadline compared to other deadline.
+     */
     @Override
     public int compareTo(Deadline o) {
         return this.dateTime.compareTo(o.dateTime);

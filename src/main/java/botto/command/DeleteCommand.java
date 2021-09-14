@@ -7,27 +7,27 @@ import botto.util.Storage;
 import botto.util.TaskList;
 
 /**
- * Command for deleting a task
+ * Command for deleting a task.
  */
 public class DeleteCommand implements Command {
     private String command;
 
     /**
-     * Constructor for a DeleteCommand
+     * Constructor for a DeleteCommand.
      *
-     * @param command user input
+     * @param command user input.
      */
     public DeleteCommand(String command) {
         this.command = command;
     }
 
     /**
-     * delete the task from the tasklist, update the storage and print relevant messages
+     * Delete the task from the tasklist, update the storage and print relevant messages.
      *
-     * @param taskList the task list involved
-     * @param dialog the ui of the Botto bot
-     * @param storage storage of the Botto bot
-     * @throws BottoException when the task is not specified
+     * @param taskList the task list involved.
+     * @param dialog the ui of the Botto bot.
+     * @param storage storage of the Botto bot.
+     * @throws BottoException when the task is not specified.
      */
     @Override
     public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {

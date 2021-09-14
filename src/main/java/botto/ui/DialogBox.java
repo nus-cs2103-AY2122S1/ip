@@ -45,10 +45,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Return the user dialog box created.
+     *
+     * @param text input from the user.
+     * @param img image of the user.
+     * @return the user dialog box created.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Return the botto dialog box created.
+     *
+     * @param text response from the botto.
+     * @param img image of the botto.
+     * @return the botto dialog box created.
+     */
     public static DialogBox getBottoDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

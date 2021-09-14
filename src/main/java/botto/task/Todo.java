@@ -1,23 +1,23 @@
 package botto.task;
 
 /**
- * Format for the Botto bot's Todo task
+ * Format for the Botto bot's Todo task.
  */
 public class Todo extends Task {
 
     /**
-     * Constructor for a Todo task
+     * Constructor for a Todo task.
      *
-     * @param description
+     * @param description task title.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * return string representation of the task
+     * Return string representation of the task.
      *
-     * @return string representation of the task
+     * @return string representation of the task.
      */
     @Override
     public String toString() {

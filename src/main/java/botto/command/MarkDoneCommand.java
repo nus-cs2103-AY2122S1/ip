@@ -7,27 +7,27 @@ import botto.util.Storage;
 import botto.util.TaskList;
 
 /**
- * Command for marking a task as done
+ * Command for marking a task as done.
  */
 public class MarkDoneCommand implements Command {
     private String command;
 
     /**
-     * Constructor for a MarkDoneCommand
+     * Constructor for a MarkDoneCommand.
      *
-     * @param command user input
+     * @param command user input.
      */
     public MarkDoneCommand(String command) {
         this.command = command;
     }
 
     /**
-     * mark the task as done, update the storage and print relevant messages
+     * Mark the task as done, update the storage and print relevant messages.
      *
-     * @param taskList the task list involved
-     * @param dialog the ui of the Botto bot
-     * @param storage storage of the Botto bot
-     * @throws BottoException when the task is not specified
+     * @param taskList the task list involved.
+     * @param dialog the ui of the Botto bot.
+     * @param storage storage of the Botto bot.
+     * @throws BottoException when the task is not specified.
      */
     @Override
     public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {

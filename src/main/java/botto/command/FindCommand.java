@@ -9,13 +9,29 @@ import botto.util.Dialog;
 import botto.util.Storage;
 import botto.util.TaskList;
 
+/**
+ * Command for finding a keyword
+ */
 public class FindCommand implements Command {
     private String command;
 
+    /**
+     * Constructor for FindCommand.
+     *
+     * @param command user command.
+     */
     public FindCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * Print a list of tasks that match the keyword.
+     *
+     * @param taskList the task list involved.
+     * @param dialog the dialog of the Botto bot.
+     * @param storage storage of the Botto bot.
+     * @throws BottoException when the there is no keyword inserted.
+     */
     @Override
     public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {
         String keyword;

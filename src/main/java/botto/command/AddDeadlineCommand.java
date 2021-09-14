@@ -11,27 +11,27 @@ import botto.util.Storage;
 import botto.util.TaskList;
 
 /**
- * Command for adding a deadline
+ * Command for adding a deadline.
  */
 public class AddDeadlineCommand implements Command {
     private String command;
 
     /**
-     * Constructor for an AddDeadlineCommand
+     * Constructor for an AddDeadlineCommand.
      *
-     * @param command user command
+     * @param command user command.
      */
     public AddDeadlineCommand(String command) {
         this.command = command;
     }
 
     /**
-     * add task to the tasklist, update the storage and print relevant messages
+     * Add task to the tasklist, update the storage and print relevant messages.
      *
-     * @param taskList the task list involved
-     * @param dialog the ui of the Botto bot
-     * @param storage storage of the Botto bot
-     * @throws BottoException when the there is no description inserted or when the command format is wrong
+     * @param taskList the task list involved.
+     * @param dialog the ui of the Botto bot.
+     * @param storage storage of the Botto bot.
+     * @throws BottoException when the there is no description inserted or when the command format is wrong.
      */
     @Override
     public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {
