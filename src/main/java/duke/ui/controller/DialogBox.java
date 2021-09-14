@@ -18,7 +18,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -70,7 +69,6 @@ public class DialogBox extends HBox {
         );
         Background background = new Background(fill);
         dialogBox.dialog.setBackground(background);
-        dialogBox.dialog.setFont(Font.font("Montserrat"));
         return dialogBox;
     }
 
@@ -84,7 +82,6 @@ public class DialogBox extends HBox {
         );
         Background background = new Background(fill);
         dialogBox.dialog.setBackground(background);
-        dialogBox.dialog.setFont(Font.font("Montserrat"));
         return dialogBox;
     }
 }
