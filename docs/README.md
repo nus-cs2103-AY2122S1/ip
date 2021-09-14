@@ -20,7 +20,7 @@
     
 ## Quick start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest botto.jar from [here](https://github.com/ngchisern/ip/releases/tag/v1.0).
+2. Download the latest botto.jar from [here](https://github.com/ngchisern/ip/releases/tag/v1.1).
 3. Double-click the file to start the app.
 4. Type the command in the chat box and press Enter/Send to execute it.
 5. Refer to the [Features](#features) below for details of each command.
