@@ -29,7 +29,7 @@ public class Ui {
             + "   eg:'contact' + 'contact name' + '/about(optional)' + 'description(optional)' \n"
             + "6) delete: Deletes a specific task or contact \n"
             + "   eg:'delete' + 't/c' + 'number' \n"
-            + "7) done: Marks a task as completed \n"
+            + "7) done: Marks a task as done \n"
             + "   eg:'done + number' \n"
             + "8) find: Finds contacts/tasks related to keyword \n"
             + "   eg:'find' + 'keyword' \n"
