@@ -4,21 +4,16 @@ package duke;
 import duke.task.Task;
 import duke.task.TaskList;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -36,8 +31,7 @@ public class Ui {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/Images/BackgroundImage.jpg"));
 
 
     /**
@@ -56,6 +50,8 @@ public class Ui {
         // setting variables
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+
+
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -63,21 +59,37 @@ public class Ui {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         scene = new Scene(mainLayout);
 
-        // setup styling/ formatting
+        // styling/formatting for window
         stage.setScene(scene);
-        stage.setTitle("Duke");
+        stage.setTitle("2Butler");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
         mainLayout.setPrefSize(400.0, 600.0);
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 570);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
+        dialogContainer.setSpacing(20);
+        BackgroundImage wrappedBackgroundImage = new BackgroundImage(backgroundImage, null, null, null, null);
+        dialogContainer.setPrefHeight(570);
+        dialogContainer.setBackground(new Background(wrappedBackgroundImage));
+
+        // styling for user input
+        userInput.setPrefSize(323.0, 29);
+        userInput.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 0");
+        userInput.setFont(Font.font("Courier New"));
+
+        // styling for send button
+        sendButton.setFont(Font.font("Courier New"));
+        sendButton.setPrefSize(75.0, 30);
+        sendButton.setStyle("-fx-background-color: #bbbbbb; -fx-background-radius: 0");
+        sendButton.setOnMouseEntered(
+            evt -> sendButton.setStyle("-fx-background-color: #dddddd; -fx-background-radius: 0"));
+        sendButton.setOnMouseExited(
+            evt -> sendButton.setStyle("-fx-background-color: #bbbbbb; -fx-background-radius: 0"));
+
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
@@ -93,7 +105,7 @@ public class Ui {
      */
     protected void showException(DukeException e) {
         String message = e.getMessage() + "\n";
-        displayDukeReply(message);
+        displayDukeErrorReply(message);
 
     }
 
@@ -102,7 +114,7 @@ public class Ui {
      * Gives greetings to users as they log into Duke.
      */
     protected void greet() {
-        String message = "Good Day Sir/Mdm, I am Duke.\nWhat can I do for you?\n";
+        String message = "Good Day Sir/Mdm, I am 2Butler.\nWhat can I do for you?\n";
         displayDukeReply(message);
 
     }
@@ -240,52 +252,26 @@ public class Ui {
     private void handleUserInput(TaskList tasks, Storage storage) {
 
         String userInputText = userInput.getText();
-        Label userTextLabel = new Label(userInputText);
-        userTextLabel.setPadding(new Insets(0, 10, 0, 0));
-        ImageView userImage = new ImageView(user);
-        clipImageViewToCircle(userImage, 100);
-        DialogBox userDialogBox = DialogBox.getUserDialog(userTextLabel, userImage);
-        userDialogBox.setPadding(new Insets(0, 0, 30, 0));
-        setDialogBoxBackgroundColor(userDialogBox, "#1FDA12");
-
+        DialogBox userDialogBox = DialogBox.of(userInputText, DialogBoxType.USER);
         dialogContainer.getChildren().add(
             userDialogBox
         );
-
         try {
             Parser.parse(userInputText, this, tasks, storage).execute();
         } catch (DukeException e) {
             this.showException(e);
         }
-
-
         userInput.clear();
     }
 
     private void displayDukeReply(String dukeReply) {
-        Label dukeTextLabel = new Label(dukeReply);
-        dukeTextLabel.setPadding(new Insets(0, 0, 0, 10));
-
-        ImageView dukeImage = new ImageView(duke);
-        clipImageViewToCircle(dukeImage, 100);
-
-        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeTextLabel, dukeImage);
-        dukeDialogBox.setPadding(new Insets(0, 0, 30, 0));
-
-        setDialogBoxBackgroundColor(dukeDialogBox, "#12B1DA");
-
+        DialogBox dukeDialogBox = DialogBox.of(dukeReply, DialogBoxType.BOT);
         dialogContainer.getChildren().add(dukeDialogBox);
     }
 
-    private void clipImageViewToCircle(ImageView imageView, int length) {
-        imageView.setPreserveRatio(false);
-        imageView.setSmooth(true);
-        Circle circle = new Circle(length / 2, length / 2, Math.min(length, length) / 2);
-        imageView.setClip(circle);
-    }
-
-    private void setDialogBoxBackgroundColor(DialogBox dialogBox, String hexValue) {
-        dialogBox.setBackground(new Background(new BackgroundFill(Paint.valueOf(hexValue), null, null)));
+    private void displayDukeErrorReply(String errorReply) {
+        DialogBox errorDialogBox = DialogBox.of(errorReply, DialogBoxType.ERROR);
+        dialogContainer.getChildren().add(errorDialogBox);
     }
 
 
