@@ -4,23 +4,15 @@ package duke;
 import duke.task.Task;
 import duke.task.TaskList;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
@@ -38,9 +30,6 @@ public class Ui {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userPhoto = new Image(this.getClass().getResourceAsStream("/images/UserDisplayPhoto.jpg"));
-    private Image botPhoto = new Image(this.getClass().getResourceAsStream("/images/BotDisplayPhoto.jpg"));
-    private Image botErrorPhoto = new Image(this.getClass().getResourceAsStream("/images/BotErrorDisplayPhoto.jpg"));
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/Images/BackgroundImage.jpg"));
 
 
@@ -69,7 +58,7 @@ public class Ui {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         scene = new Scene(mainLayout);
 
-        // setup styling/ formatting
+        // setup styling/formatting
         stage.setScene(scene);
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -249,86 +238,26 @@ public class Ui {
     private void handleUserInput(TaskList tasks, Storage storage) {
 
         String userInputText = userInput.getText();
-        Label userTextLabel = new Label(userInputText);
-        userTextLabel.setPadding(new Insets(20, 10, 0, 0));
-        userTextLabel.setStyle("-fx-text-fill: white;");
-
-        ImageView userImage = new ImageView(userPhoto);
-        userImage.setTranslateY(10);
-        clipImageViewToCircle(userImage, 100);
-        DialogBox userDialogBox = DialogBox.getUserDialog(userTextLabel, userImage);
-        userDialogBox.setPadding(new Insets(0, 0, 30, 0));
-        setDialogBoxBackgroundColor(userDialogBox, 70, 70, 70);
-
+        DialogBox userDialogBox = DialogBox.of(userInputText, DialogBoxType.USER);
         dialogContainer.getChildren().add(
             userDialogBox
         );
-
         try {
             Parser.parse(userInputText, this, tasks, storage).execute();
         } catch (DukeException e) {
             this.showException(e);
         }
-
-
         userInput.clear();
     }
 
     private void displayDukeReply(String dukeReply) {
-        Label dukeTextLabel = new Label(dukeReply);
-        dukeTextLabel.setPadding(new Insets(20, 0, 0, 10));
-        dukeTextLabel.setStyle("-fx-text-fill: white;");
-
-
-        ImageView dukeImage = new ImageView(botPhoto);
-        dukeImage.setTranslateY(10);
-
-        clipImageViewToCircle(dukeImage, 100);
-
-        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeTextLabel, dukeImage);
-        dukeDialogBox.setPadding(new Insets(0, 0, 30, 0));
-        dukeDialogBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dukeDialogBox.setFillHeight(true);
-
-
-        setDialogBoxBackgroundColor(dukeDialogBox, 200, 200, 200);
-
+        DialogBox dukeDialogBox = DialogBox.of(dukeReply, DialogBoxType.BOT);
         dialogContainer.getChildren().add(dukeDialogBox);
     }
 
     private void displayDukeErrorReply(String errorReply) {
-        Label dukeTextLabel = new Label(errorReply);
-
-        dukeTextLabel.setPadding(new Insets(20, 0, 0, 10));
-        dukeTextLabel.setStyle("-fx-text-fill: white;");
-
-
-        ImageView dukeImage = new ImageView(botErrorPhoto);
-        dukeImage.setTranslateY(10);
-
-        clipImageViewToCircle(dukeImage, 100);
-
-        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeTextLabel, dukeImage);
-
-
-        dukeDialogBox.setPadding(new Insets(0, 0, 30, 0));
-
-        setDialogBoxBackgroundColor(dukeDialogBox, 191, 63, 63);
-
-        dialogContainer.getChildren().add(dukeDialogBox);
-    }
-
-    private void clipImageViewToCircle(ImageView imageView, int length) {
-        imageView.setPreserveRatio(false);
-        imageView.setSmooth(true);
-        Circle circle = new Circle(length / 2, length / 2, Math.min(length, length) / 2);
-        imageView.setClip(circle);
-    }
-
-    private void setDialogBoxBackgroundColor(DialogBox dialogBox, int red, int green, int blue) {
-        dialogBox.setBackground(
-            new Background(new BackgroundFill(Color.rgb(red, green, blue, 0.75), new CornerRadii(35),
-                null)));
+        DialogBox errorDialogBox = DialogBox.of(errorReply, DialogBoxType.ERROR);
+        dialogContainer.getChildren().add(errorDialogBox);
     }
 
 
