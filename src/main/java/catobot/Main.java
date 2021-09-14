@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Catobot catobot = new Catobot("./data/Catobot.txt");
+    private final Catobot catobot = new Catobot("./data/Catobot.txt");
 
     /**
      * Starts the scene.
@@ -26,6 +26,9 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
+            // fix for font
+            scene.getRoot().setStyle("-fx-font-family: 'Arial'");
             stage.setScene(scene);
             stage.setTitle("Catobot");
             fxmlLoader.<MainWindow>getController().setCatobot(catobot);

@@ -30,7 +30,7 @@ public class SortCommand extends Command {
     }
 
     /**
-     * Sort a specific type of tasks.
+     * Sorts a specific type of tasks.
      *
      * @param tasks The list of tasks to be worked on.
      * @param storage The storage of the tasks.

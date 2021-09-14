@@ -33,7 +33,7 @@ public class Task implements Comparable<Task> {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); // mark done task with X
+        return (isDone ? "X" : "  "); // mark done task with X
     }
 
     /**

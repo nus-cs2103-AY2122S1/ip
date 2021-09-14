@@ -10,9 +10,14 @@ import catobot.item.TaskList;
  * Represents a Catobot.
  */
 public class Catobot {
+    /** The name of Catobot. */
     public static final String NAME = "Catobot";
+
+    /** The welcome message of Catobot. */
     public static final String WELCOME =
             String.format("Hello I am %s (>^^<)\nWhat can I do for you meow?", Catobot.NAME);
+
+    /** The exit message of Catobot. */
     public static final String BYE =
             "Bye meow! I will always wait here meow(>^^<)";
 

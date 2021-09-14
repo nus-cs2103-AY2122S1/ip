@@ -28,7 +28,8 @@ public class BotDialogBox extends HBox {
 
     private BotDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/BotDialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/BotDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -59,6 +60,7 @@ public class BotDialogBox extends HBox {
         String otherSetting = "-fx-label-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5";
         dialog.setStyle(backgroundSetting + otherSetting);
     }
+
     /**
      * Gets the bot dialog box.
      *

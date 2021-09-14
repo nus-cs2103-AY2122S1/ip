@@ -8,7 +8,7 @@ import catobot.exception.EmptyCommandException;
  * Represents a type of Task which has a due time.
  */
 public class Deadline extends Task {
-    /** Due datetime of the deadline. */
+    /** The datetime of the deadline. */
     private final LocalDateTime by;
 
     /**
@@ -62,7 +62,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Compare two deadlines chronologically (the latest first).
+     * Compares two deadlines chronologically (the latest first).
      *
      * @param o Another task being compared with.
      * @return -1 if the datetime is later than the other

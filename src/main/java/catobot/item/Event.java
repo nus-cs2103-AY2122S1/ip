@@ -63,7 +63,7 @@ public class Event extends Task {
     }
 
     /**
-     * Compare two events chronologically (the latest first).
+     * Compares two events chronologically (the latest first).
      *
      * @param o Another task being compared with.
      * @return -1 if the datetime is later than the other
