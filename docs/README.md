@@ -1,4 +1,4 @@
-# User Guide
+# User Guide for Duke
 Duke is a GUI application that allows you to unleash your productivity potentials. Duke helps you to keep track of your
 tasks at hand. It provides you with handy features that will bring your productivity to the next level.
 * Text-based
