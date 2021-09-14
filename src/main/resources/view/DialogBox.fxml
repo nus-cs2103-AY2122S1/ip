@@ -6,15 +6,18 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" maxHeight="Infinity" minHeight="-Infinity" prefWidth="260" text="Label" wrapText="true">
+        <Label fx:id="dialog" maxHeight="Infinity" minHeight="-Infinity" prefWidth="260" text="Label" wrapText="true" HBox.hgrow="ALWAYS">
             <font>
                 <Font name="Consolas" size="12.0" />
             </font>
          <HBox.margin>
             <Insets right="10.0" />
          </HBox.margin>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
         </Label>
         <Circle fx:id="avatarIcon" fill="DODGERBLUE" radius="35.0" stroke="TRANSPARENT" strokeType="INSIDE">
          <HBox.margin>

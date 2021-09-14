@@ -28,11 +28,11 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
 
-    private static final Color DUKE_COLOR = Color.valueOf("#160e3c");
+    private static final Color DUKE_COLOR = Color.valueOf("#33383b");
     private static final CornerRadii DUKE_CORNER = new CornerRadii(0, 10, 10, 10, false);
     private static final Background DUKE_BACKGROUND = new Background(new BackgroundFill(DUKE_COLOR, DUKE_CORNER, Insets.EMPTY));
 
-    private static final Color USER_COLOR = Color.valueOf("#3c317c");
+    private static final Color USER_COLOR = Color.valueOf("#000640");
     private static final CornerRadii USER_CORNER = new CornerRadii(10, 0, 10, 10, false);
     private static final Background USER_BACKGROUND = new Background(new BackgroundFill(USER_COLOR, USER_CORNER, Insets.EMPTY));
 
@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setStyle("-fx-text-fill: white");
-        dialog.setPadding(new Insets(0,0,0,20));
+//        dialog.setPadding(new Insets(0,0,0,20));
         avatarIcon.setFill(new ImagePattern(img));
     }
 
@@ -82,7 +82,7 @@ public class DialogBox extends HBox {
         db.dialog.setBackground(DUKE_BACKGROUND);
 
         if (text.contains("ERROR:")) {
-            db.dialog.setStyle("-fx-text-fill: #ad0204;");
+            db.dialog.setStyle("-fx-text-fill: #ff0000;");
         }
         return db;
     }
