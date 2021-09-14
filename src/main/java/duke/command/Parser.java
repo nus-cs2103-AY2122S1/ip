@@ -74,7 +74,7 @@ public class Parser {
      * @throws InvalidTaskException if the task does not have the correct Todo format.
      */
     public static Task testTodoValidity(String task) throws InvalidTaskException {
-        if (!task.startsWith("todo") || task.length() <= MIN_TODO_LENGTH) {
+        if (!task.startsWith("todo") || task.length() < MIN_TODO_LENGTH) {
             throw new InvalidTaskException("Todo");
         }
         String taskName = task.substring(TODO_LENGTH + 1);

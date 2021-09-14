@@ -51,7 +51,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 14));
+        dialog.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 16));
         displayPicture.setImage(img);
         this.setHeight(dialog.getHeight());
     }
