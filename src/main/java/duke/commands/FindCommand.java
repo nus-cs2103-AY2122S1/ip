@@ -21,8 +21,8 @@ public class FindCommand extends Command {
     /**
      * Searches all the existing tasks for those that contain the particular keyword and returns the output.
      *
-     * @param tasks   the full task list containing all the tasks.
-     * @param ui      the ui instance.
+     * @param tasks the full task list containing all the tasks.
+     * @param ui the ui instance.
      * @param storage the storage instance.
      */
     @Override

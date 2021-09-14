@@ -15,8 +15,8 @@ public class ExitCommand extends Command {
     /**
      * Performs the required actions that will print a bye message and terminate the program.
      *
-     * @param tasks   the full task list containing all the tasks.
-     * @param ui      the ui instance.
+     * @param tasks the full task list containing all the tasks.
+     * @param ui the ui instance.
      * @param storage the storage instance.
      */
     @Override

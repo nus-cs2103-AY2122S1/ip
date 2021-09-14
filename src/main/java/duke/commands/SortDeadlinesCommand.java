@@ -18,8 +18,8 @@ public class SortDeadlinesCommand extends Command {
      * Gives the user the output containing all the deadlines inside the task list, with them sorted
      * in chronological order.
      *
-     * @param tasks   the full task list containing all the tasks.
-     * @param ui      the ui instance.
+     * @param tasks the full task list containing all the tasks.
+     * @param ui the ui instance.
      * @param storage the storage instance.
      */
     @Override

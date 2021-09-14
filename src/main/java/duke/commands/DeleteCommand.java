@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
     /**
      * Performs the actions that adds the deletes the task from the task list.
      *
-     * @param tasks   the full task list containing all the tasks.
-     * @param ui      the ui instance.
+     * @param tasks the full task list containing all the tasks.
+     * @param ui the ui instance.
      * @param storage the storage instance.
      */
     @Override

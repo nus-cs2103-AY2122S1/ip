@@ -13,8 +13,8 @@ public class ListAllCommand extends Command {
     /**
      * Performs the necessary method invoking to print all the tasks within the task list.
      *
-     * @param tasks   the full task list containing all the tasks.
-     * @param ui      the ui instance.
+     * @param tasks the full task list containing all the tasks.
+     * @param ui the ui instance.
      * @param storage the storage instance.
      */
     @Override

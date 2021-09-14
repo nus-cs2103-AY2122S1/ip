@@ -23,8 +23,8 @@ public class DoneCommand extends Command {
      * Performs the necessary actions that will mark the given task as done, as well
      * as update the persisted data text file.
      *
-     * @param tasks   the full task list containing all the tasks.
-     * @param ui      the ui instance.
+     * @param tasks the full task list containing all the tasks.
+     * @param ui the ui instance.
      * @param storage the storage instance.
      */
     @Override

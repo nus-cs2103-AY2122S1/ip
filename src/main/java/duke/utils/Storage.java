@@ -14,7 +14,7 @@ import duke.tasks.Task;
  * A class to handle all the operations that deals with the computer hard drive or memory.
  */
 public class Storage {
-    private final String DISK_ERROR_MESSAGE = "A problem occurred while accessing the text file.";
+    private static final String DISK_ERROR_MESSAGE = "A problem occurred while accessing the text file.";
     private final String persistedData;
 
     /**
