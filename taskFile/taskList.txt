@@ -1,4 +1,4 @@
-[D][ ] geq1000 quiz (by 2021-09-14)
+[D][ ] geq1000 quiz (by 2021-09-17)
 [T][ ] ACC1701X tutorial
 [T][X] finish my ACC1701X presentation draft
 [D][ ] cs2103t IP (by 2021-09-10)

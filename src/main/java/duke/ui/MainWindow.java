@@ -11,6 +11,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -27,12 +29,12 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/DaUser.png")));
+            .getResourceAsStream("/images/chad.jpg")));
 
     private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png")));
+            .getResourceAsStream("/images/mac.jpg")));
 
-    private String welcomeMessage =
+    private String welcomeMessage = "Hello from\n" +
             " ____       _________\\\n"
             + "|  _ \\ _   _| |______/\n"
             + "| | | | | | | |     \n"
@@ -45,13 +47,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        welcomeMessage = "Hello from\n" + welcomeMessage;
-        assert (dialogContainer.getStyle().equals("-fx-background-color: aliceblue;"))
-                : "Undesirable attributes";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage),
-                DialogBox.getDukeDialog("What can I do for you today?", dukeImage)
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("How may I be at your service?", dukeImage)
+            );
+        });
+        pause.play();
     }
 
     public void setDuke(Duke duke) {
@@ -61,27 +66,34 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        PauseTransition pause1 = new PauseTransition(Duration.seconds(2));
+        PauseTransition pause2 = new PauseTransition(Duration.seconds(3));
         if (input.equalsIgnoreCase("bye")) {
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog("Exiting Duke...", dukeImage)
+                    DialogBox.getDukeDialog("Goodbye :)", dukeImage)
             );
-            pause.setOnFinished((event) -> {
+            pause1.setOnFinished((event) -> {
                 Platform.exit();
             });
+            pause1.play();
         } else {
             String response = duke.respondWith(input);
-            dialogContainer.getChildren().addAll(
+            dialogContainer.getChildren().add(
                     DialogBox.getUserDialog(input, userImage)
             );
             userInput.clear();
-            pause.setOnFinished((event) -> {
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getDukeDialog(response, dukeImage),
+            pause1.setOnFinished((event) -> {
+                dialogContainer.getChildren().add(
+                        DialogBox.getDukeDialog(response, dukeImage)
+                );
+            });
+            pause2.setOnFinished(event -> {
+                dialogContainer.getChildren().add(
                         DialogBox.getDukeDialog("What else can I do for you?", dukeImage)
                 );
             });
+            pause1.play();
+            pause2.play();
         }
-        pause.play();
     }
 }

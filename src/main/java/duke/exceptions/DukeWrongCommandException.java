@@ -7,7 +7,6 @@ public class DukeWrongCommandException extends DukeException {
      * @param suggestion alternative command
      */
     public DukeWrongCommandException(String suggestion) {
-        super("I do not understand, do you want to use command '"
-                + suggestion + "' instead?\n");
+        super("Do you want to use '" + suggestion + "' instead? Cuz I cannot understand this\n");
     }
 }

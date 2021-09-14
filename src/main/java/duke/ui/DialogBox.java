@@ -6,13 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
@@ -39,9 +40,11 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(image);
-        Circle circle = new Circle(50, 50, 50);
+        Circle circle = new Circle(50, 50, 45);
         displayPicture.setClip(circle);
         this.setSpacing(10);
+        this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD,
+                new CornerRadii(20), new Insets(10, 10, 10, 10))));
     }
 
     private void flip() {
