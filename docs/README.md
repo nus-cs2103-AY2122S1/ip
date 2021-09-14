@@ -114,7 +114,7 @@ Expected outcome:
 Format: `deadline [TASK_DESCRIPTION] /by [DATE] [TIME] /[REPETITION_TYPE] [INDEX]`
 
 Adds a Todo type task with a specified `[DATE] [TIME]` as deadline.
-* Available Date format:
+* Available Date formats:
     * `dd/MM/yyyy`
     * `dd-MM-yyyy`
     * `yyyy/MM/dd`
@@ -139,7 +139,7 @@ Expected outcome:
 
 Format: `event [TASK_DESCRIPTION] /at [DATE] [START_TIME]-[END_TIME]`
 
-Adds an Event type task that is on specified `[DATE]` and lasing from
+Adds an Event type task that is on specified `[DATE]` and lasting from
 `[START_TIME]` to `[END_TIME]`.
 * Available Date and Time formats are listed under [Deadline type task](#deadline---add-a-deadline-type-task).
 
