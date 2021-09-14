@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 public class MainWindow extends AnchorPane {
 
     private static final String WELCOME_MESSAGE = "Hello! I'm 8-Bit!\nWhat can I do for you?";
+    private static final String USER_IMAGE = "/images/user.png";
+    private static final String EIGHTBIT_IMAGE = "/images/eightbit.png";
 
     @FXML
     private ScrollPane scrollPane;
@@ -29,8 +31,8 @@ public class MainWindow extends AnchorPane {
 
     private EightBit eightBit;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image eightBitImage = new Image(this.getClass().getResourceAsStream("/images/eightbit.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE));
+    private final Image eightBitImage = new Image(this.getClass().getResourceAsStream(EIGHTBIT_IMAGE));
 
 
     public void setEightBit(EightBit eightBit) {
