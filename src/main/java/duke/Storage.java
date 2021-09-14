@@ -113,21 +113,19 @@ public class Storage {
     }
 
     private void setAfter(String storedTask, Task currentTask, ArrayList<Task> tasks) throws DukeException {
+        String[] taskDetails = storedTask.split(" / ");
 
-            String[] taskDetails = storedTask.split(" / ");
+        String afterDateTime = taskDetails[taskDetails.length - 2];
+        LocalDateTime refDateTime = LocalDateTime.parse(
+                afterDateTime,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        currentTask.setDoAfterDateTime(refDateTime);
 
-            String afterDateTime = taskDetails[taskDetails.length - 2];
-            LocalDateTime refDateTime = LocalDateTime.parse(
-                    afterDateTime,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            currentTask.setDoAfterDateTime(refDateTime);
-
-            String[] afterTasks = taskDetails[taskDetails.length - 1].split(" ");
-            for (int i = 1; i < afterTasks.length; i++) {
-                int taskNum = Integer.parseInt(afterTasks[i]);
-                currentTask.setDoAfterTask(tasks.get(taskNum - 1));
-            }
-
+        String[] afterTasks = taskDetails[taskDetails.length - 1].split(" ");
+        for (int i = 1; i < afterTasks.length; i++) {
+            int taskNum = Integer.parseInt(afterTasks[i]);
+            currentTask.setDoAfterTask(tasks.get(taskNum - 1));
+        }
     }
 
     /**
