@@ -46,7 +46,7 @@ Adds a task with a given deadline to the list
 
 Note:
 
-*Ensure that there is 1 space in front of the date
+*Ensure that there is a " " in front of the date
 
 *Use - to seperate the year, months and days
 
@@ -71,7 +71,7 @@ Adds an event to the list
 
 Note:
 
-*Ensure that there is 1 space in front of the date
+*Ensure that there is a " " in front of the date
 
 *Use - to seperate the year, months and days
 
