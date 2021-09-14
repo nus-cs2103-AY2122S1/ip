@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     private void setBackgroundImage() {
         BackgroundSize backgroundSize;
 
-        backgroundSize = new BackgroundSize(900, 700,
+        backgroundSize = new BackgroundSize(400, 600,
                 true, true, true, true);
         backgroundImage = new BackgroundImage(new Image("/background/background.jpg"),
                 null, null, null, backgroundSize);
