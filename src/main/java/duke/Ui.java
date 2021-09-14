@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -58,24 +59,37 @@ public class Ui {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         scene = new Scene(mainLayout);
 
-        // setup styling/formatting
+        // styling/formatting for window
         stage.setScene(scene);
         stage.setTitle("2Butler");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
         mainLayout.setPrefSize(400.0, 600.0);
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 570);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
         dialogContainer.setSpacing(20);
         BackgroundImage wrappedBackgroundImage = new BackgroundImage(backgroundImage, null, null, null, null);
-        dialogContainer.setPrefHeight(535);
+        dialogContainer.setPrefHeight(570);
         dialogContainer.setBackground(new Background(wrappedBackgroundImage));
-        userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
+
+        // styling for user input
+        userInput.setPrefSize(323.0, 29);
+        userInput.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 0");
+        userInput.setFont(Font.font("Courier New"));
+
+        // styling for send button
+        sendButton.setFont(Font.font("Courier New"));
+        sendButton.setPrefSize(75.0, 30);
+        sendButton.setStyle("-fx-background-color: #bbbbbb; -fx-background-radius: 0");
+        sendButton.setOnMouseEntered(
+            evt -> sendButton.setStyle("-fx-background-color: #dddddd; -fx-background-radius: 0"));
+        sendButton.setOnMouseExited(
+            evt -> sendButton.setStyle("-fx-background-color: #bbbbbb; -fx-background-radius: 0"));
+
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
