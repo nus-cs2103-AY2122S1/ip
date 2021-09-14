@@ -1,10 +1,10 @@
 # User Guide
 
-:heavy_check_mark: Fields in UPPERCASE are parameters supplied by the user.
+&#10004; Fields in UPPERCASE are parameters supplied by the user.
 
-:heavy_check_mark: Items in [square bracket] are optional.
+&#10004; Items in [square bracket] are optional.
 
-:heavy_check_mark: Date/Time format used is `DD-MM-YYYY hhmm`, where `hhmm` is in 24-hour format, e.g. 1030 for 10.30am, and 2115 for 9.15pm.
+&#10004; Date/Time format used is `DD-MM-YYYY hhmm`, where `hhmm` is in 24-hour format, e.g. 1030 for 10.30am, and 2115 for 9.15pm.
 
 ## Features 
 
