@@ -18,7 +18,6 @@ public class AddCommand extends Command implements Revertible {
     private ArrayList<Task> state;
     private Task task;
 
-
     /**
      * Constructs the AddCommand object
      * @param t Task type
@@ -38,7 +37,6 @@ public class AddCommand extends Command implements Revertible {
         Task t = tasks.addTask(this.type, this.input);
         task = t;
         storage.appendSave(t);
-
         tasks.addHistory(this);
         return ui.addResponse(t, tasks.size());
     }
@@ -47,12 +45,7 @@ public class AddCommand extends Command implements Revertible {
     public String revert(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
         // replace with previous state
         tasks.replaceList(this.state);
-        storage.modifySave(tasks.getList());
+        storage.updateSave(tasks.getList());
         return "Successfully undone add on: " + task;
-    }
-
-    @Override
-    public String histDesc() {
-        return "Added Task: " + task;
     }
 }

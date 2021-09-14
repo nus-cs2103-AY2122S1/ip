@@ -1,7 +1,7 @@
 package duke.error;
 
 /**
- * Exceptions that can occur specifically in the Duke program.
+ * Exceptions that can occur specifically in the duke.Duke program.
  */
 public class DukeException extends Exception {
     /**

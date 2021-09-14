@@ -5,8 +5,6 @@ import duke.general.Storage;
 import duke.general.Tasklist;
 import duke.general.Ui;
 
-import java.util.Stack;
-
 /**
  * Class to deal with the actions and method calls to be done for different commands
  */

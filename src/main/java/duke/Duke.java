@@ -1,10 +1,11 @@
+package duke;
+
 import duke.command.Command;
 import duke.error.DukeException;
 import duke.general.Parser;
 import duke.general.Storage;
 import duke.general.Tasklist;
 import duke.general.Ui;
-import javafx.scene.image.Image;
 
 /**
  * Chatbot that helps you form a task list
@@ -17,7 +18,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Initializes the Duke chatbot program
+     * Initializes the duke.Duke chatbot program
      * @param filePath File path to save the data files of the Tasklist to
      */
     public Duke(String filePath) {
@@ -28,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Initializes the Duke chatbot program for the Launcher
+     * Initializes the duke.Duke chatbot program for the duke.Launcher
      */
     public Duke() {
         ui = new Ui();

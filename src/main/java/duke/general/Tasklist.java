@@ -11,7 +11,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
 /**
  * Contains the task list, and has operations to add/delete from the list
  */
@@ -121,6 +120,10 @@ public class Tasklist {
         return foundTasks;
     }
 
+    /**
+     * Creates new deep copy of the list
+     * @return Deep copy of the list
+     */
     public ArrayList<Task> copyList() {
         ArrayList<Task> copy = new ArrayList<>();
         for (Task t : list) {
@@ -129,14 +132,28 @@ public class Tasklist {
         return copy;
     }
 
+
+    /**
+     * Replaces the list in the Tasklist with a given one
+     * @param lst new list to replace the existing one
+     */
     public void replaceList(ArrayList<Task> lst) {
         this.list = lst;
     }
 
+    /**
+     * Adds a revertible command that has been executed to the history stack
+     * @param c Revertible command
+     */
     public void addHistory(Revertible c) {
         history.add(c);
     }
 
+    /**
+     * Pops off the most recent command off the history stack.
+     * If history stack is empty, returns a ErrorCommand
+     * @return Revertible command found at top of history stack, if empty returns ErrorCommand
+     */
     public Revertible popHistory() {
         if (history.isEmpty()) {
             return new ErrorCommand();

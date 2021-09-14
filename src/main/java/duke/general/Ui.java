@@ -53,9 +53,6 @@ public class Ui {
      */
     public String doneResponse(Task t) {
         assert(t != null);
-
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
         return "Nice! I've marked this task as done:\n" + t;
     }
 
@@ -66,9 +63,6 @@ public class Ui {
      * @return Delete response message
      */
     public String deleteResponse(Task t, Tasklist list) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + list.size() + " tasks in your list.");
         return "Noted. I've removed this task:\n" + t.toString() + "\n"
                 + "Now you have " + list.size() + " tasks in your list.";
     }
@@ -78,8 +72,7 @@ public class Ui {
      * @return Bye response message
      */
     public String byeResponse() {
-        System.out.println("Bye bye. Duke going to sleep now.");
-        return "Bye bye. Duke going to sleep now.";
+        return "Bye bye. duke.Duke going to sleep now.";
     }
 
     /**
@@ -92,16 +85,13 @@ public class Ui {
     public String findResponse(ArrayList<Task> list) {
         if (list.size() > 0) {
             StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
-            System.out.println("Here are the matching tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
                 Task task = list.get(i - 1);
                 String line = i + "." + task.toString();
-                System.out.println(line);
                 output.append(line).append("\n");
             }
             return output.toString();
         } else {
-            System.out.println("No matching tasks have been found :(");
             return "No matching tasks have been found :(";
         }
     }
@@ -116,11 +106,9 @@ public class Ui {
             throw new DukeException("The list is empty!!");
         }
         StringBuilder output = new StringBuilder("Here are your tasks:\n");
-        System.out.println("Here are your tasks:");
         for (int i = 1; i <= t.size(); i++) {
             Task task = t.get(i - 1);
             String line = i + "." + task.toString();
-            System.out.println(line);
             output.append(line).append("\n");
         }
         return output.toString();

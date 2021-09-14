@@ -14,7 +14,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
 /**
  * Deals with loading tasks from the file and saving tasks in the file
  */
@@ -54,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * Helper function for loadSave to take in lines from save file and add it to the storedList
+     * Helper function for loadSave above to take in lines from save file and add it to the storedList
      * @param s Scanner object created with the save file
      */
     private void loadSaveAdder(Scanner s) {
@@ -127,7 +126,7 @@ public class Storage {
      * newList into duke.txt
      * @param newList The new task list after modifications (delete, done)
      */
-    public void modifySave(ArrayList<Task> newList) {
+    public void updateSave(ArrayList<Task> newList) {
         assert(newList != null) : "List of tasks needs to exist before adding";
         try {
             FileWriter fw = new FileWriter(filePath);

@@ -36,4 +36,4 @@ Now you have 2 tasks in your list.
 Here are your tasks:
 1.[D][ ] project  (by: Next Week)
 2.[E][X] birthday (at: 20 Aug)
-Bye bye. Duke going to sleep now.
+Bye bye. duke.Duke going to sleep now.

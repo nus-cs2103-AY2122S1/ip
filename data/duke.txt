@@ -1,4 +1,5 @@
-T/ /homework
+T/X/homework
 E/ /Welcome party/25 Aug
 D/ /iP/2021-09-05
-D/ /graphics/2021-09-09
+D/X/graphics lab2/2020-10-10
+T/ /Lab 2 

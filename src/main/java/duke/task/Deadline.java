@@ -1,15 +1,14 @@
 package duke.task;
 
-import duke.general.TaskType;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.general.TaskType;
+
 /**
- * duke.task.Deadline encapsulates the name of the deadline as well as
+ * Deadline encapsulates the name of the deadline as well as
  * when the task needs to be completed by.
  */
-
 public class Deadline extends Task {
     private LocalDate doneBy;
     private String by;
