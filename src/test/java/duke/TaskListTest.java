@@ -2,6 +2,10 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Todos;
+
 public class TaskListTest {
     @Test
     public void testTaskList() {

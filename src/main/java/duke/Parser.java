@@ -16,7 +16,6 @@ import duke.task.Events;
 import duke.task.Task;
 import duke.task.TaskCreator;
 import duke.task.Todos;
-
 import javafx.application.Platform;
 
 /**

@@ -1,12 +1,12 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.task.Task;
 
 /**
  * A class that handles the file containing data regarding tasks.

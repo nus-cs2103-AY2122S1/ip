@@ -1,13 +1,14 @@
 package duke.task;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
+
 
 /**
  * Contains a static method to create a Task instance.
@@ -32,17 +33,16 @@ public class TaskCreator {
             return Ui.getBadInputError();
         }
         switch (taskType) {
-        //cases do not break, as they end at the return statement    
-        case TODO: 
+        //cases do not break, as they end at the return statement
+        case TODO:
             return createTodo(array, storage, taskList);
         case DEADLINE:
             return createDeadline(array, storage, taskList);
         //last case is EVENT
         default:
-            return  createEvent(array, storage, taskList);
+            return createEvent(array, storage, taskList);
         }
     }
-    
 
     private static String createTodo(String[] array, Storage storage, TaskList taskList) {
         StringBuilder str = new StringBuilder();
