@@ -61,10 +61,7 @@ public class TaskList {
             return "☹ OOPS!!! You need to enter a description along with the deadline!";
         }
         int index = userInput.indexOf('/');
-        String by = userInput.substring(index + 4);
-        LocalDateTime localDateTime = LocalDateTime.parse(by, formatter);
-        Deadline deadline = new Deadline(userInput.substring(9, index),
-                localDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
+        Deadline deadline = new Deadline(userInput.substring(9, index), formatInputForDeadline(userInput, index));
         tasks.add(deadline);
         storage.appendToFile(deadline.toString());
         return ui.showDeadlineMessage(deadline, tasks);
@@ -82,12 +79,7 @@ public class TaskList {
             return "☹ OOPS!!! You need to enter a description along with the event timings!";
         }
         int index = userInput.indexOf('/');
-        String[] arr = userInput.substring(index + 4).split(" to ");
-        String start = arr[0];
-        String end = arr[1];
-        LocalDateTime localDateTime = LocalDateTime.parse(start, formatter);
-        start = localDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
-        Event event = new Event(userInput.substring(6, index), start + "-" + end);
+        Event event = new Event(userInput.substring(6, index), formatInputForEvent(userInput, index));
         tasks.add(event);
         storage.appendToFile(event.toString());
         return ui.showEventMessage(event, tasks);
@@ -182,5 +174,20 @@ public class TaskList {
             return "I found no matching tasks :(";
         }
         return ui.showMatchingTasks(matchingTasks);
+    }
+
+    private String formatInputForDeadline(String userInput, int index) {
+        String by = userInput.substring(index + 4);
+        LocalDateTime localDateTime = LocalDateTime.parse(by, formatter);
+        return localDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+    }
+
+    private String formatInputForEvent(String userInput, int index) {
+        String[] arr = userInput.substring(index + 4).split(" to ");
+        String start = arr[0];
+        String end = arr[1];
+        LocalDateTime localDateTime = LocalDateTime.parse(start, formatter);
+        start = localDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+        return start + "-" + end;
     }
 }
