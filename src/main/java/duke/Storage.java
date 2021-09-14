@@ -30,7 +30,8 @@ public class Storage {
      */
     public void readFile(TaskList ls) {
         try {
-            File myObj = new File(this.filepath);
+            File myObj = new File(filepath);
+            myObj.createNewFile();
             Scanner myScanner = new Scanner(myObj);
             while (myScanner.hasNextLine()) {
                 String data = myScanner.nextLine();
@@ -47,7 +48,7 @@ public class Storage {
                 }
             }
             myScanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -107,7 +108,7 @@ public class Storage {
                     str += "\n";
                 }
             }
-            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            FileWriter fileWriter = new FileWriter("./duke.txt");
             fileWriter.write(str);
             fileWriter.close();
         } catch (IOException e) {

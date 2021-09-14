@@ -29,7 +29,7 @@ public class Duke {
      */
     public Duke() {
         taskList = new TaskList(new ArrayList<Task>());
-        storage = new Storage("./data/duke.txt");
+        storage = new Storage("./duke.txt");
         ui = new Ui();
         storage.readFile(taskList);
     }
