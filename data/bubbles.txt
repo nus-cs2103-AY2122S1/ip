@@ -1,4 +1,3 @@
-T | 1 | eat dinner
-D | 0 | geq1000 forum participation | by 2021-09-22
-E | 0 | bowling with 24th mc | at 2021-09-22
-T | 0 | read a book
+D | 1 | sign the form | by 2021-09-15
+E | 0 | birthday dinner | at 2021-09-22
+T | 0 | buy groceries

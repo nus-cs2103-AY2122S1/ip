@@ -3,7 +3,9 @@
 Command Line Interface (CLI) while having the benefits of a Graphical
 User Interface (GUI). As the cutest Powerpuff Girl, Bubbles will 
 provide **constant encouragement** to make sure you are the most 
-productive you've ever been. 💙
+productive you've ever been.
+
+![Image of Bubbles Ui](Ui.png)
 
 ## Features 
 Features supported by Bubbles are:
@@ -40,6 +42,9 @@ you have entered.
 Reminds you of all the upcoming tasks (deadlines and events)
 that are coming up within the next 7 days.
 
+### Help
+Provides a list of commands that Bubbles support.
+
 ### Exit the program
 Exits the program and closes the app immediately, saving 
 your updated list of tasks into your hard disk.
@@ -54,6 +59,7 @@ do not have to complete by a certain date/time.
 Example of usage: `todo sweep the floor`
 
 Expected outcome:
+![Image of adding a todo task](images/todo.png)
 ```
 Received order! I've added this task:
    [T] [ ] sweep the floor
@@ -81,7 +87,7 @@ occurring at a date.
 - The description field is compulsory.
 - The date should be in the format of yyyy-mm-dd.
 
-Example of usage: `event birthday dinner /at 20-21-09-22`
+Example of usage: `event birthday dinner /at 2021-09-22`
 
 Expected outcome:
 ```
@@ -98,6 +104,7 @@ completed or not.
 Example of usage: `view`
 
 Expected outcome:
+![Image of listing out all tasks](images/list.png)
 ```
 Below are some of the tasks in your list!
 1. [T] [ ] sweep the floor
@@ -112,6 +119,7 @@ Marks a task as completed.
 Example of usages: `done 2`
 
 Expected outcome:
+![Image of completing a task](images/done.png)
 ```
 Good job! I've marked this task as done:
    [D] [X] sign the form (by: 15 Sep 2021)
@@ -125,6 +133,7 @@ Deletes a task from the list (permanently).
 Example of usages: `delete 1`
 
 Expected outcome:
+![Image of deleting a task](images/delete.png)
 ```
 Noted! I've removed this task:
    [T] [ ] sweep the floor
@@ -143,9 +152,10 @@ keyword entered).
 Example of usages: `find birthday`
 
 Expected outcome:
+![Image of finding a task](images/find.png)
 ```
 Here are the matching tasks in your list!
-1. [E] [X] birthday dinner (at: 22 Sep 2021)
+1. [E] [ ] birthday dinner (at: 22 Sep 2021)
 ```
 
 ### `remind` - Receive reminders on upcoming tasks
@@ -156,12 +166,24 @@ are due/occurring within the next 7 days.
 Example of usages: `remind`
 
 Expected outcome:
+![Image of using reminders](images/remind.png)
 ```
-Good news! You don't have any deadlines/events coming
-up in the next 7 days!
+Here are the upcoming deadlines and events coming up
+soon! 
+1. [D] [X] sign the form (by: 15 Sep 2021)
 ```
 
-### `bye` - Exit the program 
+### `help`
+
+Displays a list of commands with the respective formats that
+Bubbles supports.
+
+Example of usages: help
+
+Expected outcome:
+![Image of using the command function](images/help.png)
+
+### `bye`
 
 Exits the program and saves the changes made to your
 task list.

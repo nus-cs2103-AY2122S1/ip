@@ -18,6 +18,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setBubbles(new Bubbles());
 
             stage.setScene(scene);
+            stage.setTitle("Bubbles");
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
