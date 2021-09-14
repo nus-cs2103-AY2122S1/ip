@@ -1,7 +1,11 @@
 <div align = "center">
 <img align="center" height="120" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_Logo.png?raw=true">
-  
+</div>
+
+<div align = "center">
+
 # User Guide For WhoBot
+
 </div>
 
 <p align = "center"> The WhoBot is your Revolutionary Personal Assistant that makes Managing All Tasks Simple and Efficent. </p>
