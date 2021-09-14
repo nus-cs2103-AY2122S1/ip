@@ -111,11 +111,13 @@ public class TaskList {
      * Lists out current items.
      */
     public String listItems() {
-        return listItems(this.tasks);
+        String message = "Here are the tasks in your list:\n";
+        message += listItems(this.tasks);
+        return message;
     }
 
     private String listItems(List<Task> tasks) {
-        String message = "Here are the tasks in your list:\n";
+        String message = "";
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
             message += num + "." + tasks.get(i).toString() + "\n";

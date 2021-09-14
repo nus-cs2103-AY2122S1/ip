@@ -145,7 +145,9 @@ public class Parser {
         if (inputArr.length < 2) {
             throw new DukeException("The description of a find cannot be empty.");
         }
-        return list.find(inputArr[1]);
+        String result = "Here are the tasks containing: " + inputArr[1] + "\n";
+        result += list.find(inputArr[1]);
+        return result;
     }
 
     private String tagItem(String[] inputArr) throws DukeException {
