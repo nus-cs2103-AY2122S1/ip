@@ -5,8 +5,8 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Deadline](#deadline)
-  * [Event](#event)
+  * [Deadline](#deadline-:-add-deadline-tasks)
+  * [Event](#event-:-add-event-tasks)
   * [Todos](#todos)
   * [List](#list)
   * [Done](#done)
@@ -45,7 +45,7 @@ You can:
 
 **All command works given in duke are case-insensitive.** e.g The command `LIST` and `list` are equivalent.
 
-### `Deadline` - Add deadline tasks
+### `Deadline` : Add deadline tasks
 
 Add a new deadline task to the task list. A task name, and a deadline date has to be specified with the command. For the date, dude accepts two types of dates, formatted dates and unformatted dates. A formatted date allows Duke to recognise the specific date/time.
 
@@ -73,7 +73,7 @@ Adding a deadline task with a formatted date and time:
 ![Deadline](deadlineExample.png)
 <br>
 <br>
-### `Event` - Add event tasks
+### `Event` : Add event tasks
 
 Add a new event task to the task list. A task name and an event date has to be specified with the command. For the date, dude accepts two types of dates, formatted dates and unformatted dates. A formatted date allows Duke to recognise the specific date/time. More information on formatted dates in Duke can be found above under the deadline command.
 
@@ -96,7 +96,7 @@ Adding a deadline task with a formatted date and time:
 ![Event](eventExample.png)
 <br>
 <br>
-### `Todo` - Add todo tasks
+### `Todo` : Add todo tasks
 
 Add a new todo task to the task list. Only the name of the task has to be specified with the command.
 
@@ -107,7 +107,7 @@ Add a new todo task to the task list. Only the name of the task has to be specif
 `todo buy milk`
 <br>
 <br>
-### `List` - View all tasks:
+### `List` : View all tasks:
 
 Displays all your added task in the task list along with the appropriate details such as the task date and completed status.
 
@@ -117,7 +117,7 @@ Displays all your added task in the task list along with the appropriate details
 ![List](listExample.png
 <br>
 <br>
-### `Done` - Mark tasks as done
+### `Done` : Mark tasks as done
 
 Mark a task in the task list as completed using its index. The index can be obtained by using the `list` command above. Duke supports marking multiple tasks as done in one go. Hence, you can enter more than 1 index in a single command.
 
@@ -132,7 +132,7 @@ Mark task 1, 4 and 6 as completed: `done 1 4 6`
 ![Done](doneExample.png)
 <br>
 <br>
-### `Delete` - Delete tasks
+### `Delete` : Delete tasks
 
 Delete a task in the task list using its index. The index can be obtained by using the `list` command above. Duke supports the deletion of multiple tasks in one command. Hence, you can enter more than 1 index in a single command.
 
@@ -147,7 +147,7 @@ Delete task 1, 4 and 6: `delete 1 4 6`
 ![Delete](deleteExample.png)
 <br>
 <br>
-### `Find` - Seach for a task
+### `Find` : Seach for a task
 
 Find a task in the task list whose name matches the provided keywords. The search is case insensetive but the order of the word matters.
 
@@ -160,14 +160,14 @@ Find a task in the task list whose name matches the provided keywords. The searc
 ![Find](findExample.png)
 <br>
 <br>
-### `Undo` - Undo a previous change
+### `Undo` : Undo a previous change
 
 Undo any previous changes made to the task list.
 #### Format: 
 `Undo`
 <br>
 <br>
-### `Bye` - Exits the programm
+### `Bye` : Exits the programm
 
 Close the chat bot.
 #### Format: 
