@@ -10,8 +10,9 @@ Sample Screenshot of Duke:
 
 1. Download `duke.jar` from [here](https://github.com/JunWei3112/ip/releases/tag/v0.2)!
 2. Move `duke.jar` to the folder you want to use as the home folder for Duke.
-3. Double click the file to start Duke.
-4. Go ahead and start adding your tasks! :smile:
+3. Open a command window in that folder.
+4. Run the command `java -jar duke.jar` to launch the app.
+5. Go ahead and start adding your tasks! :smile:
 
 ## Features 
 
