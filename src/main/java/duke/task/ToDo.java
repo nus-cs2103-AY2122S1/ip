@@ -5,7 +5,6 @@ package duke.task;
  * ToDos class that extends Task class. It is one of the types in 3 tasks.
  */
 public class ToDo extends Task {
-
     private static final String TASKTYPE = "T";
     private boolean isDone;
     private final String task;

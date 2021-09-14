@@ -10,7 +10,6 @@ import java.util.Locale;
  * Will contain a time in the form of "/at".
  */
 public class Event extends Task {
-
     private static final String TASKTYPE = "E";
     private boolean isDone;
     private final String task;

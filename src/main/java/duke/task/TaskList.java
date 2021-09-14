@@ -16,7 +16,6 @@ import duke.logics.Parser;
  * or make use of the methods in it to execute an operation.
  */
 public class TaskList {
-
     private final ArrayList<Task> tasks;
     private LastExecution lastExecution;
 
@@ -45,6 +44,10 @@ public class TaskList {
     public String printListUi() {
         StringBuilder text = new StringBuilder();
         text.append("Here are the tasks in your list:\n");
+        //@@author Hang Zelin-reused
+        //Reused from:
+        //https://github.com/nus-cs2103-AY2122S1/ip/pull/60/commits/7f61b2b2976ae38932af343a7c8c3b71405cc6aa
+        //Inspired by his stream method.
         int[] index = {0};
         tasks.forEach(task -> text.append(++index[0]).append(".").append(task.getTaskStatus()).append("\n"));
         return text.toString();
@@ -163,7 +166,6 @@ public class TaskList {
         }
     }
 
-
     /**
      * Adds a task to the TaskLists. This method will automatically decide which type of the
      * task is added to the list.
@@ -188,7 +190,6 @@ public class TaskList {
     public Task get(int index) {
         return this.tasks.get(index);
     }
-
 
     /**
      * Returns the size of the TaskList.
@@ -216,7 +217,7 @@ public class TaskList {
      * It also contains a method AssignTask Type to find the specific type of task to create.
      */
     public enum OperationType {
-        BYE, DONE, DELETE, TELL, FIND, UNDO, LIST, TODO, DEADLINE, EVENT;
+        BYE, DONE, DELETE, TELL, FIND, UNDO, HELP, LIST, TODO, DEADLINE, EVENT;
 
         /**
          * Returns a task in a specific operationType. It can be either todo, deadline or event.

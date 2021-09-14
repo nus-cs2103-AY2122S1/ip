@@ -21,7 +21,6 @@ import duke.task.TaskList;
  */
 public class Storage {
     private final String filePath;
-
     private final ArrayList<Task> list;
 
     /**

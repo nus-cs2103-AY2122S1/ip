@@ -10,7 +10,6 @@ import java.util.Locale;
  * Will contain a time in the form of "/by".
  */
 public class Deadline extends Task {
-
     private static final String TASKTYPE = "D";
     private boolean isDone;
     private final String task;

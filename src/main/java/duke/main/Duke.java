@@ -17,7 +17,6 @@ import duke.uimanager.TextUi;
  * You can also search a specific task by its date, keyword.
  */
 public class Duke {
-
     private static final String FILEPATH = "data/tasks.txt";
     private final Storage storage;
     private final TextUi textUi;

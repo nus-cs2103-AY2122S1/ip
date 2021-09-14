@@ -16,7 +16,6 @@ import javafx.stage.Stage;
  * note: The icon image is free to use. link: https://www.flaticon.com/free-icon/chat_724715
  */
 public class Main extends Application {
-
     private final Duke duke = new Duke();
 
     /**

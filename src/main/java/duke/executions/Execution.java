@@ -8,6 +8,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TellCommand;
 import duke.command.UndoCommand;
@@ -29,6 +30,7 @@ public class Execution {
     private static final String TELL = "tell";
     private static final String FIND = "find";
     private static final String UNDO = "undo";
+    private static final String HELP = "help";
     private final TaskList taskList;
     private final TextUi textUi;
     private final Parser parser;
@@ -120,6 +122,8 @@ public class Execution {
         case FIND: command = new FindCommand(taskList, textUi, task);
         break;
         case UNDO: command = new UndoCommand(taskList, textUi);
+        break;
+        case HELP: command = new HelpCommand(textUi);
         break;
         default: command = new AddCommand(taskList, textUi, operationType, task, time);
         break;

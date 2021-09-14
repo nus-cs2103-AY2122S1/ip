@@ -5,7 +5,6 @@ package duke.task;
  * An abstract class that encapsulates the info basic for a task.
  */
 public abstract class Task {
-
     /**
      * Returns the task info in the format of "[type][] task info ..."
      *

@@ -7,14 +7,14 @@ package duke.uimanager;
  * input for each round of task execution.
  */
 public class TextUi {
-
     /**
      * Returns Hello Message to users.
      *
      * @return Default helloMessage.
      */
     public String helloMessage() {
-        String text = "Hello! Welcome to your best task manager Duke!\n"
+        String text;
+        text = "Hello! Welcome to your best task manager Duke!\n"
                + "What can I do for you?";
 
         return text;
@@ -26,8 +26,40 @@ public class TextUi {
      * @return Default goodbyeMessage.
      */
     public String goodbyeMessage() {
-        String text = "Bye. Hope to see you again soon!";
+        String text;
+        text = "Bye. Hope to see you again soon!";
         return text;
+    }
+
+    /**
+     * Returns brief user guide.
+     *
+     * @return User guide text.
+     */
+    public String helpMessage() {
+        String dividingLine;
+        String operationInfo;
+        String noteInfo;
+
+        dividingLine = "\n -- Points to Note -- \n";
+        operationInfo = "I support the following commands:\n"
+                + "1) list: See all tasks in your list.\n"
+                + "2) done: Mark a specific task as done.\n"
+                + "3) delete: Delete a specific task.\n"
+                + "4) tell: Find tasks by keyword of time.\n"
+                + "5) find: Find tasks by keyword of info.\n"
+                + "6) undo: Undo a most recent command.\n"
+                + "7) todo: Create a task of type 'todo'.\n"
+                + "8) deadline: Create a task of type 'todo'\n"
+                + "9) event: Create a task of type 'event'\n"
+                + "10) help: Take a look user guide!\n";
+        noteInfo = "1) Time format for Deadline is '/by'.\n"
+                + "2) Time format for Event is '/at'.\n"
+                + "3) yy-mm-dd time format is supported.\n"
+                + "4) dd/mm/yy hhmm time format is supported.\n"
+                + "\nHope you enjoy your experience in Duke!";
+
+        return operationInfo + dividingLine + noteInfo;
     }
 
     /**
