@@ -29,6 +29,6 @@ public class Task {
         this.isDone = true;
     }
     public String toString() {
-        return "[" + getStatusIcon() +"] " + this.description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 }

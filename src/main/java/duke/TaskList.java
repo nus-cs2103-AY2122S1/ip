@@ -42,7 +42,7 @@ public class TaskList {
      * @return the task deleted
      */
     public Task deleteTask(int index) {
-      return tasks.remove(index);
+        return tasks.remove(index);
     }
 
     /**
@@ -68,7 +68,7 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
-    public String findTasks(String keyword) {
+    public String findTasks (String keyword) {
         String output = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);

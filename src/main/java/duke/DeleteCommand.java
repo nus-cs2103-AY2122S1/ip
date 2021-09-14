@@ -1,4 +1,5 @@
 package duke;
+import duke.Ui;
 
 /**
  * Class that removes a current tasks from the task list.

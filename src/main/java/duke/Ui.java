@@ -6,50 +6,40 @@ import java.util.Scanner;
  * Class that deals with the user interface of Duke bot.
  */
 public class Ui {
-    Scanner sc = new Scanner(System.in);
-    private String dashedLine = "_______________________________________________";
+    Duke duke;
+
+    public Ui(Duke duke) {
+        this.duke = duke;
+    }
 
     public void greetUser() {
-        System.out.println(dashedLine);
-        System.out.println("Hello! I'm Duke\n"
-                            + "What can I do for you?");
-        System.out.println(dashedLine);
+        duke.showMessage("Hello! I'm Duke\n"
+                + "What can I do for you?", true);
     }
-    public String readInput() {
-        String response = sc.nextLine();
-        return response;
-    }
+
     public void displayTaskAdded(Task td, int ctr) {
-        System.out.println("Got it! I've added this task: \n" + td.toString());
         ctr++;
-        System.out.println("Now you have " + ctr + " tasks in the list.");
-        System.out.println(dashedLine);
+        duke.showMessage("Got it! I've added this task: \n" + td.toString() + "\nNow you have " + ctr + " tasks in the list.", true);
+
     }
+
     public void displayTaskRemoved(Task td, int ctr) {
-        System.out.println("Noted. I've now removed this task: \n" + td);
         ctr--;
-        System.out.println("Now you have " + ctr+ " tasks in the list.");
-        System.out.println(dashedLine);
+        duke.showMessage("Noted. I've now removed this task: \n" + td + "Now you have " + ctr+ " tasks in the list.", true);
     }
     public void displayTaskDone(Task td) {
-        System.out.println("Nice! I've marked this task as done: \n" + td);
-        System.out.println(dashedLine);
+        duke.showMessage("Nice! I've marked this task as done: \n" + td, true);
     }
     public void displayTaskList(TaskList t) {
-        System.out.println(dashedLine);
-        System.out.println("Here are the tasks on your list: ");
-        System.out.println(t);
+        duke.showMessage("Here are the tasks on your list: \n" + t.toString(), true);
     }
     public void displayFoundList(String keyword) {
-        System.out.println(dashedLine);
-        System.out.println(keyword);
+        duke.showMessage(keyword, true);
     }
     public void sayBye() {
-        System.out.println(dashedLine);
-        System.out.println("Bye! Hope to see you again soon!");
-        System.out.println(dashedLine);
+        duke.showMessage("Bye! Hope to see you again soon!", true);
     }
     public void displayError(String msg) {
-       System.out.println(msg);
+        duke.showMessage(msg, true);
     }
 }

@@ -1,2 +1,0 @@
-T|0|borrow
-D|0|return|2010-01-01

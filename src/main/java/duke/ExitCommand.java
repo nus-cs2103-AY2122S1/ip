@@ -1,4 +1,5 @@
 package duke;
+import duke.Ui;
 
 public class ExitCommand extends Command {
     /**
