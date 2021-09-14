@@ -36,8 +36,9 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         try {
-            scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
             user = new Image(new FileInputStream("levi.png"));
             bot = new Image(new FileInputStream("hange.png"));
         } catch (FileNotFoundException e) {
@@ -45,7 +46,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
-                        "Hello I'm Banana! \n How can I help you?", bot)
+                        "Hello I'm Hange! \n How can I help you?", bot)
         );
         handleActions();
     }
