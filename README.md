@@ -1,4 +1,4 @@
-### duke
+### Duke
 > *“You can do anything, but not everything.” – David Allen* [(source)](https://dansilvestre.com/productivity-quotes/)
 
 duke frees you from worry of taking care of everything. You can ask duke to help you remember things. It's
