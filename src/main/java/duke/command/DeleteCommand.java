@@ -4,6 +4,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.exception.DukeException;
+import duke.exception.InvalidParameterDukeException;
 
 
 /**
@@ -13,7 +14,9 @@ import duke.exception.DukeException;
  */
 public class DeleteCommand extends Command{
 
-    String parameter;
+    private final String parameter;
+    private static final String SUCCESS_MESSAGE = "Noted. I've removed this task:\n"
+            + "  %s %s\nNow you have %d tasks in the list.";
 
     /**
      * A constructor to initialize a delete command.
@@ -33,17 +36,20 @@ public class DeleteCommand extends Command{
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
-        assert taskList != null : "task list should not be null.";
-        boolean isValidNumber = parameter.matches("\\d+");
-        if (!isValidNumber) {
+        assert taskList != null : "Task list should not be null.";
+        if (!isValidNumber(parameter)) {
             // Invalid parameter
-            throw new DukeException("OOPS!!! Invalid task number.");
+            throw new InvalidParameterDukeException();
         }
         Task task = taskList.getTask(Integer.parseInt(parameter));
         taskList.deleteTask(Integer.parseInt(parameter));
         storage.save(taskList);
-        return String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
-                        task.getStatusIcon(), task.getDescription(), taskList.size());
+        return String.format(
+                SUCCESS_MESSAGE, task.getStatusIcon(), task.getDescription(), taskList.size());
+    }
+
+    private boolean isValidNumber(String number) {
+        return number.matches("\\d+");
     }
 
     /**

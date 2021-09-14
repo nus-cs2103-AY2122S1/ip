@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
+import duke.exception.DukeException;
+import duke.exception.InvalidParameterDukeException;
 
 /**
  * A DoneCommand class that extends from the Command class.
@@ -13,7 +13,8 @@ import duke.task.TaskList;
  */
 public class DoneCommand extends Command{
 
-    String parameter;
+    private final String parameter;
+    private static final String SUCCESS_MESSAGE = "Nice! I've marked this task as done:\n  %s %s";
 
     /**
      * A constructor to initialize a done command.
@@ -34,16 +35,18 @@ public class DoneCommand extends Command{
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        boolean isValidNumber = parameter.matches("\\d+");
-        if (!isValidNumber) {
+        if (!isValidNumber(parameter)) {
             // Invalid parameter
-            throw new DukeException("OOPS!!! Invalid task number.");
+            throw new InvalidParameterDukeException();
         }
         Task task = taskList.getTask(Integer.parseInt(parameter));
         taskList.markAsDone(Integer.parseInt(parameter));
         storage.save(taskList);
-        return String.format("Nice! I've marked this task as done:\n  %s %s",
-                task.getStatusIcon(), task.getDescription());
+        return String.format(SUCCESS_MESSAGE, task.getStatusIcon(), task.getDescription());
+    }
+
+    private boolean isValidNumber(String number) {
+        return number.matches("\\d+");
     }
 
     /**

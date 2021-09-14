@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.NoMatchingTaskDukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -13,6 +14,7 @@ import duke.exception.DukeException;
 public class FindCommand extends Command{
 
     private final String parameter;
+    private static final String SUCCESS_MESSAGE = "Here are the matching tasks in your list:\n";
 
     /**
      * A constructor to initialize a find command.
@@ -33,24 +35,24 @@ public class FindCommand extends Command{
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         assert taskList != null : "task list should not be null.";
-        TaskList searchList = new TaskList();
+        TaskList searchList = searchList(taskList);
+        boolean isEmptySearchList = searchList.size() == 0;
+        if (isEmptySearchList) {
+            throw new NoMatchingTaskDukeException();
+        }
+        String result = SUCCESS_MESSAGE + searchList.toString();
+        return result;
+    }
 
+    private TaskList searchList(TaskList taskList) {
+        TaskList searchList = new TaskList();
         for (Task t:taskList.getTaskList()) {
             boolean isInList = t.getDescription().contains(parameter);
             if (isInList) {
                 searchList.addTask(t);
             }
         }
-
-        boolean isEmptySearchList = searchList.size() == 0;
-        if (isEmptySearchList) {
-            throw new DukeException("No matching tasks found.");
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
-        sb.append(searchList.toString());
-        return sb.toString();
+        return searchList;
     }
 
     /**

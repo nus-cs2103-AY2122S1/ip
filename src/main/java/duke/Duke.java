@@ -29,7 +29,6 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            //gui.showResponse(e.getMessage());
             taskList = new TaskList();
         }
     }

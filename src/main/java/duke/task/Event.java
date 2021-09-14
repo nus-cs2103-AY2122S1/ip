@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.utility.Utility;
+
 import java.time.LocalDateTime;
 
 /**
@@ -17,7 +19,18 @@ public class Event extends Task {
      */
     public Event(String description, String eventTime) {
         super(description);
-        this.eventTime = eventTime;
+        LocalDateTime ldt = Utility.stringToDate(eventTime);
+        if (ldt == null) {
+            this.eventTime = eventTime;
+        } else {
+            boolean isDayTime = ldt.getHour() < HALF_DAY_HOURS;
+            this.eventTime = String.format("%s of %s %s, %s%s",
+                    ldt.getDayOfMonth(),
+                    ldt.getMonth().toString(),
+                    ldt.getYear(),
+                    isDayTime ? ldt.getHour() : ldt.getHour() - HALF_DAY_HOURS,
+                    isDayTime ? "am" : "pm");
+        }
     }
 
     /**
@@ -29,20 +42,6 @@ public class Event extends Task {
             super.markAsDone();
         }
         this.eventTime = eventTime;
-    }
-
-    /**
-     * A constructor to create a new event task with supported time format.
-     */
-    public Event(String description, LocalDateTime localDateTime) {
-        super(description);
-        boolean isDayTime = localDateTime.getHour() < HALF_DAY_HOURS;
-        this.eventTime = String.format("%s of %s %s, %s%s",
-                localDateTime.getDayOfMonth(),
-                localDateTime.getMonth().toString(),
-                localDateTime.getYear(),
-                isDayTime ? localDateTime.getHour() : localDateTime.getHour() - HALF_DAY_HOURS,
-                isDayTime ? "am" : "pm");
     }
 
     /**

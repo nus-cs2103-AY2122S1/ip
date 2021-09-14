@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.utility.Utility;
+
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
  * @version Level-8
  */
 public class Deadline extends Task {
-    private String dateLine;
+    private final String dateLine;
     private final int HALF_DAY_HOURS = 12;
 
     /**
@@ -17,7 +19,18 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dateLine) {
         super(description);
-        this.dateLine = dateLine;
+        LocalDateTime ldt = Utility.stringToDate(dateLine);
+        if (ldt == null) {
+            this.dateLine = dateLine;
+        } else {
+            boolean isDayTime = ldt.getHour() < HALF_DAY_HOURS;
+            this.dateLine = String.format("%s of %s %s, %s%s",
+                    ldt.getDayOfMonth(),
+                    ldt.getMonth().toString(),
+                    ldt.getYear(),
+                    isDayTime ? ldt.getHour() : ldt.getHour() - HALF_DAY_HOURS,
+                    isDayTime ? "am" : "pm");
+        }
     }
 
     /**
@@ -29,20 +42,6 @@ public class Deadline extends Task {
             super.markAsDone();
         }
         this.dateLine = dateLine;
-    }
-
-    /**
-     * A constructor to create a new deadline task with supported time format.
-     */
-    public Deadline(String description, LocalDateTime localDateTime) {
-        super(description);
-        boolean isDayTime = localDateTime.getHour() < HALF_DAY_HOURS;
-        this.dateLine = String.format("%s of %s %s, %s%s",
-                localDateTime.getDayOfMonth(),
-                localDateTime.getMonth().toString(),
-                localDateTime.getYear(),
-                isDayTime ? localDateTime.getHour() : localDateTime.getHour() - HALF_DAY_HOURS,
-                isDayTime ? "am" : "pm");
     }
 
     /**

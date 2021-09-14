@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.NoMatchingTaskDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.exception.DukeException;
@@ -11,6 +12,8 @@ import duke.exception.DukeException;
  * @version A-MoreOOP
  */
 public class ListCommand extends Command{
+
+    private static final String SUCCESS_MESSAGE = "Here is your task list:\n";
 
     /**
      * An empty constructor to initialize an exit command.
@@ -30,13 +33,10 @@ public class ListCommand extends Command{
         assert taskList != null : "task list should not be null.";
         boolean isEmptyList = taskList.size() == 0;
         if (isEmptyList) {
-            throw new DukeException("It seems that your task list is empty.\n"
-                    + "Try adding some task using \"todo\", \"deadline\" or \"event\"");
+            throw new NoMatchingTaskDukeException();
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here is your task list:\n");
-        sb.append(taskList.toString());
-        return sb.toString();
+        String result = SUCCESS_MESSAGE + taskList.toString();
+        return result;
     }
 
     /**

@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.exception.TaskNotFoundDukeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,14 +47,14 @@ public class TaskList {
 
     /**
      * A method to delete a task from the list.
-     * @param taskNo The task number to be removed.
+     * @param taskId The task number to be removed.
      */
-    public void deleteTask(int taskNo) throws DukeException {
-        if (!   isValidTask(taskNo)) {
+    public void deleteTask(int taskId) throws DukeException {
+        if (!isValidTask(taskId)) {
             // Task does not exist
-            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
+            throw new TaskNotFoundDukeException(taskId);
         }
-        taskList.remove(taskNo - 1);
+        taskList.remove(taskId - 1);
     }
 
     /**
@@ -68,44 +69,44 @@ public class TaskList {
      * A method to get a task from the task list.
      * @return Task The task to get.
      */
-    public Task getTask(int i) throws DukeException {
+    public Task getTask(int taskId) throws DukeException {
         try {
-            return taskList.get(i - 1);
+            return taskList.get(taskId - 1);
         } catch (Exception e) {
-            throw new DukeException(String.format("OOPS!!! Task %d does not exist.", i));
+            throw new TaskNotFoundDukeException(taskId);
         }
     }
 
     /**
      * A method to mark a task as done.
-     * @param taskNo The task to be marked.
+     * @param taskId The task to be marked.
      */
-    public void markAsDone(int taskNo) throws DukeException {
-        if (!isValidTask(taskNo)) {
+    public void markAsDone(int taskId) throws DukeException {
+        if (!isValidTask(taskId)) {
             // Task does not exist
-            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
+            throw new TaskNotFoundDukeException(taskId);
         }
-        taskList.get(taskNo - 1).markAsDone();
+        taskList.get(taskId - 1).markAsDone();
     }
 
     /**
      * A method to tag a task.
-     * @param taskNo The task to be tagged.
+     * @param taskId The task to be tagged.
      */
-    public void tagTask(int taskNo, String tagDescription) throws DukeException {
-        if (!isValidTask(taskNo)) {
+    public void tagTask(int taskId, String tagDescription) throws DukeException {
+        if (!isValidTask(taskId)) {
             // Task does not exist
-            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskNo));
+            throw new TaskNotFoundDukeException(taskId);
         }
-        taskList.get(taskNo - 1).addTag(tagDescription);
+        taskList.get(taskId - 1).addTag(tagDescription);
     }
 
     /**
      * A method to check if task is valid.
-     * @param taskNo The task to be marked.
+     * @param taskId The task to be marked.
      */
-    public boolean isValidTask(int taskNo) {
-        return taskNo > 0 && taskNo - 1 <= taskList.size();
+    public boolean isValidTask(int taskId) {
+        return taskId > 0 && taskId - 1 <= taskList.size();
     }
 
     /**

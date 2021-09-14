@@ -10,6 +10,8 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import duke.exception.DukeException;
+import duke.exception.MissingParameterDukeException;
+import duke.exception.UnknownCommandDukeException;
 
 
 /**
@@ -28,8 +30,6 @@ public class Parser {
     public static Command parse(String userCommand) throws DukeException{
 
         String[] command = userCommand.split(" ", 2);
-        DukeException missingParamException =
-                new DukeException(String.format("OOPS!!! Parameter for \"%s\" is missing", command[0]));
         boolean noParameter = command.length < 2;
         switch (command[0]) {
         case "bye":
@@ -40,31 +40,31 @@ public class Parser {
         case "deadline":
         case "event":
             if (noParameter) {
-                throw missingParamException;
+                throw new MissingParameterDukeException(command[0]);
             }
             return new AddCommand(command[0], command[1]);
         case "done":
             if (noParameter) {
-                throw missingParamException;
+                throw new MissingParameterDukeException(command[0]);
             }
             return new DoneCommand(command[1]);
         case "tag":
             if (noParameter) {
-                throw missingParamException;
+                throw new MissingParameterDukeException(command[0]);
             }
             return new TagCommand(command[1]);
         case "delete":
             if (noParameter) {
-                throw missingParamException;
+                throw new MissingParameterDukeException(command[0]);
             }
             return new DeleteCommand(command[1]);
         case "find":
             if (noParameter) {
-                throw missingParamException;
+                throw new MissingParameterDukeException(command[0]);
             }
             return new FindCommand(command[1]);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandDukeException();
         }
     }
 }

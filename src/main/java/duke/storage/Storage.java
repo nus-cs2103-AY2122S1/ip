@@ -1,5 +1,8 @@
 package duke.storage;
 
+import duke.exception.BadFileDukeException;
+import duke.exception.FileNotFoundDukeException;
+import duke.exception.FolderNotFoundDukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
@@ -41,7 +44,7 @@ public class Storage {
             File f = new File(s);
             boolean isValidFolder = !s.contains(".") && !f.isDirectory();
             if (isValidFolder) {
-                throw new DukeException(String.format("OOPS!!! \"%s\" folder does not exist.", s));
+                throw new FolderNotFoundDukeException(s);
             }
         }
 
@@ -53,7 +56,7 @@ public class Storage {
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new DukeException("OOPS!!! File not found.");
+            throw new FileNotFoundDukeException();
         }
 
         while (sc.hasNext()) {
@@ -70,7 +73,7 @@ public class Storage {
                 list.add(new Event(taskParameter[2], taskParameter[3], taskParameter[1].equals("X")));
                 break;
             default:
-                throw new DukeException("OOPS!!! File appears to be corrupted.");
+                throw new BadFileDukeException();
             }
         }
         return list;
@@ -94,7 +97,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException(String.format("OOPS!!! File path \"%s\" is invalid", filePath));
+            throw new FileNotFoundDukeException();
         }
     }
 }
