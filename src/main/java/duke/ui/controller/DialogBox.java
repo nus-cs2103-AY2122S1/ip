@@ -18,6 +18,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -50,6 +51,25 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    public static DialogBox getUserDialog(String text, Image img) {
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.dialog.setFont(Font.font("Courier New", 20));
+        return dialogBox;
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        BackgroundFill fill = new BackgroundFill(
+                Color.web("#C3B1E1"),
+                new CornerRadii(5),
+                Insets.EMPTY
+        );
+        Background background = new Background(fill);
+        dialogBox.dialog.setBackground(background);
+        return dialogBox;
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -58,30 +78,5 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        var dialogBox = new DialogBox(text, img);
-        BackgroundFill fill = new BackgroundFill(
-                Color.web("#29b6f6"),
-                new CornerRadii(2.5),
-                Insets.EMPTY
-        );
-        Background background = new Background(fill);
-        dialogBox.dialog.setBackground(background);
-        return dialogBox;
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var dialogBox = new DialogBox(text, img);
-        dialogBox.flip();
-        BackgroundFill fill = new BackgroundFill(
-                Color.web("#64ba69"),
-                new CornerRadii(2.5),
-                Insets.EMPTY
-        );
-        Background background = new Background(fill);
-        dialogBox.dialog.setBackground(background);
-        return dialogBox;
     }
 }
