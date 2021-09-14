@@ -43,7 +43,7 @@ Types are T, D and E, where T is task, D is deadline, E is event.
 Since there are three types of tasks, there are three different commands to add the three different types of tasks.
 
 `todo` adds a to-do typed task to the task list:
-```aidl
+```
 todo CS2103 assignment
 
 Got it, I've added this task to your task list:
@@ -52,7 +52,7 @@ Now you have 1 task in your task list.
 ```
 
 `deadline` adds a deadline typed task to the task list:
-```aidl
+```
 deadline CS2103 assignment /by 2021-11-21 06:00
 
 Got it, I've added this task to your task list:
@@ -61,7 +61,7 @@ Now you have 1 task in your task list.
 ```
 
 `event` adds an event typed task to the task list:
-```aidl
+```
 event CS2103 finals /at 2021-11-21 06:00
 
 Got it, I've added this task to your task list:
@@ -70,7 +70,7 @@ Now you have 1 task in your task list.
 ```
 
 **Use the following syntax:**
-```aidl
+```
 todo (task name)
 deadline (task name) /by (date)
 event (task name) /at (date)
@@ -81,7 +81,7 @@ event (task name) /at (date)
 This command will list out all the tasks present in the task list, along with its state and type.
 
 For example:
-```aidl
+```
 list
 
 Here are the tasks in your list:
@@ -95,7 +95,7 @@ Here are the tasks in your list:
 This command will mark a task as done. 
 
 For example:
-```aidl
+```
 done 1
 
 Nice! I've marked this task as done:
@@ -110,7 +110,7 @@ Here are the tasks in your list:
 ```
 
 **Use the following syntax:**
-```aidl
+```
 done (index as seen in the list)
 ```
 
@@ -119,7 +119,7 @@ done (index as seen in the list)
 This command will delete a task from the task list.
 
 For example:
-```aidl
+```
 delete 1
 
 Noted. I've removed this task:
@@ -133,7 +133,7 @@ Here are the tasks in your list:
 2.[E][] CS2103 Finals (at 2021-11-21 06:00)
 ```
 **Use the following syntax:**
-```aidl
+```
 delete (index as seen in the list)
 ```
 
@@ -142,7 +142,7 @@ delete (index as seen in the list)
 This command can be used to tag tasks with anything the user wishes to.
 
 For example:
-```aidl
+```
 tag 1 #assignments
 
 Got it. I've tagged the following item:
@@ -156,7 +156,7 @@ Here are the tasks in your list:
 ```
 
 **Use the following syntax:**
-```aidl
+```
 tag (index in list) #(tag)
 ```
 
