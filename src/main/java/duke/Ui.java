@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -40,6 +41,8 @@ public class Ui {
     private Image userPhoto = new Image(this.getClass().getResourceAsStream("/images/UserDisplayPhoto.jpg"));
     private Image botPhoto = new Image(this.getClass().getResourceAsStream("/images/BotDisplayPhoto.jpg"));
     private Image botErrorPhoto = new Image(this.getClass().getResourceAsStream("/images/BotErrorDisplayPhoto.jpg"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/Images/BackgroundImage.jpg"));
+
 
     /**
      * Constructor for jUnit testing
@@ -78,8 +81,10 @@ public class Ui {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        dialogContainer.setStyle("-fx-background-image: url('/images/BackgroundImage.jpg')");
+        dialogContainer.setSpacing(20);
+        BackgroundImage wrappedBackgroundImage = new BackgroundImage(backgroundImage, null, null, null, null);
         dialogContainer.setPrefHeight(535);
+        dialogContainer.setBackground(new Background(wrappedBackgroundImage));
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);

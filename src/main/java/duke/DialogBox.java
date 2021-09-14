@@ -29,18 +29,11 @@ public class DialogBox extends HBox {
     public DialogBox(Label label, ImageView imageView) {
         text = label;
         displayPicture = imageView;
-
         text.setWrapText(true);
-        text.setPrefWidth(250);
-
+        text.setMaxWidth(250);
         textFlow.getChildren().add(text);
-
-
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
-
-
-
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(textFlow, displayPicture);
     }
@@ -50,7 +43,9 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
+
         this.getChildren().setAll(tmp);
+
     }
 
     /**
