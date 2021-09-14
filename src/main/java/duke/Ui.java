@@ -19,12 +19,6 @@ import java.util.ArrayList;
 public class Ui implements Cloneable {
     private final String OUTRO = "Bye. Hope to see you again soon!";
 
-    private static final String INSTRUCTIONS = "Welcome to Duke!\n"
-            + "To add a todo task  --  todo <task>\n"
-            + "To add a deadline  --  deadline <task> /by MMM dd yyyy HH:mm\n"
-            + "To add an event  --  event <task> /at MMM dd yyyy HH:mm\n"
-            + "Other tasks include 'done', 'delete', 'find', 'list'";
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInputField;
@@ -153,7 +147,6 @@ public class Ui implements Cloneable {
         setUpUi(stage);
         setupEventHandlers();
 
-        displayGreeting();
         stage.setScene(scene);
         stage.show();
 
@@ -256,14 +249,6 @@ public class Ui implements Cloneable {
         userInputField.clear();
     }
 
-    /**
-     * Creates display Dialogue Box when initialising GUI.
-     */
-    private void displayGreeting() {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(INSTRUCTIONS, dukeImage)
-        );
-    }
 
     public Ui clone() throws CloneNotSupportedException {
         return (Ui) super.clone();

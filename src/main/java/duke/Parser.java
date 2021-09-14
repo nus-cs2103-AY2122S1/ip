@@ -17,7 +17,7 @@ public class Parser {
     private Duke duke;
 
     enum Activity {
-        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND, UNDO
+        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND, UNDO, HELP
     }
 
     /**
@@ -73,6 +73,8 @@ public class Parser {
             activity = Activity.FIND;
         } else if (command.startsWith("undo")) {
             activity = Activity.UNDO;
+        } else if (command.startsWith("help")){
+            activity = Activity.HELP;
         } else {
             activity = Activity.NORMAL;
         }
@@ -173,6 +175,9 @@ public class Parser {
         }
         case UNDO: {
             return new Undo(storageList, uiList, tasksList, duke).execute();
+        }
+        case HELP: {
+            return new Help().execute();
         }
         default: {
             return ui.unknownMessageToString();
