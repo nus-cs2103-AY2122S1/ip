@@ -5,7 +5,7 @@ User Interface (GUI). As the cutest Powerpuff Girl, Bubbles will
 provide **constant encouragement** to make sure you are the most 
 productive you've ever been.
 
-![Image of Bubbles Ui](Ui.png)
+<img alt="Image of Bubbles Ui" height="630" src="Ui.png" width="400"/>
 
 ## Features 
 Features supported by Bubbles are:
@@ -59,7 +59,7 @@ do not have to complete by a certain date/time.
 Example of usage: `todo sweep the floor`
 
 Expected outcome:
-![Image of adding a todo task](images/todo.png)
+<img alt="Image of adding a todo task" height="250" src="images/todo.png" width="380"/>
 ```
 Received order! I've added this task:
    [T] [ ] sweep the floor
@@ -104,7 +104,7 @@ completed or not.
 Example of usage: `view`
 
 Expected outcome:
-![Image of listing out all tasks](images/list.png)
+<img alt="Image of listing out all tasks" height="265" src="images/list.png" width="385"/>
 ```
 Below are some of the tasks in your list!
 1. [T] [ ] sweep the floor
@@ -119,7 +119,7 @@ Marks a task as completed.
 Example of usages: `done 2`
 
 Expected outcome:
-![Image of completing a task](images/done.png)
+<img alt="Image of completing a task" height="260" src="images/done.png" width="380"/>
 ```
 Good job! I've marked this task as done:
    [D] [X] sign the form (by: 15 Sep 2021)
@@ -133,7 +133,7 @@ Deletes a task from the list (permanently).
 Example of usages: `delete 1`
 
 Expected outcome:
-![Image of deleting a task](images/delete.png)
+<img alt="Image of deleting a task" height="240" src="images/delete.png" width="380"/>
 ```
 Noted! I've removed this task:
    [T] [ ] sweep the floor
@@ -152,7 +152,7 @@ keyword entered).
 Example of usages: `find birthday`
 
 Expected outcome:
-![Image of finding a task](images/find.png)
+<img alt="Image of finding a task" height="235" src="images/find.png" width="380"/>
 ```
 Here are the matching tasks in your list!
 1. [E] [ ] birthday dinner (at: 22 Sep 2021)
@@ -166,7 +166,7 @@ are due/occurring within the next 7 days.
 Example of usages: `remind`
 
 Expected outcome:
-![Image of using reminders](images/remind.png)
+<img alt="Image of using reminders" height="240" src="images/remind.png" width="380"/>
 ```
 Here are the upcoming deadlines and events coming up
 soon! 
@@ -181,7 +181,7 @@ Bubbles supports.
 Example of usages: help
 
 Expected outcome:
-![Image of using the command function](images/help.png)
+<img alt="Image of using the command function" height="485" src="images/help.png" width="380"/>
 
 ### `bye`
 
