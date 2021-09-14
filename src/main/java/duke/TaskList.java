@@ -35,22 +35,15 @@ public class TaskList {
     }
 
     public void updateTask(int index, String description, LocalDate date) {
-        if (description.equalsIgnoreCase("")) {
-            if (date != null) {
-                if (this.list.get(index) instanceof Event) {
-                    ((Event) this.list.get(index)).changeDate(date);
-                } else if (this.list.get(index) instanceof Deadline) {
-                    ((Deadline) this.list.get(index)).changeDate(date);
-                }
-            }
-        } else {
+        this.list.get(index).markUndone();
+        if (!description.equalsIgnoreCase("")) {
             this.getTask(index).changeDescription(description);
-            if (date != null) {
-                if (this.list.get(index) instanceof Event) {
-                    ((Event) this.list.get(index)).changeDate(date);
-                } else if (this.list.get(index) instanceof Deadline) {
-                    ((Deadline) this.list.get(index)).changeDate(date);
-                }
+        }
+        if (date != null) {
+            if (this.list.get(index) instanceof Event) {
+                ((Event) this.list.get(index)).changeDate(date);
+            } else if (this.list.get(index) instanceof Deadline) {
+                ((Deadline) this.list.get(index)).changeDate(date);
             }
         }
     }

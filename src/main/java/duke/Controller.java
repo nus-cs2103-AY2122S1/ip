@@ -2,19 +2,21 @@ package duke;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static duke.Parser.taskParse;
 
 
-public class Controller {
+public class Controller implements Initializable {
 
-    private static Storage storage = new Storage("C:\\Users\\65906\\IdeaProjects\\ip\\duke.txt");
+    private static Storage storage;
     private static TaskList tasks;
 
     @FXML
@@ -59,35 +61,36 @@ public class Controller {
     @FXML
     private DatePicker updateDate;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        storage = new Storage("duke.txt");
+        this.load();
+    }
+
     /**
      * Loads the tasklist when the load button is pressed
      *
      * @param a action of pressing load button
      */
     public void load(ActionEvent a) {
-        {
-            try {
-                tasks = new TaskList(storage.load());
-            } catch (IOException | DukeException e) {
-                tasks = new TaskList();
-            }
-            String listContent = "";
-            for (int i = 0; i < tasks.size(); i++) {
-                listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
-            }
-            listLabel.setText("Here are the tasks in your list:\n" + listContent);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException | DukeException e) {
+            tasks = new TaskList();
         }
+        listLabel.setText(tasks.toString());
     }
 
     /**
      * Loads updated tasklist when other buttons are pressed
      */
     public void load() {
-        String listContent = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException | DukeException e) {
+            tasks = new TaskList();
         }
-        listLabel.setText("Here are the tasks in your list:\n" + listContent);
+        listLabel.setText(tasks.toString());
         try {
             storage.save(tasks);
         } catch (IOException e) {
@@ -109,26 +112,31 @@ public class Controller {
             tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(), ""));
             this.load();
             assert addTaskError.getText().equals("");
-        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase( "E")) {
-            tasks.addTask(taskParse(taskType.getText(), taskDescription.getText(),
-                    taskDate.getValue().toString()));
-            this.load();
-            assert addTaskError.getText().equals("");
+        } else if (taskType.getText().equalsIgnoreCase("D") || taskType.getText().equalsIgnoreCase("E")) {
+            if (taskDate.getValue() == null) {
+                addTaskError.setText("Add a Date!");
+            } else {
+                tasks.addTask(taskParse(taskType.getText(),
+                        taskDescription.getText(),
+                        taskDate.getValue().toString()));
+                this.load();
+                assert addTaskError.getText().equals("");
+            }
         } else {
-            addTaskError.setText("Wrong Format");
+            addTaskError.setText("Task type to be T, D or E");
         }
 
     }
 
     /**
-     * Mark a task as done on the list when done button is pressed
+     * Marks a task as done on the list when the done button is pressed
      *
-     * @param a action of press add button
+     * @param a action of press done button
      */
     public void done(ActionEvent a) {
         try {
             int doneIndex = Integer.parseInt(doneText.getText()) - 1;
-            if(doneIndex > tasks.size() - 1 || doneIndex < 0) {
+            if (doneIndex > tasks.size() - 1 || doneIndex < 0) {
                 doneError.setText("Please enter a number in the list");
             } else {
                 tasks.markAsDone(doneIndex);
@@ -145,10 +153,10 @@ public class Controller {
      *
      * @param a action of press delete button
      */
-    public void delete(ActionEvent a){
+    public void delete(ActionEvent a) {
         try {
             int deleteIndex = Integer.parseInt(deleteText.getText()) - 1;
-            if(deleteIndex > tasks.size() - 1 || deleteIndex < 0) {
+            if (deleteIndex > tasks.size() - 1 || deleteIndex < 0) {
                 deleteError.setText("Please enter a number in the list");
             } else {
                 tasks.removeTask(deleteIndex);
@@ -169,7 +177,7 @@ public class Controller {
     public void update(ActionEvent a) {
         try {
             int index = Integer.parseInt(updateIndex.getText()) - 1;
-            if(index > tasks.size() - 1 || index < 0) {
+            if (index > tasks.size() - 1 || index < 0) {
                 updateError.setText("Please enter a number in the list");
             } else {
                 tasks.updateTask(index, updateDescription.getText(), updateDate.getValue());
@@ -190,4 +198,6 @@ public class Controller {
     public void find(ActionEvent a) {
         listLabel.setText(tasks.findTask(findText.getText()) + "Press load to go back!");
     }
+
+
 }

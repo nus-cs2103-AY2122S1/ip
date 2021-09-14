@@ -14,9 +14,9 @@ public class Task {
     }
 
     /**
-     * Given the isDone status return appropriate icon
+     * Get status on the task and returns appropriate icon
      *
-     * @return String "X" if task is done " " if not done
+     * @return String "X" if task is done & " " if not done
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
