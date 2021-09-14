@@ -3,13 +3,17 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TaskList {
+public class TaskList implements Cloneable {
     private ArrayList<Task> tasks;
     public TaskList() {
         tasks = new ArrayList<Task>();
     }
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void replaceWithTaskList(TaskList taskList) {
+        tasks = taskList.tasks;
     }
 
     public void addTask(Task task) {
@@ -48,5 +52,14 @@ public class TaskList {
 
     public boolean doesContain(Task task) {
         return tasks.contains(task);
+    }
+
+    @Override
+    public TaskList clone() {
+        ArrayList<Task> clonedTaskList = new ArrayList<Task>();
+        for (Task task: this.tasks) {
+            clonedTaskList.add(task.clone());
+        }
+        return new TaskList(clonedTaskList);
     }
 }

@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.util.Pair;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,7 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String dataFilePath;
-
+    private HistoryState history;
     /**
      * Constructor for Storage.
      * Sets the data folder and file path.
@@ -22,6 +24,31 @@ public class Storage {
      */
     public Storage(String dataFilePath) {
         this.dataFilePath = dataFilePath;
+    }
+
+    /**
+     * Set task list and command to history
+     * @param taskList
+     */
+    public void setHistory(TaskList taskList, Command command) {
+        history = new HistoryState(taskList, command);
+    }
+
+    public boolean isHistoryEmpty() {
+        return history == null;
+    }
+    /**
+     * Returns history and clears it.
+     * @return last saved task list
+     * @throws DukeException
+     */
+    public HistoryState popFromHistory() throws DukeException {
+        if (history == null) {
+            throw new DukeException("There is nothing saved in the history!");
+        }
+        HistoryState lastHistoryState = history;
+        history = null;
+        return lastHistoryState;
     }
 
     /**

@@ -52,6 +52,8 @@ public class Parser {
                 return new FindCommand(getQuery(inputList));
             case BYE:
                 return new ExitCommand();
+            case UNDO:
+                return new UndoCommand();
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }

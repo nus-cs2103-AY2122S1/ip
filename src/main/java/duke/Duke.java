@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 import java.util.Objects;
