@@ -48,6 +48,14 @@ public class TaskList {
     }
 
     /**
+     * @param task the task to be compared with
+     * @return true if task exists in taskList, false otherwise
+     */
+    public boolean contains(Task task) {
+        return tasks.contains(task);
+    }
+
+    /**
      * Gets the size of the task list
      *
      * @return An integer size of the list

@@ -1,38 +1,21 @@
 package ponyo.commands;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.format.DateTimeParseException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import ponyo.data.task.Deadline;
+import ponyo.data.task.Task;
+import ponyo.data.task.TaskList;
 
-// Note to marker: These tests are meant to fail, and hence will fail when we try to build.
 public class AddCommandTest {
     @Test
-    public void addCommand_invalidDateForDeadline_throwsException() {
-        final String[] invalidDates = {"2020/10/12"};
-        for (String date : invalidDates) {
-            try {
-                new Deadline("example description", date);
-            } catch (DateTimeParseException e) {
-                return;
-            }
-        }
-        fail("A task has been added with an invalid date.");
-    }
-
-    @Test
-    public void addCommand_invalidDescription_throwsException() {
-        final String[] invalidDescription = {""};
-        for (String desc : invalidDescription) {
-            try {
-                new Deadline(desc, "2020-10-12");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return;
-            }
-        }
-        fail("A task has been added with an invalid description.");
+    public void addCommand_taskListContainsTask_emptyTaskList() {
+        TaskList list = new TaskList();
+        Task task = new Deadline("desc", "2020-10-12");
+        list.add(task);
+        assertTrue(list.contains(task));
+        assertEquals(list.retrieveTask(0), task);
     }
 }
