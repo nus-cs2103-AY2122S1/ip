@@ -43,22 +43,30 @@ You can add [to-do tasks](#todo---add-to-do-task), [deadline tasks](#deadline---
 must be done by a deadline, and [event tasks](#event---add-event-task) which are tasks that occur at a certain point in
 time.
 
+![Add tasks demonstration](images/demo_add_tasks.gif)
+
 ### See your tasks
 
 You can see your tasks by [listing](#list---list-tasks) them all out, or by [finding](#find---find-tasks) tasks with
 matching keywords.
 
+![See tasks demonstration](images/demo_see_tasks.gif)
+
 ### Mark your tasks as done
 
 Once finished with your tasks, you can [mark them as done](#done---mark-task-done).
+
+![Mark task done demonstration](images/demo_mark_task_done.gif)
 
 ### Responsive user interface
 
 The UI adjusts accordingly when the app window is resized.
 
+![Responsive UI demonstration](images/demo_responsive_ui.gif)
+
 ### Persistent storage
 
-Even after exiting, data about tasks is automatically saved. This is loaded once the app is started again.
+Even after exiting, the data of all the tasks is automatically saved. This is loaded once the app is started again.
 
 [[Back to table of contents]](#table-of-contents)
 
@@ -325,7 +333,7 @@ Example of usage:
 
 Expected outcome:
 
-Chad will say goodbye before ending the session then the app will exit.
+Chad will say goodbye before the app exits.
 
 ```
 Goodbye. Hope we see each other again soon.
@@ -335,14 +343,14 @@ Goodbye. Hope we see each other again soon.
 
 ## Frequently Asked Questions (FAQ)
 
-### Where is data about tasks stored?
+### Where is the data of all the tasks stored?
 
 The data is stored in the `tasks.txt` file which is located in the `data` folder which is in the same folder as the JAR
 file.
 
 ### Do I need to create the `tasks.txt` file or the `data` folder for my data to be saved?
 
-There is no need to create the file or folder, this is created automatically for you.
+There is no need to create the `tasks.txt` file or the `data` folder; these are created automatically for you.
 
 [[Back to table of contents]](#table-of-contents)
 
@@ -350,8 +358,9 @@ There is no need to create the file or folder, this is created automatically for
 
 ChadBot is a greenfield individual project for CS2103T Software Engineering, a module that was a part of the Computer
 Science curriculum of the National University of Singapore (NUS) for those who matriculated in the NUS Academic Year
-(AY) 19/20. ChadBot was done in the AY 21/22 Semester 1 version of CS2103T Software Engineering. ChadBot was written in
-Java, using the JavaFX library for its GUI, and JUnit for its unit tests. ChadBot is based off of
+(AY) 19/20. ChadBot was done in the [AY 21/22 Semester 1 version of CS2103T Software Engineering](
+https://nus-cs2103-ay2122s1.github.io/website/admin/index.html). ChadBot was written in Java, using the JavaFX library
+for its GUI, and JUnit for its unit tests. ChadBot is based off of
 [Project Duke](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/projectDuke/index.html). ChadBot's GitHub
 repository can be found [here](https://github.com/jayasting98/ip).
 
