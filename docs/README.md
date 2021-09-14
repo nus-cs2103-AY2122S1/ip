@@ -29,7 +29,9 @@ Adds a todo task to the list
 
 Example of usage: 
 
-`todo (task to be saved)`
+`todo (task description)`
+
+task description: The task you would like to add
 
 Expected outcome:
 
@@ -43,13 +45,18 @@ x Uncompleted Tasks Left
 Adds a task with a given deadline to the list
 
 Note:
+
 *Ensure that there is 1 space in front of the date
+
 *Use - to seperate the year, months and days
+
 *Even if the month can be written as 9, use 09 instead
 
 Example of usage: 
 
 `deadline (task description) /by (Date in YYYY-MM-DD format)`
+
+task description: The task you would like to add
 
 Expected outcome:
 
@@ -63,13 +70,18 @@ x Uncompleted Tasks Left
 Adds an event to the list
 
 Note:
+
 *Ensure that there is 1 space in front of the date
+
 *Use - to seperate the year, months and days
+
 *Even if the month can be written as 9, use 09 instead
 
 Example of usage: 
 
 `event (task description) /at (Date in YYYY-MM-DD format)`
+
+task description: The task you would like to add
 
 Expected outcome:
 
@@ -94,7 +106,9 @@ Shows a list of all tasks that have a description with the given substring
 
 Example of usage: 
 
-`findstring read a book`
+`findstring (search string)`
+
+search string: A word or a line that you are looking for
 
 Expected outcome:
 Winston will return a list of all matching tasks
@@ -130,6 +144,7 @@ Example of usage:
 
 `update (list index) (task)`
 task: Either todo, event or deadline. With their respective syntax as shown in the other parts of the UG
+
 list index: The position of the desired update
 
 Expected outcome:
