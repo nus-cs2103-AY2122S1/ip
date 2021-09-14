@@ -46,7 +46,8 @@ public class Command {
     }
 
     /**
-     * Prints the welcome message from Duke and starts taking commands from the user.
+     * Prints the welcome message from Duke and starts taking commands from the user. This
+     * is for the original command line version of Duke.
      */
     public void startDuke() {
         if (!this.canUseFilePath) {

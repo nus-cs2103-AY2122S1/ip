@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Parses different strings and acts as a helper for other classes.
  */
@@ -76,6 +79,12 @@ public class Parser {
         if (indexOfBy == -1) {
             throw new DukeException("You must specify the deadline.");
         }
+        String time = str.substring(indexOfBy + "/by ".length());
+        try {
+            LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Deadline should be specified in the format of YYYY-MM-DD.");
+        }
     }
 
     private void checkFormatOfEventCommand(String str) throws DukeException {
@@ -84,8 +93,8 @@ public class Parser {
         if (eventCommandFormatIsWrong || str.length() < minimumEventCommandLength) {
             throw new DukeException("Wrong input for adding an event-task.");
         }
-        int index = str.indexOf("/at ");
-        if (index == -1) {
+        int indexOfAt = str.indexOf("/at ");
+        if (indexOfAt == -1) {
             throw new DukeException("You must specify the time for an event-task.");
         }
     }
