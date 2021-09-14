@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.InvalidDescriptionException;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -23,7 +24,10 @@ public class ReminderCommand extends Command {
      * Constructor for ReminderCommand.
      * @param fullCommand
      */
-    public ReminderCommand(String fullCommand) {
+    public ReminderCommand(String fullCommand) throws InvalidDescriptionException{
+        if (!fullCommand.equals(COMMAND_WORD)) {
+            throw new InvalidDescriptionException("There should be no description after 'reminder'");
+        }
         this.currentDate = LocalDate.now();
         this.finalDate = currentDate.plus(Period.ofDays(DAYS));
     }
@@ -34,14 +38,14 @@ public class ReminderCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        String deadlines = getUpcomingDeadlines(currentDate, finalDate);
+        String deadlines = getUpcomingDeadlines();
         if (hasUpcomingDeadlines(deadlines)) {
             return new CommandResult(COMMAND_SUCCESS + deadlines);
         }
         return new CommandResult(COMMAND_NO_MATCH);
     }
 
-    private String getUpcomingDeadlines(LocalDate currentDate, LocalDate finalDate) {
+    private String getUpcomingDeadlines() {
         String response = "";
         int count = 1;
         for (Task t : tasks.getAll()) {

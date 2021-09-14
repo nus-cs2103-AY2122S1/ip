@@ -1,14 +1,16 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
+import duke.exceptions.InvalidDescriptionException;
 import duke.task.Task;
 
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public ListCommand() {
+    public ListCommand(String fullCommand) throws InvalidDescriptionException {
+        if (!fullCommand.equals(COMMAND_WORD)) {
+            throw new InvalidDescriptionException("There should be no description after 'list'");
+        }
     }
 
     @Override
