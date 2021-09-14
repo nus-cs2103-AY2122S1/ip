@@ -7,18 +7,28 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 * [Features](#features)
   * [Deadline](#deadline--add-deadline-tasks)
   * [Event](#event--add-event-tasks)
-  * [Todos](#todos)
-  * [List](#list)
-  * [Done](#done)
-  * [Dlete](#delete)
-  * [Find](#find)
-  * [Undo](#undo)
-  * [Bye](#bye)
+  * [Todos](#todos--add-todo-tasks)
+  * [List](#list--view-all-tasks)
+  * [Done](#done--mark-tasks-as-done)
+  * [Dlete](#delete--delete-tasks)
+  * [Find](#find--search-for-a-task)
+  * [Undo](#undo--undo-a-previous-change)
+  * [Bye](#bye--exits-the-programme)
 * [Command summary](#command-summary)
 
 ## Quick start
 
 ## Features 
+
+* [Deadline](#deadline--add-deadline-tasks)
+* [Event](#event--add-event-tasks)
+* [Todos](#todos--add-todo-tasks)
+* [List](#list--view-all-tasks)
+* [Done](#done--mark-tasks-as-done)
+* [Dlete](#delete--delete-tasks)
+* [Find](#find--search-for-a-task)
+* [Undo](#undo--undo-a-previous-change)
+* [Bye](#bye--exits-the-programme)
 
 ### Add Different types of tasks
 
@@ -167,7 +177,7 @@ Undo any previous changes made to the task list.
 `Undo`
 <br>
 <br>
-### `Bye` : Exits the programm
+### `Bye` : Exits the programme
 
 Close the chat bot.
 #### Format: 
