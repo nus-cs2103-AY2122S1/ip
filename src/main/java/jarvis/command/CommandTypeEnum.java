@@ -11,7 +11,7 @@ import jarvis.task.Event;
 public enum CommandTypeEnum {
     DEADLINE("deadline",
             "add a task with a specific deadline",
-            String.format("deadline <description> <%s>",Deadline.INPUT_FORMAT)
+            String.format("deadline <description> <%s>", Deadline.INPUT_FORMAT)
     ),
     DELETE("delete",
             "delete a task using the task number shown in the tasks list",
