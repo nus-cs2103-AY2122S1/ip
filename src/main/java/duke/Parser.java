@@ -71,6 +71,7 @@ public class Parser {
         tasks.get(i - 1).markAsDone();
         String message = response.doneResponse(i, tasks);
         this.writeToFile(duke.getFilePath());
+        assert duke.getIndex() >= 0;
         System.out.println(message);
         return message;
     }
@@ -157,6 +158,7 @@ public class Parser {
             return "no task found!";
         } else {
             duke.setIndex(duke.getIndex() - 1);
+            assert duke.getIndex() >= 0;
             String message = response.deleteTaskResponse(duke.getIndex(), task);
             System.out.println(message);
             tasks.removeTask(i - 1);

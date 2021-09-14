@@ -48,7 +48,7 @@ public class Storage {
             List<Task> result = new ArrayList<>();
             while (s.hasNext()) {
                 String toParse = s.nextLine();
-                String[] split = toParse.split("//"); //gonna redo the format to something like T//1//read book
+                String[] split = toParse.split("//");
                 String taskType = split[0];
                 String isDone = split[1];
                 String description = split[2];
@@ -73,6 +73,7 @@ public class Storage {
                 }
             }
             duke.setIndex(result.size());
+            assert duke.getIndex() >= 0;
             return result;
         } catch (FileNotFoundException e) {
             System.out.println("File not found when trying to load tasks");
