@@ -83,8 +83,8 @@ public class Ui {
      * @return Message stating that a task has been marked as done.
      */
     public String taskDoneConfirmation(String desc) {
-        return "    Nice! I've marked this task as done:\n" +
-                "\t\tdesc";
+        return "    Nice! I've marked this task as done:\n\t" +
+                desc;
     }
 
     public String parsingFormatErrorMsg() {
