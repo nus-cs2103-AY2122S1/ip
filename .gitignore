@@ -13,6 +13,6 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.TXT
-/storageTestFolder
-/storageTestFolderTwo
+/text-ui-test
+/storageTestFolder/
+/storageTestFolderTwo/
