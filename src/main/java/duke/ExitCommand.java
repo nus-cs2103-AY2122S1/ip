@@ -6,7 +6,7 @@ package duke;
  * @author Sherman Ng Wei Sheng
  */
 public class ExitCommand extends Command {
-    private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+    private static String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     private final boolean isExit;
 
     /**
