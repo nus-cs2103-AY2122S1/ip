@@ -13,15 +13,15 @@ public class Parser {
      * @param fullCommand the user's input into the CLI
      * @return Command command to be executed
      */
-    public Command parseInput(String fullCommand){
+    public Command parseInput(String fullCommand) {
 
         String[] commandSplit = fullCommand.split(" ");
         String actionWord = commandSplit[0];
+        assert (actionWord != null);
 
         switch (actionWord) {
             case "bye":
                 return new ExitCommand();
-
             case "list":
                 return new ListCommand();
 
@@ -45,6 +45,7 @@ public class Parser {
 
             case "help":
                 return new HelpCommand();
+
 
         }
 

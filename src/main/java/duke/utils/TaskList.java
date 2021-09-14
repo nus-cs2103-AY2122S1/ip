@@ -33,7 +33,8 @@ public class TaskList {
      * @param index
      * @return
      */
-    public Task getTask(int index){
+    public Task getTask(int index) {
+        assert (index < tasks.size());
         return tasks.get(index);
     }
 
@@ -41,7 +42,8 @@ public class TaskList {
      * Removing a task from the specified index in the TaskList
      * @param index
      */
-    public void removeTask(int index){
+    public void removeTask(int index) {
+        assert (index < tasks.size());
         tasks.remove(index);
     }
 
