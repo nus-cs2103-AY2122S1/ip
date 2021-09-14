@@ -1,5 +1,4 @@
-T ~ Yes ~ finish training
-T ~ Yes ~ eat food
-T ~ No ~ cook food
-T ~ No ~ kill titan
-No ~ food
+T ~ Yes ~ clean room
+D ~ No ~ finish hw ~ 6pm
+E ~ No ~ School Fair ~ Dec 2 2019 1pm
+T ~ No ~ buy room decor
