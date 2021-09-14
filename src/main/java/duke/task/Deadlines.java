@@ -38,7 +38,7 @@ public class Deadlines extends Task {
         if (super.isDone()) {
             prefix = "[D] [X] ";
         }
-        String returnString = prefix + super.getName() + " (at: " + deadline.format(formatter) + ")";
+        String returnString = prefix + super.getName() + " (by: " + deadline.format(formatter) + ")";
         if (getPriorityLevel() != null) {
             returnString += Priority.getPriorityString(getPriorityLevel());
         }
