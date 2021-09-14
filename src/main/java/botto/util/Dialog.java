@@ -76,7 +76,7 @@ public class Dialog {
         StringBuilder taskMessage = new StringBuilder();
         taskMessage.append(header).append("\n\n");
 
-        taskMessage.append("---------- Todo ----------\n");
+        taskMessage.append("------------ Todo ------------\n");
         for (Todo todo: todos) {
             taskMessage.append(list.indexOf(todo) + 1).append(". ").append(todo).append("\n");
         }
@@ -88,7 +88,7 @@ public class Dialog {
         }
         taskMessage.append("\n");
 
-        taskMessage.append("---------- Event ----------\n");
+        taskMessage.append("------------ Event ------------\n");
         for (Event event: events) {
             taskMessage.append(list.indexOf(event) + 1).append(". ").append(event).append("\n");
         }
