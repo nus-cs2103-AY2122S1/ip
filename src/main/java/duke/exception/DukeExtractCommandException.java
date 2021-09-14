@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The is the DukeExtractCommandException class that extends from Exception
+ * This is the DukeExtractCommandException class that extends from Exception
  * to catch the extract command exception.
  */
 public class DukeExtractCommandException extends Exception {

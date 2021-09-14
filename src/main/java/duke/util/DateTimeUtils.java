@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The is the DateTimeUtils class that parse date and time.
+ * This is the DateTimeUtils class that parse date and time.
  */
 public class DateTimeUtils {
     private static final String DATE_PATTERN = "yyyy-MM-dd";

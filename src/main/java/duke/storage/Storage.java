@@ -6,7 +6,7 @@ import duke.listener.Message;
 import duke.task.TaskList;
 
 /**
- * The is the Storage class for task operations.
+ * This is the Storage class for task operations.
  */
 public class Storage {
     private final Message message;

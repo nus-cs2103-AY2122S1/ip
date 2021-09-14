@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * The is the Task class that contains the properties
+ * This is the Task class that contains the properties
  * of a task.
  */
 public abstract class Task {

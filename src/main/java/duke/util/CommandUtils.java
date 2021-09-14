@@ -11,7 +11,7 @@ import duke.task.EventDateTime;
 import duke.task.Operation;
 
 /**
- * The is the CommandUtils class that extracts contents from command.
+ * This is the CommandUtils class that extracts contents from command.
  */
 public class CommandUtils {
 

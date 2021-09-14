@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The is the Deadline class that extends from Task.
+ * This is the Deadline class that extends from Task.
  * Deadline task needs to be done before a specific time.
  */
 public class Deadline extends Task {

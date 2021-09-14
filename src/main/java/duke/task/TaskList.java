@@ -13,7 +13,7 @@ import duke.util.DateTimeUtils;
 import duke.util.FileUtils;
 
 /**
- * The is the TaskList class that contains a list of tasks
+ * This is the TaskList class that contains a list of tasks
  * and the operations of the tasks.
  */
 public class TaskList {

@@ -3,7 +3,7 @@ package duke.task;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The is the Event class that extends from Task.
+ * This is the Event class that extends from Task.
  * Event task starts at a specific time and ends at a specific time.
  */
 public class Event extends Task {

@@ -3,7 +3,7 @@ package duke.listener;
 import duke.constant.MessageType;
 
 /**
- * The is the Message interface.
+ * This is the Message interface.
  */
 public interface Message {
 

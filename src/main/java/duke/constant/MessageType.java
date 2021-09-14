@@ -1,7 +1,7 @@
 package duke.constant;
 
 /**
- * The is the MessageType class that contains task operations.
+ * This is the MessageType class that contains task operations.
  */
 public enum MessageType {
     NORMAL("normal"),

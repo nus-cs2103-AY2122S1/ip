@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The is the DukeUnknownException class that extends from Exception
+ * This is the DukeUnknownException class that extends from Exception
  * to catch the unknown exception.
  */
 public class DukeUnknownException extends Exception {

@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * The is the Operation class that contains task operations.
+ * This is the Operation class that contains task operations.
  */
 public enum Operation {
     TODO("todo"),

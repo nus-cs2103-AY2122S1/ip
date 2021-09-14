@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The is the FileUtils class to do file operations.
+ * This is the FileUtils class to do file operations.
  */
 public class FileUtils {
 

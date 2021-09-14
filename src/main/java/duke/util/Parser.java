@@ -16,7 +16,7 @@ import duke.listener.Message;
 import duke.task.Operation;
 
 /**
- * The is the Parser class that extracts operation from command
+ * This is the Parser class that extracts operation from command
  * and returns respective Command object.
  */
 public class Parser {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * The is the Ui class for UI display.
+ * This is the Ui class for UI display.
  */
 public class Ui {
     private static final String HORIZONTAL_LINE =

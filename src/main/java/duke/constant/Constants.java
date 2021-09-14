@@ -1,7 +1,7 @@
 package duke.constant;
 
 /**
- * The is the Constants class that contains constants
+ * This is the Constants class that contains constants
  * which will be used at anywhere.
  */
 public class Constants {

@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The is the DukeTaskNumberOutOfBoundsException class that extends from Exception
+ * This is the DukeTaskNumberOutOfBoundsException class that extends from Exception
  * to catch the task number out of bounds exception.
  */
 public class DukeTaskNumberOutOfBoundsException extends Exception {

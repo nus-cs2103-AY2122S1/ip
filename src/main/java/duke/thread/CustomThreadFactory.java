@@ -3,7 +3,7 @@ package duke.thread;
 import java.util.concurrent.ThreadFactory;
 
 /**
- * The is the CustomThreadFactory class that creates
+ * This is the CustomThreadFactory class that creates
  * thread based on the priority.
  */
 public class CustomThreadFactory implements ThreadFactory {

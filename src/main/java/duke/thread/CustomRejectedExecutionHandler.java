@@ -4,7 +4,7 @@ import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * The is the CustomRejectedExecutionHandler class that
+ * This is the CustomRejectedExecutionHandler class that
  * handles the case when all threads are busy.
  */
 public class CustomRejectedExecutionHandler implements RejectedExecutionHandler {

@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * The is the Todo class that extends from Task.
+ * This is the Todo class that extends from Task.
  * Todo task does not have any date/time attached to it.
  */
 public class Todo extends Task {

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * The is the EventDateTime class that contains the specific date,
+ * This is the EventDateTime class that contains the specific date,
  * start time and end time of event.
  */
 public class EventDateTime {

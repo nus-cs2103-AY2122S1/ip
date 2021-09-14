@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  *                          sleep(100) is used in this test method),
  *                          the task will be handed by RejectedExecutionHandler
  *
- * The is the CustomThreadPool class that handles ThreadPool.
+ * This is the CustomThreadPool class that handles ThreadPool.
  */
 public class CustomThreadPool {
     private static final int CORE_POOL_SIZE = 1;

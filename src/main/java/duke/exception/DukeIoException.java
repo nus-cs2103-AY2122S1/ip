@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * The is the DukeIoException class that extends from Exception
+ * This is the DukeIoException class that extends from Exception
  * to catch the IO exception.
  */
 public class DukeIoException extends Exception {
