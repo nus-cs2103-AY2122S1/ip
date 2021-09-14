@@ -18,12 +18,32 @@ public class FileUpdater {
      * @throws FileNotFoundException
      */
     public FileUpdater(File file, TaskList lst) throws FileNotFoundException {
-        this.file = file;
-        this.lst = lst;
-
         if (!file.exists()) {
+            try {
+                 file.createNewFile();
+            }
+            catch (java.io.IOException e){
+                e.getMessage();
+            }
             throw new FileNotFoundException("file does not exist!");
         }
+        this.file = initializeFile(file);
+        this.lst = lst;
+    }
+
+    public File initializeFile(File f){
+        File dataDir = new File(f.getParent());
+        if (!dataDir.exists()) {
+            dataDir.mkdirs();
+        }
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (java.io.IOException e){
+                e.getMessage();
+            }
+        }
+        return f;
     }
 
     /**

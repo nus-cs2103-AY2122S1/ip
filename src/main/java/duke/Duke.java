@@ -2,6 +2,8 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class Duke{
@@ -19,11 +21,27 @@ public class Duke{
         ui = new Ui(tasks);
         gui = new GUI(tasks);
         try {
-            File f = new File(filePath);
+            File f = initializeFile(filePath);
             this.fileUpdater = new FileUpdater(f, tasks);
         } catch (FileNotFoundException e){
-            fileUpdater.showError();
+            e.getMessage();
         }
+    }
+
+    public File initializeFile(String filepath){
+        File newFile = new File(filepath);
+        File dataDir = new File(newFile.getParent());
+        if (!dataDir.exists()) {
+            dataDir.mkdirs();
+        }
+        if (!newFile.exists()) {
+            try {
+                newFile.createNewFile();
+            } catch (java.io.IOException e){
+                e.getMessage();
+            }
+        }
+        return newFile;
     }
 
     public GUI getGui(){
@@ -48,7 +66,7 @@ public class Duke{
 
 
     public static void main(String[] args) {
-        Duke d =new Duke("data/Duke.txt");
+        Duke d =new Duke("./data/Duke.txt");
         d.run();
     }
 }
