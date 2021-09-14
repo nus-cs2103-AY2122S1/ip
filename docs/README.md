@@ -2,8 +2,8 @@
 Duke is a task manager and is named after the Java mascot Duke.
 
 ## Setting up
-1. Download `Duke.jar` from V0.2 from the Releases tab.
-2. Run `Duke.jar` and begin using it to keep track of all the tasks you need to attend to.
+1. Download `duke.jar` from V0.2 from the Releases tab.
+2. Run `duke.jar` and begin using it to keep track of all the tasks you need to attend to.
 
 ## Features 
 1. Add a task of type(todo/event/deadline) to the list.
