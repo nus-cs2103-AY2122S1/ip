@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        // printe bye message and close app
+        // prints bye message and close app
         if (response.equals("Bye. Hope to see you again soon!")) {
             isExit = true;
             exit();
@@ -75,6 +75,9 @@ public class MainWindow extends AnchorPane {
 
     }
 
+    /**
+     * Exits application.
+     */
     private void exit() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
