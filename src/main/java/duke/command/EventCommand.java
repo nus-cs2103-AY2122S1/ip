@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -41,7 +42,7 @@ public class EventCommand extends Command {
      * @param storage Storage of tasks.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = new Event(description, date);
         taskList.addTask(task);
         return ui.showTasksReply(true, task.toString(), taskList.size());

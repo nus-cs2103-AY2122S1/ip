@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      * @param storage Storage of tasks.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList results = TaskList.emptyTaskList();
 
         for (int i = 0; i < taskList.size(); i++) {
