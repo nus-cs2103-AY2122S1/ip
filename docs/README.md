@@ -38,7 +38,8 @@ java -jar WhoBot.jar --cli
 ```
 4. Enjoy :)
 
-<br>
+<br> 
+<hr>
 <br>
 
 ## Features 
