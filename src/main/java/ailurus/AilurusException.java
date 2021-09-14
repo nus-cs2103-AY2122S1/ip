@@ -8,7 +8,7 @@ public class AilurusException extends IllegalArgumentException {
      */
     public enum Error {
         EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE,
-        EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD, FIND, DATEPARSE
+        EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD, FIND, DATEPARSE, PICNOTFOUND
     }
 
     /**
@@ -54,6 +54,8 @@ public class AilurusException extends IllegalArgumentException {
             return "(!) OOPS!!! Sorry, no matching tasks in your list...";
         case DATEPARSE:
             return "(!) OOPS!!! Please enter date in format yyyy-mm-dd";
+        case PICNOTFOUND:
+            return "(!) OOPS!!! Pictures not found in directory :(";
         default:
             return getMessage();
         }
