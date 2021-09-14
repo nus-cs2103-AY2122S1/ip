@@ -91,6 +91,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 return "Please input a correct number";
             }
+
             setNewLists(storage, tasks, ui);
             return new Done(index, tasks, storage, ui).execute();
         }
@@ -124,23 +125,8 @@ public class Parser {
             return deadline.execute();
         }
         case FIND: {
-            TaskList matchingTasks = new TaskList();
-
-            String desc = command.substring(4);
-            if (desc.isEmpty()) {
-                throw new FindException();
-            }
-            assert desc.substring(1).length() > 0 : "Description should be present";
-            for (Task t : tasks) {
-                if (t.toString().contains(desc)) {
-                    matchingTasks.add(t);
-                }
-            }
-            if (matchingTasks.isEmpty()) {
-                return ui.nothingFoundMessageToString();
-            } else {
-                return ui.listMessageToString("matching", matchingTasks);
-            }
+            Find find = new Find(command, tasks, ui);
+            return find.execute();
         }
         case UNDO: {
             return new Undo(storageList, uiList, tasksList, duke).execute();
