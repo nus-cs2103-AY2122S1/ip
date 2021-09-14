@@ -137,7 +137,7 @@ public class TaskList {
     }
 
     /**
-     * Edit the task at the given index to the new task
+     * Edits the task at the given index to the new task
      *
      * @param newTask the new task after edition
      * @param index the index of the task to be edited
