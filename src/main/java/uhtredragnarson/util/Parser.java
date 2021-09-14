@@ -54,8 +54,7 @@ public class Parser {
                 throw new UhtredRagnarsonException(result);
             }
         } catch (DateTimeParseException e) {
-            result = "☹ OOPS!!! You have to enter a valid date in the form "
-                    + "yyyy-mm-dd";
+            result = "☹ OOPS!!! You have to enter a valid date in the form yyyy-mm-dd";
             throw new UhtredRagnarsonException(result);
         } catch (UhtredRagnarsonException e) {
             result = e.getMessage();
