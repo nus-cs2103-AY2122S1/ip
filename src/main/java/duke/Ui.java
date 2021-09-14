@@ -9,7 +9,7 @@ public class Ui {
      * Prints the welcome message.
      */
     public String showWelcome() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Guten Tag. I'm Dwight Schrute.\nWhat do you want?";
     }
 
     /**
@@ -52,7 +52,7 @@ public class Ui {
      * @return
      */
     public String printDoneTask(Task task) {
-        return "Nice! I've marked this task as done:\n" + task;
+        return "Noted. I've marked this task as done:\n" + task;
     }
 
     /**
@@ -100,7 +100,7 @@ public class Ui {
      * @return
      */
     public String printErrorMessage(String errorMessage) {
-        return "Invalid input!\n" + errorMessage;
+        return "FALSE!\n" + errorMessage;
     }
 
     /**
