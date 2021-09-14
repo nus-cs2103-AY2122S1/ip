@@ -1,5 +1,0 @@
-[T][ ] read book
-[T][X] return book
-[D][ ] cs2103t iP (by: 1/3/2020 3:00 am)
-[D][ ] cs2101 op1 (by: 3/3/2020 4:00 pm)
-[T][ ] dummy
