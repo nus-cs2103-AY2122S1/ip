@@ -19,19 +19,19 @@ public enum Message {
     REMIND("Need a reminder? Bubbles' got you!\n"),
     WELCOME("You should do what you want to do!\n"
             + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?"),
-    HELP("Don't worry, Bubbles is here to help!\n\n" +
-            "Below is a list of supported commands and format:\n" +
-            "help       /help\n" +
-            "todo       /todo [description]\n" +
-            "deadline   /deadline [description] /by yyyy-mm-dd\n" +
-            "event      /event [description] /at yyyy-mm-dd\n" +
-            "list       /list\n" +
-            "done       /done [index]\n" +
-            "delete     /delete [index]\n" +
-            "find       /find [word]\n" +
-            "remind     /remind\n" +
-            "bye        /bye\n\n" +
-            "I will not understand your command if it is not in the right format. ☹"),
+    HELP("Don't worry, Bubbles is here to help!\n\n"
+            + "Below is a list of supported commands and format:\n"
+            + "help       /help\n"
+            + "todo       /todo [description]\n"
+            + "deadline   /deadline [description] /by yyyy-mm-dd\n"
+            + "event      /event [description] /at yyyy-mm-dd\n"
+            + "list       /list\n"
+            + "done       /done [index]\n"
+            + "delete     /delete [index]\n"
+            + "find       /find [word]\n"
+            + "remind     /remind\n"
+            + "bye        /bye\n\n"
+            + "I will not understand your command if it is not in the right format. ☹"),
     EXIT("Bye-bye! Hope to see you again soon!");
 
     private String message;

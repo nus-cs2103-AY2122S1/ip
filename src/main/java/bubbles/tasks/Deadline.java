@@ -1,11 +1,11 @@
 package bubbles.tasks;
 
-import bubbles.exceptions.EmptyTaskException;
-import bubbles.exceptions.InvalidFormatException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import bubbles.exceptions.EmptyTaskException;
+import bubbles.exceptions.InvalidFormatException;
 
 /**
  * A child class of Task, representing the tasks that need to be
@@ -44,7 +44,8 @@ public class Deadline extends Task {
         try {
             item = new Deadline(arr[0], isDone, arr[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidFormatException("When adding a deadline to the task list, the date field cannot be empty.");
+            throw new InvalidFormatException("When adding a deadline to the task list, "
+                    + "the date field cannot be empty.");
         }
 
         return item;

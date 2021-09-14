@@ -1,11 +1,11 @@
 package bubbles.tasks;
 
-import bubbles.exceptions.EmptyTaskException;
-import bubbles.exceptions.InvalidFormatException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import bubbles.exceptions.EmptyTaskException;
+import bubbles.exceptions.InvalidFormatException;
 
 /**
  * A child class of Task, representing the tasks that start at
