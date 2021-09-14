@@ -1,5 +1,6 @@
 package duke.parser;
 
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import duke.Duke;
@@ -25,8 +26,10 @@ public class Parser {
     private static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :(";
     private static final String EMPTY_LIST = "Yay, you have no items in your list!";
     private static final String EMPTY_DESCRIPTION = "OOPS!!! The description of a Task cannot be empty.";
+    private static final String EMPTY_DATE = "Please include a date for this command.";
     private static final String WORD_NOT_FOUND = "OOPS!!! There's no such word in your list.";
     private static final String MISSING_FIND_PARAMETER = "Please include the word to be searched.";
+    private static final String WRONG_DATE_FORMAT = "Please input the date in the following format: dd-mm-yyyy HH:mm.";
 
     /**
      * Turns the user's input into a command.
@@ -95,13 +98,19 @@ public class Parser {
             taskName = taskItems[0].strip();
 
             if (taskItems.length == 1) {
-                taskList.add(new Deadline(taskName));
-            } else {
+                output.append(EMPTY_DATE);
+                break;
+            }
+
+            try {
                 taskList.add(new Deadline(taskName, taskItems[1].strip()));
+            } catch (DateTimeParseException DateException) {
+                output.append(WRONG_DATE_FORMAT);
+                break;
             }
 
             output.append(TODO_MESSAGE);
-            output.append(taskList.get(taskList.getSize()));
+            output.append(taskList.get(taskList.getSize() - 1)).append(System.lineSeparator());
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "event":
@@ -110,13 +119,19 @@ public class Parser {
             taskName = taskItems[0].strip();
 
             if (taskItems.length == 1) {
-                taskList.add(new Event(taskName));
-            } else {
+                output.append(EMPTY_DATE);
+                break;
+            }
+
+            try {
                 taskList.add(new Event(taskName, taskItems[1].strip()));
+            } catch (DateTimeParseException DateException) {
+                output.append(WRONG_DATE_FORMAT);
+                break;
             }
 
             output.append(TODO_MESSAGE);
-            output.append(taskList.get(taskList.getSize()));
+            output.append(taskList.get(taskList.getSize() - 1)).append(System.lineSeparator());
             output.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
             break;
         case "snooze":
@@ -124,13 +139,21 @@ public class Parser {
             taskItems = param.split(" /to ", 2);
             intParam = Integer.parseInt(taskItems[0].strip()) - 1;
 
-            if (!(taskList.get(intParam) instanceof TimedTask)) {
-                output.append("Error: This is not a TimedTask.");
+            if (taskItems.length == 1) {
+                output.append(EMPTY_DATE);
+                break;
+            } else if (!(taskList.get(intParam) instanceof TimedTask)) {
+                output.append("Oops!!! You cannot snooze this Task.");
                 break;
             }
 
-            TimedTask taskToBeChanged = (TimedTask) taskList.get(intParam);
-            taskToBeChanged.changeDate(taskItems[1].strip());
+            try {
+                TimedTask taskToBeChanged = (TimedTask) taskList.get(intParam);
+                taskToBeChanged.changeDate(taskItems[1].strip());
+            } catch (DateTimeParseException DateException) {
+                output.append(WRONG_DATE_FORMAT);
+                break;
+            }
 
             output.append(SNOOZE_MESSAGE);
             output.append(taskList.get(intParam)).append(System.lineSeparator());
