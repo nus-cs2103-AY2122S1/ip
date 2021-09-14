@@ -8,11 +8,11 @@ public enum Command {
     FIND("find", "f"),
     DONE("done", "d"),
     DELETE("delete", "rm"),
-    CLEAR("clear", "cl"),
+    CLEAR("clear", "clr"),
     TODO("todo", "td"),
     DEADLINE("deadline", "dl"),
     EVENT("event", "ev"),
-    BYE("bye", "bye"),
+    BYE("bye", "quit"),
     INVALID("invalid", "invalid");
 
     private String c;
