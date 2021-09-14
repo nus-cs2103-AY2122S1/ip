@@ -20,7 +20,7 @@ and deadlines have a date which represents when the task is due by.
 
 ## Getting started with Duke <a name="start"/>
 1. Ensure you have Java `11` or above installed.
-2. Download the latest version of `duke.jar` from [here](#insertlinklater)
+2. Download the latest version of `duke.jar` from [here](https://github.com/joenzkimchan/ip/releases/tag/Version_1.2)
 3. Place `duke.jar` into the desired folder
 4. Double click `duke.jar` and the GUI should pop up
 
