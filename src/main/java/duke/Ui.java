@@ -22,14 +22,14 @@ public class Ui {
     /**
      * Prints out the welcome message upon starting Duke.
      */
-    public static String welcomeMessage(boolean isFirstTime) {
+    public static String welcomeMessage() {
         final String startOfWelcomeMessage = "Welcome to Ben's. How may I help you?\n";
 
-        if (isFirstTime) {
+        if (Duke.isFirstTime) {
             return startOfWelcomeMessage + firstTimeMessage()
                     + importantMessage();
         } else {
-            return startOfWelcomeMessage + Storage.printStartingFileContents()
+            return startOfWelcomeMessage + Storage.printStartingFileContents() + "\n"
                     + importantMessage();
         }
     }
@@ -66,9 +66,9 @@ public class Ui {
     public static String importantMessage() {
         return "\nImportant notes: \n1) For deadlines, it must contain the word 'by'" +
                 " and events must contain the word 'at'. \n" +
-                "2) Deadlines and events must also contain the date and time as such:\n" +
-                "after by or at, in the form DATE TIME where the DATE must follow this format:" +
-                "YYYY-MM-DD;\n   and TIME must follow the 24hr format (e.g. 2pm = 1400)\n";
+                "2) Deadlines and events must also contain the date and time as such: " +
+                "after by or at, in the form DATE TIME where the DATE must follow this format: " +
+                "YYYY-MM-DD; and TIME must follow the 24hr format (e.g. 2pm = 1400)\n";
     }
 
     /**
@@ -106,7 +106,7 @@ public class Ui {
      */
     public static String markTaskMessage(Task task) {
         return MESSAGE_START + "    You have successfully done this task:\n" +
-                "      " + task.getStatusIcon() + " " + task.getDescription() + MESSAGE_END;
+                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n" + MESSAGE_END;
     }
 
     /**
@@ -222,13 +222,5 @@ public class Ui {
      */
     public static String invalidFindInput() {
         return "Invalid input. Requires a number after find (e.g. find 1).";
-    }
-
-    /**
-     * Displays an error message when user has invalid Date Time input.
-     */
-    public static String invalidDateTimeInput() {
-        return "For Deadlines and Events, the date and time must be of format 'YYYY-MM-DD TIME'\n" +
-                "and TIME must follow the 24hr format (e.g. 2pm = 1400).";
     }
 }

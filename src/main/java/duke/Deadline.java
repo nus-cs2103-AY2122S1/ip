@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * @return Description of the current deadline task.
      */
     @Override
-    public String getDescription() throws DateTimeParseException{
+    public String getDescription() {
         String temp = super.getDescription();
         if (temp.endsWith(")")) {
             return temp;

@@ -31,12 +31,8 @@ public class Task {
      *
      * @return Description of the current task.
      */
-    public String getDescription() throws IllegalArgumentException {
-        if (this.description.contains("deadline") || this.description.contains("event")) {
-            throw new IllegalArgumentException();
-        } else {
-            return this.description;
-        }
+    public String getDescription() {
+        return this.description;
     }
 
     /**

@@ -43,7 +43,7 @@ public class Duke extends Application {
     private static TaskList TASKS;
 
     /** Boolean to check if first time using Duke. **/
-    private boolean isFirstTime = false;
+    public static boolean isFirstTime = false;
 
     /**
      * Constructor for Duke.
@@ -83,7 +83,7 @@ public class Duke extends Application {
      */
     public static String getResponse(String input) {
         assert input != null: "Input cannot be null";
-        return "Baba the Duke says: \n" + Parser.evaluateUserInput(input);
+        return "Baba the Duke says: " + Parser.evaluateUserInput(input);
     }
 
     /**
@@ -95,7 +95,7 @@ public class Duke extends Application {
     public void start(Stage stage) {
         // Setting up stage and formatting window to look as expected
         setUpStage(stage);
-        
+
         // Handles user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));

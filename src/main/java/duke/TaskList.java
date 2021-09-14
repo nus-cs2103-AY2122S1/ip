@@ -47,8 +47,9 @@ public class TaskList {
                 newTask = new ToDo(userInput);
             }
             contents.add(newTask);
+            Storage.writeFile();
             assert contents.contains(newTask) : "Task List should contain newly added Task";
-            return Ui.addTaskMessage(newTask, contents.size()) + Storage.writeFile();
+            return Ui.addTaskMessage(newTask, contents.size());
         } else {
             return Ui.invalidTaskMessage();
         }
