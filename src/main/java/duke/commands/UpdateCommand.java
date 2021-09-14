@@ -12,7 +12,7 @@ public class UpdateCommand extends Command {
     private final LocalDateTime time;
     private final boolean isTimeBoundTask;
 
-    /** Contructor to make an update command of a specific task **/
+    /** Constructor to make an update command to update a specified task's description and time **/
     public UpdateCommand(int index, String desc, LocalDateTime time) {
         this.index = index;
         this.desc = desc;
@@ -20,6 +20,7 @@ public class UpdateCommand extends Command {
         this.isTimeBoundTask = true;
     }
 
+    /** Constructor to make an update command to update a specified task's description **/
     public UpdateCommand(int index, String desc) {
         this.index = index;
         this.desc = desc;

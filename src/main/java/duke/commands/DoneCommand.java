@@ -24,9 +24,9 @@ public class DoneCommand extends Command {
      * Mark the task in the index as done.
      * Prints out reply message and saves to file after.
      *
-     * @param ui The Ui instance for printing
-     * @param storage The Storage instance to get the task
-     * @return String to represent the reply of Duke
+     * @param ui The Ui instance for printing.
+     * @param storage The Storage instance to get the task.
+     * @return String to represent the reply of Duke.
      */
     @Override
     public String execute(Ui ui, Storage storage) {

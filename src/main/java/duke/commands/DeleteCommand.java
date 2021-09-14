@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     /**
      * Construct a new DeleteCommand instance with the specified index stored.
      *
-     * @param input The index of the task to delete in the list
+     * @param input The index of the task to delete in the list.
      */
 
     public DeleteCommand(int input) {
@@ -25,9 +25,9 @@ public class DeleteCommand extends Command {
      * Deletes the task in the index.
      * Print out confirmation and Saves after.
      *
-     * @param ui The Ui instance for printing messages
-     * @param storage The Storage instance delete the task from
-     * @return String to represent the reply of Duke
+     * @param ui The Ui instance for printing messages.
+     * @param storage The Storage instance delete the task from.
+     * @return String to represent the reply of Duke.
      */
     @Override
     public String execute(Ui ui, Storage storage) {

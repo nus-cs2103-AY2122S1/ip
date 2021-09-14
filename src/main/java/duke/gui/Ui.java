@@ -30,8 +30,8 @@ public class Ui {
     /**
      * Returns the string for greetings and goodbyes.
      *
-     * @param isGreeting Boolean to indicate if it is a greeting or goodbye
-     * @return String of the greeting or goodbye
+     * @param isGreeting Boolean to indicate if it is a greeting or goodbye.
+     * @return String of the greeting or goodbye.
      **/
     public String greet(Boolean isGreeting) {
         String printMessage = isGreeting

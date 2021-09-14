@@ -54,7 +54,7 @@ public class Parser {
      */
 
     public Command parse(String userInput) throws DukeExceptions {
-        List<String> splitUserInput = new ArrayList<String>();
+        List<String> splitUserInput = new ArrayList<>();
         Collections.addAll(splitUserInput, userInput.split(" ", 2));
         CommandType command = changeToEnum(splitUserInput.get(0));
         checkArguments(splitUserInput, command);
@@ -107,6 +107,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Convert a String command to an Enum.
+     * @param command String representation of the command.
+     * @return A CommandType representation of the command.
+     * @throws DukeExceptions if the command is unknown.
+     */
     private CommandType changeToEnum(String command) throws DukeExceptions {
         switch (command) {
         case "bye": {
@@ -165,14 +171,14 @@ public class Parser {
         case Delete:
             // Fallthrough
         case Done:
-            checkIndex(splitUserInput);
+            checkForIndex(splitUserInput);
             break;
         case ToDo:
             //Fallthrough
         case Event:
             //Fallthrough
         case Deadline:
-            separateDescription(splitUserInput, command);
+            checkAndProcessDescription(splitUserInput, command);
             break;
         case Find:
             checkForKeyword(splitUserInput);
@@ -184,7 +190,6 @@ public class Parser {
             throw new DukeExceptions("Unknown error!");
         }
     }
-
 
     private LocalDateTime parseDateTime(String dateString) throws DukeExceptions {
         try {
@@ -203,7 +208,7 @@ public class Parser {
         }
     }
 
-    private void checkIndex(List<String> splitUserInput) throws DukeExceptions {
+    private void checkForIndex(List<String> splitUserInput) throws DukeExceptions {
         if (splitUserInput.size() == 1) {
             throw new DukeExceptions("You have to tell me the index of the task to process!");
         }
@@ -221,7 +226,13 @@ public class Parser {
         }
     }
 
-    private void separateDescription(List<String> splitUserInput, CommandType commandType)
+    /**
+     * Checks and separates the splitUserInput body to description and time if applicable.
+     * @param splitUserInput List of string representing the user input.
+     * @param commandType The type of command.
+     * @throws DukeExceptions if there is no description.
+     */
+    private void checkAndProcessDescription(List<String> splitUserInput, CommandType commandType)
             throws DukeExceptions {
         if (splitUserInput.size() == 1 || splitUserInput.get(1).equals("")) {
             String message;
@@ -251,6 +262,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Separates the splitUserInput body to description and time.
+     * @param splitUserInput List of string representing the user input.
+     * @param commandType The type of command.
+     * @throws DukeExceptions if there is no description and/or time parameter.
+     */
     private void splitDescriptionAndTime(List<String> splitUserInput, CommandType commandType, int index)
             throws DukeExceptions {
         String splitter;
@@ -283,7 +300,7 @@ public class Parser {
                     task, splitter);
             throw new DukeExceptions(message);
         }
-        splitBody[0].strip();
+        splitBody[0] = splitBody[0].strip();
         splitUserInput.remove(index);
         Collections.addAll(splitUserInput, splitBody);
     }
@@ -295,6 +312,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Process the user input for Update command.
+     * @param splitUserInput List of string representing the user input.
+     * @throws DukeExceptions if there is no description and/or index in the input.
+     */
     private void processUpdate(List<String> splitUserInput) throws DukeExceptions {
         String[] body = splitUserInput.get(1).strip().split(" ", 2);
         if (body.length == 1) {
@@ -304,7 +326,7 @@ public class Parser {
         splitUserInput.add(body[0]);
         int index = castIndex(splitUserInput);
         splitUserInput.add(body[1]);
-        Task taskToUpdate = storage.getTask(index);
+        Task taskToUpdate = storage.getTask(index - 1);
         CommandType taskType = taskToEnum(taskToUpdate);
         if (!(taskType.equals(CommandType.ToDo))) {
             splitDescriptionAndTime(splitUserInput, taskType, 2);

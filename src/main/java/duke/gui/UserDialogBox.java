@@ -42,10 +42,10 @@ public class UserDialogBox extends HBox {
     }
 
     /**
-     * Return a new UserDialogBox with the set image and text
+     * Return a new UserDialogBox with the set image and text.
      *
-     * @param text The text to fill the dialog box
-     * @param img The image representing the User
+     * @param text The text to fill the dialog box.
+     * @param img The image representing the User.
      * @return UserDialogBox with the image and text given.
      */
     public static UserDialogBox getUserDialog(String text, Image img) {

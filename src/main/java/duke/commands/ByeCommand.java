@@ -10,7 +10,7 @@ import duke.storage.Storage;
 public class ByeCommand extends Command {
 
     /**
-     * Exit the application by calling Main
+     * Exit the application by calling Main.
      */
     @Override
     public String execute(Ui ui, Storage storage) {

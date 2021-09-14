@@ -21,11 +21,11 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Add the task to the list and print out reply message
+     * Add the task to the list and print out reply message.
      *
-     * @param ui The Ui instance for printing
-     * @param storage The Storage instance to add the task to
-     * @return String to represent the reply of Duke
+     * @param ui The Ui instance for printing.
+     * @param storage The Storage instance to add the task to.
+     * @return String to represent the reply of Duke.
      */
     @Override
     public String execute(Ui ui, Storage storage) {

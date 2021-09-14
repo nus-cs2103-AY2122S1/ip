@@ -9,11 +9,11 @@ import duke.storage.Storage;
 public class ListCommand extends Command {
 
     /**
-     * Prints out current list of task
+     * Prints out current list of task.
      *
-     * @param ui The Ui instance for printing
-     * @param storage The Storage instance to get the list
-     * @return String to represent the reply of Duke
+     * @param ui The Ui instance for printing.
+     * @param storage The Storage instance to get the list.
+     * @return String to represent the reply of Duke.
      */
 
     @Override

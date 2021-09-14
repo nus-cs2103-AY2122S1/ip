@@ -13,7 +13,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of a Circle filled with an image to represent Duke
  * and a Text containing reply from Duke.
  *
@@ -41,10 +40,10 @@ public class DukeDialogBox extends HBox {
     }
 
     /**
-     * Return a new DukeDialogBox with the set image and text
+     * Return a new DukeDialogBox with the set image and text.
      *
      * @param text The text to fill the dialog box
-     * @param img The image representing Duke
+     * @param img The image representing Duke.
      * @return DukeDialogBox with the image and text given.
      */
     public static DukeDialogBox getDukeDialog(String text, Image img) {

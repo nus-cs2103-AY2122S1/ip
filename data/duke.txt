@@ -1,5 +1,8 @@
-E%% %%upcoming test%%2020-02-19 17:55
+E%% %%playgames%%2020-01-11 11:21
 T%% %%read lecture notes
 E%% %%sleep %%2020-03-21 11:11
 E%% %%playgames %%2020-03-19 13:00
 T%% %%playgames
+D%% %%CS2103T%%2021-05-14 11:59
+T%% %%sleep
+E%% %%figma%%2021-09-14 11:11

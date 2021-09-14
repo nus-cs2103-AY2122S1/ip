@@ -20,18 +20,18 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Add the task to the list, print out reply, and save the change to file
+     * Add the task to the list, print out reply, and save the change to file.
      *
-     * @param ui The Ui instance for printing
-     * @param storage The Storage instance to add the task to
-     * @return String to represent the reply of Duke
+     * @param ui The Ui instance for printing.
+     * @param storage The Storage instance to add the task to.
+     * @return String to represent the reply of Duke.
      */
     @Override
     public String execute(Ui ui, Storage storage) {
         storage.addToList(deadline);
         storage.save();
         String dukeReply = String.format("Got it! I've added this deadline to the list: \n"
-                + "%s\n Now you have %d tasks in the list",
+                + "%s\nNow you have %d tasks in the list",
                 deadline.toString(), storage.getSize());
         return ui.reply(dukeReply);
     }
