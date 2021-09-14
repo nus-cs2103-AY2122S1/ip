@@ -5,8 +5,8 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Deadline](#deadline-:-add-deadline-tasks)
-  * [Event](#event-:-add-event-tasks)
+  * [Deadline](#deadline--add-deadline-tasks)
+  * [Event](#event--add-event-tasks)
   * [Todos](#todos)
   * [List](#list)
   * [Done](#done)
