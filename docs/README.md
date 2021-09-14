@@ -22,15 +22,15 @@ Shows a list of tasks in the task list.
 
 Finds task whose names contain any of the given keywords.
 
-### Feature-XYZ
+### Bye
 
-Description of the feature.
+Exits the application.
 
 ## Usage
 
-### `todo (description)` - Adds a Todo task
+### Adds a Todo task - `todo (description)`
 
-Adds a Todo task with the task name (description).
+Adds a Todo task with the task name `(description)`.
 
 Example of usage: 
 
@@ -45,7 +45,7 @@ Now you have 1 tasks in the list.`
 
 ### Adds a Deadline task - `deadline (description) /by (date)`
 
-Adds a Deadline task with the task name (description) and (date).
+Adds a Deadline task with the task name `(description)` and `(date)`.
 
 Example of usage: 
 
@@ -59,7 +59,7 @@ Now you have 2 tasks in the list.`
 
 ### `event (description) /at (period)` - Adds a Event task
 
-Adds a Event task with the task name (description) and (period).
+Adds a Event task with the task name `(description)` and `(period)`.
 
 Example of usage: 
 
@@ -73,7 +73,7 @@ Now you have 3 tasks in the list.`
 
 ### `doafter (description) /after (afterWhen)` - Adds a DoAfter task
 
-Adds a DoAftertask with the task name (description) and (afterWhen).
+Adds a DoAftertask with the task name `(description)` and `(afterWhen)`.
 
 Example of usage: 
 
@@ -99,5 +99,47 @@ Expected outcome:
 2.[D][] return book(by:Sep 30 2021)
 3.[E][] team meeting(at:Aug 6th 2-4pm)
 4.[DA][] return book(DoAfter:return book)`
+
+
+### `done (task number)` - Marks task as done
+
+Task with the specified `(task number)` will be marked as done.
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+`Nice! I've marked this task as done:
+[T][X] read book`
+
+### `delete (task number)` - Deletes a task
+
+Task with the specified `(task number)` will be deleted.
+
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+`Noted. I've removed this task:
+[T][X] read book
+Now you have 3 tasks in the list.`
+
+### `find (keyword)` - Finds a task
+
+Finds task whose names contain the given `(keywords)`.
+
+Example of usage: 
+
+`find book`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:
+[D][] return book(by:Sep 30 2021)
+[DA][] return book(DoAfter:return book)`
 
 
