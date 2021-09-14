@@ -22,7 +22,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("Your personal assistant Xiri");
+            stage.setTitle("Xiri - Your Personal Assistant");
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/bot.jpg")));
             stage.show();
         } catch (IOException e) {
