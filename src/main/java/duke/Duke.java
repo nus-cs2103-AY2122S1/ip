@@ -13,11 +13,12 @@ public class Duke {
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
-            parser.addTaskList(tasks);
-            parser.addStorage(storage);
         } catch (DukeException e) {
+            System.out.println(e);
             tasks = new TaskList();
         }
+        parser.addTaskList(tasks);
+        parser.addStorage(storage);
         assert tasks != null;
         assert storage != null;
     }

@@ -1,7 +1,5 @@
 package duke;
 
-import java.text.SimpleDateFormat;
-
 /**
  * todo task. Represents a task that is yet to be done with no specific timeframe.
  */
@@ -37,7 +35,7 @@ public class Todo extends Task {
      */
     @Override
     public String getSaveString() {
-        String s = "D" + this.getStatusIcon() + "_" + description;
+        String s = "T" + this.getStatusIcon() + "_" + description;
         if (this.tag != null) {
             s += "_" + tag;
         }

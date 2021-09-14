@@ -44,7 +44,7 @@ public class Storage {
      *
      * @param list TaskList of tasks.
      */
-    public String save(TaskList list) throws DukeException{
+    public String save(TaskList list) throws DukeException {
         try {
             FileWriter writer = new FileWriter(file);
             for (int i = 0; i < list.getSize(); i++) {

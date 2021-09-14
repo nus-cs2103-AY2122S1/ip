@@ -23,7 +23,7 @@ public class Deadline extends Task {
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(by);
         } catch (ParseException e) {
-            throw new DukeException("Date incorrect format");
+            throw new DukeException("Date format incorrect");
         }
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String s =  "[D]" + super.toString() + " (by: " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ")";
+        String s = "[D]" + super.toString() + " (by: " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ")";
         if (this.tag != null) {
             s += " #" + this.tag;
         }
@@ -48,7 +48,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveString() {
-        String s = "D" + this.getStatusIcon() + "_" + description + "_" + new SimpleDateFormat("dd/MM/yyyy").format(date);
+        String s = "D" + this.getStatusIcon() + "_" + description + "_"
+                + new SimpleDateFormat("dd/MM/yyyy").format(date);
         if (this.tag != null) {
             s += "_" + tag;
         }

@@ -33,8 +33,8 @@ public class Parser {
      * @return True or false. If false, program ends. If true, program continues.
      */
     public String parse(String input) {
-        assert list != null: "TaskList is null";
-        assert storage != null: "Storage is null";
+        assert list != null : "TaskList is null";
+        assert storage != null : "Storage is null";
         String message = "";
         String[] inputArr = input.split(" ", 2);
         try {
