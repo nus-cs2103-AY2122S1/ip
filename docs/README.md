@@ -121,6 +121,7 @@ Example of usage:
 Expected outcome:
 
 <img width="412" alt="list" src="https://user-images.githubusercontent.com/65549665/133203214-91d226b5-8626-4d11-8e5f-d42fe403aa8b.png">
+
 Description of the outcome.
 
 ```
