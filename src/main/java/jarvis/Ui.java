@@ -144,13 +144,13 @@ public class Ui {
                 // If it is a deadline task
                 if (TaskList.getTaskList().get(i) instanceof Deadline) {
                     //Check if the deadline is after the day starts
-                    boolean deadlineIsAfterDayStarts =
+                    boolean isDeadlineAfterDayStarts =
                             (((Deadline) TaskList.getTaskList().get(i)).getDeadline()).isAfter(start);
                     // Check if the deadline is before the day end
-                    boolean deadlineIsBeforeDayEnds =
+                    boolean isDeadlineBeforeDayEnds =
                             (((Deadline) TaskList.getTaskList().get(i)).getDeadline()).isBefore(end);
 
-                    if (deadlineIsAfterDayStarts && deadlineIsBeforeDayEnds) {
+                    if (isDeadlineAfterDayStarts && isDeadlineBeforeDayEnds) {
                         result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                         num++;
                     }
@@ -159,13 +159,13 @@ public class Ui {
                 // list of tasks for the day
                 } else if (TaskList.getTaskList().get(i) instanceof Event) {
                     //Check if the event starts after the day starts
-                    boolean eventIsAfterDayStarts =
+                    boolean isEventAfterDayStarts =
                             (((Event) TaskList.getTaskList().get(i)).getEventStart()).isAfter(start);
                     //Check if the event ends before the day end
-                    boolean eventIsBeforeDayEnds =
+                    boolean isEventBeforeDayEnds =
                             (((Event) TaskList.getTaskList().get(i)).getEventEnd()).isBefore(end);
 
-                    if (eventIsAfterDayStarts && eventIsBeforeDayEnds) {
+                    if (isEventAfterDayStarts && isEventBeforeDayEnds) {
                         result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                         num++;
                     }
