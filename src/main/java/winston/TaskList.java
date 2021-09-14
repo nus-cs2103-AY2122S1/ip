@@ -85,7 +85,7 @@ public class TaskList {
         StringBuilder result = new StringBuilder(Ui.hiYaMessage());
         assert(counter > size);
         for (Task task : this.list) {
-            result.append("\t" + counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
+            result.append(counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
             counter += 1;
         }
         result.setLength(result.length() - 1);
