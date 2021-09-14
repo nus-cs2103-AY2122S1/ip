@@ -28,6 +28,8 @@ public class Parser {
         Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
         Pattern findPattern = Pattern.compile("find (.*)");
 
+        Pattern updatePattern = Pattern.compile("update (/.*) (.*)");
+
         // Print out list
         if (input.equals("list")) {
             return ui.printResponse(taskList.list());

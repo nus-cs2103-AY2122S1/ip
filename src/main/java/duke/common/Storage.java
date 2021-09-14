@@ -70,6 +70,5 @@ public class Storage {
             System.out.println("Problem storing");
             e.printStackTrace();
         }
-        assert new Storage(this.taskListFileName).initialise() == taskList : "Stored taskList is malformed";
     }
 }

@@ -96,21 +96,4 @@ public class TaskList implements Serializable {
     public boolean isEmpty() throws Duke.DukeException {
         return this.tasks.isEmpty();
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof TaskList)) {
-            return false;
-        }
-
-        TaskList t = (TaskList) o;
-        if (t.list() != this.list()) {
-            return false;
-        }
-        return true;
-    }
 }
