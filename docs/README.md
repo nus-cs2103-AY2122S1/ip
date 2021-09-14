@@ -61,8 +61,6 @@ Task data is saved to a `duke.txt` file in the app's directory **only** upon exi
 
 ## Usage Summary
 
-### `Keyword` - Describe action
-
 Command | Syntax 
 --------|--------
 Add | **Todo** task<br>`todo DESCRIPTION`<br>**Deadline** task<br>`deadline DESCRIPTION /by DD-MM-YYYY hhmm`<br>**Event** task<br>`event DESCRIPTION /at DD-MM-YYYY hhmm [to DD-MM-YYYY hhmm]` | 
