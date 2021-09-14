@@ -31,6 +31,7 @@ public class TaskList {
     /**
      * Adds a task to the task list at specified index.
      *
+     * @param index The index to add the task at.
      * @param task The task to be added.
      */
     public void update(Task task, int index) {

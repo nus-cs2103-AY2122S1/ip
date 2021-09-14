@@ -42,6 +42,7 @@ public class Log {
      * and the deleted task.
      *
      * @param description The type of command given.
+     * @param index The index of the removed task.
      * @param task The removed task.
      */
     public void addLog(String description, Task task, int index) {

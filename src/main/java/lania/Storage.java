@@ -63,6 +63,9 @@ public class Storage {
      * @throws IOException If unable to append to file.
      */
     public void save(TaskList tasks) throws IOException {
+        if (tasks.size() == 0) {
+            appendToFile(filePath, "", 0);
+        }
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             appendToFile(filePath, task.getStringFormat(), i);
