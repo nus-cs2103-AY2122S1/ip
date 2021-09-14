@@ -3,15 +3,12 @@ package duke.common.task;
 import duke.common.Duke;
 import duke.common.enums.TaskField;
 
+/**
+ * Task associated with a given start time
+ */
 public class Event extends Task {
     private String eventTime;
 
-    /**
-     * Task associated with a given start time
-     *
-     * @param description description of the event
-     * @param eventTime when the event will occur
-     */
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;

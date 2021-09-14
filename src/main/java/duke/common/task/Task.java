@@ -5,15 +5,13 @@ import java.io.Serializable;
 import duke.common.Duke;
 import duke.common.enums.TaskField;
 
+/**
+ * Generic task that stores a description and whether the task is completed.
+ */
 public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
-    /**
-     * Generic task that stores a description and whether the task is completed.
-     *
-     * @param description description of task.
-     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

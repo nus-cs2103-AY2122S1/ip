@@ -2,6 +2,10 @@ package duke.common;
 
 import javafx.scene.image.Image;
 
+/**
+ * Duke is the parent class encapsulating the logic behind consuming input from the GUI of the application, and
+ * producing output back to the GUI.
+ */
 public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -17,6 +21,9 @@ public class Duke {
         this("data/duke.txt");
     }
 
+    /**
+     * DukeException is used for thrown exceptions related to the logic behind Duke.
+     */
     public static class DukeException extends Exception {
         public DukeException(String errorMessage) {
             super(errorMessage);

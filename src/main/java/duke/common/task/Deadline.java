@@ -7,15 +7,12 @@ import java.time.format.DateTimeParseException;
 import duke.common.Duke;
 import duke.common.enums.TaskField;
 
+/**
+ * Task with a specified deadline.
+ */
 public class Deadline extends Task {
     private LocalDate deadline;
 
-    /**
-     * Task with a specified deadline.
-     *
-     * @param description description of task.
-     * @param deadline deadline of task.
-     */
     public Deadline(String description, String deadline) {
         super(description);
         try {

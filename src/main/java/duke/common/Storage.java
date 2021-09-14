@@ -9,15 +9,13 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Handles saving of taskLists between Duke runtime sessions to text file by serialisation.
+ */
 public class Storage {
     private String taskListFileName;
     private File taskListFile;
 
-    /**
-     * Handles saving of taskLists between Duke runtime sessions to text file by serialisation.
-     *
-     * @param taskListFileName path to text file to store taskList in.
-     */
     public Storage(String taskListFileName) {
         assert taskListFileName != "" : "Filename should not be empty.";
         assert !taskListFileName.contains(" ") : "Filename should not contain whitespaces.";

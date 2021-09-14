@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 import duke.common.task.Task;
 
+/**
+ * UI handles processes string responses from Duke before passing them on to be displayed in the app.
+ */
 public class Ui {
     /**
      * Displays default Duke startup banner.
+     *
+     * @return initialisation banner
      */
     public String init() {
         String logo = " ____        _        \n"
@@ -20,6 +25,8 @@ public class Ui {
 
     /**
      * Displays bye message.
+     *
+     * @return bye message
      */
     public String terminate() {
         return "Bye. Hope to see you again soon!";
@@ -27,11 +34,18 @@ public class Ui {
 
     /**
      * Displays failure message.
+     *
+     * @return failure message
      */
     public String fail() {
         return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
+    /**
+     * Displays update failure message.
+     *
+     * @return update failure message
+     */
     public String printUpdateFail() {
         return "Sorry, there does not seem to be such a field in this task.";
     }
@@ -40,6 +54,7 @@ public class Ui {
      * Prints tasks found from find query
      *
      * @param tasks tasks found by taskList
+     * @return formatted list of tasks
      */
     public String printFind(ArrayList<Task> tasks) {
         String response = "";
@@ -56,6 +71,7 @@ public class Ui {
      * Prints data-reliant response to a command. Responses are fed by Parser
      *
      * @param response string reply to command
+     * @return response
      */
     public String printResponse(String response) {
         return response;
