@@ -12,15 +12,15 @@
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="694.0" AnchorPane.bottomAnchor="1.0" />
         <Button fx:id="sendButton" layoutX="710.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #52AB98;" text="Send" textFill="WHITE">
-         <font>
-            <Font name="Segoe UI Semibold" size="12.0" />
-         </font></Button>
+            <font>
+                <Font name="Segoe UI Semibold" size="12.0" />
+            </font></Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="800.0" style="-fx-background-color: #F6E9D7;" vvalue="1.0">
             <content>
                 <VBox fx:id="dialogContainer" alignment="TOP_CENTER" fillWidth="false" prefHeight="560.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #F6E9D7; -fx-border-color: #F6E9D7;">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" top="20.0" />
-               </padding></VBox>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                    </padding></VBox>
             </content>
         </ScrollPane>
     </children>
