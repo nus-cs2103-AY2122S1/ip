@@ -82,8 +82,12 @@ public class TaskList {
             return "☹ OOPS!!! You need to enter a description along with the event timings!";
         }
         int index = userInput.indexOf('/');
-        String at = userInput.substring(index + 4);
-        Event event = new Event(userInput.substring(6, index), at);
+        String[] arr = userInput.substring(index + 4).split(" to ");
+        String start = arr[0];
+        String end = arr[1];
+        LocalDateTime localDateTime = LocalDateTime.parse(start, formatter);
+        start = localDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+        Event event = new Event(userInput.substring(6, index), start + "-" + end);
         tasks.add(event);
         storage.appendToFile(event.toString());
         return ui.showEventMessage(event, tasks);
