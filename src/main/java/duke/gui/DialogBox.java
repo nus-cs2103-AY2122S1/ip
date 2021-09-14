@@ -1,3 +1,4 @@
+// Credit: Chan Jun Da
 package duke.gui;
 
 import java.io.IOException;
@@ -5,14 +6,12 @@ import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -20,17 +19,17 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
-    @FXML
-    private ImageView displayPicture;
+
+    private static final double SPACING = 10;
+
 
     /**
-     * Represents a dialog box with text and profile image.
-     * @param text
-     * @param img
+     * Represents a dialog box.
+     * @param text dialog content
+     * @param imageView profile
+     * @param isLeft true for Duke dialogBox, false for user dialogBox
      */
-    public DialogBox(String text, Image img) {
+    public DialogBox(String text, ImageView imageView, boolean isLeft) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/views/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,8 +39,17 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        TextBox output = isLeft
+                ? TextBox.leftwardTextBox(text)
+                : TextBox.rightwardTextBox(text);
+
+        imageView.setClip(new Circle(50, 50, 50));
+        imageView.setFitWidth(100.0);
+        imageView.setFitHeight(100.0);
+        getChildren().addAll(output, imageView);
+
+        setAlignment(Pos.TOP_RIGHT);
+        setSpacing(SPACING);
     }
 
     /**
@@ -54,25 +62,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+
     /**
-     * Gets user dialog box.
+     * Gets a user dialog box.
      *
-     * @param text User content
-     * @param img User profile
+     * @param text dialog content
+     * @param imageView user profile
      * @return an user dialog box
      */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text, ImageView imageView) {
+        return new DialogBox(text, imageView, false);
     }
 
     /**
-     * Gets Duke dialog box.
-     * @param text Duke content
-     * @param img Duke profile
+     * Gets a Duke dialog box.
+     *
+     * @param text dialog content
+     * @param imageView Duke profile
      * @return a Duke dialog box
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, ImageView imageView) {
+        var db = new DialogBox(text, imageView, true);
         db.flip();
         return db;
     }
