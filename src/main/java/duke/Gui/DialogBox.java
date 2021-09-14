@@ -19,9 +19,8 @@ import javafx.scene.text.Font;
 
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Represents a dialog box consisting of an ImageView to represent the user's
+ * and Duke's face and a label containing text from the user and Duke.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -32,10 +31,11 @@ public class DialogBox extends HBox {
     //@@author Ongzl-reused
     //Reused from GeNiaaz / ip ... duke.Gui.DialogBox.java
     /**
-     * Constructor for duke.Gui.DialogBox instance
-     * @param text message to be shown to user
-     * @param img image of user to be shown in display window
-     * @param isDuke boolean to check if is assistant or user
+     * Constructs a duke.Gui.DialogBox instance.
+     *
+     * @param text message to be shown to user.
+     * @param img image of user to be shown in display window.
+     * @param isDuke boolean to check if is assistant or user.
      */
     private DialogBox(String text, Image img, boolean isDuke, boolean isError) {
         try {
@@ -90,20 +90,22 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * returns new instance of dialogbox
-     * @param text message to be shown to user
-     * @param img image of user to be shown in display window
-     * @return new instance of dialogbox
+     * Returns new instance of dialogbox.
+     *
+     * @param text message to be shown to user.
+     * @param img image of user to be shown in display window.
+     * @return new instance of dialogbox.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, false, false);
     }
 
     /**
-     * returns new instance of dialogbox
-     * @param text message to be shown to user
-     * @param img image of user to be shown in display window
-     * @return new instance of dialogbox
+     * Returns new instance of dialogbox.
+     *
+     * @param text message to be shown to user.
+     * @param img image of user to be shown in display window.
+     * @return new instance of dialogbox.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, true, false);

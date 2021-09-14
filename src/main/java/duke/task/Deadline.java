@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Constructs a Task with a Deadline .
+     * Constructs a Task with a Deadline.
      *
      * @param description String input of description of Deadline Task.
      * @param by String for Deadline due format dd/mm/yyyy HHmm.

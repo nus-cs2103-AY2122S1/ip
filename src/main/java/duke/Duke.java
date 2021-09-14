@@ -6,6 +6,9 @@ import duke.util.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 
+/**
+ * Represents the task list manager Duke.
+ */
 public class Duke {
 
     private Ui ui;
@@ -13,7 +16,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor of duke.Duke.
+     * Constructs Duke.
      */
     public Duke(String fileName) {
         this.ui = new Ui();
@@ -38,11 +41,11 @@ public class Duke {
     }
 
     /**
-     * Runs the duke.Duke program, prints out welcome statement and starts accepting input.
-     * @return
+     * Prints out welcome statement.
+     *
+     * @return Welcome message for new user.
      */
     public String run() {
         return ui.welcome();
-
     }
 }

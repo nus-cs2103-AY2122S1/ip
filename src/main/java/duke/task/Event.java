@@ -10,10 +10,6 @@ import duke.exception.DukeException;
  * Represents a Task Event that happens at a date and time.
  */
 public class Event extends Task {
-//    //date of event in format LocalDate
-//    protected LocalDate atDate;
-//    //time of event in format String
-//    protected String atTime;
 
     /**
      * Constructs a Event Task with date and time of when it is happening.

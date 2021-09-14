@@ -4,7 +4,7 @@ package duke.util;
  * Represents the User Interface.
  */
 public class Ui {
-    //duke.Duke logo
+
     private static final String logo = " ___          _        \n"
             + "|  _ \\ _    _| | ____ \n"
             + "| |  | | |  | | |/ / _ \\\n"
@@ -15,7 +15,9 @@ public class Ui {
     }
 
     /**
-     * Welcome statement for new user.
+     * Welcomes new user.
+     *
+     * @return Returns the welcome message for new user.
      */
     public String welcome() {
         return "Hello this is\n" + logo;
