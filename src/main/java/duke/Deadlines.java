@@ -6,6 +6,7 @@ package duke;
 public class Deadlines extends Task {
     private String description;
     private String time;
+    private final String TASK_ICON = "D";
 
     /**
      * Constructor for the deadline task
@@ -25,7 +26,7 @@ public class Deadlines extends Task {
      * @return Task icon
      */
     public String getTaskIcon() {
-        return "D";
+        return this.TASK_ICON;
     }
 
     /**
@@ -48,6 +49,7 @@ public class Deadlines extends Task {
 
     /**
      * Overridden toString method to output the task in a readable format
+     *
      * @return String representing task in a readable format
      */
     @Override

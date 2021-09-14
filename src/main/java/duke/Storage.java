@@ -78,6 +78,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("File not found when trying to load tasks");
         }
+        //the code should not reach this part
         return null;
     }
 }

@@ -43,7 +43,8 @@ public class Duke {
     }
 
     /**
-     * Main function to handle the flow of application
+     * Main function to handle the flow of CLI application
+     * Technically not needed since there is the GUi, but I will be keeping this anyway
      *
      * @param args
      */

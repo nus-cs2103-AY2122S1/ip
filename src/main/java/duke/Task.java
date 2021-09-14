@@ -30,9 +30,8 @@ public class Task {
      *
      * @return Task icon of task
      */
-    //thank you @Jeromesyl for pointing out I was missing this
     public String getTaskIcon() {
-        return "a";
+        return "";
     }
 
     /**
