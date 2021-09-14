@@ -8,26 +8,26 @@ import jarvis.exception.JarvisException;
 import jarvis.storage.Storage;
 
 /**
- * Encapsulates the list of tasks
+ * Encapsulates the list of tasks.
  */
 public class TaskList {
     private ArrayList<Task> taskList;
     private ArrayList<String> versionHistory = new ArrayList<>();
 
     /**
-     * Constructor for TaskList
+     * Constructor for TaskList.
      *
-     * @param taskList The array list in which the tasks are stored
+     * @param taskList The array list in which the tasks are stored.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Adds a todo with the given description
+     * Adds a todo with the given description.
      *
-     * @param todoDescription The todo description
-     * @return The new Todo object
+     * @param todoDescription The todo description.
+     * @return The new Todo object.
      */
     public Todo addTodo(String todoDescription) {
         addToVersionHistory();
@@ -37,12 +37,12 @@ public class TaskList {
     }
 
     /**
-     * Adds a deadline task with given description and deadline
+     * Adds a deadline task with given description and deadline.
      *
-     * @param taskDescription The deadline task description
-     * @param deadline The deadline
-     * @return The new Deadline object
-     * @throws InvalidDateTimeInputException If the deadline is of the wrong format
+     * @param taskDescription The deadline task description.
+     * @param deadline The deadline.
+     * @return The new Deadline object.
+     * @throws InvalidDateTimeInputException If the deadline is of the wrong format.
      */
     public Deadline addTaskWithDeadline(String taskDescription, String deadline) throws InvalidDateTimeInputException {
         addToVersionHistory();
@@ -70,10 +70,10 @@ public class TaskList {
     }
 
     /**
-     * Marks a specific task in list as done
+     * Marks a specific task in list as done.
      *
-     * @param index The index of the task
-     * @return The task that was marked as done
+     * @param index The index of the task.
+     * @return The task that was marked as done.
      */
     public Task markAsDone(int index) {
         assert index >= 0 && index < taskList.size() : "Task index out of bounds";
@@ -84,10 +84,10 @@ public class TaskList {
     }
 
     /**
-     * Deletes a specific task in list
+     * Deletes a specific task in list.
      *
-     * @param index The index of the task
-     * @return The task that was deleted
+     * @param index The index of the task.
+     * @return The task that was deleted.
      */
     public Task deleteTask(int index) {
         assert index >= 0 && index < taskList.size() : "Task index out of bounds";
@@ -96,28 +96,28 @@ public class TaskList {
     }
 
     /**
-     * Gets the total size of the task list
+     * Gets the total size of the task list.
      *
-     * @return The size of list
+     * @return The size of list.
      */
     public int getTaskListSize() {
         return taskList.size();
     }
 
     /**
-     * Gets the summary string representation of the task list
+     * Gets the summary string representation of the task list.
      *
-     * @return A string that is a summary of the task list
+     * @return A string that is a summary of the task list.
      */
     public String getTaskListSummary() {
         return String.format("Now you have %s task(s) in the list.", taskList.size());
     }
 
     /**
-     * Gets the matching task list with tasks that contain the keyword
+     * Gets the matching task list with tasks that contain the keyword.
      *
-     * @param keyword The search keyword
-     * @return The task list with only matching tasks
+     * @param keyword The search keyword.
+     * @return The task list with only matching tasks.
      */
     public TaskList getListWithKeyword(String keyword) {
         ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -144,18 +144,18 @@ public class TaskList {
     }
 
     /**
-     * Gets the total size of the version history list
+     * Gets the total size of the version history list.
      *
-     * @return The size of version history list
+     * @return The size of version history list.
      */
     public int getVersionHistorySize() {
         return versionHistory.size();
     }
 
     /**
-     * Gets the string representation of the task list
+     * Gets the string representation of the task list.
      *
-     * @return The string representation of the task list
+     * @return The string representation of the task list.
      */
     @Override
     public String toString() {
@@ -176,9 +176,9 @@ public class TaskList {
     }
 
     /**
-     * Gets the string representation of the task list that is to be saved to storage file
+     * Gets the string representation of the task list that is to be saved to storage file.
      *
-     * @return The string representation that is to be saved
+     * @return The string representation that is to be saved.
      */
     public String toStorageFormatString() {
         StringBuilder stringBuilder = new StringBuilder();
