@@ -7,8 +7,8 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
-
 import duke.information.Contact;
 import duke.information.Deadline;
 import duke.information.Event;
@@ -100,6 +100,9 @@ public class Parser {
 
         case "contact":
             return prepareContactCommand( userInput, "/about");
+
+        case "help":
+            return prepareHelpCommand(userInputArray);
 
         default:
             throw new DukeException("Invalid Keyword.");
@@ -203,7 +206,9 @@ public class Parser {
                 //If an input does not fit any format, a DukeException will be thrown after the loop has finished.
             }
         }
-        throw new DukeException("Please enter a valid date!");
+        throw new DukeException("Please enter a date of the following format:\n " +
+                "\"Month/Year\"\n \"Day/Month/Year\"\n \"Day-Month-Year\"\n" +
+                " \"Month/Year HourMinutes\"\n \"Day/Month/Year HourMinute\"\n \"Day-Month-Year HourMinute\"\n");
     }
 
     /**
@@ -319,5 +324,19 @@ public class Parser {
         String contactName = updatedContact[0];
         String contactDetail = updatedContact[1];
         return new ContactCommand(new Contact(contactName, contactDetail));
+    }
+
+    /**
+     * Checks for invalid inputs and returns a help command if input is valid.
+     *
+     * @param userInputArray userInputArray from parse method.
+     * @return A HelpCommand.
+     */
+    private static Command prepareHelpCommand(String[] userInputArray) {
+        if (userInputArray.length == 1) {
+            return new HelpCommand();
+        } else {
+            throw new DukeException("The description of a help MUST be empty.");
+        }
     }
 }

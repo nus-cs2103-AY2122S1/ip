@@ -15,6 +15,30 @@ public class Ui {
     /** Statement to show the user upon finding no saved file */
     private static final String MESSAGE_LOADING_ERROR = "No saved tasks were found.";
 
+    /** Statement to show the user when a help keyword is called */
+    private static final String MESSAGE_HELP = "Commands: \n"
+            + "1) help: Displays a summary of all commands \n"
+            + "   eg:'help' \n"
+            + "2) todo: Adds a todo task \n"
+            + "   eg:'todo' + 'description of todo' \n"
+            + "3) event: Adds an event task \n"
+            + "   eg:'event' + 'title' + '/at' + 'location' \n"
+            + "4) deadline: Adds a deadline task \n"
+            + "   eg:'deadline' + 'title' + '/by' + 'date' \n"
+            + "5) contact: Adds a contact \n"
+            + "   eg:'contact' + 'contact name' + '/about(optional)' + 'description(optional)' \n"
+            + "6) delete: Deletes a specific task or contact \n"
+            + "   eg:'delete' + 't/c' + 'number' \n"
+            + "7) done: Marks a task as completed \n"
+            + "   eg:'done + number' \n"
+            + "8) find: Finds contacts/tasks related to keyword \n"
+            + "   eg:'find' + 'keyword' \n"
+            + "9) list: Lists all tasks and contacts \n"
+            + "   eg:'list' \n"
+            + "10) bye: Exits Cynthius \n"
+            + "   eg:'bye' \n";
+
+
     /** Shows message(s) to the user */
     public static String showToUser(String... message) {
         String displayedMessage = "";
@@ -83,5 +107,14 @@ public class Ui {
             return showToUser("No contacts found!\n");
         }
         return showToUser("Here are your contacts:\n" + contacts);
+    }
+
+    /**
+     * Displays a summary of all the keywords in Cynthius to the user.
+     *
+     * @return HELP_MESSAGE.
+     */
+    public static String showHelp() {
+        return MESSAGE_HELP;
     }
 }
