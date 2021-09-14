@@ -11,7 +11,7 @@ In the Ashy ChatBot, you can create three kinds of tasks:
 * To-Dos
 * Deadlines 
 * Events
-<p> <img width="200" src="TaskCreation.png"/></p>
+<p> <img width="350" src="TaskCreation.png"/></p>
 
 #### To-Dos
 To-Dos are simple tasks with just a description.
@@ -30,10 +30,6 @@ The following are the commands you can use:
 * Update task description
 * List out all tasks 
 
-### Save Tasks 
-The tasks you create in the Ashy ChatBot are saved to the hard-disk automatically! 
-<p> <img width="350" src="Save.png"/></p>
-
 ### Error Handling
 If you enter a wrong command by mistake, dont worry! The Ashy ChatBot has various error handling messages that are highlighted in red to guide you through!
 <p> <img width="350" src="ErrorHandling.png"/></p>
@@ -41,6 +37,9 @@ If you enter a wrong command by mistake, dont worry! The Ashy ChatBot has variou
 ### Help
 New to the Ashy ChatBot? You can use the help command to find out various features and how to implement them! 
 <p> <img width="350" src="Help.png"/></p>
+
+### Save Tasks 
+The tasks you create in the Ashy ChatBot are saved to the hard-disk automatically! 
 
 
 
