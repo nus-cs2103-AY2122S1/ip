@@ -30,7 +30,7 @@ Use list and find to quickly list your tasks by urgency or to list tasks that ma
 
 ### Create Tasks
 
-There are three types of tasks as listed in the [Add tasks section](#add-tasks). The syntax for creating each type is as follows:
+There are three types of tasks as listed in the [Add tasks section](#add-and-manage-your-tasks). The syntax for creating each type is as follows:
 
 ```
 todo {description}
