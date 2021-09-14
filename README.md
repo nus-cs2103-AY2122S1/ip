@@ -74,3 +74,8 @@ public class Launcher {
 
 ![Ui](https://user-images.githubusercontent.com/62177572/133307156-919379c3-9f32-49cb-b56f-eab48a70f2b8.png)
 
+## 5. Credits
+- [Brian Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Brian_Griffin.png)
+- [Peter Griffin Picture Resource](https://en.wikipedia.org/wiki/File:Peter_Griffin.png)
+- [Peter Griffin Dancing Picture Resource](https://www.nicepng.com/ourpic/u2q8a9t4u2a9q8u2_peter-griffin-family-guy-29-by-frasier-and/)
+- [Peter Griffin Head Icon Picture Resource](https://www.kindpng.com/imgv/hJTimxi_family-guy-peter-face-hd-png-download/)
