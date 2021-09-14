@@ -10,7 +10,9 @@
 
 <p align = "center"> The WhoBot is your Revolutionary Personal Assistant that makes Managing All Tasks Simple and Efficent. </p>
 
-<br><br>
+<br> 
+<hr>
+<br>
 
 <div align = "center">
   <img height = "300" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_CLI.png?raw=true">
