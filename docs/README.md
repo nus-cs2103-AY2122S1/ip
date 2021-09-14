@@ -2,6 +2,8 @@
 
 Welcome to DukePro. This app houses Duke, a friendly chat bot who can help you manage your tasks effectively.
 
+<img src="https://raw.github.com/ErnestCuong/ip/master/docs/Ui.png" width="300">
+
 ## Quick start
 
 **Prerequisite: Ensure that you have already installed Java 11.**
