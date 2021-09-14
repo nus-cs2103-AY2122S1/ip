@@ -24,32 +24,10 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-   
-
-## Some code example:
-```java
- protected static class DukeEmptyTask extends DukeException {
-     private Task.TaskKind t;
-
-     protected DukeEmptyTask(Task.TaskKind t) {
-         this.t = t;
-     }
-
-     @Override
-     public String toString() {
-         return "OOPS!!! The description of a " + t + " cannot be empty." +
-                 "\nTry something like: \"" + t.getExample() + "\"";
-     }
- }
-```
-
-The class `DukeException` is the hardest one :cry:
 
 ## Upcoming tasks:
 - [ ] Review some peer PRs
 - [ ] Add increments as branches :sweat_smile:
-
-> "Death is like the wind, always by my side" - Yasuo
 
 This is my [*GitHub account*](https://github.com/hungkhoaitay) hope you **love** it :heart:
 
