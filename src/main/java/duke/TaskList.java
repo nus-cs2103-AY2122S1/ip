@@ -115,14 +115,14 @@ public class TaskList {
      */
     public String addTask(Task t) {
         listOfTasks.add(t);
-        return "Okay! Task added:\n  " + t.toString() + "\n" +
-            "You now have " + listOfTasks.size() + " task(s) in the list.";
+        return "Okay! Task added:\n  " + t.toString() + "\n"
+                + "You now have " + listOfTasks.size() + " task(s) in the list.";
     }
 
     public String addTask(Task t, int index) {
         listOfTasks.add(index, t);
-        return "Okay! Task added back:\n  " + t.toString() + "\n" +
-                "You now have " + listOfTasks.size() + " task(s) in the list.";
+        return "Okay! Task added back:\n  " + t.toString() + "\n"
+                + "You now have " + listOfTasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -140,8 +140,8 @@ public class TaskList {
             Task t = listOfTasks.get(index);
             getMostRecentlyDeletedTask = t;
             listOfTasks.remove(index);
-            return "Ok! I've deleted this task:\n  " + t.toString() + "\n" +
-                "You now have " + (numOfTasks - 1) + " task(s) in the list.";
+            return "Ok! I've deleted this task:\n  " + t.toString() + "\n"
+                    + "You now have " + (numOfTasks - 1) + " task(s) in the list.";
         }
     }
 
@@ -186,6 +186,11 @@ public class TaskList {
         return matchingTasks;
     }
 
+    /**
+     * The method to return the most recently deleted task from the task list.
+     *
+     * @return the most recently deleted task
+     */
     public Task getMostRecentlyDeletedTask() {
         return this.getMostRecentlyDeletedTask;
     }

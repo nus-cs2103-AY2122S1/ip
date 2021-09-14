@@ -19,8 +19,11 @@ public class Duke {
     /** The boolean to indicate whether an Exit command is made */
     private boolean isExit;
 
-    // to be used for undo feature for add, delete and done commands
+    /** The previous command executed */
     private Command previousCommand;
+
+    /** The boolean to indicate whether a DukeException has occurred */
+    private boolean hasError;
 
     /**
      * The constructor for Duke class
@@ -42,6 +45,7 @@ public class Duke {
      * @param input The user command input
      */
     public String getResponse(String input) {
+        hasError = false;
         String output = "";
         try {
             Parser parser = new Parser(this);
@@ -50,6 +54,7 @@ public class Duke {
             output = c.execute(tasks, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
+            hasError = true;
             output = e.getMessage();
         }
         return output;
@@ -72,7 +77,21 @@ public class Duke {
         return this.tasks;
     }
 
+    /**
+     * The method to retrieve the previous command that was executed
+     *
+     * @return the previous command that was executed
+     */
     public Command getPreviousCommand() {
         return this.previousCommand;
+    }
+
+    /**
+     * The method to retrieve whether a DukeException has occurred
+     *
+     * @return whether a DukeException has occurred
+     */
+    public boolean getHasError() {
+        return this.hasError;
     }
 }

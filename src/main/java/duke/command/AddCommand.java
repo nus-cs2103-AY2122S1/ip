@@ -19,6 +19,7 @@ public class AddCommand extends Command {
         this.task = t;
     }
 
+    /** Constructor of AddCommand class */
     public AddCommand(Task t, int index) {
         this.task = t;
         this.index = index;
@@ -64,6 +65,11 @@ public class AddCommand extends Command {
         return (obj instanceof AddCommand) && this.task.equals((((AddCommand) obj).task));
     }
 
+    /**
+     * The method to return whether this command comes from an "undo" command.
+     *
+     * @return boolean indicating whether this command comes from an "undo" command
+     */
     public boolean isAlreadyUndone() {
         return this.isAlreadyUndone;
     }

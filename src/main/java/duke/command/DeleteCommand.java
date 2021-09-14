@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Duke;
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.task.Task;
