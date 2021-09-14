@@ -15,8 +15,7 @@ import type.TaskIconTypeEnum;
 import type.TimeFormatTypeEnum;
 
 /**
- * Encapsulates a task with that will occur at a specified time period.
- * It inherits from `DukeTask`.
+ * Encapsulates a task with that will occur on a date, at a specified time period.
  */
 public class EventTask extends Task {
     private static final String SPLITTER_ACTION_TIME = "/at";
@@ -33,10 +32,12 @@ public class EventTask extends Task {
     }
 
     /**
-     * Processes the input string to create an event task with an action and time.
+     * Creates an event task from a description.
      *
-     * @param description Input task string.
-     * @return App representation of a task containing an action description and time information.
+     * @param description Description including action, date and time information.
+     * @return Event task.
+     * @throws InvalidDateTimeException If the description has an invalid datetime format.
+     * @throws InvalidCommandFormatException If the description has an invalid format.
      */
     public static EventTask createTask (String description)
             throws InvalidDateTimeException, InvalidCommandFormatException {
@@ -104,6 +105,7 @@ public class EventTask extends Task {
      *
      * @param description Storage representation of an event task.
      * @return App representation of an event task.
+     * @throws InvalidFormatInStorageException If there is an invalid format in storage.
      */
     public static EventTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
         String dateFormat = DateFormatTypeEnum.INPUT.toString();

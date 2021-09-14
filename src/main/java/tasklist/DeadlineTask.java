@@ -16,7 +16,6 @@ import type.TimeFormatTypeEnum;
 
 /**
  * Encapsulates a task with a deadline.
- * It inherits from `DukeTask`.
  */
 public class DeadlineTask extends Task {
     private static final String SPLITTER_ACTION_TIME = "/by";
@@ -31,10 +30,12 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Processes the input string to create a deadline task with an action and deadline.
+     * Creates a deadline task from a description.
      *
-     * @param description Input task string.
-     * @return App representation of a task containing an action description and deadline information.
+     * @param description Description including action and deadline information.
+     * @return Deadline task.
+     * @throws InvalidDateTimeException If the description has an invalid datetime format.
+     * @throws InvalidCommandFormatException If the description has an invalid format.
      */
     public static DeadlineTask createTask(String description)
             throws InvalidDateTimeException, InvalidCommandFormatException {
@@ -96,6 +97,7 @@ public class DeadlineTask extends Task {
      *
      * @param description Storage representation of a deadline task.
      * @return App representation of a deadline task.
+     * @throws InvalidFormatInStorageException If there is an invalid format in storage.
      */
     public static DeadlineTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
         String dateFormat = DateFormatTypeEnum.INPUT.toString();

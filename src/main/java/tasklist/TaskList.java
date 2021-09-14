@@ -36,9 +36,10 @@ public class TaskList {
     }
 
     /**
-     * Adds task to a list.
+     * Adds a new task to a list.
      *
      * @param task Task be added to the list.
+     * @throws ErrorAccessingFileException If there is an error accessing the file.
      */
     public void addTaskToList(Task task) throws ErrorAccessingFileException {
         try {
@@ -52,7 +53,10 @@ public class TaskList {
     /**
      * Deletes task from a list.
      *
-     * @param taskNumber Number of the task to be removed from the list.
+     * @param taskNumber Active list number of the task to be removed from the list.
+     * @return `Task`.
+     * @throws NonExistentTaskNumberException If the task number does not exist in the active list.
+     * @throws ErrorAccessingFileException If there is an error accessing the file.
      */
     public Task deleteTaskFromList(int taskNumber) throws NonExistentTaskNumberException, ErrorAccessingFileException {
         try {

@@ -12,10 +12,10 @@ public class TodoTask extends Task {
     }
 
     /**
-     * Processes the input string to create a todo task.
+     * Creates a todo task from a description.
      *
-     * @param description Input task string.
-     * @return App representation of a task containing an action description.
+     * @param description Description including action.
+     * @return Todo task.
      */
     public static TodoTask createTask(String description) {
         return new TodoTask(description, false);
@@ -49,6 +49,7 @@ public class TodoTask extends Task {
      *
      * @param description Storage representation of a todo task.
      * @return App representation of a todo task.
+     * @throws InvalidFormatInStorageException If there is an invalid format in storage.
      */
     public static TodoTask createTaskFromStoredString(String description) throws InvalidFormatInStorageException {
         boolean isDone = Task.isStorageTaskDone(description);

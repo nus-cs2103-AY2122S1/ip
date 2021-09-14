@@ -6,7 +6,7 @@ import tasklist.TaskList;
 import type.CommandTypeEnum;
 
 /**
- * Encapsulates a done command after it is parsed from user input.
+ * Encapsulates a find command after it is parsed from user input.
  */
 public class FindCommand extends Command {
     private String keyword;
@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes a `DoneCommand` to return a list with tasks that match the keyword.
+     * Executes a `FindCommand` to return a list with tasks that match the keyword.
      *
      * @param list List containing matching tasks.
      * @return Message representing the command is executed.

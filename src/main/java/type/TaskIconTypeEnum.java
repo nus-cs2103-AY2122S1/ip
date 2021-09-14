@@ -27,7 +27,7 @@ public enum TaskIconTypeEnum {
     /**
      * Gets enum that represents the input value.
      *
-     * @param value the input value.
+     * @param value Input value.
      * @return `TaskIconTypeEnum`.
      */
     public static TaskIconTypeEnum getEnum(String value) {

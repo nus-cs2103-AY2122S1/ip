@@ -3,7 +3,7 @@ package exception;
 import message.Message;
 
 /**
- * Encapsulates an exception that contains a method to get an `ErrorMessage`.
+ * Encapsulates an exception that contains a method to get a 'Message`.
  * Duke exceptions contain messages that should be shown to the user.
  */
 public class DukeException extends Exception {

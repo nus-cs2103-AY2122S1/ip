@@ -15,7 +15,7 @@ import exception.UnhandledCommandException;
 import type.CommandTypeEnum;
 
 /**
- * Encapsulates a `Parser` that parses string inputs to commands or throws exceptions if they are invalid.
+ * Encapsulates a parser that parses string inputs to commands or throws exceptions if they are invalid.
  */
 public class CommandParser {
     /**
@@ -33,9 +33,10 @@ public class CommandParser {
      *
      * @param message Input string taken in by System.in.
      * @return `Command`.
-     * @throws InvalidTaskNumberException If the `Command` has an invalid task number.
-     * @throws NonExistentCommandTypeException If the `Command` has a command type that is not recognised.
-     * @throws MissingCommandDescriptionException If the `Command` has a missing description.
+     * @throws InvalidTaskNumberException If the command has an invalid task number.
+     * @throws NonExistentCommandTypeException If the command has a command type that is not recognised.
+     * @throws MissingCommandDescriptionException If the command has a missing description.
+     * @throws UnhandledCommandException If a command is not handled.
      */
     public Command createCommand(String message) throws
             InvalidTaskNumberException,
@@ -70,6 +71,7 @@ public class CommandParser {
 
     /**
      * Splits a string into an array of elements by a given splitter.
+     *
      * @param input Input to split.
      * @param splitter Splitter to split the string by.
      * @return Array of strings.

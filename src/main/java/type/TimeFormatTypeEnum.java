@@ -14,9 +14,9 @@ public enum TimeFormatTypeEnum {
     }
 
     /**
-     * Returns string representation of a date format type enum.
+     * Returns string representation of a time format type enum.
      *
-     * @return String representation of a date format type enum
+     * @return String representation of a time format type enum
      */
     @Override
     public String toString() {

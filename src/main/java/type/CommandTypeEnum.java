@@ -12,10 +12,10 @@ public enum CommandTypeEnum {
                     TimeFormatTypeEnum.INPUT.toString()
             )
     ),
-    DELETE("delete", "delete a task", "delete <task number in last shown list>"),
-    DONE("done", "mark a task as done", "done <task number in last shown list>"),
+    DELETE("delete", "delete a task", "delete <task number in latest list>"),
+    DONE("done", "mark a task as done", "done <task number in latest list>"),
     EVENT("event",
-            "add a task occurring at a time",
+            "add a task occurring on a date, within a time period",
             String.format("event <description> /at <%s %s %s>",
                     DateFormatTypeEnum.INPUT.toString(),
                     TimeFormatTypeEnum.INPUT.toString(),

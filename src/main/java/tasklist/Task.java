@@ -22,7 +22,7 @@ public abstract class Task {
     /**
      * Instantiates a `Task`.
      *
-     * @param description Description of task is.
+     * @param description Description of the task.
      * @param isDone The status of a task, either done or not.
      */
     public Task(String description, boolean isDone) {
@@ -32,7 +32,8 @@ public abstract class Task {
 
     /**
      * Creates a specific Task based on the prefix in the user input.
-     * @param description User input that may or may not be a valid type of task.
+     *
+     * @param description User input that may be a valid type of task.
      * @param commandType Command Type.
      * @return `Task`.
      * @throws InvalidTaskTypeException If the type of task is not recognised.
@@ -63,7 +64,7 @@ public abstract class Task {
     /**
      * Formats the task in string form, displaying the task status and description.
      *
-     * @return the task in a displayed string format
+     * @return Task in a displayed string format
      */
     @Override
     public String toString() {
@@ -75,6 +76,7 @@ public abstract class Task {
      *
      * @param fullDescription Storage representation of the task including the task type.
      * @return App representation of the task.
+     * @throws InvalidFormatInStorageException If there is an invalid format in storage.
      */
     public static Task createTaskFromStoredString(String fullDescription) throws InvalidFormatInStorageException {
         String trimmedFullDescription = fullDescription.trim();
