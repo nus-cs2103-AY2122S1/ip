@@ -2,14 +2,13 @@ package duke.gui;
 
 import duke.Duke;
 import duke.Response;
+import duke.StringUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -28,11 +27,16 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_icon.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Hagician.jpg"));
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(StringUtils.getWelcomeMessage(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -51,8 +55,8 @@ public class MainWindow extends AnchorPane {
         String response = r.getMessage();
         isExit = r.isExit();
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(new Label(input), new ImageView(userImage)),
-                DialogBox.getDukeDialog(new Label(response), new ImageView(dukeImage))
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
         if (isExit) {

@@ -97,11 +97,17 @@ public class TaskList {
             throw new DukeException("Task number: " + (index + 1) + " does not exist.");
         }
         Task temp = tasks.get(index);
-        temp.markAsDone();
-        tasks.set(index, temp);
-        String result = "Nice! I've marked this task as done:\n";
-        result += temp.toString();
-        return result;
+        StringBuffer result = new StringBuffer();
+        if (temp.isDone()) {
+            result.append("Haha! The task has been marked as done before");
+            return result.toString();
+        } else {
+            temp.markAsDone();
+            tasks.set(index, temp);
+            result.append("Nice! I've marked this task as done:\n");
+            result.append(temp.toString());
+            return result.toString();
+        }
     }
 
     /**
