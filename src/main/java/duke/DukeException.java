@@ -8,4 +8,8 @@ public class DukeException extends Exception {
     DukeException(String message, String description) {
         super("The description of a " + message + " cannot be empty. It has to be in this format: " + description);
     }
+
+    DukeException(String message) {
+        super(message);
+    }
 }

@@ -1,8 +1,12 @@
 package duke;
 
+import org.w3c.dom.events.EventException;
+
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Event class is a task. The input must be in such a format
@@ -51,6 +55,7 @@ public class Event extends Task implements GeneralCommand {
         int escapeIndex = command.lastIndexOf("/");
         this.description = command.substring(6, escapeIndex - 1);
         this.dateAndTime = command.substring(escapeIndex + 4);
+        formatLocalDateTime();
     }
 
     /**
@@ -65,13 +70,20 @@ public class Event extends Task implements GeneralCommand {
     /**
      * Formats the date and time in order to be
      * parsed into the DateTimeFormatter.
+     *
+     * @throws DukeException If date is formatted wrongly
      */
-    public void formatLocalDateTime() {
-        if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
-        } else {
-            this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
+    public void formatLocalDateTime() throws DukeException {
+
+        try {
+            if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
+            } else {
+                this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please input the correct date in this format '2021-08-27 19:15'");
         }
     }
 
@@ -82,7 +94,6 @@ public class Event extends Task implements GeneralCommand {
      */
     @Override
     public String toString() {
-        formatLocalDateTime();
         assert localDateTime != null : "Date should not be null";
         return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
     }

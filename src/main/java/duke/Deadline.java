@@ -3,6 +3,8 @@ package duke;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Deadline class is a task. The input must be in such a format
@@ -55,18 +57,25 @@ public class Deadline extends Task implements GeneralCommand {
         this.tasks = tasks;
         this.ui = ui;
         this.dateAndTime = command.substring(escapeIndex + 4);
+        formatLocalDateTime();
     }
 
     /**
      * Formats the date and time in order to be
      * parsed into the DateTimeFormatter.
+     *
+     * @throws DukeException If date is formatted wrongly
      */
-    public void formatLocalDateTime() {
-        if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
-        } else {
-            this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
+    public void formatLocalDateTime() throws DukeException {
+        try {
+            if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
+            } else {
+                this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please input the correct date in this format '2021-08-27 19:15'");
         }
     }
 
@@ -86,8 +95,6 @@ public class Deadline extends Task implements GeneralCommand {
      */
     @Override
     public String toString() {
-        formatLocalDateTime();
-
         assert localDateTime != null : "Date should not be null";
         return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: "
                 + localDateTime.format(dtf) + ")";
