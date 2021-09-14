@@ -32,12 +32,15 @@ public class CompleteCommand extends Command {
      */
     @Override
     public String execute (TaskList tasks, Storage storage, Ui ui, Log log) {
-        tasks.complete(index);
-        log.addLog("done", (Integer) index);
+
         try {
+            tasks.complete(index);
+            log.addLog("done", (Integer) index);
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showError();
+            return ui.showError();
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showUnavailableTaskMessage(index);
         }
         return ui.showCompleteMessage(tasks, index - 1);
     }

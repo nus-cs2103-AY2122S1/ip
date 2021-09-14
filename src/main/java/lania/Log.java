@@ -68,7 +68,12 @@ public class Log {
      * @return The most recent command.
      */
     public String getRecentLog() {
-        String recentCommand = commandLog.remove(commandLog.size() - 1);
+        String recentCommand;
+        try {
+            recentCommand = commandLog.remove(commandLog.size() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            recentCommand = "You have no tasks to undo!";
+        }
         return recentCommand;
     }
 

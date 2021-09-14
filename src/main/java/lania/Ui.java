@@ -60,7 +60,7 @@ public class Ui {
     }
 
     /**
-     * Message that displays all tasks by the user.
+     * Shows a message that displays all tasks by the user.
      *
      * @param tasks The user's list of tasks.
      * @return The message displayed to user concatenated as a string.
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     /**
-     * Message that shows after the user completes a task.
+     * Shows a message after the user completes a task.
      *
      * @param tasks The user's list of tasks.
      * @param i The index of the task the user has completed.
@@ -98,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Message that shows after the user undo-es a complete command.
+     * Shows a message after the user undo-es a complete command.
      *
      * @param tasks The user's list of tasks.
      * @param i The index of the task the user has completed.
@@ -117,7 +117,7 @@ public class Ui {
     }
 
     /**
-     * Message that shows after the user deletes a task.
+     * Shows a message after the user deletes a task.
      *
      * @param tasks taskList Contains the user's task list.
      * @param task The task the user has deleted.
@@ -140,7 +140,7 @@ public class Ui {
     }
 
     /**
-     * Message that indicates wrong date/time format.
+     * Shows a message that indicates wrong date/time format.
      *
      * @return The message displayed to user as a string.
      */
@@ -151,7 +151,7 @@ public class Ui {
     }
 
     /**
-     * Message that indicates invalid command.
+     * Shows a message that indicates invalid command.
      *
      * @param e The LaniaException to display.
      * @return The message displayed to user as a string.
@@ -162,7 +162,18 @@ public class Ui {
     }
 
     /**
-     * Message that indicates error loading the file.
+     * Shows a message when user tries to access an index
+     * ouf of bounds of the list of tasks
+     *
+     * @param index The index of the task to access.
+     * @return The Message displayed to user as a string.
+     */
+    public String showUnavailableTaskMessage(int index) {
+        return "There is no task available at: " + index;
+    }
+
+    /**
+     * Shows a message that indicates error loading the file.
      *
      * @return The message displayed to user as a string.
      */

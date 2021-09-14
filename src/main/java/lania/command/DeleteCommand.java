@@ -33,14 +33,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui, Log log) {
-        Task deletedTask = tasks.remove(index);
-        log.addLog("delete", deletedTask, index);
-        String message = ui.showRemoveMessage(tasks, deletedTask);
 
+        String message;
         try {
+            Task deletedTask = tasks.remove(index);
+            log.addLog("delete", deletedTask, index);
+            message = ui.showRemoveMessage(tasks, deletedTask);
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showError();
+            return ui.showError();
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showUnavailableTaskMessage(index);
         }
 
         return message;

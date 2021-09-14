@@ -38,7 +38,7 @@ public class AddCommand extends Command {
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showError();
+            return ui.showError();
         }
         return ui.showUpdateMessage(tasks, task);
     }

@@ -15,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 //@@author nguyiyang-reused
 //Reused from https://se-education.org/guides/tutorials/javaFx.html
@@ -38,6 +39,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        Circle clip = new Circle(displayPicture.getFitWidth()/2, displayPicture.getFitHeight()/2, 45);
+        displayPicture.setClip(clip);
     }
 
     private void flip() {
@@ -49,14 +52,12 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String l, Image image) {
         DialogBox userDialogBox = new DialogBox(l, image);
-        userDialogBox.setDialogBoxBackgroundColor("#ff9191");
         return userDialogBox;
     }
 
     public static DialogBox getLaniaDialog(String l, Image image) {
         DialogBox laniaDialogBox = new DialogBox(l, image);
         laniaDialogBox.flip();
-        laniaDialogBox.setDialogBoxBackgroundColor("#ffe591");
         return laniaDialogBox;
     }
 

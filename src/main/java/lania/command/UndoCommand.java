@@ -40,10 +40,12 @@ public class UndoCommand extends Command {
             Pair<Task, Integer> removedTask = log.getDeletedTask();
             tasks.update(removedTask.getKey(), removedTask.getValue());
             message = ui.showUpdateMessage(tasks, removedTask.getKey());
-        } else {
+        } else if (command.equals("undo")) {
             int markedIndex = log.getMarkedTask();
             tasks.unComplete(markedIndex);
             message = ui.showIncompleteMessage(tasks, markedIndex - 1);
+        } else {
+            message = command;
         }
 
         try {

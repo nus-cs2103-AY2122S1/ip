@@ -30,6 +30,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Lania's task manager");
             tasks = storage.load();
             fxmlLoader.<MainWindow>getController().setLania(tasks, ui, storage, parser, log);
             fxmlLoader.<MainWindow>getController().startDialog();
