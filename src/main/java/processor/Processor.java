@@ -43,9 +43,25 @@ public class Processor implements IProcessor {
         case LIST:
             return processList();
         case DONE:
-            return processDone(arguments.get(1));
+            try {
+                if (arguments.size() != 2) {
+                    throw new DukeException("Done command only takes one number argument");
+                }
+                return processDone(arguments.get(1));
+            } catch (DukeException e) {
+                Ui.print(e.getMessage());
+                return e.getMessage();
+            }
         case DELETE:
-            return processDelete(arguments.get(1));
+            try {
+                if (arguments.size() != 2) {
+                    throw new DukeException("Done command only takes one number argument");
+                }
+                return processDelete(arguments.get(1));
+            } catch (DukeException e) {
+                Ui.print(e.getMessage());
+                return e.getMessage();
+            }
         case FIND:
             return processFind(arguments.toArray(new String[0]));
         case UNDO:
@@ -141,6 +157,9 @@ public class Processor implements IProcessor {
         } catch (DukeException e) {
             Ui.print(e.getMessage());
             return e.getMessage();
+        } catch (NumberFormatException e) {
+            Ui.print(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -160,6 +179,9 @@ public class Processor implements IProcessor {
             Ui.print(output);
             return output;
         } catch (DukeException e) {
+            Ui.print(e.getMessage());
+            return e.getMessage();
+        } catch (NumberFormatException e) {
             Ui.print(e.getMessage());
             return e.getMessage();
         }
