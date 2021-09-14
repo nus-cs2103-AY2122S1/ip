@@ -28,8 +28,8 @@ public class FindCommand implements Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> filteredTasks = tasks.findMatches(queryString);
         String response = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            response += (i + 1) + "." + tasks.get(i) + "\n";
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            response += (i + 1) + "." + filteredTasks.get(i) + "\n";
         }
         return response;
 
