@@ -17,6 +17,7 @@
              -fx-background-radius: 5px;
               -fx-background-insets: 0,1;
                -fx-font-family: 'Consolas', 'monospace';"
-           textFill="#e1e0e0"/>
+           textFill="#e1e0e0"
+    ellipsisString=""/>
     <ImageView fx:id="circleDisplayPicture"/>
 </fx:root>

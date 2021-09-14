@@ -28,7 +28,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a new dialog box ui that contains the message in l and the profile picture in image.
      *
-     * @param l  the message to be displayed
+     * @param l     the message to be displayed
      * @param image the profile picture to be displayed
      */
     public DialogBox(String l, Image image) {
@@ -41,13 +41,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(l);
+        dialog.setText(l + "\r"); // Adds a new line to resolve truncation issues with javafx.
 
         dialog.setWrapText(true);
         circleDisplayPicture.setImage(image);
         resizeAndClip(circleDisplayPicture);
     }
-    
+
     private static void resizeAndClip(ImageView iv) {
         iv.setPreserveRatio(true);
         double aspectRatio = iv.getImage().getWidth() / iv.getImage().getHeight();
@@ -65,7 +65,7 @@ public class DialogBox extends HBox {
     /**
      * Gets the user dialog box with the user input and their profile picture.
      *
-     * @param userInput the user input
+     * @param userInput  the user input
      * @param profilePic the profile picture
      * @return the user dialog box
      */
