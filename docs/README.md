@@ -10,7 +10,7 @@ Duke helps you keep track of your tasks.
 
 
 ## Features 
-
+<br />
 
 ### Add Tasks
 
@@ -21,34 +21,40 @@ Task Type | Symbol
 todo | `T`
 deadline | `D`
 event | `E`
-
+<br />
 
 ### List Current Tasks
 
 Show all existing tasks you have entered.
+<br />
 
 ### Find Task
 
 Find the task by inputting the description.
+<br />
 
 ### Check Off Your Task
 
 Mark completed tasks as done.
+<br />
 
 ### Delete Your Task
 
 Delete tasks that you do not want in Duke anymore.
+<br />
 
 ### Update Your Task
 
 Update information of existing task.
+<br />
 
 ### Exit Duke
 
 Exits the App.
-
+<br />
 
 ## Usage
+<br />
 
 ### `todo` - Add todo task to Duke to keep track of
 
@@ -63,7 +69,7 @@ Got it. I've added this task:
  T |0| borrow a book
 Now you have 1 task in the list.
 ```
-
+<br />
 
 ### `deadline` - Add deadline task to Duke to keep track of
 
@@ -78,7 +84,7 @@ Got it. I've added this task:
  D |0| return book | 12 Aug 2021 6.30PM
 Now you have 1 task in the list.
 ```
-
+<br />
 
 ### `event` - Add event task to Duke to keep track of
 
@@ -93,7 +99,7 @@ Got it. I've added this task:
  E |0| concert | 12 Dec 2021 6.30PM
 Now you have 1 task in the list.
 ```
-
+<br />
 
 ### `list` - List all existing events
 
@@ -108,7 +114,7 @@ Here are the tasks in your list:
 1.T |0| borrow a book
 2.D |0| return book | 12 Aug 2021 6.30PM
 ```
-
+<br />
 
 ### `find` - Locating task by description
 
@@ -123,7 +129,7 @@ Here are the matching tasks in your list:
 1.T |0| borrow a book
 2.D |0| return book | 12 Aug 2021 6.30PM
 ```
-
+<br />
 
 ### `done` - Check Off Task when completed
 
@@ -137,7 +143,7 @@ Expected outcome:
 Nice! I've marked this task as done:
  T |1| borrow a book
 ```
-
+<br />
 
 ### `delete` - Delete task from list
 
@@ -152,7 +158,7 @@ Noted. I've removed this task:
  T |1| borrow a book
 Now you have 0 tasks in the list.
 ```
-
+<br />
 
 ### `update` - Provide instructions for update
 
@@ -169,7 +175,7 @@ edit-N/(Task Index) (New Task Name)
 To update Task Duration input:
 edit-D/(Task Index) (New Task Date and Time)
 ```
-
+<br />
 
 ### `edit-N` - Update Task Description
 
@@ -183,7 +189,7 @@ Expected outcome:
 Got it. I've updated this task:
 T |0| do homework
 ```
-
+<br />
 
 ### `edit-D` - Update Task Duration
 
@@ -197,7 +203,7 @@ Expected outcome:
 Got it. I've updated this task:
 D |0| concert | 14 Nov 2021 6.00PM
 ```
-
+<br />
 
 ### `bye` - Exits Duke
 
@@ -212,3 +218,4 @@ Exits Duke after the message below.
 ```
 Bye. Hope to see you again soon!
 ```
+<br />
