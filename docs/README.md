@@ -2,7 +2,7 @@
 
 ## About
 Ashy is your friendly chatbot that helps you keep track of to-dos, events and deadlines! Ashy will make sure you stay organised and productive! 
-<p style="text-align: center"> <img  width="350" src="Ui.png"/></p>
+<p style="text-align: center"> <img  width="500" src="Ui.png"/></p>
 
 ## Features 
 
@@ -22,7 +22,7 @@ Events are tasks that have a description and time frame.
 
 ### Task Management 
 A variety of tasks have been implemented in the Ashy ChatBot to allow you to manage your tasks more effectively! 
-<p> <img width="200" src="TaskManagment.png"/></p>
+<p> <img width="350" src="TaskManagment.png"/></p>
 The following are the commands you can use: 
 * Delete Tasks
 * Mark Tasks as Done
@@ -32,15 +32,15 @@ The following are the commands you can use:
 
 ### Save Tasks 
 The tasks you create in the Ashy ChatBot are saved to the hard-disk automatically! 
-<p> <img width="200" src="Save.png"/></p>
+<p> <img width="350" src="Save.png"/></p>
 
 ### Error Handling
 If you enter a wrong command by mistake, dont worry! The Ashy ChatBot has various error handling messages that are highlighted in red to guide you through!
-<p> <img width="200" src="ErrorHandling.png"/></p>
+<p> <img width="350" src="ErrorHandling.png"/></p>
 
 ### Help
 New to the Ashy ChatBot? You can use the help command to find out various features and how to implement them! 
-<p> <img width="200" src="Help.png"/></p>
+<p> <img width="350" src="Help.png"/></p>
 
 
 
