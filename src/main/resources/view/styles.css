@@ -13,3 +13,16 @@
     -fx-padding: 10, 0, 0, 0;
     -fx-background-color: linear-gradient(to bottom, #cdf9f9 5%, #8bafcf 100%);
 }
+.button{
+    -fx-background-color: #00cc00;
+    -fx-border-color: #008800;
+    -fx-border-width: 3;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: Sans-serif;
+    -fx-text-fill: white;
+}
+#userInput{
+    -fx-border-color: #8bafcf;
+    -fx-border-width: 3;
+}
