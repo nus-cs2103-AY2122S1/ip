@@ -28,7 +28,7 @@ Exits the application.
 
 ## Usage
 
-### Adds a Todo task - `todo (description)`
+### Todo - `todo (description)`
 
 Adds a Todo task with the task name `(description)`.
 
@@ -43,7 +43,7 @@ Expected outcome:
 `Now you have 1 tasks in the list.`
 
 
-### Adds a Deadline task - `deadline (description) /by (date)`
+### Deadline - `deadline (description) /by (date)`
 
 Adds a Deadline task with the task name `(description)` and `(date)`.
 
@@ -57,9 +57,9 @@ Expected outcome:
 `[D][] return book(by:Sep 30 2021)`<br />
 `Now you have 2 tasks in the list.`
 
-### `event (description) /at (period)` - Adds a Event task
+### Event - `event (description) /at (period)`
 
-Adds a Event task with the task name `(description)` and `(period)`.
+Adds an Event task with the task name `(description)` and `(period)`.
 
 Example of usage: 
 
@@ -71,7 +71,7 @@ Expected outcome:
 `[E][] team meeting(at:Aug 6th 2-4pm)`<br />
 `Now you have 3 tasks in the list.`
 
-### `doafter (description) /after (afterWhen)` - Adds a DoAfter task
+### DoAfter - `doafter (description) /after (afterWhen)` 
 
 Adds a DoAftertask with the task name `(description)` and `(afterWhen)`.
 
@@ -85,7 +85,7 @@ Expected outcome:
 `[DA][] return book(DoAfter:return book)`<br />
 `Now you have 4 tasks in the list.`
 
-### `list` - Lists all tasks
+### List - `list`
 
 All the tasks in the list will be shown.
 
@@ -101,7 +101,7 @@ Expected outcome:
 `4.[DA][] return book(DoAfter:return book)`
 
 
-### `done (task number)` - Marks task as done
+### Done - `done (task number)`
 
 Task with the specified `(task number)` will be marked as done.
 
@@ -114,7 +114,7 @@ Expected outcome:
 `Nice! I've marked this task as done:`<br />
 `[T][X] read book`
 
-### `delete (task number)` - Deletes a task
+### Delete - `delete (task number)`
 
 Task with the specified `(task number)` will be deleted.
 
@@ -128,7 +128,7 @@ Expected outcome:
 `[T][X] read book`<br />
 `Now you have 3 tasks in the list.`
 
-### `find (keyword)` - Finds a task
+### Find - `find (keyword)`
 
 Finds task whose names contain the given `(keywords)`.
 
@@ -142,7 +142,7 @@ Expected outcome:
 `[D][] return book(by:Sep 30 2021)`<br />
 `[DA][] return book(DoAfter:return book)`
 
-### `bye` - Exits the application
+### Bye - `bye`
 
 Shows a goodbye message and exits the application.
 
