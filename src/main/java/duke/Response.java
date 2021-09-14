@@ -9,21 +9,21 @@ import duke.tasks.Task;
  */
 public class Response {
     /**
-     * Method to show message to warn user that task number is missing.
+     * Shows message to warn user that task number is missing.
      */
     public static String showWarningMissingNumber() {
         return "OOPS!!! To delete a task, the task number must be stated.";
     }
 
     /**
-     * Method to show message to warn user that keyword is missing.
+     * Shows message to warn user that keyword is missing.
      */
     public static String showWarningMissingKeyword() {
         return "OOPS!!! To find a task, a keyword must be stated.";
     }
 
     /**
-     * Method that warns user that there is a missing description for the task.
+     * Warns user that there is a missing description for the task.
      *
      * @param command The command keyword in the user input.
      * @return The warning when there is a missing description.
@@ -42,7 +42,7 @@ public class Response {
     }
 
     /**
-     * Method to show message prompting user that command is invalid or wrong.
+     * Shows message prompting user that command is invalid or wrong.
      *
      * @return The message when a user provides an invalid input.
      */
@@ -51,7 +51,7 @@ public class Response {
     }
 
     /**
-     * Method to show message after successfully marking task as complete.
+     * Shows message after successfully marking task as complete.
      *
      * @return The message when task has been completed.
      */
@@ -61,7 +61,7 @@ public class Response {
     }
 
     /**
-     * Method to show added task, along with updated number of tasks in list.
+     * Shows added task, along with updated number of tasks in list.
      * @param task The task to be added.
      * @param numTasks Number of tasks in the arraylist.
      * @return Message after successfully adding task.

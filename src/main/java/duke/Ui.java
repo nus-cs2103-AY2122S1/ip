@@ -51,14 +51,14 @@ public class Ui {
     }
 
     /**
-     * Method to show welcome message to user.
+     * Shows welcome message to user.
      */
     public static void showWelcomeMessage() {
         showToUser(LOGO, WELCOME_MESSAGE, LINE, HELP_MESSAGE, LINE);
     }
 
     /**
-     * Method to show message to warn user that task number is missing.
+     * Shows message to warn user that task number is missing.
      */
     public static void showWarningMissingNumber() {
         String message = "OOPS!!! To delete a task, the task number must be stated.";
@@ -66,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Method to show message to warn user that keyword is missing.
+     * Shows message to warn user that keyword is missing.
      */
     public static void showWarningMissingKeyword() {
         String message = "OOPS!!! To find a task, a keyword must be stated.";
@@ -74,7 +74,8 @@ public class Ui {
     }
 
     /**
-     * Method that warns user that there is a missing description for the task.
+     * Warns user that there is a missing description for the task.
+     *
      * @param command Command word from user input.
      */
     public static void showWarningMissingDescription(String command) {
@@ -95,7 +96,7 @@ public class Ui {
     }
 
     /**
-     * Method to show goodbye message when user exits programme with command bye.
+     * Shows goodbye message when user exits programme with command bye.
      */
     public static void showGoodbyeMessage() {
         String message = "     Bye. Hope to see you again soon!";
@@ -103,7 +104,7 @@ public class Ui {
     }
 
     /**
-     * Method to show message prompting user that command is invalid or wrong.
+     * Shows message prompting user that command is invalid or wrong.
      */
     public static void showInvalidInputMessage() {
         String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
@@ -111,7 +112,7 @@ public class Ui {
     }
 
     /**
-     * Method to show message after successfully marking task as complete.
+     * Shows message after successfully marking task as complete.
      */
     public static void showCompletedMessage() {
         String message = "Nice! I've marked this task as done:";
@@ -119,14 +120,15 @@ public class Ui {
     }
 
     /**
-     * Method to show line divider.
+     * Shows line divider.
      */
     public static void showLine() {
         System.out.println(LINE);
     }
 
     /**
-     * Method to show added task, along with uodated number of tasks in list.
+     * Shows added task, along with uodated number of tasks in list.
+     *
      * @param taskName Task to be added.
      * @param numTasks Number of tasks in the arraylist.
      */
