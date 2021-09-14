@@ -16,3 +16,4 @@ E | 0 | do homework | evening
 T | 0 | buy milk
 E | 0 | buy milk | Sunday
 D | 1 | buy milk | Sunday
+T | 0 | sadfasf
