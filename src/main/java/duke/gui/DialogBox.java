@@ -1,70 +1,80 @@
+// Credit: Chan Jun Da, @fyshhh
 package duke.gui;
-
-import java.io.IOException;
-import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * DialogBox class that represents the messages sent by and to the user.
  */
-public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
-    @FXML
-    private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dialog.setText(text);
-        displayPicture.setImage(img);
-        dialog.setMinHeight(Region.USE_PREF_SIZE);
-        dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY,
-                new CornerRadii(5), Insets.EMPTY)));
-        dialog.setPadding(new Insets(10));
+public class DialogBox extends HBox {
+
+    /** default spacing between dialog and text box */
+    private static final double SPACING = 10;
+
+    /**
+     * Constructor that creates a DialogBox object, with a text message depending on
+     * the input, an image of the sender of the message, and a boolean that determines
+     * if the text box should be oriented leftwards or rightwards.
+     * @param text a String representing the message to be shown on the text box.
+     * @param imageview an ImageView representing a picture of the sender of the message.
+     * @param left a boolean representing if the text box should be oriented leftwards.
+     */
+
+    private DialogBox(String text, ImageView imageview, boolean left) {
+        TextBox output = left
+                ? TextBox.leftwardTextBox(text)
+                : TextBox.rightwardTextBox(text);
+
+        imageview.setClip(new Circle(50, 50, 50));
+        imageview.setFitWidth(100.0);
+        imageview.setFitHeight(100.0);
+        getChildren().addAll(output, imageview);
+
+        setAlignment(Pos.TOP_RIGHT);
+        setSpacing(SPACING);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the alignment of the DialogBox, moving it such that it better reflects a
+     * two-way dialogue.
+     * @return a flipped DialogBox.
      */
-    private void flip() {
+
+    private DialogBox flip() {
+        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        FXCollections.reverse(tmp);
+        this.getChildren().setAll(tmp);
+        return this;
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    /**
+     * Returns a DialogBox that formats the user's message and picture into a text message.
+     * @param message a String representing the user's message.
+     * @param iv an ImageView representing the user's picture.
+     * @return a DialogBox with the user's message and picture in the format of a text message.
+     */
+
+    public static DialogBox getUserDialog(String message, ImageView iv) {
+        return new DialogBox(message, iv, false);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    /**
+     * Returns a DialogBox that formats Olivia's message and picture into a text message.
+     * @param message a String representing the Olivia's message.
+     * @param iv an ImageView representing the Olivia's picture.
+     * @return a DialogBox with the Olivia's message and picture in the format of a text message.
+     */
+
+    public static DialogBox getDukeDialog(String message, ImageView iv) {
+        return new DialogBox(message, iv, true).flip();
     }
+
 }
