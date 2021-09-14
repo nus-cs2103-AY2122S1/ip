@@ -36,7 +36,6 @@ Each task has the following attributes and is displayed in the format `type | st
 #### Add a todo: `todo`
 - Format: `todo TASK`
 - Example: `todo buy gift`
-- Output: ``
 
 #### Add a deadline: `deadline`
 - Format: `deadline TASK /by DATE`
