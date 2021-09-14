@@ -30,7 +30,7 @@ Okay! I've added the following:
 ```
 ___
 
-### Add event: `event`
+### Add Event: `event`
 Adds an Event task to the list of tasks.
 
 Format : `event EVENT_NAME /at EVENT_DESCRIPTION`
@@ -59,7 +59,7 @@ Okay! I've added the following:
 ```
 ---
 
-### List tasks: `list`
+### List Tasks: `list`
 Lists out all the tasks.
 
 Format : `list`
@@ -102,7 +102,7 @@ Oki! The tag fun has been added. Here is the modified task!
 ```
 
 ---
-### Delete tasks: `delete`
+### Delete Tasks: `delete`
 Delete tasks from list of tasks.
 
 Format : `delete INDEX`
@@ -137,10 +137,10 @@ Exits the program.
 Format: `bye`
 
 ---
-##**FAQ**
+## FAQ  
 Q: How do I save my progress?  
 A: Data is automatically saved in your computer :)
 
 Q: Why does my jar file not run?  
-A: Check the data/duke.txt file if there are any errors, or clear it if it does not work. 
+A: Check the data/duke.txt file if there are any errors, or clear it if it does not work.   
 Do note that doing so erases your progress. 
