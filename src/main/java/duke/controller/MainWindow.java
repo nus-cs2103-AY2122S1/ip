@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final String USER_IMG_DIR = "/images/bezos.png";
-    private final String DUKE_IMG_DIR = "/images/elon.jpg";
+    private final String USER_IMG_DIR = "/images/carrot.png";
+    private final String DUKE_IMG_DIR = "/images/apple.png";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMG_DIR));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMG_DIR));

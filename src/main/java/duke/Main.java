@@ -25,13 +25,13 @@ public class Main extends Application {
         }
     }
 
-    private final String LOGO_DIR = "/images/telegram.png";
+    private final String LOGO_DIR = "/images/fruits.png";
 
     private final String MAIN_WINDOW_DIR = "/view/MainWindow.fxml";
 
     private final String CSS_DIR = "/css/index.css";
 
-    private final String GUI_TITLE = "Duke on Telegram";
+    private final String GUI_TITLE = "Sync-Me Sebby";
 
     private Image logo = new Image(this.getClass().getResourceAsStream(LOGO_DIR));
 
