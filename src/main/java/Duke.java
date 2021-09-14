@@ -1,8 +1,8 @@
-import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * The main class for the Duke program, which manages tasks for the user.

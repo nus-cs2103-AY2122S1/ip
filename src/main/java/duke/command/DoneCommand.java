@@ -1,25 +1,28 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.InvalidIndexException;
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
 
 /**
  * Represents a Command to mark a Task as 'done' on the TaskList.
  */
 public class DoneCommand extends Command {
 
-    private int index;
-    private String reply;
+    private String[] strIndexes;
+    private int validCount = 0;
+    private String reply = "Nice! I've marked these tasks as done:\n";
+    private String invalid = "The following entries are invalid: ";
+    private final String allValid = "There were no invalid entries entered.";
 
     /**
      * The constructor for a DoneCommand object.
      *
-     * @param index The given index of the Task to be marked as 'done'.
+     * @param strIndexes The given indexes of the Tasks to be marked as 'done'.
      */
-    public DoneCommand(int index) {
-        this.index = index;
+    public DoneCommand(String[] strIndexes) {
+        this.strIndexes = strIndexes;
     }
 
     /**
@@ -32,13 +35,47 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (index > tasks.getSize()) {
+        for (int i = 0; i < strIndexes.length; i++) {
+            if (!isInt(strIndexes[i])) {
+                invalid += strIndexes[i] + " ";
+                continue;
+            }
+
+            int index = Integer.parseInt(strIndexes[i]) - 1;
+            boolean isValidInt = index >= 0 && index <= tasks.getSize();
+            if (!isValidInt) {
+                invalid += strIndexes[i] + " ";
+                continue;
+            }
+
+            validCount++;
+            tasks.doneTask(index);
+            reply += tasks.getTask(index) + System.lineSeparator();
+        }
+
+        if (validCount == 0) {
             throw new InvalidIndexException();
         }
 
-        tasks.doneTask(index);
-        reply = "Nice! I've marked this task as done:\n" + "  " + tasks.getTask(index);
         storage.update(tasks);
-        return reply;
+        if (validCount == strIndexes.length) {
+            return reply + allValid;
+        } else {
+            return reply + invalid;
+        }
+    }
+
+    private static boolean isInt(String str) {
+        if (str == null) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
     }
 }

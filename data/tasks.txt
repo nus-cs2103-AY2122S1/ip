@@ -1,7 +1,3 @@
-T | 1 | read some stuff
-T | 1 | read book
-T | 1 | sleep
-T | 0 | read a book
-T | 0 | go to school
-T | 0 | new task
-D | 0 | homework | 2021-06-05
+D | 1 | homework | 2021-06-05
+T | 1 | test 1
+T | 0 | test 3

@@ -7,6 +7,11 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.EmptySearchQueryException;
+import duke.exception.NoDescriptionException;
+import duke.exception.NoKeywordException;
+import duke.exception.NoNumberException;
 
 /**
  * Parses input from the user from a given string into arguments for other
@@ -45,41 +50,6 @@ public class Parser {
             return checkExit(parsedArr);
         default:
             throw new DukeException();
-        }
-    }
-
-    /**
-     * Parses <code>done</code> and <code>delete</code> commands in order to
-     * extract task index from the user input.
-     *
-     * @param command The <code>done</code> or <code>delete</code> command.
-     * @param rest The rest of the user's string input.
-     * @return Command to be executed.
-     * @throws DukeException If <code>rest</code> is not a legitimate integer.
-     */
-    private static Command parseFurther(String command, String rest) throws DukeException {
-
-        int index;
-
-        try {
-            index = Integer.parseInt(rest) - 1;
-
-            if (index < 0) {
-                throw new InvalidIndexException();
-            }
-        } catch (NumberFormatException e) {
-            throw new NoNumberException(command);
-        }
-
-        switch(command) {
-        case "done":
-            return new DoneCommand(index);
-
-        case "delete":
-            return new DeleteCommand(index);
-
-        default:
-            throw new AssertionError(command);
         }
     }
 
@@ -123,20 +93,24 @@ public class Parser {
         return new AddCommand(strArr[0], strArr[1]);
     }
 
-    private static Command checkDelete(String[] strArr) throws DukeException {
-        if (strArr.length < 2) {
-            throw new NoNumberException(strArr[0]);
-        }
-
-        return parseFurther(strArr[0], strArr[1]);
-    }
-
     private static Command checkDone(String[] strArr) throws DukeException {
         if (strArr.length < 2) {
             throw new NoNumberException(strArr[0]);
         }
 
-        return parseFurther(strArr[0], strArr[1]);
+        String[] strIndex = strArr[1].split("\\s");
+
+        return new DoneCommand(strIndex);
+    }
+
+    private static Command checkDelete(String[] strArr) throws DukeException {
+        if (strArr.length < 2) {
+            throw new NoNumberException(strArr[0]);
+        }
+
+        String[] strIndex = strArr[1].split("\\s");
+
+        return new DeleteCommand(strIndex);
     }
 
     private static Command checkFind(String[] strArr) throws DukeException {

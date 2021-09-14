@@ -1,26 +1,27 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.InvalidIndexException;
 import duke.Storage;
 import duke.TaskList;
-import duke.task.Task;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
 
 /**
  * Represents a Command to delete a Task from the TaskList.
  */
 public class DeleteCommand extends Command {
 
-    private int index;
-    private String reply;
+    private String[] strIndexes;
+    private int validCount = 0;
+    private String reply = "Noted. I've removed these tasks:\n";
+    private String invalid = "The following entries are invalid: ";
 
     /**
      * The constructor for a DeleteCommand object.
      *
-     * @param index The given index of the Task to be deleted.
+     * @param strIndexes The given indexes of the Tasks to be deleted.
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String[] strIndexes) {
+        this.strIndexes = strIndexes;
     }
 
     /**
@@ -33,19 +34,51 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (index > tasks.getSize()) {
+        for (int i = 0; i < strIndexes.length; i++) {
+            if (!isInt(strIndexes[i])) {
+                invalid += strIndexes[i] + " ";
+                continue;
+            }
+
+            int index = Integer.parseInt(strIndexes[i]) - 1;
+            boolean isValidInt = index >= 0 && index <= tasks.getSize();
+            if (!isValidInt) {
+                invalid += strIndexes[i] + " ";
+                continue;
+            }
+
+            validCount++;
+            reply += tasks.getTask(index) + System.lineSeparator();
+            tasks.deleteTask(index);
+        }
+
+        if (validCount == 0) {
             throw new InvalidIndexException();
         }
 
-        Task deletedTask = tasks.getTask(index);
-        tasks.deleteTask(index);
-        reply = createReply(deletedTask, tasks.getSize());
         storage.update(tasks);
-        return reply;
+        if (validCount == strIndexes.length) {
+            return reply + displayNumOfTasks(tasks.getSize());
+        } else {
+            return reply + invalid + System.lineSeparator() + displayNumOfTasks(tasks.getSize());
+        }
     }
 
-    private static String createReply(Task task, int size) {
-        return "Noted. I've removed this task:\n" + "  " + task
-                + System.lineSeparator() + "Now you have " + size + " tasks in the list.";
+    private static String displayNumOfTasks(int size) {
+        return "Now you have " + size + " tasks in the list.";
+    }
+
+    private static boolean isInt(String str) {
+        if (str == null) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
     }
 }

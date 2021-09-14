@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
-
+import duke.exception.DukeException;
 
 public class ParserTest {
 
