@@ -23,7 +23,7 @@ public class Storage {
     /**
      * Loads tasks.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     public void loadTasks(TaskList taskList) {
         try {
@@ -36,7 +36,7 @@ public class Storage {
     /**
      * Saves tasks to file.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     public void saveTasksToFile(TaskList taskList) {
         try {

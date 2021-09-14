@@ -59,7 +59,7 @@ public abstract class Command {
     /**
      * Executes operation on TaskList.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     public void execute(TaskList taskList) {
     }

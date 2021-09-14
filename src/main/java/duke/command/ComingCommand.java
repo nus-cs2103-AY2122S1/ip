@@ -27,7 +27,7 @@ public class ComingCommand extends Command {
     /**
      * Finds coming tasks from TaskList.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     @Override
     public void execute(TaskList taskList) {

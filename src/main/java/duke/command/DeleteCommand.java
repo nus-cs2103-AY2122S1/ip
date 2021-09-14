@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
     /**
      * Deletes task by number extracted from command.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     @Override
     public void execute(TaskList taskList) {

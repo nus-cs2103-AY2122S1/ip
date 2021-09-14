@@ -76,8 +76,8 @@ public class DukeController extends AnchorPane implements Message {
     /**
      * Adds DukeDialog with content.
      *
-     * @param messageType Message type.
-     * @param content Content.
+     * @param messageType Message type to identify the content color.
+     * @param content Content that will be shown in the dialog.
      */
     public void addDukeDialog(MessageType messageType, String content) {
         if (dialogContainer == null) {
@@ -115,7 +115,7 @@ public class DukeController extends AnchorPane implements Message {
     /**
      * Adds UserDialog with content.
      *
-     * @param content Content.
+     * @param content Content that will be shown in the dialog.
      */
     public void addUserDialog(String content) {
         if (dialogContainer == null) {

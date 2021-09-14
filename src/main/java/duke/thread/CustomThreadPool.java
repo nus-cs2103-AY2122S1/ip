@@ -68,7 +68,7 @@ public class CustomThreadPool {
     /**
      * Executes Thread.
      *
-     * @param runnable Runnable.
+     * @param runnable Runnable object.
      */
     public void execute(Runnable runnable) {
         if (mExecutorService.isShutdown()) {
@@ -86,7 +86,7 @@ public class CustomThreadPool {
     }
 
     /**
-     * Release ThreadPool ExecutorService.
+     * Releases ThreadPool ExecutorService.
      */
     public void release() {
         if (isShutdown()) {

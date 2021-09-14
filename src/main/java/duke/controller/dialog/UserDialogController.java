@@ -20,7 +20,7 @@ public class UserDialogController extends DialogController {
     /**
      * Constructs a UserDialogController object.
      *
-     * @param text Content will be shown.
+     * @param text Content that will be shown in the dialog.
      * @throws IOException If Fxml resource does not exist.
      */
     public UserDialogController(String text)
@@ -32,7 +32,7 @@ public class UserDialogController extends DialogController {
     /**
      * Constructs a UserDialogController object.
      *
-     * @param text Content will be shown.
+     * @param text Content that will be shown in the dialog.
      * @param height UserDialogController height.
      * @throws IOException If Fxml resource does not exist.
      */

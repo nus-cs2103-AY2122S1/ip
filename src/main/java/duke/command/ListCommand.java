@@ -25,7 +25,7 @@ public class ListCommand extends Command {
     /**
      * Prints tasks from TaskList.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     @Override
     public void execute(TaskList taskList) {

@@ -22,7 +22,7 @@ public class ClearCommand extends Command {
     /**
      * Clears all tasks.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     @Override
     public void execute(TaskList taskList) {

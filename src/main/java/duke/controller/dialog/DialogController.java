@@ -46,7 +46,7 @@ public class DialogController extends HBox {
      * Adds MessageBox to dialog.
      *
      * @param dialog Dialog for the MessageBox.
-     * @param text Content will be shown.
+     * @param text Content that will be shown in the dialog.
      * @param color Content text color.
      * @param layoutX MessageBox layoutX.
      * @param layoutY MessageBox layoutY.

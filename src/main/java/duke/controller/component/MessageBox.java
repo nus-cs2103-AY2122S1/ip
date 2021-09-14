@@ -21,20 +21,20 @@ public class MessageBox extends Label {
     /**
      * Constructs a MessageBox object.
      *
-     * @param text Content will be shown.
+     * @param content Content that will be shown in the dialog.
      * @param layoutX MessageBox layoutX.
      * @param layoutY MessageBox layoutY.
      */
-    public MessageBox(String text, double layoutX, double layoutY) {
+    public MessageBox(String content, double layoutX, double layoutY) {
         super();
         init(layoutX, layoutY);
-        setText(text);
+        setText(content);
     }
 
     /**
      * Constructs a MessageBox object.
      *
-     * @param text Content will be shown.
+     * @param text Content that will be shown in the dialog.
      * @param color Content text color.
      * @param layoutX MessageBox layoutX.
      * @param layoutY MessageBox layoutY.

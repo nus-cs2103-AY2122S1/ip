@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
     /**
      * Completes task by number extracted from command.
      *
-     * @param taskList TaskList.
+     * @param taskList TaskList object.
      */
     @Override
     public void execute(TaskList taskList) {
