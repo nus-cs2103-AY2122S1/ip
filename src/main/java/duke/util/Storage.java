@@ -114,7 +114,7 @@ public class Storage {
     }
 
     /**
-     * Save tasks to storage.
+     * Saves tasks to storage.
      *
      * @param taskList Tasks to be saved to storage.
      * @throws DukeException If tasks cannot be saved to storage.

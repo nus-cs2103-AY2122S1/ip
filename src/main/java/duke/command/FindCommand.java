@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     private final String keyword;
 
     /**
-     * Construct a FindCommand to find all task(s) with the given keyword in the list of tasks.
+     * Constructs a FindCommand to find all task(s) with the given keyword in the list of tasks.
      *
      * @param keyword Keyword to be used to find all task(s) in the list of tasks.
      */
