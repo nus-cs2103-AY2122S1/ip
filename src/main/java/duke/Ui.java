@@ -104,7 +104,7 @@ public class Ui {
      */
     public static String listTasks() {
         int num = 1;
-        String result = "\t" + Ui.NO_TASKS; // If there are no tasks in the list
+        String result = Ui.NO_TASKS; // If there are no tasks in the list
 
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {
             if (i == 0) {
@@ -225,7 +225,7 @@ public class Ui {
      */
     public static String listNotes() {
         int num = 1;
-        String result = "\t" + Ui.NO_NOTES;
+        String result = Ui.NO_NOTES;
 
         for (int i = 0; i < NoteList.getNoteList().size(); i++) {
             if (i == 0) {
