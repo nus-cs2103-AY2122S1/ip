@@ -10,7 +10,7 @@ public abstract class BaseTask {
     private boolean isDone;
 
     /**
-     * This enum identifies the different types of tasks available.
+     * Identifies the different types of tasks available.
      */
     public enum TaskType {
         NONE,
@@ -22,7 +22,7 @@ public abstract class BaseTask {
 
 
     /**
-     * A constructor for the Base Task used to directly create new tasks.
+     * Creates a new Base Task, used to directly create new tasks.
      *
      * @param taskName The name and description of the task.
      * @param isDone True if task was already completed, false if task is still incomplete.
@@ -63,8 +63,7 @@ public abstract class BaseTask {
     }
 
     /**
-     * Gets the name/description of the task, as well as whether it is done
-     * neatly formatted in one line.
+     * Gets the name/description of the task, as well as whether it is done neatly formatted in one line.
      *
      * @return the String containing the line describing the task.
      */
@@ -130,7 +129,8 @@ public abstract class BaseTask {
     }
 
     /**
-     * Check the type of task represented by the current command.
+     * Checks the type of task represented by the current command.
+     *
      * @param command The command inputted by the user.
      * @return the task type. Returns NONE if it is not a task.
      */
@@ -147,7 +147,8 @@ public abstract class BaseTask {
     }
 
     /**
-     * Given the short form representing a task type, this function returns the enum representing it.
+     * Gives the short form representing a task type, this function returns the enum representing it.
+     *
      * @param taskLetter the letter of the task type that is wanted.
      * @return the enum representing the wanted task type.
      */

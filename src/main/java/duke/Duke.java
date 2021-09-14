@@ -29,7 +29,6 @@ public class Duke {
         // Processes the path to use to access storage file
         try {
             Path xmlPath = Paths.get("dukeDocs", "listSave1.xml");
-            //System.out.println(xmlPath.getFileName());
             this.currStorageMgr = new DukeStorageManager(xmlPath);
         } catch (InvalidPathException e) {
             // If there was an error loading the save file, then create a new empty one.
@@ -45,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Use to get the current instance of Duke that is running.
+     * Gets the current instance of Duke that is running.
      * Creates a new instance of Duke if there is none running.
      *
      * @return the Duke object that is running.
@@ -86,7 +85,7 @@ public class Duke {
 
 
     /**
-     * The main method that starts the whole program.
+     * Runs the main method that starts the whole program.
      *
      * @param currDuke The instance of Duke to start.
      */
@@ -96,18 +95,12 @@ public class Duke {
         currDuke.getCurrStorageMgr().reloadSaveFromXmlDoc();
 
         System.out.println("Duke is running in the folder: " + System.getProperty("user.dir"));
-
-        // Show Welcome Message
-        // currDuke.currUiCtrl.printWelcomeMessage();
-
-        // Start accepting input (Not necessary anymore)
-        // currDuke.runInputLoopMain();
     }
 
 
 
     /**
-     * Use when the user enters something new in the GUI, in order to process the command.
+     * Processes command when the user enters something new in the GUI.
      *
      * @param lastInput What the user entered into the GUI.
      */
@@ -160,9 +153,9 @@ public class Duke {
     }
 
     /**
-     * Used when Duke is supposed to say something.
+     * Adds to Duke UI buffer when Duke is supposed to say something.
      *
-     * @param printThis The message to print inside Duke's text bubble
+     * @param printThis The message to print inside Duke's text bubble.
      */
     public static void dukeSays(String printThis) {
         Duke currDuke = Duke.getCurrDuke();
@@ -172,12 +165,10 @@ public class Duke {
         // Updated to work with new UI Controller which contains a buffer
         currDuke.currUiCtrl.addToDukeBuffer(printThis);
 
-        // Buffer release is now done by Main Window
-        // currDuke.currUiCtrl.dukeBufferRelease();
     }
 
     /**
-     * Used to add something that Duke will say later into it's UI buffer.
+     * Adds something that Duke will say later into it's UI buffer.
      *
      * @param printLater The message that Duke will say when the buffer is released.
      */
@@ -190,7 +181,7 @@ public class Duke {
     }
 
     /**
-     * Used to empty the text buffer containing what Duke is going to say.
+     * Empties the text buffer containing what Duke is going to say.
      *
      * @return what Duke is going to say.
      */
@@ -206,7 +197,7 @@ public class Duke {
     }
 
     /**
-     * Used to get the Welcome Message in String form. Also prints the welcome message in the console.
+     * Gets the Welcome Message in String form. Also prints the welcome message in the console.
      *
      * @return the Welcome Message.
      */

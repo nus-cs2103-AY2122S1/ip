@@ -18,9 +18,6 @@ public class Main extends Application {
     private Duke currDuke = Duke.getCurrDuke();
 
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void start(Stage stage) {
 

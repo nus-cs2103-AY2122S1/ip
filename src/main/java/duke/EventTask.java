@@ -9,7 +9,7 @@ public class EventTask extends BaseTask {
     private String atContents;
 
     /**
-     * Constructor for creating a new Event Task.
+     * Constructs a new Event Task.
      *
      * @param taskName the name or description of the task.
      * @param atContents describes where the task should be completed at.
@@ -20,7 +20,7 @@ public class EventTask extends BaseTask {
     }
 
     /**
-     * Used for creating a new Event Task with ability to set all attributes.
+     * Creates a new Event Task with ability to set all attributes.
      *
      * @param taskName the name or description of the task.
      * @param atContents describes where the task should be completed at.

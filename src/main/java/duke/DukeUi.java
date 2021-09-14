@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class DukeUi {
 
-
     /** Default line separator designs. */
     private static String sepLine = "===========================================";
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
@@ -16,9 +15,8 @@ public class DukeUi {
     /** Buffer containing what Duke is going to say. */
     private ArrayList<String> dukeUiBuffer;
 
-
     /**
-     * Constructor for a new Duke UI Manager
+     * Constructs a new Duke UI Manager.
      */
     public DukeUi() {
         dukeUiBuffer = new ArrayList<>();
@@ -27,6 +25,7 @@ public class DukeUi {
 
     /**
      * Adds a string into Duke's UI buffer for printing later.
+     *
      * @param addThis the String to add into the buffer.
      */
     public void addToDukeBuffer(String addThis) {
@@ -36,8 +35,7 @@ public class DukeUi {
 
 
     /**
-     * Used to release what Duke wants to say from the buffer.
-     * This would print the message between 2 line separators.
+     * Releases what Duke wants to say from the buffer. Prints the message between 2 line separators.
      *
      * @return the String containing what Duke says at one go.
      */
@@ -81,7 +79,7 @@ public class DukeUi {
     }
 
     /**
-     * Add the help screen for Duke into the UI buffer.
+     * Adds the help screen for Duke into the UI buffer.
      */
     public void showHelpScreen() {
         addToDukeBuffer("Welcome to Seagull Help!!!");
@@ -112,8 +110,6 @@ public class DukeUi {
         addToDukeBuffer("");
         addToDukeBuffer("bye    >> Closes me :(");
         addToDukeBuffer("help OR help <anything>  >> Shows this help screen.");
-
-
     }
 
 }

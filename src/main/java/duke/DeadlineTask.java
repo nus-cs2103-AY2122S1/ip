@@ -17,11 +17,11 @@ public class DeadlineTask extends BaseTask {
 
 
     /**
-     * Used for creating a new Deadline Task.
+     * Creates a new Deadline Task.
      *
      * @param taskName the name or description of the task.
      * @param byWhen describes when the task should be completed by.
-     *               (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY)
+     *               (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY).
      * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
     public DeadlineTask(String taskName, String byWhen) throws DukeExceptionBase {
@@ -30,7 +30,7 @@ public class DeadlineTask extends BaseTask {
     }
 
     /**
-     * Used for creating a new Deadline Task with ability to set all attributes.
+     * Creates a new Deadline Task with ability to set all attributes.
      *
      * @param taskName the name or description of the task.
      * @param byWhen describes when the task should be completed by.
@@ -44,6 +44,7 @@ public class DeadlineTask extends BaseTask {
 
     /**
      * Stores the byWhen data of this Deadline Task, in LocalDate form.
+     *
      * @param byWhen the time the task is upposed to be done by.
      * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
@@ -80,6 +81,7 @@ public class DeadlineTask extends BaseTask {
 
     /**
      * Gets the String representation of the by when.
+     *
      * @return String representation of the LocalDate or an empty String if the Date field is empty.
      */
     private String getByWhenStr() {

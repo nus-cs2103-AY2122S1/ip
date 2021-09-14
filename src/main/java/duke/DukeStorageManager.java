@@ -31,15 +31,14 @@ public class DukeStorageManager {
     /** The local storage file. */
     private File saveFile = null;
 
-    /** The Document (XML) file after the saveFile is loaded */
+    /** The Document (XML) file after the saveFile is loaded. */
     private Document xmlSaveFileDoc = null;
 
-    /** ArrayList to contain loaded tasks before sending over to ListManager */
+    /** ArrayList to contain loaded tasks before sending over to ListManager. */
     private ArrayList<BaseTask> loadedTasks = new ArrayList<>();
 
     /**
-     * Loads storage file from the provided path.
-     * If failed then calls the method to create a new blank file instead.
+     * Loads storage file from the provided path. If failed then calls the method to create a new blank file instead.
      *
      * @param savePath the path to the save file.
      * @throws DukeExceptionBase when there are errors while loading the save file.
@@ -73,7 +72,7 @@ public class DukeStorageManager {
     }
 
     /**
-     * Constructor to create a new blank file for use as storage instead of loading.
+     * Creates a new blank file for use as storage instead of loading.
      */
     public DukeStorageManager() {
         this.createBlankSaveFile();
@@ -111,8 +110,7 @@ public class DukeStorageManager {
     }
 
     /**
-     * Run this to reload the save data from the XML doc obj into Duke's
-     * List Manager.
+     * Reloads the save data from the XML doc obj into Duke's List Manager.
      */
     public void reloadSaveFromXmlDoc() {
         if (this.xmlSaveFileDoc == null) {

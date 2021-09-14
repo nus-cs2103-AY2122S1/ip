@@ -10,10 +10,6 @@ integrated task list, you can easily add and remove tasks,
 mark a task as done, as well as searching through them easily!
 
 <br>
-Sample Image of the Seagull Tasker being used: 
-
-![Ui Sample Image](Ui.png)
-
 
 ## Installation
 Go to the [Releases](https://github.com/TLChicken/ip/releases) page
@@ -208,9 +204,6 @@ Example of usage:
 Expected outcome: The app shuts down.
 
 
-
-
-## Command Summary
 
 
 

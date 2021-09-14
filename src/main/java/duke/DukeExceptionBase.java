@@ -8,7 +8,8 @@ public class DukeExceptionBase extends Exception {
     private String exceptionMsg;
 
     /**
-     * Constructor to create a new Duke Exception.
+     * Creates a new Duke Exception.
+     *
      * @param msg The message that Duke will print due to this exception.
      */
     public DukeExceptionBase(String msg) {
@@ -16,14 +17,15 @@ public class DukeExceptionBase extends Exception {
     }
 
     /**
-     * Ask Duke to print out this exception's error message.
+     * Asks Duke to print out this exception's error message.
      */
     public void dukeSayErrorMsg() {
         Duke.dukeSays(this.exceptionMsg);
     }
 
     /**
-     * The exception's toString method to print out the exception message.
+     * Prints out the exception message.
+     *
      * @return the exception message for the current exception object.
      */
     @Override

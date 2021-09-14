@@ -8,7 +8,7 @@ package duke;
 public class DukeCommandParser {
 
     /**
-     * This enum identifies the different possible command types.
+     * Identifies the different possible command types.
      */
     public enum CommandType {
         ADD_TASK,
@@ -32,6 +32,7 @@ public class DukeCommandParser {
 
     /**
      * Parses the given command input and return the command type.
+     *
      * @param cmd The command input to parse.
      * @return the type of the command.
      */

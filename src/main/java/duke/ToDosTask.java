@@ -7,7 +7,7 @@ package duke;
 public class ToDosTask extends BaseTask {
 
     /**
-     * Constructor for creating a new To Do Task.
+     * Creates a new To Do Task.
      *
      * @param taskName the name or description of the task.
      */
@@ -17,8 +17,7 @@ public class ToDosTask extends BaseTask {
 
 
     /**
-     * Constructor for directly creating and setting all attributes of a To Do Task,
-     * for example when loading it from a Save File.
+     * Creates and directly sets all attributes of a To Do Task, for example when loading it from a Save File.
      *
      * @param taskName the name or description of the task.
      * @param isCompleted whether the task is already completed.

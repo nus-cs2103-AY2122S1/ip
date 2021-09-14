@@ -10,14 +10,14 @@ public class DukeListMgr {
     private ArrayList<BaseTask> toDoList = new ArrayList<>();
 
     /**
-     * Constructor to create a new list manager.
+     * Creates a new list manager.
      */
     public DukeListMgr() {
 
     }
 
     /**
-     * Used for adding things to the to do list.
+     * Adds things to the to do list.
      *
      * @param str   Thing to add to the list.
      * @param currTaskType The type of the task to add.
@@ -27,8 +27,6 @@ public class DukeListMgr {
         assert (this.toDoList != null) : "Duke internal List is missing!";
 
         BaseTask createdTask;
-
-        int indexOfSlash = -1;
 
         switch (currTaskType) {
         case TODO:
@@ -108,16 +106,16 @@ public class DukeListMgr {
 
 
     /**
-     * Used to mark the corresponding task as done.
+     * Marks the corresponding task as done.
      *
      * @param taskNo The task number in the list.
-     * @return Duke's output from this command
+     * @return Duke's output from this command.
      * @throws DukeExceptionBase when an invalid task is specified or if task is already done.
      */
     public String markTaskAsDone(int taskNo) throws DukeExceptionBase {
         assert (this.toDoList != null) : "Duke internal List is missing!";
-        //Task list starts from 1 instead of 0 so input in command is 1 more than
-        //the task's index in the list
+        // Task list starts from 1 instead of 0 so input in command is 1 more than
+        // the task's index in the list
         int taskIndex = taskNo - 1;
 
         if (!(taskIndex >= 0 && taskIndex < toDoList.size())) {
@@ -132,10 +130,10 @@ public class DukeListMgr {
     }
 
     /**
-     * Used to delete tasks from the list.
+     * Deletes tasks from the list.
      *
      * @param taskNo The task number to delete.
-     * @return Duke's output from this command
+     * @return Duke's output from this command.
      * @throws DukeExceptionBase when an invalid task is specified.
      */
     public String deleteTask(int taskNo) throws DukeExceptionBase {
@@ -188,7 +186,7 @@ public class DukeListMgr {
     }
 
     /**
-     * Used to print out contents of the list nicely.
+     * Prints out contents of the list nicely.
      */
     public void printOutWholeList() {
         String printThis = this.getListFromTaskList(this.toDoList);
