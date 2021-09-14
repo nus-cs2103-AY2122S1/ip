@@ -1,11 +1,9 @@
 package duke.exceptions;
 
-import duke.exceptions.DukeException1;
-
 /**
  * Exception that is thrown when a Deadline class cannot be created due to empty description provided by user.
  */
-public class DeadlineException extends DukeException1 {
+public class DeadlineException extends DukeException {
     /**
      * Creates an object of the DeadlineException class.
      */

@@ -1,6 +1,17 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.BlahCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.AddCommand;
+import duke.command.AddNoteCommand;
+import duke.command.ListNoteCommand;
+
+
 
 /**
  * Parses the input given by the user for the task manager application to
@@ -17,8 +28,6 @@ public class Parser {
      */
     public static Command parse(String command) {
         String firstWord = command.split(" ")[0];
-        //String secondWord = command.split(" ")[1];
-        //String secondPhrase = command.split(" ", 2)[1];
         if(command.equals("bye")) {
             return new ExitCommand(command);
         } else if(command.equals("list")) {
@@ -26,19 +35,15 @@ public class Parser {
         } else if(command.equals("blah")) {
             return new BlahCommand(command);
         } else if(firstWord.equals("done")) {
-            String secondWord = command.split(" ")[1];
-            String taskNumber = secondWord;
+            String taskNumber = command.split(" ")[1];
             return new DoneCommand(taskNumber);
         } else if(firstWord.equals("delete")) {
-            String secondWord = command.split(" ")[1];
-            String taskNumber = secondWord;
+            String taskNumber = command.split(" ")[1];
             return new DeleteCommand(taskNumber);
         } else if(firstWord.equals("find")) {
-            String secondPhrase = command.split(" ", 2)[1];
-            String input = secondPhrase;
-            return new FindCommand(input);
-        } else if(firstWord.equals("todo") || firstWord.equals("event")
-                || firstWord.equals("deadline")) {
+            String keyword = command.split(" ", 2)[1];
+            return new FindCommand(keyword);
+        } else if(firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")) {
             return new AddCommand(command);
         } else if(firstWord.equals("note")) {
             return new AddNoteCommand(command);

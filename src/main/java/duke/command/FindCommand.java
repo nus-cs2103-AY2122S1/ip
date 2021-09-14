@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Storage;
 import duke.Ui;
+import duke.Storage;
 import duke.notes.NotesList;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 

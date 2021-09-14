@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.exceptions.DeadlineException;
 import duke.exceptions.EventException;
 
 import java.time.LocalDate;
@@ -22,7 +21,7 @@ public class Event extends Task {
      *
      * @param description Description of what the Event task is about.
      * @param at Time of event.
-     * @throws DeadlineException If the Event object cannot be created successfully due to empty description.
+     * @throws EventException If the Event object cannot be created successfully due to empty description.
      */
     public Event(String description, String at) throws EventException {
         super(description);

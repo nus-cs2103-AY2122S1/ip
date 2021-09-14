@@ -1,11 +1,9 @@
 package duke.exceptions;
 
-import duke.exceptions.DukeException1;
-
 /**
  * Exception that is thrown when a Todo class cannot be created due to empty description provided by user.
  */
-public class TodoException extends DukeException1 {
+public class TodoException extends DukeException {
     /**
      * Creates an object of the TodoException class.
      */

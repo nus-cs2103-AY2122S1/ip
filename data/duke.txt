@@ -1,5 +1,9 @@
-T/1/sleep
-T/1/eat
 E/1/syf/03/12/2020 10:00-10:45
-N/heyo
-N/help sis
+D/1/return book/02/12/2019 18:00
+E/1/meet friend/03/12/2021 18:00-19:00
+T/0/review tutorial
+T/0/finish homework
+D/0/return book/02/12/2019 18:00
+E/1/meet friend/03/12/2021 18:00-19:00
+N/password is 123
+N/password is 123

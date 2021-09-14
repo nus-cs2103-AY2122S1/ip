@@ -1,10 +1,9 @@
 package duke.exceptions;
 
-import duke.exceptions.DukeException1;
 /**
  * Exception that is thrown when an Event class cannot be created due to empty description provided by user.
  */
-public class EventException extends DukeException1 {
+public class EventException extends DukeException {
     /**
      * Creates an object of the EventException class.
      */

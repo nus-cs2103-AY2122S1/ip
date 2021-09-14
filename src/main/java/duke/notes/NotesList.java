@@ -1,7 +1,5 @@
 package duke.notes;
 
-import duke.notes.Note;
-
 import java.util.ArrayList;
 
 public class NotesList {
@@ -10,9 +8,7 @@ public class NotesList {
     public NotesList(ArrayList<Note> notes) {
         this.notes = notes;
     }
-    public Integer getNumberOfNotes() {
-        return this.notes.size();
-    }
+
     public ArrayList<Note> getNotes() {
         return this.notes;
     }
@@ -21,11 +17,4 @@ public class NotesList {
         this.notes.add(note);
     }
 
-    public void removeNote(Integer noteNumber) {
-        this.notes.remove(noteNumber);
-    }
-
-    public Note getNote(Integer noteNumber) {
-        return this.notes.get(noteNumber);
-    }
 }

@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Event;
 import duke.tasks.Deadline;
 import duke.notes.Note;
-import duke.notes.NotesList;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Prints out the relevant messages and responds to user's inputs on the user interface
@@ -32,13 +32,15 @@ public class Ui {
      * @return Welcome message to guide users what to do.
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcomeMessage =  "Hello from\n" + logo + showLine() + "Hello! I'm Duke \n" + "What can I do for you?\n"
-                + showLine();
+        String instructions = "Here's a manual: \n1. To add a task play: todo play " +
+                "\n2. To add a deadline: deadline return book /by 02/12/2021 18:00, " +
+                "\n3. To add an event: event meet friend /at 02/12/2021 18:00 - 19:00" +
+                "\n4. To indicate task as done: done 2, where 2 refers to the task number" +
+                "\n5. To delete task: delete 3, where 3 refers to the task number" +
+                "\n6. To list tasks: list" + "\n7. to find a task using keyword: find play" +
+                "\n8. To add a note: note my password is 123" + "\n9. To list the notes: List of Notes" +
+                "\n10. To exit the application: Bye";
+        String welcomeMessage =  "Hello! I'm Peppa \n" + instructions;
         System.out.println(welcomeMessage);
         return welcomeMessage;
     }
@@ -179,9 +181,9 @@ public class Ui {
      * @return String message when user keys in keyword to find tasks.
      */
     public String respondToFind(ArrayList<Task> tasks) {
-        String responseToFind = "\tHere are the matching tasks in your list:";
+        String responseToFind = "Here are the matching tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            responseToFind = responseToFind + "\t" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
+            responseToFind = responseToFind + "\n" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
         }
         System.out.println(responseToFind);
         return responseToFind;

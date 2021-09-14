@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.exceptions.DeadlineException;
 import duke.exceptions.TodoException;
 
 /**
@@ -11,7 +10,7 @@ public class ToDo extends Task {
      * Creates an Todo task object.
      *
      * @param description Description of what the Todo task is about.
-     * @throws DeadlineException If the Todo object cannot be created successfully due to empty description.
+     * @throws TodoException If the Todo object cannot be created successfully due to empty description.
      */
     public ToDo(String description) throws TodoException {
         super(description);

@@ -33,27 +33,5 @@ public class Duke {
         } else {
             return c.execute(notes, ui, storage);
         }
-
-    }
-
-    /**
-     * Runs the Duke application and prompts users for input.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine(); // show the divider line ("_______")
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
-            ui.showLine();
-
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

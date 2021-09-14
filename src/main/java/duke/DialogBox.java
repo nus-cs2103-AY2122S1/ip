@@ -1,8 +1,5 @@
 package duke;
 
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
@@ -56,6 +56,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getWelcomeMessage(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

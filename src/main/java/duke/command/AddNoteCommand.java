@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Storage;
 import duke.Ui;
-import duke.notes.Note;
+import duke.Storage;
 import duke.notes.NotesList;
 import duke.tasks.TaskList;
+import duke.notes.Note;
 
 public class AddNoteCommand extends Command {
     String command;

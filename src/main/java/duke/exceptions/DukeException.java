@@ -5,16 +5,16 @@ import java.lang.Exception;
 /**
  * Exception that is thrown when there are errors encountered in the Duke application.
  */
-public class DukeException1 extends Exception {
+public class DukeException extends Exception {
     /**
-     * Creates an object of the DukeException1 object
+     * Creates an object of the DukeException object
      */
-    DukeException1() {
+    DukeException() {
         super();
     }
 
     /**
-     * Gets the message to be printed in response to the DukeException1 error.
+     * Gets the message to be printed in response to the DukeException error.
      *
      * @return String message in response to the error thrown.
      */
@@ -23,3 +23,4 @@ public class DukeException1 extends Exception {
         return "Error occurred!";
     }
 }
+

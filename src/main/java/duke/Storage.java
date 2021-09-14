@@ -11,12 +11,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.notes.Note;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.exceptions.DukeException1;
+import duke.notes.Note;
+import duke.exceptions.DukeException;
 
 /**
  * Represents the hard disk/file that stores all the tasks in the application.
@@ -112,14 +112,14 @@ public class Storage {
         }
     }
     /**
-     * Gets all the tasks in the hard disk
+     * Gets all the tasks in the hard disk.
      *
      * @param filePath Path of the file that contains all the tasks in the application.
      * @param list Arraylist that stores all the tasks.
      * @throws FileNotFoundException If file is not found.
-     * @throws DukeException1 If there is an error in creating a todo, event, deadline task.
+     * @throws DukeException If there is an error in creating a todo, event, deadline task.
      */
-     private void getData(String filePath, ArrayList<Task> list, ArrayList<Note> notesList) throws FileNotFoundException, DukeException1 {
+     private void getData(String filePath, ArrayList<Task> list, ArrayList<Note> notesList) throws FileNotFoundException, DukeException {
         File file = new File(filePath);
         assert file.exists();
         Scanner scanner = new Scanner(file);
@@ -150,7 +150,7 @@ public class Storage {
                     Note note = new Note(noteDescription);
                     notesList.add(note);
                 }
-            } catch (DukeException1 e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
