@@ -78,7 +78,6 @@ public class TaskListTest {
             list.add(new TaskStub(i));
             s.append(String.format("%d.[S][X] Stub task %d\n", i, i));
         }
-        s.append("Total: ").append(4).append(" tasks");
         assertEquals(s.toString(), list.toString());
     }
 
