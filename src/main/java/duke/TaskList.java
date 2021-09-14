@@ -38,6 +38,7 @@ public class TaskList {
      * @param number the task number in the task list
      */
     public String markDone(int number) {
+        assert number >= 1 && number <= taskList.size();
         Task task = taskList.get(number - 1);
         task.markDone();
         save();
@@ -52,6 +53,7 @@ public class TaskList {
      * @param number the task number in the task list
      */
     public String remove(int number) {
+        assert number >= 1 && number <= taskList.size();
         Task task = taskList.get(number - 1);
         taskList.remove(number - 1);
         save();
