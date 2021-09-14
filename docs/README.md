@@ -22,9 +22,9 @@ Shows a list of tasks in the task list.
 
 Finds task whose names contain any of the given keywords.
 
-### Bye
+### Exiting
 
-Exits the application.
+Shows a goodbye message and exits the application.
 
 ## Usage
 
@@ -142,7 +142,7 @@ Expected outcome:
 `[D][] return book(by:Sep 30 2021)`<br />
 `[DA][] return book(DoAfter:return book)`
 
-### Bye - `bye`
+### Exit - `bye`
 
 Shows a goodbye message and exits the application.
 
