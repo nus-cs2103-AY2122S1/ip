@@ -80,10 +80,15 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.setPictureDimensions(48, 32, 30);
         db.setStyle("-fx-background-color: #FFFFFF;");
-        db.setLabelPadding(new Insets(0,0,0,25));
+        db.setLabelPadding(new Insets(0, 0, 0, 25));
         return db;
     }
 
+    /**
+     * Sets padding of Label.
+     *
+     * @param insets Amount of padding to set for label.
+     */
     private void setLabelPadding(Insets insets) {
         dialog.setPadding(insets);
     }

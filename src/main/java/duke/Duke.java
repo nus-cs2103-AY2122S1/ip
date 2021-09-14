@@ -58,7 +58,7 @@ public class Duke {
     }
 
     /**
-     * Main method for Duke program.
+     * Executes the main method for Duke program.
      *
      * @param args Arguments for main method.
      */

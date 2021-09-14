@@ -578,9 +578,9 @@ public class Parser {
 
         String[] separated = userInput.split(SPACE);
 
-        boolean lengthLessThanTwo = separated.length < 2;
+        boolean isLengthLessThanTwo = separated.length < 2;
 
-        if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
+        if (isLengthLessThanTwo || !isIntegerOrAll(separated[1])
                 || isOutOfRange(taskList, separated[1])) {
             throw new IncompleteDoneException();
         } else if (isPositiveInteger(separated[1])) {
@@ -627,9 +627,9 @@ public class Parser {
      * @throws DukeException if it has an invalid index to remove.
      */
     private static RemoveCommand handleRemove(TaskList taskList, String[] separated) throws DukeException {
-        boolean lengthLessThanTwo = separated.length < 2;
+        boolean isLengthLessThanTwo = separated.length < 2;
 
-        if (lengthLessThanTwo || !isIntegerOrAll(separated[1])
+        if (isLengthLessThanTwo || !isIntegerOrAll(separated[1])
                 || isOutOfRange(taskList, separated[1])) {
             throw new IncompleteRemoveException();
         } else if (isPositiveInteger(separated[1])) {
