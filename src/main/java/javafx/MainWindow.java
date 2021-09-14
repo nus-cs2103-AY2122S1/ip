@@ -11,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for javafx.MainWindow. Provides the layout for the other controls.
@@ -45,7 +44,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InterruptedException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -54,15 +53,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (duke.isDukeExit()) {
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            }
-            catch (InterruptedException e) {
-                e.getMessage();
-            }
-            finally {
-                Platform.exit();
-            }
+            Platform.exit();
         }
     }
 }

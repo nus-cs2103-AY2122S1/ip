@@ -10,6 +10,6 @@ public class ToDoTest {
     @Test
     public void testToDoInput(){
         Task test = new ToDo("hubbub");
-        assertEquals(test.toString(), "[T][X] hubbub");
+        assertEquals(test.toString(), "[T][ ] hubbub");
     }
 }

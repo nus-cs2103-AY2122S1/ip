@@ -59,7 +59,7 @@ public class Storage {
                     String restOfTheTask = lineFromLocalStorage.substring(7);
                     if (taskType == 'T') {
                         Task newTask = new ToDo(restOfTheTask);
-                        if (String.valueOf(completed).equals("✅")) {
+                        if (String.valueOf(completed).equals("X")) {
                             newTask.markAsCompleted();
                         }
                         toDoList.add(newTask);
@@ -68,7 +68,7 @@ public class Storage {
                         String eventTime = parsedEventInput[1].split("\\)", 2)[0];
                         LocalDate localDate = LocalDate.parse(eventTime, Duke.getFormatter());
                         Task newTask = new Event(parsedEventInput[0], localDate);
-                        if (String.valueOf(completed).equals("✅")) {
+                        if (String.valueOf(completed).equals("X")) {
                             newTask.markAsCompleted();
                         }
                         toDoList.add(newTask);
@@ -77,7 +77,7 @@ public class Storage {
                         String deadlineTime = parsedDeadlineInput[1].split("\\)", 2)[0];
                         LocalDate localDate = LocalDate.parse(deadlineTime, Duke.getFormatter());
                         Task newTask = new Event(parsedDeadlineInput[0], localDate);
-                        if (String.valueOf(completed).equals("✅")) {
+                        if (String.valueOf(completed).equals("X")) {
                             newTask.markAsCompleted();
                         }
                         toDoList.add(newTask);

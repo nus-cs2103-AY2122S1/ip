@@ -58,7 +58,7 @@ public class Task {
      */
     public static String checkIfTaskCompleted(Task currentTask) {
         return currentTask.checkIfCompleted()
-                ? "✅"
-                : "X";
+                ? "X"
+                : " ";
     }
 }
