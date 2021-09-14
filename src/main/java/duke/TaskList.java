@@ -61,4 +61,29 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Calculates how many tasks are marked as done
+     *
+     * @return Number of tasks marked as done
+     */
+    public int getNumberOfDoneTasks() {
+        int result = 0;
+        for (int i = 0; i < this.getNumberOfTasks(); i++) {
+            String statusIcon = tasks.get(i).getStatusIcon();
+            if (statusIcon.equals("1")) {
+                result += 1;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Calculates how many tasks are not marked as done
+     *
+     * @return Number of tasks not marked as done
+     */
+    public int getNumberOfNotDoneTasks() {
+        return this.getNumberOfTasks() - this.getNumberOfDoneTasks();
+    }
+
 }

@@ -186,6 +186,32 @@ public class Parser {
         return message;
     }
 
+    /**
+     * Executes when Duke receives a StatTask command
+     * Calls the Statistic#numOfTasks method
+     */
+    public String statTaskExecute() {
+        Statistic stat = new Statistic(duke, tasks);
+        return stat.numberOfTasks();
+    }
+
+    /**
+     * Executes when Duke receives a StatDone command
+     * Calls the Statistic#numberOfDoneTasks() method
+     */
+    public String statDoneExecute() {
+        Statistic stat = new Statistic(duke, tasks);
+        return stat.numberOfDoneTasks();
+    }
+
+    /**
+     * Executes when Duke receives a statNotDoneExecute()
+     * Calls the Statistic#numberOfNotDoneTasks() method
+     */
+    public String statNotDoneExecute() {
+        Statistic stat = new Statistic(duke, tasks);
+        return stat.numberOfNotDoneTasks();
+    }
 
     /**
      * Generates a formatted string of tasks to be outputted to the user and to be saved into hard disk.

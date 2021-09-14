@@ -119,6 +119,12 @@ public class Duke {
                 return c.delete_execute();
             } else if (splitInput[0].equals("find")) {
                 return c.find_execute();
+            } else if (input.equals("StatTask")) {
+                return c.statTaskExecute();
+            } else if (input.equals("StatDone")) {
+                return c.statDoneExecute();
+            } else if (input.equals("StatNotDone")) {
+                return c.statNotDoneExecute();
             } else {
                 return "sorry! i'm not taught that command yet :<";
             }
