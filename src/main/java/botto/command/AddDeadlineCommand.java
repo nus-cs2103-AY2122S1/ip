@@ -54,7 +54,7 @@ public class AddDeadlineCommand implements Command {
             storage.save(taskList.getTasks());
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n"
-                    + "    Please enter in this format: deadline [title] /[by] [d/M/yyyy H:mm a]";
+                    + "    Please enter in this format: deadline [task] /by [d/M/yyyy H:mm a]";
             throw new BottoException(message);
         }
     }

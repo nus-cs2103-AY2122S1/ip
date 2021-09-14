@@ -1,5 +1,6 @@
 package botto.util;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +37,15 @@ public class Dialog {
      */
     public void showWelcome() {
         addToDialog(GREETING);
+    }
+
+    /**
+     * print the name of the bot and supported command
+     */
+    public void showHelp() {
+        String message = "Name: " + BOT_NAME + "\n"
+                + "Supported commands: " + Arrays.toString(Parser.COMMANDS);
+        addToDialog(message);
     }
 
     /**

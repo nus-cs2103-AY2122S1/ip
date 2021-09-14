@@ -55,7 +55,7 @@ public class AddEventCommand implements Command {
             storage.save(taskList.getTasks());
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n"
-                    + "    Please enter in this format: event [title] /[at] [d/M/yyyy H:mm a]";
+                    + "    Please enter in this format: event [title] /at [d/M/yyyy H:mm a]";
             throw new BottoException(message);
         }
     }

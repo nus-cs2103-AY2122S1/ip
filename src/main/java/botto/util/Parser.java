@@ -8,6 +8,7 @@ import botto.command.Command;
 import botto.command.DeleteCommand;
 import botto.command.ExitCommand;
 import botto.command.FindCommand;
+import botto.command.HelpCommand;
 import botto.command.MarkDoneCommand;
 import botto.command.ShowListCommand;
 
@@ -18,9 +19,8 @@ import botto.command.ShowListCommand;
 public class Parser {
 
     /** current available user commands */
-    private static final String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye", "find"};
-
-
+    public static final String[] COMMANDS = {"list", "done", "todo", "deadline",
+        "event", "delete", "bye", "find", "help"};
     /**
      * analyse user inputs and find out type of commands needed by the user
      *
@@ -49,6 +49,8 @@ public class Parser {
             return new ExitCommand();
         case "find":
             return new FindCommand(fullCommand);
+        case "help":
+            return new HelpCommand();
         default:
             throw new BottoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
