@@ -6,7 +6,7 @@ efficiently.
 
 ## Features 
 
->###Notes about the command format:
+>Notes about the command format:
 > * Words in UPPER_CASE are the parameters to be supplied by the user.
 > * yyyy-mm-dd indicates the format of the date parameter for deadline-type tasks.\
 > E.g. `deadline assignment /by 2021-09-17 2359` indicates that the \
