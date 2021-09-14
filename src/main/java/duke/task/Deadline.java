@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import duke.exceptions.DukeIncompleteException;
 import duke.exceptions.DukeInvalidFormatException;
 import duke.exceptions.DukeWrongCommandException;
 import duke.main.Parser;
@@ -21,6 +22,9 @@ public class Deadline extends Task {
     public Deadline(String taskName) {
         super(taskName.split("/by")[0].trim());
         this.taskName = taskName;
+        if (this.taskName.length() == 0) {
+            throw new DukeIncompleteException();
+        }
         if (!taskName.contains("/by") && taskName.contains("/at")) {
             throw new DukeWrongCommandException("Event");
         } else if (!taskName.contains("/by")) {

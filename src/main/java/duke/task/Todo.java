@@ -4,7 +4,7 @@ import duke.exceptions.DukeIncompleteException;
 import duke.exceptions.DukeWrongCommandException;
 
 public class Todo extends Task {
-    private String taskName;
+    private final String taskName;
     /**
      * Constructor of a TODO task
      * @param taskName name of the task
