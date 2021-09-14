@@ -1,0 +1,32 @@
+#dialog{
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: #00dddd;
+    -fx-background-radius: 0 20 20 20;
+}
+#userDialog{
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: #00dd00;
+    -fx-background-radius: 20 0 20 20;
+}
+#chatBackground{
+    -fx-padding: 10 10 30 10;
+}
+#dialogContainer{
+    -fx-padding: 10, 0, 0, 0;
+    -fx-background-color: linear-gradient(to bottom, #cdf9f9 5%, #8bafcf 100%);
+}
+.button{
+    -fx-background-color: #00cc00;
+    -fx-background-radius: 5;
+    -fx-border-color: #008800;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: Sans-serif;
+    -fx-text-fill: white;
+}
+#userInput{
+    -fx-border-color: #8bafcf;
+    -fx-border-width: 3;
+}

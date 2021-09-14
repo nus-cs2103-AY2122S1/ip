@@ -26,11 +26,14 @@ public class Ui {
         this.dialogContainer = dialogContainer;
     }
 
-    private void formatMessage(String message) {
+    private void formatMessage(String message, boolean isErrorMessage) {
         String formattedMessage = String.format("%s", message.replaceAll("\n", "\n\t"));
-        dialogContainer.getChildren().add(
-            DialogBox.getDukeDialog(formattedMessage, dukeImage)
-        );
+        DialogBox dialogBox = DialogBox.getDukeDialog(formattedMessage, dukeImage);
+        dialogBox.setName("Saitama");
+        if (isErrorMessage) {
+            dialogBox.setBackgroundColor("ff9999");
+        }
+        dialogContainer.getChildren().add(dialogBox);
     }
 
     /**
@@ -39,8 +42,10 @@ public class Ui {
      * @param input The input to be shown.
      */
     public void showInput(String input) {
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(input, userImage));
+        DialogBox dialogBox = DialogBox.getUserDialog(input, userImage);
+        dialogBox.setUserId();
+        dialogBox.setName("Me");
+        dialogContainer.getChildren().add(dialogBox);
     }
 
     /**
@@ -48,8 +53,8 @@ public class Ui {
      */
     public void greetUser() {
         String greetMessage = "Hello! I'm Saitama\nI do 100 sit-ups, 100 push-ups,"
-                + " 100 squats and a 10 kilometer run every day! No cap";
-        this.formatMessage(greetMessage);
+                + " 100 squats \nand a 10 kilometer run every day! No cap";
+        this.formatMessage(greetMessage, false);
     }
 
     /**
@@ -58,21 +63,21 @@ public class Ui {
      * @param e An exception thrown due to various reasons such as incorrect user command.
      */
     public void showError(DukeException e) {
-        this.formatMessage(e.getMessage());
+        this.formatMessage(e.getMessage(), true);
     }
 
     /**
      * A farewell message to display to user before ending the program.
      */
     public void showFarewell() {
-        this.formatMessage("Hope to see you again!! ^_^");
+        this.formatMessage("Hope to see you again!! ^_^", false);
     }
 
     /**
      * A message that will display to user if there is an error loading tasks from the file.
      */
     public void showLoadingError() {
-        this.formatMessage("There is an error while loading tasks or commands.");
+        this.formatMessage("There is an error while loading tasks or commands.", true);
     }
 
     /**
@@ -82,7 +87,7 @@ public class Ui {
      * @throws IllegalArgumentException If the command keyword is invalid.
      */
     public Command readCommand(String input) throws InvalidCommandException {
-        String[] stringArr = input.split(" ", 2);
+        String[] stringArr = input.trim().split(" ", 2);
         String commandName = stringArr[0].toUpperCase();
         CommandKeyword keyword = this.listOfCommands.get(commandName);
         if (keyword == null) {
@@ -101,7 +106,7 @@ public class Ui {
     public void showAddTask(Task task, int totalTasks) {
         this.formatMessage(String.format("Got it. I've added this task:"
                 + "\n\t%s"
-                + "\nNow you have %d tasks in the list.", task, totalTasks));
+                + "\nNow you have %d tasks in the list.", task, totalTasks), false);
     }
 
     /**
@@ -112,7 +117,7 @@ public class Ui {
     public void showTasks(ArrayList<Task> tasks) {
         int len = tasks.size();
         if (len == 0) {
-            this.formatMessage("No task is found!");
+            this.formatMessage("No task is found!", true);
         } else {
             boolean isMoreThanOne = len > 1;
             String isOrAre = isMoreThanOne ? "are" : "is";
@@ -123,7 +128,7 @@ public class Ui {
                 Task task = tasks.get(i);
                 message += String.format("%d.%s\n", num, task);
             }
-            this.formatMessage(message);
+            this.formatMessage(message, false);
         }
     }
 
@@ -135,9 +140,9 @@ public class Ui {
      */
     public void showMarkedTask(Task task) {
         if (task != null) {
-            this.formatMessage(String.format("Nice! I've marked this task as done: \n\t%s", task));
+            this.formatMessage(String.format("Nice! I've marked this task as done: \n\t%s", task), false);
         } else {
-            this.formatMessage("There is no such task to mark!");
+            this.formatMessage("There is no such task to mark!", true);
         }
     }
 
@@ -151,9 +156,9 @@ public class Ui {
     public void showDeletedTask(Task task, int totalTasks) {
         if (task != null) {
             this.formatMessage(String.format("Noted. I've removed this task: \n\t%s\n"
-                    + "Now you have %d tasks in the list.", task, totalTasks));
+                    + "Now you have %d tasks in the list.", task, totalTasks), false);
         } else {
-            this.formatMessage("There is no such task to delete!");
+            this.formatMessage("There is no such task to delete!", true);
         }
     }
 
@@ -161,7 +166,7 @@ public class Ui {
      * A message to display to user if user did not include keywored when using the command find.
      */
     public void showNoKeyword() {
-        this.formatMessage("There is no keyword to search for!");
+        this.formatMessage("There is no keyword to search for!", true);
     }
 
     /**

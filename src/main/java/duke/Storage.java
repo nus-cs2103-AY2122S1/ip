@@ -109,7 +109,7 @@ public class Storage {
         map.put("D", CommandKeyword.DEADLINE);
         map.put("EVENT", CommandKeyword.EVENT);
         map.put("E", CommandKeyword.EVENT);
-        map.put("DElETE", CommandKeyword.DELETE);
+        map.put("DELETE", CommandKeyword.DELETE);
         map.put("DEL", CommandKeyword.DELETE);
         map.put("DONE", CommandKeyword.DONE);
         map.put("BYE", CommandKeyword.BYE);
