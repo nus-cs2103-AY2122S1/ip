@@ -45,46 +45,46 @@ Creates a deadline.<br>
 **Format:** `deadline <deadline description> <date of deadline> [time]`<br>
 **Example:** `deadline finish assigment /by 15/9/2021 2359`<br>
 **Expected output:**<br>
-![List Ouput](images/deadline.png)
+![Deadline Ouput](images/deadline.png)
 
 ### Create an event: `event <event description> <date of event> [time]`
 Creates a event.<br>
 **Format:** `event <event description> <date of event> [time]`<br>
 **Example:** `event CS2103 Lecture /at 15/9/2021 1300`<br>
 **Expected output:**<br>
-![List Ouput](images/event.png)
+![Event Ouput](images/event.png)
 
 ### Find task: `find <task name>`
 Find the task with the text specified .<br>
 **Format:** `find <task name>`<br>
 **Example:** `find Lecture`<br>
 **Expected output:**<br>
-![List Ouput](images/find.png)
+![Find Ouput](images/find.png)
 
 ### Delete a task: `delete <task number>`
 Deletes the task that corresponds to that task number.<br>
 **Format:** `delete <task number>`<br>
 **Example:** `delete 1`<br>
 **Expected output:**<br>
-![List Ouput](images/delete.png)
+![Delete Ouput](images/delete.png)
 
 ### Mark task as done: `done <task number>`
 Marks the task that corresponds to that task number as done.<br>
 **Format:** `done <task number>`<br>
 **Example:** `done 1`<br>
 **Expected output:**<br>
-![List Ouput](images/done.png)
+![Done Ouput](images/done.png)
 
 ### Update task: `update <task number> <new task (same format as creating a new task)>`
 Updates the task with the new task inputted. **(Must be same type of task)**<br>
 **Format:** `update <task number> <new task (same format as creating a new task)>`<br>
 **Example:** `update 2 event CS2103 Lecture /at 17/9/2021 1300`<br>
 **Expected output:**<br>
-![List Ouput](images/update.png)
+![Update Ouput](images/update.png)
 
 ### Exit: `bye`
 Updates the task with the new task inputted.(Must be same type of task)<br>
 **Format:** `bye`<br>
 **Example:** `bye`<br>
 **Expected output:**<br>
-![List Ouput](images/bye.png)
+![Bye Ouput](images/bye.png)
