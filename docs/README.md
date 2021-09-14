@@ -19,7 +19,7 @@ Duke is packed with various features, such as:
 
 ## User Guide 🕹
 
-### `list`
+### - `list`
 
 See a list of your tasks.
 
@@ -37,7 +37,7 @@ Here are the tasks in your list:
 	5. [E][ ] formal dinner (from 19 Nov 2021 18:00 to 20 Nov 2021 00:00)
 ```
 
-### `todo`
+### - `todo`
 
 Create a todo.
 
@@ -52,7 +52,7 @@ added:
 You have 1 tasks in the list.
 ```
 
-### `event`
+### - `event`
 
 Create an event.
 
@@ -69,7 +69,7 @@ added:
 You have 3 tasks in the list.
 ```
 
-### `deadline`
+### - `deadline`
 
 Create a deadline.
 
@@ -86,7 +86,7 @@ added:
 You have 2 tasks in the list.
 ```
 
-### `done`
+### - `done`
 
 Mark a task as completed.
 
@@ -100,7 +100,7 @@ I've marked this task as done!
 	[E][X] CS2103T finals (from 12 Nov 2021 16:00 to 12 Nov 2021 18:00)
 ```
 
-### `delete`
+### - `delete`
 
 Delete a specific task.
 
@@ -115,7 +115,7 @@ I've deleted this task from the list!
 You have 4 tasks in the list.
 ```
 
-### `find`
+### - `find`
 
 Search a task based on the keyword provided.
 
@@ -130,7 +130,7 @@ Here are the matching tasks in your list:
 	2. [E][X] CS2103T finals (from 12 Nov 2021 16:00 to 12 Nov 2021 18:00)
 ```
 
-### `bye`
+### - `bye`
 
 Quit the app.
 
@@ -139,5 +139,6 @@ Quit the app.
 `bye`
 
 ```
+> bye
 Bye, hope to see you again!
 ```
