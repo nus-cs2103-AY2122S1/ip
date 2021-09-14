@@ -9,6 +9,9 @@ import bot.assembly.memory.BotDynamicMemoryUnit;
 import bot.assembly.memory.BotStaticMemoryUnit;
 import bot.assembly.task.Task;
 
+/**
+ * A class that is in charge of checking the validity of the commands
+ */
 public class BotCommandChecker {
 
     private final BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();

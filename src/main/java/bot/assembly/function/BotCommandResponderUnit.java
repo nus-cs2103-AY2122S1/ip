@@ -121,9 +121,8 @@ public class BotCommandResponderUnit {
     }
 
     /**
-     *
+     * C-MassOps: A method that can delete or markAsDone for all items in the tasklist.
      * @param input
-     * @return
      * @throws InvalidCommandException
      */
     public void massOps(String input) throws InvalidCommandException {

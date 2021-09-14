@@ -94,7 +94,7 @@ public class BotBrain {
     }
 
     /**
-     *
+     * A method that helps to print the greeting message
      * @return
      */
     public String startBrain() {
@@ -103,7 +103,7 @@ public class BotBrain {
     }
 
     /**
-     *
+     * A method that gets the status of termination
      * @return
      */
     public boolean getIsTerminated() {
