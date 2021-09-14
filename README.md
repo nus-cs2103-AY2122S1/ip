@@ -1,5 +1,8 @@
 # Duke project template
 
+[![CI Status](https://github.com/HolmesJJ/ip/workflows/Java%20CI/badge.svg)](https://github.com/HolmesJJ/ip/actions)
+[![codecov](https://codecov.io/gh/HolmesJJ/ip/branch/master/graph/badge.svg)](https://codecov.io/gh/HolmesJJ/ip)
+
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij
