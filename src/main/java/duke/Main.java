@@ -21,6 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Nee – Pocket Task Manager");
             fxmlLoader.<MainWindow>getController().setDuke(new Duke(pathName, true));
             scene.getStylesheets().add("/styles/styles.css");
             stage.show();

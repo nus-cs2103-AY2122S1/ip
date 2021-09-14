@@ -22,9 +22,13 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
+    private HBox speechBubble;
+    @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
+    private static final String USER_SPEECH_BUBBLE_CLASS = "user-speech-bubble";
 
     private DialogBox(String text, Image img) {
         try {
@@ -38,7 +42,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(45, 45, 35));
+        displayPicture.setClip(new Circle(25, 25, 25));
     }
 
     /**
@@ -52,11 +56,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
+        userDialog.speechBubble.getStyleClass().add(USER_SPEECH_BUBBLE_CLASS);
+        return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
