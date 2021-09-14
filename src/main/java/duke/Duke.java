@@ -13,7 +13,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Construct an instance of Duke program.
+     * Constructs an instance of Duke program.
      *
      * @param filePath The path of the file to load saved data from.
      */
@@ -28,7 +28,7 @@ public class Duke {
         }
     }
 
-    /** Construct an instance of Duke program with default file path to store/load data from (data.txt). */
+    /** Constructs an instance of Duke program with default file path to store/load data from (data.txt). */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data.txt");
@@ -40,7 +40,7 @@ public class Duke {
         }
     }
 
-    /** Start of the program. */
+    /** Runs the program. */
     public void run() {
         ui.welcomeMessage();
         boolean isExit = false;

@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Default welcome message printed when user starts the program.
+     * Displays a default welcome message printed when user starts the program.
      */
     public void welcomeMessage() {
         lineGenerator();

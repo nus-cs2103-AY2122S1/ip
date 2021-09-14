@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
@@ -82,9 +83,10 @@ public class Parser {
      * @param tasks The current list of tasks.
      * @param ui The current user interface.
      * @param storage The storage to store/load data from.
+     * @throws DukeException If there is a parsing error from the commands.
      * @return A String that contains the corresponding texts associated with the command.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String str;
         if (input.equals(Commands.BYE.toString().toLowerCase())) {
             isByeCommand = true;
@@ -137,7 +139,7 @@ public class Parser {
         String description = input.substring("find".length()).trim();
         String str = ui.matchTaskMessage();
         for (int i = 0; i < tasks.numberOfTasks(); i++) {
-            if (tasks.taskNumber(i).getDescription().contains(description)) {
+            if (tasks.taskNumber(i).getDescription().toUpperCase().contains(description.toUpperCase())) {
                 assert tasks.taskNumber(i) != null : "Task to be added should not be null.";
                 list.add(tasks.taskNumber(i));
             }
@@ -147,7 +149,7 @@ public class Parser {
     }
 
     /**
-     * List all user's tasks and returns a String that contains texts to be printed out by "list" command.
+     * Lists all user's tasks and returns a String that contains texts to be printed out by "list" command.
      *
      * @param tasks A TaskList object containing all user's tasks.
      * @param ui The current user interface by the user.
@@ -162,12 +164,16 @@ public class Parser {
      *
      * @param tasks A TaskList object containing all user's tasks.
      * @param ui The current user interface by the user.
+     * @throws DukeException If task index is out of range.
      * @return A String that contains texts to be printed out by "done" command.
      */
-    public String doneCommand(TaskList tasks, Ui ui) {
+    public String doneCommand(TaskList tasks, Ui ui) throws DukeException {
         // format is "done x", for any positive integer x
         String[] splitStr = input.split("\\s+");
         int taskIndexFromInputIndex = parseCommandArgument(splitStr[1]) - 1;
+        if (taskIndexFromInputIndex >= tasks.numberOfTasks() || taskIndexFromInputIndex < 0) {
+            throw new DukeException("Invalid task number!");
+        }
         tasks.taskNumber(taskIndexFromInputIndex).markTaskDone();
         return ui.taskDone(tasks.taskNumber(taskIndexFromInputIndex));
     }
@@ -181,12 +187,17 @@ public class Parser {
      *
      * @param tasks A TaskList object containing all user's tasks.
      * @param ui The current user interface by the user.
+     * @throws DukeException If task index is out of range.
      * @return A String that contains texts to be printed out by "delete" command.
      */
-    public String deleteCommand(TaskList tasks, Ui ui) {
+    public String deleteCommand(TaskList tasks, Ui ui) throws DukeException {
         // format is "delete x", for any positive integer x
         String[] splitStr = input.split("\\s+");
-        String str = ui.deleteTask(tasks.taskNumber(parseCommandArgument(splitStr[1]) - 1));
+        int taskIndexFromInputIndex = parseCommandArgument(splitStr[1]) - 1;
+        if (taskIndexFromInputIndex >= tasks.numberOfTasks() || taskIndexFromInputIndex < 0) {
+            throw new DukeException("Invalid task number!");
+        }
+        String str = ui.deleteTask(tasks.taskNumber(taskIndexFromInputIndex));
         tasks.removeTask(parseCommandArgument(splitStr[1]) - 1);
         return str + ui.printTaskLength(tasks);
     }
@@ -208,9 +219,10 @@ public class Parser {
     /**
      * Returns a Deadline object with the corresponding deadline item.
      *
+     * @throws DukeException If date or time is wrongly formatted.
      * @return A Deadline object.
      */
-    public Deadline deadlineCommand() {
+    public Deadline deadlineCommand() throws DukeException {
         try {
             int slashPosition = input.indexOf('/');
             String description = input.substring("deadline".length() + 1, slashPosition);
@@ -227,6 +239,7 @@ public class Parser {
     /**
      * Returns a Event object with the corresponding event item.
      *
+     * @throws DukeException If date or time is in the wrong format.
      * @return A Event object.
      */
     public Event eventCommand() throws DukeException {
