@@ -14,9 +14,10 @@ public class Bot {
     }
 
     /**
-     * A method that reads the command from the user and responds with the appropriate actions
-     * @param input
-     * @return
+     * A method to receive the input from the user and refer it to botBrain to
+     * continue processing the meaning for the input message.
+     * @param input User Command
+     * @return feedbacks corresponding to the specific commands
      */
     public String getResponse(String input) {
         if (botBrain.getIsTerminated()) {
@@ -26,16 +27,17 @@ public class Bot {
     }
 
     /**
-     * A method that initiates the bot brain and prompt it to respond with greeting message
-     * @return
+     * A method that call for a greeting message to mark the start of the bot
+     * @return A greeting message to the user in the dialogue box.
      */
     public String initiate() {
         return botBrain.startBrain();
     }
 
     /**
-     * A method that starts the bot brain to read data from the hard disk files
-     * @return
+     * A method that calls the botBrain to start getting task list data from the
+     * hard disk if any.
+     * @return A task list summary / a prompt that there is no data yet
      */
     public String checkMem() {
         return botBrain.wakeUpMemory();
