@@ -20,9 +20,11 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 
 ### **Download and try the project**
 1. Using terminal, navigate to the directory where you want to
-2. Enter the command `git clone`
-3. Configure intellij according to [setting up intellij guide](README.md)
+2. Enter the command `git clone https://github.com/Haozeee/ip.git`
+3. Open the project in intelliJ and configure the project to use JDK 11
 4. Locate the src/main/java/duke/launcher.java file, right click it and run the main method of the file
+5. If all goes well, you should expect to see a window as below
+![Start page](startExample.png)
 
 ## Features 
 
