@@ -3,9 +3,7 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +52,7 @@ public class Storage {
         Scanner s;
         try {
             s = new Scanner(testFile);
-            return Ui.printTasksOnLoad(s);
+            return Ui.displayTasksOnLoad(s);
         } catch (FileNotFoundException e) {
             return Ui.emptyListMessage();
         }
@@ -91,7 +89,7 @@ public class Storage {
                 temp = new Task(description);
             }
 
-            assert temp != null: "Temp will be a Deadline, Event or Task";
+            assert temp != null : "Temp will be a Deadline, Event or Task";
 
             if (isTaskDone) {
                 temp.markSaved();

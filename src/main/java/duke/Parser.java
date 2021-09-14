@@ -22,8 +22,8 @@ public class Parser {
         boolean isQuitDuke = userInput.equals("bye") || userInput.equals("b");
         boolean isListRequest = userInput.equals("list") || userInput.equals("l");
         boolean isTaskCompleted = userInput.startsWith("done");
-        boolean isRemoveTask = userInput.startsWith("delete") || userInput.startsWith("del ") ||
-                userInput.startsWith("rm ");
+        boolean isRemoveTask = userInput.startsWith("delete") || userInput.startsWith("del ")
+                || userInput.startsWith("rm ");
         boolean isFindTask = userInput.startsWith("find") || userInput.startsWith("f ");
 
         if (isQuitDuke) {

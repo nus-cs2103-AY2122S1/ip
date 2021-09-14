@@ -6,8 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import javafx.application.Application;
 
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +24,14 @@ import javafx.stage.Stage;
  * when the user interacts with it.
  */
 public class Duke extends Application {
+    /** The storage class used to store files for Duke. **/
+    private static Storage storage;
+
+    /** The list of tasks given to Duke (if any). **/
+    private static TaskList tasks;
+
+    /** Boolean to check if first time using Duke. **/
+    private static boolean isFirstTime = false;
 
     /** Fields for GUI **/
     private ScrollPane scrollPane;
@@ -33,17 +40,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image DUKE = new Image(this.getClass().getResourceAsStream("/images/Baba.jpg"));
-
-    /** The storage class used to store files for Duke. **/
-    private static Storage storage;
-
-    /** The list of tasks given to Duke (if any). **/
-    private static TaskList TASKS;
-
-    /** Boolean to check if first time using Duke. **/
-    public static boolean isFirstTime = false;
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Baba.jpg"));
 
     /**
      * Constructor for Duke.
@@ -67,12 +65,21 @@ public class Duke extends Application {
                 Files.createFile(storagePath);
             }
 
-            TASKS = new TaskList(Storage.load());
+            tasks = new TaskList(Storage.load());
         } catch (IOException e) {
-            System.out.println("Failed to create storage file: " +
-                    e.getMessage());
+            System.out.println("Failed to create storage file: "
+                    + e.getMessage());
         }
 
+    }
+
+    /**
+     * Returns true if user runs Duke for the first time, false otherwise.
+     *
+     * @return True if user runs Duke for the first time, false otherwise.
+     */
+    public static boolean isFirstTimeCreation() {
+        return isFirstTime;
     }
 
     /**
@@ -82,8 +89,8 @@ public class Duke extends Application {
      * @return message displaying what Duke has done with the user input
      */
     public static String getResponse(String input) {
-        assert input != null: "Input cannot be null";
-        return "Baba the Duke says: " + Parser.evaluateUserInput(input);
+        assert input != null : "Input cannot be null";
+        return "Baba the Duke says: \n" + Parser.evaluateUserInput(input);
     }
 
     /**
@@ -198,11 +205,9 @@ public class Duke extends Application {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, USER),
-                DialogBox.getDukeDialog(dukeText, DUKE)
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
-
-
 }

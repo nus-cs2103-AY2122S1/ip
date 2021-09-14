@@ -13,7 +13,7 @@ public class Task {
     protected boolean isDone;
 
     /** Indicates if the task has been saved in a file. **/
-    protected boolean wasSaved;
+    protected boolean isSaved;
 
     /**
      * Constructor for a Task.
@@ -23,7 +23,7 @@ public class Task {
     public Task (String description) {
         this.description = description;
         this.isDone = false;
-        this.wasSaved = false;
+        this.isSaved = false;
     }
 
     /**
@@ -64,6 +64,6 @@ public class Task {
      * Indicates the current task as being saved in the file (using the filepath given).
      */
     public void markSaved() {
-        this.wasSaved = true;
+        this.isSaved = true;
     }
 }

@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * This class simulates a special type of Task which has a date and time
  * for which it is to be completed by, using the word 'by'.
