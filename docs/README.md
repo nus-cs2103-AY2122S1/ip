@@ -21,31 +21,37 @@ Task Type | Symbol
 todo | `T`
 deadline | `D`
 event | `E`
+
 <br />
 
 ### List Current Tasks
 
 Show all existing tasks you have entered.
+
 <br />
 
 ### Find Task
 
 Find the task by inputting the description.
+
 <br />
 
 ### Check Off Your Task
 
 Mark completed tasks as done.
+
 <br />
 
 ### Delete Your Task
 
 Delete tasks that you do not want in Duke anymore.
+
 <br />
 
 ### Update Your Task
 
 Update information of existing task.
+
 <br />
 
 ### Exit Duke
@@ -54,7 +60,6 @@ Exits the App.
 <br />
 
 ## Usage
-<br />
 
 ### `todo` - Add todo task to Duke to keep track of
 
