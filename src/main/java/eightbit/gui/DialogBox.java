@@ -7,12 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -21,10 +27,15 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
+    private static final Color LIGHT_BLUE = Color.rgb(0, 255, 255);
+    private static final Color LIGHT_GREEN = Color.rgb(3, 252, 152);
+    private static final CornerRadii CORNER_RADII = new CornerRadii(5.0);
+    private static final Insets INSETS = new Insets(-3.0);
+
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -37,7 +48,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setBackground(new Background(new BackgroundFill(LIGHT_GREEN, CORNER_RADII, INSETS)));
+        displayPicture.setFill(new ImagePattern(img));
     }
 
     /**
@@ -45,6 +57,11 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+
+        // set dialog background colour to light blue
+        Label dialog = (Label) tmp.get(0);
+        dialog.setBackground(new Background(new BackgroundFill(LIGHT_BLUE, CORNER_RADII, INSETS)));
+
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
