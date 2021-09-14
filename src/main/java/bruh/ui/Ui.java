@@ -96,6 +96,10 @@ public class Ui {
         setupNodeTree();
     }
 
+    //@@author LMAOboxhack-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
+    // with some refactoring & modifications
+
     /**
      * Initializes all the UI elements.
      */
@@ -188,6 +192,8 @@ public class Ui {
         stage.setMinWidth(500.0);
     }
 
+    //@@author
+
     /**
      * Set up the event handlers for the UI elements.
      *
@@ -254,13 +260,6 @@ public class Ui {
     }
 
     /**
-     * The type of a message, corresponding with different senders.
-     */
-    private enum MessageType {
-        USER, BOT, ERROR
-    }
-
-    /**
      * Checks if the specified command contains an exit instruction. If it does, exits the program
      * after a short delay.
      *
@@ -272,5 +271,12 @@ public class Ui {
             exit.setOnFinished(event -> Platform.exit());
             exit.play();
         }
+    }
+
+    /**
+     * The type of a message, corresponding with different senders.
+     */
+    private enum MessageType {
+        USER, BOT, ERROR
     }
 }
