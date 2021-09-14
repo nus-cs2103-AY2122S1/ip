@@ -46,13 +46,13 @@ public class Storage {
                     tasks.add(new ToDo(description, isDone));
                     break;
                 case "D":
-                    LocalDate time = LocalDate.parse(data[3].trim());
-                    tasks.add(new Deadline(description, time, isDone));
+                    LocalDate date = LocalDate.parse(data[3].trim());
+                    tasks.add(new Deadline(description, date, isDone));
                     break;
                 case "E":
-                    LocalDate startTime = LocalDate.parse(data[3].trim());
-                    LocalDate endTime = LocalDate.parse(data[3].trim());
-                    tasks.add(new Event(description, startTime, endTime, isDone));
+                    LocalDate startDate = LocalDate.parse(data[3].trim());
+                    LocalDate endDate = LocalDate.parse(data[3].trim());
+                    tasks.add(new Event(description, startDate, endDate, isDone));
                     break;
                 }
 

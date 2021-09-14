@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.OutOfTaskListRangeException;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
@@ -12,5 +13,5 @@ public abstract class Command {
      * @param storage Storage responsible for accessing and storing Duke data
      * @return the string representation of the command
      */
-    public abstract String execute(TaskList tasks, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage) throws OutOfTaskListRangeException;
 }

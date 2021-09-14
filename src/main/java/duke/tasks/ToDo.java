@@ -22,4 +22,17 @@ public class ToDo extends Task {
         String formattedStatus = super.isDone() ? "1|" : "0|";
         return "T|" + formattedStatus + super.getDescription();
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof ToDo) {
+            return this.getDescription().equals(((ToDo) other).getDescription());
+        } else {
+            return false;
+        }
+
+    }
 }

@@ -21,7 +21,7 @@ public class TaskList {
         int len = tasks.size();
         int count = 1;
 
-        for (int i = 0; i < len - 1; i++) {
+        for (int i = 0; i < len; i++) {
             Task task = tasks.get(i);
 
             if (task.contains(keyword)) {
@@ -30,15 +30,13 @@ public class TaskList {
             }
         }
 
-        Task task = tasks.get(len - 1);
-
-        if (task.contains(keyword)) {
-            taskString.append(count + ". " + task.toString());
-        }
-
-        return taskString.toString();
+        return taskString.toString().trim();
     }
 
+    /**
+     * Sorts the Tasks according their due dates
+     *
+     */
     public void sort() {
         this.tasks.sort(null);
     }
@@ -71,16 +69,42 @@ public class TaskList {
         return String.format("You have %d tasks", this.tasks.size());
     }
 
+    /**
+     * Returns task at index
+     *
+     * @param index index of task
+     * @return task at index
+     */
     public Task get(int index) {
         return this.tasks.get(index);
     }
 
+    /**
+     * Adds task to list of tasks
+     *
+     * @param task task to be added
+     */
     public void add(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Delete task at index from task list
+     *
+     * @param index index of task
+     * @return task that was deleted
+     */
     public Task delete(int index) {
         return this.tasks.remove(index);
+    }
+
+    /**
+     * Return the size of the task list
+     *
+     * @return size of task list
+     */
+    public int getSize() {
+        return this.tasks.size();
     }
 
     @Override
@@ -96,6 +120,5 @@ public class TaskList {
 
         return taskString.toString();
     }
-
 
 }

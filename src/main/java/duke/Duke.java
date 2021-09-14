@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
 
 import duke.commands.Command;
@@ -32,7 +33,7 @@ public class Duke {
             String message = command.execute(this.taskList, this.storage);
             this.storage.save(this.taskList.getFormattedData());
             return message;
-        } catch (InvalidInputException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }
