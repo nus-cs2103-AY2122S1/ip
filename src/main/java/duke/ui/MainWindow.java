@@ -2,6 +2,8 @@ package duke.ui;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import duke.Duke;
 import duke.exception.DukeException;
@@ -100,13 +102,15 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(dukeText, dukeImg)
         );
         userInput.clear();
-        if (ui.willExit()) {
-            try {
-                Platform.exit();
-            } catch (Exception e) {
-                e.printStackTrace();
+        CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(() -> {
+            if (ui.willExit()) {
+                try {
+                    Platform.exit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }
+        });
     }
 
     private String getResponse(String input) {

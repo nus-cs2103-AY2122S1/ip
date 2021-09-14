@@ -7,11 +7,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 /**
@@ -22,15 +23,15 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private Circle circleDisplayPicture;
+    private ImageView circleDisplayPicture;
 
     /**
-     * Creates a new dialog box ui that contains the message in l and the profile picture in iv.
+     * Creates a new dialog box ui that contains the message in l and the profile picture in image.
      *
      * @param l  the message to be displayed
-     * @param iv the profile picture to be displayed
+     * @param image the profile picture to be displayed
      */
-    public DialogBox(String l, Image iv) {
+    public DialogBox(String l, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -43,8 +44,22 @@ public class DialogBox extends HBox {
         dialog.setText(l);
 
         dialog.setWrapText(true);
-        circleDisplayPicture.setRadius(30);
-        circleDisplayPicture.setFill(new ImagePattern(iv));
+        circleDisplayPicture.setImage(image);
+        resizeAndClip(circleDisplayPicture);
+    }
+    
+    private static void resizeAndClip(ImageView iv) {
+        iv.setPreserveRatio(true);
+        double aspectRatio = iv.getImage().getWidth() / iv.getImage().getHeight();
+        double tempWidthOrHeight = Math.min(iv.getImage().getWidth(), iv.getImage().getHeight());
+        iv.setViewport(new Rectangle2D((iv.getImage().getWidth() - tempWidthOrHeight) / 2, (
+            iv.getImage().getHeight() - tempWidthOrHeight) / 2, tempWidthOrHeight, tempWidthOrHeight));
+        if (aspectRatio < 1) {
+            iv.setFitWidth(60);
+        } else {
+            iv.setFitHeight(60);
+        }
+        iv.setClip(new Circle(30, 30, 30));
     }
 
     /**
