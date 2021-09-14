@@ -20,7 +20,7 @@ public class Duke {
     /**
      * Creates duke with the file path given.
      *
-     * @param filePath The file path where the tasks are stored locally.
+     * @param filePath the file path where the tasks are stored locally.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -36,8 +36,8 @@ public class Duke {
     /**
      * Gets the response from the input.
      *
-     * @param input The user input to duke.
-     * @return String The String representing Duke's response.
+     * @param input the user input to duke.
+     * @return String the String representing Duke's response.
      */
     public String getResponse(String input) {
         try {

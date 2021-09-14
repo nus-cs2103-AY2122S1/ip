@@ -19,7 +19,7 @@ public class Main extends Application {
     /**
      * Loads the GUI.
      *
-     * @param stage The stage that will be used.
+     * @param stage the stage that will be used.
      */
     @Override
     public void start(Stage stage) {

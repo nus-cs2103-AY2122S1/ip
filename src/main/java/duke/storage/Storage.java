@@ -27,7 +27,7 @@ public class Storage {
     /**
      * Creates storage with the file path provided.
      *
-     * @param filePath The file path where all the tasks are stored.
+     * @param filePath the file path where all the tasks are stored.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -80,7 +80,7 @@ public class Storage {
     /**
      * Loads the text file and creates a text file if file does not exist.
      *
-     * @return A array list with all the tasks read from the file.
+     * @return the array list with all the tasks read from the file.
      */
     public ArrayList<Task> loadFile() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -115,7 +115,7 @@ public class Storage {
     /**
      * Updates the tasks given to the file.
      *
-     * @param taskList The tasks that will be updated to the file.
+     * @param taskList the tasks that will be updated to the file.
      */
     public void updateTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getAllTasks();

@@ -18,7 +18,7 @@ public class Ui {
     /**
      * Returns the message inputted.
      *
-     * @param message The message to be outputted.
+     * @param message the message to be outputted.
      */
     public String returnMessage(String message) {
         return message;
@@ -27,8 +27,8 @@ public class Ui {
     /**
      * Returns the tasks in the task list.
      *
-     * @param taskList The tasks that will be printed.
-     * @return String The string representing all the tasks.
+     * @param taskList the tasks that will be printed.
+     * @return String the string representing all the tasks.
      */
     public String returnTasks(TaskList taskList) {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");

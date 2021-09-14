@@ -19,7 +19,7 @@ public class TaskList {
     /**
      * Returns all the tasks in an array list.
      *
-     * @return ArrayList containing all the list.
+     * @return the arraylist containing all the list.
      */
     public ArrayList<Task> getAllTasks() {
         return tasks;

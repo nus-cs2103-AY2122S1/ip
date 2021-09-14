@@ -21,8 +21,8 @@ public class UpdateCommand extends Command {
     /**
      * Creates the command that will update the task in the taskList.
      *
-     * @param taskNum The taskNum of the task that will be updated.
-     * @param updatedTask The task that contains the updated fields.
+     * @param taskNum the taskNum of the task that will be updated.
+     * @param updatedTask the task that contains the updated fields.
      */
     public UpdateCommand(int taskNum, Task updatedTask) {
         this.taskNum = taskNum;
@@ -47,9 +47,9 @@ public class UpdateCommand extends Command {
     /**
      * Executes the command by updating the task.
      *
-     * @param taskList The taskList where the task will be added.
-     * @param ui The ui where the message will be printed.
-     * @param storage The storage where it will be updated with the new task.
+     * @param taskList the taskList where the task will be added.
+     * @param ui the ui where the message will be printed.
+     * @param storage the storage where it will be updated with the new task.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

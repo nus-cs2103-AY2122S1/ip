@@ -53,8 +53,8 @@ public class DialogBox extends HBox {
     /**
      * Creates the user's dialog box with text and img provided.
      *
-     * @param text The string representing the dialog.
-     * @param img The image of the person.
+     * @param text the string representing the dialog.
+     * @param img the image of the person.
      * @return the dialog box which contains the text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -64,8 +64,8 @@ public class DialogBox extends HBox {
     /**
      * Creates the duke's dialog box with text and img provided.
      *
-     * @param text The string representing the dialog.
-     * @param img The image of duke.
+     * @param text the string representing the dialog.
+     * @param img the image of duke.
      * @return the dialog box which contains the text and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {

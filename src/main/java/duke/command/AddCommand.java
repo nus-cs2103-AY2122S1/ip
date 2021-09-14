@@ -15,7 +15,7 @@ public class AddCommand extends Command {
     /**
      * Creates the command that will add the task provided to the taskList.
      *
-     * @param task The task that will be added.
+     * @param task the task that will be added.
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -24,9 +24,9 @@ public class AddCommand extends Command {
     /**
      * Executes the command by creating the task and printing the message through the ui.
      *
-     * @param taskList The taskList where the task will be added.
-     * @param ui The ui where the message will be printed.
-     * @param storage The storage where it will be updated with the new task.
+     * @param taskList the taskList where the task will be added.
+     * @param ui the ui where the message will be printed.
+     * @param storage the storage where it will be updated with the new task.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

@@ -129,8 +129,8 @@ public class Parser {
     /**
      * Parses the string for command and returns the command.
      *
-     * @param fullCommand The string representing the command inputted by the user.
-     * @return A command that can be executed to perform action specified by the user.
+     * @param fullCommand the string representing the command inputted by the user.
+     * @return the command that can be executed to perform action specified by the user.
      * @throws DukeException if the command is not recognised.
      */
     public static Command parse(String fullCommand) throws DukeException {
