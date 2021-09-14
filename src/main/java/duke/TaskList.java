@@ -54,36 +54,73 @@ public class TaskList {
                 }
             } else {
                 if (arr[i].length() == 10 && arr[i].charAt(4) == '-' && arr[i].charAt(7) == '-') {
-                    LocalDate ld = LocalDate.parse(arr[i]);
-                    str += ld.getDayOfMonth() + " "
-                            + ld.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " "
-                            + ld.getYear();
-                    if (i != arr.length - 1) {
-                        str += " ";
-                    }
+                    str += getDateDeadline(arr, i);
                 } else if (arr[i].length() == 5 && arr[i].charAt(2) == ':') {
-                    LocalTime lt = LocalTime.parse(arr[i]);
-                    int hour = lt.getHour();
-                    String hourSuffix = hour < 12 ? "AM" : "PM";
-                    if (hour == 0) {
-                        hour = 12;
-                    } else if (hour > 12) {
-                        hour -= 12;
-                    }
-                    int minute = lt.getMinute();
-                    String minutePrefix = minute < 10 ? "0" : "";
-                    str += hour + ":" + minutePrefix + minute + " " + hourSuffix;
-                    if (i != arr.length - 1) {
-                        str += " ";
-                    }
-
+                    str += getTimeDeadline(arr, i);
                 } else {
-                    str += arr[i];
-                    if (i != arr.length - 1) {
-                        str += " ";
-                    }
+                    str += getNormalDeadline(arr, i);
                 }
             }
+        }
+        return str;
+    }
+
+    /**
+     * Converts a date input to a modified date output.
+     *
+     * @param arr The input from the user.
+     * @param i The current index in the loop.
+     * @return A string containing the modified date.
+     */
+    public static String getDateDeadline(String[] arr, int i) {
+        String str = "";
+        LocalDate ld = LocalDate.parse(arr[i]);
+        str += ld.getDayOfMonth() + " "
+                + ld.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " "
+                + ld.getYear();
+        if (i != arr.length - 1) {
+            str += " ";
+        }
+        return str;
+    }
+
+    /**
+     * Converts a time input to a modified time output.
+     *
+     * @param arr The input from the user.
+     * @param i The current index in the loop.
+     * @return A string containing the modified time.
+     */
+    public static String getTimeDeadline(String[] arr, int i) {
+        String str = "";
+        LocalTime lt = LocalTime.parse(arr[i]);
+        int hour = lt.getHour();
+        String hourSuffix = hour < 12 ? "AM" : "PM";
+        if (hour == 0) {
+            hour = 12;
+        } else if (hour > 12) {
+            hour -= 12;
+        }
+        int minute = lt.getMinute();
+        String minutePrefix = minute < 10 ? "0" : "";
+        str += hour + ":" + minutePrefix + minute + " " + hourSuffix;
+        if (i != arr.length - 1) {
+            str += " ";
+        }
+        return str;
+    }
+
+    /**
+     * Extracts the deadline from the user input..
+     *
+     * @param arr The input from the user.
+     * @param i The current index in the loop.
+     * @return A string containing the deadline.
+     */
+    public static String getNormalDeadline(String[] arr, int i) {
+        String str = arr[i];
+        if (i != arr.length - 1) {
+            str += " ";
         }
         return str;
     }

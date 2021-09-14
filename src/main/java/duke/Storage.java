@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Storage {
 
     private String filepath;
+    private static String arr[];
 
     /**
      * A constructor to create a Storage object.
@@ -29,23 +30,14 @@ public class Storage {
      */
     public void readFile(TaskList ls) {
         try {
-            String arr[];
             File myObj = new File(this.filepath);
             Scanner myScanner = new Scanner(myObj);
             while (myScanner.hasNextLine()) {
                 String data = myScanner.nextLine();
                 arr = data.split(" ");
                 String task = arr[0];
-                String description = "";
-                int counter = 0;
-                for(int i = 1; i < arr.length; i++) {
-                    if (!(arr[i].charAt(0) == '(')) {
-                        description += arr[i] + " ";
-                    } else {
-                        counter = i;
-                        break;
-                    }
-                }
+                String description = getDescription(arr);
+                int counter = getCounter(arr, 0);
                 if (task.charAt(2) == 'D') {
                     createDeadlineTask(counter, arr, ls, description);
                 } else if (task.charAt(2) == 'E') {
@@ -58,6 +50,41 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Retrieves the description of a task from a file.
+     *
+     * @param arr The input from the user.
+     * @return A description about a task.
+     */
+    public String getDescription(String[] arr) {
+        String description = "";
+        for(int i = 1; i < arr.length; i++) {
+            if (!(arr[i].charAt(0) == '(')) {
+                description += arr[i] + " ";
+            } else {
+                break;
+            }
+        }
+        return description;
+    }
+
+    /**
+     * Returns the starting index of the deadline of a task.
+     *
+     * @param arr The input from the user.
+     * @param counter The initial counter value which is set to 0.
+     * @return The starting index of a deadline.
+     */
+    public int getCounter(String[] arr, int counter) {
+        for(int i = 1; i < arr.length; i++) {
+            if (arr[i].charAt(0) == '(') {
+                counter = i;
+                break;
+            }
+        }
+        return counter;
     }
 
     /**
