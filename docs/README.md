@@ -207,6 +207,24 @@ Format: `bye`
 Expected outcome: An exit message will be shown and the program will close after a delay.
 
 
+***
+
+
+## Command Summary
+
+| Command      | Format                                               | Example                                       |
+|--------------|------------------------------------------------------| ----------------------------------------------|
+| help         | `help`                                               | `help`                                        |
+| list         | `list`                                               | `list`                                        |
+| todo         | `todo {DESCRIPTION}`                                 | `todo sleep`                                  |
+| deadline     | `deadline {DESCRIPTION} (by: {YYYY-MM-DD} {HH:mm})`  | `deadline return book (by: 2021-09-06 18:00)` |
+| event        | `event {DESCRIPTION} (at: {YYYY-MM-DD} {HH:mm})`     | `event group project (at: 2021-09-08 18:00)`  |
+| done         | `done {TASK_NUMBER}`                                 | `done 2`                                      |
+| delete       | `delete {TASK_NUMBER}`                               | `delete 2`                                    |
+| find         | `find {KEYWORD}`                                     | `find book`                                   |
+| bye          | `bye`                                                | `bye`                                         |
+
+
 
 ## Acknowledgements
 [Faker Icon](https://skt-faker.tumblr.com/post/161856846188/skt-chibi-iconsmore-skt-faker-sky-peanut)
