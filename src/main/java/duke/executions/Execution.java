@@ -124,7 +124,6 @@ public class Execution {
         default: command = new AddCommand(taskList, textUi, operationType, task, time);
         break;
         }
-
         return command;
     }
 }
