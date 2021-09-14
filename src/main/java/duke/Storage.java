@@ -41,56 +41,21 @@ public class Storage {
                 for(int i = 1; i < arr.length; i++) {
                     if (!(arr[i].charAt(0) == '(')) {
                         description += arr[i] + " ";
-                    }
-                    else {
+                    } else {
                         counter = i;
                         break;
                     }
                 }
                 if (task.charAt(2) == 'D') {
-                    String deadline = "";
-                    for (int i = counter; i < arr.length; i++) {
-                        if (i == counter) {
-                            deadline += arr[i].substring(1);
-                        } else if (i == arr.length - 1) {
-                            deadline += " " + arr[i].substring(0, arr[i].length() - 1);
-                        } else {
-                            deadline += " " + arr[i];
-                        }
-                    }
-                    Deadline item = new Deadline(description, deadline);
-                    ls.addTask(item);
-                    if (task.substring(4).equals("Done")) {
-                        ls.markAsDone(ls.getSize()-1);
-                    }
+                    createDeadlineTask(counter, arr, ls, description);
                 } else if (task.charAt(2) == 'E') {
-                    String deadline = "";
-                    for (int i = counter; i < arr.length; i++) {
-                        if (i == counter) {
-                            deadline += arr[i].substring(1);
-                        } else if (i == arr.length - 1) {
-                            deadline += " " + arr[i].substring(0, arr[i].length() - 1);
-                        } else {
-                            deadline += " " + arr[i];
-                        }
-                    }
-                    Event item = new Event(description, deadline);
-                    ls.addTask(item);
-                    if (task.substring(4).equals("Done")) {
-                        ls.markAsDone(ls.getSize() - 1);
-                    }
-                }
-                else {
-                    Todo item = new Todo(description);
-                    ls.addTask(item);
-                    if (task.substring(4).equals("Done")) {
-                        ls.markAsDone(ls.getSize() - 1);
-                    }
+                    createEventTask(counter, arr, ls, description);
+                } else {
+                    createTodoTask(arr, ls, description);
                 }
             }
             myScanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Read File Error.");
             System.out.println(e.getMessage());
         }
     }
@@ -106,7 +71,8 @@ public class Storage {
             for (int i = 0; i < ls.getSize(); i++) {
                 str += (i + 1) + "."
                         + ls.getTask(i).toString().charAt(1)
-                        + "|" + ls.getTask(i).getStatus() + " " + ls.getTask(i).getDescription();
+                        + "|" + ls.getTask(i).getStatus()
+                        + " " + ls.getTask(i).getDescription();
                 if (ls.getTask(i) instanceof Deadline || ls.getTask(i) instanceof Event) {
                     str += "(" + ls.getTask(i).getDeadline() + ")";
                 }
@@ -118,8 +84,74 @@ public class Storage {
             fileWriter.write(str);
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Save File Error.");
             System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Reads from a file and creates a deadline task.
+     *
+     * @param counter The starting index of deadline.
+     * @param arr The input from the user.
+     * @param ls The list of tasks.
+     * @param description The description of the task.
+     */
+    public void createDeadlineTask(int counter, String[] arr, TaskList ls, String description) {
+        String deadline = "";
+        for (int i = counter; i < arr.length; i++) {
+            if (i == counter) {
+                deadline += arr[i].substring(1);
+            } else if (i == arr.length - 1) {
+                deadline += " " + arr[i].substring(0, arr[i].length() - 1);
+            } else {
+                deadline += " " + arr[i];
+            }
+        }
+        Deadline item = new Deadline(description, deadline);
+        ls.addTask(item);
+        if (arr[0].substring(4).equals("Done")) {
+            ls.markAsDone(ls.getSize()-1);
+        }
+    }
+
+    /**
+     * Reads from a file and creates an event task.
+     *
+     * @param counter The starting index of deadline.
+     * @param arr The input from the user.
+     * @param ls The list of tasks.
+     * @param description The description of the task.
+     */
+    public void createEventTask(int counter, String[] arr, TaskList ls, String description) {
+        String deadline = "";
+        for (int i = counter; i < arr.length; i++) {
+            if (i == counter) {
+                deadline += arr[i].substring(1);
+            } else if (i == arr.length - 1) {
+                deadline += " " + arr[i].substring(0, arr[i].length() - 1);
+            } else {
+                deadline += " " + arr[i];
+            }
+        }
+        Event item = new Event(description, deadline);
+        ls.addTask(item);
+        if (arr[0].substring(4).equals("Done")) {
+            ls.markAsDone(ls.getSize() - 1);
+        }
+    }
+
+    /**
+     * Reads from a file and creates a todo event.
+     *
+     * @param arr The input from the user.
+     * @param ls The list of tasks.
+     * @param description The description of the task.
+     */
+    public void createTodoTask(String[] arr, TaskList ls, String description) {
+        Todo item = new Todo(description);
+        ls.addTask(item);
+        if (arr[0].substring(4).equals("Done")) {
+            ls.markAsDone(ls.getSize() - 1);
         }
     }
 

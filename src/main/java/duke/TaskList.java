@@ -30,8 +30,7 @@ public class TaskList {
         for(int i = 1; i < arr.length; i++) {
             if (!(arr[i].charAt(0) == '/')) {
                 str += arr[i] + " ";
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -46,11 +45,11 @@ public class TaskList {
      */
     public static String getDeadline(String[] arr) throws DateTimeParseException {
         String str = "";
-        boolean bool = false;
+        boolean isSlash = false;
         for(int i = 1; i < arr.length; i++) {
-            if (!bool) {
+            if (!isSlash) {
                 if (arr[i].charAt(0) == '/') {
-                    bool = true;
+                    isSlash = true;
                     str += arr[i].substring(1) + ": ";
                 }
             } else {
