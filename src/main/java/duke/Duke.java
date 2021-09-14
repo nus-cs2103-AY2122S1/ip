@@ -62,7 +62,7 @@ public class Duke extends Application {
             try {
                 if (parser.isList()) {
                     // Run based on list command
-                    ui.listAll(this.tasks);
+                    ui.list(this.tasks);
 
                     // Scan for next command
                     parser = new Parser(sc.nextLine());
@@ -152,7 +152,7 @@ public class Duke extends Application {
                     }
                 } else if (parser.isFind()) {
                     try {
-                        TaskList taskList = this.tasks.find(parser.getSecondPart());
+                        TaskList taskList = this.tasks.find(parser.secondPart());
                         ui.findTask(taskList);
 
                         parser = new Parser(sc.nextLine());

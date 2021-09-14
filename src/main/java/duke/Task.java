@@ -19,7 +19,6 @@ public class Task {
 
     private String getStatusIcon() {
         return (isDone) ? "X" : " ";
-    }
         
     public boolean isKeyword(String keyword) {
         if (this.description.contains(keyword)) {
