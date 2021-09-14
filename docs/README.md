@@ -16,6 +16,8 @@ Duke is a personal task manager in the form of a chatbot. He can help you track 
 ## Features
 Duke supports 3 main types of tasks: Todos, Deadlines and Events. You can perform Create, Read and Delete operations on these tasks, or mark them as done. Duke also helps you search for tasks if the list gets too long.
 
+Furthermore, Duke recently supposed the function to add tags! You can now optionally add tag(s) to a post to highlight the category that post falls into.
+
 ## Usages
 
 #### `list` &mdash; List Tasks
@@ -24,14 +26,9 @@ Lists all the tasks you have inserted into Duke.
 list
 ```
 
-#### `sort` &mdash; Sort Tasks
-Lists all the tasks you have inserted into Duke in alphabetical order.
-```
-sort
-```
 
 #### `find` &mdash; Find Tasks
-Search for tasks that match a given search string
+Search for tasks that match a given search string (Case-Sensitive, for further accuracy!)
 ```
 find <search_string>
 ```
@@ -51,19 +48,19 @@ delete <task_index>
 #### `todo` &mdash; Add a Todo
 Add a todo. Todos do not have any time specified.
 ```
-todo <todo_name>
+todo <todo_name> <tag(s)>
 ```
 
 #### `deadline` &mdash; Add a Deadline
-Add a deadline. The `time` parameter should follow the format specified at `Guide format and input restrictions`.
+Add a deadline. The `time` parameter should follow the format specified at `Guide format and input restrictions`. It must be strictly `dddd-mm-yy`
 ```
-deadline <deadline_name> /by <time>
+deadline <deadline_name> /by <time> <tag(s)>
 ```
 
 #### `event` &mdash; Add an Event
 Add an event. The `time` parameter should follow the format specified at `Guide format and input restrictions`.
 ```
-event <event_name> /at <time>
+event <event_name> /at <time> <tag(s)>
 ```
 
 #### `bye` &mdash; Exit app
@@ -73,6 +70,11 @@ bye
 ```
 
 ## Acknowledgements
-- JSON formatting library from [Jackson](https://github.com/FasterXML/jackson)
-- GUI from [JavaFX](https://openjfx.io)
-- Unit Testing from [JUnit5](https://github.com/junit-team/junit5)
+* JSON formatting library from [Jackson](https://github.com/FasterXML/jackson)
+* GUI from [JavaFX](https://openjfx.io)
+* Unit Testing from [JUnit5](https://github.com/junit-team/junit5)
+* [Azeem](https://github.com/DrWala/) for his repo to help me install Gradle and get my JavaFX GUI working since it was not working on my end even after following the steps provided
+* [Prof Damith](https://github.com/damithc) for his gradle.yaml file for Continuous Integration
+* Team [Duke](https://github.com/se-edu) for the skeleton code for the original Duke App
+* [AB3](https://github.com/nus-cs2103-AY1920S1/addressbook-level3) for reference to the BCD-Extension regarding Tags
+* All copyrighted images and their respective sources

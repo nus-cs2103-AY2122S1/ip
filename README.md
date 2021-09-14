@@ -22,10 +22,3 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-
-## Acknowldgements
-* [Azeem](https://github.com/DrWala/) for his repo to help me install Gradle and get my JavaFX GUI working since it was not working on my end even after following the steps provided
-* [Prof Damith](https://github.com/damithc) for his gradle.yaml file for Continuous Integration
-* Team [Duke](https://github.com/se-edu) for the skeleton code for the original Duke App
-* [AB3](https://github.com/nus-cs2103-AY1920S1/addressbook-level3) for reference to the BCD-Extension regarding Tags
-* All copyrighted images and their respective sources
