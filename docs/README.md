@@ -40,16 +40,16 @@ Creates a todo.<br>
 **Expected output:**<br>
 ![Todo Ouput](images/todo.PNG)
 
-### Create a deadline: `deadline <deadline description> <date of deadline> [time]`
+### Create a deadline: `deadline <deadline description> /by <date of deadline> [time]`
 Creates a deadline.<br>
-**Format:** `deadline <deadline description> <date of deadline> [time]`<br>
+**Format:** `deadline <deadline description> /by <date of deadline> [time]`<br>
 **Example:** `deadline finish assigment /by 15/9/2021 2359`<br>
 **Expected output:**<br>
 ![Deadline Ouput](images/deadline.PNG)
 
-### Create an event: `event <event description> <date of event> [time]`
+### Create an event: `event <event description> /at <date of event> [time]`
 Creates a event.<br>
-**Format:** `event <event description> <date of event> [time]`<br>
+**Format:** `event <event description> /at <date of event> [time]`<br>
 **Example:** `event CS2103 Lecture /at 15/9/2021 1300`<br>
 **Expected output:**<br>
 ![Event Ouput](images/event.PNG)
