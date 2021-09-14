@@ -30,7 +30,7 @@ e.g. in `todo NAME`, NAME is a parameter which can be used as `todo hw`.
 
 ### `todo, deadline, event` - Adding tasks of varying types
 
-####Adding ToDo type
+### Adding ToDo type
 
 Format: `todo NAME`
 
@@ -46,7 +46,7 @@ Got it. I've added this task:
 Now you have 6 tasks in your list.
 ```
 
-####Adding Deadline Type
+###Adding Deadline Type
 
 Format: `deadline NAME /by YYYY-MM-DD`
 * Date should only be specified in the following format given
@@ -62,7 +62,7 @@ Got it. I've added this task:
 Now you have 7 tasks in your list.
 ```
 
-####Adding tasks of the Event type
+###Adding tasks of the Event type
 
 Format: `event NAME /at DATE`
 
