@@ -15,9 +15,6 @@
          <HBox.margin>
             <Insets right="10.0" top="10.0" />
          </HBox.margin>
-         <padding>
-            <Insets right="5.0" top="5.0" />
-         </padding>
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Label>

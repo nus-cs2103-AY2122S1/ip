@@ -18,7 +18,7 @@ public class Main extends Application {
     private final Duke duke = new Duke();
 
     /**
-     * Start the GUI process with a specific stage.
+     * Starts the GUI process with a specific stage.
      *
      * @param stage Stage info to start a GUI.
      */

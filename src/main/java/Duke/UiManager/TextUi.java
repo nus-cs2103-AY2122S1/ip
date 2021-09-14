@@ -14,7 +14,7 @@ public class TextUi {
      * @return Default helloMessage.
      */
     public String helloMessage() {
-        String text = "Hello! Welcome to your best task manager Duke!"
+        String text = "Hello! Welcome to your best task manager Duke!\n"
                + "What can I do for you?";
 
         return text;

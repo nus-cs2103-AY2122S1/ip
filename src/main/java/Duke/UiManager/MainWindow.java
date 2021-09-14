@@ -45,13 +45,13 @@ public class MainWindow extends AnchorPane {
 
     private Rectangle setEmptySpace() {
         //Set empty space between dialogs.
-        emptySpace = new Rectangle(400, 20);
+        emptySpace = new Rectangle(400, 40);
         emptySpace.setFill(Color.TRANSPARENT);
         return emptySpace;
     }
 
     /**
-     * Initialize DialogBox and MainWindow stuff.
+     * Initializes DialogBox and MainWindow stuff.
      */
     @FXML
     public void initialize() {

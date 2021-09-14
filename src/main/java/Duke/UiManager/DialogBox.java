@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+
 /**
  * @@author Hang Zelin
  *
@@ -20,6 +22,7 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String EXCEPTION_IDENTIFIER = "OOPS";
     @FXML
     private Label dialog;
     @FXML
@@ -35,7 +38,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        setDialogText(text);
         displayPicture.setImage(img);
     }
 
@@ -50,6 +53,28 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Sets text in a Dialog box, with specific style.
+     *
+     * @param text String value of Duke's response
+     */
+    private void setDialogText(String text) {
+        dialog.setText(text);
+        if (hasExceptionResponse(text)) {
+            dialog.setTextFill(Color.rgb(236, 70, 70));
+        }
+    }
+
+    /**
+     * Returns a boolean value showing whether the input is an exception response.
+     *
+     * @param input String value used to detect exception response.
+     * @return boolean value indicating if input is exception response.
+     */
+    private boolean hasExceptionResponse(String input) {
+        return input.contains(EXCEPTION_IDENTIFIER);
+    }
+
+    /**
      * Returns a DialogBox for user.
      *
      * @param text Text info in user dialog box.
@@ -58,10 +83,10 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-radius:12px;"
-                + "-fx-border-style: solid; -fx-border-width: 1em");
+        dialogBox.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-width:1em 0;"
+                + "-fx-translate-x:10px;");
         dialogBox.dialog.setStyle("-fx-border-color:#FFADAD; -fx-border-style:solid; -fx-border-width:3;"
-                + "-fx-border-radius:10px; -fx-background-color: #FFADAD; -fx-background-radius: 12px;");
+                + "-fx-border-radius:10px; -fx-background-color:#FFADAD; -fx-background-radius: 12px;");
         return dialogBox;
     }
 
@@ -74,11 +99,12 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-radius:12px;"
-                + "-fx-border-style: solid; -fx-border-width: 1em;");
-        dialogBox.dialog.setStyle("-fx-border-color: #3DB2FF; -fx-border-style:solid; -fx-border-width:3;"
-                + "-fx-border-radius:10px; -fx-background-color:  #3DB2FF; -fx-background-radius: 12px;");
         dialogBox.flip();
+        dialogBox.setStyle("-fx-border-color:#3DB2FF; -fx-border-style:solid; -fx-border-width:1em 0;"
+                + "-fx-translate-x:10px;");
+        dialogBox.dialog.setStyle("-fx-border-color:#3DB2FF; -fx-border-style:solid; -fx-border-width:3;"
+                + "-fx-border-radius:10px; -fx-background-color:#3DB2FF; -fx-background-radius:12px;"
+                + "-fx-translate-x:10px");
         return dialogBox;
     }
 }

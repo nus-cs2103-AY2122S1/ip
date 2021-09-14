@@ -37,7 +37,7 @@ public class DukeException extends Exception {
         break;
         case TELL_FORMAT_ERROR: errorMessage = "OOPS!!! I'm sorry, but the format of tell is wrong :-(";
         break;
-        case EMPTY_COMMAND_ERROR: errorMessage = "Hello? Sorry but I can't receive anything from you!!!";
+        case EMPTY_COMMAND_ERROR: errorMessage = "OOPS!!! Sorry but I can't receive anything from you!!!";
         break;
         case FILE_WRITE_ERROR: errorMessage = "OOPS!!! Cannot write in data into Duke!!!";
         break;
