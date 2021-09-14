@@ -7,6 +7,9 @@ import duke.util.Parser;
 import duke.util.Ui;
 import duke.util.Storage;
 
+/**
+ * Container class for Duke program.
+ */
 public class Duke {
     private boolean isExit;
 
@@ -20,6 +23,11 @@ public class Duke {
         Parser.setTaskList(taskList);
     }
 
+    /**
+     * Drives the Duke program.
+     *
+     * @param args User inputs.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
@@ -43,7 +51,6 @@ public class Duke {
             return e.getMessage();
         }
     }
-
 
     /**
      * Returns whether the program should exit.

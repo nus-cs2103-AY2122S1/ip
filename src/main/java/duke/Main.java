@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Initializes Stage and starts GUI.
+     *
+     * @param stage Stage of GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

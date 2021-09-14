@@ -1,22 +1,22 @@
 package duke.task;
 
 /**
- * Todo class to represent a class without a deadline.
+ * To do class to represent a class without a deadline.
  */
 public class Todo extends Task {
     /**
-     * Constructor method of Todo.
+     * Constructor method of To do.
      *
-     * @param description Description of a Todo.
+     * @param description Description of a To do.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Returns the todo in array form.
+     * Returns the to do in array format.
      *
-     * @return String array.
+     * @return To do in string array format.
      */
     @Override
     public String[] formatTaskInArray() {

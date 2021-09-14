@@ -32,24 +32,24 @@ public class Parser {
             if (instr.length != 1) {
                 instrContent = instr[1];
             }
-            switch (instrType) {
-                case "todo":
-                case "t":
-                    return ToDoCommand(instrContent);
-                case "deadline":
-                case "d":
-                    return DeadlineCommand(instrContent);
-                case "event":
-                case "e":
-                    return EventCommand(instrContent);
-                case "done":
-                    return DoneCommand(instrContent);
-                case "delete":
-                    return DeleteCommand(instrContent);
-                case "find":
-                    return FindCommand(instrContent);
-                default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            switch (instrType) { 
+            case "todo":
+            case "t":
+                return ToDoCommand(instrContent);
+            case "deadline":
+            case "d":
+                return DeadlineCommand(instrContent);
+            case "event":
+            case "e":
+                return EventCommand(instrContent);
+            case "done":
+                return DoneCommand(instrContent);
+            case "delete":
+                return DeleteCommand(instrContent);
+            case "find":
+                return FindCommand(instrContent);
+            default:
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }

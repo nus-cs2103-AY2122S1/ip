@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.exceptions.DukeException;
 
+/**
+ * Class to properly extract time from the string input by user.
+ */
 public class TimeExtractor {
     /** Extracts time in a specific format.
      *

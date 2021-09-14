@@ -88,29 +88,29 @@ public class Storage {
     public static void handleData(String[] itemDetails, TaskList taskList) throws DukeException {
         String task_type = itemDetails[0];
         switch (task_type) {
-            case "T":
-                Todo todo = new Todo(itemDetails[2]);
-                if (itemDetails[1].equals("1")) {
-                    todo.markAsDone();
-                }
-                taskList.addTask(todo);
-                break;
-            case "D":
-                Deadline deadline = new Deadline(itemDetails[2], itemDetails[3]);
-                if (itemDetails[1].equals("1")) {
-                    deadline.markAsDone();
-                }
-                taskList.addTask(deadline);
-                break;
-            case "E":
-                Event event = new Event(itemDetails[2], itemDetails[3]);
-                if (itemDetails[1].equals("1")) {
-                    event.markAsDone();
-                }
-                taskList.addTask(event);
-                break;
-            default:
-                throw new DukeException("Something went wrong: cannot process the data.");
+        case "T":
+            Todo todo = new Todo(itemDetails[2]);
+            if (itemDetails[1].equals("1")) {
+                todo.markAsDone();
+            }
+            taskList.addTask(todo);
+            break;
+        case "D":
+            Deadline deadline = new Deadline(itemDetails[2], itemDetails[3]);
+            if (itemDetails[1].equals("1")) {
+                deadline.markAsDone();
+            }
+            taskList.addTask(deadline);
+            break;
+        case "E":
+            Event event = new Event(itemDetails[2], itemDetails[3]);
+            if (itemDetails[1].equals("1")) {
+                event.markAsDone();
+            }
+            taskList.addTask(event);
+            break;
+        default:
+            throw new DukeException("Something went wrong: cannot process the data.");
         }
     }
 

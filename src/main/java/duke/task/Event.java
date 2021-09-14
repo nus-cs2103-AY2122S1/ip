@@ -18,9 +18,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the event in array form.
+     * Returns the event in array format.
      *
-     * @return String array.
+     * @return Event in string array format.
      */
     @Override
     public String[] formatTaskInArray() {

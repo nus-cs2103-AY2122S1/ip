@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the deadline in array form.
+     * Returns the deadline in array format.
      *
      * @return Deadline in array format.
      */
