@@ -1,3 +1,4 @@
+// The GUI is adapted from https://se-education.org/guides/tutorials/javaFx.html
 package duke.ui;
 
 import duke.Duke;

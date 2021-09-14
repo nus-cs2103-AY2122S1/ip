@@ -1,3 +1,5 @@
+//@@author Harry-Gao-H-reused
+// The GUI is adapted from https://se-education.org/guides/tutorials/javaFx.html
 package duke.ui;
 
 import java.io.IOException;
