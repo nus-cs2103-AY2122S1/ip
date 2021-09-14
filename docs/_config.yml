@@ -3,4 +3,4 @@ plugins:
 - jekyll-remote-theme
 title: DukeBot
 description: A task manager - Type away to schedule your day
-logo: /src/main/resources/images/PageLogo.png
+logo: PageLogo.png
