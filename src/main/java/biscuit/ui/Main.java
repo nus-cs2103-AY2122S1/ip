@@ -7,6 +7,7 @@ import biscuit.Biscuit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -33,6 +34,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setBiscuit(biscuit);
+            stage.setTitle("Biscuit - Track your tasks today!");
+            stage.getIcons().add(new Image("/images/PawIcon.png"));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

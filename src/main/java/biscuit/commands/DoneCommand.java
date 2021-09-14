@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) throws BiscuitException {
         if (userInputs.length < 2) {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! "
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!!\n"
                     + "The done task number cannot be empty.");
         }
 
@@ -59,7 +59,7 @@ public class DoneCommand extends Command {
             }
             return message.toString();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter valid numbers"
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!!\nPlease enter valid numbers"
                     + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
         }
     }

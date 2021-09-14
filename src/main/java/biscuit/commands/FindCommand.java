@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) throws BiscuitException {
         if (userInputs.length < 2) {
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The search keyword cannot be empty.");
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!!\nThe search keyword cannot be empty.");
         }
 
         StringBuilder message = new StringBuilder("The following tasks match your search keyword:");

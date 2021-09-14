@@ -48,7 +48,7 @@ public class Parser {
         case "bye":
             return new ExitCommand(processedInputs);
         default:
-            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! "
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!!\n"
                     + "I'm sorry, but I don't know what that means...");
         }
     }

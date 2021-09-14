@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -45,8 +46,10 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
+        HBox hbox = (HBox) tmp.get(1);
+        hbox.setStyle("-fx-background-color:  #FFD369;");
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.TOP_RIGHT);
     }
 
     /**
@@ -68,8 +71,8 @@ public class DialogBox extends HBox {
      * @return Dialog box.
      */
     public static DialogBox getBiscuitDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        return dialogBox;
     }
 }
