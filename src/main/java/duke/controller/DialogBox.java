@@ -22,7 +22,7 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Text dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
