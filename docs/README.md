@@ -6,7 +6,7 @@ optimized for use via a Command Line Interface (CLI).
 - [Quick Start](#quick-start)
 - [Features](#features)
     * [Adds a todo task](#adds-a-todo-task-todo)
-    * [Adds a deadline task](#deletes-a-task-delete)
+    * [Adds a deadline task](#adds-a-deadline-task-deadline)
     * [Adds an event task](#adds-an-event-task-event)
     * [List all tasks](#lists-all-tasks-list)
     * [Delete task](#deletes-a-task-delete)
