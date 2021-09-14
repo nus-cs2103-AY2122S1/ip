@@ -1,13 +1,16 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ailurus.Parser;
 import ailurus.Storage;
 import ailurus.task.Deadline;
 import ailurus.task.Event;
+import ailurus.task.Task;
 import ailurus.task.TaskList;
 import ailurus.task.Todo;
-import ailurus.task.Task;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import org.junit.jupiter.api.Test;
+
 
 public class AilurusTest {
     @Test
@@ -26,7 +29,7 @@ public class AilurusTest {
     }
 
     @Test
-    public void taskTest(){
+    public void taskTest() {
         Task task1 = new Todo("Go grocery shopping");
         Task task2 = new Deadline("CS2103T ip week 2 /by 2021-08-19");
         Task task3 = new Event("CS2103T lecture /at 2021-08-27");
@@ -41,7 +44,7 @@ public class AilurusTest {
     }
 
     @Test
-    public void storageTest(){
+    public void storageTest() {
         // loading of storage
         Storage storage = new Storage("./data/", "testData.txt");
         TaskList tasklist = new TaskList(storage.load());
