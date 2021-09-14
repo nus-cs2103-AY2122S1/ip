@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 import agent.Agent;
 import agent.exceptions.DukeException;
-import agent.exceptions.TaskFileIoException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -70,9 +69,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Disables user input after prompting user to exit.
+     * Disables user input text field and send button.
      */
-    public void disableUserInput() {
+    private void disableUserInput() {
         sendButton.setDisable(true);
         userChatInputField.setDisable(true);
     }
@@ -87,10 +86,6 @@ public class MainWindow extends AnchorPane {
         String agentResponse;
         try {
             agentResponse = agent.respondToUserInput(userInput);
-        } catch (TaskFileIoException taskFileIoException) {
-            // if the read file is corrupted, shut down agent.
-            agentResponse = taskFileIoException.getMessage();
-            agent.setExited(true);
         } catch (DukeException de) {
             agentResponse = de.getMessage();
         }
@@ -101,13 +96,20 @@ public class MainWindow extends AnchorPane {
         userChatInputField.clear();
 
         if (agent.isExited()) {
-            shutDown();
+            shutDown(500);
         }
     }
 
-    private void shutDown() {
+    /**
+     * Disables user input and shuts down the agent.
+     *
+     * @param delayMilliseconds delay before terminating the program in milliseconds.
+     */
+    public void shutDown(int delayMilliseconds) {
         // Solution adapted from
         // https://stackoverflow.com/questions/15747277/how-to-make-java-program-exit-after-a-couple-of-seconds
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), 500, TimeUnit.MILLISECONDS);
+        disableUserInput();
+        Executors.newSingleThreadScheduledExecutor()
+                .schedule(() -> System.exit(0), delayMilliseconds, TimeUnit.MILLISECONDS);
     }
 }

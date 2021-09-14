@@ -53,7 +53,7 @@ public class Main extends Application {
             mainWindow.linkChatBotAgent(agent);
         } catch (DukeException de) {
             mainWindow.displayAgentMessage(de.getMessage());
-            mainWindow.disableUserInput();
+            mainWindow.shutDown(3000);
         }
     }
 }

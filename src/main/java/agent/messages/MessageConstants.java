@@ -41,7 +41,7 @@ public class MessageConstants {
     public static final String MESSAGE_INVALID_INTEGER = "Nyaa! Task number must be valid integer. eg. 1";
     public static final String MESSAGE_TASK_FILE_IO_FAILURE = "Nyaa! Unable to read/write from save file.";
     public static final String MESSAGE_INVALID_TASK_DATA = "Nyaa! Saved task data is corrupted/invalid."
-            + "\nButler has failed to start. Please verify/delete the saved data file and restart meow!";
+            + "\nButler has failed to start. Please verify/delete the saved data file! (Shutting down...)";
 
     // hide constructor for utility class
     private MessageConstants() {
