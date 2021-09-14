@@ -161,7 +161,7 @@ public class Parser {
             assert input.contains("/at");
             String[] info = input.substring(6).split(" /at ");
             tasks.addTask(ParserFunctions.getDateAndTime(
-                    info, "event"));
+                    info, "eve=nt"));
         }
         String addTaskText = "Got it. I've added this task:  \n"
                 + "       ";

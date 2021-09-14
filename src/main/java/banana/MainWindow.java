@@ -73,6 +73,7 @@ public class MainWindow extends AnchorPane {
         } else {
             String response = duke.getResponse(input);
             Parser.setPrevInput(userInput.getText());
+            System.out.println(response);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, user),
                     DialogBox.getDukeDialog(response, bot)
