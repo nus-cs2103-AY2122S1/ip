@@ -4,13 +4,13 @@
 * Have you always wanted your own personal assistant?
 * Are you tired of manually keeping track of your ever-changing tasks?
 
-Then Jarvis is perfect for you :wink:
+Then Jarvis is perfect for you 😉
 
 Jarvis is an **ABSOLUTELY FREE** and easy-to-use chatbot that can manage your tasks for you!
 
 ## Quick Start
 1. Ensure that Java 11 is installed.
-2. Download the latest JAR file from [here]()
+2. Download the latest JAR file from [here](https://github.com/Preshita01/ip/releases)
 3. Open duke.jar 
 
 ## Features
