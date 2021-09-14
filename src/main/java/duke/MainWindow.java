@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set duke for the main window controller
+     * Sets duke for the main window controller
      *
      * @param d Instance of duke to be set.
      */

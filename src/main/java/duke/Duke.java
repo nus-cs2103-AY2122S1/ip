@@ -83,7 +83,7 @@ public class Duke {
     }
 
     /**
-     * Used in Javafx to deal with the GUI aspect of Duke.
+     * Deals with the GUI aspect of Duke in javaFx.
      *
      * @param message Message passed in by the user.
      * @return Return the response of Duke
