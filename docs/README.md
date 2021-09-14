@@ -10,9 +10,7 @@
 
 <p align = "center"> The WhoBot is your Revolutionary Personal Assistant that makes Managing All Tasks Simple and Efficent. </p>
 
-<br> 
-<hr>
-<br>
+
 
 <div align = "center">
   <img height = "300" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_CLI.png?raw=true">
@@ -23,6 +21,24 @@
 
 <br> 
 <hr>
+<br>
+
+## Getting Started
+
+It's simple to get up and running. follow these steps to start using WhoBot  
+
+1. Download the JAR file from [here](https://github.com/crypto-code/ip/releases/download/A-BetterGui/WhoBot.jar).
+2. You can start the progrom by running the following command
+```
+java -jar WhoBot.jar
+```
+3. To use the cli version you can run it using the **--cli** argument
+```
+java -jar WhoBot.jar --cli
+```
+4. Enjoy :)
+
+<br>
 <br>
 
 ## Features 
