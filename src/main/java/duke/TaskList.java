@@ -21,6 +21,11 @@ public class TaskList {
         this.list = prevTasks;
     }
 
+    /**
+     * Add a task to this task list.
+     *
+     * @param newTask the task to be added.
+     */
     public void add(Task newTask) {
         list.add(newTask);
         Collections.sort(list);
