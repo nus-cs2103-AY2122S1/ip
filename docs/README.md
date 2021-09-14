@@ -1,8 +1,8 @@
-# User Guide
+# T-800 User Guide
 
 ### Fast and Easy Task Tracking
 
-Manage 3 types of task through just typing commands without the need to use your mouse!
+Use this bot to help you manage 3 types of task through just typing commands without the need to use your mouse!
 
 Task Types:
 1. Todos - Any task with a simple description of your choice
@@ -21,6 +21,11 @@ Moreover, you can easily specify the number of repetitions for deadline tasks to
 * [Adding a Todo: `todo`](#todo---add-a-todo-type-task)
 * [Adding a Deadline: `deadline`](#deadline---add-a-deadline-type-task)
 * [Adding an Event: `event`](#event---add-an-event-type-task)
+
+## Get Started
+  1. Ensure that you have Java `11` or above installed in your Computer.
+  2. Download the latest version of the .jar file from [here](https://github.com/NUSmhk/ip/releases/tag/A-Release).
+  3. Double-click the downloaded .jar file to get started!
 
 ## Usage
 
