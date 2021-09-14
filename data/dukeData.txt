@@ -1,5 +1,5 @@
 D |0| return book | 14 Nov 2021 6.00PM
-T |0| do homework
-T |0| do homework
-T |0| make bread
+T |0| submit homework
+T |1| do homework
 E |0| go to funfair | 09 Oct 2021 5.45PM
+T |0| buy coffee
