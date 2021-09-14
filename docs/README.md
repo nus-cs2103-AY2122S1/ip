@@ -1,4 +1,6 @@
 # User Guide for Baba the Duke
+
+To access Baba the Duke: https://github.com/BenjaminTan99/ip
     
 ## Features 
 ### Keeping track of various tasks (✓)
