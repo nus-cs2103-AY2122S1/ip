@@ -11,7 +11,7 @@ import duke.util.Ui;
 import javafx.fxml.FXML;
 
 public class Duke {
-    private static final String FILEPATH = "data/duke.txt";
+    private static final String FILEPATH = "duke.txt";
     private Storage storage;
     private TaskList taskList;
     @FXML

@@ -18,7 +18,7 @@ public class Ui {
     }
 
     private String getDashes() {
-        return "    ____________________________________________________________\n";
+        return "____________________________________________________________\n";
     }
 
     public void showLoadingError(String errorMessage) {
@@ -45,13 +45,13 @@ public class Ui {
      */
     public void showGoodbye() {
         String output = getDashes()
-                + "     Bye. Hope to see you again soon!\n"
+                + "Bye. Hope to see you again soon!\n"
                 + getDashes();
         System.out.println(output);
     }
 
     /** Shows messages */
     public void showMessage(String message) {
-        System.out.println(getDashes() + "    " + message + "\n" + getDashes());
+        System.out.println(getDashes() + message + "\n" + getDashes());
     }
 }

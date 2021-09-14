@@ -24,13 +24,19 @@ public class Storage {
      * @throws DukeException
      */
     public ArrayList<Task> loadTasks() throws DukeException {
-        File f = new File(filePath);
         Scanner s;
         try {
+            File f = new File(filePath);
+            if (!f.exists()) {
+                f.createNewFile();
+            }
             s = new Scanner(f);
         } catch (FileNotFoundException ffe) {
             throw new DukeException("Record not found in " + filePath);
+        } catch (IOException ioe) {
+            throw new DukeException(ioe.getMessage());
         }
+
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
             String description = s.nextLine();

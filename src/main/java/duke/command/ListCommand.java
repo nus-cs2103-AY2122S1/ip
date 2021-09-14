@@ -28,10 +28,14 @@ public class ListCommand implements Command {
      * @param taskList the TaskList to be printed
      */
     public String getTasks(TaskList taskList) {
-        ArrayList<Task> lst = taskList.getTasks();
+        ArrayList<Task> tasks = taskList.getTasks();
+        if (tasks.size() == 0) {
+            return "There is no task yet.";
+        }
+
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < lst.size(); i++) {
-            s.append(String.format("     %d. %s\n", i + 1, lst.get(i).toString()));
+        for (int i = 0; i < tasks.size(); i++) {
+            s.append(String.format("     %d. %s\n", i + 1, tasks.get(i).toString()));
         }
         return s.toString();
     }

@@ -3,7 +3,6 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -65,13 +64,15 @@ public class AddCommand implements Command {
         } else if (type.equals("deadline")) {
             String[] strings = content.split(" /by ");
             if (strings.length != 2) {
-                throw new DukeException("I'm sorry, but I don't know what that means. Please check the format of your deadline.");
+                throw new DukeException("I'm sorry, but I don't know what that means. "
+                        + "Please check the format of your deadline.");
             }
             tasks.add(new Deadline(content.split(" /by ")[0], content.split(" /by ")[1]));
         } else if (type.equals("event")) {
             String[] strings = content.split(" /at ");
             if (strings.length != 2) {
-                throw new DukeException("I'm sorry, but I don't know what that means. Please check the format of your event.");
+                throw new DukeException("I'm sorry, but I don't know what that means. "
+                        + "Please check the format of your event.");
             }
             tasks.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
         } else {

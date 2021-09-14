@@ -1,7 +1,14 @@
 # User Guide - Duke
 
+## Introduction
 Thank you for using Duke! \
-Duke is a CLI task manager that can help you organize your everyday tasks.
+Duke is a task managing system that can help you organize your everyday tasks.
+
+## Quick Start 
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest duke.jar from
+3. Copy the file to the folder you want to use as the home folder for your duke.
+4. Open the command line and type `java -jar duke.jar` to get started.
 
 ## Features 
 
