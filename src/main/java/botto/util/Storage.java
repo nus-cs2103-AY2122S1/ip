@@ -10,21 +10,20 @@ import java.util.List;
 import java.util.Scanner;
 
 import botto.BottoException;
-import botto.task.Deadline;
 import botto.task.Event;
 import botto.task.Task;
 import botto.task.Todo;
 
 /**
- * This class deals with loading tasks from the file and saving tasks in the file
+ * This class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private File file;
 
     /**
-     * Constructor for the Botto's storage
+     * Constructor for the Botto's storage.
      *
-     * @param filePath Filepath of the file that keeps track of the tasks
+     * @param filePath Filepath of the file that keeps track of the tasks.
      */
     public Storage(String filePath) {
         assert filePath != null : "The file path cannot be null";
@@ -32,10 +31,10 @@ public class Storage {
     }
 
     /**
-     * read the file and load the tasks stored inside it
+     * Read the file and load the tasks stored inside it.
      *
-     * @return a list of tasks recorded in the file
-     * @throws BottoException whenever an read operation is failed
+     * @return a list of tasks recorded in the file.
+     * @throws BottoException whenever an read operation is failed.
      */
     public List<Task> load() throws BottoException {
         List<Task> tasks = new LinkedList<>();
@@ -49,35 +48,7 @@ public class Storage {
             }
 
             Scanner scanner = new Scanner(this.file);
-            while (scanner.hasNext()) {
-                Task task;
-                String next = scanner.nextLine();
-                boolean isDone = next.charAt(4) == 'X';
-                String[] info = next.substring(7).split(" [(]..: ");
-                DateTimeFormatter taskFormatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
-
-                switch (next.charAt(1)) {
-                case 'T' :
-                    task = new Todo(info[0]);
-                    break;
-                case 'D' :
-                    String deadline = info[1].substring(0, info[1].length() - 1);
-                    task = new Deadline(info[0], LocalDateTime.parse(deadline, taskFormatter));
-                    break;
-                case 'E' :
-                    String eventTime = info[1].substring(0, info[1].length() - 1);
-                    task = new Event(info[0], LocalDateTime.parse(eventTime, taskFormatter));
-                    break;
-                default:
-                    continue;
-                }
-
-                if (isDone) {
-                    task.markAsDone();
-                }
-
-                tasks.add(task);
-            }
+            getTasksFromFile(tasks, scanner);
 
         } catch (IOException e) {
             throw new BottoException("Something went wrong when loading data: " + e.getMessage());
@@ -86,11 +57,49 @@ public class Storage {
         return tasks;
     }
 
+    private void getTasksFromFile(List<Task> tasks, Scanner scanner) {
+        while (scanner.hasNext()) {
+            Task task;
+            String nextLine = scanner.nextLine();
+
+            boolean isDone = nextLine.charAt(4) == 'X';
+            String[] info = nextLine.substring(7).split(" [(]..: ");
+            DateTimeFormatter taskFormatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+
+            switch (nextLine.charAt(1)) {
+            case 'T' :
+                String description = info[0];
+                task = new Todo(description);
+                break;
+            case 'D' :
+            case 'E' :
+                task = getDeadlineOrEvent(info, taskFormatter);
+                break;
+            default:
+                continue;
+            }
+
+            if (isDone) {
+                task.markAsDone();
+            }
+
+            tasks.add(task);
+        }
+    }
+
+    private Task getDeadlineOrEvent(String[] info, DateTimeFormatter taskFormatter) {
+        String description = info[0];
+        String timeBeforeFormat = info[1].substring(0, info[1].length() - 1);
+        LocalDateTime dateTime = LocalDateTime.parse(timeBeforeFormat, taskFormatter);
+
+        return new Event(description, dateTime);
+    }
+
     /**
-     * save the tasks in the assigned file
+     * Save the tasks in the assigned file.
      *
-     * @param tasks list of tasks to be stored
-     * @throws BottoException  whenever an write operation is failed
+     * @param tasks list of tasks to be stored.
+     * @throws BottoException  whenever an write operation is failed.
      */
     public void save(List<Task> tasks) throws BottoException {
         assert tasks != null : "tasks cannot be null";

@@ -24,6 +24,7 @@ public class ExitCommand implements Command {
     public void execute(TaskList taskList, Dialog dialog, Storage storage) {
         dialog.sayGoodBye();
 
+        // quit the programme 2s after saying goodbye
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

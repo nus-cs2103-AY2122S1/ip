@@ -6,16 +6,16 @@ import botto.BottoException;
 import botto.task.Task;
 
 /**
- * This class contains the task list and handles operations like add/delete tasks in the list
+ * This class contains the task list and handles operations like add/delete tasks in the list.
  */
 public class TaskList {
 
     private List<Task> tasks;
 
     /**
-     * Constructor for a task list
+     * Constructor for a task list.
      *
-     * @param tasks list of the user's tasks
+     * @param tasks list of the user's tasks.
      */
     public TaskList(List<Task> tasks) {
         assert tasks != null : "Task list cannot be null";
@@ -23,37 +23,37 @@ public class TaskList {
     }
 
     /**
-     * get the user's tasks in the form of a list
+     * Get the user's tasks in the form of a list.
      *
-     * @return list of the user's tasks
+     * @return list of the user's tasks.
      */
     public List<Task> getTasks() {
         return this.tasks;
     }
 
     /**
-     * get the total number of the user's task
+     * Get the total number of the user's task.
      *
-     * @return size of the user's task
+     * @return size of the user's task.
      */
     public int getSize() {
         return this.tasks.size();
     }
 
     /**
-     * add the new task to the user's task list
+     * add the new task to the user's task list.
      *
-     * @param task new task to be added
+     * @param task new task to be added.
      */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
     /**
-     * mark the task at the specific position as done
+     * Mark the task at the specific position as done.
      *
-     * @param index index of the task to be marked as done
-     * @return task at the specific position
+     * @param index index of the task to be marked as done.
+     * @return task at the specific position.
      * @throws BottoException whenever there is no task in that position.
      */
     public Task markAsDone(int index) throws BottoException {
@@ -69,11 +69,11 @@ public class TaskList {
 
 
     /**
-     * delete the task at the specific position
+     * Delete the task at the specific position.
      *
-     * @param index index of the task to be deleted
-     * @return task at the specific position
-     * @throws BottoException whenever there is no task in that position
+     * @param index index of the task to be deleted.
+     * @return task at the specific position.
+     * @throws BottoException whenever there is no task in that position.
      */
     public Task deleteTask(int index) throws BottoException {
         try {

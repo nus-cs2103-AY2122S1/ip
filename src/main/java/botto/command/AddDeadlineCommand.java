@@ -38,18 +38,24 @@ public class AddDeadlineCommand implements Command {
         String detail;
 
         try {
+            // get the informations segment of the command
             detail = command.split(" ", 2)[1];
         } catch (Exception e) {
             throw new BottoException("☹ OOPS!!! The detail of a deadline cannot be empty.");
         }
-
-        String[] information = detail.split(" /.. ", 2);
+        // split the informations segment into different part
+        String[] informations = detail.split(" /.. ", 2);
+        // formatter that fits the format of the datetime info in the command
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
         try {
-            Task task = new Deadline(information[0], LocalDateTime.parse(information[1], formatter));
-            taskList.addTask(task);
+            // information required to create a deadline
+            String description = informations[0];
+            LocalDateTime dateTime = LocalDateTime.parse(informations[1], formatter);
 
+            // create new task and update the ui and storage accordingly
+            Task task = new Deadline(description, dateTime);
+            taskList.addTask(task);
             dialog.respondAdd(task, taskList.getSize());
             storage.save(taskList.getTasks());
         } catch (Exception e) {

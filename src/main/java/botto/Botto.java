@@ -31,7 +31,7 @@ public class Botto {
     }
 
     /**
-     * evaluate user input and execute necessary action.
+     * Evaluate user input and execute necessary action.
      *
      * @param input user input.
      */
@@ -45,7 +45,7 @@ public class Botto {
     }
 
     /**
-     * set up dialog container in the ui
+     * Set up dialog container in the ui.
      *
      * @param container dialog container.
      */

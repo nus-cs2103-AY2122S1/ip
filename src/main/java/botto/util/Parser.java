@@ -14,19 +14,20 @@ import botto.command.ShowListCommand;
 
 
 /**
- * This class deals with making sense of the user command
+ * This class deals with making sense of the user command.
  */
 public class Parser {
 
-    /** current available user commands */
+    /** Current available user commands. */
     public static final String[] COMMANDS = {"list", "done", "todo", "deadline",
         "event", "delete", "bye", "find", "help"};
+
     /**
-     * analyse user inputs and find out type of commands needed by the user
+     * Analyse user inputs and find out type of commands needed by the user.
      *
-     * @param fullCommand input from the user
-     * @return type of commands requested by the user
-     * @throws BottoException when the type of commands cannot be resolved
+     * @param fullCommand input from the user.
+     * @return type of commands requested by the user.
+     * @throws BottoException when the type of commands cannot be resolved.
      */
     public static Command parse(String fullCommand) throws BottoException {
         assert fullCommand != null : "Command is not supposed to be null here";

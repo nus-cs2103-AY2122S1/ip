@@ -45,6 +45,7 @@ public class FindCommand implements Command {
         List<Task> matchesTasks = new LinkedList<>();
 
         for (Task task: taskList.getTasks()) {
+            // add the task to the list if it matches the keyword
             if (task.getDescription().toLowerCase().contains(keyword)) {
                 matchesTasks.add(task);
             }

@@ -41,8 +41,8 @@ public class DeleteCommand implements Command {
         }
 
         Task task = taskList.deleteTask(index);
-        int size = taskList.getSize();
-        dialog.respondDelete(task, size);
+        int listSize = taskList.getSize();
+        dialog.respondDelete(task, listSize);
 
         storage.save(taskList.getTasks());
     }

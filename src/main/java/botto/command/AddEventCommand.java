@@ -39,23 +39,29 @@ public class AddEventCommand implements Command {
         String detail;
 
         try {
+            // get the informations segment of the command
             detail = command.split(" ", 2)[1];
         } catch (Exception e) {
             throw new BottoException("☹ OOPS!!! The detail of an event cannot be empty.");
         }
 
-        String[] information = detail.split(" /.. ", 2);
+        // split the informations segment into different part
+        String[] informations = detail.split(" /.. ", 2);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
         try {
-            Task task = new Event(information[0], LocalDateTime.parse(information[1], formatter));
-            taskList.addTask(task);
+            // information required to create a deadline
+            String description = informations[0];
+            LocalDateTime dateTime = LocalDateTime.parse(informations[1], formatter);
 
+            // create new task and update ui & storage accordingly
+            Task task = new Event(description, dateTime);
+            taskList.addTask(task);
             dialog.respondAdd(task, taskList.getSize());
             storage.save(taskList.getTasks());
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n"
-                    + "    Please enter in this format: event [title] /at [d/M/yyyy H:mm a]";
+                    + "    Please enter in this format: event [task] /at [d/M/yyyy H:mm a]";
             throw new BottoException(message);
         }
     }
