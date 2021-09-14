@@ -12,7 +12,6 @@ import java.util.Scanner;
  * Represents the storage of the Duke application that deals with loading from and updating the tasks in the data file.
  */
 public class Storage {
-    private String dataFolderPath;
     private String dataFilePath;
 
     /**
@@ -33,6 +32,61 @@ public class Storage {
      * or there exists an invalid file type in the data file.
      */
     public ArrayList<Task> load() throws DukeException {
+        File f = getDataFile();
+        assert f.exists() : "Data File should be present";
+        Scanner s = getScanner(f);
+        ArrayList<Task> tasks = getStoredTasks(s);
+        return tasks;
+    }
+
+    private ArrayList<Task> getStoredTasks(Scanner s) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        int count = 0;
+        while (s.hasNext()) {
+            count++;
+            String l = s.nextLine();
+            String[] taskEntry = l.split("\\|");
+            switch(taskEntry[0]) {
+            case "T":
+                tasks.add(new Todo(getTaskDescription(taskEntry)));
+                break;
+            case "D":
+                tasks.add(new Deadline(getTaskDescription(taskEntry), getTaskDate(taskEntry)));
+                break;
+            case "E":
+                tasks.add(new Event(getTaskDescription(taskEntry), getTaskDate(taskEntry)));
+                break;
+            default:
+                throw new DukeException("Invalid duke. Task Type stored in Data File");
+            }
+            boolean isTaskDone = taskEntry[1].equals("X");
+            if (isTaskDone) {
+                tasks.get(tasks.size() - 1).markAsDone();
+            }
+        }
+        assert count == tasks.size() : "Should have the same number of tasks as lines in data file";
+        return tasks;
+    }
+
+    private String getTaskDescription(String[] taskEntry) {
+        return taskEntry[2];
+    }
+
+    private LocalDate getTaskDate(String[] taskEntry) {
+        return LocalDate.parse(taskEntry[3]);
+    }
+
+    private Scanner getScanner(File f) {
+        Scanner s;
+        try {
+            s = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            throw new DukeException(e.getMessage());
+        }
+        return s;
+    }
+
+    private File getDataFile() throws DukeException {
         File f;
         try {
             f = new File(dataFilePath);
@@ -44,38 +98,7 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-        assert f.exists() : "Data File should be present";
-        Scanner s;
-        try {
-            s = new Scanner(f); // create a Scanner using the File as the source
-        } catch (FileNotFoundException e) {
-            throw new DukeException(e.getMessage());
-        }
-        ArrayList<Task> tasks = new ArrayList<>();
-        int count = 0;
-        while (s.hasNext()) {
-            count++;
-            String l = s.nextLine();
-            String[] taskEntry = l.split("\\|");
-            switch(taskEntry[0]) {
-            case "T":
-                tasks.add(new Todo(taskEntry[2]));
-                break;
-            case "D":
-                tasks.add(new Deadline(taskEntry[2], LocalDate.parse(taskEntry[3])));
-                break;
-            case "E":
-                tasks.add(new Event(taskEntry[2], LocalDate.parse(taskEntry[3])));
-                break;
-            default:
-                throw new DukeException("Invalid duke. Task Type stored in Data File");
-            }
-            if (taskEntry[1].equals("X")) {
-                tasks.get(tasks.size() - 1).markAsDone();
-            }
-        }
-        assert count == tasks.size() : "Should have the same number of tasks as lines in data file";
-        return tasks;
+        return f;
     }
 
     /**

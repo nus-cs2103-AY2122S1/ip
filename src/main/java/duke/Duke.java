@@ -1,7 +1,7 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -21,20 +21,25 @@ public class Duke extends Application {
     public void start(Stage stage) {
         ui = new Ui(stage);
         storage = new Storage(dataFilePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        tasks = generateTaskList();
+
+        setEventHandlers();
 
         ui.showWelcome();
-        ui.getSendButton().setOnMouseClicked((event) -> {
-            handleUserInput(ui.readCommand());
-        });
-        ui.getUserInput().setOnAction((event) -> {
-            handleUserInput(ui.readCommand());
-        });
+    }
+
+    private TaskList generateTaskList() {
+        try {
+            return new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            return new TaskList();
+        }
+    }
+
+    private void setEventHandlers() {
+        ui.getSendButton().setOnMouseClicked((event) -> handleUserInput(ui.readCommand()));
+        ui.getUserInput().setOnAction((event) -> handleUserInput(ui.readCommand()));
     }
 
     private void handleUserInput(String fullCommand) {
@@ -44,9 +49,6 @@ public class Duke extends Application {
             Command c = Parser.parse(fullCommand);
             assert !Objects.isNull(c) : "Should always return a command, if no error thrown.";
             c.execute(tasks, storage, ui);
-            if (c instanceof ExitCommand) {
-                Platform.exit();
-            }
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
