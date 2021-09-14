@@ -20,8 +20,6 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew build -s
+  - ./gradlew test --debug
 
-after_success:
-  - ./gradlew jacocoTestReport coveralls
 
