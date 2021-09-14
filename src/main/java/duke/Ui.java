@@ -14,7 +14,8 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke, your personal task manager!\n"
-            + "What can I do for you?";
+            + "What can I do for you?\n"
+            + "Type help to learn how to use Duke!";
 
     private static final String HELP_MESSAGE = "Add tasks by commands: todo, deadline, event\n"
             + "E.g. todo run, deadline hw /by yyyy-mm-dd {time}, event meeting /at {date and/or time}\n"
@@ -24,9 +25,9 @@ public class Ui {
             + "To delete or mark task as done, type 'delete {task number}' or 'done {task number}'\n"
             + "\n"
             + "To find tasks by keyword, type 'find' followed by keywords.\n"
-            + "E.g. If your keywoord is run, type 'find run'.\n"
+            + "E.g. If your keyword is run, type 'find run'.\n"
             + "\n"
-            + "To exit, type 'bye'";
+            + "To exit, type 'bye', then close the window to quit the application.";
 
 
     public Ui() {}
