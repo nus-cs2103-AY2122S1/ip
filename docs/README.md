@@ -2,31 +2,18 @@
 
 ## Features 
 
-### Feature-ABC
+### Keep track of your tasks
 
-Description of the feature.
+Tasks are separated into three categories: todo, event and deadline.
+Todo is just a simple task, event is a task that happens during a specific period while deadline is a task that has to be done before a specific timing.
 
-### Feature-XYZ
+You can create tasks, mark tasks as done, as well as delete tasks.
 
-Description of the feature.
+### Search tasks
+
+Search through your list of tasks to find those whose description matches your query.
 
 ## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
 
 ### `list` - List all tasks
 
@@ -128,18 +115,33 @@ added: [D][ ] water plant (by: 29 Jan 1987)
 Shows the deadline task that you created. The deadline is shown in the (by: ) portion.
 The deadline is also formatted.
 
-### `find` - List all tasks
+### `find` - Find matching tasks
 
-List all tasks in alphabetical order.
+Find tasks which contain your query as a substring. Your query will be everything after the command.
 
 Sample usage:
 
-`list find celeb`
+`find celeb`
 
 Sample outcome:
 ```
+Here are the matching tasks in your list:
 1.[E][ ] celebrate (at: Sep 18 2021)
 ```
 
-These are tasks in alphabetical order. E, T and D represents event, task and deadline respectively. The presence of and 'X' indicates that a task is done.
+These are the matching tasks in alphabetical order. E, T and D represents event, task and deadline respectively. The presence of and 'X' indicates that a task is done.
 
+### `bye` - Say farewell
+
+Wave goodbye to duke before you close the program as a nice gesture.
+
+Sample usage:
+
+`bye`
+
+Sample outcome:
+```
+Bye. Hope to see you again soon!
+```
+
+Duke reluctantly bidding you farewell.
