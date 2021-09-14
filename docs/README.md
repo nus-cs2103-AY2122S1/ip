@@ -157,3 +157,19 @@ Returns the tasks that match the keyword.
 Here are the matching tasks in your list:
 1.[T][ ]Buy Birthday Gift for James
 ```
+
+### `bye` - exit program
+
+Exit program
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+Says goodbye and close program.
+
+```
+Bye. Hope to see you again soon!
+```

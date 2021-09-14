@@ -47,7 +47,6 @@ public class Parser {
         case "find":
             return ui.sayFind(Parser.parseFind(message, tasks));
         case "bye":
-            storage.unload(tasks);
             Ailurus.exit();
             return ui.sayBye();
         default:

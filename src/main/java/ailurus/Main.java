@@ -3,6 +3,7 @@ package ailurus;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -27,5 +28,16 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() {
+        Ailurus.unloadStorage();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        Platform.exit();
     }
 }

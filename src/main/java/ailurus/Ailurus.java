@@ -9,10 +9,10 @@ import javafx.application.Application;
  * @author Leeroy Liu
  */
 public class Ailurus {
+    private static Storage storage;
+    private static TaskList tasks;
+    private static Ui ui;
     private static boolean isExit = false;
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
 
     /**
      * Constructor for Ailurus Chatbot
@@ -21,13 +21,13 @@ public class Ailurus {
      * @param filename filename of the file to store data (with .txt)
      */
     public Ailurus(String directory, String filename) {
-        this.ui = new Ui();
-        this.storage = new Storage(directory, filename);
+        ui = new Ui();
+        storage = new Storage(directory, filename);
         try {
-            this.tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (AilurusException e) {
-            this.ui.showError(e.getMessage());
-            this.tasks = new TaskList();
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
         }
     }
 
@@ -40,9 +40,16 @@ public class Ailurus {
     }
 
     /**
-     * Checks if program can be exited
+     * Unload storage to save file
      *
-     * @return isExit boolean
+     */
+    public static void unloadStorage() {
+        storage.unload(tasks);
+    }
+
+    /**
+     * Returns whether program is ready to exit
+     * @return isExit
      */
     public static boolean isExit() {
         return isExit;
@@ -59,7 +66,7 @@ public class Ailurus {
             String command = Parser.parse(message);
             return Parser.parseCommand(command, message, ui, storage, tasks);
         } catch (AilurusException e) {
-            return this.ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
     }
 

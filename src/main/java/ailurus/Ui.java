@@ -21,7 +21,8 @@ public class Ui {
                 + "list\n\t- list all tasks and their task number\n"
                 + "done <task number(s)>\n\t- mark task(s) as done (e.g. done 1 2 3)\n"
                 + "delete <task number(s)>\n\t- delete task(s) (e.g. delete 1 2 3)\n"
-                + "find <matching word>\n\t- find all tasks with matching word", this.chatbot));
+                + "find <matching word>\n\t- find all tasks with matching word\n"
+                + "bye\n\t- Exit program", this.chatbot));
     }
 
     /**
