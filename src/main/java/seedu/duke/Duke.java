@@ -62,13 +62,13 @@ public class Duke {
                 return parseTaskType(type, userInput);
             case DELETE: // Fallthrough
             case DONE:
-                // arrOfCommandWords = {"done", "taskNumber"}
+                // arrOfCommandWords is {"done", "taskNumber"}
                 return parseTaskModification(type, arrOfCommandWords[1]);
             case FIND:
-                // arrOfCommandWords = {"find", "taskNumber"}
+                // arrOfCommandWords is {"find", "taskNumber"}
                 return new FindCommand(ui, taskList, arrOfCommandWords[1]);
             case GET:
-                // arrOfCommandWords = {"get", "dateString"}
+                // arrOfCommandWords is {"get", "dateString"}
                 return parseGetTasksOnDate(arrOfCommandWords[1]);
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
@@ -278,10 +278,6 @@ public class Duke {
         return taskList;
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     protected String getResponse(String input) {
         try {
             Command command = parser.parseString(input);

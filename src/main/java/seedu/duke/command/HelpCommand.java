@@ -4,7 +4,6 @@ import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 /**
  * Represents a help command. A <code>HelpCommand</code> returns
@@ -37,13 +36,19 @@ public class HelpCommand extends Command {
         commands.add(new FindCommand(ui, taskList, ""));
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "help  | get the available commands for Duke.";
     }
 
     /**
-     * Prints the available commands.
+     * Returns a string representation of
+     * the available commands.
      */
     @Override
     public String execute() {

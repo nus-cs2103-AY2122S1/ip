@@ -14,11 +14,21 @@ public class ExitCommand extends Command {
         super(ui, taskList);
     }
 
+    /**
+     * Checks if the command is an exit command.
+     *
+     * @return true if it is.
+     */
     @Override
     public boolean isExit() {
         return true;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "bye | quit the chat bot";

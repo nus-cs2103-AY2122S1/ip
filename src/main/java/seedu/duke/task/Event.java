@@ -24,9 +24,17 @@ public class Event extends Task {
         this.timeOfEvent = timeOfEvent;
     }
 
-    public Event(String description, LocalDate deadline, boolean isCompleted) {
+    /**
+     * Public constructor to create a <code>Event</code> object.
+     *
+     * @param description Description of the <code>Event</code>
+     *                    task object.
+     * @param time Time of the event.
+     * @param isCompleted Boolean indicating if task is completed.
+     */
+    public Event(String description, LocalDate time, boolean isCompleted) {
         super(description, isCompleted);
-        this.timeOfEvent = deadline;
+        this.timeOfEvent = time;
     }
 
     /**

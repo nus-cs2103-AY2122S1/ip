@@ -26,11 +26,23 @@ public class Task {
         isCompleted = false;
     }
 
+    /**
+     * Public constructor for creating a <code>Task</code> object.
+     *
+     * @param description Description of the <code>Task</code> object created.
+     * @param isCompleted Boolean indicating if task is completed.
+     */
     public Task(String description, boolean isCompleted) {
         this.description = description;
         this.isCompleted =isCompleted;
     }
 
+    /**
+     * Check if the task description contains the given keyword.
+     *
+     * @param keyword To be searched for.
+     * @return true if the description contains the keyword, false otherwise.
+     */
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
     }

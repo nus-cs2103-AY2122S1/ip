@@ -16,6 +16,12 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Public constructor for creating a <code>ToDo</code> object.
+     *
+     * @param description Description of the <code>Task</code> object created.
+     * @param isCompleted Boolean indicating if task is completed.
+     */
     public ToDo(String description, boolean isCompleted) {
         super(description, isCompleted);
     }

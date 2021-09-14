@@ -9,6 +9,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents a get command. A <code>GetCommand</code> describes
+ * the action to be executed when a user indicates a date to search
+ * for tasks happening on that date.
+ */
 public class GetCommand extends Command {
     private static final String GET_MESSAGE = "These are the tasks happening on that date:\n";
     private LocalDate date;
@@ -29,6 +34,11 @@ public class GetCommand extends Command {
         this.dateTasks = dateTasks;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "get dd/MM/yyyy | get tasks on given date";

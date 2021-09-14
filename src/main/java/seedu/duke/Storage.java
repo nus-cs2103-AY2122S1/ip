@@ -177,7 +177,7 @@ public class Storage {
     }
 
     /**
-     * Append the newly added task to the file contents.
+     * Appends the newly added task to the file contents.
      *
      * @param task The task to be appended to the file contents.
      */
@@ -192,7 +192,7 @@ public class Storage {
     }
 
     /**
-     * Update the file contents to reflect the updated list after
+     * Updates the file contents to reflect the updated list after
      * a task has been deleted from it.
      *
      * @param taskList The updated tasklist after a deletion.
@@ -235,6 +235,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Update the file with the updated task list from undo.
+     *
+     * @param taskList the current task list.
+     */
     public void undo(TaskList taskList) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));

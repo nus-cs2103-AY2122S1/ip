@@ -17,7 +17,7 @@ public class Deadline extends Task {
      *
      * @param description Description of the <code>Deadline</code>
      *                    task object.
-     * @param deadline duke.task.Deadline to complete <code>Deadline</code>
+     * @param deadline deadline to complete <code>Deadline</code>
      *                 task by.
      */
     public Deadline(String description, LocalDate deadline) {
@@ -25,6 +25,15 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Public constructor to create a <code>Deadline</code> object.
+     *
+     * @param description Description of the <code>Deadline</code>
+     *                    task object.
+     * @param deadline deadline to complete <code>Deadline</code>
+     *                 task by.
+     * @param isCompleted Boolean indicating if task is completed.
+     */
     public Deadline(String description, LocalDate deadline, boolean isCompleted) {
         super(description, isCompleted);
         this.deadline = deadline;

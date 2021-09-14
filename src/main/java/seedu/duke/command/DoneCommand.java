@@ -30,11 +30,21 @@ public class DoneCommand extends Command {
         this.storage = storage;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "done <number> | mark the task indexed by the number as done";
     }
 
+    /**
+     * Check if the given command alters the task list.
+     *
+     * @return true if it updates the task list.
+     */
     @Override
     public boolean isUpdatesTaskList() {
         return true;

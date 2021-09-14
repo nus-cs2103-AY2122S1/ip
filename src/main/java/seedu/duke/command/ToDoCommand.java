@@ -30,12 +30,22 @@ public class ToDoCommand extends Command {
         this.storage = storage;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "todo <description>  |"
                 + " add a todo task to your list with the given description";
     }
 
+    /**
+     * Check if the given command alters the task list.
+     *
+     * @return true if it updates the task list.
+     */
     @Override
     public boolean isUpdatesTaskList() {
         return true;

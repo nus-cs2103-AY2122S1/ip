@@ -4,6 +4,11 @@ import seedu.duke.DukeException;
 import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
+/**
+ * Represents a find command. A <code>FindCommand</code> describes
+ * the action to be executed when a user indicates a keyword to search
+ * for tasks with the matching keyword.
+ */
 public class FindCommand extends Command {
     private static final String FIND_MESSAGE = "Here are the matching tasks in your list.\n";
     private String keyword;
@@ -21,6 +26,11 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "find <keyword> | find tasks by the keyword";

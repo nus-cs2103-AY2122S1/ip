@@ -84,23 +84,40 @@ public abstract class Command {
         this.taskList = taskList;
     }
 
+    /**
+     * Checks if the command is an exit command.
+     *
+     * @return false if it is not.
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Checks if the given command alters the task list.
+     *
+     * @return false if it does not update the task list.
+     */
     public boolean isUpdatesTaskList() {
         return false;
     }
 
-    public TaskList getTaskList() {
-        return this.taskList;
-    }
-
+    /**
+     * Updates the hashmap if the command adds in tasks with dates.
+     *
+     * @param dateTasks Hashmap to be updated.
+     * @param manager Manager that updates the hashmap.
+     */
     public void updateDateTasks(HashMap<LocalDate, ArrayList<Task>> dateTasks,
                                 DateTimeManager manager) {
         return;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     public abstract String getUsageMessage();
 
     public abstract String execute() throws DukeException;

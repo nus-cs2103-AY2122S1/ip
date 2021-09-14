@@ -37,11 +37,21 @@ public class DeadlineCommand extends Command {
         this.storage = storage;
     }
 
+    /**
+     * Check if the given command alters the task list.
+     *
+     * @return true if it updates the task list.
+     */
     @Override
     public boolean isUpdatesTaskList() {
         return true;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "deadline <description> /by dd/MM/yyy |"
@@ -60,10 +70,12 @@ public class DeadlineCommand extends Command {
                 ADD_MESSAGE, task, taskList.status());
     }
 
-    public TaskList getUpdatedList() {
-        return this.taskList;
-    }
-
+    /**
+     * Updates the hashmap if the command adds in tasks with dates.
+     *
+     * @param dateTasks Hashmap to be updated.
+     * @param manager Manager that updates the hashmap.
+     */
     public void updateDateTasks(HashMap<LocalDate, ArrayList<Task>> dateTasks,
                                 DateTimeManager manager) {
         manager.updateDateTasks(dateTasks, date, task);

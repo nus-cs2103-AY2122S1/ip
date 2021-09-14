@@ -11,13 +11,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a reminder command. A <code>ReminderCommand</code> returns
+ * all the upcoming tasks.
+ */
 public class ReminderCommand extends Command {
     private static final String REMINDER_MESSAGE = "These are the upcoming tasks:\n";
     private static final String NO_REMINDERS_MESSAGE = "There are no upcoming tasks.";
     private HashMap<LocalDate, ArrayList<Task>> dateTasks;
 
     /**
-     * Public constructor for a <code>GetCommand</code>.
+     * Public constructor for a <code>ReminderCommand</code>.
      *
      * @param ui The Ui to handle user interactions.
      * @param taskList The task list to be updated.
@@ -29,12 +33,17 @@ public class ReminderCommand extends Command {
         this.dateTasks = dateTasks;
     }
 
+    /**
+     * Returns the format on how to use the command.
+     *
+     * @return String representation of the help message.
+     */
     @Override
     public String getUsageMessage() {
         return "reminder | get the upcoming tasks";
     }
 
-    public TaskList filterTasks() {
+    private TaskList filterTasks() {
         LocalDate now = LocalDate.now();
         ArrayList<Task> upcomingTasksList = new ArrayList<>();
 
@@ -54,7 +63,7 @@ public class ReminderCommand extends Command {
     }
 
     /**
-     * Returns tasks happening or due on the given date.
+     * Returns tasks happening or due at a later date than now.
      */
     @Override
     public String execute() throws DukeException {

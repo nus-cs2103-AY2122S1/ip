@@ -56,6 +56,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Get the previous state of the task list before the latest command
+     * that alters the task list.
+     *
+     * @return The previous state of the task list.
+     */
     public TaskList getPrevTaskList() {
         return prevTaskList;
     }
@@ -77,7 +83,7 @@ public class TaskList {
      * given keyword.
      *
      * @param keyword The string to search for among the tasks in the
-     *                tasklist.
+     *                task list.
      * @return TaskList of the tasks containing the keyword.
      */
     public TaskList findTasksByKeyword(String keyword) {
@@ -129,6 +135,11 @@ public class TaskList {
                 this.length, t);
     }
 
+    /**
+     * Check if the task list is empty.
+     *
+     * @return true if there is not tasks in the list, false otherwise.
+     */
     public boolean isEmpty() {
         return length <= 0;
     }
