@@ -92,4 +92,13 @@ public class StringUtils {
         result.append("\n");
         return result.toString();
     }
+
+    /**
+     * Returns the welcome message.
+     *
+     * @return The welcome message.
+     */
+    public static String getWelcomeMessage() {
+        return "Hello, I am Hagician\nWhat can I do for you?\n";
+    }
 }
