@@ -1,5 +1,5 @@
 <div align = "center">
-<img align="center" height="120" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_Logo.png">
+<img align="center" height="120" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_Logo.png?raw=true">
   
 # User Guide For WhoBot
 </div>
@@ -9,7 +9,7 @@
 <br>
 
 <div align = "center">
-<img align="center" height = "300" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_UI.png">
+<img align="center" height = "300" src="https://github.com/crypto-code/ip/blob/master/docs/img/Main_UI.png?raw=true">
 </div>
 
 The WhoBot comes with a GUI as well as a CLI interface and seamless way to switch between the two. You can add, delete different kinds of tasks. You can tag
