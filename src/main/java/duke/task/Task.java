@@ -79,7 +79,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        System.out.println(this.tag);
         return String.format("%s[%s] %s",
                 this.tag == null ? "" : "(#" + this.tag + ")",
                 isCompleted ? "X" : " ",

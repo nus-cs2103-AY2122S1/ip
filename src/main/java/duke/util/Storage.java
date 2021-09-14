@@ -44,7 +44,6 @@ public class Storage {
                 Task taskToAdd = Parser.parseSaveFileLine(taskInSaveFormat);
                 tasks.add(taskToAdd);
             }
-            System.out.println("Save file successfully read.");
             return tasks;
         } catch (IOException e) {
             throw new SaveFileException("Unable to load save file.");

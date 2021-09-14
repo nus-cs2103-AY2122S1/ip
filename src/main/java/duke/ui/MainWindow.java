@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.util.Reply;
 import duke.command.CommandResult;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -36,6 +37,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke duke) {
         this.duke = duke;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Reply.showWelcome(), dukeImage));
     }
 
     /**
