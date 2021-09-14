@@ -9,8 +9,7 @@ management done faster than traditional GUI apps.
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest biscuit.jar from [here](https://github.com/luffingluffy/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your Biscuit.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few
-   seconds. ![Ui](../../../../Downloads/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. ![](Ui.png)
 6. Type your commands in the chat box e.g. `list`
 7. Refer to the **Features** below for details of each command.
 
