@@ -30,11 +30,11 @@ Example of usage:
 Expected outcome:
 
 ```
-__________________________________
+__________________________________________
 Got it. I've added this task:
 [T][ ] eat lunch
 You now have 1 task(s) in the list.
-__________________________________
+__________________________________________
 ```
 
 
@@ -42,20 +42,20 @@ __________________________________
 
 User enters `deadline` as a keyword followed by the task that he/she
 wishes to add to the list. Thereafter, he/she appends the task with a
-`/by <DATE>` argument to indicate the task's due date.
+`/by <YYYY-MM-DD>` argument to indicate the task's due date.
 
 Example of usage: 
 
-`deadline return book /by June 6th`
+`deadline return book /by 2021-09-14`
 
 Expected outcome:
 
 ```
-__________________________________
+__________________________________________
 Got it. I've added this task:
-[D][ ] return book (by: June 6th)
+[D][ ] return book (by: Sep 14 2021)
 You now have 2 task(s) in the list.
-__________________________________
+__________________________________________
 ```
 
 
@@ -63,7 +63,7 @@ __________________________________
 
 User enters `event` as a keyword followed by the task that he/she
 wishes to add to the list. Thereafter, he/she appends the task with a
-`/at <DATE>` argument to indicate the task's due date.
+`/at <DATE or TIME>` argument to indicate the task's due date.
 
 Example of usage: 
 
@@ -72,11 +72,11 @@ Example of usage:
 Expected outcome:
 
 ```
-__________________________________
+__________________________________________
 Got it. I've added this task:
 [E][ ] project meeting (at: 2pm)
 You now have 3 task(s) in the list.
-__________________________________
+__________________________________________
 ```
 
 
@@ -93,10 +93,68 @@ Example of usage:
 Expected outcome:
 
 ```
-__________________________________
+__________________________________________
 Here are the tasks in your list:
 1.[T][ ] eat lunch
-2.[D][ ] return book (by: June 6th)
+2.[D][ ] return book (by: Sep 14 2021)
 3.[E][ ] project meeting (at: 2pm)
-__________________________________
+__________________________________________
+```
+
+### `done` - To mark a task in the list as complete
+
+User enters `done` followed by the index of the task that 
+he/she plans to mark as complete.
+
+
+Example of usage:
+
+`done 1`
+
+Expected outcome:
+
+```
+__________________________________________
+Nice! I've marked this task as done:
+[T][X] eat lunch
+__________________________________________
+```
+
+### `delete` - To remove a task from the list
+
+User enters `delete` followed by the index of the task that
+he/she plans to remove from the list.
+
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+```
+__________________________________________
+Noted. I've removed this task:
+[T][X] eat lunch
+You now have 2 task(s) in your list!
+__________________________________________
+```
+
+### `find` - To  mark a task in the list as complete
+
+User enters `find` followed by the keyword of the task that
+he/she plans to locate.
+
+
+Example of usage:
+
+`find book`
+
+Expected outcome:
+
+```
+__________________________________________
+Here are the tasks that fit your criteria:
+[D][ ] return book (by: Sep 14 2021)
+__________________________________________
 ```
