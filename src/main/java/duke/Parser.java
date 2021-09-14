@@ -64,7 +64,7 @@ public class Parser {
 
 
     /**
-     * Filtes the tasks that includes the keyword.
+     * Filters the tasks that includes the keyword.
      * @param input The keyword.
      * @throws InvalidFormatException Thrown when the format of the query is invalid.
      */
@@ -197,7 +197,7 @@ public class Parser {
     public String addEvent(String input) {
         try {
             if (!input.contains(" /at ") || !input.contains("/at")) {
-                throw new InvalidTaskIndexException("OOPS!! To add an Event, " +
+                throw new InvalidFormatException("OOPS!! To add an Event, " +
                         "type -> event <Description> /at <Start Date> <Start Time> <End Date> <End Time>!");
             }
             if (input.length() <= 9) {
@@ -229,7 +229,7 @@ public class Parser {
             String response = tasks.addEvent(spl[0], startDate, startTime, endDate, endTime);
             storage.writeToFile(tasks.inArrayList());
             return response;
-        } catch (DukeException | InvalidTaskIndexException | IOException | InvalidFormatException e) {
+        } catch (DukeException | IOException | InvalidFormatException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
             return "Please enter the date in the format of yyyy-MM-dd and time in the format of HH:mm!";
@@ -277,7 +277,7 @@ public class Parser {
         } catch (NumberFormatException nfe) {
             throw new InvalidTaskIndexException("A task index should only contain numbers!");
         } catch (IOException e) {
-            return "Something went wrong: " + e.getMessage();
+            return e.getMessage();
         }
     }
 

@@ -41,7 +41,7 @@ public class Storage {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println("Creating new file...1");
+                System.out.println("Creating new file...");
             }
 
         }
@@ -103,6 +103,7 @@ public class Storage {
     public String getPath() {
         return this.filePath;
     }
+
 
 
 }

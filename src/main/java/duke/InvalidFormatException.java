@@ -10,7 +10,6 @@ public class InvalidFormatException extends Exception{
      * @param str The error message that is passed from the main code.
      */
     public InvalidFormatException(String str) {
-        // calling the constructor of parent Exception
         super(str);
     }
 

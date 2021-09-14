@@ -7,14 +7,14 @@ import java.io.IOException;
  * and prints out the welcome message to the user.
  * UI also carries the parser created.
  */
-public class Recieve {
+public class Receive {
     private Parser parser;
 
     /**
      * A public constructor to create Recieve.
      * @param parser The parser created when user starts session with Duke.
      */
-    public Recieve(Parser parser) {
+    public Receive(Parser parser) {
         this.parser = parser;
     }
 
@@ -25,7 +25,6 @@ public class Recieve {
      * @return Returns the string representation of the response from Duke.
      */
     public String run(String input) {
-
             try {
                 parser.getStorage().load();
 
@@ -57,6 +56,4 @@ public class Recieve {
                 return e.getMessage();
             }
         }
-
-
 }

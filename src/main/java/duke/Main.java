@@ -19,7 +19,7 @@ public class Main extends Application {
 
     /**
      * A public constructor for Main class.
-     * @throws IOException Thrown when storage file from dukec is not found.
+     * @throws IOException Thrown when storage file for duke is not found.
      */
     public Main() throws IOException {
     }

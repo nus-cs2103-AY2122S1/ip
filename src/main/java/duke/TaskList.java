@@ -148,6 +148,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Returns a sorted list of the task list based on their dates.
+     * The order of the original task list is unchanged.
+     * @return String representation of the sorted task list.
+     */
     public String sortByDate() {
         if (tasks.size() == 0) {
             return "There is no task for now :)";
@@ -165,6 +170,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Helper function for sortByDate() method.
+     * @param unsorted the original task list.
+     * @return the sorted task list.
+     */
     private ArrayList<Task> sortHelper(ArrayList<Task> unsorted) {
         if (unsorted.size() <= 0) {
             return unsorted;

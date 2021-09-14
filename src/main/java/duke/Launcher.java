@@ -2,7 +2,9 @@ package duke;
 
 import javafx.application.Application;
 
-
+/**
+ * Launches Duke application.
+ */
 public class Launcher {
 
     /**

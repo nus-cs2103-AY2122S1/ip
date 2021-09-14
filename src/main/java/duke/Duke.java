@@ -11,11 +11,10 @@ import java.io.IOException;
  * 3. Event
  * Task List is saved into a File called duke.txt in the computer.
  */
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Recieve recieve;
+    private Receive receive;
     private Parser parser;
 
     /**
@@ -30,7 +29,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
             parser = new Parser(tasks, storage);
-            recieve = new Recieve(parser);
+            receive = new Receive(parser);
 
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
@@ -43,7 +42,7 @@ public class Duke {
      * @return Duke's response in string format.
      */
     String getResponse(String input) {
-        return recieve.run(input);
+        return receive.run(input);
     }
 
 
