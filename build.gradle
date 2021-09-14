@@ -13,14 +13,6 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     String javaFxVersion = '11'
 
@@ -36,18 +28,7 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-=======
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
+
 }
 
 test {
@@ -65,31 +46,7 @@ test {
 }
 
 application {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     mainClassName = "duke.Duke"
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> parent of 571b9f1 (Gradle and CheckStyle)
 }
 
 shadowJar {

@@ -152,7 +152,7 @@ public class Duke extends Application {
                     }
                 } else if (parser.isFind()) {
                     try {
-                        TaskList taskList = this.tasks.find(parser.secondPart());
+                        TaskList taskList = this.tasks.find(parser.getSecondPart());
                         ui.findTask(taskList);
 
                         parser = new Parser(sc.nextLine());
