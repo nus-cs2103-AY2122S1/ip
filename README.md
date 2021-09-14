@@ -1,6 +1,6 @@
 # User Guide
 
-![image of Biscuit](https://github.com/MarcusTXK/ip/blob/master/docs/Ui.png)
+![image of Biscuit](https://marcustxk.github.io/ip/Ui.png)
 
 Biscuit is a **desktop chat-bot app for managing tasks, optimised for use via a Command Line Interface** (CLI) while
 still having the benefits of a Graphical User Interface (GUI). It was made as part of CS2103T's individual project
@@ -104,6 +104,7 @@ contains the data of your previous `biscuit.jar` home folder.
 
 ---
 ## Command summary
+
 |Action      | Format : Examples                                                                              |
 |------------|------------------------------------------------------------------------------------------------|
 | To Do     | `todo <task description>` : `todo borrow book`                                                  |
