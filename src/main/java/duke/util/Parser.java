@@ -98,7 +98,7 @@ public class Parser {
                 return event;
 
             } else {
-                notValid();
+                throw new InvalidTaskTypeException(UNKNOWN_COMMAND_MESSAGE);
             }
         } catch (DukeException | IOException e) {
             return e.getMessage();
@@ -107,7 +107,6 @@ public class Parser {
             String errorMessage = "Format of date and time should be \n yyyy-MM-dd HH:mm";
             return errorMessage + "\n Please try again.";
         }
-        return UNKNOWN_COMMAND_MESSAGE;
     }
 
     /**
@@ -170,9 +169,5 @@ public class Parser {
                         + " <event name> /at yyyy-MM-dd HH:mm");
             }
         }
-    }
-
-    public static void notValid() throws InvalidTaskTypeException {
-        throw new InvalidTaskTypeException(UNKNOWN_COMMAND_MESSAGE);
     }
 }
