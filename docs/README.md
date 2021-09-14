@@ -112,6 +112,7 @@ Example of usage:
 search string: A word or a line that you are looking for
 
 Expected outcome:
+
 Winston will return a list of all matching tasks
 
 ### `done` - Mark a task as complete
