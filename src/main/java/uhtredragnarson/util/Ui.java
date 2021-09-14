@@ -114,7 +114,7 @@ public class Ui {
      */
     public String showHelpMessage() {
         return "Uhtred is a chat bot that helps you organise your tasks. You can add "
-                + "different types of tasks such as todos, deadlines and events.\n"
+                + "different types of tasks such as todos, deadlines and events.\n\n"
                 + "To add todos, type 'todo (description)'\n\n"
                 + "To add deadlines, type 'deadline (description) /by (date in the format of yyyy-mm-dd) "
                 + "(time in the format hh:mm)'\n\n"
