@@ -106,14 +106,14 @@ public class Ui {
     protected String showHelpMessage() {
         return "Uhtred is a chat bot that helps you organise your tasks. You can add "
                 + "different types of tasks such as todos, deadlines and events.\n"
-                + "To add todos, type 'todo (description)'\n"
+                + "To add todos, type 'todo (description)'\n\n"
                 + "To add deadlines, type 'deadline (description) /by (date in the format of yyyy-mm-dd) "
-                + "(time in the format hh:mm)'\n"
+                + "(time in the format hh:mm)'\n\n"
                 + "To add events, type 'event (description) /at (date in the format of yyyy-mm-dd) "
-                + "(time in the format hh:mm) to (time in the format hh:mm)'\n"
-                + "To list your tasks, type 'list'\n"
-                + "To mark tasks as done, type 'done (task number as of list)'\n"
-                + "To delete tasks, type 'delete (task number as of list)'\n"
+                + "(time in the format hh:mm) to (time in the format hh:mm)'\n\n"
+                + "To list your tasks, type 'list'\n\n"
+                + "To mark tasks as done, type 'done (task number as of list)'\n\n"
+                + "To delete tasks, type 'delete (task number as of list)'\n\n"
                 + "To find matching tasks based on a keyword, type 'find (keyword)'";
     }
 }
