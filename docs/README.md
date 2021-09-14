@@ -93,7 +93,7 @@ list [#tagname]
     <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_GUI1.png?raw=true">
     <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_GUI2.png?raw=true">
     <img align = "center" height = "450" src="https://github.com/crypto-code/ip/blob/master/docs/img/list_GUI3.png?raw=true">
-  </div
+  </div>
   <p align = "center"> GUI Interface </p>
 </div>
 
