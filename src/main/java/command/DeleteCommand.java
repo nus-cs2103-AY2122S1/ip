@@ -12,7 +12,6 @@ import ui.Ui;
 public class DeleteCommand extends Command {
 
     private int taskNumber;
-    private final boolean EXIT = false;
 
     /**
      * Creates a delete task request using the task number i
@@ -33,9 +32,5 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidValue();
         }
-    }
-
-    public boolean isExit() {
-        return EXIT;
     }
 }

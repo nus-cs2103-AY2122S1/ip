@@ -1,6 +1,5 @@
 package command;
 
-import exception.DukeException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
@@ -12,7 +11,6 @@ import java.util.Locale;
 public class FindCommand extends Command {
 
     private String keyword;
-    private final boolean EXIT = false;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -30,10 +28,5 @@ public class FindCommand extends Command {
             }
         }
         return returnedString;
-    }
-
-    @Override
-    public boolean isExit() {
-        return EXIT;
     }
 }

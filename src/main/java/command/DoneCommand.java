@@ -11,7 +11,6 @@ import ui.Ui;
 public class DoneCommand extends Command {
 
     private int taskNumber;
-    private final boolean EXIT = false;
 
     public DoneCommand(int i) {
         this.taskNumber = i;
@@ -26,9 +25,5 @@ public class DoneCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidValue();
         }
-    }
-
-    public boolean isExit() {
-        return EXIT;
     }
 }

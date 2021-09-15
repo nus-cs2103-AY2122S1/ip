@@ -34,9 +34,6 @@ public abstract class Command {
         Command commandType = null;
 
         switch (command) {
-        case "bye":
-            commandType = new ExitCommand();
-            break;
         case "done":
             commandType = new DoneCommand(Integer.parseInt(commandSplitBySpace[1]) - 1);
             break;
@@ -75,11 +72,4 @@ public abstract class Command {
      * @throws DukeException If the execution contains unexpected behaviour
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns true if the command is an exit command.
-     *
-     * @return the boolean true if command is an exit command.
-     */
-    public abstract boolean isExit();
 }

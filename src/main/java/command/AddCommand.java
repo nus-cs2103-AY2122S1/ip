@@ -12,7 +12,6 @@ import ui.Ui;
 
 public class AddCommand extends Command {
 
-    private final boolean EXIT = false;
     private TaskType taskType;
     private String taskInfo;
     private enum TaskType {
@@ -131,8 +130,5 @@ public class AddCommand extends Command {
         }
         assert outputTask != null : "Task type should have matched";
         return outputTask;
-    }
-    public boolean isExit() {
-        return EXIT;
     }
 }

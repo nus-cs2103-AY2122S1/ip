@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 public class ListCommand extends Command {
 
-        private final boolean EXIT = false;
-
         public String execute(TaskList tasks, Ui ui, Storage storage) {
             ArrayList<Task> taskList = tasks.getTaskList();
             String returnedString = "Here are your tasks: \n";
@@ -21,9 +19,5 @@ public class ListCommand extends Command {
                 returnedString += String.format("%d.%s\n", (i + 1), taskList.get(i));
             }
             return returnedString;
-        }
-
-        public boolean isExit() {
-            return EXIT;
         }
 }
