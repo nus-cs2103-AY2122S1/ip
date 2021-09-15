@@ -134,7 +134,10 @@ public class Ui {
      * @return A string with a message and the sorted list.
      */
     public String sortListMessage(ArrayList<Task> list) {
-        StringBuilder s = new StringBuilder("I have sorted the list according to the chronological order. "
+        if (list.size() == 0) {
+            return "There are no task in your list to be sorted, please add some.";
+        }
+        StringBuilder s = new StringBuilder("I have sorted the list according to the order you want. "
                 + "Here is the sorted list.\n");
         s.append(listTasks(list));
         return s.toString();

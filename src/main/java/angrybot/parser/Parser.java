@@ -126,7 +126,7 @@ public class Parser {
     private String getCommandDescription(String userInput, String taskType) throws NoCommandDescriptionException {
         int index = userInput.indexOf(" ");
         if (index < 0) {
-            if (!(taskType.equals("list") || taskType.equals("bye"))) {
+            if (!(taskType.equals("list") || taskType.equals("bye") || taskType.equals("sort"))) {
                 throw new NoCommandDescriptionException();
             }
         }
