@@ -12,9 +12,8 @@ public class Duke {
     private static final String PATH = "data/duke.txt";
 
     private final Storage storage;
-    private final Ui ui;
     private TaskList tasks;
-    private List<String> history = new ArrayList<>();
+    private final List<String> history = new ArrayList<>();
     private int historyIndex = 0;
 
     /**
@@ -24,14 +23,6 @@ public class Duke {
      */
     public Duke(String path) {
         this.storage = new Storage(path);
-        this.ui = new Ui();
-        try {
-            this.tasks = new TaskList(storage.load());
-            Ui.showMessage("Saved tasks loaded successfully!");
-        } catch (DukeException e) {
-            Ui.showError(e.getMessage());
-            this.tasks = new TaskList();
-        }
     }
 
     /**
@@ -45,8 +36,23 @@ public class Duke {
             history.add(input);
             historyIndex = history.size();
             Command command = Parser.parse(input);
-            return command.execute(tasks, ui, storage);
+            return command.execute(tasks, storage);
         } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Loads the locally saved tasks.
+     *
+     * @return the string for loading status.
+     */
+    public String getSavedTasks() {
+        try {
+            this.tasks = new TaskList(storage.load());
+            return "Saved tasks loaded successfully!";
+        } catch (DukeException e) {
+            this.tasks = new TaskList();
             return e.getMessage();
         }
     }
@@ -57,7 +63,14 @@ public class Duke {
      * @return a string of welcome message.
      */
     public String getWelcome() {
-        return Ui.getGreeting();
+        String logo =
+                " _   _ _ _\n"
+                        + "| | | (_) | _____\n"
+                        + "| |_| | | |/ / _ \\\n"
+                        + "|  _  | |   < (_) |\n"
+                        + "|_| |_|_|_|\\_\\___/\n";
+
+        return "Hello from\n" + logo + "What can I do for you?\n";
     }
 
     /**

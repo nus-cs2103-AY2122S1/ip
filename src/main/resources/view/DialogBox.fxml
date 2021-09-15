@@ -10,25 +10,24 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.layout.Background?>
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <HBox fx:id="textBox">
-            <Text fx:id="dialog" text="Label" wrappingWidth="100" >
-                <font>
-                    <Font name="Consolas" size="12"/>
-                </font>
-            </Text>
-            <padding>
-                <Insets bottom="10.0" left="15.0" right="15.0" top="15.0" />
-            </padding>
-        </HBox>
-        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" >
-            <clip>
-                <Circle centerX="30" centerY="30" radius="30"/>
-            </clip>
-        </ImageView>
-    </children>
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets left="5.0" right="5.0" top="10.0"/>
     </padding>
+    <HBox fx:id="textBox">
+        <Text fx:id="dialog" text="Label">
+            <font>
+                <Font name="Consolas" size="12"/>
+            </font>
+        </Text>
+        <padding>
+            <Insets topRightBottomLeft="25"/>
+        </padding>
+    </HBox>
+    <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+        <clip>
+            <Circle centerX="30" centerY="30" radius="30"/>
+        </clip>
+    </ImageView>
 </fx:root>

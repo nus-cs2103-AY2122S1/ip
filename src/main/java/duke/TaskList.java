@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList {
-    private final List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     /**
-     * Save the task list to the local path.
+     * Saves the task list to the local path.
      *
      * @param storage the Storage instance
      * @throws IOException thrown when there is an error saving
@@ -29,10 +29,11 @@ public class TaskList {
     }
 
     /**
-     * Remove the task from the list.
+     * Removes the task from the list.
      *
      * @param index the index starting with 1.
-     * @throws IndexOutOfBoundsException thrown when index out of bound
+     * @throws IndexOutOfBoundsException thrown when index out of bound.
+     * @return string for status.
      */
     public String remove(int index) throws IndexOutOfBoundsException {
         assert (tasks != null) : "Task list is not initialised!";
@@ -46,9 +47,22 @@ public class TaskList {
     }
 
     /**
-     * Add task to the list.
+     * Remove the task from the list.
+     *
+     * @return string for status.
+     */
+    public String clear() {
+        assert (tasks != null) : "Task list is not initialised!";
+
+        tasks = new ArrayList<>();
+        return "Cleared all tasks.";
+    }
+
+    /**
+     * Adds task to the list.
      *
      * @param task the task to be added.
+     * @return string for status.
      */
     public String add(Task task) {
         assert (tasks != null) : "Task list is not initialised!";
@@ -63,7 +77,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      *
      * @param index the index starting with 1.
      */
@@ -76,7 +90,7 @@ public class TaskList {
     }
 
     /**
-     * Filter out the tasks by the search string and print the result.
+     * Filters out the tasks by the search string and print the result.
      *
      * @param searchString the string contained by the description.
      */

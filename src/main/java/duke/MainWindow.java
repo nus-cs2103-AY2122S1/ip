@@ -42,12 +42,13 @@ public class MainWindow extends BorderPane {
         scrollPane.setFitToWidth(true);
 
         inputContainer.getStylesheets().add(this.getClass().getResource("/style/style.css").toExternalForm());
-
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.getGreeting(), dukeImage));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.getSavedTasks(), dukeImage));
     }
 
     /**

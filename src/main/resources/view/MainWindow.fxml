@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600" minWidth="400.0" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<BorderPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600" minWidth="400.0" prefHeight="700.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <center>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" vbarPolicy="ALWAYS" hvalue="1.0" minHeight="100" prefHeight="657.0" prefWidth="400.0" vvalue="1.0">
             <content>

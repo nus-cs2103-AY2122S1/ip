@@ -17,6 +17,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -26,6 +27,9 @@ import javafx.scene.text.TextAlignment;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private final double USER_DIALOG_WIDTH = 140;
+    private final double DUKE_DIALOG_WIDTH = 280;
+
     @FXML
     private HBox textBox;
     @FXML
@@ -45,14 +49,14 @@ public class DialogBox extends HBox {
 
         BackgroundFill bf = new BackgroundFill(
                 Color.LIGHTSKYBLUE,
-                new CornerRadii(10, 0, 10, 10, false),
-                new Insets(5)
+                new CornerRadii(25, 0, 25, 25, false),
+                new Insets(10)
         );
         textBox.setBackground(new Background(bf));
 
+        final double TEXT_DISPLAY_WIDTH = text.length() * 7;
         dialog.setText(text);
-        dialog.setTextAlignment(TextAlignment.RIGHT);
-        dialog.setWrappingWidth(Math.min(text.length() * dialog.getFont().getSize(), 100));
+        dialog.setWrappingWidth(Math.min(USER_DIALOG_WIDTH, TEXT_DISPLAY_WIDTH));
 
         displayPicture.setImage(img);
     }
@@ -72,8 +76,10 @@ public class DialogBox extends HBox {
                 new Insets(5)
         );
         textBox.setBackground(new Background(bf));
-        dialog.setWrappingWidth(250);
-        dialog.setTextAlignment(TextAlignment.LEFT);
+        textBox.setPadding(new Insets(15));
+
+        dialog.setFont(new Font("Consolas", 14));
+        dialog.setWrappingWidth(DUKE_DIALOG_WIDTH);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
