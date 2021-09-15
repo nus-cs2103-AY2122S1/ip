@@ -43,10 +43,11 @@ public class TaskWithDateTime extends Task {
     @Override
     public int compareTo(Task t) {
         if (t instanceof TaskWithDateTime) {
-            if (super.compareTo(t) != 1) {
-                TaskWithDateTime t1 = (TaskWithDateTime) t;
-                return compareDateTime(t1);
+            TaskWithDateTime t1 = (TaskWithDateTime) t;
+            if (this.compareDateTime(t1) <= 0) {
+                return super.compareTo(t);
             }
+            return 1;
         }
         return -1;
     }

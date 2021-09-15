@@ -3,6 +3,8 @@ package angrybot.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.List;
 
 import angrybot.command.AddCommand;
 import angrybot.command.AngryBotCommand;
@@ -38,6 +40,8 @@ public class Parser {
     private final TaskList list;
     private final Storage storage;
     private final Ui ui;
+    private final List<String> COMMAND_TYPES = Arrays.asList(new String[]{"list", "bye", "sort", "todo", "event", "deadline", "find", "help",
+            "delete", "done" });
 
     /**
      * Creates a Parser that handles user input and turn it into respective
@@ -107,8 +111,12 @@ public class Parser {
         }
     }
 
-    private String getCommandType(String userInput) {
-        return userInput.split(" ")[0];
+    private String getCommandType(String userInput) throws UnknownCommandException {
+        String commandType =  userInput.split(" ")[0];
+        if (COMMAND_TYPES.contains(commandType)) {
+            return commandType;
+        }
+        throw new UnknownCommandException();
     }
 
     private Task createTaskWithDateTime(String commandDescription, String taskType) throws NoDateTimeException,
@@ -126,7 +134,8 @@ public class Parser {
     private String getCommandDescription(String userInput, String taskType) throws NoCommandDescriptionException {
         int index = userInput.indexOf(" ");
         if (index < 0) {
-            if (!(taskType.equals("list") || taskType.equals("bye") || taskType.equals("sort"))) {
+            if (!(taskType.equals("list") || taskType.equals("bye") || taskType.equals("sort")
+                    || taskType.equals("help"))) {
                 throw new NoCommandDescriptionException();
             }
         }
