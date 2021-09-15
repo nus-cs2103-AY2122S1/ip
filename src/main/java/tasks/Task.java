@@ -1,6 +1,7 @@
 package tasks;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * The Task class implements the tasks to be tracked by the
@@ -102,8 +103,9 @@ public class Task {
     public void setLocalDate(LocalDate localDate) {}
 
     /**
-     * Changes stored date to a new date.
-     * @param newDate date to be changed to
+     * Sets the time as a valid time.
+     * @param localTime the specific valid time to store
      */
-    public void updateDate(String newDate) {}
+    public void setLocalTime(LocalTime localTime) {}
+
 }

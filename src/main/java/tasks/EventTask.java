@@ -2,7 +2,9 @@ package tasks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +24,9 @@ public final class EventTask extends Task {
     /** Stores the date information as a LocalDate */
     private LocalDate localDate;
 
+    /** Stores the time information as a LocalTime */
+    private LocalTime time;
+
     /**
      * Constructs an Event task and check if a date can be
      * stored as LocalDate. If so, save it, otherwise save
@@ -32,30 +37,77 @@ public final class EventTask extends Task {
      */
     public EventTask(String description, String date) {
         super(description);
-        LocalDate day = getDate(date);
         this.date = date;
-        setLocalDate(day);
+        setDateAndTime(date);
     }
 
-    private LocalDate getDate(String userInput) {
-        String str = userInput.replaceAll(" ", "");
-        String temp = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}";
-        Pattern p = Pattern.compile(temp);
-        Matcher m = p.matcher(str);
+    private void setDateAndTime(String userInput) {
+        String dateAndTime = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}";
+        String dateOnly = "[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}";
+        Pattern p = Pattern.compile(dateAndTime);
+        Matcher m = p.matcher(userInput);
         String dateStr;
+        String matched;
         if (m.find()) {
-            dateStr = m.group();
+            matched = m.group();
+            dateStr = matched.substring(0, matched.length() - 4)
+                    .replaceAll(" ", "");
             try {
                 String[] date = dateStr.split("/");
                 int day = Integer.parseInt(date[0]);
                 int month = Integer.parseInt(date[1]);
                 int year = Integer.parseInt(date[2]);
-                return LocalDate.of(year, month, day);
+                setLocalDate(LocalDate.of(year, month, day));
+                setTimeFromString(matched.substring(matched.length() - 4));
             } catch (DateTimeException e) {
-                return null;
+                System.out.println(this.getClass() + ": invalid date");
+            }
+        } else {
+            p = Pattern.compile(dateOnly);
+            m = p.matcher(userInput);
+            if (m.find()) {
+                dateStr = m.group();
+                try {
+                    String[] date = dateStr.split("/");
+                    int day = Integer.parseInt(date[0]);
+                    int month = Integer.parseInt(date[1]);
+                    int year = Integer.parseInt(date[2]);
+                    setLocalDate(LocalDate.of(year, month, day));
+                } catch (DateTimeException e) {
+                    System.out.println(this.getClass() + ": invalid date");
+                }
+            }
+
+        }
+    }
+
+    private void setTimeFromString(String time) {
+        try {
+            this.time = LocalTime.of(Integer.parseInt(time.substring(0, 2)),
+                    Integer.parseInt(time.substring(time.length() - 2)));
+            if (localDate != null) {
+                date += " " + this.time.toString().replaceAll(":", "");
+            }
+        } catch (NumberFormatException e) {
+            this.time = null;
+            System.out.println("invalid time" + e.getMessage());
+        } catch (NullPointerException e) {
+            this.time = null;
+            System.out.println("no time created" + e.getMessage());
+        }
+    }
+
+    /**
+     * Sets the time as a valid time.
+     * @param localTime the specific valid time to store
+     */
+    public void setLocalTime(LocalTime localTime) {
+        if (localTime != null) {
+            this.time = localTime;
+            if (this.localDate != null) {
+                date += " " + localTime.toString().replaceAll(":", "");
             }
         }
-        return null;
     }
 
     /**
@@ -72,16 +124,11 @@ public final class EventTask extends Task {
      * @param localDate the specific valid date to store
      */
     public void setLocalDate(LocalDate localDate) {
+        this.time = null;
         this.localDate = localDate;
+        this.date = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-    /**
-     * Changes stored date to a new date.
-     * @param newDate date to be changed to
-     */
-    public void updateDate(String newDate) {
-        this.date = newDate;
-    }
 
     /**
      * Retrieves the information on the date associated with task.
@@ -103,9 +150,13 @@ public final class EventTask extends Task {
     public String getDescription() {
         if (this.localDate == null) {
             return super.getDescription() + " " + "(at: " + this.date + ")";
-        } else {
+        } else if (this.time == null) {
             return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
                     + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
+        } else {
+            return super.getDescription() + " " + "(at: " + this.localDate.getDayOfMonth() + " "
+                    + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear()
+                    + " " + time + ")";
         }
     }
 

@@ -1,6 +1,7 @@
 package tasks;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -184,11 +185,11 @@ public final class TaskList {
     /**
      * Changes the date of a task to another, specific date.
      * @param localDate date to change to
+     * @param localTime time to change to
      * @param index index of task in stored list
-     * @param date string representation of localDate
      * @return result of reschedule attempt, successful or otherwise
      */
-    public String reschedule(LocalDate localDate, int index, String date) {
+    public String reschedule(LocalDate localDate, LocalTime localTime, int index) {
         if (index < 0 || index >= tasks.size()) {
             return "     Please use a valid index!\n"
                     + "     Note: 'list' can be used to see the current tasks.";
@@ -199,7 +200,7 @@ public final class TaskList {
         String previous = tasks.get(index).getType() + tasks.get(index).getStatus() + " "
                 + tasks.get(index).getDescription();
         tasks.get(index).setLocalDate(localDate);
-        tasks.get(index).updateDate(date);
+        tasks.get(index).setLocalTime(localTime);
         return "     Noted, the following task have been rescheduled:\n"
                 + "     From " + previous + "\n"
                 + "     To " + tasks.get(index).getType() + tasks.get(index).getStatus() + " "

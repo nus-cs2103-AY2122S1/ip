@@ -24,16 +24,18 @@ public final class Ui {
 
     private final String helperMessage =
             "     The following can be used:\n" + "     Types of tasks: 'todo', 'deadline', 'event'\n"
-            + "     If you wish to add a task, please input in the form: '<Type of Task> <Name of Task>'"
-            + " and include keyword '/at' OR '/by' followed by <Date> if relevant.\n"
+            + "     If you wish to add a task, please input in the form:\n'"
+            + "     <type of task> <description of task>'"
+            + " and include keyword '/at' OR '/by' followed by <date> and <time> if relevant.\n\n"
             + "     If you wish to delete a task, please input in the form: 'delete <task index>'.\n"
             + "     If you wish to see the current tasks, please input 'list'.\n"
             + "     If you wish to mark a task as done, please input 'done <task index>.'\n"
             + "     If you wish to terminate the program, please input 'bye'.\n"
-            + "     If you wish to check items due on a particular day, please input 'DD/MM/YYYY'.\n"
+            + "     If you wish to check items due on a particular day, please input 'due <date>'.\n"
             + "     If you wish to find items, please input in the form: 'find <keyword>'.\n"
             + "     If you wish to reschedule a task, please input 'reschedule <index> <new date> \n"
-            + "     Please kindly avoid unnecessary spaces and note that date is best in 'DD/MM/YYYY' form.\n";
+            + "     Please kindly avoid unnecessary spaces and note that date and time is best in "
+            + "'DD/MM/YYYY HH/MM' form.\n";
 
     private final String exitMessage = "Bye. Hope to see you again soon!";
 

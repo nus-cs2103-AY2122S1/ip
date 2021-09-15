@@ -85,7 +85,7 @@ public class TasksTest {
     @Test
     public void eventTaskTest4() {
         Task t = new EventTask("this", "2/12/2019 1800");
-        assertEquals("this (at: 2 DECEMBER 2019)", t.getDescription());
+        assertEquals("this (at: 2 DECEMBER 2019 18:00)", t.getDescription());
         assertEquals("2019-12-02", t.getLocalDate().toString());
     }
 
@@ -131,7 +131,7 @@ public class TasksTest {
     @Test
     public void deadLineTaskTest4() {
         Task t = new DeadLineTask("this", "2/12/2019 1800");
-        assertEquals("this (by: 2 DECEMBER 2019)", t.getDescription());
+        assertEquals("this (by: 2 DECEMBER 2019 18:00)", t.getDescription());
         assertEquals("2019-12-02", t.getLocalDate().toString());
     }
 }
