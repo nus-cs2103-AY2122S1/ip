@@ -31,7 +31,7 @@ public class Ui {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/Images/BackgroundImage.jpg"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/BackgroundImage.jpg"));
 
 
     /**
