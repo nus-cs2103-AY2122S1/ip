@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * duke.Storage class is responsible for dealing with loading tasks from file and saving tasks in the file.
+ * Storage class is responsible for dealing with loading tasks from file and saving tasks in the file.
  */
 public class Storage {
     private final File file;
 
     /**
-     * Creates a new duke.Storage instance at the specified path.
+     * Creates a new Storage instance at the specified path.
      * @param pathname A pathname string
      */
     public Storage(String pathname) {
@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Reads and return the contents of the file.
+     * Reads and returns the contents of the file.
      * @return The String contents of the file.
      */
     public String read() {
@@ -50,13 +50,13 @@ public class Storage {
             scanner.close();
             return contents.toString();
         } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found when trying to read file from duke.Storage class.");
+            throw new RuntimeException("File not found when trying to read file from Storage class.");
         }
     }
 
     /**
-     * Writes the specified contents into the duke.Storage file.
-     * @param contents The String contents to write to the duke.Storage file.
+     * Writes the specified contents into the Storage file.
+     * @param contents The String contents to write to the Storage file.
      */
     public void write(String contents) {
         try {
@@ -64,10 +64,10 @@ public class Storage {
             fileWriter.write(contents);
             fileWriter.close();
         } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found when trying to write to file from duke.Storage class.");
+            throw new RuntimeException("File not found when trying to write to file from Storage class.");
         } catch (IOException exception) {
             throw new RuntimeException(
-                    String.format("An I/O exception occurred when trying to write to file %s\n", this.file.getPath())
+                String.format("An I/O exception occurred when trying to write to file %s\n", this.file.getPath())
             );
         }
     }

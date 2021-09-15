@@ -7,7 +7,7 @@ import duke.task.Event;
 import duke.task.TaskCollection;
 
 /**
- * duke.request.EventRequest represents a request from the user to create an duke.task.Event in the application.
+ * EventRequest represents a request from the user to create an Event in the application.
  */
 public class EventRequest extends TaskCollectionRequest {
     private static final String AT_DELIMITER = " /at ";
@@ -15,8 +15,8 @@ public class EventRequest extends TaskCollectionRequest {
     private final Event event;
 
     /**
-     * Creates a duke.request.EventRequest.
-     * @param taskCollection The target duke.task.TaskCollection.
+     * Creates a EventRequest.
+     * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -26,7 +26,7 @@ public class EventRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the duke.request.EventRequest requests to execute.
+     * Gets the Action the EventRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override
@@ -35,20 +35,19 @@ public class EventRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Parses an input String to create a duke.task.Event into a duke.task.Event.
+     * Parses an input String to create a Event into a Event.
      * @param eventString The input String.
-     * @return The duke.task.Event parsed from the input String.
+     * @return The Event parsed from the input String.
      * @throws UserException If the eventString is invalid.
      */
     private static Event parseEvent(String eventString) throws UserException {
         String[] substrings = eventString.split(EventRequest.AT_DELIMITER, 2);
 
         if (substrings.length != 2) {
-            String[] exceptionMessages = new String[]{
+            throw new UserException(new String[]{
                 "A request to create an event task must follow the format:",
                 "  event <description> /by <datetime>"
-            };
-            throw new UserException(String.join(System.lineSeparator(), exceptionMessages));
+            });
         }
 
         String description = substrings[0];

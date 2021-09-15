@@ -7,16 +7,16 @@ import duke.task.Task;
 import duke.task.TaskCollection;
 
 /**
- * duke.action.FindTasks is an Action that finds a List of duke.task.Tasks that match a given String.
+ * FindTasks is an Action that finds a List of Tasks that match a given String.
  */
 public class FindTasks implements Action {
     private final String string;
     private final TaskCollection taskCollection;
 
     /**
-     * Creates an Action duke.action.DeleteTask that finds a List of duke.task.Tasks that match a given String.
+     * Creates an Action DeleteTask that finds a List of Tasks that match a given String.
      * @param string The String to match.
-     * @param taskCollection The duke.task.TaskCollection to find the duke.task.Tasks from.
+     * @param taskCollection The TaskCollection to find the Tasks from.
      */
     public FindTasks(String string, TaskCollection taskCollection) {
         assert string != null : "Search query string should not be null";
@@ -27,7 +27,7 @@ public class FindTasks implements Action {
     }
 
     /**
-     * Finds the duke.task.Tasks from the duke.task.TaskCollection.
+     * Finds the Tasks from the TaskCollection.
      * @return The duke.Response
      */
     public Response execute() {

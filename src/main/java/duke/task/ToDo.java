@@ -5,16 +5,16 @@ package duke.task;
  */
 public class ToDo extends Task {
     /**
-     * Creates a duke.task.ToDo with the provided description.
-     * @param description The description of the duke.task.ToDo.
+     * Creates a ToDo with the provided description.
+     * @param description The description of the ToDo.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * Converts the duke.task.ToDo into a String that represents the duke.task.ToDo.
-     * @return The String representation of a duke.task.ToDo.
+     * Converts the ToDo into a String that represents the ToDo.
+     * @return The String representation of a ToDo.
      */
     @Override
     public String toString() {
@@ -22,7 +22,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Converts the duke.task.Event into a String to be stored in duke.Storage.
+     * Converts the Event into a String to be stored in Storage.
      * @return String to be stored
      */
     @Override

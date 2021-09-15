@@ -5,16 +5,16 @@ import duke.task.Task;
 import duke.task.TaskCollection;
 
 /**
- * duke.action.AddTask is an Action that adds a duke.task.Task to a duke.task.TaskCollection.
+ * AddTask is an Action that adds a Task to a TaskCollection.
  */
 public class AddTask implements Action {
     private final Task task;
     private final TaskCollection taskCollection;
 
     /**
-     * Creates an Action duke.action.AddTask that adds a duke.task.Task into a duke.task.TaskCollection.
-     * @param task The duke.task.Task to be added.
-     * @param taskCollection The duke.task.TaskCollection to add the duke.task.Task into.
+     * Creates an Action AddTask that adds a Task into a TaskCollection.
+     * @param task The Task to be added.
+     * @param taskCollection The TaskCollection to add the Task into.
      */
     public AddTask(Task task, TaskCollection taskCollection) {
         assert task != null : "Task to add should not be null";
@@ -25,7 +25,7 @@ public class AddTask implements Action {
     }
 
     /**
-     * Adds the duke.task.Task into the duke.task.TaskCollection.
+     * Adds the Task into the TaskCollection.
      * @return The duke.Response.
      */
     @Override
@@ -35,8 +35,8 @@ public class AddTask implements Action {
     }
 
     /**
-     * Returns the duke.Response for successfully adding the duke.task.Task to the duke.task.TaskCollection.
-     * @return The duke.Response.
+     * Returns the Response for successfully adding the Task to the TaskCollection.
+     * @return The Response.
      */
     private Response respond() {
         return new Response(new String[]{

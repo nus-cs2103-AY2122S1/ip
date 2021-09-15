@@ -5,15 +5,15 @@ import duke.action.FindTasks;
 import duke.task.TaskCollection;
 
 /**
- * duke.request.FindRequest represents a request from the user to find all the Tasks in the application that
- * match a given String.
+ * FindRequest represents a request from the user to find all the Tasks in the application that matches a
+ * given String.
  */
 public class FindRequest extends TaskCollectionRequest {
     private final String string;
 
     /**
-     * Creates a duke.request.FindRequest.
-     * @param taskCollection The target duke.task.TaskCollection.
+     * Creates a FindRequest.
+     * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
      */
     protected FindRequest(TaskCollection taskCollection, String requestString) {
@@ -22,7 +22,7 @@ public class FindRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the duke.request.FindRequest requests to execute.
+     * Gets the Action the FindRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override

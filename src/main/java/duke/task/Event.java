@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * An duke.task.Event is a task that start at a specific time and ends at a specific time.
+ * An Event is a task that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Creates an duke.task.Event with the provided description and start and end date/time.
-     * @param description The description of the duke.task.Event task.
-     * @param at The date/time of the duke.task.Event.
+     * Creates an Event with the provided description and start and end date/time.
+     * @param description The description of the Event task.
+     * @param at The date/time of the Event.
      */
     public Event(String description, String at) {
         super(description);
@@ -20,8 +20,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the duke.task.Event into a String that represents the duke.task.Event.
-     * @return The String representation of a duke.task.Event.
+     * Converts the Event into a String that represents the Event.
+     * @return The String representation of a Event.
      */
     @Override
     public String toString() {
@@ -33,7 +33,7 @@ public class Event extends Task {
     }
 
     /**
-     * Converts the duke.task.Event into a String to be stored in duke.Storage.
+     * Converts the Event into a String to be stored in Storage.
      * @return String to be stored
      */
     @Override

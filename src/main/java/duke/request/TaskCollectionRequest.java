@@ -3,14 +3,14 @@ package duke.request;
 import duke.task.TaskCollection;
 
 /**
- * A duke.request.TaskCollectionRequest represents a duke.request.Request made to a duke.task.TaskCollection.
+ * A TaskCollectionRequest represents a Request made to a TaskCollection.
  */
 public abstract class TaskCollectionRequest extends Request {
     protected TaskCollection taskCollection;
 
     /**
-     * Creates a duke.request.TaskCollectionRequest to a specified Collection.
-     * @param taskCollection The Target duke.task.TaskCollection.
+     * Creates a TaskCollectionRequest to a specified Collection.
+     * @param taskCollection The Target TaskCollection.
      */
     protected TaskCollectionRequest(TaskCollection taskCollection) {
         this.taskCollection = taskCollection;

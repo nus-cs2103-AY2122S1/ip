@@ -4,14 +4,14 @@ import duke.Response;
 import duke.task.Task;
 
 /**
- * duke.action.CompleteTask is an Action that marks a duke.task.Task as done.
+ * CompleteTask is an Action that marks a Task as done.
  */
 public class CompleteTask implements Action {
     private final Task task;
 
     /**
-     * Creates an Action duke.action.CompleteTask that marks a duke.task.Task as done.
-     * @param task The duke.task.Task to be marked as done.
+     * Creates an Action CompleteTask that marks a Task as done.
+     * @param task The Task to be marked as done.
      */
     public CompleteTask(Task task) {
         assert task != null : "Task to add should not be null";
@@ -20,7 +20,7 @@ public class CompleteTask implements Action {
     }
 
     /**
-     * Marks the duke.task.Task as done.
+     * Marks the Task as done.
      * @return The duke.Response.
      */
     @Override
@@ -30,8 +30,8 @@ public class CompleteTask implements Action {
     }
 
     /**
-     * Returns the duke.Response for marking the duke.task.Task as done.
-     * @return The duke.Response.
+     * Returns the Response for marking the Task as done.
+     * @return The Response.
      */
     private Response respond() {
         return new Response(new String[]{

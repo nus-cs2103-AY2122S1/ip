@@ -4,14 +4,14 @@ import duke.Response;
 import duke.task.TaskCollection;
 
 /**
- * duke.action.ListTasks is an Action that lists the Tasks in a duke.task.TaskCollection.
+ * ListTasks is an Action that lists the Tasks in a TaskCollection.
  */
 public class ListTasks implements Action {
     private final TaskCollection taskCollection;
 
     /**
-     * Creates an Action duke.action.ListTasks that lists the Tasks in a duke.task.TaskCollection.
-     * @param taskCollection The duke.task.TaskCollection.
+     * Creates an Action ListTasks that lists the Tasks in a TaskCollection.
+     * @param taskCollection The TaskCollection.
      */
     public ListTasks(TaskCollection taskCollection) {
         assert taskCollection != null : "Task collection to add task to should exist";
@@ -20,7 +20,7 @@ public class ListTasks implements Action {
     }
 
     /**
-     * Lists all the Tasks in the duke.task.TaskCollection.
+     * Lists all the Tasks in the TaskCollection.
      * @return The duke.Response.
      */
     @Override
@@ -29,8 +29,8 @@ public class ListTasks implements Action {
     }
 
     /**
-     * Returns the duke.Response for listing all the Tasks in the duke.task.TaskCollection.
-     * @return The duke.Response.
+     * Returns the Response for listing all the Tasks in the TaskCollection.
+     * @return The Response.
      */
     private Response respond() {
         return new Response(new String[]{

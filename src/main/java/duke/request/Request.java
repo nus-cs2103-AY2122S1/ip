@@ -5,22 +5,22 @@ import duke.exception.UserException;
 import duke.task.TaskCollection;
 
 /**
- * duke.request.Request represents a request from the user to perform an action on a collection of tasks.
+ * Request represents a request from the user to perform an action on a collection of tasks.
  */
 public abstract class Request {
     private static final String COMMAND_DELIMITER = "\\s";
 
     /**
-     * Gets the Action the duke.request.Request requests to execute.
+     * Gets the Action the Request requests to execute.
      * @return The Action to be executed.
      */
     public abstract Action action();
 
     /**
-     * Creates the duke.request.Request related to the input requestString.
-     * @param taskCollection The duke.task.TaskCollection to perform the duke.request.Request on.
+     * Creates the Request related to the input requestString.
+     * @param taskCollection The TaskCollection to perform the Request on.
      * @param requestString The request String.
-     * @return The duke.request.Request related to the request String and duke.task.TaskCollection.
+     * @return The Request related to the request String and TaskCollection.
      * @throws UserException If the request String is invalid.
      */
     public static Request create(TaskCollection taskCollection, String requestString) throws UserException {

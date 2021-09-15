@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * A duke.Response from the application to some user input.
+ * A Response from the application to some user input.
  */
 public class Response {
     private static final String BASE_INDENT = "    ";
@@ -18,7 +18,7 @@ public class Response {
 
     /**
      * Creates a response with the specified String message.
-     * @param message The duke.Response message.
+     * @param message The Response message.
      */
     public Response(String message) {
         this(new String[]{ message });
@@ -26,7 +26,7 @@ public class Response {
 
     /**
      * Creates a response with the specified String array.
-     * @param messages The duke.Response message array.
+     * @param messages The Response message array.
      */
     public Response(String[] messages) {
         assert messages != null : "Messages should not be null";
@@ -47,8 +47,8 @@ public class Response {
     }
 
     /**
-     * Converts the duke.Response to its String representation.
-     * @return The String representation of the duke.Response.
+     * Converts the Response to its String representation.
+     * @return The String representation of the Response.
      */
     @Override
     public String toString() {
@@ -71,7 +71,7 @@ public class Response {
 
     /**
      * Returns a boolean indicating whether to exit the Duke window.
-     * @return
+     * @return The boolean indicating whether to exit the Duke window.
      */
     public boolean isExitResponse() {
         return isExitResponse;

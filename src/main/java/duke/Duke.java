@@ -1,10 +1,6 @@
 package duke;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import duke.action.Action;
-import duke.action.GoodbyeUser;
 import duke.action.WelcomeUser;
 import duke.exception.UserException;
 import duke.request.Request;
@@ -15,28 +11,21 @@ import duke.task.TaskCollection;
  */
 public class Duke {
     private static final String TASK_COLLECTION_STORAGE_PATH = "./data/duke.txt";
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     private final TaskCollection tasks = new TaskCollection(TASK_COLLECTION_STORAGE_PATH);
 
     /**
-     * Returns the string response.
-     * @return
+     * Returns the greeting Response of the Duke application.
+     * @return The greeting Response of the Duke application.
      */
-    public static String greetUser() {
+    public static Response greetUser() {
         Action welcomeUser = new WelcomeUser();
-        Response response = welcomeUser.execute();
-        return response.toString();
+        return welcomeUser.execute();
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Executes the action called by the user's input, saves the updated task collection and returns the
+     * appropriate response.
      */
     public Response handleUserInput(String userInput) {
         assert userInput != null : "User input should be a valid string";
