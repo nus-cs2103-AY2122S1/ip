@@ -40,7 +40,7 @@ public class Duke {
                 taskList.clearTasks();
             }
         } finally {
-            Executor executor = new Executor(storage, ui, taskList);
+            executor = new Executor(storage, ui, taskList);
         }
     }
 
@@ -50,7 +50,6 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-
             return executor.parseAndExecute(input);
         } catch (DukeException e) {
             return e.getMessage();
