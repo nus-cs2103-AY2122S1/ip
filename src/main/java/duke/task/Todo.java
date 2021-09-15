@@ -2,7 +2,6 @@ package duke.task;
 
 public class Todo extends Task {
     private String taskType = "[T]";
-    private String taskName;
 
     /**
      * Initialises a Todo object.
@@ -11,7 +10,6 @@ public class Todo extends Task {
      */
     public Todo(String taskName) {
         super(taskName);
-        this.taskName = taskName;
     }
 
     /**
@@ -22,7 +20,6 @@ public class Todo extends Task {
      */
     public Todo(String taskName, boolean isDone) {
         super(taskName);
-        this.taskName = taskName;
         if (isDone) {
             this.markAsDone();
         }
@@ -31,7 +28,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String result = taskType + this.getCheckBox()
-                + " " + this.taskName;
+                + " " + this.getTaskName();
         return result;
     }
 }

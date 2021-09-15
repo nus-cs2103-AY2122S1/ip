@@ -1,4 +1,4 @@
-package duke.data.exceptions;
+package duke.exceptions;
 
 /**
  * Signals that the date and time is invalid or missing.

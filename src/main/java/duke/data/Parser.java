@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.data;
 
 import static duke.ui.Tag.DEADLINE;
 import static duke.ui.Tag.DELETE;
@@ -18,12 +18,11 @@ import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.data.DateAndTime;
-import duke.data.exceptions.DukeException;
-import duke.data.exceptions.EmptyCommandInformationException;
-import duke.data.exceptions.EmptyTaskNameException;
-import duke.data.exceptions.InvalidDateAndTimeException;
-import duke.data.exceptions.InvalidInputException;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyCommandInformationException;
+import duke.exceptions.EmptyTaskNameException;
+import duke.exceptions.InvalidDateAndTimeException;
+import duke.exceptions.InvalidInputException;
 import duke.ui.Message;
 import duke.ui.Tag;
 
@@ -91,8 +90,8 @@ public class Parser {
         return getTaskNumber(splitArray[0]);
     }
 
-    private String getUpdatedField(String command, EditCommand.EditType editType) throws EmptyCommandInformationException,
-            InvalidInputException, InvalidDateAndTimeException {
+    private String getUpdatedField(String command, EditCommand.EditType editType)
+            throws EmptyCommandInformationException, InvalidInputException, InvalidDateAndTimeException {
         switch (editType) {
         case NAME:
             int nameStartingIndex = command.indexOf(Tag.NAME) + 2;
@@ -103,7 +102,7 @@ public class Parser {
 
             return command.substring(nameStartingIndex);
         case DATE_AND_TIME:
-            int dateStartingIndex = command.indexOf(Tag.DATE_AND_TIME) + 2; //todo change to tag.date
+            int dateStartingIndex = command.indexOf(Tag.DATE_AND_TIME) + 2;
             DateAndTime dateAndTime = new DateAndTime(command.substring(dateStartingIndex));
             return dateAndTime.getReformattedDateAndTime();
         default:
@@ -111,7 +110,8 @@ public class Parser {
         }
     }
 
-    private EditCommand.EditType getEditType(String command) throws InvalidInputException, EmptyCommandInformationException {
+    private EditCommand.EditType getEditType(String command) throws InvalidInputException,
+            EmptyCommandInformationException {
         int slashIndex = command.indexOf("/");
 
         if (slashIndex < 0) {
@@ -164,8 +164,7 @@ public class Parser {
         }
     }
 
-    private String getDateAndTime(String message, Command.CommandType taskType) throws InvalidDateAndTimeException,
-            InvalidInputException {
+    private String getDateAndTime(String message, Command.CommandType taskType) throws InvalidDateAndTimeException {
         String[] splitCommandArray = message.split(Tag.DATE_AND_TIME, 2);
 
         if (splitCommandArray.length == 1) {

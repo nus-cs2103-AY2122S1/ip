@@ -1,12 +1,11 @@
 package duke;
 
-import java.io.File;
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.data.exceptions.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
+import duke.data.Parser;
+import duke.data.Storage;
+import duke.exceptions.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -20,55 +19,24 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    private File dataFile;
-
-    public Duke() { //needed for Application.launch() to work
-        this.dataFile = new File(STORAGE_DIRECTORY_PATH);
+    /**
+     * Initialises a Duke object.
+     */
+    public Duke() {
         ui = new Ui();
         storage = new Storage(STORAGE_DIRECTORY_PATH);
-        //try {
-//            if (!this.dataFile.exists()) {
-//                boolean isFileCreated = dataFile.createNewFile();
-//                taskList = new TaskList();
-//            } else {
-//                taskList = new TaskList(storage.load());
-//            }
 
-//            if (!isFileCreated) {
-//                taskList = new TaskList(storage.load());
-//            } else {
-//                taskList = new TaskList();
-//            }
-
-            try {
-                if (!this.dataFile.exists()) {
-                    try {
-                        if (this.dataFile.getParentFile().mkdirs()) {
-                            System.out.println("Directory for file created.");
-                        }
-                        if (this.dataFile.createNewFile()) {
-                            System.out.println("File created: duke.txt");
-                        }
-                        taskList = new TaskList();
-                    } catch (IOException e) {
-                        System.out.println("Error has occurred when creating file!");
-                        e.printStackTrace();
-                    }
-                } else {
-                    taskList = new TaskList(storage.load());
-                }
-            } catch (IOException | DukeException e) {
-                e.printStackTrace();
+        try {
+            boolean isNewDataFileCreated = storage.createNewDataFile();
+            if (!isNewDataFileCreated) {
+                taskList = new TaskList(storage.load());
+            } else {
+                taskList = new TaskList();
             }
+        } catch (IOException | DukeException e) {
+            e.printStackTrace();
         }
-
-
-//    } catch (IOException e) {
-//            e.printStackTrace();
-//            //todo do we need to involve the case whereby this error occurs and show the error message to the user?
-//        }
-//    }
-
+    }
 
     /**
      * Returns a string representing the response from Duke based on the user input.
@@ -83,9 +51,7 @@ public class Duke {
             Command c = p.parse(input);
             response = c.execute(taskList, ui, storage);
         } catch (DukeException e) {
-//            e.printStackTrace();
             response = ui.showErrorMessage(e.getMessage());
-            //timer
         }
         return response;
     }

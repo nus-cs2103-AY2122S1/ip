@@ -20,6 +20,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Initialises a Task object with its date and time.
+     *
+     * @param taskName the task name
+     * @param dateAndTime the date and time
+     */
     public Task(String taskName, String dateAndTime) {
         this.taskName = taskName;
         this.dateAndTime = dateAndTime;

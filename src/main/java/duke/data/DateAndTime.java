@@ -7,10 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
-import duke.data.exceptions.InvalidDateAndTimeException;
+import duke.exceptions.InvalidDateAndTimeException;
 import duke.ui.Message;
-
-//todo documentation
 
 /**
  * Represents a DateAndTime object that reformats the date and time provided by the user to a specified format.
@@ -99,7 +97,7 @@ public class DateAndTime {
             LocalDate date = LocalDate.parse(dateInput, dateTimeFormatter);
             return date;
         } catch (DateTimeParseException e) {
-            throw new InvalidDateAndTimeException(e.getMessage()); //todo format error message?
+            throw new InvalidDateAndTimeException(e.getMessage());
         }
     }
 
@@ -168,7 +166,7 @@ public class DateAndTime {
             LocalTime time = LocalTime.parse(timeInput, dateTimeFormatter);
             return time;
         } catch (DateTimeParseException e) {
-            throw new InvalidDateAndTimeException(e.getMessage()); //todo format error message?
+            throw new InvalidDateAndTimeException(e.getMessage());
         }
     }
 }

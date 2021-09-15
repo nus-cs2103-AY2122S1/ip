@@ -1,8 +1,10 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import duke.ui.Ui;
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -71,5 +73,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (response.equals(Message.MESSAGE_EXIT)) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1500);
+        }
     }
 }

@@ -14,23 +14,14 @@ public class Ui {
      * Returns the welcome message of the programme.
      */
     public static String showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        String welcomeMessage = logo + "Hello! I'm Duke :)\n"
-                + "What can I do for you?";
-        return welcomeMessage;
+        return Message.MESSAGE_WELCOME;
     }
 
     /**
      * Returns the exit message of the programme.
      */
     public static String showExitMessage() {
-        String exitMessage = "Bye. Hope to see you again soon!";
-        return exitMessage;
+        return Message.MESSAGE_EXIT;
     }
 
     /**
@@ -139,7 +130,12 @@ public class Ui {
         return String.format("Now you have %d task%s in the list.", tasks.size(), sCharacter);
     }
 
-
+    /**
+     * Returns a string message that shows the updated task.
+     *
+     * @param updatedTask the updated task
+     * @return a string message with the updated task
+     */
     public String showEditTaskMessage(Task updatedTask) {
         String successMessage = "Got it. I've updated this task:";
         String taskString = updatedTask.toString();

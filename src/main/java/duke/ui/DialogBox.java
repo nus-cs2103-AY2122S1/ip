@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -20,12 +21,15 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String USER_DIALOG_BOX = "user-dialog-box";
+    private static final String DUKE_DIALOG_BOX = "duke-dialog-box";
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String boxType) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,7 +40,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.getStyleClass().add(boxType);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 40));
     }
 
     /**
@@ -50,11 +56,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, USER_DIALOG_BOX);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, DUKE_DIALOG_BOX);
         db.flip();
         return db;
     }

@@ -1,4 +1,4 @@
-package duke.storage;
+package duke.data;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.data.exceptions.DukeException;
+import duke.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -29,10 +29,31 @@ public class Storage {
     }
 
     /**
+     * Returns a boolean to whether a new data file is created.
+     *
+     * @return boolean of whether a new data file is created
+     * @throws IOException if an I/O error occurs
+     */
+    public boolean createNewDataFile() throws IOException {
+        if (!dataFile.exists()) {
+            if (dataFile.getParentFile().mkdirs()) {
+                System.out.println("Directory for file created.");
+            }
+            if (dataFile.createNewFile()) {
+                System.out.println("File created: duke.txt");
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Loads the stored data into the program when it restarts.
      *
      * @return a list of stored tasks
-     * @throws IOException
+     * @throws IOException if an I/O error occurs
+     * @throws DukeException if a .txt file to list conversion error occurs
      */
     public List<Task> load() throws IOException, DukeException {
         return txtToList(dataFile);
@@ -41,8 +62,8 @@ public class Storage {
     /**
      * Converts a TaskList into a txt file to be stored.
      *
-     * @param fileWriter
-     * @throws IOException
+     * @param fileWriter fileWriter
+     * @throws IOException if an I/O error occurs
      */
     public void listToTxt(FileWriter fileWriter) throws IOException {
         for (int i = 0; i < taskList.size(); i++) {
@@ -55,9 +76,9 @@ public class Storage {
     /**
      * Converts a txt file into a list of tasks to be loaded when the program restarts.
      *
-     * @param dataFile
+     * @param dataFile the stored data file
      * @return a list of stored tasks
-     * @throws IOException
+     * @throws IOException if an I/O error occurs
      */
     public List<Task> txtToList(File dataFile) throws IOException, DukeException {
         assert dataFile.exists() : "Data file does not exist";
@@ -135,8 +156,6 @@ public class Storage {
             assert false : "Invalid task type from txt";
             throw new DukeException(Message.MESSAGE_TXT_TO_LIST_CONVERSION_ERROR);
         }
-
-
     }
 
     /**
@@ -147,7 +166,6 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(dataFile);
             listToTxt(fileWriter);
         } catch (IOException e) {
-            //TODO when file dont exists
             e.printStackTrace();
         }
     }
@@ -155,7 +173,7 @@ public class Storage {
     /**
      * Updates the storage with the new task list.
      *
-     * @param newTaskList
+     * @param newTaskList the updated task list
      */
     public void update(TaskList newTaskList) {
         this.taskList = newTaskList;

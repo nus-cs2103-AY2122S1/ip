@@ -1,5 +1,6 @@
 package duke;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,8 +21,9 @@ public class Main extends Application {
         MainWindow mainWindow = new MainWindow();
         mainWindow.setDuke(duke);
         Scene scene = new Scene(mainWindow);
+        scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Duke Agenda Bot");
+        stage.setTitle("Duke");
         stage.show();
     }
 }

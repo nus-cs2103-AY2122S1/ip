@@ -1,4 +1,4 @@
-package duke.data.exceptions;
+package duke.exceptions;
 
 /**
  * An abstract class DukeException that is a parent to all exceptions pertaining to Duke.

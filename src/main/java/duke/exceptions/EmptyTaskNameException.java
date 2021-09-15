@@ -1,4 +1,4 @@
-package duke.data.exceptions;
+package duke.exceptions;
 
 /**
  * Signals that there is an empty task name error.

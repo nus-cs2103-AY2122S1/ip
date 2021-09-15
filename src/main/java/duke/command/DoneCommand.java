@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.data.exceptions.InvalidInputException;
-import duke.storage.Storage;
+import duke.data.Storage;
+import duke.exceptions.InvalidInputException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Message;
