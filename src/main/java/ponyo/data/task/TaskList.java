@@ -63,4 +63,13 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Checks if the list is empty
+     *
+     * @return true if list contains no elements
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
 }
