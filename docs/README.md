@@ -1,3 +1,5 @@
+![Picture of the UI](UI.png)
+
 # User Guide
 
 ## Features 
