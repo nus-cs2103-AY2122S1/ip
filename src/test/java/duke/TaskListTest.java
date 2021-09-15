@@ -12,9 +12,9 @@ public class TaskListTest {
     @Test
     public void check_desc_test() {
         try {
-            TaskList temp = new TaskList();
-            temp.add(new Todo("return book", false));
-            assertEquals("return book", temp.get(temp.size() - 1).getDescription());
+            TaskList tasks = new TaskList();
+            tasks.add(new Todo("buy groceries", false));
+            assertEquals("buy groceries", tasks.get(tasks.size()).getDescription());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -25,8 +25,8 @@ public class TaskListTest {
         try {
             TaskList tasks = new TaskList();
             tasks.add(new Todo("return book", false));
-            tasks.markAsDone(0);
-            assertEquals(tasks.get(0).isDone(), true);
+            tasks.markAsDone(tasks.size());
+            assertEquals(tasks.get(tasks.size()).isDone(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }

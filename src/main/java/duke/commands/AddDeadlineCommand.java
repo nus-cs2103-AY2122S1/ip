@@ -23,6 +23,10 @@ public class AddDeadlineCommand extends Command {
         this.by = by;
     }
 
+    public String getBy() {
+        return by.toString();
+    }
+
     /**
      * Executes the command. Adds deadline to task list.
      *
