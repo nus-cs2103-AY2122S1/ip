@@ -3,7 +3,6 @@ package angrybot.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.List;
 
 import angrybot.command.AddCommand;
@@ -41,8 +40,8 @@ public class Parser {
     private final TaskList list;
     private final Storage storage;
     private final Ui ui;
-    private final List<String> COMMAND_TYPES = Arrays.asList(new String[]{"list", "bye", "sort", "todo", "event", "deadline", "find", "help",
-            "delete", "done" });
+    private final List<String> commandList = List.of("list", "bye", "sort", "todo", "event",
+            "deadline", "find", "help", "delete", "done");
 
     /**
      * Creates a Parser that handles user input and turn it into respective
@@ -113,8 +112,8 @@ public class Parser {
     }
 
     private String getCommandType(String userInput) throws UnknownCommandException {
-        String commandType =  userInput.split(" ")[0];
-        if (COMMAND_TYPES.contains(commandType)) {
+        String commandType = userInput.split(" ")[0];
+        if (commandList.contains(commandType)) {
             return commandType;
         }
         throw new UnknownCommandException();
@@ -146,7 +145,8 @@ public class Parser {
         return userInput.substring(index + 1);
     }
 
-    private String getTaskDescription(String commandDescription) throws NoDateTimeException, NoTaskDescriptionException {
+    private String getTaskDescription(String commandDescription) throws NoDateTimeException,
+            NoTaskDescriptionException {
         int slashIndex = commandDescription.indexOf("/");
         if (slashIndex < 0) {
             throw new NoDateTimeException();
@@ -156,7 +156,7 @@ public class Parser {
                 throw new NoTaskDescriptionException();
             }
             return commandDescription.substring(0, slashIndex - 1);
-        } catch (StringIndexOutOfBoundsException e){
+        } catch (StringIndexOutOfBoundsException e) {
             throw new NoTaskDescriptionException();
         }
 
