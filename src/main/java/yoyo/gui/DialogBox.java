@@ -55,7 +55,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(160,185,198),
+        db.setBackground(new Background(new BackgroundFill(Color.rgb(160, 185, 198),
                 CornerRadii.EMPTY,
                 Insets.EMPTY)));
         return db;
@@ -71,7 +71,7 @@ public class DialogBox extends HBox {
     public static DialogBox getYoyoDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(165,248,211),
+        db.setBackground(new Background(new BackgroundFill(Color.rgb(165, 248, 211),
                 CornerRadii.EMPTY,
                 Insets.EMPTY)));
         return db;
