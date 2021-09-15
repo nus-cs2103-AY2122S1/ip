@@ -1,5 +1,6 @@
-T | true | read notes
-D | false | iP | 2021-09-05
-E | false | formal dinner | Sep 14 2021
-T | false | sleep
-
+T,true,read notes
+D,false,iP,2021-09-05
+E,false,formal dinner,Sep 14 2021
+T,false,sleep
+T,false,read
+T,false,watch movie
