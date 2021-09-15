@@ -176,7 +176,7 @@ public class ChatPage extends AnchorPane {
      * Print the list of tasks in this chat page
      */
     public void showCurrentList() {
-        dialogContainer.getChildren().add(DialogBox.getAliceDialog(alice.getUi().getCurrentList(), aliceImage));
+        printWithAlice(alice.getUi().getCurrentListText());
     }
 
     /**
@@ -208,6 +208,7 @@ public class ChatPage extends AnchorPane {
     public void exit() {
         Stage stage = (Stage) anchorPaneReference.getScene().getWindow();
         setUpStage(stage);
+        alice.saveCurrentVocabulary();
         stage.show();
     }
 

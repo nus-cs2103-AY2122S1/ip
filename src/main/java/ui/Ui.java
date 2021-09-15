@@ -152,7 +152,7 @@ public class Ui {
     }
 
     /** Print to the user the taskList stored in the Ui in a taskDialog format. */
-    public String getCurrentList() {
+    public String getCurrentListText() {
         return taskDialog.toString();
     }
 }

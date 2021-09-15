@@ -3,24 +3,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane fx:id="paneReference" prefHeight="800.0" prefWidth="600.0"
             style="-fx-background-color: linear-gradient(#5f6c99, #5f2c61),
             repeating-image-pattern('https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png'),
             radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.StartPage">
-    <Button id="EnterButton" fx:id="enterButton" layoutX="449.0" layoutY="448.0" mnemonicParsing="false"
+    <Button id="EnterButton" fx:id="enterButton" layoutX="435.0" layoutY="448.0" mnemonicParsing="false"
             onAction="#handleFileNameInput" prefHeight="30.0" prefWidth="57.0"
             style="-fx-background-color: darkslateblue;" text="Enter" textFill="WHITE"/>
-    <Button id="ClearButton" fx:id="clearButton" layoutX="387.0" layoutY="448.0" mnemonicParsing="false"
+    <Button id="ClearButton" fx:id="clearButton" layoutX="373.0" layoutY="448.0" mnemonicParsing="false"
             onAction="#clearInputField" style="-fx-background-color: grey;" text="Clear" textFill="ghostwhite"/>
     <TextField id="inputField" fx:id="inputField" layoutX="94.0" layoutY="380.0" onAction="#handleFileNameInput"
-               prefHeight="54.0" prefWidth="412.0"/>
+               prefHeight="54.0" prefWidth="397.0"/>
     <Label layoutX="97.0" layoutY="55.0" prefHeight="54.0" prefWidth="233.0" text="Welcome to" textFill="goldenrod"/>
     <Label layoutX="186.0" layoutY="30.0" prefHeight="66.0"
            style="-fx-font: normal italic 72px 'verdana'; -fx-text-fill: rgba(255, 230, 130)" text="Alice"
@@ -29,20 +27,15 @@
             <Font name="System Bold" size="60.0"/>
         </font>
     </Label>
-    <ScrollPane fx:id="saveFileScrollPane" hbarPolicy="NEVER" layoutX="94.0" layoutY="166.0" prefHeight="196.0"
-                prefWidth="412.0" vbarPolicy="ALWAYS">
-        <content>
-            <ListView fx:id="listView" prefHeight="200.0" prefWidth="397.0"/>
-        </content>
-    </ScrollPane>
-    <Label layoutX="97.0" layoutY="122.0" prefHeight="18.0" prefWidth="403.0"
+
+    <Label layoutX="97.0" layoutY="122.0" prefHeight="18.0" prefWidth="397.0"
            style="-fx-background-color: linear-gradient(#5f6c99, #5f2c61),
            repeating-image-pattern('https://edencoding.com/resources/wp-content/uploads/2021/02/Stars_128.png'),
-            radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);"
+           radial-gradient(center 50% 50%, radius 50%, #FFFFFF33, #00000033);"
            text="Make a slight change to create a big difference" textFill="gold"/>
-
+    <ListView fx:id="listView" prefHeight="200.0" prefWidth="397.0" layoutX="94.0" layoutY="157.0"/>
     <Label fx:id="output" layoutX="94.0" layoutY="454.0" prefHeight="18.0" prefWidth="278.0" textFill="firebrick"/>
     <Button id="deleteButton" fx:id="deleteButton" layoutX="94.0" layoutY="448.0" mnemonicParsing="false"
-            onAction="#handleDeleteFile" prefHeight="30.0" prefWidth="57.0"
-            style="-fx-background-color: darkslateblue;" text="Delete" textFill="WHITE"/>
+            onAction="#handleDeleteFile" prefHeight="30.0" prefWidth="57.0" style="-fx-background-color: darkslateblue;"
+            text="Delete" textFill="WHITE"/>
 </AnchorPane>

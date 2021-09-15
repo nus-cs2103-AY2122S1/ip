@@ -13,11 +13,9 @@ import model.task.Deadline;
 import model.task.Event;
 import model.task.Todo;
 import model.vocab.DuplicateVocabException;
-import model.vocab.Vocab;
 import model.vocab.VocabList;
 import parser.Parser;
 import storage.Storage;
-import storage.VocabularyStorage;
 import ui.ChatPage;
 import ui.Ui;
 
@@ -266,7 +264,6 @@ public class Command {
 
             vocabList.removePhrase(phraseString);
             chatPage.printWithAlice(Ui.getUnlearnText(phraseString));
-
         } catch (EmptyDescriptionException | DialogException | DuplicateVocabException  e) {
             chatPage.printError(e);
         }
