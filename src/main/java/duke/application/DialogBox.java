@@ -21,11 +21,12 @@ import javafx.scene.paint.Color;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final Color EXCEPTION_COLOR = Color.SALMON;
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final static Color EXCEPTION_COLOR = Color.SALMON;
 
     /**
      * Generates a dialog box representing communication from one party.
