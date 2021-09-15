@@ -3,6 +3,7 @@ package duke;
 import duke.command.ByeCommand;
 import duke.command.Command;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,10 +11,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Objects;
 
@@ -179,9 +181,12 @@ public class Duke extends javafx.application.Application {
         assert dialogContainer != null;
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
+        DialogBox userDb = DialogBox.getUserDialog(userText, user);
+        DialogBox dukeDb = DialogBox.getDukeDialog(dukeText, duke);
+        dialogContainer.setPadding(new Insets(100,100,100,100));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                userDb,
+                dukeDb
         );
         userInput.clear();
     }

@@ -1,12 +1,14 @@
 package duke;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,6 +30,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Image bgImage = new Image(this.getClass().getResourceAsStream("/images/backgroundImage.png"));
+        BackgroundImage myBI= new BackgroundImage(bgImage,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        dialogContainer.setBackground(new Background(myBI));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Ui().getWelcome(), dukeImage)
         );
@@ -45,9 +52,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        DialogBox userDb = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDb = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                userDb,
+                dukeDb
         );
         userInput.clear();
     }

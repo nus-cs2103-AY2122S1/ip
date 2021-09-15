@@ -9,11 +9,7 @@ import duke.task.Task;
  */
 public class Ui {
 
-    private String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private String logo = "Duke the frog~";
 
     public Ui() {
 
