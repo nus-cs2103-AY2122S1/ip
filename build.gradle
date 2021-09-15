@@ -37,6 +37,6 @@ dependencies {
 
 shadowJar {
     manifest {
-        attributes 'Main-Class': 'main/java/duke.Launcher'
+        attributes 'Main-Class': 'duke.Launcher'
     }
 }
