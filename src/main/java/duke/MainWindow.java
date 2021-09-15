@@ -1,5 +1,11 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import duke.io.DukeParser;
+import duke.type.DukeCommand;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private DukeParser parser;
+
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ditto.png"));
 
@@ -33,6 +41,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        parser = new DukeParser();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getIntroduction(), dukeImage));
     }
 
@@ -49,5 +58,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        // Exit GUI after 0.5s of detecting BYE command
+        if (parser.getCommandType(input) == DukeCommand.BYE) {
+            new Timer().schedule(new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                }
+            }, 500);
+        }
     }
 }
