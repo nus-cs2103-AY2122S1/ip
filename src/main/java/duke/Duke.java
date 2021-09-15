@@ -24,19 +24,22 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
     private boolean isExit;
+    private final String dukeName = "Pingu";
+    private final String filepath = "data/duke_list_data.txt";
 
     /**
      * Initiates the chat bot by loading the given file.
      */
     public Duke() {
-        ui = new Ui("Pingu");
-        storage = new Storage("data/duke_list_data.txt");
-        isExit = false;
+
+        this.ui = new Ui(dukeName);
+        this.storage = new Storage(filepath);
+        this.isExit = false;
 
         try {
-            tasks = new TaskList(storage.loadListData());
+            this.tasks = new TaskList(storage.loadListData());
         } catch (FileNotFoundException e) {
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -44,7 +47,7 @@ public class Duke {
      * Accepts the user's inputs and acts accordingly.
      *
      * @param input The input entered by the user.
-     * @return
+     * @return The String representing the execution of the command.
      */
     private String handleUserInput(String input) {
         try {
@@ -64,12 +67,12 @@ public class Duke {
      *
      * @param input The input entered by the user.
      * @param command The command interpreted by the parser.
-     * @return The String representing the
-     * @throws IOException
-     * @throws InvalidCommandException
-     * @throws InvalidTaskException
-     * @throws MissingTaskException
-     * @throws MissingTimeException
+     * @return The String representing the execution of the command.
+     * @throws IOException If there are problems with writing into the file.
+     * @throws InvalidCommandException  If command cannot be interpreted.
+     * @throws InvalidTaskException If task number given is wrong.
+     * @throws MissingTaskException If task cannot be found in input.
+     * @throws MissingTimeException If time cannot be found in input.
      */
     private String executeAction(String input, String command)
             throws IOException, InvalidCommandException, InvalidTaskException,
@@ -80,8 +83,9 @@ public class Duke {
         } else if (command.equals("help")) {
             return ui.printHelp();
         } else {
+            String executionDetails = tasks.performCommand(command, input);
             storage.saveTasksToFile(tasks.getTasks());
-            return tasks.performCommand(command, input);
+            return executionDetails;
         }
     }
 

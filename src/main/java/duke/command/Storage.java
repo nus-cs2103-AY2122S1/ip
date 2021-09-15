@@ -150,13 +150,20 @@ public class Storage {
      * @throws IOException If there are problems with writing into the file.
      */
     public void saveTasksToFile(ArrayList<Task> tasks) throws IOException {
-        // Writes the data into the file.
-        FileWriter fw = new FileWriter(this.filepath);
         StringBuilder textToAdd = new StringBuilder();
-
         for (Task task : tasks) {
             String taskName = task.toString();
             textToAdd.append(taskName).append("\n");
+        }
+
+        File directory = new File("data");
+        directory.mkdir();
+
+        File file = new File(this.filepath);
+        FileWriter fw = new FileWriter(this.filepath);
+
+        if (!file.exists()) {
+            file.createNewFile();
         }
 
         fw.write(textToAdd.toString());
