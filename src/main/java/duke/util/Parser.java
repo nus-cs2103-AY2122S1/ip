@@ -128,6 +128,7 @@ public class Parser {
                 + "Mark task as done:\ndone <task index>\n\n"
                 + "Delete task:\ndelete <task index>\n\n"
                 + "Show all tasks:\nlist\n\n"
-                + "Find task(s):\nfind <keyword to find>";
+                + "Find task(s):\nfind <keyword to find>\n\n"
+                + "Quit application:\nbye";
     }
 }

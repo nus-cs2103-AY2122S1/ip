@@ -184,7 +184,7 @@ public class TaskList {
     }
 
     /**
-     * Find tasks matching keyword input.
+     * Finds tasks matching keyword input.
      *
      * @param command user input command
      * @return string representation of filtered TaskList stored

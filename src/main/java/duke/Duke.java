@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Parse input command and save text file.
+     * Parses input command and save text file.
      *
      * @param command user input command
      * @return message for user
