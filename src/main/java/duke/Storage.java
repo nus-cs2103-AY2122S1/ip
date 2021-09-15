@@ -32,7 +32,7 @@ public class Storage {
     }
 
     /**
-     * Load the data from the data file if available into Duke.
+     * Loads the data from the data file if available into Duke.
      *
      * @return a List of Tasks saved in the data file.
      * @throws DukeException An exception specifically encountered in Duke's operations.
@@ -91,7 +91,7 @@ public class Storage {
     }
 
     /**
-     * Rewrite the data in the data file with the most recent Tasks.
+     * Rewrites the data in the data file with the most recent Tasks.
      *
      * @param tasks A TaskList containing the most updated tasks.
      */
