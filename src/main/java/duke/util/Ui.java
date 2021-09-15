@@ -30,6 +30,6 @@ public class Ui {
      * @param errorMessage The error message based on the exception caught/.
      */
     public String showError(String errorMessage) {
-        return "Something went wrong:\n " + errorMessage;
+        return "Wryyyyy!\n" + errorMessage;
     }
 }

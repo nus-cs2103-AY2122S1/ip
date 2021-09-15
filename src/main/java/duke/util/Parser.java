@@ -1,16 +1,17 @@
 package duke.util;
 
-import duke.command.AddCommand;
 import duke.command.Command;
+import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.command.UnknownCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
-import duke.exception.MissingArgumentException;
 
 /**
  * A class that deals with making sense of the user command.
@@ -21,12 +22,18 @@ public class Parser {
         LIST, DONE, TAG, TODO, EVENT, DEADLINE, DELETE, FIND, BYE, UNKNOWN
     }
 
+    // Returns the array consisting command components.
+    private static String[] toComponents(String command) {
+        return command.split(" ", 2);
+    }
+
     // Returns CommandType representation of the command.
-    private static CommandType toEnum(String command) {
+    private static CommandType toType(String command) {
+        String commandTypeByUser = toComponents(command)[0].toUpperCase();
         for (CommandType commandType : CommandType.values()) {
-            String commandTypeName = commandType.name();
-            boolean isMatched = commandTypeName.equalsIgnoreCase(command);
-            if (isMatched) {
+            String validType = commandType.name();
+            boolean isValid = commandTypeByUser.equals(validType);
+            if (isValid) {
                 return commandType;
             }
         }
@@ -34,85 +41,32 @@ public class Parser {
         return CommandType.UNKNOWN;
     }
 
-    // Returns hint for the possibly missing argument in the command.
-    private static String getHint(CommandType commandType) {
-        switch (commandType) {
-        case DONE:
-            // Fallthrough
-        case DELETE:
-            return "task number (eg. 3)";
-        case EVENT:
-            return "/at";
-        case DEADLINE:
-            return "/by";
-        case FIND:
-            return "any keyword (eg. book)";
-        default:
-            return "miss any argument";
-        }
-    }
-
-    // Returns an array containing each component of the full command.
-    // Checks if the command description is empty (does not apply to command with only one argument),
-    // then throws exception accordingly.
-    private static String[] splitCommand(String fullCommand) throws MissingArgumentException {
-        String[] commandComponents = fullCommand.split(" ", 2);
-        String commandPrefix = commandComponents[0];
-        CommandType commandType = toEnum(commandPrefix);
-        boolean hasNoArgument = (commandType.equals(CommandType.LIST) || commandType.equals(CommandType.TODO))
-                || (commandType.equals(CommandType.BYE) || commandType.equals(CommandType.UNKNOWN));
-        if (hasNoArgument) {
-            return commandComponents;
-        }
-
-        boolean isShortCommand = commandComponents.length < 2;
-        boolean isMissingArgument = isShortCommand || commandComponents[1].isBlank();
-        if (isMissingArgument) {
-            String hint = getHint(commandType);
-            throw new MissingArgumentException(commandPrefix, hint);
-        }
-
-        return commandComponents;
-    }
-
-    // Returns the tag by extracting it out from the command description.
-    private static String[] splitCommandDescriptionFromTag(String commandDescription) {
-        String descriptionWithoutTagSyntax = commandDescription.replaceFirst("t/", "");
-        return descriptionWithoutTagSyntax.split(" ", 2);
+    // Returns the description of the command.
+    private static String toDescription(String command) {
+        String[] components = toComponents(command);
+        return components.length < 2 ? "" : components[1];
     }
 
     // Returns command instance based on the command given by the user.
-    private static Command createCommand(String fullCommand) throws DukeException {
-        String[] commandComponents = splitCommand(fullCommand);
-        String commandType = commandComponents[0];
-        String commandDescription = commandComponents.length > 1 ? commandComponents[1] : "";
-        int taskNum;
-
-        switch (toEnum(commandType)) {
+    private static Command createCommand(String command) throws DukeException {
+        CommandType commandType = toType(command);
+        switch (commandType) {
         case LIST:
-            return new ListCommand();
+            return new ListCommand(command);
         case BYE:
-            return new ExitCommand();
+            return new ExitCommand(command);
         case DONE:
-            taskNum = Integer.parseInt(commandDescription);
-            return new DoneCommand(taskNum);
+            return new DoneCommand(toDescription(command));
         case DELETE:
-            taskNum = Integer.parseInt(commandDescription);
-            return new DeleteCommand(taskNum);
+            return new DeleteCommand(toDescription(command));
         case TODO:
-            // Fallthrough
+            return new TodoCommand(toDescription(command));
         case EVENT:
-            // Fallthrough
+            return new EventCommand(toDescription(command));
         case DEADLINE:
-            boolean hasTag = commandDescription.contains("t/");
-            String[] descriptionWithTag = hasTag
-                    ? splitCommandDescriptionFromTag(commandDescription)
-                    : new String[]{};
-            String tag = hasTag ? descriptionWithTag[0] : "";
-            String descriptionWithoutTag = hasTag ? descriptionWithTag[1] : commandDescription;
-            return new AddCommand(commandType, tag, descriptionWithoutTag);
+            return new DeadlineCommand(toDescription(command));
         case FIND:
-            return new FindCommand(commandDescription);
+            return new FindCommand(toDescription(command));
         default:
             return new UnknownCommand();
         }
@@ -121,17 +75,13 @@ public class Parser {
     /**
      * Returns a command class based on the type specified in the command.
      *
-     * @param fullCommand The command input by the user.
+     * @param command The command input by the user.
      * @return The command class based on the type specified in the command.
-     * @throws MissingArgumentException The exception that handles command with empty description.
+     * @throws EmptyCommandException The exception being thrown when the empty command is detected.
      */
-    public static Command parse(String fullCommand) throws DukeException {
-        boolean isEmptyCommand = fullCommand.isEmpty() || fullCommand.isBlank();
+    public static Command parse(String command) throws DukeException {
+        ExceptionChecker.checkEmptyCommand(command);
 
-        if (isEmptyCommand) {
-            throw new EmptyCommandException("Do not enter empty command!");
-        }
-
-        return createCommand(fullCommand);
+        return createCommand(command);
     }
 }
