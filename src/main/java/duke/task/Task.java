@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Locale;
+
 /**
  * Task is the base class for all tasks stored in the Duke application.
  */
@@ -37,7 +39,9 @@ public class Task {
      * @return Boolean representing whether Task matches String.
      */
     public boolean descriptionMatches(String regex) {
-        return this.description.matches(String.format("(.*)%s(.*)", regex));
+        String lowerCaseDescription = this.description.toLowerCase();
+        String lowerCaseRegex = regex.toLowerCase();
+        return lowerCaseDescription.matches(String.format("(.*)%s(.*)", lowerCaseRegex));
     }
 
     /**
