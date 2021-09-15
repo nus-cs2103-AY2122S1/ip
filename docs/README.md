@@ -2,28 +2,35 @@
 
 ## Features 
 
-### Feature-ABC
+### Task Management
 
-Description of the feature.
+Let Duke manage your tasks for you! Simply add a task to your list and update it when completed.
 
-### Feature-XYZ
+### Multiple Types of Tasks
 
-Description of the feature.
+Want to add details to certain kinds of tasks by adding dates and events? We've 3 different kinds of tasks for you!
+
+### Simple Commands
+Duke functions on simple, easy-to-remember commands. Need help? Don't worry! We've a command for that too :grin:
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - Lists all tasks
 
-Describe the action and its outcome.
+Lists all tasks and their current status
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-Description of the outcome.
+A numbered list of all tasks, e.g.
 
 ```
-expected output
+--------------------------------------------
+    Here are the tasks in your list:
+    1. [T][] task_desc
+    2. [D][X] task_desc (by: 2-5-2022)
+--------------------------------------------
 ```
