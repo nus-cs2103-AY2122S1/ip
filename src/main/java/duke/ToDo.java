@@ -10,7 +10,7 @@ public class ToDo extends Task {
     @Override
     public String printTask() {
         String result = "";
-        if (taskComplete) {
+        if (isComplete) {
             result = DONE;
         } else {
             result = NOT_DONE;
