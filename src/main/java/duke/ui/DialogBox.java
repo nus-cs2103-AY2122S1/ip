@@ -40,11 +40,9 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(image);
-        Circle circle = new Circle(50, 50, 45);
+        Circle circle = new Circle(50, 50, 48);
         displayPicture.setClip(circle);
         this.setSpacing(10);
-        this.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD,
-                new CornerRadii(20), new Insets(10, 10, 10, 10))));
     }
 
     private void flip() {

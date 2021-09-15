@@ -47,6 +47,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        promptDialog();
+    }
+
+    public void setDuke(Duke duke) {
+        this.duke = duke;
+    }
+
+    private void promptDialog() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
@@ -59,28 +67,18 @@ public class MainWindow extends AnchorPane {
         pause.play();
     }
 
-    public void setDuke(Duke duke) {
-        this.duke = duke;
-    }
-
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         PauseTransition pause1 = new PauseTransition(Duration.seconds(2));
         PauseTransition pause2 = new PauseTransition(Duration.seconds(3));
         if (input.equalsIgnoreCase("bye")) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog("Goodbye :)", dukeImage)
-            );
-            pause1.setOnFinished((event) -> {
-                Platform.exit();
-            });
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog("Goodbye :)", dukeImage));
+            pause1.setOnFinished((event) -> { Platform.exit(); });
             pause1.play();
         } else {
             String response = duke.respondWith(input);
-            dialogContainer.getChildren().add(
-                    DialogBox.getUserDialog(input, userImage)
-            );
+            dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
             userInput.clear();
             pause1.setOnFinished((event) -> {
                 dialogContainer.getChildren().add(
