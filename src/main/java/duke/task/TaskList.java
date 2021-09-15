@@ -132,12 +132,15 @@ public class TaskList {
     public static String[] printList(String command) {
         String[] words = command.split(" ");
         assert words[0].equals("list");
+        String[] output = new String[store.size() + 1];
         if (words.length > 1) {
             throw new DukeException("invalidCommand");
-        } else if (store.size() == 0) {
-            throw new DukeException("noTasksException");
         }
-        String[] output = new String[store.size() + 1];
+        else if (store.size() == 0) {
+            output[0] = "You have no tasks in your list yay!";
+            return output;
+        }
+
         output[0] = "Here are the tasks in your list:";
         for (int i = 0; i < store.size(); i++) {
             output[i + 1] = (i + 1) + ". " + store.get(i).toString();
