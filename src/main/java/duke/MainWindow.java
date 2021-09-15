@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User2.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     @FXML
     public void initialize() {
@@ -34,8 +34,6 @@ public class MainWindow extends AnchorPane {
         String greeting = Ui.greetUser();
         dialogContainer.getChildren().add(
                 DialogBox.greetUser(greeting, dukeImage));
-        sendButton.setStyle("-fx-background-color: Yellow");
-        dialogContainer.setStyle("-fx-background-color: Orange");
     }
 
     public void setDuke(Duke d) {
