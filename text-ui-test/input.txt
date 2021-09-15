@@ -1,0 +1,15 @@
+invalid command
+deadline
+todo Do CS2103 Quiz
+list
+todo
+deadline /by
+deadline Do CS2103 Individual Project /by Thursday
+done 2
+list
+event CS2103 Tutorial
+event CS2103 Tutorial /at
+event CS2103 Tutorial /at Mon 3-4pm
+list
+
+bye

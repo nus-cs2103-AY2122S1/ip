@@ -5,3 +5,94 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+------------------------------------------
+Hello! I'm Morgan
+What can I do for you?
+------------------------------------------
+
+
+------------------------------------------
+OOPS!!! Please enter a valid command
+------------------------------------------
+
+
+------------------------------------------
+OOPS!!! Please ensure your input is in the following format:
+	"deadline [task] /by [date/time]"
+------------------------------------------
+
+
+------------------------------------------
+Got it. I've added this task:
+	[T] [ ]  Do CS2103 Quiz
+Now you have 1 tasks in the list.
+------------------------------------------
+
+------------------------------------------
+Here are the tasks in your list:
+1. [T] [ ]  Do CS2103 Quiz
+------------------------------------------
+
+------------------------------------------
+OOPS!!! Please ensure your input is in the following format:
+	"todo [task]"
+------------------------------------------
+
+
+------------------------------------------
+OOPS!!! Please ensure your input is in the following format:
+	"deadline [task] /by [date/time]"
+------------------------------------------
+
+
+------------------------------------------
+Got it. I've added this task:
+	[D] [ ]  Do CS2103 Individual Project (by: Thursday)
+Now you have 2 tasks in the list.
+------------------------------------------
+
+------------------------------------------
+Nice! I've marked this task as done:
+	[D] [X]  Do CS2103 Individual Project (by: Thursday)
+------------------------------------------
+
+------------------------------------------
+Here are the tasks in your list:
+1. [T] [ ]  Do CS2103 Quiz
+2. [D] [X]  Do CS2103 Individual Project (by: Thursday)
+------------------------------------------
+
+------------------------------------------
+OOPS!!! Please ensure your input is in the following format:
+	"event [task] /at [date/time]"
+------------------------------------------
+
+
+------------------------------------------
+OOPS!!! Please ensure your input is in the following format:
+	"event [task] /at [date/time]"
+------------------------------------------
+
+
+------------------------------------------
+Got it. I've added this task:
+	[E] [ ]  CS2103 Tutorial (at: Mon 3-4pm)
+Now you have 3 tasks in the list.
+------------------------------------------
+
+------------------------------------------
+Here are the tasks in your list:
+1. [T] [ ]  Do CS2103 Quiz
+2. [D] [X]  Do CS2103 Individual Project (by: Thursday)
+3. [E] [ ]  CS2103 Tutorial (at: Mon 3-4pm)
+------------------------------------------
+
+------------------------------------------
+OOPS!!! Please enter a valid command
+------------------------------------------
+
+
+------------------------------------------
+Bye. Hope to see you again soon!
+------------------------------------------
+
