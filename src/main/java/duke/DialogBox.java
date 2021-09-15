@@ -8,19 +8,28 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Ellipse;
 
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
+    private Ellipse pictureOutline;
 
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
 
+        pictureOutline = new Ellipse();
+        pictureOutline.setCenterX(50.0);
+        pictureOutline.setCenterY(50.0);
+        pictureOutline.setRadiusX(50.0);
+        pictureOutline.setRadiusY(50.0);
+
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        displayPicture.setClip(pictureOutline);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
