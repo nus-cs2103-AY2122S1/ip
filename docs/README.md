@@ -13,7 +13,7 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
-[comment]: <> (![Ui Screenshot] &#40;&#41;)
+![Ui Screenshot](https://limdanqi.github.com/ip/Ui.png)
 
 &nbsp;
 
