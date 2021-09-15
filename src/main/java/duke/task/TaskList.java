@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a list that contains a <code>List</code> of tasks.
+ * Represents a list that contains a list of tasks.
  *
  * @author Sherman Ng Wei Sheng
  */
@@ -13,13 +13,16 @@ public class TaskList {
     private final List<Task> list;
 
     /**
-     * Constructor to initialize a new TaskList
+     * Constructor to initialize a new TaskList.
      */
     public TaskList() {
         this.list = new ArrayList<>();
     }
+
     /**
-     * Constructor to initialize a new TaskList
+     * Constructor to initialize a new TaskList with the imported string data.
+     *
+     * @param data The encoded data stored in the storage txt file.
      */
     public TaskList(String data) {
         this.list = new ArrayList<>();

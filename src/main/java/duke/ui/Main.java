@@ -22,7 +22,6 @@ public class Main extends Application {
      *
      * @param stage JavaFX stage object.
      */
-
     @Override
     public void start(Stage stage) {
         try {

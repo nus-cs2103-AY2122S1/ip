@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for the delete command.
      *
-     * @param index The index of the task in the TaskList to be deleted.
+     * @param index The index of the task in the TaskList to be deleted (1-indexed).
      */
     public DeleteCommand(int index) {
         this.isExit = false;

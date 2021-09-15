@@ -50,7 +50,7 @@ public abstract class Task {
     /**
      * Returns the string representation of the task in a desired format.
      *
-     * @return The String representation of the task, prefixed with a status icon.
+     * @return The string representation of the task, prefixed with a status icon.
      */
     @Override
     public String toString() {

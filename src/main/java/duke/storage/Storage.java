@@ -9,7 +9,7 @@ import duke.exception.StorageLoadingException;
 import duke.exception.StorageSavingException;
 
 /**
- * Represents the class that deals with loading tasks from file and saving tasks to file.
+ * Represents the class that handles loading tasks from file and saving tasks to file.
  *
  * @author Sherman Ng Wei Sheng
  */
@@ -18,7 +18,7 @@ public class Storage {
     private final String filePath;
 
     /**
-     * Constructor to initialise a new storage object.
+     * Constructor to initialize a new storage object.
      *
      * @param filePath The path of the txt file that stores the data to be retrieved and to be updated.
      */

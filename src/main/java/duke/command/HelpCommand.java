@@ -20,7 +20,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Returns true if the command is a programme terminating command, in this case, this is a terminating command.
+     * Returns true if the command is a program terminating command.
      *
      * @return True if it is a terminating command and false otherwise.
      */

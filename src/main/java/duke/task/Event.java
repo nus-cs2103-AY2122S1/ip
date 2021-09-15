@@ -10,13 +10,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private final LocalDate dateTime;
+
     /**
      * Constructor to initialize a new Event.
      *
      * @param description The description of the event.
      * @param dateTime The date of the event.
      */
-
     public Event(String description, LocalDate dateTime) {
         super(description);
         this.dateTime = dateTime;
@@ -37,7 +37,7 @@ public class Event extends Task {
     /**
      * Returns the string representation of the task in a desired format.
      *
-     * @return The String representation of the task, prefixed with a status icon and events identifier.
+     * @return The string representation of the task, prefixed with a status icon and events identifier.
      */
     @Override
     public String toString() {

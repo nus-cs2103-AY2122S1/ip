@@ -6,13 +6,15 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Represent the Ui class the is responsible for the interaction with user.
+ * Represents the Ui class that handles interaction with user.
  *
  * @author Sherman Ng Wei Sheng
  */
 public class Ui {
     private static final String MESSAGE_GREETING =
-            "Hello! I'm Duke\nWhat can I do for you?\nType 'help' to see the wonders that I can do!";
+            "Hello! I'm Duke\n"
+            + "What can I do for you?\n"
+            + "Type 'help' to see the wonders that I can do!";
     private static final String HORIZONTAL_LINE_WITH_BREAK =
             "        ____________________________________________________________\n";
     private Scanner sc;
@@ -32,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * Prints the greeting message of the Chatbot.
+     * Prints and returns the greeting message of the Chatbot.
      *
      * @return The formatted string of the message.
      */
@@ -41,27 +43,18 @@ public class Ui {
     }
 
     /**
-     * Returns the input keyed in by the user.
+     * Prints and returns the formatted list of content in Task List.
      *
-     * @return The string that is entered by the user.
-     */
-
-    public String getInput() {
-        return sc.nextLine();
-    }
-    /**
-     * Prints the formatted list of content in Task List.
-     *
+     * @param list The TaskList to be processed and printed.
      * @return The formatted string of the message.
      */
-
     public String printAndReturnListString(TaskList list) {
         String message = list.generateMessage();
         return printAndReturnMessage(message);
     }
 
     /**
-     * Prints the log for task object being added
+     * Prints and returns the log for task object being added.
      *
      * @param task The task object to be printed.
      * @param list The task list object that the task is being added to.
@@ -76,10 +69,12 @@ public class Ui {
     }
 
     /**
-     * Prints the input content to console with formatting.
+     * Prints the input content to console with formatting
+     * and returns the content of the message.
+     * It is the intended for the message to be both printed and returned.
      *
-     * @param content The content to be printed, wrapped between horizontal lines.
-     * @return The printed message.
+     * @param content The content to be printed.
+     * @return The printed message without the formatting.
      */
     public String printAndReturnMessage(String content) {
         String formatString =
