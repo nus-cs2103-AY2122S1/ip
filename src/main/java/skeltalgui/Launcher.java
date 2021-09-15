@@ -1,3 +1,5 @@
+package skeltalgui;
+
 import javafx.application.Application;
 
 /**

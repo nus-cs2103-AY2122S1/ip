@@ -1,6 +1,10 @@
 package skeltal;
 
 import javafx.util.Pair;
+import skeltal.task.*;
+import skeltal.task.types.Deadline;
+import skeltal.task.types.Event;
+import skeltal.task.types.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

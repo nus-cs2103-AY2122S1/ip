@@ -30,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "skeltalgui.Launcher"
 }
 
 shadowJar {

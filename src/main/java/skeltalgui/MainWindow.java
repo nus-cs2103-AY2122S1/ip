@@ -1,3 +1,5 @@
+package skeltalgui;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,12 +8,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
-import skeltal.*;
+import skeltal.Storage;
+import skeltal.Ui;
+import skeltal.task.Task;
+import skeltal.task.TaskList;
 
 import java.util.ArrayList;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for skeltalgui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML

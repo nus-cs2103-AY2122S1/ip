@@ -1,4 +1,4 @@
-package skeltal;
+package skeltal.task.expense;
 
 import java.util.ArrayList;
 

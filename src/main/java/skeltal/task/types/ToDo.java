@@ -1,4 +1,6 @@
-package skeltal;
+package skeltal.task.types;
+
+import skeltal.task.Task;
 
 public class ToDo extends Task {
 

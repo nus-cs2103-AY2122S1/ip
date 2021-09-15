@@ -4,6 +4,10 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import skeltal.*;
 import org.junit.jupiter.api.Test;
+import skeltal.task.types.Deadline;
+import skeltal.task.types.Event;
+import skeltal.task.TaskList;
+import skeltal.task.types.ToDo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

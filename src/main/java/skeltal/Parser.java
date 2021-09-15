@@ -1,5 +1,12 @@
 package skeltal;
 
+import skeltal.task.*;
+import skeltal.task.expense.Expense;
+import skeltal.task.expense.ExpenseList;
+import skeltal.task.types.Deadline;
+import skeltal.task.types.Event;
+import skeltal.task.types.ToDo;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
@@ -8,6 +15,8 @@ import java.time.LocalDate;
  * A Parser class that handles the parsing of userInputs, to determine Skeltal's response.
  */
 public class Parser {
+    final static DateTimeFormatter format = DateTimeFormatter.ISO_LOCAL_DATE;
+
     /**
      * This method parses the user's input and determines skeltal's response accordingly.
      * userInput should be in the form "command arg1 arg2".
@@ -102,19 +111,24 @@ public class Parser {
         }
 
         String time = taskAndTime[1];
-        assert time != null : "Time field cannot be empty";
+        String parsedTime = parseTime(time);
 
-        if (time.length() > 3) {
-            String[] atOrBy = time.split(" ", 2);
-            if (atOrBy[0].equals("by") || atOrBy[0].equals("at")) {
+        return parsedTime;
+    }
+
+    private static String parseTime(String time) {
+        assert time != null : "Time field cannot be empty";
+        try {
+            //Seperates time from the prefix
+            if (time.startsWith("by ") | time.startsWith("at ")) {
                 time = time.substring(3);
             }
-        }
-
-        try {
-            LocalDate date = LocalDate.parse(time, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            //Format time
+            LocalDate date = LocalDate.parse(time, format);
+            System.out.println(date);
             time = date.format(DateTimeFormatter.ofPattern("dd MMM yy"));
         } catch (DateTimeParseException e) {
+            System.out.println(e);
         }
 
         return time;

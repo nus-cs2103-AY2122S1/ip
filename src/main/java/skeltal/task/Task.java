@@ -1,4 +1,4 @@
-package skeltal;
+package skeltal.task;
 
 public class Task {
 

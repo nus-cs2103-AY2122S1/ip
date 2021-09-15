@@ -1,4 +1,8 @@
-package skeltal;
+package skeltal.task.types;
+
+import skeltal.Parser;
+import skeltal.SkeltalException;
+import skeltal.task.Task;
 
 /**
  * This class is a child of task that has the additional attribute of time,

@@ -1,4 +1,8 @@
-package skeltal;
+package skeltal.task.expense;
+
+import skeltal.Parser;
+import skeltal.SkeltalException;
+import skeltal.task.Task;
 
 public class Expense extends Task {
     private int amount;
