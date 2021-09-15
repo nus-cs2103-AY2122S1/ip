@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             removedTasks.append(tasks.remove(taskNum)).append("\n ");
         }
         storage.update(tasks);
-        return "Got it. I've removed these tasks:\n  "
+        return "Got it. I've removed these tasks:\n "
                 + removedTasks
                 + "Now you have " + tasks.size() + " tasks in the list.";
     }

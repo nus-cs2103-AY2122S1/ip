@@ -48,7 +48,7 @@ public class DoneCommand extends Command {
             doneTasks.append(taskToBeDone).append("\n ");
         }
         storage.update(tasks);
-        return "Nice! I've marked these tasks as done:\n  "
+        return "Nice! I've marked these tasks as done:\n "
                 + doneTasks;
     }
 }
