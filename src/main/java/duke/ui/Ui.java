@@ -75,6 +75,13 @@ public class Ui {
         System.out.println(line);
     }
 
+    public static void find(TaskList taskList, String keyword) {
+        System.out.println(line);
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(taskList.find(keyword));
+        System.out.println(line);
+    }
+
     public void showLoadingError() {
         System.out.println(line);
         System.out.println("Cannot Load From Data.\n");

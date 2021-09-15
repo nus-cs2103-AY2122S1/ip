@@ -88,8 +88,12 @@ public class Duke {
                         ui.add(tasks,task);
                         break;
                     }
+                    case "find": {
+                        String keyword = parser.getTask();
+                        ui.find(tasks, keyword);
+                        break;
+                    }
                     default:  {
-
                     }
                 }
 

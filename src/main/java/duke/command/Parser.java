@@ -66,11 +66,12 @@ public class Parser {
     /**
     * Returns the task info in a line of command.
     */
+
     public String getTask() throws DukeException {
         String taskDescription;
 
         if (this.getOperationType().equals("deadline") || this.getOperationType().equals("event") ||
-                this.getOperationType().equals("todo")) {
+                this.getOperationType().equals("todo") || this.getOperationType().equals("find")) {
             if (userInput.contains("/")) {
                 if (userInput.indexOf(" ") < userInput.indexOf("/")) {
                     taskDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/") - 1);
