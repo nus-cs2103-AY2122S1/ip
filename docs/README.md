@@ -1,7 +1,7 @@
 # User Guide
 
-Duke is a desktop app for managing tasks using  a Command Line Interface (CLI) while still having the benefits of a 
-Graphical User Interface (GUI). If you can type fast, Duke will help you organise your tasks quicker than traditional 
+Duck is a desktop app for managing tasks using  a Command Line Interface (CLI) while still having the benefits of a 
+Graphical User Interface (GUI). If you can type fast, Duck will help you organise your tasks quicker than traditional 
 GUI apps.
 
 ## Quick Start
@@ -10,11 +10,11 @@ GUI apps.
    If you do not have Java 11 installed, you may visit the following link to do
    so:
    https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html
-2. Download duke.jar from [here](https://github.com/ntwbruce/ip/releases/download/v0.2/duke.jar).
-3. Copy duke.jar to a directory/folder of your choice.
-4. Double-click on duke.jar to start Duke, or use the CLI command `java -jar duke.jar`.
-5. To interact with Duke, type commands into the text bar and hit Enter or click Send.
-6. The Features section below explains the commands Duke has to offer.
+2. Download duck.jar from ...
+3. Copy duck.jar to a folder of your choice.
+4. Double-click on duck.jar to start Duke, or use the CLI command `java -jar duck.jar`.
+5. To interact with Duck, type commands into the text bar and hit Enter or click Send.
+6. The Features section below explains the commands Duck has to offer.
 
 ## Features 
 
@@ -127,6 +127,6 @@ Closes the program.
 Format: `bye`
 
 ### Saving of data between uses
-Duke saves your existing task list to a hard disk when the application is closed, and will reload it when the 
-application is loaded again. On the first usage of Duke, a directory `data` will be created in the same folder as the 
-`duke.jar` file, and the data will be saved in a file called `duke.txt` within `data`.
+Duck saves your existing task list to a hard disk when the application is closed, and will reload it when the 
+application is loaded again. On the first usage of Duck, a directory `data` will be created in the same folder as the 
+`duck.jar` file, and the data will be saved in a file called `duck.txt` within `data`.
