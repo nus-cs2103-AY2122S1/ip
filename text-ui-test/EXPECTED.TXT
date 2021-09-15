@@ -1,4 +1,4 @@
-duke.Duke: Hello from
+misaki.Misaki: Hello from
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
@@ -6,7 +6,7 @@ duke.Duke: Hello from
 |____/ \__,_|_|\_\___|
 
 ____________________________________________________________
-duke.Duke: Hello! I'm duke.Duke
+misaki.Misaki: Hello! I'm misaki.Misaki
 What can I do for you?
 ____________________________________________________________
 You: todo borrow book
@@ -85,7 +85,7 @@ Here are the tasks in your list:
 ____________________________________________________________
 You: delete 2
 ____________________________________________________________
-duke.tasks.Task does not exists!
+misaki.tasks.Task does not exists!
 You only have one task in the list!
 Please enter 1 to delete or add more tasks.
 ____________________________________________________________
@@ -97,7 +97,7 @@ Now you have 0 tasks in the list.
 ____________________________________________________________
 You: delete 1
 ____________________________________________________________
-duke.tasks.Task does not exists!
+misaki.tasks.Task does not exists!
 You do not have any task in the list!
 Please add a task.
 ____________________________________________________________
