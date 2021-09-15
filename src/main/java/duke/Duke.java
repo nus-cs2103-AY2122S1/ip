@@ -6,6 +6,9 @@ public class Duke {
 
     private final TaskList tasks;
 
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
         Storage storage = new Storage("data/tasks.txt");
         tasks = new TaskList(storage);
@@ -16,6 +19,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+
+        assert input != null;
+
         try {
             Command command = Parser.parse(input);
             return command.execute(tasks);

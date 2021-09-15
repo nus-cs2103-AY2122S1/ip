@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.TaskList;
-import duke.Ui;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
 
 public class FindCommand extends Command {
 
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks) {
 
         // Check if user is attempting to find a task
-        Matcher matcher =  PATTERN_FIND.matcher(input);
+        Matcher matcher = PATTERN_FIND.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Find tasks like this: find <search string>");
         }

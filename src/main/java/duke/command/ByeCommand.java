@@ -6,7 +6,7 @@ import duke.Ui;
 /**
  * Handles the bye command which exits duke.Duke.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     public ByeCommand(String input) {
         super(input);
     }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +19,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import java.io.IOException;
-
 /**
  * Controller for the DialogBox, which represents a message box.
  */
@@ -30,6 +30,11 @@ public class DialogBox extends HBox {
     @FXML
     private Circle profilePicture;
 
+    /**
+     * Constructs a DialogBox from a text and image.
+     * @param text Messsage to be displayed by this DialogBox
+     * @param img Image to represent the sender of the message
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Handles all UI elements for duke.Duke.
@@ -41,8 +41,8 @@ public class Ui {
      * @param index Position of the task in the list
      */
     public static String notifyAdd(Task task, int index) {
-        return String.format("I have added a new %s!\n", task.getClass().getSimpleName().toLowerCase()) +
-                String.format("%d. %s", index, task);
+        return String.format("I have added a new %s!\n", task.getClass().getSimpleName().toLowerCase())
+                + String.format("%d. %s", index, task);
     }
 
     /**
@@ -51,9 +51,9 @@ public class Ui {
      * @param taskCount Number of remaining tasks left
      */
     public static String notifyDelete(Task task, int taskCount) {
-        return "I have removed this task!\n" +
-                String.format("   %s\n", task) +
-                String.format("You have %d task%s left.", taskCount, taskCount == 1 ? "" : "s");
+        return "I have removed this task!\n"
+                + String.format("   %s\n", task)
+                + String.format("You have %d task%s left.", taskCount, taskCount == 1 ? "" : "s");
     }
 
     /**
@@ -85,5 +85,9 @@ public class Ui {
      */
     public static String goodbye() {
         return "Bye bye, see you next time.";
+    }
+
+    public static String notifySort(SortOrder order) {
+        return "Sorted your tasks by " + order.label;
     }
 }

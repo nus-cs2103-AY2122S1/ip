@@ -1,23 +1,25 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.TaskList;
-import duke.Ui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+import duke.TaskList;
+
 /**
  * Carries out a certain action depending on user input.
  */
-abstract public class Command {
+public abstract class Command {
 
     /**
      * Original user input.
      */
     protected final String input;
 
+    Command(String input) {
+        this.input = input;
+    }
     /**
      * Parses a date String into LocalDate.
      *
@@ -33,9 +35,5 @@ abstract public class Command {
         }
     }
 
-    Command(String input) {
-        this.input = input;
-    }
-
-    abstract public String execute(TaskList tasks);
+    public abstract String execute(TaskList tasks);
 }

@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.task.Task;
-import duke.TaskList;
-import duke.Ui;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Handles the done command which
@@ -25,7 +25,7 @@ public class MarkAsDoneCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         // Check if user is attempting to mark a task as done.
-        Matcher matcher =  PATTERN_DONE.matcher(input);
+        Matcher matcher = PATTERN_DONE.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Mark a task as done like this: done <task number>");
         }

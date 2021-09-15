@@ -1,20 +1,19 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.List;
-import java.io.File;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Handles data persistence for duke.Duke.
@@ -92,25 +91,25 @@ public class Storage {
         boolean completed = parts[1].equals("1");
 
         switch (taskType) {
-            case "t":
-                String description = joinFrom(String.valueOf(DELIMITER), parts, 2);
-                return new ToDo(description, completed);
-            case "d":
-                String by = parts[2];
-                return new Deadline(
-                        joinFrom(String.valueOf(DELIMITER), parts, 3),
-                        completed,
-                        LocalDate.parse(parts[2], DateTimeFormatter.ISO_LOCAL_DATE)
-                );
-            case "e":
-                String at = parts[2];
-                return new Event(
-                        joinFrom(String.valueOf(DELIMITER), parts, 3),
-                        completed,
-                        LocalDate.parse(parts[2], DateTimeFormatter.ISO_LOCAL_DATE)
-                );
-            default:
-                throw new DukeException("Invalid memory!");
+        case "t":
+            String description = joinFrom(String.valueOf(DELIMITER), parts, 2);
+            return new ToDo(description, completed);
+        case "d":
+            String by = parts[2];
+            return new Deadline(
+                    joinFrom(String.valueOf(DELIMITER), parts, 3),
+                    completed,
+                    LocalDate.parse(parts[2], DateTimeFormatter.ISO_LOCAL_DATE)
+            );
+        case "e":
+            String at = parts[2];
+            return new Event(
+                    joinFrom(String.valueOf(DELIMITER), parts, 3),
+                    completed,
+                    LocalDate.parse(parts[2], DateTimeFormatter.ISO_LOCAL_DATE)
+            );
+        default:
+            throw new DukeException("Invalid memory!");
         }
     }
 
