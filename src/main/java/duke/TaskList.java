@@ -112,14 +112,18 @@ public class TaskList {
      * @return String showing all tasks
      */
     public String toDisplay() {
-        String str = "";
-        int i = 1;
-        for (Task item:TaskList) {
-            str = str + String.format("%s. %s\n", i, item);
-            i += 1;
+        if (TaskList.size() == 0) {
+            return "You don't have any tasks in your list.";
+        } else {
+            String str = "";
+            int i = 1;
+            for (Task item:TaskList) {
+                str = str + String.format("%s. %s\n", i, item);
+                i += 1;
+            }
+            assert !str.equals("") : "string returned should not be empty.";
+            return str;
         }
-        assert !str.equals("") : "string returned should not be empty.";
-        return str;
     }
 
 
