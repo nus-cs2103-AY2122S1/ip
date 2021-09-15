@@ -78,10 +78,11 @@ public class MainWindow extends BorderPane {
     private void handleTextFieldKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.UP) {
             userInput.setText(duke.getLastInput());
+            userInput.positionCaret(userInput.getLength());
         }
         if (event.getCode() == KeyCode.DOWN) {
             userInput.setText(duke.getNextInput());
+            userInput.positionCaret(userInput.getLength());
         }
-        userInput.positionCaret(userInput.getLength());
     }
 }

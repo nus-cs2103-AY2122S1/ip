@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -27,8 +26,8 @@ import javafx.scene.text.TextAlignment;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    private final double USER_DIALOG_WIDTH = 140;
-    private final double DUKE_DIALOG_WIDTH = 280;
+    private static final double USER_DIALOG_WIDTH = 140;
+    private static final double DUKE_DIALOG_WIDTH = 280;
 
     @FXML
     private HBox textBox;
@@ -54,9 +53,9 @@ public class DialogBox extends HBox {
         );
         textBox.setBackground(new Background(bf));
 
-        final double TEXT_DISPLAY_WIDTH = text.length() * 7;
+        final double textDisplayWidth = text.length() * 7;
         dialog.setText(text);
-        dialog.setWrappingWidth(Math.min(USER_DIALOG_WIDTH, TEXT_DISPLAY_WIDTH));
+        dialog.setWrappingWidth(Math.min(USER_DIALOG_WIDTH, textDisplayWidth));
 
         displayPicture.setImage(img);
     }

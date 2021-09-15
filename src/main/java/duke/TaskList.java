@@ -32,8 +32,8 @@ public class TaskList {
      * Removes the task from the list.
      *
      * @param index the index starting with 1.
-     * @throws IndexOutOfBoundsException thrown when index out of bound.
      * @return string for status.
+     * @throws IndexOutOfBoundsException thrown when index out of bound.
      */
     public String remove(int index) throws IndexOutOfBoundsException {
         assert (tasks != null) : "Task list is not initialised!";
