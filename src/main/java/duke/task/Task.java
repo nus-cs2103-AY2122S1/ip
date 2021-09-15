@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -26,10 +28,13 @@ public class Task {
         this.isDone = false;
     }
 
-    public static String[] splitDescriptionAndDate(String args, String separator) {
+    public static String[] splitDescriptionAndDate(String args, String separator) throws DukeException {
         String regex = String.format("(?<desc>.*)\\s\\(%s: (?<date>.*)\\)", separator);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(args);
+        if (!matcher.matches()) {
+            throw new DukeException("There was a problem loading your saved tasks!");
+        }
 
         String type = matcher.group("desc");
         String desc = matcher.group("date");

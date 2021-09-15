@@ -90,4 +90,12 @@ public class Duke {
         }
     }
 
+    /** Saves the tasks in given TaskList to file path of duke. */
+    public void save() {
+        try {
+            storage.save(tasks);
+        } catch (DukeException e) {
+            Ui.showLoadingError(e.getMessage());
+        }
+    }
 }

@@ -86,7 +86,7 @@ public class Ui {
     }
 
     /** Display error message */
-    public String showLoadingError(String errorMessage) {
+    public static String showLoadingError(String errorMessage) {
         return formatReply(errorMessage);
     }
 
