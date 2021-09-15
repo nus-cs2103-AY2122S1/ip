@@ -7,15 +7,15 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline (Task).
+ * Creates a Deadline Task with a specified task with a date and time (optional).
  * @author Ruth Poh
  */
 public class Deadline extends Task {
 
     /**
      * Initializes Deadline.
-     * @param taskString Task.
-     * @param date Date of deadline.
+     * @param taskString String representation of the deadline
+     * @param date Date of deadline
      */
     public Deadline(String taskString, LocalDate date) {
         super(taskString);
@@ -24,20 +24,20 @@ public class Deadline extends Task {
     }
 
     /**
-     * Initialize Deadline, with time.
-     * @param taskString Task.
-     * @param deadline Deadline of task.
-     * @param time Time of task.
+     * Initializes Deadline, with Date and Time.
+     * @param taskString String representation of the deadline
+     * @param date Date deadline is done by
+     * @param time Time deadline is done by
      */
-    public Deadline(String taskString, LocalDate deadline, LocalTime time) {
+    public Deadline(String taskString, LocalDate date, LocalTime time) {
         super(taskString);
-        super.date = deadline;
+        super.date = date;
         super.time = time;
     }
 
     /**
-     * Getter method for date Deadline occurs at.
-     * @return Date that Deadline occurs at in String form.
+     * Getter method for date.
+     * @return Readable string representation of date
      */
     @Override
     public String getDate() {
@@ -45,21 +45,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Getter method for time Deadline occurs at.
-     * @return Time that Deadline occurs at in String form.
-     */
-    @Override
-    public String getTime() {
-        if (this.time == null) {
-            return "";
-        } else {
-            return this.date.toString();
-        }
-    }
-
-    /**
-     * Getter method for simplified date and time Deadline occurs at.
-     * @return Simplified date and time Deadline occurs at in String form.
+     * Getter method for date and time Deadline occurs by.
+     * @return Simplified string form of date and time
      */
     @Override
     public String getDateTimeStorage() {
@@ -71,8 +58,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts Deadline to String for Storage.
-     * @return Deadline String for storage.
+     * Returns simplified string representation of deadline.
+     * @return Simplified string representation of deadline
      */
     @Override
     public String toStorageString() {
@@ -80,8 +67,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string of Deadline (Task).
-     * @return string of Deadline.
+     * Returns readable string representation of deadline.
+     * @return Readable string representation of deadline
      */
     @Override
     public String toString() {

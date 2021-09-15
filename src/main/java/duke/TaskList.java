@@ -253,4 +253,13 @@ public class TaskList {
             throw new KeywordNotFoundException(keyword);
         }
     }
+
+    /**
+     * Clears taskList.
+     */
+    public void clearTaskList() {
+        this.tasks = new ArrayList<>(100);
+        this.counter = 0;
+    }
+
 }

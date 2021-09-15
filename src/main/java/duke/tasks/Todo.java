@@ -1,18 +1,14 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
-import java.time.format.DateTimeFormatter;
-
 /**
- * Todo (Task).
+ * Todo (Task)
  * @author Ruth Poh
  */
 public class Todo extends Task {
 
     /**
-     * Initializes Todo.
-     * @param taskString String representation of Todo Task.
+     * Creates a Deadline Task with a specified todo.
+     * @param taskString String representation of the todo
      */
     public Todo(String taskString) {
         super(taskString);
@@ -21,7 +17,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns blank string as Todo does not have a date.
+     * Returns blank string as todo does not have a date.
      * @return Blank String
      */
     @Override
@@ -30,16 +26,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns blank string as Todo does not have a time.
-     * @return Blank String
-     */
-    @Override
-    public String getTime() {
-        return "";
-    }
-
-    /**
-     * Returns blank string as Todo does not have a date or time.
+     * Returns blank string as todo does not have a date or time.
      * @return Blank String
      */
     @Override
@@ -48,16 +35,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns descriptive string representation of Todo.
-     * @return In format '[T]: taskString'
-     */
-    @Override
-    public String toString() {
-        return "[T] " + super.toString();
-    }
-
-    /**
-     * Returns string representation of Todo (Task) for storage.
+     * Returns string representation of todo for storage.
      * @return In format 'T | isDoneStatus | taskString'
      */
     @Override
@@ -65,5 +43,13 @@ public class Todo extends Task {
         return ("T | " + this.getIsDoneBinary() + " | " + super.taskString);
     }
 
+    /**
+     * Returns descriptive string representation of todo.
+     * @return In format '[T]: taskString'
+     */
+    @Override
+    public String toString() {
+        return "[T] " + super.toString();
+    }
 
 }

@@ -3,7 +3,8 @@ package duke;
 import duke.exceptions.DukeException;
 
 /**
- * Dukewu, the modified version of Duke (Personal Assistant Chatbot). Speaks owo language.
+ * Dukewu, the modified version of Duke (Personal Assistant Chatbot).
+ * Speaks owo language.
  * @author Ruth Poh
  */
 public class Duke {
@@ -13,8 +14,8 @@ public class Duke {
     private boolean shouldContinue;
 
     /**
-     * Handles the Ui, Storage, and receiving and sending input.
-     * @param filePath File path to save data to.
+     * Initialises Dukewu.
+     * @param filePath File path to save data to
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -31,8 +32,8 @@ public class Duke {
 
     /**
      * Sends response to Ui and gets a response.
-     * @param input Command input sent to Ui.
-     * @return Message from Ui.
+     * @param input Command input sent to Ui
+     * @return Message from Ui
      */
     public String getResponse(String input){
         if (input.equalsIgnoreCase("bye")) {
@@ -43,9 +44,10 @@ public class Duke {
 
     /**
      * Checks if Duke should continue receiving input from interface.
-     * @return False if input is not "bye", true otherwise.
+     * @return False if input is not "bye", true otherwise
      */
     public boolean isExit() {
         return !shouldContinue;
     }
+
 }

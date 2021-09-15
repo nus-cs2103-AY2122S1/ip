@@ -8,59 +8,46 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event (Task).
+ * Creates a Event Task with a specified task with a date and time (optional).
  * @author Ruth Poh
  */
 public class Event extends Task {
 
     /**
      * Initializes Event.
-     * @param taskstr Task.
-     * @param date Date/Time of task.
+     * @param taskString String representation of the event
+     * @param date Date event occurs
      */
-    public Event(String taskstr, LocalDate date) {
-        super(taskstr);
+    public Event(String taskString, LocalDate date) {
+        super(taskString);
         super.date = date;
         super.time = null;
     }
 
     /**
-     * Constructor to initialize Event. With Date and Time.
-     * @param taskstr Task.
-     * @param date Date/Time of task.
-     * @param time Time of task.
+     * Initializes Event, with Date and Time.
+     * @param taskString String representation of the event
+     * @param date Date event occurs
+     * @param time Time event occurs
      */
-    public Event(String taskstr, LocalDate date, LocalTime time) {
-        super(taskstr);
+    public Event(String taskString, LocalDate date, LocalTime time) {
+        super(taskString);
         super.date = date;
         super.time = time;
     }
 
     /**
-     * Getter method for date Event occurs at.
-     * @return Date that Event occurs at in String form.
+     * Getter method for date.
+     * @return Readable string representation of date
      */
     @Override
     public String getDate() {
-        return "";
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
-     * Getter method for time Event occurs
-     * @return Time that Event occurs at in String form.
-     */
-    @Override
-    public String getTime() {
-        if (this.time == null) {
-            return "";
-        } else {
-            return this.date.toString();
-        }
-    }
-
-    /**
-     * Getter method for simplified date and time Event occurs at.
-     * @return Simplified date and time Event occurs at in String form.
+     * Getter method for date and time Event occurs at.
+     * @return Simplified string form of date and time
      */
     @Override
     public String getDateTimeStorage() {
@@ -72,8 +59,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts Event to String for storage.
-     * @return Event String for storage.
+     * Returns simplified string representation of event.
+     * @return Simplified string representation of event
      */
     @Override
     public String toStorageString() {
@@ -81,8 +68,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns string of Event (Task).
-     * @return string of Event.
+     * Returns readable string representation of event.
+     * @return Readable string representation of event
      */
     @Override
     public String toString() {

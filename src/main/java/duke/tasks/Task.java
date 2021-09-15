@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Parent Task class. Inherited by Event, Deadline, Todo.
+ * Encloses a Task with a date and time that can be marked as done.
  * @author Ruth Poh
  */
 public abstract class Task {
@@ -15,7 +15,7 @@ public abstract class Task {
 
     /**
      * Initialises Task.
-     * @param taskString String representation of Task.
+     * @param taskString String representation of the task
      */
     public Task(String taskString) {
         this.taskString = taskString;
@@ -43,8 +43,6 @@ public abstract class Task {
     }
 
     public abstract String getDate();
-
-    public abstract String getTime();
 
     /**
      * Checks if Task has a time.
