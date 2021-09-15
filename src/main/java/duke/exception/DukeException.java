@@ -13,7 +13,8 @@ public class DukeException extends Exception {
      *
      * @return The response to be shown to the user with information about the error.
      */
-    public String displayError() {
-        return "Oops! Something went wrong :(\n" + getMessage();
+    @Override
+    public String getMessage() {
+        return "Oops! Something went wrong :(\n" + super.getMessage();
     }
 }

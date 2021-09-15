@@ -20,20 +20,17 @@ public class Parser {
      *
      * @param input User input.
      * @return The response to be sent to the user.
+     * @throws DukeException Any exception raised when parsing executing the command.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         String firstWord = input.split(" ")[0];
 
         Command command = Commands.findCommand(firstWord);
 
         if (command == null) {
-            return "Unsupported Operation!";
+            throw new DukeException("Unsupported Operation!");
         }
 
-        try {
-            return command.parse(input, taskList);
-        } catch (DukeException e) {
-            return e.displayError();
-        }
+        return command.parse(input, taskList);
     }
 }

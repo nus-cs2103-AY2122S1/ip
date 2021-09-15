@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -24,6 +25,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    private final static Color EXCEPTION_COLOR = Color.SALMON;
 
     /**
      * Generates a dialog box representing communication from one party.
@@ -71,9 +73,10 @@ public class DialogBox extends HBox {
      *
      * @param text Response text.
      * @param img Duke profile image.
+     * @param hasException Whether the message to be shown is for an exception.
      * @return Dialog box representing response from Duke.
      */
-    public static ArrayList<DialogBox> getDukeDialog(String text, Image img) {
+    public static ArrayList<DialogBox> getDukeDialog(String text, Image img, boolean hasException) {
         String[] lines = text.split("\n");
 
         StringBuilder sb = new StringBuilder();
@@ -95,6 +98,9 @@ public class DialogBox extends HBox {
             // convert the built string into a dialog box if it's the 5th line, or is on the last line
             if (i % 5 == 4 || i == lines.length - 1) {
                 DialogBox db = new DialogBox(sb.toString(), img);
+                if (hasException) {
+                    db.dialog.setTextFill(EXCEPTION_COLOR);
+                }
                 db.flip();
                 dialogBoxes.add(db);
                 sb = new StringBuilder();

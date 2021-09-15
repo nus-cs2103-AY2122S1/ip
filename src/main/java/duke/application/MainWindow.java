@@ -2,6 +2,7 @@ package duke.application;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import duke.io.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,7 +42,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        addDukeDialog("Hello! I am Duke. How may I help you?");
+        addDukeDialog("Hello! I am Duke. How may I help you?", false);
     }
 
     /**
@@ -68,8 +69,15 @@ public class MainWindow extends AnchorPane {
         if (!input.equals("")) {
             userInput.clear();
             addUserDialog(input);
-            String response = parser.getResponse(input);
-            addDukeDialog(response);
+            String response;
+            boolean hasException = false;
+            try {
+                response = parser.getResponse(input);
+            } catch (DukeException e) {
+                response = e.getMessage();
+                hasException = true;
+            }
+            addDukeDialog(response, hasException);
         }
     }
 
@@ -121,9 +129,10 @@ public class MainWindow extends AnchorPane {
      * Adds a dialog for Duke to reflect Duke's response.
      *
      * @param response Response from Duke.
+     * @param hasException Whether the message to be shown is for an exception.
      */
-    private void addDukeDialog(String response) {
+    private void addDukeDialog(String response, boolean hasException) {
         assert dialogContainer != null;
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage, hasException));
     }
 }
