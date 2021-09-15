@@ -1,5 +1,7 @@
 package duke;
 
+import duke.ui.UserInterface;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

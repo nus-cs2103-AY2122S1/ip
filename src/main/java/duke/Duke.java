@@ -1,5 +1,8 @@
 package duke;
 
+import duke.command.Command;
+import duke.ui.UserInterface;
+
 import java.time.format.DateTimeFormatter;
 
 import java.nio.file.Path;

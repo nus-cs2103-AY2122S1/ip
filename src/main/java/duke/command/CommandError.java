@@ -1,4 +1,7 @@
-package duke;
+package duke.command;
+
+import duke.TaskList;
+import duke.ui.UserInterface;
 
 public class CommandError extends Command {
 
