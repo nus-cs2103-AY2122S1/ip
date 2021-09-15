@@ -83,7 +83,7 @@ a particular feature.
 
 ---
 ## Usage
-### `bye` - To end the session with the Chatbot
+### ```bye``` - To end the session with the Chatbot
 
 To quit the Chatbot App, after manipulating the tasks, you may use the
 ```bye``` command.
@@ -94,8 +94,9 @@ bye
 ```
 
 Example of usage:
-
-`bye`
+```
+bye
+```
 
 Expected outcome:
 
@@ -107,7 +108,7 @@ session.
 ```
 
 
-### `deadline` - To add a deadline type task
+### ```deadline``` - To add a deadline type task
 
 If the task you wish to add has a deadline associated with it, you may use the
 ```deadline``` command to add it.
@@ -119,8 +120,9 @@ deadline TASK_DESCRIPTION /by DD/MM/YYYY
 ```
 
 Example of usage:
-
-`deadline CS2103T iP /by 17/09/2021`
+```
+deadline CS2103T iP /by 17/09/2021
+```
 
 Expected outcome:
 
@@ -134,7 +136,7 @@ Where's My Treat? I Added:
 You Owe Me 1 Treat(s), Master!
 ```
 
-### `event` - To add an event type task
+### ```event``` - To add an event type task
 
 If the task you wish to add is event related, you may use the
 ```event``` command to add it.
@@ -145,8 +147,9 @@ event TASK_DESCRIPTION /at DD/MM/YYYY
 ```
 
 Example of usage:
-
-`event Apple Event /at 15/09/2021`
+```
+event Apple Event /at 15/09/2021
+```
 
 Expected outcome:
 
@@ -160,7 +163,7 @@ Where's My Treat? I Added:
 You Owe Me 1 Treat(s), Master!
 ```
 
-### `delete` - To delete a task
+### ```delete``` - To delete a task
 
 If there is a task you wish to delete, you may use the
 ```delete``` command to delete it.
@@ -171,8 +174,9 @@ delete TASK_NUMBER
 ```
 
 Example of usage:
-
-`delete 1`
+```
+delete 1
+```
 
 Expected outcome:
 
@@ -188,7 +192,7 @@ Task Deleted!
 You Owe Me 1 Treat(s), Master!
 ```
 
-### `done` - To mark a task as done
+### ```done``` - To mark a task as done
 
 If you completed a task, you may use the
 ```done``` command to mark it as done.
@@ -199,8 +203,9 @@ done TASK_NUMBER
 ```
 
 Example of usage:
-
-`done 1`
+```
+done 1
+```
 
 Expected outcome:
 
@@ -214,7 +219,7 @@ Task Done!
 [D][X] CS2103T iP (by: Sep 17 2021)
 ```
 
-### `find` - To find tasks with similar keywords
+### ```find``` - To find tasks with similar keywords
 
 If you wish to search for tasks with a particular keyword, you may use the
 ```find``` command to find such tasks.
@@ -225,8 +230,9 @@ find KEYWORD
 ```
 
 Example of usage:
-
-`find apple`
+```
+find apple
+```
 
 Expected outcome:
 
@@ -241,7 +247,7 @@ You Owe Me 1 Treat(s), Master!
 ```
 
 
-### `list` - To show all the tasks present in the task list
+### ```list``` - To show all the tasks present in the task list
 
 If you want to take a look at the tasks present in your task list, you may use the
 ```list``` command.
@@ -252,8 +258,9 @@ list
 ```
 
 Example of usage:
-
-`list`
+```
+list
+```
 
 Expected outcome:
 
@@ -265,7 +272,7 @@ Task Done!
 [D][X] CS2103T iP (by: Sep 17 2021)
 ```
 
-### `help` - To show all the possible commands
+### ```help``` - To show all the possible commands
 
 If you want to take a look at the commands you can execute, you may use the
 ```help``` command. You can see command descriptions, formats and usage examples
@@ -277,8 +284,9 @@ help
 ```
 
 Example of usage:
-
-`help`
+```
+help
+```
 
 Expected outcome:
 
@@ -325,7 +333,7 @@ Use the view command to view scheduled tasks for a day.
 Command Example: view 23/09/2021
 ```
 
-### `todo` - To add a todo type task
+### ```todo``` - To add a todo type task
 
 If the task you wish to add is a todo and has no fixed due date, you may use the
 ```todo``` command to add it.
@@ -336,8 +344,9 @@ todo TASK_DESCRIPTION
 ```
 
 Example of usage:
-
-`todo Laundry`
+```
+todo Laundry
+```
 
 Expected outcome:
 
@@ -352,7 +361,7 @@ You Owe Me 1 Treat(s), Master!
 ```
 
 
-### `view` - To view the tasks scheduled for a day
+### ```view``` - To view the tasks scheduled for a day
 
 This command helps you to quickly look up tasks due by or at a particular day.
 This would __only__ show you `event` and `deadline` type tasks. You may use the
@@ -364,8 +373,9 @@ view DD/MM/YYYY
 ```
 
 Example of usage:
-
-`view 23/09/2021`
+```
+view 23/09/2021
+```
 
 Expected outcome:
 
