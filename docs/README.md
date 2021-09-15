@@ -24,60 +24,60 @@ Tokio is able to store 3 types of tasks:
 Adds specified type of task to list.
 
 #### Add todo
-Format: `todo DESCRIPTION`
+Format: `todo DESCRIPTION`  
 ![AddTodo](./images/exampleTodo.png)
 
-#### Add deadline
-Format: `deadline DESCRIPTION /by yyyy-MM-dd`
+#### Add deadline  
+Format: `deadline DESCRIPTION /by yyyy-MM-dd`  
 ![AddDeadline](./images/exampleDeadline.png)
 
 #### Add event
-Format: `event DESCRIPTION /at yyyy-MM-dd HH:mm`
-![AddEvent](./images/exampleEvent.png)
+Format: `event DESCRIPTION /at yyyy-MM-dd HH:mm`  
+![AddEvent](./images/exampleEvent.png)  
 
-*__note__: cannot add tasks with the same description*  
+:warning: *__note__: cannot add tasks with the same description*  
 ![AddDuplicate](./images/exampleDuplicate.png)
 
 
 ### Feature 2 - List tasks
-Lists all tasks in list.
-Format: `list`
+Lists all tasks in list.  
+Format: `list`  
 ![ListTasks](./images/exampleList.png)
 
 
 ### Feature 3 - Mark task as done
-Marks a task as done.
-Format: `done INDEX` 
+Marks a task as done.  
+Format: `done INDEX`  
 ![DoneTask](./images/exampleDone.png)  
-*__note__: total number of tasks does not change after you have completed your task*
+:warning: *__note__: total number of tasks does not change after you have completed your task*
 
 
 ### Feature 4 - Delete task
-Removes a task from the list.
-Format: `delete INDEX`
+Removes a task from the list.  
+Format: `delete INDEX`  
 ![DeleteTask](./images/exampleDelete.png)
 
 
 ### Feature 5 - Find task
-Lists out all task with the specified keyword.
-Format: `find KEYWORD`
+Lists out all task with the specified keyword.  
+Format: `find KEYWORD`  
 ![FindTask](./images/exampleFind.png)
 
 
 ### Feature 6 - Bye
-Exits Tokio after 2s.
+Exits Tokio after 2s.  
 Format: `bye`  
 ![Bye](./images/exampleBye.png) 
 
 
 ## Command Summary
-Action | Format, Examples
------- | ----------------
-todo | `todo DESCRIPTION`  e.g., `todo CS2103T Tut 4`  
-deadline | `deadline DESCRIPTION /by yyyy-MM-dd`  e.g., `deadline CS2013T iP Submission /by 2021-09-17`
-event | `event DESCRIPTION /at yyyy-MM-dd HH:mm`  e.g., `event CS2013T tP meeting /at 2021-09-28 20:00`
-list | `list`
-done | `done INDEX`  e.g., `done 1`
-delete | `delete INDEX`  e.g., `delete 1`
-find | `find KEYWORD`  e.g., `find sep`
-bye | `bye`
+Action    | Format, Examples
+--------- | -----------------------------------------------------------------------------------------------
+todo      | `todo DESCRIPTION`  e.g., `todo CS2103T Tut 4`  
+deadline  | `deadline DESCRIPTION /by yyyy-MM-dd`  e.g., `deadline CS2013T iP Submission /by 2021-09-17`
+event     | `event DESCRIPTION /at yyyy-MM-dd HH:mm`  e.g., `event CS2013T tP meeting /at 2021-09-28 20:00`
+list      | `list`
+done      | `done INDEX`  e.g., `done 1`
+delete    | `delete INDEX`  e.g., `delete 1`
+find      | `find KEYWORD`  e.g., `find sep`
+bye       | `bye`
