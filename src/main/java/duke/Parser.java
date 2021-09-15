@@ -62,7 +62,7 @@ public class Parser {
     }
 
     /**
-     * Parse arguments if type is task.
+     * Parses arguments if type is task.
      *
      * @return Task name.
      * @throws DukeException If name is not present.
@@ -78,7 +78,7 @@ public class Parser {
     }
 
     /**
-     * Parse task date to LocalDateTime.
+     * Parses task date to LocalDateTime.
      *
      * @return Task date.
      * @throws DukeException If date is invalid.

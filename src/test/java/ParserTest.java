@@ -1,10 +1,10 @@
-import duke.DukeException;
-import duke.Parser;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.DukeException;
+import duke.Parser;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
