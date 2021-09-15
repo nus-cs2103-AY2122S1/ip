@@ -50,7 +50,7 @@ public class Parser {
         String cmd = x[0];
         assert(cmd != null);
         if (x.length == 1) {
-            if (cmd.equals("bye")) {
+            if (cmd.equals("exit")) {
                 return new ExitCommand();
             } else if (cmd.equals("list")) {
                 return new ListCommand();
@@ -240,7 +240,6 @@ public class Parser {
         } else if (prevCommand instanceof DoneCommand) {
             return new UndoneCommand(((DoneCommand) prevCommand).getIndex());
         } else {
-            // the command cannot be undone
             throw new DukeException("Previous command cannot be undone");
         }
     }
