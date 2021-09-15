@@ -72,6 +72,8 @@ public class Parser {
             return tasks.addDeadline(userInput, tasks.getStorage().getUserInputRecords());
         } else if (userInput.startsWith("event ") && userInput.contains("/at")) {
             return tasks.addEvent(userInput, tasks.getStorage().getUserInputRecords());
+        } else if (userInput.startsWith("update ") && userInput.contains("/to")) {
+            return tasks.updateTask(userInput);
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }

@@ -56,4 +56,23 @@ public class ParserTaskListTest {
         }
         assert (storage.getUserInputRecords().isEmpty());
     }
+
+    @Test
+    public void parseAndTaskList_update_lastTaskUpdated() {
+        Scanner testScanner = new Scanner("todo sleep\n"
+                + "deadline assignment /by 2021-08-09\n"
+                + "todo 1\n"
+                + "update 3 /to meeting /at 2021-08-01\n"
+                + "done 1\n"
+                + "done 2\n"
+                + "done 3\n");
+        Storage storage = new Storage();
+        Parser parser = new Parser(new TaskList(storage));
+        while (testScanner.hasNextLine()) {
+            parser.parse(testScanner.nextLine());
+        }
+        StubStorage stubStorage = new StubStorage();
+        stubStorage.setExpectedResults();
+        assertEquals(stubStorage.getUserInputRecords(), storage.getUserInputRecords());
+    }
 }

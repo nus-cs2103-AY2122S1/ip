@@ -181,4 +181,96 @@ public class TaskList {
             return builder.toString();
         }
     }
+
+    /**
+     * Update a task to the task as indicated by the user.
+     *
+     * @param userInput        input from the user.
+     * @return the response on whether a task is successfully updated.
+     */
+    public String updateTask(String userInput) {
+        int indexOfTo = userInput.indexOf("/to ");
+        if (indexOfTo == -1) {
+            return "Please indicate the updated task!";
+        }
+        try {
+            int updateCommandLength = 7;
+            int indexToUpdate = Integer.parseInt(userInput.substring(updateCommandLength, indexOfTo).trim()) - 1;
+            String contentOfUpdate = userInput.substring(indexOfTo + 4);
+            if (contentOfUpdate.contains("/by")) {
+                return updateDeadline(contentOfUpdate, indexToUpdate);
+            } else if (contentOfUpdate.contains("/at")) {
+                return updateEvent(contentOfUpdate, indexToUpdate);
+            } else {
+                return updateToDo(contentOfUpdate, indexToUpdate);
+            }
+        } catch (NumberFormatException e) {
+            return "Please enter a valid ID!\n";
+        }
+    }
+
+    private String updateToDo(String contentOfUpdate, int indexToUpdate) {
+        try {
+            if (contentOfUpdate.trim().isEmpty()) {
+                return "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            ToDo toDo = new ToDo(contentOfUpdate);
+            storage.getUserInputRecords().set(indexToUpdate, toDo);
+            return "Update successfully!\n" + printList();
+        } catch (IndexOutOfBoundsException e) {
+            return "Oops, the ID of the task does not exist!\n";
+        }
+    }
+
+    private String updateDeadline(String contentOfUpdate, int indexToUpdate) {
+        try {
+            int indexOfBy = contentOfUpdate.indexOf("/by ");
+            if (indexOfBy == -1) {
+                return "Please indicate the deadline!";
+            }
+            String description = contentOfUpdate.substring(0, indexOfBy);
+            if (description.trim().isEmpty()) {
+                return "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            LocalDate date = LocalDate.parse(contentOfUpdate.substring((indexOfBy + 3)).trim());
+            Deadline deadline = new Deadline(description, date);
+            storage.getUserInputRecords().set(indexToUpdate, deadline);
+            return "Update successfully!\n" + printList();
+        } catch (IndexOutOfBoundsException e) {
+            return "Oops, the ID of the task does not exist!\n";
+        } catch (DateTimeParseException e) {
+            return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
+        }
+    }
+
+    private String updateEvent(String contentOfUpdate, int indexToUpdate) {
+        try {
+            int indexOfAt = contentOfUpdate.indexOf("/at ");
+            if (indexOfAt == -1) {
+                return "Please indicate the date!";
+            }
+            String description = contentOfUpdate.substring(0, indexOfAt);
+            if (description.trim().isEmpty()) {
+                return "OOPS!!! The description of an event cannot be empty.\n";
+            }
+            LocalDate date = LocalDate.parse(contentOfUpdate.substring((indexOfAt) + 3).trim());
+            Event event = new Event(description, date);
+            storage.getUserInputRecords().set(indexToUpdate, event);
+            return "Update successfully!\n" + printList();
+        } catch (IndexOutOfBoundsException e) {
+            return "Oops, the ID of the task does not exist!\n";
+        } catch (DateTimeParseException e) {
+            return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
+        }
+    }
+
+    private String printList() {
+        ArrayList<Task> userInputRecords = storage.getUserInputRecords();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list:\n");
+        for (int i = 0; i < userInputRecords.size(); i++) {
+            stringBuilder.append("  " + (i + 1) + "." + userInputRecords.get(i) + "\n");
+        }
+        return stringBuilder.toString();
+    }
 }
