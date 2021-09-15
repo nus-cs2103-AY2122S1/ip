@@ -97,6 +97,7 @@ public class Parser {
         if (input.length != 1) {
             throw new DukeException("'list' command doesn't require any arguments.");
         } else {
+            System.out.println("reached parse list");
             return new ListCommand(taskList);
         }
     }

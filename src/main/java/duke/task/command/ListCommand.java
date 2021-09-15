@@ -29,6 +29,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
+        System.out.println("reached list command");
         return taskList.printList();
     }
 }

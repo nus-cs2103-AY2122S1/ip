@@ -93,19 +93,6 @@ public class TaskList {
     }
 
     /**
-     * Marks the specified task as not done.
-     *
-     * @param index the index at which the task is.
-     * @return string representation of changed task
-     */
-    public String markUndone(int index) throws DukeException {
-        Task task = tasks.get(index - 1);
-        task.undoTask();
-//        storage.markTaskUndone(index - 1);
-        return task.toString();
-    }
-
-    /**
      * Deletes the item at the specified index.
      *
      * @param index index at which item is to be deleted.
@@ -139,14 +126,16 @@ public class TaskList {
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
+        System.out.println("reached printlist");
         ArrayList<Task> currList = Undo.state.get(0);
+
+        System.out.println("size = " + currList.size());
         if (currList.size() == 0) {
             throw new DukeException("You have 0 items in your list");
         }
         StringBuilder output = new StringBuilder("These are your tasks: \n");
-        ArrayList<Task> newList = Undo.state.get(0);
-        for (int i = 0; i < newList.size(); i++) {
-            if (i < newList.size() - 1) {
+        for (int i = 0; i < currList.size(); i++) {
+            if (i < currList.size() - 1) {
                 output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i)).append("\n");
             } else {
                 output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i));
