@@ -1,3 +1,2 @@
-Manifest-Version: 1.0
-duke.gui.Main-Class: duke.Duke
-
+Manifest-Version: 0.5
+Main-Class: duke.gui.Launcher
