@@ -59,6 +59,7 @@ public class DialogBox extends HBox {
                 dialog.getText().equals(Ui.INVALID_INDEX) ||
                 dialog.getText().equals(Ui.EMPTY_TASK_DELETE) ||
                 dialog.getText().equals(Ui.EMPTY_NOTE_DELETE) ||
+                dialog.getText().equals(Ui.EMPTY_TASK_DONE) ||
                 dialog.getText().equals(Ui.INVALID_DATE_OT_TIMING) ||
                 dialog.getText().equals(Ui.START_IS_AFTER_END);
         
