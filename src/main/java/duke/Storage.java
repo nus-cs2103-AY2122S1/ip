@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String dataFilePath;
-    private HistoryState history;
+    private ArrayList<HistoryState> history = new ArrayList<HistoryState>();
     /**
      * Constructor for Storage.
      * Sets the data folder and file path.
@@ -30,8 +30,8 @@ public class Storage {
      * Set task list and command to history
      * @param taskList
      */
-    public void setHistory(TaskList taskList, Command command) {
-        history = new HistoryState(taskList, command);
+    public void addToHistory(TaskList taskList, Command command) {
+        history.add(new HistoryState(taskList, command));
     }
 
     public boolean isHistoryEmpty() {
@@ -43,11 +43,10 @@ public class Storage {
      * @throws DukeException
      */
     public HistoryState popFromHistory() throws DukeException {
-        if (history == null) {
+        if (history.isEmpty()) {
             throw new DukeException("There is nothing saved in the history!");
         }
-        HistoryState lastHistoryState = history;
-        history = null;
+        HistoryState lastHistoryState = history.remove(history.size() - 1);
         return lastHistoryState;
     }
 

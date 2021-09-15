@@ -28,11 +28,11 @@ public class DeleteCommand extends Command {
         if (tasks.getLength() <= taskIndex || 0 > taskIndex) {
             throw new DukeException("Invalid task index provided!");
         }
-        storage.setHistory(tasks, this);
+        storage.addToHistory(tasks, this);
         Task removedTask = tasks.removeTask(taskIndex);
         assert !tasks.doesContain(removedTask) : "Should have removed new task from TaskList";
         storage.updateTasks(tasks);
-        storage.setHistory(copyOfTaskListBeforeChange, this);
+        storage.addToHistory(copyOfTaskListBeforeChange, this);
         ui.showRemovedTask(removedTask, tasks);
     }
 

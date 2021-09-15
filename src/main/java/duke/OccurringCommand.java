@@ -26,7 +26,7 @@ public class OccurringCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         ui.showOccurringTasks(queryDate, tasks);
-        storage.setHistory(tasks, this);
+        storage.addToHistory(tasks, this);
     }
 
     @Override

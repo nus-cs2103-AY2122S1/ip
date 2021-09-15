@@ -55,7 +55,7 @@ public class AddCommand extends Command {
         tasks.addTask(newTask);
         assert tasks.doesContain(newTask) : "Should have added new task into TaskList";
         storage.updateTasks(tasks);
-        storage.setHistory(copyOfTaskListBeforeChange, this);
+        storage.addToHistory(copyOfTaskListBeforeChange, this);
         ui.showAddedNewTask(newTask, tasks);
     }
 

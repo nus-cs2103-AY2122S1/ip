@@ -30,11 +30,11 @@ public class SetDoneCommand extends Command {
             throw new DukeException("Invalid task index provided!");
         }
         Task currTask = tasks.getTask(taskIndex);
-        storage.setHistory(tasks, this);
+        storage.addToHistory(tasks, this);
         currTask.markAsDone();
         assert currTask.getDoneStatus() : "Task should have been marked as done";
         storage.updateTasks(tasks);
-        storage.setHistory(copyOfTaskListBeforeChange, this);
+        storage.addToHistory(copyOfTaskListBeforeChange, this);
         ui.showMarkedAsDone(currTask);
     }
 

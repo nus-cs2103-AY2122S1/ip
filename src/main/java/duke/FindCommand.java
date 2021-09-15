@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         ui.showMatchingTasks(query, tasks);
-        storage.setHistory(tasks, this);
+        storage.addToHistory(tasks, this);
     }
 
     @Override
