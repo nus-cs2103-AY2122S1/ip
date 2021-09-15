@@ -28,6 +28,7 @@ Note the following about command format:
 
 Shows a message explaning all commands used to execute the app.
 ![img_1.png](img_1.png)
+
 Format: `help`
 
 ### Listing all items: `list`
