@@ -7,7 +7,7 @@ import duke.Response;
  */
 public interface Action {
     /**
-     * Executes the specified action and returns the resulting duke.Response.
+     * Executes the specified action and returns the resulting Response.
      */
     Response execute();
 }

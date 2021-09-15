@@ -5,7 +5,7 @@ import duke.Response;
 public class GoodbyeUser implements Action {
     /**
      * Greets farewell to the user when the user requests to exit the application.
-     * @return The duke.Response.
+     * @return The Response.
      */
     public Response execute() {
         Response goodbyeResponse = new Response(new String[]{

@@ -5,16 +5,16 @@ import duke.task.Task;
 import duke.task.TaskCollection;
 
 /**
- * duke.action.DeleteTask is an Action that deletes a duke.task.Task from a duke.task.TaskCollection.
+ * DeleteTask is an Action that deletes a Task from a TaskCollection.
  */
 public class DeleteTask implements Action {
     private final int taskId;
     private final TaskCollection taskCollection;
 
     /**
-     * Creates an Action duke.action.DeleteTask that deletes a duke.task.Task from a duke.task.TaskCollection.
-     * @param taskId The identifier of the duke.task.Task to be deleted.
-     * @param taskCollection The duke.task.TaskCollection to delete the duke.task.Task from.
+     * Creates an Action DeleteTask that deletes a Task from a TaskCollection.
+     * @param taskId The identifier of the Task to be deleted.
+     * @param taskCollection The TaskCollection to delete the Task from.
      */
     public DeleteTask(int taskId, TaskCollection taskCollection) {
         this.taskId = taskId;
@@ -22,8 +22,8 @@ public class DeleteTask implements Action {
     }
 
     /**
-     * Deletes the duke.task.Task from the duke.task.TaskCollection.
-     * @return The duke.Response.
+     * Deletes the Task from the TaskCollection.
+     * @return The Response.
      */
     @Override
     public Response execute() {
@@ -32,9 +32,9 @@ public class DeleteTask implements Action {
     }
 
     /**
-     * Returns the duke.Response for successfully adding the duke.task.Task to the duke.task.TaskCollection.
-     * @param deletedTask The duke.task.Task that was deleted.
-     * @return The duke.Response.
+     * Returns the Response for successfully adding the Task to the TaskCollection.
+     * @param deletedTask The Task that was deleted.
+     * @return The Response.
      */
     private Response respond(Task deletedTask) {
         return new Response(new String[]{

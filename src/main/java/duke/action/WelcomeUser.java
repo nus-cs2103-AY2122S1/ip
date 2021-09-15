@@ -3,12 +3,12 @@ package duke.action;
 import duke.Response;
 
 /**
- * duke.action.WelcomeUser is an Action that greets the User.
+ * WelcomeUser is an Action that greets the User.
  */
 public class WelcomeUser implements Action {
     /**
      * Welcomes the user to the application.
-     * @return The duke.Response.
+     * @return The Response.
      */
     public Response execute() {
         return new Response(new String[]{
