@@ -1,29 +1,122 @@
-# User Guide
+# Duke User Guide
+
+Duke is a desktop app for task management, optimized for use via a Command Line Interface (CLI). If you can type fast, Duke can help you keep track of your work and study tasks handily!
 
 ## Features 
 
-### Feature-ABC
+Note about the command format: 
+- Words in UPPER_CASE are the parameters to be supplied by the user. E.g. in `<todo DESCRIPTION>`, `<DESCRIPTION>` is the parameter e.g. borrow a book.
+- If a command line requires task `<INDEX>` as input, the index refers to the index number displayed after the `<list>` command. The index must be a positive integer within the range of indexes listed.
 
-Description of the feature.
+### Add a task
 
-### Feature-XYZ
+Adds a task to the address book. The task must be one of the three categories:
+1. todo: A task not associated with a date or time.
+2. deadline: A task that must be done before a deadline.
+3. event: A task that takes place over a time window.
 
-Description of the feature.
+Format:
+1. `<todo DESCRIPTION>`
+2. `<deadline DESCRIPTION /by DATE TIME>`
+3. `<event DESCRIPTION /at DATE START_TIME END_TIME>`
+
+### List all tasks
+
+List all tasks currently in the list.
+
+Format: `<list>'
+
+Tasks will be displayed in this format: \[type\] \[status\] description (date time)
+- Type: T for todo, D for deadline, E for event
+- Status: X for done. Blank for not done
+- Date is in the format: Month Date Year
+- Time is in 24-hour format
+
+### Mark a task as done
+
+Mark the specified task as done
+ 
+Format: `<done INDEX>`
+
+### Delete a task
+
+Delete the specified task from the task list.
+ 
+Format: `<delete INDEX>`
+
+### Update a task
+
+Update the specified task.
+
+Format: `<update INDEX CATEGORY CONTENT>`
+
+CATEGORY must be one of the following:
+- description
+- date
+- time
+- start_time
+- end_time
+The format of the CONTENT must match the CATEGORY. E.g., if CATEGORY is the date, the CONTENT must be a valid date like 2021-09-08.
+
+### Find a task
+
+Finds tasks whose description contains a string of keywords
+
+Format: `<find KEYWORDS>`
+
+Only the description is searched.
+Only full words will be matched e.g. "project" will not match "projects".
 
 ## Usage
 
-### `Keyword` - Describe action
+### Add a Task
 
-Describe the action and its outcome.
+Input1: `<event project meeting /at 2021-09-15 14:00-16:00>`
+Outcome1: 
+"Got it. I've added this task:
+\[E\] \[ \] project meeting (at Sep 15 2021 14:00-16:00)
+Now you have 1 tasks in the list."
 
-Example of usage: 
+Input2: `<todo borrow book>`
+Outcome2: 
+"Got it. I've added this task:
+\[T\] \[ \] borrow book
+Now you have 2 tasks in the list."
 
-`keyword (optional arguments)`
+### List all tasks
 
-Expected outcome:
+Input: `<list>`
+Outcome:
+"Here are the tasks in your list:
+1. \[E\] \[ \] project meeting (at Sep 15 2021 14:00-16:00)
+2. \[T\] \[ \] borrow book"
 
-Description of the outcome.
+### Mark a task as done
 
-```
-expected output
-```
+Input: `<done 2>`
+Outcome:
+"Nice! I've marked this task as done:
+\[T\] \[X\] borrow book"
+
+### Delete a task
+
+Input: `<delete 2>`
+Outcome:
+"Noted. I've removed this task:
+\[T\] \[X\] borrow book
+Now you have 1 tasks in the list."
+
+### Update a task
+Input: `<update 1 date 2021-09-16>`
+Outcome:
+"Nice! The task is updated as follows:
+\[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
+
+### Find a task
+Input: `<find project>`
+Outcome:
+"Here are the matching tasks in your list:
+1. \[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
+
+
+*Enjoy the app & your life!* :wink:
