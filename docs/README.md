@@ -13,7 +13,7 @@ You can create 3 types of tasks using Duke:
 
 You can view all tasks in a glance.
 
-### Mark a task as completed
+### [Mark a task as completed](#mark-tasks-as-completed-done)
 
 When you have completed a task, Duke can mark that task as completed.
 
