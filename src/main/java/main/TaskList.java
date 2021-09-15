@@ -85,8 +85,6 @@ public class TaskList {
      */
     public String deleteTask(String next_line) {
         taskNumber = Integer.valueOf(next_line.substring(7));
-        this.doneCheck.remove(taskNumber - 1);
-        this.list.remove(taskNumber - 1);
         assert taskNumber > 0 : "the task number cannot be negative";
 
         String returned = "";
@@ -97,6 +95,8 @@ public class TaskList {
                         + list.get(taskNumber - 1).getTask() + "\n";
         returned = returned + this.list.size()
                 + " more to go!! Press on!!";
+        this.doneCheck.remove(taskNumber - 1);
+        this.list.remove(taskNumber - 1);
         return returned;
     }
 
