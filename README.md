@@ -4,7 +4,7 @@ Morgan is a virtual task assistant that provides both speed and convenience in m
 Equipped with a simple Graphical User Interface (GUI), Morgan is optimized for use via a Command Line Interface (CLI).
 
 Download Morgan [here](https://github.com/jennibearduit/ip/releases) and you'll never have to worry about missing 
-a single deadline!
+a single deadline! 
 
 ## Commands
 

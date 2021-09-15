@@ -10,6 +10,7 @@ import tasks.TaskList;
  */
 public class HelpCommand extends Command {
     public static final String KEYWORD = "help";
+    public static final String INPUT_FORMAT = String.format("\t%s", KEYWORD);
 
     /**
      * Return list of available commands.
@@ -25,7 +26,8 @@ public class HelpCommand extends Command {
                 + "4." + DeleteCommand.INPUT_FORMAT + "\n"
                 + "5." + FindCommand.INPUT_FORMAT + "\n"
                 + "6." + MarkDoneCommand.INPUT_FORMAT + "\n"
-                + "7." + ListCommand.INPUT_FORMAT;
+                + "7." + ListCommand.INPUT_FORMAT
+                + "8. " + HelpCommand.INPUT_FORMAT;
         return output;
     }
 }
