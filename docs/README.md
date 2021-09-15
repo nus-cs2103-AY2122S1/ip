@@ -34,13 +34,13 @@ Example of usage:
 `event CS2103T meeting /at 05/09/21 07:00`
 
 Note that deadline and event type of tasks require you to add time argument after
-`/at` or `/by` 
+`/at` or `/by`.
 
-While Saber supports multiple time format, to be safe, please follow either of the above format
+While Saber supports multiple time format, to be safe, please follow either of the above format.
 
 Expected outcome:
 
-Saber will reply you acknowledging the creation of a Todo / Normal Tasks
+Saber will reply you acknowledging the creation of a Todo / Normal Tasks.
 
 (This reply may vary depending on what type of task you create)
 
@@ -56,7 +56,7 @@ Saber will reply you acknowledging the creation of a Todo / Normal Tasks
 
 ### `list` - List Tasks
 
-Your current tasks will be listed
+Your current tasks will be listed.
 
 Example of usage:
 
@@ -145,7 +145,7 @@ Example of usage:
 
 `find hello`
 
-Note that the given word(s) is not case-sensitive
+Note that the given word(s) is not case-sensitive.
 
 Expected outcome:
 
@@ -162,7 +162,7 @@ Saber will find and list out all tasks that contain the given word(s) in their d
 
 ### `bye` - Quit Saber
 
-Quit Saber application
+Quit Saber application.
 
 Example of usage:
 
