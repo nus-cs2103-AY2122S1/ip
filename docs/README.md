@@ -118,4 +118,4 @@ Outcome:<br/>
 "Here are the matching tasks in your list: <br/>
 1.\[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
 
-### Enjoy the app & your life! :wink:
+### Enjoy the app & your life! 😉
