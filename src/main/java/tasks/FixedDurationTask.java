@@ -1,13 +1,16 @@
 package tasks;
 
+/**
+ * This is a FixedDurationTask class, which inherits from Task.
+ */
 public class FixedDurationTask extends Task {
     public static final String KEYWORD = "[Fixed]";
     public final int duration;
 
     /**
-     * Constructor for EventTask.
+     * Constructor for FixedDurationTask.
      * @param taskName The description of the deadline task.
-     * @param duration The duration of the task
+     * @param duration The duration of the task.
      */
     public FixedDurationTask(String taskName, String duration) {
         super(taskName);

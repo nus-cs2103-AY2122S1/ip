@@ -18,7 +18,7 @@ public class AddFixedDurationCommand extends AddCommand {
             + "provide a valid duration (in hours).");
 
     /**
-     * Constructor for AddDeadlineCommand.
+     * Constructor for AddFixedDurationCommand.
      * @param userInput The input string entered by the user.
      * @throws MorganException If input format is invalid.
      */

@@ -27,7 +27,7 @@ public class HelpCommand extends Command {
                 + "5." + DeleteCommand.INPUT_FORMAT + "\n"
                 + "6." + FindCommand.INPUT_FORMAT + "\n"
                 + "7." + MarkDoneCommand.INPUT_FORMAT + "\n"
-                + "8." + ListCommand.INPUT_FORMAT
+                + "8." + ListCommand.INPUT_FORMAT + "\n"
                 + "9." + HelpCommand.INPUT_FORMAT;
         return output;
     }
