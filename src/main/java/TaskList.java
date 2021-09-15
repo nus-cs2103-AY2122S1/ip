@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     public void delete(int number) {
-        list.remove(number - 1);
+        list.remove(number);
     }
 
     public void done(int number) {

@@ -28,13 +28,13 @@ public class Duke {
         while(!command.equals("bye")) {
             try {
                 try {
-                    switch (command.split(" ")[0]) {
+                    switch (Parser.parseCommand(command)) {
                         case "list":
                             ui.sayList(list);
                             command = s.nextLine();
                             break;
                         case "done":
-                            int finished = Integer.parseInt(command.split(" ")[1]) - 1;
+                            int finished = Parser.parseNumber(command);
                             tasks.done(finished);
                             ui.sayCompleted(list.get(finished));
                             command = s.nextLine();
@@ -43,13 +43,13 @@ public class Duke {
                             if (command.equals("todo") || command.equals("todo ")) {
                                 throw new DukeException(DukeException.Type.TODO);
                             }
-                            Todo toAdd = new Todo(command.split(" ", 2)[1]);
+                            Todo toAdd = new Todo(Parser.parseTodo(command));
                             tasks.add(toAdd);
                             ui.sayUpdates(toAdd, list.size());
                             command = s.nextLine();
                             break;
                         case "deadline":
-                            String[] splitD = command.split(" ", 2)[1].split(" /by ", 2);
+                            String[] splitD = Parser.parseDeadline(command);
                             String first = splitD[0];
                             String second = splitD[1];
                             Deadline toAdd2 = new Deadline(first, second);
@@ -58,7 +58,7 @@ public class Duke {
                             command = s.nextLine();
                             break;
                         case "event":
-                            String[] splitE = command.split(" ", 2)[1].split(" /at ", 2);
+                            String[] splitE = Parser.parseEvent(command);
                             String one = splitE[0];
                             String two = splitE[1];
                             Event toAdd3 = new Event(one, two);
@@ -67,8 +67,8 @@ public class Duke {
                             command = s.nextLine();
                             break;
                         case "delete":
-                            int del = Integer.parseInt(command.split(" ", 2)[1]);
-                            Task toDelete = list.get(del - 1);
+                            int del = Parser.parseNumber(command);
+                            Task toDelete = list.get(del);
                             tasks.delete(del);
                             ui.sayDeletes(toDelete, list.size());
                             command = s.nextLine();

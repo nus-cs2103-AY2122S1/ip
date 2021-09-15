@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -22,29 +26,9 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
             while (line != null) {
-                String[] split = line.split("\\|");
-                switch(split[0]) {
-                    case("T"):
-                        Todo t = new Todo(split[2]);
-                        if (!split[1].equals("0")) {
-                            t.markAsDone();
-                        }
-                        list.add(t);
-                        break;
-                    case("E"):
-                        Event e = new Event(split[2], split[3]);
-                        if (!split[1].equals("0")) {
-                            e.markAsDone();
-                        }
-                        list.add(e);
-                        break;
-                    case("D"):
-                        Deadline d = new Deadline(split[2], split[3]);
-                        if (!split[1].equals("0")) {
-                            d.markAsDone();
-                        }
-                        list.add(d);
-                        break;
+                Task task = Parser.parseData(line);
+                if (task != null) {
+                    list.add(task);
                 }
                 line = reader.readLine();
             }
