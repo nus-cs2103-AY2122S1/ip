@@ -107,7 +107,7 @@ public class Parser {
             int taskNumber = Integer.parseInt(fullCommand.split(" ")[1]);
             newCommand = new TagCommand(tag, taskNumber);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter a valid number/tag.");
+            throw new DukeException("OOPS!!! Please enter a valid number/tag.\nEg.tag 1 #fun");
         }
 
         return newCommand;
