@@ -128,7 +128,7 @@ Foramt: `save`
 #### Input History Navigation
 Simply press ⬆️⬇️ button on your keyboard to navigate throught your input history, similar to most command line interface.
 
-<img src="https://user-images.githubusercontent.com/39845424/133407009-37c2e7f9-725c-4b92-8223-27a02f774392.gif" height="680">
+<img src="https://user-images.githubusercontent.com/39845424/133408112-1323213c-34b3-4cd5-93e4-0fc4a8aba736.gif" height="640">
 
 
 ## Coming your way
