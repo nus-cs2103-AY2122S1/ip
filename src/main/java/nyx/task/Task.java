@@ -37,12 +37,16 @@ public abstract class Task {
     public abstract String formatData();
 
     /**
-     * Mark task as done.
+     * Marks task as done.
      */
     public void setDone() {
         this.isDone = true;
     }
 
+    /**
+     * Changes the content of the task.
+     * @param newContent The new content to change to.
+     */
     public void updateContent(String newContent) {
         this.content = newContent;
     }

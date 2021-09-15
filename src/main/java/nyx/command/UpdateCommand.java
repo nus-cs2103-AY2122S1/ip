@@ -22,45 +22,57 @@ public class UpdateCommand extends Command {
 
         try {
             int index = Integer.parseInt(splitInfo[0]) - 1;
-
             if (taskList.getNumTasks() == 0) {
                 return "No task to delete!";
             }
-
             Task task = taskList.getTask(index);
-
-            if (task instanceof ToDo) {
-                task.updateContent(splitInfo[1]);
-            } else if (task instanceof Deadline) {
-                String[] secondInfo = splitInfo[1].split(" /by ");
-                if (secondInfo.length != 2) {
-                    throw new NyxException("You need to update deadline using the following format:"
-                            + "\n{ details } /by { datetime }");
-                }
-                task.updateContent(secondInfo[0]);
-                Deadline deadline = (Deadline) task;
-                deadline.changeDateTime(secondInfo[1]);
-            } else {
-                String[] secondInfo = splitInfo[1].split(" /at ");
-                if (secondInfo.length != 2) {
-                    throw new NyxException("You need to update event using the following format:"
-                            + "\n{ details } /at { datetime }");
-                }
-                task.updateContent(secondInfo[0]);
-                Event event = (Event) task;
-                event.changeDateTime(secondInfo[1]);
-            }
-            storage.overwriteData(taskList);
-
-            return String.format("Noted! I've update this task to:\n  %s", task);
+            return updateHandler(splitInfo[1], task, taskList, storage);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new NyxException("Invalid task index!");
-        } catch (IOException e) {
-            throw new NyxException("Unable to save the changes...");
         }
     }
 
     public static void throwEmptyException() throws NyxException {
         throw new NyxException("You need to specify what to update!");
+    }
+
+    private String updateHandler(String newInfo, Task task, TaskList taskList, Storage storage) throws NyxException {
+        if (task instanceof ToDo) {
+            task.updateContent(newInfo);
+        } else if (task instanceof Deadline) {
+            updateDeadline(newInfo, task);
+        } else {
+            updateEvent(newInfo, task);
+        }
+
+        try {
+            storage.overwriteData(taskList);
+        } catch (IOException e) {
+            throw new NyxException("Unable to save the changes...");
+        }
+
+        return String.format("Noted! I've update this task to:\n  %s", task);
+    }
+
+    private void updateDeadline(String newInfo, Task task) throws NyxException {
+        String[] secondInfo = newInfo.split(" /by ");
+        if (secondInfo.length != 2) {
+            throw new NyxException("You need to update deadline using the following format:"
+                    + "\n{ details } /by { datetime }");
+        }
+        task.updateContent(secondInfo[0]);
+        Deadline deadline = (Deadline) task;
+        deadline.changeDateTime(secondInfo[1]);
+    }
+
+    private void updateEvent(String newInfo, Task task) throws NyxException {
+        String[] secondInfo = newInfo.split(" /at ");
+        if (secondInfo.length != 2) {
+            throw new NyxException("You need to update event using the following format:"
+                    + "\n{ details } /at { datetime }");
+        }
+        task.updateContent(secondInfo[0]);
+        Event event = (Event) task;
+        event.changeDateTime(secondInfo[1]);
     }
 }

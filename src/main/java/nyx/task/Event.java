@@ -17,6 +17,7 @@ public class Event extends Task {
      * @param content Description of the event.
      * @param at Datetime at which the event occurs.
      * @param isDone Indicator to indicate whether the deadline task is done.
+     * @throws NyxException If the wrong datetime format is given.
      */
     public Event(String content, String at, boolean isDone) throws NyxException {
         super(content, isDone);
@@ -27,6 +28,7 @@ public class Event extends Task {
      * Constructs an uncompleted event with its description, datetime.
      * @param content Description of the event.
      * @param at Datetime at which the event occurs.
+     * @throws NyxException If the wrong datetime format is given.
      */
     public Event(String content, String at) throws NyxException {
         this(content, at, false);
@@ -42,6 +44,11 @@ public class Event extends Task {
         return String.format("E, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }
 
+    /**
+     * Changes the datetime associated with the Event task.
+     * @param newDateTime New datetime to change to.
+     * @throws NyxException If the wrong datetime format is given.
+     */
     public void changeDateTime(String newDateTime) throws NyxException {
         this.at = DateTimeHandler.parseDateTime(newDateTime);
     }

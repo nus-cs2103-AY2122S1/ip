@@ -17,6 +17,7 @@ public class Deadline extends Task {
      * @param content Description of the deadline task.
      * @param by Datetime of the deadline.
      * @param isDone Indicator to indicate whether the deadline task is done.
+     * @throws NyxException If the wrong datetime format is given.
      */
     public Deadline(String content, String by, boolean isDone) throws NyxException {
         super(content, isDone);
@@ -27,11 +28,17 @@ public class Deadline extends Task {
      * Constructs an uncompleted deadline task with its description and deadline.
      * @param content Description of the deadline task.
      * @param by Datetime of the deadline.
+     * @throws NyxException If the wrong datetime format is given.
      */
     public Deadline(String content, String by) throws NyxException {
         this(content, by, false);
     }
 
+    /**
+     * Changes the datetime associated with the DeadLine task.
+     * @param newDateTime New datetime to change to.
+     * @throws NyxException If the wrong datetime format is given.
+     */
     public void changeDateTime(String newDateTime) throws NyxException {
         this.by = DateTimeHandler.parseDateTime(newDateTime);
     }
