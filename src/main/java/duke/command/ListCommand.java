@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.exception.ExtraArgumentException;
 import duke.task.Task;
+import duke.util.ExceptionChecker;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -9,6 +11,16 @@ import duke.util.Ui;
  * A class that handles task-listing command.
  */
 public class ListCommand extends Command {
+
+    /**
+     * Constructs a ListCommand instance that handles task-listing command.
+     *
+     * @param command The command input by the user.
+     * @throws ExtraArgumentException The exception for handling command with extraneous argument.
+     */
+    public ListCommand(String command) throws ExtraArgumentException {
+        ExceptionChecker.checkExtraArgument("list", command);
+    }
 
     // Appends task if the task is not null.
     private void appendToResponseIfNotNull(StringBuilder response, Task task, int currentIndex) {

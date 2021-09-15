@@ -1,6 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Task;
+import duke.util.CommandModifier;
+import duke.util.ExceptionChecker;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -17,9 +20,10 @@ public class DeleteCommand extends Command {
      *
      * @param taskNum The number of the to-be-deleted task.
      */
-    public DeleteCommand(int taskNum) {
-        assert taskNum > 0 : "Task number should be at least 1.";
-        this.taskNum = taskNum;
+    public DeleteCommand(String description) throws DukeException {
+        ExceptionChecker.checkEmptyDescription("delete", description);
+        ExceptionChecker.checkInvalidDescription(description);
+        this.taskNum = CommandModifier.toInt(description);
     }
 
     // Returns a response telling the user that the task has been successfully deleted.
@@ -39,7 +43,8 @@ public class DeleteCommand extends Command {
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ExceptionChecker.checkTaskExistence(taskNum, tasks.getTaskNum());
         Task task = tasks.getTasks().get(taskNum - 1);
         tasks.delete(taskNum - 1);
         storage.save(tasks);

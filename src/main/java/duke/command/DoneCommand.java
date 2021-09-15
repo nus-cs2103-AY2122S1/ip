@@ -1,6 +1,10 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
+import duke.util.CommandModifier;
+import duke.util.ExceptionChecker;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -10,17 +14,17 @@ import duke.util.Ui;
  */
 public class DoneCommand extends Command {
 
-    private static final String errorMessage = "The number of the task must be at least 1.";
     private final int taskNum;
 
     /**
      * Constructs a DoneCommand that handles task-mark-as-done command.
      *
-     * @param taskNum The number of the to-be-marked-as-done task.
+     * @param description The command description.
      */
-    public DoneCommand(int taskNum) {
-        assert taskNum > 0 : "Task number should be at least 1.";
-        this.taskNum = taskNum;
+    public DoneCommand(String description) throws DukeException {
+        ExceptionChecker.checkEmptyDescription("done", description);
+        ExceptionChecker.checkInvalidDescription(description);
+        this.taskNum = CommandModifier.toInt(description);
     }
 
     // Returns a response telling the user that the task has been successfully marked as done.
@@ -38,7 +42,8 @@ public class DoneCommand extends Command {
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException {
+        ExceptionChecker.checkTaskExistence(taskNum, tasks.getTaskNum());
         Task task = tasks.getTasks().get(taskNum - 1);
         task.markAsDone();
         storage.save(tasks);

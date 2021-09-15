@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.exception.EmptyDescriptionException;
 import duke.task.Task;
+import duke.util.ExceptionChecker;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -15,7 +17,8 @@ public class FindCommand extends Command {
     /**
      * Constructs a FindCommand that handles command of finding a task by searching for a keyword.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String keyword) throws EmptyDescriptionException {
+        ExceptionChecker.checkEmptyDescription("find", keyword);
         this.keyword = keyword;
     }
 

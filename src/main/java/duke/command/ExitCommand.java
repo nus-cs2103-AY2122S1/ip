@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.ExtraArgumentException;
+import duke.util.ExceptionChecker;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -8,6 +10,16 @@ import duke.util.Ui;
  * A class that handles exit-program command.
  */
 public class ExitCommand extends Command {
+
+    /**
+     * Constructs a ExitCommand instance that handles task-listing command.
+     *
+     * @param command The command input by the user.
+     * @throws ExtraArgumentException The exception for handling command with extraneous argument.
+     */
+    public ExitCommand(String command) throws ExtraArgumentException {
+        ExceptionChecker.checkExtraArgument("bye", command);
+    }
 
     /**
      * Returns the response after executing the exit-program command.
