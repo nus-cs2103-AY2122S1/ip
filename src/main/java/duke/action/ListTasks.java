@@ -14,6 +14,8 @@ public class ListTasks implements Action {
      * @param taskCollection The duke.task.TaskCollection.
      */
     public ListTasks(TaskCollection taskCollection) {
+        assert taskCollection != null : "Task collection to add task to should exist";
+
         this.taskCollection = taskCollection;
     }
 
