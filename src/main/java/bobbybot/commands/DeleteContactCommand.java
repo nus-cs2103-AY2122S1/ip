@@ -25,14 +25,14 @@ public class DeleteContactCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         if (contactNumToDelete < 1 || contactNumToDelete > contacts.size()) {
             this.response = "Invalid delete command! Contact number: " + contactNumToDelete + " does not exist\n"
-                    + "Use [list] to see available tasks!";
+                    + "Use [list_contact] to see available contacts!";
             return;
         }
 
         try {
             Person contactToDelete = contacts.getContact(contactNumToDelete - 1);
-            tasks.deleteTask(contactNumToDelete);
-            storage.save(tasks);
+            contacts.deleteContact(contactNumToDelete);
+            storage.save(contacts);
             this.response = "Noted. I've removed this contact: " + contactNumToDelete
                     + "\nNow you have " + contacts.size() + " contacts in the list.";
         } catch (BobbyException e) {

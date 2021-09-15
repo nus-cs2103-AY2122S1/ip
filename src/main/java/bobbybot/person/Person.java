@@ -32,4 +32,19 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Get save format string for text file
+     * @return save format string
+     */
+    public String getSaveFormatString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(name)
+                .append(";")
+                .append(phone)
+                .append(";")
+                .append(email)
+                .append(";")
+                .append(address);
+        return builder.toString();
+    }
 }

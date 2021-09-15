@@ -22,14 +22,15 @@ public class Duke {
     private final PersonList contacts;
     /**
      * Initialise Duke object with filepath of storage
-     * @param filePath storage .txt file path
+     * @param taskFile storage .txt file path
+     * @param storageFile storage .txt file path
      */
-    public Duke(String filePath) {
-        storage = new Storage(filePath);
+    public Duke(String taskFile, String storageFile) {
+        storage = new Storage(taskFile, storageFile);
         ui = new Ui();
-        tasks = new TaskList(storage.load());
+        tasks = new TaskList(storage.loadTasks());
         parser = new Parser();
-        contacts = new PersonList(new ArrayList<>());
+        contacts = new PersonList(storage.loadContacts());
         //todo add storage feature for contacts
     }
 

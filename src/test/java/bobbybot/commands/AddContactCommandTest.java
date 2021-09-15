@@ -21,9 +21,10 @@ import bobbybot.util.Ui;
 public class AddContactCommandTest {
 
     private static final String STORAGE_PATH = "test.txt";
+    private static final String CONTACTS_STORAGE_PATH = "contacts_test.txt";
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
-    private final Storage storage = new Storage(STORAGE_PATH);
+    private final Storage storage = new Storage(STORAGE_PATH, CONTACTS_STORAGE_PATH);
     private final PersonList contacts = new PersonList(new ArrayList<Person>());
 
     @AfterAll

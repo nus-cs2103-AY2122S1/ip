@@ -1,5 +1,6 @@
 package bobbybot.commands;
 
+import bobbybot.exceptions.BobbyException;
 import bobbybot.person.Address;
 import bobbybot.person.Email;
 import bobbybot.person.Name;
@@ -35,6 +36,11 @@ public class AddContactCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, PersonList contacts) {
         contacts.addPerson(toAdd);
+        try {
+            storage.save(contacts);
+        } catch (BobbyException e) {
+            System.out.println(e.getMessage());
+        }
         response = "Got it. I've added this contact:\n  " + toAdd + "\n"
                 + "Now you have " + contacts.size() + " contacts";
     }

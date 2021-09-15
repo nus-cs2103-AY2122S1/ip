@@ -22,10 +22,11 @@ import bobbybot.util.Ui;
 
 public class DeleteContactCommandTest {
     private static final String STORAGE_PATH = "test.txt";
+    private static final String CONTACTS_STORAGE_PATH = "contacts_test.txt";
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
-    private final Storage storage = new Storage(STORAGE_PATH);
-    private final PersonList contacts = new PersonList(Collections.emptyList());
+    private final Storage storage = new Storage(STORAGE_PATH, CONTACTS_STORAGE_PATH);
+    private final PersonList contacts = new PersonList(new ArrayList<>());
     @AfterAll
     public static void cleanUp() {
         File file = new File(STORAGE_PATH);
@@ -40,30 +41,31 @@ public class DeleteContactCommandTest {
         Phone phone = new Phone("123");
         Address address = new Address("home");
         contacts.addPerson(new Person(name, email, phone, address));
+        assertEquals(1, contacts.size());
         DeleteContactCommand c = new DeleteContactCommand(1);
         c.execute(tasks, ui, storage, contacts);
-        assertEquals(0, tasks.getTasks().size());
+        assertEquals(0, contacts.size());
     }
 
     @Test
-    public void deleteCommand_lessThanOne_errorResponse() {
-        int taskNumToDelete = 0;
-        DeleteCommand c = new DeleteCommand(taskNumToDelete);
+    public void deleteContactCommand_lessThanOne_errorResponse() {
+        int contactNumToDelete = 0;
+        DeleteContactCommand c = new DeleteContactCommand(contactNumToDelete);
         c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
-        String expected = "Invalid delete command! Task number: " + taskNumToDelete + " does not exist\n"
-                + "Use [list] to see available tasks!";
+        String expected = "Invalid delete command! Contact number: " + contactNumToDelete + " does not exist\n"
+                + "Use [list_contact] to see available contacts!";
         assertEquals(expected, response);
     }
 
     @Test
     public void deleteCommand_moreThanSize_errorResponse() {
-        int taskNumToDelete = 1;
-        DeleteCommand c = new DeleteCommand(taskNumToDelete);
+        int contactNumToDelete = 1;
+        DeleteContactCommand c = new DeleteContactCommand(contactNumToDelete);
         c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
-        String expected = "Invalid delete command! Task number: " + taskNumToDelete + " does not exist\n"
-                + "Use [list] to see available tasks!";
+        String expected = "Invalid delete command! Contact number: " + contactNumToDelete + " does not exist\n"
+                + "Use [list_contact] to see available contacts!";
         assertEquals(expected, response);
     }
 }

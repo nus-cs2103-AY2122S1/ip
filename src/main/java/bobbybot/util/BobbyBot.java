@@ -11,6 +11,7 @@ import bobbybot.person.Person;
  */
 public class BobbyBot {
     private static final String DBPATH = "data/database.txt";
+    private static final String CONTACTS_DB_PATH = "data/contacts.txt";
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
@@ -21,9 +22,9 @@ public class BobbyBot {
     public BobbyBot() {
         ui = new Ui();
         ui.showWelcome();
-        storage = new Storage(DBPATH);
-        tasks = new TaskList(storage.load());
-        contacts = new PersonList(new ArrayList<Person>());
+        storage = new Storage(DBPATH, CONTACTS_DB_PATH);
+        tasks = new TaskList(storage.loadTasks());
+        contacts = new PersonList(storage.loadContacts());
     }
 
     /**
