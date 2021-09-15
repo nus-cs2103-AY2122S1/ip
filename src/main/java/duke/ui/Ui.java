@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 
 /**
  * Represents an Ui class that is responsible for the interaction with user.
@@ -16,8 +16,8 @@ public class Ui {
      * @return String message to welcome user.
      */
     public String welcome() {
-        String welcome = "Duke: Hello! I'm Duke, a bot to help you track tasks. " +
-                "Enter 'help' to find out more about the available command lines!";
+        String welcome = "Duke: Hello! I'm Duke, a bot to help you track tasks. "
+                + "Enter 'help' to find out more about the available command lines!";
         return welcome;
     }
 
@@ -119,15 +119,15 @@ public class Ui {
      * @return String message to help user navigate the bot.
      */
     public String showHelp() {
-        return "This bot help you track tasks. Use the following format for command:\n" +
-                "1. Add to-do task: todo <description>\n" +
-                "2. Add deadline task: deadline <description> /by <yyyy-mm-ddTHH:mm>\n" +
-                "3. Add event task: event <description> /from <yyyy-mm-ddTHH:mm> /to <yyyy-mm-ddTHH:mm>\n" +
-                "4. Mark task done: done <integer>\n" +
-                "5. Delete task: delete <integer>\n" +
-                "6. Find tasks with keyword: find <keyword>\n" +
-                "7. List all tasks: list\n" +
-                "8. Help: help\n" +
-                "9. Exit: bye";
+        return "This bot help you track tasks. Use the following format for command:\n"
+                + "1. Add to-do task: todo <description>\n"
+                + "2. Add deadline task: deadline <description> /by <yyyy-mm-ddTHH:mm>\n"
+                + "3. Add event task: event <description> /from <yyyy-mm-ddTHH:mm> /to <yyyy-mm-ddTHH:mm>\n"
+                + "4. Mark task done: done <integer>\n"
+                + "5. Delete task: delete <integer>\n"
+                + "6. Find tasks with keyword: find <keyword>\n"
+                + "7. List all tasks: list\n"
+                + "8. Help: help\n"
+                + "9. Exit: bye";
     }
 }

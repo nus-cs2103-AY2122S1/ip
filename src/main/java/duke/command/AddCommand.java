@@ -5,7 +5,7 @@ import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EventFormatException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;

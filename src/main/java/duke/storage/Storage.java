@@ -1,24 +1,26 @@
 package duke.storage;
 
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.parser.Parser;
-import duke.tasks.Deadline;
-
-import java.io.*;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import duke.parser.Parser;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Represents a storage that stores the task data locally.
@@ -27,7 +29,7 @@ import java.util.stream.Stream;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Storage {
-    private static String PATH;
+    private static String path;
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
@@ -36,7 +38,7 @@ public class Storage {
      * @param filePath Input path for the data file.
      */
     public Storage(String filePath) {
-        this.PATH = filePath;
+        this.path = filePath;
     }
 
     /**
@@ -45,7 +47,7 @@ public class Storage {
      * @throws IOException If an input or output exception occurred.
      */
     public void checkFile() throws IOException {
-        final Path p = Paths.get(PATH);
+        final Path p = Paths.get(path);
         final String directory = p.getParent().toString();
         final String filename = p.getFileName().toString();
 
@@ -69,7 +71,7 @@ public class Storage {
     public ArrayList<Task> loadTask() throws IOException {
         try {
             checkFile();
-            File f = new File(PATH);
+            File f = new File(path);
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String nextLine = s.nextLine();
@@ -113,7 +115,7 @@ public class Storage {
      */
     public static void saveList() {
         try {
-            FileWriter fw = new FileWriter(PATH);
+            FileWriter fw = new FileWriter(path);
 
             for (Task t : tasks) {
                 String str = t.getType() + ", " + t.isDone() + ", " + t.getDescription();
@@ -133,7 +135,7 @@ public class Storage {
      */
     public void addTask(Task t) {
         try {
-            File file = new File(PATH);
+            File file = new File(path);
             String str = '\n' + t.getType() + ", " + t.isDone() + ", " + t.getDescription();
             //@@author hsiaotingluv-reused
             //Reused from https://stackoverflow.com/a/37674446 with minor modifications
@@ -151,7 +153,7 @@ public class Storage {
      */
     public void deleteTask(Task t) {
         try {
-            File file = new File(PATH);
+            File file = new File(path);
             String str = t.getType() + ", " + t.isDone() + ", " + t.getDescription();
             //@@author hsiaotingluv-reused
             //Reused from https://stackoverflow.com/a/45784174 with minor modifications
@@ -165,7 +167,7 @@ public class Storage {
             //Reused from https://stackoverflow.com/a/35811028
             RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
             byte b;
-            long length = randomAccessFile.length() ;
+            long length = randomAccessFile.length();
             if (length != 0) {
                 do {
                     length -= 1;
@@ -188,7 +190,7 @@ public class Storage {
      * @param t Task to be updated.
      */
     public void updateTask(Task t) {
-        Path path = Paths.get(PATH);
+        Path path = Paths.get(Storage.path);
         String original = t.getType() + ", false, " + t.getDescription();
         String newLine = t.getType() + ", true, " + t.getDescription();
         //@@author hsiaotingluv-reused

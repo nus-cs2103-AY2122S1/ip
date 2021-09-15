@@ -1,7 +1,5 @@
 package duke.exceptions;
 
-import duke.exceptions.DukeException;
-
 /**
  * Encapsulates exceptions thrown by the chat bot when user enter an empty description.
  *

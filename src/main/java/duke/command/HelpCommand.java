@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 public class HelpCommand extends Command {

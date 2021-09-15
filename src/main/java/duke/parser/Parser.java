@@ -1,13 +1,13 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DeadlineFormatException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EventFormatException;
 import duke.exceptions.OutOfBoundException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a parser that interprets the user input.

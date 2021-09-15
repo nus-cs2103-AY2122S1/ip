@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.CommandExecutor;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * The Duke program implements a chat bot called Duke that supports queries

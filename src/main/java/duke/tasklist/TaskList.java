@@ -1,9 +1,9 @@
-package duke.taskList;
+package duke.tasklist;
+
+import java.util.ArrayList;
 
 import duke.exceptions.OutOfBoundException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a TaskList that stores an array of Tasks.

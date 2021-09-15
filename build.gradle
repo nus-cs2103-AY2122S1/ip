@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
-//    id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -59,9 +59,9 @@ shadowJar {
     archiveClassifier = null
 }
 
-//checkstyle {
-//    toolVersion = '8.29'
-//}
+checkstyle {
+    toolVersion = '8.29'
+}
 
 run{
     standardInput = System.in
