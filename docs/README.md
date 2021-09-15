@@ -1,45 +1,134 @@
 # User Guide
 
-## Setting Up Locally
+## Features
 
-### Prerequisites
-* JDK 11
-* Any IDE that can run Java
-  * Recommended: IntelliJ IDE, update to the most recent version.
+### Manage all your tasks with Dukebro!
 
+Dukebro breaks down all your tasks into 3 types: Todos, Deadlines and Events.
+You can add, update, delete, list all your tasks! Dukebro does it all.
 
+You can even use keywords to filter out tasks by keywords if your tasklist gets too long!
+But that means you are either very active or procrastinating your work :P
 
-### Importing into IntelliJ
+## Usage
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-2. Open the project into IntelliJ as follows:
-   1. Click `Git | Clone`.
-   2. In the `Get from Version Control` dialog, choose GitHub on the left.
-   3. Copy and paste the cloning URL of this repository into the URL field.
-   4. In the `Directory` field, enter the path to the folder where your local copy will be created.
-   5. Click `Clone`, then `Yes` in the confirmation dialog.
-3. Configure the project to use `JDK 11 (specifically)` as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-4. Click `OK`.
-5. You are done!
+###`list`
 
-## Running Dukebro
-1. In the project directory, click `src` > `main` > `java` > `dukegui` > `Launcher`.
-2. Inside `Launcher.java`, click on the green play button on the leftside of the class.
-3. Finally, click on `Run 'Launcher.main()'`
+List out all tasks in your tasklist.
 
-## Commands
-1. `list` - list all the tasks you have currently.
-2. `delete {task number}` - deletes the task from your list corresponding to its task number.
-3. `done {task number}` - marks a task in your list as done corresponding to its task number.
-4. `todo {description} p={priority level}` - adds a "todo" task to your list with a given description and priority level of H/M/L.
-5. `deadline {description} /by {date and time} p={priority level}` - adds a "deadline" task to your list with a given description, deadline and priority level of H/M/L.
-   * date and time should be in the following format: "dd/mm/yyyy HHMM"
-6. `event {description} /at {day} p={priority level}` - adds a "event" task to your list with a given description, day and priority level of H/M/L.
-   * at should be a given day, i.e Friday.
-7. `find {keyword}` - Returns tasks that contain a given keyword.
-8. `bye` - exits the chatbot.
+Example of usage:
 
-## Feedback and Bug Reports
-* Please feel free to give us any feedback or report any problems you faced.
-  * Create a new issue under the `Issues` tab in our repo.
-* If you wish to contribute customisations or extensions to our project, please feel free to create pull requests!
+`list`
+
+Expected outcome:
+
+``` 
+Here are the tasks in your list:
+    1. [T][ ][H] read book
+    2. [D][ ][M] return book (by: Jul 7 2021 1800)
+    3. [E][ ][L] project meeting (at: Dec 1 2021 1100)
+```
+###`todo`
+
+Adds a Todo type task to your tasklist.
+
+Example of usage:
+
+`todo buy bread p=H`
+
+Expected outcome:
+
+``` 
+Got it. I've added this task:
+   [T][ ][H] buy bread
+Now you have 1 tasks in the list.
+```
+
+###`deadline`
+
+Adds a Deadline type task to your tasklist.
+
+Example of usage:
+
+`deadline work report /by 2021-05-05 1800 p=M`
+
+Expected outcome:
+
+``` 
+Got it. I've added this task:
+   [D][ ][M] work report (by: May 5 2021 1800)
+Now you have 1 tasks in the list.
+```
+###`event`
+
+Adds a Event type task to your tasklist.
+
+Example of usage:
+
+`event concert /at 2021-05-03 1200 p=L`
+
+Expected outcome:
+
+``` 
+Got it. I've added this task:
+   [E][ ][L] concert (at: May 3 2021 1200)
+Now you have 1 tasks in the list.
+```
+###`delete`
+
+Deletes a task from your tasklist.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+``` 
+Noted. I've removed this task:
+    [T][X][H] buy bread
+Now you have 2 tasks in the list.
+```
+
+###`done`
+
+Updates the status of a task in your tasklist as completed.
+
+Example of usage:
+
+`done 1`
+
+Expected outcome:
+
+``` 
+Done.
+```
+
+###`find`
+
+Finds tasks that match the given keyword.
+
+Example of usage:
+
+`find bread`
+
+Expected outcome:
+
+``` 
+Here are the matching tasks in your list:
+1.[T][ ][H] buy bread
+```
+
+###`bye`
+
+Exits the bot.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+``` 
+Bye. Hope to see you again soon!
+```
