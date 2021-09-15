@@ -192,7 +192,6 @@ public class Parser {
             Storage.addData(writer, identifyType(action));
             return Response.showAddedTask(task, taskList.getLength());
         case "list":
-            taskList.listItems();
             return Response.showList(taskList);
         case "delete":
             int num = Parser.taskNumber(action);
