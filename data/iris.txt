@@ -4,4 +4,3 @@ D | 0 | submit proposal | 2021-09-12T23:59
 T | 1 | homework
 D | 0 | CS2103T Quiz 6 | 2021-09-17T17:00
 E | 0 | CS2101 Project Meeting | 2021-09-18T09:00
-T | 1 | hannah
