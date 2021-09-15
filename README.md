@@ -14,7 +14,7 @@ a single deadline!
 2. `list` : lists all existing tasks in storage.
 
 
-3. `fixed [task] /for [duration (in hours]` : adds a fixed duration task into the list of tasks.
+3. `fixed [task] /for [duration (in hours)]` : adds a fixed duration task into the list of tasks.
 
 
 4. `todo [task]` : adds a to-do task into the list of tasks.
