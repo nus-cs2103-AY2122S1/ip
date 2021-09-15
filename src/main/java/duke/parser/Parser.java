@@ -273,7 +273,7 @@ public class Parser {
      * @throws DukeException If index outside the range of number of tasks in the taskList.
      */
     public void checkTaskIndex(int index, TaskList taskList) throws DukeException {
-        if (index >= taskList.size() || index <= 0) {
+        if (index >= taskList.size() || index < 0) {
             throw new DukeException("duke.commands.Task number does not exist!");
         }
     }
