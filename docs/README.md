@@ -3,14 +3,18 @@
 > qwick, hand me the defibwiwatow!!
 > please. turn off my [redacted] life support
 >                              - You after you use Dukuwu [(source)](https://i.redd.it/qcsnneo5fyh01.jpg)
-By: `Ruth Poh` Since: `Sep 2021`
+
+By: `Ruth Poh` Since: `September 2021`
+
 
 ## 1. Introduction
+***
 Dukewu is a modified version of the Personal Assistant Chatbot Duke, complete with owo language support. 
-Dukewu can help you **manage your tasks** with an easy-to-read Graphical User Interface (GUI) that operates 
-using text commands.
+Dukewu can help you **manage your tasks** with an **easy-to-read Graphical User Interface (GUI)** that 
+operates using **text commands**.
 
 ## 2. Quick Start
+***
 * Ensure you have Java `11` or above installed in your Computer.
 * Download the latest `duke.jar` [(here)](https://github.com/ruthpohrp/ip/releases).
 * Copy the file to the folder you want to use as the home folder for your Dukewu.
@@ -18,7 +22,23 @@ using text commands.
 
 ![Quickstart](Quickstart.png?raw=true)
 
-## 3. Command Features
+## 3. Command Summary
+***
+| Summary | Command | Example |
+|---------| ------- |---------|
+|**Help:**|`help`|-|
+|**List:**|`list`|-|
+|**Todo:**|`todo TASK`|`todo finish my homework`|
+|**Deadline:**|`deadline TASK /by DATE [TIME]`|`deadline Finish my homework /by 2021-09-16`
+|**Event:**|`event TASK /at DATE [TIME]`|`event Christmas party at my neighbour's /at 2021-12-25`
+|**Find:**|`find KEYWORDS [MORE KEYWORDS]`|`find catboys`
+|**Delete:**|`delete NUMBER`|`delete 5`
+|**Done:**|`done NUMBER`|`done 5`|
+|**Clearall:**|`clearall` followed by `y`|-|
+|**Exit:**|`bye`|-|
+
+## 4. Command Features
+***
 **Command Format**
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo TASK`, `TASK` is a 
   parameter which can be used as `todo TASK`.
@@ -27,17 +47,21 @@ using text commands.
   DATE TIME`.
 * Parameters must be input in the order specified.
 
-### 3.1 Viewing help: `help`
+### 4.1 Viewing help: `help`
 Displays a list of commands that Dukewu supports.
 
 Format: `help`
 
-### 3.2 Viewing the task list: `list`
+![Help](Help.png?raw=true)
+
+### 4.2 Viewing the task list: `list`
 Displays your list of tasks.
 
 Format: `list`
 
-### 3.3 Creating a Todo task
+![List](List.png?raw=true)
+
+### 4.3 Creating a Todo task
 Adds a task with no deadline to the task list.
 
 Format: `todo TASK`
@@ -46,8 +70,10 @@ Examples:
 * `todo finish my homework`
 * `todo prepare a burial so my teammates can let me down one last time`
 
+![Todo](Todo.png?raw=true)
 
-### 3.4 Creating a Deadline task
+
+### 4.4 Creating a Deadline task
 Adds a task with a deadline to the task list.
 
 Format: `deadline TASK /by DATE [TIME]`
@@ -58,7 +84,9 @@ Examples:
 * `deadline Finish my homework /by 2021-09-16`
 * `deadline Finish and submit my project /by 2021-09-17 23:59`
 
-### 3.5 Creating a Event task
+![Deadline](Deadline.png?raw=true)
+
+### 4.5 Creating a Event task
 Adds a task with a time that it occurs to the task list.
 
 Format: `event TASK /at DATE [TIME]`
@@ -69,7 +97,9 @@ Examples:
 * `event Christmas party at my neighbour's /at 2021-12-25`
 * `event Grab Delivery collection /at 2021-12-25 23:59`
 
-### 3.6 Finding entries: `find KEYWORD [MORE KEYWORDS]`
+![Event](Event.png?raw=true)
+
+### 4.6 Finding entries: `find KEYWORD [MORE KEYWORDS]`
 Finds entries with certain keywords in them.
 
 Format: `find KEYWORDS`
@@ -78,14 +108,16 @@ Format: `find KEYWORDS`
 * Only the task description is searched, not date or time.
 
 Examples:
-* find catboys
+* `find catboys`
   
   Returns `feed my catboys` and `buy clothes for my catboys`
-* find cat boys
+* `find cat boys`
   
   Returns `feed my cat boys` but not `feed my catboys` 
 
-### 3.7 Deleting entries: `delete`
+![Find](Find.png?raw=true)
+
+### 4.7 Deleting entries: `delete`
 Deletes task number `NUMBER` on the task list.
 
 Format: `delete NUMBER`
@@ -93,13 +125,16 @@ Format: `delete NUMBER`
 * Entry must be a valid entry in the task list i.e. Trying to `delete 11` when there are only 10 entries 
   in the list will result in an error.
 > 💡 **NOTE:** After deletion, task entries listed below the deleted task will shift upwards.
+> ⚠️ **WARNING:** This command cannot be reversed. Be careful when using this command!
 
 Examples:
 * `delete 3`
   
     Deletes the 3rd entry in the task list.
 
-### 3.8 Marking entries as done: `done`
+![Delete](Delete.png?raw=true)
+
+### 4.8 Marking entries as done: `done`
 Marks a task in the task list as done.
 
 Format: `done NUMBER`
@@ -112,46 +147,38 @@ Examples:
   
   Marks the 4th entry in the task list as done.
 
-### 3.9 Clearing all entries: `clearall`
+![Done](Done.png?raw=true)
+
+### 4.9 Clearing all entries: `clearall`
 Clears all entries from the task list. Asks for confirmation before deletion.
 > ⚠️ **WARNING:** This command cannot be reversed. Be careful when using this command!
 
 Format: `clearall` followed by `y`
 
-### 3.10 Exiting the program: `bye`
+![Clearall](Clearall.png?raw=true)
+
+### 4.10 Exiting the program: `bye`
 Exits the program. 
 > ⚠️ **WARNING:** Do not attempt to input anything into the GUI after inputting this command. Bad things 
 > will happen!
 
 Format: `bye`
 
-### 3.11 Saving the data
+![Bye](Bye.png?raw=true)
+
+### 4.11 Saving the data
 Task data is automatically saved into the hard disk after any command that changes the data. There is no 
 need to save manually. 
 
-## 4.0 FAQ
-**Q:** How do I transfer my data to another Computer?
+## 5. FAQ
+***
+**Q:** How do I transfer my data to another Computer?<br>
 **A:** Follow the Quickstart steps and download the duke.jar into the other computer. Go to your former 
-computer and go to your source folder`out > artifacts> mainjar > data`. Open the `tasks.txt` 
+computer and go to `source folder > out > artifacts > mainjar > data`. Open the `tasks.txt` 
 file. Copy and paste its contents onto the same file in the other computer.
 
-**Q** Will there be updates in the future?
-**A** Sadly, I do not plan to have any big updates in the future. I'm trapped in homework hell.
+**Q:** Will there be updates in the future?<br>
+**A:** Sadly, I do not plan to have any big updates in the future. I'm trapped in homework hell.
 
-**Q** What is the secret to acing CS2103T? 
-**A** ...I would like to know that too.
-
-## 5.0 Command Summary
-
-| Summary | Command | Example |
-|---------| ------- |---------|
-|**Help:**|`help`|-|
-|**List:**|`list`|-|
-|**Todo:**|`todo TASK`|`todo finish my homework`|
-|**Deadline:**|`deadline TASK /by DATE [TIME]`|`deadline Finish my homework /by 2021-09-16`
-|**Event:**|`event TASK /at DATE [TIME]`|`event Christmas party at my neighbour's /at 2021-12-25`
-|**Find:**|`find KEYWORDS [MORE KEYWORDS]`|`find catboys`
-|**Delete:**|`delete NUMBER`|`delete 5` 
-|**Done:**|`done NUMBER`|`done 5`|
-|**Clearall:**|`clearall` followed by `y`|-|
-|**Exit:**|`bye`|-|
+**Q:** What is the secret to acing CS2103T?<br>
+**A:** ...I would like to know that too.

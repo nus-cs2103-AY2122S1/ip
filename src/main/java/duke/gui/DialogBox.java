@@ -39,7 +39,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setFont(new Font("Luciana Grande", 15));
+        dialog.setFont(new Font("Lucida Grande", 14));
         dialog.setText(text);
         displayPicture.setImage(img);
         dialog.setPadding(new Insets(0, 0, 0, 10));

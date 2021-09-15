@@ -241,7 +241,7 @@ public class TaskList {
             Task temp = tasks.get(i);
             if (temp.getTaskString().toLowerCase().contains(keyword.toLowerCase())) {
                 isFound = true;
-                strBuilder.append(i).append(". ").append(temp.toString());
+                strBuilder.append(i + 1).append(". ").append(temp.toString());
                 if (i < counter - 1) {
                     strBuilder.append('\n');
                 }
