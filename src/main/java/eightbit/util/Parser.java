@@ -110,14 +110,19 @@ public class Parser {
     }
 
     private static DeadlineCommand parseDeadlineCommand(String command) throws EightBitException {
+        String deadlineErrorMessage = "OOPS!!! Please enter your deadline in this format:\n"
+                + "deadline <description> /by yyyy-mm-dd hh:mm\n"
+                + "Ensure a valid date and time is entered.";
+
         boolean isMissingAllArguments = command.split(" ").length == 1; // missing description and deadline
+        if (isMissingAllArguments) {
+            throw new EightBitException(deadlineErrorMessage);
+        }
+
         // missing either description or date/time
         boolean isMissingDescOrDateTime = command.substring(9).trim().split(" /by ").length < 2;
-
-        if (isMissingAllArguments || isMissingDescOrDateTime) {
-            throw new EightBitException("OOPS!!! Please enter your deadline in this format:\n"
-                    + "deadline <description> /by yyyy-mm-dd hh:mm\n"
-                    + "Ensure a valid date and time is entered.");
+        if (isMissingDescOrDateTime) {
+            throw new EightBitException(deadlineErrorMessage);
         }
 
         String[] descriptionAndBy = command.substring(9).split(" /by ");
@@ -129,21 +134,24 @@ public class Parser {
             Deadline deadline = new Deadline(deadlineDescription, localDateTime);
             return new DeadlineCommand(deadline);
         } catch (DateTimeParseException e) {
-            throw new EightBitException("OOPS!!! Please enter your deadline in this format:\n"
-                    + "deadline <description> /by yyyy-mm-dd hh:mm\n"
-                    + "Ensure a valid date and time is entered.");
+            throw new EightBitException(deadlineErrorMessage);
         }
     }
 
     private static EventCommand parseEventCommand(String command) throws EightBitException {
+        String eventErrorMessage = "OOPS!!! Please enter your event in this format:\n"
+                + "event <description> /at yyyy-mm-dd hh:mm\n"
+                + "Ensure a valid date and time is entered.";
+
         boolean isMissingAllArguments = command.split(" ").length == 1; // missing description and deadline
+        if (isMissingAllArguments) {
+            throw new EightBitException(eventErrorMessage);
+        }
+
         // missing either description or date/time
         boolean isMissingDescOrDateTime = command.substring(6).trim().split(" /at ").length < 2;
-
-        if (isMissingAllArguments || isMissingDescOrDateTime) {
-            throw new EightBitException("OOPS!!! Please enter your event in this format:\n"
-                    + "event <description> /at yyyy-mm-dd hh:mm\n"
-                    + "Ensure a valid date and time is entered.");
+        if (isMissingDescOrDateTime) {
+            throw new EightBitException(eventErrorMessage);
         }
 
         String[] descriptionAndAt = command.substring(6).split(" /at ");
@@ -155,9 +163,7 @@ public class Parser {
             Event event = new Event(eventDescription, localDateTime);
             return new EventCommand(event);
         } catch (DateTimeParseException e) {
-            throw new EightBitException("OOPS!!! Please enter your event in this format:\n"
-                    + "event <description> /at yyyy-mm-dd hh:mm\n"
-                    + "Ensure a valid date and time is entered.");
+            throw new EightBitException(eventErrorMessage);
         }
     }
 
