@@ -23,6 +23,7 @@ Duke adds and schedules your tasks for you!
 1. Install Duke.jar from [here](https://github.com/michael-lee-sk/ip/releases/tag/v0.2).
 2. Move the file to any folder to be used as the home folder for Duke.
 3. Double click to run the application.
+4. (Additional) Add a folder named "data", and inside that folder add a tasks.txt file to store tasks.
 
 ## Features description
 
