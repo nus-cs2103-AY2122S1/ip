@@ -7,7 +7,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
+
 
 
 /**
@@ -24,6 +26,8 @@ public class Parser {
 
         if (input.equalsIgnoreCase("BYE")) {
             return new ExitCommand();
+        } else if (input.equalsIgnoreCase("HELP")) {
+            return new HelpCommand();
         } else if (input.equalsIgnoreCase("LIST")) {
             return new ListCommand();
         } else if (input.toUpperCase().startsWith("DONE")) {
@@ -38,7 +42,7 @@ public class Parser {
             return new AddCommand(input);
 
         } else {
-            throw new DukeException("Sorry, I don't understand. :O");
+            throw new DukeException("Could you say that again?");
         }
     }
 }
