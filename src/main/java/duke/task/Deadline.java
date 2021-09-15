@@ -26,7 +26,7 @@ public class Deadline extends Task {
     private DateTime dueDate;
 
     /**
-     * Constructor for the deadline object.
+     * Represents the constructor for the deadline object.
      *
      * @param text The description of the deadline.
      * @param dueDate The date where it is due, to be converted to a DateTime object.
@@ -42,7 +42,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Factory method for creating a deadline object.
+     * Acts as the factory method for creating a deadline object.
      *
      * @param input The remaining input after the initial 'deadline' string.
      * @param isDone Whether the Deadline is finished.
@@ -64,7 +64,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Factory method for creating a deadline object from taskList.txt.
+     * Acts as the factory method for creating a deadline object from taskList.txt.
      *
      * @param input The remaining string after the 'D |' string.
      * @return A Deadline object.
@@ -82,7 +82,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * The format of the Deadline in taskList.txt.
+     * Gets the format of the Deadline in taskList.txt.
      *
      * @return The String format of the Deadline in taskList.txt.
      */
@@ -92,7 +92,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * The format of the deadline in console.
+     * Gets the format of the deadline in console.
      *
      * @return The String format of the deadline in console.
      */

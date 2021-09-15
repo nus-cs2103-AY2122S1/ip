@@ -23,7 +23,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructor for DialogBox.
+     * Acts as the constructor for DialogBox.
      *
      * @param fxmlResourceDir The location of the FXML file.
      * @param img The Image file to display.

@@ -15,7 +15,7 @@ public class DateTime {
     private LocalDateTime dateTime;
 
     /**
-     * Constructor for DateTime object.
+     * Acts as the constructor for DateTime object.
      *
      * @param input the String with a date and time.
      */

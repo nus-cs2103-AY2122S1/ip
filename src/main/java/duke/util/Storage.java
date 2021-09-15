@@ -19,7 +19,6 @@ public class Storage {
     private static final String INVALID_TASKLIST_MESSAGE = "Error reading taskLst. TaskList is probably invalid.";
 
     private File taskFile;
-    private boolean didTaskFileExist = false;
 
     /**
      * Constructor for Storage.
@@ -28,21 +27,10 @@ public class Storage {
         taskFile = new File(String.valueOf(filePath));
         createOuterDirectory(taskFile);
         try {
-            if (!taskFile.createNewFile()) {
-                this.didTaskFileExist = true;
-            }
+            taskFile.createNewFile();
         } catch (IOException err) {
             System.out.println(CREATE_FILE_ERROR);
         }
-    }
-
-    /**
-     * Returns whether the task file exists or not.
-     *
-     * @return Whether the task file exists or not.
-     */
-    public boolean didTaskFileExist() {
-        return this.didTaskFileExist;
     }
 
     /**

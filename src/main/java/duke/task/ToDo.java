@@ -14,7 +14,7 @@ public class ToDo extends Task {
     private static final String INVALID_SAVE_MESSAGE = "Todo save is given in the wrong format";
 
     /**
-     * Constructor for the todo object.
+     * Acts as the constructor for the todo object.
      *
      * @param text The description of the todo
      * @param isDone Whether the todo is finished
@@ -24,7 +24,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Factory method for creating a todo object.
+     * Acts as the factory method for creating a todo object.
      *
      * @param input The remaining input after the initial 'todo' string
      * @return A Todo object
@@ -40,7 +40,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Factory method for creating a todo object from taskList.txt.
+     * Acts as the factory method for creating a todo object from taskList.txt.
      *
      * @param input The remaining string after the 'T |' string.
      * @return A Todo object
@@ -57,7 +57,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * The format of the Todo in taskList.txt
+     * Gets the format of the Todo in taskList.txt
+     *
      * @return The String format of the Todo in taskList.txt
      */
     public String getSaveFormat() {
@@ -65,7 +66,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * The format of the todo in console.
+     * Gets the format of the todo in console.
+     *
      * @return The String format of the todo in console.
      */
     @Override

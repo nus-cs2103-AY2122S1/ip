@@ -25,7 +25,7 @@ public class Event extends Task {
     private DateTime eventDatetime;
 
     /**
-     * Constructor for the event object.
+     * Represents the constructor for the event object.
      *
      * @param text The description of the event.
      * @param eventDatetime The date where it is due, to be converted to a DateTime object.
@@ -41,7 +41,7 @@ public class Event extends Task {
     }
 
     /**
-     * Factory method for creating an event object.
+     * Acts as the factory method for creating an event object.
      *
      * @param input The remaining input after the initial 'event' string.
      * @param isDone Whether the Event is finished.
@@ -63,7 +63,7 @@ public class Event extends Task {
     }
 
     /**
-     * Factory method for creating an event object from taskList.txt.
+     * Acts as the factory method for creating an event object from taskList.txt.
      *
      * @param input The remaining string after the 'E |' string.
      * @return A Event object.
@@ -81,7 +81,7 @@ public class Event extends Task {
     }
 
     /**
-     * The format of the Event in taskList.txt.
+     * Gets the format of the Event in taskList.txt.
      *
      * @return The String format of the Event in taskList.txt.
      */
@@ -91,7 +91,7 @@ public class Event extends Task {
     }
 
     /**
-     * The format of the event in console.
+     * Gets the format of the event in console.
      *
      * @return The String format of the event in console.
      */

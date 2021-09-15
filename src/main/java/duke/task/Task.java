@@ -9,7 +9,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor for the Task object.
+     * Represents the constructor for the Task object.
      *
      * @param text Description of the Task.
      * @param isDone Whether the Task is done.
@@ -54,14 +54,14 @@ public abstract class Task {
     }
 
     /**
-     * The save format of the Task used for taskList.txt.
+     * Gets the save format of the Task used for taskList.txt.
      *
      * @return The String representation of the Task used for taskList.txt.
      */
     abstract String getSaveFormat();
 
     /**
-     * The String representation of the Task used in the console.
+     * Gets the String representation of the Task used in the console.
      *
      * @return The String representation of the Task.
      */

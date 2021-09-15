@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke(Paths.get(OUTER_DIR, FILE));
 
+    /**
+     * Starts the GUI.
+     *
+     * @param stage The stage object to start the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

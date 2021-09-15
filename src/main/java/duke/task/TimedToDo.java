@@ -31,7 +31,7 @@ public class TimedToDo extends Task {
     }
 
     /**
-     * Factory method for creating a timed todo object.
+     * Acts as the factory method for creating a timed todo object.
      *
      * @param input The remaining input after the initial 'todo' string.
      * @param isDone Whether the Timed Todo is finished.
@@ -53,7 +53,7 @@ public class TimedToDo extends Task {
     }
 
     /**
-     * Factory method for creating a timed todo object from taskList.txt.
+     * Acts as the factory method for creating a timed todo object from taskList.txt.
      *
      * @param input The remaining string after the 'F |' string.
      * @return A Timed Todo object.
@@ -71,7 +71,7 @@ public class TimedToDo extends Task {
     }
 
     /**
-     * The format of the Timed Todo in taskList.txt
+     * Gets the format of the Timed Todo in taskList.txt
      * @return The String format of the Timed Todo in taskList.txt
      */
     public String getSaveFormat() {
@@ -80,7 +80,7 @@ public class TimedToDo extends Task {
     }
 
     /**
-     * The format of the Timed Todo in console.
+     * Gets the format of the Timed Todo in console.
      * @return The String format of the Timed Todo in console.
      */
     @Override

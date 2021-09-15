@@ -12,7 +12,7 @@ public class UserDialogBox extends DialogBox {
     private Label userDialog;
 
     /**
-     * Constructor for the Dialog Box belonging to the User.
+     * Represents the constructor for the Dialog Box belonging to the User.
      *
      * @param text The text of the dialog box.
      * @param img The Profile picture of the user saying dialog box.

@@ -31,7 +31,7 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Constructor for Ui class.
+     * Acts as the constructor for Ui class.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -62,7 +62,7 @@ public class Ui {
     }
 
     /**
-     * Closes the scanner
+     * Closes the scanner.
      */
     public void closeScanner() {
         sc.close();

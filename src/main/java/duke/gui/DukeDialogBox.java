@@ -15,7 +15,7 @@ public class DukeDialogBox extends DialogBox {
     private Label dukeDialog;
 
     /**
-     * Constructor for the Dialog Box belonging to Duke.
+     * Acts as the constructor for the Dialog Box belonging to Duke.
      *
      * @param text The text of the dialog box.
      * @param img The Profile picture of the user saying dialog box.

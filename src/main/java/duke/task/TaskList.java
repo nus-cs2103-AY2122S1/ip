@@ -22,7 +22,7 @@ public class TaskList {
     private List<Task> taskArr;
 
     /**
-     * Constructor for TaskList to create a taskList from taskList.txt
+     * Represents the constructor for TaskList which creates a taskList from taskList.txt
      */
     public TaskList(String taskList) throws DukeException {
         this.taskArr = new ArrayList<>();
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for TaskList to create an empty taskList
+     * Represents the constructor for TaskList to create an empty taskList
      */
     public TaskList() {
         this.taskArr = new ArrayList<>();
@@ -46,7 +46,7 @@ public class TaskList {
 
 
     /**
-     * The size of the array storing the Tasks.
+     * Gets the size of the array storing the Tasks.
      *
      * @return The size of the array storing the Tasks.
      */
@@ -56,6 +56,7 @@ public class TaskList {
 
     /**
      * Adds a task to the TaskList
+     *
      * @param task The task to be added
      * @return Message when task is added
      */
