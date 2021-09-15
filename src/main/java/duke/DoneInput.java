@@ -6,6 +6,13 @@ public class DoneInput extends InputHandler {
         super(ui, taskList);
     }
 
+    /**
+     * Handles the case where the user wants to add a deadline task.
+     *
+     * @param input
+     * @return
+     * @throws EmptyDescriptionException
+     */
     @Override
     public String handle (String input) throws EmptyDescriptionException {
         if (input.length() == 4) {

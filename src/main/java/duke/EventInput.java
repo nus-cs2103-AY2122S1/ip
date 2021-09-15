@@ -9,6 +9,13 @@ public class EventInput extends InputHandler {
         super(ui, taskList);
     }
 
+    /**
+     * Handles the case where a user wants to add an event task.
+     *
+     * @param input
+     * @return
+     * @throws EmptyDescriptionException
+     */
     public String handle(String input) throws EmptyDescriptionException {
         if (input.length() == 5) {
             throw new EmptyDescriptionException("error" );
@@ -22,6 +29,6 @@ public class EventInput extends InputHandler {
         Task eventTask = new Event(task, at);
         taskList.add(eventTask);
 
-        return ui.addedTask(eventTask);
+        return ui.addTask(eventTask);
     }
 }

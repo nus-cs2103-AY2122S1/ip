@@ -8,6 +8,13 @@ public class DeadlineInput extends InputHandler {
         super(ui, taskList);
     }
 
+    /**
+     * Handles the case where the user wants to add a deadline task.
+     *
+     * @param input
+     * @return
+     * @throws EmptyDescriptionException
+     */
     @Override
     public String handle(String input) throws EmptyDescriptionException {
         if (input.length() == 8) {
@@ -19,6 +26,6 @@ public class DeadlineInput extends InputHandler {
         String task = input.substring(9, charIndex - 1);
         Task deadlineTask = new Deadline(task, by);
         taskList.add(deadlineTask);
-        return ui.addedTask(deadlineTask);
+        return ui.addTask(deadlineTask);
     }
 }

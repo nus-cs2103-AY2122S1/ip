@@ -9,6 +9,13 @@ public abstract class InputHandler {
         this.ui = ui;
     }
 
+    /**
+     * Abstract method to handle various user inputs.
+     *
+     * @param input
+     * @return
+     * @throws EmptyDescriptionException
+     */
     public abstract String handle(String input) throws EmptyDescriptionException;
 
 }

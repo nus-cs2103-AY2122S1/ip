@@ -39,16 +39,28 @@ public class Ui {
         }
     }
 
-    public String addedTask(Task task) {
+    public String addTask(Task task) {
         return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.",
                 task.toString(), TaskList.getTodoList().size());
     }
 
+    /**
+     * Returns a message to the user indicating the task has been marked as done.
+     *
+     * @param task
+     * @return
+     */
     public String doneTask (Task task) {
         return String.format("Nice! I've marked this task as done:\n %s", task.toString());
     }
 
-    public String deletedTask(Task task) {
+    /**
+     * Returns a message to the user indicating the task has been deleted.
+     *
+     * @param task
+     * @return
+     */
+    public String deleteTask(Task task) {
         return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.",
                 task.toString(), TaskList.getTodoList().size());
     }

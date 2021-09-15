@@ -6,6 +6,13 @@ public class DeleteInput extends InputHandler {
         super(ui, taskList);
     }
 
+    /**
+     * Handles the case where the user wants to delete a task.
+     *
+     * @param input
+     * @return
+     * @throws EmptyDescriptionException
+     */
     @Override
     public String handle(String input) throws EmptyDescriptionException {
         if (input.length() == 6) {
@@ -18,6 +25,6 @@ public class DeleteInput extends InputHandler {
         Task taskAtIndex = taskList.getTask(index);
 
         taskList.removeTask(index);
-        return ui.deletedTask(taskAtIndex);
+        return ui.deleteTask(taskAtIndex);
     }
 }
