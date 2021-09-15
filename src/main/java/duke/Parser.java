@@ -1,13 +1,23 @@
 package duke;
 
-import duke.command.*;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DatesCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 
 /**
@@ -148,7 +158,7 @@ public class Parser {
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `help` command has no arguments");
-            };
+            }
             return new HelpCommand();
 
         case DATES:
@@ -172,6 +182,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a task from a line of the saved file.
+     * @param line The line from the saved file.
+     * @return A Task
+     * @throws DukeException Thrown when task is invalid.
+     */
     public static Task parseSavedFile(String line) throws DukeException {
         // Split by '|' character
         String[] datas = line.split(" \\| ");

@@ -54,9 +54,9 @@ public class TaskList {
         assert tasks != null : "[duke.TaskList.addItem]: tasks parameter should not be null.";
 
         tasks.add(task);
-        String res = "Got it. I've added this task: \n" +
-                "  " + task.toString() + "\n" +
-                "Now you have " + tasks.size() + " tasks in the tasks";
+        String res = "Got it. I've added this task: \n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the tasks";
 
         storage.addToFile(task.savedToString());
         return res;
@@ -85,9 +85,9 @@ public class TaskList {
     public String removeItem(int index) throws DukeException {
         Task task = getTask(index);
         tasks.remove(index);
-        String res = "Got it. I've removed this task: \n" +
-                "  " + task.toString() + "\n" +
-                "Now you have " + tasks.size() + " tasks in the list";
+        String res = "Got it. I've removed this task: \n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list";
 
         storage.removeFromFile(index);
         return res;

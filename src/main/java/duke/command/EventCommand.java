@@ -32,7 +32,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        Event event   = new Event(description, date);
+        Event event = new Event(description, date);
         return taskList.addItem(event);
     }
 }
