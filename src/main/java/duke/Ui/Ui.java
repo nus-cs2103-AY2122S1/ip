@@ -20,8 +20,10 @@ public class Ui {
      * @return String Welcome message
      */
     public String showWelcome(){
-        return "Hello! I'm Duke \n" +
-                "What can I do for you?";
+        return "Hello! I'm Duke-Mark \n" +
+                "What can I do for you?\n" +
+                "Load your records successfully\n" +
+                "Please use <list> to check";
     }
 
     /**
@@ -43,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Gets input command for CLI using
+     * Gets input command for CLI
      * @return String
      */
     public String getCommand() {
