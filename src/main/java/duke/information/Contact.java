@@ -37,7 +37,12 @@ public class Contact {
      *
      * @return String of the contact information.
      */
+    @Override
     public String toString() {
-        return "[C] " + this.name + " (detail: " + this.detail + " )";
+        if (this.detail.isBlank()) {
+            return "[C] " + this.name;
+        } else {
+            return "[C] " + this.name + " (detail: " + this.detail + " )";
+        }
     }
 }
