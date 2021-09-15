@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+    private static final String DATE_FORMAT = "dd MMM yyyy";
+    private static final String DATE_TIME_FORMAT = "dd MMM yyyy HH:mm";
+
     public enum Command { BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND }
     private boolean toTerminate = false;
 
@@ -135,7 +138,7 @@ public class Parser {
         int delimiter = input.indexOf(" /by ");
         String task = input.substring(9, delimiter);
         String date = input.substring(delimiter + 5);
-        LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
         Deadline newDeadline = new Deadline(task, parsedDate);
         tasks.addTask(newDeadline);
         assert tasks.getList().contains(newDeadline) : "New Deadline should be added";
@@ -160,7 +163,7 @@ public class Parser {
         int delimiter = input.indexOf(" /at ");
         String task = input.substring(6, delimiter);
         String time = input.substring(delimiter + 5);
-        LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
         Event newEvent = new Event(task, parsedTime);
         tasks.addTask(newEvent);
         assert tasks.getList().contains(newEvent) : "New Event should be added";

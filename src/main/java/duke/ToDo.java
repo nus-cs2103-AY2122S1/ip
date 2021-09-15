@@ -3,14 +3,15 @@ package duke;
 /**
  * Represents a ToDo task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
+    private static final String TASK_TYPE = "T";
 
     /**
      * Class constructor specifying the task description.
      * @param task Task description.
      */
     public ToDo(String task) {
-        super(task, "T");
+        super(task, TASK_TYPE);
     }
 
     /**
@@ -19,7 +20,7 @@ public class ToDo extends Task{
      * @param completed Whether the task has been completed.
      */
     public ToDo(String task, boolean completed) {
-        super(task, completed,"T");
+        super(task, completed, TASK_TYPE);
     }
 
     @Override

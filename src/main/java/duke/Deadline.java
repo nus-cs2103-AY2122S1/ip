@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline Task.
  */
 public class Deadline extends Task {
+    private static final String DATE_FORMAT = "dd MMM yyyy";
+    private static final String TASK_TYPE = "D";
     private LocalDate date;
 
     /**
@@ -15,7 +17,7 @@ public class Deadline extends Task {
      * @param date Deadline by which the task needs to be done.
      */
     public Deadline(String task, LocalDate date) {
-        super(task, "D");
+        super(task, TASK_TYPE);
         this.date = date;
     }
 
@@ -26,7 +28,7 @@ public class Deadline extends Task {
      * @param date Deadline by which the task needs to be done.
      */
     public Deadline(String task, boolean completed, LocalDate date) {
-        super(task, completed, "D");
+        super(task, completed, TASK_TYPE);
         this.date = date;
     }
 
@@ -35,7 +37,7 @@ public class Deadline extends Task {
      * @return Deadline of task.
      */
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return this.date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     @Override

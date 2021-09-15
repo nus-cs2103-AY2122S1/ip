@@ -6,7 +6,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an Event task.
  */
-public class Event extends Task{
+public class Event extends Task {
+    private static final String DATE_TIME_FORMAT = "dd MMM yyyy HH:mm";
+    private static final String TASK_TYPE = "E";
     private LocalDateTime time;
 
     /**
@@ -15,7 +17,7 @@ public class Event extends Task{
      * @param time Date and time of event.
      */
     public Event(String task, LocalDateTime time) {
-        super(task, "E");
+        super(task, TASK_TYPE);
         this.time = time;
     }
 
@@ -26,7 +28,7 @@ public class Event extends Task{
      * @param time Date and time of event.
      */
     public Event(String task, boolean completed, LocalDateTime time) {
-        super(task, completed, "E");
+        super(task, completed, TASK_TYPE);
         this.time = time;
     }
 
@@ -35,7 +37,7 @@ public class Event extends Task{
      * @return Date and time of Event.
      */
     public String getTime() {
-        return this.time.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+        return this.time.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 
     @Override
