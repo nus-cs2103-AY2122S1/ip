@@ -4,18 +4,22 @@ Welcome User! Retriever the Chatbot is a Friendly, Dog themed Chatbot. It
 helps you to manage your busy schedule with its chat style user interface.
 
 ![](welcomeSplashScreen.png)
-Welcome Splash Screen
+* Welcome Splash Screen
 
 ![](chatBotWindow.png)
-Chatbot Window
+* Chatbot Window
 
 ---
 ## Table of Contents
-* Getting Started
-* Quick Access Links
-* Features
-* Usage
-* Command Summary
+* [Getting Started](#getting-started)
+* [Quick Access Links](#quick-access-links)
+* [Features](#features)
+* [Usage](#usage)
+* [Command Summary](#command-summary)
+
+---
+## Getting Started
+
 
 ---
 ## Quick Access Links
@@ -361,3 +365,17 @@ Master, You are Busy For The Day...
 2. [E][ ] Tesla Cyber Truck Launch (at: Sep 23 2021)
 ```
 
+---
+## Command Summary
+Command | Summary | `Syntax`
+--------|---------|-------
+bye | To end the session with the Chatbot | `bye`
+help | To display the help section | `help`
+deadline | To add a deadline type task | `deadline TASK_DESCRIPTION /by DD/MM/YYYY`
+event | To add an event type task | `event TASK_DESCRIPTION /at DD/MM/YYYY`
+todo | To add a todo type task | `todo TASK_DESCRIPTION`
+done | To mark a task as done | `done TASK_NUMBER`
+delete | To delete a task from the list | `delete TASK_NUMBER`
+find | To find and show tasks with matching keywords | `find KEYWORD`
+list | To show all the tasks present in the task list  | `list`
+view | To show the tasks scheduled for the date entered | `view DD/MM/YYYY`
