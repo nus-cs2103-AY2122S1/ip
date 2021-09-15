@@ -16,16 +16,19 @@ public class Ui {
 
     // Error messages by Jarvis for deadline task related errors
     public static final String EMPTY_DEADLINE_DESCRIPTION = "Oops! The description of a deadline cannot be empty.";
-    public static final String INCOMPLETE_DEADLINE = "I think you forgot to key in your deadline! Please key it" +
-            " in as dd/mm/yyyy hh:mm (in 24 hours format)";
+    public static final String INCOMPLETE_DEADLINE = "Please key in the date and timing as dd/mm/yyyy hh:mm " +
+            "(in 24 hours format)";
     public static final String WRONGLY_FORMATTED_DEADLINE_TIME = "Please include the time in the 24 hour format " +
             "(e.g. 15:00)";
 
     // Error messages by Jarvis for event task related errors
     public static final String EMPTY_EVENT_DESCRIPTION = "Oops! The description of an event cannot be empty.";
-    public static final String INCOMPLETE_EVENT_TIMINGS = "I think you forgot to key in your event timings!";
+    public static final String INCOMPLETE_EVENT_INFO = "Please format the date as dd/mm/yyy and the start and end " +
+            "times in the 24 hour format (e.g. 15:00-16:00)";
     public static final String WRONGLY_FORMATTED_EVENT_TIMINGS = "Please include the start and end times in the 24 " +
             "hour format (e.g. 15:00-16:00)";
+    public static final String START_IS_AFTER_END = "Please ensure that the start time of your event is before its end " +
+            "time!";
 
     // Error messages by Jarvis for other errors
     public static final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
@@ -33,6 +36,7 @@ public class Ui {
     public static String EMPTY_TASK_DELETE = "Please state the number of the task that you wish to delete! Please key " +
             "in 'list' if you'd like to view your list of tasks again!";
     public static String INVALID_INDEX = "";
+    public static final String INVALID_DATE_OT_TIMING = "Invalid date or timing!";
 
     // Error messages by Jarvis for notes related errors
     public static final String WRONGLY_FORMATTED_NOTE = "Oops, the note is formatted incorrectly! Please write it as " +
@@ -135,7 +139,7 @@ public class Ui {
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {
             //If the task is a todo, include it in today's list of tasks
             if (TaskList.getTaskList().get(i) instanceof Todo) {
-                result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
+                result += num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                 num++;
             } else {
                 // Retrieve the current year, month and date
@@ -157,7 +161,7 @@ public class Ui {
                             (((Deadline) TaskList.getTaskList().get(i)).getDeadline()).isBefore(end);
 
                     if (isDeadlineAfterDayStarts && isDeadlineBeforeDayEnds) {
-                        result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
+                        result += num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                         num++;
                     }
 
@@ -172,7 +176,7 @@ public class Ui {
                             (((Event) TaskList.getTaskList().get(i)).getEventEnd()).isBefore(end);
 
                     if (isEventAfterDayStarts && isEventBeforeDayEnds) {
-                        result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
+                        result += num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                         num++;
                     }
                 }
@@ -181,7 +185,7 @@ public class Ui {
 
         // If there are no tasks for today
         if (num == 1) {
-            result += "\tLooks like there is nothing due today!\n";
+            result += "Looks like there is nothing due today!\n";
         }
         return result;
     }
