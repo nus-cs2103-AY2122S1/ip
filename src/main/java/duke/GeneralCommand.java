@@ -15,5 +15,5 @@ public interface GeneralCommand {
      * @throws UndoException If Undo command is incomplete.
      * @throws CloneNotSupportedException If Cloning fails.
      */
-    String execute() throws IOException, DeleteException, UndoException, CloneNotSupportedException;
+    String execute() throws IOException, DeleteException, UndoException, CloneNotSupportedException, DukeException;
 }

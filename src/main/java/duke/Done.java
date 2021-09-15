@@ -40,7 +40,7 @@ public class Done implements GeneralCommand {
      * @throws IOException If an input or output operation is failed or interpreted.
      */
     @Override
-    public String execute() throws IOException {
+    public String execute() throws IOException, DukeException {
         Task toggledStatusTask = currentTask.getToggledDone();
         tasks.set(index, toggledStatusTask);
         storage.save(tasks);

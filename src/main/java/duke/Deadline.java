@@ -31,6 +31,7 @@ public class Deadline extends Task implements GeneralCommand {
         super(description);
         this.isDone = false;
         this.dateAndTime = dateAndTime;
+        formatLocalDateTimeDefault();
     }
 
     /**
@@ -76,6 +77,19 @@ public class Deadline extends Task implements GeneralCommand {
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Please input the correct date in this format '2021-08-27 19:15'");
+        }
+    }
+
+    /**
+     * Formats the date and time in order to be
+     * parsed into the DateTimeFormatter by constructor.
+     */
+    public void formatLocalDateTimeDefault() {
+        if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            this.localDateTime = LocalDateTime.parse(dateAndTime, dateTimeFormatter);
+        } else {
+            this.localDateTime = LocalDateTime.parse(dateAndTime, dtf);
         }
     }
 

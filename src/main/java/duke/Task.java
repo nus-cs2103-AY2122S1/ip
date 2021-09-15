@@ -61,7 +61,7 @@ public abstract class Task {
         return this.getStatusIcon() + " " + this.getDescription();
     }
 
-    public abstract Task getToggledDone();
+    public abstract Task getToggledDone() throws DukeException;
 
     /**
      * Checks to see if two tasks are equal in description and status.

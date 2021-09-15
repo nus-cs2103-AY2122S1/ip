@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Button;
@@ -57,7 +58,7 @@ public class Ui implements Cloneable {
         String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            message += ((i + 1) + "." + currentTask.toString() + "\n");
+            message += "    " + ((i + 1) + "." + currentTask.toString() + "\n");
         }
         message += "You have a total of " + tasks.size() + " tasks";
         return message;
@@ -74,7 +75,7 @@ public class Ui implements Cloneable {
         String message = String.format("Here are the %s tasks in your list:\n", description);
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            message += (i + 1) + "." + currentTask.toString() + "\n";
+            message += "    " + (i + 1) + "." + currentTask.toString() + "\n";
         }
         message += String.format("You have a total of " + tasks.size() + " %s tasks.\n", description);
         return message;
@@ -117,15 +118,6 @@ public class Ui implements Cloneable {
      */
     public String unknownMessageToString() {
         return "Sorry, unknown command!";
-    }
-
-    /**
-     * Returns a String when there is a loading error.
-     *
-     * @return Loading error String.
-     */
-    public String loadingErrorMessageToString() {
-        return "Your file seems to have issues loading.";
     }
 
     /**
