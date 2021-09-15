@@ -52,7 +52,7 @@ public class Storage {
      * @throws FileNotFoundException if the file ('jarvis.txt') containing the list of tasks
      * cannot be found
      */
-    public void retrieveTaskFileContents() throws FileNotFoundException {
+    public void retrieveTaskFileContents() throws FileNotFoundException, JarvisException {
         File f = new File(this.filePath); // Create a File for the given file path
         Scanner s = new Scanner(f); // Create a Scanner using the File as the source
 
@@ -97,7 +97,7 @@ public class Storage {
      *
      * @param deadlineString the string from the user's task file that represents the deadline task
      */
-    public void retrieveDeadline(String deadlineString) {
+    public void retrieveDeadline(String deadlineString) throws JarvisException {
         int currIndex = 7;
 
         // Find 'by: ' which separated the task description and the deadline
@@ -121,7 +121,7 @@ public class Storage {
      *
      * @param eventString the string from the user's task file that represents the event task
      */
-    public void retrieveEvent(String eventString) {
+    public void retrieveEvent(String eventString) throws JarvisException {
         int currIndex = 7;
 
         // Find 'at: ' which separates the task description and timings
