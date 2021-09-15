@@ -21,6 +21,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes Ui, storage and load TaskLists from specific filePath for Duke.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -31,7 +34,9 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    /**
+     * Run the programme of Duke.
+     */
     public void run() {
         String input = "";
         ui.Greet();

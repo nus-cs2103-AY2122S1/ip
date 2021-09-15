@@ -17,11 +17,17 @@ public class Storage {
     private String filePath;
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for Storage class. Initialize Storage instance using given filePath.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.tasks= new ArrayList<>();
     }
 
+    /**
+     * Load task info from local data.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
@@ -36,6 +42,9 @@ public class Storage {
         return this.tasks;
     }
 
+    /**
+     * Parse the local data.
+     */
     public void ProcessFileData(String Data) {
         char taskType = Data.charAt(0);
         char status = Data.charAt(4);
@@ -62,6 +71,9 @@ public class Storage {
         tasks.add(task);
     }
 
+    /**
+     * Save the change in the hard disk.
+     */
     public void updateData() {
         try {
             FileWriter fw = new FileWriter(filePath);

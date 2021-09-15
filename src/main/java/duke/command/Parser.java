@@ -11,6 +11,9 @@ import duke.exception.DukeException;
 public class Parser {
     private String userInput;
 
+    /**
+     * Constructor of Parser class. Initialize a Parser instance from a given userInput.
+     */
     public Parser(String userInput) {
         this.userInput = userInput;
     }
@@ -30,6 +33,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Return the operation type of user command.
+     */
     public String getOperationType() throws DukeException {
         String operation = userInput.split(" ")[0];
 
@@ -40,6 +46,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the index info in a line of command.
+     */
     public int getIndex() throws DukeException {
         String[] allWords = userInput.split(" ");
         if (allWords.length == 2) {
@@ -54,6 +63,9 @@ public class Parser {
         }
     }
 
+    /**
+    * Returns the task info in a line of command.
+    */
     public String getTask() throws DukeException {
         String taskDescription;
 
@@ -78,6 +90,9 @@ public class Parser {
         return taskDescription;
     }
 
+    /**
+     * Returns the time info in a line of command in LocalDate type.
+     */
     public LocalDate getTime() throws DukeException {
         String time;
         if (this.getOperationType().equals("deadline")) {
@@ -106,7 +121,9 @@ public class Parser {
             throw new DukeException("Sorry Date format is wrong");
         }
     }
-
+    /**
+    * Returns the task info in local data.
+     */
     public String getFileTask() {
         String task;
         char taskType = userInput.charAt(0);
@@ -117,7 +134,9 @@ public class Parser {
         }
         return task;
     }
-
+    /**
+     * Returns the time info in local data.
+     */
     public LocalDate getFileTime() {
         String time;
         LocalDate parsedTime;
