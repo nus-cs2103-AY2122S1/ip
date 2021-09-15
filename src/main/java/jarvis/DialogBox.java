@@ -47,10 +47,8 @@ public class DialogBox extends HBox {
 
         boolean isAnErrorMessage =
                 dialog.getText().equals(Ui.EMPTY_TODO_DESCRIPTION) ||
-                dialog.getText().equals(Ui.EMPTY_DEADLINE_DESCRIPTION) ||
                 dialog.getText().equals(Ui.INCOMPLETE_DEADLINE) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_DEADLINE_TIME) ||
-                dialog.getText().equals(Ui.EMPTY_EVENT_DESCRIPTION) ||
                 dialog.getText().equals(Ui.INCOMPLETE_EVENT_INFO) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS) ||
                 dialog.getText().equals(Ui.UNRECOGNISED_COMMAND) ||
