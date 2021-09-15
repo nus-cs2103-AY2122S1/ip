@@ -35,6 +35,8 @@ public class Ui {
     public static final String WRONGLY_FORMATTED_DATE = "Please format the date as dd/mm/yyy";
     public static String EMPTY_TASK_DELETE = "Please state the number of the task that you wish to delete! Please key " +
             "in 'list' if you'd like to view your list of tasks again!";
+    public static String EMPTY_TASK_DONE = "Please state the number of the task that you have completed! Please key " +
+            "in 'list' if you'd like to view your list of tasks again!";
     public static String INVALID_INDEX = "";
     public static final String INVALID_DATE_OT_TIMING = "Invalid date or timing!";
 
