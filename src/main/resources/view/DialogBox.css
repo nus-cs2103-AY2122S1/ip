@@ -1,0 +1,25 @@
+.DialogBox {
+    -fx-spacing: 10px;
+}
+
+#displayPicture {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#dialog {
+    -fx-font-size: 14px;
+}
+
+#chatBubble {
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-min-width: 70;
+}
+
+.userBubble {
+    -fx-background-color: #3f3f3f;
+}
+
+.dukeBubble {
+    -fx-background-color: #E9E9E9;
+}
