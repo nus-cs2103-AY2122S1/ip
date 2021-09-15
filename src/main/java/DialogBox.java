@@ -11,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 
 /**
  * Represents a window controller for dialog box using FXML.
@@ -24,6 +26,9 @@ public class DialogBox extends HBox {
 
     @FXML
     private ImageView displayPicture;
+
+    @FXML
+    private Polygon triangle;
 
     /**
      * Constructs DialogBox object.
@@ -42,10 +47,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setWrapText(true);
 
         Circle clip = new Circle(50, 50, 48);
+        displayPicture.setImage(img);
         displayPicture.setClip(clip);
+        triangle.setFill(Color.GREY);
     }
 
     /**
@@ -66,7 +73,9 @@ public class DialogBox extends HBox {
      * @return new dialog object.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setUserStyle();
+        return db;
     }
 
     /**
@@ -79,7 +88,28 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.setBotStyle();
         db.flip();
         return db;
+    }
+
+    public void setUserStyle() {
+        triangle.getPoints().setAll(
+                10.0, 45.0,
+                10.0, 55.0,
+                22.0, 49.0
+        );
+        triangle.setTranslateY(10);
+        triangle.setLayoutY(30);
+    }
+
+    public void setBotStyle() {
+        triangle.getPoints().setAll(
+                22.0, 45.0,
+                22.0, 55.0,
+                10.0, 49.0
+        );
+        triangle.setTranslateY(10);
+        triangle.setLayoutY(120);
     }
 }
