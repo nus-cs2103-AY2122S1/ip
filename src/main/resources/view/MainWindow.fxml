@@ -13,7 +13,7 @@
          <font>
             <Font size="20.0" />
          </font></TextField>
-        <Button fx:id="sendButton" alignment="BASELINE_CENTER" layoutX="340.0" layoutY="557.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="40.0" prefWidth="57.0" text="Send" textAlignment="CENTER" style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-text-fill: #202120; -fx-padding: 5 5 5 5; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.1, 2, 2);">
+        <Button fx:id="sendButton" alignment="BASELINE_CENTER" layoutX="340.0" layoutY="560" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="36.0" prefWidth="57.0" text="Send" textAlignment="CENTER" style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-text-fill: #202120; -fx-padding: 5 5 5 5; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.1, 2, 2);">
          <font>
             <Font name="Yu Gothic Regular" size="19.0" />
          </font></Button>
