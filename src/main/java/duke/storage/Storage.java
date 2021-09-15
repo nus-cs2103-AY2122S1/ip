@@ -114,6 +114,7 @@ public class Storage {
             }
 
             // Add in the task priority
+            currLine += " | ";
             currLine += t.getPriority();
             allLines += currLine;
             allLines += System.lineSeparator();
