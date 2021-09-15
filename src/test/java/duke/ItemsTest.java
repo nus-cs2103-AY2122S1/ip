@@ -24,7 +24,7 @@ public class ItemsTest {
         String msg;
         try {
             msg = item.addItem(new Todo("abc"));
-            msg = item.markDone(1);
+            msg = item.markDone(0);
         } catch (DukeException e) {
             msg = "";
         }
