@@ -1,6 +1,5 @@
 package duke.task.command;
 
-import duke.DukeConstants;
 import duke.DukeException;
 import duke.TaskList;
 
@@ -21,7 +20,6 @@ public class DeleteCommand extends Command {
     public DeleteCommand(TaskList taskList, int index) {
         this.taskList = taskList;
         this.index = index;
-        DukeConstants.isUndoable = true;
     }
 
     /**

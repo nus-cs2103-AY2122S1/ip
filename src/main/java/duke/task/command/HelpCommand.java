@@ -1,6 +1,5 @@
 package duke.task.command;
 
-import duke.DukeConstants;
 import duke.Ui;
 
 /**
@@ -15,7 +14,6 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute() {
-        DukeConstants.isUndoable = false;
         return Ui.getHelpMenu();
     }
 }

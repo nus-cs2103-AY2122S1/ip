@@ -1,6 +1,5 @@
 package duke.task.command;
 
-import duke.DukeConstants;
 import duke.DukeException;
 import duke.TaskList;
 
@@ -21,7 +20,6 @@ public class FindCommand extends Command {
     public FindCommand(TaskList taskList, String keyword) {
         this.keyword = keyword;
         this.taskList = taskList;
-        DukeConstants.isUndoable = false;
     }
 
     /**

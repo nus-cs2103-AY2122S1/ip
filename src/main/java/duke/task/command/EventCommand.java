@@ -1,6 +1,5 @@
 package duke.task.command;
 
-import duke.DukeConstants;
 import duke.DukeException;
 import duke.TaskList;
 import duke.task.Event;
@@ -24,7 +23,6 @@ public class EventCommand extends Command {
         this.taskList = taskList;
         this.description = description;
         this.at = at;
-        DukeConstants.isUndoable = true;
     }
 
     /**
