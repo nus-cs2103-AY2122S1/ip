@@ -1,7 +1,7 @@
 # 2Butler User Guide
 
 ## What is 2Butler?
-2Butler is a desktop task management application that can be used to set dates and times for various tasks and events. It features a Command line Interface (CLI) for you to input text commands and provides a fast and efficient way of laying down your todo list. It is themed based on the Nier Automata video game, and sports a unique look that will appease any Nier Automata and 2B fans out there.
+2Butler is a desktop task management application that can be used to set dates and times for various tasks and events. It features a Command line Interface (CLI) for you to input text commands and provides a fast and efficient way of laying down your todo list. It is themed based on the Nier Automata video game, and sports a unique look that will please any Nier Automata and 2B fans out there.
 
 
 <p align="center">
@@ -71,7 +71,7 @@ Expected outcome:
 
 ### Show your lists of tasks: `list`
 - You can show the list of all your tasks with the `list` command.
-- Each task will be assigned a task index in the order that they were added to the task. e.g. `todo Assignment` followed by `todo Homework` results in`1. [T][ ] Assignment` ordered before `2. [T][ ] Homework`
+- Each task will be assigned a task index in the order that they were added to the task. e.g. `todo Assignment` followed by `todo Homework` results in `1. [T][ ] Assignment` ordered before `2. [T][ ] Homework`.
 
 Format:
 
@@ -79,7 +79,7 @@ Format:
 
 Example of usage:
 
-`todo Assignment` followed by `deadline Assignment /by 15/09/2021` and then`list`
+`todo Assignment` followed by `deadline Assignment /by 15/09/2021` and then `list`
 
 
 Expected outcome:
@@ -94,8 +94,7 @@ Expected outcome:
 
 Format:
 
-`delete TASK_INDEX
-`
+`delete TASK_INDEX`
 
 Example of usage:
 
@@ -127,8 +126,8 @@ Expected outcome:
 
 ### Find task by description: `find`
 - You can `find` tasks by their description by inputting a search string. 
-- The search is case-sensitive. e.g. `hans` will not match `Hans`
-- The searched string can be a substring of the target description. e.g. `Hans` will match `dinner at Hans`
+- The search is case-sensitive. e.g. `hans` will not match `Hans`.
+- The searched string can be a substring of the target description. e.g. `Hans` will match `dinner at Hans`.
 
 Format:
 
@@ -147,7 +146,7 @@ Expected outcome:
 
 ### Find task by date: `find/date`
 - You can use `find/date` command to find a deadline or event by date. 
-- You can search for dates in between the start and end times of events. e.g. `find/date 15/09/2021` will match `[E][ ] Staycation (at: 14 September 2021 to 16 September 2021)`
+- You can search for dates in between the start and end times of events. e.g. `find/date 15/09/2021` will match `[E][ ] Staycation (at: 14 September 2021 to 16 September 2021)`.
 - `find/date` only looks at dates and not times hence `find/date 15/09/2021` matches with `[D][ ] Assignment (by: 15 September 2021 13:00)`.
 
 Format:
@@ -156,7 +155,7 @@ Format:
 
 Example of usage:
 
-`deadline Assignment /by 15/09/2021 ` followed by `find/date 15/09/2021`
+`deadline Assignment /by 15/09/2021` followed by `find/date 15/09/2021`
 
 Expected outcome:
 
@@ -185,7 +184,7 @@ and then `sort`.
 
 
 ### Exiting the application: `bye`
-- You can use the `bye` command to exit the app
+- You can use the `bye` command to exit the app.
 
 Format:
 `bye`
