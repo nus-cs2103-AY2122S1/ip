@@ -4,7 +4,7 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
 of a **Graphical User Interface (GUI)**. If you can type fast, 
 Ailurus can get your tasks done faster than traditional GUI apps.
 
-##Table of Content
+## Table of Content
 - [User Guide for Ailurus](#user-guide-for-ailurus)
   - [Quick start](#quick-start)
   - [Features](#features)
@@ -39,11 +39,11 @@ Ailurus can get your tasks done faster than traditional GUI apps.
 1. Type the command in the command box and press Enter to execute it. <br>
    Some example commands you can try:
 
-  * **`todo`**`Grocery Shopping` : Adds a task named `Grocery Shopping` to the task list.
+  * **`todo`** `Grocery Shopping` : Adds a task named `Grocery Shopping` to the task list.
 
   * **`list`** : Lists all tasks.
 
-  * **`delete`**`1` : Deletes the 1st task shown in the current list.
+  * **`delete`** `1` : Deletes the 1st task shown in the current list.
 
   * **`bye`** : Exits the app.
 
