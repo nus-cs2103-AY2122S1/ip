@@ -4,6 +4,7 @@ import static lifeline.util.ErrorString.ERROR_DEADLINE_INCORRECT_FORMAT;
 import static lifeline.util.ErrorString.ERROR_DEADLINE_MISSING_DETAILS;
 import static lifeline.util.ErrorString.ERROR_DELETE_MISSING_INDEX;
 import static lifeline.util.ErrorString.ERROR_DONE_MISSING_INDEX;
+import static lifeline.util.ErrorString.ERROR_ENDTIME_AFTER_STARTTIME;
 import static lifeline.util.ErrorString.ERROR_EVENT_INCORRECT_FORMAT;
 import static lifeline.util.ErrorString.ERROR_EVENT_MISSING_DETAILS;
 import static lifeline.util.ErrorString.ERROR_FIND_MISSING_KEYWORD;
@@ -340,6 +341,11 @@ public class CommandHandler {
             LocalDate date = DateTimeParser.parseDate(eventDate.trim());
             LocalTime startTime = DateTimeParser.parseTime(eventStartTime.trim());
             LocalTime endTime = DateTimeParser.parseTime(eventEndTime.trim());
+
+            if (startTime.isAfter(endTime)) {
+                throw new LifelineException(ERROR_ENDTIME_AFTER_STARTTIME);
+            }
+
             return new Event(descriptions[0].trim(), date, startTime, endTime);
         } catch (DateTimeParseException e) {
             throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);

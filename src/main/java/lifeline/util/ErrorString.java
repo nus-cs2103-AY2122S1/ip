@@ -18,6 +18,7 @@ public class ErrorString {
     public static final String ERROR_NON_INTEGER_INDEX = "Index is not an integer!";
     public static final String ERROR_NO_TASKS_FOUND = "No tasks found with the given keyword";
     public static final String ERROR_TASK_ALREADY_DONE = "Task is already done!";
+    public static final String ERROR_ENDTIME_AFTER_STARTTIME = "The end time is after the start time!";
 
     public static final String ERROR_UNABLE_TO_SAVE_TASK = "Unable to save tasks at the moment";
     public static final String ERROR_UNABLE_TO_FIND_SAVED_TASKS = "Unable to find your saved tasks!";
