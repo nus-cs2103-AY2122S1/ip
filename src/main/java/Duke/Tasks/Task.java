@@ -85,7 +85,8 @@ public class Task {
      * @return String null
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return null;
+        return "Invalid input, please enter again\n" +
+                "E.g. list, deadline, find...";
     };
 
 }
