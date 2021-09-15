@@ -3,6 +3,7 @@ package parser;
 import exceptions.MorganException;
 import tasks.DeadlineTask;
 import tasks.EventTask;
+import tasks.FixedDurationTask;
 import tasks.Task;
 import tasks.ToDoTask;
 
@@ -27,6 +28,12 @@ public class TaskParser {
         assert task != null;
         String status = String.valueOf(task.getStatus());
         String description = task.getDescription();
+
+        if (task instanceof FixedDurationTask) {
+            FixedDurationTask fixed = (FixedDurationTask) task;
+            return FixedDurationTask.KEYWORD + DELIMITER + status + DELIMITER
+                    + description + DELIMITER + fixed.getDuration();
+        }
 
         if (task instanceof EventTask) {
             EventTask event = (EventTask) task;
@@ -68,6 +75,13 @@ public class TaskParser {
 
         Task task;
         switch(taskType) {
+        case (FixedDurationTask.KEYWORD):
+            if (data.length <= DATETIME_INDEX) {
+                throw new MorganException(TAMPERED_ERROR);
+            }
+            String duration = data[DATETIME_INDEX].trim();
+            task = new FixedDurationTask(description, duration);
+            break;
         case (EventTask.KEYWORD):
             if (data.length <= DATETIME_INDEX) {
                 throw new MorganException(TAMPERED_ERROR);
