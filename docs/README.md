@@ -26,7 +26,7 @@ List all tasks currently in the list.
 
 Format: `list`
 
-Tasks will be displayed in this format: `\[type\] \[status\] description (date time)`
+Tasks will be displayed in this format: `[type] [status] description (date time)`
 - Type: T for todo, D for deadline, E for event
 - Status: X for done. Blank for not done
 - Date is in the format: Month Date Year
@@ -116,7 +116,7 @@ Outcome:<br/>
 Input: `find project`<br/>
 Outcome:<br/>
 "Here are the matching tasks in your list: <br/>
-1. \[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
+1.\[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
 
-<br/>
-### Enjoy the app & your life! :wink:
+### Enjoy the app & your life! 
+:wink:
