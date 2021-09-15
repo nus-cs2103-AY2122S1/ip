@@ -1,9 +1,12 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
-import duke.utils.*;
-
 import java.io.IOException;
+
+import duke.exceptions.DukeException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 
 /**
  * Abstract class that represents a Command in the application

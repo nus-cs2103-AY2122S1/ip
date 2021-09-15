@@ -1,8 +1,10 @@
 package duke.commands;
 
-import duke.utils.*;
-
 import java.io.IOException;
+
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 /**
  * Class that is a subclass of Command class
@@ -17,7 +19,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 

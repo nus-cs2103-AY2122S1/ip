@@ -30,9 +30,6 @@ public class DeadlineCommand extends Command {
         }
         DeadlineTask newDeadline = new DeadlineTask(commandString.substring(9).split("/")[0], date);
         taskList.addTask(newDeadline);
-
-//        System.out.println("Got it. I've added this task: ");
-//        System.out.println("  " + newDeadline.toString());
         ui.printResponse("Got it. I've added this task: ");
         ui.printResponse("  " + newDeadline.toString());
 

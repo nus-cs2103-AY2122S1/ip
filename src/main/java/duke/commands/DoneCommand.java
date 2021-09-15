@@ -9,37 +9,37 @@ import duke.utils.Ui;
  * and handles the behaviour of the Command for
  * marking a task as done
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
-    String commandString;
+    private String commandString;
 
-    public DoneCommand(String commandString){
+    public DoneCommand(String commandString) {
         this.commandString = commandString;
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
 
         String[] commandArr = commandString.split(" ");
         try {
             int taskNumberDone = Integer.parseInt(commandArr[1]);
-            if (taskNumberDone > taskList.numberOfTasks()){
+            if (taskNumberDone > taskList.numberOfTasks()) {
                 ui.printResponse("Invalid number");
                 return;
             } else {
-                int taskDoneIndex = taskNumberDone-1;
+                int taskDoneIndex = taskNumberDone - 1;
                 taskList.getTask(taskDoneIndex).makeDone();
                 ui.printResponse("Nice! I've marked this task as done: ");
                 ui.printResponse(taskList.getTask(taskDoneIndex).toString());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             ui.printResponse("Invalid input");
         }
 
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

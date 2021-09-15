@@ -1,8 +1,8 @@
 package duke.utils;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Class that represents a list of tasks
@@ -14,7 +14,7 @@ public class TaskList {
      * Constructor that initializes a TaskList object
      * @param tasks
      */
-    public TaskList(ArrayList<Task> tasks){
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -23,7 +23,7 @@ public class TaskList {
      *
      * @param task
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
@@ -52,7 +52,7 @@ public class TaskList {
     /**
      * Clears the TaskList of all tasks
      */
-    public void clearTaskList(){
+    public void clearTaskList() {
         tasks.clear();
     }
 
@@ -61,7 +61,7 @@ public class TaskList {
     /**
      * @return int number of tasks in the TaskList
      */
-    public int numberOfTasks(){
+    public int numberOfTasks() {
         return tasks.size();
     }
 

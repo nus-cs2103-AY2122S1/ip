@@ -1,5 +1,16 @@
 package duke.utils;
-import duke.commands.*;
+
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ErrorCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
 
 /**
  * Class that parses user input and perfoms the corresponding
@@ -46,12 +57,8 @@ public class Parser {
             case "help":
                 return new HelpCommand();
 
-
+            default:
+                return new ErrorCommand();
         }
-
-        return new ErrorCommand();
-
     }
-
-
 }

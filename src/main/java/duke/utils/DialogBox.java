@@ -1,18 +1,23 @@
 package duke.utils;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 
 
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructor that initializes a dialogbox with a label and an image
+     * @param l text that will be in the box
+     * @param iv image that will be next to the text
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -25,6 +30,10 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
+    /**
+     * Constructor that initializes a dialogbox with a label only
+     * @param l text that will be in the box
+     */
     public DialogBox(Label l) {
         text = l;
 

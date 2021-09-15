@@ -5,9 +5,9 @@ package duke.tasks;
  */
 public class Task {
 
+    protected TaskType type;
     protected String name;
     protected boolean isDone = false;
-    TaskType type;
 
     public enum TaskType {
         TODO, DEADLINE, EVENT
@@ -28,7 +28,7 @@ public class Task {
      *
      * @return boolean whether or not task is done
      */
-    public boolean isDone(){
+    public boolean isDone() {
         return isDone;
     }
 
@@ -37,7 +37,7 @@ public class Task {
      *
      * @return TaskType task's type
      */
-    public TaskType getType(){
+    public TaskType getType() {
         return type;
     }
 
@@ -46,7 +46,7 @@ public class Task {
      *
      * @return String name of task
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -55,14 +55,14 @@ public class Task {
      * changing the Task's boolean variable isDone
      * to true.
      */
-    public void makeDone(){
+    public void makeDone() {
         isDone = true;
     }
 
     @Override
-    public String toString(){
-        String typeString = type == TaskType.TODO ? "T" : type == TaskType.EVENT? "E" : "D";
-        String doneSymbol = isDone? "X" : " ";
+    public String toString() {
+        String typeString = type == TaskType.TODO ? "T" : type == TaskType.EVENT ? "E" : "D";
+        String doneSymbol = isDone ? "X" : " ";
         String result = "[" + typeString + "] " + "[" + doneSymbol + "] " + name;
         return result;
     }

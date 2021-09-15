@@ -1,7 +1,7 @@
 package duke.tasks;
-import duke.utils.DukeDate;
-
 import java.util.Date;
+
+import duke.utils.DukeDate;
 
 /**
  * Class for event tasks that contain a
@@ -9,8 +9,8 @@ import java.util.Date;
  */
 public class EventTask extends Task {
     private String dateLiteral;
-    Date dateFormatted;
-    String dateReadable;
+    private Date dateFormatted;
+    private String dateReadable;
 
     /**
      * Constructor that initializes an EventTask object
@@ -31,14 +31,14 @@ public class EventTask extends Task {
      *
      * @return String date
      */
-    public String getDate(){
+    public String getDate() {
         return dateLiteral;
     }
 
     @Override
-    public String toString(){
-        String typeString = type == TaskType.TODO ? "T" : type == TaskType.EVENT? "E" : "D";
-        String doneSymbol = isDone? "X" : " ";
+    public String toString() {
+        String typeString = type == TaskType.TODO ? "T" : type == TaskType.EVENT ? "E" : "D";
+        String doneSymbol = isDone ? "X" : " ";
         String result = "[" + typeString + "] " + "[" + doneSymbol + "] " + name + "(at: " + dateReadable + ")";
 
         return result;

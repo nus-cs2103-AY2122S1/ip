@@ -9,15 +9,15 @@ import duke.utils.Ui;
  * and handles the behaviour of the Command for
  * when an error is encountered
  */
-public class ErrorCommand extends Command{
+public class ErrorCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printResponse("Invalid input");
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 

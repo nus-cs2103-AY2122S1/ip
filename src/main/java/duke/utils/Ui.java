@@ -1,7 +1,8 @@
 package duke.utils;
 
+import java.util.Scanner;
+
 import duke.commands.Command;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,9 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import javafx.event.EventHandler;
-import java.util.Scanner;
 
 /**
  * Class that handles taking in user input
@@ -84,6 +82,16 @@ public class Ui {
      * Initializes the UI by displaying the stage of the javafx application.
      */
     public void init() {
+        setInitialStage();
+        start();
+        formatStage();
+        setUserInteraction();
+    }
+
+    /**
+     * Sets the initial stage display.
+     */
+    public void setInitialStage() {
         stage.setTitle("Mr Duke's Todo App");
         Color bgColor = Color.AZURE;
 
@@ -92,11 +100,13 @@ public class Ui {
         Scene scene = new Scene(mainLayout, bgColor);
 
         stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage
-        start();
+        stage.show();
+    }
 
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+    /**
+     * Formats the window to look as expected.
+     */
+    public void formatStage() {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -123,15 +133,15 @@ public class Ui {
 
         AnchorPane.setLeftAnchor(textField, 1.0);
         AnchorPane.setBottomAnchor(textField, 1.0);
+    }
 
-        //Part 3. Add functionality to handle user input.
+    /**
+     * Adds functionality to handle user input.
+     */
+    public void setUserInteraction() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
-
-//        textField.setOnAction((event) -> {
-//            handleUserInput();
-//        });
 
         //Scroll down to the end every time dialogContainer's height changes.
         vbox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -139,7 +149,6 @@ public class Ui {
 
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -161,7 +170,6 @@ public class Ui {
         label.setText(stringBuilder.toString());
 
         try {
-            //showLine(); // show the divider line ("_______")
             Command c = parser.parseInput(userInput);
             c.execute(tasklist, Ui.this, storage);
         } catch (Exception ex) {
@@ -170,10 +178,13 @@ public class Ui {
             showLine();
         }
 
-        //showLine();
         return "";
     }
 
+    /**
+     * Prints the message in the UI
+     * @param message message to be shown on Duke
+     */
     public void printResponse(String message) {
         vbox.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(message)));
@@ -184,8 +195,7 @@ public class Ui {
     /**
      * Returns the intro statement when app first launches
      */
-    public void start(){
-
+    public void start() {
         vbox.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(INTRO), new ImageView(duke) ));
         showLine();
@@ -198,11 +208,6 @@ public class Ui {
         vbox.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(ENDING), new ImageView(duke) ));
         showLine();
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            System.out.println("Unable to close");
-//        }
         stage.close();
     }
 
@@ -210,17 +215,16 @@ public class Ui {
     /**
      * Prints a dashed divider line
      */
-    public void showLine(){
+    public void showLine() {
         vbox.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label("\n________________________________________________________ \n")));
-
     }
 
     /**
      * Prints out the string message of the given Exception.
      * @param e Exception
      */
-    public void showError(Exception e){
+    public void showError(Exception e) {
         stringBuilder.append(e.toString());
         label.setText(stringBuilder.toString());
     }
