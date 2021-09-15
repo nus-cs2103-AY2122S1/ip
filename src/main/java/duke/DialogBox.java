@@ -57,6 +57,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setAlignment(Pos.CENTER_RIGHT);
+        db.setStyle("-fx-background-color: #dff9fb;");
         return db;
     }
 
@@ -67,6 +68,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         db.setAlignment(Pos.CENTER_LEFT);
+        db.setStyle("-fx-background-color: #c7ecee;");
         return db;
     }
 }
