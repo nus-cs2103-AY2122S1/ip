@@ -4,13 +4,13 @@ public class Duke {
 
     private Ui ui;
     private TaskList taskList;
-    private boolean exit;
+    private boolean isExit;
     private Storage storage;
 
     public Duke () {
         this.ui = new Ui();
         this.taskList = new TaskList();
-        exit = false;
+        isExit = false;
     }
 
     public enum InputCommands {
@@ -30,13 +30,13 @@ public class Duke {
 
     public void run () {
         System.out.println(ui.greet());
-        while (!exit) {
+        while (!isExit) {
             try {
                 String userCommand = ui.echoCommand();
 
                 if (userCommand.equals("bye")) {
                     System.out.println(ui.exit());
-                    exit = true;
+                    isExit = true;
                 } else if (userCommand.equals("list")) {
                     System.out.println(ui.retrieveList());
                 } else if (userCommand.startsWith("done")) {
@@ -58,8 +58,7 @@ public class Duke {
                     for (InputCommands inputs : InputCommands.values()) {
                         System.out.println(inputs);
                     }
-                }
-                else {
+                } else {
                     throw new UnknownInputException("error");
                 }
             } catch (DukeException e) {

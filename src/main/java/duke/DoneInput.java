@@ -12,8 +12,8 @@ public class DoneInput extends InputHandler {
             throw new EmptyDescriptionException("error");
         }
 
-        char taskIndex = input.charAt(5);
-        int index = Integer.parseInt(String.valueOf(taskIndex));
+        char indexOfTask = input.charAt(5);
+        int index = Integer.parseInt(String.valueOf(indexOfTask));
 
         Task taskAtIndex = taskList.getTask(index);
         taskAtIndex.markAsDone();
