@@ -1,4 +1,4 @@
-# User Guide
+# Borat Sagdiyev Bot User Guide
 
 ## Introduction
 Mange your upcoming deadlines, events, and tasks with Borat Sagdiyev Bot, a task manager to manage all your tasks.
