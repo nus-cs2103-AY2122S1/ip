@@ -94,7 +94,7 @@ public class Parser {
     public String getDeadlineDate() throws DeadlineFormatException {
         String deadlineDescription = inputCommandAndDescription[1];
         String date = deadlineDescription.split("/by ", 2)[1].trim();
-        date = date.replace(" ","T");
+        date = date.replace(" ", "T");
         if (!isValidDateTime(date)) {
             throw new DeadlineFormatException();
         }
@@ -127,7 +127,7 @@ public class Parser {
     public String getEventDate() throws EventFormatException {
         String deadlineDescription = inputCommandAndDescription[1];
         String date = deadlineDescription.split("/at ", 2)[1].trim();
-        date = date.replace(" ","T");
+        date = date.replace(" ", "T");
         if (!isValidDateTime(date)) {
             throw new EventFormatException();
         }

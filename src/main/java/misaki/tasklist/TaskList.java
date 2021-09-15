@@ -74,10 +74,11 @@ public class TaskList {
         return tasks.get(index).getTask();
     }
 
-    public Task get(int index) {
-        return tasks.get(index);
-    }
-
+    /**
+     * Returns the data string to be stored in local storage.
+     *
+     * @return String representation of the tasks to be stored.
+     */
     public String toStorageString() {
         String str = "";
         int count = 1;

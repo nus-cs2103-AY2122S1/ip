@@ -5,6 +5,12 @@ import misaki.storage.Storage;
 import misaki.tasklist.TaskList;
 import misaki.ui.Ui;
 
+/**
+ * Represents a command class that helps user navigate the bot.
+ *
+ * @author Chen Hsiao Ting
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class HelpCommand extends Command {
 
     /**

@@ -1,9 +1,9 @@
 package misaki.command;
 
 import misaki.exceptions.DeadlineFormatException;
-import misaki.exceptions.MisakiException;
 import misaki.exceptions.EmptyDescriptionException;
 import misaki.exceptions.EventFormatException;
+import misaki.exceptions.MisakiException;
 import misaki.parser.Parser;
 import misaki.storage.Storage;
 import misaki.tasklist.TaskList;

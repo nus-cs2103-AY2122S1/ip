@@ -25,7 +25,6 @@ import misaki.tasks.Todo;
 public class Storage {
     private static String path;
     private static ArrayList<Task> tasks = new ArrayList<Task>();
-    private boolean isNew = false;
 
     /**
      * A constructor for Storage.
@@ -98,14 +97,12 @@ public class Storage {
                 }
             }
             if (f.length() == 0) {
-                isNew = true;
                 System.out.println("This is an empty file.");
             }
             System.out.println("Finished loading saved file.");
             s.close();
         } catch (FileNotFoundException e) {
             System.out.println("A new file is created!");
-            isNew = true;
         }
         return tasks;
     }

@@ -3,7 +3,6 @@ package misaki;
 import java.io.IOException;
 import java.util.Collections;
 
-import misaki.ui.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import misaki.ui.MainWindow;
 
 /**
  * An example of a custom control using FXML.

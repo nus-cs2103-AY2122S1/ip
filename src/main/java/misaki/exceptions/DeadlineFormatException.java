@@ -7,6 +7,9 @@ package misaki.exceptions;
  * @version CS2103T AY21/22 Semester 1
  */
 public class DeadlineFormatException extends MisakiException {
+    /**
+     * Returns the correct format of a deadline task.
+     */
     public DeadlineFormatException() {
         super("Try this format:\n"
                 + "deadline <description> /by yyyy-mm-dd HH:mm\n"

@@ -1,7 +1,5 @@
 package misaki.ui;
 
-import misaki.DialogBox;
-import misaki.Misaki;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import misaki.DialogBox;
+import misaki.Misaki;
 
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
@@ -29,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image misakiImage = new Image(this.getClass().getResourceAsStream("/images/Misaki.png"));
 
+    /**
+     * Initializes the misaki program.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
