@@ -81,6 +81,7 @@ public class Parser {
      * @return Command to add a new TodoTask, null if error occurs.
      */
     private Command addTodo(String[] input) {
+        assert input != null : "input cannot be null";
         try {
             String name = input[1];
             TodoTask todo = new TodoTask(name);
@@ -98,6 +99,7 @@ public class Parser {
      * @return Command to add a new EventTask, null if error occurs.
      */
     private Command addEvent(String[] input) {
+        assert input != null : "addEvent: input cannot be null";
 
         try {
             String[] taskAndTime = input[1].split(TIME_MARKER, 2);
@@ -126,6 +128,7 @@ public class Parser {
      * @return Command to add a new DeadlineTask, null if error occurs.
      */
     private Command addDeadline(String[] input) {
+        assert input != null : "addDeadline: input cannot be null";
 
         try {
             String[] taskAndTime = input[1].split(DEADLINE_MARKER, 2);
@@ -155,6 +158,8 @@ public class Parser {
      * @return Command to delete a Task from TaskList, null if error occurs.
      */
     private Command deleteFromList(String[] input) {
+        assert input != null : "deleteFromList: input cannot be null";
+
         if (taskList.getSize() == 0) {
             ui.showError(new EmptyListException());
             return null;
@@ -176,6 +181,8 @@ public class Parser {
      * @return Command to set a task as done, null if error occurs.
      */
     private Command setTaskDone(String[] input) {
+        assert input != null : "setTaskDone: input cannot be null";
+
 
         if (taskList.getSize() == 0) {
             ui.showError(new EmptyListException());
