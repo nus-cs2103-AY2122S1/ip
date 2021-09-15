@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Pair;
 import duke.Storage;
 import duke.TaskList;
@@ -43,7 +44,7 @@ public class DoneCommand extends Command {
         Task task = statusTaskPair.getSecond();
 
         if (isTaskAlreadyDone) {
-            return ui.showError(String.format("Task %s is already done!\n  %s", taskNo + 1, task));
+            throw new DukeException(String.format("Task %s is already done!\n  %s", taskNo + 1, task));
         } else {
             return ui.showDoneTask(task);
         }

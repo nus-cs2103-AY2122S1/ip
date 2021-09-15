@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.sun.jdi.BooleanValue;
 import duke.command.Command;
 
 /**
@@ -56,16 +57,16 @@ public class Duke {
         scanner.close();
     }
 
-    public String getResponse(String input) {
+    public Pair<String, Boolean> getResponse(String input) {
         try {
             Command c = Parser.parse(input.trim());
-            return c.execute(tasks, ui, storage);
+            return new Pair<String, Boolean>(c.execute(tasks, ui, storage), false);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return new Pair<String, Boolean>(ui.showError(e.getMessage()), true);
         }
     }
 
-    public String getWelcomeMessage() {
-        return ui.showWelcome();
+    public Pair<String, Boolean> getWelcomeMessage() {
+        return new Pair<String, Boolean>(ui.showWelcome(), false);
     }
 }

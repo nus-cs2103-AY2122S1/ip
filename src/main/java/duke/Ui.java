@@ -27,12 +27,7 @@ public class Ui {
      * @return String representation of the welcome message.
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return printMessage("Hello from\n" + logo + "\nHello! I'm Duke\nWhat can I do for you?");
+        return printMessage("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /**

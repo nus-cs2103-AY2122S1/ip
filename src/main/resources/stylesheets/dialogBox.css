@@ -1,0 +1,16 @@
+.dialog-box {
+     -fx-border-radius: 20px;
+     -fx-background-radius: 20px;
+}
+
+.user-fill {
+    -fx-background-color: rgb(102, 217, 255, 0.5);
+}
+
+.error-fill {
+    -fx-background-color: rgb(255, 64, 64, 0.5);
+}
+
+.duke-fill {
+    -fx-background-color: rgb(102, 255, 179, 0.5);
+}
