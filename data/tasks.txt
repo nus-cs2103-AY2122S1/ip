@@ -1,5 +1,2 @@
-T | 0 | tasks | tag1, tag2
-T | 0 | m | -
-T | 1 | task 1 | tag1, tag2, tag3
-E | 1 | testEvent | now | urgent, pink, monthly
-T | 0 | test write | tag1, tag2, tag3
+T | 0 | test duke | -
+D | 1 | my homework | 2021-12-21 | -

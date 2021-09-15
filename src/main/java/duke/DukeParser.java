@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import commands.AddDeadlineCommand;
 import commands.AddEventCommand;
@@ -85,8 +86,8 @@ public class DukeParser {
             return new ErrorCommand("An exception occurred! See details above.");
         } catch (ArrayIndexOutOfBoundsException e) {
             return new ErrorCommand("Missing fields in command. Type 'help' for more info.");
-        } catch (Exception e) {
-            return new ErrorCommand("An exception occurred!");
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand("An error occurred in your date format! Use yyyy-mm-dd format.");
         }
     }
 }

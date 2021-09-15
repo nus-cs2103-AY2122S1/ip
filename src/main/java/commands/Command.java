@@ -1,8 +1,8 @@
 package commands;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * The Command interface models a command given by the user through
@@ -16,4 +16,5 @@ public interface Command {
     String execute(Ui ui, TaskList taskList, Storage storage);
 
     boolean isQuit();
+
 }
