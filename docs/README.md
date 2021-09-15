@@ -5,11 +5,14 @@ helps you to manage your busy schedule with its chat style user interface.
 
 <p align="center">
 * Welcome Splash Screen
+</p>
 ![](welcomeSplashScreen.png)
 
+<p align="center">
 * Chatbot Window
-![](chatBotWindow.png)
 </p>
+![](chatBotWindow.png)
+
 
 ---
 ## Table of Contents
@@ -21,7 +24,16 @@ helps you to manage your busy schedule with its chat style user interface.
 
 ---
 ## Getting Started
-
+1. Download the JAR file from [here](apple.com).
+2. Open Terminal, and type in the following command to run the App.
+```
+java -jar retriever-1.0.jar
+```
+* [OPTIONAL] If you want to enable assertions and run, type in the following command.
+```
+java -jar -ea retriever-1.0.jar
+```
+3. That's all. Enjoy and Don't forget to support me on GitHub [here](https://github.com/Jai2501).
 
 ---
 ## Quick Access Links
@@ -370,7 +382,7 @@ Master, You are Busy For The Day...
 ---
 ## Command Summary
 Command | Summary | `Syntax`
-------- | ------- | --------
+------- | ------- | -------
 bye | To end the session with the Chatbot | `bye`
 help | To display the help section | `help`
 deadline | To add a deadline type task | `deadline TASK_DESCRIPTION /by DD/MM/YYYY`
