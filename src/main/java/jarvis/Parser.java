@@ -127,43 +127,39 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseDeadline(String instruction) throws JarvisException, IOException {
-        // If the description of the deadline task is empty
-        if (instruction.length() < 10) {
+        String taskDescription = "";
+        int currIndex = 8;
+
+        // Extracting the deadline (dd/mm/yyyy hh:mm)
+        while (currIndex < instruction.length() &&
+                !instruction.substring(currIndex).startsWith(" /")) {
+            taskDescription += instruction.substring(currIndex, currIndex + 1);
+            currIndex++;
+        }
+
+        if (currIndex == 8 || currIndex == instruction.length()) {
             throw new JarvisException(Ui.EMPTY_DEADLINE_DESCRIPTION);
 
-        // If the description of the deadline task is not empty
+        // If the extracted deadline is too short to contain all of the relevant details
+        } else if (instruction.substring(currIndex).length() != 21) {
+            throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
+
+        // If the date keyed in by the user is formatted wrongly
+        } else if (instruction.charAt(currIndex + 7) != '/' &&
+                instruction.charAt(currIndex + 10) != '/') {
+            throw new JarvisException(Ui.WRONGLY_FORMATTED_DATE);
+
+        // If the time keyed in by the suer is formatted wrongly
+        } else if (instruction.substring(currIndex).length() < 20){
+            throw new JarvisException(Ui.WRONGLY_FORMATTED_DEADLINE_TIME);
+
+        // If the deadline is formatted correctly overall
         } else {
-            String taskDescription = "";
-            int currIndex = 8;
+            String by = instruction.substring(currIndex + 5);
+            Task newDeadline = new Deadline(taskDescription, by);
 
-            // Extracting the deadline (dd/mm/yyyy hh:mm)
-            while (currIndex < instruction.length() &&
-                    !instruction.substring(currIndex).startsWith(" /")) {
-                taskDescription += instruction.substring(currIndex, currIndex + 1);
-                currIndex++;
-            }
-
-            // If the extracted deadline is too short to contain all of the relevant details
-            if (currIndex == instruction.length() || instruction.substring(currIndex).length() != 21) {
-                throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
-
-            // If the date keyed in by the user is formatted wrongly
-            } else if (instruction.charAt(currIndex + 7) != '/' &&
-                    instruction.charAt(currIndex + 10) != '/') {
-                throw new JarvisException(Ui.WRONGLY_FORMATTED_DATE);
-
-            // If the time keyed in by the suer is formatted wrongly
-            } else if (instruction.substring(currIndex).length() < 20){
-                throw new JarvisException(Ui.WRONGLY_FORMATTED_DEADLINE_TIME);
-
-            // If the deadline is formatted correctly overall
-            } else {
-                String by = instruction.substring(currIndex + 5);
-                Task newDeadline = new Deadline(taskDescription, by);
-
-                // Add the task to the taskList array and update the task file in the user's hard disk
-                return TaskList.addTaskAndUpdate(newDeadline);
-            }
+            // Add the task to the taskList array and update the task file in the user's hard disk
+            return TaskList.addTaskAndUpdate(newDeadline);
         }
     }
 
