@@ -61,6 +61,8 @@ public class Storage {
     private Task readTodo(String[] components) {
         String description = components[2].substring(1);
         ToDo t = new ToDo(description);
+        String priority = components[3].substring(1);
+        t.changePriority(priority);
         if (checkIfDone(components[1])) {
             t.markAsDone();
         }
@@ -69,8 +71,10 @@ public class Storage {
 
     private Task readDeadline(String[] components) {
         String description = components[2].substring(1);
-        String time = components[3].substring(1);
+        String priority = components[3].substring(1);
+        String time = components[4].substring(1);
         Deadline d = new Deadline(description, time);
+        d.changePriority(priority);
         if (checkIfDone(components[1])) {
             d.markAsDone();
         }
@@ -80,12 +84,27 @@ public class Storage {
 
     private Task readEvent(String[] components) {
         String description = components[2].substring(1);
-        String time = components[3].substring(1);
+        String priority = components[3].substring(1);
+        String time = components[4].substring(1);
         Event e = new Event(description, time);
+        e.changePriority(priority);
         if (checkIfDone(components[1])) {
             e.markAsDone();
         }
         return e;
+    }
+
+    private String getPriority(String priority) {
+        switch (priority.toLowerCase()) {
+        case("low lvl "):
+            return "low";
+        case("medium lvl! "):
+            return "medium";
+        case ("high lvl!!! "):
+            return "high";
+        default:
+            return "";
+        }
     }
 
     private boolean checkIfDone(String component) {
