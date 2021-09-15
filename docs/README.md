@@ -1,6 +1,6 @@
 # User Guide for Duke™
 <p align="center">
-  <img src="https://github.com/kleonang/ip/blob/master/docs/Ui.png" width="512">
+  <img src="https://raw.githubusercontent.com/kleonang/ip/master/docs/Ui.png" width="512">
 </p>
 
 ## Features 
@@ -23,7 +23,7 @@ Duke™ enables you to list your tasks, mark tasks as done, find tasks, and even
 
 ## Usage
 
-### `todo DESCRIPTION` - adds a Todo task
+### Add a Todo task - `todo DESCRIPTION`
 
 Adds a Todo task to your tasks.
 
@@ -39,7 +39,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### `deadline DESCRIPTION /by YYYY-MM-DD hh:mm` - adds a Deadline task
+### Add a Deadline task - `deadline DESCRIPTION /by YYYY-MM-DD hh:mm`
 
 Adds a Deadline task to your tasks. Provide time in `hh:mm`, 24h-clock format (e.g. `23:59`).
 
@@ -56,7 +56,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-### `event DESCRIPTION /at YYYY-MM-DD hh:mm` - adds an Event task
+### Add an Event task - `event DESCRIPTION /at YYYY-MM-DD hh:mm`
 
 Adds an Event task to your tasks. Provide time in `hh:mm`, 24h-clock format (e.g. `23:59`).
 
@@ -73,7 +73,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-### `list` - lists all tasks
+### List all tasks - `list`
 
 Lists out all current tasks.
 
@@ -92,7 +92,7 @@ Here are the tasks in your list:
   (at: Aug 9 2021, 5:00 pm)
 ```
 
-### `done INDEX` - marks a task as done
+### Mark a task as done - `done INDEX`
 
 Marks the task of the given index as done. `INDEX` is referenced from the `list` command.
 
@@ -108,7 +108,7 @@ Nice! I've marked this task as done:
   (by: Sep 6 2021, 4:20 pm)
 ```
 
-### `find KEYWORD` - finds a matching task
+### Find a matching task - `find KEYWORD`
 
 Finds a task based on the given keyword.
 
@@ -123,7 +123,7 @@ Here are the matching tasks in your list:
 1.[T][MEDIUM][ ] watch bee movie
 ```
 
-### `priority INDEX LEVEL` - sets priority level for a task
+### Set priority level for a task - `priority INDEX LEVEL`
 
 Sets a priority level for the task of the given index. `INDEX` is referenced from the `list` command. Indicate priority `LEVEL` as `high`, `medium` or `low`. Tasks are marked as `MEDIUM` priority by default.
 
@@ -138,7 +138,7 @@ Nice! I've marked this task as HIGH priority:
   [T][HIGH][ ] watch bee movie
 ```
 
-### `bye` - sends a goodbye message
+### Get a goodbye message - `bye`
 
 Says goodbye to the user.
 
