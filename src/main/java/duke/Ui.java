@@ -62,7 +62,7 @@ public class Ui {
                         }
 
                         return "Commandws supported:\n\n"
-                                + "- bye\n- help\n- list\n- Todo\n- event\n- deadline\n";
+                                + "- bye\n- clearall\n- help\n- list\n- Todo\n- event\n- deadline\n";
                     } catch (DukeException e) {
                         return this.getErrorMessage(e);
                     }
@@ -187,7 +187,7 @@ public class Ui {
                         }
                         isActivatedClearCommand = true;
 
-                        return ("Pwease confirm clear task wist: y/n");
+                        return ("Pwease confirm clear task list: y/n");
                     } catch (DukeException e) {
                         return this.getErrorMessage(e);
                     }
@@ -205,7 +205,7 @@ public class Ui {
                         tasklist.clearTaskList();
                         storage.saveData(tasklist);
 
-                        return ("Alwight. Cleared!");
+                        return ("Alright. Cleared! Uwu!");
                     } catch (DukeException e) {
                         return this.getErrorMessage(e);
                     }
@@ -221,7 +221,7 @@ public class Ui {
 
                         isActivatedClearCommand = false;
 
-                        return ("Alwight. Please cawwy on.");
+                        return ("Alright. Please carry on! Uwu!");
                     } catch (DukeException e) {
                         return this.getErrorMessage(e);
                     }

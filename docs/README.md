@@ -1,29 +1,28 @@
-# User Guide
+# Super Pretty Ultra Hyper Mega Cute Shining God of Destruction Dukuwu ~~☆☆☆ tehe
+> dowcto, wewre losing him!!
+> qwick, hand me the defibwiwatow!!
+> please. turn off my [redacted] life support
+>                              - You after you use Dukuwu [(source)](https://i.redd.it/qcsnneo5fyh01.jpg)
 
-## Features 
+## What Dukuwu Does To You
+Dukuwu sucks your will to live. It's:
+* Time consuming
+* Sanity consuming
+* Flesh consuming
 
-### Feature-ABC
+Sounds fun, right? And the best part is that it's **F R E E !**
+All you need to do are these three simple steps:
+1. Download it [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)
+2. If you actually clicked the link, lmao ok no the actual one is [here](https://github.com/ruthpohrp/ip)
+3. You ~~don't actually~~ want to download this ~~_WHY WOULD YOU_~~
+4. please. turn off my life support
 
-Description of the feature.
+Features:
+- [x] A detailed narration of my slow descent into my insanity
+- [x] Nothing else
+- [x] Oh yeah and Dukuwu helps you manage your tasks ig 🤔 just run the Duke file and type 'help' to find out more
 
-### Feature-XYZ
+## 
+If you Java noob, Google is your best friend. Take it from me. Here's a sneak peek at what it looks like:
+![Alt text](https://media.discordapp.net/attachments/732543939260842045/887724097218433064/example.png?width=674&height=897)
 
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
