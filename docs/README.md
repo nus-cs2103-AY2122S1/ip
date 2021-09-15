@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -6,9 +10,8 @@
 
 3. Copy the file to the folder you want to use as the home folder for the application. Data will be saved in the home folder by default.
 
-4. Double-click the file to start the app. You should see the GUI similar to the one below: 
-![Example GUI image of Brobot]
-(https://markuslim24.github.io/ip/Ui.png)
+4. Double-click the file to start the app. You should see a GUI similar to the one below: 
+![Example GUI image of Brobot](https://markuslim24.github.io/ip/Ui.png)
 
 
 ## Features 
