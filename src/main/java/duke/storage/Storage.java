@@ -16,7 +16,6 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 
-
 public class Storage {
     public static final String DIRECTORY = "./data";
     private final String fileName;

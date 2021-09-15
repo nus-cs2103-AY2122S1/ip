@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -13,8 +14,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-
-import duke.Duke;
 
 // @@author kevinmingtarja-reused
 // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html

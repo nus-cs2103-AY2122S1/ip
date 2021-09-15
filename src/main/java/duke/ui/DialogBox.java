@@ -26,10 +26,6 @@ import javafx.scene.shape.Circle;
 // with minor modifications
 public class DialogBox extends HBox {
     private static Integer counter = 0;
-    private final String USER_BG_COLOR = "#06f";
-    private final String BOT_BG_COLOR = "373737";
-    private final String ERROR_BG_COLOR = "D4000E";
-    private final Integer CORNER_RADIUS = 10;
     @FXML
     private Label dialog;
     @FXML
@@ -54,14 +50,14 @@ public class DialogBox extends HBox {
         dialog.setTranslateX(-8);
 
         if (isError(text)) {
-            dialog.setBackground(new Background(new BackgroundFill(Color.web(ERROR_BG_COLOR),
-                    new CornerRadii(CORNER_RADIUS), new Insets(-4))));
+            dialog.setBackground(new Background(new BackgroundFill(Color.web("D4000E"),
+                    new CornerRadii(10), new Insets(-4))));
         } else if (counter % 2 == 0) {
-            dialog.setBackground(new Background(new BackgroundFill(Color.web(BOT_BG_COLOR),
-                    new CornerRadii(CORNER_RADIUS), new Insets(-4))));
+            dialog.setBackground(new Background(new BackgroundFill(Color.web("373737"),
+                    new CornerRadii(10), new Insets(-4))));
         } else {
-            dialog.setBackground(new Background(new BackgroundFill(Color.web(USER_BG_COLOR),
-                    new CornerRadii(CORNER_RADIUS), new Insets(-4))));
+            dialog.setBackground(new Background(new BackgroundFill(Color.web("#06f"),
+                    new CornerRadii(10), new Insets(-4))));
         }
         counter++;
 
