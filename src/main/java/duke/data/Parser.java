@@ -295,11 +295,11 @@ public class Parser {
      * @return a FindCommand.
      */
     private static Command prepareFindCommand(String[] userInputArray) {
-        //checks if there is a 2nd input(word to be searched)
-        if (userInputArray.length == 2) {
+        //checks if there is a 2nd input(word(s) to be searched)
+        if (userInputArray.length != 1) {
             return new FindCommand(userInputArray[1]);
         } else {
-            throw new DukeException("Please enter the word to search for");
+            throw new DukeException("Please follow this format: find KEYWORD(S)");
         }
     }
 
