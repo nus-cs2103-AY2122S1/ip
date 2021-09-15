@@ -1,13 +1,16 @@
 package duke.utils;
 
-import duke.commands.*;
+import duke.commands.AddDeadline;
+import duke.commands.AddEvent;
+import duke.commands.AddTodo;
+import duke.commands.Command;
+import duke.commands.Delete;
+import duke.commands.Done;
+import duke.commands.Find;
+import duke.commands.List;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.InvalidCommandException;
-import duke.exceptions.InvalidTaskIdException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
 
 /**
  * The Parser class is responsible for handling the user input and to perform
