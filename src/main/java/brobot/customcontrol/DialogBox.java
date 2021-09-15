@@ -19,13 +19,6 @@ public class DialogBox extends HBox {
     private final Label text;
     private final ImageView displayPicture;
     private final Circle clip = new Circle(35, 35, 35);
-    private final Background ERROR_BACKGROUND = new Background(
-            new BackgroundFill(
-                    Color.rgb(204, 0, 0, 0.7),
-                    new CornerRadii(5.0),
-                    new Insets(-1.0)
-    ));
-
 
     /**
      * DialogBox Constructor
