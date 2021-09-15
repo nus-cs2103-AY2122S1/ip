@@ -36,9 +36,9 @@ public class Ui {
      * @return String representation of task list.
      */
     public String showTaskAdded(Task task, int listLength) {
-        String output = String.format("added: " + task.toString()
+        String taskAdded = String.format("added: " + task.toString()
                 + "\nNow you have %s tasks in your list" , listLength);
-        return output;
+        return taskAdded;
     }
 
     /**
@@ -49,9 +49,9 @@ public class Ui {
      * @return String representation of task deleted.
      */
     public String showTaskDeleted(Task task, int listLength) {
-        String output = String.format("Noted. I've removed this task:\n" + task.toString()
+        String taskDeleted = String.format("Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have %s tasks in your list\n" , listLength);
-        return output;
+        return taskDeleted;
     }
 
     /**
@@ -61,9 +61,9 @@ public class Ui {
      * @return String representation of task set as done.
      */
     public String showTaskDone(Task task) {
-        String output = "Nice! I've marked this task as done:\n"
+        String taskDone = "Nice! I've marked this task as done:\n"
                 + task.toString();
-        return output;
+        return taskDone;
     }
 
     /**
@@ -72,8 +72,28 @@ public class Ui {
      * @return String representation for bye.
      */
     public String showBye() {
-        String str = "Bye! Hope to see you again soon!";
-        return str;
+        String byeMessage = "Bye! Hope to see you again soon!";
+        return byeMessage;
+    }
+
+    /**
+     * Returns head message for list.
+     *
+     * @return String representation for list head message.
+     */
+    public String showListMessage() {
+        String listMessage = "Here are the tasks in your list:\n";
+        return listMessage;
+    }
+
+    /**
+     * Returns head message for matching list.
+     *
+     * @return String representation for matching list head message.
+     */
+    public String showMatchingListMessage() {
+        String matchingListMessage = "Here are the matching tasks in your list:\n";
+        return matchingListMessage;
     }
 
     /**
@@ -82,7 +102,7 @@ public class Ui {
      * @return String representation of tasks in list.
      */
     public String getTasks(ArrayList<Task> tasks) {
-        String list = "Here are the tasks in your list:\n";
+        String list = "";
 
         if (tasks.size() == 0) {
             list += "no tasks in list yet...";

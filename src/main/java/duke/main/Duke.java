@@ -48,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves current taskList to file.
+     *
+     * @throws DukeException If there is error storing tasks.
+     */
     public void save() throws DukeException {
         storage.save(taskList, "update");
     }

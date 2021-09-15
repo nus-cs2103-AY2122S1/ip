@@ -15,7 +15,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    //@@author Shruthi0310 -reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     private Duke duke = new Duke("duke.txt");
 
     @Override

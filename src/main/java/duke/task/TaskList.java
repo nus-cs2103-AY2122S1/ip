@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui = new Ui();
-    private final String ARCHIVE_FILE_PATH = "archive.txt";
 
     /**
      * Constructor for loading old task list.
@@ -78,8 +77,6 @@ public class TaskList {
      */
     public String findMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
-        System.out.println("Here are the matching tasks in your list:");
-
         for (Task task : tasks) {
             if (task.hasKeyword(keyword)) {
                 matchingTasks.add(task);
@@ -87,7 +84,7 @@ public class TaskList {
         }
 
         TaskList matchingList = new TaskList(matchingTasks);
-        return matchingList.printTasksInList();
+        return ui.showMatchingListMessage() + matchingList.printTasksInList();
     }
 
     /**
@@ -166,6 +163,7 @@ public class TaskList {
     }
 
     public void archiveAllTasks() throws DukeException {
+        String ARCHIVE_FILE_PATH = "archive.txt";
         Storage archiveStorage = new Storage(ARCHIVE_FILE_PATH);
         archiveStorage.save(this, "archive");
         this.tasks = new ArrayList<>();

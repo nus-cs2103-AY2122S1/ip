@@ -18,6 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class DialogBox extends HBox {
+    //@@author Shruthi0310 -reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
     @FXML
     private Text dialog;
     @FXML
