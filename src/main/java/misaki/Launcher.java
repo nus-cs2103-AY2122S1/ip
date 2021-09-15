@@ -8,7 +8,7 @@ import javafx.application.Application;
 public class Launcher {
 
     /**
-     * Launches the chat bot.
+     * Launches the chatbot.
      *
      * @param args CLI arguments.
      */

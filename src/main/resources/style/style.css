@@ -1,5 +1,5 @@
 .scroll-pane .viewport {
-    -fx-background-image: url('../Images/bkgd.jpg');
+    -fx-background-image: url('../Images/bkgd.png');
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
@@ -11,21 +11,26 @@
     -fx-border-width: 0;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    -fx-text-fill: #ff5b7a;
 }
 
 .sendBtn {
-    -fx-background-color: white;
-    -fx-background-radius: 10px;
-    -fx-border-color: lightgrey;
-    -fx-border-radius: 10px;
+    -fx-background-color: #ff5b7a;
+    -fx-background-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
 }
 
 .textBox {
-    -fx-background-color: white;
+    -fx-background-color: rgba(255, 255, 255, 0.53);
     -fx-background-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-width: 2;
     -fx-border-radius: 20px;
     -fx-padding: 20;
     -fx-max-height: Infinity;
+    -fx-text-fill: #ff5b7a;
 }
 
 .text-box:focused {

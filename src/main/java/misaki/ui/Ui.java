@@ -116,8 +116,9 @@ public class Ui {
                 + "deadline              " + "\tCreate a deadline event\n"
                 + "event                 " + "\tCreate an event\n"
                 + "list                     " + "\tList all your events\n"
-                + "done {index}       " + "\tMark done for task at index\n"
-                + "delete {index}    " + "\tDelete task at index\n"
+                + "done <index>       " + "\tMark done for task at index\n"
+                + "delete <index>    " + "\tDelete task at index\n"
+                + "find                   " + "\tFind tasks with matching keyword\n"
                 + "help                   " + "\tShow all available commands\n"
                 + "bye                    " + "\tQuit bot";
     }

@@ -9,7 +9,7 @@ import misaki.tasklist.TaskList;
 import misaki.ui.Ui;
 
 /**
- * The Misaki program implements a chat bot called Misaki that supports queries
+ * The Misaki program implements a chatbot called Misaki that supports queries
  * such as creating, marking and deleting tasks.
  *
  * @author Chen Hsiao Ting

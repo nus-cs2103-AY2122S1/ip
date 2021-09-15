@@ -13,7 +13,7 @@
             <font>
                 <Font name="Comic Sans MS" size="13.0" />
             </font></TextField>
-        <Button fx:id="sendButton" layoutX="494.0" layoutY="658.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" styleClass="sendBtn" stylesheets="@../style/style.css" text="send!">
+        <Button fx:id="sendButton" layoutX="494.0" layoutY="658.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" styleClass="sendBtn" stylesheets="@../style/style.css" text="Send♡">
             <font>
                 <Font name="Comic Sans MS" size="13.0" />
             </font></Button>

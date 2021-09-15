@@ -1,4 +1,6 @@
-T, true, read
-T, false, hello
-D, true,  /by 2021-03-21T23:21
-T, true, hello
+T, true, submit iP
+D, false, submit /by 2020-01-12T23:39
+E, false, hello /at 2021-01-21T19:00
+T, false, read me
+T, true, submit assignment
+T, false, add assignment
