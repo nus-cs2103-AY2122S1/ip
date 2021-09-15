@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends IllegalArgumentException {
     private Type type;
 

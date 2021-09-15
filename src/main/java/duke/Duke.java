@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.DateTimeException;
@@ -91,6 +93,6 @@ public class Duke {
         storage.writeAll(tasks);
     }
     public static void main(String[] args) {
-            new Duke("./Data/Duke.txt").run();
+            new Duke("./Data/duke.Duke.txt").run();
     }
 }
