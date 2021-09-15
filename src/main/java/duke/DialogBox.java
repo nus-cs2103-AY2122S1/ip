@@ -48,7 +48,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.getStyleClass().add("user-fill");
+        db.dialog.getStyleClass().add("user-fill");
         return db;
     }
 
@@ -58,9 +58,9 @@ public class DialogBox extends HBox {
         DialogBox db = new DialogBox(dukeResponse, img);
         db.flip();
         if (isError) {
-            db.getStyleClass().add("error-fill");
+            db.dialog.getStyleClass().add("error-fill");
         } else {
-            db.getStyleClass().add("duke-fill");
+            db.dialog.getStyleClass().add("duke-fill");
         }
         return db;
     }

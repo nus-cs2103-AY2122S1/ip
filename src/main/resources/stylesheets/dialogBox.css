@@ -1,6 +1,7 @@
 .dialog-box {
-     -fx-border-radius: 20px;
-     -fx-background-radius: 20px;
+     -fx-border-radius: 8px;
+     -fx-background-radius: 8px;
+     -fx-padding: 8px;
 }
 
 .user-fill {
