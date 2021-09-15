@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 
 import duke.task.TaskList;
 
+import duke.util.Command;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -40,7 +41,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return Parser.parse(input, taskList, ui, storage);
+            Command c = Parser.parseCommand(input);
+            return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }

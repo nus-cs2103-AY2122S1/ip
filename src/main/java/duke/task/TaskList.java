@@ -28,7 +28,7 @@ public class TaskList {
     /**
      * Constructor for loading old task list.
      *
-     * @param tasks List of tasks entered previously
+     * @param tasks List of tasks entered previously.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -44,7 +44,7 @@ public class TaskList {
     /**
      * Returns number of tasks in list.
      *
-     * @return length of list
+     * @return length of list.
      */
     public int getListLength() {
         return tasks.size();
@@ -53,8 +53,8 @@ public class TaskList {
     /**
      * Returns string showing task added.
      *
-     * @param task Task to be added to list
-     * @return String representation of task added
+     * @param task Task to be added to list.
+     * @return String representation of task added.
      */
     public String addTaskToList(Task task) {
         tasks.add(task);
@@ -64,7 +64,7 @@ public class TaskList {
     /**
      * Returns string of tasks in list.
      *
-     * @return String representation of list
+     * @return String representation of list.
      */
     public String printTasksInList() {
         return ui.getTasks(tasks);
@@ -73,8 +73,8 @@ public class TaskList {
     /**
      * Returns tasks in list that match keyword.
      *
-     * @param keyword Keyword to match in task list
-     * @return String representation of matching tasks
+     * @param keyword Keyword to match in task list.
+     * @return String representation of matching tasks.
      */
     public String findMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
@@ -93,8 +93,8 @@ public class TaskList {
     /**
      * Returns string showing task deleted.
      *
-     * @param deleteNumber Index of task in list
-     * @return String representation of task deleted
+     * @param deleteNumber Index of task in list.
+     * @return String representation of task deleted.
      */
     public String deleteFromList(int deleteNumber) {
         assert deleteNumber >= 0 && deleteNumber < tasks.size();
@@ -107,8 +107,8 @@ public class TaskList {
     /**
      * Returns string of task set as done.
      *
-     * @param doneNumber Index of task in list
-     * @return String representation of task set as done
+     * @param doneNumber Index of task in list.
+     * @return String representation of task set as done.
      */
     public String setTaskAsDone(int doneNumber) {
         assert doneNumber >= 0 && doneNumber < tasks.size();
@@ -121,10 +121,10 @@ public class TaskList {
     /**
      * Returns string of deadline added to list.
      *
-     * @param description Details about deadline
-     * @param by Date of completion of deadline
-     * @return String representation of deadline added
-     * @throws DukeException If date entered is not of correct format
+     * @param description Details about deadline.
+     * @param by Date of completion of deadline.
+     * @return String representation of deadline added.
+     * @throws DukeException If date entered is not of correct format.
      */
     public String addDeadlineToList(String description, String by) throws DukeException {
         try {
@@ -139,10 +139,10 @@ public class TaskList {
     /**
      * Returns string of event added to list.
      *
-     * @param description Details about event
-     * @param at Date of event
-     * @return String representation of event added
-     * @throws DukeException If date entered is not of correct format
+     * @param description Details about event.
+     * @param at Date of event.
+     * @return String representation of event added.
+     * @throws DukeException If date entered is not of correct format.
      */
     public String addEventToList(String description, String at) throws DukeException {
         try {
@@ -157,8 +157,8 @@ public class TaskList {
     /**
      * Returns string of todo added to list.
      *
-     * @param description Details of todo
-     * @return String representation of todo added
+     * @param description Details of todo.
+     * @return String representation of todo added.
      */
     public String addTodoToList(String description) {
         Todo todo = new Todo(description);
@@ -174,8 +174,8 @@ public class TaskList {
     /**
      * Saves tasks in list to hard disk.
      *
-     * @param writer FileWriter that write tasks to hard disk
-     * @throws IOException If file is not found
+     * @param writer FileWriter that write tasks to hard disk.
+     * @throws IOException If file is not found.
      */
     public void saveTasksInStorage(FileWriter writer) throws IOException {
         for (Task tasks : tasks) {

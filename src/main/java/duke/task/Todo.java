@@ -8,10 +8,10 @@ public class Todo extends Task {
     /**
      * Constructor for todo object.
      *
-     * @param description Details of todo
+     * @param description Details of todo.
      */
     public Todo(String description) {
-        super(description, "todo");
+        super(description);
     }
 
     /**
@@ -27,7 +27,7 @@ public class Todo extends Task {
     /**
      * Returns string of task.
      *
-     * @return String representation of task
+     * @return String representation of task.
      */
     @Override
     public String toString() {

@@ -1,1 +1,4 @@
-T|1|run
+T|1|cs quiz
+E|0|test|2021-06-22
+D|1|smth|2022-09-24
+T|0|run

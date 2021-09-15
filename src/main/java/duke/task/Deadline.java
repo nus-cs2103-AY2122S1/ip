@@ -12,18 +12,18 @@ public class Deadline extends Task {
     /**
      * Constructor for deadline.
      *
-     * @param description Details of deadline
-     * @param by Date of completion of deadline
+     * @param description Details of deadline.
+     * @param by Date of completion of deadline.
      */
     public Deadline(String description, LocalDate by) {
-        super(description, "deadline");
+        super(description);
         this.by = by;
     }
 
     /**
      * Returns string of deadline in the format to be saved.
      *
-     * @return String representation of deadline to be saved
+     * @return String representation of deadline to be saved.
      */
     @Override
     public String saveTaskFormat(){
@@ -33,7 +33,7 @@ public class Deadline extends Task {
     /**
      * Returns string of deadline in list.
      *
-     * @return String representation of deadline
+     * @return String representation of deadline.
      */
     @Override
     public String toString() {

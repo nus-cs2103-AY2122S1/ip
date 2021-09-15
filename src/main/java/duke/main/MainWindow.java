@@ -36,8 +36,8 @@ public class MainWindow extends AnchorPane {
     private Ui ui = new Ui();
     private static boolean hasShownMenu = false;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_profile.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke_profile.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Picture1.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Picture2.png"));
 
     @FXML
     public void initialize() {
@@ -73,7 +73,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        handleBye(response);
+    }
 
+    @FXML
+    private void handleBye(String response) {
         String byeMessage = "Bye! Hope to see you again soon!";
         if(response.equals(byeMessage)) {
             PauseTransition transition = new PauseTransition(Duration.seconds(1));

@@ -15,8 +15,10 @@ public class Ui {
             + "- deadline <description> /by <date> \n  of format dd MMM yyyy\n"
             + "- event <description> /at <date>\n  of format dd MMM yyyy\n"
             + "- list: see task list\n"
+            + "- find <keyword> : find tasks with\n  keyword\n"
             + "- delete <task no.>\n"
             + "- done <task no.>\n"
+            + "- archive: archive all tasks\n"
             + "- bye: exit duke\n";
 
     /**
@@ -29,9 +31,9 @@ public class Ui {
     /**
      * Returns string of task added.
      *
-     * @param task Task added
-     * @param listLength Length of task list
-     * @return String representation of task list
+     * @param task Task added.
+     * @param listLength Length of task list.
+     * @return String representation of task list.
      */
     public String showTaskAdded(Task task, int listLength) {
         String output = String.format("added: " + task.toString()
@@ -42,9 +44,9 @@ public class Ui {
     /**
      * Returns string of task deleted.
      *
-     * @param task Task deleted
-     * @param listLength Length of task list
-     * @return String representation of task deleted
+     * @param task Task deleted.
+     * @param listLength Length of task list.
+     * @return String representation of task deleted.
      */
     public String showTaskDeleted(Task task, int listLength) {
         String output = String.format("Noted. I've removed this task:\n" + task.toString()
@@ -55,7 +57,7 @@ public class Ui {
     /**
      * Returns string of task done.
      *
-     * @param task Task set as done
+     * @param task Task set as done.
      * @return String representation of task set as done.
      */
     public String showTaskDone(Task task) {
@@ -67,18 +69,17 @@ public class Ui {
     /**
      * Returns string message for bye.
      *
-     * @return String representation for bye
+     * @return String representation for bye.
      */
     public String showBye() {
         String str = "Bye! Hope to see you again soon!";
-        System.out.println("Bye! Hope to see you again soon!");
         return str;
     }
 
     /**
      * Returns string of tasks in list.
      *
-     * @return String representation of tasks in list
+     * @return String representation of tasks in list.
      */
     public String getTasks(ArrayList<Task> tasks) {
         String list = "Here are the tasks in your list:\n";
@@ -103,11 +104,10 @@ public class Ui {
     /**
      * Returns string of error message.
      *
-     * @param message Error message
-     * @return String representation of error
+     * @param message Error message.
+     * @return String representation of error.
      */
     public String showError(String message) {
-        System.out.println(message);
         return message;
     }
 
