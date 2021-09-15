@@ -1,6 +1,4 @@
----
-title: Brobot User Guide
----
+#BroBot User Guide
 
 ## Quick start
 
