@@ -38,7 +38,8 @@ public class Ui {
         assert taskList != null : "TaskList should not be null";
         return "Okay!! I've added the following task:\n"
                 + taskList.getTask(taskList.getSize() - 1) + "\n"
-                + "Now you have " + taskList.getSize() + " in the list";
+                + "Now you have " + taskList.getSize() + (taskList.getSize() == 1 ? " task" : " tasks")
+                + " in the list";
     }
 
     /**
