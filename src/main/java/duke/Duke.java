@@ -1,7 +1,9 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
@@ -9,7 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filepath) {
+    public Duke(String filepath) throws IOException {
 
         assert filepath != null;
 
@@ -18,6 +20,7 @@ public class Duke {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
             tasks = new TaskList(new ArrayList<>());
+            storage.createNewFile();
         }
     }
 

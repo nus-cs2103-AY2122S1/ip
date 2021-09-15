@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exception.CreateFileException;
+import duke.exception.DukeException;
+import duke.exception.LoadFileException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -38,34 +41,39 @@ public class Storage {
             }
             return res;
         } catch (IOException | DukeException e) {
-            throw new DukeException("Unable to load tasks from file.");
+            throw new LoadFileException();
         }
     }
 
     private static Task dataToTask(String str) throws DukeException {
-        String[] taskArr = str.split(",");
-        String taskType = taskArr[0];
-        boolean isTaskDone = taskArr[1].equals(Task.DONE_STRING);
-        String taskDescription = taskArr[2];
-        String taskDate = "";
-        if (taskArr.length > Task.MIN_TASK_ATTRIBUTES) {
-            taskDate = taskArr[Task.MIN_TASK_ATTRIBUTES];
+        try {
+            String[] taskArr = str.split(",");
+            String taskType = taskArr[0];
+            boolean isTaskDone = taskArr[1].equals(Task.DONE_STRING);
+            String taskDescription = taskArr[2];
+            String taskDate = "";
+            if (taskArr.length > Task.MIN_TASK_ATTRIBUTES) {
+                taskDate = taskArr[Task.MIN_TASK_ATTRIBUTES];
+            }
+            Task res;
+            switch (taskType) {
+                case(Task.TODO_ALPHABET):
+                    res = new Todo(taskDescription, isTaskDone);
+                    break;
+                case(Task.DEADLINE_ALPHABET):
+                    res = new Deadline(taskDescription, taskDate, isTaskDone);
+                    break;
+                case(Task.EVENT_ALPHABET):
+                    res = new Event(taskDescription, taskDate, isTaskDone);
+                    break;
+                default:
+                    throw new DukeException("Incorrect task type!");
+            }
+            return res;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new LoadFileException();
         }
-        Task res;
-        switch (taskType) {
-        case(Task.TODO_ALPHABET):
-            res = new Todo(taskDescription, isTaskDone);
-            break;
-        case(Task.DEADLINE_ALPHABET):
-            res = new Deadline(taskDescription, taskDate, isTaskDone);
-            break;
-        case(Task.EVENT_ALPHABET):
-            res = new Event(taskDescription, taskDate, isTaskDone);
-            break;
-        default:
-            throw new DukeException("Incorrect task type!");
-        }
-        return res;
+
     }
 
     public void saveTaskToFile(Task task) {
@@ -113,6 +121,15 @@ public class Storage {
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred with file handling.");
+        }
+    }
+
+    public void createNewFile() throws CreateFileException {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath, false);
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new CreateFileException();
         }
     }
 
