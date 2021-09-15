@@ -28,7 +28,7 @@
 It's simple to get up and running. follow these steps to start using WhoBot  
 
 1. Download the JAR file from [here](https://github.com/crypto-code/ip/releases/download/A-BetterGui/WhoBot.jar).
-2. You can start the progrom by running the following command
+2. You can start the program by running the following command
 ```
 java -jar WhoBot.jar
 ```
