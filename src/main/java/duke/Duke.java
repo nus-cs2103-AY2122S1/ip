@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 import java.io.FileNotFoundException;
@@ -30,13 +31,18 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        if (!isExit) {
-            Command cmd = parser.parse(input);
-            if (cmd != null) {
+        try {
+
+            if (!isExit) {
+                Command cmd = parser.parse(input);
+                assert cmd != null;
                 cmd.execute();
+            } else {
+                System.exit(0);
             }
-        } else {
-            ui.setMessage("We're closed.");
+
+        } catch (DukeException e) {
+            ui.showError(e);
         }
 
         return ui.getMessage();

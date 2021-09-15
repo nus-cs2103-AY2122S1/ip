@@ -15,10 +15,6 @@ public class Ui {
         System.out.println("Howdy! The name's\n" + logo + "\nWhat can I do for ya?");
     }
 
-    public void showFarewell() {
-        System.out.println("Seeya!");
-    }
-
     /**
      * Prints a given String to console.
      * @param message message to be printed to console.
