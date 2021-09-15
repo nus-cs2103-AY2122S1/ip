@@ -16,13 +16,12 @@ to be used with CLI (Command Line Interface).
    *home folder* for your Duke.
 4. Double-click the file to start the app. The GUI 
    similar to the below should appear in a few seconds.
-![Duke GUI](Ui.png)
 5. Folder `data` will be created as the local Duke storage in your home folder.
 6. Type the command in the command box and press `Enter/Send` to
    execute it.
 7. Refer to the [Features](#features) below for details of each
    command.
-   
+![Duke GUI](Ui.png)
 
 ## Features
 ### Listing all tasks
