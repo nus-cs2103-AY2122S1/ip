@@ -16,13 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
-import static java.lang.Thread.sleep;
 import static javafx.application.Platform.exit;
 
 public class DukeLauncher extends Application {
@@ -101,28 +95,10 @@ public class DukeLauncher extends Application {
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
-//            isExit = userInput.getText().equals("bye");
-//            if (isExit) {
-//                try {
-//                    sleep(1000);
-//                    exit();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
         });
 
         userInput.setOnAction((event) -> {
             handleUserInput();
-//            isExit = userInput.getText().equals("bye");
-//            if (isExit) {
-//                try {
-//                    sleep(1000);
-//                    exit();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
         });
     }
 
