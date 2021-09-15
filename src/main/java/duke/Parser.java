@@ -7,6 +7,9 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.MarkDoneCommand;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyListException;
+import duke.exception.InvalidInputException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
@@ -20,6 +23,9 @@ public class Parser {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+
+    private static final String TIME_MARKER = "/at";
+    private static final String DEADLINE_MARKER = "/by";
 
     /**
      * Constructor for a Parser for Duke.
@@ -63,7 +69,7 @@ public class Parser {
         case "todo":
             return addTodo(splitInput);
         default:
-            ui.showError("Error: Command not recognised, sorry.");
+            ui.showError(new InvalidInputException("Command not recognised."));
             break;
         }
         return null;
@@ -80,7 +86,8 @@ public class Parser {
             TodoTask todo = new TodoTask(name);
             return new AddTaskCommand(taskList, storage, ui, todo);
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showError("Error: Description for To-do cannot be empty.\nexample:\ntodo buy groceries");
+            ui.showError(new InvalidInputException("Description for To-do cannot be empty." +
+                    "\nexample:\ntodo buy groceries"));
             return null;
         }
     }
@@ -92,8 +99,6 @@ public class Parser {
      */
     private Command addEvent(String[] input) {
 
-        String TIME_MARKER = " /at ";
-
         try {
             String[] taskAndTime = input[1].split(TIME_MARKER, 2);
             EventTask event;
@@ -101,14 +106,16 @@ public class Parser {
                 event = new EventTask(taskAndTime[0], taskAndTime[1]);
                 return new AddTaskCommand(taskList, storage, ui, event);
             } else {
-                ui.showError("Error: Need to specify event name and time.\nexample:\nevent meeting /at Tuesday 12pm");
+                ui.showError(new InvalidInputException("Need to specify event name and time." +
+                        "\nexample:\nevent meeting /at Tuesday 12pm"));
                 return null;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showError("Error: Description for Event cannot be empty.\nexample:\nevent meeting /at Tuesday 12pm");
+            ui.showError(new InvalidInputException("Description for Event cannot be empty." +
+                    "\nexample:\nevent meeting /at Tuesday 12pm"));
             return null;
         } catch (DateTimeException e) {
-            ui.showError("Error: Unsupported date format, must be in format yyyy-mm-dd.");
+            ui.showError(new InvalidInputException("Unsupported date format, must be in format yyyy-mm-dd."));
             return null;
         }
     }
@@ -120,24 +127,23 @@ public class Parser {
      */
     private Command addDeadline(String[] input) {
 
-        String DEADLINE_MARKER = " /by ";
-
         try {
             String[] taskAndTime = input[1].split(DEADLINE_MARKER, 2);
             if (taskAndTime.length > 1) {
                 DeadlineTask deadlineTask = new DeadlineTask(taskAndTime[0], taskAndTime[1]);
                 return new AddTaskCommand(taskList, storage, ui, deadlineTask);
             } else {
-                ui.showError("Error: Need to specify task name and deadline.\nexample:\ndeadline return book /by Sunday");
+                ui.showError(new InvalidInputException("Need to specify task name and deadline." +
+                        "\nexample:\ndeadline return book /by Sunday"));
                 return null;
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showError("Error: Description for deadline cannot be empty." +
-                    "\nexample:\ndeadline return book /by Sunday");
+            ui.showError(new InvalidInputException("Description for deadline cannot be empty.\" +\n" +
+                    "                    \"\\nexample:\\ndeadline return book /by Sunday"));
             return null;
         } catch (DateTimeException e) {
-            ui.showError("Error: Unsupported date format, must be in format yyyy-mm-dd.");
+            ui.showError(new InvalidInputException("Unsupported date format, must be in format yyyy-mm-dd."));
             return null;
         }
 
@@ -150,18 +156,18 @@ public class Parser {
      */
     private Command deleteFromList(String[] input) {
         if (taskList.getSize() == 0) {
-            ui.showError("No tasks in list!");
+            ui.showError(new EmptyListException());
             return null;
         } else {
             try {
                 int index = Integer.parseInt(input[1]);
                 return new DeleteCommand(taskList, storage, ui, index);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                ui.showError("Error: Invalid input, please enter a number from 1 to " + taskList.getSize());
+                ui.showError(new InvalidInputException("Invalid input, please enter a number from 1 to "
+                        + taskList.getSize()));
                 return null;
             }
         }
-
     }
 
     /**
@@ -172,14 +178,15 @@ public class Parser {
     private Command setTaskDone(String[] input) {
 
         if (taskList.getSize() == 0) {
-            ui.showError("Error: No tasks in list!");
+            ui.showError(new EmptyListException());
             return null;
         } else {
             try {
                 int index = Integer.parseInt(input[1]);
                 return new MarkDoneCommand(taskList, storage, ui, index);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                ui.showError("Error: Invalid input, please enter a number from 1 to " + taskList.getSize());
+                ui.showError(new InvalidInputException("Invalid input, please enter a number from 1 to "
+                        + taskList.getSize()));
                 return null;
             }
         }
@@ -195,7 +202,7 @@ public class Parser {
             String[] searchTerms = input[1].split(" ");
             return new FindCommand(taskList, storage, ui, searchTerms);
         } catch (IndexOutOfBoundsException e) {
-            ui.showError("Error: Please specify search terms.");
+            ui.showError(new InvalidInputException("Please specify search terms."));
             return null;
         }
     }

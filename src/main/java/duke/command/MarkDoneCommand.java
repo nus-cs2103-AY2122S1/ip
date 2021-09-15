@@ -3,6 +3,8 @@ package duke.command;
 import duke.Storage;
 import duke.Ui;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidInputException;
 import duke.task.TaskList;
 
 import java.io.IOException;
@@ -37,9 +39,10 @@ public class MarkDoneCommand extends Command {
             storage.save(taskList);
             ui.setMessage("Alrighty, marking this task as done:\n" + taskList.get(taskNumber));
         } catch (IOException e) {
-            ui.showError("Error: Unable to Save\n" + e.getMessage());
+            ui.showError(new DukeException("Unable to Save\n" + e.getMessage()));
         } catch (IndexOutOfBoundsException e) {
-            ui.showError("Error: Invalid input, please enter a number from 1 to " + taskList.getSize());
+            ui.showError(new InvalidInputException("Invalid input, please enter a number from 1 to "
+                    + taskList.getSize()));
         }
     }
 }

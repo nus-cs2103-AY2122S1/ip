@@ -1,3 +1,7 @@
 D|0|script|2021-09-07
 E|0|dinner with fam|2021-09-07
 T|0|fix sizing issues
+T|0|a
+T|0|b
+T|0|c
+T|0|d

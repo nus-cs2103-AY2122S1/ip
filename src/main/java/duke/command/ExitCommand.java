@@ -34,5 +34,6 @@ public class ExitCommand extends Command {
         duke.triggerExit();
         ui.setMessage("Seeya.");
         ui.showFarewell();
+        System.exit(0);
     }
 }

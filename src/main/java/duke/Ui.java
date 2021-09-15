@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 public class Ui {
 
     private String message = "";
@@ -31,11 +33,11 @@ public class Ui {
     }
 
     /**
-     * Shows a given exception error message to user.
-     * @param errorMessage Error message to show to user.
+     * Shows a given exception's error message to user.
+     * @param error Error to show to user.
      */
-    public void showError(String errorMessage) {
-        setMessage(errorMessage);
+    public void showError(DukeException error) {
+        setMessage(error.getMessage());
     }
 
 }

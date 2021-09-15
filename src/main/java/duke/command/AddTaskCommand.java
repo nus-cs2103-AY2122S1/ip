@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.Storage;
 import duke.Ui;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -36,7 +37,7 @@ public class AddTaskCommand extends Command {
         try {
             storage.save(taskList);
         } catch (IOException e) {
-            ui.showError("Error: Unable to Save\n" + e.getMessage());
+            ui.showError(new DukeException("Unable to Save\n" + e.getMessage()));
         }
         ui.setMessage("Sure thing. Added to list:\n" + task + "\nNumber of tasks in list: " + taskList.getSize());
     }

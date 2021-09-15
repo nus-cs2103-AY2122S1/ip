@@ -3,6 +3,8 @@ package duke.command;
 import duke.Storage;
 import duke.Ui;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidInputException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -40,9 +42,10 @@ public class DeleteCommand extends Command {
             ui.setMessage("Okay then, I've removed this from the list:\n" + task +
                     "\nNumber of tasks in list: " + taskList.getSize());
         } catch (IOException e) {
-            ui.showError("Error: Unable to Save\n" + e.getMessage());
+            ui.showError(new DukeException("Unable to Save\n" + e.getMessage()));
         } catch (IndexOutOfBoundsException e) {
-            ui.showError("Error: Invalid input, please enter a number from 1 to " + taskList.getSize());
+            ui.showError(new InvalidInputException("Invalid input, please enter a number from 1 to "
+                    + taskList.getSize()));
         }
     }
 }
