@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * duke.task.Task is the base class for all tasks stored in the Duke application.
+ * Task is the base class for all tasks stored in the Duke application.
  */
 public class Task {
     protected static final String STORAGE_STRING_PARSING_DELIMITER = " \\| ";
@@ -49,8 +49,8 @@ public class Task {
     }
 
     /**
-     * Converts the duke.task.Task into a String that represents the duke.task.Task.
-     * @return The String representation of a duke.task.Task.
+     * Converts the Task into a String that represents the Task.
+     * @return The String representation of a Task.
      */
     @Override
     public String toString() {
@@ -58,7 +58,7 @@ public class Task {
     }
 
     /**
-     * Converts the duke.task.Task into a String to be stored in duke.Storage.
+     * Converts the Task into a String to be stored in Storage.
      * @return String to be stored
      */
     public String toStorageString() {
@@ -67,9 +67,9 @@ public class Task {
     }
 
     /**
-     * Parses a storage String into a duke.task.Task object.
-     * @param string The String used to represent the duke.task.Task in the duke.Storage.
-     * @return The duke.task.Task represented by the duke.Storage String.
+     * Parses a storage String into a Task object.
+     * @param string The String used to represent the Task in the Storage.
+     * @return The Task represented by the Storage String.
      */
     public static Task fromStorageString(String string) {
         String[] taskSubstrings = string.split(Task.STORAGE_STRING_PARSING_DELIMITER);

@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * A duke.task.TaskType represents a type of duke.task.Task in the application.
+ * A TaskType represents a type of Task in the application.
  */
 public enum TaskType {
     DEADLINE("D"),
@@ -9,21 +9,21 @@ public enum TaskType {
     TODO("T");
 
     /**
-     * The name of the duke.task.Task.
+     * The name of the TaskType.
      */
     private final String name;
 
     /**
-     * Creates a duke.task.TaskType with the specified name.
-     * @param name Name of the duke.task.TaskType.
+     * Creates a TaskType with the specified name.
+     * @param name Name of the TaskType.
      */
     TaskType(String name) {
         this.name = name;
     }
 
     /**
-     * Gets the String representation of the duke.task.TaskType.
-     * @return The String representation of the duke.task.TaskType
+     * Gets the String representation of the TaskType.
+     * @return The String representation of the TaskType
      */
     @Override
     public String toString() {
@@ -31,8 +31,8 @@ public enum TaskType {
     }
 
     /**
-     * Parse the input String into an equivalent duke.task.TaskType.
-     * @return The equivalent duke.task.TaskType.
+     * Parses the input String into an equivalent TaskType.
+     * @return The equivalent TaskType.
      */
     public static TaskType parse(String string) {
         for (TaskType taskType : TaskType.values()) {
