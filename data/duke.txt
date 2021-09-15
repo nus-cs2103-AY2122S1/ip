@@ -1,3 +1,5 @@
 E & 1 &  1 & return book & 16/09/2021 0400
-D & 0 &  2 & tutorial exercise & 17/09/2021 0600
+D & 0 &  0 & tutorial exercise & 17/09/2021 0600
 T & 0 &  1 & buy milk
+T & 0 &  1 & buy milk
+E & 0 &  1 & meeting & 20/09/2021 0200
