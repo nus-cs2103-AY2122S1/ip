@@ -33,7 +33,7 @@ public class PriorityCommand extends Command {
         try {
             Task taskDone = tasks.getTask(index);
             taskDone.changePriority(priority);
-            return ui.displayCompletedMessage(taskDone);
+            return ui.displayChangedPriorityMessage(taskDone);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\t List number out of range, please enter a valid number\n");
         }
