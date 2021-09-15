@@ -98,6 +98,7 @@ public class ResponseProcessor {
                 return TaskList.sort(instruction);
 
             default:
+                throw new VirushadeException("I have yet to evolve to a level where I can understand this.");
             }
         }
         return handleSingleWordInput(keyword);
