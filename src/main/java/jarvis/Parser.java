@@ -139,9 +139,11 @@ public class Parser {
             currIndex++;
         }
         // If the description of the deadline task is empty
-        if (currIndex == 8 || currIndex == instruction.length()) {
+        if (currIndex == 8) {
             throw new JarvisException(Ui.EMPTY_DEADLINE_DESCRIPTION);
-
+        // If the date and timing details are missing
+        } else if (currIndex == instruction.length()) {
+            throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
         // If the extracted deadline is too short to contain all of the relevant details
         } else if (instruction.substring(currIndex).length() != 21) {
             throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
