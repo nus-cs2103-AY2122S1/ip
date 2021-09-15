@@ -4,6 +4,20 @@ Pingu helps you organize your tasks, using local storage to keep your files save
 
 ![Welcome](https://github.com/lwj1711/ip/blob/master/docs/start.png?raw=true)
 
+## Table of Contents
+- [Features](#features)
+- [Commands](#commands)
+  * [Command Format](#command-format)
+  * [Table of Commands](#table-of-commands)
+- [Usage](#usage)
+  * [Task Creation](#task-creation)
+  * [Display Tasks](#display-tasks)
+  * [Mark Task as Done](#mark-task-as-done)
+  * [Delete Task](#delete-task)
+  * [Find Tasks](#find-tasks)
+  * [Show Command help](#show-command-help)
+
+
 ## Features 
 - **Task Creation**
   
@@ -21,7 +35,7 @@ Pingu helps you organize your tasks, using local storage to keep your files save
 - Items in square brackets are to be provided by user
     - e.g. for command `todo [taskname]`, a user may enter `todo homework` 
 
-
+### Table of Commands
 Function            | Command                  | Remarks   
 --------------------|--------------------------|----------------------------------
 Create task         | `todo [task name]` <br> `deadline [task name] /by [date] ` <br> `event [task name] /at [date]`| Format of date must be YYYY-MM-DD <br> You can optionally include time in `[date]`
