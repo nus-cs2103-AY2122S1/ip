@@ -52,9 +52,19 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return parser.parse(input);
+            String response = parser.parse(input);
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Determines if it's Exit state.
+     *
+     * @return true for exit, false for running
+     */
+    public boolean isExit() {
+        return parser.isExit();
     }
 }

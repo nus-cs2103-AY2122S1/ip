@@ -13,9 +13,10 @@ public class Ui {
      * @return result content
      */
     public String showWelcome() {
-        String words1 = "Hello! Welcome! This is Duke~\n";
-        String words2 = "What can I help you today?";
-        return words1 + words2;
+        String words1 = "Hello! This is Duke~\n";
+        String words2 = "What can I help you today?\n";
+        String words3 = "Type 'help' for more commands info.";
+        return words1 + words2 + words3;
     }
 
     /**
@@ -88,5 +89,33 @@ public class Ui {
         return words;
     }
 
+    /**
+     * Prints manual.
+     *
+     * @return result content
+     */
+    public String showHelp() {
+        String manual = "Here are Duke commands:\n"
+                + "- Show all the tasks in the list:"
+                + "  list\n"
+                + "- Search keyword:"
+                + "  find [keyword]\n"
+                + "- Add a new Todo item:"
+                + "  todo ...\n"
+                + "- Add a new Event item:\n"
+                + "  event ... /at [DD/MM/YYYY (HHMM)]\n"
+                + "- Add a new deadline item:\n"
+                + "  deadline ... /by [DD/MM/YYYY (HHMM)]\n"
+                + "- Mark an item as DONE:"
+                + "  done [index]\n"
+                + "- Mark priority:\n"
+                + "  mark [index] &important OR &unimportant OR &ordinary\n"
+                + "- Delete an item:"
+                + "  delete [index]\n"
+                + "- Exit Duke:"
+                + "  bye\n";
+        String other = "If you need other help, please contact the author.";
+        return manual + other;
+    }
 
 }

@@ -11,6 +11,9 @@ public abstract class Task {
     }
     protected Priority priority;
 
+    private String starSign = "\u2605";
+    private String tickSign = "\u2713";
+
     /**
      * Represents a general Task concept.
      * @param description for general Task
@@ -45,7 +48,7 @@ public abstract class Task {
      * @return "X" or " "
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done duke.task with X
+        return (isDone ? tickSign : "  "); // mark done duke.task with X
     }
 
 
@@ -94,11 +97,11 @@ public abstract class Task {
     public String toString() {
         String result = "[" + this.getStatusIcon() + "] ";
         if (isHighPriority()) {
-            result += "!! ";
+            result = result + starSign + starSign + starSign;
         } else if (isMediumPriority()) {
-            result += "!  ";
+            result = result + starSign + starSign;
         } else {
-            result += " ";
+            result = result + starSign;
         }
         result += this.description;
         return result;

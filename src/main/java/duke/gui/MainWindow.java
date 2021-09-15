@@ -1,4 +1,10 @@
+//@@author wengYing227-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+// with minor modifications
+
 package duke.gui;
+import static java.lang.Thread.sleep;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other control.
@@ -42,7 +49,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -50,5 +57,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, new ImageView(dukeImage))
         );
         userInput.clear();
+
+        if (duke.isExit()) {
+            sleep(500);
+            Stage stage = (Stage) userInput.getScene().getWindow();
+            stage.close();
+        }
     }
 }

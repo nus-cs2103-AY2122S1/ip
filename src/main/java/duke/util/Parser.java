@@ -14,6 +14,7 @@ public class Parser {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+    private boolean isExit = false;
 
     /**
      * Represents a new parser for Duke.
@@ -27,6 +28,10 @@ public class Parser {
         this.storage = storage;
     }
 
+    public boolean isExit() {
+        return isExit;
+    }
+
     /**
      * Parses an input and process it,
      * example of the input command should be like: deadline return book /by 2/12/2019 1800 .
@@ -38,6 +43,8 @@ public class Parser {
         String lowerCase = input.toLowerCase();
         if (lowerCase.equals("bye")) {
             return commandBye();
+        } else if (lowerCase.equals("help")) {
+            return commandHelp();
         } else if (lowerCase.equals("list")) {
             return commandList();
         } else if (lowerCase.startsWith("deadline")) {
@@ -201,7 +208,12 @@ public class Parser {
         }
     }
 
+    private String commandHelp() {
+        return ui.showHelp();
+    }
+
     private String commandBye() {
+        this.isExit = true;
         return "Bye! Hope to see you again!";
     }
 }

@@ -1,4 +1,6 @@
-// Credit: Chan Jun Da
+//@@author wengYing227-reused
+//Reused from https://github.com/chan-j-d/ip
+// with minor modifications
 
 package duke.gui;
 
