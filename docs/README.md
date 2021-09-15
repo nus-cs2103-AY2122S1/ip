@@ -3,8 +3,35 @@
 Welcome User! Retriever the Chatbot is a Friendly, Dog themed Chatbot. It
 helps you to manage your busy schedule with its chat style user interface.
 
-___
+![](welcomeSplashScreen.png)
+Welcome Splash Screen
 
+![](chatBotWindow.png)
+Chatbot Window
+
+---
+## Table of Contents
+* Getting Started
+* Quick Access Links
+* Features
+* Usage
+* Command Summary
+
+---
+## Quick Access Links
+  * Adding a Task
+    * Deadline Type Task
+    * Event Type Task
+    * Todo Type Task
+  * Deleting a Task
+  * Ending the Session
+  * Finding a Task
+  * Marking Task as Done
+  * Viewing All Tasks
+  * Viewing Your Schedule
+  * Help Section
+
+---
 ## Features 
 
 ### Feature #1 - Add Various Types of Tasks to Your Schedule
@@ -36,26 +63,8 @@ ___
 > New Users Fret not! Our App has a help feature, which guides you as to how to use 
 a particular feature.
 
-
+---
 ## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
-___
-
 ### `bye` - To end the session with the Chatbot
 
 To quit the Chatbot App, after manipulating the tasks, you may use the
