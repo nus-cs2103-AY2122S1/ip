@@ -283,23 +283,22 @@ public class MainWindow extends AnchorPane {
      * Handles when tasklist button pressed
      */
     @FXML
-    private void handleGetList()  {
+    private void handleGetList() throws InterruptedException {
         String getList = "list";
         String response = duke.guiProcess(getList);
         HBox list = DialogBox.getDukeDialog(response, dukeImage);
         list.setMinWidth(scrollPane.getWidth());
-
-        this.dialogContainer.getChildren().add(list);
+        addUserDukeResponseIntoContainer(getList, response);
     }
 
     /**
      * Handles when help button pressed
      */
     @FXML
-    private void handleGetHelp() {
-        String getList = "help";
-        String response = duke.guiProcess(getList);
-        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+    private void handleGetHelp() throws InterruptedException {
+        String getHelp = "help";
+        String response = duke.guiProcess(getHelp);
+        addUserDukeResponseIntoContainer(getHelp, response);
     }
 
 

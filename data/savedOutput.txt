@@ -1,1 +1,5 @@
-T T 1
+T T task 1
+T F task 2
+T T task 3
+T T task 4
+T F task 5
