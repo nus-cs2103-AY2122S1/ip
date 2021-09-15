@@ -62,7 +62,8 @@ public class DialogBox extends HBox {
                 dialog.getText().equals(Ui.EMPTY_TASK_DONE) ||
                 dialog.getText().equals(Ui.INVALID_DATE_OT_TIMING) ||
                 dialog.getText().equals(Ui.START_IS_AFTER_END) ||
-                dialog.getText().equals(Ui.MISSING_SEARCHPHRASE);
+                dialog.getText().equals(Ui.MISSING_SEARCH_PHRASE) ||
+                dialog.getText().equals(Ui.EMPTY_NOTE_TITLE);
         
         if (isAnErrorMessage) {
             //Error message to be displayed in brown to alert user

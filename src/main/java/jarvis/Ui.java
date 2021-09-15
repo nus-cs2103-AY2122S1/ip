@@ -33,7 +33,7 @@ public class Ui {
     // Error messages by Jarvis for other errors
     public static final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
     public static final String WRONGLY_FORMATTED_DATE = "Please format the date as dd/mm/yyy";
-    public static final String MISSING_SEARCHPHRASE = "Please key a word or phrase to search for!" ;
+    public static final String MISSING_SEARCH_PHRASE = "Please key a word or phrase to search for!" ;
     public static String EMPTY_TASK_DELETE = "Please state the number of the task that you wish to delete! Please key " +
             "in 'list' if you'd like to view your list of tasks again!";
     public static String EMPTY_TASK_DONE = "Please state the number of the task that you have completed! Please key " +
@@ -46,6 +46,7 @@ public class Ui {
             "title /body";
     public static String EMPTY_NOTE_DELETE = "Please state the number of the note that you wish to delete! Please key " +
             "in 'notes' if you'd like to view your list of tasks again!";
+    public static final String EMPTY_NOTE_TITLE = "Please key in a note title!";
 
     /**
      * Displays Jarvis' first greeting when user opens the application.
@@ -207,7 +208,7 @@ public class Ui {
             currIndex++;
         }
         if (currIndex + 1 >= searchPhrase.length()) {
-            throw new JarvisException(Ui.MISSING_SEARCHPHRASE);
+            throw new JarvisException(Ui.MISSING_SEARCH_PHRASE);
         }
         searchPhrase = searchPhrase.substring(currIndex + 1);
 

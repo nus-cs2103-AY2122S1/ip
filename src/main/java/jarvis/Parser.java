@@ -237,7 +237,7 @@ public class Parser {
         StringBuilder noteTitle = new StringBuilder();
         String noteBody;
 
-        int currIndex = 5;
+        int currIndex = 4;
         // Checking for the '/' which separates the note title and body
         while (currIndex < instruction.length() &&
                 !instruction.substring(currIndex).startsWith(" /")) {
@@ -245,8 +245,10 @@ public class Parser {
             currIndex++;
         }
 
+        if (currIndex == 4) {
+            throw new JarvisException(Ui.EMPTY_NOTE_TITLE);
         // If the '/' cannot be found, note is formatted wrongly
-        if (currIndex == instruction.length()) {
+        } else if (currIndex == instruction.length()) {
             throw new JarvisException(Ui.WRONGLY_FORMATTED_NOTE);
         // If the note is formatted correctly
         } else {
@@ -275,7 +277,7 @@ public class Parser {
             try {
                 int noteNum = Integer.parseInt(instruction.substring(12)) - 1;
                 // If there is no corresponding note to the number keyed in by the user
-                if (noteNum >= TaskList.getCounter() || noteNum < 0) {
+                if (noteNum >= NoteList.getCounter() || noteNum < 0) {
                     throw new JarvisException(Ui.invalidNoteNum(noteNum));
                     // If there is a corresponding note to the number keyed in by the user
                 } else {
