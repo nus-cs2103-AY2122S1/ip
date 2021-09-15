@@ -46,7 +46,7 @@ Voila! ^_^ I've added this task:
 - [T][ ] quiz
 You currently have 1 task(s) in the list.
 ```
-### `event <description> /at <date-time>` - adds a Event task type
+### `event <description> /at <date-time>` - adds an Event task type
 Adds an Event task to the task list.
 > Note: Formats supported for *date-time*:
 > * yyyy-mm-dd (e.g 2021-12-26)
