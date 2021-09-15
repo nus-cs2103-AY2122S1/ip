@@ -179,6 +179,7 @@ public class Parser {
             // For user, the list starts at 1. However, our list index starts at 0
             int taskIndex = Integer.parseInt(input.substring(action.substringIndex)) - 1;
 
+            // Apply a delete or done function specified in the enum depending on the action
             taskToBeAltered = action.actionOnTask.apply(this.taskList, taskIndex);
             assert taskToBeAltered != null : "taskToBeAltered should not be null";
             System.out.println("This task is successfully " + action.successMessage + "!\n\n"
@@ -213,12 +214,16 @@ public class Parser {
                 + "i.e update 2 event Career fair /at 2021-09-06";
 
         try {
-            String[] params = input.split(" ", 3);
+            // Split the input in 3 params: command word, task number, task description
+            final int NUMBER_OF_PARAMS = 3;
+            String[] params = input.split(" ", NUMBER_OF_PARAMS);
             checkUpdateParams(params, paramExceptionMessage);
 
+            // Initialise variables to hold significant params
             int taskIndex = Integer.parseInt(params[1]) - 1;
             String taskDescription = params[2];
 
+            // Instantiate and update the TaskList with the new Task
             Task newTask = instantiateTask(taskDescription);
             Task oldTask = this.taskList.updateTask(taskIndex, newTask);
             System.out.println("This Task is successfully updated from:\n\n"
@@ -247,13 +252,13 @@ public class Parser {
      */
     private void checkUpdateParams(String[] params, String paramExceptionMessage)
             throws InvalidParamException, NoDescriptionException {
-        if (params.length < 3) {
+        String taskDescription;
+
+        // If the input does not have 3 params, or if the third param is not a task command, throw an exception
+        if (params.length < 3 || !isTaskCommand(taskDescription = params[2])) {
             throw new InvalidParamException(paramExceptionMessage);
         }
-        String taskDescription = params[2];
-        if (!isTaskCommand(taskDescription)) {
-            throw new InvalidParamException(paramExceptionMessage);
-        }
+
         checkDescription(taskDescription);
     }
 

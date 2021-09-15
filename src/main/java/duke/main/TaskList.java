@@ -103,16 +103,16 @@ public class TaskList implements Iterable<Task> {
      * @param match Given string to check the task descriptions against.
      */
     public void printAllContains(String match) {
-        boolean taskFound = false;
+        boolean isFound = false;
         for (int i = 0; i < this.taskList.size(); i++) {
             String description = this.taskList.get(i).getDescription();
             if (description.contains(match)) {
-                taskFound = true;
+                isFound = true;
                 System.out.println("    Task " + (i + 1) + ". " + this.taskList.get(i));
             }
         }
 
-        if (!taskFound) {
+        if (!isFound) {
             System.out.println("                    -- NO MATCHING TASKS FOUND --");
         }
     }
