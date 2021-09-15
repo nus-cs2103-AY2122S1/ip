@@ -13,7 +13,6 @@ public class DeleteCommand extends Command {
     private int index;
 
     private TaskList tasks;
-
     private Task deletedTask;
     private boolean isAlreadyUndone = false;
 
@@ -23,6 +22,7 @@ public class DeleteCommand extends Command {
         this.tasks = tasks;
     }
 
+    /** Overloaded constructor of DeleteCommand class */
     public DeleteCommand(int index, TaskList tasks, boolean isAlreadyUndone) {
         this.index = index;
         this.tasks = tasks;
@@ -64,14 +64,29 @@ public class DeleteCommand extends Command {
         return (obj instanceof DeleteCommand) && (this.index == ((DeleteCommand) obj).index);
     }
 
+    /**
+     * The method to retrieve the task to be deleted.
+     *
+     * @return the task to be deleted by this command
+     */
     public Task getDeletedTask() {
         return this.deletedTask;
     }
 
+    /**
+     * The method to retrieve the index of the task to be deleted in the list of tasks.
+     *
+     * @return the index of the task to be deleted in the list of tasks
+     */
     public int getDeletedIndex() {
         return this.index;
     }
 
+    /**
+     * The method to return whether this command comes from an "undo" command.
+     *
+     * @return boolean indicating whether this command comes from an "undo" command
+     */
     public boolean isAlreadyUndone() {
         return this.isAlreadyUndone;
     }

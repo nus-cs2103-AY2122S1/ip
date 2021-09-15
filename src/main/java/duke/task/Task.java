@@ -40,7 +40,7 @@ public abstract class Task {
      * @return symbol indicating if the task has been completed
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        return (this.isDone ? "✔︎" : " ");
     }
 
     /**

@@ -25,9 +25,12 @@ public class Parser {
     private static final String INVALID_DATETIME_FORMAT =
             "Invalid date and time input, indicate date in yyyy-MM-dd HH:mm format.";
     private static final String TOO_MANY_ARGUMENTS = "Too many arguments for this command.";
+    private static final String MISSING_NUMBER = "Indicate a task number beside the command ☻";
+    private static final String MISSING_KEYWORD = "Enter a keyword beside the command ☻";
 
     private Duke duke;
 
+    /** The constructor of a Parser object */
     public Parser(Duke duke) {
         this.duke = duke;
     }
@@ -54,9 +57,9 @@ public class Parser {
             } else if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
                 missingTaskName(cmd);
             } else if (cmd.equals("done") || cmd.equals("delete")) {
-                throw new DukeException("Indicate a task number beside the command ☻");
+                throw new DukeException(MISSING_NUMBER);
             } else if (cmd.equals("find")) {
-                throw new DukeException("Enter a keyword beside the command ☻");
+                throw new DukeException(MISSING_KEYWORD);
             } else if (cmd.equals("undo")) {
                 return getUndoCommand(this.duke.getPreviousCommand());
             } else {
@@ -133,6 +136,12 @@ public class Parser {
         return new AddCommand(e);
     }
 
+    /**
+     * The method to return an DoneCommand from a user input
+     *
+     * @param userInputArr String that the user input for the DoneCommand
+     * @return the DoneCommand to be executed
+     */
     public Command parseDoneCommand(String[] userInputArr) throws DukeException {
         if (userInputArr.length > 2) {
             throw new DukeException(TOO_MANY_ARGUMENTS);
@@ -141,6 +150,12 @@ public class Parser {
         return new DoneCommand(index);
     }
 
+    /**
+     * The method to return an DeleteCommand from a user input
+     *
+     * @param userInputArr String that the user input for the DeleteCommand
+     * @return the DeleteCommand to be executed
+     */
     public Command parseDeleteCommand(String[] userInputArr) throws DukeException {
         if (userInputArr.length > 2) {
             throw new DukeException(TOO_MANY_ARGUMENTS);
@@ -149,6 +164,12 @@ public class Parser {
         return new DeleteCommand(index, this.duke.getTaskList());
     }
 
+    /**
+     * The method to return an AddCommand from a user input
+     *
+     * @param input String that the user input to add a Deadline
+     * @return the AddCommand to be executed
+     */
     public static Command parseDeadlineCommand(String input) throws DukeException {
         try {
             return addDeadline(input);
@@ -157,6 +178,12 @@ public class Parser {
         }
     }
 
+    /**
+     * The method to return an AddCommand from a user input
+     *
+     * @param input String that the user input to add an Event
+     * @return the AddCommand to be executed
+     */
     public static Command parseEventCommand(String input) throws DukeException {
         try {
             return addEvent(input);
@@ -185,6 +212,14 @@ public class Parser {
         return input.substring(input.indexOf(" ")).strip();
     }
 
+    /**
+     * The method to parse an "undo" command by user and return the respective
+     * command to be carried out.
+     *
+     * @param prevCommand the previous command that the user wants to undo
+     * @return the command to help undo the previous command
+     * @throws DukeException
+     */
     public Command getUndoCommand(Command prevCommand) throws DukeException {
         if (prevCommand == null) {
             throw new DukeException("No previous command to undo");

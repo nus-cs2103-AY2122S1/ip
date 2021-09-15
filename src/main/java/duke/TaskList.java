@@ -112,6 +112,7 @@ public class TaskList {
      * The method to add a Task to the list
      *
      * @param t the Task to be added
+     * @return the String to show to users
      */
     public String addTask(Task t) {
         listOfTasks.add(t);
@@ -119,6 +120,13 @@ public class TaskList {
                 + "You now have " + listOfTasks.size() + " task(s) in the list.";
     }
 
+    /**
+     * The overloaded method to add a Task to the list at the specified index.
+     *
+     * @param t the Task to be added
+     * @param index the index in the list to add the Task at
+     * @return the String to show to users
+     */
     public String addTask(Task t, int index) {
         listOfTasks.add(index, t);
         return "Okay! Task added back:\n  " + t.toString() + "\n"
@@ -129,6 +137,7 @@ public class TaskList {
      * The method to delete a Task from the list
      *
      * @param index the index of the Task to be deleted
+     * @return the String to show to users
      */
     public String deleteTask(int index) {
         int numOfTasks = listOfTasks.size();
@@ -149,6 +158,7 @@ public class TaskList {
      * The method to mark a Task from the list as done
      *
      * @param index the index of the Task to be marked as done
+     * @return the String to show to users
      */
     public String markTaskAsDone(int index) {
         int numOfTasks = listOfTasks.size();
@@ -163,6 +173,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * The method to mark a Task as not yet done
+     *
+     * @param index the index of the Task to be marked as undone
+     * @return the String to show to users
+     */
     public String markTaskAsUndone(int index) {
         Task t = listOfTasks.get(index);
         t.markAsUndone();

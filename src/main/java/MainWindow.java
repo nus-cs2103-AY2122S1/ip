@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
 
     private Text text = new Text(logo);
 
+    /**
+     * Initializes the interface with a welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -44,6 +47,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(logo + "Hi, welcome back! ☻\nWhat would you like to do?", dukeImage));
     }
 
+    /**
+     * Sets the Duke object that is used
+     *
+     * @param d the Duke object to be used
+     */
     public void setDuke(Duke d) {
         this.duke = d;
     }
