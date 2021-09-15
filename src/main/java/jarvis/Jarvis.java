@@ -60,7 +60,7 @@ public class Jarvis {
     }
 
     /**
-     * Launch the application in command line interface mode.
+     * Launches the application in command line interface mode.
      */
     public void launchInCliMode() {
         Ui.showFormattedOutputMessage(ui.getGreetingMessage());

@@ -6,7 +6,8 @@ import javafx.application.Application;
 
 public class Launcher {
     /**
-     * Main method for the Jarvis application.
+     * Starts the application in CLI mode or GUI mode depending on the command line arguments supplied by the user.
+     * If the user does not supply any command line arguments, the application starts in GUI by default.
      *
      * @param args Command line arguments.
      */
