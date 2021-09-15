@@ -15,16 +15,14 @@ public class Ui {
     public static final String EMPTY_TODO_DESCRIPTION = "Oops! The description of a todo cannot be empty.";
 
     // Error messages by Jarvis for deadline task related errors
-    public static final String EMPTY_DEADLINE_DESCRIPTION = "Oops! The description of a deadline cannot be empty.";
-    public static final String INCOMPLETE_DEADLINE = "Please key in the date and timing as dd/mm/yyyy hh:mm " +
-            "(in 24 hours format)";
+    public static final String INCOMPLETE_DEADLINE = "Please key in the description, date and timing as " +
+            "description /by: dd/mm/yyyy hh:mm (in 24 hours format)";
     public static final String WRONGLY_FORMATTED_DEADLINE_TIME = "Please include the time in the 24 hour format " +
             "(e.g. 15:00)";
 
     // Error messages by Jarvis for event task related errors
-    public static final String EMPTY_EVENT_DESCRIPTION = "Oops! The description of an event cannot be empty.";
-    public static final String INCOMPLETE_EVENT_INFO = "Please format the date as dd/mm/yyy and the start and end " +
-            "times in the 24 hour format (e.g. 15:00-16:00)";
+    public static final String INCOMPLETE_EVENT_INFO = "Please key in the description, date, start and end timings " +
+            "as description /at: dd/mm/yyy hh:mm-hh:mm (in 24 hours format, e.g. 15:00-16:00)";
     public static final String WRONGLY_FORMATTED_EVENT_TIMINGS = "Please include the start and end times in the 24 " +
             "hour format (e.g. 15:00-16:00)";
     public static final String START_IS_AFTER_END = "Please ensure that the start time of your event is before its end " +
