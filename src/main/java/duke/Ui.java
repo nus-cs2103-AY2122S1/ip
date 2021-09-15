@@ -40,7 +40,7 @@ public class Ui {
                 + "deadline [Description] /by [yyyy-mm-dd] - add deadline\n"
                 + "event [Description] /at [yyyy-mm-dd HH:mm] - add event\n"
                 + "done [Task Number] - mark task as done\n"
-                + "find [Description] - search for task with word\n"
+                + "find [Keyword] - search for task with word\n"
                 + "bye - say goodbye\n";
         return usage;
     }

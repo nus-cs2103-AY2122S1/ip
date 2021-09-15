@@ -22,7 +22,7 @@
                     prefWidth="450.0" vvalue="1.0">
             <content>
                 <VBox fx:id="dialogContainer" prefHeight="546.0" prefWidth="434.0"
-                      style="-fx-background-color: lightgrey;" />
+                      style="-fx-background-color: lightgrey; overflow: auto" />
             </content>
         </ScrollPane>
     </children>
