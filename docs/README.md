@@ -3,11 +3,13 @@
 Welcome User! Retriever the Chatbot is a Friendly, Dog themed Chatbot. It
 helps you to manage your busy schedule with its chat style user interface.
 
-![](welcomeSplashScreen.png)
+<p align="center">
 * Welcome Splash Screen
+![](welcomeSplashScreen.png)
 
-![](chatBotWindow.png)
 * Chatbot Window
+![](chatBotWindow.png)
+</p>
 
 ---
 ## Table of Contents
@@ -24,16 +26,16 @@ helps you to manage your busy schedule with its chat style user interface.
 ---
 ## Quick Access Links
   * Adding a Task
-    * Deadline Type Task
-    * Event Type Task
-    * Todo Type Task
-  * Deleting a Task
-  * Ending the Session
-  * Finding a Task
-  * Marking Task as Done
-  * Viewing All Tasks
-  * Viewing Your Schedule
-  * Help Section
+    * [Deadline Type Task](#deadline---to-add-a-deadline-type-task)
+    * [Event Type Task](#event---to-add-an-event-type-task)
+    * [Todo Type Task](#todo---to-add-a-todo-type-task)
+  * [Deleting a Task](#delete---to-delete-a-task)
+  * [Ending the Session](#bye---to-end-the-session-with-the-chatbot)
+  * [Finding a Task](#find---to-find-tasks-with-similar-keywords)
+  * [Marking Task as Done](#done---to-mark-a-task-as-done)
+  * [Viewing All Tasks](#view---to-view-the-tasks-scheduled-for-a-day)
+  * [Viewing Your Schedule](#view---to-view-the-tasks-scheduled-for-a-day)
+  * [Help Section](#help---to-show-all-the-possible-commands)
 
 ---
 ## Features 
@@ -368,7 +370,7 @@ Master, You are Busy For The Day...
 ---
 ## Command Summary
 Command | Summary | `Syntax`
---------|---------|-------
+------- | ------- | --------
 bye | To end the session with the Chatbot | `bye`
 help | To display the help section | `help`
 deadline | To add a deadline type task | `deadline TASK_DESCRIPTION /by DD/MM/YYYY`
