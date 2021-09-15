@@ -18,6 +18,7 @@ public class Event extends Task {
      *
      * @param description the name/description of the task
      * @param time The times at which the event starts and ends
+     * @throws JarvisException if the event date or timings are invalid
      */
     public Event(String description, String time) throws JarvisException {
         super(description);
@@ -58,6 +59,7 @@ public class Event extends Task {
             start = LocalDateTime.of(year, month, date, startHour, startMin);
             end = LocalDateTime.of(year, month, date, endHour, endMin);
 
+        // If the there are non-numerical values in the date/timings or if the date/timings are invalid
         } catch (NumberFormatException | DateTimeException e) {
             throw new JarvisException(Ui.INVALID_DATE_OT_TIMING);
         }

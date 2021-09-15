@@ -22,6 +22,8 @@ public class JarvisTest {
 
     /**
      * Checks if event tasks are created correctly
+     *
+     * @throws JarvisException if the event date or timings are invalid
      */
     @Test
     public void eventCreation_eventTask_success() throws JarvisException {
@@ -31,6 +33,8 @@ public class JarvisTest {
 
     /**
      * Checks if deadline tasks are displayed correctly to users
+     *
+     * @throws JarvisException if the deadline date or timings are invalid
      */
     @Test
     public void deadlineCreation_deadlineTask_success() throws JarvisException {
@@ -40,6 +44,8 @@ public class JarvisTest {
 
     /**
      * Checks if deadline tasks are saved in the correct format in user's hard disk
+     *
+     * @throws JarvisException if the deadline date or timings are invalid
      */
     @Test
     public void deadlinePrintToFile_deadlineTask_success() throws JarvisException {

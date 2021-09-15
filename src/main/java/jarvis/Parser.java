@@ -136,7 +136,7 @@ public class Parser {
             taskDescription += instruction.substring(currIndex, currIndex + 1);
             currIndex++;
         }
-
+        // If the description of the deadline task is empty
         if (currIndex == 8 || currIndex == instruction.length()) {
             throw new JarvisException(Ui.EMPTY_DEADLINE_DESCRIPTION);
 
@@ -183,7 +183,8 @@ public class Parser {
             taskDescription += instruction.substring(currIndex, currIndex + 1);
             currIndex++;
         }
-        // If the description of the deadline task is empty
+
+        // If the description of the event task is empty
         if (currIndex == 5 || currIndex == instruction.length()) {
             throw new JarvisException(Ui.EMPTY_EVENT_DESCRIPTION);
         // If the extracted timestamp is too short to contain all of the relevant details

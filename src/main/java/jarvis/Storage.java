@@ -51,6 +51,7 @@ public class Storage {
      *
      * @throws FileNotFoundException if the file ('jarvis.txt') containing the list of tasks
      * cannot be found
+     * @throws JarvisException if the task date or timings are invalid
      */
     public void retrieveTaskFileContents() throws FileNotFoundException, JarvisException {
         File f = new File(this.filePath); // Create a File for the given file path
@@ -96,6 +97,7 @@ public class Storage {
      * Interprets the string from the user's task file that represents the deadline task and adds it to the task list.
      *
      * @param deadlineString the string from the user's task file that represents the deadline task
+     * @throws JarvisException if the deadline date or timing are invalid
      */
     public void retrieveDeadline(String deadlineString) throws JarvisException {
         int currIndex = 7;
@@ -120,6 +122,7 @@ public class Storage {
      * Interprets the string from the user's task file that represents the event task and adds it to the task list.
      *
      * @param eventString the string from the user's task file that represents the event task
+     * @throws JarvisException if the event date or timings are invalid
      */
     public void retrieveEvent(String eventString) throws JarvisException {
         int currIndex = 7;
@@ -231,7 +234,7 @@ public class Storage {
      * @throws IOException if there is an error in re-writing the list of tasks without the
      * deleted task
      */
-    public static void rewriteTaskFile() throws IOException{
+    public static void rewriteTaskFile() throws IOException {
         if (TaskList.getTaskList().size() == 0) {
             Storage.writeToFile("data/jarvis.txt", "");
         } else {
@@ -255,7 +258,7 @@ public class Storage {
      * @throws IOException if there is an error in re-writing the list of tasks without the
      * deleted task
      */
-    public static void rewriteNoteFile() throws IOException{
+    public static void rewriteNoteFile() throws IOException {
         if (NoteList.getNoteList().size() == 0) {
             Storage.writeToFile("data/notes.txt", "");
         } else {

@@ -17,6 +17,7 @@ public class Deadline extends Task {
      *
      * @param description The name/description of the task
      * @param by The deadline for the task (in the format dd/mm/yyyy hh:mm - in 24 hours format)
+     * @throws JarvisException if the deadline date or timings are invalid
      */
     public Deadline(String description, String by) throws JarvisException {
         super(description);
@@ -49,6 +50,8 @@ public class Deadline extends Task {
             // Formatting the deadline to be displayed to users
             this.timeToDisplay = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
             deadline = taskDate;
+
+        // If the there are non-numerical values in the date/timing or if the date/timing are invalid
         } catch (NumberFormatException | DateTimeException e) {
             throw new JarvisException(Ui.INVALID_DATE_OT_TIMING);
         }
