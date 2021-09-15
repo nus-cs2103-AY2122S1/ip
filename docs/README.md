@@ -1,7 +1,7 @@
 # User Guide
 Duke adds and schedules your tasks for you!
 
-![Image](/docs/Ui.png)
+![Image](https://raw.githubusercontent.com/michael-lee-sk/ip/master/docs/Ui.png)
 
 ## Features 
 
