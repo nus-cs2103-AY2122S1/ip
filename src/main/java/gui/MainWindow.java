@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
 
 
     /**
-     * Initialize screen for the application.
+     * Initializes screen for the application.
      */
     @FXML
     public void initialize() {

@@ -226,7 +226,7 @@ public class Processor implements IProcessor {
     }
 
     /**
-     * Redo to the previous TaskList.
+     * Goes to the previous TaskList.
      *
      * @return String representation of the previous TaskList.
      */

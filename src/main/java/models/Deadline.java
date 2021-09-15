@@ -54,7 +54,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return string implementation of the Deadline object.
+     * Returns string implementation of the Deadline object.
      *
      * @return String implementation of the Deadline.
      */

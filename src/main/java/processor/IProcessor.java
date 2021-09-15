@@ -9,7 +9,7 @@ import models.Command;
  */
 public interface IProcessor {
     /**
-     * Process command based on the type.
+     * Processes command based on the type.
      *
      * @param command Type of command.
      * @param arguments Other arguments for the command.
@@ -18,21 +18,21 @@ public interface IProcessor {
     String processCommand(Command command, List<String> arguments);
 
     /**
-     * Process command with type BYE.
+     * Processes command with type BYE.
      *
      * @return Response from the chatbot.
      */
     String processBye();
 
     /**
-     * Process command with type LIST.
+     * Processes command with type LIST.
      *
      * @return Response from the chatbot.
      */
     String processList();
 
     /**
-     * Process command with type DONE.
+     * Processes command with type DONE.
      *
      * @param index Index that specify which Task is done.
      * @return Response from the chatbot.
@@ -40,7 +40,7 @@ public interface IProcessor {
     String processDone(String index);
 
     /**
-     * Process command with type DELETE.
+     * Processes command with type DELETE.
      *
      * @param index Index that specify which Task.
      * @return Response from the chatbot.
@@ -52,7 +52,7 @@ public interface IProcessor {
     String processUndo();
 
     /**
-     * Process command with type DEFAULT.
+     * Processes command with type DEFAULT.
      *
      * @param arguments List of arguments related to the command.
      * @return Response from the chatbot.

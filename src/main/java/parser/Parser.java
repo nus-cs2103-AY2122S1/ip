@@ -30,7 +30,7 @@ public class Parser implements IParser {
     }
 
     /**
-     * Implementation that parses the command entered by the user.
+     * Parses the command entered by the user.
      *
      * @param line Command that is entered by the user.
      * @return True if the command entered is not bye.
@@ -59,7 +59,7 @@ public class Parser implements IParser {
     }
 
     /**
-     * Function implementation that allows Parser to take the next command from the user.
+     * Gets the next Command from the user.
      *
      * @return True if the command entered is not bye and the response from the chatbot.
      */
@@ -70,7 +70,7 @@ public class Parser implements IParser {
     }
 
     /**
-     * Function implementation that allows Parser to take command from the user and get response.
+     * Returns the correct response based on the Command.
      *
      * @return True if the command entered is not bye and the response from the chatbot.
      */

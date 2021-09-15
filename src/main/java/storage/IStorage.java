@@ -10,14 +10,14 @@ import tasklist.TaskList;
 public interface IStorage {
 
     /**
-     * Wrapper function that add task to the TaskList.
+     * Adds task to the TaskList.
      *
      * @param task Task to be added to the storage.
      */
     void addTask(Task task);
 
     /**
-     * Wrapper function that set a specified Task inside TaskList to be done.
+     * Sets a specified Task inside TaskList to be done.
      *
      * @param index Index of the Task that will be set done.
      * @throws InvalidIndexException If there is no task with the specified index.
@@ -25,7 +25,7 @@ public interface IStorage {
     void setDone(int index) throws InvalidIndexException;
 
     /**
-     * Wrapper function that get a specified Task from TaskList.
+     * Gets a specified Task from TaskList.
      *
      * @param index Index of the Task that will be retrieved.
      * @return  Task object with the specified index.
@@ -33,14 +33,14 @@ public interface IStorage {
     Task getTask(int index);
 
     /**
-     * Wrapper function to get the latest Task from the TaskList.
+     * Gets the latest Task from the TaskList.
      *
      * @return Task object with the last index.
      */
     Task getLastTask();
 
     /**
-     * Wrapper function that delete Task from the TaskList with the specified index.
+     * Deletes Task from the TaskList with the specified index.
      *
      * @param index Index of the Task that will be deleted.
      * @return String representation of the deleted Task.
@@ -50,7 +50,7 @@ public interface IStorage {
 
 
     /**
-     * Wrapper function to get the number of Task in the TaskList.
+     * Gets the number of Task in the TaskList.
      *
      * @return The number of Task objects in the TaskList.
      */

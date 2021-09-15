@@ -28,7 +28,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Function to add task to the ArrayList.
+     * Functions to add task to the ArrayList.
      *
      * @param task Task object that will be added.
      */
@@ -40,7 +40,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Toggle the isDone boolean inside Task objects.
+     * Toggles the isDone boolean inside Task objects.
      *
      * @param index Index of the task which is going to be set done.
      * @throws InvalidIndexException If there is no task with the specified index.
@@ -59,7 +59,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Return task with the specified index from the ArrayList.
+     * Returns task with the specified index from the ArrayList.
      *
      * @param index Index of the task that will be retrieved.
      * @return Task with the specified index.
@@ -69,7 +69,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Return the last Task object in the ArrayList.
+     * Returns the last Task object in the ArrayList.
      *
      * @return Task with the last index.
      */
@@ -78,7 +78,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Return the size of the ArrayList.
+     * Returns the size of the ArrayList.
      *
      * @return The number of Tasks in the ArrayList.
      */
@@ -87,7 +87,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Delete the task with specified index and returning the String value of the deleted Task.
+     * Deletes the task with specified index and returning the String value of the deleted Task.
      *
      * @param index Index of the task that will be deleted.
      * @return String value of the deleted Task.
@@ -108,7 +108,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Function implementation that returns all of the tasks with the matched keyword in a TaskList.
+     * Returns all of the tasks with the matched keyword in a TaskList.
      *
      * @param keywords Keywords that will be searched.
      * @return TaskList object with all lists that match the keyword.
@@ -140,7 +140,7 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Return TaskList String representation.
+     * Returns TaskList String representation.
      *
      * @return String value of the TaskList object.
      */

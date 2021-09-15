@@ -54,7 +54,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return string implementation of the Event object.
+     * Returns string implementation of the Event object.
      *
      * @return String implementation of the Event.
      */

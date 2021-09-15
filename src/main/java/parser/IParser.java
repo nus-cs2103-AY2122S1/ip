@@ -15,7 +15,7 @@ public interface IParser {
     Pair<Boolean, String> parseLine(String line);
 
     /**
-     * Function that allows Parser to take the next command from the user.
+     * Allows Parser to take the next command from the user.
      *
      * @return True if the command entered is not bye and the response from the chatbot.
      */

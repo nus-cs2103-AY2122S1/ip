@@ -46,7 +46,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return string implementation of the Todo object.
+     * Returns string implementation of the Todo object.
      *
      * @return String implementation of the Todo.
      */

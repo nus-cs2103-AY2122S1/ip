@@ -68,7 +68,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Save the current TaskList to local memory.
+     * Saves the current TaskList to local memory.
      */
     private void writeTaskListToFile() {
         try {
@@ -80,7 +80,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Wrapper function implementation that add task to the TaskList.
+     * Adds task to the TaskList.
      *
      * @param task Add a new task to storage.
      */
@@ -92,7 +92,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Wrapper function implementation that set a specified Task inside TaskList to be done.
+     * Sets a specified Task inside TaskList to be done.
      *
      * @param index Index of the Task that will be set done.
      * @throws InvalidIndexException If there is no task with the specified index.
@@ -104,7 +104,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Wrapper function implementation that get a specified Task from TaskList.
+     * Gets a specified Task from TaskList.
      *
      * @param index Index of the Task that will be retrieved.
      * @return  Task object with the specified index.
@@ -114,7 +114,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Wrapper function implementation to get the latest Task from the TaskList.
+     * Gets the latest Task from the TaskList.
      *
      * @return Task object with the last index.
      */
@@ -123,7 +123,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Wrapper function implementation that delete Task from the TaskList with the specified index.
+     * Deletes Task from the TaskList with the specified index.
      *
      * @param index Index of the Task that will be deleted.
      * @return String representation of the deleted Task.
@@ -137,7 +137,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Wrapper function implementation to get the number of Task in the TaskList.
+     * Gets the number of Task in the TaskList.
      *
      * @return The number of Task objects in the TaskList.
      */
@@ -156,7 +156,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Return TaskList String representation.
+     * Returns TaskList String representation.
      *
      * @return String representation of TaskList.
      */
@@ -194,7 +194,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Undo the previous command.
+     * Goes the previous command.
      */
     public void undo() {
         list = getPrevious();
@@ -202,7 +202,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Redo the previous command.
+     * Redoes the previous command.
      */
     public void redo() {
         list = getNext();
