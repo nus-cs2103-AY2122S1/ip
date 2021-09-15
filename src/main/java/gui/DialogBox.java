@@ -45,6 +45,11 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        dialog.setStyle("-fx-background-color: #FEFBF3; " +
+                "-fx-background-radius: 20; " +
+                "-fx-padding: 20; " +
+                "-fx-font-size: 16;"
+        );
         setAlignment(Pos.TOP_LEFT);
     }
 
