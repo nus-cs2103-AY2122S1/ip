@@ -380,8 +380,73 @@ bye
   <p align = "center"> GUI Interface </p>
 </div>
 
+<br> 
+<hr>
 <br>
 
+## For Developers
+
+WhoBot is an Open-Source modular project and can be customized by interested developers.
+
+You can always modify the responses to make it more tailored towards you by editing the `ui.echo()` statements. 
+
+For example, to modify the greeting message (for GUI) you can edit the below function. You can also modify the memory file too.
+
+```java
+  public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        DisplayBuffer.setParent(dialogContainer);
+        DisplayBuffer.setUserInput(userInput);
+        DisplayBuffer.setSendButton(sendButton);
+        this.parser = new Parser();
+        this.ui = new UI();
+        try {
+            String filename = "." + File.separator + "data" + File.separator + "WhoBotData.txt";
+            this.storage = new Storage(filename);
+            this.taskList = new TaskList(storage);
+        } catch (WhoBotException ex) {
+            ui.echo(ex.getMessage(), UI.Type.ERROR);
+            System.exit(0);
+        }
+
+        scrollPane.setOnMouseEntered(e -> {
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        });
+        scrollPane.setOnMouseExited(e -> {
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        });
+
+        ui.echo("Hello! I'm the WhoBot.", UI.Type.START);
+        ui.echo("What can I do for you?", UI.Type.END);
+  }
+```
+
+You can even modify the command specific responses by editing the `ui.echo()` in their respective functions in the **TaskList** class. Such as the function below:
+
+```java
+public void addTodo(String command, UI ui) throws WhoBotException {
+        assert ui != null;
+        try {
+            Todo task = new Todo(command.substring(5));
+            Anomaly anomalies = checkAnomalies(task);
+            if (anomalies == Anomaly.EXISTENT) {
+                throw new WhoBotException("This event already exists in your list!");
+            }
+            if (list.add(task)) {
+                taggedList.get(NO_TAG).add(task);
+                ui.echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", UI.Type.START);
+                ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
+            } else {
+                throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new WhoBotException("Ensure that the command is of the form \"todo #description\"."
+                    + " The description can not be empty.");
+        }
+    }
+```
+
+You can have fun personalizing WhoBot.
 
 # G00D LUCK
 
