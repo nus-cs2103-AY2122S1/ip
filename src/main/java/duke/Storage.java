@@ -44,7 +44,7 @@ public class Storage {
     /**
      * Initialises the ArrayList for the archiveList of Duke.
      *
-     * @return ArrayList of the archiveList.
+     * @return ArrayList to be passed into ArchiveList for Duke.
      */
     public ArrayList<Task> initialiseArchive() {
         //read from the data/archive.text and return an ArrayList of Tasks
@@ -68,15 +68,21 @@ public class Storage {
                 String task = s.nextLine();
                 String[] splitTask = task.split("\\|");
 
-                if (splitTask[0].equals("T")) {
+                switch (splitTask[0]) {
+                case "T":
                     // it is todotask
                     initialiseToDo(output, splitTask);
-                } else if (splitTask[0].equals("E")) {
+                    break;
+                case "E":
                     // event
                     initialiseEvent(output, splitTask);
-                } else if (splitTask[0].equals("D")) {
+                    break;
+                case "D":
                     // deadline
                     initialiseDeadline(output, splitTask);
+                    break;
+                default:
+                    assert false;
                 }
 
             }

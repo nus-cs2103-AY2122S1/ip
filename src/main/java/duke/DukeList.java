@@ -41,7 +41,7 @@ public abstract class DukeList {
     /**
      * Getter for taskArrayList.
      *
-     * @return tasks.
+     * @return ArrayList of tasks.
      */
     public ArrayList<Task> getTaskArrayList() {
         return this.taskArrayList;
@@ -86,6 +86,12 @@ public abstract class DukeList {
         return this.taskArrayList.get(index).convertToString();
     }
 
+    /**
+     * Gets the task at given index of the DukeList.
+     *
+     * @param index index which task is at in DukeList.
+     * @return Task at index.
+     */
     public Task get(int index) {
         return this.taskArrayList.get(index);
     }

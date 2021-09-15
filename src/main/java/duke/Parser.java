@@ -30,46 +30,46 @@ public class Parser {
 
     // Checks for command types.
     /**
-     * Checks if input is a remove command.
+     * Checks if userInput is a delete command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a remove command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a delete command.
      */
-    public static boolean isDelete(String input) {
-        String[] separated = input.split(SPACE);
+    public static boolean isDelete(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated[0].equals("delete") && separated.length > 1;
     }
 
     /**
-     * Checks if input is a remove archive command.
+     * Checks if userInput is a remove delete command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a remove archive command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a delete archive command.
      */
-    public static boolean isDeleteArchive(String input) {
-        String[] separated = input.split(SPACE);
+    public static boolean isDeleteArchive(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated.length > 2 && separated[0].equals("delete") && separated[1].equals("archive");
     }
 
     /**
-     * Checks if input is a done command.
+     * Checks if userInput is a done command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a done command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a done command.
      */
-    public static boolean isDone(String input) {
-        String[] separated = input.split(SPACE);
+    public static boolean isDone(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated[0].equals("done");
     }
 
     /**
-     * Checks if user input is a find command.
+     * Checks if user userInput is a find command.
      *
-     * @param input User input to check if it is a find command.
+     * @param userInput User input to check if it is a find command.
      * @return true if it is a find command, else false.
      */
-    public static boolean isFind(String input) {
-        String[] separated = input.split(SPACE);
+    public static boolean isFind(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated[0].equals("find");
     }
 
@@ -98,68 +98,68 @@ public class Parser {
     }
 
     /**
-     * Checks if input is an event command.
+     * Checks if userInput is an event command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a event command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a event command.
      */
-    private static boolean isEvent(String input) {
-        String[] separated = input.split(SPACE);
+    private static boolean isEvent(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated[0].equals("event");
     }
 
     /**
-     * Checks if input is a deadline command.
+     * Checks if userInput is a deadline command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a deadline command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a deadline command.
      */
-    private static boolean isDeadline(String input) {
-        String[] separated = input.split(SPACE);
+    private static boolean isDeadline(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated[0].equals("deadline");
     }
 
     /**
-     * Checks if input is a todo command.
+     * Checks if userInput is a todo command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a todo command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a todo command.
      */
-    private static boolean isTodo(String input) {
-        String[] separated = input.split(SPACE);
+    private static boolean isTodo(String userInput) {
+        String[] separated = userInput.split(SPACE);
         return separated[0].equals("todo");
     }
 
     /**
-     * Checks if input is an archive command.
+     * Checks if userInput is an archive command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is an archive command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is an archive command.
      */
-    private static boolean isArchive(String input) {
-        String[] separated = input.split(" ");
+    private static boolean isArchive(String userInput) {
+        String[] separated = userInput.split(" ");
         return separated[0].equals("archive");
     }
 
     /**
-     * Checks if input is an unarchive command.
+     * Checks if userInput is an unarchive command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is an unarchive command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is an unarchive command.
      */
-    private static boolean isUnarchive(String input) {
-        String[] separated = input.split(" ");
+    private static boolean isUnarchive(String userInput) {
+        String[] separated = userInput.split(" ");
         return separated[0].equals("unarchive");
     }
 
     /**
-     * Checks if input is a bye command.
+     * Checks if userInput is a bye command.
      *
-     * @param input Input which is being checked.
-     * @return true if input is a bye command.
+     * @param userInput Input which is being checked.
+     * @return true if userInput is a bye command.
      */
-    private static boolean isBye(String input) {
-        return input.equals("bye");
+    private static boolean isBye(String userInput) {
+        return userInput.equals("bye");
     }
 
 
@@ -200,52 +200,52 @@ public class Parser {
     /**
      * Checks if String is an Integer or "all" word.
      *
-     * @param s String to check.
+     * @param userInput String to check.
      * @return true if it is an Integer or "all" word, else false.
      */
-    public static boolean isIntegerOrAll(String s) {
-        return isPositiveInteger(s) || isAll(s);
+    public static boolean isIntegerOrAll(String userInput) {
+        return isPositiveInteger(userInput) || isAll(userInput);
     }
 
     /**
      * Checks if String is "all" word.
      *
-     * @param s String to check.
+     * @param userInput String to check.
      * @return true if it is an "all" word.
      */
-    public static boolean isAll(String s) {
-        return s.equals("all");
+    public static boolean isAll(String userInput) {
+        return userInput.equals("all");
     }
 
     /**
      * Checks if String is an Integer.
      *
-     * @param s String to check.
+     * @param userInput String to check.
      * @return true if it is an Integer.
      */
-    public static boolean isPositiveInteger(String s) {
-        return s.matches("\\d+");
+    public static boolean isPositiveInteger(String userInput) {
+        return userInput.matches("\\d+");
     }
 
     /**
      * Checks if string is within range of given taskList.
      *
      * @param dukeList taskList to see if index s is within.
-     * @param s String to check if is within range of taskList.
+     * @param userInput String to check if is within range of taskList.
      * @return true if String is within the range of the taskList, else false.
      */
-    public static boolean isOutOfRange(DukeList dukeList, String s) {
-        return !isAll(s) && (isExceedLength(dukeList, s) || isLessThanOne(s));
+    public static boolean isOutOfRange(DukeList dukeList, String userInput) {
+        return !isAll(userInput) && (isExceedLength(dukeList, userInput) || isLessThanOne(userInput));
     }
 
     /**
      * Checks if integer value of s is less than 1.
      *
-     * @param s String which is to be converted intp integer value.
+     * @param userInput String which is to be converted into integer value.
      * @return true if integer value of s is less than 1, false otherwise.
      */
-    private static boolean isLessThanOne(String s) {
-        return Integer.valueOf(s) < 1;
+    private static boolean isLessThanOne(String userInput) {
+        return Integer.valueOf(userInput) < 1;
     }
 
     /**
@@ -262,12 +262,12 @@ public class Parser {
      * Checks if integer value of s exceeds the length of dukeList.
      *
      * @param dukeList DukeList to check if integer value of s exceeds.
-     * @param s String which is to be converted into integer value.
+     * @param userInput String which is to be converted into integer value.
      * @return true if integer value of s does not exceed length of dukeList,
      * false otherwise.
      */
-    private static boolean isExceedLength(DukeList dukeList, String s) {
-        return Integer.valueOf(s) > dukeList.getSize();
+    private static boolean isExceedLength(DukeList dukeList, String userInput) {
+        return Integer.valueOf(userInput) > dukeList.getSize();
     }
 
     /**

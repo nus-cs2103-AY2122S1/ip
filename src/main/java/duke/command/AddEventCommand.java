@@ -12,7 +12,7 @@ public class AddEventCommand extends AddCommand {
     private static final String DELIMITER = "/at";
 
     /**
-     * Constructor for AddCommand.
+     * Constructor for AddEventCommand.
      *
      * @param toAdd Task to add to taskList.
      */

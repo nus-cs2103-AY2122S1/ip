@@ -96,6 +96,7 @@ public class UnarchiveCommand extends Command {
      * @param archiveList archiveList which task at indexToUnarchive would be unarchived.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList for Duke.
+     * @return String representation of the things printed in the execute method.
      */
     @Override
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {

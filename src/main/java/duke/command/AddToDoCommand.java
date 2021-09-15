@@ -10,7 +10,7 @@ import duke.task.ToDo;
 public class AddToDoCommand extends AddCommand {
 
     /**
-     * Constructor for AddCommand.
+     * Constructor for AddToDoCommand.
      *
      * @param toAdd Task to add to taskList.
      */

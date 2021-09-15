@@ -86,6 +86,7 @@ public class ArchiveCommand extends Command {
 
         ui.print(message);
     }
+
     /**
      * Gets the String representation of the things printed in the
      * execute method as well as execute the archiving of the task at
@@ -95,6 +96,7 @@ public class ArchiveCommand extends Command {
      * @param archiveList archiveList to store the archived task.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList for Duke.
+     * @return String representation of the things printed in the execute method.
      */
     @Override
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {

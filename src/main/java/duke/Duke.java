@@ -14,7 +14,7 @@ public class Duke {
     private final ArchiveList archiveList;
 
     /**
-     * Constructor for Duke. Initialises Ui, Storage and TaskList objects.
+     * Constructor for Duke. Initialises Ui, Storage, TaskList and ArchiveList objects.
      */
     public Duke() {
         this.ui = new Ui();

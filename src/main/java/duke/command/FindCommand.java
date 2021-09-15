@@ -73,6 +73,7 @@ public class FindCommand extends Command {
      * @param archiveList ArchiveList to store archived tasks.
      * @param ui Ui Object to get the String representation of the text printed.
      * @param storage Storage object which saves and loads the tasklist.
+     * @return String representation of the things printed in the execute method.
      */
     @Override
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
