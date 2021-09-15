@@ -42,12 +42,11 @@ public class Ui {
      */
     public static String guiWelcomeMessage() {
         return "Hello, I'm Duke\nWhat can I do for you?\n"
-                + "╭━━━╮╱╱╭╮\n"
-                + "╰╮╭╮┃╱╱┃┃\n"
-                + "╱┃┃┃┣╮╭┫┃╭┳━━╮\n"
-                + "╱┃┃┃┃┃┃┃╰╯┫┃━┫\n"
-                + "╭╯╰╯┃╰╯┃╭╮┫┃━┫\n"
-                + "╰━━━┻━━┻╯╰┻━━╯\n";
+                + " ___            _        \n"
+                + "|   _  \\ _   _ |  |  ___ \n"
+                + "|  |  |   |  |  |   |  |/ / __ \\\n"
+                + "|  |_|  |  |_|   |   <  __/\n"
+                + "|___/ \\___|_|\\_\\__|\n";
     }
 
     public void lineGenerator() {
