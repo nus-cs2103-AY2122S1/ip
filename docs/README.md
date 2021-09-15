@@ -20,7 +20,7 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
 
 Successfully opening TaskMan would lead you to a window like this
 
-![SuccessStartup](UI.png)
+![SuccessStartup](Ui.png)
 
 ** Common Errors **
 1. Please ensure that Java 11 or above is installed. You may download the lastest version [here](#https://www.oracle.com/java/technologies/downloads/)
