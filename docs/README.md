@@ -45,7 +45,7 @@ Checks the task as done.
 
 ### Delete tasks
 
-Removes tas#ks from your list.
+Removes tasks from your list.
 
 ### Find tasks
 
