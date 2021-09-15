@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
@@ -54,16 +55,33 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets DialogBox for user.
+     * @param text User text
+     * @param img User image
+     * @return DialogBox for user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets DialogBox for Dukewu.
+     * @param text Dukewu text
+     * @param img Dukewu image
+     * @return DialogBox for Dukewu
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 
+    /**
+     * Gets Dukewu (Welcome Message) DialogBox.
+     * @param img Dukewu image
+     * @return Dukewu DialogBox with welcome message as text
+     */
     public static DialogBox getDukeWelcome(Image img) {
         var db = new DialogBox(Ui.getWelcomeMessage(), img);
         db.flip();

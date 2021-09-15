@@ -2,22 +2,40 @@ package duke.tasks;
 
 import duke.tasks.Task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Todo (Task). Can be added to list in Duke.
- *
  * @author Ruth Poh
  */
 public class Todo extends Task {
 
     /**
-     * Constructor to initialize Todo.
-     *
+     * Initializes Todo.
      * @param taskString Task.
      */
     public Todo(String taskString) {
         super(taskString);
         super.date = null;
         super.time = null;
+    }
+
+    /**
+     * Getter method for date Todo occurs at.
+     * @return Date that Event occurs at in String form.
+     */
+    @Override
+    public String getDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    /**
+     * Getter method for time Todo occurs
+     * @return Time that Event occurs at in String form.
+     */
+    @Override
+    public String getTime() {
+        return "";
     }
 
     /**

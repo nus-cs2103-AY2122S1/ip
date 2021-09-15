@@ -1,22 +1,19 @@
 package duke.tasks;
 
 import duke.Parser;
-import duke.tasks.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline (Task). Can be added to list in Duke.
- *
+ * Deadline (Task). Can be added to TaskList.
  * @author Ruth Poh
  */
 public class Deadline extends Task {
 
     /**
-     * Constructor to initialize Deadline.
-     *
+     * Initializes Deadline.
      * @param taskString Task.
      * @param date Date of deadline.
      */
@@ -27,13 +24,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor to initialize Deadline. With time.
-     * @param taskstr Task.
+     * Initialize Deadline, with time.
+     * @param taskString Task.
      * @param deadline Deadline of task.
      * @param time Time of task.
      */
-    public Deadline(String taskstr, LocalDate deadline, LocalTime time) {
-        super(taskstr);
+    public Deadline(String taskString, LocalDate deadline, LocalTime time) {
+        super(taskString);
         super.date = deadline;
         super.time = time;
     }

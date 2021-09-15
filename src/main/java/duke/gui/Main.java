@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import duke.Duke;
 
 /**
- * A GUI for Duke using FXML.
+ * GUI for Duke using FXML.
  */
 public class Main extends Application {
 

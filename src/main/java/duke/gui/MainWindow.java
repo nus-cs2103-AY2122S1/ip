@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import duke.Duke;
 
 /**
- * Controller for duke.gui.MainWindow. Provides the layout for the other controls.
+ * Controller for Dukewu. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML

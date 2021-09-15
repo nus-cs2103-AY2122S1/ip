@@ -2,23 +2,19 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
- * Parent class. Inherited by a bunch of classes like Event and Deadline.
- *
+ * Parent Task class. Inherited by Event, Deadline, Todo.
  * @author Ruth Poh
  */
-public class Task {
+public abstract class Task {
     protected String taskString;
     protected boolean isDone;
     protected LocalDate date;
     protected LocalTime time;
 
     /**
-     * Constructor to initialize Deadline.
-     *
+     * Initialises Task.
      * @param taskString Task.
      */
     public Task(String taskString) {
@@ -27,39 +23,16 @@ public class Task {
     }
 
     /**
-     * Returns date stored in Task in String form.
-     * Is blank because Todo doesn't have a Time. Is Overwritten in Event and Deadline.
-     * @return ""
+     * Getter method for taskString.
+     * @return String of task.
      */
-    public String getDate() {
-        return "";
+    public String getTaskString() {
+        return taskString;
     }
 
-    /**
-     * Returns date stored in Task in String form.
-     * Occurs when wanting to convert date to simplified form for saving in file.
-     * @return ""
-     */
-    public String getDateTimeStorage() {
-        return "";
-    }
+    public abstract String getDate();
 
-    /**
-     * Returns String for storage.
-     * @return String for storage.
-     */
-    public String toStorageString() {
-        return "";
-    }
-
-    /**
-     * Returns date stored in Task in String form.
-     * Is blank because Todo doesn't have a Time. Is Overwritten in Event and Deadline.
-     * @return ""
-     */
-    public String getTime() {
-        return "";
-    }
+    public abstract String getTime();
 
     /**
      * Checks if Task has a time.
@@ -70,20 +43,12 @@ public class Task {
     }
 
     /**
-     * Returns the descriptive String of task. Used in displayList.
-     * @return string of task.
+     * Returns descriptive String of task.
+     * @return String of task.
      */
     @Override
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " + taskString;
-    }
-
-    /**
-     * Returns the pure String of task.
-     * @return Pure String of task.
-     */
-    public String getTaskString() {
-        return taskString;
     }
 
     /**
@@ -106,4 +71,23 @@ public class Task {
             return true;
         }
     }
+
+    /**
+     * Returns date stored in Task in String form.
+     * Occurs when wanting to convert date to simplified form for saving in file.
+     * @return ""
+     */
+    public String getDateTimeStorage() {
+        return "";
+    }
+
+    /**
+     * Returns String for storage.
+     * @return String for storage.
+     */
+    public String toStorageString() {
+        return "";
+    }
+
+
 }

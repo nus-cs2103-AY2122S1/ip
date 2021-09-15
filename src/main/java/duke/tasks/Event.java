@@ -8,15 +8,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event (Task). Can be added to list in Duke.
- *
+ * Event (Task). Can be added to a TaskList.
  * @author Ruth Poh
  */
 public class Event extends Task {
 
     /**
-     * Constructor to initialize Deadline.
-     *
+     * Initializes Event.
      * @param taskstr Task.
      * @param date Date/Time of task.
      */
@@ -44,7 +42,7 @@ public class Event extends Task {
      */
     @Override
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "";
     }
 
     /**
