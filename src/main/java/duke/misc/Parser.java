@@ -1,116 +1,175 @@
 package duke.misc;
 
 import java.io.IOException;
-import java.util.Arrays;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIndexException;
+import duke.exception.InvalidTimeException;
 import duke.task.DateTime;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 
 /**
- * Parser class to handle user commands.
+ * Parser class to handle parsing of user command inputs.
  */
 public class Parser {
+
     /**
-     * Creates a Task object according to user command.
+     * Constructor for Parser class.
+     */
+    public Parser() {
+    }
+
+    /**
+     * Parses the command input by user.
      *
      * @param input User's command input.
-     * @return Respective Task object.
-     * @throws DukeException Throws DukeException if input is invalid.
+     * @return Appropriate executable command according to user command input.
+     * @throws DukeException In case the input is invalid.
+     * @throws IOException In case the directory of data storage file is non-existent.
      */
-    public Task makeTask(String input) throws DukeException {
+    public Command parseCommand(String input) throws DukeException, IOException {
+        String inputPrefix = input;
+        String inputSuffix = "";
         int idx = input.indexOf(' ');
-        String commandType = "";
-        String[] args = {};
         if (idx >= 0) {
-            commandType = input.substring(0, idx).trim();
-            args = input.substring(idx + 1).split("/");
-            Arrays.stream(args).forEach(String::trim);
+            inputPrefix = input.substring(0, idx);
+            inputSuffix = input.substring(idx + 1);
         }
-        switch (commandType) {
-        case "todo":
-            return new Todo(args[0]);
-        case "event":
-            if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
-                throw new InvalidFormatException();
-            }
-            if (DateTime.isInvalidDate(args[1])) {
-                throw new InvalidDateException();
-            }
-            assert args.length == 2;
-            return new Event(args[0], args[1]);
+        switch (inputPrefix) {
+        case "bye":
+            return makeByeCommand(inputSuffix);
+        case "list":
+            return makeListCommand(inputSuffix);
+        case "done":
+            return makeDoneCommand(inputSuffix);
+        case "delete":
+            return makeDeleteCommand(inputSuffix);
+        case "find":
+            return makeFindCommand(inputSuffix);
         case "deadline":
-            if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
-                throw new InvalidFormatException();
-            }
-            if (DateTime.isInvalidDate(args[1])) {
-                throw new InvalidDateException();
-            }
-            assert args.length == 2;
-            return new Deadline(args[0], args[1]);
+            return makeAddDeadlineCommand(inputSuffix);
+        case "todo":
+            return makeTodoCommand(inputSuffix);
+        case "event":
+            return makeEventCommand(inputSuffix);
         default:
             throw new InvalidCommandException();
         }
     }
 
-    /**
-     * Executes the appropriate action according to user command.
-     *
-     * @param input User's command input.
-     * @param tl TaskList object which action is executed on.
-     * @return Message according to what action is executed.
-     * @throws DukeException Throws DukeException if the input is invalid.
-     * @throws IOException Throws IOException the directory to save data in is non-existent.
-     */
-    public String executeCommand(String input, TaskList tl) throws DukeException, IOException {
-        String prefix = input;
-        String suffix = "";
-        int idx = input.indexOf(' ');
+    private String[] parseDateTime(String datetime) {
+        int idx = datetime.indexOf(" ");
+        String[] res = {"x", "x"};
         if (idx >= 0) {
-            prefix = input.substring(0, idx);
-            suffix = input.substring(idx + 1);
+            res[0] = datetime.substring(0, idx);
+            res[1] = datetime.substring(idx + 1);
+            return res;
         }
-        switch (prefix) {
-        case "bye":
-            if (!suffix.isEmpty()) {
-                throw new InvalidCommandException();
-            }
-            tl.saveData();
-            return Ui.GOODBYE_MSG;
-        case "list":
-            if (!suffix.isEmpty()) {
-                throw new InvalidCommandException();
-            }
-            return Ui.LIST_MSG + tl.displayList();
-        case "done":
-            assert !suffix.equals("");
-            try {
-                int taskIdx = Integer.parseInt(suffix);
-                return Ui.DONE_MSG + tl.completeTask(taskIdx);
-            } catch (NumberFormatException e) {
-                throw new InvalidIndexException();
-            }
-        case "delete":
-            assert !suffix.equals("");
-            try {
-                int taskIdx = Integer.parseInt(suffix);
-                return Ui.DELETE_MSG + tl.deleteTask(taskIdx);
-            } catch (NumberFormatException e) {
-                throw new InvalidIndexException();
-            }
-        case "find":
-            assert !suffix.equals("");
-            return Ui.FIND_MSG + tl.findTasks(suffix);
-        default:
-            Task task = makeTask(input);
-            return Ui.ADD_MSG + tl.addTask(task);
+        res[0] = datetime;
+        return res;
+    }
+
+    private String[] parseInputSuffix(String inputSuffix) {
+        String[] args = inputSuffix.split("/");
+        for (int i = 0; i < args.length; i++) {
+            args[i] = args[i].trim();
         }
+        String[] dateAndTime = parseDateTime(args[1]);
+        String[] res = new String[3];
+        res[0] = args[0];
+        res[1] = dateAndTime[0];
+        res[2] = dateAndTime[1];
+        return res;
+    }
+
+    private Command makeByeCommand(String inputSuffix) throws DukeException {
+        if (!inputSuffix.isEmpty()) {
+            throw new InvalidCommandException();
+        }
+        return new ByeCommand();
+    }
+
+    private Command makeListCommand(String inputSuffix) throws DukeException {
+        if (!inputSuffix.isEmpty()) {
+            throw new InvalidCommandException();
+        }
+        return new ListCommand();
+    }
+
+    private Command makeDeleteCommand(String inputSuffix) throws DukeException {
+        try {
+            int taskIdx = Integer.parseInt(inputSuffix);
+            return new DeleteCommand(taskIdx);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+    }
+
+    private Command makeDoneCommand(String inputSuffix) throws DukeException {
+        try {
+            int taskIdx = Integer.parseInt(inputSuffix);
+            return new DoneCommand(taskIdx);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+    }
+
+    private Command makeFindCommand(String inputSuffix) throws InvalidCommandException {
+        if (!inputSuffix.matches("[\\s\\S]+")) {
+            throw new InvalidCommandException();
+        }
+        return new FindCommand(inputSuffix);
+    }
+
+    private Command makeAddDeadlineCommand(String inputSuffix) throws DukeException {
+        String[] args = parseInputSuffix(inputSuffix);
+        if (!inputSuffix.matches("[\\s\\S]+/[\\s\\S]+")) {
+            throw new InvalidFormatException();
+        }
+
+        assert args.length > 0;
+
+        if (DateTime.isInvalidDate(args[1])) {
+            throw new InvalidDateException();
+        }
+        if (DateTime.isInvalidTime(args[2])) {
+            throw new InvalidTimeException();
+        }
+        return new AddDeadlineCommand(args);
+    }
+
+    private Command makeEventCommand(String inputSuffix) throws DukeException {
+        String[] args = parseInputSuffix(inputSuffix);
+        if (!inputSuffix.matches("[\\s\\S]+/[\\s\\S]+")) {
+            throw new InvalidFormatException();
+        }
+
+        assert args.length > 0;
+
+        if (DateTime.isInvalidDate(args[1])) {
+            throw new InvalidDateException();
+        }
+        if (DateTime.isInvalidTime(args[2])) {
+            throw new InvalidTimeException();
+        }
+        return new AddEventCommand(args);
+    }
+
+    private Command makeTodoCommand(String inputSuffix) throws DukeException {
+        if (!inputSuffix.matches("[\\s\\S]+")) {
+            throw new InvalidCommandException();
+        }
+        return new AddTodoCommand(inputSuffix);
     }
 }

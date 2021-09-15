@@ -25,6 +25,12 @@ public class Storage {
     private final boolean fileDirExists = Files.exists(filePath.getParent());
 
     /**
+     * Constructor for Storage class.
+     */
+    public Storage() {
+    }
+
+    /**
      * Reads data from duke.txt file.
      *
      * @return ArrayList of saved tasks.
@@ -47,12 +53,12 @@ public class Storage {
                 al.add(new Todo(args[2], isTaskDone));
                 break;
             case "Event":
-                assert args.length == 4;
-                al.add(new Event(args[2], args[3], isTaskDone));
+                assert args.length == 5;
+                al.add(new Event(args[2], args[3], args[4], isTaskDone));
                 break;
             case "Deadline":
-                assert args.length == 4;
-                al.add(new Deadline(args[2], args[3], isTaskDone));
+                assert args.length == 5;
+                al.add(new Deadline(args[2], args[3], args[4], isTaskDone));
                 break;
             default:
                 assert false : "Wrote data wrongly";

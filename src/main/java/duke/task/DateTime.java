@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTime {
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("hh:mm");
+    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     private LocalDate date;
     private LocalTime time;
@@ -33,7 +33,9 @@ public class DateTime {
      */
     DateTime(String date, String time) {
         this.date = LocalDate.parse(date);
-        this.time = LocalTime.parse(time);
+        if (!time.isEmpty()) {
+            this.time = LocalTime.parse(time);
+        }
     }
 
     /**
@@ -43,6 +45,15 @@ public class DateTime {
      */
     public String getDate() {
         return date.toString();
+    }
+
+    /**
+     * Returns original time used to create the DateTime class.
+     *
+     * @return String of original time.
+     */
+    public String getTime() {
+        return time.toString();
     }
 
     /**
@@ -76,12 +87,21 @@ public class DateTime {
     }
 
     /**
-     * Overrides Object class's toString method.
+     * Formats the input date.
      *
      * @return The String representation of the date in d MMM yyy format.
      */
-    @Override
-    public String toString() {
+    public String getFormattedDate() {
         return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
+
+    /**
+     * Formats the input time.
+     *
+     * @return The String representation of the time in.
+     */
+    public String getFormattedTime() {
+        return time.format(DateTimeFormatter.ofPattern("KK.mm a"));
+    }
+
 }

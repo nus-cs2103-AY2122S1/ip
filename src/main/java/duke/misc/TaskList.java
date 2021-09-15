@@ -18,7 +18,7 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for TaskList class.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -104,6 +104,8 @@ public class TaskList {
      * @return The boolean value of the subsequence query.
      */
     public boolean isSubSequence(String a, String b) {
+        assert !a.isEmpty();
+
         // Convert all characters to lower case and remove all whitespace characters.
         a = a.toLowerCase().replaceAll("\\s+", "");
         b = b.toLowerCase().replaceAll("\\s+", "");

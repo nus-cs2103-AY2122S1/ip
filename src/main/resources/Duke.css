@@ -1,6 +1,7 @@
 #dialog {
     -fx-border-color: pink;
     -fx-border-width: 4.0;
+    -fx-background-color: black;
 }
 
 #scrollPane {
@@ -9,6 +10,7 @@
 
 #dialogContainer {
     -fx-background-color: black;
+    -fx-background-image: none;
 }
 
 #anchor {

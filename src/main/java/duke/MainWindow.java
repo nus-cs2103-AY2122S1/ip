@@ -69,6 +69,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        // To simulate a slight pause when chat bot is signaled to exit.
         if (duke.getIsExited()) {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> Platform.exit());

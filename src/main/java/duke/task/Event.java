@@ -4,30 +4,32 @@ package duke.task;
  * Event class which encapsulates event date/time.
  */
 public class Event extends Task {
-    private DateTime atDate;
+    private DateTime atDateTime;
 
     /**
      * Constructor for Event class.
      *
      * @param description Description of event.
-     * @param at Date/time of event.
+     * @param atDate Date of event.
+     * @param atTime Time of event.
      */
-    public Event(String description, String at) {
+    public Event(String description, String atDate, String atTime) {
         super(description);
-        this.atDate = new DateTime(at);
+        this.atDateTime = new DateTime(atDate, atTime);
     }
 
     /**
      * Constructor for Event class.
      *
      * @param description Description of event task.
-     * @param at Data/time of event.
+     * @param atDate Date of event.
+     * @param atTime Time of event.
      * @param isDone Completion status of event.
      */
-    public Event(String description, String at, Boolean isDone) {
+    public Event(String description, String atDate, String atTime, Boolean isDone) {
         super(description);
         super.isDone = isDone;
-        this.atDate = new DateTime(at);
+        this.atDateTime = new DateTime(atDate, atTime);
     }
 
     /**
@@ -38,7 +40,7 @@ public class Event extends Task {
     @Override
     public String getData() {
         return "Event // " + (super.getIsDone() ? 1 : 0) + " // " + super.getDescription()
-                + " // " + atDate.getDate();
+                + " // " + atDateTime.getDate() + " // " + atDateTime.getTime();
     }
 
     /**
@@ -48,6 +50,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atDate.toString() + ")\n";
+        return "[E]" + super.toString()
+                + " (by: " + atDateTime.getFormattedDate() + " "
+                + atDateTime.getFormattedTime() + ")\n";
     }
 }

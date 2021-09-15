@@ -4,30 +4,32 @@ package duke.task;
  * Deadline class which Encapsulates task's deadline.
  */
 public class Deadline extends Task {
-    private DateTime byDate;
+    private DateTime byDateTime;
 
     /**
      * Constructor for Deadline class.
      *
      * @param description Description of deadlined task.
-     * @param by Date/time of task deadline.
+     * @param byDate Date of task deadline.
+     * @param byTime Time of task deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String byDate, String byTime) {
         super(description);
-        this.byDate = new DateTime(by);
+        this.byDateTime = new DateTime(byDate, byTime);
     }
 
     /**
      * Constructor for Deadline class.
      *
      * @param description Description of deadline task.
-     * @param by Date/time of task deadline.
+     * @param byDate Date of task deadline.
+     * @param byTime Time of task deadline.
      * @param isDone Completion status of task.
      */
-    public Deadline(String description, String by, Boolean isDone) {
+    public Deadline(String description, String byDate, String byTime, Boolean isDone) {
         super(description);
         super.isDone = isDone;
-        this.byDate = new DateTime(by);
+        this.byDateTime = new DateTime(byDate, byTime);
     }
 
     /**
@@ -38,7 +40,7 @@ public class Deadline extends Task {
     @Override
     public String getData() {
         return "Deadline // " + (super.getIsDone() ? 1 : 0) + " // " + super.getDescription()
-                + " // " + byDate.getDate();
+                + " // " + byDateTime.getDate() + " // " + byDateTime.getTime();
     }
 
     /**
@@ -48,6 +50,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byDate.toString() + ")\n";
+        return "[D]" + super.toString()
+                + " (by: " + byDateTime.getFormattedDate() + " "
+                + byDateTime.getFormattedTime() + ")\n";
     }
 }

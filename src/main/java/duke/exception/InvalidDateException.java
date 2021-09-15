@@ -8,7 +8,7 @@ public class InvalidDateException extends DukeException {
      * Constructor for InvalidNoDateException class.
      */
     public InvalidDateException() {
-        super("Sorry >.< but this format is invalid!\nPlease follow this format: "
+        super("Sorry >.< but this date format is invalid!\nPlease follow this format: "
                 + "[yyyy-MM-dd].");
     }
 }

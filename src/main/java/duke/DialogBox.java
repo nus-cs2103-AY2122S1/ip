@@ -68,7 +68,6 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: black");
         db.getDialog().setStyle("-fx-background-color: azure; -fx-padding: 5 5 5 5");
         setMargin(db.getDisplayPicture(), new Insets(0, 0, 0, 10));
         db.setPadding(new Insets(10, 0, 10, 10));
@@ -85,7 +84,6 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: black");
         db.getDialog().setStyle("-fx-background-color: azure; -fx-padding: 5 5 5 5");
         db.setPadding(new Insets(10, 10, 10, 0));
         db.flip();
