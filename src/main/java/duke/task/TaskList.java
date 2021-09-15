@@ -70,7 +70,6 @@ public class TaskList {
             listOfTasks = listOfTasks + String.format("\t%d. %s\n", i + 1, tasks.get(i));
         }
 
-        System.out.println(listOfTasks);
         return listOfTasks;
     }
 }
