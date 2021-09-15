@@ -128,6 +128,9 @@ Foramt: `save`
 #### Input History Navigation
 Simply press ⬆️⬇️ button on your keyboard to navigate throught your input history, similar to most command line interface.
 
+<img src="https://user-images.githubusercontent.com/39845424/133407009-37c2e7f9-725c-4b92-8223-27a02f774392.gif" height="720">
+
+
 ## Coming your way
 
 - modify save task path.
