@@ -1,24 +1,27 @@
-# Duke project template
+# Super Pretty Ultra Hyper Mega Cute Shining God of Destruction Dukuwu ~~☆☆☆ tehe
+> dowcto, wewre losing him!!
+> qwick, hand me the defibwiwatow!!
+> please. turn off my [redacted] life support
+>                              - You after you use Dukuwu [(source)](https://i.redd.it/qcsnneo5fyh01.jpg)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## What Dukuwu Does To You
+Dukuwu sucks your will to live. It's:
+* Time consuming
+* Sanity consuming
+* Flesh consuming
 
-## Setting up in Intellij
+Sounds fun, right? And the best part is that it's **F R E E !**
+All you need to do are these three simple steps:
+1. Download it [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)
+2. If you actually clicked the link, lmao ok no the actual one is [here](https://github.com/ruthpohrp/ip)
+3. You ~~don't actually~~ want to download this ~~_WHY WOULD YOU_~~
+4. please. turn off my life support
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Features:
+- [x] A detailed narration of my slow descent into my insanity
+- [x] Nothing else
+- [x] Oh yeah and Dukuwu helps you manage your tasks ig 🤔 just run the Duke file and type 'help' to find out more
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## 
+Here's a sneak peek at what it looks like:
+![Alt text](https://media.discordapp.net/attachments/732543939260842045/887724097218433064/example.png?width=674&height=897)
