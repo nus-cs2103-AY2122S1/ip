@@ -1,6 +1,4 @@
-# Brobot User Guide
-
-##Quick start
+## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
