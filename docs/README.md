@@ -12,7 +12,7 @@ But that means you are either very active or procrastinating your work :P
 
 ## Usage
 
-###`list`
+### `list`
 
 List out all tasks in your tasklist.
 
@@ -28,7 +28,7 @@ Here are the tasks in your list:
     2. [D][ ][M] return book (by: Jul 7 2021 1800)
     3. [E][ ][L] project meeting (at: Dec 1 2021 1100)
 ```
-###`todo`
+### `todo`
 
 Adds a Todo type task to your tasklist.
 
@@ -44,7 +44,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-###`deadline`
+### `deadline`
 
 Adds a Deadline type task to your tasklist.
 
@@ -59,7 +59,7 @@ Got it. I've added this task:
    [D][ ][M] work report (by: May 5 2021 1800)
 Now you have 1 tasks in the list.
 ```
-###`event`
+### `event`
 
 Adds a Event type task to your tasklist.
 
@@ -74,7 +74,7 @@ Got it. I've added this task:
    [E][ ][L] concert (at: May 3 2021 1200)
 Now you have 1 tasks in the list.
 ```
-###`delete`
+### `delete`
 
 Deletes a task from your tasklist.
 
@@ -90,7 +90,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-###`done`
+### `done`
 
 Updates the status of a task in your tasklist as completed.
 
@@ -104,7 +104,7 @@ Expected outcome:
 Done.
 ```
 
-###`find`
+### `find`
 
 Finds tasks that match the given keyword.
 
@@ -119,7 +119,7 @@ Here are the matching tasks in your list:
 1.[T][ ][H] buy bread
 ```
 
-###`bye`
+### `bye`
 
 Exits the bot.
 
