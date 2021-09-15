@@ -1,6 +1,4 @@
-package duke.ui;
-
-import duke.MainWindow;
+package duke;
 
 import java.io.IOException;
 import java.util.Collections;

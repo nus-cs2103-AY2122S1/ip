@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         MainWindow ap = new MainWindow();
-        duke = new Duke();
+        duke = new Duke(stage);
         ap.setDuke(duke);
         Scene scene = new Scene(ap);
         stage.setScene(scene);

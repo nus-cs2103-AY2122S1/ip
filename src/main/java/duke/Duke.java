@@ -27,17 +27,6 @@ import java.nio.file.Paths;
  */
 public class Duke {
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
     private UserInterface ui;
     private DateTimeFormatter dtformatter;
     private Storage storage;
@@ -46,8 +35,8 @@ public class Duke {
     /**
      * Class constructor.
      */
-    public Duke() {
-        ui = new UserInterface();
+    public Duke(Stage stage) {
+        ui = new UserInterface(stage);
         dtformatter = DateTimeFormatter.ISO_DATE;
         String home = System.getProperty("user.home");
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
