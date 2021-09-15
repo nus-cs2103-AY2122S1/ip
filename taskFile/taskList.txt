@@ -1,5 +1,5 @@
 [D][X] geq1000 quiz (by 2021-09-17)
-[T][ ] ACC1701X tutorial
+[T][ ] acc1701x tutorial and self-study
 [T][X] finish my ACC1701X presentation draft
 [D][ ] cs2103t IP (by 2021-09-10)
 [E][ ] NUS Career Fair (at 2021-09-08)

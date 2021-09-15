@@ -49,6 +49,6 @@ public class UpdateCommand extends Command {
         default:
             throw new DukeSyntaxErrorException(taskType);
         }
-        return ACKNOWLEDGEMENT + index + "as:\n" + newTask;
+        return ACKNOWLEDGEMENT + index + " as:\n" + newTask;
     }
 }
