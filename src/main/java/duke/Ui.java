@@ -10,7 +10,7 @@ public class Ui {
      * Returns the welcome message upon startup of the bot.
      */
     public static String welcomeMessage() {
-        return "Hello this is Duke! What can I do for you today? \nuwu";
+        return "Hello this is Soy! What can I do for you today? \nuwu";
     }
 
     /**
@@ -18,7 +18,7 @@ public class Ui {
      */
     public static String unknownCommand() {
         return "OOPS!!! I'm sorry, but I don't know what that means :(\n"
-            + "Type 'help' to learn how to use DukeBot!";
+            + "Type 'help' to learn how to use SoyBot!";
     }
 
     /**

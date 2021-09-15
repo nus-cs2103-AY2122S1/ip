@@ -13,19 +13,19 @@ public class HelpUi {
      */
     public static String helpText() {
         return " Help Guide:\n"
-            + " /general: general description of Duke\n"
+            + " /general: general description of Soy\n"
             + " /task: tasks available to add\n"
             + " /commands1-2: list of commands\n";
     }
 
     /**
-     * Returns general description of duke
+     * Returns general description of Soy Bot
      *
      * @return the string for description text.
      */
     public static String generalText() {
         return " General information:\n"
-            + "This is Duke, a robot that helps you manage your tasks. Current version is: 1.2";
+            + "This is SoyBot, a robot that helps you manage your tasks. Current version is: 1.3";
     }
 
     /**
