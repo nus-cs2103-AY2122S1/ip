@@ -14,7 +14,7 @@ public class Message {
             + "Welcome to JaredDeluxe\n"
             + "Here are the list of commands available\n"
             + "todo [description] - Adds a todo task\n"
-            + "deadline [description] [optional: /at yyyy-mm-dd hh-mm] - Adds a deadline task\n"
+            + "deadline [description] [optional: /by yyyy-mm-dd hh-mm] - Adds a deadline task\n"
             + "event [description] [optional: /at yyyy-mm-dd hh-mm] - Adds a deadline task\n"
             + "list - Lists all the tasks you have currently\n"
             + "done [index] - Marks the task corresponding to that index number as done\n"

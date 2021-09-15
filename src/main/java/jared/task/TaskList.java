@@ -35,64 +35,13 @@ public class TaskList {
      */
     public String add(String command, String fullCommand) throws DukeException {
         Task newTask;
-        String desc;
-        String dateStr;
-        String[] dateTime;
-        LocalDate date;
-        LocalTime time;
 
         if (command.equals("todo")) {
-            try {
-                desc = fullCommand.split(" ", 2)[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            newTask = new Todo(desc);
+            newTask = createTodo(fullCommand);
         } else if (command.equals("deadline")) {
-            try {
-                String body = fullCommand.split(" ", 2)[1];
-                desc = body.split("/by", 2)[0].trim();
-                dateStr = body.split("/by", 2)[1].trim();
-                dateTime = dateStr.split(" ");
-                String d = dateTime[0];
-                date = LocalDate.parse(d);
-
-                if (dateTime.length > 1) {
-                    String t = dateTime[1];
-                    time = LocalTime.parse(t);
-                    newTask = new Deadline(desc, date, time);
-                } else {
-                    newTask = new Deadline(desc, date);
-                }
-
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } catch (DateTimeParseException e) {
-                System.out.println(e.getMessage());
-                throw new DukeException("Invalid date. Please enter the date (yyyy-mm-dd)");
-            }
+            newTask = createDeadline(fullCommand);
         } else if (command.equals("event")) {
-            try {
-                String body = fullCommand.split(" ", 2)[1];
-                desc = body.split("/at", 2)[0].trim();
-                dateStr = body.split("/at", 2)[1].trim();
-                dateTime = dateStr.split(" ");
-                String d = dateTime[0];
-                date = LocalDate.parse(d);
-
-                if (dateTime.length > 1) {
-                    String t = dateTime[1];
-                    time = LocalTime.parse(t);
-                    newTask = new Event(desc, date, time);
-                } else {
-                    newTask = new Event(desc, date);
-                }
-
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Invalid date and time. Please enter the date (yyyy-mm-dd)");
-            }
+            newTask = createEvent(fullCommand);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -104,6 +53,85 @@ public class TaskList {
                         + "%s\nNow you have %d tasks in the list.",
                 newTask, tasks.size()
         );
+    }
+
+    /**
+     * Creates a new Todo from user input
+     * @param fullCommand Full user input string
+     * @return new Todo object created
+     * @throws DukeException if no description is provided
+     */
+    public Todo createTodo(String fullCommand) throws DukeException {
+        try {
+            String desc = fullCommand.split(" ", 2)[1];
+            Todo newTodo = new Todo(desc);
+            return newTodo;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    /**
+     * Creates a new Deadline from user input
+     * @param fullCommand Full user input string
+     * @return new Deadline object created
+     * @throws DukeException if no description is provided or date provided is invalid
+     */
+    public Deadline createDeadline(String fullCommand) throws DukeException {
+        try {
+            String body = fullCommand.split(" ", 2)[1];
+            String desc = body.split("/by", 2)[0].trim();
+            String dateStr = body.split("/by", 2)[1].trim();
+            String[] dateTime = dateStr.split(" ");
+            String d = dateTime[0];
+            LocalDate date = LocalDate.parse(d);
+            Deadline newDeadline;
+
+            if (dateTime.length > 1) {
+                String t = dateTime[1];
+                LocalTime time = LocalTime.parse(t);
+                newDeadline = new Deadline(desc, date, time);
+            } else {
+                newDeadline = new Deadline(desc, date);
+            }
+            return newDeadline;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date. Please enter the date (yyyy-mm-dd)");
+        }
+    }
+
+    /**
+     * Creates a new Event from user input
+     * @param fullCommand Full user input string
+     * @return new Event object created
+     * @throws DukeException if no description is provided or date provided is invalid
+     */
+    public Event createEvent(String fullCommand) throws DukeException {
+        try {
+            String body = fullCommand.split(" ", 2)[1];
+            String desc = body.split("/at", 2)[0].trim();
+            String dateStr = body.split("/at", 2)[1].trim();
+            String[] dateTime = dateStr.split(" ");
+            String d = dateTime[0];
+            LocalDate date = LocalDate.parse(d);
+            Event newEvent;
+
+            if (dateTime.length > 1) {
+                String t = dateTime[1];
+                LocalTime time = LocalTime.parse(t);
+                newEvent = new Event(desc, date, time);
+            } else {
+                newEvent = new Event(desc, date);
+            }
+            return newEvent;
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date and time. Please enter the date (yyyy-mm-dd)");
+        }
     }
 
     /**
