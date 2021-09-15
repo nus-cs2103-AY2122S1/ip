@@ -102,6 +102,7 @@ Format: `bye`
 
 ***
 ##Command Summary
+
 Command | Format
 ------------ | -------------
 Add todo task | `todo {description}`
