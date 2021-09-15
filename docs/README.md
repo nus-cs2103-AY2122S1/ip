@@ -8,7 +8,7 @@ Make full use of Jarvis!
 
 ## Features
 1. Add Todos
-2. Add Tasks with deadline
+2. Add tasks with deadline
 3. Add Events
 4. Mark tasks as completed/done
 5. Find tasks by keyword
@@ -36,21 +36,21 @@ and try again. You can also find tasks by a keyword for easy reference.
 
 ### CLI
 
-For those who prefer a CLI interface, Jarvis supports CLI mode. 
+For those who prefer a command line interface, Jarvis supports CLI mode. 
 Run the following command to launch the application in CLI mode.
 
-```java -jar jarvis.jar --console```
+`java -jar jarvis.jar --console` or `java -jar jarvis.jar -c`
 
 ## Usage
 
 Important points to note:
-* Some commands that are followed by <>. It represents user input.
+* Some commands are followed by < >. It represents user input.
 * All dates are in "dd-MM-yyyy" format.
 * All times are in "HHmm" format.
 
-### `todo <description>` - Adds a todo
+### Todo: `todo <description>`
 
-Adds a todo.
+Adds a todo to your task list.
 
 Example usage:
 
@@ -66,9 +66,9 @@ Alright! I have added this to the Stark Industries Database:
 Now you have 1 task(s) in the list.
 ```
 
-### `deadline <description> /by <date> <time>` - Adds a task with a deadline
+### Deadline: `deadline <description> /by <date> <time>`
 
-Adds a task with a deadline.
+Adds a task with a deadline to your task list.
 
 Example usage:
 
@@ -84,7 +84,7 @@ Alright! I have added this to the Stark Industries Database:
 Now you have 2 task(s) in the list.
 ```
 
-### `event <description> /at <date> <start time> <end time>` - Adds an Event
+### Event: `event <description> /at <date> <start time> <end time>`
 
 Adds event with the given start and end time.
 
@@ -102,9 +102,9 @@ Alright! I have added this to the Stark Industries Database:
 Now you have 3 task(s) in the list.
 ```
 
-### `find <keyword>` - Finds all tasks that contain the keyword
+### Find: `find <keyword>`
 
-Find tasks that contain the keyword. They will be displayed in a list format.
+Find tasks that contain the keyword in the task description. They will be displayed in a list format.
 
 Example usage:
 
@@ -119,7 +119,7 @@ Stark Industries Database contains these matching tasks:
 1. [E][ ] John's Birthday Party (at: Oct 22 2021 4:00 PM to 9:00 PM)
 ```
 
-### `list` - List all your tasks
+### List: `list`
 
 List will list your tasks in a list format. You can see the task number, the task type and the task completion status.
 Any commands after `list` will be ignored.
@@ -139,7 +139,7 @@ Here are the tasks in your list:
 3. [E][ ] John's Birthday Party (at: Oct 22 2021 4:00 PM to 9:00 PM)
 ```
 
-### `done <task number>` - Marks the task as completed/done.
+### Mark as done: `done <task number>`
 
 Mark tasks as completed/done. The task number refers to the number the task is associated to in the `list` view.
 
@@ -156,7 +156,7 @@ Nice! I've marked this task as done:
     [T][X] complete assignment
 ```
 
-### `delete <task number>` - Delete a task.
+### Delete: `delete <task number>`
 
 Deletes the task with the specified task number.
 The task number refers to the number the task is associated to in the `list` view.
@@ -175,7 +175,7 @@ Initiated Delete protocol. Delete confirmed for:
 Now you have 2 task(s) in the list.
 ```
 
-### `help` - Displays the help message.
+### Help: `help`
 
 The help message is a quick way to see all available commands and command format without closing the application.
 Any commands after `help` will be ignored.
@@ -193,7 +193,7 @@ These are the valid commands in the Stark Industries Database:
 
 1. deadline
 usage: add a task with a specific deadline
-format: deadline <description> <dd-MM-yyyy HHmm>
+format: deadline <description> /by <dd-MM-yyyy HHmm>
 
 2. delete
 usage: delete a task using the task number shown in the tasks list
@@ -205,14 +205,14 @@ format: done <task number>
 
 4. event
 usage: add a event with a date, start time and end time
-format: event <description> <dd-MM-yyyy HHmm HHmm>
+format: event <description> /at <dd-MM-yyyy HHmm HHmm>
 
 5. bye
 usage: quits the application
 format: bye
 
 6. find
-usage: finds all task that contains a keyword
+usage: finds all tasks that contains a keyword
 format: find <keyword>
 
 7. help
@@ -232,11 +232,13 @@ usage: undo the previous commands
 format: undo <undo amount>
 ```
 
-### `undo <number of undos>` - Undos the specified amount of commands.
+### Undo: `undo <number of undos>`
 
 If you had previously made a mistake in entering a command, undo allows you to revert to a previous state.
 Note that only commands that affect the task list will be undoable. Examples of commands that affect the task list,
-`todo`, `deadline`, `done`, etc.
+`todo`, `deadline`, `done`, `delete`, etc. 
+Examples of commands that do not affect the task list, `help`, `list`, `undo`, etc. Use this command carefully as once
+a command us undone, it cannot be recovered again (i.e. cannot redo it).
 
 Example usage:
 
@@ -256,7 +258,7 @@ Undos the last two commands.
 Undo protocol complete! 1 command(s) reverted!
 ```
 
-### `bye` - Closes the application.
+### Exit: `bye`
 
 Exits and closes the application window.
 
@@ -267,3 +269,18 @@ Example usage:
 Expected outcome:
 
 Closes the application and exits.
+
+## Command Summary
+
+Command  | Format                                                   | Usage
+---------|----------------------------------------------------------|---------------------------------------------
+todo     | `todo <description>`                                     | `todo complete assignment`
+deadline | `deadline <description> /by <date> <time>`               | `deadline weekly quiz /by 22-10-2021 2359`
+event    | `event <description> /at <date> <start time> <end time>` | `event CS2100 exam /at 22-10-2021 1600 2100`
+find     | `find <keyword>`                                         | `find exam`
+list     | `list`                                                   | `list`
+done     | `done <task number>`                                     | `done 1`
+delete   | `delete <task number>`                                   | `delete 1`
+help     | `help`                                                   | `help`
+undo     | `undo <number of undos>`                                 | `undo 1`
+bye      | `bye`                                                    | `bye`
