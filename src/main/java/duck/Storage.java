@@ -112,6 +112,8 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
+            reader.close();
+
         } catch (DuckException e) {
             ui.showException(e);
 
@@ -166,8 +168,9 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
-            // Close writer
+            // Close writer and reader
             writer.close();
+            reader.close();
 
             // Replace duke with the updated file
             duck.delete();
@@ -203,8 +206,9 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
-            // Close writer
+            // Close reader and writer
             writer.close();
+            reader.close();
 
             // Replace duke with the updated file
             duck.delete();
