@@ -21,16 +21,6 @@ import duke.task.command.UndoCommand;
  */
 public class Parser {
 
-    private TaskList taskList;
-
-    /**
-     * Constructor for parser.
-     * @param taskList The list of tasks.
-     */
-    public Parser(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
     private Command parseDeadline(String input) throws DukeException {
         String date;
         String[] inputWords = input.split(" /by ");
@@ -45,13 +35,13 @@ public class Parser {
             description.append(s).append(" ");
         }
         date = parseDate(inputWords[1]);
-        return new DeadlineCommand(taskList, description.toString(), date);
+        return new DeadlineCommand(Duke.getLatestState(), description.toString(), date);
     }
 
     private Command parseEvent(String input) throws DukeException {
         String[] inputWords = input.split(" /at ");
         if (inputWords.length < 2) {
-            throw new DukeException("Please provide both description and time. Use '/at'. "
+            throw new DukeException("Please provide both description and time. Use '/at'.\n"
                     + "(eg. event fix hair /at 1pm)");
         }
         StringBuilder description = new StringBuilder();
@@ -60,7 +50,7 @@ public class Parser {
             String s = parseDescription[i];
             description.append(s).append(" ");
         }
-        return new EventCommand(taskList, description.toString(), inputWords[1]);
+        return new EventCommand(Duke.getLatestState(), description.toString(), inputWords[1]);
     }
 
     private Command parseTodo(String input) throws DukeException {
@@ -73,7 +63,7 @@ public class Parser {
                 String s = inputWords[i];
                 description.append(s).append(" ");
             }
-            return new TodoCommand(taskList, description.toString());
+            return new TodoCommand(Duke.getLatestState(), description.toString());
         }
     }
 
@@ -90,15 +80,14 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
         }
-        return new DoneCommand(taskList, index);
+        return new DoneCommand(Duke.getLatestState(), index);
     }
 
     private Command parseList(String[] input) throws DukeException {
         if (input.length != 1) {
             throw new DukeException("'list' command doesn't require any arguments.");
         } else {
-            System.out.println("reached parse list");
-            return new ListCommand(taskList);
+            return new ListCommand(Duke.getLatestState());
         }
     }
 
@@ -123,7 +112,7 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException("'delete' command requires an integer as number. (eg. delete 12)");
         }
-        return new DeleteCommand(taskList, index);
+        return new DeleteCommand(Duke.getLatestState(), index);
     }
 
     /**
@@ -160,7 +149,7 @@ public class Parser {
         case "delete":
             return parseDelete(input);
         case "find":
-            return new FindCommand(taskList, inputWords[1]);
+            return new FindCommand(Duke.getLatestState(), inputWords[1]);
         case "undo":
             return new UndoCommand();
         case "help":

@@ -32,7 +32,7 @@ public class Duke {
         storage = new Storage(directory, file);
         isRunning = true;
         items = new TaskList(storage);
-        parser = new Parser(this.items);
+        parser = new Parser();
     }
 
     /**
@@ -92,7 +92,12 @@ public class Duke {
         if (lastIndex < 0) {
             return new TaskList();
         }
-        return state.get(lastIndex);
+        return state.getLast();
+    }
+
+    public static void deleteLastState() {
+        TaskList t1 = state.pollLast();
+        System.out.println(t1);
     }
 
     public static int stateSize() {

@@ -65,14 +65,19 @@ public class TaskList {
      */
     public String addItem(Task task) throws DukeException {
         TaskList currList = Duke.getLatestState();
-        currList.tasks.add(task);
+        TaskList newList = currList;
+        System.out.println("state size before adding is: " + Duke.stateSize());
+        System.out.println("before adding task: " + currList.getListSize());
+        newList.tasks.add(task);
+        System.out.println("after adding task: " + currList.getListSize());
         String output = "Got it, I've added this task:\n" + task.toString();
-        if (currList.getListSize() == 0) {
+        if (newList.getListSize() == 0) {
             output += "\nNow you have 1 task in the list.";
         } else {
-            output += "\nNow you have " + getListSize() + " tasks in the list.";
+            output += "\nNow you have " + newList.getListSize() + " tasks in the list.";
         }
-        Duke.addToState(currList);
+        Duke.addToState(newList);
+        System.out.println("state size after adding is is: " + Duke.stateSize());
         return output;
     }
 
@@ -134,17 +139,17 @@ public class TaskList {
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
-        TaskList currList = Duke.getLatestState();
-        int listSize = currList.getListSize();
+//        TaskList currList = Duke.getLatestState();
+        int listSize = this.getListSize();
         if (listSize == 0) {
             throw new DukeException("You have 0 items in your list");
         }
         StringBuilder output = new StringBuilder("These are your tasks: \n");
         for (int i = 0; i < listSize; i++) {
             if (i < listSize - 1) {
-                output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i)).append("\n");
+                output.append(" ").append(i + 1).append(". ").append(this.getTaskAtIndex(i)).append("\n");
             } else {
-                output.append(" ").append(i + 1).append(". ").append(getTaskAtIndex(i));
+                output.append(" ").append(i + 1).append(". ").append(this.getTaskAtIndex(i));
             }
         }
 
@@ -208,7 +213,7 @@ public class TaskList {
      * @return the size of the array list.
      */
     public int getListSize() {
-        TaskList newList = Duke.getLatestState();
-        return newList.tasks.size();
+//        TaskList newList = Duke.getLatestState();
+        return this.tasks.size();
     }
 }
