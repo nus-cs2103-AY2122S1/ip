@@ -74,8 +74,7 @@ Now you have 0 task in the list.
 ### `list` - listing all tasks
 Lists all the tasks from the task list.
 
-Format:
-```list```
+Format: `list`
 
 CAPTain will display all your tasks as an ordered list.
 
