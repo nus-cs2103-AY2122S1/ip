@@ -51,14 +51,16 @@ public class DialogBox extends HBox {
                 dialog.getText().equals(Ui.INCOMPLETE_DEADLINE) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_DEADLINE_TIME) ||
                 dialog.getText().equals(Ui.EMPTY_EVENT_DESCRIPTION) ||
-                dialog.getText().equals(Ui.INCOMPLETE_EVENT_TIMINGS) ||
+                dialog.getText().equals(Ui.INCOMPLETE_EVENT_INFO) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS) ||
                 dialog.getText().equals(Ui.UNRECOGNISED_COMMAND) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_DATE) ||
                 dialog.getText().equals(Ui.WRONGLY_FORMATTED_NOTE) ||
                 dialog.getText().equals(Ui.INVALID_INDEX) ||
                 dialog.getText().equals(Ui.EMPTY_TASK_DELETE) ||
-                dialog.getText().equals(Ui.EMPTY_NOTE_DELETE);
+                dialog.getText().equals(Ui.EMPTY_NOTE_DELETE) ||
+                dialog.getText().equals(Ui.INVALID_DATE_OT_TIMING) ||
+                dialog.getText().equals(Ui.START_IS_AFTER_END);
         
         if (isAnErrorMessage) {
             //Error message to be displayed in brown to alert user
