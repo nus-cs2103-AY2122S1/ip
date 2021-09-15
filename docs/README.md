@@ -1,6 +1,4 @@
-# duke.Duke project template
-
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+# Duke it out
 
 ## Setting up in Intellij
 
@@ -30,66 +28,66 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## Command formats
 
-###List
+### List
 `list`
 
 Lists out all the tasks added.
-###Save
+### Save
 `save `
 
 Saves the list of tasks to the local file.
-###Add Todo
+### Add Todo
 `todo [task_name] `
 
 Adds a todo task with the name **`task_name`**.
-#####Sample command
+##### Sample command
 `todo Write essay`
-###Add Deadline
+### Add Deadline
 `deadline [task_name] /by [date]`
 
 Adds a deadline task by the name **`task_name`**.
 **`date`** must be in format **DD/MM/YYYY**.
 
-#####Sample command
+##### Sample command
 `deadline Fill in application /by 15/09/2021`
-###Add Event
+### Add Event
 `event [task_name] /at [date]`
 
 Adds a event task by the name **`task_name`**.
 **`date`** must be in format **DD/MM/YYYY**.
 
-#####Sample command
+##### Sample command
 `event Attend lecture /by 22/10/2021`
-###Remove
+### Remove
 `remove [index]`
 
 Removes a task from the list.
 **`index`** refers to the index of the task in the list returned by the **list** command
 
-#####Sample command
+##### Sample command
 `remove 1`
-###Done
+### Done
 `done [index]`
 
 Marks a task as done.
 **`index` **refers to the index of the task in the list returned by the **list** command.
 
-#####Sample command
+##### Sample command
 `done 1`
-###Find
+### Find
 `find [search_string] `
 
 Finds the tasks with containing **`search_string`** in its string form.
 
-#####Sample command
+##### Sample command
 `find add`
-###Tag
+### Tag
 `tag [index] /tag [tag_name] `
 
 Tags a task with **`tag_name`**.
 **`index` **refers to the index of the task in the list returned by the **list** command.
 
-#####Sample command
+##### Sample command
 `tag 1 /tag Temporary`
 
 
