@@ -19,7 +19,7 @@ public class Storage {
     private File file;
 
     /**
-     * Public constructor to instantiate a Storage object containing a file from the specified filePath
+     * Constructs a Storage object containing a file from the specified filePath
      *
      * @param filePath String to locate the stored data
      */

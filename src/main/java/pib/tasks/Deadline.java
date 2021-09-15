@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * A public factory method to create a Deadline task
+     * Creates a Deadline task
      *
      * @param details String containing the description, date and time
      * @param printMessage Boolean to indicate whether to print the success message after each Task is added
@@ -41,13 +41,13 @@ public class Deadline extends Task {
     public static Deadline createDeadline(String details, boolean printMessage) throws PibException {
         assert details != null;
         try {
-            int byIndex = details.indexOf("/by ");
-            String description = details.substring(0, byIndex).trim();
+            int byIndex = getByIndex(details);
+            String description = getDescriptionPortion(details, byIndex);
             if (description.isBlank()) {
                 throw new PibException("empty-task-description");
             }
             assert !details.isBlank();
-            String[] dateTime = details.substring(byIndex + 4).trim().split(" ");
+            String[] dateTime = getDateTimePortion(details, byIndex);
             String date = getDateString(dateTime[0]);
             String time = getTimeString(dateTime[1]);
             return new Deadline(description, date, time, printMessage);
@@ -56,6 +56,18 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             throw new PibException("wrong-datetime-format");
         }
+    }
+
+    private static String[] getDateTimePortion(String details, int atIndex) {
+        return details.substring(atIndex + 4).trim().split(" ");
+    }
+
+    private static String getDescriptionPortion(String details, int atIndex) {
+        return details.substring(0, atIndex).trim();
+    }
+
+    private static int getByIndex(String details) {
+        return details.indexOf("/by ");
     }
 
     private static String getTimeString(String s) {
@@ -67,7 +79,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * A public factory method to create a Deadline task
+     * Creates a Deadline task using saved data
      *
      * @param description task description
      * @param isDone value 0 (false) or 1 (true)
@@ -87,7 +99,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Public method to convert task to a string format used to save inside a .txt file
+     * Converts task to a string format used to save inside a .txt file
      *
      * @return string format of Deadline task to be saved
      */
@@ -96,7 +108,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * A public toString method to add the task type [D] in front of the checkbox, and the date behind the task description
+     * Returns a string with "[D]", then the checkbox, then the task description, then the date
      *
      * @return the string representation of a Deadline task
      */

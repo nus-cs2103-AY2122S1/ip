@@ -29,7 +29,7 @@ public class Event extends Task {
     }
 
     /**
-     * A public factory method to create an Event task
+     * Creates an Event task
      *
      * @param details String containing the description, date and time
      * @param printMessage Boolean to indicate whether to print the success message after each Task is added
@@ -79,7 +79,7 @@ public class Event extends Task {
     }
 
     /**
-     * A public factory method to create an Event task
+     * Creates an Event task using saved data
      *
      * @param description task description
      * @param isDone value 0 (false) or 1 (true)
@@ -99,7 +99,7 @@ public class Event extends Task {
     }
 
     /**
-     * Public method to convert task to a string format used to save inside a .txt file
+     * Converts task to a string format used to save inside a .txt file
      *
      * @return string format of Event task to be saved
      */
@@ -108,7 +108,7 @@ public class Event extends Task {
     }
 
     /**
-     * A public toString method to add the task type [E] in front of the checkbox, and the date behind the task description
+     * Returns a string with "[E]", then the checkbox, then the task description, then the date
      *
      * @return the string representation of an event task
      */

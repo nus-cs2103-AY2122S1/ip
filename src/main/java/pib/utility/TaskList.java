@@ -19,12 +19,15 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Public constructor to create a new TaskList
+     * Constructs a new TaskList
      */
     public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Constructs a new TaskList from an existing arraylist
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
@@ -107,7 +110,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task specified by the task number
+     * Deletes task specified by the task number
      *
      * @param taskNum Index of task to be deleted (starting from 1)
      * @throws PibException when IndexOutOfBoundsException is thrown when user enters invalid task number/blank
@@ -125,7 +128,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as specified by the task number
+     * Marks a task as specified by the task number
      *
      * @param taskNum Index of task to be marked as done (starting from 1)
      * @throws PibException when IndexOutOfBoundsException is thrown when user enters invalid task number/blank
@@ -197,7 +200,7 @@ public class TaskList {
     }
 
     /**
-     * Convert a TaskList to a string format to be saved inside a file
+     * Converts a TaskList to a string format to be saved inside a file
      *
      * @return String format of TaskList to be saved
      */
@@ -231,6 +234,4 @@ public class TaskList {
         }
         return Ui.printQueryFound(query).concat("\n").concat(new TaskList(filtered).viewList());
     }
-
-
 }

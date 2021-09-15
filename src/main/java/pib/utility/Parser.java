@@ -13,7 +13,7 @@ public class Parser {
     private TaskList list;
 
     /**
-     * Public constructor to initialise a Parser object
+     * Constructs a Parser object
      *
      * @param list TaskList that is used to store the Tasks where this parser is used
      */
@@ -51,6 +51,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Uses the scanner to read inputs from the user
+     *
+     * @param input user inputted command
+     * @return String containing the response
+     */
     public String readInput(String input) {
         try {
             if (input.contains(" ")) {

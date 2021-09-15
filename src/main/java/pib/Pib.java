@@ -22,13 +22,18 @@ public class Pib {
     private Parser parser;
 
     /**
-     * Public constructor to instantiate an instance of pib
+     * Constructs an instance of pib
      */
     public Pib() {
         ui = new Ui();
         list = new TaskList();
     }
 
+    /**
+     * Loads the saved data from a file and if no saved data is found, creates the folder and the file to store data
+     *
+     * @return String response on whether any data was successfully loaded
+     */
     public String loadData() {
         assert list != null;
         String response = "";
@@ -49,10 +54,21 @@ public class Pib {
         parser.readInput();
     }
 
+    /**
+     * Gets the response depending on the user inputted command
+     *
+     * @param input user inputted command
+     * @return String response to be displayed to the user
+     */
     public String getResponse(String input) {
         return parser.readInput(input);
     }
 
+    /**
+     * Starts the whole Pib application
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Pib p = new Pib();
         p.loadData();

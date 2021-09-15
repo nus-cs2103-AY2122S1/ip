@@ -11,8 +11,7 @@ public abstract class Task {
     private int isDone;
 
     /**
-     * Public constructor to store task description and set isDone to 0 (false)
-     * Prints success message to user
+     * Constructs a new task with description and set isDone to 0 (false), and prints success message to user
      *
      * @param description The description of the task
      * @param printMessage Boolean to indicate whether to print the success message after each Task is added
@@ -26,8 +25,7 @@ public abstract class Task {
     }
 
     /**
-     * Public constructor to store task description and isDone
-     * Prints success message to user
+     * Constructs a new task with description and isDone, and prints success message to user
      *
      * @param description The description of the task
      * @param isDone Initialise the isDone field when calling the constructor
@@ -42,7 +40,7 @@ public abstract class Task {
     }
 
     /**
-     * A public toString method to return the task description with the checkbox for toggling completion
+     * Returns a string containing the task description and the checkbox for toggling completion
      *
      * @return the string representation of a task
      */
@@ -52,7 +50,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to toggle the isDone variable, to display to the user if a task is marked as done or not
+     * Toggles the checkbox for the isDone variable
      *
      * @throws PibException when user tries to call this method on a task that is already marked as done
      * @return String containing response to be printed to user
@@ -98,7 +96,7 @@ public abstract class Task {
     }
 
     /**
-     * Abstract method to convert each task into a string to be saved in the .txt file.
+     * Converts each task into a string to be saved in the .txt file (Abstract Method)
      *
      * @return String representation for saving data of a task
      */

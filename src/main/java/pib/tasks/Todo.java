@@ -16,7 +16,7 @@ public class Todo extends Task {
     }
 
     /**
-     * A public factory method to create a Todo task
+     * Creates a Todo task
      *
      * @param details description of the todo task
      * @param printMessage Boolean to indicate whether to print the success message after each Task is added
@@ -33,7 +33,7 @@ public class Todo extends Task {
     }
 
     /**
-     * A public factory method to create a ToDo task with the isDone also initialised
+     * Creates a ToDo task using saved data
      *
      * @param details description of the todo task
      * @param isDone  value 0 (false) or 1 (true)
@@ -47,7 +47,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Public method to convert task to a string format used to save inside a .txt file
+     * Converts task to a string format used to save inside a .txt file
      *
      * @return string format of Todo task to be saved
      */
@@ -56,7 +56,7 @@ public class Todo extends Task {
     }
 
     /**
-     * A public toString method to add the task type [T] in front of the checkbox
+     * Returns a string with "[T]", then the checkbox, then the task description
      *
      * @return the string representation of a Todo task
      */
