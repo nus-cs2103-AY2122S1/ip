@@ -10,13 +10,14 @@ to be used with CLI (Command Line Interface).
 ## Quick start
 1. Ensure you have Java `11` or above installed in your c
    computer.
-2. Download the latest `Duke.jar` from [here](#).
+2. Download the latest `Duke.jar` from [here](https://github.com/radiankrisno/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the
    *home folder* for your Duke.
 4. Double-click the file to start the app. The GUI 
    similar to the below should appear in a few seconds.
 
 ![Duke GUI](Ui.png)
+
 5. Folder `data` will be created as the local Duke storage in your home folder.
 6. Type the command in the command box and press `Enter/Send` to
    execute it.
