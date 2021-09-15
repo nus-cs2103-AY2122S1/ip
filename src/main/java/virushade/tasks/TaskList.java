@@ -174,14 +174,14 @@ public class TaskList {
      * @throws VirushadeException If there are problems with the input string.
      */
     public static String sort(String sortType) throws VirushadeException {
-        if (sortType.equals("task")) {
-            Sorter.sortByTask(TASKS);
+        if (sortType.equals("type")) {
+            Sorter.sortByType(TASKS);
             return "Tasks sorted by each category successfully.";
         } else if (sortType.equals("name")) {
             Sorter.sortByName(TASKS);
             return "Tasks sorted by name successfully.";
         } else {
-            throw new VirushadeException("Please specify what you want to sort by. (e.g. 'task' or 'name')");
+            throw new VirushadeException("Please specify what you want to sort by. (e.g. 'type' or 'name')");
         }
     }
 

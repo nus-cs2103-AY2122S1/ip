@@ -56,7 +56,7 @@ public class Sorter {
      * Sorts the given Task Array by task type.
      * @param tasks ArrayList to sort the task by.
      */
-    public static void sortByTask(ArrayList<Task> tasks) throws VirushadeException {
+    public static void sortByType(ArrayList<Task> tasks) throws VirushadeException {
         ArrayList<Task> deadlineTasks = new ArrayList<>();
         ArrayList<Task> todoTasks = new ArrayList<>();
         ArrayList<Task> eventTasks = new ArrayList<>();

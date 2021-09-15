@@ -75,7 +75,6 @@ public class StringManipulator {
             int hours = timeIn24hRepresentation / 100;
             int minutes = timeIn24hRepresentation % 100;
             boolean isOutOfBounds = hours < 0 || hours > 24 || minutes < 0 || minutes > 60;
-        //    boolean cannotConvertToTime = Integer.parseInt(timeString.substring(2, 3)) > 5;
             boolean cannotConvertToTime = timeString.length() != 4;
 
             if (isOutOfBounds || cannotConvertToTime) {

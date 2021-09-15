@@ -13,11 +13,11 @@ public class ResponseProcessor {
     public static String greet() {
         return "Hello from\n"
                 + "__      __ ( )                ____\n"
-                + "\\ \\    / /  _   ____  _   _  / __/\n"
+                + "\\ \\    / /  _   _____  _  / __/\n"
                 + " \\ \\  / /  | | | ,__|| | | | \\ \\\n"
                 + "  \\ \\/ /   | | | |   | |_| | _) \\\n"
-                + "   \\__/    |_| |_|    \\__,_||___/\n"
-                + "What can <<Virushade>> do for you?\n";
+                + "   \\__/    |_| |_|   \\__,_||___/\n"
+                + "Who do you want <<Virushade>> to infect today?\n";
     }
 
     /**
@@ -25,7 +25,7 @@ public class ResponseProcessor {
      * @return The exit message.
      */
     private static String exitMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "You may run, you may hide, but you will never escape my infections!";
     }
 
     /**
@@ -42,22 +42,26 @@ public class ResponseProcessor {
             return TaskList.generateList();
 
         case "todo":
-            throw new VirushadeException("OOPS!!! The description of a todo task cannot be empty.");
+            throw new VirushadeException("The description of a todo task cannot be empty.");
 
         case "deadline":
-            throw new VirushadeException("OOPS!!! The description of a deadline task cannot be empty.");
+            throw new VirushadeException("The description of a deadline task cannot be empty.");
 
         case "event":
-            throw new VirushadeException("OOPS!!! The description of an event task cannot be empty.");
+            throw new VirushadeException("The description of an event task cannot be empty.");
 
         case "done":
-            throw new VirushadeException("OOPS!!! Please enter an integer after 'done'.");
+            throw new VirushadeException("Let me know what task needs to be marked done.");
 
         case "find":
-            throw new VirushadeException("OOPS!!! Please tell me what to find.");
+            throw new VirushadeException("Give me something to find, human.");
+
+        case "sort":
+            throw new VirushadeException("If you want me to do work, give me the right parameters first!\n"
+                    + "Let me know which sorting method you want to use, human.");
 
         default:
-            throw new VirushadeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new VirushadeException("I have yet to evolve to a level where I can understand this.");
         }
     }
 
