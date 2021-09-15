@@ -112,7 +112,7 @@ public class TaskList {
             } else {
                 priority = Task.Priority.LOW;
             }
-            Task task = new Deadline(str.substring(0, slashIndex), Storage.formatDate(day) + time, priority);
+            Task task = new Deadline(str.substring(9, slashIndex), Storage.formatDate(day) + time, priority);
             tasks.add(task);
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
@@ -146,7 +146,7 @@ public class TaskList {
             } else {
                 priority = Task.Priority.LOW;
             }
-            Task task = new Events(str.substring(0, slashIndex), day, priority);
+            Task task = new Events(str.substring(6, slashIndex), day, priority);
             tasks.add(task);
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
