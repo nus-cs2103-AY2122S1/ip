@@ -12,9 +12,8 @@ public class Ui {
     public Ui() {}
 
     /**
-     * showLoadingError() outputs a string if there are errors processing the user's input.
+     * outputs a string if there are errors processing the user's input.
      */
-
     public void showLoadingError() {
         System.out.println("Apologies there was some errors processing your tasks.");
     }

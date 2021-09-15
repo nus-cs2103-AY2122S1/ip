@@ -1,15 +1,15 @@
 package duke;
 /**
- * DukeException is an ArrayIndexOutOfBoundsException that are caused by errors in the Duke program.
+ * DukeException is an ArrayIndexOutOfBoundsException that
+ * represents the errors caused by DukeMan.
  */
 
 public class DukeException extends ArrayIndexOutOfBoundsException {
     private String cause;
 
     /**
-     * this is a constructor for the DukeException class; it contains a message parameter
+     * constructor for the DukeException class. it has a message parameter
      * that specifies the error message to be displayed.
-     *
      * @param message a String that is used to specify the error message to be produced
      */
 

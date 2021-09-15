@@ -18,7 +18,6 @@ public class Storage {
      * file path of the memory.txt file.
      * @param filePath file path of the memory.txt file
      */
-
     public Storage(String filePath) {
         File file = new File(filePath);
         try {
@@ -38,11 +37,9 @@ public class Storage {
     }
 
     /**
-     * the addTaskToMemory() task adds the String event input into the
-     * memory.txt file.
+     * adds the String event input into the memory.txt file.
      * @param event
      */
-
     public void addTaskToMemory(String event) {
         try {
             FileWriter fw = null;

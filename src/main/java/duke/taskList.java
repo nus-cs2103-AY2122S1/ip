@@ -1,6 +1,12 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +16,7 @@ import java.util.ArrayList;
  * @author Dominic Siew Zhen Yu
  */
 
-public class taskList {
+public class TaskList {
     private ArrayList<Task> taskList;
     private FileWriter taskFile;
     private boolean isFirstTimeOpening;
@@ -24,13 +30,18 @@ public class taskList {
      * The constructor for the List class that instantiates a List object.
      */
 
-    public taskList() {
+    public TaskList() {
         this.taskList = new ArrayList<Task>();
         File file = new File("data/memory.txt");
         this.memory = new Storage("data/memory.txt");
     }
 
-    public taskList(File memory) {
+    /**
+     * the initialisation of the TaskList class
+     * @param memory the file where the tasks are kept in memory
+     */
+
+    public TaskList(File memory) {
         this.taskList = new ArrayList<Task>();
         this.memory = new Storage(memory.getPath());
 
@@ -49,7 +60,6 @@ public class taskList {
             int numberAdded = 1;
 
             while ((currentLine = reader.readLine()) != null) {
-
                 assert currentLine.length() > 4;
                 String[] seperate1 = currentLine.toString().split(" ", 2);
                 String taskTypeText = seperate1[0];
@@ -58,8 +68,7 @@ public class taskList {
                 String[] seperate2 = seperate1[1].toString().split(" ", 2);
                 boolean isCompleted = (seperate2[0].equals("[✓]")) ? true : false;
                 String eventInfo = seperate2[1];
-
-                switch(taskTypeText) {
+                switch (taskTypeText) {
                 case "[T]":
                     String eventname = eventInfo;
                     this.addTodo(eventname, false);
@@ -76,8 +85,9 @@ public class taskList {
                     String timeline = seperateAgaining[1].split("\\)", 2)[0];
                     this.addEvent(event, timeline, false);
                     break;
+                default:
+                    throw new DukeException("Generic");
                 }
-
                 if (isCompleted) {
                     this.updateTaskStatus(numberAdded, false);
                 }
@@ -91,22 +101,10 @@ public class taskList {
     }
 
     /**
-     * the addTask() places generic tasks into the list (which was used in level 1-3).
-     *
-     * @param userInput
-     */
-
-    public void addTask(String userInput) {
-        taskList.add(new Task(userInput));
-    }
-
-    /**
-     * the printList() method prints out the String representation of the tasks
-     * in the List object.
+     * prints out the String representation of the tasks in the List object.
      */
 
     public String printList() {
-        System.out.println("hello");
         int numb = 1;
         String output = "Here are the tasks in your list:";
         for (Task task: taskList) {
@@ -118,8 +116,7 @@ public class taskList {
     }
 
     /**
-     * the updateTaskStatus() method marks a task to be as completed.
-     *
+     * marks a task to be as completed.
      * @param userInput the rank of the task in a list
      */
 
@@ -188,9 +185,9 @@ public class taskList {
         }
 
     }
+
     /**
-     * the addEvent() method adds Events task into the list object.
-     *
+     * adds Events task into the list object.
      * @param name the name of the event
      * @param timeline the period that the event is taking place
      */
@@ -212,7 +209,6 @@ public class taskList {
      * @param input
      * @return
      */
-
     public String addTaskResponse(Task input) {
         String output = "Got it. I've added this task:" + "\n" + input.printName()
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
@@ -239,9 +235,9 @@ public class taskList {
             return "";
         }
     }
+
     /**
-     * the removeTask() method removes the task from the list object.
-     *
+     * removes the task from the list object.
      * @param userInput the rank of the task in a list
      */
     public String removeTask(int userInput) {
@@ -283,10 +279,10 @@ public class taskList {
     }
 
     /**
-     * findWord() method finds methods with the keyword inputted by users.
-     *
+     * finds tasks with the keyword inputted by the user.
+     * @param keyWord String input from the user
+     * @return string that represents the list of tasks with the same keyword
      */
-
     public String findWord(String keyWord) {
         String output = "Here are the matching tasks in your list:";
         int numb = 1;
@@ -299,6 +295,12 @@ public class taskList {
         System.out.println(output);
         return output;
     }
+
+    /**
+     * prints tasks that happens on a given date.
+     * @param date date of the task
+     * @return a String of events that are sorted based on their timeslot
+     */
 
     public String printSchedule(String date) {
         Schedule dateEvents = new Schedule();

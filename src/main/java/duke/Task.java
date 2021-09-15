@@ -8,37 +8,31 @@ public class Task {
     private String name;
     private boolean completed;
 
-    private String COMPLETED = "[✓]";
-    private String UNCOMPLETED = "[✕]";
+    private String completedIndicator = "[✓]";
+    private String uncompletedIndicator = "[✕]";
 
     /**
      * the constructor of the Task class.
-     *
      * @param name the name of the task
      */
-
     public Task(String name) {
         this.name = name;
         completed = false;
     }
 
     /**
-     * printName() method returns the name of the Task object, and whether the task is completed or not.
-     *
+     * returns the name of the Task object, and whether the task is completed or not.
      * @return a string representation of a Task object
      */
-
     public String printName() {
-        String completionStatus = completed ? COMPLETED : UNCOMPLETED;
+        String completionStatus = completed ? completedIndicator : uncompletedIndicator;
         return completionStatus + " " + this.name;
     }
 
     /**
-     * getName() just returns the name of the tasks
-     *
+     * returns the name of the tasks
      * @return the name of the task
      */
-
     public String getName() {
         return this.name;
     }
@@ -46,13 +40,20 @@ public class Task {
 
 
     /**
-     * the toggleComplete() method toggles the boolean "completed" when the task is completed,
-     * or if the user wishes to indicate that a task is incompleted if it is indicated as
-     * otherwise.
+     * toggles the boolean "completed" when the task is completed,
+     * or if the user wishes to indicate that a task is incompleted
+     * if it is indicated as otherwise.
      *
      */
-
     public void toggleComplete() {
         completed = !completed;
+    }
+
+    /**
+     * returns boolean that represents if the task is completed.
+     * @return true if the task is complete and false otherwise
+     */
+    public boolean isCompleted() {
+        return this.completed;
     }
 }

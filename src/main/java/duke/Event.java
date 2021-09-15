@@ -6,17 +6,15 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Events are tasks that have a timeline.
- *
  * @author Dominic Siew Zhen Yu
  */
 public class Event extends Task {
     private String timeline;
     private LocalDateTime dateAndTime;
-    String TASKINDICATOR = "[E]";
+    private String taskIndicator = "[E]";
 
     /**
      * The constructor of the events class.
-     *
      * @param userInput the name of the task
      * @param timeline the period of which the event is taking place
      */
@@ -26,16 +24,21 @@ public class Event extends Task {
         if (newInput) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime date = LocalDateTime.parse(timeline, formatter);
-            this.timeline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+            this.timeline = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
             this.dateAndTime = date;
         } else {
             this.timeline = timeline;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
             LocalDateTime date = LocalDateTime.parse(timeline, formatter);
             this.dateAndTime = date;
         }
     }
 
+    /**
+     * checks whether the task is schedule on the given date.
+     * @param comparisonDate the date that's giveen by the user in the form of YYYY-MM-DD
+     * @return boolean indicating if the task is on the given date
+     */
     public boolean isDate(String comparisonDate) {
         LocalDate comparison = LocalDate.parse(comparisonDate);
         LocalDate deadlineDate = this.dateAndTime.toLocalDate();
@@ -52,10 +55,9 @@ public class Event extends Task {
      *
      * @return a string representation of a Event object
      */
-
     public String printName() {
 
-        return TASKINDICATOR + " " + super.printName() + " (at: " + this.timeline + ")";
+        return taskIndicator + " " + super.printName() + " (at: " + this.timeline + ")";
     }
 
 }

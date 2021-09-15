@@ -14,7 +14,6 @@ public class Parser {
     /**
      * constructor for the Parser class
      */
-
     public Parser() {
     }
 
@@ -24,7 +23,6 @@ public class Parser {
      *
      * @param input the given input by the user
      */
-
     public void parsing(String input) {
 
         if (input.equals("list") || input.equals("bye")) {
@@ -54,30 +52,25 @@ public class Parser {
     }
 
     /**
-     * getCommand() returns the command of the user's input.
-     *
+     * returns the command of the user's input.
      * @return the command of the user's input
      */
-
     public String getCommand() {
         return this.command;
     }
 
     /**
-     * getTaskName() returns the task's name from the user's input.
+     * returns the task's name from the user's input.
      * @return the name of the task
      */
-
     public String getTaskName() {
         return this.taskName;
     }
 
     /**
      * getTimeline() returns the timeline or the deadline of the event/deadline respectively.
-     *
      * @return the timeline/deadline of the task
      */
-
     public String getTimeline() {
         return this.deadlineOrTimeline;
     }

@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
     private DukeMan duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/171748660-352-k670803.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/e8674ed28e216a7be8307c19f062d5dc.jpeg"));
-
+    private Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/e8674ed28e216a7be8307c19f062d5dc.jpeg"));
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
