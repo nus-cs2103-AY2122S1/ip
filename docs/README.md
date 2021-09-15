@@ -448,7 +448,15 @@ public void addTodo(String command, UI ui) throws WhoBotException {
 
 You can have fun personalizing WhoBot.
 
+<br> 
+<hr>
+<br>
+
 # G00D LUCK
 
 For doubts email me at:
 [atin.s@u.nus.edu](mailto:atin.s@u.nus.edu)
+
+<br> 
+<hr>
+<br>
