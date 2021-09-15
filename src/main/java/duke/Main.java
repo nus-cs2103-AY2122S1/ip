@@ -13,18 +13,15 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
 
     @Override
     public void start(Stage stage) {
-        try {
-            MainWindow ap = new MainWindow();
-            ap.setDuke(duke);
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        MainWindow ap = new MainWindow();
+        duke = new Duke();
+        ap.setDuke(duke);
+        Scene scene = new Scene(ap);
+        stage.setScene(scene);
+        stage.show();
     }
 }
