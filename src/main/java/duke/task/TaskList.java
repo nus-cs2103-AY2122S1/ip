@@ -1,19 +1,12 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidDateTimeException;
 
-import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.text.ParseException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 
@@ -112,54 +105,6 @@ public class TaskList {
         Task task = tasks.get(doneNumber);
         task.setDone();
         return ui.showTaskDone(task);
-    }
-
-
-    /**
-     * Returns string of deadline added to list.
-     *
-     * @param description Details about deadline.
-     * @param by Date of completion of deadline.
-     * @return String representation of deadline added.
-     * @throws DukeException If date entered is not of correct format.
-     */
-    public String addDeadlineToList(String description, String by) throws DukeException {
-        try {
-            LocalDate date = Parser.parseDate(by);
-            Deadline deadline = new Deadline(description, date);
-            return addTaskToList(deadline);
-        } catch (DateTimeParseException | ParseException e) {
-            throw new InvalidDateTimeException();
-        }
-    }
-
-    /**
-     * Returns string of event added to list.
-     *
-     * @param description Details about event.
-     * @param at Date of event.
-     * @return String representation of event added.
-     * @throws DukeException If date entered is not of correct format.
-     */
-    public String addEventToList(String description, String at) throws DukeException {
-        try {
-            LocalDate date = Parser.parseDate(at);
-            Event event = new Event(description, date);
-            return addTaskToList(event);
-        } catch (DateTimeParseException | ParseException e) {
-            throw new InvalidDateTimeException();
-        }
-    }
-
-    /**
-     * Returns string of todo added to list.
-     *
-     * @param description Details of todo.
-     * @return String representation of todo added.
-     */
-    public String addTodoToList(String description) {
-        Todo todo = new Todo(description);
-        return addTaskToList(todo);
     }
 
     public void archiveAllTasks() throws DukeException {

@@ -3,7 +3,10 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionAndTimeException;
 
+import duke.task.Deadline;
 import duke.task.TaskList;
+
+import java.time.LocalDateTime;
 
 /**
  * Encapsulates the deadline command class.
@@ -38,7 +41,12 @@ public class DeadlineCommand implements Command{
         String[] deadlineDetail = Parser.parseDescriptionAndTime(userInput, "/by", "deadline");
 
         assert deadlineDetail.length == 2 : "deadlineDetail should be length of 2";
-        return tasks.addDeadlineToList(deadlineDetail[0].trim(), deadlineDetail[1].trim());
+
+        LocalDateTime localDateTime = Parser.parseDateTime(deadlineDetail[1].trim());
+        String description = deadlineDetail[0].trim();
+        Deadline deadline = new Deadline(description, localDateTime);
+
+        return tasks.addTaskToList(deadline);
     }
 
 

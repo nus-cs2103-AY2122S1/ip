@@ -3,7 +3,10 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionAndTimeException;
 
+import duke.task.Event;
 import duke.task.TaskList;
+
+import java.time.LocalDateTime;
 
 /**
  * Encapsulates the event command class.
@@ -37,9 +40,12 @@ public class EventCommand implements Command{
         }
 
         String[] eventDetail = Parser.parseDescriptionAndTime(userInput, "/at", "event");
-
         assert eventDetail.length == 2 : "eventDetail should have length of 2";
 
-        return tasks.addEventToList(eventDetail[0].trim(), eventDetail[1].trim());
+        LocalDateTime localDateTime = Parser.parseDateTime(eventDetail[1].trim());
+        String description = eventDetail[0].trim();
+        Event event = new Event(description, localDateTime);
+
+        return tasks.addTaskToList(event);
     }
 }

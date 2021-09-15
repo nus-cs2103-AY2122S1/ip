@@ -2,7 +2,9 @@ package duke.util;
 
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionException;
+
 import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Encapsulates the todo command class.
@@ -36,6 +38,9 @@ public class TodoCommand implements Command {
 
         assert userInput.length == 2;
 
-        return tasks.addTodoToList(userInput[1].trim());
+        String description = userInput[1].trim();
+        Todo todo = new Todo(description);
+
+        return tasks.addTaskToList(todo);
     }
 }

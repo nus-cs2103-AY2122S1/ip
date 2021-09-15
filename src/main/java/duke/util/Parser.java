@@ -1,11 +1,14 @@
 package duke.util;
 
-import duke.exception.*;
-
-import java.text.ParseException;
+import duke.exception.DukeException;
+import duke.exception.NoCommandException;
+import duke.exception.NoDescriptionAndTimeException;
+import duke.exception.NoDescriptionException;
+import duke.exception.NoTimeException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 /**
@@ -50,19 +53,6 @@ public class Parser {
     }
 
     /**
-     * Returns date formatted as LocalDate.
-     *
-     * @param dateTime Date entered by user.
-     * @return A date of the LocalDate format.
-     * @throws ParseException If dateTime is not of required format.
-     */
-    public static LocalDate parseDate(String dateTime) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        LocalDate date = LocalDate.parse(dateTime, formatter);
-        return date;
-    }
-
-    /**
      * Returns array of string that stores description and date of task.
      *
      * @param userInput Array that stores task type and details of task.
@@ -74,21 +64,40 @@ public class Parser {
     public static String[] parseDescriptionAndTime(String[] userInput,String regex,
                                                     String taskType) throws DukeException {
 
-        String[] next = userInput[1].trim().split(regex);
+        String[] descriptionTime = userInput[1].trim().split(regex);
 
-        if(next.length == 0) {
+        if(descriptionTime.length == 0) {
             throw new NoDescriptionAndTimeException(taskType);
         }
 
-        if (next[0].trim().length() == 0) {
+        if (descriptionTime[0].trim().length() == 0) {
             throw new NoDescriptionException(taskType);
-        } else if (next.length < 2) {
+        } else if (descriptionTime.length < 2) {
             throw new NoTimeException(taskType);
         }
 
-        assert next.length == 2;
+        assert descriptionTime.length == 2;
 
-        return next;
+        return descriptionTime;
+    }
+
+    /**
+     * Returns date and time formatted as LocalDateTime.
+     *
+     * @param userInput Date and time entered by user.
+     * @return Date and time of the LocalDateTime format.
+     * @throws DukeException If dateTime is not of required format.
+     */
+    public static LocalDateTime parseDateTime(String userInput) throws DukeException {
+        String[] dateTime = userInput.split(",", 2);
+
+        if (dateTime.length < 2) {
+            throw new DukeException("Please enter date and time of format yyyy-MM-dd, HH:mm!");
+        }
+
+        LocalDate localDate = LocalDate.parse(dateTime[0].trim());
+        LocalTime localTime = LocalTime.parse(dateTime[1].trim());
+        return LocalDateTime.of(localDate, localTime);
     }
 
 }

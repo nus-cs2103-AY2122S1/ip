@@ -1,4 +1,6 @@
 T|1|cs quiz
-E|0|test|2021-06-22
-D|1|smth|2022-09-24
-T|0|run
+D|0|smth test|2020-10-10T23:59
+D|0|smth elseef|2020-10-10T23:59
+E|0|smth|2021-05-05T11:30
+T|0|quiz
+E|0|quiz 7|2020-10-03T12:30

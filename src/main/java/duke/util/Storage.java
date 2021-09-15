@@ -14,8 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -57,7 +57,7 @@ public class Storage {
                 loadTask(input, tasks);
                 line = br.readLine();
             }
-        } catch (IOException e) {
+        } catch (IOException| DateTimeParseException e) {
             throw new DukeException("Error loading tasks...");
         }
         return tasks;
@@ -80,12 +80,12 @@ public class Storage {
             setDoneAndAddToList(tasks, todo, isTaskDone);
             break;
         case "E":
-            LocalDate at = LocalDate.parse(input[3]);
+            LocalDateTime at = LocalDateTime.parse(input[3]);
             Event event = new Event(description, at);
             setDoneAndAddToList(tasks, event, isTaskDone);
             break;
         case "D":
-            LocalDate by = LocalDate.parse(input[3]);
+            LocalDateTime by = LocalDateTime.parse(input[3]);
             Deadline deadline = new Deadline(description, by);
             setDoneAndAddToList(tasks, deadline, isTaskDone);
             break;

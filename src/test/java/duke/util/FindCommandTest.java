@@ -11,7 +11,7 @@ import duke.task.Todo;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ class FindCommandTest {
     public void execute_success() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Todo("run"));
-        list.add(new Event("cs quiz", LocalDate.of(2021, 10, 1)));
-        list.add(new Deadline("finish quiz 4", LocalDate.of(2021, 10, 1)));
+        list.add(new Event("cs quiz", LocalDateTime.parse("2021-10-01T23:59")));
+        list.add(new Deadline("finish quiz 4", LocalDateTime.parse("2021-10-01T23:59")));
         list.add(new Todo("sleep"));
         list.add(new Todo("prepare for quiz"));
 
@@ -36,15 +36,15 @@ class FindCommandTest {
         FindCommand findCommand = new FindCommand(input.split(" "));
 
         assertEquals("Here are the matching tasks in your list:\n"
-                + "\t1.[E][ ] cs quiz (at: 2021-10-01)\n"
-                + "\t2.[D][ ] finish quiz 4 (by: 2021-10-01)\n"
-                + "\t3.[T][ ] prepare for quiz\n", findCommand.execute(taskList, ui, storage));
+                + "1.[E][ ] cs quiz (at: 01 Oct 2021 11:59 PM)\n"
+                + "2.[D][ ] finish quiz 4 (by: 01 Oct 2021 11:59 PM)\n"
+                + "3.[T][ ] prepare for quiz\n", findCommand.execute(taskList, ui, storage));
 
         input = "find sleep";
         findCommand = new FindCommand(input.split(" "));
 
         assertEquals("Here are the matching tasks in your list:\n"
-                + "\t1.[T][ ] sleep\n", findCommand.execute(taskList, ui, storage));
+                + "1.[T][ ] sleep\n", findCommand.execute(taskList, ui, storage));
 
         input = "find random";
         findCommand = new FindCommand(input.split(" "));
@@ -58,8 +58,8 @@ class FindCommandTest {
     public void execute_noKeyword_exceptionThrown() {
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Todo("run"));
-        list.add(new Event("cs quiz", LocalDate.of(2021, 10, 1)));
-        list.add(new Deadline("finish quiz 4", LocalDate.of(2021, 10, 1)));
+        list.add(new Event("cs quiz", LocalDateTime.parse("2021-10-01T23:59")));
+        list.add(new Deadline("finish quiz 4", LocalDateTime.parse("2021-10-01T23:59")));
         list.add(new Todo("sleep"));
         list.add(new Todo("prepare for quiz"));
 

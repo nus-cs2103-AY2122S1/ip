@@ -12,7 +12,7 @@ import duke.task.Todo;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -24,8 +24,8 @@ class DeleteCommandTest {
     public void execute_validDeleteNumber_success() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Todo("run"));
-        list.add(new Event("funfair", LocalDate.of(2021, 10, 1)));
-        list.add(new Deadline("quiz", LocalDate.of(2021, 10, 1)));
+        list.add(new Event("funfair", LocalDateTime.parse("2021-10-01T23:59")));
+        list.add(new Deadline("quiz", LocalDateTime.parse("2021-10-01T23:59")));
 
         TaskList taskList = new TaskList(list);
         Ui ui = new Ui();
@@ -38,7 +38,7 @@ class DeleteCommandTest {
 
         input = "delete 2";
         deleteCommand = new DeleteCommand(input.split(" "));
-        assertEquals("Noted. I've removed this task:\n" + "[D][ ] quiz (by: 2021-10-01)\n"
+        assertEquals("Noted. I've removed this task:\n" + "[D][ ] quiz (by: 01 Oct 2021 11:59 PM)\n"
                 + "Now you have 1 tasks in your list\n", deleteCommand.execute(taskList, ui, storage));
     }
 
@@ -46,8 +46,8 @@ class DeleteCommandTest {
     public void execute_invalidOrNoDeleteNumber_exceptionThrown() {
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Todo("run"));
-        list.add(new Event("funfair", LocalDate.of(2021, 10, 1)));
-        list.add(new Deadline("quiz", LocalDate.of(2021, 10, 1)));
+        list.add(new Event("funfair", LocalDateTime.parse("2021-10-01T23:59")));
+        list.add(new Deadline("quiz", LocalDateTime.parse("2021-10-01T23:59")));
 
         TaskList taskList = new TaskList(list);
         Ui ui = new Ui();

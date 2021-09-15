@@ -109,7 +109,7 @@ public class Ui {
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            list += String.format("\t%s.%s\n", i + 1, tasks.get(i).toString());
+            list += String.format("%s.%s\n", i + 1, tasks.get(i).toString());
         }
 
         return list;
