@@ -5,7 +5,7 @@ public class Ui {
     }
 
     public String hi() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello! I'm Sana\nWhat can I do for you?";
     }
 
     public String bye() {

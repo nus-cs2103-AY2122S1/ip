@@ -22,6 +22,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     public DialogBox(Label l, ImageView iv) {
+        super(20);
         text = l;
         displayPicture = iv;
 
@@ -31,10 +32,10 @@ public class DialogBox extends HBox {
 
 
 
-//        text.setPadding(new Insets(4, 4, 4, 4));
-//        text.setBackground(new Background(new BackgroundFill(Color.rgb(252,207,166), CornerRadii.EMPTY, Insets.EMPTY)));
-//        text.setStyle("-fx-text-fill:#ff5fa2;-fx-font-size: 11px;-fx-font-weight:bold;");
-//        this.setPadding(new Insets(10, 10, 10, 10));
+        text.setPadding(new Insets(4, 4, 4, 4));
+        text.setBackground(new Background(new BackgroundFill(Color.rgb(252,207,166), CornerRadii.EMPTY, Insets.EMPTY)));
+        text.setStyle("-fx-text-fill:#ff5fa2;-fx-font-size: 11px;-fx-font-weight:bold;");
+        this.setPadding(new Insets(10, 10, 10, 10));
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }

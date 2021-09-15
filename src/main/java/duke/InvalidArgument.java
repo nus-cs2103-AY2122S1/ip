@@ -2,6 +2,6 @@ package duke;
 
 public class InvalidArgument extends DukeException {
     InvalidArgument() {
-        super("☹ The input is incorrect");
+        super("Aww, the input is incorrect, please try again");
     }
 }
