@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.Duke;
-
 import java.time.LocalDate;
 
-public class Deadline extends Task{
+import duke.Duke;
+
+public class Deadline extends Task {
 
     private LocalDate time;
 

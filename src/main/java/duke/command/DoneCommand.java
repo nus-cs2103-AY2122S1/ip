@@ -29,8 +29,8 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput.length == 1) {
-            throw new DukeException("OOPS!!! Please enter \"done\" followed the number corresponding to " +
-                    "the task you want to mark as completed");
+            throw new DukeException("OOPS!!! Please enter \"done\" followed the number corresponding to "
+                    + "the task you want to mark as completed");
         } else {
             int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
             tasks.getTasks().get(taskDone).markAsCompleted();
@@ -42,8 +42,8 @@ public class DoneCommand extends Command {
     /**
      * Generates a string of the done task
      *
-     * @param pos position of done task in the ArrayList<Task>
-     * @param tasks the ArrayList<Task>
+     * @param pos position of done task in the ArrayList
+     * @param tasks the ArrayList
      * @return string of the done task
      */
     public String printDoneTask(int pos, TaskList tasks) {

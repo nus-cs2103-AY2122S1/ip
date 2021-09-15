@@ -1,9 +1,5 @@
 package duke;
 
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
+
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Storage {
 
@@ -44,7 +44,7 @@ public class Storage {
      * @throws DukeException If there is no local file to be found
      */
     public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> toDoList= new ArrayList<>();
+        ArrayList<Task> toDoList = new ArrayList<>();
         Scanner scanner; // create a Scanner using the File as the source
         try {
             scanner = new Scanner(localStorageFile);
@@ -53,7 +53,7 @@ public class Storage {
         }
         try (Stream<String> localStorageStream = Files.lines(Paths.get(localStorageFilePath))) {
             localStorageStream.parallel().forEach(lineFromLocalStorage -> {
-                if (lineFromLocalStorage.contains("[") && lineFromLocalStorage.contains("]") ) {
+                if (lineFromLocalStorage.contains("[") && lineFromLocalStorage.contains("]")) {
                     char taskType = lineFromLocalStorage.charAt(1);
                     char completed = lineFromLocalStorage.charAt(4);
                     String restOfTheTask = lineFromLocalStorage.substring(7);

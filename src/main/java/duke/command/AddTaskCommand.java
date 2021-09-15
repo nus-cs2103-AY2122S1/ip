@@ -1,5 +1,9 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -8,10 +12,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class AddTaskCommand extends Command {
 
@@ -36,7 +36,7 @@ public class AddTaskCommand extends Command {
      * @throws DukeException If user input is incorrect
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("t")) {
             if (parsedUserInput.length == 1) {
@@ -92,7 +92,7 @@ public class AddTaskCommand extends Command {
     private void addTaskToList(Task newTask, Ui ui, TaskList tasks, Storage storage) {
         tasks.getTasks().add(newTask);
         storage.updateLocalStorage(tasks.getTasks());
-        ui.reply("Got it. I've added this duke.task: \n" + newTask.toString() +
-                "     \nNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        ui.reply("Got it. I've added this duke.task: \n" + newTask.toString()
+                + "     \nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

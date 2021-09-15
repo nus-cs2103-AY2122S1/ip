@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeFormatter;
+
 import duke.command.Command;
 import javafx.DialogBox;
 import javafx.application.Application;
@@ -13,9 +15,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.time.format.DateTimeFormatter;
-
 public class Duke extends Application {
+    private static final String LOCAL_STORAGE_LOCATION = "src/Data/LocalStorage.txt";
+    private static final DateTimeFormatter FORMAT_FROM_LOCAL_STORAGE = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image apollo = new Image(this.getClass().getResourceAsStream("/images/Apollo.jpg"));
@@ -26,11 +28,9 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private static final String LOCAL_STORAGE_LOCATION = "src/Data/LocalStorage.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final DateTimeFormatter FORMAT_FROM_LOCAL_STORAGE = DateTimeFormatter.ofPattern("dd LLLL yyyy");
     private boolean isExit = false;
 
     /**
@@ -130,7 +130,7 @@ public class Duke extends Application {
     }
 
     public boolean isDukeExit() {
-        return  this.isExit;
+        return this.isExit;
     }
 
     /**
@@ -148,7 +148,7 @@ public class Duke extends Application {
      * @return location of local storage
      */
     public static String getLocalStorageLocation() {
-        assert !LOCAL_STORAGE_LOCATION.equals(""): "Local storage should be defined";
+        assert !LOCAL_STORAGE_LOCATION.equals("") : "Local storage should be defined";
         return LOCAL_STORAGE_LOCATION;
     }
 }

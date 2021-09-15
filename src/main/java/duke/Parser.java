@@ -30,10 +30,10 @@ public class Parser {
                 return new FindCommand(fullCommand);
             } else if (parsedUserInput[0].equals("delete")) {
                 return new DeleteCommand(fullCommand);
-            } else if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("t") ||
-                    parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("d") ||
-                    parsedUserInput[0].equals("event") || parsedUserInput[0].equals("e")) {
-               return new AddTaskCommand(fullCommand);
+            } else if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("t")
+                    || parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("d")
+                    || parsedUserInput[0].equals("event") || parsedUserInput[0].equals("e")) {
+                return new AddTaskCommand(fullCommand);
             } else {
                 throw new DukeException("OOWOOPS!!! I'm sowwie, but I don't know what that mweans :-(");
             }
