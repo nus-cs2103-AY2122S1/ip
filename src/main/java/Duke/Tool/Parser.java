@@ -276,7 +276,7 @@ public class Parser {
                 DeleteWrongIndexException | WrongTimeFormatException e) {
 
             e.printStackTrace();
-            return null;
+            return new Task("Invalid input", false);
         }
     }
 
