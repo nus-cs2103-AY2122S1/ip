@@ -152,13 +152,13 @@ class HelpCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return "list - list all current tasks.\n"
-                + "todo <description> - add a todo task.\n"
-                + "deadline <description> /by <yyyy-mm-dd> - add a deadline task.\n"
-                + "event <description> /at <yyyy-mm-dd> - add a event task.\n"
-                + "delete <index> - delete the task at the index.\n"
-                + "done <index> - mark the task at the index as done.\n"
-                + "find <search string> - search the task description that matches the string.\n"
+        return "list - list all current tasks.\n\n"
+                + "todo <description> - add a todo task.\n\n"
+                + "deadline <description> /by <yyyy-mm-dd> - add a deadline task.\n\n"
+                + "event <description> /at <yyyy-mm-dd> - add a event task.\n\n"
+                + "delete <index> - delete the task at the index.\n\n"
+                + "done <index> - mark the task at the index as done.\n\n"
+                + "find <search string> - search the task description that matches the string.\n\n"
                 + "save - save the task to /data/duke.txt";
     }
 }

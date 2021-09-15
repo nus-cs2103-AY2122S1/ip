@@ -17,7 +17,7 @@ class DukeException extends Exception {
  */
 class UnknownActionException extends DukeException {
     public UnknownActionException() {
-        super("I'm sorry, but I don't know what that means :-(\n");
+        super("I'm sorry, but I don't know what that means :-(\n\nTry \"help\" for the list of command.");
     }
 }
 

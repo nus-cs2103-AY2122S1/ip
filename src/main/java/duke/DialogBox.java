@@ -18,6 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -50,6 +51,9 @@ public class DialogBox extends HBox {
         textBox.setBackground(new Background(bf));
 
         dialog.setText(text);
+        dialog.setTextAlignment(TextAlignment.RIGHT);
+        dialog.setWrappingWidth(Math.min(text.length() * dialog.getFont().getSize(), 100));
+
         displayPicture.setImage(img);
     }
 
@@ -69,6 +73,7 @@ public class DialogBox extends HBox {
         );
         textBox.setBackground(new Background(bf));
         dialog.setWrappingWidth(250);
+        dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

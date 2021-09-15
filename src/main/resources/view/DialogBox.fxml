@@ -19,7 +19,7 @@
                 </font>
             </Text>
             <padding>
-                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                <Insets bottom="10.0" left="15.0" right="15.0" top="15.0" />
             </padding>
         </HBox>
         <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" >
