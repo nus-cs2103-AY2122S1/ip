@@ -72,7 +72,8 @@ _*x refers to the number of task in the list_
 ###Adding a task with a deadline: `deadline`
 A task with a day to be set as a deadline. You may use either the **Command Line Format** or the given **GUI button**
 
-Command Line Format: `deadline [description] /by [YYYY-MM-DD] [Time in 24 Hour Format]`
+Command Line Format:  
+`deadline [description] /by [YYYY-MM-DD] [Time in 24 Hour Format]`
 
 GUI Button:
 
@@ -105,7 +106,8 @@ _*x refers to the number of task in the list_
 A task with a day to be set as an Event. 
 You may use either the **Command Line Format** or the given **GUI button**
 
-Command Line Format: `event [description] /at [YYYY-MM-DD] [Time in 24 Hour Format]`
+Command Line Format:  
+`event [description] /at [YYYY-MM-DD] [Time in 24 Hour Format]`
 
 GUI Button:
 
@@ -141,7 +143,7 @@ You may use either the **Command Line Format** or the given **GUI button**
 Command Line Format: `list`
 
 GUI Button:
-1. Click the ![picture](#list) button on the top left
+1. Click the ![picture](list.png) button on the top left
 
 Expected output for both methods if the list is populated:
 ```
