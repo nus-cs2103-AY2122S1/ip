@@ -8,7 +8,7 @@
 3. Copy the file to the folder you want to use as the home folder for the application. Data will be saved in the home folder by default.
 
 4. Double-click the file to start the app. You should see a GUI similar to the one below: 
-![Example GUI image of Brobot](https://markuslim24.github.io/ip/Ui.png| width=100)
+![Example GUI image of Brobot](https://markuslim24.github.io/ip/Ui.png|width=100)
 
 
 ## Features 
@@ -26,20 +26,20 @@ Examples:
 ### Add a deadline :`deadline`
 Adds a deadline task to the tasklist.
 
-Format: deadline [DESCRIPTION]\by [DD/MM/YYYY HHMM]
+Format: deadline [DESCRIPTION]/by [DD/MM/YYYY HHMM]
 
 Examples:
-* deadline finish cs2103t ip \by 17/09/2021 1700
-* deadline go to sleep\by 16/09/2021 2359
+* deadline finish cs2103t ip /by 17/09/2021 1700
+* deadline go to sleep/by 16/09/2021 2359
 
 ### Add an event : `event`
 Adds an event task to the tasklist.
 
-Format: event [DESCRIPTION]\at [DD/MM/YYYY HHMM]
+Format: event [DESCRIPTION]/at [DD/MM/YYYY HHMM]
 
 Examples:
-* event attend birthday party \at 20/09/2021 1300
-* event go for lecture\at 15/09/2021 1400
+* event attend birthday party /at 20/09/2021 1300
+* event go for lecture/at 15/09/2021 1400
 
 
 
