@@ -2,7 +2,7 @@ package storage;
 
 import java.util.ArrayList;
 
-import exception.DukeException;
+import exception.InvalidIndexException;
 import models.Task;
 import tasklist.TaskList;
 
@@ -22,7 +22,7 @@ public class StorageStub implements IStorage {
     }
 
     @Override
-    public void setDone(int index) throws DukeException {
+    public void setDone(int index) throws InvalidIndexException {
 
     }
 
@@ -37,7 +37,7 @@ public class StorageStub implements IStorage {
     }
 
     @Override
-    public String deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws InvalidIndexException {
         return "test";
     }
 

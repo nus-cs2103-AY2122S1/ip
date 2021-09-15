@@ -3,7 +3,7 @@ package tasklist;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import exception.DukeException;
+import exception.InvalidIndexException;
 import models.Task;
 
 /**
@@ -43,9 +43,9 @@ public class TaskList implements Serializable {
      * Toggle the isDone boolean inside Task objects.
      *
      * @param index Index of the task which is going to be set done.
-     * @throws DukeException If there is no task with the specified index.
+     * @throws InvalidIndexException If there is no task with the specified index.
      */
-    public void setDone(int index) throws DukeException {
+    public void setDone(int index) throws InvalidIndexException {
         try {
             if (index < 0 || index >= list.size()) {
                 throw new IndexOutOfBoundsException();
@@ -54,7 +54,7 @@ public class TaskList implements Serializable {
             next.list.get(index).setDone();
             next.previous = this;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no task with number " + (index + 1) + " in the list");
+            throw new InvalidIndexException("There is no task with number " + (index + 1) + " in the list");
         }
     }
 
@@ -91,9 +91,9 @@ public class TaskList implements Serializable {
      *
      * @param index Index of the task that will be deleted.
      * @return String value of the deleted Task.
-     * @throws DukeException If there is no task with the specified index.
+     * @throws InvalidIndexException If there is no task with the specified index.
      */
-    public String deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws InvalidIndexException {
         try {
             if (index < 0 || index >= list.size()) {
                 throw new IndexOutOfBoundsException();
@@ -103,7 +103,7 @@ public class TaskList implements Serializable {
             next.previous = this;
             return result;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no task with number " + (index + 1) + " in the list");
+            throw new InvalidIndexException("There is no task with number " + (index + 1) + " in the list");
         }
     }
 

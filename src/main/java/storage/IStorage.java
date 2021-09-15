@@ -1,6 +1,6 @@
 package storage;
 
-import exception.DukeException;
+import exception.InvalidIndexException;
 import models.Task;
 import tasklist.TaskList;
 
@@ -20,9 +20,9 @@ public interface IStorage {
      * Wrapper function that set a specified Task inside TaskList to be done.
      *
      * @param index Index of the Task that will be set done.
-     * @throws DukeException If there is no task with the specified index.
+     * @throws InvalidIndexException If there is no task with the specified index.
      */
-    void setDone(int index) throws DukeException;
+    void setDone(int index) throws InvalidIndexException;
 
     /**
      * Wrapper function that get a specified Task from TaskList.
@@ -44,9 +44,9 @@ public interface IStorage {
      *
      * @param index Index of the Task that will be deleted.
      * @return String representation of the deleted Task.
-     * @throws DukeException If there is no Task with the specified index.
+     * @throws InvalidIndexException If there is no Task with the specified index.
      */
-    String deleteTask(int index) throws DukeException;
+    String deleteTask(int index) throws InvalidIndexException;
 
 
     /**

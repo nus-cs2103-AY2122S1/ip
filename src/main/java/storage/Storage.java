@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import exception.DukeException;
+import exception.InvalidIndexException;
 import models.Task;
 import tasklist.TaskList;
 
@@ -95,9 +95,9 @@ public class Storage implements IStorage {
      * Wrapper function implementation that set a specified Task inside TaskList to be done.
      *
      * @param index Index of the Task that will be set done.
-     * @throws DukeException If there is no task with the specified index.
+     * @throws InvalidIndexException If there is no task with the specified index.
      */
-    public void setDone(int index) throws DukeException {
+    public void setDone(int index) throws InvalidIndexException {
         list.setDone(index);
         list = getNext();
         writeTaskListToFile();
@@ -127,9 +127,9 @@ public class Storage implements IStorage {
      *
      * @param index Index of the Task that will be deleted.
      * @return String representation of the deleted Task.
-     * @throws DukeException If there is no Task with the specified index.
+     * @throws InvalidIndexException If there is no Task with the specified index.
      */
-    public String deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws InvalidIndexException {
         String result = list.deleteTask(index);
         list = getNext();
         writeTaskListToFile();

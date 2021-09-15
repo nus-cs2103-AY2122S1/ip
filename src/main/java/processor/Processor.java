@@ -6,6 +6,7 @@ import java.util.List;
 
 import exception.DukeException;
 import exception.InvalidCommandException;
+import exception.InvalidIndexException;
 import exception.InvalidInputException;
 import models.Command;
 import models.Deadline;
@@ -156,7 +157,7 @@ public class Processor implements IProcessor {
             String result = "Nice! I've marked this task as done:\n   " + this.storage.getTask(i - 1);
             Ui.print(result);
             return result;
-        } catch (DukeException e) {
+        } catch (InvalidIndexException e) {
             Ui.print(e.getMessage());
             return e.getMessage();
         } catch (NumberFormatException e) {
@@ -180,7 +181,7 @@ public class Processor implements IProcessor {
                     + "\nNow you have " + this.storage.getSize() + " tasks in the list.";
             Ui.print(output);
             return output;
-        } catch (DukeException e) {
+        } catch (InvalidIndexException e) {
             Ui.print(e.getMessage());
             return e.getMessage();
         } catch (NumberFormatException e) {
