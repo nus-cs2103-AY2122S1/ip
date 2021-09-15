@@ -5,21 +5,21 @@ import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
- * Command that exits Duke when executed.
+ * Command that exits Cynthius when executed.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Saves the current tasks to disk and displays exit message.
+     * Saves the current information to disk and displays exit message.
      *
-     * @param tasks The list of tasks that a user has.
+     * @param information The list of information that a user has.
      * @param ui The ui that sends a message to the user once the tasks are saved.
-     * @param storage Saves the updated TaskList to disk.
+     * @param storage Saves the updated InformationList to disk.
      * @return The message produced by ui.
      */
     @Override
-    public String execute(InformationList tasks, Ui ui, Storage storage) {
-        storage.save(tasks);
+    public String execute(InformationList information, Ui ui, Storage storage) {
+        storage.save(information);
         return ui.showGoodbye();
     }
 }

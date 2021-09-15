@@ -24,15 +24,15 @@ public class ContactCommand extends Command {
     /**
      * Adds a contact to the InformationList.
      *
-     * @param tasks The list of tasks that a user has.
+     * @param contacts The list of contacts that a user has.
      * @param ui The ui that sends a message to the user once the contact is added.
-     * @param storage Saves the updated TaskList to disk.
+     * @param storage Saves the updated InformationList to disk.
      * @return The message produced by ui.
      */
     @Override
-    public String execute(InformationList tasks, Ui ui, Storage storage) {
-        tasks.addContact(contact);
-        storage.save(tasks);
+    public String execute(InformationList contacts, Ui ui, Storage storage) {
+        contacts.addContact(contact);
+        storage.save(contacts);
         return ui.showAddedInformation();
     }
 }

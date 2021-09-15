@@ -5,7 +5,7 @@ import duke.data.InformationList;
 import duke.data.Ui;
 
 /**
- * Command that displays a user's saved tasks and contacts when executed.
+ * Command that displays a user's saved information when executed.
  */
 public class ListCommand extends Command {
     /**

@@ -21,9 +21,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Displays a user's saved tasks containing the keyword.
+     * Displays a user's saved information containing the keyword(s).
      *
-     * @param tasks The list of tasks that a user has.
+     * @param tasks The list of information that a user has.
      * @param ui The ui that sends a filtered InformationList as a string to the user.
      * @param storage Not used for this command.
      * @return The message produced by ui.

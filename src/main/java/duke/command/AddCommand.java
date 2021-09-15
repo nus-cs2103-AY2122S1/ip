@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      *
      * @param tasks The list of tasks that a user has.
      * @param ui The ui that sends a message to the user once the task is added.
-     * @param storage Saves the updated TaskList to disk.
+     * @param storage Saves the updated InformationList to disk.
      * @return The message produced by ui.
      */
     @Override

@@ -241,7 +241,7 @@ public class Parser {
                 throw new DukeException("I'm sorry, please input a number instead!");
             }
         } else {
-            throw new DukeException("I'm sorry, please input the number of the completed task");
+            throw new DukeException("Please follow this format: done INDEX");
         }
     }
 
@@ -284,7 +284,7 @@ public class Parser {
         if (userInputArray.length == 1) {
             return new ExitCommand();
         } else {
-            throw new DukeException("The description of a bye MUST be empty.");
+            throw new DukeException("The description of a bye command MUST be empty.");
         }
     }
 
@@ -336,7 +336,7 @@ public class Parser {
         if (userInputArray.length == 1) {
             return new HelpCommand();
         } else {
-            throw new DukeException("The description of a help MUST be empty.");
+            throw new DukeException("The description of a help command MUST be empty.");
         }
     }
 }

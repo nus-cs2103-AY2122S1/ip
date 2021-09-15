@@ -9,7 +9,7 @@ import duke.data.Ui;
  * Command that marks a task as done when executed.
  */
 public class DoneCommand extends Command{
-    /** Index of the task in TaskList. */
+    /** Index of the task in InformationList. */
     private int taskNumber;
 
     /**
@@ -26,7 +26,7 @@ public class DoneCommand extends Command{
      *
      * @param tasks The list of tasks that a user has.
      * @param ui The ui that sends a message to the user once the task is marked as done.
-     * @param storage Saves the updated TaskList to disk.
+     * @param storage Saves the updated InformationList to disk.
      * @return The message produced by ui.
      */
     @Override
