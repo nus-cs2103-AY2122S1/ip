@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructs a DeleteCommand object that handles task-deletion command.
      *
-     * @param taskNum The number of the to-be-deleted task.
+     * @param description The description of the to-be-deleted task.
      */
     public DeleteCommand(String description) throws DukeException {
         ExceptionChecker.checkEmptyDescription("delete", description);
