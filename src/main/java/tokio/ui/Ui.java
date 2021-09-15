@@ -79,8 +79,8 @@ public class Ui {
      * @return Success message.
      */
     public String printAddCommand(Task task, TaskList taskList) {
-        return "Sure Rio! I Have added \"" + task.toString() + "\" to your list.\n"
-                + "You have a total of " + taskList.getSize() + " tasks on your list!";
+        return "Sure Rio! I have added this task to your list:\n" + "\"" + task.toString() + "\"\n"
+                + "You have " + taskList.getSize() + " task(s) on your list!";
     }
 
     /**
@@ -91,8 +91,8 @@ public class Ui {
      * @return Success message.
      */
     public String printDoneCommand(Task task, TaskList taskList) {
-        return "Good job on completing your task Rio!\n" + "I have marked this task as done: \""
-                + task.toString() + "\"\n" + "You have " + taskList.getSize() + " task(s) left on your list.";
+        return "Good job on completing your task Rio!\n" + "I have marked this task as done:\n \""
+                + task.toString() + "\"\n" + "You have " + taskList.getSize() + " task(s) on your list.";
     }
 
     /**

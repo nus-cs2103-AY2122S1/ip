@@ -1,6 +1,7 @@
 package tokio.tasks;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Contains the list of tasks and methods for the list.
@@ -26,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Adds newTask into the current task list.
+     * Adds newTask into the current task list if it is not already on the list.
      *
      * @param newTask Task to be added.
      */
@@ -76,7 +77,7 @@ public class TaskList {
             tasks.get(index).setDone();
         }
     }
-
+    
     /**
      * Finds tasks from taskList using keyword.
      *
@@ -87,7 +88,7 @@ public class TaskList {
         ArrayList<Task> resultTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
-            if (currTask.toString().contains(keyword)) {
+            if (currTask.toString().toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT))) {
                 resultTasks.add(currTask);
             }
         }
