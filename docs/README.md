@@ -5,7 +5,7 @@ Duke is a desktop app which serves to help you manage your daily tasks as well a
 # Quick start
 
 1. Ensure you have Java 11 or above installed in your computer
-1. Download the latest Duke.jar from [here](http://google.com).
+1. Download the latest Duke.jar from [here](https://github.com/rickyaandrew/ip/releases/download/A-Release/Duke.jar).
 1. Copy the file into a folder which you may want to use it as the home folder for your Duke.
 1. Double-click on the Duke.jar file, and you will be able to see a similar GUI appearing on your screen.
    Type your command in the command box and press Enter to execute the command.
