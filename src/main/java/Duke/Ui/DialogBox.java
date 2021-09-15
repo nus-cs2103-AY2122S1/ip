@@ -14,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -34,6 +36,12 @@ public class DialogBox extends HBox {
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if (text.startsWith("Invalid")) {
+            dialog.setText(text);
+            dialog.setTextFill(Color.RED);
+            dialog.setFont(Font.font("Courier New",15));
         }
 
         dialog.setText(text);
