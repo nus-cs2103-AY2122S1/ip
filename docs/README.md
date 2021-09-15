@@ -1,29 +1,46 @@
 # User Guide
 
-## Features 
+![Duke GUI](UI.png)
 
-### Feature-ABC
+Duke is an application that allows easy task creation and management.
 
-Description of the feature.
+## Features
 
-### Feature-XYZ
+### Intuitive GUI
 
-Description of the feature.
+An intuitive user interface allows Duke GUI to be used easily.
+
+### Easy-to-use CLI
+
+Duke can also be launched in CLI mode, which allows quick adding of tasks in via a command line interface.
+
+### Dates
+
+Date information can be added to tasks, making it easy to keep track of deadlines and events.
 
 ## Usage
 
-### `Keyword` - Describe action
+Set the `USE_GUI` flag in Duke to set whether to run Duke in GUI or CLI mode.
 
-Describe the action and its outcome.
+### `help` - Show help
 
-Example of usage: 
+Shows the help command, which lists all the other commands.
 
-`keyword (optional arguments)`
+Example of usage:
+
+`help`
 
 Expected outcome:
 
-Description of the outcome.
+```
+ALL COMMANDS:
+add         Add a task (with optionally a deadline or a date)
+bye         Exit Duke
+delete      Delete a task
+done        Mark the task as done
+find        Find a task
+help        Display all commands, or detailed info of given command
+list        List all tasks
+```
 
-```
-expected output
-```
+The list of commands are shown above.
