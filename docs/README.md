@@ -7,6 +7,7 @@ to be used with CLI (Command Line Interface).
 * [Features](#features)
 * [Command summary](#command-summary)
 
+
 ## Quick start
 1. Ensure you have Java `11` or above installed in your c
    computer.
@@ -24,6 +25,7 @@ to be used with CLI (Command Line Interface).
 7. Refer to the [Features](#features) below for details of each
    command.
    
+
 ## Features
 ### Listing all tasks
 List all tasks available, including todos, deadlines, and events.
@@ -165,6 +167,7 @@ Example:
 
 Output:
 Duke application will be closed.
+
 
 ## Command summary
 
