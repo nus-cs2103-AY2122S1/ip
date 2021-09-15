@@ -9,7 +9,7 @@ Prerequisites: JDK 11
 
 1. Download the JAR file at `release`
 2. Run jar file `java -jar bobbybot.jar`
-3. A chatbot as shown below will appear where you can start keying in commands. You can type "list" and hit enter to see the sample data that was loaded!
+3. A chatbot as shown below will appear where you can start keying in commands. Add some tasks to start making use of BobbyBot!  
 <img width="397" alt="image" src="https://user-images.githubusercontent.com/13284470/133483407-1a21a245-21cf-4083-9d6a-2331e9a7e4d3.png">
 
 
@@ -39,22 +39,26 @@ Example:
 ### Viewing all tasks: `list`  
 Lists out all tasks
 Format: `list`  
+💡The first square brackets represents the task type [T] for Todo, [E] for Event, [D] for deadline  
+💡The second square brackets represents if a task is not done [ ] or done [X]
 
 ### Finding tasks with keyword: `find`  
 Lists out all tasks that match a keyword
-Format: `find KEYWORD`
+Format: `find KEYWORD`  
 <img width="392" alt="image" src="https://user-images.githubusercontent.com/13284470/133481478-f08c1f5e-82da-4fa4-9a64-2c10b958fd10.png">
 
 
-### Finding tasks with keyword: `done`  
-Mark a list as done
-Format: `done INDEX`
+### Marking a task as done: `done`  
+Mark a task as done
+Format: `done INDEX`  
+* INDEX must be an integer and a valid task number (1,2,3..)
 
 ### Deleting a task: `delete`  
 Format: `delete INDEX`
+* INDEX must be an integer and a valid task number (1,2,3..)
 
 ### Shutting down the bot: `bye`  
-Format: `delete INDEX`
+Format: `bye`
 
 ## Contacts Commands
 
@@ -66,10 +70,10 @@ Examples:
 * `contact Elon Musk p/123456789 e/elon@tsla.com a/Moon`
 * `contact Doge Man p/98765432 e/doge@coin.com a/Sun`
 
-### Viewing all contacts: `delete`  
+### Viewing all contacts: `list_contact`  
 Format: `list_contact`
 
-### Deleting a contact: `delete`  
+### Deleting a contact: `delete_contact`  
 Format: `delete_contact INDEX`
 
 
