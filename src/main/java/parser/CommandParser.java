@@ -1,6 +1,7 @@
 package parser;
 import commands.AddDeadlineCommand;
 import commands.AddEventCommand;
+import commands.AddFixedDurationCommand;
 import commands.AddToDoCommand;
 import commands.Command;
 import commands.DeleteCommand;
@@ -44,6 +45,8 @@ public class CommandParser {
             return new FindCommand(trimmedUserInput);
         case DeleteCommand.KEYWORD:
             return new DeleteCommand(trimmedUserInput);
+        case AddFixedDurationCommand.KEYWORD:
+            return new AddFixedDurationCommand(trimmedUserInput);
         case AddEventCommand.KEYWORD:
             return new AddEventCommand(trimmedUserInput);
         case AddDeadlineCommand.KEYWORD:
