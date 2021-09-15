@@ -1,14 +1,48 @@
 # User Guide
 
+## Table of Content
+- [Features](#features)
+  - [Add Tasks](#add-tasks)
+    - [`todo`](#todo)
+    - [`event`](#event)
+    - [`deadline`](#deadline)
+  - [View Tasks](#view-tasks)
+    - [`list`](#list)
+    - [`find`](#find)
+  - [Update Tasks](#update-tasks)
+    - [`done`](#done)
+  - [Delete Tasks](#delete-tasks)
+    - [`delete`](#delete)
+    - [`clear`](#clear)
+  - [Auxiliary Features](#auxiliary-features)
+    - [`help`](#help)
+    - [`save`](#save)
+    - [Input History Navigation](#input-history-navigation)
+- Usage
+
 ## Features 
 
-### Feature-ABC
+### Add Tasks
+#### `todo`
+#### `event`
+#### `deadline`
 
-Description of the feature.
+### View Tasks
+#### `list`
+#### `find`
 
-### Feature-XYZ
+### Update Tasks
+#### `done`
 
-Description of the feature.
+### Delete Tasks
+#### `delete`
+#### `clear`
+
+### Auxiliary Features
+#### `help`
+#### `save`
+#### Input History Navigation
+
 
 ## Usage
 
