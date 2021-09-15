@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * Constructor for Deadline which consists of description and deadline of task.
      *
      * @param description The name of the deadline.
-     * @param by The eadline of the task.
+     * @param by The deadline of the task.
      */
     public Deadline(String description, String by) {
         super(description);

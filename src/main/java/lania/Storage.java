@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * This method reads the file if it exists and stores the data
+     * Reads the file if it exists and stores the data
      * into a TaskList.
      *
      * @return The TaskList containing the tasks specified in the file.

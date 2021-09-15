@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         try {
-            Command c = parser.parse(userInput.getText());
+            Command c = parser.parse(input);
             String laniaText = c.execute(tasks, storage, ui, log);
             if (c instanceof ExitCommand) {
                 timer.schedule(timerTask, 1000);
