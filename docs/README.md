@@ -5,6 +5,7 @@
 2. Download the latest release version of duke.jar from this page.
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double click the file to run. The GUI similar to the one below should appear.
+
 ![Image of Duke](Ui.png)
 
 ## Features 
