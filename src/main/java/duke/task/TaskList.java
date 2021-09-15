@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.util.ArrayList;
 
 /**
@@ -34,8 +36,26 @@ public class TaskList {
      * @param t Task to add.
      * @return True if task is added, false otherwise.
      */
-    public boolean addTask(Task t) {
+    public boolean addTask(Task t) throws DukeException {
+        if (checkDuplicate(t)) {
+            throw new DukeException("Task already exists!");
+        }
         return tasks.add(t);
+    }
+
+    /**
+     * Checks if there is a duplicate in list of tasks.
+     *
+     * @param t Task to check if already exists in taskList.
+     * @return True if task is duplicate, false otherwise.
+     */
+    public boolean checkDuplicate(Task t) {
+        for (Task task : tasks) {
+            if (task.equals(t)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
