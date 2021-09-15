@@ -19,6 +19,7 @@ import angrybot.exception.AngryBotException;
 import angrybot.exception.InvalidDateTimeException;
 import angrybot.exception.NoCommandDescriptionException;
 import angrybot.exception.NoDateTimeException;
+import angrybot.exception.NoTaskDescriptionException;
 import angrybot.exception.UnknownCommandException;
 import angrybot.storage.Storage;
 import angrybot.task.Deadline;
@@ -101,7 +102,7 @@ public class Parser {
     }
 
     private Task processTaskDescriptions(String taskType, String commandDescription) throws InvalidDateTimeException,
-            NoDateTimeException {
+            NoDateTimeException, NoTaskDescriptionException {
         switch (taskType) {
         case "deadline": case "event":
             return createTaskWithDateTime(commandDescription, taskType);
@@ -120,7 +121,7 @@ public class Parser {
     }
 
     private Task createTaskWithDateTime(String commandDescription, String taskType) throws NoDateTimeException,
-            InvalidDateTimeException {
+            InvalidDateTimeException, NoTaskDescriptionException {
         LocalDateTime dt = getDateTime(commandDescription, taskType);
         String taskDescription = getTaskDescription(commandDescription);
         if (taskType.equals("deadline")) {
@@ -139,19 +140,34 @@ public class Parser {
                 throw new NoCommandDescriptionException();
             }
         }
+        if (userInput.substring(index + 1).isBlank()) {
+            throw new NoCommandDescriptionException();
+        }
         return userInput.substring(index + 1);
     }
 
-    private String getTaskDescription(String commandDescription) throws NoDateTimeException {
+    private String getTaskDescription(String commandDescription) throws NoDateTimeException, NoTaskDescriptionException {
         int slashIndex = commandDescription.indexOf("/");
         if (slashIndex < 0) {
             throw new NoDateTimeException();
         }
-        return commandDescription.substring(0, slashIndex - 1);
+        try {
+            if (commandDescription.substring(0, slashIndex - 1).isBlank()) {
+                throw new NoTaskDescriptionException();
+            }
+            return commandDescription.substring(0, slashIndex - 1);
+        } catch (StringIndexOutOfBoundsException e){
+            throw new NoTaskDescriptionException();
+        }
+
     }
 
-    private int getTaskNumber(String commandDescription) {
-        return Integer.parseInt(commandDescription.split(" ")[0]);
+    private int getTaskNumber(String commandDescription) throws UnknownCommandException {
+        try {
+            return Integer.parseInt(commandDescription.split(" ")[0]);
+        } catch (NumberFormatException e) {
+            throw new UnknownCommandException();
+        }
     }
 
     private LocalDateTime getDateTime(String taskDescription, String taskType) throws NoDateTimeException,
