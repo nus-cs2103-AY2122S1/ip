@@ -28,9 +28,8 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/perry.png"));
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/doofenshmirtz.jpg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/perry.PNG"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/doofenshmirtz.png"));
 
     /**
      * Creates Duke ChatBot.
@@ -85,7 +84,7 @@ public class Duke extends Application {
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
-        userInput = new TextField();
+        userInput = new TextField("");
         Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
@@ -139,6 +138,7 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
