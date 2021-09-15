@@ -1,18 +1,15 @@
 package duke.main;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.io.File;
-import java.io.IOException;
 
 import duke.exception.DukeException;
 import duke.command.Parser;
-import duke.task.*;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
 import duke.storage.Storage;
 import duke.ui.Ui;
 

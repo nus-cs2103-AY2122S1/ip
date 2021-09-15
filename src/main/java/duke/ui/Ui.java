@@ -1,6 +1,7 @@
 package duke.ui;
 
-import duke.task.*;
+import duke.task.TaskList;
+import duke.task.Task;
 
 public class Ui {
     private static final String line = "____________________________________________________________";
