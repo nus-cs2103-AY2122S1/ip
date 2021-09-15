@@ -24,6 +24,7 @@ public class Task {
 
     /**
      * Returns the status of task
+     *
      * @return X if true, " " if false
      */
     public String getStatusIcon() {
@@ -46,7 +47,12 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
-    
+
+    /**
+     * Formats each task for storage purposes.
+     *
+     * @return String message suitable for saving in the storage file.
+     */
     public String formatToStorage() {
         return "[" + (this.isDone ? "X" : " ") + "] " + description;
     }

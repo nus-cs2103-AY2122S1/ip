@@ -77,7 +77,7 @@ public class TaskList {
             tasks.get(index).setDone();
         }
     }
-    
+
     /**
      * Finds tasks from taskList using keyword.
      *
@@ -86,8 +86,7 @@ public class TaskList {
      */
     public TaskList findTask(String keyword) {
         ArrayList<Task> resultTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task currTask = tasks.get(i);
+        for (Task currTask : tasks) {
             if (currTask.toString().toLowerCase(Locale.ROOT).contains(keyword.toLowerCase(Locale.ROOT))) {
                 resultTasks.add(currTask);
             }

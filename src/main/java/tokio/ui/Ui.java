@@ -116,5 +116,4 @@ public class Ui {
         return "Okay Rio, I have deleted this task from your list:\n" + task.toString()
                 + "\nYou have " + taskList.getSize() + " task(s) left on your list.";
     }
-
 }

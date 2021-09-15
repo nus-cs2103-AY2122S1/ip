@@ -9,7 +9,7 @@ import tokio.tasks.Todos;
 import tokio.ui.Ui;
 
 /**
- * Add todo task into task list and storage.
+ * Adds todo task into task list and storage.
  */
 public class AddTodoCommand extends Command {
     protected String description;

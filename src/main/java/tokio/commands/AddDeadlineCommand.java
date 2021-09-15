@@ -9,7 +9,7 @@ import tokio.tasks.TaskList;
 import tokio.ui.Ui;
 
 /**
- * Add deadline task into task list and storage file.
+ * Adds deadline task into task list and storage file.
  */
 public class AddDeadlineCommand extends Command {
     protected String description;

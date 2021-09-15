@@ -7,7 +7,7 @@ import tokio.commands.Instruction;
  */
 public class Todos extends Task {
     protected String description;
-    
+
     /**
      * Constructor for Todo with description provided by user.
      *

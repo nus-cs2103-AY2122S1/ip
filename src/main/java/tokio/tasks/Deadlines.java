@@ -42,7 +42,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Formats deadline for storage purposes..
+     * Formats deadline for storage purposes.
      *
      * @return Formatted deadline for storage purposes.
      */
@@ -51,7 +51,7 @@ public class Deadlines extends Task {
         return "[D]" + super.formatToStorage() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
-    
+
     /**
      * Compares two objects, if both objects are Deadlines and have the same name and date,
      * then they will be considered equal.

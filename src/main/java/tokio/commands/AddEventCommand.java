@@ -9,7 +9,7 @@ import tokio.tasks.TaskList;
 import tokio.ui.Ui;
 
 /**
- * Add event to task list and storage file.
+ * Adds event to task list and storage file.
  */
 public class AddEventCommand extends Command {
     protected String description;

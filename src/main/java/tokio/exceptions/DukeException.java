@@ -1,7 +1,7 @@
 package tokio.exceptions;
 
 /**
- * Exception thrown when user input causes problems.
+ * Throws exception when user input causes problems.
  */
 public class DukeException extends Exception {
     /**

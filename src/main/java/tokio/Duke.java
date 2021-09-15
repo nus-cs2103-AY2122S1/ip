@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.util.Duration;
 import tokio.commands.Command;
 import tokio.exceptions.DukeException;
@@ -61,7 +60,7 @@ public class Duke {
 
     /**
      * Starts duke.
-     * 
+     *
      * @throws DukeException If user input is unknown.
      */
     public void run() throws DukeException {
@@ -81,7 +80,7 @@ public class Duke {
 
     /**
      * Main function for Duke.
-     * 
+     *
      * @throws IOException If file cannot be loaded.
      * @throws DukeException If user input is unknown.
      */
@@ -102,7 +101,7 @@ public class Duke {
             if (command.isExit()) {
                 ui.printBye();
                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished(event -> Platform.exit());
+                delay.setOnFinished(event -> System.exit(0));
                 delay.play();
             }
             return command.execute(tasks, ui, storage);

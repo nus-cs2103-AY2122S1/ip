@@ -28,7 +28,7 @@ public class Events extends Task {
         this.date = date;
         this.time = time;
     }
-    
+
     /**
      * Initialises Events with description, date and time.
      *
