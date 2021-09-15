@@ -5,10 +5,6 @@
 
 ## Features 
 
-### Loading and Storing Tasks
-
-Tasks managed by Duke™ are stored locally in a data file, so you can be sure that Duke™ remembers your tasks, no matter how many there are.
-
 ### A Myriad of Task Types
 
 In Duke™, you get to manage 3 distinct types of tasks, they are:
@@ -18,6 +14,9 @@ In Duke™, you get to manage 3 distinct types of tasks, they are:
   - Tasks with an associated deadline
 - Events
   - Tasks that occur at a specified time and date
+
+### Load and Store Tasks
+Tasks managed by Duke™ are stored locally in a data file, so you can be sure that Duke™ remembers your tasks, no matter how many there are.
 
 ### Interact with Tasks
 Duke™ enables you to list your tasks, mark tasks as done, find tasks, and even set a priority level to differentiate more important tasks from the rest.
