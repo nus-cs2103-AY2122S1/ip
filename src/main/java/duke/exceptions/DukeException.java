@@ -7,7 +7,7 @@ package duke.exceptions;
 public class DukeException extends Exception {
     /**
      * Constructor to initialize all DukeExceptions.
-     * @param message To be printed when error in duke.gui.Main (Duke.java) occurs.
+     * @param message To be printed when error in Dukewu occurs.
      */
     public DukeException(String message) {
         super(message + '\n');
