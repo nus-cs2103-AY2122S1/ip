@@ -32,7 +32,7 @@ public class Event extends Task {
      * @param eventDate The event date.
      * @param eventStartTime The event start time.
      * @param eventEndTime The event end time.
-     * @throws InvalidDateTimeInputException If there is an error parsing the date and time.
+     * @throws InvalidDateTimeInputException If there is an error with the event date and time.
      */
     public Event(String description, String eventDate, String eventStartTime, String eventEndTime)
             throws InvalidDateTimeInputException {
@@ -43,6 +43,9 @@ public class Event extends Task {
             this.eventDate = LocalDate.parse(eventDate, dateFormatter);
             this.eventStartTime = LocalTime.parse(eventStartTime, timeFormatter);
             this.eventEndTime = LocalTime.parse(eventEndTime, timeFormatter);
+            if (this.eventEndTime.isBefore(this.eventStartTime)) {
+                throw new InvalidDateTimeInputException("Start time must be before end time!");
+            }
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeInputException("event",
                     String.format("%s %s %s", INPUT_DATE_FORMAT, INPUT_TIME_FORMAT, INPUT_TIME_FORMAT)

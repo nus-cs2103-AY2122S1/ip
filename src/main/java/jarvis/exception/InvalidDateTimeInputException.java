@@ -5,6 +5,15 @@ package jarvis.exception;
  */
 public class InvalidDateTimeInputException extends JarvisException {
     /**
+     * Default constructor for InvalidDateTimeInputException.
+     *
+     * @param errorMessage The error message.
+     */
+    public InvalidDateTimeInputException(String errorMessage) {
+        super(errorMessage);
+    }
+
+    /**
      * Constructor for InvalidDateTimeInputException.
      *
      * @param field The type of the DateTime (e.g. deadline).

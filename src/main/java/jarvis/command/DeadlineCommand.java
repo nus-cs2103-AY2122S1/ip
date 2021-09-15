@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
             throw new TaskDetailsEmptyException("description");
         }
         if (splitStrings.length < 2) {
-            throw new TaskDetailsEmptyException("deadline");
+            throw new TaskDetailsEmptyException("due date and time");
         }
         this.deadline = splitStrings[1].trim();
     }

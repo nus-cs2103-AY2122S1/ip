@@ -11,7 +11,10 @@ import jarvis.task.Event;
 public enum CommandTypeEnum {
     DEADLINE("deadline",
             "add a task with a specific deadline",
-            String.format("deadline <description> <%s>", Deadline.INPUT_FORMAT)
+            String.format(
+                    "deadline <description> /by <%s>",
+                    Deadline.INPUT_FORMAT
+            )
     ),
     DELETE("delete",
             "delete a task using the task number shown in the tasks list",
@@ -24,7 +27,7 @@ public enum CommandTypeEnum {
     EVENT("event",
             "add a event with a date, start time and end time",
             String.format(
-                    "event <description> <%s %s %s>",
+                    "event <description> /at <%s %s %s>",
                     Event.INPUT_DATE_FORMAT,
                     Event.INPUT_TIME_FORMAT,
                     Event.INPUT_TIME_FORMAT
@@ -35,7 +38,7 @@ public enum CommandTypeEnum {
             "bye"
     ),
     FIND("find",
-            "finds all task that contains a keyword",
+            "finds all tasks that contains a keyword",
             "find <keyword>"
     ),
     HELP("help",

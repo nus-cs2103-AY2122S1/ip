@@ -1,5 +1,6 @@
 package jarvis.command;
 
+import jarvis.exception.InvalidInputException;
 import jarvis.exception.JarvisException;
 import jarvis.message.OutputMessage;
 import jarvis.storage.Storage;
@@ -16,9 +17,13 @@ public class FindCommand extends Command {
      * Constructor for FindCommand.
      *
      * @param userInputWithoutCommandTrigger User input without the command trigger.
+     * @throws InvalidInputException If the keyword is empty.
      */
-    public FindCommand(String userInputWithoutCommandTrigger) {
+    public FindCommand(String userInputWithoutCommandTrigger) throws InvalidInputException {
         this.keyword = userInputWithoutCommandTrigger.trim();
+        if (this.keyword.equals("")) {
+            throw new InvalidInputException("keyword");
+        }
     }
 
     /**
