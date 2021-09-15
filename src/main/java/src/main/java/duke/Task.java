@@ -2,7 +2,7 @@ package src.main.java.duke;
 
 /**
  * Class to represent a task with String task name and
- * current progress of the task
+ * current progress of the task.
  */
 
 public class Task {
@@ -16,32 +16,34 @@ public class Task {
     }
 
     /**
-     * Method to mark the task as done
+     * Method to mark the task as done.
      */
     void markAsDone() {
         this.isDone = true;
     }
 
-    /**
-     * getter for private instance variable
-     *
-     * @return boolean value isDone
-     */
-    boolean getIsDone() {
-        return isDone;
-    }
 
     /**
-     * getter for private instance variable
+     * getter for private instance variable.
      *
-     * @return String value task name
+     * @return String value task name.
      */
     String getTask() {
         return task;
     }
 
     /**
-     * to give the String representation of the task
+     * method to set the time in the task
+     *
+     * @param time time in String to be set
+     * @throws DukeException
+     */
+    void setTime(String time) throws DukeException {
+        throw new TimeNotFoundException("Given task doesn't have time");
+    }
+
+    /**
+     * to give the String representation of the task.
      *
      * @return
      */

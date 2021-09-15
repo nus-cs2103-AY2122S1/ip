@@ -1,7 +1,7 @@
 package src.main.java.duke;
 
 /**
- * Class to represent a src.main.java.duke.Todo task
+ * Class to represent a src.main.java.duke.Todo task.
  */
 
 
@@ -17,7 +17,7 @@ public class Todo extends Task {
     }
 
     /**
-     * overridden method to mark the task as done
+     * overridden method to mark the task as done.
      */
     @Override
     void markAsDone() {
@@ -25,7 +25,7 @@ public class Todo extends Task {
     }
 
     /**
-     * overridden method to give the String representation of the task
+     * overridden method to give the String representation of the task.
      *
      * @return
      */

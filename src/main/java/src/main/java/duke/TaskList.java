@@ -3,12 +3,16 @@ package src.main.java.duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to represent the list of tasks.
+ */
+
 public class TaskList {
 
     private ArrayList<Task> list = new ArrayList<>();
 
     /**
-     * method to add the task to the list in src.main.java.duke.TaskList
+     * method to add the task to the list in src.main.java.duke.TaskList.
      *
      * @param task
      */
@@ -17,10 +21,10 @@ public class TaskList {
     }
 
     /**
-     * method to remove the specified task from the list
+     * method to remove the specified task from the list.
      *
-     * @param n index of the task
-     * @return string representation of the task deleted
+     * @param n index of the task.
+     * @return String representation of the task deleted.
      * @throws DukeException
      */
     String remove(int n) throws DukeException {
@@ -34,19 +38,19 @@ public class TaskList {
     }
 
     /**
-     * getter for accessing a particular from the list
+     * getter for accessing a particular from the list.
      *
-     * @param n index of the task
-     * @return task object which is to be accessed
+     * @param n index of the task.
+     * @return task object which is to be accessed.
      */
     Task get(int n) {
         return list.get(n);
     }
 
     /**
-     * method to mark a task in the list as done
+     * method to mark a task in the list as done.
      *
-     * @param n index of the task
+     * @param n index of the task.
      * @throws DukeException
      */
     void markAsDone(int n) throws DukeException {
@@ -57,9 +61,9 @@ public class TaskList {
     }
 
     /**
-     * method to convert the task list into a list of string to be stored in the database
+     * method to convert the task list into a list of string to be stored in the database.
      *
-     * @return
+     * @return list of the tasks in String form.
      */
     List<String> convertListtoStringList() {
         ArrayList<String> content = new ArrayList<>();
@@ -74,55 +78,52 @@ public class TaskList {
     }
 
     /**
-     * method to find all tasks in the list that match the given text
+     * method to find all tasks in the list that match the given text.
      *
-     * @param text Keyword to be searched
-     * @return list of all matching tasks
+     * @param text Keyword to be searched.
+     * @return list of all matching tasks.
      */
     List<Task> find(String text) {
         ArrayList<Task> content = new ArrayList<>();
 
         list.forEach((elem) -> {
-            String[] split = elem.getTask().split(" ");
-
-            for (int i = 0; i < split.length; i++) {
-                if (split[i].equals(text)) {
-                    content.add(elem);
-                    break;
-                }
+            if (elem.getTask().contains(text)) {
+                content.add(elem);
             }
         });
         return content;
     }
 
     /**
-     * method to print task list on command
+     * method to convert list of tasks to String form for printing.
+     *
+     * @return list of tasks in String form.
      */
     String printList() {
         StringBuilder text = new StringBuilder();
         if (list.size() == 0) {
-            System.out.println("The list has no tasks");
-            text = new StringBuilder("The list has no tasks");
-        } else {
-            for (int i = 0; i < this.list.size(); i++) {
-                System.out.println((i + 1) + ". " + list.get(i).toString());
-                text.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
-            }
+            return "The list has no tasks";
+        }
+        for (int i = 0; i < this.list.size(); i++) {
+            text.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
         return text.toString();
     }
 
-    String update(int index, String time, String task) {
-        if (task.equals("event")) {
-            Event event = (Event) list.get(index - 1);
-            event.setTime(time);
-            return event.toString();
-        } else {
-            Deadline deadline = (Deadline) list.get(index - 1);
-            deadline.setTime(time);
-            return deadline.toString();
-        }
+    /**
+     * method to update the time of the task at the given index to the new specified time.
+     *
+     * @param index integer index of the task in the list.
+     * @param time  time in String to be set to the task.
+     *              //@param task  type of task either "event" or "deadline".
+     * @return updated task in String form.
+     */
+    String update(int index, String time) throws DukeException {
+        Task task = list.get(index - 1);
+        task.setTime(time);
+        return task.toString();
     }
+
 
     int getSize() {
         return list.size();

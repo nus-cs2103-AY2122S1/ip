@@ -14,6 +14,10 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * Class to represent one dialog box to be displayed on the screen
+ */
+
 public class DialogBox extends HBox {
 
     @FXML

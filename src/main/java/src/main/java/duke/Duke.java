@@ -3,7 +3,8 @@ package src.main.java.duke;
 /**
  * Created by Shivam Tiwari
  * Chat bot to echo everything we input.
- * Features: Greetings, Echo and Exit on command
+ * Features: Greetings, add tasks of type todo, event, deadline
+ * delete tasks, mark as done, update time of tasks, view all tasks.
  */
 
 public class Duke {
@@ -17,18 +18,29 @@ public class Duke {
         super();
         this.taskList = new TaskList();
         this.storage = new Storage("./data", "duke.txt", taskList);
-        storage.readFile();
         this.ui = new UI(taskList, storage);
         this.parser = new Parser(ui);
     }
 
+    /**
+     * method to return the greeting message on bot start.
+     *
+     * @return
+     */
     String greet() {
+        try {
+            storage.readFile();
+        } catch (DukeException error) {
+            return "Format of date changed in database: 'YYYY-MM-dd'";
+        }
         return ui.greet();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * method to get the response of the chat bot based on the String input.
+     *
+     * @param input String prompt from the user.
+     * @return response of the chat bot.
      */
     String getResponse(String input) {
         String response;

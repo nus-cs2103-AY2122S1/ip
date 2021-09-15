@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 /**
  * Represents the storage unit of the chat bot and contains all
- * operations regarding the data storage of the bot
+ * operations regarding the data storage of the bot.
  */
 
 public class Storage {
 
     /**
-     * path of the file in the hard disk
+     * path of the file in the hard disk.
      */
     private String path;
     private TaskList list;
@@ -45,7 +45,7 @@ public class Storage {
     /**
      * method to read from the a text file on the system.
      */
-    void readFile() {
+    void readFile() throws DukeException {
         File file = new File(this.path);
         try {
             Scanner sc = new Scanner(file);
@@ -55,17 +55,7 @@ public class Storage {
                 String[] data = task.split(" \\| ");
                 boolean isDone = data[1].equals("1");
 
-                if (data[0].equals("T")) {
-                    System.out.println(data[2]);
-                    Todo todo = new Todo(data[2], isDone);
-                    list.add(todo);
-                } else if (data[0].equals("E")) {
-                    Event event = new Event(data[2], isDone, data[3]);
-                    list.add(event);
-                } else {
-                    Deadline deadline = new Deadline(data[2], isDone, data[3]);
-                    list.add(deadline);
-                }
+                addToList(data, isDone);
             }
         } catch (IOException e) {
             System.out.println("Failed to read from file.");
@@ -74,7 +64,28 @@ public class Storage {
     }
 
     /**
-     * method to write the data to the text file
+     * method to add the given data to the list of tasks
+     *
+     * @param data   the task in string to be added
+     * @param isDone check if the task is done or not
+     * @throws DukeException
+     */
+    void addToList(String[] data, boolean isDone) throws DukeException {
+        if (data[0].equals("T")) {
+            System.out.println(data[2]);
+            Todo todo = new Todo(data[2], isDone);
+            list.add(todo);
+        } else if (data[0].equals("E")) {
+            Event event = new Event(data[2], isDone, data[3]);
+            list.add(event);
+        } else {
+            Deadline deadline = new Deadline(data[2], isDone, data[3]);
+            list.add(deadline);
+        }
+    }
+
+    /**
+     * method to write the data to the text file.
      */
     void writeToFile() {
         try {
