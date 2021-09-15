@@ -1,3 +1,30 @@
+# Cygnus Chatbot :rocket:
+Here are the tasks in your list:
+- [x] Go to GitHub
+- [ ] Download Cygnus
+- [ ] Manage your time better!
+
+> Cygnus has helped me identify what needs to be done and manage my time better. Definitely recommend!
+> -- A satisfied user
+
+**Cygnus** is a *Personal Assistant Chatbot* designed for people who type fast. It features: 
+* **Command-line interface** for keyboard-only navigation
+* **Adding** and **removing** tasks
+* Marking tasks as done
+* **Filtering** tasks by name
+
+With more features to come!
+
+Using Cygnus is simple:
+1. Click on [this link](https://github.com/jyrw/ip/releases/tag/A-Release)
+2. Download the `.jar` file
+3. Double click the file
+4. Start adding tasks!
+
+The full user guide for Cygnus can be found [here](https://jyrw.github.io/ip/).
+
+*Cygnus* is based on the *Duke project template* (info below).
+
 # Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
