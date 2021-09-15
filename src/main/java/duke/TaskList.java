@@ -60,10 +60,20 @@ public class TaskList {
         TaskList results = new TaskList(new ArrayList<Task>());
         for (int i = 0; i < this.size(); i++) {
             Task t = this.get(i);
-            if (t.getDescription().indexOf(keyWord) != -1) {
+            if (t.getDescription().contains(keyWord)) {
                 results.add(t);
             }
         }
         return results;
+    }
+
+    public ArrayList<Task> getReminderList(){
+        ArrayList<Task> result = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.isNeedReminder()){
+                result.add(task);
+            }
+        }
+        return result;
     }
 }

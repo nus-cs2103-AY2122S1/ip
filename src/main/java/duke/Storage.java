@@ -33,21 +33,31 @@ public class Storage {
         }
     }
 
+
+
+
+
     /**
-     * adds new tasks to the file.
+     * Converts all tasks derived from the storage file to TaskList.
      *
-     * @param task Task that is going to be added.
+     * @return TaskList that includes all tasks in the file.
      */
-    public void addTaskToFile(Task task) {
+    public TaskList convertFileToTaskList() {
+        TaskList taskList = new TaskList(new ArrayList<Task>());
+        File dukeFile = new File(filePath);
         try {
-            FileWriter fileWriter = new FileWriter(filePath, true);
-            assert (!task.getDescription().contains("&&"));
-            fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
-                    + "&&" + task.getTaskTime() + "\n");
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+            Scanner scan = new Scanner(dukeFile);
+            while (scan.hasNext()) {
+                String taskString = scan.nextLine();
+                Task task = convertTaskStringToTask(taskString);
+                taskList.add(task);
+            }
+        } catch (Exception e) {
+            System.out.println("Can't understand data in the duke file. "
+                    + "Detail information: "
+                    + e.getMessage());
         }
+        return taskList;
     }
 
     /**
@@ -63,6 +73,8 @@ public class Storage {
         String taskType = newTaskCommands[0];
         String status = newTaskCommands[1];
         String taskDescription = newTaskCommands[2];
+
+
         int taskTimeStartIndex = taskType.length() + splitSign.length()
                 + status.length() + splitSign.length()
                 + taskDescription.length() + splitSign.length();
@@ -70,7 +82,10 @@ public class Storage {
         Task task;
         switch(taskType) {
         case "T":
-            task = new ToDo(taskDescription);
+            String reminderTime = newTaskCommands.length > 3 ? newTaskCommands[3] : "";
+            task = reminderTime.length() > 0
+                    ? new ToDo(taskDescription,reminderTime)
+                    : new ToDo(taskDescription);
             break;
         case "D":
             task = new Deadline(taskDescription, taskTime);
@@ -87,28 +102,12 @@ public class Storage {
         return task;
     }
 
-    /**
-     * Converts all tasks derived from the storage file to TaskList.
-     *
-     * @return TaskList that includes all tasks in the file.
-     */
-    public TaskList convertFileToTaskList() throws Exception {
-        TaskList taskList = new TaskList(new ArrayList<Task>());
-        File dukeFile = new File(filePath);
-        try {
-            Scanner scan = new Scanner(dukeFile);
-            while (scan.hasNext()) {
-                String taskString = scan.nextLine();
-                Task task = convertTaskStringToTask(taskString);
-                taskList.add(task);
-            }
-        } catch (Exception e) {
-            throw new Exception("Can't understand data in the duke file. "
-                    + "Detail information: "
-                    + e.getMessage());
-        }
-        return taskList;
-    }
+
+
+
+
+
+
 
     /**
      * Updates the file with the new TaskList.
@@ -127,4 +126,27 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * adds new tasks to the file.
+     *
+     * @param task Task that is going to be added.
+     */
+    public void addTaskToFile(Task task) {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            assert (!task.getDescription().contains("&&"));
+            fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
+                    + "&&" + task.getTaskTime() + "\n");
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+
+
+
 }

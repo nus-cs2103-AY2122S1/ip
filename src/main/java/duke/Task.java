@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The task object.
  */
@@ -7,12 +10,16 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    protected boolean isNeedReminder;
+    protected LocalDateTime reminderTime;
+
     /**
      * Default constructor for Task.
      */
     public Task() {
         this.description = "";
         this.isDone = false;
+        isNeedReminder = false;
     }
 
     /**
@@ -23,6 +30,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        isNeedReminder = false;
+    }
+
+    public Task(String description, String reminderTime){
+        this.description = description;
+        this.isNeedReminder = true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        this.reminderTime = LocalDateTime.parse(reminderTime, formatter);
     }
 
     /**
@@ -80,5 +95,13 @@ public class Task {
      */
     public String getIcon() {
         return "";
+    }
+
+    public boolean isNeedReminder() {
+        return isNeedReminder;
+    }
+
+    public LocalDateTime getReminderTime() {
+        return reminderTime;
     }
 }
