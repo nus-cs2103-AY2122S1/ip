@@ -23,24 +23,26 @@ public class Ui {
      * @return The welcome message.
      */
     public String showStartup() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n\n";
+        String greeting = "Wassup! I'm ChadBot.\n";
+        return greeting + "\n" + showHelp() + showLine();
+    }
 
-        String greeting = "Hello! I'm Duke.\n" + "What can I do for you? :)";
-
+    /**
+     * Returns the app usage menu.
+     *
+     * @return The app usage menu.
+     */
+    public String showHelp() {
         String usage = "Usage:\n"
-                + "list                                         - show current tasks\n"
-                + "todo [Description]                           - add todo\n"
-                + "deadline [Description] /by [yyyy-mm-dd]      - add deadline\n"
-                + "event [Description] /at [yyyy-mm-dd HH:mm]   - add event\n"
-                + "done [Task Number]                           - mark task as done\n"
-                + "find [Description]                           - search for task with word\n"
-                + "bye                                          - say goodbye\n";
-        return logo + greeting + "\n"
-                + usage + showLine();
+                + "help - show this menu\n"
+                + "list - show current tasks\n"
+                + "todo [Description] - add todo\n"
+                + "deadline [Description] /by [yyyy-mm-dd] - add deadline\n"
+                + "event [Description] /at [yyyy-mm-dd HH:mm] - add event\n"
+                + "done [Task Number] - mark task as done\n"
+                + "find [Description] - search for task with word\n"
+                + "bye - say goodbye\n";
+        return usage;
     }
 
     /**
