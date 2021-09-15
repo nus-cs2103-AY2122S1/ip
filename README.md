@@ -4,10 +4,10 @@
 - [x] Save and delete different types of tasks: todo, deadline, event;
 - [x] Set a saved task to be done;
 - [x] Autosave to and autoload user's data from a default directory;
-- [x] Allows user to save/load data from a specified directory;
-- [x] Search for task according to a specified key word.
+- [x] Allows user to save/load data to/from a specified directory;
+- [x] Search for task by its key word.
 - [x] Update a task
-- [x] An in-app user guideline
+- [x] In-app command list
 
 ### Syntax List:
 >Legend for datatype:

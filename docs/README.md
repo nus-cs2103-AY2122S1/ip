@@ -4,9 +4,10 @@
 - [x] Save and delete different types of tasks: todo, deadline, event;
 - [x] Set a saved task to be done;
 - [x] Autosave to and autoload user's data from a default directory;
-- [x] Allows user to save/load data from a specified directory;
-- [x] Search for task according to a specified key word.
-- [x]  An in-app user guideline
+- [x] Allows user to save/load data to/from a specified directory;
+- [x] Search for task by its key word.
+- [x] Update a task
+- [x] In-app command list
 
 ### Syntax List:
 >Legend for datatype:
@@ -20,5 +21,6 @@
 - done <*number*>: mark the task with *number* index as done;
 - delete <*number*>: delete the task with *number* index;
 - deleteAll: delete all saved tasks in the task list;
-- find <**keyword**>: find all tasks with description containing the **keyword**.
-- help: shows the list of avaliable command.
+- find <**keyword**>: find all tasks with description containing the **keyword**;
+- update <*index*> /to <**Task formatted in ToDo/Deadline/Event**>;
+- help: shows the list of available command.
