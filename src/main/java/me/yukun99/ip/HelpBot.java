@@ -16,7 +16,6 @@ import me.yukun99.ip.ui.Ui;
 public class HelpBot extends Application {
     // Name for my instance of help bot, not so fancy anymore. :(
     private static final String LOGO = "Bob";
-    private static final String FILEPATH = System.getProperty("user.dir");
 
     // Ui instance to handle Gui.
     private final Ui ui;
@@ -27,7 +26,7 @@ public class HelpBot extends Application {
     public HelpBot() throws HelpBotIoException {
         TaskFinder taskFinder = new TaskFinder();
         TaskList taskList = new TaskList(taskFinder);
-        Storage storage = new Storage(FILEPATH, taskList);
+        Storage storage = new Storage(taskList);
         storage.loadSavedTasks();
         Parser parser = new Parser(this, taskList, storage, taskFinder);
         this.ui = new Ui(LOGO, taskList, storage, taskFinder, parser);

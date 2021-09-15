@@ -76,6 +76,11 @@ public class Window extends AnchorPane {
         } catch (HelpBotInvalidCommandException | HelpBotIllegalArgumentException | HelpBotInvalidTaskTypeException
                 | HelpBotDateTimeFormatException | HelpBotIoException e) {
             displayMessage(Message.getErrorMessage(e), true, true);
+            try {
+                storage.saveMessage(Message.getErrorMessage(e));
+            } catch (HelpBotIoException ignored) {
+                //ignored as it's fine if we don't save this error.
+            }
         } finally {
             input.clear();
             updateTaskAmount();

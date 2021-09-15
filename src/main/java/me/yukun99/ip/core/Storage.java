@@ -28,15 +28,13 @@ public class Storage {
     /**
      * Constructor for a Storage instance.
      *
-     * @param filepath Filepath to use for the current Storage instance.
      * @param taskList List of tasks currently in the bot.
      */
-    public Storage(String filepath, TaskList taskList) {
+    public Storage(TaskList taskList) {
         this.taskList = taskList;
-        filepath.replace("\\", "/");
-        this.savePath = filepath + "/tasks.txt";
-        this.outputPath = filepath + "/ACTUAL.txt";
-        this.archivePath = filepath + "/archive.txt";
+        this.savePath = "tasks.txt";
+        this.outputPath = "ACTUAL.txt";
+        this.archivePath = "archive.txt";
         File previous = new File(outputPath);
         if (previous.exists()) {
             previous.delete();
