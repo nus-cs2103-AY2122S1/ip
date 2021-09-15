@@ -8,7 +8,6 @@ import duke.exception.NoDescriptionAndTimeException;
 import duke.exception.NoDescriptionException;
 import duke.exception.NoTimeException;
 
-import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
 public class ParserTest {
@@ -79,6 +78,23 @@ public class ParserTest {
         exception = assertThrows(NoDescriptionException.class,
                 () -> Parser.parseDescriptionAndTime(userInput1, "/at", "event"));
         assertEquals("OOPS! The description of event cannot be empty.", exception.getMessage());
+    }
+
+    @Test
+    public void parseDescriptionAndTime_noDescriptionAndTime_exceptionThrown() {
+        Throwable exception;
+
+        String input = "deadline /by";
+        String[] userInput = input.split(" ", 2);
+        exception = assertThrows(NoDescriptionAndTimeException.class,
+                () -> Parser.parseDescriptionAndTime(userInput, "/by", "deadline"));
+        assertEquals("OOPS! The description & time of deadline cannot be empty.", exception.getMessage());
+
+        input = "event /at";
+        String[] userInput1 = input.split(" ", 2);
+        exception = assertThrows(NoDescriptionAndTimeException.class,
+                () -> Parser.parseDescriptionAndTime(userInput1, "/at", "event"));
+        assertEquals("OOPS! The description & time of event cannot be empty.", exception.getMessage());
     }
 
 }

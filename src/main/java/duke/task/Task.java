@@ -4,8 +4,8 @@ package duke.task;
  * Encapsulates a task object.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for this task.
@@ -21,7 +21,7 @@ public class Task {
      * Checks whether this task contains the keyword.
      *
      * @param keyword Word to match in task list.
-     * @return boolean value whether the task contains keyword.
+     * @return Boolean value whether the task contains keyword.
      */
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);

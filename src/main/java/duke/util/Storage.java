@@ -44,8 +44,6 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            //Solution below on reading a file adapted from
-            //https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
             File file = new File(filePath);
             if (!file.exists()) {
                 return tasks;
@@ -56,7 +54,7 @@ public class Storage {
             while (line != null) {
                 String[] input = line.split("\\|");
                 assert input.length >= 3 : "loaded input should have at least 3 details";
-                loadTasks(input, tasks);
+                loadTask(input, tasks);
                 line = br.readLine();
             }
         } catch (IOException e) {
@@ -71,7 +69,7 @@ public class Storage {
      * @param input Array of task details in one line of file read.
      * @param tasks ArrayList to which task is loaded into.
      */
-    private void loadTasks(String[] input, ArrayList<Task> tasks) {
+    private void loadTask(String[] input, ArrayList<Task> tasks) {
         String taskType = input[0];
         String description = input[2];
         boolean isTaskDone = input[1].equals("1");

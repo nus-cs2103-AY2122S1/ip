@@ -7,6 +7,7 @@ import duke.task.TaskList;
  * Encapsulates the command interface.
  */
 public interface Command {
+
     /**
      * Returns string response when user enters a command.
      *

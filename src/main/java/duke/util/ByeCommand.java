@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 public class ByeCommand implements Command {
+
     /**
      * Returns string response when user enters a bye command.
      *

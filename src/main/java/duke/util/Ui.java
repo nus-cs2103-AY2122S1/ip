@@ -101,7 +101,7 @@ public class Ui {
      *
      * @return String representation of tasks in list.
      */
-    public String getTasks(ArrayList<Task> tasks) {
+    public String showTasks(ArrayList<Task> tasks) {
         String list = "";
 
         if (tasks.size() == 0) {
@@ -115,6 +115,11 @@ public class Ui {
         return list;
     }
 
+    /**
+     * Returns string message for archive.
+     *
+     * @return String representation of archive message.
+     */
     public String showArchiveMessage() {
         String message = "All tasks have been archived!";
         return message;

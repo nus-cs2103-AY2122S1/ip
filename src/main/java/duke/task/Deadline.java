@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Constructor for deadline.

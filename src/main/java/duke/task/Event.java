@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Encapsulates an event task.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Constructor for this event.

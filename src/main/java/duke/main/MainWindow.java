@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Encapsulates the controller for MainWindow.
  */
 public class MainWindow extends AnchorPane {
     //@@author Shruthi0310 -reused

@@ -1,9 +1,6 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import duke.exception.NoCommandException;
-import duke.exception.NoDescriptionException;
-import duke.exception.NoTimeException;
+import duke.exception.*;
 
 import java.text.ParseException;
 
@@ -21,7 +18,7 @@ public class Parser {
      *
      * @param fullCommand Command entered by user.
      * @return String representation of duke's response.
-     * @throws DukeException If user input does not meet requirement.
+     * @throws DukeException If user input does not match any command words.
      */
     public static Command parseCommand(String fullCommand) throws DukeException {
 
@@ -78,6 +75,10 @@ public class Parser {
                                                     String taskType) throws DukeException {
 
         String[] next = userInput[1].trim().split(regex);
+
+        if(next.length == 0) {
+            throw new NoDescriptionAndTimeException(taskType);
+        }
 
         if (next[0].trim().length() == 0) {
             throw new NoDescriptionException(taskType);

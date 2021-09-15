@@ -43,7 +43,7 @@ public class TaskList {
     /**
      * Returns number of tasks in list.
      *
-     * @return length of list.
+     * @return Length of list.
      */
     public int getListLength() {
         return tasks.size();
@@ -66,7 +66,7 @@ public class TaskList {
      * @return String representation of list.
      */
     public String printTasksInList() {
-        return ui.getTasks(tasks);
+        return ui.showTasks(tasks);
     }
 
     /**

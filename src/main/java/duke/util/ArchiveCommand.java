@@ -7,6 +7,7 @@ import duke.task.TaskList;
  * Encapsulates the archive command class.
  */
 public class ArchiveCommand implements Command {
+
     /**
      * Returns string response when user enters a archive command.
      *
