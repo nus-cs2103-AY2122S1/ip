@@ -65,6 +65,7 @@ Quit Duke program.
 Format: `bye`
 
 ## Command summary
+
 Action | Format | Examples
 ------ | ------ | --------
 Add ToDo | `todo <description>` | `todo picnic`
