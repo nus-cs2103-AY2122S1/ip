@@ -29,8 +29,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Agent agent;
-    private Image userImage = new Image("/images/user.jpg");
-    private Image agentImage = new Image("/images/agent.jpg");
+    private final Image userImage = new Image("/images/user.jpg");
+    private final Image agentImage = new Image("/images/agent.jpg");
 
     @FXML
     private void initialize() {

@@ -12,7 +12,7 @@ import agent.exceptions.TaskFileIoException;
 import agent.tasks.Deadline;
 import agent.tasks.TaskList;
 
-public class ReminderCommandTest {
+class ReminderCommandTest {
     @Test
     void deadlineWeekFilterAndSortingWorks_userInputReminderForWeekCommand_messageIncludesWeekDeadlines()
             throws TaskFileIoException, InvalidTaskDataException {
