@@ -1,5 +1,5 @@
 # User Guide
-<img src="Ui.png" alt="UI Screenshot" width="144"/>
+<img src="Ui.png" alt="UI Screenshot" width="344"/>
 
 Duke is a task management desktop application that provides an effective 
 and efficient way to manage all your tasks.
@@ -31,7 +31,7 @@ Remember to enter `bye` to save your changes and exit the app!
 
 You can add 3 different types of tasks.
 
-1. Adding a todo tasks:
+1. **Adding a todo tasks:**
 
 ```todo {description}```
 
@@ -39,7 +39,7 @@ For example:
 
 ```todo read book```
 
-2. Adding an event task
+2. **Adding an event task:**
 
 ```event {description} /at {date} ```
 
@@ -54,7 +54,7 @@ For example:
 
 ```event math exam /at 2/12/2019```
 
-3. Adding a deadline task
+3. **Adding a deadline task:**
 
 ```deadline {description} /by {date} ```
 
@@ -172,3 +172,7 @@ Here are the matching tasks:
 2.[E][] math exam (at: Mon, Dec 02 2019, 18:00)
 ```
 
+### Acknowledgements:
+
+- Original Duke template forked from Prof Damith CS2103T github
+- GUI Design from Javafx tutorials
