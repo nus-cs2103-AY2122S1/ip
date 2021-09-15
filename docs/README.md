@@ -2,7 +2,7 @@
 Tokio is a personal assistant chatbot that helps the user, Rio, to keep track of various things.
 
 Here is a sample interaction with Tokio,  
-![sample](./Ui.png)
+![sample](./images/sample.png)
 
 ## Features 
 > __Notes about the Command Format :heart:__
