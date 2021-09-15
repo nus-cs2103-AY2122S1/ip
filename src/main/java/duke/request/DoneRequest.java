@@ -7,14 +7,14 @@ import duke.task.Task;
 import duke.task.TaskCollection;
 
 /**
- * duke.request.DoneRequest represents a request from the user to mark a duke.task.Task as done in the application.
+ * DoneRequest represents a request from the user to mark a Task as done in the application.
  */
 public class DoneRequest extends TaskCollectionRequest {
     private final int taskId;
 
     /**
-     * Creates a duke.request.DoneRequest.
-     * @param taskCollection The target duke.task.TaskCollection.
+     * Creates a DoneRequest.
+     * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -28,7 +28,7 @@ public class DoneRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the duke.request.DoneRequest requests to execute.
+     * Gets the Action the DoneRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override

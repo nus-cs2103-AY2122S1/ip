@@ -6,15 +6,14 @@ import duke.exception.UserException;
 import duke.task.TaskCollection;
 
 /**
- * duke.request.DeleteRequest represents a request from the user to delete a duke.task.Task from the
- * duke.task.TaskCollection.
+ * DeleteRequest represents a request from the user to delete a Task from the TaskCollection.
  */
 public class DeleteRequest extends TaskCollectionRequest {
     private final int taskId;
 
     /**
-     * Creates a duke.request.DeleteRequest.
-     * @param taskCollection The target duke.task.TaskCollection.
+     * Creates a DeleteRequest.
+     * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -28,7 +27,7 @@ public class DeleteRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the duke.request.DeleteRequest requests to execute.
+     * Gets the Action the DeleteRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override

@@ -17,6 +17,14 @@ public class UserException extends Exception {
     }
 
     /**
+     * Create a UserException with the specified Message array.
+     * @param messages The messages to be displayed in the Response.
+     */
+    public UserException(String[] messages) {
+        this.message = String.join(System.lineSeparator(), messages);
+    }
+
+    /**
      * Returns the Response to be printed to the console of this UserException.
      */
     public Response toResponse() {

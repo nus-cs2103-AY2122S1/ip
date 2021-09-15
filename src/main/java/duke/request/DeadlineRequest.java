@@ -7,7 +7,7 @@ import duke.task.Deadline;
 import duke.task.TaskCollection;
 
 /**
- * duke.request.DeadlineRequest represents a request from the user to create a duke.task.Deadline in the application.
+ * DeadlineRequest represents a request from the user to create a Deadline in the application.
  */
 public class DeadlineRequest extends TaskCollectionRequest {
     private static final String BY_DELIMITER = " /by ";
@@ -15,8 +15,8 @@ public class DeadlineRequest extends TaskCollectionRequest {
     private final Deadline deadline;
 
     /**
-     * Creates a duke.request.DeadlineRequest.
-     * @param taskCollection The target duke.task.TaskCollection.
+     * Creates a DeadlineRequest.
+     * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
      * @throws UserException If the request String is invalid.
      */
@@ -26,7 +26,7 @@ public class DeadlineRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Gets the Action the duke.request.DeadlineRequest requests to execute.
+     * Gets the Action the DeadlineRequest requests to execute.
      * @return The Action to be executed.
      */
     @Override
@@ -35,20 +35,19 @@ public class DeadlineRequest extends TaskCollectionRequest {
     }
 
     /**
-     * Parses an input String to create a duke.task.Deadline into a duke.task.Deadline.
+     * Parses an input String to create a Deadline into a Deadline.
      * @param deadlineString The input String.
-     * @return The duke.task.Deadline parsed from the input String.
+     * @return The Deadline parsed from the input String.
      * @throws UserException If the deadlineString is invalid.
      */
     private static Deadline parseDeadline(String deadlineString) throws UserException {
         String[] substrings = deadlineString.split(DeadlineRequest.BY_DELIMITER, 2);
 
         if (substrings.length != 2) {
-            String[] exceptionMessages = new String[]{
+            throw new UserException(new String[]{
                 "A request to create a deadline task must follow the format:",
                 "  deadline <description> /by <datetime>"
-            };
-            throw new UserException(String.join(System.lineSeparator(), exceptionMessages));
+            });
         }
 
         String description = substrings[0];
