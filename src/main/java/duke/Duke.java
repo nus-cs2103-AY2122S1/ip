@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-    private static final String LOCAL_STORAGE_LOCATION = "src/Data/LocalStorage.txt";
+    private static final String LOCAL_STORAGE_LOCATION = "/LocalStorage.txt";
     private static final DateTimeFormatter FORMAT_FROM_LOCAL_STORAGE = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));

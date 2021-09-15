@@ -16,6 +16,8 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class Storage {
+    /** The user's home path string on their computer. */
+    private final String HOME_PATH_STRING = System.getProperty("user.home");
 
     private File localStorageFile;
     private String localStorageFilePath;
@@ -26,6 +28,7 @@ public class Storage {
      * @param filePath path of local storage
      */
     public Storage(String filePath) {
+        filePath = HOME_PATH_STRING + filePath;
         File localStorageFile = new File(filePath);
         try {
             boolean filecreated = localStorageFile.createNewFile();

@@ -13,6 +13,6 @@ public class DukeTest {
 
     @Test
     public void getLocalStorageLocation_correctValue() {
-        assertEquals(Duke.getLocalStorageLocation(), "src/Data/LocalStorage.txt");
+        assertEquals(Duke.getLocalStorageLocation(), "/LocalStorage.txt");
     }
 }
