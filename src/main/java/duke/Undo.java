@@ -1,14 +1,5 @@
 package duke;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 public class Undo {
     private TaskList items;
 
@@ -16,14 +7,12 @@ public class Undo {
         this.items = items;
     }
 
-    public static LinkedList<ArrayList<Task>> state = new LinkedList<>();
-
     public String undo() throws DukeException {
         String output;
-        if (state.size() == 0) {
+        if (Duke.state.size() == 0) {
             throw new DukeException("No more tasks left to undo");
         } else {
-            state.pop();
+            Duke.state.pop();
             output = "Got it. I have undone the task.";
             output += items.printList();
             return output;

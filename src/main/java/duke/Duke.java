@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
 import duke.task.command.Command;
 
 
@@ -25,6 +22,7 @@ public class Duke {
     private TaskList items;
 
     private Undo undo;
+    public static LinkedList<TaskList> state;
 
     /**
      * Duke Constructor
@@ -36,7 +34,7 @@ public class Duke {
         items = new TaskList(storage);
         parser = new Parser(this.items);
         undo = new Undo(this.items);
-        Undo.state = new LinkedList<>();
+        state = new LinkedList<>();
     }
 
     /**
@@ -82,6 +80,15 @@ public class Duke {
 
     private void exitChat(String message) {
         DukeConstants.isRunning = !message.equals(Ui.printGoodBye());
+    }
+
+    public static void addToState(TaskList taskList) {
+        state.add(taskList);
+    }
+
+    public static TaskList getLastestState() {
+        int lastIndex = state.size() - 1;
+        return state.get(lastIndex);
     }
 
     /**

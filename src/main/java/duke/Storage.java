@@ -93,7 +93,8 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("No saved data found");
         }
-        Undo.state.add(fileList);
+        TaskList fileTaskList = TaskList.of(fileList);
+        Duke.state.add(fileTaskList);
     }
 
     /**
