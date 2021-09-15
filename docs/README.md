@@ -2,6 +2,9 @@
 Duke is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 ## Quick Start
+
+---
+
 1. Ensure you have Java 11 or above installed in your Computer.
 
 2. Download the latest duke.jar from [here](https://github.com/limdanqi/ip/releases).
@@ -12,7 +15,11 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 [comment]: <> (![Ui Screenshot] &#40;&#41;)
 
+&nbsp;
+
 ## Features 
+
+---
 
 ### *Record your tasks*
 
@@ -42,7 +49,11 @@ Delete unwanted tasks.
 
 Exit the Duke app.
 
+&nbsp;
+
 ## Usage
+
+---
 
 ### `todo` - Add a Todo task
 
@@ -64,6 +75,7 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
+&nbsp;
 
 ### `deadline` - Add a Deadline task
 
@@ -83,6 +95,8 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
+&nbsp;
+
 ### `event` - Add an Event task
 
 Adds an Event task to the task list.
@@ -101,6 +115,8 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ```
 
+&nbsp;
+
 ### `list` - Lists all tasks
 
 Shows a list of all tasks in the task list.
@@ -114,6 +130,8 @@ Here are the tasks in your list:
 2. [D][ ] return book (by: Oct 12 2021)
 3. [E][ ] project meeting (at: Oct 11 2021, 15:00)
 ```
+
+&nbsp;
 
 ### `edit` - Edit a task
 
@@ -138,6 +156,8 @@ Got it. I've updated this task:
  [E][ ] project meeting (at: Dec 12 2021, 10:00)
 ```
 
+&nbsp;
+
 
 ### `done` - Check off a task
 
@@ -156,6 +176,7 @@ Nice! I've marked this task as done:
   [T][X] read a book
 ```
 
+&nbsp;
 
 ### `find` - Find a task
 
@@ -174,6 +195,8 @@ Here are the matching tasks in your list:
 1. [T][ ] buy eggs
 ```
 
+&nbsp;
+
 ### `delete` - Delete a task
 
 Deletes the specified task from the task list.
@@ -191,6 +214,8 @@ Noted. I've removed this task:
   [T][ ] buy eggs
 Now you have 2 tasks in the list.
 ```
+
+&nbsp;
 
 ### `exit` - Exits the program
 
