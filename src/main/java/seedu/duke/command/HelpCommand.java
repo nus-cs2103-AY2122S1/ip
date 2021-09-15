@@ -1,9 +1,12 @@
 package seedu.duke.command;
 
 import seedu.duke.Ui;
+import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Represents a help command. A <code>HelpCommand</code> returns
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 public class HelpCommand extends Command {
     private static final String HELP_MESSAGE = "Here are the available commands:\n";
     private ArrayList<Command> commands;
+    private HashMap<LocalDate, ArrayList<Task>> dateTasks;
 
     /**
      * Public constructor for HelpCommand.
@@ -19,8 +23,10 @@ public class HelpCommand extends Command {
      * @param ui The Ui to handle user interactions.
      * @param taskList The tasklist to be updated.
      */
-    public HelpCommand(Ui ui, TaskList taskList) {
+    public HelpCommand(Ui ui, TaskList taskList,
+                       HashMap<LocalDate, ArrayList<Task>>  dateTasks) {
         super(ui, taskList);
+        this.dateTasks = dateTasks;
 
         // Add dummy commands
         commands = new ArrayList<>();
@@ -31,7 +37,7 @@ public class HelpCommand extends Command {
         commands.add(new DeadlineCommand(ui, taskList,"", null, null));
         commands.add(new EventCommand(ui, taskList,"", null, null));
         commands.add(new DoneCommand(ui, taskList,0, null));
-        commands.add(new DeleteCommand(ui, taskList,0, null));
+        commands.add(new DeleteCommand(ui, taskList, dateTasks, 0, null));
         commands.add(new GetCommand(ui, taskList,null, null));
         commands.add(new FindCommand(ui, taskList, ""));
     }

@@ -18,6 +18,7 @@ public class TaskList {
     private int length = 0;
 
     private TaskList prevTaskList;
+    private Task prevTask;
 
     /**
      * Empty TaskList constructor.
@@ -29,8 +30,9 @@ public class TaskList {
     /**
      * TaskList constructor with tasks.
      */
-    public TaskList(TaskList previous, ArrayList<Task> tasks) {
+    public TaskList(TaskList previous, Task prevTask, ArrayList<Task> tasks) {
         prevTaskList = previous;
+        this.prevTask = prevTask;
         this.tasks = tasks;
         this.length = tasks.size();
     }
@@ -67,6 +69,15 @@ public class TaskList {
     }
 
     /**
+     * Get previous task operated on.
+     *
+     * @return The previous task.
+     */
+    public Task getPrevTask() {
+        return prevTask;
+    }
+
+    /**
      * Add a new task to the task list.
      *
      * @param newTask The task to be added.
@@ -75,7 +86,7 @@ public class TaskList {
     public TaskList add(Task newTask) {
         ArrayList<Task> newList = new ArrayList<>(tasks);
         newList.add(newTask);
-        return new TaskList(this, newList);
+        return new TaskList(this, newTask, newList);
     }
 
     /**
@@ -90,7 +101,7 @@ public class TaskList {
         TaskList matchingTasks = new TaskList();
         for (Task task : this.tasks) {
             if (task.containsKeyword(keyword)) {
-                // Add task to the tasklist of matching tasks.
+                // Add task to the task list of matching tasks.
                 matchingTasks = matchingTasks.add(task);
             }
         }
@@ -108,7 +119,7 @@ public class TaskList {
         Task completedTask = task.markAsCompleted();
         ArrayList<Task> newList = new ArrayList<>(tasks);
         newList.set(index, completedTask);
-        return new TaskList(this, newList);
+        return new TaskList(this, completedTask, newList);
     }
 
     /**
@@ -119,8 +130,9 @@ public class TaskList {
      */
     public TaskList deleteTask(int index) {
         ArrayList<Task> newList = new ArrayList<>(tasks);
+        Task deletedTask = newList.get(index);
         newList.remove(index);
-        return new TaskList(this, newList);
+        return new TaskList(this, deletedTask, newList);
     }
 
     /**

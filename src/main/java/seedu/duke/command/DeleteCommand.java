@@ -6,6 +6,10 @@ import seedu.duke.Ui;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Represents a delete command. A <code>DeleteCommand</code> describes
  * the action to be executed when a user indicates a task to delete.
@@ -14,6 +18,7 @@ public class DeleteCommand extends Command {
     private static final String DELETE_MESSAGE = "Noted. I've removed this task:\n";
     private int index;
     private Storage storage;
+    private HashMap<LocalDate, ArrayList<Task>> dateTasks;
 
     /**
      * Public constructor for a <code>DeleteCommand</code>.
@@ -23,11 +28,12 @@ public class DeleteCommand extends Command {
      * @param index Index of task to be deleted.
      * @param storage The storage to handle modifications to the file.
      */
-    public DeleteCommand(Ui ui, TaskList taskList,
+    public DeleteCommand(Ui ui, TaskList taskList, HashMap<LocalDate, ArrayList<Task>> dateTasks,
                          int index, Storage storage) {
         super(ui, taskList);
         this.index = index;
         this.storage = storage;
+        this.dateTasks = dateTasks;
     }
 
     /**
@@ -59,7 +65,8 @@ public class DeleteCommand extends Command {
         if (isValid) {
             Task task = taskList.getTask(index);
             taskList = taskList.deleteTask(index);
-
+            ArrayList<Task> tasksOnDate = dateTasks.get(task.getDate());
+            tasksOnDate.remove(task);
             storage.deleteTaskFromFile(this.taskList);
 
             return String.format("%s\n%s\n%s",

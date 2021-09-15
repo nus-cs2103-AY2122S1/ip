@@ -45,6 +45,15 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the current date if not a date task.
+     *
+     * @return Date of the task
+     */
+    public LocalDate getDate() {
+        return timeOfEvent;
+    }
+
+    /**
      * String representation of an <code>Event</code>.
      *
      * @return String representation of an <code>Event</code>.

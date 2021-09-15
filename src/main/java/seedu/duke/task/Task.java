@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task. A <code>Task</code> is described by
  * a string description.
@@ -45,6 +47,15 @@ public class Task {
      */
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    /**
+     * Returns the current date if not a date task.
+     *
+     * @return Date of the task
+     */
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
     /**

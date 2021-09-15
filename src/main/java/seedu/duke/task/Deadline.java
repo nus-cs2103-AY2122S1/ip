@@ -47,6 +47,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the current date if not a date task.
+     *
+     * @return Date of the task
+     */
+    public LocalDate getDate() {
+        return deadline;
+    }
+
+    /**
      * String representation of <code>Deadline</code> object.
      *
      * @return String representation of a <code>Deadline</code> object.

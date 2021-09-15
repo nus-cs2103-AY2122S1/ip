@@ -82,11 +82,11 @@ public class Duke {
             case LIST:
                 return new ListCommand(ui, taskList);
             case HELP:
-                return new HelpCommand(ui, taskList);
+                return new HelpCommand(ui, taskList, dateTasks);
             case REMINDER:
                 return new ReminderCommand(ui, taskList, dateTasks);
             case UNDO:
-                return new UndoCommand(ui, taskList, storage);
+                return new UndoCommand(ui, taskList, dateTasks, storage);
             default:
                 handleInvalidInputs(commandWord);
                 // Will not reach here since handleInvalidInputs(commandWord)
@@ -139,7 +139,7 @@ public class Duke {
                 case DONE:
                     return new DoneCommand(ui, taskList, taskIndex, storage);
                 case DELETE:
-                    return new DeleteCommand(ui, taskList, taskIndex, storage);
+                    return new DeleteCommand(ui, taskList, dateTasks, taskIndex, storage);
                 default:
                     throw new DukeException("Unable to update task.");
                 }
@@ -220,7 +220,6 @@ public class Duke {
                 taskList = type.getTaskList();
             }
             isExit = type.isExit();
-
             return response;
         }
 
@@ -319,7 +318,7 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
-                new HelpCommand(ui, taskList).execute();
+                new HelpCommand(ui, taskList, dateTasks).execute();
             }
         }
         // Close the scanner if "bye" command is given and
