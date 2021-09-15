@@ -7,7 +7,7 @@ import biscuit.storage.Storage;
 import biscuit.task.TaskList;
 
 /**
- * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * Biscuit is a Personal Assistant Chat-bot that helps a person to keep track of various things.
  */
 public class Biscuit {
     private final Storage storage;
@@ -27,10 +27,20 @@ public class Biscuit {
         }
     }
 
+    /**
+     * Gets storage in Biscuit.
+     *
+     * @return Storage.
+     */
     public Storage getStorage() {
         return storage;
     }
 
+    /**
+     * Gets task list in Biscuit.
+     *
+     * @return Task list.
+     */
     public TaskList getTaskList() {
         return taskList;
     }

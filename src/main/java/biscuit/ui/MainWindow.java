@@ -5,7 +5,6 @@ import biscuit.commands.Command;
 import biscuit.exceptions.BiscuitException;
 import biscuit.parser.Parser;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,8 +21,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Biscuit biscuit;
 
@@ -31,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private final Image biscuitImage = new Image(this.getClass().getResourceAsStream("/images/DaBiscuit.jpg"));
 
     /**
-     * Initialises MainWindow and outputs welcome message
+     * Initialises MainWindow and outputs welcome message.
      */
     @FXML
     public void initialize() {

@@ -18,6 +18,11 @@ public class Main extends Application {
 
     private String defaultPath = "data/biscuit.csv";
 
+    /**
+     * Starts the Biscuit JavaFX application.
+     *
+     * @param stage Root Stage object.
+     */
     @Override
     public void start(Stage stage) {
         try {
