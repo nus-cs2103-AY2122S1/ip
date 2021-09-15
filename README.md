@@ -1,6 +1,7 @@
 # BobbyBot
 
-This is a Java  Given below are instructions on how to use it.
+BobbyBot is a chatbot running on Java that helps to store tasks and contacts. <br>
+Given below are instructions on how to use it.
 
 ## Starting up the bot
 
