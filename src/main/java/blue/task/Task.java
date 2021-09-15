@@ -30,6 +30,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     /**
      * Returns a String representation of this instance.
      *

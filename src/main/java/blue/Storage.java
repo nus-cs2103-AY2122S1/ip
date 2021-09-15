@@ -19,6 +19,8 @@ class Storage {
     private static final String CANNOT_CREATE_TASK_MESSAGE = "No task can be created from the representation!";
     private static final String DIVIDER = "\n\n";
     private static final String DELIMITER = "\n";
+    private static final String DONE = "done";
+    private static final String NOT_DONE = "not done";
     private final String filePath;
 
     Storage(String filePath) {
@@ -59,18 +61,35 @@ class Storage {
         String classRepr = lines[0];
         String title = lines[1];
 
+        Task task;
         switch (classRepr) {
         case ToDo.REPRESENTATION:
-            return new ToDo(title);
+            task = new ToDo(title);
+            break;
         case Deadline.REPRESENTATION:
-            String by = lines[2];
-            return new Deadline(title, by);
+            String by = lines[3];
+            task = new Deadline(title, by);
+            break;
         case Event.REPRESENTATION:
-            String at = lines[2];
-            return new Event(title, at);
+            String at = lines[3];
+            task = new Event(title, at);
+            break;
         default:
             throw new BlueException(CANNOT_CREATE_TASK_MESSAGE);
         }
+
+        boolean isDone;
+        if (lines[2].equals(DONE)) {
+            isDone = true;
+        } else if (lines[2].equals(NOT_DONE)) {
+            isDone = false;
+        } else {
+            throw new BlueException(CANNOT_CREATE_TASK_MESSAGE);
+        }
+        if (isDone) {
+            task.markDone();
+        }
+        return task;
     }
 
     void save(TaskList tasks) {
@@ -111,6 +130,7 @@ class Storage {
             lines.add(Event.REPRESENTATION);
         }
         lines.add(task.getTitle());
+        lines.add(task.isDone() ? DONE : NOT_DONE);
         if (task instanceof Deadline) {
             lines.add(((Deadline) task).getBy());
         } else if (task instanceof Event) {

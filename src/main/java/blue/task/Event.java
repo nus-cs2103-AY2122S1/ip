@@ -49,6 +49,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String atRepr = at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
-        return "[" + REPRESENTATION + "]" + super.toString() + " (at:" + atRepr + ")";
+        return "[" + REPRESENTATION + "]" + super.toString() + " (at: " + atRepr + ")";
     }
 }
