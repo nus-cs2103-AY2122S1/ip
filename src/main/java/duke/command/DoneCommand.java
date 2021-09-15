@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int taskNumber) {
         assert taskNumber >= 1;
+        this.isExit = false;
         this.taskNumber = taskNumber;
     }
 
@@ -39,17 +40,8 @@ public class DoneCommand extends Command {
 
         tasks.doneTask(taskNumber);
         storage.save(tasks);
-        return ui.showDone(tasks.getTask(taskNumber));
+        return ui.createDoneMessage(tasks.getTask(taskNumber));
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 
 }

@@ -10,6 +10,13 @@ import duke.ui.Ui;
 public class LostCommand extends Command {
 
     /**
+     * Constructor for Lost Command.
+     */
+    public LostCommand() {
+        this.isExit = false;
+    }
+
+    /**
      * Informs user that Duke is unable to understand the command.
      *
      * @param tasks Task List that store all current task.
@@ -23,17 +30,8 @@ public class LostCommand extends Command {
         assert ui != null;
         assert storage != null;
 
-        return ui.showLost();
+        return ui.createLostMessage();
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 
 }

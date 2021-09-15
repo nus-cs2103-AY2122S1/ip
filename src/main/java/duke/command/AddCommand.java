@@ -23,6 +23,8 @@ public class AddCommand extends Command {
      * @throws DukeException If description given is invalid.
      */
     public AddCommand(String command, String description) throws DukeException {
+        this.isExit = false;
+
         switch(command) {
         case "todo":
             task = AddCommand.createTodo(description);
@@ -60,18 +62,9 @@ public class AddCommand extends Command {
 
         tasks.addTask(task);
         storage.save(tasks);
-        return ui.showAddTask(task, tasks);
+        return ui.createAddTaskMessage(task, tasks);
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 
     private static Task createTodo(String description) throws DukeException {
         String[] splitString = description.split("todo ");

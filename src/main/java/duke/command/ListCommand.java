@@ -11,6 +11,13 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     /**
+     * Constructor for List Command.
+     */
+    public ListCommand() {
+        this.isExit = false;
+    }
+
+    /**
      * Returns the list of tasks stored.
      *
      * @param tasks Task List that store all current task.
@@ -25,17 +32,7 @@ public class ListCommand extends Command {
         assert ui != null;
         assert storage != null;
 
-        return ui.showList(tasks);
-    }
-
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return ui.createListMessage(tasks);
     }
 
 }

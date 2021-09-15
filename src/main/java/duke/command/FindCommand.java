@@ -20,6 +20,7 @@ public class FindCommand extends Command {
      * @param keyWord Key Word to match the description of task
      */
     public FindCommand(String keyWord) {
+        this.isExit = false;
         this.keyWord = keyWord;
     }
 
@@ -40,16 +41,7 @@ public class FindCommand extends Command {
         assert storage != null;
 
         ArrayList<Task> foundTasks = tasks.findTask(keyWord);
-        return ui.showFindTask(foundTasks);
+        return ui.createFindTaskMessage(foundTasks);
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

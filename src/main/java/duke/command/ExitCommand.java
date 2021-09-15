@@ -10,6 +10,13 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     /**
+     * Constructs ExitCommand object.
+     */
+    public ExitCommand() {
+        this.isExit = true;
+    }
+
+    /**
      * Returns goodbye message.
      *
      * @param tasks Task List that store all current task.
@@ -23,17 +30,8 @@ public class ExitCommand extends Command {
         assert ui != null;
         assert storage != null;
 
-        return ui.showExit();
+        return ui.createExitMessage();
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 
 }

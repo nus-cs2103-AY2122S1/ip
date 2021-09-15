@@ -20,6 +20,7 @@ public class TagCommand extends Command {
      */
     public TagCommand(String tag, int taskNumber) {
         assert taskNumber >= 1;
+        this.isExit = false;
         this.tag = tag;
         this.taskNumber = taskNumber;
     }
@@ -42,16 +43,7 @@ public class TagCommand extends Command {
 
         tasks.addTag(tag, taskNumber);
         storage.save(tasks);
-        return ui.showTag(tag, tasks.getTask(taskNumber));
+        return ui.createTagMessage(tag, tasks.getTask(taskNumber));
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

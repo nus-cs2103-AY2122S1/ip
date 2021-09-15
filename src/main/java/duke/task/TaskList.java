@@ -92,7 +92,7 @@ public class TaskList {
      *
      * @return Number of tasks stored in the task list.
      */
-    public int totalTask() {
+    public int getTotalTask() {
         return this.taskList.size();
     }
 
@@ -120,7 +120,7 @@ public class TaskList {
      */
     public ArrayList<Task> findTask(String keyWord) throws DukeException {
         ArrayList<Task> newTasks = new ArrayList<>();
-        int numTask = this.totalTask();
+        int numTask = this.getTotalTask();
 
         for (int i = 1; i <= numTask; i++) {
             Task task = this.getTask(i);

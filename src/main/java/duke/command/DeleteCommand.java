@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int taskNumber) {
         assert taskNumber >= 1;
+        this.isExit = false;
         this.taskNumber = taskNumber;
     }
 
@@ -41,16 +42,7 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.getTask(taskNumber);
         tasks.deleteTask(taskNumber);
         storage.save(tasks);
-        return ui.showDeleteTask(deletedTask, tasks);
+        return ui.createDeleteTaskMessage(deletedTask, tasks);
     }
 
-    /**
-     * Checks whether the command is an exit command.
-     *
-     * @return Boolean whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

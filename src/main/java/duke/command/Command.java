@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public abstract class Command {
-
+    boolean isExit;
     /**
      * Executes based on the command with the arguments provided.
      *
@@ -23,5 +23,7 @@ public abstract class Command {
      *
      * @return Boolean whether command is an exit command.
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return isExit;
+    }
 }
