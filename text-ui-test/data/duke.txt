@@ -1,0 +1,9 @@
+T|1|drop CS2103T
+T|0|drop CS2103T
+E|0|macdonald's interview|2021-08-20 14:00
+D|0|fail test|2021-09-01 23:59
+T|0|dropout university
+T|0|drop CS2103T
+E|1|macdonald's interview|2021-08-20 14:00
+D|0|fail test|2021-09-01 23:59
+T|0|dropout university
