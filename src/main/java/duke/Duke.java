@@ -9,9 +9,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-    private static final boolean USE_GUI = true;
     private static final String SAVE_FILE_LOCATION = "duke-task-list.txt";
 
+    private final boolean useGui;
     private final Ui ui;
     private final TaskList taskList;
     private final Storage storage;
@@ -21,8 +21,17 @@ public class Duke extends Application {
      * Duke constructor
      */
     public Duke() {
+        this(true);
+    }
+
+    /**
+     * Duke constructor
+     * @param useGui Whether to use GUI. Otherwise, CLI mode is used
+     */
+    public Duke(boolean useGui) {
+        this.useGui = useGui;
         this.storage = new Storage(SAVE_FILE_LOCATION);
-        if (USE_GUI) {
+        if (useGui) {
             this.ui = new Gui(storage);
         } else {
             this.ui = new Cli(System.in, System.out);
@@ -43,7 +52,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        assert USE_GUI;
+        assert useGui;
         Gui gui = (Gui) ui;
         Scene scene = new Scene(gui.getRootNode());
         primaryStage.setTitle("Duke");
@@ -55,7 +64,7 @@ public class Duke extends Application {
      * Starts Duke CLI.
      */
     public void startCli() {
-        assert !USE_GUI;
+        assert !useGui;
         Cli cli = (Cli) ui;
         cli.printWelcomeMessage();
         cli.printHelp();
