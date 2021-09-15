@@ -2,7 +2,9 @@ package duke;
 
 import duke.exception.CreateFileException;
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskTypeException;
 import duke.exception.LoadFileException;
+import duke.exception.UpdateFileException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -57,17 +59,17 @@ public class Storage {
             }
             Task res;
             switch (taskType) {
-                case(Task.TODO_ALPHABET):
-                    res = new Todo(taskDescription, isTaskDone);
-                    break;
-                case(Task.DEADLINE_ALPHABET):
-                    res = new Deadline(taskDescription, taskDate, isTaskDone);
-                    break;
-                case(Task.EVENT_ALPHABET):
-                    res = new Event(taskDescription, taskDate, isTaskDone);
-                    break;
-                default:
-                    throw new DukeException("Incorrect task type!");
+            case(Task.TODO_ALPHABET):
+                res = new Todo(taskDescription, isTaskDone);
+                break;
+            case(Task.DEADLINE_ALPHABET):
+                res = new Deadline(taskDescription, taskDate, isTaskDone);
+                break;
+            case(Task.EVENT_ALPHABET):
+                res = new Event(taskDescription, taskDate, isTaskDone);
+                break;
+            default:
+                throw new InvalidTaskTypeException(str);
             }
             return res;
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -76,30 +78,30 @@ public class Storage {
 
     }
 
-    public void saveTaskToFile(Task task) {
+    public void saveTaskToFile(Task task) throws DukeException {
         saveStringToFile(task.toFileData() + "\n");
     }
 
-    private void saveStringToFile(String str) {
+    private void saveStringToFile(String str) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, true);
             fileWriter.write(str);
             fileWriter.close();
         }
         catch (IOException e) {
-            System.out.println("An error occurred with file handling.");
+            throw new UpdateFileException();
         }
     }
 
-    public void deleteTaskFromFile(int taskIndex, TaskList tasks) {
+    public void deleteTaskFromFile(int taskIndex, TaskList tasks) throws DukeException {
         updateTaskFromFile(taskIndex, true, tasks);
     }
 
-    public void editTaskFromFile(int taskIndex, TaskList tasks) {
+    public void editTaskFromFile(int taskIndex, TaskList tasks) throws DukeException {
         updateTaskFromFile(taskIndex, false, tasks);
     }
 
-    private void updateTaskFromFile(int taskIndex, boolean isDeleteTask, TaskList tasks) {
+    private void updateTaskFromFile(int taskIndex, boolean isDeleteTask, TaskList tasks) throws DukeException {
         try {
             StringBuilder newTasks = new StringBuilder();
             File taskFile = new File(filePath);
@@ -120,7 +122,7 @@ public class Storage {
             fileWriter.write(String.valueOf(newTasks));
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred with file handling.");
+            throw new UpdateFileException();
         }
     }
 

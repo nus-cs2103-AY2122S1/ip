@@ -44,7 +44,7 @@ public class TaskCommand extends Command {
         return addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks);
     }
 
-    private static String addTask(Task newTask, Storage storage, TaskList tasks) {
+    private static String addTask(Task newTask, Storage storage, TaskList tasks) throws DukeException {
         storage.saveTaskToFile(newTask);
         String addedTask = String.format("Got it, I've added this task:\n %s\n", newTask.toString());
         String numberOfTasks = String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
