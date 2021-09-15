@@ -115,10 +115,12 @@ public class Duke extends javafx.application.Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Duke the Frog");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+
+
 
         mainLayout.setPrefSize(400.0, 600.0);
 
