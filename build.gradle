@@ -39,7 +39,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "uhtredRagnarson"
+    archiveBaseName = "UhtredRagnarson"
     archiveClassifier = null
 }
 
