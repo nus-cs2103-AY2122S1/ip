@@ -95,6 +95,7 @@ Format: `find [search string]`
 Mark a task in the list as done.  
 
 Format: `done [index]`
+
 | required | arguement | remark |
 |----------|-----------|--------|
 | ✅ | [index] | the index of the course starting with 1. |
