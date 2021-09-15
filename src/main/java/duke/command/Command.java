@@ -8,7 +8,7 @@ import duke.Ui;
 public abstract class Command {
 
     private String userInput;
-    private boolean exit = false;
+    private boolean isExit = false;
 
     /**
      * Constructor for abstract class Command
@@ -30,18 +30,18 @@ public abstract class Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {}
 
     /**
-     * Sets exit to true
+     * Sets isExit to true
      */
     public void setExitTrue() {
-        this.exit = true;
+        this.isExit = true;
     }
 
     /**
      * Checks if the program should exist
-     * @return boolean of whether to exit
+     * @return boolean of whether to isExit
      */
     public boolean isExit() {
-        return this.exit;
+        return this.isExit;
     }
 
     /**

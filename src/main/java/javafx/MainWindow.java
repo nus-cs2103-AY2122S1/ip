@@ -51,6 +51,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        dialogContainer.setFillWidth(true);
         userInput.clear();
         if (duke.isDukeExit()) {
             Platform.exit();
