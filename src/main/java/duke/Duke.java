@@ -99,34 +99,4 @@ public class Duke {
         dialogContainer.getChildren().add(UserDialogBox.getUserDialog(userInput, userAvatar));
     }
 
-    /**
-     * This is the main point of interaction of user and Duke in CLI.
-     */
-    public void run() {
-        dukeCliResponse(ui.showWelcomeMessage());
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.decipher(fullCommand);
-                dukeCliResponse(c.execute(taskList, store, ui));
-                isExit = c.isExit();
-
-            } catch (DukeException e) {
-                dukeCliResponse(e.getMessage());
-            }
-        }
-    }
-
-    private void dukeCliResponse(String message) {
-        String fullMessage = "FullOfBugs:\n" + message;
-        System.out.println(fullMessage);
-    }
-
-    /** Main point of interaction with Duke in CLI*/
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
 }
