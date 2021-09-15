@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+                DialogBox.getDukeDialog(false, welcomeMessage, dukeImage)
         );
     }
 
@@ -68,9 +68,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isErrorMessage = response.startsWith("Wryyyyy!");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(isErrorMessage, response, dukeImage)
         );
         userInput.clear();
         delayedExit(input);

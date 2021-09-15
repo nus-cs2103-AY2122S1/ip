@@ -45,6 +45,10 @@ public class DialogBox extends HBox {
         dialog.setStyle("-fx-background-color: #182533;");
     }
 
+    private void setDukeErrorMessageStyle() {
+        dialog.setStyle("-fx-background-color: #182533; -fx-text-fill: red; -fx-font: bold 13pt Roboto");
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -59,9 +63,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(boolean isErrorMessage, String text, Image img) {
         var db = new DialogBox(text, img);
         db.setDukeDialogBackground();
+        if (isErrorMessage) {
+            db.setDukeErrorMessageStyle();
+        }
         db.flip();
         return db;
     }
