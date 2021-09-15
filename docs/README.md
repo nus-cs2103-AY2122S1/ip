@@ -30,17 +30,17 @@ Successfully opening TaskMan would lead you to a window like this
 Listed below is a short description of what TaskMan can do as a task manager
 
 ### Types of tasks
-- [_Todo:_](#Adding-a-task-to-do-:-todo) a simple task with a short description
-- _Event:_ a Event **date** that you want to keep track of
-- _Deadline:_ a Deadline that you want to keep track of
+- [_Todo:_](#adding-a-task-to-do-todo) a simple task with a short description
+- [_Event:_](#adding-an-event-event) a Event **date** that you want to keep track of
+- [_Deadline:_](#adding-a-task-with-a-deadline-deadline) a Deadline that you want to keep track of
 
 ### Set status of task
-- _Done Status_: After task completion, task may be set as done
+- [_Done Status:_](#mark-task-as-complete-done) After task completion, task may be set as done
 
 ### Other useful features
-- _Delete:_ Deleting a task if you dont want to keep track of it anymore
-- _List:_ A list of all the tasks being tracked
-- _Find:_ Finding a task based on a keyword in its description
+- [_Delete:_](#remove-a-task-delete) Deleting a task if you dont want to keep track of it anymore
+- [_List:_](#looking-at-all-the-task-being-tracked-list) A list of all the tasks being tracked
+- [_Find:_](#finding-task-using-keyword-find) Finding a task based on a keyword in its description
 
 ## Usage
 
