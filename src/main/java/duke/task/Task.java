@@ -4,7 +4,7 @@ package duke.task;
  * Abstract class representing Task that can be added to the TaskList.
  */
 public abstract class Task {
-    enum Priority {
+    public enum Priority {
         LOW,
         MEDIUM,
         HIGH
@@ -83,7 +83,7 @@ public abstract class Task {
      * @return String representation of the Task for the data file.
      */
     public String toFile() {
-        return "| " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.priorityString();
+        return "| " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.priorityString() + " ";
     }
 
     /**
