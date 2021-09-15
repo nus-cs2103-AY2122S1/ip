@@ -27,7 +27,7 @@
 🎉🎉🎉
 <div style="display:flex">
 <img src="https://user-images.githubusercontent.com/39845424/133389724-1e7a69a0-2620-4859-ad94-072784fe5301.png" height="440">
-<img src="https://user-images.githubusercontent.com/39845424/133390611-2c4d7572-e16f-4dfc-8960-1af9292b2baa.png" height="440">
+<img src="https://user-images.githubusercontent.com/39845424/133390611-2c4d7572-e16f-4dfc-8960-1af9292b2baa.png" height="440" style="margin: 50px;">
 <img src="https://user-images.githubusercontent.com/39845424/133391138-a80db12b-6a10-4db5-91b9-5cd06ac372b4.png" height="440">
 </div>
 
@@ -134,3 +134,7 @@ Simply press ⬆️⬇️ button on your keyboard to navigate throught your inpu
 - improve `find` feature to search for variable keywords.
 - find free time
 - etc
+
+## FAQ
+
+Please post your feedback on the github [issue page](https://github.com/YaleChen299/ip/issues)
