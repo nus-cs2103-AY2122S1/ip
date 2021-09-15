@@ -39,7 +39,7 @@ Adds a task to your list of task.
 A Task has a **completion status**, which can be marked done by [`done`](#done).  
 A task can be the following **types**:  [`todo`](#todo), [`event`](#event), [`deadline`](#deadline)
 
-#### `todo`
+### `todo`
 A `Todo` task is the simplest kind of task.  
 You can use it to track any task status.
 
@@ -50,7 +50,7 @@ Format: `todo [description]`
 | ✅ | [description] | the description of the task. |
 
 
-#### `event`
+### `event`
 An `Event` task is a task with an event date.  
 You can use it to track your event schedules.
 
@@ -61,7 +61,7 @@ Format: `event [description] /at [yyyy-mm-dd]`
 | ✅ | [description] | the description of the task. |
 | ✅ | /at [yyyy-mm-dd] | the date of the event. |
 
-#### `deadline`
+### `deadline`
 An `Deadline` task is a task with an deadline. 
 You can use it to remind you about deadlines.
 
@@ -76,11 +76,11 @@ Format: `deadline [description] /by [yyyy-mm-dd]`
 Viewing the list of task that you have is essential.  
 Currently, **Hiko** supports `list` and `find`.
 
-#### `list`
+### `list`
 You can use it to list all the tasks.  
 Format: `list`
 
-#### `find`
+### `find`
 A not-so-good search function
 You can use it to find your tasks.
 
@@ -91,7 +91,7 @@ Format: `find [search string]`
 | ✅ | [search string] | the string that is contained in a task description. |
 
 ### Update Tasks
-#### `done`
+### `done`
 Mark a task in the list as done.  
 
 Format: `done [index]`
@@ -101,7 +101,7 @@ Format: `done [index]`
 | ✅ | [index] | the index of the course starting with 1. |
 
 ### Delete Tasks
-#### `delete`
+### `delete`
 Delete a task in the list.  
 
 Format: `delete [index]`
@@ -115,11 +115,11 @@ Clears all tasks in the list.
 Format: `clear`
 
 ### Auxiliary Features
-#### `help`
+### `help`
 View the help information with all the command.  
 Format: `help`
 
-#### `save`
+### `save`
 Save the tasks into your local file `/data/duke.txt`.  
 So when you open next time the tasks will be loaded.
 
