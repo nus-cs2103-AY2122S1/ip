@@ -31,12 +31,11 @@ public class ArchiveCommand extends Command {
      *
      * @param userInput User Input which is used to generate the ArchiveCommand.
      * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return ArchiveCommand to be executed.
      * @throws IncompleteArchiveException if insufficient values are passed in.
      */
     public static ArchiveCommand generateCommand(
-            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteArchiveException {
+            String userInput, TaskList taskList) throws IncompleteArchiveException {
         String[] separated = userInput.split(" ");
 
         if (separated.length == 1) {

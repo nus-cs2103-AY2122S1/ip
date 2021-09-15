@@ -13,12 +13,9 @@ public class ListArchiveCommand extends ListCommand {
     /**
      * Factory method which generates the ListArchiveCommand from the userInput.
      *
-     * @param userInput User Input which is used to generate the ListArchiveCommand.
-     * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return ListArchiveCommand to be executed.
      */
-    public static ListArchiveCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList) {
+    public static ListArchiveCommand generateCommand() {
         return new ListArchiveCommand();
     }
 

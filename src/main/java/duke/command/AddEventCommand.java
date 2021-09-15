@@ -26,13 +26,10 @@ public class AddEventCommand extends AddCommand {
      * Factory method which generates the AddEventCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the AddEventCommand.
-     * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return AddEventCommand to be executed.
      * @throws IncompleteEventException if insufficient values are passed in.
      */
-    public static AddEventCommand generateCommand(
-            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteEventException {
+    public static AddEventCommand generateCommand(String userInput) throws IncompleteEventException {
         String[] str = splitEventInput(userInput);
 
         assert str.length == 2;

@@ -26,13 +26,12 @@ public class RemoveArchiveCommand extends RemoveCommand {
      * Factory method which generates the RemoveArchiveCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the RemoveArchiveCommand.
-     * @param taskList taskList of duke.
      * @param archiveList archiveList of duke.
      * @return RemoveArchiveCommand to be executed.
      * @throws IncompleteRemoveException if insufficient values are passed in.
      * @throws InvalidCommandException if invalid command passed in.
      */
-    public static RemoveArchiveCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList)
+    public static RemoveArchiveCommand generateCommand(String userInput, ArchiveList archiveList)
             throws IncompleteRemoveException, InvalidCommandException {
         String[] separated = userInput.split(SPACE);
 

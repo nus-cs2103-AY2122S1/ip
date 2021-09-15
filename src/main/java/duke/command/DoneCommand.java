@@ -31,12 +31,11 @@ public class DoneCommand extends Command {
      *
      * @param userInput User Input which is used to generate the DoneCommand.
      * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return DoneCommand to be executed.
      * @throws IncompleteDoneException if insufficient values are passed in.
      * @throws InvalidCommandException if invalid command passed in.
      */
-    public static DoneCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList)
+    public static DoneCommand generateCommand(String userInput, TaskList taskList)
             throws IncompleteDoneException, InvalidCommandException {
         String[] separated = userInput.split(SPACE);
 

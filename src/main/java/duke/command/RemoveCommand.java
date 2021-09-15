@@ -33,12 +33,11 @@ public class RemoveCommand extends Command {
      *
      * @param userInput User Input which is used to generate the RemoveCommand.
      * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return RemoveCommand to be executed.
      * @throws IncompleteRemoveException if insufficient values are passed in.
      * @throws InvalidCommandException if invalid command passed in.
      */
-    public static RemoveCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList)
+    public static RemoveCommand generateCommand(String userInput, TaskList taskList)
             throws IncompleteRemoveException, InvalidCommandException {
         String[] separated = userInput.split(SPACE);
 

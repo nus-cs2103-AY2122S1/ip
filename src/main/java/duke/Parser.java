@@ -283,29 +283,29 @@ public class Parser {
     public static Command parse(
             String userInput, Ui ui, TaskList taskList, ArchiveList archiveList) throws DukeException {
         if (Parser.isList(userInput)) {
-            return ListCommand.generateCommand(userInput, taskList, archiveList);
+            return ListCommand.generateCommand();
         } else if (Parser.isListArchive(userInput)) {
-            return ListArchiveCommand.generateCommand(userInput, taskList, archiveList);
+            return ListArchiveCommand.generateCommand();
         } else if (Parser.isDone(userInput)) {
-            return DoneCommand.generateCommand(userInput, taskList, archiveList);
+            return DoneCommand.generateCommand(userInput, taskList);
         } else if (Parser.isRemoveArchive(userInput)) {
-            return RemoveArchiveCommand.generateCommand(userInput, taskList, archiveList);
+            return RemoveArchiveCommand.generateCommand(userInput, archiveList);
         } else if (Parser.isRemove(userInput)) {
-            return RemoveCommand.generateCommand(userInput, taskList, archiveList);
+            return RemoveCommand.generateCommand(userInput, taskList);
         } else if (Parser.isBye(userInput)) {
-            return ExitCommand.generateCommand(userInput, taskList, archiveList);
+            return ExitCommand.generateCommand();
         } else if (Parser.isFind(userInput)) {
-            return FindCommand.generateCommand(userInput, taskList, archiveList);
+            return FindCommand.generateCommand(userInput);
         } else if (Parser.isTodo(userInput)) {
-            return AddToDoCommand.generateCommand(userInput, taskList, archiveList);
+            return AddToDoCommand.generateCommand(userInput);
         } else if (Parser.isDeadline(userInput)) {
-            return AddDeadlineCommand.generateCommand(userInput, taskList, archiveList);
+            return AddDeadlineCommand.generateCommand(userInput);
         } else if (Parser.isEvent(userInput)) {
-            return AddEventCommand.generateCommand(userInput, taskList, archiveList);
+            return AddEventCommand.generateCommand(userInput);
         } else if (Parser.isArchive(userInput)) {
-            return ArchiveCommand.generateCommand(userInput, taskList, archiveList);
+            return ArchiveCommand.generateCommand(userInput, taskList);
         } else if (Parser.isUnarchive(userInput)) {
-            return UnarchiveCommand.generateCommand(userInput, taskList, archiveList);
+            return UnarchiveCommand.generateCommand(userInput, archiveList);
         } else {
             throw new InvalidCommandException();
         }

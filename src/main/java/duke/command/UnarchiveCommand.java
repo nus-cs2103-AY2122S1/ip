@@ -30,13 +30,12 @@ public class UnarchiveCommand extends Command {
      * Factory method which generates the UnarchiveCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the UnarchiveCommand.
-     * @param taskList taskList of duke.
      * @param archiveList archiveList of duke.
      * @return UnarchiveCommand to be executed.
      * @throws IncompleteUnarchiveException if insufficient values are passed in.
      */
     public static UnarchiveCommand generateCommand(
-            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteUnarchiveException {
+            String userInput, ArchiveList archiveList) throws IncompleteUnarchiveException {
         String[] separated = userInput.split(" ");
 
         if (separated.length == 1) {

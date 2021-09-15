@@ -24,13 +24,10 @@ public class AddToDoCommand extends AddCommand {
      * Factory method which generates the AddToDoCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the AddToDoCommand.
-     * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return AddToDoCommand to be executed.
      * @throws IncompleteToDoException if insufficient values are passed in.
      */
-    public static AddToDoCommand generateCommand(
-            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteToDoException {
+    public static AddToDoCommand generateCommand(String userInput) throws IncompleteToDoException {
         String[] str = splitToDoInput(userInput);
 
         assert str.length == 1;

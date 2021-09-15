@@ -26,13 +26,10 @@ public class FindCommand extends Command {
      * Factory method which generates the FindCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the FindCommand.
-     * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return FindCommand to be executed.
      * @throws IncompleteFindException if insufficient values are passed in.
      */
-    public static FindCommand generateCommand(
-            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteFindException {
+    public static FindCommand generateCommand(String userInput) throws IncompleteFindException {
         String[] separated = userInput.split(SPACE);
 
         if (separated.length == 1) {

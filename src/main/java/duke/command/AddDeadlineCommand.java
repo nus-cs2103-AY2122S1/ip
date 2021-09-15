@@ -27,13 +27,10 @@ public class AddDeadlineCommand extends AddCommand {
      * Factory method which generates the AddDeadlineCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the AddDeadlineCommand.
-     * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return AddDeadLineCommand to be executed.
      * @throws IncompleteDeadlineException if insufficient values are passed in.
      */
-    public static AddDeadlineCommand generateCommand(
-            String userInput, TaskList taskList, ArchiveList archiveList) throws IncompleteDeadlineException {
+    public static AddDeadlineCommand generateCommand(String userInput) throws IncompleteDeadlineException {
         String[] str = splitDeadlineInput(userInput);
 
         assert str.length == 2;

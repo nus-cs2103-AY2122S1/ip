@@ -71,7 +71,7 @@ public class Storage {
      * @return ArrayList of the archiveList.
      */
     public ArrayList<Task> initialiseArchive() {
-        //read from the data/history.text and return an ArrayList of Tasks
+        //read from the data/archive.text and return an ArrayList of Tasks
         File file = new File(ARCHIVELIST_FILE_PATH);
 
         try {

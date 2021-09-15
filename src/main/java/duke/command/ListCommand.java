@@ -13,12 +13,9 @@ public class ListCommand extends Command {
     /**
      * Factory method which generates the ListCommand from the userInput.
      *
-     * @param userInput User Input which is used to generate the ListCommand.
-     * @param taskList taskList of duke.
-     * @param archiveList archiveList of duke.
      * @return ListCommand to be executed.
      */
-    public static ListCommand generateCommand(String userInput, TaskList taskList, ArchiveList archiveList) {
+    public static ListCommand generateCommand() {
         return new ListCommand();
     }
 
