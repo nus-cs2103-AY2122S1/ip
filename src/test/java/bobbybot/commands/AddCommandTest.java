@@ -1,3 +1,5 @@
+package bobbybot.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,7 +11,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import bobbybot.commands.AddCommand;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.tasks.Deadline;

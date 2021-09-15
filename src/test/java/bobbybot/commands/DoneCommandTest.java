@@ -1,3 +1,5 @@
+package bobbybot.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
@@ -7,7 +9,6 @@ import java.util.Collections;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import bobbybot.commands.DoneCommand;
 import bobbybot.tasks.ToDo;
 import bobbybot.util.PersonList;
 import bobbybot.util.Storage;

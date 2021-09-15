@@ -1,3 +1,5 @@
+package bobbybot.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
@@ -6,7 +8,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import bobbybot.commands.AddContactCommand;
 import bobbybot.person.Address;
 import bobbybot.person.Email;
 import bobbybot.person.Name;

@@ -1,3 +1,5 @@
+package bobbybot.commands;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
@@ -7,7 +9,6 @@ import java.util.Collections;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import bobbybot.commands.DeleteCommand;
 import bobbybot.tasks.ToDo;
 import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
@@ -15,7 +16,7 @@ import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
 
 
-public class DeleteCommandTest {
+public class ListCommandTest {
     private static final String STORAGE_PATH = "test.txt";
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
@@ -28,32 +29,29 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void deleteCommand_validInput_success() {
+    public void listCommand_testInput_success() {
         tasks.addTask(new ToDo("test"));
-        DeleteCommand c = new DeleteCommand(1);
-        c.execute(tasks, ui, storage, contacts);
-        assertEquals(0, tasks.getTasks().size());
-    }
+        tasks.addTask(new ToDo("testing"));
+        tasks.addTask(new ToDo("tested"));
+        tasks.addTask(new ToDo("not related"));
 
-    @Test
-    public void deleteCommand_lessThanOne_errorResponse() {
-        int taskNumToDelete = 0;
-        DeleteCommand c = new DeleteCommand(taskNumToDelete);
+        ListCommand c = new ListCommand();
         c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
-        String expected = "Invalid delete command! Task number: " + taskNumToDelete + " does not exist\n"
-                + "Use [list] to see available tasks!";
+        String expected = "Here are the tasks in your list:\n"
+                + "1. [T][ ] test\n"
+                + "2. [T][ ] testing\n"
+                + "3. [T][ ] tested\n"
+                + "4. [T][ ] not related";
         assertEquals(expected, response);
     }
 
     @Test
-    public void deleteCommand_moreThanSize_errorResponse() {
-        int taskNumToDelete = 1;
-        DeleteCommand c = new DeleteCommand(taskNumToDelete);
+    public void listCommand_emptyList_success() {
+        ListCommand c = new ListCommand();
         c.execute(tasks, ui, storage, contacts);
         String response = c.getResponse();
-        String expected = "Invalid delete command! Task number: " + taskNumToDelete + " does not exist\n"
-                + "Use [list] to see available tasks!";
+        String expected = "Here are the tasks in your list:";
         assertEquals(expected, response);
     }
 }
