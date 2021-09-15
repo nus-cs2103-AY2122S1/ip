@@ -17,6 +17,9 @@ public class DeleteTask implements Action {
      * @param taskCollection The TaskCollection to delete the Task from.
      */
     public DeleteTask(int taskId, TaskCollection taskCollection) {
+        assert taskId > 0 : "ID of task to be deleted should be greater than 0";
+        assert taskCollection != null : "Task collection to add task to should exist";
+
         this.taskId = taskId;
         this.taskCollection = taskCollection;
     }

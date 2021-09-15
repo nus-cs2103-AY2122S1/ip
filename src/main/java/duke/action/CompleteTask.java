@@ -14,6 +14,8 @@ public class CompleteTask implements Action {
      * @param task The Task to be marked as done.
      */
     public CompleteTask(Task task) {
+        assert task != null : "Task to add should not be null";
+
         this.task = task;
     }
 

@@ -17,6 +17,9 @@ public class AddTask implements Action {
      * @param taskCollection The TaskCollection to add the Task into.
      */
     public AddTask(Task task, TaskCollection taskCollection) {
+        assert task != null : "Task to add should not be null";
+        assert taskCollection != null : "Task collection to add task to should exist";
+
         this.task = task;
         this.taskCollection = taskCollection;
     }

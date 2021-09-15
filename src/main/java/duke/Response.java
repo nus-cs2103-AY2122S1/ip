@@ -29,6 +29,7 @@ public class Response {
      * @param messages The Response message array.
      */
     public Response(String[] messages) {
+        assert messages != null : "Messages should not be null";
         this.message = String.join(System.lineSeparator(), messages);
     }
 

@@ -28,6 +28,7 @@ public class Duke {
      * appropriate response.
      */
     public Response handleUserInput(String userInput) {
+        assert userInput != null : "User input should be a valid string";
         try {
             Request request = Request.create(tasks, userInput);
             Action action = request.action();
