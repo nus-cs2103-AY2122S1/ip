@@ -235,23 +235,4 @@ public class Storage {
         }
     }
 
-    /**
-     * Update the file with the updated task list from undo.
-     *
-     * @param taskList the current task list.
-     */
-    public void undo(TaskList taskList) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String newContent = taskList.getContentsToWriteToFile();
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            writer.write(newContent);
-            reader.close();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
