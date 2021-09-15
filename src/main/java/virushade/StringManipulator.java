@@ -131,22 +131,24 @@ public class StringManipulator {
      * @return A string in DD MMM YYYY TIME format if inputString is in "YYYY-MM-DD TIME" format.
      */
     public static String convertDateAndTime(String inputString) {
-        if (inputString.length() < 10) {
+        String trimmedInputString = inputString.trim();
+
+        if (trimmedInputString.length() < 10) {
             return convertTime(inputString);
-        }
+        } else {
+            String dateString = trimmedInputString.substring(0, 10).trim();
+            String timeString = trimmedInputString.substring(10).trim();
+            try {
+                String date = LocalDate.parse(dateString).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
 
-        String dateString = inputString.trim().substring(0, 10).trim();
-        String timeString = inputString.trim().substring(10).trim();
-        try {
-            String date = LocalDate.parse(dateString).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+                if (timeString.length() == 4) {
+                    return date + " " + convertTime(timeString);
+                }
 
-            if (timeString.length() == 4) {
-                return date + " " + convertTime(timeString);
+                return date + timeString;
+            } catch (DateTimeParseException e) {
+                return inputString;
             }
-
-            return date + timeString;
-        } catch (DateTimeParseException e) {
-            return inputString;
         }
     }
 
