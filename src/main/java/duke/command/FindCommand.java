@@ -41,6 +41,13 @@ public class FindCommand extends Command {
         return "find";
     }
 
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof FindCommand) {
+            return ((FindCommand) obj).keyword.equals(keyword);
+        } else {
+            return false;
+        }
+    }
 
 }

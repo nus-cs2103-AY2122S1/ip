@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.tasks.taskType;
@@ -33,4 +35,13 @@ public class DeadlineCommand extends Command {
         return "deadline";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeadlineCommand) {
+            String[] objArgs = ((DeadlineCommand) obj).fields;
+            return Arrays.equals(objArgs, this.fields);
+        } else {
+            return false;
+        }
+    }
 }

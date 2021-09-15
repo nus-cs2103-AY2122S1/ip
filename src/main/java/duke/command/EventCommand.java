@@ -1,10 +1,11 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.tasks.taskType;
 import duke.ui.Ui;
-
 
 /**
  * A EventCommand class encapsulates the instructions for Duke to add a Event Task
@@ -36,6 +37,16 @@ public class EventCommand extends Command {
     @Override
     public String getType() {
         return "event";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof EventCommand) {
+            String[] objArgs = ((EventCommand) obj).fields;
+            return Arrays.equals(objArgs, this.fields);
+        } else {
+            return false;
+        }
     }
 }
 

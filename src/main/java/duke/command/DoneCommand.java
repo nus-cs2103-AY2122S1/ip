@@ -36,4 +36,13 @@ public class DoneCommand extends Command {
     public String getType() {
         return "done";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DoneCommand) {
+            return ((DoneCommand) obj).TaskNo == TaskNo;
+        } else {
+            return false;
+        }
+    }
 }

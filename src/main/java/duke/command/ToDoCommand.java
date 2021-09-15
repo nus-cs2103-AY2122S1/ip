@@ -39,5 +39,14 @@ public class ToDoCommand extends Command {
     public String getType() {
         return "todo";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDoCommand) {
+            return ((ToDoCommand)obj).description.equals(description);
+        } else {
+            return false;
+        }
+    }
 }
 

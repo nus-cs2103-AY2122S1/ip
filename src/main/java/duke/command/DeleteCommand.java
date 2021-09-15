@@ -37,4 +37,13 @@ public class DeleteCommand extends Command {
     public String getType() {
         return "delete";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeleteCommand) {
+            return ((DeleteCommand) obj).TaskNo == TaskNo;
+        } else {
+            return false;
+        }
+    }
 }
