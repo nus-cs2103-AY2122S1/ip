@@ -1,0 +1,28 @@
+todo read book
+deadline return book /by 2021-08-24
+event project meeting /at 2021-09-01
+todo join sports club
+done 1
+done 4
+todo borrow book
+list
+delete 3
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+todo
+todo
+event
+event /at
+event /at 2021-08-13
+event someDescription /at
+event someDescription /at
+event someDescription /at 2021-09-31
+deadline
+deadline /by
+deadline /by 2021-09-31
+deadline someDescription /by
+deadline someDescription /by
+deadline someDescription /by 2021-09-31
+bye
