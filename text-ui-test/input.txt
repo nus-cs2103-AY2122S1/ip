@@ -1,0 +1,41 @@
+list hello
+list
+delete 1
+deadline cs2103t quiz /by Monday
+todo cs2103t project level 1
+todo cs2103t project level 2
+todo cs2103t project level 3
+todo cs2103t project level 4
+todo cs2103t project level 5
+todo cs2103t project level 6
+event Christmas /at December
+list
+done 1
+list
+done 2
+list
+delete 3
+list
+done 3
+list
+delete 3
+list
+done 5
+list
+todo
+event
+event /at
+event hello /at
+event /at hello
+deadline
+deadline /by
+deadline hello /by
+deadline /by hello
+done -1
+done -2 hello
+done 2 hello
+delete 1 lol
+done 1000
+done
+bye Duke
+bye
