@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     private String keyWord;
 
     /**
-     * Constructs FIndCommand object.
+     * Constructs FindCommand object.
      *
      * @param keyWord Key Word to match the description of task
      */
@@ -25,8 +25,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Find task in Task List using key word.
-     * Send list of matching task to the user.
+     * Finds task in Task List using key word.
+     * Sends list of matching task to the user.
      *
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.

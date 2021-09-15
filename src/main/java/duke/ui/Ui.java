@@ -109,7 +109,7 @@ public class Ui {
     }
 
     /**
-     * Show user a list of tasks matching the key word.
+     * Returns a list of tasks matching the key word.
      *
      * @param tasks List of tasks that match the key word.
      * @return List of tasks matching the key word.
@@ -133,7 +133,7 @@ public class Ui {
     }
 
     /**
-     * Show that the task has been tagged.
+     * Returns list of tasks that have been tagged.
      *
      * @param tag The tag that is added.
      * @param task The task that is tagged.

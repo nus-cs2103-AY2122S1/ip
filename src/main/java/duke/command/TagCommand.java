@@ -26,8 +26,8 @@ public class TagCommand extends Command {
     }
 
     /**
-     * Tag task in Task List and Storage.
-     * Return tag message to be sent to user.
+     * Tags task in Task List and Storage.
+     * Returns tag message to be sent to user.
      *
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.

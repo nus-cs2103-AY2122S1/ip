@@ -138,7 +138,7 @@ public class TaskList {
     }
 
     /**
-     * Add tag to the task.
+     * Adds tag to the task.
      *
      * @param tag Tag to be added.
      * @param taskNumber Task number of the task to be tagged.

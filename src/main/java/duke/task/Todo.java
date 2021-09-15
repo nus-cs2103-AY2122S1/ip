@@ -20,7 +20,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Convert the task into a string that can be store in the file.
+     * Converts the task into a string that can be store in the file.
      *
      * @return the text format of the task to be store in the file.
      */

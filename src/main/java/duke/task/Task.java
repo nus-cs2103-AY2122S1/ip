@@ -61,7 +61,7 @@ public class Task {
     }
 
     /**
-     * Convert the task into a string that can be store in the file.
+     * Converts the task into a string that can be store in the file.
      *
      * @return the text format of the task to be store in the file.
      */
@@ -85,7 +85,7 @@ public class Task {
     }
 
     /**
-     * Add tag to the task.
+     * Adds tag to the task.
      *
      * @param tag Tag to be added into tags.
      */
@@ -96,7 +96,7 @@ public class Task {
     }
 
     /**
-     * Check whether tag is present.
+     * Checks whether tag is present.
      *
      * @param tag Tag to search for.
      * @return

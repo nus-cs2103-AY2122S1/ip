@@ -32,7 +32,7 @@ public class Storage {
     }
 
     /**
-     * Return an array of task that are stored in the file.
+     * Returns an array of task that are stored in the file.
      *
      * @return Array of task that are store in the file.
      * @throws DukeException If file is corrupted.

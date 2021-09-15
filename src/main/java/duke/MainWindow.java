@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Start duke bot and sent hello message.
+     * Starts duke bot and sent hello message.
      */
     @FXML
     public void initialize() {

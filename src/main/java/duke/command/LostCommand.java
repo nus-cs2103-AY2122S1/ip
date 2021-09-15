@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class LostCommand extends Command {
 
     /**
-     * Constructor for Lost Command.
+     * Constructs Lost Command object.
      */
     public LostCommand() {
         super(false);

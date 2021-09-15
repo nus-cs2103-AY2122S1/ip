@@ -9,7 +9,7 @@ public abstract class Command {
     private boolean isExit;
 
     /**
-     * Constructor for Command.
+     * Constructs Command.
      *
      * @param isExit Whether is it Exit Command
      */

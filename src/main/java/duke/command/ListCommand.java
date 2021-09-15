@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Constructor for List Command.
+     * Constructs List Command object.
      */
     public ListCommand() {
         super(false);
