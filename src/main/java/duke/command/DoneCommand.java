@@ -84,6 +84,10 @@ public class DoneCommand extends Command {
             message = formatAndMarkDoneAtIndex(taskList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         ui.print(message);
     }
 
@@ -106,6 +110,10 @@ public class DoneCommand extends Command {
             message = formatAndMarkDoneAtIndex(taskList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         return message;
     }
 

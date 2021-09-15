@@ -39,7 +39,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        storage.saveFile(taskList);
+        storage.saveTaskList(taskList);
         storage.saveArchive(archiveList);
         ui.exit();
     }
@@ -55,7 +55,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
-        storage.saveFile(taskList);
+        storage.saveTaskList(taskList);
         storage.saveArchive(archiveList);
         return ui.formatExitString();
     }

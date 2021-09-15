@@ -80,6 +80,10 @@ public class UnarchiveCommand extends Command {
             message = formatAndUnarchiveIndex(taskList, archiveList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         ui.print(message);
     }
 
@@ -104,6 +108,10 @@ public class UnarchiveCommand extends Command {
             message = formatAndUnarchiveIndex(taskList, archiveList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         return message;
     }
 

@@ -38,31 +38,7 @@ public class Storage {
         //read from the data/history.text and return an ArrayList of Tasks
         File file = new File(TASKLIST_FILE_PATH);
 
-        try {
-            Scanner s = new Scanner(file);
-            ArrayList<Task> output = new ArrayList<>();
-
-            while (s.hasNext()) {
-                String task = s.nextLine();
-                String[] splitTask = task.split("\\|");
-
-                if (splitTask[0].equals("T")) {
-                    // it is todotask
-                    initialiseToDo(output, splitTask);
-                } else if (splitTask[0].equals("E")) {
-                    // event
-                    initialiseEvent(output, splitTask);
-                } else if (splitTask[0].equals("D")) {
-                    // deadline
-                    initialiseDeadline(output, splitTask);
-                }
-
-            }
-
-            return output;
-        } catch (FileNotFoundException e) {
-            return new ArrayList<>();
-        }
+        return readArrayList(file);
     }
 
     /**
@@ -74,6 +50,16 @@ public class Storage {
         //read from the data/archive.text and return an ArrayList of Tasks
         File file = new File(ARCHIVELIST_FILE_PATH);
 
+        return readArrayList(file);
+    }
+
+    /**
+     * Reads the given file and generates an array list with the tasks from the file.
+     *
+     * @param file File to be read from.
+     * @return ArrayList with tasks read from the file.
+     */
+    private ArrayList<Task> readArrayList(File file) {
         try {
             Scanner s = new Scanner(file);
             ArrayList<Task> output = new ArrayList<>();
@@ -154,7 +140,7 @@ public class Storage {
      *
      * @param taskList taskList which is being saved into user's computer.
      */
-    public void saveFile(TaskList taskList) {
+    public void saveTaskList(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(TASKLIST_FILE_PATH);
 
@@ -166,7 +152,7 @@ public class Storage {
             File file = new File(DIR_PATH);
 
             if (file.mkdir()) {
-                saveFile(taskList);
+                saveTaskList(taskList);
             } else {
                 System.out.println("Failed to create file");
             }

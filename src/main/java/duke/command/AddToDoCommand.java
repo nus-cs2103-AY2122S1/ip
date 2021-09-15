@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.ArchiveList;
-import duke.TaskList;
 import duke.exception.IncompleteToDoException;
 import duke.task.Task;
 import duke.task.ToDo;

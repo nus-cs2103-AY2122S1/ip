@@ -49,6 +49,10 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         taskList.add(this.toAdd);
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         ui.printAdd(this.toAdd, taskList.getSize());
     }
 
@@ -65,6 +69,10 @@ public class AddCommand extends Command {
     @Override
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         taskList.add(this.toAdd);
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         return ui.formatPrintAddString(this.toAdd, taskList.getSize());
     }
 

@@ -65,6 +65,10 @@ public class RemoveArchiveCommand extends RemoveCommand {
             message = formatAndRemoveIndexToRemove(archiveList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         ui.print(message);
     }
 
@@ -89,6 +93,10 @@ public class RemoveArchiveCommand extends RemoveCommand {
             message = super.formatAndRemoveIndexToRemove(archiveList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         return message;
     }
 }

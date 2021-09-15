@@ -80,6 +80,10 @@ public class ArchiveCommand extends Command {
             message = formatAndArchiveIndex(taskList, archiveList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         ui.print(message);
     }
     /**
@@ -103,6 +107,10 @@ public class ArchiveCommand extends Command {
             message = formatAndArchiveIndex(taskList, archiveList);
 
         }
+
+        storage.saveTaskList(taskList);
+        storage.saveArchive(archiveList);
+
         return message;
     }
 
