@@ -37,7 +37,7 @@ public abstract class Command {
     public static void validateDescriptionNotEmpty(CommandTypeEnum commandType, String description)
             throws MissingCommandDescriptionException {
         if (description.isEmpty()) {
-            throw new MissingCommandDescriptionException(commandType.toString());
+            throw new MissingCommandDescriptionException(commandType);
         }
     }
 
