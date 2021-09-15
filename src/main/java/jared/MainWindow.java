@@ -1,5 +1,7 @@
 package jared;
 
+import static jared.common.Message.MESSAGE_WELCOME;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for jared.MainWindow. Provides the layout for the other controls.
  */
@@ -32,6 +35,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Jared d) {
         jared = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(MESSAGE_WELCOME, dukeImage));
     }
 
     /**

@@ -1,7 +1,5 @@
 package jared.ui;
 
-import java.util.Scanner;
-
 import jared.common.DukeException;
 import jared.common.Message;
 import jared.parser.Parser;
@@ -11,13 +9,11 @@ import jared.task.TaskList;
  * Deals with user interactions.
  */
 public class Ui {
-    private Scanner scanner;
 
     /**
      * Constructor for Ui.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
         showWelcomeMessage();
     }
 
@@ -29,23 +25,13 @@ public class Ui {
     }
 
     /**
-     * Prints exit message.
-     */
-    public void showExitMessage() {
-        System.out.println(Message.MESSAGE_EXIT);
-    }
-
-    /**
      * Starts the scanner to scan for tasks from user.
      */
     public String runLogic(String input, TaskList tasks) {
         String command = Parser.parseCommand(input);
-
         try {
             if (command.equals("bye")) {
-                showExitMessage();
-                System.exit(0);
-                scanner.close();
+                return Message.MESSAGE_EXIT;
             } else if (command.equals("list")) {
                 return tasks.list();
             } else if (command.equals("done")) {
