@@ -46,4 +46,13 @@ public class Deadline extends Task {
 				+ this.by.format(dateTimeFormatterTo)
 				+ ")";
 	}
+	@Override
+	public int compareTo(Task otherTask) {
+		if (otherTask.getTaskType().equals(Command.DEADLINE)) {
+			Deadline otherDeadline = (Deadline) otherTask;
+			return this.by.compareTo(otherDeadline.by);
+		} else {
+			return super.compareTo(otherTask);
+		}
+	}
 }

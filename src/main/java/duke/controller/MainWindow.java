@@ -38,6 +38,11 @@ public class MainWindow extends AnchorPane {
 
 	public void setDuke(Duke duke) {
 		this.duke = duke;
+
+		// shows welcome message at start-up
+		DialogBox initialDialogBox = DialogBox.getUserDialog(duke.getUi().showWelcomeMessage(), userImage);
+		initialDialogBox.flip();
+		dialogContainer.getChildren().add(initialDialogBox);
 	}
 
 	/**

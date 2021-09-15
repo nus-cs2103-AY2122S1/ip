@@ -5,7 +5,8 @@ package duke.ui;
  */
 public class Ui {
 	private final String WELCOME_STRING = "Yo! Duke here...on behalf of Yang Yuzhao.\n"
-			+ "What do ya want from me?";
+			+ "I can organise task for you!\n\n"
+			+ "3 types of tasks are supported now:\n todo, deadline, event";
 	private final String BYE_STRING = "Duke out! Wake me up when ya need me again:)";
 
 	/**

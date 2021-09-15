@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is the Event class for event tasks.
  */
-public class Event extends Task {
+public class Event extends Task{
 	protected LocalDateTime at;
 
 	/**
@@ -46,5 +46,15 @@ public class Event extends Task {
 				+ " (at: "
 				+ this.at.format(dateTimeFormatterTo)
 				+ ")";
+	}
+
+	@Override
+	public int compareTo(Task otherTask) {
+		if (otherTask.getTaskType().equals(Command.EVENT)) {
+			Event otherEvent = (Event) otherTask;
+			return this.at.compareTo(otherEvent.at);
+		} else {
+			return super.compareTo(otherTask);
+		}
 	}
 }
