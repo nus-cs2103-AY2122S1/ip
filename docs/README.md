@@ -1,5 +1,5 @@
 # User Guide
-<img src="Ui.png" alt="UI Screenshot" width="144"/>
+<img src="Ui.png" alt="UI Screenshot" width="344"/>
 
 Duke is a task management desktop application that provides an effective 
 and efficient way to manage all your tasks.
