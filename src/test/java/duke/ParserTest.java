@@ -32,12 +32,12 @@ class ParserTest {
 
     @Test
     void isRemove_correctForm_true() {
-        assertTrue(Parser.isRemove("remove 2"));
+        assertTrue(Parser.isDelete("remove 2"));
     }
 
     @Test
     void isRemove_incorrectForm_false() {
-        assertFalse(Parser.isRemove("remove2"));
+        assertFalse(Parser.isDelete("remove2"));
     }
 
     @Test

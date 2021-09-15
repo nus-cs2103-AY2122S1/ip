@@ -10,8 +10,8 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListArchiveCommand;
 import duke.command.ListCommand;
-import duke.command.RemoveArchiveCommand;
-import duke.command.RemoveCommand;
+import duke.command.DeleteArchiveCommand;
+import duke.command.DeleteCommand;
 import duke.command.UnarchiveCommand;
 
 import duke.exception.DukeException;
@@ -35,9 +35,9 @@ public class Parser {
      * @param input Input which is being checked.
      * @return true if input is a remove command.
      */
-    public static boolean isRemove(String input) {
+    public static boolean isDelete(String input) {
         String[] separated = input.split(SPACE);
-        return separated[0].equals("remove") && separated.length > 1;
+        return separated[0].equals("delete") && separated.length > 1;
     }
 
     /**
@@ -46,9 +46,9 @@ public class Parser {
      * @param input Input which is being checked.
      * @return true if input is a remove archive command.
      */
-    public static boolean isRemoveArchive(String input) {
+    public static boolean isDeleteArchive(String input) {
         String[] separated = input.split(SPACE);
-        return separated.length > 2 && separated[0].equals("remove") && separated[1].equals("archive");
+        return separated.length > 2 && separated[0].equals("delete") && separated[1].equals("archive");
     }
 
     /**
@@ -288,10 +288,10 @@ public class Parser {
             return ListArchiveCommand.generateCommand();
         } else if (Parser.isDone(userInput)) {
             return DoneCommand.generateCommand(userInput, taskList);
-        } else if (Parser.isRemoveArchive(userInput)) {
-            return RemoveArchiveCommand.generateCommand(userInput, archiveList);
-        } else if (Parser.isRemove(userInput)) {
-            return RemoveCommand.generateCommand(userInput, taskList);
+        } else if (Parser.isDeleteArchive(userInput)) {
+            return DeleteArchiveCommand.generateCommand(userInput, archiveList);
+        } else if (Parser.isDelete(userInput)) {
+            return DeleteCommand.generateCommand(userInput, taskList);
         } else if (Parser.isBye(userInput)) {
             return ExitCommand.generateCommand();
         } else if (Parser.isFind(userInput)) {

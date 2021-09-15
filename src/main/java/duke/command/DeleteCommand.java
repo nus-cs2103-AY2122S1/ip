@@ -6,48 +6,48 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.IncompleteRemoveException;
+import duke.exception.IncompleteDeleteException;
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
 
 /**
- * Representation for the remove command of Duke.
+ * Representation for the delete command of Duke.
  */
-public class RemoveCommand extends Command {
+public class DeleteCommand extends Command {
 
-    private final int indexToRemove;
-    private final boolean isRemoveAll;
+    private final int indexToDelete;
+    private final boolean isDeleteAll;
 
     /**
-     * Constructor for RemoveCommand.
+     * Constructor for DeleteCommand.
      *
-     * @param indexToRemove Index of TaskList to be removed.
+     * @param indexToDelete Index of TaskList to be deleted.
      */
-    public RemoveCommand(int indexToRemove) {
-        this.indexToRemove = indexToRemove;
-        this.isRemoveAll = indexToRemove == ALL;
+    public DeleteCommand(int indexToDelete) {
+        this.indexToDelete = indexToDelete;
+        this.isDeleteAll = indexToDelete == ALL;
     }
 
     /**
-     * Factory method which generates the RemoveCommand from the userInput.
+     * Factory method which generates the DeleteCommand from the userInput.
      *
-     * @param userInput User Input which is used to generate the RemoveCommand.
+     * @param userInput User Input which is used to generate the DeleteCommand.
      * @param taskList taskList of duke.
-     * @return RemoveCommand to be executed.
-     * @throws IncompleteRemoveException if insufficient values are passed in.
+     * @return DeleteCommand to be executed.
+     * @throws IncompleteDeleteException if insufficient values are passed in.
      * @throws InvalidCommandException if invalid command passed in.
      */
-    public static RemoveCommand generateCommand(String userInput, TaskList taskList)
-            throws IncompleteRemoveException, InvalidCommandException {
+    public static DeleteCommand generateCommand(String userInput, TaskList taskList)
+            throws IncompleteDeleteException, InvalidCommandException {
         String[] separated = userInput.split(SPACE);
 
         if (Parser.isLengthLessThanTwo(separated) || !Parser.isIntegerOrAll(separated[1])
                 || Parser.isOutOfRange(taskList, separated[1])) {
-            throw new IncompleteRemoveException();
+            throw new IncompleteDeleteException();
         } else if (Parser.isPositiveInteger(separated[1])) {
-            return new RemoveCommand(Integer.valueOf(separated[1]) - 1);
+            return new DeleteCommand(Integer.valueOf(separated[1]) - 1);
         } else if (Parser.isAll(separated[1])) {
-            return new RemoveCommand(ALL);
+            return new DeleteCommand(ALL);
         } else {
             throw new InvalidCommandException();
         }
@@ -64,9 +64,9 @@ public class RemoveCommand extends Command {
     }
 
     /**
-     * Executes the RemoveCommand.
+     * Executes the DeleteCommand.
      *
-     * @param taskList TaskList to remove command at index indexToRemove from.
+     * @param taskList TaskList to delete command at index indexToDelete from.
      * @param archiveList ArchiveList to add the archived tasks to.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
@@ -74,11 +74,11 @@ public class RemoveCommand extends Command {
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         String message;
 
-        if (this.isRemoveAll) {
-            message = formatAndRemoveAll(taskList);
+        if (this.isDeleteAll) {
+            message = formatAndDeleteAll(taskList);
 
         } else {
-            message = formatAndRemoveIndexToRemove(taskList);
+            message = formatAndDeleteIndexToDelete(taskList);
 
         }
 
@@ -92,7 +92,7 @@ public class RemoveCommand extends Command {
      * Gets the String representation of the things printed in the
      * execute method as well as execute the removal of the index.
      *
-     * @param taskList TaskList to remove command at index indexToRemove from.
+     * @param taskList TaskList to delete command at index indexToDelete from.
      * @param archiveList ArchiveList to add the archived tasks to.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList of Duke.
@@ -101,11 +101,11 @@ public class RemoveCommand extends Command {
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         String message;
 
-        if (this.isRemoveAll) {
-            message = formatAndRemoveAll(taskList);
+        if (this.isDeleteAll) {
+            message = formatAndDeleteAll(taskList);
 
         } else {
-            message = formatAndRemoveIndexToRemove(taskList);
+            message = formatAndDeleteIndexToDelete(taskList);
 
         }
 
@@ -116,21 +116,21 @@ public class RemoveCommand extends Command {
     }
 
     /**
-     * Formats and removes all the items from dukeList.
+     * Formats and deletes all the items from dukeList.
      *
-     * @param dukeList dukeList to remove all the tasks from.
+     * @param dukeList dukeList to delete all the tasks from.
      * @return Returns the formatted string to be printed to the user.
      */
-    public String formatAndRemoveAll(DukeList dukeList) {
+    public String formatAndDeleteAll(DukeList dukeList) {
         String message = "Noted. I've removed these tasks from the " + dukeList.type() + ":\n";
 
         int counter = 0;
         int size = dukeList.getSize();
 
         for (int i = 0; i < size; i++) {
-            Task toRemove = dukeList.remove(0);
+            Task toDelete = dukeList.remove(0);
             counter++;
-            message += counter + "." + toRemove + "\n";
+            message += counter + "." + toDelete + "\n";
         }
 
         message += "Now you have 0 tasks in the " + dukeList.type() + ".";
@@ -138,35 +138,35 @@ public class RemoveCommand extends Command {
     }
 
     /**
-     * Formats and removes task at indexToRemove from dukeList.
+     * Formats and deletes task at indexToDelete from dukeList.
      *
-     * @param dukeList dukeList to remove task at indexToRemove.
+     * @param dukeList dukeList to delete task at indexToDelete.
      * @return Returns the formatted string to be printed to the user.
      */
-    public String formatAndRemoveIndexToRemove(DukeList dukeList) {
-        Task toRemove = dukeList.remove(this.indexToRemove);
+    public String formatAndDeleteIndexToDelete(DukeList dukeList) {
+        Task toDelete = dukeList.remove(this.indexToDelete);
 
-        return "Noted. I've removed this task from the " + dukeList.type() + ":\n" + toRemove + "\nNow you have "
+        return "Noted. I've removed this task from the " + dukeList.type() + ":\n" + toDelete + "\nNow you have "
                 + dukeList.getSize() + " tasks in the " + dukeList.type() + ".";
     }
 
     /**
-     * Gets isRemoveAll value which checks if the RemoveCommand
-     * removes all the tasks.
+     * Gets isDeleteAll value which checks if the DeleteCommand
+     * deletes all the tasks.
      *
-     * @return isRemoveAll value.
+     * @return isDeleteAll value.
      */
-    public boolean isRemoveAll() {
-        return this.isRemoveAll;
+    public boolean isDeleteAll() {
+        return this.isDeleteAll;
     }
 
     /**
-     * Gets the index to be removed.
+     * Gets the index to be deleted.
      *
-     * @return Index to be removed.
+     * @return Index to be deleted.
      */
-    public int getIndexToRemove() {
-        return this.indexToRemove;
+    public int getIndexToDelete() {
+        return this.indexToDelete;
     }
 }
 

@@ -5,52 +5,52 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.IncompleteRemoveException;
+import duke.exception.IncompleteDeleteException;
 import duke.exception.InvalidCommandException;
 
 /**
- * Representation for the remove archive command on duke.
+ * Representation for the delete archive command on duke.
  */
-public class RemoveArchiveCommand extends RemoveCommand {
+public class DeleteArchiveCommand extends DeleteCommand {
 
     /**
-     * Constructor for RemoveArchiveCommand.
+     * Constructor for DeleteArchiveCommand.
      *
-     * @param indexToRemove index to be archived from taskList.
+     * @param indexToDelete index to be archived from taskList.
      */
-    public RemoveArchiveCommand(int indexToRemove) {
-        super(indexToRemove);
+    public DeleteArchiveCommand(int indexToDelete) {
+        super(indexToDelete);
     }
 
     /**
-     * Factory method which generates the RemoveArchiveCommand from the userInput.
+     * Factory method which generates the DeleteArchiveCommand from the userInput.
      *
-     * @param userInput User Input which is used to generate the RemoveArchiveCommand.
+     * @param userInput User Input which is used to generate the DeleteArchiveCommand.
      * @param archiveList archiveList of duke.
-     * @return RemoveArchiveCommand to be executed.
-     * @throws IncompleteRemoveException if insufficient values are passed in.
+     * @return DeleteArchiveCommand to be executed.
+     * @throws IncompleteDeleteException if insufficient values are passed in.
      * @throws InvalidCommandException if invalid command passed in.
      */
-    public static RemoveArchiveCommand generateCommand(String userInput, ArchiveList archiveList)
-            throws IncompleteRemoveException, InvalidCommandException {
+    public static DeleteArchiveCommand generateCommand(String userInput, ArchiveList archiveList)
+            throws IncompleteDeleteException, InvalidCommandException {
         String[] separated = userInput.split(SPACE);
 
         if (!Parser.isIntegerOrAll(separated[2]) || Parser.isOutOfRange(archiveList, separated[2])) {
-            throw new IncompleteRemoveException();
+            throw new IncompleteDeleteException();
         } else if (Parser.isPositiveInteger(separated[2])) {
-            return new RemoveArchiveCommand(Integer.valueOf(separated[2]) - 1);
+            return new DeleteArchiveCommand(Integer.valueOf(separated[2]) - 1);
         } else if (Parser.isAll(separated[2])) {
-            return new RemoveArchiveCommand(ALL);
+            return new DeleteArchiveCommand(ALL);
         } else {
             throw new InvalidCommandException();
         }
     }
 
     /**
-     * Executes the RemoveCommand.
+     * Executes the DeleteCommand.
      *
      * @param taskList TaskList which stores the unarchived tasks.
-     * @param archiveList ArchiveList to remove at indexToRemove.
+     * @param archiveList ArchiveList to delete at indexToDelete.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
@@ -58,11 +58,11 @@ public class RemoveArchiveCommand extends RemoveCommand {
     public void execute(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         String message;
 
-        if (super.isRemoveAll()) {
-            message = formatAndRemoveAll(archiveList);
+        if (super.isDeleteAll()) {
+            message = formatAndDeleteAll(archiveList);
 
         } else {
-            message = formatAndRemoveIndexToRemove(archiveList);
+            message = formatAndDeleteIndexToDelete(archiveList);
 
         }
 
@@ -78,7 +78,7 @@ public class RemoveArchiveCommand extends RemoveCommand {
      * archiveList.
      *
      * @param taskList TaskList which stores the unarchived tasks.
-     * @param archiveList ArchiveList to remove the task at indexToRemove.
+     * @param archiveList ArchiveList to delete the task at indexToDelete.
      * @param ui Ui to get the String representation of the text printed.
      * @param storage Storage to save and load TaskList of Duke.
      */
@@ -86,11 +86,11 @@ public class RemoveArchiveCommand extends RemoveCommand {
     public String formatExecutedString(TaskList taskList, ArchiveList archiveList, Ui ui, Storage storage) {
         String message;
 
-        if (super.isRemoveAll()) {
-            message = super.formatAndRemoveAll(archiveList);
+        if (super.isDeleteAll()) {
+            message = super.formatAndDeleteAll(archiveList);
 
         } else {
-            message = super.formatAndRemoveIndexToRemove(archiveList);
+            message = super.formatAndDeleteIndexToDelete(archiveList);
 
         }
 
