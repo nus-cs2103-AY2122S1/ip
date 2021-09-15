@@ -3,7 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.sun.jdi.BooleanValue;
 import duke.command.Command;
 
 /**

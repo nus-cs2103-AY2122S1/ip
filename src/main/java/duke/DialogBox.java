@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
         double circleHeight = displayPicture.getFitHeight() / 2;
         double circleWidth = displayPicture.getFitWidth() / 2;
         displayPicture.setClip(
-                new Circle(circleWidth - 2, circleHeight,displayPicture.getFitHeight() / 2.1));
+                new Circle(circleWidth - 2, circleHeight, displayPicture.getFitHeight() / 2.1));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
