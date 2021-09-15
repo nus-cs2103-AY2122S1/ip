@@ -2,10 +2,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.task.Deadline;
-import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test

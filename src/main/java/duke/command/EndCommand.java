@@ -3,6 +3,7 @@ package duke.command;
 import duke.Duke;
 import duke.Parser;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 public class EndCommand extends Command {
     public static final String COMMAND_WORD = "bye";
@@ -26,6 +27,7 @@ public class EndCommand extends Command {
      */
     @Override
     public String run(Duke duke, Parser parser) {
+        Platform.exit();
         return Ui.goodbyeMessage();
     }
 }
