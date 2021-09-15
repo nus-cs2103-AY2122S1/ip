@@ -3,7 +3,7 @@ package bobbybot.person;
 import static bobbybot.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
-//@Reuse-AB3
+// @@author AB3-reused
 /**
  * Represents a name of a Person
  */

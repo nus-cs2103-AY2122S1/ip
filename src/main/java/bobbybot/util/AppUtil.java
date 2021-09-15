@@ -9,7 +9,7 @@ public class AppUtil {
      *
      * @throws IllegalArgumentException if {@code condition} is false.
      */
-    //@Reuse - AB3
+    // @@author AB3-reused
     public static void checkArgument(Boolean condition) {
         if (!condition) {
             throw new IllegalArgumentException();
@@ -21,7 +21,7 @@ public class AppUtil {
      *
      * @throws IllegalArgumentException with {@code errorMessage} if {@code condition} is false.
      */
-    //@Reuse - AB3
+    // @@author AB3-reused
     public static void checkArgument(Boolean condition, String errorMessage) {
         if (!condition) {
             throw new IllegalArgumentException(errorMessage);
