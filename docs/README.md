@@ -4,7 +4,9 @@
 2Butler is a desktop task management application that can be used to set dates and times for various tasks and events. It features a Command line Interface (CLI) for you to input text commands and provides a fast and efficient way of laying down your todo list. It is themed based on the Nier Automata video game, and sports a unique look that will appease any Nier Automata and 2B fans out there.
 
 
-![Ui screenshot](Ui.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/Ui.png">
+</p>
 
 ## Features 
 
@@ -24,7 +26,9 @@ Example of usage:
 
 Expected outcome:
 
-![Todo command](TodoImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/TodoImage.png">
+</p>
 
 ### Add a deadline task: `deadline`
 
@@ -41,7 +45,9 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline command](DeadlineImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/DeadlineImage.png">
+</p>
 
 
 ### Add an event task: `event`
@@ -59,8 +65,9 @@ Example of usage:
 
 Expected outcome:
 
-![Event command](EventImage.png)
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/EventImage.png">
+</p>
 
 ### Show your lists of tasks: `list`
 - You can show the list of all your tasks with the `list` command.
@@ -77,8 +84,9 @@ Example of usage:
 
 Expected outcome:
 
-![List command](ListImage.png)
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/ListImage.png">
+</p>
 
 ### Delete a task: `delete`
 - All tasks are arranged by index in a list.You can then use the `delete` command to delete a task by specifying its task index.
@@ -95,7 +103,9 @@ Example of usage:
 
 Expected outcome:
 
-![Delete command](DeleteImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/DeleteImage.png">
+</p>
 
 ### Mark task as done: `done`
 - Similar to deleting a task, you can use the `done` command to mark a task as done by specifying its task index.
@@ -111,7 +121,9 @@ Example of usage:
 
 Expected outcome:
 
-![Done command](DoneImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/DoneImage.png">
+</p>
 
 ### Find task by description: `find`
 - You can `find` tasks by their description by inputting a search string. 
@@ -129,7 +141,9 @@ Example of usage:
 
 Expected outcome:
 
-![Find by description command](FindDescriptionImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/FindDescriptionImage.png">
+</p>
 
 ### Find task by date: `find/date`
 - You can use `find/date` command to find a deadline or event by date. 
@@ -146,8 +160,9 @@ Example of usage:
 
 Expected outcome:
 
-![Find by date command](FindDateImage.png)
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/FindDateImage.png">
+</p>
 
 ### Sort all tasks: `sort`
 
@@ -163,7 +178,10 @@ Example of usage:
 `deadline Assignment /by 15/09/2021` followed by `event Staycation /at 14/09/2021 to 16/09/2021`, `todo Homework` 
 and then `sort`.
 
-![Sort command](SortImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/SortImage.png">
+</p>
+
 
 
 ### Exiting the application: `bye`
@@ -183,10 +201,17 @@ Examples:
 
 Unknown command warning:
 
-![Unknown command](UnknownCommandImage.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/UnknownCommandImage.png">
+</p>
+
 
 Invalid format warning:
-![Invalid format command](InvalidFormatImage.png)
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/aikenwx/ip/master/docs/InvalidFormatImage.png">
+</p>
+
 
 
 ## Command Summary
