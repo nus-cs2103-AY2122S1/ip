@@ -1,2 +1,4 @@
-T | 0 | test duke | -
+T | 1 | test duke | -
 D | 1 | my homework | 2021-12-21 | -
+E | 0 | meeting with friends | Friday | -
+T | 0 | assignment 2 | urgent

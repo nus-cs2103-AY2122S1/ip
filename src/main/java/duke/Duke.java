@@ -57,9 +57,8 @@ public class Duke extends Application {
     }
 
     /**
-     * From the tutorial at https://se-education.org/guides/tutorials/javaFxPart3.html
      * Creates a label with the specified text and adds it to the dialog container.
-     *
+     * From the tutorial at https://se-education.org/guides/tutorials/javaFxPart3.html
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -71,9 +70,11 @@ public class Duke extends Application {
     }
 
     /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply, then appends them to
+     * the dialog container. Also flips Duke's dialog so it appears on the left.
+     * Clears the user input after processing.
+     *
      * Provided by the tutorial at https://se-education.org/guides/tutorials/javaFxPart3.html
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Also flips Duke's dialog so it appears on the left. Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -92,8 +93,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Provided by the tutorial at https://se-education.org/guides/tutorials/javaFxPart2.html
+     * Starts the app by calling this method.
      * @param stage The Stage object where all nodes will be displayed on
+     *
+     * Provided by the tutorial at https://se-education.org/guides/tutorials/javaFxPart2.html
      */
     @Override
     public void start(Stage stage) {
