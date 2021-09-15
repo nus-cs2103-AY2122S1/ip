@@ -194,9 +194,8 @@ public class Parser {
             }
 
             // If the extracted timestamp is too short to contain all of the relevant details
-            if (currIndex == instruction.length() ||
-                    currIndex + 27 >= instruction.length()) {
-                throw new JarvisException(Ui.INCOMPLETE_EVENT_TIMINGS);
+            if (currIndex == instruction.length() || instruction.substring(currIndex).length() != 27) {
+                throw new JarvisException(Ui.INCOMPLETE_EVENT_INFO);
 
             // If the date keyed in by the user is formatted wrongly
             } else if (instruction.charAt(currIndex + 7) != '/' &&
