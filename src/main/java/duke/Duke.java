@@ -71,12 +71,27 @@ public class Duke extends Application {
         //Step 1. Setting up required components
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
         sendButton = new Button("Send");
         mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        // remove after
+        /*
+        scrollPane.setBackground(new Background(new BackgroundFill(Color.RED,
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.RED,
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
+        dialogContainer.setStyle("-fx-background-color: #FF0000;");
+        mainLayout.setBackground(new Background(new BackgroundFill(Color.RED,
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
+         */
 
         scene = new Scene(mainLayout);
 
