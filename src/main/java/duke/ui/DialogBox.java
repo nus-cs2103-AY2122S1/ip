@@ -63,7 +63,7 @@ public class DialogBox extends HBox {
 
         displayPicture.setScaleX(0.75);
         displayPicture.setScaleY(0.75);
-        displayPicture.setClip(new Circle(40, 40, 40));
+        displayPicture.setClip(new Circle(47.5, 40, 40));
         displayPicture.setImage(img);
     }
 

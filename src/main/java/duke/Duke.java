@@ -26,9 +26,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     public Duke(String name) {
         this.name = name;
@@ -39,7 +36,7 @@ public class Duke extends Application {
     }
 
     public Duke() {
-        this("HAL");
+        this("VIN");
     }
 
     public String greet() {
@@ -66,7 +63,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("HAL");
+        stage.setTitle(name);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

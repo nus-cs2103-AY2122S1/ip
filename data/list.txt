@@ -1,10 +1,3 @@
 [T][X] read book (tags: #urgent #impt)
 [D][X] return book (tags: #very urgent) (deadline: Dec 1 2021)
-[T][ ] join sports club (tags: #sport)
-[T][ ] borrow book 
-[D][ ] finish homework  (deadline: Sep 14 2021)
-[T][ ] eat (tags: #urgent)
-[T][X] sleep 
-[T][ ] drink water (tags: #mandatory)
-[T][ ] study 
-[T][ ] eat 
+[E][ ] project meeting  (tags: #cs2103t) (at: Mon 2-4pm)
