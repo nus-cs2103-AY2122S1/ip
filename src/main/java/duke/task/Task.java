@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -42,7 +43,7 @@ public class Task {
      * Overloads task command when event and deadline happen.
      *
      * @param description The task content.
-     * @param atOrBy The time when the task event or deadline happen.
+     * @param atOrBy      The time when the task event or deadline happen.
      */
     public Task(String description, String atOrBy) {
         this.description = description;
@@ -259,22 +260,94 @@ public class Task {
      * @param date The date input.
      * @return The string representing the month, day or not recognised.
      */
-    public String withinMonthOrDay(String date) {
+    public String withinMonthOrWeek(String date) {
         String splitString = " ";
+        String dateDifference = this.getDatesDifferences(date);
+        String[] differenceParts = dateDifference.split(splitString);
+        String yearDifference = differenceParts[0];
+        String monthDifference = differenceParts[1];
+        String dayDifference = differenceParts[2];
+        String dayAfter = differenceParts[3];
+        String monthAfter = differenceParts[4];
+        //judge within the month or week.
+        boolean isLessThanYear = yearDifference.equals("0");
+        boolean isLessThanMonth = monthDifference.equals("0");
+        boolean isMonthAfter = monthAfter.equals("yes");
+        boolean isDayAfter = dayAfter.equals("yes");
+        boolean isWithinMonth = isLessThanMonth && isLessThanYear && isMonthAfter && isDayAfter;
+        boolean isWithinWeek = isWithinMonth && Integer.parseInt(dayDifference) < 7;
+        //format the output.
+        return isWithinWeek ? "week" : isWithinMonth ? "month" : "not within time period";
+    }
+
+    /**
+     * Returns the int form of a month.
+     *
+     * @param month The string representation of month.
+     * @return The int form of month.
+     */
+    public int toMonthIntForm(String month) {
+        switch (month) {
+        case "Jan":
+            return 1;
+        case "Feb":
+            return 2;
+        case "Mar":
+            return 3;
+        case "Apr":
+            return 4;
+        case "May":
+            return 5;
+        case "Jun":
+            return 6;
+        case "Jul":
+            return 7;
+        case "Aug":
+            return 8;
+        case "Sep":
+            return 9;
+        case "Oct":
+            return 10;
+        case "Nov":
+            return 11;
+        default:
+            return 12;
+        }
+    }
+
+    /**
+     * Returns the date differences between instance date and given date.
+     *
+     * @param date The given date.
+     * @return The date difference using year month and day.
+     */
+    public String getDatesDifferences(String date) {
+        String splitString = " ";
+        //get int form of the year month and day of an event.
         String[] partsEventDate = atOrBy.split(splitString);
-        String monthEvent = partsEventDate[0];
-        String yearEvent = partsEventDate[2];
-        String dayEvent = partsEventDate[1];
+        int yearEvent = Integer.parseInt(partsEventDate[2]);
+        int monthEvent = toMonthIntForm(partsEventDate[0]);
+        int dayEvent = Integer.parseInt(partsEventDate[1]);
+        //get int form of the year month and day of a date.
         String[] partsDate = date.split(splitString);
-        String monthDate = partsDate[0];
-        String yearDate = partsDate[2];
-        String dayDate = partsDate[1];
-        boolean isYearAfter = Integer.parseInt(yearDate) == Integer.parseInt(yearEvent);
-        boolean isMonthSame = monthDate.equals(monthEvent);
-        boolean isDaySame = dayDate.equals(dayEvent);
-        boolean isDayAfter = Integer.parseInt(dayDate) <= Integer.parseInt(dayEvent);
-        boolean isWithinDay = isMonthSame && isYearAfter && isDaySame;
-        boolean isWithinMonth = isMonthSame && isYearAfter && isDayAfter;
-        return isWithinDay ? "day" : isWithinMonth ? "month" : "not within time period";
+        int yearDate = Integer.parseInt(partsDate[2]);
+        int monthDate = toMonthIntForm(partsDate[0]);
+        int dayDate = Integer.parseInt(partsDate[1]);
+        //Initialise the dates using int form of year month and day provided before.
+        LocalDate from = LocalDate.of(yearDate, monthDate, dayDate);
+        LocalDate to = LocalDate.of(yearEvent, monthEvent, dayEvent);
+        //Calculate the difference in dates.
+        Period period = Period.between(from, to);
+        //Ensure past events not counted.
+        String monthAfter = "no";
+        if (monthDate <= monthEvent || (monthDate == 12 && monthEvent == 1)) {
+            monthAfter = "yes";
+        }
+        String dayAfter = "no";
+        if (dayDate <= dayEvent || monthDate < monthEvent) {
+            dayAfter = "yes";
+        }
+        return period.getYears() + splitString + period.getMonths() + splitString + period.getDays()
+                + splitString + dayAfter + splitString + monthAfter;
     }
 }

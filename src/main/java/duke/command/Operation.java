@@ -7,10 +7,8 @@ package duke.command;
  */
 public enum Operation {
     TODO,
-    DONE ,
     DEADLINE,
     EVENT,
-    DELETE,
     DATE,
-    FIND;
+    FIND
 }

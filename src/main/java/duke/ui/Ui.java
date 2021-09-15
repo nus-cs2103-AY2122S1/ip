@@ -1,22 +1,10 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.exception.LoadingException;
 import duke.task.Task;
 import duke.task.TaskList;
 
 public class Ui {
-    private Scanner sc;
-
-    /**
-     * Sets up the ui scanner.
-     */
-    public Ui() {
-        //User input.
-        sc = new Scanner(System.in);
-    }
-
     /**
      * Returns the formatted string output.
      *
@@ -25,8 +13,8 @@ public class Ui {
      * @return The desirable output string related to task.
      */
     public String getOutputFrame(String task, int count) {
-        String title = "Got it. I've added this task:\n";
-        String middle = task + "\n";
+        String title = "Got it. I've added this task:" + System.lineSeparator();
+        String middle = task + System.lineSeparator();
         String end = "Now you have " + count + " tasks in the list.";
         return title + middle + end;
     }
@@ -47,8 +35,8 @@ public class Ui {
      * @param tasks The list of tasks.
      */
     public String showDelete(Task shouldDelete, TaskList tasks) {
-        String title = "Noted. I've removed this task:\n";
-        String out = shouldDelete.toString() + "\n";
+        String title = "Noted. I've removed this task:" + System.lineSeparator();
+        String out = shouldDelete.toString() + System.lineSeparator();
         String end = "Now you have " + tasks.getSize() + " tasks in the list.";
         return title + out + end;
     }
@@ -77,7 +65,7 @@ public class Ui {
      * @param stringForm The string form of that task.
      */
     public String showDone(String stringForm) {
-        String title = "Nice! I've marked this task as done:\n";
+        String title = "Nice! I've marked this task as done:" + System.lineSeparator();
         String out = stringForm;
         return title + out;
     }
@@ -90,14 +78,14 @@ public class Ui {
      * Shows the coming tasks in string representation.
      *
      * @param taskListMonth The tasks happened within a month.
-     * @param taskListDay The tasks happened within a day.
+     * @param taskListWeek The tasks happened within a week.
      * @return The string showing coming tasks.
      */
-    public String showComings(TaskList taskListMonth, TaskList taskListDay) {
-        String titleMonth = "<<Coming tasks within same month>> \n";
-        String listInMonth = taskListMonth.toString() + "\n";
-        String titleDay = "<<Coming tasks within the same day>> \n";
-        String listInDay = taskListDay.toString() + "\n";
-        return titleMonth + listInMonth + titleDay + listInDay;
+    public String showComings(TaskList taskListMonth, TaskList taskListWeek) {
+        String titleMonth = "<<Coming tasks within a month>> " + System.lineSeparator();
+        String listInMonth = taskListMonth.toString() + System.lineSeparator();
+        String titleWeek = "<<Coming tasks within a week>> " + System.lineSeparator();
+        String listInWeek = taskListWeek.toString() + System.lineSeparator();
+        return titleMonth + listInMonth + titleWeek + listInWeek;
     }
 }

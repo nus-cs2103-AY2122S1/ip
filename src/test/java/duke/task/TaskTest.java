@@ -25,8 +25,8 @@ public class TaskTest {
         String now = dateNow.format(DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH));
         Task task1 = new Event("test event", now);
         Task task2 = new Todo("test todo");
-        String expected = "day";
-        assertEquals(expected, task1.withinMonthOrDay(now));
+        String expected = "week";
+        assertEquals(expected, task1.withinMonthOrWeek(now));
         assertNull(task2.atOrBy);
     }
 }

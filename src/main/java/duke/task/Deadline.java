@@ -7,21 +7,21 @@ package duke.task;
  */
 public class Deadline extends Task {
     /** Stores the deadline. */
-    private String by;
+    private String formatBy;
 
     /**
      * Creates a deadline task.
      *
      * @param description The content of this task.
-     * @param by The deadline.
+     * @param formatBy The deadline(in format).
      */
-    public Deadline(String description, String by) {
-        super(description, by);
-        this.by = by;
+    public Deadline(String description, String formatBy) {
+        super(description, formatBy);
+        this.formatBy = formatBy;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + formatBy + ")";
     }
 }

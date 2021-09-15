@@ -9,21 +9,21 @@ public class Event extends Task {
     /**
      * The time to do the event.
      */
-    private String at;
+    private String formatAt;
 
     /**
      * Sets up the event task.
      *
      * @param description The content of event task.
-     * @param at The time when the task should be done.
+     * @param formatAt The time when the task should be done(in format).
      */
-    public Event(String description, String at) {
-        super(description, at);
-        this.at = at;
+    public Event(String description, String formatAt) {
+        super(description, formatAt);
+        this.formatAt = formatAt;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + formatAt + ")";
     }
 }

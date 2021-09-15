@@ -118,12 +118,12 @@ public class TaskList {
      * @param type The string specified month or day.
      * @return The tasks that within a month or a day.
      */
-    public TaskList tasksWithinMonthOrDay(String type) {
+    public TaskList tasksWithinMonthOrWeek(String type) {
         TaskList currList = new TaskList();
         String now = currentTime();
         taskList.stream()
                 .filter(currTask -> !(currTask instanceof Todo))
-                .filter(currTask -> currTask.withinMonthOrDay(now).equals(type))
+                .filter(currTask -> currTask.withinMonthOrWeek(now).equals(type))
                 .forEach(currList::addElement);
         return currList;
     }
@@ -134,8 +134,8 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        String end = "\n";
-        String begin = "Here are the tasks in your list:\n";
+        String end = System.lineSeparator();
+        String begin = "Here are the tasks in your list:" + System.lineSeparator();
         sb.append(begin);
         for (int i = 0; i < count; i++) {
             if (i == count - 1) {

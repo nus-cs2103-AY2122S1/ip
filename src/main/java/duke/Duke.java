@@ -17,7 +17,7 @@ import duke.ui.Ui;
 public class Duke {
     private static TaskList tasks;
     private static Ui ui;
-    private Storage storage;
+    private final Storage storage;
 
     /**
      * Sets up duke instance dealing with file path.
@@ -45,7 +45,6 @@ public class Duke {
         String output;
         try {
             Command c = Parser.parse(input);
-            assert c != null;
             output = c.execute(tasks, ui, storage);
             return output;
         } catch (DukeException e) {
@@ -59,10 +58,10 @@ public class Duke {
      * @return The string representation of tasks within day or month in Ui.
      */
     public static String showComings() {
-        TaskList taskListMonth = tasks.tasksWithinMonthOrDay("month");
+        TaskList taskListMonth = tasks.tasksWithinMonthOrWeek("month");
         assert taskListMonth != null;
-        TaskList taskListDay = tasks.tasksWithinMonthOrDay("day");
-        assert taskListDay != null;
-        return ui.showComings(taskListMonth, taskListDay);
+        TaskList taskListWeek = tasks.tasksWithinMonthOrWeek("week");
+        assert taskListWeek != null;
+        return ui.showComings(taskListMonth, taskListWeek);
     }
 }

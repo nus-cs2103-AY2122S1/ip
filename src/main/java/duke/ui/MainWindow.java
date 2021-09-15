@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,14 +31,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Image userImage;
+    private Image dukeImage;
 
     /**
      * Initialises the gui.
      */
     @FXML
     public void initialize() {
+        initialiseImage();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcome();
         showReminders();
@@ -84,5 +86,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void showReminders() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Duke.showComings(), dukeImage));
+    }
+
+    @FXML
+    private void initialiseImage() {
+        InputStream userStream = this.getClass().getResourceAsStream("/images/user.png");
+        assert userStream != null;
+        userImage = new Image(userStream);
+        InputStream dukeStream = this.getClass().getResourceAsStream("/images/duke.png");
+        assert dukeStream != null;
+        dukeImage = new Image(dukeStream);
     }
 }

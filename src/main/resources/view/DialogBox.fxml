@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" prefWidth="404.0" stylesheets="@../style/style.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" prefWidth="404.0" stylesheets="@../style/style.css" type="javafx.scene.layout.HBox" xmlns = "http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <DialogPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="294.0" style="-fx-background-color: #464e43; -fx-background-radius: 30; -fx-padding: 10;">
          <content>

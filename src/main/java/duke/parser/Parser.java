@@ -103,7 +103,7 @@ public class Parser {
      * @return Whether the command is empty or not.
      */
     public static boolean isEmpty(String response) {
-        return response.equals("delete") || response.equals("todo") || response.equals("deadline")
+        return response.trim().equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")
                 || response.equals("find");
     }

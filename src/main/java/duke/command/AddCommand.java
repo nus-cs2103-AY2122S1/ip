@@ -94,7 +94,8 @@ public class AddCommand extends Command {
         String laterPart = Parser.checkContent(response, splitIndex, splitString);
         String[] parts = laterPart.split(splitString);
         String content = parts[0];
-        String time = Task.formatOutputDateAndTime(parts[1]);
-        return new String[] {content, time};
+        String time = parts[1];
+        String formattedTime = Task.formatOutputDateAndTime(time);
+        return new String[] {content, formattedTime};
     }
 }

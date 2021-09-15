@@ -39,7 +39,7 @@ public class MarkCommand extends Command {
         if (!Parser.checkIsDigit(response.substring(splitIndex))) {
             throw new MismatchedFormException("done", "integer");
         }
-        int taskNumber = Integer.parseInt(response.substring(5));
+        int taskNumber = Integer.parseInt(response.substring(5)); //from index 5 onwards it's task number.
         Task shouldMark = tasks.markElement(taskNumber - 1);
         String stringForm = shouldMark.toString();
         storage.replace(taskNumber - 1, tasks);
