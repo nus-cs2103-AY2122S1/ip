@@ -159,6 +159,7 @@ class HelpCommand extends Command {
                 + "delete <index> - delete the task at the index.\n\n"
                 + "done <index> - mark the task at the index as done.\n\n"
                 + "find <search string> - search the task description that matches the string.\n\n"
-                + "save - save the task to /data/duke.txt";
+                + "save - save the task to /data/duke.txt\n\n"
+                + "Press UP/DOWN to navigate your input history.";
     }
 }

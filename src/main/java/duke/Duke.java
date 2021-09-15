@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Duke(Hiko created by me) is a personal assistant.
  *
@@ -11,9 +14,11 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
     private TaskList tasks;
+    private List<String> history = new ArrayList<>();
+    private int historyIndex = 0;
 
     /**
-     * public constructor for Duke.
+     * Public constructor for Duke.
      *
      * @param path the path for the saved file.
      */
@@ -29,29 +34,16 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke(PATH).run();
-    }
-
-    private void run() {
-        Ui.getGreeting();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                Ui.showCaret();
-                String input = ui.readInput();
-                Command command = Parser.parse(input);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-            }
-        }
-    }
-
+    /**
+     * Gets the response according to the user input.
+     *
+     * @param input the raw input as a string
+     * @return a string of response
+     */
     public String getResponse(String input) {
         try {
+            history.add(input);
+            historyIndex = history.size();
             Command command = Parser.parse(input);
             return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
@@ -59,7 +51,41 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the welcome message.
+     *
+     * @return a string of welcome message.
+     */
     public String getWelcome() {
         return Ui.getGreeting();
+    }
+
+    /**
+     * Gets the last user input in the history of this instance.
+     * return the first input if there is no more last history.
+     *
+     * @return a string of user input history
+     */
+    public String getLastInput() {
+        historyIndex = Math.max(historyIndex - 1, 0);
+        return history.get(historyIndex);
+    }
+
+    /**
+     * Gets the next user input in the history of this instance.
+     * return an empty string if there is no more next history.
+     *
+     * @return a string of user input history
+     */
+    public String getNextInput() {
+        try {
+            String nextInput = history.get(historyIndex + 1);
+            historyIndex = Math.min(historyIndex + 1, history.size() - 1);
+            return nextInput;
+        } catch (IndexOutOfBoundsException e) {
+            return "";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }

@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -65,5 +67,20 @@ public class MainWindow extends BorderPane {
         );
 
         userInput.clear();
+    }
+
+    /**
+     * Gets the user input history and display to the text field.
+     * Sets the caret position to the last position.
+     */
+    @FXML
+    private void handleTextFieldKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.UP) {
+            userInput.setText(duke.getLastInput());
+        }
+        if (event.getCode() == KeyCode.DOWN) {
+            userInput.setText(duke.getNextInput());
+        }
+        userInput.positionCaret(userInput.getLength());
     }
 }
