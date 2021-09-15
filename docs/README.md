@@ -186,30 +186,33 @@ Bye!
 ------------------------------------------------------------------------------------------------------------------
 ## FAQ
 **Q:** How do I transfer my data to another Computer?
+
 **A:** Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke home folder.
 
 **Q:** The program keeps telling me that my file is corrupted. What should I do?
+
 **A:** This might be the result of accidental tampering with your `.txt` file in your Duke home folder. You may either open it to see if there is any erroneous formatting and make the necessary changes, or delete the file and restart the app to create a new `.txt` file.
 
 **Q:** Is there a command that allows me to clear all my tasks?
+
 **A:** This current version of Duke does not support such a function, but may do so in the future!
 
 **Q:** I tried searching for multiple keywords with the `find` command, but received no results. What is wrong?
+
 **A:** Currently, there is no support for searching for multiple keywords, so the app will take the command to be looking for a single phrase instead. This may be implemented in the future!
 
 **Q:** Is there support for adding multiple tasks?
+
 **A:** Not at the moment, but it may do so in the future!
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
-Action | Format
-------------- | -------------------------------------------------------------------------
-**Add to-do** | `todo TASK` e.g., `todo homework`
-**Add deadline** | `deadline TASK /by YYYY-MM-DD` e.g., `deadline assignment /by 2021-09-15`
-**Add event** | `event TASK /at YYYY-MM-DD` e.g., `event meet Tim /at 2021-10-15`
-**List** | `list`
-**Delete** | `delete INDEX [MORE_INDEXES]` e.g., `delete 3 4 5`
-**Done** | `done INDEX [MORE_INDEXES]` e.g., `done 1 2 3`
-**Find** | `find KEYWORD` e.g., `find read`
-**Bye** | `bye`
+**Add to-do:** `todo TASK` e.g., `todo homework`
+**Add deadline:** `deadline TASK /by YYYY-MM-DD` e.g., `deadline assignment /by 2021-09-15`
+**Add event:** `event TASK /at YYYY-MM-DD` e.g., `event meet Tim /at 2021-10-15`
+**List:** `list`
+**Delete:** `delete INDEX [MORE_INDEXES]` e.g., `delete 3 4 5`
+**Done:** `done INDEX [MORE_INDEXES]` e.g., `done 1 2 3`
+**Find:** `find KEYWORD` e.g., `find read`
+**Bye:** `bye`
