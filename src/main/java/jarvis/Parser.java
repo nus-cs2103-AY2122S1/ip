@@ -146,14 +146,10 @@ public class Parser {
             taskDescription += instruction.substring(currIndex, currIndex + 1);
             currIndex++;
         }
-        // If the description of the deadline task is empty
-        if (currIndex == 8) {
-            throw new JarvisException(Ui.EMPTY_DEADLINE_DESCRIPTION);
-        // If the date and timing details are missing
-        } else if (currIndex == instruction.length()) {
-            throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
+
         // If the extracted deadline is too short to contain all of the relevant details
-        } else if (instruction.substring(currIndex).length() != 21) {
+        if (currIndex == 8 || currIndex == instruction.length() ||
+                instruction.substring(currIndex).length() != 21) {
             throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
 
         // If the date keyed in by the user is formatted wrongly
@@ -196,11 +192,9 @@ public class Parser {
             currIndex++;
         }
 
-        // If the description of the event task is empty
-        if (currIndex == 5 || currIndex == instruction.length()) {
-            throw new JarvisException(Ui.EMPTY_EVENT_DESCRIPTION);
-        // If the extracted timestamp is too short to contain all of the relevant details
-        } else if (instruction.substring(currIndex).length() != 27) {
+        // If the extracted string is too short to contain all of the relevant details
+        if (currIndex == 5 || currIndex == instruction.length() ||
+                instruction.substring(currIndex).length() != 27) {
             throw new JarvisException(Ui.INCOMPLETE_EVENT_INFO);
 
         // If the date keyed in by the user is formatted wrongly
