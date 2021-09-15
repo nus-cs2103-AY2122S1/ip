@@ -1,3 +1,5 @@
 T|0| watch movie
 T|0| read book 
-E|1| hello | Thu, Sep 16 2021
+E|1| hello | Sun, Aug 01 2021
+E|0| hehe | Sat, Oct 16 2021 03:00 pm
+D|0| hw | Fri, Sep 17 2021

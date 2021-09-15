@@ -7,7 +7,6 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -37,23 +36,6 @@ public class MyJournal extends Application {
 
     /**
      * Constructs the object MyJournal.
-     *
-     * @param filepath The filepath to MyJournal file.
-     */
-    public MyJournal(String filepath) {
-        ui = new Ui();
-        parser = new Parser();
-        storage = new Storage(filepath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Constructs the object MyJournal.
      */
     public MyJournal() {
         ui = new Ui();
@@ -65,28 +47,6 @@ public class MyJournal extends Application {
             e.printStackTrace();
             tasks = new TaskList();
         }
-    }
-
-    /**
-     * Runs the whole programme of MyJournal.
-     *
-     * @throws IOException The exception thrown when file is corrupted.
-     */
-    public void run() throws IOException {
-        String input;
-        Scanner reader = new Scanner(System.in);
-        ui.welcomeMessage();
-        while (true) {
-            input = reader.nextLine();
-            Scanner currLine = new Scanner(input);
-            if (input.equals("bye")) {
-                break;
-            } else {
-                parser.parse(currLine, tasks, ui);
-            }
-            storage.saveFile(tasks.toString());
-        }
-        ui.goodByeMessage();
     }
 
     /**
@@ -151,20 +111,6 @@ public class MyJournal extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**

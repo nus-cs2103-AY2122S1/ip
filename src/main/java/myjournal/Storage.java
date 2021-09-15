@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import myjournal.task.Deadline;
 import myjournal.task.Event;
@@ -56,35 +57,20 @@ public class Storage {
             currLine = sc.nextLine();
             String taskDescription = currLine.substring(5);
             boolean isDone = currLine.charAt(2) == '1';
+            String[] arr = taskDescription.split(Pattern.quote("|"));
+            String description = arr[0];
             if (currLine.charAt(0) == 'T') {
-                Todo todo = new Todo(taskDescription);
+                Todo todo = new Todo(description);
                 todo.setState(isDone);
                 tasks.add(todo);
+            } else if (currLine.charAt(0) == 'E') {
+                Event event = new Event(description, arr[1]);
+                event.setState(isDone);
+                tasks.add(event);
             } else {
-                String[] arr = taskDescription.split(" ");
-                String description = "";
-                String time = "";
-                boolean check = false;
-                for (String s : arr) {
-                    if (s.equals("|")) {
-                        check = true;
-                    } else {
-                        if (check) {
-                            time = time + " " + s;
-                        } else {
-                            description = description + s + " ";
-                        }
-                    }
-                }
-                if (currLine.charAt(0) == 'E') {
-                    Event event = new Event(description, time);
-                    event.setState(isDone);
-                    tasks.add(event);
-                } else {
-                    Deadline deadline = new Deadline(description, time);
-                    deadline.setState(isDone);
-                    tasks.add(deadline);
-                }
+                Deadline deadline = new Deadline(description, arr[1]);
+                deadline.setState(isDone);
+                tasks.add(deadline);
             }
         }
         return tasks;
