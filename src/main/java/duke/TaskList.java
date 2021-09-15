@@ -134,18 +134,17 @@ public class TaskList {
     private String executeCommandOnIndex(String userInput, ArrayList<Task> userInputRecords, String command) {
         try {
             int itemIndex = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+            Task targetTask = userInputRecords.get(itemIndex);
             if (command.equals("markDone")) {
-                Task taskDone = userInputRecords.get(itemIndex);
-                taskDone.setDone(true);
-                userInputRecords.set(itemIndex, taskDone);
+                targetTask.setDone(true);
+                userInputRecords.set(itemIndex, targetTask);
                 storage.autoSave();
                 return "Nice! I've marked this task as done:\n" + userInputRecords.get(itemIndex) + "\n";
             } else {
                 assert command.equals("delete");
-                Task itemDeleted = userInputRecords.get(itemIndex);
                 userInputRecords.remove(itemIndex);
                 storage.autoSave();
-                return "Noted. I've removed this task:\n" + itemDeleted + "\n"
+                return "Noted. I've removed this task:\n" + targetTask + "\n"
                         + "Now you have " + userInputRecords.size() + " tasks in the list.\n";
             }
         } catch (IndexOutOfBoundsException e) {
@@ -166,8 +165,7 @@ public class TaskList {
         String keyword = userInput.replace("find", "").trim();
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task userInputRecord : userInputRecords) {
-            String taskTitle = userInputRecord.getTaskTitle();
-            if (taskTitle.contains(keyword)) {
+            if (userInputRecord.getTaskTitle().contains(keyword)) {
                 searchResults.add(userInputRecord);
             }
         }

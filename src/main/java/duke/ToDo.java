@@ -25,6 +25,8 @@ public class ToDo extends Task {
 
     /**
      * Two todo objects are equal iff they are equal tasks and they are both ToDo objects.
+     *
+     * @param another the object to be compared with
      * */
     @Override
     public boolean equals(Object another) {

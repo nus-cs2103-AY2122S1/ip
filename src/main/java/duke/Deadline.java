@@ -44,6 +44,8 @@ public class Deadline extends Task {
 
     /**
      * Two deadline objects are equal iff they are equal tasks and they have the same ddl.
+     *
+     * @param another the object to be compared with
      * */
     @Override
     public boolean equals(Object another) {

@@ -44,6 +44,8 @@ public class Event extends Task {
 
     /**
      * Two event objects are equal iff they are equal tasks and they have the same date.
+     *
+     * @param another the object to be compared with
      * */
     @Override
     public boolean equals(Object another) {

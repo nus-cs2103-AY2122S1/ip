@@ -28,7 +28,7 @@ public class Storage {
     }
 
     /**
-     * Automatically(without any user command) loads the users inputs from ../data/record when the program is restarted.
+     * Loads the users inputs from ../data/record when the program is restarted automatically(without any user command).
      */
     public void autoLoad() {
         try {
@@ -59,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Automatically(without any user command) saves the users inputs to ../data/record.
+     * Saves the users inputs to ../data/record automatically(without any user command)
      */
     public void autoSave() {
         try {

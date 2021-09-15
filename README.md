@@ -23,4 +23,4 @@
 - deleteAll: delete all saved tasks in the task list;
 - find <**keyword**>: find all tasks with description containing the **keyword**;
 - update <*index*> /to <**Task formatted in ToDo/Deadline/Event**>;
-- help: shows the list of avaliable command.
+- help: shows the list of available command.

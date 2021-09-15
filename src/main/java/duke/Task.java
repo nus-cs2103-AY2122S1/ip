@@ -54,6 +54,8 @@ public class Task {
 
     /**
      * Two task objects are equal iff they have the same task title and same isDone value.
+     *
+     * @param another the object to be compared with
      * */
     @Override
     public boolean equals(Object another) {
