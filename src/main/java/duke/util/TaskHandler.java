@@ -19,7 +19,7 @@ public class TaskHandler {
     private static final String NO_TASKS_FOUND = "Nothing in the list... :(\n"
             + "Use todo/event/deadline to add something first! :^)";
     private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n"
-            + "- %s\nYou currently have %d undone task(s) in the list.";
+            + "- %s\nYou currently have %d task(s) in the list.";
     private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n"
             + "- %s\nYou currently have %d undone task(s) in the list.";
     private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n"
@@ -49,7 +49,7 @@ public class TaskHandler {
      */
     public String addTask(Task task) {
         taskList.add(task);
-        return String.format(TASK_ADDED_MESSAGE, task.toString(), getNumUndone());
+        return String.format(TASK_ADDED_MESSAGE, task.toString(), getNumTotal());
     }
 
     /**
