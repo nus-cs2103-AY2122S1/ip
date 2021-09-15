@@ -5,11 +5,11 @@ via a Command Line Interface** (CLI) while still having the benefits
 of a Graphical User Interface (GUI). You can keep track of all the
 tasks you have using this app!
 
-##Quick start
+## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
-2. Download the latest duke.jar from here.
+2. Download the latest duke.jar from [here](https://github.com/xiangjunn/ip/releases).
 
 3. Copy the file to the folder you want to use as the home folder
 for your Duke app.
@@ -32,10 +32,6 @@ Some example commands you can try:
 - `done 1` : Mark the 1st task shown in the task list as done.
 
 ## Features 
-
-### Feature-ABC
-
-Description of the feature.
 
 ### Feature-Add
 
