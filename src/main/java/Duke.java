@@ -1,6 +1,7 @@
 import java.io.File;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,9 +9,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Parser;
 import main.Storage;
@@ -32,6 +32,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
 
 
     /**
@@ -57,14 +58,15 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        Scene scene = new Scene(helloWorld, Color.CYAN); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
+        dialogContainer = new VBox(5);
+
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -72,6 +74,7 @@ public class Duke extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         scene = new Scene(mainLayout);
 
@@ -95,10 +98,12 @@ public class Duke extends Application {
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
+        sendButton.setTextFill(Color.BLACK);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -123,6 +128,8 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         Label greetings = new Label("Hello! I'm Grace" + "\n" + "How can I help you?");
+        greetings.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, new CornerRadii(0), Insets.EMPTY)));
+        greetings.setTextFill(Color.BLACK);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greetings, new ImageView(duke)));
 
@@ -157,9 +164,13 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
+        userText.setTextFill(Color.BLACK);
+        userText.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(0), Insets.EMPTY)));
         String response = this.getResponse(userInput.getText());
         assert response.length() > 0 : "response cannot be empty";
         Label dukeText = new Label(response);
+        dukeText.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, new CornerRadii(0), Insets.EMPTY)));
+        dukeText.setTextFill(Color.BLACK);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
