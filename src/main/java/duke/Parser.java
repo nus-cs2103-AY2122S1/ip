@@ -37,8 +37,8 @@ public class Parser {
             return "help";
         } else if (str.equalsIgnoreCase("list")) {
             return "list";
-        } else if (str.equalsIgnoreCase("Todo")) {
-            return "Todo";
+        } else if (str.equalsIgnoreCase("todo")) {
+            return "todo";
         } else if (str.equalsIgnoreCase("deadline")) {
             return "deadline";
         } else if (str.equalsIgnoreCase("event")) {
