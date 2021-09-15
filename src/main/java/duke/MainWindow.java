@@ -87,7 +87,7 @@ public class MainWindow extends AnchorPane {
 
     public void  popReminder(String reminder){
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog( reminder, dukeImage)
+                DialogBox.getDukeDialog(reminder, dukeImage)
         );
     }
 }

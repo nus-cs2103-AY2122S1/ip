@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Command that adds tasks.
  */
@@ -12,8 +14,11 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.addTaskToFile(taskToBeAdded);
         tasks.add(taskToBeAdded);
+        storage.addTaskToFile(taskToBeAdded);
+        TaskList taskList = new TaskList(new ArrayList<Task>());
+        taskList.add(taskToBeAdded);
+        ui.addReminder(taskList);
         return ui.addTask(taskToBeAdded, tasks.size());
     }
 

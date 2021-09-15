@@ -1,11 +1,6 @@
 package duke;
 
-import javafx.application.Platform;
-import javafx.scene.layout.AnchorPane;
-
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.ArrayList;
 
 /**
  * The Duke bot.
@@ -27,17 +22,25 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = storage.convertFileToTaskList();
         ui = new Ui();
-        initializeReminder();
     }
 
-    private void initializeReminder(){
-        ui.setReminder(main, tasks);
+    private void initializeReminder() {
+        ui.setMainWindow(main);
+        ui.addReminder(tasks);
     }
 
-    public Duke() {}
+//    public void addReminder(Task task) {
+//        TaskList taskList = new TaskList(new ArrayList<Task>());
+//        taskList.add(task);
+//        ui.addReminder(taskList);
+//    }
 
-    public void setMain(MainWindow main){
+    public Duke() {
+    }
+
+    public void setMain(MainWindow main) {
         this.main = main;
+        initializeReminder();
     }
 
     /**

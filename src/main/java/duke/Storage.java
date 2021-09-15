@@ -3,6 +3,7 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,10 +34,6 @@ public class Storage {
         }
     }
 
-
-
-
-
     /**
      * Converts all tasks derived from the storage file to TaskList.
      *
@@ -60,6 +57,7 @@ public class Storage {
         return taskList;
     }
 
+
     /**
      * Converts the string representation of task to task object.
      *
@@ -74,24 +72,32 @@ public class Storage {
         String status = newTaskCommands[1];
         String taskDescription = newTaskCommands[2];
 
-
-        int taskTimeStartIndex = taskType.length() + splitSign.length()
-                + status.length() + splitSign.length()
-                + taskDescription.length() + splitSign.length();
-        String taskTime = taskString.substring(taskTimeStartIndex);
         Task task;
+        String reminderTime;
         switch(taskType) {
         case "T":
-            String reminderTime = newTaskCommands.length > 3 ? newTaskCommands[3] : "";
+            reminderTime = newTaskCommands[4];
             task = reminderTime.length() > 0
-                    ? new ToDo(taskDescription,reminderTime)
+                    ? new ToDo(taskDescription, reminderTime)
                     : new ToDo(taskDescription);
             break;
         case "D":
-            task = new Deadline(taskDescription, taskTime);
+            String deadlineTime = newTaskCommands[3];
+            reminderTime = newTaskCommands[4];
+            task = reminderTime.length() > 0
+                    ? new Deadline(taskDescription, deadlineTime, reminderTime)
+                    : new Deadline(taskDescription, deadlineTime);
             break;
         case "E":
-            task = new Event(taskDescription, taskTime);
+            String eventTime = newTaskCommands[3];
+            String[] startingEndingTime = eventTime.split("--");
+            String from = startingEndingTime[0];
+            String to = startingEndingTime[1];
+
+            reminderTime = newTaskCommands[4];
+            task = reminderTime.length() > 0
+                    ? new Event(taskDescription, from, to, reminderTime)
+                    : new Event(taskDescription, from, to);
             break;
         default:
             throw new DukeException("Can't understand the task icon '" + taskType + "'");
@@ -101,13 +107,6 @@ public class Storage {
         }
         return task;
     }
-
-
-
-
-
-
-
 
     /**
      * Updates the file with the new TaskList.
@@ -136,17 +135,19 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
             assert (!task.getDescription().contains("&&"));
-            fileWriter.write(task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
-                    + "&&" + task.getTaskTime() + "\n");
+            String reminderTime = task.hasReminder()
+                    ? task.getReminderTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+                    : "";
+            String output = task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
+                    + "&&" + task.getTaskTime() + "&&";
+            if (!reminderTime.equals("")) {
+                output += reminderTime + "&&";
+            }
+            output += "\n";
+            fileWriter.write(output);
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-
-
-
-
-
-
 }

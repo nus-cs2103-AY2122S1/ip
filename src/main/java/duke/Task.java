@@ -10,8 +10,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    protected boolean isNeedReminder;
+    protected boolean hasReminder;
     protected LocalDateTime reminderTime;
+
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
     /**
      * Default constructor for Task.
@@ -19,7 +21,7 @@ public class Task {
     public Task() {
         this.description = "";
         this.isDone = false;
-        isNeedReminder = false;
+        hasReminder = false;
     }
 
     /**
@@ -30,12 +32,12 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        isNeedReminder = false;
+        hasReminder = false;
     }
 
     public Task(String description, String reminderTime){
         this.description = description;
-        this.isNeedReminder = true;
+        this.hasReminder = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         this.reminderTime = LocalDateTime.parse(reminderTime, formatter);
     }
@@ -97,11 +99,15 @@ public class Task {
         return "";
     }
 
-    public boolean isNeedReminder() {
-        return isNeedReminder;
+    public boolean hasReminder() {
+        return hasReminder;
     }
 
     public LocalDateTime getReminderTime() {
         return reminderTime;
+    }
+
+    public static DateTimeFormatter getDateTimeFormatter() {
+        return dateTimeFormatter;
     }
 }

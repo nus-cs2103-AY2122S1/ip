@@ -1,6 +1,8 @@
 package duke;
 
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * The class that Parses the command line from user.
@@ -62,14 +64,26 @@ public class Parser {
      * @throws ParserException Exception generated while parsing the string.
      */
     private Task parseToDo(String input) throws ParserException {
-        String[] command = input.split(splitRegex);
-        if (command.length <= 1) {
-            throw new ParserException("The description of a todo "
-                    + "cannot be empty.");
+        if (input.split("todo ").length < 1) {
+            throw new ParserException("The description of a todo cannot be empty.");
         }
-        int descriptionStartIndex = 5;
-        assert (input.length() > descriptionStartIndex);
-        return new ToDo(input.substring(descriptionStartIndex));
+        String content = input.split("todo ")[1];
+        if (content.contains("/reminder ")) {
+            if (content.split("/reminder ").length < 1 || content.split("/reminder ")[0].length() == 0) {
+                throw new ParserException("The description of a todo cannot be empty.");
+            }
+            String description = content.split("/reminder ")[0];
+            String reminderTime = content.split("/reminder ")[1];
+            try {
+                return new ToDo(description, reminderTime);
+            } catch (DateTimeParseException e) {
+                throw new ParserException("Invalid date, "
+                        + "please enter a valid date in the format: "
+                        + "yyyy/MM/dd HH:mm");
+            }
+        } else {
+            return new ToDo(content);
+        }
     }
 
     /**
@@ -80,26 +94,37 @@ public class Parser {
      * @throws ParserException Exception generated while parsing the string.
      */
     private Task parseDeadline(String input) throws ParserException {
-        String[] command = input.split(splitRegex);
-        if (command.length <= 1 || command[1].equals("/by")) {
-            throw new ParserException("The description of deadline task "
-                    + "cannot be empty.");
+        assert (input.contains("deadline "));
+        String content = input.split("deadline ")[1];
+        String description = content.substring(0, content.indexOf("/by"));
+        if (description.length() == 0) {
+            throw new ParserException("The description of deadline task cannot be empty.");
         }
-        int deadlineStartIndex = input.indexOf("/by") + 4;
-        boolean isDeadlineEmpty = deadlineStartIndex >= input.length();
-        if (!input.contains("/by") || isDeadlineEmpty) {
-            throw new ParserException("Please enter '/by' followed by a task deadline.");
+        int deadlineStartIndex = content.indexOf("/by") + 4;
+        int deadlineEndIndex = content.indexOf("/by") + 19;
+        if (deadlineEndIndex >= content.length()) {
+            throw new ParserException("please enter a valid time in the format: "
+                    + "yyyy/MM/dd HH:mm");
         }
-        int descriptionStartIndex = 9;
-        int descriptionEndIndex = input.indexOf("/by") - 1;
-        assert (input.length() > descriptionStartIndex);
-        String content = input.substring(descriptionStartIndex, descriptionEndIndex);
-        String by = input.substring(deadlineStartIndex);
+        String deadline = content.substring(deadlineStartIndex, deadlineEndIndex + 1);
+        String reminderTime = "";
+        if (content.contains("/reminder ")) {
+            int reminderTimeStartIndex = content.indexOf("/reminder ") + 10;
+            int reminderTimeEndIndex = content.indexOf("/reminder ") + 25;
+            if (reminderTimeEndIndex >= content.length()) {
+                throw new ParserException("please enter a valid time in the format: "
+                        + "yyyy/MM/dd HH:mm");
+            }
+            reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
+        }
         try {
-            return new Deadline(content, by);
+            if (reminderTime.equals("")) {
+                return new Deadline(description, deadline);
+            }
+            return new Deadline(description, deadline, reminderTime);
         } catch (DateTimeParseException e) {
             throw new ParserException("Invalid date, "
-                    + "please enter a valid date in the format: "
+                    + "please enter a valid time period in the format: "
                     + "yyyy/MM/dd HH:mm");
         }
     }
@@ -112,27 +137,49 @@ public class Parser {
      * @throws ParserException Exception generated while parsing the string.
      */
     private Task parseEvent(String input) throws ParserException {
-        String[] command = input.split(splitRegex);
-        if (command.length <= 1 || command[1].equals("/at")) {
-            throw new ParserException("The description of event "
-                    + "cannot be empty.");
+
+        /* Get event description */
+        assert (input.contains("event "));
+        String content = input.split("event ")[1];
+        String description = content.substring(0, content.indexOf("/at"));
+        if (description.length() == 0) {
+            throw new ParserException("The description of event cannot be empty.");
         }
-        int eventStartIndex = input.indexOf("/at") + 4;
-        boolean isEventTimeEmpty = eventStartIndex >= input.length();
-        if (!input.contains("/at") || isEventTimeEmpty) {
-            throw new ParserException("Please enter '/at' followed by an event time.");
+
+        /* Get event time */
+        int eventStartIndex = content.indexOf("/at") + 4;
+        int eventEndIndex = content.indexOf("/at") + 37;
+        System.out.println(content.substring(eventStartIndex, eventEndIndex + 1));
+        if (eventEndIndex >= content.length()) {
+            throw new ParserException("please enter a valid time in the format: "
+                    + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
         }
-        int descriptionStartIndex = 6;
-        int descriptionEndIndex = input.indexOf("/at") - 1;
-        assert (input.length() > descriptionStartIndex);
-        String content = input.substring(descriptionStartIndex, descriptionEndIndex);
-        String at = input.substring(eventStartIndex);
+        String eventPeriod = content.substring(eventStartIndex, eventEndIndex + 1);
+
+        /* Get reminder time */
+        String reminderTime = "";
+        if (content.contains("/reminder ")) {
+            int reminderTimeStartIndex = content.indexOf("/reminder ") + 10;
+            int reminderTimeEndIndex = content.indexOf("/reminder ") + 25;
+            if (reminderTimeEndIndex >= content.length()) {
+                throw new ParserException("please enter a valid time in the format: "
+                        + "yyyy/MM/dd HH:mm");
+            }
+            reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
+        }
+
         try {
-            return new Event(content, at);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            String[] startingEndingTime = eventPeriod.split("--");
+            String from = startingEndingTime[0];
+            String to = startingEndingTime[1];
+            if (reminderTime.equals("")) {
+                return new Event(description, from, to);
+            }
+            return new Event(description, from, to, reminderTime);
+        } catch (DateTimeParseException e) {
             throw new ParserException("Invalid date, "
                     + "please enter a valid time period in the format: "
-                    + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
+                    + "yyyy/MM/dd HH:mm");
         }
     }
 }

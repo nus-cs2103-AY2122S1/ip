@@ -10,12 +10,16 @@ public class Deadline extends Task {
      * Constructor of Deadline.
      *
      * @param description Description of deadline task.
-     * @param by The deadline of task.
+     * @param by          The deadline of task.
      */
     public Deadline(String description, String by) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        this.by = LocalDateTime.parse(by, formatter);
+        this.by = LocalDateTime.parse(by, Task.getDateTimeFormatter());
+    }
+
+    public Deadline(String description, String by, String reminderTime) {
+        super(description, reminderTime);
+        this.by = LocalDateTime.parse(by, Task.getDateTimeFormatter());
     }
 
     @Override
@@ -32,7 +36,7 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskTime() {
-        return by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+        return by.format(Task.getDateTimeFormatter());
     }
 
     @Override

@@ -70,7 +70,7 @@ public class TaskList {
     public ArrayList<Task> getReminderList(){
         ArrayList<Task> result = new ArrayList<>();
         for(Task task : tasks){
-            if(task.isNeedReminder()){
+            if(task.hasReminder()){
                 result.add(task);
             }
         }

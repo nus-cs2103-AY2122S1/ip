@@ -11,16 +11,19 @@ public class Event extends Task {
      * Constructor for event.
      *
      * @param description Description of event.
-     * @param at Event time.
+     * @param from        Event starting time.
+     * @param to          Event ending time.
      */
-    public Event(String description, String at) {
+    public Event(String description, String from, String to) {
         super(description);
-        String[] startingEndingTime = at.split("--");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-        String from = startingEndingTime[0];
-        String to = startingEndingTime[1];
-        this.from = LocalDateTime.parse(from, formatter);
-        this.to = LocalDateTime.parse(to, formatter);
+        this.from = LocalDateTime.parse(from, Task.getDateTimeFormatter());
+        this.to = LocalDateTime.parse(to, Task.getDateTimeFormatter());
+    }
+
+    public Event(String description, String from, String to, String reminderTime) {
+        super(description, reminderTime);
+        this.from = LocalDateTime.parse(from, Task.getDateTimeFormatter());
+        this.to = LocalDateTime.parse(to, Task.getDateTimeFormatter());
     }
 
     @Override
@@ -38,9 +41,9 @@ public class Event extends Task {
 
     @Override
     public String getTaskTime() {
-        return from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+        return from.format(Task.getDateTimeFormatter())
                 + "--"
-                + to.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+                + to.format(Task.getDateTimeFormatter());
     }
 
     @Override
