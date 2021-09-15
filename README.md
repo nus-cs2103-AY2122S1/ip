@@ -29,3 +29,11 @@ public class Main {
 }
 ```
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_demo.gif?raw=true)
+
+## Acknowledgement
+- DialogBox model by: [se-education.org](https://se-education.org/guides/tutorials/javaFx.html)
+- CSS for DialogBox inspired by: [munharsha](https://github.com/munharsha/ip)
+- Space background using JavaFX tutorial by: [edencoding](https://edencoding.com/resources/css_properties/fx-background-color/)
+- Alice Avatar by [Catalyst Labs](https://www.shutterstock.com/image-vector/cat-robot-cartoon-vector-icon-illustration-1801648348) confirmation number: [SSTK-01B91-05A1]()
+- User Avatar by [Koby Mendez](https://unsplash.com/@kobbyfotos)
+

@@ -42,11 +42,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // animation for text typing
+        // tutorial at www.java2s.com
         Animation animation = new Transition() {
             {
                 setCycleDuration(Duration.millis(1000));
             }
 
+            @Override
             protected void interpolate(double frac) {
                 // cast to float so Math round to int
                 int n = Math.round(text.length() * (float) frac);

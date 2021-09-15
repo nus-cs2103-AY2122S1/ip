@@ -46,7 +46,7 @@ public class ChatPage extends AnchorPane {
     private Alice alice;
     private Mode mode;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/alice.png"));
 
     /**
