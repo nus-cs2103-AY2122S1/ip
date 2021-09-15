@@ -80,6 +80,10 @@ You have the Power to Tag Tasks based on their different categories
 
 You can List all Tasks or even List Tasks belonging to a speicific Tag
 
+### - [Easily Personizable](#developers)
+
+If you are a Developer, you can easily personalize the WhoBot with custom responses
+
 <br> 
 <hr>
 <br>
@@ -383,6 +387,8 @@ bye
 <br> 
 <hr>
 <br>
+
+<h2 id = 'developers'></h2> 
 
 ## For Developers
 
