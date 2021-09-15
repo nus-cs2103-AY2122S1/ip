@@ -6,30 +6,33 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String tab = "      ";
-    private static final String line = "------------------------------------------------------------";
     private Scanner sc = new Scanner(System.in);
 
     /**
      * Shows the welcome message.
+     * @return
      */
-    public void showWelcome() {
-        String necroLogo =
+    public static String showWelcome() {
+        String necroLogoMono =
                 " ___    _                \n"
                         + "|   \\  | |   _____     ___    _  __     _____  \n"
                         + "| |\\ \\ | |  / __  \\  /   _|  | v __|  /  ___  \\ \n"
                         + "| | \\ \\| | |    __/  |  <_   |  /    |   |_|   |\n"
                         + "|_|  \\___|  \\_____|  \\____|  |__|     \\  ___  / \n";
-        System.out.println("Hello from\n" + necroLogo);
-        textBox("Hello. My name is Necro.",
-                "What do you want me to do for you on this horrible day?");
+        String necroLogo =
+                "_____       ___               \n"
+                        + "|       \\     |    |      ____       ____   __  ____      _____  \n"
+                        + "|    |\\   \\   |    |   / ___  \\   /    __)  |  V  ___)  /  ___   \\ \n"
+                        + "|    |  \\   \\ |    |  |     ___/  |    (__   |     /      (    |__|    )\n"
+                        + "|___|    \\_____|   \\______)   \\____)  |___|         \\  ___  /  ()\n";
+        return "Hello. My name is Necro.\n" /*+ necroLogoMono*/ + "\nWhat do you want me to do for you on this horrible day?";
     }
 
     /**
      * Shows a file loading error.
      */
-    public void showLoadingError() {
-        textBox("No such file exists. Creating one for you now. You're welcome.");
+    public String showLoadingError() {
+        return textBox("No such file exists. Creating one for you now. You're welcome.");
     }
 
     /**
@@ -46,19 +49,19 @@ public class Ui {
      *
      * @param errorMessage The specific message we want to show.
      */
-    public static void showError(String errorMessage) {
+    public static String showError(String errorMessage) {
         try {
             throw new InvalidInputException(errorMessage);
         } catch (InvalidInputException e) {
-            System.err.println(e);
+            return e.getMessage();
         }
     }
 
     /**
      * Shows a message when the TaskList is empty.
      */
-    public void showEmptyList() {
-        textBox("There are currently no tasks, fool.");
+    public String showEmptyList() {
+        return textBox("There are currently no tasks, fool.");
     }
 
     /**
@@ -67,10 +70,10 @@ public class Ui {
      * @param taskString The String representation of the Task.
      * @param listSize The size of the TaskList.
      */
-    public void showAdd(String taskString, int listSize) {
-        textBox("Fine. I've added this meaningless task to your list: ",
-                " --> " + taskString,
-                "Satisfied now? You have " + listSize + " items in your list. ");
+    public String showAdd(String taskString, int listSize) {
+        return textBox("Fine. I've added this meaningless task to your list: \n",
+                " --> " + listSize + ". " + taskString,
+                "\nSatisfied now? You have " + listSize + " items in your list: \n\n");
     }
 
     /**
@@ -78,41 +81,41 @@ public class Ui {
      *
      * @param taskString The String representation of the Task.
      */
-    public void showComplete(String taskString) {
-        textBox("Wow. Congratulations. You have completed the following task:",
+    public String showComplete(String taskString) {
+        return textBox("Wow. Congratulations. You have completed the following task:\n",
                 taskString,
-                "Are you happy now?");
+                "\nAre you happy now? This is your updated list:");
     }
 
-    /**
-     * Shows a Task deleted message.
-     *
-     * @param taskString The String representation of the Task.
-     */
-    public void showDelete(String taskString) {
-        textBox("Since you are so lazy, I've helped you delete this task:",
-                taskString,
-                "Go do something useful with your life.");
-    }
+//    /**
+//     * Shows a Task deleted message.
+//     *
+//     * @param taskString The String representation of the Task.
+//     */
+//    public String showDelete(String taskString) {
+//        return textBox("Since you are so lazy, I've helped you delete this task:",
+//                taskString,
+//                "Go do something useful with your life.");
+//    }
 
-    /**
-     * Shows the farewell message.
-     */
-    public void showGoodbye() {
-        textBox("Farewell, may we never meet again.");
-    }
+//    /**
+//     * Shows the farewell message.
+//     */
+//    public static String showGoodbye() {
+//        return "Farewell, may we never meet again.";
+//    }
 
     /**
      * A template for the formatted text box.
      *
      * @param messages The varargs of messages we want to show the user.
      */
-    public void textBox(String... messages) {
-        System.out.println(tab + line);
+    public String textBox(String... messages) {
+        String output = "";
         for (String message : messages) {
-            System.out.println(tab + " " + message);
+            output += message + "\n";
         }
-        System.out.println(tab + line);
+        return output;
     }
 
 }

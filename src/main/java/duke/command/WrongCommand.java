@@ -14,14 +14,14 @@ public class WrongCommand extends Command {
 
     /**
      * Executes the specified command.
-     *
-     * @param tasks The TaskList which we are modifying.
+     *  @param tasks The TaskList which we are modifying.
      * @param ui The Ui we will use for user interaction.
      * @param storage The Storage we will use for storing save data.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Ui.showError(errorMessage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return Ui.showError(errorMessage);
     }
 
     @Override

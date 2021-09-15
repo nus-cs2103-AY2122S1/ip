@@ -26,13 +26,16 @@ public class AddCommand extends Command {
      * @param ui The Ui we will use for user interaction.
      * @param storage The Storage we will use for storing save data.
      * @throws InvalidInputException When the input is deemed invalid.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+        String list = "";
         tasks.add(task);
-        ui.showAdd(task.toString(), tasks.size());
-        Command listCommand = new ListCommand();
-        listCommand.execute(tasks, ui, storage);
+        for (int j = 0; j < tasks.size(); j++) {
+            list += (j + 1) + ". " + tasks.get(j).toString() + "\n";
+        }
+        return ui.showAdd(task.toString(), tasks.size()) + list;
     }
 
     @Override

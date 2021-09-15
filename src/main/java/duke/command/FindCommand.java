@@ -1,19 +1,13 @@
 package duke.command;
 
 import duke.exception.InvalidInputException;
-import duke.task.Task;
-import duke.task.ToDo;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import javax.sound.midi.SysexMessage;
-
 public class FindCommand extends Command {
 
     private String keyword;
-    private final String tab = "      ";
-    private final String line = "------------------------------------------------------------";
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -26,21 +20,21 @@ public class FindCommand extends Command {
      * @param ui The Ui we will use for user interaction.
      * @param storage The Storage we will use for storing save data.
      * @throws InvalidInputException When the input is deemed invalid.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         if (tasks.size() == 0) {
-            ui.showEmptyList();
+            return ui.showEmptyList();
         } else {
-            System.out.println(tab + line);
-            System.out.println(tab + "Your keyword is: \"" + keyword + "\". \n");
-            System.out.println(tab + "Here are the matching tasks in your list:");
+            String output = "";
+            output += "Your keyword is: \"" + keyword + "\". \nHere are the matching tasks in your list:\n";
             for (int j = 0; j < tasks.size(); j++) {
                 if (tasks.get(j).getDescription().contains(keyword)) {
-                    System.out.println(tab + " " + (j + 1) + ". " + tasks.get(j).toString());
+                    output += (j + 1) + ". " + tasks.get(j).toString() + "\n";
                 }
             }
-            System.out.println(tab + line);
+            return output;
         }
     }
 

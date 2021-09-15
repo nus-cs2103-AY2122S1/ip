@@ -49,11 +49,14 @@ public class TaskList {
      *
      * @param index The index of the Task we want to delete.
      */
-    public void delete(int index) {
+    public String delete(int index) {
         try {
+            String taskString = (index + 1) + ". " + list.get(index).toString();
             list.remove(index);
+            return "Since you are so lazy, I've helped you delete this task:\n\n" + taskString +
+                    "\n\nGo do something useful with your life, like maybe some of your remaining tasks:";
         } catch (IndexOutOfBoundsException e) {
-            System.err.println(e);
+            return e.getMessage();
         }
     }
 

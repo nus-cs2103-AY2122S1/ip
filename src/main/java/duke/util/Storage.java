@@ -55,22 +55,25 @@ public class Storage {
      * @param tasks The TaskList to convert into JSON file format.
      */
     @SuppressWarnings("unchecked")
-    public void write(TaskList tasks) {
+    public String write(TaskList tasks) {
+        String output = "";
         JSONArray arr = new JSONArray();
         tasks.forEach((task) -> arr.add(task.toJsonObject()));
+        output = "Farewell, may we never meet again.";
         try {
             fileWriter = new FileWriter(filePath);
             fileWriter.write(arr.toJSONString());
         } catch (IOException e) {
-            e.printStackTrace();
+            output = e.getMessage();
         } finally {
             try {
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                output = e.getMessage();
             }
         }
+        return output;
     }
 
     /**

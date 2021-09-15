@@ -8,24 +8,22 @@ public class ListCommand extends Command {
 
     /**
      * Executes the specified command.
-     *
-     * @param tasks The TaskList which we are modifying.
+     *  @param tasks The TaskList which we are modifying.
      * @param ui The Ui we will use for user interaction.
      * @param storage The Storage we will use for storing save data.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            ui.showEmptyList();
+            return ui.showEmptyList();
         } else {
-            String line = "------------------------------------------------------------";
-            String tab = "      ";
-            System.out.println(tab + line);
-            System.out.println(tab + "Here are the tasks in your list:");
+            String output = "";
+            output += "Here are the tasks in your list:\n\n";
             for (int j = 0; j < tasks.size(); j++) {
-                System.out.println(tab + " " + (j + 1) + ". " + tasks.get(j).toString());
+                output += (j + 1) + ". " + tasks.get(j).toString() + "\n";
             }
-            System.out.println(tab + line);
+            return output;
         }
     }
 
