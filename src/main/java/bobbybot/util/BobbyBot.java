@@ -28,7 +28,7 @@ public class BobbyBot {
     }
 
     /**
-     * Start running the chatbot
+     * Starts the chatbot
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
@@ -48,7 +48,7 @@ public class BobbyBot {
     }
 
     /**
-     * Our main method. Starts up the chatbot and waits for user inputs
+     * Starts up the chatbot and waits for user inputs
      * @param args Command Line Arguments
      */
     public static void main(String[] args) {

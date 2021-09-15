@@ -21,7 +21,7 @@ public class Duke {
     private final TaskList tasks;
     private final PersonList contacts;
     /**
-     * Initialise Duke object with filepath of storage
+     * Constructs Duke object with filepath of storage
      * @param taskFile storage .txt file path
      * @param storageFile storage .txt file path
      */
@@ -31,7 +31,6 @@ public class Duke {
         tasks = new TaskList(storage.loadTasks());
         parser = new Parser();
         contacts = new PersonList(storage.loadContacts());
-        //todo add storage feature for contacts
     }
 
     /**
