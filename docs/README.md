@@ -174,4 +174,4 @@ Here are the matching tasks:
 
 ### Acknowledgements:
 - Original Duke template forked from Prof Damith CS2103T github
-- GUI Design from Javafx tutorials
+- GUI Design based on Javafx tutorials

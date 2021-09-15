@@ -107,44 +107,57 @@ public class Ui {
      * Formats the window to look as expected.
      */
     public void formatStage() {
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        //@@author ramaven-reused
+        //Reused from JavaFx tutorial 2 (https://se-education.org/guides/tutorials/javaFxPart2.html)
+        // with minor modifications
+        {
+            stage.setResizable(false);
+            stage.setMinHeight(600.0);
+            stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+            mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            scrollPane.setPrefSize(385, 535);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+            scrollPane.setVvalue(1.0);
+            scrollPane.setFitToWidth(true);
 
-        vbox.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            vbox.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        textField.setPrefWidth(325.0);
+            textField.setPrefWidth(325.0);
 
-        sendButton.setPrefWidth(55.0);
+            sendButton.setPrefWidth(55.1);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+            AnchorPane.setTopAnchor(scrollPane, 1.0);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+            AnchorPane.setBottomAnchor(sendButton, 1.0);
+            AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(textField, 1.0);
-        AnchorPane.setBottomAnchor(textField, 1.0);
+            AnchorPane.setLeftAnchor(textField, 1.0);
+            AnchorPane.setBottomAnchor(textField, 1.0);
+        }
+        //@@author
     }
 
     /**
      * Adds functionality to handle user input.
      */
     public void setUserInteraction() {
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        //@@author ramaven-reused
+        //Reused from JavaFx tutorial 3 (https://se-education.org/guides/tutorials/javaFxPart3.html)
+        // with minor modifications
+        {
+            sendButton.setOnMouseClicked((event) -> {
+                handleUserInput();
+            });
 
-        //Scroll down to the end every time dialogContainer's height changes.
-        vbox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+            //Scroll down to the end every time dialogContainer's height changes to
+            // improve user experience
+            vbox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        }
+        //@@author
     }
 
 
@@ -153,16 +166,18 @@ public class Ui {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(textField.getText());
-        vbox.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)));
-        Label dukeText = new Label(getResponse(textField.getText()));
-        vbox.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
-        textField.clear();
+        // Solution below adapted from JavaFx tutorial 3 (https://se-education.org/guides/tutorials/javaFxPart3.html)
+        {
+            Label userText = new Label(textField.getText());
+            vbox.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)));
+            Label dukeText = new Label(getResponse(textField.getText()));
+            vbox.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+            textField.clear();
+        }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
      */
     private String getResponse(String input) {
         String userInput = textField.getText();
@@ -225,8 +240,8 @@ public class Ui {
      * @param e Exception
      */
     public void showError(Exception e) {
-        stringBuilder.append(e.toString());
-        label.setText(stringBuilder.toString());
+        vbox.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(e.toString()) ));
     }
 
 
