@@ -1,21 +1,9 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import duke.command.Command;
+import duke.ui.MainWindow;
 import duke.ui.UserInterface;
+import javafx.stage.Stage;
+import duke.command.Command;
 
 import java.time.format.DateTimeFormatter;
 
@@ -35,8 +23,8 @@ public class Duke {
     /**
      * Class constructor.
      */
-    public Duke(Stage stage) {
-        ui = new UserInterface(stage);
+    public Duke(MainWindow mw) {
+        ui = new UserInterface(mw);
         dtformatter = DateTimeFormatter.ISO_DATE;
         String home = System.getProperty("user.home");
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");

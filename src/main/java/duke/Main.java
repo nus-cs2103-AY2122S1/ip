@@ -1,11 +1,8 @@
 package duke;
 
-import java.io.IOException;
-
+import duke.ui.MainWindow;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -18,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         MainWindow ap = new MainWindow();
-        duke = new Duke(stage);
+        duke = new Duke(ap);
         ap.setDuke(duke);
         Scene scene = new Scene(ap);
         stage.setScene(scene);

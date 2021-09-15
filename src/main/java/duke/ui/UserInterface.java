@@ -1,5 +1,8 @@
 package duke.ui;
 
+import duke.Main;
+import javafx.stage.Stage;
+
 import java.util.Scanner;
 
 /**
@@ -7,12 +10,14 @@ import java.util.Scanner;
  */
 public class UserInterface {
     Scanner stdin;
+    private MainWindow mainWindow;
 
     /**
      * Class constructor.
      */
-    public UserInterface() {
+    public UserInterface(MainWindow mainWindow) {
         stdin = new Scanner(System.in);
+        this.mainWindow = mainWindow;
     }
 
     /**
