@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "saber.Saber"
+    mainClassName = "saber.Launcher"
 }
 
 shadowJar {
