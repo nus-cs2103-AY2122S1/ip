@@ -42,7 +42,6 @@ public class DukeDialogBox extends HBox {
      * @return The DialogBox representing Duke's response.
      */
     public static DukeDialogBox getDukeDialog(String text, Image img) {
-        var db = new DukeDialogBox(text, img);
-        return db;
+        return new DukeDialogBox(text, img);
     }
 }
