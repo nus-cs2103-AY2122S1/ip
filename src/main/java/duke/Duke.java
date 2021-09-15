@@ -43,6 +43,8 @@ public class Duke {
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     *
+     * @return String array of responses.
      */
     public String[] getResponse(String input) {
         return commands(input);
@@ -52,6 +54,7 @@ public class Duke {
      * Facilitates which command to run based on the type of command processed by the Parser.
      *
      * @throws DukeException If command is not recognised or improperly formatted.
+     * @return String array of results of running the command.
      */
     private String[] commands(String command) throws DukeException {
         try {

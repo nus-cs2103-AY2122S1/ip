@@ -26,17 +26,17 @@ public class DeleteTaskCommand extends Command {
      */
     public String[] execute(Storage storage, TaskList tasks) {
         String restOfCommand = "";
-        boolean numeric;
+        boolean isNumeric;
         try {
             restOfCommand = command.substring(7);
             int temp = Integer.parseInt(restOfCommand);
-            numeric = true;
+            isNumeric = true;
         } catch (NumberFormatException err) {
-            numeric = false;
+            isNumeric = false;
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("invalidNumberFormat");
         }
-        if (!numeric) {
+        if (!isNumeric) {
             throw new DukeException("invalidNumberFormatDelete");
         }
         int taskNum = Integer.parseInt(restOfCommand) - 1;

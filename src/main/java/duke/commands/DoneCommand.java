@@ -25,18 +25,18 @@ public class DoneCommand extends Command {
      * @return A String array containing output.
      */
     public String[] execute(Storage storage, TaskList tasks) {
-        boolean numeric;
+        boolean isNumeric;
         String restOfCommand = "";
         try {
             restOfCommand = command.substring(5);
             int temp = Integer.parseInt(restOfCommand);
-            numeric = true;
+            isNumeric = true;
         } catch (NumberFormatException err) {
-            numeric = false;
+            isNumeric = false;
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("invalidNumberFormat");
         }
-        if (!numeric) {
+        if (!isNumeric) {
             throw new DukeException("invalidNumberFormat");
         }
         int taskNum = Integer.parseInt(restOfCommand) - 1;

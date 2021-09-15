@@ -183,7 +183,7 @@ public class Storage {
     }
 
     /**
-     * Edit the contents of the file to account for a current task being marked as completed.
+     * Edits the contents of the file to account for a current task being marked as completed.
      *
      * @param taskNum Task number of the task that is to be marked as completed.
      */
