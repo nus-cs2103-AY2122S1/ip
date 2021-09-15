@@ -1,7 +1,7 @@
 # Super Pretty Ultra Hyper Mega Cute Shining God of Destruction Dukuwu ~~☆☆☆ tehe
-> dowcto, wewre losing him!!
-> qwick, hand me the defibwiwatow!!
-> please. turn off my [redacted] life support
+> dowcto, wewre losing him!!<br>
+> qwick, hand me the defibwiwatow!!<br>
+> please. turn off my [redacted] life support<br>
 >                              - You after you use Dukuwu [(source)](https://i.redd.it/qcsnneo5fyh01.jpg)
 
 By: `Ruth Poh` Since: `September 2021`
