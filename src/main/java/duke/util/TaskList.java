@@ -7,7 +7,10 @@ import duke.taskTypes.Event;
 import duke.taskTypes.Task;
 import duke.taskTypes.Todo;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,8 +46,6 @@ public class TaskList {
             assert formattedTask.length == 3;
 
             boolean isDone = (formattedTask[1].equals("T"));
-            System.out.println(formattedTask[1].equals("T"));
-            System.out.println(Arrays.asList(formattedTask));
             Task pastTask = Task.empty();
             switch (formattedTask[0]) {
                 case "T" :
@@ -60,9 +61,6 @@ public class TaskList {
             mapper.put(pastTask.getDescription(), pastTask);
         }
     }
-
-
-
 
     /**
      * Identify, Search and Modify the isDone status of task based on the getStorage printed msg
@@ -80,9 +78,9 @@ public class TaskList {
             mapper.put(key, mapper.get(key).setDone());
             return mapper.get(key);
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException("\nEnsure that list position in NUMERICAL form");
+            throw new InvalidFormatException("The list position you've inputted is in an invalid format.");
         } catch (NullPointerException e) {
-            throw new InvalidFormatException("\nEnsure that number inputted can be found in the list");
+            throw new InvalidFormatException("The number inputted cannot be found in the list");
         }
     }
 
@@ -102,9 +100,9 @@ public class TaskList {
             mapper.remove(key);
             return deleted;
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException("Ensure that list position in NUMERICAL form");
+            throw new InvalidFormatException("The list position you've inputted is in an invalid format.");
         } catch (NullPointerException e) {
-            throw new InvalidFormatException("Ensure that number inputted can be found in the list");
+            throw new InvalidFormatException("The number inputted cannot be found in the list");
         }
     }
 
@@ -159,7 +157,7 @@ public class TaskList {
      */
     public String getList() {
         if (mapper.size() == 0) {
-            return "Empty List";
+            return "Im sorry, the list seems to be empty";
         }
         Collection<Task> values = mapper.values();
         Iterator<Task> look = values.iterator();
@@ -173,6 +171,12 @@ public class TaskList {
         return check;
     }
 
+    /**
+     * Find a task with description that contains the keyword
+     *
+     * @param key
+     * @return
+     */
     public String find(String key) {
 
         Collection<Task> values = mapper.values();
@@ -196,7 +200,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the details on the current state as a string array
+     * Returns the details on the current state as a string array to be saved in a TXT file
      *
      * @return String[] Array of sring that contains descrptions of state
      */
@@ -213,6 +217,11 @@ public class TaskList {
         return check;
     }
 
+    /**
+     * Returns the details on the current state as a string array to be saved in a CSV file
+     *
+     * @return String[] Array of sring that contains descrptions of state
+     */
     public String[] saveStateCsv() {
         if (mapper.size() == 0) {
             return new String[]{};
@@ -225,6 +234,4 @@ public class TaskList {
         }
         return check;
     }
-
-
 }

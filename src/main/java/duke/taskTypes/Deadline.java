@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidFormatException;
-
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -25,16 +24,15 @@ public class Deadline extends Task{
     public Deadline(String input, boolean isDone) throws DukeException {
         super(isDone);
         List<String> formattedInput = formatInput(input);
-        System.out.println(formattedInput);
         boolean isMissingDescriptionTimestamp = formattedInput.size() == 0;
         boolean isMissingTimestamp = formattedInput.size() == 1;
 
         if (isMissingDescriptionTimestamp) {
-            throw new InvalidFormatException("\nMissing description and timestamp");
+            throw new InvalidFormatException("Missing description and timestamp");
         }
 
         if (isMissingTimestamp) {
-            throw new EmptyTimeException("\nInvalid timestamp format");
+            throw new EmptyTimeException("Invalid timestamp format");
         }
 
         setTaskDetails(getTaskType(), formattedInput);
@@ -69,7 +67,7 @@ public class Deadline extends Task{
 
     // methods that returns formatted string for saving / displaying
     /**
-     * Returns a string that describes the instance for display
+     * Returns a string to be displayed to user
      *
      * @return String containing details of the task
      */
@@ -79,7 +77,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns a string that describes the instance for saving
+     * Returns a string that describes the instance for saving in  a TXT file
      *
      * @return String containing details of the task
      */
@@ -88,6 +86,11 @@ public class Deadline extends Task{
         return super.saveTask() + " /by " + super.getSaveDate();
     }
 
+    /**
+     * Returns a string that describes the instance for saving in a CSV file
+     *
+     * @return
+     */
     @Override
     public String saveTaskCsv() {
         return super.saveTaskCsv() + ",/by," + super.getSaveDateCsv();

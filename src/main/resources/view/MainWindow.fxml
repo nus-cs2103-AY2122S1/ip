@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -10,60 +9,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="744.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1001.0" prefWidth="548.0" style="-fx-background-color: #334553;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
     <children>
-      <AnchorPane layoutX="12.0" layoutY="31.0" prefHeight="945.0" prefWidth="162.0" style="-fx-background-color: beige;">
+      <AnchorPane layoutX="17.0" layoutY="14.0" prefHeight="65.0" prefWidth="513.0" style="-fx-background-color: #7ba4e9;">
          <effect>
             <DropShadow blurType="GAUSSIAN" radius="21.8625" width="68.45" />
          </effect>
+         <children>
+            <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="452.0" layoutY="9.0" onMousePressed="#handleAddEvent" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/add.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="76.0" layoutX="14.0" layoutY="12.0" onMousePressed="#handleGetList" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/tasklist.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="390.0" layoutY="9.0" onMousePressed="#handleGetHelp" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/1828940.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="67.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TaskMan - The task Manager" wrappingWidth="264.13671875">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
       </AnchorPane>
-        <TextField fx:id="userInput" alignment="TOP_LEFT" layoutX="191.0" layoutY="935.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="429.0" AnchorPane.bottomAnchor="24.0">
+        <TextField fx:id="userInput" alignment="TOP_LEFT" layoutX="18.0" layoutY="932.0" onAction="#handleUserInput" prefHeight="47.0" prefWidth="430.0" promptText="Say Something to Duke" AnchorPane.bottomAnchor="22.0">
          <effect>
             <DropShadow />
          </effect>
          <font>
             <Font size="18.0" />
          </font></TextField>
-        <Button fx:id="sendButton" layoutX="636.0" layoutY="935.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send">
+        <Button fx:id="sendButton" layoutX="455.0" layoutY="935.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send">
          <effect>
             <DropShadow />
          </effect></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="191.0" layoutY="31.0" prefHeight="892.0" prefWidth="521.0" vbarPolicy="NEVER" vvalue="1.0" AnchorPane.leftAnchor="191.0">
-            <content>
-                <VBox fx:id="dialogContainer" prefHeight="883.0" prefWidth="503.0" />
-            </content>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="17.0" layoutY="88.0" prefHeight="825.0" prefWidth="513.0" style="-fx-background-color: #8794ac;" vbarPolicy="NEVER" vvalue="1.0" AnchorPane.leftAnchor="17.0">
          <effect>
             <DropShadow />
          </effect>
+         <content>
+                <VBox fx:id="dialogContainer" prefHeight="825.0" prefWidth="511.0" style="-fx-background-color: #c5d8e1;" />
+         </content>
         </ScrollPane>
-      <VBox alignment="CENTER" layoutX="13.0" prefHeight="851.0" prefWidth="156.0">
-         <children>
-            <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets bottom="50.0" />
-               </VBox.margin>
-               <image>
-                  <Image url="@../images/add.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="105.0" fitWidth="96.0" onMousePressed="#handleGetList" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/tasklist.png" />
-               </image>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="110.0" onMousePressed="#handleGetHelp" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/1828940.png" />
-               </image>
-               <VBox.margin>
-                  <Insets bottom="200.0" top="40.0" />
-               </VBox.margin>
-            </ImageView>
-         </children>
-      </VBox>
     </children>
 </AnchorPane>

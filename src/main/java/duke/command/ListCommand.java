@@ -21,9 +21,9 @@ public class ListCommand  extends Command{
     }
 
     /**
-     * Executes a set of instructions
+     * Executes a set of instructions to get a list of all the task in the list
      *
-     * @return boolean To relay whether to continue the project
+     * @return String list of all the task
      * @throws DukeException
      */
     @Override

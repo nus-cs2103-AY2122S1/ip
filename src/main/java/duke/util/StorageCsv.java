@@ -4,7 +4,10 @@ import duke.exception.DukeException;
 import duke.exception.FileNotFoundException;
 import duke.taskTypes.Task;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +21,7 @@ public class StorageCsv implements Storage {
     private File csvFile;
     private final static String COMMA_DELIMITER = ",";
     private final static int NUMBER_CSV_COLUMN = 6;
+    private final static String HEADER = "Task Type,Done,Description,Splitter,Date,Time";
 
     /**
      * Constructor for StorageTxt and sets the file that contains previous state
@@ -48,7 +52,10 @@ public class StorageCsv implements Storage {
         List<String> pastCommand = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(csvFile);
-            scanner.nextLine();
+            if (scanner.hasNextLine()){
+                scanner.nextLine();
+            }
+
 
             while (scanner.hasNextLine()) {
 
@@ -61,16 +68,20 @@ public class StorageCsv implements Storage {
                         fields.add(rowScanner.next());
                     }
                 }
-                System.out.println(convertCsvRowToTaskDetails(fields));
                 pastCommand.add(convertCsvRowToTaskDetails(fields));
             }
-
         } catch (IOException e) {
-            throw new FileNotFoundException("\nInvalid FilePath");
+            throw new FileNotFoundException("Invalid FilePath");
         }
         return pastCommand;
     }
 
+    /**
+     * Converts csv row format to task details format
+     *
+     * @param rowDetails
+     * @return
+     */
     public String convertCsvRowToTaskDetails(List<String> rowDetails) {
         String row = "";
         for (String k : rowDetails) {
@@ -110,6 +121,7 @@ public class StorageCsv implements Storage {
 
             // Updates the history with current state of taskList
             fileWriter = new FileWriter(csvFile, true);
+            fileWriter.write(HEADER);
             fileWriter.write(System.lineSeparator());
             for( String msg : currentState){
                 fileWriter.write(msg);

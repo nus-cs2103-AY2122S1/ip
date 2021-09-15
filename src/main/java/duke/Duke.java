@@ -1,13 +1,8 @@
 package duke;
 
 import duke.command.Command;
-
 import duke.exception.DukeException;
-
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.StorageCsv;
-import duke.util.TaskList;
+import duke.util.*;
 
 import java.util.Scanner;
 
@@ -16,8 +11,8 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private final TaskList taskList = new TaskList();;
-    private final Storage storage = new StorageCsv("src/main/java/savedOutput");;
+    private final TaskList taskList = new TaskList();
+    private final Storage storage = new StorageTxt("./data");
     private final Parser parser = new Parser(storage, taskList);
     private boolean isBye;
 
@@ -30,6 +25,10 @@ public class Duke {
         parser.loadTask();
     }
 
+    /**
+     * Saves the tasklist during a closure event
+     *
+     */
     public void saveOnClosed() {
         try {
             this.storage.saveUpdateTask(taskList);
@@ -42,7 +41,6 @@ public class Duke {
      * duke program that prints in commandLine
      */
     private void textProcess() {
-
         boolean isBye = false;
         Scanner scan = new Scanner(System.in);
         while (!isBye) {
@@ -57,8 +55,9 @@ public class Duke {
         }
     }
 
-
-
+    /**
+     * duke program that passes output to the GUI
+     */
     public String guiProcess(String input) {
         String output = "";
         try {
@@ -71,28 +70,24 @@ public class Duke {
         return output;
     }
 
+    /**
+     * checks if the
+     *
+     * @return
+     */
     public boolean checkIsBye() {
         return this.isBye;
     }
 
 
     /**
-     * Main program
+     * Main program Duke in commandline output mode
      *
      * @param args
      */
     public static void main(String[] args) {
-//        Duke duke = new Duke();
-//        duke.textProcess();
-
+        Duke duke = new Duke();
+        duke.textProcess();
     }
-
-    //TEsting
-    public static String[] convertTaskDetailsToCsvRow(String taskDetails) {
-        String[] csvRow = new String[5];
-        String[] parsedInput = taskDetails.trim().split(" ", 6);
-        return parsedInput;
-    }
-
 
 }

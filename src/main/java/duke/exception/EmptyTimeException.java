@@ -8,7 +8,7 @@ public class EmptyTimeException extends DukeException{
     /**
      * Basic Constructor
      *
-     * @param errorDetails Explanation as to why error occured
+     * @param errorDetails Exception that is thrown when user inputs missing time
      */
     public EmptyTimeException (String errorDetails) {
         super(errorDetails);

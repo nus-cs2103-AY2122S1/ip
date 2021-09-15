@@ -21,6 +21,12 @@ public class ByeCommand extends Command{
         super(storage, taskList, true);
     }
 
+    /**
+     * Executes a set of instructions to close the application
+     *
+     * @return String success message
+     * @throws DukeException
+     */
     @Override
     public String exec() throws DukeException {
         return exitMessage;

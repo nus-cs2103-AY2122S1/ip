@@ -1,9 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.taskTypes.Task;
-
 import duke.util.Storage;
 import duke.util.TaskList;
 
@@ -13,7 +11,7 @@ import duke.util.TaskList;
 public class DoneCommand extends Command {
 
     private final String taskChosen;
-    private final String successMessage = "Nice! I've marked this task as done:";
+    private final String successMessage = "Nice! I've marked this task as done:\n";
 
     /**
      * Basic Constructor
@@ -28,9 +26,9 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes a set of instructions
+     * Executes a set of instructions to set a task as done
      *
-     * @return boolean To relay whether to continue the project
+     * @return String success message
      * @throws DukeException
      */
     @Override

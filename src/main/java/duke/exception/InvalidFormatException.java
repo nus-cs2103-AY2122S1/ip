@@ -8,7 +8,7 @@ public class InvalidFormatException extends DukeException {
     /**
      * Basic Constructor
      *
-     * @param errorDetails Explanation as to why error occured
+     * @param errorDetails Exception to display error made by using in regards to format in general
      */
     public InvalidFormatException(String errorDetails){
         super(errorDetails);

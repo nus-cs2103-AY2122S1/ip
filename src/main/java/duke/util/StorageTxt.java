@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,7 +54,7 @@ public class StorageTxt implements Storage {
                 pastCommand.add(scan.nextLine());
             }
         } catch (IOException e) {
-            throw new FileNotFoundException("\nInvalid FilePath");
+            throw new FileNotFoundException("Invalid FilePath");
         }
 
         return pastCommand;

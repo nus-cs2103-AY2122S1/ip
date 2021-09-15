@@ -12,6 +12,7 @@ import java.io.IOException;
 /**
  * Main Stage of the application
  */
+// Solution adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class Main extends Application {
     private final Duke duke = new Duke();
     private final FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
@@ -53,6 +54,9 @@ public class Main extends Application {
         fxmlLoader.<MainWindow>getController().setScrollPane();
     }
 
+    /**
+     * Setting up a save command whenever stage closes
+     */
     private void setupCloseEvent() {
         System.out.println("Closing Stage");
         duke.saveOnClosed();

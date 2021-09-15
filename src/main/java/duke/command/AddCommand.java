@@ -14,7 +14,6 @@ public class AddCommand extends Command {
     private final String taskDetails;
     private final String addType;
 
-
     /**
      * Basic Constructor
      *
@@ -30,9 +29,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes a set of instructions
+     * Executes a set of instructions to add a task into list and storage
      *
-     * @return boolean To relay whether to continue the project
+     * @return String success message
      * @throws DukeException
      */
     public String exec() throws DukeException {
@@ -56,12 +55,25 @@ public class AddCommand extends Command {
         return "";
     }
 
+    /**
+     * Returns a string success message
+     *
+     * @param task
+     * @return
+     */
     private String successfullyAddedTask(Task task) {
         String taskDetails = task.toString();
         int task_left = taskList.taskLeft();
         return successMessage(taskDetails, task_left);
     }
 
+    /**
+     * Formats a success message
+     *
+     * @param taskDetails
+     * @param task_left
+     * @return
+     */
     private String successMessage(String taskDetails, int task_left) {
         return "Got it. I've added this task:\n " + taskDetails +  "\nNow you have "
                 + task_left + " tasks in the list.";

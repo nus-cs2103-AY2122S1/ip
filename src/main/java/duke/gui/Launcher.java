@@ -2,12 +2,15 @@ package duke.gui;
 
 import javafx.application.Application;
 
-/** Application launcher. */
+/**
+ * Application launcher.
+ */
+// Solution adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class Launcher {
     /**
-     * The entry point to the application.
+     * Application entry point
      *
-     * @param args String arguments; not used.
+     * @param args not used
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);

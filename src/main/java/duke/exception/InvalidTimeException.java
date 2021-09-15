@@ -8,7 +8,7 @@ public class InvalidTimeException extends DukeException {
     /**
      * Basic Constructor
      *
-     * @param errorDetails Explanation as to why error occured
+     * @param errorDetails Exception that is thrown when user inputs invalid time
      */
     public InvalidTimeException(String errorDetails) {
         super(errorDetails);

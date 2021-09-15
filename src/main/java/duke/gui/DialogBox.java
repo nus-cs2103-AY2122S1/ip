@@ -1,7 +1,5 @@
 package duke.gui;
 
-
-import com.sun.scenario.effect.impl.prism.PrRenderInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +20,7 @@ import java.util.Collections;
 /**
  * Controller for dialogBox
  */
+// Solution adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class DialogBox extends HBox {
 
     @FXML
@@ -36,7 +35,6 @@ public class DialogBox extends HBox {
      * @param text details of the speech
      * @param speakerImage display picture of the current speaker
      * @param isDukeSpeaking check whether user or duke speaking
-     *
      */
     private DialogBox(String text, Image speakerImage, boolean isDukeSpeaking) {
 
@@ -74,9 +72,7 @@ public class DialogBox extends HBox {
      * @param speakerImage
      */
     private void circleCropDisplayPicture(Image speakerImage) {
-
-
-        Rectangle crop = createCircleCrop(speakerImage);
+        Rectangle crop = createCircleCrop();
         displayPicture.setClip(crop);
         displayPicture.setImage(speakerImage);
     }
@@ -86,8 +82,7 @@ public class DialogBox extends HBox {
      *
      * @return rectangle crop
      */
-    private Rectangle createCircleCrop(Image image) {
-
+    private Rectangle createCircleCrop() {
         double pictureWidth = displayPicture.getFitWidth();
         double pictureHeight = displayPicture.getFitHeight();
         Rectangle rectangle = new Rectangle(pictureWidth, pictureHeight);
@@ -132,14 +127,3 @@ public class DialogBox extends HBox {
     }
 
 }
-
-//
-//<Label fx:id="dialog" alignment="TOP_RIGHT" contentDisplay="CENTER" lineSpacing="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" textAlignment="JUSTIFY" wrapText="true">
-//
-//<font>
-//<Font size="18.0" />
-//</font>
-//<padding>
-//<Insets left="5.0" right="5.0" />
-//</padding>
-//</Label>

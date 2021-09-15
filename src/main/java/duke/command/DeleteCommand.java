@@ -25,9 +25,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes a set of instructions
+     * Executes a set of instructions to delete a task from list and storage
      *
-     * @return boolean To relay whether to continue the project
+     * @return String success message
      * @throws DukeException
      */
     @Override
@@ -38,10 +38,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Formats a successful delete message
+     * Returns a string success message
      *
      * @param task
-     * @return String successful delete message
+     * @return
      */
     private String successfullyDeletedTask(Task task) {
         String taskDetails = task.toString();
@@ -49,6 +49,11 @@ public class DeleteCommand extends Command {
         return successMessage(taskDetails, taskLeft);
     }
 
+    /**
+     * Formats a successful delete message
+     *
+     * @return String successful delete message
+     */
     private String successMessage(String taskDetails, int taskLeft) {
         return "Noted. I've removed this task:\n " + taskDetails
                 + "\nNow you have " + taskLeft + " tasks " + "in the list.";

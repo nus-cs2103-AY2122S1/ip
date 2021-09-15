@@ -26,6 +26,11 @@ public abstract class Command {
         this.isBye = isBye;
     }
 
+    /**
+     * Checks command closes the application
+     *
+     * @return
+     */
     public boolean checkIsBye() {
         return this.isBye;
     }

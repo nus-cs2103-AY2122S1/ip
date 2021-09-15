@@ -8,7 +8,6 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
-
 import duke.exception.DukeException;
 
 import java.util.List;
@@ -21,7 +20,6 @@ public class Parser {
 
     private Storage storage;
     private TaskList taskList;
-
 
     /**
      * Basic constructor for Parser
@@ -88,9 +86,9 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("\nUser input an invalid action.");
+            throw new DukeException("Sorry I can't understand what you've inputted. :(");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\nMissing info after action");
+            throw new DukeException("Missing info after action");
         }
     }
 }

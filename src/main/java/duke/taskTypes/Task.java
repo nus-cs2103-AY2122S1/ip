@@ -2,7 +2,6 @@ package duke.taskTypes;
 
 import duke.exception.*;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -61,9 +60,9 @@ public class Task {
             setDate(formattedDateTime);
             setTime(formattedDateTime);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateException("\nWrong date format(use YYYY-MM-DD)");
+            throw new InvalidDateException("Wrong date format(use YYYY-MM-DD)");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyTimeException("\nMissing time");
+            throw new EmptyTimeException("Missing time");
         }
     }
     private void setDate(String[] formattedDateTime) throws DateTimeParseException {
@@ -118,11 +117,9 @@ public class Task {
      */
     private void check24HourFormat (int hoursMins) throws InvalidTimeException {
         if (!(hoursMins <2400 && hoursMins > 0 && hoursMins%100 <60)) {
-            throw new InvalidTimeException("\nInvalid time format (use 24hr format)");
+            throw new InvalidTimeException("Invalid time format (use 24hr format)");
         }
     }
-
-
 
     // Setter and getters
     private void setState(boolean isDone) {
@@ -132,7 +129,6 @@ public class Task {
         this.isDone = true;
         return this;
     }
-
     protected String getSaveDate() {
         return this.date.toString() + " " + this.time;
     }
@@ -146,11 +142,9 @@ public class Task {
         return this.description;
     }
 
-
-
     // methods that returns formatted string for saving / displaying
     /**
-     * Returns a string that describes the instance for display
+     * Returns a string to be displayed to user
      *
      * @return String containing details of the task
      */
@@ -171,6 +165,11 @@ public class Task {
         return taskType + " " + state + " " + description;
     }
 
+    /**
+     * Returns a string that describes the instance for saving in  a CSV file
+     *
+     * @return String containing details of the task
+     */
     public String saveTaskCsv() {
         String state = isDone ? "T" : "F";
         return taskType + "," + state + "," + description;

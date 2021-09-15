@@ -11,6 +11,7 @@ import duke.util.TaskList;
 public class FindCommand extends Command {
 
     private final String key;
+    private final String successFindMessage = "Here are the tasks with the keyword : ";
 
     /**
      * Basic constructor of find command instance
@@ -25,9 +26,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes a set of instructions
+     * Executes a set of instructions to find a task based on keyword
      *
-     * @return boolean To relay whether to continue the project
+     * @return String message
      * @throws DukeException
      */
     @Override
@@ -36,8 +37,8 @@ public class FindCommand extends Command {
         String keysFound = taskList.find(key);
 
         if (keysFound.equals("")){
-            return "None Found";
+            return "Sorry, there is no task with keyword: " + key ;
         }
-        return keysFound;
+        return successFindMessage + key +"\n" + keysFound;
     }
 }

@@ -3,7 +3,6 @@ package duke.taskTypes;
 import duke.exception.DukeException;
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidFormatException;
-
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -29,11 +28,11 @@ public class Event extends Task{
         boolean isMissingTimestamp = formattedInput.size() == 1;
 
         if (isMissingDescriptionTimestamp) {
-            throw new InvalidFormatException("\nMissing description and timestamp");
+            throw new InvalidFormatException("Missing description and timestamp");
         }
 
         if (isMissingTimestamp) {
-            throw new EmptyTimeException("\nInvalid timestamp format");
+            throw new EmptyTimeException("Invalid timestamp format");
         }
 
         super.setTaskDetails(getTaskType(), formattedInput);
@@ -68,7 +67,7 @@ public class Event extends Task{
 
     // methods that returns formatted string for saving / displaying
     /**
-     * Returns a string that describes the instance
+     * Returns a string to be displayed to user
      *
      * @return String containing details of the task
      */
@@ -78,7 +77,7 @@ public class Event extends Task{
     }
 
     /**
-     * Returns a string that describes the instance for saving
+     * Returns a string that describes the instance for saving in  a TXT file
      *
      * @return String containing details of the task
      */
@@ -87,6 +86,11 @@ public class Event extends Task{
         return super.saveTask() + " /at " + super.getSaveDate();
     }
 
+    /**
+     * Returns a string that describes the instance for saving in  a CSV file
+     *
+     * @return String containing details of the task
+     */
     @Override
     public String saveTaskCsv() {
         return super.saveTaskCsv() + ",/at," + super.getSaveDateCsv();
