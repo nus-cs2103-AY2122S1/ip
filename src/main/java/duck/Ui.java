@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 public class Ui {
     /**
-     * Displays the program welcome message.
+     * Returns a string containing the program welcome message.
      *
      * @return The program welcome message.
      */
@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Displays the program closing message.
+     * Returns a string containing the program closing message.
      *
      * @return The program closing message.
      */
@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * Displays the current task list.
+     * Returns a string containing the current task list.
      *
      * @param taskList The task list to be displayed.
      * @return The task list in string representation.
@@ -45,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message to show that the given task has been set to done.
+     * Returns a string containing a message to show that the given task has been set to done.
      *
      * @param toSetDone The task that has been set to done.
      * @return String representing the task being done.
@@ -56,7 +56,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message to show that the given task has been deleted.
+     * Returns a string containing a message to show that the given task has been deleted.
      *
      * @param deleted The task that has been deleted.
      * @param listLength The new length of the task list after the deletion.
@@ -69,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Displays a schedule of tasks for the given date.
+     * Returns a string containing a schedule of tasks for the given date.
      *
      * @param taskList The task list.
      * @param desiredDate The date for which the schedule is found.
@@ -96,7 +96,7 @@ public class Ui {
     }
 
     /**
-     * Displays a list of tasks in the current task list that contain the given keyword.
+     * Returns a string containing a list of tasks in the current task list that contain the given keyword.
      *
      * @param taskList The task list.
      * @param keyword The keyword to look for in the task names.
@@ -111,7 +111,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message to show that the given task has been added to the task list.
+     * Returns a string containing a message to show that the given task has been added to the task list.
      *
      * @param newTask The task that has been added to the task list.
      * @param listLength The new length of the task list after the addition.
@@ -124,7 +124,7 @@ public class Ui {
     }
 
     /**
-     * Displays the error message of the given DuckException.
+     * Returns a string containing the error message of the given DuckException.
      *
      * @param e The DuckException whose error message is to be displayed.
      * @return The DuckException error message.

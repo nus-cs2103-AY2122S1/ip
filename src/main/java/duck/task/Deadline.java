@@ -72,12 +72,12 @@ public class Deadline extends Task {
     /**
      * Checks if this Deadline object's deadline is on the given date.
      *
-     * @param l The date against which to check this Deadline object's deadline.
+     * @param givenDate The date against which to check this Deadline object's deadline.
      * @return true if the deadline is on the given date.
      */
     @Override
-    public boolean isTodayTask(LocalDate l) {
-        return l.isEqual(deadlineDate);
+    public boolean isTodayTask(LocalDate givenDate) {
+        return givenDate.isEqual(deadlineDate);
     }
 
     @Override

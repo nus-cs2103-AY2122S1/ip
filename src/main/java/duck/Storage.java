@@ -149,11 +149,11 @@ public class Storage {
         try {
             // Create updated file
             String updatedPath = filePath.split("/")[0] + "/updated.txt";
-            File updated = new File(updatedPath);
-            updated.createNewFile();
+            File updatedFile = new File(updatedPath);
+            updatedFile.createNewFile();
 
             // Initialise file reader and writer
-            FileWriter writer = new FileWriter(updated, true);
+            FileWriter writer = new FileWriter(updatedFile, true);
             BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
@@ -174,7 +174,7 @@ public class Storage {
 
             // Replace duke with the updated file
             duck.delete();
-            updated.renameTo(duck);
+            updatedFile.renameTo(duck);
 
         } catch (IOException e) {
             ui.showException(new DuckException(DuckExceptionType.DB_DONE));
@@ -190,11 +190,11 @@ public class Storage {
         try {
             // Create updated file
             String updatedPath = filePath.split("/")[0] + "/updated.txt";
-            File updated = new File(updatedPath);
-            updated.createNewFile();
+            File updatedFile = new File(updatedPath);
+            updatedFile.createNewFile();
 
             // Initialise file reader and writer
-            FileWriter writer = new FileWriter(updated, true);
+            FileWriter writer = new FileWriter(updatedFile, true);
             BufferedReader reader = new BufferedReader(new FileReader(duck));
             String currLine = reader.readLine();
 
@@ -212,7 +212,7 @@ public class Storage {
 
             // Replace duke with the updated file
             duck.delete();
-            updated.renameTo(duck);
+            updatedFile.renameTo(duck);
 
         } catch (IOException e) {
             ui.showException(new DuckException(DuckExceptionType.DB_DELETE));

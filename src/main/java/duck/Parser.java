@@ -70,7 +70,7 @@ public class Parser {
     }
 
     /**
-     * Further parses a 'done' instruction from the user and returns a DoneCommand.
+     * Parses a 'done' instruction from the user and returns a DoneCommand.
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @param taskList Task list where task to set to done is located.
@@ -94,7 +94,7 @@ public class Parser {
     }
 
     /**
-     * Further parses a 'delete' instruction from the user and returns a DeleteCommand.
+     * Parses a 'delete' instruction from the user and returns a DeleteCommand.
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @param taskList Task list where task to delete is located.
@@ -118,7 +118,7 @@ public class Parser {
     }
 
     /**
-     * Further parses a 'find' instruction from the user and returns a FindKeywordCommand.
+     * Parses a 'find' instruction from the user and returns a FindKeywordCommand.
      *
      * @param parsedCommand Array of parsed instructions from the parse function.
      * @return FindKeywordCommand based on user input.

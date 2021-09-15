@@ -1,14 +1,13 @@
 package duck.task;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 /**
  * Represents a task that a user can add to, delete from, find, or set to done in a task list.
  */
 public abstract class Task implements Comparable<Task> {
     private final String taskName;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for a Task.
@@ -17,14 +16,14 @@ public abstract class Task implements Comparable<Task> {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        done = false;
+        isDone = false;
     }
 
     /**
      * Sets the task to done.
      */
     public void setDone() {
-        done = true;
+        isDone = true;
     }
 
     /**
@@ -33,7 +32,7 @@ public abstract class Task implements Comparable<Task> {
      * @return A string representation of this Task's list entry.
      */
     public String listEntry() {
-        if (done) {
+        if (isDone) {
             return "[X] " + taskName;
         } else {
             return "[ ] " + taskName;
@@ -46,7 +45,7 @@ public abstract class Task implements Comparable<Task> {
      * @return A string representation of this Task's database entry.
      */
     public String databaseEntry() {
-        if (done) {
+        if (isDone) {
             return " | 1 | " + taskName;
         } else {
             return " | 0 | " + taskName;
