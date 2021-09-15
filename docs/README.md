@@ -26,7 +26,7 @@ List all tasks currently in the list.
 
 Format: `<list>'
 
-Tasks will be displayed in this format: \[type\] \[status\] description (date time)
+Tasks will be displayed in this format: `<\[type\] \[status\] description (date time)>`
 - Type: T for todo, D for deadline, E for event
 - Status: X for done. Blank for not done
 - Date is in the format: Month Date Year
@@ -51,12 +51,12 @@ Update the specified task.
 Format: `<update INDEX CATEGORY CONTENT>`
 
 CATEGORY must be one of the following:
-- description
-- date
-- time
-- start_time
-- end_time
-The format of the CONTENT must match the CATEGORY. E.g., if CATEGORY is the date, the CONTENT must be a valid date like 2021-09-08.
+- `<description>`
+- `<date>`
+- `<time>`
+- `<start_time>`
+- `<end_time>`
+The format of the `<CONTENT>` must match the `<CATEGORY>`. E.g., if `<CATEGORY>` is the date, the `<CONTENT>` must be a valid date like 2021-09-08.
 
 ### Find a task
 
@@ -64,59 +64,61 @@ Finds tasks whose description contains a string of keywords
 
 Format: `<find KEYWORDS>`
 
-Only the description is searched.
+Only the description is searched.<br/>
 Only full words will be matched e.g. "project" will not match "projects".
 
 ## Usage
 
 ### Add a Task
 
-Input1: `<event project meeting /at 2021-09-15 14:00-16:00>`
-Outcome1: 
-"Got it. I've added this task:
-\[E\] \[ \] project meeting (at Sep 15 2021 14:00-16:00)
+Input1: `<event project meeting /at 2021-09-15 14:00-16:00>`<br/>
+Outcome1: <br/>
+"Got it. I've added this task: <br/>
+\[E\] \[ \] project meeting (at Sep 15 2021 14:00-16:00) <br/>
 Now you have 1 tasks in the list."
 
-Input2: `<todo borrow book>`
-Outcome2: 
-"Got it. I've added this task:
-\[T\] \[ \] borrow book
+Input2: `<todo borrow book>`<br/>
+Outcome2: <br/>
+"Got it. I've added this task: <br/>
+\[T\] \[ \] borrow book <br/>
 Now you have 2 tasks in the list."
 
 ### List all tasks
 
-Input: `<list>`
-Outcome:
-"Here are the tasks in your list:
-1. \[E\] \[ \] project meeting (at Sep 15 2021 14:00-16:00)
+Input: `<list>`<br/>
+Outcome:<br/>
+"Here are the tasks in your list: <br/>
+1. \[E\] \[ \] project meeting (at Sep 15 2021 14:00-16:00)<br/>
 2. \[T\] \[ \] borrow book"
 
 ### Mark a task as done
 
-Input: `<done 2>`
-Outcome:
-"Nice! I've marked this task as done:
+Input: `<done 2>`<br/>
+Outcome:<br/>
+"Nice! I've marked this task as done: <br/>
 \[T\] \[X\] borrow book"
 
 ### Delete a task
 
-Input: `<delete 2>`
-Outcome:
-"Noted. I've removed this task:
-\[T\] \[X\] borrow book
+Input: `<delete 2>`<br/>
+Outcome: <br/>
+"Noted. I've removed this task: <br/>
+\[T\] \[X\] borrow book <br/>
 Now you have 1 tasks in the list."
 
 ### Update a task
-Input: `<update 1 date 2021-09-16>`
-Outcome:
-"Nice! The task is updated as follows:
+Input: `<update 1 date 2021-09-16>`<br/>
+Outcome:<br/>
+"Nice! The task is updated as follows: <br/>
 \[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
 
 ### Find a task
-Input: `<find project>`
-Outcome:
-"Here are the matching tasks in your list:
+Input: `<find project>`<br/>
+Outcome:<br/>
+"Here are the matching tasks in your list: <br/>
 1. \[E\] \[ \] project meeting (at Sep 16 2021 14:00-16:00)"
 
-
-*Enjoy the app & your life!* :wink:
+<br/>
+<br/>
+<br/>
+**Enjoy the app & your life!** :wink:
