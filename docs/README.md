@@ -3,20 +3,19 @@
 Duke is a program used for helping you keep track of your own tasks at **anytime**!
 Duke can track:
 1. Things **to do**
-2. Your **deadlines** :clock3:
-3. Any **events** that are happening :tada:
+2. Your **deadlines**
+3. Any **events** that are happening
 
 ## Features 
 
 ### Managing Tasks
 
 Simply enter information of the task you want to keep note of, and Duke will do the memory work for you!
-You can also mark them as done :white_check_mark:
-and also delete :wastebasket: them when they are not needed anymore.
+You can also mark them as done and also delete them when they are not needed anymore.
  
 ### Tagging
 
-You can tag tasks :label: by adding tags to them. The tags will allow you to group up tasks that are similar or
+You can tag tasks by adding tags to them. The tags will allow you to group up tasks that are similar or
 help you prioritize your work!
 
 ## Usage
