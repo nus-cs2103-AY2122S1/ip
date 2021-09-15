@@ -1,8 +1,10 @@
 package duke.task;
 
+import duke.DukeException;
+import duke.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents an event
@@ -30,7 +32,12 @@ public class Event extends Task {
      * @return Event from string input with description and date.
      */
     public static Event build(String args) {
-        String[] desc_date = Task.splitDescriptionAndDate(args, "by");
+        String[] desc_date = new String[0];
+        try {
+            desc_date = Task.splitDescriptionAndDate(args, "by");
+        } catch (DukeException e) {
+            Ui.showLoadingError(e.getMessage());
+        }
         String desc = desc_date[0];
         String dateString = desc_date[1];
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM d yyyy"));
