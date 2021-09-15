@@ -4,12 +4,12 @@ Welcome User! Retriever the Chatbot is a Friendly, Dog themed Chatbot. It
 helps you to manage your busy schedule with its chat style user interface.
 
 <p align="center">
-* Welcome Splash Screen
+Welcome Splash Screen
 </p>
 ![](welcomeSplashScreen.png)
 
 <p align="center">
-* Chatbot Window
+Chatbot Window
 </p>
 ![](chatBotWindow.png)
 
@@ -381,6 +381,7 @@ Master, You are Busy For The Day...
 
 ---
 ## Command Summary
+
 Command | Summary | `Syntax`
 ------- | ------- | -------
 bye | To end the session with the Chatbot | `bye`
