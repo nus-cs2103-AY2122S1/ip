@@ -13,5 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# duke save files
+/data/
+/text-ui-test/data/
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
