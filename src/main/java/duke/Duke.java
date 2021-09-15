@@ -36,7 +36,7 @@ public class Duke {
                 cmd.execute();
             }
         } else {
-            ui.setMessage("We're closed.");
+            System.exit(0);
         }
 
         return ui.getMessage();

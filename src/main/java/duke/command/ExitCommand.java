@@ -32,8 +32,6 @@ public class ExitCommand extends Command {
     @Override
     public void execute() {
         duke.triggerExit();
-        ui.setMessage("Seeya.");
-        ui.showFarewell();
-        System.exit(0);
+        ui.setMessage("Seeya, press enter again to close.");
     }
 }
