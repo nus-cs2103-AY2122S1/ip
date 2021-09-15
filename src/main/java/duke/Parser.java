@@ -182,6 +182,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a task from a line of the saved file.
+     * @param line The line from the saved file.
+     * @return A Task
+     * @throws DukeException Thrown when task is invalid.
+     */
     public static Task parseSavedFile(String line) throws DukeException {
         // Split by '|' character
         String[] datas = line.split(" \\| ");
