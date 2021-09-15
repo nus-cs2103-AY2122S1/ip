@@ -3,22 +3,19 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.TaskNotFoundException;
-
 import duke.task.Task;
 import duke.task.TaskList;
-
 import duke.Storage;
-
 import duke.Ui;
 
 /**
- * Represents the user command when the user is deletes a task.
+ * Represents the user command when the user tries to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
     private String command;
 
     /**
-     * Constructor for the deleteCommand class where the user command is initialized.
+     * Represents a constructor for the DeleteCommand class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -37,7 +34,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the response when the user enters a 'delete' command and updates the task list and storage 
+     * Executes the response when the user enters a delete command and updates the task list and storage 
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
@@ -61,7 +58,9 @@ public class DeleteCommand extends Command {
         taskList.removeTask(value-1);
         boolean isTaskPresent = taskList.isTaskPresent(task);
         assert isTaskPresent == false: "isTaskPresent should be false since the task is removed from the task list";
+        
         storage.writeToFile("./duke.txt", taskList);
+        
         Ui ui = new Ui(taskList, storage);
         String response = ui.deleteResponse(task);
         return response;

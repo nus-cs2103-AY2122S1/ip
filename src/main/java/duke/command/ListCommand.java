@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.task.TaskList;
-
 import duke.Storage;
 
 /**
@@ -11,7 +10,7 @@ public class ListCommand extends Command {
     private String command;
 
     /**
-     * Constructor for the listCommand class where the user command is initialized.
+     * Represents a constructor for the ListCommand class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -30,8 +29,8 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Displays the task list when the user enters 'list'
-     *
+     * Returns the task list when the user enters the list command
+     * 
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
      */

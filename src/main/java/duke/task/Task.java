@@ -1,14 +1,14 @@
 package duke.task;
 
 /**
- * An abstract class that represents the various types of tasks.
+ * Represents the various types of tasks that can be added to the task list.
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for the Command class where the user command is initialized.
+     * Represents a constructor for the Command class where the user command is initialized.
      *
      * @param description Description of the task.
      */
@@ -34,14 +34,14 @@ public abstract class Task {
     }
     
     /**
-     * Abstract method which denotes the string representation of the task list that is stored on duke.txt.
+     * Denotes the string representation of the task list that is stored on duke.txt.
      * 
      * @return String representation of task list stored on duke.txt.
      */
     public abstract String getTaskListOnDisk();
     
     /**
-     * Returns the string representation of the task stored in the list variable.
+     * Returns the string representation of the task that is stored in the task list.
      *
      * @return String description of the task.
      */

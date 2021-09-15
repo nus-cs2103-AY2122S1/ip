@@ -1,5 +1,0 @@
-1. duke.task.Todo |X| play cricket
-2. duke.task.Todo |X| event concert/by 2021-08-09 1800
-3. duke.task.Todo |X| study
-4. duke.task.Todo |X| play
-5. duke.task.Deadline |X| cs assignment | by: Aug 19 2022, 6 PM

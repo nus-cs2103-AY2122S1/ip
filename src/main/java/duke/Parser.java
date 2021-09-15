@@ -17,7 +17,7 @@ public class Parser {
     private String command;
 
     /**
-     * Constructor for the Parser class where the user command is initialized.
+     * Represents a constructor for the Parser class where the user command is initialized.
      *
      * @param command Command typed the user.
      */
@@ -31,10 +31,10 @@ public class Parser {
      * @return Command object.
      */
     public Command parse() {
+        int len = command.length();
         if (command.equals("list")) {
             return new ListCommand(command);
-        } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1)) && command.length() <= 8 
-                && !Character.isAlphabetic(command.charAt(command.length() - 2))  && Character.isDigit(command.charAt(5))) {
+        } else if (command.startsWith("done") && Character.isDigit(command.charAt(len - 1))) {
             return new DoneCommand(command);
         } else if (command.startsWith("todo")) {
             return new TodoCommand(command);
@@ -52,7 +52,7 @@ public class Parser {
     }
 
     /**
-     * Checks if the user types the command 'bye' or the user clicks enter without typing any command.
+     * Checks if the user types the command 'bye' or clicks 'enter' without typing any command.
      *
      * @return true or false.
      */

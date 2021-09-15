@@ -6,6 +6,7 @@ public class InvalidTaskCommandException extends DukeException {
                 + "<yyyy-mm-dd HHmm>");
     }
 
+    @Override
     public String toString() {
         return super.toString();
     }

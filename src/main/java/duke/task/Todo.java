@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Todo extends Task {
     /**
-     * Constructor for the Todo class where the description of task is initialized.
+     * Represents a constructor for the Todo class where the description of task is initialized.
      *
      * @param description Description of the task.
      */
@@ -13,9 +13,8 @@ public class Todo extends Task {
         super(description);
     }
 
-
     /**
-     * Returns the string representation of the todo task stored on duke.txt.
+     * Returns the string representation of the todo task that is stored on duke.txt.
      *
      * @return String representation of the todo task stored on duke.txt.
      */
@@ -24,7 +23,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the string representation of the todo task stored in the list variable.
+     * Returns the string representation of the todo task that is stored in the task list.
      *
      * @return String description of the todo task.
      */
