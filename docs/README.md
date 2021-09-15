@@ -1,3 +1,6 @@
+---
+title: Brobot User Guide
+---
 
 ## Quick start
 
@@ -7,92 +10,78 @@
 
 3. Copy the file to the folder you want to use as the home folder for the application. Data will be saved in the home folder by default.
 
-4. Double-click the file to start the app. You should see a GUI similar to the one below: 
-![Example GUI image of Brobot](https://markuslim24.github.io/ip/Ui.png|width=100)
-
+4. Double-click the file to start the app. 
 
 ## Features 
-
+* * *
 ### Add a todo :`todo`
 Adds a todo task to the tasklist.
 
-Format: todo [DESCRIPTION]
+Format: `todo [DESCRIPTION]`
 
 Examples:
-* todo eat my lunch
-* todo think about life
+* `todo eat my lunch`
+* `todo think about life`
 
 
 ### Add a deadline :`deadline`
 Adds a deadline task to the tasklist.
 
-Format: deadline [DESCRIPTION]/by [DD/MM/YYYY HHMM]
+Format: `deadline [DESCRIPTION]/by [DD/MM/YYYY HHMM]`
 
 Examples:
-* deadline finish cs2103t ip /by 17/09/2021 1700
-* deadline go to sleep/by 16/09/2021 2359
+* `deadline finish cs2103t ip /by 17/09/2021 1700`
+* `deadline go to sleep/by 16/09/2021 2359`
+
 
 ### Add an event : `event`
 Adds an event task to the tasklist.
 
-Format: event [DESCRIPTION]/at [DD/MM/YYYY HHMM]
+Format: `event [DESCRIPTION]/at [DD/MM/YYYY HHMM]`
 
 Examples:
-* event attend birthday party /at 20/09/2021 1300
-* event go for lecture/at 15/09/2021 1400
-
+* `event attend birthday party /at 20/09/2021 1300`
+* `event go for lecture/at 15/09/2021 1400`
 
 
 ### List my tasks: `list`
 Shows the current list of tasks by date added.
 
-Format: list
+Format: `list`
 
 
 ### Mark a task as done: `done`
 Mark a task on the tasklist as done.
 
-Format: done [TASK_NUMBER]
+Format: `done [TASK_NUMBER]`
 
 Examples:
-* done 1
-* done 5
+* `done 1`
+* `done 5`
+
 
 ### Delete a task: `delete`
 Delete a task from the tasklist.
 
-Format: delete [TASK_NUMBER]
+Format: `delete [TASK_NUMBER]`
 
 Examples:
-* delete 2
-* delete 3
+* `delete 2`
+* `delete 3`
+
 
 ### Search tasks: `find`
 Search for all tasks with descriptions that contain the specified keyword.
 
-Format: find [KEYWORD]
+Format: `find [KEYWORD]`
 
 Examples:
-* find work
-* find cs2103t
+* `find work`
+* `find cs2103t`
+
 
 ### Change storage location: `storage`
 Allows users to select a new save location for which data for the app will be stored.
 
-Format: storage
+Format: `storage`
 
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
