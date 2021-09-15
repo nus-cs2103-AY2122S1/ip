@@ -15,7 +15,7 @@ import duke.task.TaskList;
 
 /**
  * This class runs a personal assistant chat bot that helps a person keep track of various tasks.
- * Commands for the bot are: list, mark, find, delete, bye, event, deadline, and todo.
+ * Commands for the bot are: list, mark, find, delete, bye, event, deadline, help, and todo.
  * Unrecognised commands will be met with a prompt to enter a recognised one instead.
  */
 public class Duke {
