@@ -101,7 +101,7 @@ public class Duke {
             }
         }
 
-        private String parseDescriptionWithDate(String userInput, String command) {
+        private String parseDescriptionWithDate(String userInput, String command) throws DukeException {
             String description = "";
 
             assert command.equals("/by ") || command.equals("/at ")
@@ -122,7 +122,7 @@ public class Duke {
                 );
                 description = userInput.substring(startOfDescription, indexOfDate).strip();
                 return description;
-            } catch (DateTimeParseException | DukeException e) {
+            } catch (DateTimeParseException e) {
                 System.out.println(e.getMessage());
             }
             return description;
