@@ -1,0 +1,33 @@
+@font-face {
+  src: url(../fonts/YuseiMagic-Regular.ttf);
+}
+
+.root {
+    -fx-font-size: 14;
+    -fx-font-family: 'Yusei Magic', sans-serif;
+    -fx-font-weight: 700;
+}
+
+.send-button {
+    -fx-background-radius: 10em;
+}
+
+.dialog-container {
+    -fx-background-image: url(../images/background.png);
+    -fx-background-size: 100%;
+    -fx-background-position: bottom;
+    -fx-padding: 10;
+}
+
+.dialog-box {
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.duke-dialog-background {
+    -fx-background-color: #FFE194;
+}
+
+.user-dialog-background {
+    -fx-background-color: #B8DFD8;
+}
