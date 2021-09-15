@@ -73,10 +73,13 @@ public class Ui {
      * @return A OutputMessage containing the matching task list message.
      */
     public OutputMessage getMatchingTaskListMessage(TaskList taskList) {
+        if (taskList.getTaskListSize() == 0) {
+            return new OutputMessage("There were no matching tasks in the Stark Industries Database.");
+        }
         return new OutputMessage(String.format(
                 "%s\n%s",
                 "Stark Industries Database contains these matching tasks:",
-                taskList.toString()
+                taskList
         ));
     }
 

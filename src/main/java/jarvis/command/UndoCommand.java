@@ -37,7 +37,7 @@ public class UndoCommand extends Command {
      */
     @Override
     public OutputMessage execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
-        if (numberOfCommandsToUndo == 0 || numberOfCommandsToUndo > taskList.getVersionHistorySize()) {
+        if (numberOfCommandsToUndo <= 0 || numberOfCommandsToUndo > taskList.getVersionHistorySize()) {
             throw new UndoException();
         }
         taskList.revertHistory(numberOfCommandsToUndo, storage);

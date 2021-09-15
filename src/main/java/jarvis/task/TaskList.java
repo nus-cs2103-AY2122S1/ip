@@ -122,7 +122,7 @@ public class TaskList {
     public TaskList getListWithKeyword(String keyword) {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.toString().toLowerCase().contains(keyword)) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 taskArrayList.add(task);
             }
         }

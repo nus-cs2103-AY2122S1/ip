@@ -34,6 +34,15 @@ public class Task {
     }
 
     /**
+     * Gets the description of a task.
+     *
+     * @return The description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Gets the string representation of a task that is to be saved to storage file.
      *
      * @return String representation that is to be saved.
