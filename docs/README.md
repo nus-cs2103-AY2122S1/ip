@@ -19,7 +19,7 @@
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest `eightbit.jar` from [here](https://github.com/pualixue/ip/releases/tag/v1.0).
+2. Download the latest `eightbit.jar` from [here](https://github.com/pualixue/ip/releases/tag/v1.1).
 3. Copy the file to the folder you want to use as the home folder for EightBit.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it.<br/>
