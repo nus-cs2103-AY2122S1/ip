@@ -21,6 +21,7 @@ public class Duke {
     /**
      * The following are private class fields of a Duke instance.
      */
+    private static String dukeResponseHeader = "FullOfBugs:\n";
     private final Storage store;
     private final Ui ui;
     private TaskList taskList;
@@ -85,13 +86,13 @@ public class Duke {
     }
 
     private void showDukeErrorMessage(String error) {
-        String dukeTextWhenException = "FullOfBugs:\n" + error;
+        String dukeTextWhenException = dukeResponseHeader + error;
         dialogContainer.getChildren()
                 .add(DukeExceptionDialogBox.getDukeExceptionDialog(dukeTextWhenException, dukeAvatarWhenException));
     }
 
     private void showDukeResponse(String message) {
-        String dukeText = "FullOfBugs:\n" + message;
+        String dukeText = dukeResponseHeader + message;
         dialogContainer.getChildren().add(DukeDialogBox.getDukeDialog(dukeText, dukeAvatar));
     }
 
