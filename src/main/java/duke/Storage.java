@@ -45,7 +45,7 @@ public class Storage {
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
         }
-        return "List saved!";
+        return Ui.saveList();
     }
 
     /**

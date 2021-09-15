@@ -37,6 +37,8 @@ public class Duke {
     public String getResponse(String string) {
         if (Objects.equals(string.charAt(0), '/')) {
             return Parser.helpCommand(string);
+        } else if (Objects.equals(string, "help")) {
+            return HelpUi.helpText();
         } else if (Objects.equals(string, "save")) {
             return storage.write(list);
         } else if (Objects.equals(string, "bye")) {
@@ -45,7 +47,6 @@ public class Duke {
         } else if (string.indexOf(' ') != -1) {
             String task = string.substring(0, string.indexOf(' '));
             String description = string.substring(string.indexOf(' ') + 1);
-            String result;
 
             switch (task) {
             case "done":
@@ -54,8 +55,7 @@ public class Duke {
 
                     Task cur = list.get(pointer - 1);
                     cur.done();
-                    result = "Nice! I've marked this task as done:\n" + cur;
-                    return result;
+                    return Ui.markDone(cur);
 
                 } catch (DukeException | NumberFormatException e) {
                     return e.getMessage();

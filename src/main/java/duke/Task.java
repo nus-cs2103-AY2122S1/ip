@@ -18,7 +18,7 @@ public class Task {
      */
     public Task(String name) throws DukeException {
         if (name.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException(Ui.wrongFormat());
         }
         this.name = name;
     }

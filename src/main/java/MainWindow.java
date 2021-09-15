@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button listButton;
     @FXML
-    private Button helpButton;
+    private Button clearButton;
 
     @FXML
     private ListView<String> taskList;
@@ -93,8 +93,7 @@ public class MainWindow extends AnchorPane {
      * Displays a help message for new users.
      */
     @FXML
-    private void displayHelp() {
-        String helpMessage = HelpUi.helpText();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(helpMessage, dukeImage));
+    private void clearList() {
+        dialogContainer.getChildren().clear();
     }
 }

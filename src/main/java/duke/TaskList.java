@@ -20,8 +20,7 @@ public class TaskList {
         String result;
         list.add(task);
         result = "added: " + task + "\n";
-        result += "Now you have " + list.size() + " tasks in the list";
-        return result;
+        return result + "Now you have " + list.size() + " tasks in the list\n" + "uwu";
     }
 
     /**
@@ -33,7 +32,7 @@ public class TaskList {
      */
     public Task get(int pos) throws DukeException {
         if (pos < 0 || pos > list.size()) {
-            throw new DukeException("☹ OOPS!!! No such task found!");
+            throw new DukeException("OOPS!!! No such task found!");
         }
         return list.get(pos);
     }
@@ -73,13 +72,12 @@ public class TaskList {
     public String delete(int pos) throws DukeException {
         String result;
         if (pos - 1 < 0 || pos > list.size()) {
-            throw new DukeException("☹ OOPS!!! No such task found!");
+            throw new DukeException("OOPS!!! No such task found!");
         }
         Task temp = list.get(pos - 1);
         list.remove(pos - 1);
         result = "Noted, I have removed this task:\n" + temp.toString() + "\n";
-        result += "Now you have " + list.size() + " tasks in the list";
-        return result;
+        return result + "Now you have " + list.size() + " tasks in the list\nuwu";
     }
 
     /**
@@ -91,7 +89,7 @@ public class TaskList {
      */
     public String find(String string) throws DukeException {
         if (string.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! No input was detected!");
+            throw new DukeException("OOPS!!! No input was detected!");
         }
         int counter = 0;
         StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
@@ -104,7 +102,7 @@ public class TaskList {
             }
         }
         if (counter == 0) {
-            return "☹ OOPS!!! No items found!";
+            return "OOPS!!! No items found!";
         } else {
             return result.toString();
         }
