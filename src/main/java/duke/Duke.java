@@ -20,10 +20,10 @@ import javafx.application.Platform;
 public class Duke {
 
     /** Path to data storage file. */
-    private final String LOCATION_OF_FILE = "data/duke.txt";
+    private static final String LOCATION_OF_FILE = "data/duke.txt";
 
     /** Path to expenses data file */
-    private final String LOCATION_OF_EXPENSES = "data/expenses.txt";
+    private static final String LOCATION_OF_EXPENSES = "data/expenses.txt";
 
     /** Handles loading and saving of Tasks. */
     private final Storage storage;

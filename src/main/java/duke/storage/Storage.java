@@ -25,13 +25,13 @@ public class Storage {
 
 
     /** Represents the deadline keyword. */
-    private final char DEADLINE = 'D';
+    private static final char DEADLINE = 'D';
 
     /** Represents the event keyword. */
-    private final char EVENT = 'E';
+    private static final char EVENT = 'E';
 
     /** Represents the todo keyword. */
-    private final char TODO = 'T';
+    private static final char TODO = 'T';
 
     /** Data file. */
     private final File file;

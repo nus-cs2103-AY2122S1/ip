@@ -27,7 +27,7 @@ import duke.exception.TaskNotFoundException;
 public class Parser {
 
     /** Represents an empty command word to call. */
-    private final String EMPTY_COMMAND = "";
+    private static final String EMPTY_COMMAND = "";
 
     /**
      * Parses a string task list index to an integer.
