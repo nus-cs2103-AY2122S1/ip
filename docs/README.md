@@ -1,4 +1,4 @@
-<img align="left" height="119" width="119" src="../src/main/resources/images/bird.png">
+<img align="left" height="119" width="119" src="https://raw.githubusercontent.com/qreoct/ip/master/src/main/resources/images/bird.png">
 
 # Augury User Guide
 *Jefferson LIM ([@qreoct](https://github.com/qreoct))*
@@ -166,6 +166,8 @@ Your search matched these tasks:
  [E][ ] shuffle off the mortal coil (at: 31 Dec 2021, Fri, 23:59)
 ```
 
+**Command aliases:** `f`
+
 ### `sort` - Sorts the tasks
 
 Sorts the tasks according to a given sort method.
@@ -201,8 +203,6 @@ Here are your tasks:
  2. [E][ ] catch the conscience of the king (at: 28 Nov 2021, Sun, 21:00)
  3. [T][ ] set mousetraps
 ```
-
-**Command aliases:** `f`
 
 ### `done` - Mark tasks as done
 
