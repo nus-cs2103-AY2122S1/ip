@@ -44,6 +44,7 @@ A `Todo` task is the simplest kind of task.
 You can use it to track any task status.
 
 Format: `todo [description]`
+
 | required | arguement | remark |
 |----------|-----------|--------|
 | ✅ | [description] | the description of the task. |
@@ -54,6 +55,7 @@ An `Event` task is a task with an event date.
 You can use it to track your event schedules.
 
 Format: `event [description] /at [yyyy-mm-dd]`
+
 | required | arguement | remark |
 |----------|-----------|--------|
 | ✅ | [description] | the description of the task. |
@@ -64,6 +66,7 @@ An `Deadline` task is a task with an deadline.
 You can use it to remind you about deadlines.
 
 Format: `deadline [description] /by [yyyy-mm-dd]`
+
 | required | arguement | remark |
 |----------|-----------|--------|
 | ✅ | [description] | the description of the task. |
@@ -82,6 +85,7 @@ A not-so-good search function
 You can use it to find your tasks.
 
 Format: `find [search string]`
+
 | required | arguement | remark |
 |----------|-----------|--------|
 | ✅ | [search string] | the string that is contained in a task description. |
@@ -100,6 +104,7 @@ Format: `done [index]`
 Delete a task in the list.  
 
 Format: `delete [index]`
+
 | required | arguement | remark |
 |----------|-----------|--------|
 | ✅ | [index] | the index of the course starting with 1. |
