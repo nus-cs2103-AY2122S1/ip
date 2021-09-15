@@ -1,39 +1,47 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.IncorrectFormatException;
+import duke.exception.NoNumberException;
+import duke.exception.NoTimeException;
+
 import java.util.StringJoiner;
 
 public class Utils {
 
     public static String[] splitBetween(String str, String separator) throws DukeException {
-        StringJoiner start = new StringJoiner(" ");
-        StringJoiner end = new StringJoiner(" ");
+        String delimiter = " ";
+        String emptyString = "";
+
+        StringJoiner beforeSeparator = new StringJoiner(delimiter);
+        StringJoiner afterSeparator = new StringJoiner(delimiter);
 
         int i = 0;
         boolean isAfterSeparator = false;
 
-        String[] strArray = str.split(" ");
+        String[] strArray = str.split(delimiter);
 
         while (i < strArray.length) {
             String currentString = strArray[i];
             if (isAfterSeparator) {
-                end.add(currentString);
+                afterSeparator.add(currentString);
             } else if (currentString.equals(separator)) {
                 isAfterSeparator = true;
             } else {
-                start.add(currentString);
+                beforeSeparator.add(currentString);
             }
             i++;
         }
 
         if (!isAfterSeparator) {
-            throw new DukeException("Incorrect format for command.");
+            throw new IncorrectFormatException();
         }
 
-        if (String.valueOf(end).equals("")) {
-            throw new DukeException("Please specify a time for the task.");
+        if (String.valueOf(afterSeparator).equals(emptyString)) {
+            throw new NoTimeException();
         }
 
-        return new String[]{String.valueOf(start), String.valueOf(end)};
+        return new String[]{String.valueOf(beforeSeparator), String.valueOf(afterSeparator)};
     }
 
     public static int getInputNumber(String userInput) throws DukeException {
@@ -43,7 +51,7 @@ public class Utils {
         try {
             return Integer.parseInt(userInput) - 1;
         } catch (NumberFormatException exception) {
-            throw new DukeException("Please enter a number after the command.");
+            throw new NoNumberException();
         }
     }
 

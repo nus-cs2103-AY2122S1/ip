@@ -2,9 +2,11 @@ package duke.command;
 
 import static duke.Utils.splitBetween;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.InvalidCommandException;
+import duke.exception.TaskFormatEmptyException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -21,7 +23,7 @@ public class TaskCommand extends Command {
         assert userArgument != null;
 
         if (userArgument.equals("")) {
-            throw new DukeException("The description of a Task cannot be empty.");
+            throw new TaskFormatEmptyException();
         }
 
         switch (userCommand) {
@@ -37,7 +39,7 @@ public class TaskCommand extends Command {
             tasks.addTask(new Event(eventInfo[0], eventInfo[1], false));
             break;
         default:
-            throw new DukeException("Unknown command!");
+            throw new InvalidCommandException();
         }
         return addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks);
     }

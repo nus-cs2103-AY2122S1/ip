@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Utils;
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
@@ -19,7 +20,7 @@ public class DeleteCommand extends Command {
         int indexToDelete = Utils.getInputNumber(userArgument);
 
         if (indexToDelete >= tasks.numberOfTasks() || indexToDelete < 0) {
-            throw new DukeException("Task does not exist!");
+            throw new TaskNotFoundException();
         }
 
         Task removedTask = tasks.getTask(indexToDelete);

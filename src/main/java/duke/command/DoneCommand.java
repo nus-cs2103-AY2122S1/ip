@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Utils;
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
@@ -19,7 +20,7 @@ public class DoneCommand extends Command {
         int done = Utils.getInputNumber(userArgument);
 
         if (done >= tasks.numberOfTasks() || done < 0) {
-            throw new DukeException("Task does not exist!");
+            throw new TaskNotFoundException();
         }
 
         Task doneTask = tasks.getTask(done);
