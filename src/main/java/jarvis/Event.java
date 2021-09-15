@@ -1,5 +1,6 @@
 package jarvis;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,44 +19,55 @@ public class Event extends Task {
      * @param description the name/description of the task
      * @param time The times at which the event starts and ends
      */
-    public Event(String description, String time) {
+    public Event(String description, String time) throws JarvisException {
         super(description);
         assert !(description.equals("")) : "Event description is empty";
 
         assert (time.length() == 22) : "Timestamp is incorrect.";
         this.time = time;
 
-        // Extracting the date, month and year numbers from the 'time' string
-        int date = Integer.parseInt(time.substring(0, 2));
-        assert (date > 0 && date < 32) : "Date is not valid";
+        LocalDateTime start, end;
 
-        int month = Integer.parseInt(time.substring(3, 5));
-        assert (month > 0 && month < 13) : "Month is not valid";
+        try {
+            // Extracting the date, month and year numbers from the 'time' string
+            int date = Integer.parseInt(time.substring(0, 2));
+            assert (date > 0 && date < 32) : "Date is not valid";
 
-        int year = Integer.parseInt(time.substring(6, 10));
-        assert (year > 0) : "Year is not valid";
+            int month = Integer.parseInt(time.substring(3, 5));
+            assert (month > 0 && month < 13) : "Month is not valid";
 
-        // Extracting the event start time hour and minute numbers from the 'time' string
-        int startHour = Integer.parseInt(time.substring(11, 13));
-        assert (startHour >= 0 && startHour < 24) : "Start hour is not valid";
+            int year = Integer.parseInt(time.substring(6, 10));
+            assert (year > 0) : "Year is not valid";
 
-        int startMin = Integer.parseInt(time.substring(14, 16));
-        assert (startMin >= 0 && startMin < 60) : "Start minute is not valid";
+            // Extracting the event start time hour and minute numbers from the 'time' string
+            int startHour = Integer.parseInt(time.substring(11, 13));
+            assert (startHour >= 0 && startHour < 24) : "Start hour is not valid";
 
-        // Extracting the event end time hour and minute numbers from the 'time' string
-        int endHour = Integer.parseInt(time.substring(17, 19));
-        assert (endHour >= 0 && endHour < 24) : "End hour is not valid";
+            int startMin = Integer.parseInt(time.substring(14, 16));
+            assert (startMin >= 0 && startMin < 60) : "Start minute is not valid";
 
-        int endMin = Integer.parseInt(time.substring(20, 22));
-        assert (endMin >= 0 && endMin < 60) : "End minute is not valid";
+            // Extracting the event end time hour and minute numbers from the 'time' string
+            int endHour = Integer.parseInt(time.substring(17, 19));
+            assert (endHour >= 0 && endHour < 24) : "End hour is not valid";
 
-        // Creating LocalDateTime objects for the start and end times of the event so that their formats can be changed
-        // later
-        LocalDateTime start = LocalDateTime.of(year, month, date, startHour, startMin);
+            int endMin = Integer.parseInt(time.substring(20, 22));
+            assert (endMin >= 0 && endMin < 60) : "End minute is not valid";
+
+            // Creating LocalDateTime objects for the start and end times of the event so that their formats can be changed
+            // later
+            start = LocalDateTime.of(year, month, date, startHour, startMin);
+            end = LocalDateTime.of(year, month, date, endHour, endMin);
+
+        } catch (NumberFormatException | DateTimeException e) {
+            throw new JarvisException(Ui.INVALID_DATE_OT_TIMING);
+        }
+
+        if (start.isAfter(end)) {
+            throw new JarvisException(Ui.START_IS_AFTER_END );
+        }
+
         this.eventStart = start;
-        LocalDateTime end = LocalDateTime.of(year, month, date, endHour, endMin);
         this.eventEnd = end;
-
         // Formatting the time to be displayed to users
         this.timeToDisplay = start.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")) +
                 " to " + end.format(DateTimeFormatter.ofPattern("HH:mm"));
