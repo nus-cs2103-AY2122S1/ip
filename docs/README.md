@@ -21,7 +21,7 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 ### **Download and run Duke**
 1. Download the jar file from the latest release from [here](https://github.com/Haozeee/ip).
 2. Using the terminal, navigate to the location of the downloaded jar file.
-3. Launch Duke using the command `jave -jar duke.jar`
+3. Launch Duke by entering the command `jave -jar duke.jar` in the terminal.
 4. Note that launching Duke by double clicking it may cause issues with saving tasks to local storage. Thus, it is better to launch Duke using the terminal.
 
 ### **View and edit the source code**
