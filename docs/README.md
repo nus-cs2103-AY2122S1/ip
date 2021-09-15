@@ -166,6 +166,42 @@ Your search matched these tasks:
  [E][ ] shuffle off the mortal coil (at: 31 Dec 2021, Fri, 23:59)
 ```
 
+### `sort` - Sorts the tasks
+
+Sorts the tasks according to a given sort method.
+
+**Command syntax:** `sort [option]`
+
+If `option` is left out, sort will use the default method, which is `Lexicographic (ascending)`.
+
+`option` is a number from `0` to `6`.
+
+**Sort options:**
+
+Value | Sort method
+---|---
+`0` | Lexicographic (ascending)
+`1` | Lexicographic (descending)
+`2` | Task type
+`3` | Task status (ascending)
+`4` | Task status (descending)
+`5` | Task time (ascending)
+`6` | Task time (descending)
+
+**Example usage:**
+`sort 6`
+
+**Expected outcome:**
+
+```
+I've sorted your list with method <Task time (descending)>
+
+Here are your tasks:
+ 1. [E][ ] shuffle off the mortal coil (at: 31 Dec 2021, Fri, 23:59)
+ 2. [E][ ] catch the conscience of the king (at: 28 Nov 2021, Sun, 21:00)
+ 3. [T][ ] set mousetraps
+```
+
 **Command aliases:** `f`
 
 ### `done` - Mark tasks as done
@@ -232,7 +268,7 @@ Closes Augury, saving your tasks.
 
 ### Themes
 
-![Themes](Ui-platforms.png)
+![Themes](Ui-themes.gif)
 
 Augury comes with various colour themes.
 
@@ -249,7 +285,8 @@ Action | Format, Examples
 **Deadline** | `deadline [description] /by [time]` <br><br> e.g. `deadline avenge Claudius /by 2021-09-15 1800`
 **Delete** | `delete [...index]`<br><br> e.g. `delete 3, 4, 8`
 **Mark as done** | `done [...index]`<br><br> e.g. `done 1, 2, 5`
-**Find tasks** | `find [query]`<br><br> e.g. `find revenge`
+**Find tasks** | `find [query] [time] [status] [type]`<br><br> e.g. `find revenge [] 2021-08-20`
+**Sort tasks** | `sort [option]`, where `option` is a number `0`-`6`
 **List tasks** | `list`, `ls`
 **Help** | `help`, `faq`
 **Quit** | `quit`, `exit`

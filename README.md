@@ -31,9 +31,11 @@ Turn your future tasks into omens of good fortune, today!
 
 ## Features
 ### 1. **Customizable UI built with JavaFX**
+
+![Themes](docs/Ui-themes.gif)
    
-Augury is fully responsive, supporting fullscreen and windows of various sizes!
-Love customization? Switch between your favourite colour themes within the app!
+Love customization? Augury is fully responsive, supporting fullscreen and windows of various sizes.
+Switch between your favourite colour themes within the app!
 
 This was my first time working on JavaFX, and I sought to create the best UI I could.
 Overall, it was a great learning experience.
@@ -41,7 +43,7 @@ Overall, it was a great learning experience.
 ### 2. **Persistent data storage** 
    
 You no longer have to be afraid of losing your data, or worry about transferring data to another device!
-Augury autosaves your tasks in plaintext files (in the `data/tasks.txt` directory), so you can easily export to other formats.
+Augury automatically saves your tasks in plaintext files (in the `data/tasks.txt` directory), so you can easily export to other formats.
 
 ### 3. **Command Line Interface for CLI lovers**
    
@@ -70,6 +72,8 @@ Additional features included:
 - **Batch operations** - Delete or Mark multiple tasks at once!
 - **Manage date & time** - Create Deadline or Event tasks that have a time associated with them!
 - **Command aliases** - Less keystrokes to type, more time for productivity!
+
+Check out the [full features included with Augury](docs/README.md)!
 
 ## Download and Usage
 

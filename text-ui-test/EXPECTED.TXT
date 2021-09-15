@@ -16,6 +16,9 @@
 	 1 tasks in total.
 	_________________________________
 	_________________________________
+	 A task matching this description already exists! Task was not created.
+	_________________________________
+	_________________________________
 	 Please use the YYYY-MM-DD HHMM format to specify time!
 	 Please try again.
 	_________________________________
@@ -102,6 +105,48 @@
 	 6 tasks in total.
 	_________________________________
 	_________________________________
+	 Please enter an argument!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Your search matched these tasks:
+	  [T][ ] item one
+	  [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	  [T][ ] five
+	  [T][ ] six
+	  [T][ ] eight
+	_________________________________
+	_________________________________
+	 Your search matched these tasks:
+	  [T][ ] item one
+	  [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	  [T][ ] five
+	  [T][ ] six
+	  [T][ ] seven
+	  [T][ ] eight
+	_________________________________
+	_________________________________
+	 Your search didn't match any tasks.
+	_________________________________
+	_________________________________
+	 Your search didn't match any tasks.
+	_________________________________
+	_________________________________
+	 Your search matched these tasks:
+	  [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	_________________________________
+	_________________________________
+	 I've sorted your list with method <Task time (descending)>
+
+	Here are your tasks:
+	 1. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 2. [T][ ] item one
+	 3. [T][ ] five
+	 4. [T][ ] six
+	 5. [T][ ] seven
+	 6. [T][ ] eight
+	_________________________________
+	_________________________________
 	 Task 9 does not exist.
 	 Please try again.
 	_________________________________
@@ -112,26 +157,24 @@
 	_________________________________
 	 I've removed these tasks: 
 		[T][ ] seven
-		[E][ ] item four (at: 22 May 2021, Sat, 23:59)
+		[T][ ] item one
 	 4 tasks remain.
 	_________________________________
 	_________________________________
-	 Please enter an argument!
-	 Please try again.
-	_________________________________
-	_________________________________
-	 Your search matched these tasks:
-	 1. [T][ ] item one
+	 I've sorted your list with method <Lexicographic (ascending)>
+
+	Here are your tasks:
+	 1. [T][ ] eight
 	 2. [T][ ] five
-	 3. [T][ ] six
-	 4. [T][ ] eight
+	 3. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 4. [T][ ] six
 	_________________________________
 	_________________________________
 	 Here are your tasks:
-	 1. [T][ ] item one
+	 1. [T][ ] eight
 	 2. [T][ ] five
-	 3. [T][ ] six
-	 4. [T][ ] eight
+	 3. [E][ ] item four (at: 22 May 2021, Sat, 23:59)
+	 4. [T][ ] six
 	_________________________________
 	_________________________________
 	 The readiness is all.

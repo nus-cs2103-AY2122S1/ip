@@ -42,6 +42,11 @@ public class EventTask extends TaskWithTime {
         return query.equals(TaskTypes.EVENT);
     }
 
+    @Override
+    public String getType() {
+        return "[E]";
+    }
+
     /**
      * Prints {@code EventTask} description with the prefix [E] and event time.
      */

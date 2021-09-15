@@ -42,6 +42,11 @@ public class DeadlineTask extends TaskWithTime {
         return query.equals(TaskTypes.DEADLINE);
     }
 
+    @Override
+    public String getType() {
+        return "[D]";
+    }
+
     /**
      * Prints {@code DeadlineTask} description with the prefix [D] and deadline time.
      */

@@ -2,11 +2,13 @@ package duke.tasks;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import duke.commands.SortCommand;
 import duke.io.Parser;
 import duke.util.Query;
 
@@ -144,6 +146,51 @@ public class TaskList {
             StringBuilder res = new StringBuilder("Your search matched these tasks:\n\t  ");
             res.append(resultTasks);
             return res.toString();
+        }
+    }
+
+    /**
+     * Checks if there is a {@code Task} in this {@code TaskList} which matches the provided description.
+     * @param description {@code String} to check against
+     * @return {@boolean} value
+     */
+    public boolean hasTaskWithDescription(String description) {
+        return tasks.stream().anyMatch(t -> t.getDescription().equalsIgnoreCase(description));
+    }
+
+    /**
+     * Sorts the {@code TaskList} according to a given {@sode SortOption}.
+     *
+     * @param option Sorting method to use.
+     */
+    public void sort(SortCommand.SortOptions option) {
+        Comparator<Task> compareDescription = Comparator.comparing((Task t) -> t.description);
+        Comparator<Task> compareType = Comparator.comparing(Task::getType);
+        Comparator<Task> compareStatus = (Task t1, Task t2) -> Boolean.compare(t1.isDone, t2.isDone);
+        Comparator<Task> compareTime = Comparator.comparing(Task::getTime);
+
+        switch(option) {
+        case LEXICOGRAPHIC_DESCENDING:
+            tasks.sort(compareDescription.reversed());
+            break;
+        case TASK_TYPE:
+            tasks.sort(compareType);
+            break;
+        case TASK_STATUS:
+            tasks.sort(compareStatus);
+            break;
+        case TASK_STATUS_DESCENDING:
+            tasks.sort(compareStatus.reversed());
+            break;
+        case TASK_TIME:
+            tasks.sort(compareTime);
+            break;
+        case TASK_TIME_DESCENDING:
+            tasks.sort(compareTime.reversed());
+            break;
+        default:
+            tasks.sort(compareDescription);
+            break;
         }
     }
 

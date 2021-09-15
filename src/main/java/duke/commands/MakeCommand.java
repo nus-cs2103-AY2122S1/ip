@@ -48,6 +48,11 @@ public class MakeCommand extends Command {
             taskDescription = args.replace(taskType + " ", "");
         }
 
+        return createTask(tasks, storage, taskType, taskDescription);
+    }
+
+    private String createTask(TaskList tasks, Storage storage,
+                              String taskType, String taskDescription) throws AuguryException {
         try {
             TaskFactory tf = new TaskFactory();
             Task newTask = tf.createTask(taskType, taskDescription);
@@ -55,6 +60,10 @@ public class MakeCommand extends Command {
             if (newTask == null) {
                 throw new UnknownCommandException("Invalid command entered when creating task.");
             }
+            if (tasks.hasTaskWithDescription(newTask.getDescription())) {
+                return "A task matching this description already exists! Task was not created.";
+            }
+
             String result = tasks.addTaskAndAnnounce(taskType, newTask);
             storage.saveTaskListToStorage(tasks);
             return result;

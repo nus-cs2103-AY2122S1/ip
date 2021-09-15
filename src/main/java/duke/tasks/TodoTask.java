@@ -34,6 +34,11 @@ public class TodoTask extends Task {
         return query.equals(TaskTypes.TODO);
     }
 
+    @Override
+    public String getType() {
+        return "[T]";
+    }
+
     /**
      * Prints {@code TodoTask} description with the prefix [T].
      */

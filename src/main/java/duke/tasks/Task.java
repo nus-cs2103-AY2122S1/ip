@@ -1,6 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -46,6 +48,19 @@ public abstract class Task {
         return this.description;
     }
 
+    /**
+     * Gets the time value of this {@code Task} (for sorting).
+     * Since {@code Task}s do not have time, it has the minimum possible value.
+     */
+    public LocalDateTime getTime() {
+        return LocalDateTime.of(LocalDate.MIN, LocalTime.MIN);
+    }
+
+    /**
+     * Returns type of {@code Task}.
+     */
+    public abstract String getType();
+
     @Override
     public String toString() {
         String checkbox = isDone ? "[X]" : "[ ]";
@@ -88,4 +103,5 @@ public abstract class Task {
      * Checks if given {@code TaskTypes} matches this {@code Task}.
      */
     public abstract boolean isMatch(TaskTypes queryTaskType);
+
 }

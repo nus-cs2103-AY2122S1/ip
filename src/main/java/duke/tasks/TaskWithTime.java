@@ -53,15 +53,16 @@ public abstract class TaskWithTime extends Task {
         return this.isSameDateAs(date);
     }
 
-    private boolean isSameDateAs(TaskWithTime otherTask) {
-        return otherTask.getTime().getYear() == this.time.getYear()
-                && otherTask.getTime().getMonth() == this.time.getMonth()
-                && otherTask.getTime().getDayOfMonth() == this.time.getDayOfMonth();
-    }
-
     private boolean isSameDateAs(LocalDateTime otherDate) {
         return otherDate.getYear() == this.time.getYear()
                 && otherDate.getMonth() == this.time.getMonth()
                 && otherDate.getDayOfMonth() == this.time.getDayOfMonth();
+    }
+
+    /**
+     * Compares the {@code LocalDateTime} value of this {@code TaskWithTime} with another.
+     */
+    public int compareTo(TaskWithTime otherTask) {
+        return otherTask.getTime().compareTo(this.time);
     }
 }

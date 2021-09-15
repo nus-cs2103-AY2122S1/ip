@@ -13,6 +13,7 @@ public enum CommandTypes {
     DELETE("delete", "del", "rm"),
     MAKE("todo", "deadline", "event"),
     FIND("find", "f"),
+    SORT("sort"),
     HELP("help", "faq", "h", "?");
 
     private final List<String> aliases;

@@ -1,4 +1,5 @@
 todo item one
+todo item one
 event item two /at 2021-2-22 2100
 list
 deadline item three /by 2021-4-19 0900
@@ -19,10 +20,16 @@ todo five
 todo six
 todo seven
 todo eight
+find  
+find i
+find []
+find [x] e
+find 2021-05-22 [d]
+find 2021-05-22 [e]
+sort 6
 delete 9
 delete 1,9,1
 delete 5,2
-find  
-find i
+sort
 list
 bye
