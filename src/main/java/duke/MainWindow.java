@@ -27,15 +27,22 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the MainWindow instance for FXML.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String dukeText = Duke.greetUser();
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeText, dukeImage));
+        Response greetingResponse = Duke.greetUser();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greetingResponse.toString(), dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Saves the Duke instance within the MainWindow instance.
+     * @param duke The Duke instance to be saved.
+     */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -47,14 +54,15 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         Response response = duke.handleUserInput(input);
 
-        if (response.isExitResponse()) {
-            Platform.exit();
-        }
-
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response.toString(), dukeImage)
         );
+
         userInput.clear();
+
+        if (response.isExitResponse()) {
+            Platform.exit();
+        }
     }
 }
