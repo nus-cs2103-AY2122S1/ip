@@ -39,6 +39,7 @@ public class Duke {
      * the dialog container. Clears the user input after processing.
      */
     public Response handleUserInput(String userInput) {
+        assert userInput != null : "User input should be a valid string";
         try {
             Request request = Request.create(tasks, userInput);
             Action action = request.action();

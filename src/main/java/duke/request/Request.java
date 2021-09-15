@@ -24,6 +24,9 @@ public abstract class Request {
      * @throws UserException If the request String is invalid.
      */
     public static Request create(TaskCollection taskCollection, String requestString) throws UserException {
+        assert taskCollection != null : "Task collection should exist";
+        assert requestString != null : "Request string should be a valid String";
+
         String[] substrings = requestString.split(COMMAND_DELIMITER, 2);
         String commandString = substrings[0];
         String commandInput = substrings.length > 1 ? substrings[1] : "";

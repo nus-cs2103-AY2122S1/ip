@@ -19,6 +19,9 @@ public class FindTasks implements Action {
      * @param taskCollection The duke.task.TaskCollection to find the duke.task.Tasks from.
      */
     public FindTasks(String string, TaskCollection taskCollection) {
+        assert string != null : "Search query string should not be null";
+        assert taskCollection != null : "Task collection to add task to should exist";
+
         this.string = string;
         this.taskCollection = taskCollection;
     }
