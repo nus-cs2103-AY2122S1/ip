@@ -5,16 +5,15 @@ package duke.exception;
  */
 public class MissingArgumentException extends DukeException {
 
-    private static final String errorMessage = "Some arguments are missing in the [%s] command. "
-            + "Check if you have [%s] in your command.";
+    private static final String message = "Did you forgot to include \"%s\" after \"%s\"?";
 
     /**
      * Constructs an MissingArgumentException instance that handles command with missing argument(s).
      *
-     * @param commandPrefix The prefix used to identify the type of command.
-     * @param hint The hint message to inform user potential missing arguments.
+     * @param type The type of the task.
+     * @param argument The argument used by the command to be functional.
      */
-    public MissingArgumentException(String commandPrefix, String hint) {
-        super(String.format(errorMessage, commandPrefix, hint));
+    public MissingArgumentException(String type, String argument) {
+        super(String.format(message, argument, type));
     }
 }
