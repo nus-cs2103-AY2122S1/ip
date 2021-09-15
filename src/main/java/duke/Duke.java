@@ -13,7 +13,7 @@ public class Duke {
     private boolean continueDuke;
 
     /**
-     * Main class for Duke. Handles the Ui, Storage, and receiving and sending input.
+     * duke.gui.Main class for Duke. Handles the Ui, Storage, and receiving and sending input.
      * @param filePath File path to save data to.
      */
     public Duke(String filePath) {

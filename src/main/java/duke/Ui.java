@@ -11,23 +11,28 @@ import duke.tasks.Task;
  * @author Ruth Poh
  */
 public class Ui {
-    private final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String LINEBREAK_START = "~~*********___\\(owo)/___\\(owo)/___*********~~\n";
-    private final String LINEBREAK_END = "\n\n~~*********___\\(owo)/___\\(owo)/___*********~~";
     private Parser parser;
 
     Ui() {
         parser = new Parser();
     }
 
+    /**
+     * Getter method for error message.
+     * @param e DukeException thrown
+     * @return Error message of DukeException
+     */
     public String getErrorMessage(DukeException e) {
         return e.getMessage();
     }
 
+    /**
+     * Executes command stated in string and saves tasklist changes to storage.
+     * @param storage Storage for storing Tasklist data
+     * @param tasklist TaskList of tasks
+     * @param str Command string
+     * @return Message after executing command stated in string
+     */
     public String getMessage(Storage storage, TaskList tasklist, String str) {
         try {
             // splits input to parse for keywords.
@@ -40,6 +45,7 @@ public class Ui {
                     if (strparse.length > 1) {
                         throw new IncorrectInputException("bye", "'bye'");
                     }
+
                     return "Goodbywe, Mastwer! Seew youw soown!\n\n";
                 } catch (DukeException e) {
                     return this.getErrorMessage(e);
@@ -51,6 +57,7 @@ public class Ui {
                     if (strparse.length > 1) {
                         throw new IncorrectInputException("help", "'help'");
                     }
+
                     return "Commandws supported:\n\n"
                             + "- bye\n- help\n- list\n- todo\n- event\n- deadline\n";
                 } catch (DukeException e) {
@@ -65,12 +72,12 @@ public class Ui {
                     }
                     StringBuilder strb = new StringBuilder();
                     strb.append("Uwu! Herw arw yourw taskws:\n");
-
                     if (tasklist.getTaskCounter() == 0) {
                         strb.append("Itw seewsm like youw wist is emptwy! Congwats!\n");
                     } else {
                         strb.append(tasklist.displayList());
                     }
+
                     return strb.toString();
                 } catch (DukeException e) {
                     return this.getErrorMessage(e);
@@ -102,9 +109,10 @@ public class Ui {
                     strb.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
                     strb.append("Youw noww havew " + (tasklist.getTaskCounter())
                             + " taskw(s) inw thew wist! uwu\n");
+
                     return strb.toString();
                 } catch (DukeException e) {
-                    return getErrorMessage(e);
+                    return this.getErrorMessage(e);
                 }
                 //Fallthrough
             case "event":
@@ -126,12 +134,12 @@ public class Ui {
             case "done":
                 // marks a task as done.
                 try {
-                    int i = tasklist.markDone(strparse);
+                    int taskNo = tasklist.markDone(strparse);
                     storage.saveData(tasklist);
 
                     StringBuilder strb = new StringBuilder();
                     strb.append("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n")
-                            .append(tasklist.getTaskDescr(i) + '\n');
+                            .append(tasklist.getTaskDescr(taskNo) + '\n');
 
                     return strb.toString();
                 } catch (DukeException e) {
@@ -158,11 +166,11 @@ public class Ui {
                 //Fallthrough
             case "find":
                 try {
-                    String temp = tasklist.find(parser.parseFind(strparse));
+                    String tasksFound = tasklist.find(parser.parseFind(strparse));
 
                     StringBuilder strb = new StringBuilder();
                     strb.append("Foundw! Here are the matching tasks:\n")
-                            .append(temp + '\n');
+                            .append(tasksFound + '\n');
 
                     return strb.toString();
                 } catch (DukeException e) {
@@ -176,4 +184,15 @@ public class Ui {
             return this.getErrorMessage(e);
         }
     }
+
+    /**
+     * Getter method for welcome message for Dukewu.
+     * @return Welcome message for Dukewu.
+     */
+    public static String getWelcomeMessage() {
+        return ("Hewwo and welcomew tow Dukewu!\n" +
+                "Dukewu aimws tow helpw youw orgwanise your wist of taskws.\n" +
+                "Pwease typwe 'help' for mwore infow! Uwu!");
+    }
+
 }

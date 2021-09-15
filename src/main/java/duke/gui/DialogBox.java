@@ -1,16 +1,21 @@
+package duke.gui;
+
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -33,8 +38,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialog.setFont(new Font("Luciana Grande", 15));
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setPadding(new Insets(0, 0, 0, 10));
     }
 
     /**
@@ -57,8 +64,8 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeWelcome(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeWelcome(Image img) {
+        var db = new DialogBox(Ui.getWelcomeMessage(), img);
         db.flip();
         return db;
     }
