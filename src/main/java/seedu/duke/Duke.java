@@ -12,7 +12,6 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ReminderCommand;
 import seedu.duke.command.ToDoCommand;
-import seedu.duke.command.UndoCommand;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
@@ -39,7 +38,7 @@ public class Duke {
 
     private class Parser {
         private final DateTimeManager manager = new DateTimeManager(
-                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                DateTimeFormatter.ofPattern("d/MM/yyyy"));
         private int taskIndex = -1;
         private LocalDate date = LocalDate.now();
 
@@ -85,8 +84,6 @@ public class Duke {
                 return new HelpCommand(ui, taskList, dateTasks);
             case REMINDER:
                 return new ReminderCommand(ui, taskList, dateTasks);
-            case UNDO:
-                return new UndoCommand(ui, taskList, dateTasks, storage);
             default:
                 handleInvalidInputs(commandWord);
                 // Will not reach here since handleInvalidInputs(commandWord)
@@ -302,7 +299,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chatbot.
+     * Runs the Duke chat bot.
      */
     private void run() {
         // Taking in commands
