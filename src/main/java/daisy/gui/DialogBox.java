@@ -1,4 +1,4 @@
-package duke;
+package daisy.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -12,6 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -38,6 +40,7 @@ public class DialogBox extends HBox {
         }
 
         textBox.setText(text);
+        displayPicture.setClip(new Circle(30, 30, 30));
         displayPicture.setImage(img);
     }
 
@@ -55,9 +58,16 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDaisyDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.textBox.setTextAlignment(TextAlignment.LEFT);
+        return db;
+    }
+    public static DialogBox getExceptionDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        db.textBox.setFill(Color.RED);
         db.textBox.setTextAlignment(TextAlignment.LEFT);
         return db;
     }

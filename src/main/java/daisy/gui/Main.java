@@ -1,10 +1,12 @@
-package duke;
+package daisy.gui;
 import java.io.IOException;
 
+import daisy.Daisy;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Daisy daisy = new Daisy();
 
     @Override
     public void start(Stage stage) {
@@ -21,8 +23,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("Duke");
+            fxmlLoader.<MainWindow>getController().setDaisy(daisy);
+            stage.setTitle("DAISY");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

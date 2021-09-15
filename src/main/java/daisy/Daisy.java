@@ -1,26 +1,29 @@
-package duke;
+package daisy;
 
 import java.util.ArrayList;
 
-import duke.command.Command;
+import daisy.command.Command;
+import daisy.command.Parser;
+import daisy.task.Storage;
+import daisy.task.TaskList;
 
 /**
- * Duke class that starts and runs the Duke bot.
+ * Duke class that starts and runs the Daisy bot.
  */
-public class Duke {
+public class Daisy {
 
-    static final String START_MESSAGE = "Hello! I'm Duke\n" + "What can I do for you?";
+    static final String START_MESSAGE = "Hello! I'm Daisy\n" + "What can I do for you?";
     private TaskList taskList;
     private Storage storage;
 
     /**
      * Constructs the Duke object.
      */
-    public Duke() {
-        storage = new Storage("data/duke.txt");
+    public Daisy() {
+        storage = new Storage("data/daisy.txt");
         try {
             taskList = new TaskList(storage.getFile());
-        } catch (DukeException e) {
+        } catch (DaisyException e) {
             e.printStackTrace();
             taskList = new TaskList(new ArrayList<>());
         }
@@ -36,13 +39,9 @@ public class Duke {
      * @param input String input message.
      * @return Response string.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DaisyException {
         assert input != null : "Input is null";
-        try {
-            Command c = Parser.parse(input);
-            return c.execute(taskList, storage);
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
+        Command c = Parser.parse(input);
+        return c.execute(taskList, storage);
     }
 }

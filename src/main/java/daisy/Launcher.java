@@ -1,5 +1,6 @@
-package duke;
+package daisy;
 
+import daisy.gui.Main;
 import javafx.application.Application;
 
 public class Launcher {
