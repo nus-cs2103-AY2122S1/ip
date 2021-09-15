@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Add the task into the list.
+     * Adds the task into the list.
      *
      * @param task Task to be added.
      */
