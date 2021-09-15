@@ -8,7 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -45,8 +46,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InterruptedException {
-        
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         
@@ -56,17 +56,18 @@ public class MainWindow extends AnchorPane {
         );
 
         if (input.contains("bye")) {
-            TimeUnit.SECONDS.sleep(1);
-            Platform.exit();
-            exit();
-            
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                }
+            };
+            Timer timer = new Timer("Timer");
+            long delay = 4000;
+            timer.schedule(task, delay);
         }
         userInput.clear();
-        
     }
     
-    private void exit() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
-        Platform.exit();
-    }
 }

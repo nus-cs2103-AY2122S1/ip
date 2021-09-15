@@ -1,2 +1,5 @@
-T - 0 - eat - LOW
-D - 0 - deadline eat  - LOW - 2 Feb 2000
+T - 0 - Chase Jasmine  - HIGH
+T - 0 - Feed Abu  - LOW
+T - 0 - Defeat Jafar  - MEDIUM
+T - 0 - Show Jasmine a whole new world  - HIGH
+E - 0 - Magic Carpet Ride  - LOW - 2021-09-19

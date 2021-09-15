@@ -70,6 +70,6 @@ public class Parser {
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return Message.byeReply(str);
+        return Message.repeatReply(str);
     }
 }

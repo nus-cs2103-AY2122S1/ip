@@ -9,7 +9,7 @@
 
 <fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="600.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" contentDisplay="CENTER" graphicTextGap="5.0" minHeight="-Infinity" minWidth="410.0" pickOnBounds="false" styleClass="textBox" stylesheets="@../css/main.css" text="Label" wrapText="true">
+        <Label fx:id="dialog" contentDisplay="CENTER" graphicTextGap="5.0" minHeight="-Infinity" minWidth="110.0" pickOnBounds="false" styleClass="textBox" stylesheets="@../css/main.css" text="Label" wrapText="true">
             <font>
                 <Font name="Comic Sans MS" size="13.0" />
             </font>
@@ -31,74 +31,3 @@
         <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
     </padding>
 </fx:root>
-<!--wanning-->
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-
-<!--<?import javafx.geometry.Insets?>-->
-<!--<?import javafx.scene.control.Label?>-->
-<!--<?import javafx.scene.image.ImageView?>-->
-<!--<?import javafx.scene.layout.HBox?>-->
-<!--<?import javafx.scene.text.Font?>-->
-
-<!--<fx:root alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefWidth="600.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">-->
-<!--    <children>-->
-<!--        <Label fx:id="dialog" contentDisplay="CENTER" minHeight="-Infinity" stylesheets="@../css/main.css" text="Label" textFill="BLACK" wrapText="true">-->
-<!--            <opaqueInsets>-->
-<!--                <Insets />-->
-<!--            </opaqueInsets>-->
-<!--            <HBox.margin>-->
-<!--                <Insets left="15.0" right="15.0" />-->
-<!--            </HBox.margin>-->
-<!--            <font>-->
-<!--                <Font name="Comic Sans MS" size="12.0" />-->
-<!--            </font>-->
-<!--            <padding>-->
-<!--                <Insets bottom="5.0" left="5.0" top="5.0" />-->
-<!--            </padding></Label>-->
-<!--        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />-->
-<!--    </children>-->
-<!--    <padding>-->
-<!--        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />-->
-<!--    </padding>-->
-<!--</fx:root>-->
-
-<!--me-->
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-
-<!--&lt;!&ndash;<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="500.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">&ndash;&gt;-->
-<!--&lt;!&ndash;    <children>&ndash;&gt;-->
-<!--&lt;!&ndash;        <Label fx:id="dialog" contentDisplay="CENTER" text="Label" wrapText="true" />&ndash;&gt;-->
-<!--&lt;!&ndash;        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />&ndash;&gt;-->
-<!--&lt;!&ndash;    </children>&ndash;&gt;-->
-<!--&lt;!&ndash;    <padding>&ndash;&gt;-->
-<!--&lt;!&ndash;        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />&ndash;&gt;-->
-<!--&lt;!&ndash;    </padding>&ndash;&gt;-->
-<!--&lt;!&ndash;</fx:root>&ndash;&gt;-->
-
-<!--<?import javafx.geometry.Insets?>-->
-<!--<?import javafx.scene.control.Label?>-->
-<!--<?import javafx.scene.image.ImageView?>-->
-<!--<?import javafx.scene.layout.HBox?>-->
-<!--<?import javafx.scene.text.Font?>-->
-
-<!--<fx:root alignment="CENTER_RIGHT" maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" minHeight="200" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1">-->
-<!--    <children>-->
-<!--        <Label fx:id="dialog" contentDisplay="CENTER" text="Label" wrapText="true">-->
-<!--            <opaqueInsets>-->
-<!--                <Insets />-->
-<!--            </opaqueInsets>-->
-<!--            <HBox.margin>-->
-<!--                <Insets left="10.0" right="20.0" />-->
-<!--            </HBox.margin>-->
-<!--            <font>-->
-<!--                <Font name="Comic Sans MS" size="12.0" />-->
-<!--            </font>-->
-<!--            <padding>-->
-<!--                <Insets left="5.0" />-->
-<!--            </padding></Label>-->
-<!--        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />-->
-<!--    </children>-->
-<!--    <padding>-->
-<!--        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />-->
-<!--    </padding>-->
-<!--</fx:root>-->

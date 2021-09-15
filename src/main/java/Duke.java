@@ -1,3 +1,4 @@
+import Common.Message;
 import duke.Parser;
 import duke.Storage;
 import tasks.TaskList;
@@ -28,7 +29,7 @@ public class Duke {
     String getResponse(String input) {
         String output;
         if (input.equals("bye")) {
-            output = "Goodbye Aladdin! \nIf you need anything, just rub the lamp. \nOh btw, atb getting Jasmine, that I can't help you.";
+            output = Message.GOODBYEMESSAGE;
         } else {
             output = parser.run(input);
         } 
