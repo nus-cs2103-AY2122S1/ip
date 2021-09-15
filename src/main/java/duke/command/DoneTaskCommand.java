@@ -29,7 +29,7 @@ public class DoneTaskCommand extends Command {
         Task completedTask = taskList.get(Integer.parseInt(inputArray[1]) - 1);
         completedTask.markAsDone();
         storage.saveData(taskList);
-        String doneMessage = String.format("Nice! I've marked this duke.task as done:\n%s", completedTask);
+        String doneMessage = String.format("Nice! I've marked this task as done:\n%s", completedTask);
         return ui.getDukeMessage(doneMessage);
     }
 
