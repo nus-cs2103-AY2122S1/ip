@@ -43,7 +43,7 @@ public class FindCommand extends Command {
                 + "Here are the matching tasks in your list:\n");
         int index = 1;
         for (Task task : tasks.getTasks()) {
-            String taskString = task.toString();
+            String taskString = task.toString().substring(6);
             appendMatched(response, taskString, index++);
         }
 
