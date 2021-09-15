@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.Task;
+import duke.TaskList;
+import duke.ui.UserInterface;
 
 /**
  * Represents a command that adds a Task to a TaskList

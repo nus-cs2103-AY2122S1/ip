@@ -14,6 +14,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import duke.command.Command;
+import duke.ui.UserInterface;
 
 import java.time.format.DateTimeFormatter;
 

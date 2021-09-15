@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.Task;
+import duke.TaskList;
+import duke.ui.UserInterface;
 
 public class CommandDone extends Command {
     private String taskName;
