@@ -17,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_DEADLINE = "☹ OOPS!!! The description of a deadline cannot be empty.";
     public static final String MESSAGE_INVALID_EVENT = "☹ OOPS!!! The description of an event cannot be empty.";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "☹ OOPS!!! Please use the date format: yyyy-mm-dd.";
+    public static final String MESSAGE_INVALID_INDEX = "Please enter a valid index! :(";
     public static final String MESSAGE_NO_TASKS = "There are no tasks in your list! "
             + "Start adding one with: todo, deadline or event.";
     public static final String MESSAGE_NO_MATCHING_TASKS = "There are no matching tasks in your list.";

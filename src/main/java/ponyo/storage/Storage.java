@@ -20,7 +20,7 @@ import ponyo.data.task.Todo;
  * Handles loading and saving of tasks into the file created.
  */
 public class Storage {
-    private static final String PATH = "src/main/data";
+    private static final String PATH = "data";
     protected String filePath;
 
     /**

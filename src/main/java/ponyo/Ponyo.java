@@ -9,7 +9,7 @@ import ponyo.storage.Storage;
 
 public class Ponyo {
     // CONSTANTS
-    private static final String PATH = "src/main/data";
+    private static final String PATH = "data";
     private static final String FILENAME = "tasks.txt";
     private static final String FILEPATH = PATH + "/" + FILENAME;
 

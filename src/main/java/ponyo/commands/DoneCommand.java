@@ -1,5 +1,6 @@
 package ponyo.commands;
 
+import ponyo.common.Messages;
 import ponyo.data.task.TaskList;
 import ponyo.storage.Storage;
 import ponyo.ui.Ui;
@@ -16,7 +17,10 @@ public class DoneCommand extends Command {
 
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
-        assert taskToMarkDone > 0;
+        assert taskToMarkDone > 0 && taskToMarkDone <= tasks.size();
+        if (taskToMarkDone > tasks.size()) {
+            return Ui.show(Messages.MESSAGE_INVALID_INDEX);
+        }
         tasks.retrieveTask(taskToMarkDone - 1).markAsDone();
         storage.getFullContents(tasks);
         return Ui.show("Nice! I've marked this task as done: \n\t" + tasks.retrieveTask(taskToMarkDone - 1));

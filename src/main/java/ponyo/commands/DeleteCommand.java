@@ -1,5 +1,6 @@
 package ponyo.commands;
 
+import ponyo.common.Messages;
 import ponyo.data.task.Task;
 import ponyo.data.task.TaskList;
 import ponyo.storage.Storage;
@@ -18,6 +19,9 @@ public class DeleteCommand extends Command {
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
         assert taskIdToDelete > 0 && taskIdToDelete <= tasks.size();
+        if (taskIdToDelete > tasks.size()) {
+            return Ui.show(Messages.MESSAGE_INVALID_INDEX);
+        }
         Task task = tasks.retrieveTask(taskIdToDelete - 1);
         tasks.remove(taskIdToDelete - 1);
         storage.getFullContents(tasks);
