@@ -9,19 +9,19 @@ import duke.data.Ui;
  * Command that deletes a Task from InformationList when executed.
  */
 public class DeleteCommand extends Command {
-    /** Index of the task in TaskList. */
-    private int taskNumber;
+    /** Index of the information to be deleted. */
+    private int index;
     /** Integer to choose which list to delete from, 0 to delete a task, 1 to delete a contact*/
     private int listToDeleteFrom;
 
     /**
      * Constructs DeleteCommand class.
      *
-     * @param taskNumber Index of task in InformationList that is to be deleted.
+     * @param index Index of task in InformationList that is to be deleted.
      * @param listToDeleteFrom Integer to specify which list of InformationList to delete from
      */
-    public DeleteCommand(int taskNumber, int listToDeleteFrom) {
-        this.taskNumber = taskNumber;
+    public DeleteCommand(int index, int listToDeleteFrom) {
+        this.index = index;
         this.listToDeleteFrom = listToDeleteFrom;
     }
 
@@ -30,21 +30,27 @@ public class DeleteCommand extends Command {
      *
      * @param tasks The list of tasks that a user has.
      * @param ui The ui that sends a message to the user once the task is deleted.
-     * @param storage Saves the updated TaskList to disk.
+     * @param storage Saves the updated InformationList to disk.
      * @return The message produced by ui.
      */
     @Override
     public String execute(InformationList tasks, Ui ui, Storage storage) {
         if (this.listToDeleteFrom == 0) {
-            if (taskNumber > tasks.getTasksSize() || taskNumber <= 0) {
+            if (tasks.getTasksSize() == 0) {
+                throw new DukeException("There are no Tasks to be deleted!");
+            }
+            if (index > tasks.getTasksSize() || index < 0) {
                 throw new DukeException("Please insert a valid Task Number!");
             }
-            tasks.deleteTask(taskNumber);
+            tasks.deleteTask(index);
         } else {
-            if (taskNumber > tasks.getContactsSize() || taskNumber <= 0) {
+            if (tasks.getContactsSize() == 0) {
+                throw new DukeException("There are no Contacts to be deleted!");
+            }
+            if (index > tasks.getContactsSize() || index < 0) {
                 throw new DukeException("Please insert a valid Contact Number!");
             }
-            tasks.deleteContact(taskNumber);
+            tasks.deleteContact(index);
         }
         storage.save(tasks);
         return ui.showDeletedInformation();

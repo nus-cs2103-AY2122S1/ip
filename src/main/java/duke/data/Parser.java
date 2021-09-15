@@ -263,13 +263,13 @@ public class Parser {
                     return new DeleteCommand(taskNumber - 1, 1);
 
                 default:
-                    throw new DukeException("I'm sorry, please specify with list to delete from!");
+                    throw new DukeException("I'm sorry, please specify which list to delete from!");
                 }
             } catch (NumberFormatException e) {
                 throw new DukeException("I'm sorry, please input a number instead!");
             }
         } else {
-            throw new DukeException("I'm sorry, please input the number of the task you wish to delete.");
+            throw new DukeException("Please follow this format: delete CONTACT/TASK INDEX.");
         }
     }
 
