@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="angrybot.MainWindow">
     <children>
         <TextField fx:id="userInput" alignment="CENTER" layoutX="2" layoutY="560.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput" prefHeight="38.0" prefWidth="335.0" promptText="Enter text here" style="-fx-background-color: rgba(248, 248, 255, 1); -fx-prompt-text-fill: #202120;  -fx-text-fill: #202120; -fx-border-color: rgba(32, 33, 32, 0.8); -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(32, 33, 32, 0.3), 10, 0.1, 2, 2);" >
          <font>

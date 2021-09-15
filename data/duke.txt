@@ -1,4 +1,0 @@
-T|0|get A for CS2103T
-D|0|iP submission|2021-09-17T23:59
-E|0|CS2103T Finals|2021-11-23T17:00
-E|0|Recess Week!|2021-09-18T00:00

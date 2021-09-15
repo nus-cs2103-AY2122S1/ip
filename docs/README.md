@@ -1,5 +1,9 @@
 # User Guide
 
+[![Java CI](https://github.com/czhi-bin/ip/actions/workflows/gradle.yml/badge.svg)](https://github.com/czhi-bin/ip/actions)
+
+Angry Bot is a GUI application that helps to keep track of tasks.
+
 ## Features 
 
 ### Feature-ABC

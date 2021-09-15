@@ -15,7 +15,7 @@
     </module>
 
     <module name="NewlineAtEndOfFile">
-        <!-- Accept LF, CR or CRLF to accomodate devs who prefer different line endings -->
+        <!-- Accept LF, CR or CRLF to accommodate devs who prefer different line endings -->
         <property name="lineSeparator" value="lf_cr_crlf"/>
     </module>
 
@@ -60,7 +60,7 @@
                       value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS"/>
             <property name="separateLineBetweenGroups" value="true"/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
-            <property name="specialImportsRegExp" value="(^org\.)|(^duke\.)"/>
+            <property name="specialImportsRegExp" value="(^org\.)|(^angrybot\.)"/>
             <property name="thirdPartyPackageRegExp" value="(^com\.)|(^javafx.)"/>
         </module>
 
