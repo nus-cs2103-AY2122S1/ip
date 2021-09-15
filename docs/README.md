@@ -5,10 +5,10 @@
 ---
 Gary is a desktop app for anyone who needs to keep track of their myriad of tasks. It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This app will make users lives easier through search and update functionalities.
 
-- [Quick start] (#-quick-start)
-- [Features] (#-features)
-- [Usage] (#-usage)
-- [Command summary] (#command-summary)
+- [Quick start](#-quick-start)
+- [Features](#-features)
+- [Usage](#-usage)
+- [Command summary](#command-summary)
 
 ## Quick start
 ---
@@ -265,7 +265,6 @@ Action | Format | Example
 List | `list` | `list`
 Add Todo | `todo <description>` | `todo Borrow a book`
 Add Deadline | `deadline <description> /by <yyyy-mm-dd>` | `deadline Complete Math assignment /by 2021-09-18`
-
 Add Event | `event <description> /at <event time>` | `event Biology exam /at Tuesday 2-4pm`
 Done | `done <task number>` | `done 1`
 Delete | `delete <task number>` | `delete 2`
