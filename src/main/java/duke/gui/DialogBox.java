@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
     @FXML
@@ -32,10 +33,13 @@ public class DialogBox extends HBox {
         this.dialog.setText(l.getText());
     }
 
-    private void flip() {
+    private void flip(boolean error) {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
+        if (error) {
+            dialog.setTextFill(Color.RED);
+        }
         this.getChildren().setAll(tmp);
     }
 
@@ -43,9 +47,9 @@ public class DialogBox extends HBox {
         return new DialogBox(l);
     }
 
-    public static DialogBox getDukeDialog(Label l) {
+    public static DialogBox getDukeDialog(Label l, boolean error) {
         var db = new DialogBox(l);
-        db.flip();
+        db.flip(error);
         return db;
     }
 }

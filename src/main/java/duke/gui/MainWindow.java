@@ -38,17 +38,19 @@ public class MainWindow extends AnchorPane {
         String userCommand = userInput.getText();
         Label input = new Label(userCommand);
         Label response;
+        boolean error = false;
         try {
             Command command = Parser.parse(userCommand);
             String message = command.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
             response = new Label(message);
         } catch (DukeException e) {
             response = new Label(duke.getUi().displayError(e));
+            error = true;
         }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input),
-                DialogBox.getDukeDialog(response)
+                DialogBox.getDukeDialog(response, error)
         );
         userInput.clear();
     }
@@ -59,7 +61,7 @@ public class MainWindow extends AnchorPane {
     public void greet() {
         Label greeting = new Label(duke.getUi().greet());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting)
+                DialogBox.getDukeDialog(greeting, false)
         );
     }
 }
