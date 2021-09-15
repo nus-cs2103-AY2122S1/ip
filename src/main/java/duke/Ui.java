@@ -3,14 +3,14 @@ package duke;
 import java.util.Scanner;
 
 /**
- * duke.Ui represents the class that deals with interactions with the user
+ * Ui represents the class that deals with interactions with the user
  */
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Prints the duke.Response to the console.
-     * @param response The duke.Response to be printed.
+     * Prints the Response to the console.
+     * @param response The Response to be printed.
      */
     public void printResponse(Response response) {
         System.out.println(response.toString());
