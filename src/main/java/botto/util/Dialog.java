@@ -25,7 +25,7 @@ public class Dialog {
     private VBox dialogContainer;
 
     /**
-     * Set up dialog container.
+     * Sets up dialog container.
      *
      * @param dialogContainer dialog container.
      */
@@ -34,14 +34,14 @@ public class Dialog {
     }
 
     /**
-     * Print the bot's welcome message.
+     * Prints the bot's welcome message.
      */
     public void showWelcome() {
         addToDialog(GREETING);
     }
 
     /**
-     * Print the name of the bot and supported command.
+     * Prints the name of the bot and supported command.
      */
     public void showHelp() {
         String message = "Name: " + BOT_NAME + "\n"
@@ -50,7 +50,7 @@ public class Dialog {
     }
 
     /**
-     * Print the user's tasks.
+     * Prints the user's tasks.
      *
      * @param list list of tasks to be printed.
      * @param header header message to be printed before printing the tasks.
@@ -61,7 +61,7 @@ public class Dialog {
     }
 
     /**
-     * Process the message that shows the tasks.
+     * Processes the message that shows the tasks.
      *
      * @param list list of tasks.
      * @param header header header message to be printed before printing the tasks.
@@ -118,7 +118,7 @@ public class Dialog {
     }
 
     /**
-     * print a response when a new task is added.
+     * Prints a response when a new task is added.
      *
      * @param task new task to be added.
      * @param size total number of the user's tasks after addition.
@@ -130,7 +130,7 @@ public class Dialog {
     }
 
     /**
-     * Process the response message for add command.
+     * Processes the response message for add command.
      *
      * @param task newly added task.
      * @param size total number of the user's tasks after addition.
@@ -143,7 +143,7 @@ public class Dialog {
     }
 
     /**
-     * Print a response when a tasks is deleted.
+     * Prints a response when a tasks is deleted.
      *
      * @param task deleted task.
      * @param size total number of the user's tasks after deletion.
@@ -154,7 +154,7 @@ public class Dialog {
     }
 
     /**
-     * Process the response message for delete command.
+     * Processes the response message for delete command.
      *
      * @param task deleted task.
      * @param size total number of the user's tasks after deletion.
@@ -167,7 +167,7 @@ public class Dialog {
     }
 
     /**
-     * Print a response when a task is marked as done.
+     * Prints a response when a task is marked as done.
      *
      * @param task the task which is just marked as done.
      */
@@ -178,7 +178,7 @@ public class Dialog {
     }
 
     /**
-     * Process the response message for done command.
+     * Processes the response message for done command.
      *
      * @param task the task which is just marked as done.
      * @return response message for done command.
@@ -189,14 +189,14 @@ public class Dialog {
     }
 
     /**
-     * Print a goodbye message.
+     * Prints a goodbye message.
      */
     public void sayGoodBye() {
         addToDialog("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Print a error message.
+     * Prints a error message.
      *
      * @param message error message.
      */
@@ -205,7 +205,7 @@ public class Dialog {
     }
 
     /**
-     * Add message to the dialog.
+     * Adds message to the dialog.
      *
      * @param message message to be added to the dialog.
      */

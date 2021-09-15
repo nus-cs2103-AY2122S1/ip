@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * Get the user's tasks in the form of a list.
+     * Gets the user's tasks in the form of a list.
      *
      * @return list of the user's tasks.
      */
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Get the total number of the user's task.
+     * Gets the total number of the user's task.
      *
      * @return size of the user's task.
      */
@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at the specific position as done.
+     * Marks the task at the specific position as done.
      *
      * @param index index of the task to be marked as done.
      * @return task at the specific position.
@@ -59,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * add the new task to the user's task list.
+     * Adds the new task to the user's task list.
      *
      * @param task new task to be added.
      */
@@ -68,7 +68,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task at the specific position.
+     * Deletes the task at the specific position.
      *
      * @param index index of the task to be deleted.
      * @return task at the specific position.

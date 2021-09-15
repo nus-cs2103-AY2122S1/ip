@@ -22,7 +22,7 @@ public class Event extends Task implements Comparable<Event> {
     }
 
     /**
-     * Return string representation of the task.
+     * Returns string representation of the task.
      *
      * @return string representation of the task.
      */
@@ -33,7 +33,7 @@ public class Event extends Task implements Comparable<Event> {
     }
 
     /**
-     * Compare the two deadlines.
+     * Compares the two deadlines.
      *
      * @param o another deadline.
      * @return the value of this deadline compared to other deadline.

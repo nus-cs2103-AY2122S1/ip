@@ -14,7 +14,7 @@ import botto.util.TaskList;
 public class ExitCommand implements Command {
 
     /**
-     * Print goodBye message.
+     * Prints goodBye message.
      *
      * @param taskList the task list involved.
      * @param dialog the ui of the Botto bot.
@@ -35,7 +35,7 @@ public class ExitCommand implements Command {
     }
 
     /**
-     * Return true.
+     * Returns true.
      *
      * @return true.
      */

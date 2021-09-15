@@ -18,17 +18,12 @@ public class AddEventCommand implements Command {
 
     private String command;
 
-    /**
-     * Constructor for an AddEventCommand.
-     *
-     * @param command user command.
-     */
     public AddEventCommand(String command) {
         this.command = command;
     }
 
     /**
-     * Add task to the tasklist, update the storage and print relevant messages.
+     * Adds task to the tasklist, update the storage and print relevant messages.
      *
      * @param taskList the task list involved.
      * @param dialog the ui of the Botto bot.

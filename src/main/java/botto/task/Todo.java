@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return string representation of the task.
+     * Returns string representation of the task.
      *
      * @return string representation of the task.
      */

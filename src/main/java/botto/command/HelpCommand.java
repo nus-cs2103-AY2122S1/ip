@@ -10,7 +10,7 @@ import botto.util.TaskList;
 public class HelpCommand implements Command {
 
     /**
-     * Print the help manual of the bot.
+     * Prints the help manual of the bot.
      *
      * @param taskList the task list involved.
      * @param dialog the dialog of the Botto bot.

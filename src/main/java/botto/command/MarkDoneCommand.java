@@ -12,17 +12,12 @@ import botto.util.TaskList;
 public class MarkDoneCommand implements Command {
     private String command;
 
-    /**
-     * Constructor for a MarkDoneCommand.
-     *
-     * @param command user input.
-     */
     public MarkDoneCommand(String command) {
         this.command = command;
     }
 
     /**
-     * Mark the task as done, update the storage and print relevant messages.
+     * Marks the task as done, update the storage and print relevant messages.
      *
      * @param taskList the task list involved.
      * @param dialog the ui of the Botto bot.

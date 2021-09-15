@@ -12,17 +12,12 @@ import botto.util.TaskList;
 public class DeleteCommand implements Command {
     private String command;
 
-    /**
-     * Constructor for a DeleteCommand.
-     *
-     * @param command user input.
-     */
     public DeleteCommand(String command) {
         this.command = command;
     }
 
     /**
-     * Delete the task from the tasklist, update the storage and print relevant messages.
+     * Deletes the task from the tasklist, update the storage and print relevant messages.
      *
      * @param taskList the task list involved.
      * @param dialog the ui of the Botto bot.

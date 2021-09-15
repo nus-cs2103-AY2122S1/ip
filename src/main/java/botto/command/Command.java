@@ -11,7 +11,7 @@ import botto.util.TaskList;
 public interface Command {
 
     /**
-     * Execute the command.
+     * Executes the command.
      *
      * @param taskList the task list involved.
      * @param dialog the dialog of the Botto bot.
@@ -21,7 +21,7 @@ public interface Command {
     public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException;
 
     /**
-     * Return true when it is an exit command, else false.
+     * Returns true when it is an exit command, else false.
      *
      * @return true when it is an exit command, else false.
      */

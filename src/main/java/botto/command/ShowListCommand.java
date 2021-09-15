@@ -10,7 +10,7 @@ import botto.util.TaskList;
 public class ShowListCommand implements Command {
 
     /**
-     * Print the user tasks.
+     * Prints the user tasks.
      *
      * @param taskList the task list involved.
      * @param dialog the ui of the Botto bot.

@@ -17,17 +17,12 @@ import botto.util.TaskList;
 public class AddDeadlineCommand implements Command {
     private String command;
 
-    /**
-     * Constructor for an AddDeadlineCommand.
-     *
-     * @param command user command.
-     */
     public AddDeadlineCommand(String command) {
         this.command = command;
     }
 
     /**
-     * Add task to the tasklist, update the storage and print relevant messages.
+     * Adds task to the tasklist, update the storage and print relevant messages.
      *
      * @param taskList the task list involved.
      * @param dialog the ui of the Botto bot.

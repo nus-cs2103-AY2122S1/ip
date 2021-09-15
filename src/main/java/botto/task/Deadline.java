@@ -24,7 +24,7 @@ public class Deadline extends Task implements Comparable<Deadline> {
     }
 
     /**
-     * Return string representation of the task.
+     * Returns string representation of the task.
      *
      * @return string representation of the task.
      */
@@ -36,7 +36,7 @@ public class Deadline extends Task implements Comparable<Deadline> {
 
 
     /**
-     * Compare the two deadlines.
+     * Compares the two deadlines.
      *
      * @param o another deadline.
      * @return the value of this deadline compared to other deadline.

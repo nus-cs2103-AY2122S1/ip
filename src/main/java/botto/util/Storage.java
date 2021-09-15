@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Read the file and load the tasks stored inside it.
+     * Reads the file and load the tasks stored inside it.
      *
      * @return a list of tasks recorded in the file.
      * @throws BottoException whenever an read operation is failed.
@@ -104,7 +104,7 @@ public class Storage {
     }
 
     /**
-     * Save the tasks in the assigned file.
+     * Saves the tasks in the assigned file.
      *
      * @param tasks list of tasks to be stored.
      * @throws BottoException  whenever an write operation is failed.

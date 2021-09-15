@@ -23,7 +23,7 @@ public class Parser {
         "event", "delete", "bye", "find", "help"};
 
     /**
-     * Analyse user inputs and find out type of commands needed by the user.
+     * Analyses user inputs and find out type of commands needed by the user.
      *
      * @param fullCommand input from the user.
      * @return type of commands requested by the user.

@@ -31,7 +31,7 @@ public class Botto {
     }
 
     /**
-     * Evaluate user input and execute necessary action.
+     * Evaluates user input and execute necessary action.
      *
      * @param input user input.
      */
@@ -45,7 +45,7 @@ public class Botto {
     }
 
     /**
-     * Set up dialog container in the ui.
+     * Sets up dialog container in the ui.
      *
      * @param container dialog container.
      */
@@ -55,7 +55,7 @@ public class Botto {
     }
 
     /**
-     * This method will instantiate the Botto bot.
+     * Instantiates the Botto bot.
      *
      * @param args sequence of characters (Strings) that are passed to the function.
      */

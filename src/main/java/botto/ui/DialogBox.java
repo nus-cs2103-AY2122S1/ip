@@ -46,7 +46,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return the user dialog box created.
+     * Returns the user dialog box created.
      *
      * @param text input from the user.
      * @param img image of the user.
@@ -57,7 +57,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return the botto dialog box created.
+     * Returns the botto dialog box created.
      *
      * @param text response from the botto.
      * @param img image of the botto.

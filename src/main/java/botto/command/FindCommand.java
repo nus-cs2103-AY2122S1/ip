@@ -15,17 +15,12 @@ import botto.util.TaskList;
 public class FindCommand implements Command {
     private String command;
 
-    /**
-     * Constructor for FindCommand.
-     *
-     * @param command user command.
-     */
     public FindCommand(String command) {
         this.command = command;
     }
 
     /**
-     * Print a list of tasks that match the keyword.
+     * Prints a list of tasks that match the keyword.
      *
      * @param taskList the task list involved.
      * @param dialog the dialog of the Botto bot.

@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Get the status icon of the task.
+     * Gets the status icon of the task.
      *
      * @return "X" if the task is done, else " ".
      */
@@ -27,7 +27,7 @@ public class Task {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -35,7 +35,7 @@ public class Task {
 
 
     /**
-     * Return the task description.
+     * Returns the task description.
      *
      * @return the task description.
      */
@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * Return string representation of the task.
+     * Returns string representation of the task.
      *
      * @return string representation of the task.
      */
