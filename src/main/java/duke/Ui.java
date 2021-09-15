@@ -24,8 +24,10 @@ public class Ui {
      *
      * @param e The Exception to be displayed.
      */
-    public void display(Exception e) {
-        display(e.getMessage());
+    public String formatError(Exception e) {
+        String result = "[ERROR]\n";
+        result += e.getMessage();
+        return result;
     }
 
     /**
@@ -34,11 +36,12 @@ public class Ui {
      * @param task The task being added.
      * @param taskList The TaskList the task was added to.
      */
-    public void addTask(Task task, TaskList taskList) {
-        display("is added.");
-        display(task.toString());
-        display("now is have " + taskList.size() + " task"
-                + (taskList.size() == 1 ? "" : "s") + ".");
+    public String addTask(Task task, TaskList taskList) {
+        String result = "is added.\n";
+        result += task.toString() + "\n";
+        result += "now is have " + taskList.size() + " task"
+                + (taskList.size() == 1 ? "" : "s") + ".";
+        return result;
     }
 
     /**
@@ -46,9 +49,10 @@ public class Ui {
      *
      * @param task The task being sompleted.
      */
-    public void completeTask(Task task) {
-        display("is done!");
-        display(task.toString());
+    public String completeTask(Task task) {
+        String result = "is done!\n";
+        result += task.toString();
+        return result;
     }
 
     /**
@@ -57,11 +61,12 @@ public class Ui {
      * @param task The task being deleted.
      * @param taskList The TaskList the task was deleted from.
      */
-    public void deleteTask(Task task, TaskList taskList) {
-        display("is deleted!");
-        display(task.toString());
-        display("now is have " + taskList.size() + " task"
-                + (taskList.size() == 1 ? "" : "s") + ".");
+    public String deleteTask(Task task, TaskList taskList) {
+        String result = "is deleted!\n";
+        result += task.toString() + "\n";
+        result += "now is have " + taskList.size() + " task"
+                + (taskList.size() == 1 ? "" : "s") + ".";
+        return result;
     }
 
     /**
@@ -71,15 +76,17 @@ public class Ui {
      *
      * @param taskList The TaskList to be displayed.
      */
-    public void listTasks(TaskList taskList) {
+    public String listTasks(TaskList taskList) {
+        String result = "";
         if (taskList.size() == 0) {
-            display("is no tasks today.");
+            result = "is no tasks today.";
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 String taskDescription = taskList.getTask(i).toString();
-                display((i + 1) + "." + taskDescription + ".");
+                result += (i + 1) + "." + taskDescription + ".\n";
             }
         }
+        return result;
     }
 
     /**
@@ -88,7 +95,8 @@ public class Ui {
      * @param taskList The TaskList to search.
      * @param str The string to search for.
      */
-    public void find(TaskList taskList, String str) {
+    public String find(TaskList taskList, String str) {
+        String result = "";
         ArrayList<String> tasksFound = new ArrayList<>();
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -100,32 +108,35 @@ public class Ui {
         }
 
         if (tasksFound.size() == 0) {
-            display("is didn't find matching task.");
+            result = "is didn't find matching task.";
         } else {
             for (int i = 0; i < tasksFound.size(); i++) {
-                display(tasksFound.get(i));
+                result += tasksFound.get(i).toString() + "\n";
             }
         }
+
+        return result;
     }
 
     /**
      * Displays the initialisation message for Duke.
      */
-    public void init() {
+    public String init() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        display("Hello from\n" + logo);
-        display("hello name is duke");
-        display("how is help today; （´・｀ ）♡");
+        String result = "Behold; The Great, The Mighty\n" + logo;
+        result += "\nhello name is duke\n";
+        result += "how is help today; （´・｀ ）♡";
+        return result;
     }
 
     /**
      * Displays the exit message for Duke.
      */
-    public void exit() {
-        display("okay is bye!!");
+    public String exit() {
+        return "okay is bye!!";
     }
 }

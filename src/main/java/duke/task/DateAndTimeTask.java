@@ -22,16 +22,15 @@ public abstract class DateAndTimeTask extends Task {
     public DateAndTimeTask(String input, String splitterKey) throws DukeException {
         if (input.length() == 0) {
             throw DukeException.BLANK_DESCRIPTION;
-        } else {
-            int i = input.indexOf(splitterKey);
-            if (i < 0) {
-                throw DukeException.BLANK_DATE_AND_TIME;
-            } else if (i == 0) {
-                throw DukeException.BLANK_DESCRIPTION;
-            }
-            setDescription(input.substring(0, i));
-            dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
         }
+        int i = input.indexOf(splitterKey);
+        if (i < 0) {
+            throw DukeException.BLANK_DATE_AND_TIME;
+        } else if (i == 0) {
+            throw DukeException.BLANK_DESCRIPTION;
+        }
+        setDescription(input.substring(0, i));
+        dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
     }
 
     /**

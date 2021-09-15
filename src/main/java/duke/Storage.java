@@ -18,7 +18,7 @@ import duke.task.ToDo;
  * @author Thomas Hogben
  */
 public class Storage {
-    private Path saveDirectory;
+    private Path saveDirectory = Paths.get("data");
     private Path savePath;
     private Ui ui;
 
@@ -27,9 +27,8 @@ public class Storage {
      * @param saveDirectory A path to the directory to save in.
      *                      It will be created it if it does not exist.
      */
-    public Storage(Ui ui, Path saveDirectory) {
+    public Storage(Ui ui) {
         this.ui = ui;
-        this.saveDirectory = saveDirectory;
         savePath = Paths.get(saveDirectory.toString(), "duke.txt");
     }
 
@@ -60,7 +59,7 @@ public class Storage {
                 Task newTask = getTaskFromSave(sc.nextLine());
                 tasks.add(newTask);
             } catch (DukeException e) {
-                ui.display(e);
+                //ui.display(e);
             }
         }
         return tasks;

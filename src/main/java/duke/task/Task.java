@@ -20,7 +20,7 @@ public abstract class Task {
      */
     public Task(String description) throws DukeException {
         setDescription(description);
-        setDone();
+        isDone = false;
     }
 
     /**

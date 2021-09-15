@@ -39,9 +39,9 @@ public class TaskList {
      *
      * @param task The new Task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
-        ui.addTask(task, this);
+        return ui.addTask(task, this);
     }
 
     /**
@@ -52,11 +52,11 @@ public class TaskList {
      * @param input The argument string after the "done" command.
      * @throws DukeException Thrown for any possible error relating to invalid input.
      */
-    public void completeTask(String input) throws DukeException {
+    public String completeTask(String input) throws DukeException {
         int n = parseTaskNumber(input);
         Task task = tasks.get(n);
         task.setDone();
-        ui.completeTask(task);
+        return ui.completeTask(task);
     }
 
     /**
@@ -67,11 +67,11 @@ public class TaskList {
      * @param input The argument string after the "delete" command.
      * @throws DukeException Thrown for any possible error relating to invalid input.
      */
-    public void deleteTask(String input) throws DukeException {
+    public String deleteTask(String input) throws DukeException {
         int n = parseTaskNumber(input);
         Task task = tasks.get(n);
         tasks.remove(n);
-        ui.deleteTask(task, this);
+        return ui.deleteTask(task, this);
     }
 
     /**
@@ -85,16 +85,16 @@ public class TaskList {
     /**
      * Lists all the tasks in the TaskList in the Ui.
      */
-    public void listTasks() {
-        ui.listTasks(this);
+    public String listTasks() {
+        return ui.listTasks(this);
     }
 
     /**
      * Finds tasks in the TaskList containing the given string and displays them in the Ui.
      * @param str the string to search for.
      */
-    public void find(String str) {
-        ui.find(this, str);
+    public String find(String str) {
+        return ui.find(this, str);
     }
 
     /**
