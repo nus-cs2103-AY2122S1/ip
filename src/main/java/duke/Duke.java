@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -98,7 +97,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Perry");
         stage.setResizable(false);
         stage.setMinHeight(layoutHeight);
         stage.setMinWidth(layoutWidth);
