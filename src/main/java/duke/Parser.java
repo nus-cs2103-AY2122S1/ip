@@ -99,6 +99,7 @@ public class Parser {
         String response = "";
         // Use Java Assertions to check for unacceptable commands
         Boolean valid = true;
+        Storage.createFile();
         try {
             if (input.equals("bye")) {
                 response = BYE_STRING;

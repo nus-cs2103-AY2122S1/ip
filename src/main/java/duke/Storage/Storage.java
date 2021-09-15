@@ -12,6 +12,22 @@ import duke.Task;
 public class Storage {
 
     /**
+     * Creates storage file if file does not exist
+     */
+    public static void createFile() {
+        File directory = new File("data/");
+        File tasks = new File("data/duke.txt");
+        try {
+            directory.mkdir();
+            if (tasks.createNewFile()) {
+                System.out.println(tasks.getName() + " created");
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
      * Write to file with processed data.
      * @param tasks Tasks to write to file.
      * @throws IOException
