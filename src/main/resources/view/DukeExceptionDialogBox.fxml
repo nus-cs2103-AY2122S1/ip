@@ -9,8 +9,7 @@
 <fx:root alignment="TOP_RIGHT" maxHeight="Infinity" prefWidth="400.0" style="-fx-background-color: FF8396;"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" maxHeight="-Infinity" style="-fx-background-color: FF8396; -fx-padding: 10;"
-               wrapText="true">
+        <Label fx:id="dialog" maxHeight="-Infinity" style="-fx-background-color: FF8396;" wrapText="true">
          <font>
             <Font size="15.0" />
          </font></Label>
