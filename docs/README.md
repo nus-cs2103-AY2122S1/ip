@@ -1,5 +1,9 @@
 # User Guide
 
+<p align="center">
+    <img src="Ui.png" width="400" alt="Ui"/>
+</p>
+
 ## Features
 
 ### Feature- Manage your tasks in a task list using CLI!
