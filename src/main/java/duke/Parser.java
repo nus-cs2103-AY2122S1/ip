@@ -27,6 +27,8 @@ public class Parser {
             return new ListCommand();
         case "statistics":
             return new StatisticsCommand();
+        case "help":
+            return new HelpCommand();
         }
         if (wrongArrayLength) {
             return new ErrorCommand("Complete your command");

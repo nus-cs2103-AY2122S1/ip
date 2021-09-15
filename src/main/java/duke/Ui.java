@@ -9,7 +9,8 @@ public class Ui {
      * Prints the welcome message.
      */
     public String showWelcome() {
-        return "Guten Tag. I'm Dwight Schrute.\nWhat do you want?";
+        return "Guten Tag. I'm Dwight Schrute.\n" +
+                "Type \"help\" if you are clueless.";
     }
 
     /**
@@ -112,15 +113,49 @@ public class Ui {
         return "Your data has been saved";
     }
 
+    /**
+     * Prints a message to confirm task is added.
+     *
+     * @return
+     */
+
     public String addedTaskMessage() {
         return "Got it. I've added this task: \n";
     }
-    
+
+    /**
+     * Prints the current statistics.
+     *
+     * @return
+     */
+
     public String printStatistics(Statistics stats) {
         String returnMessage = "";
         returnMessage += "Total Tasks Done: " + stats.getTasksDone() + "\n";
         returnMessage += "Total Tasks Added: " + stats.getTasksAdded() + "\n";
         returnMessage += "Total Tasks Deleted: " + stats.getTasksDeleted() + "\n";
         return returnMessage;
+    }
+
+    /**
+     * Prints the help message.
+     *
+     * @return
+     */
+
+    public String helpMessage() {
+        String returnMessage = "";
+        returnMessage += "Here are my commands\n";
+        returnMessage += "Todo: \"todo [task]\"\n";
+        returnMessage += "Deadline: \"deadline [task] /by YYYY-MM-DD\"\n";
+        returnMessage += "Event: \"event [task] /at YYYY-MM-DD\"\n";
+        returnMessage += "Done: \"done [task number]\"\n";
+        returnMessage += "List: \"list\"\n";
+        returnMessage += "Delete: \"delete [task number]\"\n";
+        returnMessage += "Find: \"find [keyword]\"\n";
+        returnMessage += "Delete: \"delete [task number]\"\n";
+        returnMessage += "Save: \"save\"\n";
+        return returnMessage;
+
     }
 }

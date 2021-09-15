@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         Background background = new Background(new BackgroundFill(Color.POWDERBLUE, new CornerRadii(10),
-                new Insets(5,50,5,0)));
+                new Insets(5,45,5,0)));
         setBackground(background);
     }
 

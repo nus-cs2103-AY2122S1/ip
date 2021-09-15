@@ -1,14 +1,15 @@
 package duke;
 
 /**
- *Command to list the current Statistics .
+ * Command to add a Todo Task to the existing list of tasks.
  */
-public class StatisticsCommand extends Command{
-
+public class HelpCommand extends Command {
+    
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage, Statistics stats) throws DukeException {
-        return ui.printStatistics(stats);
+        
+        return ui.helpMessage();
     }
 
     @Override
