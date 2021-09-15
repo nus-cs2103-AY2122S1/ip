@@ -21,33 +21,32 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] commandArr = commandString.split(" ");
-        boolean foundAnyMatch = false;
+        boolean anyMatchFound = false;
         int numberOfMatches = 0;
 
         for (int i = 0; i < taskList.numberOfTasks(); i++) {
-            boolean currTaskPrinted = false;
+            boolean currentTaskHasBeenPrinted = false;
 
             // loop again for each keyword in input
             for (int word = 1; word < commandArr.length; word++) {
                 boolean matches = taskList.getTask(i).getName().toLowerCase().contains(commandArr[word].toLowerCase());
                 if (matches) {
-                    if (!foundAnyMatch) {
+                    if (!anyMatchFound) {
                         ui.printResponse("Here are the matching tasks:");
                     }
-                    foundAnyMatch = true;
+                    anyMatchFound = true;
                     numberOfMatches++;
-                    if (!currTaskPrinted) {
+                    if (!currentTaskHasBeenPrinted) {
                         ui.printResponse((numberOfMatches) + "." + taskList.getTask(i).toString());
-                        currTaskPrinted = true;
+                        currentTaskHasBeenPrinted = true;
                     }
 
                 }
             }
         }
-        if (!foundAnyMatch) {
+        if (!anyMatchFound) {
             ui.printResponse("Sorry, we are unable to find any matching tasks");
         }
-
 
     }
 

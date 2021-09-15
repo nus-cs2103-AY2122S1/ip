@@ -41,9 +41,6 @@ public class HelpCommand extends Command {
         ui.printResponse("Eg. 'deadline return book /by 2/12/2019 1800' ");
 
         ui.printResponse("Type 'help' to see the list of commands available");
-
-
-
     }
 
     @Override

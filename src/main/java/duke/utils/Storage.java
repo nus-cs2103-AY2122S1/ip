@@ -155,12 +155,9 @@ public class Storage {
      * @return
      */
     public Task convertStringToTask(String line) {
-
-         // Example storage in file:
-         // T;0;readbook
-         // D;0;return book ;2/12/2019 1800
-
-
+        // Example storage in file:
+        // T;0;readbook
+        // D;0;return book ;2/12/2019 1800
         String[] lineSplit = line.split(DELIMITER);
         Task.TaskType taskType = lineSplit[0].equals("T")
                 ? Task.TaskType.TODO
@@ -170,30 +167,28 @@ public class Storage {
 
         boolean taskDone = lineSplit[1].equals("0") ? false : true;
 
-        Task currTask;
+        Task currentTask;
 
         switch (taskType) {
             case TODO:
-                currTask = new TodoTask(lineSplit[2]);
+                currentTask = new TodoTask(lineSplit[2]);
                 break;
 
             case DEADLINE:
-                currTask = new DeadlineTask(lineSplit[2], lineSplit[3]);
+                currentTask = new DeadlineTask(lineSplit[2], lineSplit[3]);
                 break;
 
             case EVENT:
-                currTask = new EventTask(lineSplit[2], lineSplit[3]);
+                currentTask = new EventTask(lineSplit[2], lineSplit[3]);
                 break;
 
             default:
                 throw new IllegalArgumentException("Corrupted file");
         }
-
         if (taskDone ) {
-            currTask.makeDone();
+            currentTask.makeDone();
         }
-
-        return currTask;
+        return currentTask;
 
     }
 

@@ -21,12 +21,7 @@ public class DukeDate {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
             try {
                 Date dateFormatted = format.parse(dateLiteral);
-                //System.out.println(dateFormatted);
                 return dateFormatted;
-                // eg. dateLiteral = 2/12/2019 1800
-                // after parse
-                // Mon Dec 02 18:00:00 SGT 2019
-
             } catch (java.text.ParseException e) {
                 System.out.println("Incorrect date format");
             }
@@ -35,12 +30,7 @@ public class DukeDate {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 Date dateFormatted = format.parse(dateLiteral);
-                //System.out.println(dateFormatted);
                 return dateFormatted;
-                // eg. dateLiteral = 2/12/2019
-                // after parse
-                // Mon Dec 02 00:00:00 SGT 2019
-
             } catch (java.text.ParseException e) {
                 System.out.println("Incorrect date format");
             }

@@ -243,9 +243,4 @@ public class Ui {
         vbox.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(e.toString()) ));
     }
-
-
-
-
-
 }

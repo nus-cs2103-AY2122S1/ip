@@ -33,6 +33,7 @@ public class Parser {
         switch (actionWord) {
             case "bye":
                 return new ExitCommand();
+
             case "list":
                 return new ListCommand();
 

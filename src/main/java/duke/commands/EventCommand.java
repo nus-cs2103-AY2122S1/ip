@@ -29,7 +29,6 @@ public class EventCommand extends Command {
             }
         }
 
-        String at = commandString.split("/")[1].substring(3);
         EventTask newEvent = new EventTask(commandString.substring(6).split("/")[0], date);
         taskList.addTask(newEvent);
         ui.printResponse("Got it. I've added this task: ");

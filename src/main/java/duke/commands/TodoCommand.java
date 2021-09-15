@@ -21,9 +21,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         TodoTask newTodo = new TodoTask(commandString.substring(5));
-        //duke.tasks.add(newTask);
         taskList.addTask(newTodo);
-        //taskCounter++;
         ui.printResponse("Got it. I've added this task: ");
         ui.printResponse("  " + newTodo.toString());
     }

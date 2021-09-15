@@ -1,6 +1,5 @@
 T;0;readbook
 D;0;return book ;2/12/2019 1800
 T;0;week 4 ip
-T;0;show mabel
 T;1;sleep
 E;0;nus run ;26/9/2021 1700
