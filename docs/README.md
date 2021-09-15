@@ -38,6 +38,14 @@ Lists all existing tasks in storage.
 
 Usage: `list`
 
+### `fixed`
+
+Adds a fixed duration task into the list of tasks.
+
+Usage: `fixed [task] /for [duration (in hours)]`
+
+Example Usage: fixed do homework /for 2
+
 ### `todo` 
 
 Adds a to-do task into the list of tasks.

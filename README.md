@@ -8,29 +8,28 @@ a single deadline!
 
 ## Commands
 
-1. `list` : lists all existing tasks in storage.
+1. `help` : lists all available commands in Morgan.
 
 
-
-2. `todo [task]` : adds a to-do task into the list of tasks.
-
+2. `list` : lists all existing tasks in storage.
 
 
-3. `event [task] /at [dd-mm-yyyy hh:mm]` : adds an event task into the list of tasks.
+3. `fixed [task] /for [duration (in hours]` : adds a fixed duration task into the list of tasks.
 
 
-
-4. `deadline [task] /by [dd-mm-yyyy hh:mm]` : adds a deadline task into the list of tasks.
-
+4. `todo [task]` : adds a to-do task into the list of tasks.
 
 
-5. `delete [task number]` : deletes a task from the list of tasks.
+5. `event [task] /at [dd-mm-yyyy hh:mm]` : adds an event task into the list of tasks.
 
 
-
-6. `done [task number]` marks a specified task as done.
-
+6. `deadline [task] /by [dd-mm-yyyy hh:mm]` : adds a deadline task into the list of tasks.
 
 
-7. `find [keyword]` : lists all existing tasks containing a specified keyword.
+7. `delete [task number]` : deletes a task from the list of tasks.
 
+
+8. `done [task number]` marks a specified task as done.
+
+
+9. `find [keyword]` : lists all existing tasks containing a specified keyword.
