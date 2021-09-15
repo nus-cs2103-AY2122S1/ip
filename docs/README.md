@@ -1,5 +1,5 @@
 # User Guide
-
+### [Download Here](https://github.com/YaleChen299/ip/releases/download/pre-release/duke.jar)
 ## Table of Content
 - [Screenshots](#screenshots)
 - [Features](#features)
