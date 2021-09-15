@@ -3,6 +3,7 @@ package duke.exception;
 public class EmptyDescriptionException extends DukeException {
 
     private static final String message = "Did you forget to write some descriptions after \"%s\"";
+
     /**
      * Constructs a EmptyDescriptionException instance that handles task with empty description.
      *

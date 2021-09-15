@@ -6,6 +6,7 @@ package duke.exception;
 public class ExtraArgumentException extends DukeException {
 
     private static final String message = "Do not write anything after \"%s\" !";
+
     /**
      * Constructs an ExtraArgumentException instance that handles command with extraneous argument.
      *

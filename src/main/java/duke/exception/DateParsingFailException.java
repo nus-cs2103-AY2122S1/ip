@@ -4,6 +4,7 @@ package duke.exception;
  * An exception that handles the failure of parsing date string to LocalDate.
  */
 public class DateParsingFailException extends DukeException {
+
     /**
      * Constructs a DukeException instance that handles the failure of parsing date string to LocalDate.
      *

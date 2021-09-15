@@ -3,6 +3,7 @@ package duke.exception;
 public class TaskNotFoundException extends DukeException {
 
     private static final String message = "Task number %d not found! Try a positive number smaller or equal to %d";
+
     /**
      * Constructs a TaskNotFoundException instance that handles the situation where a task cannot be found.
      *
