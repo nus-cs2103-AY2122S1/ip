@@ -52,14 +52,22 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseDone(String instruction) throws JarvisException, IOException {
-        int taskNum = Integer.parseInt(instruction.substring(5)) - 1;
-
-        // If the task number is invalid
-        if (taskNum >= TaskList.getCounter()) {
-            throw new JarvisException(Ui.invalidTaskNum(taskNum));
-        // If the task number is valid, update the task to done
+        if (instruction.length() < 6) {
+            throw new JarvisException(Ui.EMPTY_TASK_DONE);
         } else {
-            return TaskList.markAsDoneAndUpdate(taskNum);
+            try {
+                int taskNum = Integer.parseInt(instruction.substring(5)) - 1;
+
+                // If the task number keyed in by the user is invalid
+                if (taskNum >= TaskList.getCounter() || taskNum < 0) {
+                    throw new JarvisException(Ui.invalidTaskNum(taskNum));
+                // If the task number keyed in by the user is valid
+                } else {
+                    return TaskList.markAsDoneAndUpdate(taskNum);
+                }
+            } catch (NumberFormatException | IOException e) {
+                throw new JarvisException(Ui.UNRECOGNISED_COMMAND);
+            }
         }
     }
 
