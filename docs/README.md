@@ -17,7 +17,7 @@ An event is a task with a description and needs to be done before a specific dea
 A deadline is a task with a description and starts at a specific deadline. <br>
 
 Format: [task] [description] /[deadline]
-
+<hr>
 
 
 
@@ -26,6 +26,7 @@ Format: [task] [description] /[deadline]
 Views all tasks in the list.
 
 Format: list
+<hr>
 
 
 ### Finding a task based on a keyword that exactly matches a description: `find`
@@ -33,7 +34,7 @@ Format: list
 Finds a task based on a search term.
 
 Format: find [keyword] 
-
+<hr>
 
 
 ### Finding a task based on a keyword that partially/ exactly matches a description: `search`
@@ -41,6 +42,7 @@ Format: find [keyword]
 Finds a task based on a keyword that partially/exactly matches a task.
 
 Format: search [keyword]
+<hr>
 
 
 ### Marking a task as done: `done`
@@ -48,14 +50,14 @@ Format: search [keyword]
 Marks a task as done as shown by the symbol 'X'.
 
 Format: done [number]
-
+<hr>
 
 ### Deleting a task: `delete`
 
 Deletes a particular task in the list.
 
 Format: done [number]
-
+<hr>
 
 
 ### Exiting the program: `bye`
@@ -63,6 +65,7 @@ Format: done [number]
 Exits the whole program.
 
 Format: bye
+<hr>
 
 
 ## Usage
@@ -82,7 +85,7 @@ Duke says: Got it. I've added this task:
 [T][] math homework
 Now you have 3 tasks in the list.
 ```
-
+<hr>
 
 `deadline`
 
@@ -100,7 +103,7 @@ Duke says: Got it. I've added this task:
 [D][] math homework (by: Sunday)
 Now you have 3 tasks in the list.
 ```
-
+<hr>
 
 `event`
 
@@ -118,6 +121,7 @@ Duke says: Got it. I've added this task:
 [E][] formal dinner (on: Monday)
 Now you have 3 tasks in the list.
 ```
+<hr>
 
 `list`
 
@@ -136,6 +140,7 @@ Duke says: Here are the tasks in your list:
 2.[T][] cs2100
 3.[T][] math homework
 ```
+<hr>
 
 `find`
 
@@ -152,6 +157,7 @@ Returns tasks that match the keyword.
 Duke says: Here are the matching task(s) in your list:
 1.[E][] swimming (on: Monday)
 ```
+<hr>
 
 `search`
 
@@ -169,6 +175,7 @@ Duke says: Here are the matching keyword(s) in your list:
 1.[E][] swimming (on: Monday)
 2.[E][] swim (on: Sunday)
 ```
+<hr>
 
 `done`
 
@@ -185,6 +192,7 @@ Returns an acknowledgement message.
 Duke says: Nice! I've marked this task as done:
 [E][X] swimming (on: Monday)
 ```
+<hr>
 
 `delete`
 
@@ -202,6 +210,7 @@ Duke says: Noted. I've removed this task:
 [E][X] swimming (on: Monday)
 Now you have 3 tasks in the list.
 ```
+<hr>
 
 `bye`
 
@@ -212,7 +221,7 @@ Example:
 
 Expected outcome:
 
-Description of the outcome.
+Exits the whole program.
 
 ```
 Duke says: Good Bye. Have a nice day!
