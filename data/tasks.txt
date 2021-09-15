@@ -1,0 +1,5 @@
+T | 0 | read book
+D | 0 | return book | 2021-09-15 | 18:00
+E | 0 | CS2103T Lecture | 2021-09-17 | 10:00
+T | 0 | drink water
+D | 0 | CS2103T Quiz | 2021-09-16 | 16:00
