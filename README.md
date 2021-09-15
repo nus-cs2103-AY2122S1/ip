@@ -24,4 +24,4 @@ Features:
 
 ## 
 Here's a sneak peek at what it looks like:
-![Alt text](https://media.discordapp.net/attachments/732543939260842045/887724097218433064/example.png?width=674&height=897)
+![Sneak Peek](docs/Ui.png?raw=true)
