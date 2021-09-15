@@ -7,12 +7,12 @@ GUI apps.
 ## Quick Start
 
 1. Ensure you have Java 11 installed on your computer for your operating system.
-   If you do not have Java 11 installed, you may visit the following link to do
-   so:
-   https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html
-2. Download duck.jar from ...
+   If you do not have Java 11 installed, you may visit 
+   [this page](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) to do so.
+2. Download duck.jar from [here](https://github.com/ntwbruce/ip/releases/tag/A-Release) or
+   [click](https://github.com/ntwbruce/ip/releases/download/A-Release/duck.jar) to download.
 3. Copy duck.jar to a folder of your choice.
-4. Double-click on duck.jar to start Duke, or use the CLI command `java -jar duck.jar`.
+4. Double-click on duck.jar to start Duck, or use the CLI command `java -jar duck.jar`.
 5. To interact with Duck, type commands into the text bar and hit Enter or click Send.
 6. The Features section below explains the commands Duck has to offer.
 
