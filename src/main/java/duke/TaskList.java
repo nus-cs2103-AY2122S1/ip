@@ -149,7 +149,7 @@ public class TaskList {
             Task t = listOfTasks.get(index);
             getMostRecentlyDeletedTask = t;
             listOfTasks.remove(index);
-            return "Ok! I've deleted this task:\n  " + t.toString() + "\n"
+            return "Okay! I've deleted this task:\n  " + t.toString() + "\n"
                     + "You now have " + (numOfTasks - 1) + " task(s) in the list.";
         }
     }
