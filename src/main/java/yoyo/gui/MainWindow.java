@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,6 +24,8 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
+    @FXML
+    private Button sendButton;
 
     private Yoyo yoyo;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
@@ -42,6 +45,7 @@ public class MainWindow extends AnchorPane {
         }
         this.yoyo = yoyo;
         userInput.setFont(Font.font ("serif", 14));
+        sendButton.setFont(Font.font ("serif", 14));
     }
 
 
