@@ -1,5 +1,6 @@
-Task/DeadlineException.java
- Task.DeadlineException
+Duke.java
+ Duke
+ Ui
 Launcher.java
  Launcher
 Task/TaskList.java
@@ -10,17 +11,6 @@ Task/EventsException.java
  Task.EventsException
 Task/TodoException.java
  Task.TodoException
-Task/Task.java
- Task.Task
-Task/TaskTypes.java
- Task.TaskTypes
-MainWindow.java
- MainWindow
-DialogBox.java
- DialogBox
-Duke.java
- Duke
- Ui
 Storage/Storage.java
  Storage.DeadlineTask
  Storage.EventsTask
@@ -28,3 +18,13 @@ Storage/Storage.java
  Storage.Parser$1
  Storage.Storage
  Storage.TodoTasks
+Task/TaskTypes.java
+ Task.TaskTypes
+MainWindow.java
+ MainWindow
+DialogBox.java
+ DialogBox
+Task/Task.java
+ Task.Task
+Task/DeadlineException.java
+ Task.DeadlineException
