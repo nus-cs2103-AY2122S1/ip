@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 public class DukeDialogBox extends HBox {
     @FXML
@@ -37,6 +38,10 @@ public class DukeDialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        Circle circle = new Circle(displayPicture.getFitWidth() / 2);
+        circle.setCenterX(displayPicture.getFitHeight() / 2);
+        circle.setCenterY(displayPicture.getFitHeight() / 2);
+        displayPicture.setClip(circle);
     }
 
     /**
