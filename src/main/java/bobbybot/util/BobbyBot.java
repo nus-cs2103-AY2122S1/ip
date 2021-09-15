@@ -1,7 +1,6 @@
 package bobbybot.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 import bobbybot.commands.Command;
