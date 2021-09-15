@@ -24,9 +24,8 @@ public class Duke {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Executes the action called by the user's input, saves the updated task collection and returns the
+     * appropriate response.
      */
     public Response handleUserInput(String userInput) {
         try {
