@@ -64,45 +64,40 @@ public class Parser {
      */
     public DukeCommand processInput(String userInput) throws DukeException {
         String commandType = getCommandType(userInput).toLowerCase();
-        String commandDescription = getCommandDescription(userInput, " ");
+        String commandDescription = getCommandDescription(userInput, commandType);
 
-        if (checkDescriptionExist(commandDescription, commandType)) {
-            switch (commandType) {
-            case "list":
-                return new ListCommand(ui, storage, list);
+        switch (commandType) {
+        case "list":
+            return new ListCommand(ui, storage, list);
 
-            case "bye":
-                return new ExitCommand(ui, storage, list);
+        case "bye":
+            return new ExitCommand(ui, storage, list);
 
-            case "done":
-                return new DoneCommand(ui, storage, list, getTaskNumber(commandDescription));
+        case "done":
+            return new DoneCommand(ui, storage, list, getTaskNumber(commandDescription));
 
-            case "todo": case "deadline": case "event":
-                return new AddCommand(ui, storage, list, processTaskDescriptions(commandType, userInput));
+        case "todo": case "deadline": case "event":
+            return new AddCommand(ui, storage, list, processTaskDescriptions(commandType, commandDescription));
 
-            case "delete":
-                return new DeleteCommand(ui, storage, list, getTaskNumber(commandDescription));
+        case "delete":
+            return new DeleteCommand(ui, storage, list, getTaskNumber(commandDescription));
 
-            case "find":
-                return new FindCommand(ui, storage, list, commandDescription);
+        case "find":
+            return new FindCommand(ui, storage, list, commandDescription);
 
-            case "sort":
-                return new SortCommand(ui, storage, list, checkReverseSort(commandDescription));
+        case "sort":
+            return new SortCommand(ui, storage, list, checkReverseSort(commandDescription));
 
-            case "help":
-                return new HelpCommand(ui, storage, list);
+        case "help":
+            return new HelpCommand(ui, storage, list);
 
-            default:
-                throw new UnknownCommandException();
-            }
+        default:
+            throw new UnknownCommandException();
         }
-        throw new NoCommandDescriptionException();
     }
 
-    private Task processTaskDescriptions(String taskType, String userInput) throws InvalidDateTimeException,
-            NoDateTimeException, NoCommandDescriptionException {
-        if (checkDescriptionExist(userInput, taskType)) {
-            String commandDescription = getCommandDescription(userInput, " ");
+    private Task processTaskDescriptions(String taskType, String commandDescription) throws InvalidDateTimeException,
+            NoDateTimeException {
             switch (taskType) {
             case "deadline": case "event":
                 return createTaskWithDateTime(commandDescription, taskType);
@@ -110,22 +105,10 @@ public class Parser {
             default:
                 return new ToDo(commandDescription, false);
             }
-        }
-        throw new NoCommandDescriptionException();
     }
 
     private String getCommandType(String userInput) {
         return userInput.split(" ")[0];
-    }
-
-    private boolean checkDescriptionExist(String commandDescription, String commandType)
-            throws NoCommandDescriptionException {
-        if (!(commandType.equals("list") || commandType.equals("bye"))) {
-            if (commandDescription.isBlank()) {
-                throw new NoCommandDescriptionException();
-            }
-        }
-        return true;
     }
 
     private Task createTaskWithDateTime(String commandDescription, String taskType) throws NoDateTimeException,
@@ -140,8 +123,13 @@ public class Parser {
 
     }
 
-    private String getCommandDescription(String userInput, String substring) {
-        int index = userInput.indexOf(substring);
+    private String getCommandDescription(String userInput, String taskType) throws NoCommandDescriptionException {
+        int index = userInput.indexOf(" ");
+        if (index < 0) {
+            if (!(taskType.equals("list") || taskType.equals("bye"))) {
+                throw new NoCommandDescriptionException();
+            }
+        }
         String description = userInput.substring(index + 1);
         return description;
     }
