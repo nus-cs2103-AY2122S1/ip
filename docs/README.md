@@ -1,22 +1,24 @@
 # User Guide
 
-This repo contains the code for the Misaki chatbot as part of CS2103T: Software Engineering. Misaki is a desktop chatbot for managing and storing tasks. Start chatting with this adorable Japanese bot to manage your tasks effectively!
+This repo contains the code for the Misaki chatbot as part of CS2103T: Software Engineering. Misaki is a desktop chatbot for managing and storing tasks. 
+
+Start chatting with this adorable Japanese bot to manage your tasks effectively! („• ◡ •„) ♡
 ___
 ## Quick start
 1. Ensure you have Java `11` or above installed.
 2. Download the latest `.jar` from [here].
 3. Move the file to the desired path as the home folder for your Misaki. 
 4. Right-click the file and open the app. 
-5. Try entering help and other commands. The GUI similar to the below should appear in a few seconds.
+5. Try entering help and other commands. You should see a similar GUI as below.
 
 ![Image of ](Ui.png)
 
-5. Type the command in the command box and press Enter` to execute it.
+5. Type the command in the command box and press `Enter` to execute it.
    Some example commands you can try:
    * `help`: Shows all available command lines.
-   * `todo` `complete assignment`: Adds a todo task `[T][ ] complete assignment` to the list.
-   * `deadline` `submit iP /by 2021-09-17 23:59`: Adds a deadline task `[D][ ] submit iP (by: 17 Sep 2020 23:59pm)` to the list.
-   * `event` `birthday party /at 2021-09-19 18:00`: Adds an event task `[E][ ] birthday party (at: 19 Sep 2021 18:00pm)` to the list.
+   * `todo` `complete assignment`: Adds a todo task `complete assignment` to the list.
+   * `deadline` `submit iP /by 2021-09-17 23:59`: Adds a deadline task `submit iP (by: 17 Sep 2020 23:59pm)` to the list.
+   * `event` `birthday party /at 2021-09-19 18:00`: Adds an event task `birthday party (at: 19 Sep 2021 18:00pm)` to the list.
    * `list`: Lists all the tasks in the list.
    * `done` `2`: Marks the task at the `2` index in the list as done.
    * `delete` `2`: Deletes a task at the `2` index from the list.
