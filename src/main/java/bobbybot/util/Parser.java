@@ -7,6 +7,7 @@ import bobbybot.commands.AddCommand;
 import bobbybot.commands.AddContactCommand;
 import bobbybot.commands.Command;
 import bobbybot.commands.DeleteCommand;
+import bobbybot.commands.DeleteContactCommand;
 import bobbybot.commands.DoneCommand;
 import bobbybot.commands.ExitCommand;
 import bobbybot.commands.FindCommand;
@@ -78,10 +79,12 @@ public class Parser {
                 return prepareAddContact(arguments);
             case LIST_CONTACT:
                 return new ListContactsCommand();
+            case DELETE_CONTACT:
+                return prepareDeleteContact(arguments);
             default:
                 System.out.println("Invalid command");
-                return new IncorrectCommand();
             }
+            return new IncorrectCommand();
         } catch (InvalidArgumentException | IllegalArgumentException e) {
             return new IncorrectCommand();
         }
@@ -142,5 +145,14 @@ public class Parser {
             return new IncorrectCommand();
         }
         return new DeleteCommand(Integer.parseInt(args.trim()));
+    }
+
+    private Command prepareDeleteContact(String args) {
+        final Matcher matcher = NUMBER_ARGS_FORMAT.matcher(args.trim());
+        // Check if arg is parsable as integer
+        if (!matcher.matches()) {
+            return new IncorrectCommand();
+        }
+        return new DeleteContactCommand(Integer.parseInt(args.trim()));
     }
 }

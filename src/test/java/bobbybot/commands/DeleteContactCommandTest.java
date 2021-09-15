@@ -9,7 +9,11 @@ import java.util.Collections;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import bobbybot.tasks.ToDo;
+import bobbybot.person.Address;
+import bobbybot.person.Email;
+import bobbybot.person.Name;
+import bobbybot.person.Person;
+import bobbybot.person.Phone;
 import bobbybot.util.PersonList;
 import bobbybot.util.Storage;
 import bobbybot.util.TaskList;
@@ -29,9 +33,14 @@ public class DeleteContactCommandTest {
     }
 
     @Test
-    public void deleteCommand_validInput_success() {
-        tasks.addTask(new ToDo("test"));
-        DeleteCommand c = new DeleteCommand(1);
+    public void deleteContactCommand_validInput_success() {
+
+        Name name = new Name("test");
+        Email email = new Email("test@test");
+        Phone phone = new Phone("123");
+        Address address = new Address("home");
+        contacts.addPerson(new Person(name, email, phone, address));
+        DeleteContactCommand c = new DeleteContactCommand(1);
         c.execute(tasks, ui, storage, contacts);
         assertEquals(0, tasks.getTasks().size());
     }
