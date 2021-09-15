@@ -1,5 +1,3 @@
-T,0,asdoamisd asd sad sad asd s asd
-T,0,test |
-T,0,test | | |.|
-T,0,test hack 
-T,0,test \n
+T,1,grab lunch
+E,1,church meeting,Sunday 2-4pm
+D,0,cs2103 assignment,23-01-2020 11:01
