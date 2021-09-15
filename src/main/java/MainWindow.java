@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(
         Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.jpg")));
     private final Image dukeImage = new Image(
-        Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.jpeg")));
+        Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.jpg")));
 
     /**
      * Starts up the main window with auto scrolling.

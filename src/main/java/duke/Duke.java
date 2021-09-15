@@ -15,7 +15,6 @@ public class Duke {
      */
     private final Storage storage;
     private final TaskList list;
-    private final String verNumber = "1.2";
 
     /**
      * Creates a duke with storage pointing to the right file.
