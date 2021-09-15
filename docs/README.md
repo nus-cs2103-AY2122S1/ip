@@ -4,7 +4,7 @@ Duke is a graphical user interface (GUI) desktop app that helps you track your u
 
 - Download the `.jar` file under `Releases`,
 - Navigate to the directory in terminal,
-- run `java -jar CS2103T-iP.jar`, and voila!
+- run `java -jar duke.jar`, and voila!
 
 ## Features 👾
 
