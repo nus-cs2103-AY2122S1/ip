@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -12,7 +10,6 @@ import duke.task.ToDo;
  * @author Thomas Hogben
  */
 public class Parser {
-    private Scanner sc;
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -28,7 +25,6 @@ public class Parser {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
-        sc = new Scanner(System.in);
     }
 
     /**
@@ -41,33 +37,32 @@ public class Parser {
      *                      "list" - lists all tasks in task list
      *                      "todo" - creates new ToDo task
      */
-    public void parse() {
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            try {
-                if (input.equals("bye")) {
-                    break;
-                } else if (input.equals("list")) {
-                    taskList.listTasks();
-                } else if (input.startsWith("done ")) {
-                    taskList.completeTask(input.substring(5));
-                } else if (input.startsWith("todo ")) {
-                    taskList.addTask(new ToDo(input.substring(5)));
-                } else if (input.startsWith("deadline ")) {
-                    taskList.addTask(new Deadline(input.substring(9)));
-                } else if (input.startsWith("event ")) {
-                    taskList.addTask(new Event(input.substring(6)));
-                } else if (input.startsWith("delete ")) {
-                    taskList.deleteTask(input.substring(7));
-                } else if (input.startsWith("find ")) {
-                    taskList.find(input.substring(5));
-                } else {
-                    throw new DukeException(DukeException.DEFAULT);
-                }
-                storage.save(taskList);
-            } catch (DukeException e) {
-                ui.display(e);
+    public String parse(String input) {
+        try {
+            if (input.equals("bye")) {
+
+            } else if (input.equals("list")) {
+                return taskList.listTasks();
+            } else if (input.startsWith("done ")) {
+                return taskList.completeTask(input.substring(5));
+            } else if (input.startsWith("todo ")) {
+                return taskList.addTask(new ToDo(input.substring(5)));
+            } else if (input.startsWith("deadline ")) {
+                return taskList.addTask(new Deadline(input.substring(9)));
+            } else if (input.startsWith("event ")) {
+                return taskList.addTask(new Event(input.substring(6)));
+            } else if (input.startsWith("delete ")) {
+                return taskList.deleteTask(input.substring(7));
+            } else if (input.startsWith("find ")) {
+                return taskList.find(input.substring(5));
+            } else {
+                throw DukeException.DEFAULT;
             }
+            storage.save(taskList);
+        } catch (DukeException e) {
+            return ui.formatError(e);
         }
+
+        return "";
     }
 }

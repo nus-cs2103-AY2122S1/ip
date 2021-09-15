@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 /**
  * An encapsulation of a Task to be done, that can be marked as completed.
  * @author Thomas Hogben
@@ -16,8 +18,8 @@ public abstract class Task {
     /**
      * @param description The description of the Task.
      */
-    public Task(String description) {
-        this.description = description;
+    public Task(String description) throws DukeException {
+        setDescription(description);
         isDone = false;
     }
 
@@ -33,7 +35,10 @@ public abstract class Task {
     /**
      * @param description The new description of this task.
      */
-    public void setDescription(String description) {
+    public void setDescription(String description) throws DukeException {
+        if (description.contains("|")) {
+            throw DukeException.INVALID_CHARACTER;
+        }
         this.description = description;
     }
 
@@ -56,13 +61,6 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
-    }
-
-    /**
-     * @return The description of this task.
-     */
-    public String getDescription() {
-        return description;
     }
 
     /**

@@ -21,17 +21,16 @@ public abstract class DateAndTimeTask extends Task {
      */
     public DateAndTimeTask(String input, String splitterKey) throws DukeException {
         if (input.length() == 0) {
-            throw new DukeException(DukeException.BLANK_DESCRIPTION);
-        } else {
-            int i = input.indexOf(splitterKey);
-            if (i < 0) {
-                throw new DukeException(DukeException.BLANK_DATE_AND_TIME);
-            } else if (i == 0) {
-                throw new DukeException(DukeException.BLANK_DESCRIPTION);
-            }
-            setDescription(input.substring(0, i));
-            dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
+            throw DukeException.BLANK_DESCRIPTION;
         }
+        int i = input.indexOf(splitterKey);
+        if (i < 0) {
+            throw DukeException.BLANK_DATE_AND_TIME;
+        } else if (i == 0) {
+            throw DukeException.BLANK_DESCRIPTION;
+        }
+        setDescription(input.substring(0, i));
+        dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
     }
 
     /**
@@ -57,7 +56,7 @@ public abstract class DateAndTimeTask extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(dateAndTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException(DukeException.INVALID_DATE_AND_TIME);
+            throw DukeException.INVALID_DATE_AND_TIME;
         }
     }
 
