@@ -18,7 +18,7 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Instantiates an Items object.
+     * Instantiates a tasklise object.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -45,6 +45,7 @@ public class TaskList {
 
     /**
      * Wraps a given arrayList of tasks in a tasklist.
+     *
      * @param tasks the arraylist of tasks.
      * @return a tasklist containing the arraylist of tasks.
      */
@@ -57,6 +58,13 @@ public class TaskList {
         this.storage = storage;
     }
 
+    /**
+     * Creates a copy of a given tasklist.
+     *
+     * Used to implement undo
+     * @param taskList the list who's copy is to be made
+     * @return copied tasklist
+     */
     private TaskList copyTasklist(TaskList taskList) {
         ArrayList<Task> newList = new ArrayList<>();
         for (Task task : taskList.tasks) {
@@ -160,6 +168,11 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Returns an arraylist containing all tasks in toString() format.
+     *
+     * @return an arraylist of strings.
+     */
     public static ArrayList<String> getStringList() {
         TaskList newList = Duke.getLatestState();
         ArrayList<String> fileList = new ArrayList<>();

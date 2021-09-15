@@ -42,8 +42,7 @@ public class Storage {
 
     /**
      * Reads file. If file does not exist, creates a file.
-     *
-     * @return List containing all tasks in file originally.
+     * Stores the contents of the file in a tasklist.
      */
     public void loadData() throws DukeException {
         // Make directory and/or file if they don't exist
@@ -96,98 +95,6 @@ public class Storage {
         TaskList fileTaskList = TaskList.of(fileList);
         Duke.addToState(fileTaskList);
     }
-
-    /**
-     * Adds a task to the saved file.
-     *
-     * @param task The task as a String.
-     * @throws DukeException When saving the file fails.
-     */
-    public void addToFile(String task) throws DukeException {
-        fileTasks.add(task);
-        saveToFile();
-    }
-
-    /**
-     * Adds a task to the saved file at given index.
-     * Used with undo functionality.
-     *
-     * @param index at which task should be added
-     * @param task The task as a String.
-     * @throws DukeException When saving the file fails.
-     */
-    public void addToFile(int index, String task) throws DukeException {
-        fileTasks.add(index, task);
-        saveToFile();
-    }
-
-    /**
-     * Removes a task from the saved file.
-     *
-     * @param id The line to be removed.
-     * @throws DukeException When saving the file fails.
-     */
-    public void deleteFromFile(int id) throws DukeException {
-        fileTasks.remove(id);
-        saveToFile();
-    }
-
-    /**
-     * Marks the task at given index as done.
-     *
-     * @param id index at which task is to be marked done.
-     * @throws DukeException when a task is not found
-     */
-    public void markTaskDone(int id) throws DukeException {
-        int doneIndex = 4;
-        String task = this.getFileLine(id);
-        String newTask = task.substring(0, doneIndex) + "1" + task.substring(doneIndex + 1);
-        this.updateListTask(id, newTask);
-    }
-
-    /**
-     * Marks the task at given index as undone.
-     * Used to implement the undo functionality.
-     *
-     * @param id index at which task is to be marked done.
-     * @throws DukeException when a task is not found
-     */
-    public void markTaskUndone(int id) throws DukeException {
-        int doneIndex = 4;
-        String task = this.getFileLine(id);
-        String newTask = task.substring(0, doneIndex) + "0" + task.substring(doneIndex + 1);
-        this.updateListTask(id, newTask);
-    }
-
-    /**
-     * Updates a line in the file at the given index.
-     *
-     * @param id index at which task is to be updated.
-     * @param task new task to be updated.
-     * @throws DukeException when saving file fails.
-     */
-    public void updateListTask(int id, String task) throws DukeException {
-        fileTasks.set(id, task);
-        saveToFile();
-    }
-
-    /**
-     * Returns the String of the queried line.
-     *
-     * @param index The line number
-     * @return The String of the queried line
-     * @throws DukeException When the line is not found
-     */
-    public String getFileLine(int index) throws DukeException {
-        try {
-            ArrayList<String> fileList = TaskList.getStringList();
-            return fileList.get(index);
-        } catch (Exception e) {
-            throw new DukeException("Task doesn't exist"
-                    + "\nAre you sure you have entered the correct index?");
-        }
-    }
-
 
     /**
      * Saves the file content to the hard drive.
