@@ -158,7 +158,7 @@ public class Parser {
             if (inputs.length != 1) {
                 throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString()
                         + " `help` command has no arguments");
-            };
+            }
             return new HelpCommand();
 
         case DATES:
