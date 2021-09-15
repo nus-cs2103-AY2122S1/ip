@@ -15,7 +15,7 @@ Duke is a **desktop application for managing user tasks, optimized for use via a
 * FAQ
 * Command Summary
 
------------------------------------------------------------------------------------------------------------------
+
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `duke.jar` from [here](https://github.com/nhjryan/ip/releases).
@@ -23,7 +23,7 @@ Duke is a **desktop application for managing user tasks, optimized for use via a
 4. **Double-click** the file to start the app.
 5. Type in commands, such as `list`, `todo First Task`, and `delete 1`, to try out some of the app's functions.
 
------------------------------------------------------------------------------------------------------------------
+
 ## Features 
 
 ### `todo` - Add a To-do
