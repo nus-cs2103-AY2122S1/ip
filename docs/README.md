@@ -1,6 +1,9 @@
 # Duke User Guide
 Duke can help you sort out your life! Just give him a chance.
 
+## Interface
+![Image of Duke](https://wilburrito.github.com/images/Ui.png)
+
 ## Features 
 
 ### Add Different Types of Tasks.
