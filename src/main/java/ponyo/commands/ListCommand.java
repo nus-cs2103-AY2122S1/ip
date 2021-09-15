@@ -11,14 +11,15 @@ import ponyo.ui.Ui;
 public class ListCommand extends Command {
     @Override
     public String[] execute(TaskList tasks, Storage storage) {
-        String[] args = new String[tasks.size()];
+        String[] args = new String[tasks.size() + 1];
 
         if (tasks.isEmpty()) {
             return Ui.show(Messages.MESSAGE_NO_TASKS);
         }
 
+        args[0] = "Here are the tasks in your list: ";
         for (int i = 0; i < tasks.size(); i++) {
-            args[i] = (i + 1) + ". " + tasks.retrieveTask(i);
+            args[i + 1] = (i + 1) + ". " + tasks.retrieveTask(i);
         }
         return Ui.show(args);
     }
