@@ -40,42 +40,19 @@ public class Parser {
             } else if (userInput.equals("list")) {
                 response = dukeTaskList.displayList();
             } else if (spaceSplitInput[0].equals("done")) {
-                if (spaceSplitInput.length < 2) { // No task number entered
-                    throw new DukeException("Done Task number is missing!\n");
-                }
-                int doneTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException
-
-                response = dukeTaskList.doneTask(doneTaskNo);
-                storage.saveToDataFile();
+                response = parseDone(spaceSplitInput);
             } else if (spaceSplitInput[0].equals("delete")) {
-                if (spaceSplitInput.length < 2) { // No task number entered
-                    throw new DukeException("Delete task number is missing!\n");
-                }
-                int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException
-
-                response = dukeTaskList.deleteTask(deleteTaskNo);
-                storage.saveToDataFile();
+                response = parseDelete(spaceSplitInput);
             } else if (spaceSplitInput[0].equals("update")) {
-                if (spaceSplitInput.length < 2) { // No task number entered
-                    throw new DukeException("Update task number is missing!\n");
-                }
-                String updateCommand = spaceSplitInput[1];
-
-                response = dukeTaskList.updateTask(updateCommand);
-                storage.saveToDataFile();
+                response = parseUpdate(spaceSplitInput);
             } else if (spaceSplitInput[0].equals("find")) {
-                if (spaceSplitInput.length < 2) { // No find keyword entered
-                    throw new DukeException("Find keyword is missing!\n");
-                }
-                String keyword = spaceSplitInput[1];
-
-                response = dukeTaskList.searchTask(keyword);
+                response = parseFind(spaceSplitInput);
             } else if (spaceSplitInput[0].equals("todo")) {
-                response = parserToDo(spaceSplitInput);
+                response = parseToDo(spaceSplitInput);
             } else if (spaceSplitInput[0].equals("deadline")) {
-                response = parserDeadline(spaceSplitInput, slashSplitInput);
+                response = parseDeadline(spaceSplitInput, slashSplitInput);
             } else if (spaceSplitInput[0].equals("event")) {
-                response = parserEvent(spaceSplitInput, slashSplitInput);
+                response = parseEvent(spaceSplitInput, slashSplitInput);
             } else { // User inputs unrecognized commands
                 throw new DukeException("My intelligence has not evolved to understand this command :(\n");
             }
@@ -91,12 +68,92 @@ public class Parser {
     }
 
     /**
+     * Parses done task input and mark tasks as done.
+     *
+     * @param spaceSplitInput string array of inputs split by space.
+     * @throws DukeException if done task input format is incorrect.
+     * @return duke's response in string.
+     */
+    private String parseDone(String[] spaceSplitInput) throws DukeException, NumberFormatException {
+        String response;
+        if (spaceSplitInput.length < 2) { // No task number entered
+            throw new DukeException("Done Task number is missing!\n");
+        }
+        int doneTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException
+
+        response = dukeTaskList.doneTask(doneTaskNo);
+        storage.saveToDataFile();
+
+        return response;
+    }
+
+    /**
+     * Parses delete task input and deletes task.
+     *
+     * @param spaceSplitInput string array of inputs split by space.
+     * @throws DukeException if delete task input format is incorrect.
+     * @return duke's response in string.
+     */
+    private String parseDelete(String[] spaceSplitInput) throws DukeException, NumberFormatException {
+        String response;
+        if (spaceSplitInput.length < 2) { // No task number entered
+            throw new DukeException("Delete task number is missing!\n");
+        }
+        int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException
+
+        response = dukeTaskList.deleteTask(deleteTaskNo);
+        storage.saveToDataFile();
+
+        return response;
+    }
+
+    /**
+     * Parses update task input and updates task.
+     *
+     * @param spaceSplitInput string array of inputs split by space.
+     * @throws DukeException if update task input format is incorrect.
+     * @return duke's response in string.
+     */
+    private String parseUpdate(String[] spaceSplitInput) throws DukeException {
+        String response;
+        if (spaceSplitInput.length < 2) { // No task number entered
+            throw new DukeException("Update task number is missing!\n");
+        }
+        String updateCommand = spaceSplitInput[1];
+
+        response = dukeTaskList.updateTask(updateCommand);
+        storage.saveToDataFile();
+
+        return response;
+    }
+
+    /**
+     * Parses find task input and prints out matching task.
+     *
+     * @param spaceSplitInput string array of inputs split by space.
+     * @throws DukeException if find task input format is incorrect.
+     * @return duke's response in string.
+     */
+    private String parseFind(String[] spaceSplitInput) throws DukeException {
+        String response;
+        if (spaceSplitInput.length < 2) { // No find keyword entered
+            throw new DukeException("Find keyword is missing!\n");
+        }
+        String keyword = spaceSplitInput[1];
+
+        response = dukeTaskList.searchTask(keyword);
+
+        return response;
+    }
+
+    /**
      * Parses todos input and adds todos task.
      *
      * @param spaceSplitInput string array of inputs split by space.
+     * @throws DukeException if todos input format is incorrect.
      * @return duke's response in string.
      */
-    private String parserToDo(String[] spaceSplitInput) throws DukeException{
+    private String parseToDo(String[] spaceSplitInput) throws DukeException{
         String response;
         if (spaceSplitInput.length < 2) { // Todos has no description. If has, spaceSplitInput has length 2.
             throw new DukeException("Todo description cannot be empty!\n");
@@ -113,9 +170,11 @@ public class Parser {
      *
      * @param spaceSplitInput string array of inputs split by space.
      * @param slashSplitInput string array of inputs split by slash.
+     * @throws DukeException if deadline input format is incorrect.
+     * @throws DateTimeParseException if date/time entered cannot be parsed.
      * @return duke's response in string.
      */
-    private String parserDeadline(String[] spaceSplitInput, String[] slashSplitInput) throws DukeException,
+    private String parseDeadline(String[] spaceSplitInput, String[] slashSplitInput) throws DukeException,
             DateTimeParseException {
         String response;
         if (spaceSplitInput.length < 2) { // Deadline has no description
@@ -145,9 +204,11 @@ public class Parser {
      *
      * @param spaceSplitInput string array of inputs split by space.
      * @param slashSplitInput string array of inputs split by slash.
+     * @throws DukeException if event input format is incorrect.
+     *  @throws DateTimeParseException if date/time entered cannot be parsed.
      * @return duke's response in string.
      */
-    private String parserEvent(String[] spaceSplitInput, String[] slashSplitInput) throws DukeException,
+    private String parseEvent(String[] spaceSplitInput, String[] slashSplitInput) throws DukeException,
             DateTimeParseException {
         String response;
         if (spaceSplitInput.length < 2) { // Event has no description

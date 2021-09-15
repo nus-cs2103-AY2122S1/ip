@@ -25,7 +25,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Read data from the save file, and load them
+     * Reads data from the save file, and load them
      * into the list in a current run of Duke.
      *
      * @param type  type of task stored in save file.
@@ -63,7 +63,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Send tasks in the list to the save file.
+     * Sends tasks in the list to the save file.
      *
      * @return a string that represents all tasks in list for storing in the save file.
      */
@@ -90,7 +90,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Mark a task as done in the list.
+     * Marks a task as done in the list.
      *
      * @param doneTaskNo the task number to be marked as done.
      * @throws DukeException if task number entered out of range.
@@ -107,7 +107,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Delete a task from the list.
+     * Deletes a task from the list.
      *
      * @param deleteTaskNo the task number to be deleted.
      * @throws DukeException if task number entered out of range.
@@ -125,7 +125,7 @@ public class DukeTaskList {
     }
 
     /**
-     * update a task from the list. Update command format must be:
+     * Updates a task from the list. Update command format must be:
      * "update taskNo category content"
      * category can be description, date, time (for deadline), start_time and end_time (for events)
      *
@@ -193,7 +193,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Search for tasks in the list by a keyword.
+     * Searches for tasks in the list by a keyword.
      *
      * @param keyword keyword to be searched.
      * @return matching tasks in string.
@@ -220,7 +220,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Add a todos task to the list.
+     * Adds a todos task to the list.
      *
      * @param toDoText description of the todos task.
      * @return add Todos response.
@@ -233,7 +233,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Add a deadline task to the list. Input format for deadline:
+     * Adds a deadline task to the list. Input format for deadline:
      * /by yyyy-mm-dd hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME)
      *
      * @param ddlText description of the deadline task
@@ -251,7 +251,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Add an event task to the list. Input format for event:
+     * Adds an event task to the list. Input format for event:
      * /at yyyy-mm-dd hh:mm-hh:mm
      * (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME, dash, ISO_LOCAL_TIME)
      *

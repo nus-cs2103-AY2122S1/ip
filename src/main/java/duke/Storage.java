@@ -25,7 +25,7 @@ public class Storage {
     }
 
     /**
-     * Read data from save file. If the save file and dir don't exist,
+     * Reads data from save file. If the save file and dir don't exist,
      * create them.
      */
     public void loadDataFile() {
@@ -56,7 +56,7 @@ public class Storage {
     }
 
     /**
-     * Write data into the file.
+     * Writes data into the file.
      */
     public void saveToDataFile() {
         try {
