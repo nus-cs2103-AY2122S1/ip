@@ -1,6 +1,5 @@
 # User Guide
 
-## Features 
 ## Features
 1. Add todos, events, deadlines to your task list
 2. Mark finished tasks as completed
