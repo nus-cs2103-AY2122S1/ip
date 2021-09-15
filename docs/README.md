@@ -14,7 +14,7 @@ Mange your upcoming deadlines, events, and tasks with Borat Sagdiyev Bot, a task
 2. Else, [install Java](https://java.com/en/download/help/download_options.html) first
 
 ### Setting up
-1. Download the `Borat.jar` file [here](https://github.com/aryagiat/ip/releases)
+1. Download the `Borat.jar` file [here](https://github.com/aryagiat/ip/releases/tag/A-Release)
 2. Once installed, click the `Borat.jar` file to run the app.
 3. **(Optional)** You can also run the app through the command line.
     - [ ] Open your favorite terminal
