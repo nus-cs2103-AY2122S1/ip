@@ -1,2 +1,5 @@
-theme: jekyll-theme-cayman
 title: Brobot User Guide
+description:
+show_downloads: true
+google_analytics:
+theme: jekyll-theme-cayman
