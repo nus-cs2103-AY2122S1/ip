@@ -24,11 +24,19 @@ public class UI {
     }
 
     /**
-     * Print the inputted message out onto the terminal
-     * @param message The desired message to print
+     * Print the specified message onto the terminal
+     * @param message The specified message to print
      */
     public static void printToTerm(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * Print the specified message onto the terminal with spacing on top and bottom
+     * @param message The specified message to print
+     */
+    public static void printToTermFormatted(String message) {
+        System.out.println(formatWithSpace(message));
     }
 
     /**
@@ -51,7 +59,7 @@ public class UI {
      */
     public static String getListText(TaskList list) {
         String listText = "Alright here are the tasks in your list bro:" + list.toString();
-        return formatWithSpace(listText);
+        return listText;
     }
 
     /**
@@ -71,7 +79,7 @@ public class UI {
         int lastTaskIndex = list.getTaskAmount();
         int taskAmount = list.getTaskAmount();
         String taskAddedText = "Alright bro. I've added this task:\n" + list.getTask(lastTaskIndex);
-        return formatWithSpace(taskAddedText + getTaskAmountText(taskAmount));
+        return taskAddedText + getTaskAmountText(taskAmount);
     }
 
     /**
@@ -79,7 +87,7 @@ public class UI {
      * @param task The specified task that has been marked done.
      */
     public static String getTaskDoneText(Task task) {
-        return formatWithSpace("Good job bro! I've marked this task as done:\n " + task);
+        return "Good job bro! I've marked this task as done:\n " + task;
     }
 
     /**
@@ -91,7 +99,7 @@ public class UI {
     public static String getTaskDeletedText(Task task, TaskList list) {
         int taskAmount = list.getTaskAmount();
         String taskDeletedText = "Ok Bro, I removed the following task:\n " + task;
-        return formatWithSpace(taskDeletedText + getTaskAmountText(taskAmount));
+        return taskDeletedText + getTaskAmountText(taskAmount);
     }
 
     /**
@@ -107,7 +115,7 @@ public class UI {
      * @param e The error.
      */
     public static String getErrorText(Exception e) {
-        return formatWithSpace(e.getMessage());
+        return e.getMessage();
     }
 
     /**
@@ -116,7 +124,7 @@ public class UI {
      */
     public static String getSearchListText(TaskList list) {
         String searchListText = "Here are the matching tasks in your list bro:" + list.toString();
-        return formatWithSpace(searchListText);
+        return searchListText;
     }
 
     /**
@@ -126,6 +134,6 @@ public class UI {
     public static String getStorageChangeText(String newFileDirectory) {
         String storageChangeText =
                 "Alright bro, your list will now be saved in the following directory:\n" + newFileDirectory;
-        return formatWithSpace(storageChangeText);
+        return storageChangeText;
     }
 }
