@@ -2,7 +2,7 @@
 Tokio is a personal assistant chatbot that helps the user, Rio, to keep track of various things.
 
 Here is a sample interaction with Tokio,  
-<img src="https://sharmainec.github.io/ip/images/sample.png" width=35% height=35%>
+![sample](./Ui.png)
 
 ## Features 
 > __Notes about the Command Format :heart:__
@@ -24,61 +24,60 @@ Tokio is able to store 3 types of tasks:
 Adds specified type of task to list.
 
 #### Add todo
-- Format: `todo DESCRIPTION`
-<img src="https://sharmainec.github.io/ip/images/exampleTodo.png" width=40% height=40%>
+Format: `todo DESCRIPTION`
+![AddTodo](./images/exampleTodo.png)
 
 #### Add deadline
-- Format: `deadline DESCRIPTION /by yyyy-MM-dd`
-<img src="https://sharmainec.github.io/ip/images/exampleDeadline.png" width=40% height=40%>
+Format: `deadline DESCRIPTION /by yyyy-MM-dd`
+![AddDeadline](./images/exampleDeadline.png)
 
 #### Add event
-- Format: `event DESCRIPTION /at yyyy-MM-dd HH:mm`
-<img src="https://sharmainec.github.io/ip/images/exampleEvent.png" width=40% height=40%>
+Format: `event DESCRIPTION /at yyyy-MM-dd HH:mm`
+![AddEvent](./images/exampleEvent.png)
 
 *__note__: cannot add tasks with the same description*  
-<img src="https://sharmainec.github.io/ip/images/exampleDuplicate.png" width=40% height=40%>
+![AddDuplicate](./images/exampleDuplicate.png)
 
 
 ### Feature 2 - List tasks
 Lists all tasks in list.
-- Format: `list`
-<img src="https://sharmainec.github.io/ip/images/exampleList.png" width=40% height=40%>
+Format: `list`
+![ListTasks](./images/exampleList.png)
 
 
 ### Feature 3 - Mark task as done
 Marks a task as done.
-- Format: `done INDEX` 
- 
-<img src="https://sharmainec.github.io/ip/images/exampleDone.png" width=40% height=40%><br>
+Format: `done INDEX` 
+![DoneTask](./images/exampleDone.png)  
 *__note__: total number of tasks does not change after you have completed your task*
 
 
 ### Feature 4 - Delete task
 Removes a task from the list.
-- Format: `delete INDEX`
-<img src="https://sharmainec.github.io/ip/images/exampleDelete.png" width=40% height=40%>
+Format: `delete INDEX`
+![DeleteTask](./images/exampleDelete.png)
 
 
 ### Feature 5 - Find task
 Lists out all task with the specified keyword.
-- Format: `find KEYWORD`
-<img src="https://sharmainec.github.io/ip/images/exampleFind.png" width=40% height=40%>
+Format: `find KEYWORD`
+![FindTask](./images/exampleFind.png)
 
 
 ### Feature 6 - Bye
 Exits Tokio after 2s.
-- Format: `bye`
-<img src="https://sharmainec.github.io/ip/images/exampleBye.png" width=40% height=40%>  
+Format: `bye`  
+![Bye](./images/exampleBye.png) 
 
 
 ## Command Summary
 Action | Format, Examples
 ------ | ----------------
-todo | `todo DESCRIPTION` <br> e.g., `todo CS2103T Tut 4`  
-deadline | `deadline DESCRIPTION /by yyyy-MM-dd` <br> e.g., `deadline CS2013T iP Submission /by 2021-09-17`
-event | `event DESCRIPTION /at yyyy-MM-dd HH:mm` <br> e.g., `event CS2013T tP meeting /at 2021-09-28 20:00`
+todo | `todo DESCRIPTION`  e.g., `todo CS2103T Tut 4`  
+deadline | `deadline DESCRIPTION /by yyyy-MM-dd`  e.g., `deadline CS2013T iP Submission /by 2021-09-17`
+event | `event DESCRIPTION /at yyyy-MM-dd HH:mm`  e.g., `event CS2013T tP meeting /at 2021-09-28 20:00`
 list | `list`
-done | `done INDEX` <br> e.g., `done 1`
-delete | `delete INDEX` <br> e.g., `delete 1`
-find | `find KEYWORD` <br> e.g., `find sep`
+done | `done INDEX`  e.g., `done 1`
+delete | `delete INDEX`  e.g., `delete 1`
+find | `find KEYWORD`  e.g., `find sep`
 bye | `bye`
