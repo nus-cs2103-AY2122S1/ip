@@ -56,7 +56,7 @@ public class TaskList {
         tasks.add(task);
         String res = "Got it. I've added this task: \n"
                 + "  " + task.toString() + "\n"
-                + "Now you have " + tasks.size() + " tasks in the tasks";
+                + "Now you have " + tasks.size() + " tasks in the list";
 
         storage.addToFile(task.savedToString());
         return res;
