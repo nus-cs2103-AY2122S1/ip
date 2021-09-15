@@ -1,3 +1,5 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class AddContactCommandTest {
         Address address = new Address("32 Phoenix Road");
         AddContactCommand c = new AddContactCommand(name, email, phone, address);
         c.execute(tasks, ui, storage, contacts);
-        System.out.println(c.getResponse());
+        assertEquals("Darren; Phone: 83821019; Email: mokkwd@gmail.com; Address: 32 Phoenix Road",
+                contacts.getContact(0).toString());
     }
 }

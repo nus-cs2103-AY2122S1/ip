@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import bobbybot.commands.AddCommand;
+import bobbybot.commands.AddContactCommand;
 import bobbybot.commands.Command;
 import bobbybot.commands.DeleteCommand;
 import bobbybot.commands.DoneCommand;
@@ -14,6 +15,12 @@ import bobbybot.util.Parser;
 
 public class ParserTest {
     private final Parser parser = new Parser();
+    @Test
+    public void parse_noArgDeleteCommand_fail() {
+        String input = "done";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
 
     @Test
     public void parse_emptyCommand_fail() {
@@ -42,13 +49,13 @@ public class ParserTest {
         Command c = parser.parseCommand(input);
         assertTrue(c instanceof AddCommand);
     }
-
     @Test
     public void parse_eventCapitalLetter_success() {
         String input = "EVENT something /at Sunday";
         Command c = parser.parseCommand(input);
         assertTrue(c instanceof AddCommand);
     }
+
     @Test
     public void parse_eventNoDescription_fail() {
         String input = "Event /at 2";
@@ -148,13 +155,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_noArgDeleteCommand_fail() {
-        String input = "done";
-        Command c = parser.parseCommand(input);
-        assertTrue(c instanceof IncorrectCommand);
-    }
-
-    @Test
     public void parse_listCommand_success() {
         String input = "list";
         Command c = parser.parseCommand(input);
@@ -201,6 +201,27 @@ public class ParserTest {
     @Test
     public void parse_findSpellingError_fail() {
         String input = "lists";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
+
+    @Test
+    public void parse_contact_success() {
+        String input = "contact Darren p/83821019 e/mokkwd@gmail.com a/rainbow land 32";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof AddContactCommand);
+    }
+
+    @Test
+    public void parse_contactWrongArg_fail() {
+        String input = "contact something";
+        Command c = parser.parseCommand(input);
+        assertTrue(c instanceof IncorrectCommand);
+    }
+    @Test
+
+    public void parse_contactWrongArgFormat_fail() {
+        String input = "contact Darren /p83821019 e/mokkwd@gmail.com a/rainbow land 32";
         Command c = parser.parseCommand(input);
         assertTrue(c instanceof IncorrectCommand);
     }

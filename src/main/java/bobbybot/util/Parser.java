@@ -3,7 +3,16 @@ package bobbybot.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import bobbybot.commands.*;
+import bobbybot.commands.AddCommand;
+import bobbybot.commands.AddContactCommand;
+import bobbybot.commands.Command;
+import bobbybot.commands.DeleteCommand;
+import bobbybot.commands.DoneCommand;
+import bobbybot.commands.ExitCommand;
+import bobbybot.commands.FindCommand;
+import bobbybot.commands.IncorrectCommand;
+import bobbybot.commands.ListCommand;
+import bobbybot.commands.ListContactsCommand;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.person.Address;
@@ -21,6 +30,13 @@ public class Parser {
 
     public static final Pattern NUMBER_ARGS_FORMAT =
             Pattern.compile("\\d+");
+
+    //@@author AB3-reuse
+    public static final Pattern CONTACT_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + "p/(?<phone>[^/]+)"
+                    + "e/(?<email>[^/]+)"
+                    + "a/(?<address>[^/]+)");
     /**
      * Used for initial separation of command word and args.
      */
@@ -93,12 +109,20 @@ public class Parser {
 
     private Command prepareAddContact(String args) throws InvalidArgumentException {
         // Check arg string format to prevent errors
-        //todo add regex check for contact list and user input
-        // stub for now
-        Name name = new Name("Darren");
-        Email email = new Email("mokkwd@gmail.com");
-        Phone phone = new Phone("83821019");
-        Address address = new Address("32 Phoenix Road");
+        final Matcher matcher = CONTACT_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand();
+        }
+
+        Name name = new Name(matcher.group("name").trim());
+        Email email = new Email(matcher.group("email").trim());
+        Phone phone = new Phone(matcher.group("phone").trim());
+        Address address = new Address("address");
+
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(phone);
+        System.out.println(address);
         return new AddContactCommand(name, email, phone, address);
     }
 
