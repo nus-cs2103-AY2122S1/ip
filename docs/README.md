@@ -1,4 +1,4 @@
-# User Guide
+# Duke User Guide
 
 ## Features
 1. Add todos, events, deadlines to your task list
@@ -7,6 +7,18 @@
 4. Delete tasks from the task list.
 5. Save a task list to offline storage.
 ## Usage
+
+### `help` - Retrieve a list of commands from Duke
+
+The help command displays a full list of commands
+
+Example of usage:
+
+`help`
+
+Expected outcome:
+
+![help usage results](./help.png?raw=true)
 
 ### `todo` - Add a todo to task list.
 
