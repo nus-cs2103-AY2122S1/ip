@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     /** The display image of the Duchess.*/
     private Image duchessImage = new Image(MainWindow.class.getResource("/images/duchess-icon.png").toString());
     /** The display image of the user.*/
-    private Image userImage = new Image(MainWindow.class.getResource("/images/user-icon.png").toString());
+    private Image userImage = new Image(MainWindow.class.getResource("/images/demo.jpg").toString());
 
     /**
      * Initializes the main window.
