@@ -14,8 +14,8 @@ public class TaskTest {
 
     @Test
     public void deadlineTest() {
-        Deadline firstDeadline = new Deadline("return book", "2021-08-27");
-        Deadline secondDeadline = new Deadline("return book", "2021-08-27");
+        Deadline firstDeadline = new Deadline("return book", "2021-08-27 18:00");
+        Deadline secondDeadline = new Deadline("return book", "2021-08-27 18:00");
         assertEquals(true, firstDeadline.equals(secondDeadline));
     }
 

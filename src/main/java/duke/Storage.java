@@ -68,38 +68,8 @@ public class Storage implements Cloneable {
         Scanner s = new Scanner(new File(filePath));
         TaskList tasks = new TaskList();
         while (s.hasNext()) {
-            String text = s.nextLine();
-            String activity = text.substring(0, 1);
-            String status = text.substring(4, 5);
-            String desc;
-            String date;
-
-            if (activity.equals("T")) {
-                desc = text.substring(8);
-                ToDo todo = new ToDo(desc);
-                if (status.equals("1")) {
-                    todo.setDone();
-                }
-                tasks.add(todo);
-            } else {
-                int thirdBarId = text.indexOf('|', 7);
-                desc = text.substring(8, thirdBarId - 1);
-                date = text.substring(thirdBarId + 2);
-
-                if (activity.equals("D")) {
-                    Deadline deadline = new Deadline(desc, date);
-                    if (status.equals("1")) {
-                        deadline.setDone();
-                    }
-                    tasks.add(deadline);
-                } else {
-                    Event event = new Event(desc, date);
-                    if (status.equals("1")) {
-                        event.setDone();
-                    }
-                    tasks.add(event);
-                }
-            }
+            String command = s.nextLine();
+            findAndAddTask(command, tasks);
         }
         return tasks;
     }
@@ -122,5 +92,45 @@ public class Storage implements Cloneable {
 
     public Storage clone() throws CloneNotSupportedException {
         return (Storage) super.clone();
+    }
+
+    /**
+     * Checks the parsed String and finds out what type
+     * of task it is.
+     *
+     * @param command Parsed String.
+     * @param tasks The TaskList of tasks to be loaded.
+     */
+    public void findAndAddTask(String command, TaskList tasks) {
+        String activity = command.substring(0, 1);
+        String status = command.substring(4, 5);
+        String desc;
+        String date;
+
+        if (activity.equals("T")) {
+            desc = command.substring(8);
+            ToDo todo = new ToDo(desc);
+            if (status.equals("1")) {
+                todo.setDone();
+            }
+            tasks.add(todo);
+        } else {
+            int thirdBarId = command.indexOf('|', 7);
+            desc = command.substring(8, thirdBarId - 1);
+            date = command.substring(thirdBarId + 2);
+            if (activity.equals("D")) {
+                Deadline deadline = new Deadline(desc, date);
+                if (status.equals("1")) {
+                    deadline.setDone();
+                }
+                tasks.add(deadline);
+            } else {
+                Event event = new Event(desc, date);
+                if (status.equals("1")) {
+                    event.setDone();
+                }
+                tasks.add(event);
+            }
+        }
     }
 }
