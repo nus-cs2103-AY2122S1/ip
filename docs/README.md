@@ -12,7 +12,7 @@ Type a sentence or phrase with that matches the task description.<br />
 Our search function will be able to produce a list of tasks<br /> 
 that matches (even partially) to what you have input.
 
-### Feature-Reload tasks
+### Feature- Reload tasks
 Task CATcher saves your task list from the previous station into your<br />
 local storage as a text file.<br />
 Upon reinitialization, it reloads that file, so you have your previous tasks<br/>
