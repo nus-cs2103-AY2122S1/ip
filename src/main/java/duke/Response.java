@@ -34,12 +34,15 @@ public class Response {
 
     /**
      * Adds the specified message to the response.
-     * @param message Message to be added.
+     * @param messages Message to be added.
      */
-    public void add(String message) {
-        this.message = this.message.equals("")
-            ? message
-            : this.message + System.lineSeparator() + message;
+    @SafeVarargs
+    public final void add(String ... messages) {
+        for (String message : messages) {
+            this.message = this.message.equals("")
+                ? message
+                : this.message + System.lineSeparator() + message;
+        }
     }
 
     /**
