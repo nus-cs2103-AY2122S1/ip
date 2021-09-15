@@ -4,7 +4,7 @@ package duke.tasks;
  * Class for deadline tasks that do not contain a
  * date or datetime
  */
-public class TodoTask extends Task{
+public class TodoTask extends Task {
 
     /**
      * Constructor that initializes an EventTask object

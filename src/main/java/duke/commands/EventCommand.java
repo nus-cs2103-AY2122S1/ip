@@ -9,23 +9,21 @@ import duke.utils.Ui;
  * Class that is a subclass of Command class
  * and handles the behaviour of the Command for event tasks
  */
-public class EventCommand extends Command{
-
-
+public class EventCommand extends Command {
     private String commandString;
 
-    public EventCommand(String commandString){
+    public EventCommand(String commandString) {
         this.commandString = commandString;
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
 
         String[] dateArray = commandString.split("/");
         String date = "";
-        for(int i=1; i< dateArray.length; i++){
-            if (i==1){
-                date+=dateArray[1].substring(3);
+        for (int i = 1; i < dateArray.length; i++) {
+            if (i == 1) {
+                date += dateArray[1].substring(3);
             } else {
                 date += "/" + dateArray[i];
             }
@@ -39,7 +37,7 @@ public class EventCommand extends Command{
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

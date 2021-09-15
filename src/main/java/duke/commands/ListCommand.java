@@ -1,13 +1,15 @@
 package duke.commands;
 
-import duke.utils.*;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 /**
  * Class that is a subclass of Command class
  * and handles the behaviour of the Command for returning
  * a list of the Tasks currently in the TaskList
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -36,7 +37,6 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         ui = new Ui(stage, taskList, storage, parser);
-
         ui.init();
     }
 }

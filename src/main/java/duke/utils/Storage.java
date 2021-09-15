@@ -1,16 +1,18 @@
 package duke.utils;
 
-import duke.tasks.DeadlineTask;
-import duke.tasks.EventTask;
-import duke.tasks.Task;
-import duke.tasks.TodoTask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TodoTask;
+
+
 
 /**
  * Class that handles storage of data by writing to disk
@@ -19,12 +21,10 @@ import java.util.Scanner;
 
 public class Storage {
 
-
-
+    private static final String DELIMITER = ";";
     private String userDir = System.getProperty("user.dir");
     private String dataFilePath = userDir + "/" + "data.txt";
 
-    private static final String DELIMITER = ";";
 
     /**
      * Loads task list as a TaskList object from the data.txt file
@@ -115,14 +115,17 @@ public class Storage {
      * @param task
      * @return String representation of the task
      */
-    public String convertTaskToString(Task task){
+    public String convertTaskToString(Task task) {
         // Example storage in file:
         // T;0;readbook
         // D;0;return book ;2/12/2019 1800
         assert (task != null);
 
-        String taskType = task.getType() == Task.TaskType.TODO ? "T" :
-                task.getType() == Task.TaskType.EVENT ? "E" : "D";
+        String taskType = task.getType() == Task.TaskType.TODO
+                ? "T"
+                : task.getType() == Task.TaskType.EVENT
+                ? "E"
+                : "D";
 
         String taskName = task.getName();
 
@@ -130,12 +133,12 @@ public class Storage {
 
         String taskString = taskType + DELIMITER + isDone + DELIMITER + taskName;
 
-        if (task.getType() == Task.TaskType.EVENT){
+        if (task.getType() == Task.TaskType.EVENT) {
             taskString += DELIMITER;
             taskString += ((EventTask) task).getDate();
         }
 
-        if(task.getType() == Task.TaskType.DEADLINE){
+        if (task.getType() == Task.TaskType.DEADLINE) {
             taskString += DELIMITER;
             taskString += ((DeadlineTask) task).getDate();
         }
@@ -151,7 +154,7 @@ public class Storage {
      * @param line String representation of a task
      * @return
      */
-    public Task convertStringToTask(String line){
+    public Task convertStringToTask(String line) {
 
          // Example storage in file:
          // T;0;readbook
@@ -159,8 +162,11 @@ public class Storage {
 
 
         String[] lineSplit = line.split(DELIMITER);
-        Task.TaskType taskType = lineSplit[0].equals("T") ? Task.TaskType.TODO :
-                lineSplit[0].equals("D") ? Task.TaskType.DEADLINE : Task.TaskType.EVENT;
+        Task.TaskType taskType = lineSplit[0].equals("T")
+                ? Task.TaskType.TODO
+                : lineSplit[0].equals("D")
+                ? Task.TaskType.DEADLINE
+                : Task.TaskType.EVENT;
 
         boolean taskDone = lineSplit[1].equals("0") ? false : true;
 
@@ -183,7 +189,7 @@ public class Storage {
                 throw new IllegalArgumentException("Corrupted file");
         }
 
-        if(taskDone ){
+        if (taskDone ) {
             currTask.makeDone();
         }
 
