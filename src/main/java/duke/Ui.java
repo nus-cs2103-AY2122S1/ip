@@ -19,7 +19,7 @@ public class Ui {
     public String listToPrintableString(Tasklist elements) {
         ListIterator<Task> it = elements.toIterable();
         if (elements.size() == 0) {
-            return "You have no items in your list. Add some with [todo], [deadline] or [event]!";
+            return "You have no items in your list.\n Add some with [todo], [deadline] or [event]!";
         } else {
             String concatString = "";
             while (it.hasNext()) {
