@@ -14,6 +14,7 @@ Duke is a **desktop application for managing user tasks, optimized for use via a
   * `bye`
 * FAQ
 * Command Summary
+
 -----------------------------------------------------------------------------------------------------------------
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -21,6 +22,7 @@ Duke is a **desktop application for managing user tasks, optimized for use via a
 3. Copy the file to the folder you want to use as the *home folder* for Duke.
 4. **Double-click** the file to start the app.
 5. Type in commands, such as `list`, `todo First Task`, and `delete 1`, to try out some of the app's functions.
+
 -----------------------------------------------------------------------------------------------------------------
 ## Features 
 
@@ -202,7 +204,7 @@ Bye!
 
 ## Command Summary
 Action | Format
------- | -------
+------------- | -------------------------------------------------------------------------
 **Add to-do** | `todo TASK` e.g., `todo homework`
 **Add deadline** | `deadline TASK /by YYYY-MM-DD` e.g., `deadline assignment /by 2021-09-15`
 **Add event** | `event TASK /at YYYY-MM-DD` e.g., `event meet Tim /at 2021-10-15`
