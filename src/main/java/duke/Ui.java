@@ -12,7 +12,7 @@ import tasks.Task;
  */
 public class Ui {
 
-    public static final String DASHES = "-----------------------------------------------------------\n";
+    public static final String DASHES = "-------------------------------------------------\n";
     /** System messages */
     public static final String DEADLINE_FORMAT = "deadline {Deadline name} -by {Date to be completed by}.\n"
             + "Use \"/by\" to specify that the input date is a formatted date.";

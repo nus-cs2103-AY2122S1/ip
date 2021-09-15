@@ -11,7 +11,7 @@
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true" maxWidth="390">
          <font>
-            <Font name="Apple Braille" size="13.0" />
+            <Font name="Arial" size="13.0" />
          </font></Label>
         <StackPane maxHeight="100.0" maxWidth="100.0"> <!-- use the preferred size for max size constraints -->
             <padding>
