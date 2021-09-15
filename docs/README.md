@@ -386,4 +386,4 @@ bye
 # G00D LUCK
 
 For doubts email me at:
-[atin.s@u.nus.edu](emailto:atin.s@u.nus.edu)
+[atin.s@u.nus.edu](mailto:atin.s@u.nus.edu)
