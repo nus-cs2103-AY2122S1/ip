@@ -49,7 +49,7 @@ Adds a deadline task to the task list.
 
 Format: `deadline TASK /by TASK_DATE_TIME`
 
-Example: `deadline ES2660 draft /by tonight`
+Example: `deadline ES2660 draft /by 16/9`
 
 Expected outcome: 
 ```
