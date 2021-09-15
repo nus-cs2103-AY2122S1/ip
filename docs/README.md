@@ -52,7 +52,7 @@ Command Line Format: `todo [description]`
 
 GUI Button:
 
-1. Click the `+` button on the top right
+1. Click the `+` button on the top right 
 2. Select `todo` under **Tasktype**
 3. Add your task description under **Description**
 
