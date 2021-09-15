@@ -5,10 +5,13 @@ Given below are instructions on how to use it.
 
 ## Starting up the bot
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Prerequisites: JDK 11
 
 1. Download the JAR file at `release`
 2. Run jar file `java -jar bobbybot.jar`
+3. A chatbot as shown below will appear where you can start keying in commands. You can type "list" and hit enter to see the sample data that was loaded!
+<img width="397" alt="image" src="https://user-images.githubusercontent.com/13284470/133483407-1a21a245-21cf-4083-9d6a-2331e9a7e4d3.png">
+
 
 ## Task Commands
 
@@ -28,7 +31,7 @@ Example:
 
 ### Adding a deadline: `deadline`  
 Adds a deadline with a datetime argument
-Format: `deadline DESCRIPTION /bt DATETIME`  
+Format: `deadline DESCRIPTION /by DATETIME`  
 :bulb: Note that DATETIME for a deadline has to follow the following format: `dd-mm-yyyy hh:mm`  
 Example:
 * `deadline cs2103 assignment /by 23-01-2020 11:01` 
@@ -40,6 +43,8 @@ Format: `list`
 ### Finding tasks with keyword: `find`  
 Lists out all tasks that match a keyword
 Format: `find KEYWORD`
+<img width="392" alt="image" src="https://user-images.githubusercontent.com/13284470/133481478-f08c1f5e-82da-4fa4-9a64-2c10b958fd10.png">
+
 
 ### Finding tasks with keyword: `done`  
 Mark a list as done
@@ -66,4 +71,22 @@ Format: `list_contact`
 
 ### Deleting a contact: `delete`  
 Format: `delete_contact INDEX`
+
+
+## Saving the data
+The data that is collected by Bobby is automatically saved! No worries 😄 If you want to view the raw data being loaded, check out the /data directory
+
+## Command Summary
+Command | Example
+------------ | -------------
+todo | `todo grab lunch`
+event | `event church meeting /at Sunday 2-4pm`
+deadline | format: `deadline DESCRIPTION /by [dd-mm-yyyy hh:mm]`  <br>`deadline DESCRIPTION /bt DATETIME`
+list | `list`
+find | `find cs2103`
+done | `done 1`
+delete | `delete 1`
+contact | format: contact NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS: <br> `contact Elon Musk p/123456789 e/elon@tsla.com a/Moon`
+list_contact | `list_contact`
+delete_contact | `delete_contact 1`
 
