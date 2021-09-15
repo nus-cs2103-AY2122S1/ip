@@ -11,11 +11,12 @@ public class Event extends Task {
     /**
      * Constructs an Event instance which is one of the task's type.
      *
+     * @param tags The string array consisting all the tags.
      * @param description The task description.
      * @param at The date of the task being carried out.
      */
-    public Event(String tag, String description, LocalDate at) {
-        super(tag, description);
+    public Event(String[] tags, String description, LocalDate at) {
+        super(tags, description);
         this.at = at;
     }
 

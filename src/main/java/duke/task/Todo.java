@@ -8,10 +8,11 @@ public class Todo extends Task {
     /**
      * Constructs a Todo instance which is one of the task's type.
      *
+     * @param tags The string array consisting all the tags.
      * @param description The task description.
      */
-    public Todo(String tag, String description) {
-        super(tag, description);
+    public Todo(String[] tags, String description) {
+        super(tags, description);
     }
 
     /**

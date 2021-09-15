@@ -1,21 +1,24 @@
 package duke.task;
 
+import duke.util.CommandModifier;
+
 /**
  * A task class which represents the user's tasks.
  */
 public class Task {
 
     protected String description;
-    protected String tag;
+    protected String[] tags;
     protected boolean isDone;
 
     /**
      * Constructs a task instance which represents the user's task.
      *
+     * @param tags The string array consisting all the tags.
      * @param description The task description.
      */
-    public Task(String tag, String description) {
-        this.tag = tag;
+    public Task(String[] tags, String description) {
+        this.tags = tags;
         this.description = description;
         this.isDone = false;
     }
@@ -42,7 +45,7 @@ public class Task {
      * @return The string representation in the format to be written in tasks.txt file.
      */
     public String toDataString() {
-        return String.format("| %d | %s | %s", isDone ? 1 : 0, tag, description);
+        return String.format("| %d | %s| %s", isDone ? 1 : 0, CommandModifier.toTagArrayDataString(tags), description);
     }
 
     /**
@@ -51,6 +54,6 @@ public class Task {
      * @return The string representation of this task.
      */
     public String toString() {
-        return String.format("%s%s%s %s", getStatusIcon(), tag.isBlank() ? "" : " #" , tag, description);
+        return String.format("%s %s%s", getStatusIcon(), CommandModifier.toTagArrayString(tags), description);
     }
 }

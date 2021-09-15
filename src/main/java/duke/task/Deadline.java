@@ -13,11 +13,12 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline instance which is one of the task's type.
      *
+     * @param tags The string array consisting all the tags.
      * @param description The task description.
      * @param by The deadline of the task.
      */
-    public Deadline(String tag, String description, LocalDate by) {
-        super(tag, description);
+    public Deadline(String[] tags, String description, LocalDate by) {
+        super(tags, description);
         this.by = by;
     }
 
