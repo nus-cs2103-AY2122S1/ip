@@ -5,9 +5,9 @@
 ### Create tasks
 
 You can create 3 types of tasks using Duke:
-1. Todo: tasks without any date attached to it.
-2. Event: tasks with a date to be done at that date.
-3. Deadline: tasks with a date to be completed by that date
+1. [Todo](#adding-a-new-todo-task-todo): tasks without any date attached to it.
+2. [Event](#adding-a-new-deadline-task-deadline): tasks with a date to be done at that date.
+3. [Deadline](#adding-a-new-event-task-event): tasks with a date to be completed by that date
 
 ### [View list of tasks](#view-all-tasks-list)
 
@@ -17,16 +17,16 @@ You can view all tasks in a glance.
 
 When you have completed a task, Duke can mark that task as completed.
 
-### Delete a task
+### [Delete a task](#delete-a-task-deadline)
 
 If you want to remove a specific task from the list, Duke can delete it.
 
 
-### Search for task by name
+### [Search for task by name](#search-for-task-by-name-find)
 
 You can search for a specific task by its name.
 
-### Undo a command
+### [Undo a command](#undo-a-command-undo)
 
 You can undo the previous commands you gave to Duke to carry out.
 
@@ -83,7 +83,7 @@ Format: `done <index>`
 Example of usage:
 * `done 1`
 
-### Delete a task
+### Delete a task: `deadline`
 
 Removes a specific task from the list of tasks.
 
