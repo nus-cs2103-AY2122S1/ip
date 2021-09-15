@@ -1,8 +1,10 @@
 [T]|[]|asda
 [T]|[]|asdasd
-[E]|[]|fish fish|2001-02-10
+[E]|[X]|fish fish|2001-02-10
 [E]|[]|fish head|2000-01-01
 [T]|[]|smile
 [T]|[]|hihi
 [T]|[]|asdas
 [T]|[]|asdas
+[E]|[]|get food|2000-02-02
+[D]|[]|eat food|2000-02-02

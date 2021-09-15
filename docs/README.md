@@ -1,40 +1,12 @@
 # User Guide
 
 ## Features 
-
-### Feature-Add Todo
-
-Adds a todo item to the task list.
-
-### Feature-Add Event
-
-Adds an event to the task list containing task name and the date of the event.
-
-### Feature-Add Deadline
-
-Adds a deadline to the task list containing the task name and the date of the deadline.
-
-### Feature-List items
-
-Lists all the tasks currently in the task list.
-
-### Feature-Mark item as complete
-
-Marks an item on the task list as completed.
-
-### Feature-Find task(s) using a keyword
-
-Returns a list of task names that match the given keyword.
-
-### Feature-Delete an item
-
-Deletes an item from the task list.
-
-### Feature-Save the task list offline
-
-Stores current items in a task list into a text file for offline storage.
-
-
+## Features
+1. Add todos, events, deadlines to your task list
+2. Mark finished tasks as completed
+3. Display all tasks that contain a specified keyword
+4. Delete tasks from the task list.
+5. Save a task list to offline storage.
 ## Usage
 
 ### `todo` - Add a todo to task list.
@@ -47,11 +19,9 @@ Example of usage:
 
 Expected outcome:
 
-The task name is added to the task list.
+![todo usage results](./todo.png?raw=true)
 
-```
-[T]|[]|some task
-```
+
 
 ### `event` - Add an event to task list.
 
@@ -63,11 +33,9 @@ Example of usage:
 
 Expected outcome:
 
-The event name is added to the task list.
+![event usage results](./event.png?raw=true)
 
-```
-[E]|[]|some task (at: 2003-03-01)
-```
+
 
 ### `deadline` - Add a deadline to task list.
 
@@ -79,11 +47,9 @@ Example of usage:
 
 Expected outcome:
 
-The deadline name is added to the task list.
+![deadline usage results](./deadline.png?raw=true)
 
-```
-[D]|[]|some task (by: 2001-02-01)
-```
+
 
 ### `items` - List all items on the task list.
 
@@ -95,13 +61,8 @@ Example of usage:
 
 Expected outcome:
 
-Displays a list of all tasks in the task list.
+![list usage results](./items.png?raw=true)
 
-```
-1. [T]|[]|some task
-2. [T]|[]|some task
-3. [T]|[]|some task
-```
 
 ### `completed` - Mark an item as completed.
 
@@ -113,11 +74,8 @@ Example of usage:
 
 Expected outcome:
 
-Displays the completed task as a confirmation.
-```
-You have successfully completed task:
-[T]|[x]|some task
-```
+![completed usage results](./completed.png?raw=true)
+
 
 ### `delete` - Delete a task from the task list.
 
@@ -129,10 +87,8 @@ Example of usage:
 
 Expected outcome:
 
-Displays the deleted task as a confirmation.
-```
-[D]|[]|some task (by: 2001-02-01)
-```
+![delete usage results](./delete.png?raw=true)
+
 
 ### `find` - Find a task(s) from the task list
 
@@ -144,12 +100,8 @@ Example of usage:
 
 Expected outcome:
 
-Displays all tasks with matching keyword.
-```
-[D]|[]|some task (by: 2001-02-01)
-[D]|[]|some task (by: 2001-02-01)
-[D]|[]|some task (by: 2001-02-01)
-```
+![find usage results](./find.png?raw=true)
+
 
 ### `bye` - Save the task list offline
 
@@ -161,8 +113,5 @@ Example of usage:
 
 Expected outcome:
 
-Displays a confirmation after saving to a text document.
+![save usage results](./save.png?raw=true)
 
-```
-Your data has been successfully saved!
-```
