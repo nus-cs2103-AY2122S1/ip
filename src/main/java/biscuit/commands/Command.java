@@ -34,7 +34,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute command from userInput.
+     * Executes command from userInput.
      *
      * @param taskList Task list.
      * @param storage  Storage to save to.

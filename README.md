@@ -27,7 +27,8 @@ component, applying the best practices learnt in CS2103T Software Engineering.
    Computer.
 2. Download the latest biscuit.jar from [here](https://github.com/MarcusTXK/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for `Biscuit`.
-4. Double-click the file to start the app.
+4. Double-click the file to start the app or run the jar with the following command from the home folder for `Biscuit`: 
+   `java -jar biscuit.jar`.
 5. Type in commands in the command box and press Enter to execute it.
 ---
 ## Features
