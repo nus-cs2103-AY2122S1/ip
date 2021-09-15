@@ -33,6 +33,7 @@ public class Ui {
     // Error messages by Jarvis for other errors
     public static final String UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :(";
     public static final String WRONGLY_FORMATTED_DATE = "Please format the date as dd/mm/yyy";
+    public static final String MISSING_SEARCHPHRASE = "Please key a word or phrase to search for!" ;
     public static String EMPTY_TASK_DELETE = "Please state the number of the task that you wish to delete! Please key " +
             "in 'list' if you'd like to view your list of tasks again!";
     public static String EMPTY_TASK_DONE = "Please state the number of the task that you have completed! Please key " +
@@ -197,25 +198,33 @@ public class Ui {
      *
      * @param searchPhrase The key word/phrase that the user inputs for the search
      * @return list of tasks that matches the searchPhrase
+     * @throws JarvisException if the search word/phrase is missing
      */
-    public static String findTasks(String searchPhrase) {
+    public static String findTasks(String searchPhrase) throws JarvisException {
+        // Extract the search word/phrase
+        int currIndex = 4;
+        while (currIndex < searchPhrase.length() && !searchPhrase.substring(currIndex).startsWith(" ")) {
+            currIndex++;
+        }
+        if (currIndex + 1 >= searchPhrase.length()) {
+            throw new JarvisException(Ui.MISSING_SEARCHPHRASE);
+        }
+        searchPhrase = searchPhrase.substring(currIndex + 1);
+
         String result = "";
         result += "Here are the matching tasks in your list:\n";
         int num = 1;
 
-        // Extract the search word/phrase
-        searchPhrase = searchPhrase.substring(5);
-
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {
             // Check if the search word/phrase is contained in the task description
             if (TaskList.getTaskList().get(i).getDescription().contains(searchPhrase)) {
-                result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
+                result += num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                 num++;
             }
         }
         // If there are no matching results
         if (num == 1) {
-            result += "\tNo matching results found!\n";
+            result += "No matching results found!\n";
         }
         return result;
     }
