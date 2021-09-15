@@ -3,9 +3,7 @@ package duke.parser;
 import duke.exception.DukeException;
 
 public class Parser {
-	protected String NOT_UNDERSTOOD_MESSAGE = "____________________________________________________________\n"
-			+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-			+ "____________________________________________________________\n";
+	protected String NOT_UNDERSTOOD_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
 	public String getNotUnderstoodMessage() {
 		return NOT_UNDERSTOOD_MESSAGE;
