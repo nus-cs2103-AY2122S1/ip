@@ -20,7 +20,8 @@ public class ToDo extends Task {
 
     @Override
     public String populateSaveData() {
-        return "T | " + (this.isDone ? 1 : 0) + " | " + this.description;
+        return "T | " + (this.isDone ? 1 : 0) + " | " + this.description + " | "
+                + "todo"; // The third part should be ignored.
     }
 
     @Override

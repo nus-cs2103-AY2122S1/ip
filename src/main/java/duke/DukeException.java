@@ -45,6 +45,8 @@ public class DukeException extends Exception {
         case PIPE_SYMBOL:
             return "OOPS!!! Duke cannot identify the symbol \"|\". Please do not include it "
                     + "within your input :)";
+        case HAS_DUPLICATE:
+            return "Failed to add task: there is a duplicate task in list that is unfinished.";
         case FAIL_TO_READ:
             return "Failed to read from file";
         case FAIL_TO_WRITE:

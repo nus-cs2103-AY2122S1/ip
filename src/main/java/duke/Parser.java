@@ -1,5 +1,7 @@
 package duke;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,17 +42,13 @@ public class Parser {
      * @param listSize size of current task list
      * @return command for duke to execute
      * @throws DukeException if user command is missing operand or invalid
-     * @throws IllegalArgumentException if parameters are invalid
      */
-    public static ICommand parse(String s, int listSize) throws DukeException, IllegalArgumentException {
-        // Check if parameters are valid
-        if (s == null) {
-            throw new IllegalArgumentException("user command cannot be null");
-        } else if (listSize < 0) {
+    public static ICommand parse(String s, int listSize) throws DukeException {
+        requireNonNull(s);
+        if (listSize < 0) {
             throw new IllegalArgumentException("list size cannot be" + listSize);
         }
 
-        // Remove all leading and trailing whitespaces
         s = s.strip();
         String[] strArr = s.split(" ", 2);
         if (strArr.length == 1) {
@@ -100,6 +98,7 @@ public class Parser {
      */
     private static int tryParseDoneOrDelete(String s, int listSize) throws DukeException {
         assert s != null : "input string is null";
+
         try {
             int taskIndex = Integer.parseInt(s) - 1;
             if (taskIndex >= 0 && taskIndex < listSize) {
@@ -120,6 +119,7 @@ public class Parser {
      */
     private static String[] tryParseDeadline(String s) throws DukeException {
         assert s != null : "input string is null";
+
         s = s.strip();
         List<String> strList = Arrays.asList(s.split(" "));
         if (strList.contains(WORD_DEADLINE_BY)) {
@@ -163,32 +163,32 @@ public class Parser {
     /**
      * Converts save data string to task.
      * @param s save data string
-     * @return a new task constructs based on the given string
+     * @return a new task constructed based on the given string
      * @throws DukeException if the string is not aligned with save data format
-     * @throws IllegalArgumentException if input string is null
      */
-    public static Task fileContentsToTask(String s) throws DukeException, IllegalArgumentException {
-        if (s == null) {
-            throw new IllegalArgumentException("String to write cannot be null");
-        }
+    public static Task fileContentsToTask(String s) throws DukeException {
+        requireNonNull(s, "String to write cannot be null");
 
         String[] arr = s.split(DIVIDER_WORD, 4);
-        if (arr.length < 3) {
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
+        try {
+            int i = Integer.parseInt(arr[1]);
+            if (arr.length != 4 || i < 0 || i > 1) {
+                throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
         }
 
-        boolean isDone = arr[1].equals("1");
-        if (arr[0].equals("T")) {
+        boolean isDone = Integer.parseInt(arr[1]) == 1;
+        switch (arr[0]) {
+        case "T":
             return Task.getToDo(arr[2], isDone);
-        } else {
-            if (arr.length == 4) {
-                if (arr[0].equals("D")) {
-                    return Task.getDeadline(arr[2], arr[3], isDone);
-                } else if (arr[0].equals("E")) {
-                    return Task.getEvent(arr[2], arr[3], isDone);
-                }
-            }
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
+        case "D":
+            return Task.getDeadline(arr[2], arr[3], isDone);
+        case "E":
+            return Task.getEvent(arr[2], arr[3], isDone);
+        default:
+            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
         }
     }
 }

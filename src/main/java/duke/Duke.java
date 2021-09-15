@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.ICommand;
+import duke.ui.MainWindow;
 import duke.ui.Ui;
 import duke.ui.UiMode;
 
@@ -48,11 +49,8 @@ public class Duke {
         this.isExit = false;
     }
 
-    /**
-     * Starts interacting with user. Exit the loop when detecting {@link duke.Parser#WORD_EXIT Parser.WORD_EXIT}.
-     */
-    public void run() {
-        Ui.printWelcomeMessage();
+    protected void initialize() {
+        ui.printWelcomeMessage();
 
         try {
             if (!storage.isEmpty()) {
@@ -61,6 +59,25 @@ public class Duke {
         } catch (DukeException e) {
             Ui.printErrorMessage(e);
         }
+    }
+
+    protected void initialize(MainWindow mainWindow) {
+        ui.printWelcomeMessage(mainWindow);
+
+        try {
+            if (!storage.isEmpty()) {
+                taskList.load(storage.getFileContents());
+            }
+        } catch (DukeException e) {
+            Ui.printErrorMessage(e);
+        }
+    }
+
+    /**
+     * Starts interacting with user. Exit the loop when detecting {@link duke.Parser#WORD_EXIT Parser.WORD_EXIT}.
+     */
+    public void run() {
+        this.initialize();
 
         // Echo loop till exit word is entered
         while (!isExit) {

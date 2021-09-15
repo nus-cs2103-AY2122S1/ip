@@ -50,4 +50,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    protected void printWelcomeMessage(String s) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(s, dukeImage));
+    }
 }

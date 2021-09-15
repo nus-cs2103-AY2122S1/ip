@@ -29,4 +29,14 @@ public class TaskList extends ArrayList<Task> {
     public void deleteAll() {
         super.clear();
     }
+
+    /**
+     * Checks there is an unfinished task which equals to the given task.
+     * @param newTask given task to check
+     * @param <T> type of task
+     * @return if there is an unfinished task in list which equals to the given task
+     */
+    public <T extends Task> boolean hasDuplicate(T newTask) {
+        return super.stream().anyMatch(t -> (!t.getStatus()) && t.equals(newTask));
+    }
 }

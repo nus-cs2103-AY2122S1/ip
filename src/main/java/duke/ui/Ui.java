@@ -1,5 +1,7 @@
 package duke.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,7 +51,7 @@ public class Ui {
         if (Ui.uiMode == UiMode.CLI) {
             System.out.println(LEFT_INDENT + s);
         } else if (Ui.uiMode == UiMode.GUI) {
-            log.add(s);
+            log.add(s + "\n");
         }
     }
 
@@ -65,7 +67,7 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public static void printWelcomeMessage() {
+    public void printWelcomeMessage() {
         if (Ui.uiMode == UiMode.CLI) {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -73,13 +75,20 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
             System.out.println("Hello from\n" + logo);
+            printDividerLine();
+            printWithIndent("Hello! I'm Duke");
+            printWithIndent("What can I do for you?");
+            printDividerLine();
         }
+    }
 
-        // print welcome words
-        printDividerLine();
-        printWithIndent("Hello! I'm Duke");
-        printWithIndent("What can I do for you?");
-        printDividerLine();
+    /**
+     * Prints welcome message.
+     */
+    public void printWelcomeMessage(MainWindow mainWindow) {
+        if (Ui.uiMode == UiMode.GUI) {
+            mainWindow.printWelcomeMessage("Hello! I'm Duke. What can I do for you?");
+        }
     }
 
     public static void printGoodbyeMessage() {
@@ -89,12 +98,10 @@ public class Ui {
     /**
      * Print contents of task list.
      * @param taskList Duke's ask list
-     * @throws IllegalArgumentException if task list is null
      */
     public static void printList(TaskList taskList) {
-        if (taskList == null) {
-            throw new IllegalArgumentException("task list is not initialized");
-        }
+        requireNonNull(taskList, "task list is not initialized");
+
         for (int i = 0; i < taskList.size(); i++) {
             printWithIndent((i + 1) + "." + taskList.get(i).toString());
         }
@@ -105,10 +112,11 @@ public class Ui {
      * @param listSize Size of current list.
      * @throws IllegalArgumentException if list size is negative
      */
-    public static void printTaskCount(int listSize) {
+    public static void printTaskCount(int listSize) throws IllegalArgumentException {
         if (listSize < 0) {
             throw new IllegalArgumentException("list size should not be negative");
         }
+
         printWithIndent(getTaskCountString(listSize));
     }
 
@@ -130,12 +138,10 @@ public class Ui {
     /**
      * Prints a new task info.
      * @param taskStr String representation of the new task
-     * @throws IllegalArgumentException if task string is null
      */
-    public static void printNewTask(String taskStr) throws IllegalArgumentException {
-        if (taskStr == null) {
-            throw new IllegalArgumentException("Task string cannot be null");
-        }
+    public static void printNewTask(String taskStr) {
+        requireNonNull(taskStr, "Task string cannot be null");
+
         printWithIndent("Got it. I've added this task:");
         printWithIndent("  " + taskStr);
     }
@@ -143,12 +149,10 @@ public class Ui {
     /**
      * Prints a removed task info.
      * @param taskStr String representation of the removed task.
-     * @throws IllegalArgumentException if task string is null
      */
-    public static void printRemoveTask(String taskStr) throws IllegalArgumentException {
-        if (taskStr == null) {
-            throw new IllegalArgumentException("Task string cannot be null");
-        }
+    public static void printRemoveTask(String taskStr) {
+        requireNonNull(taskStr, "Task string cannot be null");
+
         printWithIndent("Noted. I've removed this task: ");
         printWithIndent("  " + taskStr);
     }
@@ -160,12 +164,10 @@ public class Ui {
     /**
      * Prints a task which is marked as done.
      * @param taskStr String representation of the task which is marked as done.
-     * @throws IllegalArgumentException if task string is null
      */
-    public static void printMarkDone(String taskStr) throws IllegalArgumentException {
-        if (taskStr == null) {
-            throw new IllegalArgumentException("Task string cannot be null");
-        }
+    public static void printMarkDone(String taskStr) {
+        requireNonNull(taskStr, "Task string cannot be null");
+
         printWithIndent("Nice! I've marked this task as done: ");
         printWithIndent("  " + taskStr);
     }
@@ -174,12 +176,9 @@ public class Ui {
      * Prints an error message based on exception type of DukeException.
      * @param e exception to print
      * @param userInput the latest user command before exception happens
-     * @throws IllegalArgumentException if user input string is null
      */
-    public static void printErrorMessage(DukeException e, String userInput) throws IllegalArgumentException {
-        if (userInput == null) {
-            throw new IllegalArgumentException("User input cannot be null");
-        }
+    public static void printErrorMessage(DukeException e, String userInput) {
+        requireNonNull(userInput, "User input cannot be null");
         switch (e.getType()) {
         case INDEX_OUT_OF_BOUND:
         case INVALID_COMMAND:
@@ -197,16 +196,17 @@ public class Ui {
             printWithIndent("event {description} /at {time period}");
             printWithIndent("Example: event project meeting /at Mon 2-4pm");
             break;
-        case PIPE_SYMBOL:
-        case FAIL_TO_READ:
-        case FAIL_TO_WRITE:
-            printWithIndent(e.getMessage());
-            break;
         case OTHERS:
             printWithIndent("Unknown exception occurred.");
             break;
+        case PIPE_SYMBOL:
+        case HAS_DUPLICATE:
+        case FAIL_TO_READ:
+        case FAIL_TO_WRITE:
+        case FAIL_TO_CREATE_FILE:
         default:
-            assert false : e.getType();
+            printWithIndent(e.getMessage());
+            break;
         }
     }
 
@@ -219,7 +219,7 @@ public class Ui {
     }
 
     protected static String getTaskCountString(int listSize) {
-        assert listSize >= 0 : "list size cannot be" + listSize;
+        assert listSize >= 0 : "list size cannot be negative: " + listSize;
         return "Now you have " + listSize + " task" + (listSize <= 1 ? "" : "s")
                 + " in the list.";
     }
