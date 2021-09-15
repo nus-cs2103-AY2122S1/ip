@@ -98,10 +98,18 @@ public class TaskList {
      * @return The String message.
      */
     protected String deleteTask(String userInput, Ui ui, Storage storage) throws IOException {
+        if (userInput.equals("delete")) {
+            return "☹ OOPS!!! You need to enter a index shown by the list command!";
+        }
         if (tasks.size() == 0) {
             return "You have nothing in your list to delete!";
         }
-        int index = Integer.parseInt(userInput.split(" ")[1]);
+        int index;
+        try {
+            index = Integer.parseInt(userInput.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            return "☹ OOPS!!! You need to enter a POSITIVE INTEGER!";
+        }
         if (index > tasks.size()) {
             return "You do not have that many tasks!";
         } else if (index <= 0) {
@@ -139,10 +147,18 @@ public class TaskList {
      * @return The String message.
      */
     protected String markTaskAsDone(String userInput, Ui ui, Storage storage) throws IOException {
+        if (userInput.equals("done")) {
+            return "☹ OOPS!!! You need to enter a index shown by the list command!";
+        }
         if (tasks.size() == 0) {
             return "You have nothing in your list to mark as done!";
         }
-        int index = Integer.parseInt(userInput.split(" ")[1]);
+        int index;
+        try {
+            index = Integer.parseInt(userInput.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            return "☹ OOPS!!! You need to enter a POSITIVE INTEGER!";
+        }
         if (index > tasks.size()) {
             return "You do not have that many tasks!";
         } else if (index <= 0) {
