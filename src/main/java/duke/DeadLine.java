@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 public class DeadLine extends Task {
     static final String DONE = "[D][X] ";
     static final String NOT_DONE = "[D][ ] ";
-    private String deadLine;
     private LocalDateTime dateTime;
 
     /**
@@ -22,7 +21,6 @@ public class DeadLine extends Task {
      */
     public DeadLine(String task, String deadLine) {
         super(task);
-        this.deadLine = deadLine;
         timeFormatter(deadLine);
     }
 
