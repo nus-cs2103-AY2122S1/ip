@@ -102,6 +102,10 @@ public abstract class Command {
         return false;
     }
 
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
     /**
      * Updates the hashmap if the command adds in tasks with dates.
      *
