@@ -62,14 +62,16 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        if (list.isEmpty()) {
-            return "No tasks in list!";
-        } else {
-            String output = "";
-            for (int i = 0; i < list.size(); i++) {
-                output += ((i + 1) + ". " + list.get(i) + "\n");
+
+        String output = "";
+        for (int i = 0; i < list.size(); i++) {
+            output += ((i + 1) + ". " + list.get(i));
+            if (i != list.size() - 1) {
+                output += "\n";
             }
-            return output;
         }
+
+        return output;
+
     }
 }
