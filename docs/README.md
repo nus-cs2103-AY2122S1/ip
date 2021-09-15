@@ -113,7 +113,7 @@ Example: `schedule 2021-09-15`
 Expected output:
 ````
 Here is the schedule for 2021-09-15:
-[T][ ] Go shopping (by 2021-09-15 at 3:00pm)
+[D][ ] Go shopping (by 2021-09-15 at 3:00pm)
 [E][ ] Prepare for dinner (on 2021-09-15 from 5:00pm to 7:00pm)
 
 Here are tasks without specific timing:
