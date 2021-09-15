@@ -107,7 +107,7 @@ public class Event extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Task)) {
+        if (!(o instanceof Event)) {
             return false;
         } else {
             Event e = (Event) o;

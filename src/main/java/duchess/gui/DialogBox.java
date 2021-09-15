@@ -73,7 +73,12 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image iv) {
         var db = new DialogBox(text, iv);
-        db.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(100), new Insets(12))));
+        db.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(100),
+                new Insets(5))));
+        db.dialog.setStyle("-fx-font-weight: bold;" + "-fx-font-family: 'SF Pro Display' ");
+        db.setStyle("-fx-padding: 0;" + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                + "-fx-border-color: deepskyblue;" + "-fx-border-radius: 100");
         return db;
     }
 
@@ -86,7 +91,12 @@ public class DialogBox extends HBox {
     public static DialogBox getDuchessDialog(String text, Image iv) {
         var db = new DialogBox(text, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.LAWNGREEN, new CornerRadii(100), new Insets(12))));
+        db.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(100),
+                new Insets(5))));
+        db.dialog.setStyle("-fx-font-family: 'SF Pro Display'");
+        db.setStyle("-fx-padding: 0;" + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                + "-fx-border-color: orchid;" + "-fx-border-radius: 100");
         return db;
     }
 }

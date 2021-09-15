@@ -10,7 +10,7 @@
   <children>
     <Label fx:id="dialog" ellipsisString="more..." maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" text="Text" wrapText="true">
          <font>
-            <Font name="Calibri" size="12.0" />
+            <Font name="SansSerif Regular" size="14.0" />
          </font></Label>
     <ImageView fx:id="displayPicture" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
   </children>

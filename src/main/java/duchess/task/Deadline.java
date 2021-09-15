@@ -67,7 +67,7 @@ public class Deadline extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Task)) {
+        if (!(o instanceof Deadline)) {
             return false;
         } else {
             Deadline d = (Deadline) o;
