@@ -3,14 +3,11 @@ package duke.command;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Event;
-
 import duke.Storage;
-
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskCommandException;
-
 import duke.Ui;
 
 import java.time.LocalDateTime;
@@ -18,13 +15,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the user command when the user enters an event.
+ * Represents the user command when the user adds an event to the task list.
  */
 public class EventCommand extends Command {
     private String command;
 
     /**
-     * Constructor for the eventCommand class where the user command is initialized.
+     * Represents a constructor for the EventCommand class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -43,7 +40,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes the response when the user enters an 'event' command and updates the task list and storage 
+     * Executes the response when the user enters an event command and updates the task list and storage 
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
@@ -68,11 +65,14 @@ public class EventCommand extends Command {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
+            
             Task task = new Event(parts[0].substring(6), dateTime);
             taskList.addTask(task);
             assert taskList.getTask(taskList.getSize() - 1).equals(task): "last element in the task list should be " 
                     + "equivalent to the most recently added task";
+            
             storage.writeToFile("./duke.txt", taskList);
+            
             Ui ui = new Ui(taskList, storage);
             String response = ui.taskResponse(task);
             return response;

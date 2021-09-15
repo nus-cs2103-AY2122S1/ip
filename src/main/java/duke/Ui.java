@@ -1,12 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.Scanner;
+
 /**
- * Represents the user interface which deals with interactions with the user
+ * Represents the user interface which deals with interactions with the user.
  */
 public class Ui {
     Scanner sc;
@@ -14,7 +14,7 @@ public class Ui {
     private static Storage storage;
 
     /**
-     * Constructor for the Ui class where variables are initialized
+     * Represents a constructor for the Ui class where variables are initialized.
      *
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
@@ -47,39 +47,39 @@ public class Ui {
     public String showWelcome() {
         String welcomeMessage = "Hello from duke :)) \n\n" + "Here is your current task list: \n" + showLine() + "\n" 
                 + this.taskList.printList() + "\n" + showLine()  + "\nEnd of task list \n\n" + "How can I help you?";
-        System.out.println(welcomeMessage);
+        printInput(welcomeMessage);
         return welcomeMessage;
     }
 
     /**
-     * Class method that returns the string response to the bye command.
+     * Returns the string response to the bye command.
      * 
      * @return String response to the bye command.
      */
     public static String sayBye() {
         String byeMessage = "Bye. Have a great day!";
-        System.out.println(byeMessage);
+        printInput(byeMessage);
         return byeMessage;
     }
 
     /**
-     * Class method that returns a dashed line to enhance user interface.
+     * Returns a dashed line to enhance the user interface.
      * 
      * @return String representation of a dashed line.
      */
     public static String showLine() {
         String line = "-----------------------------------------------";
-        System.out.println(line);
+        printInput(line);
         return line;
     }
 
     /**
-     * Class method that returns a string value argument on the screen.
+     * Returns a string value argument that is displayed on the screen.
      *
      * @param msg String value to be printed on the screen.
      * @return String value to be printed on the screen.
      */
-    public static String printMessage(String msg) {
+    public static String printInput(String msg) {
         System.out.println(msg);
         return msg;
     }
@@ -93,7 +93,7 @@ public class Ui {
     public String taskResponse(Task task) {
         String taskMessage = "Got it. I've added this task:" + System.lineSeparator() + task.toString() 
                 + System.lineSeparator() + "Now you have " + taskList.getSize() + " tasks in the list.";
-        System.out.println(taskMessage);
+        printInput(taskMessage);
         return taskMessage;
     }
 
@@ -105,7 +105,7 @@ public class Ui {
      */
     public String doneResponse(Task task) {
         String doneMessage = "Nice! I've marked this task as done:" + System.lineSeparator() + task.toString();
-        System.out.println(doneMessage);
+        printInput(doneMessage);
         return doneMessage;
     }
 
@@ -117,9 +117,9 @@ public class Ui {
      * remaining in the task list.
      */
     public String deleteResponse(Task task) {
-        String deleteMessage = "Noted. I've removed this task:" + System.lineSeparator() + task.toString() + System.lineSeparator()
-                + "Now you have " + taskList.getSize() + " tasks in the list.";
-        System.out.println(deleteMessage);
+        String deleteMessage = "Noted. I've removed this task:" + System.lineSeparator() + task.toString() 
+                + System.lineSeparator() + "Now you have " + taskList.getSize() + " tasks in the list.";
+        printInput(deleteMessage);
         return deleteMessage;
     }
 
@@ -142,25 +142,28 @@ public class Ui {
     public String findResponse(String wordToFind, TaskList taskList) {
         int count = 1;
         String response = "";
+        
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             String[] partsBeforeSlash = task.toString().split("\\(", 2);
             String[] furtherBreakdownIntoParts = partsBeforeSlash[0].split(" ");
+            
             if (isWordPresent(furtherBreakdownIntoParts, wordToFind)) {
-                response += count + ". " + task.toString() + "\n"; 
+                response += count + ". " + task + "\n"; 
                 System.lineSeparator();
                 count++;
             }
         }
         
         assert count > 0: "count should be greater than 0";
+        
         if (count == 1) {
-            String message = Ui.printMessage("Sorry, there are no matching tasks in your list :/");
+            String message = printInput("Sorry, there are no matching tasks in your list :/");
             return message;
         }
         
         String findMessage = "Here are the matching tasks in your list:" + System.lineSeparator() + response;
-        System.out.println(findMessage);
+        printInput(findMessage);
         return findMessage;
     }
 }

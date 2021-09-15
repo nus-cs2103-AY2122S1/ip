@@ -3,22 +3,19 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.TaskNotFoundException;
-
 import duke.task.Task;
 import duke.task.TaskList;
-
 import duke.Storage;
-
 import duke.Ui;
 
 /**
- * Represents the user command when the user is done with a task.
+ * Represents the user command when the user is done with a task in the task list.
  */
 public class DoneCommand extends Command {
     private String command;
 
     /**
-     * Constructor for the doneCommand class where the user command is initialized.
+     * Represents a constructor for the DoneCommand class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -37,7 +34,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the response when the user enters a 'done' command and updates the task list and storage 
+     * Executes the response when the user enters a done command and updates the task list and storage 
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
@@ -59,7 +56,9 @@ public class DoneCommand extends Command {
         Task task = taskList.getTask(value - 1);
         task.markAsDone();
         assert task.getStatusIcon().equals("X"): "Since the task is marked as done, the status icon returned should be X";
+        
         storage.writeToFile("./duke.txt", taskList);
+        
         Ui ui = new Ui(taskList, storage);
         String response = ui.doneResponse(task);
         return response;

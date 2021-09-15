@@ -11,7 +11,7 @@ public class Deadline extends Task {
     private String formattedDtf;
 
     /**
-     * Constructor for the Deadline class where the description of task and date are initialized.
+     * Represents a constructor for the Deadline class where the description of task and date are initialized.
      *
      * @param description Description of the task.
      * @param by The date of deadline in yyyy-MM-dd HHmm format.             
@@ -19,13 +19,14 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+        
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
         String formattedDtf = this.by.format(dtf);
         this.formattedDtf = formattedDtf;
     }
 
     /**
-     * Returns the string representation of the deadline task stored on duke.txt.
+     * Returns the string representation of the deadline task that is stored on duke.txt.
      *
      * @return String representation of the deadline task stored on duke.txt.
      */
@@ -34,7 +35,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of the deadline task stored in the list variable.
+     * Returns the string representation of the deadline task that is stored in the task list.
      *
      * @return String description of the deadline task.
      */

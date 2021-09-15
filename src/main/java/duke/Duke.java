@@ -1,9 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
-
 import duke.task.TaskList;
-
 import duke.command.Command;
 
 public class Duke {
@@ -21,6 +19,7 @@ public class Duke {
     public void runCLI() throws DukeException {
         this.ui.showWelcome();
         Ui.showLine();
+        
         boolean isExit = false;
         while (!isExit) {
             String command = ui.getCommand();
@@ -45,6 +44,7 @@ public class Duke {
             String response = Ui.sayBye();
             return response;
         } 
+        
         Command c = parser.parse();
         String response = c.execute(this.taskList, this.storage);
         return response;

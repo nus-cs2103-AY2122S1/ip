@@ -3,12 +3,9 @@ package duke.command;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
 import duke.Storage;
-
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
-
 import duke.Ui;
 
 /**
@@ -18,7 +15,7 @@ public class TodoCommand extends Command {
     private String command;
 
     /**
-     * Constructor for the todoCommand class where the user command is initialized.
+     * Represents a constructor for the TodoCommand class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -37,7 +34,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the response when the user enters a 'todo' command and updates the task list and storage 
+     * Executes the response when the user enters a todo command and updates the task list and storage 
      * file (duke.txt)
      *
      * @param taskList TaskList that stores the tasks.
@@ -54,7 +51,9 @@ public class TodoCommand extends Command {
         taskList.addTask(task);
         assert taskList.getTask(taskList.getSize() - 1).equals(task): "last element in the task list should be " 
                 + "equivalent to the most recently added task";
+        
         storage.writeToFile("./duke.txt", taskList);
+        
         Ui ui = new Ui(taskList, storage);
         String response = ui.taskResponse(task);
         return response;

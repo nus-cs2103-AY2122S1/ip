@@ -11,7 +11,7 @@ public class TaskList {
     private ArrayList<Task> userList;
 
     /**
-     * Constructor for the TaskList class where the task list is initialized.
+     * Represents a constructor for the TaskList class where the task list is initialized as an array list.
      */
     public TaskList() {
         userList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class TaskList {
      */
     public String printList() {
         if (userList.isEmpty()) {
-            String response = Ui.printMessage("You don't have any tasks in the list!");
+            String response = Ui.printInput("You don't have any tasks in the list!");
             return response;
         } 
         
@@ -32,8 +32,8 @@ public class TaskList {
         int count = 1;
         for (int i = 0; i < userList.size(); i++) {
             Task t = userList.get(i);
-            System.out.println(t);
-            response += count + ". " + t.toString() + "\n";
+            Ui.printInput(t.toString());
+            response += count + ". " + t + "\n";
             count++;
         }
         return response;

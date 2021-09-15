@@ -1,30 +1,28 @@
 package duke;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.Scanner;
-
 import duke.task.TaskList;
 import duke.task.Task;
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file (duke.txt).
  */
 public class Storage {
     private String filepath;
     private File file;
 
     /**
-     * Constructor for the Storage class where the filepath is initialized
+     * Represents a constructor for the Storage class where the filepath is initialized.
      *
      * @param filepath Filepath of the file (duke.txt) where the task data is stored.
      */
@@ -42,55 +40,49 @@ public class Storage {
     }
 
     /**
-     * Loads the task data from the duke.txt file into the list variable.
+     * Loads the task data from the duke.txt storage file into the task list.
      *
      * @param taskList TaskList where the tasks are stored.
      */
     public void loadTaskListData(TaskList taskList) {
         try {
-            Scanner s = new Scanner(this.file); 
-            if (!s.hasNext()) {
-                Ui.printMessage("There are no items in your task list!");
-            } else {
-                Ui.printMessage("Here is your current task list: ");
-                while (s.hasNext()) {
-                    String str = s.nextLine();
-                    System.out.println(str);
-                    String[] parts = str.split("\\|", 4);
-                    String subStr = parts[0].substring(3).trim();
-                    if (subStr.equals("duke.task.Todo")) {
-                        Task task = new Todo(parts[2].trim());
-                        if (parts[1].trim().equals("X")) {
-                            task.markAsDone();
-                        }
-                        taskList.addTask(task);
-                    } else if (subStr.equals("duke.task.Deadline")) {
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
-                        LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
-                        Task task = new Deadline(parts[2].trim(), dateTime);
-                        if (parts[1].trim().equals("X")) {
-                            task.markAsDone();
-                        }
-                        taskList.addTask(task);
-                    } else {
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
-                        LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
-                        Task task = new Event(parts[2].trim(), dateTime);
-                        if (parts[1].trim().equals("X")) {
-                            task.markAsDone();
-                        }
-                        taskList.addTask(task);
-                    }
-                }
-                Ui.printMessage("End of task list");
+            Scanner s = new Scanner(this.file);
+            while (s.hasNext()) {
+                String str = s.nextLine();
+                String[] parts = str.split("\\|", 4);
+                String taskType = parts[0].substring(3).trim();
+                
+                addTaskToTaskList(parts, taskList, taskType);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
     
+    private void addTaskToTaskList(String[] parts, TaskList taskList, String taskType) {
+        Task task = null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
+        
+        if (taskType.equals("duke.task.Todo")) {
+            task = new Todo(parts[2].trim());
+        } else if (taskType.equals("duke.task.Deadline")) {
+            LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
+            task = new Deadline(parts[2].trim(), dateTime);
+        } else if (taskType.equals("duke.task.Event")) {
+            LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
+            task = new Event(parts[2].trim(), dateTime);
+        }
+        
+        if (task != null) {
+            if (parts[1].trim().equals("X")) {
+                task.markAsDone();
+            }
+            taskList.addTask(task);
+        }
+    }
+    
     /**
-     * Writes the task data to the duke.txt file whenever the list variable is updated.
+     * Writes the task data to the duke.txt file whenever the task list is updated.
      *
      * @param filePath Filepath of the file (duke.txt) where the task data is stored.
      * @param taskList TaskList where the tasks are stored.

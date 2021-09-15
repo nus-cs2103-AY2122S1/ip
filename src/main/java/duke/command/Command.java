@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -12,7 +11,7 @@ public abstract class Command {
     private String command;
 
     /**
-     * Constructor for the Command class where the user command is initialized.
+     * Represents a constructor for the Command class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -21,7 +20,7 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method which represents Duke's response to various types of user commands.
+     * Represents Duke's response to various types of user commands.
      *
      * @param taskList TaskList where the tasks are stored.
      * @return String response to various types of commands.
