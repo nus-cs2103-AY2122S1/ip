@@ -1,5 +1,7 @@
 # User Guide
 
+*Please note: Do create a "data" folder, with a "duketest.txt" inside, within the same folder as the jar file.
+
 ## Features 
 
 ### Adding tasks
