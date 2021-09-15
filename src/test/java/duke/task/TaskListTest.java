@@ -1,8 +1,10 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
@@ -14,7 +16,7 @@ public class TaskListTest {
         for (int i = 0; i < inputs.length; i++) {
             String output = taskList.addTodoToList(inputs[i]);
             assertEquals(String.format("added: [T][ ] %s\n"
-                    + "Now you have %s tasks in your list\n", inputs[i], i+1), output);
+                    + "Now you have %s tasks in your list", inputs[i], i+1), output);
         }
     }
 
