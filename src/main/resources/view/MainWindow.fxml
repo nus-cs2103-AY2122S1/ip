@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane depthTest="ENABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" style="-fx-background-color: #2f3236#2f3236;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="whobot.main.gui.MainWindow">
+   <children>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="1.0" layoutY="183.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background: #2f3236#2f3236; -fx-background-color: #2f3236#2f3236;" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="dialogContainer" prefHeight="600.0" prefWidth="600.0" />
+         </content>
+      </ScrollPane>
+      <TextField fx:id="userInput" layoutX="13.0" layoutY="830.0" onAction="#handleUserInput" prefHeight="30.0" prefWidth="500.0" style="-fx-background-color: lightgrey;">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font></TextField>
+      <Button fx:id="sendButton" layoutX="526.0" layoutY="829.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #cce3e3#cce3e3;" text="Send" textFill="#8300ff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font></Button>
+      <ImageView fitHeight="169.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@../img/WhoBot Logo.png" />
+         </image>
+      </ImageView>
+      <Line endX="471.0" layoutX="129.0" layoutY="169.0" startX="-129.0" stroke="#005cfa" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeWidth="4.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
+      <Line endX="535.0" endY="-1.0000003576278687" layoutX="66.0" layoutY="14.0" startX="-65.00001525878906" startY="-1.0000003576278687" stroke="#005cfa" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeWidth="4.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
+      <Line endX="475.0" endY="-1.0" layoutX="124.0" layoutY="786.0" startX="-126.00000762939453" startY="-1.0" stroke="#005cfa" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeWidth="4.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
+   </children>
+   <effect>
+      <DropShadow height="0.0" radius="13.05" spread="0.01" width="54.2" />
+   </effect>
+</AnchorPane>

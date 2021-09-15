@@ -1,0 +1,12 @@
+../src/main/java/WhoBot/main/Gui.java
+../src/main/java/WhoBot/main/UI.java
+../src/main/java/WhoBot/main/WhoBot.java
+../src/main/java/WhoBot/main/WhoBotException.java
+../src/main/java/WhoBot/task/Deadline.java
+../src/main/java/WhoBot/task/Event.java
+../src/main/java/WhoBot/task/Task.java
+../src/main/java/WhoBot/task/Todo.java
+../src/main/java/WhoBot/utils/Helper.java
+../src/main/java/WhoBot/utils/Parser.java
+../src/main/java/WhoBot/utils/Storage.java
+../src/main/java/WhoBot/utils/TaskList.java
