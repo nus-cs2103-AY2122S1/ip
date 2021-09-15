@@ -1,6 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 import duke.task.command.Command;
 
@@ -20,7 +22,7 @@ public class Duke {
     private TaskList items;
 
     private Undo undo;
-    public static LinkedList<TaskList> state;
+    public static Stack<TaskList> state = new Stack<>();
     public static boolean isRunning;
 
     /**
@@ -28,7 +30,6 @@ public class Duke {
      */
     public Duke(String directory, String file) throws DukeException {
         ui = new Ui();
-        state = new LinkedList<>();
         storage = new Storage(directory, file);
         isRunning = true;
         items = new TaskList(storage);
@@ -84,24 +85,22 @@ public class Duke {
     }
 
     public static void addToState(TaskList taskList) {
-        state.add(taskList);
+        Duke.state.push(taskList);
     }
 
     public static TaskList getLatestState() {
-        int lastIndex = state.size() - 1;
-        if (lastIndex < 0) {
+        if (Duke.state.isEmpty()) {
             return new TaskList();
         }
-        return state.getLast();
+        return Duke.state.peek();
     }
 
     public static void deleteLastState() {
-        TaskList t1 = state.pollLast();
-        System.out.println(t1);
+        Duke.state.pop();
     }
 
     public static int stateSize() {
-        return state.size();
+        return Duke.state.size();
     }
 
     /**

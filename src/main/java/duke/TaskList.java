@@ -57,6 +57,14 @@ public class TaskList {
         this.storage = storage;
     }
 
+    private TaskList copyTasklist(TaskList taskList) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (Task task : taskList.tasks) {
+            newList.add(task);
+        }
+        return TaskList.of(newList);
+    }
+
     /**
      * Adds an item to the list.
      *
@@ -65,11 +73,8 @@ public class TaskList {
      */
     public String addItem(Task task) throws DukeException {
         TaskList currList = Duke.getLatestState();
-        TaskList newList = currList;
-        System.out.println("state size before adding is: " + Duke.stateSize());
-        System.out.println("before adding task: " + currList.getListSize());
+        TaskList newList = copyTasklist(currList);
         newList.tasks.add(task);
-        System.out.println("after adding task: " + currList.getListSize());
         String output = "Got it, I've added this task:\n" + task.toString();
         if (newList.getListSize() == 0) {
             output += "\nNow you have 1 task in the list.";
@@ -77,7 +82,6 @@ public class TaskList {
             output += "\nNow you have " + newList.getListSize() + " tasks in the list.";
         }
         Duke.addToState(newList);
-        System.out.println("state size after adding is is: " + Duke.stateSize());
         return output;
     }
 
@@ -91,7 +95,7 @@ public class TaskList {
         if (index <= 0) {
             throw new DukeException("Invalid index. Only non-negative values are accepted.");
         }
-        TaskList currList = Duke.getLatestState();
+        TaskList currList = copyTasklist(Duke.getLatestState());
         if (currList.getListSize() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
         }
@@ -123,12 +127,12 @@ public class TaskList {
             throw new DukeException("You don't have these many tasks!");
         }
         int listIndex = index - 1;
-        TaskList newList = Duke.getLatestState();
+        TaskList newList = copyTasklist(Duke.getLatestState());
         Task task = newList.getTaskAtIndex(listIndex);
         newList.tasks.remove(listIndex);
         Duke.addToState(newList);
         String output =  "Noted. I have removed this task:\n" + task
-                + "\n Number of tasks remaining: " + getListSize();
+                + "\n Number of tasks remaining: " + newList.getListSize();
         return output;
 
     }
@@ -139,7 +143,6 @@ public class TaskList {
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
-//        TaskList currList = Duke.getLatestState();
         int listSize = this.getListSize();
         if (listSize == 0) {
             throw new DukeException("You have 0 items in your list");
@@ -213,7 +216,6 @@ public class TaskList {
      * @return the size of the array list.
      */
     public int getListSize() {
-//        TaskList newList = Duke.getLatestState();
         return this.tasks.size();
     }
 }
