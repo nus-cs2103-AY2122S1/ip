@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents exceptions thrown by Duke Personal Assistant Chatbot.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     DukeException(String message) {
         super(message);
@@ -18,7 +18,7 @@ public class DukeException extends Exception{
 /**
  * Represents exception where task description is not found.
  */
-class DescriptionNotFoundException extends DukeException{
+class DescriptionNotFoundException extends DukeException {
 
     DescriptionNotFoundException(String message) {
         super(message);
@@ -33,7 +33,7 @@ class DescriptionNotFoundException extends DukeException{
 /**
  * Represents exception where ToDo task description is not found.
  */
-class ToDoDescriptionNotFoundException extends DescriptionNotFoundException{
+class ToDoDescriptionNotFoundException extends DescriptionNotFoundException {
 
     ToDoDescriptionNotFoundException(String message) {
         super(message);
@@ -48,7 +48,7 @@ class ToDoDescriptionNotFoundException extends DescriptionNotFoundException{
 /**
  * Represents exception where Deadline task description is not found.
  */
-class DeadlineDescriptionNotFoundException extends DescriptionNotFoundException{
+class DeadlineDescriptionNotFoundException extends DescriptionNotFoundException {
 
     DeadlineDescriptionNotFoundException(String message) {
         super(message);
@@ -63,7 +63,7 @@ class DeadlineDescriptionNotFoundException extends DescriptionNotFoundException{
 /**
  * Represents exception where Event task description is not found.
  */
-class EventDescriptionNotFoundException extends DescriptionNotFoundException{
+class EventDescriptionNotFoundException extends DescriptionNotFoundException {
 
     EventDescriptionNotFoundException(String message) {
         super(message);
@@ -132,5 +132,20 @@ class TaskIndexOutOfBoundException extends DukeException {
     @Override
     public String toString() {
         return "TaskIndexOutOfBoundException: " + this.getMessage();
+    }
+}
+
+/**
+ * Represents exception where task index is out of range.
+ */
+class InvalidTaskTypeException extends DukeException {
+
+    InvalidTaskTypeException(String message) {
+        super(message);
+    }
+
+    @Override
+    public String toString() {
+        return "InvalidTaskTypeException: " + this.getMessage();
     }
 }

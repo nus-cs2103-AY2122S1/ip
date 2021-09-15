@@ -1,18 +1,18 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.io.File;
-import java.io.FileWriter;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Stores the TaskList to a local file
@@ -20,6 +20,8 @@ import java.util.ArrayList;
 public class Storage {
     private static String FILE_DIRECTORY = "./data";
     private static String FILE_PATH = "./data/duke.txt";
+    private static final String DATE_FORMAT = "dd MMM yyyy";
+    private static final String DATE_TIME_FORMAT = "dd MMM yyyy HH:mm";
 
     /**
      * Creates directory and file to store the TaskList if it is not found.
@@ -61,16 +63,18 @@ public class Storage {
                     break;
                 case "E":
                     LocalDateTime dateTime = LocalDateTime.parse(values[3], DateTimeFormatter
-                            .ofPattern("dd MMM yyyy HH:mm"));
+                            .ofPattern(DATE_TIME_FORMAT));
                     list.add(new Event(values[2], values[1].equals("1"), dateTime));
                     break;
                 case "D":
-                    LocalDate date = LocalDate.parse(values[3], DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    LocalDate date = LocalDate.parse(values[3], DateTimeFormatter.ofPattern(DATE_FORMAT));
                     list.add(new Deadline(values[2], values[1].equals("1"), date));
                     break;
+                default:
+                    throw new InvalidTaskTypeException("Task does not have a valid task type.");
                 }
             }
-        } catch (FileNotFoundException err) {
+        } catch (FileNotFoundException | InvalidTaskTypeException err) {
             System.out.println(err.getMessage());
         }
         return list;
