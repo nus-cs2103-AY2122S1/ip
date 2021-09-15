@@ -1,5 +1,5 @@
 # Duke User Guide
-Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind from having to remember all your important tasks in a day. Duke is able to save all your tasks on your local computer so that you can easily access and update it even when you are offline.
+Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind from having to remember all your important tasks in a day. Duke is able to save all your tasks on your local computer so that you can easily access and update it even when you are offline. It is also open source and easy to edit, thus you can add as much functionality to it as you desire.
 
 ![Duke](Ui.png)
 
@@ -18,7 +18,13 @@ Duke is a text-based, lightweight and easy-to-learn chatbot that frees your mind
 
 ## Quick start
 
-### **Download and try the project**
+### **Download and run Duke**
+1. Download the jar file from the latest release from [here](https://github.com/Haozeee/ip).
+2. Using the terminal, navigate to the location of the downloaded jar file.
+3. Launch Duke using the command `jave -jar duke.jar`
+4. Note that launching Duke by double clicking it may cause issues with saving tasks to local storage. Thus, it is better to launch Duke using the terminal.
+
+### **View and edit the source code**
 1. Using terminal, navigate to the directory where you want to
 2. Enter the command `git clone https://github.com/Haozeee/ip.git`
 3. Open the project in intelliJ and configure the project to use JDK 11
