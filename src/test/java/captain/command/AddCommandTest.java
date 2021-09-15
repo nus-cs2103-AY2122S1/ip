@@ -1,11 +1,11 @@
-package duke.command;
+package captain.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
+import captain.DukeException;
+import captain.Storage;
+import captain.Ui;
+import captain.task.Task;
+import captain.task.TaskList;
+import captain.task.Todo;
 import org.junit.jupiter.api.Test;
 
 public class AddCommandTest {

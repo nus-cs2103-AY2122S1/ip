@@ -1,6 +1,6 @@
-package duke.task;
+package captain.task;
 
-import duke.DukeException.MissingDescriptionException;
+import captain.DukeException.MissingDescriptionException;
 
 /**
  * Encapsulates the details of a Task object.

@@ -1,4 +1,4 @@
-package duke;
+package captain;
 
 public enum Commands {
     LIST("list"),

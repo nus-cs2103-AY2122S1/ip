@@ -1,20 +1,20 @@
-package duke;
+package captain;
 
-import static duke.Commands.INVALID;
+import static captain.Commands.INVALID;
 
-import duke.DukeException.InvalidTaskIndexException;
-import duke.command.AddCommand;
-import duke.command.ClearCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import captain.DukeException.InvalidTaskIndexException;
+import captain.command.AddCommand;
+import captain.command.ClearCommand;
+import captain.command.Command;
+import captain.command.DeleteCommand;
+import captain.command.DoneCommand;
+import captain.command.ExitCommand;
+import captain.command.FindCommand;
+import captain.command.InvalidCommand;
+import captain.command.ListCommand;
+import captain.task.Deadline;
+import captain.task.Event;
+import captain.task.Todo;
 
 
 

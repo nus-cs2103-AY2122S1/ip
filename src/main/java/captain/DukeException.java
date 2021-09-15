@@ -1,4 +1,4 @@
-package duke;
+package captain;
 
 /**
  * Represents the exceptions unique to Duke chatbot.

@@ -1,4 +1,4 @@
-import duke.Duke;
+import captain.Captain;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,10 +21,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Captain captain;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
+    private Image captainImage = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
 
     /**
      * Sets up the welcome message.
@@ -32,11 +32,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(WELCOME_MSG, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(WELCOME_MSG, captainImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setCaptain(Captain c) {
+        captain = c;
     }
 
     /**
@@ -46,10 +46,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = captain.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, captainImage)
         );
         userInput.clear();
     }

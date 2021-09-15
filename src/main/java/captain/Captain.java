@@ -1,7 +1,7 @@
-package duke;
+package captain;
 
-import duke.command.Command;
-import duke.task.TaskList;
+import captain.command.Command;
+import captain.task.TaskList;
 import javafx.scene.image.Image;
 
 /**
@@ -9,8 +9,8 @@ import javafx.scene.image.Image;
  *
  * @author Adam Ho
  */
-public class Duke {
-    private static final String FILEPATH = "./data/duke.txt";
+public class Captain {
+    private static final String FILEPATH = "./data/taskdata.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -18,7 +18,7 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/samoyed.png"));
 
-    public Duke() {
+    public Captain() {
         this(FILEPATH);
     }
 
@@ -28,7 +28,7 @@ public class Duke {
      *
      * @param filepath The path of the file's location.
      */
-    public Duke(String filepath) {
+    public Captain(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
         try {
@@ -79,6 +79,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(FILEPATH).run();
+        new Captain(FILEPATH).run();
     }
 }

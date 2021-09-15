@@ -1,13 +1,13 @@
-package duke.command;
+package captain.command;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import captain.Storage;
+import captain.Ui;
+import captain.task.Task;
+import captain.task.TaskList;
 
 public class FindCommand extends Command {
     private String[] keywords;

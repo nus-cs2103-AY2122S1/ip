@@ -1,2 +1,0 @@
-T | 0 | run at west coast
-D | 0 | assignment 1 | next wednesday

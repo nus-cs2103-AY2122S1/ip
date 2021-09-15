@@ -1,6 +1,6 @@
-package duke.task;
+package captain.task;
 
-import duke.DukeException.MissingDescriptionException;
+import captain.DukeException.MissingDescriptionException;
 
 /**
  * Represents a task with deadline.

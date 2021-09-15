@@ -1,9 +1,9 @@
-package duke.command;
+package captain.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import captain.DukeException;
+import captain.Storage;
+import captain.Ui;
+import captain.task.TaskList;
 
 public abstract class Command {
 

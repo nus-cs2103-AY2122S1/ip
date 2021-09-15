@@ -1,9 +1,9 @@
-package duke;
+package captain;
 
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.TaskList;
+import captain.task.Task;
+import captain.task.TaskList;
 
 
 /**
@@ -12,12 +12,13 @@ import duke.task.TaskList;
  * @author Adam Ho
  */
 public class Ui {
-    public static final String LIST_TASK_MSG = "\tHere are the tasks in your list:\n";
-    public static final String FIND_TASKS_MSG = "\tThe tasks that match your keywords are:\n";
-    public static final String DONE_MSG = "\tNice! I've marked this task as done:\n\t  ";
-    public static final String CLEAR_MSG = "\t All your tasks have been cleared!";
-    public static final String LOAD_ERROR_MSG = "\tWe couldn't load your data file ><";
-    public static final String EXIT_MSG = "\tGoodbye! Please visit me again soon :(";
+    public static final String LIST_TASK_MSG = "\tHere are a list of tasks you have:\n";
+    public static final String EMPTY_LIST = "\tGreat job! You're done for the day!\n";
+    public static final String FIND_TASKS_MSG = "\tHere's all that I can find with the keywords:\n";
+    public static final String DONE_MSG = "\tGood job! One less task for you!\n\t  ";
+    public static final String CLEAR_MSG = "\tAll your tasks have been cleared!";
+    public static final String LOAD_ERROR_MSG = "\tOops! Looks like something went wrong with your data file!";
+    public static final String EXIT_MSG = "\tBye, see you again soon!";
 
     private Scanner sc = new Scanner(System.in);
 
@@ -58,6 +59,14 @@ public class Ui {
      */
     public String showTaskList(TaskList tasks) {
         return LIST_TASK_MSG + printTaskLists(tasks);
+    }
+
+    /**
+     * Shows to user that the task list is empty.
+     * @return A String that informs the user that the task list is empty.
+     */
+    public String showEmptyTaskList() {
+        return EMPTY_LIST;
     }
 
     public String showTasksFound(TaskList tasks) {

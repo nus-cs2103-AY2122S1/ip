@@ -1,8 +1,8 @@
-package duke.task;
+package captain.task;
 
 import java.util.ArrayList;
 
-import duke.DukeException.MissingTaskException;
+import captain.DukeException.MissingTaskException;
 
 /**
  * Contains the task list.

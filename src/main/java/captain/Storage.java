@@ -1,4 +1,4 @@
-package duke;
+package captain;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.DukeException.MissingDescriptionException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
+import captain.DukeException.MissingDescriptionException;
+import captain.task.Deadline;
+import captain.task.Event;
+import captain.task.Task;
+import captain.task.TaskList;
+import captain.task.Todo;
 
 
 /**
