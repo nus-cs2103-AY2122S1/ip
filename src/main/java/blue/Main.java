@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Blue using FXML.
+ * This code is reused from SE-EDU JavaFX tutorial,
+ * available at: https://se-education.org/guides/tutorials/javaFx.html
  */
 public class Main extends Application {
     private static final String DEFAULT_FILEPATH = "data/tasks.txt";
