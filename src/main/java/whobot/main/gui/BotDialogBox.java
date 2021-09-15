@@ -61,7 +61,6 @@ public class BotDialogBox extends HBox {
             displayPicture.setImage(img);
         }
         displayText(text, delay);
-        //dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     private void displayText(String text, double delay) {

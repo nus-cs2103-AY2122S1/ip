@@ -87,7 +87,7 @@ public class MainWindow extends AnchorPane {
         try {
             if (parser.parse(command, ui, storage, taskList) == -1) {
                 String message = "GoodBye, I hope to see you again soon :)";
-                long delay = message.length() * 50 + 10500;
+                long delay = message.length() * 50 + 500;
                 ui.echo("GoodBye, I hope to see you again soon :)", UI.Type.COMPLETE);
                 Thread delayThread = new Thread(() -> {
                     try {
