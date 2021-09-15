@@ -1,6 +1,8 @@
 package duke.task.command;
 
 import duke.DukeConstants;
+import duke.DukeException;
+import duke.Storage;
 import duke.Ui;
 
 /**
@@ -14,7 +16,7 @@ public class ByeCommand extends Command {
      * @return The output message of the command.
      */
     @Override
-    public String execute() {
+    public String execute() throws DukeException {
         DukeConstants.isUndoable = false;
 
         return Ui.printGoodBye();

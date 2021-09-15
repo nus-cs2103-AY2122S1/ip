@@ -1,6 +1,5 @@
 package duke.task.command;
 
-import duke.DukeConstants;
 import duke.DukeException;
 import duke.TaskList;
 
@@ -18,7 +17,6 @@ public class ListCommand extends Command {
      */
     public ListCommand(TaskList taskList) {
         this.taskList = taskList;
-        DukeConstants.isUndoable = false;
     }
 
     /**
@@ -29,7 +27,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        System.out.println("reached list command");
         return taskList.printList();
     }
 }

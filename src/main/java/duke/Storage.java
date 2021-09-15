@@ -20,10 +20,10 @@ import duke.task.Todo;
 public class Storage {
 
     // The relative path to the directory
-    private final String directory;
+    private static String directory = "";
 
     // The file
-    private final String file;
+    private static String file = "";
 
     // The contents of the file as a List of Strings
     private ArrayList<String> fileTasks;
@@ -32,11 +32,11 @@ public class Storage {
      * Instantiates a storage object.
      *
      * @param fileDir The path to the directory.
-     * @param file The file name.
+     * @param fileName The file name.
      */
-    public Storage(String fileDir, String file) {
-        this.directory = fileDir;
-        this.file = file;
+    public Storage(String fileDir, String fileName) {
+        directory = fileDir;
+        file = fileName;
         this.fileTasks = new ArrayList<>();
     }
 
@@ -56,7 +56,7 @@ public class Storage {
             System.out.println("Failed to create a new file");
         }
 
-        // list to contain all tasks ass understood by bot.
+        // list to contain all tasks as understood by bot.
         ArrayList<Task> fileList = new ArrayList<>();
         try {
             Scanner fileReader = new Scanner(dataFile);
@@ -94,7 +94,7 @@ public class Storage {
             throw new DukeException("No saved data found");
         }
         TaskList fileTaskList = TaskList.of(fileList);
-        Duke.state.add(fileTaskList);
+        Duke.addToState(fileTaskList);
     }
 
     /**
@@ -194,7 +194,7 @@ public class Storage {
      *
      * @throws DukeException when saving the file fails.
      */
-    private void saveToFile() throws DukeException {
+    public static void saveToFile() throws DukeException {
         try {
             ArrayList<String> fileList = TaskList.getStringList();
             Files.write(Paths.get(directory + "/" + file), fileList, StandardCharsets.UTF_8);

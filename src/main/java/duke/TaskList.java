@@ -64,10 +64,10 @@ public class TaskList {
      * @return A status message to be displayed.
      */
     public String addItem(Task task) throws DukeException {
-        TaskList currList = Duke.getLastestState();
+        TaskList currList = Duke.getLatestState();
         currList.tasks.add(task);
         String output = "Got it, I've added this task:\n" + task.toString();
-        if (currList.getListSize() == 1) {
+        if (currList.getListSize() == 0) {
             output += "\nNow you have 1 task in the list.";
         } else {
             output += "\nNow you have " + getListSize() + " tasks in the list.";
@@ -86,7 +86,7 @@ public class TaskList {
         if (index <= 0) {
             throw new DukeException("Invalid index. Only non-negative values are accepted.");
         }
-        TaskList currList = Duke.getLastestState();
+        TaskList currList = Duke.getLatestState();
         if (currList.getListSize() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
         }
@@ -118,7 +118,7 @@ public class TaskList {
             throw new DukeException("You don't have these many tasks!");
         }
         int listIndex = index - 1;
-        TaskList newList = Duke.getLastestState();
+        TaskList newList = Duke.getLatestState();
         Task task = newList.getTaskAtIndex(listIndex);
         newList.tasks.remove(listIndex);
         Duke.addToState(newList);
@@ -134,7 +134,7 @@ public class TaskList {
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
-        TaskList currList = Duke.getLastestState();
+        TaskList currList = Duke.getLatestState();
         int listSize = currList.getListSize();
         if (listSize == 0) {
             throw new DukeException("You have 0 items in your list");
@@ -153,7 +153,7 @@ public class TaskList {
     }
 
     public static ArrayList<String> getStringList() {
-        TaskList newList = Duke.getLastestState();
+        TaskList newList = Duke.getLatestState();
         ArrayList<String> fileList = new ArrayList<>();
         for (Task task : newList.tasks) {
             fileList.add(task.toString());
@@ -169,7 +169,7 @@ public class TaskList {
      * @throws DukeException thrown if the task list is empty.
      */
     public String findTask(String keyword) throws DukeException {
-        TaskList newList = Duke.getLastestState();
+        TaskList newList = Duke.getLatestState();
         StringBuilder output = new StringBuilder();
         output.append("Here are the matching tasks in your list: ");
         int ctr = 0;
@@ -196,7 +196,7 @@ public class TaskList {
      * @return string representation of the task
      */
     public Task getTaskAtIndex(int index) {
-        TaskList newList = Duke.getLastestState();
+        TaskList newList = Duke.getLatestState();
         Task task = newList.tasks.get(index);
         return task;
     }
@@ -208,7 +208,7 @@ public class TaskList {
      * @return the size of the array list.
      */
     public int getListSize() {
-        TaskList newList = Duke.getLastestState();
+        TaskList newList = Duke.getLatestState();
         return newList.tasks.size();
     }
 }

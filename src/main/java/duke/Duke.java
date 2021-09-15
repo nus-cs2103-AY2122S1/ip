@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import duke.task.command.Command;
@@ -23,18 +21,18 @@ public class Duke {
 
     private Undo undo;
     public static LinkedList<TaskList> state;
+    public static boolean isRunning;
 
     /**
      * Duke Constructor
      */
     public Duke(String directory, String file) throws DukeException {
         ui = new Ui();
+        state = new LinkedList<>();
         storage = new Storage(directory, file);
-        DukeConstants.isRunning = true;
+        isRunning = true;
         items = new TaskList(storage);
         parser = new Parser(this.items);
-        undo = new Undo(this.items);
-        state = new LinkedList<>();
     }
 
     /**
@@ -44,7 +42,7 @@ public class Duke {
         String rawInput;
         String output = "";
         ui.greet();
-        while (DukeConstants.isRunning) {
+        while (isRunning) {
             rawInput = Ui.getInput();
             output = getResponse(rawInput);
         }
@@ -75,24 +73,34 @@ public class Duke {
      * @return True when duke is awake and false otherwise.
      */
     public boolean isRunning() {
-        return DukeConstants.isRunning;
+        return isRunning;
     }
 
-    private void exitChat(String message) {
-        DukeConstants.isRunning = !message.equals(Ui.printGoodBye());
+    private void exitChat(String message) throws DukeException {
+        isRunning = !message.equals(Ui.printGoodBye());
+        if (!isRunning()) {
+            Storage.saveToFile();
+        }
     }
 
     public static void addToState(TaskList taskList) {
         state.add(taskList);
     }
 
-    public static TaskList getLastestState() {
+    public static TaskList getLatestState() {
         int lastIndex = state.size() - 1;
+        if (lastIndex < 0) {
+            return new TaskList();
+        }
         return state.get(lastIndex);
     }
 
+    public static int stateSize() {
+        return state.size();
+    }
+
     /**
-     * The main function of Bhutu.
+     * Starts the bot.
      *
      * @param args The command line arguments
      */

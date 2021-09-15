@@ -9,6 +9,10 @@ import duke.Undo;
 public class UndoCommand extends Command {
 
     private Undo undo;
+
+    public UndoCommand() {
+        undo = new Undo();
+    }
     /**
      * Executes the command.
      *
@@ -17,11 +21,6 @@ public class UndoCommand extends Command {
      */
     @Override
     public String execute() throws DukeException, IOException {
-        if (!DukeConstants.isUndoable) {
-            return "Please input an undo-able task."
-                    + "\nCommands 'delete', 'todo', 'event', 'deadline' and 'done' can be undone";
-        }
-        DukeConstants.isUndoable = false;
         return undo.undo();
     }
 }
