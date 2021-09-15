@@ -10,7 +10,7 @@ import yoyo.task.TaskList;
  */
 public class DialogHandler {
     /**
-     * Say goodbye to users.
+     * Says goodbye to users.
      */
     public String sayGoodbye() {
         return "Bye. Hope to see you again soon!";
