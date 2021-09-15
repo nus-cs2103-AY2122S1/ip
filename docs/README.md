@@ -1,6 +1,6 @@
 # User Guide
 
-*Please note: Do create a "data" folder, with a "duketest.txt" inside, within the same folder as the jar file.
+*Please note: Within the same folder as the jar file, create a "data" folder, with a "duketest.txt" inside.
 
 ## Features 
 
@@ -80,7 +80,7 @@ Got it. I've added this task:
 Now you have x tasks in the list.
 ```
 
-### `list` - Show all tasks stored.
+### `list` - Show all tasks stored
 
 Displays all tasks with their relevant details in a list format.
 
@@ -98,7 +98,7 @@ Here are the tasks in your list:
   ...
 ```
 
-### `done` - Mark a specific task as done.
+### `done` - Mark a specific task as done
 
 Marks the task at the given index in the list as done.
 
