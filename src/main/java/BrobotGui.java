@@ -68,6 +68,9 @@ public class BrobotGui extends Application {
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(UI.getGreetingText()), new ImageView(brobot))
+        );
 
         userInput.setPrefWidth(325.0);
 
