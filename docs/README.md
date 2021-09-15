@@ -137,3 +137,8 @@ Shuts down the app immediately.
 Example of usage:
 
 `bye`
+
+## Credits
+1. https://www.flaticon.com/free-icon/user_1736218?term=user&related_id=1736218 Kiranshastry
+2. https://www.flaticon.com/free-icon/hacker_1473736?term=hackers&related_id=1473736 Eucalyp
+3. https://www.pinterest.com/pin/540291286525012021/ Gr8desktopbackgrounds.com
