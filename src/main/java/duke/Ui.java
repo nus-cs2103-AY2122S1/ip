@@ -15,19 +15,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String LOGO =
-            "$$$$$$$\\                                                             $$$$$\\                     $$\\       \n" +
-            "$$  __$$\\                                                            \\__$$ |                    $$ |      \n" +
-            "$$ |  $$ | $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\              $$ | $$$$$$\\   $$$$$$$\\ $$ |  $$\\ \n" +
-            "$$$$$$$  |$$  __$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\             $$ | \\____$$\\ $$  _____|$$ | $$  |\n" +
-            "$$  ____/ $$$$$$$$ |$$ /  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \\__|      $$\\   $$ | $$$$$$$ |$$ /      $$$$$$  / \n" +
-            "$$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |            $$ |  $$ |$$  __$$ |$$ |      $$  _$$<  \n" +
-            "$$ |      \\$$$$$$$\\ $$$$$$$  |$$$$$$$  |\\$$$$$$$\\ $$ |            \\$$$$$$  |\\$$$$$$$ |\\$$$$$$$\\ $$ | \\$$\\ \n" +
-            "\\__|       \\_______|$$  ____/ $$  ____/  \\_______|\\__|             \\______/  \\_______| \\_______|\\__|  \\__|\n" +
-            "                    $$ |      $$ |                                                                        \n" +
-            "                    $$ |      $$ |                                                                        \n" +
-            "                    \\__|      \\__|                                                                        ";
-
     private static final String END_TEXT = "Pepper Jack love Fraggle Rock!";
 
     private static final String[] LIST_OF_COMMAND_USAGE_TEXT = {
@@ -63,7 +50,7 @@ public class Ui {
      * @return Formatted reply to display to user.
      */
     public static String formatReply(String str) {
-        return "[PEPPER JACK]\n" + str + "\n";
+        return str + "\n";
     }
 
     /**
@@ -94,8 +81,8 @@ public class Ui {
     }
 
     /** Display welcome message */
-    public String showWelcome() {
-        return "The name is\n" + LOGO + "\n" + formatReply("This Pepper Jack, wassup!");
+    public static String showWelcome() {
+        return formatReply("This Pepper Jack, wassup!");
     }
 
     /** Display error message */

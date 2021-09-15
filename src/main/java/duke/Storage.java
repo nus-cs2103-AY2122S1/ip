@@ -23,6 +23,10 @@ public class Storage {
     /** File path string to data of tasks to load/save */
     private String filePath;
 
+    /** Regex of data file format */
+    public static final Pattern TASK_FORMAT = Pattern
+            .compile("\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)");
+
     /**
      * Storage constructor using file path to load/save tasks.
      *
@@ -52,9 +56,10 @@ public class Storage {
             Scanner sc = new Scanner(tasks);
             while (sc.hasNext()) {
                 // Parse string to get task type, status, and description
-                String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(sc.nextLine());
+                Matcher matcher = TASK_FORMAT.matcher(sc.nextLine());
+                if (!matcher.matches()) {
+                    throw new DukeException("There was a problem loading your saved tasks!");
+                }
 
                 String type = matcher.group("type");
                 String desc = matcher.group("desc");
@@ -89,7 +94,7 @@ public class Storage {
      */
     public void save(TaskList taskList) throws DukeException {
         //  Does not need to save anything if there are no tasks to be saved
-        if (taskList.size() == 0)
+        if (taskList.size() == 0) return;
 
         try {
             File file = new File(filePath);
