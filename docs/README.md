@@ -29,10 +29,12 @@ Chatbot Window
 ```
 java -jar retriever-1.0.jar
 ```
+
 * [OPTIONAL] If you want to enable assertions and run, type in the following command.
 ```
 java -jar -ea retriever-1.0.jar
 ```
+
 3. That's all. Enjoy and Don't forget to support me on GitHub [here](https://github.com/Jai2501).
 
 ---
@@ -100,13 +102,12 @@ bye
 
 Expected outcome:
 
-The Chatbot would close, indicating that you have successfully terminated the
-session.
-
 ```
 -> Sad To See You Go!
 ```
 
+The Chatbot would close, indicating that you have successfully terminated the
+session.
 
 ### ```deadline``` - To add a deadline type task
 
@@ -126,15 +127,17 @@ deadline CS2103T iP /by 17/09/2021
 
 Expected outcome:
 
-The Chatbot would print a message suggesting that you have successfully added the
-deadline type task. However, if you make a mistake in the ```keyword```, 
-the ```command format``` or the ```date format```, an error message would be shown.
-
 ```
 Where's My Treat? I Added:
 [D][ ] CS2103T iP (by: Sep 17 2021)
 You Owe Me 1 Treat(s), Master!
 ```
+
+<span color="red">
+The Chatbot would print a message suggesting that you have successfully added the
+deadline type task. However, if you make a mistake in the ```keyword```,
+the ```command format``` or the ```date format```, an error message would be shown.
+</span>
 
 ### ```event``` - To add an event type task
 
@@ -153,15 +156,17 @@ event Apple Event /at 15/09/2021
 
 Expected outcome:
 
-The Chatbot would print a message suggesting that you have successfully added the
-event type task. However, if you make a mistake in the ```keyword```,
-the ```command format``` or the ```date format```, an error message would be shown.
-
 ```
 Where's My Treat? I Added:
 [E][ ] Apple Event  (at: Sep 15 2021)
 You Owe Me 1 Treat(s), Master!
 ```
+
+<span color="red">
+The Chatbot would print a message suggesting that you have successfully added the
+event type task. However, if you make a mistake in the ```keyword```,
+the ```command format``` or the ```date format```, an error message would be shown.
+</span>
 
 ### ```delete``` - To delete a task
 
@@ -180,17 +185,20 @@ delete 1
 
 Expected outcome:
 
-The Chatbot would print a message showcasing the task deleted, and how many
-tasks are still present in the task list. However, if you make a mistake
-in the ```keyword```, the ```command format``` or the ```TASK_NUMBER```,
-an error message would be shown.
-
 ```
 Woof! Whose a Bad Boy?
 Task Deleted!
 [D][ ] CS2103T iP (by: Sep 17 2021)
 You Owe Me 1 Treat(s), Master!
 ```
+
+<span color="red">
+The Chatbot would print a message showcasing the task deleted, and how many
+tasks are still present in the task list. However, if you make a mistake
+in the ```keyword```, the ```command format``` or the ```TASK_NUMBER```,
+an error message would be shown.
+</span>
+
 
 ### ```done``` - To mark a task as done
 
@@ -209,15 +217,17 @@ done 1
 
 Expected outcome:
 
-The Chatbot would print a message showcasing the task marked as done.
-However, if you make a mistake in the ```keyword```, the ```command format```
-or the ```TASK_NUMBER```, an error message would be shown.
-
 ```
 Woof! Whose a Good Boy?
 Task Done!
 [D][X] CS2103T iP (by: Sep 17 2021)
 ```
+
+<span color="red">
+The Chatbot would print a message showcasing the task marked as done.
+However, if you make a mistake in the ```keyword```, the ```command format```
+or the ```TASK_NUMBER```, an error message would be shown.
+</span>
 
 ### ```find``` - To find tasks with similar keywords
 
@@ -236,16 +246,17 @@ find apple
 
 Expected outcome:
 
-The Chatbot would print a list of tasks which have the keyword present in them.
-However, if you make a mistake in the ```keyword``` or
-the ```command format```, an error message would be shown.
-
 ```
 Woof! Look What I Found: 
 1. [E][ ] Apple Event (at: Sep 15 2021)
 You Owe Me 1 Treat(s), Master!
 ```
 
+<span color="red">
+The Chatbot would print a list of tasks which have the keyword present in them.
+However, if you make a mistake in the ```keyword``` or
+the ```command format```, an error message would be shown.
+</span>
 
 ### ```list``` - To show all the tasks present in the task list
 
@@ -264,13 +275,13 @@ list
 
 Expected outcome:
 
-The Chatbot would print a list showcasing the tasks present.
-
 ```
 Woof! Whose a Good Boy?
 Task Done!
 [D][X] CS2103T iP (by: Sep 17 2021)
 ```
+
+The Chatbot would print a list showcasing the tasks present.
 
 ### ```help``` - To show all the possible commands
 
@@ -289,8 +300,6 @@ help
 ```
 
 Expected outcome:
-
-The Chatbot would print the command details.
 
 ```
 Master, I shall guide you to my best ability to smell.
@@ -333,6 +342,8 @@ Use the view command to view scheduled tasks for a day.
 Command Example: view 23/09/2021
 ```
 
+The Chatbot would print the command details.
+
 ### ```todo``` - To add a todo type task
 
 If the task you wish to add is a todo and has no fixed due date, you may use the
@@ -350,15 +361,17 @@ todo Laundry
 
 Expected outcome:
 
-The Chatbot would print a message suggesting that you have successfully added the
-todo type task. However, if you make a mistake in the ```keyword``` or
-the ```command format```, an error message would be shown.
-
 ```
 Where's My Treat? I Added:
 [T][ ] Laundry
 You Owe Me 1 Treat(s), Master!
 ```
+
+<span color="red">
+The Chatbot would print a message suggesting that you have successfully added the
+todo type task. However, if you make a mistake in the ```keyword``` or
+the ```command format```, an error message would be shown.
+</span>
 
 
 ### ```view``` - To view the tasks scheduled for a day
@@ -379,15 +392,17 @@ view 23/09/2021
 
 Expected outcome:
 
-The Chatbot would print a list containing the tasks due on that particular date.
-However, if you make a mistake in the ```keyword```,
-the ```command format``` or the ```date format```, an error message would be shown.
-
 ```
 Master, You are Busy For The Day...
 1. [D][ ] CS2100 Assignment (by: Sep 23 2021)
 2. [E][ ] Tesla Cyber Truck Launch (at: Sep 23 2021)
 ```
+
+<span color="red">
+The Chatbot would print a list containing the tasks due on that particular date.
+However, if you make a mistake in the ```keyword```,
+the ```command format``` or the ```date format```, an error message would be shown.
+</span>
 
 ---
 ## Command Summary
