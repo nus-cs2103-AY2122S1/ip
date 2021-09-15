@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke.ui;
+
+import duke.task.*;
 
 public class Ui {
     private static final String line = "____________________________________________________________";

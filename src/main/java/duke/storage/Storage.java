@@ -1,12 +1,17 @@
+package duke.storage;
+
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.task.*;
+import duke.exception.DukeException;
+import duke.command.Parser;
 
 public class Storage {
     private String filePath;
@@ -17,7 +22,7 @@ public class Storage {
         this.tasks= new ArrayList<>();
     }
 
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
             Scanner fileInput = new Scanner(f);
