@@ -51,7 +51,7 @@ public class Deadline extends Task {
         int hour = this.by.getHour();
         int minute = this.by.getMinute();
 
-        String toPrint = String.format("[D]%s (at: %s %d %d %s:%s)",
+        String toPrint = String.format("[D]%s (by: %s %d %d %s:%s)",
                 super.toString(), month, date, year, hour, minute);
         return toPrint;
     }
