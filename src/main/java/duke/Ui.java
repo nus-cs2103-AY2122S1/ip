@@ -1,6 +1,5 @@
 package duke;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Button;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Deals with the interaction of a user.
  */
-public class Ui implements Cloneable {
+public class Ui {
     private final String OUTRO = "Bye. Hope to see you again soon!";
 
     private ScrollPane scrollPane;
@@ -129,6 +128,14 @@ public class Ui implements Cloneable {
         return "Sorry, there are no matching tasks";
     }
 
+    /**
+     * String to be printed on GUI upon opening Duke.
+     *
+     * @return String to be printed on GUI.
+     */
+    public String greetingMessageToString() {
+        return "    Hello, welcome to Duke! Type help to see your available commands.";
+    }
 
     /**
      * Initialises the Gui.
@@ -173,27 +180,45 @@ public class Ui implements Cloneable {
 
         mainLayout.setPrefSize(500.0, 600.0);
 
+        setUpScrollPane(scrollPane);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setSpacing(25.0);
+        userInputField.setPrefWidth(435.0);
+        sendButton.setPrefWidth(55.0);
+
+        setUpAnchorPane(scrollPane, sendButton, userInputField);
+
+        scrollPane.setContent(dialogContainer);
+        mainLayout.getChildren().addAll(scrollPane, userInputField, sendButton);
+    }
+
+    /**
+     * Sets up ScrollPane.
+     *
+     * @param scrollPane Current ScrollPane to be set up.
+     */
+    public void setUpScrollPane(ScrollPane scrollPane) {
         scrollPane.setPrefSize(485.0, 535.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+    }
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.setSpacing(25.0);
-
-        userInputField.setPrefWidth(435.0);
-
-        sendButton.setPrefWidth(55.0);
-
+    /**
+     * Sets up AnchorPane.
+     *
+     * @param scrollPane Sets current ScrollPane.
+     * @param sendButton Sets current Button.
+     * @param userInputField Sets current TextField.
+     */
+    public void setUpAnchorPane(ScrollPane scrollPane, Button sendButton, TextField userInputField) {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInputField, 1.0);
         AnchorPane.setBottomAnchor(userInputField, 1.0);
-
-        scrollPane.setContent(dialogContainer);
-        mainLayout.getChildren().addAll(scrollPane, userInputField, sendButton);
     }
 
     /**
@@ -239,10 +264,5 @@ public class Ui implements Cloneable {
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInputField.clear();
-    }
-
-
-    public Ui clone() throws CloneNotSupportedException {
-        return (Ui) super.clone();
     }
 }

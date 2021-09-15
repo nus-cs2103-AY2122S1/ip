@@ -1,9 +1,6 @@
 package duke;
 
-import org.w3c.dom.events.EventException;
-
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -87,6 +84,10 @@ public class Event extends Task implements GeneralCommand {
         }
     }
 
+    /**
+     * Formats the date and time in order to be
+     * parsed into the DateTimeFormatter by constructor.
+     */
     public void formatLocalDateTimeDefault() {
         if (this.dateAndTime.substring(0, 1).matches("[0-9]")) {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
