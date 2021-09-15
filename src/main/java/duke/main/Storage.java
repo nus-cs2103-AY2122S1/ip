@@ -3,6 +3,7 @@ package duke.main;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -37,10 +38,20 @@ public class Storage {
             List<Task> taskList = taskString.map(Parser::generateTaskFromLine).collect(Collectors.toList());
             return new TaskList(taskList);
         } catch (IOException e) {
-            throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
+            makeTasksFile();
+            return new TaskList();
         } catch (ArrayIndexOutOfBoundsException e) {
             resetTasks();
             throw new DukeException("\t OOPS!!! Your tasks might be corrupted.");
+        }
+    }
+
+    private void makeTasksFile() {
+        File newFile = new File(filePath.toString());
+        try {
+            newFile.createNewFile();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
