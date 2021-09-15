@@ -32,7 +32,7 @@ public class Virushade extends Application {
     private Scene scene;
     private AnchorPane mainLayout;
 
-    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/Telescope.png"));
     private final Image VIRUSHADE = new Image(this.getClass().getResourceAsStream("/images/Virushade.png"));
 
     /**
