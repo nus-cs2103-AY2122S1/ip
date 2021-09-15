@@ -63,7 +63,7 @@ public abstract class Task {
      * @return X for true (done) and " " for false (not done)
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "✔" : " ✘ ");
     }
 
     /** mark the current models.task as done. */

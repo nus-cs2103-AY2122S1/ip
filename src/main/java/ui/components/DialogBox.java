@@ -1,5 +1,7 @@
-package ui;
+package ui.components;
 
+import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,8 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -24,7 +28,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog = new Label();
     @FXML
-    private ImageView displayPicture = new ImageView();
+    private Circle displayPicture = new Circle();
 
     /**
      * Constructor for the dialog box
@@ -38,12 +42,23 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.setText(text);
-        displayPicture.setImage(image);
+        Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(1000));
+            }
 
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+            protected void interpolate(double frac) {
+                // cast to float so Math round to int
+                int n = Math.round(text.length() * (float) frac);
+                dialog.setText(text.substring(0, n));
+            }
+        };
 
+
+        displayPicture.setRadius(50);
+        displayPicture.setFill(new ImagePattern(image));
+
+        animation.play();
         this.setAlignment(Pos.TOP_RIGHT);
     }
 

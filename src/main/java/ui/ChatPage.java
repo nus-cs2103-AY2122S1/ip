@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import ui.components.CenterBox;
+import ui.components.DialogBox;
 
 import java.io.IOException;
 
@@ -67,7 +69,7 @@ public class ChatPage extends AnchorPane {
         alice.getUi().setChatPage(this);
         mode = Mode.DEFAULT;
         setActionToElements();
-        printWelcomeText();
+        putWelcomeText();
     }
 
     private void setActionToElements() {
@@ -121,17 +123,11 @@ public class ChatPage extends AnchorPane {
     /**
      * Print initial welcoming message
      */
-    public void printWelcomeText() {
+    public void putWelcomeText() {
         try {
-            Label logo = getDialogLabel("Alice");
-            logo.setStyle("-fx-font: normal italic 72px 'verdana' ");
-
-            Label welcome = getDialogLabel(Ui.getWelcomeText());
-
-            dialogContainer.getChildren().addAll(
-                    logo,
-                    welcome
-            );
+            CenterBox welcomeBox = CenterBox.getCenterBox("Alice"
+                    , "My name is Alice, how can I help you organize today?");
+            dialogContainer.getChildren().add(welcomeBox);
             showCurrentList();
         } catch (Exception e) {
             printError(e);

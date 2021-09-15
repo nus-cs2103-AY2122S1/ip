@@ -1,6 +1,5 @@
 package ui;
 
-import alice.Alice;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.stage.Stage;
 import storage.Storage;
+import ui.components.AlertBox;
 
 import java.io.File;
 import java.io.IOException;
@@ -164,7 +164,7 @@ public class StartPage extends AnchorPane {
             Scene scene = new Scene(ap);
             // implement alice before setting the scene to stage
             fxmlLoaderChatPage.<ChatPage>getController().setUpByFileName(inputField.getText());
-            fxmlLoaderChatPage.<ChatPage>getController().printWelcomeText();
+            fxmlLoaderChatPage.<ChatPage>getController().putWelcomeText();
             // set and show scene to finalise
             stage.setScene(scene);
         } catch (IOException e) {
