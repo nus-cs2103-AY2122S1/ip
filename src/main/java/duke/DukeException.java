@@ -11,6 +11,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructs a DukeException with type of that exception.
+     *
      * @param type Type of exception
      */
     public DukeException(ExceptionType type) {
@@ -20,6 +21,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructs a DukeException with the type of that exception and additional information describing it.
+     *
      * @param type type of exception
      * @param otherMessage additional information describing the exception
      */

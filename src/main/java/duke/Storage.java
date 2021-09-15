@@ -19,14 +19,15 @@ public class Storage {
     private static final String SAVE_FILENAME = "duke.txt";
     private static Path savePath;
 
-    private boolean initialized;
+    private boolean isInitialized;
 
     public Storage() {
-        this.initialized = false;
+        this.isInitialized = false;
     }
 
     /**
      * Initializes save path with default save path.
+     *
      * @throws DukeException if failed to create file
      */
     protected void initialize() throws DukeException {
@@ -51,7 +52,7 @@ public class Storage {
             }
 
             savePath = path;
-            this.initialized = true;
+            this.isInitialized = true;
             assert Files.exists(savePath) : "Failed to create file at " + savePath;
         } catch (IOException e) {
             throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
@@ -60,6 +61,7 @@ public class Storage {
 
     /**
      * Initializes save path with given save path.
+     *
      * @param pathStr string of given path, ending with save file name
      * @throws DukeException if failed to create file
      */
@@ -83,7 +85,7 @@ public class Storage {
             }
 
             savePath = path;
-            this.initialized = true;
+            this.isInitialized = true;
             assert Files.exists(savePath) : "Failed to create file at " + savePath;
         } catch (IOException e) {
             throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
@@ -92,11 +94,12 @@ public class Storage {
 
     /**
      * Appends a line of text to the end of save file.
+     *
      * @param textToWrite text to write to save file
      * @throws DukeException if failed to write to save file
      */
     public void writeLine(String textToWrite) throws DukeException, IllegalArgumentException {
-        if (!this.initialized) {
+        if (!this.isInitialized) {
             return;
         }
         if (textToWrite == null) {
@@ -112,13 +115,14 @@ public class Storage {
     }
 
     /**
-     * Remove a line of text in save file
+     * Removes a line of text in save file
+     *
      * @param lineIndex index of line to remove
      * @throws DukeException if failed to write to save file
      * @throws IllegalArgumentException if line index is negative
      */
     public void removeLine(int lineIndex) throws DukeException, IllegalArgumentException {
-        if (!this.initialized) {
+        if (!this.isInitialized) {
             return;
         }
         if (lineIndex < 0) {
@@ -134,11 +138,12 @@ public class Storage {
     }
 
     /**
-     * Remove all contents in save file
+     * Removes all contents in save file
+     *
      * @throws DukeException if failed to write to save file
      */
     public void removeAll() throws DukeException {
-        if (!this.initialized) {
+        if (!this.isInitialized) {
             return;
         }
         try {
@@ -149,14 +154,15 @@ public class Storage {
     }
 
     /**
-     * Change a line in save file
+     * Changes a line in save file
+     *
      * @param lineIndex index of line to change
      * @param textToWrite new text at the line
      * @throws DukeException if failed to write to save file
      * @throws IllegalArgumentException if line index is negative or text to write is null
      */
     public void setLine(int lineIndex, String textToWrite) throws DukeException {
-        if (!this.initialized) {
+        if (!this.isInitialized) {
             return;
         }
         if (lineIndex < 0) {
@@ -175,11 +181,12 @@ public class Storage {
 
     /**
      * Checks if save file is empty.
+     *
      * @return true if save file is empty, false otherwise
      * @throws DukeException if failed to read from save file
      */
     protected boolean isEmpty() throws DukeException {
-        if (!this.initialized) {
+        if (!this.isInitialized) {
             return true;
         }
         try {
@@ -191,11 +198,12 @@ public class Storage {
 
     /**
      * Reads all lines from save file.
+     *
      * @return the lines from save file as a list
      * @throws DukeException if failed to read from save file
      */
     protected List<String> getFileContents() throws DukeException {
-        if (!this.initialized) {
+        if (!this.isInitialized) {
             return new ArrayList<>();
         }
         try {

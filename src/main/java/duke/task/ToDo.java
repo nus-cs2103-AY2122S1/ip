@@ -3,6 +3,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Constructs a "to do" instance.
+     *
      * @param description Description of the "to do" instance.
      */
     protected ToDo(String description) {
@@ -11,6 +12,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a "to do" instance.
+     *
      * @param description Description of the "to do" instance.
      * @param isDone Has the task been done?
      */

@@ -38,6 +38,7 @@ public class Parser {
 
     /**
      * Convert user input to {@link duke.command.ICommand ICommand}.
+     *
      * @param s user command
      * @param listSize size of current task list
      * @return command for duke to execute
@@ -91,6 +92,7 @@ public class Parser {
 
     /**
      * Parses mark_done/delete command to retrieve line index.
+     *
      * @param s mark_done/delete command
      * @param listSize size of current list
      * @return Line index in save file to mark as done/delete.
@@ -113,6 +115,7 @@ public class Parser {
 
     /**
      * Parses deadline command to description and due time.
+     *
      * @param s deadline command
      * @return An string array of length 2, with the first element being description and the second being due time.
      * @throws DukeException If command is missing operand (description, due time) or missing keyword (" /by ")
@@ -138,6 +141,7 @@ public class Parser {
 
     /**
      * Parses event command to description and time period.
+     *
      * @param s event command
      * @return An string array of length 3, with the second element being description and the third being time period
      * @throws DukeException If command is missing operand (description, time period) or missing keyword (" /by ")
@@ -162,6 +166,7 @@ public class Parser {
 
     /**
      * Converts save data string to task.
+     *
      * @param s save data string
      * @return a new task constructed based on the given string
      * @throws DukeException if the string is not aligned with save data format

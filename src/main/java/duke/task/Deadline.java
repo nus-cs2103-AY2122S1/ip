@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline instance with description and due time.
+     *
      * @param description description of deadline
      * @param by due time. If given string is in format yyyy-mm-dd, a LocalDate instance will be created to
      *          store the date
@@ -30,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline instance with description, due time and task status.
+     *
      * @param description description of deadline
      * @param by due time. If given string is in format yyyy-mm-dd, a LocalDate instance will be created to
      *          store the date

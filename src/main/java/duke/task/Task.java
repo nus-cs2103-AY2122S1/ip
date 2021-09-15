@@ -56,7 +56,8 @@ public abstract class Task {
     }
 
     /**
-     * Convert the task into a string to store in local file.
+     * Converts the task into a string to store in local file.
+     *
      * The fields are divide by "|"; second parameter is 1 if the task is done, 0 otherwise.
      * @return a string to store in local file that represents the task.
      * @see duke.Parser#fileContentsToTask(String)

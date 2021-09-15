@@ -22,7 +22,8 @@ public class Ui {
     private Scanner scanner;
 
     /**
-     * Initialize Ui component with Ui mode.
+     * Initializes Ui component with Ui mode.
+     *
      * @param uiMode Does the
      */
     public Ui(UiMode uiMode) {
@@ -40,7 +41,8 @@ public class Ui {
     }
 
     /**
-     * Read next line of user command from System.in.
+     * Reads next line of user command from System.in.
+     *
      * @return next line of user command as string
      */
     public String readCommand() {
@@ -84,6 +86,8 @@ public class Ui {
 
     /**
      * Prints welcome message.
+     *
+     * @param mainWindow controller of main window
      */
     public void printWelcomeMessage(MainWindow mainWindow) {
         if (Ui.uiMode == UiMode.GUI) {
@@ -96,7 +100,8 @@ public class Ui {
     }
 
     /**
-     * Print contents of task list.
+     * Prints contents of task list.
+     *
      * @param taskList Duke's ask list
      */
     public static void printList(TaskList taskList) {
@@ -108,7 +113,8 @@ public class Ui {
     }
 
     /**
-     * Print contents of task list.
+     * Prints contents of task list.
+     *
      * @param listSize Size of current list.
      * @throws IllegalArgumentException if list size is negative
      */
@@ -122,6 +128,7 @@ public class Ui {
 
     /**
      * Prints found tasks info.
+     *
      * @param tasks Found tasks
      */
     public static void printFoundTasks(String[] tasks) {
@@ -137,6 +144,7 @@ public class Ui {
 
     /**
      * Prints a new task info.
+     *
      * @param taskStr String representation of the new task
      */
     public static void printNewTask(String taskStr) {
@@ -148,6 +156,7 @@ public class Ui {
 
     /**
      * Prints a removed task info.
+     *
      * @param taskStr String representation of the removed task.
      */
     public static void printRemoveTask(String taskStr) {
@@ -163,6 +172,7 @@ public class Ui {
 
     /**
      * Prints a task which is marked as done.
+     *
      * @param taskStr String representation of the task which is marked as done.
      */
     public static void printMarkDone(String taskStr) {
@@ -174,6 +184,7 @@ public class Ui {
 
     /**
      * Prints an error message based on exception type of DukeException.
+     *
      * @param e exception to print
      * @param userInput the latest user command before exception happens
      */
@@ -212,6 +223,7 @@ public class Ui {
 
     /**
      * Prints an error message based on exception type of DukeException.
+     *
      * @param e exception to print
      */
     public static void printErrorMessage(DukeException e) {

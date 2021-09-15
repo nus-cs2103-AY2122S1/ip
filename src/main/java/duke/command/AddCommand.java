@@ -16,7 +16,8 @@ public class AddCommand implements ICommand {
     private final Task task;
 
     /**
-     * Initialize the task to add.
+     * Initializes the task to add.
+     *
      * @param strArr Info of the task to add.
      */
     public AddCommand(String[] strArr) throws IllegalArgumentException {

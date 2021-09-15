@@ -18,6 +18,7 @@ public class Duke {
 
     /**
      * Initializes duke with specified UI mode
+     *
      * @param uiMode UI mode
      */
     public Duke(UiMode uiMode) {
@@ -34,6 +35,7 @@ public class Duke {
 
     /**
      * Initializes duke with given data save path.
+     *
      * @param pathStr string of save path, ending with the name of save file
      * @param uiMode UI mode
      */

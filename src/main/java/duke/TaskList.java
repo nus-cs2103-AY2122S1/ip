@@ -12,6 +12,7 @@ import duke.ui.Ui;
 public class TaskList extends ArrayList<Task> {
     /**
      * Takes a list of save data string, convert them to tasks and add them into list.
+     *
      * @param list lines of save data as list
      */
     protected void load(List<String> list) {
@@ -32,6 +33,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Checks there is an unfinished task which equals to the given task.
+     *
      * @param newTask given task to check
      * @param <T> type of task
      * @return if there is an unfinished task in list which equals to the given task
