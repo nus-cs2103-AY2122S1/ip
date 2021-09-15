@@ -5,14 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddTodoCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 
 /**
  * Represents the Parser class which makes sense of what the user typed.
@@ -30,30 +23,33 @@ public class Parser {
     public Command getCommand(String commandLine, TaskList tasks) throws DukeException {
         String[] fullCommand = commandLine.split(" ");
         String command = fullCommand[0];
-        String desc;
 
         switch (command) {
+        case "exit":
+            return new ExitCommand();
         case "list":
-            return new ListCommand("list");
+            return new ListCommand();
         case "done":
             hasIndex(fullCommand);
 
             ArrayList<Integer> doneIndexes = parseIndexes(fullCommand, tasks.size());
-            return new DoneCommand("done", doneIndexes);
+            return new DoneCommand(doneIndexes);
         case "delete":
             hasIndex(fullCommand);
 
             ArrayList<Integer> deleteIndexes = parseIndexes(fullCommand, tasks.size());
-            return new DeleteCommand("delete", deleteIndexes);
+            return new DeleteCommand(deleteIndexes);
         case "todo":
-            desc = commandLine.replace("todo", "").trim();
+            String todoDesc;
+            todoDesc = commandLine.replace("todo", "").trim();
 
-            if (desc.equals("")) {
+            if (todoDesc.equals("")) {
                 throw new DukeException("A to-do needs a description");
             }
 
-            return new AddTodoCommand(desc);
+            return new AddTodoCommand(todoDesc);
         case "deadline":
+            String deadlineDesc;
             String by;
             String[] deadlineArgs = commandLine.replace("deadline ", "").split("/by ");
 
@@ -61,12 +57,13 @@ public class Parser {
                 throw new DukeException("Invalid format for deadline");
             }
 
-            desc = deadlineArgs[0];
+            deadlineDesc = deadlineArgs[0];
             by = deadlineArgs[1];
 
             LocalDateTime deadlineDate = this.parseDate(by);
-            return new AddDeadlineCommand(desc, deadlineDate);
+            return new AddDeadlineCommand(deadlineDesc, deadlineDate);
         case "event":
+            String eventDesc;
             String at;
 
             String[] eventArgs = commandLine.replace("event ", "").split("/at ");
@@ -75,18 +72,19 @@ public class Parser {
                 throw new DukeException("Invalid format for event");
             }
 
-            desc = eventArgs[0];
+            eventDesc = eventArgs[0];
             at = eventArgs[1];
 
-            if (desc.equals("")) {
+            if (eventDesc.equals("")) {
                 throw new DukeException("An event needs a description");
             }
 
             LocalDateTime eventDate = this.parseDate(at);
-            return new AddEventCommand(desc, eventDate);
+            return new AddEventCommand(eventDesc, eventDate);
         case "find":
-            desc = commandLine.replace("find", "").trim();
-            return new FindCommand("find", desc);
+            String keyword;
+            keyword = commandLine.replace("find", "").trim();
+            return new FindCommand("find", keyword);
         default:
             throw new DukeException("I do not understand that command");
         }

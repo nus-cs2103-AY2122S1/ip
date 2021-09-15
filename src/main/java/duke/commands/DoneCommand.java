@@ -15,11 +15,10 @@ public class DoneCommand extends Command {
     /**
      * Constructor for DoneCommand
      *
-     * @param desc        Description of command.
      * @param doneIndexes The indexes of tasks to be marked.
      */
-    public DoneCommand(String desc, ArrayList<Integer> doneIndexes) {
-        super(desc);
+    public DoneCommand(ArrayList<Integer> doneIndexes) {
+        super("");
         Collections.sort(doneIndexes);
         this.doneIndexes = doneIndexes;
     }

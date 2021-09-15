@@ -9,11 +9,9 @@ import duke.tasks.Task;
 public class ListCommand extends Command {
     /**
      * Constructor for ListCommand.
-     *
-     * @param desc Description of command.
      */
-    public ListCommand(String desc) {
-        super(desc);
+    public ListCommand() {
+        super("");
     }
 
     /**

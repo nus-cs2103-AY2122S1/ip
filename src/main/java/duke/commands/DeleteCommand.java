@@ -15,11 +15,10 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand.
      *
-     * @param desc          Description of the delete command.
      * @param deleteIndexes The indexes of the tasks to be deleted.
      */
-    public DeleteCommand(String desc, ArrayList<Integer> deleteIndexes) {
-        super(desc);
+    public DeleteCommand(ArrayList<Integer> deleteIndexes) {
+        super("");
         Collections.sort(deleteIndexes);
         this.deleteIndexes = deleteIndexes;
 
