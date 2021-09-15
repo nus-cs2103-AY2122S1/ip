@@ -52,7 +52,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "duke.DukeRunner"
 }
 
 run {
@@ -62,5 +62,5 @@ run {
 
 shadowJar {
     archiveBaseName = "DuC"
-    archiveVersion = "1.0"
+    archiveVersion = "2.0"
 }
