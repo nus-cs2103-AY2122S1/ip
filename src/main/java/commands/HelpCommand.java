@@ -23,11 +23,12 @@ public class HelpCommand extends Command {
                 + "1." + AddToDoCommand.INPUT_FORMAT + "\n"
                 + "2." + AddDeadlineCommand.INPUT_FORMAT + "\n"
                 + "3." + AddEventCommand.INPUT_FORMAT + "\n"
-                + "4." + DeleteCommand.INPUT_FORMAT + "\n"
-                + "5." + FindCommand.INPUT_FORMAT + "\n"
-                + "6." + MarkDoneCommand.INPUT_FORMAT + "\n"
-                + "7." + ListCommand.INPUT_FORMAT
-                + "8. " + HelpCommand.INPUT_FORMAT;
+                + "4." + AddFixedDurationCommand.INPUT_FORMAT + "\n"
+                + "5." + DeleteCommand.INPUT_FORMAT + "\n"
+                + "6." + FindCommand.INPUT_FORMAT + "\n"
+                + "7." + MarkDoneCommand.INPUT_FORMAT + "\n"
+                + "8." + ListCommand.INPUT_FORMAT
+                + "9." + HelpCommand.INPUT_FORMAT;
         return output;
     }
 }
