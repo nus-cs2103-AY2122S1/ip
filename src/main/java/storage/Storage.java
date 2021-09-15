@@ -46,16 +46,13 @@ public class Storage {
                 String[] output = line.split("\\s\\|\\s");
                 switch (output[0]) {
                 case "T":
-                    Task newTodo = new Todo(output[2], output[4], output[1].equals("1"));
-                    taskList.add(newTodo);
+                    loadTodo(taskList, output);
                     break;
                 case "D":
-                    Task newDeadline = new Deadline(output[2], output[3], output[4], output[1].equals("1"));
-                    taskList.add(newDeadline);
+                    loadDeadline(taskList, output);
                     break;
                 case "E":
-                    Task newEvent = new Event(output[2], output[3], output[4], output[1].equals("1"));
-                    taskList.add(newEvent);
+                    loadEvent(taskList, output);
                     break;
                 default:
                     System.out.println("Detected invalid task type. Please check...");
@@ -66,6 +63,39 @@ public class Storage {
             System.out.println("Something went wrong: " + e1.getMessage());
         }
         return taskList;
+    }
+
+    private void loadTodo(ArrayList<Task> taskList, String[] output) {
+        Task newTodo;
+        if (output.length < 4) {
+            newTodo = new Todo(output[2], "", output[1].equals("1"));
+
+        } else {
+            newTodo = new Todo(output[2], output[4], output[1].equals("1"));
+        }
+        taskList.add(newTodo);
+    }
+
+    private void loadDeadline(ArrayList<Task> taskList, String[] output) throws InvalidDateFormat {
+        Task newDeadline;
+        if (output.length < 5) {
+            newDeadline = new Deadline(output[2], output[3], "", output[1].equals("1"));
+
+        } else {
+            newDeadline = new Deadline(output[2], output[3], output[4], output[1].equals("1"));
+        }
+        taskList.add(newDeadline);
+    }
+
+    private void loadEvent(ArrayList<Task> taskList, String[] output) throws InvalidDateFormat {
+        Task newEvent;
+        if (output.length < 5) {
+            newEvent = new Event(output[2], output[3], "", output[1].equals("1"));
+
+        } else {
+            newEvent = new Event(output[2], output[3], output[4], output[1].equals("1"));
+        }
+        taskList.add(newEvent);
     }
 
     /**

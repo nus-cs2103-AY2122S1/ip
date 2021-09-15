@@ -52,28 +52,20 @@ public class AddCommand extends Command {
         case "todo":
             this.taskType = TaskType.TODO;
             checkDescription(input, TaskType.TODO);
-            this.taskInfo = padTaskInfo(input.substring(5));
+            this.taskInfo = input.substring(5);
             break;
         case "deadline":
             this.taskType = TaskType.DEADLINE;
             checkDescription(input, TaskType.DEADLINE);
-            this.taskInfo = padTaskInfo(input.substring(9));
+            this.taskInfo = input.substring(9);
             break;
         case "event":
             this.taskType = TaskType.EVENT;
             checkDescription(input, TaskType.EVENT);
-            this.taskInfo = padTaskInfo(input.substring(6));
+            this.taskInfo = input.substring(6);
             break;
         default:
             break;
-        }
-    }
-
-    private String padTaskInfo(String taskInfo) {
-        if (!taskInfo.contains(" --")) {
-            return taskInfo + " -- ";
-        } else {
-            return taskInfo;
         }
     }
 
@@ -103,27 +95,56 @@ public class AddCommand extends Command {
                         + "Now you have %d tasks in the list.\n", newTask, tasks.size());
     }
 
-    private Task createTask(TaskType type) throws InvalidDateFormat {
-        Task outputTask = null;
-        switch (type) {
-        case TODO:
+    private Task createTodo() {
+        if (this.taskInfo.contains(" --") && (this.taskInfo.split(" --").length > 1)) {
             String todoDescription = taskInfo.split(" --")[0];
             String todoNotes = taskInfo.split(" --")[1];
-            outputTask = new Todo(todoDescription, todoNotes, false);
-            break;
-        case DEADLINE:
+            return new Todo(todoDescription, todoNotes, false);
+        } else {
+            String todoDescription = taskInfo;
+            return new Todo(todoDescription, "", false);
+        }
+    }
+
+    private Task createDeadline() throws InvalidDateFormat {
+        if (taskInfo.contains(" --") && (this.taskInfo.split(" --").length > 1)) {
             String deadlineDescription = taskInfo.split(" /by ")[0];
             String deadlineDateAndNotes = taskInfo.split(" /by ")[1];
             String deadlineDate = deadlineDateAndNotes.split(" --")[0];
             String deadlineNotes = deadlineDateAndNotes.split(" --")[1];
-            outputTask = new Deadline(deadlineDescription, deadlineDate, deadlineNotes, false);
-            break;
-        case EVENT:
+            return new Deadline(deadlineDescription, deadlineDate, deadlineNotes, false);
+        } else {
+            String deadlineDescription = taskInfo.split(" /by ")[0];
+            String deadlineDate = taskInfo.split(" /by ")[1];
+            return new Deadline(deadlineDescription, deadlineDate, "", false);
+        }
+    }
+
+    private Task createEvent() throws InvalidDateFormat {
+        if (taskInfo.contains(" --") && (this.taskInfo.split(" --").length > 1)) {
             String eventDescription = taskInfo.split(" /at ")[0];
             String eventDateAndNotes = taskInfo.split(" /at ")[1];
             String eventDate = eventDateAndNotes.split(" --")[0];
             String eventNotes = eventDateAndNotes.split(" --")[1];
-            outputTask = new Event(eventDescription, eventDate, eventNotes, false);
+            return new Event(eventDescription, eventDate, eventNotes, false);
+        } else {
+            String eventDescription = taskInfo.split(" /at ")[0];
+            String eventDate = taskInfo.split(" /at ")[1];
+            return new Event(eventDescription, eventDate, "", false);
+        }
+    }
+
+    private Task createTask(TaskType type) throws InvalidDateFormat {
+        Task outputTask = null;
+        switch (type) {
+        case TODO:
+            outputTask = createTodo();
+            break;
+        case DEADLINE:
+            outputTask = createDeadline();
+            break;
+        case EVENT:
+            outputTask = createEvent();
             break;
         default:
             break;
@@ -131,4 +152,6 @@ public class AddCommand extends Command {
         assert outputTask != null : "Task type should have matched";
         return outputTask;
     }
+
+
 }

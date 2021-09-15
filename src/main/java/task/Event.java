@@ -24,8 +24,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(),
-                date.format(dayOutputFormatter));
+        return String.format("[E]%s (at: %s)\n%s", super.toString(),
+                date.format(dayOutputFormatter), this.notes);
     }
 
     @Override

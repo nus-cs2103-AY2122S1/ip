@@ -37,9 +37,9 @@ public class Duke {
     protected String getResponse(String input) {
         try {
             Command c = Command.parse(input);
-            return "Duke: " + c.execute(tasks, ui, storage);
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e){
-            return "Duke: " + e.getMessage();
+            return e.getMessage();
         }
     }
 }

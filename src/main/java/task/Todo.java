@@ -23,7 +23,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[T]%s\n%s", super.toString(), this.notes);
     }
 
     @Override
