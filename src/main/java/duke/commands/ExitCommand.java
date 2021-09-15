@@ -1,16 +1,15 @@
 package duke.commands;
 
-import duke.TaskList;
-
 import java.io.IOException;
+
+import duke.TaskList;
 
 /**
  * Command that exits the program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Constructor for ExitCommand.
-     *
      */
     public ExitCommand() {
         super("");
