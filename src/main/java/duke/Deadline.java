@@ -11,7 +11,7 @@ public class Deadline extends Task {
      * Creates a Deadline object.
      *
      * @param description Description of the task.
-     * @param timeBy Due date of the task.
+     * @param timeBy      Due date of the task.
      */
     public Deadline(String description, String timeBy) {
         super(description);
@@ -25,7 +25,9 @@ public class Deadline extends Task {
      * @return A character representing the task type.
      */
     @Override
-    public char getTaskType() { return 'D'; }
+    public char getTaskType() {
+        return 'D';
+    }
 
     /**
      * Returns the due date of the task as a String.

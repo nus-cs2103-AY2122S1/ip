@@ -6,8 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +31,12 @@ public class MainWindow extends AnchorPane{
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Image bgImage = new Image(this.getClass().getResourceAsStream("/images/betterDukeBackground.png"));
+        BackgroundImage myBI= new BackgroundImage(bgImage,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,
+                BackgroundSize.DEFAULT);
+        dialogContainer.setBackground(new Background(myBI));
+
     }
 
     public void setDuke(Duke d) {

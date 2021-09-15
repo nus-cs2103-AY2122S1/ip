@@ -18,6 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
@@ -30,7 +31,7 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,7 +41,15 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(0, 173, 253),
+        Paint colour;
+
+        if (isUser) {
+            colour = Color.rgb(253, 123, 24);
+        } else {
+            colour = Color.rgb(253, 222, 24);
+        }
+
+        dialog.setBackground(new Background(new BackgroundFill(colour,
                 new CornerRadii(5), new Insets(-3, -6, -3, -6))));
         dialog.setText(text);
         displayPicture.setFill(new ImagePattern(img));
@@ -57,11 +66,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, true);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, false);
         db.flip();
         return db;
     }
