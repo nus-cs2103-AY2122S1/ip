@@ -30,6 +30,8 @@ when you're done. No need to keep the application running.
 
 Need to quickly check what tasks you have? Duke starts up in an instant using the power of streams!
 
+-------------------------------------------------------------------
+
 ## Usage
 
 ### `todo` - Record todos, tasks with no deadlines
