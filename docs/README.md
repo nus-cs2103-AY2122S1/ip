@@ -173,6 +173,11 @@ Here are the matching tasks:
 ```
 
 ### Acknowledgements:
+<<<<<<< HEAD
 
 - Original Duke template forked from Prof Damith CS2103T github
 - GUI Design from Javafx tutorials
+=======
+- Original Duke template forked from Prof Damith CS2103T github
+- GUI Design from Javafx tutorials
+>>>>>>> dc8235569a6729ae305d4b0558a63f455c9028db
