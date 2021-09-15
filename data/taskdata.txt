@@ -1,1 +1,2 @@
-T | 0 | tutorial
+D | 1 | proposal submission | 17 Sep
+T | 1 | math homework

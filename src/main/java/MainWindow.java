@@ -1,4 +1,5 @@
 import captain.Captain;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,7 +11,7 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    public static final String WELCOME_MSG = "\tHello! I'm Adam, your personal chat bot."
+    public static final String WELCOME_MSG = "\tAhoy there!"
             + "\n\tHow may I assist you today?";
     @FXML
     private ScrollPane scrollPane;
