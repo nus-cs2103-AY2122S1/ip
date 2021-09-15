@@ -25,7 +25,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
 
-        String list = "";
+        String list = "Here is a list of all your tasks:\n";
 
         for (int i = 0; i < tasks.getSize(); i++) {
             list += (i + 1) + "." + tasks.getTask(i);
