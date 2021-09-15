@@ -6,7 +6,16 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public abstract class Command {
-    boolean isExit;
+    private boolean isExit;
+
+    /**
+     * Constructor for Command.
+     *
+     * @param isExit Whether is it Exit Command
+     */
+    public Command(boolean isExit) {
+        this.isExit = isExit;
+    }
     /**
      * Executes based on the command with the arguments provided.
      *

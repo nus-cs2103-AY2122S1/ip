@@ -17,8 +17,8 @@ public class DoneCommand extends Command {
      * @param taskNumber Task number of the task to be marked done.
      */
     public DoneCommand(int taskNumber) {
+        super(false);
         assert taskNumber >= 1;
-        this.isExit = false;
         this.taskNumber = taskNumber;
     }
 

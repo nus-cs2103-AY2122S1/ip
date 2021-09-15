@@ -18,8 +18,8 @@ public class DeleteCommand extends Command {
      * @param taskNumber Task number of the task to be deleted.
      */
     public DeleteCommand(int taskNumber) {
+        super(false);
         assert taskNumber >= 1;
-        this.isExit = false;
         this.taskNumber = taskNumber;
     }
 

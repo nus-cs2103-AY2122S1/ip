@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
      * Constructs ExitCommand object.
      */
     public ExitCommand() {
-        this.isExit = true;
+        super(true);
     }
 
     /**

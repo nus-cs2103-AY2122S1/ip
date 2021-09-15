@@ -13,7 +13,7 @@ public class LostCommand extends Command {
      * Constructor for Lost Command.
      */
     public LostCommand() {
-        this.isExit = false;
+        super(false);
     }
 
     /**

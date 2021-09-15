@@ -23,7 +23,7 @@ public class AddCommand extends Command {
      * @throws DukeException If description given is invalid.
      */
     public AddCommand(String command, String description) throws DukeException {
-        this.isExit = false;
+        super(false);
 
         switch(command) {
         case "todo":

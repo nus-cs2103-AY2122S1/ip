@@ -19,8 +19,8 @@ public class TagCommand extends Command {
      * @param taskNumber Task number of the task to be tag.
      */
     public TagCommand(String tag, int taskNumber) {
+        super(false);
         assert taskNumber >= 1;
-        this.isExit = false;
         this.tag = tag;
         this.taskNumber = taskNumber;
     }

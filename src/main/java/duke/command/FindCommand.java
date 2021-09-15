@@ -20,7 +20,7 @@ public class FindCommand extends Command {
      * @param keyWord Key Word to match the description of task
      */
     public FindCommand(String keyWord) {
-        this.isExit = false;
+        super(false);
         this.keyWord = keyWord;
     }
 

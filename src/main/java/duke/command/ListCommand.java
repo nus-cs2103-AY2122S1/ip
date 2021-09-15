@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      * Constructor for List Command.
      */
     public ListCommand() {
-        this.isExit = false;
+        super(false);
     }
 
     /**
