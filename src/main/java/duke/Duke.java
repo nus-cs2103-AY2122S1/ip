@@ -9,16 +9,20 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    
+
+    /**
+     * Constructor for Duke that initialises UI, Storage and Tasklist upon start. 
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt", "data/");
         tasks = new TaskList(storage.load());
     }
-    
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Parses user input to create respective command and execute it.
+     * @param input User input from GUI.
+     * @return String response to be displayed in GUI.
      */
     public String getResponse(String input) {
         try {

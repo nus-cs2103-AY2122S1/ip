@@ -8,6 +8,7 @@ import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkDoneCommand;
 import duke.exceptions.DukeException;
@@ -95,6 +96,9 @@ public class Parser {
                 }
                 command = new FindCommand(taskDescription);
                 break;
+            case "help":
+                command = new HelpCommand();
+                break;
             default:
                 throw new InvalidInputException();
             }
@@ -105,14 +109,17 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses search string to obtain keywords for searching through tasklist.
+     * @param searchString Search description from user input.
+     * @return Array of search words from broken down searchString. 
+     */
     public static ArrayList<String> parseSearchString(String searchString) {
         ArrayList<String> searchTerms = new ArrayList<>();
         searchTerms.add(searchString);
         if (searchString.contains(" ")) {
             for (String word : searchString.split(" ")) {
                 searchTerms.add(word);
-                // Can possibly split into subwords.
-                // E.g. Searching "birds" would return description with "bird"
             }
         }
         return searchTerms;

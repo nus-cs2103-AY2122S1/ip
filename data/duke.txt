@@ -1,5 +1,4 @@
-T / 1 / wash plates
-D / 1 / return book / 2021-12-10
-E / 0 / tutorial / 2021-10-23
-D / 1 / do tutorial / 2021-09-22
-E / 0 / tuition / 2019-12-30
+T / 1 / Read Book
+D / 0 / Return Book / 2021-09-08
+E / 0 / Buy Coffee / 2021-09-22
+E / 0 / Make Coffee / 2021-09-23

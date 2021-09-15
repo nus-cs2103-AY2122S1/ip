@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import duke.exceptions.TaskOutOfRangeException;
 import duke.tasks.Task;
@@ -69,6 +68,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Searches for tasks that match the searchDescription.
+     * @param searchDescription Search description from user input.
+     * @return List of tasks with matching task decriptions.
+     */
     public ArrayList<Task> findTask(String searchDescription) {
         ArrayList<String> searchTerms = Parser.parseSearchString(searchDescription.toLowerCase());
         ArrayList<Task> results = new ArrayList<>();
