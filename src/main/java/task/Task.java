@@ -30,9 +30,15 @@ public abstract class Task {
         return this.notes;
     }
 
+    public String showIfHaveNotes() {
+        return getNotes().isEmpty()
+                ? ""
+                : "**" + this.notes + "**";
+    }
+
     @Override
     public String toString() {
-        return String.format("[%s] %s\nNote: %s\n", this.getStatusIcon(), this.description, this.notes);
+        return String.format("[%s] %s\n%s\n", this.getStatusIcon(), this.description, showIfHaveNotes());
 
     }
 
