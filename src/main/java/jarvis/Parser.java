@@ -102,18 +102,20 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseTodo(String instruction) throws JarvisException, IOException {
+        int currIndex = 4;
+
         // If the description of the todo task is empty
-        if (instruction.length() < 5) {
-            throw new JarvisException(Ui.EMPTY_TODO_DESCRIPTION);
-
-        // If the description of the todo task is not empty
-        } else {
-            String taskDescription = instruction.substring(4);
-            Todo newTodo = new Todo(taskDescription);
-
-            // Add the task to the taskList array and update the document save in the user's local computer
-            return TaskList.addTaskAndUpdate(newTodo);
+        while (currIndex < instruction.length() && !instruction.substring(currIndex).startsWith(" ")) {
+            currIndex++;
         }
+        if (currIndex + 1 >= instruction.length()) {
+            throw new JarvisException(Ui.EMPTY_TODO_DESCRIPTION);
+        }
+
+        String taskDescription = instruction.substring(currIndex);
+        Todo newTodo = new Todo(taskDescription);
+        // Add the task to the taskList array and update the document save in the user's local computer
+        return TaskList.addTaskAndUpdate(newTodo);
     }
 
     /**
