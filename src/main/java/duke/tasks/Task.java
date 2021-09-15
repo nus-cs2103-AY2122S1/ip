@@ -75,7 +75,7 @@ public class Task {
      * @throws EmptyListException if the list of expenses is currently empty.
      * @throws InvalidIndexException if the index of expense to be deleted is out of bounds.
      */
-    public void deleteExpenseFromTask(int deleteIndex) throws EmptyListException,
+    public String deleteExpenseFromTask(int deleteIndex) throws EmptyListException,
             InvalidIndexException {
 
         if (expenses.isEmpty()) {
@@ -87,11 +87,11 @@ public class Task {
         for (String key : expenses.keySet()) {
             if (count == deleteIndex) {
                 expenses.remove(key);
-                break;
+                return key;
             }
             count++;
         }
-
+        return "";
     }
 
     /**

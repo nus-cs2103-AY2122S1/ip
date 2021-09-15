@@ -187,7 +187,7 @@ public class Parser {
 
         boolean isDelete = expense.matches("([0-9]+)\\s+(?i)/delete\\s+([0-9]+)");
         boolean isDisplay = expense.matches("([0-9]+)");
-        boolean isAdd = expense.matches("([0-9]+)\\s+(\\w+)\\s+(\\$)([0-9]+)");
+        boolean isAdd = expense.matches("([0-9]+)([\\s+(\\w+)\\s+]+)(\\$)([0-9]+)");
         boolean isSum = expense.matches("([0-9]+)\\s(?i)/sum$");
 
         try {
@@ -244,12 +244,13 @@ public class Parser {
     private ArrayList<String> separatePurposeAndAmount(String input) throws InvalidExpenseFormatException {
         input = input.trim();
         String[] parsedInfo = input.split("\\$");
-        if (parsedInfo.length > 2) {
-            throw new InvalidExpenseFormatException();
+        ArrayList<String> purpose = new ArrayList<>();
+        for (int i = 0; i < parsedInfo.length - 1; i++) {
+            purpose.add(parsedInfo[i].trim());
         }
         ArrayList<String> result = new ArrayList<>();
-        result.add(parsedInfo[0].trim());
-        result.add(parsedInfo[1].trim());
+        result.add(String.join(" ", purpose));
+        result.add(parsedInfo[parsedInfo.length - 1].trim());
         return result;
     }
 

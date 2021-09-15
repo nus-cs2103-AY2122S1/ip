@@ -50,7 +50,7 @@ public class TaskList {
     public String addToList(Task task) {
         taskList.add(task);
 
-        String message = "Got it. I've added this task: Added: " + task;
+        String message = "Got it. I've added this task:\n" + task;
         String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
         return message + "\nNow you have " + taskList.size() + taskGrammar + " in the list.";
     }
@@ -247,8 +247,11 @@ public class TaskList {
         }
         Task task = taskList.get(taskIndex);
         try {
-            task.deleteExpenseFromTask(deleteIndex);
-            return "I deleted " + (deleteIndex + 1) + " from " + task + "!";
+            String expensePurpose = task.deleteExpenseFromTask(deleteIndex);
+            if (expensePurpose == "") {
+                return "I couldn't find the expense you were looking for!";
+            }
+            return "I deleted:\n" + expensePurpose + "\nfrom " + task + "!";
         } catch (DukeException e) {
             return e.getMessage();
         }
