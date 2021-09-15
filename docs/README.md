@@ -15,8 +15,8 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
     * [Viewing help : `help`](#viewing-help--help)
 *  [Exiting the application: `bye`](#exiting-the-application-bye)
 ## Quick Setup
-1. Ensure you have Java 11 or above installed in your Computer.
-2. Using the Command Line, run the command java -jar duke.jar (i.e., run the command in the same folder as the jar file)
+    1. Ensure you have Java 11 or above installed in your Computer.
+    2. Using the Command Line, run the command java -jar duke.jar (i.e., run the command in the same folder as the jar file)
 
 Successfully opening TaskMan would lead you to a window like this
 

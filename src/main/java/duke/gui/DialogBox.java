@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.transform.Rotate;
 
 
 import java.io.IOException;
@@ -51,6 +52,8 @@ public class DialogBox extends HBox {
         alignDialogBoxBasedOnSpeaker(isDukeSpeaking);
         circleCropDisplayPicture(speakerImage);
         displayPicture.setImage(speakerImage);
+        displayPicture.setRotationAxis(Rotate.Y_AXIS);
+        displayPicture.setRotate(180);
     }
 
     /**
