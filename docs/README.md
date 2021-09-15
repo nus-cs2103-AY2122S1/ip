@@ -1,11 +1,13 @@
 # Duke User Guide
 
 ## Features
-1. Add todos, events, deadlines to your task list
-2. Mark finished tasks as completed
-3. Display all tasks that contain a specified keyword
+1. Add todos, events, deadlines to your task list.
+2. Mark finished tasks as completed.
+3. Display all tasks that contain a specified keyword.
 4. Delete tasks from the task list.
 5. Save a task list to offline storage.
+6. Displays a full list of commands when requesting for help.
+7. 
 ## Usage
 
 ### `help` - Retrieve a list of commands from Duke
