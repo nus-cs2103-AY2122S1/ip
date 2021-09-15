@@ -3,7 +3,7 @@ Duke is a desktop app designed to help you keep track of tasks through
 a Graphical user Interface (GUI).
 ## Features and Usage
 Upon starting Duke, you will see this:  
-![Ui picture](./Ui.PNG)  
+![Ui picture](Ui.png)  
 Simply click into the command box at the bottom and type any of the commands listed below!  
 ### Add tasks as a Todo, Event, or Deadline : <mark>todo</mark> or <mark>event</mark> or <mark>deadline</mark>
   * Todo is formatted as __todo task__. Eg: todo run

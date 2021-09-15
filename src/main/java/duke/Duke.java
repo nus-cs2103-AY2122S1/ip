@@ -14,12 +14,6 @@ public class Duke {
     /** Ui object to print output to user */
     private Ui ui;
 
-    public enum Type {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-
     /**
      * Constructor with no parameters for Launcher class.
      */

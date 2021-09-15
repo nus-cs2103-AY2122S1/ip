@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Duke;
+import duke.Type;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -175,18 +175,18 @@ public class Storage {
      * @param type Type of Task (Event, Deadline, or Todo).
      * @param datetime Date and time of Task (if applicable).
      */
-    public void newTaskToData(String taskName, Duke.Type type, String datetime) {
+    public void newTaskToData(String taskName, Type type, String datetime) {
         try {
             FileWriter dataWriter = new FileWriter(filePath.concat(fileName), true);
-            if (type == Duke.Type.TODO) {
+            if (type == Type.TODO) {
                 dataWriter.write("T,0," + taskName + ", \n");
                 dataWriter.close();
-            } else if (type == Duke.Type.DEADLINE) {
+            } else if (type == Type.DEADLINE) {
                 dataWriter.write("D,0," + taskName + "," + datetime + "\n");
                 dataWriter.close();
             } else {
                 // Type at this point should be EVENT
-                assert type == Duke.Type.EVENT;
+                assert type == Type.EVENT;
                 dataWriter.write("E,0," + taskName + "," + datetime + "\n");
                 dataWriter.close();
             }

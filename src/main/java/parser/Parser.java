@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import duke.Duke;
+import duke.Type;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
@@ -120,7 +120,7 @@ public class Parser {
             return " OOPS!!! The description of a todo cannot be empty.";
         }
         tasks.addTask(new Todo(userInput.substring(5)));
-        storage.newTaskToData(userInput.substring(5), Duke.Type.TODO, "");
+        storage.newTaskToData(userInput.substring(5), Type.TODO, "");
         return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
     }
@@ -148,7 +148,7 @@ public class Parser {
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             return " Date and Time must be specified by YYYY-MM-DD HH:MM";
         }
-        storage.newTaskToData(userInput.substring(9, slashIndex - 1), Duke.Type.DEADLINE,
+        storage.newTaskToData(userInput.substring(9, slashIndex - 1), Type.DEADLINE,
                 userInput.substring(slashIndex + 4));
         return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
@@ -178,7 +178,7 @@ public class Parser {
             return " Date and Time must be specified by YYYY-MM-DD HH:MM";
         }
 
-        storage.newTaskToData(userInput.substring(6, slashIndex - 1), Duke.Type.EVENT,
+        storage.newTaskToData(userInput.substring(6, slashIndex - 1), Type.EVENT,
                 userInput.substring(slashIndex + 4));
         return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";

@@ -5,13 +5,6 @@ import task.TaskList;
 
 public class Ui {
     /**
-     * Returns a welcome message to the terminal.
-     */
-    public static String welcomeMessage() {
-        return "Hello! I'm Duke\n" + "What can I do for you?";
-    }
-
-    /**
      * Returns a farewell message to the terminal.
      */
     public static String goodbyeMessage() {
