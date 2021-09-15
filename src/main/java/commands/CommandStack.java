@@ -12,7 +12,7 @@ public class CommandStack {
     private final Stack<UndoableCommand> pastCommands = new Stack<>();
 
     /**
-     * Add a new command on the top of the command stack.
+     * Adds a new command on the top of the command stack.
      *
      * @param command The UndoableCommand that is to be added.
      */

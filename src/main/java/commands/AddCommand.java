@@ -20,7 +20,7 @@ public abstract class AddCommand extends UndoableCommand {
     private final TaskList taskList;
 
     /**
-     * Create a command to add a type of task to the taskList.
+     * Creates a command that add a type of task to the taskList.
      *
      * @param userInput The user input that triggers the command.
      * @param typeToAdd The type of task that should be added.

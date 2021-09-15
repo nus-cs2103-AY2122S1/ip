@@ -8,7 +8,7 @@ public abstract class UndoableCommand extends Command {
     private Runnable undoFunction;
 
     /**
-     * Undo the command and restore the taskList to the previous version;
+     * Undoes the previous command and restore the taskList to the previous version;
      */
     public void undo() {
         assert this.undoFunction != null : "Error while undoing";
