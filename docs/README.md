@@ -1,4 +1,4 @@
-<img align="left" height="119" width="119" src="src/main/resources/images/bird.png">
+<img align="left" height="119" width="119" src="../src/main/resources/images/bird.png">
 
 # Augury User Guide
 *Jefferson LIM ([@qreoct](https://github.com/qreoct))*
