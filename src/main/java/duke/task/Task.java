@@ -1,5 +1,8 @@
 package duke.task;
 
+import static duke.io.TaskStorage.TASK_DONE;
+import static duke.io.TaskStorage.TASK_NOT_DONE;
+
 /**
  * Abstract class representing a task.
  */
@@ -58,7 +61,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + name;
+        return "[" + (isDone ? "✓" : "✗") + "] " + name;
     }
 
     /**
@@ -67,6 +70,6 @@ public abstract class Task {
      * @return String to be saved as a line in save.csv.
      */
     public String getSaveString() {
-        return (isDone ? "o," : "x,") + name;
+        return (isDone ? TASK_DONE : TASK_NOT_DONE) + "," + name;
     }
 }

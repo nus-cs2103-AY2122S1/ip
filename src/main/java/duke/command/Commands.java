@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.io.AliasStorage;
 import java.util.List;
+
+import duke.io.AliasStorage;
 
 /**
  * Enum of commands to cycle through and return the right command that matches user input.

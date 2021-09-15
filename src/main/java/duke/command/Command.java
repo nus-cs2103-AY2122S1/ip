@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.io.AliasStorage;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A command keeps track of its string and parses user input using its parse function.

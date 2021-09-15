@@ -84,7 +84,15 @@ public class DialogBox extends HBox {
             sb.append(lines[i]);
             sb.append("\n");
 
-            // convert the built string into a dialog box if it's the 5th line or it's the last line
+            // pad the continuation message so the text appears on the top of the dialog box
+            if (i == lines.length - 1 && i > 4) {
+                while (i % 5 != 4) {
+                    sb.append("\n");
+                    i++;
+                }
+            }
+
+            // convert the built string into a dialog box if it's the 5th line, or is on the last line
             if (i % 5 == 4 || i == lines.length - 1) {
                 DialogBox db = new DialogBox(sb.toString(), img);
                 db.flip();

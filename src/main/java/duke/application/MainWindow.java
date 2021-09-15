@@ -1,17 +1,16 @@
 package duke.application;
 
+import java.util.ArrayList;
+
 import duke.io.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

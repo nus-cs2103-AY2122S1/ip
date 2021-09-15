@@ -17,6 +17,8 @@ import duke.task.ToDo;
  * Storage class that manages the saving and loading of the task list.
  */
 public class TaskStorage {
+    public static final String TASK_DONE = "o";
+    public static final String TASK_NOT_DONE = "x";
     private static final File SAVE_FILE = new File("save.csv");
 
     /**
