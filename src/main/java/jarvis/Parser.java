@@ -144,8 +144,7 @@ public class Parser {
             }
 
             // If the extracted deadline is too short to contain all of the relevant details
-            if (currIndex == instruction.length() ||
-                    currIndex + 5 >= instruction.length()) {
+            if (currIndex == instruction.length() || instruction.substring(currIndex).length() != 21) {
                 throw new JarvisException(Ui.INCOMPLETE_DEADLINE);
 
             // If the date keyed in by the user is formatted wrongly
@@ -179,42 +178,39 @@ public class Parser {
      * hard disk after marking a task as completed
      */
     public static String parseEvent(String instruction) throws JarvisException, IOException {
+        String taskDescription = "";
+        int currIndex = 5;
+
+        // Extracting the timestamp (format: dd/mm/yyyy hh:mm-hh:mm)
+        while (currIndex < instruction.length() &&
+                !instruction.substring(currIndex).startsWith(" /")) {
+            taskDescription += instruction.substring(currIndex, currIndex + 1);
+            currIndex++;
+        }
         // If the description of the deadline task is empty
-        if (instruction.length() < 7) {
+        if (currIndex == 5 || currIndex == instruction.length()) {
             throw new JarvisException(Ui.EMPTY_EVENT_DESCRIPTION);
+        // If the extracted timestamp is too short to contain all of the relevant details
+        } else if (instruction.substring(currIndex).length() != 27) {
+            throw new JarvisException(Ui.INCOMPLETE_EVENT_INFO);
+
+        // If the date keyed in by the user is formatted wrongly
+        } else if (instruction.charAt(currIndex + 7) != '/' &&
+                instruction.charAt(currIndex + 10) != '/' &&
+                instruction.charAt(currIndex + 15) != ' ') {
+            throw new JarvisException(Ui.WRONGLY_FORMATTED_DATE);
+
+        // If the timings keyed in by the user is formatted wrongly
+        } else if (instruction.substring(currIndex).length() < 25){
+            throw new JarvisException(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS);
+
+        // If the timestamp is formatted correctly overall
         } else {
-            String taskDescription = "";
-            int currIndex = 5;
+            String by = instruction.substring(currIndex + 5);
+            Task newEvent = new Event(taskDescription, by);
 
-            // Extracting the timestamp (format: dd/mm/yyyy hh:mm-hh:mm)
-            while (currIndex < instruction.length() &&
-                    !instruction.substring(currIndex).startsWith(" /")) {
-                taskDescription += instruction.substring(currIndex, currIndex + 1);
-                currIndex++;
-            }
-
-            // If the extracted timestamp is too short to contain all of the relevant details
-            if (currIndex == instruction.length() || instruction.substring(currIndex).length() != 27) {
-                throw new JarvisException(Ui.INCOMPLETE_EVENT_INFO);
-
-            // If the date keyed in by the user is formatted wrongly
-            } else if (instruction.charAt(currIndex + 7) != '/' &&
-                    instruction.charAt(currIndex + 10) != '/' &&
-                    instruction.charAt(currIndex + 15) != ' ') {
-                throw new JarvisException(Ui.WRONGLY_FORMATTED_DATE);
-
-            // If the timings keyed in by the user is formatted wrongly
-            } else if (instruction.substring(currIndex).length() < 25){
-                throw new JarvisException(Ui.WRONGLY_FORMATTED_EVENT_TIMINGS);
-
-            // If the timestamp is formatted correctly overall
-            } else {
-                String by = instruction.substring(currIndex + 5);
-                Task newEvent = new Event(taskDescription, by);
-
-                // Add the task to the taskList array and update the task file in the user's hard disk
-                return TaskList.addTaskAndUpdate(newEvent);
-            }
+            // Add the task to the taskList array and update the task file in the user's hard disk
+            return TaskList.addTaskAndUpdate(newEvent);
         }
     }
 
