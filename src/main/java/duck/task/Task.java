@@ -1,6 +1,7 @@
 package duck.task;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * Represents a task that a user can add to, delete from, find, or set to done in a task list.
@@ -59,7 +60,7 @@ public abstract class Task implements Comparable<Task> {
      * @return true if the Task name contains the keyword.
      */
     public boolean containsKeyword(String keyword) {
-        return taskName.contains(keyword);
+        return taskName.toLowerCase().contains(keyword.toLowerCase());
     }
 
     /**
