@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event (Task). Can be added to a TaskList.
+ * Event (Task).
  * @author Ruth Poh
  */
 public class Event extends Task {
@@ -77,13 +77,7 @@ public class Event extends Task {
      */
     @Override
     public String toStorageString() {
-        String isDoneString;
-        if (super.isDone) {
-            isDoneString = "1";
-        } else {
-            isDoneString = "0";
-        }
-        return ("E | " + isDoneString + " | " + super.taskString + " | " + this.getDateTimeStorage());
+        return ("E | " + this.getIsDoneBinary() + " | " + super.taskString + " | " + this.getDateTimeStorage());
     }
 
     /**

@@ -33,8 +33,8 @@ public class Parser {
             return "help";
         } else if (str.equalsIgnoreCase("list")) {
             return "list";
-        } else if (str.equalsIgnoreCase("todo")) {
-            return "todo";
+        } else if (str.equalsIgnoreCase("Todo")) {
+            return "Todo";
         } else if (str.equalsIgnoreCase("deadline")) {
             return "deadline";
         } else if (str.equalsIgnoreCase("event")) {
@@ -67,7 +67,7 @@ public class Parser {
     }
 
     /**
-     * Joins Array of Strings together without the keyword todo at the start.
+     * Joins Array of Strings together without the keyword Todo at the start.
      * @param strParse Array of Strings to be parsed.
      * @return Todo task.
      * @throws DukeException Errors that occur during parsing (incorrect commands, etc.).
@@ -75,7 +75,7 @@ public class Parser {
     public Todo parseTodo(String[] strParse) throws DukeException {
         StringBuilder taskb = new StringBuilder();
         if (strParse.length == 1) {
-            throw new IncorrectInputException("todo", "using 'todo (taskw)'");
+            throw new IncorrectInputException("Todo", "using 'Todo (taskw)'");
         }
         for (int i = 1; i < strParse.length; i++) {
             taskb.append(strParse[i]);

@@ -59,7 +59,7 @@ public class Ui {
                     }
 
                     return "Commandws supported:\n\n"
-                            + "- bye\n- help\n- list\n- todo\n- event\n- deadline\n";
+                            + "- bye\n- help\n- list\n- Todo\n- event\n- deadline\n";
                 } catch (DukeException e) {
                     return this.getErrorMessage(e);
                 }
@@ -83,8 +83,8 @@ public class Ui {
                     return this.getErrorMessage(e);
                 }
                 //Fallthrough
-            case "todo":
-                // adds a todo task to the list.
+            case "Todo":
+                // adds a Todo task to the list.
                 try {
                     tasklist.addTodo(parser.parseTodo(strparse));
                     storage.saveData(tasklist);

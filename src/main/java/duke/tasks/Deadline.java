@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline (Task). Can be added to TaskList.
+ * Deadline (Task).
  * @author Ruth Poh
  */
 public class Deadline extends Task {
@@ -76,13 +76,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toStorageString() {
-        String isDoneString;
-        if (super.isDone) {
-            isDoneString = "1";
-        } else {
-            isDoneString = "0";
-        }
-        return ("D | " + isDoneString + " | " + super.taskString + " | " + this.getDateTimeStorage());
+        return ("D | " + this.getIsDoneBinary() + " | " + super.taskString + " | " + this.getDateTimeStorage());
     }
 
     /**

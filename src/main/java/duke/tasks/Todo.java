@@ -5,14 +5,14 @@ import duke.tasks.Task;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Todo (Task). Can be added to list in Duke.
+ * Todo (Task).
  * @author Ruth Poh
  */
 public class Todo extends Task {
 
     /**
      * Initializes Todo.
-     * @param taskString Task.
+     * @param taskString String representation of Todo Task.
      */
     public Todo(String taskString) {
         super(taskString);
@@ -21,17 +21,17 @@ public class Todo extends Task {
     }
 
     /**
-     * Getter method for date Todo occurs at.
-     * @return Date that Event occurs at in String form.
+     * Returns blank string as Todo does not have a date.
+     * @return Blank String
      */
     @Override
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "";
     }
 
     /**
-     * Getter method for time Todo occurs
-     * @return Time that Event occurs at in String form.
+     * Returns blank string as Todo does not have a time.
+     * @return Blank String
      */
     @Override
     public String getTime() {
@@ -39,27 +39,31 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts Todo to String for Storage.
-     * @return Todo String for storage.
+     * Returns blank string as Todo does not have a date or time.
+     * @return Blank String
      */
     @Override
-    public String toStorageString() {
-        String isDoneString;
-        if (super.isDone) {
-            isDoneString = "1";
-        } else {
-            isDoneString = "0";
-        }
-        return ("T | " + isDoneString + " | " + super.taskString);
+    public String getDateTimeStorage() {
+        return "";
     }
 
     /**
-     * Returns string of Deadline (Task).
-     * @return string of Deadline.
+     * Returns descriptive string representation of Todo.
+     * @return In format '[T]: taskString'
      */
     @Override
     public String toString() {
         return "[T] " + super.toString();
     }
+
+    /**
+     * Returns string representation of Todo (Task) for storage.
+     * @return In format 'T | isDoneStatus | taskString'
+     */
+    @Override
+    public String toStorageString() {
+        return ("T | " + this.getIsDoneBinary() + " | " + super.taskString);
+    }
+
 
 }

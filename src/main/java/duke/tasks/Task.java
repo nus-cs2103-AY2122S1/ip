@@ -15,7 +15,7 @@ public abstract class Task {
 
     /**
      * Initialises Task.
-     * @param taskString Task.
+     * @param taskString String representation of Task.
      */
     public Task(String taskString) {
         this.taskString = taskString;
@@ -24,10 +24,22 @@ public abstract class Task {
 
     /**
      * Getter method for taskString.
-     * @return String of task.
+     * @return String representation of task.
      */
     public String getTaskString() {
         return taskString;
+    }
+
+    /**
+     * Returns binary format for isDone.
+     * @return 1 is isDone, 0 is !isDone
+     */
+    public String getIsDoneBinary() {
+        if (isDone) {
+            return "1";
+        } else {
+            return "0";
+        }
     }
 
     public abstract String getDate();
@@ -43,16 +55,16 @@ public abstract class Task {
     }
 
     /**
-     * Returns descriptive String of task.
-     * @return String of task.
+     * Returns String representation of the Task (with description).
+     * @return In form '[X] taskString'.
      */
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + taskString;
+        return "[" + this.getTaskStatus() + "] " + taskString;
     }
 
     /**
-     * Returns string 'X' if task is done, ' ' if task is not.
+     * Returns string 'X' if Task is done, ' ' if task is not.
      * @return string 'X' or 'x'.
      */
     public String getTaskStatus() {
@@ -60,7 +72,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks task as done.
+     * Marks Task as done.
      * @return True if task is marked as done, False if task is already done.
      */
     public boolean markAsDone() {
@@ -72,22 +84,8 @@ public abstract class Task {
         }
     }
 
-    /**
-     * Returns date stored in Task in String form.
-     * Occurs when wanting to convert date to simplified form for saving in file.
-     * @return ""
-     */
-    public String getDateTimeStorage() {
-        return "";
-    }
+    public abstract String getDateTimeStorage();
 
-    /**
-     * Returns String for storage.
-     * @return String for storage.
-     */
-    public String toStorageString() {
-        return "";
-    }
-
+    public abstract String toStorageString();
 
 }
