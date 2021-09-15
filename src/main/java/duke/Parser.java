@@ -14,7 +14,6 @@ public class Parser {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private final TaskList tasks;
     private boolean toRewriteData;
-    private boolean toExit;
     private boolean toFind;
 
     /**
@@ -25,7 +24,6 @@ public class Parser {
     public Parser(TaskList tasks) {
         this.tasks = tasks;
         this.toRewriteData = false;
-        this.toExit = false;
         this.toFind = false;
     }
 
@@ -116,15 +114,6 @@ public class Parser {
     }
 
     /**
-     * Getter for the exit status of the last parsed command.
-     *
-     * @return True if ready to exit Duke after "bye" command.
-     */
-    public boolean needsToExit() {
-        return this.toExit;
-    }
-
-    /**
      * Parses the user input and runs the corresponding command.
      *
      * @param userInput A string containing the user input.
@@ -133,7 +122,6 @@ public class Parser {
      */
     public String parse(String userInput) throws DukeException {
         if (userInput.equals("bye")) {
-            this.toExit = true;
             return "Bye. Hope to see you again soon!";
         } else if (userInput.equals("list")) {
             return list(this.tasks);

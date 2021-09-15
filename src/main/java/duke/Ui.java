@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -45,6 +48,14 @@ public class Ui extends AnchorPane {
                 DialogBox.getDukeDialog(response)
         );
         userInput.clear();
+        // Exits after 3 seconds upon receiving bye response
+        if (response.equals("Bye. Hope to see you again soon!")) {
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    System.exit(0);
+                }
+            }, 3000);
+        }
     }
 
     /**

@@ -20,7 +20,7 @@
          <children>
           <Label fx:id="dialog" minHeight="-Infinity" text="Label" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Courier New" size="13.0" />
+                  <Font name="Courier New" size="12.0" />
                </font>
                <opaqueInsets>
                   <Insets right="10.0" />

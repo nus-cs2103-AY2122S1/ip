@@ -34,9 +34,6 @@ public class Duke extends Application {
      */
     public static String getResponse(String input) throws DukeException {
         String response = parser.parse(input);
-        if (parser.needsToExit()) {
-            return response;
-        }
         if (parser.needsToRewrite()) {
             storage.rewriteData(tasks);
         }
