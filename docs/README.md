@@ -138,9 +138,9 @@ Nice! I've marked this task as HIGH priority:
   [T][HIGH][ ] watch bee movie
 ```
 
-### Get a goodbye message - `bye`
+### Exit the program - `bye`
 
-Says goodbye to the user.
+Says goodbye to the user, then exits the program after 3 seconds.
 
 Example of usage: 
 
