@@ -13,15 +13,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
-/**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
- */
+// @@author kevinmingtarja-reused
+// Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+// with minor modifications
 public class DialogBox extends HBox {
+    private static Integer counter = 0;
+    private final String USER_BG_COLOR = "#06f";
+    private final String BOT_BG_COLOR = "373737";
+    private final String ERROR_BG_COLOR = "D4000E";
+    private final Integer CORNER_RADIUS = 10;
     @FXML
     private Label dialog;
     @FXML
@@ -38,9 +43,28 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setPadding(new Insets(8));
+        dialog.setPadding(new Insets(4));
+        dialog.setTextFill(Color.WHITE);
         // Prevents long text from being cut off
-        HBox.setHgrow(dialog, Priority.ALWAYS);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.setTranslateY(16);
+        dialog.setTranslateX(-8);
+
+        if (isError(text)) {
+            dialog.setBackground(new Background(new BackgroundFill(Color.web(ERROR_BG_COLOR),
+                    new CornerRadii(CORNER_RADIUS), new Insets(-4))));
+        } else if (counter % 2 == 0) {
+            dialog.setBackground(new Background(new BackgroundFill(Color.web(BOT_BG_COLOR),
+                    new CornerRadii(CORNER_RADIUS), new Insets(-4))));
+        } else {
+            dialog.setBackground(new Background(new BackgroundFill(Color.web(USER_BG_COLOR),
+                    new CornerRadii(CORNER_RADIUS), new Insets(-4))));
+        }
+        counter++;
+
+        displayPicture.setScaleX(0.75);
+        displayPicture.setScaleY(0.75);
+        displayPicture.setClip(new Circle(40, 40, 40));
         displayPicture.setImage(img);
     }
 
@@ -62,5 +86,9 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    private boolean isError(String text) {
+        return text.startsWith("Error: Whoops...");
     }
 }

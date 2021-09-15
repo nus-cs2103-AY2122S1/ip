@@ -3,7 +3,7 @@
 [T][ ] join sports club (tags: #sport)
 [T][ ] borrow book 
 [D][ ] finish homework  (deadline: Sep 14 2021)
-[T][ ] eat 
+[T][ ] eat (tags: #urgent)
 [T][X] sleep 
 [T][ ] drink water (tags: #mandatory)
 [T][ ] study 

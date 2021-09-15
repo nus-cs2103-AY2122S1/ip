@@ -30,10 +30,14 @@ public class Parser {
      * @return true if input is not equal to "bye".
      */
     public String parseInput(String input) {
+        if (input.equals("")) {
+            return "Please enter something.";
+        }
+
         String response = "";
         try {
             if (input.equals("bye")) {
-                response += "Goodbye human. See you soon!\n";
+                response += "Goodbye human. See you soon! Shutting down in three seconds...\n";
             } else if (input.equals("list")) {
                 response += taskList.printItems();
             } else if (input.startsWith("done")) {
@@ -48,7 +52,7 @@ public class Parser {
                 response += addItem(input);
             }
         } catch (DukeException e) {
-            ui.print(e.getMessage());
+            return e.getMessage();
         }
         assert !response.equals("");
 

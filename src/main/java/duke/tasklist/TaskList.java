@@ -124,7 +124,7 @@ public class TaskList {
         Task taggedItem = list.get(index - 1);
         taggedItem.addTag(tag);
 
-        response += ("Got it. I've tagging the following task:\n");
+        response += ("Got it. I've tagged the following task:\n");
         response += String.format("    %s%n", taggedItem);
 
         saveData();
