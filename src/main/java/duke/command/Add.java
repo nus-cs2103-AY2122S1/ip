@@ -12,7 +12,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Rpresents a type of Command that adds a Task to a tasklist.
+ * Represents a type of Command that adds a Task to a tasklist.
  */
 public class Add extends Command {
 

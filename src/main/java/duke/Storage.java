@@ -41,6 +41,8 @@ public class Storage {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = arr[i].trim();
         }
+        assert(fullString.length() > 0);
+        //left uninitialized as at this point, there should be a valid task format to convert.
         Task curr;
         if (arr[0].equals("T")) {
             curr = new Todo(arr[3], arr[2]);

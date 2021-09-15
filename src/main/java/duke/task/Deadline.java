@@ -1,44 +1,42 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a specific type of Task that have deadlines.
+ */
 public class Deadline extends Task {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    protected LocalDateTime by;
 
-    protected LocalDate date;
-    protected LocalTime time;
-    protected String by;
 
     /**
      * Constructs a Deadline task.
      *
-     * @param description
-     * @param by
+     * @param description The description of the task.
+     * @param by The deadline.
      */
     public Deadline(String description, String priority, String by) {
         super(description, priority);
-        this.by = by;
-        String[] arr = by.split(" ");
-        assert(arr.length == 2);
-        String[] arr1 = arr[0].split("\\/");
-        assert(arr1.length == 3);
-        assert(Integer.valueOf(arr1[1]) <= 12 && Integer.valueOf(arr1[1]) > 0);
-        assert(Integer.valueOf(arr1[0]) <= 31 && Integer.valueOf(arr1[0]) > 0);
-        this.date = LocalDate.parse(String.format("%s-%s-%s", arr1[2], arr1[1].length() == 1
-                ? "0" + arr1[1] : arr1[1], arr1[0].length() == 1 ? "0" + arr1[0] : arr1[0]));
-        this.time = LocalTime.parse(arr[1].substring(0, 2) + ":" + arr[1].substring(2));
+        this.by = LocalDateTime.parse(by.trim(), DATE_TIME_FORMATTER);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                + this.time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 
+    /**
+     * Converts a Deadline into the format for storing.
+     *
+     * @return A String specific to a Deadline that follows the storing conventions for our data file.
+     */
     @Override
     public String convertToFileFormat() {
-        return String.format("D%s | %s", super.convertToFileFormat(), this.by);
+        String temp = this.by.toString().replace("T", " ").replace(":", "");
+        return String.format("D%s | %s", super.convertToFileFormat(), temp);
     }
 }

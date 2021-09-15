@@ -6,15 +6,13 @@ import java.util.Scanner;
  * Represents the class that handles all the interactions with the user.
  */
 public class Ui {
-
+    private static final String LOGO = " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     private Scanner scanner;
 
-    @SuppressWarnings("CheckStyle")
-    private final String logo = " ____        _\n"
-        + "|  _ \\ _   _| | _____\n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Constructs the handler.
@@ -27,7 +25,7 @@ public class Ui {
      * Displays the welcome message.
      */
     public void showWelcome() {
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         System.out.println("What can I do for you?");
     }
 
