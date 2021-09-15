@@ -28,7 +28,17 @@ public class Ui {
     }
 
     /**
-     * Displays the goodbye message
+     * Returns the greeting message.
+     * @return The greeting message.
+     */
+    public static String getGreetingMessage() {
+        return "Jak sie masz? My name-a Borat. I like you.\n"
+                + "What I do for you?";
+    }
+
+    /**
+     * Returns the goodbye message
+     * @return The goodbye message.
      */
     public static String getGoodByeMessage() {
         return "Bye. Have a good time!";
