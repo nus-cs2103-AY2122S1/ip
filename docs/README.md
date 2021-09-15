@@ -1,7 +1,7 @@
 # User Guide
 Duke is a **Personal Assistant Chatbot** that helps you to keep track of various things. You can think of it as a digital task list, where you can add and delete tasks.
 
-<img width="427" alt="Hello, I'm Duke" src="https://user-images.githubusercontent.com/65549665/133202028-9bd38670-12c3-43c4-9f5e-be9c5be4d005.png">
+<img width="427" alt="Ui" src="https://user-images.githubusercontent.com/65549665/133483200-7bd914ed-1c62-4f96-820d-16c586ec9acb.png">
 
 ## Features 
 Listed below are Duke's features:
