@@ -172,3 +172,6 @@ Here are the matching tasks:
 2.[E][] math exam (at: Mon, Dec 02 2019, 18:00)
 ```
 
+### Acknowledgements:
+- Original Duke template forked from Prof Damith CS2103T github
+- GUI Design from Javafx tutorials
