@@ -1,7 +1,9 @@
 package duke;
 
 import javafx.application.Platform;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -14,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @author Erwin Quek
+ * @version CS2103 AY21/22 Sem 1
  */
 public class MainWindow extends AnchorPane {
     @FXML

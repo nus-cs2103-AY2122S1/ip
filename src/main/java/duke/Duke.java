@@ -1,9 +1,11 @@
 package duke;
 
 import duke.dukeException.DukeException;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
+
 import duke.tools.Parser;
 import duke.tools.Storage;
 import duke.tools.Ui;
@@ -14,7 +16,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * A to-do bot.
+ * A TaskList Bot that allows user to add or update various types of Tasks.
  *
  * @author Erwin Quek
  * @version CS2103 AY21/22 Sem 1
@@ -29,7 +31,6 @@ public class Duke {
     /**
      * Constructor to create Duke.
      * @param filePath Takes in a filepath
-     * @throws FileNotFoundException Throws an error when file not found
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -43,7 +44,12 @@ public class Duke {
 
     }
 
-    String getResponse(String input) {
+    /**
+     * Returns a response from Duke based on the user input. Duke will terminate when "bye" command is recieved.
+     * @param input A string of commands from the user.
+     * @return A response from Duke associated with the given input.
+     */
+    public String getResponse(String input) {
         String response;
         try {
             response = Parser.parse(input);
@@ -56,16 +62,23 @@ public class Duke {
         }
     }
 
+    /**
+     * Return a Boolean value to check if Duke has been terminated by the user.
+     * @return A Boolean value to represent status of Duke.
+     */
     public Boolean isAlive() {
         return this.status;
     }
 
+    /**
+     * A method to update Duke's status to false which represents termination.
+     */
     public void endDuke() {
         this.status = false;
     }
 
     /**
-     * Start the Duke bot.
+     * A method to start up Duke bot for CLI.
      */
     public void run() {
         ui.showWelcomeMessage();
@@ -88,10 +101,10 @@ public class Duke {
     }
 
     /**
-     * Marks a task done by index.
-     * @param i the index for task to remove
-     * @throws DukeException throw error
-     * @return result
+     * Returns a String message associated to markDone. It also updates the duke.txt file.
+     * @param i The index of the task that the user wants to remove.
+     * @throws DukeException throw a Duke error.
+     * @return A String message associated to markDone.
      */
     public static String markDone(int i) throws DukeException {
         if (i > tasks.getSize()) {
@@ -106,7 +119,8 @@ public class Duke {
     }
 
     /**
-     * Get the Duke TaskList,
+     * Returns a String message containing the Task List after reading Duke.txt.
+     * @return The Task List stored in Duke.
      */
     public static String getTaskList() {
         if (tasks.getSize() <= 0) {
@@ -121,9 +135,10 @@ public class Duke {
     }
 
     /**
-     * Method to handle toDo tasks.
+     * Returns a String message associated to toDo. It also adds a new todo task into duke.txt file.
      * @param input takes in a command by the user
-     * @throws DukeException throws an error
+     * @throws DukeException throw a Duke error.
+     * @return A String message associated to toDo.
      */
     public static String toDo(String input) throws DukeException {
         if (input.equals("todo")) {
@@ -133,14 +148,15 @@ public class Duke {
         ToDo td = new ToDo(t);
         tasks.addNewTask(td);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "Got it. I've added this task: \n " + "  " + td +
-                "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: \n " + "  " + td + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
-     * Method to handle Deadline tasks.
+     * Returns a String message associated to deadline. It also adds a new deadline task into duke.txt file.
      * @param input takes in a command by the user
-     * @throws DukeException throws an error
+     * @throws DukeException throw a Duke error.
+     * @return A String message associated to deadline.
      */
     public static String deadline(String input) throws DukeException {
         if (!input.contains("/by")){
@@ -151,14 +167,15 @@ public class Duke {
         Deadline dl = new Deadline(t);
         tasks.addNewTask(dl);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "Got it. I've added this task: \n " + "  " + dl
-                + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: \n " + "  " + dl + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
-     * Method to handle Event tasks.
+     * Returns a String message associated to event. It also adds a new event task into duke.txt file.
      * @param input takes in a command by the user
-     * @throws DukeException throws an error
+     * @throws DukeException throw a Duke error.
+     * @return A String message associated to event.
      */
     public static String event(String input) throws DukeException {
         if (!input.contains("/at ")){
@@ -169,14 +186,15 @@ public class Duke {
         Event e = new Event(t);
         tasks.addNewTask(e);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "Got it. I've added this task: \n " + "  " + e
-                + "\n"  + "Now you have " + tasks.getSize()  + " tasks in the list.";
+        return "Got it. I've added this task: \n " + "  " + e + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
-     * Method to handle delete tasks.
-     * @param i takes in a command by the user
-     * @throws DukeException throws an error
+     * Returns a String message associated to deleteTask action. It also removes that task from duke.txt file.
+     * @param i takes in an index of task to be deleted.
+     * @throws DukeException throw a Duke error.
+     * @return A String message associated to deleteTask action.
      */
     public static String deleteTask(int i) throws DukeException {
         if (i > tasks.getSize()) {
@@ -192,8 +210,11 @@ public class Duke {
     }
 
     /**
-     * Method to find task using a search key.
-     * @param input search key
+     * Returns a String message associated to findTask after searching through duke.txt file to find the task
+     * related to the user input.
+     * @param input takes in a command by the user
+     * @throws DukeException throw a Duke error.
+     * @return A String message of the relevant result from the search.
      */
     public static String findTask(String input) {
         String searchKey = input.split("find ")[1];
@@ -212,8 +233,8 @@ public class Duke {
     }
 
     /**
-     * Main method to run the bot.
-     * @param args Takes in user input
+     * A Main method to run Duke.
+     * @param args Takes in user input.
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
