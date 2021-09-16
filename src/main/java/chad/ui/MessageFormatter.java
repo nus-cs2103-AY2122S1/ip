@@ -14,6 +14,7 @@ import chad.task.Task;
 public class MessageFormatter {
 
     private static final String INDENTATION_UNIT_STRING = " ";
+    private static final String TASKS_LIST_ENTRY_FORMAT = "%d.%s\n";
 
     private static MessageFormatter instance;
 
@@ -51,7 +52,7 @@ public class MessageFormatter {
         StringBuilder sb = new StringBuilder();
         int n = tasks.size();
         for (int i = 0; i < n; i++) {
-            sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
+            sb.append(String.format(TASKS_LIST_ENTRY_FORMAT, i + 1, tasks.get(i)));
         }
         return sb.toString().stripTrailing();
     }
@@ -75,7 +76,7 @@ public class MessageFormatter {
     String formatFindTasksResultsList(List<Map.Entry<Integer, Task>> queryResults) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Integer, Task> findResult : queryResults) {
-            sb.append(String.format("%d.%s\n", findResult.getKey() + 1, findResult.getValue()));
+            sb.append(String.format(TASKS_LIST_ENTRY_FORMAT, findResult.getKey() + 1, findResult.getValue()));
         }
         return sb.toString().stripTrailing();
     }

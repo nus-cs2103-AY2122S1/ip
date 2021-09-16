@@ -15,6 +15,7 @@ public abstract class TemporalTask extends Task {
     private static final String DATE_TIME_FILE_FORMAT_PATTERN = "yyyyMMddHHmm";
     private static final DateTimeFormatter DATE_TIME_FILE_FORMATTER = DateTimeFormatter
             .ofPattern(DATE_TIME_FILE_FORMAT_PATTERN);
+    private static final String TEMPORAL_TASK_STRING_REPRESENTATION_TEMPLATE = "%s (%s: %s)";
 
     private LocalDateTime time;
 
@@ -43,6 +44,7 @@ public abstract class TemporalTask extends Task {
     @Override
     public String toString() {
         String taskRepresentation = super.toString();
-        return String.format("%s (%s: %s)", taskRepresentation, getTimeRelation(), time.format(DATE_TIME_FORMATTER));
+        return String.format(TEMPORAL_TASK_STRING_REPRESENTATION_TEMPLATE, taskRepresentation, getTimeRelation(),
+                time.format(DATE_TIME_FORMATTER));
     }
 }

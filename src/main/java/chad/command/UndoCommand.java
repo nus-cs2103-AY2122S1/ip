@@ -11,6 +11,9 @@ import chad.ui.Ui;
 public class UndoCommand extends Command {
 
     private static final CommandType COMMAND_TYPE = CommandType.UNDO;
+    private static final String NO_UNDOABLE_COMMANDS_LEFT_MESSAGE = "There are no commands (left over) to undo.";
+    private static final String UNDO_SUCCESSFUL_MESSAGE = "Okay, I have undone the following command:";
+    private static final String UNNECESSARY_ARGUMENTS_ERROR_MESSAGE = "There were unnecessary arguments.";
 
     /**
      * Creates an UndoCommand instance.
@@ -27,11 +30,11 @@ public class UndoCommand extends Command {
         Command command = commandHandler.undo(taskHandler);
         if (command == null) {
             ui.startMessage()
-                    .addLine("There are no commands (left over) to undo.")
+                    .addLine(NO_UNDOABLE_COMMANDS_LEFT_MESSAGE)
                     .displayMessage();
         } else {
             ui.startMessage()
-                    .addLine("Okay, I have undone the following command:")
+                    .addLine(UNDO_SUCCESSFUL_MESSAGE)
                     .addCommand(command)
                     .displayMessage();
         }
@@ -40,7 +43,7 @@ public class UndoCommand extends Command {
     @Override
     void parseCommand(String[] tokens) throws ChadInvalidCommandException {
         if (tokens.length > 1) {
-            throw new ChadInvalidCommandException("There were unnecessary arguments.");
+            throw new ChadInvalidCommandException(UNNECESSARY_ARGUMENTS_ERROR_MESSAGE);
         }
     }
 

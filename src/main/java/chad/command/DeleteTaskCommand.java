@@ -12,6 +12,8 @@ import chad.ui.Ui;
 public class DeleteTaskCommand extends ApplyOnTaskNumberCommand {
 
     private static final CommandType COMMAND_TYPE = CommandType.DELETE_TASK;
+    private static final String NO_EXISTING_TASK_NUMBER_ERROR_MESSAGE = "The task number does not exist.";
+    private static final String DELETE_TASK_SUCCESSFUL_MESSAGE = "Noted. I've removed this task:";
 
     private Task deletedTask;
 
@@ -29,10 +31,10 @@ public class DeleteTaskCommand extends ApplyOnTaskNumberCommand {
         try {
             deletedTask = taskHandler.deleteTask(getTaskIndex());
         } catch (IndexOutOfBoundsException e) {
-            throw new ChadInvalidCommandException("The task number does not exist.");
+            throw new ChadInvalidCommandException(NO_EXISTING_TASK_NUMBER_ERROR_MESSAGE);
         }
         ui.startMessage()
-                .addLine("Noted. I've removed this task:")
+                .addLine(DELETE_TASK_SUCCESSFUL_MESSAGE)
                 .addTask(deletedTask)
                 .addTasksListLength(taskHandler.getNumberOfTasks())
                 .displayMessage();

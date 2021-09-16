@@ -64,6 +64,7 @@ public class DialogBox extends HBox {
     private static final String RESPONSE_DIALOG_BACKGROUND_RADIUS_STYLE = "-fx-background-radius: 0 16 16 16;";
     private static final String NORMAL_RESPONSE_DIALOG_BACKGROUND_COLOUR_STYLE = "-fx-background-color: #ADD8E6;";
     private static final String ERROR_RESPONSE_DIALOG_BACKGROUND_COLOUR_STYLE = "-fx-background-color: #FF7F7F;";
+    private static final String FXML_PATH = "/view/DialogBox.fxml";
 
     @FXML
     private HBox dialogLayout;
@@ -81,7 +82,7 @@ public class DialogBox extends HBox {
 
     private void initialiseFxml() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource(FXML_PATH));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

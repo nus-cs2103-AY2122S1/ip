@@ -16,6 +16,8 @@ public class CommandParser {
     private static final String DELETE_TASK_COMMAND = "delete";
     private static final String FIND_TASKS_COMMAND = "find";
     private static final String UNDO_COMMAND = "undo";
+    private static final String EMPTY_COMMAND_ERROR_MESSAGE = "This command is empty.";
+    private static final String NO_EXISTING_COMMAND_ERROR_MESSAGE = "This command does not exist.";
 
     /**
      * Parses the command to get the Command instance.
@@ -27,7 +29,7 @@ public class CommandParser {
     public Command getCommandInstance(String command) throws ChadInvalidCommandException {
         String[] tokens = command.strip().split(" ");
         if (tokens.length == 0 || tokens[0].length() == 0) {
-            throw new ChadInvalidCommandException("This command is empty.");
+            throw new ChadInvalidCommandException(EMPTY_COMMAND_ERROR_MESSAGE);
         }
         String commandName = tokens[0];
         switch (commandName) {
@@ -50,7 +52,7 @@ public class CommandParser {
         case UNDO_COMMAND:
             return new UndoCommand(command);
         default:
-            throw new ChadInvalidCommandException("This command does not exist.");
+            throw new ChadInvalidCommandException(NO_EXISTING_COMMAND_ERROR_MESSAGE);
         }
     }
 }

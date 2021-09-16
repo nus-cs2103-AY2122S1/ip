@@ -8,6 +8,9 @@ package chad.task;
 public abstract class Task {
 
     private static final String DONE_MARK = "X";
+    private static final String DONE_INDICATOR_TEMPLATE = "[%s]";
+    private static final String NOT_DONE_INDICATOR = "[ ]";
+    private static final String TASK_STRING_REPRESENTATION_TEMPLATE = "%s%s %s";
 
     private String description;
     private boolean isDone;
@@ -44,9 +47,9 @@ public abstract class Task {
 
     private String getDoneIndicator() {
         if (isDone) {
-            return String.format("[%s]", DONE_MARK);
+            return String.format(DONE_INDICATOR_TEMPLATE, DONE_MARK);
         } else {
-            return "[ ]";
+            return NOT_DONE_INDICATOR;
         }
     }
 
@@ -60,11 +63,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getTypeIndicator());
-        sb.append(getDoneIndicator());
-        sb.append(" ");
-        sb.append(description);
-        return sb.toString();
+        return String.format(TASK_STRING_REPRESENTATION_TEMPLATE, getTypeIndicator(), getDoneIndicator(), description);
     }
 }
