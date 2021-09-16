@@ -9,7 +9,7 @@ This repo contains the code for the Misaki chatbot as part of CS2103T: Software 
 2. Download the latest `.jar` from [here].
 3. Move the file to the desired path as the home folder for your Misaki. 
 4. Right-click the file and open the app. 
-5. Try entering help and other commands. You should see a similar GUI as below. 🌷
+5. Try entering help and list commands. You should see a similar GUI as below. 🌷
 
 ![Image of ](Ui.png)
 
@@ -73,7 +73,7 @@ Exits the program.<br>
 Format: `bye`
 
 ### 🌸 Save data
-Misaki saves data automatically in the local storage after every valid user input.
+Misaki saves data automatically in the local storage after every valid user input. 🌟
 
 ## Command summary
 
