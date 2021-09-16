@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.gui.DialogBox;
 import duke.task.Task;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;

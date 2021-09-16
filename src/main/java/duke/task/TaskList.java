@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.Storage;
-import duke.Ui;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Contains the task list. It has operations to change the tasks in the list.
@@ -75,7 +75,7 @@ public class TaskList {
             task = Event.create(description, false);
             break;
         default:
-            // checked for command validity in duke.Parser class, so this should not execute at all
+            // checked for command validity in duke.parser.Parser class, so this should not execute at all
             throw new InvalidCommandException();
         }
         assert task != null : "Task not added successfully but error is not caught";

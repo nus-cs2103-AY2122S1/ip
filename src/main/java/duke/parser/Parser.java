@@ -1,9 +1,10 @@
-package duke;
+package duke.parser;
 
 import duke.command.Command;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 /**
