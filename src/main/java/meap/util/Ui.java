@@ -1,9 +1,9 @@
-package duke.util;
+package meap.util;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
+import meap.exception.DukeException;
+import meap.task.Deadline;
+import meap.task.Event;
+import meap.task.ToDo;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

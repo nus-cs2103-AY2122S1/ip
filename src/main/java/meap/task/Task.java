@@ -1,6 +1,6 @@
-package duke.task;
+package meap.task;
 
-import duke.exception.DukeException;
+import meap.exception.DukeException;
 
 import java.util.Arrays;
 import java.util.List;

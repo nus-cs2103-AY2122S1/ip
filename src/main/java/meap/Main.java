@@ -1,4 +1,4 @@
-package duke;
+package meap;
 
 import java.io.IOException;
 
@@ -7,22 +7,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import duke.controller.MainWindow;
-import javafx.stage.StageStyle;
+import meap.controller.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Meap meap = new Meap();
 
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindows.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(meap);
 
             Scene scene = new Scene(ap);
             stage.setScene(scene);

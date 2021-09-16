@@ -1,11 +1,11 @@
-package duke.util;
+package meap.util;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
-import duke.task.Event;
+import meap.exception.DukeException;
+import meap.task.Deadline;
+import meap.task.Task;
+import meap.task.TaskList;
+import meap.task.ToDo;
+import meap.task.Event;
 
 public class Parser {
     private final TaskList TASKLIST;

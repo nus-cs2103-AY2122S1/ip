@@ -1,3 +1,0 @@
-T | 1 | nus pw 
-E | 0 | nus seminar talk | next wed
-T | 0 | clean my room

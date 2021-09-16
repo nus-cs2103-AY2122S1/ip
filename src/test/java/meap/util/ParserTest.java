@@ -1,10 +1,4 @@
-package duke.util;
-
-import duke.task.Task;
-import duke.task.TaskList;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
+package meap.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

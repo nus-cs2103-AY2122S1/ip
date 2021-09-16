@@ -1,6 +1,4 @@
-package duke.util;
-
-import org.junit.jupiter.api.Test;
+package meap.util;
 
 public class UiTest {
 //    @Test

@@ -14,7 +14,7 @@
 <!--<?import javafx.scene.layout.AnchorPane?>-->
 <!--<?import javafx.scene.layout.VBox?>-->
 <!--<?import javafx.scene.text.Font?>-->
-<!--<AnchorPane xmlns:fx = "http://javafx.com/fxml/1" maxHeight = "-Infinity" maxWidth = "-Infinity" minHeight = "-Infinity" minWidth = "-Infinity" prefHeight = "600.0" prefWidth = "400.0" style = "-fx-border-color: black; -fx-background-color: black;" xmlns = "http://javafx.com/javafx/11" fx:controller = "duke.controller.MainWindow">-->
+<!--<AnchorPane xmlns:fx = "http://javafx.com/fxml/1" maxHeight = "-Infinity" maxWidth = "-Infinity" minHeight = "-Infinity" minWidth = "-Infinity" prefHeight = "600.0" prefWidth = "400.0" style = "-fx-border-color: black; -fx-background-color: black;" xmlns = "http://javafx.com/javafx/11" fx:controller = "meap.controller.MainWindow">-->
 <!--    <children>-->
 <!--        <TextField fx:id = "userInput" layoutY = "558.0" onAction = "#handleUserInput" prefHeight = "40.0" promptText = "Enter Command Here ..." style = "-fx-background-color: #373e43;" styleClass = "text-field" stylesheets = "@style.css" AnchorPane.bottomAnchor = "1.0" AnchorPane.leftAnchor = "1.0" AnchorPane.rightAnchor = "75.0">-->
 <!--            <font>-->
@@ -35,7 +35,7 @@
 <!--</AnchorPane>-->
 
 <?import java.net.URL?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controller.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="meap.controller.MainWindow">
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="374.0" AnchorPane.bottomAnchor="1.0" />
         <Button fx:id="sendButton" layoutX="374.0" layoutY="556.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #ede6f0;" text="send" />

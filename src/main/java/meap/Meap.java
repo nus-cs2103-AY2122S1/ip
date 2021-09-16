@@ -1,16 +1,16 @@
-package duke;
+package meap;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.util.Parser;
-import duke.util.Storage;
+import meap.exception.DukeException;
+import meap.task.TaskList;
+import meap.util.Parser;
+import meap.util.Storage;
 import java.io.File;
 
-public class Duke {
+public class Meap {
     private final Parser PARSER;
-    private static final String STORAGE_FILEPATH = "data" + File.separatorChar + "duke-storage.txt";
+    private static final String STORAGE_FILEPATH = "data" + File.separatorChar + "meap-storage.txt";
 
-    public Duke() {
+    public Meap() {
         Storage dukeStore = new Storage(STORAGE_FILEPATH);
         TaskList taskList = TaskList.of(dukeStore);
         PARSER = Parser.initialize(taskList);

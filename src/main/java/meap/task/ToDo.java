@@ -1,4 +1,4 @@
-package duke.task;
+package meap.task;
 
 public class ToDo extends Task {
     public static final String SYMBOL = "T";

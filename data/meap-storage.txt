@@ -1,0 +1,4 @@
+T | 1 | nus pw 
+E | 1 | nus seminar talk | next wed
+T | 1 | clean my room
+T | 0 | smth

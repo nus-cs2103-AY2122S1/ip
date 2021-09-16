@@ -1,6 +1,6 @@
-package duke.util;
+package meap.util;
 
-import duke.task.Task;
+import meap.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;

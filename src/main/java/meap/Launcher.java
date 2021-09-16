@@ -1,4 +1,4 @@
-package duke;
+package meap;
 
 import javafx.application.Application;
 

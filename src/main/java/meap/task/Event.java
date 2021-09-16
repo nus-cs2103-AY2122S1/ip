@@ -1,4 +1,4 @@
-package duke.task;
+package meap.task;
 
 public class Event extends Task {
     public static final String SYMBOL = "E";

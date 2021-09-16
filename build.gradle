@@ -48,7 +48,7 @@ test {
 
 application {
     // compulsory property which tells Gradle the entry pt to application
-    mainClassName = "duke.Launcher"
+    mainClassName = "meap.Launcher"
 }
 
 shadowJar {
