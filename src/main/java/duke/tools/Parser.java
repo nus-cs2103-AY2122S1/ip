@@ -22,7 +22,7 @@ public class Parser {
     public static String parse(String command) throws DukeException, IOException {
         if (command.contains("bye")) {
             assert command.contains("bye");
-            return "\n Bye. Hope to see you again soon!";
+            return "Bye. Hope to see you again soon!";
         }
         if (command.startsWith("list")) {
             assert command.contains("list");
@@ -30,7 +30,7 @@ public class Parser {
         } else if (command.startsWith("done")) {
             assert command.contains("done");
             if (command.trim().equals("done")) {
-                throw new DukeException("\n☹ OOPS!!! The description of done cannot be empty.\n " +
+                throw new DukeException("☹ OOPS!!! The description of done cannot be empty.\n " +
                         "Please follow this format: \n" +
                         "    done {task index}");
             }
@@ -39,7 +39,7 @@ public class Parser {
         } else if (command.contains("delete")) {
             assert command.contains("delete");
             if (command.trim().equals("delete")) {
-                throw new DukeException("\n☹ OOPS!!! The description of delete cannot be empty.\n " +
+                throw new DukeException("☹ OOPS!!! The description of delete cannot be empty.\n " +
                         "Please follow this format: \n" +
                         "    delete {task index}");
             }
@@ -57,13 +57,13 @@ public class Parser {
         } else if (command.startsWith("find")) {
             assert command.contains("find");
             if (command.trim().equals("find")) {
-                throw new DukeException("\n☹ OOPS!!! The description of find cannot be empty.\n " +
+                throw new DukeException("☹ OOPS!!! The description of find cannot be empty.\n " +
                         "Please follow this format: \n" +
                         "    find {key}");
             }
             return Duke.findTask(command);
         } else {
-            throw new DukeException("\n OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
