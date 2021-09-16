@@ -109,7 +109,7 @@ Adds an event to the list of tasks.
 
 Command format:
 
-`event [description] /by [time]`
+`event [description] /at [time]`
 
 💡 Ensure `time` is `[dd/MM/yy] [HHmm] `
 
@@ -139,6 +139,12 @@ Example of usage:
 
 `done 2` marks the second task in the list as done.
 
+Expected outcome:
+```
+Nice! Task done:
+  [T][X] get coffee
+```
+
 <br>
 
 ### Find Tasks: `find`
@@ -163,7 +169,7 @@ Command format:
 
 Example of usage:
 
-`undo 1` Undos one command.
+`undo 1` Undos one command and returns the list of tasks.
 
 💡 Ensure there is a previous command to undo.
 
