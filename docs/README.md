@@ -16,6 +16,7 @@ Tabby is a desktop app for managing your task list. It is optimized for use via 
 - [Saving Data](#saving-data)
 - [Command Summary](#command-summary)
 
+
 ---
 
 ## Features <a name="features"></a>
