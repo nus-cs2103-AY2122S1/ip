@@ -24,6 +24,12 @@ Duke can manage 3 different types of tasks for the user.
 
 Duke allows the user to save the current task list into an archive file for future access.
 
+#### Note: Source Images
+Find the source for images used:
+* Background: https://www.pinterest.com/pin/602215781414404190/
+* Character with notepad: https://wantubizhi.com/image.aspx
+* Thinking Cat: https://tenor.com/view/peach-cat-and-goma-cat-thinking-planning-cat-gif-20587989
+
 
 ## Usage
 

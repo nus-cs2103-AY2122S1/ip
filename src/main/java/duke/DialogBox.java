@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
 
         dialog.setMinHeight(Label.USE_PREF_SIZE);
         dialog.setText(text);
-        dialog.setStyle("-fx-border-color: #897caa; -fx-border-image-insets: 5; -fx-border-radius: 8; "
+        dialog.setStyle("-fx-border-color: #af8204; -fx-border-image-insets: 5; -fx-border-radius: 8; "
                 + "-fx-border-width: 2; -fx-label-padding: 7");
 
         displayPicture.setImage(img);
