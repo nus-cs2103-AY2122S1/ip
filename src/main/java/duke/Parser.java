@@ -21,6 +21,12 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Perform the actions based on what the user input.
+     *
+     * @param input String containing text to add
+     * @return string to be showed on the GUI
+     */
     public String parse(String input) {
         if (input.startsWith(EXIT_COMMAND)) {
             return ui.goodbye();
@@ -66,12 +72,5 @@ public class Parser {
             }
         }
         return "I don't understand. Please try again!";
-
-
-
-
-
-
-
     }
 }
