@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
     public DeadlineCommand(String args) throws DukeException {
         Matcher matcher = EVENT_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            throw new DukeException("Events must be in the format 'deadline <description> /by <dd MMM yyyy>");
+            throw new DukeException("Deadlines must be in the format 'deadline <description> /by <dd MMM yyyy>");
         }
         description = matcher.group("description").trim();
         by = matcher.group("by").trim();
