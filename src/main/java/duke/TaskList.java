@@ -98,6 +98,7 @@ public class TaskList {
 
     /**
      * Returns an ArrayList of Task objects containing the given search keyword.
+     *
      * @param str Keyword used for searching.
      * @return ArrayList of Task objects matching the keyword.
      */
@@ -113,6 +114,7 @@ public class TaskList {
 
     /**
      * Get the number of tasks in todo list.
+     *
      * @return the number of tasks in todo list.
      */
     public int getNumOfTask() {

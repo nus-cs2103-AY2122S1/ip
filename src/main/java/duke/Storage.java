@@ -67,16 +67,13 @@ public class Storage {
         int indexOfStatus = 3;
         char type = string.charAt(indexOfType);
         char status = string.charAt(indexOfStatus);
-        boolean isDone;
-        if (status == ' ') {
-            isDone = false;
-        } else if (status == 'X') {
-            isDone = true;
-        } else {
-            throw new DukeException("Cannot read file.");
-        }
+        boolean isDone = isTaskDone(status);
         int indexOfDescription = 6;
         String description = string.substring(indexOfDescription);
+        addTaskToList(tasks, type, isDone, description);
+    }
+
+    private void addTaskToList(ArrayList<Task> tasks, char type, boolean isDone, String description) throws DukeException {
         if (type == 'T') {
             tasks.add(new ToDo(description, isDone));
         } else if (type == 'E') {
@@ -91,6 +88,18 @@ public class Storage {
         } else {
             throw new DukeException("Cannot read file.");
         }
+    }
+
+    private boolean isTaskDone(char status) throws DukeException {
+        boolean isDone;
+        if (status == ' ') {
+            isDone = false;
+        } else if (status == 'X') {
+            isDone = true;
+        } else {
+            throw new DukeException("Cannot read file.");
+        }
+        return isDone;
     }
 
     /**

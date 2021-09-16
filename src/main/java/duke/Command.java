@@ -73,8 +73,6 @@ public class Command {
         }
     }
 
-
-
     /**
      * Runs the type of command given in the parameters and returns Duke's
      * reply.
@@ -86,35 +84,63 @@ public class Command {
     public String getReplyFromDuke(String typeOfCommand, String description) {
         try {
             if (typeOfCommand.equals("bye")) {
-                this.storage.writeToFile(this.taskList.getTaskList());
-                return this.ui.getEndMessage();
+                return getByeCommandReply();
             } else if (typeOfCommand.equals("list")) {
-                return this.ui.getIterateTaskList(this.taskList.getTaskList());
+                return getListCommandReply();
             } else if (typeOfCommand.equals("done")) {
-                int task = this.parser.parseDoneCommand(description);
-                Task t = this.taskList.markTaskAsDone(task);
-                return this.ui.getMarkAsDoneMessage(t);
+                return getDoneCommandReply(description);
             } else if (typeOfCommand.equals("delete")) {
-                int task = this.parser.parseDeleteCommand(description);
-                Task t = this.taskList.deleteTask(task);
-                return this.ui.getDeletedTaskMessage(t) + this.ui.getNumberOfTasksInList(this.taskList);
+                return getDeleteCommandReply(description);
             } else if (typeOfCommand.equals("addTask")) {
-                Task task = this.parser.parseAddTask(description);
-                this.taskList.addTask(task);
-                return this.ui.getAddedTaskMessage(task) + this.ui.getNumberOfTasksInList(this.taskList);
+                return getAddTaskReply(description);
             } else if (typeOfCommand.equals("empty")) {
-                return this.ui.getMessageForEmptyLineInput();
+                return getEmptyCommandReply();
             } else if (typeOfCommand.equals("find")) {
-                String str = this.parser.parseFindCommand(description);
-                ArrayList<Task> matchingTasks = this.taskList.findTask(str);
-                assert(this.ui.getMatchingTaskList(matchingTasks) != null);
-                return this.ui.getMatchingTaskList(matchingTasks);
+                return getFindCommandReply(description);
             } else {
                 throw new DukeException("Sorry I don't understand this command :(");
             }
         } catch (DukeException e) {
             return e.getMessage() + "\n";
         }
+    }
+
+    private String getFindCommandReply(String description) throws DukeException {
+        String str = this.parser.parseFindCommand(description);
+        ArrayList<Task> matchingTasks = this.taskList.findTask(str);
+        assert(this.ui.getMatchingTaskList(matchingTasks) != null);
+        return this.ui.getMatchingTaskList(matchingTasks);
+    }
+
+    private String getEmptyCommandReply() {
+        return this.ui.getMessageForEmptyLineInput();
+    }
+
+    private String getAddTaskReply(String description) throws DukeException {
+        Task task = this.parser.parseAddTask(description);
+        this.taskList.addTask(task);
+        return this.ui.getAddedTaskMessage(task) + this.ui.getNumberOfTasksInList(this.taskList);
+    }
+
+    private String getDeleteCommandReply(String description) throws DukeException {
+        int task = this.parser.parseDeleteCommand(description);
+        Task t = this.taskList.deleteTask(task);
+        return this.ui.getDeletedTaskMessage(t) + this.ui.getNumberOfTasksInList(this.taskList);
+    }
+
+    private String getDoneCommandReply(String description) throws DukeException {
+        int task = this.parser.parseDoneCommand(description);
+        Task t = this.taskList.markTaskAsDone(task);
+        return this.ui.getMarkAsDoneMessage(t);
+    }
+
+    private String getListCommandReply() {
+        return this.ui.getIterateTaskList(this.taskList.getTaskList());
+    }
+
+    private String getByeCommandReply() throws DukeException {
+        this.storage.writeToFile(this.taskList.getTaskList());
+        return this.ui.getEndMessage();
     }
 
     /**
