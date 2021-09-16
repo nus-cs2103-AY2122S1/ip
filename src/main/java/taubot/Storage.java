@@ -41,7 +41,7 @@ public class Storage {
             while (s.hasNext()) {
                 String currentLine = s.nextLine();
                 String[] commands = currentLine.split(",");
-                Task.TaskType type = Taubot.convertToTaskType(commands[0]);
+                Task.TaskType type = Taubot.convertStringToTaskType(commands[0]);
                 switch (type) {
                 case TODO:
                     tasks.addTask(commands[2]);

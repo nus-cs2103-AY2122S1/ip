@@ -18,14 +18,14 @@ public class TaubotUi {
      * Greets user on startup.
      */
     public void greetUser() {
-        String logo = "████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ████████╗\n" +
-                "╚══██╔══╝██╔══██╗██║   ██║██╔══██╗██╔═══██╗╚══██╔══╝\n" +
-                "   ██║   ███████║██║   ██║██████╔╝██║   ██║   ██║   \n" +
-                "   ██║   ██╔══██║██║   ██║██╔══██╗██║   ██║   ██║   \n" +
-                "   ██║   ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   \n" +
-                "   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   \n" +
-                "                                                    \n" +
-                "\n";
+        String logo = "████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ████████╗\n"
+                + "╚══██╔══╝██╔══██╗██║   ██║██╔══██╗██╔═══██╗╚══██╔══╝\n"
+                + "   ██║   ███████║██║   ██║██████╔╝██║   ██║   ██║   \n"
+                + "   ██║   ██╔══██║██║   ██║██╔══██╗██║   ██║   ██║   \n"
+                + "   ██║   ██║  ██║╚██████╔╝██████╔╝╚██████╔╝   ██║   \n"
+                + "   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   \n"
+                + "                                                    \n"
+                + "\n";
         String firstLine = "hey, i'm \n" + logo + "\n";
         String secondLine = "what do you want?";
         System.out.println(firstLine + secondLine);
@@ -58,8 +58,8 @@ public class TaubotUi {
         } else if (date.equals("")) {
             response = "these are the deadlines and events: \n";
         }
-        for (int i = 0; i < tasks.size(); i++) {
-            response += tasks.get(i).toString() + "\n";
+        for (Task task : tasks) {
+            response += task.toString() + "\n";
         }
         return response;
     }
@@ -98,8 +98,8 @@ public class TaubotUi {
         if (tasks.size() == 0) {
             response = "there are no tasks matching that keyword";
         }
-        for (int i = 0; i < tasks.size(); i++) {
-            response += tasks.get(i).toString() + "\n";
+        for (Task task : tasks) {
+            response += task.toString() + "\n";
         }
         return response;
     }

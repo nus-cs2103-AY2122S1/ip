@@ -74,7 +74,7 @@ public class Taubot {
         }
     }
 
-    public void stopRunningTaubot() {
+    private void stopRunningTaubot() {
         isRunning = false;
     }
 
@@ -121,7 +121,7 @@ public class Taubot {
      * @throws TaubotException Thrown whenever user requests delete of a
      * task out of range or not a number. e.g. delete hi
      */
-    public String deleteTask() throws TaubotException {
+    private String deleteTask() throws TaubotException {
         try {
             tasks.deleteTask(parser.findCommandIndex());
             writeDataToTaubot();
@@ -144,9 +144,9 @@ public class Taubot {
      * or when the user does not give a date for an event or deadline task,
      * or when the user formats the date wrongly.
      */
-    public String addTask() throws TaubotException {
+    private String addTask() throws TaubotException {
         String firstCommand = parser.getFirstCommand();
-        Task.TaskType taskType = convertToTaskType(firstCommand);
+        Task.TaskType taskType = convertStringToTaskType(firstCommand);
         String date = parser.findDateInCommand();
         String taskDesc = parser.findTaskDescription();
         if (taskDesc.equals("")) {
@@ -162,7 +162,7 @@ public class Taubot {
                 LocalDate ld = LocalDate.parse(dateString);
                 assert !dateString.equals("");
                 assert !timeString.equals("");
-                tasks.addTask(taskDesc, convertToTaskType(firstCommand), ld, timeString);
+                tasks.addTask(taskDesc, convertStringToTaskType(firstCommand), ld, timeString);
                 writeDataToTaubot();
                 return confirmAdditionOfTask();
             } else {
@@ -179,7 +179,7 @@ public class Taubot {
     /**
      * Confirms the addition of a task.
      */
-    public String confirmAdditionOfTask() {
+    private String confirmAdditionOfTask() {
         int tasksLength = tasks.getTasksLength();
         assert tasksLength != 0;
         return ui.showTaskAddedMessage(tasksLength, tasks.getTask(tasksLength).toString());
@@ -213,7 +213,7 @@ public class Taubot {
      * @param command The command to be converted.
      * @return The TaskType enum of the task.
      */
-    public static Task.TaskType convertToTaskType(String command) {
+    public static Task.TaskType convertStringToTaskType(String command) {
         switch (command) {
         case "todo":
             return Task.TaskType.TODO;
@@ -226,7 +226,7 @@ public class Taubot {
         }
     }
 
-    public boolean isInDateFormat(String date) {
+    private boolean isInDateFormat(String date) {
         return DATE_PATTERN.matcher(date).matches();
     }
 

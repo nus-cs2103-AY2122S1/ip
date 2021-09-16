@@ -54,11 +54,10 @@ public class MessageContainer extends HBox {
         if (textMessage.getText().split(" ")[0].equals(errorMessagePrefix)) {
             taubotReply.setBackground(new Background(new BackgroundFill(dukeErrorMessageColour, messageCornerRadius,
                     messageInset)));
-        } else {
-            taubotReply.setBackground(new Background(new BackgroundFill(dukeTextMessageColour, messageCornerRadius,
-                    messageInset)));
-
+            return;
         }
+        taubotReply.setBackground(new Background(new BackgroundFill(dukeTextMessageColour, messageCornerRadius,
+                    messageInset)));
         taubotReply.setTextFill(blackColour);
         Collections.reverse(text);
         getChildren().setAll(text);
