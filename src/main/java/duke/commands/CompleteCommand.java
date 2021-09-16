@@ -14,8 +14,8 @@ public class CompleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        assert index < tasks.getNumOfTasks();
-        assert index > 0;
+        assert index <= tasks.getNumOfTasks() : "invalid task reference";
+        assert index > 0 : "reference smaller than 0";
 
         Task task = tasks.getTask(index);
         if (task.isDone()) {

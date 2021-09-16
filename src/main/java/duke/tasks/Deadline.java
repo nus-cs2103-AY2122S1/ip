@@ -24,7 +24,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String when, boolean done) throws UserInputError {
         super(description, Task.Type.DEADLINE, done);
-        assert !description.trim().equals("");
+        assert !description.trim().equals("") : "empty deadline task description";
         try {
             String[] arr = checkDateTimeFormat(when.trim());
             this.date = getDateFromString(arr[0].trim().toLowerCase());

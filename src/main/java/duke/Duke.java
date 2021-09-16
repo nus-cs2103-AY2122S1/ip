@@ -26,7 +26,7 @@ public class Duke {
             output = e.getMessage();
         }
 
-        assert !output.equals("");
+        assert !output.equals("") : "empty output";
         return ui.formatOutput(output);
     }
 }
