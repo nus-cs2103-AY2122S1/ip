@@ -1,4 +1,4 @@
-# GARY :snail:
+# GARY 🐌
 ---
 
 ## User Guide
@@ -78,11 +78,11 @@ This is your current list!
     3.[E][]  Biology exam (at: Tuesday 2-4pm)
 ```
 
-* Todo tasks are marked as [T]
-* Deadline tasks are marked as [D]
-* Event tasks are marked as [E]
-* Tasks that are done are marked as [X]
-* Tasks that are not done are marked as []
+* Todo tasks are marked as `[T]`
+* Deadline tasks are marked as `[D]`
+* Event tasks are marked as `[E]`
+* Tasks that are done are marked as `[X]`
+* Tasks that are not done are marked as `[]`
 
 ### `todo` - Adds a Todo task 
 
@@ -106,8 +106,8 @@ You have successfully added the following task!
 You now have 1 task in your list!
 ```
 
-* [T] means that this is a Todo task
-* [] means that the task is not marked as done (default state)
+* `[T]` means that this is a Todo task
+* `[]` means that the task is not marked as done (default state)
 
 ### `deadline` - Adds a Deadline task
 
@@ -131,8 +131,8 @@ You have successfully added the following task!
 You now have 2 tasks in your list!
 ```
 
-* [D] means that this is a Deadline task
-* [] means that the task is not marked as done (default state)
+* `[D]` means that this is a Deadline task
+* `[]` means that the task is not marked as done (default state)
 
 ### `event` - Adds an Event task
 
@@ -156,8 +156,8 @@ You have successfully added the following task!
 You now have 3 tasks in your list!
 ```
 
-* [E] means that this is an Event task
-* [] means that the task is not marked as done (default state)
+* `[E]` means that this is an Event task
+* `[]` means that the task is not marked as done (default state)
 
 ### `done` - Marks task as done
 
@@ -179,7 +179,7 @@ This task is successfully marked as done!
     [T][X] Borrow a book
 ```
 
-* [X] means that this task is marked as done
+* `[X]` means that this task is marked as done
 
 ### `delete` - Deletes task
 
