@@ -28,7 +28,7 @@ public class DukeTest {
 
     @Test
     public void testPraserBye() throws DukeException, IOException {
-        boolean expectedResult = true;
+        boolean isTrue = true;
         boolean actualResult = Parser.parse("bye");
         assertEquals(expectedResult, actualResult);
     }

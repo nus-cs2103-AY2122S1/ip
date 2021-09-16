@@ -65,7 +65,7 @@ public class Duke {
     }
 
     /**
-     * Method to run the bot.
+     * Start the Duke bot.
      */
     public void run() {
         ui.showWelcomeMessage();
@@ -88,7 +88,7 @@ public class Duke {
     }
 
     /**
-     * Method to mark a task done by index.
+     * Marks a task done by index.
      * @param i the index for task to remove
      * @throws DukeException throw error
      * @return result
@@ -106,7 +106,7 @@ public class Duke {
     }
 
     /**
-     * Method to get the Duke TaskList
+     * Get the Duke TaskList,
      */
     public static String getTaskList() {
         if (tasks.getSize() <= 0) {
