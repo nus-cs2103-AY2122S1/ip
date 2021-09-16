@@ -57,10 +57,6 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        //URL url = new File("src/main/resources/MainWindow.fxml").toURI().toURL();
-        //Parent root = FXMLLoader.load(url);
-        //System.out.println(getClass().getResource("MainWindow.fxml"));
-        //System.out.println(getClass().getResource("userIcon.png"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
         Parent root2 = loader.load();
         Scene scene = new Scene(root2);
