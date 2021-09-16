@@ -44,7 +44,7 @@ Successfully opening TaskMan would lead you to a window like this
 
 ### Adding a task to do :`todo`
 > A task with a description.  
-< Users could either type at the textbox below or press a button shortcut
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `todo [description]`
@@ -70,7 +70,7 @@ _*x refers to the number of task in the list_
 
 ### Adding a task with a deadline: `deadline`
 > A task with a day to be set as a deadline.  
-< Users could either type at the textbox below or press a button shortcut
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `deadline [description] /by [YYYY-MM-DD] [Time in 24 Hour Format]`
@@ -104,7 +104,7 @@ _*x refers to the number of task in the list_
 
 ### Adding an event: `event`
 > A task with a day to be set as an Event.  
-< Users could either type at the textbox below or press a button shortcut
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `event [description] /at [YYYY-MM-DD] [Time in 24 Hour Format]`
@@ -137,7 +137,7 @@ _*x refers to the number of task in the list_
 
 ### Looking at all the task being tracked: `list`
 > Get a list of all the task being tracked.  
-< Users could either type at the textbox below or press a button shortcut
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `list`
@@ -161,7 +161,7 @@ Im sorry, the list seems to be empty
 
 ### Finding task using keyword: `find`
 > Find a task based keyword description . 
-< Users can can only type in the textbox. _**Button shortcut coming soon**_
+  Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `find [keyword/s]`
@@ -180,7 +180,7 @@ _*x refers to the task position in the whole list._
 
 ### Mark task as complete: `done`
 > Marks a task as complete.  
-< Users can can only type in the textbox. _**Button shortcut coming soon**_
+  Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `done [task position in list]`  
@@ -202,7 +202,7 @@ Expected output:
 
 ### Remove a task: `delete`
 > Delete a task.  
-< Users can can only type in the textbox. _**Button shortcut coming soon**_
+  Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `delete [task position in list]`  
@@ -225,7 +225,7 @@ _*x refers to the number of task in the list_
 
 ### Viewing help : `help`
 > A quick way to access instructions for Command Line Commands
-< Users could either type at the textbox below or press a button shortcut
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `help`  
@@ -261,7 +261,7 @@ Expected Output:
 
 ### Exiting the application `bye`
 > There are two ways to close the application.  
-< Users could either type in the textbox below or simply closing `x` on the top right
+  Users could either type in the textbox below or simply closing `x` on the top right
 
 _Format to type in textbox:_  
 `bye`
