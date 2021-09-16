@@ -187,7 +187,7 @@ public class Parser {
 
         boolean isDelete = expense.matches("([0-9]+)\\s+(?i)/delete\\s+([0-9]+)");
         boolean isDisplay = expense.matches("([0-9]+)");
-        boolean isAdd = expense.matches("([0-9]+)([\\s+(\\w+)\\s+]+)(\\$)([0-9]+)");
+        boolean isAdd = expense.matches("([0-9]+)([\\s+(\\w+)\\s+]+)(\\$)([0-9]+)(\\.*)([0-9]*)");
         boolean isSum = expense.matches("([0-9]+)\\s(?i)/sum$");
 
         try {
