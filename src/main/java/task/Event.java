@@ -10,7 +10,7 @@ public class Event extends Task {
 
     private LocalDate date;
 
-    DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
     DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Event(String description, String deadline, String notes, boolean completed) throws InvalidDateFormat {
