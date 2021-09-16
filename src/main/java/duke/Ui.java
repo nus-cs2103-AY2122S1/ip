@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -12,7 +11,6 @@ public class Ui {
     String logo;
     Storage storage;
     TaskList tasks;
-    boolean isExit = false;
     Scanner scanner = new Scanner(System.in);
 
     public Ui(Storage storage, TaskList taskList) {
