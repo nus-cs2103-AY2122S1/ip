@@ -13,18 +13,20 @@
 
 ### 1. Add `todo` Task
 
-This feature allows you to categorize a task as `todo` and add it to your `TaskList`.
+This feature allows you to categorize a task as `todo` and add it to your `TaskList`. 
+However, duplicate todo task is not allowed.
 
 ### 2. Add `event` Task
 
 This feature allows you to categorize a task as `event` and add it to your `TaskList`. You need to specify details 
-such as date and time for this task. 
+such as date and time for this task. However, duplicate event task is not allowed.
 
 
 ### 3. Add `deadline` Task
 
 This feature allows you to categorize a task as `dealine` and add it to your `TaskList`. You need to specify details
-such as date and time for this task.
+such as date and time for this task. However, duplicate deadline task is not allowed.
+
 
 ### 4. Mark Task as Done
 
