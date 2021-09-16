@@ -48,4 +48,4 @@ bye
 Data is always saved when a task is created/an operation is executed on the task list.
 
 ## Preview
-<img src="Ui.PNG" height="500">
+<img src="Ui.png" height="500">

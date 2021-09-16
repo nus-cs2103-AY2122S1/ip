@@ -4,6 +4,8 @@ import duke.exception.DukeInvalidCommandException;
 import duke.logic.parser.Parser;
 import duke.logic.tasks.TaskList;
 
+import java.util.Locale;
+
 /**
  * Main program
  */
