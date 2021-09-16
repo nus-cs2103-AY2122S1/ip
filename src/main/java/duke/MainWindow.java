@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.awt.*;
+import java.net.URL;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -32,10 +36,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMsg = "Hello I'm The Duke.\n"
+        String welcomeMsg = "Hello I'm The Duke \uD83D\uDE0A \n"
                 + "What can I do for you?";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMsg, dukeImage)
+                DukeDialogBox.getDukeDialog(welcomeMsg, dukeImage)
         );
     }
 
@@ -52,9 +56,23 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                UserDialogBox.getUserDialog(input, userImage),
+                DukeDialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
+
+    //@@author Daniel Barral
+    //Reused from https://stackoverflow.com/questions/10967451
+    // with minor modifications
+    @FXML
+    private void showHelpMessage() {
+        String userGuideUrl = "https://www.google.com"; //TODO replace with user guide url
+        try {
+            Desktop.getDesktop().browse(new URL(userGuideUrl).toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //@@author
 }
