@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -26,6 +28,8 @@ public class DukeGui extends Application {
     private Button sendButton;
     private Scene scene;
     private Duke duke;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -40,7 +44,7 @@ public class DukeGui extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        Path filePath = Paths.get("src", "main", "data", "duke.txt");
+        Path filePath = Paths.get("src", "main", "resources", "duke.txt");
         duke = new Duke(filePath);
 
         scene = new Scene(mainLayout);
@@ -51,12 +55,12 @@ public class DukeGui extends Application {
         // Specifications of the layout
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 800.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(585, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -65,7 +69,7 @@ public class DukeGui extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(525.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -76,6 +80,9 @@ public class DukeGui extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // Show welcome message
+        showWelcomeMessage();
 
         // Interacting with the user
         sendButton.setOnMouseClicked((event) -> {
@@ -100,9 +107,10 @@ public class DukeGui extends Application {
         Label userText = new Label(input);
         Label dukeText = new Label(getResponse(input));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText),
-                DialogBox.getDukeDialog(dukeText)
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(bot))
         );
+
         userInput.clear();
         if (input.equals("bye")) {
             Platform.exit();
@@ -116,6 +124,20 @@ public class DukeGui extends Application {
      */
     private String getResponse(String input) {
         return duke.readInput(input);
+    }
+
+    private void showWelcomeMessage() {
+        String input =
+                " ___           _        \n"
+                + "|   _  \\  ___ | | _____ \n"
+                + "|  | |  |/  _  \\| |/ / _ \\\n"
+                + "|  |_|  |  |_|  |   <  __/\n"
+                + "|____/ \\___/|_|\\_\\___|\n"
+                + "Hello! I'm Doke\nWhat do you want??\n";
+        Label dukeText = new Label(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(bot))
+        );
     }
 
 }

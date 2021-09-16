@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -12,15 +13,24 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     private Label text;
+    private ImageView displayPicture;
 
-
-    public DialogBox(Label l) {
+    public DialogBox(Label l, ImageView iv, String color) {
         text = l;
+        displayPicture = iv;
 
         text.setWrapText(true);
+        text.setStyle("-fx-padding: 10;"
+                + "-fx-border-color: blue;"
+                + "-fx-border-radius: 10px;");
+
+        displayPicture.setFitWidth(100.0);
+        displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text);
+        this.getChildren().addAll(text, displayPicture);
+        this.setSpacing(10);
+        this.setStyle("-fx-background-color:" + color);
     }
 
     /**
@@ -33,24 +43,12 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    /**
-     * Gets user dialog and return a DialogBox.
-     *
-     * @param l The user dialog
-     * @return DialogBox object containing the dialog.
-     */
-    public static DialogBox getUserDialog(Label l) {
-        return new DialogBox(l);
+    public static DialogBox getUserDialog(Label l, ImageView iv) {
+        return new DialogBox(l, iv, "LemonChiffon");
     }
 
-    /**
-     * Gets user dialog and return a DialogBox.
-     *
-     * @param l The user dialog
-     * @return DialogBox object containing the dialog.
-     */
-    public static DialogBox getDukeDialog(Label l) {
-        var db = new DialogBox(l);
+    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        var db = new DialogBox(l, iv, "Lavender");
         db.flip();
         return db;
     }

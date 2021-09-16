@@ -8,30 +8,14 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner SCANNER;
-    private String separator = "----------------------------------------";
+    private String separator = "-----------------------------------------" +
+            "------------------------------------------------";
 
     /**
      * Constructor for Ui.
      */
     public Ui() {
         this.SCANNER = new Scanner(System.in);
-    }
-
-    /**
-     * Returns the welcome message.
-     *
-     * @return The string containing the welcome message.
-     */
-    public String showWelcome() {
-        String LOGO = "----------------------------------------\n"
-                + " ____        _        \n"
-                + "|  _ \\  ___ | | _____ \n"
-                + "| | | |/ _ \\| |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\___/|_|\\_\\___|\n"
-                + "Hello! I'm Doke\nWhat do you want??\n"
-                + "----------------------------------------";
-        return LOGO;
     }
 
     /**
