@@ -3,15 +3,20 @@ import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Class that handles commands
+ */
 public class TaskManager {
     Task[] taskList = new Task[100];
     int i = 0;
     File txtFile;
     String path;
 
+    /**
+     * Constructor for a TaskManager instance
+     */
     TaskManager() {
         File txtFile;
-//        System.out.println(System.getProperty("user.dir"));
         String path = System.getProperty("user.dir") + "\\src\\main\\data\\duke.txt";
         txtFile = new File(path);
         this.txtFile = txtFile;
@@ -164,7 +169,7 @@ public class TaskManager {
         return "";
     }
 
-    public String listAll() {
+    private String listAll() {
         String output = "";
         for (int j = 0; j < i; j++) {
             if (taskList[j] instanceof ToDo) {
@@ -179,7 +184,7 @@ public class TaskManager {
         return "Here are the tasks in your list: \n" + output;
     }
 
-    public String toDoAddedMessage() {
+    private String toDoAddedMessage() {
         String output = "Got it. I've added this task: \n"
                         + "[" + taskList[i - 1].getTask() + "]"
                         + "[" + taskList[i - 1].getStatusIcon() + "] "
@@ -189,7 +194,7 @@ public class TaskManager {
         return output;
     }
 
-    public String deadlineAddedMessage() {
+    private String deadlineAddedMessage() {
         String output = "Got it. I've added this task: \n"
                         + "[" + taskList[i - 1].getTask() + "]"
                         + "[" + taskList[i - 1].getStatusIcon() + "] "
@@ -199,7 +204,7 @@ public class TaskManager {
         return output;
     }
 
-    public String eventAddedMessage() {
+    private String eventAddedMessage() {
         String output = "Got it. I've added this task: \n"
                         + "[" + taskList[i - 1].getTask() + "]"
                         + "[" + taskList[i - 1].getStatusIcon() + "] "
@@ -209,14 +214,14 @@ public class TaskManager {
         return output;
     }
 
-    public String doneTaskMessage(int taskNo) {
+    private String doneTaskMessage(int taskNo) {
         String output = "Nice! I've marked this task as done: \n"
                         + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
                         + taskList[taskNo - 1].getDescription();
         return output;
     }
 
-    public String deletedTaskMessage(String type, String status, String task, int taskNo) {
+    private String deletedTaskMessage(String type, String status, String task, int taskNo) {
         String output = "Noted. I've removed this task: \n"
                         + " [" + type + "] "
                         + "[" + status + "] "
@@ -226,23 +231,23 @@ public class TaskManager {
         return output;
     }
 
-    public String errorUnknownCommandMessage() {
+    private String errorUnknownCommandMessage() {
         return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 
-    public String byeMessage() {
+    private String byeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String errorEmptyMessage(String task) {
+    private String errorEmptyMessage(String task) {
         return "☹ OOPS!!! The description of a " + task + " cannot be empty.";
     }
 
-    public String errorInvalidTaskNo() {
+    private String errorInvalidTaskNo() {
         return "invalid number!";
     }
 
-    public static boolean isNumeric(String string) {
+    private static boolean isNumeric(String string) {
         int intValue;
 
         if(string == null || string.equals("")) {
@@ -258,7 +263,7 @@ public class TaskManager {
         return false;
     }
 
-    public static void writeToFile(String filePath, String textToAdd) throws IOException {
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
