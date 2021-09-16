@@ -1,9 +1,10 @@
-# AnnieZero User guide
 
+# User guide
+![image](AnnieZero_logo.png)
 ## Navigation
-
- - [How to set-up](#quick-start)
- - Features
+ - **App set-up**
+	 - [Quick-start](#quick-start)
+ - **Features**
 	 - [Listing all your tasks: `list`](#listing-all-your-tasks-list)
 	 - [Adding a todo task: `todo`](#adding-a-todo-task-todo)
 	 - [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
@@ -11,8 +12,8 @@
 	 - [Deleting a task: `delete`](#deleting-a-task-delete)
 	 - [Marking a task as done: `done`](#marking-a-task-as-done-done)
 	 - [Finding specified tasks: `find`](#finding-specified-tasks-find)
-	 - [Exiting the program: `bye`](#Exiting-the-program-bye)
-
+	 - [Exiting the app: `bye`](#exiting-the-app-bye)
+	 - [Saving tasks](#saving-tasks)
 
 ## Quick-start
 1.  Ensure you have  `Java 11`  or above installed in your computer.
@@ -27,7 +28,7 @@ Format: `list`
 
 Lists all the tasks currently in your task list. 
 
-Expected outcome:  
+Expected outcome:
 A numbered list of your current tasks will be shown.
 
 ### Adding a todo task: `todo`
@@ -38,12 +39,9 @@ Adds a todo tasks to your current task list.
 - The description of this todo task should be stated in `DESCRIPTION`. It cannot be left empty.
 
 Expected outcome:
-
-AnnieZero will notify you with a message displaying the task details
-if the task has been successfully added.
+AnnieZero will notify you with a message displaying the task details if the task has been successfully added.
 
 Example usage:
-
 `todo learn baking` will add a todo task with description *learn baking*.
 
 ### Adding a deadline task: `deadline`
@@ -60,12 +58,10 @@ Adds a deadline tasks to your current task list.
 - There must only be one **spacing** between `BY_DATE` and `BY_TIME`.
 
 Expected outcome:
-
 AnnieZero will notify you with a message displaying the task details
 if the task has been successfully added.
 
 Expected usage:
-
 `deadline cs999 assignment / 2021-10-19 23:59` will add a tasks named cs999 assignment that has a deadline of 19 October 2021, 11.59pm.
 
 ### Adding an event task: event
@@ -84,12 +80,10 @@ Adds a deadline tasks to your current task list.
 - There must be a letter **t** between `START_TIME` and `END_TIME`.
 
 Expected outcome:
-
 AnnieZero will notify you with a message displaying the task details
 if the task has been successfully added.
 
 Example usage:
-
 `event beach day / 2021-11-01 08:30t12:00` will add a task named beach day that happens on 1 November 2021 from 8.30am to 12pm.
 
 ### Deleting a task: `delete`
@@ -113,7 +107,7 @@ Expected outcome:
 AnnieZero will notify you with a message displaying the task details
 of the successfully marked task.
 
-Example of usage:  
+Example usage:  
 `mark 3`  will delete the 3rd task in the list.
 
 ### Finding specified tasks: `find`
