@@ -116,10 +116,6 @@ Format: `bye`
 
 After executing any command that modifies the data, the new data will be automatically saved. So there is no need to save the data manually.
 
-### Editing the data file
-
-Data are saved as a txt file `[JAR file location]/data/list.txt`. Advanced users are welcome to update data directly by editing that data file.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
