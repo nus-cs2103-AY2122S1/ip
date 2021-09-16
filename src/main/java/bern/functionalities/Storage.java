@@ -24,6 +24,9 @@ public class Storage {
         try {
             new Storage().reinitialiseFile();
             FileWriter fw = new FileWriter("savedList.txt");
+            if (arListTask.isEmpty()) {
+                fw.close();
+            }
             fw.write(new Ui().getReply(Command.LIST, "", arListTask));
             fw.close();
         } catch (IOException e) {
