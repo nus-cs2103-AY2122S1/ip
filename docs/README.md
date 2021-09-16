@@ -63,7 +63,7 @@ Voila! ^_^ I've added this task:
 - [E][ ] volleyball training (at: 26 Dec 2021, 7.00 PM)
 You currently have 2 task(s) in the list.
 ```
-### `deadline <description> /at <due-date>` - adds a Deadline task type
+### `deadline <description> /by <due-date>` - adds a Deadline task type
 Adds a Deadline task to the task list.
 > Note: Formats supported for *due-date*:
 > * yyyy-mm-dd (e.g 2021-12-26)
