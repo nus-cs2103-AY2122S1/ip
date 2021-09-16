@@ -1,6 +1,7 @@
 package storage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,8 +62,12 @@ public class Storage {
                     break;
                 }
             }
-        } catch (IOException e1) {
-            System.out.println("Something went wrong: " + e1.getMessage());
+        } catch (FileNotFoundException e) {
+            File directory = new File("data");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            writeToFile("data/tasks.txt", "");
         }
         return taskList;
     }
@@ -105,12 +110,15 @@ public class Storage {
      *
      * @param filePath path to the local file used for storage.
      * @param textToAdd the string containing task details
-     * @throws IOException If file is unable to be read.
      */
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
+    private static void writeToFile(String filePath, String textToAdd) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -127,10 +135,6 @@ public class Storage {
             output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator
                     + t.getDescription() + separator + t.getDeadline() + separator + t.getNotes() + "\n";
         }
-        try {
-            writeToFile(this.filePath, output);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeToFile(this.filePath, output);
     }
 }
