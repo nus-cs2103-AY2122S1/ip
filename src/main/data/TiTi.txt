@@ -1,0 +1,5 @@
+[E][X] concert (at: 8pm)
+[E][X] birthday (at: Jan 22 2022)
+[D][ ] homework (by: Sep 11 2021)
+[T][X] laundry
+[T][ ] groceries
