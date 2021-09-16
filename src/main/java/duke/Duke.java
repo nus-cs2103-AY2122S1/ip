@@ -91,27 +91,30 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         Gui gui = new Gui(stage);
-        EventHandler<? super MouseEvent> mouseEventHandler;
-        EventHandler<ActionEvent> buttonEventHandler;
-        mouseEventHandler = e -> {
+        String dukeIntroMessage = cliUi.showWelcome();
+        String initialTaskString = taskList.toString();
+        String welcomeMessage = dukeIntroMessage + "\n" + initialTaskString;
+        EventHandler<? super MouseEvent> mouseEventHandler = e -> {
             String input = gui.getUserInput();
             gui.generateDialogBoxes(getResponse(input));
             if (isExit) {
                 gui.exit();
             }
         };
-        buttonEventHandler = e -> {
+        EventHandler<ActionEvent> buttonEventHandler = e -> {
             String input = gui.getUserInput();
             gui.generateDialogBoxes(getResponse(input));
             if (isExit) {
                 gui.exit();
             }
         };
+
         gui.setUserInputHandler(mouseEventHandler, buttonEventHandler);
+        gui.showDukeMessage(welcomeMessage);
     }
 
     /**
-     * Main method for Duke.
+     * Runs Duke.
      *
      * @param args Placeholder argument.
      */

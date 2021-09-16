@@ -102,6 +102,18 @@ public class Gui {
     }
 
     /**
+     * Shows the welcome message.
+     *
+     * @param dukeMessage Welcome message to be shown.
+     */
+    public void showDukeMessage(String dukeMessage) {
+        Label dukeText = new Label(dukeMessage);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+        );
+    }
+
+    /**
      * Closes the window after defined duration.
      */
     public void exit() {

@@ -2,27 +2,19 @@ package duke.utils;
 
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
-
 /** Class to handle all printing of messages */
 public class CliUi {
     private static final String SEPARATOR = "_".repeat(60);
-    private static final String[] WELCOME_MESSAGE = {"Hello! I'm Duke", "What can I do for you?"};
+    private static final String[] WELCOME_MESSAGES = {"Hello! I'm Duke.", "This is your current task list!"};
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String TAB = " ".repeat(4);
 
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        printOut(WELCOME_MESSAGE);
-    }
-
-    /**
-     * Prints error message of exceptions thrown by Duke.
-     */
-    public void showError(DukeException dukeException) {
-        printOut(dukeException.getMessage());
+    public String showWelcome() {
+        printOut(WELCOME_MESSAGES);
+        return String.join(" ", WELCOME_MESSAGES);
     }
 
     /**
@@ -30,13 +22,6 @@ public class CliUi {
      */
     public void showLoadingError() {
         printOut("Data file is corrupted, unable to load");
-    }
-
-    /**
-     * Prints message telling the user that the saved data is loaded successfully.
-     */
-    public void showLoadingSuccess() {
-        printOut("Task list loaded successfully!");
     }
 
     /**
