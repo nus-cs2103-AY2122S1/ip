@@ -1,245 +1,124 @@
 package duke;
 
+import duke.commands.*;
 import duke.exceptions.DukeException;
-import duke.exceptions.IncorrectInputException;
 import duke.exceptions.InvalidInputException;
-import duke.tasks.Task;
 
 /**
  * User interface. Handles text for user interface.
  * @author Ruth Poh
  */
 public class Ui {
-    private Parser parser;
-    private boolean isActivatedClearCommand;
+    private final Parser parser;
+    private static boolean isActivatedClearCommand;
 
     Ui() {
         parser = new Parser();
         isActivatedClearCommand = false;
     }
 
-    /**
-     * Getter method for error message.
-     *
-     * @param e DukeException thrown
-     * @return Error message of DukeException
-     */
-    public String getErrorMessage(DukeException e) {
-        return e.getMessage();
-    }
+
 
     /**
-     * Executes command stated in string and saves tasklist changes to storage.
+     * Executes command stated in string and saves taskList changes to storage.
      *
-     * @param storage  Storage for storing Tasklist data
-     * @param tasklist TaskList of tasks
+     * @param storage  Storage for storing TaskList data
+     * @param taskList TaskList of tasks
      * @param str Command string
      * @return Message after executing command stated in string
      */
-    public String getMessage(Storage storage, TaskList tasklist, String str) {
+    public String getMessage(Storage storage, TaskList taskList, String str) {
         try {
             // splits input to parse for keywords.
-            String[] strparse = str.split(" ");
+            String[] strParse = str.split(" ");
+            String command = this.parser.parseCommand(strParse[0]);
+            if (!(isActivatedClearCommand && command.equals("y"))) {
+                isActivatedClearCommand = false;
+                command = "n";
+            }
+            isActivatedClearCommand = false;
 
-            switch (this.parser.parseCommand(strparse[0])) {
+            switch (command) {
                 case "bye":
                     // breaks loop, closes chatbot.
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("bye", "'bye'");
-                        }
-
-                        return "Goodbywe, Mastwer! Seew youw soown!\n\n";
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    ByeCommand bye = new ByeCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return bye.execute();
                     //Fallthrough
                 case "help":
                     // lists command list
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("help", "'help'");
-                        }
+                    HelpCommand help = new HelpCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return help.execute();
 
-                        return "Commandws supported:\n\n"
-                                + "- bye\n- clearall\n- help\n- list\n- todo\n- event\n- deadline\n- "
-                                + "delete\n- done\n- find\n\nPlease check our website at https://ruthpohrp" +
-                                ".github.io/ip/ for more details!";
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
                     //Fallthrough
                 case "list":
                     // lists history of current tasks.
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("list", "'list'");
-                        }
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Uwu! Herw arw yourw taskws:\n");
-                        if (tasklist.getTaskCounter() == 0) {
-                            stringBuilder.append("Itw seewsm like youw wist is emptwy! Congwats!\n");
-                        } else {
-                            stringBuilder.append(tasklist.displayList());
-                        }
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    ListCommand list = new ListCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return list.execute();
                     //Fallthrough
                 case "todo":
                     // adds a Todo task to the list.
-                    try {
-                        tasklist.addTodo(parser.parseTodo(strparse));
-                        storage.saveData(tasklist);
+                    TodoCommand todo = new TodoCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return todo.execute();
 
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
-                        stringBuilder.append("Youw noww havew " + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
                     //Fallthrough
                 case "deadline":
                     // adds a deadline task to the list.
-                    try {
-                        tasklist.addDeadline(parser.parseDeadline(strparse));
-                        storage.saveData(tasklist);
-
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
-                        stringBuilder.append("Youw noww havew " + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    DeadlineCommand deadline = new DeadlineCommand(storage,
+                            taskList, strParse, isActivatedClearCommand);
+                    return deadline.execute();
                     //Fallthrough
                 case "event":
                     // adds an event to the list. pretty much like deadline.
-                    try {
-                        tasklist.addEvent(parser.parseEvent(strparse));
-                        storage.saveData(tasklist);
-
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
-                        stringBuilder.append("Youw noww havew " + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    EventCommand event = new EventCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return event.execute();
                     //Fallthrough
                 case "done":
                     // marks a task as done.
-                    try {
-                        int taskNo = tasklist.markDone(strparse);
-                        storage.saveData(tasklist);
-
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n")
-                                .append(tasklist.getTaskDescr(taskNo) + '\n');
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    DoneCommand done = new DoneCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return done.execute();
                     //Fallthrough
                 case "delete":
                     // deletes corresponding task on list.
-                    try {
-                        Task t = tasklist.delete(strparse);
-                        storage.saveData(tasklist);
-
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n")
-                                .append(t.toString() + '\n');
-                        stringBuilder.append("Youw noww havew "
-                                + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                     DeleteCommand delete = new DeleteCommand(storage, taskList, strParse,
+                             isActivatedClearCommand);
+                     return delete.execute();
                     //Fallthrough
                 case "find":
-                    try {
-                        String tasksFound = tasklist.find(parser.parseFind(strparse));
-
-                        StringBuilder stringBuilder = new StringBuilder();
-                        stringBuilder.append("Foundw! Here are the matching tasks:\n")
-                                .append(tasksFound + '\n');
-
-                        return stringBuilder.toString();
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    FindCommand find = new FindCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return find.execute();
                     //Fallthrough
                 case "clearall":
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("clearall", "'clearall'");
-                        }
-                        isActivatedClearCommand = true;
-
-                        return ("Pwease confirm clear task list: y/n");
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    ClearallCommand clearall = new ClearallCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return clearall.execute();
                     //Fallthrough
                 case "y":
-                    try {
-                        if (strparse.length > 1) {
-                            throw new InvalidInputException();
-                        }
-                        if (!isActivatedClearCommand) {
-                            throw new InvalidInputException();
-                        }
-
-                        isActivatedClearCommand = false;
-                        tasklist.clearTaskList();
-                        storage.saveData(tasklist);
-
-                        return ("Alright. Cleared! Uwu!");
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
+                    ClearallConfirmCommand clearallConfirm = new ClearallConfirmCommand(storage, taskList, strParse,
+                            isActivatedClearCommand);
+                    return clearallConfirm.execute();
                     //Fallthrough
                 case "n":
-                    try {
-                        if (strparse.length > 1) {
-                            throw new InvalidInputException();
-                        }
-                        if (!isActivatedClearCommand) {
-                            throw new InvalidInputException();
-                        }
-
-                        isActivatedClearCommand = false;
-
-                        return ("Alright. Please carry on! Uwu!");
-                    } catch (DukeException e) {
-                        return this.getErrorMessage(e);
-                    }
-                    //Fallthrough
+                    ClearallRejectCommand clearallRejectCommand = new ClearallRejectCommand(storage,
+                            taskList, strParse, isActivatedClearCommand);
+                    return clearallRejectCommand.execute();
                 default:
                     throw new InvalidInputException();
             }
         } catch (DukeException e) {
-            return this.getErrorMessage(e);
+            return e.getMessage();
         }
     }
 
     /**
      * Getter method for welcome message for Dukewu.
-     *
-     * @return Welcome message for Dukewu.
+     * @return Welcome message for Dukewu
      */
     public static String getWelcomeMessage() {
         return ("Hewwo and welcomew tow Dukewu!\n" +
@@ -247,4 +126,11 @@ public class Ui {
                 "Pwease typwe 'help' for mwore infow! Uwu!");
     }
 
+    /**
+     * Getter method for successful loading of data for Dukewu.
+     * @return Successful loading of data message
+     */
+    public static String getLoadingSuccessfulMessage() {
+        return ("Loadiwng file for you. . . Loaded!\n");
+    }
 }

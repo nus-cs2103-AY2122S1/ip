@@ -23,10 +23,12 @@ public class Duke {
         shouldContinue = true;
         try {
             tasklist = storage.loadData();
-            System.out.println("Loadiwng file for you. . . Loaded!\n");
+            System.out.println(Ui.getLoadingSuccessfulMessage());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            tasklist = new TaskList(); // creates new tasklist if one cannot be found.
+            // creates new tasklist if one cannot be found.
+            tasklist = new TaskList();
+
         }
     }
 

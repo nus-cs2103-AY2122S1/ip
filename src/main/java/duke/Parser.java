@@ -85,7 +85,7 @@ public class Parser {
     public Todo parseTodo(String[] strParse) throws DukeException {
         StringBuilder taskb = new StringBuilder();
         if (strParse.length == 1) {
-            throw new IncorrectInputException("Todo", "using 'todo feed my cat'");
+            throw new IncorrectInputException("todo", "using 'todo feed my cat'");
         }
         for (int i = 1; i < strParse.length; i++) {
             taskb.append(strParse[i]);
@@ -109,6 +109,7 @@ public class Parser {
             }
             StringBuilder strBuilder = new StringBuilder();
             int i = 1;
+            //parses words before /by keyword
             while (i < strParse.length
                     && !strParse[i].equalsIgnoreCase("/by")) {
                 strBuilder.append(strParse[i]);
@@ -119,6 +120,7 @@ public class Parser {
                 i++;
             }
             i++;
+            //parses words after /by keyword
             if (strBuilder.toString().equals("") || (i != strParse.length - 1 && i != strParse.length - 2)) {
                 throw new IncorrectInputException("deadline",
                         "using 'deadline feed my cat /by 2020-01-01 10:30'. Time is optional!");
@@ -150,6 +152,7 @@ public class Parser {
             }
             StringBuilder strBuilder = new StringBuilder();
             int i = 1;
+            //parses words before /at keyword
             while (i < strParse.length
                     && !strParse[i].equalsIgnoreCase("/at")) {
                 strBuilder.append(strParse[i]);
@@ -160,6 +163,7 @@ public class Parser {
                 i++;
             }
             i++;
+            //parses words after /at keyword
             if (strBuilder.toString().equals("") || (i != strParse.length - 1 && i != strParse.length - 2)) {
                 throw new IncorrectInputException("event",
                         "using 'event feed neighbour's cat /at 2020-01-01 08:00'. Time is optional!");
@@ -179,7 +183,7 @@ public class Parser {
     }
 
     /**
-     * Converts date to readable String format.
+     * Converts date to a readable String representation.
      * @param date Date to be converted
      * @return String of readable Date
      */
@@ -188,9 +192,9 @@ public class Parser {
     }
 
     /**
-     * Converts time to readable String format.
-     * @param time Time to be converted.
-     * @return String of readable time.
+     * Converts time to a readable String representation.
+     * @param time Time to be converted
+     * @return String of readable time
      */
     public String simplifyTime(LocalTime time) {
         int hour = time.getHour();

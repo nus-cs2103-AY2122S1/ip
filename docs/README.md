@@ -172,13 +172,15 @@ need to save manually.
 
 ## 5. FAQ
 ***
-**Q:** How do I transfer my data to another Computer?<br>
-**A:** Follow the Quickstart steps and download the duke.jar into the other computer. Go to your former 
-computer and go to `source folder > out > artifacts > mainjar > data`. Open the `tasks.txt` 
-file. Copy and paste its contents onto the same file in the other computer.
+**Q:** `Dukewu.jar` isn't opening when I double click it.<br>
+**A:** If you're on Windows, go to settings and change it so it runs Java(TM) Platform SE binary by 
+default. If you're on Mac, make sure you have the latest version of Java installed before double-clicking 
+on the .jar file. If all fails, you can manually open the .jar on the command terminal using the command 
+`-java Dukewu.jar`. (Make sure your current directory is the directory where your .jar is before using the 
+command.)  
 
 **Q:** Will there be updates in the future?<br>
 **A:** Sadly, I do not plan to have any big updates in the future. I'm trapped in homework hell.
 
 **Q:** What is the secret to acing CS2103T?<br>
-**A:** ...I would like to know that too.
+**A:** I would like to know that too :')
