@@ -117,6 +117,6 @@ Examples:
 - `find #Important`
 
 
-###Saving the data
+### Saving the data
 Duke automatically saves the tasks in the hard disk after any command that adds <br>
 or modifies the tasks.
