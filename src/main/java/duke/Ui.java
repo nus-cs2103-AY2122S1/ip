@@ -8,7 +8,7 @@ public class Ui {
      * Displays a greeting message.
      */
     public String greet() {
-        return "Hello from Duke!\nWhat can I do for you?";
+        return "Hello from Duke! :D\n"+ "What can I do for you?";
     }
 
     /**

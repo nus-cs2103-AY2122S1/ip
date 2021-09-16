@@ -4,11 +4,14 @@ import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.exception.DukeException;
 
+import java.util.concurrent.TimeUnit;
+
 public class Duke {
 
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    private boolean exit;
 
     @SuppressWarnings("unused")
     public Duke() {
@@ -18,6 +21,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.taskList = new TaskList(storage.load());
         this.ui = new Ui();
+        exit = false;
     }
 
     /**
@@ -31,6 +35,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             output = c.execute(taskList, ui, storage);
+            exit = c.isExit();
         } catch (DukeException e) {
             output = e.getMessage();
         }
@@ -44,6 +49,10 @@ public class Duke {
      */
     public String greet() {
         return ui.greet();
+    }
+
+    public boolean isExit() {
+        return exit;
     }
 
     public void exit() {

@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,5 +58,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (duke.isExit()) {
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task, 175);
+        }
     }
 }
