@@ -4,6 +4,12 @@ import duke.DukeException;
 
 public class DeadlineTask extends Task {
 
+    /**
+     * Create a new Deadline Task
+     * @param description Description of Deadline
+     * @param time Time of Deadline
+     * @throws DukeException If Task has errors.
+     */
     public DeadlineTask(String description, String time) throws DukeException {
         super(description, time);
         assert(description.isEmpty());

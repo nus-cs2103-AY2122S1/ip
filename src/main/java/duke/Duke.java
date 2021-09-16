@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-
+import duke.task.Task;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,43 +32,30 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
-     * Placeholder constructor made to placate JavaFX.
+     * Create a Duke object for JavaFX.
      */
     public Duke() {
         this("tasks.txt");
     }
 
     private Duke(String filePath) {
-        assert (filePath.isEmpty());
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = (TaskList<Task>) storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+        assert (!filePath.isEmpty());
         assert(tasks instanceof TaskList);
     }
 
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
+    /**
+     * Starts the Duke chatbot.
+     *
+     * @param stage Stage for Duke Chatbot.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -91,7 +78,7 @@ public class Duke extends Application {
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
@@ -121,6 +108,7 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle user input.
         //Part 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -131,47 +119,33 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
+        ResponsePair dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                DialogBox.getDukeDialog(dukeText.getResponse(), duke)
         );
         userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
-            return(e.getMessage());
+        if (dukeText.getIsExit()) {
+            System.exit(1);
         }
     }
 
     /**
-     * Shows welcome message
-     * @return String representation of welcome message.
+     * Get User's Command.
+     * @param input User Command.
      */
-    public String welcome() {
-        return ui.showWelcome();
+    public ResponsePair getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return new ResponsePair(e.getMessage(), false);
+        }
     }
 
-    /**
-     * Starts the Duke chatbot.
-     *
-     * @param args Command line arguments to be passed into Duke. Not Used
-     */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
-    }
 }

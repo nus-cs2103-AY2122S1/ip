@@ -1,11 +1,15 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.ResponsePair;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class ExitCommand extends Command {
+/**
+ * A Command class representing the 'Delete' command.
+ */
+public class ExitCommand implements Command {
 
     /**
      * Create a new Command indicating exit from Duke chatbot.
@@ -18,10 +22,11 @@ public class ExitCommand extends Command {
      * @param tasks List of tasks.
      * @param ui UI of Duke Chatbot.
      * @param storage Storage of Duke Chatbot.
+     * @return String of Duke chatbot response.
      * @throws DukeException If execution fails.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showGoodbye();
+    public ResponsePair execute(TaskList tasks, Ui ui, Storage storage) {
+        return new ResponsePair(ui.showGoodbye(), isExit());
     }
 
     /**

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.task.DeadlineTask;
@@ -33,17 +32,17 @@ public class Storage {
 
         Task task;
         switch (type) {
-            case "T":
-                task = new TodoTask(description);
-                break;
-            case "D":
-                task = new DeadlineTask(description, time);
-                break;
-            case "E":
-                task = new EventTask(description, time);
-                break;
-            default:
-                throw new DukeException("Incorrect Task Format!");
+        case "T":
+            task = new TodoTask(description);
+            break;
+        case "D":
+            task = new DeadlineTask(description, time);
+            break;
+        case "E":
+            task = new EventTask(description, time);
+            break;
+        default:
+            throw new DukeException("Incorrect Task Format!");
         }
         if (isDone) {
             task.finishTask();
@@ -52,13 +51,14 @@ public class Storage {
     }
 
     /**
-     * Load list of tasks from file or if file is absent, create new file
+     * Load list of tasks from file or if file is absent, create new file.
+     *
      * @return List of tasks
      * @throws DukeException If new file cannot be made.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public TaskList<Task> load() throws DukeException {
         try {
-            ArrayList<Task> taskList = new ArrayList<>();
+            TaskList<Task> taskList = new TaskList<>();
             if (!file.exists()) {
                 file.createNewFile();
                 return taskList;
@@ -77,7 +77,8 @@ public class Storage {
     }
 
     /**
-     * Save list of tasks to file
+     * Save list of tasks to file.
+     *
      * @param tasks List of tasks.
      * @throws DukeException If destination file is absent.
      */

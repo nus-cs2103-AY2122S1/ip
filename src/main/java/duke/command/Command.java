@@ -1,11 +1,16 @@
 package duke.command;
 
+
 import duke.DukeException;
+import duke.ResponsePair;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public abstract class Command {
+/**
+ * An interface to encapsulate all Command types.
+ */
+public interface Command {
 
     /**
      * Execute user command
@@ -14,12 +19,12 @@ public abstract class Command {
      * @param storage Storage of Duke Chatbot.
      * @throws DukeException If execution fails.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    ResponsePair execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.
      */
-    public abstract boolean isExit();
+    boolean isExit();
 
 }

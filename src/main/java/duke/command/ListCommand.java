@@ -4,26 +4,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
+import duke.ResponsePair;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-public class ListCommand extends Command {
+/**
+ * A Command class representing the 'Delete' command.
+ */
+public class ListCommand implements Command {
 
     private LocalDateTime time = null;
 
     /**
      * Create a new Command indicating all tasks are to be listed.
      * @param fullCommand Unedited user command.
+     * @throws DukeException If the input string is not of the correct time format.
      */
     public ListCommand(String fullCommand) throws DukeException {
-        String timeString = fullCommand.replace("list", "").trim();
-        if (timeString.isEmpty()) {
-            return;
-        }
         try {
-            this.time = LocalDateTime.parse(timeString);
+            String timeString = fullCommand.replace("list", "").trim();
+            if (!timeString.isEmpty()) {
+                this.time = LocalDateTime.parse(timeString);
+            }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid Date Time Format");
         }
@@ -34,9 +38,10 @@ public class ListCommand extends Command {
      * @param tasks List of tasks.
      * @param ui UI of Duke Chatbot.
      * @param storage Storage of Duke Chatbot.
+     * @return String of Duke chatbot response.
      * @throws DukeException If execution fails.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public ResponsePair execute(TaskList tasks, Ui ui, Storage storage) {
         String response = "Here are the tasks in your list:";
         int listIndex = 1;
         for (int i = 0; i < tasks.size(); i++) {
@@ -47,7 +52,7 @@ public class ListCommand extends Command {
             }
             response += String.format("\n%d. %s", listIndex++, task);
         }
-        return response;
+        return new ResponsePair(response, isExit());
     }
 
     /**

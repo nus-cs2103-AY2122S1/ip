@@ -4,6 +4,12 @@ import duke.DukeException;
 
 public class EventTask extends Task {
 
+    /**
+     * Create a new Event Task
+     * @param description Description of Deadline
+     * @param time Time of Deadline
+     * @throws DukeException If Task has errors.
+     */
     public EventTask(String description, String time) throws DukeException {
         super(description, time);
         assert(description.isEmpty());
