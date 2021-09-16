@@ -13,7 +13,7 @@ public class UpdateCommand extends Command {
     private LocalDate date;
 
     /**
-     * Constructor for UpdateCommand
+     * Constructor for UpdateCommand with label
      * @param index item in tasklist to be updated
      * @param label new label for the item in tasklist
      */
@@ -22,6 +22,11 @@ public class UpdateCommand extends Command {
         this.label = label;
     }
 
+    /**
+     * Constructor for UpdateCommand with date
+     * @param index item in tasklist to be updated
+     * @param date new date for the item in tasklist
+     */
     public UpdateCommand(int index, LocalDate date) {
         this.index = index;
         this.date = date;

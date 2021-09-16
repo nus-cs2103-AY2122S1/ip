@@ -91,7 +91,7 @@ public class Ui {
     }
 
     public String notifyIndexOutOfBounds() {
-        return ("Sorry! Your command has an invalid index choice");
+        return ("Sorry! Your command has an invalid index choice, or is missing components");
     }
 
     public String notifyImproperIndex() {

@@ -26,7 +26,7 @@ public class MarkDoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasklist, Ui ui, Storage store) {
-        tasklist.get(index).setFlag(true);
+        tasklist.get(index).setIsDone(true);
         return ui.notifySuccessfulMarkDone(tasklist, index);
     }
 }

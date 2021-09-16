@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public abstract class Task {
     protected String label;
     protected LocalDate date;
-    private boolean flag;
+    private boolean isDone;
 
     /**
      * Basic constructor, creates a task with the given label.
@@ -17,23 +17,23 @@ public abstract class Task {
      */
     public Task(String label) {
         this.label = label;
-        this.flag = false;
+        this.isDone = false;
     }
 
     /**
      * Method used to mark the task as done.
-     * @param flag Indicates whether the task is marked as done.
+     * @param isDone Indicates whether the task is marked as done.
      */
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
-     * Getter for boolean flag.
-     * @return the flag of the Task.
+     * Getter for boolean isDone.
+     * @return the isDone of the Task.
      */
-    public boolean getFlag() {
-        return flag;
+    public boolean getIsDone() {
+        return isDone;
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if (flag) {
+        if (isDone) {
             return "[X] " + label;
         } else {
             return "[ ] " + label;

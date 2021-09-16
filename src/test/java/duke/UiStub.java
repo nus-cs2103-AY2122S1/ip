@@ -1,3 +1,5 @@
+package duke;
+
 public class UiStub extends duke.Ui {
     @Override
     public String notifySuccessfulAdd(duke.TaskList tl) {

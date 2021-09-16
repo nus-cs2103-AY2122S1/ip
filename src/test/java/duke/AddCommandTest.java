@@ -1,14 +1,18 @@
+import java.time.LocalDate;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.UiStub;
+import duke.command.AddCommand;
+import duke.command.Command;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.Storage;
-import duke.TaskList;
-import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class AddCommandTest {
     //store is irrelevant, tl code is simple enough that i did not stub it.

@@ -17,9 +17,6 @@ import duke.command.UpdateCommand;
 /**
  * Class responsible for parsing and understanding user input.
  */
-//TODO: indexoutofbounds is sometimes caused by invalid commands; this is incorrectly
-//reported to the user. e.g. the command "update date 3" fails because it doesn't include
-//a date to change, but will report "invalid index choice to user".
 public abstract class Parser {
     private static void checkDescription(String[] in) throws DukeException {
         if (in.length == 1) {

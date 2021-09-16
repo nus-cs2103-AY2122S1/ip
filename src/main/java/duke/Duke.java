@@ -14,8 +14,8 @@ public class Duke {
     private static Storage storage;
 
     /**
-     * Initial startup code and loading from saved data if found is done here. Saved data filename and location is
-     * hardcoded in this implementation. data folder will be created if none exists.
+     * Starts application and loads data if it exists. Saved data filename and location is
+     * hardcoded in this implementation and data folder will be created if none is found.
      */
     public Duke() {
         ui = new Ui();
@@ -27,7 +27,12 @@ public class Duke {
         }
     }
 
-    String getResponse(String input) {
+    /**
+     * Returns response from the chat application given users input.
+     * @param input input from the user
+     * @return String to be displayed to the user
+     */
+    public String getResponse(String input) {
         String response = "";
         try {
             Command c = Parser.parse(input);

@@ -25,7 +25,7 @@ public class Storage {
     private Path path;
 
     /**
-     * When a Storage object is initialised, it will create the data directory in the source directory.
+     * Initialises a storage object, that will create a data directory in the source directory if it does not exist.
      * Currently filename represents where the data is to be saved, and it is hard-coded in Duke.java.
      * @param filename is the file the application will write to, in the data folder.
      */
@@ -40,8 +40,7 @@ public class Storage {
     }
 
     /**
-     * Load locates the saved data if it exists, and parses it to create a TaskList representing the saved sessions
-     * data. Uses a Ui object to print notices informing a user if errors occur, when the load begins, and when it ends.
+     * Loads located saved data if it exists, and parses it to create a TaskList representing the saved sessions data.
      * @return a list of tasks saved from previous session.
      * @throws IOException if initialising the reader fails, or reading from the save data causes an error.
      * @throws DukeException if the saved data has a format that is not recognised.
@@ -62,8 +61,7 @@ public class Storage {
     }
 
     /**
-     * Given a TaskList from the current session and a Ui object, method attempts to save the session in a text file.
-     * Method prints notices to the user for when the saving begins and ends.
+     * Saves the tasklist from the current session in a text file in the data directory.
      * @param tasklist contains the tasks from the current session.
      * @throws IOException if writing to the text file fails, or initialising the writer fails.
      */
@@ -80,7 +78,7 @@ public class Storage {
     private String formatForSave(Task e) {
         String entry = "";
         entry = entry + e.getType() + "|";
-        entry = entry + e.getFlag() + "|";
+        entry = entry + e.getIsDone() + "|";
         entry = entry + e.getLabel();
         if (e.getType().equals("E") || e.getType().equals("D")) {
             entry = entry + "|" + e.getDate();
@@ -103,7 +101,7 @@ public class Storage {
         }
 
         if (Boolean.parseBoolean(arr[1])) {
-            t.setFlag(true);
+            t.setIsDone(true);
         }
         return t;
     }
