@@ -20,6 +20,7 @@ public abstract class Command {
      * @param input the command entered by the user
      */
     public Command(String input) {
+        assert input != null;
         this.input = input;
     }
 

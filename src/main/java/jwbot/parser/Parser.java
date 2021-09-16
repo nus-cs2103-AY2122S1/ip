@@ -26,6 +26,7 @@ public class Parser {
      * @return a parsed Command object created based on the user command
      */
     public static Command parse(String input) throws JwBotException {
+        assert input != null : "input is null";
         if (input.equals("bye")) {
             return new ExitCommand(input);
         } else if (input.equals("list")) {

@@ -8,6 +8,7 @@ public class ExitCommand extends Command {
 
     public ExitCommand(String input) {
         super(input);
+        assert input.equals("bye");
     }
 
     /**

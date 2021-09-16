@@ -15,6 +15,7 @@ public class FindCommand extends Command {
 
     public FindCommand(String input) {
         super(input);
+        assert input.startsWith("find");
     }
 
     @Override

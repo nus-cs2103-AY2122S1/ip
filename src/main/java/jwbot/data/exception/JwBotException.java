@@ -14,5 +14,6 @@ public class JwBotException extends Exception {
      */
     public JwBotException(String e) {
         super(e);
+        assert e != null && !e.equals("");
     }
 }

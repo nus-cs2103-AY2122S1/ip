@@ -3,3 +3,7 @@
 [E][ ] party (at: 3pm)
 [T][ ] dsdsd
 [T][ ] sdsd
+[T][ ] study
+[D][X] drink (by: 2012-12-24)
+[T][ ] study
+[T][ ] study

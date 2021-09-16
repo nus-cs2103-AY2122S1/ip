@@ -12,6 +12,7 @@ public class AddTodoCommand extends Command {
 
     public AddTodoCommand(String input) {
         super(input);
+        assert input.startsWith("todo");
     }
 
     /**
