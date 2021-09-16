@@ -52,15 +52,16 @@
         The order rule "STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE" consists of:
           1. STATIC: static imports
           2. STANDARD_JAVA_PACKAGE: standard java/javax imports
-          3. SPECIAL_IMPORTS: defined as org imports
-          4. THIRD_PARTY_PACKAGE: defined as com imports
+          3. THIRD_PARTY_PACKAGE: defined as any other imports
+          4. SPECIAL_IMPORTS: defined as iris imports
         -->
+
         <module name="CustomImportOrder">
             <property name="customImportOrderRules"
-                      value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
-            <property name="specialImportsRegExp" value="^org\."/>
-            <property name="thirdPartyPackageRegExp" value="^com\."/>
+                      value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS"/>
+            <property name="specialImportsRegExp" value="^iris\."/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
         </module>
 
         <!-- Checks for redundant import statements.
@@ -314,14 +315,6 @@
             <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, PLUS, MINUS, STAR, MOD, SR, BSR,
         GE, GT, SL, LE, LT, BXOR, BOR, LOR, BAND, LAND, LITERAL_INSTANCEOF, TYPE_EXTENSION_AND, METHOD_REF"/>
             <property name="option" value="nl"/>
-        </module>
-        <module name="OperatorWrap">
-            <!-- Checks that the assignment type operator is at the previous end of line in a line wrap.
-                 This includes "=", "/=", "+=", "-=", "*=", "%=", ">>=", ">>>=", "<<=", "^=", "&=".
-            -->
-            <property name="tokens" value="ASSIGN, DIV_ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, STAR_ASSIGN, MOD_ASSIGN,
-        SR_ASSIGN, BSR_ASSIGN, SL_ASSIGN, BXOR_ASSIGN, BOR_ASSIGN, BAND_ASSIGN"/>
-            <property name="option" value="eol"/>
         </module>
 
         <module name="SeparatorWrap">

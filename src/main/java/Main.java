@@ -1,12 +1,12 @@
 import java.io.IOException;
 
-import iris.Iris;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import iris.Iris;
 /**
  * Represents the GUI Application for Iris
  */

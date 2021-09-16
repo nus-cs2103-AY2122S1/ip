@@ -1,7 +1,8 @@
 package iris.command;
 
-import iris.TaskList;
 import javafx.application.Platform;
+
+import iris.TaskList;
 
 public class ByeCommand extends Command {
     @Override
