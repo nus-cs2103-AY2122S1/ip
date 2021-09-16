@@ -103,8 +103,8 @@ public class Ui {
         return ("Sorry! I can't understand the index for your command");
     }
 
-    public String notifyEmptyDescription() {
-        return ("Sorry! Your command appears to be missing a description");
+    public String notifyError(DukeException e) {
+        return ("Sorry! Your command has the following issue: " + e.getMessage());
     }
 
     public String notifyImproperDateTime() {
@@ -121,5 +121,9 @@ public class Ui {
 
     public String notifyUpdateComplete(Task after) {
         return ("I've updated your selected task to: " + after);
+    }
+
+    public String notifyUpdateError() {
+        return "Sorry! You've tried to update the date of a todo task";
     }
 }

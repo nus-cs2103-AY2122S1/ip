@@ -39,7 +39,7 @@ public class Duke {
             Command c = Parser.parse(input);
             response = c.execute(tasklist, ui, storage);
         } catch (DukeException e) {
-            return ui.notifyEmptyDescription();
+            return ui.notifyError(e);
         } catch (IndexOutOfBoundsException e) {
             return ui.notifyIndexOutOfBounds();
         } catch (NumberFormatException e) {

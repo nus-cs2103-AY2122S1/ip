@@ -20,7 +20,7 @@ import duke.command.UpdateCommand;
 public abstract class Parser {
     private static void checkDescription(String[] in) throws DukeException {
         if (in.length == 1) {
-            throw new DukeException("Command has empty description");
+            throw new DukeException("command is incorrect or incomplete");
         }
     }
 

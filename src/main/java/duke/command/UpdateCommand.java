@@ -40,6 +40,11 @@ public class UpdateCommand extends Command {
             Task after = tasklist.get(index);
             return ui.notifyUpdateComplete(after);
         } else {
+            //guard clause; should not set date of todo
+            if (tasklist.get(index).getType().equals("T")) {
+                return ui.notifyUpdateError();
+            }
+
             tasklist.get(index).setDate(date);
             Task after = tasklist.get(index);
             return ui.notifyUpdateComplete(after);
