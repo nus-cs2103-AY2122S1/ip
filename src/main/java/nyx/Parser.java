@@ -17,6 +17,7 @@ import nyx.command.UpdateCommand;
 public class Parser {
     /**
      * Interprets the user input and executes the command specified in the input using TaskList and Storage objects.
+     *
      * @param input String representation of the user input.
      * @return Command object to be executed
      * @throws NyxException If the input keyword is wrong or if the input lacks information

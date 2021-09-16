@@ -5,11 +5,27 @@ import nyx.Storage;
 import nyx.task.Event;
 import nyx.task.TaskList;
 
+/**
+ * Represents a command to add an Event task.
+ */
 public class EventCommand extends Command {
+    /**
+     * Constructs an EventCommand object.
+     *
+     * @param information Information needed to add an Event task.
+     */
     public EventCommand(String information) {
         super(information);
     }
 
+    /**
+     * Performs operations needed to add an Event task.
+     *
+     * @param taskList TaskList object containing all the tasks.
+     * @param storage Storage object to deal with hard disk related operations.
+     * @return String representation of the message for the user.
+     * @throws NyxException If an error is encountered while adding the Event task.
+     */
     @Override
     public String execute(TaskList taskList, Storage storage) throws NyxException {
         String[] splitInfo = information.split(" /at ");

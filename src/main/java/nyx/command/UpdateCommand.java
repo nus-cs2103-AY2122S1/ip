@@ -10,11 +10,28 @@ import nyx.task.Task;
 import nyx.task.TaskList;
 import nyx.task.ToDo;
 
+
+/**
+ * Represents a command to edit a specific task
+ */
 public class UpdateCommand extends Command {
+    /**
+     * Constructs an UpdateCommand object.
+     *
+     * @param information The information needed to edit the task.
+     */
     public UpdateCommand(String information) {
         super(information);
     }
 
+    /**
+     * Performs operations needed to edit a specific task.
+     *
+     * @param taskList TaskList object containing all the tasks.
+     * @param storage Storage object to deal with hard disk related operations.
+     * @return String representation of the message for the user.
+     * @throws NyxException If an error is encountered while editing the task.
+     */
     @Override
     public String execute(TaskList taskList, Storage storage) throws NyxException {
         String[] splitInfo = information.split(" ", 2);

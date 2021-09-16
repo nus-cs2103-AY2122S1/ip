@@ -7,6 +7,7 @@ package nyx.task;
 public class ToDo extends Task {
     /**
      * Constructs a todo task with its description and an indicator of whether it is marked as done.
+     *
      * @param content Description of the todo task.
      * @param isDone Indicator to indicate whether the todo task is done.
      */
@@ -16,6 +17,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs an uncompleted todo task with its description.
+     *
      * @param content Description of the todo task.
      */
     public ToDo(String content) {
@@ -24,6 +26,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a String representation of the todo task in the format required for saving into hard disk.
+     *
      * @return String representation of the todo task in the format required to save into hard disk.
      */
     @Override
@@ -33,6 +36,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the String representation of the todo task.
+     *
      * @return String representation of the todo task.
      */
     @Override

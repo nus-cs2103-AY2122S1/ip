@@ -12,7 +12,8 @@ public abstract class Command {
     protected final String information;
 
     /**
-     * Constructor for Command. (For invocation by subclass constructors)
+     * Constructor for Command. (For invocation by subclass constructors).
+     *
      * @param information information needed to run the command.
      */
     public Command(String information) {
@@ -21,6 +22,7 @@ public abstract class Command {
 
     /**
      * Performs operations on taskList object and storage object.
+     *
      * @param taskList TaskList object containing all the tasks.
      * @param storage Storage object to deal with hard disk related operations.
      * @return Output string to display to user.

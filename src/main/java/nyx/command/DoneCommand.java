@@ -6,11 +6,27 @@ import nyx.NyxException;
 import nyx.Storage;
 import nyx.task.TaskList;
 
+/**
+ * Represents a command to mark task as done.
+ */
 public class DoneCommand extends Command {
+    /**
+     * Constructs a DoneCommand object.
+     *
+     * @param information Information needed to mark a task as done.
+     */
     public DoneCommand(String information) {
         super(information);
     }
 
+    /**
+     * Performs operations needed to mark a task as done.
+     *
+     * @param taskList TaskList object containing all the tasks.
+     * @param storage Storage object to deal with hard disk related operations.
+     * @return String representation of the output for the user.
+     * @throws NyxException If an error is encountered while marking a task.
+     */
     @Override
     public String execute(TaskList taskList, Storage storage) throws NyxException {
         try {

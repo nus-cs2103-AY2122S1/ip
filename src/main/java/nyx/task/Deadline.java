@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with its description, deadline and an indicator of whether it is marked as done.
+     *
      * @param content Description of the deadline task.
      * @param by Datetime of the deadline.
      * @param isDone Indicator to indicate whether the deadline task is done.
@@ -26,6 +27,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs an uncompleted deadline task with its description and deadline.
+     *
      * @param content Description of the deadline task.
      * @param by Datetime of the deadline.
      * @throws NyxException If the wrong datetime format is given.
@@ -36,6 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Changes the datetime associated with the DeadLine task.
+     *
      * @param newDateTime New datetime to change to.
      * @throws NyxException If the wrong datetime format is given.
      */
@@ -45,6 +48,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a String representation of the deadline task in the format required for saving into hard disk.
+     *
      * @return String representation of the deadline task in the format required to save into hard disk.
      */
     @Override
@@ -55,6 +59,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the String representation of the deadline task.
+     *
      * @return String representation of the deadline task.
      */
     @Override

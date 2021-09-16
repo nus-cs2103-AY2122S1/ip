@@ -7,11 +7,27 @@ import nyx.Storage;
 import nyx.task.Task;
 import nyx.task.TaskList;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Constructs a DeleteCommand object.
+     *
+     * @param information Information needed to delete a task.
+     */
     public DeleteCommand(String information) {
         super(information);
     }
 
+    /**
+     * Perform operations needed to delete a task.
+     *
+     * @param taskList TaskList object containing all the tasks.
+     * @param storage Storage object to deal with hard disk related operations.
+     * @return String representation of the message for the user.
+     * @throws NyxException If an error is encountered while deleting the task.
+     */
     @Override
     public String execute(TaskList taskList, Storage storage) throws NyxException {
         try {

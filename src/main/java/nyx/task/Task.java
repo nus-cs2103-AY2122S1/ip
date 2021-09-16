@@ -9,7 +9,8 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor for Task. (For invocation by subclass constructors)
+     * Constructor for Task. (For invocation by subclass constructors).
+     *
      * @param content Description of the task.
      * @param isDone Indicator to indicate whether the task is done.
      */
@@ -32,6 +33,7 @@ public abstract class Task {
 
     /**
      * Returns a String representation of the task in the format required for saving into hard disk.
+     *
      * @return String representation of the task in the format required to save into text hard disk.
      */
     public abstract String formatData();
@@ -45,6 +47,7 @@ public abstract class Task {
 
     /**
      * Changes the content of the task.
+     *
      * @param newContent The new content to change to.
      */
     public void updateContent(String newContent) {
@@ -53,6 +56,7 @@ public abstract class Task {
 
     /**
      * Returns the String representation of the task.
+     *
      * @return String representation of the task.
      */
     @Override

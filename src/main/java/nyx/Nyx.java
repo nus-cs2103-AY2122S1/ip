@@ -12,6 +12,7 @@ public class Nyx {
 
     /**
      * Constructs a Nyx object to initialize the chatbot with the specified folder and file names.
+     *
      * @param folderName Name of the folder where the file is.
      * @param fileName Name of the file to store the tasks.
      */

@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event with its description, datetime, and an indicator of whether it is marked as done.
+     *
      * @param content Description of the event.
      * @param at Datetime at which the event occurs.
      * @param isDone Indicator to indicate whether the deadline task is done.
@@ -26,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Constructs an uncompleted event with its description, datetime.
+     *
      * @param content Description of the event.
      * @param at Datetime at which the event occurs.
      * @throws NyxException If the wrong datetime format is given.
@@ -36,6 +38,7 @@ public class Event extends Task {
 
     /**
      * Returns a String representation of the event in the format required for saving into hard disk.
+     *
      * @return String representation of the event in the format required to save into hard disk.
      */
     @Override
@@ -46,6 +49,7 @@ public class Event extends Task {
 
     /**
      * Changes the datetime associated with the Event task.
+     *
      * @param newDateTime New datetime to change to.
      * @throws NyxException If the wrong datetime format is given.
      */
@@ -55,6 +59,7 @@ public class Event extends Task {
 
     /**
      * Returns the String representation of the event.
+     *
      * @return String representation of the event.
      */
     @Override

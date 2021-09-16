@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Constructs a Storage object using the specified folder name and file name.
+     *
      * @param folderName Name of the folder where the file is.
      * @param fileName Name of the file to store the tasks.
      */
@@ -56,6 +57,7 @@ public class Storage {
 
     /**
      * Loads tasks from the hard disk and returns them in an ArrayList.
+     *
      * @return ArrayList of Task objects.
      * @throws NyxException If the tasks are loaded from the hard disk unsuccessfully.
      */
@@ -82,6 +84,7 @@ public class Storage {
 
     /**
      * Overwrites the list of tasks in the hard disk with the specified list.
+     *
      * @param taskList TaskList object that keeps track of all the tasks.
      * @throws IOException If an error is encountered while overwriting the hard disk.
      */
@@ -93,6 +96,7 @@ public class Storage {
 
     /**
      * Appends the specified task into the hard disk.
+     *
      * @param task The task to save.
      * @throws IOException If an error is encountered while appending the task to the hard disk.
      */
