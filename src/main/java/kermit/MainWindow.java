@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Kermit kermit;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cookiemonster.png"));
-    private Image kermitImage = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user-profile-pic.png"));
+    private Image kermitImage = new Image(this.getClass().getResourceAsStream("/images/kermit-profile-pic.png"));
 
     private final String WELCOME_MESSAGE = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\n" +
             "What can I do for you?";
