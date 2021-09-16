@@ -17,6 +17,13 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Deletes an exiting task and removes it from database.
+     *
+     * @param tasks Current taskList.
+     * @param ui User interface of Duke.
+     * @return String output result of the delete command.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui) {
         assert index < tasks.getNumOfTasks();

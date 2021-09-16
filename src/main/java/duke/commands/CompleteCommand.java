@@ -17,6 +17,13 @@ public class CompleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks an existing Task as complete and updates the database.
+     *
+     * @param tasks Current taskList.
+     * @param ui User interface of Duke.
+     * @return String output result of the complete command.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui) {
         assert index <= tasks.getNumOfTasks() : "invalid task reference";

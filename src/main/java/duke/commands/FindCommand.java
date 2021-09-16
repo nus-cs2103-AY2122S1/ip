@@ -15,6 +15,13 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Find all tasks that match the given keyword.
+     *
+     * @param tasks Current taskList.
+     * @param ui User interface of Duke.
+     * @return String output result of the find command.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui) {
         StringBuilder op = new StringBuilder();
