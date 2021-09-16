@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Dialog box of chat box. From JavaFX tutorial.
@@ -35,6 +36,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(displayPicture.getFitWidth() / 2,
+                displayPicture.getFitHeight() / 2.1, 37));
     }
 
     /**
