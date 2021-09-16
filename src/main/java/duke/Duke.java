@@ -129,7 +129,7 @@ public class Duke {
      * @param input takes in a command by the user
      * @throws DukeException throws an error
      */
-    public static String  deadline(String input) throws DukeException {
+    public static String deadline(String input) throws DukeException {
         if (!input.contains("/by")){
             String message = "OOPS!!! Please follow this format: \n deadline {task} /by {YYYY-MM-DDTHH:MM}";
             throw new DukeException(message);
@@ -169,7 +169,7 @@ public class Duke {
         if (i > tasks.getSize()) {
             throw new DukeException("OOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
         }
-        String start = "\n Noted. I've removed this task: \n";
+        String start = "Noted. I've removed this task: \n";
         String deleted = tasks.getTask(i-1).toString();
         tasks.deleteGivenTask(i - 1);
         TaskList.updateMemory(storage.getPath(), tasks);
