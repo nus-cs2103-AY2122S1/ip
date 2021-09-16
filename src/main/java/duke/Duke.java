@@ -8,7 +8,6 @@ import duke.task.TaskManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,6 +21,7 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    // GUI components
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -29,15 +29,15 @@ public class Duke extends Application {
     private Button helpButton;
     private Scene scene;
 
-    private Duke duke;
-    private ResponseManager responseManager;
-    private TaskManager taskManager;
-    private Storage storage;
-    private boolean isRunning = true;
-    private Parser parser = new Parser();
+    // Backend components
+    private final ResponseManager responseManager;
+    private final TaskManager taskManager;
+    private final Storage storage;
+    private final Parser parser = new Parser();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jesse.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    // Image resources
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jesse.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     /**
      * Constructor for Duke.
@@ -50,24 +50,12 @@ public class Duke extends Application {
         taskManager = new TaskManager(storage.loadSave());
     }
 
-    public Duke() {
-
-    }
-
-    public static void main(String[] args) {
-        //new Duke("docs\\save.txt");
-    }
-
     /**
      * Starts running the program.
      *
      * @param stage The UI stage to display the chat.
      */
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-        duke = new Duke("docs\\save.txt");
-
-
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -118,29 +106,11 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**

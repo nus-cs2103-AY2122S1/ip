@@ -22,7 +22,7 @@ public class Storage {
      * Constructor for Storage object, requires the path to
      * where the save file should be located.
      *
-     * @param saveFileLocation
+     * @param saveFileLocation A string which denotes the path to the save file.
      */
     public Storage(String saveFileLocation) {
         this.SAVE_FILE_LOCATION = saveFileLocation;
@@ -35,13 +35,13 @@ public class Storage {
      * @param tasks The latest list of tasks.
      */
     public void updateSave(List<Task> tasks) {
-        String data = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            data += tasks.get(i).toStringSave() + "\n";
+        StringBuilder data = new StringBuilder();
+        for (Task task : tasks) {
+            data.append(task.toStringSave()).append("\n");
         }
         try {
             FileOutputStream fos = new FileOutputStream(SAVE_FILE_LOCATION, false);
-            byte[] b = data.getBytes();
+            byte[] b = data.toString().getBytes();
             fos.write(b);
             fos.close();
         } catch (IOException ex) {
@@ -62,23 +62,7 @@ public class Storage {
             Scanner sc = new Scanner(saveFile);
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
-                Task newTask;
-                String[] taskDetails = sc.nextLine().split(">");
-                String name = taskDetails[2];
-                boolean done = taskDetails[1].equals("1");
-                switch (taskDetails[0]) {
-                case "T":
-                    newTask = new Task.ToDo(name, done);
-                    break;
-                case "D":
-                    newTask = new Task.Deadline(name, LocalDateTime.parse(taskDetails[3]), done);
-                    break;
-                case "E":
-                    newTask = new Task.Event(name, LocalDateTime.parse(taskDetails[3]), done);
-                    break;
-                default:
-                    throw new DukeException.NoNameException("Duke.Task type invalid");
-                }
+                Task newTask = generateTaskFromSave(sc.nextLine());
                 tasks.add(newTask);
             }
             return tasks;
@@ -88,5 +72,33 @@ public class Storage {
             System.out.println("Error: save file invalid");
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * Creates a task by reading the string representing the task from the save file.
+     *
+     * @param nextLine The string from the save file representing the task to be generated.
+     * @return The task that has been generated from the save file string.
+     * @throws DukeException.NoNameException Occurs when the task type in the save file is invalid.
+     */
+    private Task generateTaskFromSave(String nextLine) throws DukeException.NoNameException {
+        Task newTask;
+        String[] taskDetails = nextLine.split(">");
+        String name = taskDetails[2];
+        boolean done = taskDetails[1].equals("1");
+        switch (taskDetails[0]) {
+            case "T":
+                newTask = new Task.ToDo(name, done);
+                break;
+            case "D":
+                newTask = new Task.Deadline(name, LocalDateTime.parse(taskDetails[3]), done);
+                break;
+            case "E":
+                newTask = new Task.Event(name, LocalDateTime.parse(taskDetails[3]), done);
+                break;
+            default:
+                throw new DukeException.NoNameException("Duke.Task type invalid");
+        }
+        return newTask;
     }
 }

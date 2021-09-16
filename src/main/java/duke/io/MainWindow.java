@@ -27,6 +27,10 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jesse.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * Creates the main window and filled the dialog container with The Duke's welcome message when the application
+     * starts up.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -56,17 +60,19 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    //@@author Daniel Barral
-    //Reused from https://stackoverflow.com/questions/10967451
-    // with minor modifications
+    /**
+     * @author Daniel Barral
+     * Redirects the user to the project's website and user guide.
+     * Reused from https://stackoverflow.com/questions/10967451 with minor modifications.
+     */
     @FXML
     private void showHelpMessage() {
-        String userGuideUrl = "https://github.com/ryanongra/ip/blob/master/README.md";
+        String userGuideUrl = "https://ryanongra.github.io/ip/";
         try {
             Desktop.getDesktop().browse(new URL(userGuideUrl).toURI());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //@@author
+    //@author
 }

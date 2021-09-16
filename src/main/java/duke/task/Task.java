@@ -13,7 +13,7 @@ public class Task {
 
     private boolean isDone;
 
-    private String taskType;
+    private final String taskType;
 
     /**
      * Constructor for newly added tasks.
@@ -46,7 +46,6 @@ public class Task {
         this.name = name;
         this.isDone = done;
         this.taskType = taskType;
-        assert(name != null) : (name!= "");
     }
 
     public String getName() {
@@ -67,7 +66,6 @@ public class Task {
 
     /**
      * Returns a string representing the task in the save file format.
-     * @return A string representing the task in the save file format.
      */
     public String toStringSave() {
         int doneData = isDone ? 1 : 0;
@@ -79,6 +77,9 @@ public class Task {
         return taskTypeData + ">" + doneData + ">" + name;
     }
 
+    /**
+     * This class encapsulates a to-do type task.
+     */
     public static class ToDo extends Task {
 
         public ToDo(String name) throws DukeException.NoNameException {
@@ -90,6 +91,9 @@ public class Task {
         }
     }
 
+    /**
+     * This class encapsulates a task with a deadline.
+     */
     public static class Deadline extends Task {
 
         private LocalDateTime deadline;
@@ -119,6 +123,11 @@ public class Task {
             assert (deadline != null);
         }
 
+        /**
+         * Changes the deadline of the task to the dateTime specified.
+         *
+         * @param time The new dateTime for this task.
+         */
         public void snoozeTask(LocalDateTime time) {
             this.deadline = time;
         }
@@ -127,11 +136,17 @@ public class Task {
             return super.toString() + " (" + deadline.toString().replace('T', ' ') + ")";
         }
 
+        /**
+         * Returns a string representing the task in the save file format.
+         */
         public String toStringSave() {
             return super.toStringSave() + ">" + deadline;
         }
     }
 
+    /**
+     * This class encapsulates an event type task.
+     */
     public static class Event extends Task {
 
         private LocalDateTime when;
@@ -161,6 +176,11 @@ public class Task {
             assert (when != null);
         }
 
+        /**
+         * Changes the date and time of when the event is happening to the dateTime specified.
+         *
+         * @param time The new dateTime for this event.
+         */
         public void snoozeTask(LocalDateTime time) {
             this.when = time;
         }
@@ -169,6 +189,9 @@ public class Task {
             return super.toString() + " (" + when.toString().replace('T', ' ') + ")";
         }
 
+        /**
+         * Returns a string representing the task in the save file format.
+         */
         public String toStringSave() {
             return super.toStringSave() + ">" + when;
         }

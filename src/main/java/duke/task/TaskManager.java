@@ -114,7 +114,6 @@ public class TaskManager {
         Task deletedTask = null;
         try {
             int taskIndex = Integer.parseInt(String.valueOf(input.charAt(7)));
-
             if (!(taskIndex > tasks.size())) {
                 System.out.println("Duke says: You have deleted the task "
                         + tasks.get(taskIndex - 1).getName());
@@ -127,6 +126,16 @@ public class TaskManager {
         return deletedTask;
     }
 
+    /**
+     * Changes the dataTime for a specified deadline or event type task.
+     *
+     * @param input The user's input.
+     * @return The task which has been updated.
+     * @throws DukeException.NoTimeSpecifiedException Occurs when the user does not provide a dateTime.
+     * @throws DukeException.InvalidInputException Occurs when the user does not enter the date in the correct format
+     *                                             or when the task index entered it invalid.
+     * @throws DukeException.UnsnoozeableTaskException Occurs when the user attempts to snooze a to-do type task.
+     */
     public Task snoozeTask(String input) throws DukeException.NoTimeSpecifiedException, DukeException.InvalidInputException,
             DukeException.UnsnoozeableTaskException {
         Task snoozedTask = null;
@@ -142,7 +151,7 @@ public class TaskManager {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a time");
         } catch (DateTimeParseException e) {
-            System.out.println("Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n "
+            throw new DukeException.InvalidInputException("Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n "
                     + "E.g. 2021-08-28T18:30");
         }
         return snoozedTask;

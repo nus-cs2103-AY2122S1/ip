@@ -49,10 +49,24 @@ public class UserDialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates the dialog box containing the user's response and image.
+     *
+     * @param text The user's input.
+     * @param img The user's image ("profile picture")
+     * @return The UserDialogBox with the relevant components set.
+     */
     public static UserDialogBox getUserDialog(String text, Image img) {
         return new UserDialogBox(text, img);
     }
 
+    /**
+     * Creates the dialog box containing The Duke's response and image.
+     *
+     * @param text The Duke's response
+     * @param img The Duke's image ("profile picture")
+     * @return The DukeDialogBox with the relevant components set.
+     */
     public static UserDialogBox getDukeDialog(String text, Image img) {
         var db = new UserDialogBox(text, img);
         db.flip();

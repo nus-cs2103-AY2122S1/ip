@@ -35,6 +35,11 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * This exception occurs when the user attempts to
+     * snooze a task which does not have a dateTime
+     * (i.e. a to-do type task)
+     */
     public static class UnsnoozeableTaskException extends Exception {
         public UnsnoozeableTaskException(String message) {
             super(message);

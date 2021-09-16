@@ -9,6 +9,7 @@ import duke.command.*;
 public class Parser {
     /**
      * Gets the user's input and return the relevant command to execute.
+     *
      * @return A command which determines how the program should react.
      */
     public ICommand getInput(String input) {

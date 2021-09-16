@@ -19,6 +19,7 @@ public class ResponseManager {
      * Prints out the list of tasks.
      *
      * @param tasks The current list of tasks.
+     * @return The message listing out the tasks.
      */
     public String getListTasksMessage(ArrayList<Task> tasks) {
         StringBuilder message = new StringBuilder(
@@ -28,13 +29,19 @@ public class ResponseManager {
             message.append(
                     "Looks like you don't have any pending tasks!\nMust be nice (-_-;)");
         } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                String newTask = i + 1 + "."
-                        + tasks.get(i).toString() + "\n";
-                message.append(newTask);
-            }
+            message.append(generateTasksMessage(tasks));
         }
         return message.toString();
+    }
+
+    private StringBuilder generateTasksMessage(ArrayList<Task> tasks) {
+        StringBuilder message = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            String newTask = i + 1 + "."
+                    + tasks.get(i).toString() + "\n";
+            message.append(newTask);
+        }
+        return message;
     }
 
     /**
@@ -42,6 +49,7 @@ public class ResponseManager {
      *
      * @param task The task that was added.
      * @param numTasks The new total number of tasks.
+     * @return The confirmation message.
      */
     public String getTaskAdditionMessage(Task task, int numTasks) {
         return "I've added the task: \n"
@@ -54,6 +62,7 @@ public class ResponseManager {
      *
      * @param task The task that was deleted.
      * @param numTasks The new total number of tasks.
+     * @return The confirmation message.
      */
     public String getTaskDeletionMessage(Task task, int numTasks) {
         return "I've deleted the task: \n"
@@ -66,6 +75,7 @@ public class ResponseManager {
      *
      * @param task The task that was completed.
      * @param numTasks The current total number of tasks.
+     * @return The confirmation message.
      */
     public String getTaskCompletionMessage(Task task, int numTasks) {
         return "You've completed the task: \n"
@@ -73,6 +83,12 @@ public class ResponseManager {
                 + "You now have " + numTasks + " tasks, jiayouz!";
     }
 
+    /**
+     * Prints confirmation that a task was successfully snoozed.
+     *
+     * @param task The task which has been snoozed.
+     * @return The confirmation message.
+     */
     public String getSnoozeTaskMessage(Task task) {
         return "The task: \n"
                 + "     " + task.toString() + "\n"
