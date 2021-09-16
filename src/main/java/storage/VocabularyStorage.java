@@ -27,17 +27,17 @@ import parser.Parser;
  */
 public class VocabularyStorage extends Storage {
 
-    public static final String VOCAB_PATH = "/vocab.txt";
+    public static final String VOCAB_FILE_NAME = "/vocab.txt";
 
     private VocabList vocabListRead;
 
     /**
      * Create a writer and reader at file according to default path.
      *
-     * @throws IOException
+     * @throws IOException if the vocabulary storage fails to create writer at that location
      */
     public VocabularyStorage() throws IOException {
-        this.filePath = DIRECTORY_PATH + VOCAB_PATH;
+        this.filePath = DIRECTORY_PATH + VOCAB_FILE_NAME;
         writer = new BufferedWriter(new FileWriter(filePath, true));
         reader = new BufferedReader(new FileReader(filePath));
     }

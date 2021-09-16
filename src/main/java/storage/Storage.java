@@ -49,12 +49,11 @@ public class Storage {
 
 
     /**
-     * Constructor using default file location to use as storage.
-     *
-     * @throws IOException when there is error registering writer and reader to certain file location.
+     * Empty Constructor of storage.
+     * Not to be used for this class but for its subclasses.
      */
-    public Storage() throws IOException {
-        this(DEFAULT_FILE_NAME);
+    public Storage() {
+        // NOT TO BE USED FOR THIS CLASS BUT FOR ITS SUBCLASSES
     }
 
     /**

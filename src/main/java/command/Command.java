@@ -142,7 +142,7 @@ public class Command {
                 throw new EmptyDescriptionException("The description of a todo cannot be empty.");
             }
             chatPage.printWithAlice(ui.getTaskDialog().addTask(new Todo(fullCommand.substring(("todo ").length()))));
-        } catch (TaskDialogException | EmptyDescriptionException e) {
+        } catch (TaskDialogException | DialogException | EmptyDescriptionException e) {
             chatPage.printError(e);
         }
     }
@@ -158,7 +158,7 @@ public class Command {
             String dDescription = fullCommand.substring(("deadline ").length(), fullCommand.indexOf("/"));
             String by = fullCommand.substring(fullCommand.indexOf("/by ") + "/by ".length());
             chatPage.printWithAlice(ui.getTaskDialog().addTask(new Deadline(dDescription, by)));
-        } catch (TaskDialogException | EmptyDescriptionException
+        } catch (TaskDialogException | DialogException | EmptyDescriptionException
                 | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
@@ -175,7 +175,7 @@ public class Command {
             String eDescription = fullCommand.substring(("event ").length(), fullCommand.indexOf("/"));
             String at = fullCommand.substring(fullCommand.indexOf("/at ") + "/at ".length());
             chatPage.printWithAlice(ui.getTaskDialog().addTask(new Event(eDescription, at)));
-        } catch (TaskDialogException | EmptyDescriptionException
+        } catch (TaskDialogException | DialogException | EmptyDescriptionException
                 | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }

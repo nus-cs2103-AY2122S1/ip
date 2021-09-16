@@ -162,6 +162,7 @@ public class StartPage extends AnchorPane {
             fxmlLoaderChatPage.<ChatPage>getController().setUpByFileName(inputField.getText());
             fxmlLoaderChatPage.<ChatPage>getController().putWelcomeText();
             // set and show scene to finalise
+            stage.setTitle(inputField.getText());
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

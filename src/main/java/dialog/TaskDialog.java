@@ -79,12 +79,12 @@ public class TaskDialog extends Dialog {
      * @param task the task to be added to the TaskList of this TaskDialog.
      * @throws TaskDialogException duplicated task cannot be added.
      */
-    public String addTask(Task task) throws TaskDialogException {
+    public String addTask(Task task) throws TaskDialogException, DialogException {
         if (taskList.contains(task)) {
             throw new TaskDialogException("The task '" + task + "' to be added already exists! Please delete "
                 + "the previous one first");
         }
-        Dialog addDialog = TaskDialog.generate(task.getDescription());
+        Dialog addDialog = Dialog.generate(task.getDescription());
         taskList.add(task);
         addDialog.add("Got it. I've added this task:");
         addDialog.add("  " + task);
@@ -148,14 +148,14 @@ public class TaskDialog extends Dialog {
         Task task = taskList.get(index);
         task.markAsDone();
         String id = "markAsDone" + task.hashCode();
-        Dialog markAsDoneDialog = Dialog.generate(id);
-        markAsDoneDialog.add("Nice! I've marked this task as done:");
-        markAsDoneDialog.add("  " + task);
-        // allow duplicates later
-        Dialog.archive.remove(id);
-
-        return markAsDoneDialog.toString();
-
+        if (archive.containsKey(id)) {
+            return archive.get(id).toString();
+        } else {
+            Dialog markAsDoneDialog = Dialog.generate(id);
+            markAsDoneDialog.add("Nice! I've marked this task as done:");
+            markAsDoneDialog.add("  " + task);
+            return markAsDoneDialog.toString();
+        }
     }
 
     /**
@@ -175,7 +175,7 @@ public class TaskDialog extends Dialog {
         removeDialog.add("Now you have " + this.taskList.length() + " tasks in the list.");
 
         Dialog.archive.remove(id);
-        Dialog.archive.remove(task.toString());
+        Dialog.archive.remove(task.getDescription());
 
         return removeDialog.toString();
 
