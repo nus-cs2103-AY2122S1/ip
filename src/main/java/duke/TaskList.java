@@ -54,7 +54,9 @@ public class TaskList {
         return tasks.get(taskNo).check();
     }
 
-    public String uncheck(int taskNo) { return tasks.get(taskNo).uncheck(); }
+    public String uncheck(int taskNo) {
+        return tasks.get(taskNo).uncheck();
+    }
 
     /**
      * delete certain task

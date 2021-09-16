@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class ResponseFormatter {
     /**
@@ -110,7 +110,7 @@ public class ResponseFormatter {
             return "(///￣ ￣///) No tasks with that keyword was found...";
         } else {
             for (int i = 0; i < foundTasks.size(); i++) {
-                foundList += (i + 1) +  ": " + foundTasks.get(i).toString() + "\n";
+                foundList += (i + 1) + ": " + foundTasks.get(i).toString() + "\n";
             }
             return "(*¯︶¯*) Here are the matching tasks in your list:\n"
                     + foundList;
@@ -119,5 +119,9 @@ public class ResponseFormatter {
 
     public String formatUndo(String commandType) {
         return commandType + " has been undone!";
+    }
+
+    public String formatSnooze(String snoozedTask) {
+        return "Ok..." + snoozedTask + " has been snoozed zZzZ";
     }
 }

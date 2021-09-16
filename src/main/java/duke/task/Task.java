@@ -38,6 +38,11 @@ public class Task {
         return this.toString();
     }
 
+    /**
+     * marks the task as incomplete
+     *
+     * @return full string representation of task with completion status
+     */
     public String uncheck() {
         this.isDone = false;
         return this.toString();

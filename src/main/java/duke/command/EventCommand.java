@@ -9,9 +9,8 @@ import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import duke.task.Task;
 import duke.task.Event;
+import duke.task.Task;
 
 
 public class EventCommand extends Command {
@@ -62,7 +61,8 @@ public class EventCommand extends Command {
      * @return
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
+    public String execute(TaskList taskList, ResponseFormatter rf,
+                          Storage storage, History history) throws IOException {
         this.event = new Event(this.desc, this.at);
         taskList.add(event);
         storage.writeToFile(taskList);
@@ -74,8 +74,8 @@ public class EventCommand extends Command {
     public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
         ArrayList<Task> currentList = taskList.getList();
         currentList.removeIf(task ->
-                task instanceof Event &&
-                        task.getDescription().equals(this.event.getDescription())
+                task instanceof Event
+                        && task.getDescription().equals(this.event.getDescription())
         );
         taskList.updateTaskList(currentList);
 

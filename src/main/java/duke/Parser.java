@@ -13,6 +13,7 @@ import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SnoozeCommand;
 import duke.command.TodoCommand;
 import duke.command.UndoCommand;
 
@@ -20,7 +21,7 @@ import duke.command.UndoCommand;
  * Parser object that parses all the input from user to commands understood by Duke
  */
 public class Parser {
-    public static History history;
+    private static History history;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
     private static String[] parsed;
 
@@ -70,6 +71,19 @@ public class Parser {
         return details;
     }
 
+    private static String[] parsedSnooze(String command) throws
+            IllegalArgumentException,
+            ArrayIndexOutOfBoundsException,
+            StringIndexOutOfBoundsException {
+
+        String[] details = command.split(" ");
+        if (details[1].equals("") || details[2].equals("")) {
+            throw new IllegalArgumentException();
+        }
+        details[2] = details[2] + " " + details[3];
+        return details;
+    }
+
     private static LocalDateTime parseDate(String dateTime) throws DateTimeException {
         return LocalDateTime.parse(dateTime, formatter);
     }
@@ -113,6 +127,10 @@ public class Parser {
                 return new FindCommand(parseKeyword(input));
             case UndoCommand.COMMAND:
                 return new UndoCommand();
+            case SnoozeCommand.COMMAND:
+                String[] snooze = parsedSnooze(input);
+                int taskNo = parseTaskNo(snooze[1]);
+                return new SnoozeCommand(taskNo, parseDate(snooze[2]));
             default:
                 throw new DukeException("Ehhh... (￣ ￣|||) Sorry I do not understand.");
             }
@@ -121,13 +139,12 @@ public class Parser {
         } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
             return new ErrorCommand("Don't leave it empty!!", "(・`ω´・)");
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new ErrorCommand("Say something!!!", "(-_-)");
+            return new ErrorCommand("Be specific!!!", "(-_-)");
         } catch (DateTimeException e) {
             return new ErrorCommand(
                     "Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format",
                     "(`-´)");
         }
-
     }
 
 }

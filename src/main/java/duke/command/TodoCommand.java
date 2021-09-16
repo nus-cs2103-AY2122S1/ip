@@ -8,7 +8,6 @@ import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -61,7 +60,8 @@ public class TodoCommand extends Command {
      * @return formatted response
      */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
+    public String execute(TaskList taskList, ResponseFormatter rf,
+                          Storage storage, History history) throws IOException {
         if (this.desc.equals("")) {
             throw new IllegalArgumentException();
         }
@@ -76,8 +76,8 @@ public class TodoCommand extends Command {
     public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
         ArrayList<Task> currentList = taskList.getList();
         currentList.removeIf(task ->
-                task instanceof Todo &&
-                        task.getDescription().equals(this.todo.getDescription())
+                task instanceof Todo
+                        && task.getDescription().equals(this.todo.getDescription())
         );
         taskList.updateTaskList(currentList);
 

@@ -52,7 +52,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
+    public String execute(TaskList taskList, ResponseFormatter rf,
+                          Storage storage, History history) throws IOException {
         try {
             if (taskNo == -1 || taskNo + 1 > taskList.getList().size()) {
                 throw new ArrayIndexOutOfBoundsException();
