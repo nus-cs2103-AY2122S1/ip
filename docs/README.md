@@ -3,7 +3,7 @@
 This repo contains the code for the Misaki chatbot as part of CS2103T: Software Engineering. 
 
 🌸 Misaki 🌸 is a desktop chatbot for managing and storing tasks. Start chatting with this adorable Japanese bot to manage your tasks effectively! („• ◡ •„) ♡
-___
+
 ## Quick start
 1. Ensure you have Java `11` or above installed.
 2. Download the latest `.jar` from [here].
@@ -27,6 +27,7 @@ ___
 ___
 ## Features
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. e.g. `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo submit assignment`.
+
 ### 🌸 Add a todo task: `todo`
 Adds a todo task to the list.<br>
 Format: `todo DESCRIPTION`
@@ -72,7 +73,7 @@ Format: `bye`
 
 ### 🌸 Save data
 Misaki saves data automatically in the local storage after every valid user input.
-___
+
 ## Command summary
 
 Action | Format, Examples
