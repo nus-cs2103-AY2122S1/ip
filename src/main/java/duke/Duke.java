@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.exceptions.DukeException;
@@ -29,8 +27,6 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             this.tasks = new TaskList();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
         }
     }
 
