@@ -113,7 +113,6 @@ public class Parser {
      */
     public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
-        assert index >= 0;
         tasks.getTask(index).setIsDone(true);
         String doneText = " Nice! I've marked this task as done: \n"
                 + "       ";
@@ -194,6 +193,15 @@ public class Parser {
         } else if (input.equals("blah")) {
             throw new DukeException(" OOPS!!! I'm sorry, but I don't know"
                     + " what that means :-(");
+        } else {
+            String[] splitInput = input.split(" ");
+            if (splitInput.length == 2) {
+                int index = Integer.parseInt(splitInput[1]);
+                if (index < 0 || index >= tasks.getSize()) {
+                    throw new DukeException(" OOPS!!! That index "
+                            + "is out of bounds :-(");
+                }
+            }
         }
     }
 
@@ -205,7 +213,6 @@ public class Parser {
      */
     public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
-        assert index >= 0;
         deletedTask = tasks.getTask(index);
         tasks.removeTask(deletedTask);
         String removeTaskText = " Noted. I've removed this task:  \n"
