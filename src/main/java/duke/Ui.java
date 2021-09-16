@@ -16,9 +16,10 @@ public class Ui {
     }
 
     /**
-     * Shows appropriate error messages to user.
+     * Returns String representation of an error.
      *
      * @param e Error to be shown.
+     * @return String representation of the error.
      */
     public String showError(DukeException e) {
         return echo(e.toString());
@@ -33,24 +34,26 @@ public class Ui {
     }
 
     /**
-     * Prints a list of objects.
+     * Returns String representation of a list of objects.
      *
-     * @param tasks   List of items to be printed.
-     * @param heading The heading to precede the list of items.
+     * @param items List of items to be printed.
+     * @param heading Heading to precede the list of items.
+     * @return String representation of all the items.
      */
-    public String printAll(List<?> tasks, String heading) {
+    public String printAll(List<?> items, String heading) {
         String s = "";
         s += INDENT + heading + INDENT + "\n";
-        for (int i = 1; i <= tasks.size(); i++) {
-            s += (INDENT + i + " " + tasks.get(i - 1) + INDENT + "\n");
+        for (int i = 1; i <= items.size(); i++) {
+            s += (INDENT + i + " " + items.get(i - 1) + INDENT + "\n");
         }
         return s;
     }
 
     /**
-     * Prints duke's response to the user.
+     * Returns String representation of Duke's response to user.
      *
-     * @param input Duke's response as a String.
+     * @param input Duke's response.
+     * @return String representation of Duke's response.
      */
     public String echo(String input) {
         assert input.length() > 0;
