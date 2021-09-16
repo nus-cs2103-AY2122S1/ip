@@ -35,7 +35,7 @@ public class TaskEvent extends Task {
     }
 
     /**
-     * Return string representation of Event.
+     * Returns string representation of Event.
      *
      * @return Event display.
      */

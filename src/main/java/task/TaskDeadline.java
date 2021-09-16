@@ -36,7 +36,7 @@ public class TaskDeadline extends Task {
     }
 
     /**
-     * Return string representation of Deadline.
+     * Returns string representation of Deadline.
      *
      * @return Deadline display.
      */

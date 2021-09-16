@@ -9,7 +9,7 @@ import task.Task;
 import task.TaskList;
 
 /**
- * Command to sort the task list
+ * Command to sort the task list.
  */
 public class CommandSort extends Command {
 
@@ -23,14 +23,15 @@ public class CommandSort extends Command {
      * @param sortFilters Un-parsed list of filters.
      */
     public CommandSort(TaskList taskList, String sortFilters) {
-        this.commandName = "sort /name /date";
+        this.commandName = "sort";
         this.description = "Sorts list based on arguments provided. Having no arguments would default to"
                 + " sorting by /name. If there is more than 1 argument, the list will be sorted by the first."
                 + "followed by the second, etc...";
         this.arguments = new String[]{
             "/name Optional argument to sort by name",
             "/date Optional argument to sort by date",
-            "/done Optional argument to sort by completion status"
+            "/done Optional argument to sort by completion status",
+            "/added Optional argument to sort by added-by date"
         };
 
         this.taskList = taskList;
