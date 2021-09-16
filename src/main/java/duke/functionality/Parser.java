@@ -87,7 +87,7 @@ public class Parser {
         String args = inputSplit[1];
         String[] argsSplit = args.split(" /at ", 2);
         if (checkInputLength(argsSplit)) {
-            throw new DukeException("OOPS!!! Please indicate the start and end time of the event.");
+            throw new DukeException("OOPS!!! Please indicate the date of the event.");
         }
         checkTimeFormat(argsSplit[1]);
         return new AddCommand(Event.taskTag(), argsSplit[0], argsSplit[1]);
@@ -95,7 +95,7 @@ public class Parser {
 
     private static DoneCommand prepareDoneCommand(String[] inputSplit) throws DukeException {
         if (checkInputLength(inputSplit)) {
-            throw new DukeException("OOPS!!! Please indicate which task you want to delete.");
+            throw new DukeException("OOPS!!! Please indicate which task you want to mark as done.");
         }
         String strTaskNum = inputSplit[1].split(" ")[0];
         try {
@@ -117,7 +117,6 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Please indicate a valid index.");
         }
-
     }
 
     private static FindCommand prepareFindCommand(String[] inputSplit) throws DukeException {
@@ -131,38 +130,28 @@ public class Parser {
 
     private static ArchiveCommand prepareArchiveCommand(String[] inputSplit) throws DukeException {
         if (checkInputLength(inputSplit)) {
-            throw DukeException.missingInput("find");
+            throw new DukeException("OOPS!!! Please indicate which task you want to archive.");
         }
-        String[] strArrOfTaskNums = inputSplit[1].split(" ", 2);
-        int numOfTasks = strArrOfTaskNums.length;
-        int[] arrOfTaskNums = new int[numOfTasks];
+        String strTaskNum = inputSplit[1].split(" ")[0];
         try {
-            for (int i = 0; i < numOfTasks; i++) {
-                int taskNum = Integer.parseInt(strArrOfTaskNums[i]) - 1;
-                arrOfTaskNums[i] = taskNum;
-            }
+            int taskNum = Integer.parseInt(strTaskNum) - 1;
+            return new ArchiveCommand(taskNum);
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Please indicate a valid index.");
         }
-        return new ArchiveCommand(arrOfTaskNums);
     }
 
     private static RestoreCommand prepareRestoreCommand(String[] inputSplit) throws DukeException {
         if (checkInputLength(inputSplit)) {
-            throw DukeException.missingInput("find");
+            throw new DukeException("OOPS!!! Please indicate which task you want to restore.");
         }
-        String[] strArrOfTaskNums = inputSplit[1].split(" ", 2);
-        int numOfTasks = strArrOfTaskNums.length;
-        int[] arrOfTaskNums = new int[numOfTasks];
+        String strTaskNum = inputSplit[1].split(" ")[0];
         try {
-            for (int i = 0; i < numOfTasks; i++) {
-                int taskNum = Integer.parseInt(strArrOfTaskNums[i]) - 1;
-                arrOfTaskNums[i] = taskNum;
-            }
+            int taskNum = Integer.parseInt(strTaskNum) - 1;
+            return new RestoreCommand(taskNum);
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Please indicate a valid index.");
         }
-        return new RestoreCommand(arrOfTaskNums);
     }
 
     private static boolean checkInputLength(String[] inputSplit) {
