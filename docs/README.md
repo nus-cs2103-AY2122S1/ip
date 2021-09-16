@@ -35,7 +35,7 @@ Format: `deadline DESCRIPTION /by yyyy-MM-dd`
 Format: `event DESCRIPTION /at yyyy-MM-dd HH:mm`  
 ![AddEvent](./images/exampleEvent.png)  
 
-:warning: *__note__: cannot add tasks with the same description*  
+:warning: *__note__: cannot add tasks with the same description (case INSENSITIVE)*  
 ![AddDuplicate](./images/exampleDuplicate.png)
 
 
@@ -61,7 +61,8 @@ Format: `delete INDEX`
 ### Feature 5 - Find task
 Lists out all task with the specified keyword.  
 Format: `find KEYWORD`  
-![FindTask](./images/exampleFind.png)
+![FindTask](./images/exampleFind.png)  
+:warning: *__note__: case INSENSITIVE*
 
 
 ### Feature 6 - Bye
