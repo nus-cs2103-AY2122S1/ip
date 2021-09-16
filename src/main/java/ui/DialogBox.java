@@ -54,6 +54,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox that displays user input command.
+     *
+     * @param text String containing text input of user.
+     * @param img Image of user's profile.
+     * @return DialogBox representing user input display.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setAlignment(Pos.CENTER_RIGHT);
@@ -61,6 +68,13 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Returns a DialogBox that displays Duke's resultant output.
+     *
+     * @param text String containing text output of Duke.
+     * @param img Image of Duke's profile.
+     * @return DialogBox representing Duke output display.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

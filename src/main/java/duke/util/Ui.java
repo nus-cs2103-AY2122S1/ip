@@ -14,9 +14,9 @@ public class Ui {
     }
 
     /**
-     * Wrapper to render Duke output in a consistent format.
+     * Format Duke output String consistently.
      *
-     * @param str String representing Duke output.
+     * @param str String representing a formatted Duke output.
      */
     public String formatOutput(String str) {
         StringBuilder sb = new StringBuilder();
@@ -25,9 +25,9 @@ public class Ui {
     }
 
     /**
-     * Format Task to render desired add task output.
+     * Format Task to a desired add task output String.
      *
-     * @param task Task just added.
+     * @param task String representing the Task just added.
      */
     public String addTaskOutput(Task task) {
         return "Got it. I've added this task:\n"
@@ -35,13 +35,13 @@ public class Ui {
                 + task.toString()
                 + "\nNow you have "
                 + taskList.getNumOfTasks()
-                + " tasks in the list.";
+                + " tasks in your list.";
     }
 
     /**
-     * Format Task to render desired delete task output.
+     * Format Task to a desired delete task output String.
      *
-     * @param task Task just deleted.
+     * @param task String representing the Task just deleted.
      */
     public String deleteTaskOutput(Task task) {
         return "Noted. I've removed this task:\n"
@@ -49,6 +49,6 @@ public class Ui {
                 + task.toString()
                 + "\nNow you have "
                 + taskList.getNumOfTasks()
-                + " tasks in the list.";
+                + " tasks in your list.";
     }
 }

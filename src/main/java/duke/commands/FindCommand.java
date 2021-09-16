@@ -6,10 +6,22 @@ import duke.util.Ui;
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructor for the find command.
+     *
+     * @param keyword Keyword users are searching for.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Find all tasks that match the given keyword.
+     *
+     * @param tasks Current taskList.
+     * @param ui User interface of Duke.
+     * @return String output result of the find command.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui) {
         StringBuilder op = new StringBuilder();
@@ -19,6 +31,8 @@ public class FindCommand extends Command {
                 op.append(tasks.getTask(i).toString()).append("\n");
             }
         }
-        return "Here are the matching tasks in your list:\n" + op;
+        return op.length() == 0
+                ? "Yikes! No tasks match what you are looking for :("
+                : "Here are the matching tasks in your list:\n" + op;
     }
 }

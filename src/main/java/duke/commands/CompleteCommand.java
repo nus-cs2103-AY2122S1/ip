@@ -8,18 +8,30 @@ import duke.util.Ui;
 public class CompleteCommand extends Command {
     private final int index;
 
+    /**
+     * Constructor for a complete command.
+     *
+     * @param index Integer reference for the task to be deleted.
+     */
     public CompleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Marks an existing Task as complete and updates the database.
+     *
+     * @param tasks Current taskList.
+     * @param ui User interface of Duke.
+     * @return String output result of the complete command.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        assert index < tasks.getNumOfTasks();
-        assert index > 0;
+        assert index <= tasks.getNumOfTasks() : "invalid task reference";
+        assert index > 0 : "reference smaller than 0";
 
         Task task = tasks.getTask(index);
         if (task.isDone()) {
-            return "Great! But you have already completed this task!";
+            return "Great! But you have already completed this task :(";
         } else {
             task.markDone();
             Storage.writeDatabase(tasks);

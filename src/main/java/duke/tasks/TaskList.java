@@ -9,7 +9,7 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     /**
-     * Constructor to make a task list.
+     * Constructor to make a taskList.
      *
      * @param list ArrayList of Tasks.
      */
@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Find the number of Tasks.
+     * Get the number of Tasks.
      *
      * @return Number of Tasks.
      */
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Add another Task to the list.
+     * Add another Task to the taskList.
      *
      * @param task A Task object.
      */
@@ -73,6 +73,6 @@ public class TaskList {
                     .append(taskList.get(i).toString())
                     .append("\n");
         }
-        return "Here are the tasks in your list:\n" + op;
+        return op.length() == 0 ? "You have no tasks for now XD!" : "Here are your tasks:\n" + op;
     }
 }

@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Retrieves data from stored database. Return empty task arraylist if .txt does not exist.
+     * Print an error message with either an IOException or invalid user input.
      *
      * @return ArrayList of tasks previously stored in database.
      */
@@ -48,6 +49,7 @@ public class Storage {
 
     /**
      * Write current ist of tasks into the database.
+     * Print an error message if there is an IOException.
      *
      * @param taskList TaskList of current tasks.
      */
