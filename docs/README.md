@@ -6,12 +6,7 @@ There are 3 types of tasks you can manage:
 2. Deadline
 3. Event
 
-This user guide details how to download Duke and get started, as well as all the commands you can use to interact with Duke.
-
-## Quick Start
-1. Ensure you have Java 11 or above installed.
-2. Download the latest `duke.jar` from [here](https://github.com/kslui99/ip/releases/tag/v0.1).
-3. Double-click the `duke.jar` file to start the app.
+This user guide details all the commands you can use to interact with Duke.
 
 ## Features and Usage
 ### Adding a ToDo: `todo [description]`
