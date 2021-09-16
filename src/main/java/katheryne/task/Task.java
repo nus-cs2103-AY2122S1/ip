@@ -31,6 +31,10 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+    
+    public boolean find(String keyword) {
+        return this.description.contains(keyword);
+    }
 
     // getters & setters (needed for jackson)
     protected void setDescription(String description) {

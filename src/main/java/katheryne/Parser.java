@@ -8,6 +8,7 @@ import katheryne.command.DeleteCommand;
 import katheryne.command.DoneCommand;
 import katheryne.command.EventCommand;
 import katheryne.command.ExitCommand;
+import katheryne.command.FindCommand;
 import katheryne.command.ListCommand;
 import katheryne.command.TodoCommand;
 
@@ -58,17 +59,15 @@ public class Parser {
         try {
             // Process as needed per command, throw errors if command format is wrong
             switch (commandWord) {
-            case ExitCommand.COMMAND:
-            case ListCommand.COMMAND:
+            case ExitCommand.COMMAND: case ListCommand.COMMAND:
                 return new String[0];
-            case DoneCommand.COMMAND:
-            case DeleteCommand.COMMAND:
+            case DoneCommand.COMMAND: case DeleteCommand.COMMAND:
                 if (processedRemainingText.length == 1 || processedRemainingText[1].split(" ").length > 1) {
                     throw new KatheryneException("Just tell me the command and what index, nothing else.");
                 }
                 processedRemainingText = new String[]{input.split(" ", 2)[1]};
                 break;
-            case TodoCommand.COMMAND:
+            case TodoCommand.COMMAND: case FindCommand.COMMAND:
                 processedRemainingText = new String[]{ processedRemainingText[1] };
                 break;
             case EventCommand.COMMAND:

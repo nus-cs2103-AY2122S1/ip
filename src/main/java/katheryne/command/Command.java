@@ -25,8 +25,8 @@ public abstract class Command {
             return new ListCommand();
         case ExitCommand.COMMAND:
             return new ExitCommand();
-//        case FindCommand.COMMAND:
-//            return new FindCommand(processedRemainingText);
+        case FindCommand.COMMAND:
+            return new FindCommand(processedRemainingText);
         case DoneCommand.COMMAND:
             return new DoneCommand(processedRemainingText);
         case DeleteCommand.COMMAND:
