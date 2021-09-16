@@ -97,6 +97,10 @@ public class Duke {
                 message = this.taskArray.handleReset();
                 break;
             }
+            case COMMAND_HELP: {
+                message = this.taskArray.handleHelp();
+                break;
+            }    
             default: {
                 message = Formatter.getResponseString(ERROR_UNKNOWN_COMMAND);
                 break;
