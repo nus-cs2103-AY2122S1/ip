@@ -1,5 +1,3 @@
-[T][X] hihi
-[D][X] study (by: 2012-11-11)
-[E][ ] party (at: 3pm)
-[T][ ] dsdsd
 [T][ ] sdsd
+[D][ ] study (by: 2012-12-24)
+[T][ ] study

@@ -22,14 +22,20 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
-            String[] separated = input.split(" ");
-            int index = Integer.parseInt(separated[1]);
-            Task task = tasks.remove(index - 1);
+            Task task = processTask(tasks);
             storage.write(tasks);
             return ui.showDeleteSuccessMessage(task, tasks.getSize());
         } catch (Exception e) {
             throw new JwBotException("Sorry bro, I think you chose an incorrect index number to delete!");
         }
+    }
+
+    @Override
+    protected Task processTask(TaskList tasks) {
+        String[] separated = input.split(" ");
+        int index = Integer.parseInt(separated[1]);
+        Task task = tasks.remove(index - 1);
+        return task;
     }
 
     /**

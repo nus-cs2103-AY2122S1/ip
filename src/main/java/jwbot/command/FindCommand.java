@@ -19,14 +19,24 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
-        List<Task> results = new ArrayList<>();
+        List<Task> result = processSearchResult(tasks);
+        return ui.showSearchList(result);
+    }
+
+    private List<Task> processSearchResult(TaskList tasks) {
+        List<Task> result = new ArrayList<>();
         String keyword = input.split(" ", 2)[1];
         for (Task task : tasks.getItems()) {
-            if (task.includedOrNot(keyword)) {
-                results.add(task);
+            if (task.isRelevant(keyword)) {
+                result.add(task);
             }
         }
-        return ui.showSearchList(results);
+        return result;
+    }
+
+    @Override
+    protected Task processTask(TaskList tasks) {
+        return null;
     }
 
     @Override

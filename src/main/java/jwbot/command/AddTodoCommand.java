@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
+import jwbot.data.task.Task;
 import jwbot.data.task.Todo;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
@@ -23,8 +24,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
-        String content = input.split(" ", 2)[1];
-        Todo todo = new Todo(content);
+        Todo todo = processTask(tasks);
         tasks.addTask(todo);
         try {
             storage.write(tasks);
@@ -32,6 +32,13 @@ public class AddTodoCommand extends Command {
             throw new JwBotException("Sorry bro, I think you made an error with the todo format!");
         }
         return ui.showAddTaskSuccessMessage(todo);
+    }
+
+    @Override
+    protected Todo processTask(TaskList tasks) {
+        String content = input.split(" ", 2)[1];
+        Todo todo = new Todo(content);
+        return todo;
     }
 
     /**

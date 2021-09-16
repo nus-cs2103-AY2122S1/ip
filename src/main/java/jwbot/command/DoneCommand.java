@@ -2,6 +2,7 @@ package jwbot.command;
 
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
+import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
@@ -21,14 +22,21 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
-            String[] separated = input.split(" ");
-            int index = Integer.parseInt(separated[1]);
-            tasks.getTask(index - 1).markAsDone();
+            Task task = processTask(tasks);
+            task.markAsDone();
             storage.write(tasks);
-            return ui.showDoneSuccessMessage(tasks.getTask(index - 1));
+            return ui.showDoneSuccessMessage(task);
         } catch (Exception e) {
             throw new JwBotException("Sorry bro, I think you chose an incorrect index number to mark done!");
         }
+    }
+
+    @Override
+    protected Task processTask(TaskList tasks) {
+        String[] separated = input.split(" ");
+        int index = Integer.parseInt(separated[1]);
+        Task task = tasks.getTask(index - 1);
+        return task;
     }
 
     /**
