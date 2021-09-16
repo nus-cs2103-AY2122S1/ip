@@ -1,2 +1,3 @@
-[T][X] homework
-[D][ ] essay  (by: 180921 1700)
+[T][X] visit mom
+[D][ ] lab  (by: 210921 0100)
+[E][ ] party  (at: 220921 1900)
