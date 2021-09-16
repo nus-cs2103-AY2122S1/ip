@@ -8,7 +8,7 @@ the user.
 ### Adding Tasks
 
 Our Duke program is able to add your tasks into the Death Note! Please do the tasks that you have written there,
-or else, you have to bear the consequences. :japanese_orge:
+or else, you have to bear the consequences. :japanese_ogre:
 
 Duke can handle three different kinds of tasks. They are:
 
