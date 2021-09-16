@@ -14,8 +14,8 @@ types:
 ### 2. Mark as done
 StuDo is able to mark your tasks as done once you complete them.
 
-### 3. Remove tasks
-StuDo is able to remove tasks from your list anytime.
+### 3. Delete tasks
+StuDo is able to delete tasks from your list anytime.
 
 ### 4. Find tasks
 StuDo is able to find your tasks with a given keyword for you from your list when you cannot find them.
@@ -32,8 +32,8 @@ StuDo is able to unarchive your tasks if you want to move them back from your ar
 ### 8. List archived tasks
 StuDo is able to show you the tasks you have archived.
 
-### 9. Remove archived tasks
-StuDo is able to remove tasks from your list of archived tasks anytime.
+### 9. Delete archived tasks
+StuDo is able to delete tasks from your list of archived tasks anytime.
 
 ## Usage
 
@@ -128,19 +128,19 @@ Marks task at index `1` as done from StuDo's list of tasks.
 
 
 
-### 7. `remove <task index number>` - removes task at given index number
+### 7. `delete <task index number>` - delete task at given index number
 
-Removes task at given index number from StuDo's list of tasks.
+Delete task at given index number from StuDo's list of tasks.
 
 Example of usage:
 
-`remove 1`
+`delete 1`
 
 Expected outcome:
 
-Removes task at index `1` from StuDo's list of tasks.
+Delete task at index `1` from StuDo's list of tasks.
 
-<img src="userGuideDemo/remove.png" width="317" height="400">
+<img src="userGuideDemo/delete.png" width="317" height="400">
 
 
 ### 8. `archive <task index number>` - archives task at given index number
@@ -189,17 +189,17 @@ Shows the list of archived tasks to the user.
 
 <img src="userGuideDemo/listArchive.png" width="487" height="250">
 
-### 11. `remove archive <task index number>` - removes task at task index number from list of archived tasks
+### 11. `delete archive <task index number>` - delete task at task index number from list of archived tasks
 
-Removes task at task index number from StuDo's list of archived tasks.
+Delete task at task index number from StuDo's list of archived tasks.
 
 Example of usage:
 
-`remove archive 1`
+`delete archive 1`
 
 Expected outcome:
 
-List of archived tasks does not contain the task which we removed.
+List of archived tasks does not contain the task which we deleted.
 
-<img src="userGuideDemo/removeArchive.png" width="323" height="350">
+<img src="userGuideDemo/deleteArchive.png" width="323" height="350">
 
