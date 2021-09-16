@@ -48,7 +48,8 @@ public class Ui {
                 + "|  |_|  /     /  /\\  \\     |   |\n"
                 + "|  |_|  \\   /    __   \\   |   |\n"
                 + "|______/ /__/    \\__\\ |__|\n";
-        return logo + "Hello! I'm Bai. （ ● ___ ●.）\nWhat can I do for you?";
+        return logo + "Hello! I'm Bai. （ ● ___ ●.）\nWhat can I do for you?\n"
+                + "Enter 'help' to see a list of available commands";
     }
 
     /**
