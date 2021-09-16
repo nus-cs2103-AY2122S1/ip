@@ -204,7 +204,7 @@ Delete a task.
 Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
-`delete [task position in list]`
+`delete [task position in list]`  
 _*Note, to find `[task position in list]` , user may use either [find](#finding-task-using-keyword-find) or 
 [list](#looking-at-all-the-task-being-tracked-list)_
 
