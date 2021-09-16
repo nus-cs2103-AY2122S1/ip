@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Image bgImage = new Image(this.getClass().getResourceAsStream("/images/backgroundImage.png"));
+        Image bgImage = new Image(this.getClass().getResourceAsStream("/images/BackgroundImage.png"));
         BackgroundImage myBI= new BackgroundImage(bgImage,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
