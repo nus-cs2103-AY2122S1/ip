@@ -48,7 +48,6 @@ public class Duke{
      * Executes the Duke object.
      */
     public void run() {
-        System.out.println(returnOutput("hehehe"));
         boolean isExit = false;
         ui.greet();
         taskList.printTask();

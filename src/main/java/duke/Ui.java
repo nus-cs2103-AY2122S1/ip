@@ -261,11 +261,11 @@ public class Ui {
             action = Type.FINDTASK;
         } else if (input.split(" ")[0].equals("done")){
             action = Type.MARKDONE;
-        } else if (input.split("event")[0].equals("")) {
+        } else if (input.split("event").length == 0 || input.split("event")[0].equals("")) {
             action = Type.ADDEVENT;
-        } else if (input.split("deadline")[0].equals("")) {
+        } else if (input.split("deadline").length == 0 || input.split("deadline")[0].equals("")) {
             action = Type.ADDDEADLINE;
-        } else if (input.split("todo")[0].equals("")) {
+        } else if (input.split("todo").length == 0 || input.split("todo")[0].equals("")) {
             action = Type.ADDTODO;
         } else {
             action = Type.NONE;
