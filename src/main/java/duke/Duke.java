@@ -24,7 +24,7 @@ public class Duke {
         }
     }
 
-    String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, storage);
