@@ -1,6 +1,6 @@
 import javafx.application.Application;
 
-import duke.Main;
+import energy.Main;
 
 /**
  * A launcher class to workaround classpath issues.

@@ -53,12 +53,12 @@
           1. STATIC: static imports
           2. STANDARD_JAVA_PACKAGE: standard java/javax imports
           3. THIRD_PARTY_PACKAGE: defined as any other imports
-          4. SPECIAL_IMPORTS: defined as duke imports
+          4. SPECIAL_IMPORTS: defined as energy imports
     -->
     <module name="CustomImportOrder">
       <property name="customImportOrderRules"
                 value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS"/>
-      <property name="specialImportsRegExp" value="^duke\."/>
+      <property name="specialImportsRegExp" value="^energy\."/>
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <property name="separateLineBetweenGroups" value="true"/>
     </module>
