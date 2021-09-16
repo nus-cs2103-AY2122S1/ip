@@ -1,4 +1,4 @@
-#Jarvis User Guide
+<h1>Jarvis User Guide</h1>
 
 
 Based on a project template for a greenfield Java project, previously named [_Duke_](https://www.oracle.com/java/duke.html).
