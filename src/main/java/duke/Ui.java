@@ -178,4 +178,16 @@ public class Ui {
         }
         printBreak();
     }
+
+    /**
+     * print tasks that has been snoozed
+     *
+     * @param snoozedTask task that has been snoozed
+     */
+    public void printSnooze(String snoozedTask) {
+        printBreak();
+        System.out.println("Ok... This task has been snoozed zzZ");
+        System.out.println(snoozedTask);
+        printBreak();
+    }
 }

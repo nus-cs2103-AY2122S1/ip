@@ -31,6 +31,15 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String snooze(LocalDateTime snoozedTime) {
+        this.at = snoozedTime;
+        return toString();
+    }
+
+    public LocalDateTime getAt() {
+        return this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(displayFormatter) + ")";

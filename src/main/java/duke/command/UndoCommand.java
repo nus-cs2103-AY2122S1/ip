@@ -1,13 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-
-import java.io.IOException;
 
 public class UndoCommand extends Command {
     public static final String COMMAND = "undo";
@@ -19,8 +18,9 @@ public class UndoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
-        if (history.history.isEmpty()) {
+    public String execute(TaskList taskList, ResponseFormatter rf,
+                          Storage storage, History history) throws IOException {
+        if (history.isEmpty()) {
             return rf.formatError("Nothing to undo!");
         }
         Command lastCommand = history.getLastCommand();

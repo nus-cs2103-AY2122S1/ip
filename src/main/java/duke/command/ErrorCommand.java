@@ -64,7 +64,7 @@ public class ErrorCommand extends Command {
         if (this.emoticon != null) {
             return rf.formatError(this.error, this.emoticon);
         } else {
-            return  rf.formatError(this.error);
+            return rf.formatError(this.error);
         }
     }
 }
