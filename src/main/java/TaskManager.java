@@ -189,50 +189,45 @@ public class TaskManager {
     }
 
     private String toDoAddedMessage() {
-        String output = "Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                         + "[" + taskList[i - 1].getTask() + "]"
                         + "[" + taskList[i - 1].getStatusIcon() + "] "
                         + taskList[i - 1].getDescription()
                         + "\n"
                         + "Now you have " + (i) + " tasks in the list.";
-        return output;
     }
 
     private String deadlineAddedMessage() {
-        String output = "Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                         + "[" + taskList[i - 1].getTask() + "]"
                         + "[" + taskList[i - 1].getStatusIcon() + "] "
                         + taskList[i - 1].getDescription()
                         + "\n"
                         + "Now you have " + (i) + " tasks in the list.";
-        return output;
     }
 
     private String eventAddedMessage() {
-        String output = "Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                         + "[" + taskList[i - 1].getTask() + "]"
                         + "[" + taskList[i - 1].getStatusIcon() + "] "
                         + taskList[i - 1].getDescription()
                         + "\n"
                         + "Now you have " + (i) + " tasks in the list.";
-        return output;
     }
 
     private String doneTaskMessage(int taskNo) {
-        String output = "Nice! I've marked this task as done: \n"
+        return "Nice! I've marked this task as done: \n"
                         + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
                         + taskList[taskNo - 1].getDescription();
-        return output;
     }
 
     private String deletedTaskMessage(String type, String status, String task, int taskNo) {
-        String output = "Noted. I've removed this task: \n"
+        return "Noted. I've removed this task: \n"
                         + " [" + type + "] "
                         + "[" + status + "] "
                         + task
                         + "\n"
                         + "Now you have " + (i) + " tasks in the list.";
-        return output;
     }
 
     private String errorUnknownCommandMessage() {
