@@ -1,0 +1,3 @@
+T - 1 - CS2100 assignment
+E - 0 - birthday - 2022-01-01
+D - 0 - quiz - 2021-09-20
