@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
-                        " Hello I'm Hange! \n How can I help you?", bot)
+                        " Hello I'm Banana! \n How can I help you?", bot)
         );
         handleActions();
     }
