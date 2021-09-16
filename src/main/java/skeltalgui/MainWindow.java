@@ -33,15 +33,24 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lady.png"));
 
+    /**
+     * Initialize a dialogContainer.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Introduce the bot.
+     */
     public void introduction() {
         speak(Ui.introduction());
     }
 
+    /**
+     * Load tasks into the Skeltal system.
+     */
     public void loadTasks() {
         Pair<ArrayList<Task>, String> tasksStringPair =
                 Storage.loadFile(Storage.SKELTAL_PATH, Storage.wrappedStringToTask);
@@ -67,6 +76,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Displays the string as a DialogueBox.
+     *
+     * @param str the str
+     */
     public void speak(String str) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(str, dukeImage)
