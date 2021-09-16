@@ -2,7 +2,7 @@
 - [User Guide](#user-guide)
     * [Quick Start](#quick-start)
     * [Features](#features)
-        + [Viewing help: `help`](#viewing-help-help)
+        + [Viewing help: `help`](#viewing-help---help)
         + [Adding a Todo Task: `todo`](#adding-a-todo-task-todo)
         + [Adding a Deadline Task: `deadline`](#adding-a-deadline-task-deadline)
         + [Adding an Event Task: `event`](#adding-an-event-task-event)
@@ -43,7 +43,7 @@ DukeBai is a **desktop app for managing your upcoming tasks**, optimized for use
 
 ## Features
 
-### Viewing hellp - `help`
+### Viewing help - `help`
 
 Displays a list of available commands with example usage.
 
