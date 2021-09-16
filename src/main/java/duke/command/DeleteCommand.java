@@ -48,6 +48,6 @@ public class DeleteCommand extends Command {
         } catch(DukeException e) {
             return e.getMessage();
         }
-        return toDelete + ui.numberOfTasks(tasks);
+        return toDelete + System.lineSeparator() + ui.numberOfTasks(tasks);
     }
 }
