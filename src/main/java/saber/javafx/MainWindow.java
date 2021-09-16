@@ -29,6 +29,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Saber saber;
+    private SaberUI saberGeneralUI;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image saberImage = new Image(this.getClass().getResourceAsStream("/images/saberprofile.png"));
@@ -39,7 +40,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        SaberUI saberGeneralUI = new SaberUI();
+        this.saberGeneralUI = new SaberUI();
         dialogContainer.getChildren().addAll(
                 DialogBox.getSaberDialog(saberGeneralUI.getGreeting(), saberImage)
         );
@@ -47,6 +48,11 @@ public class MainWindow extends AnchorPane {
 
     public void setSaber(Saber d) {
         saber = d;
+        if (saber.getHasInitializationError()) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getSaberDialog(saberGeneralUI.getStorageLoadingError(), saberImage)
+            );
+        }
     }
 
     /**

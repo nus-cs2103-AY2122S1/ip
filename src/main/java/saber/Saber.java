@@ -30,6 +30,8 @@ public class Saber {
     /** The list that stores the tasks when the Saber application is running */
     private TaskList taskList;
 
+    private boolean hasInitializationError = false;
+
     /** The enum that represents all the possible command to Saber application */
     public enum InputCommand {
         add,
@@ -67,6 +69,7 @@ public class Saber {
             this.taskList = new TaskList(storage.load());
         } catch (SaberStorageLoadException e) {
             saberGeneralUI.showStorageLoadingError();
+            hasInitializationError = true;
             this.taskList = new TaskList(new ArrayList<>());
         }
     }
@@ -75,7 +78,7 @@ public class Saber {
      * Stores the entire existing TaskList to the hard disk
      * (to the file specified by the filepath)
      */
-    public void storeExistingTaskList() {
+    public void storeExistingTaskList() throws SaberStorageStoreException {
         TaskType[] taskTypeArray = new TaskType[taskList.size()];
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) instanceof Deadline) {
@@ -88,12 +91,7 @@ public class Saber {
                 taskTypeArray[i] = TaskType.normalTask;
             }
         }
-
-        try {
-            storage.store(taskList, taskTypeArray);
-        } catch (SaberStorageStoreException e) {
-            saberGeneralUI.showStorageStoringError();
-        }
+        storage.store(taskList, taskTypeArray);
     }
 
     /***
@@ -122,7 +120,11 @@ public class Saber {
                 saberGeneralUI.showLineBreak();
             }
         }
-        storeExistingTaskList();
+        try {
+            storeExistingTaskList();
+        } catch (SaberStorageStoreException e) {
+            saberGeneralUI.showStorageStoringError();
+        }
     }
 
     /**
@@ -142,7 +144,18 @@ public class Saber {
             return saberGeneralUI.getCommandNotFoundError();
         } catch (NullPointerException e) {
             return saberGeneralUI.getGenericError();
+        } catch (SaberStorageStoreException e) {
+            return saberGeneralUI.getStorageStoringError();
         }
+    }
+
+    /**
+     * Gets initialization error
+     *
+     * @return initialization error
+     */
+    public boolean getHasInitializationError() {
+        return hasInitializationError;
     }
 
     /***
