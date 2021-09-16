@@ -47,6 +47,8 @@ operates using **text commands**.
   DATE TIME`.
 * Parameters must be input in the order specified.
 
+> 💡 By the way, I heard that if you type in 'love' into Dukewu, something nice will happen...
+
 ### 4.1 Viewing help: `help`
 Displays a list of commands that Dukewu supports.
 
