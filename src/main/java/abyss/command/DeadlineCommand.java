@@ -11,7 +11,7 @@ import abyss.task.Task;
  * Represents a command to add a deadline to the list of tasks.
  */
 public class DeadlineCommand implements Command {
-    private static final String DEADLINE_REGEX = "^\\S[ -~]*\\/by[ ]+\\S[ -~]*$";
+    private static final String DEADLINE_REGEX = "^\\S[ -~]*\\/d[ ]+\\S[ -~]*$";
 
     private String description;
     private String date;
@@ -20,7 +20,7 @@ public class DeadlineCommand implements Command {
         if (!content.matches(DEADLINE_REGEX)) {
             throw new InvalidDeadlineException();
         }
-        String[] parts = content.split("\\/by[ ]+", 2);
+        String[] parts = content.split("\\/d[ ]+", 2);
         this.description = parts[0];
         this.date = parts[1];
     }

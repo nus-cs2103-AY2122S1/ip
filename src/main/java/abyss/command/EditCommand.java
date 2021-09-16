@@ -30,7 +30,7 @@ public abstract class EditCommand implements Command {
 
         String editContent = parts[1];
         EditCommand cmd;
-        if (content.matches(EDIT_DATE_REGEX)) {
+        if (editContent.matches(EDIT_DATE_REGEX)) {
             String[] subParts = editContent.split("[ ]+", 2);
             cmd = new EditDateCommand(index, subParts[1]);
         } else {

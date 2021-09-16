@@ -11,7 +11,7 @@ import abyss.task.Task;
  * Represents a command to add an event to the list of tasks.
  */
 public class EventCommand implements Command {
-    private static final String EVENT_REGEX = "^\\S[ -~]*\\/at[ ]+\\S[ -~]*$";
+    private static final String EVENT_REGEX = "^\\S[ -~]*\\/d[ ]+\\S[ -~]*$";
 
     private String description;
     private String date;
@@ -20,7 +20,7 @@ public class EventCommand implements Command {
         if (!content.matches(EVENT_REGEX)) {
             throw new InvalidEventException();
         }
-        String[] parts = content.split("\\/at[ ]+", 2);
+        String[] parts = content.split("\\/d[ ]+", 2);
         this.description = parts[0];
         this.date = parts[1];
     }

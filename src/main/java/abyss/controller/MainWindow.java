@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Abyss abyss;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Abyss.png"));
-    private Image abyssImage = new Image(this.getClass().getResourceAsStream("/images/Abyss.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Six.png"));
+    private Image abyssImage = new Image(this.getClass().getResourceAsStream("/images/Gnome.png"));
 
     /**
      * Initializes Abyss window with welcome message.
@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-            DialogBox.getDukeDialog(START_MESSAGE, abyssImage)
+            AbyssDialog.getDialog(START_MESSAGE, abyssImage)
         );
     }
 
@@ -52,8 +52,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = abyss.getResponse(input);
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, abyssImage)
+            UserDialog.getDialog(input, userImage),
+            AbyssDialog.getDialog(response, abyssImage)
         );
         userInput.clear();
     }
