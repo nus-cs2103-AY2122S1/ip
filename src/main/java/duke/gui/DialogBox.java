@@ -26,6 +26,7 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            setStyle("-fx-background-color: #f3d403");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,6 +43,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        setStyle("-fx-background-color: #abdff9");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
