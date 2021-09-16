@@ -44,6 +44,17 @@ public class TaskList {
     }
 
     /**
+     * instantiates a new taskList object.
+     *
+     * @param storage storage to be initialised
+     * @throws DukeException if storage cannot load data.
+     */
+    public TaskList(Storage storage) throws DukeException {
+        storage.loadData();
+        this.storage = storage;
+    }
+
+    /**
      * Wraps a given arrayList of tasks in a tasklist.
      *
      * @param tasks the arraylist of tasks.
@@ -51,11 +62,6 @@ public class TaskList {
      */
     public static TaskList of(ArrayList<Task> tasks) {
         return new TaskList(tasks);
-    }
-
-    public TaskList(Storage storage) throws DukeException {
-        storage.loadData();
-        this.storage = storage;
     }
 
     /**
@@ -137,7 +143,7 @@ public class TaskList {
         Task task = newList.getTaskAtIndex(listIndex);
         newList.tasks.remove(listIndex);
         Duke.addToState(newList);
-        String output =  "Noted. I have removed this task:\n" + task
+        String output = "Noted. I have removed this task:\n" + task
                 + "\n Number of tasks remaining: " + newList.getListSize();
         return output;
 

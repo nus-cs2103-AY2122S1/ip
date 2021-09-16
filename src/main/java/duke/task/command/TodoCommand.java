@@ -12,6 +12,11 @@ public class TodoCommand extends Command {
     private TaskList taskList;
     private String description;
 
+    /**
+     * Instantiates a new command object
+     * @param taskList list in which command is to be added
+     * @param description description of the todo task
+     */
     public TodoCommand(TaskList taskList, String description) {
         this.taskList = taskList;
         this.description = description;

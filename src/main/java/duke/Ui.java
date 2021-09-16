@@ -20,7 +20,8 @@ public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
     // Help Section Strings.
-    private static final String welcomeToHelpSectionMessage = "Welcome to the help section. I will help you find what you desire";
+    private static final String welcomeToHelpSectionMessage = "Welcome to the help section. "
+            + "\nI will help you find what you desire";
     private static final String byeCommandDescription = "Use the bye command to end the session.";
     private static final String byeCommandExample = "Command Example: bye";
     private static final String deadlineCommandDescription = "Use the deadline command to add a deadline type task.";
@@ -46,7 +47,8 @@ public class Ui {
     private static final String todoCommandDescription = "Use the todo command to add a todo type task.";
     private static final String todoCommandExample = "Command Example: todo iP cleanup";
     private static final String todoCommandFormat = "-> todo TASK_DESCRIPTION";
-    private static final String undoCommandDescription = "Use the undo command to undo the latest action you performed.";
+    private static final String undoCommandDescription = "Use the undo command to undo the latest action you "
+            + "performed.";
     private static final String undoCommandExample = "Command Example: undo";
     private static final String goodbyeMessage = "Going so soon? Hope to see you again!";
 

@@ -162,7 +162,7 @@ public class Parser {
 
     /**
      * Parses a raw date string as input into a valid date and time string.
-     * 
+     *
      * @param input The raw date string.
      * @return A string valid as a date.
      * @throws DukeException Thrown if the input is an invalid date.

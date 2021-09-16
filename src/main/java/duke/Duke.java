@@ -10,6 +10,9 @@ import duke.task.command.Command;
  */
 public class Duke {
 
+    private static Stack<TaskList> state = new Stack<>();
+    private static boolean isRunning;
+
     // All UI functionality
     private final Ui ui;
     // All saved data related functionality
@@ -20,8 +23,6 @@ public class Duke {
     private TaskList items;
 
     private Undo undo;
-    public static Stack<TaskList> state = new Stack<>();
-    public static boolean isRunning;
 
     /**
      * Duke Constructor
@@ -58,7 +59,7 @@ public class Duke {
             String output = command.execute();
             exitChat(output);
 
-            assert !output.equals(""): "Unable to generate response. Please try again.";
+            assert !output.equals("") : "Unable to generate response. Please try again.";
             return output;
         } catch (Exception dukeException) {
             return dukeException.getMessage();
