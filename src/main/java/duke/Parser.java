@@ -8,7 +8,6 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
-import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 import duke.command.SaveCommand;
@@ -66,7 +65,7 @@ public abstract class Parser {
      *
      * @param in is a String representing user input.
      * @return Command to be executed by the application.
-     * @throws DukeException if the user's input is missing a description.
+     * @throws DukeException if the user's input is missing a description or is incorrect.
      * @throws IndexOutOfBoundsException if the user's command gives a index that is out of bounds.
      * @throws NumberFormatException if the user's command has an index that the application does not understand.
      * @throws DateTimeParseException if the user's command has a date that does not match "yyyy-mm-dd" format.
@@ -120,7 +119,7 @@ public abstract class Parser {
             return new AddCommand("event", eventLabel, eventDate);
 
         default:
-            return new InvalidCommand();
+            throw new DukeException("command is incorrect or incomplete");
         }
     }
 }
