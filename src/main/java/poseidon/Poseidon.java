@@ -1,15 +1,15 @@
-package duke;
+package poseidon;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import poseidon.task.Deadline;
+import poseidon.task.Event;
+import poseidon.task.Task;
+import poseidon.task.Todo;
 
 
-public class Duke {
+public class Poseidon {
 
     private static final String NON_EXISTENT_TASK = "That task doesn't exist.\nPlease Try again.";
 
@@ -23,14 +23,14 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructs a Duke object and initialises the class members.
+     * Constructs a Poseidon object and initialises the class members.
      */
-    public Duke() {
+    public Poseidon() {
         ui = new Ui();
         try {
             storage = new Storage();
             taskList = new TaskList(storage.load());
-        } catch (DukeException ex) {
+        } catch (PoseidonException ex) {
             ui.showStorageError();
             storage = null;
             taskList = new TaskList();
@@ -76,7 +76,7 @@ public class Duke {
             default:
                 break;
             }
-        } catch (DukeException | IOException ex) {
+        } catch (PoseidonException | IOException ex) {
             errorMessage = ui.showError(ex.getMessage());
         }
         assert errorMessage.length() != 0 : "Error message supposed to contain readable text";
@@ -126,7 +126,7 @@ public class Duke {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
 
         if (!taskList.isIndexValid(taskIndex)) {
-            throw new DukeException(NON_EXISTENT_TASK);
+            throw new PoseidonException(NON_EXISTENT_TASK);
         }
 
         String message = taskList.markTaskDone(taskIndex);
@@ -139,7 +139,7 @@ public class Duke {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
 
         if (!taskList.isIndexValid(taskIndex)) {
-            throw new DukeException(NON_EXISTENT_TASK);
+            throw new PoseidonException(NON_EXISTENT_TASK);
         }
 
         String message = taskList.deleteTask(taskIndex);

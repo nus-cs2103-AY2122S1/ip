@@ -1,4 +1,4 @@
-package duke;
+package poseidon;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import poseidon.task.Deadline;
+import poseidon.task.Event;
+import poseidon.task.Task;
+import poseidon.task.Todo;
 
 public class Storage {
 
@@ -34,7 +34,7 @@ public class Storage {
             }
             this.taskDataFile = taskDataFile;
         } catch (IOException ex) {
-            throw new DukeException(ex.getMessage() + "\n"
+            throw new PoseidonException(ex.getMessage() + "\n"
                     + "Couldn't access/create necessary file to store tasks."
                     + "Please exit the bot if you don't want to lose new tasks.");
         }
@@ -71,14 +71,14 @@ public class Storage {
             loadScan.close();
             return tasks;
         } catch (IOException ex) {
-            throw new DukeException(ex.getMessage() + "\n"
+            throw new PoseidonException(ex.getMessage() + "\n"
                     + "Couldn't load data from stored file."
                     + "Please exit the bot if you don't want to lose new tasks.");
         }
     }
 
     /**
-     * Writes a new Task to the storage document of Duke.
+     * Writes a new Task to the storage document of the Bot.
      *
      * @param taskStorage Storage string version of the new Task.
      * @throws IOException If file access or modification is obstructed.
@@ -90,7 +90,7 @@ public class Storage {
     }
 
     /**
-     * Writes an existing Task as done in the storage document of Duke.
+     * Writes an existing Task as done in the storage document of the Bot.
      *
      * @param index Index of the Task to be modified.
      * @param taskStorage Storage string version of the modified Task.
@@ -123,7 +123,7 @@ public class Storage {
     }
 
     /**
-     * Deletes a Task from the storage document of Duke.
+     * Deletes a Task from the storage document of Bot.
      *
      * @param index Index of the deleted Task.
      * @throws IOException If file access or modification is obstructed.

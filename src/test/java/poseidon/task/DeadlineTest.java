@@ -1,4 +1,4 @@
-package duke.task;
+package poseidon.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Parser;
+import poseidon.Parser;
 
 public class DeadlineTest {
 

@@ -1,8 +1,8 @@
-package duke;
+package poseidon;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
+import poseidon.task.Task;
 
 public class Ui {
 
@@ -19,12 +19,21 @@ public class Ui {
      * @return String welcome message.
      */
     public String getWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String helloMsg = "Hello! I'm Duke\n"
+        String logo = "                   /\\                   \n"
+                + "           ||\\    /||\\    /||           \n"
+                + "           \\\\_\\  ''||''  /_//           \n"
+                + "            \\\\     ||     //            \n"
+                + "             \\\\    ||    //             \n"
+                + "              \\\\   ||   //              \n"
+                + "               \\\\__||__//               \n"
+                + "                   ||                   \n"
+                + "                   ||                   \n"
+                + "                   ||                   \n"
+                + "                   ||                   \n"
+                + "           P O S E || D O N             \n"
+                + "                   ||                   \n"
+                + "                   ||                   \n\n";
+        String helloMsg = "Hello! I'm POSEIDON\n"
                 + "What can I do for you?";
         return logo + helloMsg;
     }

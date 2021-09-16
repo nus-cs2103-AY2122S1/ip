@@ -1,4 +1,4 @@
-package duke;
+package poseidon;
 
 import java.io.IOException;
 

@@ -1,8 +1,8 @@
-package duke;
+package poseidon;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
+import poseidon.task.Task;
 
 public class TaskList {
 

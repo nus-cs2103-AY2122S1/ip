@@ -1,4 +1,4 @@
-package duke;
+package poseidon;
 
 import javafx.application.Application;
 

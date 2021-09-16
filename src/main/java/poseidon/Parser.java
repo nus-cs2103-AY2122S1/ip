@@ -1,4 +1,4 @@
-package duke;
+package poseidon;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -63,7 +63,7 @@ public class Parser {
             deadlineDT = LocalDateTime.parse(dateTime, formatter);
             return deadlineDT;
         } catch (DateTimeException ex) {
-            throw new DukeException(ex.getMessage() + "\n"
+            throw new PoseidonException(ex.getMessage() + "\n"
                     + "Please try again.");
         }
     }
@@ -93,14 +93,14 @@ public class Parser {
         String[] strArr = Pattern.compile(validTodo).split(newCommand, 2);
 
         if (strArr.length == 1 && strArr[0].length() > 4) {
-            throw new DukeException("There appears to be a typo in your TODO command.\n"
+            throw new PoseidonException("There appears to be a typo in your TODO command.\n"
                     + "The command should be of the form:\n"
                     + "  todo 'description'\n"
                     + "Please try again.");
         }
 
         if (strArr.length == 1 || strArr[1].length() == 0) {
-            throw new DukeException("The description of a TODO task cannot be empty.\nPlease try again.");
+            throw new PoseidonException("The description of a TODO task cannot be empty.\nPlease try again.");
         }
 
         return new String[]{"add", "todo", strArr[1]};
@@ -110,7 +110,7 @@ public class Parser {
         final String validDeadline = "(?i)(deadline ).*\\S+.*( /by )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}";
 
         if (!Pattern.compile(validDeadline).matcher(newCommand).matches()) {
-            throw new DukeException("There appears to be a typo in your DEADLINE command.\n"
+            throw new PoseidonException("There appears to be a typo in your DEADLINE command.\n"
                     + "The command should be of the form:\n"
                     + "  deadline 'description' /by 'yyyy mm dd hhmm'\n"
                     + "Please try again.");
@@ -125,7 +125,7 @@ public class Parser {
                 + "( to )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}";
 
         if (!Pattern.compile(validEvent).matcher(newCommand).matches()) {
-            throw new DukeException("There appears to be a typo in your EVENT command.\n"
+            throw new PoseidonException("There appears to be a typo in your EVENT command.\n"
                     + "The command should be of the form:\n"
                     + "  event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'\n"
                     + "Please try again.");
@@ -141,14 +141,14 @@ public class Parser {
         String[] strArr = Pattern.compile(validFind).split(newCommand, 2);
 
         if (strArr.length == 1 && strArr[0].length() > 4) {
-            throw new DukeException("There appears to be a typo in your FIND command.\n"
+            throw new PoseidonException("There appears to be a typo in your FIND command.\n"
                     + "The command should be of the form:\n"
                     + "  find 'content'\n"
                     + "Please try again.");
         }
 
         if (strArr.length == 1 || strArr[1].length() == 0) {
-            throw new DukeException("The contents of a FIND command cannot be empty.\nPlease try again.");
+            throw new PoseidonException("The contents of a FIND command cannot be empty.\nPlease try again.");
         }
 
         return new String[]{"find", strArr[1].trim()};

@@ -1,4 +1,4 @@
-package duke;
+package poseidon;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private ImageView sendButtonImage;
 
-    private Duke duke;
+    private Poseidon poseidon;
 
     @FXML
     public void initialize() {
@@ -42,29 +42,29 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * @param d Duke to be set as logical unit for the GUI.
+     * @param p Poseidon to be set as logical unit for the GUI.
      */
-    public void setDuke(Duke d) {
-        duke = d;
-        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(duke.runWelcome(), BOT_IMAGE));
+    public void setPoseidon(Poseidon p) {
+        poseidon = p;
+        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(poseidon.runWelcome(), BOT_IMAGE));
         sendButtonImage.setImage(SEND_IMAGE);
         userInput.setFont(USER_FONT);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing the Bot's reply and then appends them
+     * to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if (duke.isBye(input)) {
+        if (poseidon.isBye(input)) {
             Platform.exit();
             return;
         }
 
-        String response = duke.run(input);
+        String response = poseidon.run(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE),
                 DialogBox.getBotDialog(response, BOT_IMAGE)
