@@ -121,7 +121,7 @@ Numbered list of all tasks in the task list.
 3. [E][ ] cs2103T meeting (at: Sep 24 2021) 
 ```
 
-### `Find` - Searching for tasks by keywords
+### `find` - Searching for tasks by keywords
 
 Lists the tasks in the task list containing the specified keyword.
 
