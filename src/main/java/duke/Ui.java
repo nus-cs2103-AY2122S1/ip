@@ -38,6 +38,10 @@ public class Ui {
                 isActivatedClearCommand = false;
             }
 
+            if (str.equalsIgnoreCase("i love you duke")) {
+                command = "love";
+            }
+
             switch (command) {
             case "bye":
                 // breaks loop, closes chatbot.
@@ -90,15 +94,19 @@ public class Ui {
                 return clearall.execute();
                 //Fallthrough
             case "y":
-                ClearallConfirmCommand clearallConfirm = new ClearallConfirmCommand(storage,
+                ClearallConfirmCommand confirm = new ClearallConfirmCommand(storage,
                         taskList, strParse);
-                return clearallConfirm.execute();
+                return confirm.execute();
                 //Fallthrough
             case "n":
-                ClearallRejectCommand clearallRejectCommand = new ClearallRejectCommand(storage,
+                ClearallRejectCommand reject = new ClearallRejectCommand(storage,
                         taskList, strParse);
-                return clearallRejectCommand.execute();
+                return reject.execute();
                 //Fallthrough
+            case "love":
+                DukeLovesYouCommand love = new DukeLovesYouCommand(
+                        storage, taskList, strParse);
+                return love.execute();
             default:
                 throw new InvalidInputException();
             }
