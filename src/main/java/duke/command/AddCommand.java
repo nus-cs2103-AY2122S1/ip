@@ -6,18 +6,42 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
-import java.time.LocalDateTime;
-
-public class AddCommand extends Command {
+/**
+ * A Command class representing the 'Add' command.
+ */
+public class AddCommand implements Command {
 
     private Task taskToAdd;
 
     /**
      * Create a new Command indicating a task is add.
      * @param fullCommand Unedited user command.
+     * @throws DukeException If parseTask has an error.
      */
     public AddCommand(String fullCommand) throws DukeException {
         parseTask(fullCommand);
+    }
+
+    /**
+     * Differentate which tasks user is adding.
+     * @param fullCommand Unedited user command.
+     * @throws DukeException If an invalid command format is written.
+     */
+    private void parseTask(String fullCommand) throws DukeException {
+        String type = fullCommand.split(" ")[0];
+        switch (type) {
+            case "todo":
+                parseTodo(fullCommand);
+                break;
+            case "deadline":
+                parseDeadline(fullCommand);
+                break;
+            case "event":
+                parseEvent(fullCommand);
+                break;
+            default:
+                throw new DukeException("Invalid Command!");
+        }
     }
 
     private void parseTodo(String fullCommand) throws DukeException {
@@ -49,25 +73,17 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Differentate which tasks user is adding.
-     * @param fullCommand Unedited user command.
-     * @throws DukeException If an invalid command format is written.
+     * Execute user command.
+     * @param tasks List of tasks.
+     * @param ui UI of Duke Chatbot.
+     * @param storage Storage of Duke Chatbot.
+     * @return Duke's Response.
+     * @throws DukeException If execution fails.
      */
-    private void parseTask(String fullCommand) throws DukeException {
-        String type = fullCommand.split(" ")[0];
-        switch (type) {
-            case "todo":
-                parseTodo(fullCommand);
-                break;
-            case "deadline":
-                parseDeadline(fullCommand);
-                break;
-            case "event":
-                parseEvent(fullCommand);
-                break;
-            default:
-                throw new DukeException("Invalid Command!");
-        }
+    public ResponsePair execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        addTask(tasks);
+        storage.save(tasks);
+        return new ResponsePair(String.format("Task Added!\n %s", taskToAdd), isExit());
     }
 
     private void addTask(TaskList tasks) throws DukeException {
@@ -78,19 +94,6 @@ public class AddCommand extends Command {
             }
         }
         tasks.add(taskToAdd);
-    }
-
-    /**
-     * Execute user command.
-     * @param tasks List of tasks.
-     * @param ui UI of Duke Chatbot.
-     * @param storage Storage of Duke Chatbot.
-     * @throws DukeException If execution fails.
-     */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        addTask(tasks);
-        storage.save(tasks);
-        return String.format("Task Added!\n %s", taskToAdd);
     }
 
     /**

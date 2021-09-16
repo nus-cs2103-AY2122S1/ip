@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Returns command according to input response.
+     *
      * @param fullCommand Unedited user response.
      * @return requested command.
      * @throws DukeException If raised by the command during further parsing.

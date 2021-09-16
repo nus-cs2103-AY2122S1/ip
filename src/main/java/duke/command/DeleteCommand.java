@@ -1,18 +1,19 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 import duke.task.Task;
 
-public class DeleteCommand extends Command {
+/**
+ * A Command class representing the 'Delete' command.
+ */
+public class DeleteCommand implements Command {
 
     private int taskIndex;
 
     /**
      * Create a new Command indicating a task is deleted.
      * @param fullCommand Unedited user command.
+     * @throws DukeException If the input string does not represent an integer.
      */
     public DeleteCommand(String fullCommand) throws DukeException {
         String taskIndexString = fullCommand.replace("delete", "").trim();
@@ -29,12 +30,13 @@ public class DeleteCommand extends Command {
      * @param ui UI of Duke Chatbot.
      * @param storage Storage of Duke Chatbot.
      * @throws DukeException If execution fails.
+     * @return String of Duke chatbot response.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public ResponsePair execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = (Task) tasks.remove(taskIndex - 1);
             storage.save(tasks);
-            return String.format("Task deleted.\n %s", task);
+            return new ResponsePair(String.format("Task deleted.\n %s", task), isExit());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid Task Index");
         }

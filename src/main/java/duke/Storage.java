@@ -52,7 +52,8 @@ public class Storage {
     }
 
     /**
-     * Load list of tasks from file or if file is absent, create new file
+     * Load list of tasks from file or if file is absent, create new file.
+     *
      * @return List of tasks
      * @throws DukeException If new file cannot be made.
      */
@@ -77,7 +78,8 @@ public class Storage {
     }
 
     /**
-     * Save list of tasks to file
+     * Save list of tasks to file.
+     *
      * @param tasks List of tasks.
      * @throws DukeException If destination file is absent.
      */
