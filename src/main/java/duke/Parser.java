@@ -132,13 +132,13 @@ public class Parser {
             }
             taskInfo = params[1];
             if (taskInfo.startsWith("/by")) {
-                throw new DukeException("OOPS!!! You are missing the name of the deadline."
+                throw new DukeException("You are missing the name of the deadline."
                         + "\nThe correct format is:"
                         + "\ndeadline [deadline name] /by [yyyy-mm-dd]");
             }
             String[] deadlineInfo = taskInfo.split(" /by ");
             if (deadlineInfo.length == 1) {
-                throw new DukeException("OOPS!!! Please enter deadline information in the following "
+                throw new DukeException("Please enter deadline information in the following "
                         + "format:\ndeadline [deadline name] /by [yyyy-mm-dd]");
             }
             return new AddDeadlineCommand(deadlineInfo[0], deadlineInfo[1]);
