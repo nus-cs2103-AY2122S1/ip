@@ -78,7 +78,7 @@ public class Deadline extends Task {
      * @return String denoting the Deadline task which will be stored in the hard disk.
      */
     @Override
-    public String storeTask() {
+    public String storeItem() {
         return "D/" + getDone() + "/" + getDescription() + "/" + this.by;
     };
 

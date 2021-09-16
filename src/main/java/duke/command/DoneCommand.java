@@ -12,22 +12,22 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         Integer count = Integer.valueOf(this.taskNumber);
         tasks.getTask(count - 1).markAsDone();
-        storage.rewriteFile(tasks.getTasks());
+        storage.rewriteFile(tasks.getTasks(), notes.getNotes());
         return ui.respondToDone(tasks.getTasks(), count);
     }
 
-    @Override
+    /**@Override
     public String execute(NotesList notes, Ui ui, Storage storage) {
         return "";
-    };
+    };*/
 
-    @Override
+    /**@Override
     public Boolean isTaskRelatedCommand() {
         return true;
-    };
+    };*/
 
     @Override
     public Boolean isExit() {

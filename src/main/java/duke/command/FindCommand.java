@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             if(tasks.getTask(i).getDescription().contains(command)) {
@@ -26,15 +26,15 @@ public class FindCommand extends Command {
         return ui.respondToFind(foundTasks);
     }
 
-    @Override
+    /**@Override
     public String execute(NotesList notes, Ui ui, Storage storage) {
         return "";
-    };
+    };*/
 
-    @Override
+    /**@Override
     public Boolean isTaskRelatedCommand() {
         return true;
-    };
+    };*/
 
     @Override
     public Boolean isExit() {

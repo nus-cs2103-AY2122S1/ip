@@ -6,8 +6,8 @@ import duke.notes.NotesList;
 import duke.tasks.TaskList;
 
 public abstract class Command {
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-    public abstract String execute(NotesList notes, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage);
+    //public abstract String execute(NotesList notes, Ui ui, Storage storage);
     public abstract Boolean isExit();
-    public abstract Boolean isTaskRelatedCommand();
+    //public abstract Boolean isTaskRelatedCommand();
 }

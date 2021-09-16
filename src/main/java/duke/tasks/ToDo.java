@@ -43,7 +43,7 @@ public class ToDo extends Task {
      * @return String denoting the Todo task which will be stored in the hard disk.
      */
     @Override
-    public String storeTask() {
+    public String storeItem() {
         return "T/" + getDone() + "/" + getDescription();
     };
 

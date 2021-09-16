@@ -22,16 +22,17 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
-        notes = new NotesList(storage.loadNotes());
+        tasks = new TaskList(storage.getTasksFromMemory());
+        notes = new NotesList(storage.getNotesFromMemory());
     }
 
     public String getResponse(String inputFromUser) {
         Command c = Parser.parse(inputFromUser);
-        if(c.isTaskRelatedCommand()) {
+        return c.execute(tasks, notes, ui, storage);
+        /**if(c.isTaskRelatedCommand()) {
             return c.execute(tasks, ui, storage);
         } else {
             return c.execute(notes, ui, storage);
-        }
+        }*/
     }
 }

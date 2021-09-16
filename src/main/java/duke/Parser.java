@@ -1,16 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.BlahCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.FindCommand;
-import duke.command.AddCommand;
-import duke.command.AddNoteCommand;
-import duke.command.ListNoteCommand;
-
+import duke.command.*;
 
 
 /**
@@ -32,8 +22,6 @@ public class Parser {
             return new ExitCommand(command);
         } else if(command.equals("list")) {
             return new ListCommand(command);
-        } else if(command.equals("blah")) {
-            return new BlahCommand(command);
         } else if(firstWord.equals("done")) {
             String taskNumber = command.split(" ")[1];
             return new DoneCommand(taskNumber);
@@ -47,11 +35,15 @@ public class Parser {
             return new AddCommand(command);
         } else if(firstWord.equals("note")) {
             return new AddNoteCommand(command);
-        } else if(command.equals("List of Notes")) {
+        } else if(command.equals("n/list")) {
             return new ListNoteCommand(command);
+        } else if(firstWord.equals("n/delete")){
+            String noteNumber = command.split(" ")[1];
+            return new DeleteNoteCommand(noteNumber);
         } else {
-            assert false;
-            return null;
+            return new BlahCommand(command);
+            //assert false;
+            //return null;
         }
     }
 }

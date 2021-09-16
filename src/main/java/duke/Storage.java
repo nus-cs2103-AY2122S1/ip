@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.item.Item;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Deadline;
@@ -23,6 +24,9 @@ import duke.exceptions.DukeException;
  */
 public class Storage {
     private String path;
+    private String directory;
+    ArrayList<Task> listOfTasks;
+    ArrayList<Note> listOfNotes;
 
     /**
      * Creates an object of the Storage class to store all tasks on the hard disk.
@@ -31,6 +35,9 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.path = filePath;
+        this.directory = filePath.split("/")[0];
+        this.listOfTasks = new ArrayList<>();
+        this.listOfNotes = new ArrayList<>();
     }
 
     /**
@@ -38,27 +45,47 @@ public class Storage {
      *
      * @return Arraylist containing all the tasks in the hard disk.
      */
-    public ArrayList<Task> load() {
-        ArrayList<Task> listOfTasks = new ArrayList<>();
-        ArrayList<Note> listOfNotes = new ArrayList<>();
+    private void loadMemory() {
         try {
-            boolean hasDirectory = Files.exists(Paths.get("data"));
-            boolean hasFile = Files.exists(Paths.get("data/duke.txt"));
-            if (!hasDirectory) {
+            if (!isDirectoryPresent()) {
                 createDirectory();
-            } else if (!hasFile) {
+            } else if (!isFilePresent()) {
                 createFile();
             }
-            getData("data/duke.txt", listOfTasks, listOfNotes);
-            checkEmptyTasksList(listOfTasks);
+            getData(this.path, this.listOfTasks, this.listOfNotes);
+            //checkEmptyTasksList(listOfTasks);
         } catch (IOException e) {
             System.out.println("Could not get the contents of the file!");
-        } finally {
-            return listOfTasks;
+        } catch(DukeException e) {
+            System.out.println("Error occurred when storing the files from the hard disk to a list");
         }
     }
 
-    public ArrayList<Note> loadNotes() {
+    public ArrayList<Task> getTasksFromMemory() {
+        loadMemory();
+        return this.listOfTasks;
+    }
+
+    public ArrayList<Note> getNotesFromMemory() {
+        //loadMemory();
+        return this.listOfNotes;
+    }
+
+
+    private boolean isDirectoryPresent() {
+        boolean hasDirectory = Files.exists(Paths.get(this.directory));
+        return hasDirectory;
+    }
+
+    private boolean isFilePresent() {
+        boolean hasFile = Files.exists(Paths.get(this.path));
+        return hasFile;
+    }
+
+
+
+
+    /**public ArrayList<Note> loadNotes() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         ArrayList<Note> listOfNotes = new ArrayList<>();
         try {
@@ -70,13 +97,13 @@ public class Storage {
                 createFile();
             }
             getData("data/duke.txt", listOfTasks, listOfNotes);
-            checkEmptyTasksList(listOfTasks);
+            //checkEmptyTasksList(listOfTasks);
         } catch (IOException e) {
             System.out.println("Could not get the contents of the file!");
         } finally {
             return listOfNotes;
         }
-    }
+    }*/
 
     /**
      * Creates a file if it does not already exist.
@@ -101,7 +128,7 @@ public class Storage {
     /**
      * Checks if the task list is empty.
      */
-    private void checkEmptyTasksList(ArrayList<Task> listOfTasks) {
+    /**private void checkEmptyTasksList(ArrayList<Task> listOfTasks) {
         try {
             if(listOfTasks.size() != 0) {
                 System.out.println("There are no tasks");
@@ -110,45 +137,46 @@ public class Storage {
         } catch (FileNotFoundException e){
             System.out.println("File not found");
         }
-    }
+    }*/
     /**
      * Gets all the tasks in the hard disk.
      *
      * @param filePath Path of the file that contains all the tasks in the application.
-     * @param list Arraylist that stores all the tasks.
+     * @param listOfTasks Arraylist that stores all the tasks.
+     * @param listOfNotes Arraylist that stores all the notes.
      * @throws FileNotFoundException If file is not found.
      * @throws DukeException If there is an error in creating a todo, event, deadline task.
      */
-     private void getData(String filePath, ArrayList<Task> list, ArrayList<Note> notesList) throws FileNotFoundException, DukeException {
+     private void getData(String filePath, ArrayList<Task> listOfTasks, ArrayList<Note> listOfNotes) throws FileNotFoundException, DukeException {
         File file = new File(filePath);
         assert file.exists();
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
-            String s = scanner.nextLine();
+            String data = scanner.nextLine();
             try {
-                String typeOfData = s.split("/")[0];
-                String indicationOfTaskCompletion = s.split("/")[1];
+                String typeOfData = data.split("/")[0];
+                String indicationOfTaskCompletion = data.split("/")[1];
                 if(typeOfData.equals("T")) {
-                    String todoTask = s.split("/")[2];
+                    String todoTask = data.split("/")[2];
                     ToDo todo = new ToDo(todoTask);
-                    list.add(todo);
-                    todo.getTaskCompletionStatus(indicationOfTaskCompletion);
+                    listOfTasks.add(todo);
+                    todo.setTaskCompletionStatus(indicationOfTaskCompletion);
                 } else if(typeOfData.equals("D")) {
-                    String deadlineTask = s.split("/", 4)[2];
-                    String completeBy = s.split("/", 4)[3];
+                    String deadlineTask = data.split("/", 4)[2];
+                    String completeBy = data.split("/", 4)[3];
                     Deadline deadline = new Deadline(deadlineTask, completeBy);
-                    list.add(deadline);
-                    deadline.getTaskCompletionStatus(indicationOfTaskCompletion);
+                    listOfTasks.add(deadline);
+                    deadline.setTaskCompletionStatus(indicationOfTaskCompletion);
                 } else if(typeOfData.equals("E")) {
-                    String eventTask = s.split("/", 4)[2];
-                    String eventAt = s.split("/", 4)[3];
+                    String eventTask = data.split("/", 4)[2];
+                    String eventAt = data.split("/", 4)[3];
                     Event event = new Event(eventTask, eventAt);
-                    list.add(event);
-                    event.getTaskCompletionStatus(indicationOfTaskCompletion);
+                    listOfTasks.add(event);
+                    event.setTaskCompletionStatus(indicationOfTaskCompletion);
                 } else {
-                    String noteDescription = s.split("/")[1];
+                    String noteDescription = data.split("/")[1];
                     Note note = new Note(noteDescription);
-                    notesList.add(note);
+                    listOfNotes.add(note);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -162,23 +190,23 @@ public class Storage {
      * @param path Path of the file containing all the tasks.
      * @throws FileNotFoundException If file is not found.
      */
-    private void printFile(String path) throws FileNotFoundException {
+    /**private void printFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner scanner = new Scanner(file);
         while(scanner.hasNext()) {
             System.out.println(scanner.nextLine());
         }
-    }
+    }*/
 
     /**
      * Appends a task to the end of the file storing all the tasks.
      *
-     * @param task Task to be appended to the end of the file.
+     * @param item item to be appended to the end of the file.
      */
-    public void appendToFile(Task task) {
+    public void appendToFile(Item item) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter("data/duke.txt", true));
-            write.append(task.storeTask());
+            write.append(item.storeItem());
             write.newLine();
             write.close();
         }  catch(IOException e) {
@@ -186,7 +214,7 @@ public class Storage {
         }
     }
 
-    public void appendToFile(Note note) {
+    /**public void appendToFile(Note note) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter("data/duke.txt", true));
             write.append(note.storeNote());
@@ -195,19 +223,23 @@ public class Storage {
         }  catch(IOException e) {
             System.out.println("error occurred when appending note to file!");
         }
-    }
+    }*/
 
     /**
      * Rewrites the entire file from the start.
      *
      * @param tasks The Arraylist storing all the tasks.
      */
-    public void rewriteFile(ArrayList<Task> tasks) {
+    public void rewriteFile(ArrayList<Task> tasks, ArrayList<Note> notes) {
         try {
             PrintWriter writer = new PrintWriter("data/duke.txt");
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                writer.println(task.storeTask());
+                writer.println(task.storeItem());
+            }
+            for (int i = 0; i < notes.size(); i++) {
+                Note note = notes.get(i);
+                writer.println(note.storeItem());
             }
             writer.close();
         } catch (IOException e) {

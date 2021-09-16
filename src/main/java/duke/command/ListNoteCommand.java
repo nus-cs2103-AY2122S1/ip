@@ -12,19 +12,19 @@ public class ListNoteCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "";
-    }
-
-    @Override
-    public String execute(NotesList notes, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         return ui.respondToNotesList(notes.getNotes());
     }
 
-    @Override
+    /**@Override
+    public String execute(NotesList notes, Ui ui, Storage storage) {
+        return ui.respondToNotesList(notes.getNotes());
+    }*/
+
+    /**@Override
     public Boolean isTaskRelatedCommand() {
         return false;
-    };
+    };*/
 
     @Override
     public Boolean isExit() {

@@ -1,9 +1,11 @@
 package duke.tasks;
 
+import duke.item.Item;
+
 /**
  * Represent a particular task.
  */
-public abstract class Task {
+public abstract class Task extends Item {
     private String description;
     private boolean isDone;
     protected Integer order;
@@ -76,11 +78,11 @@ public abstract class Task {
      *
      * @return String denoting the Task which will be stored in the hard disk.
      */
-    public abstract String storeTask();
+    //public abstract String storeTask();
 
-    public void getTaskCompletionStatus(String status) {
+    public void setTaskCompletionStatus(String status) {
         if(status.equals("1")) {
-            setDone();
+            markAsDone();
         }
     }
 

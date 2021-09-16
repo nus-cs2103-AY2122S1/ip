@@ -1,5 +1,7 @@
 package duke.notes;
 
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class NotesList {
@@ -15,6 +17,10 @@ public class NotesList {
 
     public void addNote(Note note) {
         this.notes.add(note);
+    }
+
+    public Note getNote(Integer noteNumber) {
+        return this.notes.get(noteNumber);
     }
 
 }

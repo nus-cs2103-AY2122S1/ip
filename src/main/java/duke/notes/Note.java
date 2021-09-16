@@ -1,13 +1,16 @@
 package duke.notes;
 
-public class Note {
+import duke.item.Item;
+
+public class Note extends Item {
     private String description;
 
     public Note(String description) {
         this.description = description;
     }
 
-    public String storeNote() {
+    @Override
+    public String storeItem() {
         return "N/" + description;
     }
 

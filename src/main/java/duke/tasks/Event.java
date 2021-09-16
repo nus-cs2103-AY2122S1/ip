@@ -92,7 +92,7 @@ public class Event extends Task {
      * @return String denoting the Event task which will be stored in the hard disk.
      */
     @Override
-    public String storeTask() {
+    public String storeItem() {
         return "E/" + getDone() + "/" + getDescription() + "/" + this.at;
     };
 

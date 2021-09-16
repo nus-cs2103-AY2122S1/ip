@@ -32,14 +32,15 @@ public class Ui {
      * @return Welcome message to guide users what to do.
      */
     public String showWelcome() {
-        String instructions = "Here's a manual: \n1. To add a task play: todo play " +
-                "\n2. To add a deadline: deadline return book /by 02/12/2021 18:00, " +
-                "\n3. To add an event: event meet friend /at 02/12/2021 18:00 - 19:00" +
-                "\n4. To indicate task as done: done 2, where 2 refers to the task number" +
-                "\n5. To delete task: delete 3, where 3 refers to the task number" +
-                "\n6. To list tasks: list" + "\n7. to find a task using keyword: find play" +
-                "\n8. To add a note: note my password is 123" + "\n9. To list the notes: List of Notes" +
-                "\n10. To exit the application: Bye";
+        String instructions = "Here's a manual: \n1. To add a task play: todo play "
+                + "\n2. To add a deadline: deadline return book /by 02/12/2021 18:00, "
+                + "\n3. To add an event: event meet friend /at 02/12/2021 18:00 - 19:00"
+                + "\n4. To indicate task as done: done 2, where 2 refers to the task number"
+                + "\n5. To delete task: delete 3, where 3 refers to the task number"
+                + "\n6. To list tasks: list" + "\n7. to find a task using keyword: find play"
+                + "\n8. To add a note: note my password is 123" + "\n9. To list the notes: n/list"
+                + "\n10. To delete a note: n/delete 2, where 2 refers to to note number"
+                + "\n11. To exit the application: Bye";
         String welcomeMessage =  "Hello! I'm Peppa \n" + instructions;
         System.out.println(welcomeMessage);
         return welcomeMessage;
@@ -119,7 +120,7 @@ public class Ui {
      * @return String message when todo task is created.
      */
     public String respondToTodo(ArrayList<Task> tasks, ToDo todo) {
-        String responseToToDo = "\t" + "Got it. I've added this task: " + "\n\t\t" + todo.toString() +
+        String responseToToDo = "\t" + "Got it. I've added this task: " + "\n\t" + todo.toString() +
                 "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
         System.out.println(responseToToDo);
         return responseToToDo;
@@ -133,7 +134,7 @@ public class Ui {
      * @return String message when event task is created.
      */
     public String respondToEvent(ArrayList<Task> tasks, Event event) {
-        String responseToEvent = "\tGot it. I've added this task: " + "\n\t\t" + event.toString() +
+        String responseToEvent = "\tGot it. I've added this task: " + "\n\t" + event.toString() +
                 "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
         System.out.println(responseToEvent);
         return responseToEvent;
@@ -147,7 +148,7 @@ public class Ui {
      * @return String message when deadline task is created.
      */
     public String respondToDeadline(ArrayList<Task> tasks, Deadline deadline) {
-        String respondToDeadline = "\t" + "Got it. I've added this task: " + "\n\t\t" + deadline.toString() +
+        String respondToDeadline = "\t" + "Got it. I've added this task: " + "\n\t" + deadline.toString() +
                 "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
         System.out.println(respondToDeadline);
         return respondToDeadline;
@@ -212,5 +213,12 @@ public class Ui {
         }
         System.out.println(responseToNotesList);
         return responseToNotesList;
+    }
+
+    public String respondToDeleteNote(ArrayList<Note> notes, Note note) {
+        String responseToDeleteNote = "\tNoted. I've removed this note: \n\t\t" + note.toString() +
+                "\n\tNow you have " + Integer.toString(notes.size()) + " notes in the list.";
+        System.out.println(responseToDeleteNote);
+        return responseToDeleteNote;
     }
 }
