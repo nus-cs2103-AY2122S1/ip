@@ -208,11 +208,14 @@ public class Parser {
         command = parseCommand(s[0].toUpperCase());
 
         switch (command) {
+        // Always possible
+        case BYE:
+            break;
+
         // List cannot be empty
         case LIST:
         case SAVE:
         case LOAD:
-        case BYE:
             if (duke.taskSize() == 0) {
                 throw new EmptyListException(command);
             }
