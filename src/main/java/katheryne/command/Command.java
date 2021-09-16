@@ -6,6 +6,9 @@ import katheryne.TaskList;
 import katheryne.Ui;
 import katheryne.UnknownCommandException;
 
+/**
+ * Abstract command class for other commands to inherit from. Also has the factory method to create new commands.
+ */
 public abstract class Command {
 
     /**

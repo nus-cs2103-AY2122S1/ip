@@ -9,6 +9,9 @@ import katheryne.TaskList;
 import katheryne.Ui;
 import katheryne.task.Deadline;
 
+/**
+ * Command to add a deadline task
+ */
 public class DeadlineCommand extends Command {
     /**
      * The constant name to refer to this command by
@@ -34,6 +37,14 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Creates a new deadline task and adds it to the tasklist, then prints out a confirmation message.
+     * 
+     * @param taskList A container for tasks which contains Katheryne's tasks.
+     * @param ui The Ui used for the user interface.
+     * @param storage The storage object taking care of writing and reading the text file.
+     * @throws KatheryneException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
         Deadline deadline = new Deadline(description, atByDate);

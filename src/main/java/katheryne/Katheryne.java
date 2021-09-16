@@ -20,10 +20,11 @@ public class Katheryne {
         Storage storage = new Storage();
         Ui ui = new Ui();
         TaskList lst = new TaskList();
+        String PATH_NAME = "tasks.json";
 
         // initialise Katheryne
         try {
-            storage.loadTasks(lst, "tasks.json");
+            storage.loadTasks(lst, PATH_NAME);
         } catch (KatheryneException e) {
             ui.showErrorMessage(e);
         }

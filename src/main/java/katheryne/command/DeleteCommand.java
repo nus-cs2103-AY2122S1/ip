@@ -33,6 +33,14 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Deletes a task from the taskList and prints a confirmation message.
+     * 
+     * @param taskList A container for tasks which contains Katheryne's tasks.
+     * @param ui The Ui used for the user interface.
+     * @param storage The storage object taking care of writing and reading the text file.
+     * @throws KatheryneException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
         try {

@@ -31,7 +31,8 @@ public class Parser {
     }
 
     /**
-     * Returns a string array where the first item is the command word
+     * Returns a string array where the first item is the command word and the second
+     * is the remaining input after a space.
      * 
      * @param input
      * @return

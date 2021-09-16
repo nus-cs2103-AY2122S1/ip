@@ -23,7 +23,7 @@ public class Ui {
                 + "I am Katheryne, the receptionist here at the Adventurers' Guild.");
         System.out.println("How may I assist?");
         if (!lst.isEmpty()) {
-            System.out.println("I still have your list of tasks from last time." +
+            System.out.println("I still have your list of tasks from last time. " +
                             "The number of tasks you have is " + lst.getSize() + ".");
         }
     }

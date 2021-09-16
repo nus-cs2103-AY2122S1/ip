@@ -9,6 +9,9 @@ import katheryne.TaskList;
 import katheryne.Ui;
 import katheryne.task.Event;
 
+/**
+ * Command to add an event to the tasklist
+ */
 public class EventCommand extends Command {
     /**
      * The constant name to refer to this command by
@@ -33,6 +36,14 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * Adds an event to the task list, prints a confirmation message.
+     * 
+     * @param taskList A container for tasks which contains Katheryne's tasks.
+     * @param ui The Ui used for the user interface.
+     * @param storage The storage object taking care of writing and reading the text file.
+     * @throws KatheryneException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
         Event event = new Event(description, atAsDate);

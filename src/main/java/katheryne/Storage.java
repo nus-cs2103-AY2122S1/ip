@@ -45,7 +45,7 @@ public class Storage {
         if (Files.isReadable(Paths.get(pathName))) {
             try {
                 lst.addAll(Arrays.asList(this.mapper.readValue(
-                        Paths.get("tasks.json").toFile(),
+                        Paths.get(pathName).toFile(),
                         Task[].class)));
             } catch (IOException e) {
                 throw new KatheryneException("I can't seem to find your files... Let's start over afresh.");

@@ -6,6 +6,9 @@ import katheryne.TaskList;
 import katheryne.Ui;
 import katheryne.WrongIndexException;
 
+/**
+ * Command to mark a task as done
+ */
 public class DoneCommand extends Command {
     /**
      * The constant name to refer to this command by
@@ -29,6 +32,14 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Marks a task as complete. Prints a confirmation message if successful
+     * 
+     * @param taskList A container for tasks which contains Katheryne's tasks.
+     * @param ui The Ui used for the user interface.
+     * @param storage The storage object taking care of writing and reading the text file.
+     * @throws KatheryneException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
         boolean isDone = taskList.doTask(index);
