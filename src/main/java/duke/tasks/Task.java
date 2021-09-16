@@ -6,7 +6,7 @@ import duke.commands.EditCommand;
 /**
  * This class represents a Task. It is a superclass from which more specific Task classes will extend from.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -49,6 +49,12 @@ public class Task {
         return " | " + isDoneString + " | " + description;
     }
 
+    /**
+     * Returns true if the Task's description contains the keyword; otherwise false.
+     * 
+     * @param keyword Keyword that user is searching for.
+     * @return true if the Task's description contains the keyword; otherwise false.
+     */
     public boolean containsKeyword(String keyword) {
         return description.contains(keyword);
     }
@@ -56,7 +62,7 @@ public class Task {
     /**
      * Returns a string representation of a task to be shown to the user.
      *
-     * @return String representation of task
+     * @return String representation of task.
      */
     @Override
     public String toString() {
@@ -78,9 +84,13 @@ public class Task {
         }
         return false;
     }
-    
-    public Task getUpdatedTask(EditCommand edit) throws DukeException {
-        String newDescription = edit.getDescription() == null ? description : edit.getDescription();
-        return new Task(newDescription, isDone);
-    }
+
+    /**
+     * Returns updated task using information from the EditCommand.
+     * 
+     * @param edit EditCommand that includes information to update in this Task.
+     * @return Updated Task.
+     * @throws DukeException If information to update is invalid.
+     */
+    public abstract Task getUpdatedTask(EditCommand edit) throws DukeException;
 }

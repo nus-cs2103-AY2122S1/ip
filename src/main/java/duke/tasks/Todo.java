@@ -31,6 +31,10 @@ public class Todo extends Task {
         return "T" + super.toFileString();
     }
 
+    /**
+     * {@inheritdoc}
+     * Appends "[T]" to the front to show that Task is a Todo.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
@@ -44,6 +48,9 @@ public class Todo extends Task {
         return false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public Task getUpdatedTask(EditCommand edit) {
         String newDescription = edit.getDescription() == null ? description : edit.getDescription();

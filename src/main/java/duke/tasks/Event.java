@@ -36,11 +36,7 @@ public class Event extends Task {
         super(description, isDone);
         this.date = parseDateTime(at);
     }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
+    
     private LocalDateTime parseDateTime(String at) throws DukeException {
         try {
             return LocalDateTime.parse(at, FORMATTER);
@@ -50,11 +46,18 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toFileString() {
         return "E" + super.toFileString() + " | " + date.format(FORMATTER);
     }
 
+    /**
+     * {@inheritdoc}
+     * Appends "[E]" to the front to show that Task is a Deadline.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DISPLAY_FORMATTER) + ")";
@@ -69,6 +72,9 @@ public class Event extends Task {
         return false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     @Override
     public Task getUpdatedTask(EditCommand edit) throws DukeException {
         String newDescription = edit.getDescription() == null ? description : edit.getDescription();

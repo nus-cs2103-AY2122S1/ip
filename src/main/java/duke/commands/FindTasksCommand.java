@@ -23,6 +23,12 @@ public class FindTasksCommand extends Command {
         return tasksWithKeyword.printTaskList(true);
     }
 
+    /**
+     * Returns true if object is a FindCommand with the same keyword.
+     *
+     * @param obj Object to be compared to FindCommand.
+     * @return True if object is a FindCommand with the same keyword.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof FindTasksCommand) {

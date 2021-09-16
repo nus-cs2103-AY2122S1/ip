@@ -37,7 +37,7 @@ public class TaskList {
         StringBuilder message = new StringBuilder();
         message.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            message.append((i + 1) + ". " + tasks.get(i) + "\n");
+            message.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         return message.toString();
     }
@@ -55,7 +55,7 @@ public class TaskList {
         StringBuilder message = new StringBuilder();
         message.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            message.append((i + 1) + ". " + tasks.get(i) + "\n");
+            message.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         return message.toString();
     }
@@ -78,7 +78,7 @@ public class TaskList {
      *
      * @param taskIndex Index of the Task to be marked as done.
      * @return Task that was marked as done.
-     * @throws DukeException
+     * @throws DukeException If taskIndex is negative or more than or equal to size of array.
      */
     public Task markTaskDone(int taskIndex) throws DukeException {
         validateTaskIndex(taskIndex);
@@ -92,7 +92,7 @@ public class TaskList {
      *
      * @param taskIndex Index of Task to be deleted.
      * @return Task that was deleted.
-     * @throws DukeException
+     * @throws DukeException If taskIndex is negative or more than or equal to size of array.
      */
     public Task deleteTask(int taskIndex) throws DukeException {
         validateTaskIndex(taskIndex);
@@ -129,13 +129,13 @@ public class TaskList {
         }
         return new TaskList(arrListTasks);
     }
-    
-    // TODO: add javadoc
-    public ArrayList<Task> getAllTasks() {
-        return tasks;
-    }
-    
-    // TODO: add javadoc
+
+    /**
+     * Updates task in TaskList at specified index with the updated task.
+     * 
+     * @param taskIndex Index of Task to be updated in tasks ArrayList.
+     * @param updatedTask Updated Task to replace original Task.
+     */
     public void editTask(int taskIndex, Task updatedTask) {
         tasks.set(taskIndex, updatedTask);
     }
@@ -163,5 +163,15 @@ public class TaskList {
             return tasks.equals(other.tasks);
         }
         return false;
+    }
+
+    /**
+     * Returns Task in TaskList at specified index.
+     * 
+     * @param taskIndex Index of Task in tasks ArrayList to be returned.
+     * @return Task in TaskList at specified index.
+     */
+    public Task getTask(int taskIndex) {
+        return tasks.get(taskIndex);
     }
 }

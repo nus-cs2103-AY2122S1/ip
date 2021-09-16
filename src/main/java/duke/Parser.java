@@ -111,7 +111,7 @@ public class Parser {
         return new AddTaskCommand(deadline);
     }
 
-    protected static int getTaskIndex(String answer) throws DukeException {
+    private static int getTaskIndex(String answer) throws DukeException {
         try {
             String taskNo = answer.split(" ")[1];
             int taskIndex = Integer.parseInt(taskNo) - 1;

@@ -11,7 +11,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructs a Duke object.
+     * Constructs a Duke object with a UI, Storage and TaskList with stored Tasks.
      */
     public Duke() {
         ui = new Ui();
@@ -23,10 +23,13 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Executes command from parsing user input.
+     * Returns message to be shown to user.
+     * 
+     * @param input User input.
+     * @return Message to be shown to user.
      */
     public String getResponse(String input) {
         try {
