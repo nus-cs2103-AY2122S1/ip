@@ -56,7 +56,9 @@ Adds a task with a deadline to do by some date and time, to the task list.
 
 Format: `deadline <TASK_DESCRIPTION> /by <DATE_TIME>`
 
-** DATE_TIME has to in the format `dd-MM-YYYY HH:mm`
+<div markdown="span" class="alert alert-warning">
+DATE_TIME has to in the format `dd-MM-YYYY HH:mm`
+</div>
 
 Example: `deadline math assignment /by 05-09-2021 23:00`
 
