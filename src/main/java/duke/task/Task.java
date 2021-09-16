@@ -68,7 +68,7 @@ public class Task {
         String[] deconstructedDescription = description.split(" ");
 
         for (int i = 0; i < deconstructedDescription.length; i++) {
-            if (deconstructedDescription[i].equals(keyword)) {
+            if (deconstructedDescription[i].toUpperCase().contains(keyword.toUpperCase())) {
                 return true;
             }
         }
