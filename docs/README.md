@@ -17,7 +17,7 @@ Gary is a desktop app for anyone who needs to keep track of their myriad of task
 3. Copy the file to the folder you want to use as the home folder for Gary.
 4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds. The image below shows an example of the app with sample data.
 
-![Image of Gary](https://github.com/BryannYeap/ip/blob/master/docs/Ui.png)
+![Image of Gary](https://BryannYeap.github.io/ip/Ui.png)
 
 ## Features 
 ---
