@@ -29,7 +29,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
     @Override
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.
