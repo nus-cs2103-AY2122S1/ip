@@ -9,6 +9,7 @@ public enum Commands {
     DELETE("delete"),
     FIND("find"),
     CLEAR("clear"),
+    SORT("sort"),
     EXIT("exit"),
     INVALID("");
 

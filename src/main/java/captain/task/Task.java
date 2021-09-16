@@ -7,7 +7,9 @@ import captain.DukeException.MissingDescriptionException;
  *
  * @author Adam Ho
  */
-public class Task {
+public class Task implements Comparable<Task> {
+    public static final String TODO = "Todo";
+    public static final String DEADLINE = "Deadline";
     private String description;
     private boolean isDone;
 
@@ -50,5 +52,11 @@ public class Task {
     @Override
     public String toString() {
         return this.getStatus() + this.description;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        String taskType = task.getClass().getSimpleName();
+        return taskType.equals(TODO) ? -1 : taskType.equals(DEADLINE) ? 0 : 1;
     }
 }

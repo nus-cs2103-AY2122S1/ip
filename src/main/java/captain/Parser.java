@@ -12,6 +12,7 @@ import captain.command.ExitCommand;
 import captain.command.FindCommand;
 import captain.command.InvalidCommand;
 import captain.command.ListCommand;
+import captain.command.SortCommand;
 import captain.task.Deadline;
 import captain.task.Event;
 import captain.task.Todo;
@@ -67,6 +68,8 @@ public class Parser {
             return new FindCommand(taskDescriptions);
         case CLEAR:
             return new ClearCommand();
+        case SORT:
+            return new SortCommand();
         case EXIT:
             return new ExitCommand();
         default:

@@ -1,6 +1,7 @@
 package captain.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import captain.DukeException.MissingTaskException;
 
@@ -56,7 +57,7 @@ public class TaskList {
         taskList.clear();
     }
 
-    public boolean containsTask(Task t) {
-        return taskList.contains(t);
+    public void sortByTask() {
+        Collections.sort(taskList);
     }
 }
