@@ -42,7 +42,7 @@ public class Parser {
     }
 
     /**
-     * Done command task process
+     * Marks done command task process
      *
      * @param cmd
      * @param tasks
@@ -167,7 +167,7 @@ public class Parser {
                     throw new NoTimeException(instruction.name());
 
                 } else {
-                    try{
+                    try {
                         int endOfDescription = subString_period.indexOf("/from ");
                         int endOfStartTime = subString_period.indexOf("/to ");
                         String description = subString_period.substring(0, endOfDescription - 1);
@@ -185,9 +185,7 @@ public class Parser {
             default:
                 throw new NoCommandException(instruction.name());
             }
-        }
-
-        else {
+        } else {
             switch (instruction) {
                 case TODO:
                     throw new NoDescriptionException(instruction.name());

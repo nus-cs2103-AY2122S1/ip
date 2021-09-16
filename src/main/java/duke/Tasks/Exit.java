@@ -35,7 +35,7 @@ public class Exit extends Task {
     }
 
     /**
-     * Off the application and exit
+     * Offs the application and exit
      */
     public void offApplication() {
         Platform.exit();

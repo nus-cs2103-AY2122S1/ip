@@ -9,6 +9,7 @@ public class Launcher {
 
     /**
      * The main method for launch the Main class
+     * 
      * @param args
      */
     public static void main(String[] args) {
