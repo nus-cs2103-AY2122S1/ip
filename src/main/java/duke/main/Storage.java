@@ -130,10 +130,22 @@ public class Storage {
      */
     public void createDataFile() {
         File data = new File(this.filePath);
+        createDataDir();
         try {
             data.createNewFile();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private void createDataDir() {
+        String dirName = this.filePath.split("/")[0];
+        File dir = new File(dirName);
+        boolean isSuccessful = dir.mkdir();
+        if (isSuccessful) {
+            System.out.println("Successfully created dir");
+        } else {
+            System.out.println("Unsuccessful in creating dir");
         }
     }
 }
