@@ -26,7 +26,7 @@ Besides being an expert fire bender, Mako is also great at helping you manage yo
 ### Note about the command format:
 Words in `{ }` are the parameters to be supplied by the user. 
 
-e.g. `todo {task's name}` where {task's name} is the user's input. For instance, `todo homework`
+e.g. `todo {task's name}` where {task's name} is the user's input. 
 
 # Usage
 
