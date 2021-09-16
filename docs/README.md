@@ -37,6 +37,7 @@ Carrot Task Manager allows user to talk to Ms.Carrot (the computer) and perform 
 3. **Find** a task.
 4. **Mark** a task **as done**.
 5. **View** the todo list.  
+6. **Save** the todo list to the user's device. 
 
 >Note: \* \* is used in the user guide to specify places for the user's own input.  
 
@@ -116,5 +117,12 @@ Example of usuage:
 Here are the tasks in your list:  
  1. \[T\]\[ \] dance practice 
  2. \[E\]\[ \] rehearsal (at: 12)  
+ 
+### Saving the Todo List
+
+A user can save the todo list to his or her local device with the command:
+`save`
+
+Note: The todo list will be saved in a file called *file.txt*. If the user already has a file called *file.txt*, the content of the original file will be overwritten by this new todo list. The user will be able to access his or her todo list the next time he or she opens the **Carrot Task Manager**. 
 
 
