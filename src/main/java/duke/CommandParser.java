@@ -11,8 +11,8 @@ public class CommandParser extends Parser<String[]> {
             + "I'm sorry, but I don't know what that means :-(";
     private static final String MISSING_ARGUMENT_TEMPLATE = "☹ OOPS!!! "
             + "Seems like there are missing argument(s) for %s";
-    private static final String NON_NUMBER_ARGUMENT_TEMPLATE = "☹ OOPS!!! "
-            + "Should have entered a number for %s, BOI";
+    private static final String NON_VALID_NUMBER_ARGUMENT_TEMPLATE = "☹ OOPS!!! "
+            + "Should have entered a valid number for %s, BOI";
 
     /**
      * Parse the given line from the CLI and returns an array of commands and arguments.
@@ -75,7 +75,7 @@ public class CommandParser extends Parser<String[]> {
             throw new DukeException(String.format(MISSING_ARGUMENT_TEMPLATE, cmdSplitFront));
         } else if ((cmdSplitFront.equals("delete") || cmdSplitFront.equals("done"))
             && !cmdSplit[1].matches("[0-9]+")) {
-            throw new DukeException(String.format(NON_NUMBER_ARGUMENT_TEMPLATE, cmdSplitFront));
+            throw new DukeException(String.format(NON_VALID_NUMBER_ARGUMENT_TEMPLATE, cmdSplitFront));
         }
         return cmdSplit;
     }
