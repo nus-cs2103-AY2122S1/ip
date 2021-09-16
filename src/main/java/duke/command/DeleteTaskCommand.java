@@ -2,7 +2,10 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.task.TaskList;
+import javafx.util.Pair;
+
+import duke.result.Result;
+import duke.result.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
 
@@ -26,13 +29,16 @@ public class DeleteTaskCommand extends Command {
      * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
-     * @return A task list with the specified task removed and an output message.
+     * @return A Result object containing task and alias data, as well as an output message.
      * @throws IOException If an error occurs during the save operation.
      */
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        TaskList newTaskList = taskList.deleteTask(ui, input);
+    public Result execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+        // This pair contains the updated task list along with an output message
+        Pair<TaskList, String> taskListPair = taskList.deleteTask(ui, input);
+        TaskList newTaskList = taskListPair.getKey();
         storage.saveTasksToFile(newTaskList);
-        return newTaskList;
+        String message = taskListPair.getValue();
+        return new Result(newTaskList, message);
     }
 }

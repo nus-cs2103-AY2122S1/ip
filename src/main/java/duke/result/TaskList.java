@@ -1,4 +1,4 @@
-package duke.task;
+package duke.result;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Ui;
@@ -15,21 +21,18 @@ import duke.util.Ui;
 /**
  * A class that contains the base functionality for a task list,
  * including adding, deleting, listing, and marking tasks as done.
- * It also contains the response for Duke after a user input.
  */
 public class TaskList {
     private static final int DEADLINE_EXTRA_LENGTH = 3;
     private static final int EVENT_EXTRA_LENGTH = 4;
 
     private final List<Task> tasks;
-    private final String recentMessage;
 
     /**
      * Creates a task list with no tasks.
      */
     public TaskList() {
         tasks = new ArrayList<>();
-        recentMessage = "";
     }
 
     /**
@@ -39,29 +42,15 @@ public class TaskList {
      */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
-        this.recentMessage = "";
-    }
-
-    /**
-     * Creates a task list with a given list of tasks and a message.
-     *
-     * @param tasks         A list of tasks.
-     * @param recentMessage A string generated from running a command.
-     */
-    public TaskList(List<Task> tasks, String recentMessage) {
-        this.tasks = new ArrayList<>(tasks);
-        this.recentMessage = recentMessage;
     }
 
     /**
      * Creates a task list with a given TaskList and a message.
      *
      * @param otherTaskList A TaskList object representing a list of tasks.
-     * @param recentMessage A string generated from running a command.
      */
-    public TaskList(TaskList otherTaskList, String recentMessage) {
+    public TaskList(TaskList otherTaskList) {
         this.tasks = new ArrayList<>(otherTaskList.tasks);
-        this.recentMessage = recentMessage;
     }
 
     /**
@@ -79,10 +68,11 @@ public class TaskList {
      *
      * @param ui     Object that handles printing/formatting of messages.
      * @param inputs A variable amount of strings representing the user input.
-     * @return A new TaskList instance containing the new task and an output message.
+     * @return A pair containing a TaskList instance containing the new task,
+     * and a string representing an output message.
      * @throws DukeException If input contains |, or is in an invalid format.
      */
-    public TaskList addTask(Ui ui, String... inputs) throws DukeException {
+    public Pair<TaskList, String> addTask(Ui ui, String... inputs) throws DukeException {
         for (String input : inputs) {
             if (input.contains("|")) {
                 throw new DukeException("Input contains |, which is an invalid/reserved character.");
@@ -112,8 +102,9 @@ public class TaskList {
 
         // Common functionality: add task to list, print task and list size
         newTasks.add(newTask);
+        TaskList newTaskList = new TaskList(newTasks);
         String message = ui.showAddTaskMessage(newTasks.size(), newTask);
-        return new TaskList(newTasks, message);
+        return new Pair<>(newTaskList, message);
     }
 
     /**
@@ -202,10 +193,11 @@ public class TaskList {
      *
      * @param ui    Object that handles printing/formatting of messages.
      * @param input String containing user input.
-     * @return A new TaskList instance with the selected task removed and an output message.
+     * @return A pair containing a TaskList instance with the selected task removed,
+     * and a string representing an output message.
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
-    public TaskList deleteTask(Ui ui, String input) throws DukeException {
+    public Pair<TaskList, String> deleteTask(Ui ui, String input) throws DukeException {
         String[] splitInputs = input.split(" ");
         if (splitInputs.length != 2) {
             throw new DukeException("Input should be of the format: delete [taskNumber]");
@@ -228,8 +220,9 @@ public class TaskList {
         }
 
         Task removedTask = newTasks.remove(taskIndex);
+        TaskList newTaskList = new TaskList(newTasks);
         String message = ui.showDeleteTaskMessage(newTasks.size(), removedTask);
-        return new TaskList(newTasks, message);
+        return new Pair<>(newTaskList, message);
     }
 
     /**
@@ -238,10 +231,11 @@ public class TaskList {
      *
      * @param ui    Object that handles user interface functionality. (e.g. printing)
      * @param input String containing user input.
-     * @return A new TaskList instance with the selected task marked as done.
+     * @return A pair containing a TaskList instance with the selected task marked as done,
+     * and a string representing an output message.
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
-    public TaskList markTask(Ui ui, String input) throws DukeException {
+    public Pair<TaskList, String> markTask(Ui ui, String input) throws DukeException {
         String[] splitInputs = input.split(" ");
         if (splitInputs.length != 2) {
             throw new DukeException("Input should be of the format: done [taskNumber]");
@@ -265,8 +259,9 @@ public class TaskList {
 
         Task doneTask = newTasks.get(taskIndex).markAsDone();
         newTasks.set(taskIndex, doneTask);
+        TaskList newTaskList = new TaskList(newTasks);
         String message = ui.showDoneTaskMessage(doneTask);
-        return new TaskList(newTasks, message);
+        return new Pair<>(newTaskList, message);
     }
 
     /**
@@ -351,15 +346,6 @@ public class TaskList {
                 .filter(task -> task.hasSameDate(date))
                 .collect(Collectors.toList());
         return new TaskList(onDateTasks);
-    }
-
-    /**
-     * Gets the string message generated after running a command.
-     *
-     * @return A string generated after running a command.
-     */
-    public String getRecentMessage() {
-        return recentMessage;
     }
 
     /**

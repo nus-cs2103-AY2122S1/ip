@@ -1,41 +1,37 @@
-package duke.util;
+package duke.result;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.util.Pair;
+
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Ui;
+
+/**
+ * A class that contains the base functionality for handling aliases,
+ * including adding, deleting and listing them.
+ */
 public class AliasHandler {
     // Stores aliases in the form of: alias(key):command(value)
     private final HashMap<String, String> aliasHashMap;
-    private final String recentMessage;
 
     /**
      * Creates an alias handler with no aliases.
      */
     public AliasHandler() {
         this.aliasHashMap = new HashMap<>();
-        this.recentMessage = "";
     }
 
     /**
      * Creates an alias handler with aliases.
      *
-     * @param aliasHashMap  A hashmap that matches aliases to corresponding commands.
+     * @param aliasHashMap A hashmap that matches aliases to corresponding commands.
      */
     public AliasHandler(HashMap<String, String> aliasHashMap) {
         this.aliasHashMap = aliasHashMap;
-        this.recentMessage = "";
-    }
-
-    /**
-     * Creates an alias handler with aliases and an output message.
-     *
-     * @param aliasHashMap  A hashmap that matches aliases to corresponding commands.
-     * @param recentMessage A string generated from running a command.
-     */
-    public AliasHandler(HashMap<String, String> aliasHashMap, String recentMessage) {
-        this.aliasHashMap = aliasHashMap;
-        this.recentMessage = recentMessage;
     }
 
     /**
@@ -63,10 +59,11 @@ public class AliasHandler {
      * Aliases are not case sensitive. (e.g. quit is treated the same as QUIT)
      *
      * @param input String containing user input.
-     * @return A new AliasHandler instance containing the new task and an output message.
+     * @return A pair that contains an AliasHandler instance with the new alias,
+     * and a string that represents an output message.
      * @throws DukeException If input contains |, or is in an invalid format.
      */
-    public AliasHandler addAlias(Ui ui, String input) throws DukeException {
+    public Pair<AliasHandler, String> addAlias(Ui ui, String input) throws DukeException {
         HashMap<String, String> newAliasHashMap = new HashMap<>(this.aliasHashMap);
         if (input.contains("|")) {
             throw new DukeException("Input contains |, which is an invalid/reserved character.");
@@ -89,8 +86,9 @@ public class AliasHandler {
         Parser.parseCommandFromInput(command);
 
         newAliasHashMap.put(alias, command);
+        AliasHandler newAliasHandler = new AliasHandler(newAliasHashMap);
         String message = ui.showAddAliasMessage(alias, command);
-        return new AliasHandler(newAliasHashMap, message);
+        return new Pair<>(newAliasHandler, message);
     }
 
     /**
@@ -125,10 +123,11 @@ public class AliasHandler {
      * Aliases are not case sensitive. (e.g. quit is treated the same as QUIT)
      *
      * @param input String containing user input.
-     * @return A new AliasHandler instance with the selected alias removed and an output message.
+     * @return A pair that contains an AliasHandler instance with the new alias,
+     * and a string that represents an output message.
      * @throws DukeException If input contains |, or is in an invalid format.
      */
-    public AliasHandler deleteAlias(Ui ui, String input) throws DukeException {
+    public Pair<AliasHandler, String> deleteAlias(Ui ui, String input) throws DukeException {
         HashMap<String, String> newAliasHashMap = new HashMap<>(this.aliasHashMap);
         String[] splitInputs = input.split(" ");
         if (splitInputs.length != 2) {
@@ -141,17 +140,9 @@ public class AliasHandler {
             throw new DukeException(errorMessage);
         }
         String command = newAliasHashMap.remove(alias);
+        AliasHandler newAliasHandler = new AliasHandler(newAliasHashMap);
         String message = ui.showDeleteAliasMessage(alias, command);
-        return new AliasHandler(newAliasHashMap, message);
-    }
-
-    /**
-     * Gets the string message generated after running a command.
-     *
-     * @return A string generated after running a command.
-     */
-    public String getRecentMessage() {
-        return recentMessage;
+        return new Pair<>(newAliasHandler, message);
     }
 
     /**

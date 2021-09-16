@@ -2,7 +2,8 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.task.TaskList;
+import duke.result.Result;
+import duke.result.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
 
@@ -34,11 +35,10 @@ public abstract class Command {
      * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
-     * @return A task list that may or may not be modified from the input task list, depending on
-     * the command called, along with a new output message.
+     * @return A Result object containing task and alias data, as well as an output message.
      * @throws IOException If an error occurs during a save/load operation.
      */
-    public abstract TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract Result execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
     /**
      * Returns true if the command terminates Duke, false otherwise.

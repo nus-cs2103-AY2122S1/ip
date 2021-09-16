@@ -16,6 +16,7 @@ import duke.command.FindCommand;
 import duke.command.ListAliasCommand;
 import duke.command.ListCommand;
 import duke.command.OnDateCommand;
+import duke.result.AliasHandler;
 
 /**
  * A class that handles all parsing related functionality, parsing dates, times,
@@ -84,7 +85,7 @@ public class Parser {
         String inputString = input.split(" ")[0].toLowerCase();
         String commandString = aliasHandler.convertAlias(inputString);
         // Note: any changes made to this switch-case should also be made
-        // to the switch-case in AliasHandler method isCommandKeyWord
+        // to the switch-case in AliasHandler method isCommandKeyword
         switch (commandString) {
         case "addalias":
             return new AddAliasCommand(input);

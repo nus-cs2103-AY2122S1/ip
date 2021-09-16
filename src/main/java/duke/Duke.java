@@ -6,8 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import duke.command.Command;
-import duke.task.TaskList;
-import duke.util.AliasHandler;
+import duke.result.AliasHandler;
+import duke.result.Result;
+import duke.result.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -96,11 +97,14 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parseCommandFromInput(input.trim());
-            taskList = command.execute(taskList, ui, storage);
+            Result result = command.execute(taskList, ui, storage);
+            // Duke should always give a non-empty response to a command
+            assert (!result.getMessage().equals(""));
+            // Update user-related state (tasks and aliases)
+            taskList = result.getTaskList();
+            Parser.setAliasHandler(result.getAliasHandler());
             isTerminated = command.isTerminated();
-            // Duke should always give a response to a command
-            assert (!taskList.getRecentMessage().equals(""));
-            return taskList.getRecentMessage();
+            return result.getMessage();
         } catch (IOException e) {
             return ui.showError("The data failed to save to the save file with error:"
                     + e.getMessage());
