@@ -33,6 +33,7 @@ public class CommandHelp extends Command {
                 + new CommandDone(null, 0) + '\n'
                 + new CommandDelete(null, 0) + '\n'
                 + new CommandList(null, null) + '\n'
+                + new CommandSort(null, null) + '\n'
                 + new CommandHelp() + '\n'
                 + new CommandExit();
     }

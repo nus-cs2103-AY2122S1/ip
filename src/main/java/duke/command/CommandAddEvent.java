@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import duke.ui.Ui;
@@ -43,7 +44,8 @@ public class CommandAddEvent extends Command {
                     input[0],
                     DukeParser.getDate(input[1]),
                     input[2],
-                    false));
+                    false,
+                    LocalDateTime.now()));
         } catch (DateTimeParseException e) {
             return Ui.MESSAGE_INVALID_DATE;
         }

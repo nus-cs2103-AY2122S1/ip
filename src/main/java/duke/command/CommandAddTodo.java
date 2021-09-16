@@ -3,6 +3,8 @@ package duke.command;
 import task.TaskList;
 import task.TaskTodo;
 
+import java.time.LocalDateTime;
+
 /**
  * Command to add a to-do.
  */
@@ -33,6 +35,6 @@ public class CommandAddTodo extends Command {
      */
     @Override
     public String execute() {
-        return taskList.add(new TaskTodo(desc, false));
+        return taskList.add(new TaskTodo(desc, false, LocalDateTime.now()));
     }
 }

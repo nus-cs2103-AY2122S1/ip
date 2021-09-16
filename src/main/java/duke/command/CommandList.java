@@ -89,7 +89,8 @@ public class CommandList extends Command {
 
             switch (command) {
             case ("name"):
-                results.add(task -> task.getDescription().contains(arg));
+                results.add(task -> task.getDescription()
+                        .toLowerCase().contains(arg.toLowerCase()));
                 break;
             case ("date"):
                 LocalDate date = DukeParser.getDate(arg);
@@ -101,5 +102,30 @@ public class CommandList extends Command {
         }
 
         return results;
+    }
+
+    private String getCommand(String str)
+            throws IllegalArgumentException{
+        int index = getCommandArgumentSplitIndex(str);
+        return str.substring(0, index);
+    }
+
+    private String getArgument(String str)
+            throws IllegalArgumentException {
+
+        // Ensure validity; has a command and an argument
+        int index = getCommandArgumentSplitIndex(str);
+        return str.substring(index).trim();
+    }
+
+    private int getCommandArgumentSplitIndex(String str)
+            throws IllegalArgumentException {
+        // Ensure validity; has a command and an argument
+        int index = str.indexOf(' ');
+        if (index == -1) {
+            throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
+        }
+
+        return index;
     }
 }

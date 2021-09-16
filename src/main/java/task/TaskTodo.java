@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * To-do task event.
@@ -13,8 +14,8 @@ public class TaskTodo extends Task {
      * @param description Description of task.
      * @param done Completion status.
      */
-    public TaskTodo(String description, boolean done) {
-        super(description, done);
+    public TaskTodo(String description, boolean done, LocalDateTime dateTimeAdded) {
+        super(description, done, dateTimeAdded);
     }
 
     /**
@@ -39,7 +40,8 @@ public class TaskTodo extends Task {
     public String saveString() {
         return "T" + '\t'
                 + (this.isDone ? "1" : "0") + '\t'
-                + this.description;
+                + this.description + '\t'
+                + this.dateTimeAdded;
     }
 
     /**

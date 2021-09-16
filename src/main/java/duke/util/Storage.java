@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,18 +96,25 @@ public class Storage {
         try {
             switch (taskType) {
             case "T":
+                // Create new To-do
                 assert args.length == 3: "Invalid loaded task";
-                return new TaskTodo(args[2], args[1].equals("1"));
+                return new TaskTodo(args[2], args[1].equals("1"), LocalDateTime.parse(args[3]));
             case "D":
-                assert args.length == 4 || args.length == 5: "Invalid loaded task";
-                return args.length == 4
-                        ? new TaskDeadline(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
-                        : new TaskDeadline(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));
+                // Create new Deadline
+                assert args.length == 5 || args.length == 6: "Invalid loaded task";
+                return args.length == 5
+                        ? new TaskDeadline(args[2], LocalDate.parse(args[3]), null,
+                                !args[1].equals("0"), LocalDateTime.parse(args[4]))
+                        : new TaskDeadline(args[2], LocalDate.parse(args[3]), args[4],
+                                !args[1].equals("0"), LocalDateTime.parse(args[5]));
             case "E":
-                assert args.length == 4 || args.length == 5: "Invalid loaded task";
-                return args.length == 4
-                        ? new TaskEvent(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
-                        : new TaskEvent(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));
+                // Create new Event
+                assert args.length == 5 || args.length == 6: "Invalid loaded task";
+                return args.length == 5
+                        ? new TaskEvent(args[2], LocalDate.parse(args[3]), null,
+                                !args[1].equals("0"), LocalDateTime.parse(args[4]))
+                        : new TaskEvent(args[2], LocalDate.parse(args[3]), args[4],
+                                !args[1].equals("0"), LocalDateTime.parse(args[5]));
             default:
                 throw new ParseException(Ui.MESSAGE_INVALID_ARG + Ui.MESSAGE_FILE_NOT_READ, 0);
             }
@@ -115,3 +123,4 @@ public class Storage {
         }
     }
 }
+

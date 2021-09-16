@@ -47,11 +47,11 @@ Adds a deadline into your task list.
 
 **Example usage:**
 
-`deadline taskname /by DD/MM/YYYY xxxxH`
+`deadline taskname /by DD/MM/YYYY xxxx`
 
 * `taskname` - Name of deadline
 * `DD/MM/YYYY` - Date and month can be 1-2 digits long
-* `xxxxH` - Time in 24-hour format *[Optional]*
+* `xxxx` - Time in 24-hour format *[Optional]*
 
 **Expected outcome:**
 
@@ -70,11 +70,11 @@ Adds an event into your task list.
 
 **Example usage:**
 
-`event taskname /at DD/MM/YYYY xxxxH`
+`event taskname /at DD/MM/YYYY xxxx`
 
 * `taskname` - Name of deadline
 * `DD/MM/YYYY` - Date and month can be 1-2 digits long
-* `xxxxH` - Time in 24-hour format *[Optional]*
+* `xxxx` - Time in 24-hour format *[Optional]*
 
 A confirmation response would be sent by Duke:
 
@@ -158,6 +158,36 @@ Noted. Duke-san removed this task!
         [D][X] Example task
 There are ___ tasks in your list
 ```
+
+<br/><br/>
+
+### `Sort` - Sorts your tasks
+
+Sorts your tasks based on the arguments provided.
+
+**Example usage (with and without optional arguments):**
+
+`sort` - Standard sort by name (no arguments)
+
+`list /date` - Sort by date and time
+
+`list /done` - Sort by completion status
+
+`list /name` - Sort by name (Same as no arguments)
+
+`list /added` - Sort by date in which task was added
+
+Arguments can be stacked, list will be sorted by the first one first, followed by the second, etc.
+
+`list /done /date` - Sort by completion status first. For those with the completion status, sort by date and time.
+
+`list /done /date /name` - Same as above, but for those with the same date and time, sorted in alphabetical order.
+
+**Expected outcome:**
+
+This command will overwrite your current list with the new sorted task list.
+
+A new list of all your tasks (if any) would be sent by Duke.
 
 <br/><br/>
 

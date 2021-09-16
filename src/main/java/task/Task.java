@@ -1,7 +1,7 @@
 package task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 
 import duke.ui.Ui;
 
@@ -11,6 +11,7 @@ import duke.ui.Ui;
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
+    protected LocalDateTime dateTimeAdded;
 
     /**
      * Constructor.
@@ -18,9 +19,10 @@ public abstract class Task {
      * @param input Description of task.
      * @param isDone Whether the task is complete.
      */
-    public Task(String input, boolean isDone) {
+    public Task(String input, boolean isDone, LocalDateTime dateTimeAdded) {
         description = input;
         this.isDone = isDone;
+        this.dateTimeAdded = dateTimeAdded;
     }
 
     /**
@@ -41,6 +43,16 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
+
+    public boolean getDone() {
+        return isDone;
+    }
+
+    public LocalDateTime getAdded() {
+        return dateTimeAdded;
+    }
+
+
 
     public abstract LocalDate getDate();
 

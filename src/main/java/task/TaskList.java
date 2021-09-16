@@ -125,5 +125,6 @@ public class TaskList {
         for (int i = filters.size() - 1; i >= 0; i--) {
             tasks.sort(filters.get(i));
         }
+        Storage.saveList(tasks);
     }
 }

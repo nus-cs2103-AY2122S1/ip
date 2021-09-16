@@ -25,12 +25,14 @@ public class CommandSort extends Command {
      * @param sortFilters Un-parsed list of filters.
      */
     public CommandSort(TaskList taskList, String sortFilters) {
-        this.commandName = "list /name <name> /date DD/MM/YYYY";
-        this.description = "Toggles completion of task. Order of arguments does not matter";
+        this.commandName = "sort /name /date";
+        this.description = "Sorts list based on arguments provided. Having no arguments would default to" +
+                " sorting by /name. If there is more than 1 argument, the list will be sorted by the first." +
+                "followed by the second, etc...";
         this.arguments = new String[]{
-                "/name Optional argument to search for particular name",
-                "/date Optional date argument in DAY/MONTH/YEAR, "
-                        + "to search for tasks on a particular date"
+                "/name Optional argument to sort by name",
+                "/date Optional argument to sort by date",
+                "/done Optional argument to sort by completion status"
         };
 
         this.taskList = taskList;
@@ -87,6 +89,12 @@ public class CommandSort extends Command {
             case ("date"):
                 results.add(createDateTimeComparator());
                 break;
+            case ("done"):
+                results.add(createDoneComparator());
+                break;
+            case ("added"):
+                results.add(createAddedComparator());
+                break;
             default:
                 throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
             }
@@ -96,15 +104,23 @@ public class CommandSort extends Command {
     }
 
     private Comparator<Task> createNameComparator() {
-        return Comparator.comparing(Task::getDescription);
+        return Comparator.comparing(t -> t.getDescription().toLowerCase());
     }
 
     private Comparator<Task> createDateTimeComparator() {
-        return (o1, o2) -> {
-            int compareDate = o1.getDate().compareTo(o2.getDate());
+        return (t1, t2) -> {
+            int compareDate = t1.getDate().compareTo(t2.getDate());
             return compareDate == 0
-                    ? o1.getTime().compareTo(o2.getTime())
-                    : o1.getDate().compareTo(o2.getDate());
+                    ? t1.getTime().compareTo(t2.getTime())
+                    : t1.getDate().compareTo(t2.getDate());
         };
+    }
+
+    private Comparator<Task> createDoneComparator() {
+        return Comparator.comparing(Task::getDone);
+    }
+
+    private Comparator<Task> createAddedComparator() {
+        return Comparator.comparing(Task::getAdded);
     }
 }

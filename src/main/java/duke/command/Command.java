@@ -39,30 +39,4 @@ public abstract class Command {
         return commandName + " - " + description + '\n'
                 + argString + '\n';
     }
-
-    protected static String getCommand(String str)
-            throws IllegalArgumentException{
-        int index = getCommandArgumentSplitIndex(str);
-        return str.substring(0, index);
-    }
-
-    protected static String getArgument(String str)
-            throws IllegalArgumentException {
-
-        // Ensure validity; has a command and an argument
-        int index = getCommandArgumentSplitIndex(str);
-        return str.substring(index).trim();
-    }
-
-    private static int getCommandArgumentSplitIndex(String str)
-            throws IllegalArgumentException {
-        // Ensure validity; has a command and an argument
-        int index = str.indexOf(' ');
-
-        if (index == -1) {
-            throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
-        }
-
-        return index;
-    }
 }

@@ -3,6 +3,7 @@ package task;
 import duke.ui.Ui;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
@@ -21,9 +22,9 @@ public class TaskDeadline extends Task {
      * @param time Time of task (Optional argument), saved as "" otherwise.
      * @param done Completion status.
      */
-    public TaskDeadline(String description, LocalDate date, String time, boolean done)
+    public TaskDeadline(String description, LocalDate date, String time, boolean done, LocalDateTime dateTimeAdded)
             throws DateTimeParseException {
-        super(description, done);
+        super(description, done, dateTimeAdded);
         this.by = date;
         this.time = Optional.ofNullable(time)
                 .map(String::strip)
@@ -60,7 +61,8 @@ public class TaskDeadline extends Task {
                 + (this.isDone ? "1" : "0") + '\t'
                 + this.description + '\t'
                 + this.by + '\t'
-                + this.time;
+                + this.time + '\t'
+                + this.dateTimeAdded;
     }
 
     /**

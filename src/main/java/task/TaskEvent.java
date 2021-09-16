@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
@@ -19,8 +20,8 @@ public class TaskEvent extends Task {
      * @param time Time of Event. Optional, "" otherwise.
      * @param done Completion status.
      */
-    public TaskEvent(String description, LocalDate date, String time, boolean done) {
-        super(description, done);
+    public TaskEvent(String description, LocalDate date, String time, boolean done, LocalDateTime dateTimeAdded) {
+        super(description, done, dateTimeAdded);
         this.at = date;
         this.time = Optional.ofNullable(time)
                 .map(String::strip)
@@ -57,7 +58,8 @@ public class TaskEvent extends Task {
                 + (this.isDone ? "1" : "0") + '\t'
                 + this.description + '\t'
                 + this.at + '\t'
-                + this.time;
+                + this.time + '\t'
+                + this.dateTimeAdded;
     }
 
     /**
