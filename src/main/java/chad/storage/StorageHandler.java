@@ -32,6 +32,11 @@ public class StorageHandler {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_PATTERN);
     private static final String DEADLINE_TASK_TIME_RELATION_TOKEN = "/by";
     private static final String EVENT_TASK_TIME_RELATION_TOKEN = "/at";
+    private static final String TOKEN_DELIMITER = " ";
+    private static final int TASK_MAIN_ARGUMENTS_START_INDEX = 2;
+    private static final String TODO_TASK_TYPE_TOKEN = "T";
+    private static final String DEADLINE_TASK_TYPE_TOKEN = "D";
+    private static final String EVENT_TASK_TYPE_TOKEN = "E";
 
     private static StorageHandler instance;
 
@@ -104,7 +109,7 @@ public class StorageHandler {
     }
 
     private Task parseTaskRepresentation(String taskRepresentation) throws IllegalArgumentException {
-        String[] tokens = taskRepresentation.strip().split(" ");
+        String[] tokens = taskRepresentation.strip().split(TOKEN_DELIMITER);
         checkTokensArrayLength(tokens);
         Task task = parseTask(tokens);
         String doneToken = tokens[1];
@@ -121,11 +126,11 @@ public class StorageHandler {
     private Task parseTask(String[] tokens) throws IllegalArgumentException {
         String type = tokens[0];
         switch (type) {
-        case "T":
+        case TODO_TASK_TYPE_TOKEN:
             return parseToDoTask(tokens);
-        case "D":
+        case DEADLINE_TASK_TYPE_TOKEN:
             return parseDeadlineTask(tokens);
-        case "E":
+        case EVENT_TASK_TYPE_TOKEN:
             return parseEventTask(tokens);
         default:
             throw new IllegalArgumentException();
@@ -151,15 +156,17 @@ public class StorageHandler {
     }
 
     private ToDoTask parseToDoTask(String[] tokens) {
-        String taskDescription = getTokenSequence(tokens, 2, tokens.length);
+        String taskDescription = getTokenSequence(tokens,
+                TASK_MAIN_ARGUMENTS_START_INDEX, tokens.length);
         checkTaskDescriptionLength(taskDescription);
         return new ToDoTask(taskDescription);
     }
 
     private DeadlineTask parseDeadlineTask(String[] tokens) {
-        int timeRelationIndex = findTokenIndex(DEADLINE_TASK_TIME_RELATION_TOKEN, tokens, 2, tokens.length);
+        int timeRelationIndex = findTokenIndex(DEADLINE_TASK_TIME_RELATION_TOKEN, tokens,
+                TASK_MAIN_ARGUMENTS_START_INDEX, tokens.length);
         int timeStartIndex = timeRelationIndex + 1;
-        String taskDescription = getTokenSequence(tokens, 2, timeRelationIndex);
+        String taskDescription = getTokenSequence(tokens, TASK_MAIN_ARGUMENTS_START_INDEX, timeRelationIndex);
         String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);
         checkTaskDescriptionLength(taskDescription);
         checkTimeStringLength(timeStr);
@@ -168,9 +175,10 @@ public class StorageHandler {
     }
 
     private EventTask parseEventTask(String[] tokens) {
-        int timeRelationIndex = findTokenIndex(EVENT_TASK_TIME_RELATION_TOKEN, tokens, 2, tokens.length);
+        int timeRelationIndex = findTokenIndex(EVENT_TASK_TIME_RELATION_TOKEN, tokens,
+                TASK_MAIN_ARGUMENTS_START_INDEX, tokens.length);
         int timeStartIndex = timeRelationIndex + 1;
-        String taskDescription = getTokenSequence(tokens, 2, timeRelationIndex);
+        String taskDescription = getTokenSequence(tokens, TASK_MAIN_ARGUMENTS_START_INDEX, timeRelationIndex);
         String timeStr = getTokenSequence(tokens, timeStartIndex, tokens.length);
         checkTaskDescriptionLength(taskDescription);
         checkTimeStringLength(timeStr);
@@ -182,7 +190,7 @@ public class StorageHandler {
         StringBuilder tokenSequenceSb = new StringBuilder();
         for (int i = inclusiveStart; i < exclusiveEnd; i++) {
             String token = tokens[i];
-            tokenSequenceSb.append(token).append(" ");
+            tokenSequenceSb.append(token).append(TOKEN_DELIMITER);
         }
         return tokenSequenceSb.toString().strip();
     }

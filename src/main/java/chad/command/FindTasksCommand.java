@@ -15,6 +15,10 @@ import chad.ui.Ui;
 public class FindTasksCommand extends Command {
 
     private static final CommandType COMMAND_TYPE = CommandType.FIND_TASKS;
+    private static final String MISSING_QUERY_ERROR_TEMPLATE = "A query is required for \"%s\" commands.";
+    private static final String NO_MATCH_MESSAGE = "No matching tasks were found.";
+    private static final String ONE_MATCH_MESSAGE = "Here is the 1 matching task in your list:";
+    private static final String MULTIPLE_MATCHES_TEMPLATE = "Here are the %d matching tasks in your list:";
 
     private String queryTaskDescription;
 
@@ -35,18 +39,18 @@ public class FindTasksCommand extends Command {
         switch (n) {
         case 0:
             ui.startMessage()
-                    .addLine("No matching tasks were found.")
+                    .addLine(NO_MATCH_MESSAGE)
                     .displayMessage();
             break;
         case 1:
             ui.startMessage()
-                    .addLine("Here is the 1 matching task in your list:")
+                    .addLine(ONE_MATCH_MESSAGE)
                     .addFindTasksResultsList(queryResults)
                     .displayMessage();
             break;
         default:
             ui.startMessage()
-                    .addLine(String.format("Here are the %d matching tasks in your list:", n))
+                    .addLine(String.format(MULTIPLE_MATCHES_TEMPLATE, n))
                     .addFindTasksResultsList(queryResults)
                     .displayMessage();
             break;
@@ -62,7 +66,7 @@ public class FindTasksCommand extends Command {
 
     private void checkQueryTaskDescriptionLength(String queryTaskDescription) throws ChadInvalidCommandException {
         if (queryTaskDescription.length() == 0) {
-            throw new ChadInvalidCommandException(String.format("A query is required for \"%s\" commands.",
+            throw new ChadInvalidCommandException(String.format(MISSING_QUERY_ERROR_TEMPLATE,
                     getCommandType().getCommandDescription()));
         }
     }

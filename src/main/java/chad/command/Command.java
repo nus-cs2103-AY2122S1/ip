@@ -11,6 +11,7 @@ import chad.ui.Ui;
 public abstract class Command {
 
     private static final boolean MUST_EXIT = false;
+    private static final String TOKEN_DELIMITER = " ";
 
     private String command;
 
@@ -21,8 +22,8 @@ public abstract class Command {
      */
     public Command(String command) throws ChadInvalidCommandException {
         this.command = command;
-        String[] tokens = command.strip().split(" ");
-        assert tokens.length != 0 && tokens[0].length() != 0 : "The String command cannot be empty";
+        String[] tokens = command.strip().split(TOKEN_DELIMITER);
+        assert tokens.length != 0 && tokens[0].length() != 0 : "The String command cannot be empty.";
         String commandName = tokens[0];
         CommandType commandType = getCommandType();
         assert commandName.equals(commandType.getCommandName()) : String.format("This command is not \"%s\".",
@@ -62,7 +63,7 @@ public abstract class Command {
         StringBuilder tokenSequenceSb = new StringBuilder();
         for (int i = inclusiveStart; i < exclusiveEnd; i++) {
             String token = tokens[i];
-            tokenSequenceSb.append(token).append(" ");
+            tokenSequenceSb.append(token).append(TOKEN_DELIMITER);
         }
         return tokenSequenceSb.toString().strip();
     }

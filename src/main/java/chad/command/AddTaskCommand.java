@@ -11,6 +11,10 @@ import chad.ui.Ui;
  */
 public abstract class AddTaskCommand extends Command implements UndoableCommand {
 
+    private static final String ADD_TASK_SUCCESSFUL_MESSAGE = "Got it. I've added this task:";
+    private static final String MISSING_TASK_DESCRIPTION_ERROR_TEMPLATE =
+            "A description is required for \"%s\" commands.";
+
     private Task task;
     private String taskDescription;
     private int taskIndex;
@@ -37,7 +41,7 @@ public abstract class AddTaskCommand extends Command implements UndoableCommand 
         taskHandler.addTask(task);
         int numberOfTasks = taskHandler.getNumberOfTasks();
         ui.startMessage()
-                .addLine("Got it. I've added this task:")
+                .addLine(ADD_TASK_SUCCESSFUL_MESSAGE)
                 .addTask(task)
                 .addTasksListLength(numberOfTasks)
                 .displayMessage();
@@ -75,9 +79,9 @@ public abstract class AddTaskCommand extends Command implements UndoableCommand 
         return getTokenSequence(tokens, 1, tokens.length);
     }
 
-    private void checkTaskDescriptionLength(String taskDescription) throws ChadInvalidCommandException {
+    void checkTaskDescriptionLength(String taskDescription) throws ChadInvalidCommandException {
         if (taskDescription.length() == 0) {
-            throw new ChadInvalidCommandException(String.format("A description is required for \"%s\" commands.",
+            throw new ChadInvalidCommandException(String.format(MISSING_TASK_DESCRIPTION_ERROR_TEMPLATE,
                     getCommandType().getCommandDescription()));
         }
     }

@@ -24,6 +24,8 @@ import javafx.stage.Stage;
 public class ChadChatBot extends Application {
 
     private static final String APP_WINDOW_TITLE = "ChadBot";
+    private static final String FXML_PATH = "/view/Ui.fxml";
+    private static final String APP_ICON_PATH = "/images/yeschad_toleft.png";
 
     private Ui ui;
     private CommandParser commandParser;
@@ -55,7 +57,7 @@ public class ChadChatBot extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ChadChatBot.class.getResource("/view/Ui.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(ChadChatBot.class.getResource(FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             initialiseStage(stage, scene);
@@ -89,7 +91,7 @@ public class ChadChatBot extends Application {
 
     private void initialiseStage(Stage stage, Scene scene) {
         stage.setTitle(APP_WINDOW_TITLE);
-        Image appIcon = new Image("/images/yeschad_toleft.png");
+        Image appIcon = new Image(APP_ICON_PATH);
         stage.getIcons().add(appIcon);
         stage.setScene(scene);
     }

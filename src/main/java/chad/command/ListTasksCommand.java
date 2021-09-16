@@ -11,6 +11,9 @@ import chad.ui.Ui;
 public class ListTasksCommand extends Command {
 
     private static final CommandType COMMAND_TYPE = CommandType.LIST_TASKS;
+    private static final String NO_TASKS_MESSAGE = "There are no tasks in your list.";
+    private static final String SOME_TASKS_MESSAGE = "Here are the tasks in your list:";
+    private static final String UNNECESSARY_ARGUMENTS_ERROR_MESSAGE = "There were unnecessary arguments.";
 
     /**
      * Creates an ListTasksCommand instance.
@@ -25,11 +28,11 @@ public class ListTasksCommand extends Command {
     public void execute(TaskHandler taskHandler, Ui ui) throws ChadInvalidCommandException {
         if (taskHandler.getNumberOfTasks() == 0) {
             ui.startMessage()
-                    .addLine("You have no tasks in the list.")
+                    .addLine(NO_TASKS_MESSAGE)
                     .displayMessage();
         } else {
             ui.startMessage()
-                    .addLine("Here are the tasks in your list:")
+                    .addLine(SOME_TASKS_MESSAGE)
                     .addTasksList(taskHandler.getTasks())
                     .displayMessage();
         }
@@ -38,7 +41,7 @@ public class ListTasksCommand extends Command {
     @Override
     void parseCommand(String[] tokens) throws ChadInvalidCommandException {
         if (tokens.length > 1) {
-            throw new ChadInvalidCommandException("There were unnecessary arguments.");
+            throw new ChadInvalidCommandException(UNNECESSARY_ARGUMENTS_ERROR_MESSAGE);
         }
     }
 

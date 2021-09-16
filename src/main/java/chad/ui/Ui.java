@@ -119,6 +119,11 @@ public class Ui extends AnchorPane {
     private static final String EXIT_MESSAGE = "Goodbye. Hope we see each other again soon.";
     private static final String UNEXPECTED_ERROR_MESSAGE = "An unexpected error has occurred.";
     private static final String INVALID_COMMAND_ERROR_TEMPLATE = "This command is invalid.\n%s\nPlease try again.";
+    private static final String USER_IMAGE_PATH = "/images/yeschad_toleft.png";
+    private static final String BOT_NORMAL_IMAGE_PATH = "/images/gigachad_toright.png";
+    private static final String BOT_ERROR_IMAGE_PATH = "/images/gigachad_error_toright.png";
+    private static final String NOT_ONE_TASK_TEMPLATE = "Now you have %d tasks in the list.";
+    private static final String ONE_TASK_MESSAGE = "Now you have 1 task in the list.";
 
     @FXML
     private GridPane gridPane;
@@ -146,9 +151,9 @@ public class Ui extends AnchorPane {
      */
     public Ui() {
         messageFormatter = MessageFormatter.getInstance();
-        userImage = new Image(this.getClass().getResourceAsStream("/images/yeschad_toleft.png"));
-        botNormalImage = new Image(this.getClass().getResourceAsStream("/images/gigachad_toright.png"));
-        botErrorImage = new Image(this.getClass().getResourceAsStream("/images/gigachad_error_toright.png"));
+        userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_PATH));
+        botNormalImage = new Image(this.getClass().getResourceAsStream(BOT_NORMAL_IMAGE_PATH));
+        botErrorImage = new Image(this.getClass().getResourceAsStream(BOT_ERROR_IMAGE_PATH));
         isAtBottom = true;
         wasAtBottom = true;
         hasNewDialog = false;
@@ -275,9 +280,9 @@ public class Ui extends AnchorPane {
     private String getListLengthMessage(int listLength) {
         // Check whether singular or plural should be printed.
         if (listLength != 1) {
-            return String.format("Now you have %d tasks in the list.", listLength);
+            return String.format(NOT_ONE_TASK_TEMPLATE, listLength);
         } else {
-            return "Now you have 1 task in the list.";
+            return ONE_TASK_MESSAGE;
         }
     }
 

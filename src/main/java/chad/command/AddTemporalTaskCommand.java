@@ -13,6 +13,10 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
 
     private static final String DATE_TIME_FORMAT_PATTERN = "yyyy/M/d HHmm";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_PATTERN);
+    private static final String TIME_RELATION_TEMPLATE = "/%s";
+    private static final String MISSING_DATE_TIME_ERROR_TEMPLATE = "A date and time is required for \"%s\" commands.";
+    private static final String INVALID_DATE_TIME_FORMAT_ERROR_TEMPLATE =
+            "The date and time should be in the \"%s\" format.";
 
     private LocalDateTime time;
 
@@ -45,7 +49,7 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
     }
 
     private int findTimeRelationIndex(String[] tokens) {
-        String timeRelationToken = String.format("/%s", getTimeRelation());
+        String timeRelationToken = String.format(TIME_RELATION_TEMPLATE, getTimeRelation());
         for (int i = 1; i < tokens.length; i++) {
             String token = tokens[i];
             if (token.equals(timeRelationToken)) {
@@ -55,16 +59,9 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
         return tokens.length;
     }
 
-    private void checkTaskDescriptionLength(String taskDescription) throws ChadInvalidCommandException {
-        if (taskDescription.length() == 0) {
-            throw new ChadInvalidCommandException(String.format("A description is required for \"%s\" commands.",
-                    getCommandType().getCommandDescription()));
-        }
-    }
-
     private void checkTimeStringLength(String timeStr) throws ChadInvalidCommandException {
         if (timeStr.length() == 0) {
-            throw new ChadInvalidCommandException(String.format("A date and time is required for \"%s\" commands.",
+            throw new ChadInvalidCommandException(String.format(MISSING_DATE_TIME_ERROR_TEMPLATE,
                     getCommandType().getCommandDescription()));
         }
     }
@@ -74,7 +71,7 @@ public abstract class AddTemporalTaskCommand extends AddTaskCommand {
             time = LocalDateTime.parse(timeStr, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ChadInvalidCommandException(String
-                    .format("The date and time should be in the \"%s\" format.", DATE_TIME_FORMAT_PATTERN));
+                    .format(INVALID_DATE_TIME_FORMAT_ERROR_TEMPLATE, DATE_TIME_FORMAT_PATTERN));
         }
     }
 }

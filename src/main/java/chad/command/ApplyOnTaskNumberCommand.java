@@ -7,6 +7,9 @@ package chad.command;
  */
 public abstract class ApplyOnTaskNumberCommand extends Command implements UndoableCommand {
 
+    private static final String MISSING_TASK_NUMBER_ERROR_TEMPLATE = "A task number is required for \"%s\" commands.";
+    private static final String INVALID_TASK_NUMBER_ERROR_MESSAGE = "The task number is not a number.";
+
     private int taskIndex;
 
     /**
@@ -27,7 +30,7 @@ public abstract class ApplyOnTaskNumberCommand extends Command implements Undoab
 
     private void checkTaskNumberStringLength(String taskNumberString) throws ChadInvalidCommandException {
         if (taskNumberString.length() == 0) {
-            throw new ChadInvalidCommandException(String.format("A task number is required for \"%s\" commands.",
+            throw new ChadInvalidCommandException(String.format(MISSING_TASK_NUMBER_ERROR_TEMPLATE,
                     getCommandType().getCommandDescription()));
         }
     }
@@ -51,7 +54,7 @@ public abstract class ApplyOnTaskNumberCommand extends Command implements Undoab
         try {
             taskIndex = Integer.parseInt(taskNumberString) - 1;
         } catch (NumberFormatException e) {
-            throw new ChadInvalidCommandException("The task number is not a number.");
+            throw new ChadInvalidCommandException(INVALID_TASK_NUMBER_ERROR_MESSAGE);
         }
     }
 }
