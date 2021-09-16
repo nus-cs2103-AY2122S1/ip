@@ -1,7 +1,7 @@
 # User Guide
 **WoofBot** is your very own task managing bot. Simply key in the tasks that you want to keep track off, and WoofBot will keep note of it for you. Fast, clean, and easy-to-use - what more could you ask for!
 
-![WoofBot Ui](/docs/Ui.png)
+![WoofBot Ui](https://cravetocode.github.io/ip/Ui.png)
 
 ## Features
 Listed below are features available in WoofBot:
@@ -36,7 +36,7 @@ Expected outcome:
 
 Description of the outcome.
 
-![Todo](Todo.png)
+![Todo](https://cravetocode.github.io/ip/Todo.png)
 
 ### `deadline` - Add a Deadline task.
 
@@ -50,7 +50,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline](/docs/Deadline.png)
+![Deadline](https://cravetocode.github.io/ip/Deadline.png)
 
 ### `event` - Add an Event task.
 
@@ -64,7 +64,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event](/docs/Event.png)
+![Event](https://cravetocode.github.io/ip/Event.png)
 
 ### `list` - Lists all saved tasks.
 
@@ -78,7 +78,7 @@ Example of usage:
 
 Expected outcome:
 
-![List Tasks](/docs/List.png)
+![List Tasks](https://cravetocode.github.io/ip/List.png)
 
 ### `done` - Marks the specified task as completed.
 
@@ -92,7 +92,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done](/docs/Done.png)
+![Done](https://cravetocode.github.io/ip/Done.png)
 
 ### `delete` - Deletes the specified task.
 
@@ -106,7 +106,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete Task](https://cravetocode.github.io/ip/Deadline.png)
+![Delete Task](https://cravetocode.github.io/ip/Delete.png)
 
 ### `find` - Find all tasks with names that match the given keyword query.
 
@@ -120,7 +120,7 @@ Example of usage:
 
 Expected outcome:
 
-![Find Tasks](/docs/Find.png)
+![Find Tasks](https://cravetocode.github.io/ip/Find.png)
 
 ### `archive` - Archives all specified tasks.
 
@@ -135,7 +135,7 @@ Example of usage:
 
 Expected outcome:
 
-![Archive Task](/docs/Archive.png)
+![Archive Task](https://cravetocode.github.io/ip/Archive.png)
 
 ### `listarchive` - Lists all tasks in the archive.
 
@@ -149,7 +149,7 @@ Example of usage:
 
 Expected outcome:
 
-![List Archive](/docs/ArchiveList.png)
+![List Archive](https://cravetocode.github.io/ip/ArchiveList.png)
 
 ### `restore` - Restores all specified tasks.
 
@@ -164,7 +164,7 @@ Example of usage:
 
 Expected outcome:
 
-![Restore Task](/docs/Restore.png)
+![Restore Task](https://cravetocode.github.io/ip/Restore.png)
 
 ### `bye` - Exit the application.
 
@@ -178,4 +178,4 @@ Example of usage:
 
 Expected outcome:
 
-![Exit Application](/docs/Bye.png)
+![Exit Application](https://cravetocode.github.io/ip/Bye.png)
