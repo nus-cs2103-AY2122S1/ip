@@ -127,8 +127,4 @@ public class Ui {
         }
         return response;
     }
-
-    public void showLoadingError() {
-
-    }
 }

@@ -1,13 +1,6 @@
 package duke;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -16,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,10 +21,6 @@ import javafx.stage.Stage;
  * It will save the final list into the file when programmes end.
  */
 public class Duke extends Application {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -41,23 +29,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-//    public Duke(String filePath) {
-//        this.storage = new Storage(filePath);
-//        this.tasks = new TaskList(storage.load());
-//        this.ui = new Ui(this.storage, this.tasks);
-//    }
-//
-//    public void run() {
-//        boolean isExit = false;
-//        System.out.println(ui.greet());
-//        while (!isExit) {
-//            String input = ui.readLine();
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Duke("data/tasks.txt").run();
-//    }
 
     @Override
     public void start(Stage stage) {
@@ -152,8 +123,9 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Prepare the string to be returned to be showed on the GUI
+     *
+     * @param input String input that is given by the user.
      */
     private String getResponse(String input) {
         Storage storage = new Storage("data/duke.txt");
