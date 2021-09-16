@@ -1,6 +1,6 @@
-# User Guide
+# Tabby User Guide
 
-Tabby is a desktop app for managing your task list. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+**Tabby** is a desktop app for managing your task list. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 - [Features](#features)
   - [View commands](#view-commands)
@@ -15,6 +15,7 @@ Tabby is a desktop app for managing your task list. It is optimized for use via 
   - [Bye](#bye)
 - [Saving Data](#saving-data)
 - [Command Summary](#command-summary)
+
 
 ---
 
