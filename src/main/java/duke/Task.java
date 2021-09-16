@@ -35,7 +35,7 @@ public class Task {
         hasReminder = false;
     }
 
-    public Task(String description, String reminderTime){
+    public Task(String description, String reminderTime) {
         this.description = description;
         this.hasReminder = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
