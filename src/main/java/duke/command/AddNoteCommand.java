@@ -22,6 +22,15 @@ public class AddNoteCommand extends Command {
         this.command = command;
     }
 
+    private String getTypeOfCommand() {
+        return this.command.split(" ")[0];
+    }
+
+    private String getNoteDescription() {
+        String noteDescription = this.command.split(" ", 2)[1];
+        return noteDescription;
+    }
+
     /**
      * Executes the action of adding a note to the task manager Peppa.
      *
@@ -34,9 +43,10 @@ public class AddNoteCommand extends Command {
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         try {
-            String typeOfCommand = this.command.split(" ")[0];
+            String typeOfCommand = getTypeOfCommand();
             assert typeOfCommand != "note";
-            Note note = new Note(this.command);
+            String descriptionOfNote = getNoteDescription();
+            Note note = new Note(descriptionOfNote);
             notes.addNote(note);
             storage.appendToFile(note);
             return ui.respondToNote(notes.getNotes(), note);

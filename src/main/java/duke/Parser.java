@@ -1,16 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.AddCommand;
-import duke.command.AddNoteCommand;
-import duke.command.ListNoteCommand;
-import duke.command.DeleteNoteCommand;
-import duke.command.BlahCommand;
+import duke.command.*;
 
 /**
  * Parses the input given by the user for the task manager application to
@@ -48,6 +38,8 @@ public class Parser {
         } else if(firstWord.equals("n/delete")){
             String noteNumber = command.split(" ")[1];
             return new DeleteNoteCommand(noteNumber);
+        } else if(command.equals("help")) {
+            return new HelpCommand(command);
         } else {
             return new BlahCommand(command);
         }

@@ -13,6 +13,15 @@ import duke.notes.Note;
  */
 public class Ui {
     private String command;
+    private String manual = "Here's a manual: \n1. To add a task play: todo play "
+            + "\n2. To add a deadline: deadline return book /by DD/MM/YYYY HH:MM, "
+            + "\n3. To add an event: event meet friend /at DD/MM/YYYY HH:MM-HH:MM"
+            + "\n4. To indicate task as done: done 2, where 2 refers to the task number"
+            + "\n5. To delete task: delete 3, where 3 refers to the task number"
+            + "\n6. To list tasks: list" + "\n7. to find a task using keyword: find play"
+            + "\n8. To add a note: note my password is 123" + "\n9. To list the notes: n/list"
+            + "\n10. To delete a note: n/delete 2, where 2 refers to to note number"
+            + "\n11. To exit the application: Bye";
 
     /**
      * Prints out the error that has occurred.
@@ -31,17 +40,7 @@ public class Ui {
      * @return Welcome message to guide users what to do.
      */
     public String showWelcome() {
-        String instructions = "Here's a manual: \n1. To add a task play: todo play "
-                + "\n2. To add a deadline: deadline return book /by 02/12/2021 18:00, "
-                + "\n3. To add an event: event meet friend /at 02/12/2021 18:00 - 19:00"
-                + "\n4. To indicate task as done: done 2, where 2 refers to the task number"
-                + "\n5. To delete task: delete 3, where 3 refers to the task number"
-                + "\n6. To list tasks: list" + "\n7. to find a task using keyword: find play"
-                + "\n8. To add a note: note my password is 123" + "\n9. To list the notes: n/list"
-                + "\n10. To delete a note: n/delete 2, where 2 refers to to note number"
-                + "\n11. To exit the application: Bye";
-        String welcomeMessage =  "Hello! I'm Peppa \n" + instructions;
-        System.out.println(welcomeMessage);
+        String welcomeMessage =  "Hello! I'm Peppa \n" + this.manual;
         return welcomeMessage;
     }
 
@@ -86,8 +85,14 @@ public class Ui {
      */
     public String respondToDelete(ArrayList<Task> tasks, Task task) {
         String numberOfTasks = Integer.toString(tasks.size());
+        String taskString = ""; //This variable either stores the plural or singular form of task based on the number of notes.
+        if(tasks.size() == 1) {
+            taskString = " task";
+        } else {
+            taskString = " tasks";
+        }
         String responseToDelete = "\tNoted. I've removed this task: \n\t\t" + task.toString() +
-                "\n\tNow you have " + numberOfTasks + " tasks in the list.";
+                "\n\tNow you have " + numberOfTasks + taskString + " in the list.";
         return responseToDelete;
     }
 
@@ -100,8 +105,14 @@ public class Ui {
      */
     public String respondToTodo(ArrayList<Task> tasks, ToDo todo) {
         String numberOfTasks = Integer.toString(tasks.size());
+        String taskString = ""; //This variable either stores the plural or singular form of task based on the number of notes.
+        if(tasks.size() == 1) {
+            taskString = " task";
+        } else {
+            taskString = " tasks";
+        }
         String responseToToDo = "\t" + "Got it. I've added this task: " + "\n\t" + todo.toString() +
-                "\n\tNow you have " + numberOfTasks + " tasks in the list.";
+                "\n\tNow you have " + numberOfTasks + taskString + " in the list.";
         return responseToToDo;
     }
 
@@ -114,8 +125,14 @@ public class Ui {
      */
     public String respondToEvent(ArrayList<Task> tasks, Event event) {
         String numberOfTasks = Integer.toString(tasks.size());
+        String taskString = ""; //This variable either stores the plural or singular form of task based on the number of notes.
+        if(tasks.size() == 1) {
+            taskString = " task";
+        } else {
+            taskString = " tasks";
+        }
         String responseToEvent = "\tGot it. I've added this task: " + "\n\t" + event.toString() +
-                "\n\tNow you have " + numberOfTasks+ " tasks in the list.";
+                "\n\tNow you have " + numberOfTasks + taskString + " in the list.";
         return responseToEvent;
     }
 
@@ -128,8 +145,14 @@ public class Ui {
      */
     public String respondToDeadline(ArrayList<Task> tasks, Deadline deadline) {
         String numberOfTasks = Integer.toString(tasks.size());
+        String taskString = ""; //This variable either stores the plural or singular form of task based on the number of notes.
+        if(tasks.size() == 1) {
+            taskString = " task";
+        } else {
+            taskString = " tasks";
+        }
         String responseToDeadline = "\t" + "Got it. I've added this task: " + "\n\t" + deadline.toString() +
-                "\n\tNow you have " + numberOfTasks + " tasks in the list.";
+                "\n\tNow you have " + numberOfTasks + taskString + " in the list.";
         return responseToDeadline;
     }
 
@@ -177,8 +200,14 @@ public class Ui {
      */
     public String respondToNote(ArrayList<Note> notes, Note note) {
         String numberOfNotes = Integer.toString(notes.size());
+        String noteString = ""; //This variable stores the plural or singular form of note based on the number of notes.
+        if(notes.size() == 1) {
+            noteString = " note";
+        } else {
+            noteString = " notes";
+        }
         String responseToNote = "\t" + "Got it. I've added this note: " + "\n\t\t" + note.toString() +
-                "\n\tNow you have " + numberOfNotes + " notes in the list.";
+                "\n\tNow you have " + numberOfNotes + noteString + " in the list.";
         return responseToNote;
     }
 
@@ -207,8 +236,23 @@ public class Ui {
      */
     public String respondToDeleteNote(ArrayList<Note> notes, Note note) {
         String numberOfNotes = Integer.toString(notes.size());
+        String noteString = ""; //This variable stores the plural or singular form of note based on the number of notes.
+        if(notes.size() == 1) {
+            noteString = " note";
+        } else {
+            noteString = " notes";
+        }
         String responseToDeleteNote = "\tNoted. I've removed this note: \n\t\t" + note.toString() +
-                "\n\tNow you have " + numberOfNotes + " notes in the list.";
+                "\n\tNow you have " + numberOfNotes + noteString + " in the list.";
         return responseToDeleteNote;
+    }
+
+    /**
+     * Prints the manual on the user interface for users to refer to for the commands.
+     *
+     * @return String message of the manual of the task manager Peppa.
+     */
+    public String respondToHelp() {
+        return this.manual;
     }
 }

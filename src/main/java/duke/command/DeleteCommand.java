@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         try {
             Integer number = Integer.valueOf(this.taskNumber);
-            if(number < 0 || number > tasks.getNumberOfTasks()) {
+            if(number <= 0 || number > tasks.getNumberOfTasks()) {
                 return ui.showError("You have entered a index that does not correspond to any task.");
             }
             ArrayList<Task> originalTaskList = tasks.getTasks();

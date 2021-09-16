@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         try {
             Integer count = Integer.valueOf(this.taskNumber);
-            if(count < 0 || count > tasks.getNumberOfTasks()) {
+            if(count <= 0 || count > tasks.getNumberOfTasks()) {
                 return ui.showError("You have entered a index that does not correspond to any task.");
             }
             tasks.getTask(count - 1).markAsDone();

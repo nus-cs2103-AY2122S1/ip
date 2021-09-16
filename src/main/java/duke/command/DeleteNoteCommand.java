@@ -34,7 +34,7 @@ public class DeleteNoteCommand extends Command {
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         try {
             Integer number = Integer.valueOf(this.noteNumber);
-            if(number < 0 || number > notes.getNumberOfNotes()) {
+            if(number <= 0 || number > notes.getNumberOfNotes()) {
                 return ui.showError("You have entered a index that does not correspond to any note.");
             }
             Note note = notes.getNote(number - 1);

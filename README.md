@@ -1,63 +1,34 @@
-# **Peppa User Guide** 😁
+# 🐷 **Peppa User Guide**
 
 # PeppaTaskHandler
 
-> "Your mind is for having ideas, not holding them.”
-> - David Allen [source](https://dansilvestre.com/productivity-quotes/)
-
-PeppaTaskHandler makes it much easier to plan and manage your tasks on a daily basis. It's
-
-- easy to use
-- easy to learn
-- very ~~fast~~ responsive
+### *Peppa's got your back* 🤪
+> Oink oink!
+> - It's easy to manage tasks with my help!
+> - I am very **fast and responsive** - peppa
 
 To start using the application,
-
 1. download java if you have yet to install!
-2. download the application
-3. open it via your terminal
-4. tell peppa your tasks and notes
-5. Enjoy as Peppa oinks away and managed all your tasks and notes for you 🤩
-
-Most importantly, DukeTaskHandler is **free** 🤪
+2. download Peppa from [PeppaTaskHandler](https://github.com/Neha-5678/ip/releases/tag/A-Release)
+3. open your terminal and type java -jar peppa.jar
+   4Enjoy as Peppa oinks away and manages all your tasks and notes for you 🤩
 
 ## *Features that Peppa has to offer you* 🐷
-
-###1. Feature Add Todo
-* Adds a **Todo** in your list of tasks
-
-###2. Feature Add Deadline
-* Adds a **Deadline** in your list of tasks
-
-###3. Feature Add Event
-* Adds an **Event** in your list of tasks
-
-###4. Feature List
-* **List** all the tasks that you have added to Peppa
-
-###5. Feature Delete
-* **Deletes** a particular task for you if you no longer need it
-
-###6. Feature Done
-* Indicated a task as **done** if you have completed it
-
-###7. Feature Find a task by a keyword
-* Helps you **find** a task by typing a keyword
-
-###8. Feature Add a Note
-* Allows you to **add a Note** to remind yourself of details
-
-###9. Feature List all notes
-* **Lists all the notes** that you have added to Peppa
-
-###10. Feature Exit application
-* **Say bye** to *Peppa* before you close the application!
-
+1. Feature Add Todo
+2. Feature Add Deadline
+3. Feature Add Event
+4. Feature List
+5. Feature Delete
+6. Feature Done
+7. Feature Find a task by a keyword
+8. Feature Add a Note
+9. Feature List all notes
+10. Feature Delete a Note
 ## Usage
 
 ### 🖊️`todo`
 
-*This action adds a Todo to the list of tasks and Peppa will respond with the todo that has been added and the total number of tasks in the list.*
+*Adds a Todo*
 
 Example of usage:
 
@@ -72,7 +43,7 @@ Now you have 2 tasks in the list.
 ```
 ### 	⏰`deadline`
 
-*This action adds a Deadline to the list of tasks and Peppa will respond with the deadline that has been added and the total number of tasks in the list.*
+*Adds a Deadline*
 
 Example of usage:
 
@@ -88,7 +59,7 @@ Now you have 3 tasks in the list.
 
 ### 📆`event`
 
-*This action adds an Event to the list of tasks and Peppa will respond with the event that has been added and the total number of tasks in the list.*
+*Adds an Event*
 
 Example of usage:
 
@@ -104,7 +75,7 @@ Now you have 4 tasks in the list.
 
 ### 📄`list`
 
-*This action lists all the tasks in the order that you have told Peppa. It will also indicate the type of each task and whether the task has been done.*
+*Lists all the tasks in the order that you have told Peppa.*
 
 Example of usage:
 
@@ -123,8 +94,7 @@ Here are the tasks in your list:
 
 ### 🗑️`delete`
 
-*This action requires a task number and deletes the task that corresponds to that number.
-Peppa will respond with the task that has been deleted and the total number of tasks left in the list.*
+*Deletes a task.*
 
 Example of usage:
 
@@ -140,8 +110,7 @@ Now you have 3 tasks in the list.
 
 ### `done`
 
-*This action requires a task number and indicates the task that corresponds to that number as done.
-Peppa will respond with the task that has been indicated as done.*
+*Indicates a task as done.*
 
 Example of usage:
 
@@ -155,8 +124,7 @@ Nice! I've marked this task as done:
 ```
 ### 🔍`find`
 
-*This action requires a keyword and Peppa will respond with the tasks that match with the keyword.
-The aim is to allow users to find their tasks more easily especially when the list gets longer 😅*
+*Find tasks that match with a keyword.*
 
 Example of usage:
 
@@ -171,7 +139,7 @@ Here are the matching tasks in your list:
 
 ### 📕`note`
 
-*This action adds a note and Peppa responds with the note that you have added and the total number of notes.*
+*Adds a Note.*
 
 Example of usage:
 
@@ -184,9 +152,9 @@ Got it. I've added this note:
     password is 123
 Now you have 2 tasks in the list.
 ```
-### `List of Notes`
+### `n/list`
 
-*This action asks Peppa to list all the notes stored in the order that they were added and states the total number of notes.*
+*List all the notes.*
 
 Example of usage:
 
@@ -198,6 +166,21 @@ Expected outcome:
 Got it. I've added this note:
     password is 123
 Now you have 2 notes in the list.
+```
+### `n/delete`
+
+*Deletes a note.*
+
+Example of usage:
+
+`n/delete 2`
+
+Expected outcome:
+
+```
+Noted. I've removed this note:
+    password is 123
+Now you have 1 note in the list.
 ```
 
 ### 👋`bye` - Describe action
