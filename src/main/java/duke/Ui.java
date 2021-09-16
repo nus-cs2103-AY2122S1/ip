@@ -95,6 +95,9 @@ public class Ui {
      * @return A string with all matching tasks.
      */
     public String showReminderTasks(TaskList taskList) {
+        if (taskList.isEmpty()) {
+            return "You have no tasks due in the next 7 days!";
+        }
         return "Reminder: These are the tasks due in the next 7 days." + taskList;
     }
 

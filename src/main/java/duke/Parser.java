@@ -54,7 +54,7 @@ public class Parser {
             return new DeadlineCommand(arguments);
         case "find":
             return new FindCommand(arguments);
-        case "remind":
+        case "reminder":
             return new ReminderCommand();
         default:
             throw new DukeException("Invalid Command Entered");
