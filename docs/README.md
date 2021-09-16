@@ -10,9 +10,9 @@ Fret not! Duke remembers these tasks for you - whether they be todos, upcoming d
    * Deadline
    * Event
 2. Mark tasks as completed
-3. Tag tasks
-4. Search for a task you added before
-5. Delete tasks that you are completed
+3. Add tags to tasks
+4. Search for a task you have added before
+5. Delete any task
 6. An intuitive GUI
 
 ### ToDo
@@ -31,15 +31,15 @@ Events are tasks with a description and a date at which they take place.
 ## Usage
 
 Note: 
-* Dates should be in the following format `yyyy-mm-dd`
+* Dates should be entered in the following format `yyyy-mm-dd`
 
 ### `todo <description>` - Adds a ToDo
 
-Adds a ToDo to your task list
+Adds a ToDo to your task list.
 
 Usage example:
 
-```todo ```
+```todo final presentation```
 
 
 ### `deadline <description> by <date>` - Adds a Deadline
