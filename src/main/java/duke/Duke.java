@@ -33,7 +33,9 @@ public class Duke {
 
     private Parser parser;
 
-
+//    public Duke(Parser p) {
+//        this.parser = p;
+//    }
     public Duke() {
         parser = new Parser(myScanner);
     }
@@ -72,50 +74,50 @@ public class Duke {
         return count;
     }
 
-    static void saveTasks(List<Task> tasks) {//Called on "bye"
-        try {
-            File data_file = new File("Data/DukeData.txt");
-            FileWriter writer = new FileWriter("Data/DukeData.txt");//Overwriting entire file
-            for (Task task : tasks) {
-                writer.write(task.toString());
-                writer.write("\n");
-            }
-            writer.close();
-            if (data_file.createNewFile()) {
-                System.out.println("File created: " + data_file.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    static void saveTasks(List<Task> tasks) {//Called on "bye"
+//        try {
+//            File data_file = new File("Data/DukeData.txt");
+//            FileWriter writer = new FileWriter("Data/DukeData.txt");//Overwriting entire file
+//            for (Task task : tasks) {
+//                writer.write(task.toString());
+//                writer.write("\n");
+//            }
+//            writer.close();
+//            if (data_file.createNewFile()) {
+//                System.out.println("File created: " + data_file.getName());
+//            } else {
+//                System.out.println("File already exists.");
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    static void readFile(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String currLine = s.nextLine();
-            char taskType = currLine.charAt(1);
-            switch (taskType) {
-            case 'T':
-                toDo.add(new ToDo(currLine.substring(7)));
-                System.out.println(new ToDo(currLine.substring(7)));
-                break;
-            case 'D':
-                int l = currLine.indexOf("(");
-                int n = currLine.indexOf(")");
-                toDo.add(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
-                System.out.println(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
-                break;
-            case 'E':
-                int i = currLine.indexOf("(");
-                int k = currLine.indexOf(")");
-                toDo.add(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
-                System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
-                break;
-            }
-        }
-    }
+//    static void readFile(String filePath) throws FileNotFoundException {
+//        File f = new File(filePath); // create a File for the given file path
+//        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+//        while (s.hasNext()) {
+//            String currLine = s.nextLine();
+//            char taskType = currLine.charAt(1);
+//            switch (taskType) {
+//            case 'T':
+//                toDo.add(new ToDo(currLine.substring(7)));
+//                System.out.println(new ToDo(currLine.substring(7)));
+//                break;
+//            case 'D':
+//                int l = currLine.indexOf("(");
+//                int n = currLine.indexOf(")");
+//                toDo.add(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
+//                System.out.println(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
+//                break;
+//            case 'E':
+//                int i = currLine.indexOf("(");
+//                int k = currLine.indexOf(")");
+//                toDo.add(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
+//                System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
+//                break;
+//            }
+//        }
+//    }
 
 }
