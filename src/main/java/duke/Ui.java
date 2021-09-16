@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Prints the tasks that has been completed by the user.
+     * Prints the tasks that has been completed by user.
      *
      * @param tasks Collection of tasks in the task manager application.
      * @param taskNumber Number of the task that has been completed in the list of tasks.
