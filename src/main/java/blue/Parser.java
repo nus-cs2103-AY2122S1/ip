@@ -55,12 +55,13 @@ public class Parser {
      */
     public static String[] getArguments(String input) {
         assert input != null : "Input should be a String (possibly empty)";
-        if (input.length() > 0) {
-            String[] split = input.split(" ");
-            if (split.length >= 2) {
-                return Arrays.copyOfRange(split, 1, split.length);
-            }
+        if (input.length() == 0) {
+            return new String[]{};
         }
-        return new String[]{};
+        String[] split = input.split(" ");
+        if (split.length < 2) {
+            return new String[]{};
+        }
+        return Arrays.copyOfRange(split, 1, split.length);
     }
 }

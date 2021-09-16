@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class ParserTest {
     @Test
     public void getArguments_nullInput_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> Parser.getArguments(null));
+        assertThrows(AssertionError.class, () -> Parser.getArguments(null));
     }
 
     @Test

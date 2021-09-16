@@ -33,19 +33,27 @@ class Storage {
      * @return A List of Tasks.
      */
     List<Task> load() throws BlueException {
-        List<Task> tasks = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         try {
             String allContent = Files.readString(Path.of(filePath)).strip();
             String[] taskRepresentations = allContent.split(DIVIDER);
-            for (String taskRepresentation : taskRepresentations) {
-                if (taskRepresentation.length() > 0) {
-                    Task task = makeTask(taskRepresentation);
-                    tasks.add(task);
-                }
-            }
-            return tasks;
+            addAll(taskList, taskRepresentations);
+            return taskList;
         } catch (IOException e) {
             throw new BlueException("An error occurred when loading from " + filePath);
+        }
+    }
+
+    private void addAll(List<Task> tasks, String[] taskRepresentations) throws BlueException {
+        for (String taskRepresentation : taskRepresentations) {
+            addTaskIfValid(tasks, taskRepresentation);
+        }
+    }
+
+    private void addTaskIfValid(List<Task> tasks, String taskRepresentation) throws BlueException {
+        if (taskRepresentation.length() > 0) {
+            Task task = makeTask(taskRepresentation);
+            tasks.add(task);
         }
     }
 
@@ -78,32 +86,39 @@ class Storage {
             throw new BlueException(CANNOT_CREATE_TASK_MESSAGE);
         }
 
-        boolean isDone;
-        if (lines[2].equals(DONE)) {
-            isDone = true;
-        } else if (lines[2].equals(NOT_DONE)) {
-            isDone = false;
-        } else {
-            throw new BlueException(CANNOT_CREATE_TASK_MESSAGE);
-        }
+        boolean isDone = getDoneStatus(lines);
         if (isDone) {
             task.markDone();
         }
         return task;
     }
 
-    void save(TaskList tasks) {
+    private boolean getDoneStatus(String[] lines) throws BlueException {
+        if (lines[2].equals(DONE)) {
+            return true;
+        } else if (lines[2].equals(NOT_DONE)) {
+            return false;
+        } else {
+            throw new BlueException(CANNOT_CREATE_TASK_MESSAGE);
+        }
+    }
+
+    void save(TaskList taskList) {
         try {
             createIfNotExists(filePath);
             BufferedWriter writer = Files.newBufferedWriter(Path.of(filePath));
-            for (Task task : tasks.getAll()) {
-                writer.write(makeString(task));
-                writer.write(DIVIDER);
-            }
+            writeAllTasks(writer, taskList.getAll());
             writer.flush();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void writeAllTasks(BufferedWriter writer, List<Task> all) throws IOException {
+        for (Task task : all) {
+            writer.write(makeString(task));
+            writer.write(DIVIDER);
         }
     }
 
