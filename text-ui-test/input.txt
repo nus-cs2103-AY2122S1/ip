@@ -1,0 +1,33 @@
+list
+todo do homework
+deadline assignment /by 2021-12-01
+event dinner /at 6pm
+deadline submission /by 2021-08-21
+event @something /at today
+done 1
+done 4
+delete 2
+list
+invalid command
+blah
+todo
+deadline
+deadline nowhitespace /by
+deadline whitespace /by
+deadline something /by invalidDate
+deadline  /by 2021-08-21
+deadline some,comma /by sometime
+deadline something /at 2021-08-21
+event
+event nowhitespace /at
+event whitespace /at
+event  /at tonight
+event some,comma /at today
+event something /by sometime
+done 1000
+done 0
+done -1
+delete 1000
+delete 0
+delete -1
+bye
