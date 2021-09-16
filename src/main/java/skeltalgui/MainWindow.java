@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lady.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/skeleton.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/monkey.png"));
 
     /**
      * Initialize a dialogContainer.
