@@ -52,7 +52,6 @@ public class MainWindow extends AnchorPane {
 		scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 		String input = userInput.getText();
 		String response = duke.getResponse(input, ui);
-		System.out.println(response);
 		dialogContainer.getChildren().addAll(
 				DialogBox.getUserDialog(input, userImage),
 				DialogBox.getEmptyBox(20, 30),

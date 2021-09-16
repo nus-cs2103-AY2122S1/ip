@@ -103,6 +103,9 @@ public class Parser {
         try {
             String[] parsedString = input.split("\\s", 2);
             String word = parsedString[1].trim();
+            if (word.isEmpty() || word.isBlank()) {
+                throw new EmptyDescriptionException("Please enter a word to search the list");
+            }
             return new FindCommand(word);
         } catch (ArrayIndexOutOfBoundsException ex) {
             throw new EmptyDescriptionException("Please enter a word to search the list");
@@ -273,6 +276,9 @@ public class Parser {
     private static TasksOnCommand parseTasksOn(String input) {
         try {
             String[] parsedString = input.split("\\s", 2);
+            if (parsedString[1].strip().isBlank() || parsedString[1].strip().isEmpty()) {
+                throw new EmptyDescriptionException("Please enter a date to view all the tasks due");
+            }
             LocalDate date = DateTimeParser.deadlineDateParse(parsedString[1].trim());
             return new TasksOnCommand(date);
         } catch (ArrayIndexOutOfBoundsException ex) {
