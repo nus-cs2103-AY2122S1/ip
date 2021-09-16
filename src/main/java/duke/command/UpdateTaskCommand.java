@@ -10,6 +10,9 @@ import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
 
+/**
+ * A class that represents a command that will update tasks.
+ */
 public class UpdateTaskCommand extends Command {
     private int taskNum;
     private String newDescription;

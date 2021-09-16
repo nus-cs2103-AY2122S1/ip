@@ -8,6 +8,9 @@ import duke.TaskList;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 
+/**
+ * A class that represents a command that will query tasks.
+ */
 public class QueryCommand extends Command {
     /**
      * The type of the command.

@@ -7,6 +7,9 @@ import duke.exception.DukeException;
 import duke.exception.IndexMismatchException;
 import duke.task.Task;
 
+/**
+ * A class that represents a command that will modify tasks.
+ */
 public class ModifyTaskCommand extends Command {
     /**
      * The type of the command.

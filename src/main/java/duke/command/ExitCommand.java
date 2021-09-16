@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * A class that represents a command that exit Duke.
+ */
 public class ExitCommand extends Command {
     /**
      * Constructs a {@code ExitCommand} object.
