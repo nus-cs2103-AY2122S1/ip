@@ -2,7 +2,7 @@ package duke.ui;
 
 import java.io.IOException;
 
-import duke.main.Duke;
+import duke.main.DuC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private final Duke duke = new Duke("taskFile/taskList.txt");
+    private final DuC duC = new DuC("taskFile/taskList.txt");
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -20,7 +20,7 @@ public class Main extends Application {
             assert (ap.getPrefWidth() == 500) : "Undesirable attributes";
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuC(duC);
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {

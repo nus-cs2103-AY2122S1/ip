@@ -1,12 +1,12 @@
 package duke.exceptions;
 
-public abstract class DukeException extends RuntimeException {
+public abstract class DucException extends RuntimeException {
     private static final String DEFAULT_STRING = "Please type in 'help' for instructions";
     /**
      * Constructor for Duke Exception class
      * @param message Error message
      */
-    public DukeException(String message) {
+    public DucException(String message) {
         super(message);
     }
 

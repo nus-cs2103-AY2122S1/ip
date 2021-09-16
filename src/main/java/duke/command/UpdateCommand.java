@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeSyntaxErrorException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucSyntaxErrorException;
 import duke.main.TaskList;
 import duke.task.Task;
 
 public class UpdateCommand extends Command {
-    private static final String ACKNOWLEDGEMENT = "Noted, I have updated the task at position ";
+    private static final String ACKNOWLEDGEMENT = "Deal, I have updated the task at position ";
     private final String description;
     private final TaskList taskList;
 
@@ -24,7 +24,7 @@ public class UpdateCommand extends Command {
     public String reply() {
         String[] commandComponents = this.description.split(" ", 3);
         if (commandComponents.length < 3) {
-            throw new DukeIncompleteException();
+            throw new DucIncompleteException();
         }
         String indexString = commandComponents[0];
         String taskType = commandComponents[1];
@@ -33,7 +33,7 @@ public class UpdateCommand extends Command {
         try {
             index = Integer.parseInt(indexString);
         } catch (NumberFormatException e) {
-            throw new DukeSyntaxErrorException(indexString);
+            throw new DucSyntaxErrorException(indexString);
         }
         Task newTask;
         switch (taskType.toLowerCase()) {
@@ -47,7 +47,7 @@ public class UpdateCommand extends Command {
             newTask = taskList.replaceTask(taskInfo, Task.Type.EVENT, index);
             break;
         default:
-            throw new DukeSyntaxErrorException(taskType);
+            throw new DucSyntaxErrorException(taskType);
         }
         return ACKNOWLEDGEMENT + index + " as:\n" + newTask;
     }

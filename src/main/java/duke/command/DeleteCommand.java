@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeSyntaxErrorException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucSyntaxErrorException;
 import duke.main.TaskList;
 
 public class DeleteCommand extends Command {
 
     private static final String REPLY_DELETE_ALL =
-            "Noted! I've deleted all tasks and reset your list";
+            "Consider it done! The list is now as empty as your pathetic life";
     private static final String REPLY_DELETE =
             "Noted! I've deleted the following task: \n";
     private final String description;
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
     @Override
     public String reply() {
         if (description.length() <= 0) {
-            throw new DukeIncompleteException();
+            throw new DucIncompleteException();
         } else if (description.equalsIgnoreCase("all")) {
             taskList.deleteAll();
             return REPLY_DELETE_ALL;
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             index = Integer.parseInt(description);
             return REPLY_DELETE + taskList.delete(index);
         } catch (NumberFormatException e) {
-            throw new DukeSyntaxErrorException(description);
+            throw new DucSyntaxErrorException(description);
         }
     }
 }

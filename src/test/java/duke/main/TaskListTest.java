@@ -1,8 +1,8 @@
 package duke.main;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeOutOfBoundException;
-import duke.exceptions.DukeWrongCommandException;
+import duke.exceptions.DucException;
+import duke.exceptions.DucOutOfBoundException;
+import duke.exceptions.DucWrongCommandException;
 import duke.task.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,8 +32,8 @@ public class TaskListTest {
 
     @Test
     public void testDone() {
-        assertThrows(DukeException.class, () -> taskList.done(10));
-        assertThrows(DukeOutOfBoundException.class, () -> taskList.done(-1));
+        assertThrows(DucException.class, () -> taskList.done(10));
+        assertThrows(DucOutOfBoundException.class, () -> taskList.done(-1));
         taskList.done(1);
         assertTrue(taskList.get(1).isCompleted());
         taskList.doneAll();
@@ -43,8 +43,8 @@ public class TaskListTest {
 
     @Test
     public void testDelete() {
-        assertThrows(DukeException.class, () -> taskList.delete(10));
-        assertThrows(DukeOutOfBoundException.class, () -> taskList.delete(-1));
+        assertThrows(DucException.class, () -> taskList.delete(10));
+        assertThrows(DucOutOfBoundException.class, () -> taskList.delete(-1));
         taskList.delete(1);
         assertEquals(2, taskList.size());
         taskList.deleteAll();
@@ -61,9 +61,9 @@ public class TaskListTest {
         assertEquals(5, taskList.size());
         taskList.addTask("cs2101 OP 1 /at 2021-08-30", Task.Type.EVENT);
         assertEquals(6, taskList.size());
-        assertThrows(DukeWrongCommandException.class,
+        assertThrows(DucWrongCommandException.class,
                 () -> taskList.addTask("play Liszt", Task.Type.DEADLINE));
-        assertThrows(DukeWrongCommandException.class,
+        assertThrows(DucWrongCommandException.class,
                 () -> taskList.addTask("play Liszt", Task.Type.EVENT));
     }
 }

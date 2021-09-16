@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeInvalidFormatException;
-import duke.exceptions.DukeWrongCommandException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucInvalidFormatException;
+import duke.exceptions.DucWrongCommandException;
 
 public class TestEvent {
     /**
@@ -35,16 +35,16 @@ public class TestEvent {
      */
     @Test
     public void test2() {
-        assertThrows(DukeIncompleteException.class, () -> {
+        assertThrows(DucIncompleteException.class, () -> {
             Event eventTestObject1 = new Event("");
         });
-        assertThrows(DukeWrongCommandException.class, () -> {
+        assertThrows(DucWrongCommandException.class, () -> {
             Event eventTestObject2 = new Event("an event");
         });
-        assertThrows(DukeWrongCommandException.class, () -> {
+        assertThrows(DucWrongCommandException.class, () -> {
             Event eventTestObject3 = new Event("an event /by today");
         });
-        assertThrows(DukeInvalidFormatException.class, () -> {
+        assertThrows(DucInvalidFormatException.class, () -> {
             Event eventTestObject4 = new Event("an event /at today");
         });
     }

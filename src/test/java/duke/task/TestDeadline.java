@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeInvalidFormatException;
-import duke.exceptions.DukeWrongCommandException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucInvalidFormatException;
+import duke.exceptions.DucWrongCommandException;
 
 public class TestDeadline {
 
@@ -36,16 +36,16 @@ public class TestDeadline {
      */
     @Test
     public void test2() {
-        assertThrows(DukeIncompleteException.class, () -> {
+        assertThrows(DucIncompleteException.class, () -> {
             Deadline deadlineTestObject2 = new Deadline("");
         });
-        assertThrows(DukeWrongCommandException.class, () -> {
+        assertThrows(DucWrongCommandException.class, () -> {
             Deadline deadlineTestObject3 = new Deadline("a deadline");
         });
-        assertThrows(DukeWrongCommandException.class, () -> {
+        assertThrows(DucWrongCommandException.class, () -> {
             Deadline deadlineTestObject4 = new Deadline("a deadline /at today");
         });
-        assertThrows(DukeInvalidFormatException.class, () -> {
+        assertThrows(DucInvalidFormatException.class, () -> {
             Deadline deadlineTestObject5 = new Deadline("a deadline /by today");
         });
     }

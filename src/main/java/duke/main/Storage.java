@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
+import duke.exceptions.DucException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -84,7 +84,7 @@ public class Storage {
             sc.close();
         } catch (IOException e) {
             System.out.println("Cannot find file specified");
-        } catch (DukeException e) {
+        } catch (DucException e) {
             System.out.println(e.getMessage());
         }
     }

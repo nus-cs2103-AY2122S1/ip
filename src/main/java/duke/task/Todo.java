@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeWrongCommandException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucWrongCommandException;
 
 public class Todo extends Task {
     private final String taskName;
@@ -12,11 +12,11 @@ public class Todo extends Task {
     public Todo(String taskName) {
         super(taskName);
         if (taskName.length() == 0) {
-            throw new DukeIncompleteException();
+            throw new DucIncompleteException();
         } else if (taskName.contains("/by")) {
-            throw new DukeWrongCommandException("Deadline");
+            throw new DucWrongCommandException("Deadline");
         } else if (taskName.contains("/at")) {
-            throw new DukeWrongCommandException("Event");
+            throw new DucWrongCommandException("Event");
         }
         this.taskName = taskName;
     }

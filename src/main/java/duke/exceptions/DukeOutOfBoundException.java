@@ -1,7 +1,0 @@
-package duke.exceptions;
-
-public class DukeOutOfBoundException extends DukeException {
-    public DukeOutOfBoundException() {
-        super("The index is out of range bro\n");
-    }
-}

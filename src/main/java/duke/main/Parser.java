@@ -12,13 +12,13 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TaskCommand;
 import duke.command.UpdateCommand;
-import duke.exceptions.DukeSyntaxErrorException;
+import duke.exceptions.DucSyntaxErrorException;
 import duke.task.Task;
 
 public class Parser {
 
     /**
-     * Convert YYYY-MM-DD format to MMM dd YYY format (for representing time in Duke)
+     * Convert YYYY-MM-DD format to MMM dd YYY format (for representing time in DuC)
      * @param date date in (yyyy-mm-dd) format
      * @return date in MMM dd YYY format
      */
@@ -69,7 +69,7 @@ public class Parser {
         case "update":
             return new UpdateCommand(description, taskList);
         default:
-            throw new DukeSyntaxErrorException(type);
+            throw new DucSyntaxErrorException(type);
         }
     }
 }

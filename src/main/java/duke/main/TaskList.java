@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.exceptions.DukeOutOfBoundException;
+import duke.exceptions.DucOutOfBoundException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -47,7 +47,7 @@ public class TaskList {
      */
     public Task done(int index) {
         if (index > taskList.size() || index <= 0) {
-            throw new DukeOutOfBoundException();
+            throw new DucOutOfBoundException();
         } else {
             index--;
             Task doneTask = taskList.remove(index);
@@ -80,7 +80,7 @@ public class TaskList {
      */
     public Task delete(int index) {
         if (index > taskList.size() || index <= 0) {
-            throw new DukeOutOfBoundException();
+            throw new DucOutOfBoundException();
         } else {
             index--;
             return taskList.remove(index);
@@ -99,7 +99,7 @@ public class TaskList {
 
     public Task get(int index) {
         if (index > taskList.size() || index <= 0) {
-            throw new DukeOutOfBoundException();
+            throw new DucOutOfBoundException();
         } else {
             index--;
             return taskList.get(index);
@@ -147,12 +147,15 @@ public class TaskList {
 
     /**
      * Update a task at a specify index number
-     * @param task
-     * @param type
-     * @param index
-     * @return
+     * @param task Task description to be replaced
+     * @param type Type of task being replaced
+     * @param index Index number indicated
+     * @return task replacement
      */
     public Task replaceTask(String task, Task.Type type, int index) {
+        if (index <= 0 || index > taskList.size()) {
+            throw new DucOutOfBoundException();
+        }
         task = task.trim();
         Task newTask;
         switch (type) {
@@ -166,7 +169,8 @@ public class TaskList {
             newTask = new Todo(task);
         }
         index--;
-        this.taskList.remove(index);
+        Task deleted = this.taskList.remove(index);
+        assert (!taskList.contains(deleted));
         this.taskList.add(index, newTask);
         return newTask;
     }

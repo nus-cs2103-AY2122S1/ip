@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeSyntaxErrorException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucSyntaxErrorException;
 import duke.main.TaskList;
 
 public class DoneCommand extends Command {
     private static final String REPLY_DONE_ALL =
-            "Nice! I've marked all tasks in your list as done!";
+            "Wonderful! You've completed everything in your list!";
     private static final String REPLY_DONE =
-            "Nice! I've marked this task as done: \n";
+            "Okay, I've marked the following task as done: \n";
     private final String description;
     private final TaskList taskList;
 
@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
     @Override
     public String reply() {
         if (description.length() == 0) {
-            throw new DukeIncompleteException();
+            throw new DucIncompleteException();
         } else if (description.equalsIgnoreCase("all")) {
             taskList.doneAll();
             return REPLY_DONE_ALL;
@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
             int taskIndex = Integer.parseInt(description);
             return REPLY_DONE + taskList.done(taskIndex);
         } catch (NumberFormatException e) {
-            throw new DukeSyntaxErrorException(description);
+            throw new DucSyntaxErrorException(description);
         }
     }
 }

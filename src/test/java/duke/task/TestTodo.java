@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeWrongCommandException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucWrongCommandException;
 
 public class TestTodo {
 
@@ -31,13 +31,13 @@ public class TestTodo {
      */
     @Test
     public void test2() {
-        assertThrows(DukeIncompleteException.class, () -> {
+        assertThrows(DucIncompleteException.class, () -> {
             Todo testObject2 = new Todo("");
         });
-        assertThrows(DukeWrongCommandException.class, () -> {
+        assertThrows(DucWrongCommandException.class, () -> {
             Todo testObject2 = new Todo("Go to gym /by 2021-09-02");
         });
-        assertThrows(DukeWrongCommandException.class, () -> {
+        assertThrows(DucWrongCommandException.class, () -> {
             Todo testObject2 = new Todo("Go to gym /at 2021-09-02");
         });
     }

@@ -2,7 +2,7 @@ package duke;
 
 import duke.ui.Main;
 import javafx.application.Application;
-public class DukeRunner {
+public class DuCRunner {
     /**
      * duke.ui.Main class
      * @param args argument for duke.ui.Main class

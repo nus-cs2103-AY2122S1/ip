@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.exceptions.DukeIncompleteException;
-import duke.exceptions.DukeSyntaxErrorException;
+import duke.exceptions.DucIncompleteException;
+import duke.exceptions.DucSyntaxErrorException;
 import duke.main.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -28,13 +28,13 @@ public class DateOfCommand extends Command {
     @Override
     public String reply() {
         if (description.length() == 0) {
-            throw new DukeIncompleteException();
+            throw new DucIncompleteException();
         }
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(description);
         } catch (NumberFormatException e) {
-            throw new DukeSyntaxErrorException(description);
+            throw new DucSyntaxErrorException(description);
         }
         Task taskName = taskList.get(taskIndex);
         String taskType;
@@ -49,7 +49,7 @@ public class DateOfCommand extends Command {
         } else if (taskName instanceof Todo) {
             return taskName.getDate() + taskIndex;
         } else {
-            throw new DukeSyntaxErrorException(taskName.toString());
+            throw new DucSyntaxErrorException(taskName.toString());
         }
     }
 }

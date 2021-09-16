@@ -1,4 +1,4 @@
-Welcome to duke!
+Welcome to duC!
 Here is a comprehensive list of commands you can use:
 
 1. 'help': Help you with how to use the commands
