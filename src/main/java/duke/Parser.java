@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import command.Command;
 import exceptions.NoSuchCommandException;
-import tasks.Task;
-import tasks.ToDo;
 
 
 /**
