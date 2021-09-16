@@ -1,28 +1,33 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import duke.exception.DukeException;
 
 //TODO: Refactor the commands into their own separate classes.
 public class Duke {
-
+    
     protected static final String COMMAND_TODO = "todo";
     protected static final String COMMAND_EVENT = "event";
     protected static final String COMMAND_DEADLINE = "deadline";
+
     private static final String STORAGE_DIRECTORY = "FergusChatBot.txt";
+
     private static final String COMMAND_BYE = "bye";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_SAVE = "save";
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_RESET = "reset";
 
     private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded :)";
     private static final String READ_FAILURE = "No saved file has been found :(";
 
-    private static final List<String> GREETING = List.of("Hello! I'm Fergus' Chatbot!", "What can I do for you?");
+    private static final List<String> GREETING = new ArrayList<>(Arrays.asList("Hello! I'm Fergus' Chatbot!", "What can I do for you?"));
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
     private static final String ERROR_UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
@@ -31,7 +36,6 @@ public class Duke {
 
     /**
      * Returns an instance of the Chatbot that has attempted to read the txt file.
-     * @param filePath
      */
     public Duke() {
         this.storage = new Storage(STORAGE_DIRECTORY);
@@ -120,5 +124,10 @@ public class Duke {
         }
         return Formatter.getResponseString(startMessage);
     }
-    
+
+    public static String[] getListOfCommands() {
+        return new String[] { COMMAND_TODO, COMMAND_EVENT, COMMAND_DEADLINE, COMMAND_BYE,
+            COMMAND_LIST, COMMAND_DONE, COMMAND_DELETE, COMMAND_SAVE, COMMAND_FIND, COMMAND_HELP, COMMAND_RESET };
+    }
+
 }

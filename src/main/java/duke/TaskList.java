@@ -199,15 +199,10 @@ public class TaskList {
         }
 
         Pattern pattern = Pattern.compile(description, Pattern.CASE_INSENSITIVE);
-        List<Task> tasksFound = taskArray
-            .stream()
-            .filter(
-                x -> {
-                    Matcher matcher = pattern.matcher(x.getDescription());
-                    return matcher.find();
-                }
-            )
-            .collect(Collectors.toList());
+        List<Task> tasksFound = taskArray.stream().filter(x -> {
+            Matcher matcher = pattern.matcher(x.getDescription());
+            return matcher.find();
+        }).collect(Collectors.toList());
 
         if (tasksFound.isEmpty()) {
             throw new DukeException(MESSAGE_FIND_EMPTY);
@@ -216,6 +211,13 @@ public class TaskList {
         return Formatter.getNumberedListResponse(MESSAGE_FIND, tasksFound);
     }
 
+    public String handleHelp() {
+        List<String> output = new ArrayList<>();
+        output.add("Here is a list of the current commands that are available!");
+        output.addAll(Arrays.asList(Duke.getListOfCommands()));
+        return Formatter.getResponseString(output);
+    }
+    
     /**
      * Resets the arrayList of chatbot.
      */
