@@ -39,6 +39,20 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private DialogBox(String text, Image img, String backgroundColor) {
+        this(text, img);
+        dialog.setStyle("-fx-font-family: Times New Roman; -fx-font-size: 16; " +
+                "-fx-background-color: " + backgroundColor);
+    }
+
+    private DialogBox(String text, Image img, String backgroundColor, String fontColor) {
+        this(text, img);
+        dialog.setStyle("-fx-font-family: Times New Roman; -fx-font-size: 16; " +
+                "-fx-background-color: " + backgroundColor + ";" +
+                "-fx-text-fill: " + fontColor);
+    }
+
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -50,11 +64,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "#e9e9eB");
     }
 
     public static DialogBox getKermitDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "#42cb5f", "white");
         db.flip();
         return db;
     }
