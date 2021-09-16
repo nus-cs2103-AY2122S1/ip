@@ -53,7 +53,7 @@ public class HelpWindow extends AnchorPane {
     }
 
     /**
-     * Check if the help window is opened.
+     * Checks if the help window is opened.
      *
      * @return true if the help window has been opened, false otherwise
      */
