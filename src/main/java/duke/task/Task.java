@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+/** Task class that makes up objects in the TaskList */
 public class Task {
 
     private String description;
@@ -22,8 +23,11 @@ public class Task {
     public final static String DONE_STRING = "1";
     public final static String NOT_DONE_STRING = "0";
 
-    /* Number of attributes a task has, excluding the date of the task*/
-    public final static int MIN_TASK_ATTRIBUTES = 3;
+    /* Index of the attributes saved in the .txt file */
+    public final static int TASK_TYPE_INDEX = 0;
+    public final static int TASK_DONE_INDEX = 1;
+    public final static int TASK_DESCRIPTION_INDEX = 2;
+    public final static int TASK_DATE_INDEX = 3;
 
     /* The delimiter between the attributes for the task in the .txt file */
     public final static String STORAGE_DELIMITER = ",";

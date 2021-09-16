@@ -1,6 +1,5 @@
 package duke.utils;
 
-
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -10,6 +9,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TaskCommand;
 
+/** Parser class to parse a user's input */
 public class Parser {
 
     /**
@@ -42,6 +42,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user's input and returns the appropriate command for Duke to execute
+     *
+     * @param userInput The user's String input
+     * @return The appropriate Command to execute based on the user's input
+     */
     public static Command parse(String userInput) {
         String userCommand = getUserCommand(userInput);
         String userArgument = getUserArgument(userInput);
