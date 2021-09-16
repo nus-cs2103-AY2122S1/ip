@@ -18,10 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 
-/**
- * Controller for MainWindow.
- * Provides the layout for the other controls.
- */
 public class MainWindow extends AnchorPane {
 
     @FXML
@@ -37,6 +33,12 @@ public class MainWindow extends AnchorPane {
     private Image user;
     private Image bot;
 
+    /**
+     * Sets the color of the background
+     * to be dark green, sets the scrollPane
+     * features, initialises the Image
+     * objects and prints the welcome label.
+     */
     @FXML
     public void initialize() {
         dialogContainer.setBackground(new Background(new BackgroundFill(
@@ -44,8 +46,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         try {
-            user = new Image(new FileInputStream("/Users/ravi57004/ip/levi.png"));
-            bot = new Image(new FileInputStream("/Users/ravi57004/ip/hange.png"));
+            user = new Image(new FileInputStream(
+                    "/Users/ravi57004/ip/src/main/resources/images/levi.png"));
+            bot = new Image(new FileInputStream(
+                    "/Users/ravi57004/ip/src/main/resources/images/hange.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -79,7 +83,6 @@ public class MainWindow extends AnchorPane {
         } else {
             String response = duke.getResponse(input);
             Parser.setPrevInput(input);
-            System.out.println(response);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input + " ",
                             user),
@@ -90,7 +93,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Allows the send button and textfield
+     * Allows the send button and TextField
      * to handle user input.
      */
     public void handleActions() {
