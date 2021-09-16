@@ -124,4 +124,4 @@ Format: `update <index> <format of task>`
      
 Example of usage: 
 
-![find reply](/docs/picturesforug/update.PNG)
+![update reply](/docs/picturesforug/update.PNG)
