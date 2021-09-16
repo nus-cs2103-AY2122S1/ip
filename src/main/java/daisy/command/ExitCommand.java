@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 import daisy.task.Storage;
 import daisy.task.TaskList;
-import javafx.application.Platform;
 
 /**
  * ExitCommand class handles the 'bye' command to close Duke.
