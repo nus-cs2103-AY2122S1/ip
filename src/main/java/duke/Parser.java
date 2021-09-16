@@ -1,10 +1,20 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
+import duke.command.AddNoteCommand;
+import duke.command.ListNoteCommand;
+import duke.command.DeleteNoteCommand;
+import duke.command.BlahCommand;
+import duke.command.HelpCommand;
 
 /**
- * Parses the input given by the user for the task manager application to
- * execute the necessary action.
+ * Parses the input given by the user for the task manager application to execute the necessary action.
  */
 public class Parser {
 
