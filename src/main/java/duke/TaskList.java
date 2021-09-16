@@ -64,7 +64,7 @@ public class TaskList {
     }
 
     /**
-     * Get all tasks that contains the given string.
+     * Gets all tasks that contains the given string.
      *
      * @param query the string to be matched.
      * @return ArrayList of tasks that matches the query.

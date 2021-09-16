@@ -14,7 +14,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Create an instance to handle and writing to a specific file.
+     * Creates an instance to handle and writing to a specific file.
      *
      * @param filePath the path to the file to be read from and written to.
      */
