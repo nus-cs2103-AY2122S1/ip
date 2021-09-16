@@ -24,6 +24,7 @@ public class Main extends Application {
             MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
             mainWindow.setExecutor(executor);
             mainWindow.setStage(stage);
+            stage.setTitle("BobCat");
             stage.show();
 
             mainWindow.respondBobCat(new String[]{"Hello! I'm BobCat!", "Trying to remember what happened..."});
