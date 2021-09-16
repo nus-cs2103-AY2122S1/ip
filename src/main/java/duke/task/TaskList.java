@@ -96,7 +96,7 @@ public class TaskList {
      * @throws InvalidTaskIndexException When the index is out of bounds.
      * @throws InvalidFormatException    When the input command is of the wrong format.
      */
-    public String done(String command) throws InvalidTaskIndexException, InvalidFormatException {
+    public String markAsDone(String command) throws InvalidTaskIndexException, InvalidFormatException {
         int taskIdx = Parser.getIndexFromCommand(command);
         boolean isValidIndex = taskIdx >= 1 && taskIdx <= tasks.size();
 
@@ -118,7 +118,7 @@ public class TaskList {
      * @throws InvalidFormatException        When the input command is of the wrong format.
      * @throws EmptyTodoDescriptionException When the description is empty.
      */
-    public String todo(String command) throws InvalidFormatException, EmptyTodoDescriptionException {
+    public String addTodo(String command) throws InvalidFormatException, EmptyTodoDescriptionException {
         String regex = "^todo (.+)";
         String validFormatDescription = "todo {description}";
         String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);
@@ -140,7 +140,7 @@ public class TaskList {
      * @return Formatted string containing the added deadline task, to be displayed to the user.
      * @throws InvalidFormatException When the input command is of the wrong format.
      */
-    public String deadline(String command) throws InvalidFormatException {
+    public String addDeadline(String command) throws InvalidFormatException {
         String regex = "^deadline (.+) /by (.+)";
         String validFormatDescription = "deadline {description} /by {date}";
         String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);
@@ -165,7 +165,7 @@ public class TaskList {
      * @return Formatted string containing the added event task, to be displayed to the user.
      * @throws InvalidFormatException When the input command is of the wrong format.
      */
-    public String event(String command) throws InvalidFormatException {
+    public String addEvent(String command) throws InvalidFormatException {
         String regex = "^event (.+) /at (.+)";
         String validFormatDescription = "event {description} /at {time}";
         String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);

@@ -32,7 +32,7 @@ public class Command {
      * @throws DukeException When there is an error marking the task as done.
      */
     public static String done(TaskList tasks, MainStorage mainStorage, String command) throws DukeException {
-        String output = tasks.done(command);
+        String output = tasks.markAsDone(command);
         mainStorage.save(tasks.toSaveFormat());
         return output;
     }
@@ -47,7 +47,7 @@ public class Command {
      * @throws DukeException When there is an error creating the todo.
      */
     public static String todo(TaskList tasks, MainStorage mainStorage, String command) throws DukeException {
-        String output = tasks.todo(command);
+        String output = tasks.addTodo(command);
         mainStorage.save(tasks.toSaveFormat());
         return output;
     }
@@ -62,7 +62,7 @@ public class Command {
      * @throws DukeException When there is an error creating the deadline.
      */
     public static String deadline(TaskList tasks, MainStorage mainStorage, String command) throws DukeException {
-        String output = tasks.deadline(command);
+        String output = tasks.addDeadline(command);
         mainStorage.save(tasks.toSaveFormat());
         return output;
     }
@@ -77,7 +77,7 @@ public class Command {
      * @throws DukeException When there is an error creating the event.
      */
     public static String event(TaskList tasks, MainStorage mainStorage, String command) throws DukeException {
-        String output = tasks.event(command);
+        String output = tasks.addEvent(command);
         mainStorage.save(tasks.toSaveFormat());
         return output;
     }
