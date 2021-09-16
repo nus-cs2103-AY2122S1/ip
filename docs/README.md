@@ -44,12 +44,12 @@ java -jar -ea retriever-1.0.jar
     * [Event Type Task](#to-add-an-event-type-task---event)
     * [Todo Type Task](#to-add-a-todo-type-task---todo)
   * [Deleting a Task](#to-delete-a-task---delete)
-  * [Ending the Session](#to-end-the-session-with-the-chatbot---bye)
+  * [Marking a Task as Done](#to-mark-a-task-as-done---done)
   * [Finding a Task](#to-find-tasks-with-similar-keywords---find)
-  * [Marking Task as Done](#to-mark-a-task-as-done---done)
-  * [Viewing All Tasks](#to-show-all-the-tasks-present-in-the-task-list---list)
   * [Viewing Your Schedule](#to-view-the-tasks-scheduled-for-a-day---view)
+  * [Viewing All Tasks](#to-show-all-the-tasks-present-in-the-task-list---list)
   * [Help Section](#to-show-all-the-possible-commands---help)
+  * [Ending the Session](#to-end-the-session-with-the-chatbot---bye)
 
 ---
 ## Features 
