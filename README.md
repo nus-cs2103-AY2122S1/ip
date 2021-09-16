@@ -14,4 +14,5 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
 3. After that, locate the `src/main/java/kermit/Launcher.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-<img width="468" alt="Screenshot 2021-09-16 at 2 10 42 PM" src="https://user-images.githubusercontent.com/25302138/133559073-585a023e-25d3-49b2-a293-e70f9e93f635.png">
+<img width="512" alt="Kermit-program" src="https://user-images.githubusercontent.com/25302138/133612837-1d7a78ce-21a2-4c20-a7e8-d673d963378e.png">
+
