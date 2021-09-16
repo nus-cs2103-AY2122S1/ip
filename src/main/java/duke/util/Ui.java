@@ -26,7 +26,7 @@ public class Ui {
      * @return Result content
      */
     public String showList(String input) {
-        String words = "Here is your duke.task list:\n";
+        String words = "Here is your task list:\n";
         return words + input;
     }
 
