@@ -92,7 +92,7 @@ Format:
 
 `event {task's name} /at {time of the event in the format: Year-Month-Date Hour:Minute}`
 
-Example: 
+Example of `event` command: 
 
 `event carnival /at 2021-09-15 20:00`
 
@@ -112,9 +112,9 @@ Format:
 
 `done {task's reference number on the list}`
 
-Example: 
+Example of `done` command: 
 
-`list` then `done 2`, then `done 2` again. In this case, the todo homework task is the 2nd task in the list.
+`list` then `done 2`, then `done 2` again. Suppose the "homework" todo is the 2nd task in the list.
 
 Expected outcome:
 `````
@@ -134,9 +134,9 @@ Format:
 
 `remove {task's reference number on the list}`
 
-Example: 
+Example of `remove` command: 
 
-`list` then `remove 2`. Suppose you have 2 tasks and the homework todo task is your 2nd task in your list.  
+`list` then `remove 2`. Suppose you have 2 tasks and the "homework" todo is your 2nd task in your list.  
 
 Expected outcome:
 `````
@@ -152,7 +152,7 @@ Format:
 
 `find {search term}`
 
-Example: 
+Example of `find` command: 
 
 `find key`. 
 
@@ -165,13 +165,13 @@ Here's the matching tasks in your list:
 `````
 
 ### View schedule: `schedule`
-sorts tasks that are on a given date.
+sorts tasks chronologically that are on a given date.
 
 Format: 
 
 `schedule {date of schedule in the format: Year-Month-Day}`
 
-Example: 
+Example or `schedule` command: 
 
 `schedule 2021-01-01` 
 
