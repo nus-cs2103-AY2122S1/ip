@@ -1,15 +1,12 @@
 package duke;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.command.Command;
-import duke.Parser;
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Test;
+
+import duke.command.Command;
 
 public class ParserTest {
     @Test
@@ -19,7 +16,7 @@ public class ParserTest {
     }
 
     @Test
-    void testParse_parseDeadlineWithDate_DeadlineWithProperDate() throws DukeException {
+    void testParse_parseDeadlineWithDate_deadlineWithProperDate() throws DukeException {
         Command c = Parser.parse("deadline unit tests /by 2021-11-11");
         TaskList tl = new TaskList();
         UiStub ui = new UiStub();
@@ -27,9 +24,9 @@ public class ParserTest {
         c.execute(tl, ui, store);
 
         assertAll("checking created command",
-                () -> assertEquals("D",tl.get(0).getType()),
-                () -> assertEquals(1, tl.size()),
-                () -> assertEquals("unit tests", tl.get(0).getLabel())
+            () -> assertEquals("D", tl.get(0).getType()),
+            () -> assertEquals(1, tl.size()),
+            () -> assertEquals("unit tests", tl.get(0).getLabel())
         );
     }
 }

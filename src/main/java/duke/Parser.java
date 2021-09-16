@@ -63,6 +63,7 @@ public abstract class Parser {
 
     /**
      * Takes in a String representing user input, and parses it, producing the appropriate Command.
+     *
      * @param in is a String representing user input.
      * @return Command to be executed by the application.
      * @throws DukeException if the user's input is missing a description.
