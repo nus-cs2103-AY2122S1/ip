@@ -38,13 +38,6 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string detailing the syntax of the Event command
-     *
-     * @return helper text of correct syntax
-     */
-//    public static String syntax() {
-//        return String.format("event command syntax: \n    '%s'", Event.COMMAND_SYNTAX);
-//    }
 
     /**
      * Converts an Task instance to a string to be stored.

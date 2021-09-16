@@ -17,12 +17,20 @@ public class Ui {
 //    private static final String TOP_BORDER = "____________________________________";
 //    private static final String BOTTOM_BORDER = "------------------------------------";
     public static final String LOGO =
-        ",--.   ,--.,------.  ,---.  ,------.  \n" +
-        "|   `.'   ||  .---' /  O  \\|  .--. ' \n" +
-        "|  |'.'|  ||  `--, |  .-.  ||  '--' | \n" +
-        "|  |   |  ||  `---.|  | |  ||  | --'  \n" +
-        "`--'   `--'`------'`--' `--'`--'      \n";
-    public static final String WELCOME_STATEMENT = "Qualified Personal Task Manager\n";
+                "___  ___ _____  ___  ______ \n" +
+                "|  \\/  ||  ___|/ _ \\ | ___ \\\n" +
+                "| .  . || |__ / /_\\ \\| |_/ /\n" +
+                "| |\\/| ||  __||  _  ||  __/ \n" +
+                "| |  | || |___| | | || |    \n" +
+                "\\_|  |_/\\____/\\_| |_/\\_|    \n";
+//                "  __  __ ___   _   ___ \n" +
+//                " |  \\/  | __| /_\\ | _ \\\n" +
+//                " | |\\/| | _| / _ \\|  _/\n" +
+//                " |_|  |_|___/_/ \\_\\_|  \n\n";
+////                " ------------------------\n";
+
+
+    public static final String WELCOME_STATEMENT = "Certified Personal Task Manager\n";
     public static final String CLOSING_STATEMENT = "Bye, hope to see you again :)\n" +
             INDENT + "shutting down...";
     public static final String[] USER_SUPPORTED_COMMANDS =

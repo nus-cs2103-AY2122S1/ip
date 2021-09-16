@@ -12,6 +12,7 @@
 .dialog-box-section Text {
     -fx-font-size: 13px;
     /*-fx-font-family: "Times New Roman";*/
+    -fx-font-family: "Courier New";
     -fx-background-color: #FDFEFE;
     /*-fx-fill: #ebfff6;*/
     /*-fx-text-alignment: right;*/
