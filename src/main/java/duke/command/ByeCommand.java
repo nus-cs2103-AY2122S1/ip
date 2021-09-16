@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.io.ResponseManager;
+import duke.Storage;
+import duke.task.TaskManager;
 
 /**
  * This class encapsulates the command to cease the conversation with Duke.

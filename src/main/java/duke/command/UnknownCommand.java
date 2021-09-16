@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.io.ResponseManager;
+import duke.Storage;
+import duke.task.TaskManager;
 
 /**
  * This class is used when an input is not understood.

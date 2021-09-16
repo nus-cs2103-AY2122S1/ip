@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.io.ResponseManager;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskManager;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

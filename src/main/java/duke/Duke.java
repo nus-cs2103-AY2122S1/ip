@@ -1,5 +1,10 @@
 package duke;
 
+import duke.command.ICommand;
+import duke.io.Parser;
+import duke.io.ResponseManager;
+import duke.io.UserDialogBox;
+import duke.task.TaskManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,8 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -183,7 +186,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         ICommand c = parser.getInput(input);
         c.execute(taskManager, responseManager, storage);
         return c.getReply();

@@ -1,29 +1,30 @@
-package duke;
+package duke.command;
 
-/**
- * This class encapsulates the command to complete a task.
- * It is triggered by the parser and uses the TaskManager, Ui, and Storage.
- */
-public class DoneCommand implements ICommand {
+import duke.*;
+import duke.io.ResponseManager;
+import duke.task.Task;
+import duke.task.TaskManager;
 
-    private String taskIndex;
+public class SnoozeCommand implements ICommand {
+
+    private final String input;
     private TaskManager tm;
     private ResponseManager responseManager;
     private Storage storage;
-    private Task completedTask;
+    private Task snoozedTask;
     private String reply;
 
     /**
      * Constructor for the command.
      *
-     * @param taskIndex The index of the task which the user wants to mark completed.
+     * @param input The user's input which triggered the creation of this command.
      */
-    public DoneCommand(String taskIndex) {
-        this.taskIndex = taskIndex;
+    public SnoozeCommand(String input) {
+        this.input = input;
     }
 
     /**
-     * Marks the desired task completed by interacting with the relevant instances as mentioned above.
+     * Changes the deadline/event time.
      *
      * @param tm The TaskManager object controlling the tasks in Duke.
      * @param responseManager The Ui object managing Duke's user interface.
@@ -31,17 +32,15 @@ public class DoneCommand implements ICommand {
      */
     public void execute(TaskManager tm, ResponseManager responseManager, Storage storage) {
         try {
-            completedTask = tm.completeTask(taskIndex);
+            snoozedTask = tm.snoozeTask(input);
             this.responseManager = responseManager;
-            this.tm = tm;
-            this.storage = storage;
-            if (completedTask == null) {
+            if (snoozedTask == null) {
                 reply = responseManager.getInvalidIndexMessage();
             } else {
-                reply = responseManager.getTaskCompletionMessage(completedTask, tm.getTasks().size());
+                reply = responseManager.getSnoozeTaskMessage(snoozedTask);
                 storage.updateSave(tm.getTasks());
             }
-        } catch (DukeException.InvalidInputException e) {
+        } catch (DukeException.InvalidInputException | DukeException.NoTimeSpecifiedException | DukeException.UnsnoozeableTaskException e) {
             reply = responseManager.getErrorMessage(e);
         }
     }

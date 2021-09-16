@@ -1,4 +1,6 @@
-package duke;
+package duke.io;
+
+import duke.command.*;
 
 /**
  * This class encapsulates the understanding of commands.

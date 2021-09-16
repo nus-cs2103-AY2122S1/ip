@@ -1,6 +1,11 @@
 import duke.*;
-import duke.ResponseManager;
+import duke.io.ResponseManager;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddToDoCommand;
+import duke.task.Task;
+import duke.task.TaskManager;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

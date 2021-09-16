@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.*;
+import duke.io.ResponseManager;
+import duke.task.Task;
+import duke.task.TaskManager;
 
 /**
  * This class encapsulates the command to add a To-Do type task.
