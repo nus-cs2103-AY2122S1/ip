@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.exceptions.DukeException;
-
-import java.io.IOException;
 
 /**
  * Runs the program Duke.
@@ -36,6 +36,7 @@ public class Duke {
 
     /**
      * Generates a response to the user.
+     *
      * @param input full command the user typed in
      * @return
      */
@@ -47,6 +48,7 @@ public class Duke {
 
     /**
      * Executes a command and returns a CommandResult.
+     *
      * @param command type of command.
      * @return command result to get the String response.
      */
@@ -56,7 +58,11 @@ public class Duke {
         return result;
     }
 
-    /** Gets the standard welcome message from Ui. */
+    /**
+     * Retrieves the standard welcome message from Ui.
+     *
+     * @return welcome message as String.
+     */
     public String getWelcomeMessage() {
         return ui.showWelcomeMessage();
     }

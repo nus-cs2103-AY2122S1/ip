@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.InvalidDescriptionException;
 import duke.task.Task;
-import java.util.ArrayList;
 
 /**
  * Contains the task list e.g. it has operation to add/delete tasks in the list.
@@ -15,11 +16,12 @@ public class TaskList {
      * Constructor for a new, empty TaskList.
      */
     public TaskList() {
-        this.arrayList = new ArrayList<Task>();
+        this.arrayList = new ArrayList<>();
     }
 
     /**
      * Adds a task to the TaskList.
+     *
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -28,6 +30,7 @@ public class TaskList {
 
     /**
      * Returns a task at the specified index.
+     *
      * @param index Index of task.
      * @return Task Task at index.
      * @throws InvalidDescriptionException If index is out of bounds of TaskList.
@@ -41,6 +44,7 @@ public class TaskList {
 
     /**
      * Marks a specific task as done.
+     *
      * @param index Index of task.
      * @return Task Completed Task at index.
      * @throws InvalidDescriptionException
@@ -53,6 +57,7 @@ public class TaskList {
 
     /**
      * Deletes a specific task.
+     *
      * @param index Index of task.
      * @return Task Deleted Task at index.
      * @throws InvalidDescriptionException
@@ -65,6 +70,7 @@ public class TaskList {
 
     /**
      * Searches the TaskList for tasks containing keyword.
+     *
      * @param keyword Provided by user.
      * @return ArrayList Matched tasks.
      */

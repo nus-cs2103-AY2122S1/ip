@@ -1,20 +1,32 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDescriptionException;
 import duke.exceptions.NoDescriptionException;
 import duke.task.Task;
 
-import java.io.IOException;
-
+/**
+ * Represents a Delete Command.
+ */
 public class DeleteCommand extends Command {
 
+    /** Unique command word */
     public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_SUCCESS = "Noted. I've marked this as done: %1$s";
-    int index;
 
+    /** Successful execution message */
+    public static final String MESSAGE_SUCCESS = "Noted. I've marked this as done: %1$s";
+    private int index;
+
+
+    /**
+     * Constructs a Delete Command.
+     *
+     * @param fullCommand User input.
+     * @throws NoDescriptionException If there is no description.
+     * @throws InvalidDescriptionException If the format is wrong.
+     */
     public DeleteCommand(String fullCommand) throws NoDescriptionException, InvalidDescriptionException {
         if (fullCommand.equals("delete")) {
             throw new NoDescriptionException("Please specify a task to delete.");
@@ -32,6 +44,11 @@ public class DeleteCommand extends Command {
         assert index > 0 : "Index provided is negative";
     }
 
+    /**
+     * Executes the task and returns a CommandResult.
+     *
+     * @return CommandResult
+     */
     public CommandResult execute() {
         try {
             Task taskToDelete = tasks.deleteTask(index);

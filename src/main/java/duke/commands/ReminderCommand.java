@@ -1,22 +1,27 @@
 package duke.commands;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import duke.exceptions.InvalidDescriptionException;
 import duke.task.Deadline;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.time.Period;
 
 /**
  * Represents the upcoming Deadlines between the current date and (current date + N days).
  */
 public class ReminderCommand extends Command {
 
+    /** Unique command word */
     public static final String COMMAND_WORD = "reminder";
-    public static final String COMMAND_SUCCESS = "Upcoming deadline(s): \n";
-    public static final String COMMAND_NO_MATCH = "No upcoming deadlines";
-    public static final int DAYS = 2;
 
+    /** Successful execution message */
+    public static final String COMMAND_SUCCESS = "Upcoming deadline(s): \n";
+
+    /** No match message */
+    public static final String COMMAND_NO_MATCH = "No upcoming deadlines";
+
+    private static final int DAYS = 2;
     private final LocalDate currentDate;
     private final LocalDate finalDate;
 
@@ -24,7 +29,7 @@ public class ReminderCommand extends Command {
      * Constructor for ReminderCommand.
      * @param fullCommand
      */
-    public ReminderCommand(String fullCommand) throws InvalidDescriptionException{
+    public ReminderCommand(String fullCommand) throws InvalidDescriptionException {
         if (!fullCommand.equals(COMMAND_WORD)) {
             throw new InvalidDescriptionException("There should be no description after 'reminder'");
         }
@@ -33,8 +38,9 @@ public class ReminderCommand extends Command {
     }
 
     /**
-     * Returns a CommandResult with upcoming deadlines.
-     * @return
+     * Executes the task and returns a CommandResult.
+     *
+     * @return CommandResult.
      */
     @Override
     public CommandResult execute() {
@@ -60,9 +66,9 @@ public class ReminderCommand extends Command {
     private boolean isWithinRange(Task t) {
         if (t instanceof Deadline) {
             LocalDate deadlineDate = ((Deadline) t).getDate();
-            if (deadlineDate.isEqual(currentDate) ||
-                    deadlineDate.isEqual(finalDate) ||
-                    (deadlineDate.isAfter(currentDate) && deadlineDate.isBefore(finalDate))) {
+            if (deadlineDate.isEqual(currentDate)
+                    || deadlineDate.isEqual(finalDate)
+                    || (deadlineDate.isAfter(currentDate) && deadlineDate.isBefore(finalDate))) {
                 return true;
             }
         }

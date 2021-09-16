@@ -1,20 +1,29 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.exceptions.NoDescriptionException;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.io.IOException;
 
 /**
  * Represents a To Do Command.
  */
 public class ToDoCommand extends Command {
 
+    /** Unique command word */
     public static final String COMMAND_WORD = "todo";
+
+    /** Successful execution message */
     public static final String MESSAGE_SUCCESS = "Task successfully added: %1$s";
     private Task taskToAdd;
 
+    /**
+     * Constructs a To Do Command.
+     *
+     * @param fullCommand User input.
+     * @throws NoDescriptionException If there is no description.
+     */
     public ToDoCommand(String fullCommand) throws NoDescriptionException {
         if (fullCommand.equals("todo")) {
             throw new NoDescriptionException("The description of a todo cannot be empty.");
@@ -24,6 +33,11 @@ public class ToDoCommand extends Command {
         taskToAdd = new ToDo(desc);
     }
 
+    /**
+     * Executes the task and returns a CommandResult.
+     *
+     * @return CommandResult.
+     */
     @Override
     public CommandResult execute() {
         tasks.add(taskToAdd);
@@ -35,6 +49,11 @@ public class ToDoCommand extends Command {
         }
     }
 
+    /**
+     * Returns the task to be added.
+     *
+     * @return Task.
+     */
     public Task getTaskToAdd() {
         return taskToAdd;
     }

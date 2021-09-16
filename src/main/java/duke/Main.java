@@ -1,9 +1,8 @@
 package duke;
 
-import duke.controller.MainWindow;
-
 import java.io.IOException;
 
+import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +16,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    /**
+     * Drives the FXMLLoader.
+     *
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

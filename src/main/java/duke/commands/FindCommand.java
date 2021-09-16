@@ -1,20 +1,26 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.exceptions.DukeException;
+import java.util.ArrayList;
+
 import duke.exceptions.InvalidDescriptionException;
 import duke.exceptions.NoDescriptionException;
 import duke.task.Task;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
+/**
+ * Represents a Find Command.
+ */
 public class FindCommand extends Command {
 
+    /** Unique command word */
     public static final String COMMAND_WORD = "find";
-    String keyword;
+    private String keyword;
 
+    /**
+     * Constructs a Find Command.
+     * @param fullCommand User input.
+     * @throws NoDescriptionException If there is no description.
+     * @throws InvalidDescriptionException If the format is wrong.
+     */
     public FindCommand(String fullCommand) throws NoDescriptionException, InvalidDescriptionException {
         if (fullCommand.equals("find")) {
             throw new NoDescriptionException("Please specify a keyword to search up.");
@@ -24,6 +30,11 @@ public class FindCommand extends Command {
         keyword = splitCommand[1];
     }
 
+    /**
+     * Executes the task and returns a CommandResult.
+     *
+     * @return CommandResult.
+     */
     public CommandResult execute() {
         ArrayList<Task> matchedTasks = tasks.findTasks(keyword);
         String response = "";

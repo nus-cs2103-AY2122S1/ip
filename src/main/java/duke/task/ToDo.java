@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a To Do object.
+     *
      * @param description Description of the To Do.
      */
     public ToDo(String description) {

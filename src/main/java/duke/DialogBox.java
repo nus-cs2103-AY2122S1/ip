@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Collections;
 
 import duke.controller.MainWindow;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 /**
  * An example of a custom control using FXML.
@@ -27,15 +25,21 @@ import javafx.scene.text.FontWeight;
  */
 public class DialogBox extends HBox {
 
+    private static final String FX_BACKGROUND_COLOR_WHITE = "-fx-background-color:WHITE;";
+    private static final String FX_BORDER_RADIUS = "-fx-background-radius: 15px";
+
     @FXML
     private Label dialog;
 
     @FXML
     private ImageView displayPicture;
 
-    private static final String FX_BACKGROUND_COLOR_WHITE = "-fx-background-color:WHITE;";
-    private static final String FX_BORDER_RADIUS = "-fx-background-radius: 15px";
-
+    /**
+     * Constructs a DialogBox for the GUI.
+     *
+     * @param text Input/Output response.
+     * @param img Profile image.
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -72,10 +76,24 @@ public class DialogBox extends HBox {
         dialog.setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox belonging to the user.
+     *
+     * @param text Input command.
+     * @param img User profile image.
+     * @return DialogBox belonging to user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox belonging to Duke.
+     *
+     * @param text Output response.
+     * @param img Duke profile image.
+     * @return DialogBox belonging to Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

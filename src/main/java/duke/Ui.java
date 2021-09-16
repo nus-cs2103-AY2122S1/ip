@@ -5,11 +5,10 @@ package duke;
  */
 public class Ui {
 
-    private boolean isExit;
-
     private static final String DIVIDER = "-------------------------------------";
-    private static final String LS = System.lineSeparator();
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke \n" + "What can I do for you?";
+
+    private boolean isExit;
 
     /**
      * Constructs a Ui Object.
@@ -49,6 +48,7 @@ public class Ui {
 
     /**
      * Checks if program has exited.
+     *
      * @return boolean isExit.
      */
     public boolean isExit() {
@@ -69,6 +69,7 @@ public class Ui {
 
     /**
      * Prints error message.
+     *
      * @param s
      */
     public void showError(String s) {

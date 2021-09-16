@@ -2,7 +2,6 @@ package duke.controller;
 
 import duke.DialogBox;
 import duke.Duke;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -40,7 +39,9 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container.
+     *
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -56,7 +57,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates a dialog box from Duke that contains the welcome message.
      *
-     * Called by the start method in Main.java
+     * Called by the start method in Main.java.
      */
     public void welcomeMessage() {
         String message = duke.getWelcomeMessage();

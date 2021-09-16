@@ -1,49 +1,47 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 import duke.commands.DeadlineCommand;
 import duke.commands.EventCommand;
 import duke.commands.ToDoCommand;
-
 import duke.exceptions.DukeException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.File;
-import java.io.FileWriter;
-
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
-
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private final String FILEPATH;
+    private final String FILE_PATH;
 
     /**
      * Constructs a Storage object.
+     *
      * @param filePath The path of saved file.
      */
     public Storage(String filePath) {
-        this.FILEPATH = filePath;
+        this.FILE_PATH = filePath;
     };
 
     /**
      * Starts up the file reader, creates file if it does not exist.
+     *
      * @return TaskList New TaskList with inputs from filePath.
      * @throws DukeException
      * @throws IOException
      */
     public TaskList load() throws DukeException, IOException {
-        File f = new File(FILEPATH);
+        File f = new File(FILE_PATH);
         if (!f.exists()) {
-            Files.createFile(Paths.get(FILEPATH));
+            Files.createFile(Paths.get(FILE_PATH));
         }
 
         TaskList storedTaskList = new TaskList();
@@ -80,7 +78,7 @@ public class Storage {
                 }
             }
 
-            assert isDone.equals("1") || isDone.equals("0")  : "Stored file is false";
+            assert isDone.equals("1") || isDone.equals("0") : "Stored file is false";
 
             if (isDone.equals("1")) {
                 storedTaskList.markAsDone(index);
@@ -92,11 +90,12 @@ public class Storage {
 
     /**
      * Appends to file. Append when adding new tasks.
+     *
      * @param textToAppend
      * @throws IOException
      */
     public void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(FILEPATH, true);
+        FileWriter fw = new FileWriter(FILE_PATH, true);
         fw.write(System.lineSeparator() + textToAppend);
         fw.close();
     }
@@ -130,7 +129,7 @@ public class Storage {
             }
         }
 
-        FileWriter fw = new FileWriter(FILEPATH);
+        FileWriter fw = new FileWriter(FILE_PATH);
         fw.write(req);
         fw.close();
     }

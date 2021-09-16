@@ -1,27 +1,39 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
+import java.io.IOException;
+
 import duke.exceptions.InvalidDescriptionException;
 import duke.exceptions.MissingTimeCommandException;
 import duke.exceptions.NoDescriptionException;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.io.IOException;
-
 /**
- * Represents a To Do Command.
+ * Represents an Event Command.
  */
 public class EventCommand extends Command {
 
+    /** Unique command word */
     public static final String COMMAND_WORD = "event";
-    private Task taskToAdd;
 
+    /** Successful execution message */
     public static final String MESSAGE_SUCCESS = "Task successfully added: %1$s";
+
+    /** Unsuccessful execution message */
     public static final String MESSAGE_EMPTY_DESCRIPTION = "The description of a event cannot be empty.";
 
-    public EventCommand(String fullCommand) throws NoDescriptionException, MissingTimeCommandException, InvalidDescriptionException {
+    private Task taskToAdd;
+
+    /**
+     * Constructs a Event Command.
+     *
+     * @param fullCommand User input.
+     * @throws NoDescriptionException If there is no description.
+     * @throws MissingTimeCommandException If there is no time.
+     * @throws InvalidDescriptionException If the format is wrong.
+     */
+    public EventCommand(String fullCommand) throws NoDescriptionException,
+            MissingTimeCommandException, InvalidDescriptionException {
         if (fullCommand.equals(COMMAND_WORD)) {
             throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
         }
@@ -57,6 +69,11 @@ public class EventCommand extends Command {
         taskToAdd = new Event(desc, date);
     }
 
+    /**
+     * Executes the task and returns a CommandResult.
+     *
+     * @return CommandResult.
+     */
     @Override
     public CommandResult execute() {
         tasks.add(taskToAdd);
@@ -68,6 +85,11 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * Returns the task to be added.
+     *
+     * @return Task.
+     */
     public Task getTaskToAdd() {
         return taskToAdd;
     }

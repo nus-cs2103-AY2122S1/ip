@@ -3,7 +3,6 @@ package duke.task;
 /**
  * Abstract Task class.
  */
-
 public abstract class Task {
 
     private String description;
@@ -28,6 +27,7 @@ public abstract class Task {
 
     /**
      * Queries whether the Task is done.
+     *
      * @return boolean isDone.
      */
     public boolean isDone() {
@@ -36,6 +36,7 @@ public abstract class Task {
 
     /**
      * Returns the status icon depending on whether the Task is done.
+     *
      * @return String Representation.
      */
     public String getStatusIcon() {
@@ -44,6 +45,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the Task.
+     *
      * @return Description.
      */
     public String getDescription() {
