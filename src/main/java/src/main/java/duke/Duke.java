@@ -25,7 +25,7 @@ public class Duke {
     /**
      * method to return the greeting message on bot start.
      *
-     * @return
+     * @return greeting response of the bot.
      */
     String greet() {
         try {

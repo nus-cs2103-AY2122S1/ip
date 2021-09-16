@@ -10,10 +10,10 @@ public class Todo extends Task {
     private String task;
     private boolean isDone;
 
-    Todo(String T, boolean D) {
-        super(T, D);
-        task = T;
-        isDone = D;
+    Todo(String t, boolean d) {
+        super(t, d);
+        task = t;
+        isDone = d;
     }
 
     /**

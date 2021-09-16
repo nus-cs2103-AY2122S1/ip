@@ -64,10 +64,10 @@ public class Storage {
     }
 
     /**
-     * method to add the given data to the list of tasks
+     * method to add the given data to the list of tasks.
      *
-     * @param data   the task in string to be added
-     * @param isDone check if the task is done or not
+     * @param data   the task in string to be added.
+     * @param isDone check if the task is done or not.
      * @throws DukeException
      */
     void addToList(String[] data, boolean isDone) throws DukeException {

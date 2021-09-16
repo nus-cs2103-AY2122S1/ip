@@ -10,9 +10,9 @@ public class Task {
     private String task;
     private boolean isDone;
 
-    Task(String T, boolean D) {
-        task = T;
-        isDone = D;
+    Task(String t, boolean d) {
+        task = t;
+        isDone = d;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Task {
     /**
      * to give the String representation of the task.
      *
-     * @return
+     * @return the String representation of the task.
      */
     @Override
     public String toString() {

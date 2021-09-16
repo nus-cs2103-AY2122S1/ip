@@ -27,8 +27,8 @@ public class UI {
     /**
      * Method to mark the task as done.
      *
-     * @param n the task number entered by the user
-     * @return
+     * @param n the task number entered by the user.
+     * @return the task in string form that has been marked as done.
      * @throws DukeException
      */
     String markAsDone(int n) throws DukeException {
@@ -44,7 +44,7 @@ public class UI {
      * Method to delete a task from the list.
      *
      * @param n the task number entered by the user.
-     * @return
+     * @return the task that has been deleted in string form.
      * @throws DukeException
      */
     String deleteTask(int n) throws DukeException {
@@ -62,7 +62,7 @@ public class UI {
      * Method to add the input to the list
      *
      * @param input String input from the user
-     * @return
+     * @return response of the bot containing the String form of the task added.
      */
     String addToList(Task input) {
         list.add(input);
@@ -80,7 +80,7 @@ public class UI {
      *
      * @param input String task name.
      * @param time  String time of event.
-     * @return
+     * @return response of the bot containing the String form of the task added.
      */
     String createEvent(String input, String time) {
         Event event = new Event(input, false, time);
@@ -92,7 +92,7 @@ public class UI {
      * add it to the task list.
      *
      * @param input String task name.
-     * @return
+     * @return response of the bot containing the String form of the task added.
      */
     String createTodo(String input) {
         Todo todo = new Todo(input, false);
@@ -105,7 +105,7 @@ public class UI {
      *
      * @param input String task name.
      * @param time  String time of deadline.
-     * @return
+     * @return response of the bot containing the String form of the task added.
      */
     String createDeadline(String input, String time) throws DukeException {
         Deadline deadline = new Deadline(input, false, time);
@@ -116,7 +116,7 @@ public class UI {
      * method to greet the user in the beginning of the session and also show
      * the tasks in the list.
      *
-     * @return
+     * @return response of bot containing the greeting message and all the tasks in the list.
      */
     String greet() {
         String text = "Hello, I'm Duke\n";
@@ -130,7 +130,7 @@ public class UI {
      * method to find the specified and print the result to the user screen.
      *
      * @param text the keyword to be searched.
-     * @return
+     * @return list containing all the tasks matching the given expression.
      */
     String find(String text) {
         StringBuilder output = new StringBuilder();
@@ -147,7 +147,7 @@ public class UI {
      *
      * @param task type of task.
      * @param time new time to be set.
-     * @return
+     * @return the task that has been updated in String format.
      * @throws DukeException
      */
     String update(String task, String time) throws DukeException {
@@ -162,7 +162,7 @@ public class UI {
      * method to invoke print method of the Tasklist class and show the tasks in the
      * list.
      *
-     * @return
+     * @return String form of all the tasks in the list.
      */
     String printList() {
         return list.printList();

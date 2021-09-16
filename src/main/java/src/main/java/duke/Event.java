@@ -11,10 +11,10 @@ public class Event extends Task {
     private boolean isDone;
     private String time;
 
-    Event(String T, boolean D, String time) {
-        super(T, D);
-        task = T;
-        isDone = D;
+    Event(String t, boolean d, String time) {
+        super(t, d);
+        task = t;
+        isDone = d;
         this.time = time;
     }
 

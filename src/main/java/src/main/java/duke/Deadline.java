@@ -15,10 +15,10 @@ public class Deadline extends Task {
     private boolean isDone;
     private LocalDate time;
 
-    Deadline(String T, boolean D, String time) throws DukeException {
-        super(T, D);
-        task = T;
-        isDone = D;
+    Deadline(String t, boolean d, String time) throws DukeException {
+        super(t, d);
+        task = t;
+        isDone = d;
 
         try {
             this.time = LocalDate.parse(time);
@@ -52,6 +52,8 @@ public class Deadline extends Task {
 
     /**
      * method to convert deadline to a string with time interpreted by the chat bot.
+     *
+     * @return task converted to a string format suitable for storage purpose.
      */
     String makeStorageString() {
         return ("D | " + (isDone ? "1" : "0") + " | " + this.task + " | " + this.time.toString());
@@ -64,6 +66,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return ("D | " + (isDone ? "1" : "0") + " | " + this.task + " | " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return ("D | " + (isDone ? "1" : "0") + " | " + this.task + " | "
+                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

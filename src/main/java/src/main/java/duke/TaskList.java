@@ -102,7 +102,7 @@ public class TaskList {
     String printList() {
         StringBuilder text = new StringBuilder();
         if (list.size() == 0) {
-            return "The list has no tasks";
+            return "The list has no tasks\n";
         }
         for (int i = 0; i < this.list.size(); i++) {
             text.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
@@ -115,7 +115,6 @@ public class TaskList {
      *
      * @param index integer index of the task in the list.
      * @param time  time in String to be set to the task.
-     *              //@param task  type of task either "event" or "deadline".
      * @return updated task in String form.
      */
     String update(int index, String time) throws DukeException {
