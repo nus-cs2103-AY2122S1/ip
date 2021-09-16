@@ -10,7 +10,7 @@ import duke.exception.EmptyFieldException;
  */
 public class ToDo extends Task {
     /**
-     * A string representing the description of a to-do.
+     * Constructor of the toDo class.
      *
      * @throws EmptyFieldException If description is empty.
      */
