@@ -9,20 +9,20 @@ import duke.task.TaskList;
  * Command to create Event tasks.
  */
 public class EventCommand extends Command {
-    private String input;
-    private String taskDesc;
-    private String eventDate;
+    private String taskDesc = "";
+    private String eventDate = "";
 
     /**
      * Constructor for EventCommand.
      *
      * @param input User input.
      */
-    public EventCommand(String input) {
-        this.input = input;
-        this.taskDesc = input.replaceFirst("^event ", "").split(" /")[0];
+    public EventCommand(String input) throws DukeException {
+        this.taskDesc = input.replaceFirst("^event", "").split(" /")[0];
         if (input.contains("/at")) {
             this.eventDate = input.substring(input.indexOf("/at") + 4);
+        } else {
+            throw new DukeException("☹ OOPS!!! Please use the /at command to include the time of event.");
         }
     }
 

@@ -12,7 +12,6 @@ import duke.DukeException;
 public class Deadline extends Task {
 
     protected String deadline;
-    protected String date = "";
 
     /**
      * Constructor for Deadline.
@@ -24,23 +23,15 @@ public class Deadline extends Task {
     public Deadline(String description, String deadline) throws DukeException {
         super(description);
 
-        try {
-            LocalDate localDate = LocalDate.parse(deadline);
-            this.date = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } catch (DateTimeParseException e) {
-            throw new DukeException("duke.task.Deadline should be in a yyyy-mm-dd format.");
-        }
-
-        if (description.isEmpty() || description == "" || description == " ") {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-        } else {
-            this.description = description;
-        }
-
-        if (deadline.isEmpty() || deadline == "" || deadline == " ") {
+        if (deadline.equals("") || deadline.equals(" ")) {
             throw new DukeException("☹ OOPS!!! The deadline of this task must be indicated.");
         } else {
-            this.deadline = this.date;
+            try {
+                LocalDate localDate = LocalDate.parse(deadline);
+                this.deadline = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("duke.task.Deadline should be in a yyyy-mm-dd format.");
+            }
         }
     }
 

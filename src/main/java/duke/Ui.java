@@ -32,7 +32,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return ("Hello from\n" + logo + "\n"
-                + "Hello! I'm duke.Duke\n" + "What can I do for you?");
+                + "Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     /**
@@ -63,10 +63,10 @@ public class Ui {
      * @param task Done task.
      */
     public String setTaskAsDone(Task task) {
+        assert !task.equals(null) : "task does not exist";
         return "Nice! I've marked this task as done: \n" + task.toString();
     }
 
-    //CHANGED
     /**
      * Prints Ui for removing task from the list.
      *
@@ -74,12 +74,12 @@ public class Ui {
      * @param size Updated number of items on the TaskList.
      */
     public String removeTaskFromList(Task task, int size) {
+        assert !task.equals(null) : "task does not exist";
         String taskToString = task.toString();
         return ("Noted. I've removed this task: \n" + taskToString
                 + "\nNow you have " + size + " tasks in the list.");
     }
 
-    //CHANGED
     /**
      * Prints the current TaskList.
      *
@@ -97,7 +97,6 @@ public class Ui {
         }
     }
 
-    //CHANGED
     /**
      * Searches for the keyword among current Tasks.
      *
@@ -120,7 +119,6 @@ public class Ui {
         return result;
     }
 
-    //CHANGED
     /**
      * Prints a message when all current Tasks do not contain the keyword provided.
      *
@@ -131,30 +129,12 @@ public class Ui {
     }
 
     /**
-     * Reads the user input.
-     *
-     * @return The next line of user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    //CHANGED
-    /**
      * Prints DukeException errors.
      *
      * @param e Error message.
      */
-    public String showError(String e) {
-        return (e);
-    }
-
-    //CHANGED
-    /**
-     * Prints line for formatting messages.
-     */
-    public String showLine() {
-        return ("___________________");
+    public String getErrorMessage(Exception e) {
+        return e.getMessage();
     }
 
     /**
