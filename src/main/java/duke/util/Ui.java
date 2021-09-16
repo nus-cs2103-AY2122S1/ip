@@ -13,7 +13,7 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String LINE = "-----------------------------------------------------------------------\n";
-    private final Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);

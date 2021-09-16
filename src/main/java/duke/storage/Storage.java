@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 public abstract class Storage {
-    protected final String filePath;
+    protected String filePath;
 
     /**
      * Constructor for a new Storage object.

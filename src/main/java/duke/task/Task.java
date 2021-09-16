@@ -4,7 +4,7 @@ package duke.task;
  * This class encapsulates a task in the Duke application.
  */
 public abstract class Task {
-    private final String description;
+    private String description;
     private boolean isDone;
 
     /**
@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the description of the task.
+     * Gets the description of the task.
      *
      * @return The description of the task.
      */

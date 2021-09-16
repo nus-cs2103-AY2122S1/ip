@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * This class encapsulates a deadline task in the Duke Application.
  */
 public class Deadline extends Task {
-    private final LocalDate by;
+    private LocalDate dueBy;
 
     /**
      * Constructor for a new Deadline task.
@@ -17,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by) {
         super(description);
-        this.by = by;
+        this.dueBy = by;
     }
 
     /**
@@ -29,17 +29,17 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.dueBy = by;
     }
 
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                this.dueBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override
     public String toSaveFormat() {
-        return String.format("D,%s,%s", super.toSaveFormat(), this.by);
+        return String.format("D,%s,%s", super.toSaveFormat(), this.dueBy);
     }
 }

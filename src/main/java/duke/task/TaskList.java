@@ -9,7 +9,6 @@ import duke.exception.EmptyTodoDescriptionException;
 import duke.exception.InvalidFileFormatException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidTaskIndexException;
-import duke.storage.Event;
 import duke.util.Parser;
 import duke.util.Ui;
 

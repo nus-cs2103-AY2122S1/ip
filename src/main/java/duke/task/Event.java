@@ -1,22 +1,20 @@
-package duke.storage;
-
-import duke.task.Task;
+package duke.task;
 
 /**
  * This class encapsulates an event task in the Duke Application.
  */
 public class Event extends Task {
-    private final String at;
+    private String eventTime;
 
     /**
      * Constructor for a new Event task.
      *
      * @param description The task description.
-     * @param at          The time of this task.
+     * @param eventTime   The time of this task.
      */
-    public Event(String description, String at) {
+    public Event(String description, String eventTime) {
         super(description);
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     /**
@@ -28,16 +26,16 @@ public class Event extends Task {
      */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        this.eventTime = at;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        return String.format("[E]%s (at: %s)", super.toString(), this.eventTime);
     }
 
     @Override
     public String toSaveFormat() {
-        return String.format("E,%s,%s", super.toSaveFormat(), this.at);
+        return String.format("E,%s,%s", super.toSaveFormat(), this.eventTime);
     }
 }
