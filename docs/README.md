@@ -11,7 +11,7 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
    * [Finding task using keyword: `find`](#finding-task-using-keyword-find)
    * [Mark task as complete: `done`](#mark-task-as-complete-done)
    * [Remove a task: `delete`](#remove-a-task-delete)
-   * [Viewing help : `help`](#viewing-help--help)*
+   * [Viewing help : `help`](#viewing-help--help)
 * [Exiting the application: `bye`](#exiting-the-application-bye)  
 
  
