@@ -37,6 +37,7 @@ public class Main extends Application {
             duke.run();
             this.sendMessageToUser(this.duke.getStorageStatusMessage());
             this.sendMessageToUser(Ui.WELCOME_MESSAGE);
+            stage.setTitle("ted");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +46,7 @@ public class Main extends Application {
 
     private Path getFilePath() {
         String userDir = System.getProperty("user.dir");
-        return Paths.get(userDir, "taskLog.txt");
+        return Paths.get(userDir, "tasks.txt");
     }
 
     private void sendMessageToUser(String message) {

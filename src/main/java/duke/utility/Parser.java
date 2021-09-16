@@ -33,6 +33,7 @@ public class Parser {
     public static final String INVALID_DATETIME_MESSAGE = "Invalid task description: invalid date/time\n"
             + "Please use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr format)]\n"
             + "e.g. event lecture / 21-02-2021 1500";
+    public static final String HELP_MESSAGE = "visit https://whoisjustinngo.github.io/ip/ to view the user guide";
 
     private final TaskList taskList;
     private final Storage storage;
@@ -69,6 +70,8 @@ public class Parser {
                 return this.taskList.searchTasks(command.substring(5).trim());
             case "list":
                 return this.taskList.getAllTasks();
+            case "help":
+                return HELP_MESSAGE;
             default:
                 return this.parseNewTask(command.trim());
             }

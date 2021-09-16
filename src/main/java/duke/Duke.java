@@ -17,7 +17,7 @@ import duke.utility.Ui;
 
 public class Duke {
     public static final String UNABLE_TO_CREATE_STORAGE_MESSAGE = "Unable to create/open specified file."
-            + "\nTasks will not be logged.";
+            + "\nTasks will not be saved.";
     private final Ui ui;
     private TaskList tasks;
     private Storage storage;

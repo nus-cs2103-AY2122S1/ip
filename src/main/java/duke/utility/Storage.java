@@ -43,12 +43,12 @@ public class Storage {
         File previousLog = new File(this.filePath);
         boolean newFileCreated = previousLog.createNewFile();
         if (newFileCreated) { // file already exists
-            this.storageLoadStatusMessage = "Specified file not found.\nNew file created: " + filePath
-                    + "\nTask log will be saved there.";
+            this.storageLoadStatusMessage = "Specified file not found.\nNew file created at " + filePath
+                    + "\nTasks will be saved there.";
         } else { // file already exists
             this.storageLoadStatusMessage = "Successfully established connection with file " + filePath
-                    + "\nPrevious duke.task log imported."
-                    + "\nAll changes to task log will be saved there.";
+                    + "\nPrevious tasks imported."
+                    + "\nAll changes to tasks will be saved there.";
         }
     }
 

@@ -1,11 +1,12 @@
-# :scroll: User Guide
+# Ted User Guide
 
 ### About
-This app helps the user track tasks.
-There are 3 types of tasks that the user can add and track:
-1. **ToDo**
-2. **Event** 
-3. **Deadline**
+Ted helps users track tasks, well, 3 types of tasks to be exact:
+* **T - Todos**
+* **E - Events**
+* **D - Deadlines**  
+
+(Hence T E D - Ted)
 
 `ToDos` are the most basic type of task, with just a name and a completion status, whereas `Deadlines` and `Events` can additionally store date and time information.
 ***
@@ -62,7 +63,7 @@ D: [X] ph1234 essay before: Wed, 15 Sep 2021, 23:59
 ### Deleting a task from the list: `delete`
 Enter the command `delete <task number>`, where `<task number>` is the number of the task to delete.  
 For example, to delete the task `buy bread` from the list in the previous examples, enter  `delete 1` since the task is task 1 on the list.  
-> :bulb: tip: you can check the task number using `list`
+> **Tip:** you can check the task number using `list`
 
 &nbsp;
 ### Searching for tasks: `find`
@@ -74,7 +75,7 @@ To use, enter `find <keyword(s)>`. For example, if your list has tasks with the 
 4. cs2103 team project user guide
 
 Entering `find cs2103` will display items 1, 2 and 4 to the user.
->:heavy_exclamation_mark: note that the app checks if the given `<keyword(s)>` are a substring of the name of the tasks.  
+> **Tip:** note that the app checks if the given `<keyword(s)>` are a substring of the name of the tasks.  
 > Therefore, entering `find cs2103 project` **will not** bring up tasks 1 and / or 4.  
 > Entering `find cs` **will** bring up 1, 2 and 4 since those names have "cs" as a substring.
 
@@ -82,6 +83,10 @@ Entering `find cs2103` will display items 1, 2 and 4 to the user.
 ### Bringing up the schedule for a particular date: `schedule`
 Entering `schedule <date>` brings up all the events and deadlines that have a date that matches the specified date.  
 Note that the date specified has to be in the format: "dd-mm-yyyy".
+
+&nbsp;
+### Finding help: `help`
+Provides the link to this user guide.
 
 &nbsp;
 ### Closing the app: `bye`

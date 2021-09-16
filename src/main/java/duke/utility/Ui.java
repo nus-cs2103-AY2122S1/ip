@@ -2,7 +2,8 @@ package duke.utility;
 
 public class Ui {
 
-    public static final String WELCOME_MESSAGE = "Hello I'm Duke!\nWhat can I do for you?";
+    public static final String WELCOME_MESSAGE = "Hello I'm Ted!\nWhat can I do for you?\n"
+            + "(you can enter \"help\" at any time if you need help on using this app)";
     private Parser parser;
 
 
