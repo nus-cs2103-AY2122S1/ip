@@ -12,7 +12,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -36,17 +39,19 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        dialogContainer.setBackground(new Background(new BackgroundFill(
+                Color.DARKSEAGREEN, null, null)));
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         try {
-            user = new Image(new FileInputStream("levi.png"));
-            bot = new Image(new FileInputStream("hange.png"));
+            user = new Image(new FileInputStream("/Users/ravi57004/ip/levi.png"));
+            bot = new Image(new FileInputStream("/Users/ravi57004/ip/hange.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
-                        "Hello I'm Hange! \n How can I help you?", bot)
+                        " Hello I'm Hange! \n How can I help you?", bot)
         );
         handleActions();
     }
@@ -69,14 +74,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (userInput.getText().equals("bye")) {
+        if (input.equals("bye")) {
             Platform.exit();
         } else {
             String response = duke.getResponse(input);
-            Parser.setPrevInput(userInput.getText());
+            Parser.setPrevInput(input);
             System.out.println(response);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, user),
+                    DialogBox.getUserDialog(input + " ",
+                            user),
                     DialogBox.getDukeDialog(response, bot)
             );
         }
