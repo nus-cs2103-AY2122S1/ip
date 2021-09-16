@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.util.DukeException;
+
 /**
  * Represents an event task with a <code>description</code> corresponding to the content
  * and a <code>at</code> time representing the event time.
@@ -37,9 +39,12 @@ public class Event extends Task {
      * @param time a String of format dd/mm/yyyy hhmm(optional)
      * @return transformed time of type LocalDateTime
      */
-    public LocalDateTime parseTime(String time) {
+    private LocalDateTime parseTime(String time) {
         String[] str = time.split(" ");
         String[] oldDate = str[0].split("/");
+        if (oldDate.length != 3) {
+            throw new DukeException("OOPS!!! The time is not of the correct format!");
+        }
         LocalDateTime localTime;
         if (str.length > 1) {
             String hour = str[1].substring(0, 2);
@@ -59,11 +64,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String string = "[E]" + super.toString() + "(at: ";
+        String string = "[E]" + super.toString() + " (at: ";
         if (hasTime) {
-            string += at.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy")) + ")";
+            string += at.format(DateTimeFormatter.ofPattern("HH:mm, dd/MM/yyyy")) + ")";
         } else {
-            string += at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            string += at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
         }
         return string;
     }

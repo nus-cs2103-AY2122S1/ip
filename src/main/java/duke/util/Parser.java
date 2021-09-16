@@ -71,7 +71,7 @@ public class Parser {
      *
      * @return result content
      */
-    public String commandList() {
+    private String commandList() {
         String items = "";
         if (taskList.length() > 0) {
             items = items + "    1. " + taskList.get(0).toString();
@@ -87,7 +87,7 @@ public class Parser {
      * @param input
      * @return result content
      */
-    public String findKeyword(String input) {
+    private String findKeyword(String input) {
         try {
             String lowerCase = input.toLowerCase();
             assert lowerCase.length() > 0 : "The input should not be empty!";

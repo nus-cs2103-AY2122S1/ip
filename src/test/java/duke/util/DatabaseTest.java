@@ -13,9 +13,9 @@ import duke.task.Todo;
 class DatabaseTest {
 
     @Test
-    void readData() {
+    void readData_success() {
         try {
-            Database dukeDB = new Database("data/tasks.txt");
+            Database dukeDB = new Database("data/duke.txt");
             dukeDB.readData();
         } catch (Exception e) {
             fail("there is error on readData");
@@ -23,9 +23,9 @@ class DatabaseTest {
     }
 
     @Test
-    void addData() {
+    void addData_success() {
         try {
-            Database dukeDB = new Database("data/tasks.txt");
+            Database dukeDB = new Database("data/duke.txt");
             Task ddl = new Deadline("return book", "2/2/2019 1800");
             Task todo = new Todo("buy milk");
             Task event = new Event("meeting", "2/12/2020");
@@ -38,9 +38,9 @@ class DatabaseTest {
     }
 
     @Test
-    void doneData() {
+    void doneData_success() {
         try {
-            Database dukeDB = new Database("data/tasks.txt");
+            Database dukeDB = new Database("data/duke.txt");
             dukeDB.doneData(1);
         } catch (Exception e) {
             fail("there is error on doneData");
@@ -48,13 +48,12 @@ class DatabaseTest {
     }
 
     @Test
-    void deleteData() {
+    void deleteData_success() {
         try {
-            Database dukeDB = new Database("data/tasks.txt");
+            Database dukeDB = new Database("data/duke.txt");
             dukeDB.deleteData(1);
         } catch (Exception e) {
             fail("there is error on doneData");
         }
     }
 }
-

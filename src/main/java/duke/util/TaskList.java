@@ -20,6 +20,9 @@ public class TaskList {
      * @return Task item
      */
     public Task get(int index) {
+        if (index > tasks.size() - 1) {
+            throw new DukeException("OOPS!!! The index is beyond the scope!");
+        }
         return tasks.get(index);
     }
 
