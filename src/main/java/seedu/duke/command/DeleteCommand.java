@@ -65,8 +65,13 @@ public class DeleteCommand extends Command {
         if (isValid) {
             Task task = taskList.getTask(index);
             taskList = taskList.deleteTask(index);
-            ArrayList<Task> tasksOnDate = dateTasks.get(task.getDate());
-            tasksOnDate.remove(task);
+            ArrayList<Task> tasksOnDate = dateTasks
+                    .getOrDefault(task.getDate(), new ArrayList<>());
+
+            // Remove if it is an upcoming task
+            if (!tasksOnDate.equals(LocalDate.now())) {
+                tasksOnDate.remove(task);
+            }
             storage.deleteTaskFromFile(this.taskList);
 
             return String.format("%s\n%s\n%s",
