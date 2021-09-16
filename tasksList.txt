@@ -9,3 +9,4 @@ D | 1 | task | 21/09/2021
 D | 1 | Testing | 12/09/2021
 T | 0 | laundry
 D | 1 | CS2103T iP | 17/09/2021
+T | 1 | sleep

@@ -24,7 +24,7 @@ Chatbot Window
 
 ---
 ## Getting Started
-1. Download the JAR file from [here](apple.com).
+1. Download the JAR file from [here](https://github.com/Jai2501/ip/releases/tag/v2.0).
 2. Open Terminal, and type in the following command to run the App.
 ```
 java -jar retriever-1.0.jar
