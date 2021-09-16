@@ -1,8 +1,5 @@
 package duke;
 
-import java.io.File;
-import java.net.URL;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -29,17 +26,14 @@ public class Controller {
     private Storage storage;
     private Image dukeIcon;
     private Image userIcon;
-
+    private Image backgroundImage;
     /**
      * Constructor for the controller.
      */
     public Controller() {
         try {
-            URL dukeUrl = new File("./src/main/java/duke/resources/dukeIcon.png").toURI().toURL();
-            dukeIcon = new Image(String.valueOf(dukeUrl));
-            URL userUrl = new File("src/main/java/duke/resources/userIcon.png").toURI().toURL();
-            userIcon = new Image(String.valueOf(userUrl));
-
+            dukeIcon = new Image(this.getClass().getResourceAsStream("/dukeIcon.png"));
+            userIcon = new Image(this.getClass().getResourceAsStream("/userIcon.png"));
         } catch (Exception ee) {
             System.out.println("rip welcome message");
         }

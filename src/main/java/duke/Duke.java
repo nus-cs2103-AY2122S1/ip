@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.File;
-import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -30,7 +28,7 @@ public class Duke extends Application {
      */
     public Duke() {
         this.list = new MyList();
-        this.storage = new Storage(this.list, "./Data.txt");
+        this.storage = new Storage(this.list, "Data.txt");
     }
 
     /**
@@ -56,13 +54,16 @@ public class Duke extends Application {
     /**
      * Starts up the duke GUI.
      * @param stage The stage for the GUI
-     * @throws Exception
      */
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = new File("src\\main\\java\\duke\\resources\\MainWindow.fxml").toURI().toURL();
-        Parent root = FXMLLoader.load(url);
-        Scene scene = new Scene(root);
+        //URL url = new File("src/main/resources/MainWindow.fxml").toURI().toURL();
+        //Parent root = FXMLLoader.load(url);
+        //System.out.println(getClass().getResource("MainWindow.fxml"));
+        //System.out.println(getClass().getResource("userIcon.png"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
+        Parent root2 = loader.load();
+        Scene scene = new Scene(root2);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Duke");
