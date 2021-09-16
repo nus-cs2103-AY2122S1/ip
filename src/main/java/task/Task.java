@@ -6,7 +6,7 @@ public abstract class Task {
     protected String notes;
 
     /**
-     * Constructor for Task class
+     * Constructs a Task class with common information.
      * @param description the task description
      * @param notes additional notes that are not related to task name
      * @param completed true if task has been completed

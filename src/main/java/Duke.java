@@ -5,8 +5,8 @@ import task.TaskList;
 
 
 /**
- * Project Duke is an educational software project.
- * It stores tasks entered by users locally and reloads then on every start-up.
+ * Duke is secretary chatbot.
+ * It stores tasks entered by users locally and reloads them on every start-up.
  */
 
 public class Duke {

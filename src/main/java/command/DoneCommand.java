@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execute the given command returned by parse method.
+     * Executes the given command returned by parse method.
      * Each command class will have its own interaction with Ui, TaskList and Storage
      *
      * @param tasks the TaskList loaded from storage.

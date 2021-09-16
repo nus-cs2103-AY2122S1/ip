@@ -1,14 +1,14 @@
 package task;
 
 /**
- * task.Todo is a subclass of a task.Task.
+ * Todo is a subclass of a Task.
  * It has the same behaviour of a task except printing out the task.Task type when using
  * ToString method call.
  */
 
 public class Todo extends Task {
     /**
-     * Constructor for task.Todo object.
+     * Constructor for Todo object.
      *
      * @param description the task description
      */
@@ -21,7 +21,6 @@ public class Todo extends Task {
      *
      * @return the String representation of a task.Todo
      */
-
     private String showNotesIfAvailable() {
         if (this.notes.isEmpty()) {
             return "";
