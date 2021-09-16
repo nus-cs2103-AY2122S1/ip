@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public abstract class Task {
 
@@ -25,7 +25,7 @@ public abstract class Task {
         }
     }
 
-    abstract String toWriteString();
+    public abstract String toWriteString();
 
     public String getDescription() {
         return this.description;
