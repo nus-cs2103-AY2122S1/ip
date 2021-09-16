@@ -62,6 +62,7 @@ Says goodbye to duke.
 Format: `bye`
 
 ## Command summary
+
  Action          | Format, Example                             
  :-------------: | :-----------:                               
   help           | `help`
