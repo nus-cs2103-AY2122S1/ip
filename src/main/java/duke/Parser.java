@@ -31,7 +31,8 @@ public class Parser {
             return new HelpCommand();
         }
         if (wrongArrayLength) {
-            return new ErrorCommand("Complete your command");
+            return new ErrorCommand("Fix your command!\n" +
+                    "Type \"help\" if you need help.");
         }
         switch (commandArr[0]) {
         case "done": 
@@ -51,7 +52,8 @@ public class Parser {
             return parseEventCommand(command);
 
         default:
-            return new ErrorCommand("I'm sorry, but I don't know what that means!");
+            return new ErrorCommand("Fix your command!\n" +
+                    "Type \"help\" if you need help.");
         }
 
 
