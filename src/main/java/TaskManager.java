@@ -51,6 +51,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Method that handles commands and returns Joker's appropriate output and response.
+     * @param inData input message from the user
+     * @return Joker bot's response to command entered
+     */
     public String executeCommand(String inData) {
         int inDataLength = inData.length();
         if (!Objects.equals(inData.toLowerCase(), "bye")) {
