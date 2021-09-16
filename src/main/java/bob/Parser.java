@@ -150,29 +150,39 @@ public class Parser {
             String[] splitResponse = response.split(" ", 2);
             boolean hasNoTaskDescription = splitResponse.length == 1;
             boolean hasNoDate = !response.contains("/by");
-            boolean hasNoTaskAndDate = splitResponse.length == 2;
-            if (hasNoTaskDescription) {
+            if (!hasNoDate && !hasNoTaskDescription) {
+                hasNoTaskDescription = response.split("/by", 2)[0].split(" ", 0).length == 1;
+            }
+            if (!hasNoDate) {
+                hasNoDate = response.split("/by", 0).length == 1;
+            }
+            boolean hasNoTaskAndDate = hasNoTaskDescription && hasNoDate;
+
+            if (hasNoTaskAndDate) {
+                throw new NoTaskAndDateException();
+            } else if (hasNoTaskDescription) {
                 throw new NoTaskException();
             } else if (hasNoDate) {
                 throw new NoDeadlineException();
-            } else if (hasNoTaskAndDate) {
-                throw new NoTaskAndDateException();
-            } else if (splitResponse[1].split(" ", 3).length == 2) {
-                throw new NoTaskException();
             }
         } else if (isEventCommand) {
             String[] splitResponse = response.split(" ", 2);
             boolean hasNoTaskDescription = splitResponse.length == 1;
             boolean hasNoDate = !response.contains("/at");
-            boolean hasNoTaskAndDate = splitResponse.length == 2;
-            if (hasNoTaskDescription) {
+            if (!hasNoDate && !hasNoTaskDescription) {
+                hasNoTaskDescription = response.split("/at", 2)[0].split(" ", 0).length == 1;
+            }
+            if (!hasNoDate) {
+                hasNoDate = response.split("/at", 0).length == 1;
+            }
+            boolean hasNoTaskAndDate = hasNoTaskDescription && hasNoDate;
+
+            if (hasNoTaskAndDate) {
+                throw new NoTaskAndDateException();
+            } else if (hasNoTaskDescription) {
                 throw new NoTaskException();
             } else if (hasNoDate) {
                 throw new NoEventTimingException();
-            } else if (hasNoTaskAndDate) {
-                throw new NoTaskAndDateException();
-            } else if (splitResponse[1].split(" ", 3).length == 2) {
-                throw new NoTaskException();
             }
         } else if (isSearchCommand) {
             String[] splitResponse = response.split(" ", 2);

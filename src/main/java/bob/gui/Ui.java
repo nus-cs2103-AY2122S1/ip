@@ -143,14 +143,14 @@ public class Ui {
      * Returns message for when the user does not specify the deadline of their Deadline task.
      */
     public String getNoDeadlineExceptionMessage() {
-        return "When is the deadline? >:(\n";
+        return "When is the deadline? >:(\nPlease specify the date with the format\n/by YYYY-MM-DD";
     }
 
     /**
      * Returns message for when the user does not specify the timing of their Event task.
      */
     public String getNoEventTimingExceptionMessage() {
-        return "When is the event? >:(\n";
+        return "When is the event? >:(\nPlease specify the date with the format\n/at YYYY-MM-DD";
     }
 
     /**
