@@ -26,13 +26,13 @@ public class Duke extends Application {
      * @param filePath File path of where the saved task list is.
      */
     public Duke(String filePath) {
-        this.cliUi = new CliUi();
-        this.storage = new Storage(filePath);
+        cliUi = new CliUi();
+        storage = new Storage(filePath);
         try {
-            this.taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.cliUi.showLoadingError();
-            this.taskList = new TaskList();
+            cliUi.showLoadingError();
+            taskList = new TaskList();
         }
     }
 
@@ -40,13 +40,13 @@ public class Duke extends Application {
      * Duke constructor. Loads stored tasks from default filepath.
      */
     public Duke() {
-        this.cliUi = new CliUi();
-        this.storage = new Storage(DATA_FILE_PATH);
+        cliUi = new CliUi();
+        storage = new Storage(DATA_FILE_PATH);
         try {
-            this.taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.cliUi.showLoadingError();
-            this.taskList = new TaskList();
+            cliUi.showLoadingError();
+            taskList = new TaskList();
         }
     }
 
