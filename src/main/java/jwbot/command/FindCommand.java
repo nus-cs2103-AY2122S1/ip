@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     private List<Task> processSearchResult(TaskList tasks) {
         List<Task> result = new ArrayList<>();
         String keyword = input.split(" ", 2)[1];
-        for (Task task : tasks.getItems()) {
+        for (Task task : tasks.getTasks()) {
             if (task.isRelevant(keyword)) {
                 result.add(task);
             }

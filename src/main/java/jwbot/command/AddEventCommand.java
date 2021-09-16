@@ -24,6 +24,7 @@ public class AddEventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
+            tasks.backupTasks();
             Event event = processTask(tasks);
             tasks.addTask(event);
             storage.write(tasks);

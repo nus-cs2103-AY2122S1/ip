@@ -25,6 +25,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
+        tasks.backupTasks();
         Todo todo = processTask(tasks);
         tasks.addTask(todo);
         try {

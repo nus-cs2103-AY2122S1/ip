@@ -3,7 +3,10 @@ package jwbot.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import jwbot.data.task.Deadline;
+import jwbot.data.task.Event;
 import jwbot.data.task.Task;
+import jwbot.data.task.Todo;
 
 /**
  * Class that stores the list of the tasks.
@@ -12,22 +15,26 @@ import jwbot.data.task.Task;
  */
 public class TaskList {
 
-    private List<Task> items;
+    private List<Task> prevTasks;
+    private List<Task> tasks;
 
     /**
      * The basic constructor of the task list that takes in an arraylist of tasks.
      *
-     * @param items the list of the tasks
+     * @param tasks the list of the tasks
      */
-    public TaskList(List<Task> items) {
-        this.items = items;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+        this.prevTasks = new ArrayList<>();
+        backupTasks();
     }
 
     /**
      * The alternative constructor made in case an error occurs.
      */
     public TaskList() {
-        items = new ArrayList<>();
+        tasks = new ArrayList<>();
+        this.prevTasks = new ArrayList<>();
     }
 
     /**
@@ -35,8 +42,8 @@ public class TaskList {
      *
      * @return the stored private arraylist of the tasks
      */
-    public List<Task> getItems() {
-        return items;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
@@ -46,7 +53,7 @@ public class TaskList {
      * @return the removed task
      */
     public Task remove(int index) {
-        return items.remove(index);
+        return tasks.remove(index);
     }
 
     /**
@@ -55,7 +62,7 @@ public class TaskList {
      * @return the size of the stored task arraylist
      */
     public int getSize() {
-        return items.size();
+        return tasks.size();
     }
 
     /**
@@ -64,7 +71,7 @@ public class TaskList {
      * @param task the task that the user wants to add to the list
      */
     public void addTask(Task task) {
-        items.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -74,6 +81,30 @@ public class TaskList {
      * @return the task from the list of the index
      */
     public Task getTask(int index) {
-        return items.get(index);
+        return tasks.get(index);
+    }
+
+    public void undoCommand() {
+        tasks = deepCopy(prevTasks);
+    }
+
+    public void backupTasks() {
+        prevTasks = deepCopy(tasks);
+    }
+
+    public List<Task> deepCopy(List<Task> tasks) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof Todo) {
+                result.add(new Todo((Todo) task));
+            }
+            if (task instanceof Event) {
+                result.add(new Event((Event) task));
+            }
+            if (task instanceof Deadline) {
+                result.add(new Deadline((Deadline) task));
+            }
+        }
+        return result;
     }
 }

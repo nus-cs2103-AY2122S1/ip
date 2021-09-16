@@ -42,7 +42,7 @@ public class Storage {
      */
     public void write(TaskList items) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        List<Task> tasks = items.getItems();
+        List<Task> tasks = items.getTasks();
         for (Task task : tasks) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;

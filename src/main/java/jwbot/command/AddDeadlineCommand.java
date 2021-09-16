@@ -26,6 +26,7 @@ public class AddDeadlineCommand extends Command {
         assert ui != null;
         assert storage != null;
         try {
+            tasks.backupTasks();
             Deadline deadline = processTask(tasks);
             tasks.addTask(deadline);
             storage.write(tasks);

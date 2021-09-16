@@ -16,6 +16,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(Todo todo) {
+        super(todo.description);
+    }
+
     /**
      * override toString method for easier printing
      *

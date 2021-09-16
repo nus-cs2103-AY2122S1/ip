@@ -1,14 +1,6 @@
 package jwbot.parser;
 
-import jwbot.command.AddDeadlineCommand;
-import jwbot.command.AddEventCommand;
-import jwbot.command.AddTodoCommand;
-import jwbot.command.Command;
-import jwbot.command.DeleteCommand;
-import jwbot.command.DoneCommand;
-import jwbot.command.ExitCommand;
-import jwbot.command.FindCommand;
-import jwbot.command.ListCommand;
+import jwbot.command.*;
 import jwbot.data.exception.JwBotException;
 
 
@@ -43,6 +35,8 @@ public class Parser {
             return new AddEventCommand(input);
         } else if (input.startsWith("delete ")) {
             return new DeleteCommand(input);
+        } else if (input.equals("undo")) {
+            return new UndoCommand(input);
         } else {
             throw new JwBotException("Sorry bro, I don't understand what you mean!");
         }

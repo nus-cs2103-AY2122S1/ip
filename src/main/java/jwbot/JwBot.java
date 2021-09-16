@@ -24,7 +24,7 @@ public class JwBot {
      * @param filePath the path of the txt file that the tasks will be recorded on
      */
     public JwBot(String filePath) {
-        assert filePath != null : "filePath is null";
+        assert filePath != null;
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -36,7 +36,7 @@ public class JwBot {
     }
 
     public void exit() {
-            System.exit(0);
+        System.exit(0);
     }
 
     public String getResponse(String input) throws JwBotException {

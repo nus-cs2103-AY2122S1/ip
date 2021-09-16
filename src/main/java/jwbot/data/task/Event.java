@@ -16,11 +16,16 @@ public class Event extends Task {
      * The constructor of the event task
      *
      * @param description the description of the event
-     * @param by          the date or time of the event
+     * @param at          the date or time of the event
      */
-    public Event(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.at = by;
+        this.at = at;
+    }
+
+    public Event(Event event) {
+        super(event.description);
+        this.at = event.at;
     }
 
     /**

@@ -26,6 +26,11 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    public Deadline(Deadline deadline) {
+        super(deadline.description);
+        this.by = deadline.by;
+    }
+
     /**
      * The constructor of the deadline task.
      *

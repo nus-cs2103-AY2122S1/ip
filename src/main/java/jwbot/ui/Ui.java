@@ -97,4 +97,8 @@ public class Ui {
         return error;
     }
 
+    public String showUndoSuccessMessage() {
+        return "OK bro, the latest change you made in the task list is undone!";
+    }
+
 }
