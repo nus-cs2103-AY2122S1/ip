@@ -127,6 +127,7 @@ public class Ui {
                 + "find {keyword}: Shows a list of tasks containing {keyword}\n"
                 + "done {index}: Marks the {index} task as done\n"
                 + "delete {index}: Deletes the {index} task\n"
+                + "tag {index} #{tag}: tag the {index} task with {tag}"
                 + "todo {task name}: Adds {task name} to the list\n"
                 + "deadline {task name} /by {YYYY-MM-DD}: Adds {task name} to the list with a deadline\n"
                 + "event {task name} /by {YYYY-MM-DD}: Adds {task name} to the list with an event date";
