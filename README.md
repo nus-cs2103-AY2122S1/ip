@@ -74,3 +74,17 @@ Format: `find <keyword>`
 Example: `find CS2103`
 
  
+Statistics about different types of tasks: stattask
+
+Shows how many of each type of task Duke has  
+Format: `stattask`
+   
+Statistics about how many tasks are done: statdone
+   
+Shows how many tasks are marked as done  
+Format: `statdone`
+   
+Statistics about how many tasks are not marked as done: statnotdone
+   
+Shows how many tasks are not marked as done  
+Format: `statnotdone`
