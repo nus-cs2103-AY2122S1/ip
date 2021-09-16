@@ -40,7 +40,7 @@ public class TaskList {
      * @return The task numbered <code>index</code>.
      */
     public Task getTask(int index) throws DukeException {
-        if (index < 0 || index >= tasks.size()) {
+        if (index <= 0 || index > tasks.size()) {
             throw new DukeException(OUT_OF_BOUNDS_MSG);
         }
         return tasks.get(index - 1);
@@ -53,7 +53,7 @@ public class TaskList {
      * @return The task removed.
      */
     public Task deleteTask(int index) throws DukeException {
-        if (index < 0 || index >= tasks.size()) {
+        if (index <= 0 || index > tasks.size()) {
             throw new DukeException(OUT_OF_BOUNDS_MSG);
         }
         return tasks.remove(index - 1);
