@@ -51,15 +51,15 @@ public class Storage {
         File dir = new File("data");
         boolean hasDirectory = dir.exists() && dir.isDirectory();
 
-        if(!hasDirectory) {
+        if (!hasDirectory) {
             dir.mkdir();
         }
 
         try {
             taskFile.createNewFile();
         } catch (IOException e) {
-            throw new DukeException("Oh No! There seems to be something " +
-                    "wrong with the file...");
+            throw new DukeException("Oh No! There seems to be something "
+                    + "wrong with the file...");
         }
     }
 
@@ -140,7 +140,7 @@ public class Storage {
      * @param doneIndicator The done status of the task.
      */
     public void checkDoneStatus(Task task, String doneIndicator) {
-        if(doneIndicator.trim().equals("Y")) {
+        if (doneIndicator.trim().equals("Y")) {
             task.markAsDone();
         }
     }

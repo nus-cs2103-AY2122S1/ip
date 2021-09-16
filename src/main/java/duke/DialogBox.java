@@ -26,6 +26,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * A private constructor for DialogBox.
+     *
+     * @param text The text to display.
+     * @param img The image in the dialog box.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -50,6 +56,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a dialogbox containing the user input and user image.
+     *
+     * @param text The user input.
+     * @param img The user image.
+     * @return Dialog box containing the input and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color:lavender");
@@ -59,12 +72,27 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Returns a dialog box containing Duke's response and image.
+     *
+     * @param text Duke's response.
+     * @param img Duke's image.
+     * @return Dialog box containing the text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color:lightsteelblue");
         return db;
     }
 
+    /**
+     * Returns the dialog box containing Duke's user greeting
+     * and Duke's image.
+     *
+     * @param text The user greeting.
+     * @param img Duke's image.
+     * @return Dialog box containing the text and image.
+     */
     public static DialogBox greetUser(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color:lightsteelblue");

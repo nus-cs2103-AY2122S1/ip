@@ -1,10 +1,18 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ScheduleCommand;
+import duke.exception.DukeException;
+
 
 /**
  * A class to process and make sense of the command
@@ -124,7 +132,7 @@ public class Parser {
             break;
         default:
             hasDateCommand = false;
-            assert false: "invalid task command";
+            assert false : "invalid task command";
             break;
         }
         return hasDateCommand;
@@ -150,7 +158,7 @@ public class Parser {
         }
 
         String descriptionAndDate = splitInputWords[1].trim();
-        if(taskType.equals("deadline") || taskType.equals("event")) {
+        if (taskType.equals("deadline") || taskType.equals("event")) {
             boolean hasDescription = hasDescriptionAndDate(descriptionAndDate,
                     taskType);
             boolean hasDateCommand = hasDateCommand(descriptionAndDate,
@@ -206,7 +214,7 @@ public class Parser {
      */
     public Command checkScheduleCommand(String input) throws DukeException {
         String[] inputs = input.split(" +", 2);
-        if(inputs.length != 2) {
+        if (inputs.length != 2) {
             throw new DukeException("OOPS!! Please indicate the date of the "
                     + "schedule you want to view :) Use the format "
                             + "yyyy-mm-dd!!");
@@ -214,7 +222,7 @@ public class Parser {
         try {
             LocalDate scheduleDate = LocalDate.parse(inputs[1].trim());
             return new ScheduleCommand(input, scheduleDate);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("I can only understand the date in yyyy-mm-dd"
                     + "format :)");
         }

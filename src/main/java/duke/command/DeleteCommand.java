@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
         tasks.delete(index);
         try {
             storage.editFileAll(tasks);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
         return toDelete + System.lineSeparator() + ui.numberOfTasks(tasks);

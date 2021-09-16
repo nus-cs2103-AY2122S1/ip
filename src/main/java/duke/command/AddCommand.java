@@ -45,7 +45,15 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
-
+    /**
+     * Returns a deadline task to be added into task list
+     * if input date format is correct.
+     *
+     * @param inputDate The user input date.
+     * @param description The description of the task.
+     * @return The Deadline task.
+     * @throws DukeException If the date format is incorrect.
+     */
     public Task addDeadline(String inputDate, String description) throws DukeException {
         try {
             LocalDate date = LocalDate.parse(inputDate.trim());
@@ -57,6 +65,15 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Returns the event task to be added, if the input date and time
+     * is in correct format.
+     *
+     * @param inputDateTime The inputted date and time.
+     * @param description The description of the event.
+     * @return The event task to be added.
+     * @throws DukeException If the format of the date and time is wrong.
+     */
     public Task addEvent(String inputDateTime, String description) throws DukeException {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -82,7 +99,6 @@ public class AddCommand extends Command {
      * @throws DukeException DukeException thrown when format of date/time
      *                       is incorrect.
      */
-
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
@@ -102,8 +118,8 @@ public class AddCommand extends Command {
             task = addEvent(addTask[1], addTask[0]);
             break;
         default:
-            task= null;
-            assert false: "invalid task command";
+            task = null;
+            assert false : "invalid task command";
             break;
         }
 

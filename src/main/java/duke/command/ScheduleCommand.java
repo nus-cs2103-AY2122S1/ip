@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -8,8 +10,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * A class which encapsulates the command of

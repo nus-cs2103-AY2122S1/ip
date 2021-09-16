@@ -11,8 +11,8 @@ import duke.task.Task;
 public class Ui {
 
     /** The indentation for 4 spaces */
-    private final static String INDENT = "  ";
-    
+    private static final String INDENT = "  ";
+
     /** The scanner to read user input */
     private Scanner scanner;
 
@@ -27,12 +27,12 @@ public class Ui {
     public String getIndent() {
         return INDENT;
     }
-    
+
     /**
      * Prints the greeting message.
      */
     public static String greetUser() {
-        return "Hello! I'm Duke :)\n" 
+        return "Hello! I'm Duke :)\n"
                 + "What can I do for you?";
     }
 
@@ -41,7 +41,7 @@ public class Ui {
      */
     public String sayBye() {
         scanner.close();
-        return  "Bye! Hope to see you again soon :)";
+        return "Bye! Hope to see you again soon :)";
     }
 
     /**
@@ -68,7 +68,7 @@ public class Ui {
      * @param temp The task which is done.
      */
     public String doneTask(Task temp) {
-        return  "YAY good job for completing the task :)\n"
+        return "YAY good job for completing the task :)\n"
                 + "I've marked it as done:\n" + INDENT
                         + temp.toString();
     }
@@ -104,7 +104,7 @@ public class Ui {
      * @param task The task to be added.
      */
     public String addTask(Task task) {
-        return  "Sure! I've added this task:\n"
+        return "Sure! I've added this task:\n"
                 + INDENT + task.toString();
     }
 
@@ -114,7 +114,7 @@ public class Ui {
      * @param taskList The list of tasks.
      */
     public String numberOfTasks(TaskList taskList) {
-        String numberOfTasks =  "You have " + taskList.size()
+        String numberOfTasks = "You have " + taskList.size()
                 + (taskList.size() == 1 ? " task" : " tasks")
                         + " in the list :)";
         return numberOfTasks;

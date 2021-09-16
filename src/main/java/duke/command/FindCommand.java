@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @return The string indicating the command has been executed.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert command.contains("find"): "find is not included";
+        assert command.contains("find") : "find is not included";
         String keyWord = command.split(" +", 2)[1].trim();
         int count = 0;
         String matchingTasks = "";
