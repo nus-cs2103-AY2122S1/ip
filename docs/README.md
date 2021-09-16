@@ -1,17 +1,24 @@
-# DukeMan User Guide
-DukeMan is a simple task manager application that seeks to make your life better by helping you manage your todos, events and deadlines!
+# Bolin User Guide
+Besides being an expert fire bender, Mako is also great at helping you manage your todos, events and deadlines! The application uses quick-text inputs via a Command Line Interface (CLI) while having an excellent Graphical User Interface (GUI). Organise your tasks by using Mako today! 
+
+* [Quick Start](#quick-start-guide)
+* [Features](#features)
+* [Usage](#usage)
+* [Command Summary](#command-summary)
 
 <img src="https://github.com/Domszy/ip/blob/master/docs/Screenshot%20of%20DukeMan.png" width="400" >
 
-### Quick Start Guide 🤘🏻
+### Quick Start Guide
+
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the DukeMan.jar file from the repository.
+2. Download the Mako.jar file from the repository.
 3. Double-click the file to start the app. 
 4. Refer to the Features below for details of each command.
 
-# Features 🤖
+# Features
 * insert tasks which are categorised as todos, deadlines and events
-* mark your tasks as done, or remove them
+* mark your tasks as done
+* remove your tasks from the list
 * view your scheduled events and deadlines 
 * find tasks with a specific keyword
 
@@ -80,14 +87,16 @@ Format: `schedule {date of schedule in the format: Year-Month-Day}`
 
 Example: `schedule 2021-01-01` prints out the list of deadlines and events on 2021-01-01 in chronological order
 
-## Command summary
-Action | Format | Example
------------- | ------------- | -------------
-todo | `todo {task's name}` | `todo homework`
-deadline | `deadline {task's name} /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00`
-event | `event {task's name} /at {Year-Month-Date Hour:Minute}` | `event carnival /at 2021-09-15 20:00`
-list | `list` | `list`
-done | `done {task's reference number}` | `done 2`
-remove | `remove {task's reference number}` | `remove 2`
-find | `find {word to find}` | `find word`
-scedule | `schedule {Year-Month-Day}` | `schedule 2021-09-15`
+## Usage
+
+## Command Summary
+| Action | Format | Example |
+| ------------ | ------------- | ------------- |
+|todo | `todo {task's name}` | `todo homework` |
+| deadline | `deadline {task's name} /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
+| event | `event {task's name} /at {Year-Month-Date Hour:Minute}` | `event carnival /at 2021-09-15 20:00` |
+| list | `list` | `list` |
+| done | `done {task's reference number}` | `done 2` |
+| remove | `remove {task's reference number}` | `remove 2` |
+| find | `find {word to find}` | `find word` |
+| scedule | `schedule {Year-Month-Day}` | `schedule 2021-09-15` |
