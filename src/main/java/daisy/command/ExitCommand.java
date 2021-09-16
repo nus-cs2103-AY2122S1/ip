@@ -1,7 +1,7 @@
-package duke.command;
+package daisy.command;
 
-import duke.Storage;
-import duke.TaskList;
+import daisy.task.Storage;
+import daisy.task.TaskList;
 
 /**
  * ExitCommand class handles the 'bye' command to close Duke.
@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
     /**
      * Returns the exit message.
      *
-     * @param taskList The TaskList of Duke.
-     * @param storage The Storage of Duke.
+     * @param taskList The TaskList of Daisy.
+     * @param storage The Storage of Daisy.
      * @return Response string.
      */
     @Override

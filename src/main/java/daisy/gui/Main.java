@@ -6,11 +6,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+//@@author tsy24-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+// with minor modifications
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Daisy using FXML.
  */
 public class Main extends Application {
 
@@ -24,7 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDaisy(daisy);
-            stage.setTitle("DAISY");
+            stage.setTitle("Daisy");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

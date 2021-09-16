@@ -1,4 +1,4 @@
-package duke.task;
+package daisy.task;
 
 /**
  * Task class that handles the common traits of the different types of tasks.

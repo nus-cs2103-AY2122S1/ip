@@ -1,10 +1,10 @@
-package duke.command;
+package daisy.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import duke.Storage;
-import duke.TaskList;
+import daisy.task.Storage;
+import daisy.task.TaskList;
 
 /**
  * OnCommand class handles the 'on' command to list the tasks on a date.
@@ -25,8 +25,8 @@ public class OnCommand extends Command {
     /**
      * Returns the tasks the with same date in a response string.
      *
-     * @param taskList The TaskList of Duke.
-     * @param storage The Storage of Duke.
+     * @param taskList The TaskList of Daisy.
+     * @param storage The Storage of Daisy.
      * @return Response string.
      */
     @Override

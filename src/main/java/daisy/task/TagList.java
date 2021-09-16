@@ -1,14 +1,16 @@
-package duke.task;
+package daisy.task;
 
 import java.util.ArrayList;
 
+/**
+ * TagList class handles the tag list of a task.
+ */
 public class TagList {
     private ArrayList<String> tags = new ArrayList<>();
     /**
-     * Returns the String representation of task in file format.
-     * File format is the format used to save tasks in a file.
+     * Adds tags to the task.
      *
-     * @param tagStrings String representation of task in file format.
+     * @param tagStrings Tag strings.
      */
     public void addTags(String ... tagStrings) {
         if (tagStrings != null) {
@@ -30,10 +32,10 @@ public class TagList {
         }
     }
     /**
-     * Returns the String representation of task in file format.
+     * Returns the String representation of tags in file format.
      * File format is the format used to save tasks in a file.
      *
-     * @return String representation of task in file format.
+     * @return String representation of tags in file format.
      */
     public String convertToFileFormat() {
         if (tags.isEmpty()) {

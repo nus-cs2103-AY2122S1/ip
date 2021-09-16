@@ -15,6 +15,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+//@@author tsy24-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+// with modifications
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */

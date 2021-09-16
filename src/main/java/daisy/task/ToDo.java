@@ -1,4 +1,4 @@
-package duke.task;
+package daisy.task;
 
 /**
  * ToDo class that handles todo tasks.

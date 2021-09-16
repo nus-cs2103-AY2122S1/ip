@@ -1,13 +1,13 @@
-package duke.command;
+package daisy.command;
 
 import java.time.LocalDate;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
+import daisy.DaisyException;
+import daisy.task.Deadline;
+import daisy.task.Event;
+import daisy.task.Storage;
+import daisy.task.TaskList;
+import daisy.task.ToDo;
 
 /**
  *  AddCommand class handles the commands that add tasks to the TaskList.
@@ -33,13 +33,13 @@ public class AddCommand extends Command {
      * Adds task of TaskType type to the task list
      * and returns the response message.
      *
-     * @param taskList The TaskList of Duke.
-     * @param storage The Storage of Duke.
+     * @param taskList The TaskList of Daisy.
+     * @param storage The Storage of Daisy.
      * @return Response string.
-     * @throws DukeException  If error occur during execution.
+     * @throws DaisyException  If error occur during execution.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DaisyException {
         switch (type) {
         case DEADLINE:
             assert parameters.length == 2 : "Wrong number of parameters";
@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             storage.saveList(taskList.convertToFileFormat());
             return ADD_HEADER + toDo + taskList.getListStatus();
         default:
-            throw new DukeException("Error");
+            throw new DaisyException("Error");
         }
     }
 }

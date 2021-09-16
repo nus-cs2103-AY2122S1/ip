@@ -1,8 +1,11 @@
-package duke.command;
+package daisy.command;
 
-import duke.Storage;
-import duke.TaskList;
+import daisy.task.Storage;
+import daisy.task.TaskList;
 
+/**
+ * FindCommand class handles the 'find' command to list the tasks containing a query string.
+ */
 public class FindCommand extends Command {
 
     static final String FIND_HEADER = "Here are the matching tasks in your list:\n";
@@ -21,8 +24,8 @@ public class FindCommand extends Command {
      * Finds tasks from the task list that contain the query string
      * and returns the response message.
      *
-     * @param taskList The TaskList of Duke.
-     * @param storage The Storage of Duke.
+     * @param taskList The TaskList of Daisy.
+     * @param storage The Storage of Daisy.
      * @return Response string.
      */
     @Override

@@ -1,9 +1,9 @@
-package duke.command;
+package daisy.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Task;
+import daisy.DaisyException;
+import daisy.task.Storage;
+import daisy.task.Task;
+import daisy.task.TaskList;
 
 /**
  * DeleteCommand class handles the commands that deletes a particular task in the task list.
@@ -25,13 +25,13 @@ public class DeleteCommand extends Command {
      * Deletes the task with index taskNumber from the task list
      * and returns the response message.
      *
-     * @param taskList The TaskList of Duke.
-     * @param storage The Storage of Duke.
+     * @param taskList The TaskList of Daisy.
+     * @param storage The Storage of Daisy.
      * @return Response string.
-     * @throws DukeException  If taskNumber is invalid.
+     * @throws DaisyException  If taskNumber is invalid.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DaisyException {
         Task deletedTask = taskList.removeTask(taskNumber - 1);
         storage.saveList(taskList.convertToFileFormat());
         return DELETE_HEADER + deletedTask + taskList.getListStatus();

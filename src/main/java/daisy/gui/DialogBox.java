@@ -17,9 +17,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+//@@author tsy24-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+// with modifications
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * Dialog box consisting of an ImageView to represent the speaker's face and a text
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -53,17 +55,36 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
-
+    /**
+     * Returns a DialogBox containing text and image of user.
+     *
+     * @param text Text string from user.
+     * @param img Image of user.
+     * @return DialogBox containing text and image of user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
-
+    /**
+     * Returns a flipped DialogBox containing response and image of Daisy.
+     *
+     * @param text Response string from Daisy.
+     * @param img Image of Daisy.
+     * @return DialogBox containing response and image of Daisy.
+     */
     public static DialogBox getDaisyDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.textBox.setTextAlignment(TextAlignment.LEFT);
         return db;
     }
+    /**
+     * Returns a flipped DialogBox containing error message and image of Daisy.
+     *
+     * @param text Error message string from Daisy.
+     * @param img Image of Daisy.
+     * @return DialogBox containing error message and image of Daisy.
+     */
     public static DialogBox getExceptionDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

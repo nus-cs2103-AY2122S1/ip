@@ -8,7 +8,7 @@ import daisy.task.Storage;
 import daisy.task.TaskList;
 
 /**
- * Duke class that starts and runs the Daisy bot.
+ * Daisy class that starts and runs the Daisy bot.
  */
 public class Daisy {
 
@@ -17,7 +17,7 @@ public class Daisy {
     private Storage storage;
 
     /**
-     * Constructs the Duke object.
+     * Constructs the Daisy object.
      */
     public Daisy() {
         storage = new Storage("data/daisy.txt");
@@ -34,7 +34,7 @@ public class Daisy {
     }
 
     /**
-     * Gets the response from the Duke bot for the input.
+     * Gets the response from the Daisy bot for the input.
      *
      * @param input String input message.
      * @return Response string.

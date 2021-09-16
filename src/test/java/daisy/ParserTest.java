@@ -1,18 +1,19 @@
-package duke;
+package daisy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.command.ExitCommand;
+import daisy.command.ExitCommand;
+import daisy.command.Parser;
 
 public class ParserTest {
 
     @Test
     public void parse_randomCommand_exceptionThrown() {
         try {
-            assertEquals(0, Parser.parse("hi"));
+            assertEquals(new ExitCommand(), Parser.parse("hi"));
             fail(); // the test should not reach this line
         } catch (Exception e) {
             assertEquals("I'm sorry, but I don't know what that means :-(\n", e.getMessage());
@@ -23,7 +24,7 @@ public class ParserTest {
     public void testByeCommand() {
         try {
             assertEquals(new ExitCommand(), Parser.parse("bye"));
-        } catch (DukeException e) {
+        } catch (DaisyException e) {
             fail();
         }
     }

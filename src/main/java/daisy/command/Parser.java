@@ -1,16 +1,8 @@
-package duke;
+package daisy.command;
 
 import java.time.LocalDate;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.OnCommand;
-import duke.command.TagCommand;
+import daisy.DaisyException;
 
 /**
  * Parser class deals with making sense of the user command.
@@ -22,9 +14,9 @@ public class Parser {
      *
      * @param commandMessage Command message from user's input.
      * @return Command to be executed.
-     * @throws DukeException  If correct command cannot be created.
+     * @throws DaisyException  If correct command cannot be created.
      */
-    public static Command parse(String commandMessage) throws DukeException {
+    public static Command parse(String commandMessage) throws DaisyException {
         assert commandMessage != null : "Command message is null";
         String[] messages = commandMessage.split(" ", 2);
         String command = messages[0];
@@ -59,7 +51,7 @@ public class Parser {
             String[] tagParameters = tagDescription.split(" ", 2);
             return new TagCommand(getTaskNumber(tagParameters[0]), tagParameters[1].split("/"));
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
+            throw new DaisyException("I'm sorry, but I don't know what that means :-(\n");
         }
     }
 
@@ -69,13 +61,13 @@ public class Parser {
      * @param des User's command message excluding the command word.
      * @param command Type of command.
      * @return Description string.
-     * @throws DukeException If description is empty.
+     * @throws DaisyException If description is empty.
      */
-    private static String checkDescriptionAvailable(String des, String command) throws DukeException {
+    private static String checkDescriptionAvailable(String des, String command) throws DaisyException {
         assert des != null : "Description to check is null";
         String description = des.trim();
         if (description.isEmpty()) {
-            throw new DukeException(String.format("The description of a %s cannot be empty!\n", command));
+            throw new DaisyException(String.format("The description of a %s cannot be empty!\n", command));
         } else {
             return des;
         }
@@ -88,12 +80,12 @@ public class Parser {
      * @param command Type of command.
      * @param regex Regex string to split description.
      * @return String array of parameters.
-     * @throws DukeException If description does not contain a date.
+     * @throws DaisyException If description does not contain a date.
      */
-    private static String[] getParameters(String des, String command, String regex) throws DukeException {
+    private static String[] getParameters(String des, String command, String regex) throws DaisyException {
         assert des != null : "Description to check is null";
         if (!des.contains(regex)) {
-            throw new DukeException(String.format("The new %s is missing a date!\n", command));
+            throw new DaisyException(String.format("The new %s is missing a date!\n", command));
         } else {
             return des.split(regex);
         }
@@ -104,13 +96,13 @@ public class Parser {
      *
      * @param des User's command message excluding the command word.
      * @return Task number of task to be edited.
-     * @throws DukeException If no task number is provided.
+     * @throws DaisyException If no task number is provided.
      */
-    private static int getTaskNumber(String des) throws DukeException {
+    private static int getTaskNumber(String des) throws DaisyException {
         assert des != null : "Description to check is null";
         String description = des.trim();
         if (description.isEmpty()) {
-            throw new DukeException("I do not know which task to change!\n");
+            throw new DaisyException("I do not know which task to change!\n");
         } else {
             return Integer.parseInt(description);
         }

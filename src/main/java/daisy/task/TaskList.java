@@ -1,14 +1,12 @@
-package duke;
+package daisy.task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+import daisy.DaisyException;
 
 /**
- * TaskList class handles the task list of Duke.
+ * TaskList class handles the task list of Daisy.
  */
 public class TaskList {
     static final String ZERO_TASK_STRING = "There are no tasks in the list\n";
@@ -39,11 +37,11 @@ public class TaskList {
      *
      * @param i Index of task in task list.
      * @return Completed task in task list.
-     * @throws DukeException  If taskNumber is invalid.
+     * @throws DaisyException  If taskNumber is invalid.
      */
-    public Task markTaskAsDone(int i) throws DukeException {
+    public Task markTaskAsDone(int i) throws DaisyException {
         if (i < 0 || i >= tasks.size()) {
-            throw new DukeException("I cannot find this task number!\n");
+            throw new DaisyException("I cannot find this task number!\n");
         }
         Task completedTask = tasks.get(i);
         completedTask.markAsDone();
@@ -97,11 +95,11 @@ public class TaskList {
      *
      * @param i Index of task in task list.
      * @return Task removed from task list.
-     * @throws DukeException  If taskNumber is invalid.
+     * @throws DaisyException  If taskNumber is invalid.
      */
-    public Task removeTask(int i) throws DukeException {
+    public Task removeTask(int i) throws DaisyException {
         if (i < 0 || i >= tasks.size()) {
-            throw new DukeException("I cannot find this task number!\n");
+            throw new DaisyException("I cannot find this task number!\n");
         }
         return tasks.remove(i);
     }
@@ -150,11 +148,11 @@ public class TaskList {
      *
      * @param i Index of task in task list.
      * @return Task removed from task list.
-     * @throws DukeException  If taskNumber is invalid.
+     * @throws DaisyException  If taskNumber is invalid.
      */
-    public Task addTags(int i, String[] tags) throws DukeException {
+    public Task addTags(int i, String[] tags) throws DaisyException {
         if (i < 0 || i >= tasks.size()) {
-            throw new DukeException("I cannot find this task number!\n");
+            throw new DaisyException("I cannot find this task number!\n");
         }
         Task task = tasks.get(i);
         task.addTags(tags);
