@@ -1,7 +1,7 @@
-# Guide to using Memo-Assitant Duke
+# Guide to using Memo-Assistant Duke
 
-Sample screenshot
-![Image of UI](https://github.com/wanyu-l/ip/blob/master/docs/Ui.png)
+Memo-Assistant Duke is an easy-to-use program with Graphical User Interface(GUI).
+It can help you track different tasks to be done.
 
 ## Features 
 
@@ -156,11 +156,10 @@ To [D][] assignment (by: 21 SEPTEMBER 2021)
 
 ### Feature-Snooze
 
-Upon launch of application, Duke checks for tasks due on the day itself and results in the following dialog box to appear:
+Upon launch of application, Duke checks for tasks due on the day itself and results in a dialog box displaying list of tasks due.
+There will be 2 options to choose for the user.
 
-![Image of UI](https://github.com/wanyu-l/ip/blob/master/docs/TasksDueToday.png)
-
-`Snooze` results in relevant tasks to be rescheduled to the subsequent day.
+`Snooze` results in relevant tasks to be rescheduled to the subsequent day, without a time specification.
 
 `Confirm` does not result in any further changes, choose this to manually reschedule later or to ignore the alert.
 
@@ -171,10 +170,12 @@ Close the program.
 
 Expected input format: bye
 **Example:**
-`reschedule 2 21/09/2021`
+`bye`
 
-**Will result in the following dialog box:**
+**A new dialog box will appear on top of Duke's dialog window, displaying the exit message:**
 
-![Image of UI](https://github.com/wanyu-l/ip/blob/master/docs/ByeWindow.png)
+```
+Bye. Hope to see you again soon!
+```
 
 Click `confirm` or `X` at the top right corner to proceed to close the program.
