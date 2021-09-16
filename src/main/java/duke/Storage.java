@@ -57,43 +57,56 @@ public class Storage {
      * @return The corresponding task object.
      */
     public Task getTaskFromString(String s) {
+        Task t = null;
+        try {
+            t = getTask(s);
+        } catch (WrongCommandFormatException e) {
+            Ui.formatExceptionMessage(e);
+            Ui.loadingError();
+        }
+        return t;
+    }
+
+    /**
+     * Converts the string representation of the task into its task object.
+     * @param s The string representation
+     * @return The task corresponding to the string.
+     * @throws WrongCommandFormatException
+     */
+    public Task getTask(String s) throws WrongCommandFormatException {
         assert (s.length() > 6);
         String taskType = s.substring(0, 3);
         String taskDescription = s.substring(7);
         Task t = null;
-        try {
-            if (s.substring(3, 6).equals("[X]")) {
-                switch (taskType) {
-                case "[T]":
-                    t = new Todo(taskDescription, true);
-                    break;
-                case "[D]":
-                    t = new Deadline(taskDescription, true);
-                    break;
-                case "[E]":
-                    t = new Event(taskDescription, true);
-                    break;
-                default:
-                    // Leaves Task t as null
-                }
-            } else {
-                switch (taskType) {
-                case "[T]":
-                    t = new Todo(taskDescription, false);
-                    break;
-                case "[D]":
-                    t = new Deadline(taskDescription, false);
-                    break;
-                case "[E]":
-                    t = new Event(taskDescription, false);
-                    break;
-                default:
-                    //leaves Task t as null
-                }
+
+        if (s.substring(3, 6).equals("[X]")) {
+            switch (taskType) {
+            case "[T]":
+                t = new Todo(taskDescription, true);
+                break;
+            case "[D]":
+                t = new Deadline(taskDescription, true);
+                break;
+            case "[E]":
+                t = new Event(taskDescription, true);
+                break;
+            default:
+                // Leaves Task t as null
             }
-        } catch (WrongCommandFormatException e) {
-            Ui.formatExceptionMessage(e);
-            Ui.loadingError();
+        } else {
+            switch (taskType) {
+            case "[T]":
+                t = new Todo(taskDescription, false);
+                break;
+            case "[D]":
+                t = new Deadline(taskDescription, false);
+                break;
+            case "[E]":
+                t = new Event(taskDescription, false);
+                break;
+            default:
+                //leaves Task t as null
+            }
         }
         return t;
     }
