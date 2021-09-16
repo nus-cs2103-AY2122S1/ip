@@ -58,15 +58,25 @@ public class Event implements Task {
         if (next.equals("/by")) {
             throw new WrongCommandFormatException("Wrong keyword used. Please try again with /at");
         } else if (next.equals("/at")) {
-            if (s.hasNextLine()) {
-                this.timeframe = s.nextLine();
-            } else {
-                throw new WrongCommandFormatException(
-                        "No timeframe specified. Please specify a deadline after `/at`"
-                );
-            }
+            parseTimeframe(s);
         } else {
             this.description += next + " ";
+        }
+    }
+
+    /**
+     * Checks if there is any input for the timeframe of the event.
+     * If not, throws an exception.
+     * @param s The scanner containing the timeframe.
+     * @throws WrongCommandFormatException
+     */
+    public void parseTimeframe(Scanner s) throws WrongCommandFormatException {
+        if (s.hasNextLine()) {
+            this.timeframe = s.nextLine();
+        } else {
+            throw new WrongCommandFormatException(
+                    "No timeframe specified. Please specify a deadline after `/at`"
+            );
         }
     }
 
