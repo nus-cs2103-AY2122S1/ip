@@ -108,6 +108,19 @@ Noted. I've removed this task:
 You now have 3 tasks in the list.
 ```
 
+### Find
+A list of task containing the find keyword will be returned when using the `find` command.
+
+Command: `find <taskName>`
+
+Example: `find task1`
+
+Output
+```
+Here are the matching tasks in your list:
+1.[T][ ] task1
+```
+
 ### Bye
 Duke secretary is closed using the `bye` command.
 
