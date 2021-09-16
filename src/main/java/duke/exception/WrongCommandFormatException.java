@@ -13,6 +13,10 @@ public class WrongCommandFormatException extends Exception {
         this.message = message;
     }
 
+    /**
+     * Gets the exception message.
+     * @return The exception message.
+     */
     public String getMessage() {
         return this.message;
     }
