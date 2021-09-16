@@ -5,9 +5,10 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
-import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TaskCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 
 /** Parser class to parse a user's input */
 public class Parser {
@@ -48,7 +49,7 @@ public class Parser {
      * @param userInput The user's String input
      * @return The appropriate Command to execute based on the user's input
      */
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws DukeException {
         String userCommand = getUserCommand(userInput);
         String userArgument = getUserArgument(userInput);
 
@@ -68,7 +69,7 @@ public class Parser {
         case Command.FIND_COMMAND:
             return new FindCommand(userCommand, userArgument);
         default:
-            return new InvalidCommand(userCommand, userArgument);
+            throw new InvalidCommandException();
         }
     }
 }

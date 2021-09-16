@@ -12,12 +12,23 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/** Command for creating a Task */
 public class TaskCommand extends Command {
 
+    /**
+     * Constructor for a TaskCommand
+     * @param userCommand The command the user gives
+     * @param userArgument The argument (rest of the String after the command)
+     */
     public TaskCommand(String userCommand, String userArgument) {
         super(userCommand, userArgument);
     }
 
+    /**
+     * Creates a task with the type specified by the user
+     * @return A string of the task created
+     * @throws DukeException If the task cannot be created
+     */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
 
         assert userArgument != null;

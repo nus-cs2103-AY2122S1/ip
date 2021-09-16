@@ -6,15 +6,24 @@ import duke.utils.Utils;
 
 import java.time.LocalDate;
 
+/** Command for listing Tasks */
 public class ListCommand extends Command {
 
     private static final String SORT_BY_DATE_ARGUMENT = "sortByDate";
     private static final String DESCENDING_ARGUMENT = "desc";
 
+    /**
+     * Constructor for a ListCommand
+     * @param userCommand The command the user gives
+     * @param userArgument The argument (rest of the String after the command)
+     */
     public ListCommand(String userCommand, String userArgument) {
         super(userCommand, userArgument);
     }
 
+    /**
+     * @return A list of all the Tasks
+     */
     public String execute(TaskList tasks, Storage storage) {
         if (tasks.isEmpty()) {
             return "Currently no tasks!";
