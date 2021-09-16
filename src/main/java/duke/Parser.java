@@ -27,7 +27,7 @@ public class Parser {
         if (answer == null) {
             throw new DukeException("User input is null.");
         }
-        
+
         String[] parts = answer.split(" ");
         String command = parts[0];
         String taskDetails = "";
@@ -48,7 +48,7 @@ public class Parser {
         case "deadline":
             return parseDeadlineCommand(taskDetails);
         case "find":
-            return parseFindCommand(taskDetails); 
+            return parseFindCommand(taskDetails);
         case "edit":
             return parseEditCommand(answer);
         case "bye":
@@ -65,7 +65,7 @@ public class Parser {
         if (editDescParts.length < 2 && editDateParts.length < 2) {
             throw new DukeException("Nothing to edit.");
         }
-        
+
         if (editDateParts.length >= 2 && editDescParts.length >= 2) {
             return new EditCommand(taskIndex, editDescParts[1].trim(), editDateParts[1].trim());
         } else if (editDateParts.length >= 2) {
@@ -124,26 +124,26 @@ public class Parser {
                     + " eg. 'done 2'");
         }
     }
-    
+
     private static DoneCommand parseDoneCommand(String answer) throws DukeException {
         int taskIndex = getTaskIndex(answer);
         return new DoneCommand(taskIndex);
     }
-    
+
     private static DeleteCommand parseDeleteCommand(String answer) throws DukeException {
         int taskIndex = getTaskIndex(answer);
         return new DeleteCommand(taskIndex);
     }
-    
+
     private static ListCommand parseListCommand() {
         return new ListCommand();
     }
-    
+
     private static FindTasksCommand parseFindCommand(String taskDetails) throws DukeException {
         checkEmptyTaskDetails(taskDetails);
         return new FindTasksCommand(taskDetails);
     }
-    
+
     private static ByeCommand parseByeCommand() {
         return new ByeCommand();
     }

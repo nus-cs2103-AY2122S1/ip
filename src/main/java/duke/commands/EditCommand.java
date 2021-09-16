@@ -6,8 +6,6 @@ import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Task;
 
-import java.util.ArrayList;
-
 /**
  * Represents Command to edit a Task's description and/or date.
  */
@@ -16,6 +14,13 @@ public class EditCommand extends Command {
     private final String description;
     private final String date;
 
+    /**
+     * Constructs an EditCommand to update the information of an existing Task in the TaskList. 
+     * 
+     * @param taskIndex Index of task to be edited.
+     * @param description Edited description of task. May be null if description does not need to be updated.
+     * @param date Edited description of task. May be null if date does not need to be updated.
+     */
     public EditCommand(int taskIndex, String description, String date) {
         this.taskIndex = taskIndex;
         this.description = description;
@@ -33,7 +38,7 @@ public class EditCommand extends Command {
 
     /**
      * Returns date of updated task.
-     * 
+     *
      * @return Date of updated task.
      */
     public String getDate() {

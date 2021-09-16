@@ -83,7 +83,7 @@ public class Ui {
 
     /**
      * Returns message showing edited task.
-     * 
+     *
      * @param taskIndex Index of Task that was edited.
      * @param task Edited Task.
      * @return message showing edited task.

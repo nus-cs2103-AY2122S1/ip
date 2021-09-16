@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.DukeException;
-import duke.commands.EditCommand;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+import duke.commands.EditCommand;
 
 /**
  * This class represents an Event Task.
@@ -36,7 +36,7 @@ public class Event extends Task {
         super(description, isDone);
         this.date = parseDateTime(at);
     }
-    
+
     private LocalDateTime parseDateTime(String at) throws DukeException {
         try {
             return LocalDateTime.parse(at, FORMATTER);

@@ -65,7 +65,7 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-    
+
     private static ArrayList<Task> getTasksFromStore(File store) throws DukeException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(store));
@@ -80,7 +80,7 @@ public class Storage {
         reader.close();
         return tasks;
     }
-    
+
     private static void writeTasksToStore(File store, TaskList tasks) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(store));
         ArrayList<String> taskStrings = tasks.getTaskStrings();
@@ -94,7 +94,7 @@ public class Storage {
     private static Task parseTask(String fileLine, int lineNo) throws DukeException {
         assert fileLine != null : "Line " + lineNo + " of storage file is null";
         assert !fileLine.isBlank() : "Line " + lineNo + " of storage file is blank";
-        
+
         try {
             String[] parts = fileLine.split(" \\| ");
             String taskType = parts[0];

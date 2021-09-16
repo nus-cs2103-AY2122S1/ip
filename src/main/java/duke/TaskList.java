@@ -51,7 +51,7 @@ public class TaskList {
         if (tasks.size() == 0) {
             return "There are no matching tasks in the list.";
         }
-        
+
         StringBuilder message = new StringBuilder();
         message.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -132,7 +132,7 @@ public class TaskList {
 
     /**
      * Updates task in TaskList at specified index with the updated task.
-     * 
+     *
      * @param taskIndex Index of Task to be updated in tasks ArrayList.
      * @param updatedTask Updated Task to replace original Task.
      */
@@ -167,7 +167,7 @@ public class TaskList {
 
     /**
      * Returns Task in TaskList at specified index.
-     * 
+     *
      * @param taskIndex Index of Task in tasks ArrayList to be returned.
      * @return Task in TaskList at specified index.
      */

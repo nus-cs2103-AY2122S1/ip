@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.DukeException;
-import duke.commands.EditCommand;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+import duke.commands.EditCommand;
 
 /**
  * This class represents a Deadline Task.

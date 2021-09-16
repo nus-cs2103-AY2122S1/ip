@@ -27,7 +27,7 @@ public class Duke {
     /**
      * Executes command from parsing user input.
      * Returns message to be shown to user.
-     * 
+     *
      * @param input User input.
      * @return Message to be shown to user.
      */

@@ -51,7 +51,7 @@ public abstract class Task {
 
     /**
      * Returns true if the Task's description contains the keyword; otherwise false.
-     * 
+     *
      * @param keyword Keyword that user is searching for.
      * @return true if the Task's description contains the keyword; otherwise false.
      */
@@ -87,7 +87,7 @@ public abstract class Task {
 
     /**
      * Returns updated task using information from the EditCommand.
-     * 
+     *
      * @param edit EditCommand that includes information to update in this Task.
      * @return Updated Task.
      * @throws DukeException If information to update is invalid.
