@@ -160,7 +160,7 @@ Im sorry, the list seems to be empty
 
 ### Finding task using keyword: `find`
 Find a task based keyword description . 
-Users can can only type in the textbox. _**Button shortcut comming soon**_
+Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `find [keyword/s]`
@@ -179,7 +179,7 @@ _*x refers to the task position in the whole list._
 
 ### Mark task as complete: `done`
 Marks a task as complete.  
-Users can can only type in the textbox. _**Button shortcut comming soon**_
+Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `done [task position in list]`  
@@ -201,7 +201,7 @@ Expected output:
 
 ### Remove a task: `delete`
 Delete a task.  
-Users can can only type in the textbox. _**Button shortcut comming soon**_
+Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `delete [task position in list]`
