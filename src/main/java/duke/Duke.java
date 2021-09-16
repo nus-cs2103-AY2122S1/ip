@@ -83,7 +83,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new Button("SAY");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -94,14 +94,15 @@ public class Duke extends Application {
         // Formatting stage
         stage.setTitle("Duke Pro MAX (TM)");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(500.0);
+        stage.setMinWidth(700.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(700.0, 500.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(700, 450);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setStyle("-fx-font-size: 18px");
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
@@ -110,9 +111,15 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.setSpacing(10);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(600.0);
+        userInput.setMinHeight(50.0);
+        userInput.setStyle("-fx-background-color: #f9a26c; -fx-font-size: 20px;"
+                + "-fx-font-weight: bolder");
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(100.0);
+        sendButton.setMinHeight(50.0);
+        sendButton.setStyle("-fx-background-color: #f26627; -fx-text-fill: #efeeee;"
+                + "-fx-font-size: 20px; -fx-font-weight: bolder");
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);

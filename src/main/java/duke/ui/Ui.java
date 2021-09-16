@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
 public class Ui {
     private static final String SEPARATOR =
             "-------------------------------------------------------";
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     private final Scanner in;
     private final PrintStream out;
@@ -59,6 +59,8 @@ public class Ui {
 
     private Label makeLabel(String message) {
         Label temp = new Label(message);
+        temp.setStyle("-fx-text-fill: white; -fx-font-weight: 700; -fx-background-color: #325d79;"
+                + "-fx-padding: 20px; -fx-background-radius: 20px");
         temp.setWrapText(true);
         return temp;
     }
