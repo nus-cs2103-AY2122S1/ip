@@ -1,3 +1,2 @@
-[T][ ] swim
-[T][ ] study
-[T][ ] SWIMM
+[T][X] homework
+[D][ ] essay  (by: 180921 1700)

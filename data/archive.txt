@@ -3,3 +3,5 @@
 [T][X] cs2101 lecture 
 [E][ ] lvl88  (at: 120321 1234)
 [T][X] swim
+[T][X] kjs
+[E][ ]  (at: 170221 1700)
