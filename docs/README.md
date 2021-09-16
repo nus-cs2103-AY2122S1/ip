@@ -106,7 +106,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete Task](/docs/Delete.png)
+![Delete Task](https://cravetocode.github.io/ip/Deadline.png)
 
 ### `find` - Find all tasks with names that match the given keyword query.
 
