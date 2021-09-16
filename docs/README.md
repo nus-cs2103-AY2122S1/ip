@@ -39,6 +39,7 @@ And it is **FREE!**
 6. [**`delete`**](#6): deletes a task by task number of the full tasks list.
 7. [**`clear`**](#7): clear all tasks in the system.
 8. [**`bye`**](#8): exits the system.
+9. [Saving the data](#9)
 
 ## Usage
 
@@ -202,6 +203,27 @@ bye
 Expected outcome:
 
 System exits.
+
+### <label id="9">9<label> Saving the data.
+
+The system automatically saves the data to `<YOUR JAR FILE PATH>/data/duke.txt` after any changes are made to the data. 
+
+**:exclamation: You can update your data manually, but you should be aware that if you update your data format by mistake, your data will be removed**
+
+## Command Summary
+
+Action | Format | Example
+--------|---------|---------
+**Add `todo` task** | `todo <TASK_DESCRIPTION>` | `todo read book`
+**Add `deadline` task** | `deadline <DESCRIPTION /by yyyy-MM-dd HH:mm>` | `deadline return book /by 2021-08-08 10:00`
+**Add `event` task** | `event <DESCRIPTION /at yyyy-MM-dd HH:mm HH:mm>` | `event project meeting /at 2021-09-08 19:00 21:00`
+**List all tasks** | `list` | `list`
+**Mark a task as done** | `done <TASK_NUMBER>` | `done <TASK_NUMBER>`
+**Find tasks** | `find <KEYWORD>` | `find <KEYWORD>`
+**List coming tasks** | `coming` | `coming`
+**Delete tasks** | `delete <TASK_NUMBER>` | `delete <TASK_NUMBER>`
+**Clear tasks** | `clear` | `clear`
+**Exit the system** | `bye` | `bye`
 
 ## Development
 
