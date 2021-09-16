@@ -1,6 +1,7 @@
 # Duke Batman
 
 This is an adaptation of a greenfield Java project from [SE-EDU](https://github.com/se-edu/duke) It's named after the Java mascot _Duke_.
+Ui of the project is as show [here](Ui.png).
 
 * [Quickstart](#quickstart)
 * [Features](#features)
