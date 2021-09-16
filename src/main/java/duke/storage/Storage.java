@@ -39,20 +39,12 @@ public class Storage {
      * @throws DukeException file/folder not found.
      */
     public List<Task> load() throws DukeException {
-        String[] folders = filePath.split("/");
-        for (String s:folders) {
-            File f = new File(s);
-            boolean isValidFolder = !s.contains(".") && !f.isDirectory();
-            if (isValidFolder) {
-                throw new FolderNotFoundDukeException(s);
-            }
-        }
+        checkFilepath(filePath);
 
-        File file = new File(filePath);
-        List<Task> list = new ArrayList<>();
         Scanner sc;
+        List<Task> list = new ArrayList<>();
+        File file = new File(filePath);
 
-        // Load all tasks from the file
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
@@ -79,6 +71,17 @@ public class Storage {
         return list;
     }
 
+    private void checkFilepath(String filePath) throws DukeException{
+        String[] folders = filePath.split("/");
+        for (String s:folders) {
+            File f = new File(s);
+            boolean isValidFolder = !s.contains(".") && !f.isDirectory();
+            if (isValidFolder) {
+                throw new FolderNotFoundDukeException(s);
+            }
+        }
+    }
+
     /**
      * Save task method.
      * Save the task list at the given file path.
@@ -86,9 +89,10 @@ public class Storage {
      * @throws DukeException invalid location to save.
      */
     public void save(TaskList taskList) throws DukeException {
+        checkFilepath(filePath);
         File file = new File(filePath);
         if (file.isDirectory()) {
-            throw new DukeException(String.format("OOPS!!! \"%s\" is not a file but a folder.", filePath));
+            throw new FileNotFoundDukeException();
         }
         try {
             FileWriter fw = new FileWriter(filePath);

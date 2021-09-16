@@ -1,9 +1,11 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidParameterDukeException;
+import duke.exception.InvalidTagDukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.exception.DukeException;
 
 /**
  * A TagCommand class that extends from the Command class.
@@ -13,6 +15,8 @@ import duke.exception.DukeException;
 public class TagCommand extends Command{
 
     private final String description;
+    private static final String SUCCESS_MESSAGE = "I've tagged this task as %s :\n  %s %s";
+
 
     /**
      * A constructor to initialize a tag command.
@@ -35,20 +39,18 @@ public class TagCommand extends Command{
         String[] parameter = description.split(" ");
         boolean isValidTagParameter = parameter.length == 2;
         if (!isValidTagParameter) {
-            throw new DukeException("OOPS!!! Tag parameter is missing.\n"
-                    + "eg. tag 2 Important");
+            throw new InvalidParameterDukeException();
         }
 
         boolean isValidNumber = parameter[0].matches("\\d+");
         if (!isValidNumber) {
-            // Invalid parameter
-            throw new DukeException("OOPS!!! Invalid task number.");
+            throw new InvalidTagDukeException();
         }
         Task task = taskList.getTask(Integer.parseInt(parameter[0]));
         taskList.tagTask(Integer.parseInt(parameter[0]), parameter[1]);
         storage.save(taskList);
-        return String.format("I've tagged this task as %s :\n  %s %s",
-                task.showTag(), task.getStatusIcon(), task.getDescription());
+        return String.format(
+                SUCCESS_MESSAGE, task.showTag(), task.getStatusIcon(), task.getDescription());
     }
 
     @Override

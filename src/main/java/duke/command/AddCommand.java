@@ -1,11 +1,15 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.UnknownCommandDukeException;
 import duke.exception.InvalidDeadlineDukeException;
 import duke.exception.InvalidEventDukeException;
+import duke.exception.UnknownCommandDukeException;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 /**
  * An AddCommand class that extends from the Command class.
