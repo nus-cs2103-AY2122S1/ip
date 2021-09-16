@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+import duke.util.DateTimeUtils;
+
 /**
  * Event task event.
  */
@@ -27,7 +29,7 @@ public class TaskEvent extends Task {
                 .map(String::strip)
                 .orElse("");
 
-        if (checkInvalidTime(this.time)) {
+        if (DateTimeUtils.checkInvalidTime(this.time)) {
             throw new DateTimeParseException("INVALID TIME", this.time, 0);
         }
     }
@@ -73,11 +75,21 @@ public class TaskEvent extends Task {
         return date.equals(at);
     }
 
+    /**
+     * Returns a LocalDate date of Event.
+     *
+     * @return LocalDate of which the event occurs.
+     */
     @Override
     public LocalDate getDate() {
         return at;
     }
 
+    /**
+     * Returns a String representing time if present in event.
+     *
+     * @return Time of which event occurs. "" if no time is present
+     */
     @Override
     public String getTime() {
         return time;

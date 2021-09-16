@@ -39,8 +39,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        assert this.getClass().getResourceAsStream(USER_IMAGE_LOCATION) != null:" User Image not found";
-        assert this.getClass().getResourceAsStream(USER_IMAGE_LOCATION) != null:" Duke Image not found";
+        assert this.getClass().getResourceAsStream(USER_IMAGE_LOCATION) != null : " User Image not found";
+        assert this.getClass().getResourceAsStream(USER_IMAGE_LOCATION) != null : " Duke Image not found";
 
         userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_LOCATION));
         dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE_LOCATION));

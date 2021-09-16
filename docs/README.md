@@ -93,15 +93,15 @@ Using the command with no arguments displays the index numbers of all tasks, to 
 
 **Example usage (with and without optional arguments):**
 
-`list` - Standard list command (no arguments)
+`list` - List all items (no arguments)
 
 `list /date DD/MM/YYYY` - Search for tasks at date
 
-`list /name taskname` - Search for tasks with name
+`list /name taskname` - Search for tasks that contains name
 
 Arguments can be stacked, order of arguments does not matter.
 
-`list /name taskname /date DD/MM/YYYY` - Search for tasks with specified name AND date
+`list /name taskname /date DD/MM/YYYY` - Search for tasks that contains specified name AND date
 
 
 * `DD/MM/YYYY` - Date and month can be 1-2 digits long

@@ -1,9 +1,5 @@
 package duke.command;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import duke.ui.Ui;
 
 /**
@@ -28,9 +24,9 @@ public abstract class Command {
      */
     @Override
     public String toString() {
-        assert commandName != null: "Command Name cannot be null";
-        assert description != null: "Description cannot be null";
-        assert arguments != null: "Arguments cannot be null";
+        assert commandName != null : "Command Name cannot be null";
+        assert description != null : "Description cannot be null";
+        assert arguments != null : "Arguments cannot be null";
 
         StringBuilder argString = new StringBuilder();
         for (String arg : arguments) {

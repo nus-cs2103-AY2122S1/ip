@@ -1,11 +1,11 @@
 package task;
 
-import duke.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
+
+import duke.util.DateTimeUtils;
 
 /**
  * Deadline task event.
@@ -30,7 +30,7 @@ public class TaskDeadline extends Task {
                 .map(String::strip)
                 .orElse("");
 
-        if (checkInvalidTime(this.time)) {
+        if (DateTimeUtils.checkInvalidTime(this.time)) {
             throw new DateTimeParseException("INVALID TIME", this.time, 0);
         }
     }
@@ -76,11 +76,21 @@ public class TaskDeadline extends Task {
         return date.equals(by);
     }
 
+    /**
+     * Returns a LocalDate of the deadline.
+     *
+     * @return LocalDate of which the deadline is due.
+     */
     @Override
     public LocalDate getDate() {
         return by;
     }
 
+    /**
+     * Returns a String representing time of deadline if present.
+     *
+     * @return Time of which deadline is due, "" if no time is present
+     */
     @Override
     public String getTime() {
         return time;

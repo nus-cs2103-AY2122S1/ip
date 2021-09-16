@@ -71,6 +71,13 @@ public class Ui {
                 : "There are " + size + " tasks in your list";
     }
 
+    /**
+     * Displays message when toggling the completion status of a task.
+     *
+     * @param isDone New status of task.
+     * @param task Task in question.
+     * @return Corresponding message string.
+     */
     public static String messageToggleDone(boolean isDone, Task task) {
         return (isDone
                 ? "Sugoi! Duke-san marked this task as done!"

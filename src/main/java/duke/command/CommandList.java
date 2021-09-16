@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import duke.ui.Ui;
-import duke.util.DukeParser;
+import duke.util.DateTimeUtils;
 import task.Task;
 import task.TaskList;
 
@@ -93,7 +93,7 @@ public class CommandList extends Command {
                         .toLowerCase().contains(arg.toLowerCase()));
                 break;
             case ("date"):
-                LocalDate date = DukeParser.getDate(arg);
+                LocalDate date = DateTimeUtils.getDate(arg);
                 results.add(task -> task.isDate(date));
                 break;
             default:
@@ -105,7 +105,7 @@ public class CommandList extends Command {
     }
 
     private String getCommand(String str)
-            throws IllegalArgumentException{
+            throws IllegalArgumentException {
         int index = getCommandArgumentSplitIndex(str);
         return str.substring(0, index);
     }

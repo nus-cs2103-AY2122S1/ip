@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import duke.ui.Ui;
-import duke.util.DukeParser;
+import duke.util.DateTimeUtils;
 import task.TaskEvent;
 import task.TaskList;
 
@@ -42,7 +42,7 @@ public class CommandAddEvent extends Command {
         try {
             return taskList.add(new TaskEvent(
                     input[0],
-                    DukeParser.getDate(input[1]),
+                    DateTimeUtils.getDate(input[1]),
                     input[2],
                     false,
                     LocalDateTime.now()));

@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.ui.Ui;
-import javafx.application.Platform;
-
 import java.util.Timer;
 import java.util.TimerTask;
+
+import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Command to exit program.
@@ -26,7 +26,9 @@ public class CommandExit extends Command {
     @Override
     public String execute() {
         new Timer().schedule(new TimerTask() {
-            public void run () { Platform.exit(); }
+            public void run () {
+                Platform.exit();
+            }
         }, 2000);
 
         return Ui.goodByeMessage();

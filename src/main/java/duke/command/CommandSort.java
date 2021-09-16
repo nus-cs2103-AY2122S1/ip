@@ -1,17 +1,15 @@
 package duke.command;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.function.Predicate;
 
 import duke.ui.Ui;
 import task.Task;
 import task.TaskList;
 
 /**
- * Command to sort the tasklist
+ * Command to sort the task list
  */
 public class CommandSort extends Command {
 
@@ -21,18 +19,18 @@ public class CommandSort extends Command {
     /**
      * Constructor for this command.
      *
-     * @param taskList Task list to list.
+     * @param taskList Task list to sort.
      * @param sortFilters Un-parsed list of filters.
      */
     public CommandSort(TaskList taskList, String sortFilters) {
         this.commandName = "sort /name /date";
-        this.description = "Sorts list based on arguments provided. Having no arguments would default to" +
-                " sorting by /name. If there is more than 1 argument, the list will be sorted by the first." +
-                "followed by the second, etc...";
+        this.description = "Sorts list based on arguments provided. Having no arguments would default to"
+                + " sorting by /name. If there is more than 1 argument, the list will be sorted by the first."
+                + "followed by the second, etc...";
         this.arguments = new String[]{
-                "/name Optional argument to sort by name",
-                "/date Optional argument to sort by date",
-                "/done Optional argument to sort by completion status"
+            "/name Optional argument to sort by name",
+            "/date Optional argument to sort by date",
+            "/done Optional argument to sort by completion status"
         };
 
         this.taskList = taskList;
@@ -41,7 +39,6 @@ public class CommandSort extends Command {
 
     /**
      * Lists out tasks based on given filters.
-     * TODO
      */
     @Override
     public String execute() {
@@ -57,7 +54,7 @@ public class CommandSort extends Command {
      * Gets arguments from a multi-argument string.
      *
      * @param stringToParse String to parse.
-     * @return Arraylist with all filters to use to display list.
+     * @return Arraylist with all filters to use to sort list.
      * @throws DateTimeParseException Thrown if error in parsing dates.
      * @throws IllegalArgumentException Thrown if an argument is in a wrong format.
      */

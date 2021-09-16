@@ -29,7 +29,7 @@ public class TaskList {
      * @param tasks Existing task list to use.
      */
     public TaskList(ArrayList<Task> tasks) {
-        assert tasks != null: "Tasks must be an arraylist, not null";
+        assert tasks != null : "Tasks must be an arraylist, not null";
         this.tasks = tasks;
     }
 
@@ -51,8 +51,9 @@ public class TaskList {
         }
 
         tasks.add(task);
-        assert tasks.contains(task): "Task list should contain added task";
+        assert tasks.contains(task) : "Task list should contain added task";
         Storage.saveList(tasks);
+
         return Ui.messageAddTask(task, getSize());
 
     }
@@ -83,7 +84,7 @@ public class TaskList {
     public String delete(int index) {
         try {
             Task removedTask = tasks.remove(index - 1);
-            assert !tasks.contains(removedTask): "Task list should not contain removed task";
+            assert !tasks.contains(removedTask) : "Task list should not contain removed task";
 
             Storage.saveList(tasks);
             return Ui.messageRemoveTask(removedTask, getSize());
@@ -95,7 +96,7 @@ public class TaskList {
     /**
      * Displays the list of tasks based on predicate filter.
      *
-     * @param filters Predicates to filter; return true to display task.
+     * @param filters Array of Predicates to filter; return true to display task.
      */
     public String displayList(ArrayList<Predicate<Task>> filters) {
         if (tasks.size() == 0) {
@@ -121,6 +122,12 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Sorts the list of tasks based on the Comparator filters.
+     * Saves the list afterwards.
+     *
+     * @param filters Array of Comparators to use.
+     */
     public void sort(ArrayList<Comparator<Task>> filters) {
         for (int i = filters.size() - 1; i >= 0; i--) {
             tasks.sort(filters.get(i));

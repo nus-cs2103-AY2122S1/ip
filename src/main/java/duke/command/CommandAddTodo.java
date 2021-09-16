@@ -1,9 +1,9 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import task.TaskList;
 import task.TaskTodo;
-
-import java.time.LocalDateTime;
 
 /**
  * Command to add a to-do.

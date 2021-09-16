@@ -1,12 +1,19 @@
 package duke.util;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandAddDeadline;
+import duke.command.CommandAddEvent;
+import duke.command.CommandAddTodo;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandExit;
+import duke.command.CommandHelp;
+import duke.command.CommandInvalid;
+import duke.command.CommandList;
+import duke.command.CommandSort;
 import task.TaskList;
 
 /**
@@ -46,7 +53,7 @@ public class DukeParser {
      * @param input String input from the Listener given by the User.
      */
     public Command parseInput(String input) {
-        assert input != null: "Input to parse cannot be null";
+        assert input != null : "Input to parse cannot be null";
 
         if (input.equals("gubbai")) {
             return new CommandExit();
@@ -87,18 +94,4 @@ public class DukeParser {
             return new CommandInvalid(input);
         }
     }
-
-    /**
-     * Takes in a String date and returns its corresponding LocalDate object.
-     *
-     * @param date String date in format DD/MM/YYYY, with 1-2 digits from Day and Month.
-     * @return LocalDate object with the corresponding day, month and year.
-     * @throws DateTimeParseException Thrown if date passed is an invalid one.
-     */
-    public static LocalDate getDate(String date) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        return LocalDate.parse(date, formatter);
-    }
-
-
 }

@@ -97,11 +97,11 @@ public class Storage {
             switch (taskType) {
             case "T":
                 // Create new To-do
-                assert args.length == 3: "Invalid loaded task";
+                assert args.length == 3 : "Invalid loaded task";
                 return new TaskTodo(args[2], args[1].equals("1"), LocalDateTime.parse(args[3]));
             case "D":
                 // Create new Deadline
-                assert args.length == 5 || args.length == 6: "Invalid loaded task";
+                assert args.length == 5 || args.length == 6 : "Invalid loaded task";
                 return args.length == 5
                         ? new TaskDeadline(args[2], LocalDate.parse(args[3]), null,
                                 !args[1].equals("0"), LocalDateTime.parse(args[4]))
@@ -109,7 +109,7 @@ public class Storage {
                                 !args[1].equals("0"), LocalDateTime.parse(args[5]));
             case "E":
                 // Create new Event
-                assert args.length == 5 || args.length == 6: "Invalid loaded task";
+                assert args.length == 5 || args.length == 6 : "Invalid loaded task";
                 return args.length == 5
                         ? new TaskEvent(args[2], LocalDate.parse(args[3]), null,
                                 !args[1].equals("0"), LocalDateTime.parse(args[4]))

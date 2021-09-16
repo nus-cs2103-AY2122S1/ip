@@ -55,14 +55,26 @@ public class TaskTodo extends Task {
         return false;
     }
 
+    /**
+     * Returns a LocalDate if present in task.
+     * Since a to-do has no date, it should be prioritised after deadlines or events
+     * that do contain dates, as they are most likely to be of higher priority.
+     *
+     * @return LocalDate.MAX to represent the lack of date.
+     */
     @Override
     public LocalDate getDate() {
         return LocalDate.MAX;
     }
 
+    /**
+     * Returns a String representing time if present in task.
+     *
+     * @return Since no time is present, to-do returns an empty string.
+     */
     @Override
     public String getTime() {
-        return "2400";
+        return "";
     }
 
 }

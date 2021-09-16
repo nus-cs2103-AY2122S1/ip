@@ -44,27 +44,37 @@ public abstract class Task {
         return description;
     }
 
+    /**
+     * Obtains the completion status of the task.
+     *
+     * @return Boolean to check if task is done.
+     */
     public boolean getDone() {
         return isDone;
     }
 
+    /**
+     * Obtains the date in which the task was created.
+     *
+     * @return LocalDateTime which indicates when the task was created.
+     */
     public LocalDateTime getAdded() {
         return dateTimeAdded;
     }
 
-
-
+    /**
+     * Returns a LocalDate if present in task.
+     *
+     * @return LocalDate of which the task occurs.
+     */
     public abstract LocalDate getDate();
 
+    /**
+     * Returns a String representing time if present in task.
+     *
+     * @return Time of which task occurs.
+     */
     public abstract String getTime();
-
-    //TODO
-    protected static boolean checkInvalidTime(String time) {
-        if (time.equals("")) return false;
-
-        int timeInt = Integer.parseInt(time);
-        return ( timeInt >= 2400  || timeInt < 0);
-    }
 
     /**
      * Represents string of Task.
