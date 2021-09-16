@@ -15,10 +15,20 @@ public class Ui extends Application {
 
     private Duke duke;
 
+    /**
+     * A constructor for the Ui.
+     *
+     * @throws IOException If unexpected IO errors occur when initializing Duke.
+     */
     public Ui() throws IOException {
         duke = new Duke();
     }
 
+    /**
+     * Starts the Ui with the given stage.
+     *
+     * @param stage The stage for javaFX scene.
+     */
     @Override
     public void start(Stage stage) {
         try {

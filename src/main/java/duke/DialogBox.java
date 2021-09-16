@@ -58,6 +58,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates and returns a user dialog box.
+     *
+     * @param text The text to be used as the message.
+     * @param img The image to be used as the icon.
+     * @return The user dialog box created.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         Label tempLabel = (Label) db.lookup("#dialog");
@@ -65,6 +72,13 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates and returns a duke dialog box.
+     *
+     * @param text The text to be used as the message.
+     * @param img The image to be used as the icon.
+     * @return The duke dialog box created.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         Label tempLabel = (Label) db.lookup("#dialog");

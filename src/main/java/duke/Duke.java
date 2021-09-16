@@ -30,6 +30,11 @@ public class Duke {
     private final TaskList tasks;
     private final CommandParser commandParser;
 
+    /**
+     * A constructor for Duke.
+     *
+     * @throws IOException If unexpected IO errors occur when initializing storage.
+     */
     public Duke() throws IOException {
         this("data/duke.txt");
     }
@@ -143,6 +148,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Return the response of duke afer receiving the input.
+     *
+     * @param input The input to be parsed into a command and executed.
+     * @return The response after executing the command.
+     */
     public String getResponse(String input) {
         try {
             String[] cmd = commandParser.parse(input);
@@ -154,6 +165,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Launch the Duke application.
+     *
+     * @param args Ignored parameters.
+     */
     public static void main(String[] args) {
         Application.launch(Ui.class, args);
     }
