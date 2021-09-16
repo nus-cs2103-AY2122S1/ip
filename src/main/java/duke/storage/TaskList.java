@@ -106,14 +106,12 @@ public class TaskList extends ArrayList<Task> {
     public String find(String keyword) {
         StringBuilder result = new StringBuilder();
         result.append("Here are the matching tasks in your list! \n");
-        int index = 1;
         for (Task task : this) {
             if (task.getDescription().contains(keyword)) {
-                result.append(index)
+                result.append(indexOf(task) + 1)
                         .append(". ")
                         .append(task)
                         .append('\n');
-                index++;
             }
         }
         return (result.toString().stripTrailing());
