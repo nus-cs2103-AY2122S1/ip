@@ -70,7 +70,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.getDialog().setStyle("-fx-background-color: azure; -fx-padding: 5 5 5 5");
         setMargin(db.getDisplayPicture(), new Insets(0, 0, 0, 10));
-        db.setPadding(new Insets(10, 0, 10, 10));
+        db.setPadding(new Insets(10, 0, 10, 25));
         return db;
     }
 
