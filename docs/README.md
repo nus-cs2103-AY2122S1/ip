@@ -40,16 +40,16 @@ java -jar -ea retriever-1.0.jar
 ---
 ## Quick Access Links
   * Adding a Task
-    * [Deadline Type Task](#deadline---to-add-a-deadline-type-task)
-    * [Event Type Task](#event---to-add-an-event-type-task)
-    * [Todo Type Task](#todo---to-add-a-todo-type-task)
-  * [Deleting a Task](#delete---to-delete-a-task)
-  * [Ending the Session](#bye---to-end-the-session-with-the-chatbot)
-  * [Finding a Task](#find---to-find-tasks-with-similar-keywords)
-  * [Marking Task as Done](#done---to-mark-a-task-as-done)
-  * [Viewing All Tasks](#view---to-view-the-tasks-scheduled-for-a-day)
-  * [Viewing Your Schedule](#view---to-view-the-tasks-scheduled-for-a-day)
-  * [Help Section](#help---to-show-all-the-possible-commands)
+    * [Deadline Type Task](#to-add-a-deadline-type-task---deadline)
+    * [Event Type Task](#to-add-an-event-type-task---event)
+    * [Todo Type Task](#to-add-a-todo-type-task---todo)
+  * [Deleting a Task](#to-delete-a-task---delete)
+  * [Ending the Session](#to-end-the-session-with-the-chatbot---bye)
+  * [Finding a Task](#to-find-tasks-with-similar-keywords---find)
+  * [Marking Task as Done](#to-mark-a-task-as-done---done)
+  * [Viewing All Tasks](#to-show-all-the-tasks-present-in-the-task-list---list)
+  * [Viewing Your Schedule](#to-view-the-tasks-scheduled-for-a-day---view)
+  * [Help Section](#to-show-all-the-possible-commands---help)
 
 ---
 ## Features 
@@ -85,7 +85,7 @@ a particular feature.
 
 ---
 ## Usage
-### ```bye``` - To end the session with the Chatbot
+### To end the session with the Chatbot - `bye`
 
 To quit the Chatbot App, after manipulating the tasks, you may use the
 ```bye``` command.
@@ -109,7 +109,7 @@ Expected outcome:
 The Chatbot would close, indicating that you have successfully terminated the
 session.
 
-### ```deadline``` - To add a deadline type task
+### To add a deadline type task - `deadline`
 
 If the task you wish to add has a deadline associated with it, you may use the
 ```deadline``` command to add it.
@@ -139,7 +139,7 @@ deadline type task. However, if you make a mistake in the ```keyword```,
 the ```command format``` or the ```date format```, an error message would be shown.
 </span>
 
-### ```event``` - To add an event type task
+### To add an event type task - `event`
 
 If the task you wish to add is event related, you may use the
 ```event``` command to add it.
@@ -168,7 +168,7 @@ event type task. However, if you make a mistake in the ```keyword```,
 the ```command format``` or the ```date format```, an error message would be shown.
 </span>
 
-### ```delete``` - To delete a task
+### To delete a task - `delete`
 
 If there is a task you wish to delete, you may use the
 ```delete``` command to delete it.
@@ -200,7 +200,7 @@ an error message would be shown.
 </span>
 
 
-### ```done``` - To mark a task as done
+### To mark a task as done - `done`
 
 If you completed a task, you may use the
 ```done``` command to mark it as done.
@@ -229,7 +229,7 @@ However, if you make a mistake in the ```keyword```, the ```command format```
 or the ```TASK_NUMBER```, an error message would be shown.
 </span>
 
-### ```find``` - To find tasks with similar keywords
+### To find tasks with similar keywords - `find`
 
 If you wish to search for tasks with a particular keyword, you may use the
 ```find``` command to find such tasks.
@@ -258,7 +258,7 @@ However, if you make a mistake in the ```keyword``` or
 the ```command format```, an error message would be shown.
 </span>
 
-### ```list``` - To show all the tasks present in the task list
+### To show all the tasks present in the task list - `list`
 
 If you want to take a look at the tasks present in your task list, you may use the
 ```list``` command.
@@ -283,7 +283,7 @@ Task Done!
 
 The Chatbot would print a list showcasing the tasks present.
 
-### ```help``` - To show all the possible commands
+### To show all the possible commands - `help`
 
 If you want to take a look at the commands you can execute, you may use the
 ```help``` command. You can see command descriptions, formats and usage examples
@@ -344,7 +344,7 @@ Command Example: view 23/09/2021
 
 The Chatbot would print the command details.
 
-### ```todo``` - To add a todo type task
+### To add a todo type task - `todo`
 
 If the task you wish to add is a todo and has no fixed due date, you may use the
 ```todo``` command to add it.
@@ -374,7 +374,7 @@ the ```command format```, an error message would be shown.
 </span>
 
 
-### ```view``` - To view the tasks scheduled for a day
+### To view the tasks scheduled for a day - `view`
 
 This command helps you to quickly look up tasks due by or at a particular day.
 This would __only__ show you `event` and `deadline` type tasks. You may use the
