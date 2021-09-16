@@ -31,12 +31,18 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Not to be called from Todo tasks.
+     */
     @Override
     public String getDate() {
         assert false;
         return "";
     }
 
+    /**
+     * Not to be called from Todo tasks.
+     */
     @Override
     public void setDate(LocalDate date) {
         assert false;

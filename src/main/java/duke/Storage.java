@@ -27,11 +27,11 @@ public class Storage {
     /**
      * Initialises a storage object, that will create a data directory in the source directory if it does not exist.
      *
-     * Currently filename represents where the data is to be saved, and it is hard-coded in Duke.java.
-     * @param filename is the file the application will write to, in the data folder.
+     * Currently fileName represents where the data is to be saved, and it is hard-coded in Duke.java.
+     * @param fileName is the file the application will write to, in the data folder.
      */
-    public Storage (String filename, Ui ui) {
-        path = FileSystems.getDefault().getPath("data", filename);
+    public Storage (String fileName, Ui ui) {
+        path = FileSystems.getDefault().getPath("data", fileName);
         File directory = new File("data");
         if (directory.mkdir()) {
             ui.notifyFolderCreated();
@@ -77,21 +77,21 @@ public class Storage {
         writer.close();
     }
 
-    //converts a Task into a string to be saved to a txt file.
-    private String formatForSave(Task e) {
+    //converts a Task Object into a string to be saved to a txt file.
+    private String formatForSave(Task task) {
         String entry = "";
-        entry = entry + e.getType() + "|";
-        entry = entry + e.getIsDone() + "|";
-        entry = entry + e.getLabel();
-        if (e.getType().equals("E") || e.getType().equals("D")) {
-            entry = entry + "|" + e.getDate();
+        entry = entry + task.getType() + "|";
+        entry = entry + task.getIsDone() + "|";
+        entry = entry + task.getLabel();
+        if (task.getType().equals("E") || task.getType().equals("D")) {
+            entry = entry + "|" + task.getDate();
         }
         return entry;
     }
 
     //dual of formatForSave. Converts from saved string back to Task.
-    private Task formatForLoad(String s) throws DukeException {
-        String[] arr = s.split("[|]");
+    private Task formatForLoad(String savedData) throws DukeException {
+        String[] arr = savedData.split("[|]");
         Task t;
         if (arr[0].equals("T")) {
             t = new Todo(arr[2]);

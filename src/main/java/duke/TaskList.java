@@ -9,10 +9,10 @@ import duke.task.Task;
  * Java's arraylist with a more limited interface, implemented due to course requirements.
  */
 public class TaskList {
-    private ArrayList<Task> tl;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        tl = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -21,22 +21,22 @@ public class TaskList {
      * @param loadedData loadedData is the TaskList from a previous session.
      */
     public TaskList(ArrayList<Task> loadedData) {
-        tl = loadedData;
+        tasks = loadedData;
     }
 
     public int size() {
-        return tl.size();
+        return tasks.size();
     }
 
     public Task get(int i) {
-        return tl.get(i);
+        return tasks.get(i);
     }
 
     public Task delete(int i) {
-        return tl.remove(i);
+        return tasks.remove(i);
     }
 
     public void add(Task t) {
-        tl.add(t);
+        tasks.add(t);
     }
 }
