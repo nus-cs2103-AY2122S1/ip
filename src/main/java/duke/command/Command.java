@@ -12,14 +12,14 @@ public abstract class Command {
     public Command() { }
 
     /**
-     * Method to determine if the command is an exit command
+     * Determines if the command is an exit command.
      *
      * @return whether it is an exit command
      */
     public abstract boolean isExit();
 
     /**
-     * Method to carry out the command
+     * Carries out the command.
      *
      * @param tasks the list of tasks to be modified
      * @param storage the storage utility for the program

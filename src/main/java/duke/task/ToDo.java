@@ -6,7 +6,7 @@ package duke.task;
 public class ToDo extends Task {
 
     /**
-     * Constructor of ToDo class
+     * Constructor of ToDo class.
      *
      * @param name name of task
      */
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructor of ToDo class
+     * Constructor of ToDo class.
      *
      * @param name name of task
      * @param isDone whether the task has been completed
@@ -25,7 +25,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Method to return the string representation of the ToDo instance
+     * Returns the string representation of the ToDo instance.
      *
      * @return the string representation of the ToDo instance
      */
@@ -35,7 +35,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Method to return the string to be recorded of the ToDo instance
+     * Returns the string to be recorded in the data file of the ToDo instance.
      *
      * @return the string to be recorded of the ToDo instance
      */
@@ -47,7 +47,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Method to determine if two instances of ToDo are equal
+     * Determines if two instances of ToDo are equal.
      *
      * @param obj the object to be used for comparison
      * @return boolean indicating if the two ToDo instances are equal

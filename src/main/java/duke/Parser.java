@@ -36,7 +36,7 @@ public class Parser {
     }
 
     /**
-     * The method to parse an input line by the user
+     * Parses an input line by the user.
      *
      * @param input the String line to be parsed
      * @return the command to be executed
@@ -86,7 +86,7 @@ public class Parser {
     }
 
     /**
-     * The method to throw an exception user does not fill in task name
+     * Throws an exception if user does not fill in a task name.
      *
      * @param cmd the type of command
      * @throws DukeException
@@ -97,7 +97,7 @@ public class Parser {
     }
 
     /**
-     * The method to return an AddCommand with a task
+     * Returns an AddCommand with a task to be added.
      *
      * @param input String to be parsed to get the Task
      * @return the AddCommand with the Task to be added
@@ -109,7 +109,7 @@ public class Parser {
     }
 
     /**
-     * The method to return an AddCommand with a task
+     * Returns an AddCommand with a task to be added.
      *
      * @param input String to be parsed to get the Task
      * @return the AddCommand with the Task to be added
@@ -123,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * The method to return an AddCommand with a task
+     * Returns an AddCommand with a task to be added.
      *
      * @param input String to be parsed to get the Task
      * @return the AddCommand with the Task to be added
@@ -137,7 +137,7 @@ public class Parser {
     }
 
     /**
-     * The method to return an DoneCommand from a user input
+     * Checks that there are no extra arguments, and returns a DoneCommand from a user input.
      *
      * @param userInputArr String that the user input for the DoneCommand
      * @return the DoneCommand to be executed
@@ -151,7 +151,7 @@ public class Parser {
     }
 
     /**
-     * The method to return an DeleteCommand from a user input
+     * Checks that there are no extra arguments, and returns a DeleteCommand from a user input.
      *
      * @param userInputArr String that the user input for the DeleteCommand
      * @return the DeleteCommand to be executed
@@ -161,11 +161,11 @@ public class Parser {
             throw new DukeException(TOO_MANY_ARGUMENTS);
         }
         int index = getTaskNumber(userInputArr);
-        return new DeleteCommand(index, this.duke.getTaskList());
+        return new DeleteCommand(index);
     }
 
     /**
-     * The method to return an AddCommand from a user input
+     * Catches invalid date-time format input by user.
      *
      * @param input String that the user input to add a Deadline
      * @return the AddCommand to be executed
@@ -179,7 +179,7 @@ public class Parser {
     }
 
     /**
-     * The method to return an AddCommand from a user input
+     * Catches invalid date-time format input by user.
      *
      * @param input String that the user input to add an Event
      * @return the AddCommand to be executed
@@ -193,7 +193,7 @@ public class Parser {
     }
 
     /**
-     * The method to get the index of the Task
+     * Gets the index of the Task from the user input.
      *
      * @param inputArr the array of Strings
      * @return the index of the Task to be modified
@@ -203,7 +203,7 @@ public class Parser {
     }
 
     /**
-     * The method to get the keyword for a Find command
+     * Gets the keyword for a Find command from the user input.
      *
      * @param input the user input
      * @return the keyword to be searched for in the list of tasks
@@ -213,7 +213,7 @@ public class Parser {
     }
 
     /**
-     * The method to parse an "undo" command by user and return the respective
+     * Parses an "undo" command by user and returns the respective
      * command to be carried out.
      *
      * @param prevCommand the previous command that the user wants to undo
@@ -229,7 +229,7 @@ public class Parser {
                 throw new DukeException("Previous command cannot be undone");
             }
             int index = this.duke.getTaskList().size() - 1;
-            return new DeleteCommand(index, this.duke.getTaskList(), true);
+            return new DeleteCommand(index, true);
         } else if (prevCommand instanceof DeleteCommand) {
             if (((DeleteCommand) prevCommand).isAlreadyUndone()) {
                 throw new DukeException("Previous command cannot be undone");

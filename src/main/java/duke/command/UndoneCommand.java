@@ -18,7 +18,7 @@ public class UndoneCommand extends Command {
     }
 
     /**
-     * Method to determine if the command is an exit command
+     * Determines if the command is an exit command.
      *
      * @return whether it is an exit command
      */
@@ -28,7 +28,7 @@ public class UndoneCommand extends Command {
     }
 
     /**
-     * Method to carry out the command
+     * Carries out the command.
      *
      * @param tasks the list of tasks to be modified
      * @param storage the storage utility for the program
@@ -41,7 +41,7 @@ public class UndoneCommand extends Command {
     }
 
     /**
-     * Method to determine if two instances of UndoneCommand are equal
+     * Determines if two instances of UndoneCommand are equal.
      *
      * @param obj the object to be used for comparison
      * @return boolean indicating if the two UndoneCommand instances are equal

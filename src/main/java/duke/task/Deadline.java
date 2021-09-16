@@ -12,7 +12,7 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor of Deadline class
+     * Constructor of Deadline class.
      *
      * @param name name of task
      * @param by date of deadline of the task
@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor of Deadline class
+     * Constructor of Deadline class.
      *
      * @param name name of task
      * @param isDone whether the task has been completed
@@ -37,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Method to return the string representation of the Deadline instance
+     * Returns the string representation of the Deadline instance.
      *
      * @return the string representation of the Deadline instance
      */
@@ -48,7 +48,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Method to return the string to be recorded of the Deadline instance
+     * Return the string to be recorded into the data file of the Deadline instance.
      *
      * @return the string to be recorded of the Deadline instance
      */
@@ -61,7 +61,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Method to determine if two instances of Deadline are equal
+     * Determine if two instances of Deadline are equal.
      *
      * @param obj the object to be used for comparison
      * @return boolean indicating if the two Deadline instances are equal

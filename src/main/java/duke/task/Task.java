@@ -12,7 +12,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor of Task class
+     * Constructor of Task class.
      *
      * @param name name of task
      */
@@ -23,7 +23,7 @@ public abstract class Task {
     }
 
     /**
-     * Constructor of Task class
+     * Constructor of Task class.
      *
      * @param name name of task
      * @param isDone whether the task has been completed
@@ -35,7 +35,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to return the symbol indicating if the task has been completed
+     * Returns the symbol indicating if the task has been completed.
      *
      * @return symbol indicating if the task has been completed
      */
@@ -44,7 +44,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to get the name of the task
+     * Gets the name of the task.
      *
      * @return the name of the task
      */
@@ -53,7 +53,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to mark the task as done
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -64,7 +64,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to return the string representation of the Task
+     * Returns the string representation of the Task.
      *
      * @return the string representation of the Task
      */
@@ -74,7 +74,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to return the string to be recorded of the Task instance
+     * Returns the string to be recorded of the Task instance.
      *
      * @return the string to be recorded of the Task instance
      */

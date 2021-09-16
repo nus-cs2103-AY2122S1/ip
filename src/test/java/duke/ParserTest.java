@@ -33,7 +33,7 @@ public class ParserTest {
     public void testParseDeleteCommand() throws DukeException {
         Duke d = new Duke("data/tasks.txt");
         Parser p = new Parser(d);
-        assertEquals(p.parse("delete 2"), new DeleteCommand(1, d.getTaskList()));
+        assertEquals(p.parse("delete 2"), new DeleteCommand(1));
     }
 
     @Test

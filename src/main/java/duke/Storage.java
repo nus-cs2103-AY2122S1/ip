@@ -18,11 +18,11 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** the path of the file used for storage */
+    /** The path of the file used for storage */
     private String filePath;
 
     /**
-     * The constructor of the Storage class
+     * The constructor of the Storage class.
      *
      * @param filePath the path of the file used for storage
      */
@@ -31,7 +31,8 @@ public class Storage {
     }
 
     /**
-     * The method to load the data from an already existing file into a new list of tasks
+     * Loads the data from an already existing file into a new list of tasks, and creates
+     * a new file if the file does not exist yet.
      *
      * @return the list of tasks
      * @throws DukeException
@@ -61,7 +62,7 @@ public class Storage {
     }
 
     /**
-     * The method to write the list of tasks to a storage file
+     * Writes the list of tasks to a storage file.
      *
      * @param tasks the list of tasks to be written to the storage file
      */
@@ -78,7 +79,7 @@ public class Storage {
     }
 
     /**
-     * The method to parse a line from the storage file and get the Task object it represents
+     * Parses a line from the storage file and get the Task object it represents.
      *
      * @param line the line to be parsed
      * @return the Task to be added into the list of tasks

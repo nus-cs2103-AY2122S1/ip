@@ -12,7 +12,7 @@ public class Event extends Task {
     protected LocalDateTime at;
 
     /**
-     * Constructor of Event class
+     * Constructor of Event class.
      *
      * @param name name of task
      * @param at date of the event
@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor of Event class
+     * Constructor of Event class.
      *
      * @param name name of task
      * @param isDone whether the task has been completed
@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Method to return the string representation of the Event instance
+     * Returns the string representation of the Event instance.
      *
      * @return the string representation of the Event instance
      */
@@ -48,7 +48,7 @@ public class Event extends Task {
     }
 
     /**
-     * Method to return the string to be recorded of the Event instance
+     * Returns the string to be recorded in the data file of the Event instance.
      *
      * @return the string to be recorded of the Event instance
      */
@@ -61,7 +61,7 @@ public class Event extends Task {
     }
 
     /**
-     * Method to determine if two instances of Event are equal
+     * Determines if two instances of Event are equal.
      *
      * @param obj the object to be used for comparison
      * @return boolean indicating if the two Event instances are equal

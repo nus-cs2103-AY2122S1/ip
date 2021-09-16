@@ -23,7 +23,7 @@ public class Duke {
     private boolean hasError;
 
     /**
-     * The constructor for Duke class
+     * The constructor for Duke class.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -58,7 +58,8 @@ public class Duke {
     }
 
     /**
-     * The method to determine if user has input an Exit command
+     * Determines if user has input an Exit command.
+     *
      * @return whether an Exit command has been made
      */
     public boolean isExit() {
@@ -66,7 +67,7 @@ public class Duke {
     }
 
     /**
-     * The method to retrieve the task list
+     * Retrieves the task list used to store the tasks.
      *
      * @return the list of tasks
      */
@@ -75,7 +76,7 @@ public class Duke {
     }
 
     /**
-     * The method to retrieve the previous command that was executed
+     * Retrieves the previous command that was executed.
      *
      * @return the previous command that was executed
      */
@@ -84,7 +85,7 @@ public class Duke {
     }
 
     /**
-     * The method to retrieve whether a DukeException has occurred
+     * Retrieves the boolean indicating whether a DukeException has occurred.
      *
      * @return whether a DukeException has occurred
      */

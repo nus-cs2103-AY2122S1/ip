@@ -8,13 +8,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    /** the list of tasks */
+    /** The list of tasks */
     private ArrayList<Task> listOfTasks;
 
     private Task getMostRecentlyDeletedTask = null;
 
     /**
-     * The constructor of the TaskList class
+     * The constructor of the TaskList class.
      *
      * @param tasks the list of tasks
      */
@@ -23,14 +23,14 @@ public class TaskList {
     }
 
     /**
-     * The constructor of the TaskList class
+     * The constructor of the TaskList class.
      */
     public TaskList() {
         this.listOfTasks = new ArrayList<Task>();
     }
 
     /**
-     * The method to return the list of tasks
+     * Returns the list of tasks.
      *
      * @return the list of tasks
      */
@@ -39,7 +39,8 @@ public class TaskList {
     }
 
     /**
-     * The method to show user all the tasks in the list
+     * Shows the user all the tasks in the list.
+     *
      * @return the string containing all tasks
      */
     public String showAllTasks() {
@@ -51,7 +52,7 @@ public class TaskList {
     }
 
     /**
-     * The method to show user all the matching tasks given a keyword
+     * Shows the user all the matching tasks given a keyword.
      *
      * @param matchingTasks the list of tasks matching the keyword given by user
      * @return the string containing all matching tasks
@@ -65,7 +66,7 @@ public class TaskList {
     }
 
     /**
-     * The method to return all tasks as a String
+     * Returns all tasks as a String.
      *
      * @param tasks the tasks in the list
      * @return the String containing all tasks in the given ArrayList
@@ -82,7 +83,7 @@ public class TaskList {
 
 
     /**
-     * Method to determine if the list of tasks is empty
+     * Returns if the list of tasks is empty.
      *
      * @return whether the list of tasks is empty
      */
@@ -91,7 +92,7 @@ public class TaskList {
     }
 
     /**
-     * Method to determine the number of elements in the list of tasks
+     * Returns the number of elements in the list of tasks.
      *
      * @return the number of elements in the list of tasks
      */
@@ -100,7 +101,7 @@ public class TaskList {
     }
 
     /**
-     * Method to return a task at a specific index in the list
+     * Returns the task at the specific index in the list.
      *
      * @return the task at the specific index in the list
      */
@@ -109,7 +110,7 @@ public class TaskList {
     }
 
     /**
-     * The method to add a Task to the list
+     * Adds a Task to the list.
      *
      * @param t the Task to be added
      * @return the String to show to users
@@ -121,7 +122,7 @@ public class TaskList {
     }
 
     /**
-     * The overloaded method to add a Task to the list at the specified index.
+     * Adds a Task to the list at the specified index.
      *
      * @param t the Task to be added
      * @param index the index in the list to add the Task at
@@ -134,7 +135,7 @@ public class TaskList {
     }
 
     /**
-     * The method to delete a Task from the list
+     * Deletes a Task from the list.
      *
      * @param index the index of the Task to be deleted
      * @return the String to show to users
@@ -155,7 +156,7 @@ public class TaskList {
     }
 
     /**
-     * The method to mark a Task from the list as done
+     * Marks the task at the specified index from the list as done.
      *
      * @param index the index of the Task to be marked as done
      * @return the String to show to users
@@ -174,7 +175,7 @@ public class TaskList {
     }
 
     /**
-     * The method to mark a Task as not yet done
+     * Marks a Task as not yet done.
      *
      * @param index the index of the Task to be marked as undone
      * @return the String to show to users
@@ -186,7 +187,7 @@ public class TaskList {
     }
 
     /**
-     * The method to get a list of matching tasks based on a given keyword.
+     * Gets a list of matching tasks based on a given keyword.
      *
      * @param keyword keyword to filter out matching tasks
      * @return the list of tasks matching the given keyword
@@ -203,7 +204,7 @@ public class TaskList {
     }
 
     /**
-     * The method to return the most recently deleted task from the task list.
+     * Returns the most recently deleted task from the task list.
      *
      * @return the most recently deleted task
      */
