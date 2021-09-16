@@ -10,11 +10,10 @@ import duke.exceptions.InvalidInputException;
  */
 public class Ui {
     private final Parser parser;
-    private static boolean isActivatedClearCommand;
+    private static boolean isActivatedClearCommand = false;
 
     Ui() {
         parser = new Parser();
-        isActivatedClearCommand = false;
     }
 
     /**
@@ -33,9 +32,10 @@ public class Ui {
             if (isActivatedClearCommand) {
                 if (command.equals("y")) {
                     //do nothing
+                } else {
+                    command = "n";
                 }
                 isActivatedClearCommand = false;
-                command = "n";
             }
 
             switch (command) {
@@ -48,7 +48,6 @@ public class Ui {
                 // lists command list
                 HelpCommand help = new HelpCommand(storage, taskList, strParse);
                 return help.execute();
-
                 //Fallthrough
             case "list":
                 // lists history of current tasks.
@@ -59,7 +58,6 @@ public class Ui {
                 // adds a Todo task to the list.
                 TodoCommand todo = new TodoCommand(storage, taskList, strParse);
                 return todo.execute();
-
                 //Fallthrough
             case "deadline":
                 // adds a deadline task to the list.
@@ -87,6 +85,7 @@ public class Ui {
                 return find.execute();
                 //Fallthrough
             case "clearall":
+                isActivatedClearCommand = true;
                 ClearallCommand clearall = new ClearallCommand(storage, taskList, strParse);
                 return clearall.execute();
                 //Fallthrough
@@ -99,6 +98,7 @@ public class Ui {
                 ClearallRejectCommand clearallRejectCommand = new ClearallRejectCommand(storage,
                         taskList, strParse);
                 return clearallRejectCommand.execute();
+                //Fallthrough
             default:
                 throw new InvalidInputException();
             }

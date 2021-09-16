@@ -56,7 +56,7 @@ public class Parser {
         } else if (str.equalsIgnoreCase("n")) {
             return "n";
         } else {
-            throw new InvalidInputException();
+            return str;
         }
     }
 
@@ -135,7 +135,7 @@ public class Parser {
             }
         } catch (DateTimeParseException e) {
             throw new IncorrectInputException("deadline",
-                    "using 'deadline feed my cat /by 2020-01-01 10:30'. Time is optional!");
+                    "using 'deadline feed my cat /by 2020-01-01 10:30' (Time is optional!)");
         }
     }
 
@@ -166,7 +166,7 @@ public class Parser {
             //parses words after /at keyword
             if (strBuilder.toString().equals("") || (i != strParse.length - 1 && i != strParse.length - 2)) {
                 throw new IncorrectInputException("event",
-                        "using 'event feed neighbour's cat /at 2020-01-01 08:00'. Time is optional!");
+                        "using 'event feed neighbour's cat /at 2020-01-01 08:00' (Time is optional!)");
             }
             assert strParse[i - 1].equalsIgnoreCase("/at") : "Event missing /at keyword";
             LocalDate date = LocalDate.parse(strParse[i++]);
