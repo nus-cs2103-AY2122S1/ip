@@ -44,6 +44,7 @@ public class DoneCommand extends Command {
         assert target >= 1 : "Target index for Done should be at least 1!";
 
         Task completed = taskList.markAsDone(target);
+        storage.saveTasks(taskList);
         return new CommandResult(response.showCompletedTask(completed));
     }
 }

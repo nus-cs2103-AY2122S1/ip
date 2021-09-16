@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
 import duke.tasks.Event;
 import duke.util.PersistentStorage;
 import duke.util.Response;
@@ -41,10 +42,11 @@ public class EventCommand extends Command {
      * @param storage The PersistentStorage associated with the Duke instance.
      * @return A CommandResult detailing the addition of an Event task.
      */
-    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
+            throws DukeException {
         Event event = new Event(this.description, this.eventDateTime);
-
         taskList.addTask(event);
+        storage.saveTasks(taskList);
         return new CommandResult(response.showAddedTask(taskList, event));
     }
 }

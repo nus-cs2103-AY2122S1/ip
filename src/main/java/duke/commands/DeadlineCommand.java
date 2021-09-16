@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.util.PersistentStorage;
 import duke.util.Response;
@@ -41,9 +42,11 @@ public class DeadlineCommand extends Command {
      * @param storage The PersistentStorage associated with the Duke instance.
      * @return A CommandResult detailing the added Task.
      */
-    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
+            throws DukeException {
         Deadline deadline = new Deadline(this.description, this.dueDateTime);
         taskList.addTask(deadline);
+        storage.saveTasks(taskList);
         return new CommandResult(response.showAddedTask(taskList, deadline));
     }
 }

@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
 import duke.tasks.DoAfter;
 import duke.util.PersistentStorage;
 import duke.util.Response;
@@ -42,9 +43,11 @@ public class DoAfterCommand extends Command {
      * @return A CommandResult detailing the added Task.
      */
     @Override
-    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
+            throws DukeException {
         DoAfter doAfter = new DoAfter(this.description, this.doAfterDateTime);
         taskList.addTask(doAfter);
+        storage.saveTasks(taskList);
         return new CommandResult(response.showAddedTask(taskList, doAfter));
     }
 }
