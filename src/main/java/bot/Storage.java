@@ -59,7 +59,8 @@ public class Storage {
         File file = new File(absolutePath);
 
         try {
-            if (!file.exists()) {
+            while (!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
 
