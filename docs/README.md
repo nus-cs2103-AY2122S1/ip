@@ -97,7 +97,8 @@ Shows all your current tasks with the completion status and task type.
 
 **Expected Outcome**:
 
-![Screenshot 2021-09-16 at 6 07 02 PM](https://user-images.githubusercontent.com/76540550/133601901-5028d4ba-b37e-40f7-96c7-373c1fb6c542.png)
+![Screenshot 2021-09-17 at 12 29 22 AM](https://user-images.githubusercontent.com/76540550/133650158-94655cea-737b-4c40-806e-da5ff677b502.png)
+
 
 <br />
 
