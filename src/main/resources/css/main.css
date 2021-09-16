@@ -1,5 +1,5 @@
 .scroll-pane .viewport {
-    -fx-background-image: url('../Images/Sky.png');
+    -fx-background-image: url('../images/Sky.png');
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;

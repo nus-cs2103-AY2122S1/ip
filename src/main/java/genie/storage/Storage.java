@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 public class Storage {
     
-    private static final String DIRECTORY = "src/main/data";
+    private static final String DIRECTORY = "data";
     private static final String FILENAME = "duke.txt";
     private static final String PATH = DIRECTORY + "/" + FILENAME;
 
