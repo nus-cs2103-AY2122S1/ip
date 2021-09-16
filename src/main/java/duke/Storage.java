@@ -19,17 +19,14 @@ import duke.task.ToDo;
  */
 public class Storage {
     private Path saveDirectory = Paths.get("data");
-    private Path savePath;
+    private Path savePath = Paths.get(saveDirectory.toString(), "duke.txt");
     private Ui ui;
 
     /**
      * @param ui A Ui to send display commands to.
-     * @param saveDirectory A path to the directory to save in.
-     *                      It will be created it if it does not exist.
      */
     public Storage(Ui ui) {
         this.ui = ui;
-        savePath = Paths.get(saveDirectory.toString(), "duke.txt");
     }
 
     /**
