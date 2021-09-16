@@ -62,7 +62,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Task.printTime(at) + ")\n";
+        return "[E]" + super.toString() + "\n\t(at: " + Task.printTime(at) + ")\n";
     }
 
     /**
