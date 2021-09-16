@@ -17,7 +17,8 @@ public class ToDo extends Task {
      * @param isDone Has the task been done?
      */
     protected ToDo(String description, boolean isDone) {
-        super(description, isDone);
+        this(description);
+        this.isDone = isDone;
     }
 
     @Override

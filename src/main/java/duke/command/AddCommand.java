@@ -4,15 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import duke.DukeException;
 import duke.ExceptionType;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.task.Task;
 import duke.ui.Ui;
 
-public class AddCommand implements ICommand {
-    private static final String WORD_TODO = "todo";
-    private static final String WORD_DEADLINE = "deadline";
-    private static final String WORD_EVENT = "event";
+public class AddCommand extends Command {
     private final Task task;
 
     /**
@@ -23,17 +21,25 @@ public class AddCommand implements ICommand {
     public AddCommand(String[] strArr) throws IllegalArgumentException {
         requireNonNull(strArr, "Input string array is null");
 
-        if (strArr.length == 2 && strArr[0].equals(WORD_TODO)) {
+        if (strArr.length == 2 && strArr[0].equals(Parser.getWordTodo())) {
             task = Task.getToDo(strArr[1]);
-        } else if (strArr.length == 3 && strArr[0].equals(WORD_DEADLINE)) {
+        } else if (strArr.length == 3 && strArr[0].equals(Parser.getWordDeadline())) {
             task = Task.getDeadline(strArr[1], strArr[2]);
-        } else if (strArr.length == 3 && strArr[0].equals(WORD_EVENT)) {
+        } else if (strArr.length == 3 && strArr[0].equals(Parser.getWordEvent())) {
             task = Task.getEvent(strArr[1], strArr[2]);
         } else {
-            throw new IllegalArgumentException("Input string array is shorter than required.");
+            throw new IllegalArgumentException("Wrong input string array format");
         }
     }
 
+    /**
+     * Adds a task to task list and outputs information of the created task.
+     *
+     * @param taskList duke's task list
+     * @param ui current Ui instance
+     * @param storage current storage instance
+     * @throws DukeException if there is an unfinished task which equals to the given task
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         requireNonNull(taskList);

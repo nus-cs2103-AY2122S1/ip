@@ -1,26 +1,36 @@
 package duke.command;
 
+import static java.util.Objects.requireNonNull;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.task.Task;
 import duke.ui.Ui;
 
-public class DoneCommand implements ICommand {
+public class DoneCommand extends Command {
     private final int lineIndex;
 
     public DoneCommand(int lineIndex) {
         this.lineIndex = lineIndex;
     }
 
+    /**
+     * Mark a task as done according to line index; outputs the task's information.
+     *
+     * @param taskList duke's task list
+     * @param ui current Ui instance
+     * @param storage current storage instance
+     * @throws DukeException if storage fails to write in file
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IllegalArgumentException {
-        if (taskList == null || ui == null || storage == null) {
-            throw new IllegalArgumentException("One of the parameters is null.");
-        }
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        requireNonNull(ui);
+        requireNonNull(storage);
+
         Task task = taskList.get(lineIndex);
-        storage.setLine(lineIndex, task.populateSaveData());
         task.setStatus(true);
+        storage.setLine(lineIndex, task.populateSaveData());
         Ui.printMarkDone(task.toString());
     }
 

@@ -1,15 +1,25 @@
 package duke.command;
 
+import static java.util.Objects.requireNonNull;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.ui.Ui;
 
-public class ListCommand implements ICommand {
+public class ListCommand extends Command {
+    /**
+     * Displays the task list.
+     *
+     * @param taskList duke's task list
+     * @param ui current Ui instance
+     * @param storage current storage instance
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IllegalArgumentException {
-        if (taskList == null || ui == null || storage == null) {
-            throw new IllegalArgumentException("One of the parameters is null.");
-        }
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        requireNonNull(taskList);
+        requireNonNull(ui);
+        requireNonNull(storage);
+
         Ui.printList(taskList);
     }
 

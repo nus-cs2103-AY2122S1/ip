@@ -107,6 +107,11 @@ public class Ui {
     public static void printList(TaskList taskList) {
         requireNonNull(taskList, "task list is not initialized");
 
+        if (taskList.size() == 0) {
+            printWithIndent("The task list is empty");
+            return;
+        }
+
         for (int i = 0; i < taskList.size(); i++) {
             printWithIndent((i + 1) + "." + taskList.get(i).toString());
         }
@@ -116,11 +121,11 @@ public class Ui {
      * Prints contents of task list.
      *
      * @param listSize Size of current list.
-     * @throws IllegalArgumentException if list size is negative
+     * @throws IndexOutOfBoundsException if list size is negative
      */
-    public static void printTaskCount(int listSize) throws IllegalArgumentException {
+    public static void printTaskCount(int listSize) throws IndexOutOfBoundsException {
         if (listSize < 0) {
-            throw new IllegalArgumentException("list size should not be negative");
+            throw new IndexOutOfBoundsException("list size should not be negative");
         }
 
         printWithIndent(getTaskCountString(listSize));
@@ -190,6 +195,7 @@ public class Ui {
      */
     public static void printErrorMessage(DukeException e, String userInput) {
         requireNonNull(userInput, "User input cannot be null");
+
         switch (e.getType()) {
         case INDEX_OUT_OF_BOUND:
         case INVALID_COMMAND:
