@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
 
     /** Successful execution message */
-    public static final String MESSAGE_SUCCESS = "Task successfully added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Task successfully added:\n%1$s";
 
     /** Unsuccessful execution message */
     public static final String MESSAGE_EMPTY_DESCRIPTION = "The description of a event cannot be empty.";

@@ -15,7 +15,7 @@ public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
     /** Successful execution message */
-    public static final String MESSAGE_SUCCESS = "Task successfully added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Task successfully added:\n%1$s";
     private Task taskToAdd;
 
     /**

@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
     /** Successful execution message */
-    public static final String MESSAGE_SUCCESS = "Noted. I've marked this as done: %1$s";
+    public static final String MESSAGE_SUCCESS = "Noted. I've marked this as done:\n%1$s";
     private int index;
 
     /**

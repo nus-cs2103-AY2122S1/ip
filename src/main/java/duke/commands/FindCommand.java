@@ -44,7 +44,7 @@ public class FindCommand extends Command {
             response += "No matches!";
         } else {
             for (Task t : matchedTasks) {
-                response += (count + ". " + t.toString());
+                response += (count + ". " + t.toString() + "\n");
                 count += 1;
             }
         }
