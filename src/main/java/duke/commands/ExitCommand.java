@@ -28,7 +28,8 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute() {
         // Schedules a Timer to exit the javafx Platform.
-        // Code adapted from https://stackoverflow.com/questions/21974415/how-to-close-this-javafx-application-after-showing-a-message-in-a-text-area-elem/21996863
+        // Code adapted from https://stackoverflow.com/questions/21974415/
+        //                   how-to-close-this-javafx-application-after-showing-a-message-in-a-text-area-elem/21996863
         new Timer().schedule(new TimerTask() {
             public void run() {
                 Platform.exit();
