@@ -32,7 +32,7 @@ public class EventCommand extends Command {
         storage.addToList(event);
         storage.save();
         String dukeReply = String.format("Got it! I've added this event to the list: \n"
-                + " %s\n Now you have %d tasks in the list!\n",
+                + "%s\nNow you have %d tasks in the list!\n",
                 event.toString(), storage.getSize());
         return ui.reply(dukeReply);
     }

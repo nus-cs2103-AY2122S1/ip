@@ -30,8 +30,8 @@ public class ToDoCommand extends Command {
     public String execute(Ui ui, Storage storage) {
         storage.addToList(toDo);
         storage.save();
-        String dukeReply = String.format("Got it! I've added this toDo to the list: \n"
-                        + " %s\n Now you have %d tasks in the list!\n",
+        String dukeReply = String.format("Got it! I've added this todo to the list: \n"
+                        + "%s\nNow you have %d tasks in the list!\n",
                 toDo.toString(), storage.getSize());
         return ui.reply(dukeReply);
     }

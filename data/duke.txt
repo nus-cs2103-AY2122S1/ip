@@ -1,7 +1,9 @@
 E%%X%%playgames%%2020-01-11 11:21
-T%%X%%read lecture notes
-E%%X%%sleep %%2020-03-21 11:11
+E%%X%%eat%%2019-01-01 00:00
 T%% %%playgames
-D%% %%CS2103T%%2021-05-14 11:59
+D%%X%%CS2103T%%2021-05-14 11:59
 T%% %%sleep
 E%% %%figma%%2021-09-14 11:11
+T%% %%cry
+E%% %%career fair%%2021-09-07 12:00
+D%% %%userguide%%2021-09-16 23:59
