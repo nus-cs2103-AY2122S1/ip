@@ -8,9 +8,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private static final String INVALID_TASK_NUMBER_MESSAGE =
-            "This is not a valid task number.";
-
     /** The ArrayList that represents the list of Tasks */
     private ArrayList<Task> tasks;
 
@@ -88,7 +85,7 @@ public class TaskList {
      */
     public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {
         Task removedTask = tasks.get(taskNumber - 1);
-        tasks.remove(taskNumber);
+        tasks.remove(taskNumber - 1);
         return removedTask;
     }
 

@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.time.format.DateTimeParseException;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -103,7 +104,11 @@ public class Parser {
         }
         try {
             String[] descSplit = desc.split("(\\s+)/at(\\s+)");
-            return new EventCommand(descSplit[0], descSplit[1]);
+            String dateAndTime = descSplit[1];
+            String[] dateAndTimeSplit = dateAndTime.split("\\s+");
+            String date = dateAndTimeSplit[0];
+            String time = dateAndTimeSplit[1];
+            return new EventCommand(descSplit[0], date, time);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(INVALID_EVENT_FORMAT);
         }
@@ -189,6 +194,8 @@ public class Parser {
             return new FindCommand(desc);
         case UpdateCommand.COMMAND_WORD:
             return new UpdateParser(desc).parse();
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
         default:
             throw new DukeException(INVALID_COMMAND_MESSAGE);
         }

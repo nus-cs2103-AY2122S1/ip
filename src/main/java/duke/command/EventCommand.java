@@ -15,7 +15,8 @@ public class EventCommand extends Command {
     /** The description of the event to be added. */
     private String description;
     /** The date and time of the event to be added. */
-    private String dateAndTime;
+    private String date;
+    private String time;
 
     /**
      * Constructs an EventCommand object.
@@ -23,9 +24,10 @@ public class EventCommand extends Command {
      * @param description The description of the event to be added.
      * @param dateAndTime The date and time of the event to be added.
      */
-    public EventCommand(String description, String dateAndTime) {
+    public EventCommand(String description, String date, String time) {
         this.description = description;
-        this.dateAndTime = dateAndTime;
+        this.date = date;
+        this.time = time;
     }
 
     /**
@@ -38,7 +40,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        Event newEvent = new Event(description, dateAndTime);
+        Event newEvent = new Event(description, date, time);
         tasks.addTask(newEvent);
         storage.save(tasks);
         return Ui.getAddedMessage(newEvent, tasks.size());

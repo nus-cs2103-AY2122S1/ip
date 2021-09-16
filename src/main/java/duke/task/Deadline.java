@@ -15,14 +15,14 @@ public class Deadline extends Task {
     private LocalTime byTime;
 
     /**
-     * Constructs a Deadline task using given details, date and time.
+     * Constructs a Deadline task using given description, date and time.
      *
-     * @param taskDetails The details of the deadline.
+     * @param taskDescription The description of the deadline.
      * @param byDate The date of the deadline.
      * @param byTime The time of the deadline.
      */
-    public Deadline (String taskDetails, String byDate, String byTime) {
-        super(taskDetails);
+    public Deadline (String taskDescription, String byDate, String byTime) {
+        super(taskDescription);
         this.byDate = LocalDate.parse(byDate);
         this.byTime = LocalTime.parse(byTime);
     }
@@ -32,7 +32,7 @@ public class Deadline extends Task {
      *
      * @return The letter "D" that represents a Deadline.
      */
-    public String taskType() {
+    public String getTaskType() {
         return "D";
     }
 
@@ -48,8 +48,8 @@ public class Deadline extends Task {
      * @return The String representation of the task details, date and time.
      */
     @Override
-    public String getTaskDetails() {
-        return super.getTaskDetails() + " | " + byDate + " | " + byTime;
+    public String getTaskDescription() {
+        return super.getTaskDescription() + " | " + byDate + " | " + byTime;
     }
 
     /**
@@ -62,6 +62,6 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                + byTime + ")";
+                + byTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

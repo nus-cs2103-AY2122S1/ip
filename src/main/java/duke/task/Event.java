@@ -1,21 +1,30 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A class representing an Event task.
  */
 public class Event extends Task {
 
-    /** the timing of the Event as a String. */
-    private String at;
+    /** the date of the event as a String. */
+    private LocalDate atDate;
+    /** the time of the event as a String. */
+    private LocalTime atTime;
 
     /**
-     * Constructs an Event object using the given task details and timing of the event.
-     * @param taskDetails The given task details.
-     * @param at the timing of the event as a String.
+     * Constructs an Event object using the given task description and timing of the event.
+     *
+     * @param taskDescription The given task description
+     * @param atDate The date of the event as a String
+     * @param atTime The time of the event as a String
      */
-    public Event (String taskDetails, String at) {
-        super(taskDetails);
-        this.at = at;
+    public Event (String taskDescription, String atDate, String atTime) {
+        super(taskDescription);
+        this.atDate = LocalDate.parse(atDate);
+        this.atTime = LocalTime.parse(atTime);
     }
 
     /**
@@ -23,13 +32,14 @@ public class Event extends Task {
      *
      * @return The letter "E" that represents an Event.
      */
-    public String taskType() {
+    public String getTaskType() {
         return "E";
     }
 
     @Override
     public void setDateAndTime(String date, String time) {
-        this.at = date + " " + time;
+        this.atDate = LocalDate.parse(date);
+        this.atTime = LocalTime.parse(time);
     }
 
     /**
@@ -39,8 +49,8 @@ public class Event extends Task {
      * @return The String representation of the task details and timing of the Event.
      */
     @Override
-    public String getTaskDetails() {
-        return super.getTaskDetails() + " | " + at;
+    public String getTaskDescription() {
+        return super.getTaskDescription() + " | " + atDate + " | " + atTime;
     }
 
     /**
@@ -50,6 +60,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at :" + at + ")";
+        return "[E]" + super.toString() + " (at: "
+                + atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + atTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

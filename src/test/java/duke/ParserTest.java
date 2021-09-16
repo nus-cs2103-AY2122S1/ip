@@ -27,7 +27,7 @@ public class ParserTest {
         TaskList tasks = new TaskList();
         Parser parser = new Parser(tasks);
 
-        DukeException thrown = assertThrows(DukeException.class, () -> parser.parse("done "));
+        DukeException thrown = assertThrows(DukeException.class, () -> parser.parse("done"));
         assertEquals("Please enter the task number of your target task.",
                 thrown.getMessage());
     }

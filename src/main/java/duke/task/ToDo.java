@@ -18,7 +18,7 @@ public class ToDo extends Task {
      *
      * @return The letter "T" that represents a ToDo.
      */
-    public String taskType() {
+    public String getTaskType() {
         return "T";
     }
 

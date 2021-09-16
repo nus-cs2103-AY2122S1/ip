@@ -32,7 +32,7 @@ public abstract class Task {
         isDone = true;
     }
 
-    public String getTaskDetails() {
+    public String getTaskDescription() {
         return taskDetails;
     }
 
@@ -54,8 +54,14 @@ public abstract class Task {
      *
      * @return A letter as a String that represents the task type.
      */
-    public abstract String taskType();
+    public abstract String getTaskType();
 
+    /**
+     * Sets the date and time of the event
+     *
+     * @param date
+     * @param time
+     */
     public abstract void setDateAndTime(String date, String time);
 
     /**
