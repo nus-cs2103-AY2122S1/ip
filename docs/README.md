@@ -1,6 +1,6 @@
 # User Guide
 **WoofBot** is your very own task managing bot. Simply key in the tasks that you want to keep track off, and WoofBot will keep note of it for you. Fast, clean, and easy-to-use - what more could you ask for!
-![WoofBot Ui](/docs/Ui.png.png)
+![WoofBot Ui](/docs/Ui.png)
 
 ## Features
 Listed below are features available in WoofBot:
