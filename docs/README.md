@@ -150,6 +150,7 @@ Duke will list out all the tasks that have descriptions matching the `SEARCHTERM
 ## Command Summary
 Action|Format|Examples
 ------|------|--------
+
 todo|`todo TASK`| `todo buy eggs`
 event|`event TASK /at YYYY-MM-DD /recur RECURRENCE`|`event meeting /at 2021-09-16`, `event team meeting /at 2021-09-20 /recur weekly`
 deadline|`deadline TASK /by YYYY-MM-DD`|`deadline CS2103T iP /by 2021-09-17`
