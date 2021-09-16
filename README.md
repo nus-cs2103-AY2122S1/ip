@@ -22,6 +22,9 @@ Features:
 - [x] Nothing else
 - [x] Oh yeah and Dukuwu helps you manage your tasks ig 🤔 just run the Duke file and type 'help' to find out more
 
+Check my [website](https://ruthpohrp.github.io/ip/) and start using Dukewu now!
+
 ## 
 Here's a sneak peek at what it looks like:
 ![Sneak Peek](docs/Ui.png?raw=true)
+
