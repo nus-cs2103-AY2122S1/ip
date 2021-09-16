@@ -25,6 +25,4 @@ public class Bern {
     public String getResponse(String input, ArrayList<Task> arListTask) {
         return ui.getReplyUniversal(input, arListTask);
     }
-
-
 }

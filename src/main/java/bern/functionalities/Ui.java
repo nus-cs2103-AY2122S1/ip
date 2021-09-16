@@ -3,7 +3,11 @@ package bern.functionalities;
 import java.util.ArrayList;
 
 import bern.Command;
-import bern.exception.*;
+import bern.exception.BernException;
+import bern.exception.DuplicateException;
+import bern.exception.EmptyDescriptionException;
+import bern.exception.IndexException;
+import bern.exception.InvalidCommandException;
 import bern.model.Deadline;
 import bern.model.Event;
 import bern.model.Task;
@@ -30,7 +34,6 @@ public class Ui {
         if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("deadline");
         }
-        // TODO Haven't handled if there is no /by
         String task = input.substring(len + 1, input.indexOf('/') - 1);
         String by = input.substring(input.indexOf('/') + 4);
         Deadline addition = new Deadline(task, by);
@@ -58,7 +61,6 @@ public class Ui {
         if (input.length() == len || (input.length() == len + 1 && input.substring(len, len + 1).equals(" "))) {
             throw new EmptyDescriptionException("event");
         }
-        // TODO Haven't handled if there is no /at
         String task = input.substring(len + 1, input.indexOf('/') - 1);
         String at = input.substring(input.indexOf('/') + 4);
         Event addition = new Event(task, at);
@@ -291,8 +293,12 @@ public class Ui {
             } else {
                 new Ui().getReply(Command.INVALID, input, arListTask);
             }
-        } catch (BernException e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            if (e instanceof BernException) {
+                System.out.println(e.getMessage());
+            } else {
+                System.out.println("non BernException: " + e.getMessage());
+            }
         }
     }
 
@@ -328,8 +334,13 @@ public class Ui {
             } else {
                 return new Ui().getReply(Command.INVALID, input, arListTask);
             }
-        } catch (BernException e) {
-            return e.getMessage();
+        } catch (Exception e) {
+            if (e instanceof BernException) {
+                return e.getMessage();
+            } else {
+                return "I only handle some errors as specified in IP requirements. "
+                        + "Sorry this error wasn't handled. :'(";
+            }
         }
     }
 }
