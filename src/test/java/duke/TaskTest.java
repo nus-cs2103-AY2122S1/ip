@@ -1,5 +1,6 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
@@ -22,12 +23,14 @@ public class TaskTest {
     public void markDoneTest() {
         TaskList item = new TaskList();
         String msg;
+        String output = "Nice! I have marked this task as done: \n" + "T | 1 | abc";
         try {
-            msg = item.addItem(new Todo("abc"));
+            Todo t = new Todo("abc");
+            msg = item.addItem(t);
             msg = item.markDone(0);
         } catch (DukeException e) {
             msg = "";
         }
-        assertNotEquals(msg, "");
+        assertEquals("", msg);
     }
 }
