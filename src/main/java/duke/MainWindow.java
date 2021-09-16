@@ -23,8 +23,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/chow200.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/jerry200.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PusheenUser200.png"));
+    private Image happyBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenBot200.png"));
+    private Image angryBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenAngry200.png"));
+
 
     @FXML
     public void initialize() {
@@ -40,7 +42,7 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException e) {
             startMessage = e.getMessage();
         }
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startMessage, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startMessage, happyBotImage));
     }
 
     /**
@@ -49,12 +51,21 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        Image botImage;
         String input = userInput.getText();
         Response response = duke.handleCommands(input);
         String responseOutput = response.getMessage();
+
+        if (response.hasError()) {
+            botImage = angryBotImage;
+        } else {
+            botImage = happyBotImage;
+        }
+
+        //TODO: isTerminate
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(responseOutput, dukeImage)
+            DialogBox.getDukeDialog(responseOutput, botImage)
         );
         userInput.clear();
     }

@@ -12,6 +12,7 @@ import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskEnum;
 import duke.task.Todo;
 
 public class TaskList {
@@ -47,28 +48,29 @@ public class TaskList {
 
         for (String taskAsString : taskArrayAsString) {
             String[] commands = taskAsString.split(" \\| ");
-            String command = commands[0];
+            String userInputCommand = commands[0];
             boolean isDone = commands[1].equals("1");
             String description = commands[2];
-            switch (command) {
-            case Duke.COMMAND_EVENT: {
+            TaskEnum task = TaskEnum.getTask(userInputCommand);
+            switch (task) {
+            case EVENT: {
                 String date = commands[3];
                 newTaskArray.add(new Event(description, date, isDone));
                 break;
             }
-            case Duke.COMMAND_DEADLINE: {
+            case DEADLINE: {
                 String date = commands[3];
                 newTaskArray.add(new Deadline(description, date, isDone));
                 break;
             }
-            case Duke.COMMAND_TODO: {
+            case TODO: {
                 newTaskArray.add(new Todo(description, isDone));
                 break;
             }
-            default: { // TODO: Refactor this with exceptions
+            default: { 
                 throw new DukeException(ERROR_UNKNOWN_FILE_COMMAND);
-            }
-            }
+            }  
+        } 
         }
         return newTaskArray;
     }

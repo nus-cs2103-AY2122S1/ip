@@ -3,26 +3,14 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import duke.command.CommandEnum;
 import duke.exception.DukeException;
 
-//TODO: Refactor the commands into their own separate classes.
 public class Duke {
     
-    protected static final String COMMAND_TODO = "todo";
-    protected static final String COMMAND_EVENT = "event";
-    protected static final String COMMAND_DEADLINE = "deadline";
-
     private static final String STORAGE_DIRECTORY = "FergusChatBot.txt";
-
-    private static final String COMMAND_BYE = "bye";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_DONE = "done";
-    private static final String COMMAND_DELETE = "delete";
-    private static final String COMMAND_SAVE = "save";
-    private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_HELP = "help";
-    private static final String COMMAND_RESET = "reset";
 
     private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded :)";
     private static final String READ_FAILURE = "No saved file has been found :(";
@@ -48,70 +36,72 @@ public class Duke {
     // prettier-ignore
     public Response handleCommands(String input) {
         String[] commands = input.split(" ");
-        String command = commands[0];
-        assert !command.isEmpty() : "The given input command is empty or invalid";
+        String userInputCommand = commands[0];
+        assert !userInputCommand.isEmpty() : "The given input command is empty or invalid";
+
         String message = "";
-        boolean isBye = false;
+        boolean isTerminate = false;
+
         try {
+            CommandEnum command = CommandEnum.getCommand(userInputCommand);
             switch (command) {
-            case COMMAND_BYE: {
+            case BYE: {
                 message = Formatter.getResponseString(FAREWELL);
-                isBye = true;
+                isTerminate = true;
                 break;
             }
-            case COMMAND_LIST: {
+            case LIST: {
                 message = this.taskArray.handleList();
                 break;
             }
-            case COMMAND_EVENT: {
+            case EVENT: {
                 message = this.taskArray.handleAddEvent(commands);
                 break;
             }
-            case COMMAND_DEADLINE: {
+            case DEADLINE: {
                 message = this.taskArray.handleAddDeadline(commands);
                 break;
             }
-            case COMMAND_TODO: {
+            case TODO: {
                 message = this.taskArray.handleAddToDo(commands);
                 break;
             }
-            case COMMAND_DONE: {
+            case DONE: {
                 assert Arrays.asList(commands).size() >= 2 : "Invalid format of index for command done given";
                 int taskIndex = Integer.parseInt(commands[1]);
                 message = this.taskArray.handleDone(taskIndex);
                 break;
             }
-            case COMMAND_DELETE: {
+            case DELETE: {
                 assert Arrays.asList(commands).size() >= 2 : "Invalid format of index for command delete given";
                 int taskIndex = Integer.parseInt(commands[1]);
                 message = this.taskArray.handleDelete(taskIndex);
                 break;
             }
-                case COMMAND_SAVE: {
+                case SAVE: {
                 message = this.taskArray.handleSave(this.storage);
                 break;
             }
-            case COMMAND_FIND: {
+            case FIND: {
                 message = this.taskArray.handleFind(commands[1]);
                 break;
             }
-            case COMMAND_RESET: {
+            case RESET: {
                 message = this.taskArray.handleReset();
                 break;
             }
-            case COMMAND_HELP: {
+            case HELP: {
                 message = this.taskArray.handleHelp();
                 break;
             }    
             default: {
-                message = Formatter.getResponseString(ERROR_UNKNOWN_COMMAND);
-                break;
+                throw new DukeException(ERROR_UNKNOWN_COMMAND);
             }
             }
-            return new Response(isBye, message);
         } catch (DukeException e) {
-            return new Response(isBye, e.getMessage());
+            return new Response(false, true, e.getMessage());
         }
+        return new Response(isTerminate, false, message);
     }
 
     /**
@@ -132,8 +122,14 @@ public class Duke {
     }
 
     public static String[] getListOfCommands() {
-        return new String[] { COMMAND_TODO, COMMAND_EVENT, COMMAND_DEADLINE, COMMAND_BYE,
-            COMMAND_LIST, COMMAND_DONE, COMMAND_DELETE, COMMAND_SAVE, COMMAND_FIND, COMMAND_HELP, COMMAND_RESET };
+        List<CommandEnum> listOfCommands = Arrays.asList(CommandEnum.values());
+        List<String> listOfStringCommands = listOfCommands
+            .stream()
+            .map(CommandEnum::toString)
+            .collect(Collectors.toList());
+        String[] result = new String[listOfStringCommands.size()];
+        Arrays.setAll(result, listOfStringCommands::get);
+        return result;
     }
 
 }
