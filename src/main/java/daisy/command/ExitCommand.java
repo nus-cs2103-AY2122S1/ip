@@ -24,10 +24,10 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) {
         //@@author tsy24-reused
-        //Reused from https://stackoverflow.com/a/21996863
+        //Reused from https://stackoverflow.com/a/21974490
         new Timer().schedule(new TimerTask() {
             public void run() {
-                Platform.exit();
+                System.exit(0);
             }
         }, 1500);
         return BYE_MESSAGE;
