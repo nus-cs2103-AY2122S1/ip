@@ -1,7 +1,7 @@
 package duke.taskTypes;
 
 import duke.exception.*;
-import duke.taskTypes.Event;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ class EventTest {
     public void deadlineSaveTask_validStringInput_stringReturned() throws DukeException {
         assertEquals(
                 "E F event1 /at 2019-09-09 1900",
-                new Event("event1 /at 2019-09-09 1900", false).saveTask());
+                new Event("event1 /at 2019-09-09 1900", false).saveTaskTxt());
     }
 
     @Test

@@ -1,5 +1,8 @@
 package duke.util;
 
+
+import java.util.List;
+
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -9,8 +12,6 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
-
-import java.util.List;
 
 /**
  * Parser deals with making sense of the user input. Creates and returns a command object

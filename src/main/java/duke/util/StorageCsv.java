@@ -1,9 +1,5 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import duke.exception.FileNotFoundException;
-import duke.taskTypes.Task;
-
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.exception.FileNotFoundException;
+import duke.taskTypes.Task;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -24,7 +23,7 @@ public class StorageCsv implements Storage {
     private final static String HEADER = "Task Type,Done,Description,Splitter,Date,Time";
 
     /**
-     * Constructor for StorageTxt and sets the file that contains previous state
+     * Constructor for StorageCSV and sets the file that contains previous state
      *
      * @param filePath File location that contains text file containing previous state
      * @throws DukeException Thrown when file does not exist
@@ -32,7 +31,7 @@ public class StorageCsv implements Storage {
     public StorageCsv(String filePath) {
         File dir = new File(filePath);
         dir.mkdirs();
-        File csvFile = new File(filePath + "/csvFile.csv");
+        File csvFile = new File(filePath + "/savedOutput.csv");
         if (!csvFile.exists()) {
             try{
                 csvFile.createNewFile();
@@ -52,28 +51,43 @@ public class StorageCsv implements Storage {
         List<String> pastCommand = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(csvFile);
-            if (scanner.hasNextLine()){
-                scanner.nextLine();
-            }
-
-
+            avoidReadingCsvHeaderLine(scanner);
             while (scanner.hasNextLine()) {
-
-                String line = scanner.nextLine();
-
-                List<String> fields = new ArrayList<>();
-                try (Scanner rowScanner = new Scanner(line)) {
-                    rowScanner.useDelimiter(COMMA_DELIMITER);
-                    while (rowScanner.hasNext()) {
-                        fields.add(rowScanner.next());
-                    }
-                }
+                List<String> fields = scanningIndividualRow(scanner);
                 pastCommand.add(convertCsvRowToTaskDetails(fields));
             }
         } catch (IOException e) {
             throw new FileNotFoundException("Invalid FilePath");
         }
         return pastCommand;
+    }
+
+    /**
+     * Avoid reading header of the csv file
+     *
+     * @param scanner
+     */
+    private void avoidReadingCsvHeaderLine(Scanner scanner) {
+        if (scanner.hasNextLine()){
+            scanner.nextLine();
+        }
+    }
+
+    /**
+     * Scans each individual row
+     *
+     * @param scanner
+     * @return fields list that contains task details of each individual row
+     */
+    private List<String> scanningIndividualRow(Scanner scanner) {
+        String line = scanner.nextLine();
+        List<String> fields = new ArrayList<>();
+        Scanner rowScanner = new Scanner(line);
+        rowScanner.useDelimiter(COMMA_DELIMITER);
+        while (rowScanner.hasNext()) {
+            fields.add(rowScanner.next());
+        }
+        return fields;
     }
 
     /**
@@ -91,7 +105,7 @@ public class StorageCsv implements Storage {
     }
 
     /**
-     * Saves newly added task into storageTxt
+     * Saves newly added task into storage file
      * @param task Newly added task
      * @throws DukeException Thrown when file does not exist
      */
@@ -109,6 +123,7 @@ public class StorageCsv implements Storage {
 
     /**
      * Updates and saves the state of the changed task
+     *
      * @param taskList current state
      * @throws DukeException Thrown when file does not exist
      */

@@ -31,16 +31,16 @@ public class TaskList {
     }
 
     /**
-     * Insert Past state from storageTxt into current tasklist
+     * Insert Past state from storage into current tasklist
      *
-     * @param pastTaskLists List of past task details found in the storageTxt
+     * @param pastTaskLists List of past task details found in the storage
      * @throws DukeException
      */
     public void insertPast(List<String> pastTaskLists) throws DukeException {
 
         Iterator<String> look = pastTaskLists.iterator();
 
-        while (look.hasNext()){
+        while (look.hasNext()) {
             String[] formattedTask = look.next().split(" ", 3);
 
             assert formattedTask.length == 3;
@@ -48,28 +48,28 @@ public class TaskList {
             boolean isDone = (formattedTask[1].equals("T"));
             Task pastTask = Task.empty();
             switch (formattedTask[0]) {
-                case "T" :
-                    pastTask = new Todo(formattedTask[2], isDone );
-                    break;
-                case "E" :
-                    pastTask = new Event(formattedTask[2], isDone);
-                    break;
-                case "D" :
-                    pastTask = new Deadline(formattedTask[2], isDone);
-                    break;
+            case "T" :
+                pastTask = new Todo(formattedTask[2], isDone );
+                break;
+            case "E" :
+                pastTask = new Event(formattedTask[2], isDone);
+                break;
+            case "D" :
+                pastTask = new Deadline(formattedTask[2], isDone);
+                break;
             }
             mapper.put(pastTask.getDescription(), pastTask);
         }
     }
 
     /**
-     * Identify, Search and Modify the isDone status of task based on the getStorage printed msg
+     * Search and Modify the isDone status of task from task list
      *
      * @param input tajes in the input from user
      * @return String that contains the done success msg
      * @throws InvalidFormatException when user input does not conform to the standard
      */
-    public Task done (String input) throws DukeException {
+    public Task done(String input) throws DukeException {
         try {
             int list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
             Collection<Task> values = mapper.values();
@@ -85,7 +85,7 @@ public class TaskList {
     }
 
     /**
-     * Identify, Search and Delete task from task list based on the position of list
+     * Search and Delete task from task list based on the position of list
      *
      * @param input contains the position of which task to delete
      * @return Task returns deleted task
@@ -107,35 +107,35 @@ public class TaskList {
     }
 
     /**
-     * Creates a task instance, adds to storageTxt and prints a success msg
+     * Creates a task instance, adds to storage and prints a success msg
      *
      * @param input takes in the input from user
      * @return Task returns newly created task
      */
-    public Task todo (String input) throws DukeException {
+    public Task todo(String input) throws DukeException {
         Todo todo = new Todo(input, false);
         mapper.put(todo.getDescription(), todo);
         return todo;
     }
 
     /**
-     * Creates a task instance, adds to storageTxt and prints a success msg
+     * Creates a task instance, adds to storage and prints a success msg
      *
      * @param input tajes in the input from user
      * @return Task returns newly created task
      */
-    public Task deadline (String input) throws DukeException {
+    public Task deadline(String input) throws DukeException {
         Deadline deadline = new Deadline(input, false);
         mapper.put(deadline.getDescription(), deadline);
         return deadline;
     }
     /**
-     * Creates a task instance, adds to storageTxt and prints a success msg
+     * Creates a task instance, adds to storage and prints a success msg
      *
      * @param input tajes in the input from user
      * @return Task returns newly created task
      */
-    public Task event (String input) throws DukeException {
+    public Task event(String input) throws DukeException {
         Event event = new Event(input, false);
         mapper.put(event.getDescription(), event);
         return event;
@@ -212,7 +212,7 @@ public class TaskList {
         Iterator<Task> look = values.iterator();
         String[] check = new String[mapper.size()];;
         for (int pos = 0; pos < mapper.size(); pos++) {
-            check[pos] = look.next().saveTask();
+            check[pos] = look.next().saveTaskTxt();
         }
         return check;
     }

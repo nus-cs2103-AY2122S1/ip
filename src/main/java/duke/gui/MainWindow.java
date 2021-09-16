@@ -273,7 +273,7 @@ public class MainWindow extends AnchorPane {
      * Check whether to continue duke operations
      */
     private void checkExit() {
-        if (duke.checkIsBye()) {
+        if (duke.shouldAbort()) {
             CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(Platform::exit);
         }
     }

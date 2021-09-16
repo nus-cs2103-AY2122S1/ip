@@ -31,7 +31,7 @@ public abstract class Command {
      *
      * @return
      */
-    public boolean checkIsBye() {
+    public boolean shouldAbort() {
         return this.isBye;
     }
 

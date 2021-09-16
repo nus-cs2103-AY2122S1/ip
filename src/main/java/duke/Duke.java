@@ -7,12 +7,12 @@ import duke.util.*;
 import java.util.Scanner;
 
 /**
- *fw duke.Duke class
+ * Main Duke class
  */
 public class Duke {
 
     private final TaskList taskList = new TaskList();
-    private final Storage storage = new StorageTxt("./data");
+    private final Storage storage = new StorageCsv("./data");
     private final Parser parser = new Parser(storage, taskList);
     private boolean isBye;
 
@@ -48,7 +48,7 @@ public class Duke {
             try {
                 Command c = parser.parse(input);
                 System.out.println(c.exec());
-                isBye = c.checkIsBye();
+                isBye = c.shouldAbort();
             } catch (DukeException e) {
                 System.out.println(e.toString());
             }
@@ -63,7 +63,7 @@ public class Duke {
         try {
             Command c = parser.parse(input);
             output = c.exec();
-            isBye = c.checkIsBye();
+            isBye = c.shouldAbort();
         } catch (DukeException e) {
             return e.toString();
         }
@@ -71,11 +71,11 @@ public class Duke {
     }
 
     /**
-     * checks if the
+     * checks if the program is to be terminated
      *
      * @return
      */
-    public boolean checkIsBye() {
+    public boolean shouldAbort() {
         return this.isBye;
     }
 

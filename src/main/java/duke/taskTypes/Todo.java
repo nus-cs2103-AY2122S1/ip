@@ -1,10 +1,11 @@
 package duke.taskTypes;
 
-import duke.exception.DukeException;
-import duke.exception.InvalidFormatException;
+
 import java.util.Arrays;
 import java.util.List;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidFormatException;
 
 /**
  * Task class that sets description of task, date, time

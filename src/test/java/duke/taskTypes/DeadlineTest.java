@@ -11,7 +11,6 @@ import duke.exception.InvalidDateException;
 import duke.exception.InvalidTimeException;
 
 
-import duke.taskTypes.Deadline;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +31,7 @@ class DeadlineTest {
     public void deadlineSaveTask_validStringInput_stringReturned() throws DukeException {
         assertEquals(
                 "D F dead1 /by 2019-09-09 1900",
-                new Deadline("dead1 /by 2019-09-09 1900", false).saveTask());
+                new Deadline("dead1 /by 2019-09-09 1900", false).saveTaskTxt());
     }
 
     @Test

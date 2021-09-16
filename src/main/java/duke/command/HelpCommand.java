@@ -21,7 +21,6 @@ public class HelpCommand extends Command{
             + divider + "Deleting a person : delete [task list position] \n"
             + divider + "Exiting the program : bye";
 
-
     /**
      * Basic Constructor
      *

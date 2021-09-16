@@ -41,7 +41,7 @@ public class StorageTxt implements Storage {
     }
 
     /**
-     * Reads and returns a list of previous task
+     * Reads from the storage file and returns a list of previous tasks
      *
      * @return List of String read from the file
      * @throws DukeException
@@ -61,12 +61,12 @@ public class StorageTxt implements Storage {
     }
 
     /**
-     * Saves newly added task into storageTxt
+     * Saves newly added task into storage file
      * @param task Newly added task
      * @throws DukeException Thrown when file does not exist
      */
     public void saveAddedTask(Task task) throws DukeException {
-        String msg = task.saveTask();
+        String msg = task.saveTaskTxt();
         try {
             FileWriter fileWriter = new FileWriter(savedOutput, true);
             fileWriter.write(msg);
@@ -78,7 +78,7 @@ public class StorageTxt implements Storage {
     }
 
     /**
-     * Updates and saves the state of the changed task
+     * Updates and saves the state of the changed task in storage file
      * @param taskList current state
      * @throws DukeException Thrown when file does not exist
      */

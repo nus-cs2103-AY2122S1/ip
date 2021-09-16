@@ -1,11 +1,16 @@
 package duke.taskTypes;
 
-import duke.exception.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.EmptyTimeException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidTimeException;
 
 /**
  * Task class that sets description of task, date, time
@@ -33,21 +38,25 @@ public class Task {
         return new Task(false);
     }
 
-
-
-    // Reformats user input before setting Task details methods
-        // taskDetails refers to taskType, description, date and time
-    protected void setTaskDetails(String type, List<String> formattedInput) throws DukeException {
+    /**
+     * Set the task details based on a list of task details
+     *
+     * @param type type of task
+     * @param taskDetails task details in a form of a list
+     * @throws DukeException
+     */
+    protected void setTaskDetails(String type, List<String> taskDetails) throws DukeException {
         setTaskType(type);
-        setDescription(retrieveTaskDescription(formattedInput));
-        setDateTime(retrieveDateTimeDetails(formattedInput));
+        setDescription(retrieveTaskDescription(taskDetails));
+        setDateTime(retrieveDateTimeDetails(taskDetails));
     }
-    private void setTaskType(String input){
-        this.taskType = input;
-    }
-    protected void setDescription(String input){
-        this.description = input;
-    }
+
+    /**
+     * Sets the date and time based on a single string that contains date and time
+     *
+     * @param input
+     * @throws DukeException
+     */
     protected void setDateTime(String input) throws DukeException {
         if (input == null){
             this.date = null;
@@ -65,14 +74,7 @@ public class Task {
             throw new EmptyTimeException("Missing time");
         }
     }
-    private void setDate(String[] formattedDateTime) throws DateTimeParseException {
-        this.date = LocalDate.parse(formattedDateTime[0]);
-    }
-    private void setTime(String[] formattedDateTime) throws InvalidTimeException {
-        int hoursMins = Integer.parseInt(formattedDateTime[1]);
-        check24HourFormat(hoursMins);
-        this.time = hoursMins;
-    }
+
 
     /**
      * Retrieves task description from the formatted user input
@@ -121,28 +123,6 @@ public class Task {
         }
     }
 
-    // Setter and getters
-    private void setState(boolean isDone) {
-        this.isDone = isDone;
-    }
-    public Task setDone(){
-        this.isDone = true;
-        return this;
-    }
-    protected String getSaveDate() {
-        return this.date.toString() + " " + this.time;
-    }
-    protected String getSaveDateCsv() {
-        return this.date.toString() + "," + this.time;
-    }
-    protected String getFormatDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time + " hrs";
-    }
-    public String getDescription(){
-        return this.description;
-    }
-
-    // methods that returns formatted string for saving / displaying
     /**
      * Returns a string to be displayed to user
      *
@@ -160,7 +140,7 @@ public class Task {
      *
      * @return String containing details of the task
      */
-    public String saveTask() {
+    public String saveTaskTxt() {
         String state = isDone ? "T" : "F";
         return taskType + " " + state + " " + description;
     }
@@ -173,6 +153,41 @@ public class Task {
     public String saveTaskCsv() {
         String state = isDone ? "T" : "F";
         return taskType + "," + state + "," + description;
+    }
+
+    // Setter and getters
+    private void setState(boolean isDone) {
+        this.isDone = isDone;
+    }
+    public Task setDone(){
+        this.isDone = true;
+        return this;
+    }
+    private void setDate(String[] formattedDateTime) throws DateTimeParseException {
+        this.date = LocalDate.parse(formattedDateTime[0]);
+    }
+    private void setTime(String[] formattedDateTime) throws InvalidTimeException {
+        int hoursMins = Integer.parseInt(formattedDateTime[1]);
+        check24HourFormat(hoursMins);
+        this.time = hoursMins;
+    }
+    private void setTaskType(String input){
+        this.taskType = input;
+    }
+    protected void setDescription(String input){
+        this.description = input;
+    }
+    protected String getSaveDate() {
+        return this.date.toString() + " " + this.time;
+    }
+    protected String getSaveDateCsv() {
+        return this.date.toString() + "," + this.time;
+    }
+    protected String getFormatDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time + " hrs";
+    }
+    public String getDescription(){
+        return this.description;
     }
 }
 

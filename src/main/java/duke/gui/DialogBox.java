@@ -1,5 +1,9 @@
 package duke.gui;
 
+
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,10 +17,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
-
-
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * Controller for dialogBox
