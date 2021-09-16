@@ -3,6 +3,7 @@ package abyss.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import abyss.Ui;
 import abyss.exception.InvalidCommandException;
@@ -125,12 +126,12 @@ public class TaskManager {
      * @param keyword Keyword to filter the task list by.
      */
     public String find(String keyword) {
-        keyword = keyword.trim();
+        keyword = keyword.trim().toLowerCase();
         String regex = "[ -~]*" + keyword + "[ -~]*";
         TaskManager filteredTasks = new TaskManager();
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
             Task task = this.get(i);
-            if (!task.description.matches(regex)) {
+            if (!task.description.toLowerCase().matches(regex)) {
                 continue;
             }
             filteredTasks.tasks.add(task);
