@@ -125,9 +125,7 @@ public class DukeLauncher extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        System.out.println("hihi");
         return dukeObject.returnOutput(input);
-//        return "hi";
     }
 
     /**

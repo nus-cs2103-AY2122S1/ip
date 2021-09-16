@@ -177,12 +177,12 @@ public class Ui {
     public String undoAddTask() {
         Task taskToBeDeleted = taskList.get(previousTaskIndex - 1);
         taskList.deleteTask(previousTaskIndex - 1);
-        System.out.println("Noted. I've removed this task: \n"
+        System.out.println("Noted. I've undo the addition of this task: \n"
                 + "  " + taskToBeDeleted.toString() +"\n" +
                 "Now you have " + taskList.length() + " tasks in the list.");
         storage.saveTask(taskList);
         resetUndo();
-        return "Noted. I've removed this task: \n"
+        return "Noted. I've undo the addition of this task this task: \n"
                 + "  " + taskToBeDeleted.toString() +"\n" +
                 "Now you have " + taskList.length() + " tasks in the list.";
     }
@@ -190,12 +190,12 @@ public class Ui {
     public String undoDeleteTask() {
         Task task = recentlyModifiedTask;
         taskList.addTask(task);
-        System.out.println("Got it. I've added this task: \n"
+        System.out.println("Got it. I've undo the deletion of this task: \n"
                 + "  " + task.toString() + "\n" +
                 "Now you have " + taskList.length() + " tasks in the list.");
         storage.saveTask(taskList);
         resetUndo();
-        return "Got it. I've added this task: \n"
+        return "Got it. I've undo the deletion of this task this task: \n"
                 + "  " + task.toString() + "\n" +
                 "Now you have " + taskList.length() + " tasks in the list.";
     }
