@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "src.main.java.duke.Duke"
+    mainClassName = "src.main.java.duke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "src.main.java.duke"
+    archiveBaseName = "Duke"
     archiveClassifier = null
 }
 
