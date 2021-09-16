@@ -31,8 +31,8 @@ public class Storage {
      * @return A task list read from the .txt file.
      */
     public ArrayList<Task> readFromTaskTxt() {
-        File file = new File(filePath);
         try {
+            File file = new File(filePath);
             Scanner sc = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {

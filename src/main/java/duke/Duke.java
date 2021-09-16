@@ -10,7 +10,7 @@ import duke.task.TaskList;
  */
 public class Duke {
     /** The local file path. */
-    private static final String filePath = "data/duke.txt";
+    private static final String filePath = System.getProperty("user.dir") + "/data/duke.txt";
     /** The storage instance. */
     private final Storage storage;
     /** The task list. */

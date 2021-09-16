@@ -95,7 +95,8 @@ public class Parser {
             assert array.length == 4 : "Parse deadline document fails";
             return new Deadline(array[2], parseIsDone(array[1]), parseDateTime(array[3]));
         default:
-            throw new DukeException("Error in saved tasks document");
+            String errorMessage = "Error in saved tasks document: " + input;
+            throw new DukeException(errorMessage);
         }
     }
 
