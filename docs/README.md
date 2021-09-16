@@ -260,6 +260,7 @@ Format:
 
 ### Command summary
 ---
+
 Action | Format | Example
 -------|--------|--------
 List | `list` | `list`
