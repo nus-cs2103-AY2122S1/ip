@@ -1,6 +1,7 @@
 package duke.task;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -11,7 +12,8 @@ import duke.DukeException;
  * @author Thomas Hogben
  */
 public abstract class DateAndTimeTask extends Task {
-    private LocalDateTime dateTime;
+    private LocalDate date;
+    private LocalTime time;
 
     /**
      * @param input The input string to create the task.
@@ -30,7 +32,7 @@ public abstract class DateAndTimeTask extends Task {
             throw DukeException.BLANK_DESCRIPTION;
         }
         setDescription(input.substring(0, i));
-        dateTime = parseDateAndTime(input.substring(i + splitterKey.length()));
+        setDateAndTime(input.substring(i + splitterKey.length()));
     }
 
     /**
@@ -43,7 +45,7 @@ public abstract class DateAndTimeTask extends Task {
      */
     public DateAndTimeTask(String description, String dateAndTime, boolean isDone) throws DukeException {
         super(description, isDone);
-        dateTime = parseDateAndTime(dateAndTime);
+        setDateAndTime(dateAndTime);
     }
 
     /**
@@ -51,12 +53,27 @@ public abstract class DateAndTimeTask extends Task {
      * @return A LocalDateTime encapsulating the provided date and time.
      * @throws DukeException If the format of the date and time is incorrect.
      */
-    private LocalDateTime parseDateAndTime(String dateAndTime) throws DukeException {
+    public void setDateAndTime(String dateAndTime) throws DukeException {
+        String[] splitDateAndTime = dateAndTime.split(" ");
+        setDate(splitDateAndTime[0]);
+        setTime(splitDateAndTime[1]);
+    }
+
+    public void setDate(String date) throws DukeException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            return LocalDateTime.parse(dateAndTime, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            this.date = LocalDate.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            throw DukeException.INVALID_DATE_AND_TIME;
+            throw DukeException.INVALID_DATE;
+        }
+    }
+
+    public void setTime(String time) throws DukeException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+            this.time = LocalTime.parse(time, formatter);
+        } catch (DateTimeParseException e) {
+            throw DukeException.INVALID_TIME;
         }
     }
 
@@ -65,8 +82,12 @@ public abstract class DateAndTimeTask extends Task {
      */
     @Override
     public String getSave() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        return super.getSave() + "|" + dateTime.format(formatter);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        String dateStr = date.format(dateFormatter);
+        String timeStr = time.format(timeFormatter);
+
+        return super.getSave() + "|" + dateStr + " " + timeStr;
     }
 
     /**
@@ -74,11 +95,16 @@ public abstract class DateAndTimeTask extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d LLL yyyy h.mma");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d LLL yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h.mma");
         String result = super.toString();
-        if (dateTime != null) {
-            result += " (" + dateTime.format(formatter) + ")";
+
+        if (date != null && time != null) {
+            String dateStr = date.format(dateFormatter);
+            String timeStr = time.format(timeFormatter);
+            result += " (" + dateStr + " " + timeStr + ")";
         }
+
         return result;
     }
 }
