@@ -9,13 +9,15 @@
     -fx-background-color: black;
 }
 
-.dialog-box-section Text {
+.dialog-box-section Label {
     -fx-font-size: 13px;
     /*-fx-font-family: "Times New Roman";*/
     -fx-font-family: "Courier New";
     -fx-background-color: #FDFEFE;
     /*-fx-fill: #ebfff6;*/
     /*-fx-text-alignment: right;*/
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
 }
 
 .dialog-box-section ImageView {

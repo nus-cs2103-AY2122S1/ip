@@ -12,11 +12,11 @@
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
          styleClass="dialog-box-section">
     <children>
-        <Text fx:id="dialog" text="Label" wrappingWidth = "250.0">
+        <Label fx:id="dialog" text="Label" wrapText = "true" minHeight="-Infinity">
          <HBox.margin>
             <Insets left="2.0" right="2.0" />
          </HBox.margin>
-        </Text>
+        </Label>
 <!--        <Label fx:id="dialog" text="Label" wrapText="true">-->
 <!--         <HBox.margin>-->
 <!--            <Insets left="2.0" right="2.0" />-->

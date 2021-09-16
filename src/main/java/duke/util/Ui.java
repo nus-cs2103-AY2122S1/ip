@@ -14,15 +14,13 @@ import java.util.stream.Collectors;
  */
 public class Ui {
     public static final String INDENT = "    ";
-//    private static final String TOP_BORDER = "____________________________________";
-//    private static final String BOTTOM_BORDER = "------------------------------------";
     public static final String LOGO =
-                "___  ___ _____  ___  ______ \n" +
-                "|  \\/  ||  ___|/ _ \\ | ___ \\\n" +
-                "| .  . || |__ / /_\\ \\| |_/ /\n" +
-                "| |\\/| ||  __||  _  ||  __/ \n" +
-                "| |  | || |___| | | || |    \n" +
-                "\\_|  |_/\\____/\\_| |_/\\_|    \n";
+                " ___  ___ _____  ___  ______ \n" +
+                " |  \\/  ||  ___|/ _ \\ | ___ \\\n" +
+                " | .  . || |__ / /_\\ \\| |_/ /\n" +
+                " | |\\/| ||  __||  _  ||  __/ \n" +
+                " | |  | || |___| | | || |    \n" +
+                " \\_|  |_/\\____/\\_| |_/\\_|    \n";
 //                "  __  __ ___   _   ___ \n" +
 //                " |  \\/  | __| /_\\ | _ \\\n" +
 //                " | |\\/| | _| / _ \\|  _/\n" +
@@ -50,7 +48,7 @@ public class Ui {
                 return Event.COMMAND_SYNTAX;
             case "deadline":
                 return Deadline.COMMAND_SYNTAX + "\n" +
-                        INDENT + String.format("example: '%s'", Deadline.COMMAND_EXAMPLE_CALL);
+                        String.format(" (eg.)'%s'", Deadline.COMMAND_EXAMPLE_CALL);
             case "list":
                 return "list";
             case "done":
