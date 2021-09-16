@@ -54,8 +54,6 @@ public class Duke {
      */
     public String showOpeningMessage() {
         return "Hello! This is Duke :)\n"
-                + "To use my AUTOSAVE feature, please type 'bye' when you're done!\n"
-                + "Otherwise, I am unable to save your tasks for future reference :(\n"
                 + "Now, what can I do for you?";
     }
 
