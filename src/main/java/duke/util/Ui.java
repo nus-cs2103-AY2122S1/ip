@@ -6,7 +6,6 @@ import duke.task.Event;
 import duke.task.ToDo;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +39,11 @@ public class Ui {
     public static final String FIND_COMMAND_REGEX = "find \\w+"; //find <word>
     public static final String HELP_COMMAND_REGEX = "help"; //find <word>
 
+    /**
+     * Returns command syntax of command keyword parsed in
+     * @param keyword command keyword
+     * @return command syntax as a String
+     */
     public static String commandSyntax(String keyword) {
         switch(keyword) {
             case "todo":
@@ -66,6 +70,10 @@ public class Ui {
         }
     }
 
+    /**
+     * All commands syntax of user commands
+     * @return String of all UserCommandsSyntax prepended by '-'
+     */
     public static String allUserCommandsSyntax() {
         return Arrays.asList(USER_SUPPORTED_COMMANDS)
                 .stream()

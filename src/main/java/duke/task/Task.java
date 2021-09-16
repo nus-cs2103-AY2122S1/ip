@@ -42,10 +42,10 @@ public class Task {
     }
 
     /**
-     * @return "x" or "" depending on whether task is complete
+     * @return "✓" or "x" depending on whether task is complete
      */
     public String completeStatus() {
-        return this.isDone ? "X" : " ";
+        return this.isDone ? "\u2713" : "\u2718";
     }
 
     //setter
@@ -65,14 +65,19 @@ public class Task {
         return this.taskSummary;
     }
 
-    //helper function
+    /**
+     * Checks if keyword is in a task description.
+     * @param keyword
+     */
     public boolean isInTaskSummary(String keyword) {
         String[] keywords = this.taskSummary.split(" ");
         List<String> keywordList = Arrays.asList(keywords);
         return keywordList.contains(keyword);
     }
 
-    //only for purpose of polymorphism, change to abstract?
+    /**
+     * @return String storage format of Task instance
+     */
     public String toStorageFormat() {
         return String.format(
             "? | %d | %s ",

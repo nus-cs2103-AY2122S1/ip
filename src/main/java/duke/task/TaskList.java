@@ -42,6 +42,11 @@ public final class TaskList {
         return new TaskList(tasks, storageFile);
     }
 
+    /**
+     * Constructor for TaskList class
+     * @param tasks ArrayList of Tasks
+     * @param storageFile Storage object that abstracts out where storage file is
+     */
     private TaskList(ArrayList<Task> tasks, Storage storageFile) {
         this.STORAGE_FILE = storageFile;
         this.TASKS = tasks;
@@ -50,10 +55,6 @@ public final class TaskList {
     public void addTask(Task task) {
         this.TASKS.add(task);
         this.updateStore();
-    }
-
-    public Task get(int idx) {
-        return this.TASKS.get(idx);
     }
 
     public int length() {
@@ -73,13 +74,20 @@ public final class TaskList {
         return reply;
     }
 
-    //helper function
+    /**
+     * Toggles a certain task as done and updates the storage file
+     * @param idx index of task that is to be toggled
+     */
     private void toggleDoneAndUpdateStore(int idx) {
         assert isValidIndex(idx, TASKS.size()) : "has to be valid index to toggle done";
         TASKS.get(idx).markCompleted();
         this.updateStore();
     }
 
+    /**
+     * Deletes a certain task as done and updates the storage file
+     * @param idx index of task that is to be deleted
+     */
     public String executeDeleteCommand(int idx) {
         if (!isValidIndex(idx, TASKS.size())) {
             throw DukeException.of(
@@ -95,13 +103,15 @@ public final class TaskList {
         return reply;
     }
 
-    //helper function
      private void removeTaskAndUpdateStore(int idx) {
         assert isValidIndex(idx, TASKS.size()) : "has to be valid index to remove task";
         TASKS.remove(idx);
         this.updateStore();
     }
 
+    /**
+     * @return List of tasks of which task description contains the passed in keyword
+     */
     public String executeFindCommand(String keyword) {
         Integer[] indexesFrom0 = this.filter(task -> task.isInTaskSummary(keyword));
         String tasksAsString = this.selectTasksAsString(indexesFrom0);
@@ -165,13 +175,7 @@ public final class TaskList {
 
     @Override
     public String toString() {
-//        StringBuilder result = new StringBuilder();
         int numOfTasks = this.TASKS.size();
-//        for (int i = 0; i < numOfTasks; i++) {
-//            int idxFrom1 = i + 1;
-//            result.append(String.format("%d: %s\n", idxFrom1, this.TASKS.get(i).toString()));
-//        }
-//        return result.toString();
         return IntStream.range(0,numOfTasks)
                 .mapToObj(i -> (i+1) + ". " + TASKS.get(i).toString() + "\n")
                 .reduce("",(a,b) -> (a + b));

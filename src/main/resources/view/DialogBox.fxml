@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import java.net.URL?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.shape.Circle?>
 <fx:root alignment="TOP_RIGHT"
          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0"
@@ -18,11 +17,6 @@
             <Insets left="2.0" right="2.0" />
          </HBox.margin>
         </Label>
-<!--        <Label fx:id="dialog" text="Label" wrapText="true">-->
-<!--         <HBox.margin>-->
-<!--            <Insets left="2.0" right="2.0" />-->
-<!--         </HBox.margin>-->
-<!--        </Label>-->
         <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
             <HBox.margin>
                 <Insets left="8.0" right="8.0" />

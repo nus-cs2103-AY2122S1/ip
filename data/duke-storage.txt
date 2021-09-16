@@ -2,4 +2,4 @@ E | 1 | smth | somewhere
 D | 1 | smth | 01-01-2022 1400
 T | 1 | bas
 T | 1 | smth
-T | 0 | smth else
+T | 1 | smth else

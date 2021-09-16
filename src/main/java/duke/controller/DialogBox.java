@@ -27,6 +27,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox that returns an image side by side to a text box
+     * @param text Text to be shown in text box
+     * @param img Image to be shown
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -55,13 +60,25 @@ public class DialogBox extends HBox {
         dialog.setTextAlignment(TextAlignment.RIGHT);
     }
 
+    /**
+     * Factory method for a user DialogBox
+     * @param text
+     * @param img
+     * @return DialogBox as dialog coming from user image
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setTextAlignRight();
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Factory method for a Meap DialogBox
+     * @param text
+     * @param img
+     * @return DialogBox as dialog coming from user image
+     */
+    public static DialogBox getMeapDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

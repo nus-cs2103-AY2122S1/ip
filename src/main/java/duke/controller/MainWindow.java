@@ -2,7 +2,6 @@ package duke.controller;
 
 import duke.Duke;
 import duke.util.Ui;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -40,7 +39,7 @@ public class MainWindow extends AnchorPane {
 
     private void sendMessageFromDuke(String text) {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(text, dukeImage)
+                DialogBox.getMeapDialog(text, dukeImage)
         );
     }
 
@@ -68,7 +67,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getMeapDialog(response, dukeImage)
         );
         userInput.clear();
 
