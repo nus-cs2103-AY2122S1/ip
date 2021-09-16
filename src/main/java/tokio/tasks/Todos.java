@@ -2,8 +2,6 @@ package tokio.tasks;
 
 import tokio.commands.Instruction;
 
-import java.util.Locale;
-
 /**
  * Represents a todo task.
  */
@@ -53,7 +51,7 @@ public class Todos extends Task {
             return true;
         } else if (obj instanceof Todos) {
             Todos t = (Todos) obj;
-            return this.description.toLowerCase(Locale.ROOT).equals(t.description);
+            return this.description.equals(t.description);
         } else {
             return false;
         }

@@ -2,7 +2,6 @@ package tokio.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import tokio.commands.Instruction;
 import tokio.exceptions.DukeException;
@@ -66,7 +65,7 @@ public class Deadlines extends Task {
             return true;
         } else if (obj instanceof Deadlines) {
             Deadlines d = (Deadlines) obj;
-            return this.description.toLowerCase(Locale.ROOT).equals(d.description) && this.date.equals(d.date);
+            return this.description.equals(d.description) && this.date.equals(d.date);
         } else {
             return false;
         }
