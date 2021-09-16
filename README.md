@@ -11,7 +11,7 @@ Duke is:
 * ~~helpful~~ *REALLY* helpful 
 
 ## Getting Started
-1. Download it [here](https://github.com/wanyu-l/ip/releases/download/v0.1/Duke.java.jar)
+1. Download it [here](https://github.com/wanyu-l/ip/releases/download/v0.2/Memo-Assistant.Duke.jar)
 2. Run it
 3. Add your tasks
    - Don't worry, Duke will assist you with inputs!
@@ -31,7 +31,7 @@ Duke is:
 - [x] store a **List** of tasks to be done
 - [x] add, **Delete** and mark tasks as **Done**
 - [x] **Find** tasks by **Due** dates or keywords
-- [ ] **Reschedule** tasks to new dates (coming soon)
+- [x] **Reschedule** tasks to new dates (coming soon)
 
 **Here's a part of the program, maybe it can be of help in practising coding in Java, the `main` method:**
 ```java
