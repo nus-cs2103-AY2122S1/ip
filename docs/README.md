@@ -26,7 +26,7 @@ Successfully added:
 
 Adds an entry that is descriptive of a task that is to be done on a specific date.
 
-Expected input format: event {description} /at {date in DD/MM/YYYY}
+Expected input format: event {description} /at {date in DD/MM/YYYY} (Optional) {time in HH/MM}
 
 **Example:**
 `event quiz /at 12/09/2021` 
@@ -42,7 +42,7 @@ Successfully added:
 
 Adds an entry that is descriptive of a task that is to be done by a specific date.
 
-Expected input format: deadline {description} /by {date in DD/MM/YYYY}
+Expected input format: deadline {description} /by {date in DD/MM/YYYY} (Optional) {time in HH/MM}
 
 **Example:**
 `deadline assignment /by 20/09/2021` 
@@ -141,7 +141,7 @@ The task(s) found are:
 
 Change the date associated with an entry of task.
 
-Expected input format: reschedule {index} {new date in DD/MM/YYYY}
+Expected input format: reschedule {index} {new date in DD/MM/YYYY} (Optional) {time in HH/MM}
 
 **Example:**
 `reschedule 2 21/09/2021`
@@ -157,7 +157,8 @@ To [D][] assignment (by: 21 SEPTEMBER 2021)
 ### Feature-Snooze
 
 Upon launch of application, Duke checks for tasks due on the day itself and results in a dialog box displaying list of tasks due.
-There will be 2 options to choose for the user.
+
+There will be 2 options to choose for the user, `Snooze` and `Confirm`.
 
 `Snooze` results in relevant tasks to be rescheduled to the subsequent day, without a time specification.
 
