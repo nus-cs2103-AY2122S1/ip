@@ -42,7 +42,7 @@ public class ToDoCommand extends Command {
     public CommandResult execute() {
         tasks.add(taskToAdd);
         try {
-            storage.rewriteFile(tasks);
+            storage.appendToFile(taskToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAdd));
         } catch (IOException e) {
             return new CommandResult(e.getMessage());
