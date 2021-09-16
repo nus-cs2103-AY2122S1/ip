@@ -33,9 +33,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int listSize = tasks.getSize();
             int index = getIndex();
             String commandResult = tasks.remove(index);
+            int listSize = tasks.getSize();
 
             String output = ui.showDelete(commandResult, listSize);
             super.execute(tasks, ui, storage);
