@@ -32,7 +32,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return ("Hello from\n" + logo + "\n"
-                + "Hello! I'm duke.Duke\n" + "What can I do for you?");
+                + "Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     /**
@@ -66,7 +66,6 @@ public class Ui {
         return "Nice! I've marked this task as done: \n" + task.toString();
     }
 
-    //CHANGED
     /**
      * Prints Ui for removing task from the list.
      *
@@ -79,7 +78,6 @@ public class Ui {
                 + "\nNow you have " + size + " tasks in the list.");
     }
 
-    //CHANGED
     /**
      * Prints the current TaskList.
      *
@@ -97,7 +95,6 @@ public class Ui {
         }
     }
 
-    //CHANGED
     /**
      * Searches for the keyword among current Tasks.
      *
@@ -120,7 +117,6 @@ public class Ui {
         return result;
     }
 
-    //CHANGED
     /**
      * Prints a message when all current Tasks do not contain the keyword provided.
      *
@@ -139,7 +135,6 @@ public class Ui {
         return sc.nextLine();
     }
 
-    //CHANGED
     /**
      * Prints DukeException errors.
      *
@@ -149,7 +144,6 @@ public class Ui {
         return (e);
     }
 
-    //CHANGED
     /**
      * Prints line for formatting messages.
      */
