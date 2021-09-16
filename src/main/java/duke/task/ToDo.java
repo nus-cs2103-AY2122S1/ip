@@ -43,16 +43,6 @@ public class ToDo extends Task {
     public ToDo(String taskSummary) {
         super(taskSummary);
     }
-
-//    /**
-//     * Returns a string detailing the syntax of the ToDo command
-//     *
-//     * @return helper text of correct syntax
-//     */
-//    public static String syntax() {
-//        return String.format("todo command syntax: \n    '%s'",ToDo.COMMAND_SYNTAX);
-//    }
-
     /**
      * Converts an Task instance to a string to be stored.
      *

@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        this.sendMessageFromDuke(Ui.LOGO + Ui.WELCOME_STATEMENT);
+        this.sendMessageFromDuke(Ui.LOGO + "\n " + Ui.WELCOME_STATEMENT);
     }
 
     public void setDuke(Duke d) {

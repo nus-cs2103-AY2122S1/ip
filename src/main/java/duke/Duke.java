@@ -17,7 +17,7 @@ public class Duke {
     }
 
     public String getResponse(String userInput) {
-        String reply = "defaultReply-";
+        String reply;
         try {
             reply = PARSER.parseCommand(userInput);
         } catch (DukeException e) {

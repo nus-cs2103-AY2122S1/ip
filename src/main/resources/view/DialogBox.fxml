@@ -7,25 +7,29 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Circle?>
 <fx:root alignment="TOP_RIGHT"
-         maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
          styleClass="dialog-box-section">
     <children>
-        <Text fx:id="dialog" text="Label" wrappingWidth = "250.0">
+        <Label fx:id="dialog" text="Label" wrapText = "true" minHeight="-Infinity">
          <HBox.margin>
             <Insets left="2.0" right="2.0" />
          </HBox.margin>
-        </Text>
+        </Label>
 <!--        <Label fx:id="dialog" text="Label" wrapText="true">-->
 <!--         <HBox.margin>-->
 <!--            <Insets left="2.0" right="2.0" />-->
 <!--         </HBox.margin>-->
 <!--        </Label>-->
-        <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets left="8.0" right="8.0" />
-         </HBox.margin>
+        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+            <HBox.margin>
+                <Insets left="8.0" right="8.0" />
+            </HBox.margin>
+            <clip>
+                <Circle styleClass="displayPicCircle" centerX="29.0" centerY="29.0" radius="28.0"/>
+            </clip>
         </ImageView>
     </children>
     <padding>

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import duke.controller.MainWindow;
+import javafx.stage.StageStyle;
 
 /**
  * A GUI for Duke using FXML.
@@ -26,6 +27,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setResizable(false);
+//            stage.initStyle(StageStyle.DECORATED);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,12 +35,4 @@ public class Main extends Application {
     }
 }
 
-//
-//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-//            Scene scene = new Scene(fxmlLoader.load());
-//            fxmlLoader.<MainWindow>getController().setDuke(new Sora(false));
-//
-//            stage.setScene(scene);
-//            stage.setResizable(false);
-//            stage.initStyle(StageStyle.TRANSPARENT);
-//            stage.show();
+
