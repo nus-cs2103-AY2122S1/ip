@@ -20,9 +20,9 @@ public class Events extends Task {
     /**
      * Constructor.
      *
-     * @param description the name of the task
-     * @param date the date of the start of the event
-     * @param time the time of the start of the event
+     * @param description the name of the task.
+     * @param date the date of the start of the event.
+     * @param time the time of the start of the event.
      */
     public Events(String description, String date, String time) throws LebronException {
         super(description);
