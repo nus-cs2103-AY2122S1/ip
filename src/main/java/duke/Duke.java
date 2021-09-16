@@ -37,8 +37,6 @@ public class Duke{
         return ui.greet() + taskList.printTask();
     }
     public String returnOutput(String input) {
-//        System.out.println(ui.handleInput(input));
-
         return ui.handleInput(input);
     }
 
