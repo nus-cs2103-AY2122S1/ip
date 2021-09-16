@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" blendMode="SRC_ATOP" focusTraversable="false" maxHeight="Infinity" minHeight="-Infinity" prefWidth="270.0" style="-fx-background-color: #000000; -fx-opacity: 0.70;" text="Label" textFill="WHITE" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" blendMode="SRC_ATOP" maxHeight="Infinity" minHeight="-Infinity" prefWidth="270.0" style="-fx-background-color: #000000; -fx-opacity: 0.5;" text="Label" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial" size="13.0" />
          </font>

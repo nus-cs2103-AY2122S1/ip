@@ -59,6 +59,9 @@ public class DukeMan {
             String timeline = parser.getTimeline();
             output = tasks.addEvent(eventName, timeline, true);
             break;
+        case "bye":
+            output = "Bye. Hope to see you again soon!";
+            break;
         case "list":
             output = tasks.printList();
             break;

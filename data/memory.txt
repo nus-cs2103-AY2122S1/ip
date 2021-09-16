@@ -1,12 +1,2 @@
-[D] [✕] CS2100 assingment (by: Sep 15 2021 13:00)
-[E] [✕] meeting with prof Aaron (at: Sep 15 2021 15:00)
-[D] [✕] CS2103 submission (by: Sep 15 2021 23:59)
-[T] [✕] homework
-[T] [✕] homework
-[D] [✕] assignment (by: Jan 01 2021 12:00)
-[T] [✕] homework
-[D] [✕] assignment (by: Jan 01 2021 12:00)
-[E] [✕] carnival (at: Jan 01 2021 12:00)
-[T] [✕] homework
-[D] [✕] assignment (by: Jan 01 2021 12:00)
-[E] [✕] carnival (at: Jan 01 2021 12:00)
+[T] [✕] homwork
+[D] [✕] assignment (by: Sep 15 2021 13:00)

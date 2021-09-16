@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -134,10 +132,7 @@ public class TaskList {
         Task task = taskList.get(userInput - 1);
         String lineToRemove = task.printName();
         task.toggleComplete();
-        if (!task.isCompleted()) {
-            output += "I've marked this task as not done: \n" + task.printName();
-            return output;
-        }
+
         if (isInput) {
 
             output += "Nice! I've marked this task as done:\n" + task.printName();
@@ -313,12 +308,8 @@ public class TaskList {
         String output = "";
         int numb = 1;
 
-        LocalDate currentDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String outputDate = currentDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        output += "Here's your schedule for " + outputDate + ":";
-
         for (Task task : schedule) {
-            output += "\n" + numb + ". " + task.printName();
+            output += numb + ". " + task.printName() + "\n";
             numb++;
         }
         return output;
