@@ -1,4 +1,6 @@
 package duke.command;
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Input;
 import duke.Storage;
@@ -10,7 +12,8 @@ import duke.task.TaskList;
  * Command to delete tasks.
  */
 public class DeleteCommand extends Command {
-    private int taskNumber;
+    private Input input;
+    private ArrayList<Integer> taskNumberList;
 
     /**
      * Constructor for DeleteCommand.
@@ -19,13 +22,9 @@ public class DeleteCommand extends Command {
      * @throws DukeException If input is invalid.
      */
     public DeleteCommand(Input input) throws DukeException {
+        this.input = input;
         if (input.hasCommandWordOnly("delete")) {
             throw new DukeException("A number must follow after the command word 'delete'.");
-        }
-        try {
-            this.taskNumber = input.getIndex("delete");
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS! Please enter a valid task number.");
         }
     }
 
@@ -39,13 +38,26 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
-        if (taskNumber < 0 || taskNumber >= ls.getSize()) {
-            throw new DukeException("Item does not exist in the list.");
+
+        try {
+            this.taskNumberList = input.getIndexArray("delete", ls.getSize());
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS! Please enter a valid task number.");
         }
-        Task task = ls.getTask(taskNumber);
-        ls.removeTask(taskNumber);
-        storage.rewriteFile(ls);
-        return ui.removeTaskFromList(task, ls.getSize());
+
+        TaskList tasksToBeRemoved = new TaskList();
+        for (int taskNumber : this.taskNumberList) {
+            Task task = ls.getTask(taskNumber);
+            tasksToBeRemoved.addTask(task);
+        }
+
+        for (int i = 0; i < tasksToBeRemoved.getSize(); i++) {
+            Task task = tasksToBeRemoved.getTask(i);
+            ls.removeTask(task);
+            storage.rewriteFile(ls);
+        }
+
+        return ui.removeTaskFromList(tasksToBeRemoved, ls.getSize());
     }
 
     /**

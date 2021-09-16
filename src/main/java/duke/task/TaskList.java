@@ -26,10 +26,10 @@ public class TaskList {
     /**
      * Removes task from current TaskList.
      *
-     * @param index Index of the task to be removed from current TaskList.
+     * @param task Task to be removed from current TaskList.
      */
-    public void removeTask(int index) {
-        this.tasklist.remove(index);
+    public void removeTask(Task task) {
+        this.tasklist.remove(task);
     }
 
     /**

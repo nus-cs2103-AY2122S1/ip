@@ -60,24 +60,34 @@ public class Ui {
     /**
      * Prints Ui for setting task as done.
      *
-     * @param task Done task.
+     * @param tasklist TaskList of tasks to be set as done.
+     * @param newListSize New number of items on the TaskList.
      */
-    public String setTaskAsDone(Task task) {
-        assert !task.equals(null) : "task does not exist";
-        return "Nice! I've marked this task as done: \n" + task.toString();
+    public String setTaskAsDone(TaskList tasklist) {
+        assert !tasklist.equals(null) : "task does not exist";
+        String result = "Nice! I've marked these tasks as done: \n";
+        for (int i = 0; i < tasklist.getSize(); i++) {
+            Task task = tasklist.getTask(i);
+            result += task.toString() + "\n";
+        }
+        return result;
     }
 
     /**
      * Prints Ui for removing task from the list.
      *
-     * @param task Task to be removed.
-     * @param size Updated number of items on the TaskList.
+     * @param tasklist TaskList of tasks to be removed.
+     * @param newListSize New number of items on the TaskList.
      */
-    public String removeTaskFromList(Task task, int size) {
-        assert !task.equals(null) : "task does not exist";
-        String taskToString = task.toString();
-        return ("Noted. I've removed this task: \n" + taskToString
-                + "\nNow you have " + size + " tasks in the list.");
+    public String removeTaskFromList(TaskList tasklist, int newListSize) {
+        assert !tasklist.equals(null) : "task does not exist";
+        String result = "Noted. I've removed these tasks: \n";
+        for (int i = 0; i < tasklist.getSize(); i++) {
+            Task task = tasklist.getTask(i);
+            result += task.toString() + "\n";
+        }
+        result += "Now you have " + newListSize + " tasks in the list.";
+        return result;
     }
 
     /**

@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Input {
 
     private String input;
@@ -28,13 +30,29 @@ public class Input {
         return "";
     }
 
-    public int getIndex(String tag) {
+    public ArrayList<Integer> getIndexArray(String tag, int lsSize) throws DukeException {
         if (tag.equals("delete")) {
-            return Integer.valueOf(this.input.substring(7)) - 1;
+            return generateIndexArray(this.input.substring(7), lsSize);
         } else if (tag.equals("done")) {
-            return Integer.valueOf(this.input.substring(5)) - 1;
+            return generateIndexArray(this.input.substring(5), lsSize);
+        } else {
+            return new ArrayList<>();
         }
-        return 0;
+    }
+
+    public ArrayList<Integer> generateIndexArray(String indexes, int lsSize) throws DukeException {
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < indexes.length(); i++) {
+            char c = indexes.charAt(i);
+            if (c != ' ') {
+                int index = Integer.parseInt(String.valueOf(c)) - 1;
+                if (index < 0 || index >= lsSize) {
+                    throw new DukeException("Item does not exist in the list.");
+                }
+                arr.add(index);
+            }
+        }
+        return arr;
     }
 
     public String getKeyword() {

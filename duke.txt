@@ -1,4 +1,2 @@
-<<<<<<< HEAD
-D | 0 |  hey | Feb 02 2020
-=======
->>>>>>> branch-Assertions
+T | 1 | 1
+T | 1 | 2
