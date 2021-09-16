@@ -8,9 +8,6 @@ import duke.tasks.Task;
  * Creates an Ui system that is responsible for creation of responses to be output to user.
  */
 public class Ui {
-    //TODO String return javadocs
-    private static final String BORDER = "________________________________________________________";
-    private static final String NEW_LINE = System.lineSeparator();
     private static final String PLACEHOLDER = "%text%";
     private static final String DONE_TASK = "Nice! I've marked this task as done:";
     private static final String MAX_TASKS = "Sorry! You have max number of tasks stored already.";
@@ -33,7 +30,7 @@ public class Ui {
 
     private static String prettyPrint(String msg) {
         String indentedMsg = msg.replaceAll("(?m)^", "    ");
-        return String.format("%s\n%s\n%s\n", BORDER, indentedMsg, BORDER);
+        return indentedMsg;
     }
 
     /**
@@ -146,7 +143,7 @@ public class Ui {
      * @return Message that an invalid command has been input.
      */
     public String unknownCommandMessage() {
-        return prettyPrint(UNKNOWN_COMMAND);
+        return UNKNOWN_COMMAND;
     }
 
     /**
@@ -156,7 +153,7 @@ public class Ui {
      * @return Message about error.
      */
     public static String showErrorMessage(String errorMsg) {
-        return prettyPrint(errorMsg);
+        return errorMsg;
     }
 
     /**

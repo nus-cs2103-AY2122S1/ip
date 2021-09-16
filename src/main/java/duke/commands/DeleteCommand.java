@@ -24,17 +24,19 @@ public class DeleteCommand extends Command {
     public String execute(Storage storage, Ui ui) {
         try {
             int taskListLen = storage.taskListLen();
-            int lenBeforeDelete = taskListLen;
-            if (taskNum + 1 <= taskListLen) {
-                Task removedTask = storage.deleteTask(taskNum);
-                taskListLen -= 1;
-                storage.saveToFile();
-                assert(lenBeforeDelete == storage.taskListLen() + 1)
-                        : "Task has not been deleted properly from storage during execution of DeleteCommand.";
-                return ui.taskDeletedMessage(removedTask, taskListLen);
-            } else {
+            if (taskNum + 1 > taskListLen) {
                 return ui.missingTaskMessage(this.taskNum + 1);
             }
+            int lenBeforeDelete = taskListLen;
+            Task removedTask = storage.deleteTask(taskNum);
+            taskListLen -= 1;
+            storage.saveToFile();
+
+            assert(lenBeforeDelete == storage.taskListLen() + 1)
+                    : "Task has not been deleted properly from storage during execution of DeleteCommand.";
+
+            return ui.taskDeletedMessage(removedTask, taskListLen);
+
         } catch (IndexOutOfBoundsException e) {
             return Ui.showErrorMessage("Please enter a valid index!");
         }

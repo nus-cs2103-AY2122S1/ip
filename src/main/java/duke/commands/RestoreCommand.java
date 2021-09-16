@@ -34,18 +34,18 @@ public class RestoreCommand extends Command {
                     return ui.maxTaskReachedMessage();
                 }
 
+                // Delete from archive list
                 archiveTaskListLen = storage.archiveListLen();
-                archiveLenBeforeDelete = taskListLen;
-                Task taskToRestore;
-                if (i + 1 <= archiveTaskListLen) {
-                    taskToRestore = storage.deleteArchivedTask(i);
-                    storage.saveToArchive();
-                    assert(archiveLenBeforeDelete == storage.archiveListLen() + 1)
-                            : "Task has not been deleted properly from archive during execution of RestoreCommand.";
-                } else {
+                if (i + 1 > archiveTaskListLen) {
                     return ui.missingTaskMessage(i + 1);
                 }
+                archiveLenBeforeDelete = taskListLen;
+                Task taskToRestore = storage.deleteArchivedTask(i);
+                storage.saveToArchive();
+                assert(archiveLenBeforeDelete == storage.archiveListLen() + 1)
+                        : "Task has not been deleted properly from archive during execution of RestoreCommand.";
 
+                // Add to main task list
                 storage.addTask(taskToRestore);
                 storage.saveToFile();
                 assert(storage.taskListLen() == taskListLen + 1)

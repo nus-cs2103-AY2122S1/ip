@@ -34,19 +34,19 @@ public class ArchiveCommand extends Command {
                     return ui.maxArchiveTaskReachedMessage();
                 }
 
+                // Delete from main task list
                 taskListLen = storage.taskListLen();
-                lenBeforeDelete = taskListLen;
-                Task taskToArchive;
-                if (i + 1 <= taskListLen) {
-                    taskToArchive = storage.deleteTask(i);
-                    storage.saveToFile();
-                    assert(lenBeforeDelete == storage.taskListLen() + 1)
-                            : "Task has not been deleted properly from storage during execution of ArchiveCommand.";
-                } else {
+                if (i + 1 > taskListLen) {
                     return ui.missingTaskMessage(i + 1);
                 }
+                lenBeforeDelete = taskListLen;
+                Task taskToArchive = storage.deleteTask(i);
+                storage.saveToFile();
+                assert(lenBeforeDelete == storage.taskListLen() + 1)
+                        : "Task has not been deleted properly from storage during execution of ArchiveCommand.";
 
 
+                // Add to archive list
                 storage.archiveTask(taskToArchive);
                 storage.saveToArchive();
                 assert(storage.archiveListLen() == archiveTaskListLen + 1)

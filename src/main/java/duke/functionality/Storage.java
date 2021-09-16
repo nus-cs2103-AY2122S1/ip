@@ -30,7 +30,7 @@ public class Storage {
      * Returns a storage system that is loaded with pre-saved tasks and archived tasks, if any, and allows for the
      * storage of more tasks.
      *
-     * @param filePath The filepath in which to place the file containing saved tasks.
+     * @param filePath The filepath in which to place the files containing saved data.
      */
     public Storage(String filePath) {
         try {
