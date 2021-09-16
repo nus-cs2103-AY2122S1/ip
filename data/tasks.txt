@@ -1,0 +1,8 @@
+T | 1 | read book
+D | 1 | return book | 2021-08-12 15:30
+P | 1 | PE | 2021-08-23 17:00 | 2021-08-23 17:30
+E | 1 | project meeting | 2021-08-22 21:30
+T | 0 | join sports club
+D | 1 | return book | 2021-08-20 12:00
+E | 0 | meeting | 2021-08-23 17:00
+P | 0 | Consultation CS3244 | 2021-08-23 17:00 | 2021-08-23 17:30
