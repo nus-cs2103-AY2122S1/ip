@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Utils;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Utils;
 import duke.exception.TaskNotFoundException;
 import duke.task.Task;
 
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
         storage.deleteTaskFromFile(indexToDelete, tasks);
         tasks.removeTask(indexToDelete);
 
-        String removedTaskString = String.format("I've removed this task:\n%s", removedTask.toString());
+        String removedTaskString = String.format("I've removed this task:\n%s\n", removedTask.toString());
         String tasksLeftString = String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
         return removedTaskString + tasksLeftString;
     }

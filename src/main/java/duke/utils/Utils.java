@@ -1,4 +1,4 @@
-package duke;
+package duke.utils;
 
 import duke.exception.DukeException;
 import duke.exception.IncorrectFormatException;

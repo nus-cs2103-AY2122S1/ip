@@ -1,10 +1,10 @@
 package duke.command;
 
-import static duke.Utils.splitBetween;
+import static duke.utils.Utils.splitBetween;
 
 import duke.exception.DukeException;
-import duke.Storage;
-import duke.TaskList;
+import duke.utils.Storage;
+import duke.utils.TaskList;
 import duke.exception.InvalidCommandException;
 import duke.exception.TaskFormatEmptyException;
 import duke.task.Deadline;

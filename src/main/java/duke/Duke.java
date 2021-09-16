@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
 
 import java.io.IOException;
 import java.util.ArrayList;

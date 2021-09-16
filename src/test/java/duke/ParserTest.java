@@ -1,5 +1,6 @@
 package duke;
 
+import duke.utils.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,19 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
     @Test
     public void testGetUserCommand() {
-        Parser parser = new Parser();
-        assertEquals("todo", parser.getUserCommand("todo blah blah"));
+        assertEquals("todo", Parser.getUserCommand("todo blah blah"));
     }
 
     @Test
     public void testGetUserArgument() {
-        Parser parser = new Parser();
-        assertEquals("blah blah", parser.getUserArgument("todo blah blah"));
+        assertEquals("blah blah", Parser.getUserArgument("todo blah blah"));
     }
 
     @Test
     public void testNoUserArgument() {
-        Parser parser = new Parser();
-        assertEquals("", parser.getUserArgument("todo "));
+        assertEquals("", Parser.getUserArgument("todo "));
     }
 }

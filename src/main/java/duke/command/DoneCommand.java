@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Utils;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Utils;
 import duke.exception.TaskNotFoundException;
 import duke.task.Task;
 
