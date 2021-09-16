@@ -125,9 +125,8 @@ Expected outcome:
 ### `archive` - Archives all specified tasks.
 
 Archives the task at the specified task number, by moving it from the task list to the archive.
-Multiple task numbers can be input in one command, by separating each task number with a whitespace.
 
-Format: `archive <task_numbers>`
+Format: `archive <task_number>`
 
 Example of usage:
 
@@ -154,9 +153,8 @@ Expected outcome:
 ### `restore` - Restores all specified tasks.
 
 Restores the task at the specified task number in the archive, by moving it from the archive, back to the task list.
-Multiple task numbers can be input in one command, by separating each task number with a whitespace.
 
-Format: `restore <task_numbers>`
+Format: `restore <task_number>`
 
 Example of usage:
 
