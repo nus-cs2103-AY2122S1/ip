@@ -9,6 +9,11 @@ import duke.task.TaskList;
 public class ListCommand extends Command {
     private String command;
 
+    /**
+     * Creates ListCommand object.
+     *
+     * @param command command given by user.
+     */
     public ListCommand(String command) {
         assert command.startsWith("list");
         this.command = command;

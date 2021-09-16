@@ -10,6 +10,11 @@ import duke.ui.Ui;
 public class EndCommand extends Command {
     private String command;
 
+    /**
+     * Creates EndCommand object.
+     *
+     * @param command command given by user.
+     */
     public EndCommand(String command) {
         assert command.startsWith("bye");
         this.command = command;

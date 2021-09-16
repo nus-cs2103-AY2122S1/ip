@@ -1,5 +1,7 @@
 package duke.storage;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,12 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.ui.Ui;
-
 
 
 

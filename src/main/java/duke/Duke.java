@@ -53,8 +53,8 @@ public class Duke {
     /**
      * Facilitates which command to run based on the type of command processed by the Parser.
      *
-     * @throws DukeException If command is not recognised or improperly formatted.
      * @return String array of results of running the command.
+     * @throws DukeException If command is not recognised or improperly formatted.
      */
     private String[] commands(String command) throws DukeException {
         try {

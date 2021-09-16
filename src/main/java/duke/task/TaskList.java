@@ -135,8 +135,7 @@ public class TaskList {
         String[] output = new String[store.size() + 1];
         if (words.length > 1) {
             throw new DukeException("invalidCommand");
-        }
-        else if (store.size() == 0) {
+        } else if (store.size() == 0) {
             output[0] = "You have no tasks in your list yay!";
             return output;
         }

@@ -12,6 +12,11 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     private String command;
 
+    /**
+     * Creates FindCommand object.
+     *
+     * @param command command given by user.
+     */
     public FindCommand(String command) {
         assert command.startsWith("find");
         this.command = command;

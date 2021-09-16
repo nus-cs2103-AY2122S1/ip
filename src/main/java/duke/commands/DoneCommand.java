@@ -12,6 +12,11 @@ import duke.ui.Ui;
 public class DoneCommand extends Command {
     private String command;
 
+    /**
+     * Creates DoneCommand object.
+     *
+     * @param command command given by user.
+     */
     public DoneCommand(String command) {
         assert command.startsWith("done");
         this.command = command;

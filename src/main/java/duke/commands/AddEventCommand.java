@@ -19,6 +19,11 @@ import duke.ui.Ui;
 public class AddEventCommand extends Command {
     private String command;
 
+    /**
+     * Creates AddEventCommand object.
+     *
+     * @param command command given by user.
+     */
     public AddEventCommand(String command) {
         assert command.startsWith("event");
         this.command = command;

@@ -12,6 +12,11 @@ import duke.ui.Ui;
 public class DeleteTaskCommand extends Command {
     private String command;
 
+    /**
+     * Creates DeleteTaskCommand object.
+     *
+     * @param command command given by user.
+     */
     public DeleteTaskCommand(String command) {
         assert command.startsWith("delete");
         this.command = command;

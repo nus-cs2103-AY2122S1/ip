@@ -9,6 +9,11 @@ package duke.task;
 
 public class ToDo extends Task {
 
+    /**
+     * Creates ToDo object.
+     *
+     * @param name name of ToDo task.
+     */
     public ToDo(String name) {
         super(name);
         assert !(name == null);
