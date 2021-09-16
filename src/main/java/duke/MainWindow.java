@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/rama1.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rama2.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/chimp.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/batman.png"));
 
     /**
      * Initialises the mainWindow to display welcome message and handle userInput.
