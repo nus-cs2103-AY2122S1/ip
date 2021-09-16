@@ -187,4 +187,7 @@ Example of usage:
 
 Expected outcome:
 
-<img src="bye.png" alt=Lifeline response to bye>                    
+<img src="bye.png" alt=Lifeline response to bye>
+
+## Acknowledgements
+* [Gson by Google](https://github.com/google/gson) - To save tasks as a JSON file.
