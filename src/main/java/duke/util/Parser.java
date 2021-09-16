@@ -71,7 +71,7 @@ public class Parser {
                 cmd = new CompleteCommand(index);
                 break;
             default:
-                cmd = new FalseCommand();
+                cmd = new FalseCommand(input);
             }
         } else {
             switch (command) {
@@ -82,7 +82,7 @@ public class Parser {
                 cmd = new ListCommand();
                 break;
             default:
-                cmd = new FalseCommand();
+                cmd = new FalseCommand(input);
             }
         }
         return cmd;
