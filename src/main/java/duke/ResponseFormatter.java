@@ -17,7 +17,7 @@ public class ResponseFormatter {
         todos.trimToSize();
         String formatted = "";
         if (todos.size() == 0) {
-            return " ٩(◕‿◕｡)۶ Ehe no task for now.";
+            return " <(_ _)> Ehe no task for now.";
         } else {
             for (int i = 0; i < todos.size(); i++) {
                 formatted += (i + 1) + ": " + todos.get(i).toString() + "\n";
@@ -42,7 +42,7 @@ public class ResponseFormatter {
      * Returns the goodbye message to user
      */
     public String formatBye() {
-        return "Bye. Hope to see you again soon! (´｡• ω •｡`)";
+        return "Bye. Hope to see you again soon! =^_^=";
     }
 
     /**
@@ -52,7 +52,7 @@ public class ResponseFormatter {
      *
      */
     public String formatDone(String completedTask) {
-        return "(´• ω •`) What a rarity! This task has been marked as done:\n"
+        return "(@_@;) What a rarity! This task has been marked as done:\n"
                 + completedTask;
     }
 
@@ -64,7 +64,7 @@ public class ResponseFormatter {
      *
      */
     public String formatDelete(String deletedTask, int listLength) {
-        return "(￢_￢) Ok... This task has been deleted:\n"
+        return "(~_~) Ok... This task has been deleted:\n"
                 + "deleted: " + deletedTask + "\n"
                 + "You have " + listLength + " task(s) to go! (]><)]";
     }
@@ -75,7 +75,7 @@ public class ResponseFormatter {
      * @param e the error to getMessage()
      */
     public String formatFileError(IOException e) {
-        return "╮(￣ω￣;)╭ File Error..." + e.getMessage();
+        return "（ ﾟ Дﾟ) File Error..." + e.getMessage();
     }
 
     /**
@@ -112,7 +112,7 @@ public class ResponseFormatter {
             for (int i = 0; i < foundTasks.size(); i++) {
                 foundList += (i + 1) + ": " + foundTasks.get(i).toString() + "\n";
             }
-            return "(*¯︶¯*) Here are the matching tasks in your list:\n"
+            return "(*^u^*) Here are the matching tasks in your list:\n"
                     + foundList;
         }
     }
@@ -122,6 +122,6 @@ public class ResponseFormatter {
     }
 
     public String formatSnooze(String snoozedTask) {
-        return "Ok..." + snoozedTask + " has been snoozed zZzZ";
+        return "Ok..." + snoozedTask + " has been snoozed OwO";
     }
 }

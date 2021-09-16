@@ -33,7 +33,7 @@ public class Duke {
 
 
     /**
-     * Runs duke program - a chatbot with personality
+     * Runs duke program - a chatbot
      */
     public void run() {
         ui.printGreetings();

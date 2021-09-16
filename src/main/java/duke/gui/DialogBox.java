@@ -56,13 +56,13 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setStyle("-fx-background-color: #FFDBE4");
+        db.setStyle("-fx-background-color: #FFE5EC");
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #EBECF0");
+        db.setStyle("-fx-background-color: #FFFEF1");
         return db;
     }
 }

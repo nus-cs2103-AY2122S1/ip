@@ -31,6 +31,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * snooze the deadline
+     *
+     * @param snoozedTime
+     * @return task in string format
+     */
     public String snooze(LocalDateTime snoozedTime) {
         this.by = snoozedTime;
         return toString();

@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
             ui.printDelete(display, taskList.getList().size());
             history.addHistory(this);
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.printError("Eh... No such task found. Cannot delete.", "(＃￣ω￣)");
+            ui.printError("Eh... No such task found. Cannot delete.", "(＃*w*)");
         }
     }
 
@@ -64,13 +64,12 @@ public class DeleteCommand extends Command {
             history.addHistory(this);
             return rf.formatDelete(display, taskList.getList().size());
         } catch (ArrayIndexOutOfBoundsException e) {
-            return rf.formatError("Eh... No such task found. Cannot delete.", "(＃￣ω￣)");
+            return rf.formatError("Eh... No such task found. Cannot delete.", "(＃*w*)");
         }
     }
 
     @Override
     public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
-        System.out.println("undoing delete");
         taskList.add(deleted);
         storage.writeToFile(taskList);
         return rf.formatUndo("Delete Command");

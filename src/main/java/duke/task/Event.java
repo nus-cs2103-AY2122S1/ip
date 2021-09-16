@@ -31,6 +31,12 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * event to be updated/snoozed
+     *
+     * @param snoozedTime updated time
+     * @return updated event in string format
+     */
     public String snooze(LocalDateTime snoozedTime) {
         this.at = snoozedTime;
         return toString();

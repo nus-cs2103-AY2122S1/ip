@@ -132,7 +132,7 @@ public class Parser {
                 int taskNo = parseTaskNo(snooze[1]);
                 return new SnoozeCommand(taskNo, parseDate(snooze[2]));
             default:
-                throw new DukeException("Ehhh... (￣ ￣|||) Sorry I do not understand.");
+                throw new DukeException("Ehhh... (owO) Sorry sir I do not understand.");
             }
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
@@ -143,7 +143,7 @@ public class Parser {
         } catch (DateTimeException e) {
             return new ErrorCommand(
                     "Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format",
-                    "(`-´)");
+                    "(`-`)");
         }
     }
 

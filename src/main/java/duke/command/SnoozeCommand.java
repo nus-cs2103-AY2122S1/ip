@@ -19,6 +19,13 @@ public class SnoozeCommand extends Command {
     private LocalDateTime prevDate;
     private LocalDateTime currDate;
 
+    /**
+     * Constructor for Snooze Command
+     *
+     * @param taskNo the index of task completed
+     * @param newDate the date to be updated
+     *
+     */
     public SnoozeCommand(int taskNo, LocalDateTime newDate) {
         this.taskNo = taskNo;
         this.currDate = newDate;
@@ -65,6 +72,15 @@ public class SnoozeCommand extends Command {
         }
     };
 
+
+    /**
+     * Executes commands
+     *
+     * @param taskList current list
+     * @param rf Response Formatter
+     * @param storage current storage
+     * @throws IOException for commands that needs to write to storage file
+     */
     public String execute(TaskList taskList, ResponseFormatter rf,
                                    Storage storage, History history) throws IOException {
         try {
@@ -101,14 +117,17 @@ public class SnoozeCommand extends Command {
         }
     };
 
+    @Override
     public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
         boolean isEvent = this.task instanceof Event;
         boolean isDeadline = this.task instanceof Deadline;
 
         if (isEvent) {
-            ((Event) this.task).snooze(prevDate);
+            Event event = (Event) this.task;
+            event.snooze(prevDate);
         } else if (isDeadline) {
-            ((Deadline) this.task).snooze(prevDate);
+            Deadline deadline = (Deadline) this.task;
+            deadline.snooze(prevDate);
         }
 
         storage.writeToFile(taskList);
