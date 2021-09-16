@@ -24,7 +24,8 @@ This repo contains the code for the Misaki chatbot as part of CS2103T: Software 
 🌼 `delete` `2`: Deletes a task at the `2` index from the list.<br>
 ☘️ `find` `assignment`: Finds all tasks with matching keyword `assignment`.<br>
 🌼 `bye`: Exits the program.<br>
-___
+
+
 ## Features
 * Words in `UPPER_CASE` are the parameters to be supplied by the user. e.g. `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo submit assignment`.
 
