@@ -1,24 +1,109 @@
-# duke.Duke project template
+# Duke Batman
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is an adaptation of a greenfield Java project from [SE-EDU](https://github.com/se-edu/duke) It's named after the Java mascot _Duke_. 
 
-## Setting up in Intellij
+* [Quickstart](#quickstart)
+* [Features](#features)
+   * [ToDo](#todo)
+   * [Event](#event)
+   * [Deadline](#deadline)
+   * [Recurring](#recurring)
+   * [List](#list)
+   * [Delete](#delete)
+   * [Done](#done)
+   * [Find](#find)
+   * [Bye](#bye)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Quickstart
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. Ensure you have Java 11 or above installed in your Computer.
+ 
+2. Download the latest duke.jar from here.
+
+3. Copy the file to the folder you want to use as the home folder.
+ 
+4. Double-click the file to start the app.
+
+5. Type commands in the command box and press Enter to execute it. e.g typing `list` and pressing Enter will open up the list stored
+
+Refer to the [Features](#features) below for details of each command.
+
+## Features
+
+### ToDo
+
+Adding a ToDo Task to the list
+
+Format: `todo TASKDESCRIPTION`
+
+Examples: 
+* `todo Homework`
+* `todo Buy groceries`
+
+### Event
+
+Adding a Event Task to the list
+
+Format: `event TASKDESCRIPTION /atTIME_OF_EVENT`
+
+Examples: 
+* `event Concert /at6pm today`
+* `event Lessons /at12/08/2021 6pm`
+
+### Deadline
+
+Adding a Deadline Task to the list
+
+Format: `deadline TASKDESCRIPTION /by TIME_DUE`
+
+Examples: 
+* `deadline Homework /at 6pm today`
+* `deadline Project work /at 12/08/2021 6pm`
+
+### Recurring
+
+Adding a Recurring Task to the list
+
+Format: `recurring TASKDESCRIPTION /byTIME_DUE /recurring NUM_DAYS`
+
+Examples: 
+* `recurring Tutorial /at 16/09/2021 /recurring 7`
+
+### List
+
+Display all the tasks in the list
+
+Format: `list`
+
+### Delete
+
+Deletes the specified task from the task list.
+
+Format: `delete INDEX`
+
+* The index must be a positive integer 1, 2, 3, …​
+
+### Done
+
+Mark the specified task from the task list as done.
+
+Format: `done INDEX`
+
+* The index must be a positive integer 1, 2, 3, …​
+
+### Find
+
+Finds task which contact the given keyword exactly.
+
+Format: `find KEYWORD`
+
+Examples:
+
+`find home` returns `homework` but not `Homework`
+
+### Bye
+
+Say goodbye to Duke Batman
+
+Format: `bye`
+
