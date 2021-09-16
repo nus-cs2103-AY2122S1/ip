@@ -10,7 +10,37 @@ Ted helps users track tasks, well, 3 types of tasks to be exact:
 
 `ToDos` are the most basic type of task, with just a name and a completion status, whereas `Deadlines` and `Events` can additionally store date and time information.
 
+
+
+
+### Getting started
+Download the file, place the file in the desired directory, then simply double click to run. If this does not work or there is some unexpected behaviour regarding the saving and loading of file (see warning below), you can run the app using the command line as follows:
+```
+cd <name of directory which the ted.jar is located>
+java -jar ted.jar
+```
+> ###Warning
+> (See section on `Saving and loading of tasks` in the `Features and commands` section below for a better undestanding of why this matters)  
+> 
+> On some mac systems, the security permissions might not be configured to allow the .jar file to read and write to disk when the app is run using double click.  
+> 
+> You will know this is happening when the second message that you see regarding creating of a new file will specify a filepath that is **not** the file the .jar is in (it will instead be some path that starts with /private/var/folders/...). Furthermore, the file created is merely a temporary file and hence your tasks will not be saved.  
+> 
+> To fix this issue, you can either:
+> 1. Stick exclusively to running the jar via the terminal
+> (easier solution, but less convenient in the long run)  
+> 2. Give the java launcher additional permissions as detailed [here](https://discussions.apple.com/thread/252709578) (not as easy solution, but more convenient in the long run)
+
 ## Features and commands
+
+&nbsp;
+### Saving and loading of tasks
+One stand-out feature is that **tasks are automatically saved to the hard disk** so that every time ted starts up it loads your previous tasks and you can simply continue where you left off the previous time. This file which all the tasks are saved in is called `tasks.txt` and will be automatically created if it is **not found in the same directory as ted.jar**.
+
+> ###Warning
+> Always make sure that `tasks.txt` is in the same directory as `ted.jar` to ensure that ted can find the file to read from and write to.
+
+> **Tip:** this means that if you ever want to start afresh and delete all the tasks in the list, you can simply delete the `tasks.txt` file so that ted will just create a new one on the next run.
 
 &nbsp;
 ### Adding a new task to the list
