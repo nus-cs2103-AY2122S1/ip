@@ -9,4 +9,11 @@ public class DukeTest {
     public void dummyTest() {
         assertEquals(2, 2);
     }
+
+    @Test
+    public void testGetResponse() {
+        Duke duke = new Duke("data/duke.txt");
+        String TEST_INPUT = "todo buy groceries";
+        assertEquals(duke.getResponse(TEST_INPUT), "Task successfully added:\n[T][ ] buy groceries");
+    }
 }
