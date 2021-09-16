@@ -1,5 +1,6 @@
 package bob.gui;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -7,6 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 /**
  * Represents a message sent in the chat, with the message sender's image and their message.
@@ -30,11 +35,20 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        text.setStyle("-fx-text-fill: BLACK;");
+        text.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, FontPosture.REGULAR, 13));
+
+        displayPicture.setFitWidth(150.0);
+        displayPicture.setFitHeight(150.0);
+        Circle circle = new Circle(50);
+        circle.setCenterX(displayPicture.getFitWidth() / 2);
+        circle.setCenterY(displayPicture.getFitHeight() / 2);
+        displayPicture.setClip(circle);
 
         this.setAlignment(Pos.CENTER_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        this.setStyle("-fx-border-color: AZURE; -fx-border-width: 2;" +
+                "-fx-border-radius: 30; -fx-border-insets: 5;");
     }
 
     /**
