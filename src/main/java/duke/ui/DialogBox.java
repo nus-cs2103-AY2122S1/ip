@@ -51,12 +51,24 @@ public class DialogBox extends HBox {
 
     }
 
+    /**
+     * Creates a user dialog box.
+     * @param text The user text.
+     * @param img The user image.
+     * @return The dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: #a9d6ca;" + "-fx-background-radius: 2em;");
         return db;
     }
 
+    /**
+     * Creates a duke dialog box.
+     * @param text The duke response.
+     * @param img The duke image.
+     * @return The dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -19,7 +19,7 @@ public class DeleteCommand extends Command{
             + "  %s %s\nNow you have %d tasks in the list.";
 
     /**
-     * A constructor to initialize a delete command.
+     * A constructor for a delete command.
      * @param parameter the parameter of the delete command, should be a task number.
      */
     public DeleteCommand(String parameter) {

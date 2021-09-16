@@ -11,6 +11,13 @@ import duke.task.TaskList;
  */
 public abstract class Command {
 
+    /**
+     * Execute a command.
+     * @param taskList The task list to execute the command on.
+     * @param storage The place to store the session.
+     * @throws DukeException execution errors.
+     * @return The response
+     */
     public abstract String execute(TaskList taskList, Storage storage) throws DukeException;
 
     public abstract boolean isExit();

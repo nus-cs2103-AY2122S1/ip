@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.NoMatchingTaskDukeException;
+import duke.exception.DukeException;
+import duke.exception.EmptyTaskListDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.exception.DukeException;
 
 /**
  * A ListCommand class that extends from the Command class.
@@ -33,7 +33,7 @@ public class ListCommand extends Command{
         assert taskList != null : "task list should not be null.";
         boolean isEmptyList = taskList.size() == 0;
         if (isEmptyList) {
-            throw new NoMatchingTaskDukeException();
+            throw new EmptyTaskListDukeException();
         }
         String result = SUCCESS_MESSAGE + taskList.toString();
         return result;

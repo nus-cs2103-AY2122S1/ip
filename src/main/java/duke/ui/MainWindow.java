@@ -1,6 +1,8 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.exception.DukeException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -34,9 +36,18 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Start the duke chatbot by printing the welcome message along with any start up errors.
+     * @param d the duke to be started.
+     */
     public void startDuke(Duke d) {
         duke = d;
-        printOutput(duke.getGui().getWelcomeMessage());
+        printOutput(Gui.getWelcomeMessage());
+        try {
+            duke.start();
+        } catch (DukeException e) {
+            printOutput(e.getMessage());
+        }
     }
 
     /**
@@ -47,11 +58,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, DUKE_IMAGE)
-        );
+        printInput(input);
+        printOutput(response);
         userInput.clear();
+        if (response.equals(Gui.getExitMessage())) {
+            Platform.exit();
+        }
     }
 
     /**
@@ -69,6 +81,7 @@ public class MainWindow extends AnchorPane {
      * Print an input string to chatbox.
      * @param input the input to print.
      */
+    @FXML
     public void printInput(String input) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE)

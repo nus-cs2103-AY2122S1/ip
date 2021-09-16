@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Gui;
 
 
 /**
@@ -11,7 +12,7 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command{
 
-    private String EXIT_MESSAGE = "Bye!";
+    private final String EXIT_MESSAGE = Gui.getExitMessage();
 
     /**
      * An empty constructor to initialize an exit command.

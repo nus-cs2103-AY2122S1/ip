@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidParameterDukeException;
 import duke.exception.InvalidTagDukeException;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -16,7 +15,6 @@ public class TagCommand extends Command{
 
     private final String description;
     private static final String SUCCESS_MESSAGE = "I've tagged this task as %s :\n  %s %s";
-
 
     /**
      * A constructor to initialize a tag command.
@@ -38,19 +36,19 @@ public class TagCommand extends Command{
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         String[] parameter = description.split(" ");
         boolean isValidTagParameter = parameter.length == 2;
-        if (!isValidTagParameter) {
-            throw new InvalidParameterDukeException();
-        }
-
-        boolean isValidNumber = parameter[0].matches("\\d+");
-        if (!isValidNumber) {
+        if (!isValidTagParameter || !isValidNumber(parameter[0])) {
             throw new InvalidTagDukeException();
         }
-        Task task = taskList.getTask(Integer.parseInt(parameter[0]));
-        taskList.tagTask(Integer.parseInt(parameter[0]), parameter[1]);
+        int taskNumber = Integer.parseInt(parameter[0]);
+        Task task = taskList.getTask(taskNumber);
+        taskList.tagTask(taskNumber, parameter[1]);
         storage.save(taskList);
         return String.format(
                 SUCCESS_MESSAGE, task.showTag(), task.getStatusIcon(), task.getDescription());
+    }
+
+    private boolean isValidNumber(String number) {
+        return number.matches("\\d+");
     }
 
     @Override
