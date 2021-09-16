@@ -37,9 +37,9 @@ public class FindCommand extends Command {
         ArrayList<Task> matchingTasks = tasks.find(query);
 
         // Create the response to be displayed
-        String output = "Here are the matching tasks in your list: \n\t ";
+        String output = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < matchingTasks.size(); i++) {
-            output += String.valueOf(i + 1) + ". " + matchingTasks.get(i) + "\n\t ";
+            output += String.valueOf(i + 1) + ". " + matchingTasks.get(i) + "\n";
         }
 
         // Return a description of the execution result
