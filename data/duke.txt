@@ -1,9 +1,2 @@
-T | 0 | task1
-T | 1 | task2
-T | 1 | task3
-D | 0 | d1 | Dec 12 2025
-D | 0 | d2 | Oct 12 2021
-D | 0 | d3 | Oct 12 2022
-E | 1 | e1 | Oct 12 2021 2000
-E | 0 | e2 | Oct 12 2022 2200
-E | 1 | e3 | Dec 10 2023 2100
+T | 0 | read book
+E | 0 | book club sharing | Oct 12 2021 1800
