@@ -41,7 +41,6 @@ public class Storage {
         }
     }
 
-    // TODO: Find a better way to do this..
     /**
      * Saves given <code>TaskList</code> into a file according to storagePath. Will overwrite existing file, or
      * create it if given filename does not exist.

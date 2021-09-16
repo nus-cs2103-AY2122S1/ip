@@ -3,9 +3,9 @@ package bobcat.executor;
 import java.io.IOException;
 import java.util.Objects;
 
-import bobcat.exception.ExitException;
 import bobcat.executor.command.basic.Bye;
 import bobcat.executor.command.basic.Find;
+import bobcat.executor.command.basic.List;
 import bobcat.executor.command.create.Deadline;
 import bobcat.executor.command.create.Event;
 import bobcat.executor.command.create.ToDo;
@@ -51,35 +51,23 @@ public class ExecutionUnit {
         queryArr = parser.parse(query);
 
         String[] reply;
-        switch (queryArr[0]) {
-        case "list":
-            reply = bobcat.executor.command.basic.List.execute(taskList, queryArr);
-            break;
-        case "bye":
-            reply = Bye.execute(taskList, queryArr);
-            throw new ExitException(reply[0]);
-        case "find":
-            reply = Find.execute(taskList, queryArr);
-            break;
-        case "done":
-            reply = Done.execute(taskList, queryArr);
-            break;
-        case "delete":
-            reply = Delete.execute(taskList, queryArr);
-            break;
-        case "todo":
-            reply = ToDo.execute(taskList, queryArr);
-            break;
-        case "deadline":
-            reply = Deadline.execute(taskList, queryArr);
-            break;
-        case "event":
-            reply = Event.execute(taskList, queryArr);
-            break;
-        default:
-            reply = null;
-            break;
-        }
+        reply = Objects.equals(queryArr[0], "list")
+                ? List.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "bye")
+                ? Bye.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "find")
+                ? Find.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "done")
+                ? Done.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "delete")
+                ? Delete.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "todo")
+                ? ToDo.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "deadline")
+                ? Deadline.execute(taskList, queryArr)
+                : Objects.equals(queryArr[0], "event")
+                ? Event.execute(taskList, queryArr)
+                : null;
         storeExecutor.saveStorage(storagePath, taskList);
         return reply;
     }
