@@ -9,7 +9,7 @@ Ui sample looks like [this](https://github.com/wengYing227/ip/blob/master/docs/U
 2. Download the latest released jar file from [here](https://github.com/wengYing227/ip/releases) to your computer.
 3. Double-click the file or run the command `java -jar duke.jar` to start the app. The GUI similar to the below will
 appear in several seconds. (Note: some sample data are inside the database)
-![img.png](img.png)
+<img src="img.png" alt="sample" width="300"/>
 
 4. Type in commands in the command box and click `Send` button to execute your command.
 You can try the following commands.
@@ -28,7 +28,8 @@ Note the following about command format:
 ### Viewing help: `help`
 
 Shows a message explaning all commands used to execute the app.
-![img_1.png](img_1.png)
+
+<img src="img_1.png" alt="sample" width="300"/>
 
 Format: `help`
 
@@ -41,7 +42,8 @@ Format: `list`
 ### Adding a Todo task: `todo`
 
 Adds a Todo task with its description.
-![img_2.png](img_2.png)
+
+<img src="img_2.png" alt="sample" width="300"/>
 
 Format: `todo {description}`
 
@@ -81,7 +83,8 @@ Example:
 ### Marking a task with a priority level: `mark`
 
 Marks a task specified by its index with a specified priority level.
-![img_3.png](img_3.png)
+
+<img src="img_3.png" alt="sample" width="300"/>
 
 Format: `mark {index integer} [&important OR &unimportant OR &ordinary]`
 
