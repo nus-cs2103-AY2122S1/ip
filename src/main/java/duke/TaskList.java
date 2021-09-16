@@ -14,7 +14,7 @@ public class TaskList {
     }
 
     /**
-     * Add tasks to the list.
+     * Adds task to the list.
      *
      * @param task Task to add.
      */
@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task from the list.
+     * Deletes the task from the list.
      *
      * @param taskIndex Index of the task to delete.
      */
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Get the length of the list.
+     * Gets the length of the list.
      *
      * @return Length of list.
      */
@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Get the task list as a list.
+     * Gets the task list as a list.
      *
      * @return List of tasks.
      */
@@ -50,7 +50,7 @@ public class TaskList {
     }
 
     /**
-     * Get the task at the specific index of the list.
+     * Gets the task at the specific index of the list.
      *
      * @param taskIndex Index of the task.
      * @return Task at the index.

@@ -22,7 +22,7 @@ public class Parser {
     }
 
     /**
-     * Perform the actions based on what the user input.
+     * Performs the actions based on what the user input.
      *
      * @param input String containing text to add
      * @return string to be showed on the GUI

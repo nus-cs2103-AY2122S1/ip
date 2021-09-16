@@ -31,7 +31,7 @@ public class Ui {
     }
 
     /**
-     * Get the input from user.
+     * Gets the input from user.
      */
     public String readLine() {
         return scanner.nextLine();
@@ -48,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * Save the final list to the file and bid user farewell.
+     * Saves the final list to the file and bid user farewell.
      */
     public String goodbye() {
         storage.write(tasks.getTaskList(), storage.getFilePath());
@@ -69,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Mark the task at specific index as done.
+     * Marks the task at specific index as done.
      *
      * @param taskNumber Index of the task you want to mark as done.
      */

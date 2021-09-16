@@ -124,7 +124,7 @@ public class Storage {
                 Files.write(path, stringToInsert.getBytes(), StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
-
+              //There won't be any instance where no file is found because it will just create a new file
         }
     }
 }
