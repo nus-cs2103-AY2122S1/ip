@@ -1,0 +1,32 @@
+help
+list
+abcd
+todo borrow book
+list
+deadline return book /by 22/08/2021 1800
+list
+event project meeting /at 01/09/2021 0900-1300
+list
+done -1
+done 100
+done 1
+list
+done 2
+done 3
+list
+delete 2
+list
+todo
+deadline
+event
+done
+delete
+deadline project submission
+deadline project submission /by
+event volleyball cca
+event volleyball cca /at 
+deadline pay bills /by 01/09/2021 1200
+filter 01/09/2021
+deadline return book /by 22/08/2021 1800
+find book
+bye
