@@ -57,14 +57,14 @@ public class MyList {
      */
     public String addTask(Task t) {
         myList.add(t);
-        return Ui.addTaskMessage(t, this);
+        return Ui.getAddTaskMessage(t, this);
     }
 
     /**
      * Lists out all the items in the list.
      */
     public String listAll() {
-        return Ui.listAllMessage(this);
+        return Ui.getListAllMessage(this);
     }
 
     /**
@@ -77,7 +77,7 @@ public class MyList {
         try {
             return myList.get(index - 1).markComplete();
         } catch (IndexOutOfBoundsException e) {
-            return Ui.invalidIndexMessage();
+            return Ui.getInvalidIndexMessage();
         }
     }
 
@@ -90,7 +90,7 @@ public class MyList {
     public String deleteTask(int index) {
         assert (index > 0);
         Task removed = this.myList.remove(index - 1);
-        return Ui.deleteTaskMessage(removed, this);
+        return Ui.getDeleteTaskMessage(removed, this);
     }
 
     /**
@@ -104,13 +104,13 @@ public class MyList {
         for (int i = 0; i < getListSize(); i++) {
             Task t = getTask(i);
             String taskDescription = t.getDescription().toLowerCase();
-            if (taskDescription.contains(keyword.toLowerCase())) {
+            if (taskDescription.contains(keyword.toLowerCase().trim())) {
                 matchingList[i] = t;
                 counter++;
             }
         }
-        String s = Ui.containsKeyword(counter);
-        s += Ui.containsKeywordTask(matchingList);
+        String s = Ui.getContainsKeywordMessage(counter);
+        s += Ui.getTaskWithKeywordMessage(matchingList);
         return s;
     }
 
@@ -143,7 +143,7 @@ public class MyList {
                 long daysBetween = ChronoUnit.DAYS.between(currentDate, deadline);
                 if (daysBetween <= noOfDays && !d.isDone()) {
                     noOfDeadlines++;
-                    result += Ui.withinDeadlineMessage(d, daysBetween, i + 1);
+                    result += Ui.getWithinDeadlineMessage(d, daysBetween, i + 1);
                 }
             }
         }

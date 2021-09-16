@@ -192,10 +192,10 @@ public class Deadline implements Task {
     @Override
     public String markComplete() {
         if (this.isDone) {
-            return Ui.taskAlrCompleted(this);
+            return Ui.getTaskAlrCompletedMessage(this);
         } else {
             this.isDone = true;
-            return Ui.markCompleteDeadline(this);
+            return Ui.getMarkCompleteDeadlineMessage(this);
         }
     }
 

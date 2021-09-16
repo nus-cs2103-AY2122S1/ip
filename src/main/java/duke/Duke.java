@@ -74,7 +74,7 @@ public class Duke extends Application {
      */
     public void startCli() {
 
-        System.out.println(Ui.welcomeMessage());
+        System.out.println(Ui.getWelcomeMessage());
 
         this.storage.load();
 

@@ -19,7 +19,7 @@ public class Ui {
      * Returns the welcome message.
      * @return The welcome message.
      */
-    public static String welcomeMessage() {
+    public static String getWelcomeMessage() {
         System.out.println(
                 "Yo! Duke here \n"
                         + "What did you call me for? \n"
@@ -33,7 +33,7 @@ public class Ui {
     /**
      * Prints out the error message when loading of tasks fails
      */
-    public static void loadingError() {
+    public static void getLoadingErrorMessage() {
         System.out.println("Error loading duke.tasks");
     }
 
@@ -41,7 +41,7 @@ public class Ui {
      * Prints out the error message when user keys in an invalid index.
      * @return the error message.
      */
-    public static String invalidIndexMessage() {
+    public static String getInvalidIndexMessage() {
         System.out.println("Invalid index, please try again");
         return "Invalid index, please try again";
     }
@@ -51,7 +51,7 @@ public class Ui {
      * @param e the exception to get the message from.
      * @return the error message.
      */
-    public static String formatExceptionMessage(WrongCommandFormatException e) {
+    public static String getFormatExceptionMessage(WrongCommandFormatException e) {
         System.out.println(e.getMessage());
         return e.getMessage();
     }
@@ -60,7 +60,7 @@ public class Ui {
      * Prints out the message when the user updates the date format.
      * @return The message.
      */
-    public static String formatUpdatedMessage() {
+    public static String getFormatUpdatedMessage() {
         System.out.println("Date format has been updated to: " + Duke.getFormat());
         return "Date format has been updated to: " + Duke.getFormat();
     }
@@ -69,7 +69,7 @@ public class Ui {
      * Prints and returns the message when the user tries to update into and invalid date format.
      * @return the message.
      */
-    public static String unacceptableFormatMessage() {
+    public static String getUnacceptableFormatMessage() {
         System.out.println("Not an acceptable format. Please try again");
         return "Not an acceptable format. Please try again";
     }
@@ -78,7 +78,7 @@ public class Ui {
      * Prints and returns the current date format.
      * @return the message.
      */
-    public static String currentDateFormatMessage() {
+    public static String getCurrentDateFormatMessage() {
         System.out.println("Current format " + Duke.getFormat());
         return "Current format " + Duke.getFormat();
     }
@@ -87,7 +87,7 @@ public class Ui {
      * Prints and returns the message when the user inputs an unrecognised command.
      * @return The message.
      */
-    public static String noFormatSpecifiedMessage() {
+    public static String getNoFormatSpecifiedMessage() {
         System.out.println("No format specified. Please try again.");
         return "No format specified. Please try again.";
     }
@@ -105,7 +105,7 @@ public class Ui {
      * Prints out the goodbye message.
      * @return the message.
      */
-    public static String botShutdownMessage() {
+    public static String getBotShutdownMessage() {
         System.out.println("Good riddance! Time to continue my beauty sleep :)");
         return "Good riddance! Time to continue my beauty sleep :)";
     }
@@ -116,7 +116,7 @@ public class Ui {
      * @param list the list that the task is added to.
      * @return the message.
      */
-    public static String addTaskMessage(Task t, MyList list) {
+    public static String getAddTaskMessage(Task t, MyList list) {
         int noOfItems = list.getListSize();
         String s = "Got it! I have added: \n"
                 + t.toString()
@@ -135,7 +135,7 @@ public class Ui {
      * @param list the list that contains the items to be printed out.
      * @return the message.
      */
-    public static String listAllMessage(MyList list) {
+    public static String getListAllMessage(MyList list) {
         int listLength = list.getListSize();
         String output = "";
         if (listLength == 0) {
@@ -157,7 +157,7 @@ public class Ui {
      * @param list The list that the task has been deleted from.
      * @return the message.
      */
-    public static String deleteTaskMessage(Task t, MyList list) {
+    public static String getDeleteTaskMessage(Task t, MyList list) {
         int noOfItems = list.getListSize();
         String s = "Noted. I've removed this task: \n"
                 + t.toString()
@@ -177,7 +177,7 @@ public class Ui {
      * @param t The completed task that the user tries to mark as complete
      * @return the message
      */
-    public static String taskAlrCompleted(Task t) {
+    public static String getTaskAlrCompletedMessage(Task t) {
         String s = "`" + t.getDescription().substring(1) + "`" + " is already completed.";
         System.out.println(s);
         return s;
@@ -188,7 +188,7 @@ public class Ui {
      * @param e The task that was marked as completed.
      * @return the message
      */
-    public static String markCompleteEvent(Event e) {
+    public static String getMarkCompleteEventMessage(Event e) {
         String s = "Completed:"
                 + e.getDescription()
                 + " (at: "
@@ -204,7 +204,7 @@ public class Ui {
      * @param t The to do that was marked completed.
      * @return the message.
      */
-    public static String markCompleteTodo(Todo t) {
+    public static String getMarkCompleteTodoMessage(Todo t) {
         System.out.println("Finally! Took you long enough to complete:" + t.getDescription());
         return "Finally! Took you long enough to complete:" + t.getDescription();
     }
@@ -214,7 +214,7 @@ public class Ui {
      * @param d The deadline that was marked as completed.
      * @return the message.
      */
-    public static String markCompleteDeadline(Deadline d) {
+    public static String getMarkCompleteDeadlineMessage(Deadline d) {
         String s = "Completed: "
                 + d.getDescription()
                 + " (by: "
@@ -229,15 +229,15 @@ public class Ui {
      * @param counter The number of matching tasks.
      * @return the message.
      */
-    public static String containsKeyword(int counter) {
+    public static String getContainsKeywordMessage(int counter) {
 
         if (counter > 0) {
             if (counter == 1) {
                 System.out.println("There is 1 matching task in your list: \n");
                 return "There is 1 matching task in your list: \n";
             } else {
-                System.out.println("There are " + counter + " matching task in your list: \n");
-                return "There are " + counter + " matching task in your list: \n";
+                System.out.println("There are " + counter + " matching tasks in your list: \n");
+                return "There are " + counter + " matching tasks in your list: \n";
             }
         } else {
             System.out.println("There are no matching tasks in your list\n");
@@ -250,7 +250,7 @@ public class Ui {
      * @param matchingList The array containing the matching tasks.
      * @return the message.
      */
-    public static String containsKeywordTask(Task[] matchingList) {
+    public static String getTaskWithKeywordMessage(Task[] matchingList) {
         int noOfItems = matchingList.length;
         String s = "";
         for (int i = 0; i < noOfItems; i++) {
@@ -268,7 +268,7 @@ public class Ui {
      * Informs the user that he has not input a keyword after the find command.
      * @return the message.
      */
-    public static String noKeywordSpecifiedMessage() {
+    public static String getNoKeywordSpecifiedMessage() {
         System.out.println("No keyword specified. Please try again");
         return "No keyword specified. Please try again";
     }
@@ -278,7 +278,7 @@ public class Ui {
      * command is not accepted.
      * @return The message.
      */
-    public static String noDaySpecifiedMessage() {
+    public static String getNoDaySpecifiedMessage() {
         System.out.println("No proper timeframe specified. Please try again");
         return "No proper timeframe specified. Please try again";
     }
@@ -289,7 +289,7 @@ public class Ui {
      * @param daysWithin the number of days between today and the deadline.
      * @return The String representation of deadline including the days between.
      */
-    public static String withinDeadlineMessage(Deadline d, long daysWithin, int index) {
+    public static String getWithinDeadlineMessage(Deadline d, long daysWithin, int index) {
         if (daysWithin < 0) {
             long overdue = Math.abs(daysWithin);
             return index + ". " + d.toString() + " (overdue by " + overdue + " days)\n";
@@ -324,7 +324,7 @@ public class Ui {
         return "Your list has been cleared.";
     }
 
-    public static String getHelp() {
+    public static String getHelpMessage() {
         return "Here are the commands duke supports:\n"
                 + "1. todo {description}\n"
                 + "2. deadline {description} /by {date}\n"

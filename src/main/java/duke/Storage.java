@@ -61,8 +61,8 @@ public class Storage {
         try {
             t = getTask(s);
         } catch (WrongCommandFormatException e) {
-            Ui.formatExceptionMessage(e);
-            Ui.loadingError();
+            Ui.getFormatExceptionMessage(e);
+            Ui.getLoadingErrorMessage();
         }
         return t;
     }

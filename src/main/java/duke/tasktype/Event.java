@@ -145,10 +145,10 @@ public class Event implements Task {
     @Override
     public String markComplete() {
         if (this.isDone) {
-            return Ui.taskAlrCompleted(this);
+            return Ui.getTaskAlrCompletedMessage(this);
         } else {
             this.isDone = true;
-            return Ui.markCompleteEvent(this);
+            return Ui.getMarkCompleteEventMessage(this);
         }
     }
 

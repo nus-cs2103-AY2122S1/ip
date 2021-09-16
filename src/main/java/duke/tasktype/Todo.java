@@ -91,10 +91,10 @@ public class Todo implements Task {
     @Override
     public String markComplete() {
         if (isDone) {
-            return Ui.taskAlrCompleted(this);
+            return Ui.getTaskAlrCompletedMessage(this);
         } else {
             this.isDone = true;
-            return Ui.markCompleteTodo(this);
+            return Ui.getMarkCompleteTodoMessage(this);
         }
     }
 

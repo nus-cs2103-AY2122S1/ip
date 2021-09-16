@@ -103,7 +103,7 @@ public class Controller {
      * @return The label to be added to the scene.
      */
     public Label getWelcomeMessage() {
-        Label textToAdd = new Label(Ui.welcomeMessage());
+        Label textToAdd = new Label(Ui.getWelcomeMessage());
         return textToAdd;
     }
 

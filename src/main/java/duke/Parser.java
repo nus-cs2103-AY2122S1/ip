@@ -72,13 +72,13 @@ public class Parser {
             response = getSetFormatResponse();
             break;
         case "format":
-            response = Ui.currentDateFormatMessage();
+            response = Ui.getCurrentDateFormatMessage();
             break;
         case "find":
             response = getFindResponse();
             break;
         case "bye":
-            response = Ui.botShutdownMessage();
+            response = Ui.getBotShutdownMessage();
             this.isRunning = false;
             break;
         case "remind":
@@ -111,7 +111,7 @@ public class Parser {
             counter++;
         }
         if (counter == 0) {
-            response = Ui.invalidIndexMessage();
+            response = Ui.getInvalidIndexMessage();
         }
         return response;
     }
@@ -131,7 +131,7 @@ public class Parser {
             response = this.list.addTask(newTodo);
             this.storage.writeToFile();
         } catch (WrongCommandFormatException e) {
-            response = Ui.formatExceptionMessage(e);
+            response = Ui.getFormatExceptionMessage(e);
         }
         return response;
     }
@@ -151,7 +151,7 @@ public class Parser {
             response = this.list.addTask(newDeadline);
             this.storage.writeToFile();
         } catch (WrongCommandFormatException e) {
-            response = Ui.formatExceptionMessage(e);
+            response = Ui.getFormatExceptionMessage(e);
         }
         return response;
     }
@@ -171,7 +171,7 @@ public class Parser {
             response = this.list.addTask(newEvent);
             this.storage.writeToFile();
         } catch (WrongCommandFormatException e) {
-            response = Ui.formatExceptionMessage(e);
+            response = Ui.getFormatExceptionMessage(e);
         }
         return response;
     }
@@ -187,7 +187,7 @@ public class Parser {
             response = this.list.deleteTask(index);
             this.storage.writeToFile();
         } else {
-            response = Ui.invalidIndexMessage();
+            response = Ui.getInvalidIndexMessage();
         }
         return response;
     }
@@ -201,13 +201,13 @@ public class Parser {
         if (this.s.hasNextLine()) {
             try {
                 Duke.setFormat(this.s.nextLine().substring(1));
-                response = Ui.formatUpdatedMessage();
+                response = Ui.getFormatUpdatedMessage();
                 this.storage.writeToFile();
             } catch (IllegalArgumentException e) {
-                response = Ui.unacceptableFormatMessage();
+                response = Ui.getUnacceptableFormatMessage();
             }
         } else {
-            response = Ui.noFormatSpecifiedMessage();
+            response = Ui.getNoFormatSpecifiedMessage();
         }
         return response;
     }
@@ -221,7 +221,7 @@ public class Parser {
         if (this.s.hasNextLine()) {
             response = this.list.find(this.s.nextLine());
         } else {
-            response = Ui.noKeywordSpecifiedMessage();
+            response = Ui.getNoKeywordSpecifiedMessage();
         }
         return response;
     }
@@ -237,7 +237,7 @@ public class Parser {
             daysFromToday = this.s.nextInt();
             response = this.list.findDeadlineWithin(daysFromToday);
         } else {
-            response = Ui.noDaySpecifiedMessage();
+            response = Ui.getNoDaySpecifiedMessage();
         }
         return response;
     }
@@ -257,6 +257,6 @@ public class Parser {
      * @return Duke's response
      */
     private String getHelpResponse() {
-        return Ui.getHelp();
+        return Ui.getHelpMessage();
     }
 }
