@@ -36,10 +36,11 @@ public class TodoCommand extends Command {
      * @return A CommandResult detailing the result of adding a ToDo task.
      * @throws DukeException if the provided target index is not in range.
      */
-    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
+            throws DukeException {
         ToDo task = new ToDo(this.description);
-
         taskList.addTask(task);
+        storage.saveTasks(taskList);
         return new CommandResult(response.showAddedTask(taskList, task));
     }
 }

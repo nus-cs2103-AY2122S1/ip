@@ -44,6 +44,7 @@ public class DeleteCommand extends Command {
         assert target >= 1 : "Target index for Delete should be at least 1!";
 
         Task removed = taskList.deleteTask(target);
+        storage.saveTasks(taskList);
         return new CommandResult(response.showRemovedTask(taskList, removed));
     }
 }

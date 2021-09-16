@@ -7,12 +7,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 /**
  * A class encapsulating a DialogBox, which contains text and an Image representing the user.
@@ -46,8 +55,16 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Change font and font colour of text
+        Color c = Color.web("#475161");
         dialog.setText(text);
+        dialog.setTextFill(c);
+        dialog.setFont(new Font("Helvetica", 16));
+
+        // Make display picture into a circle
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle( 47, 45, 45));
     }
 
     /**
@@ -68,7 +85,11 @@ public class DialogBox extends HBox {
      * @return A DialogBox representing a message from the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        Color c = Color.web("#BFDC36");
+        BackgroundFill backgroundFill = new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY);
+        db.setBackground(new Background(backgroundFill));
+        return db;
     }
 
     /**
@@ -81,6 +102,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        Color c = Color.web("#FF614C");
+        BackgroundFill backgroundFill = new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY);
+        db.setBackground(new Background(backgroundFill));
         return db;
     }
 }

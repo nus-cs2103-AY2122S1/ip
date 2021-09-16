@@ -1,6 +1,6 @@
 T | 0 | bye
 T | 0 | why there
-T | 0 | kekw
+T | 1 | kekw
 D | 0 | kekw | 23-03-2020 23:59
 E | 0 | kekw | 23-03-2020 04:59
-DA | 1 | kekeke | 23-03-2019 23:40
+DA | 0 | test4 | 04-04-2025 23:40
