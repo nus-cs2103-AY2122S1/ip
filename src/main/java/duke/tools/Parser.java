@@ -60,7 +60,8 @@ public class Parser {
             }
             return Duke.findTask(command);
         } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I'm sorry, but I don't know what that means :-( \n"
+                + "\n You can refer to this user guide for help: \n" + "       https://erwinqxy.github.io/ip/" );
         }
     }
 }
