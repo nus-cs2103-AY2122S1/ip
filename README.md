@@ -22,9 +22,8 @@ dory is a personalised chatbot that handles your queries and helps you to rememb
 2.  download the **.jar** file
 3. create an empty folder anywhere on your computer
 4. drag the **.jar** file into the folder
-5. open your terminal and navigate to the folder
-6. type 'java -jar (name-of-jar-file).jar' and hit enter
-7. have fun, refer to the user guide for more help!
+5. double click the **.jar** file to open the bot
+6. have fun, refer to the user guide for more help!
 
 ## ✨ user guide
 to find out more on how to use it, refer to the [*user guide*](https://kvihashini.github.io/ip/)
