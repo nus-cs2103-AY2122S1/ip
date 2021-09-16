@@ -15,15 +15,12 @@ import duke.exceptions.DukeException;
  * Parser to parse user commands.
  */
 public class Parser {
-    private static final String[] UNRECOGNISED_HELP_ARGS = new String[]{"help"};
     private TaskArrayList taskList;
-
-
 
     /**
      * Constructor for Parser.
      *
-     * @param taskList TaskArrayList object to work with.
+     * @param taskList TaskArrayList object to work with
      */
     Parser(TaskArrayList taskList) {
         this.taskList = taskList;
@@ -65,6 +62,5 @@ public class Parser {
                     + new CommandHelp(cmdArgsArr, taskList).run());
         }
     }
-
 
 }

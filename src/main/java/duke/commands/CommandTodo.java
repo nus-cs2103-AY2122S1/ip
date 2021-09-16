@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 /**
- * Command to execute when user types "todo"
+ * Command to execute when user types "todo".
  */
 public class CommandTodo extends Command {
     public static final String HELP_COMMAND = "todo";

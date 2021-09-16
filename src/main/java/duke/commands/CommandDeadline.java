@@ -8,7 +8,7 @@ import duke.tasks.Task;
 
 
 /**
- * Command to execute when user types "deadline"
+ * Command to execute when user types "deadline".
  */
 public class CommandDeadline extends Command {
     public static final String HELP_COMMAND = "deadline";

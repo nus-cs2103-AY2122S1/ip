@@ -5,8 +5,6 @@ package duke.tasks;
  */
 public class Todo extends Task {
 
-    public static final String USAGE_TEXT = "Usage : todo <task name>";
-
     /**
      * Default constructor for a new task.
      *
@@ -19,8 +17,8 @@ public class Todo extends Task {
     /**
      * Full constructor with all fields exposed.
      *
-     * @param name task name.
-     * @param done state of task done.
+     * @param name task name
+     * @param done state of task done
      */
     public Todo(String name, boolean done) {
         super(name, done);

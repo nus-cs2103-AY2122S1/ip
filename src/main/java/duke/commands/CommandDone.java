@@ -6,7 +6,7 @@ import duke.exceptions.DukeException;
 
 
 /**
- * Command to execute when user types "done"
+ * Command to execute when user types "done".
  */
 public class CommandDone extends Command {
     public static final String HELP_COMMAND = "done";

@@ -13,9 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * DialogBox containing the userName and the dialog of the user.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -46,12 +44,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox for the user's text.
+     *
+     * @param userName name of the user
+     * @param text text that should be associated with the user
+     * @return DialogBox representing the user's half of the conversation
+     */
     public static DialogBox getUserDialog(String userName, String text) {
         DialogBox db = new DialogBox(userName, text);
         db.getStyleClass().add("userBox");
         return db;
     }
 
+    /**
+     * Creates a DialogBox for Duke's dialog under normal operation.
+     *
+     * @param userName name of the bot
+     * @param text text that the bot replied with
+     * @return DialogBox representing bot's half of the conversation
+     */
     public static DialogBox getDukeDialog(String userName, String text) {
         var db = new DialogBox(userName, text);
         db.getStyleClass().add("dukeBox");
@@ -59,6 +71,13 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates a DialogBox for Duke's dialog when there is an error.
+     *
+     * @param userName name of the bot
+     * @param text text that the bot replied with
+     * @return DialogBox representing bot's half of the conversation
+     */
     public static DialogBox getDukeDialogError(String userName, String text) {
         var db = new DialogBox(userName, text);
         db.getStyleClass().add("dukeBoxError");

@@ -5,7 +5,7 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeExitException;
 
 /**
- * Command to execute when user types "bye"
+ * Command to execute when user types "bye".
  */
 public class CommandBye extends Command {
     public static final String HELP_COMMAND = "bye";

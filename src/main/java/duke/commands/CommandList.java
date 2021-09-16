@@ -4,7 +4,7 @@ import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
 /**
- * Command to execute when user types "list"
+ * Command to execute when user types "list".
  */
 public class CommandList extends Command {
     public static final String HELP_COMMAND = "list";

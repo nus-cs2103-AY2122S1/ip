@@ -5,19 +5,19 @@ package duke.tasks;
  */
 abstract public class Task {
     protected String name;
-    protected boolean isTaskDone = false;
+    protected boolean isTaskDone;
 
     /**
      * Default constructor for a new task.
      *
-     * @param name task name.
+     * @param name task name
      */
     public Task(String name) {
         this(name, false);
     }
 
     /**
-     * Full constructor with all fields exposed
+     * Full constructor with all fields exposed.
      *
      * @param name task name
      * @param isTaskDone done state
@@ -30,7 +30,7 @@ abstract public class Task {
     /**
      * Generates the message printed when this task is added.
      *
-     * @return added: task name.
+     * @return added: task name
      */
     public String addMsg() {
         return "added: " + this.name;
@@ -46,7 +46,7 @@ abstract public class Task {
     /**
      * Gets the name for this task.
      *
-     * @return task name.
+     * @return task name
      */
     public String getTaskName() {
         return this.name;
@@ -59,7 +59,7 @@ abstract public class Task {
     /**
      * Returns json-like representation of object data.
      *
-     * @return String representation of data.
+     * @return String representation of data
      */
     public abstract String serialize();
     // newline is the only? reliable way to divide data without escape characters

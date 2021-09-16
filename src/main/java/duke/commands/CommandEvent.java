@@ -6,7 +6,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
- * Command to execute when user types "event"
+ * Command to execute when user types "event".
  */
 public class CommandEvent extends Command {
     public static final String HELP_COMMAND = "event";

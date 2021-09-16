@@ -17,7 +17,7 @@ public class Duke {
     private Path storagePath;
 
     /**
-     * Create a Duke instance
+     * Creates a Duke instance.
      */
     public Duke() {
         storagePath = Paths.get(".", "data", "duke.txt");
@@ -30,7 +30,7 @@ public class Duke {
     }
 
     /**
-     * Get the response for a given user command input
+     * Gets the response for a given user command input.
      *
      * @param userInput command typed by user
      * @return Message to print on screen for user

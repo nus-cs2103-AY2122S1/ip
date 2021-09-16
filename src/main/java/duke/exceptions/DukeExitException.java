@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Exception raised when unable to read save file.
+ * Exception raised when duke should exit.
  */
 public class DukeExitException extends DukeException {
     /**

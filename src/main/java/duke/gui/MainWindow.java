@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     /**
-     * Initialize the window with welcome dialog
+     * Initialize the window with welcome dialog.
      */
     @FXML
     public void initialize() {
@@ -36,6 +36,11 @@ public class MainWindow extends AnchorPane {
         displayWelcomeDialog();
     }
 
+    /**
+     * Sets the duke backend to use for this front end instance.
+     *
+     * @param d Duke backend object to use
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -62,7 +67,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Format user dialog and dike response
+     * Format user dialog and duke response.
      *
      * @param input    user input String
      * @param response duke response String

@@ -4,7 +4,7 @@ import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
 /**
- * Abstract base class for commands
+ * Abstract base class for commands.
  */
 abstract class Command {
     public static String HELP_DESCRIPTION;
@@ -14,7 +14,7 @@ abstract class Command {
     protected TaskArrayList taskList;
 
     /**
-     * Sets up a command using the command, arguments and task list
+     * Sets up a command using the command, arguments and task list.
      *
      * @param cmdArgsArr String array of command , optional 2nd member arguments
      * @param taskList   list of tasks stored by Duke

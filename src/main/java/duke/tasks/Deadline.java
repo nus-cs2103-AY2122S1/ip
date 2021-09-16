@@ -8,7 +8,6 @@ import java.time.temporal.ChronoUnit;
  * Deadline task for tasks that have an end date.
  */
 public class Deadline extends Task {
-    public static final String USAGE_TEXT = "Usage: deadline <task name> /by <deadline> ";
 
     private String by;
     private LocalDate byDate;
@@ -16,8 +15,8 @@ public class Deadline extends Task {
     /**
      * Default constructor for a new task.
      *
-     * @param name task name.
-     * @param by   deadline for deadline task.
+     * @param name task name
+     * @param by   deadline for deadline task
      */
     public Deadline(String name, String by) {
         this(name, false, by);
@@ -26,9 +25,9 @@ public class Deadline extends Task {
     /**
      * Full constructor with all fields exposed.
      *
-     * @param name task name.
-     * @param done boolean state of task done.
-     * @param by   deadline for deadline task.
+     * @param name task name
+     * @param done boolean state of task done
+     * @param by   deadline for deadline task
      */
     public Deadline(String name, boolean done, String by) {
         super(name, done);

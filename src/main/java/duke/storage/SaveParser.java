@@ -25,7 +25,7 @@ public class SaveParser {
     /**
      * Constructs a Save parser.
      *
-     * @param scanner scanner object that is reading the save file.
+     * @param scanner scanner object that is reading the save file
      */
     SaveParser(Scanner scanner) {
         this.scanner = scanner;
@@ -43,8 +43,8 @@ public class SaveParser {
     /**
      * Extracts next task from save file and return it as object.
      *
-     * @return new task from save file.
-     * @throws DukeReadSaveException if there is an invalid task.
+     * @return new task from save file
+     * @throws DukeReadSaveException if there is an invalid task
      */
     public Task getNextTask() throws DukeReadSaveException {
         String[] taskType = this.scanner.nextLine().split(":", 2);
@@ -64,7 +64,7 @@ public class SaveParser {
     }
 
     /**
-     * Test if next line of savefile is the start of a new task block
+     * Test if next line of savefile is the start of a new task block.
      *
      * @return true if next line of savefile is the start of a new task block
      */
@@ -73,7 +73,7 @@ public class SaveParser {
     }
 
     /**
-     * Parse the next line of the savefile and extract Key:Value as a 2 member string array
+     * Parse the next line of the savefile and extract Key:Value as a 2 member string array.
      *
      * @return Pair of [Key,Value]
      */
@@ -82,7 +82,7 @@ public class SaveParser {
     }
 
     /**
-     * Create a checklist of arguments to mark found
+     * Create a checklist of arguments to mark found.
      *
      * @param args String vargs of the keys to add to checklist
      * @return HashMap checklist of (String Key, Boolean found)

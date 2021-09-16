@@ -4,7 +4,7 @@ import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
 /**
- * Command to execute when user types "delete"
+ * Command to execute when user types "delete".
  */
 public class CommandDelete extends Command {
     public static final String HELP_COMMAND = "delete";

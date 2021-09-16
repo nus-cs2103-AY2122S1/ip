@@ -8,8 +8,6 @@ import duke.commands.CommandFind;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
-
-
 /**
  * Array List of Task objects.
  */
@@ -34,7 +32,7 @@ public class TaskArrayList extends ArrayList<Task> {
     }
 
     /**
-     * Check if the provided task number exists in the list
+     * Checks if the provided task number exists in the list.
      *
      * @param taskNo Task number to check
      * @return true if there is a task with that task number in the list
@@ -66,16 +64,16 @@ public class TaskArrayList extends ArrayList<Task> {
     /**
      * Generates the message to print when tasklist length changes.
      *
-     * @return You now have X task(s) in the list.
+     * @return You now have X task(s) in the list
      */
     private String announceNewLength() {
         return String.format("Now you have %d %s in the list.", this.size(), this.size() == 1 ? "task" : "tasks");
     }
 
     /**
-     * Enumerates members for printing
+     * Enumerates members for printing.
      *
-     * @return String[] of "X. taskname".
+     * @return String[] of "X. taskname"
      */
     public String enumerate() {
         StringBuilder out = new StringBuilder();
@@ -88,7 +86,7 @@ public class TaskArrayList extends ArrayList<Task> {
     }
 
     /**
-     * Find all tasks that contain the searchTerm
+     * Find all tasks that contain the searchTerm.
      * enumerate but only include if task string contains search term
      * use absolute task number so delete and done commands can reference this result
      *
@@ -110,9 +108,9 @@ public class TaskArrayList extends ArrayList<Task> {
     /**
      * Marks a task as done.
      *
-     * @param taskNo task number to mark.
-     * @return mark done message String.
-     * @throws DukeException when invalid task number provided.
+     * @param taskNo task number to mark
+     * @return mark done message String
+     * @throws DukeException when invalid task number provided
      */
     public String markDone(int taskNo) throws DukeException {
         if (!this.isValidTaskNo(taskNo)) {

@@ -4,7 +4,7 @@ import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
 /**
- * Command to execute when user types "help"
+ * Command to execute when user types "help".
  */
 public class CommandHelp extends Command {
     public static final String HELP_COMMAND = "help";
@@ -25,7 +25,7 @@ public class CommandHelp extends Command {
     }
 
     /**
-     * Parse the help command arguments and return appropriate response
+     * Parses the help command arguments and return appropriate response.
      *
      * @param cmdArgsArr 2 member String array containing [command, arguments]
      * @return relevant help message
@@ -64,7 +64,7 @@ public class CommandHelp extends Command {
     }
 
     /**
-     * Overview of valid commands
+     * Overview of valid commands.
      *
      * @return String of valid commands and brief description
      */

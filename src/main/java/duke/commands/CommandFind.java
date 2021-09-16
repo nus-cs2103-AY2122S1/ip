@@ -4,7 +4,7 @@ import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
 /**
- * Command to execute when user types "find"
+ * Command to execute when user types "find".
  */
 public class CommandFind extends Command {
     public static final String HELP_COMMAND = "find";

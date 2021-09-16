@@ -20,7 +20,7 @@ public class Storage {
     /**
      * Creates store file if required.
      *
-     * @param path path to store file.
+     * @param path path to store file
      */
     public static void createStore(Path path) {
         if (Files.exists(path)) {
@@ -38,8 +38,8 @@ public class Storage {
     /**
      * Loads store file as a TaskArrayList.
      *
-     * @param path path to store file.
-     * @return TaskArrayList of stored tasks.
+     * @param path path to store file
+     * @return TaskArrayList of stored tasks
      */
     public static TaskArrayList load(Path path) throws DukeException, IOException {
         createStore(path);
@@ -60,8 +60,8 @@ public class Storage {
     /**
      * Dumps a taskList to a store file.
      *
-     * @param taskList duke.TaskArrayList to store.
-     * @param path location to store taskList.
+     * @param taskList duke.TaskArrayList to store
+     * @param path location to store taskList
      */
     public static void dump(TaskArrayList taskList, Path path) {
         createStore(path);
