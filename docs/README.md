@@ -9,15 +9,14 @@
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Double-click the file to start the app and you should see the following GUI.
 
-![Image of Duke]
-(https://github.com/Shivlock221b/ip/tree/master/docs/Ui.png)
+![Image of Duke](/docs/Ui.png)
 
 ### Features
 
 #### Create a todo task : *todo*
  Adds a task with no time limit to the task list
 
- Format: *todo* **NAME OF TASK**
+ Format: *todo* **<NAME OF TASK>**
 
  *Example*
 
@@ -26,7 +25,7 @@
 #### Create an Event task : *event*
  Adds a task with a specified time to the task list
 
- Format: *event* **NAME OF TASK** /at **TIME**
+ Format: *event* **<NAME OF TASK>** /at **<TIME>**
 
  *Example*
 
@@ -35,7 +34,7 @@
 #### Create a Deadline task : *deadline*
  Adds a task with a deadline time to the task list
 
- Format: *deadline* **NAME OF THE TASK** /by **TIME IN THIS FORMAT YYYY-MM-DD**
+ Format: *deadline* **<NAME OF THE TASK>** /by **<TIME IN THIS FORMAT YYYY-MM-DD>**
 
  *Example*
 
@@ -44,7 +43,7 @@
 #### Mark a task in the list as done : *done*
  Marks a task in the list as done i.e. puts a cross in front of the task in the list
 
- Format: *done* **INDEX OF TASK IN THE LIST**
+ Format: *done* **<INDEX OF TASK IN THE LIST>**
 
  *Example*
 
@@ -58,8 +57,8 @@
 #### Update a time of tasks in the list : *update*
  Updates the time of tasks in the list, mainly events and deadlines, since todo tasks have no time
 
- Format for events:    *update* **INDEX OF TASK IN THE LIST** /to **NEW TIME**
- Format for deadlines: *update* **INDEX OF TASK IN THE LIST** /to **NEW TIME IN THIS FORMAT YYYY-MM-DD**
+ Format for events:    *update* **<INDEX OF TASK IN THE LIST>** /to **<NEW TIME>**
+ Format for deadlines: *update* **<INDEX OF TASK IN THE LIST>** /to **<NEW TIME IN THIS FORMAT YYYY-MM-DD>**
 
  *Example*
 
@@ -69,7 +68,7 @@
 #### Delete a task from the task list : *delete*
  Deletes a task from the list
 
- Format: *delete* **INDEX OF THE TASK IN THE LIST**
+ Format: *delete* **<INDEX OF THE TASK IN THE LIST>**
 
  *Example*
 
@@ -78,7 +77,7 @@
 #### Find a list of matching tasks from the list : *find*
  Finds a list of tasks from teh task list, containing all the tasks the match the given expression
 
- Format: *find* **EXPRESSION TO BE SEARCHED**
+ Format: *find* **<EXPRESSION TO BE SEARCHED>**
 
  *Example*
 
