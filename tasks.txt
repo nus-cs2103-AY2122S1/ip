@@ -2,3 +2,4 @@ E|1| hangout with friends | Sat, Sep 18 2021 12:00 pm
 T|1| text friends 
 T|0| do laundry 
 D|1| do hw | Mon, Oct 04 2021 12:00 pm
+E|0| go concert | Mon, Oct 18 2021 12:00 pm

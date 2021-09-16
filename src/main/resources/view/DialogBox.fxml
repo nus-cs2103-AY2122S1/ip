@@ -13,7 +13,7 @@
         <Label fx:id="dialog" minHeight="-Infinity" style="-fx-background-color: #d0b5c1; -fx-text-fill: #400f51;
         -fx-label-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5;" text="Label" wrapText="true">
             <HBox.margin>
-                <Insets right="5.0" />
+                <Insets right="5.0" left="5.0"/>
             </HBox.margin></Label>
         <Circle fx:id="displayPicture" fill="#ffffff" radius="30.0" stroke="#ffffff" strokeLineCap="ROUND"
                 strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="0.5" />
