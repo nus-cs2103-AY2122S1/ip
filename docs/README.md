@@ -187,14 +187,14 @@ Expected outcome:
 ## Command summary
 |      Action      | Format, Examples                                                                                            |
 |:----------------:|:----------------------------------------------------------------------------------------------------------- |
-|   **Add ToDo**   | `todo <description>` Adds a task to the task list.|                                                            |
-| **Add Deadline** | `deadline <description> /by <date> <time>` Adds a task with a deadline to the task list.|
-|  **Add Event**   | `event <description> /at <date> <time>` Adds an event to the task list.
-|     **Done**     | `done <index>` Marks the specified task as done.                                                                     |
-|    **Delete**    | `delete <index>` Deletes the specified task.                                                                    |
-|    **Archive**    | `archive <index>` Archives the specified task.
-|     **List**     | `list` Shows a list of all tasks.
-|    **Archives**    | `archives` Shows a list of all archived tasks.  |
-|     **Find**     | `find <keyword>` Find tasks whose descriptions contain the keyword.                                                       |
-|     **Help**     | `help` Shows the list of commands Sun can handle.                                                                                              |
-|     **Terminate**     | `bye` Exits Sun GUI.                                                                                                       |
+|   **Add ToDo**   | `todo <description>` Adds a task to the task list.                                                          |
+| **Add Deadline** | `deadline <description> /by <date> <time>` Adds a task with a deadline to the task list.                    |
+|  **Add Event**   | `event <description> /at <date> <time>` Adds an event to the task list.                                     |
+|     **Done**     | `done <index>` Marks the specified task as done.                                                            |
+|    **Delete**    | `delete <index>` Deletes the specified task.                                                                |
+|    **Archive**    | `archive <index>` Archives the specified task.                                                             |
+|     **List**     | `list` Shows a list of all tasks.                                                                           |            
+|    **Archives**    | `archives` Shows a list of all archived tasks.                                                            |
+|     **Find**     | `find <keyword>` Find tasks whose descriptions contain the keyword.                                         |
+|     **Help**     | `help` Shows the list of commands Sun can handle.                                                           |
+|     **Terminate**     | `bye` Exits Sun GUI.                                                                                   |
