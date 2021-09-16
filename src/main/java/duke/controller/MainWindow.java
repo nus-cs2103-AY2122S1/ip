@@ -43,7 +43,7 @@ public class MainWindow extends Stage {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.getInitMessage(), dukeImage)
+                DialogBox.getDukeDialog(duke.getInitMessage(), dukeImage, duke.hasException())
         );
     }
 
@@ -62,7 +62,7 @@ public class MainWindow extends Stage {
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, duke.hasException())
         );
         userInput.clear();
     }

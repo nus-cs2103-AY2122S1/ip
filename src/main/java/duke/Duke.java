@@ -31,6 +31,7 @@ public class Duke {
     private TaskList taskList;
     private String initMessage = "";
     private boolean isTerminated = false;
+    private boolean hasException = false;
 
     /**
      * Creates a Duke chat bot instance, using a file path for loading/saving.
@@ -50,6 +51,7 @@ public class Duke {
                 taskList = storage.loadTasksFromFile();
             }
         } catch (Exception e) {
+            hasException = true;
             initMessage += ui.showSaveFileLoadingError(e.getMessage());
             taskList = new TaskList();
         }
@@ -65,6 +67,7 @@ public class Duke {
             }
             Parser.setAliasHandler(aliasHandler);
         } catch (Exception e) {
+            hasException = true;
             initMessage += ui.showConfigLoadingError(e.getMessage());
             taskList = new TaskList();
         }
@@ -96,6 +99,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            hasException = false;
             Command command = Parser.parseCommandFromInput(input.trim());
             Result result = command.execute(taskList, ui, storage);
             // Duke should always give a non-empty response to a command
@@ -106,9 +110,11 @@ public class Duke {
             isTerminated = command.isTerminated();
             return result.getMessage();
         } catch (IOException e) {
+            hasException = true;
             return ui.showError("The data failed to save to the save file with error:"
                     + e.getMessage());
         } catch (Exception e) {
+            hasException = true;
             return ui.showError(e.getMessage());
         }
     }
@@ -120,5 +126,15 @@ public class Duke {
      */
     public boolean isTerminated() {
         return isTerminated;
+    }
+
+    /**
+     * Returns a boolean representing whether or not an exception was thrown
+     * while executing a command.
+     *
+     * @return True if an exception was caught, false otherwise.
+     */
+    public boolean hasException() {
+        return hasException;
     }
 }
