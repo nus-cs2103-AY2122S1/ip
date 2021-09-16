@@ -77,7 +77,7 @@ public class TaskManager {
             throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a time");
         } catch (DateTimeParseException e) {
             System.out.println("Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n "
-                    + "E.g. 2021-08-28T18:30");
+                    + "E.g. 2021-08-28 18:30");
         }
         return addedEvent;
     }
@@ -152,7 +152,7 @@ public class TaskManager {
             throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a time");
         } catch (DateTimeParseException e) {
             throw new DukeException.InvalidInputException("Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n "
-                    + "E.g. 2021-08-28T18:30");
+                    + "E.g. 2021-08-28 18:30");
         }
         return snoozedTask;
     }
