@@ -7,9 +7,6 @@ import duke.command.Command;
  */
 public class Duke {
 
-    /** The filepath for storage */
-    private static final String FILE_PATH = "data/tasks.txt";
-
     /** The storage utility */
     private Storage storage;
 
@@ -28,8 +25,8 @@ public class Duke {
     /**
      * The constructor for Duke class
      */
-    public Duke() {
-        storage = new Storage(FILE_PATH);
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -40,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * Method to execute the user command, and return a response to user
+     * Executes the user command, and returns a response to user.
      *
      * @param input The user command input
      */
