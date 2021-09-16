@@ -146,12 +146,14 @@ public class Duke extends Application{
             switch (parsedCommand[0]) {
             case "done":
                 //Marks tasks as done
-                int index = Integer.valueOf(parsedCommand[1]) - 1;
+                int index = Integer.parseInt(parsedCommand[1]) - 1;
+                assert index > 0 : "index should be positive";
                 return tasks.setDone(index);
 
             case "delete":
                 //Deletes tasks
                 int indexD = Integer.valueOf(parsedCommand[1]) - 1;
+                assert indexD > 0 : "index should be positive";
                 return tasks.deleteTask(indexD);
 
             case "find":
@@ -289,6 +291,7 @@ public class Duke extends Application{
     }
 
     public static void main(String[] args) {
+        System.out.println("here");
         new Duke("data/tasks.txt").run();
     }
 }
