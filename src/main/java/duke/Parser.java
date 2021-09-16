@@ -83,6 +83,7 @@ public class Parser {
             } else if (checkInvalidDescription(input)) { //see if user submits a todo/event/delete but uses a wrong format
                 throw new InvalidDescription(input);
             } else if (input.equals("bye")) {
+                System.exit(0);
                 return ui.bye();
             } else {
                 throw new InvalidArgument();
