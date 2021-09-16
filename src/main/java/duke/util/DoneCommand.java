@@ -27,7 +27,7 @@ public class DoneCommand implements Command{
      * @param ui Ui that prints message to users.
      * @param storage Storage to save and load data.
      * @return String representation of duke's response for done command.
-     * @throws DukeException If no task number entered or invalid task number entered.
+     * @throws DukeException If no task number or invalid task number entered.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

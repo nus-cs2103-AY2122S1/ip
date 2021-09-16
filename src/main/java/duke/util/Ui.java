@@ -98,7 +98,7 @@ public class Ui {
 
     /**
      * Returns string of tasks in list.
-     *
+     * @param tasks Array list of task to be printed.
      * @return String representation of tasks in list.
      */
     public String showTasks(ArrayList<Task> tasks) {

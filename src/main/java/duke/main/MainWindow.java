@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void initialDialog() {
+    private void getInitialDialog() {
         if (!hasShownMenu) {
             String response = ui.showWelcome();
             dialogContainer.getChildren().addAll(

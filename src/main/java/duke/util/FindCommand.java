@@ -24,7 +24,7 @@ public class FindCommand implements Command {
      * @param tasks List of tasks.
      * @param ui Ui that prints message to users.
      * @param storage Storage to save and load data.
-     * @return String representation of duke's response for find command.
+     * @return String representation of response for find command.
      * @throws DukeException If no keyword for find command entered.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

@@ -13,7 +13,7 @@ public class ListCommand implements Command {
      * @param tasks List of tasks.
      * @param ui Ui that prints message to users.
      * @param storage Storage to save and load data.
-     * @return String representation of duke's response for list command.
+     * @return String representation of response for list command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

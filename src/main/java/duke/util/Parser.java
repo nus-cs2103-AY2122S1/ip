@@ -56,7 +56,7 @@ public class Parser {
      * Returns array of string that stores description and date of task.
      *
      * @param userInput Array that stores task type and details of task.
-     * @param regex Regex to split the details of task into description and date.
+     * @param regex Regex to split the task details into description and date.
      * @param taskType Type of task.
      * @return Array of string containing description and date respectively.
      * @throws DukeException If userInput doesn't contain description or date.

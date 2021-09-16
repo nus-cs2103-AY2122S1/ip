@@ -98,7 +98,7 @@ public class Storage {
      * Sets task to done if they were saved as done previously.
      *
      * @param tasks Array list into which task is added
-     * @param task Task to be set as done or not.
+     * @param task Task to be set as done or not and loaded.
      * @param isTaskDone Boolean of whether task has been done.
      */
     private void setDoneAndAddToList(ArrayList<Task> tasks, Task task, boolean isTaskDone) {

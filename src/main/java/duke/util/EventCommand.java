@@ -31,7 +31,7 @@ public class EventCommand implements Command{
      * @param ui Ui that prints message to users.
      * @param storage Storage to save and load data.
      * @return String representation of duke's response for event command.
-     * @throws DukeException If no description or time entered for event command.
+     * @throws DukeException If no description/time entered for event command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

@@ -30,7 +30,7 @@ public class DeadlineCommand implements Command{
      * @param ui Ui that prints message to users.
      * @param storage Storage to save and load data.
      * @return String representation of duke's response for deadline command.
-     * @throws DukeException If there is no description or time input for deadline.
+     * @throws DukeException If there's no description or time for deadline.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

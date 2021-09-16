@@ -1,3 +1,0 @@
-T|1|run
-E|0|quiz|2021-01-01T11:30
-D|0|submit assignment|2021-10-10T23:59
