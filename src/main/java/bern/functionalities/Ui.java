@@ -89,7 +89,6 @@ public class Ui {
             throw new EmptyDescriptionException("todo");
         }
         ToDo addition = new ToDo(input.substring(len + 1));
-        System.out.println(arListTask.contains(addition));
         if (arListTask.contains(addition)) {
             throw new DuplicateException(input);
         }
@@ -258,48 +257,6 @@ public class Ui {
         assert input.length() > 4 : "done input is invalid";
         return "Good job! I've marked this task as done:\n"
                 + arListTask.get(index).toString();
-    }
-
-    /**
-     * A method to process input from parsing to replying to writing into file.
-     *
-     * @param input The given command.
-     * @param arListTask The initial ArrayList of Tasks.
-     */
-    public void processInput(String input, ArrayList<Task> arListTask) {
-        try {
-            if (parser.isDone(input)) {
-                System.out.println(new Ui().getReply(Command.DONE, input, arListTask));
-                storage.writeIntoFile(arListTask);
-            } else if (parser.isDeadline(input)) {
-                System.out.println(new Ui().getReply(Command.DEADLINE, input, arListTask));
-                storage.writeIntoFile(arListTask);
-            } else if (parser.isEvent(input)) {
-                System.out.println(new Ui().getReply(Command.EVENT, input, arListTask));
-                storage.writeIntoFile(arListTask);
-            } else if (parser.isToDo(input)) {
-                System.out.println(new Ui().getReply(Command.TODO, input, arListTask));
-                storage.writeIntoFile(arListTask);
-            } else if (parser.isBye(input)) {
-                System.out.println(new Ui().getReply(Command.BYE, input, arListTask));
-            } else if (parser.isList(input)) {
-                System.out.println(new Ui().getReply(Command.LIST, input, arListTask));
-                storage.writeIntoFile(arListTask);
-            } else if (parser.isDelete(input)) {
-                System.out.println(new Ui().getReply(Command.DELETE, input, arListTask));
-                storage.writeIntoFile(arListTask);
-            } else if (parser.isFind(input)) {
-                System.out.println(new Ui().getReply(Command.FIND, input, arListTask));
-            } else {
-                new Ui().getReply(Command.INVALID, input, arListTask);
-            }
-        } catch (Exception e) {
-            if (e instanceof BernException) {
-                System.out.println(e.getMessage());
-            } else {
-                System.out.println("non BernException: " + e.getMessage());
-            }
-        }
     }
 
     /**

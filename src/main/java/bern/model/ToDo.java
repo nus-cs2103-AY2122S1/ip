@@ -29,9 +29,6 @@ public class ToDo extends Task{
             return false;
         } else {
             ToDo compared = (ToDo) obj;
-            System.out.println("cut cut");
-            System.out.println(compared.description);
-            System.out.println(this.description);
             if (compared.description.equals(this.description)) {
                 System.out.println("yo guys im in");
                 return true;

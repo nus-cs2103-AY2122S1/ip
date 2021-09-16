@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import bern.functionalities.Storage;
 import bern.model.Task;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -59,6 +60,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            try {
+                Platform.exit();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
         userInput.clear();
     }
 }
