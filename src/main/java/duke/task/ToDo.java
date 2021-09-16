@@ -27,7 +27,7 @@ public class ToDo extends Task {
      */
     public ToDo(String description, boolean completed, List<String> tags) {
         this(description);
-        super.completed = completed;
+        super.isComplete = completed;
         super.tags = tags;
     }
 
@@ -50,7 +50,7 @@ public class ToDo extends Task {
      */
     @Override
     public String generateStorageString() {
-        return "T | " + super.completed + " | " + super.description + " | " + super.formatTags() + " | " + " ";
+        return "T | " + super.isComplete + " | " + super.description + " | " + super.formatTags() + " | " + " ";
     }
 
 }

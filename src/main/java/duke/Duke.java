@@ -9,7 +9,8 @@ import duke.task.TaskList;
 import java.io.File;
 
 /**
- * The entry point to the Duke chatbot.
+ * Represents the entry point to the Duke program.
+ * Calling start in Duke will start the chatbot.
  */
 public class Duke {
     private Storage storage;
@@ -45,8 +46,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response to a user input.
+     *
+     * @param input String input from user.
+     * @return String response from the bot.
      */
     public String getResponse(String input) {
         try {
@@ -57,7 +60,7 @@ public class Duke {
     }
 
     /**
-     * Set the ui to the given Ui object.
+     * Sets the ui to the given Ui object.
      *
      * @param ui Ui to be set
      */

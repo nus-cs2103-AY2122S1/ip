@@ -42,7 +42,7 @@ public class Event extends Task {
      */
     public Event(String desc, String at, boolean isCompleted, List<String> tags) {
         this(desc, at);
-        super.completed = isCompleted;
+        super.isComplete = isCompleted;
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
@@ -72,7 +72,7 @@ public class Event extends Task {
      */
     @Override
     public String generateStorageString() {
-        return "E | " + super.completed + " | " + super.description + " | " + super.formatTags() + " | " + this.at;
+        return "E | " + super.isComplete + " | " + super.description + " | " + super.formatTags() + " | " + this.at;
     }
 
     @Override

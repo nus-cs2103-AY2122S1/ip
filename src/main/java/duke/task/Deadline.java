@@ -44,7 +44,7 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String before, boolean isCompleted, List<String> tags) {
         this(desc, before);
-        super.completed = isCompleted;
+        super.isComplete = isCompleted;
         super.tags = tags;
     }
 
@@ -75,7 +75,7 @@ public class Deadline extends Task {
      */
     @Override
     public String generateStorageString() {
-        return "D | " + super.completed + " | " + super.description + " | " + super.formatTags() + " | " + this.by;
+        return "D | " + super.isComplete + " | " + super.description + " | " + super.formatTags() + " | " + this.by;
     }
 
     @Override

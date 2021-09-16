@@ -15,7 +15,7 @@ import java.util.Objects;
  * Encapsulates a task.
  */
 public abstract class Task {
-    protected boolean completed;
+    protected boolean isComplete;
     protected List<String> tags;
     protected String description;
 
@@ -26,7 +26,7 @@ public abstract class Task {
      */
     protected Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isComplete = false;
         this.tags = new ArrayList<>();
     }
 
@@ -80,7 +80,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String check = this.completed ? "[X] " : "[ ] ";
+        String check = this.isComplete ? "[X] " : "[ ] ";
         return check + description + formatTags();
     }
 
@@ -88,7 +88,7 @@ public abstract class Task {
      * Marks the Task as done.
      */
     public String markAsDone() {
-        this.completed = true;
+        this.isComplete = true;
         return Ui.getTaskDoneMessage(this);
     }
 
@@ -118,11 +118,11 @@ public abstract class Task {
             return false;
         }
         Task task = (Task) o;
-        return completed == task.completed && description.equals(task.description);
+        return isComplete == task.isComplete && description.equals(task.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(completed, description);
+        return Objects.hash(isComplete, description);
     }
 }
