@@ -15,13 +15,18 @@
    - [`help`](#help)
    - [`bye`](#bye)
    - [save](#save)
-### Download here   
+ 
+## [Download here](https://github.com/amzhy/ip/releases/download/A-Release/duke.jar)
+
 <br />
   
 ## Add Tasks
 
+---
 Adds a task of type `todo`/ `deadline`/ `event` to your list of tasks.
-<br></br>
+
+<br />
+
 ### `todo`
 
 Add a todo task that is not time-sensitive to your list of tasks.
@@ -81,8 +86,10 @@ Add an event with a specified date and time to your list of tasks.
 
 <br />
 
+
 ## View Tasks
 
+---
 ### `list`
 Shows all your current tasks with the completion status and task type.
 
@@ -96,6 +103,7 @@ Shows all your current tasks with the completion status and task type.
 
 ## Update Tasks
 
+---
 ### `done`
 Complete a task in your list of tasks.
 
@@ -135,6 +143,8 @@ Remove a task from your list of tasks.
 <br />
 
 ## Search Tasks
+
+---
 ### `find`
 Find relevant tasks with keyword.
 
@@ -155,6 +165,8 @@ Find relevant tasks with keyword.
 <br />
 
 ## Additional Features
+
+---
 ### `help`
 List all  supported commands with their respective formats.
 
