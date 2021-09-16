@@ -31,7 +31,7 @@ Duke is:
 - [x] store a **List** of tasks to be done
 - [x] add, **Delete** and mark tasks as **Done**
 - [x] **Find** tasks by **Due** dates or keywords
-- [x] **Reschedule** tasks to new dates (coming soon)
+- [x] **Reschedule** tasks to new dates
 
 **Here's a part of the program, maybe it can be of help in practising coding in Java, the `main` method:**
 ```java
