@@ -92,14 +92,14 @@ public class Duke {
         return String.format(LIST_TASK_TEMPLATE, tasks.toString());
     }
 
-    private String doneTask(int index) throws IOException {
+    private String doneTask(int index) throws IOException, DukeException {
         tasks.getTask(index).markAsDone();
         String res = String.format(MARK_DONE_MSG_TEMPLATE, tasks.getTask(index));
         taskStorage.backup(tasks);
         return res;
     }
 
-    private String deleteTask(int index) throws IOException {
+    private String deleteTask(int index) throws IOException, DukeException {
         String res = String.format(
             DELETE_TASK_MSG_TEMPLATE,
             tasks.deleteTask(index),
@@ -149,7 +149,7 @@ public class Duke {
     }
 
     /**
-     * Return the response of duke afer receiving the input.
+     * Return the response of duke after receiving the input.
      *
      * @param input The input to be parsed into a command and executed.
      * @return The response after executing the command.

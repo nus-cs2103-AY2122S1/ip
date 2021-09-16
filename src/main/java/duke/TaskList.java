@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * A class representing a list of tasks.
  */
 public class TaskList {
+    private static final String OUT_OF_BOUNDS_MSG = "Please choose a valid index! >:(";
     private ArrayList<Task> tasks;
 
     /**
@@ -38,7 +39,10 @@ public class TaskList {
      * @param index The number of which the task should be retrieved from.
      * @return The task numbered <code>index</code>.
      */
-    public Task getTask(int index) {
+    public Task getTask(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException(OUT_OF_BOUNDS_MSG);
+        }
         return tasks.get(index - 1);
     }
 
@@ -48,7 +52,10 @@ public class TaskList {
      * @param index The number of which the task should be removed.
      * @return The task removed.
      */
-    public Task deleteTask(int index) {
+    public Task deleteTask(int index) throws DukeException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException(OUT_OF_BOUNDS_MSG);
+        }
         return tasks.remove(index - 1);
     }
 
