@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private Image logo = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     /**
      * Starts and loads the applicaion.
      * Trigger duke to initialise all classes.
@@ -32,6 +35,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("DUKE");
+            stage.getIcons().add(logo);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

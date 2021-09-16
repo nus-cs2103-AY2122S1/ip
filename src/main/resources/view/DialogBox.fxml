@@ -21,7 +21,7 @@
                         </Label>
                         <Text fx:id="dialog" fill="#ddfff7" smooth="false" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="eqe3e2hriu3effwefwefoiwejfiowjefiojwofjowefjiwewfwifhjwofpjoejgoprejgopg34toi3jtioj3iot43itio3jtht3" textAlignment="RIGHT" textOrigin="TOP" wrappingWidth="275.0">
                             <font>
-                                <Font name="Arial" size="14.0" />
+                                <Font name="Consolas" size="12.0" />
                             </font>
                         </Text>
                     </children>
