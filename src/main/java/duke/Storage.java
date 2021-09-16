@@ -33,10 +33,10 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         try {
+            this.storage.mkdir();
             this.storage.createNewFile();
         } catch (IOException error) {
-            throw new DukeException("ensure you have created a folder named 'data' "
-                    + "within the main project directory!");
+            throw new DukeException("there was a error creating a file!");
         }
         try {
             // Initialisation of required objects
