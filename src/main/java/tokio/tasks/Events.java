@@ -3,6 +3,7 @@ package tokio.tasks;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import tokio.commands.Instruction;
 import tokio.exceptions.DukeException;
@@ -84,7 +85,8 @@ public class Events extends Task {
             return true;
         } else if (obj instanceof Events) {
             Events e = (Events) obj;
-            return this.description.equals(e.description) && this.date.equals(e.date) && this.time.equals(e.time);
+            return this.description.toLowerCase(Locale.ROOT).equals(e.description)
+                    && this.date.equals(e.date) && this.time.equals(e.time);
         } else {
             return false;
         }

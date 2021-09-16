@@ -1,5 +1,7 @@
 package tokio.tasks;
 
+import java.util.Locale;
+
 import tokio.commands.Instruction;
 
 /**
@@ -51,7 +53,7 @@ public class Todos extends Task {
             return true;
         } else if (obj instanceof Todos) {
             Todos t = (Todos) obj;
-            return this.description.equals(t.description);
+            return this.description.toLowerCase(Locale.ROOT).equals(t.description);
         } else {
             return false;
         }
