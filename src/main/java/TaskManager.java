@@ -23,7 +23,6 @@ public class TaskManager {
         this.path = path;
 
         if (!txtFile.exists()) {
-            //create new file
             try {
                 txtFile.createNewFile();
                 this.txtFile = txtFile;
