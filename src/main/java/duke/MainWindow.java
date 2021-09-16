@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
-    private Image admin = new Image(MainWindow.class.getResourceAsStream("/images/duke.png"));
-    private Image user = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
+    private final Image admin = new Image(MainWindow.class.getResourceAsStream("/images/duke.png"));
+    private final Image user = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML

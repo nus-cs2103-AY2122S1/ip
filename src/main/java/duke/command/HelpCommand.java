@@ -27,7 +27,7 @@ public class HelpCommand implements Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Collections.addAll(commandList, new ListCommand(), new AddTaskCommand(), new FindCommand(),
-                new DoneCommand(), new DeleteCommand(), new HelpCommand(), new ByeCommand(), new HelpCommand());
+                new DoneCommand(), new DeleteCommand(), new ByeCommand(), new HelpCommand());
         return ui.printAll(commandList, "Command Help: \n");
     }
     /**
