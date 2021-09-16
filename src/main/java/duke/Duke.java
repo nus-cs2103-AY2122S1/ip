@@ -42,8 +42,8 @@ public class Duke {
     public void run() {
         String rawInput;
         String output = "";
-        ui.greet();
         while (isRunning) {
+            Ui.printMessage(output);
             rawInput = Ui.getInput();
             output = getResponse(rawInput);
         }

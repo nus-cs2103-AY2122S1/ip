@@ -53,9 +53,8 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void greet() {
-        System.out.println(LOGO);
-        printMessage("Hello! I'm Bhutu, your personal chatbot!\nWhat can I do for you?");
+    public static String getWelcomeText() {
+        return "Hello! I'm Bhutu, your personal chatbot!\nWhat can I do for you today?";
     }
 
     /**
