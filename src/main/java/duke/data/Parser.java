@@ -1,8 +1,8 @@
 package duke.data;
 
-import duke.command.AddCommand;
+import duke.command.AddContactCommand;
+import duke.command.AddTaskCommand;
 import duke.command.Command;
-import duke.command.ContactCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
@@ -75,13 +75,13 @@ public class Parser {
         switch (keyword) {
 
         case "deadline":
-            return prepareAddCommand("deadline ", userInput, userInputArray, "/by");
+            return prepareAddTaskCommand("deadline ", userInput, userInputArray, "/by");
 
         case "event":
-            return prepareAddCommand("event ", userInput, userInputArray, "/at");
+            return prepareAddTaskCommand("event ", userInput, userInputArray, "/at");
 
         case "todo":
-            return prepareAddCommand("todo ", userInput, userInputArray, "");
+            return prepareAddTaskCommand("todo ", userInput, userInputArray, "");
 
         case "done":
             return prepareDoneCommand(userInputArray);
@@ -99,7 +99,7 @@ public class Parser {
             return prepareFindCommand(userInputArray);
 
         case "contact":
-            return prepareContactCommand( userInput, "/about");
+            return prepareAddContactCommand( userInput, "/about");
 
         case "help":
             return prepareHelpCommand(userInputArray);
@@ -110,15 +110,15 @@ public class Parser {
     }
 
     /**
-     * Checks for invalid inputs and returns an add command if input is valid.
+     * Checks for invalid inputs and returns an add task command if input is valid.
      *
      * @param keyword The type of task.
      * @param userInput userInput from parse method.
      * @param userInputArray userInputArray from parse method.
      * @param specialPhrase The string to split the task description(if any).
-     * @return An AddCommand.
+     * @return An AddTaskCommand.
      */
-    private static Command prepareAddCommand(String keyword,
+    private static Command prepareAddTaskCommand(String keyword,
             String userInput, String[] userInputArray, String specialPhrase) {
         String userInputWithoutKeyword = userInput.replace(keyword, "");
         switch (keyword) {
@@ -126,7 +126,7 @@ public class Parser {
             //checks if description is empty
             if (userInputArray.length > 1) {
                 ToDo newToDo = new ToDo(userInputWithoutKeyword);
-                return new AddCommand(newToDo);
+                return new AddTaskCommand(newToDo);
             } else {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
@@ -144,7 +144,7 @@ public class Parser {
             }
             String deadlineDescription = updatedDeadline[0];
             String deadlineDetail = updatedDeadline[1];
-            return new AddCommand(prepareDeadline(deadlineDescription, deadlineDetail));
+            return new AddTaskCommand(prepareDeadline(deadlineDescription, deadlineDetail));
 
         //Default will be for "event" keyword
         default:
@@ -161,14 +161,14 @@ public class Parser {
                 String eventDescription = updatedEvent[0];
                 String eventDetail = updatedEvent[1];
                 Event newEvent = new Event(eventDescription, eventDetail);
-                return new AddCommand(newEvent);
+                return new AddTaskCommand(newEvent);
             }
         }
     }
 
     /**
      * Checks if the date and time inputted by the user follows any of the formats allowed.
-     * To be used only in prepareAddCommand method.
+     * To be used only in prepareAddTaskCommand method.
      *
      * @param description Deadline description.
      * @param dateTime The date and time input as a string.
@@ -304,17 +304,17 @@ public class Parser {
     }
 
     /**
-     * Checks for invalid inputs and returns a contact command if input is valid.
+     * Checks for invalid inputs and returns an add contact command if input is valid.
      *
      * @param userInput userInput from parse method.
      * @param specialPhrase The string to split the task description(if any).
-     * @return A ContactCommand.
+     * @return A AddContactCommand.
      */
-    private static Command prepareContactCommand (String userInput, String specialPhrase) {
+    private static Command prepareAddContactCommand (String userInput, String specialPhrase) {
         String userInputWithoutKeyword = userInput.replace("contact ", "");
         //For contacts without details
         if(!userInputWithoutKeyword.contains(specialPhrase)) {
-            return new ContactCommand(new Contact(userInputWithoutKeyword, " "));
+            return new AddContactCommand(new Contact(userInputWithoutKeyword, " "));
         }
         String[] updatedContact = userInputWithoutKeyword.split(" " + specialPhrase + " ");
         //Returns error if user enters less/more than one special phrase
@@ -323,7 +323,7 @@ public class Parser {
         }
         String contactName = updatedContact[0];
         String contactDetail = updatedContact[1];
-        return new ContactCommand(new Contact(contactName, contactDetail));
+        return new AddContactCommand(new Contact(contactName, contactDetail));
     }
 
     /**

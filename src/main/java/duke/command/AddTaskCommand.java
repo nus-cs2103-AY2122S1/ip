@@ -8,16 +8,16 @@ import duke.information.Task;
 /**
  * Command that adds a new Task to InformationList when executed.
  */
-public class AddCommand extends Command {
+public class AddTaskCommand extends Command {
     /** Task to be added to InformationList. */
     private Task task;
 
     /**
-     * Constructs AddCommand class.
+     * Constructs AddTaskCommand class.
      *
      * @param task Task to be added to InformationList.
      */
-    public AddCommand(Task task) {
+    public AddTaskCommand(Task task) {
         this.task = task;
     }
 

@@ -8,16 +8,16 @@ import duke.information.Contact;
 /**
  * Command that adds a new Contact to InformationList when executed.
  */
-public class ContactCommand extends Command {
+public class AddContactCommand extends Command {
     /** Contact to be added to InformationList. */
     private Contact contact;
 
     /**
-     * Constructs ContactCommand class.
+     * Constructs AddContactCommand class.
      *
      * @param contact Contact to be added to InformationList.
      */
-    public ContactCommand(Contact contact) {
+    public AddContactCommand(Contact contact) {
         this.contact = contact;
     }
 
