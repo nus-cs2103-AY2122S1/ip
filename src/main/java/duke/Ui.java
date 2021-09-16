@@ -37,7 +37,10 @@ public class Ui {
      */
     public String displayFindList(TaskList tasklist) {
         String res = "Here are the matching tasks in your list:\n";
-        return res + displayList(tasklist);
+        for (int i = 0; i < tasklist.size(); i++) {
+            res += tasklist.get(i).toString() + "\n";
+        }
+        return res;
     }
 
     /**
@@ -83,10 +86,6 @@ public class Ui {
         return res;
     }
 
-    public String notifyBadCommand() {
-        return ("Sorry! I don't know what your request means. Please try again?");
-    }
-
     public String notifySavingComplete() {
         return ("Your list has been saved!");
     }
@@ -120,7 +119,7 @@ public class Ui {
     }
 
     public String notifyUpdateComplete(Task after) {
-        return ("I've updated your selected task to: " + after);
+        return ("I've updated your selected task to:\n" + "  " + after);
     }
 
     public String notifyUpdateError() {
