@@ -76,8 +76,6 @@ public class Parser {
             String fieldAndContent = body.split("\\s", 2)[1];
             String content = fieldAndContent.split("\\s", 2)[1];
             String field = fieldAndContent.split("\\s", 2)[0];
-            System.out.println("content: " + content);
-            System.out.println("field: " + field);
             if (taskNo > taskList.size()) {
                 throw new NonExistentTaskException();
             }
@@ -87,11 +85,11 @@ public class Parser {
             } else {
                 throw new DukeException("This task cannot be edited");
             }
-            } catch(ArrayIndexOutOfBoundsException | NumberFormatException ex){
-                throw new EmptyDescriptionException("Please enter a valid task number and field in the given format:\n "
-                        + Constants.EDIT_FORMAT);
-            }
+        } catch (IndexOutOfBoundsException | NumberFormatException ex){
+            throw new EmptyDescriptionException("Please enter a valid task number and field in the given format:\n "
+                    + Constants.EDIT_FORMAT);
         }
+    }
 
 
 

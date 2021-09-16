@@ -18,8 +18,11 @@ public class TaskList {
     }
 
     public Task get(int i) {
-        assert i < this.size() : new InvalidNumberInputException();
-        return taskList.get(i);
+        try {
+            return taskList.get(i);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidNumberInputException();
+        }
     }
 
     public int size() {
@@ -95,3 +98,4 @@ public class TaskList {
         return ans;
     }
 }
+

@@ -13,9 +13,9 @@ public class Constants {
     public static final String EVENT_FORMAT = "\nPlease use the following format:\n"
             + "event [event_description] /at [event_date_and_time]";
     public static final String EDIT_FORMAT = "\nedit [task_no] [field] [revised_contents]\n\n" +
-            "* task_no refers to the index of the element which you wish to edit in the task list\n" +
-            "* field refers to three attributes of the specified task types - description, date and dateTime\n\n" +
-            "Please use the keywords:\n" +
+            "* [task_no] refers to the index of the element which you wish to edit in the task list\n" +
+            "* [field] refers to three attributes of the specified task types - description, date and dateTime\n\n" +
+            "Please use the keywords for the fields:\n" +
             "* desc - to change the description of a task\n" +
             "* date - to change the date of a deadline\n" +
             "* datetime - to change the date and time of an event";
@@ -24,3 +24,4 @@ public class Constants {
     }
 
 }
+
