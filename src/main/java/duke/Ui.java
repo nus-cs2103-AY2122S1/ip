@@ -95,7 +95,7 @@ public class Ui {
             TimerTask timeTask = new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println("running task : " + task.getDescription());
+                    System.out.println("reminding task : " + task.getDescription());
                     Platform.runLater(() -> {
                         mainWindow.popReminder("reminder!" + task.toString());
                     });

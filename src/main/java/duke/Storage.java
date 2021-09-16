@@ -76,14 +76,14 @@ public class Storage {
         String reminderTime;
         switch(taskType) {
         case "T":
-            reminderTime = newTaskCommands[4];
+            reminderTime = newTaskCommands.length > 3 ? newTaskCommands[3] : "";
             task = reminderTime.length() > 0
                     ? new ToDo(taskDescription, reminderTime)
                     : new ToDo(taskDescription);
             break;
         case "D":
             String deadlineTime = newTaskCommands[3];
-            reminderTime = newTaskCommands[4];
+            reminderTime = newTaskCommands.length > 4 ? newTaskCommands[4] : "";
             task = reminderTime.length() > 0
                     ? new Deadline(taskDescription, deadlineTime, reminderTime)
                     : new Deadline(taskDescription, deadlineTime);
@@ -94,7 +94,7 @@ public class Storage {
             String from = startingEndingTime[0];
             String to = startingEndingTime[1];
 
-            reminderTime = newTaskCommands[4];
+            reminderTime = newTaskCommands.length > 4 ? newTaskCommands[4] : "";
             task = reminderTime.length() > 0
                     ? new Event(taskDescription, from, to, reminderTime)
                     : new Event(taskDescription, from, to);
@@ -139,11 +139,7 @@ public class Storage {
                     ? task.getReminderTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
                     : "";
             String output = task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
-                    + "&&" + task.getTaskTime() + "&&";
-            if (!reminderTime.equals("")) {
-                output += reminderTime + "&&";
-            }
-            output += "\n";
+                    + "&&" + task.getTaskTime() + "&&" + reminderTime + "\n";
             fileWriter.write(output);
             fileWriter.close();
         } catch (IOException e) {
