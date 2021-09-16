@@ -9,9 +9,9 @@ import duke.storage.Storage;
  */
 public abstract class Command {
     /**
-     * Execute the command.
+     * Executes the command.
      *
-     * @param tasks   The TaskList of the Duke instance.
+     * @param tasks The TaskList of the Duke instance.
      * @param storage The storage handler of the Duke instance.
      * @throws DukeException The checked exception to be thrown when execution fails.
      */

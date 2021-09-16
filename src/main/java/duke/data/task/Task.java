@@ -21,7 +21,7 @@ public abstract class Task {
     }
 
     /**
-     * Set isDone to true.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
