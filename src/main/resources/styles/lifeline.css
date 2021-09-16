@@ -1,0 +1,12 @@
+.root {
+    -fx-font-size: 10pt;
+}
+.speech-bubble {
+    -fx-background-color: white;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+.user-speech-bubble {
+    -fx-background-color: lightblue;
+}
