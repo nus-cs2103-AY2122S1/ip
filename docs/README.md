@@ -50,10 +50,12 @@ You can clone a task in the list and add it to the tail of the list.
 ### **`list`** - List all the tasks
 List all the tasks already in the task list.
 
-__Example of usage:__</br>
+__Example of usage:__
+
 `list`
 
-__Expected outcome:__</br>
+__Expected outcome:__
+
 List all the tasks.
 ```
 Here are the tasks in your list:
@@ -67,10 +69,12 @@ Here are the tasks in your list:
 ### **`todo`** - Add a todo task
 Add a todo task with description of what needs to be done.
 
-__Example of usage:__</br>
+__Example of usage:__
+
 `todo read books`
 
-__Expected outcome:__</br>
+__Expected outcome:__
+
 Add todo `read books` to the task list. And shows you the number of tasks in the task list after the addition.
 ```
 Got it. I've added this task:
@@ -81,10 +85,12 @@ Now you have 5 works in the list.
 ### **`deadline`** - Add a deadline task
 Add a deadline task with description and deadline.
 
-__Example of usage:__</br>
+__Example of usage:__
+
 `deadline Lab1 /by 22/09/2021 14:00`
 
-__Expected outcome:__</br>
+__Expected outcome:__
+
 Add deadline task `Lab1` with the deadline time `22/09/2021 14:00`. And shows you the number of tasks in the task list after the addition.
 ```
 Got it. I've added this task:
@@ -95,10 +101,12 @@ Now you have 6 tasks in the list.
 ### **`event`** - Add an event task
 Add an event task with description and the time when the event will happen.
 
-__Example of usage:__</br>
+__Example of usage:__
+
 `event team meeting /at 16/09/2021 10:00`
 
-__Expected outcome:__</br>
+__Expected outcome:__
+
 Add event task `team meeting` with the time `16/09/2021 10:00`. And shows you the number of tasks in the task list after the addition.
 ```
 Got it. I've added this task:
@@ -109,10 +117,10 @@ Now you have 7 tasks in the list.
 ### **`done`** - Mark a task as done
 Mark a task specified by the index shown in task list as done.
 
-__Example of usage:__</br>
+__Example of usage:__
 `done 5`
 
-__Expected outcome:__</br>
+__Expected outcome:__
 Mark the 5th task in the list as done.
 ```
 Nice! I've marked this task as done:
@@ -122,10 +130,10 @@ Nice! I've marked this task as done:
 ### **`delete`** - Delete a task
 Delete a task specified by the index shown in task list.
 
-__Example of usage:__</br>
+__Example of usage:__
 `delete 4`
 
-__Expected outcome:__</br>
+__Expected outcome:__
 Delete the 4th task in the task list. And shows you the number of tasks in the task list after the deletion.
 ```
 Got it. I've removed this task:
@@ -136,10 +144,10 @@ Now you have 6 tasks in the list.
 ### **`edit`** - Edit an existing task
 Edit an existing task specified by the index shown in task list.
 
-__Example of usage:__</br>
+__Example of usage:__
 `edit 3 presentation meeting /t 02/10/2021 10:00`
 
-__Expected outcome:__</br>
+__Expected outcome:__
 Edit the existing 3th event, change it into `presentation meeting` with new time `02/10/2021 10:00`.
 ```
 Got it. Here is the updated task:
@@ -149,10 +157,10 @@ Got it. Here is the updated task:
 ### **`find`** - Find tasks
 Find the tasks whose description contains the query key word provided by the user.
 
-__Example of usage:__</br>
+__Example of usage:__
 `find books`
 
-__Expected outcome:__</br>
+__Expected outcome:__
 All the tasks whose description contains `books`.
 ```
 Here are the matching tasks in your list:
@@ -164,10 +172,10 @@ Here are the matching tasks in your list:
 ### **`clone`** - Clone task
 Clone the task specified by the index shown in task list.
 
-__Example of usage:__</br>
+__Example of usage:__
 `clone 2`
 
-__Expected outcome:__</br>
+__Expected outcome:__
 Clone the task specified by the index shown in task list, and add it to the tail of the list.
 ```
 Got it. I've added this task:
@@ -178,10 +186,10 @@ Now you have 6 tasks in the list.
 ### **`bye`** - Exit
 Exit the program
 
-__Example of usage:__</br>
+__Example of usage:__
 `bye`
 
-__Expected outcome:__</br>
+__Expected outcome:__
 Say goodbye exit the program.
 ```
 Bye. Hope to see you again soon!
