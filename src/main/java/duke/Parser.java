@@ -25,7 +25,7 @@ public class Parser {
      */
     public void parsing(String input) {
 
-        if (input.equals("list") || input.equals("bye")) {
+        if (input.equals("list")) {
             this.command = input;
             return;
         }
