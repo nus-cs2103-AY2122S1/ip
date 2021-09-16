@@ -1,5 +1,6 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
@@ -17,12 +18,12 @@ public class DoneCommand extends Command {
      * @param input User input.
      * @throws DukeException If input is invalid.
      */
-    public DoneCommand(String input) throws DukeException {
+    public DoneCommand(Input input) throws DukeException {
+        if (input.hasCommandWordOnly("done")) {
+            throw new DukeException("A number must follow after the command word 'done'.");
+        }
         try {
-            if (input.equals("done") || input.equals("done ")) {
-                throw new DukeException("A number must follow after the command word 'done'.");
-            }
-            this.taskNumber = Integer.valueOf(input.substring(5)) - 1;;
+            this.taskNumber = input.getIndex("done");;
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS! Please enter a valid task number.");
         }

@@ -1,5 +1,6 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Event;
@@ -9,7 +10,6 @@ import duke.task.TaskList;
  * Command to create Event tasks.
  */
 public class EventCommand extends Command {
-    private String input;
     private String taskDesc;
     private String eventDate;
 
@@ -18,11 +18,10 @@ public class EventCommand extends Command {
      *
      * @param input User input.
      */
-    public EventCommand(String input) {
-        this.input = input;
-        this.taskDesc = input.replaceFirst("^event ", "").split(" /")[0];
-        if (input.contains("/at")) {
-            this.eventDate = input.substring(input.indexOf("/at") + 4);
+    public EventCommand(Input input) {
+        this.taskDesc = input.getDescription("event");
+        if (input.checkIfContains("/at")) {
+            this.eventDate = input.getDate("event");
         }
     }
 

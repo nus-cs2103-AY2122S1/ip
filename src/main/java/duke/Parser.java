@@ -23,22 +23,23 @@ public class Parser {
      * @return The respective commands.
      * @throws DukeException If the user input is invalid.
      */
-    public static Command parse(String input) throws DukeException {
-        if (input.equals("bye")) {
+    public static Command parse(Input input) throws DukeException {
+        String tag = input.checkType();
+        if (tag.equals("bye")) {
             return new ExitCommand();
-        } else if (input.equals("list")) {
+        } else if (tag.equals("list")) {
             return new ListCommand();
-        } else if (input.startsWith("done")) {
+        } else if (tag.equals("done")) {
             return new DoneCommand(input);
-        } else if (input.startsWith("delete")) {
+        } else if (tag.equals("delete")) {
             return new DeleteCommand(input);
-        } else if (input.startsWith("find")) {
+        } else if (tag.equals("find")) {
             return new FindCommand(input);
-        } else if (input.startsWith("todo")) {
+        } else if (tag.equals("todo")) {
             return new TodoCommand(input);
-        } else if (input.startsWith("deadline")) {
+        } else if (tag.equals("deadline")) {
             return new DeadlineCommand(input);
-        } else if (input.startsWith("event")) {
+        } else if (tag.equals("event")) {
             return new EventCommand(input);
         } else {
             return new ErrorCommand();

@@ -28,7 +28,7 @@ public class Deadline extends Task {
             LocalDate localDate = LocalDate.parse(deadline);
             this.date = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("duke.task.Deadline should be in a yyyy-mm-dd format.");
+            throw new DukeException("Deadline should be in a yyyy-mm-dd format.");
         }
 
         if (description.isEmpty() || description == "" || description == " ") {
