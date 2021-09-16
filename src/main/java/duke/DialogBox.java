@@ -37,9 +37,9 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         if (person.equals("dory")) {
-            dialog.setStyle("-fx-background-color: #fff1f2\n"
-                    + "-fx-padding: 10 10 10 10\n"
-                    + "-fx-background-radius: 15\n"
+            dialog.setStyle("-fx-background-color: #fff1f2 ;\n"
+                    + "-fx-padding: 10 10 10 10;\n"
+                    + "-fx-background-radius: 15;\n"
                     + "-fx-label-padding: 3\n"
                     + "-fx-text-fill: black");
         }

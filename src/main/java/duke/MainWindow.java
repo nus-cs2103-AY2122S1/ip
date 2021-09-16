@@ -25,9 +25,30 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user-chatbot.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dory-chatbot.png"));
 
+    /**
+     * Shows introduction paragraph and instructions to user.
+     */
+    public String showIntro() {
+        String dory = "              \uD83E\uDD91 \uD83D\uDC1F \uD83D\uDC0B \uD83D\uDC19 \uD83D\uDC21 \uD83C\uDF0A "
+                + "\n"
+                + "refer to 'tinyurl.com/doryguide' for the bot's user guide! ";
+
+        String fish = "                                          ....\n"
+                + "                                         /.... \\\n"
+                + "   hi my name is dory   .-`\\ \\      `...')\n"
+                + "   and i can help you  ( o   | |          (\n"
+                + "    remember things    `-_ / /_./``-._)\n"
+                + "                                       `\\___\\";
+        return fish + "\n" + dory;
+    }
+
+    /**
+     *  Starts the Dialog box.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showFirstMessage();
     }
 
     public void setDuke(Duke d) {
@@ -48,4 +69,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    /**
+     * Shows the intro message to user.
+     */
+    @FXML
+    private void showFirstMessage() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(showIntro(), dukeImage));
+    }
+
+
 }
