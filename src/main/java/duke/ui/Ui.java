@@ -10,7 +10,7 @@ public class Ui {
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|____/ \\____|_|\\_\\___|\n\n";
     public static final String MESSAGE_GREETING = "Hello from\n" + LOGO;
     public static final String MESSAGE_HELP = "How can I help you?";
     public static final String MESSAGE_ADD_TASK = "Added the following task:\n"

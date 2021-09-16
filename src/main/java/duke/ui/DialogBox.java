@@ -33,6 +33,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        setStyle("-fx-background-color: #bbdefb;");
     }
 
     /** Flips the dialog box horizontally. */
@@ -41,6 +42,7 @@ public class DialogBox extends HBox {
         Collections.reverse(temp);
         getChildren().setAll(temp);
         setAlignment(Pos.TOP_LEFT);
+        setStyle("-fx-background-color: #d1c4e9;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
