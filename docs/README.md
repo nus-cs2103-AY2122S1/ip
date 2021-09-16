@@ -6,8 +6,9 @@
 2. Add `event` task
 3. Add `deadline` task 
 4. Mark tasks as done 
-5. Delete tasks from task list
+5. Delete tasks from `TaskList`
 6. View your task list
+7. Find a particular task from `TaskList`
 
 ## Details of Features 
 
@@ -40,6 +41,10 @@ This feature allows you to delete a task from the `TaskList`.
 
 This feature allows you to view your current `TaskList`. 
 
+### 7. Find tasks in `TaskList`
+
+This feature allows you to find tasks in `TaskList` that match a given search key.
+
 ## Usage
 
 ### 1. `todo <task name>` - Add a to-do task
@@ -65,3 +70,7 @@ Example of usage: `delete 1`
 ### 6. `list` - View your current task list
 
 Example of usage: `list`
+
+### 7. `find` - Find tasks that match a search key in your current task list
+
+Example of usage: `find <search key>`
