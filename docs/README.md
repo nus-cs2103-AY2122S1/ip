@@ -1,6 +1,8 @@
 # DukeMan User Guide
 DukeMan is a simple task manager application that seeks to make your life better by helping you manage your todos, events and deadlines!
 
+<img src="https://github.com/Domszy/ip/blob/master/docs/Screenshot%20of%20DukeMan.png" width="400" >
+
 ### Quick Start Guide 🤘🏻
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the DukeMan.jar file from the repository.
@@ -89,4 +91,3 @@ done | `done {task's reference number}` | `done 2`
 remove | `remove {task's reference number}` | `remove 2`
 find | `find {word to find}` | `find word`
 scedule | `schedule {Year-Month-Day}` | `schedule 2021-09-15`
-
