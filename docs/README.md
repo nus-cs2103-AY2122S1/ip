@@ -23,7 +23,7 @@
 ## Add Tasks
 
 ---
-Adds a task of type `todo`/ `deadline`/ `event` to your list of tasks.
+Adds a task of type `todo` / `deadline` / `event` to your list of tasks.
 
 <br />
 
@@ -39,7 +39,7 @@ Add a todo task that is not time-sensitive to your list of tasks.
 | [detail] | description of the task |
 
 
-**Example of Usage**: `todo read book`
+**Example of Usage**: `todo write book`
 
 **Expected outcome**: 
 
