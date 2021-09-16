@@ -6,8 +6,8 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 public class DeleteCommand extends Command {
-    public DeleteCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public DeleteCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override

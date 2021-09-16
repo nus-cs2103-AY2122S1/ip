@@ -1,0 +1,4 @@
+T | 1 | feed my cat
+E | 0 | alksdfasdfasdf | 2022-12-12 | 12:12
+D | 0 | sterqerqer | 2022-12-12 | 13:12
+D | 1 | qerewlrqwer | 2022-12-12 | 23:59

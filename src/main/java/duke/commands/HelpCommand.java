@@ -7,8 +7,8 @@ import duke.exceptions.IncorrectInputException;
 
 public class HelpCommand extends Command {
 
-    public HelpCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public HelpCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override
@@ -17,7 +17,6 @@ public class HelpCommand extends Command {
             if (strParse.length > 1) {
                 throw new IncorrectInputException("help", "'help'");
             }
-
 
             return ("Commandws supported:\n\n"
                     + "- bye\n- clearall\n- help\n- list\n- todo\n- event\n- deadline\n- "

@@ -44,7 +44,7 @@ public class Storage {
         }
 
         try {
-            TaskList tasklist = new TaskList();
+            TaskList taskList = new TaskList();
             List<String> lines = Files.readAllLines(path);
 
             for (String str : lines) {
@@ -53,28 +53,28 @@ public class Storage {
                 if (strparse.length < 3 || strparse.length > 5) {
                     continue;
                 } else if (strparse[0].equals("T")) {
-                    tasklist.addReadTodo(strparse[2], Integer.parseInt(strparse[1]));
+                    taskList.addReadTodo(strparse[2], Integer.parseInt(strparse[1]));
                 } else if (strparse[0].equals("D")) {
-                    if (strparse.length < 4) {
-                        tasklist.addReadDeadline(strparse[2],
+                    if (strparse.length < 5) {
+                        taskList.addReadDeadline(strparse[2],
                                 Integer.parseInt(strparse[1]), strparse[3], null);
                     } else {
-                        tasklist.addReadDeadline(strparse[2],
+                        taskList.addReadDeadline(strparse[2],
                                 Integer.parseInt(strparse[1]), strparse[3], strparse[4]);
                     }
                 } else if (strparse[0].equals("E")) {
-                    if (strparse.length < 4) {
+                    if (strparse.length < 5) {
                         //event has a time
-                        tasklist.addReadEvent(strparse[2],
+                        taskList.addReadEvent(strparse[2],
                                 Integer.parseInt(strparse[1]), strparse[3], null);
                     } else {
                         //event doesn't have a time
-                        tasklist.addReadEvent(strparse[2],
+                        taskList.addReadEvent(strparse[2],
                                 Integer.parseInt(strparse[1]), strparse[3], strparse[4]);
                     }
                 }
             }
-            return tasklist;
+            return taskList;
         } catch (Exception e) {
             throw new LoadingFileError();
         }
@@ -82,11 +82,11 @@ public class Storage {
 
     /**
      * Saves TaskList in String form to txt file. If file does not exist, one is created.
-     * @param tasklist tasklist to be converted into txt file, then saved
+     * @param taskList taskList to be converted into txt file, then saved
      * @throws DukeException Exceptions that occur when saving file
      */
-    public void saveData(TaskList tasklist) throws DukeException {
-        String textToSave = tasklist.saveAsString();
+    public void saveData(TaskList taskList) throws DukeException {
+        String textToSave = taskList.saveAsString();
         String homeDir = System.getProperty("user.dir");
         Path path = Paths.get(homeDir, this.filePath);
         boolean directoryExists = Files.exists(path);

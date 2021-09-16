@@ -6,8 +6,8 @@ import duke.exceptions.DukeException;
 
 public class DoneCommand extends Command {
 
-    public DoneCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public DoneCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override

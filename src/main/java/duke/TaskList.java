@@ -74,7 +74,7 @@ public class TaskList {
      * @param time Time deadline occurs by.
      */
     public void addReadDeadline(String task, int isDoneInt, String date, String time) {
-        if (time != null) {
+        if (time == null) {
             tasks.add(new Deadline(task, LocalDate.parse(date)));
         } else {
             tasks.add(new Deadline(task, LocalDate.parse(date), LocalTime.parse(time)));
@@ -102,7 +102,7 @@ public class TaskList {
      * @param time Time event occurs at.
      */
     public void addReadEvent(String task, int isDoneInt, String date, String time) {
-        if (time != null) {
+        if (time == null) {
             tasks.add(new Event(task, LocalDate.parse(date)));
         } else {
             tasks.add(new Event(task, LocalDate.parse(date), LocalTime.parse(time)));
@@ -260,6 +260,15 @@ public class TaskList {
     public void clearTaskList() {
         this.tasks = new ArrayList<>(100);
         this.counter = 0;
+    }
+
+    /**
+     * Getter method for Tasks from tasklist.
+     * @param taskNo Number task to get
+     * @return Task as requested
+     */
+    public Task getTask(int taskNo) {
+        return this.tasks.get(taskNo - 1);
     }
 
 }

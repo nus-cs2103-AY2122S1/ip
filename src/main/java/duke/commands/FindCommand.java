@@ -6,8 +6,8 @@ import duke.TaskList;
 import duke.exceptions.DukeException;
 
 public class FindCommand extends Command {
-    public FindCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public FindCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override

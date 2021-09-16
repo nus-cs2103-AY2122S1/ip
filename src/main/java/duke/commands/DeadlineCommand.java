@@ -6,8 +6,8 @@ import duke.TaskList;
 import duke.exceptions.DukeException;
 
 public class DeadlineCommand extends Command {
-    public DeadlineCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public DeadlineCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override

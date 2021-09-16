@@ -7,8 +7,8 @@ import duke.exceptions.DukeException;
 
 public class TodoCommand extends Command {
 
-    public TodoCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public TodoCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override

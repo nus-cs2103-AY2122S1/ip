@@ -8,8 +8,8 @@ import duke.exceptions.InvalidInputException;
 
 public class ClearallConfirmCommand extends Command {
 
-    public ClearallConfirmCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public ClearallConfirmCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override
@@ -18,11 +18,7 @@ public class ClearallConfirmCommand extends Command {
             if (strParse.length > 1) {
                 throw new InvalidInputException();
             }
-            if (!isActivatedClearCommand) {
-                throw new InvalidInputException();
-            }
 
-            isActivatedClearCommand = false;
             taskList.clearTaskList();
             storage.saveData(taskList);
 

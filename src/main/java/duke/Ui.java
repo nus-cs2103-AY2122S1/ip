@@ -17,8 +17,6 @@ public class Ui {
         isActivatedClearCommand = false;
     }
 
-
-
     /**
      * Executes command stated in string and saves taskList changes to storage.
      *
@@ -32,84 +30,77 @@ public class Ui {
             // splits input to parse for keywords.
             String[] strParse = str.split(" ");
             String command = this.parser.parseCommand(strParse[0]);
-            if (!(isActivatedClearCommand && command.equals("y"))) {
+            if (isActivatedClearCommand) {
+                if (command.equals("y")) {
+                    //do nothing
+                }
                 isActivatedClearCommand = false;
                 command = "n";
             }
-            isActivatedClearCommand = false;
 
             switch (command) {
-                case "bye":
-                    // breaks loop, closes chatbot.
-                    ByeCommand bye = new ByeCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return bye.execute();
-                    //Fallthrough
-                case "help":
-                    // lists command list
-                    HelpCommand help = new HelpCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return help.execute();
+            case "bye":
+                // breaks loop, closes chatbot.
+                ByeCommand bye = new ByeCommand(storage, taskList, strParse);
+                return bye.execute();
+                //Fallthrough
+            case "help":
+                // lists command list
+                HelpCommand help = new HelpCommand(storage, taskList, strParse);
+                return help.execute();
 
-                    //Fallthrough
-                case "list":
-                    // lists history of current tasks.
-                    ListCommand list = new ListCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return list.execute();
-                    //Fallthrough
-                case "todo":
-                    // adds a Todo task to the list.
-                    TodoCommand todo = new TodoCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return todo.execute();
+                //Fallthrough
+            case "list":
+                // lists history of current tasks.
+                ListCommand list = new ListCommand(storage, taskList, strParse);
+                return list.execute();
+                //Fallthrough
+            case "todo":
+                // adds a Todo task to the list.
+                TodoCommand todo = new TodoCommand(storage, taskList, strParse);
+                return todo.execute();
 
-                    //Fallthrough
-                case "deadline":
-                    // adds a deadline task to the list.
-                    DeadlineCommand deadline = new DeadlineCommand(storage,
-                            taskList, strParse, isActivatedClearCommand);
-                    return deadline.execute();
-                    //Fallthrough
-                case "event":
-                    // adds an event to the list. pretty much like deadline.
-                    EventCommand event = new EventCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return event.execute();
-                    //Fallthrough
-                case "done":
-                    // marks a task as done.
-                    DoneCommand done = new DoneCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return done.execute();
-                    //Fallthrough
-                case "delete":
-                    // deletes corresponding task on list.
-                     DeleteCommand delete = new DeleteCommand(storage, taskList, strParse,
-                             isActivatedClearCommand);
-                     return delete.execute();
-                    //Fallthrough
-                case "find":
-                    FindCommand find = new FindCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return find.execute();
-                    //Fallthrough
-                case "clearall":
-                    ClearallCommand clearall = new ClearallCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return clearall.execute();
-                    //Fallthrough
-                case "y":
-                    ClearallConfirmCommand clearallConfirm = new ClearallConfirmCommand(storage, taskList, strParse,
-                            isActivatedClearCommand);
-                    return clearallConfirm.execute();
-                    //Fallthrough
-                case "n":
-                    ClearallRejectCommand clearallRejectCommand = new ClearallRejectCommand(storage,
-                            taskList, strParse, isActivatedClearCommand);
-                    return clearallRejectCommand.execute();
-                default:
-                    throw new InvalidInputException();
+                //Fallthrough
+            case "deadline":
+                // adds a deadline task to the list.
+                DeadlineCommand deadline = new DeadlineCommand(storage,
+                        taskList, strParse);
+                return deadline.execute();
+                //Fallthrough
+            case "event":
+                // adds an event to the list. pretty much like deadline.
+                EventCommand event = new EventCommand(storage, taskList, strParse);
+                return event.execute();
+                //Fallthrough
+            case "done":
+                // marks a task as done.
+                DoneCommand done = new DoneCommand(storage, taskList, strParse);
+                return done.execute();
+                //Fallthrough
+            case "delete":
+                // deletes corresponding task on list.
+                 DeleteCommand delete = new DeleteCommand(storage, taskList, strParse);
+                 return delete.execute();
+                //Fallthrough
+            case "find":
+                FindCommand find = new FindCommand(storage, taskList, strParse);
+                return find.execute();
+                //Fallthrough
+            case "clearall":
+                ClearallCommand clearall = new ClearallCommand(storage, taskList, strParse);
+                return clearall.execute();
+                //Fallthrough
+            case "y":
+                ClearallConfirmCommand clearallConfirm = new ClearallConfirmCommand(storage,
+                        taskList, strParse);
+                return clearallConfirm.execute();
+                //Fallthrough
+            case "n":
+                ClearallRejectCommand clearallRejectCommand = new ClearallRejectCommand(storage,
+                        taskList, strParse);
+                return clearallRejectCommand.execute();
+            default:
+                throw new InvalidInputException();
             }
         } catch (DukeException e) {
             return e.getMessage();

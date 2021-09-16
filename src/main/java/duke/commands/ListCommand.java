@@ -7,8 +7,8 @@ import duke.exceptions.IncorrectInputException;
 
 public class ListCommand extends Command {
 
-    public ListCommand(Storage storage, TaskList taskList, String[] strParse, boolean isActivatedClearCommand) {
-        super(storage, taskList, strParse, isActivatedClearCommand);
+    public ListCommand(Storage storage, TaskList taskList, String[] strParse) {
+        super(storage, taskList, strParse);
     }
 
     @Override

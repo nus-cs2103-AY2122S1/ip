@@ -205,6 +205,9 @@ public class Parser {
         if (hour < 12) {
             hourInString = String.valueOf(hour);
             amOrPm = "am";
+        } else if (hour == 12) {
+            hourInString = String.valueOf(hour);
+            amOrPm = "pm";
         } else {
             hourInString = String.valueOf(hour - 12);
             amOrPm = "pm";
