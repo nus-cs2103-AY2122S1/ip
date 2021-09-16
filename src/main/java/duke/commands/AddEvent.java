@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DuplicateTaskException;
-import duke.exceptions.EmptyTaskDescriptionException;
 import duke.tasks.Event;
 import duke.utils.TaskList;
 
