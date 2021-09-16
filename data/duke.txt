@@ -1,2 +1,6 @@
-T | 0 | read book
-E | 0 | book club sharing | Oct 12 2021 1800
+T | 0 | todo1
+T | 0 | todo2
+D | 0 | deadline1 | Dec 12 2025
+D | 0 | deadline2 | Oct 12 2021
+E | 0 | event1 | Oct 12 2021 2000
+E | 0 | event2 | Oct 12 2022 2200
