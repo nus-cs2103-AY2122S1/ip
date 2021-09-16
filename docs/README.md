@@ -17,7 +17,8 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
   
 ## Quick Setup
     1. Ensure you have Java 11 or above installed in your Computer.
-    2. Using the Command Line, run the command java -jar taskman.jar (i.e., run the command in the same folder as the jar file)
+    2. Using the Command Line, run the command java -jar taskman.jar  
+       (i.e., run the command in the same folder as the jar file)
 
 Successfully opening TaskMan would lead you to a window like this
 
@@ -28,7 +29,7 @@ Successfully opening TaskMan would lead you to a window like this
 
 
 ## Features
-Listed below is a short description of what TaskMan can do as a task manager
+> Listed below is a short description of what TaskMan can do as a task manager
 
 1. Types of tasks
    - [_Todo:_](#adding-a-task-to-do-todo) a simple task with a short description
@@ -42,8 +43,8 @@ Listed below is a short description of what TaskMan can do as a task manager
    - [_Find:_](#finding-task-using-keyword-find) Finding a task based on a keyword in its description
 
 ### Adding a task to do :`todo`
-A task with a description.  
-Users could either type at the textbox below or press a button shortcut
+> A task with a description.  
+< Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `todo [description]`
@@ -68,8 +69,8 @@ _*x refers to the number of task in the list_
 
 
 ### Adding a task with a deadline: `deadline`
-A task with a day to be set as a deadline.  
-Users could either type at the textbox below or press a button shortcut
+> A task with a day to be set as a deadline.  
+< Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `deadline [description] /by [YYYY-MM-DD] [Time in 24 Hour Format]`
@@ -102,8 +103,8 @@ _*x refers to the number of task in the list_
 
 
 ### Adding an event: `event`
-A task with a day to be set as an Event.  
-Users could either type at the textbox below or press a button shortcut
+> A task with a day to be set as an Event.  
+< Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `event [description] /at [YYYY-MM-DD] [Time in 24 Hour Format]`
@@ -135,8 +136,8 @@ _*x refers to the number of task in the list_
 
 
 ### Looking at all the task being tracked: `list`
-Get a list of all the task being tracked.  
-Users could either type at the textbox below or press a button shortcut
+> Get a list of all the task being tracked.  
+< Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `list`
@@ -159,8 +160,8 @@ Im sorry, the list seems to be empty
 1. Adding characters after `list` in the Command Line. This will invalidate the command
 
 ### Finding task using keyword: `find`
-Find a task based keyword description . 
-Users can can only type in the textbox. _**Button shortcut coming soon**_
+> Find a task based keyword description . 
+< Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `find [keyword/s]`
@@ -178,8 +179,8 @@ _*x refers to the task position in the whole list._
 
 
 ### Mark task as complete: `done`
-Marks a task as complete.  
-Users can can only type in the textbox. _**Button shortcut coming soon**_
+> Marks a task as complete.  
+< Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `done [task position in list]`  
@@ -200,8 +201,8 @@ Expected output:
 
 
 ### Remove a task: `delete`
-Delete a task.  
-Users can can only type in the textbox. _**Button shortcut coming soon**_
+> Delete a task.  
+< Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `delete [task position in list]`  
@@ -223,8 +224,8 @@ _*x refers to the number of task in the list_
     2. task position is not in **NUMERICAL** form
 
 ### Viewing help : `help`
-A quick way to access instructions for Command Line Commands
-Users could either type at the textbox below or press a button shortcut
+> A quick way to access instructions for Command Line Commands
+< Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `help`  
@@ -259,8 +260,8 @@ Expected Output:
 ```
 
 ### Exiting the application `bye`
-There are two ways to close the application.  
-Users could either type in the textbox below or simply closing `x` on the top right
+> There are two ways to close the application.  
+< Users could either type in the textbox below or simply closing `x` on the top right
 
 _Format to type in textbox:_  
 `bye`
