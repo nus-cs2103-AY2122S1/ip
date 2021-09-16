@@ -6,25 +6,25 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 ---------------------------------
-Hello! I'm Duke
+Hello! I'm genie.Genie
 What can I do for you?
 ---------------------------------
 ---------------------------------
 Got it. I've added this task: 
 [T][ ] read book
-Now you have 1 tasks in the list.
+Now you have 1 genie.tasks in the list.
 ---------------------------------
 Got it. I've added this task: 
 [D][ ] deadline return book  (by: June 6th)
-Now you have 2 tasks in the list.
+Now you have 2 genie.tasks in the list.
 ---------------------------------
 Got it. I've added this task: 
 [E][ ] event project meeting (at:Aug 6th 2-4pm)
-Now you have 3 tasks in the list.
+Now you have 3 genie.tasks in the list.
 ---------------------------------
 Got it. I've added this task: 
 [T][ ] join sports club
-Now you have 4 tasks in the list.
+Now you have 4 genie.tasks in the list.
 ---------------------------------
 Nice! I've marked this task as done: 
 [T][X] read book
@@ -34,11 +34,11 @@ Nice! I've marked this task as done:
 ---------------------------------
 Got it. I've added this task: 
 [D][ ] deadline return book  (by: June 6th)
-Now you have 3 tasks in the list.
+Now you have 3 genie.tasks in the list.
 ---------------------------------
 Got it. I've added this task: 
 [T][ ] borrow book
-Now you have 4 tasks in the list.
+Now you have 4 genie.tasks in the list.
 ---------------------------------
 1. [T][X] read book
 2. [E][ ] event project meeting (at:Aug 6th 2-4pm)
@@ -47,11 +47,11 @@ Now you have 4 tasks in the list.
 ---------------------------------
 Got it. I've added this task: 
 [D][ ] deadline return book  (by: Sunday)
-Now you have 5 tasks in the list.
+Now you have 5 genie.tasks in the list.
 ---------------------------------
 Got it. I've added this task: 
 [E][ ] event project meeting (at:Mon 2-4pm)
-Now you have 6 tasks in the list.
+Now you have 6 genie.tasks in the list.
 ---------------------------------
 Bye. Hope to see you again soon!
 ---------------------------------

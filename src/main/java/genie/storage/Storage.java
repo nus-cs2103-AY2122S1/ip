@@ -1,6 +1,6 @@
-package duke;
+package genie.storage;
 
-import tasks.*;
+import genie.tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -50,9 +50,9 @@ public class Storage {
 
 
     /**
-     * Reads the file to retrieve all the tasks.
+     * Reads the file to retrieve all the genie.tasks.
      * 
-     * @return The TaskList with all the tasks present in the file.
+     * @return The TaskList with all the genie.tasks present in the file.
      * @throws IOException Handles any errors that can occur when interacting with the file.
      */
 
@@ -138,10 +138,10 @@ public class Storage {
 
 
     /**
-     * Retrieve all the existing tasks in TaskList and write it to the file. 
+     * Retrieve all the existing genie.tasks in TaskList and write it to the file. 
      * Rewrites the file everytime thus preventing duplicates.
      * 
-     * @param tasks A List of tasks after the bot has been in use.
+     * @param tasks A List of genie.tasks after the bot has been in use.
      */
     public static void getAllTasks(List<Task> tasks) {
         try {

@@ -1,7 +1,7 @@
 # User Guide
 
 #🧞‍♂
-️Genie is a **desktop app for managing your tasks, optimised used via a Command Line Interface (CLI)** while 
+️Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while 
 still having the benefits of a Graphical User Interface (GUI).
 
 ###💡 Note about the command format
@@ -14,15 +14,15 @@ still having the benefits of a Graphical User Interface (GUI).
 
 ## Features
 
-The Genie is powerful enough to help you do the following: 
+The genie.Genie is powerful enough to help you do the following: 
 
-* Add a new tasks to you task list
-* View all the tasks you have
+* Add a new genie.tasks to you task list
+* View all the genie.tasks you have
 * Mark a task as completed
 * Delete a task
 * Find task(s) based on keywords
-* Save and load your tasks automatically from your hard drive
-* Add priority to tasks
+* Save and load your genie.tasks automatically from your hard drive
+* Add priority to genie.tasks
 * View task list by priority level
 
 ## Usage 
@@ -74,7 +74,7 @@ Adds an event to the task list.
 
 ### Listing all task: ```list```
 
-List all the tasks that are both completed and not completed.
+List all the genie.tasks that are both completed and not completed.
 
 *Format:* ```list```
 
@@ -114,7 +114,7 @@ Deleting a specified task from the list.
 
 ### Locating a task: ```find KEYWORD```
 
-Find tasks that contains the given index.
+Find genie.tasks that contains the given index.
 
 *Format:* ```find KEYWORD```
 
@@ -126,7 +126,7 @@ Find tasks that contains the given index.
 
 ### Show all commands: ```help```
 
-Show all the available commands and formats for the user input that the Genie understands.
+Show all the available commands and formats for the user input that the genie.Genie understands.
 
 *Format:* ```help```
 
@@ -145,6 +145,6 @@ Format: ```bye```
 
 ### Saving the data
 
-All the tasks added to the list are automatically saved to the hard drive, 
-no manual editing is needed. The next time the app is opened, your tasks 
+All the genie.tasks added to the list are automatically saved to the hard drive, 
+no manual editing is needed. The next time the app is opened, your genie.tasks 
 will still appear when you enter the ```list``` command.

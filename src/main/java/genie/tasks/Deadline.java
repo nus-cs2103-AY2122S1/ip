@@ -1,4 +1,4 @@
-package tasks;
+package genie.tasks;
 
 public class Deadline extends Task {
 
@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     /**
      * A method that overwrites the toStringForFile() method
-     * in tasks
+     * in genie.tasks
      *
      * @return the String representation of Deadline, to be written into the file
      */

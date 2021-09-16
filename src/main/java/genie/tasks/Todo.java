@@ -1,4 +1,4 @@
-package tasks;
+package genie.tasks;
 
 /**
  * A To-do class that is a subclass of Tasks. 

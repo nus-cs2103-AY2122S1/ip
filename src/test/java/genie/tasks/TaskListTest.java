@@ -1,4 +1,4 @@
-package tasks;
+package genie.tasks;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,3 +1,6 @@
+package genie;
+
+import genie.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
     
-    private Duke duke = new Duke();
+    private Genie genie = new Genie();
 
     public Main() throws IOException {
     }
@@ -23,9 +26,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(genie);
             stage.show();
-//            DialogBox db = new DialogBox(text)
+//            genie.gui.DialogBox db = new genie.gui.DialogBox(text)
         } catch (IOException e) {
             e.printStackTrace();
         }

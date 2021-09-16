@@ -1,4 +1,7 @@
-import Common.Message;
+package genie.gui;
+
+import genie.common.Message;
+import genie.Genie;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for genie.gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,7 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Genie genie;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -37,8 +40,8 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Genie d) {
+        genie = d;
     }
 
     /**
@@ -48,7 +51,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = genie.getResponse(input);
         
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

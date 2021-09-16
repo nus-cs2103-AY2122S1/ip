@@ -1,4 +1,4 @@
-package tasks;
+package genie.tasks;
 
 /**
  * Task class that handles a task and methods that manipulated the task

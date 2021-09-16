@@ -1,7 +1,9 @@
-import Common.Message;
-import duke.Parser;
-import duke.Storage;
-import tasks.TaskList;
+package genie;
+
+import genie.common.Message;
+import genie.parser.Parser;
+import genie.storage.Storage;
+import genie.tasks.TaskList;
 
 import java.io.IOException;
 
@@ -10,11 +12,11 @@ import java.io.IOException;
  * 
  * @author Raveen Prabhu 
  */
-public class Duke {
+public class Genie {
     private TaskList taskList;
     private Parser parser;
 
-    public Duke() throws IOException {
+    public Genie() throws IOException {
         taskList = Storage.readFile();
         parser = new Parser(taskList);
         System.out.println("Duke constructor called");
@@ -26,7 +28,7 @@ public class Duke {
      * @param input Input provided by user.
      * @return Response message by system.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         String output;
         if (input.equals("bye")) {
             output = Message.GOODBYEMESSAGE;

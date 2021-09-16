@@ -1,3 +1,3 @@
 T - 0 - Chase Jasmine  - HIGH
 D - 0 - Learn to ride magic carpet  - LOW - 19 Sep 2021
-E - 0 - Magic Carpet Ride w Jasmine  - HIGH - 2021-09-21
+E - 1 - Magic Carpet Ride w Jasmine  - HIGH - 2021-09-21

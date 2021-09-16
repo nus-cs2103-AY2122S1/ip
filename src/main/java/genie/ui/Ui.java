@@ -1,4 +1,4 @@
-package duke;
+package genie.ui;
 
 public class Ui {
     

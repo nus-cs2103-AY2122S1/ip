@@ -1,7 +1,8 @@
-package duke;
+package genie.parser;
 
-import Common.Message;
-import tasks.TaskList;
+import genie.exception.GenieException;
+import genie.common.Message;
+import genie.tasks.TaskList;
 
 public class Parser {
     
@@ -65,9 +66,9 @@ public class Parser {
                 return output;
             }
             else {
-                throw new DukeException("Command is not valid!");
+                throw new GenieException("Command is not valid!");
             }
-        } catch (DukeException e) {
+        } catch (GenieException e) {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return Message.repeatReply(str);

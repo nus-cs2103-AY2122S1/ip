@@ -1,4 +1,4 @@
-package tasks;
+package genie.tasks;
 
 public class Events extends Task {
     protected String at;
@@ -10,7 +10,7 @@ public class Events extends Task {
 
     /**
      * A method that overwrites the toStringForFile() method
-     * in tasks
+     * in genie.tasks
      *
      * @return the String representation of Event, to be written into the file
      */

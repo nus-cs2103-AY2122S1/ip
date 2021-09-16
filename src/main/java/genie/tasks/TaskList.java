@@ -1,7 +1,7 @@
-package tasks;
+package genie.tasks;
 
-import duke.DukeException;
-import duke.Storage;
+import genie.exception.GenieException;
+import genie.storage.Storage;
 
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -26,12 +26,12 @@ public class TaskList {
      * The output that will be shown when the input command is list.
      * 
      * @param str
-     * @return a String with all the existing tasks shown in a list view. 
+     * @return a String with all the existing genie.tasks shown in a list view. 
      */
     public String showList(String str) {
-//        int listLen = tasks.size();
+//        int listLen = genie.tasks.size();
 //        if (listLen == 0) {
-//            str = "You have no tasks!\nNow that you are done with all your work, go after Jasmine!";
+//            str = "You have no genie.tasks!\nNow that you are done with all your work, go after Jasmine!";
 //        }
         for (int i = 0; i < tasks.size(); i++) {
             str += (i+1) + ". " + tasks.get(i);
@@ -63,7 +63,7 @@ public class TaskList {
      * @return A response from the bot to indicate a to-do task has been created
      * and added to the task list
      */
-    public String todoTask(String str) throws DukeException {
+    public String todoTask(String str) throws GenieException {
         try {
             assert str.length() >= 5;
             Task.Priority priority;
@@ -84,7 +84,7 @@ public class TaskList {
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
                     + task
-                    + "\nNow you have " + tasks.size() + " tasks in the list.";
+                    + "\nNow you have " + tasks.size() + " genie.tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
         }
@@ -117,7 +117,7 @@ public class TaskList {
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
                     + task
-                    + "\nNow you have " + tasks.size() + " tasks in the list.";
+                    + "\nNow you have " + tasks.size() + " genie.tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a event cannot be empty.\n" + 
                     "If you have entered a day instead of a date, please enter a date in the format: yyyy-mm-dd.";
@@ -151,7 +151,7 @@ public class TaskList {
             Storage.writeLine(task);
             return "Got it. I've added this task: \n"
                     + task
-                    + "\nNow you have " + tasks.size() + " tasks in the list.";
+                    + "\nNow you have " + tasks.size() + " genie.tasks in the list.";
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a deadline cannot be empty.\n" +
                     "If you have entered a day instead of a date, please enter a date in the format: yyyy-mm-dd.";
@@ -175,16 +175,16 @@ public class TaskList {
         Storage.getAllTasks(tasks);
         return "Got it. I've deleted this task: \n"
                 + t
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+                + "\nNow you have " + tasks.size() + " genie.tasks in the list.";
     }
 
     /**
-     * Command to find and display all tasks containing keyword 
+     * Command to find and display all genie.tasks containing keyword 
      * @param keyword word to search for
      * @return A string of all the results presented in a list view
      */
     public String findTask(String keyword) {
-        String results = "Here are the matching tasks in your list: \n";
+        String results = "Here are the matching genie.tasks in your list: \n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).description.contains(keyword))
                 results += (i+1) + ". " + tasks.get(i);
@@ -205,13 +205,13 @@ public class TaskList {
             priority = Task.Priority.LOW;
         }
         int j = 1;
-        String results = "Here are the matching tasks in your list: \n";
+        String results = "Here are the matching genie.tasks in your list: \n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).priority == priority) {
                 results += (j) + ". " + tasks.get(i) + "\n";
                 j++;
             } 
-//            if (i > tasks.size() - 1) {
+//            if (i > genie.tasks.size() - 1) {
 //                results += "\n";
 //            }
         } return results;
