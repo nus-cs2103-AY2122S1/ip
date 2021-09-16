@@ -113,8 +113,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(this.filePath, true);
             fileWriter.write(str);
             fileWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new UpdateFileException();
         }
     }
