@@ -7,7 +7,6 @@ import exception.InvalidDescription;
 import exception.InvalidNotes;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command is the over-arching class of all possible commands supported by Duke.
@@ -68,9 +67,8 @@ public abstract class Command {
      * Each command class will have its own interaction with Ui, TaskList and Storage
      *
      * @param tasks the TaskList loaded from storage.
-     * @param ui Ui interface that prints messages.
      * @param storage accesses the file location in local storage.
      * @throws DukeException If the execution contains unexpected behaviour
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 }

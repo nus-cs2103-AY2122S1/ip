@@ -13,6 +13,14 @@ public class Event extends Task {
     private DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /**
+     * Constructs a new Event task.
+     * @param description the description of the task.
+     * @param deadline the deadline of the task.
+     * @param notes additional notes regarding the task
+     * @param completed true if the task is completed.
+     * @throws InvalidDateFormat
+     */
     public Event(String description, String deadline, String notes, boolean completed) throws InvalidDateFormat {
         super(description, notes, completed);
         try {

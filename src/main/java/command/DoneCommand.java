@@ -3,7 +3,6 @@ package command;
 import exception.InvalidValue;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * DoneCommand will mark as task as completed when executed.
@@ -16,7 +15,15 @@ public class DoneCommand extends Command {
         this.taskNumber = i;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidValue {
+    /**
+     * Execute the given command returned by parse method.
+     * Each command class will have its own interaction with Ui, TaskList and Storage
+     *
+     * @param tasks the TaskList loaded from storage.
+     * @param storage accesses the file location in local storage.
+     */
+    @Override
+    public String execute(TaskList tasks, Storage storage) throws InvalidValue {
         try {
             tasks.completeTask(taskNumber);
             storage.write(tasks.getTaskList());

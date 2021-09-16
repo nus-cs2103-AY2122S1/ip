@@ -4,7 +4,6 @@ import exception.InvalidValue;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * DeleteCommand will delete the task stored in local storage when executed.
@@ -22,7 +21,16 @@ public class DeleteCommand extends Command {
         this.taskNumber = i;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidValue {
+    /**
+     * Execute the given command returned by parse method.
+     * Each command class will have its own interaction with Ui, TaskList and Storage
+     *
+     * @param tasks the TaskList loaded from storage.
+     * @param storage accesses the file location in local storage.
+     * @throws InvalidValue If there is no task at the given index.
+     */
+    @Override
+    public String execute(TaskList tasks, Storage storage) throws InvalidValue {
         try {
             Task deletedTask = tasks.deleteTask(taskNumber);
             storage.write(tasks.getTaskList());

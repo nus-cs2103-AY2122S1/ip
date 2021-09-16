@@ -6,7 +6,6 @@ import java.util.Locale;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
-import ui.Ui;
 
 public class FindCommand extends Command {
 
@@ -16,8 +15,15 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Execute the given command returned by parse method.
+     * Each command class will have its own interaction with Ui, TaskList and Storage
+     *
+     * @param tasks the TaskList loaded from storage.
+     * @param storage accesses the file location in local storage.
+     */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String returnedString = "Here are the matching tasks in your list:";
         ArrayList<Task> taskList = tasks.getTaskList();
         int index = 1;

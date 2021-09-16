@@ -9,7 +9,6 @@ import task.Event;
 import task.Task;
 import task.TaskList;
 import task.Todo;
-import ui.Ui;
 
 
 public class AddCommand extends Command {
@@ -82,7 +81,16 @@ public class AddCommand extends Command {
         }
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
+    /**
+     * Execute the given command returned by parse method.
+     * Each command class will have its own interaction with Ui, TaskList and Storage
+     *
+     * @param tasks the TaskList loaded from storage.
+     * @param storage accesses the file location in local storage.
+     * @throws InvalidDateFormat if the date is not in the proper dd/MM/yyyy format
+     */
+    @Override
+    public String execute(TaskList tasks, Storage storage) throws InvalidDateFormat {
         Task newTask = null;
 
         switch(taskType) {
@@ -165,6 +173,4 @@ public class AddCommand extends Command {
         assert outputTask != null : "Task type should have matched";
         return outputTask;
     }
-
-
 }

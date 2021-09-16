@@ -2,7 +2,6 @@ import command.Command;
 import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 
 /**
@@ -14,7 +13,6 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Creates the instance of Duke.
@@ -24,7 +22,6 @@ public class Duke {
      */
 
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -37,7 +34,7 @@ public class Duke {
     protected String getResponse(String input) {
         try {
             Command c = Command.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
