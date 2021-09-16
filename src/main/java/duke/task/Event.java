@@ -6,7 +6,7 @@ import duke.misc.Parser;
  * Event class which represents a task with event date/time.
  */
 public class Event extends Task {
-    private DateTime atDateTime;
+    private final DateTime atDateTime;
 
     /**
      * Constructor for Event class.
@@ -33,7 +33,9 @@ public class Event extends Task {
         super(description);
         super.isDone = isDone;
         String[] timeRange = Parser.parseEventTime(atTime);
-        this.atDateTime = new DateTime(atDate, timeRange[0], timeRange[1]);
+        String startTime = timeRange[0];
+        String endTime = timeRange[1];
+        this.atDateTime = new DateTime(atDate, startTime, endTime);
     }
 
     /**
@@ -55,7 +57,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (at: " + atDateTime.getFormattedDate() + " "
-                + atDateTime.getFormattedTimeRange() + ")\n";
+                + " (at: "
+                + atDateTime.getFormattedDate()
+                + " "
+                + atDateTime.getFormattedTimeRange()
+                + ")\n";
     }
 }

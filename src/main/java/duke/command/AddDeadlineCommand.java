@@ -11,8 +11,8 @@ import duke.task.Task;
  * AddDeadlineCommand class which represents a command to add a Deadline task.
  */
 public class AddDeadlineCommand extends Command {
-    private boolean isBye = false;
-    private String[] args;
+    private final boolean isBye;
+    private final String[] args;
 
     /**
      * Constructor for AddDeadlineCommand class.
@@ -21,6 +21,7 @@ public class AddDeadlineCommand extends Command {
      */
     public AddDeadlineCommand(String[] args) {
         this.args = args;
+        isBye = false;
     }
 
     /**
@@ -35,7 +36,8 @@ public class AddDeadlineCommand extends Command {
         Task task = new Deadline(args[0], args[1], args[2]);
         return Ui.ADD_MSG
                 + tl.addTask(task)
-                + "Current tasks count: " + tl.getSize()
+                + "Current tasks count: "
+                + tl.getSize()
                 + "\n";
     }
 

@@ -18,6 +18,10 @@ import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIndexException;
 import duke.exception.InvalidTimeException;
 import duke.task.DateTime;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Parser class to handle parsing of user command inputs.
@@ -39,18 +43,32 @@ public class Parser {
      * @throws IOException In case the directory of data storage file is non-existent.
      */
     public Command parseCommand(String input) throws DukeException, IOException {
-        String prefixArguments = input;
-        String suffixArguments = "";
         int idx = input.indexOf(' ');
         if (idx >= 0) {
-            prefixArguments = input.substring(0, idx);
-            suffixArguments = input.substring(idx + 1);
+            String prefixArguments = input.substring(0, idx);
+            String suffixArguments = input.substring(idx + 1);
+            return handleMultiArgCommand(prefixArguments, suffixArguments);
+        } else {
+            return handleOneArgCommand(input);
         }
-        switch (prefixArguments) {
+    }
+
+    // Handles one argument commands.
+    private Command handleOneArgCommand(String input) throws DukeException {
+        switch (input) {
         case "bye":
-            return makeByeCommand(suffixArguments);
+            return makeByeCommand();
         case "list":
-            return makeListCommand(suffixArguments);
+            return makeListCommand();
+        default:
+            throw new InvalidCommandException();
+        }
+    }
+
+    // Handles multi argument commands.
+    private Command handleMultiArgCommand(
+            String prefixArguments, String suffixArguments) throws DukeException {
+        switch (prefixArguments) {
         case "done":
             return makeDoneCommand(suffixArguments);
         case "delete":
@@ -78,16 +96,50 @@ public class Parser {
         return time.split("t");
     }
 
+    /**
+     * Handles parsing of the stored tasks data for Storage class.
+     *
+     * @param taskData The task's stored data.
+     * @return The appropriate Task object.
+     */
+    public static Task parseStoredTaskData(String taskData) {
+        String[] args = taskData.split(" // ");
+        String taskType = args[0];
+        String description = args[2];
+        Boolean isTaskDone = Integer.parseInt(args[1]) != 0;
+
+        assert args.length == 3 || args.length == 5;
+
+        if (taskType.equals("Todo")) {
+            return new Todo(description, isTaskDone);
+        }
+
+        String date = args[3];
+        String time = args[4];
+        if (taskType.equals("Event")) {
+            return new Event(description, date, time, isTaskDone);
+        } else {
+            assert taskType.equals("Deadline");
+            return new Deadline(description, date, time, isTaskDone);
+        }
+    }
+
     // Extracts the date and time from user input.
-    private String[] parseDateTime(String datetime) {
-        int idx = datetime.indexOf(" ");
+    private String[] parseDateTime(String dateTimeArg) {
+        int idx = dateTimeArg.indexOf(" ");
+
+        // The "x" literals serve as a filler to prevent null array variables.
         String[] res = {"x", "x"};
+
         if (idx >= 0) {
-            res[0] = datetime.substring(0, idx);
-            res[1] = datetime.substring(idx + 1);
+            // Date argument
+            res[0] = dateTimeArg.substring(0, idx);
+            // Time argument
+            res[1] = dateTimeArg.substring(idx + 1);
             return res;
         }
-        res[0] = datetime;
+
+        res[0] = dateTimeArg;
         return res;
     }
 
@@ -98,48 +150,49 @@ public class Parser {
         }
 
         String[] args = suffixArguments.split("/");
-        for (int i = 0; i < args.length; i++) {
-            args[i] = args[i].trim();
-        }
+        String description = args[0].trim();
+        String dateTimeArg = args[1].trim();
 
-        String[] dateAndTime = parseDateTime(args[1]);
-
-        if (DateTime.isInvalidDate(dateAndTime[0])) {
+        String[] dateAndTime = parseDateTime(dateTimeArg);
+        String date = dateAndTime[0];
+        String time = dateAndTime[1];
+        if (DateTime.isInvalidDate(date)) {
             throw new InvalidDateException();
         }
-        if (isInvalidTime(dateAndTime[1])) {
+        if (isInvalidTime(time)) {
             throw new InvalidTimeException();
         }
 
         String[] res = new String[3];
-        res[0] = args[0];
-        res[1] = dateAndTime[0];
-        res[2] = dateAndTime[1];
+        res[0] = description;
+        res[1] = date;
+        res[2] = time;
 
         return res;
     }
 
+    // Checks the validity of time for both deadline and event tasks.
     private boolean isInvalidTime(String time) {
+        // Checks time for deadline task.
         if (!DateTime.isInvalidTime(time)) {
             return false;
         }
-        int toIdx = time.indexOf("t");
-        String timeStart = time.substring(0, toIdx);
-        String timeEnd = time.substring(toIdx + 1);
-        return DateTime.isInvalidTime(timeStart) || DateTime.isInvalidTime(timeEnd);
+
+        // Checks time range for event task.
+        int tIdx = time.indexOf("t");
+        String timeStart = time.substring(0, tIdx);
+        String timeEnd = time.substring(tIdx + 1);
+        boolean isInvalidTimeStart = DateTime.isInvalidTime(timeStart);
+        boolean isInvalidTimeEnd = DateTime.isInvalidTime(timeEnd);
+
+        return isInvalidTimeStart || isInvalidTimeEnd;
     }
 
-    private Command makeByeCommand(String inputSuffix) throws DukeException {
-        if (!inputSuffix.isEmpty()) {
-            throw new InvalidCommandException();
-        }
+    private Command makeByeCommand() {
         return new ByeCommand();
     }
 
-    private Command makeListCommand(String inputSuffix) throws DukeException {
-        if (!inputSuffix.isEmpty()) {
-            throw new InvalidCommandException();
-        }
+    private Command makeListCommand() {
         return new ListCommand();
     }
 

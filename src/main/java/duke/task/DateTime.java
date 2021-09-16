@@ -13,7 +13,7 @@ public class DateTime {
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-    private LocalDate date;
+    private final LocalDate date;
     private LocalTime time;
     private LocalTime startTime;
     private LocalTime endTime;

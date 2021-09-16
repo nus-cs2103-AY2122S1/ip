@@ -7,12 +7,13 @@ import duke.misc.Ui;
  * ListCommand class to represent the command to list the current tasks.
  */
 public class ListCommand extends Command {
-    private boolean isBye = false;
+    private final boolean isBye;
 
     /**
      * Constructor for ListCommand class.
      */
     public ListCommand() {
+        isBye = false;
     }
 
     /**

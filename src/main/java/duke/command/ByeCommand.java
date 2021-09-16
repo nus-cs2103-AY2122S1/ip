@@ -9,7 +9,7 @@ import duke.misc.Ui;
  * ByeCommand class which represents the command to exit Duke.
  */
 public class ByeCommand extends Command {
-    private boolean isBye;
+    private final boolean isBye;
 
     /**
      * Constructor for ByeCommand class.

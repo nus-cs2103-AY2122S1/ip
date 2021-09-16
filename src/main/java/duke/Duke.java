@@ -40,8 +40,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command command = p.parseCommand(input);
-            if (command.getIsBye() == true) {
+            Command command = p.parseCommand(input.trim());
+            if (command.getIsBye()) {
                 isExited = true;
             }
             return command.execute(tl);

@@ -4,7 +4,7 @@ package duke.task;
  * Deadline class to represent a task with a deadline.
  */
 public class Deadline extends Task {
-    private DateTime byDateTime;
+    private final DateTime byDateTime;
 
     /**
      * Constructor for Deadline class.
@@ -51,7 +51,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + byDateTime.getFormattedDate() + " "
-                + byDateTime.getFormattedTime() + ")\n";
+                + " (by: "
+                + byDateTime.getFormattedDate()
+                + " "
+                + byDateTime.getFormattedTime()
+                + ")\n";
     }
 }

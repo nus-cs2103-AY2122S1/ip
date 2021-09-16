@@ -11,8 +11,8 @@ import duke.task.Todo;
  * AddTodoCommand class to represent the command to add a Todo task.
  */
 public class AddTodoCommand extends Command {
-    private boolean isBye = false;
-    private String inputSuffix;
+    private final boolean isBye;
+    private final String inputSuffix;
 
     /**
      * Constructor for AddTodoCommand class.
@@ -21,6 +21,7 @@ public class AddTodoCommand extends Command {
      */
     public AddTodoCommand(String inputSuffix) {
         this.inputSuffix = inputSuffix;
+        isBye = false;
     }
 
     /**
@@ -36,7 +37,8 @@ public class AddTodoCommand extends Command {
         Task task = new Todo(inputSuffix);
         return Ui.ADD_MSG
                 + tl.addTask(task)
-                + "Current tasks count: " + tl.getSize()
+                + "Current tasks count: "
+                + tl.getSize()
                 + "\n";
     }
 

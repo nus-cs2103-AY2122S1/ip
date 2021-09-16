@@ -9,6 +9,7 @@ import duke.misc.TaskList;
  * Command class to represent an executable command.
  */
 public abstract class Command {
+
     /**
      * Executes the appropriate operations according to command type.
      *

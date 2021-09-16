@@ -10,8 +10,8 @@ import duke.misc.Ui;
  * DoneCommand class to represent a command to mark a task as done.
  */
 public class DoneCommand extends Command {
-    private boolean isBye = false;
-    private int idx;
+    private final boolean isBye;
+    private final int idx;
 
     /**
      * Constructor for DoneCommand class.
@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int idx) {
         this.idx = idx;
+        isBye = false;
     }
 
     /**

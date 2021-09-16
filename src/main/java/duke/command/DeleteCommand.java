@@ -10,8 +10,8 @@ import duke.misc.Ui;
  * DeleteCommand class to represent a command to delete a specific task.
  */
 public class DeleteCommand extends Command {
-    private boolean isBye = false;
-    private int idx;
+    private final boolean isBye;
+    private final int idx;
 
     /**
      * Constructor for DeleteCommand class.
@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int idx) {
         this.idx = idx;
+        isBye = false;
     }
 
     /**

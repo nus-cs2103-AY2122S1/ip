@@ -4,6 +4,7 @@ package duke.task;
  * Todo class which represents a task without a deadline.
  */
 public class Todo extends Task {
+
     /**
      * Constructor of Todo class.
      *

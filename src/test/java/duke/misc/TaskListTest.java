@@ -15,9 +15,11 @@ class TaskListTest {
     void testDelete() {
         try {
             TaskList tl = new TaskList();
+            tl.initialise();
             Todo task = new Todo("bake cake");
             tl.addTask(task);
-            assertEquals(task.toString(), tl.deleteTask(1));
+            int idx = tl.getSize();
+            assertEquals(task.toString(), tl.deleteTask(idx));
         } catch (DukeException | IOException e) {
             fail();
         }

@@ -147,6 +147,6 @@ public class TaskList {
                 .filter(task -> isSubSequence(task.getDescription(), key))
                 .map(Task::toString)
                 .map(description -> "- " + description)
-                .collect(Collectors.joining(""));
+                .collect(Collectors.joining());
     }
 }

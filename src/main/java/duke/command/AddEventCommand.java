@@ -11,8 +11,8 @@ import duke.task.Task;
  * AddEventCommand class which represents the command to add an Event task.
  */
 public class AddEventCommand extends Command {
-    private boolean isBye = false;
-    private String[] args;
+    private final boolean isBye;
+    private final String[] args;
 
     /**
      * Constructor for AddEventCommand class.
@@ -21,6 +21,7 @@ public class AddEventCommand extends Command {
      */
     public AddEventCommand(String[] args) {
         this.args = args;
+        isBye = false;
     }
 
     /**
@@ -35,7 +36,8 @@ public class AddEventCommand extends Command {
         Task task = new Event(args[0], args[1], args[2]);
         return Ui.ADD_MSG
                 + tl.addTask(task)
-                + "Current tasks count: " + tl.getSize()
+                + "Current tasks count: "
+                + tl.getSize()
                 + "\n";
     }
 

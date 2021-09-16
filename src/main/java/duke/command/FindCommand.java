@@ -9,11 +9,17 @@ import duke.misc.Ui;
  * FindCommand class to represent command to find specific tasks.
  */
 public class FindCommand extends Command {
-    private boolean isBye = false;
-    private String inputSuffix;
+    private final boolean isBye;
+    private final String inputSuffix;
 
+    /**
+     * Constructor for FindCommand class.
+     *
+     * @param inputSuffix The keyword to search for tasks.
+     */
     public FindCommand(String inputSuffix) {
         this.inputSuffix = inputSuffix;
+        isBye = false;
     }
 
     /**
