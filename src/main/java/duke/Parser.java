@@ -50,6 +50,10 @@ public class Parser {
      */
     public String parse(String input) {
         String result = "";
+
+        assert taskList != null : "taskList must be initialised by this point";
+        assert storage != null : "storage must be initialised by this point";
+
         try {
             if (input.equals(COMMAND_EXIT)) {
                 //TO-DO
