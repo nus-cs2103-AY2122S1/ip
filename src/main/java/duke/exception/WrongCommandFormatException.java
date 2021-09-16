@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Class that encapsulates an exception thrown when user enters a command with the wrong format.
+ */
 public class WrongCommandFormatException extends Exception {
 
     private String message;
