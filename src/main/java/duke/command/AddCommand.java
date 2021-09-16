@@ -49,7 +49,7 @@ public class AddCommand extends Command {
     public Task addDeadline(String inputDate, String description) throws DukeException {
         try {
             LocalDate date = LocalDate.parse(inputDate.trim());
-            return new Deadline(description.trim(), date);
+            return new Deadline(description.trim().split("deadline")[1].trim(), date);
         } catch (DateTimeParseException e) {
             throw new DukeException("OH NO :( I can't seem to understand "
                     + "the date you have entered.\n" + "I can only understand if it "

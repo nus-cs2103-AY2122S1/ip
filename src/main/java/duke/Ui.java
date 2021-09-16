@@ -59,7 +59,7 @@ public class Ui {
      * Prints the message for listing tasks.
      */
     public String showList() {
-        return "Look at how busy you are!! :";
+        return "Here is your list of tasks :";
     }
 
     /**

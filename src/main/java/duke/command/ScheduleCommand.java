@@ -69,7 +69,7 @@ public class ScheduleCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String taskSchedule = "You are sooo busy!! :\n";
+        String taskSchedule = "Here is your schedule :\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task checkTask = tasks.get(i);
             if (!(checkTask instanceof Todo)) {
