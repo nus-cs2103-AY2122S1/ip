@@ -4,11 +4,7 @@ import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 /**
  * A GUI for Duke using FXML.

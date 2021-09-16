@@ -13,7 +13,7 @@ public class Event extends Task {
      * Constructs Event object
      *
      * @param name name of task
-     * @param at date and time for task to be completed by
+     * @param at date and time for task to commence
      */
     public Event(String name, LocalDateTime at) {
         super(name);

@@ -4,12 +4,10 @@ import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.util.List;
-
 public class ListCommand extends Command {
-    final static String cmd = "list";
-    final static String usage = "list all functions";
-    final static String format = "list";
+    static final String CMD = "list";
+    static final String USAGE = "list all functions";
+    static final String FORMAT = "list";
 
     public ListCommand() {}
 
@@ -19,14 +17,14 @@ public class ListCommand extends Command {
     }
 
     public static String getCmd() {
-        return cmd;
+        return CMD;
     }
 
     public static String getUsage() {
-        return usage;
+        return USAGE;
     }
 
     public static String getFormat() {
-        return format;
+        return FORMAT;
     }
 }

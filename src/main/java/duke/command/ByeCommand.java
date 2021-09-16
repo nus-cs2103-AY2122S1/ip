@@ -5,9 +5,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 public class ByeCommand extends Command {
-    final static String cmd = "bye";
-    final static String usage = "exit app";
-    final static String format = "bye";
+    static final String CMD = "bye";
+    static final String USAGE = "exit app";
+    static final String FORMAT = "bye";
 
     public ByeCommand() {}
 
@@ -17,14 +17,14 @@ public class ByeCommand extends Command {
     }
 
     public static String getCmd() {
-        return cmd;
+        return CMD;
     }
 
     public static String getUsage() {
-        return usage;
+        return USAGE;
     }
 
     public static String getFormat() {
-        return format;
+        return FORMAT;
     }
 }

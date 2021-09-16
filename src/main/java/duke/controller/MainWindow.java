@@ -1,8 +1,12 @@
 package duke.controller;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import duke.Main;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,10 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -38,6 +38,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/winnie.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/baymax.jpg"));
 
+    /**
+     * Constructs a MainWindow object
+     *
+     * @param stage stage
+     */
     public MainWindow(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         fxmlLoader.setRoot(this);
@@ -60,6 +65,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Shows list of tasks and welcomes user
+     */
     public void start() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getUi().showTaskList(duke.getTaskList(), "past"), dukeImage),
@@ -109,5 +117,4 @@ public class MainWindow extends AnchorPane {
         sendButton.setDisable(true);
         timer.schedule(exit, new Date(System.currentTimeMillis() + 3 * 1000));
     }
-
 }

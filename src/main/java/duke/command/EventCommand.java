@@ -1,20 +1,25 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-
 public class EventCommand extends Command {
-    final static String cmd = "event";
-    final static String usage = "add tasks that need that starts at a specific time";
-    final static String format = "event {task name} /by {yyyy-MM-dd HH:mm}";
+    static final String CMD = "event";
+    static final String USAGE = "add tasks that need that starts at a specific time";
+    static final String FORMAT = "event {task name} /by {yyyy-MM-dd HH:mm}";
 
     private String name;
     private LocalDateTime at;
 
+    /**
+     * Constructs an EventCommand object
+     *
+     * @param name name of task
+     * @param at date and time for task to commence
+     */
     public EventCommand(String name, LocalDateTime at) {
         this.name = name;
         this.at = at;
@@ -31,14 +36,14 @@ public class EventCommand extends Command {
     }
 
     public static String getCmd() {
-        return cmd;
+        return CMD;
     }
 
     public static String getUsage() {
-        return usage;
+        return USAGE;
     }
 
     public static String getFormat() {
-        return format;
+        return FORMAT;
     }
 }

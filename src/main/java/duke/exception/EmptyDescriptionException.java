@@ -4,7 +4,7 @@ package duke.exception;
  * Thrown when no descriptions are provided for tasks
  */
 public class EmptyDescriptionException extends DukeException {
-    private final String ERROR;
+    private final String error;
 
     /**
      * Constructs EmptyDescriptionException object
@@ -14,7 +14,7 @@ public class EmptyDescriptionException extends DukeException {
      */
     public EmptyDescriptionException(String msg, String task) {
         super(msg);
-        this.ERROR = String.format("OOPS!!! The description of a %s cannot be empty.\n", task);
+        this.error = String.format("OOPS!!! The description of a %s cannot be empty.\n", task);
     }
 
     /**
@@ -24,7 +24,7 @@ public class EmptyDescriptionException extends DukeException {
      */
     @Override
     public String getError() {
-        return this.ERROR;
+        return this.error;
     }
 
 }

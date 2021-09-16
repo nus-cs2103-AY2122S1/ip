@@ -5,9 +5,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
-    final static String cmd = "find";
-    final static String usage = "find a task by searching for a keyword";
-    final static String format = "find {keyword}";
+    static final String CMD = "find";
+    static final String USAGE = "find a task by searching for a keyword";
+    static final String FORMAT = "find {keyword}";
 
     private String keyword;
 
@@ -24,14 +24,14 @@ public class FindCommand extends Command {
     }
 
     public static String getCmd() {
-        return cmd;
+        return CMD;
     }
 
     public static String getUsage() {
-        return usage;
+        return USAGE;
     }
 
     public static String getFormat() {
-        return format;
+        return FORMAT;
     }
 }

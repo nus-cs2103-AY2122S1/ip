@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Tasks that need to be done before a specific date and time
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDateTime by;
 
     /**

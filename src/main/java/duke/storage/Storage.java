@@ -1,23 +1,24 @@
 package duke.storage;
 
-import duke.data.TaskList;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.io.IOException;
+
+import duke.data.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Deals with loading tasks from file and saving tasks in file
  */
 public class Storage {
 
-    final private String path;
+    private final String path;
     private TaskList tasks;
 
     /**
@@ -37,47 +38,47 @@ public class Storage {
      * @throws IOException
      */
     public TaskList loadData() throws IOException {
-            File file = new File(path);
-            tasks = new TaskList();
+        File file = new File(path);
+        tasks = new TaskList();
 
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdir();
-            }
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdir();
+        }
 
-            if (!file.exists()) {
-                file.createNewFile();
-            } else {
-                Scanner sc = new Scanner(file);
-                while(sc.hasNextLine()) {
-                    String s = sc.nextLine();
+        if (!file.exists()) {
+            file.createNewFile();
+        } else {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String s = sc.nextLine();
 
-                    String[] arr = s.split("/");
-                    boolean isDone = (arr[1].equals("1"));
-                    String name = arr[2];
+                String[] arr = s.split("/");
+                boolean isDone = (arr[1].equals("1"));
+                String name = arr[2];
 
-                    if (s.contains("T")) {
-                        ToDo todo = new ToDo(name, isDone);
-                        tasks.addTask(todo);
-                    }
-
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-                    if (s.contains("D")) {
-                        LocalDateTime by = LocalDateTime.parse(arr[3], formatter);
-                        Deadline deadline = new Deadline(name, by, isDone);
-                        tasks.addTask(deadline);
-                    }
-
-                    if (s.contains("E")) {
-                        LocalDateTime at = LocalDateTime.parse(arr[3], formatter);
-                        Event event = new Event(name, at, isDone);
-                        tasks.addTask(event);
-                    }
+                if (s.contains("T")) {
+                    ToDo todo = new ToDo(name, isDone);
+                    tasks.addTask(todo);
                 }
-                System.out.println(System.lineSeparator());
-                sc.close();
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+                if (s.contains("D")) {
+                    LocalDateTime by = LocalDateTime.parse(arr[3], formatter);
+                    Deadline deadline = new Deadline(name, by, isDone);
+                    tasks.addTask(deadline);
+                }
+
+                if (s.contains("E")) {
+                    LocalDateTime at = LocalDateTime.parse(arr[3], formatter);
+                    Event event = new Event(name, at, isDone);
+                    tasks.addTask(event);
+                }
             }
-            return tasks;
+            System.out.println(System.lineSeparator());
+            sc.close();
+        }
+        return tasks;
     }
 
     /**
@@ -86,18 +87,18 @@ public class Storage {
      * @param tasks current list of tasks
      */
     public void updateData(TaskList tasks) {
-       try {
-           this.tasks = tasks;
-           File file = new File(path);
-           FileWriter fw = new FileWriter(file);
+        try {
+            this.tasks = tasks;
+            File file = new File(path);
+            FileWriter fw = new FileWriter(file);
 
-           for (int i = 0; i < tasks.getSize(); i++) {
-               Task task = tasks.getTask(i);
-               fw.write(task.toStringInStorage() + "\n");
-           }
-           fw.close();
-       } catch (IOException e) {
-           System.out.println("( ⚆ _ ⚆ ) OOPS!!! Something went wrong while uploading data!");
-       }
+            for (int i = 0; i < tasks.getSize(); i++) {
+                Task task = tasks.getTask(i);
+                fw.write(task.toStringInStorage() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("( ⚆ _ ⚆ ) OOPS!!! Something went wrong while uploading data!");
+        }
     }
 }

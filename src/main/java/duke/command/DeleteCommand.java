@@ -6,9 +6,9 @@ import duke.task.Task;
 import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
-    final static String cmd = "delete";
-    final static String usage = "deletes specified task";
-    final static String format =  "delete {task number}";
+    static final String CMD = "delete";
+    static final String USAGE = "deletes specified task";
+    static final String FORMAT = "delete {task number}";
 
     private int taskNum;
 
@@ -27,14 +27,14 @@ public class DeleteCommand extends Command {
     }
 
     public static String getCmd() {
-        return cmd;
+        return CMD;
     }
 
     public static String getUsage() {
-        return usage;
+        return USAGE;
     }
 
     public static String getFormat() {
-        return format;
+        return FORMAT;
     }
 }

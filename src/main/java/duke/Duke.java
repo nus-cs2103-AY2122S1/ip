@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.data.TaskList;
 import duke.exception.DukeException;
@@ -7,7 +9,6 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.io.IOException;
 
 /**
  * A Personal Assistant Chat bot that helps to keep track of tasks
@@ -34,7 +35,7 @@ public class Duke {
             ui.showLoadingError();
             taskList = new TaskList();
         }
-        parser = new Parser(this.taskList, this.ui, this.storage);
+        parser = new Parser(this.taskList);
     }
 
     public Ui getUi() {
@@ -46,7 +47,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        try{
+        try {
             Command command = parser.parse(input);
             return command.execute(this.taskList, this.ui, this.storage);
 

@@ -5,9 +5,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 public class HelpCommand extends Command {
-    final static String cmd = "help";
-    final static String usage = "shows list of all commands & usages";
-    final static String format = "help";
+    static final String CMD = "help";
+    static final String USAGE = "shows list of all commands & usages";
+    static final String FORMAT = "help";
 
     public HelpCommand() {}
 
@@ -17,14 +17,14 @@ public class HelpCommand extends Command {
     }
 
     public static String getCmd() {
-        return cmd;
+        return CMD;
     }
 
     public static String getUsage() {
-        return usage;
+        return USAGE;
     }
 
     public static String getFormat() {
-        return format;
+        return FORMAT;
     }
 }

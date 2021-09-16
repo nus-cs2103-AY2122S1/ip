@@ -4,7 +4,7 @@ package duke.exception;
  * Thrown when user does not provide correct preposition for certain task descriptions
  */
 public class MissingPreException extends DukeException {
-    private final String ERROR;
+    private final String error;
 
     /**
      * Constructs MissingPreException object
@@ -14,7 +14,7 @@ public class MissingPreException extends DukeException {
      */
     public MissingPreException(String msg, String pre) {
         super(msg);
-        this.ERROR = String.format("OOPS!!! Missing %s preposition!", pre);
+        this.error = String.format("OOPS!!! Missing %s preposition!", pre);
     }
 
     /**
@@ -24,6 +24,6 @@ public class MissingPreException extends DukeException {
      */
     @Override
     public String getError() {
-        return this.ERROR;
+        return this.error;
     }
 }

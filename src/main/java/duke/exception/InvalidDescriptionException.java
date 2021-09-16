@@ -4,7 +4,7 @@ package duke.exception;
  * Thrown when description of task is invalid
  */
 public class InvalidDescriptionException extends DukeException {
-    private final String ERROR;
+    private final String error;
 
     /**
      * Constructs InvalidDescriptionException object
@@ -14,7 +14,7 @@ public class InvalidDescriptionException extends DukeException {
      */
     public InvalidDescriptionException(String msg, String task) {
         super(msg);
-        this.ERROR = String.format("OOPS!!! Please enter a proper description for %s", task);
+        this.error = String.format("OOPS!!! Please enter a proper description for %s", task);
     }
 
     /**
@@ -24,6 +24,6 @@ public class InvalidDescriptionException extends DukeException {
      */
     @Override
     public String getError() {
-        return this.ERROR;
+        return this.error;
     }
 }

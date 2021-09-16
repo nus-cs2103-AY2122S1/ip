@@ -1,20 +1,32 @@
 package duke.controller;
 
+import java.io.IOException;
+
 import duke.Main;
-import duke.command.*;
-import javafx.beans.binding.Bindings;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Controller for Help Page.
@@ -29,9 +41,15 @@ public class HelpPage extends AnchorPane {
     @FXML
     private Label label;
 
-    private Stage stage;
-    private Scene prev;
+    private final Stage stage;
+    private final Scene prev;
 
+    /**
+     * Constructs a HelpPage object
+     *
+     * @param stage stage
+     * @param prev previous scene
+     */
     public HelpPage(Stage stage, Scene prev) {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/HelpPage.fxml"));
         fxmlLoader.setRoot(this);
@@ -45,23 +63,27 @@ public class HelpPage extends AnchorPane {
         }
     }
 
+    /**
+     * Builds the help page
+     */
     public void start() {
         label.setText("Here's some help!");
+        //noinspection rawtypes
         TableView tableView = new TableView();
         TableColumn<Command, String> command = new TableColumn<>("Command");
         TableColumn<Command, String> function = new TableColumn<>("Function");
         TableColumn<Command, String> format = new TableColumn<>("Format");
 
         command.setCellValueFactory(
-                new PropertyValueFactory<>("cmd")
+                new PropertyValueFactory<>("CMD")
         );
 
         function.setCellValueFactory(
-                new PropertyValueFactory<>("usage")
+                new PropertyValueFactory<>("USAGE")
         );
 
         format.setCellValueFactory(
-                new PropertyValueFactory<>("format")
+                new PropertyValueFactory<>("FORMAT")
         );
 
         tableView.getColumns().add(command);
@@ -78,13 +100,16 @@ public class HelpPage extends AnchorPane {
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label,tableView, exitButton);
+        vBox.getChildren().addAll(label, tableView, exitButton);
 
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Returns to previous scene
+     */
     @FXML
     public void exitHelpPage() {
         stage.setScene(prev);

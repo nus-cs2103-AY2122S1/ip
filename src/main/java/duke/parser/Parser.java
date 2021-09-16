@@ -1,36 +1,46 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.storage.Storage;
-import duke.data.TaskList;
-import duke.exception.*;
-import duke.ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.data.TaskList;
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidDescriptionException;
+import duke.exception.MissingPreException;
+import duke.exception.NoNumberException;
+import duke.exception.TaskNoDateTimeException;
+import duke.exception.TaskNoNameException;
+import duke.exception.TaskNotFoundException;
 
 /**
  * Deals with making sense of user command
  */
 public class Parser {
 
-    TaskList tasks;
-    Ui ui;
-    Storage storage;
+    private TaskList tasks;
 
     /**
      * Constructs Parser object
+     *  @param tasks   list of tasks
      *
-     * @param tasks   list of tasks
-     * @param ui      to deal with interactions with users
-     * @param storage to update file
      */
 
-    public Parser(TaskList tasks, Ui ui, Storage storage) {
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
-        this.ui = ui;
-        this.storage = storage;
     }
 
     /**
