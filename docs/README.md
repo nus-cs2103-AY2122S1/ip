@@ -19,7 +19,7 @@ Download the file, place the file in the desired directory, then simply double c
 cd <name of directory which the ted.jar is located>
 java -jar ted.jar
 ```
-> ###Warning
+> **Warning**
 > (See section on `Saving and loading of tasks` in the `Features and commands` section below for a better undestanding of why this matters)  
 > 
 > On some mac systems, the security permissions might not be configured to allow the .jar file to read and write to disk when the app is run using double click.  
@@ -37,7 +37,7 @@ java -jar ted.jar
 ### Saving and loading of tasks
 One stand-out feature is that **tasks are automatically saved to the hard disk** so that every time ted starts up it loads your previous tasks and you can simply continue where you left off the previous time. This file which all the tasks are saved in is called `tasks.txt` and will be automatically created if it is **not found in the same directory as ted.jar**.
 
-> ###Warning
+> **Warning**
 > Always make sure that `tasks.txt` is in the same directory as `ted.jar` to ensure that ted can find the file to read from and write to.
 
 > **Tip:** this means that if you ever want to start afresh and delete all the tasks in the list, you can simply delete the `tasks.txt` file so that ted will just create a new one on the next run.
