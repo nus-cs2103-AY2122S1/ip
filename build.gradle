@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.GUI.Launcher"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -56,6 +56,6 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
 }

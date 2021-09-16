@@ -7,10 +7,10 @@
 
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 public class Ui {
 
@@ -58,9 +58,9 @@ public class Ui {
      * @return The bot's output for the delete command.
      */
     public String showDeletion(String taskRemoved, int taskListSize) {
-            return String.format("Oki! I have removed this task:\n%s\n%d more tasks to go!",
-                    taskRemoved,
-                    taskListSize);
+        return String.format("Oki! I have removed this task:\n%s\n%d more tasks to go!",
+                taskRemoved,
+                taskListSize);
     }
 
     /**
@@ -100,7 +100,7 @@ public class Ui {
     public String showSearch(ArrayList<String> wordList) {
 
         if (wordList.isEmpty()) {
-           return "You don't have anything in your todo list with that word!";
+            return "You don't have anything in your todo list with that word!";
 
         } else {
             StringBuilder words = new StringBuilder();

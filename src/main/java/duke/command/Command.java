@@ -7,6 +7,9 @@
 
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.NotDoneRightException;
@@ -18,8 +21,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.ui.Ui;
-import java.time.LocalDate;
-import java.io.IOException;
+
 
 public class Command {
 

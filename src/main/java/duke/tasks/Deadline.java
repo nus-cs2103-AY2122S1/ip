@@ -11,8 +11,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Deadline extends Task {
-    private final LocalDate dateBy;
+
     protected ArrayList<String> tags = new ArrayList<>();
+    private final LocalDate dateBy;
 
     // This is used only for loading from the storage
     /**
@@ -63,6 +64,5 @@ public class Deadline extends Task {
     public String getStatusString() {
         return String.format("D@%d@%s@%s@%s@", (isDone ? 1 : 0), this.description, this.dateBy.toString(),
                 getTagsForStorage(this.tags));
-//        return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy.toString();
     }
 }

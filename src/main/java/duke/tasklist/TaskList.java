@@ -7,8 +7,10 @@
 
 package duke.tasklist;
 
-import duke.tasks.Task;
 import java.util.ArrayList;
+
+import duke.tasks.Task;
+
 
 public class TaskList {
     private final ArrayList<Task> tasks;

@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private final Duke DUKE = new Duke();
+    private final Duke duke = new Duke();
 
     /**
      * Constructor for Main.
@@ -43,7 +43,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.getIcons().add(new Image("/images/DaUser.png"));
             stage.setTitle("Notaro");
-            fxmlLoader.<duke.ui.MainWindow>getController().setDuke(DUKE);
+            fxmlLoader.<duke.ui.MainWindow>getController().setDuke(duke);
             stage.show();
 
         } catch (IOException e) {

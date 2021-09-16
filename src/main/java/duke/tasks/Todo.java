@@ -13,9 +13,21 @@ public class Todo extends Task {
 
     protected ArrayList<String> tags = new ArrayList<>();
 
+    /**
+     * Constructs a Todo object. This is used in creating a new Todo object.
+     *
+     * @param description The description of the Todo object.
+     */
     public Todo(String description) {
         super(description);
     }
+
+    /**
+     * Constructs a Todo object based on previous saved data. This is used when loading the saved file.
+     *
+     * @param description The description of the Todo object.
+     * @param isDone Whether the Todo object has been done or yet.
+     */
     public Todo(String description, boolean isDone, ArrayList<String> tags) {
         super(description);
         this.isDone = isDone;

@@ -9,16 +9,15 @@ package duke;
 
 import java.io.IOException;
 
-import duke.exceptions.DukeDataLoadException;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.scene.layout.AnchorPane;
-
 import duke.command.CommandExecutor;
+import duke.exceptions.DukeDataLoadException;
 import duke.exceptions.DukeExceptions;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
+import javafx.scene.layout.AnchorPane;
+
 
 public class Duke extends AnchorPane {
 
@@ -50,6 +49,7 @@ public class Duke extends AnchorPane {
                 Platform.exit();
             }
             return commandExecutor.execute(input);
+
         } catch (DukeExceptions | IOException exception) {
             return "Ohno! You were so exceptional, an error has occurred!\n" + exception.getMessage();
         }

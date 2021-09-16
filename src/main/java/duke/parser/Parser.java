@@ -8,11 +8,11 @@
 
 package duke.parser;
 
+import java.time.LocalDate;
+
 import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.NotDoneRightException;
-import java.time.LocalDate;
-import java.util.zip.DataFormatException;
 
 public class Parser {
 

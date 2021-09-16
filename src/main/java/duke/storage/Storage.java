@@ -7,14 +7,13 @@
 
 package duke.storage;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.exceptions.DukeDataLoadException;
 import duke.tasks.Deadline;
@@ -26,7 +25,7 @@ import duke.tasks.Todo;
 public class Storage {
 
     private final ArrayList<String> commandsSaved = new ArrayList<>(); // array of saved lines in the new txt file
-    private final File FILE;
+    private final File file;
 
     /**
      * Constructs a Storage object.
@@ -34,7 +33,7 @@ public class Storage {
      * @param filePath The filePath where the file is found or will be created.
      */
     public Storage(String filePath) {
-        FILE = new File(filePath);
+        file = new File(filePath);
     }
 
     /**
@@ -46,79 +45,84 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException, DukeDataLoadException {
 
-        final ArrayList<Task> tasks = new ArrayList<>();
-
-        // If the file exists, print out the previous data if it exists
-        if (FILE.exists()) {
-
-            if (FILE.length() == 0) {
-                System.out.println("Oops! Looks like you don't have anything saved :(");
-
-            } else {
-                System.out.println("Here's your progress:");
-                Scanner fileSc = new Scanner(FILE);
-
-                while (fileSc.hasNext()) {
-                    String nextLine = fileSc.nextLine();
-
-                    // Interprets each line of the file / each command
-                    String[] txtFileCmd = nextLine.split("@");
-                    String taskType = txtFileCmd[0];
-                    boolean taskState = Integer.parseInt(txtFileCmd[1]) != 0;  // 0 for not done, 1 for done
-                    String taskInfo = txtFileCmd[2];
-                    ArrayList<String> taskTags = formTagList(txtFileCmd[4]);
-
-                    // This is either the dateBy for Deadline or eventDetails for Events. Empty field for Todo.
-                    String moreTaskInfo = txtFileCmd[3];
-
-
-                    commandsSaved.add(nextLine);
-
-                    // Checks the task type (i.e. deadline, todo or event) and add them to tasks respectively
-                    switch (taskType) {
-                    case "T": {
-                        tasks.add(new Todo(taskInfo, taskState, taskTags));
-                        break;
-
-                    }
-                    case "D": {
-                        // String dateBy = txtFileCmd[3];
-                        tasks.add(new Deadline(taskInfo, LocalDate.parse(moreTaskInfo), taskState, taskTags));
-                        break;
-
-                    }
-                    case "E": {
-                        // String eventDetails = txtFileCmd[3];
-                        tasks.add(new Event(taskInfo, moreTaskInfo, taskState, taskTags));
-                        break;
-                    }
-                    default:
-                        throw new DukeDataLoadException("The task is not recognized!");
-
-                    }
-                }
-                fileSc.close();
-
-                for (int count = 0; count < tasks.size(); count++) {
-                    System.out.println((count + 1) + ". " + tasks.get(count).toString());
-                }
+        if (!file.exists()) {
+            // Create the data folder if it does not exist.
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdir();
             }
-
-        // If the file does not exist, create a new file
-        } else {
-//            System.out.println("Welcome new user!");
-//            System.out.println("Let me create a save file for you :)");
-            if (!FILE.getParentFile().exists()) {
-                FILE.getParentFile().mkdir();
-            }
-            FILE.createNewFile();
+            file.createNewFile(); // Create the duke.txt file.
+            return new ArrayList<Task>();
         }
 
+        if (file.length() == 0) {
+            return new ArrayList<Task>();
+        }
+
+        return readFileAddTasks();
+    }
+
+    /**
+     * Adds a Task parsed from the save file (data/duke.txt) into an ArrayList of tasks.
+     *
+     * @param tasks The ArrayList of tasks to which the saved task will be added.
+     * @param taskType The type of task to be added.
+     * @param taskState Whether the task has been completed.
+     * @param taskInfo Description of the task.
+     * @param moreTaskInfo Additional task information. dateBy for Deadline; eventDetails for Events; Empty for Todo
+     * @param taskTags Tags attached to the task.
+     * @throws DukeDataLoadException The exception is thrown when the task is not recognised.
+     */
+    private void addExistingTask(ArrayList<Task> tasks, String taskType, boolean taskState, String taskInfo,
+                                 String moreTaskInfo, ArrayList<String> taskTags) throws DukeDataLoadException {
+        // Checks the task type (i.e. deadline, todo or event) and add them to tasks respectively
+        switch (taskType) {
+        case "T": {
+            tasks.add(new Todo(taskInfo, taskState, taskTags));
+            break;
+
+        }
+        case "D": {
+            // String dateBy = txtFileCmd[3];
+            tasks.add(new Deadline(taskInfo, LocalDate.parse(moreTaskInfo), taskState, taskTags));
+            break;
+
+        }
+        case "E": {
+            // String eventDetails = txtFileCmd[3];
+            tasks.add(new Event(taskInfo, moreTaskInfo, taskState, taskTags));
+            break;
+        }
+        default:
+            throw new DukeDataLoadException("The task is not recognized!");
+
+        }
+    }
+
+    private ArrayList<Task> readFileAddTasks() throws FileNotFoundException, DukeDataLoadException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner fileSc = new Scanner(file);
+
+        while (fileSc.hasNext()) {
+            String nextLine = fileSc.nextLine();
+
+            // Interprets each line of the file / each command
+            String[] txtFileCmd = nextLine.split("@");
+            String taskType = txtFileCmd[0];
+            boolean taskState = Integer.parseInt(txtFileCmd[1]) != 0; // 0 for not done, 1 for done
+            String taskInfo = txtFileCmd[2];
+            String moreTaskInfo = txtFileCmd[3];
+            ArrayList<String> taskTags = formTagList(txtFileCmd[4]);
+
+            addExistingTask(tasks, taskType, taskState, taskInfo, moreTaskInfo, taskTags);
+            commandsSaved.add(nextLine);
+        }
+
+        fileSc.close();
         return tasks;
     }
 
     /**
-     * Forms an ArrayList<String> tags from a String tags.
+     * Forms an ArrayList of String called tags from a String of tags.
      *
      * @param tags the String of tags to be put into the ArrayList
      * @return the ArrayList formed from the tags
@@ -135,10 +139,6 @@ public class Storage {
             return tagList;
         }
     }
-//    private static ArrayList<String> formTagList(String tags) {
-//        String[] splitTags = tags.split(" ");
-//        return (ArrayList<String>) Arrays.asList(splitTags);
-//    }
 
     /**
      * Updates the file.
@@ -151,7 +151,7 @@ public class Storage {
             txt.append(s).append("\n");
         }
 
-        PrintWriter pw = new PrintWriter(FILE);
+        PrintWriter pw = new PrintWriter(file);
         pw.append(txt.toString());
         pw.flush();
     }

@@ -33,9 +33,10 @@ ___
 ### Add Event: `event`
 Adds an Event task to the list of tasks.
 
-Format : `event EVENT_NAME /at EVENT_DESCRIPTION`
+**Format**  
+`event EVENT_NAME /at EVENT_DESCRIPTION`
 
-Example:
+**Example**  
 Input : `event afa /at suntec`
 ```
 Okay! I've added the following:
@@ -47,9 +48,10 @@ ___
 ### Add Todo: `todo`
 Adds a Todo task to the list of tasks.
 
-Format : `todo TODO_NAME`
+**Format**  
+`todo TODO_NAME`
 
-Example:  
+**Example**  
 Input: `todo watch anime`  
 Output:
 ```
@@ -62,10 +64,10 @@ Okay! I've added the following:
 ### List Tasks: `list`
 Lists out all the tasks.
 
-Format : `list`
+**Format**  
+`list`
 
-Example:
-
+**Example**  
 Input : `list`  
 Output :
 ```
@@ -79,9 +81,10 @@ Here are your tasks:
 ### Mark Tasks as Done: `done`
 Mark a task as done.
 
-Format : `done INDEX`
+**Format**  
+`done INDEX`
 
-Example:  
+**Example**  
 Input : `done 1`  
 Output : 
 ```
@@ -91,9 +94,10 @@ Yay good job! [T][X] watch anime has been completed
 ### Tag Task: `tag`
 Tag tasks with additional descriptions.
 
-Format : `tag INDEX TAG_DESCRIPTION`
+**Format**  
+`tag INDEX TAG_DESCRIPTION`
 
-Example:  
+**Example**  
 Input: `tag 1 fun`  
 Output:
 ```
@@ -105,9 +109,10 @@ Oki! The tag fun has been added. Here is the modified task!
 ### Delete Tasks: `delete`
 Delete tasks from list of tasks.
 
-Format : `delete INDEX`
+**Format**  
+`delete INDEX`
 
-Example:  
+**Example**  
 Input : `delete 3`  
 Output :
 ```
@@ -119,9 +124,10 @@ Oki! I have removed this task:
 ### Find Tasks: `find`
 Search for tasks that match the given keyword.
 
-Format : `find KEYWORD`
+**Format**  
+`find KEYWORD`
 
-Example:  
+**Example**  
 Input : `find book`  
 Output:
 ```
@@ -134,13 +140,21 @@ Good luck!
 ### Exit Program: `bye`
 Exits the program.
 
-Format: `bye`
+Format:  
+`bye`
 
 ---
 ## FAQ  
 Q: How do I save my progress?  
 A: Data is automatically saved in your computer :)
 
-Q: Why does my jar file not run?  
-A: Check the data/duke.txt file if there are any errors, or clear it if it does not work.   
-Do note that doing so erases your progress. 
+Q: What is the data/duke.txt file generated after running the app?  
+A: It is the save file of the app. Please do not edit the folder and file in any way, 
+as it can lead to file corruption.
+
+Q: Why does my JAR file not run?  
+A: It is likely that the save file has been corrupted. 
+Check the duke.txt file saved in the data folder for any noticeable errors.
+If all else fails, clear the file or delete the folder.   
+Do note that doing so erases your progress.  
+
