@@ -20,10 +20,18 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final int FONT_SIZE = 16;
+    private static final int PADDING = 5;
+    private static final String LIGHT_GREEN_HEX_VALUE = "#42cb5f";
+    private static final String GREY_HEX_VALUE = "#e9e9eB";
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
+
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -39,19 +47,34 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /*
+     * Border radius adapted from
+     * José Pereda
+     * https://stackoverflow.com/questions/43557722/javafx-border-radius-background-color
+     */
     private DialogBox(String text, Image img, String backgroundColor) {
         this(text, img);
-        dialog.setStyle("-fx-font-family: Times New Roman; -fx-font-size: 16; " +
-                "-fx-background-color: " + backgroundColor);
+        dialog.setStyle("-fx-font-family: Times New Roman;"
+                + "-fx-font-size:" + FONT_SIZE + ";"
+                + "-fx-background-color: " + backgroundColor + ";"
+                + "-fx-padding: 5 5 5 10;"
+                + "-fx-background-radius: 10px;");
     }
 
+    /*
+     * Border radius adapted from
+     * José Pereda
+     * https://stackoverflow.com/questions/43557722/javafx-border-radius-background-color
+     */
     private DialogBox(String text, Image img, String backgroundColor, String fontColor) {
         this(text, img);
-        dialog.setStyle("-fx-font-family: Times New Roman; -fx-font-size: 16; " +
-                "-fx-background-color: " + backgroundColor + ";" +
-                "-fx-text-fill: " + fontColor);
+        dialog.setStyle("-fx-font-family: Times New Roman;"
+                + "-fx-font-size:" + FONT_SIZE + ";"
+                + "-fx-background-color: " + backgroundColor + ";"
+                + "-fx-text-fill: " + fontColor + ";"
+                + "-fx-padding: 5 5 5 10;"
+                + "-fx-background-radius: 10px;");
     }
-
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -64,11 +87,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, "#e9e9eB");
+        return new DialogBox(text, img, GREY_HEX_VALUE);
     }
 
     public static DialogBox getKermitDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "#42cb5f", "white");
+        var db = new DialogBox(text, img, LIGHT_GREEN_HEX_VALUE, "white");
         db.flip();
         return db;
     }
