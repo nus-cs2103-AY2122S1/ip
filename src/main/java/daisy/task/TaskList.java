@@ -9,9 +9,9 @@ import daisy.DaisyException;
  * TaskList class handles the task list of Daisy.
  */
 public class TaskList {
-    static final String ZERO_TASK_STRING = "There are no tasks in the list\n";
-    static final String ONE_TASK_STRING = "There is currently 1 task in your list\n";
-    static final String MULTIPLE_TASK_STRING = "There are currently %d tasks in your list\n";
+    static final String ZERO_TASK_STRING = "\nThere are no tasks in the list";
+    static final String ONE_TASK_STRING = "\nThere is currently 1 task in your list";
+    static final String MULTIPLE_TASK_STRING = "\nThere are currently %d tasks in your list";
     private ArrayList<Task> tasks;
 
     /**
