@@ -79,12 +79,14 @@ public abstract class Task {
      * @throws UserInputError Throws error if time String is not valid.
      */
     public void checkTimeFormat(String time) throws UserInputError {
-        if (time.length() != 4) { //checks that string adheres to 24h format
+        String trimmed = time.trim();
+
+        if (trimmed.length() != 4) { //checks that string adheres to 24h format
             throw new UserInputError("Invalid time input. Please ensure it is in 24h format");
         }
 
-        int hour = Integer.parseInt(time.substring(0, 2));
-        int min = Integer.parseInt(time.substring(2, 4));
+        int hour = Integer.parseInt(trimmed.substring(0, 2));
+        int min = Integer.parseInt(trimmed.substring(2, 4));
 
         if (hour < 0 || hour > 23 || min < 0 || min > 59) { //checks hour and min are valid
             throw new UserInputError("Your hour/minute input is invalid. Please check and try again!");

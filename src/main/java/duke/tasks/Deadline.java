@@ -46,8 +46,8 @@ public class Deadline extends Task {
      * @throws UserInputError Throws error with wrong datetime input format.
      */
     private String[] checkDateTimeFormat(String datetime) throws UserInputError {
-        String[] arr = datetime.split(" ");
-        if (arr.length > 2 || arr.length < 1) {
+        String[] arr = datetime.trim().split(" ", 2);
+        if (arr.length < 1) {
             throw new UserInputError("Invalid datetime format. "
                     + "Please ensure you leave a space between date and time");
         }
@@ -55,6 +55,7 @@ public class Deadline extends Task {
         if (arr.length == 2) { //if there exists time input, check time format
             String time = arr[1];
             checkTimeFormat(time);
+            arr[1] = time.trim();
         }
         return arr;
     }
@@ -72,7 +73,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String formatTime = time.equals("") ? "" : ", " + time;
-        return "[D]" + super.toString() + " (by: " + formattedDate + formatTime + ")";
+        String formatTime = time.equals("") ? "" : " || " + time;
+        return "[D]" + super.toString() + " { by: " + formattedDate + formatTime + " }";
     }
 }

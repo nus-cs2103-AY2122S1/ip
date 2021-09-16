@@ -19,7 +19,7 @@ public class CompleteCommand extends Command {
 
         Task task = tasks.getTask(index);
         if (task.isDone()) {
-            return "Great! But you have already completed this task!";
+            return "Great! But you have already completed this task :(";
         } else {
             task.markDone();
             Storage.writeDatabase(tasks);

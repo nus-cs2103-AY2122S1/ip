@@ -19,6 +19,8 @@ public class FindCommand extends Command {
                 op.append(tasks.getTask(i).toString()).append("\n");
             }
         }
-        return "Here are the matching tasks in your list:\n" + op;
+        return op.length() == 0
+                ? "Yikes! No tasks match what you are looking for :("
+                : "Here are the matching tasks in your list:\n" + op;
     }
 }

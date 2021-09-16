@@ -26,7 +26,7 @@ public class Parser {
      */
     public Parser(String input, TaskList taskList) {
         this.input = input;
-        this.command = getFirstWord(input);
+        this.command = getFirstWord(input).toLowerCase();
         this.taskList = taskList;
     }
 
@@ -141,7 +141,7 @@ public class Parser {
     private void checkDescExist() throws UserInputError {
         if (input.split(" ").length == 1) {
             throw new UserInputError(
-                    "Oops! Please add description for your command."
+                    "Oops! Please add description for your command :)"
             );
         }
     }

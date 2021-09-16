@@ -73,6 +73,6 @@ public class TaskList {
                     .append(taskList.get(i).toString())
                     .append("\n");
         }
-        return "Here are the tasks in your list:\n" + op;
+        return op.length() == 0 ? "You have no tasks for now XD!" : "Here are the your tasks:\n" + op;
     }
 }
