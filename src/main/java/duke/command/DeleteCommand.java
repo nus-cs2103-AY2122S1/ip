@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         int id;
         String result;
         try {
-            id = Integer.parseInt(cmd.strip()) + 1;
+            id = Integer.parseInt(cmd.strip()) - 1;
         } catch (NumberFormatException e) {
             throw new InvalidCommandException();
         }
