@@ -1,7 +1,7 @@
 # User Guide
 Duke is your personal chatbot that helps you to keep track of your tasks.
 
-![Ui](docs/images/Ui.png)
+![Ui](Ui.png)
 ## Features 
 
 ### Adding a todo task :`todo`
