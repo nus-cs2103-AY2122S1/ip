@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     private static final String FAREWELL = "Bye! Hope to see you soon!";
+    private static final String GREETING = "Hello! Welcome to Duke";
 
     @FXML
     private ScrollPane scrollPane;
@@ -48,8 +49,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void greet() {
-        String greeting = "Hello! Welcome to Duke";
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(GREETING, dukeImage));
     }
 
     @FXML
@@ -57,8 +57,13 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Sets Duke chatbot.
+     *
+     * @param duke A Duke object.
+     */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
