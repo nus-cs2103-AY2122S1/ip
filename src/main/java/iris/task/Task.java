@@ -5,6 +5,7 @@ package iris.task;
  */
 public class Task {
     protected static final String DATE_FORMAT = "MMM d yyyy";
+    protected static final String INVALID_DATE_ERROR = "Please enter the date in YYYY-MM-DD format.";
     protected boolean isDone;
     protected TaskPriority taskPriority = TaskPriority.LOW;
     protected String name;

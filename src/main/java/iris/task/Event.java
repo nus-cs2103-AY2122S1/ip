@@ -24,7 +24,7 @@ public class Event extends Task {
         try {
             this.at = LocalDate.parse(at);
         } catch (DateTimeParseException exception) {
-            throw new IrisException("Invalid date provided.");
+            throw new IrisException(Task.INVALID_DATE_ERROR);
         }
     }
 
@@ -40,7 +40,7 @@ public class Event extends Task {
         try {
             this.at = LocalDate.parse(at);
         } catch (DateTimeParseException exception) {
-            throw new IrisException("Invalid date provided.");
+            throw new IrisException(Task.INVALID_DATE_ERROR);
         }
     }
 

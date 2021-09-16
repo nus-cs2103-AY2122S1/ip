@@ -24,7 +24,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException exception) {
-            throw new IrisException("Invalid date provided.");
+            throw new IrisException(Task.INVALID_DATE_ERROR);
         }
     }
 
@@ -33,14 +33,14 @@ public class Deadline extends Task {
      * @param name          name of the deadline
      * @param by            due date for this deadline e.g. "2021-08-23"
      * @param taskPriority  priority level of this deadline
-     * @throws IrisException
+     * @throws IrisException for invalid date
      */
     public Deadline(String name, String by, TaskPriority taskPriority) throws IrisException {
         super(name, taskPriority);
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException exception) {
-            throw new IrisException("Invalid date provided.");
+            throw new IrisException(Task.INVALID_DATE_ERROR);
         }
     }
 
