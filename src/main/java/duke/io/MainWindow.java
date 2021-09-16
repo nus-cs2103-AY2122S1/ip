@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
     // with minor modifications
     @FXML
     private void showHelpMessage() {
-        String userGuideUrl = "https://www.google.com"; //TODO replace with user guide url
+        String userGuideUrl = "https://github.com/ryanongra/ip/blob/master/README.md";
         try {
             Desktop.getDesktop().browse(new URL(userGuideUrl).toURI());
         } catch (Exception e) {
