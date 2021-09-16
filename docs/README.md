@@ -208,7 +208,7 @@ System exits.
 
 The system automatically saves the data to `<YOUR JAR FILE PATH>/data/duke.txt` after any changes are made to the data. 
 
-**:exclamation: You can update your data manually, but you should be aware that if you update your data format by mistake, your data will be removed**
+**❗You can update your data manually, but you should be aware that if you update your data format by mistake, your data will be removed**
 
 ## Command Summary
 
