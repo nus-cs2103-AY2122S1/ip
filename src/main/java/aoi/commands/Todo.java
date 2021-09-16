@@ -1,10 +1,10 @@
-package duke.commands;
+package aoi.commands;
 
 /**
  * Encapsulates a Todo object that implements a Task.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class Todo extends Task {
     /**

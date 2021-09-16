@@ -1,10 +1,10 @@
-package duke.parser;
+package aoi.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.data.TaskList;
-import duke.exceptions.DukeException;
-import duke.ui.Ui;
+import aoi.data.TaskList;
+import aoi.exceptions.AoiException;
+import aoi.ui.Ui;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class ParserTest {
             String cmd = "deadline return book /by 06/12/2019 1800";
             parser.parse(cmd);
             assertEquals("[D][ ] return book (by: Dec 06 2019 18:00)\n  Notes: ", taskList.get(0).toString());
-        } catch (DukeException e) {
+        } catch (AoiException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -35,7 +35,7 @@ public class ParserTest {
             cmd = "delete 1";
             parser.parse(cmd);
             assertEquals(0, taskList.getLength());
-        } catch (DukeException e) {
+        } catch (AoiException e) {
             System.out.println(e.getMessage());
         }
     }

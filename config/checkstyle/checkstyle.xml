@@ -52,13 +52,13 @@
         The order rule "STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE" consists of:
           1. STATIC: static imports
           2. STANDARD_JAVA_PACKAGE: standard java/javax imports
-          3. SPECIAL_IMPORTS: defined as duke imports
+          3. SPECIAL_IMPORTS: defined as aoi imports
           4. THIRD_PARTY_PACKAGE: defined as any other imports
         -->
         <module name="CustomImportOrder">
             <property name="customImportOrderRules"
                       value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
-            <property name="specialImportsRegExp" value="^duke\."/>
+            <property name="specialImportsRegExp" value="^aoi\."/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
             <property name="separateLineBetweenGroups" value="true"/>
         </module>

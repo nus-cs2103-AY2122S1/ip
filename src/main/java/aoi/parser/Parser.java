@@ -1,23 +1,23 @@
-package duke.parser;
+package aoi.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import duke.commands.Deadline;
-import duke.commands.Event;
-import duke.commands.Task;
-import duke.commands.Todo;
-import duke.data.TaskList;
-import duke.exceptions.DukeException;
-import duke.ui.Ui;
+import aoi.commands.Deadline;
+import aoi.commands.Event;
+import aoi.commands.Task;
+import aoi.commands.Todo;
+import aoi.data.TaskList;
+import aoi.exceptions.AoiException;
+import aoi.ui.Ui;
 
 /**
  * Encapsulates a Parser object that reads in and executes commands based on user's input.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class Parser {
     private TaskList tasks;
@@ -34,7 +34,7 @@ public class Parser {
      * Public constructor for Parser.
      *
      * @param tasks A list of tasks.
-     * @param ui Ui for duke.Duke.
+     * @param ui Ui for aoi.Aoi.
      */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
@@ -45,9 +45,9 @@ public class Parser {
      * Reads in and executes user's input based on string given.
      *
      * @param cmd String from user's input.
-     * @throws DukeException
+     * @throws AoiException
      */
-    public String parse(String cmd) throws DukeException {
+    public String parse(String cmd) throws AoiException {
         String[] tokens = cmd.split(" ");
         Keyword command = validateCommand(tokens);
 
@@ -84,7 +84,7 @@ public class Parser {
             argIndex = Arrays.asList(tokens).indexOf("/by");
             notesIndex = Arrays.asList(tokens).indexOf("/notes");
             if (argIndex == -1) {
-                throw new DukeException("Missing deadline.");
+                throw new AoiException("Missing deadline.");
             }
             description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
             if (notesIndex == -1) {
@@ -99,14 +99,14 @@ public class Parser {
                 this.tasks.add(task);
                 message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
-                throw new DukeException("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                throw new AoiException("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
             break;
         case EVENT:
             argIndex = Arrays.asList(tokens).indexOf("/at");
             notesIndex = Arrays.asList(tokens).indexOf("/notes");
             if (argIndex == -1) {
-                throw new DukeException("Missing time of event.");
+                throw new AoiException("Missing time of event.");
             }
             description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
             if (notesIndex == -1) {
@@ -121,7 +121,7 @@ public class Parser {
                 this.tasks.add(task);
                 message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
-                throw new DukeException("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                throw new AoiException("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
             break;
         case DONE:
@@ -142,25 +142,25 @@ public class Parser {
             message.append(tasks.printMatchingTasks(keyword));
             break;
         default:
-            throw new DukeException("Unknown command passed.");
+            throw new AoiException("Unknown command passed.");
         }
         return message.toString();
     }
 
-    private static Keyword validateCommand(String[] cmd) throws DukeException {
+    private static Keyword validateCommand(String[] cmd) throws AoiException {
         Keyword keyword;
         try {
             keyword = Keyword.valueOf(cmd[0].toUpperCase());
             if ((keyword.equals(Keyword.TODO) || keyword.equals(Keyword.DEADLINE) || keyword.equals(Keyword.EVENT))
                     && cmd.length < 2) {
-                throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", keyword));
+                throw new AoiException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", keyword));
             }
             if ((keyword.equals(Keyword.DONE) || keyword.equals(Keyword.DELETE) || keyword.equals(Keyword.FIND))
                     && (cmd.length < 2)) {
-                throw new DukeException("☹ OOPS!!! Missing arguments.");
+                throw new AoiException("☹ OOPS!!! Missing arguments.");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("Brother! What are you saying?");
+            throw new AoiException("Brother! What are you saying?");
         }
         return keyword;
     }

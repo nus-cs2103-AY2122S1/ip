@@ -1,4 +1,4 @@
-package duke.commands;
+package aoi.commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates a Deadline object that implements a Task and has a deadline.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class Deadline extends Task {
     protected LocalDateTime by;

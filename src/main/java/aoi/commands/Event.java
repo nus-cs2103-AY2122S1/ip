@@ -1,4 +1,4 @@
-package duke.commands;
+package aoi.commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates an Event object that implements a Task and has an event time.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class Event extends Task {
     protected LocalDateTime at;

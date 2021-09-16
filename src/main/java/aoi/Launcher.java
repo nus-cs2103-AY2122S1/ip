@@ -1,4 +1,4 @@
-package duke;
+package aoi;
 
 import javafx.application.Application;
 

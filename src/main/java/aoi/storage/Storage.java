@@ -1,4 +1,4 @@
-package duke.storage;
+package aoi.storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,17 +10,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.commands.Deadline;
-import duke.commands.Event;
-import duke.commands.Task;
-import duke.commands.Todo;
-import duke.data.TaskList;
+import aoi.commands.Deadline;
+import aoi.commands.Event;
+import aoi.commands.Task;
+import aoi.commands.Todo;
+import aoi.data.TaskList;
 
 /**
  * Encapsulates a Storage object that handles loading and saving of Tasks.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class Storage {
     private String path;

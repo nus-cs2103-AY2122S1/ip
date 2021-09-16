@@ -1,15 +1,15 @@
-package duke.data;
+package aoi.data;
 
 import java.util.ArrayList;
 
-import duke.commands.Task;
-import duke.exceptions.DukeException;
+import aoi.commands.Task;
+import aoi.exceptions.AoiException;
 
 /**
  * Encapsulates a TodoList that contains Tasks.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class TaskList {
     /** A list of tasks */
@@ -52,11 +52,11 @@ public class TaskList {
      * Completes a Task in a Tasklist with a given index.
      *
      * @param index Index of Task in the List (0-indexed)
-     * @throws DukeException
+     * @throws AoiException
      */
-    public void complete(int index) throws DukeException {
+    public void complete(int index) throws AoiException {
         if (index < 0 || index > lst.size() - 1) {
-            throw new DukeException("Hey! Invalid Task number given.");
+            throw new AoiException("Hey! Invalid Task number given.");
         }
         Task task = lst.get(index);
         task.completeTask();
@@ -66,11 +66,11 @@ public class TaskList {
      * Deletes a Task in a Tasklist with a given index.
      *
      * @param index Index of Task in the List (0-indexed)
-     * @throws DukeException
+     * @throws AoiException
      */
-    public void delete(int index) throws DukeException {
+    public void delete(int index) throws AoiException {
         if (index < 0 || index > lst.size() - 1) {
-            throw new DukeException("Hey! Invalid Task number given.");
+            throw new AoiException("Hey! Invalid Task number given.");
         }
         lst.remove(index);
     }
@@ -88,9 +88,9 @@ public class TaskList {
         return lst.size();
     }
 
-    public Task get(int index) throws DukeException {
+    public Task get(int index) throws AoiException {
         if (index < 0 || index > lst.size() - 1) {
-            throw new DukeException("Hey! Invalid Task number given.");
+            throw new AoiException("Hey! Invalid Task number given.");
         }
         Task task = lst.get(index);
         return task;

@@ -1,8 +1,8 @@
-package duke;
+package aoi;
 
 import java.io.IOException;
 
-import duke.controller.MainWindow;
+import aoi.controller.MainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for duke.Duke using FXML.
+ * A GUI for aoi.Aoi using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt");
+    private Aoi aoi = new Aoi("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {
@@ -24,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setAoi(aoi);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

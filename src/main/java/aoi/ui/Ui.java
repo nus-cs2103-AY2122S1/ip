@@ -1,13 +1,13 @@
-package duke.ui;
+package aoi.ui;
 
-import duke.commands.Task;
-import duke.data.TaskList;
+import aoi.commands.Task;
+import aoi.data.TaskList;
 
 /**
- * Encapsulates the Ui component of duke.Duke.
+ * Encapsulates the Ui component of aoi.Aoi.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public class Ui {
     private TaskList tasks;

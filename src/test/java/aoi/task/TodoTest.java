@@ -1,9 +1,9 @@
-package duke.task;
+package aoi.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.commands.Task;
-import duke.commands.Todo;
+import aoi.commands.Task;
+import aoi.commands.Todo;
 
 import org.junit.jupiter.api.Test;
 

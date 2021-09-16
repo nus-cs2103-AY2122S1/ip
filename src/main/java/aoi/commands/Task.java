@@ -1,11 +1,11 @@
-package duke.commands;
+package aoi.commands;
 
 /**
  * Encapsulates a Task that has a description and a completion state isDone.
  * To be implemented by Deadline, Event and Todo.
  *
  * @author Owen Tan
- * @version duke.Duke Level-9
+ * @version aoi.Aoi Level-9
  */
 public abstract class Task {
     protected String description;

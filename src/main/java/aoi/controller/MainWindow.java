@@ -1,10 +1,10 @@
-package duke.controller;
+package aoi.controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import duke.Duke;
-import duke.ui.Ui;
+import aoi.Aoi;
+import aoi.ui.Ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -28,24 +28,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Aoi aoi;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/itadori.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/todo3.jpeg"));
+    private Image aoiImage = new Image(this.getClass().getResourceAsStream("/images/todo3.jpeg"));
 
     /** Initialise main components */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showGreeting(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getAoiDialog(Ui.showGreeting(), aoiImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setAoi(Aoi aoi) {
+        aoi = aoi;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply
+     * Creates two dialog boxes, one echoing user input and the other containing aoi.Aoi's reply
      * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -57,10 +57,10 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        String response = duke.getResponse(input);
+        String response = aoi.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getAoiDialog(response, aoiImage)
         );
         userInput.clear();
 
