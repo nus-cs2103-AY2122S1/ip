@@ -13,7 +13,7 @@ VIN Chatbot is a desktop app for keeping track of your tasks. This application u
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Vin.jar` from [here](https://github.com/kevinmingtarja/ip/releases).
+1. Download the latest `vin.jar` from [here](https://github.com/kevinmingtarja/ip/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your VIN Chatbot.
 
