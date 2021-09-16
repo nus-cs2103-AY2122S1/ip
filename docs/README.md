@@ -1,16 +1,11 @@
----
-layout: page
-title: User Guide
----
+# User Guide
 
 This repo contains the code for the Misaki chatbot as part of CS2103T: Software Engineering.
 
 🌸 Misaki 🌸 is a **desktop chatbot app for managing and storing tasks, optimized for use via a 
 Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-Start chatting with this adorable Japanese bot to manage your tasks effectively! („• ◡ •„) ♡
 
-* Table of Contents
-{:toc}
+Start chatting with this adorable Japanese bot to manage your tasks effectively! („• ◡ •„) ♡
 
 --------------------------------------------------------------------------------------------------------------------
 
