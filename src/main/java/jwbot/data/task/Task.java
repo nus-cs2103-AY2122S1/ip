@@ -27,6 +27,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /**
      * Copied from the partial solution. Get the icon of the status.
      *

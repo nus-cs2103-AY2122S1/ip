@@ -1,3 +1,4 @@
+[T][X] study
 [T][ ] study
 [T][ ] study
-[E][X] party (at: 3pm)
+[T][X] study

@@ -27,7 +27,7 @@ public class Deadline extends Task {
     }
 
     public Deadline(Deadline deadline) {
-        super(deadline.description);
+        super(deadline.description, deadline.isDone);
         this.by = deadline.by;
     }
 

@@ -17,7 +17,7 @@ public class Todo extends Task {
     }
 
     public Todo(Todo todo) {
-        super(todo.description);
+        super(todo.description, todo.isDone);
     }
 
     /**

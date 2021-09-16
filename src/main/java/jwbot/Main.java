@@ -25,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setJwBot(jwBot);
+            stage.setTitle("JWBOT");
             stage.show();
         } catch (IOException e) {
             throw new JwBotException("Bro, there was an error with starting!");

@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     public Event(Event event) {
-        super(event.description);
+        super(event.description, event.isDone);
         this.at = event.at;
     }
 
