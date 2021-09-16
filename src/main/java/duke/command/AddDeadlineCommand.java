@@ -1,28 +1,26 @@
 package duke.command;
 
 import duke.exception.IncompleteDeadlineException;
-
 import duke.task.Deadline;
-import duke.task.Task;
 
 /**
- * Representation for the add deadline command of Duke.
+ * Represents the add deadline command of Duke.
  */
 public class AddDeadlineCommand extends AddCommand {
 
     private static final String DELIMITER = "/by";
 
     /**
-     * Constructor for AddDeadlineCommand.
+     * Constructs a AddDeadlineCommand object to add given deadline object.
      *
-     * @param toAdd Task to add to taskList.
+     * @param toAdd Deadline Task to add to taskList.
      */
-    public AddDeadlineCommand(Task toAdd) {
+    public AddDeadlineCommand(Deadline toAdd) {
         super(toAdd);
     }
 
     /**
-     * Factory method which generates the AddDeadlineCommand from the userInput.
+     * Generates a AddDeadlineCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the AddDeadlineCommand.
      * @return AddDeadLineCommand to be executed.

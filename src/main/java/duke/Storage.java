@@ -21,7 +21,7 @@ public class Storage {
     private final String ARCHIVELIST_FILE_PATH;
 
     /**
-     * Constructor for Storage.
+     * Constructs a Storage object.
      */
     public Storage() {
         this.TASKLIST_FILE_PATH = "data" + File.separator + "history.txt";

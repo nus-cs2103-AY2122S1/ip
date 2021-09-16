@@ -7,14 +7,14 @@ import duke.Ui;
 import duke.exception.IncompleteFindException;
 
 /**
- * Representation for the find command of Duke.
+ * Represents the find command of Duke.
  */
 public class FindCommand extends Command {
 
     private final String keyword;
 
     /**
-     * Constructor for FindCommand.
+     * Constructs a FindCommand object with keyword to find in taskList.
      *
      * @param keyword Keyword to search for in TaskList.
      */
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Factory method which generates the FindCommand from the userInput.
+     * Generates a FindCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the FindCommand.
      * @return FindCommand to be executed.

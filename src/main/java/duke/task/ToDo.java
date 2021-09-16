@@ -1,12 +1,12 @@
 package duke.task;
 
 /**
- * Type of Task which is an Event.
+ * Represents the type of Task which is an Event.
  */
 public class ToDo extends Task {
 
     /**
-     * Constructor for ToDoObject.
+     * Constructs a ToDo object with given description.
      *
      * @param description Description of ToDoObject.
      */

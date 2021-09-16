@@ -2,26 +2,25 @@ package duke.command;
 
 import duke.exception.IncompleteEventException;
 import duke.task.Event;
-import duke.task.Task;
 
 /**
- * Representation for the add event command of Duke.
+ * Represents the add event command of Duke.
  */
 public class AddEventCommand extends AddCommand {
 
     private static final String DELIMITER = "/at";
 
     /**
-     * Constructor for AddEventCommand.
+     * Constructs a AddEventCommand object to add given Event Object.
      *
-     * @param toAdd Task to add to taskList.
+     * @param toAdd Event Task to add to taskList.
      */
-    public AddEventCommand(Task toAdd) {
+    public AddEventCommand(Event toAdd) {
         super(toAdd);
     }
 
     /**
-     * Factory method which generates the AddEventCommand from the userInput.
+     * Generates a AddEventCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the AddEventCommand.
      * @return AddEventCommand to be executed.

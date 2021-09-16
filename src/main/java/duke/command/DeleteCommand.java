@@ -11,7 +11,7 @@ import duke.exception.InvalidCommandException;
 import duke.task.Task;
 
 /**
- * Representation for the delete command of Duke.
+ * Represents the delete command of Duke.
  */
 public class DeleteCommand extends Command {
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     private final boolean isDeleteAll;
 
     /**
-     * Constructor for DeleteCommand.
+     * Constructs a DeleteCommand object to delete task at indexToDelete in taskList.
      *
      * @param indexToDelete Index of TaskList to be deleted.
      */
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Factory method which generates the DeleteCommand from the userInput.
+     * Generates the DeleteCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the DeleteCommand.
      * @param taskList taskList of duke.

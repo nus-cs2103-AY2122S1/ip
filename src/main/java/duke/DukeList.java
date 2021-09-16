@@ -11,14 +11,14 @@ public abstract class DukeList {
     private final ArrayList<Task> taskArrayList;
 
     /**
-     * Constructor for DukeList.
+     * Constructs a DukeList object.
      */
     public DukeList() {
         this.taskArrayList = new ArrayList<>();
     }
 
     /**
-     * Constructor for DukeList, which assigns the taskArrayList to a
+     * Constructs a DukeList object, which assigns the taskArrayList to a
      * specific ArrayList.
      *
      * @param taskArrayList ArrayList to be assigned to taskArrayList.
@@ -39,7 +39,7 @@ public abstract class DukeList {
     }
 
     /**
-     * Getter for taskArrayList.
+     * Gets the taskArrayList.
      *
      * @return ArrayList of tasks.
      */

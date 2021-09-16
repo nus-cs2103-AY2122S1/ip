@@ -9,7 +9,7 @@ import duke.exception.IncompleteUnarchiveException;
 import duke.task.Task;
 
 /**
- * Representation for the unarchive command on duke.
+ * Represents the unarchive command on duke.
  */
 public class UnarchiveCommand extends Command {
 
@@ -17,7 +17,7 @@ public class UnarchiveCommand extends Command {
     private final boolean isUnarchiveAll;
 
     /**
-     * Constructor for UnarchiveCommand.
+     * Constructs a UnarchiveCommand object which unarchives task at indexToUnarchive in archiveList.
      *
      * @param indexToUnarchive index of task to be unarchived.
      */
@@ -27,7 +27,7 @@ public class UnarchiveCommand extends Command {
     }
 
     /**
-     * Factory method which generates the UnarchiveCommand from the userInput.
+     * Generates a UnarchiveCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the UnarchiveCommand.
      * @param archiveList archiveList of duke.

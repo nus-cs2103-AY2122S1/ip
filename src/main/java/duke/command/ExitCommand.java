@@ -6,12 +6,12 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Representation for exit command of Duke.
+ * Represents the exit command of Duke.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Factory method which generates the ExitCommand from the userInput.
+     * Generates a ExitCommand from the userInput.
      *
      * @return ExitCommand to be executed.
      */

@@ -9,14 +9,14 @@ import java.util.ArrayList;
  */
 public class ArchiveList extends DukeList {
     /**
-     * Constructor for ArchiveList.
+     * Constructs a ArchiveList object.
      */
     public ArchiveList() {
         super();
     }
 
     /**
-     * Constructor for ArchiveList, setting taskArrayList
+     * Constructs a ArchiveList object, setting taskArrayList
      * to a given list.
      *
      * @param list List to be assigned to taskArrayList.
@@ -26,7 +26,7 @@ public class ArchiveList extends DukeList {
     }
 
     /**
-     * Getter for archived tasks.
+     * Gets the archived tasks.
      *
      * @return Archived tasks.
      */

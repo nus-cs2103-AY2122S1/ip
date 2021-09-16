@@ -9,7 +9,7 @@ import duke.exception.IncompleteArchiveException;
 import duke.task.Task;
 
 /**
- * Representation for the Archive Command of Duke.
+ * Represents the Archive Command of Duke.
  */
 public class ArchiveCommand extends Command {
 
@@ -17,7 +17,7 @@ public class ArchiveCommand extends Command {
     private final boolean isArchiveAll;
 
     /**
-     * Constructor for ArchiveCommand.
+     * Constructs a ArchiveCommand object to archive task at indexToArchive in taskList.
      *
      * @param indexToArchive index of task to be archived.
      */
@@ -27,7 +27,7 @@ public class ArchiveCommand extends Command {
     }
 
     /**
-     * Factory method which generates the ArchiveCommand from the userInput.
+     * Generates a ArchiveCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the ArchiveCommand.
      * @param taskList taskList of duke.

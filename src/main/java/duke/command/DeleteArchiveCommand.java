@@ -9,12 +9,12 @@ import duke.exception.IncompleteDeleteException;
 import duke.exception.InvalidCommandException;
 
 /**
- * Representation for the delete archive command on duke.
+ * Represents the delete archive command on duke.
  */
 public class DeleteArchiveCommand extends DeleteCommand {
 
     /**
-     * Constructor for DeleteArchiveCommand.
+     * Constructs a DeleteArchiveCommand object to delete Task at indexToDelete in archiveList.
      *
      * @param indexToDelete index to be archived from taskList.
      */
@@ -23,7 +23,7 @@ public class DeleteArchiveCommand extends DeleteCommand {
     }
 
     /**
-     * Factory method which generates the DeleteArchiveCommand from the userInput.
+     * Generates a DeleteArchiveCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the DeleteArchiveCommand.
      * @param archiveList archiveList of duke.

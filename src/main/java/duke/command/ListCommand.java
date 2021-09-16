@@ -6,12 +6,12 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Representation for the list command of Duke.
+ * Represents the list command of Duke.
  */
 public class ListCommand extends Command {
 
     /**
-     * Factory method which generates the ListCommand from the userInput.
+     * Generates a ListCommand from the userInput.
      *
      * @return ListCommand to be executed.
      */

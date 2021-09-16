@@ -1,25 +1,24 @@
 package duke.command;
 
 import duke.exception.IncompleteToDoException;
-import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * Representation for the AddToDoCommand of Duke.
+ * Represents the AddToDoCommand of Duke.
  */
 public class AddToDoCommand extends AddCommand {
 
     /**
-     * Constructor for AddToDoCommand.
+     * Constructs a AddToDoCommand object to add given ToDo Task.
      *
-     * @param toAdd Task to add to taskList.
+     * @param toAdd ToDo Task to add to taskList.
      */
-    public AddToDoCommand(Task toAdd) {
+    public AddToDoCommand(ToDo toAdd) {
         super(toAdd);
     }
 
     /**
-     * Factory method which generates the AddToDoCommand from the userInput.
+     * Generates a AddToDoCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the AddToDoCommand.
      * @return AddToDoCommand to be executed.

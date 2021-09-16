@@ -9,7 +9,7 @@ import duke.exception.IncompleteDoneException;
 import duke.exception.InvalidCommandException;
 
 /**
- * Representation for the done command of Duke.
+ * Represents the done command of Duke.
  */
 public class DoneCommand extends Command {
 
@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     private final boolean isMarkAll;
 
     /**
-     * Constructor for DoneCommand.
+     * Constructs a DoneCommand object to mark task at indexToMarkAsDone as done in taskList.
      *
      * @param indexToMarkAsDone Index of taskList to mark as done.
      */
@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Factory method which generates the DoneCommand from the userInput.
+     * Generates a DoneCommand from the userInput.
      *
      * @param userInput User Input which is used to generate the DoneCommand.
      * @param taskList taskList of duke.

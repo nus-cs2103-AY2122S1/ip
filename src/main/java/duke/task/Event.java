@@ -1,13 +1,13 @@
 package duke.task;
 
 /**
- * Type of Task which is an Event.
+ * Represents the type of Task which is an Event.
  */
 public class Event extends Task {
     private String duration;
 
     /**
-     * Constructor for Event.
+     * Constructs a Event object with given description and date.
      *
      * @param description Description of Event.
      * @param duration Duration of Event.

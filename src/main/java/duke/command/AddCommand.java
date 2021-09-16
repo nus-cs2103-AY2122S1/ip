@@ -13,14 +13,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Representation for the add command of Duke.
+ * Represents the add command of Duke.
  */
 public class AddCommand extends Command {
 
     private final Task toAdd;
 
     /**
-     * Constructor for AddCommand.
+     * Constructs a AddCommand object to add given task object.
      *
      * @param toAdd Task to add to taskList.
      */

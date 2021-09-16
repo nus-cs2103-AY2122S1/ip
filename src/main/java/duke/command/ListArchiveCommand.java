@@ -6,12 +6,12 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Representation for the list archive command on duke.
+ * Represents the list archive command on duke.
  */
 public class ListArchiveCommand extends ListCommand {
 
     /**
-     * Factory method which generates the ListArchiveCommand from the userInput.
+     * Generates a ListArchiveCommand from the userInput.
      *
      * @return ListArchiveCommand to be executed.
      */

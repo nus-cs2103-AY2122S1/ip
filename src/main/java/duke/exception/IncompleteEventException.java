@@ -1,13 +1,13 @@
 package duke.exception;
 
 /**
- * Representation for incomplete fields of Event exception.
+ * Represents the incomplete fields of Event exception.
  */
 public class IncompleteEventException extends DukeException {
     private static String MESSAGE = "OOPS!!! The description or date of an event is invalid or cannot be read.";
 
     /**
-     * Constructor for IncompleteEventException.
+     * Constructs a IncompleteEventException object.
      */
     public IncompleteEventException() {
         super(MESSAGE);

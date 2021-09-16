@@ -12,7 +12,7 @@ public class Ui {
     private final Scanner sc;
 
     /**
-     * Constructor of Ui.
+     * Constructs a Ui object.
      */
     public Ui() {
         this.sc = new Scanner(System.in);

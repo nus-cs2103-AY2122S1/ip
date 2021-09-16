@@ -1,14 +1,14 @@
 package duke.task;
 
 /**
- * Representation of Task to be done.
+ * Represents the Task to be done.
  */
 public class Task {
     private String description;
     private boolean isDone;
 
     /**
-     * Constructor for Task.
+     * Constructs a Task object with given description.
      *
      * @param description Description of Task.
      */

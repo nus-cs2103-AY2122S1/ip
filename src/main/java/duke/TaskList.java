@@ -9,14 +9,14 @@ import java.util.ArrayList;
  */
 public class TaskList extends DukeList {
     /**
-     * Constructor for TaskList.
+     * Constructs a TaskList object.
      */
     public TaskList() {
         super();
     }
 
     /**
-     * Constructor for TaskList.
+     * Constructs a TaskList object.
      *
      * @param list List to be assigned to taskArrayList in DukeList.
      */
@@ -25,7 +25,7 @@ public class TaskList extends DukeList {
     }
 
     /**
-     * Getter for taskArrayList.
+     * Gets the taskArrayList.
      *
      * @return tasks.
      */
