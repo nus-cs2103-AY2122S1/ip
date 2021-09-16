@@ -13,7 +13,7 @@ import iris.task.ToDo;
  * Encapsulates the TaskList-related functionality of Iris
  */
 public class TaskList {
-    private final List<Task> tasks = new ArrayList<>();
+    private final List<Task> TASKS = new ArrayList<>();
 
     /**
      * Gets the size of the TaskList
@@ -21,7 +21,7 @@ public class TaskList {
      * @return the size of the TaskList
      */
     public int getCount() {
-        return tasks.size();
+        return TASKS.size();
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      * @return Task at the given index
      */
     public Task get(int index) {
-        return tasks.get(index);
+        return TASKS.get(index);
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      * @param name name of the ToDo to be created
      */
     public void addTodo(String name, TaskPriority taskPriority) {
-        tasks.add(new ToDo(name, taskPriority));
+        TASKS.add(new ToDo(name, taskPriority));
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
      * @throws IrisException for invalid Deadline
      */
     public void addDeadline(String name, String by, TaskPriority taskPriority) throws IrisException {
-        tasks.add(new Deadline(name, by, taskPriority));
+        TASKS.add(new Deadline(name, by, taskPriority));
     }
 
     /**
@@ -62,7 +62,7 @@ public class TaskList {
      * @throws IrisException for invalid Event
      */
     public void addEvent(String name, String at, TaskPriority taskPriority) throws IrisException {
-        tasks.add(new Event(name, at, taskPriority));
+        TASKS.add(new Event(name, at, taskPriority));
     }
 
     /**
@@ -75,7 +75,7 @@ public class TaskList {
         if (index <= 0) {
             throw new IrisException("Please enter a valid task index.");
         }
-        int count = tasks.size();
+        int count = TASKS.size();
         if (index > count) {
             throw new IrisException(String.format("Your task list only has %d items", count));
         }
@@ -90,7 +90,7 @@ public class TaskList {
      */
     public Task done(int index) throws IrisException {
         validateTaskIndex(index);
-        Task task = tasks.get(index - 1);
+        Task task = TASKS.get(index - 1);
         task.markDone();
         return task;
     }
@@ -104,7 +104,7 @@ public class TaskList {
      */
     public Task delete(int index) throws IrisException {
         validateTaskIndex(index);
-        return tasks.remove(index - 1);
+        return TASKS.remove(index - 1);
     }
 
     /**
@@ -115,7 +115,7 @@ public class TaskList {
      */
     public List<Task> find(String searchTerm) {
         List<Task> result = new ArrayList<>();
-        for (Task task : tasks) {
+        for (Task task : TASKS) {
             if (task.contains(searchTerm)) {
                 result.add(task);
             }
@@ -130,8 +130,8 @@ public class TaskList {
      */
     public String[] toCommands() {
         List<String> commands = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            commands.add(tasks.get(i).toCommand(i + 1));
+        for (int i = 0; i < TASKS.size(); i++) {
+            commands.add(TASKS.get(i).toCommand(i + 1));
         }
         String[] result = new String[commands.size()];
         return commands.toArray(result);

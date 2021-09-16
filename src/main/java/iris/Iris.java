@@ -6,8 +6,8 @@ import iris.command.Command;
  * Represents an Iris object
  */
 public class Iris {
-    private final Storage storage;
-    private final TaskList tasks = new TaskList();
+    private final Storage STORAGE;
+    private final TaskList TASKS = new TaskList();
 
     /**
      * Creates a new Iris instance
@@ -15,9 +15,9 @@ public class Iris {
      * @param filePath Path to file containing tasks
      */
     public Iris(String filePath) {
-        storage = new Storage(filePath);
+        STORAGE = new Storage(filePath);
         try {
-            storage.readTasks(tasks);
+            STORAGE.readTasks(TASKS);
         } catch (IrisException exception) {
             System.out.printf("An error has occurred: %s%n", exception.toString());
         }
@@ -30,7 +30,7 @@ public class Iris {
     public String getResponse(String rawCommand) {
         try {
             Command command = Parser.parse(rawCommand);
-            return command.runAndStore(tasks, storage);
+            return command.runAndStore(TASKS, STORAGE);
         } catch (IrisException exception) {
             return exception.getMessage();
         }
