@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #413c58;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+            prefWidth="500.0" style="-fx-background-color: #413c58;" xmlns="http://javafx.com/javafx/11"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" textAlignment="CENTER" textFill="#000000ce">
+        <TextField fx:id="userInput" layoutX="5.0" layoutY="650.0" maxHeight="-Infinity"
+                   maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput"
+                   prefHeight="50.0" prefWidth="440.0" style="-fx-background-color: A3C4BC;"
+                   AnchorPane.bottomAnchor="1.6000000000000227" />
+        <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="448.0" layoutY="647.0" maxHeight="-Infinity"
+                maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                onAction="#handleUserInput" prefHeight="50.0" prefWidth="50.0"
+                style="-fx-background-color: E7EFC5; -fx-background-radius: 5;" textAlignment="CENTER"
+                textFill="#000000ce">
          <font>
             <Font name="Segoe UI Bold Italic" size="16.0" />
-         </font></Button>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+         </font>
+         <graphic>
+            <ImageView fx:id="sendButtonImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true"
+                       preserveRatio="true" translateX="-1.0" translateY="2.0">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </graphic></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity"
+                    minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="500.0"
+                    style="-fx-background-color: transparent;" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="400.0" style="-fx-background-color: #413c58;" />
+                <VBox fx:id="dialogContainer" prefHeight="644.0" prefWidth="486.0"
+                      style="-fx-background-color: #413c58;" translateY="1.0" />
             </content>
         </ScrollPane>
     </children>
