@@ -6,7 +6,7 @@ import java.util.HashSet;
 /** Abstract class representing a task */
 public abstract class Task {
 
-    private boolean done = false;
+    private boolean isDone = false;
     private String taskDetails;
 
     /**
@@ -25,8 +25,8 @@ public abstract class Task {
      * @return boolean indicating whether the task status has been changed from not done to done.
      */
     public boolean markDone() {
-        if (!done) {
-            done = true;
+        if (!isDone) {
+            isDone = true;
             return true;
         } else {
             return false;
@@ -50,7 +50,7 @@ public abstract class Task {
      * @return String representation of how data will be saved to disk.
      */
     public String toDataString() {
-        return String.format("%d | %s", done ? 1 : 0, taskDetails);
+        return String.format("%d | %s", isDone ? 1 : 0, taskDetails);
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "X" : " ", taskDetails);
+        return String.format("[%s] %s", isDone ? "X" : " ", taskDetails);
     }
 
     /**

@@ -51,7 +51,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Method to initialize commandline version of Duke.
+     * Initializes commandline version of Duke.
      */
     public void run() {
         cliUi.showWelcome();
@@ -71,8 +71,9 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @input User's input String.
      */
     private String getResponse(String input) {
         Command command;
