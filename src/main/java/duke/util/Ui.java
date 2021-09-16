@@ -31,7 +31,7 @@ public class Ui {
     public static final String CLOSING_STATEMENT = "Bye, hope to see you again :)\n" +
             INDENT + "shutting down...";
     public static final String[] USER_SUPPORTED_COMMANDS =
-            {"todo", "deadline", "event", "list", "done", "delete", "find", "bye", "help"};
+            {"todo", "deadline", "event", "list", "find", "done", "delete", "bye", "help"};
     public static final String LIST_COMMAND_REGEX = "list";
     public static final String BYE_COMMAND_REGEX = "bye";
     public static final String DONE_COMMAND_REGEX = "done [0-9]{1,2}"; //done <num> //limits to 99
