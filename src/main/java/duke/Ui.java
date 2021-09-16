@@ -7,6 +7,7 @@ import duke.task.TaskList;
 
 /**
  * The User Interface of Duke.
+ * Handles the creation of Duke's responses.
  * @author Thomas Hogben
  */
 public class Ui {
@@ -66,6 +67,12 @@ public class Ui {
         result += task.toString() + "\n";
         result += "now is have " + taskList.size() + " task"
                 + (taskList.size() == 1 ? "" : "s") + ".";
+        return result;
+    }
+
+    public String editTask(Task task) {
+        String result = "is got it\n";
+        result += task.toString();
         return result;
     }
 

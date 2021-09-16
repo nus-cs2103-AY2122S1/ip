@@ -18,11 +18,19 @@ public class DukeException extends Exception {
             new DukeException("save file corrupt. is created new file.");
     public static final DukeException INVALID_CHARACTER =
             new DukeException("is cannot use the character '|'. is try again!");
+    public static final DukeException INVALID_DATE =
+            new DukeException("is formatted date wrong. is please try again.\n"
+                    + "format is yyyy-mm-dd");
+    public static final DukeException INVALID_TIME =
+            new DukeException("is formatted time wrong. is please try again.\n"
+                    + "format is hhmm (24h time)");
     public static final DukeException INVALID_DATE_AND_TIME =
-            new DukeException("is formatted date and time wrong. is please try again."
+            new DukeException("is formatted date and time wrong. is please try again.\n"
                               + "format is yyyy-mm-dd hhmm (24h time)");
     public static final DukeException INVALID_TASK_NUMBER =
             new DukeException("what kind of number is (||'︵'.)");
+    public static final DukeException INVALID_TASK_TYPE =
+            new DukeException("is the wrong task type for that. is try again?");
     public static final DukeException NOT_ENOUGH_TASKS =
             new DukeException("we is dont have that many tasks yet.");
     public static final DukeException UNSPECIFIED_TASK =

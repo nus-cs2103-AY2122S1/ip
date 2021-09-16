@@ -112,7 +112,7 @@ public class TaskList {
      * @throws DukeException If the input String is blank, not an integer,
      *                       or not a valid task number.
      */
-    private int parseTaskNumber(String input) throws DukeException {
+    public int parseTaskNumber(String input) throws DukeException {
         try {
             if (input.length() < 1) {
                 throw DukeException.UNSPECIFIED_TASK;
