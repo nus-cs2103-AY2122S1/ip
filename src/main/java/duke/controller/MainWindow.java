@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser"
             + ".png")));
     private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke"
-            + ".jpg")));
+            + ".png")));
 
     /**
      * Forces ScrollPane to automatically scroll down.

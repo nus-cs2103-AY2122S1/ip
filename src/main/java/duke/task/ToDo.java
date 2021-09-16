@@ -33,7 +33,7 @@ public class ToDo extends Task {
 
     private static String getDescription(String description) throws DukeException {
         if (description.equals("")) {
-            throw new DukeException("\t OOPS!!! Your todo needs a description.\n");
+            throw new DukeException("OOPS!!! Your todo needs a description.\n");
         }
         return description;
     }

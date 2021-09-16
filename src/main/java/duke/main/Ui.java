@@ -35,8 +35,8 @@ public class Ui {
      * @return String response to added task.
      */
     public static String getAddTaskMessage(Task task, TaskList taskList) {
-        return "\t Got it. I've added this task:\n"
-                + "\t \t " + task + taskList.getTaskListSummary();
+        return "Got it. I've added this task:\n"
+                + "  " + task + taskList.getTaskListSummary();
     }
 
     /**
@@ -46,7 +46,7 @@ public class Ui {
      * @return String response to tagged task.
      */
     public static String getTagAddedMessage(Task task) {
-        return "\t Nice! I've added the tag. Here's your task:\n" + "\t\t " + task + "\n";
+        return "Nice! I've added the tag. Here's your task:\n" + "  " + task + "\n";
     }
 
     /**
@@ -66,8 +66,8 @@ public class Ui {
      * @return String response to removed task.
      */
     public static String getRemoveTaskMessage(Task task, TaskList taskList) {
-        return "\t Got it. I've removed this task:\n"
-                + "\t \t " + task + taskList.getTaskListSummary();
+        return "Got it. I've removed this task:\n"
+                + "  " + task + taskList.getTaskListSummary();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Ui {
      * @return String response to completed task.
      */
     public static String getTaskDoneMessage(Task task) {
-        return "\t Nice! I've marked this task as done:\n" + "\t\t " + task + "\n";
+        return "Nice! I've marked this task as done:\n" + "  " + task + "\n";
     }
 
 
@@ -87,7 +87,7 @@ public class Ui {
      * @return String response to reset task.
      */
     public static String getResetTasksMessage() {
-        return "\tClearing tasks...\n" + "\tYou can now start anew...\n";
+        return "Clearing tasks...\n" + "You can now start anew...\n";
     }
 
     /**
@@ -96,7 +96,7 @@ public class Ui {
      * @return String message.
      */
     public String getEmptyInputMessage() {
-        return "\tTake your time :)\n";
+        return "Take your time :)\n";
     }
 
     /**
@@ -106,7 +106,7 @@ public class Ui {
      */
     public String getUnknownCommandMessage(String command) {
         assert (!command.equals(""));
-        return "\tI don't understand " + command + " (yet...)\n";
+        return "I don't understand " + command + " (yet...)\n";
     }
 
     /**
@@ -117,7 +117,7 @@ public class Ui {
      */
     public String getTaskListSummary(TaskList taskList) {
         if (taskList.isEmpty()) {
-            return "\tYou haven't added any tasks yet\n";
+            return "You haven't added any tasks yet\n";
         } else {
             return taskList.toString();
         }
@@ -138,7 +138,7 @@ public class Ui {
      * @param tasks User's existing tasks to be displayed with the greeting.
      */
     public void greetWithFamiliarity(TaskList tasks) {
-        String greeting = "\tNice to see you again.\n";
+        String greeting = "Nice to see you again.\n";
         greeting += tasks.getTaskListSummary() + "\n";
 
         if (!tasks.isEmpty()) {
@@ -155,9 +155,9 @@ public class Ui {
      */
     public String getMatchingTasksSummary(List<Task> matchingTasks) {
         if (matchingTasks.isEmpty()) {
-            return "\tNo matching tasks found!\n";
+            return "No matching tasks found!\n";
         } else {
-            return "\tHere are the matching tasks from your list:\n"
+            return "Here are the matching tasks from your list:\n"
                     + TaskList.enumerateTasks(matchingTasks);
         }
     }

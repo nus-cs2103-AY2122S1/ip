@@ -8,6 +8,7 @@ import duke.task.ToDo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Handles the parsing of user commands.
@@ -58,7 +59,7 @@ public class Parser {
         try {
             return Integer.parseInt(description);
         } catch (NumberFormatException e) {
-            throw new DukeException("\tI'm Sorry, WHAT?!?!\n");
+            throw new DukeException("I'm Sorry, WHAT?!?!\n");
         }
     }
 
@@ -75,12 +76,32 @@ public class Parser {
         String taskType = fragments[0];
         boolean isComplete = Boolean.parseBoolean(fragments[1]);
         String description = fragments[2];
-        String tags = fragments[3];
-        List<String> tagList = new ArrayList<>(Arrays.asList(tags.split("#")));
+        String tagsString = fragments[3];
+        List<String> tagList = generateTagList(tagsString);
         String time = fragments[4];
-
         return generateTaskFromDetails(taskType, isComplete, description, time, tagList);
     }
+
+    /**
+     * Generates a tag list from a given String.
+     *
+     * @param tagsString String representation of tags.
+     * @return List of tags.
+     */
+    private static List<String> generateTagList(String tagsString) {
+        List<String> tagList;
+        if (tagsString.contains(" #")) {
+            tagList = new ArrayList<>(Arrays.asList(tagsString.split(" #")));
+        } else {
+            tagList = new ArrayList<>();
+        }
+
+        //remove empty tags
+        tagList = tagList.stream().filter(str -> !str.isEmpty()).collect(Collectors.toList());
+
+        return tagList;
+    }
+
 
     /**
      * Generate a task from the given parameters.
@@ -109,7 +130,7 @@ public class Parser {
             foundTask = new Event(taskDescription, time, isCompletedTask, tags);
             break;
         default:
-            throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
+            throw new DukeException("OOPS!!! I can't find your tasks.\n");
         }
         //@formatter:on
 

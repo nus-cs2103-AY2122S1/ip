@@ -72,7 +72,7 @@ public class Executor {
             String taskNum = taskNumAndTag[0];
 
             if (taskNumAndTag.length < 2) {
-                throw new DukeException("\tPlease enter a tag");
+                throw new DukeException("Please enter a tag");
             }
 
             String tag = taskNumAndTag[1];
@@ -128,7 +128,7 @@ public class Executor {
         int taskNum = getTaskNum(description);
         Task selectedTask = taskList.getTask(taskNum);
         if (selectedTask == null) {
-            throw new DukeException("\tSorry, I can't seem to find that task\n");
+            throw new DukeException("Sorry, I can't seem to find that task\n");
         }
         return selectedTask;
     }

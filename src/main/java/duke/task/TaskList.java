@@ -37,7 +37,7 @@ public class TaskList {
         String toPrint = "";
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            toPrint += ("\t " + index + ". " + taskList.get(i));
+            toPrint += ("  " + index + ". " + taskList.get(i));
         }
         return toPrint;
     }
@@ -61,7 +61,7 @@ public class TaskList {
         int numTasks = this.taskList.size();
         String size = numTasks == 0 ? "no" : String.valueOf(numTasks);
         String maybePlural = numTasks == 1 ? " task " : " tasks ";
-        return "\t You have " + size + maybePlural + "in the list.\n";
+        return "You have " + size + maybePlural + "in the list.\n";
     }
 
     /**
@@ -83,7 +83,7 @@ public class TaskList {
      */
     public List<Task> findTasks(String query) {
         if (query.isEmpty()) {
-            throw new DukeException("\tYou haven't specified any keywords\n");
+            throw new DukeException("You haven't specified any keywords\n");
         }
         String[] keywords = query.split(" ");
         List<Task> matches = new ArrayList<>();

@@ -42,7 +42,7 @@ public class Storage {
             return new TaskList();
         } catch (ArrayIndexOutOfBoundsException e) {
             resetTasks();
-            throw new DukeException("\t OOPS!!! Your tasks might be corrupted.");
+            throw new DukeException("OOPS!!! Your tasks might be corrupted.");
         }
     }
 
@@ -65,7 +65,7 @@ public class Storage {
             List<String> formattedTaskList = tasklist.formatForStorage();
             Files.write(filePath, formattedTaskList, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new DukeException("\t OOPS!!! I can't store any changes you make. \n");
+            throw new DukeException("OOPS!!! I can't store any changes you make. \n");
         }
     }
 
@@ -77,7 +77,7 @@ public class Storage {
             Files.newBufferedWriter(filePath);
             return Ui.getResetTasksMessage();
         } catch (IOException e) {
-            throw new DukeException("\t OOPS!!! Continuing without saving.\n");
+            throw new DukeException("OOPS!!! Continuing without saving.\n");
         }
     }
 

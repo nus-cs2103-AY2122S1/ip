@@ -50,7 +50,7 @@ public class Deadline extends Task {
 
     private static String extractDesc(String descAndTime) throws DukeException {
         if (descAndTime.equals("")) {
-            throw new DukeException("\t OOPS!!! Your deadline needs a description.\n");
+            throw new DukeException("OOPS!!! Your deadline needs a description.\n");
         }
         return descAndTime.split(" by ")[0];
     }
@@ -59,7 +59,7 @@ public class Deadline extends Task {
         try {
             return descAndTime.split(" by ")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t OOPS!!! You need to specify a time.\n");
+            throw new DukeException("OOPS!!! You need to specify a time.\n");
         }
     }
 

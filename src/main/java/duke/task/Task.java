@@ -41,7 +41,7 @@ public abstract class Task {
         try {
             return LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\t OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
+            throw new DukeException("OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class Task {
     public String formatTags() {
         String toPrint = " ";
         for (String tag : tags) {
-            toPrint += ("#" + tag);
+            toPrint += ("#" + tag + " ");
         }
         return toPrint;
     }
