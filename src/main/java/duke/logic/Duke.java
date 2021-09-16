@@ -12,7 +12,11 @@ import java.util.Locale;
 public class Duke {
     private Parser parser;
     private TaskList taskList;
+    public boolean isExited;
 
+    /**
+     * Constructs a Duke object
+     */
     public Duke() {
         this.taskList = new TaskList();
         this.parser = new Parser(taskList);
@@ -31,6 +35,11 @@ public class Duke {
         } catch (DukeInvalidCommandException e) {
             result = e.getMessage();
         }
+        if (userCommandText.trim().equals("bye")) {
+            this.isExited = true;
+        }
         return result;
     }
+    
+    
 }
