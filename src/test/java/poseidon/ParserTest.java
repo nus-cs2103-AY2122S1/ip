@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import poseidon.parser.Parser;
+
 public class ParserTest {
 
     @Test

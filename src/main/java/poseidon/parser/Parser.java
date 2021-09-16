@@ -1,9 +1,11 @@
-package poseidon;
+package poseidon.parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
+
+import poseidon.exception.PoseidonException;
 
 public class Parser {
 

@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
             prefWidth="500.0" style="-fx-background-color: #413c58;" xmlns="http://javafx.com/javafx/11"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="poseidon.MainWindow">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="poseidon.ui.MainWindow">
     <children>
         <TextField fx:id="userInput" layoutX="5.0" layoutY="650.0" maxHeight="-Infinity"
                    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput"

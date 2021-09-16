@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import poseidon.Parser;
+import poseidon.parser.Parser;
 
 public class DeadlineTest {
 

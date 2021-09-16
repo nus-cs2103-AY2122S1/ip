@@ -1,4 +1,4 @@
-package poseidon;
+package poseidon.ui;
 
 import java.util.ArrayList;
 

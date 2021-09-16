@@ -1,4 +1,4 @@
-package poseidon;
+package poseidon.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import poseidon.Poseidon;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

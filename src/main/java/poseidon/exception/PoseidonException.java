@@ -1,8 +1,8 @@
-package poseidon;
+package poseidon.exception;
 
 public class PoseidonException extends IllegalArgumentException {
 
-    protected PoseidonException(String errorMsg) {
+    public PoseidonException(String errorMsg) {
         super(errorMsg);
     }
 
