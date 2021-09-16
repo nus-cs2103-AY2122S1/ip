@@ -49,7 +49,7 @@ Todos are tasks that doesn't have a set deadline or time frame. use the `todo` k
 
 Format: 
 
-`todo {task's name}`
+`todo <task's name>`
 
 Example of `todo` command:
 
