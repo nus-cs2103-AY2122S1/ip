@@ -80,8 +80,8 @@ Format: `delete_contact INDEX`
 ## Saving the data
 The data that is collected by Bobby is automatically saved! No worries 😄 If you want to view the raw data being loaded, check out the /data directory
 
-<br>
 ## Command Summary  
+  
 Command | Example
 ------------ | -------------
 todo | `todo grab lunch`
