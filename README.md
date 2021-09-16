@@ -66,6 +66,7 @@ Format: `event TASK_DESCRIPTION /at DATE START_TIME-END_TIME`
 *  `TASK_DESCRIPTION` can include spaces.
 * The format for `DATE` is dd/mm/yyyy.
 * The format for `START_TIME` and `END_TIME` is hh:mm (24h format)
+* Any clashes with existing events **will not** be highlighted
 
 Example(s):
 `event party /at 15/09/2021 17:00-20:00`
