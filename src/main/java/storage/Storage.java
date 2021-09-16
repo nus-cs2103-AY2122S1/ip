@@ -15,7 +15,7 @@ import task.Task;
 import task.Todo;
 
 public class Storage {
-    /** Relative file path to the folder containing the data file */
+    /** Absolute file path to the folder containing the data file */
     private String filePath;
     /** Name of data file */
     private String fileName;
@@ -26,7 +26,8 @@ public class Storage {
      * @param fileName Name of data file.
      */
     public Storage(String filePath, String fileName) {
-        this.filePath = filePath;
+        String current_dir = new File("").getAbsolutePath();
+        this.filePath = current_dir.concat(filePath);
         this.fileName = fileName;
     }
 
