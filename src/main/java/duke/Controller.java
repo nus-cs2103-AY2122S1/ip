@@ -32,9 +32,9 @@ public class Controller {
      */
     public Controller() {
         try {
-            URL dukeUrl = new File("C:\\Users\\65915\\ip\\src\\main\\dukeIcon.png").toURI().toURL();
+            URL dukeUrl = new File("./src/main/java/duke/resources/dukeIcon.png").toURI().toURL();
             dukeIcon = new Image(String.valueOf(dukeUrl));
-            URL userUrl = new File("C:\\Users\\65915\\ip\\src\\main\\userIcon.png").toURI().toURL();
+            URL userUrl = new File("src/main/java/duke/resources/userIcon.png").toURI().toURL();
             userIcon = new Image(String.valueOf(userUrl));
 
         } catch (Exception ee) {

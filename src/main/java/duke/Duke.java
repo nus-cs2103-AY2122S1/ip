@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  * @version CS2103T week 6
  */
 public class Duke extends Application {
-    private static String format = "yyyy-MM-dd"; //default date
+    private static String format = "yyyy-MM-dd"; //default date format
     private MyList list;
     private Storage storage;
 
@@ -60,7 +60,7 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = new File("C:\\Users\\65915\\ip\\src\\main\\java\\duke\\MainWindow.fxml").toURI().toURL();
+        URL url = new File("src\\main\\java\\duke\\resources\\MainWindow.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
         stage.setScene(scene);
