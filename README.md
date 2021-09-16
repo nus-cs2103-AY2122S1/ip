@@ -16,3 +16,6 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 3. After that, locate the `src/main/java/kermit/Launcher.java` file, right-click it, and choose `Run Launcher.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
 <img width="512" alt="Kermit-program" src="https://user-images.githubusercontent.com/25302138/133612837-1d7a78ce-21a2-4c20-a7e8-d673d963378e.png">
 
+## Acknowledgements
+[OpenSvg](https://freesvg.org/red-elmo) for the Elmo clip art that was used for the user profile
+[Alex_Fotos](https://pixabay.com/photos/kermit-frog-towel-dry-fun-cute-2823941/) for the Kermit frog, that used for Kermit's profile photo.
