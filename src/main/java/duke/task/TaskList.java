@@ -1,20 +1,16 @@
 package duke.task;
 import java.util.ArrayList;
 
-import duke.Ui;
-
 /**
  * Class that encapsulates Tasklists.
  */
 public class TaskList {
     private ArrayList<Task> tasklist;
-    private Ui ui;
 
     /**
      * Constructor for TaskList.
      */
     public TaskList() {
-        this.ui = new Ui();
         this.tasklist = new ArrayList<Task>();
     }
 
