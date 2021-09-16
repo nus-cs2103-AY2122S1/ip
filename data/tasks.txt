@@ -1,0 +1,10 @@
+D | 1 | CS2105 Assignment 0 | 2021-08-29 2359
+D | 1 | PC1201 Test 1 (First Mock Test) | 2021-09-02 1400
+D | 1 | CS2103 Week 4 Quiz | 2021-08-30 2359
+D | 0 | CS3240 Week 4 Quiz | 2021-08-31 2000
+T | 0 | Vacuum room floor
+T | 0 | Change bedsheet
+T | 0 | Download files from LumiNUS
+T | 0 | CS2103 Week 3 Deliverables (JUnit)
+T | 0 | CS2103 Week 3 Deliverables (Jar)
+T | 0 | CS2103 Week 3 Deliverables (Javadocs)
