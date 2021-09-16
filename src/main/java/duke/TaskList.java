@@ -27,9 +27,10 @@ public class TaskList {
      *
      * @param existingTasks Previously saved tasks.
      */
-    public TaskList(List<Task> existingTasks, List<Task> existingArchives) {
+    public TaskList(List<Task> existingTasks, List<Task> existingArchives, int hp) {
         this.tasks = (existingTasks == null ? new ArrayList<>() : existingTasks);
         this.archives = existingArchives;
+        this.hpCount = hp;
     }
 
     public void addHp() {

@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.DukeOutOfBoundsException;
 import duke.task.Task;
 
 /**
@@ -31,12 +32,14 @@ public class ArchiveTaskCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException {
-        if (idx >= tasks.getSize()) {
-            throw new DukeException("OOPS!!! That task doesn't exist.");
-        }
         assert tasks != null;
-        Task t = tasks.get(idx);
-        tasks.archive(idx);
+        Task t;
+        try {
+            t = tasks.get(idx);
+            tasks.archive(idx);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeOutOfBoundsException();
+        }
         return "Ok. I've archived the task: \n\t" + t;
     }
 

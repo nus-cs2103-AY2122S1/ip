@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.DukeOutOfBoundsException;
 
 public class UnarchiveTaskCommand implements Command {
     private int idx;
@@ -26,14 +27,15 @@ public class UnarchiveTaskCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) throws DukeException {
-        if (idx >= taskList.getArchiveSize()) {
-            throw new DukeException("OOPS!!! That task doesn't exist.");
-        }
         assert taskList != null;
-        String response = "Noted. I've unarchived this task: \n\t" + taskList.getArchivedTask(idx)
+        try {
+            String response = "Noted. I've unarchived this task: \n\t" + taskList.getArchivedTask(idx)
                 + "\nYou can now find it in your main list.";
-        taskList.unarchive(idx);
-        return response;
+            taskList.unarchive(idx);
+            return response;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeOutOfBoundsException();
+        }
     }
 
     /**

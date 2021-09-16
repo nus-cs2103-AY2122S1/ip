@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,8 +19,11 @@ import javafx.stage.Stage;
  * Encapsulates the Duke chatbot.
  */
 public class Duke extends Application {
+    private String taskFilePath = "data/tasks.txt";
+    private String archiveFilePath = "data/archives.txt";
     private Storage taskStorage;
     private Storage archiveStorage;
+    private HpStorage hpStorage;
     private TaskList taskList;
     private Ui ui;
     private ScrollPane scrollPane;
@@ -28,14 +32,15 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    Duke(String taskFilePath, String archiveFilePath) {
+    Duke() {
         ui = new Ui();
-        taskStorage = new Storage(taskFilePath);
-        archiveStorage = new Storage(archiveFilePath);
         try {
-            taskList = new TaskList(taskStorage.loadTasksFromFile(), archiveStorage.loadTasksFromFile());
+            taskStorage = new Storage(taskFilePath);
+            archiveStorage = new Storage(archiveFilePath);
+            hpStorage = new HpStorage();
+            taskList = new TaskList(taskStorage.loadTasksFromFile(),
+                    archiveStorage.loadTasksFromFile(), hpStorage.loadHpFromFile());
         } catch (IOException e) {
-            System.out.println(Ui.format(e.toString()));
             taskList = new TaskList();
         }
     }
@@ -126,6 +131,7 @@ public class Duke extends Application {
             response = cmd.execute(taskList, ui);
             taskStorage.writeTasksToFile(taskList.getTasks());
             archiveStorage.writeTasksToFile(taskList.getArchives());
+            hpStorage.writeHpToFile(taskList.getHp());
         } catch (DukeException | IOException e) {
             return e.toString();
         }

@@ -12,7 +12,7 @@ public class ListCommand implements Command {
         }
         StringBuilder response = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i < tasks.getSize() + 1; i++) {
-            response.append(String.format("\t %d. %s\n", i, tasks.get(i - 1)));
+            response.append(String.format("  %d. %s\n", i, tasks.get(i - 1)));
         }
         return response.toString();
     }

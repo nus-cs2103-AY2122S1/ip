@@ -58,7 +58,7 @@ public class DialogBox extends HBox {
         String[] styles;
         if (text.startsWith("OOPS")) {
             styles = new String[]{"error-dialog-background"};
-        } else if (text.contains("headpat")) {
+        } else if (text.contains(new Ui().getSecretCmdKey())) {
             styles = new String[]{"archives-dialog-background"};
         } else {
             styles = new String[]{"duke-dialog-background"};

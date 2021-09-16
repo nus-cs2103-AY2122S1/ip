@@ -13,7 +13,7 @@ public class ListArchiveCommand implements Command {
         }
         StringBuilder response = new StringBuilder("Here are the tasks in your archive:\n");
         for (int i = 1; i < taskList.getArchiveSize() + 1; i++) {
-            response.append(String.format("\t %d. %s\n", i, taskList.getArchivedTask(i - 1)));
+            response.append(String.format("  %d. %s\n", i, taskList.getArchivedTask(i - 1)));
         }
         response.append(hpMsg);
         return response.toString();

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 /**
  * Encapsulates the Deadline class which has a date as its deadline.
  */
@@ -24,7 +24,7 @@ public class Deadline extends Task {
         try {
             this.date = LocalDate.parse(by.trim());
         } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!! Deadline date is invalid."
+            throw new DukeException("Deadline date is invalid."
                     + " Please format it as: \n\t[yyyy-mm-dd])");
         }
         this.by = by;

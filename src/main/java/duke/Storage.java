@@ -2,9 +2,12 @@ package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,22 +20,16 @@ import duke.task.ToDo;
  * Encapsulates the storage class.
  */
 public class Storage {
-    private final String filePath;
-    private final File file;
+    private static final String DIR_PATH = "data/";
+    private final String saveFilePath;
 
     /**
      * Constructor for a Storage instance.
      *
-     * @param path The path of the file.
+     * @param saveFilePath The path of the save file.
      */
-    public Storage(String path) {
-        File file = new File(path);
-        this.file = new File(path);
-        if (!file.exists()) {
-            String dir = file.getParent();
-            File dirFile = new File(dir);
-        }
-        this.filePath = path;
+    public Storage(String saveFilePath) {
+        this.saveFilePath = saveFilePath;
     }
 
     private Task toTask(String fileRecord) {
@@ -64,15 +61,19 @@ public class Storage {
      * @throws IOException If there is error reading from the file.
      */
     public List<Task> loadTasksFromFile() throws IOException {
-        FileReader fileReader = new FileReader(filePath);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line;
-        ArrayList<Task> tasks = new ArrayList<>();
-        while ((line = bufferedReader.readLine()) != null) {
-            tasks.add(toTask(line));
+        try {
+            FileReader fileReader = new FileReader(saveFilePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            ArrayList<Task> tasks = new ArrayList<>();
+            while ((line = bufferedReader.readLine()) != null) {
+                tasks.add(toTask(line));
+            }
+            fileReader.close();
+            return tasks;
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
         }
-        fileReader.close();
-        return tasks;
     }
 
     /**
@@ -81,7 +82,15 @@ public class Storage {
      * @param tasks List of tasks to be saved.
      */
     public void writeTasksToFile(List<Task> tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath);
+        File dir = new File(DIR_PATH);
+        if (!Files.exists(Paths.get(DIR_PATH))) {
+            dir.mkdir();
+        }
+        File file = new File(saveFilePath);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(saveFilePath);
         StringBuilder fileRecords = new StringBuilder();
         for (Task task : tasks) {
             fileRecords.append(task.toFileRecord());

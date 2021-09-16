@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.DukeOutOfBoundsException;
 
 /**
  * Encapsulates the delete command.
@@ -29,14 +30,15 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException {
-        if (idx >= tasks.getSize()) {
-            throw new DukeException("OOPS!!! That task doesn't exist.");
-        }
         assert tasks != null;
-        String response = "Noted. I've removed this task: \n\t" + tasks.get(idx)
+        try {
+            String response = "Noted. I've removed this task: \n\t" + tasks.get(idx)
                 + "\nNow you have " + ui.formatNumTasks(tasks.getSize() - 1) + " in the list.";
-        tasks.remove(idx);
-        return response;
+            tasks.remove(idx);
+            return response;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeOutOfBoundsException();
+        }
     }
 
     /**

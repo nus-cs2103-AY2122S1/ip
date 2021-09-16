@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.DukeOutOfBoundsException;
 import duke.task.Task;
 
 
@@ -32,12 +33,14 @@ public class DoneCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException {
-        if (idx >= tasks.getSize()) {
-            throw new DukeException("OOPS!!! That task doesn't exist.");
-        }
         assert tasks != null;
-        Task t = tasks.get(idx);
-        t.markAsDone();
+        Task t;
+        try {
+            t = tasks.get(idx);
+            t.markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeOutOfBoundsException();
+        }
         return "Nice! I've marked this task as done: \n\t" + t;
     }
 

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt", "data/archives.txt");
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -28,7 +28,7 @@ public class Main extends Application {
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-        } catch ( IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

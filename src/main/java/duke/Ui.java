@@ -3,28 +3,16 @@ package duke;
 import java.util.Base64;
 import java.util.Scanner;
 
+import duke.task.Task;
+
 public class Ui {
-    private static String line =
-            "*･゜ﾟ･*･゜ﾟ･*:.｡..｡.:*･'(*ﾟ▽ﾟ*)'･*:.｡. .｡.:*･゜ﾟ･*゜ﾟ･*";
-    private static String welcomeMsg = "Hello! I'm Duke\nSay 'help' to see how you can use me.";
+    private static String welcomeMsg = "Hello! I'm Duke\nSay 'help' to see how I can help you.";
     private static String goodbyeMsg = "See you next time!";
-    private static String secretCmdKey = new String(Base64.getDecoder().decode("aGVhZHBhdA=="));
+    private static String secretCmdKey = new String(Base64.getDecoder().decode("aGVhZHBhdA==")); //Look away please
     private static Scanner sc = new Scanner(System.in);
-
-    public static String format(String msg) {
-        return msg + "\n\n" + line;
-    }
-
-    public String readCommand() {
-        return sc.nextLine();
-    }
 
     public String getWelcomeMsg() {
         return welcomeMsg;
-    }
-
-    public String getErrorMsg(DukeException e) {
-        return e + "\nWhat else can I do for you?";
     }
 
     public String getGoodbyeMsg() {
@@ -40,6 +28,18 @@ public class Ui {
             return String.format("1 %s given", secretCmdKey);
         }
         return String.format("%d %ss given", hpCount, secretCmdKey);
+    }
+
+    /**
+     * Formats the done adding task message after a task is successfully added to task list.
+     *
+     * @param tasks The user's task list.
+     * @param t The task added.
+     * @return The message to be displayed to user.
+     */
+    public String formatDoneAddingTaskMsg(TaskList tasks, Task t) {
+        return "Got it. I've added this task: \n\t" + t
+                + "\nNow you have " + formatNumTasks(tasks.getSize()) + " in the list.";
     }
 
     /**

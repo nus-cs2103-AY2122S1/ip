@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -24,12 +23,9 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
 
     @FXML
-    private ImageView imageView = new ImageView();
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.gif"));
 
@@ -58,7 +54,7 @@ public class MainWindow extends AnchorPane {
         } else if (dukeResponse.startsWith("See you")) {
             imagePath = "/images/DaDukeBye.gif";
         } else if (dukeResponse.startsWith("...")) {
-            imagePath = "/images/pigeon-fluffy.gif";
+            imagePath = "/images/DaDukeMoji.gif";
         } else {
             imagePath = "/images/DaDuke.gif";
         }

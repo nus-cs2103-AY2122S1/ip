@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Encapsulates the Event class which has a starting date and time.
@@ -29,7 +29,7 @@ public class Event extends Task {
             this.eventDate = LocalDate.parse(dateTime[0].trim());
             this.eventTime = LocalTime.parse(dateTime[1].trim());
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!! Event date and time are invalid."
+            throw new DukeException("Event date and time are invalid."
                     + " Please format them as:\n\t[yyyy-mm-dd HH:MM]");
         }
         this.at = at;
