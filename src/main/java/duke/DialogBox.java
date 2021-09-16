@@ -12,8 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 
 /**
  * An example of a custom control using FXML.
@@ -21,12 +20,25 @@ import javafx.scene.layout.Region;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private static final String userStyle = "-fx-background-insets: 0 10 0 10;" +
+            "-fx-background-radius: 10;" +
+            "-fx-background-color: #6CE1FF;" +
+            "-fx-padding: 5 20 5 20;" +
+            "-fx-font-size: 9pt;";
+
+    private static final String dukeStyle = "-fx-background-insets: 0 10 0 10;" +
+            "-fx-background-radius: 10;" +
+            "-fx-background-color: #B7F0FF;" +
+            "-fx-padding: 5 20 5 20;" +
+            "-fx-font-size: 9pt;";
+
+    private DialogBox(String text, Image img, String style) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -38,6 +50,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.setStyle(style);
         displayPicture.setImage(img);
     }
 
@@ -52,11 +65,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, userStyle);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, dukeStyle);
         db.flip();
         return db;
     }
