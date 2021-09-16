@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Removes a task from the task list.
+     * Removes a task from the taskList.
      *
      * @param taskId the task to be removed from the list.
      */
@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * Get a task from the task list
+     * Gets a task from the taskList.
      *
      * @param taskId the task to be retrieved
      * @return the requested task
@@ -48,6 +48,8 @@ public class TaskList {
     }
 
     /**
+     * Checks if specified task exists in the taskList.
+     *
      * @param task the task to be compared with
      * @return true if task exists in taskList, false otherwise
      */
@@ -56,7 +58,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the size of the task list
+     * Gets the size of the task list.
      *
      * @return An integer size of the list
      */
@@ -65,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * Checks if the list is empty
+     * Checks if the taskList is empty.
      *
      * @return true if list contains no elements
      */

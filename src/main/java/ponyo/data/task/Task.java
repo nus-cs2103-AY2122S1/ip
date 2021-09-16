@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Get the done status of a task
+     * Gets the done status of a task.
      *
      * @return the string representation of whether a task is done
      */
@@ -27,7 +27,7 @@ public class Task {
     }
 
     /**
-     * Get the done status of a task
+     * Gets the done status of a task.
      *
      * @return the integer (bool) representation of whether a task is done
      */
@@ -43,7 +43,7 @@ public class Task {
     }
 
     /**
-     * Converts the task into a string to be added to the file
+     * Converts the task into a string to be added to the file.
      *
      * @return A string representation of a Task object to add in file.
      */

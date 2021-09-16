@@ -46,7 +46,7 @@ public class Storage {
     }
 
     /**
-     * Checks if the file and folder exists
+     * Checks if the file and folder exists.
      *
      * @param filePath path to check
      * @throws IOException if file creation fails
@@ -67,7 +67,7 @@ public class Storage {
     }
 
     /**
-     * Formats the text to be written in the file
+     * Formats the text to be written in the file.
      *
      * @param t task to be written into file
      */
@@ -80,7 +80,7 @@ public class Storage {
     }
 
     /**
-     * Retrieve all the contents in the task list.
+     * Retrieves all the contents in the task list.
      * Used when re-writing the contents in the file.
      *
      * @param tasks the task list to be parsed
@@ -98,7 +98,7 @@ public class Storage {
     }
 
     /**
-     * Returns a list of tasks stored in the file
+     * Returns a list of tasks stored in the file.
      *
      * @param filePath path of file
      * @throws IOException if error reading file
@@ -116,7 +116,7 @@ public class Storage {
     }
 
     /**
-     * Read each task and create a new task instance per line
+     * Reads each task and creates a new task instance per line.
      *
      * @param fileScanner Scanner object to parse the file
      * @return a Task to be added into the global TaskList
@@ -164,7 +164,7 @@ public class Storage {
     }
 
     /**
-     * Parse the task details in each line of file
+     * Parses the task details in each line of file.
      *
      * @param lineScanner a Scanner object to parse a line
      * @return a String array of task details: marked, description, date.

@@ -63,7 +63,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Handles the creation of a new todo
+     * Handles the creation of a new todo.
      *
      * @param tasks a TaskList of tasks objects
      * @param storage a Storage object to interact with hard disk
@@ -78,7 +78,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Handles the creation of a new Deadline
+     * Handles the creation of a new Deadline.
      *
      * @param tasks a TaskList of tasks objects
      * @param storage a Storage object to interact with hard disk
@@ -93,7 +93,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Handles the creation of a new Event
+     * Handles the creation of a new Event.
      *
      * @param tasks a TaskList of tasks objects
      * @param storage a Storage object to interact with hard disk
@@ -108,7 +108,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Gets details of a newly created task
+     * Gets details of a newly created task.
      *
      * @return String array task details: description, by-date etc.
      */
@@ -122,7 +122,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Formats the task into printable format
+     * Formats the task into printable format.
      *
      * @param task the task to be printed
      * @param size size of the new taskList
@@ -134,7 +134,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Formats the date from yyyy-mm-dd to MM d yyyy
+     * Formats the date from yyyy-mm-dd to MM d yyyy.
      *
      * @param inputDate The original date in the form of yyyy-mm-dd
      * @param slashIndex The index to split the command to get the date

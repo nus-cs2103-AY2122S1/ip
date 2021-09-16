@@ -17,7 +17,7 @@ public class Ponyo {
     private TaskList tasks;
 
     /**
-     * Create a new Ponyo program instance
+     * Creates a new Ponyo program instance.
      */
     public Ponyo() {
         try {

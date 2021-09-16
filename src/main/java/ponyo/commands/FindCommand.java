@@ -36,7 +36,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Get all matching task to keyword
+     * Gets all matching task to keyword.
      *
      * @param matchingTasks a list of Task objects
      * @return string representation of all matching tasks to print
