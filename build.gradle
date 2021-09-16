@@ -1,20 +1,9 @@
 plugins {
     id 'java'
     id 'application'
-//    id '' +
-//            '' +
-//            '' +
-//            '' +
-//            '' +
-//            'checkstyle'
     id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
-
-//javafx {
-//    version = "11.0.2"
-//    modules = [ 'javafx.controls' ]
-//}
 
 repositories {
     mavenCentral()
@@ -55,17 +44,13 @@ test {
 }
 
 application {
-    mainClassName = "duke.gui.Launcher"
+    mainClassName = "taskman.gui.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "TaskMan"
     archiveClassifier = null
 }
-
-//checkstyle {
-//    toolVersion = '8.29'
-//}
 
 run{
     standardInput = System.in
