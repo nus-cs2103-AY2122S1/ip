@@ -3,7 +3,8 @@ package command;
 import exception.DukeException;
 import exception.InvalidCommand;
 import exception.InvalidDateFormat;
-import exception.NullDescription;
+import exception.InvalidDescription;
+import exception.InvalidNotes;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -21,10 +22,11 @@ public abstract class Command {
      * @param input string input by users
      * @return The specific type of command that can be executed
      * @throws InvalidCommand If command cannot be understood
-     * @throws NullDescription If AddCommand is intended but without any description
+     * @throws InvalidDescription If AddCommand is intended but without any description
      * @throws InvalidDateFormat If AddCommand is intended but the date format is not followed
      */
-    public static Command parse(String input) throws InvalidCommand, NullDescription, InvalidDateFormat {
+    public static Command parse(String input) throws InvalidCommand, InvalidDescription,
+            InvalidDateFormat, InvalidNotes {
         String[] commandSplitBySpace = input.split(" ");
         if (commandSplitBySpace.length == 0 || commandSplitBySpace[0].equals(" ")) {
             throw new InvalidCommand();
@@ -55,11 +57,10 @@ public abstract class Command {
             break;
         default:
             throw new InvalidCommand();
-    }
+        }
 
-    assert commandType != null : "CommandType should have been determined";
-
-    return commandType;
+        assert commandType != null : "CommandType should have been determined";
+        return commandType;
     }
 
     /**

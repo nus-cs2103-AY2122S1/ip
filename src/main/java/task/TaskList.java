@@ -26,6 +26,10 @@ public class TaskList {
         return taskList.remove(index);
     }
 
+    /**
+     * Marks as task as completed.
+     * @param index the index of the task in the list.
+     */
     public void completeTask(int index) {
         Task taskToComplete = taskList.get(index);
         taskToComplete.markIsDone();

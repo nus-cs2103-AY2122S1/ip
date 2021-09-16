@@ -5,6 +5,12 @@ public abstract class Task {
     protected boolean isDone;
     protected String notes;
 
+    /**
+     * Constructor for Task class
+     * @param description the task description
+     * @param notes additional notes that are not related to task name
+     * @param completed true if task has been completed
+     */
     public Task(String description, String notes, boolean completed) {
         this.description = description;
         this.isDone = completed;
@@ -28,12 +34,6 @@ public abstract class Task {
 
     public String getNotes() {
         return this.notes;
-    }
-
-    public String showIfHaveNotes() {
-        return getNotes().isEmpty()
-                ? ""
-                : "**" + this.notes + "**";
     }
 
     @Override

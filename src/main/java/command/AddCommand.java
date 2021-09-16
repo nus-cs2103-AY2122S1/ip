@@ -1,14 +1,16 @@
 package command;
 
 import exception.InvalidDateFormat;
-import exception.NullDescription;
+import exception.InvalidDescription;
+import exception.InvalidNotes;
 import storage.Storage;
 import task.Deadline;
+import task.Event;
 import task.Task;
 import task.TaskList;
 import task.Todo;
-import task.Event;
 import ui.Ui;
+
 
 public class AddCommand extends Command {
 
@@ -18,54 +20,65 @@ public class AddCommand extends Command {
         TODO, DEADLINE, EVENT
     }
 
-    private void checkDescription(String description, TaskType type) throws NullDescription {
-        switch (type) {
-        case TODO:
-            if (description.length() <= 4 || description.split(" ").length < 2) {
-                throw new NullDescription("todo");
-            }
+    /**
+     * Abstracts out the critical information from the user's input and insert task as the taskType.
+     * Initialises taskInfo and taskType with respective information.
+     *
+     * @param input The complete string input by users
+     * @throws InvalidDescription If the description of task is empty or contains only spaces.
+     */
+    public AddCommand(String input) throws InvalidDateFormat, InvalidDescription, InvalidNotes {
+        switch (input.split(" ")[0]) {
+        case "todo":
+            this.taskType = TaskType.TODO;
+            checkTodoDescription(input.trim());
+            this.taskInfo = input.substring(5);
             break;
-        case DEADLINE:
-            if (description.length() <= 8 || description.split(" ").length < 2) {
-                throw new NullDescription("deadline");
-            }
+        case "deadline":
+            this.taskType = TaskType.DEADLINE;
+            checkDeadlineDescription(input.trim());
+            this.taskInfo = input.substring(9);
             break;
-        case EVENT:
-            if (description.length() <= 5 || description.split(" ").length < 2) {
-                throw new NullDescription("event");
-            }
+        case "event":
+            this.taskType = TaskType.EVENT;
+            checkEventDescription(input.trim());
+            this.taskInfo = input.substring(6);
             break;
         default:
             break;
         }
     }
 
-    /**
-     * Abstracts out the critical information from the user's input and insert task as the taskType.
-     * Initialises taskInfo and taskType with respective information.
-     *
-     * @param input The complete string input by users
-     * @throws NullDescription If the description of task is empty or contains only spaces.
-     */
-    public AddCommand(String input) throws NullDescription {
-        switch (input.split(" ")[0]) {
-        case "todo":
-            this.taskType = TaskType.TODO;
-            checkDescription(input, TaskType.TODO);
-            this.taskInfo = input.substring(5);
-            break;
-        case "deadline":
-            this.taskType = TaskType.DEADLINE;
-            checkDescription(input, TaskType.DEADLINE);
-            this.taskInfo = input.substring(9);
-            break;
-        case "event":
-            this.taskType = TaskType.EVENT;
-            checkDescription(input, TaskType.EVENT);
-            this.taskInfo = input.substring(6);
-            break;
-        default:
-            break;
+    private void checkTodoDescription(String description) throws InvalidDescription, InvalidNotes {
+        if (description.length() <= 5) {
+            throw new InvalidDescription("todo");
+        } else if (description.contains(" --") && description.split(" --").length != 2) {
+            throw new InvalidNotes();
+        }
+    }
+
+    private void checkDeadlineDescription(String description) throws InvalidDescription,
+            InvalidDateFormat, InvalidNotes {
+        if (description.length() <= 9) {
+            throw new InvalidDescription("deadline");
+        } else if (description.substring(9).startsWith("/by")) {
+            throw new InvalidDescription("deadline");
+        } else if (description.substring(9).split("/by").length < 2) {
+            throw new InvalidDateFormat();
+        } else if (description.contains(" --") && description.split(" --").length != 2) {
+            throw new InvalidNotes();
+        }
+    }
+
+    private void checkEventDescription(String description) throws InvalidDescription, InvalidDateFormat, InvalidNotes {
+        if (description.length() <= 6) {
+            throw new InvalidDescription("event");
+        } else if (description.substring(6).startsWith("/at")) {
+            throw new InvalidDescription("event");
+        } else if (description.substring(6).split("/at").length < 2) {
+            throw new InvalidDateFormat();
+        } else if (description.contains(" --") && description.split(" --").length != 2) {
+            throw new InvalidNotes();
         }
     }
 

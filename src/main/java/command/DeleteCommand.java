@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     private int taskNumber;
 
     /**
-     * Creates a delete task request using the task number i
+     * Creates a delete-task request using the task number i
      *
      * @param i the task number to be deleted
      */
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
         this.taskNumber = i;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage)  throws InvalidValue {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidValue {
         try {
             Task deletedTask = tasks.deleteTask(taskNumber);
             storage.write(tasks.getTaskList());

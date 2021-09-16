@@ -1,21 +1,23 @@
 package storage;
 
-import exception.InvalidDateFormat;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exception.InvalidDateFormat;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
+
+
 /**
  * Storage class allows access to the local storage file that contains the data saved.
  * Filepath to the local file is required.
- * If file is not found, tasklist will be initialised to be empty.
+ * If file is not found, taskList will be initialised to be empty.
  */
 public class Storage {
 
@@ -122,8 +124,8 @@ public class Storage {
         String separator = " | ";
 
         for (Task t : taskList) {
-            output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator +
-                    t.getDescription() + separator + t.getDeadline() + separator + t.getNotes() + "\n";
+            output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator
+                    + t.getDescription() + separator + t.getDeadline() + separator + t.getNotes() + "\n";
         }
         try {
             writeToFile(this.filePath, output);

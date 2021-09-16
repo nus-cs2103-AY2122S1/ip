@@ -4,6 +4,6 @@ public class InvalidCommand extends DukeException {
 
     @Override
     public String getMessage() {
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "Please don't confuse me with unknown commands, I do not know what that means! >_<";
     }
 }

@@ -4,6 +4,6 @@ public class InvalidValue extends DukeException {
 
     @Override
     public String getMessage() {
-        return "OOPS!!! I'm sorry, but the task number seems to be invalid.";
+        return "I don't see a task at that index, try again with a different number?";
     }
 }

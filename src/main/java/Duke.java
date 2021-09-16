@@ -38,7 +38,7 @@ public class Duke {
         try {
             Command c = Command.parse(input);
             return c.execute(tasks, ui, storage);
-        } catch (DukeException e){
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }

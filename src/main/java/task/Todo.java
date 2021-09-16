@@ -21,9 +21,18 @@ public class Todo extends Task {
      *
      * @return the String representation of a task.Todo
      */
+
+    private String showNotesIfAvailable() {
+        if (this.notes.isEmpty()) {
+            return "";
+        } else {
+            return "--" + this.notes + "\n";
+        }
+    }
+
     @Override
     public String toString() {
-        return String.format("[T]%s\n%s", super.toString(), this.notes);
+        return String.format("[T]%s\n%s", super.toString(), showNotesIfAvailable());
     }
 
     @Override

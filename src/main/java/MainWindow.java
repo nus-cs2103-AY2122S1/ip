@@ -21,6 +21,7 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /** Initialises the UI of the chatBot */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -43,10 +44,13 @@ public class MainWindow extends AnchorPane {
             handleExit();
         }
 
-        String response = duke.getResponse(input);
+        String formattedResponse = "Duke\n\n" + duke.getResponse(input);
+
+        String formattedInput = "You\n\n" + input;
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(formattedInput, userImage),
+                DialogBox.getDukeDialog(formattedResponse, dukeImage)
         );
         userInput.clear();
     }
@@ -56,7 +60,7 @@ public class MainWindow extends AnchorPane {
         Platform.exit();
     }
 
-    /** Greets the user on lauch */
+    /** Greets the user on launch */
     private void handleGreeting() {
         String initialGreetingMessage = "Hello! I'm Duke. "
                 + "\nWhat can I do for you?";

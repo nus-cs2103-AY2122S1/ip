@@ -1,12 +1,12 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class FindCommand extends Command {
 
