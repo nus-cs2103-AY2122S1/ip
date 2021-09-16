@@ -67,6 +67,9 @@ public class DialogBox extends HBox {
 
     public void setName(String name) {
         this.name.setText(name);
+        if (name.equals("Me")) {
+            this.name.setAlignment(Pos.TOP_RIGHT);
+        }
     }
 
     public void setBackgroundColor(String colorHex) {

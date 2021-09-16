@@ -12,7 +12,7 @@
     <children>
         <HBox fx:id="chatBackground">
             <VBox>
-                <Label fx:id="name" text="label" />
+                <Label fx:id="name" text="label" maxWidth="Infinity" />
                 <Label fx:id="dialog" text="Label" wrapText="true">
                 </Label>
             </VBox>
