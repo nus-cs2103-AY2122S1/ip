@@ -1,4 +1,5 @@
-D ~ Yes ~ finish hw ~ 6pm
 D ~ Yes ~ eat food ~ 7pm
-T ~ Yes ~ call friend
-E ~ No ~ Concert ~ Oct 3 2021 3pm
+Yes ~ eat food
+Yes ~ cook food
+T ~ No ~ make more food
+E ~ No ~ food festival ~ 5pm
