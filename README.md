@@ -1,6 +1,6 @@
 # Duke project template
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a project for the CS2103 (Software Engineering) Individual Project component. 
 
 ## Setting up in Intellij
 
@@ -22,3 +22,50 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+# Duke Chatbot
+
+According to the [nus-cs2103-AY2122S1/ip README.md](https://github.com/nus-cs2103-AY2122S1/ip/blob/master/README.md),
+
+> This is a project template for a greenfield Java project. It's named after the Java mascot Duke.
+
+## Usage
+
+This **chatbot** can be _used by_:
+* the JAR file, found [here](https://github.com/jovyntls/ip/blob/master/build/libs/ip-1.0-SNAPSHOT-all.jar)
+* run tests using `bash ./text-ui-test/duke-test.sh`
+* clone the repo and run the `main` function:
+
+```java
+public static void main(String[] args) {
+    String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    System.out.println("Hello from\n" + logo);
+
+    Duke duke = new Duke("../../data/duke_storage.txt");
+
+    duke.greet();
+    duke.taskMode();
+}
+```
+
+(This code is found in `ip/src/main/java/duke/Duke.java`.)
+
+## Progress
+
+### Milestones
+1. ~~Week 1~~
+2. ~~Week 2~~
+3. ~~Week 3~~
+4. Week 4
+
+### To do
+
+- [x] Basic chatbot implementation
+- [x] Extra features
+- [ ] GUI
+
+:+1: :sparkles: :camel: :tada:
+:rocket: :metal: :octocat:
