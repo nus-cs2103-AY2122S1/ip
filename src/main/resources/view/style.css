@@ -4,6 +4,11 @@
     -fx-background-color: #ffffff;
 }
 
+.dialog-box-section {
+    -fx-border-radius: 25px;
+    /*-fx-background-color: #FDFEFE;*/
+}
+
 .button:focused {
     /*-fx-background-color: #ede6f0;*/
     -fx-background-color: black;
@@ -20,37 +25,7 @@
     -fx-background-radius: 8px;
 }
 
+/* If not using circle clipping, this will show */
 .dialog-box-section ImageView {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
-/*.text-field:focused {*/
-/*    -fx-background-color: #a9a9a9 , white , white;*/
-/*    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;*/
-/*}*/
-
-
-
-
-/*Skyblaise99 code*/
-
-/*.text-field{*/
-/*    -fx-text-fill: #50ff00;*/
-/*}*/
-
-/*.scroll-pane {*/
-/*    -fx-background-color: black;*/
-/*    -fx-border-color: black;*/
-/*}*/
-
-/*.scroll-bar:vertical{*/
-/*    -fx-background-color:transparent;*/
-/*}*/
-
-/*.increment-button, .decrement-button {*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-border-color: transparent;*/
-/*}*/
-
-/*.scroll-bar:vertical .thumb {*/
-/*    -fx-background-color: grey;*/
-/*}*/
