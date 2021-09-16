@@ -9,7 +9,7 @@
 
 <fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="600.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" contentDisplay="CENTER" graphicTextGap="5.0" minHeight="-Infinity" pickOnBounds="false" styleClass="textBox" stylesheets="@../style/style.css" text="Label" wrapText="true">
+        <Label fx:id="dialog" contentDisplay="CENTER" graphicTextGap="5.0" minHeight="-Infinity" pickOnBounds="false" styleClass="misakiTextBox" stylesheets="@../style/style.css" text="Label" wrapText="true">
             <font>
                 <Font name="Comic Sans MS" size="13.0" />
             </font>

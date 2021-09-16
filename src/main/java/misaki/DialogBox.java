@@ -36,9 +36,9 @@ public class DialogBox extends HBox {
      * @param text Text of dialog account.
      * @param img  Image of dialog account.
      */
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String path) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(path));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -70,7 +70,7 @@ public class DialogBox extends HBox {
      * @return user dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "/view/UserDialogBox.fxml");
     }
 
     /**
@@ -81,7 +81,7 @@ public class DialogBox extends HBox {
      * @return Misaki dialog box.
      */
     public static DialogBox getMisakiDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "/view/MisakiDialogBox.fxml");
         db.flip();
         return db;
     }

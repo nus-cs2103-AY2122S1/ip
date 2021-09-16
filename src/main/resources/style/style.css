@@ -5,32 +5,47 @@
     -fx-background-repeat: no-repeat;
 }
 
+.scroll-bar .thumb {
+    -fx-background-color: white;
+}
+
 .userInput {
     -fx-background-color: white;
     -fx-border-color: rgb(209, 240, 255);
     -fx-border-width: 0;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-text-fill: #ff5b7a;
+    -fx-text-fill: rgb(113, 60, 255);
 }
 
 .sendBtn {
-    -fx-background-color: #ff5b7a;
+    -fx-background-color: rgba(255, 74, 108, 0.71);
     -fx-background-radius: 20px;
     -fx-border-color: white;
     -fx-border-radius: 20px;
     -fx-text-fill: white;
 }
 
-.textBox {
-    -fx-background-color: rgba(255, 255, 255, 0.53);
+.userTextBox {
+    -fx-background-color: rgba(202, 182, 255, 0.4);
     -fx-background-radius: 20px;
-    -fx-border-color: white;
+    -fx-border-color: rgb(202, 182, 255);
     -fx-border-width: 2;
     -fx-border-radius: 20px;
     -fx-padding: 20;
     -fx-max-height: Infinity;
-    -fx-text-fill: #ff5b7a;
+    -fx-text-fill: rgb(113, 60, 255);
+}
+
+.misakiTextBox {
+    -fx-background-color: rgba(255, 180, 192, 0.35);
+    -fx-background-radius: 20px;
+    -fx-border-color: rgb(255, 180, 192);
+    -fx-border-width: 2;
+    -fx-border-radius: 20px;
+    -fx-padding: 20;
+    -fx-max-height: Infinity;
+    -fx-text-fill: #ff4a6c;
 }
 
 .text-box:focused {
