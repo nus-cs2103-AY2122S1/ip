@@ -26,7 +26,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /** The different formats of date/time allowed as input */
     private final static String DATE_AND_TIME_FORMAT[] = {
-        "M/y", "d/M/y", "d-M-y", "M/y HHmm", "d/M/y HHmm", "d-M-y HHmm"
+        "M/y", "d/M/y", "d-M-y", "d/M/y HHmm", "d-M-y HHmm"
     };
 
     //@@author addressbook-level2-reused
@@ -177,6 +177,7 @@ public class Parser {
     private static Deadline prepareDeadline(String description, String dateTime) {
         for (String dateTimeFormat : DATE_AND_TIME_FORMAT) {
             try {
+                //The only format that uses a YearMonth class
                 if (dateTimeFormat.equals("M/y")) {
                     YearMonth userInput = YearMonth.parse(dateTime,
                             DateTimeFormatter.ofPattern(dateTimeFormat));
@@ -185,6 +186,7 @@ public class Parser {
                     }
                     return new Deadline(description, userInput);
                 }
+                //To check if user inputted any form of time
                 if (dateTimeFormat.split(" ").length > 1) {
                     LocalDateTime userInput = LocalDateTime.parse(dateTime,
                             DateTimeFormatter.ofPattern(dateTimeFormat));
@@ -192,7 +194,9 @@ public class Parser {
                         userInput = userInput.plusYears(2000);
                     }
                     return new Deadline(description, userInput);
-                } else {
+                }
+                //Default case is a LocalDate
+                else {
                     LocalDate userInput = LocalDate.parse(dateTime,
                             DateTimeFormatter.ofPattern(dateTimeFormat));
                     if (userInput.getYear() < 2000) {
@@ -208,7 +212,7 @@ public class Parser {
         }
         throw new DukeException("Please enter a date of the following format:\n " +
                 "\"Month/Year\"\n \"Day/Month/Year\"\n \"Day-Month-Year\"\n" +
-                " \"Month/Year HourMinutes\"\n \"Day/Month/Year HourMinute\"\n \"Day-Month-Year HourMinute\"\n");
+                " \"Day/Month/Year HourMinute\"\n \"Day-Month-Year HourMinute\"\n");
     }
 
     /**
