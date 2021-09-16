@@ -6,31 +6,31 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import katheryne.command.Command;
 
 @JsonTypeInfo(use = NAME, include = PROPERTY)
 
-/**
- * Chat bot katheryne.Katheryne, used for simple todo lists
- */
 public class Katheryne {
-
+    /**
+     * Chat bot katheryne.Katheryne, used for simple todo lists
+     */
     public static void main(String[] args) {
         // initialise variables
+        final String pathName = "tasks.json";
         Storage storage = new Storage();
         Ui ui = new Ui();
         TaskList lst = new TaskList();
-        String PATH_NAME = "tasks.json";
 
         // initialise Katheryne
         try {
-            storage.loadTasks(lst, PATH_NAME);
+            storage.loadTasks(lst, pathName);
         } catch (KatheryneException e) {
             ui.showErrorMessage(e);
         }
         ui.greet(lst);
 
-        while (ui.isRunning) {
+        while (ui.getIsRunning()) {
             try {
                 String userInput = ui.readCommand();
                 Command c = Parser.parse(userInput);

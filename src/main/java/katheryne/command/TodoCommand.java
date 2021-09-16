@@ -28,7 +28,7 @@ public class TodoCommand extends Command {
 
     /**
      * Create a Todo and add it to the task list. Print a confirmation message
-     * 
+     *
      * @param taskList A container for tasks which contains Katheryne's tasks.
      * @param ui The Ui used for the user interface.
      * @param storage The storage object taking care of writing and reading the text file.

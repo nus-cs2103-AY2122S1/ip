@@ -14,7 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline task with a date due by and a description.
-     * 
+     *
      * @param description
      * @param dateDueBy
      */
@@ -58,7 +58,7 @@ public class Deadline extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Deadline) {
             Deadline o = (Deadline) obj;
-            return this.getDateDueBy().equals(o.getDateDueBy()) ? super.equals(obj) : false;
+            return this.getDateDueBy().equals(o.getDateDueBy()) && super.equals(obj);
         }
         return false;
     }

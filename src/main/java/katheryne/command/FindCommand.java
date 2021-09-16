@@ -4,7 +4,6 @@ import katheryne.KatheryneException;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
-import katheryne.task.Todo;
 
 public class FindCommand extends Command {
     /**
@@ -29,11 +28,11 @@ public class FindCommand extends Command {
         if (subList.isEmpty()) {
             ui.say("I couldn't find any tasks containing '" + keyword + "'. Try another word?");
         } else {
-            ui.say("Tasks containing '" + keyword + "' are listed below. " 
+            ui.say("Tasks containing '" + keyword + "' are listed below. "
                     + "The number of tasks is " + subList.getSize() + ".");
             ui.listTasks(subList);
         }
-        
+
     }
 
 }

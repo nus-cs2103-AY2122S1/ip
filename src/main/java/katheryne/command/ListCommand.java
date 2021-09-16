@@ -16,14 +16,14 @@ public class ListCommand extends Command {
 
     /**
      * Default constructor.
-     * 
+     *
      * @throws KatheryneException
      */
     ListCommand() throws KatheryneException {}
 
     /**
      * Prints out the tasks in the tasklist.
-     * 
+     *
      * @param taskList A container for tasks which contains Katheryne's tasks.
      * @param ui The Ui used for the user interface.
      * @param storage The storage object taking care of writing and reading the text file.

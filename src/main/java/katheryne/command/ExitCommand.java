@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
 
     /**
      * Quits the programme.
-     * 
+     *
      * @param taskList A container for tasks which contains Katheryne's tasks.
      * @param ui The Ui used for the user interface.
      * @param storage The storage object taking care of writing and reading the text file.

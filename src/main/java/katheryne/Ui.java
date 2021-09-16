@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Deals with user interactions.
  */
 public class Ui {
-    public boolean isRunning;
+    private boolean isRunning;
     private final Scanner scanner = new Scanner(System.in);
 
     public Ui() {
@@ -19,12 +19,12 @@ public class Ui {
      * @param lst
      */
     void greet(TaskList lst) {
-        System.out.println("Ad astra abyssosque! " 
+        System.out.println("Ad astra abyssosque! "
                 + "I am Katheryne, the receptionist here at the Adventurers' Guild.");
         System.out.println("How may I assist?");
         if (!lst.isEmpty()) {
-            System.out.println("I still have your list of tasks from last time. " +
-                            "The number of tasks you have is " + lst.getSize() + ".");
+            System.out.println("I still have your list of tasks from last time. "
+                + "The number of tasks you have is " + lst.getSize() + ".");
         }
     }
 
@@ -48,7 +48,7 @@ public class Ui {
 
     /**
      * Prints out a statement which states the number of tasks in the list
-     * 
+     *
      * @param lst
      */
     public void countTasksInList(TaskList lst) {
@@ -56,6 +56,10 @@ public class Ui {
                 ? "There is currently 1 item in your list."
                 : "There are currently " + lst.getSize() + " items in your list.";
         this.say(statement);
+    }
+
+    protected boolean getIsRunning() {
+        return isRunning;
     }
 
     /**

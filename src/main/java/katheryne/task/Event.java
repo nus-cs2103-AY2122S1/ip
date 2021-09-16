@@ -56,7 +56,7 @@ public class Event extends Task {
     /**
      * Checks if an object is equal to this event. It is equal if and only if it is an event with
      * the same description and date at
-     *      
+     *
      * @param obj Object to compare to this task.
      * @return
      */
@@ -64,7 +64,7 @@ public class Event extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Event) {
             Event o = (Event) obj;
-            return this.dateAt.equals(o.getDateAt()) ? super.equals(obj) : false;
+            return this.dateAt.equals(o.getDateAt()) && super.equals(obj);
         }
         return false;
     }

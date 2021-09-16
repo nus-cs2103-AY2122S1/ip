@@ -13,9 +13,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = Deadline.class, name = "katheryne.task.Deadline")
 })
 
-/**
- * Class used for Tasks.
- */
 public abstract class Task {
     private String description;
     private Boolean isDone = false;
@@ -31,7 +28,7 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-    
+
     public boolean find(String keyword) {
         return this.description.contains(keyword);
     }
@@ -57,7 +54,7 @@ public abstract class Task {
             return "[ ] " + description;
         }
     }
-    
+
     /**
      * Checks if an object is equal to this task.
      * The object is equal if and only if it is a task of the same type, with the same description

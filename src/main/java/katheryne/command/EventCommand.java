@@ -38,7 +38,7 @@ public class EventCommand extends Command {
 
     /**
      * Adds an event to the task list, prints a confirmation message.
-     * 
+     *
      * @param taskList A container for tasks which contains Katheryne's tasks.
      * @param ui The Ui used for the user interface.
      * @param storage The storage object taking care of writing and reading the text file.
@@ -48,7 +48,7 @@ public class EventCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
         Event event = new Event(description, atAsDate);
         taskList.add(event);
-        ui.say("Event '" + description + "' added to your list, scheduled for " 
+        ui.say("Event '" + description + "' added to your list, scheduled for "
                 + event.getStringAt());
         ui.countTasksInList(taskList);
     }

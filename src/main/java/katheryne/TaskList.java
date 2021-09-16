@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import katheryne.task.Task;
-import katheryne.task.Todo;
 
 /**
  * A container for tasks which contains Katheryne's tasks.
@@ -58,7 +57,13 @@ public class TaskList {
         lst.remove(index);
         return true;
     }
-    
+
+    /**
+     * Finds all the tasks which contain a certain keyword within the description.
+     *
+     * @param keyword
+     * @return a TaskList of the tasks found.
+     */
     public TaskList tasksContaining(String keyword) {
         TaskList taskWithKeyword = new TaskList();
         for (int i = 1; i <= this.getSize(); i++) {
@@ -73,7 +78,7 @@ public class TaskList {
     /**
      * Gets the task at the index given in the task list. Note that this method may
      * throw errors if index is out of bounds.
-     * 
+     *
      * @param index
      * @return
      */
@@ -87,7 +92,7 @@ public class TaskList {
 
     /**
      * Gets the size of the taskList.
-     * 
+     *
      * @return
      */
     public int getSize() {
