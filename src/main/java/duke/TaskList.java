@@ -66,10 +66,7 @@ public class TaskList {
      * @return copied tasklist
      */
     private TaskList copyTasklist(TaskList taskList) {
-        ArrayList<Task> newList = new ArrayList<>();
-        for (Task task : taskList.tasks) {
-            newList.add(task);
-        }
+        ArrayList<Task> newList = new ArrayList<>(taskList.tasks);
         return TaskList.of(newList);
     }
 
