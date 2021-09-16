@@ -4,7 +4,6 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 public class ByeCommand extends Command {
     public static final String COMMAND = "Bye!";
@@ -16,20 +15,6 @@ public class ByeCommand extends Command {
      */
     public ByeCommand() {
         this.isExit = true;
-    }
-
-    /**
-     * Execute ByeCommand, prints a goodbye message from duke
-     *
-     *  @param taskList current task list
-     * @param ui current ui
-     * @param storage current storage
-     *
-     * @return
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
-        ui.printBye();
     }
 
     /**

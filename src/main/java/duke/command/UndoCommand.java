@@ -6,16 +6,11 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 public class UndoCommand extends Command {
     public static final String COMMAND = "undo";
 
     public UndoCommand() {}
-
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException {
-    }
 
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf,

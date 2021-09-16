@@ -6,7 +6,7 @@ import duke.task.Task;
 
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>(100);
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Constructor for TaskList

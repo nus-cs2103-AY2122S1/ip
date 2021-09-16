@@ -4,7 +4,6 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 
 public class ErrorCommand extends Command {
@@ -31,23 +30,6 @@ public class ErrorCommand extends Command {
     public ErrorCommand(String error, String emoticon) {
         this.error = error;
         this.emoticon = emoticon;
-    }
-
-    /**
-     * Executes Error Command to print error response
-     *  @param taskList current list
-     * @param ui current ui to access print responses
-     * @param storage current storage
-     *
-     * @return
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
-        if (this.emoticon != null) {
-            ui.printError(this.error, this.emoticon);
-        } else {
-            ui.printError(this.error);
-        }
     }
 
     /**

@@ -7,7 +7,6 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -23,29 +22,6 @@ public class TodoCommand extends Command {
      */
     public TodoCommand(String desc) {
         this.desc = desc;
-    }
-
-    /**
-     * Executes Todo Command, adds a todo task to the list, prints response
-     * and stores updated list in file
-     *
-     * @param taskList current list
-     * @param ui current ui to access print responses
-     * @param storage current storage
-     * @throws IOException when there is file save error
-     *
-     * @return
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException {
-        if (this.desc.equals("")) {
-            throw new IllegalArgumentException();
-        }
-        todo = new Todo(this.desc);
-        taskList.add(todo);
-        storage.writeToFile(taskList);
-        ui.printAdd(todo, taskList.getList().size());
-        history.addHistory(this);
     }
 
     /**

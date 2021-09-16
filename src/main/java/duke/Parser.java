@@ -12,6 +12,7 @@ import duke.command.DoneCommand;
 import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelloCommand;
 import duke.command.ListCommand;
 import duke.command.SnoozeCommand;
 import duke.command.TodoCommand;
@@ -21,7 +22,6 @@ import duke.command.UndoCommand;
  * Parser object that parses all the input from user to commands understood by Duke
  */
 public class Parser {
-    private static History history;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
     private static String[] parsed;
 
@@ -41,47 +41,46 @@ public class Parser {
             IllegalArgumentException,
             ArrayIndexOutOfBoundsException,
             StringIndexOutOfBoundsException {
-        String[] details = new String[2];
+        String[] eventDetails = new String[2];
         String desc = command.split(" /at ")[0].substring(6);
         if (desc.equals("")) {
             throw new IllegalArgumentException();
         }
-        details[0] = desc;
-        details[1] = command.split(" /at ")[1];
-        if (details[1].equals("")) {
+        eventDetails[0] = desc;
+        eventDetails[1] = command.split(" /at ")[1];
+        if (eventDetails[1].equals("")) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return details;
+        return eventDetails;
     }
 
     private static String[] parseDeadlineTask(String command) throws
             IllegalArgumentException,
             ArrayIndexOutOfBoundsException,
             StringIndexOutOfBoundsException {
-        String[] details = new String[2];
+        String[] deadlineDetails = new String[2];
         String desc = command.split(" /by ")[0].substring(9);
         if (desc.equals("")) {
             throw new IllegalArgumentException();
         }
-        details[0] = desc;
-        details[1] = command.split(" /by ")[1];
-        if (details[1].equals("")) {
+        deadlineDetails[0] = desc;
+        deadlineDetails[1] = command.split(" /by ")[1];
+        if (deadlineDetails[1].equals("")) {
             throw new IllegalArgumentException();
         }
-        return details;
+        return deadlineDetails;
     }
 
     private static String[] parsedSnooze(String command) throws
             IllegalArgumentException,
             ArrayIndexOutOfBoundsException,
             StringIndexOutOfBoundsException {
-
-        String[] details = command.split(" ");
-        if (details[1].equals("") || details[2].equals("")) {
+        String[] snoozeDetails = command.split(" ");
+        if (snoozeDetails[1].equals("") || snoozeDetails[2].equals("")) {
             throw new IllegalArgumentException();
         }
-        details[2] = details[2] + " " + details[3];
-        return details;
+        snoozeDetails[2] = snoozeDetails[2] + " " + snoozeDetails[3];
+        return snoozeDetails;
     }
 
     private static LocalDateTime parseDate(String dateTime) throws DateTimeException {
@@ -107,6 +106,8 @@ public class Parser {
         parsed = input.split(" ");
         try {
             switch (parsed[0]) {
+            case HelloCommand.COMMAND:
+                return new HelloCommand();
             case ByeCommand.COMMAND:
                 return new ByeCommand();
             case ListCommand.COMMAND:

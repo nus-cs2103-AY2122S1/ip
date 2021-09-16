@@ -8,7 +8,6 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -29,26 +28,6 @@ public class DeadlineCommand extends Command {
     public DeadlineCommand(String desc, LocalDateTime by) {
         this.desc = desc;
         this.by = by;
-    }
-
-    /**
-     * Executes Deadline Command, adds a deadline task to the list, prints response
-     * and stores updated list in file
-     *
-     * @param taskList current list
-     * @param ui current ui to access print responses
-     * @param storage current storage
-     * @throws IOException when there is file save error
-     *
-     * @return
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException {
-        this.deadline = new Deadline(this.desc, this.by);
-        taskList.add(deadline);
-        storage.writeToFile(taskList);
-        history.addHistory(this);
-        ui.printAdd(deadline, taskList.getList().size());
     }
 
     /**

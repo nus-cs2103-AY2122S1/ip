@@ -4,7 +4,6 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 
 
@@ -21,18 +20,6 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
-    }
-
-    /**
-     * Executes find command and search for keyword in list and print response
-     *  @param taskList current list
-     * @param ui current ui to access print responses
-     * @param storage current storage
-     * @return
-     */
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) {
-        ui.printFound(taskList.findKeyword(this.keyword));
     }
 
     /**

@@ -1,11 +1,20 @@
 package duke;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import duke.task.Task;
 
 public class ResponseFormatter {
+    /**
+     * Returns a greeting from duke
+     *
+     */
+    public String formatGreetings() {
+        return "Hello I am Duke! What a pleasant surprise to see you here.\n"
+                + "Are you sure you are ready to do work...";
+    }
     /**
      * Returns the current list formatted
      *

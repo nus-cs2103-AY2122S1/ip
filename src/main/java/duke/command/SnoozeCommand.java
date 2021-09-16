@@ -7,7 +7,6 @@ import duke.History;
 import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -30,48 +29,6 @@ public class SnoozeCommand extends Command {
         this.taskNo = taskNo;
         this.currDate = newDate;
     }
-
-    /**
-     * Executes commands
-     *
-     * @param taskList current list
-     * @param ui current ui to access print responses
-     * @param storage current storage
-     * @throws IOException for commands that needs to write to storage file
-     */
-    public void execute(TaskList taskList, Ui ui, Storage storage, History history) throws IOException {
-        try {
-            if (taskNo == -1 || taskNo + 1 > taskList.getList().size()) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-
-            this.task = taskList.getList().get(taskNo);
-            boolean isEvent = this.task instanceof Event;
-            boolean isDeadline = this.task instanceof Deadline;
-            if (!isDeadline && !isEvent) {
-                throw new IllegalArgumentException();
-            }
-
-            String display = "";
-            if (isEvent) {
-                display = ((Event) this.task).snooze(currDate);
-            } else if (isDeadline) {
-                display = ((Deadline) this.task).snooze(currDate);
-            }
-            storage.writeToFile(taskList);
-
-            ui.printSnooze(display);
-            history.addHistory(this);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.printError(
-                    "Eh... No such task found. Cannot mark as done.",
-                    "(＃￣ω￣)"
-            );
-        } catch (IllegalArgumentException e) {
-            ui.printError("Cannot snooze a task with no date!", ">.<");
-        }
-    };
-
 
     /**
      * Executes commands
