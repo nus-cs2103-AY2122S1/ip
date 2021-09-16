@@ -182,7 +182,7 @@ Format: `bye`
 
 Example of usage:
 
-`exit`
+`bye`
 
 Expected outcome:
 
