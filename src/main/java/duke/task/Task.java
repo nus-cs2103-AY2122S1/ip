@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidDateFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,18 +33,30 @@ public class Task {
     /* The delimiter between the attributes for the task in the .txt file */
     public final static String STORAGE_DELIMITER = ",";
 
+    /**
+     * A constructor for a Task
+     * @param description The description of the Task
+     * @param done Whether the Task is done
+     */
     public Task(String description, boolean done) {
         this.description = description;
         this.isDone = done;
     }
 
+    /**
+     * A constructor for a Task
+     * @param description The description of the Task
+     * @param date The date associated with the Task
+     * @param done Whether the task is done
+     * @throws DukeException When the date has an incorrect format
+     */
     public Task(String description, String date, boolean done) throws DukeException {
         this.description = description;
         this.isDone = done;
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date format!");
+            throw new InvalidDateFormatException();
         }
     }
 
@@ -58,12 +71,16 @@ public class Task {
         return isDone ? "X" : " ";
     }
 
-    private String getDoneString() { return isDone ? DONE_STRING : NOT_DONE_STRING; }
+    private String getDoneString() {
+        return isDone ? DONE_STRING : NOT_DONE_STRING;
+    }
 
     /**
-     * Formats the task data for saving in tasks.txt
+     * @return String of the task data for saving in tasks.txt
      */
-    public String toFileData() { return String.join(STORAGE_DELIMITER, getDoneString(), description); }
+    public String toFileData() {
+        return String.join(STORAGE_DELIMITER, getDoneString(), description);
+    }
 
     /**
      * Gets the date of the task in the format of DD Month-Name YYYY
@@ -82,6 +99,9 @@ public class Task {
         return this.date.toString();
     }
 
+    /**
+     * @return The LocalDate of the Task
+     */
     public LocalDate getDate() {
         return date;
     }
@@ -96,6 +116,9 @@ public class Task {
         return String.format("[%s]", alphabet);
     }
 
+    /**
+     * @return The String representation of the Task
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", getDoneSymbol(), description);
