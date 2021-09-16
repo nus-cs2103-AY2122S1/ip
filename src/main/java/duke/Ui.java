@@ -28,13 +28,6 @@ public class Ui {
     }
 
     /**
-     * Prints a standard line break.
-     */
-    public void showDivider() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
      * Prints welcome message to the terminal and returns the message.
      */
     public String showWelcomeMessage() {
@@ -56,21 +49,9 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye statement, changes isExit to true.
-     */
-    public String sendGoodbye() {
-        String exitMessage = "Bye. Hope to see you again soon!";
-        showDivider();
-        System.out.println(exitMessage);
-        showDivider();
-        this.isExit = true;
-        return exitMessage;
-    }
-
-    /**
      * Prints error message.
      *
-     * @param s
+     * @param s Error message.
      */
     public void showError(String s) {
         System.err.println(s);
