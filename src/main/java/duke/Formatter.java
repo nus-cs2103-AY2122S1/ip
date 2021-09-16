@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import duke.task.Task;
+
 abstract class Formatter {
 
     private static final String INDENTATION_1 = " ";
@@ -54,7 +56,7 @@ abstract class Formatter {
      * @param totalTasks The total number of tasks.
      * @return
      */
-    public static String getTaskName(String[] commands) {
+    public static String getTaskName(String[] commands) {                
         int indexOfDateSeparator = IntStream
             .range(0, commands.length)
             .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
