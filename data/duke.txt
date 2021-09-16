@@ -1,3 +1,5 @@
 T,1,some task
 D,1,some task,2022-01-01 08:00
-T,1,bla
+T,0,grey
+T,0,jee
+T,1,lolo
