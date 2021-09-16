@@ -70,7 +70,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the bot and waits for the user's input.
+     * Starts the CLI version of the duke.
      */
     public void startCli() {
 

@@ -243,7 +243,7 @@ public class Parser {
     }
 
     /**
-     * Generates duke's response to the 'clear' command.
+     * Generates Duke's response to the 'clear' command.
      * @return Duke's response.
      */
     private String getClearResponse() {
@@ -252,6 +252,10 @@ public class Parser {
         return Ui.getClearMessage();
     }
 
+    /**
+     * Generates Duke's response to the 'help' command.
+     * @return Duke's response
+     */
     private String getHelpResponse() {
         return Ui.getHelp();
     }

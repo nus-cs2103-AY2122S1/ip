@@ -13,6 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Class that handles user inputs into the GUI.
+ */
 public class Controller {
     @FXML
     private VBox dialogContainer;
@@ -46,7 +49,7 @@ public class Controller {
     }
 
     /**
-     * Adds the welcome message as soon as duke is started.
+     * Adds the welcome message to the GUI as soon as duke is started.
      */
     public void initialize() {
         addWelcomeMessage();
