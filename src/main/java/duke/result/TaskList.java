@@ -45,15 +45,6 @@ public class TaskList {
     }
 
     /**
-     * Creates a task list with a given TaskList and a message.
-     *
-     * @param otherTaskList A TaskList object representing a list of tasks.
-     */
-    public TaskList(TaskList otherTaskList) {
-        this.tasks = new ArrayList<>(otherTaskList.tasks);
-    }
-
-    /**
      * Applies a function to every task in the task list.
      *
      * @param consumer A function that is to be applied to each task in the list.
