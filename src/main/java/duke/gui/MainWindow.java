@@ -5,12 +5,20 @@ import duke.main.Duke;
 import duke.main.DukeException;
 import duke.main.Parser;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,8 +32,22 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /**
+     * Initializes the MainWindow
+     */
     @FXML
     public void initialize() {
+        Stop[] stops = new Stop[] { new Stop(0, Color.DARKVIOLET), new Stop(0.7, Color.DARKBLUE)};
+        LinearGradient lgColor = new LinearGradient(
+                0,
+                0,
+                1,
+                0,
+                true,
+                CycleMethod.NO_CYCLE,
+                stops);
+        BackgroundFill bgFill = new BackgroundFill(lgColor, CornerRadii.EMPTY, Insets.EMPTY);
+        dialogContainer.setBackground(new Background(bgFill));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
