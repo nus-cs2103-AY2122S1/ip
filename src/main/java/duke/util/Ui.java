@@ -35,7 +35,7 @@ public class Ui {
                 + task.toString()
                 + "\nNow you have "
                 + taskList.getNumOfTasks()
-                + " tasks in the list.";
+                + " tasks in your list.";
     }
 
     /**
@@ -49,6 +49,6 @@ public class Ui {
                 + task.toString()
                 + "\nNow you have "
                 + taskList.getNumOfTasks()
-                + " tasks in the list.";
+                + " tasks in your list.";
     }
 }
