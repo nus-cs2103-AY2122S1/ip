@@ -1,0 +1,7 @@
+/* CSS partially adapted from yourally2's CSS */
+#dialog {
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, #383939, 10, 0.4, 3, 3);
+    -fx-border-insets: 5px;
+}
