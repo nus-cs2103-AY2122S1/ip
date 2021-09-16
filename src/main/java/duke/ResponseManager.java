@@ -10,7 +10,7 @@ public class ResponseManager {
      * Goodbye message when the user enters the "bye" command.
      */
     public String getByeMessage() {
-        return "Duke says: Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -20,7 +20,7 @@ public class ResponseManager {
      */
     public String getListTasksMessage(ArrayList<Task> tasks) {
         StringBuilder message = new StringBuilder(
-                "Duke says: Here is your list of tasks :)\n");
+                "Here is your list of tasks\n");
 
         if (tasks.size() == 0) {
             message.append(
@@ -42,7 +42,7 @@ public class ResponseManager {
      * @param numTasks The new total number of tasks.
      */
     public String getTaskAdditionMessage(Task task, int numTasks) {
-        return "Duke says: I've added the task: \n"
+        return "I've added the task: \n"
                 + "     " + task.toString() + "\n"
                 + "You now have " + numTasks + " tasks, jiayouz!";
     }
@@ -54,7 +54,7 @@ public class ResponseManager {
      * @param numTasks The new total number of tasks.
      */
     public String getTaskDeletionMessage(Task task, int numTasks) {
-        return "Duke says: I've deleted the task: \n"
+        return "I've deleted the task: \n"
                 + "     " + task.toString() + "\n"
                 + "You now have " + numTasks + " tasks, jiayouz!";
     }
@@ -66,13 +66,13 @@ public class ResponseManager {
      * @param numTasks The current total number of tasks.
      */
     public String getTaskCompletionMessage(Task task, int numTasks) {
-        return "Duke says: You've completed the task: \n"
+        return "You've completed the task: \n"
                 + "     " + task.toString() + "Well done!\n"
                 + "You now have " + numTasks + " tasks, jiayouz!";
     }
 
     public String getSnoozeTaskMessage(Task task) {
-        return "Duke says: The task: \n"
+        return "The task: \n"
                 + "     " + task.toString() + "\n"
                 + "has been snoozed\n";
     }
@@ -90,13 +90,15 @@ public class ResponseManager {
      * Prints a message to tell the user that Duke does not understand their input.
      */
     public String getUnknownCommandMessage() {
-        return "Duke says: Sorry I don't understand what that means";
+        return "\u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \n" +
+                "Sorry I don't understand what that means";
     }
 
     /**
      * Prints a message to tell the user that the task number they are trying to complete/delete does not exist.
      */
     public String getInvalidIndexMessage() {
-        return "Duke says: You don't have that many tasks!";
+        return "\u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \n" +
+                "You don't have that many tasks!";
     }
 }

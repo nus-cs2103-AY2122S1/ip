@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -21,6 +23,7 @@ public class Duke extends Application {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
+    private Button helpButton;
     private Scene scene;
 
     private Duke duke;
@@ -69,9 +72,10 @@ public class Duke extends Application {
 
         userInput = new TextField();
         sendButton = new Button("Send");
+        helpButton = new Button("Help");
 
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, helpButton);
 
         scene = new Scene(mainLayout);
 
@@ -100,6 +104,8 @@ public class Duke extends Application {
 
         sendButton.setPrefWidth(55.0);
 
+        helpButton.setPrefWidth(55.0);
+
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -113,11 +119,17 @@ public class Duke extends Application {
             handleUserInput();
         });
 
+        helpButton.setOnMouseClicked((event) -> {
+            displayHelpPopup();
+        });
+
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+
 
     }
 
@@ -146,8 +158,23 @@ public class Duke extends Application {
         String dukeText = react(userText);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(dukeText, dukeImage)
+                UserDialogBox.getUserDialog(userText, userImage),
+                UserDialogBox.getDukeDialog(dukeText, dukeImage)
+        );
+        userInput.clear();
+    }
+
+    private void displayHelpPopup() {
+//        dialogContainer.getChildren().addAll(
+//                UserDialogBox.getDukeDialog("wefwe", userImage)
+//        );
+        String userText = userInput.getText();
+        System.out.println(react(userText));
+        String dukeText = react(userText);
+
+        dialogContainer.getChildren().addAll(
+                UserDialogBox.getUserDialog(userText, userImage),
+                UserDialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }

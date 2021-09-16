@@ -132,7 +132,6 @@ public class Task {
 
     public static class Event extends Task {
 
-        //private final LocalDate date;
         private LocalDateTime when;
 
         /**
