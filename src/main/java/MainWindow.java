@@ -27,13 +27,12 @@ public class MainWindow extends AnchorPane {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final String greeting = "Hello from\n"
-            + logo
+    private final String greeting = "Hello from Duke!"
             + "\n"
             + "What can I do for you?";
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
     @FXML
     public void initialize() {
