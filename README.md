@@ -17,5 +17,5 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 <img width="512" alt="Kermit-program" src="https://user-images.githubusercontent.com/25302138/133612837-1d7a78ce-21a2-4c20-a7e8-d673d963378e.png">
 
 ## Acknowledgements
-[OpenSvg](https://freesvg.org/red-elmo) for the Elmo clip art that was used for the user profile
+[OpenSvg](https://freesvg.org/red-elmo) for the Elmo clip art that was used for the user profile <br>
 [Alex_Fotos](https://pixabay.com/photos/kermit-frog-towel-dry-fun-cute-2823941/) for the Kermit frog, that used for Kermit's profile photo.
