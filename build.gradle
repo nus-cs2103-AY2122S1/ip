@@ -48,7 +48,8 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "WingerIO"
+    archiveVersion = "v0.2"
     archiveClassifier = null
 }
 
