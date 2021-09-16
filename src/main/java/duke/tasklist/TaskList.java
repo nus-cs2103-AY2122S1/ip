@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
@@ -42,7 +43,9 @@ public class TaskList {
      *
      * @param index Index of item that wants to be marked as done.
      */
-    public String markTaskAsDone(int index) {
+    public String markTaskAsDone(int index) throws DukeException {
+        checkIndexValidity(index);
+
         String response = "";
 
         Task doneTask = getTask(index).markAsDone();
@@ -84,7 +87,9 @@ public class TaskList {
      *
      * @param index Index of item that wants to be deleted.
      */
-    public String delete(int index) {
+    public String delete(int index) throws DukeException {
+        checkIndexValidity(index);
+
         String response = "";
         Task removedItem = list.remove(index - 1);
 
@@ -119,7 +124,9 @@ public class TaskList {
         return response;
     }
 
-    public String tag(int index, String tag) {
+    public String tag(int index, String tag) throws DukeException {
+        checkIndexValidity(index);
+
         String response = "";
         Task taggedItem = list.get(index - 1);
         taggedItem.addTag(tag);
@@ -176,6 +183,12 @@ public class TaskList {
             Files.write(path, listItems(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    void checkIndexValidity(Integer index) throws DukeException {
+        if (index - 1 >= list.size() || index < 1) {
+            throw new DukeException("There are no tasks with the given index. Please try again.");
         }
     }
 }
