@@ -148,6 +148,7 @@ Duke will list out all the tasks that have descriptions matching the `SEARCHTERM
 ![find expected outcome](./images/find.png)
 
 ## Command Summary
+
 Action|Format|Examples
 ------|------|--------
 todo|`todo TASK`| `todo buy eggs`
