@@ -19,6 +19,10 @@ public class Ui {
     public static final String CLEAR_MSG = "\tAll your tasks have been cleared!";
     public static final String LOAD_ERROR_MSG = "\tOops! Looks like something went wrong with your data file!";
     public static final String EXIT_MSG = "\tBye, see you again soon!";
+    public static final String ADD_TASK_MSG = "\tGot it. I've added this task:\n\t  ";
+    public static final String DELETE_TASK_MSG = "\tNoted. I've removed this task:\n\t  ";
+    public static final String NUM_OF_TASK_MSG = "\n\tNow you have %1$d %2$s in the list.";
+
 
     private Scanner sc = new Scanner(System.in);
 
@@ -32,11 +36,11 @@ public class Ui {
 
     /**
      * Shows to user that a task was added to the task list successfully.
-
      */
     public String showAddTask(TaskList tasks, Task task) {
-        return "\tGot it. I've added this task:\n\t  " + task
-                + "\n\tNow you have " + tasks.getListSize() + " in the list.";
+        int listSize = tasks.getListSize();
+        String taskFormat = listSize > 1 ? "tasks" : "task";
+        return ADD_TASK_MSG + task + String.format(NUM_OF_TASK_MSG, listSize, taskFormat);
     }
 
     /**
@@ -45,8 +49,9 @@ public class Ui {
      * @param task The task to add into the task list.
      */
     public String showDeleteTask(TaskList tasks, Task task) {
-        return "\tNoted. I've removed this task:\n\t  " + task
-                + "\n\tNow you have " + tasks.getListSize() + " in the list.";
+        int listSize = tasks.getListSize();
+        String taskFormat = listSize > 1 ? "tasks" : "task";
+        return DELETE_TASK_MSG + task + String.format(NUM_OF_TASK_MSG, listSize, taskFormat);
     }
 
     public String showLoadingError() {
