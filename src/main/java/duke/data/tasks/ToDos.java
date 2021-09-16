@@ -8,16 +8,16 @@ public class ToDos extends Task {
         super(name);
     }
 
-    public ToDos(boolean completed, String name) {
-        super(completed, name);
+    public ToDos(boolean completed, String name, String tags) {
+        super(completed, name, tags);
     }
 
     @Override
     public String getSaveData() {
         if (this.isCompleted()) {
-            return "T~1~" + this.getName();
+            return String.format("T~1~%s~%s", this.getName(), this.getTags());
         } else {
-            return "T~0~" + this.getName();
+            return String.format("T~0~%s~%s", this.getName(), this.getTags());
         }
     }
 
