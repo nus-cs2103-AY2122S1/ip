@@ -53,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * Write the task list to the .txt file
+     * Writes the task list to the .txt file
      *
      * @param tasks The given task list.
      */
