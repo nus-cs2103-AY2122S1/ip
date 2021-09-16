@@ -43,6 +43,7 @@ Format: `list`
 * Having any other parameter will cause the command to not be executed
 
 Example of usage: 
+
 ![list](/docs/picturesforug/list.png)
 
 ### `ToDo` - Adds new ToDo
