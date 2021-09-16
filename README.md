@@ -1,6 +1,6 @@
 # The Duke
 <p>
-*The Duke* (inspired by a character in the show Solar Opposites) is a personal helper chatbot. The Duke allows you to 
+The Duke (inspired by a character in the show Solar Opposites) is a personal helper chatbot. The Duke allows you to 
 keep track of tasks such as:
 </p>
 
