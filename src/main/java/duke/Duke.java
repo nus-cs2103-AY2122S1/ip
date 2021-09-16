@@ -4,12 +4,20 @@ import duke.command.Command;
 
 import java.io.IOException;
 
+/**
+ * The driver class that runs the program
+ */
 public class Duke {
     private Ui ui;
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Initializes an instance of Duke class.
+     * @param pathName Folder name of the storage file
+     * @param fileName Name of the storage file
+     */
     public Duke(String pathName, String fileName) {
         ui = new Ui();
         parser = new Parser();
@@ -23,10 +31,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the execution of the program.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         new Duke("data", "tasks.txt").run();
     }
 
+    /**
+     * Executes the program.
+     */
     public void run() {
         ui.displayWelcome();
         boolean isExit = false;

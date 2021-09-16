@@ -10,7 +10,17 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.PrintCommand;
 
+/**
+ * A class that contaisn methods to parse command line strings
+ */
 public class Parser {
+    /**
+     * Parses a command line string input on screen to get the details
+     * of the Command object
+     * @param commandLine The command line string to parse
+     * @return The Command object
+     * @throws DukeException If the command line string is not valid
+     */
     public Command parse(String commandLine) throws DukeException {
         String[] commandLineParts = commandLine.split("\\s+", 2);
 
@@ -74,6 +84,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Gets task number from the command information.
+     * @param commandInfo The command information
+     * @return The task number
+     * @throws DukeException If the information is not valid
+     */
     private int getTaskNumFromCommand(String commandInfo) throws DukeException {
         if (commandInfo.trim().length() > 0) {
             try {
@@ -86,6 +102,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets task description from ToDo command information.
+     * @param commandInfo The ToDo command information
+     * @return The task description
+     * @throws DukeException If the information is not valid
+     */
     private String getTaskDescriptionFromToDoCommand(String commandInfo) throws DukeException {
         if (commandInfo.trim().length() > 0) {
             return commandInfo;
@@ -94,6 +116,12 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * @param commandInfo
+     * @return
+     * @throws DukeException
+     */
     private String getTaskInfoFromDeadlineCommand(String commandInfo) throws DukeException {
         if (commandInfo.trim().length() > 0) {
             String[] deadlineTaskDetails = commandInfo.split("/", 2);
@@ -160,6 +188,12 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * @param commandInfo
+     * @return
+     * @throws DukeException
+     */
     private String getTaskInfoFromEventCommand(String commandInfo) throws DukeException {
         if (commandInfo.trim().length() > 0) {
             String[] eventTaskDetails = commandInfo.split("/", 2);
@@ -226,6 +260,12 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * @param commandInfo
+     * @return
+     * @throws DukeException
+     */
     private String getDateFromPrintCommand(String commandInfo) throws DukeException {
         if (commandInfo.trim().length() > 0) {
             if (commandInfo.trim().startsWith("/on")) {

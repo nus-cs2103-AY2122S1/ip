@@ -6,7 +6,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * A class that contains methods to handle i/o operations through screen
+ */
 public class Ui {
+    /**
+     * Reads command line string from the user.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         System.out.println("ENTER COMMAND:");
@@ -14,11 +20,17 @@ public class Ui {
         return sc.nextLine().trim();
     }
 
+    /**
+     * Displays goodbye message on exiting.
+     */
     public void exit() {
         String message = "\t" + "Bye. Hope to see you again soon!";
         displayResponse(message);
     }
 
+    /**
+     * Greets the user with a welcome message.
+     */
     public void displayWelcome() {
         displayLine();
         displayWelcomeMessage();
@@ -26,22 +38,36 @@ public class Ui {
         displayLine();
     }
 
+    /**
+     * Displays a message with proper formatting.
+     * @param message Message to be displayed
+     */
     public void displayResponse(String message) {
         displayLine();
         System.out.println(message);
     }
 
+    /**
+     * Dis[lays an error message with proper formatting
+     * @param message Error message to be displayed
+     */
     public void displayError(String message) {
         displayLine();
         System.out.println("ERROR MESSAGE:");
         System.out.println("\t" + "☹ " + message);
     }
 
+    /**
+     * Displays a line to seoarate different parts of a message
+     */
     public void displayLine() {
         String horizontalLine = "____________________________________________________________";
         System.out.println(horizontalLine);
     }
 
+    /**
+     * Displays welcome message with proper formatting.
+     */
     private void displayWelcomeMessage() {
         String message = "\t" + "Hello! I'm Duke, your Personal Assistant ChatBot."
                 + System.lineSeparator()
@@ -50,6 +76,9 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Displays the menu of options.
+     */
     private void displayMenuOptions() {
         String format = "%-25s%s%n";
 
@@ -89,27 +118,52 @@ public class Ui {
         System.out.printf(format, menuOption8, menuOption8Info);
     }
 
+    /**
+     * Displays a message when a new task is added.
+     * @param task The task added
+     * @return
+     */
     public String taskAddedMessage(Task task) {
         return "\t" + "Got it. I've added this task:"
                 + System.lineSeparator() + "\t\t" + task;
     }
 
+    /**
+     * Displays a message when a task is removed
+     * @param task The task removed
+     * @return
+     */
     public String taskDeletedMessage(Task task) {
         return "\t" + "Noted. I've removed this task:"
                 + System.lineSeparator() + "\t\t" + task;
     }
 
+    /**
+     * Displays a message when a task has been executed.
+     * @param task The task executed
+     * @return
+     */
     public String taskDoneMessage(Task task) {
         return "\t" + "Nice! I've marked this task as done:"
                 + System.lineSeparator() + "\t\t" + task;
     }
 
+    /**
+     * Gets a message containing the number of tasks.
+     * @param taskList List of tasks
+     * @return a string containing size of the list of tasks.
+     */
     public String getNumOfTasksInList(TaskList taskList) {
         return "\t" + "Now you have " + taskList.size()
                 + (taskList.size() > 1 ? " tasks" : " task")
                 + " in the list.";
     }
 
+    /**
+     * Gets a message containing the list of tasks.
+     * @param taskList List of tasks
+     * @return a string containing the list of tasks
+     */
     public String getTasksInList(TaskList taskList) {
         StringBuilder response = new StringBuilder("\t" + "Here are the tasks in your list:"
                 + System.lineSeparator()
@@ -129,6 +183,12 @@ public class Ui {
         return response.toString();
     }
 
+    /**
+     * Gets a message containing the list of tasks on a specified date.
+     * @param dateStr The date corresponding which the tasks have to be found.
+     * @param taskList List of all tasks
+     * @return a string containing the list of tasks on the given date
+     */
     public String getTasksOnDate(String dateStr, TaskList taskList) {
         TaskList taskOnDateList = new TaskList();
 
@@ -163,6 +223,11 @@ public class Ui {
         return response.toString();
     }
 
+    /**
+     * Converts a given date from local format to "mmm d yyyy" format.
+     * @param dateStr A string containing date in local format
+     * @return A string containing date in "mmm d yyyy" format
+     */
     private String processDateStr(String dateStr) {
         LocalDate date;
         String processedDateStr;
