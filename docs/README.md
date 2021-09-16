@@ -118,9 +118,11 @@ Now you have 7 tasks in the list.
 Mark a task specified by the index shown in task list as done.
 
 __Example of usage:__
+
 `done 5`
 
 __Expected outcome:__
+
 Mark the 5th task in the list as done.
 ```
 Nice! I've marked this task as done:
@@ -131,9 +133,11 @@ Nice! I've marked this task as done:
 Delete a task specified by the index shown in task list.
 
 __Example of usage:__
+
 `delete 4`
 
 __Expected outcome:__
+
 Delete the 4th task in the task list. And shows you the number of tasks in the task list after the deletion.
 ```
 Got it. I've removed this task:
@@ -145,9 +149,11 @@ Now you have 6 tasks in the list.
 Edit an existing task specified by the index shown in task list.
 
 __Example of usage:__
+
 `edit 3 presentation meeting /t 02/10/2021 10:00`
 
 __Expected outcome:__
+
 Edit the existing 3th event, change it into `presentation meeting` with new time `02/10/2021 10:00`.
 ```
 Got it. Here is the updated task:
