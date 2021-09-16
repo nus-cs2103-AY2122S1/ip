@@ -1,7 +1,7 @@
 package duke.dukeException;
 
 /**
- * To handle Duke Exception.
+ * This program called Duke Exception is for handling Exceptions in Duke.
  *
  * @author Erwin Quek
  * @version CS2103 AY21/22 Sem 1

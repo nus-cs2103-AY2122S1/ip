@@ -8,16 +8,16 @@ package duke.tasks;
  */
 public class ToDo extends Task{
     /**
-     * A constructor for ToDo
-     * @param description Takes in a user input
+     * A constructor for ToDo.
+     * @param description Takes in a user input.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * A method to get todo task info.
-     * @return a string of the todo task details to be saved in data
+     * Return a String representation of todo task to be saved in duke.txt.
+     * @return A String of the todo task.
      */
     @Override
     public String getTaskInfo() {
@@ -26,7 +26,7 @@ public class ToDo extends Task{
 
     /**
      * A method to get a String representation of todo task.
-     * @return a string of the todo task.
+     * @return A string of the todo task.
      */
     @Override
     public String toString() {

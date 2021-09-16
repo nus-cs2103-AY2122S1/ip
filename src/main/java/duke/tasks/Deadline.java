@@ -17,7 +17,7 @@ public class Deadline extends Task{
 
     /**
      * Constructor for Deadline.
-     * @param description Takes in a description of Deadline task
+     * @param description Takes in a description of Deadline task.
      */
     public Deadline(String description) throws DukeException {
         super(description.substring(0, description.indexOf("/by ")).trim());
@@ -31,8 +31,8 @@ public class Deadline extends Task{
     }
 
     /**
-     * A method to get deadline task info.
-     * @return a string of the deadline task details to be saved in data
+     * Returns a string representation of the deadline task details to be saved in duke.txt.
+     * @return A string representation of the deadline tas.
      */
     @Override
     public String getTaskInfo() {
@@ -40,8 +40,8 @@ public class Deadline extends Task{
     }
 
     /**
-     * A method to get a String representation of Deadline task.
-     * @return a string of the Deadline task.
+     * Returns a String representation of Deadline task.
+     * @return A string representation of the Deadline task.
      */
     @Override
     public String toString() {

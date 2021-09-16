@@ -30,8 +30,8 @@ public class Event extends Task{
     }
 
     /**
-     * A method to get Event task info.
-     * @return a string of the Event task details to be saved in data
+     * Returns a string representation of Event task details to be saved in duke.txt.
+     * @return A string representation of Event task.
      */
     @Override
     public String getTaskInfo() {
@@ -39,8 +39,8 @@ public class Event extends Task{
     }
 
     /**
-     * A method to get a String representation of Event task.
-     * @return a string of the Event task.
+     * Return a String representation of Event task.
+     * @return A string representation of of the Event task.
      */
     @Override
     public String toString() {
