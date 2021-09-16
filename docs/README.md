@@ -1,4 +1,4 @@
-# Bolin User Guide
+# Mako User Guide
 Besides being an expert fire bender, Mako is also great at helping you manage your todos, events and deadlines! The application uses quick-text inputs via a Command Line Interface (CLI) while having an excellent Graphical User Interface (GUI). Organise your tasks by using Mako today! 
 
 * [Quick Start](#quick-start-guide)
@@ -6,20 +6,21 @@ Besides being an expert fire bender, Mako is also great at helping you manage yo
 * [Usage](#usage)
 * [Command Summary](#command-summary)
 
-<img src="https://github.com/Domszy/ip/blob/master/docs/Screenshot%20of%20DukeMan.png" width="400" >
-
 ### Quick Start Guide
 
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the Mako.jar file from the repository.
-3. Double-click the file to start the app. 
-4. Refer to the Features below for details of each command.
+3. Move the file to a folder you would want to use as the home folder for Mako.
+4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds.
+5. Refer to the Features below for details of each command.
 
-# Features
+<img src="https://domszy.github.io/ip/Ui.png" width="400" >
+
+# Features 
 * insert tasks which are categorised as todos, deadlines and events
 * mark your tasks as done
-* remove your tasks from the list
-* view your scheduled events and deadlines 
+* remove your tasks from the list 
+* view your scheduled events and deadlines on a date 
 * find tasks with a specific keyword
 
 ### Insert todos: `todo`
@@ -92,11 +93,11 @@ Example: `schedule 2021-01-01` prints out the list of deadlines and events on 20
 ## Command Summary
 | Action | Format | Example |
 | ------------ | ------------- | ------------- |
-|todo | `todo {task's name}` | `todo homework` |
-| deadline | `deadline {task's name} /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
-| event | `event {task's name} /at {Year-Month-Date Hour:Minute}` | `event carnival /at 2021-09-15 20:00` |
+| todo | `todo <task's name>` | `todo homework` |
+| deadline | `deadline <task's name> /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
+| event | `event <task's name> /at <Year-Month-Date Hour:Minute>` | `event carnival /at 2021-09-15 20:00` |
 | list | `list` | `list` |
-| done | `done {task's reference number}` | `done 2` |
-| remove | `remove {task's reference number}` | `remove 2` |
-| find | `find {word to find}` | `find word` |
-| scedule | `schedule {Year-Month-Day}` | `schedule 2021-09-15` |
+| done | `done <task's reference number>` | `done 2` |
+| remove | `remove <task's reference number>` | `remove 2` |
+| find | `find <search term>` | `find word` |
+| scedule | `schedule <Year-Month-Day>` | `schedule 2021-09-15` |
