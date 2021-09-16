@@ -124,7 +124,7 @@ public class Parser {
         } else if (unparsedStr.startsWith(TAG_DATE)) {
             String date = unparsedStr.substring(TAG_DATE.length());
             DateAndTimeTask castedTask = DateAndTimeTask.cast(task);
-            castedTask.setTime(date);
+            castedTask.setDate(date);
         } else if (unparsedStr.startsWith(TAG_TIME)) {
             String time = unparsedStr.substring(TAG_TIME.length());
             DateAndTimeTask castedTask = DateAndTimeTask.cast(task);
