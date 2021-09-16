@@ -24,6 +24,7 @@ public class Duke {
     protected static Storage storage;
     protected static TaskList tasks;
     protected static Ui ui;
+    protected boolean status;
 
     /**
      * Constructor to create Duke.
@@ -35,6 +36,7 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
+            status = true;
         } catch (FileNotFoundException | DukeException e) {
             e.printStackTrace();
         }
@@ -45,10 +47,21 @@ public class Duke {
         String response;
         try {
             response = Parser.parse(input);
+            if (input.equals("bye")) {
+                endDuke();
+            }
             return response;
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
+    }
+
+    public Boolean isAlive() {
+        return this.status;
+    }
+
+    public void endDuke() {
+        this.status = false;
     }
 
     /**
