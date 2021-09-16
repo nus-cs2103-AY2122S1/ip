@@ -4,7 +4,9 @@ Interface** (CLI) while still having the benefits of a Graphical User Interface 
 gets your task management done faster than traditional GUI apps.
 
 ## Features
-*Words in `UPPER_CASE` are the parameters to be supplied by the user.*  
+*Words in `UPPER_CASE` are the parameters to be supplied by the user. Parameters must
+be given in the order specified. Extraneous parameters or unknown commands will not 
+be accepted by Duke.*
 
 ### Listing all tasks: `list`
 

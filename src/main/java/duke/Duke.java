@@ -6,6 +6,7 @@ import task.TaskList;
 import duke_exception.DukeException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -213,6 +214,10 @@ public class Duke extends Application {
             if (input.equals("undo")) {
                 tasks = previousTasks.copy();
                 result = newCommand.execute(tasks, ui, storage);
+            } else if (input.equals("bye")) {
+                previousTasks = tasks.copy();
+                result = newCommand.execute(tasks, ui, storage);
+                Platform.exit();
             } else {
                 previousTasks = tasks.copy();
                 result = newCommand.execute(tasks, ui, storage);
