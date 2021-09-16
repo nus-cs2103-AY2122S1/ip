@@ -13,13 +13,13 @@ public class DeadlineTest {
     @Test
     public void testOutput1() throws UserInputError {
         Deadline deadline = new Deadline("merge branch", "2021-09-09 2359", true);
-        assertEquals("[D][X] merge branch (by: Sep 9 2021, 2359)", deadline.toString());
+        assertEquals("[D][X] merge branch { by: Sep 9 2021 || 2359 }", deadline.toString());
     }
 
     @Test
     public void testOutput2() throws UserInputError {
         Deadline deadline = new Deadline("merge branch", "2021-09-09", false);
-        assertEquals("[D][  ] merge branch (by: Sep 9 2021)", deadline.toString());
+        assertEquals("[D][  ] merge branch { by: Sep 9 2021 }", deadline.toString());
     }
 
     @Test
