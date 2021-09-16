@@ -107,3 +107,7 @@ Output:
 Output: 
 
 ![](./Find2.png)
+
+## Acknowledgement
+
+I would like to acknowledge [JavaFX tutorial @SE-EDU/guides](https://se-education.org/guides/tutorials/javaFx.html) as this project's GUI is based on the JavaFX tutorial, including design and assets. 
