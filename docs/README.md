@@ -87,7 +87,7 @@ a particular feature.
 ## Usage
 ### To end the session with the Chatbot - `bye`
 
-To quit the Chatbot App, after manipulating the tasks, you may use the
+To quit the Chatbot App after manipulating the tasks, you may use the
 ```bye``` command.
 
 Format:
@@ -342,7 +342,7 @@ Use the view command to view scheduled tasks for a day.
 Command Example: view 23/09/2021
 ```
 
-The Chatbot would print the command details.
+The Chatbot would print the list of executable commands and their details.
 
 ### To add a todo type task - `todo`
 
