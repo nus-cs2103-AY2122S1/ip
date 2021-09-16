@@ -9,9 +9,10 @@ any inputs they require.
 
 Example of usage: 
 
-`help <command name>`
-
-`help deadline`
+```
+help <command name>
+help deadline
+```
 
 Expected outcome:
 
