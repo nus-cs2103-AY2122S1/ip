@@ -1,17 +1,19 @@
-# Duke 
+# SoyBot
 
->_"A failure to plan is a plan to fail."_ - Wise Man
+>_"Sumikko Gurashi is cute."_ - Wise Man
 
-This is a project named after the Java mascot _Duke_. Given below are instructions on how to use it.
-Duke helps you become a _much better_ person, __never__ again missing your deadlines!
+This is a project named _SoyBot_. Given below are instructions on how to use it.
+SoyBot helps you become a _much better_ person, __never__ again missing your deadlines!
 ## Features
    ```
    Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   
+░██████╗░█████╗░██╗░░░██╗  ██████╗░░█████╗░████████╗
+██╔════╝██╔══██╗╚██╗░██╔╝  ██╔══██╗██╔══██╗╚══██╔══╝
+╚█████╗░██║░░██║░╚████╔╝░  ██████╦╝██║░░██║░░░██║░░░
+░╚═══██╗██║░░██║░░╚██╔╝░░  ██╔══██╗██║░░██║░░░██║░░░
+██████╔╝╚█████╔╝░░░██║░░░  ██████╦╝╚█████╔╝░░░██║░░░
+╚═════╝░░╚════╝░░░░╚═╝░░░  ╚═════╝░░╚════╝░░░░╚═╝░░░
    ```
 Features include:
 * Adding various tasks such as deadlines and events
@@ -23,7 +25,7 @@ Features include:
 How to use:
 1. Download any of the releases from https://github.com/meerian/ip/releases
 2. Run the .jar file
-3. ???
+3. Refer to user guide at https://meerian.github.io/ip/
 4. Profit! 😎
 
 Task List:
