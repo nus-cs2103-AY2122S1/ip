@@ -9,7 +9,7 @@ Ted helps users track tasks, well, 3 types of tasks to be exact:
 (Hence T E D - Ted)
 
 `ToDos` are the most basic type of task, with just a name and a completion status, whereas `Deadlines` and `Events` can additionally store date and time information.
-***
+
 ## Features and commands
 
 &nbsp;
