@@ -54,6 +54,6 @@ public class Deadline extends Task {
 
     @Override
     public String getDeadline() {
-        return this.date.toString();
+        return this.date.format(dayInputFormatter);
     }
 }
