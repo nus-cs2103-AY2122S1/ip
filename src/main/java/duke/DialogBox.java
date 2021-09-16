@@ -68,7 +68,6 @@ public class DialogBox extends HBox {
         db.setStyle("-fx-background-color:lavender");
         db.setWidth(300);
         db.setHeight(110);
-        db.flip();
         return db;
     }
 
@@ -82,6 +81,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color:lightsteelblue");
+        db.flip();
         return db;
     }
 
@@ -96,6 +96,7 @@ public class DialogBox extends HBox {
     public static DialogBox greetUser(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color:lightsteelblue");
+        db.flip();
         return db;
     }
 }

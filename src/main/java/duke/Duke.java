@@ -67,7 +67,7 @@ public class Duke {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             public void run() {
-                Platform.exit();
+                System.exit(0);
             }
         }, 1000);
         //@@author
