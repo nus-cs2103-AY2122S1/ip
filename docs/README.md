@@ -2,7 +2,7 @@
 ---
 Quick Start:
 - 
-1. download it from [here](https://github.com/noobmaster19/ip/releases/download/v1/ip.jar)
+1. download it from [here](https://github.com/noobmaster19/ip/releases/download/v0.2/ip.jar)
 2. double-click it.
 3. Refer to the features section on how to use it
 ---
