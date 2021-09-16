@@ -19,7 +19,7 @@ public class Event extends DateAndTimeTask {
 
     /**
      * @param description The description of the Event.
-     * @param dateAndTime Format: "[description] /at yyyy-mm-dd hhmm" (24h time)
+     * @param dateAndTime Format: "yyy-mm-dd hhmm" (24h time)
      * @param isDone Whether the task is done.
      */
     public Event(String description, String dateAndTime, boolean isDone) throws DukeException {

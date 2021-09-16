@@ -1,6 +1,11 @@
 package duke;
 
-import duke.task.*;
+import duke.task.DateAndTimeTask;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Parses input commands.
@@ -26,8 +31,6 @@ public class Parser {
     private Ui ui;
 
     /**
-     * Currently only scans System.in.
-     *
      * @param taskList The TaskList the Parser should operate on.
      * @param storage A Storage to use for saving tasks.
      * @param ui A Ui to send display commands to.
@@ -39,12 +42,14 @@ public class Parser {
     }
 
     /**
-     * Parses input continously and executes the commands provided.
-     * Commands recognised: "bye" - exits parsing loop
+     * Parses input and executes the command inside.
+     * Commands recognised: "bye" - marks Duke for shutdown
      *                      "deadline" - creates new Deadline task
      *                      "delete" - deletes specified task
      *                      "done" - completes specified task
+     *                      "edit" - edits specified task
      *                      "event" - creates new Event task
+     *                      "find" - searches tasks using given string
      *                      "list" - lists all tasks in task list
      *                      "todo" - creates new ToDo task
      */
@@ -87,6 +92,14 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Parses an edit command.
+     * Valid tags are /desc, /date, /time.
+     *
+     * @param input The input string after the edit command containing the arguments.
+     * @return The generated completion message for display.
+     * @throws DukeException If there are any errors related to input arguments.
+     */
     private String parseEditCommand(String input) throws DukeException {
         int indexOfNextSpace = input.indexOf(' ');
         if (indexOfNextSpace == -1) {
@@ -95,6 +108,7 @@ public class Parser {
         int taskNumber = taskList.parseTaskNumber(input.substring(0, indexOfNextSpace));
 
         int indexOfNextKeyword = indexOfNextSpace + 1;
+
         //The remaining unparsed section of the input.
         String unparsedStr = input.substring(indexOfNextKeyword);
         Task task = taskList.getTask(taskNumber);
@@ -105,20 +119,12 @@ public class Parser {
             task.setDescription(description);
         } else if (unparsedStr.startsWith(TAG_DATE)) {
             String date = unparsedStr.substring(TAG_DATE.length());
-            if (task instanceof DateAndTimeTask) {
-                DateAndTimeTask castedTask = (DateAndTimeTask) task;
-                castedTask.setDate(date);
-            } else {
-                throw DukeException.INVALID_TASK_TYPE;
-            }
+            DateAndTimeTask castedTask = DateAndTimeTask.cast(task);
+            castedTask.setTime(date);
         } else if (unparsedStr.startsWith(TAG_TIME)) {
-            String time = unparsedStr.substring(TAG_DATE.length());
-            if (task instanceof DateAndTimeTask) {
-                DateAndTimeTask castedTask = (DateAndTimeTask) task;
-                castedTask.setTime(time);
-            } else {
-                throw DukeException.INVALID_TASK_TYPE;
-            }
+            String time = unparsedStr.substring(TAG_TIME.length());
+            DateAndTimeTask castedTask = DateAndTimeTask.cast(task);
+            castedTask.setTime(time);
         } else {
             throw DukeException.DEFAULT;
         }
