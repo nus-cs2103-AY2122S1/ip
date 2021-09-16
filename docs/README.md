@@ -27,7 +27,7 @@ AnnieZero is a lightweight desktop app that helps you keep track of your tasks o
 5.  You can now start tracking your tasks 😃
 
 ### GUI showcase
-![image](Ui.png.png)
+![image](Ui.png)
 
 ## Features
 
