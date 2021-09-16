@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" stylesheets="@styles.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" stylesheets="@styles.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="TOP_LEFT" lineSpacing="2.0" minHeight="60.0" prefWidth="244.0" stylesheets="@styles.css" text="Label" wrapText="true">
+        <Label fx:id="dialog" maxHeight="Infinity" alignment="TOP_LEFT" lineSpacing="2.0" minHeight="-Infinity" prefWidth="244.0" stylesheets="@styles.css" text="Label" wrapText="true">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
