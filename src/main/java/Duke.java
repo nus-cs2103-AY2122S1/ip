@@ -128,7 +128,7 @@ public class Duke extends Application {
     }
 
 
-    public static void introMessage() {
+    private static void introMessage() {
         System.out.println("____________________________________________________________ \n"
                 + "Hello! I'm Joker \n"
                 + "What can I do for you? \n"
