@@ -1,12 +1,13 @@
 package duke;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import javafx.application.Platform;
-
 import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import duke.controller.MainWindow;
+import duke.task.Task;
+import javafx.application.Platform;
 
 /**
  * Class that is in charge of interacting with user.
@@ -25,7 +26,7 @@ public class Ui {
      * Says GoodBye to the user when they leave.
      */
     public String bye() {
-        return "Bye. Hope to see you again soon!";
+        return "Click close button on the top right corner to exit the bot.";
     }
 
     /**
@@ -85,31 +86,41 @@ public class Ui {
                 + "\nNow you have" + taskListSize + " tasks in the list.";
     }
 
+    /**
+     * Connects mainWindow to this duke.
+     *
+     * @param mainWindow The GUI main window.
+     */
     public void setMainWindow(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * Adds tasks to the reminder.
+     *
+     * @param tasks TaskList of tasks that need to be reminded.
+     */
     public void addReminder(TaskList tasks) {
+        assert (mainWindow != null);
         List<Task> reminderList = tasks.getReminderList();
-        for(Task task : reminderList) {
+        for (Task task : reminderList) {
             TimerTask timeTask = new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println("reminding task : " + task.getDescription());
                     Platform.runLater(() -> {
-                        mainWindow.popReminder("reminder!" + task.toString());
+                        mainWindow.displayReminder("reminder!" + task.toString());
                     });
                 }
             };
 
             Calendar date = Calendar.getInstance();
-            date.set(Calendar.YEAR,task.getReminderTime().getYear());
-            date.set(Calendar.MONTH,task.getReminderTime().getMonthValue()-1);
-            date.set(Calendar.DAY_OF_MONTH,task.getReminderTime().getDayOfMonth());
-            date.set(Calendar.HOUR_OF_DAY,task.getReminderTime().getHour());
-            date.set(Calendar.MINUTE,task.getReminderTime().getMinute());
-            date.set(Calendar.SECOND,0);
-            date.set(Calendar.MILLISECOND,0);
+            date.set(Calendar.YEAR, task.getReminderTime().getYear());
+            date.set(Calendar.MONTH, task.getReminderTime().getMonthValue() - 1);
+            date.set(Calendar.DAY_OF_MONTH, task.getReminderTime().getDayOfMonth());
+            date.set(Calendar.HOUR_OF_DAY, task.getReminderTime().getHour());
+            date.set(Calendar.MINUTE, task.getReminderTime().getMinute());
+            date.set(Calendar.SECOND, 0);
+            date.set(Calendar.MILLISECOND, 0);
 
             Timer timer = new Timer();
             timer.schedule(timeTask, date.getTime());

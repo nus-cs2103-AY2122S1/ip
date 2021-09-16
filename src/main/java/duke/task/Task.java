@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,16 +7,15 @@ import java.time.format.DateTimeFormatter;
  * The task object.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
-
-    protected boolean hasReminder;
-    protected LocalDateTime reminderTime;
-
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
+    private String description;
+    private boolean isDone;
+    private boolean hasReminder;
+    private LocalDateTime reminderTime;
+
     /**
-     * Default constructor for Task.
+     * Constructs a default Task.
      */
     public Task() {
         this.description = "";
@@ -25,7 +24,7 @@ public class Task {
     }
 
     /**
-     * Constructor for Task with String description.
+     * Constructs Task.
      *
      * @param description Description for task.
      */
@@ -35,6 +34,12 @@ public class Task {
         hasReminder = false;
     }
 
+    /**
+     * Constructs Task with reminder.
+     *
+     * @param description  Description for task.
+     * @param reminderTime The time when a reminder message display.
+     */
     public Task(String description, String reminderTime) {
         this.description = description;
         this.hasReminder = true;
@@ -99,14 +104,29 @@ public class Task {
         return "";
     }
 
+    /**
+     * Checks whether this task need reminder.
+     *
+     * @return Boolean value indicating whether the task need to be reminded.
+     */
     public boolean hasReminder() {
         return hasReminder;
     }
 
+    /**
+     * Tells the time when duke remind user about the task.
+     *
+     * @return The time when user will be reminded of this task.
+     */
     public LocalDateTime getReminderTime() {
         return reminderTime;
     }
 
+    /**
+     * Gets the standard date time formatter for tasks.
+     *
+     * @return The date time formatter.
+     */
     public static DateTimeFormatter getDateTimeFormatter() {
         return dateTimeFormatter;
     }

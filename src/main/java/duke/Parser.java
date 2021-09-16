@@ -1,8 +1,21 @@
 package duke;
 
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkAsDoneCommand;
+import duke.exception.DukeException;
+import duke.exception.ParserException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * The class that Parses the command line from user.
@@ -64,13 +77,13 @@ public class Parser {
      * @throws ParserException Exception generated while parsing the string.
      */
     private Task parseToDo(String input) throws ParserException {
-        if (input.split("todo ").length < 1) {
+        if (input.split("todo ").length < 2) {
             throw new ParserException("The description of a todo cannot be empty.");
         }
         String content = input.split("todo ")[1];
         if (content.contains("/reminder ")) {
-            if (content.split("/reminder ").length < 1 || content.split("/reminder ")[0].length() == 0) {
-                throw new ParserException("The description of a todo cannot be empty.");
+            if (content.split("/reminder ").length < 2 || content.split("/reminder ")[0].length() == 0) {
+                throw new ParserException("Please enter the reminder time");
             }
             String description = content.split("/reminder ")[0];
             String reminderTime = content.split("/reminder ")[1];
@@ -94,29 +107,43 @@ public class Parser {
      * @throws ParserException Exception generated while parsing the string.
      */
     private Task parseDeadline(String input) throws ParserException {
-        assert (input.contains("deadline "));
-        String content = input.split("deadline ")[1];
-        String description = content.substring(0, content.indexOf("/by"));
-        if (description.length() == 0) {
-            throw new ParserException("The description of deadline task cannot be empty.");
+        /* Gets description */
+        if (input.split("deadline ").length < 2) {
+            throw new ParserException("The description of a deadline cannot be empty.");
         }
+        String content = input.split("deadline ")[1];
+        if (!content.contains("/by")) {
+            throw new ParserException("Please enter /by followed by a deadline.");
+        }
+        String description = content.substring(0, content.indexOf("/by"));
+        if (description.equals("")) {
+            throw new ParserException("The description of a deadline cannot be empty.");
+        }
+
+        /* Gets deadline */
         int deadlineStartIndex = content.indexOf("/by") + 4;
         int deadlineEndIndex = content.indexOf("/by") + 19;
         if (deadlineEndIndex >= content.length()) {
-            throw new ParserException("please enter a valid time in the format: "
+            throw new ParserException("Invalid date, "
+                    + "please enter a valid time period in the format: "
                     + "yyyy/MM/dd HH:mm");
         }
         String deadline = content.substring(deadlineStartIndex, deadlineEndIndex + 1);
+
+        /* Gets reminder time */
         String reminderTime = "";
         if (content.contains("/reminder ")) {
             int reminderTimeStartIndex = content.indexOf("/reminder ") + 10;
             int reminderTimeEndIndex = content.indexOf("/reminder ") + 25;
             if (reminderTimeEndIndex >= content.length()) {
-                throw new ParserException("please enter a valid time in the format: "
+                throw new ParserException("Invalid date, "
+                        + "please enter a valid time period in the format: "
                         + "yyyy/MM/dd HH:mm");
             }
             reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
         }
+
+        /* Creates deadline task */
         try {
             if (reminderTime.equals("")) {
                 return new Deadline(description, deadline);
@@ -137,17 +164,20 @@ public class Parser {
      * @throws ParserException Exception generated while parsing the string.
      */
     private Task parseEvent(String input) throws ParserException {
-
-        /* Get event description */
-        assert (input.contains("event "));
+        /* Gets event description */
+        if (input.split("event ").length < 2) {
+            throw new ParserException("The description of an event cannot be empty.");
+        }
         String content = input.split("event ")[1];
+        if (!content.contains("/at")) {
+            throw new ParserException("Please enter /at followed by an event period.");
+        }
         String description = content.substring(0, content.indexOf("/at"));
-        if (description.length() == 0) {
-            throw new ParserException("The description of event cannot be empty.");
+        if (description.equals("")) {
+            throw new ParserException("The description of an event cannot be empty.");
         }
 
-        System.out.println("hello");
-        /* Get event time */
+        /* Gets event time */
         int eventStartIndex = content.indexOf("/at") + 4;
         int eventEndIndex = content.indexOf("/at") + 37;
         if (eventEndIndex >= content.length()) {
@@ -156,7 +186,7 @@ public class Parser {
         }
         String eventPeriod = content.substring(eventStartIndex, eventEndIndex + 1);
 
-        /* Get reminder time */
+        /* Gets reminder time */
         String reminderTime = "";
         if (content.contains("/reminder ")) {
             int reminderTimeStartIndex = content.indexOf("/reminder ") + 10;
@@ -168,6 +198,7 @@ public class Parser {
             reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
         }
 
+        /* Creates an event task */
         try {
             String[] startingEndingTime = eventPeriod.split("--");
             String from = startingEndingTime[0];

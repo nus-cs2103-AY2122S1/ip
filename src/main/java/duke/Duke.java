@@ -1,6 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
+import duke.command.Command;
+import duke.controller.MainWindow;
+import duke.exception.DukeException;
 
 /**
  * The Duke bot.
@@ -29,36 +31,10 @@ public class Duke {
         ui.addReminder(tasks);
     }
 
-//    public void addReminder(Task task) {
-//        TaskList taskList = new TaskList(new ArrayList<Task>());
-//        taskList.add(task);
-//        ui.addReminder(taskList);
-//    }
-
-    public Duke() {
-    }
-
-    public void setMain(MainWindow main) {
+    public void setMainWindow(MainWindow main) {
         this.main = main;
+        main.greetUser(ui.greet());
         initializeReminder();
-    }
-
-    /**
-     * Greets the user at the start.
-     *
-     * @return Greeting message.
-     */
-    public String greeting() {
-        return ui.greet();
-    }
-
-    /**
-     * Says bye to user.
-     *
-     * @return Message that ends the duke conversation.
-     */
-    public String bye() {
-        return ui.bye();
     }
 
     /**

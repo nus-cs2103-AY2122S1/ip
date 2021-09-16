@@ -2,6 +2,8 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.task.Task;
+import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {

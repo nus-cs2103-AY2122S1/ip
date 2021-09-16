@@ -1,5 +1,6 @@
-package duke;
+package duke.controller;
 
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -31,12 +32,14 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the duke bot in the back for GUI.
+     *
+     * @param d Duke bot.
+     */
     public void setDuke(Duke d) {
         duke = d;
-        duke.setMain(this);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.greeting(), dukeImage)
-        );
+        duke.setMainWindow(this);
     }
 
     /**
@@ -54,9 +57,25 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    public void popReminder(String reminder) {
+    /**
+     * Displays the reminder message on the GUI.
+     *
+     * @param reminder The reminder message.
+     */
+    public void displayReminder(String reminder) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(reminder, dukeImage)
+        );
+    }
+
+    /**
+     * Prints the greeting message to users when they start duke.
+     *
+     * @param greeting The greeting message.
+     */
+    public void greetUser(String greeting) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage)
         );
     }
 }

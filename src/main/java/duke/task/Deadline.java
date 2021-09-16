@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor of Deadline.
+     * Constructs a Deadline.
      *
      * @param description Description of deadline task.
      * @param by          The deadline of task.
@@ -17,6 +17,13 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, Task.getDateTimeFormatter());
     }
 
+    /**
+     * Constructs Deadline with a reminder.
+     *
+     * @param description  Description off deadline task.
+     * @param by           The deadline of task.
+     * @param reminderTime The time when a reminder message display.
+     */
     public Deadline(String description, String by, String reminderTime) {
         super(description, reminderTime);
         this.by = LocalDateTime.parse(by, Task.getDateTimeFormatter());
@@ -24,9 +31,14 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
-                + ")";
+        String result = "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        result += this.hasReminder()
+                ? ", remind at" + this.getReminderTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                : "";
+        result += ")";
+
+        return result;
     }
 
     @Override

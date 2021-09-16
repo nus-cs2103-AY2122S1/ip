@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ public class Event extends Task {
     protected LocalDateTime to;
 
     /**
-     * Constructor for event.
+     * Constructs an event.
      *
      * @param description Description of event.
      * @param from        Event starting time.
@@ -20,6 +20,14 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, Task.getDateTimeFormatter());
     }
 
+    /**
+     * Constructs an event with deadline.
+     *
+     * @param description  Description of event.
+     * @param from         Event starting time.
+     * @param to           Event ending time.
+     * @param reminderTime The time when a reminder message display.
+     */
     public Event(String description, String from, String to, String reminderTime) {
         super(description, reminderTime);
         this.from = LocalDateTime.parse(from, Task.getDateTimeFormatter());
@@ -28,10 +36,16 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:"
+        String result = "[E]" + super.toString() + " (at: "
                 + from.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
                 + " -- "
-                + to.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
+                + to.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        result += this.hasReminder()
+                ? ", remind at" + this.getReminderTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                : "";
+        result += ")";
+
+        return result;
     }
 
     @Override

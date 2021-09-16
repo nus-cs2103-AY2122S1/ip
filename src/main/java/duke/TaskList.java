@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.task.Task;
+
 /**
  * ArrayList of tasks.
  */
@@ -57,7 +59,7 @@ public class TaskList {
      * @return TaskList contains all the tasks that has the key word.
      */
     public TaskList find(String keyWord) {
-        TaskList results = new TaskList(new ArrayList<Task>());
+        TaskList results = new TaskList(new ArrayList<>());
         for (int i = 0; i < this.size(); i++) {
             Task t = this.get(i);
             if (t.getDescription().contains(keyWord)) {
@@ -67,10 +69,10 @@ public class TaskList {
         return results;
     }
 
-    public ArrayList<Task> getReminderList(){
+    public ArrayList<Task> getReminderList() {
         ArrayList<Task> result = new ArrayList<>();
-        for(Task task : tasks){
-            if(task.hasReminder()){
+        for (Task task : tasks) {
+            if (task.hasReminder()) {
                 result.add(task);
             }
         }

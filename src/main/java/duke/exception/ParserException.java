@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception generated while parsing user input.

@@ -1,6 +1,11 @@
-package duke;
+package duke.command;
 
 import java.util.ArrayList;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Command that adds tasks.

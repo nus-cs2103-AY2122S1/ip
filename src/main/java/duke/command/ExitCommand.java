@@ -1,22 +1,26 @@
-package duke;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
- * Command that lists all tasks.
+ * Command that exits the bot.
  */
-public class ListCommand extends Command {
+public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.listAllTasks(tasks);
+        return ui.bye();
     }
 
     @Override
     public boolean isExit() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof ListCommand) {
+        if (obj instanceof ExitCommand) {
             return true;
         } else {
             return false;
