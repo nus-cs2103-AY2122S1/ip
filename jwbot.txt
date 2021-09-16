@@ -1,4 +1,6 @@
 [T][X] study
 [T][ ] study
-[T][ ] study
 [T][X] study
+[T][ ] study
+[E][ ] party (at: 3pm)
+[D][ ] submission (by: 2012-12-24)
