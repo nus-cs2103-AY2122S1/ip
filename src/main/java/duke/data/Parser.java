@@ -321,7 +321,7 @@ public class Parser {
             return new AddContactCommand(new Contact(userInputWithoutKeyword, " "));
         }
         String[] updatedContact = userInputWithoutKeyword.split(" " + specialPhrase + " ");
-        //Checks if user follows the format 
+        //Checks if user follows the format
         if (updatedContact.length != 2) {
             throw new DukeException("Please follow this format: contact NAME (/about NAME_DESCRIPTION)");
         }

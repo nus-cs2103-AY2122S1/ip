@@ -115,6 +115,6 @@ public class Ui {
      * @return HELP_MESSAGE.
      */
     public static String showHelp() {
-        return MESSAGE_HELP;
+        return showToUser(MESSAGE_HELP);
     }
 }
