@@ -32,24 +32,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
-
+        
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(dukeEngine.initialize()), new ImageView(duke)));
-
         setStyle(mainLayout, stage);
 
         // Handle user input
@@ -57,16 +52,13 @@ public class Main extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
-
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
