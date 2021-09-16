@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-
+import duke.task.Task;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -42,7 +42,7 @@ public class Duke extends Application {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = (TaskList<Task>) storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();

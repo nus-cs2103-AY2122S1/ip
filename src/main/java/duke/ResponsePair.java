@@ -6,7 +6,7 @@ package duke;
 public class ResponsePair {
     private final String response;
     private final boolean isExit;
-    
+
     /**
      * Create an object that encapsulates multiple objects
      */
@@ -17,7 +17,7 @@ public class ResponsePair {
 
     /**
      * Extracts Response portion.
-     * 
+     *
      * @return String representing Response.
      */
     public String getResponse() {
@@ -26,7 +26,7 @@ public class ResponsePair {
 
     /**
      * Extracts isExit portion.
-     * 
+     *
      * @return Boolean representing isExit.
      */
     public boolean getIsExit() {

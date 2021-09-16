@@ -1,6 +1,11 @@
 package duke.command;
 
-import duke.*;
+
+import duke.DukeException;
+import duke.ResponsePair;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * An interface to encapsulate all Command types.

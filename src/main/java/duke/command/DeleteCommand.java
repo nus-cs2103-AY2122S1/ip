@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.ResponsePair;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -29,8 +33,8 @@ public class DeleteCommand implements Command {
      * @param tasks List of tasks.
      * @param ui UI of Duke Chatbot.
      * @param storage Storage of Duke Chatbot.
-     * @throws DukeException If execution fails.
      * @return String of Duke chatbot response.
+     * @throws DukeException If execution fails.
      */
     public ResponsePair execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

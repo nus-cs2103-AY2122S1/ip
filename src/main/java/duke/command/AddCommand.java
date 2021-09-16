@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.ResponsePair;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -30,17 +34,17 @@ public class AddCommand implements Command {
     private void parseTask(String fullCommand) throws DukeException {
         String type = fullCommand.split(" ")[0];
         switch (type) {
-            case "todo":
-                parseTodo(fullCommand);
-                break;
-            case "deadline":
-                parseDeadline(fullCommand);
-                break;
-            case "event":
-                parseEvent(fullCommand);
-                break;
-            default:
-                throw new DukeException("Invalid Command!");
+        case "todo":
+            parseTodo(fullCommand);
+            break;
+        case "deadline":
+            parseDeadline(fullCommand);
+            break;
+        case "event":
+            parseEvent(fullCommand);
+            break;
+        default:
+            throw new DukeException("Invalid Command!");
         }
     }
 
@@ -54,22 +58,30 @@ public class AddCommand implements Command {
 
     private void parseDeadline(String fullCommand) throws DukeException {
         String[] descriptions = fullCommand.replace("deadline", "").split("/by");
-        String description = descriptions[0].trim();
-        String time = descriptions[1].trim();
-        if (description.isEmpty() || time.isEmpty()) {
-            throw new DukeException("Empty Deadline Command!");
+        try {
+            String description = descriptions[0].trim();
+            String time = descriptions[1].trim();
+            if (description.isEmpty() || time.isEmpty()) {
+                throw new DukeException("Empty Deadline Command!");
+            }
+            this.taskToAdd = new DeadlineTask(description, time);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Wrong Format!");
         }
-        this.taskToAdd = new DeadlineTask(description, time);
     }
 
     private void parseEvent(String fullCommand) throws DukeException {
         String[] descriptions = fullCommand.replace("event", "").split("/at");
-        String description = descriptions[0].trim();
-        String time = descriptions[1].trim();
-        if (description.isEmpty() || time.isEmpty()) {
-            throw new DukeException("Empty Event Command!");
+        try {
+            String description = descriptions[0].trim();
+            String time = descriptions[1].trim();
+            if (description.isEmpty() || time.isEmpty()) {
+                throw new DukeException("Empty Event Command!");
+            }
+            this.taskToAdd = new EventTask(description, time);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Wrong Format!");
         }
-        this.taskToAdd = new EventTask(description, time);
     }
 
     /**

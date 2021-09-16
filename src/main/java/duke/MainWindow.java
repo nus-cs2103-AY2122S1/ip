@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke! What can I do for you?", dukeImage)
+                DialogBox.getDukeDialog("Hello! I'm MomoBot! What can I do for you?", dukeImage)
         );
         userInput.clear();
     }
@@ -63,5 +63,4 @@ public class MainWindow extends AnchorPane {
             System.exit(1);
         }
     }
-
 }

@@ -2,6 +2,10 @@ package duke.task;
 
 public class TodoTask extends Task {
 
+    /**
+     * Create a new Todo Task
+     * @param taskCommand User command
+     */
     public TodoTask(String taskCommand) {
         super(taskCommand);
         assert(taskCommand.isEmpty());

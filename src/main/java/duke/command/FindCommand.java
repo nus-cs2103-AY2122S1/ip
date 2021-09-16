@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.ResponsePair;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -28,8 +32,8 @@ public class FindCommand implements Command {
      * @param tasks List of tasks.
      * @param ui Ui of Duke chatbot.
      * @param storage Storage of Duke chatbot.
-     * @throws DukeException If execution fails.
      * @return String of Duke chatbot response.
+     * @throws DukeException If execution fails.
      */
     public ResponsePair execute(TaskList tasks, Ui ui, Storage storage) {
         String response = "Here are the matching tasks in your list:";
@@ -42,7 +46,7 @@ public class FindCommand implements Command {
             }
             response += String.format("\n%d. %s", listIndex++, task);
         }
-        return new ResponsePair(response,isExit());
+        return new ResponsePair(response, isExit());
     }
 
     /**

@@ -14,7 +14,7 @@ public class Ui {
      * Display message when Duke chatbot ends.
      */
     public String showGoodbye() {
-        return("Goodbye! Have a nice day!");
+        return "Goodbye! Have a nice day!";
     }
 
     /**
@@ -22,14 +22,14 @@ public class Ui {
      * @param error Input error message.
      */
     public String showError(String error) {
-        return(String.format("Error! %s", error));
+        return String.format("Error! %s", error);
     }
 
     /**
      * Display message when file is absent during loading.
      */
     public String showLoadingError() {
-        return(showError("Oops! Cannot load file! We will start afresh :)"));
+        return showError("Oops! Cannot load file! We will start afresh :)");
     }
 
 }
