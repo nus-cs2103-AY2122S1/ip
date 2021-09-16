@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
  * @author: Ravi Ananya
  **/
 
-public class Duke  {
+public class Duke {
 
     private String filePath;
     private Storage storage;
@@ -49,7 +49,7 @@ public class Duke  {
             output = p.parseInput(tasks);
             writeToFile();
         } catch (DukeException | IOException e) {
-            System.out.println(e.getMessage());
+            output = e.getMessage();
         }
         return output;
     }
@@ -98,36 +98,6 @@ public class Duke  {
 
 }
 
-/**
- * The DukeException class
- * throws specialised Duke exceptions.
- *
- * @author: Ravi Ananya
- **/
-class DukeException extends Exception {
-
-    private String errorMessage;
-
-    /**
-     * Constructor for DukeException.
-     *
-     * @param errorMessage user input.
-     */
-    public DukeException(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    /**
-     * Gets the error message.
-     *
-     * @return the error message.
-     */
-    @Override
-    public String getMessage() {
-        return errorMessage;
-    }
-
-}
 
 
 
