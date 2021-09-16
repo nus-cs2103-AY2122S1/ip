@@ -23,72 +23,160 @@ Besides being an expert fire bender, Mako is also great at helping you manage yo
 * view your scheduled events and deadlines on a date 
 * find tasks with a specific keyword
 
-### Insert todos: `todo`
-Todos are tasks that doesn't have a set deadline or time frame. use the `todo` keyword to insert a todo into DukeMan. 
-
-Format: `todo {task's name}`
-
-Example: `todo homework` inserts the task "homework" into DukeMan
-
-
-### Insert deadlines: `deadline`
-Deadlines are tasks that have a set completion or submission date and time. use the `deadline` command to insert a deadline into DukeMan.
-
-Format: `deadline {task's name} /by {the deadline of the task in the format of Year-Month-Date Hour:Minute}`
-
-Example: `deadline assignment /by 2021-09-15 12:00` inserts the task "assignment" into DukeMan that due on 15th September 2021 on 12:00PM.
-
-
-### Insert events: `event`
-Events are tasks that have a set date and time. use the `event` command to insert an event into DukeMan.
-
-Format: `event {task's name} /at {the beggining timeframe of the task in the format of Year-Month-Date Hour:Minute}`
-
-Example: `event carnival /at 2021-09-15 20:00` inserts the event "carnival" into DukeMan that's beginning on 15th September 2021, 8:00PM.
-
+# Usage
 
 ### View tasks: `list`
-showcases the list of tasks inputted into DukeMan. 
+showcases the list of tasks given to Mako. Mako also indicates the type of the task and whether the task have been completed or not.
 
-Format: `list`
+Format: 
+`list`
 
+Example: 
+`````
+Here are the tasks in your list: 
+1. [T] [✓] homework 
+2. [D] [✕] CS2100 Assignment (by: 2nd Sep 2021 13:00)
+3. [E] [✕] Meeting (at: 2nd Sep 2021 15:00)
+`````
+* [T] indicates that the task is a todo task
+* [D] indicates that the task is a deadline
+* [E] indicates that the task is an event
+* [✕] indicates that the task have not been completed
+* [✓] indicates that the task have been completed
+
+### Insert todos: `todo`
+Todos are tasks that doesn't have a set deadline or time frame. use the `todo` keyword to insert a todo into Mako. 
+
+Format: 
+
+`todo {task's name}`
+
+Example of `todo` command:
+
+`todo homework`
+
+Expected outcome:
+`````
+Got it. I've added this task:
+[T] [✕] homework
+Now you have 1 task in the list.
+`````
+
+### Insert deadlines: `deadline`
+Deadlines are tasks that have a set completion or submission date and time. use the `deadline` command to insert a deadline into Mako.
+
+Format: 
+
+`deadline {task's name} /by {the deadline of the task in the format of Year-Month-Date Hour:Minute}`
+
+Example of `deadline` command:
+
+`deadline assignment /by 2021-09-15 12:00` 
+
+Expected outcome:
+`````
+Got it. I've added this task:
+[D] [✕] assignment (by: 15 Sep 2021 12:00)
+Now you have 1 task in the list.
+`````
+
+### Insert events: `event`
+Events are tasks that have a set date and time. use the `event` command to insert an event into Mako.
+
+Format: 
+
+`event {task's name} /at {the beggining timeframe of the task in the format of Year-Month-Date Hour:Minute}`
+
+Example: 
+
+`event carnival /at 2021-09-15 20:00`
+
+Expected outcome:
+`````
+Got it. I've added this task:
+[E] [✕] carnival (by: 15 Sep 2021 20:00)
+Now you have 1 task in the list.
+`````
 
 ### Mark a task as done: `done`
-marks a task as completed. 
+marks a task as completed. If the task is marked as comepleted, performing this task again marks the task as uncompleted.
 * Marks the task as completed at the specified INDEX.
 * The index refers to the index number shown in the task list when viewing tasks
 
-Format: `done {task's reference number on the list}`
+Format: 
 
-Example: `list` then `done 2` marks the 2nd task on the tasks list as completed
+`done {task's reference number on the list}`
 
+Example: 
+
+`list` then `done 2`, then `done 2` again. In this case, the todo homework task is the 2nd task in the list.
+
+Expected outcome:
+`````
+Nice! I've marked this task as done: 
+[T] [✓] homework
+
+I've marked this task as not done:
+[T] [✕] homework
+`````
 
 ### Remove tasks: `remove`
 remove tasks from the task list
 * Removes a task at the specified INDEX.
 * The index refers to the index number shown in the task list when viewing tasks
 
-Format: `remove {task's reference number on the list}`
+Format: 
 
-Example: `list` then `remove 2` deletes the 2nd task on the tasks list
+`remove {task's reference number on the list}`
 
+Example: 
+
+`list` then `remove 2`. Suppose you have 2 tasks and the homework todo task is your 2nd task in your list.  
+
+Expected outcome:
+`````
+Noted. I have removed the task:
+[T] [✓] homework
+Now you have 1 task in the list.
+`````
 
 ### Find tasks with specific key word: `find`
 finds tasks with a similar key word in its name. 
 
-Format: `find {key word}`
+Format: 
 
-Example: `find key` finds tasks with the word "key" in its name
+`find {key word}`
 
+Example: 
+
+`find key`. 
+
+Expected outcome: 
+`````
+Here's the matching tasks in your list:
+1. [E] [✓] keynote speech (at: 18 Sep 2021 12:00)
+2. [T] [✓] bake key lime cake for movie event 
+3. [D] [✕] give key to Sasha (by: 19 Sep 2021 15:00)
+`````
 
 ### View schedule: `schedule`
 sorts tasks that are on a given date.
 
-Format: `schedule {date of schedule in the format: Year-Month-Day}`
+Format: 
 
-Example: `schedule 2021-01-01` prints out the list of deadlines and events on 2021-01-01 in chronological order
+`schedule {date of schedule in the format: Year-Month-Day}`
 
-## Usage
+Example: 
+
+`schedule 2021-01-01` 
+
+Expected outcome: 
+`````
+Here's the matching tasks in your list:
+1. [E] [✕] BTS concert (at: 01 Jan 2021 12:00)
+2. [D] [✕] CS2100 assignment (by: 01 Jan 2021 15:00)
+3. [E] [✕] Meeting with prof Aaron (at: 01 Jan 2021 20:00)
+`````
 
 ## Command Summary
 | Action | Format | Example |
