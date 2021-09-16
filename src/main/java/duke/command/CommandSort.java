@@ -3,58 +3,49 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import duke.ui.Ui;
-import duke.util.DukeParser;
 import task.Task;
 import task.TaskList;
 
 /**
- * Command to list out tasks.
+ * Command to sort the tasklist
  */
-public class CommandList extends Command {
+public class CommandSort extends Command {
 
     private final TaskList taskList;
-    private final String unparsedFilters;
+    private final String sortFilters;
 
     /**
      * Constructor for this command.
      *
      * @param taskList Task list to list.
-     * @param unparsedFilters Un-parsed list of filters.
+     * @param sortFilters Un-parsed list of filters.
      */
-    public CommandList(TaskList taskList, String unparsedFilters) {
+    public CommandSort(TaskList taskList, String sortFilters) {
         this.commandName = "list /name <name> /date DD/MM/YYYY";
         this.description = "Toggles completion of task. Order of arguments does not matter";
         this.arguments = new String[]{
-            "/name Optional argument to search for particular name",
-            "/date Optional date argument in DAY/MONTH/YEAR, "
-                    + "to search for tasks on a particular date"
+                "/name Optional argument to search for particular name",
+                "/date Optional date argument in DAY/MONTH/YEAR, "
+                        + "to search for tasks on a particular date"
         };
 
         this.taskList = taskList;
-        this.unparsedFilters = unparsedFilters;
+        this.sortFilters = sortFilters;
     }
 
     /**
      * Lists out tasks based on given filters.
+     * TODO
      */
     @Override
     public String execute() {
-        if (unparsedFilters == null) {
-            // Display all if no filters
-            ArrayList<Predicate<Task>> filter = new ArrayList<>();
-            filter.add(task -> true);
-            return taskList.displayList(filter);
-        }
-
-        // Extract modifiers and filter
         try {
-            ArrayList<Predicate<Task>> filters = listStringToFilter(unparsedFilters);
-            return taskList.displayList(filters);
-        } catch (DateTimeParseException e) {
-            return Ui.MESSAGE_INVALID_DATE;
+            taskList.sort(sortStringToFilter(sortFilters));
+            return new CommandList(taskList, null).execute();
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         }
@@ -68,13 +59,19 @@ public class CommandList extends Command {
      * @throws DateTimeParseException Thrown if error in parsing dates.
      * @throws IllegalArgumentException Thrown if an argument is in a wrong format.
      */
-    private ArrayList<Predicate<Task>> listStringToFilter(String stringToParse)
+    private ArrayList<Comparator<Task>> sortStringToFilter(String stringToParse)
             throws DateTimeParseException, IllegalArgumentException {
+
+        if (stringToParse == null) {
+            ArrayList<Comparator<Task>> results = new ArrayList<>();
+            results.add(createNameComparator());
+            return results;
+        }
 
         // Separate individual commands
         String[] args = stringToParse.split(" /");
 
-        ArrayList<Predicate<Task>> results = new ArrayList<>();
+        ArrayList<Comparator<Task>> results = new ArrayList<>();
 
         for (String str : args) {
 
@@ -83,17 +80,12 @@ public class CommandList extends Command {
                 continue;
             }
 
-            // Get command and argument information
-            String command = getCommand(str);
-            String arg = getArgument(str);
-
-            switch (command) {
+            switch (str) {
             case ("name"):
-                results.add(task -> task.getDescription().contains(arg));
+                results.add(createNameComparator());
                 break;
             case ("date"):
-                LocalDate date = DukeParser.getDate(arg);
-                results.add(task -> task.isDate(date));
+                results.add(createDateTimeComparator());
                 break;
             default:
                 throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
@@ -101,5 +93,18 @@ public class CommandList extends Command {
         }
 
         return results;
+    }
+
+    private Comparator<Task> createNameComparator() {
+        return Comparator.comparing(Task::getDescription);
+    }
+
+    private Comparator<Task> createDateTimeComparator() {
+        return (o1, o2) -> {
+            int compareDate = o1.getDate().compareTo(o2.getDate());
+            return compareDate == 0
+                    ? o1.getTime().compareTo(o2.getTime())
+                    : o1.getDate().compareTo(o2.getDate());
+        };
     }
 }

@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -118,5 +119,11 @@ public class TaskList {
         }
 
         return result.toString();
+    }
+
+    public void sort(ArrayList<Comparator<Task>> filters) {
+        for (int i = filters.size() - 1; i >= 0; i--) {
+            tasks.sort(filters.get(i));
+        }
     }
 }

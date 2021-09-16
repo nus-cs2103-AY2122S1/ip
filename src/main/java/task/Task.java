@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.ui.Ui;
 
@@ -39,6 +40,18 @@ public abstract class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    public abstract LocalDate getDate();
+
+    public abstract String getTime();
+
+    //TODO
+    protected static boolean checkInvalidTime(String time) {
+        if (time.equals("")) return false;
+
+        int timeInt = Integer.parseInt(time);
+        return ( timeInt >= 2400  || timeInt < 0);
     }
 
     /**

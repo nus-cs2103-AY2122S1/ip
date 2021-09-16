@@ -22,18 +22,6 @@ public abstract class Command {
     public abstract String execute();
 
     /**
-     * Takes in a String date and returns its corresponding LocalDate object.
-     *
-     * @param date String date in format DD/MM/YYYY, with 1-2 digits from Day and Month.
-     * @return LocalDate object with the corresponding day, month and year.
-     * @throws DateTimeParseException Thrown if date passed is an invalid one.
-     */
-    protected static LocalDate getDate(String date) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        return LocalDate.parse(date, formatter);
-    }
-
-    /**
      * Represents Command as a string.
      *
      * @return Command name, description, as well as its arguments on newlines.
@@ -50,5 +38,31 @@ public abstract class Command {
         }
         return commandName + " - " + description + '\n'
                 + argString + '\n';
+    }
+
+    protected static String getCommand(String str)
+            throws IllegalArgumentException{
+        int index = getCommandArgumentSplitIndex(str);
+        return str.substring(0, index);
+    }
+
+    protected static String getArgument(String str)
+            throws IllegalArgumentException {
+
+        // Ensure validity; has a command and an argument
+        int index = getCommandArgumentSplitIndex(str);
+        return str.substring(index).trim();
+    }
+
+    private static int getCommandArgumentSplitIndex(String str)
+            throws IllegalArgumentException {
+        // Ensure validity; has a command and an argument
+        int index = str.indexOf(' ');
+
+        if (index == -1) {
+            throw new IllegalArgumentException(Ui.MESSAGE_INVALID_ARG);
+        }
+
+        return index;
     }
 }

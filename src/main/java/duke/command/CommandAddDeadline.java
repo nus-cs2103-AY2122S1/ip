@@ -3,6 +3,7 @@ package duke.command;
 import java.time.format.DateTimeParseException;
 
 import duke.ui.Ui;
+import duke.util.DukeParser;
 import task.TaskDeadline;
 import task.TaskList;
 
@@ -20,7 +21,7 @@ public class CommandAddDeadline extends Command {
      * @param input Array with info needed to create the class.
      */
     public CommandAddDeadline(TaskList taskList, String[] input) {
-        this.commandName = "deadline <string> /by DD/MM/YYYY xxxxH";
+        this.commandName = "deadline <string> /by DD/MM/YYYY xxxx";
         this.description = "Creates a deadline task";
         this.arguments = new String[]{
             "<string> Description of Deadline",
@@ -40,7 +41,7 @@ public class CommandAddDeadline extends Command {
         try {
             return taskList.add(new TaskDeadline(
                     input[0],
-                    Command.getDate(input[1]),
+                    DukeParser.getDate(input[1]),
                     input[2],
                     false));
         } catch (DateTimeParseException e) {

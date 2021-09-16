@@ -52,4 +52,15 @@ public class TaskTodo extends Task {
     public boolean isDate(LocalDate date) {
         return false;
     }
+
+    @Override
+    public LocalDate getDate() {
+        return LocalDate.MAX;
+    }
+
+    @Override
+    public String getTime() {
+        return "2400";
+    }
+
 }

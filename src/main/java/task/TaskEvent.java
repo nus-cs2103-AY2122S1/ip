@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
@@ -24,6 +25,10 @@ public class TaskEvent extends Task {
         this.time = Optional.ofNullable(time)
                 .map(String::strip)
                 .orElse("");
+
+        if (checkInvalidTime(this.time)) {
+            throw new DateTimeParseException("INVALID TIME", this.time, 0);
+        }
     }
 
     /**
@@ -64,5 +69,15 @@ public class TaskEvent extends Task {
     @Override
     public boolean isDate(LocalDate date) {
         return date.equals(at);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return at;
+    }
+
+    @Override
+    public String getTime() {
+        return time;
     }
 }
