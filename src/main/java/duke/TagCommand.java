@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Encapsulates a command by the user to tag a task in Duke's to-do-list.
