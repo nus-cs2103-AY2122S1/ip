@@ -10,7 +10,7 @@
     <children>
         <Label fx:id="dialog" style="-fx-border-color: lightblue; -fx-padding: 18; -fx-background-radius: 15; -fx-background-color: azure; -fx-border-radius: 15;" text="Label" textFill="#6748d4" textOverrun="WORD_ELLIPSIS" wrapText="true">
          <font>
-            <Font name="Helvetica" size="11.0" />
+            <Font name="Helvetica" size="10" />
          </font>
          <padding>
             <Insets bottom="5.0" left="2.0" right="5.0" top="5.0" />
