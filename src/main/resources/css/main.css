@@ -1,0 +1,31 @@
+.scroll-pane {
+    -fx-background-color: #292929;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: lightgrey;
+    -fx-border-radius: 10px;
+}
+
+.text-box {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-max-height: Infinity;
+}
+
+.text-box:focused {
+    -fx-background-color: transparent, -fx-box-border, -fx-control-inner-background;
+    -fx-border-color: lightgrey;
+}
+
+.label {
+    -fx-max-height: Infinity;
+    -fx-padding: 10px 15px 10px 15px;
+    -fx-background-radius: 15px;
+}

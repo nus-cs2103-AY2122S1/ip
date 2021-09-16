@@ -1,0 +1,5 @@
+T - 0 - read book
+D - 1 - return book - Jun 6 2020
+E - 1 - project meeting - Aug 6 2020
+T - 0 - soccer training
+D - 1 - cs2103 iP  - Sep 14 2020
