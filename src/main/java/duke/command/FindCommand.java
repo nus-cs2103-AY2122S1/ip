@@ -1,22 +1,31 @@
 package duke.command;
 
+import static java.util.Objects.requireNonNull;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.task.Task;
 import duke.ui.Ui;
 
-public class FindCommand implements ICommand {
+public class FindCommand extends Command {
     private final String keyWord;
 
     public FindCommand(String keyWord) {
         this.keyWord = keyWord;
     }
 
+    /**
+     * Looks for tasks whose description contains the key word, then outputs search result.
+     * See {@link duke.ui.Ui#printFoundTasks Ui.printFoundTasks}
+     *
+     * @param taskList duke's task list
+     * @param ui current Ui instance
+     * @param storage current storage instance
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (taskList == null || ui == null || storage == null) {
-            throw new IllegalArgumentException("One of the parameters is null.");
-        }
+        requireNonNull(ui);
+
         Ui.printFoundTasks(taskList.stream()
                 .filter(t -> t.getDescription().contains(keyWord))
                 .map(Task::toString)

@@ -19,6 +19,8 @@ public class Deadline extends Task {
      */
     protected Deadline(String description, String by) {
         super(description);
+        assert by != null : "due time is null";
+
         try {
             date = LocalDate.parse(by);
             hasDate = true;
@@ -38,15 +40,8 @@ public class Deadline extends Task {
      * @param isDone task status
      */
     protected Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        try {
-            date = LocalDate.parse(by);
-            hasDate = true;
-            this.by = by;
-        } catch (DateTimeParseException e) {
-            hasDate = false;
-            this.by = by;
-        }
+        this(description, by);
+        this.isDone = isDone;
     }
 
     @Override

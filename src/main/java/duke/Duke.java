@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.ICommand;
+import duke.command.Command;
 import duke.ui.MainWindow;
 import duke.ui.Ui;
 import duke.ui.UiMode;
@@ -33,54 +33,20 @@ public class Duke {
         this.isExit = false;
     }
 
-    /**
-     * Initializes duke with given data save path.
-     *
-     * @param pathStr string of save path, ending with the name of save file
-     * @param uiMode UI mode
-     */
-    public Duke(String pathStr, UiMode uiMode) {
-        ui = new Ui(uiMode);
-        taskList = new TaskList();
-        storage = new Storage();
-        try {
-            storage.initialize(pathStr);
-        } catch (DukeException e) {
-            Ui.printErrorMessage(e);
-        }
-        this.isExit = false;
-    }
-
     protected void initialize() {
+        this.initializeHelper();
         ui.printWelcomeMessage();
-
-        try {
-            if (!storage.isEmpty()) {
-                taskList.load(storage.getFileContents());
-            }
-        } catch (DukeException e) {
-            Ui.printErrorMessage(e);
-        }
     }
 
     protected void initialize(MainWindow mainWindow) {
+        this.initializeHelper();
         ui.printWelcomeMessage(mainWindow);
-
-        try {
-            if (!storage.isEmpty()) {
-                taskList.load(storage.getFileContents());
-            }
-        } catch (DukeException e) {
-            Ui.printErrorMessage(e);
-        }
     }
 
     /**
-     * Starts interacting with user. Exit the loop when detecting {@link duke.Parser#WORD_EXIT Parser.WORD_EXIT}.
+     * Starts interacting with user in CLI-mode. Exit the loop when detecting {@link duke.Parser#WORD_EXIT WORD_EXIT}.
      */
     public void run() {
-        this.initialize();
-
         // Echo loop till exit word is entered
         while (!isExit) {
             String userInput = ui.readCommand();
@@ -92,7 +58,7 @@ public class Duke {
                     throw new DukeException(ExceptionType.PIPE_SYMBOL);
                 }
 
-                ICommand c = Parser.parse(userInput, taskList.size());
+                Command c = Parser.parse(userInput, taskList.size());
                 c.execute(this.taskList, this.ui, this.storage);
                 this.isExit = c.isExit();
                 Ui.printDividerLine();
@@ -104,14 +70,15 @@ public class Duke {
     }
 
     /**
-     * Starts interacting with user. Exit the loop when detecting {@link duke.Parser#WORD_EXIT Parser.WORD_EXIT}.
+     * Starts interacting with user in GUI-mode. Exit the loop when detecting {@link duke.Parser#WORD_EXIT WORD_EXIT}.
      */
     public String getResponse(String userInput) {
         try {
             if (userInput.contains("|")) {
                 throw new DukeException(ExceptionType.PIPE_SYMBOL);
             }
-            ICommand c = Parser.parse(userInput, taskList.size());
+
+            Command c = Parser.parse(userInput, taskList.size());
             c.execute(this.taskList, this.ui, this.storage);
         } catch (DukeException e) {
             Ui.printErrorMessage(e, userInput);
@@ -119,7 +86,22 @@ public class Duke {
         return Ui.getResponse();
     }
 
+    /**
+     * Entry of CLI-mode duke.
+     * @param args arguments for the main method.
+     */
     public static void main(String[] args) {
-        new Duke(UiMode.CLI).run();
+        Duke duke = new Duke(UiMode.CLI);
+        duke.initialize();
+        duke.run();
+    }
+
+    private void initializeHelper() {
+        try {
+            storage.initialize();
+            taskList.load(storage.getFileContents());
+        } catch (DukeException e) {
+            Ui.printErrorMessage(e);
+        }
     }
 }

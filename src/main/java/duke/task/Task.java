@@ -3,19 +3,18 @@ package duke.task;
 import static java.util.Objects.requireNonNull;
 
 public abstract class Task {
+    private static final int NUM_OF_SAVE_PARAMS = 4;
+
     protected String description;
     protected boolean isDone;
 
     protected Task(String description) {
+        assert description != null : "description is null";
         this.description = description;
-    }
-
-    protected Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
     }
 
     // factory methods
+
     public static ToDo getToDo(String description) {
         requireNonNull(description, "Description of ToDo cannot be null");
         return new ToDo(description);
@@ -46,9 +45,31 @@ public abstract class Task {
         return new Event(description, period, isDone);
     }
 
+    // getters
+
+    public static int getNumOfSaveParams() {
+        return NUM_OF_SAVE_PARAMS;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
+    // setter
+
+    public void setStatus(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    // string methods
 
     @Override
     public String toString() {
@@ -62,19 +83,5 @@ public abstract class Task {
      * @return a string to store in local file that represents the task.
      * @see duke.Parser#fileContentsToTask(String)
      */
-    public String populateSaveData() {
-        return "T | " + (isDone ? 1 : 0) + " | " + description;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public boolean getStatus() {
-        return this.isDone;
-    }
-
-    public void setStatus(boolean isDone) {
-        this.isDone = isDone;
-    }
+    public abstract String populateSaveData();
 }

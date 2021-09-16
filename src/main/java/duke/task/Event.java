@@ -11,6 +11,8 @@ public class Event extends Task {
      */
     protected Event(String description, String period) {
         super(description);
+        assert period != null : "period is null";
+
         this.period = period;
     }
 
@@ -22,8 +24,8 @@ public class Event extends Task {
      * @param isDone Has the event been done?
      */
     protected Event(String description, String period, boolean isDone) {
-        super(description, isDone);
-        this.period = period;
+        this(description, period);
+        this.isDone = isDone;
     }
 
     @Override
