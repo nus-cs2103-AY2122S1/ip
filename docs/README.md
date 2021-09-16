@@ -89,7 +89,7 @@ Example of usage:
 ```done 3```
 
 
-### `delete <index>` - Delete tasks
+### `delete <index>` - Deletes a task
 
 Delete a task from your list. You can delete a task using its index.
 
