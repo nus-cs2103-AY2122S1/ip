@@ -23,12 +23,14 @@ public class ArchiveCommand extends Command {
      * @return Message indicating whether the task has been successfully archived.
      */
     public String execute(Storage storage, Ui ui) {
+        int taskNum;
         int taskListLen;
         int lenBeforeDelete;
         int archiveTaskListLen;
 
         for (int i = 0; i < arrOfTaskNums.length; i++) {
             try {
+                taskNum = arrOfTaskNums[i];
                 archiveTaskListLen = storage.archiveListLen();
                 if (archiveTaskListLen >= TaskList.MAX_TASKS) {
                     return ui.maxArchiveTaskReachedMessage();
@@ -36,15 +38,14 @@ public class ArchiveCommand extends Command {
 
                 // Delete from main task list
                 taskListLen = storage.taskListLen();
-                if (i + 1 > taskListLen) {
-                    return ui.missingTaskMessage(i + 1);
+                if (taskNum + 1 > taskListLen) {
+                    return ui.missingTaskMessage(taskNum + 1);
                 }
                 lenBeforeDelete = taskListLen;
-                Task taskToArchive = storage.deleteTask(i);
+                Task taskToArchive = storage.deleteTask(taskNum);
                 storage.saveToFile();
                 assert(lenBeforeDelete == storage.taskListLen() + 1)
                         : "Task has not been deleted properly from storage during execution of ArchiveCommand.";
-
 
                 // Add to archive list
                 storage.archiveTask(taskToArchive);
@@ -58,6 +59,5 @@ public class ArchiveCommand extends Command {
         }
 
         return ui.tasksArchivedMessage();
-
     }
 }

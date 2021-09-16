@@ -23,12 +23,14 @@ public class RestoreCommand extends Command {
      * @return Message indicating whether the tasks has been successfully restored.
      */
     public String execute(Storage storage, Ui ui) {
+        int taskNum;
         int archiveTaskListLen;
         int archiveLenBeforeDelete;
         int taskListLen;
 
         for (int i = 0; i < arrOfTaskNums.length; i++) {
             try {
+                taskNum = arrOfTaskNums[i];
                 taskListLen = storage.taskListLen();
                 if (storage.archiveListLen() >= TaskList.MAX_TASKS) {
                     return ui.maxTaskReachedMessage();
@@ -36,11 +38,11 @@ public class RestoreCommand extends Command {
 
                 // Delete from archive list
                 archiveTaskListLen = storage.archiveListLen();
-                if (i + 1 > archiveTaskListLen) {
-                    return ui.missingTaskMessage(i + 1);
+                if (taskNum + 1 > archiveTaskListLen) {
+                    return ui.missingTaskMessage(taskNum + 1);
                 }
                 archiveLenBeforeDelete = taskListLen;
-                Task taskToRestore = storage.deleteArchivedTask(i);
+                Task taskToRestore = storage.deleteArchivedTask(taskNum);
                 storage.saveToArchive();
                 assert(archiveLenBeforeDelete == storage.archiveListLen() + 1)
                         : "Task has not been deleted properly from archive during execution of RestoreCommand.";
