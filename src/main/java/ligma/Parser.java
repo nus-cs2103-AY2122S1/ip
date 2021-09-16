@@ -3,13 +3,7 @@ package ligma;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
-import ligma.command.AddCommand;
-import ligma.command.Command;
-import ligma.command.DeleteCommand;
-import ligma.command.DoneCommand;
-import ligma.command.ExitCommand;
-import ligma.command.FindCommand;
-import ligma.command.ListCommand;
+import ligma.command.*;
 import ligma.task.*;
 
 /**
@@ -35,6 +29,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "help":
+                return new HelpCommand();
             default:
                 return handleBadCommands(input);
             }

@@ -198,19 +198,19 @@ public class Recurring extends Task {
         String nextStr = "";
 
         switch (this.recurPeriod) {
-            case DAY:
-                nextStr = getNextDailyOcc();
-                break;
-            case WEEK:
-                nextStr = getNextWeeklyOcc();
-                break;
-            case MONTH:
-                nextStr = getNextMonthlyOcc();
-                break;
-            case YEAR:
-                nextStr = getNextAnnualOcc();
-                break;
-            default:
+        case DAY:
+            nextStr = getNextDailyOcc();
+            break;
+        case WEEK:
+            nextStr = getNextWeeklyOcc();
+            break;
+        case MONTH:
+            nextStr = getNextMonthlyOcc();
+            break;
+        case YEAR:
+            nextStr = getNextAnnualOcc();
+            break;
+        default:
         }
 
         return String.format("[R]%s (next: %s)",
