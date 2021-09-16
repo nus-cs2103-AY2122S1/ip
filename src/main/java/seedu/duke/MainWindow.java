@@ -34,6 +34,9 @@ public class MainWindow extends Stage {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/boh.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kaonashi.gif"));
 
+    /**
+     * Initialise the scrollPane and dialogContainer.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -41,6 +44,11 @@ public class MainWindow extends Stage {
         dialogContainer.setFillWidth(true);
     }
 
+    /**
+     * Initialise and start duke chat bot.
+     *
+     * @param d Duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
         duke.init();

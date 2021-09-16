@@ -23,9 +23,9 @@ import java.util.HashMap;
  * and handles any updates to the file.
  */
 public class Storage {
+    private static DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
     private String filePath;
     private HashMap<LocalDate, ArrayList<Task>> dateTasks;
-    private static DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
 
     private enum Letter {
         TODO('T'),
@@ -94,8 +94,7 @@ public class Storage {
             taskList = parseData(taskList);
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
-        }
-        finally {
+        } finally {
             return taskList;
         }
     }
@@ -112,39 +111,39 @@ public class Storage {
 
     private TaskList parseData(TaskList taskList) throws IOException, DukeException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String task = "";
-            while ((task = reader.readLine()) != null) {
-                char type = task.charAt(1);
-                Letter taskType = Letter.parseLetter(type);
-                boolean isCompleted = task.charAt(4) == 'X';
-                String description = parseDescription(task);
+        String task = "";
+        while ((task = reader.readLine()) != null) {
+            char type = task.charAt(1);
+            Letter taskType = Letter.parseLetter(type);
+            boolean isCompleted = task.charAt(4) == 'X';
+            String description = parseDescription(task);
 
-                // Dummy objects initialised.
-                Task newTask = new Task("");
-                LocalDate time = LocalDate.now();
+            // Dummy objects initialised.
+            Task newTask = new Task("");
+            LocalDate time = LocalDate.now();
 
-                switch (taskType) {
-                case TODO:
-                    newTask = taskType.updateTaskListWithToDo(description, isCompleted);
-                    break;
-                case DEADLINE:
-                    time = parseTime(task, "by: ");
-                    newTask = taskType.updateTaskListWithDeadline(description, time,
-                            isCompleted, this.dateTasks);
-                    break;
-                case EVENT:
-                    time = parseTime(task, "at: ");
-                    newTask = taskType.updateTaskListWithEvent(description, time,
-                            isCompleted, this.dateTasks);
-                    break;
-                default:
-                    throw new DukeException("Invalid task.");
-                }
-                System.out.println(newTask);
-                taskList = taskList.add(newTask);
+            switch (taskType) {
+            case TODO:
+                newTask = taskType.updateTaskListWithToDo(description, isCompleted);
+                break;
+            case DEADLINE:
+                time = parseTime(task, "by: ");
+                newTask = taskType.updateTaskListWithDeadline(description, time,
+                        isCompleted, this.dateTasks);
+                break;
+            case EVENT:
+                time = parseTime(task, "at: ");
+                newTask = taskType.updateTaskListWithEvent(description, time,
+                        isCompleted, this.dateTasks);
+                break;
+            default:
+                throw new DukeException("Invalid task.");
             }
-            reader.close();
-            return taskList;
+            System.out.println(newTask);
+            taskList = taskList.add(newTask);
+        }
+        reader.close();
+        return taskList;
     }
 
     private LocalDate parseTime(String task, String command) throws DukeException {
@@ -154,7 +153,7 @@ public class Storage {
         }
 
         int endOfDateString = task.indexOf(')');
-        assert endOfDateString >= 0: "DateString is within brackets.";
+        assert endOfDateString >= 0 : "DateString is within brackets.";
 
         String timeDescription = task.substring(timeIndex + command.length(),
                 endOfDateString);

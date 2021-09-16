@@ -36,7 +36,7 @@ public class Task {
      */
     public Task(String description, boolean isCompleted) {
         this.description = description;
-        this.isCompleted =isCompleted;
+        this.isCompleted = isCompleted;
     }
 
     /**

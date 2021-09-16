@@ -50,7 +50,7 @@ public class Duke {
 
             if (arrOfCommandWords.length <= 1) {
                 Command command = parseOneWordCommand(type);
-                assert command != null: "Command is valid.";
+                assert command != null : "Command is valid.";
                 return command;
             }
 
@@ -238,6 +238,9 @@ public class Duke {
      */
     private final Storage storage = new Storage("./data/duke.text", dateTasks);
 
+    /**
+     * Load the existing data to Duke.
+     */
     public void init() {
         String directoryPath = "./data";
 

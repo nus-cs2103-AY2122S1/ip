@@ -16,6 +16,9 @@ import java.util.HashMap;
  */
 public abstract class Command {
 
+    /**
+     * Enum containing the available command types.
+     */
     public enum CommandType {
         TODO("todo"),
         DEADLINE("deadline"),
@@ -36,8 +39,14 @@ public abstract class Command {
             this.type = type;
         }
 
-        //@@author Morrow1ndy-reused
-        // with minor modifications
+        /**
+         * @@author Morrow1ndy-reused.
+         * with minor modifications.
+         * Parses and return the corresponding command from the command word.
+         *
+         * @param word Command word to parse.
+         * @return Command Type.
+         */
         public static CommandType parseTypeFromCommandWord(String word) {
             switch (word) {
             case "todo":
