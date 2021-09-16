@@ -172,7 +172,7 @@ Example:
 
 Expected outcome: 
 `````
-Here's the matching tasks in your list:
+Here's your schedule for Jan 01 2021:
 1. [E] [✕] BTS concert (at: 01 Jan 2021 12:00)
 2. [D] [✕] CS2100 assignment (by: 01 Jan 2021 15:00)
 3. [E] [✕] Meeting with prof Aaron (at: 01 Jan 2021 20:00)
@@ -180,7 +180,7 @@ Here's the matching tasks in your list:
 
 ## Command Summary
 | Action | Format | Example |
-| ------------ | ------------- | ------------- |
+
 | todo | `todo <task's name>` | `todo homework` |
 | deadline | `deadline <task's name> /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
 | event | `event <task's name> /at <Year-Month-Date Hour:Minute>` | `event carnival /at 2021-09-15 20:00` |
