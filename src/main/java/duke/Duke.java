@@ -1,8 +1,5 @@
 package duke;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import duke.task.TaskList;
 
 /**
@@ -30,10 +27,4 @@ public class Duke {
     public String getResponse(String input) {
         return parser.parse(input);
     }
-
-    /*
-    public static void main(String[] args) {
-        Path savePath = Paths.get("data");
-        new Duke(savePath).run();
-    } */
 }
