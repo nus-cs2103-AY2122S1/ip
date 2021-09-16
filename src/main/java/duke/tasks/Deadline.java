@@ -2,6 +2,7 @@ package duke.tasks;
 
 import duke.exceptions.DeadlineException;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,12 +23,14 @@ public class Deadline extends Task {
      * @param by Deadline by which the task should be completed.
      * @throws DeadlineException If the Deadline object cannot be created successfully due to empty description.
      */
-    public Deadline(String description, String by) throws DeadlineException {
+    public Deadline(String description, String by) throws DeadlineException, DateTimeException {
         super(description);
         if(description.equals("deadline")) {
             throw new DeadlineException();
         }
         this.by = by;
+        this.date = getDateObject();
+        this.time = getTimeObject();
     }
 
     /**
@@ -53,23 +56,36 @@ public class Deadline extends Task {
      *
      * @return String denoting the deadline of the task.
      */
-    public String getDate() {
-        String date = by.split(" ")[0];
-        this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
+    private String getDateInString() {
+        //String date = by.split(" ")[0];
+        //this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
         String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return formattedDate;
     }
+
+    private LocalDate getDateObject() {
+        String date = by.split(" ")[0];
+        LocalDate dataObject = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
+        return dataObject;
+    }
+
 
     /**
      * Gets the time by which the task must be completed.
      *
      * @return String denoting the time by which task must be completed.
      */
-    public String getTime() {
-        String time = by.split(" ")[1];
-        this.time = LocalTime.parse(time);
+    private String getTimeInString() {
+        //String time = by.split(" ")[1];
+        //this.time = LocalTime.parse(time);
         String formattedTime = this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
         return formattedTime;
+    }
+
+    private LocalTime getTimeObject() {
+        String time = by.split(" ")[1];
+        LocalTime timeObject = LocalTime.parse(time);
+        return timeObject;
     }
 
     /**
@@ -89,6 +105,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + getDate() + " " + getTime() + ")";
+        return "[D]" + super.toString() + "(by: " + getDateInString() + " " + getTimeInString() + ")";
     }
 }

@@ -11,6 +11,10 @@ public class NotesList {
         this.notes = notes;
     }
 
+    public Integer getNumberOfNotes() {
+        return this.notes.size();
+    }
+
     public ArrayList<Note> getNotes() {
         return this.notes;
     }

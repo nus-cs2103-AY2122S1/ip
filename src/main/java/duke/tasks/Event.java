@@ -1,7 +1,9 @@
 package duke.tasks;
 
 import duke.exceptions.EventException;
+import jdk.jshell.execution.LoaderDelegate;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -23,12 +25,15 @@ public class Event extends Task {
      * @param at Time of event.
      * @throws EventException If the Event object cannot be created successfully due to empty description.
      */
-    public Event(String description, String at) throws EventException {
+    public Event(String description, String at) throws EventException, DateTimeException {
         super(description);
         if(description.equals("event")) {
             throw new EventException();
         }
         this.at = at;
+        this.date = getDateObject();
+        this.startTime = getStartTimeObject();
+        this.endTime = getEndTimeObject();
     }
 
     /**
@@ -49,29 +54,50 @@ public class Event extends Task {
         return "E";
     };
 
+    private LocalDate getDateObject() {
+        String date = at.split(" ")[0];
+        LocalDate dateObject = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1]
+                + "-" + date.split("/")[0]);
+        return dateObject;
+    }
     /**
      * Gets the date of the event.
      *
      * @return String denoting the date of the event.
      */
-    public String getDate() {
-        String date = at.split(" ")[0];
-        this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
+    private String getDateInString() {
+        //String date = at.split(" ")[0];
+        //this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
         String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return formattedDate;
     }
+
+    private LocalTime getStartTimeObject() {
+        String time = at.split(" ")[1];
+        String startTime = time.split("-")[0];
+        LocalTime startTimeObject = LocalTime.parse(startTime);
+        return startTimeObject;
+    }
+
 
     /**
      * Gets the start time of the event.
      *
      * @return String denoting the end time of the event.
      */
-    public String getStartTime() {
-        String time = at.split(" ")[1];
-        String startTime = time.split("-")[0];
-        this.startTime = LocalTime.parse(startTime);
+    private String getStartTimeInString() {
+        //String time = at.split(" ")[1];
+        //String startTime = time.split("-")[0];
+        //this.startTime = LocalTime.parse(startTime);
         String formattedStartTime = this.startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         return formattedStartTime;
+    }
+
+    private LocalTime getEndTimeObject() {
+        String time = at.split(" ")[1];
+        String endTime = time.split("-")[1];
+        LocalTime endTimeObject = LocalTime.parse(endTime);
+        return endTimeObject;
     }
 
     /**
@@ -79,7 +105,7 @@ public class Event extends Task {
      *
      * @return String denoting the end time of the event.
      */
-    public String getEndTime() {
+    private String getEndTimeInString() {
         String time = at.split(" ")[1];
         String endTime = time.split("-")[1];
         this.endTime = LocalTime.parse(endTime);
@@ -103,6 +129,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + getDate() + " from " + getStartTime() + " to " + getEndTime() + ")";
+        return "[E]" + super.toString() + "(at: " + getDateInString() + " from " + getStartTimeInString()
+                + " to " + getEndTimeInString() + ")";
     }
 }

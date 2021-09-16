@@ -13,10 +13,17 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
-        Integer count = Integer.valueOf(this.taskNumber);
-        tasks.getTask(count - 1).markAsDone();
-        storage.rewriteFile(tasks.getTasks(), notes.getNotes());
-        return ui.respondToDone(tasks.getTasks(), count);
+        try {
+            Integer count = Integer.valueOf(this.taskNumber);
+            if(count < 0 || count > tasks.getNumberOfTasks()) {
+                return ui.showError("You have entered a index that does not correspond to any task.");
+            }
+            tasks.getTask(count - 1).markAsDone();
+            storage.rewriteFile(tasks.getTasks(), notes.getNotes());
+            return ui.respondToDone(tasks.getTasks(), count);
+        } catch(NumberFormatException e) {
+            return ui.showError("You have entered an invalid input that is not a number.");
+        }
     }
 
     /**@Override

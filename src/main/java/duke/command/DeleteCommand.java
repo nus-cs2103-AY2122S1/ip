@@ -16,12 +16,20 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
-        Integer number = Integer.valueOf(this.taskNumber);
-        ArrayList<Task> originalTaskList = tasks.getTasks();
-        Task task = tasks.getTask(number - 1);
-        tasks.getTasks().remove(number - 1);
-        storage.rewriteFile(tasks.getTasks(), notes.getNotes());
-        return ui.respondToDelete(tasks.getTasks(), task);
+        try {
+            Integer number = Integer.valueOf(this.taskNumber);
+            if(number < 0 || number > tasks.getNumberOfTasks()) {
+                return ui.showError("You have entered a index that does not correspond to any task.");
+            }
+            ArrayList<Task> originalTaskList = tasks.getTasks();
+            Task task = tasks.getTask(number - 1);
+            tasks.getTasks().remove(number - 1);
+            storage.rewriteFile(tasks.getTasks(), notes.getNotes());
+            return ui.respondToDelete(tasks.getTasks(), task);
+        } catch(NumberFormatException e) {
+            return ui.showError("You have entered an invalid input that is not a number.");
+        }
+
     }
 
     /**@Override

@@ -6,6 +6,7 @@ import duke.notes.Note;
 import duke.notes.NotesList;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
@@ -17,11 +18,18 @@ public class DeleteNoteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
-        Integer number = Integer.valueOf(this.noteNumber);
-        Note note = notes.getNote(number - 1);
-        notes.getNotes().remove(number - 1);
-        storage.rewriteFile(tasks.getTasks(), notes.getNotes());
-        return ui.respondToDeleteNote(notes.getNotes(), note);
+        try {
+            Integer number = Integer.valueOf(this.noteNumber);
+            if(number < 0 || number > notes.getNumberOfNotes()) {
+                return ui.showError("You have entered a index that does not correspond to any note.");
+            }
+            Note note = notes.getNote(number - 1);
+            notes.getNotes().remove(number - 1);
+            storage.rewriteFile(tasks.getTasks(), notes.getNotes());
+            return ui.respondToDeleteNote(notes.getNotes(), note);
+        }  catch(NumberFormatException e) {
+            return ui.showError("You have entered an invalid input that is not a number.");
+        }
     }
 
     @Override

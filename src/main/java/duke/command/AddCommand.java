@@ -9,6 +9,8 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.exceptions.DukeException;
 
+import java.time.DateTimeException;
+
 public class AddCommand extends Command {
     String command;
 
@@ -54,9 +56,14 @@ public class AddCommand extends Command {
         return descriptionOfDeadline;
     }
 
-    private String getDeadlineTiming(String taskDescription) {
-        String by = command.split("/by ")[1];
-        return by;
+    private String getDeadlineTiming(String taskDescription, Ui ui) {
+        try {
+            String by = command.split("/by ")[1];
+            return by;
+        }  catch(DateTimeException e) {
+            return ui.showError("You have keyed in an incorrect date or time! Please check :)");
+        }
+
     }
 
     private String executeDeadlineCommand(TaskList tasks, Ui ui, Storage storage) {
@@ -66,7 +73,7 @@ public class AddCommand extends Command {
             } else {
                 String descriptionOfTask = getTaskDescription();
                 String descriptionOfDeadline = getDeadlineDescription(descriptionOfTask);
-                String by = getDeadlineTiming(descriptionOfTask);
+                String by = getDeadlineTiming(descriptionOfTask, ui);
                 Deadline deadline = new Deadline(descriptionOfDeadline, by);
                 tasks.addTask(deadline);
                 storage.appendToFile(deadline);
@@ -109,15 +116,19 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
-        String typeOfTask = getTypeOfTask();
-        if(typeOfTask.equals("todo")) {
-            return executeTodoCommand(tasks, ui, storage);
-        } else if(typeOfTask.equals("deadline")) {
-            return executeDeadlineCommand(tasks, ui, storage);
-        } else if(typeOfTask.equals("event")) {
-            return executeEventCommand(tasks, ui, storage);
-        } else {
-            return ui.respondToInvalidCommand();
+       try {
+            String typeOfTask = getTypeOfTask();
+            if(typeOfTask.equals("todo")) {
+                return executeTodoCommand(tasks, ui, storage);
+            } else if(typeOfTask.equals("deadline")) {
+                return executeDeadlineCommand(tasks, ui, storage);
+            } else if(typeOfTask.equals("event")) {
+                return executeEventCommand(tasks, ui, storage);
+            } else {
+                return ui.respondToInvalidCommand();
+            }
+        } catch(DateTimeException e) {
+            return ui.showError("You have keyed in an incorrect date or time! Please check :)");
         }
     }
 
