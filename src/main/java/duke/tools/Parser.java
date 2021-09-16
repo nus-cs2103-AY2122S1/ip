@@ -55,7 +55,7 @@ public class Parser {
         } else if (command.startsWith("find")) {
             assert command.contains("find");
             if (command.trim().equals("find")) {
-                throw new DukeException("☹ OOPS!!! The description of find cannot be empty.\n "
+                throw new DukeException("OOPS!!! The description of find cannot be empty.\n "
                         + "Please follow this format: \n" + "    find {key}");
             }
             return Duke.findTask(command);
