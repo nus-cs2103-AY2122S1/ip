@@ -14,8 +14,8 @@ import angrybot.task.Task;
 public class Ui {
     private static final String INDENTATION = "    ";
 
-    private static final String WELCOME_MSG = "Welcome to AngryBot you little shit. What do you want from me?\n"
-            + "Type \"help\" if you are dumb and requires help.";
+    private static final String WELCOME_MSG = "Welcome to AngryBot. What do you want from me?\n"
+            + "Type \"help\" if you requires help.";
     private static final String FAREWELL_MSG = "Bye bye, I go sleep already. See you again.";
 
     private static final String HELP_TODO = "todo <description> - Adds a Todo task with the specified description.";
