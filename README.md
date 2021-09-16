@@ -4,6 +4,8 @@
 
 This is the chat bot that lets you manage your tasks easily!([download it from here](https://github.com/LuoZhijie-tom/ip.git))
 
+[start](#start-new)
+
 ### Commands:
 * __todo__ *description* : Add a ToDo task.
 * __deadline__ *description* __/by__ *deadline* : Add a Deadline task.
@@ -47,3 +49,4 @@ public void run() {
         }
     }
 ```
+### Start New
