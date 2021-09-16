@@ -1,2 +1,5 @@
 D | 1 | proposal submission | 17 Sep
 T | 1 | math homework
+T | 0 | aaa
+T | 0 | aab
+T | 0 | a
