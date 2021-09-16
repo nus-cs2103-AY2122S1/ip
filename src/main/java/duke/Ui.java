@@ -8,7 +8,14 @@ import java.util.Scanner;
  * Represents the Ui of Duke.
  */
 public class Ui {
+    /**
+     * Represents the line to be printed on the CLI.
+     */
     public static final String LINE = "____________________________________________________________";
+
+    /**
+     * Represents the scanner to scan the user input.
+     */
     private final Scanner sc;
 
     /**

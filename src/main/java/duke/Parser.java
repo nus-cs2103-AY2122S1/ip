@@ -26,6 +26,9 @@ import java.time.format.DateTimeParseException;
  * Represents a parser which parses the input given by users of Duke.
  */
 public class Parser {
+    /**
+     * Represents the whitespace character to split the input.
+     */
     private static final String SPACE = " ";
 
     // Checks for command types.

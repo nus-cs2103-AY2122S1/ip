@@ -14,7 +14,9 @@ import javafx.stage.Stage;
  * Represents the GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    /**
+     * Represents the duke object.
+     */
     private Duke duke = new Duke();
 
     /**

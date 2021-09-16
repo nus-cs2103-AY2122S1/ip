@@ -4,6 +4,9 @@ package duke.task;
  * Represents the type of Task which has a deadline.
  */
 public class Deadline extends Task {
+    /**
+     * Represents the deadline of the task.
+     */
     private String by;
 
     /**

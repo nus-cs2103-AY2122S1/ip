@@ -16,8 +16,19 @@ import java.util.Scanner;
  * Stores and retrieves information of the tasklist for Duke.
  */
 public class Storage {
+    /**
+     * Represents the filepath to the file to save the taskList.
+     */
     private final String TASKLIST_FILE_PATH;
+
+    /**
+     * Represents the directory path to save the taskList and archiveList.
+     */
     private final String DIR_PATH;
+
+    /**
+     * Represents the filepath to the file to save the archiveList.
+     */
     private final String ARCHIVELIST_FILE_PATH;
 
     /**

@@ -16,7 +16,9 @@ import java.time.format.DateTimeFormatter;
  * Represents the add command of Duke.
  */
 public class AddCommand extends Command {
-
+    /**
+     * Represents task to add.
+     */
     private final Task toAdd;
 
     /**

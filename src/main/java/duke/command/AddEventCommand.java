@@ -8,6 +8,9 @@ import duke.task.Event;
  */
 public class AddEventCommand extends AddCommand {
 
+    /**
+     * Represents Delimiter to split the user input.
+     */
     private static final String DELIMITER = "/at";
 
     /**

@@ -8,6 +8,9 @@ import java.util.ArrayList;
  * Represents Tasks for Duke.
  */
 public abstract class DukeList {
+    /**
+     * Represents the arrayList to store the tasks.
+     */
     private final ArrayList<Task> taskArrayList;
 
     /**

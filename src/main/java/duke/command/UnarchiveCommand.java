@@ -13,7 +13,14 @@ import duke.task.Task;
  */
 public class UnarchiveCommand extends Command {
 
+    /**
+     * Represents index to unarchive.
+     */
     private final int indexToUnarchive;
+
+    /**
+     * Represents if it is an unarchive all command.
+     */
     private final boolean isUnarchiveAll;
 
     /**

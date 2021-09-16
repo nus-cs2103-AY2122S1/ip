@@ -13,7 +13,14 @@ import duke.exception.InvalidCommandException;
  */
 public class DoneCommand extends Command {
 
+    /**
+     * Represents index to mark as done.
+     */
     private final int indexToMarkAsDone;
+
+    /**
+     * Represents if it is a done all command
+     */
     private final boolean isMarkAll;
 
     /**

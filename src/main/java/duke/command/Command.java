@@ -9,7 +9,14 @@ import duke.Ui;
  * Represents the Abstract class for Commands.
  */
 public abstract class Command {
+    /**
+     * Represents the whitespace character to split input.
+     */
     public static final String SPACE = " ";
+
+    /**
+     * Represents the all command.
+     */
     public static final int ALL = -1;
 
     /**

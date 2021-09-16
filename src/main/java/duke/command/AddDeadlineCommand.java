@@ -8,6 +8,9 @@ import duke.task.Deadline;
  */
 public class AddDeadlineCommand extends AddCommand {
 
+    /**
+     * Represents Delimiter to split the user input.
+     */
     private static final String DELIMITER = "/by";
 
     /**

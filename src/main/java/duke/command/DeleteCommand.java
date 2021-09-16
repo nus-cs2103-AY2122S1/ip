@@ -15,7 +15,14 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
+    /**
+     * Represents index to delete.
+     */
     private final int indexToDelete;
+
+    /**
+     * Represents if it is a delete all command.
+     */
     private final boolean isDeleteAll;
 
     /**

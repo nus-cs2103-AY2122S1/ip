@@ -8,9 +8,24 @@ import duke.exception.DukeException;
  * acts as a todolist.
  */
 public class Duke {
+    /**
+     * Represents the Ui of duke.
+     */
     private final Ui ui;
+
+    /**
+     * Represents the storage of duke.
+     */
     private final Storage storage;
+
+    /**
+     * Represents the taskList of duke.
+     */
     private final TaskList taskList;
+
+    /**
+     * Represents the archiveList of duke.
+     */
     private final ArchiveList archiveList;
 
     /**

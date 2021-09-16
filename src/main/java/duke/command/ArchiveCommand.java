@@ -13,7 +13,14 @@ import duke.task.Task;
  */
 public class ArchiveCommand extends Command {
 
+    /**
+     * Represents index to archive.
+     */
     private final int indexToArchive;
+
+    /**
+     * Represents if it is an archive all command.
+     */
     private final boolean isArchiveAll;
 
     /**

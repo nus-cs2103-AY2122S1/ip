@@ -11,6 +11,9 @@ import duke.exception.IncompleteFindException;
  */
 public class FindCommand extends Command {
 
+    /**
+     * Represents keyword to find.
+     */
     private final String keyword;
 
     /**
