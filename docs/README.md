@@ -35,7 +35,7 @@ Duke registers your todo task and lets you know about it.
 ```
 Got it. I've added this task
   [T][ ] make coffee
-Now you have 1 tasks in the list.
+Now you have 1 tasks in your list.
 ```
 
 ### `deadline` - Adds a Deadline Task
@@ -43,7 +43,7 @@ Now you have 1 tasks in the list.
 Adds task that needs to be done before a specific date. 
 Time is an optional input here. Feel free to add one!
 
-**Format:** `deadline TASK_DESCRPTION /by DATE [TIME]`
+**Format:** `deadline TASK_DESCRIPTION /by DATE [TIME]`
 
 - Distinguish details and datetime with `/by`
 - `TIME` is in 24h format (e.g. 0930 or 2359)
@@ -60,8 +60,8 @@ Duke registers your deadline task and lets you know about it.
 
 ```
 Got it. I've added this task
-  [D][ ] brew tea (at: Sep 15 2021)
-Now you have 2 tasks in the list.
+  [D][ ] brew tea { by: Sep 15 2021 }
+Now you have 2 tasks in your list.
 ```
 ### `event` - Adds an Event Task
 
@@ -85,8 +85,8 @@ Duke registers your event task and lets you know about it.
 
 ```
 Got it. I've added this task
-  [E][ ] tea workshop (at: Sep 20 2021, 0930-1300)
-Now you have 3 tasks in the list.
+  [E][ ] tea workshop { at: Sep 20 2021 || 0930-1300 }
+Now you have 3 tasks in your list.
 ```
 
 ### `done` - Marks Task as Complete
@@ -110,7 +110,7 @@ Duke marks this task as complete with an `X`.
 
 ```
 Nice! I've marked this task as done:
-[D][X] brew tea (at: Sep 15 2021)
+[D][X] brew tea { at: Sep 15 2021 }
 ```
 
 ### `list` - Renders All Tasks at Hand
@@ -124,10 +124,10 @@ Expected outcome:
 Duke lists out all the tasks you have (complete and incomplete).
 
 ```
-Here are the tasks in your list:
+Here are your tasks:
 1. [T][ ] make coffee
-2. [D][X] brew tea (at: Sep 15 2021)
-3. [E][ ] tea workshop (at: Sep 20 2021, 0930-1300)
+2. [D][X] brew tea { at: Sep 15 2021 }
+3. [E][ ] tea workshop { at: Sep 20 2021 || 0930-1300 }
 ```
 
 ### `find` - Filters Tasks by Keyword
@@ -145,8 +145,8 @@ Expected outcome:
 Tasks containing the keyword or phrase given.
 ```
 Here are the matching tasks in your list:
-[D][X] brew tea (at: Sep 15 2021)
-[E][ ] tea workshop (at: Sep 20 2021, 0930-1300)
+[D][X] brew tea { at: Sep 15 2021 }
+[E][ ] tea workshop { at: Sep 20 2021 || 0930-1300 }
 ```
 
 ### `delete` - Deletes Task
@@ -168,8 +168,8 @@ Duke deletes your task and lets you know about it.
 
 ```
 Noted. I've removed this task:
-  [D][X] brew tea (at: Sep 15 2021)
-Now you have 2 tasks in the list.
+  [D][X] brew tea { at: Sep 15 2021 }
+Now you have 2 tasks in your list.
 ```
 
 ### `bye` - Exits Duke
