@@ -51,6 +51,8 @@ public class Storage {
             throw DukeException.CORRUPT_SAVE;
         }
 
+        assertSaveFileExists();
+
         while (sc.hasNextLine()) {
             try {
                 Task newTask = getTaskFromSave(sc.nextLine());
@@ -68,6 +70,8 @@ public class Storage {
      * @param taskList The TaskList to be saved.
      */
     public void save(TaskList taskList) {
+        assertSaveFileExists();
+
         try {
             Files.delete(savePath);
             Files.createFile(savePath);
@@ -120,5 +124,9 @@ public class Storage {
         } catch (DukeException e) {
             throw DukeException.CORRUPT_TASK;
         }
+    }
+
+    public void assertSaveFileExists() {
+        assert Files.exists(savePath) : "Save file should exist";
     }
 }
