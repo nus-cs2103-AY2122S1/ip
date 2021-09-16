@@ -2,8 +2,23 @@
 This is a greenfield Java project based on the generic project called
 [***Project Duke***](https://nus-cs2103-ay2021s1.github.io/website/se-book-adapted/projectDuke/index.html).
 <br>
-The result of this project is a personal assistant chat-bot named *Cynthius*
+The result of this project is a personal assistant chat-bot named [***Cynthius***](https://github.com/El0hime/ip/releases)
 capable of keeping track of tasks and contacts given by the user.
+
+
+* [Features](#features)
+    * [Help](#help-help)
+    * [Adding a ToDo](#adding-a-todo-todo)
+    * [Adding an Event](#adding-an-event-event)
+    * [Adding a Deadline](#adding-a-deadline-deadline)
+    * [Adding a Contact](#adding-a-contact-contact)
+    * [Deleting tasks/contacts](#deleting-a-task/contact-delete)
+    * [Marking task as done](#marking-task-as-done-done)
+    * [Finding tasks/contacts](#finding-task(s)-find)
+    * [Listing tasks/contacts](#list-tasks/contacts-list)
+    * [Saving the data](#saving-data)
+    * [Exiting the program](#exiting-Cynthius-bye)
+* [Command summary](#command-summary)
 
 ## Features 
 
@@ -162,4 +177,19 @@ Expected outcome:
 Bye. Hope to see you again soon!
 ```
 <hr>
+
+### Command summary
+
+Command | Format | Example
+------------ | ------------- | -------------
+Add a **ToDo** | `todo TASK` | `todo homework`
+Add an **Event** | `event TASK /at TASK_LOCATION` | `event birthday party /at Calvin's house`
+Add a **Deadline** | `deadline TASK /by TASK_DATE_TIME` | `deadline ES2660 draft /by 16/9`
+Add a **Contact** | `contact NAME (/about NAME_DESCRIPTION)` | `contact Calvin /about orbital partner`
+**Delete** Task/Contact | `delete CONTACT/TASK INDEX` | `delete c 1`, `delete t 3`
+Mark task as **Done** | `done INDEX` | `done 1`, `done 2`
+**Find** Tasks/Contacts| `find KEYWORD(S)` | `find k3soju`
+**List** All Tasks/Contacts| `list`| `list`
+**Help** | `help`| `help`
+**Exit** | `bye` | `bye`
 
