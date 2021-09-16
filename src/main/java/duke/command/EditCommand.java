@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Action;
+import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.StringUtils;
@@ -51,24 +52,28 @@ public class EditCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage) {
         Task temp = taskList.getTask(index);
-        if (description.contains("/by")) {
-            Deadline d = (Deadline) temp;
-            String[] arr = Parser.parseEditInfo(description);
-            assert arr.length == 2 : "Parse edit info error";
-            d.setDeadlineTime(Parser.parseDateTime(arr[1]));
-            if (!arr[0].equals("")) {
-                d.setDescription(arr[0]);
+        if (description.contains("/t")) {
+            if (temp instanceof Deadline) {
+                Deadline d = (Deadline) temp;
+                String[] arr = Parser.parseEditInfo(description);
+                assert arr.length == 2 : "Parse edit info error";
+                d.setDeadlineTime(Parser.parseDateTime(arr[1]));
+                if (!arr[0].equals("")) {
+                    d.setDescription(arr[0]);
+                }
+                return StringUtils.getEditMessage(d);
+            } else if (temp instanceof Event) {
+                Event e = (Event) temp;
+                String[] arr = Parser.parseEditInfo(description);
+                assert arr.length == 2 : "Parse edit info error";
+                e.setEventTime(Parser.parseDateTime(arr[1]));
+                if (!arr[0].equals("")) {
+                    e.setDescription(arr[0]);
+                }
+                return StringUtils.getEditMessage(e);
+            } else {
+                throw new DukeException("Todo task do not have a time");
             }
-            return StringUtils.getEditMessage(d);
-        } else if (description.contains("/at")) {
-            Event e = (Event) temp;
-            String[] arr = Parser.parseEditInfo(description);
-            assert arr.length == 2 : "Parse edit info error";
-            e.setEventTime(Parser.parseDateTime(arr[1]));
-            if (!arr[0].equals("")) {
-                e.setDescription(arr[0]);
-            }
-            return StringUtils.getEditMessage(e);
         } else {
             temp.setDescription(description);
             return StringUtils.getEditMessage(temp);

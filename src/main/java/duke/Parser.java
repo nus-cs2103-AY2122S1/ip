@@ -180,6 +180,8 @@ public class Parser {
                 return new EditCommand(Action.EDIT, taskNumber - 1, info);
             } catch (NumberFormatException e) {
                 throw new DukeException("A number must be given to specified the task.");
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please provide more information to edit the task.");
             }
         }
         case CLONE: {
@@ -205,10 +207,8 @@ public class Parser {
      */
     public static String[] parseEditInfo(String input) {
         String[] arr;
-        if (input.contains("/by")) {
-            arr = input.indexOf("/by") != 0 ? input.split(" /by ") : input.split("/by ");
-        } else if (input.contains("/at")) {
-            arr = input.indexOf("/at") != 0 ? input.split(" /at ") : input.split("/at ");
+        if (input.contains("/t")) {
+            arr = input.indexOf("/t") != 0 ? input.split(" /t ") : input.split("/t ");
         } else {
             arr = new String[]{input};
         }
