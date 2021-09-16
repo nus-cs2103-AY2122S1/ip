@@ -8,10 +8,10 @@ import java.util.List;
 
 
 /**
- * A TaskList class that handles all the methods that manipulates
- * the task list.
+ * A list of task objects that the Genie will be handling.
  */
 public class TaskList {
+    
     private final List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
@@ -19,16 +19,12 @@ public class TaskList {
     }
     
     /**
-     * The output that will be shown when the input command is list.
+     * The entire list of tasks that are both completed and not completed.
      * 
-     * @param str
+     * @param str The input command by the user.
      * @return a String with all the existing genie.tasks shown in a list view. 
      */
     public String showList(String str) {
-//        int listLen = genie.tasks.size();
-//        if (listLen == 0) {
-//            str = "You have no genie.tasks!\nNow that you are done with all your work, go after Jasmine!";
-//        }
         for (int i = 0; i < tasks.size(); i++) {
             str += (i+1) + ". " + tasks.get(i);
             if (i != tasks.size() - 1) {
@@ -39,10 +35,10 @@ public class TaskList {
     }
 
     /**
-     * A method to mark the task as done
+     * A method to mark the task as done.
      * 
-     * @param str The input command
-     * @return The output that you want to be printed out in the console
+     * @param str The input command by the user.
+     * @return The output that you want to be printed out in the console.
      */
     public String markDone(String str) {
         int completedTaskIndex = Integer.parseInt(str.substring(5)) - 1;
@@ -53,11 +49,11 @@ public class TaskList {
     }
 
     /**
-     * A method to create & add a to-do task
+     * A method to create & add a to-do task.
      * 
-     * @param str The input command
+     * @param str The input command by the user.
      * @return A response from the bot to indicate a to-do task has been created
-     * and added to the task list
+     * and added to the task list.
      */
     public String todoTask(String str) throws GenieException {
         try {
@@ -88,11 +84,11 @@ public class TaskList {
     }
 
     /**
-     * A method to create & add a deadline task
+     * A method to create & add a deadline task.
      *
-     * @param str The input command
+     * @param str The input command by the user.
      * @return A response from the bot to indicate a deadline task has been created
-     * and added to the task list
+     * and added to the task list.
      */
     public String deadlineTask(String str) {
         try {
@@ -123,11 +119,11 @@ public class TaskList {
     }
 
     /**
-     * A method to create & add an event
+     * A method to create & add an event.
      *
-     * @param str The input command
+     * @param str The input command by the user.
      * @return A response from the bot to indicate a event has been created
-     * and added to the task list
+     * and added to the task list.
      */
     public String eventsTask(String str) {
         try {
@@ -157,9 +153,9 @@ public class TaskList {
     }
 
     /**
-     * A method to delete a task
+     * A method to delete a task from the list of tasks.
      *
-     * @param str The input command
+     * @param str The input command by the user.
      * @return A response from the bot to indicate a task has been deleted
      * and added to the task list
      */
@@ -175,9 +171,10 @@ public class TaskList {
     }
 
     /**
-     * Command to find and display all genie.tasks containing keyword 
-     * @param keyword word to search for
-     * @return A string of all the results presented in a list view
+     * Command to find and display all genie.tasks containing keyword..
+     * 
+     * @param keyword word to search for.
+     * @return A string of all the results presented in a list view that contains the keyword.
      */
     public String findTask(String keyword) {
         String results = "Here are the matching genie.tasks in your list: \n";
@@ -190,7 +187,13 @@ public class TaskList {
         }
         return results;
     }
-    
+
+    /**
+     * Finds and shows all the tasks in the list of the specified priority.
+     * 
+     * @param str The priority the user wants to search.
+     * @return The list of all the tasks in the list of the specified priority.
+     */
     public String showPriority(String str) {
         Task.Priority priority;
         if (str.toUpperCase().contains("HIGH")) {

@@ -1,7 +1,7 @@
 package genie.tasks;
 
 /**
- * Task class that handles a task and methods that manipulated the task
+ * A class that represents a Task object which is a work that has to be completed.
  */
 public class Task {
     protected String description;
@@ -11,7 +11,6 @@ public class Task {
     public enum Priority {
         HIGH, MEDIUM, LOW
     }
-
 
     public Task(String description, Priority priority) {
         this.description = description;

@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
     
-    private Genie genie = new Genie();
+    private final Genie genie = new Genie();
 
     public Main() throws IOException {
     }
@@ -26,9 +26,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(genie);
+            fxmlLoader.<MainWindow>getController().setGenie(genie);
             stage.show();
-//            genie.gui.DialogBox db = new genie.gui.DialogBox(text)
         } catch (IOException e) {
             e.printStackTrace();
         }

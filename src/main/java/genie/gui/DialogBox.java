@@ -33,7 +33,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setClip(clip);
         displayPicture.setImage(img);
@@ -49,12 +48,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Returns a dialog box with the user's input and image.
+     * 
+     * @param text The text to be included in the users dialog box.
+     * @param img The user's profile image.
+     * @return A dialog box with the user's input and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialogBox = new DialogBox(text, img);
         return userDialogBox;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Returns a dialog box with Genie's input and image.
+     *
+     * @param text The text to be included in Genie's dialog box.
+     * @param img The image of Genie.
+     * @return A dialog box with the user's input and image.
+     */
+    public static DialogBox getGenieDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

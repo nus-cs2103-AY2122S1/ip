@@ -1,7 +1,7 @@
 package genie.gui;
 
-import genie.common.Message;
 import genie.Genie;
+import genie.common.Message;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,18 +29,18 @@ public class MainWindow extends AnchorPane {
 
     private Genie genie;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Aladdin.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Genie.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Message.WELCOMEMESSAGE, dukeImage)
+                DialogBox.getGenieDialog(Message.WELCOMEMESSAGE, dukeImage)
         );
     }
 
-    public void setDuke(Genie d) {
+    public void setGenie(Genie d) {
         genie = d;
     }
 
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
         
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getGenieDialog(response, dukeImage)
         );
 
         if (input.contains("bye")) {

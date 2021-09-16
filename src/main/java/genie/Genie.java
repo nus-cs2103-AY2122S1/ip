@@ -8,7 +8,8 @@ import genie.tasks.TaskList;
 import java.io.IOException;
 
 /**
- * A chat bot named Duke that is responsive to commands.
+ * A chat bot named Genie that is responsive to commands and keeps track of all the tasks that 
+ * the user has to do.
  * 
  * @author Raveen Prabhu 
  */

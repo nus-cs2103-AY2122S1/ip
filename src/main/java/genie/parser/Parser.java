@@ -5,6 +5,9 @@ import genie.exception.EmptyMessage;
 import genie.exception.GenieException;
 import genie.tasks.TaskList;
 
+/**
+ * A class that makes sense of the user's input command. 
+ */
 public class Parser {
     
     final private TaskList taskList;
@@ -62,6 +65,7 @@ public class Parser {
             else if (str.contains("help")) {
                 return Message.HELPCOMMANDS;
             } 
+            // command show priority
             else if (str.contains("show")) {
                 output = taskList.showPriority(str);
                 return output;

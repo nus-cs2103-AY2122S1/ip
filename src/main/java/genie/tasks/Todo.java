@@ -1,7 +1,7 @@
 package genie.tasks;
 
 /**
- * A To-do class that is a subclass of Tasks. 
+ * A child class of a task that represents a to do task that need to be done.
  */
 public class Todo extends Task {
     public Todo(String description, Priority priority) {

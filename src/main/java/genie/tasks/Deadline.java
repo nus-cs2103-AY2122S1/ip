@@ -1,8 +1,11 @@
 package genie.tasks;
 
+/**
+ * A child class of a task that represents a task that need to be done by a specific date.
+ */
 public class Deadline extends Task {
 
-    protected String by;
+    private String by;
 
     public Deadline(String description, String by, Priority priority) {
         super(description, priority);

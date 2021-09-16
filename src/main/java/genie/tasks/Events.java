@@ -1,7 +1,10 @@
 package genie.tasks;
 
+/**
+ * A child class of a task that represents a task that need to be done on a specific date or time.
+ */
 public class Events extends Task {
-    protected String at;
+    private String at;
 
     public Events(String description, String at, Priority priority) {
         super(description, priority);

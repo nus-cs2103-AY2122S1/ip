@@ -13,7 +13,15 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+
+/**
+ * A class that deals with loading the tasks saved on the hard disk, 
+ * followed by saving the tasks in the Genie bot back into the file after
+ * the programme ends.
+ */
+
 public class Storage {
+    
     private static final String DIRECTORY = "src/main/data";
     private static final String FILENAME = "duke.txt";
     private static final String PATH = DIRECTORY + "/" + FILENAME;
@@ -37,7 +45,13 @@ public class Storage {
         }
     }
 
-    public static String[] parseTaskDetails(Scanner lineScanner) {
+    /**
+     * Breaks down the user input into smaller portions and stores the input into an Array.
+     * 
+     * @param lineScanner The Scanner object that will be reading the user input at that line. 
+     * @return The input broken down and put in the harddrive, making it easier to understand.
+     */
+    public static String[] breakdownUserInput(Scanner lineScanner) {
         int size = 0;
         String[] taskDetails = new String[4];
         while (lineScanner.hasNext()) {
@@ -55,7 +69,6 @@ public class Storage {
      * @return The TaskList with all the genie.tasks present in the file.
      * @throws IOException Handles any errors that can occur when interacting with the file.
      */
-
     public static TaskList readFile() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         checkForFile(Storage.PATH);
@@ -67,75 +80,72 @@ public class Storage {
         fileScanner.close();
         return new TaskList(tasks);
     }
-    
-    public static Task readEachTask(Scanner fileScanner) throws IOException {
+
+    /**
+     * Reads each individual line, which are all single tasks, and creates
+     * new tasks by scanning for the necessary parameters required by the tasks.
+     * 
+     * @param fileScanner Scanner object required to scan the file.
+     * @return A Task object with a description, priority level and date for deadlines & events.
+     */
+    public static Task readEachTask(Scanner fileScanner) {
         Scanner lineScanner = new Scanner(fileScanner.nextLine());
         lineScanner.useDelimiter(Pattern.compile("(\\n)| - "));
-
         String taskCode = lineScanner.next();
-
-        String[] taskDetails = parseTaskDetails(lineScanner);
+        String[] taskDetails = breakdownUserInput(lineScanner);
         boolean isMarkedDone = taskDetails[0].equals("1");
         String description = taskDetails[1];
         String p = taskDetails[2];
         String date = taskDetails.length > 3 ? taskDetails[3] : null;
+        Task.Priority priority;
         
-            Task.Priority priority;
-
-            switch(taskCode) {
-            case "T":
-                p.toUpperCase();
-                if (p.contains("HIGH")) {
-                    priority = Task.Priority.HIGH;
-                } else if (p.contains("MEDIUM")) {
-                    priority = Task.Priority.MEDIUM;
-                } else {
-                    priority = Task.Priority.LOW;
-                }
-                Task task = new Todo(description, priority);
-                if (isMarkedDone) {
-                    task.taskDone();
-                }
-                return task;
-            case "D":
-                p.toUpperCase();
-                if (p.contains("HIGH")) {
-                    priority = Task.Priority.HIGH;
-//                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("MEDIUM")) {
-                    priority = Task.Priority.MEDIUM;
-//                    newDesc = desc.substring(0, descLen - 6);
-                } else {
-                    priority = Task.Priority.LOW;
-//                    newDesc = desc.substring(0, descLen);
-                }
-                task = new Deadline(description, date, priority);
-                if (isMarkedDone) {
-                    task.taskDone();
-                }
-                return task;
-            case "E":
-                p.toUpperCase();
-                if (p.contains("HIGH")) {
-                    priority = Task.Priority.HIGH;
-//                    newDesc = desc.substring(0, descLen - 4);
-                } else if (p.contains("MEDIUM")) {
-                    priority = Task.Priority.MEDIUM;
-//                    newDesc = desc.substring(0, descLen - 6);
-                } else {
-                    priority = Task.Priority.LOW;
-//                    newDesc = desc.substring(0, descLen);
-                }
-                task = new Events(description, date, priority);
-                if (isMarkedDone) {
-                    task.taskDone();
-                }
-                return task;
+        switch(taskCode) {
+        case "T":
+            p.toUpperCase();
+            if (p.contains("HIGH")) {
+                priority = Task.Priority.HIGH;
+            } else if (p.contains("MEDIUM")) {
+                priority = Task.Priority.MEDIUM;
+            } else {
+                priority = Task.Priority.LOW;
             }
-        
-        return new Task("", Task.Priority.HIGH);
+            Task task = new Todo(description, priority);
+            if (isMarkedDone) {
+                task.taskDone();
+            }
+            return task;
+        case "D":
+            p.toUpperCase();
+            if (p.contains("HIGH")) {
+                priority = Task.Priority.HIGH;
+            } else if (p.contains("MEDIUM")) {
+                priority = Task.Priority.MEDIUM;
+            } else {
+                priority = Task.Priority.LOW;
+            }
+            task = new Deadline(description, date, priority);
+            if (isMarkedDone) {
+                task.taskDone();
+            }
+            return task;
+        case "E":
+            p.toUpperCase();
+            if (p.contains("HIGH")) {
+                priority = Task.Priority.HIGH;
+            } else if (p.contains("MEDIUM")) {
+                priority = Task.Priority.MEDIUM;
+            } else {
+                priority = Task.Priority.LOW;
+            }
+            task = new Events(description, date, priority);
+            if (isMarkedDone) {
+                task.taskDone();
+            }
+            return task;
+        default:
+            return new Todo(description, Task.Priority.LOW);
+        }
     }
-
 
     /**
      * Retrieve all the existing genie.tasks in TaskList and write it to the file. 
