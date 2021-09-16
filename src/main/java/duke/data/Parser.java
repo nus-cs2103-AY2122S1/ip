@@ -138,9 +138,9 @@ public class Parser {
             }
             userInputWithoutKeyword = userInput.replace(keyword, "");
             String[] updatedDeadline = userInputWithoutKeyword.split(" " + specialPhrase + " ");
-            //Returns error if user enters less/more than one special phrase
+            //Checks if user follows the format
             if (updatedDeadline.length != 2) {
-                throw new DukeException("I'm sorry, please have ONE " + specialPhrase + " in your description!");
+                throw new DukeException("Please follow this format: deadline TASK /by TASK_DATE_TIME");
             }
             String deadlineDescription = updatedDeadline[0];
             String deadlineDetail = updatedDeadline[1];
@@ -154,9 +154,9 @@ public class Parser {
             }
             userInputWithoutKeyword = userInput.replace(keyword, "");
             String[] updatedEvent = userInputWithoutKeyword.split(" " + specialPhrase + " ");
-            //Returns error if user enters less/more than one special phrase
+            //Checks if user follows the format
             if (updatedEvent.length != 2) {
-                throw new DukeException("I'm sorry, please have ONE " + specialPhrase + " in your description!");
+                throw new DukeException("Please follow this format: event TASK /at TASK_LOCATION");
             } else {
                 String eventDescription = updatedEvent[0];
                 String eventDetail = updatedEvent[1];
@@ -321,9 +321,9 @@ public class Parser {
             return new AddContactCommand(new Contact(userInputWithoutKeyword, " "));
         }
         String[] updatedContact = userInputWithoutKeyword.split(" " + specialPhrase + " ");
-        //Returns error if user enters less/more than one special phrase
+        //Checks if user follows the format 
         if (updatedContact.length != 2) {
-            throw new DukeException("I'm sorry, please have ONE " + specialPhrase + " in your description!");
+            throw new DukeException("Please follow this format: contact NAME (/about NAME_DESCRIPTION)");
         }
         String contactName = updatedContact[0];
         String contactDetail = updatedContact[1];
