@@ -1,23 +1,23 @@
 # User Guide
 ## Features
-1. ### [Add tasks](#add-tasks)
+1. [**Add tasks**](#add-tasks)
    - [`todo`](#todo)
    - [`deadline`](#deadline)
    - [`event`](#event)
-2. ### [View tasks](#view-tasks)
+2. [**View tasks**](#view-tasks)
    - [`list`](#list)
-3. ### [Update tasks](#update-tasks)
+3. [**Update tasks**](#update-tasks)
    - [`done`](#done)
    - [`delete`](#delete)
-4. ### [Search tasks](#search-tasks)
+4. [**Search tasks**](#search-tasks)
    - [`find`](#find)
-5. ### [Additional Features](#additional-features)
+5. [**Additional Features**](#additional-features)
    - [`help`](#help)
    - [`bye`](#bye)
    - [save](#save)
-### Download here
-
-<br></br>
+### Download here   
+<br />
+  
 ## Add Tasks
 
 Adds a task of type `todo`/ `deadline`/ `event` to your list of tasks.
@@ -41,7 +41,8 @@ Add a todo task that is not time-sensitive to your list of tasks.
 ![Screenshot 2021-09-16 at 5 15 17 PM](https://user-images.githubusercontent.com/76540550/133602205-c19cc254-7348-4e2a-aa59-3aed2acf5104.png)
 
 
-<br></br>
+<br />
+
 ### `deadline`
 Add a deadline task with a specified date and time your list of tasks.
 
@@ -59,7 +60,8 @@ Add a deadline task with a specified date and time your list of tasks.
 
 ![Screenshot 2021-09-16 at 5 37 26 PM](https://user-images.githubusercontent.com/76540550/133602163-86e99996-2c38-4a73-9905-31fe3ffe1c8f.png)
 
-<br></br>
+<br />
+
 ### `event`
 Add an event with a specified date and time to your list of tasks.
 
@@ -77,7 +79,8 @@ Add an event with a specified date and time to your list of tasks.
 
 ![Screenshot 2021-09-16 at 5 42 44 PM](https://user-images.githubusercontent.com/76540550/133602124-1bbc3501-806d-4240-9bd9-ee72f135d32f.png)
 
-<br></br>
+<br />
+
 ## View Tasks
 
 ### `list`
@@ -89,7 +92,8 @@ Shows all your current tasks with the completion status and task type.
 
 ![Screenshot 2021-09-16 at 6 07 02 PM](https://user-images.githubusercontent.com/76540550/133601901-5028d4ba-b37e-40f7-96c7-373c1fb6c542.png)
 
-<br></br>
+<br />
+
 ## Update Tasks
 
 ### `done`
@@ -109,7 +113,8 @@ Complete a task in your list of tasks.
 ![Screenshot 2021-09-16 at 6 05 20 PM](https://user-images.githubusercontent.com/76540550/133601954-40b78698-65c8-43c3-ac9c-9032467316d8.png)
 
 
-<br></br>
+<br />
+
 ### `delete`
 Remove a task from your list of tasks.
 
@@ -127,7 +132,8 @@ Remove a task from your list of tasks.
 
 ![Screenshot 2021-09-16 at 6 07 02 PM](https://user-images.githubusercontent.com/76540550/133601901-5028d4ba-b37e-40f7-96c7-373c1fb6c542.png)
 
-<br></br>
+<br />
+
 ## Search Tasks
 ### `find`
 Find relevant tasks with keyword.
@@ -146,7 +152,8 @@ Find relevant tasks with keyword.
 
 ![Screenshot 2021-09-16 at 6 11 45 PM](https://user-images.githubusercontent.com/76540550/133601607-c24acd3d-c661-4bd7-8bbf-43a95f38f149.png)
 
-<br></br>
+<br />
+
 ## Additional Features
 ### `help`
 List all  supported commands with their respective formats.
@@ -158,7 +165,5 @@ Exits the application.
 
 **Format**: `bye`
 
-### save
-Saves and loads your current tasks from your local file`data/list.txt` whenever you use the application.
-
-
+### save 
+Saves and loads your current tasks from your local file`data/list.txt` whenever you use the application. 
