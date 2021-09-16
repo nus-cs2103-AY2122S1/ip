@@ -76,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * Save tasks from given task list into the storage file.
+     * Saves tasks from given task list into the storage file.
      *
      * @param taskManager List of tasks to be stored.
      * @throws IOException If there is error writing to file.
