@@ -24,6 +24,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setPrimaryStage(stage);
             stage.show();
+            stage.setTitle("Tabby");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -29,16 +29,32 @@ public abstract class Command {
     public abstract boolean isExit();
 
     /**
-     * Append multiple strings into one string separated by newline character.
+     * Appends multiple strings into one string separated by newline character.
+     *
+     * @param outputs String outputs
+     * @return A single string output
      */
     protected String formatOutput(String... outputs) {
         return String.join("\n", outputs);
     }
 
     /**
-     * Append multiple strings in an array into one string separated by newline character.
+     * Appends multiple strings in an array into one string separated by newline character.
+     *
+     * @param outputs String outputs.
+     * @return A single string output.
      */
     protected String formatOutput(ArrayList<String> outputs) {
         return String.join("\n", outputs);
+    }
+
+    /**
+     * Wraps the output string in triple back ticks to indicate code block.
+     *
+     * @param output String output.
+     * @return A string output in code black.
+     */
+    protected String formatCodeBlockOutput(String output) {
+        return "```\n" + output + "\n```";
     }
 }

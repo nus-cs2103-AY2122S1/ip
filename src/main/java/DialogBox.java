@@ -18,6 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -36,13 +37,16 @@ public class DialogBox extends HBox {
     @FXML
     private Button copyButton;
 
+    private final String codeBlockStartMarker = "```\n";
+    private final String codeBlockEndMarker = "\n```";
+
     /**
      * Constructs a dialog box.
      *
      * @param text Text to show in dialog box.
      * @param img  Image to show in dialog box.
      */
-    public DialogBox(String text, Image img, Color color) {
+    public DialogBox(String text, Image img, Color dialogColor) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -52,12 +56,33 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        initImage(img);
+        initDialog(text, dialogColor);
+        hideActions();
+    }
+
+    private void initImage(Image img) {
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(40, 40, 40));
-        textFlow.setBackground(new Background(new BackgroundFill(color, new CornerRadii(15), null)));
+    }
 
-        hideActions();
+    private void initDialog(String text, Color dialogColor) {
+        textFlow.setBackground(new Background(new BackgroundFill(dialogColor, new CornerRadii(15), null)));
+        dialog.setText(text);
+
+        if (isCodeBlock(text)) {
+            handleCodeBlock(text);
+        }
+    }
+
+    private boolean isCodeBlock(String text) {
+        return text.startsWith(codeBlockStartMarker) && text.endsWith(codeBlockEndMarker);
+    }
+
+    private void handleCodeBlock(String text) {
+        String textContent = text.substring(codeBlockStartMarker.length(), text.length() - codeBlockEndMarker.length());
+        dialog.setText(textContent);
+        dialog.setFont(Font.font("Consolas", 14));
     }
 
     /**

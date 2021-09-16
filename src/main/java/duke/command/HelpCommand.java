@@ -35,14 +35,15 @@ public class HelpCommand extends Command {
             // event <TASK_DESCRIPTION> /at <TIME> | add an event task which occurs at some time
             commandList = Files.lines(filePath).map(line -> {
                 String[] command = line.split(" \\| ", 2);
-                String res = String.format("%-50s\t%-50s", command[0], command[1]);
+                String res = String.format("%-40s\t%-40s", command[0], command[1]);
                 System.out.println(res);
                 return res;
             }).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
             throw new DukeException("Could not retrieve command list!");
         }
-        return formatOutput("Commands:", formatOutput(commandList));
+        // help commands should appear as monospace font
+        return formatCodeBlockOutput(formatOutput("Commands:", formatOutput(commandList)));
     }
 
     /**
