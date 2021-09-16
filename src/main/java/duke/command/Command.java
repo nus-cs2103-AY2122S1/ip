@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Objects;
+
 /**
  * Blueprint for a user command. Consists of a keyword and the rest of the command.
  */
@@ -34,5 +36,22 @@ public class Command {
      */
     public String getRestOfCommand() {
         return this.restOfCommand;
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this Command instance.
+     * @param o The reference object with which to compare.
+     * @return True if the obj is an instance of None; false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Command command = (Command) o;
+        return keyword == command.keyword && Objects.equals(restOfCommand, command.restOfCommand);
     }
 }
