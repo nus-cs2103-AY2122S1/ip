@@ -129,6 +129,8 @@ public class Duke extends Application {
             return "You keyed in the command wrongly";
         } catch (IndexOutOfBoundsException e) {
             return "Sorry but the number you keyed in is out of range";
+        } catch (NumberFormatException e) {
+            return "You did not key in any number!";
         }
     }
 }
