@@ -116,19 +116,18 @@ public class Ui {
      */
     public String helpMessage() {
         return ("How to use Duke:\n\n"
-        + "1. TODO: Enter todo and your task description after the todo\n"
-        + "\t(eg: todo read book)\n"
-        + "2. DEADLINE: Enter deadline, your task description after, and the date of the deadline after /by command\n"
-        + "\t(eg: deadline return book /by 12-01-2021 12:00)\n"
-        + "3. EVENT: Enter event, your task description after, and the date of the event after /at command\n"
-        + "\t(eg: event attend team meeting /at 12-01-2021 12:00)\n"
-        + "4. LIST: Enter list to list out all tasks\n"
-        + "5. DONE: Enter done and the task number after to mark a task as done\n"
-        + "6. FIND: Enter find and a specific key word to find tasks that match the keyword\n"
-        + "7. DELETE: Enter delete and a the task number to delete task from the list\n"
-        + "\nNOTE: Dates should be entered in dd-MM-yyyy HH:mm format\n"
-        + "\nIt's wednesday my dudes\nAHHHHHHHHHHHHHHHHHHHH\n"
-        );
+            + "1. TODO: Enter todo and your task description after the todo\n"
+            + "\t(eg: todo read book)\n"
+            + "2. DEADLINE: Enter deadline, your task description after, and the date of the deadline after /by command"
+            + "\n\t(eg: deadline return book /by 12-01-2021 12:00)\n"
+            + "3. EVENT: Enter event, your task description after, and the date of the event after /at command\n"
+            + "\t(eg: event attend team meeting /at 12-01-2021 12:00)\n"
+            + "4. LIST: Enter list to list out all tasks\n"
+            + "5. DONE: Enter done and the task number after to mark a task as done\n"
+            + "6. FIND: Enter find and a specific key word to find tasks that match the keyword\n"
+            + "7. DELETE: Enter delete and a the task number to delete task from the list\n"
+            + "\nNOTE: Dates should be entered in dd-MM-yyyy HH:mm format\n"
+            + "\nIt's wednesday my dudes\nAHHHHHHHHHHHHHHHHHHHH\n");
     }
 
     /**
