@@ -12,9 +12,7 @@ import java.util.ArrayList;
  */
 
 public class Lebron {
-    public static final String FILE_PATH = "./data/duke.txt";
-    private static final String HORIZONTAL_LINE = "    ____________________________" +
-            "________________________________\n";
+    public static final String FILE_PATH = "./build/libs/data/lebron.txt";
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
@@ -71,8 +69,8 @@ public class Lebron {
     /**
      * Runs the bot.
      *
-     * @param text the input text
-     * @return the reply received from the bot given an input
+     * @param text the input text.
+     * @return the reply received from the bot given an input.
      */
     public String run(String text) {
         Parser parser = new Parser();
@@ -83,91 +81,28 @@ public class Lebron {
             Command command = Command.fromString(commandWord);
             switch (command) {
             case BYE:
-                reply = ui.replyExit();
+                reply = this.commandBye();
                 break;
             case LIST:
-                reply = ui.replyDisplay(taskList);
+                reply = this.commandList();
                 break;
             case DONE:
-                if (splitWords.length < 2 || splitWords[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please specify which task you wish "
-                            + "to complete.");
-                }
-                assert splitWords.length == 2 : "There should be 2 items to specify which task is done.";
-                int pos = Integer.parseInt(splitWords[1]);
-                reply = taskList.markDone(pos - 1);
-                storage.saveToFile(taskList.getLst());
+                reply = this.commandDone(splitWords);
                 break;
             case TODO:
-                if (splitWords.length < 2 || splitWords[1].equals("")) {
-                    throw new LebronException("    :( OOPS! The description of a ToDo "
-                            + "cannot be empty.");
-                }
-                assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
-                reply = taskList.add(new ToDo(splitWords[1]));
-                storage.saveToFile(taskList.getLst());
+                reply = this.commandToDo(splitWords);
                 break;
             case DEADLINE:
-                if (splitWords.length < 2 || splitWords[1].equals("")) {
-                    throw new LebronException("    :( OOPS! The description of a Deadline " +
-                            "cannot be empty.");
-                }
-                assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
-                String[] splitBy = splitWords[1].split("/by ", 2);
-                if (splitBy.length < 2 || splitBy[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please check that the '/by' keyword " +
-                            "is used and that a due date and time is given.");
-                }
-                assert splitBy.length == 2 : "There should be a description and a datetime.";
-                String[] dateTimeArrDeadline = splitBy[1].split(" ", 2);
-                if (dateTimeArrDeadline.length < 2 || dateTimeArrDeadline[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please check that your date and time is " +
-                            "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
-                }
-                assert dateTimeArrDeadline.length == 2 : "There should be a date and time.";
-                reply = taskList.add(new Deadline(splitBy[0], dateTimeArrDeadline[0]
-                        , dateTimeArrDeadline[1]));
-                storage.saveToFile(taskList.getLst());
+                reply = commandDeadline(splitWords);
                 break;
             case EVENT:
-                if (splitWords.length < 2 || splitWords[1].equals("")) {
-                    throw new LebronException("    :( OOPS! The description of an Event " +
-                            "cannot be empty.");
-                }
-                assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
-                String[] splitAt = splitWords[1].split("/at ", 2);
-                if (splitAt.length < 2 || splitAt[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please check that the '/at' keyword " +
-                            "is used and that a due date is given.");
-                }
-                assert splitAt.length == 2 : "There should be a description and a datetime.";
-                String[] dateTimeArrEvent = splitAt[1].split(" ", 2);
-                if (dateTimeArrEvent.length < 2 || dateTimeArrEvent[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please check that your date and time is " +
-                            "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
-                }
-                assert dateTimeArrEvent.length == 2 : "There should be a date and time.";
-                reply = taskList.add(new Events(splitAt[0], dateTimeArrEvent[0], dateTimeArrEvent[1]));
-                storage.saveToFile(taskList.getLst());
-
+                reply = this.commandEvent(splitWords);
                 break;
             case DELETE:
-                if (splitWords.length < 2 || splitWords[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please specify which task you wish "
-                            + "to delete.");
-                }
-                assert splitWords.length == 2 : "There should be 2 items to specify which task to delete.";
-                int pos2 = Integer.parseInt(splitWords[1]);
-                reply = taskList.delete(pos2 - 1);
-                storage.saveToFile(taskList.getLst());
+                reply = this.commandDelete(splitWords);
                 break;
             case FIND:
-                if (splitWords.length < 2 || splitWords[1].equals("")) {
-                    throw new LebronException("    :( OOPS! Please specify some words to search for.");
-                }
-                assert splitWords.length == 2 : "There should be 2 items to specify a string to search for.";
-                String keyword = splitWords[1];
-                reply = ui.replyFind(taskList, keyword);
+                reply = this.commandFind(splitWords);
                 break;
             case UNDO:
                 taskList.undo();
@@ -184,5 +119,156 @@ public class Lebron {
         } catch (LebronException e) {
             return ui.printException(e.getMessage());
         }
+    }
+
+    /**
+     * Handles the case where commandWord is Bye.
+     *
+     * @return the response from the bot
+     */
+    private String commandBye() {
+        return ui.replyExit();
+    }
+
+    /**
+     * Handles the case where commandWord is List.
+     *
+     * @return the response from the bot
+     */
+    private String commandList() {
+        return ui.replyDisplay(taskList);
+    }
+
+    /**
+     * Handles the case where commandWord is Done.
+     *
+     * @param splitWords the parsed user input.
+     * @return the response from the bot.
+     * @throws LebronException if the input is invalid.
+     */
+    private String commandDone(String[] splitWords) throws LebronException {
+        if (splitWords.length < 2 || splitWords[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please specify which task you wish "
+                    + "to complete.");
+        }
+        assert splitWords.length == 2 : "There should be 2 items to specify which task is done.";
+        try {
+            int pos = Integer.parseInt(splitWords[1]);
+            storage.saveToFile(taskList.getLst());
+            return taskList.markDone(pos - 1);
+        }
+        catch (NumberFormatException e) {
+            throw new LebronException("    :( OOPS! Make sure you input a valid number!");
+        }
+    }
+
+    /**
+     * Handles the case where commandWord is ToDo.
+     *
+     * @param splitWords the parsed user input.
+     * @return the response from the bot.
+     * @throws LebronException if the input is invalid.
+     */
+    private String commandToDo(String[] splitWords) throws LebronException {
+        if (splitWords.length < 2 || splitWords[1].equals("")) {
+            throw new LebronException("    :( OOPS! The description of a ToDo "
+                    + "cannot be empty.");
+        }
+        assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
+        storage.saveToFile(taskList.getLst());
+        return taskList.add(new ToDo(splitWords[1]));
+    }
+
+    /**
+     * Handles the case where commandWord is Deadline.
+     *
+     * @param splitWords the parsed user input.
+     * @return the response from the bot.
+     * @throws LebronException if the input is invalid.
+     */
+    private String commandDeadline(String[] splitWords) throws LebronException {
+        if (splitWords.length < 2 || splitWords[1].equals("")) {
+            throw new LebronException("    :( OOPS! The description of a Deadline " +
+                    "cannot be empty.");
+        }
+        assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
+        String[] splitBy = splitWords[1].split("/by ", 2);
+        if (splitBy.length < 2 || splitBy[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please check that the '/by' keyword " +
+                    "is used and that a due date and time is given.");
+        }
+        assert splitBy.length == 2 : "There should be a description and a datetime.";
+        String[] dateTimeArrDeadline = splitBy[1].split(" ", 2);
+        if (dateTimeArrDeadline.length < 2 || dateTimeArrDeadline[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please check that your date and time is " +
+                    "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
+        }
+        assert dateTimeArrDeadline.length == 2 : "There should be a date and time.";
+        storage.saveToFile(taskList.getLst());
+        return taskList.add(new Deadline(splitBy[0], dateTimeArrDeadline[0],
+                dateTimeArrDeadline[1]));
+    }
+
+    /**
+     * Handles the case where commandWord is Event.
+     *
+     * @param splitWords the parsed user input.
+     * @return the response from the bot.
+     * @throws LebronException if the input is invalid.
+     */
+    private String commandEvent(String[] splitWords) throws LebronException {
+        if (splitWords.length < 2 || splitWords[1].equals("")) {
+            throw new LebronException("    :( OOPS! The description of an Event " +
+                    "cannot be empty.");
+        }
+        assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
+        String[] splitAt = splitWords[1].split("/at ", 2);
+        if (splitAt.length < 2 || splitAt[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please check that the '/at' keyword " +
+                    "is used and that a due date is given.");
+        }
+        assert splitAt.length == 2 : "There should be a description and a datetime.";
+        String[] dateTimeArrEvent = splitAt[1].split(" ", 2);
+        if (dateTimeArrEvent.length < 2 || dateTimeArrEvent[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please check that your date and time is " +
+                    "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
+        }
+        assert dateTimeArrEvent.length == 2 : "There should be a date and time.";
+        storage.saveToFile(taskList.getLst());
+        return taskList.add(new Events(splitAt[0], dateTimeArrEvent[0], dateTimeArrEvent[1]));
+    }
+
+    /**
+     * Handles the case where commandWord is Delete.
+     *
+     * @param splitWords the parsed user input.
+     * @return the response from the bot.
+     * @throws LebronException if the input is invalid.
+     */
+    private String commandDelete(String[] splitWords) throws LebronException {
+        if (splitWords.length < 2 || splitWords[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please specify which task you wish "
+                    + "to delete.");
+        }
+        assert splitWords.length == 2 : "There should be 2 items to specify which task to delete.";
+        int pos2 = Integer.parseInt(splitWords[1]);
+        storage.saveToFile(taskList.getLst());
+        return taskList.delete(pos2 - 1);
+    }
+
+    /**
+     * Handles the case where commandWord is Find.
+     *
+     * @param splitWords the parsed user input.
+     * @return the response from the bot.
+     * @throws LebronException if the input is invalid.
+     */
+    private String commandFind(String[] splitWords) throws LebronException {
+        if (splitWords.length < 2 || splitWords[1].equals("")) {
+            throw new LebronException("    :( OOPS! Please specify some words to search for.");
+        }
+        assert splitWords.length == 2 : "There should be 2 items to specify a string to search for.";
+        String keyword = splitWords[1];
+        return ui.replyFind(taskList, keyword);
     }
 }

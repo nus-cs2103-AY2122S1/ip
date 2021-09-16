@@ -37,7 +37,7 @@ public class Ui {
     /**
      * Responds to the add event.
      *
-     * @param lst the TaskList that the user wants to add the task to
+     * @param lst the TaskList that the user wants to add the task to.
      * @return the desired response.
      */
     public String replyAdd(ArrayList<Task> lst, Task task) {
@@ -58,7 +58,7 @@ public class Ui {
     /**
      * Responds to the display list event when the user says list.
      *
-     * @param lst The TaskList to be displayed
+     * @param lst The TaskList to be displayed.
      * @return the desired response.
      */
     public String replyDisplay(TaskList lst) {
@@ -74,7 +74,7 @@ public class Ui {
     /**
      * Responds to the markDone event.
      *
-     * @param task The task that is marked done
+     * @param task The task that is marked done.
      * @return the desired response.
      */
     public String replyMarkDone(Task task) {
@@ -86,8 +86,8 @@ public class Ui {
     /**
      * Responds to the delete event.
      *
-     * @param task the task in the list to delete
-     * @param size the size of the TaskList
+     * @param task the task in the list to delete.
+     * @param size the size of the TaskList.
      * @return the desired response.
      */
     public String replyDelete(Task task, int size) {
@@ -100,8 +100,8 @@ public class Ui {
     /**
      * Responds to the find event.
      *
-     * @param lst the current TaskList
-     * @param keyword the keyword
+     * @param lst the current TaskList.
+     * @param keyword the keyword.
      * @return the desired response.
      */
     public String replyFind(TaskList lst, String keyword) {
@@ -120,14 +120,15 @@ public class Ui {
     /**
      * Responds to the undo event.
      *
-     * @return a reply
+     * @return a reply.
      */
     public String replyUndo() {
-        return "I have removed your last action.";
+        return "    I have removed your last action.";
     }
 
     /**
      * Prints out the given message.
+     *
      * @param message the given message.
      * @return the error message.
      */

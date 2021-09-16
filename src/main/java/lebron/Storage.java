@@ -19,8 +19,6 @@ import lebron.task.ToDo;
  * @author Nigel Tan
  */
 public class Storage {
-    private static final String HORIZONTAL_LINE = "    ________________________________________" +
-            "____________________\n";
     private File file;
     private final String filePath;
 
@@ -48,8 +46,8 @@ public class Storage {
     /**
      * Loads the file contents and saves it in an arraylist.
      *
-     * @param filePath the file path
-     * @return an ArrayList containing tasks
+     * @param filePath the file path.
+     * @return an ArrayList containing tasks.
      */
     public ArrayList<Task> loadFileContents(String filePath) {
         try {
@@ -61,41 +59,17 @@ public class Storage {
                 String line = s.nextLine();
                 String[] splitWords = line.split(" \\| ", 4);
                 String taskName = splitWords[0];
-                String isDone = splitWords[1];
+                String isDoneValue = splitWords[1];
                 Task task;
                 switch (taskName) {
                 case "T":
-                    task = new ToDo(splitWords[2]);
-                    if (isDone.equals("1")) {
-                        task.markAsDone();
-                    }
-                    taskList.add(task);
+                    this.handleCaseToDo(splitWords, isDoneValue, taskList);
                     break;
                 case "D":
-                    try {
-                        String deadline = splitWords[3];
-                        String[] dateTimeDeadline = deadline.split(" ", 2);
-                        task = new Deadline(splitWords[2], dateTimeDeadline[0], dateTimeDeadline[1]);
-                        if (isDone.equals("1")) {
-                            task.markAsDone();
-                        }
-                        taskList.add(task);
-                    } catch (LebronException e) {
-                        System.err.println(e);
-                    }
+                    this.handleCaseDeadline(splitWords, isDoneValue, taskList);
                     break;
                 case "E":
-                    try {
-                        String at = splitWords[3];
-                        String[] dateTimeEvent = at.split(" ", 2);
-                        task = new Events(splitWords[2], dateTimeEvent[0], dateTimeEvent[1]);
-                        if (isDone.equals("1")) {
-                            task.markAsDone();
-                        }
-                        taskList.add(task);
-                    } catch (LebronException e) {
-                        System.err.println(e);
-                    }
+                    this.handleCaseEvent(splitWords, isDoneValue, taskList);
                     break;
                 default:
                     System.out.println(":( OOPS! There is a task that I don't recognise.\n");
@@ -114,7 +88,7 @@ public class Storage {
     /**
      * Saves the current list of tasks into the specified file.
      *
-     * @param taskList the list of tasks
+     * @param taskList the list of tasks.
      */
     public void saveToFile(ArrayList<Task> taskList) {
         try {
@@ -129,6 +103,63 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Something went wrong when saving file contents "
                     + e.getMessage());
+        }
+    }
+
+    /**
+     * Handles the case where the task is a ToDo.
+     *
+     * @param splitWords the parsed input from text file.
+     * @param isDoneValue "1" if task is done, "0" if task is not done.
+     * @param taskList the tasklist.
+     */
+    private void handleCaseToDo(String[] splitWords, String isDoneValue, ArrayList<Task> taskList) {
+        Task task = new ToDo(splitWords[2]);
+        if (isDoneValue.equals("1")) {
+            task.markAsDone();
+        }
+        taskList.add(task);
+    }
+
+    /**
+     * Handles the case where the task is a Deadline.
+     *
+     * @param splitWords the parsed input from text file.
+     * @param isDoneValue "1" if task is done, "0" if task is not done.
+     * @param taskList the tasklist.
+     */
+    private void handleCaseDeadline(String[] splitWords, String isDoneValue, ArrayList<Task> taskList) {
+        try {
+            String deadline = splitWords[3];
+            String[] dateTimeDeadline = deadline.split(" ", 2);
+            Task task = new Deadline(splitWords[2], dateTimeDeadline[0], dateTimeDeadline[1]);
+            if (isDoneValue.equals("1")) {
+                task.markAsDone();
+            }
+            taskList.add(task);
+        } catch (LebronException e) {
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * Handles the case where the task is a Event.
+     *
+     * @param splitWords the parsed input from text file.
+     * @param isDoneValue "1" if task is done, "0" if task is not done.
+     * @param taskList the tasklist.
+     */
+    private void handleCaseEvent(String[] splitWords, String isDoneValue, ArrayList<Task> taskList) {
+        try {
+            String at = splitWords[3];
+            String[] dateTimeEvent = at.split(" ", 2);
+            Task task = new Events(splitWords[2], dateTimeEvent[0], dateTimeEvent[1]);
+            if (isDoneValue.equals("1")) {
+                task.markAsDone();
+            }
+            taskList.add(task);
+        } catch (LebronException e) {
+            System.err.println(e);
         }
     }
 }
