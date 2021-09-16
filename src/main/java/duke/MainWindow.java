@@ -34,8 +34,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Show welcome message
-        String welcomeMessage = "Hello! I'm Duke, your personal assistant. \nWhat can I do for you?";
-        displayDialogs(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
+        String welcomeMessage = Ui.getWelcomeMessage();
+        displayDukeDialog(welcomeMessage);
     }
 
     public void setDuke(Duke d) {
@@ -58,5 +58,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void displayDialogs(DialogBox ... dialogs) {
         dialogContainer.getChildren().addAll(dialogs);
+    }
+
+    /**
+     * Prints a given message to the GUI using Duke's dialog box.
+     *
+     * @param message The message to display.
+     */
+    public void displayDukeDialog(String message) {
+        displayDialogs(DialogBox.getDukeDialog(message, dukeImage));
     }
 }

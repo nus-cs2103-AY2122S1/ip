@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates a deadline to meet, which can be entered into the to-do-list.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Constructor for a deadline task.

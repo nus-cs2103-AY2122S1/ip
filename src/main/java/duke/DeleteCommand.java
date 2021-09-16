@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Encapsulates a command by the user to delete a task from Duke's to-do-list.
  */
@@ -35,7 +37,11 @@ public class DeleteCommand extends Command {
         // Delete task from list of tasks, and persist to text file
         Task t = tasks.delete(index);
         assert !t.equals(null);
-        storage.save(tasks);
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            ui.showSavingError(e);
+        }
 
         // Return a description of the execution result
         return "Noted. I've removed this task: \n"

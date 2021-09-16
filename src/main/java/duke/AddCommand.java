@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Encapsulates a command by the user to add a task into Duke's to-do-list.
  */
@@ -58,7 +60,11 @@ public class AddCommand extends Command {
         // Add task to list in Duke, and persist to text file
         assert !t.equals(null);
         tasks.add(t);
-        storage.append(t.toStringForFile() + System.lineSeparator());
+        try {
+            storage.append(t.toStringForFile() + System.lineSeparator());
+        } catch (IOException e) {
+            ui.showSavingError(e);
+        }
 
         // Return a description of the execution result
         return "Got it. I've added this task: \n"

@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -41,7 +42,11 @@ public class TagCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Tag task, and persist to text file
         Task t = tasks.tag(this.index, this.tag);
-        storage.save(tasks);
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            ui.showSavingError(e);
+        }
 
         // Return a description of the execution result
         return "Got it. I've tagged this task: \n"

@@ -20,7 +20,8 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showLoadingError();
+            this.tasks = new TaskList();
         }
     }
 

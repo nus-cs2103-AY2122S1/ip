@@ -79,14 +79,10 @@ public class Storage {
      *
      * @param tasks The list of tasks to save.
      */
-    public void save(TaskList tasks) {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(tasks.toStringForFile());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+    public void save(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(tasks.toStringForFile());
+        fw.close();
     }
 
     /**
@@ -95,13 +91,9 @@ public class Storage {
      *
      * @param textToAppend The text to append to the end of the text file.
      */
-    public void append(String textToAppend) {
-        try {
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write(textToAppend);
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+    public void append(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend);
+        fw.close();
     }
 }

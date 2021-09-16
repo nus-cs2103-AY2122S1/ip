@@ -4,8 +4,8 @@ package duke;
  * Encapsulates a task, which can be entered into the to-do-list.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
     private String tag = null;
 
     /**

@@ -12,6 +12,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         String output = "";

@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Encapsulates a command by the user to mark a task in Duke's to-do-list as done.
  */
@@ -35,7 +37,11 @@ public class DoneCommand extends Command {
         // Mark task as done, and persist to text file
         Task t = tasks.markAsDone(index);
         assert !t.equals(null);
-        storage.save(tasks);
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            ui.showSavingError(e);
+        }
 
         // Return a description of the execution result
         return "Nice! I've marked this task as done: \n" + t.toString();

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates an event, which can be entered into the to-do-list.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Constructor for an event task.
