@@ -50,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Function that parses the line that is stored in the storage file.
+     * Parses the line that is stored in the storage file.
      *
      * @param task line in the file that represents a task.
      * @return Task object corresponding to the line in the file.
@@ -98,7 +98,7 @@ public class Storage {
     }
 
     /**
-     * Function that writes a line to file.
+     * Writes a line to file.
      *
      * @param text text to be written.
      */

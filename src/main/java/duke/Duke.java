@@ -38,7 +38,7 @@ public class Duke {
 
 
     /**
-     * Function that checks whether the user wants to exit the program.
+     * Checks whether the user wants to exit the program.
      *
      * @param instruction instruction given by the user.
      * @return a boolean on whether the program should terminate.
