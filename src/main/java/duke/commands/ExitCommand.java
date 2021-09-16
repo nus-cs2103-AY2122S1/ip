@@ -1,5 +1,10 @@
 package duke.commands;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
+
 /**
  * Represents an Exit Command.
  */
@@ -22,6 +27,12 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute() {
+        new Timer().schedule(new TimerTask() {
+            public void run() {
+                Platform.exit();
+            }
+        }, 5000);
+
         return new CommandResult(MESSAGE_EXIT);
     }
 }
