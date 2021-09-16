@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * An example of a custom control using FXML.
@@ -41,6 +43,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(Font.font("Arial", FontWeight.BOLD, 13));
         displayPicture.setImage(img);
     }
 
@@ -55,13 +58,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.setFillHeight(true);
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         db.setFillHeight(true);
         return db;
