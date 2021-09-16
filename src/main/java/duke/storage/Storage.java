@@ -1,7 +1,6 @@
 package duke.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,9 +46,8 @@ public class Storage {
      *
      * @return The task list.
      * @throws LoadingException The exception related to loading.
-     * @throws IOException The exception occurred when setting up the scanner.
      */
-    public ArrayList<Task> load() throws LoadingException, IOException {
+    public ArrayList<Task> load() throws LoadingException {
         Scanner s = buildFileAndScanner();
         ArrayList<Task> taskList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -69,9 +67,8 @@ public class Storage {
      *
      * @return The scanner that takes in the file content input.
      * @throws LoadingException The exception happens during creating the file.
-     * @throws IOException The exception occurred during setting up the scanner.
      */
-    public Scanner buildFileAndScanner() throws LoadingException, IOException {
+    public Scanner buildFileAndScanner() throws LoadingException {
         java.nio.file.Path path = java.nio.file.Paths.get(dir, "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
         if (!directoryExists) {
@@ -80,10 +77,10 @@ public class Storage {
         File f = new File(path + file);
         Scanner s;
         try {
+            f.createNewFile();
             s = new Scanner(f);
             return s;
-        } catch (FileNotFoundException e) {
-            f.createNewFile();
+        } catch (IOException e) {
             throw new LoadingException();
         }
     }

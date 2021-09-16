@@ -22,7 +22,8 @@ public class Ui {
     /**
      * Shows the error message.
      *
-     * @param message
+     * @param message The error message.
+     * @return error message.
      */
     public String showError(String message) {
         return message;
@@ -33,6 +34,7 @@ public class Ui {
      *
      * @param shouldDelete The task should be deleted.
      * @param tasks The list of tasks.
+     * @return The deleted task string form.
      */
     public String showDelete(Task shouldDelete, TaskList tasks) {
         String title = "Noted. I've removed this task:" + System.lineSeparator();
@@ -46,6 +48,7 @@ public class Ui {
      *
      * @param task The task want to be shown.
      * @param count The number of tasks in task list.
+     * @return The added string.
      */
     public String showAdding(String task, int count) {
         return getOutputFrame(task, count);
@@ -53,6 +56,8 @@ public class Ui {
 
     /**
      * Shows error while loading.
+     *
+     * @return The error message.
      */
     public String showLoadingError() {
         LoadingException e = new LoadingException();
@@ -63,6 +68,7 @@ public class Ui {
      * Shows the task marked as done.
      *
      * @param stringForm The string form of that task.
+     * @return The string representation of done.
      */
     public String showDone(String stringForm) {
         String title = "Nice! I've marked this task as done:" + System.lineSeparator();

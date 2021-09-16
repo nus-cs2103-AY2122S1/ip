@@ -24,7 +24,7 @@ public class Duke {
      *
      * @param filePath The important
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -39,6 +39,7 @@ public class Duke {
      * Runs the program of duke.
      *
      * @param input The user input.
+     * @return The response of duke.
      * @throws IOException The exception related to store and read tasks.
      */
     public String getResponse(String input) throws IOException {
