@@ -86,7 +86,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("duke");
+        stage.setTitle("The Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -122,18 +122,11 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        helpButton.setOnMouseClicked((event) -> {
-            displayHelpPopup();
-        });
-
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
-
     }
 
     /**
@@ -156,21 +149,6 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        String userText = userInput.getText();
-        System.out.println(react(userText));
-        String dukeText = react(userText);
-
-        dialogContainer.getChildren().addAll(
-                UserDialogBox.getUserDialog(userText, userImage),
-                UserDialogBox.getDukeDialog(dukeText, dukeImage)
-        );
-        userInput.clear();
-    }
-
-    private void displayHelpPopup() {
-//        dialogContainer.getChildren().addAll(
-//                UserDialogBox.getDukeDialog("wefwe", userImage)
-//        );
         String userText = userInput.getText();
         System.out.println(react(userText));
         String dukeText = react(userText);

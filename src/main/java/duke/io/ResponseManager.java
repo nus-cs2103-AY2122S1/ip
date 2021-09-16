@@ -69,7 +69,7 @@ public class ResponseManager {
      */
     public String getTaskCompletionMessage(Task task, int numTasks) {
         return "You've completed the task: \n"
-                + "     " + task.toString() + "Well done!\n"
+                + "     " + task.toString() + " Well done!\n"
                 + "You now have " + numTasks + " tasks, jiayouz!";
     }
 
