@@ -8,7 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -40,6 +44,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.setBackground(new Background(backgroundFill));
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(new Response().showStartMsg(), dukeImage)
         );
@@ -52,6 +57,12 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
+
+        if (!this.duke.hasLoadedFile()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(new Response().showLoadError(), dukeImage)
+            );
+        }
     }
 
     /**

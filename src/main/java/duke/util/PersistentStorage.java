@@ -25,7 +25,7 @@ public class PersistentStorage {
 
     /**
      * String that represents a filepath to the text
-     * file for persistent storage
+     * file for persistent storage.
      */
     private String filepath;
 
@@ -72,13 +72,15 @@ public class PersistentStorage {
                 String[] allTasks = fileData.split("\n");
 
                 for (String task : allTasks) {
+                    validateFileString(task);
+
                     // Split task string into tokens
                     String[] tokens = task.split(" \\| ");
 
                     String taskType = tokens[0];
-                    boolean isDone = tokens[1].equals("1");
-                    String description = tokens[2];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    boolean isDone = tokens[1].equals("1");;
+                    String description = tokens[2];;
                     String rawDateTimeInfo;
 
                     switch(taskType) {
@@ -144,6 +146,33 @@ public class PersistentStorage {
             writer.close();
         } catch (IOException e) {
             throw new DukeException("An error occurred while trying to save data to your file :(");
+        }
+    }
+
+    /**
+     * Validate file string in persistent storage file.
+     *
+     * @param fileRepr The file String to be validated.
+     * @throws DukeException If a parse error occurs.
+     */
+    public void validateFileString(String fileRepr) throws DukeException {
+        String[] tokenized = fileRepr.split(" \\| ");
+        int tokenLength = tokenized.length;
+
+        // Check correct length
+        if (tokenLength < 3 || tokenLength > 4) {
+            throw new DukeException("There was an error in parsing your file!");
+        }
+
+        // Check task type
+        String taskType = tokenized[0];
+        boolean isTodo = taskType.equals("T");
+        boolean isDeadline = taskType.equals("D");
+        boolean isEvent = taskType.equals("E");
+        boolean isDoAfter = taskType.equals("DA");
+        boolean isValidTask = (isTodo || isDeadline || isEvent || isDoAfter);
+        if (!isValidTask) {
+            throw new DukeException("There was an error in parsing your file!");
         }
     }
 }

@@ -12,6 +12,7 @@ import duke.util.Tasklist;
  */
 public class Duke {
 
+    private boolean isSuccessfulFileLoad;
     private PersistentStorage storage;
     private Tasklist taskList;
     private Response response;
@@ -27,8 +28,9 @@ public class Duke {
 
         try {
             taskList = storage.loadTasks();
+            this.isSuccessfulFileLoad = true;
         } catch (DukeException e) {
-            response.showLoadError();
+            this.isSuccessfulFileLoad = false;
             taskList = new Tasklist();
         }
     }
@@ -47,5 +49,14 @@ public class Duke {
         } catch (DukeException e) {
             return new CommandResult(response.showErrorMsg(e));
         }
+    }
+
+    /**
+     * Returns a boolean indicating if persistent storage file was successfully loaded
+     *
+     * @return true if persistent storage file was loaded successfully, and false otherwise.
+     */
+    public boolean hasLoadedFile() {
+        return isSuccessfulFileLoad;
     }
 }
