@@ -47,8 +47,8 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.CENTER_RIGHT);
         this.getChildren().addAll(text, displayPicture);
-        this.setStyle("-fx-border-color: AZURE; -fx-border-width: 2;" +
-                "-fx-border-radius: 30; -fx-border-insets: 5;");
+        this.setStyle("-fx-border-color: AZURE; -fx-border-width: 2;"
+                + "-fx-border-radius: 30; -fx-border-insets: 5;");
     }
 
     /**

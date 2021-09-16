@@ -1,9 +1,9 @@
 package bob;
 
+import java.util.ArrayList;
+
 import bob.exception.NoSearchResultException;
 import bob.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents the user's list of tasks to be completed.

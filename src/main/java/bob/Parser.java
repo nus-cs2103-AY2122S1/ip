@@ -1,5 +1,7 @@
 package bob;
 
+import java.util.Objects;
+
 import bob.exception.InvalidDateException;
 import bob.exception.InvalidInputException;
 import bob.exception.NoDeadlineException;
@@ -13,8 +15,6 @@ import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
 import bob.task.Todo;
-
-import java.util.Objects;
 
 /**
  * Represents an object that deals with making sense of the user commands.

@@ -1,10 +1,10 @@
 package bob.task;
 
-import bob.exception.InvalidDateException;
-
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import bob.exception.InvalidDateException;
 
 /**
  * Represents a special type of task with a specific date, meaning the task will occur or be completed at that date.

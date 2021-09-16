@@ -1,17 +1,19 @@
 package bob.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskTest {
-    Task testTask = new Task("eat bread");
+    private Task testTask = new Task("eat bread");
+
     @Test
-    public void newTaskTest(){
+    public void newTaskTest() {
         assertEquals(" ", testTask.getStatusIcon());
     }
 
     @Test
-    public void markCompletedTest(){
+    public void markCompletedTest() {
         testTask.markCompleted();
         assertEquals("X", testTask.getStatusIcon());
     }

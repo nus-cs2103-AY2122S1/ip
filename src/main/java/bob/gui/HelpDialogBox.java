@@ -39,7 +39,7 @@ public class HelpDialogBox extends HBox {
 
         this.setAlignment(Pos.CENTER_LEFT);
         this.getChildren().addAll(displayPicture, link);
-        this.setStyle("-fx-border-color: AZURE; -fx-border-width: 2;" +
-                "-fx-border-radius: 30; -fx-border-insets: 5;");
+        this.setStyle("-fx-border-color: AZURE; -fx-border-width: 2;"
+                + "-fx-border-radius: 30; -fx-border-insets: 5;");
     }
 }

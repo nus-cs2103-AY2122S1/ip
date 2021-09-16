@@ -1,5 +1,11 @@
 package bob;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
 import bob.exception.InvalidDateException;
@@ -7,13 +13,6 @@ import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
 import bob.task.Todo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 
 /**
  * Represents an object that deals with loading tasks from a specified file and saving tasks in the file.
@@ -117,28 +116,40 @@ public class Storage {
         switch (splitDate[0]) {
         case "Jan":
             month = "01";
+            break;
         case "Feb":
             month = "02";
+            break;
         case "Mar":
             month = "03";
+            break;
         case "Apr":
             month = "04";
+            break;
         case "May":
             month = "05";
+            break;
         case "Jun":
             month = "06";
+            break;
         case "Jul":
             month = "07";
+            break;
         case "Aug":
             month = "08";
+            break;
         case "Sep":
             month = "09";
+            break;
         case "Oct":
             month = "10";
+            break;
         case "Nov":
             month = "11";
+            break;
         case "Dec":
             month = "12";
+            break;
         default:
             month = "00"; // Should never reach this branch.
         }

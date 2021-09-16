@@ -1,18 +1,17 @@
 package bob;
 
-import bob.exception.DirectoryNotFoundException;
-import bob.exception.FileNotFoundException;
-import bob.gui.DialogBox;
-import bob.gui.HelpDialogBox;
-import bob.gui.Ui;
-
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Objects;
+
+import bob.exception.DirectoryNotFoundException;
+import bob.exception.FileNotFoundException;
+import bob.gui.DialogBox;
+import bob.gui.HelpDialogBox;
+import bob.gui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -238,7 +237,7 @@ public class Bob extends Application {
                 dukeText.setVisited(true); // Set the hyperlink as visited so that the text is black.
                 dukeText.setOnAction(e -> {
                     try {
-                        Desktop.getDesktop().browse(new URI("https://felwuzhere.wixsite.com/bobhelp"));
+                        Desktop.getDesktop().browse(new URI("https://feliciaivane.github.io/ip/"));
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     } catch (URISyntaxException ex) {
