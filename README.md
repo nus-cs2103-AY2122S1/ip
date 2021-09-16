@@ -31,14 +31,14 @@ Duke Imposter is a management tool that tracks your tasks in an easily accessibl
 ### For Java developers
 
 1. Download the source code.
-2. Navigate to root/src/main/java/duke/Duke.java
+2. Navigate to root/src/main/java/duke/DukeLauncher.java
 3. Start the app via the main method
 
 ```java
-// Duke.java
-public static void main(String[] args) {
-    Duke duke = new Duke();
-    duke.start();
+public class DukeLauncher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
 }
 ```
                                                                   
