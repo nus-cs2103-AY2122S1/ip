@@ -1,18 +1,21 @@
 package dialog;
 
-import dialog.exceptions.DialogException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import dialog.exceptions.DialogException;
 
 public class DialogTest {
     @Test
     public void generateTest() throws DialogException {
         String expected =
-                "    ____________________________________________________________\n" +
-                "    test1\n" +
-                "    test2\n" +
-                "    ____________________________________________________________";
+            "    ____________________________________________________________\n"
+                + "    test1\n"
+                + "    test2\n"
+                + "    ____________________________________________________________";
         Dialog testDialog = Dialog.generate("generateTest");
         testDialog.add("test1");
         testDialog.add("test2");
@@ -45,9 +48,9 @@ public class DialogTest {
         testDialog.add("sentences");
 
         String expectedMessage =
-                "    ____________________________________________________________\n" +
-                "    sentences\n" +
-                "    ____________________________________________________________";
+            "    ____________________________________________________________\n"
+                + "    sentences\n"
+                + "    ____________________________________________________________";
 
         assertEquals(Dialog.get("getTest").toString(), expectedMessage);
     }

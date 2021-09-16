@@ -1,5 +1,7 @@
 package ui;
 
+import java.io.IOException;
+
 import alice.Alice;
 import dialog.exceptions.DialogException;
 import javafx.fxml.FXML;
@@ -16,7 +18,6 @@ import javafx.stage.Stage;
 import ui.components.CenterBox;
 import ui.components.DialogBox;
 
-import java.io.IOException;
 
 /**
  * Page for interacting with Alice
@@ -27,7 +28,7 @@ import java.io.IOException;
  * @since 0.02
  */
 public class ChatPage extends AnchorPane {
-
+    /** different mode on how should chat page deal with input inputted by the user */
     public enum Mode {
         DEFAULT, LEARN
     }
@@ -60,9 +61,11 @@ public class ChatPage extends AnchorPane {
 
     /**
      * Constructor for the chat page.
+     * Instantiate new Alice and set her user interface's chat page to this page, set mode to
+     * default and print welcome text.
      *
-     * @param fileName the filename that the user has chosen
-     * @throws IOException if there is anything wrong with the IO
+     * @param fileName the filename that the user has chosen.
+     * @throws IOException if there is anything wrong with the IO when instantiating alice.
      */
     ChatPage(String fileName) throws IOException {
         this.alice = new Alice(fileName);
@@ -78,13 +81,13 @@ public class ChatPage extends AnchorPane {
         userInput.setOnAction((event) -> handleUserInput());
 
         dialogContainer.heightProperty().addListener((observable)
-                -> scrollPane.setVvalue(1.0));
+            -> scrollPane.setVvalue(1.0));
     }
 
     /**
-     * Return Alice currently embedded in this chat page
+     * Return Alice currently embedded in this chat page.
      *
-     * @return alice, the virtual assistant
+     * @return alice that is responsible for processing the dialog to be printed.
      */
     public Alice getAlice() {
         return this.alice;
@@ -97,9 +100,9 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Setter for alice
+     * Setter for alice.
      *
-     * @param a Alice to be set to this chat page
+     * @param a Alice to be set to this chat page.
      */
     public void setAlice(Alice a) {
         alice = a;
@@ -108,6 +111,7 @@ public class ChatPage extends AnchorPane {
     /**
      * Setter for alice using a file name to automatically link alice
      * to the specified file.
+     * Instantiate new Alice and set her user interface's chat page to this page.
      *
      * @param fileName name of file
      */
@@ -121,12 +125,12 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Print initial welcoming message
+     * Print initial welcoming message as a label at the top of the chat page.
      */
     public void putWelcomeText() {
         try {
-            CenterBox welcomeBox = CenterBox.getCenterBox("Alice"
-                    , "My name is Alice, how can I help you organize today?");
+            CenterBox welcomeBox = CenterBox.getCenterBox("Alice",
+                "My name is Alice, how can I help you organize today?");
             dialogContainer.getChildren().add(welcomeBox);
             showCurrentList();
         } catch (Exception e) {
@@ -139,9 +143,9 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Create label from String
+     * Create label from String.
      *
-     * @param text String containing text to add
+     * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
@@ -156,7 +160,7 @@ public class ChatPage extends AnchorPane {
     @FXML
     private void handleUserInput() {
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(userInput.getText(), userImage)
+            DialogBox.getUserDialog(userInput.getText(), userImage)
         );
         if (this.mode == Mode.DEFAULT) {
             this.alice.execute(userInput.getText());
@@ -176,7 +180,7 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Print error to this chat page
+     * Print error to this chat page.
      *
      * @param e exception to be print
      */
@@ -190,7 +194,7 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Explicitly ask Alice to print something into this chat page
+     * Explicitly ask Alice to print something into this chat page.
      *
      * @param input string input to be printed
      */
@@ -199,7 +203,7 @@ public class ChatPage extends AnchorPane {
     }
 
     /**
-     * Exit the chat page and go back to the start page
+     * Exit the chat page and go back to the start page.
      */
     public void exit() {
         Stage stage = (Stage) anchorPaneReference.getScene().getWindow();

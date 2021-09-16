@@ -1,5 +1,7 @@
 package command;
 
+import java.io.IOException;
+
 import alice.exceptions.AliceException;
 import command.exceptions.EmptyDescriptionException;
 import command.exceptions.EmptyIndexException;
@@ -9,20 +11,19 @@ import command.exceptions.InvalidIndexException;
 import command.exceptions.InvalidTimeFormatException;
 import dialog.TaskDialog;
 import dialog.exceptions.DialogException;
+import dialog.exceptions.TaskDialogException;
 import model.task.Deadline;
 import model.task.Event;
 import model.task.Todo;
-import model.vocab.DuplicateVocabException;
 import model.vocab.VocabList;
+import model.vocab.exceptions.DuplicateVocabException;
 import parser.Parser;
 import storage.Storage;
 import ui.ChatPage;
 import ui.Ui;
 
-import java.io.IOException;
-
 /**
- * Command class responsible for executing different command
+ * Command class responsible for executing different command.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
@@ -31,7 +32,7 @@ import java.io.IOException;
  */
 public class Command {
     /**
-     * Different type of Command available
+     * Different type of Command available.
      */
     public enum CommandType {
         TODO, DEADLINE, EVENT, LIST, DATE, FIND, DONE, DELETE, LEARN, UNLEARN, COMMANDS, BYE
@@ -42,10 +43,10 @@ public class Command {
 
     /**
      * Default constructor for Command.
-     * Create a Command object from given full Command
+     * Create a Command object from given full Command.
      *
-     * @param fullCommand command with its arguments and tagger
-     * @throws AliceException invalid argument for command
+     * @param fullCommand command with its arguments and tagger.
+     * @throws AliceException invalid argument for command.
      */
     public Command(String fullCommand) {
         this.fullCommand = fullCommand;
@@ -53,10 +54,10 @@ public class Command {
     }
 
     /**
-     * Execute the command according to its type
+     * Execute the command according to its type.
      *
-     * @param ui      the ui in which the command object is going to use to print output
-     * @param storage the storage for the command to save progress
+     * @param ui      the ui in which the command object is going to use to print output.
+     * @param storage the storage for the command to save progress.
      */
     public void execute(Ui ui, Storage storage) {
         switch (commandType) {
@@ -95,6 +96,7 @@ public class Command {
             break;
         case BYE:
             executeBye(ui, storage);
+            break;
         default:
             // UNREACHABLE: already checked via StringToCommand
             break;
@@ -122,8 +124,8 @@ public class Command {
         ChatPage chatPage = ui.getChatPage();
         try {
             if (fullCommand.split(" ").length == 1) {
-                throw new EmptyDescriptionException("The keyword of find cannot be empty. Try using command " +
-                        "'list' if you want to see the full list");
+                throw new EmptyDescriptionException("The keyword of find cannot be empty. Try using command "
+                        + "'list' if you want to see the full list");
             }
             String kwString = fullCommand.substring(("find ").length());
 
@@ -140,7 +142,7 @@ public class Command {
                 throw new EmptyDescriptionException("The description of a todo cannot be empty.");
             }
             chatPage.printWithAlice(ui.getTaskDialog().addTask(new Todo(fullCommand.substring(("todo ").length()))));
-        } catch (DialogException | EmptyDescriptionException e) {
+        } catch (TaskDialogException | EmptyDescriptionException e) {
             chatPage.printError(e);
         }
     }
@@ -156,7 +158,7 @@ public class Command {
             String dDescription = fullCommand.substring(("deadline ").length(), fullCommand.indexOf("/"));
             String by = fullCommand.substring(fullCommand.indexOf("/by ") + "/by ".length());
             chatPage.printWithAlice(ui.getTaskDialog().addTask(new Deadline(dDescription, by)));
-        } catch (DialogException | EmptyDescriptionException
+        } catch (TaskDialogException | EmptyDescriptionException
                 | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
@@ -173,7 +175,7 @@ public class Command {
             String eDescription = fullCommand.substring(("event ").length(), fullCommand.indexOf("/"));
             String at = fullCommand.substring(fullCommand.indexOf("/at ") + "/at ".length());
             chatPage.printWithAlice(ui.getTaskDialog().addTask(new Event(eDescription, at)));
-        } catch (DialogException | EmptyDescriptionException
+        } catch (TaskDialogException | EmptyDescriptionException
                 | EmptyTaggerException | InvalidTimeFormatException e) {
             chatPage.printError(e);
         }
@@ -182,8 +184,8 @@ public class Command {
     private boolean isValidListIndexFormat(String fullCommand, TaskDialog taskDialog) {
         if (fullCommand.split(" ").length == 1) {
             throw new EmptyIndexException("The index of done cannot be empty.");
-        } else if (Integer.parseInt(fullCommand.split(" ")[1]) <= 0 ||
-                Integer.parseInt(fullCommand.split(" ")[1]) > taskDialog.getTaskList().length()) {
+        } else if (Integer.parseInt(fullCommand.split(" ")[1]) <= 0
+                || Integer.parseInt(fullCommand.split(" ")[1]) > taskDialog.getTaskList().length()) {
             if (taskDialog.getTaskList().length() == 0) {
                 throw new InvalidIndexException("Looks like your list is currently empty.");
             } else {
@@ -241,7 +243,7 @@ public class Command {
             chatPage.printWithAlice(Ui.getAskForFeedbackText(phraseString));
             chatPage.getAlice().setPhraseToLearn(phraseString);
             chatPage.setMode(ChatPage.Mode.LEARN);
-        } catch (EmptyDescriptionException | DialogException | DuplicateVocabException  e) {
+        } catch (EmptyDescriptionException | DialogException | DuplicateVocabException e) {
             chatPage.printError(e);
         }
     }
@@ -264,7 +266,7 @@ public class Command {
 
             vocabList.removePhrase(phraseString);
             chatPage.printWithAlice(Ui.getUnlearnText(phraseString));
-        } catch (EmptyDescriptionException | DialogException | DuplicateVocabException  e) {
+        } catch (EmptyDescriptionException | DialogException | DuplicateVocabException e) {
             chatPage.printError(e);
         }
     }

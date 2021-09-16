@@ -1,5 +1,9 @@
 package parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import alice.exceptions.AliceException;
 import command.Command;
 import command.exceptions.InvalidTimeFormatException;
@@ -9,25 +13,21 @@ import model.task.Task;
 import model.task.TaskList;
 import model.vocab.Vocab;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Class for parsing different data type to other type or different format.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
- * @since 0.01
+ * @version 0.03
+ * @since 0.02
  */
 public class Parser {
     /**
-     * Static method for converting a string of command to Command Type
+     * Static method for converting a string of command to Command Type.
      *
-     * @param s the string
-     * @return CommandType of the command
-     * @throws AliceException invalid command is parsed into the method
+     * @param s the string.
+     * @return CommandType of the command.
+     * @throws AliceException invalid command is parsed into the method.
      */
     public static Command.CommandType stringToCommand(String s) throws AliceException {
         switch (s) {
@@ -65,9 +65,9 @@ public class Parser {
     /**
      * Static method for converting a string to different TaskType.
      *
-     * @param s the string
-     * @return TaskType of the tasks
-     * @throws AliceException invalid models.task string representation is parsed into the method
+     * @param s the string.
+     * @return TaskType of the tasks.
+     * @throws AliceException invalid models.task string representation is parsed into the method.
      */
     public static TaskList.TaskType stringToTaskType(String s) throws AliceException {
         switch (s) {
@@ -83,11 +83,11 @@ public class Parser {
     }
 
     /**
-     * Static method for converting a className of a models.task to the TaskType enum
+     * Static method for converting a className of a task to the TaskType enum.
      *
-     * @param cn class name
-     * @return taskType of the classname passed
-     * @throws AliceException invalid classname is parsed into the method
+     * @param cn task subclass class name to be converted to TaskType enum.
+     * @return taskType of the classname passed.
+     * @throws AliceException invalid classname is parsed into the method.
      */
     public static TaskList.TaskType classNameToTaskType(String cn) throws AliceException {
         switch (cn) {
@@ -106,11 +106,11 @@ public class Parser {
     }
 
     /**
-     * Static method for converting the taskType into its string representation
+     * Static method for converting the taskType into its string representation.
      *
-     * @param t the taskType
-     * @return the String representation fo that taskType
-     * @throws AliceException invalid TaskType has been parsed into the method
+     * @param t the taskType to be converted to string representation.
+     * @return the String representation fo that taskType.
+     * @throws AliceException invalid TaskType has been parsed into the method.
      */
     public static String taskTypeToString(TaskList.TaskType t) throws AliceException {
         switch (t) {
@@ -126,10 +126,10 @@ public class Parser {
     }
 
     /**
-     * Static method for converting the models.task to a save format string representation
+     * Static method for converting the task to a save format string representation.
      *
-     * @param task the models.task
-     * @return string representation to be seen in the save file of the models.task
+     * @param task the task to be converted to String save format.
+     * @return string representation to be seen in the save file of the task.
      */
     public static String taskToSaveFormat(Task task) {
         TaskList.TaskType type = classNameToTaskType(task.getClass().getName());
@@ -149,32 +149,44 @@ public class Parser {
         return s;
     }
 
+    /**
+     * Static method for converting a vocab object to its String save format.
+     *
+     * @param vocab the vocab to be converted to String save format.
+     * @return string representation of that vocab.
+     */
     public static String vocabToSaveFormat(Vocab vocab) {
         return vocab.getPhrase() + " | " + vocab.getFeedback();
     }
 
     /**
-     * Static method for converting a string of yes or others to boolean
+     * Static method for converting a string of yes or others to boolean.
      *
-     * @param yesNo string of yes or no
-     * @return true for string resembling yes, false otherwise
+     * @param yesNo string of yes or no.
+     * @return true for string resembling yes, false otherwise.
      */
     public static boolean yesNoToBoolean(String yesNo) {
         switch (yesNo) {
+        case "Yes":
         case "yes":
         case "y":
         case "Y":
             return true;
-        default:
+        case "No":
+        case "no":
+        case "n":
+        case "N":
             return false;
+        default:
+            throw new AliceException("Invalid format of yes or no detected: " + yesNo);
         }
     }
 
     /**
-     * Static method for parsing string representation to LocalDate object
+     * Static method for parsing string representation to LocalDate object.
      *
-     * @param s the string representation of time
-     * @return LocalDate object if is is of format yyyy-MM-dd
+     * @param s the string representation of time.
+     * @return LocalDate object if is is of format yyyy-MM-dd.
      */
     public static LocalDate parseTimeString(String s) {
         try {
@@ -185,10 +197,10 @@ public class Parser {
     }
 
     /**
-     * For parsing a string of full command to a Command object
+     * For parsing a string of full command to a Command object.
      *
-     * @param fullCommand command in string format
-     * @return Command object of the string
+     * @param fullCommand command in string format.
+     * @return Command object of the string.
      */
     public static Command parse(String fullCommand) {
         return new Command(fullCommand);

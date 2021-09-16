@@ -1,5 +1,8 @@
 package ui.components;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.animation.Animation;
 import javafx.animation.Transition;
 import javafx.collections.FXCollections;
@@ -15,11 +18,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.util.Collections;
-
 /**
- * DialogBox is a class for the dialog in the chat page
+ * Structure for message bubble of both user and Alice.
  *
  * @author https://se-education.org/guides/tutorials/javaFx.html
  */
@@ -31,9 +31,9 @@ public class DialogBox extends HBox {
     private Circle displayPicture = new Circle();
 
     /**
-     * Constructor for the dialog box
+     * Constructor for the dialog box.
      */
-    public DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         // animation for text typing
-        // tutorial at www.java2s.com
+        // tutorial by www.java2s.com
         Animation animation = new Transition() {
             {
                 setCycleDuration(Duration.millis(1000));
@@ -76,11 +76,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Factory method for producing DialogBox
+     * Factory method for producing DialogBox.
      *
-     * @param text the message to be printed in the DialogBox
+     * @param text the message to be printed in the DialogBox.
      * @param img  image to use as the avatar.
-     * @return DialogBox with message to the left and avatar to the right
+     * @return DialogBox with message to the left and avatar to the right.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);

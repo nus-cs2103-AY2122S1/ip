@@ -6,9 +6,9 @@ package dialog.exceptions;
  */
 public class DialogException extends Exception {
     /**
-     * Default constructor of DialogException
+     * Default constructor of DialogException.
      *
-     * @param errorMessage message to be stored in the DialogException
+     * @param errorMessage message to be stored in the DialogException.
      */
     public DialogException(String errorMessage) {
         super(errorMessage);

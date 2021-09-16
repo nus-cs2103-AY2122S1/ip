@@ -20,7 +20,7 @@ public abstract class Task {
      * Abstract Task cannot be created.
      * isDone is set to false by default.
      *
-     * @param description the description of the models.task
+     * @param description the description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -31,8 +31,8 @@ public abstract class Task {
      * Default constructor for Task to be used by its subclasses for convenience.
      * Abstract Task cannot be created.
      *
-     * @param description the description of the models.task
-     * @param isDone      whether the models.task is done
+     * @param description the description of the task.
+     * @param isDone      whether the task is done.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -42,7 +42,7 @@ public abstract class Task {
     /**
      * Getter for isDone.
      *
-     * @return isDone boolean of the models.task
+     * @return isDone boolean of the task.
      */
     public boolean isDone() {
         return this.isDone;
@@ -51,7 +51,7 @@ public abstract class Task {
     /**
      * Getter for description.
      *
-     * @return description of the models.task
+     * @return description of the task.
      */
     public String getDescription() {
         return this.description;
@@ -60,13 +60,13 @@ public abstract class Task {
     /**
      * Return a string representation of isDone boolean.
      *
-     * @return X for true (done) and " " for false (not done)
+     * @return ✔ for true (done) and ✘ for false (not done).
      */
     public String getStatusIcon() {
         return (isDone ? "✔" : " ✘ ");
     }
 
-    /** mark the current models.task as done. */
+    /** mark the current task as done. */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -77,9 +77,27 @@ public abstract class Task {
     }
 
     /**
-     * Template: "[x] description" or "[ ] description" for done and not done models.task respectively.
+     * Check whether the given object is the same object, is of type Task and have matching description.
      *
-     * @return the template of the string representation of models.task
+     * @param other other object to be checked
+     * @return whether that object should equal to this task or not
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Task)) {
+            return false;
+        }
+        Task otherTask = (Task) other;
+        return otherTask.getDescription().equals(description);
+    }
+
+    /**
+     * Template: "[x] description" or "[ ] description" for done and not done task respectively.
+     *
+     * @return the template of the string representation of task.
      */
     @Override
     public String toString() {

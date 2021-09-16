@@ -1,15 +1,11 @@
 package storage;
 
-import parser.Parser;
-import model.task.TaskList;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,13 +15,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.task.TaskList;
+import parser.Parser;
+
 /**
- * Class for dealing with the storage system saving and loading save file
+ * Class for dealing with the storage system saving and loading save file.
+ * Deal with reading and writing to file and can load TaskList from specified file.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
- * @since 0.01
+ * @version 0.03
+ * @since 0.02
  */
 public class Storage {
 
@@ -33,6 +33,12 @@ public class Storage {
     public static final String DIRECTORY_PATH = "./alice";
     /** the directory to store all the save file to be called data */
     public static final String DATA_PATH = "/data";
+
+    /** writer for writing to file */
+    protected static BufferedWriter writer;
+    /** reader for reading the file */
+    protected static BufferedReader reader;
+
     /** default name for the file */
     private static final String DEFAULT_FILE_NAME = "task_list";
 
@@ -42,60 +48,55 @@ public class Storage {
     private TaskList taskListRead;
 
 
-    /** writer for writing to file */
-    protected static BufferedWriter WRITER;
-    /** reader for reading the file */
-    protected static BufferedReader READER;
-
     /**
-     * Constructor using default file location to use as storage
+     * Constructor using default file location to use as storage.
      *
-     * @throws IOException when there is error registering writer and reader to certain file location
+     * @throws IOException when there is error registering writer and reader to certain file location.
      */
     public Storage() throws IOException {
         this(DEFAULT_FILE_NAME);
     }
 
     /**
-     * Constructor using the specified fileName as the name of the save file to read and write to
+     * Constructor using the specified fileName as the name of the save file to read and write to.
      *
-     * @param fileName the name of the file without file type suffix
-     * @throws IOException there is error registering writer and reader
+     * @param fileName the name of the file without file type suffix.
+     * @throws IOException there is error registering writer and reader.
      */
     public Storage(String fileName) throws IOException {
         // the save file to be used as simple text file in this update
         this.filePath = DIRECTORY_PATH + DATA_PATH + "/" + fileName + ".txt";
-        WRITER = new BufferedWriter(new FileWriter(filePath, true));
-        READER = new BufferedReader(new FileReader(filePath));
+        writer = new BufferedWriter(new FileWriter(filePath, true));
+        reader = new BufferedReader(new FileReader(filePath));
     }
 
     /**
-     * check if within the data folder of alice contain the following fileName or not
+     * Check if within the data folder of alice contain the following fileName or not.
      *
-     * @param fileName the file name of the file in data folder
-     * @return if the file name exist or not
-     * @throws IOException if there is any error dealing with the system IO
+     * @param fileName the file name of the file in data folder.
+     * @return if the file with specified name exist or not.
+     * @throws IOException if there is any error dealing with the system IO.
      */
     public static boolean contains(String fileName) throws IOException {
-        String full_file_name = fileName + ".txt";
+        String fullFileName = fileName + ".txt";
 
         if (!haveSaveLocation()) {
             createSaveLocation();
         }
         return new ArrayList<>(Arrays.stream(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH + Storage.DATA_PATH))
-                .map(File::getName).collect(Collectors.toList())).contains(full_file_name);
+            .map(File::getName).collect(Collectors.toList())).contains(fullFileName);
     }
 
     /**
-     * load taskList from where the reader and writer is currently at
+     * load taskList from where the reader and writer is currently at.
      *
-     * @return TaskList read from the save file
+     * @return TaskList read from the save file.
      */
     public TaskList loadTaskList() {
 
         taskListRead = new TaskList();
 
-        READER.lines().forEach((line) -> {
+        reader.lines().forEach((line) -> {
             TaskList.TaskType type = Parser.stringToTaskType(line.substring(0, 2));
             int index1 = line.indexOf("|");
             String isDoneString = line.substring(index1 + 2, index1 + 3);
@@ -117,39 +118,39 @@ public class Storage {
     }
 
     /**
-     * Return folder from the specified file path
+     * Return folder from the specified file path.
      *
-     * @param folderPath the folder path
-     * @return the folder as File
+     * @param folderPath the folder path.
+     * @return the folder as File.
      */
     public static File getFolderFromPath(String folderPath) {
         return new File(folderPath);
     }
 
     /**
-     * Return an array of files from a directory from the file path
+     * Return an array of files from a directory from the file path.
      *
-     * @param folderPath the file path of the directory
-     * @return File[] of the files in the folder including hidden files
+     * @param folderPath the file path of the directory.
+     * @return File[] of the files in the folder including hidden files.
      */
     public static File[] getFilesFromDirectory(String folderPath) {
         return new File(folderPath).listFiles();
     }
 
     /**
-     * Check if the directory to store the save file exist or not
+     * Check if the directory to store the save file exist or not.
      *
-     * @return whether the directory path and the folder for the save file exist or not
+     * @return whether the directory path and the folder for the save file exist or not.
      */
     public static boolean haveSaveLocation() {
         return java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH))
-                && java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH + DATA_PATH));
+            && java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH + DATA_PATH));
     }
 
     /**
-     * Create save location from the directory to the folder to store the save files
+     * Create save location from the directory to the folder to store the save files.
      *
-     * @throws IOException if there is any error dealing with the system IO
+     * @throws IOException if there is any error dealing with the system IO.
      */
     public static void createSaveLocation() throws IOException {
         if (!haveSaveLocation()) {
@@ -163,17 +164,18 @@ public class Storage {
     }
 
     /**
-     * Store the taskList into the save file the reader and writer are currently at
+     * Store the taskList into the save file the reader and writer are currently at.
      *
-     * @param taskList the taskList to be stored
-     * @throws IOException if there is any error dealing with the system IO
+     * @param taskList the taskList to be stored.
+     * @throws IOException if there is any error dealing with the system IO.
      */
     public void save(TaskList taskList) throws IOException {
         Path path = Paths.get(filePath);
-        List<String> fileContent = taskList.getTasks().stream().map(Parser::taskToSaveFormat).collect(Collectors.toList());
+        List<String> fileContent = taskList.getTasks().stream().map(Parser::taskToSaveFormat)
+            .collect(Collectors.toList());
         Files.write(path, fileContent, StandardCharsets.UTF_8);
-        READER.close();
-        WRITER.close();
+        reader.close();
+        writer.close();
     }
 
     /**

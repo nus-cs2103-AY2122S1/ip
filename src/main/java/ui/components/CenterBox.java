@@ -1,14 +1,23 @@
 package ui.components;
 
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
+/**
+ * VBox for outputting a space background box to the middle of its container.
+ * Consist of logo at the top and dialog at the bottom.
+ *
+ * @author Kan Jitpakdi
+ * @author GitHub: kanjitp
+ * @version 0.03
+ * @since 0.00
+ */
 public class CenterBox extends VBox {
 
     @FXML
@@ -17,9 +26,10 @@ public class CenterBox extends VBox {
     private Label dialog = new Label();
 
     /**
-     * Constructor for the dialog box
+     * Constructor for the dialog box.
+     * Load the format from fxml and then set the text to Label.
      */
-    public CenterBox(String textLogo, String textDialog) {
+    private CenterBox(String textLogo, String textDialog) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/CenterBox.fxml"));
             fxmlLoader.setController(this);
@@ -34,13 +44,14 @@ public class CenterBox extends VBox {
     }
 
     /**
-     * Factory method for producing DialogBox
+     * Factory method to generate a CenterBox with specified Strings.
      *
-     * @param text the message to be printed in the DialogBox
-     * @return DialogBox with message to the left and avatar to the right
+     * @param logo string to be use as logo at the top.
+     * @param dialog string of the dialog at the bottom.
+     * @return CenterBox with the design according to fxml.
      */
-    public static CenterBox getCenterBox(String logo, String text) {
-        return new CenterBox(logo, text);
+    public static CenterBox getCenterBox(String logo, String dialog) {
+        return new CenterBox(logo, dialog);
     }
 
 }

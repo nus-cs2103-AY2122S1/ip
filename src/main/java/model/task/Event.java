@@ -16,8 +16,8 @@ public class Event extends TimeTask {
      * Adapted constructor for Event.
      * isDone is set to false.
      *
-     * @param description the description of the event
-     * @param at          the time of the event with yyyy-MM-dd format
+     * @param description the description of the event.
+     * @param at          the time of the event with yyyy-MM-dd format.
      */
     public Event(String description, String at) {
         super(description, at);
@@ -26,9 +26,9 @@ public class Event extends TimeTask {
     /**
      * Adapted constructor for Event.
      *
-     * @param description the description of the event
-     * @param isDone      whether the event is done
-     * @param at          the time of the event with yyyy-MM-dd format
+     * @param description the description of the event.
+     * @param isDone      whether the event is done.
+     * @param at          the time of the event with yyyy-MM-dd format.
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone, at);
@@ -36,12 +36,13 @@ public class Event extends TimeTask {
 
     /**
      * Template: "[E][x] description (at: Month DD YYYY)" or "[E][ ] description (at: Month DD YYYY)" for done
-     * and not done models.task respectively.
+     * and not done task respectively.
      *
-     * @return the template above for Event
+     * @return the template above for Event.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.getTime().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + "(at: "
+                + this.getTime().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

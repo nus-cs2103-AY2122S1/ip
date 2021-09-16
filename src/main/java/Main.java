@@ -9,11 +9,18 @@ import storage.Storage;
 import ui.StartPage;
 
 /**
- * A GUI for Alice using FXML.
+ * Main class of the application.
+ * Responsible for starting up the application and show Start Page.
+ *
+ * @author Kan Jitpakdi
+ * @author GitHub: kanjitp
+ * @version 0.03
+ * @since 0.02
  */
 public class Main extends Application {
     /**
-     * Start method overridden from the Application of JavaFX
+     * Start method overridden from the Application of JavaFX.
+     * Create save location if the save location does not exist and start the app.
      *
      * @param stage stage for the app to distribute its system
      */

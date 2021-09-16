@@ -1,34 +1,43 @@
 package ui;
 
 import dialog.Dialog;
-import dialog.exceptions.DialogException;
 import dialog.TaskDialog;
-
+import dialog.exceptions.DialogException;
 import model.task.TaskList;
 
 /**
- * The Ui class dealing with user interacting with the application and its system.
+ * Act as the bottleneck between TaskDialog and ChatPage.
+ * Allow Alice to have access to her Dialog and where to output that Dialog.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.02
- * @since 0.01
+ * @version 0.03
+ * @since 0.02
  */
 public class Ui {
 
+    /** responsible for outputting result */
     private TaskDialog taskDialog;
+    /** layout for showing the result */
     private ChatPage chatPage;
 
     /**
      * Constructor of Ui.
-     * The Ui object should be specified of which TaskList it is supposed to import
-     * with the method importTaskList(TaskList taskList) not through the constructor.
+     * Require to manually set taskDialog and chatPage through importing task list and
+     * setting chat page.
      */
     public Ui() {
         taskDialog = null;
         chatPage = null;
     }
 
+    /**
+     * Constructor of Ui.
+     * Does not require to manually set taskDialog or ChatPage.
+     *
+     * @param taskDialog taskDialog for Ui to deal with dialog which has TaskList.
+     * @param chatPage   chat page for outputting the dialog.
+     */
     public Ui(TaskDialog taskDialog, ChatPage chatPage) {
         this.taskDialog = taskDialog;
         this.chatPage = chatPage;
@@ -39,10 +48,15 @@ public class Ui {
      *
      * @param taskList the taskList to be imported.
      */
-    public void setTaskList(TaskList taskList) {
+    public void importTaskList(TaskList taskList) {
         this.taskDialog = (TaskDialog) TaskDialog.generate("taskList: " + taskList.hashCode(), taskList);
     }
 
+    /**
+     * Setter for chat page.
+     *
+     * @param chatPage chat page for outputting the dialog.
+     */
     public void setChatPage(ChatPage chatPage) {
         this.chatPage = chatPage;
     }
@@ -57,6 +71,11 @@ public class Ui {
         return this.taskDialog;
     }
 
+    /**
+     * Getter for chat page.
+     *
+     * @return current chat page in which the ui is outputting the result.
+     */
     public ChatPage getChatPage() {
         return this.chatPage;
     }
@@ -94,7 +113,7 @@ public class Ui {
     }
 
     /**
-     * Static method for showing to the user the command in which alice can perform.
+     * Static method returning a String of user commands in which alice can perform.
      *
      * @throws DialogException the dialog cannot have the same id while the app is running.
      */
@@ -107,11 +126,11 @@ public class Ui {
             commandsListDialog.add("This is the following commands, I can perform:\n");
             commandsListDialog.add("1. 'todo <task description>' - add a todo task to the list");
             commandsListDialog.add("2. 'deadline <task description> /by <by when>' "
-                    + "- add a deadline task with specific deadline");
+                + "- add a deadline task with specific deadline");
             commandsListDialog.add("3. 'event <task description> /at <at when>' "
-                    + "- add an event task with specific time");
+                + "- add an event task with specific time");
             commandsListDialog.add("4. 'date <yyyy-mm-dd>' "
-                    + "- list all todos and all the deadlines and events before specified time");
+                + "- list all todos and all the deadlines and events before specified time");
             commandsListDialog.add("5. 'list' - show the current task list");
             commandsListDialog.add("6. 'find <keyword>' - list the task with specific keywords");
             commandsListDialog.add("7. 'done <task index>' - mark that task as done");
@@ -124,6 +143,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Get text for asking the user to feed in the feedback for Alice to learn new vocabulary.
+     *
+     * @param phraseToLearn phrase for alice to recognize.
+     * @return the dialog for Alice to ask user for feedback with specific phrase.
+     * @throws DialogException the dialog cannot have the same id while the app is running.
+     */
     public static String getAskForFeedbackText(String phraseToLearn) throws DialogException {
         String dialogId = "learn " + phraseToLearn;
         if (Dialog.containsId(dialogId)) {
@@ -137,6 +163,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Get text for informing the user that Alice would not get the input phrase anymore.
+     *
+     * @param phraseToUnlearn phrase for alice to recognize.
+     * @return the dialog for Alice to inform the user of the phrase that she will forget.
+     * @throws DialogException the dialog cannot have the same id while the app is running.
+     */
     public static String getUnlearnText(String phraseToUnlearn) throws DialogException {
         String dialogId = "unlearn " + phraseToUnlearn;
         if (Dialog.containsId(dialogId)) {

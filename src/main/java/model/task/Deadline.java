@@ -3,7 +3,7 @@ package model.task;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class for Deadline with specific time for when models.task is due
+ * Class for Deadline with specific time for when task is due.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
@@ -17,7 +17,7 @@ public class Deadline extends TimeTask {
      * isDone is set to false.
      *
      * @param description the description of the deadline.
-     * @param by          the time of the event with yyyy-MM-dd format
+     * @param by          the time of the event with yyyy-MM-dd format.
      */
     public Deadline(String description, String by) {
         super(description, by);
@@ -26,9 +26,9 @@ public class Deadline extends TimeTask {
     /**
      * Adapted constructor for deadline.
      *
-     * @param description the description of the deadline
-     * @param isDone      whether the deadline is done
-     * @param by          the time of the event with yyyy-MM-dd format
+     * @param description the description of the deadline.
+     * @param isDone      whether the deadline is done.
+     * @param by          the time of the event with yyyy-MM-dd format.
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone, by);
@@ -36,7 +36,7 @@ public class Deadline extends TimeTask {
 
     /**
      * Template: "[D][x] description (by: Month DD YYYY)" or "[D][ ] description (by: Month DD YYYY)" for done
-     * and not done models.task respectively.
+     * and not done task respectively.
      *
      * @return the template above for Deadline
      */

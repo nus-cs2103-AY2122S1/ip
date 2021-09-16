@@ -1,32 +1,29 @@
 package ui;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-
-import javafx.stage.Stage;
-import storage.Storage;
-import ui.components.AlertBox;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import storage.Storage;
+import ui.components.AlertBox;
+
 /**
- * Page for selecting a save file to navigate to and instantiate Alice
+ * Page for selecting a save file to navigate to and instantiate Alice.
+ * Start page will switch to chat page once user has chosen a save file.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
@@ -48,13 +45,12 @@ public class StartPage extends AnchorPane {
     private AnchorPane paneReference = new AnchorPane();
     @FXML
     private ListView<String> listView = new ListView<>();
-    @FXML
-    private Label output;
 
     private ArrayList<File> files;
 
     /**
-     *
+     * Constructor of StartPage.
+     * fetch save files and populate the list view.
      */
     public StartPage() {
         fetchSaveFiles();
@@ -76,7 +72,7 @@ public class StartPage extends AnchorPane {
 
     private void addFileNamesToItems(ObservableList<String> items) {
         files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(
-                Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
+            Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
         for (File file : files) {
             if (file.isFile() && !file.isHidden()) {
                 String fullFileName = file.getName();
@@ -110,12 +106,12 @@ public class StartPage extends AnchorPane {
         }
         // check if the input name is one of the file name
         boolean containsFile = listView.getItems().stream().anyMatch(
-                fileName -> fileName.equals(inputField.getText()));
+            fileName -> fileName.equals(inputField.getText()));
 
         if (!containsFile) {
             // prompt user to confirm creating new file first
             AlertBox.display("Are you sure you want to create new file '" + inputField.getText() + "'",
-                    e -> showChatPage());
+                e -> showChatPage());
         } else {
             // go to the chat page directly
             showChatPage();
@@ -129,16 +125,16 @@ public class StartPage extends AnchorPane {
         }
         // check if the input name is one of the file name
         boolean containsFile = listView.getItems().stream().anyMatch(
-                fileName -> fileName.equals(inputField.getText()));
+            fileName -> fileName.equals(inputField.getText()));
 
         if (containsFile) {
             // prompt user to confirm creating new file first
             AlertBox.display("Are you sure you want to delete your save file '" + inputField.getText() + "'",
-                    e -> {
-                        deleteFile();
-                        removeSaveFileFromListView();
-                        refreshSaveFiles();
-                    });
+                e -> {
+                    deleteFile();
+                    removeSaveFileFromListView();
+                    refreshSaveFiles();
+                });
         }
     }
 

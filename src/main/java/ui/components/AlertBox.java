@@ -12,7 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Prompt Box for user to confirm about his/her action
+ * Prompt a Box for user to confirm about his/her action.
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
