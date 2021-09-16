@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 /**
  * An example of a custom control using FXML.
@@ -24,8 +26,17 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Polygon triangle;
 
-    private DialogBox(String text, Image img) {
+    /**
+     * Constructor of Dialog box
+     *
+     * @param text Text inside dialogbox.
+     * @param img Picture of sender of the message.
+     * @param type Either duke or user.
+     */
+    private DialogBox(String text, Image img, String type) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -35,8 +46,26 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+
+        if (type.equals("user")) {
+            triangle.getPoints().setAll(
+                    10.0, 45.0,
+                    10.0, 55.0,
+                    17.0, 50.0
+            );
+        } else if (type.equals("duke")){
+            triangle.getPoints().setAll(
+                    10.0, 45.0,
+                    10.0, 55.0,
+                    3.0, 50.0
+            );
+        }
+        triangle.setTranslateY(30);
+        triangle.setLayoutY(30);
+        triangle.setFill(Color.LIGHTPINK);
+
         displayPicture.setImage(img);
+        dialog.setText(text);
     }
 
     /**
@@ -50,11 +79,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "user");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "duke");
         db.flip();
         return db;
     }

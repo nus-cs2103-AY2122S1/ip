@@ -6,14 +6,14 @@ package duke;
  */
 public class Ui {
     private static final String LOGO =
-            "                     _               _         \n"
-                    + "                    | |             | |        \n"
-                    + "  _ __ ___     ___  | |   ___     __| |  _   _ \n"
-                    + " | '_ ` _ \\  / _ \\| |  / _ \\  / _` | | | | |\n"
-                    + " | | | | | | |  __/ | | | (_) | | (_| | | |_| |\n"
-                    + " |_| |_| |_|  \\___||_|  \\___/  \\__,_|\\__, |\n"
-                    + "                                          __/ |\n"
-                    + "                                         |___/ \n";
+            "                    _              _        \n" +
+                    "                   |  |             |  |       \n" +
+                    " _ __ _     __  |  |  __      _|  | _   _ \n" +
+                    "| '_ ` _  \\ / _ \\|  | / _ \\  / _`  ||  |  |  |\n" +
+                    "|  | | | |  ||  __/|  || (_) | | (_|  | |  |_|  |\n" +
+                    "|_| |_| |_| \\___| |_| \\__/  \\__,_| \\___, |\n" +
+                    "                                          __/   |\n" +
+                    "                                          |___/ \n";
 
     public static String HELP_TEXT =
             "- to enter a task:\n" +
@@ -29,7 +29,9 @@ public class Ui {
                     "- to search for a task:\n" +
                     " 'find' + searchWord\n" +
                     "- to save all tasks and exit:\n" +
-                    " 'bye' \n";
+                    " 'bye' \n" +
+                    "- to snooze a task/deadline: \n" +
+                    " 'snooze' + taskNumber + date(yyyy-MM-dd)";
 
     public static String WELCOME = "Hello from\n" + LOGO + "Type 'help' to see how to talk to me!";
 
