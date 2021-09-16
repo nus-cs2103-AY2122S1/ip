@@ -1,10 +1,9 @@
 # Duke
----
 Do you procrastinate non-stop and need something to help you be on track?
 Then Duke is the solution you need!
 ![UI Screenshot](Ui.png)
 ## Features
----
+
 ### Task Management
 
 The main feature of Duke is to help you with your task management.
@@ -17,7 +16,7 @@ The three types of task are listed below:
 Duke allows users to add, delete and find such tasks with relative ease.
 
 ## Usage
----
+
 ### `todo` - Add a todo Task
 
 Adds a todo task with its description to the to-do list.
