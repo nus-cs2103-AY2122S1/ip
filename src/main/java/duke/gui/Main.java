@@ -129,7 +129,8 @@ public class Main extends Application {
         return dukeEngine.runDuke(input);
     }
 
-    //Method to delay exit adapted from https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
+    // Method to delay exit adapted from
+    // https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
     private void exit() {
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(e -> Platform.exit());

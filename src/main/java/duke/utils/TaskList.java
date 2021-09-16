@@ -39,20 +39,17 @@ public class TaskList {
      */
     public void add(Task t) throws DuplicateTaskException {
         assert t != null : "task to add cannot be null";
-
         for (Task task : this.taskList) {
             if (t.equals(task)) {
                 throw new DuplicateTaskException();
             }
         }
-
         this.taskList.add(t);
         try {
             this.storage.saveData(this);
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     /**

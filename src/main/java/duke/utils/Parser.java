@@ -8,7 +8,11 @@ import duke.commands.Delete;
 import duke.commands.Done;
 import duke.commands.Find;
 import duke.commands.ListTasks;
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyQueryException;
+import duke.exceptions.EmptyTaskDescriptionException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidDateException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +26,6 @@ import java.util.List;
 public class Parser {
 
     private enum CommandType {
-        LIST,
         FIND,
         ADD_EVENT,
         ADD_DEADLINE,
