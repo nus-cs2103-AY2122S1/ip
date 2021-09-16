@@ -1,5 +1,19 @@
 # User Guide
 
+# Table of Contents
+
+1. [Features](#features)
+2. [Usage](#usage)
+    1. [`todo`](#todo---add-a-to-do)
+    2. [`deadline`](#deadline---add-a-deadline)
+    3. [`event`](#event---add-an-event)
+    4. [`list`](#list---list-all-tasks)
+    5. [`find`](#find---finds-all-tasks-with-a-matching-name)
+    6. [`done`](#done---mark-a-task-as-done)
+    7. [`delete`](#delete---delete-a-task)
+    8. [`alias`](#alias---add-an-alias-for-a-command)
+    9. [`bye`](#bye---exits-the-application)
+
 ## Features 
 
 ### Keep track of your day-to-day tasks, deadlines and events
