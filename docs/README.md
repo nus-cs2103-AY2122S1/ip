@@ -27,7 +27,7 @@ Duke is a **chat bot for managing your upcoming tasks**, chat with Duke to get y
 3. Copy the file to the folder you want to use as the home folder for your task list.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 
-![img](/DefaultGUI.png)
+![img](DefaultGUI.png)
 
 1. Type the command in the command box and press Enter to execute it. You can try the follow example commands:
    - `list`: Shows the list of tasks you have added.
@@ -98,7 +98,7 @@ Format: `list`
 
 Example Expected Outcome:
 
-![list GUI](/listGUI.png)
+![list GUI](listGUI.png)
 
 ### Marking a task as done: `done`
 
@@ -164,7 +164,7 @@ Example:
 
 - `find submission`
 
-![FindGUI](/findGUI.png)
+![FindGUI](findGUI.png)
 
 ### Snooze tasks: `snooze`
 
