@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import duke.exception.DukeException;
+
+//TODO: Refactor the commands into their own separate classes.
 public class Duke {
     
     protected static final String COMMAND_TODO = "todo";
@@ -49,67 +52,71 @@ public class Duke {
         assert !command.isEmpty() : "The given input command is empty or invalid";
         String message = "";
         boolean isBye = false;
-        switch (command) {
-        case COMMAND_BYE: {
-            message = Formatter.getResponseString(FAREWELL);
-            isBye = true;
-            break;
+        try {
+            switch (command) {
+            case COMMAND_BYE: {
+                message = Formatter.getResponseString(FAREWELL);
+                isBye = true;
+                break;
+            }
+            case COMMAND_LIST: {
+                message = this.taskArray.handleList();
+                break;
+            }
+            case COMMAND_EVENT: {
+                message = this.taskArray.handleAddEvent(commands);
+                break;
+            }
+            case COMMAND_DEADLINE: {
+                message = this.taskArray.handleAddDeadline(commands);
+                break;
+            }
+            case COMMAND_TODO: {
+                message = this.taskArray.handleAddToDo(commands);
+                break;
+            }
+            case COMMAND_DONE: {
+                int taskIndex = Integer.parseInt(commands[1]);
+                message = this.taskArray.handleDone(taskIndex);
+                break;
+            }
+            case COMMAND_DELETE: {
+                int taskIndex = Integer.parseInt(commands[1]);
+                message = this.taskArray.handleDelete(taskIndex);
+                break;
+            }
+            case COMMAND_SAVE: {
+                message = this.taskArray.handleSave(this.storage);
+                break;
+            }
+            case COMMAND_FIND: {
+                message = this.taskArray.handleFind(commands[1]);
+                break;
+            }
+            case COMMAND_RESET: {
+                message = this.taskArray.handleReset();
+                break;
+            }
+            case COMMAND_HELP: {
+                message = this.taskArray.handleHelp();
+                break;
+            }    
+            default: {
+                message = Formatter.getResponseString(ERROR_UNKNOWN_COMMAND);
+                break;
+            }
+            }
+            return new Response(isBye, message);
+        } catch (DukeException e) {
+            return new Response(isBye, e.getMessage());
         }
-        case COMMAND_LIST: {
-            message = this.taskArray.handleList();
-            break;
-        }
-        case COMMAND_EVENT: {
-            message = this.taskArray.handleAddEvent(commands);
-            break;
-        }
-        case COMMAND_DEADLINE: {
-            message = this.taskArray.handleAddDeadline(commands);
-            break;
-        }
-        case COMMAND_TODO: {
-            message = this.taskArray.handleAddToDo(commands);
-            break;
-        }
-        case COMMAND_DONE: {
-            int taskIndex = Integer.parseInt(commands[1]);
-            message = this.taskArray.handleDone(taskIndex);
-            break;
-        }
-        case COMMAND_DELETE: {
-            int taskIndex = Integer.parseInt(commands[1]);
-            message = this.taskArray.handleDelete(taskIndex);
-            break;
-        }
-        case COMMAND_SAVE: {
-            message = this.taskArray.handleSave(this.storage);
-            break;
-        }
-        case COMMAND_FIND: {
-            message = this.taskArray.handleFind(commands[1]);
-            break;
-        }
-        case COMMAND_RESET: {
-            message = this.taskArray.handleReset();
-            break;
-        }
-        case COMMAND_HELP: {
-            message = this.taskArray.handleHelp();
-            break;
-        }
-        default: {
-            message = Formatter.getResponseString(ERROR_UNKNOWN_COMMAND);
-            break;
-        }
-        }
-        return new Response(isBye, message);
     }
 
     /**
      * Returns the response for start up.
      * @return
      */
-    public String handleStart() {
+    public String handleStart() throws DukeException {
         List<String> startMessage = GREETING;
 
         List<String> taskArrayAsString = storage.load();

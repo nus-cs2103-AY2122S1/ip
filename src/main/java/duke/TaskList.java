@@ -8,6 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class TaskList {
 
     private static final String MESSAGE_LIST = "Here are the tasks in your list:";
@@ -17,19 +23,22 @@ public class TaskList {
     private static final String MESSAGE_FIND = "I found your tasks!";
     private static final String MESSAGE_FIND_EMPTY = "No tasks were found with this description! ☹";
     private static final String MESSAGE_FIND_LIST_EMPTY = "There are no tasks in your list to find! ☹";
+    
     private static final String ERROR_UNKNOWN_FILE_COMMAND = "☹ OOPS!!! The saved file might be corrupted!";
     private static final String ERROR_TODO_MISSING_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
     private static final String ERROR_DELETE_INVALID_INDEX = "☹ OOPS!!! Please state a valid index to delete!";
+    private static final String ERROR_DONE_INVALID_INDEX = "☹ OOPS!!! Please use a valid indexed task to mark as done";
     private static final String ERROR_SAVE = "☹ OOPS!!! I am unable to save the file for an unknown reason!";
+    private static final String ERROR_ADD = "☹ OOPS!!! I am unable to add your task for an unknown reason!";
 
     private List<Task> taskArray;
 
-    public TaskList(List<String> taskArrayAsString) {
+    public TaskList(List<String> taskArrayAsString) throws DukeException {
         this.taskArray = convertStringsToTasks(taskArrayAsString);
     }
 
     //prettier-ignore
-    private List<Task> convertStringsToTasks(List<String> taskArrayAsString) {
+    private List<Task> convertStringsToTasks(List<String> taskArrayAsString) throws DukeException {
         List<Task> newTaskArray = new ArrayList<>();
 
         if (taskArrayAsString.isEmpty()) {
@@ -57,7 +66,7 @@ public class TaskList {
                 break;
             }
             default: { // TODO: Refactor this with exceptions
-                System.out.println(ERROR_UNKNOWN_FILE_COMMAND);
+                throw new DukeException(ERROR_UNKNOWN_FILE_COMMAND);
             }
             }
         }
@@ -68,9 +77,9 @@ public class TaskList {
      * Lists the array of tasks.
      *
      */
-    public String handleList() {
+    public String handleList() throws DukeException {
         if (taskArray.isEmpty()) {
-            return Formatter.getResponseString(MESSAGE_LIST_EMPTY);
+            throw new DukeException(MESSAGE_LIST_EMPTY);
         }
 
         return Formatter.getNumberedListResponse(MESSAGE_LIST, taskArray);
@@ -81,11 +90,15 @@ public class TaskList {
      *
      * @param newTask
      */
-    public String handleAddHelper(Task newTask) {
+    public String handleAddHelper(Task newTask) throws DukeException{
         taskArray.add(newTask);
-        return Formatter.getResponseString(
-            Formatter.addTaskString(newTask.toString(), Integer.toString(taskArray.size()))
-        );
+        try {
+            return Formatter.getResponseString(
+                Formatter.addTaskString(newTask.toString(), Integer.toString(taskArray.size()))
+            );
+        } catch (Exception e) {
+            throw new DukeException(ERROR_ADD);
+        }
     }
 
     /**
@@ -93,8 +106,8 @@ public class TaskList {
      *
      * @param command
      */
-    public String handleAddToDo(String[] command) {
-        String newTaskDescription = Formatter.getTaskName(command);
+    public String handleAddToDo(String[] commands) throws DukeException {
+        String newTaskDescription = Formatter.getTaskName(commands);
         if (newTaskDescription.equals("")) {
             return Formatter.getResponseString(ERROR_TODO_MISSING_DESCRIPTION);
         }
@@ -107,9 +120,9 @@ public class TaskList {
      *
      * @param command
      */
-    public String handleAddDeadline(String[] command) {
-        String newTaskDescription = Formatter.getTaskName(command);
-        String newTaskDate = Formatter.getTaskDate(command);
+    public String handleAddDeadline(String[] commands) throws DukeException {
+        String newTaskDescription = Formatter.getTaskName(commands);
+        String newTaskDate = Formatter.getTaskDate(commands);
         Deadline newTask = new Deadline(newTaskDescription, newTaskDate);
         return handleAddHelper(newTask);
     }
@@ -119,9 +132,9 @@ public class TaskList {
      *
      * @param command
      */
-    public String handleAddEvent(String[] command) {
-        String newTaskDescription = Formatter.getTaskName(command);
-        String newTaskDate = Formatter.getTaskDate(command);
+    public String handleAddEvent(String[] commands) throws DukeException {
+        String newTaskDescription = Formatter.getTaskName(commands);
+        String newTaskDate = Formatter.getTaskDate(commands);
         Event newTask = new Event(newTaskDescription, newTaskDate);
         return handleAddHelper(newTask);
     }
@@ -131,10 +144,14 @@ public class TaskList {
      *
      * @param taskIndex
      */
-    public String handleDone(int taskIndex) {
-        Task indexedTask = this.taskArray.get(taskIndex - 1);
-        String output = indexedTask.setTaskAsDone();
-        return Formatter.getResponseString(output);
+    public String handleDone(int taskIndex) throws DukeException{
+        try {
+            Task indexedTask = this.taskArray.get(taskIndex - 1);
+            String output = indexedTask.setTaskAsDone();
+            return Formatter.getResponseString(output);    
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(ERROR_DONE_INVALID_INDEX);
+        }
     }
 
     /**
@@ -143,14 +160,15 @@ public class TaskList {
      *
      * @param taskIndex
      */
-    public String handleDelete(int taskIndex) {
-        if (taskIndex < -1 || taskIndex >= taskArray.size()) {
-            return Formatter.getResponseString(ERROR_DELETE_INVALID_INDEX);
-        }
+    public String handleDelete(int taskIndex) throws DukeException {
+        try {
         Task deletedTask = taskArray.remove(taskIndex - 1);
         return Formatter.getResponseString(
             Formatter.deleteTaskString(deletedTask.toString(), Integer.toString(taskArray.size()))
         );
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(ERROR_DELETE_INVALID_INDEX);
+        }
     }
 
     /**
@@ -158,7 +176,7 @@ public class TaskList {
      *
      * @param storage
      */
-    public String handleSave(Storage storage) {
+    public String handleSave(Storage storage) throws DukeException {
         try {
             String fileContents = storage.writeToFile(taskArray);
             List<String> fileContentStrings = Arrays.asList(fileContents.split("\n"));
@@ -167,7 +185,7 @@ public class TaskList {
             output.addAll(fileContentStrings);
             return Formatter.getResponseString(output);
         } catch (IOException e) {
-            return Formatter.getResponseString(ERROR_SAVE);
+            throw new DukeException(ERROR_SAVE);
         }
     }
 
@@ -175,7 +193,7 @@ public class TaskList {
      * Prints tasks with similar description based on regex with description.
      * @param description
      */
-    public String handleFind(String description) {
+    public String handleFind(String description) throws DukeException {
         if (taskArray.isEmpty()) {
             return Formatter.getResponseString(MESSAGE_FIND_LIST_EMPTY);
         }
@@ -187,7 +205,7 @@ public class TaskList {
         }).collect(Collectors.toList());
 
         if (tasksFound.isEmpty()) {
-            return Formatter.getResponseString(MESSAGE_FIND_EMPTY);
+            throw new DukeException(MESSAGE_FIND_EMPTY);
         }
 
         return Formatter.getNumberedListResponse(MESSAGE_FIND, tasksFound);

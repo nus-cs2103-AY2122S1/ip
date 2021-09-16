@@ -1,6 +1,7 @@
-package duke;
+package duke.task;
 
 public class Todo extends Task {
+    protected static final String COMMAND_TODO = "todo";
 
     /**
      * Returns a ToDo instance.
@@ -37,7 +38,7 @@ public class Todo extends Task {
      * Returns proper format to write to txt file.
      */
     public String toWriteString() {
-        String output = Duke.COMMAND_TODO;
+        String output = COMMAND_TODO;
         String isDone = (this.isDone ? "1" : "0");
         output += DIVIDER + isDone + DIVIDER + this.description;
         return output;
