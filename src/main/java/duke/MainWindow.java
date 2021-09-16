@@ -6,13 +6,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final Font USER_FONT = Font.loadFont(DialogBox.class.getResource("/fonts/JetBrainsMono-Italic.ttf")
+                    .toExternalForm(),
+            15);
+    private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/UserIcon.jpg"));
+    private static final Image BOT_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/BotIcon.png"));
+    private static final Image SEND_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/SendIcon.png"));
 
     @FXML
     private ScrollPane scrollPane;
@@ -22,11 +31,10 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private ImageView sendButtonImage;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     @FXML
     public void initialize() {
@@ -38,7 +46,9 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.runWelcome(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(duke.runWelcome(), BOT_IMAGE));
+        sendButtonImage.setImage(SEND_IMAGE);
+        userInput.setFont(USER_FONT);
     }
 
     /**
@@ -56,8 +66,8 @@ public class MainWindow extends AnchorPane {
 
         String response = duke.run(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getBotDialog(response, BOT_IMAGE)
         );
         userInput.clear();
         assert userInput.getText().length() == 0 : "User input in GUI text field is supposed to be cleared";
