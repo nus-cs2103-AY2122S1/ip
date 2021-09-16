@@ -22,7 +22,6 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) throws DukeException {
         super(description);
-
         if (deadline.equals("") || deadline.equals(" ")) {
             throw new DukeException("☹ OOPS!!! The deadline of this task must be indicated.");
         } else {

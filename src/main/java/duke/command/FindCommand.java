@@ -1,5 +1,6 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Find;
@@ -16,8 +17,8 @@ public class FindCommand extends Command {
      *
      * @param input The user input.
      */
-    public FindCommand(String input) {
-        this.keyword = input.substring(5);
+    public FindCommand(Input input) {
+        this.keyword = input.getKeyword();
     }
 
     /**

@@ -22,7 +22,6 @@ public class Event extends Task {
      */
     public Event(String description, String at) throws DukeException {
         super(description);
-
         if (at.equals("") || at.equals(" ")) {
             throw new DukeException("☹ OOPS!!! The time of the event must be indicated.");
         } else {

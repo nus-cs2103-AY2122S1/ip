@@ -45,7 +45,7 @@ public class Duke {
 
         while (!isExit) {
             try {
-                Command c = Parser.parse(scanner.nextLine().trim());
+                Command c = Parser.parse(new Input(scanner.nextLine().trim()));
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -70,7 +70,7 @@ public class Duke {
      */
     String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(new Input(input));
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.getErrorMessage(e);

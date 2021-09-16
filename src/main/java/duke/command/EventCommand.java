@@ -1,5 +1,6 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Event;
@@ -17,10 +18,10 @@ public class EventCommand extends Command {
      *
      * @param input User input.
      */
-    public EventCommand(String input) throws DukeException {
-        this.taskDesc = input.replaceFirst("^event", "").split(" /")[0];
-        if (input.contains("/at")) {
-            this.eventDate = input.substring(input.indexOf("/at") + 4);
+    public EventCommand(Input input) throws DukeException {
+        this.taskDesc = input.getDescription("event");
+        if (input.checkIfContains("/at")) {
+            this.eventDate = input.getDate("event");
         } else {
             throw new DukeException("☹ OOPS!!! Please use the /at command to include the time of event.");
         }

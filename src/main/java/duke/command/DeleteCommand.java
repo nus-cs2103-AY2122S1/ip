@@ -1,5 +1,6 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
@@ -17,12 +18,12 @@ public class DeleteCommand extends Command {
      * @param input User input.
      * @throws DukeException If input is invalid.
      */
-    public DeleteCommand(String input) throws DukeException {
+    public DeleteCommand(Input input) throws DukeException {
+        if (input.hasCommandWordOnly("delete")) {
+            throw new DukeException("A number must follow after the command word 'delete'.");
+        }
         try {
-            if (input.equals("delete") || input.equals("delete ")) {
-                throw new DukeException("A number must follow after the command word 'delete'.");
-            }
-            this.taskNumber = Integer.valueOf(input.substring(7)) - 1;
+            this.taskNumber = input.getIndex("delete");
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS! Please enter a valid task number.");
         }

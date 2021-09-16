@@ -1,5 +1,6 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
@@ -16,8 +17,8 @@ public class TodoCommand extends Command {
      *
      * @param input User input.
      */
-    public TodoCommand(String input) {
-        this.taskDesc = input.replaceFirst("^todo", "");
+    public TodoCommand(Input input) {
+        this.taskDesc = input.getDescription("todo");
     }
 
     /**

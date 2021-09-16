@@ -1,10 +1,10 @@
 package duke.command;
 import duke.DukeException;
+import duke.Input;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.TaskList;
-
 
 /**
  * Command to create Deadline tasks.
@@ -18,10 +18,11 @@ public class DeadlineCommand extends Command {
      *
      * @param input User's input.
      */
-    public DeadlineCommand(String input) {
-        this.taskDesc = input.replaceFirst("^deadline", "").split(" /")[0];
-        assert input.contains("/by") : "missing /by command";
-        this.deadline = input.substring(input.indexOf("/by") + 4);
+    public DeadlineCommand(Input input) {
+        this.taskDesc = input.getDescription("deadline");
+        if (input.checkIfContains("/by")) {
+            this.deadline = input.getDate("deadline");
+        }
     }
 
     /**
