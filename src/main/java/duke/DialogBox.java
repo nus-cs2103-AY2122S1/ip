@@ -23,9 +23,9 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     private static final double imageSize = 90.0;
-    private static final Background dukeBG = new Background(new BackgroundFill(
+    private static final Background DUKE_BG = new Background(new BackgroundFill(
         Color.rgb(83, 215, 105), new CornerRadii(10), new Insets(5)));
-    private static final Background userBG = new Background(new BackgroundFill(
+    private static final Background USER_BG = new Background(new BackgroundFill(
         Color.rgb(90, 200, 250), new CornerRadii(10), new Insets(5)));
     @FXML
     private Label dialog;
@@ -68,7 +68,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         Label tempLabel = (Label) db.lookup("#dialog");
-        tempLabel.setBackground(userBG);
+        tempLabel.setBackground(USER_BG);
         return db;
     }
 
@@ -83,7 +83,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         Label tempLabel = (Label) db.lookup("#dialog");
         db.flip();
-        tempLabel.setBackground(dukeBG);
+        tempLabel.setBackground(DUKE_BG);
         return db;
     }
 }
