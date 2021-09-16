@@ -25,6 +25,7 @@ public abstract class DateAndTimeTask extends Task {
         String[] processedInput = processInput(input, splitterKey);
         setDescription(processedInput[0]);
         setDateAndTime(processedInput[1]);
+        assertDateAndTime();
     }
 
     /**
@@ -38,6 +39,7 @@ public abstract class DateAndTimeTask extends Task {
     public DateAndTimeTask(String description, String dateAndTime, boolean isDone) throws DukeException {
         super(description, isDone);
         setDateAndTime(dateAndTime);
+        assertDateAndTime();
     }
 
     /**
@@ -48,6 +50,7 @@ public abstract class DateAndTimeTask extends Task {
         String[] splitDateAndTime = dateAndTime.split(" ");
         setDate(splitDateAndTime[0]);
         setTime(splitDateAndTime[1]);
+        assertDateAndTime();
     }
 
     /**
@@ -94,15 +97,14 @@ public abstract class DateAndTimeTask extends Task {
      */
     @Override
     public String toString() {
+        assertDateAndTime();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d LLL yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h.mma");
         String result = super.toString();
 
-        if (date != null && time != null) {
-            String dateStr = date.format(dateFormatter);
-            String timeStr = time.format(timeFormatter);
-            result += " (" + dateStr + " " + timeStr + ")";
-        }
+        String dateStr = date.format(dateFormatter);
+        String timeStr = time.format(timeFormatter);
+        result += " (" + dateStr + " " + timeStr + ")";
 
         return result;
     }
@@ -149,5 +151,10 @@ public abstract class DateAndTimeTask extends Task {
         }
 
         return input.split(splitterKey);
+    }
+
+    private void assertDateAndTime() {
+        assert date != null : "Date of task cannot be null";
+        assert time != null : "Time of task cannot be null";
     }
 }

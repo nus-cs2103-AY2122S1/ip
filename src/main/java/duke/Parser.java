@@ -55,6 +55,10 @@ public class Parser {
      */
     public String parse(String input) {
         String result = "";
+
+        assert taskList != null : "taskList must be initialised by this point";
+        assert storage != null : "storage must be initialised by this point";
+
         try {
             if (input.equals(COMMAND_EXIT)) {
                 //TO-DO
@@ -120,7 +124,7 @@ public class Parser {
         } else if (unparsedStr.startsWith(TAG_DATE)) {
             String date = unparsedStr.substring(TAG_DATE.length());
             DateAndTimeTask castedTask = DateAndTimeTask.cast(task);
-            castedTask.setTime(date);
+            castedTask.setDate(date);
         } else if (unparsedStr.startsWith(TAG_TIME)) {
             String time = unparsedStr.substring(TAG_TIME.length());
             DateAndTimeTask castedTask = DateAndTimeTask.cast(task);
