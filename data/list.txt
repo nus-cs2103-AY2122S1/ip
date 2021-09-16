@@ -1,2 +1,0 @@
-[T][X] read book (tags: #urgent #done)
-[D][X] return book   (deadline: Dec 1 2021)
