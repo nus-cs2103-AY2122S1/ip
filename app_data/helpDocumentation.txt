@@ -67,6 +67,20 @@ Example:
 delete 3
 
 --------------------------------------------------------------------
+Finding a task: find
+Finds tasks that match a keyword.
+
+Format: find <KEY_WORD>
+
+Example:
+find book
+
+Output:
+I found these matching tasks in your list for 'book':
+1.[T][X] read book
+2.[D][ ] return book (by: Sep 08 2021, 03:00 pm)
+
+--------------------------------------------------------------------
 Exit program: bye
 Exits this program session.
 
