@@ -1,48 +1,72 @@
-# Do Understand Know Empower (duke)
+# The Duke
+<p>
+The Duke (inspired by a character in the show Solar Opposites) is a personal helper chatbot. The Duke allows you to 
+keep track of tasks such as:
+</p>
 
-Hello 😄 This is Ryan Ong's evolution of the **duke Chatbot** with the purpose of keeping track of the tasks *you* ~~die die~~ need to do.
-> Quidquid latine dictum sit, altum videtur
+ - To-do type tasks
+ - Tasks with deadlines
+ - Events
 
-## Features
+See below for a full list of The Duke's commands and how to use The Duke :smiley:
 
- * Add tasks
- * Delete tasks
- * Complete tasks
- * Local storage
+> Welcome to my humble abode. I'm the Duke. The ruler of shadows.
+> The main vein. The big boy. The top puppy.
 
-## Tasks
+## User Guide
 
-Tasks are available in the following types:
+### Add To-Do `todo <task name>`
+Adds a to-do type task to your list of tasks.
+###### Example
+`todo New Task` will add a to-do task called New Task to your list. 
 
-1. ToDo
-2. Event
-3. Deadline
+### Add Deadline `deadline <deadline name> /<date and time>`
+Adds a task with a deadline to your list of tasks.
+ - Date and time is preceded with a backslash (/).
+ - Date and time must be entered in the format YYYY-MM-DD HH-MM.
+###### Example
+`deadline New Deadline /2021-12-30 18:00` will add a deadline task called 
+New Deadline with the deadline set to the 30th of december 2021 at 6pm.
 
-## Example code
+### Add Event `event <event name> /<date and time>`
+Adds an event with a date and time to your list of tasks.
+- Date and time is preceded with a backslash (/).
+- Date and time must be entered in the format YYYY-MM-DD HH-MM.
+###### Example
+`event New Event /2021-12-30 18:00` will add an event called
+New Event scheduled for the 30th of december 2021 at 6pm.
 
-Here's an example of the `code` for the ToDo task!
+### List Tasks `list`
+Lists out all the tasks which you currently have in your list.
 
-```java
-public static class ToDo extends Task {
+### Complete Task `done <task index>`
+Sets a task to be marked as completed.
+ - `task index` is based on the index indicated with the command `list`.
+###### Example
+`done 1` will mark the first task in the list as completed.
 
-        public ToDo(String name) throws DukeException.NoNameException {
-            super(name, "#ToDo");
-        }
+### Delete Task `delete <task index>`
+Deletes a task from your task list.
+- `task index` is based on the index indicated with the command `list`.
+###### Example
+`delete 1` will delete the first task in your list.
 
-        public ToDo(String name, boolean done) throws DukeException.NoNameException {
-            super(name, "#ToDo", done);
-        }
-    }
-```
+### Close Application `bye`
+Closes the application.
 
-## Have you tried all the features?
+### Search List of Tasks `find <keyword>`
+Shows you your tasks which names contain the keyword specified. 
+###### Example
+`find CS2103` will show you a list of all your tasks which have 
+"CS2103" in their name.
 
- - [ ] Added three tasks (one of each type)
- - [ ] Completed task 2
- - [ ] Deleted task 1
- - [ ] Closed the program
- - [ ] Restarted the program to see your list is saved!
-
-## Guess what page I'm referring to now?
-
-[This page!](https://nus-cs2103-ay2122s1.github.io/website/schedule/week4/project.html)
+### Reschedule a Task `snooze <task index> /<date and time>`
+Changes the deadline/time of a Deadline or Event task to the date and 
+time specified.
+- Command is only applicable to Deadline or Event tasks.
+- `task index` is based on the index indicated with the command `list`.
+- Date and time is preceded with a backslash (/).
+- Date and time must be entered in the format YYYY-MM-DD HH-MM.
+###### Example
+`snooze 1 /2021-12-30 23:59` will change the date and time of the first
+task to the 30th of December, 11:59pm.
