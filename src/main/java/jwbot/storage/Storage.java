@@ -31,6 +31,7 @@ public class Storage {
      * @param filePath the path of the txt file that the tasks will be recorded on
      */
     public Storage(String filePath) {
+        assert filePath != null : "filePath is null";
         this.filePath = filePath;
     }
 

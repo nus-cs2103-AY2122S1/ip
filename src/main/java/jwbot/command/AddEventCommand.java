@@ -10,6 +10,7 @@ public class AddEventCommand extends Command {
 
     public AddEventCommand(String input) {
         super(input);
+        assert input.startsWith("event");
     }
 
     /**

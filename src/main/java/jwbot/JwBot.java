@@ -1,7 +1,5 @@
 package jwbot;
 
-
-import javafx.application.Platform;
 import jwbot.command.Command;
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
@@ -26,6 +24,7 @@ public class JwBot {
      * @param filePath the path of the txt file that the tasks will be recorded on
      */
     public JwBot(String filePath) {
+        assert filePath != null : "filePath is null";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -41,6 +40,7 @@ public class JwBot {
     }
 
     public String getResponse(String input) throws JwBotException {
+        assert input != null;
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);

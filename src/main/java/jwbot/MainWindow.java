@@ -60,5 +60,6 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             jwBot.exit();
         }
+        assert !input.equals("bye");
     }
 }

@@ -8,6 +8,7 @@ public class ListCommand extends Command {
 
     public ListCommand(String input) {
         super(input);
+        assert input.equals("list");
     }
 
     /**

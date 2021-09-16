@@ -10,6 +10,7 @@ public class AddDeadlineCommand extends Command {
 
     public AddDeadlineCommand(String input) {
         super(input);
+        assert input.startsWith("deadline");
     }
 
     /**
@@ -21,6 +22,9 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         try {
             String content = input.split(" ", 2)[1];
             String[] separated = content.split(" /by ");
