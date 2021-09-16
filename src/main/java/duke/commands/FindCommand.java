@@ -6,6 +6,11 @@ import duke.util.Ui;
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructor for the find command.
+     *
+     * @param keyword Keyword users are searching for.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

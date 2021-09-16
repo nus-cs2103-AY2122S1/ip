@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import duke.exceptions.UserInputError;
 
 /**
- * The Deadline class that represents a task with a starting datetime.
+ * The Deadline class that represents a task with a date and optional time input.
  */
 public class Deadline extends Task {
 
@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor to create a Deadline task.
+     * Throws an error if datetime is invalid.
      *
      * @param description details of task.
      * @param when deadline date of task.
@@ -40,6 +41,7 @@ public class Deadline extends Task {
 
     /**
      * Checks that both date and time input of the user is accurate and valid.
+     * Throws a UserInputError with wrong datetime format.
      *
      * @param datetime Datetime string input of user.
      * @return An array containing the date and time strings.
@@ -63,7 +65,7 @@ public class Deadline extends Task {
     /**
      * Appends datetime to the String format writeable to Storage file.
      *
-     * @return Formatted data as a string
+     * @return Formatted data as a string.
      */
     @Override
     public String convertTaskToString() {

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import duke.exceptions.UserInputError;
 
 /**
- * The Event class that represents a task with a starting datetime.
+ * The Event class that represents a task with a date and time period.
  */
 public class Event extends Task {
 
@@ -16,11 +16,12 @@ public class Event extends Task {
 
     /**
      * Constructor to create an Event task.
+     * Throws an error if datetime is invalid
      *
      * @param description Details of task.
      * @param when Deadline of task.
      * @param done Boolean value that indicates completeness of task.
-     * @throws UserInputError Throws error with bad user input.
+     * @throws UserInputError Throws error with invalid when String.
      */
     public Event(String description, String when, boolean done) throws UserInputError {
         super(description, Task.Type.EVENT, done);
@@ -35,6 +36,7 @@ public class Event extends Task {
 
     /**
      * Checks that both date and time input of the user is accurate and valid.
+     * Throws a UserInputError with wrong datetime format.
      *
      * @param datetime Datetime string input of user.
      * @return An array containing the date and time strings.
@@ -54,9 +56,10 @@ public class Event extends Task {
 
     /**
      * Checks if input time period is valid and in the correct format.
+     * Throws UserInputError if time range is invalid.
      *
      * @param period String representing starting and ending time of event task.
-     * @throws UserInputError Throws error if time input is invalid/in the wrong format.
+     * @throws UserInputError Throws error if time input is invalid or in the wrong format.
      */
     private void checkTimeRangeFormat(String period) throws UserInputError {
         String[] timings = period.trim().split("-");
@@ -70,7 +73,7 @@ public class Event extends Task {
 
         int end = Integer.parseInt(timings[1].trim());
         int start = Integer.parseInt(timings[0].trim());
-        if ( end < start  || start == end) {
+        if (end < start || start == end) {
             throw new UserInputError("Invalid time. Please ensure start and end time are logically sound.");
         }
 

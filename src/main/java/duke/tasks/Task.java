@@ -39,6 +39,7 @@ public abstract class Task {
     }
 
     /**
+     * Get LocalDate object from a date string that can be a natural date or normal date.
      * Parse date String to identify natural dates, if existent, and convert them to YYYY-MM-DD format.
      * Otherwise, parse String and throw an error if date String is in an invalid format.
      *
@@ -73,7 +74,8 @@ public abstract class Task {
     }
 
     /**
-     * Function to check if the format of time (i.e. 24h format) and if time given is valid (i.e. 1260 is rejected).
+     * Checks the format and validity of given time String.
+     * Throws an error if time String is invalid.
      *
      * @param time String of time that is being checked.
      * @throws UserInputError Throws error if time String is not valid.
@@ -88,18 +90,19 @@ public abstract class Task {
         int hour = Integer.parseInt(trimmed.substring(0, 2));
         int min = Integer.parseInt(trimmed.substring(2, 4));
 
-        if (hour < 0 || hour > 23 || min < 0 || min > 59) { //checks hour and min are valid
+        if (hour < 0 || hour > 23 || min < 0 || min > 59) { //checks hour and min are valid (i.e. 1260 is rejected)
             throw new UserInputError("Your hour/minute input is invalid. Please check and try again!");
         }
     }
 
     /**
      * Creates a new task according task type.
+     * Throws a UserInputError if Task type is invalid.
      *
      * @param input String containing task details.
      * @param type The enum type of the task.
      * @return A Task object.
-     * @throws UserInputError Throws error with bad user input.
+     * @throws UserInputError Throws error with invalid task type.
      */
     public static Task createTask(String input, Type type) throws UserInputError {
         String[] details;
@@ -119,10 +122,12 @@ public abstract class Task {
     }
 
     /**
-     * Convert String equivalent of a task from database to a Task object.
+     * Return a Task object by converting from a task String retrieved from database.
+     * Throws a UserInputError if task String is invalid.
      *
      * @param dataString String containing Task details.
      * @return A Task object with task type and details.
+     * @throws UserInputError Throws error with invalid task String format.
      */
     public static Task stringToTask(String dataString) throws UserInputError {
         Task newTask;
@@ -151,12 +156,13 @@ public abstract class Task {
     }
 
     /**
-     * Separate input into task description and datetime.
+     * Returns an array containing the task description and datetime.
+     * Throws a UserInputError if details are incomplete.
      *
      * @param str String of details.
      * @param key Delimiter.
      * @return Array of description and datetime.
-     * @throws UserInputError Throws error with bad user input.
+     * @throws UserInputError Throws error with incomplete details.
      */
     private static String[] separateDetails(String str, String key) throws UserInputError {
         if (str.split(key).length <= 1) {
@@ -167,7 +173,7 @@ public abstract class Task {
     }
 
     /**
-     * Convert Task object to a String form for database.
+     * Convert Task object to a task String.
      *
      * @return String writeable to database.
      */

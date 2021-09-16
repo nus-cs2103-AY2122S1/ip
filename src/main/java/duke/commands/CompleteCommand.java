@@ -8,6 +8,11 @@ import duke.util.Ui;
 public class CompleteCommand extends Command {
     private final int index;
 
+    /**
+     * Constructor for a complete command.
+     *
+     * @param index Integer reference for the task to be deleted.
+     */
     public CompleteCommand(int index) {
         this.index = index;
     }

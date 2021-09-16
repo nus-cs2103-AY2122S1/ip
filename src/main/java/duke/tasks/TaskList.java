@@ -9,7 +9,7 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     /**
-     * Constructor to make a task list.
+     * Constructor to make a taskList.
      *
      * @param list ArrayList of Tasks.
      */
@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Find the number of Tasks.
+     * Get the number of Tasks.
      *
      * @return Number of Tasks.
      */
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Add another Task to the list.
+     * Add another Task to the taskList.
      *
      * @param task A Task object.
      */

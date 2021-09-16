@@ -19,6 +19,7 @@ public class Parser {
     private final String input;
     private final String command;
     private final TaskList taskList;
+
     /**
      * Constructor to make a parser.
      *
@@ -26,15 +27,15 @@ public class Parser {
      */
     public Parser(String input, TaskList taskList) {
         this.input = input;
-        this.command = getFirstWord(input).toLowerCase();
+        this.command = getCommand(input).toLowerCase();
         this.taskList = taskList;
     }
 
     /**
-     * Parses input to get the appropriate Command object. Throws a UserInputError if user command does not exist in
-     * Duke.
+     * Parses input to get the appropriate Command object.
+     * Throws a UserInputError if user command does not exist in Duke.
      *
-     * @return Command type according to input.
+     * @return Command type according to user input.
      * @throws UserInputError Throws error with bad user input.
      */
     public Command parse() throws UserInputError {
@@ -88,7 +89,7 @@ public class Parser {
     }
 
     /**
-     * Get index of the task the user is referring to.
+     * Get integer index of the task the user is referring to.
      *
      * @return Index of wanted task.
      */
@@ -102,10 +103,11 @@ public class Parser {
     }
 
     /**
-     * Check that input index is valid.
+     * Check that input index is a valid reference.
+     * Throws a UserInputError if index is out of bounds.
      *
      * @param index Input index proposed by user.
-     * @throws UserInputError Throws error with bad user input.
+     * @throws UserInputError Throws error if index is out of bounds.
      */
     private void checkIndexRange(int index) throws UserInputError {
         if (index < 0) {
@@ -124,9 +126,9 @@ public class Parser {
     }
 
     /**
-     * Separate command and description from input.
+     * Get description from user input.
      *
-     * @param input User input.
+     * @param input String input.
      * @return Description of the task.
      */
     private String getDesc(String input) {
@@ -134,7 +136,8 @@ public class Parser {
     }
 
     /**
-     * Check user input contains needed description.
+     * Check user input contains a description.
+     * Throws a UserInputError if there is no description for the command.
      *
      * @throws UserInputError Throws error with bad user input.
      */
@@ -147,12 +150,12 @@ public class Parser {
     }
 
     /**
-     * Get the command from the input.
+     * Get command String from the input.
      *
-     * @param text User input.
-     * @return Command for Duke.
+     * @param text User String input.
+     * @return Command String for Duke.
      */
-    private String getFirstWord(String text) {
+    private String getCommand(String text) {
         int index = text.indexOf(' ');
 
         if (index > -1) { // Check if there is more than one word.
