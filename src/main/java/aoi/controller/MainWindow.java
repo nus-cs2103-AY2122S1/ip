@@ -40,8 +40,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getAoiDialog(Ui.showGreeting(), aoiImage));
     }
 
-    public void setAoi(Aoi aoi) {
-        aoi = aoi;
+    public void setAoi(Aoi a) {
+        aoi = a;
     }
 
     /**
@@ -54,6 +54,7 @@ public class MainWindow extends AnchorPane {
 
         // Does nothing if input is empty.
         if (input.trim().isEmpty()) {
+            System.out.println("hi");
             return;
         }
 
