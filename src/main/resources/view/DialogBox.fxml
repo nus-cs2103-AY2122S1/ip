@@ -8,12 +8,12 @@
 
 <fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" style="-fx-background-color: #FF8E49; -fx-background-radius: 10; -fx-padding: 10">
+        <Label fx:id="dialog" text="Label" wrapText="true" style="-fx-background-color: #FF8E49; -fx-background-radius: 40; -fx-padding: 25" >
             <font>
                 <Font name="Courier New Bold" size="15" />
             </font>
         </Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" scaleX="0.80" scaleY="0.80" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
