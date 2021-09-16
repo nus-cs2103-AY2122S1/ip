@@ -1,4 +1,3 @@
 T / 1 / Read Book
-D / 0 / Return Book / 2021-09-08
-E / 0 / Buy Coffee / 2021-09-22
+D / 1 / Return Book / 2021-09-08
 E / 0 / Make Coffee / 2021-09-23

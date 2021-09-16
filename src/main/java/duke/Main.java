@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setTitle("Duck");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/duck.jpg")));
             stage.show();

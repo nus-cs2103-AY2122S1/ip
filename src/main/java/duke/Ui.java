@@ -15,15 +15,15 @@ public class Ui {
     private static final String BYE = "Bye. Hope to see you again soon!\n"
             + "*quack*\n";
     private static final String HELP = "Here's a list of commands that Duck can help you with!\n"
-            + "1. todo TASK: Add a Todo task to your list\n"
-            + "2. deadline TASK /by YYYY-MM-DD: Add a Deadline to your list with a specified date\n"
-            + "3. event TASK /at YYYY-MM-DD: Add a Event to your list with a specified date\n"
-            + "4. list: Displays your task list\n"
-            + "5. done TASK_NO: Mark a task on your list as completed.\n"
-            + "6. delete TASK_NO: Delete a task from your list\n"
-            + "7. find SEARCH_TERMS: Search for tasks that contain words from your search term\n"
-            + "8. help: View list of commands again\n"
-            + "Have fun using Duck!";
+            + "1. todo TASK: Add a Todo task\n"
+            + "2. deadline TASK /by YYYY-MM-DD: Add a Deadline task with a specified date\n"
+            + "3. event TASK /at YYYY-MM-DD: Add a Event task with a specified date\n"
+            + "4. list: Display your task list\n"
+            + "5. done TASK_NO: Mark a task as completed\n"
+            + "6. delete TASK_NO: Delete a task\n"
+            + "7. find SEARCH_TERMS: Search for tasks\n"
+            + "8. help: View this list of commands again\n"
+            + "*quack*\n";
 
     /**
      * Display greeting to users upon running.
@@ -76,7 +76,7 @@ public class Ui {
      * @return Message that task was deleted.
      */
     public String showDeleted(Task deletedTask, int numTasks) {
-        return String.format("Noted. I've removed this task: %s\nNow you have %d tasks in your list.\n",
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in your list.\n",
                 deletedTask.toString(), numTasks);
     }
 
@@ -107,12 +107,12 @@ public class Ui {
      */
     public String showList(TaskList tasks) {
         if (tasks.taskList.isEmpty()) {
-            return "There are no duke.tasks on your list. *quack*";
+            return "There are no tasks on your list. *quack*";
         } else if (tasks.getLength() == 1) {
             return String.format("There is one task on your list:\n1. %s\n*quack*",
                     tasks.getTask(0).toString());
         } else {
-            String taskStrings = "Here are the duke.tasks on your list:\n";
+            String taskStrings = "Here are the tasks on your list:\n";
             int i = 1;
             for (Task task : tasks.taskList) {
                 taskStrings += String.format("%d. %s\n", i, task.toString());
