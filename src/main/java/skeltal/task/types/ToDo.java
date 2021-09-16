@@ -4,12 +4,16 @@ import skeltal.task.Task;
 
 public class ToDo extends Task {
 
-    /**
-     * A constructor that initialises a To Do object.
-     * @param task The task that should be stored in the object.
-     */
-    public ToDo(String task) {
+    private ToDo(String task) {
         super(task);
+    }
+
+    /**
+     * A factory method that initialises a To Do object.
+     * @param description The task that should be stored in the object.
+     */
+    public static ToDo of(String description) {
+        return new ToDo(description);
     }
 
     /**

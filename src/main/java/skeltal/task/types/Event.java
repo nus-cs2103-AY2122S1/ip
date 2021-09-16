@@ -11,15 +11,29 @@ import skeltal.task.Task;
 public class Event extends Task {
     private String time;
 
+    private Event(String description) {
+        super(description);
+    }
+
     /**
-     * A constructor that initialises a Event object.
-     * @param description A semi-processed string from the parser which contains
-     *                The task and the time. e.g "Task /time".
-     * @throws SkeltalException If the time description is not found.
+     * A factory method that initialises a Event object.
+     *
+     * @param taskAndTime A semi-processed string from the parser which contains
+     *                    The task and the time. e.g "Task /time".
+     * @returns An Event object.
+     * @throws SkeltalException
      */
-    public Event(String description) throws SkeltalException {
-        super(description.split("/", 2)[0]);
-        this.time = Parser.parseDescription(description, "event");
+    public static Event of(String taskAndTime) throws SkeltalException {
+        String[] taskTimeArr = Parser.parseDescription(taskAndTime, "event");
+        String task = taskTimeArr[0];
+        String time = taskTimeArr[1];
+        Event event = new Event(task);
+        event.setTime(time);
+        return event;
+    }
+
+    private void setTime(String time) {
+        this.time = time;
     }
 
     /**
@@ -30,11 +44,13 @@ public class Event extends Task {
      */
     @Override
     public String store() {
-        return "E | " + super.store() + "| " + time;
+        return "E | " + super.store() + " | " + time;
     }
 
-    /** Returns a String representation of the Event object, for printing purposes.
+    /**
+     * Returns a String representation of the Event object, for printing purposes.
      * Eg "[E][ ] Task (time)".
+     *
      * @return A string representation of the Event object for printing.
      */
     @Override

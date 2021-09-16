@@ -11,15 +11,28 @@ import skeltal.task.Task;
 public class Deadline extends Task {
     private String time;
 
+    private Deadline(String description) throws SkeltalException {
+        super(description);
+    }
+
     /**
-     * A constructor that initialises a Deadline object.
-     * @param description A semi-processed string from the parser which contains
-     *                The task and the time. e.g "Task /time".
-     * @throws SkeltalException If the time description is not found.
+     * A factory method that initialises a Deadline object.
+     *
+     * @param taskAndTime A semi-processed string from the parser which contains
+     *                    The task and the time. e.g "Task /time".
+     * @throws SkeltalException
      */
-    public Deadline(String description) throws SkeltalException {
-        super(description.split("/", 2)[0]);
-        this.time = Parser.parseDescription(description, "deadline");
+    public static Deadline of(String taskAndTime) throws SkeltalException {
+        String[] taskTimeArr = Parser.parseDescription(taskAndTime, "deadline");
+        String task = taskTimeArr[0];
+        String time = taskTimeArr[1];
+        Deadline dead = new Deadline(task);
+        dead.setTime(time);
+        return dead;
+    }
+
+    private void setTime(String time) {
+        this.time = time;
     }
 
     private String formatTime() {
@@ -34,12 +47,14 @@ public class Deadline extends Task {
      */
     @Override
     public String store() {
-        return "D | " + super.store() + "| " + this.time;
+        return "D | " + super.store() + " | " + this.time;
     }
 
-     /** Returns a String representation of the Deadline object, for printing purposes.
-      * Eg "[D][ ] Task (time)".
-      * @return A string representation of the Deadline object for printing.
+    /**
+     * Returns a String representation of the Deadline object, for printing purposes.
+     * Eg "[D][ ] Task (time)".
+     *
+     * @return A string representation of the Deadline object for printing.
      */
     @Override
     public String toString() {

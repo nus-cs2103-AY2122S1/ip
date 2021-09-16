@@ -1,5 +1,7 @@
 package skeltalgui;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,8 +14,8 @@ import skeltal.Storage;
 import skeltal.Ui;
 import skeltal.task.Task;
 import skeltal.task.TaskList;
-
-import java.util.ArrayList;
+import skeltal.task.expense.Expense;
+import skeltal.task.expense.ExpenseList;
 
 /**
  * Controller for skeltalgui.MainWindow. Provides the layout for the other controls.
@@ -28,8 +30,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lady.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lady.png"));
 
     @FXML
     public void initialize() {
@@ -41,9 +43,13 @@ public class MainWindow extends AnchorPane {
     }
 
     public void loadTasks() {
-        Pair<ArrayList<Task>, String> listStringPair = Storage.loadFile();
-        TaskList.loadTaskList(listStringPair.getKey());
-        speak(listStringPair.getValue());
+        Pair<ArrayList<Task>, String> tasksStringPair =
+                Storage.loadFile(Storage.SKELTAL_PATH, Storage.wrappedStringToTask);
+        Pair<ArrayList<Expense>, String> expenseStringPair =
+                Storage.loadFile(Storage.EXPENSE_PATH, Storage.wrappedStringToExpense);
+        TaskList.loadTaskList(tasksStringPair.getKey());
+        ExpenseList.loadExpenseList(expenseStringPair.getKey());
+        speak(tasksStringPair.getValue());
     }
 
     /**

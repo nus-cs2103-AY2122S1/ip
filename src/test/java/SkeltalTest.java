@@ -1,19 +1,21 @@
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import org.junit.jupiter.api.BeforeEach;
-import skeltal.*;
 import org.junit.jupiter.api.Test;
+import skeltal.Parser;
+import skeltal.SkeltalException;
+import skeltal.Storage;
+import skeltal.task.TaskList;
 import skeltal.task.types.Deadline;
 import skeltal.task.types.Event;
-import skeltal.task.TaskList;
 import skeltal.task.types.ToDo;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SkeltalTest {
 
-    private ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
@@ -34,9 +36,9 @@ public class SkeltalTest {
     @Test
     public void taskListTest() {
         try {
-            Event event = new Event("event test /at 12pm");
-            Deadline deadline = new Deadline("deadline test /by 12pm");
-            ToDo todo = new ToDo("todo test");
+            Event event = Event.of("event test /at 12pm");
+            Deadline deadline = Deadline.of("deadline test /by 12pm");
+            ToDo todo = ToDo.of("todo test");
             TaskList.addTask(event);
             TaskList.addTask(deadline);
             TaskList.addTask(todo);
@@ -61,16 +63,16 @@ public class SkeltalTest {
 
     @Test
     public void loaderTest() {
-        Storage.loadFile();
+        Storage.loadFile(Storage.SKELTAL_PATH, Storage.wrappedStringToTask);
         assertEquals("Saved tasks have been loaded into the skeltal system!", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void tasksTest() {
         try {
-            Event event = new Event("event test /at 12pm");
-            Deadline deadline = new Deadline("deadline test /by 12pm");
-            ToDo todo = new ToDo("todo test");
+            Event event = Event.of("event test /at 12pm");
+            Deadline deadline = Deadline.of("deadline test /by 12pm");
+            ToDo todo = ToDo.of("todo test");
             TaskList.addTask(event);
             TaskList.addTask(deadline);
             TaskList.addTask(todo);
