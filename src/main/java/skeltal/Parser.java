@@ -1,15 +1,15 @@
 package skeltal;
 
-import skeltal.task.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import skeltal.task.TaskList;
 import skeltal.task.expense.Expense;
 import skeltal.task.expense.ExpenseList;
 import skeltal.task.types.Deadline;
 import skeltal.task.types.Event;
 import skeltal.task.types.ToDo;
-
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
 
 /**
  * A Parser class that handles the parsing of userInputs, to determine Skeltal's response.
@@ -18,7 +18,7 @@ public class Parser {
     /**
      * The constant FORMATTERS.
      */
-    final static DateTimeFormatter[] FORMATTERS = {DateTimeFormatter.ofPattern("dd-MM-yy"),
+    static final DateTimeFormatter[] FORMATTERS = {DateTimeFormatter.ofPattern("dd-MM-yy"),
             DateTimeFormatter.ofPattern("dd-MM-yyyy"), DateTimeFormatter.ofPattern("dd/MM/yyyy"),
             DateTimeFormatter.ofPattern("dd/MM/yyyy"), DateTimeFormatter.ofPattern("ddMMyyyy"),
             DateTimeFormatter.ofPattern("dd MMM yy")};
@@ -65,7 +65,7 @@ public class Parser {
     /**
      * Execute command with no args.
      *
-     * @param commandDescriptionArr the command description arr.
+     * @param command the command description arr.
      * @return Skeltal's reply.
      * @throws SkeltalException
      */
@@ -86,6 +86,8 @@ public class Parser {
         case "sum":
             reply = ExpenseList.sum();
             break;
+        case "updoot":
+            reply = Ui.updoot();
         default:
             throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -95,7 +97,7 @@ public class Parser {
     /**
      * Execute command that has arguments.
      *
-     * @param commandDescriptionArr the command description arr
+     * @param command the command description arr
      * @return the string
      * @throws SkeltalException the skeltal exception
      */
@@ -148,8 +150,8 @@ public class Parser {
         String[] taskAndTime = description.split("/", 2);
 
         if (taskAndTime.length == 1 || taskAndTime[1].isEmpty()) {
-            throw new SkeltalException("OOPS! The description of an " +
-                    taskType + " cannot be empty!");
+            throw new SkeltalException("OOPS! The description of an "
+                    + taskType + " cannot be empty!");
         }
 
         String time = taskAndTime[1];
@@ -170,7 +172,7 @@ public class Parser {
         return descriptionAmountArr;
     }
 
-    private static String parseTime(String time) {
+    private static String parseTime(String time) throws SkeltalException {
         assert time != null : "Time field cannot be empty";
         //Seperates time from the prefix
         if (time.startsWith("by ") | time.startsWith("at ")) {
@@ -181,14 +183,19 @@ public class Parser {
         return time;
     }
 
-    private static String tryParseDate(String date) {
+    private static String tryParseDate(String date) throws SkeltalException {
         LocalDate dateObj = null;
+        boolean error = false;
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
                 dateObj = LocalDate.parse(date, formatter);
                 return dateObj.format(DateTimeFormatter.ofPattern("dd MMM yy"));
             } catch (DateTimeParseException e) {
+                error = true;
             }
+        }
+        if (error) {
+            throw new SkeltalException("Please only input dates!");
         }
         return date;
     }
@@ -208,14 +215,15 @@ public class Parser {
             if (isValid.length == 1) {
                 throw new SkeltalException("OOPS! The description of todo cannot be empty!");
             }
+            break;
         case "list":
             break;
         case "bank":
             break;
         default:
             if (isValid.length == 1) {
-                throw new SkeltalException("OOPS!!! I'm sorry," +
-                        " but I don't know what that means :-(");
+                throw new SkeltalException("OOPS!!! I'm sorry,"
+                        + " but I don't know what that means :-(");
             }
         }
     }

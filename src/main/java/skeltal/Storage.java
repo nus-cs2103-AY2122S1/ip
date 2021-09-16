@@ -23,6 +23,19 @@ public class Storage {
     final public static String SKELTAL_PATH = "src/main/Data/skeltal.txt";
     final public static String EXPENSE_PATH = "src/main/Data/expense.txt";
 
+    public static SkeltalFunction<String, Task> wrappedStringToTask = new SkeltalFunction<String, Task>() {
+        @Override
+        public Task apply(String data) throws SkeltalException {
+            return stringToTask(data);
+        }
+    };
+
+    public static SkeltalFunction<String, Expense> wrappedStringToExpense = new SkeltalFunction<String, Expense>() {
+        @Override
+        public Expense apply(String data) throws SkeltalException {
+            return stringToExpense(data);
+        }
+    };
     /**
      * Loads the txt file of the list of tasks from the specified path.
      *
@@ -117,6 +130,8 @@ public class Storage {
             setDone(done, dead);
             task = dead;
             break;
+        default:
+            //Do nothing
         }
         return task;
     }
@@ -127,19 +142,6 @@ public class Storage {
         return Expense.of(formattedData);
     }
 
-    public static SkeltalFunction<String, Task> wrappedStringToTask = new SkeltalFunction<String, Task>() {
-        @Override
-        public Task apply(String data) throws SkeltalException {
-            return stringToTask(data);
-        }
-    };
-
-    public static SkeltalFunction<String, Expense> wrappedStringToExpense = new SkeltalFunction<String, Expense>() {
-        @Override
-        public Expense apply(String data) throws SkeltalException {
-            return stringToExpense(data);
-        }
-    };
 
 
 }

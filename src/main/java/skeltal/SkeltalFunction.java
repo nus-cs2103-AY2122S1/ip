@@ -6,7 +6,7 @@ package skeltal;
  * @param <T> The type parameter that apply will accept as a parameter.
  * @param <R> The type parameter that apply will return.
  */
-public interface SkeltalFunction<T,R> {
+public interface SkeltalFunction<T, R> {
     /**
      * Apply r.
      *

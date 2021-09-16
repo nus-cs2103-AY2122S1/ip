@@ -18,9 +18,9 @@ public class TaskList {
      */
     public static String addTask(Task assignment) throws SkeltalException {
         tasks.add(assignment);
-        String reply = "Got it. I've added this task\n" +
-                assignment + "\n" +
-                "Now you have " + tasks.size() + " tasks in the list.";
+        String reply = "Got it. I've added this task\n"
+                + assignment + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
         Storage.write(Storage.SKELTAL_PATH, "task");
         return reply;
     }
@@ -49,15 +49,15 @@ public class TaskList {
     }
 
     /**
-     * Sets the Task at the index (index_1 - 1) in the TaskList to a "completed" state.
+     * Sets the Task at the index (indexPlus1 - 1) in the TaskList to a "completed" state.
      *
-     * @param index_1 The index of the task in the list + 1.
+     * @param indexPlus1 The index of the task in the list + 1.
      * @return A reply from Skeltal for setting the task to done.
      * @throws SkeltalException
      */
-    public static String done(String index_1) throws SkeltalException {
+    public static String done(String indexPlus1) throws SkeltalException {
         String reply = "";
-        int i = Integer.parseInt(index_1) - 1;
+        int i = Integer.parseInt(indexPlus1) - 1;
         Task assignment = tasks.get(i);
         assignment.setComplete();
         reply += "Done! I've marked this task as done!\n";
