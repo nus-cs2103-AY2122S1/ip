@@ -76,7 +76,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setDialogBox(new Font("American Typewriter", 18),
+        db.setDialogBox(new Font("American Typewriter", 16),
                 Color.SADDLEBROWN);
         return db;
     }
