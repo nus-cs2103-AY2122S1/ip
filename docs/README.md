@@ -1,29 +1,25 @@
 # User Guide
+Adapted from [AddresBook3 SE-Edu User Guide](https://se-education.org/addressbook-level3/UserGuide.html#quick-start)
 
-## Features 
+VIN Chatbot is a desktop app for managing tasks, events, and deadlines. This application utilizes the Command Line Interface (CLI) for the most part, but it also  has a Graphical User Interface (GUI) to make it more user friendly.
 
-### Feature-ABC
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [Command Summary](#command-summary)
 
-Description of the feature.
+--------------------------------------------------------------------------------------------------------------------
 
-### Feature-XYZ
+## Quick start
 
-Description of the feature.
+1. Ensure you have Java `11` or above installed in your Computer.
 
-## Usage
+1. Download the latest `Vin.jar` from [here](https://github.com/kevinmingtarja/ip/releases).
 
-### `Keyword` - Describe action
+1. Copy the file to the folder you want to use as the _home folder_ for your VIN Chatbot.
 
-Describe the action and its outcome.
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](Ui.png)
 
-Example of usage: 
+1. After running VIN for the first time, a `data` directory will be created on the _home folder_ and will act as the local storage to store your tasks.
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+1. Refer to the [Features](#features) below for details of each command.
