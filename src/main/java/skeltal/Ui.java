@@ -35,7 +35,8 @@ public class Ui {
     public static String updoot() {
         String bone = " _       _\n"
                 + "(_'-----'_)\n"
-                + "(_.'\"\"\"\"._) fsc";
+                + "(_.'\"\"\"\"._) fsc\n"
+                + "You have been given some Calcium for your bones";
         return bone;
     }
 }

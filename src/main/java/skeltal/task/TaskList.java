@@ -122,4 +122,8 @@ public class TaskList {
         return toWrite;
     }
 
+    public static void resetList() {
+        tasks.clear();
+    }
+
 }

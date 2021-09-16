@@ -88,6 +88,7 @@ public class Parser {
             break;
         case "updoot":
             reply = Ui.updoot();
+            break;
         default:
             throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
