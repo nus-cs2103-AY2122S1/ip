@@ -50,7 +50,8 @@ Now you have 1 task in your list.
 Adds an event task to the list of tasks.
 
 Format : `event TASK_NAME /at DATE`
-* DATE must be in format : `d/M/uu H:mm` or `d/M/uuuu H:mm`
+* DATE must be in format : `d/M/yy H:mm` or `d/M/yyyy H:mm`
+* Hour can either be single or double digit. e.g `09:50` or `9:50`
 
 Example:
 
