@@ -25,7 +25,7 @@ public class Main extends Application {
             scene.getStylesheets().add("/view/stylesheet.css");
 
             stage.setScene(scene);
-            stage.setTitle("Duke Chatterbot");
+            stage.setTitle("Jarvis Chatterbot");
             stage.show();
 
             window.welcomeMessage();

@@ -12,7 +12,7 @@ public class Ui {
      * @return string of logo
      */
     public String showWelcome() {
-        return "Hello! I'm Duke\n"
+        return "Hello! I'm Jarvis\n"
              + "What can I do for you?\n";
     }
 
