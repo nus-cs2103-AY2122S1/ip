@@ -1,7 +1,7 @@
 package duke.controller;
 
 import duke.Main;
-import duke.command.Command;
+import duke.command.*;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,7 +57,7 @@ public class HelpPage extends AnchorPane {
         );
 
         function.setCellValueFactory(
-                new PropertyValueFactory<>("fn")
+                new PropertyValueFactory<>("usage")
         );
 
         format.setCellValueFactory(
@@ -69,24 +69,14 @@ public class HelpPage extends AnchorPane {
         tableView.getColumns().add(format);
 
         ObservableList<Command> data = FXCollections.observableArrayList(
-                new Command("bye", "exit app", "bye"),
-                new Command("list", "list all functions", "list"),
-                new Command("todo", "add tasks without any date/time attached",
-                        "todo {task name}"),
-                new Command("deadline", "add tasks that need to be done before a specific date & time\n",
-                        "deadline {task name} /by {yyyy-MM-dd HH:mm}"),
-                new Command("event", "add tasks that need that starts at a specific time\n",
-                        "event {task name} /by {yyyy-MM-dd HH:mm}"),
-                new Command("done", "marks specified task as done\n",
-                        "done {task number}"),
-                new Command("delete", "deletes specified task\n",
-                        "delete {task number}"),
-                new Command("find", "find a task by searching for a keyword\n",
-                        "find {keyword}")
+                new ByeCommand(), new HelpCommand(), new ListCommand(),
+                new DoneCommand(), new DeleteCommand(), new TodoCommand(),
+                new DeadlineCommand(), new EventCommand(), new FindCommand()
         );
 
         tableView.setItems(data);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label,tableView, exitButton);
 

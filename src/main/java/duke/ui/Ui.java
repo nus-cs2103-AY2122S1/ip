@@ -12,7 +12,7 @@ public class Ui {
      * Greets user when programme is run
      */
     public String showWelcome() {
-        return "Hello! I'm Duke\n" + "What can I do for you?";
+        return "Hello! I'm Duke\n" + "What can I do for you?\n" + "Enter help for list of commands!";
     }
 
     /**
@@ -27,6 +27,10 @@ public class Ui {
      */
     public String showLoadingError() {
         return "Sorry! There was an error while trying to load past records :(";
+    }
+
+    public String showAfterHelp() {
+        return "Hope I was of help!";
     }
 
     /**
@@ -64,8 +68,8 @@ public class Ui {
     /**
      * Lists required tasks in the list
      *
-     * @param list  list of tasks
-     * @param cmd determine which message to be shown
+     * @param list list of tasks
+     * @param cmd  determine which message to be shown
      */
     public String showTaskList(TaskList list, String cmd) {
         boolean isListCmd = cmd.equals("list");

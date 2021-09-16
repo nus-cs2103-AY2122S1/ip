@@ -74,34 +74,40 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("help")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog("Hope I was of help!", dukeImage)
-            );
-            userInput.clear();
-            Scene prev = this.getScene();
-            HelpPage helpPage = new HelpPage(stage, prev);
-            helpPage.start();
-        } else {
+        {
+            if (input.equals("help")) {
+                help();
+            }
             String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
             userInput.clear();
-            if (response.equals(duke.getUi().showBye())) {
-                Timer timer = new Timer();
-                TimerTask exit = new TimerTask() {
-                    @Override
-                    public void run() {
-                        System.exit(0);
-                    }
-                };
-                userInput.setDisable(true);
-                sendButton.setDisable(true);
-                timer.schedule(exit, new Date(System.currentTimeMillis() + 3 * 1000));
+            if (input.equals("bye")) {
+                exit();
             }
         }
     }
+
+    private void help() {
+        userInput.clear();
+        Scene prev = this.getScene();
+        HelpPage helpPage = new HelpPage(stage, prev);
+        helpPage.start();
+    }
+
+    private void exit() {
+        Timer timer = new Timer();
+        TimerTask exit = new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        };
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
+        timer.schedule(exit, new Date(System.currentTimeMillis() + 3 * 1000));
+    }
+
 }
