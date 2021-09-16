@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import javafx.application.Platform;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Represents a Duke bot that can interact with users
@@ -43,10 +47,23 @@ public class Duke {
         try {
             String fullCommand = input;
             Command c = parser.parse(fullCommand);
+            if(c.isBye()) {
+                exitDuke();
+            }
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    //@@author endriu_l-reused
+    //Reused from https://stackoverflow.com/questions/21974415/how-to-close-this-javafx-application-after-showing-a-message-in-a-text-area-elem/21996863
+    // with minor modifications
+    public void exitDuke() {
+        Timer timer = new Timer();
+                new Timer().schedule(new TimerTask() {
+                    public void run () { Platform.exit(); }
+                }, 1000);
     }
 
     public Ui getUi() {
