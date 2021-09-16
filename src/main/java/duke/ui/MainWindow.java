@@ -4,6 +4,7 @@ import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -49,6 +50,7 @@ public class MainWindow extends AnchorPane {
         duke = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), botImage));
         dialogContainer.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+        dialogContainer.setPadding(new Insets(0, 4, 24, 4));
     }
 
     /**

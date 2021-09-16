@@ -142,7 +142,10 @@ public class TaskList {
      * Prints the current list of tasks.
      */
     public String printItems() {
-        String response = "Here are the tasks in your list:\n";
+        String response = list.size() == 0
+                ? "There are no tasks yet in your list.\n"
+                : "Here are the tasks in your list:\n";
+
         return response + printItems(this.list);
     }
 

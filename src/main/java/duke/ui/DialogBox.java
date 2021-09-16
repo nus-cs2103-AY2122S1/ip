@@ -47,7 +47,6 @@ public class DialogBox extends HBox {
         // Prevents long text from being cut off
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.setTranslateY(16);
-        dialog.setTranslateX(-8);
 
         if (isError(text)) {
             dialog.setBackground(new Background(new BackgroundFill(Color.web("D4000E"),
