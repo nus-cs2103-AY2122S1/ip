@@ -14,11 +14,13 @@ You can add tasks, deadlines, events, and even timed tasks.
 - Complete Tasks
 - Find Tasks
 - List all your Tasks
-- 
+
+## Overview
 
 ### `todo` - Adds a Todo
 
 Adds a task to the todolist  
+  
 `todo eat breakfast`  
 
 Output:
@@ -30,6 +32,7 @@ Now you have x tasks in the list.
 ### `todo ... /for` (Overloaded) - Adds a timed todo
 
 Adds a timed todo to the todolist  
+
 `todo eat breakfast /for 30 mins`
 
 Output:
@@ -41,6 +44,7 @@ Now you have x tasks in the list.
 ### `deadline` - Adds a deadline with an end date
 
 Adds a deadline to the todolist  
+
 `event go to 2103 lecture /at 2021-09-17 1600`
 
 Output:
@@ -52,6 +56,7 @@ Now you have x tasks in the list.
 ### `delete <number>` - Deletes a Task
 
 Deletes a task from the todolist according to its index, starting from 1   
+
 `delete 1`
 
 Output:
@@ -64,6 +69,7 @@ Now you have x tasks in the list.
 ### `done <number>` - Completes a Task
 
 Completes a task from the todolist according to its index, starting from 1  
+
 `done 1`
 
 Output:
@@ -75,31 +81,21 @@ Now you have x tasks in the list.
 
 ### `find <text>` - Finds a Task
 
-Finds a task that matches the given string 
-`find hi`
+Finds a task that matches the given string   
 
-Output:
-```
-Nice! I've marked this task as done:
-[T][ ] eat breakfast
-Now you have x tasks in the list.
-```
-
-### `find <text>` - Finds a Task
-
-Finds a task that matches the given string 
 `find breakfast`
 
 Output:
 ```
 Here are the matching tasks in your list:
-[T][ ] eat breakfast
+1. [T][ ] eat breakfast
 ```
 
 
 ### `list` - Lists all available Tasks
 
-Lists all available Tasks in the current TaskList.
+Lists all available Tasks in the current TaskList.  
+
 `list`
 
 Output:
