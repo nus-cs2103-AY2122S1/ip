@@ -87,7 +87,7 @@ public class Storage {
         String priority = components[3].substring(1);
         String time = components[4].substring(1);
         Event e = new Event(description, time);
-        e.changePriority(priority);
+        e.changePriority(getPriority(priority));
         if (checkIfDone(components[1])) {
             e.markAsDone();
         }
