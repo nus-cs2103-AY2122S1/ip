@@ -3,6 +3,7 @@ package jwbot.command;
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
 import jwbot.data.task.Event;
+import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
@@ -23,9 +24,7 @@ public class AddEventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
-            String content = input.split(" ", 2)[1];
-            String[] separated = content.split(" /at ");
-            Event event = new Event(separated[0], separated[1]);
+            Event event = processTask(tasks);
             tasks.addTask(event);
             storage.write(tasks);
             return ui.showAddTaskSuccessMessage(event);
@@ -33,6 +32,15 @@ public class AddEventCommand extends Command {
             throw new JwBotException("Sorry bro, I think you made an error with the event format!");
         }
     }
+
+    @Override
+    protected Event processTask(TaskList tasks) {
+        String content = input.split(" ", 2)[1];
+        String[] separated = content.split(" /at ");
+        Event event = new Event(separated[0], separated[1]);
+        return event;
+    }
+
 
     /**
      * The method that checks if the bot should be stopped.

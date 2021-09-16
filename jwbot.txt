@@ -3,7 +3,11 @@
 [E][ ] party (at: 3pm)
 [T][ ] dsdsd
 [T][ ] sdsd
+<<<<<<< HEAD
 [T][ ] study
 [D][X] drink (by: 2012-12-24)
 [T][ ] study
+=======
+[D][ ] study (by: 2012-12-24)
+>>>>>>> branch-A-CodeQuality
 [T][ ] study

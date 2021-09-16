@@ -2,6 +2,7 @@ package jwbot.command;
 
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
+import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
@@ -32,6 +33,8 @@ public abstract class Command {
      * @param storage the storage object responsible for writing and reading txt file
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException;
+
+    protected abstract Task processTask(TaskList tasks);
 
     /**
      * The method that checks if the bot should be stopped.

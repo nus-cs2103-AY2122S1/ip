@@ -34,10 +34,9 @@ public class Ui {
      */
     public String showDeleteSuccessMessage(Task task, int listSize) {
         StringBuilder r = new StringBuilder();
-        r.append("OK Bro, I noted you've deleted this task:\n"
-                + task);
+        r.append("OK Bro, I noted you've deleted this task:\n").append(task);
         r.append(System.getProperty("line.separator"));
-        r.append("So bro, now you have " + listSize + " tasks stored in the list!");
+        r.append("So bro, now you have ").append(listSize).append(" tasks stored in the list!");
         return r.toString();
     }
 
@@ -52,10 +51,10 @@ public class Ui {
         r.append("OK bro, the tasks in your list are: ");
         r.append(System.getProperty("line.separator"));
         for (int i = 1; i < tasks.getSize() + 1; i++) {
-            r.append(i + ". " + tasks.getTask(i - 1));
+            r.append(i).append(". ").append(tasks.getTask(i - 1));
             r.append(System.getProperty("line.separator"));
         }
-        r.append("Bro, now you have " + tasks.getSize() + " task(s)!");
+        r.append("Bro, now you have ").append(tasks.getSize()).append(" task(s)!");
         return r.toString();
     }
 
@@ -69,7 +68,7 @@ public class Ui {
         r.append("OK bro, the matching tasks in your list are: ");
         r.append(System.getProperty("line.separator"));
         for (int i = 1; i < searchList.size() + 1; i++) {
-            r.append(i + ". " + searchList.get(i - 1));
+            r.append(i).append(". ").append(searchList.get(i - 1));
             r.append(System.getProperty("line.separator"));
         }
         return r.toString();

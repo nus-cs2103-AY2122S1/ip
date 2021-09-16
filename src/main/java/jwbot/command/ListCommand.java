@@ -1,6 +1,7 @@
 package jwbot.command;
 
 import jwbot.data.TaskList;
+import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
@@ -21,6 +22,11 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.showList(tasks);
+    }
+
+    @Override
+    protected Task processTask(TaskList tasks) {
+        return null;
     }
 
     /**
