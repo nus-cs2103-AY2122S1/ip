@@ -83,7 +83,7 @@ public class TaskList {
      */
     public Task doneTask(int index) throws DukeException {
         Task task = getTask(index);
-        task.setStatus(true);
+        task.setComplete(true);
         return task;
     }
 

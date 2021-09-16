@@ -10,17 +10,17 @@ import java.time.format.FormatStyle;
  */
 public class Task {
     protected String description;
-    protected boolean status;
+    protected boolean isComplete;
 
     /**
      * Constructs generic Task object
      *
      * @param description Description of task
-     * @param status Completion status of Task
+     * @param isComplete Completion status of Task
      */
-    private Task(String description, boolean status) {
+    private Task(String description, boolean isComplete) {
         this.description = description;
-        this.status = status;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Task {
      * @return Corresponding status icon
      */
     public String getStatusIcon() {
-        return (status ? "[X]" : "[ ]");
+        return (isComplete ? "[X]" : "[ ]");
     }
 
     public String getTaskType() {
@@ -40,8 +40,8 @@ public class Task {
         return this.description;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setComplete(boolean complete) {
+        this.isComplete = complete;
     }
 
     public static class Todo extends Task {
@@ -67,7 +67,7 @@ public class Task {
          */
         @Override
         public String toString() {
-            return "todo" + " | " + (this.status ? "1" : "0") + " | " + this.description;
+            return "todo" + " | " + (this.isComplete ? "1" : "0") + " | " + this.description;
         }
 
     }
@@ -111,7 +111,7 @@ public class Task {
          */
         @Override
         public String toString() {
-            return "deadline" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | " + this.by;
+            return "deadline" + " | " + (this.isComplete ? "1" : "0") + " | " + this.description + " | " + this.by;
         }
 
     }
@@ -154,7 +154,7 @@ public class Task {
          */
         @Override
         public String toString() {
-            return "event" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | " + this.at;
+            return "event" + " | " + (this.isComplete ? "1" : "0") + " | " + this.description + " | " + this.at;
         }
 
     }
@@ -207,7 +207,7 @@ public class Task {
          */
         @Override
         public String toString() {
-            return "within" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | "
+            return "within" + " | " + (this.isComplete ? "1" : "0") + " | " + this.description + " | "
                     + this.firstDate + " | " + this.secondDate;
         }
 
