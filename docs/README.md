@@ -12,6 +12,9 @@ You can add tasks, deadlines, events, and even timed tasks.
 - Delete Tasks
 - View Tasks
 - Complete Tasks
+- Find Tasks
+- List all your Tasks
+- 
 
 ### `todo` - Adds a Todo
 
@@ -68,4 +71,40 @@ Output:
 Nice! I've marked this task as done:
 [T][ ] eat breakfast
 Now you have x tasks in the list.
+```
+
+### `find <text>` - Finds a Task
+
+Finds a task that matches the given string 
+`find hi`
+
+Output:
+```
+Nice! I've marked this task as done:
+[T][ ] eat breakfast
+Now you have x tasks in the list.
+```
+
+### `find <text>` - Finds a Task
+
+Finds a task that matches the given string 
+`find breakfast`
+
+Output:
+```
+Here are the matching tasks in your list:
+[T][ ] eat breakfast
+```
+
+
+### `list` - Lists all available Tasks
+
+Lists all available Tasks in the current TaskList.
+`list`
+
+Output:
+```
+Here are the tasks in your list:
+1. [T][ ] eat breakfast
+2. [T][ ] eat lunch
 ```
