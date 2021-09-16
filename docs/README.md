@@ -36,7 +36,7 @@ Expected outcome:
 
 Description of the outcome.
 
-![Todo](/docs/Todo.png)
+![Todo](Todo.png)
 
 ### `deadline` - Add a Deadline task.
 
