@@ -22,17 +22,9 @@ public abstract class DateAndTimeTask extends Task {
      * @throws DukeException Thrown if the any part of the input string is invalid.
      */
     public DateAndTimeTask(String input, String splitterKey) throws DukeException {
-        if (input.length() == 0) {
-            throw DukeException.BLANK_DESCRIPTION;
-        }
-        int i = input.indexOf(splitterKey);
-        if (i < 0) {
-            throw DukeException.BLANK_DATE_AND_TIME;
-        } else if (i == 0) {
-            throw DukeException.BLANK_DESCRIPTION;
-        }
-        setDescription(input.substring(0, i));
-        setDateAndTime(input.substring(i + splitterKey.length()));
+        String[] processedInput = processInput(input, splitterKey);
+        setDescription(processedInput[0]);
+        setDateAndTime(processedInput[1]);
         assertDateAndTime();
     }
 
@@ -52,7 +44,6 @@ public abstract class DateAndTimeTask extends Task {
 
     /**
      * @param dateAndTime Expected format: "yyyy-MM-dd HHmm"
-     * @return A LocalDateTime encapsulating the provided date and time.
      * @throws DukeException If the format of the date and time is incorrect.
      */
     public void setDateAndTime(String dateAndTime) throws DukeException {
@@ -62,6 +53,10 @@ public abstract class DateAndTimeTask extends Task {
         assertDateAndTime();
     }
 
+    /**
+     * @param date Expected format: "yyyy-MM-dd"
+     * @throws DukeException If the format of the date is incorrect.
+     */
     public void setDate(String date) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -71,6 +66,10 @@ public abstract class DateAndTimeTask extends Task {
         }
     }
 
+    /**
+     * @param time Expected format: "HHmm"
+     * @throws DukeException If the format of the time is incorrect.
+     */
     public void setTime(String time) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
@@ -108,6 +107,50 @@ public abstract class DateAndTimeTask extends Task {
         result += " (" + dateStr + " " + timeStr + ")";
 
         return result;
+    }
+
+    /**
+     * Casts a given task to a DateAndTimeTask.
+     *
+     * @param task The task to be casted.
+     * @return The casted task.
+     * @throws DukeException If the task is not an instance of DateAndTimeTask.
+     */
+    public static DateAndTimeTask cast(Task task) throws DukeException {
+        DateAndTimeTask result;
+
+        if (task instanceof DateAndTimeTask) {
+            result = (DateAndTimeTask) task;
+        } else {
+            throw DukeException.INVALID_TASK_TYPE;
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param input The input string to create the task.
+     * @param splitterKey The key that splits the input string into the task description
+     *                    and the task date and time. Should include spaces on both ends.
+     * @return A String[] with the description as element 0 and the date and time string
+     *         as element 1.
+     * @throws DukeException Thrown if the any part of the input string is invalid.
+     */
+    private String[] processInput(String input, String splitterKey) throws DukeException {
+        if (input.length() == 0) {
+            throw DukeException.BLANK_DESCRIPTION;
+        }
+
+        int i = input.indexOf(splitterKey);
+
+        if (i < 0) {
+            throw DukeException.BLANK_DATE_AND_TIME;
+        } else if (i == 0) {
+            throw DukeException.BLANK_DESCRIPTION;
+        }
+
+        return input.split(splitterKey);
     }
 
     private void assertDateAndTime() {

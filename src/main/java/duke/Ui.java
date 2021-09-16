@@ -21,9 +21,10 @@ public class Ui {
     }
 
     /**
-     * Displays an Exception in the Ui.
+     * Formats an error message suitable for display.
      *
-     * @param e The Exception to be displayed.
+     * @param e The Exception to be formatted.
+     * @return The generated message to display.
      */
     public String formatError(Exception e) {
         String result = "[ERROR]\n";
@@ -32,23 +33,25 @@ public class Ui {
     }
 
     /**
-     * Displays the 'task added' message.
+     * Generates the 'task added' message.
      *
      * @param task The task being added.
      * @param taskList The TaskList the task was added to.
+     * @return The generated message to display.
      */
     public String addTask(Task task, TaskList taskList) {
+        String numOfTasks = formatNumberOfTasks(taskList.size());
         String result = "is added.\n";
         result += task.toString() + "\n";
-        result += "now is have " + taskList.size() + " task"
-                + (taskList.size() == 1 ? "" : "s") + ".";
+        result += "now is have " + numOfTasks + ".";
         return result;
     }
 
     /**
-     * Displays the 'task completed' message.
+     * Generates the 'task completed' message.
      *
-     * @param task The task being sompleted.
+     * @param task The task being completed.
+     * @return The generated message to display.
      */
     public String completeTask(Task task) {
         String result = "is done!\n";
@@ -57,21 +60,28 @@ public class Ui {
     }
 
     /**
-     * Displays the 'task-deleted' message.
+     * Generates the 'task deleted' message.
      *
      * @param task The task being deleted.
      * @param taskList The TaskList the task was deleted from.
+     * @return The generated message to display.
      */
     public String deleteTask(Task task, TaskList taskList) {
+        String numOfTasks = formatNumberOfTasks(taskList.size());
         String result = "is deleted!\n";
         result += task.toString() + "\n";
-        result += "now is have " + taskList.size() + " task"
-                + (taskList.size() == 1 ? "" : "s") + ".";
+        result += "now is have " + numOfTasks + ".";
         return result;
     }
 
+    /**
+     * Generates the 'task edited' message.
+     *
+     * @param task The task being edited.
+     * @return The generated message to display.
+     */
     public String editTask(Task task) {
-        String result = "is got it\n";
+        String result = "is got it!\n";
         result += task.toString();
         return result;
     }
@@ -82,6 +92,7 @@ public class Ui {
      * and their type/status.
      *
      * @param taskList The TaskList to be displayed.
+     * @return The generated message to display.
      */
     public String listTasks(TaskList taskList) {
         String result = "";
@@ -97,10 +108,12 @@ public class Ui {
     }
 
     /**
-     * Finds and displays tasks from the given TaskList containing the given string.
+     * Finds tasks from the given TaskList containing the given string, and generates
+     * a message to display.
      *
      * @param taskList The TaskList to search.
      * @param str The string to search for.
+     * @return The generated message to display.
      */
     public String find(TaskList taskList, String str) {
         String result = "";
@@ -126,7 +139,7 @@ public class Ui {
     }
 
     /**
-     * Displays the initialisation message for Duke.
+     * Generates the initialisation message for Duke.
      */
     public String init() {
         String logo = " ____        _        \n"
@@ -141,9 +154,26 @@ public class Ui {
     }
 
     /**
-     * Displays the exit message for Duke.
+     * Generates the exit message for Duke.
      */
     public String exit() {
         return "okay is bye!!";
+    }
+
+    /**
+     * Formats the number of tasks.
+     * For example, if i = 1 then "1 task" is returned.
+     * If i = 2 then "2 tasks" is returned.
+     *
+     * @param i The number of tasks.
+     * @return The number of tasks in string format.
+     */
+    private String formatNumberOfTasks(int i) {
+        boolean isPlural = i != 1;
+        String noun = isPlural
+                      ? "tasks"
+                      : "task";
+
+        return i + " " + noun;
     }
 }
