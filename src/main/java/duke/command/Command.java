@@ -11,19 +11,13 @@ import duke.Ui;
 public interface Command {
 
     /**
-     * Execute all commands.
+     * Returns a String after executing appropriate commands.
      *
-     * @param taskList Manages all current tasks.
-     * @param ui Used to print messages.
-     * @param storage Loads and saves the tasks to a txt file.
-     * @throws DukeException Thrown if there are input/parsing errors.
+     * @param taskList TaskList to manage current user's tasks.
+     * @param ui Ui to print messages to the user.
+     * @param storage Storage to save and load tasks from disk.
+     * @return String Duke's response to user.
+     * @throws DukeException If there are input or parsing errors.
      */
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns a boolean to determine if Duke should stop running.
-     *
-     * @return A boolean true If the command is an exit command and false otherwise.
-     */
-    boolean isRunning();
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

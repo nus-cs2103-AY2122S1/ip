@@ -22,40 +22,37 @@ public class Parser {
      * @throws DukeException Thrown if user input is invalid.
      */
     public static Command parse(String cmd) throws DukeException {
-        String[] arr = cmd.split(" ", 2);
         if (cmd.equals("bye")) {
             return new ByeCommand();
         } else if (cmd.equals("list")) {
             return new ListCommand();
         } else if (cmd.equals("help")) {
             return new HelpCommand();
-        } else if (arr[0].equals("find")) {
-            if (arr.length == 1) {
-                throw new DukeException("Enter search keyword to find tasks");
-            } else {
-                return new FindCommand(arr[1]);
+        } else {
+            return parseSpecialCommand(cmd);
+        }
+    }
+
+    private static Command parseSpecialCommand(String cmd) throws DukeException {
+        String[] arr = cmd.split(" ", 2);
+        if (validateCommand(arr)) {
+            if (arr[0].equals("find")) {
+                return new FindCommand(arr[1].trim());
             }
-        } else if (arr[0].equals("done")) {
-            if (arr.length == 1) {
-                throw new DukeException("Enter task no. to complete the task");
-            } else {
-                return new DoneCommand(arr[1]);
+            if (arr[0].equals("done")) {
+                return new DoneCommand(arr[1].trim());
             }
-        } else if (arr[0].equals("delete")) {
-            if (arr.length == 1) {
-                throw new DukeException("Enter task no. to delete the task");
-            } else {
-                return new DeleteCommand(arr[1]);
+            if (arr[0].equals("delete")) {
+                return new DeleteCommand(arr[1].trim());
             }
-        } else if (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event")) {
-            if (arr.length == 1 || arr[1].trim().length() == 0) {
-                throw new DukeException("Invalid Task entry. Description of a task cannot be empty.");
-            } else {
+            if (arr[0].equals("todo") || arr[0].equals("event") || arr[0].equals("deadline")) {
                 return new AddTaskCommand(arr);
             }
-        } else {
-            throw new DukeException("Oops! Invalid entry.");
         }
+        throw new DukeException("Invalid Command: please try again!");
+    }
+    private static boolean validateCommand(String[] arr) {
+        return arr.length > 1 && arr[1].trim().length() > 0;
     }
 }
 

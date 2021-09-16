@@ -11,28 +11,22 @@ import duke.Ui;
 public class ListCommand implements Command {
 
     /**
-     * Method to execute command.
+     * Returns a String after executing appropriate commands.
      *
-     * @param taskList TaskList that manages all current tasks.
-     * @param ui Ui used to print messages.
-     * @param storage Loads and saves the tasks to a txt file.
-     * @throws DukeException Thrown if there are input/parsing errors.
+     * @param taskList TaskList to manage current user's tasks.
+     * @param ui Ui to print messages to the user.
+     * @param storage Storage to save and load tasks from disk.
+     * @return String Duke's response to user.
+     * @throws DukeException If there are input or parsing errors.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.printAll(taskList.getTasks(), "Here are the tasks in your list");
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        if (taskList.getTasks().size() > 0) {
+            return ui.printAll(taskList.getTasks(), "Here are the tasks in your list:");
+        } else {
+            return ui.echo("No tasks in your list yet!");
+        }
     }
-
-    /**
-     * Returns a boolean to determine if Duke should stop running.
-     *
-     * @return A boolean false as this is not an exit command.
-     */
-    @Override
-    public boolean isRunning() {
-        return false;
-    }
-
     /**
      * Returns a string representation of the object. In general, the
      * {@code toString} method returns a string that

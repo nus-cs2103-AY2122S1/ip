@@ -1,6 +1,3 @@
-T | 1 | rit
-D | 1 | return bk | 19/12/2021 19:00
-D | 1 | do hw due | 19/08/2021 19:00
-E | 1 | funeral | 19/08/2021 23:00
-T | 0 | write
-D | 0 | read | 18/08/2021 23:00
+[T] | 0 | read
+[E] | 1 | meeting | 17/10/2021 15:00
+[T] | 0 | write

@@ -11,29 +11,20 @@ import duke.Ui;
 public class ByeCommand implements Command {
 
     /**
-     * Execute command.
+     * Returns a String after executing appropriate commands.
      *
-     * @param taskList TaskList that manages all current tasks.
-     * @param ui Ui used to print messages.
-     * @param storage Loads and saves the tasks to a txt file.
-     * @throws DukeException Thrown if there are input/parsing errors.
+     * @param taskList TaskList to manage current user's tasks.
+     * @param ui Ui to print messages to the user.
+     * @param storage Storage to save and load tasks from disk.
+     * @return String Duke's response to user.
+     * @throws DukeException If there are input or parsing errors.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.save(taskList.getTasks());
         ui.exit();
+        return "";
     }
-
-    /**
-     * Returns a boolean to determine if Duke should stop running.
-     *
-     * @return A boolean true as this is an exit command.
-     */
-    @Override
-    public boolean isRunning() {
-        return true;
-    }
-
     /**
      * Returns a string representation of the object. In general, the
      * {@code toString} method returns a string that

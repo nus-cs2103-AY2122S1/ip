@@ -18,7 +18,7 @@ public class TaskListTest {
         Deadline d = new Deadline("hw due", LocalDateTime.parse("19/08/2021 19:00", formatter));
         TaskList t = new TaskList();
         t.addTask(d);
-        assertEquals("[D][ ] hw due (by: Aug 19 2021 07:00pm)", t.getTask(0).toString());
+        assertEquals("[D][✘] hw due (by: Aug 19 2021 07:00pm)", t.getTask(0).toString());
     }
 
 
@@ -28,7 +28,7 @@ public class TaskListTest {
         TaskList t = new TaskList();
         t.addTask(e);
         t.markDone(0);
-        assertEquals("[E][X] class (at: Sep 19 2021 07:00pm)", t.getTask(0).toString());
+        assertEquals("[E][✓] class (at: Sep 19 2021 07:00pm)", t.getTask(0).toString());
 
     }
 
@@ -37,6 +37,6 @@ public class TaskListTest {
         ToDo td = new ToDo("write");
         TaskList t = new TaskList();
         t.addTask(td);
-        assertEquals("[T][ ] write", t.getTask(0).toString());
+        assertEquals("[T][✘] write", t.getTask(0).toString());
     }
 }

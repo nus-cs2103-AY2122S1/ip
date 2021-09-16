@@ -3,13 +3,11 @@ package duke;
 import java.util.ArrayList;
 
 import duke.command.Command;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * Class used to start ChatBot.
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -18,7 +16,7 @@ public class Duke extends Application {
      * Constructor to initialize Duke.
      */
     public Duke() {
-        ui = new Ui(this);
+        ui = new Ui();
         storage = new Storage();
         try {
             taskList = new TaskList(storage.load());
@@ -27,20 +25,12 @@ public class Duke extends Application {
             ui.showError(e);
         }
     }
-
-    @Override
-    public void start(Stage primaryStage) {
-        ui.start();
-    }
-
-    protected void run(String fullCommand) {
+    protected String run(String fullCommand) {
         try {
             Command c = Parser.parse(fullCommand);
-            c.execute(taskList, ui, storage);
+            return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
     }
-
-    public static void main(String[] args) { }
 }
