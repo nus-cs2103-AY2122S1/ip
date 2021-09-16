@@ -33,21 +33,21 @@ Some example commands you can try:
 
    🌼 **`help`**: Shows all available command lines.<br>
 
-   ☘️ **`todo`** `complete assignment`: Adds a todo task `complete assignment` to the list.<br>
+   ☘️ **`todo`**`complete assignment`: Adds a todo task `complete assignment` to the list.<br>
    
-   🌼 `deadline` `submit iP /by 2021-09-17 23:59`: Adds a deadline task `submit iP (by: 17 Sep 2020 23:59pm)` to the
+   🌼 **`deadline`**`submit iP /by 2021-09-17 23:59`: Adds a deadline task `submit iP (by: 17 Sep 2020 23:59pm)` to the
    list.<br>
 
-   ☘️ **`event`** `birthday party /at 2021-09-19 18:00`: Adds an event task `birthday party (at: 19 Sep 2021 18:00pm)` to
+   ☘️ **`event`**`birthday party /at 2021-09-19 18:00`: Adds an event task `birthday party (at: 19 Sep 2021 18:00pm)` to
    the list.<br>
 
    🌼 **`list`**: Lists all the tasks in the list.<br>
 
-   ☘️ **`done`** `2`: Marks the task at the `2` index in the list as done.<br>
+   ☘️ **`done`**`2`: Marks the task at the `2` index in the list as done.<br>
 
-   🌼 **`delete`** `2`: Deletes a task at the `2` index from the list.<br>
+   🌼 **`delete`**`2`: Deletes a task at the `2` index from the list.<br>
 
-   ☘️ **`find`** `assignment`: Finds all tasks with matching keyword `assignment`.<br>
+   ☘️ **`find`**`assignment`: Finds all tasks with matching keyword `assignment`.<br>
 
    🌼 **`bye`**: Exits the program.<br>
 
@@ -70,22 +70,22 @@ e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `t
 Adds a todo task to the list.<br>
 Format: `todo DESCRIPTION`
 
-### 🌸 Add a deadline task `deadline`
+### 🌸 Add a deadline task: `deadline`
 
 Adds a deadline task to the list.<br>
 Format: `deadline DESCRIPTION /by yyyy-mm-dd HH:mm`
 
-### 🌸 Add an event task `event`
+### 🌸 Add an event task: `event`
 
 Adds an event task to the list.<br>
 Format: `event DESCRIPTION /at yyyy-mm-dd HH:mm`
 
-### 🌸 List all tasks `list`
+### 🌸 List all tasks: `list`
 
 Lists all the tasks in the list.<br>
 Format: `list`
 
-### 🌸 Mark task done `done`
+### 🌸 Mark task done: `done`
 
 Marks a task in the list as done.<br>
 Format: `done INDEX`
@@ -94,7 +94,7 @@ Format: `done INDEX`
 * The index refers to the index number of task in the list.
 * The index must be a positive integer 1, 2, 3, ...
 
-### 🌸 Delete task `delete`
+### 🌸 Delete task: `delete`
 
 Deletes a task from the list.<br>
 Format: `delete INDEX`
@@ -103,19 +103,19 @@ Format: `delete INDEX`
 * The index refers to the index number of task in the list.
 * The index must be a positive integer 1, 2, 3, ...
 
-### 🌸 Find tasks `find`
+### 🌸 Find tasks: `find`
 
 Finds all tasks with matching keyword.<br>
 Format: `delete KEYWORD`
 
 * Finds all tasks containing `KEYWORD`.
 
-### 🌸 View help `help`
+### 🌸 View help: `help`
 
 Shows all available commands that the Masaki bot understands.<br>
 Format: `help`
 
-### 🌸 Exit program `bye`
+### 🌸 Exit program: `bye`
 
 Exits the program.<br>
 Format: `bye`
