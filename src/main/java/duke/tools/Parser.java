@@ -30,7 +30,7 @@ public class Parser {
         } else if (command.startsWith("done")) {
             assert command.contains("done");
             if (command.trim().equals("done")) {
-                throw new DukeException("☹ OOPS!!! The description of done cannot be empty.\n " +
+                throw new DukeException("OOPS!!! The description of done cannot be empty.\n " +
                         "Please follow this format: \n" +
                         "    done {task index}");
             }
@@ -39,7 +39,7 @@ public class Parser {
         } else if (command.contains("delete")) {
             assert command.contains("delete");
             if (command.trim().equals("delete")) {
-                throw new DukeException("☹ OOPS!!! The description of delete cannot be empty.\n " +
+                throw new DukeException("OOPS!!! The description of delete cannot be empty.\n " +
                         "Please follow this format: \n" +
                         "    delete {task index}");
             }

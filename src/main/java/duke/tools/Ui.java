@@ -8,7 +8,7 @@ package duke.tools;
  */
 public class Ui {
 
-    private static final String DIVIDER = "____________________________________________________________";
+    private static final String DIVIDER = "____________________________________________________________\n";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -46,7 +46,6 @@ public class Ui {
      * Method to read user input.
      */
     public void readCommand() {
-        //String prompt_message = "Add to-do list ({input})/ View list (list) / Complete task (done {input}) / End (bye) :";
         String prompt_message = "Please input your command: ";
         System.out.println(prompt_message);
     }
@@ -56,6 +55,6 @@ public class Ui {
     }
 
     public static void printMessage(String message) {
-        System.out.println(DIVIDER + "\t" + message);
+        System.out.println(DIVIDER + message + "\n");
     }
 }

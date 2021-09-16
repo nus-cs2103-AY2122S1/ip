@@ -99,7 +99,7 @@ public class Duke {
         if (tasks.getSize() <= 0) {
             return "Hey!! Your list is empty lahhh! \n \n Please add some tasks!!";
         }
-        String start = "Sure!! Here are the " + tasks.getSize() + " tasks in your list: \n";
+        String start = "Sure!! You have " + tasks.getSize() + " tasks in your list: \n";
         String res = "";
         for (int i = 0; i < tasks.getSize(); i++) {
             res += "\n" + (i + 1) + ". " + tasks.getTask(i);
@@ -114,7 +114,7 @@ public class Duke {
      */
     public static String toDo(String input) throws DukeException {
         if (input.equals("todo")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
         }
         String t = input.split("todo ")[1];
         ToDo td = new ToDo(t);
