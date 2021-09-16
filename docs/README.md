@@ -86,7 +86,7 @@ _Format_: `find <KEYWORD>`
 
 _Example_: `find book`
 
-![Image of Find]()
+![Image of Find](https://github.com/mukundrs/ip/blob/master/docs/DukeFind.png)
 
 ### 1.8. List Tasks <a name="List"></a>
 
