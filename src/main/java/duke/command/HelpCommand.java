@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import duke.DukeException;
 import duke.task.Storage;
@@ -25,20 +25,20 @@ public class HelpCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         // show command list
-        String path = "app_data/commands.txt";
-        ArrayList<String> commandList;
+        ArrayList<String> commandList = new ArrayList<>();
 
         try {
-            Path filePath = java.nio.file.Paths.get(path);
             // read command from file
             // example:
             // event <TASK_DESCRIPTION> /at <TIME> | add an event task which occurs at some time
-            commandList = Files.lines(filePath).map(line -> {
+            InputStream in = this.getClass().getResourceAsStream("/app_data/commands.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            while (reader.ready()) {
+                String line = reader.readLine();
                 String[] command = line.split(" \\| ", 2);
                 String res = String.format("%-40s\t%-40s", command[0], command[1]);
-                System.out.println(res);
-                return res;
-            }).collect(Collectors.toCollection(ArrayList::new));
+                commandList.add(res);
+            }
         } catch (IOException e) {
             throw new DukeException("Could not retrieve command list!");
         }

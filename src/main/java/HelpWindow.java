@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class HelpWindow extends AnchorPane {
-    public static final String HELP_DOC = "app_data/helpDocumentation.txt";
     @FXML
     private Stage window;
     @FXML
@@ -37,8 +36,8 @@ public class HelpWindow extends AnchorPane {
     private String parseHelpDoc() {
         String result = "";
         try {
-            java.nio.file.Path filePath = java.nio.file.Paths.get(HELP_DOC);
-            result = Files.readString(filePath);
+            InputStream in = this.getClass().getResourceAsStream("/app_data/helpDocumentation.txt");
+            result = new String(in.readAllBytes());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

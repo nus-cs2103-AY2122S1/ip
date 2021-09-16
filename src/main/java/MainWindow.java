@@ -37,7 +37,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox
             .getDukeDialog("Hello I'm Tabby, your personal task manager :) What do you want to do today?", dukeImage));
-        helpWindow = new HelpWindow();
     }
 
     /**
@@ -96,6 +95,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void handleHelp() {
+        helpWindow = new HelpWindow();
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {

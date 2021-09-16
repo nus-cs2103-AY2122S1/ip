@@ -1,3 +1,12 @@
+-----------------------------  ABOUT  -----------------------------
+
+Tabby is a desktop app for managing your task list. 
+It is optimized for use via a Command Line Interface (CLI) while 
+still having the benefits of a Graphical User Interface (GUI).
+
+
+----------------------------  COMMANDS  ----------------------------
+
 Adding a todo task: todo
 Adds a todo to the task list.
 
