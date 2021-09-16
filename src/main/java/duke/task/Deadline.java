@@ -18,6 +18,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Makes deep copy of itself.
+     *
+     * @return Deadline deep copy of itself.
+     */
+    @Override
+    public Task duplicate() {
+        return new Event(this.description, this.by);
+    }
+
+    /**
      * Generates the string representation of event.
      *
      * @return String representation of event.

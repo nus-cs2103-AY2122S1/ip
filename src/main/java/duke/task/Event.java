@@ -18,6 +18,15 @@ public class Event extends Task {
     }
 
     /**
+     * Makes deep copy of itself
+     * @return Event deep copy of itself
+     */
+    @Override
+    public Task duplicate() {
+        return new Event(this.description, this.at);
+    }
+
+    /**
      * Generates the string representation of event.
      *
      * @return String representation of event.

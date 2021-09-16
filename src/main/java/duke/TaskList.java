@@ -111,8 +111,9 @@ public class TaskList {
             throw new DukeException("You don't have these many tasks!");
         }
         int taskIndex = index - 1;
-        Task task = currList.getTaskAtIndex(taskIndex);
+        Task task = currList.getTaskAtIndex(taskIndex).duplicate();
         String output = task.doneTask();
+        currList.setTaskAtIndex(taskIndex, task);
         Duke.addToState(currList);
         return output;
     }
@@ -216,10 +217,14 @@ public class TaskList {
      * @param index index at which task exists
      * @return string representation of the task
      */
-    public Task getTaskAtIndex(int index) {
+    private Task getTaskAtIndex(int index) {
         TaskList newList = Duke.getLatestState();
         Task task = newList.tasks.get(index);
         return task;
+    }
+
+    private void setTaskAtIndex(int index, Task task) {
+        this.tasks.add(index, task);
     }
 
     /**

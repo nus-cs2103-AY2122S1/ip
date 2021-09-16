@@ -23,4 +23,13 @@ public class Todo extends Task {
     public String toString() {
         return "T " + super.toString();
     }
+
+    /**
+     * Makes deep copy of itself
+     * @return Event deep copy of itself
+     */
+    @Override
+    public Task duplicate() {
+        return new Todo(description);
+    }
 }

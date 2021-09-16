@@ -42,12 +42,11 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as not done.
-     * Used for the undo functionality.
+     * Makes deep copy of itself
+     *
+     * @return Task deep copy of itself
      */
-    public void undoTask() {
-        this.isDone = false;
-    }
+    public abstract Task duplicate();
 
     /**
      * Generates the task string representation.
