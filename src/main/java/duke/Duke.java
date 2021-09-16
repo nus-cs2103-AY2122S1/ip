@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Stack;
 
 import duke.task.command.Command;
