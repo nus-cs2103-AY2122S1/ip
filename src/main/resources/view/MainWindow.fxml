@@ -30,7 +30,7 @@
             </light>
          </Lighting>
       </effect></ListView>
-  <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="52.0" prefWidth="330.0" styleClass="bodybg" stylesheets="@BackgroundTBox.css" AnchorPane.bottomAnchor="1.0" />
+  <TextField fx:id="userInput" layoutY="553.0" onAction="#handleUserInput" prefHeight="52.0" prefWidth="330.0" styleClass="bodybg" stylesheets="@BackgroundTBox.css" />
   <Button fx:id="listButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="400.0" layoutY="553.0" mnemonicParsing="false" onAction="#displayList" prefHeight="52.0" prefWidth="226.0" style="-fx-border-color: #ced3ff;" styleClass="bodybg" stylesheets="@BackgroundTBox.css" text="Refresh List" textAlignment="CENTER" textFill="#181818" />
    <VBox layoutX="244.0" layoutY="40.0" />
    <Button fx:id="clearButton" layoutX="326.0" layoutY="553.0" mnemonicParsing="false" onAction="#clearList" prefHeight="26.0" prefWidth="74.0" style="-fx-border-color: #ced3ff;" styleClass="bodybg" stylesheets="@BackgroundTBox.css" text="Clear" />

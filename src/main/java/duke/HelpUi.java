@@ -13,7 +13,7 @@ public class HelpUi {
      */
     public static String helpText() {
         return " Help Guide:\n"
-            + " /general: general description of Soy\n"
+            + " /general: general description of Soy Bot\n"
             + " /task: tasks available to add\n"
             + " /commands1-2: list of commands\n";
     }
