@@ -9,8 +9,21 @@ still having the benefits of a Graphical User Interface (GUI).
   e.g. ```todo TASK```, ```TASK``` is a parameter which can be used as ```todo eat dinner```.
   
 
-![overview](Images/main.png)
+![overview](images/main.png)
 
+* [Features](#features)
+  * [Adding a todo](#adding-a-todo-todo)
+  * [Adding a deadline](#adding-a-deadline-deadline)
+  * [Adding a event](#adding-a-event-event)
+  * [Listing all task](#listing-all-task-list)
+  * [Marking a task as done](#marking-a-task-as-done-done-index)
+  * [Deleting a task](#deleting-a-task-delete-index)
+  * [Locating a task](#locating-a-task-find-keyword)
+  * [Show all commands](#show-all-commands-help)
+  * [Show tasks of certain priority](#show-tasks-of-certain-priority-show-priority-level)
+  * [Exiting the program](#exiting-the-program-bye)
+  
+  
 
 ## Features
 
@@ -25,7 +38,7 @@ The genie.Genie is powerful enough to help you do the following:
 * Add priority to genie.tasks
 * View task list by priority level
 
-## Usage 
+[comment]: <> (## Usage )
 
 ### Adding a todo: ```todo```
 Adds a todo task to the list
@@ -41,7 +54,7 @@ Adds a todo task to the list
 * ```todo Chase Jasmine HIGH```
 * ```todo Feed Abu```
 
-![overview](Images/todo.png)
+![overview](images/todo.png)
 
 ### Adding a deadline: ```deadline```
 
@@ -58,7 +71,7 @@ Adds a deadline to the task list.
 
 * ```deadline Learn to ride magic carpet /by 2021-09-19```
 
-![overview](Images/deadline.png)
+![overview](images/deadline.png)
 
 ### Adding a event: ```event```
 
@@ -70,7 +83,7 @@ Adds an event to the task list.
 
 * ```event Magic Carpet Ride w Jasmine /at 2021-09-21 HIGH```
 
-![overview](Images/event.png)
+![overview](images/event.png)
 
 ### Listing all task: ```list```
 
@@ -78,7 +91,7 @@ List all the genie.tasks that are both completed and not completed.
 
 *Format:* ```list```
 
-![overview](Images/list.png)
+![overview](images/list.png)
 
 ###Marking a task as done: ```done INDEX```
 
@@ -94,7 +107,7 @@ Format: ```done INDEX```
 
 * ```list``` followed by ```done 2``` to mark the first task on the list as done.
 
-![overview](Images/list.png)
+![overview](images/list.png)
 
 ###Deleting a task: ```delete INDEX```
 
@@ -110,7 +123,7 @@ Deleting a specified task from the list.
 
 * ```list``` followed by ```delete 2``` to delete the first task on the list.
 
-![overview](Images/delete.png)
+![overview](images/delete.png)
 
 ### Locating a task: ```find KEYWORD```
 
@@ -122,7 +135,7 @@ Find genie.tasks that contains the given index.
 
 * ```find Jasmine``` 
 
-![overview](Images/find.png)
+![overview](images/find.png)
 
 ### Show all commands: ```help```
 
@@ -132,7 +145,19 @@ Show all the available commands and formats for the user input that the genie.Ge
 
 Expected outcome: 
 
-![overview](Images/help.png)
+![overview](images/help.png)
+
+### Show tasks of certain priority: ```show PRIORITY LEVEL```
+
+Show all the tasks that are of the indicated priority level.
+
+*Format:* ```show PRIORITY LEVEL```
+* Priority levels are HIGH, MEDIUM & LOW
+
+*Examples*
+
+* ```show HIGH```
+
 
 ### Exiting the program: ```bye```
 
@@ -140,7 +165,7 @@ Exits the program.
 
 Format: ```bye```
 
-![overview](Images/bye.png)
+![overview](images/bye.png)
 
 
 ### Saving the data
