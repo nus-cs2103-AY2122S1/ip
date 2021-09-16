@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     /** Successful execution message */
-    public static final String MESSAGE_SUCCESS = "Noted. I've marked this as done: %1$s";
+    public static final String MESSAGE_SUCCESS = "Noted. I've deleted this task: %1$s";
     private int index;
 
 
