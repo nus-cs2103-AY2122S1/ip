@@ -23,6 +23,11 @@ Besides being an expert fire bender, Mako is also great at helping you manage yo
 * view your scheduled events and deadlines on a date 
 * find tasks with a specific keyword
 
+### Note about the command format:
+Words in `{ }` are the parameters to be supplied by the user. 
+
+e.g. `todo {task's name}` where {task's name} is the user's input. For instance, `todo homework`
+
 # Usage
 
 ### View tasks: `list`
@@ -49,7 +54,7 @@ Todos are tasks that doesn't have a set deadline or time frame. use the `todo` k
 
 Format: 
 
-`todo <task's name>`
+`todo {task's name}`
 
 Example of `todo` command:
 
@@ -67,7 +72,7 @@ Deadlines are tasks that have a set completion or submission date and time. use 
 
 Format: 
 
-`deadline {task's name} /by {the deadline of the task in the format of Year-Month-Date Hour:Minute}`
+`deadline {task's name} /by {the deadline of the task in the format: Year-Month-Date Hour:Minute}`
 
 Example of `deadline` command:
 
@@ -85,7 +90,7 @@ Events are tasks that have a set date and time. use the `event` command to inser
 
 Format: 
 
-`event {task's name} /at {the beggining timeframe of the task in the format of Year-Month-Date Hour:Minute}`
+`event {task's name} /at {time of the event in the format: Year-Month-Date Hour:Minute}`
 
 Example: 
 
@@ -121,7 +126,7 @@ I've marked this task as not done:
 `````
 
 ### Remove tasks: `remove`
-remove tasks from the task list
+remove a task from the task list
 * Removes a task at the specified INDEX.
 * The index refers to the index number shown in the task list when viewing tasks
 
@@ -141,11 +146,11 @@ Now you have 1 task in the list.
 `````
 
 ### Find tasks with specific key word: `find`
-finds tasks with a similar key word in its name. 
+finds tasks with the search term in its name. 
 
 Format: 
 
-`find {key word}`
+`find {search term}`
 
 Example: 
 
@@ -181,11 +186,11 @@ Here's your schedule for Jan 01 2021:
 ## Command Summary
 
 | Action | Format | Example |
-| todo | `todo <task's name>` | `todo homework` |
-| deadline | `deadline <task's name> /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
-| event | `event <task's name> /at <Year-Month-Date Hour:Minute>` | `event carnival /at 2021-09-15 20:00` |
+| todo | `todo {task's name}` | `todo homework` |
+| deadline | `deadline {task's name} /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
+| event | `event {task's name} /at {Year-Month-Date Hour:Minute}` | `event carnival /at 2021-09-15 20:00` |
 | list | `list` | `list` |
-| done | `done <task's reference number>` | `done 2` |
-| remove | `remove <task's reference number>` | `remove 2` |
-| find | `find <search term>` | `find word` |
-| scedule | `schedule <Year-Month-Day>` | `schedule 2021-09-15` |
+| done | `done {task's reference number}` | `done 2` |
+| remove | `remove {task's reference number}` | `remove 2` |
+| find | `find {search term}` | `find word` |
+| scedule | `schedule {Year-Month-Day}` | `schedule 2021-09-15` |
