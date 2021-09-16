@@ -5,8 +5,6 @@ for use via a Command Line Interface (CLI)** while still having the benefits
 of a Graphical User Interface (GUI) which is similar to a chatbot. If you can
 type fast, Duke can get your manage your tasks better than traditional GUI apps.
 
-=======================================================
-
 ## Features 
 
 ### Viewing help: `help`
@@ -53,7 +51,7 @@ Format: `delete INDEX`
 
 ### Locating tasks by name: `find`
 
-Finds tasks whose names contain any of the given keywords.
+Find tasks whose names contain any of the given keywords.
 
 Format: `find KEYWORD`
 
@@ -63,18 +61,16 @@ Says goodbye to duke.
 
 Format: `bye`
 
-=======================================================
-
 ## Command summary
-| Action          | Format, Example                             |
-| :-------------: | :-----------:                               |
-|  help           | `help`                                      |
-|  todo           | `todo TASK_NAME`                            |
-|  deadline       | `deadline TASK_NAME /by DATE`               |
-|  event          | `event TASK_NAME /at DATE`                  |
-|  list           | `list`                                      |
-|  done           | `done INDEX`                                |
-|  delete         | `delete INDEX`                              |
-|  find           | `find KEYWORD`                              |
-|  bye            | `bye`                                       |
+ Action          | Format, Example                             
+ :-------------: | :-----------:                               
+  help           | `help`
+  todo           | `todo TASK_NAME`
+  deadline       | `deadline TASK_NAME /by DATE`
+  event          | `event TASK_NAME /at DATE`
+  list           | `list`
+  done           | `done INDEX`
+  delete         | `delete INDEX`
+  find           | `find KEYWORD`
+  bye            | `bye`
 
