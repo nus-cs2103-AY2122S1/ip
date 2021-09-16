@@ -1,6 +1,6 @@
 # User Guide
 
-![Duke GUI](UI.png)
+![Duke GUI](Ui.png)
 
 Duke is an application that allows easy task creation and management.
 
