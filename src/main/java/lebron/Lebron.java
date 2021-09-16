@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 
 public class Lebron {
-    public static final String FILE_PATH = "./data/duke.txt";
+    public static final String FILE_PATH = "./build/libs/data/lebron.txt";
     private static final String HORIZONTAL_LINE = "    ____________________________" +
             "________________________________\n";
     private final Storage storage;
