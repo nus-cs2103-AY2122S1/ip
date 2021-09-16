@@ -74,7 +74,7 @@ Add a new task to keep track of that has a specific deadline.
 
 Example of usage:
 
-`deadline review bread /by 09/02/2021`
+`deadline review bread /by 2021-02-09`
 
 Expected outcome:
 
@@ -82,7 +82,7 @@ A new uncompleted deadline task "review bread" with the date "9 Feb 2021" will b
 
 ```
 Okay okay I've added the task:
-[D] [ ] review bread (by: )
+[D] [ ] review bread (by: Feb 9 2021)
 Yay 3 tasks!
 ```
 
@@ -92,7 +92,7 @@ Add a new task to keep track of that has a specific date.
 
 Example of usage:
 
-`event make bread /at 12/02/2021`
+`event make bread /at 2021-02-12`
 
 Expected outcome:
 
@@ -100,7 +100,7 @@ A new uncompleted event task "make bread" with the date "12 Feb 2021" will be ad
 
 ```
 Okay okay I've added the task:
-[E] [ ] make bread (at: )
+[E] [ ] make bread (at: Feb 12 2021)
 Yay 4 tasks!
 ```
 
@@ -120,8 +120,8 @@ All the tasks in the list will be shown.
 Here's your tasks! Wow I'm so helpful!
 1.[T] [ ] drink milo
 2.[T] [ ] eat bread
-3.[D] [ ] review bread (by: )
-4.[E] [ ] make bread (at: )
+3.[D] [ ] review bread (by: Feb 9 2021)
+4.[E] [ ] make bread (at: Feb 12 2021)
 ```
 
 ### `find` - Searching for tasks
@@ -139,8 +139,8 @@ Returns all the tasks in the list that contain the word "bread".
 ```
 Are any of these tasks the one you're looking for?
 1.[T] [ ] eat bread
-2.[D] [ ] review bread (by: )
-3.[E] [ ] make bread (at: )
+2.[D] [ ] review bread (by: Feb 9 2021)
+3.[E] [ ] make bread (at: Feb 12 2021)
 ```
 
 ### `done` - Completing task
