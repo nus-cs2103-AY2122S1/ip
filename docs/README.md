@@ -9,6 +9,9 @@
 5. Delete tasks from `TaskList`
 6. View your task list
 7. Find a particular task from `TaskList`
+8. C-BetterSearch
+9. C-DetectDuplicates
+
 
 ## Details of Features 
 
@@ -44,6 +47,14 @@ This feature allows you to view your current `TaskList`.
 ### 7. Find tasks in `TaskList`
 
 This feature allows you to find tasks in `TaskList` that match a given search key.
+
+### 8. C-BetterSearch
+
+More flexibility in search e.g., find items even if the keyword matches the item only partially.
+
+### 9. C-DetectDuplicates
+
+Add the ability to recognize and deal with duplicate items. e.g., the same task cannot be added multiple times. 
 
 ## Usage
 
