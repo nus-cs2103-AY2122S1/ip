@@ -25,6 +25,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -115,10 +120,23 @@ public class Bob extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
+        userInput.setPromptText("Talk to me here!");
+        userInput.setFocusTraversable(false);
+
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        // Setting the main darker background.
+        Image bg = new Image(this.getClass().getResourceAsStream("/images/Background.jpeg"));
+        BackgroundImage bgImage = new BackgroundImage(bg,
+                BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        Background background = new Background(bgImage);
+        mainLayout.setBackground(background);
 
         scene = new Scene(mainLayout);
 
@@ -159,6 +177,16 @@ public class Bob extends Application {
                 DialogBox.getBobDialog(new Label(ui.getStartMessage()), new ImageView(bob))
         );
 
+        // Setting the paler chat background.
+        Image img = new Image(this.getClass().getResourceAsStream("/images/PaleBackground.png"));
+        BackgroundImage bImg = new BackgroundImage(img,
+                BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        Background bGround = new Background(bImg);
+        dialogContainer.setBackground(bGround);
+
         // Displaying the appropriate Bob messages if the data directory or bob.txt file do not exist yet.
         if (!isDirectoryPresent) {
             dialogContainer.getChildren().addAll(
@@ -176,13 +204,9 @@ public class Bob extends Application {
         );
 
         // Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
         // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -214,7 +238,7 @@ public class Bob extends Application {
                 dukeText.setVisited(true); // Set the hyperlink as visited so that the text is black.
                 dukeText.setOnAction(e -> {
                     try {
-                        Desktop.getDesktop().browse(new URI("https://felwuzhere.wixsite.com/my-site-1"));
+                        Desktop.getDesktop().browse(new URI("https://felwuzhere.wixsite.com/bobhelp"));
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     } catch (URISyntaxException ex) {
