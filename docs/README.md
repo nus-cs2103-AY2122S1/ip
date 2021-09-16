@@ -2,7 +2,7 @@
 
 ## Quick Start 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `Duke.jar` from [here](http://google.com).
+2. Download the latest `duke.jar` from [here](https://github.com/kaldius/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the *home folder* for your Duke.
 4. Start the app and begin typing commands! Try this out:
     * todo learn to use Duke!
