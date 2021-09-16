@@ -25,7 +25,7 @@ public class Ui {
      * @return Welcome message.
      */
     public String welcomeMessage() {
-        return ("Hello I'm your friendly task-planning chatbot Duke!\n"
+        return ("Hello I'm your friendly task-planning chatbot duke.Duke!\n"
                 + "To enter a deadline, please type in this format: 'deadline {title of item} "
                 + "/by d/mm/yyyy hh:mm'\n"
                 + "To enter an event, please type in this format: 'event {title of item} /on d/mm/yyyy hh:mm'\n"
@@ -34,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * The message that is shown when the user first uses Duke since a local path has not been
+     * The message that is shown when the user first uses duke.Duke since a local path has not been
      * created.
      *
      * @return Loading Error message.

@@ -19,7 +19,6 @@
                 fx:id="dialog"
                 text="Label"
                 wrapText="true"
-                style="-fx-padding: 10"
         />
         <ImageView
                 fx:id="displayPicture"
@@ -30,6 +29,6 @@
         />
     </children>
     <padding>
-        <Insets bottom="15.0" top="15.0" />
+        <Insets bottom="15.0" top="15.0" left="8.0" right="8.0" />
     </padding>
 </fx:root>

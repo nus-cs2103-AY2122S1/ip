@@ -1,4 +1,5 @@
-import java.awt.*;
+package duke;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -51,6 +52,30 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Creates a new dialog box using the string of text and image given.
+     *
+     * @param text The string to be displayed.
+     * @param img The image to be shown.
+     * @return A dialog box containing both items.
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
+    }
+
+    /**
+     * Creates a new dialog box for the program instead of the user.
+     *
+     * @param text The string to be displayed.
+     * @param img The image of duke.Duke.
+     * @return A dialog box containing both items.
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
+    /**
      * Sets the text properties suc as paddings, text alignments, border and background.
      */
     private void setTextProperties() {
@@ -73,29 +98,5 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
         dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,
                 new CornerRadii(10.0), new Insets(0))));
-    }
-
-    /**
-     * Creates a new dialog box using the string of text and image given.
-     *
-     * @param text The string to be displayed.
-     * @param img The image to be shown.
-     * @return A dialog box containing both items.
-     */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    /**
-     * Creates a new dialog box for the program instead of the user.
-     *
-     * @param text The string to be displayed.
-     * @param img The image of Duke.
-     * @return A dialog box containing both items.
-     */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
     }
 }

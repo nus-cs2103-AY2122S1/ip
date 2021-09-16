@@ -1,8 +1,5 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+package duke;
+
 import duke.command.Command;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -32,7 +29,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Initialises a Duke program to start chatting with the user. ALl inputs go through this method.
+     * Initialises a duke.Duke program to start chatting with the user. ALl inputs go through this method.
      *
      * @param filePath The file to store the data that users input will be initialised if it does not exist, else will
      *                 be overwritten.
@@ -52,8 +49,12 @@ public class Duke extends Application {
         this("data/duke.txt");
     }
 
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
     /**
-     * The program will begin when this method is called.
+     * Starts the program when this method is called.
      */
     public void run() {
         ui.welcomeMessage();
@@ -68,6 +69,23 @@ public class Duke extends Application {
                 ui.showError(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Takes in a userInput and returns a String that contains the program's response.
+     *
+     * @param input The user input that will be read and deciphered.
+     * @return A string that shows the program's response.
+     */
+    public String getResponse(String input) {
+        String toPrint = "";
+        try {
+            Command c = Parser.parse(input);
+            toPrint = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            toPrint = ui.showError(e.getMessage());
+        }
+        return toPrint;
     }
 
     @Override
@@ -91,7 +109,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -136,8 +154,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then
+     * appends them to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         String userText = userInput.getText();
@@ -147,27 +165,5 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
-    }
-
-
-    /**
-     * Takes in a userInput and returns a String that contains the program's response.
-     *
-     * @param input The user input that will be read and deciphered.
-     * @return A string that shows the program's response.
-     */
-    public String getResponse(String input) {
-        String toPrint = "";
-        try {
-            Command c = Parser.parse(input);
-            toPrint = c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
-            toPrint = ui.showError(e.getMessage());
-        }
-        return toPrint;
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }

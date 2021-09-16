@@ -70,6 +70,10 @@ public class Task {
             return false;
         }
         Task other = (Task) obj;
-        return this.itemName.equals(other.itemName) && this.dateTime.equals(other.dateTime) && (this.isDone == other.isDone);
+        boolean isItemNameEqual = this.itemName.equals(other.itemName);
+
+        boolean isDateTimeEqual = this.dateTime.equals(other.dateTime);
+        boolean isDoneEqual = this.isDone == other.isDone;
+        return isItemNameEqual && isDateTimeEqual && isDoneEqual;
     }
 }

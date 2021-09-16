@@ -25,7 +25,7 @@ public class TaskList {
     private ArrayList<Task> xs = new ArrayList<>();
 
     /**
-     * Initialising new file, if file cannot be found throws an error.
+     * Initialises the file from specified file path. If file cannot be found, it throws an error.
      *
      * @param file The file that is to be copied into the list xs.
      * @throws DukeException If file is not found.

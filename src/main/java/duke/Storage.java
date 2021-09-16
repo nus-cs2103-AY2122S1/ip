@@ -13,7 +13,7 @@ import duke.task.Todo;
 
 /**
  * Storage deals with the file that stores the items in the user's local memory so that
- * the user can retrieve his tasks when he loads up Duke in the future after exiting.
+ * the user can retrieve his tasks when he loads up duke.Duke in the future after exiting.
  */
 public class Storage {
     private File file;
@@ -38,7 +38,7 @@ public class Storage {
     public File rewriteDone(String description, String cl, File dukeData) throws IOException {
         Scanner sc = new Scanner(dukeData);
         int count = 0;
-        boolean changed = false;
+        boolean isChanged = false;
         File temp = new File("data/temp.txt");
         FileWriter fw = new FileWriter(temp, true);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -51,10 +51,10 @@ public class Storage {
             if (!(count == 0)) {
                 bw.newLine();
             }
-            if (parts[2].equals(description) && parts[0].equals(cl) && !changed) {
+            if (parts[2].equals(description) && parts[0].equals(cl) && !isChanged) {
                 bw.write(parts[0] + "|1|" + parts[2] + "|" + parts[3]);
                 count++;
-                changed = true;
+                isChanged = true;
                 continue;
             }
             bw.write(nextLine);
@@ -109,7 +109,7 @@ public class Storage {
      */
     public File deleteLine(String description, String cl, File dukeData) throws IOException {
         Scanner sc = new Scanner(dukeData);
-        boolean deleted = false;
+        boolean isDeleted = false;
         int count = 0;
         File temp = new File("data/temp.txt");
         FileWriter fw = new FileWriter(temp, true);
@@ -120,8 +120,8 @@ public class Storage {
                 continue;
             }
             String[] parts = nextLine.split("\\|", 10);
-            if (parts[2].equals(description) && parts[0].equals(cl) && !deleted) {
-                deleted = true;
+            if (parts[2].equals(description) && parts[0].equals(cl) && !isDeleted) {
+                isDeleted = true;
                 continue;
             }
             if (!(count == 0)) {
@@ -139,7 +139,7 @@ public class Storage {
     }
 
     /**
-     * A method that deletes a specified task from the local memory using the method deleteLine
+     * Deletes a specified task from the local memory using the method deleteLine
      * function.
      *
      * @param toDelete The task that is to be deleted.

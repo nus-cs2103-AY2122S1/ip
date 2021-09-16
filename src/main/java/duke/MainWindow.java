@@ -1,3 +1,5 @@
+package duke;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -28,7 +30,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        String toWelcome = ("Hello I'm your friendly task-planning chatbot Duke!\n"
+        String toWelcome = ("Hello I'm your friendly task-planning chatbot duke.Duke!\n"
                 + "To enter a deadline, please type in this format:\n'deadline(or d) {title of item} "
                 + "/by d/mm/yyyy hh:mm'\n"
                 + "To enter an event, please type in this format: \n'event(or e) {title of item} /on d/mm/yyyy hh:mm'\n"
@@ -43,8 +45,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
