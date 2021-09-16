@@ -82,7 +82,7 @@ public class Duke {
      */
     public static String markDone(int i) throws DukeException {
         if (i > tasks.getSize()) {
-            throw new DukeException("\nOOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
+            throw new DukeException("OOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
         }
         String start = "Nice! I've marked this task as done:";
         tasks.getTask(i - 1).markAsDone();
@@ -156,7 +156,7 @@ public class Duke {
         Event e = new Event(t);
         tasks.addNewTask(e);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "\n Got it. I've added this task: \n " + "  " + e
+        return "Got it. I've added this task: \n " + "  " + e
                 + "\n"  + "Now you have " + tasks.getSize()  + " tasks in the list.";
     }
 
@@ -171,10 +171,10 @@ public class Duke {
         }
         String start = "Noted. I've removed this task: \n";
         String deleted = tasks.getTask(i-1).toString();
-        tasks.deleteGivenTask(i - 1);
+        tasks.deleteGivenTask(i);
         TaskList.updateMemory(storage.getPath(), tasks);
         String mid = "  " + deleted;
-        String end = "Now you have " + tasks.getSize() + " tasks in the list.";
+        String end = "\nNow you have " + tasks.getSize() + " tasks in the list.";
         return start + mid + end;
     }
 
