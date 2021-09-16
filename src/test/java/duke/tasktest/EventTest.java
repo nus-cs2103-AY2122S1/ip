@@ -1,4 +1,4 @@
-package duke.taskTest;
+package duke.tasktest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

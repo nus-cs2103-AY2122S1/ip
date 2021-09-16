@@ -35,17 +35,17 @@ public class TaskList {
      * @return list of tasks as a string
      */
     public String print() {
-        boolean allTasksDone = true;
+        boolean hasAllTasksDone = true;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.size(); i++) {
             if (!this.get(i).getStatus()) {
-                allTasksDone = false;
+                hasAllTasksDone = false;
             }
             String taskString = this.get(i).toString();
             stringBuilder.append("\n").append(i+1).append(". ").append(taskString);
         }
 
-        return  stringBuilder.toString() + taskDoneMessage(allTasksDone);
+        return  stringBuilder.toString() + taskDoneMessage(hasAllTasksDone);
     }
 
     public String taskDoneMessage(boolean allTasksDone){
@@ -88,14 +88,14 @@ public class TaskList {
      * @return boolean value of whether the task is contained in the list
      */
     public boolean containsTask(Task task) {
-        boolean ans = false;
+        boolean listContains = false;
         for (Task value : taskList) {
             if (value.getDetails().trim().equals(task.getDetails().trim())) {
-                ans = true;
+                listContains = true;
                 break;
             }
         }
-        return ans;
+        return listContains;
     }
 }
 

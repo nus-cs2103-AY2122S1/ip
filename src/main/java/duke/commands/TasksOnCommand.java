@@ -16,7 +16,7 @@ public class TasksOnCommand extends Command {
     private final LocalDate date;
 
     /**
-     * Initialise the input date which is used to search the list
+     * Initialises the input date which is used to search the list
      *
      * @param date input date which is used to retrieve the tasks
      */
