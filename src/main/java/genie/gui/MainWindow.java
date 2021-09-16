@@ -51,6 +51,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.length() == 0) {
+            return;
+        }
         String response = genie.getResponse(input);
         
         dialogContainer.getChildren().addAll(
@@ -67,7 +70,7 @@ public class MainWindow extends AnchorPane {
                 }
             };
             Timer timer = new Timer("Timer");
-            long delay = 4000;
+            long delay = 2000;
             timer.schedule(task, delay);
         }
         userInput.clear();

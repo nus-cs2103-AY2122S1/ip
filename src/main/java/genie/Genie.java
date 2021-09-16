@@ -29,6 +29,7 @@ public class Genie {
      * @return Response message by system.
      */
     public String getResponse(String input) {
+        assert input.length() != 0;
         String output;
         if (input.equals("bye")) {
             output = Message.GOODBYEMESSAGE;

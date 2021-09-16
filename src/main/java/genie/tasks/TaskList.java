@@ -17,10 +17,6 @@ public class TaskList {
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
-
-    public void add(Task task) {
-        tasks.add(task);
-    }
     
     /**
      * The output that will be shown when the input command is list.
@@ -101,7 +97,7 @@ public class TaskList {
     public String deadlineTask(String str) {
         try {
             int slashIndex = str.indexOf("/");
-            //assert slashIndex >= 0 && slashIndex <= str.length();
+            assert slashIndex >= 0 && slashIndex <= str.length();
             String day = str.substring(slashIndex + 4, slashIndex + 14);
             String time = str.substring(slashIndex + 14);
             Task.Priority priority;
@@ -210,10 +206,7 @@ public class TaskList {
             if (tasks.get(i).priority == priority) {
                 results += (j) + ". " + tasks.get(i) + "\n";
                 j++;
-            } 
-//            if (i > genie.tasks.size() - 1) {
-//                results += "\n";
-//            }
+            }
         } return results;
     }
 }

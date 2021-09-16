@@ -1,7 +1,8 @@
 package genie.parser;
 
-import genie.exception.GenieException;
 import genie.common.Message;
+import genie.exception.EmptyMessage;
+import genie.exception.GenieException;
 import genie.tasks.TaskList;
 
 public class Parser {
@@ -65,12 +66,14 @@ public class Parser {
                 output = taskList.showPriority(str);
                 return output;
             }
-            else {
-                throw new GenieException("Command is not valid!");
+            else if (str.isEmpty()) {
+                throw new EmptyMessage(str);
             }
-        } catch (GenieException e) {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            else {
+                throw new GenieException(str);
+            }
+        } catch (GenieException | EmptyMessage e) {
+            return e.toString();
         }
-        return Message.repeatReply(str);
     }
 }
