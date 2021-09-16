@@ -1,7 +1,7 @@
 # User Guide
 
 Duke is **an interactive desktop app for managing tasks**, optimized for use via **a Command Line Interface (CLI)** while still having the benefits of **a Graphical User Interface (GUI)**. If you can type fast, Duke can get your task operations done faster than traditional GUI apps. 
-Ui sample looks like [this](https://github.com/wengYing227/ip/blob/master/docs/Ui.png).
+
 
 ## Quick Start
 
