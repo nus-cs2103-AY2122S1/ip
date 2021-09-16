@@ -50,12 +50,12 @@ test {
 }
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "misaki.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "v2.0.0"
+    archiveBaseName = "misaki"
+    archiveVersion = "v3.0.0"
     archiveClassifier = null
 }
 
