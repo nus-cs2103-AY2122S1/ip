@@ -18,6 +18,8 @@ public class DeleteCommand extends Command {
             int index = Integer.valueOf(this.args);
             tasklist.deleteTask(index);
             return "Deleted task number " + index;
+        } catch (NumberFormatException e) {
+            return "please input a number";
         } catch (DukeException e) {
             return e.getMessage();
         }

@@ -9,6 +9,9 @@ public class Duke {
     private final Ui ui;
     private boolean isRunning = true;
 
+    /**
+     * Constructs a new Duke instance.
+     */
     public Duke() {
         store = new Storage("./data/duke.txt");
         tasklist = new TaskList();
@@ -41,15 +44,11 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command cmd = Command.createCommand(input);
-            return cmd.execute(this.tasklist, this.ui, this.store, this);
+            String response = cmd.execute(this.tasklist, this.ui, this.store, this);
+            return ui.addPadding(response);
         } catch (DukeException e) {
             return e.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.run();
     }
 
 }

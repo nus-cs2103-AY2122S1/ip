@@ -10,7 +10,7 @@ public class ToDo extends Task {
 
     @Override
     public String saveTask() {
-        return "todo|" + this.getName() + (this.isDone() ? "|1" : "|0");
+        return "todo|" + this.getName() + (this.isDone() ? "|1|" : "|0|") + this.saveTags();
     }
 
     @Override

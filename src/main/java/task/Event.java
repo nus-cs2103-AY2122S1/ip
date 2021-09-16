@@ -10,6 +10,13 @@ public class Event extends Task {
 
     private LocalDate at;
 
+    /**
+     * Constructs Event Task instance.
+     *
+     * @param name Name of task.
+     * @param at Time of task.
+     * @throws DukeException When name is empty.
+     */
     public Event(String name, String at) throws DukeException {
         super(name);
         try {
@@ -21,7 +28,7 @@ public class Event extends Task {
 
     @Override
     public String saveTask() {
-        return "event|" + this.getName() + "/at" + at + (this.isDone() ? "|1" : "|0");
+        return "event|" + this.getName() + "/at" + at + (this.isDone() ? "|1|" : "|0|") + this.saveTags();
     }
 
     @Override

@@ -17,6 +17,8 @@ public class DoneCommand extends Command {
         try {
             tasklist.doneTask(Integer.valueOf(this.args));
             return tasklist.printTasks();
+        } catch (NumberFormatException e) {
+            return "please input a number";
         } catch (DukeException e) {
             return e.getMessage();
         }

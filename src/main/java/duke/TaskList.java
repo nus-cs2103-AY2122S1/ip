@@ -84,7 +84,14 @@ public class TaskList {
         return response.toString();
     }
 
-    public Task tagTask(int id, String tagName){
+    /**
+     * Adds a tag to the specified task.
+     *
+     * @param id Id of task to tag.
+     * @param tagName Name of tag.
+     * @return Task that was tagged.
+     */
+    public Task tagTask(int id, String tagName) {
         Task t = tasks.get(id);
         t.addTag(tagName);
         return t;
@@ -107,7 +114,8 @@ public class TaskList {
     public String toString() {
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
-            out.append(i).append(": ").append(this.tasks.get(i).toString()).append("\n");
+            Task t = this.tasks.get(i);
+            out.append(i).append(": ").append(t.toString()).append(t.getTags()).append("\n");
         }
         return out.toString();
     }

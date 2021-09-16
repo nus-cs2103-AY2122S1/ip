@@ -37,9 +37,20 @@ public class Parser {
         return stripStrings(parts);
     }
 
+    /**
+     * Parses text in storage into tags.
+     *
+     * @param line Text in storage for storing tags.
+     * @return Array of tags.
+     */
+    public static String[] parseTags(String line) {
+        String[] parts = line.split("#");
+        return stripStrings(parts);
+    }
+
     private static void checkArg(String[] arg) throws DukeException {
         if (arg.length < 2) {
-            throw new DukeException("Please specify time");
+            throw new DukeException("too little argument");
         } else if (arg.length > 2) {
             throw new DukeException("too many argument");
         }

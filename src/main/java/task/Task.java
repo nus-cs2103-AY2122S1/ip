@@ -1,10 +1,9 @@
 package task;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Parser;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public abstract class Task {
 
@@ -12,6 +11,12 @@ public abstract class Task {
     private boolean done;
     private ArrayList<String> tags;
 
+    /**
+     * Constructs a Todo Task instance.
+     *
+     * @param name Name of task.
+     * @throws DukeException When name is empty.
+     */
     public Task(String name) throws DukeException {
         if (name.isBlank()) {
             throw new DukeException("Please specify name");
@@ -62,10 +67,16 @@ public abstract class Task {
      */
     public static Task getTask(String s) {
         String[] parts = Parser.parseStorage(s);
-        assert parts.length == 3;
+        assert parts.length == 4;
         Task t = createTask(parts[0], parts[1]);
         if (parts[2].equals("1")) {
             t.markDone();
+        }
+        String[] tags = Parser.parseTags(parts[3]);
+        for (String tag: tags) {
+            if (!tag.equals("")) {
+                t.addTag(tag);
+            }
         }
         return t;
     }
@@ -85,8 +96,30 @@ public abstract class Task {
         return done;
     }
 
-    public void addTag(String tag){
+    public void addTag(String tag) {
         this.tags.add(tag);
+    }
+
+    public String getTags() {
+        if (this.tags.size() == 0) {
+            return "";
+        }
+        StringBuilder display = new StringBuilder("\n    Tags:");
+        for (int i = 0; i < this.tags.size(); i++) {
+            display.append(" #").append(this.tags.get(i));
+        }
+        return display.toString();
+    }
+
+    protected String saveTags() {
+        if (this.tags.size() == 0) {
+            return "#";
+        }
+        StringBuilder display = new StringBuilder("");
+        for (int i = 0; i < this.tags.size(); i++) {
+            display.append("#" + this.tags.get(i));
+        }
+        return display.toString();
     }
 
     /**
@@ -104,10 +137,6 @@ public abstract class Task {
     @Override
     public String toString() {
         String check = done ? "X" : " ";
-        StringBuilder showTags = new StringBuilder("\nTags:");
-        for (int i = 0; i < this.tags.size(); i++) {
-            showTags.append("\n#").append(this.tags.get(i));
-        }
-        return "[" + check + "] " + name + showTags.toString();
+        return "[" + check + "] " + name;
     }
 }

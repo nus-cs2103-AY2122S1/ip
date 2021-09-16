@@ -11,6 +11,11 @@ public class Storage {
 
     private final File file;
 
+    /**
+     * Constructs a Storage instance.
+     *
+     * @param pathToFile Path to .txt file used for storage.
+     */
     public Storage(String pathToFile) {
         file = new File(pathToFile);
         try {
