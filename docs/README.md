@@ -1,12 +1,15 @@
 # User Guide
-**Carrot Task Manager** is a desktop app for managing tasks. It provides the functionalities of a todo list in a dialogue format. User can chat with Ms.Carrot (the computer), and she will help the user keep track of his or her tasks.
+**Carrot Task Manager** is a desktop app for managing tasks. It provides the functionalities of a todo list in a dialogue format. A user can chat with Ms.Carrot (the computer), and she will help the user keep track of his or her tasks.
 
 ## Quick Start
 1. Ensure you have Java 11 installed in your computer.
 2. Download the **IP.jar** from v0.2 [here](https://github.com/chingh20/ip/releases).
 3. Copy the file to the folder you want to use for your **Carrot Task Manager**.
-4. Double-click the file to start the app.
-5. Type any command in the command box and press Enter to execute it.  
+4. Double-click the file to start the app. You will see a window like this:  
+  
+   ![Image](https://github.com/chingh20/ip/blob/a45ff7c92df8f3fd03943f313b67aed5f197a1ef/src/main/resources/images/StartUpPage.png)
+  
+5. Type any command in the text box and press Enter on your keyboard or click Send to execute it.  
    Some sample commands you might want to try is:   
    `list` - Shows your todo list.  
    `todo start list` - Adds "start list" as a task in your todo list.     
