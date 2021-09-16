@@ -4,3 +4,5 @@ E|1|project meeting|2021-08-26
 T|1|join sports club
 T|0|run
 D|0|submit assignment|2021-09-03
+E|0|Birthday Party!|2022-06-20
+D|0|Buy presents!|2022-03-01
