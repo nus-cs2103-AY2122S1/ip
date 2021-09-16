@@ -1,7 +1,5 @@
 package duke.commands;
 
-import java.util.function.Supplier;
-
 import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 import duke.tasks.Event;
@@ -13,10 +11,13 @@ import duke.tasks.Task;
 public class CommandEvent extends Command {
     public static final String HELP_COMMAND = "event";
     public static final String HELP_DESCRIPTION = "Add a new event task";
-    public static final String HELP_USAGE = "Usage: event task_name </at event_time>\n"
-            + "Add a new event task\n"
+    public static final String HELP_USAGE =
+            "Usage: event task_name </at event_time>\n"
+            + HELP_DESCRIPTION + "\n"
             + "\ttask_name\tname of the task to add\n"
             + "\t /at event_time\ttime that event occurs at";
+
+    private static final int REQUIRED_ARG_COUNT = 2;
 
     public CommandEvent(String[] cmdArgsArr, TaskArrayList taskList) {
         super(cmdArgsArr, taskList);
@@ -24,10 +25,7 @@ public class CommandEvent extends Command {
 
     @Override
     public String run() throws DukeException {
-        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
-        Supplier<Boolean> isMissingAtArgument = () -> (cmdArgsArr[1].split("/at", 2).length != 2);
-
-        if (hasWrongArgumentCount || isMissingAtArgument.get()) {
+        if (hasWrongArgumentCount(REQUIRED_ARG_COUNT) || isMissingArgument("/at")) {
             throw new DukeException(HELP_USAGE);
         }
 

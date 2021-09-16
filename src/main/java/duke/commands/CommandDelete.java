@@ -1,11 +1,7 @@
 package duke.commands;
 
-import java.util.function.Supplier;
-
 import duke.TaskArrayList;
 import duke.exceptions.DukeException;
-
-
 
 /**
  * Command to execute when user types "delete"
@@ -13,9 +9,12 @@ import duke.exceptions.DukeException;
 public class CommandDelete extends Command {
     public static final String HELP_COMMAND = "delete";
     public static final String HELP_DESCRIPTION = "Delete a task from the list";
-    public static final String HELP_USAGE = "Usage: delete task_number\n"
-            + "Delete a task\n"
+    public static final String HELP_USAGE =
+            "Usage: delete task_number\n"
+            + HELP_DESCRIPTION + "\n"
             + "\ttask_number\ttask number of the task to delete";
+
+    private static final int REQUIRED_ARG_COUNT = 2;
 
     public CommandDelete(String[] cmdArgsArr, TaskArrayList taskList) {
         super(cmdArgsArr, taskList);
@@ -23,10 +22,7 @@ public class CommandDelete extends Command {
 
     @Override
     public String run() throws DukeException {
-        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
-        Supplier<Boolean> isNotNumericArgument = () -> !cmdArgsArr[1].matches("[0-9]+");
-
-        if (hasWrongArgumentCount || isNotNumericArgument.get()) {
+        if (hasWrongArgumentCount(REQUIRED_ARG_COUNT) || isNotNumericArgument(cmdArgsArr[1])) {
             throw new DukeException(HELP_USAGE);
         }
 

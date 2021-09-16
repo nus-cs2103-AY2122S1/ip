@@ -9,8 +9,9 @@ import duke.exceptions.DukeException;
 public class CommandHelp extends Command {
     public static final String HELP_COMMAND = "help";
     public static final String HELP_DESCRIPTION = "Provide help information for Duke commands";
-    public static final String HELP_USAGE = "Usage: Help [command]\n"
-            + "Display this help message\n"
+    public static final String HELP_USAGE =
+            "Usage: Help [command]\n"
+            + HELP_DESCRIPTION + "\n"
             + "Options:\n"
             + "\tCommand (optional) - displays help information on that command";
 

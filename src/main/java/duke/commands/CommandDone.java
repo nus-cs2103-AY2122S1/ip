@@ -1,7 +1,5 @@
 package duke.commands;
 
-import java.util.function.Supplier;
-
 import duke.TaskArrayList;
 import duke.exceptions.DukeException;
 
@@ -13,9 +11,12 @@ import duke.exceptions.DukeException;
 public class CommandDone extends Command {
     public static final String HELP_COMMAND = "done";
     public static final String HELP_DESCRIPTION = "Mark a task as done";
-    public static final String HELP_USAGE = "Usage: done task_number\n"
-            + "Mark a task as done\n"
+    public static final String HELP_USAGE =
+            "Usage: done task_number\n"
+            + HELP_DESCRIPTION + "\n"
             + "\ttask_number\ttask number of the task to mark as done";
+
+    private static final int REQUIRED_ARG_COUNT = 2;
 
     public CommandDone(String[] cmdArgsArr, TaskArrayList taskList) {
         super(cmdArgsArr, taskList);
@@ -23,10 +24,7 @@ public class CommandDone extends Command {
 
     @Override
     public String run() throws DukeException {
-        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
-        Supplier<Boolean> isNotNumericArgument = () -> !cmdArgsArr[1].matches("[0-9]+");
-
-        if (hasWrongArgumentCount || isNotNumericArgument.get()) {
+        if (hasWrongArgumentCount(REQUIRED_ARG_COUNT) || isNotNumericArgument(cmdArgsArr[1])) {
             throw new DukeException(HELP_USAGE);
         }
 

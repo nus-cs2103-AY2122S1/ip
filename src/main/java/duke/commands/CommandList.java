@@ -9,19 +9,19 @@ import duke.exceptions.DukeException;
 public class CommandList extends Command {
     public static final String HELP_COMMAND = "list";
     public static final String HELP_DESCRIPTION = "List out all tracked tasks";
-    public static final String HELP_USAGE = "Usage: list\n"
-            + "List all tracked tasks";
+    public static final String HELP_USAGE =
+            "Usage: list\n"
+            + HELP_DESCRIPTION;
+
+    private static final int REQUIRED_ARG_COUNT = 1;
 
     public CommandList(String[] cmdArgsArr, TaskArrayList taskList) {
         super(cmdArgsArr, taskList);
     }
 
-
     @Override
     public String run() throws DukeException {
-        boolean hasWrongArgumentCount = cmdArgsArr.length > 1;
-
-        if (hasWrongArgumentCount) {
+        if (hasWrongArgumentCount(REQUIRED_ARG_COUNT)) {
             throw new DukeException(HELP_USAGE);
         }
 

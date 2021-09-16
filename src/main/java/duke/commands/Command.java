@@ -14,7 +14,7 @@ abstract class Command {
     protected TaskArrayList taskList;
 
     /**
-     * Set up a command using the command, arguments and task list
+     * Sets up a command using the command, arguments and task list
      *
      * @param cmdArgsArr String array of command , optional 2nd member arguments
      * @param taskList   list of tasks stored by Duke
@@ -24,6 +24,30 @@ abstract class Command {
         this.taskList = taskList;
     }
 
+    /**
+     * Tests if cmdArgs has the wrong length.
+     *
+     * @param desiredValue length of array {cmd,args}
+     * @return True if length does not match desired value
+     */
+    protected boolean hasWrongArgumentCount (int desiredValue) {
+        return !(cmdArgsArr.length == desiredValue);
+    }
+
+    /**
+     * Tests if arguments contain the desired marker.
+     *
+     * @param marker String that precedes an argument
+     * @return True if the desired marker is missing
+     */
+    protected boolean isMissingArgument (String marker) {
+        assert cmdArgsArr.length == 2;
+        return cmdArgsArr[1].split(marker, 2).length != 2;
+    }
+
+    protected boolean isNotNumericArgument (String arg) {
+        return !arg.matches("[0-9]+");
+    }
 
     /**
      * Runs the command.
@@ -32,6 +56,5 @@ abstract class Command {
      * @throws DukeException
      */
     public abstract String run() throws DukeException;
-
 
 }

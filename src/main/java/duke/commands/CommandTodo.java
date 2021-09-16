@@ -11,9 +11,12 @@ import duke.tasks.Todo;
 public class CommandTodo extends Command {
     public static final String HELP_COMMAND = "todo";
     public static final String HELP_DESCRIPTION = "Add a new todo task";
-    public static final String HELP_USAGE = "Usage: todo task_name\n"
-            + "Add a new todo task\n"
+    public static final String HELP_USAGE =
+            "Usage: todo task_name\n"
+            + HELP_DESCRIPTION + "\n"
             + "\ttask_name\tname of the task to add";
+
+    private static final int REQUIRED_ARG_COUNT = 2;
 
     public CommandTodo(String[] cmdArgsArr, TaskArrayList taskList) {
         super(cmdArgsArr, taskList);
@@ -21,9 +24,7 @@ public class CommandTodo extends Command {
 
     @Override
     public String run() throws DukeException {
-        boolean hasWrongArgumentCount = (cmdArgsArr.length != 2);
-
-        if (hasWrongArgumentCount) {
+        if (hasWrongArgumentCount(REQUIRED_ARG_COUNT)) {
             throw new DukeException(HELP_USAGE);
         }
 
