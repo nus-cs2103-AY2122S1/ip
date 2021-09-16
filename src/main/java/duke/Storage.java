@@ -44,7 +44,7 @@ public class Storage {
 
         ArrayList<Task> list = new ArrayList<>();
 
-        file = new File(System.getProperty("user.dir") + "\\" + filePath);
+        file = new File(filePath);
 
         try {
             if (!file.exists()) {
@@ -80,7 +80,7 @@ public class Storage {
      */
     public void update(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(filePath);
             BufferedWriter bw = new BufferedWriter(fw);
 
             for (int i = 0; i < tasks.getSize(); i++) {
