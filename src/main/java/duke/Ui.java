@@ -110,7 +110,7 @@ public class Ui {
      * @return
      */
     public String saveMessage() {
-        return "Your data has been saved";
+        return "Saved. I have everything stored in my brain";
     }
 
     /**
@@ -145,7 +145,7 @@ public class Ui {
 
     public String helpMessage() {
         String returnMessage = "";
-        returnMessage += "Here are my commands\n";
+        returnMessage += "Here are my commands:\n";
         returnMessage += "Todo: \"todo [task]\"\n";
         returnMessage += "Deadline: \"deadline [task] /by YYYY-MM-DD\"\n";
         returnMessage += "Event: \"event [task] /at YYYY-MM-DD\"\n";
