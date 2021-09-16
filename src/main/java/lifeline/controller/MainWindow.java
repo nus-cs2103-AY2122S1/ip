@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
     private Lifeline lifeline = new Lifeline("save" + File.separator + "tasks.json");
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image lifelineImage = new Image(this.getClass().getResourceAsStream("/images/DaLifeline.png"));
+    private Image lifelineImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initializes an instance of Lifeline to respond to user input and forces ScrollPane to automatically scroll down.

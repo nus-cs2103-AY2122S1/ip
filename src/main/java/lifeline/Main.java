@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,8 +26,6 @@ public class Main extends Application {
             Scene scene = new Scene(anchorPane);
             scene.getStylesheets().add("styles/lifeline.css");
 
-            Image icon = new Image(this.getClass().getResourceAsStream("/images/Apex.png"));
-            stage.getIcons().add(icon);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Lifeline");
