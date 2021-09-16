@@ -8,9 +8,9 @@ It has:
 * potential
 * features I guess
 
-What I did to get into this mess:
+What I did to get into this:
 1. Sign up for CS2103T
-2. Not realise what I was getting into
+2. Not realise much work I was signing up for
 3. Profit..?
 
 Here's a tiny preview of some code you'll find in this project!
