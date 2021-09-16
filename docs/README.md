@@ -284,3 +284,13 @@ delete   | `delete <task number>`                                   | `delete 1`
 help     | `help`                                                   | `help`
 undo     | `undo <number of undos>`                                 | `undo 1`
 bye      | `bye`                                                    | `bye`
+
+## Credits
+
+All images used in this application are from [unsplash](https://unsplash.com/).
+
+1. [Baby Groot / User Image](https://unsplash.com/photos/kHqbPFRCmf0)
+2. [Jarvis / Bot Image](https://unsplash.com/photos/OgvqXGL7XO4)
+3. [Application Background](https://unsplash.com/photos/_kUxT8WkoeY)
+
+All the above images are free to use under the [Unsplash License](https://unsplash.com/license)
