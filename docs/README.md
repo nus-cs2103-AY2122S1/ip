@@ -179,6 +179,7 @@ Here's your schedule for Jan 01 2021:
 `````
 
 ## Command Summary
+
 | Action | Format | Example |
 | todo | `todo <task's name>` | `todo homework` |
 | deadline | `deadline <task's name> /by {Year-Month-Day Hour:Minute}` | `deadline assignment /by 2021-09-15 13:00` |
