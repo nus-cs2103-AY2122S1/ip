@@ -1,4 +1,4 @@
-# User Guide
+# Banana Chatbot
 
 ## Features
 
@@ -55,7 +55,7 @@ the correct statement:
 
 ```
 Got it. I've added this task:  
-    [T][] clean room
+   [T][] clean room
 Now you have 2 tasks in the list.
 ```
 ### `deadline` - Adds a Deadline task
@@ -71,7 +71,7 @@ the correct statement:
 
 ```
 Got it. I've added this task:
-    [D][] finish hw (by: 6pm)
+   [D][] finish hw (by: 6pm)
 Now you have 3 tasks in the list.
 ```
 
@@ -88,7 +88,7 @@ the correct statement:
 
 ```
 Got it. I've added this task:
-    [E][] School Fair (at: Dec 2 2019 1pm)
+   [E][] School Fair (at: Dec 2 2019 1pm)
 Now you have 5 tasks in the list.
 ```
 
@@ -138,7 +138,7 @@ and prints the correct statement:
 
 ```
 Nice! I've marked this task as done:
-   [D][X] finish hw (by: 6pm)
+  [D][X] finish hw (by: 6pm)
 ```
 
 ### `list` - Lists all the tasks
