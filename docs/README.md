@@ -1,5 +1,6 @@
 # User Guide
 **WoofBot** is your very own task managing bot. Simply key in the tasks that you want to keep track off, and WoofBot will keep note of it for you. Fast, clean, and easy-to-use - what more could you ask for!
+
 ![WoofBot Ui](/docs/Ui.png)
 
 ## Features
@@ -11,12 +12,12 @@ Listed below are features available in WoofBot:
 2. Mark a task as done
 3. Delete a task from the task list
 4. View all tasks in task list
-5. Find all tasks related to keyword(s)
+5. Find all tasks related to keyword(s) entered
 6. Archive a task
 7. View all tasks in archive
 8. Restore a task from the archive back to the task list
 
-All inputs are text-based and can be input via a Graphical User Interface (GUI).
+All inputs are *text-based* and can be input via a Graphical User Interface (GUI).
 All tasks that have been added or archived are saved and loaded automatically from a locally stored file!
 
 ## Usage
