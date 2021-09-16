@@ -20,9 +20,9 @@ public class Deadline extends Task {
     /**
      * Constructor.
      *
-     * @param description the name of the task
-     * @param date the date of the deadline in yyyy-mm-dd
-     * @param time the time of the deadline in HHmm
+     * @param description the name of the task.
+     * @param date the date of the deadline in yyyy-mm-dd.
+     * @param time the time of the deadline in HHmm.
      */
     public Deadline(String description, String date, String time) throws LebronException {
         super(description);
