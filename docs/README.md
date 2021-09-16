@@ -4,16 +4,17 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
 ## Quick Navigation
 * [Quick Setup](#quick-setup)
 * [Features](#features)
-* [Usage](#usage)
-    * [Adding a task to do :`todo`](#adding-a-task-to-do-todo)
-    * [Adding a task with a deadline: `deadline`](#adding-a-task-with-a-deadline-deadline)
-    * [Adding an event: `event`](#adding-an-event-event)
-    * [Looking at all the task being tracked: `list`](#looking-at-all-the-task-being-tracked-list)
-    * [Finding task using keyword: `find`](#finding-task-using-keyword-find)
-    * [Mark task as complete: `done`](#mark-task-as-complete-done)
-    * [Remove a task: `delete`](#remove-a-task-delete)
-    * [Viewing help : `help`](#viewing-help--help)
-*  [Exiting the application: `bye`](#exiting-the-application-bye)
+   * [Adding a task to do :`todo`](#adding-a-task-to-do-todo)
+   * [Adding a task with a deadline: `deadline`](#adding-a-task-with-a-deadline-deadline)
+   * [Adding an event: `event`](#adding-an-event-event)
+   * [Looking at all the task being tracked: `list`](#looking-at-all-the-task-being-tracked-list)
+   * [Finding task using keyword: `find`](#finding-task-using-keyword-find)
+   * [Mark task as complete: `done`](#mark-task-as-complete-done)
+   * [Remove a task: `delete`](#remove-a-task-delete)
+   * [Viewing help : `help`](#viewing-help--help)
+*  [Exiting the application: `bye`](#exiting-the-application-bye)  
+  
+  
 ## Quick Setup
     1. Ensure you have Java 11 or above installed in your Computer.
     2. Using the Command Line, run the command java -jar duke.jar (i.e., run the command in the same folder as the jar file)
@@ -22,35 +23,32 @@ Successfully opening TaskMan would lead you to a window like this
 
 ![SuccessStartup](Ui.png)
 
-** Common Errors **
+**Troubleshoot common errors:**
 1. Please ensure that Java 11 or above is installed. You may download the lastest version [here](#https://www.oracle.com/java/technologies/downloads/)
 
 
 ## Features
 Listed below is a short description of what TaskMan can do as a task manager
 
-### Types of tasks
-- [_Todo:_](#adding-a-task-to-do-todo) a simple task with a short description
-- [_Event:_](#adding-an-event-event) a Event **date** that you want to keep track of
-- [_Deadline:_](#adding-a-task-with-a-deadline-deadline) a Deadline that you want to keep track of
-
-### Set status of task
-- [_Done Status:_](#mark-task-as-complete-done) After task completion, task may be set as done
-
-### Other useful features
-- [_Delete:_](#remove-a-task-delete) Deleting a task if you dont want to keep track of it anymore
-- [_List:_](#looking-at-all-the-task-being-tracked-list) A list of all the tasks being tracked
-- [_Find:_](#finding-task-using-keyword-find) Finding a task based on a keyword in its description
-
-## Usage
+1. Types of tasks
+   - [_Todo:_](#adding-a-task-to-do-todo) a simple task with a short description
+   - [_Event:_](#adding-an-event-event) a Event **date** that you want to keep track of
+   - [_Deadline:_](#adding-a-task-with-a-deadline-deadline) a Deadline that you want to keep track of
+2. Set status of task
+   - [_Done Status:_](#mark-task-as-complete-done) After task completion, task may be set as done
+3. Other useful features
+   - [_Delete:_](#remove-a-task-delete) Deleting a task if you dont want to keep track of it anymore
+   - [_List:_](#looking-at-all-the-task-being-tracked-list) A list of all the tasks being tracked
+   - [_Find:_](#finding-task-using-keyword-find) Finding a task based on a keyword in its description
 
 ### Adding a task to do :`todo`
-A task with a description. You may use either the **Command Line Format** or the given **GUI button**
+A task with a description.  
+Users could either type at the textbox below or press a button shortcut
 
-Command Line Format: `todo [description]`
+_Format to type in textbox:_  
+`todo [description]`
 
-
-GUI Button:
+_Button Shortcut:_
 
 1. Click the `+` button on the top right 
 2. Select `todo` under **Tasktype**
@@ -69,13 +67,14 @@ _*x refers to the number of task in the list_
 1. Missing Description, TaskMan requires a description to be attached to all task
 
 
-###Adding a task with a deadline: `deadline`
-A task with a day to be set as a deadline. You may use either the **Command Line Format** or the given **GUI button**
+### Adding a task with a deadline: `deadline`
+A task with a day to be set as a deadline.  
+Users could either type at the textbox below or press a button shortcut
 
-Command Line Format:  
+_Format to type in textbox:_  
 `deadline [description] /by [YYYY-MM-DD] [Time in 24 Hour Format]`
 
-GUI Button:
+_Button Shortcut:_
 
 1. Click the `+` button on the top right
 2. Select `deadline` under **Tasktype**
@@ -102,14 +101,14 @@ _*x refers to the number of task in the list_
 3. Missing/Wrong Time input. Requires time to be in 24 hour format (0000 to 2359)
 
 
-###Adding an event: `event`
-A task with a day to be set as an Event. 
-You may use either the **Command Line Format** or the given **GUI button**
+### Adding an event: `event`
+A task with a day to be set as an Event.  
+Users could either type at the textbox below or press a button shortcut
 
-Command Line Format:  
+_Format to type in textbox:_  
 `event [description] /at [YYYY-MM-DD] [Time in 24 Hour Format]`
 
-GUI Button:
+_Button Shortcut:_
 
 1. Click the `+` button on the top right
 2. Select `event` under **Tasktype**
@@ -135,35 +134,36 @@ _*x refers to the number of task in the list_
 3. Missing/Wrong Time input. Requires time to be in 24 hour format (0000 to 2359)
 
 
-
 ### Looking at all the task being tracked: `list`
-Get a list of all the task being tracked. 
-You may use either the **Command Line Format** or the given **GUI button**
+Get a list of all the task being tracked.  
+Users could either type at the textbox below or press a button shortcut
 
-Command Line Format: `list`
+_Format to type in textbox:_  
+`list`
 
-GUI Button:
+_Button Shortcut:_
 1. Click the ![picture](list.png) button on the top left
 
-Expected output for both methods if the list is populated:
+Expected output for both methods if the list is _populated_:
 ```
  1. [task1 details here]
  2. [task2 details here]
  ...
 ```
-Expected output for both methods if the list is not populated:
+Expected output for both methods if the list is _not populated_:
 ```
 Im sorry, the list seems to be empty
 ```
 
 **Troubleshoot common errors:**
-1. Adding something else after `list` in the Command Line. This will invalidate the command
+1. Adding characters after `list` in the Command Line. This will invalidate the command
 
 ### Finding task using keyword: `find`
 Find a task based keyword description . 
-You only have the Command Line for this feature. **_GUI option coming soon_**
+Users can can only type in the textbox. _**Button shortcut comming soon**_
 
-Command Line Format: `find [keyword/s]`
+_Format to type in textbox:_  
+`find [keyword/s]`
 
 Expected output:
 ```
@@ -178,9 +178,13 @@ _*x refers to the task position in the whole list._
 
 
 ### Mark task as complete: `done`
-Marks a task as complete. You only have the Command Line for this feature. **_GUI option coming soon_**
+Marks a task as complete.  
+Users can can only type in the textbox. _**Button shortcut comming soon**_
 
-Command Line Format: `done [task position in list]`
+_Format to type in textbox:_  
+`done [task position in list]`  
+_*Note, to find `[task position in list]` , user may use either [find](#finding-task-using-keyword-find) or 
+[list](#looking-at-all-the-task-being-tracked-list)_
 
 Expected output:
 ```
@@ -188,8 +192,6 @@ Expected output:
  x. [taskx details here]
  ...
 ```
-_*Note, to find `[task position in list]` , user may use either [find](#finding-task-using-keyword-find) or 
-[list](#looking-at-all-the-task-being-tracked-list)_
 
 **Troubleshoot common errors:**
 1. Invalid Task number. Task position may be invalid due to
@@ -197,11 +199,14 @@ _*Note, to find `[task position in list]` , user may use either [find](#finding-
     2. task position is not in **NUMERICAL** form
 
 
-
 ### Remove a task: `delete`
-Delete a task. You only have the Command Line for this feature. **_GUI option coming soon_**
+Delete a task.  
+Users can can only type in the textbox. _**Button shortcut comming soon**_
 
-Command Line Format: `delete [task position in list]`
+_Format to type in textbox:_  
+`delete [task position in list]`
+_*Note, to find `[task position in list]` , user may use either [find](#finding-task-using-keyword-find) or 
+[list](#looking-at-all-the-task-being-tracked-list)_
 
 Expected output:
 ```
@@ -211,18 +216,20 @@ Expected output:
 ```
 _*x refers to the number of task in the list_
 
+
 **Troubleshoot common errors:**
 1. Invalid Task number. Task position may be invalid due to
     1. Number is out of bounds (Negative or larger than list size)
     2. task position is not in **NUMERICAL** form
 
-###Viewing help : `help`
+### Viewing help : `help`
 A quick way to access instructions for Command Line Commands
-A task with a description. You may use either the **Command Line Format** or the given **GUI button**
+Users could either type at the textbox below or press a button shortcut
 
-Command Line Format: `help`
+_Format to type in textbox:_  
+`help`  
 
-GUI Button:
+_Button Shortcut:_
 
 1. Click the `?` button on the top right
 
@@ -251,14 +258,18 @@ Expected Output:
  Exiting the program : bye";
 ```
 
-###Exiting the application `bye`
-There are two ways to close the application.
-Either a Command Line or simply closing `x` on the top right
+### Exiting the application `bye`
+There are two ways to close the application.  
+Users could either type in the textbox below or simply closing `x` on the top right
 
-Format: `bye`
+_Format to type in textbox:_  
+`bye`
+
+_Button Shortcut:_
+1. Click the 'x' at the top right of the application
 
 Expected Output:
-```aidl
+```
  Bye! Hope to see you soon
 ```
 
