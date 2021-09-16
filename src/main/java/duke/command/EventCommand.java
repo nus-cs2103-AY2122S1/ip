@@ -10,18 +10,20 @@ import duke.task.TaskList;
  * Command to create Event tasks.
  */
 public class EventCommand extends Command {
-    private String taskDesc;
-    private String eventDate;
+    private String taskDesc = "";
+    private String eventDate = "";
 
     /**
      * Constructor for EventCommand.
      *
      * @param input User input.
      */
-    public EventCommand(Input input) {
+    public EventCommand(Input input) throws DukeException {
         this.taskDesc = input.getDescription("event");
         if (input.checkIfContains("/at")) {
             this.eventDate = input.getDate("event");
+        } else {
+            throw new DukeException("☹ OOPS!!! Please use the /at command to include the time of event.");
         }
     }
 

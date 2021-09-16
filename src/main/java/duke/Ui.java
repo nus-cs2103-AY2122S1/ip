@@ -63,6 +63,7 @@ public class Ui {
      * @param task Done task.
      */
     public String setTaskAsDone(Task task) {
+        assert !task.equals(null) : "task does not exist";
         return "Nice! I've marked this task as done: \n" + task.toString();
     }
 
@@ -73,6 +74,7 @@ public class Ui {
      * @param size Updated number of items on the TaskList.
      */
     public String removeTaskFromList(Task task, int size) {
+        assert !task.equals(null) : "task does not exist";
         String taskToString = task.toString();
         return ("Noted. I've removed this task: \n" + taskToString
                 + "\nNow you have " + size + " tasks in the list.");
@@ -127,28 +129,12 @@ public class Ui {
     }
 
     /**
-     * Reads the user input.
-     *
-     * @return The next line of user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
      * Prints DukeException errors.
      *
      * @param e Error message.
      */
-    public String showError(String e) {
-        return (e);
-    }
-
-    /**
-     * Prints line for formatting messages.
-     */
-    public String showLine() {
-        return ("___________________");
+    public String getErrorMessage(Exception e) {
+        return e.getMessage();
     }
 
     /**

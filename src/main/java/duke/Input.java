@@ -49,8 +49,9 @@ public class Input {
         if (tag.equals("delete")) {
             return (this.input.equals("delete") || input.equals("delete "));
         } else if (tag.equals("done")) {
-            return (equals("done") || input.equals("done "))
+            return (equals("done") || input.equals("done "));
         }
+        return false;
     }
 
     @Override

@@ -10,8 +10,8 @@ import duke.task.TaskList;
  * Command to create Deadline tasks.
  */
 public class DeadlineCommand extends Command {
-    private String taskDesc;
-    private String deadline;
+    private String taskDesc = "";
+    private String deadline = "";
 
     /**
      * Constructor for DeadlineCommand.
