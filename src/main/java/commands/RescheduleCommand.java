@@ -56,7 +56,7 @@ public final class RescheduleCommand extends Command {
             }
             String prefix = "";
             if (localTime == null) {
-                prefix = "     Not a valid time.\n";
+                prefix = "     No valid time found, please reschedule later!\n";
             }
             String result = prefix + list.reschedule(localDate, localTime, index);
             storage.resetFile(list.getTasks());

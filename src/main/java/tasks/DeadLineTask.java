@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.DukeException;
+
 /**
  * The DeadlineTask Class inherits Task Class
  * to support different specificities of a task
@@ -26,6 +28,12 @@ public final class DeadLineTask extends Task {
 
     /** Stores the time information as a LocalTime */
     private LocalTime time;
+
+    /** Stores the information if the task has a valid date */
+    private boolean hasValidDate;
+
+    /** Stores the information if the task has a valid time */
+    private boolean hasValidTime;
 
     /**
      * Constructs a Deadline task and check if a date can be
@@ -58,9 +66,15 @@ public final class DeadLineTask extends Task {
                 int month = Integer.parseInt(date[1]);
                 int year = Integer.parseInt(date[2]);
                 setLocalDate(LocalDate.of(year, month, day));
-                setTimeFromString(matched.substring(matched.length() - 4));
+                hasValidDate = true;
             } catch (DateTimeException e) {
-                System.out.println(this.getClass() + ": invalid date");
+                hasValidDate = false;
+            }
+            try {
+                setTimeFromString(matched.substring(matched.length() - 4));
+                hasValidTime = true;
+            } catch (DukeException e) {
+                hasValidTime = false;
             }
         } else {
             p = Pattern.compile(dateOnly);
@@ -73,15 +87,31 @@ public final class DeadLineTask extends Task {
                     int month = Integer.parseInt(date[1]);
                     int year = Integer.parseInt(date[2]);
                     setLocalDate(LocalDate.of(year, month, day));
+                    hasValidDate = true;
                 } catch (DateTimeException e) {
-                    System.out.println(this.getClass() + ": invalid date");
+                    hasValidDate = false;
                 }
             }
-
         }
     }
 
-    private void setTimeFromString(String time) {
+    /**
+     * Retrieves the information if this task has a valid date.
+     * @return if the task has a valid date
+     */
+    public boolean hasValidDate() {
+        return hasValidDate;
+    }
+
+    /**
+     * Retrieves the information if this task has a valid time.
+     * @return if the task has a valid time
+     */
+    public boolean hasValidTime() {
+        return hasValidTime;
+    }
+
+    private void setTimeFromString(String time) throws DukeException {
         try {
             this.time = LocalTime.of(Integer.parseInt(time.substring(0, 2)),
                     Integer.parseInt(time.substring(time.length() - 2)));
@@ -89,11 +119,11 @@ public final class DeadLineTask extends Task {
                 dueDate += " " + this.time.toString().replaceAll(":", "");
             }
         } catch (NumberFormatException e) {
-            this.time = null;
-            System.out.println("invalid time" + e.getMessage());
+            throw new DukeException("Please use a number!");
         } catch (NullPointerException e) {
-            this.time = null;
-            System.out.println("no time created" + e.getMessage());
+            throw new DukeException("Not a valid time!");
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid values!");
         }
     }
 

@@ -33,7 +33,8 @@ public final class Ui {
             + "     If you wish to terminate the program, please input 'bye'.\n"
             + "     If you wish to check items due on a particular day, please input 'due <date>'.\n"
             + "     If you wish to find items, please input in the form: 'find <keyword>'.\n"
-            + "     If you wish to reschedule a task, please input 'reschedule <index> <new date> \n"
+            + "     If you wish to reschedule a task, please input 'reschedule <index> <new date>' "
+            + "followed by <time>, if relevant \n"
             + "     Please kindly avoid unnecessary spaces and note that date and time is best in "
             + "'DD/MM/YYYY HH/MM' form.\n";
 

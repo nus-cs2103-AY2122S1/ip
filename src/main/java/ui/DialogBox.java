@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 //@@author wanyu-l-reused
 //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
@@ -31,12 +32,14 @@ public final class DialogBox extends HBox {
     @FXML
     private Label text;
 
+    private final double userFontSize = 30.0;
+
     /**
      * Constructs a ui.DialogBox object.
      *
      * @param text the input by user or output by user wrapped by Label
      */
-    private DialogBox(String text, Image img, Color imageBorder, Color backgroundColor) {
+    private DialogBox(String text, Image img, Color imageBorder, Color backgroundColor, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setController(this);
@@ -46,6 +49,9 @@ public final class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        if (isUser) {
+            dialog.setFont(Font.font(userFontSize));
+        }
         displayPicture.setFill(new ImagePattern(img));
         displayPicture.setStroke(imageBorder);
         this.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(20.0),
@@ -65,7 +71,7 @@ public final class DialogBox extends HBox {
      * @return a dialog box representing the user
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text + "    ", img, Color.BISQUE, Color.LIGHTBLUE);
+        return new DialogBox(text + "    ", img, Color.BISQUE, Color.LIGHTBLUE, true);
     }
 
     /**
@@ -74,7 +80,7 @@ public final class DialogBox extends HBox {
      * @return a dialog box representing Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, Color.LIGHTCORAL, Color.DARKSEAGREEN);
+        var db = new DialogBox(text, img, Color.LIGHTCORAL, Color.DARKSEAGREEN, false);
         db.flip();
         return db;
     }

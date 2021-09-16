@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171"
+            prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput"
+        <TextField fx:id="userInput" layoutY="358.0" onAction="#handleUserInput"
                    prefHeight="20.0" prefWidth="920.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="925.0" layoutY="773.0" mnemonicParsing="false"
+        <Button fx:id="sendButton" layoutX="925.0" layoutY="573.0" mnemonicParsing="false"
                 onAction="#handleUserInput" prefHeight="20.0" prefWidth="75.0" text="Enter" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" vbarPolicy="ALWAYS"
                     AnchorPane.topAnchor="1.0" fitToWidth="true"
-                    prefHeight="770.0" prefWidth="998.0" vvalue="1.0">
+                    prefHeight="570.0" prefWidth="998.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="760.0" prefWidth="990.0" />
+                <VBox fx:id="dialogContainer" prefHeight="560.0" prefWidth="990.0" />
             </content>
         </ScrollPane>
     </children>

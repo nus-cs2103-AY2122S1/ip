@@ -40,6 +40,13 @@ public final class EventCommand extends Command {
             EventTask task = new EventTask(list.filterInfo(getInput()),
                     list.getEventDay(getInput()));
             String result = list.addTask(task);
+            if (!task.hasValidTime()) {
+                result = "     No valid time found, please remember to add later if need be!\n" + result;
+            }
+            if (!task.hasValidTime() && !task.hasValidDate()
+                    || task.hasValidTime() && !task.hasValidDate()) {
+                result = "     Not a valid date, please remember to reschedule later!\n" + result;
+            }
             storage.resetFile(list.getTasks());
             return result;
         } catch (DukeException e) {
