@@ -7,10 +7,10 @@
 3. Copy the file to the folder you want to use for your **Carrot Task Manager**.
 4. Double-click the file to start the app.
 5. Type any command in the command box and press Enter to execute it.  
-   Some sample commands you might want to try is: 
-   `/list` - Shows your todo list.
-   `/todo start list` - Adds "start list" as a task in your todo list.   
-   Refer to the Features below for details of each command!
+   Some sample commands you might want to try is:   
+   `list` - Shows your todo list.  
+   `todo start list` - Adds "start list" as a task in your todo list.     
+   Refer to the Usage section below for details of each command.
    
 ## Features 
 The prominent feature of **Carrot Task Manager** is its todo list. 
@@ -68,7 +68,7 @@ Example of usage:
 - User's list **after** task 1 is deleted:
  1. \[E\]\[ \] rehearsal (at: 12)   
   
-Note: Task number is given according to the order in which a task is added into the todo list. A user can check the task number of a task by viewing the whole todo list with `/list`.
+Note: Task number is given according to the order in which a task is added into the todo list. A user can check the task number of a task by viewing the whole todo list with `list`.
 
 ### Finding a Task
 
@@ -100,16 +100,16 @@ Example of usage:
  1. \[T\]\[X\] dance practice
  2. \[E\]\[ \] rehearsal (at: 12)  
 
-Note: Task number is given according to the order in which a task is added into the todo list. Users can check the task number of a task by viewing the whole todo list with `/list`.
+Note: Task number is given according to the order in which a task is added into the todo list. Users can check the task number of a task by viewing the whole todo list with `list`.
 
 ### Viewing the Todo List  
 
 A user can view the entire todo list with the command:
-`\list`
+`list`
 
 Example of usuage:
-- `\list`
-- Result after `\list`:  
+- `list`
+- Result after `list`:  
 Here are the tasks in your list:  
  1. \[T\]\[ \] dance practice 
  2. \[E\]\[ \] rehearsal (at: 12)  
