@@ -3,6 +3,12 @@ Ligma is a new task managing app. Users interact with Ligma through its Graphica
 Here's how it looks like:<br />
 ![Ligma GUI Screenshot](Ui.png)
 
+[Download it here](https://github.com/nicole-luo-exe/ip/releases/tag/A-Release)
+and run
+```
+java -jar {path-to-ligma.jar}/ligma.jar
+```
+
 ## Features
 * Viewing help `help`
 * Adding tasks
