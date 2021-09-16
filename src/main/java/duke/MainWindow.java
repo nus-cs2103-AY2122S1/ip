@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        Color c = Color.web("#EBE8D8");
+        Color c = Color.web("#95B8D1");
         BackgroundFill backgroundFill = new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY);
         dialogContainer.setBackground(new Background(backgroundFill));
 

@@ -84,7 +84,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        Color c = Color.web("#BFDC36");
+        Color c = Color.web("#D6EADF");
         BackgroundFill backgroundFill = new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY);
         db.setBackground(new Background(backgroundFill));
         return db;
@@ -100,7 +100,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        Color c = Color.web("#FF614C");
+        Color c = Color.web("#B8E0D2");
         BackgroundFill backgroundFill = new BackgroundFill(c, CornerRadii.EMPTY, Insets.EMPTY);
         db.setBackground(new Background(backgroundFill));
         return db;
