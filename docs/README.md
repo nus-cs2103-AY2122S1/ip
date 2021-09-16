@@ -96,6 +96,7 @@ if the task has been successfully added.
 Example of usage:  
 1. `event beach day / 2021-11-01 08:30t12:00` will add a task named *beach day* that happens on 1 November 2021 from 8.30am to 12pm.
 2. `event gala premier / 2021-11-02 18:00t23:00` will a task named *gala premier* that happens on 2 November 2021 from 6pm to 11.30pm  
+
 ### Deleting a task: `delete`
 Format: `delete INDEX`
 
@@ -107,6 +108,7 @@ of the successfully deleted task.
 
 Example of usage:  
 1. `delete 2`  will delete the 2nd task in the list.  
+
 ### Marking a task as done: `done`
 Format: `done INDEX`
 
@@ -118,6 +120,7 @@ of the successfully marked task.
 
 Example of usage:  
 1. `mark 3`  will delete the 3rd task in the list.  
+
 ### Finding specified tasks: `find`
 Format: `find KEYWORD`
 
