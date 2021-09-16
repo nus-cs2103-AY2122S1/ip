@@ -271,3 +271,4 @@ Done | `done <task number>` | `done 1`
 Delete | `delete <task number>` | `delete 2`
 Find | `find <search terms>` | `find Biology`
 Update | `update <task number> <task description + required parameters>` | `update 2 deadline Study for Biology exam /by 2021-09-18`
+Exit | `bye` | `bye`
