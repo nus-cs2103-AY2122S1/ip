@@ -11,8 +11,10 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
    * [Finding task using keyword: `find`](#finding-task-using-keyword-find)
    * [Mark task as complete: `done`](#mark-task-as-complete-done)
    * [Remove a task: `delete`](#remove-a-task-delete)
-   * [Viewing help : `help`](#viewing-help--help)
-*  [Exiting the application: `bye`](#exiting-the-application-bye)  
+   * [Viewing help : `help`](#viewing-help--help)*
+* [Exiting the application: `bye`](#exiting-the-application-bye)  
+
+ 
   
   
 ## Quick Setup
@@ -42,7 +44,7 @@ Successfully opening TaskMan would lead you to a window like this
    - [_List:_](#looking-at-all-the-task-being-tracked-list) A list of all the tasks being tracked
    - [_Find:_](#finding-task-using-keyword-find) Finding a task based on a keyword in its description
 
-### Adding a task to do :`todo`
+## Adding a task to do :`todo`
 > A task with a description.  
   Users could either type at the textbox below or press a button shortcut
 
@@ -68,7 +70,7 @@ _*x refers to the number of task in the list_
 1. Missing Description, TaskMan requires a description to be attached to all task
 
 
-### Adding a task with a deadline: `deadline`
+## Adding a task with a deadline: `deadline`
 > A task with a day to be set as a deadline.  
   Users could either type at the textbox below or press a button shortcut
 
@@ -102,7 +104,7 @@ _*x refers to the number of task in the list_
 3. Missing/Wrong Time input. Requires time to be in 24 hour format (0000 to 2359)
 
 
-### Adding an event: `event`
+## Adding an event: `event`
 > A task with a day to be set as an Event.  
   Users could either type at the textbox below or press a button shortcut
 
@@ -135,7 +137,7 @@ _*x refers to the number of task in the list_
 3. Missing/Wrong Time input. Requires time to be in 24 hour format (0000 to 2359)
 
 
-### Looking at all the task being tracked: `list`
+## Looking at all the task being tracked: `list`
 > Get a list of all the task being tracked.  
   Users could either type at the textbox below or press a button shortcut
 
@@ -178,7 +180,7 @@ _*x refers to the task position in the whole list._
 1. No spacing between `find` and `[keywords]`. TaskMan would not recognize it as a command
 
 
-### Mark task as complete: `done`
+## Mark task as complete: `done`
 > Marks a task as complete.  
   Users can can only type in the textbox. _**Button shortcut coming soon**_
 
@@ -200,7 +202,7 @@ Expected output:
     2. task position is not in **NUMERICAL** form
 
 
-### Remove a task: `delete`
+## Remove a task: `delete`
 > Delete a task.  
   Users can can only type in the textbox. _**Button shortcut coming soon**_
 
@@ -223,7 +225,7 @@ _*x refers to the number of task in the list_
     1. Number is out of bounds (Negative or larger than list size)
     2. task position is not in **NUMERICAL** form
 
-### Viewing help : `help`
+## Viewing help : `help`
 > A quick way to access instructions for Command Line Commands
   Users could either type at the textbox below or press a button shortcut
 
@@ -259,7 +261,7 @@ Expected Output:
  Exiting the program : bye";
 ```
 
-### Exiting the application `bye`
+## Exiting the application `bye`
 > There are two ways to close the application.  
   Users could either type in the textbox below or simply closing `x` on the top right
 
