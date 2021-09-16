@@ -1,12 +1,11 @@
 package kermit.command;
 
 import kermit.KermitException;
-import kermit.tasks.Event;
-
+import kermit.tasks.Deadline;
 public class AddDeadlineCommand extends AddDateDependentTaskCommand {
 
     public AddDeadlineCommand(String description, String dateString) throws KermitException {
-        super(new Event(description, AddDateDependentTaskCommand.parseDate(dateString)), description);
+        super(new Deadline(description, AddDateDependentTaskCommand.parseDate(dateString)), description);
     }
 
     /**
