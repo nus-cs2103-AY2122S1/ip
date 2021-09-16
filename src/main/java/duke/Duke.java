@@ -6,12 +6,7 @@ import java.nio.file.Paths;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeExitException;
-import duke.gui.Main;
 import duke.storage.Storage;
-
-import javafx.application.Application;
-
-
 
 /**
  * Main class for Duke.
@@ -32,15 +27,6 @@ public class Duke {
             this.taskList = new TaskArrayList();
         }
         this.parser = new Parser(taskList);
-    }
-
-    /**
-     * Main entry point for Duke project.
-     *
-     * @param args unused.
-     */
-    public static void main(String[] args) {
-        Application.launch(Main.class, args);
     }
 
     /**
