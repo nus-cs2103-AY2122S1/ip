@@ -11,6 +11,7 @@ If tracking tasks by yourself gets dull, give JIJI a try!
 ## Features
 
 > Words in `<>` brackets are parameters that should be supplied by the user
+> You cannot add duplicate tasks to a list
 
 ### Adding a deadline task: `deadline`
 
@@ -111,3 +112,9 @@ find | `find <keyword>`
 help | `help`
 list | `list`
 todo | `todo <description>`
+
+## Credits
+These are the sources of Studio Ghibli images used
+* [Jiji from Kiki's Delivery Service](https://www.ghibli.jp/works/majo/#frame&gid=1&pid=18)
+* [Totoro from My Neighbor Totoro](https://www.ghibli.jp/works/totoro/#frame&gid=1&pid=29)
+
