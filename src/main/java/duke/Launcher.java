@@ -14,7 +14,7 @@ public class Launcher {
         final List<String> arguments = Arrays.asList(args);
         final int modeIndex = arguments.indexOf("-mode");
         final String mode = modeIndex == -1 ? "gui" : arguments.get(modeIndex + 1);
-        if ("console".equalsIgnoreCase(mode)) {
+        if ("cli".equalsIgnoreCase(mode)) {
             runConsole();
         } else if ("gui".equalsIgnoreCase(mode)) {
             Application.launch(Main.class, args);
