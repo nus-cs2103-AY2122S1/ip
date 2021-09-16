@@ -1,0 +1,17 @@
+list
+deadline level9 test /by 12-03-2020 18:00
+todo testing 123
+done 1
+deadline Level9 test /by 12
+done 2
+filter Level9
+filter none
+delete 1
+event test123 /at 23-Dec-2020 15:00 to 2020-Dec-24 12:00
+delete 2
+event
+done 5
+delete 1
+delete 4
+list
+bye
