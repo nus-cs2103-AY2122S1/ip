@@ -28,31 +28,27 @@ public class Parser {
      */
     public static Command parse(String str) throws DukeException {
         assert str.length() != 0 : "Command cannot be blank";
-        try {
-            String[] splitStr = str.split(" ", 2);
-            String commandType = splitStr[0].trim();
-            switch (Instruction.comparesTo(commandType)) {
-            case LIST:
-                return new ListCommand();
-            case DONE:
-                return new DoneCommand(Integer.parseInt(splitStr[1].trim()));
-            case DELETE:
-                return new DeleteCommand(Integer.parseInt(splitStr[1].trim()));
-            case TODO:
-                return new AddTodoCommand(splitStr[1].trim());
-            case DEADLINE:
-                return new AddDeadlineCommand(splitStr[1].trim());
-            case EVENT:
-                return new AddEventCommand(splitStr[1].trim());
-            case FIND:
-                return new FindCommand(splitStr[1].trim());
-            case BYE:
-                return new ByeCommand();
-            default:
-                throw new DukeException("Please enter a valid command so that I will be able to help you...");
-            }
-        } catch (Exception e) {
-            throw new DukeException("Rio! Please enter a command to proceed...");
+        String[] splitStr = str.split(" ", 2);
+        String commandType = splitStr[0].trim();
+        switch (Instruction.comparesTo(commandType)) {
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            return new DoneCommand(Integer.parseInt(splitStr[1].trim()));
+        case DELETE:
+            return new DeleteCommand(Integer.parseInt(splitStr[1].trim()));
+        case TODO:
+            return new AddTodoCommand(splitStr[1].trim());
+        case DEADLINE:
+            return new AddDeadlineCommand(splitStr[1].trim());
+        case EVENT:
+            return new AddEventCommand(splitStr[1].trim());
+        case FIND:
+            return new FindCommand(splitStr[1].trim());
+        case BYE:
+            return new ByeCommand();
+        default:
+            throw new DukeException("Rio, please enter a valid command so that I can help you!");
         }
     }
 }

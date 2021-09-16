@@ -16,8 +16,9 @@ import tokio.exceptions.DukeException;
 public class Main extends Application {
     private Duke duke = new Duke();
 
-    public Main() throws IOException, DukeException {}
-    
+    public Main() throws DukeException, IOException {
+    }
+
     @Override
     public void start(Stage stage) {
         try {

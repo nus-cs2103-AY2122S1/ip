@@ -97,6 +97,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            if (input.isBlank()) {
+                throw new DukeException("Rio, please key in a command...");
+            }
             Command command = Parser.parse(input.trim());
             if (command.isExit()) {
                 ui.printBye();
@@ -105,7 +108,7 @@ public class Duke {
                 delay.play();
             }
             return command.execute(tasks, ui, storage);
-        } catch (DukeException | IOException e) {
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
