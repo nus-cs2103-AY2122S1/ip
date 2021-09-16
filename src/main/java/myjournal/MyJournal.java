@@ -137,6 +137,6 @@ public class MyJournal extends Application {
         Scanner text = new Scanner(input);
         String parsedInput = parser.parse(text, tasks, ui);
         storage.saveFile(tasks.toString());
-        return "MyJournal: " + parsedInput;
+        return parsedInput;
     }
 }

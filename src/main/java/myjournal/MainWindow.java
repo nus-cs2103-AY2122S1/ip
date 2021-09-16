@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private boolean isOffline = true;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/flower.png"));
-    private Image journalImage = new Image(this.getClass().getResourceAsStream("/images/journal.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pig.png"));
+    private Image journalImage = new Image(this.getClass().getResourceAsStream("/images/rabbit.png"));
 
     /**
      * Initializes MainWindow.
