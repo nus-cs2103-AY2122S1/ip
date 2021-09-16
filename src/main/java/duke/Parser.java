@@ -15,8 +15,8 @@ public class Parser {
      * @return Type of command.
      */
     public String parseCommand(String str) {
-        if (str.equals("bye")) {
-            return "bye";
+        if (str.equals("save")) {
+            return "save";
         } else if (str.equals("list")) {
             return "list";
         } else if (str.startsWith("done")) {

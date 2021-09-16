@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="187.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" lineSpacing="1.0" text="Label" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" cache="true" cacheHint="SCALE_AND_ROTATE" contentDisplay="TOP" graphicTextGap="1.0" lineSpacing="1.0" maxWidth="-Infinity" prefHeight="131.0" prefWidth="234.0" text="Label" wrapText="true">
          <HBox.margin>
-            <Insets />
+            <Insets left="1.0" right="1.0" />
          </HBox.margin>
          <font>
             <Font name="Constantia" size="12.0" />

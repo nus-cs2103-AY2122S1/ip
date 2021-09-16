@@ -46,12 +46,12 @@ public class Ui {
     }
 
     /**
-     * Returns the goodbye message for the user.
+     * Tells the user that the todo list is saved.
      *
-     * @return Goodbye message for the user.
+     * @return Todo list is successfully saved message for the user.
      */
-    public String getEndMessage() {
-        return "Bye! See you next time!";
+    public String getSaveMessage() {
+        return "Your todo list is saved!";
     }
 
     /**
@@ -109,7 +109,7 @@ public class Ui {
         if (taskList.size() == 0) {
             return "No matching task!\n\n";
         }
-        String str = "Here are the tasks that matches your search:\n";
+        String str = "Here are the tasks that match your search:\n";
         for (int i = 0; i < taskList.size(); i++) {
             Task temp = taskList.get(i);
             str = str + (i + 1) + "." + temp + "\n";

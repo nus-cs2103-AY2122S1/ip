@@ -67,7 +67,7 @@ public class Command {
             String reply = getReplyFromDuke(action, command);
             System.out.println(reply);
             assert(reply != null);
-            if (reply.equals(this.ui.getEndMessage())) {
+            if (reply.equals(this.ui.getSaveMessage())) {
                 hasNextCommand = false;
             }
         }
@@ -83,8 +83,8 @@ public class Command {
      */
     public String getReplyFromDuke(String typeOfCommand, String description) {
         try {
-            if (typeOfCommand.equals("bye")) {
-                return getByeCommandReply();
+            if (typeOfCommand.equals("save")) {
+                return getSaveCommandReply();
             } else if (typeOfCommand.equals("list")) {
                 return getListCommandReply();
             } else if (typeOfCommand.equals("done")) {
@@ -138,9 +138,9 @@ public class Command {
         return this.ui.getIterateTaskList(this.taskList.getTaskList());
     }
 
-    private String getByeCommandReply() throws DukeException {
+    private String getSaveCommandReply() throws DukeException {
         this.storage.writeToFile(this.taskList.getTaskList());
-        return this.ui.getEndMessage();
+        return this.ui.getSaveMessage();
     }
 
     /**
