@@ -14,7 +14,7 @@ This user guide details how to download Duke and get started, as well as all the
 3. Double-click the `duke.jar` file to start the app.
 
 ## Features and Usage
-### Adding a ToDo: ```todo [description]```
+### Adding a ToDo: `todo [description]`
 Adds a new ToDo to your task list.
 
 Example of usage:
@@ -32,41 +32,41 @@ Now you have 2 tasks in the list.
 ```
 
 
-### Adding a Deadline: ```deadline [description] /by [yyyy-mm-dd hhmm]```
+### Adding a Deadline: `deadline [description] /by [yyyy-mm-dd]`
 Adds a new Deadline to your task list.
 
 Example of usage:
 
-`deadline assignment 1 /by 2021-09-17 2359`
+`deadline assignment 1 /by 2021-09-17`
 
 Expected outcome:
 
-A new Deadline 'assignment 1', due on Sep 17 2021 2359, is added to the task list.
+A new Deadline 'assignment 1', due on Sep 17 2021, is added to the task list.
 
 ```
 Got it. I've added this task:
-[D][] assignment 1 (by: Sep 17 2021 2359)
+[D][] assignment 1 (by: Sep 17 2021)
 Now you have 3 tasks in the list.
 ```
 
-### Adding an Event: ```event [description] /at [yyyy-mm-dd hhmm]```
+### Adding an Event: `event [description] /at [yyyy-mm-dd]`
 Adds a new Event to your task list.
 
 Example of usage:
 
-`event project meeting /at 2021-09-17 1400`
+`event project meeting /at 2021-09-17`
 
 Expected outcome:
 
-A new Event 'project meeting', happening at Sep 17 2021 1400, is added to the task list.
+A new Event 'project meeting', happening at Sep 17 2021, is added to the task list.
 
 ```
 Got it. I've added this task:
-[E][] project meeting (at: Sep 17 2021 1400)
+[E][] project meeting (at: Sep 17 2021)
 Now you have 4 tasks in the list.
 ```
 
-### Listing all tasks: ```list```
+### Listing all tasks: `list`
 Lists all the tasks in your task list.
 
 Example of usage:
@@ -80,11 +80,11 @@ All the tasks in the list are displayed.
 ```
 1. [T][] read book
 2. [T][] return book
-3. [D][] assignment 1 (by: Sep 17 2021 2359)
-4. [E][] project meeting (at: Sep 17 2021 1400)
+3. [D][] assignment 1 (by: Sep 17 2021)
+4. [E][] project meeting (at: Sep 17 2021)
 ```
 
-### Marking a task as done: ```done [index]```
+### Marking a task as done: `done [index]`
 Marks the task at the specified index as done. Index is the number in front of the task returned by the list command. 
 
 Example of usage:
@@ -97,8 +97,8 @@ Expected Output:
 ```
 1. [T][] read book
 2. [T][] return book
-3. [D][] assignment 1 (by: Sep 17 2021 2359)
-4. [E][] project meeting (at: Sep 17 2021 1400)
+3. [D][] assignment 1 (by: Sep 17 2021)
+4. [E][] project meeting (at: Sep 17 2021)
 ```
 
 Then to mark the third task as done:
@@ -108,11 +108,11 @@ Then to mark the third task as done:
 Expected Output:
 ```
 Nice! I've marked this task as done:
-[D][X] assignment 1 (by: Sep 17 2021 2359)
+[D][X] assignment 1 (by: Sep 17 2021)
 ```
 
 
-### Searching for a task: ```find [description]```
+### Searching for a task: `find [description]`
 Finds tasks whose description, date or time contain any of the given keywords.
 * The search is case-sensitive. For example, ```Assignment 1``` will not match ```assignment 1```
 * The order of the keywords matters. For example, ```1 assignment``` will not match ```assignment 1```.
@@ -133,7 +133,7 @@ Here are the matching tasks in your list:
 ```
 
 
-### Deleting a task: ```delete [index]```
+### Deleting a task: `delete [index]`
 Deletes the task at the specified index. Index is the number in front of the task returned by the list command. 
 
 Example of usage:
@@ -146,8 +146,8 @@ Output:
 ```
 1. [T][] read book
 2. [T][] return book
-3. [D][] assignment 1 (by: Sep 17 2021 2359)
-4. [E][] project meeting (at: Sep 17 2021 1400)
+3. [D][] assignment 1 (by: Sep 17 2021)
+4. [E][] project meeting (at: Sep 17 2021)
 ```
 
 Then to delete the third task:
@@ -160,7 +160,7 @@ The third task, 'assignment 1', is deleted.
 
 ```
 Noted. I've removed this task:
-[D][] assignment 1 (by: Sep 17 2021 2359)
+[D][] assignment 1 (by: Sep 17 2021)
 Now you have 3 tasks in the list.
 ```
 
