@@ -13,7 +13,7 @@ public class Task {
     /**
      * Constructor.
      *
-     * @param name the name of the task
+     * @param name the name of the task.
      */
     public Task(String name) {
         this.name = name;
@@ -30,7 +30,7 @@ public class Task {
     /**
      * This method returns the status icon of the tast, X if true, blank if false.
      *
-     * @return X if true, blank if false
+     * @return X if true, blank if false.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // markAsDone done task with X
@@ -39,7 +39,7 @@ public class Task {
     /**
      * This method returns the name of the Task.
      *
-     * @return name of the Task
+     * @return name of the Task.
      */
     public String getName() {
         return this.name;
