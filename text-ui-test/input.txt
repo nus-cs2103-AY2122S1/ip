@@ -1,9 +1,8 @@
-johnathan joestar
 todo joseph
-deadline jotaro /by 3
-event josuke /at diamond
+deadline jotaro /by 2019-12-12
+event josuke /at 1999-12-12
 list
+done 1
 done 2
-done 3
 list
 bye

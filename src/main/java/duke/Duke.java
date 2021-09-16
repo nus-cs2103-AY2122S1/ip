@@ -93,6 +93,6 @@ public class Duke {
         storage.writeAll(tasks);
     }
     public static void main(String[] args) {
-            new Duke("./Data/duke.Duke.txt").run();
+            new Duke("./Data/Duke.txt").run();
     }
 }

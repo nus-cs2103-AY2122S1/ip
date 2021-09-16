@@ -1,7 +1,5 @@
 package duke;
 
-import duke.DukeException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
