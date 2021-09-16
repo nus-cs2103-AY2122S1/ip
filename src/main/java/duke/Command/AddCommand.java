@@ -1,46 +1,63 @@
 package duke.Command;
 
 import duke.DukeException;
+import duke.Parser.Type;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command to add task to list
+ */
 public class AddCommand extends Command {
-    private String type;
+    private Type type;
     private String description;
+
 
     /**
      * Constructor for AddCommand
+     *
      * @param type Type of task
      * @param description Description of task
      */
-    public AddCommand(String type, String description) {
+    public AddCommand(Type type, String description) throws DukeException {
         this.type = type;
         this.description = description;
     }
 
+    /**
+     * Adds task to list
+     *
+     * @param tasks Current TaskList
+     * @param ui Ui object of bot
+     * @param storage Storage object of bot
+     * @return Confirmation message
+     * @throws DukeException when incorrect input
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task;
-        if (type.equals("todo")) {
+        Task task = null;
+        switch (type) {
+        case todo:
             task = new Task.Todo(description, false);
-
-        } else if (type.equals("deadline")) {
-            String[] temp = description.split("by ", 2);
-            task = new Task.Deadline(temp[0], false, temp[1]);
-
-        } else if (type.equals("event")) {
-            String[] temp = description.split("at ", 2);
-            task = new Task.Event(temp[0], false, temp[1]);
-
-        } else if (type.equals("within")) {
-            String[] temp = description.split("between | and ", 3);
-            task = new Task.Within(temp[0], false, temp[1], temp[2]);
-        } else {
-            throw new DukeException("Sorry, I don't understand what that means. :(");
+            break;
+        case deadline:
+            String[] temp1 = description.split("by ");
+            task = new Task.Deadline(temp1[0], false, temp1[1]);
+            break;
+        case event:
+            String[] temp2 = description.split("at ");
+            task = new Task.Event(temp2[0], false, temp2[1]);
+            break;
+        case within:
+            String[] temp3 = description.split("between | and ");
+            task = new Task.Within(temp3[0], false, temp3[1], temp3[2]);
+            break;
+        default:
         }
 
+        assert task != null;
         tasks.addTask(task);
         String result = "";
         result += ("Added: " + task.getTaskType() + task.getStatusIcon() + " " + task.getDescription() + "\n");
@@ -49,6 +66,11 @@ public class AddCommand extends Command {
         return result;
     }
 
+    /**
+     * Checks if Command is ExitCommand
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

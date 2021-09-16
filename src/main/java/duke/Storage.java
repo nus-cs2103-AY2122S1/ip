@@ -9,9 +9,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles storing and loading data
+ */
 public class Storage {
     private String filepath;
 
+    /**
+     * Constructs new storage object
+     * @param filepath filepath to store data
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -20,7 +27,7 @@ public class Storage {
      * Loads task data from storage
      *
      * @return ArrayList of tasks
-     * @throws DukeException
+     * @throws DukeException when file not found
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();

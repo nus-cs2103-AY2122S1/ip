@@ -11,7 +11,9 @@ import duke.Task;
 import duke.TaskList;
 
 
-
+/**
+ * Test class for TaskList class
+ */
 public class TaskListTest {
     @Test
     public void addTaskTest() throws DukeException {

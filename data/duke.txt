@@ -1,5 +1,2 @@
-todo | 0 | test1
-event | 0 | test 2  | 2021-12-12
-deadline | 0 | test 3  | 2021-11-11
-within | 0 | test4  | 2021-12-12 | 2021-12-12
-within | 0 | test 4  | 2021-10-09 | 2021-11-12
+todo | 0 | Do
+event | 0 | Dinner with Friends  | 2021-10-10

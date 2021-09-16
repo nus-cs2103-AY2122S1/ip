@@ -12,6 +12,7 @@ public abstract class Command {
      * @param tasks Current TaskList
      * @param ui Ui object of bot
      * @param storage Storage object of bot
+     * @return Confirmation message
      * @throws DukeException
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

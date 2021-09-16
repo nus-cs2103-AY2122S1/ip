@@ -25,6 +25,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes command and returns the reply
+     * @param input User input entered
+     * @return The reply by bot
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

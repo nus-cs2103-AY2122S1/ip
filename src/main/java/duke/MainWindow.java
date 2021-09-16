@@ -7,8 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for duke.MainWindow. Provides the layout for the other controls. From JavaFX tutorial.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -37,7 +38,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. From JavaFX tutorial.
      */
     @FXML
     private void handleUserInput() {

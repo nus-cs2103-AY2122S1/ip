@@ -1,6 +1,8 @@
 package duke;
 
-
+/**
+ * UI related methods
+ */
 public class Ui {
 
 

@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 /**
- * Task class that includes Todos, Events and Deadline.
+ * Task class that includes Todos, Events, Deadline and Within.
  */
 public class Task {
     protected String description;
