@@ -15,6 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    public static final String CHATBOT_NAME = "Duke";
     private Duke duke = new Duke();
 
     @Override
@@ -23,6 +24,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle(CHATBOT_NAME);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

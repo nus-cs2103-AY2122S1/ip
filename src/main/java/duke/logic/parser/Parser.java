@@ -1,3 +1,5 @@
+//@@author {qvinhprolol}-reused
+//Code in the parser class is inspired from Github user uyencfi, LimPy1000
 package duke.logic.parser;
 
 import duke.exception.DukeInvalidCommandException;
@@ -33,10 +35,11 @@ public class Parser {
     private static final String OUT_OF_BOUNDS_ERR_MSG = "OOPS!!! The task number should be between 0 and ";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final String INVALID_TAG_COMMAND_ERR_MSG = "OOPS!!! The tag command format is /tag <index> <tag>";
+    public static final String INVALID_BYE_COMMAND_ERR_MSG = "Invalid exception, do you mean bye?";
 
     private enum CommandName {
-        LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, TAG;
-        
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, TAG;
+
         private static CommandName getCommandCode(String input) {
             CommandName result;
             try {
@@ -48,7 +51,7 @@ public class Parser {
         }
     }
     private final TaskList taskList;
-    
+
     /**
      * Constructs for the class.
      */
@@ -77,7 +80,7 @@ public class Parser {
         return parsedNumber;
     }
 
-    private String[] getTaskArguments(String input, String regex, String errorMsg) 
+    private String[] getTaskArguments(String input, String regex, String errorMsg)
             throws DukeInvalidCommandException {
         String[] parsedArguments = input.split(regex);
         if (parsedArguments.length != 2) {
@@ -161,7 +164,7 @@ public class Parser {
         }
         return new FindCommand(parsedInput[1]).executeCommand(taskList);
     }
-    
+
     private String handleTag(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException(INVALID_TAG_COMMAND_ERR_MSG);
@@ -177,10 +180,20 @@ public class Parser {
         String tag = arguments[1];
         return new TagCommand(taskIndex, tag).executeCommand(taskList);
     }
-    
+
+    private String handleBye(String[] parsedInput) throws DukeInvalidCommandException {
+        if (parsedInput.length > 1) {
+            throw new DukeInvalidCommandException(INVALID_BYE_COMMAND_ERR_MSG);
+        }
+        return new ByeCommand().executeCommand(taskList);
+    }
+
     public String invokeCommand(String input) throws DukeInvalidCommandException {
         String[] parsedInput = parseInput(input);
         CommandName commandName = CommandName.getCommandCode(parsedInput[0]);
+        if (commandName == null) {
+            throw new DukeInvalidCommandException(UNKNOWN_COMMAND_ERR_MSG);
+        }
         switch (commandName) {
         case LIST:
             return handleList(parsedInput);
@@ -198,6 +211,8 @@ public class Parser {
             return handleFind(parsedInput);
         case TAG:
             return handleTag(parsedInput);
+        case BYE:
+            return handleBye(parsedInput);
         default:
             throw new DukeInvalidCommandException(UNKNOWN_COMMAND_ERR_MSG);
         }
