@@ -1,4 +1,1 @@
-T|1|read book
-D|0|return book|2021-08-19T12:30
-E|0|ip submission|2021-09-07T23:59
-T|0|study for midterms
+T|0|sleep

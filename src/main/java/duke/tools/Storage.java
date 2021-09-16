@@ -1,5 +1,6 @@
 package duke.tools;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -22,8 +23,26 @@ public class Storage {
      * @throws InvalidPathException Throws an invalid path error
      */
     public Storage(String filePath) throws InvalidPathException {
+        Storage.createTaskListFile();
         this.path = Path.of(filePath);
         this.stringPath = filePath;
+    }
+
+    /**
+     * Handle file creation if it does not exist
+     */
+    public static void createTaskListFile() {
+        File s = new File("./data");
+        boolean isDirectoryCreated;
+        try {
+            isDirectoryCreated = s.mkdir();
+            if (isDirectoryCreated) {
+                File f = new File("./data/duke.txt");
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("There is an error");
+        }
     }
 
     /**
