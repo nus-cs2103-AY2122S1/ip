@@ -42,10 +42,6 @@ public class TaskList {
         }
     }
 
-//    public TaskList() {
-//
-//    }
-
     /**
      * Method to update task list.
      * @param arrOfInputs taking in an array of inputs

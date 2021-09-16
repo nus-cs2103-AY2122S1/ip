@@ -34,7 +34,7 @@ public class Ui {
     public static String getWelcomeMessage() {
         String welcome = "Hello! I'm Duke. A friendly chatbot!! :)\n"
                 + "What can I do for you?\n";
-        return ("\n" + welcome);
+        return (welcome);
     }
 
     public void showGoodbyeMessage() {

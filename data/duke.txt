@@ -1,7 +1,5 @@
 T|1|read book
 D|0|return book|2021-08-19T12:30
 E|0|project meeting|2021-08-20T18:00
-D|0|return book|2021-08-24T23:59
 E|1|sleep|2015-02-20T06:30
-T|0|eat
 T|0|read book

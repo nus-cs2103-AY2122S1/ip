@@ -45,7 +45,7 @@ public class Duke {
         String response;
         try {
             response = Parser.parse(input);
-            return "Duke heard: " + response;
+            return response;
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
@@ -84,7 +84,7 @@ public class Duke {
         if (i > tasks.getSize()) {
             throw new DukeException("\nOOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
         }
-        String start = "\n Nice! I've marked this task as done:";
+        String start = "Nice! I've marked this task as done:";
         tasks.getTask(i - 1).markAsDone();
         TaskList.updateMemory(storage.getPath(), tasks);
         String res = tasks.getTask(i-1).toString();
@@ -96,7 +96,10 @@ public class Duke {
      * Method to get the Duke TaskList
      */
     public static String getTaskList() {
-        String start = "\n Here are the " + tasks.getSize() + " tasks in your list: \n";
+        if (tasks.getSize() <= 0) {
+            return "Hey!! Your list is empty lahhh! \n \n Please add some tasks!!";
+        }
+        String start = "Sure!! Here are the " + tasks.getSize() + " tasks in your list: \n";
         String res = "";
         for (int i = 0; i < tasks.getSize(); i++) {
             res += "\n" + (i + 1) + ". " + tasks.getTask(i);
@@ -117,7 +120,7 @@ public class Duke {
         ToDo td = new ToDo(t);
         tasks.addNewTask(td);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "\nGot it. I've added this task: \n " + "  " + td +
+        return "Got it. I've added this task: \n " + "  " + td +
                 "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
@@ -128,14 +131,14 @@ public class Duke {
      */
     public static String  deadline(String input) throws DukeException {
         if (!input.contains("/by")){
-            String message = "\nOOPS!!! Please follow this format: \n deadline {task} /by {YYYY-MM-DDTHH:MM}";
+            String message = "OOPS!!! Please follow this format: \n deadline {task} /by {YYYY-MM-DDTHH:MM}";
             throw new DukeException(message);
         }
         String t = input.split("deadline ")[1];
         Deadline dl = new Deadline(t);
         tasks.addNewTask(dl);
         TaskList.updateMemory(storage.getPath(), tasks);
-        return "\nGot it. I've added this task: \n " + "  " + dl
+        return "Got it. I've added this task: \n " + "  " + dl
                 + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
@@ -146,7 +149,7 @@ public class Duke {
      */
     public static String event(String input) throws DukeException {
         if (!input.contains("/at ")){
-            String message = "\nOOPS!!! Please follow this format: \n event {task} /at {YYYY-MM-DDTHH:MM}";
+            String message = "OOPS!!! Please follow this format: \n event {task} /at {YYYY-MM-DDTHH:MM}";
             throw new DukeException(message);
         }
         String t = input.split("event ")[1];
@@ -164,14 +167,14 @@ public class Duke {
      */
     public static String deleteTask(int i) throws DukeException {
         if (i > tasks.getSize()) {
-            throw new DukeException("\nOOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
+            throw new DukeException("OOPS!!! Invalid index.\nPlease choose between 1 to " + tasks.getSize());
         }
         String start = "\n Noted. I've removed this task: \n";
         String deleted = tasks.getTask(i-1).toString();
         tasks.deleteGivenTask(i - 1);
         TaskList.updateMemory(storage.getPath(), tasks);
         String mid = "  " + deleted;
-        String end = "\n Now you have " + tasks.getSize() + " tasks in the list.";
+        String end = "Now you have " + tasks.getSize() + " tasks in the list.";
         return start + mid + end;
     }
 
@@ -181,7 +184,7 @@ public class Duke {
      */
     public static String findTask(String input) {
         String searchKey = input.split("find ")[1];
-        String start = "\nHere are the matching tasks in your list: ";
+        String start = "Here are the matching tasks in your list: ";
         String res = "";
         int currIndex = 1;
         for (int i = 0; i < tasks.getSize(); i++) {
