@@ -9,6 +9,6 @@ public class InvalidFormatException extends DukeException {
      */
     public InvalidFormatException() {
         super("Sorry >.< but this format is invalid!\nPlease follow this format:"
-                + " [<Type> <Description> / <Date/Time>].");
+                + " [<Type> <Description> / <Date> <Time>].");
     }
 }

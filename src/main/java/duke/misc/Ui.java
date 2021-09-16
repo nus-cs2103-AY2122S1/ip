@@ -1,7 +1,7 @@
 package duke.misc;
 
 /**
- * Ui class to encapsulate display messages for input/output of duke.
+ * Ui class to encapsulate display messages for input/output of Duke.
  */
 public class Ui {
     /** Welcome message to display when duke starts */
@@ -10,7 +10,7 @@ public class Ui {
     public static final String GOODBYE_MSG = "Bye. See you soon!";
     /** Message to display when listCommand executed. */
     public static final String LIST_MSG = "Here are the tasks in your list:\n";
-    /** Message to display when task creation command execution. */
+    /** Message to display when a task creation command is executed. */
     public static final String ADD_MSG = "Gotcha. I've added this task:\n";
     /** Message to display when doneCommand executed. */
     public static final String DONE_MSG = "I have marked this task as done:\n";

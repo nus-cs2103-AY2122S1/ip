@@ -21,8 +21,12 @@ public class Task {
         return isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
-     * Returns "X" if completed and " " otherwise.
+     * Returns an icon to indicate completion status of task.
      *
      * @return "X" or " " depending on status.
      */
@@ -30,12 +34,8 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     /**
-     * Formats task's data into a string for storage in hard disk
+     * Formats task's data into a string for storage in duke.txt.
      *
      * @return String containing task's data.
      */
@@ -51,9 +51,9 @@ public class Task {
     }
 
     /**
-     * Overrides Object class's toString method.
+     * Returns a string describing details of the task.
      *
-     * @return A String describing details of Task class.
+     * @return A String describing details of the task.
      */
     @Override
     public String toString() {

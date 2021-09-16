@@ -27,7 +27,7 @@ public class TaskList {
     /**
      * Initialises the TaskList using the stored data.
      *
-     * @throws IOException Throws IOException if directory is Invalid.
+     * @throws IOException In case of invalid file directory.
      */
     public void initialise() throws IOException {
         storage = new Storage();
@@ -35,7 +35,16 @@ public class TaskList {
     }
 
     /**
-     * Creates a string with all task information appended in rows.
+     * Returns size of current TaskList.
+     *
+     * @return size of current TaskList
+     */
+    public int getSize() {
+        return tasks.size();
+    }
+
+    /**
+     * Creates a String with all task information appended in rows.
      *
      * @return String of all task information.
      */
@@ -50,9 +59,11 @@ public class TaskList {
      *
      * @param task The Task object to be added.
      * @return The String output by toString method of task.
+     * @throws IOException In case of invalid file directory.
      */
-    public String addTask(Task task) {
+    public String addTask(Task task) throws IOException {
         tasks.add(task);
+        saveData();
         return task.toString();
     }
 
@@ -61,36 +72,40 @@ public class TaskList {
      *
      * @param idx Index of task to be deleted.
      * @return The String output by toString method of task to be added.
-     * @throws DukeException Throws DukeException if index of task is out of bounds.
+     * @throws DukeException In case index of task is out of bounds.
+     * @throws IOException In case of invalid file directory.
      */
-    public String deleteTask(int idx) throws DukeException {
+    public String deleteTask(int idx) throws DukeException, IOException {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
         }
         String message = tasks.get(idx - 1).toString();
         tasks.remove(idx - 1);
+        saveData();
         return message;
     }
 
     /**
      * Marks specified task from current TaskList as done.
      *
-     * @param idx Index of task to be completed.
+     * @param idx Index of task to be marked completed.
      * @return The String output by toString method of task to be added.
-     * @throws DukeException Throws DukeException if index of task is out of bounds.
+     * @throws DukeException In case if index of task is out of bounds.
+     * @throws IOException In case of invalid file directory.
      */
-    public String completeTask(int idx) throws DukeException {
+    public String completeTask(int idx) throws DukeException, IOException {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
         }
         tasks.get(idx - 1).markAsDone();
+        saveData();
         return tasks.get(idx - 1).toString();
     }
 
     /**
-     * Saves all tasks into specified directory.
+     * Saves all tasks into specified file directory.
      *
-     * @throws IOException Throws IOException if directory is invalid.
+     * @throws IOException In case of invalid file directory.
      */
     public void saveData() throws IOException {
         storage.writeData(tasks);
@@ -99,8 +114,8 @@ public class TaskList {
     /**
      * Checks if String b is a subsequence of String a.
      *
-     * @param a 'Container' String.
-     * @param b 'Containee' String.
+     * @param a The 'Container' String.
+     * @param b The 'Containee' String.
      * @return The boolean value of the subsequence query.
      */
     public boolean isSubSequence(String a, String b) {
@@ -129,8 +144,9 @@ public class TaskList {
      */
     public String findTasks(String key) {
         return tasks.stream()
-                .map(Task::getDescription)
-                .filter(description -> isSubSequence(description, key))
-                .collect(Collectors.joining("\n"));
+                .filter(task -> isSubSequence(task.getDescription(), key))
+                .map(Task::toString)
+                .map(description -> "- " + description)
+                .collect(Collectors.joining(""));
     }
 }

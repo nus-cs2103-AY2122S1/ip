@@ -34,7 +34,7 @@ public class Storage {
      * Reads data from duke.txt file.
      *
      * @return ArrayList of saved tasks.
-     * @throws IOException Throws IOException if directory is invalid.
+     * @throws IOException In case the file directory is invalid..
      */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
@@ -71,8 +71,8 @@ public class Storage {
     /**
      * Writes data into duke.txt file.
      *
-     * @param al The ArrayList to write from.
-     * @throws IOException Throws IOException if directory is invalid.
+     * @param al The ArrayList of tasks to write from.
+     * @throws IOException In case the file directory is invalid.
      */
     public void writeData(ArrayList<Task> al) throws IOException {
         if (!fileDirExists) {

@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Deadline class which Encapsulates task's deadline.
+ * Deadline class to represent a task with a deadline.
  */
 public class Deadline extends Task {
     private DateTime byDateTime;
@@ -9,7 +9,7 @@ public class Deadline extends Task {
     /**
      * Constructor for Deadline class.
      *
-     * @param description Description of deadlined task.
+     * @param description Description of deadline task.
      * @param byDate Date of task deadline.
      * @param byTime Time of task deadline.
      */
@@ -33,7 +33,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Formats task's data into a string for storage in hard disk.
+     * Formats task's data into a string for storage in duke.txt.
      *
      * @return String containing task's data.
      */
@@ -44,9 +44,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overrides Task class's toString method.
+     * Returns a String describing details of the deadline task.
      *
-     * @return A String describing details of Deadline class.
+     * @return A String describing details of the deadline task.
      */
     @Override
     public String toString() {

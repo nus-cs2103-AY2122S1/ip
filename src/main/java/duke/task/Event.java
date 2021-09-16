@@ -1,7 +1,9 @@
 package duke.task;
 
+import duke.misc.Parser;
+
 /**
- * Event class which encapsulates event date/time.
+ * Event class which represents a task with event date/time.
  */
 public class Event extends Task {
     private DateTime atDateTime;
@@ -15,7 +17,8 @@ public class Event extends Task {
      */
     public Event(String description, String atDate, String atTime) {
         super(description);
-        this.atDateTime = new DateTime(atDate, atTime);
+        String[] timeRange = Parser.parseEventTime(atTime);
+        this.atDateTime = new DateTime(atDate, timeRange[0], timeRange[1]);
     }
 
     /**
@@ -29,29 +32,30 @@ public class Event extends Task {
     public Event(String description, String atDate, String atTime, Boolean isDone) {
         super(description);
         super.isDone = isDone;
-        this.atDateTime = new DateTime(atDate, atTime);
+        String[] timeRange = Parser.parseEventTime(atTime);
+        this.atDateTime = new DateTime(atDate, timeRange[0], timeRange[1]);
     }
 
     /**
-     * Formats task's data into a string for hard drive storage
+     * Formats task's data into a string for storage in duke.txt.
      *
      * @return String containing task's data.
      */
     @Override
     public String getData() {
         return "Event // " + (super.getIsDone() ? 1 : 0) + " // " + super.getDescription()
-                + " // " + atDateTime.getDate() + " // " + atDateTime.getTime();
+                + " // " + atDateTime.getDate() + " // " + atDateTime.getTimeRange();
     }
 
     /**
-     * Overrides Task class's toString method.
+     * Returns a String describing details of the event task.
      *
-     * @return A String Describing details of Event class.
+     * @return A String Describing details of the event task.
      */
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (by: " + atDateTime.getFormattedDate() + " "
-                + atDateTime.getFormattedTime() + ")\n";
+                + " (at: " + atDateTime.getFormattedDate() + " "
+                + atDateTime.getFormattedTimeRange() + ")\n";
     }
 }

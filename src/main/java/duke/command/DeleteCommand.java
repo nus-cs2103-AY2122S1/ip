@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.misc.TaskList;
 import duke.misc.Ui;
@@ -25,9 +27,10 @@ public class DeleteCommand extends Command {
      *
      * @param tl The current TaskList.
      * @return String to notify user of successful command execution.
-     * @throws DukeException In case of errors.
+     * @throws DukeException In case of Duke related errors.
+     * @throws IOException In case of invalid file directory.
      */
-    public String execute(TaskList tl) throws DukeException {
+    public String execute(TaskList tl) throws DukeException, IOException {
         return Ui.DELETE_MSG + tl.deleteTask(idx);
     }
 

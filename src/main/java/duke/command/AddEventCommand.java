@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.misc.TaskList;
 import duke.misc.Ui;
 import duke.task.Event;
@@ -15,7 +17,7 @@ public class AddEventCommand extends Command {
     /**
      * Constructor for AddEventCommand class.
      *
-     * @param args Parsed input that contains the type and deadline of task.
+     * @param args Parsed input that contains the type, date and time of task.
      */
     public AddEventCommand(String[] args) {
         this.args = args;
@@ -24,13 +26,17 @@ public class AddEventCommand extends Command {
     /**
      * Executes the operation to add the Event task.
      *
-     * @param tl The TaskList which the task is added to.
+     * @param tl The current TaskList.
      * @return String to notify user of successful command execution.
+     * @throws IOException In case of invalid file directory.
      */
-    public String execute(TaskList tl) {
+    public String execute(TaskList tl) throws IOException {
         assert args.length == 3;
         Task task = new Event(args[0], args[1], args[2]);
-        return Ui.ADD_MSG + tl.addTask(task);
+        return Ui.ADD_MSG
+                + tl.addTask(task)
+                + "Current tasks count: " + tl.getSize()
+                + "\n";
     }
 
     public boolean getIsBye() {

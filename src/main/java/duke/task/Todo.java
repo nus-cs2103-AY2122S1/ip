@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Todo class which represents a class without a deadline.
+ * Todo class which represents a task without a deadline.
  */
 public class Todo extends Task {
     /**
@@ -16,7 +16,7 @@ public class Todo extends Task {
     /**
      * Constructor of Todo class.
      *
-     * @param description Description of a task without deadline.
+     * @param description Description of todo task.
      * @param isDone Completion status of task.
      */
     public Todo(String description, Boolean isDone) {
@@ -25,7 +25,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Formats task's data into a string for storage in hard disk
+     * Formats task's data into a string for storage in duke.txt.
      *
      * @return String containing task's data.
      */
@@ -35,9 +35,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Overrides Task class's toString method.
+     * Returns a string describing details of the todo task.
      *
-     * @return A String describing details of Todo class.
+     * @return A String describing details of the todo task.
      */
     @Override
     public String toString() {

@@ -39,35 +39,46 @@ public class Parser {
      * @throws IOException In case the directory of data storage file is non-existent.
      */
     public Command parseCommand(String input) throws DukeException, IOException {
-        String inputPrefix = input;
-        String inputSuffix = "";
+        String prefixArguments = input;
+        String suffixArguments = "";
         int idx = input.indexOf(' ');
         if (idx >= 0) {
-            inputPrefix = input.substring(0, idx);
-            inputSuffix = input.substring(idx + 1);
+            prefixArguments = input.substring(0, idx);
+            suffixArguments = input.substring(idx + 1);
         }
-        switch (inputPrefix) {
+        switch (prefixArguments) {
         case "bye":
-            return makeByeCommand(inputSuffix);
+            return makeByeCommand(suffixArguments);
         case "list":
-            return makeListCommand(inputSuffix);
+            return makeListCommand(suffixArguments);
         case "done":
-            return makeDoneCommand(inputSuffix);
+            return makeDoneCommand(suffixArguments);
         case "delete":
-            return makeDeleteCommand(inputSuffix);
+            return makeDeleteCommand(suffixArguments);
         case "find":
-            return makeFindCommand(inputSuffix);
+            return makeFindCommand(suffixArguments);
         case "deadline":
-            return makeAddDeadlineCommand(inputSuffix);
+            return makeAddDeadlineCommand(suffixArguments);
         case "todo":
-            return makeTodoCommand(inputSuffix);
+            return makeTodoCommand(suffixArguments);
         case "event":
-            return makeEventCommand(inputSuffix);
+            return makeEventCommand(suffixArguments);
         default:
             throw new InvalidCommandException();
         }
     }
 
+    /**
+     * Parses the user input for event time range.
+     *
+     * @param time User input for event time range.
+     * @return Parsed user input for event time range.
+     */
+    public static String[] parseEventTime(String time) {
+        return time.split("t");
+    }
+
+    // Extracts the date and time from user input.
     private String[] parseDateTime(String datetime) {
         int idx = datetime.indexOf(" ");
         String[] res = {"x", "x"};
@@ -80,17 +91,42 @@ public class Parser {
         return res;
     }
 
-    private String[] parseInputSuffix(String inputSuffix) {
-        String[] args = inputSuffix.split("/");
+    // Extracts the description and date/time from user input.
+    private String[] parseSuffixArgs(String suffixArguments) throws DukeException {
+        if (!suffixArguments.matches("[\\s\\S]+/[\\s\\S]+")) {
+            throw new InvalidFormatException();
+        }
+
+        String[] args = suffixArguments.split("/");
         for (int i = 0; i < args.length; i++) {
             args[i] = args[i].trim();
         }
+
         String[] dateAndTime = parseDateTime(args[1]);
+
+        if (DateTime.isInvalidDate(dateAndTime[0])) {
+            throw new InvalidDateException();
+        }
+        if (isInvalidTime(dateAndTime[1])) {
+            throw new InvalidTimeException();
+        }
+
         String[] res = new String[3];
         res[0] = args[0];
         res[1] = dateAndTime[0];
         res[2] = dateAndTime[1];
+
         return res;
+    }
+
+    private boolean isInvalidTime(String time) {
+        if (!DateTime.isInvalidTime(time)) {
+            return false;
+        }
+        int toIdx = time.indexOf("t");
+        String timeStart = time.substring(0, toIdx);
+        String timeEnd = time.substring(toIdx + 1);
+        return DateTime.isInvalidTime(timeStart) || DateTime.isInvalidTime(timeEnd);
     }
 
     private Command makeByeCommand(String inputSuffix) throws DukeException {
@@ -133,36 +169,12 @@ public class Parser {
     }
 
     private Command makeAddDeadlineCommand(String inputSuffix) throws DukeException {
-        String[] args = parseInputSuffix(inputSuffix);
-        if (!inputSuffix.matches("[\\s\\S]+/[\\s\\S]+")) {
-            throw new InvalidFormatException();
-        }
-
-        assert args.length > 0;
-
-        if (DateTime.isInvalidDate(args[1])) {
-            throw new InvalidDateException();
-        }
-        if (DateTime.isInvalidTime(args[2])) {
-            throw new InvalidTimeException();
-        }
+        String[] args = parseSuffixArgs(inputSuffix);
         return new AddDeadlineCommand(args);
     }
 
     private Command makeEventCommand(String inputSuffix) throws DukeException {
-        String[] args = parseInputSuffix(inputSuffix);
-        if (!inputSuffix.matches("[\\s\\S]+/[\\s\\S]+")) {
-            throw new InvalidFormatException();
-        }
-
-        assert args.length > 0;
-
-        if (DateTime.isInvalidDate(args[1])) {
-            throw new InvalidDateException();
-        }
-        if (DateTime.isInvalidTime(args[2])) {
-            throw new InvalidTimeException();
-        }
+        String[] args = parseSuffixArgs(inputSuffix);
         return new AddEventCommand(args);
     }
 

@@ -15,27 +15,31 @@ public class DateTime {
 
     private LocalDate date;
     private LocalTime time;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     /**
-     * Constructor for DateTIme class.
+     * Constructor for DateTime class.
      *
-     * @param date The date in YYYY-MM-dd format.
+     * @param date The date in yyyy-MM-dd format.
+     * @param time The time in HH:mm format.
      */
-    DateTime(String date) {
+    DateTime(String date, String time) {
         this.date = LocalDate.parse(date);
+        this.time = LocalTime.parse(time);
     }
 
     /**
      * Constructor for DateTime class.
      *
      * @param date The date in yyyy-MM-dd format.
-     * @param time The time in hh:mm format.
+     * @param startTime The time in HH:mm format.
+     * @param endTime The time in HH:mm format.
      */
-    DateTime(String date, String time) {
+    DateTime(String date, String startTime, String endTime) {
         this.date = LocalDate.parse(date);
-        if (!time.isEmpty()) {
-            this.time = LocalTime.parse(time);
-        }
+        this.startTime = LocalTime.parse(startTime);
+        this.endTime = LocalTime.parse(endTime);
     }
 
     /**
@@ -54,6 +58,15 @@ public class DateTime {
      */
     public String getTime() {
         return time.toString();
+    }
+
+    /**
+     * Returns original time range used to create the DateTime class.
+     *
+     * @return String of original time range.
+     */
+    public String getTimeRange() {
+        return startTime.toString() + "t" + endTime.toString();
     }
 
     /**
@@ -98,10 +111,20 @@ public class DateTime {
     /**
      * Formats the input time.
      *
-     * @return The String representation of the time in.
+     * @return The String representation of the time in KK.mma format.
      */
     public String getFormattedTime() {
-        return time.format(DateTimeFormatter.ofPattern("KK.mm a"));
+        return time.format(DateTimeFormatter.ofPattern("hh.mma"));
     }
 
+    /**
+     * Formats the input time range.
+     *
+     * @return The String representation of the time range in KK.mma format.
+     */
+    public String getFormattedTimeRange() {
+        return startTime.format(DateTimeFormatter.ofPattern("hh.mma"))
+                + " to "
+                + endTime.format(DateTimeFormatter.ofPattern("hh.mma"));
+    }
 }

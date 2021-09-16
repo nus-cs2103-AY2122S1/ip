@@ -14,8 +14,8 @@ public abstract class Command {
      *
      * @param tl The current TaskList.
      * @return String to notify user of successful command execution.
-     * @throws DukeException In case of errors.
-     * @throws IOException In case of errors.
+     * @throws DukeException In case of Duke related errors.
+     * @throws IOException In case of invalid file directory.
      */
     public abstract String execute(TaskList tl) throws DukeException, IOException;
 

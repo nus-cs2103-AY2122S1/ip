@@ -21,7 +21,7 @@ public class FindCommand extends Command {
      *
      * @param tl The current TaskList.
      * @return String to notify user of successful command execution.
-     * @throws IOException In case of errors.
+     * @throws IOException In case of invalid file directory.
      */
     public String execute(TaskList tl) throws IOException {
         return Ui.FIND_MSG + tl.findTasks(inputSuffix);
