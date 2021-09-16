@@ -1,29 +1,69 @@
-# User Guide
+# Duke User Guide :robot:
 
-## Features 
+Duke is a chat bot that enables you to mange your tasks.
 
-### Feature-ABC
+# Features:
+1. [Add tasks](#add-tasks)
 
-Description of the feature.
+2. [List all tasks](#list-all-tasks)
 
-### Feature-XYZ
+3. [Delete task](#delete-task)
 
-Description of the feature.
+4. [Find task](#find-task)
 
-## Usage
+5. [Mark task as done](#mark-task-as-done)
 
-### `Keyword` - Describe action
+6. [Set reminder](#set-reminder)
 
-Describe the action and its outcome.
+## Add tasks:
+### ToDo:
+tasks without any date/time(e.g., go travelling)
+Command: `todo <description of the task>`
+Example: `todo drink milk`
 
-Example of usage: 
+### Deadline:
+tasks that need to be done before a specific date/time(e.g., submit the assigment before 2021/09/17 midnight)
 
-`keyword (optional arguments)`
+Command: `deadline <description of the task> /by <deadline>` (Note that the date time format should be`yyyy/MM/dd HH:mm`)
 
-Expected outcome:
+Example: `deadline submit the assignment /by 2021/09/17 23:59`
 
-Description of the outcome.
+### Event:
+tasks that has a starting time and an ending time(e.g., group discussion at 2021/09/18 2pm - 3pm)
 
-```
-expected output
-```
+Command: `event <description of the task> /at <time period>` (Note that the date time format should be`yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm`)
+
+Example: `event group discussion /at 2021/09/18 14:00--2021/09/18 16:00`
+
+## List all tasks:
+Show all the tasks
+
+Command: `list`
+
+## Delete task:
+Delete a specific task by index
+
+Command: `delete <task index>`
+
+Example: `delete 1` (delete the first task)
+
+## Find task:
+Find specific tasks through keywords
+
+Command: `find <keyword>`
+
+Example: `find assignment`
+
+## Mark task as done:
+Mark a specific task through task index as done
+
+Command: `done <task index>`
+
+Example: `done 1` (mark the first task as done)
+
+## Set reminder:
+Set a reminder time while adding a new task(ToDo, Deadline, Event). Then duke will remind you when the reminder time reaches.
+
+Command: add `/reminder <reminder date>` after your add tasks command (Note that the reminder date format should be `yyyy/MM/dd HH:mm`)
+
+Example: `todo drink milk /reminder 2021/09/20 22:00`,   `deadline submit the assignment /by 2021/09/17 23:59 /reminder 2021/09/15 09:00`,   `event group discussion /at 2021/09/18 14:00--2021/09/18 16:00 /reminder 2021/09/16 14:00`

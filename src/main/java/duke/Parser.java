@@ -146,10 +146,10 @@ public class Parser {
             throw new ParserException("The description of event cannot be empty.");
         }
 
+        System.out.println("hello");
         /* Get event time */
         int eventStartIndex = content.indexOf("/at") + 4;
         int eventEndIndex = content.indexOf("/at") + 37;
-        System.out.println(content.substring(eventStartIndex, eventEndIndex + 1));
         if (eventEndIndex >= content.length()) {
             throw new ParserException("please enter a valid time in the format: "
                     + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
@@ -163,7 +163,7 @@ public class Parser {
             int reminderTimeEndIndex = content.indexOf("/reminder ") + 25;
             if (reminderTimeEndIndex >= content.length()) {
                 throw new ParserException("please enter a valid time in the format: "
-                        + "yyyy/MM/dd HH:mm");
+                        + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
             }
             reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
         }
