@@ -44,7 +44,7 @@ public class DukeGui extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        Path filePath = Paths.get("src", "main", "resources", "duke.txt");
+        Path filePath = Paths.get("duke.txt");
         duke = new Duke(filePath);
 
         scene = new Scene(mainLayout);
