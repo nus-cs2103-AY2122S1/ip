@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Constructor called when loading in data.
+     *
      * @param loadedData loadedData is the TaskList from a previous session.
      */
     public TaskList(ArrayList<Task> loadedData) {

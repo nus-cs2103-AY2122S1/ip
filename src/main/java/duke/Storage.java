@@ -26,6 +26,7 @@ public class Storage {
 
     /**
      * Initialises a storage object, that will create a data directory in the source directory if it does not exist.
+     *
      * Currently filename represents where the data is to be saved, and it is hard-coded in Duke.java.
      * @param filename is the file the application will write to, in the data folder.
      */
@@ -41,6 +42,7 @@ public class Storage {
 
     /**
      * Loads located saved data if it exists, and parses it to create a TaskList representing the saved sessions data.
+     *
      * @return a list of tasks saved from previous session.
      * @throws IOException if initialising the reader fails, or reading from the save data causes an error.
      * @throws DukeException if the saved data has a format that is not recognised.
@@ -62,6 +64,7 @@ public class Storage {
 
     /**
      * Saves the tasklist from the current session in a text file in the data directory.
+     *
      * @param tasklist contains the tasks from the current session.
      * @throws IOException if writing to the text file fails, or initialising the writer fails.
      */

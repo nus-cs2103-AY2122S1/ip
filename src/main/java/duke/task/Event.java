@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Basic constructor for Event Task objects.
+     *
      * @param label description of the Task.
      * @param date date associated with the Task.
      */
@@ -21,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Getter for type.
+     *
      * @return "E" as an identifier for other parts of the application.
      */
     @Override

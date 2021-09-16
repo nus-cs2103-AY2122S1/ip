@@ -13,6 +13,7 @@ public abstract class Task {
 
     /**
      * Basic constructor, creates a task with the given label.
+     *
      * @param label The description the task is created with. Not allowed to be empty.
      */
     public Task(String label) {
@@ -22,6 +23,7 @@ public abstract class Task {
 
     /**
      * Method used to mark the task as done.
+     *
      * @param isDone Indicates whether the task is marked as done.
      */
     public void setIsDone(boolean isDone) {
@@ -30,6 +32,7 @@ public abstract class Task {
 
     /**
      * Getter for boolean isDone.
+     *
      * @return the isDone of the Task.
      */
     public boolean getIsDone() {
@@ -38,6 +41,7 @@ public abstract class Task {
 
     /**
      * Getter for label.
+     *
      * @return the label of the task.
      */
     public String getLabel() {
@@ -46,6 +50,7 @@ public abstract class Task {
 
     /**
      * Setter for label.
+     *
      * @param label the new label of the task.
      */
     public void setLabel(String label) {
@@ -54,12 +59,14 @@ public abstract class Task {
 
     /**
      * Getter for type. Implementation left to subclasses.
+     *
      * @return a capital letter in a string e.g. "D" for a Deadline Task.
      */
     public abstract String getType();
 
     /**
      * Getter for date. Not applicable for Todo tasks.
+     *
      * @return A String representing the date associated with the Task.
      */
     public abstract String getDate();
@@ -71,6 +78,7 @@ public abstract class Task {
 
     /**
      * Override of toString to provide a user friendly String representation of Task objects.
+     *
      * @return a String representing the Task meant to be printed for the user.
      */
     @Override

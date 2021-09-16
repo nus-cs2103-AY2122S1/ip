@@ -16,6 +16,7 @@ public class Ui {
 
     /**
      * Returns a String representing tasks in the list.
+     *
      * @param tasklist tasks to be displayed.
      * @return String representation of tasks.
      */
@@ -30,6 +31,7 @@ public class Ui {
 
     /**
      * Returns a String representing tasks found.
+     *
      * @param tasklist tasks to be displayed.
      * @return String representation of tasks.
      */
@@ -40,6 +42,7 @@ public class Ui {
 
     /**
      * Returns a String to notify user of task being added.
+     *
      * @param tasklist tasks containing new added task.
      * @return String representation of message.
      */
@@ -53,6 +56,7 @@ public class Ui {
 
     /**
      * Returns a String to notify user that task has been marked done.
+     *
      * @param tasklist tasks containing task marked done.
      * @param index index of the task marked done.
      * @return String to notify user that task has been marked done.
@@ -66,6 +70,7 @@ public class Ui {
 
     /**
      * Returns a String to notify user that task has been deleted.
+     *
      * @param tasklist remaining tasks after deletion
      * @param removed task that was removed
      * @return String to notify user that task has been deleted.

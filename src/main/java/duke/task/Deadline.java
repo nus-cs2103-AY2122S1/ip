@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Basic constructor for Deadline Task objects.
+     *
      * @param label description of the Task.
      * @param date date associated with the Task.
      */
@@ -21,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Getter for type.
+     *
      * @return "D" as an identifier for other parts of the application.
      */
     @Override

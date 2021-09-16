@@ -29,6 +29,7 @@ public class Duke {
 
     /**
      * Returns response from the chat application given users input.
+     *
      * @param input input from the user
      * @return String to be displayed to the user
      */
