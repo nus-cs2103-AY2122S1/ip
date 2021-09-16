@@ -91,8 +91,8 @@ public class TaskList {
     /**
      * Retrieve the task from the list given an index.
      *
-     * @param position the index
-     * @return the task
+     * @param position the index.
+     * @return the task.
      */
     public Task getItem(int position) {
         return this.tasks.get(position);
