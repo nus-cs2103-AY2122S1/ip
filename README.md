@@ -1,6 +1,9 @@
-# aoi.Aoi project template
+# Aoi Todo Chat Bot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Aoi_. Given below are instructions on how to use it.
+![Image of UI](docs/Ui.png)
+## About
+
+Aoi Todo Chat Bot is a todo-list app that was introduced as a greenfield Java project template _Duke_, as part of CS2103T's individual project component.
 
 ## Setting up in Intellij
 

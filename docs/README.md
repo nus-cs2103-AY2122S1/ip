@@ -1,4 +1,4 @@
-#Aoi Todo Bot User Guide
+# Aoi Todo Bot User Guide
 
 Losing track of your tasks? Aoi Todo Bot is a todo list app to manage your daily tasks with ease.
 
