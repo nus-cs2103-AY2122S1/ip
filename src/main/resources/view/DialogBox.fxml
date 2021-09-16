@@ -5,10 +5,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-border-style: solid; -fx-border-width: 3; -fx-border-color: #1a2c79#1a2c79; -fx-background-color: #7eed94#7eed94;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-style: solid; -fx-border-width: 3; -fx-border-color: #938f5f#938f5f; -fx-background-color: #e2d9b0;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" prefHeight="84.0" prefWidth="253.0" style="-fx-font-family: Tahoma, sans-serif;" text="Label" textFill="#2e2494" wrapText="true" />
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="dialog" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="253.0" text="Label" textFill="#4c3c2c" wrapText="true">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding></Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 50%; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-opacity: 30;" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

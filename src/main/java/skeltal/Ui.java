@@ -11,8 +11,8 @@ public class Ui {
      * @return A String containing the introduction statement.
      */
     public static String introduction() {
-        String intro = "GREETINGS! You have been visited by the CS2103 skeleton "
-                + "who only appears once every 2147483647 years! \n"
+        String intro = "SALUTATIONS! You have been visited by the CS2103 skeleton "
+                + "who only appears once every 2013 years! \n"
                 + "Type updoot in 2013 seconds or you will forever have bad bones :)";
         return intro;
     }
@@ -33,10 +33,8 @@ public class Ui {
      * @return A String that prints a bone
      */
     public static String updoot() {
-        String bone = " _       _\n"
-                + "(_'-----'_)\n"
-                + "(_.'\"\"\"\"._) fsc\n"
-                + "You have been given some Calcium for your bones";
+        String bone = "You have been given some Calcium for your bones\n"
+                + "Thank Mr. Skeltal.";
         return bone;
     }
 }
