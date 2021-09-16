@@ -32,25 +32,22 @@ public class Input {
 
     public ArrayList<Integer> getIndexArray(String tag, int lsSize) throws DukeException {
         if (tag.equals("delete")) {
-            return generateIndexArray(this.input.substring(7), lsSize);
+            return generateIndexArray(lsSize, this.input.substring(7).split(" "));
         } else if (tag.equals("done")) {
-            return generateIndexArray(this.input.substring(5), lsSize);
+            return generateIndexArray(lsSize, this.input.substring(5).split(" "));
         } else {
             return new ArrayList<>();
         }
     }
 
-    public ArrayList<Integer> generateIndexArray(String indexes, int lsSize) throws DukeException {
+    public ArrayList<Integer> generateIndexArray(int lsSize, String ... a) throws DukeException {
         ArrayList<Integer> arr = new ArrayList<>();
-        for (int i = 0; i < indexes.length(); i++) {
-            char c = indexes.charAt(i);
-            if (c != ' ') {
-                int index = Integer.parseInt(String.valueOf(c)) - 1;
-                if (index < 0 || index >= lsSize) {
-                    throw new DukeException("Item does not exist in the list.");
-                }
-                arr.add(index);
+        for (String i : a) {
+            int index = Integer.parseInt(i) - 1;
+            if (index < 0 || index >= lsSize) {
+                throw new DukeException("Item does not exist in the list.");
             }
+            arr.add(index);
         }
         return arr;
     }
