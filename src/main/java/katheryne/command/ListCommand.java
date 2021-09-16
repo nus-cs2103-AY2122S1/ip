@@ -15,6 +15,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
+        ui.say("Here's the list I've stored for you:");
         ui.listTasks(taskList);
     }
 }

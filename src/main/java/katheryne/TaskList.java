@@ -58,6 +58,17 @@ public class TaskList {
         lst.remove(index);
         return true;
     }
+    
+    public TaskList tasksContaining(String keyword) {
+        TaskList taskWithKeyword = new TaskList();
+        for (int i = 1; i <= this.getSize(); i++) {
+            Task t = this.getTask(i - 1);
+            if (t.find(keyword)) {
+                taskWithKeyword.add(t);
+            }
+        }
+        return taskWithKeyword;
+    }
 
     /**
      * Gets the task at the index given in the task list. Note that this method may
@@ -70,11 +81,16 @@ public class TaskList {
         return lst.get(index);
     }
 
-    protected boolean isEmpty() {
+    public boolean isEmpty() {
         return lst.isEmpty();
     }
 
-    protected int getSize() {
+    /**
+     * Gets the size of the taskList.
+     * 
+     * @return
+     */
+    public int getSize() {
         return lst.size();
     }
 

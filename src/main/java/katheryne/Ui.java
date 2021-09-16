@@ -41,7 +41,6 @@ public class Ui {
      * @param lst
      */
     public void listTasks(TaskList lst) {
-        this.say("Here's the list I've stored for you:");
         for (int i = 1; i <= lst.getSize(); i++) {
             this.say(i + ") " + lst.getTask(i - 1));
         }
