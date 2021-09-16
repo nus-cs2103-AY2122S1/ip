@@ -11,12 +11,17 @@
 	 - [Deleting a task: `delete`](#deleting-a-task-delete)
 	 - [Marking a task as done: `done`](#marking-a-task-as-done-done)
 	 - [Finding specified tasks: `find`](#finding-specified-tasks-find)
+	 - [Exiting the program: `bye`](#Exiting-the-program-bye)
+
+
 ## Quick-start
 1.  Ensure you have  `Java 11`  or above installed in your computer.
 2.  Copy the  `anniezero.jar`  file to the folder you want to use as the home folder for AnnieZero.
 3.  Open your terminal and navigate to the home folder for Anniezero.
 4.  Run  `java -jar anniezero.jar`  to start the program.
+
 ## Features
+
 ### Listing all your tasks: `list`
 Format: `list`
 
@@ -62,6 +67,7 @@ if the task has been successfully added.
 Expected usage:
 
 `deadline cs999 assignment / 2021-10-19 23:59` will add a tasks named cs999 assignment that has a deadline of 19 October 2021, 11.59pm.
+
 ### Adding an event task: event
 Format: `event DESCRIPTION / AT_DATE START_TIMEtEND_TIME`
 
@@ -125,3 +131,17 @@ A list of tasks with description that matches the `KEYWORD` will be shown.
 Example usage:
 `find d w sc` will find a task named `Date with Skittle-chan`.
 `find learnbaking` will find a task named `learn baking`.
+
+### Exiting the app: `bye`
+Format: `bye`
+
+Saves the tasks into the hard drive and exits the app.
+
+Expected outcome:
+AnnieZero will say goodbye and close the app after a short pause.
+
+### Saving tasks
+
+Tasks are saved automatically whenever a new task is added and when you exit.
+
+
