@@ -60,7 +60,7 @@ public class Deadline implements Task {
     }
 
     /**
-     * Checks if the timeframe specified after the "/by" keyword is correct.
+     * Checks if there is a  timeframe specified after the "/by" keyword.
      * In the case of reading from the data file, this method also checks for
      * the format of the date when the data file was written and saves the date accordingly.
      * @param s The scanner containing the timeframe component of the command
@@ -77,14 +77,7 @@ public class Deadline implements Task {
         }
 
         try {
-            if (s.hasNext()) {
-                String formatter = s.next();
-                DateTimeFormatter format = DateTimeFormatter.ofPattern(formatter);
-                this.deadline = LocalDate.parse(date, format);
-            } else {
-                this.command += " " + Duke.getFormat();
-                this.deadline = LocalDate.parse(date, currentFormat);
-            }
+            parseTimeFrame(s, date);
         } catch (DateTimeParseException ex) {
             throw new WrongCommandFormatException(
                     "Wrong deadline format specified. \n"
@@ -95,6 +88,25 @@ public class Deadline implements Task {
                             + "settings by using the command `setFormat`"
 
             );
+        }
+    }
+
+    /**
+     * Parses the dateline and checks if it is in the current specified format.
+     * In the case of reading from the data file, checks if the date had been saved in the
+     * correct format.
+     * @param s The scanner containing the saved format from the data file if applicable.
+     * @param date The date to be parsed.
+     * @throws DateTimeParseException
+     */
+    public void parseTimeFrame(Scanner s, String date) throws DateTimeParseException {
+        if (s.hasNext()) {
+            String formatter = s.next();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(formatter);
+            this.deadline = LocalDate.parse(date, format);
+        } else {
+            this.command += " " + Duke.getFormat();
+            this.deadline = LocalDate.parse(date, currentFormat);
         }
     }
 
