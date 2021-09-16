@@ -15,11 +15,16 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private final static String FILE_PATH = "./data/tasks.txt";
+    private final static String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
 
+    /**
+     *
+     * @param stage The JavaFX stage
+     */
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
