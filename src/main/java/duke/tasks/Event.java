@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import duke.exceptions.EventException;
-import jdk.jshell.execution.LoaderDelegate;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -60,14 +59,8 @@ public class Event extends Task {
                 + "-" + date.split("/")[0]);
         return dateObject;
     }
-    /**
-     * Gets the date of the event.
-     *
-     * @return String denoting the date of the event.
-     */
+
     private String getDateInString() {
-        //String date = at.split(" ")[0];
-        //this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
         String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return formattedDate;
     }
@@ -79,16 +72,7 @@ public class Event extends Task {
         return startTimeObject;
     }
 
-
-    /**
-     * Gets the start time of the event.
-     *
-     * @return String denoting the end time of the event.
-     */
     private String getStartTimeInString() {
-        //String time = at.split(" ")[1];
-        //String startTime = time.split("-")[0];
-        //this.startTime = LocalTime.parse(startTime);
         String formattedStartTime = this.startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         return formattedStartTime;
     }
@@ -100,11 +84,6 @@ public class Event extends Task {
         return endTimeObject;
     }
 
-    /**
-     * Gets the end time of the event.
-     *
-     * @return String denoting the end time of the event.
-     */
     private String getEndTimeInString() {
         String time = at.split(" ")[1];
         String endTime = time.split("-")[1];

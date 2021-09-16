@@ -5,27 +5,40 @@ import duke.Storage;
 import duke.notes.NotesList;
 import duke.tasks.TaskList;
 
+/**
+ * Responds to a user's random or invalid input.
+ */
 public class BlahCommand extends Command {
-    String command;
+    private String command;
+
+    /**
+     * Instantiates an object of the AddNoteCommand class.
+     *
+     * @param command User's input.
+     */
     public BlahCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * Executes the action of responding to a user's random input.
+     *
+     * @param tasks List of tasks stored in the task manager.
+     * @param notes List of notes stored in the task manager.
+     * @param ui User interface of the task manager.
+     * @param storage Hard disk containing all the tasks and notes of the task manager.
+     * @return Message to be printed on the user interface to notify the user of the outcome of the input entered.
+     */
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         return ui.respondToBlah();
     }
 
-    /**@Override
-    public String execute(NotesList notes, Ui ui, Storage storage) {
-        return "";
-    };*/
-
-    /**@Override
-    public Boolean isTaskRelatedCommand() {
-        return true;
-    };*/
-
+    /**
+     * Returns a boolean value indicating if user wants to exit the task manager.
+     *
+     * @return Boolean value.
+     */
     @Override
     public Boolean isExit() {
         return false;

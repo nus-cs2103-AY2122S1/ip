@@ -51,41 +51,26 @@ public class Deadline extends Task {
         return "D";
     };
 
-    /**
-     * Gets the date that the task must be completed by.
-     *
-     * @return String denoting the deadline of the task.
-     */
-    private String getDateInString() {
-        //String date = by.split(" ")[0];
-        //this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
-        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return formattedDate;
-    }
-
     private LocalDate getDateObject() {
         String date = by.split(" ")[0];
         LocalDate dataObject = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
         return dataObject;
     }
 
-
-    /**
-     * Gets the time by which the task must be completed.
-     *
-     * @return String denoting the time by which task must be completed.
-     */
-    private String getTimeInString() {
-        //String time = by.split(" ")[1];
-        //this.time = LocalTime.parse(time);
-        String formattedTime = this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
-        return formattedTime;
+    private String getDateInString() {
+        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return formattedDate;
     }
 
     private LocalTime getTimeObject() {
         String time = by.split(" ")[1];
         LocalTime timeObject = LocalTime.parse(time);
         return timeObject;
+    }
+
+    private String getTimeInString() {
+        String formattedTime = this.time.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return formattedTime;
     }
 
     /**

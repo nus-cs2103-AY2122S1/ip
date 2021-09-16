@@ -11,9 +11,17 @@ import duke.exceptions.DukeException;
 
 import java.time.DateTimeException;
 
+/**
+ * Adds a task to the task manager in response to the user's input.
+ */
 public class AddCommand extends Command {
-    String command;
+    private String command;
 
+    /**
+     * Instantiates an object of the AddCommand class.
+     *
+     * @param command User's input.
+     */
     public AddCommand(String command) {
         this.command = command;
     }
@@ -58,8 +66,8 @@ public class AddCommand extends Command {
 
     private String getDeadlineTiming(String taskDescription, Ui ui) {
         try {
-            String by = command.split("/by ")[1];
-            return by;
+            String deadlineTiming = command.split("/by ")[1];
+            return deadlineTiming;
         }  catch(DateTimeException e) {
             return ui.showError("You have keyed in an incorrect date or time! Please check :)");
         }
@@ -73,8 +81,8 @@ public class AddCommand extends Command {
             } else {
                 String descriptionOfTask = getTaskDescription();
                 String descriptionOfDeadline = getDeadlineDescription(descriptionOfTask);
-                String by = getDeadlineTiming(descriptionOfTask, ui);
-                Deadline deadline = new Deadline(descriptionOfDeadline, by);
+                String deadlineTiming = getDeadlineTiming(descriptionOfTask, ui);
+                Deadline deadline = new Deadline(descriptionOfDeadline, deadlineTiming);
                 tasks.addTask(deadline);
                 storage.appendToFile(deadline);
                 return ui.respondToDeadline(tasks.getTasks(), deadline);
@@ -102,8 +110,8 @@ public class AddCommand extends Command {
             } else {
                 String descriptionOfTask = getTaskDescription();
                 String description = getEventDescription(descriptionOfTask);
-                String at = getEventTiming(descriptionOfTask);
-                Event event = new Event(description, at);
+                String eventTiming = getEventTiming(descriptionOfTask);
+                Event event = new Event(description, eventTiming);
                 tasks.addTask(event);
                 storage.appendToFile(event);
                 return ui.respondToEvent(tasks.getTasks(), event);
@@ -114,6 +122,15 @@ public class AddCommand extends Command {
         return "";
     }
 
+    /**
+     * Executes the action of adding a task to the task manager Peppa.
+     *
+     * @param tasks List of tasks stored in the task manager.
+     * @param notes List of notes stored in the task manager.
+     * @param ui User interface of the task manager.
+     * @param storage Hard disk containing all the tasks and notes of the task manager.
+     * @return Message to be printed on the user interface to notify the user of the outcome of the input entered.
+     */
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
        try {
@@ -125,23 +142,18 @@ public class AddCommand extends Command {
             } else if(typeOfTask.equals("event")) {
                 return executeEventCommand(tasks, ui, storage);
             } else {
-                return ui.respondToInvalidCommand();
+                return ui.respondToBlah();
             }
         } catch(DateTimeException e) {
             return ui.showError("You have keyed in an incorrect date or time! Please check :)");
         }
     }
 
-    /**@Override
-    public String execute(NotesList notes, Ui ui, Storage storage) {
-        return "";
-    };*/
-
-    /**@Override
-    public Boolean isTaskRelatedCommand() {
-        return true;
-    };*/
-
+    /**
+     * Returns a boolean value indicating if user wants to exit the task manager.
+     *
+     * @return Boolean value.
+     */
     @Override
     public Boolean isExit() {
         return false;

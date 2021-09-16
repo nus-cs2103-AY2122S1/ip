@@ -62,10 +62,6 @@ public abstract class Task extends Item {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void setDone() {
-        isDone = true;
-    }
-
     /**
      * Mark the particular task as done.
      */
@@ -78,8 +74,6 @@ public abstract class Task extends Item {
      *
      * @return String denoting the Task which will be stored in the hard disk.
      */
-    //public abstract String storeTask();
-
     public void setTaskCompletionStatus(String status) {
         if(status.equals("1")) {
             markAsDone();

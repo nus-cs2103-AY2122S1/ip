@@ -5,12 +5,30 @@ import duke.Storage;
 import duke.notes.NotesList;
 import duke.tasks.TaskList;
 
+/**
+ * Indicates a task as done in response to the user's input.
+ */
 public class DoneCommand extends Command {
-    String taskNumber;
+    private String taskNumber;
+
+    /**
+     * Instantiates an object of the DoneCommand class.
+     *
+     * @param command User's input.
+     */
     public DoneCommand(String command) {
         this.taskNumber = command;
     }
 
+    /**
+     * Executes the action of marking a task as done.
+     *
+     * @param tasks List of tasks stored in the task manager.
+     * @param notes List of notes stored in the task manager.
+     * @param ui User interface of the task manager.
+     * @param storage Hard disk containing all the tasks and notes of the task manager.
+     * @return Message to be printed on the user interface to notify the user of the outcome of the input entered.
+     */
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         try {
@@ -26,16 +44,11 @@ public class DoneCommand extends Command {
         }
     }
 
-    /**@Override
-    public String execute(NotesList notes, Ui ui, Storage storage) {
-        return "";
-    };*/
-
-    /**@Override
-    public Boolean isTaskRelatedCommand() {
-        return true;
-    };*/
-
+    /**
+     * Returns a boolean value indicating if user wants to exit the task manager.
+     *
+     * @return Boolean value.
+     */
     @Override
     public Boolean isExit() {
         return false;

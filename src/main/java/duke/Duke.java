@@ -26,13 +26,14 @@ public class Duke {
         notes = new NotesList(storage.getNotesFromMemory());
     }
 
+    /**
+     * Gets a response to the input entered by the user.
+     *
+     * @param inputFromUser String input entered by the user.
+     * @return Result of executing the command in response to the input entered by the user.
+     */
     public String getResponse(String inputFromUser) {
         Command c = Parser.parse(inputFromUser);
         return c.execute(tasks, notes, ui, storage);
-        /**if(c.isTaskRelatedCommand()) {
-            return c.execute(tasks, ui, storage);
-        } else {
-            return c.execute(notes, ui, storage);
-        }*/
     }
 }

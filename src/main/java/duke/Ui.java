@@ -1,7 +1,6 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.ArrayList;;
 
 import duke.tasks.Task;
 import duke.tasks.ToDo;
@@ -10,7 +9,7 @@ import duke.tasks.Deadline;
 import duke.notes.Note;
 
 /**
- * Prints out the relevant messages and responds to user's inputs on the user interface
+ * Prints out the relevant messages and responds to user's inputs on the user interface.
  */
 public class Ui {
     private String command;
@@ -47,29 +46,6 @@ public class Ui {
     }
 
     /**
-     * Prints out a horizontal dashed line on the user interface.
-     *
-     * @return Horizontal dotted line.
-     */
-    public String showLine() {
-        String prettyLine = "\n______________________________________________________________\n";
-        System.out.println(prettyLine);
-        return prettyLine;
-    }
-
-    /**
-     * Reads the command or inputs entered by the user.
-     *
-     * @return String message when command input by user is read.
-     */
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        this.command = input;
-        return this.command;
-    }
-
-    /**
      * Prints the list of tasks in the application when user asks for it.
      *
      * @param tasks Collection of tasks in the task manager application.
@@ -78,9 +54,10 @@ public class Ui {
     public String respondToList(ArrayList<Task> tasks) {
         String responseToList = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            responseToList = responseToList + "\n" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
+            String index = Integer.toString(i + 1);
+            Task currentTask = tasks.get(i);
+            responseToList = responseToList + "\n" + index + "." + currentTask.toString();
         }
-        System.out.println(responseToList);
         return responseToList;
     }
 
@@ -92,9 +69,11 @@ public class Ui {
      * @return String message when user wants to indicate a task as done.
      */
     public String respondToDone(ArrayList<Task> tasks, Integer taskNumber) {
+        Task currentTask = tasks.get(taskNumber - 1);
+        String taskStatusIcon = currentTask.getStatusIcon();
+        String taskDescription = currentTask.getDescription();
         String responseToDone = "\tNice! I've marked this task as done: \n \t \t" + " ["
-                + tasks.get(taskNumber - 1).getStatusIcon() + "] " + tasks.get(taskNumber - 1).getDescription();
-        System.out.println(responseToDone);
+                + taskStatusIcon + "] " + taskDescription;
         return responseToDone;
     }
 
@@ -106,9 +85,9 @@ public class Ui {
      * @return String message when user wants to delete a task.
      */
     public String respondToDelete(ArrayList<Task> tasks, Task task) {
+        String numberOfTasks = Integer.toString(tasks.size());
         String responseToDelete = "\tNoted. I've removed this task: \n\t\t" + task.toString() +
-                "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
-        System.out.println(responseToDelete);
+                "\n\tNow you have " + numberOfTasks + " tasks in the list.";
         return responseToDelete;
     }
 
@@ -120,9 +99,9 @@ public class Ui {
      * @return String message when todo task is created.
      */
     public String respondToTodo(ArrayList<Task> tasks, ToDo todo) {
+        String numberOfTasks = Integer.toString(tasks.size());
         String responseToToDo = "\t" + "Got it. I've added this task: " + "\n\t" + todo.toString() +
-                "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
-        System.out.println(responseToToDo);
+                "\n\tNow you have " + numberOfTasks + " tasks in the list.";
         return responseToToDo;
     }
 
@@ -134,9 +113,9 @@ public class Ui {
      * @return String message when event task is created.
      */
     public String respondToEvent(ArrayList<Task> tasks, Event event) {
+        String numberOfTasks = Integer.toString(tasks.size());
         String responseToEvent = "\tGot it. I've added this task: " + "\n\t" + event.toString() +
-                "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
-        System.out.println(responseToEvent);
+                "\n\tNow you have " + numberOfTasks+ " tasks in the list.";
         return responseToEvent;
     }
 
@@ -148,20 +127,19 @@ public class Ui {
      * @return String message when deadline task is created.
      */
     public String respondToDeadline(ArrayList<Task> tasks, Deadline deadline) {
-        String respondToDeadline = "\t" + "Got it. I've added this task: " + "\n\t" + deadline.toString() +
-                "\n\tNow you have " + Integer.toString(tasks.size()) + " tasks in the list.";
-        System.out.println(respondToDeadline);
-        return respondToDeadline;
+        String numberOfTasks = Integer.toString(tasks.size());
+        String responseToDeadline = "\t" + "Got it. I've added this task: " + "\n\t" + deadline.toString() +
+                "\n\tNow you have " + numberOfTasks + " tasks in the list.";
+        return responseToDeadline;
     }
 
     /**
-     * Prints the response on the user interface to the blah input by user.
+     * Prints the response on the user interface to a random or invalid input by user.
      *
      * @return String message when user types random command like blah.
      */
     public String respondToBlah() {
         String responseToBlah = "\tOOPS!!! I'm sorry, but I don't know what that means :-(";
-        System.out.println(responseToBlah);
         return responseToBlah;
     }
 
@@ -172,7 +150,6 @@ public class Ui {
      */
     public String respondToBye() {
         String responseToBye = "\tBye. Hope to see you again soon!";
-        System.out.println(responseToBye);
         return responseToBye;
     }
 
@@ -184,41 +161,54 @@ public class Ui {
     public String respondToFind(ArrayList<Task> tasks) {
         String responseToFind = "Here are the matching tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            responseToFind = responseToFind + "\n" + Integer.toString(i + 1) + "." + tasks.get(i).toString();
+            String index = Integer.toString(i + 1);
+            Task currentTask = tasks.get(i);
+            responseToFind = responseToFind + "\n" + index + "." + currentTask.toString();
         }
-        System.out.println(responseToFind);
         return responseToFind;
     }
 
     /**
-     * @return String message in response to invalid commands.
+     * Prints the note that has been created by the user on the user interface.
+     *
+     * @param notes Current list of notes in the task manager.
+     * @param note Note that has been created and added to the task manager.
+     * @return String message indicating that the note has been added and the total number of notes in the task manager.
      */
-    public String respondToInvalidCommand() {
-        String responseToFind = "\tInvalid command!";
-        System.out.println(responseToFind);
-        return responseToFind;
-    }
-
     public String respondToNote(ArrayList<Note> notes, Note note) {
+        String numberOfNotes = Integer.toString(notes.size());
         String responseToNote = "\t" + "Got it. I've added this note: " + "\n\t\t" + note.toString() +
-                "\n\tNow you have " + Integer.toString(notes.size()) + " notes in the list.";
-        System.out.println(responseToNote);
+                "\n\tNow you have " + numberOfNotes + " notes in the list.";
         return responseToNote;
     }
 
+    /**
+     * Prints the list of notes that are stored in the task manager on the user interface.
+     *
+     * @param notes Current list of notes in the task manager.
+     * @return String of list of notes in the task manager.
+     */
     public String respondToNotesList(ArrayList<Note> notes) {
         String responseToNotesList = "Here are the notes in your list:";
         for (int i = 0; i < notes.size(); i++) {
-            responseToNotesList = responseToNotesList + "\n" + Integer.toString(i + 1) + "." + notes.get(i).toString();
+            String currentIndex = Integer.toString(i + 1);
+            Note currentNote = notes.get(i);
+            responseToNotesList = responseToNotesList + "\n" + currentIndex + "." + currentNote.toString();
         }
-        System.out.println(responseToNotesList);
         return responseToNotesList;
     }
 
+    /**
+     * Prints a message on the user interface to notify users that the note has been deleted successfully.
+     *
+     * @param notes Current list of notes in the task manager.
+     * @param note Note that has been created and added to the task manager.
+     * @return String message indicating the note that has been deleted.
+     */
     public String respondToDeleteNote(ArrayList<Note> notes, Note note) {
+        String numberOfNotes = Integer.toString(notes.size());
         String responseToDeleteNote = "\tNoted. I've removed this note: \n\t\t" + note.toString() +
-                "\n\tNow you have " + Integer.toString(notes.size()) + " notes in the list.";
-        System.out.println(responseToDeleteNote);
+                "\n\tNow you have " + numberOfNotes + " notes in the list.";
         return responseToDeleteNote;
     }
 }

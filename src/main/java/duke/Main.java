@@ -24,7 +24,7 @@ public class Main extends Application {
             scene.getStylesheets().add(getClass().getResource("/view/stylesheet.css").toExternalForm());
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("peppa");
+            stage.setTitle("peppa"); //set the title of the window to be peppa
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

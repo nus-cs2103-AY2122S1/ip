@@ -8,12 +8,30 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Deletes a task from the task manager in response to the user's input.
+ */
 public class DeleteCommand extends Command {
-    String taskNumber;
+    private String taskNumber;
+
+    /**
+     * Instantiates an object of the DeleteCommand class.
+     *
+     * @param command User's input.
+     */
     public DeleteCommand(String command) {
         this.taskNumber = command;
     }
 
+    /**
+     * Executes the action of deleting a task from the task manager Peppa.
+     *
+     * @param tasks List of tasks stored in the task manager.
+     * @param notes List of notes stored in the task manager.
+     * @param ui User interface of the task manager.
+     * @param storage Hard disk containing all the tasks and notes of the task manager.
+     * @return Message to be printed on the user interface to notify the user of the outcome of the input entered.
+     */
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage) {
         try {
@@ -32,16 +50,11 @@ public class DeleteCommand extends Command {
 
     }
 
-    /**@Override
-    public String execute(NotesList notes, Ui ui, Storage storage) {
-        return "";
-    };*/
-
-    /**@Override
-    public Boolean isTaskRelatedCommand() {
-        return true;
-    };*/
-
+    /**
+     * Returns a boolean value indicating if user wants to exit the task manager.
+     *
+     * @return Boolean value.
+     */
     @Override
     public Boolean isExit() {
         return false;
