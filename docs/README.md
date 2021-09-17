@@ -18,10 +18,10 @@ A deadline is a task with a description and starts at a specific deadline. <br>
 
 Format: [task] [description] /[time preposition] [deadline]
 <br>
-Date format: yyyy-mm-dd
-<br>
-Time format: hh:mm
-<hr>
+Deadline format:<br>
+- Date format: yyyy-mm-dd
+- Time format: hh:mm
+- Without a format e.g Sunday 2pm
 
 
 
