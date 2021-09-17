@@ -9,3 +9,4 @@ T|0| swim swim swim
 T|0| swim /at 2021-09-16 
 E|0| watch / 12:00 | 
 E|0| watch | 12:00 pm
+D|0| do hw | Thu, Sep 09 2021

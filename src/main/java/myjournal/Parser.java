@@ -159,7 +159,7 @@ public class Parser {
                         + "Try editing the time of an Event or Deadline instead:)");
             }
             Scanner time = new Scanner(newInfo);
-            tasks.getTask(index).setTime(getTimeDate(time));
+            tasks.getTask(index).setTime(parseTimeDate(time));
         } else {
             tasks.getTask(index).setTaskName(newInfo);
         }
@@ -213,7 +213,7 @@ public class Parser {
      * @return The String representation of the time or date of the task.
      * @throws DateTimeParseException An exception thrown if the date or time is invalid.
      */
-    public static String getTimeDate(Scanner line) throws DateTimeParseException {
+    public static String parseTimeDate(Scanner line) throws DateTimeParseException {
         String parsed = "";
         while (line.hasNext()) {
             String currWord = line.next();
@@ -313,7 +313,7 @@ public class Parser {
             }
             taskName = taskName + currWord + " ";
         }
-        return new Event(taskName, getTimeDate(line));
+        return new Event(taskName, parseTimeDate(line));
     }
 
     /**
@@ -334,6 +334,6 @@ public class Parser {
             }
             taskName = taskName + currWord + " ";
         }
-        return new Deadline(taskName, getTimeDate(line));
+        return new Deadline(taskName, parseTimeDate(line));
     }
 }
