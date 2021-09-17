@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,8 +10,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    private static String[] arr;
     private String filepath;
-    private static String arr[];
 
     /**
      * A constructor to create a Storage object.
@@ -61,7 +60,7 @@ public class Storage {
      */
     public String getDescription(String[] arr) {
         String description = "";
-        for(int i = 1; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             if (!(arr[i].charAt(0) == '(')) {
                 description += arr[i] + " ";
             } else {
@@ -79,7 +78,7 @@ public class Storage {
      * @return The starting index of a deadline.
      */
     public int getCounter(String[] arr, int counter) {
-        for(int i = 1; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             if (arr[i].charAt(0) == '(') {
                 counter = i;
                 break;
@@ -95,21 +94,8 @@ public class Storage {
      */
     public static void saveFile(TaskList ls) {
         try {
-            String str = "";
-            for (int i = 0; i < ls.getSize(); i++) {
-                str += (i + 1) + "."
-                        + ls.getTask(i).toString().charAt(1)
-                        + "|" + ls.getTask(i).getStatus()
-                        + " " + ls.getTask(i).getDescription();
-                if (ls.getTask(i) instanceof Deadline || ls.getTask(i) instanceof Event) {
-                    str += "(" + ls.getTask(i).getDeadline() + ")";
-                }
-                if (i != ls.getSize() - 1) {
-                    str += "\n";
-                }
-            }
             FileWriter fileWriter = new FileWriter("./duke.txt");
-            fileWriter.write(str);
+            fileWriter.write(ls.toString());
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -138,7 +124,7 @@ public class Storage {
         Deadline item = new Deadline(description, deadline);
         ls.addTask(item);
         if (arr[0].substring(4).equals("Done")) {
-            ls.markAsDone(ls.getSize()-1);
+            ls.markAsDone(ls.getSize() - 1);
         }
     }
 

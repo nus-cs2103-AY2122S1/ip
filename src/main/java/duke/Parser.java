@@ -1,10 +1,8 @@
 package duke;
 
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-
-import static java.lang.Integer.decode;
 import static java.lang.Integer.parseInt;
+
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the main logic of the code when the user enters an input.
@@ -12,7 +10,7 @@ import static java.lang.Integer.parseInt;
 public class Parser {
     private TaskList taskList;
     private Ui ui;
-    private String arr[];
+    private String[] arr;
 
     /**
      * A constructor to create a parser object.
@@ -48,33 +46,30 @@ public class Parser {
         do {
             try {
                 arr = input.split(" ");
-                String firstWord = arr[0];
-                switch (firstWord) {
-                    case "bye":
-                        return ui.printBye();
-                    case "done":
-                        return parseDone(arr);
-                    case "delete":
-                        return parseDelete(arr);
-                    case "todo":
-                        return parseTodo(arr);
-                    case "deadline":
-                        return parseDeadline(arr);
-                    case "event":
-                        return parseEvent(arr);
-                    case "list":
-                        return parseList();
-                    case "find":
-                        return parseFind(arr);
-                    case "search":
-                        return parseSearch(arr);
-                    default:
-                        throw new InvalidCommandException("Command Not Found");
+                switch (arr[0]) {
+                case "bye":
+                    return ui.printBye();
+                case "done":
+                    return parseDone(arr);
+                case "delete":
+                    return parseDelete(arr);
+                case "todo":
+                    return parseTodo(arr);
+                case "deadline":
+                    return parseDeadline(arr);
+                case "event":
+                    return parseEvent(arr);
+                case "list":
+                    return parseList();
+                case "find":
+                    return parseFind(arr);
+                case "search":
+                    return parseSearch(arr);
+                default:
+                    throw new InvalidCommandException("Command Not Found");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | DateTimeParseException e) {
                 return e.toString();
-            } catch (DateTimeParseException e) {
-                return e.getMessage();
             }
         } while (!input.equals("bye"));
     }
@@ -83,8 +78,8 @@ public class Parser {
      * Deals with the user input when the user types "done".
      *
      * @param arr Array of strings from the user input.
-     * @throws InvalidCommandException If the following input is not valid.
      * @return A response when the user types done.
+     * @throws InvalidCommandException If the following input is not valid.
      */
     public String parseDone(String[] arr) throws InvalidCommandException,
             InvalidValueException {
@@ -96,9 +91,9 @@ public class Parser {
      * Deals with the user input when the user types "delete".
      *
      * @param arr Array of strings from the user input.
+     * @return A response when the user types delete.
      * @throws InvalidCommandException If the following input is not valid.
      * @throws InvalidValueException If the following input is not a valid number.
-     * @return A response when the user types delete.
      */
     public String parseDelete(String[] arr) throws InvalidCommandException,
             InvalidValueException {
@@ -110,8 +105,8 @@ public class Parser {
      * Deals with the user input when the user types "todo".
      *
      * @param arr Array of strings from the user input.
-     * @throws EmptyDescriptionException If the next input is missing.
      * @return A response when the user types todo.
+     * @throws EmptyDescriptionException If the next input is missing.
      */
     public String parseTodo(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
@@ -125,8 +120,8 @@ public class Parser {
      * Deals with the user input when the user types "deadline".
      *
      * @param arr Array of strings from the user input.
-     * @throws EmptyDescriptionException If the next input is missing.
      * @return A response when the user types deadline.
+     * @throws EmptyDescriptionException If the next input is missing.
      */
     public String parseDeadline(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
@@ -140,8 +135,8 @@ public class Parser {
      * Deals with the user input when the user types "event".
      *
      * @param arr Array of strings from the user input.
-     * @throws EmptyDescriptionException If the next input is missing.
      * @return A response when the user types event.
+     * @throws EmptyDescriptionException If the next input is missing.
      */
     public String parseEvent(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
@@ -163,8 +158,8 @@ public class Parser {
      * Deals with the user input when the user types "find".
      *
      * @param arr Array of strings from the user input.
-     * @throws InvalidCommandException If the following input is not valid.
      * @return A response when the user types find.
+     * @throws InvalidCommandException If the following input is not valid.
      */
     public String parseFind(String[] arr) throws InvalidCommandException {
         if (arr.length == 1) {
@@ -182,8 +177,8 @@ public class Parser {
      * Deals with the user input when the user types "find".
      *
      * @param arr Array of strings from the user input.
-     * @throws InvalidCommandException If the following input is not valid.
      * @return A string containing a list of tasks that matches the keyword.
+     * @throws InvalidCommandException If the following input is not valid.
      */
     public String parseSearch(String[] arr) throws InvalidCommandException {
         if (arr.length == 1) {

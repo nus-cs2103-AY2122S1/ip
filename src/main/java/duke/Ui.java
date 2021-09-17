@@ -1,7 +1,5 @@
 package duke;
 
-import static java.lang.Integer.parseInt;
-
 /**
  * Represents a class that deals with interaction with the user.
  */
@@ -12,8 +10,7 @@ public class Ui {
      * @return A string containing a welcome message.
      */
     public String printWelcome() {
-        return (
-                "Hello! I'm Duke :) \n"
+        return "Hello! I'm Duke :) \n"
                         + "Type: \n"
                         + "1. A task (todo/deadline/event) followed by description to add tasks \n"
                         + "   e.g \"deadline submit homework /by Sunday 12 pm\" \n"
@@ -22,8 +19,7 @@ public class Ui {
                         + "4. \"search [keyword]\" to find a matching keyword contained in a task \n"
                         + "5. \"done [number]\" to mark a particular task as done \n"
                         + "6. \"delete [number]\" to delete a particular task \n"
-                        + "7. \"bye\" to exit"
-        );
+                        + "7. \"bye\" to exit";
     }
 
     /**
@@ -38,7 +34,8 @@ public class Ui {
      * Informs the user that a task has been marked as done.
      * @return A string to show that a task has been marked as done.
      */
-    public String printDone() { return "Nice! I've marked this task as done: ";
+    public String printDone() {
+        return "Nice! I've marked this task as done: ";
     }
 
     /**

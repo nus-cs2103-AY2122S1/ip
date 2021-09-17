@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -27,7 +26,7 @@ public class TaskList {
      */
     public static String getDescription(String[] arr) {
         String str = "";
-        for(int i = 1; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             if (!(arr[i].charAt(0) == '/')) {
                 str += arr[i] + " ";
             } else {
@@ -46,7 +45,7 @@ public class TaskList {
     public static String getDeadline(String[] arr) throws DateTimeParseException {
         String str = "";
         boolean isSlash = false;
-        for(int i = 1; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             if (!isSlash) {
                 if (arr[i].charAt(0) == '/') {
                     isSlash = true;
@@ -211,7 +210,7 @@ public class TaskList {
         searchList = new ArrayList<>();
         for (int i = 0; i < ls.size(); i++) {
             String[] arr = ls.get(i).getDescription().split(" ");
-            for(int j = 0; j < arr.length; j++) {
+            for (int j = 0; j < arr.length; j++) {
                 if (arr[j].equals(search)) {
                     searchList.add(ls.get(i));
                     break;
@@ -240,7 +239,7 @@ public class TaskList {
         searchList = new ArrayList<>();
         for (int i = 0; i < ls.size(); i++) {
             String[] arr = ls.get(i).getDescription().split(" ");
-            for(int j = 0; j < arr.length; j++) {
+            for (int j = 0; j < arr.length; j++) {
                 if (arr[j].contains(search)) {
                     searchList.add(ls.get(i));
                     break;
@@ -257,5 +256,23 @@ public class TaskList {
             }
             return str;
         }
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < getSize(); i++) {
+            str += (i + 1) + "."
+                    + getTask(i).toString().charAt(1)
+                    + "|" + getTask(i).getStatus()
+                    + " " + getTask(i).getDescription();
+            if (getTask(i) instanceof Deadline || getTask(i) instanceof Event) {
+                str += "(" + getTask(i).getDeadline() + ")";
+            }
+            if (i != getSize() - 1) {
+                str += "\n";
+            }
+        }
+        return str;
     }
 }

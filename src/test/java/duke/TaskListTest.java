@@ -1,10 +1,10 @@
 package duke;
 
-import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     String s = "event swimming /on Monday 2pm";
