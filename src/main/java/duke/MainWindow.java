@@ -59,6 +59,8 @@ public class MainWindow extends AnchorPane {
             userInput.setDisable(true);
             sendButton.setDisable(true);
 
+            //Solution below adapted from https://stackoverflow.com/questions/21974415/
+            // how-to-close-this-javafx-application-after-showing-a-message-in-a-text-area-elem/21996863
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
