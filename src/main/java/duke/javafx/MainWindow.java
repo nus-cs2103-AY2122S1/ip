@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greet = Ui.greet();
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(greet, dukeImage)
+                DialogBox.getDukeDialog(greet, dukeImage, false)
         );
     }
 
@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void showException(Exception e) {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+                DialogBox.getDukeDialog(e.getMessage(), dukeImage, true)
         );
     }
 
@@ -70,10 +70,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String[] response = duke.getResponse(input);
+        String output = response[0];
+        boolean isWarning = response[1].equals("F");
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage, isWarning),
+                DialogBox.getDukeDialog(output, dukeImage, isWarning)
         );
         userInput.clear();
     }

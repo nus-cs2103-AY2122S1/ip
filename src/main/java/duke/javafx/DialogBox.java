@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -25,7 +26,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private final boolean isWarning;
+
+    private DialogBox(String text, Image img, boolean isWarning) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,6 +39,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        this.isWarning = isWarning;
+
+        if (this.isWarning) {
+            dialog.setTextFill(Color.color(1, 0, 0));
+        }
         displayPicture.setImage(img);
     }
 
@@ -49,12 +57,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text, Image img, boolean isWarning) {
+        return new DialogBox(text, img, isWarning);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image img, boolean isWarning) {
+        var db = new DialogBox(text, img, isWarning);
         db.flip();
         return db;
     }

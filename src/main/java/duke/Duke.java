@@ -33,18 +33,25 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response based on the input command. The response is an array of String with two elements:
+     * <ul>
+     *     <li>The first element is the corresponding response of the input that will be displayed on the GUI;</li>
+     *     <li>The second element is either {@code T} or {@code F}. It indicates whether the input is a valid command.
+     *     </li>
+     * </ul>
+     *
+     * @param input The input command.
+     * @return response An array of String described above.
      */
-    public String getResponse(String input) {
+    public String[] getResponse(String input) {
         try {
             Command command = Parser.parseCommand(input);
             if (command.isExit()) {
                 Platform.exit();
             }
-            return command.execute(this.tasks, this.storage);
+            return new String[] {command.execute(this.tasks, this.storage), "T"};
         } catch (DukeException e) {
-            return e.getMessage();
+            return new String[] {e.getMessage(), "F"};
         }
     }
 }
