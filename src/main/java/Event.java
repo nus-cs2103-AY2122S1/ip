@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A task
+ */
 public class Event extends Task {
     protected String dateNum;
     protected LocalDate date;
