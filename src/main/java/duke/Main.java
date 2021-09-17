@@ -3,12 +3,10 @@ package duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * A GUI for Duke using FXML.
@@ -16,7 +14,6 @@ import java.util.Objects;
 public class Main extends Application {
 
     private final Duke duke = new Duke("./data/tasks.json");
-    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.jpg")));
 
     @Override
     public void start(Stage stage) {
