@@ -16,6 +16,7 @@ import duke.command.UnsupportedCommandException;
  * Responsible for parsing of command line user input.
  */
 public class Parser {
+    
     /**
      * Parses and returns the command represented by the user input.
      *
@@ -24,9 +25,10 @@ public class Parser {
      * @throws UnsupportedCommandException If user command is not supported.
      * @throws MalformedCommandException If a supported user command has the wrong format.
      */
-    public static Command parse(String userInput) throws UnsupportedCommandException, MalformedCommandException {
-        String[] userInputSplit = userInput.split(" ", 2);
-        String userCommand = userInputSplit[0];
+    public static Command parse(String userInput) throws
+            UnsupportedCommandException, MalformedCommandException {
+
+        String userCommand = getUserCommand(userInput);
 
         switch (userCommand){
         case ListCommand.COMMAND_IDENTIFIER:
@@ -48,5 +50,29 @@ public class Parser {
         default:
             throw new UnsupportedCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    /**
+     * Returns the string identifier of the user's command.
+     *
+     * @param userInput String input from user.
+     * @return String identifier of the user's command.
+     */
+    public static String getUserCommand(String userInput) {
+        String[] userInputSplit = userInput.split(" ", 2);
+        String userCommand = userInputSplit[0];
+        return userCommand;
+    }
+
+    /**
+     * Returns the parameters related to the user command.
+     *
+     * @param userInput String input from user.
+     * @return String parameters of the user command.
+     */
+    public static String getCommandParams(String userInput) {
+        String[] userInputSplit = userInput.split(" ", 2);
+        String commandParams = userInputSplit[1];
+        return commandParams;
     }
 }

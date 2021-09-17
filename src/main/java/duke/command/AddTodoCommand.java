@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.parser.Parser;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -20,12 +21,13 @@ public class AddTodoCommand extends AddCommand {
         assert userInput != null : "User input should be null for the creation of a Command";
 
         try {
-            String description = userInput.split(" ", 2)[1];
-            Task task = new Todo(description);
+            String commandParams = Parser.getCommandParams(userInput);
+            String taskDescription = getTaskDescription(commandParams);
+            Task task = new Todo(taskDescription);
             return new AddTodoCommand(task);
-        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-            throw new MalformedCommandException("Creating an todo needs to follow the following format: " +
-                    "todo [description]");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MalformedCommandException("Creating an todo needs to follow the following "
+                    + "format: todo [description]");
         }
     }
 

@@ -26,9 +26,8 @@ public class DeleteCommand implements Command {
             int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
             return new DeleteCommand(taskIndex);
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            throw new MalformedCommandException(
-                    "Please provide a valid integer index for the task you want to delete like so: "
-                            + "delete [taskIndex in integer form]");
+            throw new MalformedCommandException("Please provide a valid integer index for the task"
+                    + " you want to delete like so: " + "delete [taskIndex in integer form]");
         }
     }
 
@@ -41,10 +40,5 @@ public class DeleteCommand implements Command {
         Task taskDeleted = tasks.delete(taskIndex - 1);
         int numTasksRemaining = tasks.numTasks();
         return ui.showTaskDeletedMessage(taskDeleted, numTasksRemaining);
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

@@ -26,9 +26,8 @@ public class DoneCommand implements Command {
             int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
             return new DoneCommand(taskIndex);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new MalformedCommandException(
-                    "Please provide a valid integer index for the task you want to mark as done like so: "
-                            + "done [taskIndex in integer form]");
+            throw new MalformedCommandException("Please provide a valid integer index for the task"
+                    + " you want to mark as done like so: done [taskIndex in integer form]");
         }
     }
 
@@ -40,10 +39,5 @@ public class DoneCommand implements Command {
     public String execute(TaskList tasks, Ui ui) throws MalformedCommandException {
         Task taskMarkedDone = tasks.markTaskDone(taskIndex - 1);
         return ui.showTaskDoneMessage(taskMarkedDone);
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }
