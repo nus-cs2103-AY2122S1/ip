@@ -22,7 +22,7 @@ public class Event extends Task {
         super(str.split(" /", 2)[0]);
         String[] command = str.split(" /", 2);
         if (command.length == 1) {
-            throw new DukeArgumentException("No commands specified for task 'deadline'!");
+            throw new DukeArgumentException("No commands specified for task 'event'!");
         }
         String[] commandAndDate = command[1].split(" ", 2);
         if (!commandAndDate[0].equals("at")) {
