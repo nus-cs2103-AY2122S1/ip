@@ -1,4 +1,4 @@
-![app icon](images/aegir_icon.png)
+![app icon](docs/images/aegir_icon.png)
 # PATS: User Guide
 
 PATS stands for "Primitive Aegir Terminal Service". It is a task manager that helps you to manage todos, events and 
@@ -16,7 +16,7 @@ deadlines.
    data on runtime.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br><br>
-   ![Ui](images/Ui.PNG)
+   ![Ui](docs/images/Ui.PNG)
 
 --------------------------------------------------------------------------------------------------------------------
 
