@@ -16,6 +16,10 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Creates a task list
+     * @param storageList list of storageElement
+     */
     public TaskList(List<StorageElement> storageList) {
         assert storageList.size() > 0 : "StorageList length should not be 0";
         taskList = new ArrayList<>();
@@ -34,7 +38,6 @@ public class TaskList {
 
     /**
      * Adds task to list of tasks
-     * @param task
      */
     public void addTask(Task task) {
         this.taskList.add(task);
@@ -73,6 +76,11 @@ public class TaskList {
         return this.taskList.remove(index);
     }
 
+    /**
+     * Find a task by key word
+     * @param keyWords keyword to be searched
+     * @return tasks found in form of strings
+     */
     public String findTaskByKeyWord(String ... keyWords) {
         boolean canFind = false;
         String description = "";
@@ -99,6 +107,10 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    /**
+     * String representation of TaskList
+     * @return String representation of taskList
+     */
     public String toString() {
         if (this.taskList.size() == 0) {
             return "Empty Task List";

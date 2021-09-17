@@ -3,6 +3,10 @@ package duke.tasks;
 import duke.main.StorageElement;
 
 public class Todo extends Task {
+    /**
+     * Creates new todo
+     * @param description creates new todo task
+     */
     public Todo(String description) {
         super(description);
         this.taskIcon = "T";

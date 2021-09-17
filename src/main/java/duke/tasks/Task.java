@@ -36,7 +36,7 @@ public abstract class Task {
      * This is like a factory methods to generate Task object
      *
      * @param storageElement Storage Element object - a template for storage information
-     * @return
+     * @return return the Task
      */
     public static Task of(StorageElement storageElement) {
         if (storageElement.getTaskIcon().equals("T")) {
@@ -55,7 +55,7 @@ public abstract class Task {
      *
      * @return Storage element to be saved to disk
      */
-    abstract public StorageElement getStorageElement();
+    public abstract StorageElement getStorageElement();
 
     private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X

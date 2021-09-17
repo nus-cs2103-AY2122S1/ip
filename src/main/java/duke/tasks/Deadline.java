@@ -1,14 +1,14 @@
 package duke.tasks;
 
-import duke.main.StorageElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.main.StorageElement;
 /**
  * Represents task with deadline
  */
 public class Deadline extends Task {
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Creates Deadline object from description and deadline time
@@ -22,16 +22,17 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(time);
     }
 
-    private String getFormattedTime() {
-        return this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-    }
-
     /**
-     * {@inheritDoc}
+     * Creates deadline
+     * @param storageElement storageElement taken from Storage class
      */
     public Deadline(StorageElement storageElement) {
         super(storageElement);
         this.by = storageElement.getTime();
+    }
+
+    private String getFormattedTime() {
+        return this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     public String toString() {
@@ -39,7 +40,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Get storage element
+     * @return storage element to be returned
      */
     @Override
     public StorageElement getStorageElement() {

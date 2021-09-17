@@ -1,11 +1,20 @@
 package duke.main;
 
-import duke.commands.*;
+import java.util.Arrays;
+import java.util.List;
+
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Represents a class that handles reading all user input
@@ -24,7 +33,7 @@ public class Parser {
     }
 
     private static boolean isLowerCase(String input) {
-        return input == input.toLowerCase();
+        return input.equals(input.toLowerCase());
     }
 
     /**

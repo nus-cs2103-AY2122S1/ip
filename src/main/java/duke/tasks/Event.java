@@ -1,12 +1,27 @@
 package duke.tasks;
 
-import duke.main.StorageElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
-    private LocalDate at;
+import duke.main.StorageElement;
 
+public class Event extends Task {
+    private final LocalDate at;
+
+    /**
+     * Creates Event
+     * @param storageElement storageElement taken from Storage class
+     */
+    public Event(StorageElement storageElement) {
+        super(storageElement);
+        this.at = storageElement.getTime();
+    }
+
+    /**
+     * Creates Event
+     * @param description description of event
+     * @param time time of event
+     */
     public Event(String description, String time) {
         super(description);
         this.taskIcon = "E";
@@ -17,13 +32,10 @@ public class Event extends Task {
         return this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
-    public Event(StorageElement storageElement) {
-        super(storageElement);
-        this.at = storageElement.getTime();
-    }
+
 
     public String toString() {
-        return "[" + this.taskIcon + "]" + super.toString() + " (at: " + this.getFormattedTime() +")";
+        return "[" + this.taskIcon + "]" + super.toString() + " (at: " + this.getFormattedTime() + ")";
     }
 
     @Override

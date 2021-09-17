@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.util.Arrays;
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Represents abstract class for all user command

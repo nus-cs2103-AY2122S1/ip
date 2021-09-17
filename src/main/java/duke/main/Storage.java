@@ -1,7 +1,5 @@
 package duke.main;
 
-import duke.exceptions.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,15 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+
 /**
  * Represents as class that handles saving/loading tasks to/from hard disk
  */
 public class Storage {
     private static final String DONE = "1";
     private static final String NOT_DONE = "0";
-    private static String DELIMITER = " | ";
-    private static String DELIMITER_REGEX = " \\| ";
-    private static String NUM_TASK_DONE = "Number of tasks done";
+    private static final String DELIMITER = " | ";
+    private static final String DELIMITER_REGEX = " \\| ";
+    private static final String NUM_TASK_DONE = "Number of tasks done";
     private String filePath;
     private int numTaskDone;
     /**

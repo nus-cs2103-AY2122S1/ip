@@ -8,7 +8,7 @@ import duke.tasks.Task;
  * Represents a class that handles all Ui responsibility
  */
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -98,6 +98,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Shows done task to Ui
+     * @param task task that has been marked done
+     * @return output to user
+     */
     public String showDoneTask(Task task) {
         String output = "";
         output += "Nice! I've marked this task as done:\n";
@@ -105,6 +110,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Shows the number of task the user currently have
+     * @param numTasks number of tasks
+     * @return output to user
+     */
     public String showNumTask(int numTasks) {
         if (numTasks == 1 || numTasks == 0) {
             return "Now you have " + numTasks + " task in the list.";
