@@ -5,7 +5,7 @@ public class Ui {
      * Print the greet expressions
      */
     public static String greet() {
-        return "    Hello, I'm Duke. What can I do for you?";
+        return "Hello, I'm Duke. What can I do for you?";
     }
 
     /**
@@ -15,9 +15,9 @@ public class Ui {
      * @param task the task want to add to the list
      */
     public static String addTask(TaskList taskList, Task task) {
-        String line1 = "    Got it. I've added this task:\n";
+        String line1 = "Got it. I've added this task:\n";
         String line2 =  task.toString() + "\n";
-        String line3 = "    Now you have " + taskList.size() + " tasks in the list.\n";
+        String line3 = "Now you have " + taskList.size() + " tasks in the list.\n";
         return line1 + line2 + line3;
     }
 
@@ -25,7 +25,7 @@ public class Ui {
      * Handle bye category input
      */
     public static String bye() {
-        return  "   Bye. Hope to see you again soon!\n";
+        return  "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -38,7 +38,7 @@ public class Ui {
         String newStr;
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            newStr = "    " + (i + 1) + ". " + task.toString() + "\n";
+            newStr =  (i + 1) + ". " + task.toString() + "\n";
             str = str + newStr;
         }
         return str;
@@ -59,15 +59,15 @@ public class Ui {
      * @param task the task that want to be deleted from the list
      */
     public static String delete(TaskList taskList, Task task) {
-        String line1 = "    Got it. I've removed this task:\n";
-        String line2 = "    " + task.toString() + "\n";
-        String line3 = "    Now you have " + taskList.size() + " tasks in the list.\n";
+        String line1 = "Got it. I've removed this task:\n";
+        String line2 = task.toString() + "\n";
+        String line3 = "Now you have " + taskList.size() + " tasks in the list.\n";
         return line1 + line2 + line3;
     }
 
     public static String update(Task task) {
-        String line1 = " Got it. I've updated this task:\n";
-        String line2 = "    " + task.toString() + "\n";
+        String line1 = "Got it. I've updated this task:\n";
+        String line2 = task.toString() + "\n";
         return line1 + line2;
     }
 
