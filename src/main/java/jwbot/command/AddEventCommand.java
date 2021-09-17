@@ -3,7 +3,6 @@ package jwbot.command;
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
 import jwbot.data.task.Event;
-import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 

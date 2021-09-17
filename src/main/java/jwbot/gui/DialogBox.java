@@ -1,4 +1,4 @@
-package jwbot;
+package jwbot.gui;
 
 import java.io.IOException;
 import java.util.Collections;

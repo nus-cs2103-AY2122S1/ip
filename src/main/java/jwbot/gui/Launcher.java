@@ -1,4 +1,4 @@
-package jwbot;
+package jwbot.gui;
 
 import javafx.application.Application;
 

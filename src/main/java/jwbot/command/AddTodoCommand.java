@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
-import jwbot.data.task.Task;
 import jwbot.data.task.Todo;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;

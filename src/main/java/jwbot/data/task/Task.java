@@ -27,6 +27,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Second constructor of the task.
+     *
+     * @param description the description of the task.
+     * @param isDone whether the task is done
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

@@ -22,9 +22,6 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
-        assert tasks != null;
-        assert ui != null;
-        assert storage != null;
         try {
             tasks.backupTasks();
             Deadline deadline = processTask(tasks);
