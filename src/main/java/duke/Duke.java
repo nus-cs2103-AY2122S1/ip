@@ -30,7 +30,6 @@ public class Duke {
 
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage();
         this.tasks = new TaskList();
     }
 
@@ -42,7 +41,7 @@ public class Duke {
      */
     public String initialise() {
         try {
-            storage.loadTasks(tasks);
+            Storage.loadTasks(tasks);
         } catch (StorageException e) {
             return ui.showErrorMessage(e);
         }
@@ -54,7 +53,7 @@ public class Duke {
      */
     public void saveTasks() {
         try {
-            storage.saveTasks(tasks);
+            Storage.saveTasksToFile(tasks, Storage.FILE_NAME);
         } catch (StorageException e) {
             ui.showErrorMessage(e);
         }

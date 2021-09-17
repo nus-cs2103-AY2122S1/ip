@@ -3,6 +3,7 @@ package duke.parser;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
+import duke.command.ArchiveCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -45,6 +46,8 @@ public class Parser {
             return AddEventCommand.create(userInput);
         case FindCommand.COMMAND_IDENTIFIER:
             return FindCommand.create(userInput);
+        case ArchiveCommand.COMMAND_IDENTIFIER:
+            return ArchiveCommand.create(userInput);
         case ExitCommand.COMMAND_IDENTIFIER:
             return ExitCommand.create();
         default:
