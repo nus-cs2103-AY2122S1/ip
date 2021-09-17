@@ -14,18 +14,23 @@ import java.io.IOException;
  */
 public class Storage {
 
-    /**
+    /**￼
      * Save the current taskList to disk.
      * 
      * @param taskList Current list of tasks.
      */
     public static void save(TaskList taskList) {
-        File file =  new File("data/TaskList.ser");
+        File file_dir = new File("data");
+        if (! file_dir.exists()) {
+            file_dir.mkdir();
+        }
+        File file = new File("data/TaskList.ser");
         if (! file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 assert 1 == 0 : "IO ERROR " + e.toString();
+                e.printStackTrace();
             }
         }
         try {
@@ -36,11 +41,12 @@ public class Storage {
             fileOut.close();
         } catch (IOException e) {
             assert 1 == 0 : "IO ERROR " + e.toString();
+            e.printStackTrace();
         }
     }
 
     /**
-     * Load the taskList saved on disk. Called when Duke is started. 
+     * Load the taskList saved on disk. Called when Duke is started.
      * 
      * @return The taskList stored on the disk.
      */
@@ -54,14 +60,16 @@ public class Storage {
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 try {
                     TaskList tasks = (TaskList) in.readObject();
-                    in.close();
                     return tasks; 
                 } catch (ClassNotFoundException e) {
-                    in.close();
                     assert 1 == 0 : "IO ERROR " + e.toString();
+                    e.printStackTrace();
+                } finally {
+                    in.close();
                 }
             } catch (IOException e) {
                 assert 1 == 0 : "IO ERROR " + e.toString();
+                e.printStackTrace();
             }
         }
         return new TaskList();

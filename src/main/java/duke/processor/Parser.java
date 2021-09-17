@@ -109,7 +109,7 @@ public class Parser {
                     }
                     return out;
                 }
-            } catch (DukeExcpetion | DateTimeParseException e) {
+            } catch (DukeExcpetion | DateTimeParseException | IndexOutOfBoundsException e) {
                 return new Event(name, newInput.substring(timeIndex + 4));
             }
         }
@@ -131,7 +131,7 @@ public class Parser {
                 } else {
                     return new Doafter(name, startDate);
                 }
-            } catch (DukeExcpetion e) {
+            } catch (DukeExcpetion | IndexOutOfBoundsException | DateTimeParseException e) {
                 return new Doafter(name, newInput.substring(timeIndex + 7));
             }
         }
@@ -153,7 +153,7 @@ public class Parser {
                 } else {
                     return new Deadline(name, endDate);
                 }
-            } catch (DukeExcpetion e) {
+            } catch (DukeExcpetion | IndexOutOfBoundsException | DateTimeParseException e) {
                 return new Deadline(name, newInput.substring(timeIndex + 4));
             }
         }
