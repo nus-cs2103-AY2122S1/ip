@@ -1,8 +1,1 @@
 [T][ ] kill morty
-[T][ ] kill wilbur
-[E][ ] kill wilbur --2021-09-01T12:00
-[E][ ] cs2103 tutorial --2021-09-02T13:00
-[T][ ] kill rick
-[T][ ] hello
-[D][ ] chemistry homework --2021-09-27T12:00
-[E][ ] chemistry lesson --2021-09-27T12:00

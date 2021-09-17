@@ -2,7 +2,7 @@
 Duke can help you sort out your life! Just give him a chance.
 
 ## Interface
-![Image of Duke](https://wilburrito.github.com/images/Ui.png)
+![Image of Duke](https://github.com/wilburrito/ip/tree/master/docs/Ui.png)
 
 ## Features 
 

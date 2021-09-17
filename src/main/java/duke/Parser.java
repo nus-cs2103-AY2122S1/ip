@@ -193,6 +193,9 @@ public class Parser {
             try {
                 String[] splitString = input.split(" ");
                 if (splitString.length == 1) {
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! Choose the task number to be considered done.\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! Choose the task number to be considered done.\n"
@@ -202,7 +205,9 @@ public class Parser {
 
                 String taskItemNumber = splitString[1];
                 if (Integer.parseInt(taskItemNumber) > Duke.getTaskList().size()) {
-
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! Choose a valid task number to be considered done.\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! Choose a valid task number to be considered done.\n"
@@ -219,6 +224,9 @@ public class Parser {
             try {
                 String actualToDo = input.replace(input.split(" ")[0], "");
                 if (actualToDo.equals("")) {
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! The description of a todo cannot be empty.\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! The description of a todo cannot be empty.\n"
@@ -237,6 +245,9 @@ public class Parser {
             try {
                 input = input.replace(input.split(" ")[0], "");
                 if (input.split("/").length == 1) {
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! The description or by-date (or both) cannot be empty.\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! The description or by-date (or both) cannot be empty.\n"
@@ -262,6 +273,10 @@ public class Parser {
             try {
                 input = input.replace(input.split(" ")[0], "");
                 if (input.split("/").length == 1) {
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! The description of an event,"
+                            + " as well as its date and time, cannot be empty.\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! The description of an event,"
@@ -296,6 +311,9 @@ public class Parser {
 
             try {
                 if (input.split(" ").length == 1) {
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! Please state the task number that you want to delete.\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! Please state the task number that you want to delete.\n"
@@ -312,6 +330,9 @@ public class Parser {
         } else if (input.split(" ")[0].equals("find")) {
             try {
                 if (input.split(" ").length == 1) {
+                    response = "____________________________________________________________\n"
+                            + "☹ OOPS!!! Please tell me what you want to find!\n"
+                            + "____________________________________________________________";
                     throw new DukeException(
                             "____________________________________________________________\n"
                                     + "☹ OOPS!!! Please tell me what you want to find!\n"
