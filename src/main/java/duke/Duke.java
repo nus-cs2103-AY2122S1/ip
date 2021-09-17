@@ -20,7 +20,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage("tasks.txt");
+        storage = new Storage("data/tasks.txt");
         try {
             taskList = storage.load();
         } catch (Exception e) {

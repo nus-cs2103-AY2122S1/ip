@@ -102,7 +102,9 @@ public class Storage {
      */
     public void createNewFile() {
         File file = new File(fileName);
+        File directory = new File(file.getParent());
         try {
+            directory.mkdir();
             boolean fileCreated = file.createNewFile();
             if (!fileCreated) {
                 System.out.println("Error: File already exists");
