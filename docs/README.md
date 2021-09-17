@@ -34,7 +34,7 @@ Example:
 Expected outcome:
 The task `buy groceries` has been added to the list.
 
-<img src ="/src/main/resources/images/todo.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/todo.png?raw=true" width = "500" height = "300">
 
 
 
@@ -54,7 +54,7 @@ Examples:
 Expected outcome:
 The deadline `finish iP` to be completed by the given date and time has been added to the list.
 
-<img src ="/src/main/resources/images/deadline.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/deadline.png?raw=true" width = "500" height = "300">
 
 
 
@@ -73,7 +73,7 @@ Examples:
 Expected outcome:
 The `project meeting` event scheduled for the given date and time has been added to the list.
 
-<img src ="/src/main/resources/images/event.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/event.png?raw=true" width = "500" height = "300">
 
 
 
@@ -88,7 +88,7 @@ Examples:
 Expected outcome:
 The `4th` item in the task list is deleted.
 
-<img src ="/src/main/resources/images/delete.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/delete.png?raw=true" width = "500" height = "300">
 
 
 
@@ -103,7 +103,7 @@ Examples:
 Expected outcome:
 List of tasks that contains the word `quiz`
 
-<img src ="/src/main/resources/images/find.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/find.png?raw=true" width = "500" height = "300">
 
 
 
@@ -118,7 +118,7 @@ Examples:
 Expected outcome:
 The `3rd` item in the task list is marked as done.
 
-<img src ="/src/main/resources/images/done.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/done.png?raw=true" width = "500" height = "300">
 
 
 
@@ -133,7 +133,7 @@ Examples:
 Expected outcome:
 The current list of tasks is displayed.
 
-<img src ="/src/main/resources/images/list.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/list.png?raw=true" width = "500" height = "300">
 
 
 
@@ -148,7 +148,7 @@ Examples:
 Expected outcome:
 The syntax and purpose of the find command is displayed.
 
-<img src ="/src/main/resources/images/help.png?raw=true" width = "500" height = "300">
+<img src ="\https://github.com/aishh12/ip/blob/master/src/main/resources/images/help.png?raw=true" width = "500" height = "300">
 
 
 
