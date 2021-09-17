@@ -32,11 +32,11 @@ repositories {
 }
 
 application {
-    mainClassName = "duke.main.Launcher"
+    mainClassName = "hyddd.main.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Hyddd"
     archiveClassifier = null
 }
 

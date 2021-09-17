@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.DukeException;
-import duke.logics.Parser;
+import hyddd.exceptions.HydddException;
+import hyddd.logics.Parser;
 /**
  * @author Hang Zelin
  *
@@ -49,7 +49,7 @@ public class ParserTest {
             assertEquals("bye", new Parser("bye").getOperationType());
             assertEquals("delete", new Parser("delete 10").getOperationType());
             assertEquals("list", new Parser("list").getOperationType());
-        } catch (DukeException e) {
+        } catch (HydddException e) {
             fail(); //should not reach this.
         }
 
@@ -62,7 +62,7 @@ public class ParserTest {
             assertEquals("return book", new Parser("deadline return book /by 2/12/2019 1800").getTask());
             assertEquals("project meeting", new Parser("event project meeting /at Aug 6th 6pm").getTask());
             assertEquals("project splashdown", new Parser("event project splashdown /at 2019-10-15").getTask());
-        } catch (DukeException e) {
+        } catch (HydddException e) {
             fail(); //should not reach this.
         }
     }
@@ -74,7 +74,7 @@ public class ParserTest {
             assertEquals("2/12/2019 1800", new Parser("deadline return book /by 2/12/2019 1800").getTime());
             assertEquals("Aug 6th 6pm", new Parser("event project meeting /at Aug 6th 6pm").getTime());
             assertEquals("2019-10-15", new Parser("event project splashdown /at 2019-10-15").getTime());
-        } catch (DukeException e) {
+        } catch (HydddException e) {
             fail(); //should not reach this.
         }
     }

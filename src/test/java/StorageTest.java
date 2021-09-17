@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.DukeException;
-import duke.saveloadmanager.Storage;
+import hyddd.exceptions.HydddException;
+import hyddd.saveloadmanager.Storage;
 /**
  * @author Hang Zelin
  *
@@ -18,12 +18,12 @@ public class StorageTest {
     public void load_correctFilePath_success() {
         try {
             assertEquals("[T][X] borrow book",
-                    new Storage("data/tasks.txt").load().get(0).getTaskStatus());
-            assertEquals("[D][X] return book (by: Sep 23 2020 15:25)",
-                    new Storage("data/tasks.txt").load().get(2).getTaskStatus());
+                    new Storage("tasks.txt").load().get(0).getTaskStatus());
+            assertEquals("[D][X] return book (by: Dec 02 2019 18:00)",
+                    new Storage("tasks.txt").load().get(1).getTaskStatus());
             assertEquals("[E][X] project meeting (at: I don't know the time.)",
-                    new Storage("data/tasks.txt").load().get(3).getTaskStatus());
-        } catch (DukeException e) {
+                    new Storage("tasks.txt").load().get(2).getTaskStatus());
+        } catch (HydddException e) {
             //Should not reach this.
             fail();
         }
@@ -34,7 +34,7 @@ public class StorageTest {
         try {
             assertEquals(new ArrayList<>(), new Storage("I don't know").load());
             fail(); //Should not reach this.
-        } catch (DukeException e) {
+        } catch (HydddException e) {
             assertEquals("OOPS!!! Cannot Read From Data!!!", e.getErrorMessage());
         }
     }
