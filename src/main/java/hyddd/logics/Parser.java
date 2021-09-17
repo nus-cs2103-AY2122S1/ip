@@ -1,5 +1,6 @@
 package hyddd.logics;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -74,14 +75,23 @@ public class Parser {
         int minute;
         int endIndex1 = time.indexOf(SLASH);
         int endIndex2 = time.lastIndexOf(SPACE);
-        day = Integer.parseInt(time.substring(0, endIndex1));
+        try {
+            day = Integer.parseInt(time.substring(0, endIndex1));
+        } catch (NumberFormatException e) {
+            return null;
+        }
         int dayInteger = day;
         int endIndex3 = time.indexOf(SLASH, Integer.toString(dayInteger).length() + 1);
 
-        month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
-        year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
-        hour = Integer.parseInt(time.substring(endIndex2 + 1).substring(0, 2));
-        minute = Integer.parseInt(time.substring(endIndex2 + 1).substring(2));
+        try {
+            month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
+            year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
+            hour = Integer.parseInt(time.substring(endIndex2 + 1).substring(0, 2));
+            minute = Integer.parseInt(time.substring(endIndex2 + 1).substring(2));
+        } catch (NumberFormatException e) {
+            return null;
+        }
+
         if (!isValidDate(day, month, year, hour, minute)) {
             return null;
         } else {

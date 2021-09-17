@@ -61,7 +61,7 @@ public class Event extends Task {
         if (this.time != null) {
             parsedTime = this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH));
         } else {
-            parsedTime = "I don't know the time.";
+            parsedTime = "I don't know the time. Maybe your format is in correct!";
         }
 
         return parsedTime;
@@ -69,7 +69,7 @@ public class Event extends Task {
 
     private String getUnknownTime() {
         String specificTime;
-        specificTime = "I don't know the time";
+        specificTime = "I don't know the time. Maybe your format is in correct!";
         return specificTime;
     }
 
