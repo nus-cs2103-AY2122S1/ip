@@ -6,7 +6,7 @@ Random title inserted
 
 1. Feature
    - [Add, update, track completion, and delete tasks](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#add-update-track-completion-and-delete-tasks)
-   - [View task and task date](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#view-task-and-task-date)
+   - [View task and task date](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#view-tasks-and-query-tasks)
    - [Load and save](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#load-and-save)
 2. Usage
    - [`help` - Getting help](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#help---getting-help)
@@ -42,7 +42,7 @@ What can you do with DuC? You can:
 
 &nbsp;
 
-### View tasks, task date, and query task
+### View tasks and query tasks
 
 View the list of all ongoing task on the list, and the date associated with them. Search for task that match a given query.
 
