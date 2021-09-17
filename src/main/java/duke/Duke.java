@@ -12,7 +12,7 @@ public class Duke {
     private static final String STORAGE_DIRECTORY = "FergusChatBot.txt";
 
     private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded. "
-            + "Enter 'list' to view";
+            + "Enter 'list' to view all available commands";
     private static final String READ_FAILURE = "No saved file has been found :(";
 
     private static final List<String> GREETING = new ArrayList<>(
