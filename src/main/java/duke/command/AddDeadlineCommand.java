@@ -39,16 +39,8 @@ public class AddDeadlineCommand extends Command {
             throw new InvalidCommandException("Deadline must have description and time");
         }
 
-        String description = deadlineInputs[0];
-        LocalDateTime time;
-        try {
-            time = DateTime.parse(deadlineInputs[1]);
-        } catch(Exception e) {
-            throw new InvalidCommandException("Unable to parse deadline time");
-        }
-
-        this.description = description;
-        this.time = time;
+        this.description = deadlineInputs[0];
+        this.time = DateTime.parse(deadlineInputs[1]);
     }
 
     /**

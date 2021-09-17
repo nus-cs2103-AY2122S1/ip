@@ -39,16 +39,8 @@ public class AddEventCommand extends Command {
             throw new InvalidCommandException("Event must have description and time");
         }
 
-        String description = eventInputs[0];
-        LocalDateTime time;
-        try {
-            time = DateTime.parse(eventInputs[1]);
-        } catch(Exception e) {
-            throw new InvalidCommandException("Unable to parse event time");
-        }
-
-        this.description = description;
-        this.time = time;
+        this.description = eventInputs[0];
+        this.time = DateTime.parse(eventInputs[1]);
     }
 
     /**
