@@ -2,6 +2,8 @@ package duke;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.command.Command;
 import duke.parser.Parser;
@@ -19,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -127,14 +128,20 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        Label dukeText = new Label(getResponse(input));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
         assert (userInput.getText().equals("")) : "userInput should be cleared.";
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                public void run () { System.exit(0); }
+            }, 10000);
+        }
     }
 
     private String getResponse(String input) {

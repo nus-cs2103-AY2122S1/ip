@@ -205,7 +205,7 @@ Example of usage:
 
 Expected outcome:
 
-Causes Duke to display a farewell message.
+Causes Duke to display a farewell message and closes the application.
 
 ```
 See you! Have a nice day!
