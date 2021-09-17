@@ -156,5 +156,21 @@ List:
 1. Deadline: submit homework [X] (by Oct 20 2021)
 ```
 
+### `bye` - Exits the Duke application
+
+Exits the application.
+
+Example of usage:
+
+`bye`
+
+Expected outcome: Duke displays a goodbye message before exiting.
+
+Description of the outcome.
+
+```
+Bye from Duke!
+```
+
 
 
