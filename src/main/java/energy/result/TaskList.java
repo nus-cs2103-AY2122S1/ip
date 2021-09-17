@@ -288,13 +288,14 @@ public class TaskList {
             throw new EnergyException("Command must be of the form: due [integer][h/d/m] "
                     + "(h = hours, d = days, m = months)");
         }
-        String offset = splitInputs[1];
-        boolean isValidInput = offset.matches("\\d+");
+        String dueRange = splitInputs[1];
+        boolean isValidInput = dueRange.matches("[0-9]+[hdm]");
         if (!isValidInput) {
             throw new EnergyException("Command must be of the form: due [integer][h/d/m] "
                     + "(h = hours, d = days, m = months)");
         }
-
+        // Gets the number of hours/days/months from the input range
+        String offset = dueRange.substring(0, dueRange.length() - 1);
         LocalDateTime dateTime = LocalDateTime.now();
         switch (input.charAt(input.length() - 1)) {
         case ('h'):
