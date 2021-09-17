@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -74,6 +75,13 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return taskList.isEmpty();
+    }
+
+    /**
+     * Clears all the tasks in the task list.
+     */
+    public void clearTasks() {
+        taskList.clear();
     }
 
     private boolean isTaskBefore(Task task, LocalDate date) {

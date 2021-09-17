@@ -11,12 +11,11 @@ having the benefits of a Graphical User Interface (GUI).
     - [Listing all tasks: `list`](#listing-all-tasks-list)
     - [Marking task as done: `done`](#marking-task-as-done-done)
     - [Deleting a task: `delete`](#deleting-a-task-delete)
+    - [Clearing all tasks: `clear`](#clearing-all-tasks-clear)
     - [Finding a task: `find`](#finding-a-task-find)
     - [Reminders for tasks: `remind`](#reminders-for-tasks-remind)
     - [Exiting the program: `exit`](#exiting-the-program-exit)
 - [Command summary](#command-summary)
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,6 +71,12 @@ Format: `done INDEX`
 Deletes the specified task from the task list.
 
 Format: `delete INDEX`
+
+### Clearing all tasks: `clear`
+
+Clears all tasks in the task list.
+
+Format: `clear`
 
 ### Finding a task: `find`
 

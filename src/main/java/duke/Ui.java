@@ -101,4 +101,13 @@ public class Ui {
         return "Reminder: These are the tasks due in the next 7 days." + taskList;
     }
 
+    /**
+     * Displays the message indicating that the tasklist has been cleared.
+     *
+     * @return The message indicating that the tasklist has been cleared.
+     */
+    public String showTasklistClear() {
+        return "The tasklist has been cleared.\nNow you have 0 tasks in the list.";
+    }
+
 }

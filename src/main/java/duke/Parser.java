@@ -3,6 +3,7 @@ package duke;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.commands.ClearCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
@@ -38,7 +39,7 @@ public class Parser {
         String command = matcher.group("command");
         String arguments = matcher.group("arguments");
         switch (command) {
-        case "bye":
+        case "exit":
             return new ExitCommand();
         case "list":
             return new ListCommand();
@@ -56,6 +57,8 @@ public class Parser {
             return new FindCommand(arguments);
         case "reminder":
             return new ReminderCommand();
+        case "clear":
+            return new ClearCommand();
         default:
             throw new DukeException("Invalid Command Entered");
         }
