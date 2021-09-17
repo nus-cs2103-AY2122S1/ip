@@ -68,15 +68,22 @@ public class ParserExceptionDetector {
      * @throws HydddException Exception is thrown when task cannot be read.
      */
     public void detectGetTaskException() throws HydddException {
-        boolean isCorrectType = input.startsWith(DEADLINE) || input.startsWith(EVENT)
-                || input.startsWith(TODO) || input.startsWith(FIND);
-        boolean isInCorrectFormat = input.contains(SPACE);
+        boolean isCorrectType;
+        boolean isInCorrectFormat;
+        boolean isEmptyTask;
 
+        isCorrectType = input.startsWith(DEADLINE) || input.startsWith(EVENT)
+                || input.startsWith(TODO) || input.startsWith(FIND);
+        isInCorrectFormat = input.contains(SPACE);
         if (!isCorrectType) {
             return;
         }
-
         if (!isInCorrectFormat) {
+            throw new HydddException(ExceptionType.NO_TASK_ERROR);
+        }
+        isEmptyTask = input.contains(SLASH)
+                && (input.indexOf(SPACE) == input.indexOf(SLASH) - 1);
+        if (isEmptyTask) {
             throw new HydddException(ExceptionType.NO_TASK_ERROR);
         }
     }
