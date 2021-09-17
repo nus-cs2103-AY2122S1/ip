@@ -55,12 +55,16 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    /** Closes the program */
+    /**
+     * Closes the program.
+     */
     private void handleExit() {
         Platform.exit();
     }
 
-    /** Greets the user on launch */
+    /**
+     * Greets the user on launch.
+     */
     private void handleGreeting() {
         String initialGreetingMessage = "Hello! I'm Duke. "
                 + "\nWhat can I do for you?";
