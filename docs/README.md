@@ -44,8 +44,8 @@ Bid farewell to Wonderland when you are done!
 
 ## Usage
 
-### `add` - Adding a task
-Adds a task into the task list.
+### Adding a task: `todo`, `deadline` or `event`
+Adds a todo, deadline or event into the task list accordingly.
 
 Format:
 1. ```todo TASK_DESCRIPTION```
@@ -67,8 +67,8 @@ Got it. I've added this todo:
 Now you have 1 task in the list.
 ```
 
-### `delete` - deleting a task
-Deletes the task in specified index from the task list.
+### Deleting a task: `delete` 
+Deletes the task of specified index from the task list.
 
 Format:
 ```delete INDEX```
@@ -85,7 +85,7 @@ Noted! I've removed this task:
 Now you have 0 task in the list.
 ```
 
-### `list` - listing all tasks
+### Listing all tasks: `list` 
 Lists all the tasks from the task list.
 
 Format: `list`
@@ -99,8 +99,8 @@ Here are the tasks in your list:
 3. [E][ ] Match (at: Nov 1 2021)
 ```
 
-### `done` - marking a task as done
-Marks a task as done.
+### Marking a task as done: `done` 
+Marks the task of specified index as done.
 
 Format:
 ```done INDEX```
@@ -109,14 +109,14 @@ Format:
 Example of usage:
 ```done 1```
 
-Wonderland will mark the specified task as done.
+Wonderland will send a message once the specified task is marked as done.
 
 ```
 Nice! I've marked this task as done:
   [T][X] buy matchsticks
 ```
 
-### `find` - finding a task
+### Finding a task: `find` 
 Finds a list of tasks that contains the specified keywords.
 
 Format:
@@ -136,11 +136,15 @@ Here are the matching task in your list:
 2. [T][ ] Match 
 ```
 
-### `bye` - exiting the app
+### Exiting the app: `bye` 
 Exits the program
 
 Format:
 ```bye```
+
+### Saving the data
+AddressBook data are saved in the hard disk automatically after any command that changes the data. 
+There is no need to save manually.
 
 ## Command summary
 
