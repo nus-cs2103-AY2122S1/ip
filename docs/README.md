@@ -1,5 +1,33 @@
 # User Guide
 
+## Contents page
+
+Commands
+- help
+- list
+- todo
+- deadline
+- event
+- done
+- delete
+- find
+- by
+
+## Features
+
+### Keep track of tasks
+
+Lists all the tasks and if you have completed them.
+
+### Various tasks supported
+    
+Supports basic to-do list tasks, events and deadlines.
+
+### Local Storage
+
+Your data is saved on your own computer and can be transferred
+to other devices to be used.
+
 ## Usage
 
 ### `help` - Get command syntax
