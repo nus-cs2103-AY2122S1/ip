@@ -1,18 +1,18 @@
 package duke.utils;
 
-import duke.exceptions.DuplicateTaskException;
-import duke.exceptions.InvalidTaskIdException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exceptions.DuplicateTaskException;
+import duke.exceptions.InvalidTaskIdException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * The Storage class handles the loading and saving of TaskList
@@ -21,6 +21,11 @@ import java.util.List;
 public class Storage {
     private Path filePath;
 
+    /**
+     * Creates a Storage instance linked to a file path to save the task list.
+     *
+     * @param filePath The filepath to save the task list.
+     */
     public Storage(Path filePath) {
         assert !filePath.toString().equals("") : "file path cannot be empty";
         this.filePath = filePath;
@@ -38,10 +43,8 @@ public class Storage {
         TaskList taskList = new TaskList();
         for (String content : contents) {
             String[] taskDetails = content.split("=");
-            
             assert !taskDetails[0].equals("") : "task name cannot be empty";
             Task savedTask;
-          
             if (taskDetails[0].equals("ToDo")) {
                 savedTask = new ToDo(taskDetails[2]);
             } else if (taskDetails[0].equals("Deadline")) {
@@ -85,8 +88,9 @@ public class Storage {
                     lines.add(line);
                 } else {
                     String line = String.format("Deadline=%s=%s=%s",
-                            task.getCompleted(), task.getTaskName(),
-                            ((Deadline) task).getDeadline());
+                            task.getCompleted(), task.getTaskName(), (
+                                    (Deadline) task).getDeadline()
+                    );
                     lines.add(line);
                 }
             } catch (InvalidTaskIdException e) {

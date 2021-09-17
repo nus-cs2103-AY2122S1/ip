@@ -10,6 +10,11 @@ public abstract class Task {
     /** Whether the task is completed or not */
     private boolean isCompleted;
 
+    /**
+     * Creates a task instance with a task name.
+     *
+     * @param taskName Name of the task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isCompleted = false;

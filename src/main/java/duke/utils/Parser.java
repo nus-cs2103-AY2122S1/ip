@@ -1,5 +1,10 @@
 package duke.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.commands.AddDeadline;
 import duke.commands.AddEvent;
 import duke.commands.AddTodo;
@@ -14,10 +19,7 @@ import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.InvalidDateException;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * The Parser class is responsible for handling the user input and to perform
@@ -43,7 +45,7 @@ public class Parser {
     public static boolean isValidDateFormat(String dateInput) {
         // Date format checking adapted from:
         // https://stackoverflow.com/questions/2149680/regex-date-format-validation-on-java
-        if (!dateInput.matches("\\d{4}-\\d{2}-\\d{2}")){
+        if (!dateInput.matches("\\d{4}-\\d{2}-\\d{2}")) {
             return false;
         }
         SimpleDateFormat validFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,7 +64,7 @@ public class Parser {
      * @param command The command type specified by the user.
      * @param input The command input from the user.
      * @return A List of arguments corresponding to the command type.
-     * @throws DukeException
+     * @throws DukeException If there are invalid or missing arguments.
      */
     public static List<String> getArgs(CommandType command, String input) throws DukeException {
         List<String> args = new ArrayList<>();
@@ -70,27 +72,39 @@ public class Parser {
             String taskId = input.split(" ")[1];
             args.add(taskId);
         } else if (command == CommandType.ADD_TODO) {
-            if (input.split(" ").length < 2) throw new EmptyTaskDescriptionException();
+            if (input.split(" ").length < 2) {
+                throw new EmptyTaskDescriptionException();
+            }
             String todoName = input.split(" ", 2)[1];
             args.add(todoName);
         } else if (command == CommandType.ADD_DEADLINE) {
             String deadline = input.split("/by", 2)[1].trim();
-            if (!isValidDateFormat(deadline)) throw new InvalidDateException();
+            if (!isValidDateFormat(deadline)) {
+                throw new InvalidDateException();
+            }
             String beforeTime = input.split("/by", 2)[0].trim();
-            if (beforeTime.split(" ").length < 2) throw new EmptyTaskDescriptionException();
+            if (beforeTime.split(" ").length < 2) {
+                throw new EmptyTaskDescriptionException();
+            }
             String deadlineName = beforeTime.split(" ", 2)[1];
             args.add(deadlineName);
             args.add(deadline);
         } else if (command == CommandType.ADD_EVENT) {
             String time = input.split("/at", 2)[1].trim();
-            if (!isValidDateFormat(time)) throw new InvalidDateException();
+            if (!isValidDateFormat(time)) {
+                throw new InvalidDateException();
+            }
             String beforeTime = input.split("/at", 2)[0].trim();
-            if (beforeTime.split(" ").length < 2) throw new EmptyTaskDescriptionException();
+            if (beforeTime.split(" ").length < 2) {
+                throw new EmptyTaskDescriptionException();
+            }
             String eventName = beforeTime.split(" ", 2)[1];
             args.add(eventName.trim());
             args.add(time.trim());
         } else if (command == CommandType.FIND) {
-            if (input.split(" ").length < 2) throw new EmptyQueryException();
+            if (input.split(" ").length < 2) {
+                throw new EmptyQueryException();
+            }
             String query = input.split(" ", 2)[1];
             args.add(query);
         }

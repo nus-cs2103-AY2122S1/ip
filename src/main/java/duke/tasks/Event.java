@@ -10,6 +10,12 @@ public class Event extends Task {
     /** Event time stored as a LocalDate object */
     private LocalDate timePeriod;
 
+    /**
+     * Creates an event task with an event name and time.
+     *
+     * @param taskName Name of the event task.
+     * @param timePeriod Time of the event task with the format YYYY-MM-DD.
+     */
     public Event(String taskName, String timePeriod) {
         super(taskName);
         this.timePeriod = LocalDate.parse(timePeriod);

@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,10 +15,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import duke.Duke;
 import javafx.util.Duration;
 
+/**
+ * The main class to handle the layout of the GUI and control
+ * user interactions with Duke via the GUI.
+ */
 public class Main extends Application {
 
     private ScrollPane scrollPane;
@@ -43,8 +46,9 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
-        
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(dukeEngine.initialize()), new ImageView(duke)));
+
+        dialogContainer.getChildren().add(DialogBox
+                .getDukeDialog(new Label(dukeEngine.initialize()), new ImageView(duke)));
         setStyle(mainLayout, stage);
 
         // Handle user input
@@ -67,6 +71,13 @@ public class Main extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Creates a label with the specified text, to be displayed in the
+     * dialog container.
+     *
+     * @param text The text to add.
+     * @return A label instance containing the specified text.
+     */
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
@@ -74,6 +85,12 @@ public class Main extends Application {
         return textToAdd;
     }
 
+    /**
+     * Styles the layout of Duke.
+     *
+     * @param layout An anchorpane layout.
+     * @param stage The stage of the container.
+     */
     private void setStyle(AnchorPane layout, Stage stage) {
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -104,6 +121,11 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
+    /**
+     * Creates two dialog boxes after a user input: one displays the
+     * user input, the other displays Duke's response. Adds the boxes to
+     * the dialog container.
+     */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -117,18 +139,24 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Given a user input, it returns the response by Duke.
+     *
+     * @param input The user input.
+     * @return The response by Duke.
+     */
     private String getResponse(String input) {
         return dukeEngine.runDuke(input);
     }
 
-    // Method to delay exit adapted from
-    // https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
+    /**
+     * Exits the GUI after a one second delay.
+     */
     private void exit() {
+        // Method to delay exit adapted from
+        // https://stackoverflow.com/questions/30543619/how-to-use-pausetransition-method-in-javafx
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(e -> Platform.exit());
         pause.play();
     }
-
-
-
 }

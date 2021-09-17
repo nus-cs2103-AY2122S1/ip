@@ -7,9 +7,15 @@ import java.time.format.DateTimeFormatter;
  * The Deadline class encapsulates a deadline with a deadline timing.
  */
 public class Deadline extends Task {
-    /** Deadline stored as a LocalDate object */
+    /** Deadline stored as a LocalDate object. */
     private LocalDate deadline;
 
+    /**
+     * Creates a deadline task with a given name and deadline.
+     *
+     * @param taskName Name of the deadline task.
+     * @param deadline Deadline of the task with the format YYYY-MM-DD.
+     */
     public Deadline(String taskName, String deadline) {
         super(taskName);
         this.deadline = LocalDate.parse(deadline);

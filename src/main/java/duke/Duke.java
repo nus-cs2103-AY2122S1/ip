@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.utils.Parser;
 import duke.utils.TaskList;
-
-import java.io.IOException;
 
 /**
  * Duke class is responsible for the overall app functionality. Duke runs
@@ -26,7 +26,7 @@ public class Duke {
         try {
             taskList.loadFromDisk();
             return GREETING + taskList.toString();
-        } catch(IOException e) {
+        } catch (IOException e) {
             return GREETING + "Your schedule is empty. What should I add to your schedule?";
         }
     }

@@ -1,34 +1,40 @@
 package duke.utils;
 
-import duke.exceptions.InvalidTaskIdException;
-import duke.exceptions.DuplicateTaskException;
-import duke.tasks.Task;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exceptions.DuplicateTaskException;
+import duke.exceptions.InvalidTaskIdException;
+import duke.tasks.Task;
+
+
 /**
  * The TaskList class encapsulates a list of user's tasks.
  */
 public class TaskList {
     private List<Task> taskList = new ArrayList<>();
-
-    String home = System.getProperty("user.home");
-    Path filePath = Paths.get(home, "tasks.txt");
-    private Storage storage = new Storage(filePath);
+    private Storage storage;
 
     /**
-     * Loads the saved tasks from the user's disk. If not available, will
-     * return an empty TaskList.
+     * Creates the task list instance. The task list will also
+     * create a storage instance to save/load tasks from the task list.
+     */
+    public TaskList() {
+        String home = System.getProperty("user.home");
+        Path filePath = Paths.get(home, "tasks.txt");
+        this.storage = new Storage(filePath);
+    }
+
+    /**
+     * Loads the saved tasks from the user's disk. If not available, the task list
+     * remains empty.
      *
-     * @return The TaskList object containing the saved tasks (if applicable).
      * @throws IOException If there is an error loading from the specified file.
      */
     public void loadFromDisk() throws IOException {
-        System.out.println(this.storage);
         this.taskList = this.storage.loadData().taskList;
     }
 
@@ -47,7 +53,7 @@ public class TaskList {
         this.taskList.add(t);
         try {
             this.storage.saveData(this);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -111,6 +117,13 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Searches tasks with names matching the search query, and
+     * returns a task list containing the matching tasks.
+     *
+     * @param query Search query given by the user.
+     * @return A task list with tasks matching that query.
+     */
     public TaskList search(String query) {
         TaskList result = new TaskList();
         for (Task task : taskList) {

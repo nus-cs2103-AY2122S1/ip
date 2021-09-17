@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String GREETING = "Hi, I'm Duke, your personal assistant!\n";
-    private static final String FAREWELL =  "Bye from Duke!";
+    private static final String FAREWELL = "Bye from Duke!";
 
     /**
      * Displays the list of tasks from a TaskList object.
