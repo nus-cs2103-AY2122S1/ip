@@ -23,14 +23,14 @@ public class Task {
     }
 
     /**
-     * This method marks the task as true.
+     * Marks the task as true.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * This method returns the status icon of the tast, X if true, blank if false.
+     * Returns the status icon of the tast, X if true, blank if false.
      *
      * @return X if true, blank if false.
      */
@@ -39,7 +39,7 @@ public class Task {
     }
 
     /**
-     * This method returns the name of the Task.
+     * Returns the name of the Task.
      *
      * @return name of the Task.
      */
@@ -48,7 +48,7 @@ public class Task {
     }
 
     /**
-     * Get the value representing if the task is done.
+     * Gets the value representing if the task is done.
      *
      * @return 1 if the task is done, 0 if the task is not done.
      */
@@ -57,7 +57,7 @@ public class Task {
     }
 
     /**
-     * Produce the desired format for storing to file.
+     * Produces the desired format for storing to file.
      *
      * @return the desired string.
      */

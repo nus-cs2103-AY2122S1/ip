@@ -28,7 +28,7 @@ public class TaskList {
     }
 
     /**
-     * This method handles the add event.
+     * Handles the add event.
      *
      * @param task the Task that the user wants to add.
      */
@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * This method handles the markDone event when the user says done, marking the Task as done.
+     * Handles the markDone event when the user says done, marking the Task as done.
      *
      * @param pos the position of the Task in the ArrayList lst.
      * @return the task that was marked done.
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * This method handles the delete response.
+     * THandles the delete response.
      *
      * @param pos the position of the task in the list to delete.
      * @return the task that was deleted.
@@ -83,7 +83,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieve the task from the list given an index.
+     * Retrieves the task from the list given an index.
      *
      * @param position the index.
      * @return the task.

@@ -45,7 +45,7 @@ public class Event extends Task {
     }
 
     /**
-     * Produce the desired format for storing to file.
+     * Producess the desired format for storing to file.
      *
      * @return the desired string.
      */

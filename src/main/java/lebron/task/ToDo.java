@@ -22,7 +22,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Produce the desired format for storing to file.
+     * Produces the desired format for storing to file.
      *
      * @return the desired string.
      */
