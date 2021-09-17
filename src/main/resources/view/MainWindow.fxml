@@ -15,7 +15,7 @@
                 <children>
                     <TextField fx:id="userInput" layoutX="10.0" layoutY="562.0" onAction="#handleUserInput" prefHeight="32.0" prefWidth="304.0" style="-fx-border-color: black; -fx-background-radius: 2px; -fx-border-radius: 2px;" />
                     <Button fx:id="sendButton" layoutX="325.0" layoutY="562.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="32.0" prefWidth="64.0" style="-fx-background-color: #e5d0f7; -fx-border-color: black; -fx-background-radius: 2px; -fx-border-radius: 2px;" text="Send" />
-                    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vbarPolicy="NEVER" vvalue="1.0">
+                    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
                         <content>
                             <VBox fx:id="dialogContainer" prefHeight="557.0" prefWidth="388.0" style="-fx-background-color: #b463ff;" />
                         </content>
