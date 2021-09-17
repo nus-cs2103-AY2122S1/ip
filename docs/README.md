@@ -5,16 +5,16 @@ This application presents a interactive user interface to create, tag and list o
 
 ## Key Features
 
-1. **Task Management** - Add, delete and complete tasks of the following categories:
- - Todo
- - Deadline
- - Event
+- **Task Management** - Add, delete and complete tasks of the following categories:
+  - Todo
+  - Deadline
+  - Event
 
-2. **Search via** (task name)
- - Existing tasks can be filtered via their task names or their tagged categories. 
+- **Search via** (task name)
+  - Existing tasks can be filtered via their task names or their tagged categories. 
  
-3. **List** tasks
- - Provides an overview of all tasks and their current status.
+- **List** tasks
+  -Provides an overview of all tasks and their current status.
 
 ## Usage
 
