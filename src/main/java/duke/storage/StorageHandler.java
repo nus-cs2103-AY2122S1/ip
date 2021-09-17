@@ -34,13 +34,13 @@ public class StorageHandler {
                 //load data into TaskList
                 Scanner myReader = new Scanner(taskListCSV);
                 char taskType = 'x';
-                int done = 0;
+                char done = ' ';
                 String description = "";
                 String dateString = "";
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine();
                     taskType = data.charAt(1);
-                    done = data.charAt(4) - 49;
+                    done = data.charAt(4);
                     if(taskType == 'E' || taskType == 'D') {
                         int slashIndex = taskType == 'E'
                                 ? data.indexOf("(at:")
@@ -53,18 +53,18 @@ public class StorageHandler {
                     Task task;
                     if (taskType == 'E') {
                         task = new Event(description, dateString);
-                        if (done == 1)
+                        if (done == 'X')
                             task.markAsDone();
                         TaskList.getTaskList().addTask(task);
                     } else if (taskType == 'D') {
                         LocalDate deadlineDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM dd yyyy"));
                         task = new Deadline(description, deadlineDate);
-                        if (done == 1)
+                        if (done == 'X')
                             task.markAsDone();
                         TaskList.getTaskList().addTask(task);
                     } else {
                         task = new ToDo(description);
-                        if (done == 1)
+                        if (done == 'X')
                             task.markAsDone();
                         TaskList.getTaskList().addTask(task);
                     }
