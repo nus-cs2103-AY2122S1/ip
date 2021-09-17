@@ -44,21 +44,25 @@ public class TagCommand extends Command {
                 continue;
             }
             if (!isTags) {
-                try {
-                    int parsedInteger = Integer.parseInt(keyword);
-                    if (parsedInteger <= 0) {
-                        throw new DukeException("Invalid input. Please enter a positive integer for the index");
-                    }
-                    indexes.add(parsedInteger);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid input. Please enter a integer for the index");
-                }
+                AddIndex(keyword);
             } else {
                 tags.add(keyword);
             }
         }
         if (tags.size() == 0) {
             throw new DukeException("Invalid input. Please enter a tag after |");
+        }
+    }
+
+    private void AddIndex(String keyword) throws DukeException {
+        try {
+            int parsedInteger = Integer.parseInt(keyword);
+            if (parsedInteger <= 0) {
+                throw new DukeException("Invalid input. Please enter a positive integer for the index");
+            }
+            indexes.add(parsedInteger);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid input. Please enter a integer for the index");
         }
     }
 

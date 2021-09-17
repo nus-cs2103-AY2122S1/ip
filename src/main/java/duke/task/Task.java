@@ -30,18 +30,18 @@ public abstract class Task {
             throw new DukeException("The description cannot be empty");
         }
         switch (type) {
-            case "todo": {
-                return (ToDo.of(description));
-            }
-            case "deadline": {
-                return (Deadline.of(description));
-            }
-            case "event": {
-                return (Event.of(description));
-            }
-            default: {
-                throw new DukeException("Sorry I don't understand");
-            }
+        case "todo": {
+            return (ToDo.of(description));
+        }
+        case "deadline": {
+            return (Deadline.of(description));
+        }
+        case "event": {
+            return (Event.of(description));
+        }
+        default: {
+            throw new DukeException("Sorry I don't understand");
+        }
         }
     }
 
@@ -74,7 +74,6 @@ public abstract class Task {
      * @return string representation of the task to be saved in the hard disl/
      */
     protected String toSaveInFile(String time) {
-        System.out.println("tags are " + this.tags);
         String doneString = this.isDone ? "1" : "0";
         String tagString = this.tags.size() == 0
                 ? ""
@@ -88,7 +87,6 @@ public abstract class Task {
      * @param tags tags to be added to task
      */
     public void addTags(ArrayList<String> tags) {
-        System.out.println("Tags added are" + tags);
         this.tags.addAll(tags);
     }
 
