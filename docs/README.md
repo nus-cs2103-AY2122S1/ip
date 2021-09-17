@@ -1,6 +1,6 @@
 # User Guide
 
-![Energy Logo](../src/main/resources/images/GivePLZTransparent.png?raw=true)
+![Energy Logo](./GivePLZTransparent.png?raw=true)
 
 Energy is a desktop app that helps you manage your tasks, optimized for use via a Command-Line Interface,  
 combined with a sleek Graphical User Interface with minimal clutter. If you are a fast typist, Energy is the ideal task
@@ -38,7 +38,7 @@ management app for you.
    version.
 3. Copy the jar file to the folder that you want to use as the home folder.
 4. Double-click the jar file to start the app. A GUI (like the one shown below) should appear.
-   ![Energy UI](./Ui.png?raw=true)
+   ![Energy UI](./Ui_Small.png?raw=true)
 5. Type the command in the command box and press enter, or click the send button. Here are some commands you could try:
     * `todo Task 1`: Adds a todo task with the description "Task 1".
     * `list`: Lists all tasks.
@@ -78,6 +78,8 @@ Format: `todo (task description)`
 
 Example: `todo Buy groceries` adds a task with the description "Buy groceries".
 
+---
+
 #### Adding a deadline task: `deadline`
 
 Adds a deadline task, which is a task with a description along with a date and time, to the task list.
@@ -86,6 +88,8 @@ Format: `deadline (description) /by (date[YYYY-MM-DD]) (time[HH:MM])`,
 
 Example: `deadline Finish presentation /by 2021-09-30 23:59` adds a task with the description "Finish presentation"
 with a date of September 30th, 2021, 11:59 PM.
+
+---
 
 #### Adding an event task: `event`
 
@@ -96,11 +100,15 @@ Format: `event (description) /at (date[YYYY-MM-DD]) (start time[HH:MM]) (end tim
 Example: `event Meet with professor /at 2021-09-18 11:00 13:00` adds a task with the description "Meet with professor"
 with a date of September 18th, 2021, 11:00 AM - 1:00 PM.
 
+---
+
 #### Listing all tasks: `list`
 
 Lists all tasks currently stored in the program, in order of when they were added.
 
 Format: `list`
+
+---
 
 #### Marking a task as done: `done`
 
@@ -110,6 +118,8 @@ Format: `done (task index)`
 
 Example: `done 2` will mark the second task in the list as done.
 
+---
+
 #### Deleting a task: `delete`
 
 Deletes a task from the list, depending on the task index specified.
@@ -117,6 +127,8 @@ Deletes a task from the list, depending on the task index specified.
 Format: `delete (task index)`
 
 Example: `delete 3` will delete the third task in the list.
+
+---
 
 #### Listing all tasks due in X hours/days/months: `due`
 
@@ -126,6 +138,8 @@ Format: `due (number)(h/d/m)`
 
 Example: `due 10d` gets all tasks due within 10 days from now. (This includes tasks that are already due now.)
 
+---
+
 #### Listing all tasks occurring on a certain date: `ondate`
 
 Lists all tasks occurring on a given input date.
@@ -133,6 +147,8 @@ Lists all tasks occurring on a given input date.
 Format: `ondate (date[YYYY-MM-DD])`
 
 Example: `ondate 2021-09-30` gets all tasks occurring on September 30th, 2021.
+
+---
 
 #### Listing all tasks containing a keyword/keyphrase: `find`
 
@@ -164,11 +180,15 @@ Notes:
 * You cannot use an existing alias as an alias for another command. (e.g. If `t` is already an alias for `todo`
   , `addalias deadline t` is invalid.)
 
+---
+
 #### Listing all aliases: `listalias`
 
 Lists all aliases added by the user.
 
 Format: `listalias`
+
+---
 
 #### Deleting an alias: `deletealias`
 
@@ -194,17 +214,22 @@ Format: `bye`
 
 There is no need to save manually. Any change made to task or alias data is saved automatically to the hard drive.
 
+---
+
 #### Editing the save file
 
 Task data is saved in the file [JAR file location]/data/tasks.txt. Advanced users can edit this file directly to update
 the task list. If any changes made cause the format to the invalid, Energy will start with a blank task list on the next
 run.
 
+---
+
 #### Editing the config file
 
 Alias data is saved in the file [JAR file location]/data/config.txt. Advanced users can edit this file directly to
 add/delete aliases. If any changes made cause the format to the invalid, Energy will start with no aliases on the next
-run.
+run .
+
 ---
 
 ## Command Summary
