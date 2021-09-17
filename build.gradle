@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
@@ -14,7 +13,8 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
-    String javaFxVersion = "11"
+    String javaFxVersion = '11'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -44,16 +44,16 @@ test {
 }
 
 application {
-    mainClassName = "duke.Ui.Ui"
+    mainClassName = "duke.Ui.Launcher"
 }
 
-javafx {
-    version = "17"
-    modules = [ 'javafx.controls' ]
+shadowJar {
+    archiveBaseName = "duke"
+    archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '9.00'
+    toolVersion = '8.29'
 }
 
 run {

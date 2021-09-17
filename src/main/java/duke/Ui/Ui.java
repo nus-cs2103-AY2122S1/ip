@@ -81,7 +81,9 @@ public class Ui extends Application {
         this.userInputField.clear();
     }
 
+    /*
     public static void main(String[] args) {
         launch();
     }
+     */
 }
