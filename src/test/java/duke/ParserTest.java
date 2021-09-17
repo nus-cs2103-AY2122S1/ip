@@ -1,6 +1,5 @@
 package duke;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -12,7 +11,7 @@ public class ParserTest {
     @Test
     void testParse_taskWithEmptyDescription_throwException() {
         Exception exception = assertThrows(DukeException.class, () -> Parser.parse("todo "));
-        assertEquals("Command has empty description", exception.getMessage());
+        assertEquals("command is incorrect or incomplete", exception.getMessage());
     }
 
     @Test
@@ -23,10 +22,8 @@ public class ParserTest {
         Storage store = new Storage("", ui);
         c.execute(tl, ui, store);
 
-        assertAll("checking created command",
-            () -> assertEquals("D", tl.get(0).getType()),
-            () -> assertEquals(1, tl.size()),
-            () -> assertEquals("unit tests", tl.get(0).getLabel())
-        );
+        assertEquals("D", tl.get(0).getType());
+        assertEquals(1, tl.size());
+        assertEquals("unit tests", tl.get(0).getLabel());
     }
 }
