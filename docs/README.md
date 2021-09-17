@@ -16,9 +16,9 @@
    - [`delete` - Delete a task from the list](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#delete---delete-a-task-from-the-list)
    - [`find` - Query a task in your list](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#find---query-a-task-in-your-list)
    - [`list` - View all the current tasks you are having](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#list---view-all-the-current-tasks-you-are-having)
-   - [`bye` - Exit the program](https://github.com/hmanhduc2k/ip/blob/master/docs/README.me#bye---exit-the-program)
+   - [`bye` - Exit the program](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#bye---exit-the-program)
 3. Command Summary
-   - [Summary table](https://github.com/hmanhduc2k/ip/blob/master/docs/README.me#command-summary)
+   - [Summary table](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#command-summary)
 
 </br>
 
