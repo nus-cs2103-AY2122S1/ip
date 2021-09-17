@@ -113,6 +113,9 @@ public class Parser {
         if (input.length() == 4) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
         }
+        if (!input.contains("/p")) {
+            throw new DukeException("OOPS!!! The priority for this item cannot be empty.\n");
+        }
         int pIndex = input.indexOf("/p");
         String taskDesc = input.substring(5, pIndex - 1);
 
@@ -133,6 +136,9 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
         }
         assert input.length() != 0 : "Input length shouldn't be 0";
+        if (!input.contains("/p")) {
+            throw new DukeException("OOPS!!! The priority for this item cannot be empty.\n");
+        }
 
         int byIndex = input.indexOf("/");
         int pIndex = input.indexOf("/p");
@@ -155,6 +161,9 @@ public class Parser {
     public static Task parseEvent(String input) throws DukeException {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.\n");
+        }
+        if (!input.contains("/p")) {
+            throw new DukeException("OOPS!!! The priority for this item cannot be empty.\n");
         }
 
         int byIndex = input.indexOf("/");
