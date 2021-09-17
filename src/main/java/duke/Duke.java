@@ -2,6 +2,7 @@ package duke;
 
 import duke.gui.DialogBox;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +19,9 @@ import javafx.stage.Stage;
 import duke.command.Command;
 import duke.error.DukeException;
 import duke.task.TaskList;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A chatbot that helps keep track of various tasks.
@@ -166,6 +170,15 @@ public class Duke extends Application {
     public String getResponse(String input) {
         String response = "";
         try {
+            if (input.toLowerCase().equals("bye")) {
+                new Timer().schedule(new TimerTask() {
+                    public void run() {
+                        Platform.exit();
+                        System.exit(0);
+                    }
+                }, 2000);
+            }
+
             Command c = Parser.parse(input);
             response += c.execute(tasks, ui, storage);
         } catch (DukeException e) {
@@ -173,30 +186,5 @@ public class Duke extends Application {
         }
 
         return response;
-    }
-
-    /**
-     * Runs the program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExitCommand();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }
