@@ -83,10 +83,30 @@ public class Duke {
         }
     }
 
+    /**
+     * adds a new tasklist to the state.
+     *
+     * @param taskList the tasklist to be added.
+     */
     public static void addToState(TaskList taskList) {
         Duke.state.push(taskList);
     }
 
+    /**
+     * Deletes the latest tasklist and saves the new tasklist locally.
+     * Used in the undo functionality.
+     * @throws DukeException
+     */
+    public static void deleteLastState() throws DukeException {
+        Duke.state.pop();
+        Storage.saveToFile();
+    }
+
+    /**
+     * retrieves the latest value of tasklist.
+     *
+     * @return the latest tasklist.
+     */
     public static TaskList getLatestState() {
         if (Duke.state.isEmpty()) {
             return new TaskList();
@@ -94,11 +114,11 @@ public class Duke {
         return Duke.state.peek();
     }
 
-    public static void deleteLastState() throws DukeException {
-        Duke.state.pop();
-        Storage.saveToFile();
-    }
-
+    /**
+     * Retrieves the number of elements in the stack.
+     *
+     * @return the number of elements in the stack.
+     */
     public static int stateSize() {
         return Duke.state.size();
     }
