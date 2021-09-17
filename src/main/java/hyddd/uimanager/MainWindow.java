@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     private Hyddd hyddd;
     private BackgroundImage backgroundImage;
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private final Image hydddImage = new Image(this.getClass().getResourceAsStream("/images/hyddd.jpg"));
+    private final Image hydddImage = new Image(this.getClass().getResourceAsStream("/images/Hyddd.jpg"));
 
 
     //@@author Hang Zelin-reused
