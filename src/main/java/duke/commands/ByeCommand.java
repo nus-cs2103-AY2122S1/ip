@@ -17,17 +17,8 @@ public class ByeCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTasks(tasks);
+        System.exit(0);
         return ui.showBye();
-    }
-
-    /**
-     * Returns true to show that the Duke chatbot should be exited.
-     *
-     * @return True.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
     }
 
     /**

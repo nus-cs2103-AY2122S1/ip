@@ -18,13 +18,4 @@ public abstract class Command {
      * @throws DukeException
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Represents if Duke program should be exited. Should be overridden by Command that exits program.
-     *
-     * @return False.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }
