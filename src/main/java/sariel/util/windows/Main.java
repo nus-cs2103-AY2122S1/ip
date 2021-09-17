@@ -18,10 +18,11 @@ public class Main extends Application {
 
     private static final String saveFilePath = "save.txt";
     private static final String tempFilePath = "temp.txt";
-    private Sariel sariel = new Sariel(saveFilePath, tempFilePath);
+    private Sariel sariel;
 
     @Override
     public void start(Stage stage) {
+        this.sariel = new Sariel(saveFilePath, tempFilePath, stage);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

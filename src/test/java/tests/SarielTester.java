@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import sariel.util.commands.DelCommand;
-import sariel.util.commands.ExitCommand;
 import sariel.util.parser.Parser;
 import sariel.util.tasks.DateTaskTable;
 import sariel.util.tasks.DatedTask;
@@ -17,10 +16,10 @@ import sariel.util.tasks.TaskList;
 import sariel.util.ui.Ui;
 
 
-
-
-
-
+/**
+ * Test class for Sariel.
+ *
+ */
 public class SarielTester {
 
     /**
@@ -92,8 +91,7 @@ public class SarielTester {
             p.inputsParser("todo Build the empire states building").executeAll();
             assertEquals(2, tasklist.size());
             assertEquals(t.get(Parser.dateParse("2020-08-01")).get(0), tasklist.get(0));
-            p.inputsParser("bye").executeAll();
-            assertEquals(true, ExitCommand.isExit());
+
 
 
         } catch (DukeException e) {

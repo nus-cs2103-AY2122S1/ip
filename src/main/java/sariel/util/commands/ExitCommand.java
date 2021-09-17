@@ -1,6 +1,8 @@
 package sariel.util.commands;
 
 
+import sariel.util.controller.Sariel;
+
 /**
  * When this command runs, the Duke stops working.
  *
@@ -8,25 +10,30 @@ package sariel.util.commands;
 public class ExitCommand implements Command {
 
 
-    private static boolean isClosed = false;
+    private static Sariel sariel;
 
     /**
      * The constructor of the ExitCommand.
-     *
      */
-    public ExitCommand() {
+    public ExitCommand() {}
+
+    /**
+     * Sets the sariel for the program to exit.
+     *
+     * @param sariel
+     */
+    public static void setSariel(Sariel sariel) {
+        ExitCommand.sariel = sariel;
     }
+
 
     @Override
     public String execute() {
-
-        this.isClosed = true;
+        ExitCommand.sariel.quit();
         return "";
     }
 
-    public static boolean isExit() {
-        return ExitCommand.isClosed;
-    }
+
 
 
 }

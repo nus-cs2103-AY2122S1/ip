@@ -48,7 +48,6 @@ public class Parser {
     private final TaskList taskList;
     private final DateTaskTable dateTaskList;
 
-
     /**
      * Constructor for the parser class.
      *

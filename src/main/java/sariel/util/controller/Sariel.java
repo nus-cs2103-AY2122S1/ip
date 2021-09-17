@@ -9,8 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import sariel.util.commands.AddCommand;
 import sariel.util.commands.CommandList;
+import sariel.util.commands.ExitCommand;
 import sariel.util.commons.Messages;
 import sariel.util.parser.Parser;
 import sariel.util.storage.Storage;
@@ -43,7 +45,7 @@ public class Sariel {
     private final TaskList tasks;
     private final DateTaskTable dateTaskTable;
     private TaskList displayTasks;
-
+    private Stage stage;
 
     /**
      * Constructor for duke.
@@ -51,7 +53,9 @@ public class Sariel {
      * @param filename The file to save at.
      * @param tempFilePath The tempfile name to use.
      */
-    public Sariel(String filename, String tempFilePath) {
+    public Sariel(String filename, String tempFilePath, Stage stage) {
+        ExitCommand.setSariel(this);
+        this.stage = stage;
         this.tasks = new TaskList();
         this.dateTaskTable = new DateTaskTable();
         this.parser = new Parser(this.ui, this.tasks, this.dateTaskTable);
@@ -186,13 +190,20 @@ public class Sariel {
     }
 
 
-
+    /**
+     * Quits Sariel.
+     *
+     *
+     */
+    public void quit() {
+        this.stage.close();
+    }
 
 
 
 
     /**
-     * A method to print the list to dukes list feature.
+     * Prints the list to dukes list feature.
      * Renders the list command kind of obsolete. Is there a way to make
      * this method call not used?
      */
