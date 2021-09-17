@@ -34,7 +34,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //dialogContainer.setAlignment(Pos.CENTER);
     }
 
     public void setDuke(Duke d) {
@@ -56,10 +55,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    public void welcomeMessage() {
-        String message = duke.getWelcomeMessage();
+    public void sendFromDuke(String text) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(message, dukeImage)
+                DialogBox.getDukeDialog(text, dukeImage)
         );
     }
 

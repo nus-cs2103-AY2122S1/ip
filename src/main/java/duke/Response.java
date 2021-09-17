@@ -31,7 +31,7 @@ public class Response {
     }
 
     public static String inputRequestMessage() {
-        return "What can I do for you?";
+        return "What can I do for you?\n(Enter 'help' to see available commands)";
     }
 
     public static String markTaskDoneMessage() {
@@ -71,7 +71,7 @@ public class Response {
     }
 
     public static String invalidCommandMessage() {
-        return "Pardon me?\n(Enter 'help' for available commands)";
+        return "Pardon me?\n(Enter 'help' to see available commands)";
     }
 
 }

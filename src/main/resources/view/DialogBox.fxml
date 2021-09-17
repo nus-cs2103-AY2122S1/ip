@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="380.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="380.0" minWidth="-Infinity" prefHeight="120.0" prefWidth="380.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="260.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: F34652; -fx-background-radius: 30;" text="Label" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
+    <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="260.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="260.0" style="-fx-background-color: F34652; -fx-background-radius: 30;" text="Label" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

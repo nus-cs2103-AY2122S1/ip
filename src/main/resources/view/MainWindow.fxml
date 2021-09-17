@@ -11,7 +11,7 @@
   <children>
       <SplitPane dividerPositions="0.951450892857143" maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
-          <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="575.0" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="400.0" pannable="true" prefHeight="575.0" style="-fx-background: transparent; -fx-background-color: #FFD660;" vbarPolicy="ALWAYS" vvalue="1.0">
+          <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="575.0" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="400.0" pannable="true" prefHeight="575.0" style="-fx-background-color: #FFD660; -fx-background: transparent;" vbarPolicy="ALWAYS" vvalue="1.0">
             <content>
               <VBox fx:id="dialogContainer" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" />
             </content>
