@@ -115,15 +115,15 @@ Format: `update <index> <format of task>`
 Example `update 1 play games /at 2021-12-12 12:00` (assuming task with index 1 was an event)
 
 ## Command Summary
-Commands | Command Format
------------- | -------------
-Bye | `bye`
-List | `list`
-ToDo | `todo <name>` </br> Example: `todo sleep`
-Event | `event <name> /at <time>` </br> Example: `event exam /at 2021-11-04 12:00`
-Deadline | `deadline <name> /by <time>` </br> Example: `deadline User Guide /by 2021-11-04 11:00`
-Delete | `delete <index>` </br> Example `delete 1`
-Done | `done <index>` </br>  `done 1`
-Find | `find <keyword>` </br> ' `find cs`
-Update | `update <index> <format of task>` </br> Example: `update 1 play games /at 2021-12-12 12:00` (assuming task with index 1 was an event)
+| Commands | Command Format |
+| ------------ | ------------- |
+| Bye | `bye` |
+| List | `list` |
+| ToDo | `todo <name>` </br> Example: `todo sleep` |
+| Event | `event <name> /at <time>` </br> Example: `event exam /at 2021-11-04 12:00` |
+| Deadline | `deadline <name> /by <time>` </br> Example: `deadline User Guide /by 2021-11-04 11:00` |
+| Delete | `delete <index>` </br> Example `delete 1` |
+| Done | `done <index>` </br>  `done 1` |
+| Find | `find <keyword>` </br> ' `find cs` |
+| Update | `update <index> <format of task>` </br> Example: `update 1 play games /at 2021-12-12 12:00` (assuming task with index 1 was an event) |
   
