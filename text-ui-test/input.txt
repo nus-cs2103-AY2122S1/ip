@@ -1,0 +1,19 @@
+todo hello
+list
+deadline bad format /by 31-12-2030
+deadline far future /by 2030-12-31
+list
+event past /at 2020-01-01
+list
+done 1
+list
+done 2
+list
+delete 2
+list
+delete done
+list
+delete expired
+list
+goodbye
+bye
