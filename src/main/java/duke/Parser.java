@@ -19,38 +19,35 @@ public class Parser {
     /**
      * Parses user input into a Command that should be executed by the Duke chatbot.
      *
-     * @param answer User input parsed into a String.
+     * @param input User input parsed into a String.
      * @return Command that is to be executed by Duke based on user input.
      * @throws DukeException If user input is not in the correct format or not a recognised command.
      */
-    public static Command parse(String answer) throws DukeException {
-        if (answer == null) {
+    public static Command parse(String input) throws DukeException {
+        if (input == null) {
             throw new DukeException("User input is null.");
         }
 
-        String[] parts = answer.split(" ");
-        String command = parts[0];
-        String taskDetails = "";
-        if (answer.contains(" ")) {
-            taskDetails = answer.substring(answer.indexOf(" ") + 1);
-        }
+        String command = getCommand(input);
+        String commandDetails = getCommandDetails(input);
+
         switch (command) {
         case "done":
-            return parseDoneCommand(answer);
+            return parseDoneCommand(commandDetails);
         case "delete":
-            return parseDeleteCommand(answer);
+            return parseDeleteCommand(commandDetails);
         case "list":
             return parseListCommand();
         case "todo":
-            return parseTodoCommand(taskDetails);
+            return parseTodoCommand(commandDetails);
         case "event":
-            return parseEventCommand(taskDetails);
+            return parseEventCommand(commandDetails);
         case "deadline":
-            return parseDeadlineCommand(taskDetails);
+            return parseDeadlineCommand(commandDetails);
         case "find":
-            return parseFindCommand(taskDetails);
+            return parseFindCommand(commandDetails);
         case "edit":
-            return parseEditCommand(answer);
+            return parseEditCommand(commandDetails);
         case "bye":
             return parseByeCommand();
         default:
@@ -58,66 +55,95 @@ public class Parser {
         }
     }
 
-    private static EditCommand parseEditCommand(String taskDetails) throws DukeException {
-        int taskIndex = getTaskIndex(taskDetails);
-        String[] editDescParts = taskDetails.split("/desc", 2);
-        String[] editDateParts = taskDetails.split("/date", 2);
-        if (editDescParts.length < 2 && editDateParts.length < 2) {
-            throw new DukeException("Nothing to edit. Usage of edit command: edit [taskIndex] /desc [new desc]"
-                    + "/date [new date]\n" + "eg. edit 1 /desc Submit IP /date 17-9-2021 23:59");
-        }
+    private static String getCommand(String input) {
+        String[] parts = input.split(" ");
+        return parts[0];
+    }
 
-        if (editDateParts.length >= 2 && editDescParts.length >= 2) {
-            // both description and date should be edited
-            return new EditCommand(taskIndex, editDescParts[1].trim(), editDateParts[1].trim());
-        } else if (editDateParts.length >= 2) {
-            // only date should be edited
-            return new EditCommand(taskIndex, null, editDateParts[1].trim());
-        } else {
-            // only description should be edited
-            return new EditCommand(taskIndex, editDescParts[1].trim(), null);
+    private static String getCommandDetails(String input) {
+        String commandDetails = "";
+        if (input.contains(" ")) {
+            commandDetails = input.substring(input.indexOf(" ") + 1);
+        }
+        return commandDetails;
+    }
+
+    private static EditCommand parseEditCommand(String commandDetails) throws DukeException {
+        String EDIT_USAGE = "Error. Usage of edit command: edit [taskIndex] /desc [new desc]"
+                + "/date [new date]\n" + "eg. edit 1 /desc Submit IP /date 17-9-2021 23:59";
+        int taskIndex = getTaskIndex(commandDetails);
+        try {
+            String detailsWithoutIndex = commandDetails.split(" ", 2)[1];
+            String[] editDescParts = detailsWithoutIndex.split("/desc", 2);
+            String[] editDateParts = detailsWithoutIndex.split("/date", 2);
+            if (editDescParts.length < 2 && editDateParts.length < 2) {
+                throw new DukeException(EDIT_USAGE);
+            }
+
+            if (editDateParts.length >= 2 && editDescParts.length >= 2) {
+                // both description and date should be edited
+                String editedDescription = editDescParts[1].split("/date")[0].trim();
+                checkEmptyDetails(editedDescription, "desc");
+                String editedDate = editDateParts[1].split("/desc")[0].trim();
+                return new EditCommand(taskIndex, editedDescription, editedDate);
+            } else if (editDateParts.length >= 2) {
+                // only date should be edited
+                String editedDate = editDateParts[1].trim();
+                return new EditCommand(taskIndex, null, editedDate);
+            } else {
+                // only description should be edited
+                String editedDescription = editDescParts[1].trim();
+                checkEmptyDetails(editedDescription, "desc");
+                return new EditCommand(taskIndex, editedDescription, null);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(EDIT_USAGE);
         }
     }
 
-    private static void checkEmptyTaskDetails(String taskDetails) throws DukeException {
-        if (taskDetails.isEmpty()) {
-            throw new DukeException("Task details cannot be empty");
+    private static void checkEmptyDetails(String commandDetails, String item) throws DukeException {
+        if (commandDetails.isEmpty()) {
+            throw new DukeException(item + " details cannot be empty.");
         }
     }
 
-    private static AddTaskCommand parseTodoCommand(String taskDetails) throws DukeException {
-        checkEmptyTaskDetails(taskDetails);
-        Todo todo = new Todo(taskDetails);
+    private static AddTaskCommand parseTodoCommand(String commandDetails) throws DukeException {
+        checkEmptyDetails(commandDetails, "Todo");
+        Todo todo = new Todo(commandDetails);
         return new AddTaskCommand(todo);
     }
 
-    private static AddTaskCommand parseEventCommand(String taskDetails) throws DukeException {
-        checkEmptyTaskDetails(taskDetails);
-        String[] parts = taskDetails.split(" /at ");
+    private static AddTaskCommand parseEventCommand(String commandDetails) throws DukeException {
+        String[] parts = commandDetails.split("/at ");
+        String description = parts[0].trim();
+        checkEmptyDetails(description, "Event");
+        
         if (parts.length < 2) {
             throw new DukeException("Event descriptions must contain /at [dd-mm-yyyy hh:mm]");
         }
-        String description = parts[0];
-        String at = parts[1];
+        String at = parts[1].trim();
+        
         Event event = new Event(description, at);
         return new AddTaskCommand(event);
     }
 
-    private static AddTaskCommand parseDeadlineCommand(String taskDetails) throws DukeException {
-        checkEmptyTaskDetails(taskDetails);
-        String[] parts = taskDetails.split(" /by ");
+    private static AddTaskCommand parseDeadlineCommand(String commandDetails) throws DukeException {
+        String[] parts = commandDetails.split("/by ");
+        String description = parts[0].trim();
+        checkEmptyDetails(description, "Deadline");
+        
         if (parts.length < 2) {
             throw new DukeException("Deadline descriptions must contain /by [dd-mm-yyyy hh:mm]");
         }
-        String description = parts[0];
         String by = parts[1];
+        
         Deadline deadline = new Deadline(description, by);
         return new AddTaskCommand(deadline);
     }
 
-    private static int getTaskIndex(String answer) throws DukeException {
+    private static int getTaskIndex(String commandDetails) throws DukeException {
         try {
-            String taskNo = answer.split(" ")[1];
+            String taskNo = commandDetails.split(" ")[0];
             int taskIndex = Integer.parseInt(taskNo) - 1;
             if (taskIndex < 0) {
                 throw new DukeException("Invalid task number. Task number should be positive.");
@@ -129,13 +155,13 @@ public class Parser {
         }
     }
 
-    private static DoneCommand parseDoneCommand(String answer) throws DukeException {
-        int taskIndex = getTaskIndex(answer);
+    private static DoneCommand parseDoneCommand(String commandDetails) throws DukeException {
+        int taskIndex = getTaskIndex(commandDetails);
         return new DoneCommand(taskIndex);
     }
 
-    private static DeleteCommand parseDeleteCommand(String answer) throws DukeException {
-        int taskIndex = getTaskIndex(answer);
+    private static DeleteCommand parseDeleteCommand(String commandDetails) throws DukeException {
+        int taskIndex = getTaskIndex(commandDetails);
         return new DeleteCommand(taskIndex);
     }
 
@@ -143,9 +169,9 @@ public class Parser {
         return new ListCommand();
     }
 
-    private static FindTasksCommand parseFindCommand(String taskDetails) throws DukeException {
-        checkEmptyTaskDetails(taskDetails);
-        return new FindTasksCommand(taskDetails);
+    private static FindTasksCommand parseFindCommand(String commandDetails) throws DukeException {
+        checkEmptyDetails(commandDetails, "Find keyword");
+        return new FindTasksCommand(commandDetails);
     }
 
     private static ByeCommand parseByeCommand() {
