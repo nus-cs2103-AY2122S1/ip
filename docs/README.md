@@ -12,7 +12,7 @@ Description of the feature.
 
 ## Usage
 
-### `Duke.Keyword` - Describe action
+### `Wonderland.Keyword` - Describe action
 
 Describe the action and its outcome.
 
