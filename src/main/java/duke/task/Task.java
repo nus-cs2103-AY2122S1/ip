@@ -99,7 +99,7 @@ public abstract class Task {
     }
 
     /**
-     * Return a {@code String} format of the {@code Task} containing the status and
+     * Returns a {@code String} format of the {@code Task} containing the status and
      * title of {@code Task}.
      *
      * @return String representation of {@code Task}.

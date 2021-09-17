@@ -67,7 +67,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return a String representation of a Deadline task. Starts "[D]" to indicate
+     * Returns a String representation of a Deadline task. Starts "[D]" to indicate
      * that it is a Deadline task.
      *
      * @return String representation of an Deadline.

@@ -56,6 +56,13 @@ public class Duke {
         scanner.close();
     }
 
+    /**
+     * Returns a {@code Pair} where the first element is Duke's response to the input
+     * and the second element contains the validness of the input.
+     *
+     * @return {@code Pair<String, Boolean>} where first element is Duke's response
+     *         and the second element is true if input is invalid, false otherwise.q
+     */
     public Pair<String, Boolean> getResponse(String input) {
         try {
             Command c = Parser.parse(input.trim());
