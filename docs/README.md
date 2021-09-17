@@ -12,6 +12,7 @@
 * [Search for tasks](#search-for-tasks-find)
 * [Clear chat](#clear-chat-clear)
 * [Exiting the program](#exiting-the-program-exit)
+* [FAQ](#faq)
 
 ## How to use
 
