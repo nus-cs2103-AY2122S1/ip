@@ -65,7 +65,7 @@ public class TaskList {
 
     protected String markAsCompleted(String taskName) throws DukeException.TaskAlreadyCompleteException,
             DukeException.NoSuchTaskException {
-        // assert this.existingTasks.contains(taskName) : "task to delete does not exist";
+        // assert this.existingTask~s.contains(taskName) : "task to delete does not exist";
         int taskIndex = this.getTaskIndex(taskName);
         Task completedTask = this.tasks.get(taskIndex);
         if (completedTask.getIsCompleted()) {
