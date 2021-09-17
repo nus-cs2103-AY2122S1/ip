@@ -17,7 +17,11 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-
+/**
+ * Handles user input and output to screen,
+ * the scroller, the text field and the
+ * send button.
+ */
 public class MainWindow extends AnchorPane {
 
     @FXML
@@ -55,7 +59,8 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
-                        " Hello I'm Banana! \n How can I help you?", bot)
+                        " Hello I'm Banana! \n "
+                                + "How can I help you?", bot)
         );
         handleActions();
     }
@@ -80,15 +85,14 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         if (input.equals("bye")) {
             Platform.exit();
-        } else {
-            String response = duke.getResponse(input);
-            Parser.setPrevInput(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input + " ",
-                            user),
-                    DialogBox.getDukeDialog(response, bot)
-            );
         }
+        String response = duke.getResponse(input);
+        Parser.setPrevInput(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input + " ",
+                        user),
+                DialogBox.getDukeDialog(response, bot)
+        );
         userInput.clear();
     }
 
@@ -106,3 +110,4 @@ public class MainWindow extends AnchorPane {
         });
     }
 }
+
