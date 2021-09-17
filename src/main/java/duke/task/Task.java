@@ -9,7 +9,7 @@ public class Task {
     /**
      * boolean showing whether the task has been completed.
      */
-    private boolean completed;
+    private boolean isCompleted;
 
 
     /**
@@ -19,7 +19,7 @@ public class Task {
      */
     public Task(String input) {
         this.title = input.trim();
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Task {
      * @return String that states that the task has been completed
      */
     public String completeItem() {
-        this.completed = true;
+        this.isCompleted = true;
         return "Nice! I've marked this task as done:\n" + this.toString();
     }
 
@@ -36,7 +36,7 @@ public class Task {
      * @return formatted string for uploading to the database
      */
     public String formatTask() {
-        int complete = completed ? 1 : 0;
+        int complete = isCompleted ? 1 : 0;
         return complete + " | " + this.title;
     }
 
@@ -56,7 +56,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String complete = this.completed ? "[X]" : "[ ]";
+        String complete = this.isCompleted ? "[X]" : "[ ]";
         return complete + " " + this.title + " ";
     }
 }

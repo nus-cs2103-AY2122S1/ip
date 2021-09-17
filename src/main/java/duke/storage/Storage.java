@@ -55,7 +55,7 @@ public class Storage {
     }
 
     /**
-     * Initialise Task object and adds it to the arraylist.
+     * Initialises Task object and adds it to the arraylist.
      *
      * @param taskDetails information on a particular task.
      * @param listOfTasks ArrayList of tasks to be returned by load().

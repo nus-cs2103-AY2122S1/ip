@@ -51,10 +51,22 @@ public class DialogBox extends HBox {
         dialog.setTextFill(Color.DARKRED);
     }
 
+    /**
+     * Returns DialogBox containing the user input.
+     * @param text input string of user.
+     * @param img user's profile picture.
+     * @return DialogBox containing user's input
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns DialogBox containing Duke's response to user input.
+     * @param text String containing Duke's response.
+     * @param img Duke's profile picture.
+     * @return DialogBox containing Duke's response.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
@@ -62,6 +74,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Returns DialogBox containing Duke's error response to user input.
+     * @param text String containing Duke's error message.
+     * @param img Duke's profile picture.
+     * @return DialogBox containing Duke's error message.
+     */
     public static DialogBox getErrorDialog(String text, Image img) {
         DialogBox db = getDukeDialog(text, img);
         db.setErrorDialog();
