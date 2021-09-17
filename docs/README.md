@@ -13,9 +13,9 @@ having the benefits of a Graphical User Interface (GUI).
 >   * e.g. in `done INDEX`, `INDEX` is a parameter which can be used as `done 1`.
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `archives` and `bye`) 
 > will be ignored.
->  * e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+>   * e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 > * Format supported for date and time is only `DDMMYY HHmm `
->  * e.g `190921 1700` refers to 19 September 2021, 5:00PM.
+>   * e.g `190921 1700` refers to 19 September 2021, 5:00PM.
 
 ### Viewing Help: `help` 
 
@@ -186,7 +186,7 @@ Expected outcome:
 
 ## Command summary
 |      Action      | Format, Examples                                                                                            |
-|------------------|-----------------------------------------------------------------------------------------------------------  |
+|:----------------:|:----------------------------------------------------------------------------------------------------------- :|
 |   **Add ToDo**   | `todo <description>` Adds a task to the task list.                                                          |
 | **Add Deadline** | `deadline <description> /by <date> <time>` Adds a task with a deadline to the task list.                    |
 |  **Add Event**   | `event <description> /at <date> <time>` Adds an event to the task list.                                     |
