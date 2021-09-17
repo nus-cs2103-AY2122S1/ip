@@ -6,7 +6,7 @@ Random title inserted
 
 1. Feature
    - [Add, update, track completion, and delete tasks](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#add-update-track-completion-and-delete-tasks)
-   - [View task and task date](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#view-tasks-and-query-tasks)
+   - [View tasks and query tasks](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#view-tasks-and-query-tasks)
    - [Load and save](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#load-and-save)
 2. Usage
    - [`help` - Getting help](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#help---getting-help)
