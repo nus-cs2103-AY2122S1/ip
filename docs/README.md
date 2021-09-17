@@ -15,9 +15,9 @@ additionally store date and time information.
 
 
 ### Getting started
-Download the file, place the file in the desired directory, then simply double click to run. If this does not work or 
-there is some unexpected behaviour regarding the saving and loading of file (see warning below), you can run the app 
-using the command line as follows:
+First make sure the device you are running it on has Java 11. Download the file, place the file in the desired directory, 
+then simply double click to run. If this does not work or there is some unexpected behaviour regarding the saving and loading
+of file (see warning below), you can run the app using the command line as follows:
 ```
 cd <name of directory which the ted.jar is located>
 java -jar ted.jar
