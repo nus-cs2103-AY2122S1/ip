@@ -3,7 +3,7 @@
 Losing track of your tasks? Aoi Todo Bot is a todo list app to manage your daily tasks with ease.
 
 * Features
-    * [Adding a Todo: `todo`](#adding-a-todo:`)
+    * Adding a Todo: `todo`
     * Adding a Deadline: `deadline`
     * Adding a Event: `event`
     * Listing all tasks: `list`

@@ -1,27 +1,63 @@
-# Aoi Todo Chat Bot
+# Aoi Todo Bot
 
-![Image of UI](docs/Ui.png)
+Losing track of your tasks? Aoi Todo Bot is a todo list app to manage your daily tasks with ease.
+
+---
+* [About](#about)
+* [Features](#features)
+* [Download](#download)
+* [User Guide](#user-guide)
+* [Development](#development)
+* [Acknowledgements](#acknowledgements)
+
+---
 ## About
 
-Aoi Todo Chat Bot is a todo-list app that was introduced as a greenfield Java project template _Duke_, as part of CS2103T's individual project component.
+Aoi Todo Chat Bot is a todo list app that was introduced as a greenfield Java project template _Duke_, as part of CS2103T's individual project component.
 
-## Setting up in Intellij
+![Image of Welcome](docs/Welcome.png)
+![Image of UI](docs/Ui.png)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/aoi.Aoi.java` file, right-click it, and choose `Run aoi.Aoi.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Features
+### Tasks
+Three different types of tasks to help you track your tasks better!
+* Todos: Tasks without any date/time
+* Deadlines: Tasks that has a specific deadline
+* Events: Tasks that start and end at specific times
+
+### Friendlier Syntax
+To optimise command-line usage, the app's syntax has become shorter.
+
+Example:
+* list &#8594; ls
+* done &#8594; d
+* delete &#8594; del
+
+## Download
+Aoi Todo Bot can be downloaded [here](https://github.com/mslevis/ip/releases).
+
+## User Guide
+User Guide can be found [here](https://mslevis.github.io/ip).
+
+## Development
+First, **fork** this repo, and **clone** the fork into your computer.
+
+If you plan to use Intellij IDEA (highly recommended):
+
+1. **Configure the JDK**: Follow the guide 
+   [[se-edu/guides] IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html)
+    to ensure Intellij is configured to use JDK 11.
+   
+2. **Import the project as a Gradle project**: Follow the guide 
+   [[se-edu/guides] IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+   to import the project into IDEA.
+   
+Note: Importing a Gradle project is slightly different from importing a normal Java project.
+   
+3. Verify the setup:
+Run the gradle task "run" and try a few commands.
+
+## Acknowledgements
+* App Icon made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com)
+* Wallpaper by [Juli4](https://www.zedge.net/profile/79ddf50f-6c00-4401-8547-2561b0d82c2a)
