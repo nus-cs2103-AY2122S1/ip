@@ -43,16 +43,23 @@ public class TaskList {
     /**
      * Deletes the task at the given task index.
      *
-     * @param taskNum Task index of the task.
+     * @param input the input of user for this command.
+     * @param minCommandLength minimum length of command.
      * @return string representation of the task removed.
      */
-    public String removeTask(int taskNum) throws DukeException {
+    public String removeTask(String input, int minCommandLength) throws DukeException {
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(input.substring(minCommandLength - 1));
+        } catch (Exception e) {
+            throw new DukeException(Ui.getDeleteFormatMsg());
+        }
         if (taskNum < 1) {
-            throw new DukeException("negative item");
+            throw new DukeException(Ui.getNegativeTaskMsg());
         } else if (list.size() == 0) {
-            throw new DukeException("no task found");
+            throw new DukeException(Ui.getListEmptyMsg());
         } else if (taskNum > list.size()) {
-            throw new DukeException("no such task");
+            throw new DukeException(Ui.getTaskNotFoundMsg());
         }
         assert taskNum > 0 : "task number is empty";
         Task item = list.remove(taskNum - 1);
@@ -63,17 +70,24 @@ public class TaskList {
     /**
      * Adds tag to the chosen task.
      *
-     * @param taskNum Task index of the task.
-     * @param tag String of tag.
+     * @param infoArray array representing the information.
      * @return string representation of the task after adding tags.
      */
-    public String addTag(int taskNum, String tag) throws DukeException {
+    public String addTag(String[] infoArray) throws DukeException {
+        int taskNum;
+        String tag;
+        try {
+            taskNum = Integer.parseInt(infoArray[1]);
+            tag = infoArray[2];
+        } catch (Exception e) {
+            throw new DukeException(Ui.getTagFormatMsg());
+        }
         if (taskNum < 1) {
-            throw new DukeException("negative item");
+            throw new DukeException(Ui.getNegativeTaskMsg());
         } else if (list.size() == 0) {
-            throw new DukeException("no task found");
+            throw new DukeException(Ui.getListEmptyMsg());
         } else if (taskNum > list.size()) {
-            throw new DukeException("no such task");
+            throw new DukeException(Ui.getTaskNotFoundMsg());
         }
         Task item = list.get(taskNum - 1);
         item.addTag(tag);
@@ -85,19 +99,29 @@ public class TaskList {
     /**
      * Marks the task at the given task index as done.
      *
-     * @param taskNum Task index of the task.
+     * @param input the input of user for this command.
+     * @param minCommandLength minimum length of command.
      * @return string representation of task done.
      */
-    public String markTaskAsDone(int taskNum) throws DukeException {
+    public String markTaskAsDone(String input, int minCommandLength) throws DukeException {
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(input.substring(minCommandLength - 1));
+        } catch (Exception e) {
+            throw new DukeException(Ui.getDoneFormatMsg());
+        }
         if (taskNum < 1) {
-            throw new DukeException("negative item");
+            throw new DukeException(Ui.getNegativeTaskMsg());
         } else if (list.size() == 0) {
-            throw new DukeException("no task found");
+            throw new DukeException(Ui.getListEmptyMsg());
         } else if (taskNum > list.size()) {
-            throw new DukeException("no such task");
+            throw new DukeException(Ui.getTaskNotFoundMsg());
         }
         assert taskNum > 0 : "task number is empty";
         Task item = list.get(taskNum - 1);
+        if (item.isDone()) {
+            throw new DukeException(Ui.getTaskAlreadyDoneMsg());
+        }
         item.markAsDone();
         this.updateFile();
         return Ui.getTaskDone(item.toString());
@@ -161,6 +185,9 @@ public class TaskList {
      * @return string representation of all the tasks.
      */
     public String listTasks() throws DukeException {
+        if (list.size() == 0) {
+            throw new DukeException(Ui.getListEmptyMsg());
+        }
         String msg = "    Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < list.size(); i++) {
             msg += String.format("    %d.%s", (i + 1), list.get(i).toString()) + System.lineSeparator();
@@ -168,10 +195,15 @@ public class TaskList {
         return msg;
     }
 
+    /**
+     * Updates the file into storage.
+     */
     public void updateFile() throws DukeException {
         storage.updateFile(list);
     }
-
+    /**
+     * Writes the file into storage.
+     */
     public void writeFile(Task t) throws DukeException {
         storage.writeFile(t);
     }

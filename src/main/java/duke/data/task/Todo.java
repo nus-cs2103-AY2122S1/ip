@@ -9,9 +9,10 @@ package duke.data.task;
 public class Todo extends Task {
 
     /**
-     * Constructor for ToDo class.
+     * Constructor for Todo class.
      *
      * @param description Description of the task.
+     * @param tags array of strings representing the tags.
      */
     public Todo(String description, String[] tags) {
         super(description);

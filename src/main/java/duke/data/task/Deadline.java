@@ -21,6 +21,7 @@ public class Deadline extends Task {
      *
      * @param description Description of the task.
      * @param by Date the task is due.
+     * @param tags array of strings representing the tags.
      */
     public Deadline(String description, String by, String[] tags) {
         super(description);
@@ -43,7 +44,7 @@ public class Deadline extends Task {
     /**
      * Formats the deadline task to the desirable format.
      *
-     * @return A string representing the deadline task in the desirable format.
+     * @return String representing the deadline task in the desirable format.
      */
     public String formatToWrite() {
         return String.format("D | %d | %s | %s", (super.isDone ? 1 : 0), this.by,
@@ -54,7 +55,7 @@ public class Deadline extends Task {
      * Formats the due date to the desirable format.
      *
      * @param dateTime Input date format.
-     * @return A string representing the date in the desirable format.
+     * @return String representing the date in the desirable format.
      */
     public String parseStringToDate(String dateTime) throws DukeException {
         DateTimeFormatter sourceFormat;

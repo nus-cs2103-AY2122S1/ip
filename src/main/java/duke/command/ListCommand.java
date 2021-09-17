@@ -8,6 +8,10 @@ import duke.data.TaskList;
  * @author Wang Hong Yong
  */
 public class ListCommand extends Command {
+    public static final String COMMAND_WORD = "LIST";
+    public static final String COMMAND_USAGE = COMMAND_WORD
+            + " : lists out all the tasks stored.";
+    public static final String COMMAND_FORMAT = "Format: list ";
 
     /**
      * Constructor for ListCommand.
@@ -20,6 +24,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the "List" Command.
+     *
      * @return string that represents details of listing all the tasks.
      */
     @Override

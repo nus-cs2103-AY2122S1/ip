@@ -10,6 +10,11 @@ import duke.ui.Ui;
  * @author Wang Hong Yong
  */
 public class DeleteCommand extends Command {
+    public static final String COMMAND_WORD = "DELETE";
+    public static final String COMMAND_USAGE = COMMAND_WORD
+            + " : deletes an existing task.";
+    public static final String COMMAND_FORMAT = "Format: delete <Task Number> "
+            + "(e.g delete 1)\n";
     private String input;
 
     /**
@@ -25,15 +30,16 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the "Delete" Command.
+     *
      * @return string that represents details of deleting this task.
+     * @throws DukeException if task faces an error during execution.
      */
     @Override
-    public String execute() {
-        int minCommandLength = 6;
-        if (input.length() == minCommandLength) {
-
+    public String execute() throws DukeException {
+        int minCommandLength = 8;
+        if (input.length() < minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("delete"));
         }
-        return super.taskList.removeTask(Integer.parseInt(input.substring(minCommandLength + 1)));
+        return super.taskList.removeTask(input, minCommandLength);
     }
 }

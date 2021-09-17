@@ -25,7 +25,8 @@ public class Task {
 
     /**
      * Retrieves the done status of the task.
-     * @return string representation of the done status of the task.
+     *
+     * @return String representation of the done status of the task.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -90,7 +91,7 @@ public class Task {
     /**
      * Returns the String containing all the tags.
      *
-     * @return String representation of all tags.
+     * @param tag Tag that this task is associated with.
      */
     public void addTag(String tag) {
         this.tags.add(tag);

@@ -11,6 +11,11 @@ import duke.ui.Ui;
  * @author Wang Hong Yong
  */
 public class TagCommand extends Command {
+    public static final String COMMAND_WORD = "TAG";
+    public static final String COMMAND_USAGE = COMMAND_WORD
+            + " : adds a tag to the selected task";
+    public static final String COMMAND_FORMAT = "Format: tag <task number> <description> "
+            + "(e.g tag 2 priority)\n";
     private String input;
 
     /**
@@ -26,18 +31,16 @@ public class TagCommand extends Command {
 
     /**
      * Executes the "Tag" Command.
+     *
      * @return string that represents details of tagging this task.
+     * @throws DukeException if task faces an error during execution.
      */
-    public String execute() {
-        if (input.length() == 3 || input.length() == 4) {
-            throw new DukeException(Ui.getEmptyDescriptionMsg("done"));
-            // change error msg
+    public String execute() throws DukeException {
+        int minCommandLength = 7;
+        if (input.length() < minCommandLength) {
+            throw new DukeException(Ui.getTagFormatMsg());
         }
-        try {
-            String[] infoArray = input.split("\\s+");
-            return taskList.addTag(Integer.parseInt(infoArray[1]), infoArray[2]);
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
-        }
+        String[] infoArray = input.split("\\s+");
+        return taskList.addTag(infoArray);
     }
 }

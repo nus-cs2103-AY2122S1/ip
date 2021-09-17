@@ -10,6 +10,11 @@ import duke.ui.Ui;
  * @author Wang Hong Yong
  */
 public class DoneCommand extends Command {
+    public static final String COMMAND_WORD = "DONE";
+    public static final String COMMAND_USAGE = COMMAND_WORD
+            + " : Marks selected Task as done.";
+    public static final String COMMAND_FORMAT = "Format: done <Task Number> "
+            + "(e.g done 1)\n";
     private String input;
 
     /**
@@ -25,14 +30,16 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the "Done" Command.
+     *
      * @return string that represents details of completing this task.
+     * @throws DukeException if task faces an error during execution.
      */
     @Override
     public String execute() throws DukeException {
-        int minCommandLength = 4;
-        if (input.length() == minCommandLength) {
+        int minCommandLength = 6;
+        if (input.length() < minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("done"));
         }
-        return taskList.markTaskAsDone(Integer.parseInt(input.substring(minCommandLength + 1)));
+        return super.taskList.markTaskAsDone(input, minCommandLength);
     }
 }

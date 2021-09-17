@@ -77,7 +77,7 @@ public class Storage {
     /**
      * Updates the file according to the tasklist.
      *
-     * @param tasks String representatio of all tasks.
+     * @param tasks String representation of all tasks.
      * @throws DukeException if unexpected error is encountered.
      */
     public static void updateFile(ArrayList<Task> tasks) throws DukeException {
@@ -105,15 +105,11 @@ public class Storage {
         Task task;
         String[] tags;
         String letter = info[0];
-        System.out.println(info.length);
-        System.out.println(letter);
         if ((letter.equals("D") || letter.equals("E")) && (info.length == 5)) {
             tags = info[4].split("\\>");
         } else if ((letter.equals("T")) && (info.length == 4)) {
-            System.out.println("tags");
             tags = info[3].split("\\>");
         } else {
-            System.out.println("gg");
             tags = new String[0];
         }
         switch (letter) {

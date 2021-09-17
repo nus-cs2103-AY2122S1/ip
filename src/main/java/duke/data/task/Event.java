@@ -14,6 +14,7 @@ public class Event extends Task {
      *
      * @param description Description of the task.
      * @param at Date of the event.
+     * @param tags array of strings representing the tags.
      */
     public Event(String description, String at, String[] tags) {
         super(description);
@@ -36,7 +37,7 @@ public class Event extends Task {
     /**
      * Formats the event task to the desirable format.
      *
-     * @return A string representing the event task in the desirable format.
+     * @return String representing the event task in the desirable format.
      */
     public String formatToWrite() {
         return String.format("E | %d | %s | %s", (super.isDone ? 1 : 0), this.at, super.formatToWrite());
