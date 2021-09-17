@@ -1,0 +1,10 @@
+todo read book
+deadline return book /by Monday
+deadline return book /by 2/12/2019 1800
+event project meeting /on 12/08/2021 2359
+list
+delete 2
+done 3
+done 2
+list
+bye
