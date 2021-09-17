@@ -15,8 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke(
-            "/Users/ravi57004/ip/src/main/java/Tasks.txt");
+    private Duke duke = new Duke("info/Tasks.txt");
 
     /**
      * Loads the FXMLLoader object
