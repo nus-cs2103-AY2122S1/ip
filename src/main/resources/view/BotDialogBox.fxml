@@ -17,9 +17,9 @@
                 <Font name="Arial" size="13.0" />
             </font>
             <HBox.margin>
-                <Insets right="5.0" />
+                <Insets left="6.0" />
             </HBox.margin></Label>
-        <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="50.0" />

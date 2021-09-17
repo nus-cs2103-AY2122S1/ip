@@ -34,9 +34,9 @@ Expected outcome:
 
 ```
 Here are Ihe lasks in your list:
-  1. [T][✓] eat 
-  2. [E][✗] code (at 02 Sep 2021 05:00 PM)
-  3. [D][✗] sleep (by: 01 Aug 2021 06:00 AM)
+  1. [T][X] eat 
+  2. [E][ ] code (at 02 Sep 2021 05:00 PM)
+  3. [D][ ] sleep (by: 01 Aug 2021 06:00 AM)
 ```
 
 ### `deadline` - Add deadline
@@ -50,7 +50,7 @@ Expected outcome:
 
 ```
 Got it meow! I've added this task:
-    [D][✗] study (by: 01 May 2024 11:59 PM)
+    [D][ ] study (by: 01 May 2024 11:59 PM)
 Now you have 5 tasks in the list.
 ```
 
@@ -66,7 +66,7 @@ Expected outcome:
 
 ```
 Got it meow! I've added this task:
-    [E][✗] study (at: 01 May 2024 11:59 PM)
+    [E][ ] study (at: 01 May 2024 11:59 PM)
 Now you have 5 tasks in the list.
 ```
 
@@ -81,7 +81,7 @@ Expected outcome:
 
 ```
 Got it meow! I've added this task:
-    [T][✗] sleep
+    [T][ ] sleep
 Now you have 5 tasks in the list.
 ```
 
@@ -97,7 +97,7 @@ Expected outcome:
 
 ```
 Noted. I've removed this task:
-    [T][✓] eat 
+    [T][X] eat 
 Now you have 4 tasks in the list.
 ```
 
@@ -113,7 +113,7 @@ Expected outcome:
 
 ```
 Noted. I've marked this task as done:
-    [D][✓] sleep (by: 01 Aug 2021 06:00 AM)
+    [D][X] sleep (by: 01 Aug 2021 06:00 AM)
 ```
 
 ### `sort` - Sort a type of tasks
@@ -130,9 +130,9 @@ Expected outcome:
 
 ```
 Here are the sorted deadline in your list:
-    1. [D][x] graduation (by: 01 May 2020 11:59 PM) 
-    2. [D][x] sleep (by: 01 Oct 2021 06:00 AM) 
-    3. [D][✓] hello (by: 31 Aug 2021 06:00 AM) 
+    1. [D][ ] graduation (by: 01 May 2020 11:59 PM) 
+    2. [D][ ] sleep (by: 01 Oct 2021 06:00 AM) 
+    3. [D][X] say hello (by: 31 Aug 2021 06:00 AM) 
 ```
 
 ### `find` - Find a task
@@ -147,18 +147,42 @@ Expected outcome:
 
 ```
 Here are the sorted deadline in your list:
-    1. [T][x] no life
-    2. [E][x] have fun in life (by: 01 Oct 2023 06:00 AM) 
-    3. [D][✓] lifestyle (by: 31 Aug 2021 06:00 AM) 
+    1. [T][ ] no life
+    2. [E][ ] have fun in life (by: 01 Oct 2023 06:00 AM) 
+    3. [D][X] lifestyle (by: 31 Aug 2021 06:00 AM) 
 ```
 
 ### `bye` - Exit the app
 
 Exit the app. The list data will automatically be saved.
 
-Format and example of usage: `exit`
+Format and example of usage: `bye`
 
 Expected outcome:
 ```
 Bye meow! I will always wait here meow(>^^<)
 ```
+
+## Command Summary
+| Command                                        | Example                              |
+|------------------------------------------------|--------------------------------------|
+| `list`                                         | `list`                               |
+| `deadline <description> /by <yyyy-MM-dd HHmm>` | `deadline study /by 2024-05-01 2359` |
+| `event <description> /at <yyyy-MM-dd HHmm>`    | `event study /at 2024-05-01 2359`    |
+| `todo <description>`                           | `todo sleep`                         |
+| `delete <index>`                               | `delete 1`                           |
+| `done <index>`                                 | `done 3`                             |
+| `sort <task_type>`                             | `sort deadline`                      |
+| `find <keyword>`                               | `find life`                          |
+| `bye`                                          | `bye`                                |
+
+## Credit
+Icons used are [free for non-commercial use](https://icons8.com/license). They are listed below:
+
+Bot profile:
+<a target="_blank" href="https://icons8.com/icon/121197/cat">Cat</a> 
+icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+User profile:
+<a target="_blank" href="https://icons8.com/icon/121351/cat">Cat</a> 
+icon by <a target="_blank" href="https://icons8.com">Icons8</a>

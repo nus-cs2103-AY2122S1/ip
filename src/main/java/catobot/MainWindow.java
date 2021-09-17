@@ -23,9 +23,9 @@ public class MainWindow extends AnchorPane {
     private Catobot catobot;
 
     private final Image userImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/image/kuma-2.png")));
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/image/user.png")));
     private final Image dukeImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/image/neko-2.png")));
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/image/bot.png")));
 
     /**
      * Initializes the displaying window.
