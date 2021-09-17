@@ -57,7 +57,7 @@ public class Ui {
     public String listAllTasks(TaskList tasks) {
         String result = "";
         if (tasks.size() == 0) {
-            result = "Sorry, duke can't find any task with this keyword.";
+            result = "Sorry, duke can't find any tasks.";
             return result;
         }
         for (int i = 0; i < tasks.size(); i++) {
