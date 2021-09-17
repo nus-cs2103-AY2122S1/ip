@@ -75,6 +75,9 @@ public class Ui {
      * @return A String with all the tasks in the list.
      */
     public String showList(TaskList taskList) {
+        if (taskList.isEmpty()) {
+            return "You have no tasks in your list!";
+        }
         return "Here are the tasks in your list: " + taskList;
     }
 
