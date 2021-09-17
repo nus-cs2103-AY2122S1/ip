@@ -203,8 +203,8 @@ public class Parser {
             }
         } else if (input.contains("deadline") && !input.contains("/by  ")
                   || input.contains("event") && !input.contains("/at  ")) {
-            throw new DukeException(" OOPS!!! You need to specify"
-                    + "\n when the occasion is happening :-(");
+            throw new DukeException(" OOPS!!! You need to use"
+                    + "\n the correct format :-(");
         }
     }
 
