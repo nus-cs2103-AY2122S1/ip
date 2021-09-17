@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Main-Class: Main
+Class-Path: javafx-fxml-11-win.jar javafx-base-11.jar javafx-controls-11
+ -win.jar junit-jupiter-api-5.5.0.jar javafx-controls-11-linux.jar junit
+ -platform-engine-1.5.0.jar javafx-fxml-11-mac.jar javafx-graphics-11-ma
+ c.jar javafx-base-11-linux.jar junit-platform-commons-1.5.0.jar opentes
+ t4j-1.2.0.jar javafx-controls-11.jar javafx-controls-11-mac.jar junit-j
+ upiter-engine-5.5.0.jar javafx-base-11-win.jar javafx-graphics-11-linux
+ .jar apiguardian-api-1.1.0.jar javafx-graphics-11-win.jar javafx-fxml-1
+ 1-linux.jar javafx-graphics-11.jar javafx-base-11-mac.jar
+

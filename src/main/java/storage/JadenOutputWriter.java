@@ -1,3 +1,5 @@
+package storage;
+
 import model.TaskList;
 
 import java.io.File;
@@ -12,7 +14,7 @@ public class JadenOutputWriter {
         try {
             this.outputFile.createNewFile();
         } catch (IOException e) {
-            Session.output("I See A Problem With Writing Outputs.");
+            System.out.println("I See A Problem With Writing Outputs.");
             e.printStackTrace();
         }
     }
@@ -24,7 +26,7 @@ public class JadenOutputWriter {
             outputWriter.write(outputString);
             outputWriter.close();
         } catch (IOException e) {
-            Session.output(" There Is Something Wrong With Our Output Target.");
+            System.out.println(" There Is Something Wrong With Our Output Target.");
         }
     }
 }

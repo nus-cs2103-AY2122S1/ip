@@ -1,6 +1,12 @@
-import model.*;
+package storage;
+
 import parser.ParsedInput;
 
+import model.TaskList;
+import model.Task;
+import model.ToDoTask;
+import model.DeadlineTask;
+import model.EventTask;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -28,14 +34,13 @@ public class JadenTaskReader {
                 String taskLine = fileReader.nextLine();
                 if(taskLine.length() > 1) {
                     Task newTask = decodeTask(taskLine);
-                    if(newTask != null) tasks.addTask(newTask, false);
+                    if(newTask != null) tasks.addTask(newTask);
                 } else {
                     break;
                 }
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
-            Session.output("Your Input Document Is Deeply Flawed, Like Many Of Us.");
         } finally {
             return tasks;
         }

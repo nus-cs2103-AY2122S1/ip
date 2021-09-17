@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  * Parsed input that can easily be processed into a task.
  */
 public class ParsedInput {
-    public final CommandType commandType;
+    public CommandType commandType;
     public String taskDescription = "";
     public LocalDate deadline;
     public String eventPeriod = "";
@@ -18,14 +18,14 @@ public class ParsedInput {
     /**
      * Generates parsed input for task.
      * @param input
-     * @throws JadenInputException
      */
-    public ParsedInput(String input) throws JadenInputException {
+    public ParsedInput(String input) {
         String[] splitInput = input.split(" ");
         switch (splitInput[0]) {
             case "todo":
                 if(!inputValidator.checkTodo(splitInput)) {
-                    throw JadenInputException.invalidTodo();
+                    this.commandType = CommandType.ERROR;
+                    break;
                 }
                 this.commandType = CommandType.TODO;
                 this.taskDescription = joinStrings(splitInput, 1, splitInput.length - 1);
@@ -64,8 +64,9 @@ public class ParsedInput {
             case "find":
                 this.commandType = CommandType.FIND;
                 this.taskDescription = joinStrings(splitInput, 1, splitInput.length - 1);
+                break;
             default:
-                throw JadenInputException.unrecognized();
+                this.commandType = CommandType.ERROR;
         }
     }
 
