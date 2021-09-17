@@ -9,7 +9,7 @@ import duke.task.Task;
 import duke.ui.Ui;
 
 public class DeleteTaskCommand extends Command {
-    private String arguments;
+    private int taskIndex;
 
     /**
      * Creates a command that deletes a task.
@@ -20,7 +20,12 @@ public class DeleteTaskCommand extends Command {
         if (arguments.length() == 0) {
             throw new InvalidCommandException("Command `delete` requires an arguments");
         }
-        this.arguments = arguments;
+
+        try {
+            this.taskIndex = Integer.parseInt(arguments);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Unable to parse number from arguments: " + arguments);
+        }
     }
 
     /**
@@ -35,12 +40,9 @@ public class DeleteTaskCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task;
         try {
-            int taskIndex = Integer.parseInt(arguments);
             task = taskList.removeTask(taskIndex - 1);
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandException("Unable to parse number from arguments: " + arguments);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskException("There is no task with the following number: " + arguments);
+            throw new InvalidTaskException("There is no task with the following number: " + taskIndex);
         }
 
         storage.saveTasks(taskList);
