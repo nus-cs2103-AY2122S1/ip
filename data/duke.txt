@@ -1,0 +1,7 @@
+T | 1 | read book
+D | 0 | return book | 6/6/2021 1800
+E | 0 | project meeting | 6/8/2021 1400
+T | 1 | join sports club
+D | 1 | complete iP Week 3 | 27/8/2021 0800
+D | 0 | do CS3243 tutorial | 25/8/2021 0800
+T | 0 | some stuff
