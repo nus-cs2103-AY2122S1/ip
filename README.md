@@ -1,24 +1,33 @@
-# Duke project template
+![Project Poseidon](./src/main/resources/images/Logo.png)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## *Project POSEIDON*
+Repository for the Individual Project of CS2103T - Software Engineering taken in AY2021-2022 Semester 1.
 
-## Setting up in Intellij
+## *About*
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+**POSEIDON** -  stands for  **P**lanner **O**rganizer that's **S**imple **E**fficient **I**ntelligent **D**igital **O**ptimized and **N**ifty.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+**POSEIDON** (Poseidon) is a **desktop application for keeping track of todo tasks, upcoming deadlines and planning events**. Poseidon's efficient and intelligent algorithm, combined with an optimized Command Line Interface (CLI) and a simple Graphical User Interface (GUI) gives you a fast and smooth user experience. If you can type fast, Poseidon can help you plan and organize your day faster than traditional GUI apps.
+
+## *Tech*
+Project POSEIDON was made possible due to the following tech stack:
+- [Java](https://www.java.com/en/) - Written in Java™ SE Development Kit 11.0.9 (JDK 11.0.9)
+- [JavaFX](https://openjfx.io/) - An open source software platform for creating GUI-based desktop applications built on Java. JavaFX Version 11 used.
+- [SceneBuilder](https://gluonhq.com/products/scene-builder/) -  A visual layout tool with Drag & Drop interface for designing JavaFX application interfaces. Scene Builder 16.0.0 used.
+-   [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/#section=windows)  - Text editor for Java. IntelliJ IDEA 2021.2 IC-212.4746.92 used.
+- [Git CLI](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line) - Version control
+
+## *Acknowledgements*
+Thank you.
+- Send icon made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
+- Poseidon art and logo created using [Canva](https://www.canva.com/)
+- Code inspiration and help from [SkyBlaise99](https://github.com/SkyBlaise99) from [Task](https://github.com/SkyBlaise99/ip/blob/master/src/main/java/sora/task/Task.java)
+- User Guide art inspiration from [hsiaotingluv](https://github.com/hsiaotingluv) from [User Guide](https://github.com/hsiaotingluv/ip/blob/master/docs/README.md)
+## *Repo Stats*
+
+-   Project POSEIDON was initiated on 19th August, 2021, and took 12 coding sessions spread over 31 days and was last updated on 18th September, 2021.
+
+-   2750 total lines of text of which 1500 LOC are in Java
+
+## *Author*
+[Yeluri Ketan](https://github.com/YeluriKetan) - Undergraduate, Computer Science, NUS '24
