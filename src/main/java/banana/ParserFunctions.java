@@ -9,8 +9,7 @@ import java.time.LocalDate;
  * commands.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 public class ParserFunctions {
 
     /**
@@ -75,7 +74,7 @@ public class ParserFunctions {
      * parsed by LocalDate.
      *
      * @param date the old-format date.
-     * @return the date.
+     * @return the new-format date.
      */
     public static String parseDates(String date) {
         String[] sepIntoYearMonthDate = date.split("/");
