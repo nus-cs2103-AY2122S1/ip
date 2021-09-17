@@ -31,11 +31,11 @@ Search for tasks containing a keyword of your choice.
 
 Add a todo task to the current task list.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `todo read book`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Update the current task list with your new todo task.
 
@@ -50,11 +50,11 @@ Now you have 1 task in the list.
 
 Add a deadline task to the current task list.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `deadline finish iP /by 2021-09-17`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Add a deadline task and reflects its respective deadline in MMM dd yyyy format.
 
@@ -69,11 +69,11 @@ Now you have 2 tasks in the list.
 
 Add an event task to the current task list.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `event party /at 2021-09-18`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Add a event task and reflects its event date in MMM dd yyyy format.
 
@@ -88,11 +88,11 @@ Now you have 3 tasks in the list.
 
 Check task off in the task list to represent it as done. Able to check multiple tasks off at once.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `done 1 2`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Mark tasks indicated by the task numbers given as done.
 
@@ -107,11 +107,11 @@ Nice! I've marked these tasks as done:
 
 Delete tasks off the task list. Able to delete multiple tasks at once.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `delete 1 3`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Delete tasks at the given task numbers.
 
@@ -127,11 +127,11 @@ Now you have 1 tasks in the list.
 
 Display current task list.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `list`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 If the task list is empty:
 ```
@@ -152,11 +152,11 @@ Here are the tasks in your list:
 
 Display tasks containing any keyword, phrase or letter of the user's choice.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `find book`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Search for tasks containing the keyword 'book'.
 
@@ -170,11 +170,11 @@ Here are tasks that contain the keyword 'book':
 
 Terminate and close the application.
 
-###### _Example of usage:_
+_Example of usage:_
 
 `bye`
 
-###### _Expected outcome:_
+_Expected outcome:_
 
 Terminate and close the application.
 
