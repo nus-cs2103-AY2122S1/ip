@@ -3,9 +3,6 @@ package duke;
 import duke.commands.Command;
 import duke.gui.Main;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * The main class which runs the Duke chatbot.
