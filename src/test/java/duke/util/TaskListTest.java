@@ -55,14 +55,4 @@ class TaskListTest {
         taskList.deleteTask(0);
         assertEquals(0, taskList.getSize());
     }
-
-    @Test
-    void testToString() {
-        TaskList taskList = new TaskList(new ArrayList<>());
-        Todo todo = new Todo("read book");
-        taskList.addTask(todo);
-        Todo todo2 = new Todo("prepare lunch");
-        taskList.addTask(todo2);
-        assertEquals("     1.[T][ ] read book\n     2.[T][ ] prepare lunch", taskList.toString());
-    }
 }
