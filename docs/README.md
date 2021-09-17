@@ -25,7 +25,7 @@ say ```todo [task description]```
 
 #### Add an Event task
 - ```event``` tasks are tasks with a specific date and time. To add one,
-  say  <br /> ```event [event name] /at [yyyy-mm-dd HH_MM]```
+  say  <br /> ```event [event name] /at [yyyy-mm-dd HH:MM]```
 - You can replace ```event``` with ```e```.
 - E.g. ```e CS3241 finals /at 2021-12-01 13:00```
 
