@@ -91,7 +91,7 @@ public abstract class Command {
     }
 
     /**
-     * Command will execute.
+     * Executes the command.
      *
      * @param tasks the task to be executed in the command.
      * @param ui the ui to interact with the user.

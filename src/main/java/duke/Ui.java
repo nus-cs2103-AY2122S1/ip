@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Return string saying bye.
+     * Returns string saying bye.
      *
      * @return String saying bye.
      */
@@ -122,30 +122,30 @@ public class Ui {
      */
     public String helpMessage(CommandsTypes commandsType) {
         switch (commandsType) {
-            case ADD: {
-                return AddCommand.getHelpMessage();
-            }
-            case LIST: {
-                return ListCommand.getHelpMessage();
-            }
-            case DELETE: {
-                return DeleteCommand.getHelpMessage();
-            }
-            case TAG: {
-                return TagCommand.getHelpMessage();
-            }
-            case FIND: {
-                return FindCommand.getHelpMessage();
-            }
-            case MARK_DONE: {
-                return MarkDoneCommand.getHelpMessage();
-            }
-            case HELP: {
-                return HelpCommand.getHelpMessage();
-            }
-            default: {
-                assert false : "Unknown command type for help";
-            }
+        case ADD: {
+            return AddCommand.getHelpMessage();
+        }
+        case LIST: {
+            return ListCommand.getHelpMessage();
+        }
+        case DELETE: {
+            return DeleteCommand.getHelpMessage();
+        }
+        case TAG: {
+            return TagCommand.getHelpMessage();
+        }
+        case FIND: {
+            return FindCommand.getHelpMessage();
+        }
+        case MARK_DONE: {
+            return MarkDoneCommand.getHelpMessage();
+        }
+        case HELP: {
+            return HelpCommand.getHelpMessage();
+        }
+        default: {
+            assert false : "Unknown command type for help";
+        }
         }
         return null;
     }
