@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,7 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PusheenUser200.png"));
     private Image happyBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenBot200.png"));
     private Image angryBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenAngry200.png"));
+    private Image sleepBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenSleep200.png"));
 
+    private static final long SECOND_IN_MILLISECONDS = 1000;
 
     @FXML
     public void initialize() {
@@ -51,22 +56,28 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        Image botImage;
         String input = userInput.getText();
         Response response = duke.handleCommands(input);
         String responseOutput = response.getMessage();
 
-        if (response.hasError()) {
-            botImage = angryBotImage;
-        } else {
-            botImage = happyBotImage;
-        }
+        Image botImage = response.hasError() ? angryBotImage : happyBotImage;
+        botImage = response.isTerminate() ? sleepBotImage: botImage;
+        boolean isTerminate = response.isTerminate();
 
-        //TODO: isTerminate
-        dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(responseOutput, botImage)
-        );
+
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(responseOutput, botImage));
         userInput.clear();
+
+        if (isTerminate) {
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask(){
+                    @Override
+                    public void run() {
+                        System.exit(0);
+                    }
+                };
+                timer.schedule(task, SECOND_IN_MILLISECONDS * 3);
+        }
     }
 }
