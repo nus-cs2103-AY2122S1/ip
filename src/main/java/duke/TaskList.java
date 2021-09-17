@@ -78,11 +78,14 @@ public class TaskList {
      *
      * @param taskIndex Index of the Task to be marked as done.
      * @return Task that was marked as done.
-     * @throws DukeException If taskIndex is negative or more than or equal to size of array.
+     * @throws DukeException If taskIndex is negative, no task exists at that index, or the task is already done.
      */
     public Task markTaskDone(int taskIndex) throws DukeException {
         validateTaskIndex(taskIndex);
         Task task = tasks.get(taskIndex);
+        if (task.getIsDone()) {
+            throw new DukeException("Task " + (taskIndex + 1) + " is already marked as done.");
+        }
         task.markAsDone();
         return task;
     }

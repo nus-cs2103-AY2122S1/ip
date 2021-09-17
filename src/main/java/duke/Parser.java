@@ -69,8 +69,8 @@ public class Parser {
     }
 
     private static EditCommand parseEditCommand(String commandDetails) throws DukeException {
-        String EDIT_USAGE = "Error. Usage of edit command: edit [taskIndex] /desc [new desc]"
-                + "/date [new date]\n" + "eg. edit 1 /desc Submit IP /date 17-9-2021 23:59";
+        final String EDIT_USAGE = "Usage of edit command:\nedit [taskIndex] /desc [new desc] "
+                + "/date [new date]\neg. edit 1 /desc Submit IP /date 17-9-2021 23:59";
         int taskIndex = getTaskIndex(commandDetails);
         try {
             String detailsWithoutIndex = commandDetails.split(" ", 2)[1];
@@ -114,7 +114,7 @@ public class Parser {
     }
 
     private static AddTaskCommand parseEventCommand(String commandDetails) throws DukeException {
-        String[] parts = commandDetails.split("/at ");
+        String[] parts = commandDetails.split("/at");
         String description = parts[0].trim();
         checkEmptyDetails(description, "Event");
         
@@ -128,14 +128,14 @@ public class Parser {
     }
 
     private static AddTaskCommand parseDeadlineCommand(String commandDetails) throws DukeException {
-        String[] parts = commandDetails.split("/by ");
+        String[] parts = commandDetails.split("/by");
         String description = parts[0].trim();
         checkEmptyDetails(description, "Deadline");
         
         if (parts.length < 2) {
             throw new DukeException("Deadline descriptions must contain /by [dd-mm-yyyy hh:mm]");
         }
-        String by = parts[1];
+        String by = parts[1].trim();
         
         Deadline deadline = new Deadline(description, by);
         return new AddTaskCommand(deadline);
