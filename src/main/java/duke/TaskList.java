@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -29,8 +30,10 @@ public class TaskList {
      * @param searchStr The string to filter by.
      */
     public TaskList filterTasks(String searchStr) {
-        ArrayList<Task> tasks = new ArrayList<>(this.tasks);
-        tasks.removeIf((task) -> !task.getDescription().toLowerCase().contains(searchStr.toLowerCase()));
+        String searchInput = searchStr.toLowerCase();
+        ArrayList<Task> tasks = this.tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(searchInput))
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return new TaskList(tasks);
     }

@@ -22,6 +22,7 @@ public class Duke {
     }
 
     public void setUi(Ui ui) {
+        assert ui != null;
         this.ui = ui;
     }
 

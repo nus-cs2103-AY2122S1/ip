@@ -41,6 +41,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke duke) {
+        assert duke != null;
         this.duke = duke;
 
         Ui ui = new GraphicalUi(dialogContainer, dukeImage);
