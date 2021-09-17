@@ -16,16 +16,16 @@ import duke.task.Todo;
  * Responsible for loading and saving user's tasks on disk.
  */
 public class Storage {
-    private final static String DIR_PATH = "data";
-    private final static String FILE_NAME = "tasks.txt";
+    public final static String DIR_PATH = "./data";
+    public final static String FILE_NAME = "tasks";
 
     /**
      * Returns file object which contains the tasks stored on disk.
      *
      * @return file object which contains tasks stored on disk.
      */
-    public File getTaskFile() {
-        File file = new File(DIR_PATH + "/" + FILE_NAME);
+    private static File getTaskFile() {
+        File file = new File(DIR_PATH + "/" + FILE_NAME + ".txt");
         return file;
     }
 
@@ -35,7 +35,7 @@ public class Storage {
      * @param tasks Task list.
      * @throws StorageException If file storing the tasks is incorrectly formatted.
      */
-    public void loadTasks(TaskList tasks) throws StorageException {
+    public static void loadTasks(TaskList tasks) throws StorageException {
         try {
             File taskFile = getTaskFile();
             Scanner sc = new Scanner(taskFile);
@@ -54,7 +54,7 @@ public class Storage {
         }
     }
 
-    private Task parseTaskFromStorage(String taskString) throws
+    private static Task parseTaskFromStorage(String taskString) throws
             ArrayIndexOutOfBoundsException, DateTimeParseException {
 
         String[] splitTaskString = taskString.split(Task.STORAGE_DELIMITER);
@@ -84,9 +84,10 @@ public class Storage {
      * Saves users tasks in a file on disk.
      *
      * @param tasks List of users tasks.
+     * @param fileName Name of file where tasks should be saved.
      * @throws StorageException If unable to write tasks to a file on disk.
      */
-    public void saveTasks(TaskList tasks) throws StorageException {
+    public static void saveTasksToFile(TaskList tasks, String fileName) throws StorageException {
         assert tasks != null : "Task list should not be null in order to save tasks on disk";
 
         try {
@@ -94,7 +95,7 @@ public class Storage {
             if (!base_dir.exists()) {
                 base_dir.mkdirs();
             }
-            FileWriter fw = new FileWriter(DIR_PATH + "/" + FILE_NAME);
+            FileWriter fw = new FileWriter(DIR_PATH + "/" + fileName + ".txt");
             fw.write(tasks.toStorageFormat());
             fw.close();
         } catch (IOException e) {

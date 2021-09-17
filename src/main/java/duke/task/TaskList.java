@@ -90,6 +90,13 @@ public class TaskList {
         return filteredTaskList;
     }
 
+    /**
+     * Clears the user's current list of tasks.
+     */
+    public void clear() {
+        tasks = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         StringBuilder taskListStringRepresentation = new StringBuilder();
