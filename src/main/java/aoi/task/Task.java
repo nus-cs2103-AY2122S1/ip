@@ -1,4 +1,4 @@
-package aoi.commands;
+package aoi.task;
 
 /**
  * Encapsulates a Task that has a description and a completion state isDone.

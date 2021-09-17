@@ -10,11 +10,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import aoi.commands.Deadline;
-import aoi.commands.Event;
-import aoi.commands.Task;
-import aoi.commands.Todo;
 import aoi.data.TaskList;
+import aoi.task.Deadline;
+import aoi.task.Event;
+import aoi.task.Task;
+import aoi.task.Todo;
 
 /**
  * Encapsulates a Storage object that handles loading and saving of Tasks.

@@ -1,4 +1,4 @@
-package aoi.commands;
+package aoi.task;
 
 /**
  * Encapsulates a Todo object that implements a Task.

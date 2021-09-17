@@ -2,8 +2,8 @@ package aoi.data;
 
 import java.util.ArrayList;
 
-import aoi.commands.Task;
 import aoi.exceptions.AoiException;
+import aoi.task.Task;
 
 /**
  * Encapsulates a TodoList that contains Tasks.

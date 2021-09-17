@@ -1,4 +1,4 @@
-package aoi.controller;
+package aoi.controllers;
 
 import java.util.Timer;
 import java.util.TimerTask;

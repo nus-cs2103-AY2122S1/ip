@@ -1,4 +1,4 @@
-package aoi.controller;
+package aoi.controllers;
 
 import java.io.IOException;
 import java.util.Collections;

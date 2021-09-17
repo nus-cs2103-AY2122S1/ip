@@ -1,7 +1,7 @@
 package aoi.ui;
 
-import aoi.commands.Task;
 import aoi.data.TaskList;
+import aoi.task.Task;
 
 /**
  * Encapsulates the Ui component of aoi.Aoi.

@@ -2,7 +2,7 @@ package aoi;
 
 import java.io.IOException;
 
-import aoi.controller.MainWindow;
+import aoi.controllers.MainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

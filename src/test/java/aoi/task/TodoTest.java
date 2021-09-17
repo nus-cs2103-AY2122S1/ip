@@ -2,9 +2,6 @@ package aoi.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import aoi.commands.Task;
-import aoi.commands.Todo;
-
 import org.junit.jupiter.api.Test;
 
 public class TodoTest {
