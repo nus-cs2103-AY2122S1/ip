@@ -1,10 +1,4 @@
-title: "Duke"
-theme: minima
-
 markdown: kramdown
-
-header_pages:
-  - README.md
 
 plugins:
   - jemoji
