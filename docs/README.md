@@ -1,29 +1,62 @@
 # User Guide
 
-## Features 
+<p align="center">
+    <img src="Ui.png" width="400" alt="Ui"/>
+</p>
 
-### Feature-ABC
+## Features
 
-Description of the feature.
+### Feature- Manage your tasks in a task list using CLI!
 
-### Feature-XYZ
-
-Description of the feature.
+Have you ever wanted to manage your tasks via a CLI? Pix will help you with just that!
 
 ## Usage
 
-### `Keyword` - Describe action
+### `Keyword` - todo/event/deadline
 
-Describe the action and its outcome.
+Adds a task of the specific type to the task list.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo read book`
 
 Expected outcome:
 
-Description of the outcome.
+```
+Added this task: 
+[T][] read book
+You now have 1 task(s) in your list
 
 ```
-expected output
-```
+
+### `Keyword` - delete
+
+Deletes a task from the task list.
+
+Example of usage:
+
+`delete 2`
+
+### `Keyword` - done/undone
+
+Completes or uncompletes a task from the task list.
+
+Example of usage:
+
+`done 4`
+
+### `Keyword` - find
+
+Finds the tasks that contain the keyword stated.
+
+Example of usage:
+
+`find book`
+
+### `Keyword` - list
+
+Lists all your tasks from the task list.
+
+Example of usage:
+
+`list`
