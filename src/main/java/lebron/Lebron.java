@@ -4,6 +4,8 @@ import lebron.exception.LebronException;
 import lebron.task.*;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 /**
  * This class represents the chat bot.
@@ -16,7 +18,8 @@ public class Lebron {
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
-
+    private Stack<TaskList> previousStates = new Stack<>();
+    private boolean wasUndo = false;
 
     /**
      * Available commands that the bot can understand.
@@ -60,10 +63,11 @@ public class Lebron {
      *
      */
     public Lebron() {
-        this.ui = new Ui(this);
+        this.ui = new Ui();
         this.storage = new Storage(FILE_PATH);
         ArrayList<Task> loadList = storage.loadFileContents(FILE_PATH);
-        taskList = new TaskList(loadList, this);
+        //this.taskList = new TaskList(loadList);
+        this.previousStates.push(new TaskList(loadList));
     }
 
     /**
@@ -93,7 +97,7 @@ public class Lebron {
                 reply = this.commandToDo(splitWords);
                 break;
             case DEADLINE:
-                reply = commandDeadline(splitWords);
+                reply = this.commandDeadline(splitWords);
                 break;
             case EVENT:
                 reply = this.commandEvent(splitWords);
@@ -105,12 +109,11 @@ public class Lebron {
                 reply = this.commandFind(splitWords);
                 break;
             case UNDO:
-                taskList.undo();
+                this.commandUndo();
                 reply = ui.replyUndo();
-                storage.saveToFile(taskList.getLst());
                 break;
             case OTHER:
-                throw new LebronException(" OOPS! I'm sorry, but I don't know what that means.\n");
+                throw new LebronException("    OOPS! I'm sorry, but I don't know what that means.\n");
             default:
                 break;
             }
@@ -136,7 +139,31 @@ public class Lebron {
      * @return the response from the bot
      */
     private String commandList() {
-        return ui.replyDisplay(taskList);
+        return ui.replyDisplay(getLatestState());
+    }
+
+    /**
+     * Handles the case where commandWord is Undo.
+     */
+    private void commandUndo() throws LebronException {
+        try {
+//            if (!this.wasUndo) {
+//                //First remove the current state, which is at the top of the stack
+//                this.previousStates.pop();
+//            }
+            this.previousStates.pop();
+            storage.saveToFile(getLatestState());
+        } catch (EmptyStackException e) {
+            throw new LebronException("    OOPS! I have no memory of your last action! Try doing something first!");
+        }
+    }
+
+    private TaskList getLatestState() {
+        if (previousStates.isEmpty()) {
+            return new TaskList(new ArrayList<>());
+        } else {
+            return previousStates.peek();
+        }
     }
 
     /**
@@ -151,11 +178,17 @@ public class Lebron {
             throw new LebronException("    :( OOPS! Please specify which task you wish "
                     + "to complete.");
         }
+        if (Integer.parseInt(splitWords[1]) > getLatestState().getSize()) {
+            throw new LebronException("    :( OOPS! The task is not yet created!");
+        }
         assert splitWords.length == 2 : "There should be 2 items to specify which task is done.";
         try {
             int pos = Integer.parseInt(splitWords[1]);
-            storage.saveToFile(taskList.getLst());
-            return taskList.markDone(pos - 1);
+            TaskList newTaskList = getLatestState().getCopy(getLatestState());
+            Task task = getLatestState().markDone(pos - 1);
+            previousStates.push(newTaskList);
+            storage.saveToFile(getLatestState());
+            return ui.replyMarkDone(task);
         }
         catch (NumberFormatException e) {
             throw new LebronException("    :( OOPS! Make sure you input a valid number!");
@@ -175,8 +208,12 @@ public class Lebron {
                     + "cannot be empty.");
         }
         assert splitWords.length == 2 : "There should be 2 items to specify task and description.";
-        storage.saveToFile(taskList.getLst());
-        return taskList.add(new ToDo(splitWords[1]));
+        Task task = new ToDo(splitWords[1]);
+        TaskList newTaskList = getLatestState().getCopy(getLatestState());
+        newTaskList.add(task);
+        previousStates.push(newTaskList);
+        storage.saveToFile(newTaskList);
+        return ui.replyAdd(newTaskList.getLst(), task);
     }
 
     /**
@@ -198,15 +235,19 @@ public class Lebron {
                     "is used and that a due date and time is given.");
         }
         assert splitBy.length == 2 : "There should be a description and a datetime.";
-        String[] dateTimeArrDeadline = splitBy[1].split(" ", 2);
-        if (dateTimeArrDeadline.length < 2 || dateTimeArrDeadline[1].equals("")) {
+        String[] dateTimeArr = splitBy[1].split(" ", 2);
+        if (dateTimeArr.length < 2 || dateTimeArr[1].equals("")) {
             throw new LebronException("    :( OOPS! Please check that your date and time is " +
                     "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
         }
-        assert dateTimeArrDeadline.length == 2 : "There should be a date and time.";
-        storage.saveToFile(taskList.getLst());
-        return taskList.add(new Deadline(splitBy[0], dateTimeArrDeadline[0],
-                dateTimeArrDeadline[1]));
+        assert dateTimeArr.length == 2 : "There should be a date and time.";
+        Task task = new Deadline(splitBy[0], dateTimeArr[0],
+                dateTimeArr[1]);
+        TaskList newTaskList = getLatestState().getCopy(getLatestState());
+        newTaskList.add(task);
+        previousStates.push(newTaskList);
+        storage.saveToFile(newTaskList);
+        return ui.replyAdd(newTaskList.getLst(), task);
     }
 
     /**
@@ -228,14 +269,18 @@ public class Lebron {
                     "is used and that a due date is given.");
         }
         assert splitAt.length == 2 : "There should be a description and a datetime.";
-        String[] dateTimeArrEvent = splitAt[1].split(" ", 2);
-        if (dateTimeArrEvent.length < 2 || dateTimeArrEvent[1].equals("")) {
+        String[] dateTimeArr = splitAt[1].split(" ", 2);
+        if (dateTimeArr.length < 2 || dateTimeArr[1].equals("")) {
             throw new LebronException("    :( OOPS! Please check that your date and time is " +
                     "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
         }
-        assert dateTimeArrEvent.length == 2 : "There should be a date and time.";
-        storage.saveToFile(taskList.getLst());
-        return taskList.add(new Events(splitAt[0], dateTimeArrEvent[0], dateTimeArrEvent[1]));
+        assert dateTimeArr.length == 2 : "There should be a date and time.";
+        Task task = new Event(splitAt[0], dateTimeArr[0], dateTimeArr[1]);
+        TaskList newTaskList = getLatestState().getCopy(getLatestState());
+        newTaskList.add(task);
+        previousStates.push(newTaskList);
+        storage.saveToFile(newTaskList);
+        return ui.replyAdd(newTaskList.getLst(), task);
     }
 
     /**
@@ -250,10 +295,17 @@ public class Lebron {
             throw new LebronException("    :( OOPS! Please specify which task you wish "
                     + "to delete.");
         }
+        if (Integer.parseInt(splitWords[1]) - 1 > getLatestState().getSize()) {
+            throw new LebronException("    :( OOPS! The task is not yet created!");
+        }
         assert splitWords.length == 2 : "There should be 2 items to specify which task to delete.";
-        int pos2 = Integer.parseInt(splitWords[1]);
-        storage.saveToFile(taskList.getLst());
-        return taskList.delete(pos2 - 1);
+        int pos = Integer.parseInt(splitWords[1]);
+        TaskList newTaskList = new TaskList(getLatestState().getLst());
+        Task task = newTaskList.delete(pos - 1);
+        previousStates.push(newTaskList);
+        this.wasUndo = false;
+        storage.saveToFile(newTaskList);
+        return ui.replyDelete(task, newTaskList.getSize());
     }
 
     /**
@@ -269,6 +321,6 @@ public class Lebron {
         }
         assert splitWords.length == 2 : "There should be 2 items to specify a string to search for.";
         String keyword = splitWords[1];
-        return ui.replyFind(taskList, keyword);
+        return ui.replyFind(getLatestState(), keyword);
     }
 }

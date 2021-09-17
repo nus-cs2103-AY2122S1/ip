@@ -22,50 +22,45 @@ public class TaskList {
      *
      * @param lst The list of tasks.
      */
-    public TaskList(ArrayList<Task> lst, Lebron lebron) {
+    public TaskList(ArrayList<Task> lst) {
         this.tasks = lst;
-        this.ui = new Ui(lebron);
+        this.ui = new Ui();
         this.position = 1;
     }
 
     /**
      * This method handles the add event.
      *
-     * @param task the Task that the user wants to add
-     * @return the reply from the bot
+     * @param task the Task that the user wants to add.
      */
-    public String add(Task task) {
+    public void add(Task task) {
         tasks.add(task);
-        String reply = ui.replyAdd(this.tasks, task);
-        return reply;
     }
 
     /**
      * This method handles the markDone event when the user says done, marking the Task as done.
      *
-     * @param pos the position of the Task in the ArrayList lst
-     * @return the reply from the bot
+     * @param pos the position of the Task in the ArrayList lst.
+     * @return the task that was marked done.
      */
-    public String markDone(int pos) {
+    public Task markDone(int pos) {
         Task task = tasks.get(pos);
         task.markAsDone();
-        String reply = ui.replyMarkDone(task);
-        return reply;
+        return task;
     }
 
     /**
      * This method handles the delete response.
      *
-     * @param pos the position of the task in the list to delete
-     * @return the reply from the bot
+     * @param pos the position of the task in the list to delete.
+     * @return the task that was deleted.
      */
-    public String delete(int pos) throws LebronException {
+    public Task delete(int pos) throws LebronException {
         if (pos > tasks.size() - 1) {
             throw new LebronException("Invalid index!");
         }
         Task task = tasks.remove(pos);
-        String reply = ui.replyDelete(task, tasks.size());
-        return reply;
+        return task;
     }
 
     /**
@@ -96,5 +91,15 @@ public class TaskList {
      */
     public Task getItem(int position) {
         return this.tasks.get(position);
+    }
+
+    /**
+     * Gets a copy of the TaskList.
+     *
+     * @param taskList the TaskList to copy.
+     * @return the copied TaskList.
+     */
+    public TaskList getCopy(TaskList taskList) {
+        return new TaskList(taskList.getLst());
     }
 }

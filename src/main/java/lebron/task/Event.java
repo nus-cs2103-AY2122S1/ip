@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author Nigel Tan
  */
-public class Events extends Task {
+public class Event extends Task {
 
     private final LocalDate date;
     private final LocalTime time;
@@ -24,7 +24,7 @@ public class Events extends Task {
      * @param date the date of the start of the event.
      * @param time the time of the start of the event.
      */
-    public Events(String description, String date, String time) throws LebronException {
+    public Event(String description, String date, String time) throws LebronException {
         super(description);
         try {
             this.date = LocalDate.parse(date);
@@ -38,7 +38,7 @@ public class Events extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
-                + " " + time.format(DateTimeFormatter.ofPattern("HHmm"))+ ")";
+                + " " + this.time + ")";
     }
 
     /**
@@ -48,6 +48,7 @@ public class Events extends Task {
      */
     @Override
     public String getStringForFile() {
-        return "E | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " + this.time;
+        return "E | " + super.getDoneValue() + " | " + super.getName() + "| " + this.date + " " +
+                time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 }

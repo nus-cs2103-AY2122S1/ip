@@ -30,7 +30,7 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));;
         } catch (DateTimeParseException e) {
-            throw new LebronException("    hi:( OOPS! Please check that your date and time is " +
+            throw new LebronException("    :( OOPS! Please check that your date and time is " +
                     "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
         }
     }
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
-                + " " + time.format(DateTimeFormatter.ofPattern("HHmm"))+ ")";
+                + " " + this.time + ")";
     }
 
     /**
@@ -48,6 +48,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getStringForFile() {
-        return "D | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " + this.time;
+        return "D | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " +
+                time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 }

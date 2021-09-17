@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import lebron.exception.LebronException;
-import lebron.task.Deadline;
-import lebron.task.Events;
-import lebron.task.Task;
-import lebron.task.ToDo;
+import lebron.task.*;
 
 /**
  * Represents a storage class to handle writing and loading from a file.
@@ -90,11 +87,11 @@ public class Storage {
      *
      * @param taskList the list of tasks.
      */
-    public void saveToFile(ArrayList<Task> taskList) {
+    public void saveToFile(TaskList taskList) {
         try {
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < taskList.size(); i++) {
-                String textToAppend = taskList.get(i).getStringForFile();
+            for (int i = 0; i < taskList.getLst().size(); i++) {
+                String textToAppend = taskList.getItem(i).getStringForFile();
                 builder.append(textToAppend).append("\n");
             }
             FileWriter fw = new FileWriter(filePath);
@@ -153,7 +150,7 @@ public class Storage {
         try {
             String at = splitWords[3];
             String[] dateTimeEvent = at.split(" ", 2);
-            Task task = new Events(splitWords[2], dateTimeEvent[0], dateTimeEvent[1]);
+            Task task = new Event(splitWords[2], dateTimeEvent[0], dateTimeEvent[1]);
             if (isDoneValue.equals("1")) {
                 task.markAsDone();
             }
