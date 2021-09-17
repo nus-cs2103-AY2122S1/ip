@@ -27,11 +27,11 @@ Now you have _ tasks in the list.
 A event task will have an 'activity' field to describe the event, a 'date' field to describe when the event is, and a 'priority' field to describe the priority (can be any number)
 
 ### Deadline 
-- input: `deadline activity /at 2020-09-12 /p 1`
+- input: `deadline activity /by 2020-09-12 /p 1`
 - expected:
 ```
 Got it. I have added this task: 
-[D][] activity (at: Sept 12 2020) [Priority 1]
+[D][] activity (by: Sept 12 2020) [Priority 1]
 Now you have _ tasks in the list.
 ```
 A deadline task will have an 'activity' field to describe the event, a 'date' field to describe when the event is, and a 'priority' field to describe the priority (can be any number)
