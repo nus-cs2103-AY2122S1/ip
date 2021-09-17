@@ -74,8 +74,11 @@ Suppose the task list looks like this.
 Example of usage: `find dec 12`
 
 Expected outcome:
-
-![Image of Yaktocat](../src/main/resources/images/findDemo.png)
+```
+Here are the matching tasks in your list:
+1. [E][] test-description (at: Dec 12 2021)
+2. [E][] awdawdadw (at: Dec 12 2021)
+```
 
 ### Undo previous command: `undo`
 
