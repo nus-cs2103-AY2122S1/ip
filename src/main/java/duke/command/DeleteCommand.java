@@ -16,7 +16,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {
+        if (tasks.size() - 1 < deletedTaskIndex) {
+            throw new IndexOutOfBoundsException("This task doesn't exit, please enter a valid task index.");
+        }
         Task deletedTask = tasks.delete(deletedTaskIndex);
         storage.convertTaskListToFile(tasks);
         return ui.deleteTask(deletedTask, tasks.size());

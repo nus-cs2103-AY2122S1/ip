@@ -55,7 +55,11 @@ public class Ui {
      * @param tasks TaskList that is going to be printed.
      */
     public String listAllTasks(TaskList tasks) {
-        String result = new String();
+        String result = "";
+        if (tasks.size() == 0) {
+            result = "Sorry, duke can't find any task with this keyword.";
+            return result;
+        }
         for (int i = 0; i < tasks.size(); i++) {
             result += (i + 1) + "." + tasks.get(i).toString() + "\n";
         }

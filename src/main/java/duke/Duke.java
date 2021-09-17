@@ -14,7 +14,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private MainWindow main;
-    private boolean isExit = false;
+    private Parser parser;
+
 
     /**
      * Constructor for Duke bot
@@ -25,6 +26,7 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = storage.convertFileToTaskList();
         ui = new Ui();
+        parser = new Parser();
     }
 
     private void initializeReminder() {
@@ -45,15 +47,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            tasks = storage.convertFileToTaskList();
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-        Parser parser = new Parser(" ");
-        try {
             Command c = parser.parse(input);
             return c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
+        } catch (Exception e) {
             return ui.showError(e.getMessage());
         }
     }
