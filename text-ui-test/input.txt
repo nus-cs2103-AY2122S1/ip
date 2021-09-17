@@ -1,0 +1,11 @@
+todo check1
+event check2 /at 2022-06-08
+deadline check3 /by 2022-06-08
+done 1
+list
+todo
+blah
+delete 3
+delete 2
+delete 1
+bye
