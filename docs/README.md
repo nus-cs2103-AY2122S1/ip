@@ -1,6 +1,7 @@
 # Duke How-To
 
-Welcome to Duke! This application presents a interactive user interface to create, tag and list our tasks.  <br/>
+Welcome to Duke! <br/>
+This application presents a interactive user interface to create, tag and list our tasks.  <br/>
  <br/>
 Try it out [here](https://github.com/ykwei7/ip/releases/download/A-Release/duke.jar)!
 
