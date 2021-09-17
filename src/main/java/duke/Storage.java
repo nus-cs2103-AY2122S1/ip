@@ -76,10 +76,6 @@ public class Storage {
      */
     public TaskList load() throws IOException, DukeException {
         TaskList ls = new TaskList();
-        File directory = new File("duke.txt");
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
         File data = new File(filePath);
         data.createNewFile();
         Scanner s = new Scanner(data);
