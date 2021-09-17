@@ -3,7 +3,7 @@
     -fx-padding: 8 8 8 8;
     -fx-border-radius: 6 6 6 6;
     -fx-background-radius: 6 6 6 6;
-    -fx-opacity: 0.9;
+    -fx-opacity: 0.95;
 }
 
 .dialog-pane-user{
@@ -11,7 +11,7 @@
     -fx-padding: 8 8 8 8;
     -fx-border-radius: 6 6 6 6;
     -fx-background-radius: 6 6 6 6;
-    -fx-opacity: 0.9;
+    -fx-opacity: 0.95;
 }
 
 

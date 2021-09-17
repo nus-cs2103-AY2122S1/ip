@@ -1,31 +1,31 @@
-package duke;
+package pats;
 
 /**
  * Signals that an exception has occurred during runtime.
- * Any exception during runtime will be converted to DukeException, resulting an error message to System.out.
+ * Any exception during runtime will be converted to PatsException, resulting an error message to System.out.
  */
 
-public class DukeException extends Exception {
+public class PatsException extends Exception {
 
     private final ExceptionType type;
 
     /**
-     * Constructs a DukeException with type of that exception.
+     * Constructs a PatsException with type of that exception.
      *
      * @param type Type of exception
      */
-    public DukeException(ExceptionType type) {
+    public PatsException(ExceptionType type) {
         super(errorTypeToMessage(type));
         this.type = type;
     }
 
     /**
-     * Constructs a DukeException with the type of that exception and additional information describing it.
+     * Constructs a PatsException with the type of that exception and additional information describing it.
      *
      * @param type type of exception
      * @param otherMessage additional information describing the exception
      */
-    public DukeException(ExceptionType type, String otherMessage) {
+    public PatsException(ExceptionType type, String otherMessage) {
         super(errorTypeToMessage(type) + " " + otherMessage);
         this.type = type;
     }

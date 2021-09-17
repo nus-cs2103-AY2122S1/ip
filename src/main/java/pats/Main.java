@@ -1,23 +1,23 @@
-package duke;
+package pats;
 
 import java.io.IOException;
 
-import duke.ui.MainWindow;
-import duke.ui.UiMode;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import pats.ui.MainWindow;
+import pats.ui.UiMode;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Pats using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke(UiMode.GUI);
-    private final Image iconImage = new Image(this.getClass().getResourceAsStream("/images/Aegir_icon.png"));
+    private Pats pats = new Pats(UiMode.GUI);
+    private final Image iconImage = new Image(this.getClass().getResourceAsStream("/images/aegir_icon.png"));
     private final String title = "PATS";
 
     @Override
@@ -32,8 +32,8 @@ public class Main extends Application {
             VBox vbox = fxmlLoader.load();
             Scene scene = new Scene(vbox);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            this.duke.initialize(fxmlLoader.getController());
+            fxmlLoader.<MainWindow>getController().setDuke(pats);
+            this.pats.initialize(fxmlLoader.getController());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

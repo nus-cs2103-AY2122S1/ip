@@ -1,4 +1,4 @@
-package duke.task;
+package pats.task;
 
 public class Event extends Task {
     protected String period;

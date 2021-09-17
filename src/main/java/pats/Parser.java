@@ -1,4 +1,4 @@
-package duke;
+package pats;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,15 +6,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteAllCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.task.Task;
+import pats.command.AddCommand;
+import pats.command.Command;
+import pats.command.DeleteAllCommand;
+import pats.command.DeleteCommand;
+import pats.command.DoneCommand;
+import pats.command.ExitCommand;
+import pats.command.FindCommand;
+import pats.command.ListCommand;
+import pats.task.Task;
 
 /**
  * Provides methods to parse user command and saved contents.
@@ -37,14 +37,14 @@ public class Parser {
     protected static final String DIVIDER_WORD = " \\| ";
 
     /**
-     * Convert user input to {@link duke.command.Command ICommand}.
+     * Convert user input to {@link pats.command.Command ICommand}.
      *
      * @param userInput user command
      * @param listSize size of current task list
      * @return command for duke to execute
-     * @throws DukeException if user command is missing operand or invalid
+     * @throws PatsException if user command is missing operand or invalid
      */
-    public static Command parse(String userInput, int listSize) throws DukeException {
+    public static Command parse(String userInput, int listSize) throws PatsException {
         requireNonNull(userInput);
         if (listSize < 0) {
             throw new IllegalArgumentException("list size cannot be" + listSize);
@@ -66,9 +66,9 @@ public class Parser {
             case WORD_TODO:
             case WORD_DEADLINE:
             case WORD_EVENT:
-                throw new DukeException(ExceptionType.MISSING_OPERAND);
+                throw new PatsException(ExceptionType.MISSING_OPERAND);
             default:
-                throw new DukeException(ExceptionType.INVALID_COMMAND);
+                throw new PatsException(ExceptionType.INVALID_COMMAND);
             }
         } else {
             switch (words[0]) {
@@ -85,7 +85,7 @@ public class Parser {
             case WORD_EVENT:
                 return new AddCommand(tryParseEvent(words[1]));
             default:
-                throw new DukeException(ExceptionType.INVALID_COMMAND);
+                throw new PatsException(ExceptionType.INVALID_COMMAND);
             }
         }
     }
@@ -96,9 +96,9 @@ public class Parser {
      * @param indexStr index string
      * @param listSize size of current list
      * @return Line index in save file to mark as done/delete.
-     * @throws DukeException If command is lacking a number or line index is out of bound.
+     * @throws PatsException If command is lacking a number or line index is out of bound.
      */
-    private static int tryParseDoneOrDelete(String indexStr, int listSize) throws DukeException {
+    private static int tryParseDoneOrDelete(String indexStr, int listSize) throws PatsException {
         assert indexStr != null : "index of done/delete is null";
 
         try {
@@ -107,9 +107,9 @@ public class Parser {
 
             return taskIndex;
         } catch (NumberFormatException e) {
-            throw new DukeException(ExceptionType.INVALID_OPERAND);
+            throw new PatsException(ExceptionType.INVALID_OPERAND);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ExceptionType.INDEX_OUT_OF_BOUND);
+            throw new PatsException(ExceptionType.INDEX_OUT_OF_BOUND);
         }
     }
 
@@ -118,9 +118,9 @@ public class Parser {
      *
      * @param operand operand string in deadline command
      * @return An string array of length 2, with the first element being description and the second being due time.
-     * @throws DukeException If command is missing operand (description, due time) or missing keyword (" /by ")
+     * @throws PatsException If command is missing operand (description, due time) or missing keyword (" /by ")
      */
-    private static String[] tryParseDeadline(String operand) throws DukeException {
+    private static String[] tryParseDeadline(String operand) throws PatsException {
         assert operand != null : "input operand string is null";
 
         String s = operand.strip();
@@ -129,7 +129,7 @@ public class Parser {
         boolean hasKeyWord = i > 0 && i < words.size() - 1;
 
         if (!hasKeyWord) {
-            throw new DukeException(ExceptionType.MISSING_OPERAND);
+            throw new PatsException(ExceptionType.DDL_MISSING_KEYWORD);
         } else {
             return new String[]{"deadline",
                     s.split(WORD_DEADLINE_BY, 2)[0].strip(),
@@ -143,9 +143,9 @@ public class Parser {
      *
      * @param operand operand string in event command
      * @return An string array of length 3, with the second element being description and the third being time period
-     * @throws DukeException If command is missing operand (description, time period) or missing keyword (" /by ")
+     * @throws PatsException If command is missing operand (description, time period) or missing keyword (" /by ")
      */
-    private static String[] tryParseEvent(String operand) throws DukeException {
+    private static String[] tryParseEvent(String operand) throws PatsException {
         assert operand != null : "input operand string is null";
 
         String s = operand.strip();
@@ -154,7 +154,7 @@ public class Parser {
         boolean hasKeyWord = i > 0 && i < words.size() - 1;
 
         if (!hasKeyWord) {
-            throw new DukeException(ExceptionType.MISSING_OPERAND);
+            throw new PatsException(ExceptionType.EVENT_MISSING_KEYWORD);
         } else {
             return new String[]{"event",
                     s.split(WORD_EVENT_AT, 2)[0].strip(),
@@ -168,9 +168,9 @@ public class Parser {
      *
      * @param lineString string of a line in save file
      * @return a new task constructed based on the given string
-     * @throws DukeException if the string is not aligned with save data format
+     * @throws PatsException if the string is not aligned with save data format
      */
-    public static Task fileContentsToTask(String lineString) throws DukeException {
+    public static Task fileContentsToTask(String lineString) throws PatsException {
         requireNonNull(lineString, "string of line is null");
 
         String[] words = lineString.split(DIVIDER_WORD, 4);
@@ -180,10 +180,10 @@ public class Parser {
             boolean isValidIndex = isDoneIndex == 0 || isDoneIndex == 1;
             boolean isValidLine = words.length == Task.getNumOfSaveParams();
             if (!(isValidIndex && isValidLine)) {
-                throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
+                throw new PatsException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
+            throw new PatsException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
         }
 
         boolean isDone = Integer.parseInt(words[1]) == 1;
@@ -195,7 +195,7 @@ public class Parser {
         case "E":
             return Task.getEvent(words[2], words[3], isDone);
         default:
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
+            throw new PatsException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in save file.");
         }
     }
 

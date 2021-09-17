@@ -1,11 +1,11 @@
-package duke.command;
+package pats.command;
 
 import static java.util.Objects.requireNonNull;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Task;
-import duke.ui.Ui;
+import pats.Storage;
+import pats.TaskList;
+import pats.task.Task;
+import pats.ui.Ui;
 
 public class FindCommand extends Command {
     private final String keyWord;
@@ -16,7 +16,7 @@ public class FindCommand extends Command {
 
     /**
      * Looks for tasks whose description contains the key word, then outputs search result.
-     * See {@link duke.ui.Ui#printFoundTasks Ui.printFoundTasks}
+     * See {@link pats.ui.Ui#printFoundTasks Ui.printFoundTasks}
      *
      * @param taskList duke's task list
      * @param ui current Ui instance

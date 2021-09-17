@@ -1,10 +1,10 @@
-package duke;
+package pats;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Task;
-import duke.ui.Ui;
+import pats.task.Task;
+import pats.ui.Ui;
 
 /**
  * Contains the task list.
@@ -24,7 +24,7 @@ public class TaskList extends ArrayList<Task> {
                 assert s != null : "a line of save data should not be null";
 
                 super.add(Parser.fileContentsToTask(s));
-            } catch (DukeException e) {
+            } catch (PatsException e) {
                 Ui.printErrorMessage(e);
             }
         }

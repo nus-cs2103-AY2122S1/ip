@@ -3,13 +3,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import pats.Parser;
+import pats.PatsException;
+import pats.command.AddCommand;
+import pats.command.DeleteCommand;
+import pats.command.DoneCommand;
+import pats.command.ExitCommand;
+import pats.command.ListCommand;
 
 public class ParserTest {
     @Test
@@ -25,11 +25,11 @@ public class ParserTest {
 
     @Test
     public void parse_invalidInputs_exceptionThrown() {
-        assertThrows(DukeException.class, () -> Parser.parse("bye s", 1));
-        assertThrows(DukeException.class, () -> Parser.parse("todo", 1));
-        assertThrows(DukeException.class, () -> Parser.parse("deadline  /by s", 1));
-        assertThrows(DukeException.class, () -> Parser.parse("event a /by b", 1));
-        assertThrows(DukeException.class, () -> Parser.parse("delete -1", 0));
-        assertThrows(DukeException.class, () -> Parser.parse("done 2", 1));
+        assertThrows(PatsException.class, () -> Parser.parse("bye s", 1));
+        assertThrows(PatsException.class, () -> Parser.parse("todo", 1));
+        assertThrows(PatsException.class, () -> Parser.parse("deadline  /by s", 1));
+        assertThrows(PatsException.class, () -> Parser.parse("event a /by b", 1));
+        assertThrows(PatsException.class, () -> Parser.parse("delete -1", 0));
+        assertThrows(PatsException.class, () -> Parser.parse("done 2", 1));
     }
 }

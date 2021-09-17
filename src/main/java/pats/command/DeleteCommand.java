@@ -1,11 +1,11 @@
-package duke.command;
+package pats.command;
 
 import static java.util.Objects.requireNonNull;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.ui.Ui;
+import pats.PatsException;
+import pats.Storage;
+import pats.TaskList;
+import pats.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int lineIndex;
@@ -20,10 +20,10 @@ public class DeleteCommand extends Command {
      * @param taskList duke's task list
      * @param ui current Ui instance
      * @param storage current storage instance
-     * @throws DukeException if storage fails to write in file
+     * @throws PatsException if storage fails to write in file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws PatsException {
         requireNonNull(taskList);
         requireNonNull(ui);
         requireNonNull(storage);

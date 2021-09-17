@@ -1,10 +1,10 @@
-package duke.command;
+package pats.command;
 
 import static java.util.Objects.requireNonNull;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.ui.Ui;
+import pats.Storage;
+import pats.TaskList;
+import pats.ui.Ui;
 
 public class ExitCommand extends Command {
     /**

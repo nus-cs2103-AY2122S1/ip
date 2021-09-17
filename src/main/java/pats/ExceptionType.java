@@ -1,7 +1,7 @@
-package duke;
+package pats;
 
 /**
- * Represents types of {@link duke.DukeException DukeException}.
+ * Represents types of {@link PatsException PatsException}.
  */
 public enum ExceptionType {
     INDEX_OUT_OF_BOUND, MISSING_OPERAND, DDL_MISSING_KEYWORD, EVENT_MISSING_KEYWORD, INVALID_COMMAND, INVALID_OPERAND,

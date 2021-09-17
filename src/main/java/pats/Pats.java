@@ -1,15 +1,15 @@
-package duke;
+package pats;
 
-import duke.command.Command;
-import duke.ui.MainWindow;
-import duke.ui.Ui;
-import duke.ui.UiMode;
+import pats.command.Command;
+import pats.ui.MainWindow;
+import pats.ui.Ui;
+import pats.ui.UiMode;
 
 /**
- * Wrapper of Duke's implementation.
- * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * Wrapper of Pats's implementation.
+ * Pats is a terminal system that helps a person to keep track of various things.
  */
-public class Duke {
+public class Pats {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
@@ -21,13 +21,13 @@ public class Duke {
      *
      * @param uiMode UI mode
      */
-    public Duke(UiMode uiMode) {
+    public Pats(UiMode uiMode) {
         ui = new Ui(uiMode);
         taskList = new TaskList();
         storage = new Storage();
         try {
             storage.initialize();
-        } catch (DukeException e) {
+        } catch (PatsException e) {
             Ui.printErrorMessage(e);
         }
         this.isExit = false;
@@ -44,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Starts interacting with user in CLI-mode. Exit the loop when detecting {@link duke.Parser#WORD_EXIT WORD_EXIT}.
+     * Starts interacting with user in CLI-mode. Exit the loop when detecting {@link pats.Parser#WORD_EXIT WORD_EXIT}.
      */
     public void run() {
         // Echo loop till exit word is entered
@@ -55,14 +55,14 @@ public class Duke {
                 Ui.printDividerLine();
 
                 if (userInput.contains("|")) {
-                    throw new DukeException(ExceptionType.PIPE_SYMBOL);
+                    throw new PatsException(ExceptionType.PIPE_SYMBOL);
                 }
 
                 Command c = Parser.parse(userInput, taskList.size());
                 c.execute(this.taskList, this.ui, this.storage);
                 this.isExit = c.isExit();
                 Ui.printDividerLine();
-            } catch (DukeException e) {
+            } catch (PatsException e) {
                 Ui.printErrorMessage(e, userInput);
                 Ui.printDividerLine();
             }
@@ -70,18 +70,18 @@ public class Duke {
     }
 
     /**
-     * Starts interacting with user in GUI-mode. Exit the loop when detecting {@link duke.Parser#WORD_EXIT WORD_EXIT}.
+     * Starts interacting with user in GUI-mode. Exit the loop when detecting {@link pats.Parser#WORD_EXIT WORD_EXIT}.
      */
     public String getResponse(String userInput) {
         try {
             if (userInput.contains("|")) {
-                throw new DukeException(ExceptionType.PIPE_SYMBOL);
+                throw new PatsException(ExceptionType.PIPE_SYMBOL);
             }
 
             Command c = Parser.parse(userInput, taskList.size());
             c.execute(this.taskList, this.ui, this.storage);
             this.isExit = c.isExit();
-        } catch (DukeException e) {
+        } catch (PatsException e) {
             Ui.printErrorMessage(e, userInput);
         }
         return Ui.getResponse();
@@ -96,16 +96,16 @@ public class Duke {
      * @param args arguments for the main method.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke(UiMode.CLI);
-        duke.initialize();
-        duke.run();
+        Pats pats = new Pats(UiMode.CLI);
+        pats.initialize();
+        pats.run();
     }
 
     private void initializeHelper() {
         try {
             storage.initialize();
             taskList.load(storage.getFileContents());
-        } catch (DukeException e) {
+        } catch (PatsException e) {
             Ui.printErrorMessage(e);
         }
     }

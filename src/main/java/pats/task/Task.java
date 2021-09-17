@@ -1,4 +1,4 @@
-package duke.task;
+package pats.task;
 
 import static java.util.Objects.requireNonNull;
 
@@ -81,7 +81,7 @@ public abstract class Task {
      *
      * The fields are divide by "|"; second parameter is 1 if the task is done, 0 otherwise.
      * @return a string to store in local file that represents the task.
-     * @see duke.Parser#fileContentsToTask(String)
+     * @see pats.Parser#fileContentsToTask(String)
      */
     public abstract String populateSaveData();
 }

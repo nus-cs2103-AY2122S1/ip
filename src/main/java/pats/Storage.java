@@ -1,4 +1,4 @@
-package duke;
+package pats;
 
 import static java.util.Objects.requireNonNull;
 
@@ -29,9 +29,9 @@ public class Storage {
     /**
      * Initializes save path with default save path.
      *
-     * @throws DukeException if failed to create file
+     * @throws PatsException if failed to create file
      */
-    protected void initialize() throws DukeException {
+    protected void initialize() throws PatsException {
         Path path = Arrays.stream(SAVE_DIRECTORY)
                 .map(Paths::get)
                 .reduce(Paths.get(""), Path::resolve)
@@ -42,7 +42,7 @@ public class Storage {
                 createFile(path);
             }
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
+            throw new PatsException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
         }
 
         savePath = path;
@@ -68,9 +68,9 @@ public class Storage {
      * Appends a line of text to the end of save file.
      *
      * @param textToWrite text to write to save file
-     * @throws DukeException if failed to write to save file
+     * @throws PatsException if failed to write to save file
      */
-    public void writeLine(String textToWrite) throws DukeException {
+    public void writeLine(String textToWrite) throws PatsException {
         requireNonNull(textToWrite, "text to write is null");
 
         if (!this.isInitialized) {
@@ -82,7 +82,7 @@ public class Storage {
             fileWriter.write(textToWrite);
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
+            throw new PatsException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
         }
     }
 
@@ -90,10 +90,10 @@ public class Storage {
      * Removes a line of text in save file
      *
      * @param lineIndex index of line to remove
-     * @throws DukeException if failed to write to save file
+     * @throws PatsException if failed to write to save file
      * @throws IndexOutOfBoundsException if line index is negative
      */
-    public void removeLine(int lineIndex) throws DukeException {
+    public void removeLine(int lineIndex) throws PatsException {
         if (!this.isInitialized) {
             return;
         }
@@ -107,16 +107,16 @@ public class Storage {
             originalContent.remove(lineIndex);
             Files.write(savePath, originalContent);
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
+            throw new PatsException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
         }
     }
 
     /**
      * Removes all contents in save file
      *
-     * @throws DukeException if failed to write to save file
+     * @throws PatsException if failed to write to save file
      */
-    public void removeAll() throws DukeException {
+    public void removeAll() throws PatsException {
         if (!this.isInitialized) {
             return;
         }
@@ -124,7 +124,7 @@ public class Storage {
         try {
             Files.write(savePath, new ArrayList<String>());
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
+            throw new PatsException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
         }
     }
 
@@ -133,10 +133,10 @@ public class Storage {
      *
      * @param lineIndex index of line to change
      * @param textToWrite new text at the line
-     * @throws DukeException if failed to write to save file
+     * @throws PatsException if failed to write to save file
      * @throws IndexOutOfBoundsException if line index is negative or text to write is null
      */
-    public void setLine(int lineIndex, String textToWrite) throws DukeException {
+    public void setLine(int lineIndex, String textToWrite) throws PatsException {
         if (!this.isInitialized) {
             return;
         }
@@ -151,7 +151,7 @@ public class Storage {
             originalContent.set(lineIndex, textToWrite);
             Files.write(savePath, originalContent);
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
+            throw new PatsException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
         }
     }
 
@@ -159,9 +159,9 @@ public class Storage {
      * Reads all lines from save file.
      *
      * @return the lines from save file as a list
-     * @throws DukeException if failed to read from save file
+     * @throws PatsException if failed to read from save file
      */
-    protected List<String> getFileContents() throws DukeException {
+    protected List<String> getFileContents() throws PatsException {
         if (!this.isInitialized) {
             return new ArrayList<>();
         }
@@ -169,7 +169,7 @@ public class Storage {
         try {
             return Files.readAllLines(savePath);
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_READ, e.getMessage());
+            throw new PatsException(ExceptionType.FAIL_TO_READ, e.getMessage());
         }
     }
 }

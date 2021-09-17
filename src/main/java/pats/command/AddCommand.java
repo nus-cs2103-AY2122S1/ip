@@ -1,14 +1,14 @@
-package duke.command;
+package pats.command;
 
 import static java.util.Objects.requireNonNull;
 
-import duke.DukeException;
-import duke.ExceptionType;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Task;
-import duke.ui.Ui;
+import pats.ExceptionType;
+import pats.Parser;
+import pats.PatsException;
+import pats.Storage;
+import pats.TaskList;
+import pats.task.Task;
+import pats.ui.Ui;
 
 public class AddCommand extends Command {
     private final Task task;
@@ -38,16 +38,16 @@ public class AddCommand extends Command {
      * @param taskList duke's task list
      * @param ui current Ui instance
      * @param storage current storage instance
-     * @throws DukeException if there is an unfinished task which equals to the given task
+     * @throws PatsException if there is an unfinished task which equals to the given task
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws PatsException {
         requireNonNull(taskList);
         requireNonNull(ui);
         requireNonNull(storage);
 
         if (taskList.hasDuplicate(task)) {
-            throw new DukeException(ExceptionType.HAS_DUPLICATE);
+            throw new PatsException(ExceptionType.HAS_DUPLICATE);
         }
 
         taskList.add(task);

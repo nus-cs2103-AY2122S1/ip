@@ -1,12 +1,12 @@
-package duke.ui;
+package pats.ui;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.DukeException;
-import duke.TaskList;
+import pats.PatsException;
+import pats.TaskList;
 
 /**
  * Provides methods to interact with user.
@@ -96,7 +96,7 @@ public class Ui {
     /**
      * Prints contents of task list.
      *
-     * @param taskList Duke's ask list
+     * @param taskList Pats's ask list
      */
     public static void printList(TaskList taskList) {
         requireNonNull(taskList, "task list is not initialized");
@@ -106,8 +106,9 @@ public class Ui {
             return;
         }
 
+        int numOfDigits = taskList.size() / 10 + 1;
         for (int i = 0; i < taskList.size(); i++) {
-            printWithIndent((i + 1) + "." + taskList.get(i).toString());
+            printWithIndent(String.format("%" + numOfDigits + "d", i + 1) + ". " + taskList.get(i).toString());
         }
     }
 
@@ -182,12 +183,12 @@ public class Ui {
     }
 
     /**
-     * Prints an error message based on exception type of DukeException.
+     * Prints an error message based on exception type of PatsException.
      *
      * @param e exception to print
      * @param userInput the latest user command before exception happens
      */
-    public static void printErrorMessage(DukeException e, String userInput) {
+    public static void printErrorMessage(PatsException e, String userInput) {
         requireNonNull(userInput, "User input cannot be null");
 
         switch (e.getType()) {
@@ -224,11 +225,11 @@ public class Ui {
     }
 
     /**
-     * Prints an error message based on exception type of DukeException.
+     * Prints an error message based on exception type of PatsException.
      *
      * @param e exception to print
      */
-    public static void printErrorMessage(DukeException e) {
+    public static void printErrorMessage(PatsException e) {
         printErrorMessage(e, "");
     }
 

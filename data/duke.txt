@@ -1,0 +1,3 @@
+T | 0 | cs2103 user guide | todo
+D | 1 | cs2106 lab2 | 2021-09-28
+E | 0 | st2334 quiz | week 7

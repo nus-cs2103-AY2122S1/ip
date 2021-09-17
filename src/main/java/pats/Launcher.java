@@ -1,4 +1,4 @@
-package duke;
+package pats;
 
 import javafx.application.Application;
 
