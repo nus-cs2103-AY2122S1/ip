@@ -15,6 +15,23 @@ Search for tasks using the `find` command to find your tasks easily!
 
 ## Usage
 
+### `list` - Lists all tasks
+
+Lists out all the tasks.
+
+Example of usage:
+
+`list`
+
+The current list of tasks will be displayed
+
+
+```
+1.[T][ ] todo1
+2.[E][X] event2 (at: mon 2-4pm)
+3.[D][ ] deadline3 (by: 01 January 2021)
+```
+
 ### `todo` - Adds a todo to your list of tasks
 
 Adds a todo with a given description to the list of tasks
@@ -57,7 +74,7 @@ The event will be added and the message below will be shown.
 Got it, I've added this task
 [E][ ] DESCRIPTION (at: TIMEFRAME)
 ```
-### `Delete` - Deletes a task from the task list
+### `delete` - Deletes a task from the task list
 
 Deletes a task at the given index from the task list
 
@@ -67,7 +84,7 @@ Example of usage:
 
 Task at index will be deleted.
 
-### `Done` - Marks a task as completed
+### `done` - Marks a task as completed
 
 Marks a task at the given index as completed
 
@@ -77,7 +94,7 @@ Example of usage:
 
 Task at index will be marked as done.
 
-### `Find` - Finds all tasks that match a query
+### `find` - Finds all tasks that match a query
 
 Finds all tasks with description that matches the query.
 
