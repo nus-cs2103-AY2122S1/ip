@@ -2,8 +2,6 @@ package duke;
 
 import javafx.application.Platform;
 
-import java.util.Scanner;
-
 /**
  * Represents a Duke program, which is a Personal Assistant Chatbot
  * that helps a person to keep track of various tasks.
@@ -18,8 +16,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Executes command and return response.
+     *
+     * @return response string from executing command
      */
     public String getResponse(String input) {
         Command command = Parser.getCommand(input);
@@ -27,48 +26,37 @@ public class Duke {
     }
 
     private boolean loadData() {
-        // Load data and list task
         try {
             userList = TaskList.load();
             return true;
         } catch (Exception exception) {
+            userList = new TaskList();
             return false;
         }
     }
 
-    // Deprecated as program has moved to GUI
-    private void run() throws Exception {
-
-        System.out.print(getWelcomeMessage());
-
-        while (true) {
-            String userInput = getUserInput();
-            Command command = Parser.getCommand(userInput);
-            System.out.println(getResponse(command, userInput));
-        }
-    }
-
-    private static String getUserInput() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
     public String getWelcomeMessage() {
         StringBuilder resultString = new StringBuilder();
+        boolean isNewUser = !isLoadSuccessful || userList.isEmpty();
 
-        if (isLoadSuccessful) {
+        if (isNewUser) {
+
+            resultString.append(Response.newUserWelcomeMessage() + "\n");
+        } else {
             resultString.append(Response.existingUserWelcomeMessage() + "\n");
             resultString.append(Response.leftoverTaskMessage(userList));
-        } else {
-            userList = new TaskList();
-            resultString.append(Response.newUserWelcomeMessage() + "\n");
         }
 
-        //resultString.append(Response.inputRequestMessage() + "\n");
         return resultString.toString();
     }
 
+    /**
+     * Returns response string from executing the user command
+     *
+     * @return response string from executing the user command
+     * */
     private String getResponse(Command command, String userInput) {
+        int number;
         switch (command) {
         case HELLO:
             return Response.helloMessage();
@@ -76,12 +64,25 @@ public class Duke {
             Platform.exit();
             return Response.byeMessage();
         case LIST:
-            return userList.toString();
+            if (userList.isEmpty()) {
+                return userList.toString();
+            }
+            return "Here are your current tasks:\n" + userList.toString();
         case DONE:
-            int number = Integer.parseInt(userInput.substring(5));
+            try {
+                number = Integer.parseInt(userInput.substring(5));
+            } catch (Exception exception) {
+                return "Please enter your input as: done <number>\n" +
+                        "e.g. done 1";
+            }
             return userList.markDone(number);
         case DELETE:
-            number = Integer.parseInt(userInput.substring(7));
+            try {
+                number = Integer.parseInt(userInput.substring(7));
+            } catch (Exception exception) {
+                return "Please enter your input as: delete <number>\n" +
+                        "e.g. delete 2";
+            }
             return userList.remove(number);
         case TODO:
             // Fallthrough
@@ -91,9 +92,13 @@ public class Duke {
             try {
                 return userList.add(Parser.getTask(command, userInput));
             } catch (Exception exception) {
-                return "Error: " + exception;
+                return exception.getMessage();
             }
         case FIND:
+            if (userInput.length() == 4) {
+                return "Please enter as: find <keyword>\n" +
+                        "e.g. find book";
+            }
             return userList.find(userInput.substring(5));
         case CLEAR:
             return userList.clear();
