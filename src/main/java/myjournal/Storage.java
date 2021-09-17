@@ -37,10 +37,14 @@ public class Storage {
      * @param newFile The new file that needs to be saved.
      * @throws IOException The exception thrown when the file is corrupted.
      */
-    public void saveFile(String newFile) throws IOException {
-        FileWriter writer = new FileWriter(this.file, false);
-        writer.write(newFile);
-        writer.close();
+    public void saveFile(String newFile) {
+        try {
+            FileWriter writer = new FileWriter(this.file, false);
+            writer.write(newFile);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
