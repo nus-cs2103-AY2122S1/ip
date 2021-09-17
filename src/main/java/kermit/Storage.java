@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import kermit.tasks.DateDependentTask;
@@ -37,6 +38,61 @@ public class Storage {
     }
 
     /**
+     * Processes task and adds it to arrayList.
+     *
+     * @param taskList Task list to add tasks to.
+     * @param description Description of task.
+     * @param date Date string of task
+     * @param isCompleted If task is completed.
+     * @param taskShortForm Short form of task.
+     * @throws KermitException if unknown task.
+     */
+    private void processTaskToTaskList(ArrayList<Task> taskList, String description, Optional<LocalDate> date,
+                           boolean isCompleted, String taskShortForm) throws KermitException {
+        switch (taskShortForm) {
+        case "T":
+            taskList.add(new ToDo(description, isCompleted));
+            break;
+        case "D":
+            taskList.add(new Deadline(description, date.get(), isCompleted));
+            break;
+        case "E":
+            taskList.add(new Event(description, date.get(), isCompleted));
+            break;
+        default:
+            throw new KermitException("Unknown task!");
+        }
+    }
+
+    private boolean parseTaskCompletion(String line) {
+        String[] commands = line.split(" \\| ");
+        return commands[1].equals("1");
+    }
+
+    private String parseTaskShortForm(String line) {
+        String[] commands = line.split(" \\| ");
+        return commands[0];
+    }
+
+    private String parseDescription(String line) {
+        String[] commands = line.split(" \\| ");
+        return commands[2];
+    }
+
+    private Optional<LocalDate> parseDate(String line) throws KermitException {
+        String[] commands = line.split(" \\| ");
+
+        if (parseTaskShortForm(line).equals("E") || parseTaskShortForm(line).equals("D")) {
+            try {
+                return Optional.of(LocalDate.parse(commands[3]));
+            } catch (DateTimeParseException e) {
+                throw new KermitException("Invalid date in data file!");
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
      * Loads data from the relative file path provided.
      * If the file tree or the file does not exist, it would recursively
      * create any parent folders necessary and the file itself.
@@ -53,44 +109,20 @@ public class Storage {
 
             boolean didCreateFile = file.createNewFile();
             ArrayList<Task> taskList = new ArrayList<>();
-            String line;
-            Task task;
             Scanner sc = new Scanner(file);
+
             // Read file line by line
             if (!didCreateFile) {
+                String line;
                 while (sc.hasNextLine()) {
                     line = sc.nextLine();
                     String[] commands = line.split(" \\| ");
-                    String taskShortForm = commands[0];
-                    boolean isCompleted = commands[1].equals("1");
-                    String description = commands[2];
 
-                    LocalDate date = LocalDate.now();
-                    if (taskShortForm.equals("E") || taskShortForm.equals("D")) {
-                        try {
-                            date = LocalDate.parse(commands[3]);
-                        } catch (DateTimeParseException e) {
-                            throw new KermitException("Invalid date in data file!");
-                        }
-                    }
-
-                    // Create task based on line data
-                    switch (taskShortForm) {
-                    case "T":
-                        task = new ToDo(description, isCompleted);
-                        taskList.add(task);
-                        break;
-                    case "D":
-                        task = new Deadline(description, date, isCompleted);
-                        taskList.add(task);
-                        break;
-                    case "E":
-                        task = new Event(description, date, isCompleted);
-                        taskList.add(task);
-                        break;
-                    default:
-                        throw new KermitException("Unknown task!");
-                    }
+                    processTaskToTaskList(taskList,
+                            parseDescription(line),
+                            parseDate(line),
+                            parseTaskCompletion(line),
+                            parseTaskShortForm(line));
                 }
             }
             return taskList;
