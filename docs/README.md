@@ -1,4 +1,4 @@
-# User Guide
+![Image of UI](Ui.png)
 
 ## Features
 
