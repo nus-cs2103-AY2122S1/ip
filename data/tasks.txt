@@ -1,4 +1,4 @@
 E|0|project meeting|12 Sep 2021 1700
 E|0|meeting|15 Sep 2021 1200
 D|1|assignment|15 Sep 2021 1300
-T|0|a /by 2021/09/10 0000 /by 2021/09/10 0000
+E|0|a|10 Sep 2021 0000

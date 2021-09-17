@@ -1,21 +1,11 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.tasks.Task;
 
 /**
  * Prints various messages.
  */
 public class Ui {
-    private final Scanner sc;
-
-    /**
-     * Instantiates a ui object.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
 
     /**
      * Prints a message to show users the number of tasks there are in the list.
@@ -93,21 +83,6 @@ public class Ui {
     }
 
     /**
-     * Reads the user input.
-     *
-     * @return User input string.
-     */
-    public String readCommand() {
-        String input = sc.nextLine();
-
-        while (input.strip().isEmpty()) {
-            input = sc.nextLine();
-        }
-
-        return input;
-    }
-
-    /**
      * Prints the error message.
      *
      * @param err Error message to be displayed.
@@ -125,9 +100,9 @@ public class Ui {
      */
     public String printInvalidTaskNumError(TaskList tasks) {
         if (tasks.getSize() > 0) {
-            return "That task does not exist!\nPlease enter a number from 1 to " + tasks.getSize() + ".";
+            return printError("That task does not exist!\nPlease enter a number from 1 to " + tasks.getSize() + ".");
         } else {
-            return "You have no tasks in your list to mark as done or delete.";
+            return printError("You have no tasks in your list to mark as done or delete.");
         }
     }
 }

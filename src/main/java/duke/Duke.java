@@ -51,35 +51,6 @@ public class Duke {
     }
 
     /**
-     * Executes the Duke program.
-     */
-    public void run() {
-        ui.printWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-
-            } catch (DukeException e) {
-                ui.printError(e.toString());
-            }
-        }
-    }
-
-    /**
-     * Drives the Duke program.
-     *
-     * @param args Arguments that user inputs.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-
-    /**
      * Returns chat-bot response depending on the user input.
      *
      * @param input User input.
