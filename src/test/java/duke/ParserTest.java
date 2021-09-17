@@ -12,7 +12,7 @@ public class ParserTest {
     @Test
     void parser_deleteTask_deleteCommand() {
         try {
-            assertEquals(new DeleteCommand(1), new Parser(" ").parse("delete 2"));
+            assertEquals(new DeleteCommand(1), new Parser().parse("delete 2"));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -21,7 +21,7 @@ public class ParserTest {
     @Test
     void parser_list_listCommand() {
         try {
-            assertEquals(new ListCommand(), new Parser(" ").parse("list"));
+            assertEquals(new ListCommand(), new Parser().parse("list"));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

@@ -116,9 +116,9 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String doneStatus = isDone ? "[X]" : "[ ]";
         String taskType = "[" + getIcon() + "]";
+        String doneStatus = isDone ? "[X]" : "[ ]";
         String description = " " + getDescription();
-        return doneStatus + taskType + description;
+        return taskType + doneStatus + description;
     }
 }
