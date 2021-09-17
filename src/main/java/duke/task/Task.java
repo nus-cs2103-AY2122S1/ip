@@ -1,5 +1,5 @@
-package duke;
-public class Task {
+package duke.task;
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -27,6 +27,32 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns a boolean representing the status of the task.
+     *
+     * @return the task's isDone value.
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    /**
+     * Updates the description and due date of the Event.
+     *
+     * @param input the description of the event task.
+     * @return new Task with updated description.
+     */
+    public abstract Task update(String input);
+
+    /**
+     * Returns the description of the task.
+     *
+     * @return the description of the task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
 

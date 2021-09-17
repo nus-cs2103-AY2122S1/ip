@@ -1,4 +1,5 @@
-package duke;
+package duke.task;
+
 public class Todo extends Task {
 
     /**
@@ -16,6 +17,7 @@ public class Todo extends Task {
      * @param description the description of the todo task.
      * @return new Todo with updated description and due date.
      */
+    @Override
     public Todo update(String description) {
         return new Todo(description);
     }

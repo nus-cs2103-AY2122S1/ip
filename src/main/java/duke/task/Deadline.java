@@ -1,4 +1,5 @@
-package duke;
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
@@ -24,34 +25,18 @@ public class Deadline extends Task {
     /**
      * Updates the description and due date of the deadline.
      *
-     * @param description the description of the deadline task.
-     * @param by the due date of the task.
+     * @param input user's input for updating the deadline.
      * @return new Deadline with updated description and due date.
      */
-    public static Deadline update(String description, String by) {
-        return new Deadline(description, by);
+    @Override
+    public Deadline update(String input) {
+        if (input.contains("/by")) {
+            String[] splitInput = input.split(" /by ", 2);
+            return new Deadline(splitInput[0], splitInput[1]);
+        } else {
+            return new Deadline(input, this.by);
+        }
     }
-
-    //    /**
-    //     * Updates the date of the deadline.
-    //     *
-    //     * @param by the due date of the task.
-    //     * @return new Deadline with the updated due date.
-    //     */
-    //    public Deadline updateDate(String by) {
-    //        return new Deadline(this.description, by);
-    //    }
-
-    /**
-     * Updates the description of the deadline.
-     *
-     * @param description the description of the task.
-     * @return new Deadline with the updated description;
-     */
-    public Deadline updateDesc(String description) {
-        return new Deadline(description, this.by);
-    }
-
 
     /**
      * {@inheritDoc}
@@ -64,5 +49,14 @@ public class Deadline extends Task {
         } else {
             return "[D]" + super.toString() + " (by: " + by + ")";
         }
+    }
+
+    /**
+     * Returns the due date of the deadline.
+     *
+     * @return the value of by.
+     */
+    public String getBy() {
+        return this.by;
     }
 }

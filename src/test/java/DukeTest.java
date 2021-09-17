@@ -1,34 +1,36 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.Duke;
 import org.junit.jupiter.api.Test;
 
-//import duke.Duke;
-import duke.Parser;
-//import duke.Storage;
-//import duke.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class DukeTest {
 
-    //    private Duke duke = new Duke("Data\\taskList.txt");
-    //
+    Ui ui = new Ui();
+    Storage storage = new Storage("Test\\taskList.txt");
+    Duke duke = new Duke("Test\\taskList.txt");
+
     @Test
-    public void parserTest1() {
+    public void parserTest() {
         assertEquals("bye", Parser.parse("bye"));
         assertEquals("list", Parser.parse("list"));
         assertEquals("todo", Parser.parse("todo borrow book"));
     }
-    //
-    //    @Test
-    //    public void storageTest() {
-    //        assertEquals(3, new Storage("Data\\taskList.txt").load().size());
-    //    }
-    //
-    //    @Test
-    //    public void uiWelcomeTest() {
-    //        String separator = "    ____________________________________________________________";
-    //        String message = separator + "\n" + "     Hello! I'm Duke" + "\n"
-    //                + "     What can I do for you?" + "\n" + separator;
-    //        assertEquals(message, Ui.welcomeMessage());
-    //    }
+
+    @Test
+    public void dukeExceptionTest() {
+        assertEquals("(ㆆ_ㆆ) OOPS!!! You haven't specified the task you have completed.",
+                this.duke.getResponse("done"));
+        assertEquals("(O_O) OOPS!!! You haven't specified the task you want to delete.",
+                this.duke.getResponse("delete"));
+    }
+
+    @Test
+    public void storageTest() {
+        assertEquals(0, storage.load().getNumTasks());
+    }
 
 }

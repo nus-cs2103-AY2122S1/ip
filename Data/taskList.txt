@@ -1,5 +1,3 @@
-D | 0 | return book | Sunday
-T | 0 | borrow book
-T | 0 | return book
-T | 0 | buy book
-D | 0 | hand in assignment | 2020-12-18
+T | 0 | hehehe
+D | 0 | return book | 2020-12-02
+E | 0 | cluster lunch | 2021-09-03

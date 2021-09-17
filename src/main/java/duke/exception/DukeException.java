@@ -1,11 +1,11 @@
-package duke;
+package duke.exception;
 public class DukeException extends RuntimeException {
 
     public enum Type {
         EmptyDone {
             @Override
             public String getMessage() {
-                return "(ㆆ_ㆆ) OOPS!!! You haven't specified the task you have completed.";
+                return "(O_O) OOPS!!! You haven't specified the task you have completed.";
             }
         },
         EmptyDelete {
@@ -36,6 +36,12 @@ public class DukeException extends RuntimeException {
             @Override
             public String getMessage() {
                 return "(O_O) OOPS!!! The description of a deadline cannot be empty.";
+            }
+        },
+        EmptyFind {
+            @Override
+            public String getMessage() {
+                return "(O_O) OOPS!!! The query for find cannot be empty.";
             }
         },
         EmptyUpdate {

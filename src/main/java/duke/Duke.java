@@ -1,38 +1,25 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.gui.DialogBox;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class Duke extends Application {
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+public class Duke {
+
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Storage storage;
-    private Ui ui;
-    private String filePath;
-
-    /**
-     * Constructor for Duke object.
-     */
-    public Duke() {
-        this.ui = new Ui();
-    }
+    private TaskList taskList;
 
     /**
      * Constructor for Duke object.
@@ -40,97 +27,8 @@ public class Duke extends Application {
      * @param filePath the file path of the document which stores the users tasks.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.filePath = filePath;
         this.storage = new Storage(filePath);
-    }
-
-    //    /**
-    //     * runs the Duke chat bot
-    //     */
-    //    public void run() {
-    //        String separator = "    ____________________________________________________________";
-    //        System.out.println(Ui.welcomeMessage());
-    //        Scanner in = new Scanner(System.in);
-    //        String input = in.nextLine();
-    //        while (!Parser.parse(input).equals("bye")) {
-    //            this.storage.save(this.ui.run(this.storage, input));
-    //            input = in.nextLine();
-    //        }
-    //        System.out.println(separator);
-    //        System.out.println("     Bye. Hope to see you again soon!");
-    //        System.out.println(separator);
-    //    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void start(Stage stage) {
-
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        this.taskList = this.storage.load();
     }
 
     /**
@@ -148,29 +46,21 @@ public class Duke extends Application {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String userText = userInput.getText();
-        assert userText != null;
-        String dukeText = getResponse(userInput.getText());
-        assert dukeText != null;
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
-        );
-        userInput.clear();
-    }
-
-    /**
      * Gets the program output give the user input.
      *
      * @param input User input
      * @return Duke's response
      */
-    String getResponse(String input) {
-        return this.ui.run(this.storage, input);
+    public String getResponse(String input) {
+        if (input.equals("exit")) {
+            Platform.exit();
+        }
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.taskList, input, this.storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
 

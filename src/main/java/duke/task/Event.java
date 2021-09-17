@@ -1,4 +1,5 @@
-package duke;
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Event extends Task {
@@ -24,32 +25,17 @@ public class Event extends Task {
     /**
      * Updates the description and due date of the Event.
      *
-     * @param description the description of the event task.
-     * @param at the date the event is happening.
+     * @param input the description of the event task.
      * @return new Event with updated description and due date.
      */
-    public Event update(String description, String at) {
-        return new Event(description, at);
-    }
-
-    //    /**
-    //     * Updates the date of the Event.
-    //     *
-    //     * @param at the due date of the task.
-    //     * @return new Event with the updated event time.
-    //     */
-    //    public Event updateDate(String at) {
-    //        return new Event(this.description, at);
-    //    }
-
-    /**
-     * Updates the description of the Event.
-     *
-     * @param description the description of the task.
-     * @return new Event with the updated description;
-     */
-    public Event updateDesc(String description) {
-        return new Event(description, this.at);
+    @Override
+    public Event update(String input) {
+        if (input.contains("/at")) {
+            String[] splitInput = input.split(" /at ", 2);
+            return new Event(splitInput[0], splitInput[1]);
+        } else {
+            return new Event(input, this.at);
+        }
     }
 
     /**
@@ -63,5 +49,14 @@ public class Event extends Task {
         } else {
             return "[E]" + super.toString() + " (at: " + this.at + ")";
         }
+    }
+
+    /**
+     * Returns the date of the event.
+     *
+     * @return the value of at.
+     */
+    public String getAt() {
+        return this.at;
     }
 }
