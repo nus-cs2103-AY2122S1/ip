@@ -87,6 +87,8 @@ public class Storage {
      * @throws StorageException If unable to write tasks to a file on disk.
      */
     public void saveTasks(TaskList tasks) throws StorageException {
+        assert tasks != null : "Task list should not be null in order to save tasks on disk";
+
         try {
             File base_dir = new File(DIR_PATH);
             if (!base_dir.exists()) {

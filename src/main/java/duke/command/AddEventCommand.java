@@ -21,6 +21,8 @@ public class AddEventCommand extends AddCommand {
      * @throws MalformedCommandException If userInput is incorrectly formatted for an AddEvent command.
      */
     public static Command create(String userInput) throws MalformedCommandException {
+        assert userInput != null : "User input should be null for the creation of a Command";
+
         try {
             String commandParams = Parser.getCommandParams(userInput);
             String taskDescription = getTaskDescription(commandParams);
