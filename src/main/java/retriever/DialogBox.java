@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Setting up the dialog box.
+     *
+     * @param text The text to be displayed.
+     * @param img The profile picture to be shown.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -53,10 +59,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox, corresponding to the user input.
+     *
+     * @param text The text entered by the user, to be displayed.
+     * @param img The profile of the user.
+     * @return A DialogBox with the user content.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox, corresponsing to the retriever output.
+     *
+     * @param text The text returned by the chatbot, to be displayed.
+     * @param img The profile of the retriever chatbot.
+     * @return A DialogBox with the Chatbot response content.
+     */
     public static DialogBox getRetrieverDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
