@@ -20,7 +20,8 @@ How can I assist you ?
 ### Gnosis
 
 Gnosis provides the ability to create, retrieve and delete different variety of tasks
-to manage as well as manage places visited.</br>
+to manage as well as manage places visited.
+</br>
 
 Different types of tasks includes: todos, deadlines and events.
 
