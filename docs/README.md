@@ -1,5 +1,5 @@
 # User Guide
-_Adapted from AddressBook3 <AB3 SE-Edu User Guide](https://se-education.org/addressbook-level3/)_
+_Adapted from AddressBook3 [SE-Edu User Guide](https://se-education.org/addressbook-level3/)_
 
 ![Sun Screenshot](Ui.png)
 
@@ -10,7 +10,7 @@ having the benefits of a Graphical User Interface (GUI).
 ## Getting Started
 
 1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest `Sun.jar` from [here](https://github.com/wonyeji/ip).
+2. Download the latest `Sun.jar` from [here](https://github.com/wonyeji/ip/releases).
 3. Copy the file to the folder you want to use as the home folder for your Sun Chatbot.
 4. Double-click the file to start the app. The GUI that is similar to the picture above should appear in a few seconds.
 
