@@ -1,18 +1,23 @@
 package duke.components;
-import duke.task.Todo;
+
 import duke.task.Deadline;
 import duke.task.Event;
-import java.util.Scanner;
-import java.util.ArrayList;
+import duke.task.Todo;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents the storage file that Duke can read from and write to.
@@ -29,14 +34,13 @@ public class Storage {
     /**
      * Reads tasks stored in data file and add them into TaskList.
      * Creates the date file if it does not exist.
+     *
      * @param taskList The Task List of Duke to receive tasks from data file.
      */
     public void loadInto(TaskList taskList) {
 
-        String dataPath = "./data/data.txt";
-
         try {
-            Path path = Paths.get(dataPath);
+            Path path = Paths.get(filePath);
             Files.createDirectories(path.getParent());
             Files.createFile(path);
             System.out.println("Directories for data.txt are created.");
@@ -108,6 +112,7 @@ public class Storage {
 
     /**
      * Writes a task to the data file.
+     *
      * @param taskToWrite The string representation of the task to be written.
      */
     public void writeTaskToFile(String taskToWrite) {
@@ -120,6 +125,7 @@ public class Storage {
 
     /**
      * Appends a task to the end of the data file.
+     *
      * @param taskToAppend The string representation of the task to be appended.
      */
     public void appendTaskToFile(String taskToAppend) {
@@ -132,6 +138,7 @@ public class Storage {
 
     /**
      * Appends a text to the end of a file.
+     *
      * @param filePath The path to the file to be appended to.
      * @param textToAppend The text to be appended.
      * @throws IOException If there is an error while appending.
@@ -144,6 +151,7 @@ public class Storage {
 
     /**
      * Writes a text to the end of a file.
+     *
      * @param filePath The path to the file to be written into.
      * @param textToAdd The text to be written.
      * @throws IOException If there is an error while writing.

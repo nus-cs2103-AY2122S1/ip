@@ -12,10 +12,18 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Sets the task as done.
+     */
     public void setDone() {
          isDone = true;
      }
 
+    /**
+     * Returns the status icon of the task, X means done, empty means undone.
+     *
+     * @return The status icon of the task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

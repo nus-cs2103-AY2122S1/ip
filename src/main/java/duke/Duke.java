@@ -1,9 +1,11 @@
 package duke;
+
 import duke.components.Parser;
 import duke.components.Storage;
-import duke.components.Ui;
 import duke.components.TaskList;
+import duke.components.Ui;
 import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -16,6 +18,7 @@ public class Duke {
     private Storage storage;
     private Parser parser;
     private TaskList taskList;
+    private static final String FILE_PATH = "./data/data.txt";
 
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -60,6 +63,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/data.txt").run();
+        new Duke(FILE_PATH).run();
     }
 }

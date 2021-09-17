@@ -1,4 +1,5 @@
 package duke.components;
+
 import duke.task.Task;
 
 /**
@@ -22,21 +23,29 @@ public class Ui {
                 + "How can I help you today?\n"
                 + lineBreak + "\n"
                 + "You can create Tasks here.\n"
-                + "To add a Todo, \n simply key in `todo` followed by the name;\n"
-                + "To add a Deadline, \n simply key in `deadline` followed by its name, `/by` and the deadline;\n"
-                + "To add an Event, \n simply key in `event` followed by its name, `/at` and its time.\n"
+                + "To add a Todo, \n"
+                + " simply key in `todo` followed by the name;\n"
+                + "To add a Deadline, \n"
+                + " simply key in `deadline` followed by its name, `/by` and the deadline;\n"
+                + "To add an Event, \n"
+                + " simply key in `event` followed by its name, `/at` and its time.\n"
                 + "Please key in the date and time in the format of `26/08/2021 20:20`.\n"
                 + lineBreak + "\n"
-                + "To display the current list, \n simply enter 'list'.\n"
-                + "To delete a task, \n simply enter 'delete' and space, followed by the task index.\n"
-                + "To mark a task as done, \n simple enter 'done' and space, followed by the task index.\n"
-                + "To exit, \n simply enter 'bye'.\n"
+                + "To display the current list, \n"
+                + " simply enter 'list'.\n"
+                + "To delete a task, \n"
+                + " simply enter 'delete' and space, followed by the task index.\n"
+                + "To mark a task as done, \n"
+                + " simple enter 'done' and space, followed by the task index.\n"
+                + "To exit, \n"
+                + " simply enter 'bye'.\n"
                 + lineBreak + "\n"
         );
     }
 
     /**
      * Display a message when user successfully adds a task.
+     *
      * @param newTask The new task user added.
      */
     public void displayAddTaskMessage(Task newTask) {
@@ -46,6 +55,7 @@ public class Ui {
 
     /**
      * Display the number of tasks in task list.
+     *
      * @param taskList The task list that user is enquiring.
      */
     public void displayTaskNumber(TaskList taskList) {
@@ -68,6 +78,7 @@ public class Ui {
 
     /**
      * Display a message when user marks a task as done.
+     *
      * @param taskMarkDone The task that is done.
      */
     public void displayMarkDoneMessage(String taskMarkDone) {

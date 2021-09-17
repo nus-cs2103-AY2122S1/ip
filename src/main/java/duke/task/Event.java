@@ -1,6 +1,7 @@
 package duke.task;
-import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 /**
  * Represents a Task of type Event, which has a time at which it happens.

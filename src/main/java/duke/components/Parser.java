@@ -1,8 +1,10 @@
 package duke.components;
+
+import java.time.format.DateTimeFormatter;
+
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a parser that will make sense of user input.
@@ -30,6 +32,7 @@ public class Parser {
 
     /**
      * Checks if user input is "bye".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "bye".
      */
@@ -39,6 +42,7 @@ public class Parser {
 
     /**
      * Checks if user input is "list".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "list".
      */
@@ -48,6 +52,7 @@ public class Parser {
 
     /**
      * Checks if user input is "done".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "done".
      */
@@ -57,6 +62,7 @@ public class Parser {
 
     /**
      * Checks if user input is "delete".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "delete".
      */
@@ -66,6 +72,7 @@ public class Parser {
 
     /**
      * Checks if user input is "todo".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "todo".
      */
@@ -75,6 +82,7 @@ public class Parser {
 
     /**
      * Checks if user input is "deadline".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "deadline".
      */
@@ -84,6 +92,7 @@ public class Parser {
 
     /**
      * Checks if user input is "event".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "event".
      */
@@ -93,6 +102,7 @@ public class Parser {
 
     /**
      * Returns the formatter used for format date and time.
+     *
      * @return The DateTimeFormatter used in Duke.
      */
     public DateTimeFormatter getFormatter() {
@@ -101,6 +111,7 @@ public class Parser {
 
     /**
      * Checks if user input is "done".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "done".
      */
@@ -112,6 +123,7 @@ public class Parser {
 
     /**
      * Checks if user input is "delete".
+     *
      * @param input The user input.
      * @return Boolean that represents whether the user input is "delete".
      */
