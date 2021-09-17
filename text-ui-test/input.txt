@@ -1,0 +1,11 @@
+list
+todo
+blah
+todo borrow book
+deadline gym /by 25/8/2021 0800
+event marathon /at 27/8/2021 0800
+done 5
+delete 7
+delete 6
+delete 5
+bye
