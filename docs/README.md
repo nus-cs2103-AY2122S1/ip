@@ -76,7 +76,6 @@ Expected outcome:
 I Understand. I have Added:
     [D][] something (by: 12 Dec 2021)
 You have {n} tasks.
-.....
 ```
 
 
@@ -94,7 +93,6 @@ Expected outcome:
 I Understand. I have Added:
     [D][] something (by: 12 Dec 2021)
 You have {n} tasks.
-.....
 ```
 
 ### `done` - Adds a task identified bt index as done
@@ -111,7 +109,6 @@ Expected outcome:
 Your task has been marked as done.
     [D][X] something (by: 12 Dec 2021)
 You have {n} tasks.
-.....
 ```
 
 
@@ -129,6 +126,18 @@ Expected outcome:
 Your task has been marked as done.
     [D][X] something (by: 12 Dec 2021)
 You have {n} tasks.
-.....
 ```
 
+### `bye` - Ends session with Duke
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+
+
+```
+I Fare Thee Well.
+```
