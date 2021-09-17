@@ -66,6 +66,8 @@ public class TaskManager {
         if (!Objects.equals(inData.toLowerCase(), "bye")) {
             if (Objects.equals(inData, "list")) {
                 return listAll();
+            } else if (Objects.equals(inData, "help")) {
+                return helpMessage();
             } else if (inData.contains("todo")) {
                 try {
                     inData.substring(0, 6);
@@ -179,14 +181,6 @@ public class TaskManager {
         return "";
     }
 
-    /**
-     * Intro Message for duke
-     * @return intro string
-     */
-    public String introMessage() {
-        return "Hello! I'm Joker \n"
-                + "What can I do for you?";
-    }
 
     private String listAll() {
         String output = "";
@@ -259,6 +253,13 @@ public class TaskManager {
 
     private String errorInvalidTaskNo() {
         return "invalid number!";
+    }
+
+    private String helpMessage() {
+        return "Please enter commands in this format: \n"
+                + "todo (task) \n"
+                + "deadline (task) /by (yyyy-mm-dd) \n"
+                + "event (task) /by (yyyy-mm-dd)";
     }
 
     private static boolean isNumeric(String string) {
