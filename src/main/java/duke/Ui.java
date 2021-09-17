@@ -11,98 +11,112 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * Prints the greeting from Duke.
+     * Returns the greeting from Duke.
+     *
+     * @return Greeting in string.
      */
-    public void sayHi() {
-        System.out.println("Hello from\n" + "DUKE\n" + "What can I do for you?");
+    public String sayHi() {
+        return "Hello from\n" + "DUKE\n" + "What can I do for you?";
     }
 
     /**
-     * Prints the list of tasks in Duke.
+     * Returns the list of tasks in Duke.
      *
      * @param list List with the tasks.
+     * @return string of list.
      */
-    public void sayList(ArrayList<Task> list) {
-        System.out.println("Here are the tasks in your tasks:");
+    public String sayList(ArrayList<Task> list) {
+        String str = "Here are the tasks in your tasks:\n";
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
             if (list.get(i) != null) {
-                System.out.println(num + "." + list.get(i).toString());
+                str = str + num + "." + list.get(i).toString() + "\n";
             }
         }
+        return str;
     }
 
     /**
-     * Prints a reply to indicate successfully
-     * marking a specified task as done.
+     * Returns a string representing a reply to indicate
+     * successfully marking a specified task as done.
      *
      * @param t Task that was marked.
+     * @return String for the reply.
      */
-    public void sayCompleted(Task t) {
-        System.out.println("Nice! I've marked this task as done:\n" + "  " + t.toString());
+    public String sayCompleted(Task t) {
+        return "Nice! I've marked this task as done:\n" + "  " + t.toString();
     }
 
     /**
-     * Prints the error message of a Duke Exception.
+     * Returns the error message of a Duke Exception.
      *
      * @param e DukeException.
+     * @return String for the message.
      */
-    public void sayError(DukeException e) {
-        System.out.println(e.getMessage());
+    public String sayError(DukeException e) {
+        return e.getMessage();
     }
 
     /**
-     * Prints a reply to indicate successfully adding
+     * Returns a reply to indicate successfully adding
      * a specified task and the current list size.
      *
      * @param t Added Task.
      * @param size List size.
+     * @return String representing the reply.
      */
-    public void sayUpdates(Task t, int size) {
-        System.out.println("Got it. I've added this task:\n  "
+    public String sayUpdates(Task t, int size) {
+        return "Got it. I've added this task:\n  "
                 + t.toString()
-                + "\nNow you have " + size + " tasks in the task.");
+                + "\nNow you have " + size + " tasks in the task.";
     }
 
     /**
-     * Prints a reply to indicate successfully deleting
+     * Returns a reply to indicate successfully deleting
      * a specified task and the current list size.
      *
      * @param t Deleted Task.
      * @param size List size.
+     * @return String representing the reply.
      */
-    public void sayDeletes(Task t, int size) {
-        System.out.println("Noted. I've removed this task:\n  "
+    public String sayDeletes(Task t, int size) {
+        return "Noted. I've removed this task:\n  "
                 + t.toString()
-                + "\nNow you have " + size + " tasks in the list.");
+                + "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
-     * Prints a reply indicating wrong input.
+     * Returns a reply indicating wrong input.
+     *
+     * @return String representing the reply.
      */
-    public void sayWrongInput() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String sayWrongInput() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
-     * Prints a reply to indicate the exit of Duke.
+     * Returns a reply to indicate the exit of Duke.
+     *
+     * @return String representing the reply.
      */
-    public void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the matching tasks in the list with the keyword.
+     * Returns in a string the matching tasks in the list with the keyword.
      *
      * @param list List of matching tasks.
+     * @return String representing the tasks.
      */
-    public void sayFind(ArrayList<Task> list) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String sayFind(ArrayList<Task> list) {
+        String str = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
             if (list.get(i) != null) {
-                System.out.println(num + "." + list.get(i).toString());
+                str = str + num + "." + list.get(i).toString() + "\n";
             }
         }
+        return str;
     }
 }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 
 /**
@@ -111,5 +112,53 @@ public class Parser {
             }
         }
         return keyTasks;
+    }
+
+    public static String parseResponse(String command, Ui ui, ArrayList<Task> list, TaskList tasks) {
+        try {
+            switch (Parser.parseCommand(command)) {
+                case "list":
+                    return ui.sayList(list);
+                case "done":
+                    int finished = Parser.parseNumber(command);
+                    tasks.done(finished);
+                    return ui.sayCompleted(list.get(finished));
+                case "todo":
+                    if (command.equals("todo") || command.equals("todo ")) {
+                        throw new DukeException(DukeException.Type.TODO);
+                    }
+                    Todo newTodo = new Todo(Parser.parseTodo(command));
+                    tasks.add(newTodo);
+                    return ui.sayUpdates(newTodo, list.size());
+                case "deadline":
+                    String[] splitD = Parser.parseDeadline(command);
+                    String description = splitD[0];
+                    String date = splitD[1];
+                    Deadline newDeadline = new Deadline(description, date);
+                    tasks.add(newDeadline);
+                    return ui.sayUpdates(newDeadline, list.size());
+                case "event":
+                    String[] splitE = Parser.parseEvent(command);
+                    String descriptionOfEvent = splitE[0];
+                    String dateOfEvent = splitE[1];
+                    Event newEvent = new Event(descriptionOfEvent, dateOfEvent);
+                    tasks.add(newEvent);
+                    return ui.sayUpdates(newEvent, list.size());
+                case "delete":
+                    int del = Parser.parseNumber(command);
+                    Task toDelete = list.get(del);
+                    tasks.delete(del);
+                    return ui.sayDeletes(toDelete, list.size());
+                case "find":
+                    ArrayList<Task> keyTasks = Parser.parseFind(list, command);
+                    return ui.sayFind(keyTasks);
+                default:
+                    return ui.sayWrongInput();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.Type.INVALID);
+        } catch (DateTimeException e) {
+            throw new DukeException(DukeException.Type.DATE);
+        }
     }
 }

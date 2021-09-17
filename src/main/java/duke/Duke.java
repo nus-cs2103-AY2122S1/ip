@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,78 +36,33 @@ public class Duke {
      * Runs Duke.
      */
     public void run() {
-        ui.sayHi();
+        System.out.println(ui.sayHi());
         Scanner s = new Scanner(System.in);
         String command = s.nextLine();
         while (!command.equals("bye")) {
             try {
-                try {
-                    switch (Parser.parseCommand(command)) {
-                    case "list":
-                        ui.sayList(list);
-                        command = s.nextLine();
-                        break;
-                    case "done":
-                        int finished = Parser.parseNumber(command);
-                        tasks.done(finished);
-                        ui.sayCompleted(list.get(finished));
-                        command = s.nextLine();
-                        break;
-                    case "todo":
-                        if (command.equals("todo") || command.equals("todo ")) {
-                            throw new DukeException(DukeException.Type.TODO);
-                        }
-                        Todo newTodo = new Todo(Parser.parseTodo(command));
-                        tasks.add(newTodo);
-                        ui.sayUpdates(newTodo, list.size());
-                        command = s.nextLine();
-                        break;
-                    case "deadline":
-                        String[] splitD = Parser.parseDeadline(command);
-                        String description = splitD[0];
-                        String date = splitD[1];
-                        Deadline newDeadline = new Deadline(description, date);
-                        tasks.add(newDeadline);
-                        ui.sayUpdates(newDeadline, list.size());
-                        command = s.nextLine();
-                        break;
-                    case "event":
-                        String[] splitE = Parser.parseEvent(command);
-                        String descriptionOfEvent = splitE[0];
-                        String dateOfEvent = splitE[1];
-                        Event newEvent = new Event(descriptionOfEvent, dateOfEvent);
-                        tasks.add(newEvent);
-                        ui.sayUpdates(newEvent, list.size());
-                        command = s.nextLine();
-                        break;
-                    case "delete":
-                        int del = Parser.parseNumber(command);
-                        Task toDelete = list.get(del);
-                        tasks.delete(del);
-                        ui.sayDeletes(toDelete, list.size());
-                        command = s.nextLine();
-                        break;
-                    case "find":
-                        ArrayList<Task> keyTasks = Parser.parseFind(list, command);
-                        ui.sayFind(keyTasks);
-                        command = s.nextLine();
-                        break;
-                    default:
-                        ui.sayWrongInput();
-                        command = s.nextLine();
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException(DukeException.Type.INVALID);
-                } catch (DateTimeException e) {
-                    throw new DukeException(DukeException.Type.DATE);
-                }
+                System.out.println(Parser.parseResponse(command, ui, list, tasks));
+                command = s.nextLine();
             } catch (DukeException e) {
-                ui.sayError(e);
+                System.out.println(ui.sayError(e));
                 command = s.nextLine();
             }
         }
-        ui.sayBye();
+        System.out.println(ui.sayBye());
         storage.writeAll(tasks);
+    }
+
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            storage.writeAll(tasks);
+            return ui.sayBye();
+        } else {
+            try {
+                return Parser.parseResponse(input, ui, list, tasks);
+            } catch (DukeException e) {
+                return ui.sayError(e);
+            }
+        }
     }
 
     /**
