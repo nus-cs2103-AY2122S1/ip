@@ -45,27 +45,27 @@ public class Duke {
                             if (command.equals("todo") || command.equals("todo ")) {
                                 throw new DukeException(DukeException.Type.TODO);
                             }
-                            Todo toAdd = new Todo(Parser.parseTodo(command));
-                            tasks.add(toAdd);
-                            ui.sayUpdates(toAdd, list.size());
+                            Todo newTodo = new Todo(Parser.parseTodo(command));
+                            tasks.add(newTodo);
+                            ui.sayUpdates(newTodo, list.size());
                             command = s.nextLine();
                             break;
                         case "deadline":
                             String[] splitD = Parser.parseDeadline(command);
-                            String first = splitD[0];
-                            String second = splitD[1];
-                            Deadline toAdd2 = new Deadline(first, second);
-                            tasks.add(toAdd2);
-                            ui.sayUpdates(toAdd2, list.size());
+                            String description = splitD[0];
+                            String date = splitD[1];
+                            Deadline newDeadline = new Deadline(description, date);
+                            tasks.add(newDeadline);
+                            ui.sayUpdates(newDeadline, list.size());
                             command = s.nextLine();
                             break;
                         case "event":
                             String[] splitE = Parser.parseEvent(command);
-                            String one = splitE[0];
-                            String two = splitE[1];
-                            Event toAdd3 = new Event(one, two);
-                            tasks.add(toAdd3);
-                            ui.sayUpdates(toAdd3, list.size());
+                            String descriptionOfEvent = splitE[0];
+                            String dateOfEvent = splitE[1];
+                            Event newEvent = new Event(descriptionOfEvent, dateOfEvent);
+                            tasks.add(newEvent);
+                            ui.sayUpdates(newEvent, list.size());
                             command = s.nextLine();
                             break;
                         case "delete":

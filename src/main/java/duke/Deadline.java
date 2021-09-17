@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected String by;
+    protected String byPart;
     protected LocalDate date;
     protected String afterDate;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String byPart) {
         super(description);
-        this.by = by;
-        String[] arr = by.split(" ", 2);
+        this.byPart = byPart;
+        String[] arr = byPart.split(" ", 2);
         this.afterDate = arr.length == 2 ? arr[1] : "";
         this.date = LocalDate.parse(arr[0]);
     }
@@ -19,7 +19,7 @@ public class Deadline extends Task {
     @Override
     public String toWrite() {
         int marked = this.isDone ? 1 : 0;
-        return String.format("D|%d|%s|%s\n", marked, this.description, this.by);
+        return String.format("D|%d|%s|%s\n", marked, this.description, this.byPart);
     }
 
     @Override

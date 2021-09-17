@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected String at;
+    protected String atPart;
     protected LocalDate date;
     protected String afterDate;
 
-    public Event(String description, String at) {
+    public Event(String description, String atPart) {
         super(description);
-        this.at = at;
-        String[] arr = at.split(" ", 2);
+        this.atPart = atPart;
+        String[] arr = atPart.split(" ", 2);
         this.afterDate = arr.length == 2 ? arr[1] : "";
         this.date = LocalDate.parse(arr[0]);
     }
@@ -19,7 +19,7 @@ public class Event extends Task {
     @Override
     public String toWrite() {
         int marked = this.isDone ? 1 : 0;
-        return String.format("E|%d|%s|%s\n", marked, this.description, this.at);
+        return String.format("E|%d|%s|%s\n", marked, this.description, this.atPart);
     }
 
     @Override
