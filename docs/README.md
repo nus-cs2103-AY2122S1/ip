@@ -23,17 +23,18 @@
 ---
 
 ## Commands in Duke
-Command | Description
------------ | ------------
-`todo { name }` | Creates a to do task with specified name
-`deadline { name } /by { YYYY-MM-DD }` | Creates a deadline task with specified name and time
-`event { name } /at { YYYY-MM-DD }` | Creates an event task with specified name and time
-`list` | List all tasks
-`done { number }` | Marks the specified task as done
-`delete { number }` | Deletes the specified task
-`find { keyword }` | Finds all tasks that contains the specified keyword
-`tag { number } # { name }` | Tags the specified task with the specified tag
-`bye` | Saves tasks to hard disk and closes session
+
+|Command | Description|
+|:------------|:-----------|
+|`todo { name }` | Creates a to do task with specified name|
+|`deadline { name } /by { YYYY-MM-DD }` | Creates a deadline task with specified name and time|
+|`event { name } /at { YYYY-MM-DD }` | Creates an event task with specified name and time|
+|`list` | List all tasks|
+|`done { number }` | Marks the specified task as done|
+|`delete { number }` | Deletes the specified task|
+|`find { keyword }` | Finds all tasks that contains the specified keyword|
+|`tag { number } # { name }` | Tags the specified task with the specified tag|
+| `bye` | Saves tasks to hard disk and closes session|
 
 ---
 
