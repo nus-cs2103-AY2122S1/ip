@@ -67,10 +67,6 @@ public class Duke extends Application {
         // initialize stage
         createScene(stage);
 
-        // display stage
-        stage.setScene(scene);
-        stage.show();
-
         // setup other items
         setAnchors();
         setListeners();
@@ -115,6 +111,10 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
+        // display stage
+        stage.setScene(scene);
+        stage.show();
+
         // styling the stage
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -123,7 +123,7 @@ public class Duke extends Application {
 
         mainLayout.setPrefSize(500.0, 700.0);
 
-        scrollPane.setPrefSize(500, 700);
+        scrollPane.setPrefSize(500, 645);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
