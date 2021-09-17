@@ -182,3 +182,8 @@ Terminate and close the application.
 ### Save tasks to disk
 
 Automatically save the tasks to disk.
+
+
+### Acknowledgements:
+Original Duke template forked from Prof Damith CS2103T Github
+GUI Design based on JavaFX tutorials
