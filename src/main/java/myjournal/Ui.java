@@ -5,7 +5,7 @@ import myjournal.task.Task;
 /**
  * Creates the Ui object.
  *
- * @author felissafaustine
+ * @author Felissa Faustine.
  */
 public class Ui {
     /**
@@ -34,7 +34,7 @@ public class Ui {
      * Prints out the statement after a task is added.
      *
      * @param taskList The list of all tasks.
-     * @return The task added.
+     * @return The task added in form of string.
      */
     public String taskAddPrint(TaskList taskList) {
         assert taskList != null : "TaskList should not be null";
@@ -48,7 +48,7 @@ public class Ui {
      * Prints the task that has been deleted.
      *
      * @param task The task that has been deleted.
-     * @return The task removed.
+     * @return The task removed in form of string.
      */
     public String removeTaskPrint(Task task) {
         assert task != null : "Task should not be null";
@@ -60,7 +60,7 @@ public class Ui {
      * Prints the task that has been edited.
      *
      * @param task The task that has been edited.
-     * @return The task edited.
+     * @return The task edited in form of string.
      */
     public String editTaskPrint(Task task) {
         assert task != null : "Task should not be null";
@@ -72,7 +72,7 @@ public class Ui {
      * Prints the task with the keyword.
      *
      * @param tasks The list of the tasks with the keyword.
-     * @return The tasks found.
+     * @return The tasks found in form of string.
      */
     public String findTaskPrint(TaskList tasks) {
         assert tasks != null : "TaskList should not be null";
@@ -91,7 +91,7 @@ public class Ui {
      * Prints the task that has been marked as done.
      *
      * @param task The task that has been marked as done.
-     * @return The task marked as done.
+     * @return The task marked as done in form of string.
      */
     public String doneTaskPrint(Task task) {
         assert task != null : "Task should not be null";

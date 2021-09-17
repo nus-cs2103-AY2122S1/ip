@@ -9,7 +9,7 @@ import myjournal.task.Task;
 /**
  * Creates the TaskList object.
  *
- * @author felissafaustine
+ * @author Felissa Faustine.
  */
 public class TaskList {
     private ArrayList<Task> tasks;

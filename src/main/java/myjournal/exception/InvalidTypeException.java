@@ -3,7 +3,7 @@ package myjournal.exception;
 /**
  * Creates the invalid type exceptions.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class InvalidTypeException extends MyJournalException {
 

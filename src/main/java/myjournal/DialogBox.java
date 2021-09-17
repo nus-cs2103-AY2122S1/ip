@@ -16,9 +16,10 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * Creates a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
+ *
+ * @author Felissa Faustine.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -26,6 +27,12 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
+    /**
+     * Constructs the dialog box for the application GUI.
+     *
+     * @param text The text to be displayed.
+     * @param img The image for the display picture.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -50,10 +57,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the user dialog.
+     *
+     * @param text The text to be displayed.
+     * @param img The user's display picture.
+     * @return A DialogBox object of the user's dialog.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns MyJournal dialog.
+     *
+     * @param text The text to be displayed.
+     * @param img The journal's display picture.
+     * @return A DialogBox object of MyJournal's dialog.
+     */
     public static DialogBox getMyJournalDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

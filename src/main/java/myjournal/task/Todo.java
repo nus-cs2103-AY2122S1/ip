@@ -3,7 +3,7 @@ package myjournal.task;
 /**
  * Creates task with the type of todo.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class Todo extends Task {
     /**
@@ -33,6 +33,11 @@ public class Todo extends Task {
         return "";
     }
 
+    /**
+     * Sets the time of the task.
+     *
+     * @param time The time of the task.
+     */
     public void setTime(String time) {
     }
 

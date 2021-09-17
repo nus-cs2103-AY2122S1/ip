@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Creates chatBot called MyJournal.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class MyJournal {
     private Storage storage;
@@ -29,8 +29,10 @@ public class MyJournal {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Parses user's input.
+     *
+     * @param input The user's input.
+     * @return The parsed input.
      */
     public String getResponse(String input) {
         Scanner text = new Scanner(input);

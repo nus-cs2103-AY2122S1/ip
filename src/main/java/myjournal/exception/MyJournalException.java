@@ -3,7 +3,7 @@ package myjournal.exception;
 /**
  * Creates MyJournal Exceptions.
  *
- * @author felissafaustine
+ * @author Felissa Faustine.
  */
 public class MyJournalException extends RuntimeException {
     /**

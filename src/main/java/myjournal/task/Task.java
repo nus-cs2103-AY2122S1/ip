@@ -3,7 +3,7 @@ package myjournal.task;
 /**
  * An abstract class for tasks.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public abstract class Task {
     private String taskName;
@@ -69,8 +69,18 @@ public abstract class Task {
      */
     public abstract String getTime();
 
+    /**
+     * Sets the time of the task.
+     *
+     * @param time The time of the task.
+     */
     public abstract void setTime(String time);
 
+    /**
+     * Sets the description of the task.
+     *
+     * @param taskName The description of the task.
+     */
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }

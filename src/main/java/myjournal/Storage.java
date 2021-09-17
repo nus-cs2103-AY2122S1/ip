@@ -16,7 +16,7 @@ import myjournal.task.Todo;
 /**
  * Creates the object Storage.
  *
- * @author felissafaustine
+ * @author Felissa Faustine.
  */
 public class Storage {
     private File file;

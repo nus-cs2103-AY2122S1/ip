@@ -3,7 +3,7 @@ package myjournal.task;
 /**
  * Creates tasks with the type of event.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class Event extends Task {
     private String time;
@@ -37,6 +37,11 @@ public class Event extends Task {
         return "E";
     }
 
+    /**
+     * Sets the time of the task.
+     *
+     * @param time The time of the task.
+     */
     public void setTime(String time) {
         this.time = time;
     }

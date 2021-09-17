@@ -3,7 +3,7 @@ package myjournal.task;
 /**
  * Creates task with the type of Deadline.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class Deadline extends Task {
     private String time;
@@ -37,6 +37,11 @@ public class Deadline extends Task {
         return "D";
     }
 
+    /**
+     * Sets the deadline of the task.
+     *
+     * @param time The deadline of the task.
+     */
     public void setTime(String time) {
         this.time = time;
     }

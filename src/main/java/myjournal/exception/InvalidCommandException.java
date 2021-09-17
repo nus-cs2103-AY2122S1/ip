@@ -1,14 +1,14 @@
 package myjournal.exception;
 
 /**
- * A class to create invalid task number exceptions.
+ * Creates invalid command exceptions.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class InvalidCommandException extends MyJournalException {
 
     /**
-     * The constructor for the InvalidTaskNumberExceptions.
+     * Constructs InvalidCommandException objects.
      *
      * @param message The error message.
      */

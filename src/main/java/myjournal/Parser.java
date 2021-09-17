@@ -18,7 +18,7 @@ import myjournal.task.Todo;
 /**
  * Returns an object of Parser.
  *
- * @author felissafaustine
+ * @author Felissa Faustine.
  */
 public class Parser {
     /**
@@ -26,6 +26,8 @@ public class Parser {
      *
      * @param line The current line parsed.
      * @param tasks The list of the tasks in MyJournal.
+     * @param ui The ui for this MyJournal object.
+     * @return The parsed user's input.
      */
     public String parse(Scanner line, TaskList tasks, Ui ui) {
         try {
@@ -63,7 +65,7 @@ public class Parser {
      *
      * @param line The current line that is being parsed.
      * @param tasks The list of tasks.
-     * @return A task which has been marked as done.
+     * @return The list of the tasks containing the keyword.
      */
     public static TaskList parseFind(Scanner line, TaskList tasks) {
         assert tasks != null : "TaskList should not be null";
@@ -173,6 +175,7 @@ public class Parser {
      * Parses user's input for the command "list".
      *
      * @param tasks The list of tasks.
+     * @return The list of tasks in form of a String.
      */
     public static String parseList(TaskList tasks) {
         assert tasks != null : "TaskList should not be null";

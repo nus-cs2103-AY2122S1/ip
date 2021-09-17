@@ -3,7 +3,7 @@ package myjournal.exception;
 /**
  * Creates invalid task number exceptions.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class InvalidTaskNumberException extends MyJournalException {
 

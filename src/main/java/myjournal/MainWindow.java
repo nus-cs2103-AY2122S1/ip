@@ -13,6 +13,8 @@ import javafx.util.Duration;
 
 /**
  * Creates Main Window.
+ *
+ * @author Felissa Faustine.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -42,8 +44,8 @@ public class MainWindow extends AnchorPane {
         isOffline = false;
     }
 
-    public void setMyJournal(MyJournal d) {
-        myJournal = d;
+    public void setMyJournal(MyJournal myJournal) {
+        this.myJournal = myJournal;
     }
 
     /**

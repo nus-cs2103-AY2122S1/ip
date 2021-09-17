@@ -3,7 +3,7 @@ package myjournal.exception;
 /**
  * Creates empty description exceptions.
  *
- * @author Felissa Faustine
+ * @author Felissa Faustine.
  */
 public class EmptyDescriptionException extends MyJournalException {
 
