@@ -2,6 +2,8 @@ package duke.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -13,11 +15,11 @@ public class Ui {
 
     // The lines that Duke will print
     /** The Duke chatbot's logo. */
-    private final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private final String LOGO = " _____               __    \n"
+            + "|    _   \\  __  __  |   |  __    ____ \n"
+            + "|   |  |   | |  | |  |  |   |/   / /  __  \\\n"
+            + "|   |_|   | |  |_|  |  |     <  |    ___/\n"
+            + "|_____/   \\___/   |__|\\__\\ \\_____|\n";
     /** The line break between each interaction. */
     private final String LINE_BREAK = "-------------------------------------------------------------------";
     /** The standard welcome message Duke will print as it starts. */
@@ -61,16 +63,18 @@ public class Ui {
      * Prints the full welcome message when Duke starts.
      */
     public String greetWelcome() {
-        String output = LINE_BREAK + "\n" + WELCOME_MESSAGE + "\n" + LINE_BREAK + "\n";
-        System.out.println(output);
-        return output;
+        return WELCOME_MESSAGE;
     }
 
     /**
-     * Prints the full goodbye message when Duke closes.
+     * Prints the full goodbye message when Duke closes and closes the GUI after 2 seconds.
      */
     public String greetGoodbye() {
-        System.out.println(GOODBYE_MESSAGE);
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                System.exit(0);
+            }
+        }, 2000);
         return GOODBYE_MESSAGE;
     }
 
