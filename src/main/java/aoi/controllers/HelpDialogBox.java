@@ -3,18 +3,20 @@ package aoi.controllers;
 import java.io.IOException;
 import java.util.Collections;
 
+import aoi.Main;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.shape.Circle;
 
 /**
@@ -24,14 +26,11 @@ import javafx.scene.shape.Circle;
  */
 public class HelpDialogBox extends HBox {
     @FXML
-    private Label dialog;
-    @FXML
     private Hyperlink hyperlink;
     @FXML
     private ImageView displayPicture;
-    private final Hyperlink link = new Hyperlink("https://mslevis.github.io/ip/");
 
-    private HelpDialogBox(String text, Image img) {
+    private HelpDialogBox(Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/HelpDialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -41,10 +40,15 @@ public class HelpDialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        dialog.getStyleClass().add("dialog-box");
-        hyperlink.getStyleClass().add("dialog-box");
-        this.setHgrow(dialog, Priority.ALWAYS);
+        hyperlink.getStyleClass().add("help-link");
+        hyperlink.setText("https://mslevis.github.io/ip/");
+        hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+                new Main().getHostServices().showDocument(hyperlink.getText());
+            }
+        });
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 40, 40));
     }
@@ -59,8 +63,8 @@ public class HelpDialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static HelpDialogBox getHelpDialog(String text, Image img) {
-        var db = new HelpDialogBox(text, img);
+    public static HelpDialogBox getHelpDialog(Image img) {
+        var db = new HelpDialogBox(img);
         db.flip();
         return db;
     }

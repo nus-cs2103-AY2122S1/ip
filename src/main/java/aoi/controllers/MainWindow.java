@@ -12,7 +12,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -81,7 +80,8 @@ public class MainWindow extends AnchorPane {
         if (response.equals(Ui.showHelpMsg())) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    HelpDialogBox.getHelpDialog(response, aoiImage));
+                    DialogBox.getAoiDialog(response, aoiImage),
+                    HelpDialogBox.getHelpDialog(aoiImage));
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

@@ -41,9 +41,6 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.getStyleClass().add("dialog-box");
-//        if (text.contains(link.getText())) {
-//            dialog.getChildren().add(link);
-//        }
         this.setHgrow(dialog, Priority.ALWAYS);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 40, 40));
