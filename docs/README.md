@@ -14,7 +14,6 @@ than traditional GUI apps.
   - [Finding task(s) by keyword: `find`](#finding-tasks-by-keyword-find)
   - [Sorting all deadline tasks: `sort`](#sorting-all-deadline-tasks-sort)
   - [Exiting the program: `bye`](#exiting-the-program-bye)
-- [FAQ](#faq)
 - [Command summary](#command-summary)
 
 <hr />
