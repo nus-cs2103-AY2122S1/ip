@@ -19,10 +19,25 @@ import duke.command.TodoCommand;
 import duke.command.UndoCommand;
 
 /**
- * Parser object that parses all the input from user to commands understood by Duke
+ * Parser object that parses all the input from user to commands understood by Duke.
  */
 public class Parser {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
+
+    private static final int TODO_PREFIX_LENGTH = 5;
+    private static final int EVENT_PREFIX_LENGTH = 6;
+    private static final int DEADLINE_PREFIX_LENGTH = 9;
+
+    private static final String UNIDENTIFIED_COMMAND_MESSAGE = "Ehhh... (owO) Sorry sir I do not understand.";
+    private static final String EMPTY_INPUT_MESSAGE = "Don't leave it empty!!";
+    private static final String EMPTY_INPUT_EMOTICON = ">_>";
+    private static final String MISSING_DETAILS_MESSAGE = "Be specific!!!";
+    private static final String MISSING_DETAILS_EMOTICON = "(-_-)";
+    private static final String INCORRECT_DATE_MESSAGE
+            = "Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format";
+    private static final String INCORRECT_DATE_EMOTICON = "(`-`)";
+
+
     private static String[] parsed;
 
     private static int parseTaskNo(String parse) {
@@ -30,19 +45,21 @@ public class Parser {
         return taskNo;
     }
 
-    private static String parseTodoTask() throws IllegalArgumentException {
+    private static String parseTodoTask(String command) throws IllegalArgumentException {
         if (parsed.length < 2 || parsed[1].equals("")) {
             throw new IllegalArgumentException();
         }
-        return parsed[1];
+        String desc = command.substring(TODO_PREFIX_LENGTH);
+        return desc;
     }
 
     private static String[] parseEventTask(String command) throws
             IllegalArgumentException,
             ArrayIndexOutOfBoundsException,
             StringIndexOutOfBoundsException {
+
         String[] eventDetails = new String[2];
-        String desc = command.split(" /at ")[0].substring(6);
+        String desc = command.split(" /at ")[0].substring(EVENT_PREFIX_LENGTH);
         if (desc.equals("")) {
             throw new IllegalArgumentException();
         }
@@ -58,8 +75,9 @@ public class Parser {
             IllegalArgumentException,
             ArrayIndexOutOfBoundsException,
             StringIndexOutOfBoundsException {
+
         String[] deadlineDetails = new String[2];
-        String desc = command.split(" /by ")[0].substring(9);
+        String desc = command.split(" /by ")[0].substring(DEADLINE_PREFIX_LENGTH);
         if (desc.equals("")) {
             throw new IllegalArgumentException();
         }
@@ -75,6 +93,7 @@ public class Parser {
             IllegalArgumentException,
             ArrayIndexOutOfBoundsException,
             StringIndexOutOfBoundsException {
+
         String[] snoozeDetails = command.split(" ");
         if (snoozeDetails[1].equals("") || snoozeDetails[2].equals("")) {
             throw new IllegalArgumentException();
@@ -96,10 +115,10 @@ public class Parser {
     }
 
     /**
-     * Parses input line by line
+     * Parses input according to the different commands.
      *
-     * @param input the input of the user
-     * @return returns a command type to be executed in duke.run()
+     * @param input Input of the user
+     * @return  Command type to be executed in duke.run()
      */
     public static Command parseCommands(String input) {
         assert !input.isEmpty() : "input should not be empty";
@@ -117,7 +136,7 @@ public class Parser {
             case DeleteCommand.COMMAND:
                 return new DeleteCommand(parseTaskNo(parsed[1]));
             case TodoCommand.COMMAND:
-                return new TodoCommand(parseTodoTask());
+                return new TodoCommand(parseTodoTask(input));
             case EventCommand.COMMAND:
                 String[] eventDetails = parseEventTask(input);
                 return new EventCommand(eventDetails[0], parseDate(eventDetails[1]));
@@ -133,18 +152,16 @@ public class Parser {
                 int taskNo = parseTaskNo(snooze[1]);
                 return new SnoozeCommand(taskNo, parseDate(snooze[2]));
             default:
-                throw new DukeException("Ehhh... (owO) Sorry sir I do not understand.");
+                throw new DukeException(UNIDENTIFIED_COMMAND_MESSAGE);
             }
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
         } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
-            return new ErrorCommand("Don't leave it empty!!", "(・`ω´・)");
+            return new ErrorCommand(EMPTY_INPUT_MESSAGE, EMPTY_INPUT_EMOTICON);
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new ErrorCommand("Be specific!!!", "(-_-)");
+            return new ErrorCommand(MISSING_DETAILS_MESSAGE, MISSING_DETAILS_EMOTICON);
         } catch (DateTimeException e) {
-            return new ErrorCommand(
-                    "Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format",
-                    "(`-`)");
+            return new ErrorCommand(INCORRECT_DATE_MESSAGE, INCORRECT_DATE_EMOTICON);
         }
     }
 

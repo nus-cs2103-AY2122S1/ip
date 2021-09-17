@@ -14,7 +14,7 @@ public class Duke {
     /**
      * Constructor for Duke object
      *
-     * @param filePath relative path to where the data was stored
+     * @param filePath Relative path to where the data was stored
      */
     public Duke(String filePath) {
         responseFormatter = new ResponseFormatter();
@@ -28,6 +28,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the repsonse of chatbot based on user input
+     *
+     * @param input User input raw
+     * @return Chatbot response that has been formatted
+     */
     public String getResponse(String input) {
         assert !input.isEmpty() : "input should not be empty!";
         try {

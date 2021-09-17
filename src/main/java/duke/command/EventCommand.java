@@ -14,6 +14,7 @@ import duke.task.Task;
 
 public class EventCommand extends Command {
     public static final String COMMAND = "event";
+    private static final String COMMAND_TYPE = "Event Command";
     private String desc;
     private LocalDateTime at;
     private Event event;
@@ -21,8 +22,8 @@ public class EventCommand extends Command {
     /**
      * Constructor for Event Command
      *
-     * @param desc description of task
-     * @param at when task starts
+     * @param desc Description of task
+     * @param at Date when task starts
      *
      */
     public EventCommand(String desc, LocalDateTime at) {
@@ -32,13 +33,14 @@ public class EventCommand extends Command {
 
     /**
      * Executes Events Command, adds an event task to the list, returns response
-     * and stores updated list in file
+     * and stores updated list in file.
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @throws IOException when there is file save error
-     * @return
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @throws IOException When there is file save error
+     * @return Event created message formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf,
@@ -60,6 +62,6 @@ public class EventCommand extends Command {
         taskList.updateTaskList(currentList);
 
         storage.writeToFile(taskList);
-        return rf.formatUndo("Event Command");
+        return rf.formatUndo(COMMAND_TYPE);
     }
 }

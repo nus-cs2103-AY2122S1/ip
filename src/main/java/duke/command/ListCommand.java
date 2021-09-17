@@ -10,12 +10,13 @@ public class ListCommand extends Command {
     public static final String COMMAND = "list";
 
     /**
-     * Executes list command and returns the current list
+     * Executes list command and returns the current list.
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @return formatted response
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @return List of tasks formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {

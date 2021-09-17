@@ -11,8 +11,8 @@ public class Event extends Task {
     /**
      * Constructor
      *
-     * @param description task description
-     * @param at starts at
+     * @param description Task description
+     * @param at Starts at
      */
     public Event(String description, LocalDateTime at) {
         super(description, false);
@@ -22,9 +22,9 @@ public class Event extends Task {
     /**
      * Constructor for when reading file from storage
      *
-     * @param description task description
-     * @param isDone check complete status
-     * @param at starts at
+     * @param description Task description
+     * @param isDone Check complete status
+     * @param at Starts at
      */
     public Event(String description, String isDone, LocalDateTime at) {
         super(description, isDone.equals("1"));
@@ -32,10 +32,10 @@ public class Event extends Task {
     }
 
     /**
-     * event to be updated/snoozed
+     * Event to be updated/snoozed
      *
-     * @param snoozedTime updated time
-     * @return updated event in string format
+     * @param snoozedTime Updated time
+     * @return Updated event in string format
      */
     public String snooze(LocalDateTime snoozedTime) {
         this.at = snoozedTime;

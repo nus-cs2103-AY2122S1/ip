@@ -18,7 +18,7 @@ public class ResponseFormatter {
     /**
      * Returns the current list formatted
      *
-     * @param taskList current list
+     * @param taskList Current task list
      *
      */
     public String formatList(TaskList taskList) {
@@ -38,8 +38,8 @@ public class ResponseFormatter {
     /**
      * Returns the task added to list formatted
      *
-     * @param task new task added
-     * @param taskLength the new length of the list
+     * @param task New task added
+     * @param taskLength New length of the list
      *
      */
     public String formatAdd(Task task, int taskLength) {
@@ -57,7 +57,7 @@ public class ResponseFormatter {
     /**
      * Returns the task that has been marked as complete formatted
      *
-     * @param completedTask the description field of the task that has been completed
+     * @param completedTask Description field of the task that has been completed
      *
      */
     public String formatDone(String completedTask) {
@@ -68,8 +68,8 @@ public class ResponseFormatter {
     /**
      * Returns the specific task deleted by user formatted
      *
-     * @param deletedTask description field of the task that has been deleted
-     * @param listLength current length of list after deletion
+     * @param deletedTask Description field of the task that has been deleted
+     * @param listLength Current length of list after deletion
      *
      */
     public String formatDelete(String deletedTask, int listLength) {
@@ -81,7 +81,7 @@ public class ResponseFormatter {
     /**
      * Returns file error that has occurred during storage
      *
-     * @param e the error to getMessage()
+     * @param e Error to getMessage()
      */
     public String formatFileError(IOException e) {
         return "（ ﾟ Дﾟ) File Error..." + e.getMessage();
@@ -90,8 +90,8 @@ public class ResponseFormatter {
     /**
      * Returns type of error formatted
      *
-     * @param message error message to be understood
-     * @param emoticon emoticon to add expressions and character to duke
+     * @param message Error message to be understood
+     * @param emoticon Emoticon to add expressions and character to duke
      *
      */
     public String formatError(String message, String emoticon) {
@@ -101,7 +101,7 @@ public class ResponseFormatter {
     /**
      * Return already formatted error messages
      *
-     * @param message formatted error message
+     * @param message Formatted error message
      *
      */
     public String formatError(String message) {
@@ -111,7 +111,7 @@ public class ResponseFormatter {
     /**
      * Return tasks related to keywords
      *
-     * @param foundTasks list of tasks that matches
+     * @param foundTasks List of tasks that matches
      */
     public String formatFound(ArrayList<Task> foundTasks) {
         String foundList = "";

@@ -12,13 +12,15 @@ import duke.task.Todo;
 
 public class TodoCommand extends Command {
     public static final String COMMAND = "todo";
+    private static final String COMMAND_TYPE = "Todo Command";
+
     private String desc;
     private Todo todo;
 
     /**
      * Constructor for Todo Command
      *
-     * @param desc description of todo task
+     * @param desc Description of todo task
      */
     public TodoCommand(String desc) {
         this.desc = desc;
@@ -28,12 +30,13 @@ public class TodoCommand extends Command {
      * Executes Todo Command, adds a todo task to the list, returns response
      * and stores updated list in file
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @throws IOException when there is file save error
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @throws IOException When there is file save error
      *
-     * @return formatted response
+     * @return Todo Created message formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf,
@@ -58,6 +61,6 @@ public class TodoCommand extends Command {
         taskList.updateTaskList(currentList);
 
         storage.writeToFile(taskList);
-        return rf.formatUndo("Todo Command");
+        return rf.formatUndo(COMMAND_TYPE);
     }
 }

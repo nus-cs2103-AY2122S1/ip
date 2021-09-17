@@ -14,6 +14,7 @@ import duke.task.Task;
 
 public class DeadlineCommand extends Command {
     public static final String COMMAND = "deadline";
+    private static final String COMMAND_TYPE= "Deadline Command";
     private String desc;
     private LocalDateTime by;
     private Deadline deadline;
@@ -21,8 +22,8 @@ public class DeadlineCommand extends Command {
     /**
      * Constructor of Deadline Command
      *
-     * @param desc the description of the task
-     * @param by due date
+     * @param desc Description of the task
+     * @param by Due date
      *
      */
     public DeadlineCommand(String desc, LocalDateTime by) {
@@ -32,14 +33,15 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes Deadline Command, adds a deadline task to the list, returns response
-     * and stores updated list in file
+     * and stores updated list in file.
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @throws IOException when there is file save error
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @throws IOException When there is file save error
      *
-     * @return
+     * @return Deadline created message formatted.
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf,
@@ -61,6 +63,6 @@ public class DeadlineCommand extends Command {
         taskList.updateTaskList(currentList);
 
         storage.writeToFile(taskList);
-        return rf.formatUndo("Deadline Command");
+        return rf.formatUndo(COMMAND_TYPE);
     }
 }

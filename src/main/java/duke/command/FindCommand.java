@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     /**
      * Constructor for keyword
      *
-     * @param keyword to search in list
+     * @param keyword Keyword to search in list
      *
      */
     public FindCommand(String keyword) {
@@ -23,12 +23,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes find command and search for keyword in list and returns response
+     * Executes find command and search for keyword in list and returns response.
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @return formatted response
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @return List of matching tasks formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {

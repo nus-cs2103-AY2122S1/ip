@@ -13,7 +13,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Storage class that stores all previous chat history and list in data/duke.txt
+ * Storage class that stores all previous chat history and list in data/duke.txt.
  */
 public class Storage {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
@@ -23,7 +23,7 @@ public class Storage {
     /**
      * Constructor for Storage
      *
-     * @param pathname relative path to where the chat history is stored
+     * @param pathname Relative path to where the chat history is stored
      */
     public Storage(String pathname) {
         this.taskList = new TaskList();
@@ -31,10 +31,10 @@ public class Storage {
     }
 
     /**
-     * read and parse data from previous chat history
+     * Read and parse data from previous chat history.
      *
      * @return List of previous stated task
-     * @throws IOException when file cannot be read
+     * @throws IOException When file cannot be read
      *
      */
     public TaskList readFile() throws IOException {
@@ -72,10 +72,10 @@ public class Storage {
 
 
     /**
-     * saves the current list to the chat history file
+     * Saves the current list to the chat history file.
      *
-     * @param taskList updated list after commands are executed
-     * @throws IOException when file cannot be saved
+     * @param taskList Updated list after commands are executed
+     * @throws IOException When file cannot be saved
      */
     public void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(f.getAbsoluteFile());

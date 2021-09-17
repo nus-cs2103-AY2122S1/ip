@@ -13,6 +13,13 @@ import duke.task.Task;
 
 public class SnoozeCommand extends Command {
     public static final String COMMAND = "snooze";
+    private static final String COMMAND_TYPE = "Snooze Command";
+
+    private static final String ARRAYOUTOFBOUNDS_MESSAGE = "Eh... No such task found. Cannot mark as done.";
+    private static final String ARRAYOUTOFBOUNDS_EMOTICON = "(＃-w-)";
+    private static final String ILLEGALARGUMENT_MESSAGE ="Cannot snooze a task with no date!";
+    private static final String ILLEGALARGUMENT_EMOTICON = ">.<";
+
     private int taskNo;
     private Task task;
     private LocalDateTime prevDate;
@@ -21,8 +28,8 @@ public class SnoozeCommand extends Command {
     /**
      * Constructor for Snooze Command
      *
-     * @param taskNo the index of task completed
-     * @param newDate the date to be updated
+     * @param taskNo Index of task completed
+     * @param newDate Date to be updated
      *
      */
     public SnoozeCommand(int taskNo, LocalDateTime newDate) {
@@ -31,12 +38,15 @@ public class SnoozeCommand extends Command {
     }
 
     /**
-     * Executes commands
+     * Executes Snooze command that delays/changes dates of Event and Deadline tasks.
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @throws IOException for commands that needs to write to storage file
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @throws IOException For commands that needs to write to storage file
+     *
+     * @return Snoozed task message formatted
      */
     public String execute(TaskList taskList, ResponseFormatter rf,
                                    Storage storage, History history) throws IOException {
@@ -65,12 +75,9 @@ public class SnoozeCommand extends Command {
 
             return rf.formatSnooze(display);
         } catch (ArrayIndexOutOfBoundsException e) {
-            return rf.formatError(
-                    "Eh... No such task found. Cannot mark as done.",
-                    "(＃￣ω￣)"
-            );
+            return rf.formatError(ARRAYOUTOFBOUNDS_MESSAGE, ARRAYOUTOFBOUNDS_EMOTICON);
         } catch (IllegalArgumentException e) {
-            return rf.formatError("Cannot snooze a task with no date!", ">.<");
+            return rf.formatError(ILLEGALARGUMENT_MESSAGE, ILLEGALARGUMENT_EMOTICON);
         }
     };
 
@@ -88,6 +95,6 @@ public class SnoozeCommand extends Command {
         }
 
         storage.writeToFile(taskList);
-        return rf.formatUndo("Snooze Command");
+        return rf.formatUndo(COMMAND_TYPE);
     };
 }

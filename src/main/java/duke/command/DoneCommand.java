@@ -10,6 +10,9 @@ import duke.TaskList;
 
 public class DoneCommand extends Command {
     public static final String COMMAND = "done";
+    private static final String COMMAND_TYPE = "Done Command";
+    private static final String ERROR_MESSAGE = "Eh... No such task found. Cannot mark as done.";
+    private static final String ERROR_EMOTICON = "(＃-w-)";
     private int taskNo;
 
     /**
@@ -25,15 +28,16 @@ public class DoneCommand extends Command {
 
     /**
      * Executes Done Command to mark task as completed, stores updated list in file
-     * and formats response
+     * and formats response.
      *
-     * @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
-     * @throws ArrayIndexOutOfBoundsException
-     * @throws IOException if writeToFile has a file error
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @throws ArrayIndexOutOfBoundsException When the task number given is not within the length of the task list
+     * @throws IOException If writeToFile has a file error
      *
-     * @return
+     * @return Done message formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws
@@ -48,10 +52,7 @@ public class DoneCommand extends Command {
             history.addHistory(this);
             return rf.formatDone(display);
         } catch (ArrayIndexOutOfBoundsException e) {
-            return rf.formatError(
-                    "Eh... No such task found. Cannot mark as done.",
-                    "(＃￣ω￣)"
-            );
+            return rf.formatError(ERROR_MESSAGE, ERROR_EMOTICON);
         }
     }
 
@@ -59,6 +60,6 @@ public class DoneCommand extends Command {
     public String undo(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
         taskList.uncheck(this.taskNo);
         storage.writeToFile(taskList);
-        return rf.formatUndo("Done Command");
+        return rf.formatUndo(COMMAND_TYPE);
     }
 }

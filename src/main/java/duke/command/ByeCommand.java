@@ -10,7 +10,7 @@ public class ByeCommand extends Command {
 
     /**
      * Constructor for ByeCommand
-     * will mark isExit as true so duke can escape while loop
+     * Marks isExit as true so duke can escape the application.
      *
      */
     public ByeCommand() {
@@ -18,12 +18,13 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Execute ByeCommand, returns a goodbye message from duke
+     * Execute ByeCommand, returns a goodbye message from duke.
      *
-     * @param taskList current task list
+     * @param taskList Current task list
      * @param rf Response formatter
-     * @param storage current storage
-     * @return
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @return Bye message String formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {

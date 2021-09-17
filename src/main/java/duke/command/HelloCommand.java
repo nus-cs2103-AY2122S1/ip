@@ -8,7 +8,7 @@ import duke.TaskList;
 import java.io.IOException;
 
 public class HelloCommand extends Command {
-    public static final String COMMAND = "Hello!";
+    public static final String COMMAND = "hello";
 
     /**
      * Constructor for Hello Command
@@ -18,8 +18,17 @@ public class HelloCommand extends Command {
         this.isExit = false;
     }
 
+    /**
+     * Executes Hello Command to return greetings message.
+     *
+     * @param taskList Current list
+     * @param rf Response formatter
+     * @param storage Current storage
+     * @param history List of previous commands
+     * @return Hello message formatted
+     */
     @Override
-    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) throws IOException {
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {
         return rf.formatGreetings();
     }
 }

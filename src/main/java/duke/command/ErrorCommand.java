@@ -12,7 +12,7 @@ public class ErrorCommand extends Command {
 
     /**
      * Constructor for Error Command
-     * @param error error message
+     * @param error Error message
      *
      */
     public ErrorCommand(String error) {
@@ -23,8 +23,8 @@ public class ErrorCommand extends Command {
     /**
      * Constructor for Error command
      *
-     * @param error error message
-     * @param emoticon emoticon to express dissatisfaction for the error committed
+     * @param error Error message
+     * @param emoticon Emoticon to express dissatisfaction for the error committed
      *
      */
     public ErrorCommand(String error, String emoticon) {
@@ -33,13 +33,14 @@ public class ErrorCommand extends Command {
     }
 
     /**
-     * Executes Error Command to returns error response
+     * Executes Error Command to returns error response.
      *
-     *  @param taskList current list
+     * @param taskList Current list
      * @param rf Response Formatter
-     * @param storage current storage
+     * @param storage Current storage
+     * @param history List of previous commands
      *
-     * @return
+     * @return Error message formatted
      */
     @Override
     public String execute(TaskList taskList, ResponseFormatter rf, Storage storage, History history) {

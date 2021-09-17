@@ -9,6 +9,7 @@ import duke.TaskList;
 
 public class UndoCommand extends Command {
     public static final String COMMAND = "undo";
+    private static final String ERROR_MESSAGE = "Nothing to undo!";
 
     public UndoCommand() {}
 
@@ -16,7 +17,7 @@ public class UndoCommand extends Command {
     public String execute(TaskList taskList, ResponseFormatter rf,
                           Storage storage, History history) throws IOException {
         if (history.isEmpty()) {
-            return rf.formatError("Nothing to undo!");
+            return rf.formatError(ERROR_MESSAGE);
         }
         Command lastCommand = history.getLastCommand();
         history.undo();

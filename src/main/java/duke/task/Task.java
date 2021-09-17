@@ -5,10 +5,10 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Constructor
+     * Constructor for Task object
      *
-     * @param task task description
-     * @param isDone completion status
+     * @param task Task description
+     * @param isDone Completion status
      */
     public Task(String task, boolean isDone) {
         this.description = task;
@@ -20,18 +20,18 @@ public class Task {
     }
 
     /**
-     * returns converted to string representation of completion status
+     * Returns converted to string representation of completion status.
      *
-     * @return string representation of completion status
+     * @return String representation of completion status
      */
     public String getStatusIcon() {
         return isDone ? "[X] " : "[ ] ";
     }
 
     /**
-     * marks task as complete
+     * Marks task as complete.
      *
-     * @return full string representation of task with completion status
+     * @return Full string representation of task with completion status
      */
     public String check() {
         this.isDone = true;
@@ -39,9 +39,9 @@ public class Task {
     }
 
     /**
-     * marks the task as incomplete
+     * Marks the task as incomplete.
      *
-     * @return full string representation of task with completion status
+     * @return Full string representation of task with completion status
      */
     public String uncheck() {
         this.isDone = false;
@@ -57,10 +57,10 @@ public class Task {
     }
 
     /**
-     * check is this task contains the keyword
+     * Check if this task contains the keyword.
      *
-     * @param keyword keyword
-     * @return if task contains keywords
+     * @param keyword Keyword
+     * @return Boolean that checks if task contains keywords
      */
     public boolean findKeyword(String keyword) {
         String processed = description;

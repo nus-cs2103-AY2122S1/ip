@@ -24,9 +24,9 @@ public class TaskList {
     }
 
     /**
-     * add task to list
+     * Add task to list.
      *
-     * @param task task to be added
+     * @param task Task to be added
      *
      */
     public void add(Task task) {
@@ -34,9 +34,9 @@ public class TaskList {
     }
 
     /**
-     * get current list
+     * Get current task list.
      *
-     * @return current list
+     * @return Current task list
      *
      */
     public ArrayList<Task> getList() {
@@ -44,25 +44,31 @@ public class TaskList {
     }
 
     /**
-     * mark certain task as complete
+     * Mark certain task as complete.
      *
-     * @param taskNo the index of task to be marked as completed
-     * @return displayed message to inform user that task has been marked as completed
+     * @param taskNo Index of task to be marked as completed
+     * @return Displayed message to inform user that task has been marked as completed
      *
      */
     public String complete(int taskNo) {
         return tasks.get(taskNo).check();
     }
 
+    /**
+     * Mark certain task as incomplete.
+     *
+     * @param taskNo Index of task to be unchecked
+     * @return Displayed message to inform user that task has been unchecked
+     */
     public String uncheck(int taskNo) {
         return tasks.get(taskNo).uncheck();
     }
 
     /**
-     * delete certain task
+     * Delete a certain task.
      *
-     * @param taskNo the index of task to be deleted
-     * @return displayed message to inform user that task has been deleted
+     * @param taskNo Index of task to be deleted
+     * @return Displayed message to inform user that task has been deleted
      *
      */
     public String delete(int taskNo) {
@@ -72,10 +78,10 @@ public class TaskList {
     }
 
     /**
-     * finds tasks that contains the keyword
+     * Finds tasks that contains the keyword.
      *
-     * @param keyword keyword
-     * @return the collection of task that contains the keyword
+     * @param keyword Keyword that user inputted
+     * @return Collection of task that contains the keyword
      */
     public ArrayList<Task> findKeyword(String keyword) {
         ArrayList<Task> matchedTasks = new ArrayList<>();

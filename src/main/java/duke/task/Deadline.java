@@ -11,8 +11,8 @@ public class Deadline extends Task {
     /**
      * Constructor
      *
-     * @param description task description
-     * @param by due date
+     * @param description Task description
+     * @param by Due date
      */
     public Deadline(String description, LocalDateTime by) {
         super(description, false);
@@ -22,9 +22,9 @@ public class Deadline extends Task {
     /**
      * Constructor for reading file from storage
      *
-     * @param description task description
-     * @param isDone check
-     * @param by due date
+     * @param description Task description
+     * @param isDone Check
+     * @param by Due date
      */
     public Deadline(String description, String isDone, LocalDateTime by) {
         super(description, isDone.equals("1"));
@@ -32,10 +32,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * snooze the deadline
+     * Snooze the deadline.
      *
-     * @param snoozedTime
-     * @return task in string format
+     * @param snoozedTime Updated date and time
+     * @return Task in string format
      */
     public String snooze(LocalDateTime snoozedTime) {
         this.by = snoozedTime;
