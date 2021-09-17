@@ -1,10 +1,9 @@
 # Duke
 As Nat said:
-> Who has time to use other apps for to-do lists?
+> Who has time to use other apps for a to-do list?
 
 Introducing Duke, Nat's personalised chat bot, adapted from the Duke project. 🤓
 
-* text-based
 * ~~easy~~ *SUPER EASY* to use
 * fuss-free
 * **$0!** 🤑
@@ -12,16 +11,17 @@ Introducing Duke, Nat's personalised chat bot, adapted from the Duke project. �
 ## Features
 - [x] add task as todo, deadline or event
 - [x] delete task
+- [x] show all tasks
 - [x] mark task as done
-- [ ] sort tasks based on deadline (coming soon!)
-- [ ] reminders (coming soon!)
+- [x] find task
+- [x] undo the previous command (works for add, delete and mark task as done!) 
 
 ## How to use
-1. Run `Duke.main()` It will trigger this method:
+1. Run `Launcher.main()` It will trigger this method:
 
 ```java
 public static void main(String[] args) {
-  new Duke("data/duke.txt").run();
+    Application.launch(Duke.class, args);
 }
 ```
 
