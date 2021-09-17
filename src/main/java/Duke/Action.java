@@ -1,4 +1,4 @@
-package duke;
+package Duke;
 public enum Action {
     LIST,
     DONE,

@@ -35,7 +35,7 @@ public class Duke {
     }
 
 
-    public String greet(){
+    public String great(){
         return this.ui.great();
     }
 

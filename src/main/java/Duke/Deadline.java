@@ -1,4 +1,4 @@
-package duke;
+package Duke;
 import java.text.SimpleDateFormat;
 
  /**

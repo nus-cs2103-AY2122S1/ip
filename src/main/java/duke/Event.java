@@ -1,12 +1,11 @@
 package duke;
-
 import java.text.SimpleDateFormat;
 
-/**
- * <pre>
- * Child class Event from Task Class
- * </pre>
- */
+ /**
+  * <pre>
+  * Child class Event from Task Class
+  * </pre>
+  */
 public class Event extends Task{
 
     /**
@@ -19,7 +18,7 @@ public class Event extends Task{
     /**
      * Defult to String.
      * @return String representation of task
-     */
+     */            
     @Override
     public String toString(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy HH:mm");

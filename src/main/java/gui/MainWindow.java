@@ -34,6 +34,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greetMessage = "hello Im duke! What can I do for you?\nType help to see all the commands.";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetMessage, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -45,7 +49,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InputNotValidError, IOException {
+    private void handleUserInput() throws IOException, InputNotValidError {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

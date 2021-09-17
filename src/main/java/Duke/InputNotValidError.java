@@ -1,4 +1,4 @@
-package duke;
+package Duke;
 
  /**
   * <pre>
