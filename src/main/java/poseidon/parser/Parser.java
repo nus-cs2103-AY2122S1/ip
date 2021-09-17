@@ -111,7 +111,7 @@ public class Parser {
             throw new PoseidonException("The description of a TODO task cannot be empty.\nPlease try again.");
         }
 
-        return new String[]{"add", "todo", strArr[1]};
+        return new String[]{"add", "todo", strArr[1].trim()};
     }
 
     private static String[] parseDeadline(String newCommand) {

@@ -15,7 +15,7 @@ import poseidon.ui.Ui;
 
 
 /**
- * Represents a Poseidon object that executes the user commands.
+ * Represents a {@code Poseidon} object that executes the user commands.
  *
  * @author Yeluri Ketan
  * @version CS2103T AY21/22 Sem 1 iP
