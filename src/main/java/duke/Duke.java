@@ -34,21 +34,23 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response from Duke.
+     *
+     * @param input the input from the user
+     * @return the string to be displayed in the Ui
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             if (c.isExit()) {
                 new java.util.Timer().schedule(
-                        new java.util.TimerTask() {
-                            @Override
-                            public void run() {
-                                System.exit(0);
-                            }
-                        },
-                        500
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            System.exit(0);
+                        }
+                    },
+                    500
                 );
             }
             return c.execute(tasks, storage);

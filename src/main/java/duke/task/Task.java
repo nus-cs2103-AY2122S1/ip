@@ -40,26 +40,26 @@ public abstract class Task {
      */
     private String getPriorityIcon() {
         switch (this.priority) {
-            case 1:
-                return "[!  ]";
-            case 2:
-                return "[!! ]";
-            case 3:
-                return "[!!!]";
-            default:
-                return "[   ]";
+        case 1:
+            return "[!  ]";
+        case 2:
+            return "[!! ]";
+        case 3:
+            return "[!!!]";
+        default:
+            return "[   ]";
         }
     }
 
     /**
-     * Change task to done.
+     * Marks task as done.
      */
     public void setDone() {
         isDone = true;
     }
 
     /**
-     * Get the done status.
+     * Gets the done status.
      */
     public boolean getDone() { return isDone; }
 

@@ -38,7 +38,7 @@ public interface TaskList {
     String printListDate(String date);
 
     /**
-     * Return the number of items in the TaskList.
+     * Returns the number of items in the TaskList.
      *
      * @return listCount
      */

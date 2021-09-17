@@ -2,9 +2,9 @@ package duke.command;
 
 import java.time.DateTimeException;
 
-import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.utils.DukeException;
 
 /**
  * ListCommand is a command which prints out all the Tasks in the list, and even

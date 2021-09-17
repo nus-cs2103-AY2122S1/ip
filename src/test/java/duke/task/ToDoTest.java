@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ToDoTest {
 
-    private final ToDo t =  new ToDo(false, "tutorial", 1);
+    private ToDo t = new ToDo(false, "tutorial", 1);
 
     @Test
     public void constructor() {

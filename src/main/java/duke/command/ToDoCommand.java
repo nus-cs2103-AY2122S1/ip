@@ -2,10 +2,10 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
+import duke.utils.DukeException;
 
 /**
  * ToDoCommand is a command which adds a ToDo task to the task list.

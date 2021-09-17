@@ -5,10 +5,10 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
+import duke.utils.DukeException;
 
 /**
  * DeadlineCommand is a command which adds a deadline task to the task list.

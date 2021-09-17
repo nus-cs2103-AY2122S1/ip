@@ -141,7 +141,7 @@ public class TaskListDuke implements TaskList {
     }
 
     /**
-     * Return the number of items in the TaskList.
+     * Returns the number of items in the TaskList.
      *
      * @return the number of items in the tasklist
      */

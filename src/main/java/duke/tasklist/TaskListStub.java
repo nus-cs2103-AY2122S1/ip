@@ -84,7 +84,7 @@ public class TaskListStub implements TaskList {
     }
 
     /**
-     * Return the number of items in the TaskList.
+     * Returns the number of items in the TaskList.
      *
      * @return listCount
      */
@@ -93,7 +93,7 @@ public class TaskListStub implements TaskList {
     }
 
     /**
-     * Return output for testing.
+     * Returns output for testing.
      *
      * @return the output
      */
@@ -102,7 +102,7 @@ public class TaskListStub implements TaskList {
     }
 
     /**
-     * Return nothing.
+     * Returns nothing.
      *
      * @param searchString the string to be searched
      */

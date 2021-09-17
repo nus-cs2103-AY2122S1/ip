@@ -2,9 +2,9 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.utils.DukeException;
 
 /**
  * DoneCommand is a command which marks a specific Task as done from the TaskList.

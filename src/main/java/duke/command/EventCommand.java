@@ -5,10 +5,10 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.utils.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.tasklist.TaskList;
+import duke.utils.DukeException;
 
 /**
  * EventCommand is a command which adds an event task to the task list.
