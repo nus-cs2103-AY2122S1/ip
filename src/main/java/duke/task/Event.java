@@ -1,8 +1,11 @@
 package duke.task;
 
+/**
+ * A type of task with information on when it is meant to occur.
+ */
 public class Event extends Task {
     /** The information on the time of the Event. */
-    private String time;
+    private final String TIME;
 
     /**
      * Constructs a new Event task.
@@ -12,7 +15,7 @@ public class Event extends Task {
      */
     public Event(String name, String time) {
         super(name);
-        this.time = time;
+        this.TIME = time;
     }
 
     /**
@@ -21,7 +24,7 @@ public class Event extends Task {
      * @return The save format of the Event task.
      */
     public String convertToSaveFormat() {
-        return "E|" + super.convertToSaveFormat() + "|" + time;
+        return "E|" + super.convertToSaveFormat() + "|" + TIME;
     }
 
     /**
@@ -29,6 +32,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + TIME + ")";
     }
 }

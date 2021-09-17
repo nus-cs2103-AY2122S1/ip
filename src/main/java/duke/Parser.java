@@ -3,6 +3,9 @@ package duke;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the parsing of commands and subsequent actions.
+ */
 public class Parser {
     /** Regex for a Done command. */
     private final String REGEX_DONE = "done [0-9]+";
@@ -16,26 +19,23 @@ public class Parser {
     private final String REGEX_EVENT = "event [\\w\\s-]+ \\/at [\\w\\s-]+";
     /** Regex for a Find command. */
     private final String REGEX_FIND = "find [\\w\\s-]+";
-
+    /** The command that the user inputs. */
     private String command;
+    /** The TaskList object containing the list of tasks and operations. */
     private TaskList tasks;
-    private Ui ui;
 
-    // TODO: change javadocs
     /**
      * Handles all user commands.
-     * Takes in a user command and checks which command it is. Upon determining the command, performs the
-     * necessary action.
+     * Takes in a user command and checks which command it is. Upon determining the command, calls the relevant method
+     * to perform the necessary actions.
      *
      * @param command The user command to be handled.
      * @param tasks The TaskList object containing the list of tasks and operations.
-     * @param ui The UI object that handles messages to the user.
-     * @return Whether or not the Duke program should exit or continue running.
+     * @return The current status of the Duke program.
      */
-    public DukeStatus parse(String command, TaskList tasks, Ui ui) {
+    public DukeStatus parse(String command, TaskList tasks) {
         this.command = command;
         this.tasks = tasks;
-        this.ui = ui;
         DukeStatus currentStatus;
 
         if (command.equals("help")) {
@@ -64,58 +64,98 @@ public class Parser {
         return currentStatus;
     }
 
+    /**
+     * Handles the help command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleHelpCommand() {
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getHelpMessage());
+        currentStatus.setResponse(Ui.getHelpMessage());
         return currentStatus;
     }
 
+    /**
+     * Handles the list command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleListCommand() {
         String[] response = tasks.getStringArr();
         response[0] = "Here are the tasks in your list:";
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse(response));
+        currentStatus.setResponse(Ui.getResponse(response));
         return currentStatus;
     }
 
+    /**
+     * Handles the bye command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleByeCommand() {
         return DukeStatus.INACTIVE;
     }
 
+    /**
+     * Handles the done command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleDoneCommand() {
         String indexStr = command.substring(5);
         int index = Integer.parseInt(indexStr) - 1;
         String res = tasks.markAsDone(index);
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse("Nice! I've marked this task as done:", res));
+        currentStatus.setResponse(Ui.getResponse("Nice! I've marked this task as done:", res));
         return currentStatus;
     }
 
+    /**
+     * Handles the delete command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleDeleteCommand() {
         String indexStr = command.substring(7);
         int index = Integer.parseInt(indexStr) - 1;
         String removedTask = tasks.removeTask(index);
         String numTasksLeft = tasks.numTasks();
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse("Noted. I've removed this task:", removedTask, numTasksLeft));
+        currentStatus.setResponse(Ui.getResponse("Noted. I've removed this task:", removedTask, numTasksLeft));
         return currentStatus;
     }
 
+    /**
+     * Handles the command with an invalid todo format.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleEmptyToDoCommand() {
         DukeStatus currentStatus = DukeStatus.ERROR;
-        currentStatus.setResponse(ui.getResponse("OOPS!!! The description of a todo cannot be empty."));
+        currentStatus.setResponse(Ui.getResponse("OOPS!!! The description of a todo cannot be empty."));
         return currentStatus;
     }
 
+    /**
+     * Handles the todo command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleToDoCommand() {
         String name = command.substring(5);
         String taskAdded = tasks.addToDo(name);
         String numTasksLeft = tasks.numTasks();
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse("Got it. I've added this task:", taskAdded, numTasksLeft));
+        currentStatus.setResponse(Ui.getResponse("Got it. I've added this task:", taskAdded, numTasksLeft));
         return currentStatus;
     }
 
+    /**
+     * Handles the deadline command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleDeadlineCommand() {
         int breakPos = command.indexOf("/by");
         String name = command.substring(9, breakPos - 1);
@@ -123,10 +163,15 @@ public class Parser {
         String taskAdded = tasks.addDeadline(name, due);
         String numTasksLeft = tasks.numTasks();
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse("Got it. I've added this task:", taskAdded, numTasksLeft));
+        currentStatus.setResponse(Ui.getResponse("Got it. I've added this task:", taskAdded, numTasksLeft));
         return currentStatus;
     }
 
+    /**
+     * Handles the event command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleEventCommand() {
         int breakPos = command.indexOf("/at");
         String name = command.substring(6, breakPos - 1);
@@ -134,10 +179,15 @@ public class Parser {
         String taskAdded = tasks.addEvent(name, time);
         String numTasksLeft = tasks.numTasks();
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse("Got it. I've added this task:", taskAdded, numTasksLeft));
+        currentStatus.setResponse(Ui.getResponse("Got it. I've added this task:", taskAdded, numTasksLeft));
         return currentStatus;
     }
 
+    /**
+     * Handles the find command.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleFindCommand() {
         String textToSearch = command.substring(5);
         List<String> tasksFoundList = tasks.searchTasks(textToSearch);
@@ -148,13 +198,18 @@ public class Parser {
             tasksFoundArr[tempIndex] = tempIndex + ". " + tasksFoundList.get(i);
         }
         DukeStatus currentStatus = DukeStatus.MESSAGE;
-        currentStatus.setResponse(ui.getResponse(tasksFoundArr));
+        currentStatus.setResponse(Ui.getResponse(tasksFoundArr));
         return currentStatus;
     }
 
+    /**
+     * Handles any unrecognisable commands.
+     *
+     * @return The current status of the Duke program.
+     */
     private DukeStatus handleUnrecognisableCommand() {
         DukeStatus currentStatus = DukeStatus.ERROR;
-        currentStatus.setResponse(ui.getResponse("OOPS!!! I'm sorry, but I don't know what that means ):"));
+        currentStatus.setResponse(Ui.getResponse("OOPS!!! I'm sorry, but I don't know what that means ):"));
         return currentStatus;
     }
 }

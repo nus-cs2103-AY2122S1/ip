@@ -3,8 +3,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-// import java.lang.NumberFormatException;
 
+/**
+ * A type of task with information on when it is due.
+ */
 public class Deadline extends Task {
     /** The date the task is due, in LocalDate format. */
     private LocalDate due;
@@ -12,13 +14,10 @@ public class Deadline extends Task {
     private boolean hasDate = true;
     /** The time the task is due, in String format. */
     private String timeStr;
-    /**  Whether the task has a time it is due in a recognisable, 24-hour format. */
+    /** Whether the task has a time it is due in a recognisable, 24-hour format. */
     private boolean hasTime = true;
     /** The information on when the task is due. */
     private String dueStr;
-
-    private final int EARLIEST_TIME = 0;
-    private final int LATEST_TIME = 2359;
 
     /**
      * Constructs a new Deadline task.
@@ -36,7 +35,13 @@ public class Deadline extends Task {
         getDueDateTime();
     }
 
+    /**
+     * Checks if a string contains a recognisable date and time format.
+     * Sets the hasDate and hasTime booleans to false if there are no recognisable date and time formats respectively.
+     * Note that if no date is recognised, the hasTime boolean is automatically set to false.
+     */
     private void checkForDateTime() {
+        // Checks for a recognisable date format
         String[] dateTimeArr = dueStr.split(" ");
         try {
             due = LocalDate.parse(dateTimeArr[0]);
@@ -50,12 +55,15 @@ public class Deadline extends Task {
             return;
         }
 
+        // Checks for a recognisable time format
         int time = -1;
         try {
             time = Integer.parseInt(dateTimeArr[1]);
         } catch (NumberFormatException e) {
             hasTime = false;
         }
+        final int EARLIEST_TIME = 0;
+        final int LATEST_TIME = 2359;
         if (hasTime && EARLIEST_TIME <= time && time <= LATEST_TIME) {
             timeStr = dateTimeArr[1];
         } else {
@@ -63,8 +71,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gets the final string containing the information on when the task is due.
+     */
     private void getDueDateTime() {
-        int startIndex = getStartIndex();
+        int startIndex = getStartIndexOfNonDateTime();
         addNonDateTimeToDueStr(startIndex);
         if (hasTime) {
             addTimeToDueStr();
@@ -74,7 +85,13 @@ public class Deadline extends Task {
         }
     }
 
-    private int getStartIndex() {
+    /**
+     * Gets the start index of the string which contains no date and time.
+     * The index is relative to whether or not the string contains a recognisable date and/or time format or not.
+     *
+     * @return The start index of the string which contains no date and time.
+     */
+    private int getStartIndexOfNonDateTime() {
         final int TIME_START_INDEX = 2;
         final int DATE_START_INDEX = 1;
         final int NO_DATETIME_START_INDEX = 0;
@@ -83,6 +100,11 @@ public class Deadline extends Task {
                 : NO_DATETIME_START_INDEX;
     }
 
+    /**
+     * Adds the string which contains no date and time to the string containing the information on when the task is due.
+     *
+     * @param startIndex The start index of the string which contains no date and time.
+     */
     private void addNonDateTimeToDueStr(int startIndex) {
         String[] dateTimeArr = dueStr.split(" ");
         dueStr = "";
@@ -94,10 +116,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Formats and adds the string containing the time to the string containing the information on when the task is due.
+     */
     private void addTimeToDueStr() {
         int hours = Integer.parseInt(timeStr.substring(0, 2));
         int minutes = Integer.parseInt(timeStr.substring(2));
-        String mornAftStr = "";
+        String mornAftStr;
+        // Checks if the time is in the morning (am) or afternoon/evening (pm)
         if (hours > 12) {
             hours -= 12;
             mornAftStr = "pm";
@@ -115,6 +141,9 @@ public class Deadline extends Task {
         dueStr = " " + timeStr + dueStr;
     }
 
+    /**
+     * Formats and adds the string containing the date to the string containing the information on when the task is due.
+     */
     private void addDateToDueStr() {
         dueStr = due.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + dueStr;
     }

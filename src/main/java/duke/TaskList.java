@@ -10,15 +10,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Stores tasks and allows for operations to be performed on them.
+ */
 public class TaskList {
     /** The list of tasks. */
-    private ArrayList<Task> userTasks;
+    private final ArrayList<Task> USER_TASKS;
 
     /**
      * Constructs a new instance of the TaskList with no tasks inside.
      */
     public TaskList() {
-        this.userTasks = new ArrayList<>();
+        this.USER_TASKS = new ArrayList<>();
     }
 
     /**
@@ -28,8 +31,8 @@ public class TaskList {
      * @param tasks The stream of strings which represent the data of each task.
      */
     public TaskList(Stream<String> tasks) {
-        this.userTasks = new ArrayList<>();
-        tasks.forEach(x -> userTasks.add(cleanData(x)));
+        this.USER_TASKS = new ArrayList<>();
+        tasks.forEach(x -> USER_TASKS.add(cleanData(x)));
     }
 
     /**
@@ -39,10 +42,10 @@ public class TaskList {
      * @return A array of strings representing the list of tasks, one element for one task.
      */
     public String[] getStringArr() {
-        String[] tasks = new String[userTasks.size() + 1];
-        for (int i = 0; i < userTasks.size(); i++) {
+        String[] tasks = new String[USER_TASKS.size() + 1];
+        for (int i = 0; i < USER_TASKS.size(); i++) {
             int tempNum = i + 1;
-            tasks[tempNum] = tempNum + ". " + userTasks.get(i);
+            tasks[tempNum] = tempNum + ". " + USER_TASKS.get(i);
         }
         return tasks;
     }
@@ -55,8 +58,8 @@ public class TaskList {
      * @return The string representation of the task marked as done.
      */
     public String markAsDone(int index) {
-        userTasks.get(index).markAsDone();
-        return "  " + userTasks.get(index).toString();
+        USER_TASKS.get(index).markAsDone();
+        return "  " + USER_TASKS.get(index).toString();
     }
 
     /**
@@ -67,8 +70,8 @@ public class TaskList {
      * @return The string representation of the task deleted.
      */
     public String removeTask(int index) {
-        String res = userTasks.get(index).toString();
-        userTasks.remove(index);
+        String res = USER_TASKS.get(index).toString();
+        USER_TASKS.remove(index);
         return "  " + res;
     }
 
@@ -80,8 +83,8 @@ public class TaskList {
      * @return The string representation of the ToDo task added.
      */
     public String addToDo(String name) {
-        userTasks.add(new ToDo(name));
-        return "  " + userTasks.get(userTasks.size() - 1).toString();
+        USER_TASKS.add(new ToDo(name));
+        return "  " + USER_TASKS.get(USER_TASKS.size() - 1).toString();
     }
 
     /**
@@ -93,8 +96,8 @@ public class TaskList {
      * @return The string representation of the Deadline task added.
      */
     public String addDeadline(String name, String due) {
-        userTasks.add(new Deadline(name, due));
-        return "  " + userTasks.get(userTasks.size() - 1).toString();
+        USER_TASKS.add(new Deadline(name, due));
+        return "  " + USER_TASKS.get(USER_TASKS.size() - 1).toString();
     }
 
     /**
@@ -106,8 +109,8 @@ public class TaskList {
      * @return The string representation of the Event task added.
      */
     public String addEvent(String name, String time) {
-        userTasks.add(new Event(name, time));
-        return "  " + userTasks.get(userTasks.size() - 1).toString();
+        USER_TASKS.add(new Event(name, time));
+        return "  " + USER_TASKS.get(USER_TASKS.size() - 1).toString();
     }
 
     /**
@@ -116,7 +119,7 @@ public class TaskList {
      * @return The number of tasks in the task list.
      */
     public String numTasks() {
-        return "Now you have " + userTasks.size() + " tasks in the list.";
+        return "Now you have " + USER_TASKS.size() + " tasks in the list.";
     }
 
     /**
@@ -127,14 +130,14 @@ public class TaskList {
      */
     public String convertToSaveFormat() {
         String dataStr = "";
-        if (userTasks.size() == 0) {
+        if (USER_TASKS.size() == 0) {
             return dataStr;
         }
-        for (int i = 0; i < userTasks.size() - 1; i++) {
-            Task data = userTasks.get(i);
+        for (int i = 0; i < USER_TASKS.size() - 1; i++) {
+            Task data = USER_TASKS.get(i);
             dataStr += data.convertToSaveFormat() + "\n";
         }
-        dataStr += userTasks.get(userTasks.size() - 1).convertToSaveFormat();
+        dataStr += USER_TASKS.get(USER_TASKS.size() - 1).convertToSaveFormat();
         return dataStr;
     }
 
@@ -146,8 +149,8 @@ public class TaskList {
      * @return A list containing the string representations of tasks which contain the specified search string.
      */
     public List<String> searchTasks(String textToSearch) {
-        return userTasks.stream().filter(task -> task.getName().contains(textToSearch))
-                .map(task -> task.toString()).collect(Collectors.toList());
+        return USER_TASKS.stream().filter(task -> task.getName().contains(textToSearch))
+                .map(Task::toString).collect(Collectors.toList());
     }
 
     /**
@@ -160,6 +163,7 @@ public class TaskList {
      */
     private Task cleanData(String data) {
         String[] dataParts = data.split("[|]");
+        assert dataParts.length > 2 : "Your task data has been corrupted.";
         Task tempTask = new ToDo("");
         if (dataParts.length == 3) {
             tempTask = new ToDo(dataParts[2]);
@@ -168,8 +172,6 @@ public class TaskList {
         } else if (dataParts[0].equals("E")) {
             tempTask = new Event(dataParts[2], dataParts[3]);
         }
-
-        //TODO: error handling
 
         if (dataParts[1].equals("1")) {
             tempTask.markAsDone();

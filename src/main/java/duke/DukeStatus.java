@@ -1,8 +1,11 @@
 package duke;
 
+/**
+ * Encapsulates the status of the Duke program.
+ */
 public enum DukeStatus {
-    ACTIVE("active"), INACTIVE ("Bye. Hope to see you again soon!"),
-            ERROR ("Error message here."), MESSAGE("Message to user here.");
+    INACTIVE ("Bye. Hope to see you again soon!"), ERROR ("Error message here."),
+            MESSAGE("Message to user here.");
 
     private String response;
 

@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A type of task with the only information being its name.
+ */
 public class ToDo extends Task {
     /**
      * Constructs a new ToDo task.

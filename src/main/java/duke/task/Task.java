@@ -1,8 +1,11 @@
 package duke.task;
 
+/**
+ * A basic type of task from which other types of tasks are built off of.
+ */
 public class Task {
     /** The name of the Task. */
-    private String name;
+    private final String NAME;
     /** Whether the Task has been completed. */
     private boolean isCompleted;
 
@@ -12,7 +15,7 @@ public class Task {
      * @param name The name of the Task.
      */
     public Task(String name) {
-        this.name = name;
+        this.NAME = name;
         this.isCompleted = false;
     }
 
@@ -30,7 +33,7 @@ public class Task {
      */
     public String convertToSaveFormat() {
         String completedStr = isCompleted ? "1" : "0";
-        return completedStr + "|" + name;
+        return completedStr + "|" + NAME;
     }
 
     /**
@@ -39,7 +42,7 @@ public class Task {
      * @return The name of the task.
      */
     public String getName() {
-        return this.name;
+        return this.NAME;
     }
 
     /**
@@ -50,6 +53,6 @@ public class Task {
     @Override
     public String toString() {
         String symbol = isCompleted ? "X" : " ";
-        return "[" + symbol + "] " + name;
+        return "[" + symbol + "] " + NAME;
     }
 }

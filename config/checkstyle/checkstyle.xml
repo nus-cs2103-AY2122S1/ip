@@ -121,6 +121,7 @@
       <!-- Validates non-static members against the supplied expression. -->
       <metadata name="altname" value="MemberName"/>
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+      <property name="applyToPrivate" value="false"/>
       <property name="severity" value="warning"/>
     </module>
 
@@ -136,7 +137,8 @@
     </module>
 
     <module name="LocalFinalVariableName">
-      <!-- Validates identifiers for local final variables against the expression "^[a-z][a-zA-Z0-9]*$". -->
+      <!-- Validates identifiers for local final variables against the expression "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$". -->
+      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
       <property name="severity" value="warning"/>
     </module>
 
@@ -293,6 +295,10 @@
       <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS,
         UNARY_PLUS"/>
       <property name="allowLineBreaks" value="true"/>
+    </module>
+
+    <module name="JavadocParagraph">
+      <property name="allowNewlineParagraph" value="false"/>
     </module>
 
     <!-- No trailing whitespace -->

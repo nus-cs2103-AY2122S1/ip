@@ -7,13 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+/**
+ * Encapsulates the storage and access of the local file containing the user's tasks.
+ */
 public class Storage {
-    /** The user's home path string on their computer. */
-    private final String HOME_PATH_STRING = System.getProperty("user.home");
-    /** The file path string to find store task info to. */
-    private String filePathString;
     /** The path to the task storage file. */
-    private Path dataPath;
+    private final Path DATA_PATH;
 
     /**
      * Constructs an instance of the Storage class.
@@ -22,8 +21,8 @@ public class Storage {
      * @param filePath The file path to the storage file on the user's computer.
      */
     public Storage(String filePath) {
-        this.filePathString = filePath;
-        dataPath = Paths.get(HOME_PATH_STRING, filePathString);
+        final String HOME_PATH_STRING = System.getProperty("user.home");
+        DATA_PATH = Paths.get(HOME_PATH_STRING, filePath);
     }
 
     /**
@@ -36,16 +35,16 @@ public class Storage {
      */
     public Stream<String> load() throws DukeException {
         Stream<String> lines;
-        if (!Files.exists(dataPath)) {
+        if (!Files.exists(DATA_PATH)) {
             try {
-                Files.createFile(dataPath);
+                Files.createFile(DATA_PATH);
             } catch (IOException e) {
                 throw new DukeException(e.getMessage());
             }
         }
 
         try {
-            lines = Files.lines(dataPath);
+            lines = Files.lines(DATA_PATH);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
@@ -62,7 +61,7 @@ public class Storage {
      */
     public void rewriteData(String dataStr) throws DukeException {
         try {
-            Files.writeString(dataPath, dataStr, StandardCharsets.ISO_8859_1);
+            Files.writeString(DATA_PATH, dataStr, StandardCharsets.ISO_8859_1);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }

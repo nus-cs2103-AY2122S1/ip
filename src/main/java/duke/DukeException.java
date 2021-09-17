@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Encapsulates exceptions that occur during the execution of the Duke program.
+ */
 public class DukeException extends Exception {
     /**
      * Constructs a new DukeException.
