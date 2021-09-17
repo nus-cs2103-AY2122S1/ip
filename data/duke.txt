@@ -1,1 +1,5 @@
 T/0/sadkjfhasdlkjfh
+T/0/read book
+T/0/return book
+T/0/get groceries
+D/0/ip /2021-09-17
