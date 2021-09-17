@@ -169,7 +169,7 @@ public class Parser {
         } else if (arr.length > 2) {
             throw new InvalidCommandException("Please enter a single keyword!");
         } else {
-            return taskList.findTask(arr[1]);
+            return ui.findTask(taskList, arr[1]);
         }
     }
 
@@ -188,12 +188,13 @@ public class Parser {
         } else if (arr.length > 2) {
             throw new InvalidCommandException("Please enter a single keyword!");
         } else {
-            return taskList.searchTask(arr[1]);
+            return ui.searchTask(taskList, arr[1]);
         }
     }
 
     /**
      * Checks for invalid inputs for parseDone and parseDelete.
+     *
      * @param arr An input from the user.
      * @return An appropriate response for done or delete.
      */

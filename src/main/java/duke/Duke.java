@@ -36,6 +36,8 @@ public class Duke {
 
     /**
      * Receives an input from the user and outputs the appropriate response.
+     *
+     * @return A string representation of the response to the user input.
      */
     public String getResponse(String input) {
         String parsed = new Parser(taskList, ui).parse(input);

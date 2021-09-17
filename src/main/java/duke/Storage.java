@@ -103,14 +103,13 @@ public class Storage {
     }
 
     /**
-     * Reads from a file and creates a deadline task.
+     * Returns the deadline of a task saved in a file.
      *
-     * @param counter The starting index of deadline.
-     * @param arr The input from the user.
-     * @param ls The list of tasks.
-     * @param description The description of the task.
+     * @param counter The index where the deadline starts.
+     * @param arr A list of words in a file.
+     * @return The deadline of a task.
      */
-    public void createDeadlineTask(int counter, String[] arr, TaskList ls, String description) {
+    public String getDeadline(int counter, String[] arr) {
         String deadline = "";
         for (int i = counter; i < arr.length; i++) {
             if (i == counter) {
@@ -121,6 +120,19 @@ public class Storage {
                 deadline += " " + arr[i];
             }
         }
+        return deadline;
+    }
+
+    /**
+     * Reads from a file and creates a deadline task.
+     *
+     * @param counter The starting index of deadline.
+     * @param arr The input from the user.
+     * @param ls The list of tasks.
+     * @param description The description of the task.
+     */
+    public void createDeadlineTask(int counter, String[] arr, TaskList ls, String description) {
+        String deadline = getDeadline(counter, arr);
         Deadline item = new Deadline(description, deadline);
         ls.addTask(item);
         if (arr[0].substring(4).equals("Done")) {
@@ -137,16 +149,7 @@ public class Storage {
      * @param description The description of the task.
      */
     public void createEventTask(int counter, String[] arr, TaskList ls, String description) {
-        String deadline = "";
-        for (int i = counter; i < arr.length; i++) {
-            if (i == counter) {
-                deadline += arr[i].substring(1);
-            } else if (i == arr.length - 1) {
-                deadline += " " + arr[i].substring(0, arr[i].length() - 1);
-            } else {
-                deadline += " " + arr[i];
-            }
-        }
+        String deadline = getDeadline(counter, arr);
         Event item = new Event(description, deadline);
         ls.addTask(item);
         if (arr[0].substring(4).equals("Done")) {
