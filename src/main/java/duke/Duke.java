@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.ui.Ui;
 
 public class Duke {
@@ -14,10 +15,9 @@ public class Duke {
      * @param filePath The storage location for Duke's tasklist.
      * @throws Exception
      */
-    public Duke(String filePath) throws Exception {
+    public Duke(String filePath) throws DukeException {
         super();
         this.storage = new Storage(filePath);
-        // TODO: throw error if unable to create file?
         this.taskList = new TaskList(storage.loadTasks());
     }
 
@@ -36,8 +36,7 @@ public class Duke {
             Command command = Parser.parse(fullCommand);
             command.execute(taskList, ui, storage);
             return command.shouldExit();
-        } catch (Exception e) {
-            // TODO: custom Duke exceptions?
+        } catch (DukeException e) {
             ui.printMessage("Error: " + e.getMessage());
             return false;
         }

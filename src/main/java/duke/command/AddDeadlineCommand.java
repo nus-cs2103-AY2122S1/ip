@@ -49,10 +49,10 @@ public class AddDeadlineCommand extends Command {
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
-     * @throws IOException when unable to save tasks.
+     * @throws DukeException when unable to save tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task deadline = new Deadline(description, time);
         taskList.addTask(deadline);
 

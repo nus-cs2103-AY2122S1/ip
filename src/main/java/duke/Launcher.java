@@ -6,7 +6,7 @@ import duke.ui.ConsoleUi;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * A launcher class to launch Duke.
  */
 public class Launcher {
     /**
@@ -44,13 +44,8 @@ public class Launcher {
 
         boolean shouldExit = false;
         while (!shouldExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                shouldExit = duke.executeCommand(fullCommand);
-            } catch (Exception e) {
-                // TODO: custom Duke exceptions?
-                ui.printMessage("Error: " + e.getMessage());
-            }
+            String fullCommand = ui.readCommand();
+            shouldExit = duke.executeCommand(fullCommand);
         }
 
         ui.printGoodbye();

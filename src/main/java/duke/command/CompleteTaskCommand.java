@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTaskException;
 import duke.task.Task;
 import duke.ui.Ui;
 
@@ -27,19 +29,19 @@ public class CompleteTaskCommand extends Command {
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
-     * @throws Exception when unable to find task or when unable to save tasks.
+     * @throws DukeException when unable to find task or when unable to save tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task;
         try {
             int taskIndex = Integer.parseInt(arguments);
             task = taskList.getTask(taskIndex - 1);
             task.markCompleted();
         } catch (NumberFormatException e) {
-            throw new Exception("Unable to parse number from arguments: " + arguments);
+            throw new InvalidCommandException("Unable to parse number from arguments: " + arguments);
         } catch (IndexOutOfBoundsException e) {
-            throw new Exception("There is no task with the following number: " + arguments);
+            throw new InvalidTaskException("There is no task with the following number: " + arguments);
         }
 
         storage.saveTasks(taskList);

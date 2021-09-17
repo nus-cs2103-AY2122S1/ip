@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTaskException;
 import duke.task.Task;
 import duke.ui.Ui;
 
@@ -30,15 +32,15 @@ public class DeleteTaskCommand extends Command {
      * @throws Exception when unable to find task or when unable to save tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task;
         try {
             int taskIndex = Integer.parseInt(arguments);
             task = taskList.removeTask(taskIndex - 1);
         } catch (NumberFormatException e) {
-            throw new Exception("Unable to parse number from arguments: " + arguments);
+            throw new InvalidCommandException("Unable to parse number from arguments: " + arguments);
         } catch (IndexOutOfBoundsException e) {
-            throw new Exception("There is no task with the following number: " + arguments);
+            throw new InvalidTaskException("There is no task with the following number: " + arguments);
         }
 
         storage.saveTasks(taskList);
