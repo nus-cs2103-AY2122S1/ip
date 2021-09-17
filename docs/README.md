@@ -17,6 +17,7 @@ Deadline and Event tasks have an added functionality of allowing you to add a da
 ### Saving tasks
 
 You can input a save command into the application to save your list for future use!
+If saved data is found, your previous session will be loaded into the application automatically.
 
 ### Other task related utilities:
 The application also comes with the following list of helpful functions to aid you in managing your tasks:
