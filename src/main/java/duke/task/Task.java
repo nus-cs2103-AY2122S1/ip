@@ -41,10 +41,10 @@ public abstract class Task implements Comparable<Task> {
     /**
      * Gets the String representation of the task's status.
      *
-     * @return "✓" if completed and "" otherwise
+     * @return "X" if completed and "" otherwise
      */
     private String getIcon() {
-        return isDone ? "✓" : " ";
+        return isDone ? "X" : " ";
     }
 
     /**

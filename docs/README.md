@@ -105,7 +105,7 @@ Example of usage:
 Expected outcome:
 ```
 Good Job! :D I've marked this task as done:
-- [T][✓] quiz
+- [T][X] quiz
 You currently have 2 undone task(s) in the list.
 ```
 ### `delete <index>` - deletes a task
@@ -118,7 +118,7 @@ Example of usage:
 Expected outcome:
 ```
 Voila! ^_^ I've deleted this task:
-- [T][✓] quiz
+- [T][X] quiz
 You currently have 2 task(s) in the list.
 ```
 ### `find <keyword>` - finds a task
