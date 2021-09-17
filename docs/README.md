@@ -14,6 +14,12 @@ Tired of keeping track of the many tasks in your mind? Duke has got you covered!
 
 # Getting started
 
+## Installation and setup
+
+Download the JAR [file](https://github.com/cedricongjh/ip/releases/download/A-Release/duke.jar)
+
+Start the JAR file, and done! Duke is up and running!
+
 ## Adding a task
 
 To add a task, simply type `todo <task_name>` E.g. todo Finish assignment
