@@ -3,15 +3,15 @@
 ## Features
 
 - Adding a
-  - [todo](https://github.com/jaredlhf/ip/edit/master/docs/README.md#todo)
-  - [deadline](https://github.com/jaredlhf/ip/edit/master/docs/README.md#deadline)
-  - [event](https://github.com/jaredlhf/ip/edit/master/docs/README.md#event)
-- [List all tasks](https://github.com/jaredlhf/ip/edit/master/docs/README.md#list) 
-- [Mark a task as done](https://github.com/jaredlhf/ip/edit/master/docs/README.md#done) 
-- [Delete a task](https://github.com/jaredlhf/ip/edit/master/docs/README.md#delete) 
-- [Find a task](https://github.com/jaredlhf/ip/edit/master/docs/README.md#find) 
-- [Sort tasks](https://github.com/jaredlhf/ip/edit/master/docs/README.md#sort) 
-- [Exit](https://github.com/jaredlhf/ip/edit/master/docs/README.md#bye) 
+  - [todo](#todo)
+  - [deadline](#deadline)
+  - [event](#event)
+- [List all tasks](#list) 
+- [Mark a task as done](#done) 
+- [Delete a task](#delete) 
+- [Find a task](#find) 
+- [Sort tasks](#sort) 
+- [Exit](#bye) 
 
 ## Usage
 
