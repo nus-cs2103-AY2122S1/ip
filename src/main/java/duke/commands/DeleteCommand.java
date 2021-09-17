@@ -10,7 +10,7 @@ import duke.tasks.Task;
  * Represents Command to delete a Task from a TaskList.
  */
 public class DeleteCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Constructs a DeleteCommand with the given taskIndex
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
         Task task = tasks.deleteTask(taskIndex);
         storage.saveTasks(tasks);
         return ui.showDelete(task, tasks);
-    };
+    }
 
     /**
      * Checks if an object is equal to this DeleteCommand.

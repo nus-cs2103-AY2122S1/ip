@@ -20,7 +20,7 @@ public class FindTasksCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList tasksWithKeyword = tasks.findTasksWithKeyword(keyword);
-        return tasksWithKeyword.printTaskList(true);
+        return tasksWithKeyword.printTaskListForFind();
     }
 
     /**

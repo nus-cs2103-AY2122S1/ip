@@ -43,11 +43,9 @@ public class TaskList {
     }
 
     /**
-     * Prints the tasks in the TaskList with different display messages depending on if user is finding tasks.
-     *
-     * @param isFindCommand True if user is finding tasks. False if user is printing entire task list.
+     * Prints the tasks in the TaskList that contain the specified keyword in a Find Command.
      */
-    public String printTaskList(boolean isFindCommand) {
+    public String printTaskListForFind() {
         if (tasks.size() == 0) {
             return "There are no matching tasks in the list.";
         }

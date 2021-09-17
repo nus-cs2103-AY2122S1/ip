@@ -48,7 +48,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * Appends "[D]" to the front to show that Task is a Deadline.
      */
     @Override
@@ -57,7 +57,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public String toFileString() {
@@ -74,7 +74,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public Task getUpdatedTask(EditCommand edit) throws DukeException {

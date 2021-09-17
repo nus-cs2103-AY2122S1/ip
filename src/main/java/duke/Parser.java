@@ -68,39 +68,6 @@ public class Parser {
         return commandDetails;
     }
 
-    private static EditCommand parseEditCommand(String commandDetails) throws DukeException {
-        String editMessage = "Usage of edit command:\nedit [taskIndex] /desc [new desc] "
-                + "/date [new date]\neg. edit 1 /desc Submit IP /date 17-9-2021 23:59";
-        int taskIndex = getTaskIndex(commandDetails);
-        try {
-            String detailsWithoutIndex = commandDetails.split(" ", 2)[1];
-            String[] editDescParts = detailsWithoutIndex.split("/desc", 2);
-            String[] editDateParts = detailsWithoutIndex.split("/date", 2);
-            if (editDescParts.length < 2 && editDateParts.length < 2) {
-                throw new DukeException(editMessage);
-            }
-
-            if (editDateParts.length >= 2 && editDescParts.length >= 2) {
-                // both description and date should be edited
-                String editedDescription = editDescParts[1].split("/date")[0].trim();
-                checkEmptyDetails(editedDescription, "desc");
-                String editedDate = editDateParts[1].split("/desc")[0].trim();
-                return new EditCommand(taskIndex, editedDescription, editedDate);
-            } else if (editDateParts.length >= 2) {
-                // only date should be edited
-                String editedDate = editDateParts[1].trim();
-                return new EditCommand(taskIndex, null, editedDate);
-            } else {
-                // only description should be edited
-                String editedDescription = editDescParts[1].trim();
-                checkEmptyDetails(editedDescription, "desc");
-                return new EditCommand(taskIndex, editedDescription, null);
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(editMessage);
-        }
-    }
-
     private static void checkEmptyDetails(String commandDetails, String item) throws DukeException {
         if (commandDetails.isEmpty()) {
             throw new DukeException(item + " details cannot be empty.");
@@ -139,6 +106,39 @@ public class Parser {
 
         Deadline deadline = new Deadline(description, by);
         return new AddTaskCommand(deadline);
+    }
+
+    private static EditCommand parseEditCommand(String commandDetails) throws DukeException {
+        String editMessage = "Usage of edit command:\nedit [taskIndex] /desc [new desc] "
+                + "/date [new date]\neg. edit 1 /desc Submit IP /date 17-9-2021 23:59";
+        int taskIndex = getTaskIndex(commandDetails);
+        try {
+            String detailsWithoutIndex = commandDetails.split(" ", 2)[1];
+            String[] editDescParts = detailsWithoutIndex.split("/desc", 2);
+            String[] editDateParts = detailsWithoutIndex.split("/date", 2);
+            if (editDescParts.length < 2 && editDateParts.length < 2) {
+                throw new DukeException(editMessage);
+            }
+
+            if (editDateParts.length >= 2 && editDescParts.length >= 2) {
+                // both description and date should be edited
+                String editedDescription = editDescParts[1].split("/date")[0].trim();
+                checkEmptyDetails(editedDescription, "desc");
+                String editedDate = editDateParts[1].split("/desc")[0].trim();
+                return new EditCommand(taskIndex, editedDescription, editedDate);
+            } else if (editDateParts.length >= 2) {
+                // only date should be edited
+                String editedDate = editDateParts[1].trim();
+                return new EditCommand(taskIndex, null, editedDate);
+            } else {
+                // only description should be edited
+                String editedDescription = editDescParts[1].trim();
+                checkEmptyDetails(editedDescription, "desc");
+                return new EditCommand(taskIndex, editedDescription, null);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(editMessage);
+        }
     }
 
     private static int getTaskIndex(String commandDetails) throws DukeException {

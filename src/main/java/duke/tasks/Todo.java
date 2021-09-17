@@ -32,7 +32,7 @@ public class Todo extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * Appends "[T]" to the front to show that Task is a Todo.
      */
     @Override
@@ -49,7 +49,7 @@ public class Todo extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public Task getUpdatedTask(EditCommand edit) {

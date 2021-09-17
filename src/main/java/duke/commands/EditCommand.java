@@ -57,7 +57,7 @@ public class EditCommand extends Command {
         Task toEditTask = tasks.getTask(taskIndex);
         Task editedTask = toEditTask.getUpdatedTask(this);
         tasks.editTask(taskIndex, editedTask);
-        storage.saveTasks(tasks);
+        Storage.saveTasks(tasks);
         return ui.showEditedTask(taskIndex, editedTask);
     }
 }

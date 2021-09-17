@@ -55,7 +55,7 @@ public class Event extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * Appends "[E]" to the front to show that Task is a Deadline.
      */
     @Override
@@ -73,7 +73,7 @@ public class Event extends Task {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     @Override
     public Task getUpdatedTask(EditCommand edit) throws DukeException {

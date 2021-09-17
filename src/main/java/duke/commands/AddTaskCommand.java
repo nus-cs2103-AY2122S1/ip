@@ -9,7 +9,7 @@ import duke.tasks.Task;
  * Represents a command to add a Task to a TaskList.
  */
 public class AddTaskCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Constructs an AddTaskCommand.
@@ -29,7 +29,7 @@ public class AddTaskCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(task);
-        storage.saveTasks(tasks);
+        Storage.saveTasks(tasks);
         return ui.showAddTask(tasks, task);
     }
 
