@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.command.DukeCommand;
 import duke.exception.DukeArgumentException;
@@ -31,7 +33,7 @@ public class DukeUi extends Application {
             DukeCommand command = DukeCommandParser.parseInput(input);
             response = command.execute(Duke.getTaskList());
             if (command.isExit()) {
-                Platform.exit();
+                delayedExit();
             }
         } catch (DukeCommandException | DukeArgumentException e) {
             response = e.getMessage();
@@ -52,5 +54,17 @@ public class DukeUi extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @author endriu_l/Jason C taken from stackoverflow.
+     */
+    private static void delayedExit() {
+        TimerTask exit = new TimerTask() {
+            public void run() {
+                Platform.exit();
+            }
+        };
+        new Timer().schedule(exit, 2000);
     }
 }
