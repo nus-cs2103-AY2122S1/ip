@@ -238,15 +238,19 @@ public class Parser {
         String outputText = " No matching tasks, sorry";
         TaskList newTasks = new TaskList(new ArrayList<>());
         if (input.contains("find")) {
-            String item = input.split(" ")[1];
-            for (int i = 0; i < tasks.getSize(); i++) {
-                if (tasks.getTask(i).getDescription().contains(item)) {
-                    newTasks.addTask(tasks.getTask(i));
+            String[] items = input.split(" ");
+            if (items.length > 1) {
+                for (int i = 0; i < tasks.getSize(); i++) {
+                    if (tasks.getTask(i).getDescription().contains(items[1])) {
+                        newTasks.addTask(tasks.getTask(i));
+                    }
                 }
             }
-            outputText = " Here are the matching tasks "
-                    + "in your list: \n" + "     ";
-            return outputText + ParserFunctions.getItems(newTasks);
+            if (newTasks.getSize() > 0) {
+                outputText = " Here are the matching tasks "
+                        + "in your list: \n" + "     ";
+                return outputText + ParserFunctions.getItems(newTasks);
+            }
         }
         return outputText;
     }
