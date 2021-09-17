@@ -31,6 +31,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.getIcons().add(BOT_ICON);
             fxmlLoader.<MainWindow>getController().setPoseidon(poseidon);
+            stage.setTitle("Poseidon");
             stage.show();
             stage.setResizable(false);
         } catch (IOException e) {
