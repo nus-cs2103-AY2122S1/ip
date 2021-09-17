@@ -22,7 +22,7 @@ Random title inserted
 3. Command Summary
    - [Summary table](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#command-summary)
 
-
+&nbsp;
 
 ## Features 
 
@@ -40,19 +40,19 @@ What can you do with DuC? You can:
 - Mark a task as completed (if it is done, mark it X rightaway!)
 - Or delete a task at will (the list is too long? Delete it and save some spaces!)
 
-</br>
+&nbsp;
 
 ### View task and task date
 
 View the list of all ongoing task on the list, and the date associated with them
 
-</br>
+&nbsp;
 
 ### Load and Save
 
 Want to visit the list later? We save everything for you, just reload the app again and see your previously-saved list
 
-</br>
+&nbsp;
 
 ## Usage
 
@@ -71,7 +71,7 @@ Here is a comprehensive list of command you can use:
 ...
 ```
 
-</br>
+&nbsp;
 
 ### `todo` - Add a task of type TODO
 
@@ -92,7 +92,7 @@ Now you have 1 task in your list
 
 ```
 
-</br>
+&nbsp;
 
 ### `deadline` - Add a task of type DEADLINE
 
@@ -115,7 +115,7 @@ Nice! I've added the following task to your list:
 Now you have 2 tasks in your list
 ```
 
-</br>
+&nbsp;
 
 ### `event` - Add a task of type EVENT
 
@@ -137,7 +137,7 @@ Nice! I've added the following task to your list:
 Now you have 3 tasks in your list
 ```
 
-</br>
+&nbsp;
 
 ### `done` - Mark a task in the list as completed
 
@@ -157,7 +157,7 @@ Okay, I've marked this task as done:
 [D][X] CS2103T IP Submission (by Sep 17 2021)
 ```
 
-</br>
+&nbsp;
 
 ### `update` - Change the description of a specified task in the list
 
@@ -180,7 +180,7 @@ Deal, I have updated the task at position 1 as:
 [T][ ] run at least 3km
 ```
 
-</br>
+&nbsp;
 
 ### `delete` - Delete a task from the list
 
@@ -200,7 +200,7 @@ Noted! I've deleted the following task:
 [E][ ] NUS Career Fair (at Sep 10 2021)
 ```
 
-</br>
+&nbsp;
 
 ### `find` - Query a task in your list
 
@@ -221,7 +221,7 @@ The following task(s) matches given query 'CS2103T':
 [D][X] CS2103T IP Submission (by Sep 17 2021)
 ```
 
-</br>
+&nbsp;
 
 ### `list` - View all the current tasks you are having
 
@@ -237,7 +237,7 @@ Here's the list of all tasks:
 [E][ ] NUS Career Fair (at Sep 10 2021)
 ```
 
-</br>
+&nbsp;
 
 ### `bye` - Exit the program
 
@@ -247,7 +247,7 @@ Syntax: `bye`
 
 Expected outcome: A goodbye message and the app exiting in 3 seconds.
 
-</br>
+&nbsp;
 
 ## Command Summary
 
