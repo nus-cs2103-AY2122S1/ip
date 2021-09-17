@@ -41,7 +41,7 @@ public class Parser {
     private static CommandType handleFindInput(String command) throws DukeException {
         if (command.equals("find")) {
             throw new DukeException("☹ OOPS!!! The find command needs a search term after it "
-                    + "in the following format: find searchterm");
+                    + "in the following format: find term");
         }
         return CommandType.FIND;
     }

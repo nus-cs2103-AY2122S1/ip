@@ -16,7 +16,7 @@ public class Event extends Task {
      * Creates an Event object from user command using the description and date and time.
      *
      * @param description describes the nature of the task.
-     * @param at is the date and time at which the task is ocurring, converted to LocalDateTime object.
+     * @param at is the date and time at which the task is occurring, converted to LocalDateTime object.
      */
     public Event(String description, String at) {
         super(description);
@@ -30,7 +30,7 @@ public class Event extends Task {
      *
      * @param num number retrieved from the drive that determines if the task is done or not.
      * @param description describes the nature of the task.
-     * @param at is the date and time at which the task is ocurring, converted to LocalDateTime object.
+     * @param at is the date and time at which the task is occurring, converted to LocalDateTime object.
      */
     public Event(String num, String description, String at) {
         this(description, at);

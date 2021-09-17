@@ -11,8 +11,10 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
 
-    private static final int LENGTH_OF_BY = 4;
-    private static final int LENGTH_OF_AT = 4;
+    private static final String DEADLINE_DATETIME_MARKER = "/by ";
+    private static final String DEADLINE_DATETIME_MARKER_WITH_SPACE = " /by ";
+    private static final String EVENT_DATETIME_MARKER = "/at ";
+    private static final String EVENT_DATETIME_MARKER_WITH_SPACE = " /at ";
 
     private ArrayList<Task> taskList;
 
@@ -41,7 +43,7 @@ public class TaskList {
     public String find(String searchTerm, Ui ui) throws DukeException {
         if (searchTerm.isEmpty()) {
             throw new DukeException("Please provide a search term after the find command in the following format:"
-                    + " find searchterm");
+                    + " find term");
         }
         try {
             //@@author kaushikkrdy-reused
@@ -53,7 +55,7 @@ public class TaskList {
             return ui.showMatchingTasks(new ArrayList<>(matchingTaskList));
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Please provide a search term after the find command in the following format:"
-                    + " find searchterm");
+                    + " find term");
         }
     }
 
@@ -143,8 +145,9 @@ public class TaskList {
      */
     public String createDeadline(String description, Storage storage, Ui ui) throws DukeException {
         try {
-            String newDescription = description.substring(0, description.indexOf(" /by "));
-            String by = description.substring(description.indexOf("/by ") + LENGTH_OF_BY);
+            String newDescription = description.substring(0, description.indexOf(DEADLINE_DATETIME_MARKER_WITH_SPACE));
+            String by = description.substring(description.indexOf(DEADLINE_DATETIME_MARKER)
+                    + DEADLINE_DATETIME_MARKER.length());
             Task addedTask = new Deadline(newDescription, by);
             this.taskList.add(addedTask);
             storage.appendToFile(addedTask.getFileString());
@@ -171,8 +174,9 @@ public class TaskList {
      */
     public String createEvent(String description, Storage storage, Ui ui) throws DukeException {
         try {
-            String newDescription = description.substring(0, description.indexOf(" /at "));
-            String at = description.substring(description.indexOf("/at ") + LENGTH_OF_AT);
+            String newDescription = description.substring(0, description.indexOf(EVENT_DATETIME_MARKER_WITH_SPACE));
+            String at = description.substring(description.indexOf(EVENT_DATETIME_MARKER)
+                    + EVENT_DATETIME_MARKER.length());
             Task addedTask = new Event(newDescription, at);
             this.taskList.add(addedTask);
             storage.appendToFile(addedTask.getFileString());
