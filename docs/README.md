@@ -11,7 +11,7 @@
 - [Delete a task](#delete) 
 - [Find a task](#find) 
 - [Sort tasks](#sort) 
-- [Exit](#bye) 
+- [Exit](#exit) 
 
 ## Usage
 
