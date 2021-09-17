@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -36,16 +37,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
-//            AnchorPane ap = fxmlLoader.load();
-//            Scene scene = new Scene(ap);
-//            stage.setScene(scene);
-//            fxmlLoader.<MainWindow>getController().setDuke(duke);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
 
         //Step 1. Setting up required components
@@ -93,7 +84,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
@@ -138,6 +129,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */

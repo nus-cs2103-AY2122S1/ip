@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
@@ -11,6 +13,7 @@ public class TaskManager {
     int i = 0;
     File txtFile;
     String path;
+    String folder;
 
     /**
      * Constructor for a TaskManager instance
@@ -21,21 +24,20 @@ public class TaskManager {
         txtFile = new File(path);
         this.txtFile = txtFile;
         this.path = path;
+        this.folder = System.getProperty("user.dir") + "\\src\\main\\data";
 
-        if (!txtFile.exists()) {
-            try {
+        try {
+            if (Files.notExists(Path.of(folder))) {
+                Files.createDirectories(Path.of(folder));
+            }
+            if (!txtFile.exists()) {
                 txtFile.createNewFile();
                 this.txtFile = txtFile;
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        } else {
-            try {
+            } else {
                 BufferedReader br = new BufferedReader(new FileReader(txtFile));
                 String txtLine;
                 txtLine = br.readLine();
-                while(txtLine != null) {
+                while (txtLine != null) {
                     String[] segments = txtLine.split("\\|");
                     executeCommand(segments[2]);
                     if (Objects.equals(segments[0], "1")) {
@@ -44,14 +46,16 @@ public class TaskManager {
                     }
                     txtLine = br.readLine();
                 }
-            } catch (IOException e) {
-                System.out.println("ERROR OCCURRED");
             }
+        } catch (IOException e) {
+            System.out.println("ERROR OCCURRED");
         }
+
     }
 
     /**
      * Method that handles commands and returns Joker's appropriate output and response.
+     *
      * @param inData input message from the user
      * @return Joker bot's response to command entered
      */
@@ -150,14 +154,14 @@ public class TaskManager {
                             appendToFile(path, command);
                         }
                     } else if (taskList[k].getTask() == "D") {
-                        String command = done + (k + 1)+ "|deadline " + taskList[k].getDescription() + "/by " + taskList[k].getDateNum();
+                        String command = done + (k + 1) + "|deadline " + taskList[k].getDescription() + "/by " + taskList[k].getDateNum();
                         if (k == 0) {
                             writeToFile(path, command);
                         } else {
                             appendToFile(path, command);
                         }
                     } else if (taskList[k].getTask() == "E") {
-                        String command = done + (k + 1)+ "|event " + taskList[k].getDescription() + "/at " + taskList[k].getDateNum();
+                        String command = done + (k + 1) + "|event " + taskList[k].getDescription() + "/at " + taskList[k].getDateNum();
                         if (k == 0) {
                             writeToFile(path, command);
                         } else {
@@ -180,7 +184,7 @@ public class TaskManager {
                 output += j + 1 + ". [" + taskList[j].getTask() + "]" +
                         "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription() + "\n";
             } else {
-               output += j + 1 + ". [" + taskList[j].getTask() + "]" +
+                output += j + 1 + ". [" + taskList[j].getTask() + "]" +
                         "[" + taskList[j].getStatusIcon() + "] " + taskList[j].getDescription()
                         + taskList[j].getDate() + "\n";
             }
@@ -190,44 +194,44 @@ public class TaskManager {
 
     private String toDoAddedMessage() {
         return "Got it. I've added this task: \n"
-                        + "[" + taskList[i - 1].getTask() + "]"
-                        + "[" + taskList[i - 1].getStatusIcon() + "] "
-                        + taskList[i - 1].getDescription()
-                        + "\n"
-                        + "Now you have " + (i) + " tasks in the list.";
+                + "[" + taskList[i - 1].getTask() + "]"
+                + "[" + taskList[i - 1].getStatusIcon() + "] "
+                + taskList[i - 1].getDescription()
+                + "\n"
+                + "Now you have " + (i) + " tasks in the list.";
     }
 
     private String deadlineAddedMessage() {
         return "Got it. I've added this task: \n"
-                        + "[" + taskList[i - 1].getTask() + "]"
-                        + "[" + taskList[i - 1].getStatusIcon() + "] "
-                        + taskList[i - 1].getDescription()
-                        + "\n"
-                        + "Now you have " + (i) + " tasks in the list.";
+                + "[" + taskList[i - 1].getTask() + "]"
+                + "[" + taskList[i - 1].getStatusIcon() + "] "
+                + taskList[i - 1].getDescription()
+                + "\n"
+                + "Now you have " + (i) + " tasks in the list.";
     }
 
     private String eventAddedMessage() {
         return "Got it. I've added this task: \n"
-                        + "[" + taskList[i - 1].getTask() + "]"
-                        + "[" + taskList[i - 1].getStatusIcon() + "] "
-                        + taskList[i - 1].getDescription()
-                        + "\n"
-                        + "Now you have " + (i) + " tasks in the list.";
+                + "[" + taskList[i - 1].getTask() + "]"
+                + "[" + taskList[i - 1].getStatusIcon() + "] "
+                + taskList[i - 1].getDescription()
+                + "\n"
+                + "Now you have " + (i) + " tasks in the list.";
     }
 
     private String doneTaskMessage(int taskNo) {
         return "Nice! I've marked this task as done: \n"
-                        + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
-                        + taskList[taskNo - 1].getDescription();
+                + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
+                + taskList[taskNo - 1].getDescription();
     }
 
     private String deletedTaskMessage(String type, String status, String task, int taskNo) {
         return "Noted. I've removed this task: \n"
-                        + " [" + type + "] "
-                        + "[" + status + "] "
-                        + task
-                        + "\n"
-                        + "Now you have " + (i) + " tasks in the list.";
+                + " [" + type + "] "
+                + "[" + status + "] "
+                + task
+                + "\n"
+                + "Now you have " + (i) + " tasks in the list.";
     }
 
     private String errorUnknownCommandMessage() {
@@ -249,7 +253,7 @@ public class TaskManager {
     private static boolean isNumeric(String string) {
         int intValue;
 
-        if(string == null || string.equals("")) {
+        if (string == null || string.equals("")) {
             System.out.println("String cannot be parsed, it is null or empty.");
             return false;
         }
