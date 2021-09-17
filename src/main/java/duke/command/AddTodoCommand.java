@@ -17,6 +17,8 @@ public class AddTodoCommand extends AddCommand {
      * @throws MalformedCommandException If userInput is incorrectly formatted for an AddTodo command.
      */
     public static Command create(String userInput) throws MalformedCommandException {
+        assert userInput != null : "User input should be null for the creation of a Command";
+
         try {
             String description = userInput.split(" ", 2)[1];
             Task task = new Todo(description);

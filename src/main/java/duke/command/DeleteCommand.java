@@ -20,6 +20,8 @@ public class DeleteCommand implements Command {
      * @throws MalformedCommandException If userInput is incorrectly formatted for a Delete command.
      */
     public static Command create(String userInput) throws MalformedCommandException {
+        assert userInput != null : "User input should be null for the creation of a Command";
+
         try {
             int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
             return new DeleteCommand(taskIndex);

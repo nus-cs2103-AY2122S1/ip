@@ -15,6 +15,8 @@ public class FindCommand implements Command {
      * @return Find command.
      */
     public static Command create(String userInput)  {
+        assert userInput != null : "User input should be null for the creation of a Command";
+
         String searchTerm = userInput.split(" ", 2)[1];
         return new FindCommand(searchTerm);
     }
