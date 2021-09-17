@@ -333,8 +333,6 @@ public class TaskList {
                 String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
                 at = String.join(" ", atArray);
             } else if ((tagStart < commandIndex) && (commandIndex + 1 != inputArr.length)) {
-                System.out.println(commandIndex);
-                System.out.println(inputArr.length);
                 throw new DukeException("Tags must be after your /at location!");
             } else {
                 throw new DukeException("NO LOCATION DATA INPUT");

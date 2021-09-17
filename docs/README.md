@@ -10,8 +10,7 @@ Duke is a personal task manager in the form of a chatbot. He can help you track 
 
 ## Guide format and input restrictions
 - User input for commands are surrounded with angular brackets as such `<deadline_name>`. The brackets themselves are not part of the command.
-- All time input should be formatted as `d/M/yyyy HHm`. For example, you would insert 21st March 2103 9:03pm as `21/03/2103 2103`.
-- Anything not surrounded by angular brackets is necessary for that command to work
+- All time input should be formatted as `yyyy-mm-dd`. For example, you if you want to indicate your data of 21st Jan, 2021, it should be inputted as `2021-01-21`.
 
 ## Features
 Duke supports 3 main types of tasks: Todos, Deadlines and Events. You can perform Create, Read and Delete operations on these tasks, or mark them as done. Duke also helps you search for tasks if the list gets too long.
