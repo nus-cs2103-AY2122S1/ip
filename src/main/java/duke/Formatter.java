@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import duke.task.Task;
+import duke.exception.DukeException;
 
 abstract class Formatter {
 
-    private static final String INDENTATION_1 = " ";
-    private static final String INDENTATION_4 = "    ";
-    private static final String INDENTATION_5 = "     ";
-    private static final String BREAK_LINE = "____________________________________________________________";
+    private static final String ERROR_INITALIZE_STATIC = "Don't try to initialize this utility class! :(";
+    private static final String ERROR_MISSING_DESCRIPTION = "OOPS!!! The description cannot be left empty.";
+    private static final String ERROR_MISSING_DATE = "OOPS!!! The date cannot be left empty.";
 
-    private Formatter() {
-        System.out.println("Don't try to initialize this utility class! :(");
+    private Formatter() throws DukeException {
+        throw new DukeException(ERROR_INITALIZE_STATIC);
     }
 
     /**
@@ -29,7 +28,7 @@ abstract class Formatter {
     public static List<String> addTaskString(String task, String totalTasks) {
         return List.of(
             "Got it. I've added this task: ",
-            INDENTATION_1 + task,
+            task,
             String.format("Now you have %s tasks in the list.", totalTasks)
         );
     }
@@ -44,7 +43,7 @@ abstract class Formatter {
     public static List<String> deleteTaskString(String task, String totalTasks) {
         return List.of(
             "Noted. I've removed this task: ",
-            INDENTATION_1 + task,
+            task,
             String.format("Now you have %s tasks in the list.", totalTasks)
         );
     }
@@ -56,13 +55,16 @@ abstract class Formatter {
      * @param totalTasks The total number of tasks.
      * @return
      */
-    public static String getTaskName(String[] commands) {                
+    public static String getTaskName(String[] commands) throws DukeException {                
         int indexOfDateSeparator = IntStream
             .range(0, commands.length)
             .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
             .findFirst()
             .orElse(commands.length);
         String[] tasksNames = Arrays.copyOfRange(commands, 1, indexOfDateSeparator);
+        if (tasksNames.length == 0) {
+            throw new DukeException(ERROR_MISSING_DESCRIPTION);
+        }
         return Arrays.stream(tasksNames).collect(Collectors.joining(" "));
     }
 
@@ -73,21 +75,22 @@ abstract class Formatter {
      * @param totalTasks The total number of tasks.
      * @return
      */
-    public static String getTaskDate(String[] commands) {
+    public static String getTaskDate(String[] commands) throws DukeException {
         int indexOfDateSeparator = IntStream
             .range(0, commands.length)
             .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
             .findFirst()
-            .orElse(commands.length);
-        String[] tasksNames = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
-        return Arrays.stream(tasksNames).collect(Collectors.joining(" "));
+            .orElseThrow(() -> new DukeException(ERROR_MISSING_DATE));
+        String[] taskDate = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
+        if (taskDate.length == 0) {
+            throw new DukeException(ERROR_MISSING_DATE);
+        }
+        return Arrays.stream(taskDate).collect(Collectors.joining(" "));
     }
 
-    // prettier-ignore
-    //TODO: Make both sets of formatOutput and print to handle String ... args instead
     public static String formatOutput(String inputText) {
         return (
-            INDENTATION_4 + BREAK_LINE + "\n" + INDENTATION_5 + inputText + "\n" + INDENTATION_4 + BREAK_LINE + "\n"
+             inputText + "\n"
             );
     }
 
@@ -98,11 +101,10 @@ abstract class Formatter {
      * @return
      */
     public static String formatOutput(List<String> inputText) {
-        String output = INDENTATION_4 + BREAK_LINE + "\n";
+        String output = "";
         for (int i = 0; i < inputText.size(); i++) {
-            output += INDENTATION_5 + inputText.get(i) + "\n";
+            output += inputText.get(i) + "\n";
         }
-        output += INDENTATION_4 + BREAK_LINE + "\n";
         return output;
     }
 
@@ -114,7 +116,7 @@ abstract class Formatter {
         return formatOutput(inputText);
     }
 
-    public static List<String> formatNumberedListOutput(String header, List<Task> taskArray) {
+    private static List<String> formatNumberedListOutput(String header, List<? extends Object> taskArray) {
         List<String> outputList = new ArrayList<>();
         outputList.add(header);
         for (int i = 0; i < taskArray.size(); i++) {
@@ -123,7 +125,7 @@ abstract class Formatter {
         return outputList;
     }
 
-    public static String getNumberedListResponse(String header, List<Task> taskArray) {
+    public static String getNumberedListResponse(String header, List<? extends Object> taskArray) {
         List<String> outputList = formatNumberedListOutput(header, taskArray);
         return getResponseString(outputList);
     }

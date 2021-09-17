@@ -1,9 +1,11 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 public abstract class Task {
 
     protected static final String ERROR_ALREADY_DONE = "Error! The task has already been marked as complete!";
-    protected static final String SUCCESS_DONE = "Nice! I've marked this task as isDone:";
+    protected static final String SUCCESS_DONE = "Nice! I've marked this task as done:";
     protected static final String INDENTATION_5 = "     ";
     protected static final String DIVIDER = " | ";
 
@@ -16,9 +18,9 @@ public abstract class Task {
      *
      * @return
      */
-    public String setTaskAsDone() {
+    public String setTaskAsDone() throws DukeException {
         if (this.isDone) {
-            return Task.ERROR_ALREADY_DONE;
+            throw new DukeException(Task.ERROR_ALREADY_DONE);
         } else {
             this.isDone = true;
             return Task.SUCCESS_DONE + "\n" + INDENTATION_5 + this.toString();

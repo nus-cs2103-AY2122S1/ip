@@ -2,16 +2,18 @@ package duke;
 
 public class Response {
 
-    private boolean isBye;
+    private boolean isTerminate;
+    private boolean hasError;
     private String message;
 
     /**
-     * Returns a pair class of isBye and response
-     * @param isBye
+     * Returns a pair class of isTerminate and response
+     * @param isTerminate
      * @param response
      */
-    public Response(boolean isBye, String message) {
-        this.isBye = isBye;
+    public Response(boolean isTerminate, boolean hasError, String message) {
+        this.isTerminate = isTerminate;
+        this.hasError = hasError;
         this.message = message;
     }
 
@@ -19,7 +21,11 @@ public class Response {
         return this.message;
     }
 
-    public boolean isBye() {
-        return this.isBye;
+    public boolean isTerminate() {
+        return this.isTerminate;
+    }
+
+    public boolean hasError() {
+        return this.hasError;
     }
 }
