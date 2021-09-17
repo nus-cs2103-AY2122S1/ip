@@ -31,7 +31,10 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
-
+            if (input.trim().length() == 4) {
+                throw new DukeException(
+                        "It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
+            }
             int index = Integer.parseInt(input.trim().substring(5)) - 1;
             if (index >= list.getSize() || index < 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
@@ -41,7 +44,6 @@ public class DoneCommand extends Command {
             list.setTask(index, newTask);
             Storage.save(list);
             return ui.showTaskDone(list.getTask(index).getTaskState(), index + 1);
-
         } catch (NumberFormatException e) {
             throw new DukeException(
                     "It looks like you did not enter a valid integer for the \"done\" command. Please try again!");

@@ -31,7 +31,10 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
-
+            if (input.trim().length() == 6) {
+                throw new DukeException(
+                        "It looks like you did not enter a valid integer for the \"delete\" command. Please try again!");
+            }
             int index = Integer.parseInt(input.trim().substring(7)) - 1;
             if (index >= list.getSize() || index < 0) {
                 throw new DukeException("That task doesn't exist. Please try again!");
@@ -39,11 +42,10 @@ public class DeleteCommand extends Command {
             Task removedTask = list.getTask(index);
             list.removeTask(index);
             Storage.save(list);
-
             return ui.showTaskDeleted("" + (index + 1) + ". " + removedTask.getTaskState());
-
         } catch (NumberFormatException e) {
-            throw new DukeException("It looks like you did not enter a valid integer for the \"delete\" command. Please try again!");
+            throw new DukeException(
+                    "It looks like you did not enter a valid integer for the \"delete\" command. Please try again!");
         }
     }
 }
