@@ -14,12 +14,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Represents a controller for {@code DialogBox} used by JavaFX to create GUI, consisting of
+ * a {@code Circle} containing an image to represent the speaker's face and
+ * a {@code Text} box containing text from the speaker.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
  */
 public class DialogBox extends VBox {
 
+    // Constants to be used for creation of a User's DialogBox.
     private static final Font USER_FONT = Font.loadFont(DialogBox.class.getResource("/fonts/JetBrainsMono-Italic.ttf")
                     .toExternalForm(),
             15);
@@ -27,7 +31,7 @@ public class DialogBox extends VBox {
     private static final String USER_ICON_STYLE =
             "-fx-border-color: #A3C4BC; -fx-border-width: 5; -fx-border-radius: 50;";
 
-
+    // Constants to be used for creation of the Bot's DialogBox.
     private static final Font BOT_FONT = Font.loadFont(DialogBox.class.getResource("/fonts/JetBrainsMono-Regular.ttf")
                     .toExternalForm(),
             15);
@@ -35,14 +39,17 @@ public class DialogBox extends VBox {
     private static final String BOT_ICON_STYLE =
             "-fx-border-color: #E7EFC5; -fx-border-width: 5; -fx-border-radius: 50;";
 
+    // Background and content box of the text box.
+    @FXML
+    private HBox textBackgroundBox;
     @FXML
     private Text dialog;
+
+    // Background and content container of the image icon.
     @FXML
     private Pane imagePane;
     @FXML
     private Circle imageCircle;
-    @FXML
-    private HBox textBackgroundBox;
 
     private DialogBox(String text, Image img) {
         try {
@@ -59,7 +66,7 @@ public class DialogBox extends VBox {
     }
 
     /**
-     * Modifies the dialog box to set the style and font intended for User dialog boxes.
+     * Modifies the {@code DialogBox} to set the style and font intended for User dialog boxes.
      */
     private void modifyForUser() {
         imagePane.setStyle(USER_ICON_STYLE);
@@ -68,7 +75,7 @@ public class DialogBox extends VBox {
     }
 
     /**
-     * Modifies the dialog box to set the style and font intended for Bot dialog boxes
+     * Modifies the {@code DialogBox} to set the style and font intended for Bot dialog boxes
      * and flips the contents to the left.
      */
     private void modifyForBot() {
@@ -80,11 +87,12 @@ public class DialogBox extends VBox {
     }
 
     /**
-     * Returns a dialog box representing a User dialog (i.e.) image on right side, user background color and user font.
+     * Returns a {@code DialogBox} representing a User dialog (i.e.) image on right side,
+     * user background color and user font.
      *
-     * @param text Text to be shown in the dialog box.
-     * @param img Image to be used as profile image.
-     * @return Dialog Box with Text and profile image.
+     * @param text Text to be shown in the {@code DialogBox}.
+     * @param img {@code Image} to be used as profile image.
+     * @return {@code DialogBox} with Text and profile image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
@@ -93,11 +101,12 @@ public class DialogBox extends VBox {
     }
 
     /**
-     * Returns a dialog box representing a Bot dialog (i.e.) image on left side, bot background color and bot font.
+     * Returns a {@code DialogBox} representing a Bot dialog
+     * (i.e.) image on left side, bot background color and bot font.
      *
-     * @param text Text to be shown in the dialog box.
-     * @param img Image to be used as profile image.
-     * @return Dialog Box with Text and profile image.
+     * @param text Text to be shown in the {@code DialogBox}.
+     * @param img {@code Image} to be used as profile image.
+     * @return {@code DialogBox} with Text and profile image.
      */
     public static DialogBox getBotDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);

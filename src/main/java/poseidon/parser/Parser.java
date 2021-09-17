@@ -7,6 +7,12 @@ import java.util.regex.Pattern;
 
 import poseidon.exception.PoseidonException;
 
+/**
+ * Represents a {@code Parser} object for all parsing related operations.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
+ */
 public class Parser {
 
     // Regex versions of all the possible commands
@@ -21,10 +27,10 @@ public class Parser {
     private static final String CMD_SORT = "(?i)sort\\s*";
 
     /**
-     * Returns a String array that contains the useful and necessary parts of a command to be executed.
+     * Returns a {@code String} array that contains the useful and necessary parts of a command to be executed.
      *
-     * @param newCommand String version of a command.
-     * @return String array.
+     * @param newCommand {@code String} version of a command.
+     * @return {@code String} array.
      */
     public static String[] parse(String newCommand) {
         if (Pattern.compile(CMD_BYE).matcher(newCommand).matches()) {
@@ -51,10 +57,10 @@ public class Parser {
     }
 
     /**
-     * Returns a LocalDateTime object after parsing a string version of date and time.
+     * Returns a {@code LocalDateTime} object after parsing a string version of date and time.
      *
-     * @param dateTime String version of date and time.
-     * @return LocalDateTime object.
+     * @param dateTime {@code String} version of date and time.
+     * @return {@code LocalDateTime} object.
      */
     public static LocalDateTime parseDateTime(String dateTime) {
         final String dateFormat = "yyyy MM dd HHmm";
@@ -71,20 +77,20 @@ public class Parser {
     }
 
     /**
-     * Returns the integer version of a string number.
+     * Returns the {@code Integer} version of a {@code String} number.
      *
-     * @param intString String version of a number.
-     * @return integer version of the given number.
+     * @param intString {@code String} version of a number.
+     * @return {@code Integer} version of the given number.
      */
     public static int parseIndex(String intString) {
         return Integer.parseInt(intString.trim());
     }
 
     /**
-     * Returns true if the given user string input is a valid "bye" command by pattern matching.
+     * Returns true if the given user {@code String} input is a valid "bye" command by pattern matching.
      *
-     * @param newCommand String user input.
-     * @return Boolean validation result.
+     * @param newCommand {@code String} user input.
+     * @return {@code Boolean} validation result.
      */
     public static boolean isParsedBye(String newCommand) {
         return Pattern.compile(CMD_BYE).matcher(newCommand).matches();

@@ -4,19 +4,26 @@ import java.util.ArrayList;
 
 import poseidon.task.Task;
 
+/**
+ * Represents an {@code TaskList} object that contains an {@code ArrayList} to keep track of the {@code Task}s during
+ * runtime and dictates operations based for modifying the {@code ArrayList}.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
     /**
-     * Constructs a new TaskList object by initializing a new ArrayList for runtime storage.
+     * Constructs a new {@code TaskList} object by initializing a new {@code ArrayList} for runtime storage.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Constructs a new TaskList object by storing the given ArrayList for runtime storage.
+     * Constructs a new {@code TaskList} object by storing the given {@code ArrayList} for runtime storage.
      *
      * @param tasks ArrayList to be used runtime storage.
      */
@@ -25,10 +32,10 @@ public class TaskList {
     }
 
     /**
-     * Returns a string message indicating success after adding a task to the list of tasks.
+     * Returns a {@code String} message indicating success after adding a {@code Task} to the list of tasks.
      *
-     * @param newTask New task to be added.
-     * @return String success message.
+     * @param newTask New {@code Task} to be added.
+     * @return {@code String} success message.
      */
     public String addTask(Task newTask) {
         tasks.add(newTask);
@@ -38,10 +45,10 @@ public class TaskList {
     }
 
     /**
-     * Returns a string message indicating success after marking a task done in the list of tasks.
+     * Returns a {@code String} message indicating success after marking a {@code Task} done in the list of tasks.
      *
-     * @param taskIndex Index of the Task.
-     * @return String success message.
+     * @param taskIndex Index of the {@code Task}.
+     * @return {@code String} success message.
      */
     public String markTaskDone(int taskIndex) {
         Task currTask = tasks.get(taskIndex - 1);
@@ -52,10 +59,10 @@ public class TaskList {
     }
 
     /**
-     * Returns a string message indicating success after deleting a task from the list of tasks.
+     * Returns a {@code String} message indicating success after deleting a {@code Task} from the list of tasks.
      *
-     * @param taskIndex Index of the Task.
-     * @return String success message.
+     * @param taskIndex Index of the {@code Task}.
+     * @return {@code String} success message.
      */
     public String deleteTask(int taskIndex) {
         Task currTask = tasks.get(taskIndex - 1);
@@ -67,28 +74,28 @@ public class TaskList {
     }
 
     /**
-     * Returns the ArrayList of tasks maintained by this TaskList object.
+     * Returns the {@code ArrayList} of {@code Task}s maintained by this {@code TaskList} object.
      *
-     * @return ArrayList of Task objects.
+     * @return {@code ArrayList} of {@code Task} objects.
      */
     public ArrayList<Task> getList() {
         return tasks;
     }
 
     /**
-     * Returns the string representation of a Task (based on the Index) to be used for storage.
+     * Returns the {@code String} representation of a {@code Task} (based on the Index) to be used for storage.
      *
-     * @param taskIndex Index of the Task.
-     * @return String for storage.
+     * @param taskIndex Index of the {@code Task}.
+     * @return {@code String} for storage.
      */
     public String getTaskStorage(int taskIndex) {
         return tasks.get(taskIndex - 1).toStorage();
     }
 
     /**
-     * Returns a boolean indicating the validity of the Task's Index.
+     * Returns a {@code Boolean} indicating the validity of the {@code Task}'s Index.
      *
-     * @param taskIndex Index of the Task.
+     * @param taskIndex Index of the {@code Task}.
      * @return Validity of the Index.
      */
     public boolean isIndexValid(int taskIndex) {
@@ -96,10 +103,10 @@ public class TaskList {
     }
 
     /**
-     * Returns an ArrayList containing all the tasks that have the content in their description.
+     * Returns an {@code ArrayList} containing all the {@code Task}s that have the content in their description.
      *
      * @param content Content to be searched for.
-     * @return ArrayList of Task objects.
+     * @return {@code ArrayList} of {@code Task} objects.
      */
     public ArrayList<Task> findTasks(String content) {
         ArrayList<Task> filteredList = new ArrayList<>();
@@ -112,9 +119,9 @@ public class TaskList {
     }
 
     /**
-     * Returns an ArrayList of tasks maintained by this TaskList object sorted by time.
+     * Returns an {@code ArrayList} of {@code Task}s maintained by this {@code TaskList} object sorted by time.
      *
-     * @return ArrayList of Task objects.
+     * @return {@code ArrayList} of {@code Task} objects.
      */
     public ArrayList<Task> sortTasks() {
         ArrayList<Task> sortedList = new ArrayList<>();

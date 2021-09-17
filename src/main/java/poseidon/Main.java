@@ -11,10 +11,14 @@ import javafx.stage.Stage;
 import poseidon.ui.MainWindow;
 
 /**
- * A GUI for Poseidon using FXML.
+ * Represents a GUI for {@code Poseidon} using JavaFX and FXML.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
  */
 public class Main extends Application {
 
+    // Icon for application window.
     private static final Image BOT_ICON = new Image(Main.class.getResourceAsStream("/images/BotIcon.png"));
     private Poseidon poseidon = new Poseidon();
 

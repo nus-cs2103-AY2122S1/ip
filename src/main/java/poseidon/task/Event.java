@@ -4,17 +4,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents an {@code Event} object that contains the description of the event task,
+ * a date and time to mark the beginning of the event and
+ * a date and time to mark the end of the event.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
+ */
 public class Event extends Task {
 
     private LocalDateTime fromDateTime;
     private LocalDateTime toDateTime;
 
     /**
-     * Constructs a new Event using the given description, from time and to time.
+     * Constructs a new {@code Event} using the given description, from time and to time.
      *
-     * @param description Description of the Event.
-     * @param fromDateTime From time of the Event.
-     * @param toDateTime To time of the Event.
+     * @param description Description of the {@code Event}.
+     * @param fromDateTime From time of the {@code Event}.
+     * @param toDateTime To time of the {@code Event}.
      */
     public Event(String description, LocalDateTime fromDateTime, LocalDateTime toDateTime) {
         super(description);
@@ -23,12 +31,12 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs a new Event using the given description, done status, from time and to time.
+     * Constructs a new {@code Event} using the given description, done status, from time and to time.
      *
-     * @param description Description of the new Event.
-     * @param isDone Done status of the new Event.
-     * @param fromDateTime From time of the new Event.
-     * @param toDateTime To time of the new Event.
+     * @param description Description of the new {@code Event}.
+     * @param isDone Done status of the new {@code Event}.
+     * @param fromDateTime From time of the new {@code Event}.
+     * @param toDateTime To time of the new {@code Event}.
      */
     public Event(String description, boolean isDone, LocalDateTime fromDateTime, LocalDateTime toDateTime) {
         super(description);
