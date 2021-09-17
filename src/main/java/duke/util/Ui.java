@@ -46,21 +46,21 @@ public class Ui {
      * @param errorMsg Error message to be printed onto the console.
      */
     public void showError(String errorMsg) {
-        System.out.println("     " + errorMsg);
+        System.out.println(errorMsg);
     }
 
     /**
      * Prints a divider with no new line.
      */
     public void showOpeningLine() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
      * Prints a divider with a new line.
      */
     public void showClosingLine() {
-        System.out.println("    ____________________________________________________________\n");
+        System.out.println("____________________________________________________________\n");
     }
 
     /**
