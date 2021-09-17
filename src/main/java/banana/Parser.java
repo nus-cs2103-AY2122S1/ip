@@ -10,8 +10,8 @@ import java.util.ArrayList;
  **/
 public class Parser {
 
+    private static String prevInput;
     private String input;
-    protected static String prevInput;
     private static Task deletedTask;
 
     /**
