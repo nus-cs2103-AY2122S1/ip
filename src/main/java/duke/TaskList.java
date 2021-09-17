@@ -113,4 +113,8 @@ public class TaskList {
             fileDB.save(t);
         }
     }
+
+    public int size() {
+        return tasks.size();
+    }
 }

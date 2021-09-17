@@ -140,6 +140,7 @@ public class Chatbot {
         if (command != null) {
             return builtInCommands(command, parseInput.length == 1 ? "" : parseInput[1]);
         }
+
         TaskCommands taskCommand = TaskCommands.toEnum(input);
         if (taskCommand != null) {
             String[] arguments = input.split(" ", 2);
@@ -164,9 +165,9 @@ public class Chatbot {
         case CHAT_COMMAND_LIST:
             return this.taskList.list(this.ui);
         case CHAT_COMMAND_FIND:
-                TaskList findTaskList = this.taskList.findTasks(argument);
-                System.out.println(findTaskList.list(this.ui));
-                return ChatContinue.CHAT_CONTINUE;
+            TaskList findTaskList = this.taskList.findTasks(argument);
+            System.out.println(findTaskList.list(this.ui));
+            return ChatContinue.CHAT_CONTINUE;
         default:
             this.ui.showNotSupported();
             return ChatContinue.CHAT_END;

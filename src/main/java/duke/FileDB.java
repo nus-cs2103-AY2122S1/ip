@@ -18,7 +18,7 @@ public class FileDB {
     private Parser parser;
 
 
-    public FileDB(TaskList taskList) throws DukeIOException, DukeDateParseException{
+    public FileDB(TaskList taskList) throws DukeIOException, DukeDateParseException {
         this.fileDB = new File(DEFAULT_SAVE);
         this.parser = new Parser();
         this.isFileExists = false;
@@ -71,7 +71,8 @@ public class FileDB {
         }
     }
 
-    public void loadTask(TaskList memory) throws DukeFileException, DukeDateParseException{
+    public void loadTask(TaskList memory) throws DukeFileException, DukeDateParseException {
+        assert memory.size() == 0 : "memory not clean slate!";
         try {
             Scanner scanner = new Scanner(fileDB);
             while(scanner.hasNextLine()) {
@@ -85,7 +86,7 @@ public class FileDB {
         }
     }
 
-    public void clearAll() throws DukeIOException{
+    public void clearAll() throws DukeIOException {
         try {
             FileWriter fileWriter = new FileWriter(this.fileDB);
             fileWriter.write("");
