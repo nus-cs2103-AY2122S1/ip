@@ -212,7 +212,7 @@ Proceeded by the closure of the application.
 | ------------ | ------------- | ------------- |
 |todo | `todo {task's description}` | `todo read book` |
 | deadline | `deadline {task's description} /by {Year-Month-Day}` | `deadline return book /by 2021-09-30` |
-| event | `event {task's description} /at {Year-Month-DateTHour:Minute}` | `event meeting /at 2021-09-30 13:55` |
+| event | `event {task's description} /at {Year-Month-DateTHour:Minute}` | `event meeting /at 2021-09-30T13:55` |
 | list | `list` | `list`|
 | delete | `delete {task's index}` | `delete 1` |
 | done | `done {task's index}` | `done 2` |
