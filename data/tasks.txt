@@ -1,0 +1,8 @@
+T%return book%false
+D%finish assignment%false%12/08/1999 1200
+T%readbook%true
+T%rejwjenfjwnj%false
+T%read%false
+T%jewbfjbwejk%false
+T%qnjkdnjqknjk qwdqdwqdw%false
+T%here%false

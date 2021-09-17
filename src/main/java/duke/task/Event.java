@@ -9,10 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
     public static final String IDENTIFIER = "E";
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-    private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
 
-    private LocalDateTime at;
+    private LocalDateTime eventDate;
 
     /**
      * Creates a event task.
@@ -24,7 +22,7 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, String at) throws DateTimeParseException {
         super(description, isDone);
-        this.at = LocalDateTime.parse(at, INPUT_FORMAT);
+        this.eventDate = LocalDateTime.parse(at, DATE_INPUT_FORMAT);
     }
 
     /**
@@ -36,17 +34,17 @@ public class Event extends Task {
      */
     public Event(String description, String at) throws DateTimeParseException {
         super(description);
-        this.at = LocalDateTime.parse(at, INPUT_FORMAT);
+        this.eventDate = LocalDateTime.parse(at, DATE_INPUT_FORMAT);
     }
 
     @Override
     public String toString() {
         return "[" + IDENTIFIER + "]" + super.toString()
-                + " (at:" + at.format(DISPLAY_FORMAT)  + ")";
+                + " (at:" + eventDate.format(DATE_DISPLAY_FORMAT)  + ")";
     }
     @Override
     public String toStorageFormat() {
-        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat() + Task.STORAGE_DELIMITER
-                + at.format(INPUT_FORMAT);
+        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat()
+                + Task.STORAGE_DELIMITER + eventDate.format(DATE_INPUT_FORMAT);
     }
 }

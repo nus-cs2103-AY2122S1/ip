@@ -42,47 +42,17 @@ public class Duke {
      */
     public String initialise() {
         try {
-            tasks.loadTasks(storage.load());
+            storage.loadTasks(tasks);
         } catch (StorageException e) {
             return ui.showErrorMessage(e);
         }
         return ui.showWelcomeMessage();
     }
 
-
-    public void exit() {
-        try {
-            storage.saveTasks(tasks);
-        } catch (StorageException e) {
-            ui.showErrorMessage(e);
-        }
-    }
-
     /**
-     * Reads user input and executes user commands.
+     * Stores tasks onto a file on disk and returns error message if storage of tasks fails.
      */
-    public void run() {
-        ui.showWelcomeMessage();
-
-        try {
-            tasks.loadTasks(storage.load());
-        } catch (StorageException e) {
-            ui.showErrorMessage(e);
-        }
-
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = ui.getUserInput();
-                Command userCommand = Parser.parse(userInput);
-                userCommand.execute(tasks, ui);
-                isExit = userCommand.isExit();
-            } catch (UnsupportedCommandException | MalformedCommandException e) {
-                ui.showErrorMessage(e);
-            }
-        }
-
+    public void saveTasks() {
         try {
             storage.saveTasks(tasks);
         } catch (StorageException e) {

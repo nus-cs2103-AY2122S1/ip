@@ -22,9 +22,4 @@ public class ListCommand implements Command {
     public String execute(TaskList tasks, Ui ui) {
         return ui.showTaskList(tasks);
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

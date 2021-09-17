@@ -20,12 +20,6 @@ public class ExitCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui) {
-
         return ui.showExitMessage();
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }
