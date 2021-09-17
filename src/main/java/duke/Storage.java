@@ -43,8 +43,10 @@ public class Storage {
                     Task task = convertDataToTask(str);
                     tasks.add(task);
                 }
+            } else {
+                throw new DukeException("File not found");
             }
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             ui.showError(e.getMessage());
         }
 
@@ -58,14 +60,18 @@ public class Storage {
      */
     public void save(Task task) {
         boolean directoryExists = Files.exists(filePath);
-        try {
-            if (directoryExists) {
-                String newData = task.toData() + '\n';
-                Files.write(filePath, newData.getBytes(), StandardOpenOption.APPEND);
-            } else {
-                throw new DukeException("Data file doesn't exist");
+        if (!directoryExists) {
+            try {
+                Files.createDirectories(filePath.getParent());
+                Files.createFile(filePath);
+            } catch (IOException e) {
+                ui.showError(e.getMessage());
             }
-        } catch (IOException | DukeException e) {
+        }
+        try {
+            String newData = task.toData() + '\n';
+            Files.write(filePath, newData.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
             ui.showError(e.getMessage());
         }
     }
