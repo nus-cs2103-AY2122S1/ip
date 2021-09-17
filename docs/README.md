@@ -1,5 +1,6 @@
 # User Guide
-Duke is a cute todo app that helps you manage tasks.
+Duke is a cute todo app that helps you manage tasks. <br />
+![UI](Ui.png)
 
 ## Quick Start
 1. Ensure that you have ```Java 11``` or above installed in your computer.
@@ -37,13 +38,6 @@ say ```todo [task description]```
 ### List tasks
 - List all tasks in your task list by saying ```list```
 - You can replace ```list``` with ```ls``` <br />
-- Example outcome:
-```
-Here are the tasks in your list:
-    1. [T][] a todo
-    2. [E][X] an event (at: Apr 20 2021 12:00 AM)
-    3. [D][] a dedline (by: Aug 15 2021)
-```
 
 ### Mark a task as done
 - Mark a task as done by saying ```done [task number]```, where 
