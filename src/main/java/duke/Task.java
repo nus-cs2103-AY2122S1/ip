@@ -34,7 +34,16 @@ public class Task {
         this.isDone = true;
     }
 
-    protected String serialise() {
+    /** Mark task as not done. */
+    public void markNotDone() {
+        this.isDone = false;
+    }
+
+    /** Convert task object into string.
+     *
+     * @return string that contains the data of the task
+     */
+    protected String convertToSavableString() {
         return " | " + (isDone ? "1" : "0") + " | " + description;
     }
 

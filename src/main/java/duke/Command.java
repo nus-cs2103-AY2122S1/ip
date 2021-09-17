@@ -46,6 +46,21 @@ public enum Command {
             return "clear";
         }
     },
+    UNDO {
+        public String toString() {
+            return "undo";
+        }
+    },
+    HELLO {
+        public String toString() {
+            return "hello";
+        }
+    },
+    HELP {
+        public String toString() {
+            return "help";
+        }
+    },
     INVALID {
         public String toString() {
             return "invalid";
