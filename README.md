@@ -3,6 +3,9 @@
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are 
 instructions on how to use it.
 
+Refer [HERE](https://github.com/nniiggeell/ip/tree/A-Release#readme) to view the user guide and find out more about 
+what Lebron can do!
+
 ## Setting up in Intellij
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
