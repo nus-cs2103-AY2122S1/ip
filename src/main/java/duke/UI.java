@@ -19,33 +19,12 @@ public class UI {
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Prints the welcome message when the program starts.
-     */
-    public void showWelcome() {
-        System.out.println("Hello from\n" + LOGO);
-        showLine();
-        System.out.println("Hello I'm Duke\nWhat can I do for you?\n");
-        showLine();
-    }
-
-    /**
      * Returns the welcome message when the program starts.
      *
      * @return Welcome message.
      */
     public String welcomeResponse() {
-        System.out.println("Hello from\n" + LOGO);
-        showLine();
-        System.out.println("Hello I'm Duke\nWhat can I do for you?\n");
-        showLine();
         return "Hello from\n" + LOGO + "\n\nHello I'm Duke\nWhat can I do for you?\n";
-    }
-
-    /**
-     * Prints the divider line.
-     */
-    public void showLine() {
-        System.out.print(DIVIDER);
     }
 
     /**
@@ -116,14 +95,5 @@ public class UI {
      */
     public void showError(String message) {
         System.out.println(message);
-    }
-
-    /**
-     * Returns the command input by the user.
-     *
-     * @return command input by the user.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }

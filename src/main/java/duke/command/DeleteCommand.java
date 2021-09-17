@@ -20,7 +20,6 @@ public class DeleteCommand extends Command {
      * @param index The index of the command to be deleted in the list.
      */
     public DeleteCommand(int index) {
-        super(false);
         this.index = index;
     }
 

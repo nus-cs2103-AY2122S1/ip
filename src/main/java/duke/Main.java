@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.*;
 import java.io.IOException;
 
 import duke.gui.MainWindow;
@@ -29,5 +28,12 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        //When platform.exit() is called, stop() will be called
+        System.out.println("Application is closed");
     }
 }

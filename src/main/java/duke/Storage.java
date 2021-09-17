@@ -43,10 +43,52 @@ public class Storage {
      * @throws DukeException If something wrong happens.
      */
     public ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        File dataFile = getDataFile();
+
+        try {
+            Scanner f = new Scanner(dataFile);
+
+            while (f.hasNext()) {
+                addTaskToList(tasks, f.nextLine());
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new DukeException("OOPS!! Something went wrong");
+        }
+
+        return tasks;
+    }
+
+    private void addTaskToList(ArrayList<Task> tasks, String entry) throws DukeException {
+        Task t = createTask(entry);
+        tasks.add(t);
+    }
+
+    private Task createTask(String entry) throws DukeException {
+        String[] task = entry.split("/");
+
+        String taskType = task[0];
+        boolean isDone = (Integer.parseInt(task[1]) == 1);
+        String description = task[2];
+        String time = task.length == 4 ? task[3] : null;
+
+        switch (taskType) {
+        case "T":
+            return new TodoTask(description, isDone);
+        case "D":
+            return new DeadlineTask(description, isDone, time);
+        case "E":
+            return new EventTask(description, isDone, time);
+        default :
+            throw new DukeException("OOPS!! Something went wrong");
+        }
+    }
+
+    private File getDataFile() throws DukeException {
         File directory = new File(directoryPath);
         File dataFile = new File(filePath);
-
-        ArrayList<Task> tasks = new ArrayList<>();
 
         try {
             if (!directory.exists()) {
@@ -59,29 +101,7 @@ public class Storage {
             throw new DukeException("OOPS!! Something went wrong");
         }
 
-        try {
-            Scanner f = new Scanner(dataFile);
-
-            while (f.hasNext()) {
-                String[] task = f.nextLine().split("/");
-
-                String taskType = task[0];
-                boolean isDone = (Integer.parseInt(task[1]) == 1);
-                String description = task[2];
-                String time = task.length == 4 ? task[3] : null;
-
-                if (taskType.equals("T")) {
-                    tasks.add(new TodoTask(description, isDone));
-                } else if (taskType.equals("D")) {
-                    tasks.add(new DeadlineTask(description, isDone, time));
-                } else {
-                    tasks.add(new EventTask(description, isDone, time));
-                }
-            }
-        } catch (FileNotFoundException e) {
-            throw new DukeException("OOPS!! Something went wrong");
-        }
-        return tasks;
+        return dataFile;
     }
 
     /**
@@ -95,6 +115,12 @@ public class Storage {
 
         ArrayList<Task> listOfTasks = tasks.getListOfTasks();
 
+        writeTasksToFile(fw, listOfTasks);
+
+        fw.close();
+    }
+
+    private void writeTasksToFile(FileWriter fw, ArrayList<Task> listOfTasks) throws IOException {
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task t = listOfTasks.get(i);
 
@@ -103,6 +129,7 @@ public class Storage {
             String isDone = t.getStatusIcon().equals("X") ? "1" : "0";
 
             String line = type + "/" + isDone + "/" + description;
+
             if (type.equals("D")) {
                 DeadlineTask dt = (DeadlineTask) t;
                 line += "/" + dt.getTime();
@@ -113,7 +140,5 @@ public class Storage {
             line += "\n";
             fw.write(line);
         }
-
-        fw.close();
     }
 }
