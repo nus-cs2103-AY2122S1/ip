@@ -6,10 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import myjournal.exception.EmptyDescriptionException;
-import myjournal.exception.InvalidCommandException;
-import myjournal.exception.InvalidTaskNumberException;
-import myjournal.exception.InvalidTypeException;
+import myjournal.exception.*;
 import myjournal.task.Deadline;
 import myjournal.task.Event;
 import myjournal.task.Task;
@@ -53,16 +50,8 @@ public class Parser {
             default:
                 throw new InvalidCommandException("OOPS!!! Please enter a valid command!");
             }
-        } catch (InvalidTypeException e) {
+        } catch (MyJournalException | DateTimeParseException e) {
             return e.toString();
-        } catch (InvalidTaskNumberException e) {
-            return e.toString();
-        } catch (EmptyDescriptionException e) {
-            return e.toString();
-        } catch (InvalidCommandException e) {
-            return e.toString();
-        } catch (DateTimeParseException exception) {
-            return exception.toString();
         }
     }
 
