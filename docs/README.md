@@ -1,4 +1,6 @@
-# User Guide: That time I created a Chat Bot named myself because Singaporean keep f**king mispronounce it and butcher it in front of me
+# User Guide: That time I created a Chat Bot named myself because Singaporeans keep f**king mispronounce and butcher it in front of me
+
+Insert title here
 
 ## Menu
 
@@ -62,6 +64,12 @@ and see the shortened-version of this User Guide. At your Service!
 Syntax: `help`
 
 Expected outcome: Shortened user guide to detail all command syntax for DuC
+
+```
+Welcome to DuC!
+Here is a comprehensive list of command you can use:
+...
+```
 
 </br>
 
@@ -145,7 +153,7 @@ Example of usage:
 Expected outcome: The specified task in the list is marked as completed, with an X being checked beside.
 
 ```
-Nice! I've marked this task as done:
+Okay, I've marked this task as done:
 [D][X] CS2103T IP Submission (by Sep 17 2021)
 ```
 
@@ -168,7 +176,7 @@ Example of usage:
 Expected outcome: The task given at the specified index number is changed accordingly to the new task
 
 ```
-Noted, I have updated the task at position 1 as:
+Deal, I have updated the task at position 1 as:
 [T][ ] run at least 3km
 ```
 
