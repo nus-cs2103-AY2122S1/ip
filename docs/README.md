@@ -37,6 +37,7 @@ The task `buy groceries` has been added to the list.
 <img src ="/src/main/resources/images/todo.png?raw=true" width = "500" height = "300">
 
 
+
 ### Adding a deadline : `deadline`
 
 Adds a deadline to be completed by a certain date and time to the list.
@@ -56,6 +57,7 @@ The deadline `finish iP` to be completed by the given date and time has been add
 <img src ="/src/main/resources/images/deadline.png?raw=true" width = "500" height = "300">
 
 
+
 ### Adding an event : `event`
 Adds an event schedules for a certain date and time to the list.
 
@@ -73,6 +75,8 @@ The `project meeting` event scheduled for the given date and time has been added
 
 <img src ="/src/main/resources/images/event.png?raw=true" width = "500" height = "300">
 
+
+
 ### Deleting a task : `delete`
 Deletes the specified task from the list.
 
@@ -88,6 +92,8 @@ The `4th` item in the task list is deleted.
 
 <img src ="/src/main/resources/images/delete.png?raw=true" width = "500" height = "300">
 
+
+
 ### Finding a task : `find`
 Displays all tasks containing the specified keyword.
 
@@ -100,6 +106,8 @@ Expected outcome:
 List of tasks that contains the word `quiz`
 
 <img src ="/src/main/resources/images/find.png?raw=true" width = "500" height = "300">
+
+
 
 ### Marking a task as done : `done`
 Marks specified task in the list as done.
@@ -114,6 +122,8 @@ The `3rd` item in the task list is marked as done.
 
 <img src ="/src/main/resources/images/done.png?raw=true" width = "500" height = "300">
 
+
+
 ### Listing existing tasks : `list`
 Displays all the tasks currently present in the list.
 
@@ -127,6 +137,8 @@ The current list of tasks is displayed.
 
 <img src ="/src/main/resources/images/list.png?raw=true" width = "500" height = "300">
 
+
+
 ### Viewing command help : `help`
 Shows syntax and purpose of the specified command.
 
@@ -139,6 +151,8 @@ Expected outcome:
 The syntax and purpose of the find command is displayed.
 
 <img src ="/src/main/resources/images/help.png?raw=true" width = "500" height = "300">
+
+
 
 ### Saving the data 
 The tasks in the hard disk are saved automatically whenever the task list changes and the data from the hard disk when Blitz starts up. There is no need to save manually.
