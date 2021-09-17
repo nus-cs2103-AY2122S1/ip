@@ -22,7 +22,7 @@ Random title inserted
 3. Command Summary
    - [Summary table](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#command-summary)
 
-</br>
+
 
 ## Features 
 
