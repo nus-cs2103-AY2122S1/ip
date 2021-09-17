@@ -70,6 +70,8 @@ public class Storage {
                 String description = task[2];
                 String time = task.length == 4 ? task[3] : null;
 
+                assert taskType.equals("T") || taskType.equals("D") || taskType.equals("E"): "invalid task type";
+
                 if (taskType.equals("T")) {
                     tasks.add(new TodoTask(description, isDone));
                 } else if (taskType.equals("D")) {
@@ -101,6 +103,8 @@ public class Storage {
             String type = t.getType();
             String description = t.getDescription();
             String isDone = t.getStatusIcon().equals("X") ? "1" : "0";
+
+            assert type.equals("T") || type.equals("D") || type.equals("E"): "invalid task type";
 
             String line = type + "/" + isDone + "/" + description;
             if (type.equals("D")) {
