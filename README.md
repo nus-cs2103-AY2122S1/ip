@@ -1,29 +1,16 @@
-# Duke project template
+# Duke 
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are
-instructions on how to use it.
+Duke is a simple task manager.
 
-## Setting up in Intellij
+This is a greenfield Java project. It's named after the Java mascot _Duke_. 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Setting Up
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project
-   first)
-1. Open the project into Intellij as follows:
-    1. Click `Open`.
-    1. Select the project directory, and click `OK`.
-    1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained
-   in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code
-   editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the
-   below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. Download `duke.jar` from the latest releases.
+2. Move the `jar` file into the folder where you want to store your tasks.
+3. Run `duke.jar`.
+
+### Credits
+
+- Images of [Dwight](https://www.pngaaa.com/search/dwight-schrute-png/) and [Michael](https://styles.redditmedia.com/t5_qzkjb/styles/profileIcon_x4tw9ulkwsx11.jpg?width=256&height=256&crop=256:256,smart&s=e5c348696cd5182ad92527307b3dc8dc4e48880b) (from the TV show The Office).
+- [JavaFX tutorial](https://se-education.org/guides/tutorials/javaFx.html) from SE-EDU
