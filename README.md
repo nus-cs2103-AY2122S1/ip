@@ -25,6 +25,24 @@ public static void main(String[] args) {
 }
 ```
 
-2. Enjoy the bot!
+2. Write the command in the input box:
+
+**Displaying all tasks**
+* `ls`
+
+**Adding a task**
+* `todo [task description]\n`
+* `deadline [task description] /by [date and/or time]`
+* `event [task description] /at [date and/or time]`
+
+**Deleting a task/Marking a task as done**
+* display all task
+* `delete [the task number]`
+
+**Finding a task**
+* `find [keyword(s)]`
+
+**Undoing a command**
+* `undo`
 
 What are you waiting for? Download it here! [click me](https://github.com/nataniayp/ip)
