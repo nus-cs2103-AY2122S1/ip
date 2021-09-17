@@ -144,7 +144,6 @@ public class TaskDialog extends Dialog {
      * @throws DialogException dialog cannot have the same id while the app is running.
      */
     public String markTaskAsDone(int index) throws DialogException {
-        assert index < 0 || index > this.taskList.length() : "Index out of bound";
         Task task = taskList.get(index);
         task.markAsDone();
         String id = "markAsDone" + task.hashCode();
@@ -165,7 +164,6 @@ public class TaskDialog extends Dialog {
      * @throws DialogException dialog cannot have the same id while the app is running.
      */
     public String deleteTaskByIndex(int index) throws DialogException {
-        assert index < 0 || index > this.taskList.length() : "Index out of bound";
         Task task = taskList.get(index);
         taskList.remove(index);
         String id = "remove" + task.hashCode();

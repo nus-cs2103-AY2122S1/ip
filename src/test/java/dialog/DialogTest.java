@@ -11,11 +11,7 @@ import dialog.exceptions.DialogException;
 public class DialogTest {
     @Test
     public void generateTest() throws DialogException {
-        String expected =
-            "    ____________________________________________________________\n"
-                + "    test1\n"
-                + "    test2\n"
-                + "    ____________________________________________________________";
+        String expected = "test1\n" + "test2\n";
         Dialog testDialog = Dialog.generate("generateTest");
         testDialog.add("test1");
         testDialog.add("test2");
@@ -47,10 +43,7 @@ public class DialogTest {
         Dialog testDialog = Dialog.generate("getTest");
         testDialog.add("sentences");
 
-        String expectedMessage =
-            "    ____________________________________________________________\n"
-                + "    sentences\n"
-                + "    ____________________________________________________________";
+        String expectedMessage = "sentences\n";
 
         assertEquals(Dialog.get("getTest").toString(), expectedMessage);
     }

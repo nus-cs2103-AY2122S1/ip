@@ -10,24 +10,24 @@ This User Guide contains:
 
     **Alice Start Page**
 
-    - [x]  Create, Open, Delete multiple save files for different occasions
-    - [x]  Navigating to different save files
+    -   Create, Open, Delete multiple save files for different occasions
+    -   Navigating to different save files
 
     ---
 
     **Alice Chat Page**
 
-    - [x]  Add **Todo** task
-    - [x]  Add **event** task
-    - [x]  Add **deadline** task
-    - [x]  Mark task as done
-    - [x]  Delete task
-    - [x]  Search certain tasks using date to find upcoming task till that date
-    - [x]  Search certain tasks using "keywords"
-    - [x]  Teach Alice to learn how to respond to certain vocabulary or sentences
-    - [x]  Tell Alice to unlearn certain vocabulary or sentences
-    - [x]  Asking Alice to list out all the commands
-    - [x]  Saving file and continue editing other save files
+    -   Add **Todo** task
+    -   Add **event** task
+    -   Add **deadline** task
+    -   Mark task as done
+    -   Delete task
+    -   Search certain tasks using date to find upcoming task till that date
+    -   Search certain tasks using "keywords"
+    -   Teach Alice to learn how to respond to certain vocabulary or sentences
+    -   Tell Alice to unlearn certain vocabulary or sentences
+    -   Asking Alice to list out all the commands
+    -   Saving file and continue editing other save files
 
 ## **Features:**
 
