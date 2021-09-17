@@ -12,6 +12,14 @@ import javafx.scene.layout.VBox;
 
 public class UserInteraction {
 
+    /**
+     * Handles the input provided by the user in the text box
+     *
+     * @param userInput TextField that houses user input
+     * @param dialogContainer The vertical box holding UI elements
+     * @param duke Display image of the duke bot
+     * @param user Display image of the user
+     */
     public static void handleUserInput(TextField userInput
             , VBox dialogContainer, Image duke, Image user) {
         String userMsg = userInput.getText();
@@ -28,6 +36,14 @@ public class UserInteraction {
         }
     }
 
+    /**
+     * Handles program termination, trigerred by the user typing bye
+     *
+     * @param userInput TextField that houses user input
+     * @param dialogContainer The vertical box holding UI elements
+     * @param duke Display image of the duke bot
+     * @param user Display image of the user
+     */
     public static void exitHandler(TextField userInput
             , VBox dialogContainer, Image duke, Image user) {
         Label goodbye = new Label("Ram Ram!");
@@ -40,11 +56,24 @@ public class UserInteraction {
         Platform.exit();
     }
 
+    /**
+     * Returns the response of the bot for a particular user input.
+     *
+     * @param input The srting value of the input provided by user
+     * @return The return generated in response to user's input
+     */
     private static String getResponse(String input) {
         DukeMessage msg = MessageFactory.createMessage(input);
         return msg.createMessageString();
     }
 
+    /**
+     * Handles the beginning of the program, greets user with a
+     * welcome message.
+     *
+     * @param dialogContainer The vertical box holding UI elements
+     * @param duke Display image of the duke bot
+     */
     public static void greetUser(VBox dialogContainer, Image duke) {
         Label greet = new Label("Namaste chacha!\nKaise yaad kiye humko?");
         dialogContainer.getChildren().addAll(
