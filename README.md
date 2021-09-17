@@ -14,7 +14,7 @@ The project is named after the Java mascot _Duke_. It builds upon a template for
 ## Quick set-up
 
 The set-up is easy. Simply,
-1. Download the jar file [here](https://github.com/botr99/ip/releases/tag/v0.2).
+1. Download the jar file [here](https://github.com/botr99/ip/releases/tag/A-Release).
 2. Copy the jar file into an *empty* folder.
 3. Open a terminal at that folder.
 4. Run `java -jar duke.jar` and you are good to go! 😎
