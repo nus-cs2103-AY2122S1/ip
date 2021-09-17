@@ -165,7 +165,7 @@ Displays tasks with similar string of letters along with their index in the list
 Are these the tasks you're looking for?
 ```
 
-### `Undo` - Undoes the last command
+### `Undo` - Undoes the last command which affected the list
 
 Example of usage:
 
@@ -175,7 +175,7 @@ undo
 
 Expected outcome:
 
-Undoes the last command.
+Undoes the last command which affected the list if there was any.
 
 ```
 Undone!
@@ -201,9 +201,9 @@ Undo again would result in:
 3.[E][X] bread sale (at: when its dark outside)
 ```
 
-If the previous command did not change the list, undo would result in no change.
+If there are no previous commands which change the list, undo would result in no change.
 
-### `Exit` - Exits the application
+### `Bye` - Exits the application
 
 Example of usage:
 
