@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -82,6 +83,16 @@ public class Ui {
      */
     public String showFilteredTaskList(TaskList tasks) {
         return "Here are the matching tasks in your list:\n" + tasks;
+    }
+
+    /**
+     * Returns a message confirming tasks were archived successfully.
+     *
+     * @param filename Name of file where archived tasks will be stored.
+     * @return Message confirming tasks were archived successfully.
+     */
+    public String showTasksArchivedMessage(String filename) {
+        return "Your tasks have been archived to " + Storage.DIR_PATH + "/" + filename;
     }
 
     /**
