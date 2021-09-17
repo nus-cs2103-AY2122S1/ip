@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import duke.command.CommandEnum;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,19 +19,19 @@ import duke.task.Todo;
 public class TaskList {
 
     private static final String MESSAGE_LIST = "Here are the tasks in your list:";
-    private static final String MESSAGE_LIST_EMPTY = "There are no tasks in your list! ☹";
+    private static final String MESSAGE_LIST_EMPTY = "There are no tasks in your list!";
     private static final String MESSAGE_SAVE = "Saved the file successfully! The following is saved:\n";
     private static final String MESSAGE_RESET = "All your tasks have been reset!";
     private static final String MESSAGE_FIND = "I found your tasks!";
-    private static final String MESSAGE_FIND_EMPTY = "No tasks were found with this description! ☹";
-    private static final String MESSAGE_FIND_LIST_EMPTY = "There are no tasks in your list to find! ☹";
-    
-    private static final String ERROR_UNKNOWN_FILE_COMMAND = "☹ OOPS!!! The saved file might be corrupted!";
-    private static final String ERROR_TODO_MISSING_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
-    private static final String ERROR_DELETE_INVALID_INDEX = "☹ OOPS!!! Please state a valid index to delete!";
-    private static final String ERROR_DONE_INVALID_INDEX = "☹ OOPS!!! Please use a valid indexed task to mark as done";
-    private static final String ERROR_SAVE = "☹ OOPS!!! I am unable to save the file for an unknown reason!";
-    private static final String ERROR_ADD = "☹ OOPS!!! I am unable to add your task for an unknown reason!";
+    private static final String MESSAGE_FIND_EMPTY = "No tasks were found with this description!";
+    private static final String MESSAGE_FIND_LIST_EMPTY = "There are no tasks in your list to find!";
+    private static final String MESSAGE_HELP = "Here is a list of the current commands that are available!";
+
+    private static final String ERROR_UNKNOWN_FILE_COMMAND = "OOPS!!! The saved file might be corrupted!";
+    private static final String ERROR_DELETE_INVALID_INDEX = "OOPS!!! Please state a valid index to delete!";
+    private static final String ERROR_DONE_INVALID_INDEX = "OOPS!!! Please use a valid indexed task to mark as done";
+    private static final String ERROR_SAVE = "OOPS!!! I am unable to save the file for an unknown reason!";
+    private static final String ERROR_ADD = "OOPS!!! I am unable to add your task for an unknown reason!";
 
     private List<Task> taskArray;
 
@@ -87,6 +88,10 @@ public class TaskList {
         return Formatter.getNumberedListResponse(MESSAGE_LIST, taskArray);
     }
 
+    public String handleHelp() {
+        return Formatter.getNumberedListResponse(MESSAGE_HELP, Arrays.asList(CommandEnum.getListOfCommands()));
+    }
+
     /**
      * Adds the tasks to the list and prints the add message.
      *
@@ -110,9 +115,6 @@ public class TaskList {
      */
     public String handleAddToDo(String[] commands) throws DukeException {
         String newTaskDescription = Formatter.getTaskName(commands);
-        if (newTaskDescription.equals("")) {
-            return Formatter.getResponseString(ERROR_TODO_MISSING_DESCRIPTION);
-        }
         Todo newTask = new Todo(newTaskDescription);
         return handleAddHelper(newTask);
     }
@@ -211,13 +213,6 @@ public class TaskList {
         }
 
         return Formatter.getNumberedListResponse(MESSAGE_FIND, tasksFound);
-    }
-
-    public String handleHelp() {
-        List<String> output = new ArrayList<>();
-        output.add("Here is a list of the current commands that are available!");
-        output.addAll(Arrays.asList(Duke.getListOfCommands()));
-        return Formatter.getResponseString(output);
     }
     
     /**

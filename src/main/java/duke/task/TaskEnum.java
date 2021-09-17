@@ -10,7 +10,7 @@ public enum TaskEnum {
     TODO("todo"), EVENT("event"), DEADLINE("deadline");
 
     private final String taskType;
-    private static final String ERROR_INVALID_TASK_COMMAND = "☹ OOPS!!! This is an invalid task type.";
+    private static final String ERROR_INVALID_TASK_COMMAND = "OOPS!!! This is an invalid task type.";
 
     TaskEnum(String taskType) {
         this.taskType = taskType;

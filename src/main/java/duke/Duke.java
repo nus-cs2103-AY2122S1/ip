@@ -3,7 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import duke.command.CommandEnum;
 import duke.exception.DukeException;
@@ -12,12 +11,12 @@ public class Duke {
     
     private static final String STORAGE_DIRECTORY = "FergusChatBot.txt";
 
-    private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded :)";
+    private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded. Enter 'list' to view";
     private static final String READ_FAILURE = "No saved file has been found :(";
 
     private static final List<String> GREETING = new ArrayList<>(Arrays.asList("Hello! I'm Fergus' Chatbot!", "What can I do for you?"));
     private static final String FAREWELL = "Bye. Hope to see you again soon! The program will close in 3 seconds!";
-    private static final String ERROR_UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String ERROR_UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private Storage storage;
     private TaskList taskArray;
@@ -119,17 +118,6 @@ public class Duke {
             startMessage.add(READ_SUCCESS);
         }
         return Formatter.getResponseString(startMessage);
-    }
-
-    public static String[] getListOfCommands() {
-        List<CommandEnum> listOfCommands = Arrays.asList(CommandEnum.values());
-        List<String> listOfStringCommands = listOfCommands
-            .stream()
-            .map(CommandEnum::toString)
-            .collect(Collectors.toList());
-        String[] result = new String[listOfStringCommands.size()];
-        Arrays.setAll(result, listOfStringCommands::get);
-        return result;
     }
 
 }

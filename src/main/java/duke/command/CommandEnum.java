@@ -1,5 +1,9 @@
 package duke.command;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exception.DukeException;
 
 public enum CommandEnum {
@@ -21,7 +25,7 @@ public enum CommandEnum {
     TODO("todo");
 
     private final String commandType;
-    private static final String ERROR_INVALID_COMMAND_TYPE = "☹ OOPS!!! This is an invalid command type.";
+    private static final String ERROR_INVALID_COMMAND_TYPE = "OOPS!!! This is an invalid command type.";
 
     CommandEnum(String commandType) {
         this.commandType = commandType;
@@ -39,6 +43,17 @@ public enum CommandEnum {
             }
         }
         throw new DukeException(ERROR_INVALID_COMMAND_TYPE);
+    }
+
+    public static String[] getListOfCommands() {
+        List<CommandEnum> listOfCommands = Arrays.asList(CommandEnum.values());
+        List<String> listOfStringCommands = listOfCommands
+            .stream()
+            .map(CommandEnum::toString)
+            .collect(Collectors.toList());
+        String[] result = new String[listOfStringCommands.size()];
+        Arrays.setAll(result, listOfStringCommands::get);
+        return result;
     }
 
 }
