@@ -33,8 +33,6 @@ Creates a task of name `TASKNAME`.
 
 Usage: `deadline TASKNAME /by DEADLINE`
 
-Remarks: `DEADLINE` if placed in the YYYY-MM-DD format translates to the alphabetical version.
-
 Creates a task of name `TASKNAME` by `DEADLINE`.
 
 <hr />
@@ -42,8 +40,6 @@ Creates a task of name `TASKNAME` by `DEADLINE`.
 - #### `event` - Adds a task with specific event details
 
 Usage: `event TASKNAME /at EVENT_DETAILS`
-
-Remarks: `EVENT_DETAILS` if placed in the YYYY-MM-DD format translates to the alphabetical version.
 
 Creates a task of name `TASKNAME` at `EVENT_DETAILS`.
 
