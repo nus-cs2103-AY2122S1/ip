@@ -88,8 +88,7 @@ Format: `done INDEX`
 
 Examples:
 - `list` followed by `done 2` marks the 2nd task in the task list as done.
-- `find read` followed by `done 1` marks the 1st task in the task list as done, **NOT** in the results of the find 
-- command.
+- `find read` followed by `done 1` marks the 1st task in the task list as done, **NOT** in the results of the find command.
 
 ### Deleting a task: `delete`
 Deletes the task with the given index from the task list.
@@ -101,8 +100,7 @@ Format: `delete INDEX`
 
 Examples:
 - `list` followed by `delete 2` deletes the 2nd task from the task list.
-- `find read` followed by `delete 1` deletes the 1st task from the task list, **NOT** from the results of the find 
-- command.
+- `find read` followed by `delete 1` deletes the 1st task from the task list, **NOT** from the results of the find command.
 
 ### Finding task(s) by keyword: `find`
 Finds task(s) which contain(s) the given keyword.
@@ -136,7 +134,7 @@ Action | Format, Examples
 **Event** | `event TASK_DESCRIPTION /at DATE` e.g. `event go party /at midnight`
 **Deadline** | `deadline TASK_DESCRIPTION /by DATE` e.g. `deadline submit assignment /by 2020-09-16`
 **Done** | `done INDEX` e.g. `done 1`
-**Delete** | `delete INDEX` e.g. delete 2`
+**Delete** | `delete INDEX` e.g. `delete 2`
 **Find** | `find KEYWORD` e.g. `find read`
 **Sort** | `sort`
 **Exit** | `bye`
