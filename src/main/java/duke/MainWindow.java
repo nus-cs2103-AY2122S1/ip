@@ -16,6 +16,9 @@ import java.util.TimerTask;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final int TIMER_DELAY = 700;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,8 +33,6 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    private final int TIMER_DELAY = 700;
 
     /**
      * Displays greeting message to user upon program starting.

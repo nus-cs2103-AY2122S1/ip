@@ -11,9 +11,10 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
 
+    private static final int LENGTH_OF_BY = 4;
+    private static final int LENGTH_OF_AT = 4;
+
     private ArrayList<Task> taskList;
-    private final int LENGTH_OF_BY = 4;
-    private final int LENGTH_OF_AT = 4;
 
     /**
      * Converts the ArrayList of task strings to Task objects stored in the ArrayList of tasks.
@@ -33,8 +34,8 @@ public class TaskList {
      *
      * @param searchTerm user wants to find all tasks that have descriptions matching user's search term.
      * @param ui handles interactions with user by printing the appropriate messages.
-     * @return all tasks that match user's search term
-     * @throws DukeException if search term is not given alongside the find command
+     * @return all tasks that match user's search term.
+     * @throws DukeException if search term is not given alongside the find command.
      * in the following format: find searchterm.
      */
     public String find(String searchTerm, Ui ui) throws DukeException {
@@ -49,7 +50,7 @@ public class TaskList {
                     .filter(task -> task.toString().contains(searchTerm))
                     .collect(Collectors.toList());
             //@@author
-            return ui.showMatchingTasks(new ArrayList<Task>(matchingTaskList));
+            return ui.showMatchingTasks(new ArrayList<>(matchingTaskList));
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Please provide a search term after the find command in the following format:"
                     + " find searchterm");
@@ -63,7 +64,7 @@ public class TaskList {
      * @param num denotes the position of the task in the task list (if counting from 1).
      * @param storage handles updating the specified task from the disk as done.
      * @param ui handles interactions with user by printing the appropriate messages.
-     * @return task that was marked done
+     * @return task that was marked done.
      * @throws DukeException if number given is not within the total number of tasks or done command does not follow
      * the format: done number.
      */
@@ -92,8 +93,8 @@ public class TaskList {
      * @param num denotes the position of the task in the task list (if counting from 1).
      * @param storage handles deleting the specified task from the disk.
      * @param ui handles interactions with user by printing the appropriate messages.
-     * @return task that was deleted and the number of remaining tasks in the task list
-     * @throws DukeException if number given is not within the total number of tasks or delete command
+     * @return task that was deleted and the number of remaining tasks in the task list.
+     * @throws DukeException if number given is not within the total number of tasks or delete command.
      * does not follow the format: delete number.
      */
     public String delete(String num, Storage storage, Ui ui) throws DukeException {

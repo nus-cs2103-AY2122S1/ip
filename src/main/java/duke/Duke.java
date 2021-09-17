@@ -7,16 +7,16 @@ public class Duke {
 
     private static final String FILEPATH = "data/duke.txt";
 
+    private static final int FIND_INPUT_START_INDEX = 5;
+    private static final int DELETE_INPUT_START_INDEX = 7;
+    private static final int DONE_INPUT_START_INDEX = 5;
+    private static final int TODO_INPUT_START_INDEX = 5;
+    private static final int DEADLINE_INPUT_START_INDEX = 9;
+    private static final int EVENT_INPUT_START_INDEX = 6;
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private final int FIND_INPUT_START_INDEX = 5;
-    private final int DELETE_INPUT_START_INDEX = 7;
-    private final int DONE_INPUT_START_INDEX = 5;
-    private final int TODO_INPUT_START_INDEX = 5;
-    private final int DEADLINE_INPUT_START_INDEX = 9;
-    private final int EVENT_INPUT_START_INDEX = 6;
 
     /**
      * Creates Ui and Storage instances.
@@ -42,8 +42,8 @@ public class Duke {
     /**
      * Parses user's input and returns the appropriate message.
      *
-     * @param userInput
-     * @return appropriate message based on user's input
+     * @param userInput is user's input that they enter into program.
+     * @return appropriate message based on user's input.
      */
     public String run(String userInput) {
         try {

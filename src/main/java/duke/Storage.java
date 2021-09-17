@@ -54,7 +54,7 @@ public class Storage {
                 return taskStrings;
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
         }
 
         return taskStrings;
@@ -73,7 +73,7 @@ public class Storage {
             fw.write("\n");
             fw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class Storage {
             Files.write(path, lines, StandardCharsets.UTF_8);
             //@@author
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
         }
 
     }
@@ -112,7 +112,7 @@ public class Storage {
             lines.remove(lineNumber);
             Files.write(path, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
         }
     }
 }

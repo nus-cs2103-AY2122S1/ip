@@ -21,19 +21,22 @@ import java.util.Collections;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final int TOP_PADDING = 5;
+    private static final int RIGHT_PADDING = 10;
+    private static final int BOTTOM_PADDING = 5;
+    private static final int LEFT_PADDING = 10;
+    private static final int DUKE_BOX_AND_IMAGE_DISTANCE = 5;
+
+    private static final String DUKE_BG_COLOR = "#444444";
+    private static final int DUKE_BG_RADIUS = 20;
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private final int TOP_PADDING = 5;
-    private final int RIGHT_PADDING = 10;
-    private final int BOTTOM_PADDING = 5;
-    private final int LEFT_PADDING = 10;
-    private final int DUKE_BOX_AND_IMAGE_DISTANCE = 5;
 
-    private final String DUKE_BG_COLOR = "#444444";
-    private final int DUKE_BG_RADIUS = 20;
 
     private DialogBox(String text, Image img) {
         try {
@@ -75,9 +78,9 @@ public class DialogBox extends HBox {
     /**
      * Creates a dialog box to represent user information.
      *
-     * @param text represents input shown by user
-     * @param img represents picture of user
-     * @return dialog box containing user's message and picture
+     * @param text represents input shown by user.
+     * @param img represents picture of user.
+     * @return dialog box containing user's message and picture.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
@@ -88,9 +91,9 @@ public class DialogBox extends HBox {
     /**
      * Creates a dialog box to represent program information.
      *
-     * @param text represents message shown by program
-     * @param img represents picture of program
-     * @return dialog box containing program's message and picture
+     * @param text represents message shown by program.
+     * @param img represents picture of program.
+     * @return dialog box containing program's message and picture.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

@@ -17,7 +17,8 @@ public class Main extends Application {
 
     /**
      * Loads MainWindow onto stage.
-     * @param stage represents main window in program
+     *
+     * @param stage represents main window in program.
      */
     @Override
     public void start(Stage stage) {

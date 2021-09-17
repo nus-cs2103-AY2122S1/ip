@@ -5,11 +5,12 @@ package duke;
  */
 public abstract class Task {
 
+    protected static final String NOT_DONE_STRING = "0";
+    protected static final int DONE = 1;
+    protected static final int NOT_DONE = 0;
+
     protected String description;
     protected boolean isDone;
-    protected final String NOT_DONE_STRING = "0";
-    protected final int DONE = 1;
-    protected final int NOT_DONE = 0;
 
     /**
      * Initialises Task object with a description and default undone status.
