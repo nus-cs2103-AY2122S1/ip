@@ -11,7 +11,7 @@ public class Ui {
     public void displayWelcomeMessage() {
         System.out.println(lineBreak
                 + "\n"
-                + "Hello! I'm Azure.\n"
+                + "Hello! I'm Duke.\n"
                 + "How can I help you today?\n"
                 + lineBreak + "\n"
                 + "You can create Tasks here.\n"

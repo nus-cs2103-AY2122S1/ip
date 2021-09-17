@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -16,26 +17,28 @@ import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private final File dataFile;
-    private final File dataFolder;
-    private final File dukeFolder;
     private final String filePath;
+//    private final File dataFolder;
+//    private final File dukeFolder;
 
     public Storage(String filePath) {
-        this.dataFile = new File(filePath); // "./duke/data/data.txt"
-        this.dukeFolder = new File(filePath.substring(0, 6)); // "./duke"
-        this.dataFolder = new File(filePath.substring(0, 11)); // "./duke/data"
+        this.dataFile = new File(filePath); // "./data/data.txt"
         this.filePath = filePath;
+//        this.dukeFolder = new File(filePath.substring(0, 6)); // "./duke"
+//        this.dataFolder = new File(filePath.substring(0, 11)); // "./duke/data"
     }
 
     public void loadInto(TaskList taskList) {
 
-        String dataPath = "./duke/data/data.txt";
+        String dataPath = "./data/data.txt";
 
         try {
             Path path = Paths.get(dataPath);
             Files.createDirectories(path.getParent());
             Files.createFile(path);
             System.out.println("Directories for data.txt is created.");
+        } catch (FileNotFoundException e) {
+            System.out.println("data.txt already exists.");
         } catch (IOException e) {
             System.out.println("Failed to create data directories" + e.getMessage());
         }
@@ -153,7 +156,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("data.txt is not found.");
+            System.out.println("data.txt is not found." + e.getMessage());
         }
     }
 

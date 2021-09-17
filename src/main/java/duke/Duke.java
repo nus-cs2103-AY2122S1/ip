@@ -1,3 +1,4 @@
+package duke;
 import duke.components.Parser;
 import duke.components.Storage;
 import duke.components.Ui;
@@ -51,6 +52,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./duke/data/data.txt").run();
+        new Duke("./data/data.txt").run();
     }
 }
