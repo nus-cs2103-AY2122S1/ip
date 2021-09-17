@@ -1,7 +1,6 @@
 package skeltal;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ import skeltal.task.types.ToDo;
  * A class to handle the loading and storage of the list of tasks.
  */
 public class Storage {
-    final public static String SKELTAL_PATH = "src/main/Data/skeltal.txt";
-    final public static String EXPENSE_PATH = "src/main/Data/expense.txt";
+    public static final String SKELTAL_PATH = "./src/main/data/skeltal.txt";
+    public static final String EXPENSE_PATH = "./src/main/data/expense.txt";
 
     public static SkeltalFunction<String, Task> wrappedStringToTask = new SkeltalFunction<String, Task>() {
         @Override
@@ -36,6 +35,7 @@ public class Storage {
             return stringToExpense(data);
         }
     };
+
     /**
      * Loads the txt file of the list of tasks from the specified path.
      *
@@ -43,30 +43,26 @@ public class Storage {
      * @param path       The path of the file to load from.
      * @param loadFormat The wrapped function to use to convert a String
      *                   to a type T object.
-     * @return A Pair<ArrayList<T>, String> of Tasks representative of the
-     * ArrayList and Skeltal's response to the user.
+     * @return A Pair of Tasks representative of the
+     * arrayList and Skeltal's response to the user.
      */
     public static <T> Pair<ArrayList<T>, String> loadFile(String path, SkeltalFunction<String, T> loadFormat) {
         ArrayList<T> arrayList = new ArrayList<>();
         String reply = "";
         try {
             File taskFile = new File(path);
+            createFileIfNone(taskFile);
             Scanner sc = new Scanner(taskFile);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 T task = loadFormat.apply(data);
                 arrayList.add(task);
             }
-        } catch (FileNotFoundException e) {
-            reply = "No existing tasks can be found! Creating a new list for you :)";
-            File taskFile = new File(path);
-            try {
-                taskFile.mkdir();
-                taskFile.createNewFile();
-            } catch (IOException ioException) {
-                reply = "List could not be created :(";
-            }
+        } catch (IOException io) {
+            System.out.println(io);
+            throw new SkeltalException(io.getMessage());
         } catch (SkeltalException e) {
+            System.out.println(e);
             reply = e.getMessage();
         } finally {
             reply = "Saved tasks have been loaded into the skeltal system!";
@@ -84,6 +80,8 @@ public class Storage {
     public static String write(String path, String classType) throws SkeltalException {
         try {
             String reply = "";
+            File taskFile = new File(path);
+            createFileIfNone(taskFile);
             FileWriter fw = new FileWriter(path, false);
             if (classType.equals("task")) {
                 fw.write(TaskList.tasksToFileFormat());
@@ -142,6 +140,11 @@ public class Storage {
         return Expense.of(formattedData);
     }
 
-
+    private static void createFileIfNone(File taskFile) throws IOException {
+        if (!taskFile.exists()) {
+            taskFile.getParentFile().mkdirs();
+            taskFile.createNewFile();
+        }
+    }
 
 }

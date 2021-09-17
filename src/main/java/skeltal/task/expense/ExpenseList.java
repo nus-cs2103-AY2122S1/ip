@@ -35,6 +35,9 @@ public class ExpenseList {
     public static String deleteExpense(String index) throws SkeltalException {
         String reply = "";
         int i = Integer.parseInt(index) - 1;
+        if (outOfRange(i)) {
+            throw new SkeltalException("Choose a positive number that is within the range of the list!");
+        }
         reply += expenses.get(i) + "\n";
         expenses.remove(i);
         reply += "Now you have " + expenses.size() + " expenses in the list.";
@@ -64,5 +67,13 @@ public class ExpenseList {
 
     public static void loadExpenseList(ArrayList<Expense> expenseArrayList) {
         expenses = expenseArrayList;
+    }
+
+    private static boolean outOfRange(int i) {
+        if (expenses.size() <= 0 || expenses.size() < i) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

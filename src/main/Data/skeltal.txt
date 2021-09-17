@@ -1,3 +1,0 @@
-T | 0 | quick
-T | 0 | askjdla
-E | 0 | asdkljalsd  | 12 Nov 99

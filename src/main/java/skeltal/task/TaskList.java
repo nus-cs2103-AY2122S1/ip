@@ -74,8 +74,11 @@ public class TaskList {
      * @throws SkeltalException
      */
     public static String delete(String index) throws SkeltalException {
-        String reply = "";
+        String reply = "Removed this task:\n";
         int i = Integer.parseInt(index) - 1;
+        if (outOfRange(i)) {
+            throw new SkeltalException("Choose a positive number that is within the range of the list!");
+        }
         reply += tasks.get(i) + "\n";
         tasks.remove(i);
         reply += "Now you have " + tasks.size() + " tasks in the list.";
@@ -126,4 +129,11 @@ public class TaskList {
         tasks.clear();
     }
 
+    private static boolean outOfRange(int i) {
+        if (tasks.size() <= 0 || tasks.size() < i) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
