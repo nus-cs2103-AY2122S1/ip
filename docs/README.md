@@ -42,9 +42,9 @@ What can you do with DuC? You can:
 
 &nbsp;
 
-### View task and task date
+### View tasks, task date, and query task
 
-View the list of all ongoing task on the list, and the date associated with them
+View the list of all ongoing task on the list, and the date associated with them. Search for task that match a given query.
 
 &nbsp;
 
