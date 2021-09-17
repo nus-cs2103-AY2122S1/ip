@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.markTaskDone(taskIndex);
+        storage.saveTasks(tasks);
         return ui.showMarkDone(task);
     }
 

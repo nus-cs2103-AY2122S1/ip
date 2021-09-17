@@ -16,7 +16,6 @@ public class ByeCommand extends Command {
      * @param storage Storage that is used to save tasks.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.saveTasks(tasks);
         System.exit(0);
         return ui.showBye();
     }

@@ -29,6 +29,7 @@ public class AddTaskCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(task);
+        storage.saveTasks(tasks);
         return ui.showAddTask(tasks, task);
     }
 
