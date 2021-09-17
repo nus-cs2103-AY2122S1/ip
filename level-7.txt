@@ -1,8 +1,4 @@
-T | 0 | hello
-T | 0 | grocery shopping
-T | 1 | shower
-D | 0 | hw  | 2012-10-11 23:59
-T | 0 | shower
 D | 0 | CS2103T assignment  | 2021-09-17 23:59
-E | 0 | part  | 2012-10-01 09:00-10:00
-T | 0 | shower
+T | 0 | grocery
+E | 0 | CCA meeting  | 2021-09-20 09:00-11:00
+T | 1 | walk dog
