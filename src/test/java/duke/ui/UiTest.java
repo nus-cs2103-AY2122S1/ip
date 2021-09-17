@@ -13,6 +13,6 @@ public class UiTest {
 
     @Test
     public void unknownInputMsgTest_success() {
-        assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" , Ui.getUnknownInputMsg());
+        assertEquals("    I'm sorry, but I don't know what that means :-(" , Ui.getUnknownInputMsg());
     }
 }
