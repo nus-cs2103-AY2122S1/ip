@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.ui.Ui;
 
@@ -13,9 +14,9 @@ public class DeleteTaskCommand extends Command {
      *
      * @param arguments Command arguments.
      */
-    public DeleteTaskCommand(String arguments) throws Exception {
+    public DeleteTaskCommand(String arguments) throws InvalidCommandException {
         if (arguments.length() == 0) {
-            throw new Exception("Command `done` requires an arguments");
+            throw new InvalidCommandException("Command `delete` requires an arguments");
         }
         this.arguments = arguments;
     }

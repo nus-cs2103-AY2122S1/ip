@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.InvalidCommandException;
 import duke.ui.Ui;
 
 public class ByeCommand extends Command {
@@ -10,9 +11,9 @@ public class ByeCommand extends Command {
      *
      * @param arguments Command arguments.
      */
-    public ByeCommand(String arguments) throws Exception {
+    public ByeCommand(String arguments) throws InvalidCommandException {
         if (arguments.length() > 0) {
-            throw new Exception("Command `bye` does not accept arguments");
+            throw new InvalidCommandException("Command `bye` does not accept arguments");
         }
     }
 
