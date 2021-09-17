@@ -26,8 +26,8 @@ public class Duke extends Application{
 //    private String filePath = "data/tasks.txt";
 //    private String directoryName = "data";
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DukeCoin.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DukeSmaug.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DukeCoin.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DukeSmaug.png"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -40,7 +40,7 @@ public class Duke extends Application{
     public void start(Stage stage) {
         //Step 1. Setting up required components
 
-        //The container for the content of the chat to scroll.
+        //The container for the content of the chat to scroll. Designing layout.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -56,6 +56,7 @@ public class Duke extends Application{
         stage.setScene(scene);
         stage.show();
 
+        // Set preferred size and title
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -132,7 +133,7 @@ public class Duke extends Application{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             if (input.equals("bye")) {
                 storage.saveTask(tasks);

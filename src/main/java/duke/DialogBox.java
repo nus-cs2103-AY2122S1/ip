@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.geometry.Insets;
 
 
 
@@ -40,7 +41,9 @@ public class DialogBox extends HBox {
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
+        l.setPadding(new Insets(5, 10, 0, 10));
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        this.setPadding(new Insets(10));
     }
 }
