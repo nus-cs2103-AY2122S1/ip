@@ -319,7 +319,7 @@ public class Parser {
         }
         while (line.hasNext()) {
             String currWord = line.next();
-            if (currWord.charAt(0) == '/') {
+            if (currWord.equals("/at")) {
                 break;
             }
             taskName = taskName + currWord + " ";
@@ -340,7 +340,7 @@ public class Parser {
         }
         while (line.hasNext()) {
             String currWord = line.next();
-            if (currWord.charAt(0) == '/') {
+            if (currWord.equals("/by")) {
                 break;
             }
             taskName = taskName + currWord + " ";

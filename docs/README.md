@@ -34,7 +34,7 @@ you can easily edit your task descriptions without having to delete your tasks f
 
 You can put the time or deadline for all of your tasks just by classifying them as event/deadline!
 
-### Feature-Fine tasks
+### Feature-Find tasks
 
 You can search tasks according to a keyword to generate a list of your tasks with the keyword.
 
@@ -80,13 +80,13 @@ Okay!! I've added the following task:
 Now you have 2 tasks in the list
 ```
 
-### Deadline - `deadline [taskName] /at [time]`
+### Deadline - `deadline [taskName] /by [time]`
 
 It adds a deadline task to the task list. Time can be in form of yyyy-mm-dd or hh:mm or both.
 
 Example of usage:
 
-`deadline do hw /at 2021-09-16 14:00`
+`deadline do hw /by 2021-09-16 14:00`
 
 Expected outcome:
 
