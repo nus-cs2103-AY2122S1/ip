@@ -15,11 +15,11 @@ public class Ui {
 
     // The lines that Duke will print
     /** The Duke chatbot's logo. */
-    private final String LOGO = " _____               __    \n"
-            + "|    _   \\  __  __  |   |  __    ____ \n"
-            + "|   |  |   | |  | |  |  |   |/   / /  __  \\\n"
-            + "|   |_|   | |  |_|  |  |     <  |    ___/\n"
-            + "|_____/   \\___/   |__|\\__\\ \\_____|\n";
+    private final String LOGO = " ____               __    \n"
+            + "|    _   \\  __  __ |   | __    _ __ \n"
+            + "|   |  |   | |  |  |  | |    |/   /  /   __ \\\n"
+            + "|   |_|   | |  |_|  | |      <   |    ___/\n"
+            + "|____/   \\_ __/  |__|\\__\\ \\_____|\n";
     /** The line break between each interaction. */
     private final String LINE_BREAK = "-------------------------------------------------------------------";
     /** The standard welcome message Duke will print as it starts. */
