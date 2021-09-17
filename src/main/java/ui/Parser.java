@@ -46,10 +46,8 @@ public class Parser {
             default:
                 throw new DukeException.TaskTypeNotFoundException("TaskType cannot be found");
             }
-
             Task task = Parser.createTask(taskName, split, taskType, isDone);
             return task;
-
         } catch (DukeException e) {
             logError(e, returnMsg);
             return null;

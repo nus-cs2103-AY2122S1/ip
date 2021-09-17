@@ -39,7 +39,7 @@ public class Duke {
     }
 
     /**
-     * Run main program
+     * Run main program while exit command is not given
      */
     public void run() {
         Ui.start();
