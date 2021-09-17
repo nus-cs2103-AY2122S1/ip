@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
  * @author Nigel Tan
  */
 public class Deadline extends Task {
-
+    private final String strTime;
+    private final String strDate;
     private final LocalDate date;
     private final LocalTime time;
 
@@ -27,10 +28,12 @@ public class Deadline extends Task {
     public Deadline(String description, String date, String time) throws LebronException {
         super(description);
         try {
+            this.strDate = date;
+            this.strTime = time;
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));;
         } catch (DateTimeParseException e) {
-            throw new LebronException("    hi:( OOPS! Please check that your date and time is " +
+            throw new LebronException("    :( OOPS! Please check that your date and time is " +
                     "valid and formatted as 'yyyy-MM-dd' 'HHmm'.");
         }
     }
@@ -38,7 +41,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
-                + " " + time.format(DateTimeFormatter.ofPattern("HHmm"))+ ")";
+                + " " + this.time + ")";
     }
 
     /**
@@ -48,6 +51,18 @@ public class Deadline extends Task {
      */
     @Override
     public String getStringForFile() {
-        return "D | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " + this.time;
+        return "D | " + super.getDoneValue() + " | " + super.getName() + " | " + this.date + " " +
+                time.format(DateTimeFormatter.ofPattern("HHmm"));
+    }
+
+    /**
+     * Overrides the makeCopy() method in Task.
+     *
+     * @return the copied task.
+     * @throws LebronException if the date/time is in wrong format.
+     */
+    @Override
+    public Deadline makeCopy() throws LebronException {
+        return new Deadline(this.getName(), this.strDate, this.strTime);
     }
 }

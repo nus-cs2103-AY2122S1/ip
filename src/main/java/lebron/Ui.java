@@ -14,14 +14,12 @@ public class Ui {
     private static final String HORIZONTAL_LINE = "    "
             + "____________________________________________________________\n";
     private int count;
-    private final Lebron app;
 
     /**
      * Constructor
      */
-    public Ui(Lebron lebron) {
+    public Ui() {
         this.count = 1;
-        this.app = lebron;
     }
 
     /**
