@@ -13,5 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Test outputs
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Data files
+/data/

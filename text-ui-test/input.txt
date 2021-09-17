@@ -1,0 +1,22 @@
+clear
+add todo a
+add todo b
+add deadline c /by today
+add event d /at 2021-09-12
+done 2
+add deadline e
+add todo
+list
+done abc
+done 10
+add deadline f /by 2021-03-11
+done 4
+list
+remove 3
+list
+remove 3
+list
+remove 6
+remove aaa
+restore
+bye
