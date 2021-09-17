@@ -5,12 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Deadline are Tasks that have an attached date as the time a Task needs to be completed by.
+ * Deadlines are Tasks that have an attached date as the time a Task needs to be completed by.
  * @author spdpnd98.
  */
-public class Deadline extends Task{
-    private Date date;
+public class Deadline extends Task {
     protected static final String DEADLINE_LABEL = "D";
+    private Date date;
 
     /**
      * Creates a Deadline instance.
@@ -26,7 +26,7 @@ public class Deadline extends Task{
             throw new DukeArgumentException("No commands specified for task 'deadline'!");
         }
         String[] commandAndDate = command[1].split(" ", 2);
-        if(!commandAndDate[0].equals("by")) {
+        if (!commandAndDate[0].equals("by")) {
             throw new DukeArgumentException("Unknown command provided to duke.Deadline! did you use '/by'?");
         } else if (commandAndDate.length == 1) {
             throw new DukeArgumentException("No date specified!");
@@ -39,12 +39,12 @@ public class Deadline extends Task{
         }
     }
 
-    protected Deadline(String isDone, String description, String date) throws DukeDateParseException{
+    protected Deadline(String isDone, String description, String date) throws DukeDateParseException {
         super(description);
         try {
             this.date = (new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")).parse(date);
             this.isDone = Boolean.valueOf(isDone);
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             throw new DukeDateParseException(e);
         }
     }

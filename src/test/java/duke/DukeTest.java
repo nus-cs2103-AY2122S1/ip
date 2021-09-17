@@ -1,16 +1,16 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
-    protected static String TEST = "TEST";
-    protected static String TEST_TASK_TYPE = "L";
+    protected static final String TEST = "TEST";
+    protected static final String TEST_TASK_TYPE = "L";
     @Test
     public void parseTestSuccess() {
         Parser parser = new Parser();
@@ -24,7 +24,7 @@ public class DukeTest {
         String actual = null;
         String expected = TEST_TASK_TYPE + "|false|" + TEST;
         try {
-            actual = parser.parseTask(t);
+            actual = parser.encodeTask(t);
         } catch (DukeNoDateException e) {
             exception = e;
         }
@@ -43,7 +43,8 @@ public class DukeTest {
             exception = e;
         }
         assertTrue(exception == null);
-        String expected = "[D][ ] " + TEST + " (by: " + new SimpleDateFormat("dd/mm/yyyy").parseObject("1/1/2021") +")";
+        String expected = "[D][ ] " + TEST + " (by: "
+                + new SimpleDateFormat("dd/mm/yyyy").parseObject("1/1/2021") + ")";
         assertEquals(expected, d.toString());
     }
 }

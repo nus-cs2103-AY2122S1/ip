@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Event are Tasks that have an attached date as the time the Task will happen.
+ * Events are Tasks that have an attached date as the time the Task will happen.
  */
-public class Event extends Task{
-    private Date date;
+public class Event extends Task {
     protected static final String EVENT_LABEL = "E";
+    private Date date;
 
     /**
      * Creates an Event instance.
@@ -25,7 +25,7 @@ public class Event extends Task{
             throw new DukeArgumentException("No commands specified for task 'deadline'!");
         }
         String[] commandAndDate = command[1].split(" ", 2);
-        if(!commandAndDate[0].equals("at")) {
+        if (!commandAndDate[0].equals("at")) {
             throw new DukeArgumentException("Unknown command provided to duke.Event! did you use '/at'?");
         } else if (commandAndDate.length == 1) {
             throw new DukeArgumentException("No date specified!");
@@ -41,7 +41,7 @@ public class Event extends Task{
         super(description);
         try {
             this.date = (new SimpleDateFormat("")).parse(date);
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             throw new DukeDateParseException(e);
         }
     }
@@ -63,7 +63,7 @@ public class Event extends Task{
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Event) {
+        if (obj instanceof Event) {
             Event event = (Event) obj;
             return event.date.equals(this.date) && event.description.equals(this.description);
         }
