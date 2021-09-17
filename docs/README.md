@@ -36,11 +36,11 @@ Usage: `deadline TASKNAME /by DEADLINE`
 
 Remarks: `DEADLINE` if placed in the YYYY-MM-DD format translates to the alphabetical version.
 
+Creates a task of name `TASKNAME` by `DEADLINE`.
+
 <hr />
 
 - #### `event` - Adds a task with specific event details
-
-Creates a task of name `TASKNAME` by `DEADLINE`.
 
 Usage: `event TASKNAME /at EVENT_DETAILS`
 
@@ -70,7 +70,7 @@ Second item on list is marked as completed, displays an error if it is already c
 
 Usage: `delete 2`
 
-Expected outcome: Second item on the list is deleted, displays an error if second item does not exists.
+Second item on the list is deleted, displays an error if second item does not exists.
 
 <hr />
 
@@ -80,7 +80,7 @@ Expected outcome: Second item on the list is deleted, displays an error if secon
 
 Usage: `find KEYWORD`
 
-Expected outcome: Displays all the task that include `KEYWORD` in their task name.
+Displays all the task that include `KEYWORD` in their task name.
 
 <hr />
 
@@ -90,7 +90,7 @@ Expected outcome: Displays all the task that include `KEYWORD` in their task nam
 
 Usage: `list`
 
-Expected outcome: Displays all the task alongside their completion status.
+Displays all the task alongside their completion status.
 
 
 
