@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 
 /**
- * @Chatbot represents a chatbot.
+ * Represents a chatbot.
  * @author spdpnd98.
  */
 public class Chatbot {
     /**
-     * @ChatCommands are enumerations used for chatbot commands.
+     * Enumerations used for chatbot commands.
      */
     private enum ChatCommands {
         CHAT_COMMAND_BYE("bye"),
@@ -23,7 +23,7 @@ public class Chatbot {
         }
 
         public static ChatCommands toEnum (String str) {
-            for(ChatCommands chatCommand: ChatCommands.values()) {
+            for (ChatCommands chatCommand: ChatCommands.values()) {
                 if (chatCommand.command.equalsIgnoreCase(str)) {
                     return chatCommand;
                 }
@@ -34,7 +34,7 @@ public class Chatbot {
 
 
     /**
-     * @TaskCommands are enumerations used to identify individual tasks and actions to be taken.
+     * Enumerations used to identify individual tasks and actions to be taken.
      */
     protected enum TaskCommands {
         TASK_COMMAND_DONE("done"),
@@ -51,7 +51,7 @@ public class Chatbot {
 
         public static TaskCommands toEnum (String str) {
             String[] splitCommand = str.split(" ", 2);
-            for(TaskCommands chatCommand: TaskCommands.values()) {
+            for (TaskCommands chatCommand: TaskCommands.values()) {
                 if (chatCommand.command.equalsIgnoreCase(splitCommand[0])) {
                     return chatCommand;
                 }
@@ -62,7 +62,7 @@ public class Chatbot {
 
 
     /**
-     * @ChatContinue are enumerations to indicate if a chat should continue or terminate.
+     * Enumerations to indicate if a chat should continue or terminate.
      */
     public enum ChatContinue {
         CHAT_CONTINUE,
@@ -84,7 +84,7 @@ public class Chatbot {
         try {
             this.ui.showLoadingFile();
             this.fileDB = new FileDB(this.taskList);
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             // File already exists
             System.out.println(e.getMessage());
         } catch (DukeDateParseException e) {
@@ -93,9 +93,7 @@ public class Chatbot {
     }
 
     /**
-     * @chat initiates a chat with the user, and checks for handled exceptions.
-     *
-     * Only used in CLI version.
+     * Initiates a chat with the user, and checks for handled exceptions.
      */
     public void chat() {
         boolean isChatting = true;
@@ -107,7 +105,7 @@ public class Chatbot {
                 System.out.println(e.getMessage());
             } catch (DukeTaskException e) {
                 System.out.println(e.getMessage());
-            } catch (DukeIOException e) {
+            } catch (DukeIoException e) {
                 System.out.println(e);
             } catch (DukeDateParseException e) {
                 System.out.println(e);
@@ -116,27 +114,28 @@ public class Chatbot {
     }
 
     /**
-     * @interpret contains the logic to understand user inputs.
+     * Contains the logic to understand user inputs.
      *
      * @return ChatContinue enum to indicate if the chat should continue or terminate.
-     * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
+     * @throws DukeIoException thrown by TaskList.addTask method, if fails to store in FileDB.
      * @throws DukeDateParseException thrown by TaskList.addTask method, if fails to parse the date.
      * @throws DukeArgumentException if not enough arguments are given to TaskCommand methods.
      */
-    private ChatContinue interpret() throws DukeIOException, DukeDateParseException, DukeArgumentException {
+    private ChatContinue interpret() throws DukeIoException, DukeDateParseException, DukeArgumentException {
         String input = scanner.nextLine();
         return guiInterpret(input);
     }
 
     /**
-     * @guiInterpret contains the logic to understand user inputs.
+     * Contains the logic to understand user inputs.
      *
      * @return ChatContinue enum to indicate if the chat should continue or terminate.
-     * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
+     * @throws DukeIoException thrown by TaskList.addTask method, if fails to store in FileDB.
      * @throws DukeDateParseException thrown by TaskList.addTask method, if fails to parse the date.
      * @throws DukeArgumentException if not enough arguments are given to TaskCommand methods.
      */
-    public ChatContinue guiInterpret(String input) throws DukeIOException, DukeDateParseException, DukeArgumentException {
+    public ChatContinue guiInterpret(String input)
+            throws DukeIoException, DukeDateParseException, DukeArgumentException {
         String[] parseInput = input.split(" ", 2);
         ChatCommands command = ChatCommands.toEnum(parseInput[0]);
         if (command != null) {
@@ -160,7 +159,7 @@ public class Chatbot {
      * @param command the user's input.
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue builtInCommands(ChatCommands command, String argument) throws DukeIOException{
+    private ChatContinue builtInCommands(ChatCommands command, String argument) throws DukeIoException {
         switch (command) {
         case CHAT_COMMAND_BYE:
             return this.farewell();
@@ -181,7 +180,7 @@ public class Chatbot {
      *
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue farewell() throws DukeIOException{
+    private ChatContinue farewell() throws DukeIoException {
         this.ui.showFarewell();
         this.taskList.saveAll(this.fileDB);
         return ChatContinue.CHAT_END;

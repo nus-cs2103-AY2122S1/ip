@@ -2,9 +2,8 @@ package duke;
 
 import java.text.ParseException;
 
-
 /**
- * @DukeDateParseException is an exception that is thrown when date format passed into Duke commands are incorrect.
+ * Exception that is thrown when there is a problem with date format.
  */
 public class DukeDateParseException extends ParseException {
 

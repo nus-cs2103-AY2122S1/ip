@@ -1,6 +1,6 @@
 package duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     protected static final String TODO_LABEL = "T";
 
     public ToDo(String str) {
@@ -20,5 +20,14 @@ public class ToDo extends Task{
     @Override
     public String toString() {
         return "[" + TODO_LABEL + "]" + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDo) {
+            ToDo todo = (ToDo) obj;
+            return todo.description.equals(this.description);
+        }
+        return false;
     }
 }

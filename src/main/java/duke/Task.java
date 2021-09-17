@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * @Task is a generic task.
+ * A  generic task.
  */
 public abstract class Task {
     protected static final String COMPLETED = "[X]";
@@ -39,7 +39,7 @@ public abstract class Task {
      *
      * @throws DukeNoDateException Task has no date associated to it
      */
-    protected String getDate() throws DukeNoDateException{
+    protected String getDate() throws DukeNoDateException {
         throw new DukeNoDateException();
     }
 

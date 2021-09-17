@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Ui {
+    /**
+     * Creates an instance of Ui object.
+     */
     public Ui() {
         System.out.println("Hey there, I'm Duke! Nice to meet you!");
         System.out.println("I'm a bot build by SpdPnd98, let me know how I can help you!");
@@ -56,5 +59,9 @@ public class Ui {
 
     protected void showFarewell() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    protected void showDuplicated() {
+        System.out.println("It seems this task has already existed. Skipping the addition of this task...");
     }
 }

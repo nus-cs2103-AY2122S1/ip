@@ -3,6 +3,10 @@ package duke;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents a list of tasks but doesn't allow explicit modification to each items in the list.
+ */
+
 public class TaskList {
     private List<Task> tasks;
 
@@ -14,7 +18,8 @@ public class TaskList {
         this.tasks.add(t);
     }
 
-    protected Chatbot.ChatContinue addTask(Chatbot.TaskCommands command, String input, Ui ui, FileDB fileDB) throws DukeIOException, DukeDateParseException {
+    protected Chatbot.ChatContinue addTask(Chatbot.TaskCommands command, String input, Ui ui, FileDB fileDB)
+            throws DukeIoException, DukeDateParseException {
         switch (command) {
         case TASK_COMMAND_DONE:
             return this.markDone(input, ui);
@@ -32,33 +37,57 @@ public class TaskList {
         }
     }
 
-    private Chatbot.ChatContinue addTodo(String input, FileDB fileDB, Ui ui) throws DukeIOException{
+    private Boolean hasDuplicatedTask(Task newTask) {
+        return tasks.stream().anyMatch(task -> task.equals(newTask));
+    }
+
+    private Chatbot.ChatContinue addTodo(String input, FileDB fileDB, Ui ui) throws DukeIoException {
         ToDo todo = new ToDo(input);
-        tasks.add(todo);
-        fileDB.save(todo);
-        ui.showAddTaskSuccessful(todo);
+        if (this.hasDuplicatedTask(todo)) {
+            ui.showDuplicated();
+        } else {
+            tasks.add(todo);
+            fileDB.save(todo);
+            ui.showAddTaskSuccessful(todo);
+        }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
-    private Chatbot.ChatContinue addDeadline(String input, FileDB fileDB, Ui ui) throws DukeIOException, DukeDateParseException {
+    private Chatbot.ChatContinue addDeadline(String input, FileDB fileDB, Ui ui)
+            throws DukeIoException, DukeDateParseException {
         Deadline deadline = new Deadline(input);
-        tasks.add(deadline);
-        fileDB.save(deadline);
-        ui.showAddTaskSuccessful(deadline);
+        if (this.hasDuplicatedTask(deadline)) {
+            ui.showDuplicated();
+        } else {
+            tasks.add(deadline);
+            fileDB.save(deadline);
+            ui.showAddTaskSuccessful(deadline);
+        }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
-    private Chatbot.ChatContinue addEvent(String input, FileDB fileDB, Ui ui) throws DukeIOException, DukeDateParseException {
+    private Chatbot.ChatContinue addEvent(String input, FileDB fileDB, Ui ui)
+            throws DukeIoException, DukeDateParseException {
         Event event = new Event(input);
-        tasks.add(event);
-        fileDB.save(event);
-        ui.showAddTaskSuccessful(event);
+        if (this.hasDuplicatedTask(event)) {
+            ui.showDuplicated();
+        } else {
+            tasks.add(event);
+            fileDB.save(event);
+            ui.showAddTaskSuccessful(event);
+        }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
+    /**
+     * Finds task form task list.
+     *
+     * @param target task description.
+     * @return list of possible tasks.
+     */
     public TaskList findTasks(String target) {
         TaskList taskList = new TaskList();
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             if (currentTask.description.contains(target)) {
                 taskList.tasks.add(currentTask);
@@ -106,9 +135,9 @@ public class TaskList {
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
-    protected void saveAll(FileDB fileDB) throws DukeIOException{
+    protected void saveAll(FileDB fileDB) throws DukeIoException {
         fileDB.clearAll();
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             fileDB.save(t);
         }

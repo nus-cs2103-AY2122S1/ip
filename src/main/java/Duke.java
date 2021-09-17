@@ -1,5 +1,11 @@
-import duke.*;
-import javafx.animation.PauseTransition;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import duke.Chatbot;
+import duke.DukeArgumentException;
+import duke.DukeDateParseException;
+import duke.DukeIoException;
+import duke.DukeTaskException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -14,9 +20,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 public class Duke extends Application {
     private ScrollPane scrollPane;
@@ -184,7 +187,7 @@ public class Duke extends Application {
             errorMsg = e.getMessage();
         } catch (DukeTaskException e) {
             errorMsg = e.getMessage();
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             errorMsg = e.toString();
         } catch (DukeDateParseException e) {
             errorMsg = e.toString();
@@ -192,7 +195,7 @@ public class Duke extends Application {
         System.out.flush();
         System.setOut(old);
         assert System.out != ps : "output stream not reset";
-        if(errorMsg != null) {
+        if (errorMsg != null) {
             return errorMsg;
         } else {
             return baos.toString();
