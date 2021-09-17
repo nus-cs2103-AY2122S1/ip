@@ -186,7 +186,7 @@ Expected outcome:
 
 ## Command summary
 |      Action      | Format, Examples                                                                                            |
-|:----------------:|:----------------------------------------------------------------------------------------------------------- |
+|------------------|-----------------------------------------------------------------------------------------------------------  |
 |   **Add ToDo**   | `todo <description>` Adds a task to the task list.                                                          |
 | **Add Deadline** | `deadline <description> /by <date> <time>` Adds a task with a deadline to the task list.                    |
 |  **Add Event**   | `event <description> /at <date> <time>` Adds an event to the task list.                                     |
