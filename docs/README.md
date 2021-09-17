@@ -166,4 +166,15 @@ The exit message is printed and the application window closes.
 Bye. Hope to see you again soon! Just a little
 reminder : YOU ARE AWESOME - THAT'S WHAT SHE SAID :))
 ```
+## Acknowledgements
+
+The entities used in this app to represent the 
+bot and the user are both fictional characters
+from the show 'The Office'.
+
+The images used are from the following sources:
+
+* The bot: [Michael Scott's character from 'The Office'](https://www.reddit.com/r/DunderMifflin/comments/50ozx4/my_favorite_michael_scott_face/)
+* The user: [Jim Halpert's character from 'The Office'](https://in.pinterest.com/pin/448882287849921609/?amp_client_id=CLIENT_ID(_)&mweb_unauth_id={{default.session}}&simplified=true)
+
 
