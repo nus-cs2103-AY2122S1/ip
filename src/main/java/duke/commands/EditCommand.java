@@ -15,8 +15,8 @@ public class EditCommand extends Command {
     private final String date;
 
     /**
-     * Constructs an EditCommand to update the information of an existing Task in the TaskList. 
-     * 
+     * Constructs an EditCommand to update the information of an existing Task in the TaskList.
+     *
      * @param taskIndex Index of task to be edited.
      * @param description Edited description of task. May be null if description does not need to be updated.
      * @param date Edited description of task. May be null if date does not need to be updated.

@@ -117,12 +117,12 @@ public class Parser {
         String[] parts = commandDetails.split("/at");
         String description = parts[0].trim();
         checkEmptyDetails(description, "Event");
-        
+
         if (parts.length < 2) {
             throw new DukeException("Event descriptions must contain /at [dd-mm-yyyy hh:mm]");
         }
         String at = parts[1].trim();
-        
+
         Event event = new Event(description, at);
         return new AddTaskCommand(event);
     }
@@ -131,12 +131,12 @@ public class Parser {
         String[] parts = commandDetails.split("/by");
         String description = parts[0].trim();
         checkEmptyDetails(description, "Deadline");
-        
+
         if (parts.length < 2) {
             throw new DukeException("Deadline descriptions must contain /by [dd-mm-yyyy hh:mm]");
         }
         String by = parts[1].trim();
-        
+
         Deadline deadline = new Deadline(description, by);
         return new AddTaskCommand(deadline);
     }
