@@ -9,25 +9,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the storage file that Duke can read from and write to.
+ */
 public class Storage {
     private final File dataFile;
     private final String filePath;
-//    private final File dataFolder;
-//    private final File dukeFolder;
 
     public Storage(String filePath) {
         this.dataFile = new File(filePath); // "./data/data.txt"
         this.filePath = filePath;
-//        this.dukeFolder = new File(filePath.substring(0, 6)); // "./duke"
-//        this.dataFolder = new File(filePath.substring(0, 11)); // "./duke/data"
     }
 
+    /**
+     * Reads tasks stored in data file and add them into TaskList.
+     * Creates the date file if it does not exist.
+     * @param taskList The Task List of Duke to receive tasks from data file.
+     */
     public void loadInto(TaskList taskList) {
 
         String dataPath = "./data/data.txt";
@@ -36,67 +39,10 @@ public class Storage {
             Path path = Paths.get(dataPath);
             Files.createDirectories(path.getParent());
             Files.createFile(path);
-            System.out.println("Directories for data.txt is created.");
-        } catch (FileNotFoundException e) {
-            System.out.println("data.txt already exists.");
+            System.out.println("Directories for data.txt are created.");
         } catch (IOException e) {
-            System.out.println("Failed to create data directories" + e.getMessage());
+            System.out.println("Failed to create data directories (they may already exist)" + e.getMessage());
         }
-
-        // if duke folder does not exist, create duke folder, data folder and data file
-//        if (!dukeFolder.exists()) {
-//            dukeFolder.mkdir();
-//            try {
-//                File dataFolder = new File("./duke/data");
-//                if (dataFolder.createNewFile()) {
-//                    System.out.println("Data folder has been created.");
-//                }
-//            } catch (IOException e) {
-//                System.out.println("An error occurred.");
-//                e.printStackTrace();
-//            }
-//
-//            try {
-//                File dataFile = new File("./duke/data/data.txt");
-//                if (dataFile.createNewFile()) {
-//                    System.out.println("Data file has been created.");
-//                }
-//            } catch (IOException e) {
-//                System.out.println("An error occurred.");
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        // if data folder does not exist, create folder and file
-//        if (!dataFolder.exists()) {
-//            dataFolder.mkdir();
-//            try {
-//                File dataDirectory = new File("./duke/data/data.txt");
-//                if (dataDirectory.createNewFile()) {
-//                    System.out.println("Data file has been created.");
-//                } else {
-//                    //
-//                }
-//            } catch (IOException e) {
-//                System.out.println("An error occurred.");
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        // if data.txt does not exist, create file
-//        if (!dataFile.exists()) {
-//            try {
-//                File dataDirectory = new File("./duke/data/data.txt");
-//                if (dataDirectory.createNewFile()) {
-//                    System.out.println("Data file has been created.");
-//                } else {
-//                    //
-//                }
-//            } catch (IOException e) {
-//                System.out.println("An error occurred.");
-//                e.printStackTrace();
-//            }
-//        }
 
         // a List to store all Tasks read from data.txt
         ArrayList<String> dataRead = new ArrayList<>();
@@ -160,6 +106,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes a task to the data file.
+     * @param taskToWrite The string representation of the task to be written.
+     */
     public void writeTaskToFile(String taskToWrite) {
         try {
             writeToFile(filePath, taskToWrite);
@@ -168,6 +118,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends a task to the end of the data file.
+     * @param taskToAppend The string representation of the task to be appended.
+     */
     public void appendTaskToFile(String taskToAppend) {
         try {
             appendToFile(filePath, taskToAppend);
@@ -176,18 +130,33 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends a text to the end of a file.
+     * @param filePath The path to the file to be appended to.
+     * @param textToAppend The text to be appended.
+     * @throws IOException If there is an error while appending.
+     */
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * Writes a text to the end of a file.
+     * @param filePath The path to the file to be written into.
+     * @param textToAdd The text to be written.
+     * @throws IOException If there is an error while writing.
+     */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Erases the content of a file.
+     */
     public void eraseFileContent() {
         try {
             new FileWriter(filePath, false).close();

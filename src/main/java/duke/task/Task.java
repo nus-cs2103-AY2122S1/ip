@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a Task, which has a name and can be marked as done.
+ */
 public class Task {
     protected String taskName;
     protected boolean isDone;

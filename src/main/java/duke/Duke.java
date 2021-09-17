@@ -6,6 +6,11 @@ import duke.components.TaskList;
 import duke.task.Task;
 import java.util.Scanner;
 
+/**
+ * Duke is an application that can store Tasks for users.
+ * Users can store three types of tasks, Deadline, Event, and Todo.
+ * They can also mark a task as completed and view all tasks they have.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -19,6 +24,9 @@ public class Duke {
         this.taskList = new TaskList(this.storage, this.ui, this.parser);
     }
 
+    /**
+     * Activates and runs the Duke application.
+     */
     public void run() {
         storage.loadInto(taskList);
         ui.displayWelcomeMessage();

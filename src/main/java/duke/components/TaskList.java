@@ -6,6 +6,9 @@ import duke.task.Event;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Task List that contains all tasks.
+ */
 public class TaskList {
     private ArrayList<Task> inputs;
     private Storage storage;
@@ -19,15 +22,27 @@ public class TaskList {
         this.parser = parser;
     }
 
+    /**
+     * Gets the length of the task list.
+     * @return The length of the task list.
+     */
     public int getSize() {
         return this.inputs.size();
     }
 
+    /**
+     * Adds a task read from data file to task list.
+     * @param task A task read from data file.
+     */
     public void addTaskFromDataFile(Task task) {
         inputs.add(task);
     }
 
-    // normal input
+    /**
+     * Takes in user input, parse it and create a task.
+     * Adds it into task list and writes the updated list to data file.
+     * @param input User input used to create a task.
+     */
     public void addTaskFromInput(String input) {
 
         String[] group = input.split(" ");
@@ -94,6 +109,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task based on user input.
+     * @param input User input used to delete a task.
+     */
     public void deleteTask(String input) {
         String[] parts = input.split(" ");
         int index = Integer.parseInt(parts[1]) - 1;
@@ -115,6 +134,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark a task as done.
+     * @param input User input used to mark a task as done.
+     */
     public void markDone(String input) {
         String[] parts = input.split(" ");
         int index = Integer.parseInt(parts[1]) - 1;
@@ -131,6 +154,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Display all tasks in task list.
+     */
     public void displayAllTasks() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < inputs.size(); i++) {

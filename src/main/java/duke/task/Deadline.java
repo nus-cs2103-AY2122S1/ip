@@ -2,6 +2,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task of type Deadline, which has a due time.
+ */
 public class Deadline extends Task {
     // protected String ddlByTime;
     protected LocalDateTime ddlDateTime;
