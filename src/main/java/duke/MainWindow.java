@@ -31,10 +31,12 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        // Adapted the following snippet from https://github.com/gordonlzy/ip/
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage)
-        );
+        sendButton.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white");
+        dialogContainer.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white");
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.showWelcome(), dukeImage));
     }
 
     /**
