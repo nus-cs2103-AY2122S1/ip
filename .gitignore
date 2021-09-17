@@ -1,17 +1,30 @@
 # IDEA files
-/.idea/
+.idea/
 /out/
 /*.iml
 
 # Gradle build files
-/.gradle/
-/build/
+.gradle/
+build/
+build/.gradle
 src/main/resources/docs/
+
+# Test files
+src/test/resource/taskList1.txt
+src/test/resource/taskList2.txt
+
+# Javafx library
+javafx/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+# Memory files
+memory
+
+# Test Files
+text-textUi-test/ACTUAL.txt
+text-textUi-test/EXPECTED-UNIX.TXT
+text-textUi-test/memory/*

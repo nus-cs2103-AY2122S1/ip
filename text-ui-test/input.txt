@@ -1,0 +1,13 @@
+todo borrow book
+deadline return book /by 2019-10-15
+event project meeting /at 2019-10-15
+done 3
+done 1
+done 2
+list
+todo bye
+todos
+deadline
+todo
+event
+bye
