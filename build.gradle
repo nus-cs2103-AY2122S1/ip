@@ -54,7 +54,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "blitz.Launcher"
 }
 
 shadowJar {
@@ -67,4 +67,14 @@ run{
 
     enableAssertions = true
 
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "blitz.Launcher"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
