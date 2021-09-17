@@ -2,6 +2,10 @@ package banana;
 
 import java.io.FileNotFoundException;
 import java.io.File;
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,6 +20,7 @@ import java.util.Scanner;
 public class Storage {
 
     private String filePath;
+    private File file;
 
     /**
      * Constructor for the Storage class.
@@ -36,13 +41,30 @@ public class Storage {
     }
 
     /**
+     * Creates the directory and the file.
+     *
+     * @throws IOException if unable to create.
+     */
+    public void setFile() throws IOException {
+        File directory = new File("info");
+        if (!directory.exists()) {
+            Files.createDirectory(Paths.get("info"));
+        }
+        file = new File(filePath);
+        if (!file.exists()) {
+            Files.createFile(Paths.get(filePath));
+        }
+    }
+
+    /**
      * Gets the tasks from the file.
      *
      * @param f the file.
      * @return the loaded list of tasks.
      * @throws FileNotFoundException if the file does not exist.
      */
-    public TaskList load(File f) throws FileNotFoundException {
+    public TaskList load(File f) throws IOException {
+        setFile();
         TaskList tasks = new TaskList(new ArrayList<>());
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
