@@ -1,6 +1,7 @@
 package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import duke.tasks.Todo;
 
 public class TaskListTest {
     @Test
-    public void testAddNewTask() {
+    public void addNewTask() {
         TaskList tasks = new TaskList();
         ArrayList<Task> taskArr = new ArrayList<>();
         taskArr.add(new Todo("test"));
@@ -21,7 +22,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testMarkTaskDone() throws DukeException {
+    public void markTaskDone() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
         taskArr.add(new Todo("test"));
         Todo doneTodo = new Todo("test", true);
@@ -34,7 +35,21 @@ public class TaskListTest {
     }
 
     @Test
-    public void testDeleteTask() throws DukeException {
+    public void markTaskDone_alreadyDoneTask_exceptionThrown() throws DukeException {
+        ArrayList<Task> taskArr = new ArrayList<>();
+        taskArr.add(new Todo("test", true));
+        TaskList tasks = new TaskList(taskArr);
+        try {
+            tasks.markTaskDone(0);
+            fail();
+        } catch (DukeException e) {
+            assertEquals("Task 1 is already marked as done.", e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void deleteTask() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
         taskArr.add(new Todo("test"));
         TaskList tasks = new TaskList(taskArr);
@@ -43,7 +58,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testGetTaskStrings() throws DukeException {
+    public void getTaskStrings() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
         taskArr.add(new Todo("test", true));
         TaskList tasks = new TaskList(taskArr);
