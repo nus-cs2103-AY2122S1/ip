@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
      * them to the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() {
         if (isOffline) {
             initialize();
         }
