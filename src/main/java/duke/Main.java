@@ -25,7 +25,6 @@ public class Main extends Application {
             scene.getRoot().setStyle("-fx-font-family: 'serif'");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,6 +33,6 @@ public class Main extends Application {
 
     @Override
     public void stop() {
-        duke.exit();
+        duke.saveTasks();
     }
 }

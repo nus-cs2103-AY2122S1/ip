@@ -23,44 +23,8 @@ public class TaskList {
     }
 
     /**
-     * Loads task from file on disk into the task list.
-     *
-     * @param file File storing tasks on disk.
-     * @throws StorageException If file storing the tasks is incorrectly formatted.
-     */
-    public void loadTasks(File file) throws StorageException {
-        try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                String taskString = sc.nextLine();
-                String[] splitTaskString = taskString.split(Task.STORAGE_DELIMITER);
-                Task task = null;
-
-                switch (splitTaskString[0]) {
-                case Todo.IDENTIFIER:
-                    task = new Todo(splitTaskString[1], Boolean.parseBoolean(splitTaskString[2]));
-                    break;
-                case Event.IDENTIFIER:
-                    task = new Event(splitTaskString[1], Boolean.parseBoolean(splitTaskString[2]), splitTaskString[3]);
-                    break;
-                case Deadline.IDENTIFIER:
-                    task = new Deadline(splitTaskString[1], Boolean.parseBoolean(splitTaskString[2]),
-                            splitTaskString[3]);
-                    break;
-                }
-
-                if (task != null) {
-                    tasks.add(task);
-                }
-            }
-        } catch (FileNotFoundException ignored) {
-        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            throw new StorageException("Txt file for loading tasks is wrongly formatted. Some tasks were not loaded");
-        }
-    }
-
-    /**
      * Adds a task to the task list.
+     *
      * @param task Task to be added to task list.
      * @return task that was added to the task list.
      */
@@ -82,12 +46,13 @@ public class TaskList {
             task.markDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. " +
-                "Please provide a task index from that list");
+            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. "
+                    + "Please provide a task index from that list");
         }
     }
 
     /**
+     * Deletes a task from the user's task list.
      *
      * @param taskIndex Index of task to delete from task list.
      * @return Task that was deleted.
@@ -97,8 +62,8 @@ public class TaskList {
         try {
             return tasks.remove(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. " +
-                "Please provide a task index from that list");
+            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. "
+                    + "Please provide a task index from that list");
         }
     }
 

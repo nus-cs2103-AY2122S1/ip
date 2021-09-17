@@ -5,9 +5,10 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Adds a task to the user's list of task.
+ * Adds a task to the user's list of tasks.
  */
 public abstract class AddCommand implements Command {
+    protected static final String DATE_DELIMITER = " /";
     protected Task task;
 
     @Override
@@ -17,8 +18,10 @@ public abstract class AddCommand implements Command {
         return ui.showTaskAddedMessage(task, numTasksRemaining);
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
+    protected static String getTaskDescription(String userInput) throws
+            ArrayIndexOutOfBoundsException {
+        String[] commandParamsSplit = userInput.split(DATE_DELIMITER, 2);
+        String taskDescription = commandParamsSplit[0];
+        return taskDescription;
     }
 }

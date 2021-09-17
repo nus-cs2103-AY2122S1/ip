@@ -18,6 +18,7 @@ public class Todo extends Task {
 
     /**
      * Creates a todo task.
+     *
      * @param description Task's description.
      */
     public Todo(String description) {

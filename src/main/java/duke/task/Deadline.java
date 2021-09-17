@@ -9,8 +9,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
     public static final String IDENTIFIER = "D";
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-    private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
 
     private LocalDateTime by;
 
@@ -24,7 +22,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, String by) throws DateTimeParseException {
         super(description, isDone);
-        this.by = LocalDateTime.parse(by, INPUT_FORMAT);
+        this.by = LocalDateTime.parse(by, DATE_INPUT_FORMAT);
     }
 
     /**
@@ -36,18 +34,18 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DateTimeParseException{
         super(description);
-        this.by = LocalDateTime.parse(by, INPUT_FORMAT);
+        this.by = LocalDateTime.parse(by, DATE_INPUT_FORMAT);
     }
 
     @Override
     public String toString() {
         return "[" + IDENTIFIER + "]" + super.toString()
-                + " (by:" + by.format(DISPLAY_FORMAT) + ")";
+                + " (by:" + by.format(DATE_DISPLAY_FORMAT) + ")";
     }
 
     @Override
     public String toStorageFormat() {
-        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat() + Task.STORAGE_DELIMITER
-                + by.format(INPUT_FORMAT);
+        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat()
+                + Task.STORAGE_DELIMITER + by.format(DATE_INPUT_FORMAT);
     }
 }

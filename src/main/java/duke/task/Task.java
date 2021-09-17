@@ -1,10 +1,17 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task in the task list.
  */
 public abstract class Task {
-    public final static String STORAGE_DELIMITER = "%";
+    public static final String STORAGE_DELIMITER = "%";
+
+    protected static final DateTimeFormatter DATE_INPUT_FORMAT =
+            DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    protected static final DateTimeFormatter DATE_DISPLAY_FORMAT =
+            DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
 
     private String description;
     private boolean isDone;

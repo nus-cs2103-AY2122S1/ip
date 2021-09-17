@@ -28,9 +28,4 @@ public class FindCommand implements Command {
         TaskList filteredTasks = tasks.findTasks(searchTerm);
         return ui.showFilteredTaskList(filteredTasks);
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
