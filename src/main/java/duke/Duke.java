@@ -36,10 +36,7 @@ public class Duke extends Application{
     private Storage storage;
     private Ui ui;
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
+    private AnchorPane createContainer() {
         //The container for the content of the chat to scroll. Designing layout.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -51,12 +48,10 @@ public class Duke extends Application{
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        return mainLayout;
+    }
 
-        stage.setScene(scene);
-        stage.show();
-
-        // Set preferred size and title
+    public void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -86,6 +81,18 @@ public class Duke extends Application{
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+        AnchorPane mainLayout = createContainer();
+        scene = new Scene(mainLayout);
+        stage.setScene(scene);
+        stage.show();
+
+        // Set preferred size and title
+        formatWindow(stage, mainLayout);
 
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -212,8 +219,6 @@ public class Duke extends Application{
     }
 
 
-
-
     public void run() {
         try {
             storage.load();
@@ -291,8 +296,8 @@ public class Duke extends Application{
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("here");
-        new Duke("data/tasks.txt").run();
-    }
+//    public static void main(String[] args) {
+//        System.out.println("here");
+//        new Duke("data/tasks.txt").run();
+//    }
 }
