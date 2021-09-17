@@ -3,6 +3,7 @@
 **Duke** is an app that helps you to manage all your tasks and deadlines through a Graphical User Interface.
 
 ## Contents
+- [Quick Start](#quick-start)
 - [Features](#features)
   - [Add Task](#add-task)
   - [Edit Task](#edit-task)
@@ -22,6 +23,20 @@
   - [`done`](#done---mark-task-done)
   - [`find`](#find---find-tasks-containing-keyword)
   - [`bye`](#bye---exit-program)
+
+## Quick Start
+1. Ensure that you have `Java 11` installed on your computer.
+2. Download the latest duke.jar file [here](https://github.com/neojxuan/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for Duke.
+4. Double-click the file to start the app. A GUI similar to below should appear:
+![GUI](./Ui.png)
+5. Type a command in the command box and press Enter to execute it. Here are some sample commands to try out:
+     - todo do 2103 quiz: Adds a Todo task with `do 2103 quiz` as task description
+     - event concert /at 20-02-2021 18:30: Adds an Event task with `concert` 
+       description and 20 Feb 2021 6:30 PM as time
+     - list: Lists all tasks
+     - delete 1: Deletes the first task shown in the list
+     - bye: Exits the app
 
 ## Features 
 
