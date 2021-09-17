@@ -11,8 +11,7 @@ import java.io.FileNotFoundException;
  * fundamental class.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 public class Duke {
 
     private String filePath;
@@ -41,6 +40,9 @@ public class Duke {
      * You should have your own function to generate a
      * response to user input. Replace this stub with
      * your completed method.
+     *
+     * @param input the user input
+     * @return the output
      */
     protected String getResponse(String input) {
         String output = "";
@@ -52,10 +54,6 @@ public class Duke {
             output = e.getMessage();
         }
         return output;
-    }
-
-
-    public static void main(String[] args) {
     }
 
     /**
