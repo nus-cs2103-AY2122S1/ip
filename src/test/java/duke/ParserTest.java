@@ -3,9 +3,8 @@ package duke;
 import duke.command.Command;
 import duke.command.CommandsTypes;
 import duke.task.Task;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.Test;
+import static junit.framework.TestCase.assertTrue;
 
 public class ParserTest {
     @Test
