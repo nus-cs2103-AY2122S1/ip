@@ -115,6 +115,7 @@ Format: `update <index> <format of task>`
 Example `update 1 play games /at 2021-12-12 12:00` (assuming task with index 1 was an event)
 
 ## Command Summary
+
 | Commands | Command Format |
 | ------------ | ------------- |
 | Bye | `bye` |
