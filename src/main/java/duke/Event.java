@@ -18,8 +18,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String serialise() {
-        return "E" + super.serialise() + " | " + at;
+    public String convertToSavableString() {
+        return "E" + super.convertToSavableString() + " | " + at;
     }
 
     @Override

@@ -27,13 +27,23 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.getIcons().add(iconImage);
-            stage.setTitle("Butler Pooh");
+            initialiseTitleBar(stage);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().welcomeMessage();
+            sendWelcomeMessage(fxmlLoader);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private void initialiseTitleBar(Stage stage) {
+        stage.getIcons().add(iconImage);
+        stage.setTitle("Butler Pooh");
+    }
+
+    private void sendWelcomeMessage(FXMLLoader fxmlLoader) {
+        fxmlLoader.<MainWindow>getController().sendFromDuke(duke.getWelcomeMessage());
+        fxmlLoader.<MainWindow>getController().sendFromDuke(Response.inputRequestMessage());
+    }
+
 }

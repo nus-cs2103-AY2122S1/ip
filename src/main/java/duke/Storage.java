@@ -19,13 +19,13 @@ public class Storage {
     private static final Set<String> VALID_TASK_TYPES = Set.of("T", "D", "E");
     private static final Set<String> VALID_DONE_STATUSES = Set.of("0", "1");
 
-    public static List<Task> retrieveTaskList() throws FileNotFoundException {
+    public static ArrayList<Task> retrieveTaskList() throws FileNotFoundException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             throw new FileNotFoundException();
         }
         Scanner scanner = new Scanner(file);
-        List<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String dataString = scanner.nextLine();
             Task task = convertStringToTask(dataString);
@@ -84,7 +84,7 @@ public class Storage {
         assert file.exists();
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Task task : taskList) {
-            fileWriter.write(task.serialise() + System.lineSeparator());
+            fileWriter.write(task.convertToSavableString() + System.lineSeparator());
         }
         fileWriter.close();
     }

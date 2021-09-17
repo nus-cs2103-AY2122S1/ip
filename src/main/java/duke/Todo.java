@@ -13,8 +13,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String serialise() {
-        return "T" + super.serialise();
+    public String convertToSavableString() {
+        return "T" + super.convertToSavableString();
     }
 
     @Override

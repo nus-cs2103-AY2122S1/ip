@@ -18,8 +18,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String serialise() {
-        return "D" + super.serialise() + " | " + by;
+    public String convertToSavableString() {
+        return "D" + super.convertToSavableString() + " | " + by;
     }
 
     @Override
