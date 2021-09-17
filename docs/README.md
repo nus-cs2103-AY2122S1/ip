@@ -164,17 +164,16 @@ Bye meow! I will always wait here meow(>^^<)
 ```
 
 ## Command Summary
-| Command                                        | Example                              |
-|------------------------------------------------|--------------------------------------|
-| `list`                                         | `list`                               |
-| `deadline <description> /by <yyyy-MM-dd HHmm>` | `deadline study /by 2024-05-01 2359` |
-| `event <description> /at <yyyy-MM-dd HHmm>`    | `event study /at 2024-05-01 2359`    |
-| `todo <description>`                           | `todo sleep`                         |
-| `delete <index>`                               | `delete 1`                           |
-| `done <index>`                                 | `done 3`                             |
-| `sort <task_type>`                             | `sort deadline`                      |
-| `find <keyword>`                               | `find life`                          |
-| `bye`                                          | `bye`                                |
+
+- `list`                                         
+- `deadline <description> /by <yyyy-MM-dd HHmm>` 
+- `event <description> /at <yyyy-MM-dd HHmm>`    
+- `todo <description>`                           
+- `delete <index>`                               
+- `done <index>`                                 
+- `sort <task_type>`                             
+- `find <keyword>`                               
+- `bye`                                          
 
 ## Credit
 Icons used are [free for non-commercial use](https://icons8.com/license). They are listed below:
