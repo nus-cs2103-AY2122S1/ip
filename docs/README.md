@@ -1,5 +1,5 @@
 # User Guide
-![Project Poseidon](./../src/main/resources/images/Logo.png)
+![Project Poseidon](./Logo.png)
 
 **Table of Contents**:
 - [Introduction](#ocean-introduction)
@@ -23,21 +23,21 @@
 :merman: :trident: :ocean:
 
 **P.O.S.E.I.D.O.N** -  stands for
-######  
+
 **P** lanner
-######  
+
 **O** rganizer that's
-######  
+
 **S** imple
-######  
+
 **E** fficient
-######  
+
 **I** ntelligent
-######  
+
 **D** igital
-######  
+
 **O** ptimized and
-######  
+
 **N** ifty.
 
 ## :ocean: Quick Start
