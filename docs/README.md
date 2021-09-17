@@ -35,6 +35,7 @@ Adds a deadline task to the list of tasks.
 
 Format : `deadline TASK_NAME /by DATE`
 * DATE must be in format : `d/M/yy H:mm` or `d/M/yyyy H:mm`
+* Time must be in 24-hour format. e.g `14:30` is 2:30 p.m
 * Hour can either be single or double digit. e.g `09:50` or `9:50`
 
 Example:
@@ -52,6 +53,7 @@ Adds an event task to the list of tasks.
 
 Format : `event TASK_NAME /at DATE`
 * DATE must be in format : `d/M/yy H:mm` or `d/M/yyyy H:mm`
+* Time must be in 24-hour format. e.g `14:30` is 2:30 p.m
 * Hour can either be single or double digit. e.g `09:50` or `9:50`
 
 Example:
