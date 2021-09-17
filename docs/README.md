@@ -148,7 +148,7 @@ Here are the tasks in your list:
 
 
 
-### `find` - Find tasks containing keyword
+### `find` - Search for tasks containing keyword
 
 Display tasks containing any keyword, phrase or letter of the user's choice.
 
@@ -158,7 +158,7 @@ Example of usage:
 
 Expected outcome:
 
-Description of the outcome.
+Search for tasks containing the keyword 'book'.
 
 ```
 Here are tasks that contain the keyword 'book':
@@ -184,6 +184,7 @@ Terminate and close the application.
 Automatically save the tasks to disk.
 
 
-### Acknowledgements:
+## Acknowledgements:
 Original Duke template forked from Prof Damith CS2103T Github
+
 GUI Design based on JavaFX tutorials
