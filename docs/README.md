@@ -12,12 +12,15 @@ TaskMan is your one-stop-shop for all your task management! TaskMan tracks your 
    * [Mark task as complete: `done`](#mark-task-as-complete-done)
    * [Remove a task: `delete`](#remove-a-task-delete)
    * [Viewing help : `help`](#viewing-help--help)
-*  [Exiting the application: `bye`](#exiting-the-application-bye)  
+* [Exiting the application: `bye`](#exiting-the-application-bye)  
+
+ 
   
   
 ## Quick Setup
     1. Ensure you have Java 11 or above installed in your Computer.
-    2. Using the Command Line, run the command java -jar taskman.jar (i.e., run the command in the same folder as the jar file)
+    2. Using the Command Line, run the command java -jar taskman.jar  
+       (i.e., run the command in the same folder as the jar file)
 
 Successfully opening TaskMan would lead you to a window like this
 
@@ -28,7 +31,7 @@ Successfully opening TaskMan would lead you to a window like this
 
 
 ## Features
-Listed below is a short description of what TaskMan can do as a task manager
+> Listed below is a short description of what TaskMan can do as a task manager
 
 1. Types of tasks
    - [_Todo:_](#adding-a-task-to-do-todo) a simple task with a short description
@@ -41,9 +44,9 @@ Listed below is a short description of what TaskMan can do as a task manager
    - [_List:_](#looking-at-all-the-task-being-tracked-list) A list of all the tasks being tracked
    - [_Find:_](#finding-task-using-keyword-find) Finding a task based on a keyword in its description
 
-### Adding a task to do :`todo`
-A task with a description.  
-Users could either type at the textbox below or press a button shortcut
+## Adding a task to do :`todo`
+> A task with a description.  
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `todo [description]`
@@ -67,9 +70,9 @@ _*x refers to the number of task in the list_
 1. Missing Description, TaskMan requires a description to be attached to all task
 
 
-### Adding a task with a deadline: `deadline`
-A task with a day to be set as a deadline.  
-Users could either type at the textbox below or press a button shortcut
+## Adding a task with a deadline: `deadline`
+> A task with a day to be set as a deadline.  
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `deadline [description] /by [YYYY-MM-DD] [Time in 24 Hour Format]`
@@ -101,9 +104,9 @@ _*x refers to the number of task in the list_
 3. Missing/Wrong Time input. Requires time to be in 24 hour format (0000 to 2359)
 
 
-### Adding an event: `event`
-A task with a day to be set as an Event.  
-Users could either type at the textbox below or press a button shortcut
+## Adding an event: `event`
+> A task with a day to be set as an Event.  
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `event [description] /at [YYYY-MM-DD] [Time in 24 Hour Format]`
@@ -134,9 +137,9 @@ _*x refers to the number of task in the list_
 3. Missing/Wrong Time input. Requires time to be in 24 hour format (0000 to 2359)
 
 
-### Looking at all the task being tracked: `list`
-Get a list of all the task being tracked.  
-Users could either type at the textbox below or press a button shortcut
+## Looking at all the task being tracked: `list`
+> Get a list of all the task being tracked.  
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `list`
@@ -159,8 +162,8 @@ Im sorry, the list seems to be empty
 1. Adding characters after `list` in the Command Line. This will invalidate the command
 
 ### Finding task using keyword: `find`
-Find a task based keyword description . 
-Users can can only type in the textbox. _**Button shortcut coming soon**_
+> Find a task based keyword description . 
+  Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `find [keyword/s]`
@@ -177,9 +180,9 @@ _*x refers to the task position in the whole list._
 1. No spacing between `find` and `[keywords]`. TaskMan would not recognize it as a command
 
 
-### Mark task as complete: `done`
-Marks a task as complete.  
-Users can can only type in the textbox. _**Button shortcut coming soon**_
+## Mark task as complete: `done`
+> Marks a task as complete.  
+  Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
 `done [task position in list]`  
@@ -199,12 +202,12 @@ Expected output:
     2. task position is not in **NUMERICAL** form
 
 
-### Remove a task: `delete`
-Delete a task.  
-Users can can only type in the textbox. _**Button shortcut coming soon**_
+## Remove a task: `delete`
+> Delete a task.  
+  Users can can only type in the textbox. _**Button shortcut coming soon**_
 
 _Format to type in textbox:_  
-`delete [task position in list]`
+`delete [task position in list]`  
 _*Note, to find `[task position in list]` , user may use either [find](#finding-task-using-keyword-find) or 
 [list](#looking-at-all-the-task-being-tracked-list)_
 
@@ -222,9 +225,9 @@ _*x refers to the number of task in the list_
     1. Number is out of bounds (Negative or larger than list size)
     2. task position is not in **NUMERICAL** form
 
-### Viewing help : `help`
-A quick way to access instructions for Command Line Commands
-Users could either type at the textbox below or press a button shortcut
+## Viewing help : `help`
+> A quick way to access instructions for Command Line Commands
+  Users could either type at the textbox below or press a button shortcut
 
 _Format to type in textbox:_  
 `help`  
@@ -258,9 +261,9 @@ Expected Output:
  Exiting the program : bye";
 ```
 
-### Exiting the application `bye`
-There are two ways to close the application.  
-Users could either type in the textbox below or simply closing `x` on the top right
+## Exiting the application `bye`
+> There are two ways to close the application.  
+  Users could either type in the textbox below or simply closing `x` on the top right
 
 _Format to type in textbox:_  
 `bye`
