@@ -201,8 +201,8 @@ public class Parser {
                 throw new DukeException(" OOPS!!! Your index"
                         + "\n is invalid :-(");
             }
-        } else if (input.contains("deadline") && !input.contains("/by  ")
-                  || input.contains("event") && !input.contains("/at  ")) {
+        } else if (input.contains("deadline") && !input.contains("/by ")
+                  || input.contains("event") && !input.contains("/at ")) {
             throw new DukeException(" OOPS!!! You need to use"
                     + "\n the correct format :-(");
         }
