@@ -1,4 +1,3 @@
 T | 1 | borrow book
 D | 1 | return book | 2/12/2019 1800
 E | 1 | project meeting | I don't know the time. Maybe your format is in correct!
-D | 1 | dadas | I don't know the time. Maybe your format is in correct!

@@ -69,20 +69,23 @@ public class ParserExceptionDetector {
      */
     public void detectGetTaskException() throws HydddException {
         boolean isCorrectType;
-        boolean isInCorrectFormat;
+        boolean hasSlash;
+        boolean hasSpace;
         boolean isEmptyTask;
 
         isCorrectType = input.startsWith(DEADLINE) || input.startsWith(EVENT)
                 || input.startsWith(TODO) || input.startsWith(FIND);
-        isInCorrectFormat = input.contains(SPACE);
+        hasSpace = input.contains(SPACE);
+        hasSlash = input.contains(SLASH);
         if (!isCorrectType) {
             return;
         }
-        if (!isInCorrectFormat) {
+        if (!hasSpace) {
             throw new HydddException(ExceptionType.NO_TASK_ERROR);
         }
-        isEmptyTask = input.contains(SLASH)
-                && (input.indexOf(SPACE) == input.indexOf(SLASH) - 1);
+        isEmptyTask = hasSlash && !(input.startsWith(TODO) || input.startsWith(FIND))
+                && (input.indexOf(SPACE) == input.lastIndexOf(SLASH) - 1);
+
         if (isEmptyTask) {
             throw new HydddException(ExceptionType.NO_TASK_ERROR);
         }
@@ -94,22 +97,27 @@ public class ParserExceptionDetector {
      * @throws HydddException Exception is thrown when the format of time is wrong or time info is missing.
      */
     public void detectGetTimeException() throws HydddException {
-        boolean isContainTime = input.startsWith(TODO) || input.startsWith(DEADLINE)
-                || input.startsWith(EVENT) || input.startsWith(TELL);
-        boolean isDeadlineFormat = input.contains(SLASH) && input.contains(BY);
-        boolean isEventFormat = input.contains(SLASH) && input.contains(AT);
-        boolean isTellFormat = input.contains(SPACE);
+        boolean isContainTime;
+        boolean isDeadlineFormat;
+        boolean isEventFormat;
+        boolean isTellFormat;
+
+        isContainTime = input.startsWith(DEADLINE) || input.startsWith(EVENT) || input.startsWith(TELL);
+        isDeadlineFormat = input.contains(SLASH) && input.contains(BY)
+                && (input.charAt(input.indexOf(SLASH) - 1) == ' ');;
+        isEventFormat = input.contains(SLASH) && input.contains(AT) && (input.charAt(input.indexOf(SLASH) - 1) == ' ');;
+        isTellFormat = input.contains(SPACE);
 
         if (!isContainTime) {
             return;
         }
 
         //throw exceptions for deadline or events' format.
-        if (input.startsWith(DEADLINE) && !isDeadlineFormat) {
+        if (input.startsWith(DEADLINE) && !isDeadlineFormat || input.endsWith(BY)) {
             throw new HydddException(ExceptionType.DEADLINE_FORMAT_ERROR);
         }
 
-        if (input.startsWith(EVENT) && !isEventFormat) {
+        if (input.startsWith(EVENT) && !isEventFormat || input.endsWith(AT)) {
             throw new HydddException(ExceptionType.EVENT_FORMAT_ERROR);
         }
 

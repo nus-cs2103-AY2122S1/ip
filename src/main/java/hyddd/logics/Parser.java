@@ -24,6 +24,8 @@ public class Parser {
     private static final String PIPE = "|";
     private static final String BY = "/by";
     private static final String AT = "/at";
+    private static final String TODO = "todo";
+    private static final String FIND = "find";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String TELL = "tell";
@@ -216,11 +218,18 @@ public class Parser {
      */
     public String getTask() throws HydddException {
         String task;
+        String taskTimeFormat = "";
 
         parserExceptionDetector.detectGetTaskException();
 
-        if (input.contains(SLASH)) {
-            task = input.substring(input.indexOf(SPACE) + 1, input.indexOf(SLASH) - 1);
+        if (input.startsWith(DEADLINE)) {
+            taskTimeFormat = BY;
+        } else if (input.startsWith(EVENT)) {
+            taskTimeFormat = AT;
+        }
+
+        if (input.contains(SLASH) && !(input.startsWith(TODO) || input.startsWith(FIND))) {
+            task = input.substring(input.indexOf(SPACE) + 1, input.lastIndexOf(taskTimeFormat) - 1);
         } else {
             task = input.substring(input.indexOf(SPACE) + 1);
         }
@@ -240,9 +249,9 @@ public class Parser {
         parserExceptionDetector.detectGetTimeException();
 
         if (input.startsWith(DEADLINE)) {
-            time = input.substring(input.indexOf(BY) + 4);
+            time = input.substring(input.lastIndexOf(BY) + 4);
         } else if (input.startsWith(EVENT)) {
-            time = input.substring(input.indexOf(AT) + 4);
+            time = input.substring(input.lastIndexOf(AT) + 4);
         } else if (input.startsWith(TELL)) {
             time = input.substring(input.indexOf(SPACE) + 1);
         }
