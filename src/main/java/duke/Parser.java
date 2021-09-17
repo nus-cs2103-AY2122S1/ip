@@ -38,7 +38,7 @@ public class Parser {
      *
      * @param input The string input provided by the user.
      * @return Task number of the task with reference to its number on the list.
-     * @throws MissingTaskNumberException
+     * @throws MissingTaskNumberException If the task number is missing.
      */
     public static int taskNumber(String input) throws MissingTaskNumberException {
         String[] strArr = input.split(" ", 2);
@@ -57,7 +57,7 @@ public class Parser {
      *
      * @param input The string input provided by the user.
      * @return Keyword after 'find' command.
-     * @throws MissingKeywordException
+     * @throws MissingKeywordException If the keyword is missing.
      */
     public static String getKeyword(String input) throws MissingKeywordException{
         String[] strArr = input.split(" ", 2);
@@ -75,7 +75,7 @@ public class Parser {
      *
      * @param input The string input provided by the user.
      * @return Description of the task.
-     * @throws MissingDescriptionException
+     * @throws MissingDescriptionException If the description is missing.
      */
     public static String getDescription(String input) throws MissingDescriptionException {
         String[] strArr = input.split(" ", 2);
@@ -94,7 +94,7 @@ public class Parser {
      *
      * @param input The string input provided by the user.
      * @return New instance of subclass of task.
-     * @throws DukeException
+     * @throws DukeException If there is any missing information, or if there is an invalid input.
      */
     static Task identifyType(String input) throws DukeException {
         String command = Parser.getCommand(input);
@@ -124,7 +124,7 @@ public class Parser {
      * @param taskList The arraylist of tasks.
      * @param file The file that the data is written to.
      * @param writer The printwriter.
-     * @throws DukeException
+     * @throws DukeException If format is wrong.
      */
     public static void parseCommand(TaskList taskList, File file, PrintWriter writer) throws DukeException {
         Scanner input = new Scanner(System.in);
@@ -171,7 +171,7 @@ public class Parser {
      * @param writer The printwriter to edit the file.
      * @param action The string input provided by the user.
      * @return Corresponding response for the user input.
-     * @throws DukeException
+     * @throws DukeException If format is wrong.
      */
     public static String getCommandResponse(TaskList taskList, File file,
                                             PrintWriter writer, String action) throws DukeException {
@@ -180,7 +180,7 @@ public class Parser {
         switch (command) {
         case "done":
             int taskNum = Parser.taskNumber(action);
-            String oldDescription = taskList.getIndividualTask(taskNum - 1).toString();
+            String oldDescription = taskList.getIndividualTaskInString(taskNum - 1);
             taskList.completeTask(taskNum);
             Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription);
             return Response.showCompletedMessage(taskList.getIndividualTask(taskNum - 1));

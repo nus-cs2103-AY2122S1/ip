@@ -41,7 +41,7 @@ public class Storage {
      * of the file to the top and clears all previous data before starting.
      *
      * @return Printwriter instance to write data into file.
-     * @throws IOException
+     * @throws IOException If file cant be created.
      */
     public PrintWriter load() throws IOException {
         PrintWriter writer = new PrintWriter(this.file);

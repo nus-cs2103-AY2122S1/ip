@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class that deals with all the interactions with the user.
+ * Class that deals with all the interactions with the user for CLI application.
  */
 public class Ui {
 

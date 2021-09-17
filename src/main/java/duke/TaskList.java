@@ -58,7 +58,7 @@ public class TaskList {
      * Deletes a specific task from the list.
      *
      * @param taskID Task index as shown to user.
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException If taskID is out of bounds.
      */
     public void deleteTask(int taskID) throws IndexOutOfBoundsException{
         if (taskID <=0 || taskID > this.tasks.size()) {
@@ -81,6 +81,16 @@ public class TaskList {
      */
     public Task getIndividualTask(int id) {
         return this.tasks.get(id);
+    }
+
+    /**
+     * Getter to get individual tasks from arraylist.
+     *
+     * @param id Index of task in array.
+     * @return Individual tasks in string.
+     */
+    public String getIndividualTaskInString(int id) {
+        return this.tasks.get(id).toString();
     }
 
     /**

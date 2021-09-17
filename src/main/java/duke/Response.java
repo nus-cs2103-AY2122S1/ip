@@ -4,8 +4,8 @@ import duke.tasks.Task;
 
 /**
  * This class encapsulates the responses that will be displayed to the user
- * when running the application. This class is not to be confused with the Ui class.
- * Ui class is the responses shown in the terminal and is also used in debugging.
+ * when running the GUI application. This class is not to be confused with the Ui class.
+ * Ui class is the responses shown in the terminal for CLI application.
  */
 public class Response {
     /**

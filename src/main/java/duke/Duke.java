@@ -42,7 +42,7 @@ public class Duke {
     /**
      * Run method triggers file to be created and welcomes user with welcome message.
      *
-     * @throws DukeException
+     * @throws DukeException If an exception is caught in parse command.
      */
     public void run() throws DukeException {
         File dukeFile = new File("data/duke.txt");
@@ -68,10 +68,11 @@ public class Duke {
     /**
      * Main method for program. Creates file path and creates file.
      *
-     * @param args
-     * @throws Exception
+     * @param args Arguments of main method.
+     * @throws IOException If createDirectories fails to be executed.
+     * @throws DukeException If program cannot be run.
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException, DukeException {
         Files.createDirectories(Paths.get("data/"));
         File dukeFile = new File("data/duke.txt");
         new Duke(dukeFile).run();
