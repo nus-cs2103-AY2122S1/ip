@@ -163,3 +163,15 @@ Shows an empty list when list command is entered.
 Here are the tasks in your list:
 no tasks in list yet...
 ```
+___
+### `bye` - Exits program
+
+Example of usage: `bye`
+
+Expected outcome:
+
+Shows bye message and closes app.
+
+```
+Bye! Hope to see you again soon!
+```
