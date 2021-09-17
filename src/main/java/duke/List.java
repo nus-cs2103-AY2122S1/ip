@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Represents the Todo List for Duke.
+ * Represents the List of tasks for Duke.
  */
 public class List {
     public static final String DISPLAY_LIST_COMMAND = "list";
@@ -38,7 +38,7 @@ public class List {
     }
 
     /**
-     * Adds Task to the List.
+     * Adds a Task to the List.
      *
      * @param input the command given.
      * @throws IOException If the file cannot be read/found.
@@ -51,17 +51,16 @@ public class List {
         }
         if (input.equals(HELP_COMMAND)) {
             return helpPage();
-        } else {
-            try {
-                return parser.process(input, this);
-            } catch (DukeException e) {
-                return (e.getMessage());
-            }
+        }
+        try {
+            return parser.process(input, this);
+        } catch (DukeException e) {
+            return (e.getMessage());
         }
     }
 
     /**
-     * Display the current content of the list.
+     * Displays the current content of the list.
      * Ordered by creation time.
      *
      * @returns The list in String.

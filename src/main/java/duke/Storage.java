@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * A representation of a class that handles the reading and writing of the data.
+ * Represents of a class that handles the reading and writing of the data.
  */
 public class Storage {
     public static final String FILENAME = "filename.txt";
@@ -25,7 +25,7 @@ public class Storage {
 
     /**
      * Reads the data from the File.
-     * Add the entries to the List according to the order in data.
+     * Adds the entries to the List according to the order in data.
      *
      * @return A newly created List of Tasks.
      * @throws IOException If the file cannot be read/found.

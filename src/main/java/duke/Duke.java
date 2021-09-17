@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Represent the Duke Bot.
+ * Represents the Duke Bot.
  * Entry point to the programme.
  */
 public class Duke extends Application {
@@ -32,27 +32,24 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Ben.jpg"));
 
     /**
-     * Entry point to the program
+     * Starts to the program
      *
      * @param stage the stage to be displayed.
      */
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
+    // with minor modifications
     @Override
     public void start(Stage stage) {
-        //@@author Jeffry Lum-reused
-        //Reused from https://se-education.org/guides/tutorials/javaFx.html
-        // with minor modifications
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
         scene.getRoot().setStyle("-fx-font-family: 'Courier New'");
         stage.setScene(scene);
         stage.show();
@@ -62,24 +59,19 @@ public class Duke extends Application {
         stage.setMinWidth(400.0);
 
         mainLayout.setPrefSize(400.0, 600.0);
-
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
@@ -88,12 +80,12 @@ public class Duke extends Application {
     }
 
     /**
-     * Add Duke setups after initial GUI setups.
+     * Adds a Duke object after initial GUI setups.
      */
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
+    // with minor modifications
     public void addDuke() {
-        //@@author Jeffry Lum-reused
-        //Reused from https://se-education.org/guides/tutorials/javaFx.html
-        // with minor modifications
         Duke dukeBot = new Duke();
         Parser parser = new Parser();
         File myObj = new File(Storage.FILENAME);
@@ -129,10 +121,10 @@ public class Duke extends Application {
      * @param parser The parser used for processing input.
      * @param data The data used for storage.
      */
+    //@@author Jeffry Lum-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFx.html
+    // with minor modifications
     private void handleUserInput(Duke dukeBot, Parser parser, Storage data) {
-        //@@author Jeffry Lum-reused
-        //Reused from https://se-education.org/guides/tutorials/javaFx.html
-        // with minor modifications
         if (userInput.getText().equals(QUIT_COMMAND)) {
             System.exit(0);
         }

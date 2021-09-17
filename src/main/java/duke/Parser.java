@@ -7,7 +7,7 @@ import java.time.DateTimeException;
  */
 public class Parser {
     /**
-     * Handles the input commands and execute the commands.
+     * Handles the input commands and calls the correct commands.
      *
      * @param list The current todolist.
      * @param input The command given by the user.
@@ -37,7 +37,7 @@ public class Parser {
     }
 
     /**
-     * Process todos commands.
+     * Processes todos commands.
      *
      * @param input The command given by the user.
      * @param list The current todolist.
@@ -55,7 +55,7 @@ public class Parser {
     }
 
     /**
-     * Process deadline commands.
+     * Processes deadline commands.
      *
      * @param input The command given by the user.
      * @param list The current todolist.
@@ -77,7 +77,7 @@ public class Parser {
     }
 
     /**
-     * Process event commands.
+     * Processes event commands.
      *
      * @param input The command given by the user.
      * @param list The current todolist.

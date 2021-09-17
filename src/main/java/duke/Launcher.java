@@ -3,11 +3,11 @@ package duke;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Represents a launcher class to workaround classpath issues.
  */
 public class Launcher {
     /**
-     * Start of the programme.
+     * Launches the programme.
      *
      * @param args default.
      */

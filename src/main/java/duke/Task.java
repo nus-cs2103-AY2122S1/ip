@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * A representation of a Task Class.
+ * Represents a Task Class.
  * Handles operations that are common for all Tasks.
  */
 public class Task {
@@ -21,8 +21,7 @@ public class Task {
     }
 
     /**
-     * Overloaded constructor for Task Class.
-     * Used when loading data.
+     * Overloaded constructor for Task Class when loading data.
      *
      * @param name Name of the Task.
      * @param done Done status of the Task.
@@ -49,8 +48,7 @@ public class Task {
     }
 
     /**
-     * Handles the creation of new Tasks.
-     * Used when loading the data from file.
+     * Handles the creation of new Tasks when loading the data from file.
      *
      * @param input The line from data.
      * @return A Task based on the input.

@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * A class that handles the dialog box for the dialog.
+ * Represents class that handles the dialog box for the dialog.
  */
 public class DialogBox extends HBox {
 
