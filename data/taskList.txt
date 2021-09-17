@@ -1,0 +1,5 @@
+[E][X] party  (at: 220921 1900)
+[D][ ] essay  (by: 120421 2359)
+[T][ ] read book
+[D][ ] return book  (by: 190921 1700)
+[T][ ] read book
