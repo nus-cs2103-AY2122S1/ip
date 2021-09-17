@@ -133,9 +133,12 @@ Edits the task at the specified index.
 
 Format: `edit INDEX /desc [DESC] /date [DATETIME]`
 - The index refers to the number shown in the displayed task list.
+- The index should be a positive number not greater than the number of tasks in the task list.
 - At least one of the fields (desc or date) must be provided
 - Existing values will be updated to the input values
 - DATETIME should be entered in this format: `dd-mm-yyyy hh:mm`
+- If the task to be edited is a Todo, the /date field will be ignored 
+but the description of the Todo will still be updated if the /desc field is present
 
 Example of usage:
 
@@ -156,6 +159,7 @@ Deletes the task at the specified index.
 
 Format: `delete INDEX`
 - The index refers to the number shown in the displayed task list.
+- The index should be a positive number not greater than the number of tasks in the task list.
 
 Example of usage:
 
@@ -198,6 +202,7 @@ Marks the task at the specified index as done.
 
 Format: `done INDEX`
 - The index refers to the number shown in the displayed task list.
+- The index should be a positive number not greater than the number of tasks in the task list.
 
 Example of usage:
 
