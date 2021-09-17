@@ -16,6 +16,6 @@ public class Ui {
     public static String printDate(LocalDate rawLocalDate) {
         String month = rawLocalDate.getMonth().toString().substring(0, 3);
 
-        return (month + " " + rawLocalDate.getDayOfMonth() + " " + rawLocalDate.getYear());
+        return (rawLocalDate.getDayOfMonth() + " " + month + " " + rawLocalDate.getYear());
     }
 }
