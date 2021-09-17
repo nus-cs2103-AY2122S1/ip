@@ -28,11 +28,6 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (obj instanceof AddCommand) {
             return true;

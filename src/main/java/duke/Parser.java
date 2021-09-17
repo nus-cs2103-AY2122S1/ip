@@ -46,15 +46,15 @@ public class Parser {
         } else if (input.startsWith("todo")) {
             return parseToDo(input);
         } else if (input.startsWith("deadline")) {
-           return parseDeadline(input);
+            return parseDeadline(input);
         } else if (input.startsWith("event")) {
-           return parseEvent(input);
+            return parseEvent(input);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private Command parseMarkAsDoneCommand(String input) throws DukeException{
+    private Command parseMarkAsDoneCommand(String input) throws DukeException {
         try {
             int contentStartIndex = 5;
             int taskIndex = Integer.parseInt(input.substring(contentStartIndex));

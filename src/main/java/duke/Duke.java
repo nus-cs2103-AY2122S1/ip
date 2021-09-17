@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.controller.MainWindow;
-import duke.exception.DukeException;
 
 /**
  * The Duke bot.

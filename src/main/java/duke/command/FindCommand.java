@@ -18,11 +18,6 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (obj instanceof FindCommand) {
             return true;
