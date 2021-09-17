@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * An example of a custom control using FXML.
@@ -20,6 +21,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    @FXML
+    private VBox dialogFrame;
     @FXML
     private Label dialog;
     @FXML
@@ -50,12 +53,24 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.changeTheme(true);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.changeTheme(false);
         return db;
+    }
+
+    private void changeTheme(boolean isUser) {
+        dialogFrame.getStyleClass().clear();
+        if (isUser) {
+            dialogFrame.getStyleClass().add("dialog-pane-user");
+        } else {
+            dialogFrame.getStyleClass().add("dialog-pane-pats");
+        }
     }
 }

@@ -24,7 +24,7 @@ public class Ui {
     /**
      * Initializes Ui component with Ui mode.
      *
-     * @param uiMode Does the
+     * @param uiMode Mode of UI
      */
     public Ui(UiMode uiMode) {
         Ui.uiMode = uiMode;
@@ -71,14 +71,8 @@ public class Ui {
      */
     public void printWelcomeMessage() {
         if (Ui.uiMode == UiMode.CLI) {
-            String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-            System.out.println("Hello from\n" + logo);
             printDividerLine();
-            printWithIndent("Hello! I'm Duke");
+            printWithIndent("Welcome to Primitive Aegir Terminal Service.");
             printWithIndent("What can I do for you?");
             printDividerLine();
         }
@@ -91,12 +85,12 @@ public class Ui {
      */
     public void printWelcomeMessage(MainWindow mainWindow) {
         if (Ui.uiMode == UiMode.GUI) {
-            mainWindow.printWelcomeMessage("Hello! I'm Duke. What can I do for you?");
+            mainWindow.printWelcomeMessage("Welcome to Primitive Aegir Terminal Service.\nWhat can I do for you?");
         }
     }
 
     public static void printGoodbyeMessage() {
-        printWithIndent("Bye. Hope to see you again soon!");
+        printWithIndent("Science and technology will pave our way towards utopia.");
     }
 
     /**
@@ -108,7 +102,7 @@ public class Ui {
         requireNonNull(taskList, "task list is not initialized");
 
         if (taskList.size() == 0) {
-            printWithIndent("The task list is empty");
+            printWithIndent("The task list is empty.");
             return;
         }
 
@@ -138,7 +132,7 @@ public class Ui {
      */
     public static void printFoundTasks(String[] tasks) {
         if (tasks != null && tasks.length > 0) {
-            printWithIndent("Here are the matching tasks in your list:");
+            printWithIndent("Here are the matching tasks:");
             for (int i = 0; i < tasks.length; i++) {
                 printWithIndent((i + 1) + "." + tasks[i]);
             }
@@ -167,7 +161,7 @@ public class Ui {
     public static void printRemoveTask(String taskStr) {
         requireNonNull(taskStr, "Task string cannot be null");
 
-        printWithIndent("Noted. I've removed this task: ");
+        printWithIndent("Noted. This task has been removed: ");
         printWithIndent("  " + taskStr);
     }
 
@@ -183,7 +177,7 @@ public class Ui {
     public static void printMarkDone(String taskStr) {
         requireNonNull(taskStr, "Task string cannot be null");
 
-        printWithIndent("Nice! I've marked this task as done: ");
+        printWithIndent("Noted. This task has been marked as done: ");
         printWithIndent("  " + taskStr);
     }
 
@@ -204,12 +198,12 @@ public class Ui {
             printWithIndent(userInput + ": " + e.getMessage());
             break;
         case DDL_MISSING_KEYWORD:
-            printWithIndent(e.getMessage() + ". Correct format is:");
+            printWithIndent(e.getMessage() + "Correct format is:");
             printWithIndent("deadline {description} /by {due time}");
             printWithIndent("Example: deadline return book /by Sunday");
             break;
         case EVENT_MISSING_KEYWORD:
-            printWithIndent(e.getMessage() + ". Correct format is:");
+            printWithIndent(e.getMessage() + "Correct format is:");
             printWithIndent("event {description} /at {time period}");
             printWithIndent("Example: event project meeting /at Mon 2-4pm");
             break;
@@ -217,6 +211,8 @@ public class Ui {
             printWithIndent("Unknown exception occurred.");
             break;
         case PIPE_SYMBOL:
+            printWithIndent(userInput + ": " + e.getMessage() + "Please do not include it in your command.");
+            break;
         case HAS_DUPLICATE:
         case FAIL_TO_READ:
         case FAIL_TO_WRITE:

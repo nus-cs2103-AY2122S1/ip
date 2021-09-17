@@ -80,10 +80,15 @@ public class Duke {
 
             Command c = Parser.parse(userInput, taskList.size());
             c.execute(this.taskList, this.ui, this.storage);
+            this.isExit = c.isExit();
         } catch (DukeException e) {
             Ui.printErrorMessage(e, userInput);
         }
         return Ui.getResponse();
+    }
+
+    public boolean isExit() {
+        return this.isExit;
     }
 
     /**

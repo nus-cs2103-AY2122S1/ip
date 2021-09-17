@@ -1,0 +1,27 @@
+.dialog-pane-pats{
+    -fx-background-color: #e0e1f1;
+    -fx-padding: 8 8 8 8;
+    -fx-border-radius: 6 6 6 6;
+    -fx-background-radius: 6 6 6 6;
+    -fx-opacity: 0.9;
+}
+
+.dialog-pane-user{
+    -fx-background-color: #ffffb3;
+    -fx-padding: 8 8 8 8;
+    -fx-border-radius: 6 6 6 6;
+    -fx-background-radius: 6 6 6 6;
+    -fx-opacity: 0.9;
+}
+
+
+.label{
+    -fx-font-family: "Roboto Regular";
+    -fx-font-size: 11pt;
+}
+
+.dialog-container{
+    -fx-background-image: url("/images/aegir_icon.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}

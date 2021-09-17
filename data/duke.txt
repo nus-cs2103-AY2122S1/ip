@@ -1,4 +1,0 @@
-T | 1 | sksk | todo
-E | 0 | asdhajk | asdhajd
-D | 0 | s | 1777-11-11
-T | 0 | 1\ | todo
