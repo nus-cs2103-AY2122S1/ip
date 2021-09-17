@@ -118,7 +118,6 @@ public class Ui {
      *
      * @return
      */
-
     public String addedTaskMessage() {
         return "Got it. I've added this task: \n";
     }
@@ -128,7 +127,6 @@ public class Ui {
      *
      * @return
      */
-
     public String printStatistics(Statistics stats) {
         String returnMessage = "";
         returnMessage += "Total Tasks Done: " + stats.getTasksDone() + "\n";
@@ -142,7 +140,6 @@ public class Ui {
      *
      * @return
      */
-
     public String helpMessage() {
         String returnMessage = "";
         returnMessage += "Here are my commands:\n";
@@ -155,7 +152,9 @@ public class Ui {
         returnMessage += "Find: \"find [keyword]\"\n";
         returnMessage += "Delete: \"delete [task number]\"\n";
         returnMessage += "Save: \"save\"\n";
+        returnMessage += "Exit: \"bye\"\n";
         return returnMessage;
 
     }
+    
 }

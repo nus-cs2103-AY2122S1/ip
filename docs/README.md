@@ -132,6 +132,14 @@ Total Tasks Added: 3
 Total Tasks Deleted: 1 
 ```
 
+### `bye` - Exits the application
+
+Example of usage:
+
+`bye`
+
+
+
 ### `help` - Learn how to use the application
 
 Example of usage:
@@ -151,6 +159,7 @@ Delete: delete [task number]
 Find: find [keyword]
 Delete: delete [task number]
 Save: save
+Exit: bye
 ```
 
 

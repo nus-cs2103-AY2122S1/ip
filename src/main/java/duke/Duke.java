@@ -42,6 +42,10 @@ public class Duke {
         return c.execute(tasks, ui, storage, statistics);
 
     }
+    
+    /**
+     * Returns the greeting message.
+     */
     String greetingMessage() {
         return ui.showWelcome();
     }
