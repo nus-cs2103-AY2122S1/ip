@@ -7,20 +7,16 @@ package task;
  */
 
 public class Todo extends Task {
+
     /**
-     * Constructor for Todo object.
+     * Constructs a Todo object.
      *
-     * @param description the task description
+     * @param description the task description.
      */
     public Todo(String description, String notes, boolean completed) {
         super(description, notes, completed);
     }
 
-    /**
-     * Returns out the task.Task description and the task type in String
-     *
-     * @return the String representation of a task.Todo
-     */
     private String showNotesIfAvailable() {
         if (this.notes.isEmpty()) {
             return "";
@@ -29,6 +25,11 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Returns the string representation of the Todo object.
+     *
+     * @return the full string representation of Todo Object.
+     */
     @Override
     public String toString() {
         return String.format("[T]%s\n%s", super.toString(), showNotesIfAvailable());

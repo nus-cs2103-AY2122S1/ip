@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the given command returned by parse method.
-     * Each command class will have its own interaction with Ui, TaskList and Storage
+     * Each command class will have its own interaction with Ui, TaskList and Storage.
      *
      * @param tasks the TaskList loaded from storage.
      * @param storage accesses the file location in local storage.

@@ -11,13 +11,18 @@ public class DoneCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Creates a command to mark task as completed.
+     *
+     * @param i the index of the completed task.
+     */
     public DoneCommand(int i) {
         this.taskNumber = i;
     }
 
     /**
      * Executes the given command returned by parse method.
-     * Each command class will have its own interaction with Ui, TaskList and Storage
+     * Each command class will have its own interaction with Ui, TaskList and Storage.
      *
      * @param tasks the TaskList loaded from storage.
      * @param storage accesses the file location in local storage.

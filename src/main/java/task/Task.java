@@ -7,6 +7,7 @@ public abstract class Task {
 
     /**
      * Constructs a Task class with common information.
+     *
      * @param description the task description
      * @param notes additional notes that are not related to task name
      * @param completed true if task has been completed
@@ -17,6 +18,11 @@ public abstract class Task {
         this.notes = notes;
     }
 
+    /**
+     * Returns 'X' if the task is completed, and " " otherwise.
+     *
+     * @return the status of the completion of task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
@@ -24,6 +30,8 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
+
+    /** Marks a task as completed */
     public void markIsDone() {
         this.isDone = true;
     }
@@ -36,17 +44,17 @@ public abstract class Task {
         return this.notes;
     }
 
+    /**
+     * Returns the string representation of the Task.
+     *
+     * @return the full string representation of Task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
 
     }
 
-    /**
-     * Returns the type of task in String.
-     *
-     * @return string format of task type.
-     */
     public abstract String getType();
     public abstract String getDeadline();
 }

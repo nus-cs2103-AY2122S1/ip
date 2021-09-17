@@ -12,17 +12,16 @@ import exception.InvalidDateFormat;
 public class Deadline extends Task {
 
     private LocalDate date;
-
     private DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
      * Initialises the description, deadline and isComplete status of task.
      *
-     * @param description task description
-     * @param deadline deadline of task
-     * @param completed true if the task is completed
-     * @throws InvalidDateFormat
+     * @param description task description.
+     * @param deadline deadline of task.
+     * @param completed true if the task is completed.
+     * @throws InvalidDateFormat if the date is written in the wrong format.
      */
     public Deadline(String description, String deadline, String notes, boolean completed) throws InvalidDateFormat {
         super(description, notes, completed);
@@ -41,6 +40,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the string representation of the Deadline Object.
+     *
+     * @return the full string representation of Deadline Object.
+     */
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)\n%s", super.toString(),

@@ -23,7 +23,7 @@ public class AddCommand extends Command {
      * Abstracts out the critical information from the user's input and insert task as the taskType.
      * Initialises taskInfo and taskType with respective information.
      *
-     * @param input The complete string input by users
+     * @param input The complete string input by users.
      * @throws InvalidDescription If the description of task is empty or contains only spaces.
      */
     public AddCommand(String input) throws InvalidDateFormat, InvalidDescription, InvalidNotes {
@@ -83,11 +83,11 @@ public class AddCommand extends Command {
 
     /**
      * Executes the given command returned by parse method.
-     * Each command class will have its own interaction with Ui, TaskList and Storage
+     * Each command class will have its own interaction with Ui, TaskList and Storage.
      *
      * @param tasks the TaskList loaded from storage.
      * @param storage accesses the file location in local storage.
-     * @throws InvalidDateFormat if the date is not in the proper dd/MM/yyyy format
+     * @throws InvalidDateFormat if the date is not in the proper dd/MM/yyyy format.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws InvalidDateFormat {

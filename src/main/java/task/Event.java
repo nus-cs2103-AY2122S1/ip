@@ -15,11 +15,12 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event task.
+     *
      * @param description the description of the task.
      * @param deadline the deadline of the task.
      * @param notes additional notes regarding the task
      * @param completed true if the task is completed.
-     * @throws InvalidDateFormat
+     * @throws InvalidDateFormat if the date is written in the wrong format.
      */
     public Event(String description, String deadline, String notes, boolean completed) throws InvalidDateFormat {
         super(description, notes, completed);
@@ -38,6 +39,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the string representation of the Event Object.
+     *
+     * @return the full string representation of Event Object.
+     */
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)\n%s", super.toString(),

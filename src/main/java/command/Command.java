@@ -16,13 +16,13 @@ public abstract class Command {
 
     /**
      * Parses the input given by users and return the correct type of command.
-     * Invalid commands will throw the respective DukeExceptions
+     * Invalid commands will throw the respective DukeExceptions.
      *
-     * @param input string input by users
-     * @return The specific type of command that can be executed
-     * @throws InvalidCommand If command cannot be understood
-     * @throws InvalidDescription If AddCommand is intended but without any description
-     * @throws InvalidDateFormat If AddCommand is intended but the date format is not followed
+     * @param input string input by users.
+     * @return The specific type of command that can be executed.
+     * @throws InvalidCommand If command cannot be understood.
+     * @throws InvalidDescription If AddCommand is intended but without any description.
+     * @throws InvalidDateFormat If AddCommand is intended but the date format is not followed.
      */
     public static Command parse(String input) throws InvalidCommand, InvalidDescription,
             InvalidDateFormat, InvalidNotes {
@@ -64,11 +64,11 @@ public abstract class Command {
 
     /**
      * Executes the given command returned by parse method.
-     * Each command class will have its own interaction with Ui, TaskList and Storage
+     * Each command class will have its own interaction with Ui, TaskList and Storage.
      *
      * @param tasks the TaskList loaded from storage.
      * @param storage accesses the file location in local storage.
-     * @throws DukeException If the execution contains unexpected behaviour
+     * @throws DukeException If the execution contains unexpected behaviour.
      */
     public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 }

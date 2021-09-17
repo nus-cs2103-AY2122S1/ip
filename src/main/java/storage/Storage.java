@@ -111,12 +111,6 @@ public class Storage {
         taskList.add(newEvent);
     }
 
-    /**
-     * Writes data into the file specified.
-     *
-     * @param filePath path to the local file used for storage.
-     * @param textToAdd the string containing task details
-     */
     private static void writeToFile(String filePath, String textToAdd) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -128,7 +122,7 @@ public class Storage {
     }
 
     /**
-     * Abstracts the data of tasks into a string used for writeToFile.
+     * Abstracts out the data of tasks into a string used for writeToFile.
      *
      * @param taskList the ArrayList of tasks.
      */

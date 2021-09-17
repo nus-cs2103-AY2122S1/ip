@@ -3,7 +3,6 @@ import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
 
-
 /**
  * Duke is secretary chatbot.
  * It stores tasks entered by users locally and reloads them on every start-up.
@@ -18,9 +17,8 @@ public class Duke {
      * Creates the instance of Duke.
      * The path to the local file and tasklist will be initialised.
      *
-     * @param filePath the path to the local file
+     * @param filePath the path to the local file.
      */
-
     public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -29,7 +27,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
 
     protected String getResponse(String input) {
         try {
