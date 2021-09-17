@@ -23,6 +23,8 @@ import bot.tasks.ToDo;
 public class Logger {
     private static BufferedReader bufferedReader;
 
+    private Logger() {}
+
     protected static void initialize() {
         try {
             ensureTasksExist();
@@ -79,6 +81,7 @@ public class Logger {
 
     private static void ensureTasksExist() throws IOException {
         Path path = Paths.get("tasks.txt");
+        // Adapted the following file setup from https://github.com/Yukun99/ip/
         if (!Files.exists(path)) {
             String newPath = System.getProperty("user.dir");
             newPath = newPath.replace("\\", "/");

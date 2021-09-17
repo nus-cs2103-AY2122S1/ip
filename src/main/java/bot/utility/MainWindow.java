@@ -1,17 +1,17 @@
 package bot.utility;
 
-import java.util.Objects;
-
 import bot.commands.Command;
 import bot.error.DukeException;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
+import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,8 +23,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Ui ui;
     private Parser parser;
@@ -45,8 +43,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        sendButton.setOnMouseClicked((event) -> handleUserInput());
-        userInput.setOnAction((event) -> handleUserInput());
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));

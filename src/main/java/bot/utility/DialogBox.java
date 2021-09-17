@@ -41,6 +41,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
         clip.setArcWidth(100);
         clip.setArcHeight(100);

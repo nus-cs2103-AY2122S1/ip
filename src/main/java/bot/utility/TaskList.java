@@ -10,6 +10,11 @@ import bot.tasks.Task;
  */
 public class TaskList {
     private static List<Task> tasks;
+
+    private TaskList() {
+
+    }
+
     protected static void initialize() {
         tasks = Logger.loadList();
     }
