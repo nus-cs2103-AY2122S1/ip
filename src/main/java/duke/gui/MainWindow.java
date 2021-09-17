@@ -74,6 +74,7 @@ public class MainWindow extends AnchorPane {
             });
             pause.play();
         }
+        // @@author
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
