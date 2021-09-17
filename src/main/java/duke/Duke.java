@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -21,8 +20,6 @@ public class Duke extends Application {
     private Button sendButton;
     private AnchorPane mainLayout;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
 
     /** Encapsulates the storage of tasks in a file within the user's computer for continuity across Duke sessions. */
     private final Storage STORAGE;
@@ -68,7 +65,6 @@ public class Duke extends Application {
 
     private void setUpComponents(Stage stage) {
         // insert assert here?
-        //Step 1. Setting up required components
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
 
@@ -79,20 +75,6 @@ public class Duke extends Application {
         mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        // remove after
-        /*
-        scrollPane.setBackground(new Background(new BackgroundFill(Color.RED,
-                CornerRadii.EMPTY,
-                Insets.EMPTY)));
-        dialogContainer.setBackground(new Background(new BackgroundFill(Color.RED,
-                CornerRadii.EMPTY,
-                Insets.EMPTY)));
-        dialogContainer.setStyle("-fx-background-color: #FF0000;");
-        mainLayout.setBackground(new Background(new BackgroundFill(Color.RED,
-                CornerRadii.EMPTY,
-                Insets.EMPTY)));
-         */
-
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -100,8 +82,6 @@ public class Duke extends Application {
     }
 
     private void formatWindow(Stage stage) {
-        // insert assert here?
-        //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -130,26 +110,21 @@ public class Duke extends Application {
     }
 
 
-    // TODO: check
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        DukeStatus currentStatus = DukeStatus.ACTIVE;
-        try {
-            currentStatus = PARSER.parse(input, tasks, UI);
-        } catch (DukeException e) {
-            UI.getResponse(e.getMessage());
-        }
+        DukeStatus currentStatus = PARSER.parse(input, tasks, UI);
+
         try {
             STORAGE.rewriteData(tasks.convertToSaveFormat());
         } catch (DukeException e) {
-            // TODO
             UI.getResponse(e.getMessage());
         }
 
         if (currentStatus == DukeStatus.INACTIVE) {
+            // TODO: 1 second delay
             Platform.exit();
             System.exit(0);
         }

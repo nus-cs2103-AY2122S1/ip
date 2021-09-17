@@ -2,7 +2,7 @@ package duke;
 
 public enum DukeStatus {
     ACTIVE("active"), INACTIVE ("Bye. Hope to see you again soon!"),
-            ERROR ("error"), MESSAGE("message");
+            ERROR ("Error message here."), MESSAGE("Message to user here.");
 
     private String response;
 
