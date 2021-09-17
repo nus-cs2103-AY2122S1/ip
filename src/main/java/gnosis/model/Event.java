@@ -1,7 +1,8 @@
 package gnosis.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import gnosis.util.DateTimeHelper;
 
 /**
  * This class encapsulates an
@@ -45,7 +46,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return super.toString()
-                + "(at:" + this.getDatetime().format(
-                        DateTimeFormatter.ofPattern("MM dd yyyy, hh:mma")) + ")";
+                + "(at:" + DateTimeHelper.dateToString(this.getDatetime()) + ")";
     }
 }

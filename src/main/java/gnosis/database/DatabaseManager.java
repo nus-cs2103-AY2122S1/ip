@@ -6,7 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 
-
+/**
+ * Database manager to manage read/write to file.
+ *
+ * @author Pawandeep Singh
+ * */
 public class DatabaseManager {
 
     protected static final String DELIMITER = ",";
@@ -33,7 +37,7 @@ public class DatabaseManager {
         return this.filePath;
     }
 
-    // returns value whether data folder and file was created successfully
+
     protected boolean createDataFolder() {
         // create folder
         return !this.file.exists() && file.getParentFile().mkdir();

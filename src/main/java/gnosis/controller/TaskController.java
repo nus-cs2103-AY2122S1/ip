@@ -1,9 +1,8 @@
 package gnosis.controller;
 
+import static gnosis.util.DateTimeHelper.stringToDate;
+
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +21,8 @@ import gnosis.util.GnosisException;
 public class TaskController implements CommandListener {
 
     private List<Task> tasks;
+
+    // TODO: remove use of hardcoded value
     private TaskDbManager taskDbManager = new TaskDbManager("tasks");
 
     public TaskController() {
@@ -30,7 +31,6 @@ public class TaskController implements CommandListener {
 
     @Override
     public void executeCommand(Command commandToExecute, String userInput, GnosisUI view) throws GnosisException {
-        // execute command
         switch (commandToExecute) {
         case TODO:
             Todo td = this.addTodo(userInput);
@@ -131,13 +131,11 @@ public class TaskController implements CommandListener {
         String[] splitTaskInput = deadline.split("/by");
 
         if (splitTaskInput.length != 2) {
-            //deadline empty exception
             throw new GnosisException(GnosisConstants.DEADLINE_EMPTY_EXCEPT_MESSAGE);
         }
 
         String taskName = splitTaskInput[0];
         String taskDeadline = splitTaskInput[1];
-
         Deadline dl = new Deadline(taskName, stringToDate(taskDeadline));
         tasks.add(dl);
 
@@ -197,26 +195,5 @@ public class TaskController implements CommandListener {
 
     public int getNumOfTasks() {
         return this.getTasks().size();
-    }
-
-    /**
-     * Converts a string to a DateTime.
-     *
-     * @param dateString to convert to a date.
-     * @return LocalDateTime formatted datetime.
-     * @throws GnosisException If String date does not match date format.
-     */
-    public static LocalDateTime stringToDate(String dateString) throws GnosisException {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-
-        LocalDateTime ldt;
-        try {
-            ldt = LocalDateTime.parse(dateString.stripLeading(), formatter);
-        } catch (DateTimeParseException e) {
-            throw new GnosisException(GnosisConstants.DATETIME_FORMAT_EXCEPT_MESSAGE);
-        }
-
-        return ldt;
     }
 }

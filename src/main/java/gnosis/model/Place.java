@@ -1,7 +1,8 @@
 package gnosis.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import gnosis.util.DateTimeHelper;
 
 /**
  * The Place class encapsulates a place denoting the name, address
@@ -42,7 +43,7 @@ public class Place {
 
     @Override
     public String toString() {
-        return "visited: " + this.name + " at " + this.address + "on " + this.dateVisited.format(
-                DateTimeFormatter.ofPattern("MM dd yyyy, hh:mma"));
+        return "visited: " + this.name + " at " + this.address + "on "
+                + DateTimeHelper.dateToString(this.dateVisited);
     }
 }

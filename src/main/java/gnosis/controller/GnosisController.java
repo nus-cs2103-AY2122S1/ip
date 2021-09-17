@@ -46,10 +46,8 @@ public class GnosisController {
      * @throws GnosisException If command not found.
      */
     public void executeUserCommand(Command commandToExecute, String commandInput) throws GnosisException {
-        //Command command;
         String commandIdentifier;
         try {
-            //command = Command.valueOf(strCommand.toUpperCase().trim());
             commandIdentifier = Command.getCommandIdentifier(commandToExecute);
         } catch (IllegalArgumentException e) {
             throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
@@ -105,12 +103,13 @@ public class GnosisController {
      * Exports file to specified path.
      * @param fileName Name of file to export.
      * @param pathToExport Path to export file.
-     * @return Boolean value determining whether export was sucessful.
+     * @return Boolean value determining whether export was successful.
      * */
     public boolean export(String fileName, File pathToExport) {
         if (pathToExport == null) {
             return false;
         }
+        //TODO: Improve checking and not have it hardcoded
         if (fileName.equalsIgnoreCase("tasks")) {
             return taskController.exportFile(pathToExport);
         } else if (fileName.equalsIgnoreCase("places")) {

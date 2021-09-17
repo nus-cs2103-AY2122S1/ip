@@ -15,15 +15,6 @@ import javafx.stage.Stage;
 /**
  *
  * Gnosis class is the main programme to execute chat-bot assistant.
- * Commands Gnosis can provide a task tracker to user:
- *
- * "t0do (task name)" - creates t0do task
- * "deadline (task name) /by (datetime)" - creates deadline task
- * "event (task name) /at (datetime)" - creates event task
- * "find (keyword)" - displays all task matching keyword
- * "list" - displays all tasks
- * "done (task number)" - marks specified task as done
- * "bye" - exits program
  *
  * @author Pawandeep Singh
 

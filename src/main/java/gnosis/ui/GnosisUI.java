@@ -30,9 +30,6 @@ import javafx.util.Duration;
  * @author Pawandeep Singh
  * */
 public class GnosisUI extends AnchorPane {
-
-    //TODO: Variable Comments
-
     private GnosisController gnosisController;
 
     @FXML
@@ -68,9 +65,9 @@ public class GnosisUI extends AnchorPane {
     /**
      * Handle command ComboBox when user selects it.
      * */
+    @FXML
     public void commandComboBoxHandler() {
         Command command = commandComboBox.getValue();
-        System.out.println(command);
         switch (command) {
         case BYE:
         case PLACE:
@@ -84,7 +81,9 @@ public class GnosisUI extends AnchorPane {
         }
     }
 
-
+    /**
+     * Handles user input.
+     * */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -95,6 +94,32 @@ public class GnosisUI extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(command + " " + input));
         this.parseInput(input);
         userInput.clear();
+    }
+
+    /**
+     * Sets a listener when user exports file.
+     * */
+    @FXML
+    public void setExportCsvListener(ActionEvent event) {
+        //allow user to export task to csv
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        MenuItem exportItem = (MenuItem) event.getTarget();
+        File file = fileChooser.showSaveDialog(exportItem.getParentPopup().getOwnerWindow());
+
+        //check for
+        boolean isExportSuccess = gnosisController.export(exportItem.getText(), file);
+        if (!isExportSuccess) {
+            displayMessage("File not exported");
+        } else {
+            displayMessage("File Exported");
+        }
+
     }
 
     /**
@@ -131,7 +156,7 @@ public class GnosisUI extends AnchorPane {
      */
     public void displayGreetMessage(boolean isTaskDataAvailable, boolean isPlaceDataAvailable) {
 
-        String taskDataAvailabeMesasge =
+        String taskDataAvailableMessage =
                 isTaskDataAvailable
                         ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
                         : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE;
@@ -141,7 +166,7 @@ public class GnosisUI extends AnchorPane {
                         ? GnosisConstants.DATA_PLACE_FILE_FOUND_MESSAGE
                         : GnosisConstants.DATA_PLACE_FILE_NOT_FOUND_MESSAGE;
 
-        displayMessage(GnosisConstants.GREET_MESSAGE, taskDataAvailabeMesasge, placeDataAvailableMessage);
+        displayMessage(GnosisConstants.GREET_MESSAGE, taskDataAvailableMessage, placeDataAvailableMessage);
     }
 
     /**
@@ -231,8 +256,20 @@ public class GnosisUI extends AnchorPane {
         }
     }
 
+    /**
+     * Displays messages in sequence.
+     *
+     * @param messages Messages to display to user.
+     */
+    public void displayMessage(String... messages) {
 
+        String message = "";
+        for (String msg: messages) {
+            message = message.concat(msg + "\n");
+        }
 
+        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(message));
+    }
 
     /**
      * Displays bye message to user.
@@ -245,44 +282,7 @@ public class GnosisUI extends AnchorPane {
         delay.play();
     }
 
-    /**
-     * Displays messages in sequence
-     *
-     * @param messages Messages to display to user.
-     */
-    public void displayMessage(String... messages) {
-
-        String msgs = "";
-        for (String msg: messages) {
-            msgs = msgs.concat(msg + "\n");
-        }
-
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(msgs));
-    }
-
     public void setCloseMenuListener() {
         Platform.exit();
-    }
-
-    public void setExportCsvListener(ActionEvent event) {
-        //allow user to export task to csv
-        FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        //Show save file dialog
-        MenuItem exportItem = (MenuItem) event.getTarget();
-        File file = fileChooser.showSaveDialog(exportItem.getParentPopup().getOwnerWindow());
-
-        //check for
-        boolean isExportSuccess = gnosisController.export(exportItem.getText(), file);
-        if (!isExportSuccess) {
-            displayMessage("File not exported");
-        } else {
-            displayMessage("File Exported");
-        }
-
     }
 }

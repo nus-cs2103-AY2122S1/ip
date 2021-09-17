@@ -19,6 +19,8 @@ import javafx.scene.layout.HBox;
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
+ *
+ * credit to image: https://www.iconarchive.com/
  */
 public class DialogBox extends HBox {
 
@@ -35,13 +37,11 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image image) {
         try {
-            ///gnosis/ui/GnosisMainWindow.fxml
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gnosis/ui/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-            System.out.println("ERROR WITH DIALOG BOX");
             e.printStackTrace();
         }
 
@@ -66,7 +66,6 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text) {
         var db = new DialogBox(text, USER);
         db.setStyle("-container-color: #F6A93F; -chat-color: black");
-        //db.setStyle("-fx-min-width: 25em;");
         return db;
     }
 

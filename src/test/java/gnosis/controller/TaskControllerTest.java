@@ -14,6 +14,7 @@ public class TaskControllerTest {
     public void addTodoToTaskManager_someValue_success() throws GnosisException {
         TaskController taskCommandManager = new TaskController();
         Todo td = taskCommandManager.addTodo("JUNIT Test");
-        assertEquals(td, taskCommandManager.getTasks().get(0));
+        int size = taskCommandManager.getTasks().size();
+        assertEquals(td, taskCommandManager.getTasks().get(size - 1));
     }
 }

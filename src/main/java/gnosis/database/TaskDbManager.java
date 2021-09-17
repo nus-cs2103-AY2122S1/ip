@@ -27,9 +27,6 @@ public class TaskDbManager extends DatabaseManager {
      * @return Loaded tasks from database.
      * */
     public List<Task> loadTasks() {
-        //check if user has folder:
-        // if no folder -> means no data found -> create one from scratch
-        // if folder found -> load to arraylist tasks
         if (this.isDataFileAvail()) {
             return this.getTasksFromFile();
         } else {
@@ -69,7 +66,10 @@ public class TaskDbManager extends DatabaseManager {
         }
     }
 
-
+    /**
+     * Reads Tasks into file system.
+     * @return list of tasks from file system.
+     */
     private List<Task> getTasksFromFile() {
 
         List<Task> tasks = new ArrayList<>();

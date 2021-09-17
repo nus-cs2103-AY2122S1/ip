@@ -1,9 +1,8 @@
 package gnosis.controller;
 
+import static gnosis.util.DateTimeHelper.stringToDate;
+
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import gnosis.database.PlaceDbManager;
@@ -13,7 +12,6 @@ import gnosis.model.Place;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
-
 
 
 public class PlaceController implements CommandListener {
@@ -27,7 +25,6 @@ public class PlaceController implements CommandListener {
 
     @Override
     public void executeCommand(Command commandToExecute, String userInput, GnosisUI view) throws GnosisException {
-        // do something
         switch (commandToExecute) {
         case VISITED:
             // add place visited
@@ -92,28 +89,4 @@ public class PlaceController implements CommandListener {
     public int getNumOfPlaces() {
         return this.places.size();
     }
-
-    /**
-     * Converts a string to a DateTime.
-     *
-     * @param dateString to convert to a date.
-     * @return LocalDateTime formatted datetime.
-     * @throws GnosisException If String date does not match date format.
-     */
-    public static LocalDateTime stringToDate(String dateString) throws GnosisException {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-
-        LocalDateTime ldt;
-        try {
-            ldt = LocalDateTime.parse(dateString.stripLeading(), formatter);
-        } catch (DateTimeParseException e) {
-            throw new GnosisException(GnosisConstants.DATETIME_FORMAT_EXCEPT_MESSAGE);
-        }
-
-        return ldt;
-    }
-
-
-
 }

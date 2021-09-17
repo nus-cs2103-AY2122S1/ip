@@ -9,8 +9,7 @@ package gnosis.util;
  * */
 public class GnosisConstants {
 
-    //public static final String DISPLAY_FORMAT = "-- \t============\t --";
-
+    // COMMAND IDENTIFIERS
     public static final String SYSTEM_EXIT_IDENTIFER = "EXIT";
     public static final String TASK_COMMAND_IDENTIFIER = "TASK";
     public static final String PLACE_COMMAND_IDENTIFIER = "PLACE";

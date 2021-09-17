@@ -11,7 +11,11 @@ import java.util.stream.Collectors;
 
 import gnosis.model.Place;
 
-
+/**
+ * Database manager to manage place file to read/write
+ *
+ * @author Pawandeep Singh
+ * */
 public class PlaceDbManager extends DatabaseManager {
 
     public PlaceDbManager(String fileName) {
@@ -24,9 +28,6 @@ public class PlaceDbManager extends DatabaseManager {
      * @return places Returns a list of places from file.
      */
     public List<Place> loadGnosisPlaces() {
-        //check if user has folder:
-        // if no folder -> means no data found -> create one from scratch
-        // if folder found -> load to arraylist places
         if (this.isDataFileAvail()) {
             return this.getTasksFromFile();
         } else {
@@ -64,9 +65,11 @@ public class PlaceDbManager extends DatabaseManager {
         }
     }
 
-
+    /**
+     * Reads Places into file system.
+     * @return list of places from file system.
+     */
     private List<Place> getTasksFromFile() {
-
         List<Place> places = new ArrayList<>();
         try {
             places = Files.newBufferedReader(Paths.get(this.getFilePath()))
