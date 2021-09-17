@@ -157,8 +157,8 @@ public class Ui {
         return userInput.getText();
     }
 
-    public void showLoadingError() {
-        showResponse(false, "Error loading data file, starting with empty duke.TaskList.");
+    public void showLoadingError(String errorMessage) {
+        showResponse(false, "Error loading data file: " + errorMessage, "Starting with empty TaskList.");
     }
 
     public void showError(String errorMessage) {

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,10 +53,10 @@ public class Storage {
      * Loads data from the data file, if any.
      *
      * @return ArrayList of tasks loaded from the data file.
-     * @throws DukeException If IOException is thrown while creating a new datafile, data file is not found
+     * @throws DukeDataException If IOException is thrown while creating a new datafile, data file is not found
      * or there exists an invalid file type in the data file.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeDataException {
         File f = getDataFile();
         assert f.exists() : "Data File should be present";
         Scanner s = getScanner(f);
@@ -63,13 +64,20 @@ public class Storage {
         return tasks;
     }
 
-    private ArrayList<Task> getStoredTasks(Scanner s) {
+    private ArrayList<Task> getStoredTasks(Scanner s) throws DukeDataException {
+        String divider = "\\|";
+        String taskDoneStatus = "X";
+        int minEntryLength = 2;
+
         ArrayList<Task> tasks = new ArrayList<>();
         int count = 0;
         while (s.hasNext()) {
             count++;
             String l = s.nextLine();
-            String[] taskEntry = l.split("\\|");
+            String[] taskEntry = l.split(divider);
+            if (taskEntry.length < minEntryLength) {
+
+            }
             switch(taskEntry[0]) {
             case "T":
                 tasks.add(new Todo(getTaskDescription(taskEntry)));
@@ -81,9 +89,9 @@ public class Storage {
                 tasks.add(new Event(getTaskDescription(taskEntry), getTaskDate(taskEntry)));
                 break;
             default:
-                throw new DukeException("Invalid duke. Task Type stored in Data File");
+                throw new DukeDataException("Invalid Task Type stored in Data File");
             }
-            boolean isTaskDone = taskEntry[1].equals("X");
+            boolean isTaskDone = taskEntry[1].equals(taskDoneStatus);
             if (isTaskDone) {
                 tasks.get(tasks.size() - 1).markAsDone();
             }
@@ -92,12 +100,24 @@ public class Storage {
         return tasks;
     }
 
-    private String getTaskDescription(String[] taskEntry) {
-        return taskEntry[2];
+    private String getTaskDescription(String[] taskEntry) throws DukeDataException {
+        int descriptionIndex = 2;
+        if (taskEntry.length < descriptionIndex + 1) {
+            throw new DukeDataException("No description for task.");
+        }
+        return taskEntry[descriptionIndex];
     }
 
-    private LocalDate getTaskDate(String[] taskEntry) {
-        return LocalDate.parse(taskEntry[3]);
+    private LocalDate getTaskDate(String[] taskEntry) throws DukeDataException {
+        int dateIndex = 3;
+        if (taskEntry.length < dateIndex + 1) {
+            throw new DukeDataException("No date provided.");
+        }
+        try {
+            return LocalDate.parse(taskEntry[dateIndex]);
+        } catch (DateTimeParseException e) {
+            throw new DukeDataException("Invalid date provided.");
+        }
     }
 
     private Scanner getScanner(File f) {
@@ -105,12 +125,12 @@ public class Storage {
         try {
             s = new Scanner(f);
         } catch (FileNotFoundException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeDataException(e.getMessage());
         }
         return s;
     }
 
-    private File getDataFile() throws DukeException {
+    private File getDataFile() throws DukeDataException {
         File f;
         try {
             f = new File(dataFilePath);
@@ -120,7 +140,7 @@ public class Storage {
                 f.createNewFile();
             }
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeDataException(e.getMessage());
         }
         return f;
     }
@@ -129,9 +149,9 @@ public class Storage {
      * Updates the data file with the updated task list.
      *
      * @param tasks Updated task list.
-     * @throws DukeException If there is an IOException while writing to the data file.
+     * @throws DukeDataException If there is an IOException while writing to the data file.
      */
-    public void updateTasks(TaskList tasks) throws DukeException {
+    public void updateTasks(TaskList tasks) throws DukeDataException {
         try {
             FileWriter fw = new FileWriter(dataFilePath);
             for (int i = 0; i < tasks.getLength(); i++) {
@@ -139,7 +159,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Error writing data file:" + e.getMessage());
+            throw new DukeDataException("Error writing data file:" + e.getMessage());
         }
     }
 }

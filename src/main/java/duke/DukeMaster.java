@@ -30,8 +30,8 @@ public class DukeMaster extends Application {
     private TaskList generateTaskList() {
         try {
             return new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
+        } catch (DukeDataException e) {
+            ui.showLoadingError(e.getMessage());
             return new TaskList();
         }
     }
