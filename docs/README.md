@@ -17,7 +17,7 @@ capable of keeping track of tasks and contacts given by the user.
     * [Finding tasks/contacts](#finding-tasks-or-contacts-find)
     * [Listing tasks/contacts](#list-tasks-and-contacts-list)
     * [Saving the data](#saving-data)
-    * [Exiting the program](#exiting-Cynthius-bye)
+    * [Exiting the program](#exiting-cynthius-bye)
 * [Command summary](#command-summary)
 
 ## Features 
