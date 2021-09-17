@@ -2,7 +2,8 @@
 
 ## Download
 
-You can download the latest version of MyJournal [here](https://github.com/felissaf/ip/releases/tag/A-Jar).
+You can download the latest version of MyJournal 
+[here](https://github.com/felissaf/ip/releases/download/A-Release/myjournal-1.0-SNAPSHOT.jar).
 
 ## Features 
 * Add tasks
