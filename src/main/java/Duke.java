@@ -39,5 +39,6 @@ public class Duke extends Application {
         ui = new Ui(stage, taskList, storage, parser);
         ui.init();
     }
+
 }
 
