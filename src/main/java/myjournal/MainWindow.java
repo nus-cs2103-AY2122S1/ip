@@ -1,7 +1,5 @@
 package myjournal;
 
-import java.io.IOException;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
