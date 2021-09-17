@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * @Deadline are Tasks that have an attached date as the time a Task needs to be completed by.
+ * @author spdpnd98.
  */
 public class Deadline extends Task{
     private Date date;
@@ -61,5 +62,14 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[" + DEADLINE_LABEL + "]" + super.toString() + " (by: " + date + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline deadline = (Deadline) obj;
+            return deadline.date.equals(this.date) && deadline.description.equals(this.description);
+        }
+        return false;
     }
 }

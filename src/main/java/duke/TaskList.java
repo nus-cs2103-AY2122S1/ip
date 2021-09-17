@@ -3,6 +3,10 @@ package duke;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @TaskList represents a TaskList but doesn't allow explicit modification to each items in the list.
+ */
+
 public class TaskList {
     private List<Task> tasks;
 
@@ -32,27 +36,43 @@ public class TaskList {
         }
     }
 
+    private Boolean hasDuplicatedTask(Task newTask) {
+       return tasks.stream().anyMatch(task -> task.equals(newTask));
+    }
+
     private Chatbot.ChatContinue addTodo(String input, FileDB fileDB, Ui ui) throws DukeIOException{
         ToDo todo = new ToDo(input);
-        tasks.add(todo);
-        fileDB.save(todo);
-        ui.showAddTaskSuccessful(todo);
+        if (this.hasDuplicatedTask(todo)) {
+            ui.showDuplicated();
+        } else {
+            tasks.add(todo);
+            fileDB.save(todo);
+            ui.showAddTaskSuccessful(todo);
+        }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
     private Chatbot.ChatContinue addDeadline(String input, FileDB fileDB, Ui ui) throws DukeIOException, DukeDateParseException {
         Deadline deadline = new Deadline(input);
-        tasks.add(deadline);
-        fileDB.save(deadline);
-        ui.showAddTaskSuccessful(deadline);
+        if(this.hasDuplicatedTask(deadline)) {
+            ui.showDuplicated();
+        } else {
+            tasks.add(deadline);
+            fileDB.save(deadline);
+            ui.showAddTaskSuccessful(deadline);
+        }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
     private Chatbot.ChatContinue addEvent(String input, FileDB fileDB, Ui ui) throws DukeIOException, DukeDateParseException {
         Event event = new Event(input);
-        tasks.add(event);
-        fileDB.save(event);
-        ui.showAddTaskSuccessful(event);
+        if(this.hasDuplicatedTask(event)) {
+            ui.showDuplicated();
+        } else {
+            tasks.add(event);
+            fileDB.save(event);
+            ui.showAddTaskSuccessful(event);
+        }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 

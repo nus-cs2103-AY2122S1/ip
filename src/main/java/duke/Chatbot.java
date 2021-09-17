@@ -93,7 +93,7 @@ public class Chatbot {
     }
 
     /**
-     * @chat initiates a chat with the user, and checks for handled exceptions.
+     * Initiates a chat with the user, and checks for handled exceptions.
      */
     public void chat() {
         boolean isChatting = true;
@@ -114,7 +114,7 @@ public class Chatbot {
     }
 
     /**
-     * @interpret contains the logic to understand user inputs.
+     * Contains the logic to understand user inputs.
      *
      * @return ChatContinue enum to indicate if the chat should continue or terminate.
      * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
@@ -127,7 +127,7 @@ public class Chatbot {
     }
 
     /**
-     * @guiInterpret contains the logic to understand user inputs.
+     * Contains the logic to understand user inputs.
      *
      * @return ChatContinue enum to indicate if the chat should continue or terminate.
      * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
