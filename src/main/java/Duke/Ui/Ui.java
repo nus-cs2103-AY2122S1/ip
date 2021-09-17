@@ -13,9 +13,10 @@ import javafx.stage.Stage;
  * Graphical User Interface for Duke.
  */
 public class Ui {
-    public static final String GREETING_MESSAGE = "Hello I'm Duke!";
-    public static final String EXIT_MESSAGE = "Bye bye! Hope you have a productive day :)";
-    public static final String ERROR_MESSAGE = "Oops! An error occurred: %s";
+    public static final String GREETING_MESSAGE = "Greetings. My name is Dwight Schrute. You may call me Mr. Schrute.";
+    public static final String EXIT_MESSAGE = "You're going to go? I'll miss you so much. Oh, I'm going to cry myself"
+            + " to sleep. False. I will not miss you.";
+    public static final String ERROR_MESSAGE = "An error occurred. %s";
     public static final String FILE_FORMAT_ERROR_MESSAGE = "The file storing your tasks is in an unrecognized format. "
             + "Please fix or remove it.";
 

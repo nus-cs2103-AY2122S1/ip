@@ -11,7 +11,7 @@ import java.util.Set;
 
 class DoneTaskCommand extends Command {
     private static final Set<String> KEYWORDS = new HashSet<>(List.of("done", "do"));
-    private static final String DONE_TASK_SUCCESS_MESSAGE = "Good job! I've marked this task as done:\n\t%s";
+    private static final String DONE_TASK_SUCCESS_MESSAGE = "Good job. I've marked this task as done:\n\t%s";
 
     @Override
     public void run(Duke duke, UserInput input) throws InvalidTaskException {
