@@ -18,6 +18,8 @@ import duke.commands.WelcomeCommand;
  * Parses user commands into the program.
  */
 public class Parser {
+    /** Error message if there is unknown command. */
+    private static final String MESSAGE_UNKNOWN_COMMAND = "I'm sorry, but I don't know what that means!";
 
     /**
      * Parses user commands into the program to determine which command they are categorised as.
@@ -70,7 +72,7 @@ public class Parser {
             return new ExitCommand();
 
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means! D:");
+            throw new DukeException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }
