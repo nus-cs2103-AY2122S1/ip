@@ -3,13 +3,6 @@
 Duke is a command line interface oriented task manager. It comes with a GUI and support for multiple
 types of tasks.
 
-- [Quick Start](#Quick Start)
-- [Features](#Features)
-- [Usage](#Usage)
-- [Command Summary](#Command Summary)
-
----
-
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed.
@@ -19,8 +12,6 @@ types of tasks.
 5. You should see something like the screenshot below. Type your command in the textbox and hit enter. You may find a list of commands in this user guide.
 
 ![Screenshot](Ui.png)
-
----
 
 ## Features
 
@@ -45,8 +36,6 @@ You can search for a task in the list using its description.
 ### List tasks
 
 You can view all of your tasks in a numbered list.
-
----
 
 ## Usage
 
@@ -168,8 +157,6 @@ Bye bye! Hope you have a productive day :)
 ```
 
 Aliases: `exit`, `bye`, `quit`, `q`
-
----
 
 ### Command Summary
 
