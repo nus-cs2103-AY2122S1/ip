@@ -1,4 +1,4 @@
-package tasks;
+package blitz.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +24,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
+        return "[E]" + super.toString() + " (on: "
             + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
     }
 

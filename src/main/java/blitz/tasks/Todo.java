@@ -1,4 +1,4 @@
-package tasks;
+package blitz.tasks;
 
 public class Todo extends Task {
 

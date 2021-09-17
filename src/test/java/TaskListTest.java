@@ -4,11 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import blitz.BlitzException;
+import blitz.TaskList;
+import blitz.Ui;
 import org.junit.jupiter.api.Test;
 
-import tasks.Deadline;
-import tasks.Task;
-import tasks.Todo;
+import blitz.tasks.Deadline;
+import blitz.tasks.Task;
+import blitz.tasks.Todo;
 
 class TaskListTest {
 

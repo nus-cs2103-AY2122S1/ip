@@ -1,3 +1,5 @@
+package blitz;
+
 public class Blitz {
 
     private Storage storage;
@@ -5,7 +7,7 @@ public class Blitz {
     private Ui ui;
 
     /**
-     * Creates Blitz object with given file path.
+     * Creates blitz.Blitz object with given file path.
      *
      * @param filePath
      */
@@ -22,27 +24,27 @@ public class Blitz {
     }
 
     /**
-     * Returns Blitz's storage object.
+     * Returns blitz.Blitz's storage object.
      *
-     * @return Blitz's storage object.
+     * @return blitz.Blitz's storage object.
      */
     public Storage getStorage() {
         return storage;
     }
 
     /**
-     * Returns list of tasks.
+     * Returns list of blitz.tasks.
      *
-     * @return list of tasks.
+     * @return list of blitz.tasks.
      */
     public TaskList getTasks() {
         return tasks;
     }
 
     /**
-     * Returns Blitz's Ui.
+     * Returns blitz.Blitz's blitz.Ui.
      *
-     * @return Blitz's Ui.
+     * @return blitz.Blitz's blitz.Ui.
      */
     public Ui getUi() {
         return ui;

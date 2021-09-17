@@ -1,3 +1,5 @@
+package blitz;
+
 public class BlitzException extends Exception {
 
     protected String message;

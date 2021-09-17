@@ -1,3 +1,5 @@
+package blitz;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -52,7 +54,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-border-color: #5218FA; -fx-border-radius: 10; "
+                + "-fx-border-style: dashed; -fx-border-width: 1.5");
+        return db;
     }
 
     public static DialogBox getBlitzDialog(String text, Image img) {

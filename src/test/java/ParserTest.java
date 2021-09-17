@@ -2,9 +2,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import tasks.Deadline;
-import tasks.Todo;
-
+import blitz.Blitz;
+import blitz.BlitzException;
+import blitz.Parser;
+import blitz.Ui;
+import blitz.tasks.Deadline;
+import blitz.tasks.Todo;
 
 class ParserTest {
     @Test
@@ -18,7 +21,7 @@ class ParserTest {
     void parseCommand_taskWithEmptyDescription_errorMessage() {
         Blitz b = new Blitz("data/blitz.txt");
         String result = Parser.parseCommand("todo", b.getTasks(), b.getUi());
-        boolean isEqual = b.getUi().getTaskDescriptionCannotBeEmptyMessage()
+        boolean isEqual = Ui.getTaskDescriptionCannotBeIncompleteMessage()
                 .equals(result);
         assertEquals(true, isEqual);
     }
@@ -26,7 +29,7 @@ class ParserTest {
     void parseCommand_taskToAdd_invalidDateTimeFormat() {
         Blitz b = new Blitz("data/blitz.txt");
         String result = Parser.parseCommand("event party /on Sunday", b.getTasks(), b.getUi());
-        boolean isEqual = b.getUi().getIncorrectDateTimeFormatMessage().equals(result);
+        boolean isEqual = Ui.getIncorrectDateTimeFormatMessage().equals(result);
         assertEquals(true, isEqual);
     }
     @Test
@@ -36,7 +39,7 @@ class ParserTest {
         String result = Parser.parseCommand("deadline return book /by 12/08/2021 2359", b.getTasks(), b.getUi());
         String message = "Got it. I've added this task:" + "\n\t" + new Deadline("return book",
                 Parser.parseDateTime("12/08/2021 2359")) + "\n\nNow you have "
-                + b.getTasks().size() + " tasks in the list.";
+                + b.getTasks().size() + " blitz.tasks in the list.";
         boolean isEqual = message.equals(result);
         assertEquals(true, isEqual);
     }

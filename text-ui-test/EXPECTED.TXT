@@ -1,6 +1,6 @@
 	____________________________________________________________________________________________________
-	Hola! I'm Blitz :)
-	Here are the tasks in your list:
+	Hola! I'm blitz.Blitz :)
+	Here are the blitz.tasks in your list:
 	---No items stored yet---
 	____________________________________________________________________________________________________
 	So what can I do for you today?
@@ -8,7 +8,7 @@
 	____________________________________________________________________________________________________
 	Got it. I've added this task:
 		[T][ ] read book
-	Now you have 1 tasks in the list.
+	Now you have 1 blitz.tasks in the list.
 	____________________________________________________________________________________________________
 	____________________________________________________________________________________________________
 	OOPS!!! Incorrect date/time format! Please enter deadline date/time in "d M yyyy HHmm" format
@@ -16,15 +16,15 @@
 	____________________________________________________________________________________________________
 	Got it. I've added this task:
 		[D][ ] return book (by: Dec 2 2019 06:00 pm)
-	Now you have 2 tasks in the list.
+	Now you have 2 blitz.tasks in the list.
 	____________________________________________________________________________________________________
 	____________________________________________________________________________________________________
 	Got it. I've added this task:
 		[E][ ] project meeting (at: Aug 12 2021 11:59 pm)
-	Now you have 3 tasks in the list.
+	Now you have 3 blitz.tasks in the list.
 	____________________________________________________________________________________________________
 	____________________________________________________________________________________________________
-	Here are the tasks in your list:
+	Here are the blitz.tasks in your list:
 	1.[T][ ] read book
 	2.[D][ ] return book (by: Dec 2 2019 06:00 pm)
 	3.[E][ ] project meeting (at: Aug 12 2021 11:59 pm)
@@ -32,7 +32,7 @@
 	____________________________________________________________________________________________________
 	Noted. I've removed this task:
 		[D][ ] return book (by: Dec 2 2019 06:00 pm)
-	Now you have 2 tasks in the list.
+	Now you have 2 blitz.tasks in the list.
 	____________________________________________________________________________________________________
 	____________________________________________________________________________________________________
 	OOPS!!! You are attempting to mark an invalid task number!
@@ -42,7 +42,7 @@
 		[E][X] project meeting (at: Aug 12 2021 11:59 pm)
 	____________________________________________________________________________________________________
 	____________________________________________________________________________________________________
-	Here are the tasks in your list:
+	Here are the blitz.tasks in your list:
 	1.[T][ ] read book
 	2.[E][X] project meeting (at: Aug 12 2021 11:59 pm)
 	____________________________________________________________________________________________________

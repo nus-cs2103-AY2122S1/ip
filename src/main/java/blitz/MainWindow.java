@@ -1,3 +1,5 @@
+package blitz;
+
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -47,7 +49,7 @@ public class MainWindow extends AnchorPane {
 
         assert(listOfTasks.equals(new BlitzException("\"No items currently in the list!!\"")));
 
-        String openingMessage = listOfTasks + "\nSo what can I do for you today?";
+        String openingMessage = listOfTasks + "\n" + blitz.getUi().getFeatureList();
         dialogContainer.getChildren().addAll(
                 DialogBox.getBlitzDialog(openingMessage, blitzImage)
         );
@@ -55,7 +57,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing
-     *     Blitz's reply and then appends them to the dialog container. Clears
+     *     blitz.Blitz's reply and then appends them to the dialog container. Clears
      *     the user input after processing.
      */
     @FXML

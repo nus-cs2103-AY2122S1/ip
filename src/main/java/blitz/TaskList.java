@@ -1,7 +1,9 @@
+package blitz;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import tasks.Task;
+import blitz.tasks.Task;
 
 public class TaskList {
 
@@ -33,7 +35,7 @@ public class TaskList {
      */
     public String addTask(Task taskToAdd) throws BlitzException {
         if (taskList.contains(taskToAdd)) {
-            throw new BlitzException("This task already exists in the list! "
+            throw new BlitzException("A task with this name already exists in the list! "
                     + "Do you want to consider adding some other task?");
         }
         taskList.add(taskToAdd);
@@ -76,10 +78,10 @@ public class TaskList {
 
     }
     /**
-     * Finds tasks which contain the given keyword.
+     * Finds blitz.tasks which contain the given keyword.
      *
      * @param keyword specifies keyword to be searched for.
-     * @return list of tasks that contain the given keyword.
+     * @return list of blitz.tasks that contain the given keyword.
      */
     public TaskList findMatchingTasks(String keyword) throws BlitzException {
         if (size() == 0) {
@@ -116,7 +118,6 @@ public class TaskList {
             result = result.concat("\n" + ctr + ". " + taskList.get(ctr - 1));
             ctr++;
         }
-        System.out.println(result);
         return result + "\n";
     }
 }
