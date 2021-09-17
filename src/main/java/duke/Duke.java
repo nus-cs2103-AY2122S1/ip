@@ -1,6 +1,8 @@
 package duke;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * The main controller for the entire Duke program.
@@ -48,8 +50,9 @@ public class Duke {
         }
 
         if (currentStatus == DukeStatus.INACTIVE) {
-            // TODO: 1 second delay
-            Platform.exit();
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.playFromStart();
             System.exit(0);
         }
         return currentStatus.getResponse();
