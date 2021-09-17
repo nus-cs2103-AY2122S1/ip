@@ -39,7 +39,7 @@ public class Ui {
                 + "creates a new ToDo task with the name given\n");
         stringToPrint += (INDENTATION + "3. event task_name /at date_time:" + INDENTATION
                 + "creates a new Event task with the name and datetime given\n");
-        stringToPrint += (INDENTATION + "4. deadline task_name /by date_time:" + INDENTATION
+        stringToPrint += (INDENTATION + "4. deadline task_name /by date_time(yyyy-mm-dd):" + INDENTATION
                 + "creates a new Deadline task with the name and datetime given\n");
         stringToPrint += (INDENTATION + "5. find search_term:" + INDENTATION
                 + "shows a list of all the tasks with that search term in its name\n");
