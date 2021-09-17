@@ -1,9 +1,11 @@
 package duke;
 
+import java.util.Locale;
 import java.util.stream.Stream;
 
 import duke.command.Command;
 import duke.command.CommandsTypes;
+import duke.command.HelpCommand;
 import duke.task.Task;
 
 
@@ -28,6 +30,9 @@ public class Parser {
             return Command.makeCommand(CommandsTypes.LIST);
         }
         String[] splitBySpace = input.split(" ");
+        if (splitBySpace[0].toLowerCase().equals("help")) {
+            return getCommand(CommandsTypes.HELP, splitBySpace);
+        }
         if (splitBySpace.length < 2) {
             throw new DukeException("Invalid input.");
         }
@@ -75,5 +80,12 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException(s2);
         }
+    }
+
+    private static Command getCommand(CommandsTypes commandsTypes, String[] splitBySpace) throws DukeException {
+        if (splitBySpace.length < 2) {
+            return new HelpCommand();
+        }
+        return new HelpCommand(splitBySpace[1].toLowerCase());
     }
 }

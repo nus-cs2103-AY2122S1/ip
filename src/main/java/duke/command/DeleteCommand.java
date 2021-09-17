@@ -11,6 +11,7 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
     private final int index;
+    public static final String HELP_MESSAGE = "To delete a task from the list, type \ndelete {index of task}\nEg. delete 1";
 
     /**
      * Makes a DeleteCommand that deletes the task that was inputted.
@@ -19,6 +20,10 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         this.index = index;
+    }
+
+    public static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 
     /**

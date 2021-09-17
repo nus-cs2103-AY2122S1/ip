@@ -11,7 +11,8 @@ import duke.DukeException;
  */
 public class Event extends Task {
     private final LocalDateTime date;
-    private static final String inputExample = " event my birtday /at 01/01/2000 1400";
+    public static final String inputExample = " event my birtday /at 01/01/2000 1400";
+    public static final String syntax = "event {description of event} /at {dd/MM/yyyy hhmm}";
 
     private Event(String description, LocalDateTime dateTime) {
         super(description);

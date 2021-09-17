@@ -10,6 +10,7 @@ import duke.Ui;
  */
 public class MarkDoneCommand extends Command {
     private final int index;
+    public static final String HELP_MESSAGE = "To mark a task as done, type\ndone {index of task}\nEg. done 1";
 
     /**
      * Makes a MarkDoneCommand that marks a task as done.
@@ -18,6 +19,10 @@ public class MarkDoneCommand extends Command {
      */
     public MarkDoneCommand(int index) {
         this.index = index;
+    }
+
+    public static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 
     /**

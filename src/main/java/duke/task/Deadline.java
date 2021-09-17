@@ -11,7 +11,8 @@ import duke.DukeException;
  */
 public class Deadline extends Task {
     private final LocalDateTime date;
-    private static final String inputExample = "deadline return book /by 3/4/2021 400";
+    public static final String inputExample = "deadline return book /by 3/4/2021 400";
+    public static final String syntax = "deadline {description of deadline} /by {dd/MM/yyyy hhmm}";
 
     private Deadline(String description, LocalDateTime dateTime) {
         super(description);

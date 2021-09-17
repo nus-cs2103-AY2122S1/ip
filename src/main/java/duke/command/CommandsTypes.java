@@ -10,5 +10,6 @@ public enum CommandsTypes {
     MARK_DONE,
     LIST,
     FIND,
-    TAG
+    TAG,
+    HELP;
 }

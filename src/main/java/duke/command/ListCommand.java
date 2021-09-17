@@ -8,6 +8,17 @@ import duke.Ui;
  * A command which aims to list the current tasks.
  */
 public class ListCommand extends Command {
+    public static final String HELP_MESSAGE = "Dude this damn easy. Just type list into the textbook and send";
+
+    /**
+     * Returns the help messsage for listing.
+     *
+     * @return help message for listing.
+     */
+    public static String getHelpMessage() {
+        return HELP_MESSAGE;
+    }
+
     /**
      * Lists the current tasks.
      *

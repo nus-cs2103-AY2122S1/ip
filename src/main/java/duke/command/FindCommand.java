@@ -11,6 +11,7 @@ import duke.Ui;
  */
 public class FindCommand extends Command {
     private ArrayList<String> keywords = new ArrayList<>();
+    public static final String HELP_MESSAGE = "To find a task, type \nfind {name/tag/time of task}\nEg. find homework";
 
     /**
      * Makes a FindCommand which prints tasks which contain keyword.
@@ -21,6 +22,10 @@ public class FindCommand extends Command {
         for (String keyword: keywords) {
             this.keywords.add(keyword);
         }
+    }
+
+    public static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 
     /**

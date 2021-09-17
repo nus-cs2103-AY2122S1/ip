@@ -2,6 +2,14 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.command.AddCommand;
+import duke.command.CommandsTypes;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
+import duke.command.TagCommand;
 import duke.task.Task;
 
 
@@ -104,5 +112,41 @@ public class Ui {
     public String showTagsAdded(Tasklist taggedTasks, ArrayList<String> tags) {
         String tagString = tags.toString();
         return "Tagged tasks:\n" + taggedTasks + " with " + tagString;
+    }
+
+    /**
+     * Returns help message for different command types.
+     *
+     * @param commandsType the command type which user wants help with.
+     * @return help message for command type which user wants.
+     */
+    public String helpMessage(CommandsTypes commandsType) {
+        switch (commandsType) {
+            case ADD: {
+                return AddCommand.getHelpMessage();
+            }
+            case LIST: {
+                return ListCommand.getHelpMessage();
+            }
+            case DELETE: {
+                return DeleteCommand.getHelpMessage();
+            }
+            case TAG: {
+                return TagCommand.getHelpMessage();
+            }
+            case FIND: {
+                return FindCommand.getHelpMessage();
+            }
+            case MARK_DONE: {
+                return MarkDoneCommand.getHelpMessage();
+            }
+            case HELP: {
+                return HelpCommand.getHelpMessage();
+            }
+            default: {
+                assert false : "Unknown command type for help";
+            }
+        }
+        return null;
     }
 }

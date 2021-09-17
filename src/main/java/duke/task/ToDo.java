@@ -6,6 +6,9 @@ import duke.DukeException;
  * Class that represents todo task.
  */
 public class ToDo extends Task {
+    public static final String syntax = "todo {description of todo}";
+    public static final String inputExample = "todo get a life";
+
     private ToDo(String description) {
         super(description);
     }
