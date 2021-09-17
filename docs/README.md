@@ -168,8 +168,7 @@ List of all the Task that match the keyword.
 
 ### `priority` - Changes the Priority of a Task
 
-Changes the priority of the Task at the specified index number,
-to the specified priority level.
+Changes the priority of the Task at the specified index number, to the specified priority level (low, medium, high).
 
 Example of usage: 
 
