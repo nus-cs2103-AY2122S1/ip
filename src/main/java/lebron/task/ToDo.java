@@ -1,7 +1,5 @@
 package lebron.task;
 
-import lebron.exception.LebronException;
-
 /**
  * This class represents the ToDo event.
  *

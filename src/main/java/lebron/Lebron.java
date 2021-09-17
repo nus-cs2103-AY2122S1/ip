@@ -1,7 +1,12 @@
 package lebron;
 
 import lebron.exception.LebronException;
-import lebron.task.*;
+import lebron.task.Deadline;
+import lebron.task.Event;
+import lebron.task.Task;
+import lebron.task.TaskList;
+import lebron.task.ToDo;
+
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
@@ -131,7 +136,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Bye.
+     * Handles the case where commandWord is bye.
      *
      * @return the response from the bot
      */
@@ -140,7 +145,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is List.
+     * Handles the case where commandWord is list.
      *
      * @return the response from the bot
      */
@@ -149,7 +154,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Undo. Will remove the current state of the TaskList from the stack.
+     * Handles the case where commandWord is undo. Will remove the current state of the TaskList from the stack.
      */
     private void commandUndo() throws LebronException {
         if (previousStates.size() == 1) {
@@ -165,7 +170,7 @@ public class Lebron {
 
 
     /**
-     * Handles the case where commandWord is Done.
+     * Handles the case where commandWord is done.
      *
      * @param splitWords the parsed user input.
      * @return the response from the bot.
@@ -194,7 +199,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is ToDo.
+     * Handles the case where commandWord is todo.
      *
      * @param splitWords the parsed user input.
      * @return the response from the bot.
@@ -215,7 +220,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Deadline.
+     * Handles the case where commandWord is deadline.
      *
      * @param splitWords the parsed user input.
      * @return the response from the bot.
@@ -249,7 +254,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Event.
+     * Handles the case where commandWord is event.
      *
      * @param splitWords the parsed user input.
      * @return the response from the bot.
@@ -282,7 +287,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Delete.
+     * Handles the case where commandWord is delete.
      *
      * @param splitWords the parsed user input.
      * @return the response from the bot.
@@ -306,7 +311,7 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Find.
+     * Handles the case where commandWord is find.
      *
      * @param splitWords the parsed user input.
      * @return the response from the bot.

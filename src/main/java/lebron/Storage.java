@@ -140,7 +140,7 @@ public class Storage {
     }
 
     /**
-     * Handles the case where the task is a Event.
+     * Handles the case where the task is an Event.
      *
      * @param splitWords the parsed input from text file.
      * @param isDoneValue "1" if task is done, "0" if task is not done.
