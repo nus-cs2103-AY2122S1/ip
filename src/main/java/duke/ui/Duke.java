@@ -80,11 +80,13 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            UserInteraction
+                    .handleUserInput(userInput, dialogContainer, duke, user);
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            UserInteraction
+                    .handleUserInput(userInput, dialogContainer, duke, user);
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -92,44 +94,8 @@ public class Duke extends Application {
         //load list of tasks
         StorageHandler.loadAll();
         //greeting
-        greetUser();
+        UserInteraction.greetUser(dialogContainer, duke);
     }
 
-    private void greetUser() {
-        Label greet = new Label("Namaste chacha!\nKaise yaad kiye humko?");
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greet, new ImageView(duke))
-        );
-    }
 
-    private void exitHandler() {
-        Label goodbye = new Label("Ram Ram!");
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(goodbye, new ImageView(duke))
-        );
-        userInput.clear();
-        boolean isStoreSuccessful = StorageHandler.insertTasks();
-        assert isStoreSuccessful == true : "couldn't store tasks";
-        Platform.exit();
-    }
-
-    private void handleUserInput() {
-        String userMsg = userInput.getText();
-        if(userMsg.equals("bye")) {
-            exitHandler();
-        } else {
-            Label userText = new Label(userMsg);
-            Label dukeText = new Label(getResponse(userMsg));
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-            );
-            userInput.clear();
-        }
-    }
-
-    private String getResponse(String input) {
-        DukeMessage msg = MessageFactory.createMessage(input);
-        return msg.createMessageString();
-    }
 }
