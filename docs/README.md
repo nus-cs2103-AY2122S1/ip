@@ -98,10 +98,6 @@ Nice! I've marked this task as done:
   [E][X] Movie (at: Mon 2-4pm)
 ```
 
-
-
-
-
 ### `update <task number> </field> <new value for field>` - Update task
 
 Duke will update the corresponding field of task specified by task number to use new value supplied.
@@ -139,4 +135,18 @@ Success message indicating that the task has been successfully deleted.
 Noted. I've removed this task:
 [T][] Fix Documentation
 Now you have 2 tasks in the list.
+```
+
+### `bye` - Close the application
+
+Terminates the programme. Chat bot will issue a farewell message before closing the chat window automatically.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
 ```

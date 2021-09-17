@@ -27,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * Displays bye message.
+     * Displays bye message, then terminates the programme.
      *
      * @return bye message
      */
