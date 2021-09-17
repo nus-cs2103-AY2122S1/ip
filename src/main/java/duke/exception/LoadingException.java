@@ -8,6 +8,6 @@ public class LoadingException extends DukeException {
      * Constructs a LoadingException.
      */
     public LoadingException() {
-        super("Duke forgot about your old task list liao, Duke create a new one for you ah!");
+        super("Error loading tasks.");
     }
 }
