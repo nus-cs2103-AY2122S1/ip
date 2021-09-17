@@ -34,7 +34,7 @@ ___
 Adds an Event task to the list of tasks.
 
 **Format**  
-`event EVENT_NAME /at EVENT_DESCRIPTION DATE START_TIME~END_TIME`
+`event EVENT_NAME /at DATE START_TIME~END_TIME`
 (Note that the dates must be in format : `YYYY-MM-DD`, and times in format: `HH:MM`)
 
 **Example**  
