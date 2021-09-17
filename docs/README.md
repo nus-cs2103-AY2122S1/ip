@@ -132,16 +132,26 @@ Here are the tasks you were looking for:
 ```
 
 ### Clear chat: `clear`
-Clear the chatbox.
+Clear the chatbox.  
 
 Format : `clear`
 
 ### Exiting the program: `exit`
-Exits the program.
+Exits the program.  
 
 Format : `exit`
 
 
-### Saving the data
-Data is saved in the hard disk automatically after a command that changes the data. 
+### FAQ
+Q: How is my data being saved?  
+A: Data is saved in the hard disk automatically after a command that changes the data. 
 There is no need to save manually.
+
+Q: What is the data/tasks.txt file generated after running the app for the first time?  
+A: That is the save file. Please avoid deleting or editing the file as it could cause the save file to corrupt, 
+resulting in loss of your data.
+
+Q: I cannot run the app. How do I fix this?  
+A: Ensure you have the Java version 11 or newer installed on your computer.  
+If it still fails to run, it could be due to corruption of the save file, data/tasks.txt.   
+Clear or delete the file. Do note that doing this erases your data.
