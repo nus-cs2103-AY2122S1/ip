@@ -1,6 +1,7 @@
 package model.task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Class for Deadline with specific time for when task is due.
@@ -32,6 +33,29 @@ public class Deadline extends TimeTask {
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone, by);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDescription(), getTime(), this.getClass().getName());
+    }
+
+    /**
+     * Check whether the given object is the same object, is of type Deadline and have matching description and time.
+     *
+     * @param other other object to be checked
+     * @return whether that object should equal to this deadline or not
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Deadline)) {
+            return false;
+        }
+        Deadline otherDeadline = (Deadline) other;
+        return otherDeadline.getDescription().equals(getDescription()) && otherDeadline.getTime().equals(getTime());
     }
 
     /**

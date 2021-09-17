@@ -84,7 +84,15 @@ public class TaskDialog extends Dialog {
             throw new TaskDialogException("The task '" + task + "' to be added already exists! Please delete "
                 + "the previous one first");
         }
-        Dialog addDialog = Dialog.generate(task.getDescription());
+        String dialogId = "";
+        TaskList.TaskType taskType = Parser.classNameToTaskType(task.getClass().getName());
+        if (taskType == TaskList.TaskType.EVENT || taskType == TaskList.TaskType.DEADLINE) {
+            TimeTask timeTask = (TimeTask) task;
+            dialogId = taskType + timeTask.getDescription() + timeTask.getTime();
+        } else {
+            dialogId = taskType + task.getDescription();
+        }
+        Dialog addDialog = Dialog.generate(dialogId);
         taskList.add(task);
         addDialog.add("Got it. I've added this task:");
         addDialog.add("  " + task);

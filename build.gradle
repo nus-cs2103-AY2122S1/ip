@@ -55,6 +55,7 @@ application {
 }
 
 shadowJar {
+    mainClassName = "Launcher"
     archiveBaseName = "alice"
 }
 

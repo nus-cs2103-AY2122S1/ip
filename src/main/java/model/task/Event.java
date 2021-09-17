@@ -1,6 +1,7 @@
 package model.task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Class for Event with specific time for when the event is occurring.
@@ -32,6 +33,29 @@ public class Event extends TimeTask {
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone, at);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDescription(), getTime(), this.getClass().getName());
+    }
+
+    /**
+     * Check whether the given object is the same object, is of type Task and have matching description.
+     *
+     * @param other other object to be checked
+     * @return whether that object should equal to this task or not
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Event)) {
+            return false;
+        }
+        Event otherEvent = (Event) other;
+        return otherEvent.getDescription().equals(getDescription()) && otherEvent.getTime().equals(getTime());
     }
 
     /**
