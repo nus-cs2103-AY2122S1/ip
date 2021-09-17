@@ -45,7 +45,7 @@ Close the program with a single command.
 
 ## Usage
 
-### 1A. `todo` - Add a todo task
+### 1A. `todo <Task Name>` - Add a todo task
 
 Add a todo task to the current task list.
 
@@ -64,7 +64,7 @@ Now you have 1 task in the list.
 ```
 
 
-### 1B. `deadline` - Add a deadline task
+### 1B. `deadline <Task Name> /by <yyyy-mm-dd>` - Add a deadline task
 
 Add a deadline task to the current task list.
 
@@ -83,7 +83,7 @@ Now you have 2 tasks in the list.
 ```
 
 
-### 1C. `event` - Add an event task
+### 1C. `event <Task Name> /at <yyyy-mm-dd>` - Add an event task
 
 Add an event task to the current task list.
 
@@ -102,9 +102,9 @@ Now you have 3 tasks in the list.
 ```
 
 
-### 2. `done` - Mark tasks as done
+### 2. `done <Task Numbers>` - Mark tasks as done
 
-Check task off in the task list to represent it as done. Able to check multiple tasks off at once.
+Check task off in the task list when it is done. Only able to input valid task numbers. Able to check multiple tasks off at once by entering multiple task numbers, each separated by a whitespace. 
 
 _Example of usage:_
 
@@ -121,9 +121,9 @@ Nice! I've marked these tasks as done:
 ```
 
 
-### 3. `delete` - Delete tasks of your choice
+### 3. `delete <Task Numbers>` - Delete tasks of your choice
 
-Delete tasks off the task list. Able to delete multiple tasks at once.
+Delete tasks off the task list. Only able to input valid task numbers. Able to delete multiple tasks at once by entering multiple task numbers, each separated by a whitespace.
 
 _Example of usage:_
 
@@ -166,9 +166,9 @@ Here are the tasks in your list:
 
 
 
-### 5. `find` - Search for tasks containing keyword
+### 5. `find <Keyword>` - Search for tasks containing keyword
 
-Display tasks containing any keyword, phrase or letter of the user's choice.
+Display tasks containing any keyword, phrase or letter of the user's choice. 
 
 _Example of usage:_
 

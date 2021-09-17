@@ -146,8 +146,8 @@ public class Storage {
             }
         }
         String oldDate = input.substring(endIndex);
-        String newDate = LocalDate.parse(oldDate, DateTimeFormatter.ofPattern( "MMM dd yyyy"))
-                .format(DateTimeFormatter.ofPattern( "uuuu-MM-dd"));
+        String newDate = LocalDate.parse(oldDate, DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                .format(DateTimeFormatter.ofPattern("uuuu-MM-dd"));
         return newDate;
     }
 }

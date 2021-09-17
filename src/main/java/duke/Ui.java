@@ -1,5 +1,4 @@
 package duke;
-import java.util.Scanner;
 
 import duke.task.Find;
 import duke.task.Task;
@@ -10,14 +9,11 @@ import duke.task.TaskList;
  * Class that encapsulates the Ui in Duke.
  */
 public class Ui {
-    private Scanner sc;
-    private String input = "";
 
     /**
      * Constructor for Ui class.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -109,7 +105,8 @@ public class Ui {
      * @return String representation of the Tasks that include the keyword.
      */
     public String printListWithKeyword(TaskList ls, String word, Find find) {
-        String result = "Here are tasks that contain the keyword '" + word + "':\n";
+        String intro = "Here are tasks that contain the keyword '" + word + "':\n";
+        String result = "";
         int count = 1;
         for (int i = 0; i < ls.getSize(); i++) {
             Task task = ls.getTask(i);
@@ -119,7 +116,12 @@ public class Ui {
                 count++;
             }
         }
-        return result;
+
+        if (result.equals("")) {
+            return "There were no tasks that contained your keyword '" + word + "' :-(";
+        } else {
+            return intro + result;
+        }
     }
 
     /**
