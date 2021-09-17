@@ -37,11 +37,11 @@ public class DeleteCommand extends Command {
                 Task deletedTask = tasks.getTasks().get(taskToDelete);
                 tasks.getTasks().remove(taskToDelete);
                 storage.updateLocalStorage(tasks.getTasks());
-                ui.reply("Noted. I've removed this duke.task: \n" + deletedTask.toString()
+                ui.reply("Noted. I've removed this task: \n" + deletedTask.toString()
                         + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
             } catch (NumberFormatException e) {
                 throw new DukeException("OOPS!!! Please enter \"delete\" followed the number corresponding to "
-                        + "the duke.task you want deleted");
+                        + "the task you want deleted");
             }
         }
     }

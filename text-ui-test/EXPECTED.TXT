@@ -19,7 +19,7 @@ Input:
 todo wrwreg
 --------------------------------------------------------------------------------------------
 Output:
-Got it. I've added this duke.task:
+Got it. I've added this task:
 [T][X] wrwreg
 Now you have 1 tasks in the list.
 --------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Input:
 deadline tomorrow /by tomorrow
 --------------------------------------------------------------------------------------------
 Output:
-Got it. I've added this duke.task:
+Got it. I've added this task:
 [D][X] tomorrow (by:  tomorrow)
 Now you have 2 tasks in the list.
 --------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ Input:
 event sleep /at never
 --------------------------------------------------------------------------------------------
 Output:
-Got it. I've added this duke.task:
+Got it. I've added this task:
 [E][X] sleep (at:  never)
 Now you have 3 tasks in the list.
 --------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Input:
 done 1
 --------------------------------------------------------------------------------------------
 Output:
-Nice! I've marked this duke.task as done:
+Nice! I've marked this task as done:
 1.[T][✅] wrwreg
 --------------------------------------------------------------------------------------------
 
@@ -76,7 +76,7 @@ Input:
 delete 1
 --------------------------------------------------------------------------------------------
 Output:
-Noted. I've removed this duke.task:
+Noted. I've removed this task:
 [T][✅] wrwreg
 Now you have 2 tasks in the list.
 --------------------------------------------------------------------------------------------

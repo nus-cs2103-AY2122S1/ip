@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
             int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
             tasks.getTasks().get(taskDone).markAsCompleted();
             storage.updateLocalStorage(tasks.getTasks());
-            ui.reply("Nice! I've marked this duke.task as done: \n" + printDoneTask(taskDone, tasks));
+            ui.reply("Nice! I've marked this task as done: \n" + printDoneTask(taskDone, tasks));
         }
     }
 
