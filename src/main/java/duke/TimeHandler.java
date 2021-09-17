@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Helps to parse user input time string
@@ -23,13 +22,13 @@ public class TimeHandler {
             if (s2.chars().filter(c->c=='/').count() == 2) {
                 formattedDate = parseDate(s2);
             } else if (s2.length() == 4 && s2.matches("\\d{4}")) {
-                formattedDate = parseTime(s2);
+                formattedTime = " " + parseTime(s2);
             }
         }
         return formattedDate + formattedTime;
     }
 
-    private static String parseDate(String dateString) {
+    public static String parseDate(String dateString) {
         // parse date from format from d/m/y to d mmm yyyy
         String[] date = dateString.split("/");
         assert date.length == 3;
@@ -40,7 +39,7 @@ public class TimeHandler {
         return localDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
-    private static String parseTime(String timeString) {
+    public static String parseTime(String timeString) {
         // parse date from format from 24 hr format to 12 hr format
         // e.g. 2030 -> 08:30 PM
         assert timeString.length() == 4;
@@ -48,9 +47,8 @@ public class TimeHandler {
         int hour = Integer.parseInt(timeString.substring(0,2));
         String minute = timeString.substring(2);
         String meridiem = (hour > 11) ? "PM" : "AM";
-        hour = (hour - 1) % 12 + 1;
-        return " " + hour + ":" + minute + " " + meridiem;
+        hour = (hour + 11) % 12 + 1;
+        return hour + ":" + minute + " " + meridiem;
     }
-
 
 }
