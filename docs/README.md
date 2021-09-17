@@ -5,12 +5,19 @@ with GUI in JavaFX.
 
 ## Features 
 
+
+
 ### Listing all tasks: ```list```
 
 Shows a list of all the tasks in the user's task list.
 
 Format: ```list```
-- Will be in the form ```[task icon] [done status] description datetime```
+- Each task will be in the form ```[task icon] [done status] description datetime```
+- ```[T]``` is a task icon that stands for a Todo task, does not have a datetime after the description.
+- ```[D]``` is a task icon that stands for a Deadline task.
+- ```[E]``` is a task icon that stands for an Event task. 
+- ```[X]``` is a done status indicating the task is done. 
+- ```[ ]``` is a done status indicating the task has not been done yet.
 
 ### Exiting the program: ```bye```
 
@@ -20,7 +27,7 @@ Format: ```bye```
 
 ### Locating tasks by name: ```find```
 
-Find tasks that contain the given keyword.
+Find tasks with descriptions that contain the given keyword.
 
 Format: ```find <keyword>```
 
@@ -31,7 +38,6 @@ Delete the specified task from the user's task list.
 Format: ```delete <index>```
 - Deletes the task at the specified index.
 - The index refers to the index number shown in the user's task list.
-- The index must be a positive integer 1, 2, 3, …
 
 ### Marking task as done: ```done```
 
@@ -40,7 +46,6 @@ Mark the specified task in the user's task list as done.
 Format: ```done <index>```
 - Mark the task at the specified index as done.
 - The index refers to the index number shown in the user's task list.
-- The index must be a positive integer 1, 2, 3, …
 
 ### Adding a todo task: ```todo```
 
