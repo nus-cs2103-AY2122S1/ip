@@ -1,6 +1,6 @@
 # User Guide
 
-
+<br><br>
 ## Bob
 
 Bob is a sarcastic and slightly annoying yet helpful chatbot that helps you keep track of all the things you need to do.
@@ -8,45 +8,46 @@ If you are a quick typer, Bob allows you to manage your tasks much faster than r
 
 ![alt text](https://github.com/feliciaivane/ip/blob/master/docs/Ui.png?raw=true)
 
-
+<br><br>
+<br><br>
 ## Features 
 
 ### Managing regular tasks
 
 Add and delete todo tasks, and mark them as completed.
 
-
+<br><br>
 ### Managing deadlines
 
 Add and delete deadlines, and mark them as completed.
 
-
+<br><br>
 ### Managing events
 
 Add and delete events, and mark them as completed.
 
-
+<br><br>
 ### Viewing all tasks
 
 View all saved tasks.
 
-
+<br><br>
 ### Searching for tasks
 
 View tasks containing a specific keyword.
 
-
+<br><br>
 ### Viewing help
 
 Be directed to this User Guide.
 
-
+<br><br>
 ### Saving data
 
 Automatically save task list in text file, and reload data the next time Bob is launched.
 
-
-
+<br><br>
+<br><br>
 ## Commands
 
 ### `help` - Viewing help
@@ -67,7 +68,7 @@ Click on this message to view my guide then!
 (You'll need internet access though :p)
 ```
 
-
+<br><br>
 ### `todo` - Adding todo task
 
 Add a new task to keep track of that has no specific date or deadline.
@@ -86,7 +87,7 @@ Okay okay I've added the task:
 Yay 2 tasks!
 ```
 
-
+<br><br>
 ### `deadline` - Adding deadline task
 
 Add a new task to keep track of that has a specific deadline.
@@ -105,7 +106,7 @@ Okay okay I've added the task:
 Yay 3 tasks!
 ```
 
-
+<br><br>
 ### `event` - Adding event task
 
 Add a new task to keep track of that has a specific date.
@@ -124,7 +125,7 @@ Okay okay I've added the task:
 Yay 4 tasks!
 ```
 
-
+<br><br>
 ### `list` - Displaying all tasks
 
 Displays all the tasks in the list.
@@ -145,7 +146,7 @@ Here's your tasks! Wow I'm so helpful!
 4.[E] [ ] make bread (at: Feb 12 2021)
 ```
 
-
+<br><br>
 ### `find` - Searching for tasks
 
 Search for all the tasks in the list that contain a specific keyword.
@@ -165,7 +166,7 @@ Are any of these tasks the one you're looking for?
 3.[E] [ ] make bread (at: Feb 12 2021)
 ```
 
-
+<br><br>
 ### `done` - Completing task
 
 Mark a task in the list as completed.
@@ -183,7 +184,7 @@ Wow you finally did something productive!
 [T] [X] eat bread
 ```
 
-
+<br><br>
 ### `delete` - Removing task
 
 Delete a task from the list.
@@ -202,8 +203,8 @@ Okay task yeeted away :D
 Yay 3 tasks!
 ```
 
-
-
+<br><br>
+<br><br>
 ## Acknowledgements
 
 GUI inspiration from Fantasia by @soaza
