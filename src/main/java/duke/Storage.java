@@ -97,23 +97,50 @@ public class Storage {
      * @throws DukeException If the user input is invalid.
      */
     public Task parseTask(String input) throws DukeException {
+        String doneString = input.substring(4, 5);
+        boolean state = getDoneState(doneString);
         if (input.startsWith("T")) {
             String taskDesc = input.substring(7);
             Todo tTask = new Todo(taskDesc);
+            if (state) {
+                tTask.setDone();
+            }
             return tTask;
         } else if (input.startsWith("D")) {
             String taskDesc = getDesc(input.substring(7));
             String taskDate = getDate(input);
             Deadline dTask = new Deadline(taskDesc, taskDate);
+            if (state) {
+                dTask.setDone();
+            }
             return dTask;
         } else {
             String taskDesc = getDesc(input.substring(7));
             String taskDate = getDate(input);
             Event eTask = new Event(taskDesc, taskDate);
+            if (state) {
+                eTask.setDone();
+            }
             return eTask;
         }
     }
 
+    /**
+     * Gets done state of task.
+     *
+     * @param input String representation of done state of task.
+     * @return Boolean representation of done state of task.
+     */
+    public boolean getDoneState(String input) {
+        return input.equals("1");
+    }
+
+    /**
+     * Gets description of task.
+     *
+     * @param input User input.
+     * @return The String representation of the task description.
+     */
     public String getDesc(String input) {
         int endIndex = 0;
         int count = 0;
