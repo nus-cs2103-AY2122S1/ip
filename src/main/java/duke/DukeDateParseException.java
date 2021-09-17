@@ -2,16 +2,11 @@ package duke;
 
 import java.text.ParseException;
 
-// TODO: used for loading
-public class DukeDateParseException extends ParseException {
-    public DukeDateParseException(String s, int errorOffset) {
-        super(s, errorOffset);
-    }
 
-    public DukeDateParseException(String s) {
-        // parsing tasks do not need an offset
-        super(s, 0);
-    }
+/**
+ * @DukeDateParseException is an exception that is thrown when date format passed into Duke commands are incorrect.
+ */
+public class DukeDateParseException extends ParseException {
 
     public DukeDateParseException(ParseException e) {
         super(e.getMessage(), e.getErrorOffset());

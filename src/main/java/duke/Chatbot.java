@@ -94,6 +94,8 @@ public class Chatbot {
 
     /**
      * @chat initiates a chat with the user, and checks for handled exceptions.
+     *
+     * Only used in CLI version.
      */
     public void chat() {
         boolean isChatting = true;
