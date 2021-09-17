@@ -18,21 +18,6 @@ upcoming deadlines.
 
 ## Usage
 
-### `help` - Viewing help
-
-Shows a message explaining how to use Duke.
-
-Example of usage: 
-
-`help`
-
-Expected outcome:
-
-List of commands.
-
-```
-expected output
-```
 
 ### `todo` - Adding a todo task
 
