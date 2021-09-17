@@ -1,13 +1,16 @@
 package aoi.controllers;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import aoi.Aoi;
+import aoi.Main;
 import aoi.ui.Ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -33,15 +36,27 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/itadori.jpeg"));
     private final Image aoiImage = new Image(this.getClass().getResourceAsStream("/images/todo3.jpeg"));
 
+    public MainWindow(Aoi aoi) {
+        this.aoi = aoi;
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+            dialogContainer.getStyleClass().add("dialog-container");
+            sendButton.getStyleClass().add("send-button");
+            userInput.getStyleClass().add("input-box");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /** Initialise main components */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getAoiDialog(Ui.showGreeting(), aoiImage));
-    }
-
-    public void setAoi(Aoi a) {
-        aoi = a;
     }
 
     /**
@@ -54,7 +69,6 @@ public class MainWindow extends AnchorPane {
 
         // Does nothing if input is empty.
         if (input.trim().isEmpty()) {
-            System.out.println("hi");
             return;
         }
 

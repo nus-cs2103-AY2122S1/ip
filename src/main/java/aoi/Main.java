@@ -20,17 +20,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/reminder.png")));
-            stage.setTitle("Aoi Todo Bot");
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setAoi(aoi);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MainWindow app = new MainWindow(aoi);
+        Scene scene = new Scene(app);
+        scene.getStylesheets().add("/view/styles.css");
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/reminder.png")));
+        stage.setTitle("Aoi Todo Bot");
+        stage.setScene(scene);
+        stage.show();
     }
 }

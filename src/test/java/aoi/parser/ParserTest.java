@@ -2,11 +2,11 @@ package aoi.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import aoi.data.TaskList;
 import aoi.exceptions.AoiException;
 import aoi.storage.Storage;
+
+import org.junit.jupiter.api.Test;
 
 
 public class ParserTest {
