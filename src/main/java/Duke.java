@@ -33,8 +33,6 @@ public class Duke extends Application {
         taskManager = new TaskManager();
     }
 
-//    private Duke duke = new Duke();
-
     @Override
     public void start(Stage stage) {
 
@@ -107,7 +105,6 @@ public class Duke extends Application {
 
     public static void main(String[] args) {
         String inData = "yo";
-        introMessage();
 
         TaskManager taskManager = new TaskManager();
 
@@ -119,11 +116,9 @@ public class Duke extends Application {
     }
 
 
-    private static void introMessage() {
-        System.out.println("____________________________________________________________ \n"
-                + "Hello! I'm Joker \n"
-                + "What can I do for you? \n"
-                + "____________________________________________________________");
+    public static String introMessage() {
+        return "Hello! I'm Joker \n"
+                + "What can I do for you?";
     }
 
     /**

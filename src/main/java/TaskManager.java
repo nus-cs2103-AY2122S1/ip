@@ -179,6 +179,15 @@ public class TaskManager {
         return "";
     }
 
+    /**
+     * Intro Message for duke
+     * @return intro string
+     */
+    public String introMessage() {
+        return "Hello! I'm Joker \n"
+                + "What can I do for you?";
+    }
+
     private String listAll() {
         String output = "";
         for (int j = 0; j < i; j++) {
