@@ -183,6 +183,7 @@ public class TaskList {
         String toBeFound = input.substring(5);
         ArrayList<Task> tasksFound = new ArrayList<>();
 
+        // find and add matching tasks to another list
         for (int i = 0; i < inputs.size(); i++) {
             Task element = inputs.get(i);
             if (element.toString().contains(toBeFound)) {
