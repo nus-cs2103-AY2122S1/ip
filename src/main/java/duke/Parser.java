@@ -41,7 +41,7 @@ public class Parser {
         } else if (splitData[0].equals(Deadline.DEADLINE_LABEL)) {
             return new Deadline(splitData[1], splitData[2], splitData[3]);
         } else if (splitData[0].equals(Event.EVENT_LABEL)) {
-            return new Event(splitData[1], splitData[2]);
+            return new Event(splitData[1], splitData[2], splitData[3]);
         } else {
             throw new DukeArgumentException("Database error!");
         }

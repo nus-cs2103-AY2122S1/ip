@@ -37,10 +37,11 @@ public class Event extends Task {
         }
     }
 
-    protected Event(String description, String date) throws DukeDateParseException {
+    protected Event(String isDone, String description, String date) throws DukeDateParseException {
         super(description);
         try {
-            this.date = (new SimpleDateFormat("")).parse(date);
+            this.date = (new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")).parse(date);
+            this.isDone = Boolean.valueOf(isDone);
         } catch (ParseException e) {
             throw new DukeDateParseException(e);
         }
