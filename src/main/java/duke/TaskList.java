@@ -129,7 +129,7 @@ public class TaskList {
                 filteredTaskQuantifier = "Here are the matching tasks in your list:";
             }
             String filteredTasks = "";
-            for (int i = 1; i <= list.size(); i++) {
+            for (int i = 1; i <= filteredList.size(); i++) {
                 filteredTasks = filteredTasks + ("\n" + i + ". " + filteredList.get(i - 1));
             }
             return filteredTaskQuantifier + filteredTasks;

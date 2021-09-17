@@ -114,7 +114,7 @@ public class NoteList {
                 filteredNoteQuantifier = "Here are the matching notes in your list:";
             }
             String filteredNotes = "";
-            for (int i = 1; i <= list.size(); i++) {
+            for (int i = 1; i <= filteredList.size(); i++) {
                 filteredNotes = filteredNotes + ("\n" + i + ". " + filteredList.get(i - 1));
             }
             return filteredNoteQuantifier + filteredNotes;
