@@ -13,7 +13,9 @@ public class DeleteCommand extends Command {
     private int index;
 
     /**
-     * {@inheritDoc}
+     * Creates delete command
+     * @param userInput userinput
+     * @throws DukeException throws if user input is invalid
      */
     public DeleteCommand(String userInput) throws DukeException {
         super(userInput);
@@ -21,7 +23,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
+     * Execute delete command
+     * @param taskList The object that holds a list of Task
+     * @param ui The object responsible for updating Ui response
+     * @param storage The object responsible to save/load list of task to/from hard disk
+     * @return string to be outputed to users
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -39,7 +45,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
+     * Check if command is exit command
+     * @return true if exit command
      */
     @Override
     public boolean isExit() {

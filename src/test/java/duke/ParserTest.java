@@ -1,10 +1,17 @@
 package duke;
 
-import duke.main.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.main.Parser;
 
+
+
+/**
+ * Class to test parser
+ */
 class ParserTest {
 
     @Test

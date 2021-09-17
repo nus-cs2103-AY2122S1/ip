@@ -12,15 +12,15 @@ public class ListCommand extends Command {
 
     /**
      * Creates list command
-     * @param userInput input from user
-     * @throws DukeException throw if invalid command
+     * @param userInput user input
+     * @throws DukeException throws if user input is invalid
      */
     public ListCommand(String userInput) throws DukeException {
         super(userInput);
     }
 
     /**
-     * executes of listcommand
+     * executes of list command
      * @param taskList The object that holds a list of Task
      * @param ui The object responsible for updating Ui response
      * @param storage The object responsible to save/load list of task to/from hard disk

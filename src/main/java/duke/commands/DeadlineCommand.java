@@ -18,7 +18,9 @@ public class DeadlineCommand extends Command {
     private String description;
 
     /**
-     * {@inheritDoc}
+     * Creates deadline command
+     * @param userInput userinput
+     * @throws DukeException throws if user input is invalid
      */
     public DeadlineCommand(String userInput) throws DukeException {
         super(userInput);
@@ -28,7 +30,11 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
+     * Execute deadline command
+     * @param taskList The object that holds a list of Task
+     * @param ui The object responsible for updating Ui response
+     * @param storage The object responsible to save/load list of task to/from hard disk
+     * @return String to be printed out to user
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

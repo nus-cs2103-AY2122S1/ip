@@ -1,20 +1,16 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.main.StorageElement;
 import duke.main.TaskList;
 import duke.tasks.Task;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 
 class TaskStub extends Task {
     protected TaskStub(String description) {
         super(description);
-    }
-
-    protected TaskStub(StorageElement storageElement) {
-        super(storageElement);
     }
 
     @Override

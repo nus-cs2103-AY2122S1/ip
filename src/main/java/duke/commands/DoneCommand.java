@@ -13,7 +13,9 @@ public class DoneCommand extends Command {
     private int index;
 
     /**
-     * {@inheritDoc}
+     * Creates done command
+     * @param userInput userinput
+     * @throws DukeException throws if userinput is invalid
      */
     public DoneCommand(String userInput) throws DukeException {
         super(userInput);
@@ -21,7 +23,11 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
+     * Execute done command
+     * @param taskList The object that holds a list of Task
+     * @param ui The object responsible for updating Ui response
+     * @param storage The object responsible to save/load list of task to/from hard disk
+     * @return string to be outputed to users
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -38,7 +44,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
+     * Check if this is exit command
+     * @return return true if is exit command
      */
     @Override
     public boolean isExit() {
