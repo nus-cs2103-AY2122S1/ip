@@ -39,7 +39,7 @@ Refer to the [Features](#features) below for details of each command.
 <hr />
 
 ## Features
-ℹ️ Notes about the command format:
+:information_source: Notes about the command format:
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo TASK_DESCRIPTION`, 
 `TASK_DESCRIPTION` is a parameter which is to be used as `todo read book`.
@@ -62,7 +62,7 @@ Adds an Event task, with the given task description and date, to the task list.
 
 Format: `event TASK_DESCRIPTION /at DATE`
 
-The date can be in **ANY** format.
+The `DATE` can be in **ANY** format.
 
 Examples:
 - `event go party /at midnight`
@@ -71,7 +71,7 @@ Examples:
 ### Adding a deadline task: `deadline`
 Adds a Deadline task, with the given task description and date, to the task list.
 
-The date must be in **yyyy-mm-dd** format.
+The `DATE` must be in **yyyy-mm-dd** format.
 
 Format: `deadline TASK_DESCRIPTION /by DATE`
 
@@ -131,12 +131,12 @@ Format: `exit`
 
 Action | Format, Examples
 --- | ---
-List | `list`
-Todo | `todo TASK_DESCRIPTION` e.g. `todo read book`
-Event | `event TASK_DESCRIPTION /at DATE` e.g. `event go party /at midnight`
-Deadline | `deadline TASK_DESCRIPTION /by DATE` e.g. `deadline submit assignment /by 2020-09-16`
-Done | `done INDEX` e.g. `done 1`
-Delete | `delete INDEX` e.g. delete 2`
-Find | `find KEYWORD` e.g. `find read`
-Sort | `sort`
-Exit | `bye`
+**List** | `list`
+**Todo** | `todo TASK_DESCRIPTION` e.g. `todo read book`
+**Event** | `event TASK_DESCRIPTION /at DATE` e.g. `event go party /at midnight`
+**Deadline** | `deadline TASK_DESCRIPTION /by DATE` e.g. `deadline submit assignment /by 2020-09-16`
+**Done** | `done INDEX` e.g. `done 1`
+**Delete** | `delete INDEX` e.g. delete 2`
+**Find** | `find KEYWORD` e.g. `find read`
+**Sort** | `sort`
+**Exit** | `bye`
