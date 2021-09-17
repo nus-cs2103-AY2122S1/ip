@@ -46,7 +46,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s %s (at: %s) %s", super.toString(), description, eventDetails,
+        return String.format("[E]%s%s (at: %s) %s", super.toString(), description, eventDetails,
                 getTags(this.tags));
     }
 

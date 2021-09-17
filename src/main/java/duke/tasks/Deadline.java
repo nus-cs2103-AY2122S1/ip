@@ -49,7 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s %s (by: %d %s %d) %s", super.toString(), description, dateBy.getDayOfMonth(),
+        return String.format("[D]%s%s (by: %d %s %d) %s", super.toString(), description, dateBy.getDayOfMonth(),
                 dateBy.getMonth().toString(), dateBy.getYear(), getTags(this.tags));
 //        return "[D]" + super.toString() + description + " (by: " + dateBy.getDayOfMonth()
 //                + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";

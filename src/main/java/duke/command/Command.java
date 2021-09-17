@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.NotDoneRightException;
+import duke.exceptions.InvalidIntegerInput;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -113,10 +113,10 @@ public class Command {
      * @param userCommand The command inputted from the user
      * @param taskList The task list which contains the tasks
      * @return The bot's output for the delete command.
-     * @throws NotDoneRightException If there are errors processing the "done" command.
+     * @throws InvalidIntegerInput If there are errors processing the "done" command.
      * @throws IOException If there are errors processing the file.
      */
-    public String delete(String userCommand, TaskList taskList) throws NotDoneRightException, IOException {
+    public String delete(String userCommand, TaskList taskList) throws InvalidIntegerInput, IOException {
         Parser parser = new Parser(userCommand);
         int ref = parser.getSecondInteger(taskList.size()) - 1;
         String taskRemoved = taskList.get(ref).toString();
@@ -131,10 +131,10 @@ public class Command {
      * @param userCommand The command inputted from the user
      * @param taskList The task list which contains the tasks
      * @return The bot's output for the done command.
-     * @throws NotDoneRightException If there are errors processing the "done" command.
+     * @throws InvalidIntegerInput If there are errors processing the "done" command.
      * @throws IOException If there are errors processing the file.
      */
-    public String done(String userCommand, TaskList taskList) throws IOException, NotDoneRightException {
+    public String done(String userCommand, TaskList taskList) throws IOException, InvalidIntegerInput {
         Parser parser = new Parser(userCommand);
         int ref = parser.getSecondInteger(taskList.size()) - 1;
         Task task = taskList.get(ref);
@@ -180,9 +180,9 @@ public class Command {
      * @param taskList The task list which contains the tasks
      * @return The bot's output for the tag command.
      * @throws EmptyDescriptionException If the user input is missing extra information after the command.
-     * @throws NotDoneRightException If there are errors processing the "done" command.
+     * @throws InvalidIntegerInput If there are errors processing the "done" command.
      */
-    public String tag(String userCommand, TaskList taskList) throws EmptyDescriptionException, NotDoneRightException,
+    public String tag(String userCommand, TaskList taskList) throws EmptyDescriptionException, InvalidIntegerInput,
             IOException {
         Parser parser = new Parser(userCommand);
         int ref = parser.getSecondInteger(taskList.size()) - 1;

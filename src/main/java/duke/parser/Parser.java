@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.NotDoneRightException;
+import duke.exceptions.InvalidIntegerInput;
 
 public class Parser {
 
@@ -27,7 +27,7 @@ public class Parser {
     public Parser(String command) {
         assert command != null : "Command to be parsed cannot be null";
         this.command = command;
-        this.commandWords = command.split(" ");
+        this.commandWords = command.toLowerCase().split(" ");
     }
 
     /**
@@ -36,7 +36,7 @@ public class Parser {
      * @return The first word from the user, which is the command
      */
     public String getFirstWord() {
-        return commandWords[0].toLowerCase();
+        return commandWords[0];
     }
 
     /**
@@ -48,7 +48,7 @@ public class Parser {
         if (commandWords.length == 1) {
             throw new EmptyDescriptionException("todo");
         }
-        return commandWords[1].toLowerCase();
+        return commandWords[1];
     }
 
     /**
@@ -56,18 +56,24 @@ public class Parser {
      *
      * @param size The length of the taskList
      * @return The second word (aka the number) from the user
-     * @throws NotDoneRightException If there are issues with extracting the second integer from user input.
+     * @throws InvalidIntegerInput If there are issues with extracting the second integer from user input.
      */
-    public int getSecondInteger(int size) throws NotDoneRightException {
+    public int getSecondInteger(int size) throws InvalidIntegerInput {
+        int secondInteger;
 
-        if (command.toLowerCase().split(" ").length == 1
-                || Integer.parseInt(command.split(" ")[1]) < 1
-                || Integer.parseInt(command.split(" ")[1]) > size) {
-            throw new NotDoneRightException("1", String.valueOf(size));
-
-        } else {
-            return Integer.parseInt(commandWords[1]);
+        try {
+            secondInteger = Integer.parseInt(commandWords[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidIntegerInput("1", String.valueOf(size));
         }
+
+        if (commandWords.length == 1
+                || secondInteger < 1
+                || secondInteger > size) {
+            throw new InvalidIntegerInput("1", String.valueOf(size));
+        }
+
+        return secondInteger;
     }
 
     /**

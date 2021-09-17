@@ -19,7 +19,7 @@ public class DukeTest {
                 "Finish assignment",
                 LocalDate.parse("2020-12-12")
         );
-        assertEquals("[D][ ] Finish assignment (by: 12 DECEMBER 2020)", deadline.toString());
+        assertEquals("[D][ ] Finish assignment (by: 12 DECEMBER 2020) ", deadline.toString());
     }
 
     @Test
@@ -28,7 +28,7 @@ public class DukeTest {
                 "Eat my potatoes"
         );
         todo.markAsDone();
-        assertEquals("[T][X] Eat my potatoes", todo.toString());
+        assertEquals("[T][X] Eat my potatoes ", todo.toString());
     }
 
     @Test
@@ -38,6 +38,6 @@ public class DukeTest {
                 "NUS"
         );
         event.markAsDone();
-        assertEquals("[E][X] Meeting friends (at: NUS)", event.toString());
+        assertEquals("[E][X] Meeting friends (at: NUS) ", event.toString());
     }
 }
