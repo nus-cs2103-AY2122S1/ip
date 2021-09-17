@@ -6,15 +6,15 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * The Duke Application.
+ * The DukeMaster Application.
  */
-public class Duke extends Application {
+public class DukeMaster extends Application {
     private final String dataFilePath = "./data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke() {}
+    public DukeMaster() {}
 
     @Override
     public void start(Stage stage) {
