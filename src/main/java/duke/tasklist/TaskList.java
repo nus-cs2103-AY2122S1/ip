@@ -99,6 +99,7 @@ public class TaskList {
 
     /**
      * Checks if the new task to be added is a duplicate of another task already in the tasklist.
+     *
      * @param taskToCheck The task to be checked.
      * @return True if the task to be added is a duplicate, false otherwise.
      * @throws DuplicateTaskException If the task to be added is a duplicate.

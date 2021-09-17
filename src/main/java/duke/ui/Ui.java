@@ -20,25 +20,33 @@ public class Ui {
             + "|   |  |   | |  |  |  | |    |/   /  /   __ \\\n"
             + "|   |_|   | |  |_|  | |      <   |    ___/\n"
             + "|____/   \\_ __/  |__|\\__\\ \\_____|\n";
-    /** The line break between each interaction. */
-    private final String LINE_BREAK = "-------------------------------------------------------------------";
+
     /** The standard welcome message Duke will print as it starts. */
     private final String WELCOME_MESSAGE = "Hello I'm\n" + LOGO + "How may I help you today boss?\n";
+
     /** The standard goodbye message Duke will print as it closes. */
     private final String GOODBYE_MESSAGE = "Okay then! I hope to see you again soon boss!";
+
     /** The standard delete message Duke will print as it adds a task. */
     private final String ADD_MESSAGE = "Got it boss! I've added this task:";
+
     /** The standard delete message Duke will print as it deletes a task. */
     private final String DELETE_MESSAGE = "Noted boss. I've removed this task:";
+
     /** The standard delete message Duke will print as it marks a task as done. */
     private final String DONE_MESSAGE = "Nice one boss! I've marked this task as done:";
+
     /** The standard error message Duke will print if an unrecognised command is inputted. */
     private final String UNRECOGNISED_MESSAGE = "☹ I'm sorry boss! I'm not quite sure what you need me to do!";
+
     /** The standard list message Duke will print as it lists all the task. */
     private final String LIST_MESSAGE = "Here are the tasks in your list:";
+
     /** The standard find message Duke will print as it finds all the matching tasks. */
     private final String FIND_MESSAGE = "Here are the matching tasks in your list:";
 
+    /** The line break between each interaction. */
+    private final String LINE_BREAK = "-------------------------------------------------------------------";
 
     /** The scanner utilised to read inputs from the user. */
     private Scanner scan;
@@ -61,6 +69,8 @@ public class Ui {
 
     /**
      * Prints the full welcome message when Duke starts.
+     *
+     * @return The standard welcome message upon startup.
      */
     public String greetWelcome() {
         return WELCOME_MESSAGE;
@@ -68,6 +78,8 @@ public class Ui {
 
     /**
      * Prints the full goodbye message when Duke closes and closes the GUI after 2 seconds.
+     *
+     * @return The standard goodbye message.
      */
     public String greetGoodbye() {
         new Timer().schedule(new TimerTask() {
@@ -79,22 +91,15 @@ public class Ui {
     }
 
     /**
-     * Prints the divider between interactions between Duke and the user.
-     */
-    public void showLine() {
-        System.out.println(LINE_BREAK);
-    }
-
-    /**
      * Prints the full added task message when a task is added successfully.
      *
      * @param task The added task.
      * @param taskList The tasklist the task is added to.
      */
     public String showTaskAdded(Task task, TaskList taskList) {
+        assert task != null : "The task to be added cannot be null!";
         String output = ADD_MESSAGE + "\n";
         output += "  " + task + "\n" + taskList.toString() + "\n";
-        System.out.println(output);
         return output;
     }
 
@@ -108,7 +113,6 @@ public class Ui {
         String output = DELETE_MESSAGE + "\n";
         output += "  " + task.toString() + "\n";
         output += taskList.toString() + "\n";
-        System.out.println(output);
         return output;
     }
 
@@ -120,7 +124,6 @@ public class Ui {
     public String showTaskDone(Task task) {
         String output = DONE_MESSAGE + "\n";
         output += "  " + task.toString() + "\n";
-        System.out.println(output);
         return output;
     }
 
@@ -137,7 +140,6 @@ public class Ui {
             int currTask = i + 1;
             output += currTask + "." + allTasks.get(i).toString() + "\n";
         }
-        System.out.println(output);
         return output;
     }
 
@@ -158,25 +160,31 @@ public class Ui {
                 findPosition++;
             }
         }
-        System.out.println(output);
         return output;
     }
 
     /**
      * Prints the full unrecognised input message.
+     *
+     * @return The full unrecognised input message.
      */
     public String showUnrecognised() {
-        System.out.println(UNRECOGNISED_MESSAGE);
         return UNRECOGNISED_MESSAGE;
     }
 
     /**
      * Prints the error message should an error come up during an interaction.
      *
-     * @param errorMessage
+     * @param errorMessage The standard error message.
      */
     public String showError(String errorMessage) {
-        System.out.println(errorMessage);
         return errorMessage;
+    }
+
+    /**
+     * Prints the divider between interactions between Duke and the user.
+     */
+    public void showLine() {
+        System.out.println(LINE_BREAK);
     }
 }

@@ -24,6 +24,7 @@ public class Parser {
 
     /**
      * Produces the corresponding type of executable command from the user input.
+     *
      * @param fullCommand The full command inputted by the user.
      * @return The corresponding type of executable command from the user input.
      * @throws InvalidInputException If the given full input by the user is invalid.
@@ -65,12 +66,12 @@ public class Parser {
         } else {
 
             throw new InvalidInputException();
-
         }
     }
 
     /**
      * Creates the corresponding command for the type of task to be added.
+     *
      * @param taskType The type of task to be added based on the TaskType enum.
      * @param fullCommand The full input given by the user.
      * @return The corresponding type of executable task command from the user input.
@@ -107,6 +108,7 @@ public class Parser {
 
     /**
      * Creates the corresponding command for the type of action to be done to the task.
+     *
      * @param indexAction The type of action to be executed based on the IndexAction enum.
      * @param fullCommand The full input given by the user.
      * @return The corresponding type of executable task command from the user input.
@@ -137,6 +139,7 @@ public class Parser {
 
     /**
      * Creates the corresponding command for the type of action to be done to the task.
+     *
      * @param fullCommand The full input given by the user.
      * @return The corresponding type of executable task command from the user input.
      * @throws MissingKeywordException If the input is missing a keyword.
@@ -145,14 +148,13 @@ public class Parser {
             throws MissingKeywordException {
 
         String[] splitCommand = fullCommand.split(" ");
-
         checkForKeyword(splitCommand);
-
         return new FindCommand(splitCommand[1]);
     }
 
     /**
      * Checks for the presence of a description for inputs that add tasks.
+     *
      * @param splitCommand The full input given by the user broken up into an array.
      * @throws MissingDescriptionException If the input is missing a description.
      */
@@ -174,6 +176,7 @@ public class Parser {
 
     /**
      * Checks for the presence of an index for inputs that perform an action to a task.
+     *
      * @param splitCommand The full input given by the user broken up into an array.
      * @throws MissingIndexException If the input is missing an index.
      */
@@ -183,11 +186,11 @@ public class Parser {
         if (splitCommand.length == 1) {
             throw new MissingIndexException();
         }
-
     }
 
     /**
      * Checks for the presence of a keyword for inputs that perform a search function.
+     *
      * @param splitCommand The full input given by the user broken up into an array.
      * @throws MissingKeywordException If the input is missing a keyword.
      */
@@ -197,6 +200,5 @@ public class Parser {
         if (splitCommand.length == 1) {
             throw new MissingKeywordException();
         }
-
     }
 }
