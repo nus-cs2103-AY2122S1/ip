@@ -111,7 +111,7 @@ public class Ui {
 
     /**
      * Displays syntax and use of given command
-     * 
+     *
      * @param command command to seek help for
      * @return syntax and use of given command
      */
