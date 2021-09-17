@@ -1,6 +1,6 @@
-# User Guide: That time I created a Chat Bot named myself because Singaporeans keep f**king mispronounce and butcher it in front of me
+# User Guide: DuC - That time I created a Chat Bot named myself because everyone keep mispronounce and butcher it in front of me
 
-Insert title here
+Random title inserted
 
 ## Menu
 
