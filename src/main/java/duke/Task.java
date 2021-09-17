@@ -14,10 +14,17 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+<<<<<<< HEAD
     /**
      * Marks the task as done.
      *
      */
+=======
+    public String getDescription() {
+        return this.description;
+    }
+
+>>>>>>> branch-Level-9
     public void markAsDone () {
         this.isDone = true;
     }

@@ -69,5 +69,28 @@ public class Ui {
         System.out.println(e);
     }
 
+    /**
+     * UI message for the find command.
+     *
+     * @param keyword
+     * @return the list of tasks containing the keyword specified by the user
+     */
+    public String findTask(String keyword) {
+        ArrayList<Task> list = TaskList.getTodoList();
+        if (list.size() == 0) {
+            return "You currently have no tasks!";
+        } else {
+            String tasksWithKeywordList = "";
+            int index = 0;
+            for (Task task : list) {
+                if (task.getDescription().contains(keyword)) {
+                    index++;
+                    tasksWithKeywordList = tasksWithKeywordList + (index)
+                            + ". " + task.toString() + "\n";
+                }
+            }
+            return "Here are the matching tasks in your list:\n" + tasksWithKeywordList;
+        }
 
+    }
 }

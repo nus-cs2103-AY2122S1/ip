@@ -58,6 +58,9 @@ public class Duke {
                     for (InputCommands inputs : InputCommands.values()) {
                         System.out.println(inputs);
                     }
+                } else if (userCommand.startsWith("find")) {
+                    InputHandler findInputHandler = new FindInput(ui, taskList);
+                    System.out.println(findInputHandler.handle(userCommand));
                 } else {
                     throw new UnknownInputException("error");
                 }
