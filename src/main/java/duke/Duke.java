@@ -1,7 +1,6 @@
 package duke;
 
 import duke.commands.Command;
-import duke.ui.DialogBox;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -131,9 +130,8 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        Label startText = new Label(LOGO);
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(startText, new ImageView(IMAGE_DUKE))
+                DialogBox.getDukeDialog(LOGO, IMAGE_DUKE)
         );
     }
 
@@ -158,24 +156,24 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         boolean isExit = (userInput.getText().equalsIgnoreCase("bye"));
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(IMAGE_USER)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(IMAGE_DUKE))
+                DialogBox.getUserDialog(userInput.getText(), IMAGE_USER),
+                DialogBox.getDukeDialog(getResponse(userInput.getText()), IMAGE_DUKE)
         );
         userInput.clear();
 
         if (isExit) {
             Platform.exit();
         }
+
+        System.out.println(isExit);
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String currLine) {
+    public String getResponse(String currLine) {
         try {
             Command currCommand = Parser.parse(currLine);
             currCommand.execute(this.items, this.ui);
