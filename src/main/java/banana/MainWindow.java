@@ -34,8 +34,10 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Image user;
-    private Image bot;
+    private Image user = new Image(this.getClass().getResourceAsStream(
+            "/images/levi.png"));
+    private Image bot = new Image(this.getClass().getResourceAsStream(
+            "/images/hange.png"));
 
     /**
      * Sets the color of the background
@@ -49,14 +51,7 @@ public class MainWindow extends AnchorPane {
                 Color.DARKSEAGREEN, null, null)));
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        try {
-            user = new Image(new FileInputStream(
-                    "/Users/ravi57004/ip/src/main/resources/images/levi.png"));
-            bot = new Image(new FileInputStream(
-                    "/Users/ravi57004/ip/src/main/resources/images/hange.png"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
                         " Hello I'm Banana! \n "
@@ -85,6 +80,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         if (input.equals("bye")) {
             Platform.exit();
+            return;
         }
         String response = duke.getResponse(input);
         Parser.setPrevInput(input);
