@@ -8,6 +8,8 @@
     https://oss-generic.github.io/process/codingstandards/coding-standards-java.html
 -->
 
+<!-- This checkstyle.xml file was adapted from https://github.com/nus-cs2103-AY2122S1/forum/issues/136-->
+
 <module name="Checker">
 
   <module name="FileTabCharacter">
