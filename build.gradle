@@ -56,6 +56,15 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Launcher'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 run{
     standardInput = System.in
     enableAssertions = true

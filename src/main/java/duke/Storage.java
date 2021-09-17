@@ -64,13 +64,13 @@ public class Storage {
             return addEntriesFromFile(entries);
         } catch (FileNotFoundException e) {
             try {
-                if (!(dukeData.createNewFile())) {
-                    throw new DukeException("Uh-Oh! Your Data can't be stored!");
+                if (!(dukeData.getParentFile().mkdir()) && !(dukeData.createNewFile())) {
+                    throw new DukeException("Uh-Oh! Your Data can't be stored! (Directory can't be created)");
                 } else {
                     return new EntryList();
                 }
             } catch (IOException err) {
-                throw new DukeException("Uh-Oh! Your Data can't be stored!");
+                throw new DukeException("Uh-Oh! Your Data can't be stored! (IO Error)");
             }
         }
     }
