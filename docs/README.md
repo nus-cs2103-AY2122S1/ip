@@ -2,8 +2,7 @@
 A great companion to help you organize your life.
 
 ## Setup
-1. Download the jar file [here](https://github.
-com/SajalVaishnav/ip/releases/download/A-Release/duke.jar)
+1. Download the jar file [here](https://github.com/SajalVaishnav/ip/releases/download/A-Release/duke.jar)
 2. Run the jar file according to [this guide](https://stackoverflow.com/questions/394616/running-jar-file-on-windows)
 ## Features 
 * Manage your todos, events and deadlines
@@ -13,34 +12,44 @@ com/SajalVaishnav/ip/releases/download/A-Release/duke.jar)
 
 ### Adding new tasks
 * Add a new event
-`event meeting /at tonight`
+
+Example: `event meeting /at tonight`
 
 * Add a new todo
-`todo read book`
+
+Example: `todo read book`
 
 * Add a new deadline
-`deadline submit report /by 12-11-2021`
+
+Example: `deadline submit report /by 12-11-2021`
 
 ### Viewing all your tasks
 * List all tasks
-`list`
+
+Example: `list`
 
 ### Searching for a task
 * Find a task
-`find meeting`
+
+Example: `find meeting`
 
 * Search by date
-`find 12-11-2021`
+
+Example: `find 12-11-2021`
 
 ### Completing a task
 * Mark a task as complete
+
 First, list all tasks by either using the `list` command or the `find` command.
-Then, type `done` followed by the index of the task
-`done 1`
+Then, type `done` followed by the index of the task 
+  
+Example: `done 1`
 
 ### Deleting a task
 * Delete a task
+
 First, list all tasks by either using the `list` command or the `find` command.
 Then, type `delete` followed by the index of the task
-`delete 1`
+
+Example: `delete 1`
 
