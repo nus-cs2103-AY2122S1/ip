@@ -81,4 +81,8 @@ public class Duke {
             return ui.showError(e.getMessage());
         }
     }
+
+    public static void main(String[] args) {
+        Launcher launcher = new Launcher();
+    }
 }
