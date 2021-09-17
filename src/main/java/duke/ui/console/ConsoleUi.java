@@ -1,8 +1,8 @@
 package duke.ui.console;
 
-import duke.ui.Ui;
-
 import java.util.Scanner;
+
+import duke.ui.Ui;
 
 public class ConsoleUi extends Ui {
     private final Scanner in;

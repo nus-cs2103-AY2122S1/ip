@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.DateTime;
 import duke.Storage;
 import duke.TaskList;
@@ -8,8 +10,6 @@ import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 public class AddDeadlineCommand extends Command {
     private final String description;

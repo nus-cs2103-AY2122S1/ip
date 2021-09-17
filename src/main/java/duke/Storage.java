@@ -85,26 +85,26 @@ public class Storage {
         boolean isCompleted = components[1].equals("1");
         String description = unescapeString(components[2]);
         switch (components[0]) {
-            case "T": {
-                tasks.add(new Todo(description, isCompleted));
-                break;
-            }
-            case "E": {
-                if (components.length != 4) {
-                    throw new StorageException("Invalid storage file format");
-                }
-                tasks.add(new Event(description, DateTime.parse(components[3]), isCompleted));
-                break;
-            }
-            case "D": {
-                if (components.length != 4) {
-                    throw new StorageException("Invalid storage file format");
-                }
-                tasks.add(new Deadline(description, DateTime.parse(components[3]), isCompleted));
-                break;
-            }
-            default:
+        case "T": {
+            tasks.add(new Todo(description, isCompleted));
+            break;
+        }
+        case "E": {
+            if (components.length != 4) {
                 throw new StorageException("Invalid storage file format");
+            }
+            tasks.add(new Event(description, DateTime.parse(components[3]), isCompleted));
+            break;
+        }
+        case "D": {
+            if (components.length != 4) {
+                throw new StorageException("Invalid storage file format");
+            }
+            tasks.add(new Deadline(description, DateTime.parse(components[3]), isCompleted));
+            break;
+        }
+        default:
+            throw new StorageException("Invalid storage file format");
         }
     }
 

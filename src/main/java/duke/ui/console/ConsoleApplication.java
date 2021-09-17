@@ -1,9 +1,9 @@
 package duke.ui.console;
 
+import java.util.Scanner;
+
 import duke.Duke;
 import duke.exception.DukeException;
-
-import java.util.Scanner;
 
 public class ConsoleApplication {
     /**
