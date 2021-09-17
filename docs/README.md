@@ -1,14 +1,22 @@
 # User Guide
+Welcome to Duke, a To-Do List app.
 
 ## Features 
 
-### Feature-ABC
+### Add and Delete Items
 
-Description of the feature.
+Duke includes 3 different items.
+* Todo - Simply entry with a descriptor
+* Deadline - Deadline with a due date
+* Event - Event with a happening time
 
-### Feature-XYZ
+### Tagging Items
 
-Description of the feature.
+Items can be tagged for information.
+
+### Finding Items
+
+Items can be filtered using a keyword filter.
 
 ## Usage
 
