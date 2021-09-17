@@ -4,8 +4,8 @@ package duke;
  */
 public abstract class DukeMessage {
     /**
-     * Displays the Duke's response to user input.
+     * Returns the Duke's response to user input.
      */
-    public abstract String display();
+    public abstract String createMessageString();
 }
 

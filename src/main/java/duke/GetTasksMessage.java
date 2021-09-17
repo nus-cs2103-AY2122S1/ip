@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Represents Duke' response when the user requests for list of tasks.
  */
 public class GetTasksMessage extends DukeMessage{
-    public String display() {
+
+    public String createMessageString() {
         String reply = "";
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
         int count = 1;

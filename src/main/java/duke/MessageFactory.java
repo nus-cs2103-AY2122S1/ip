@@ -1,7 +1,5 @@
 package duke;
 
-import duke.AddTaskMessage;
-
 /**
  * The factory class responsible for instantiating the right sub-type of DukeMessage.
  */
@@ -31,9 +29,8 @@ public class MessageFactory {
                     throw new ArrayIndexOutOfBoundsException();
                 return new DeleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("find")) {
-                int len = userStr.length();
                 String searchStr = userStr.substring(5);
-                return new FindMessage(searchStr);
+                return new FindTasksMessage(searchStr);
             } else {
                 return new AddTaskMessage(userStr);
             }
@@ -42,7 +39,6 @@ public class MessageFactory {
         } catch (IllegalFormatException | EmptyDescriptionException | InvalidCommandException exception) {
             return new ErrorMessage(exception.getMessage());
         } catch (Exception e) {
-            //System.out.println(e.fillInStackTrace());
             return new ErrorMessage("kya likhra h bhai??");
         }
     }

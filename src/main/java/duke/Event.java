@@ -4,25 +4,27 @@ package duke;
  * Represents the Events that are added to TaskList. Extends Task.
  */
 public class Event extends Task{
-    private boolean done;
+    private boolean isDone;
     private String taskString;
     private String timeSlot;
 
     public Event(String taskString, String timeSlot) {
         this.taskString = taskString;
-        this.done = false;
+        this.isDone = false;
         this.timeSlot = timeSlot;
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public String getTaskString() {
-        if(done) {
-            return "[E][X] " + this.taskString + " (at: " + this.timeSlot + ")";
+        if(isDone) {
+            return "[E][X] " + this.taskString
+                    + " (at: " + this.timeSlot + ")";
         } else {
-            return "[E][ ] " + this.taskString + " (at: " + this.timeSlot + ")";
+            return "[E][ ] " + this.taskString
+                    + " (at: " + this.timeSlot + ")";
         }
     }
 }

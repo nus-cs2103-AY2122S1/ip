@@ -23,7 +23,9 @@ public class Deadline extends Task {
 
     public String getTaskString() {
         if(done) {
-            return "[D][X] " + this.taskString + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[D][X] " + this.taskString +
+                    " (by: " +
+                    this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         } else {
             return "[D][ ] " + this.taskString + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }

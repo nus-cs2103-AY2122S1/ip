@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class TaskListCsvHandler {
+public class StorageHandler {
     private static String path = "src/main/data/TaskList.txt";
     private static String fileNewLine = System.lineSeparator();
 

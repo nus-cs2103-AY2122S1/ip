@@ -20,11 +20,13 @@ public class TaskFactory {
             try {
                 String taskDescription = taskStr.substring(5);
                 if(taskDescription.stripLeading().equals(""))
-                    throw new EmptyDescriptionException("Ja ammi se todo ka format seekh ke aa!\n" +
+                    throw new EmptyDescriptionException
+                            ("Ja ammi se todo ka format seekh ke aa!\n" +
                             "description bhi dena padta hai");
                 return new ToDo(taskDescription);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new EmptyDescriptionException("Ja ammi se todo ka format seekh ke aa!\n" +
+                throw new EmptyDescriptionException
+                        ("Ja ammi se todo ka format seekh ke aa!\n" +
                         "description bhi dena padta hai");
             }
         } else if(taskStr.length() >= 8 && taskStr.substring(0, 8).equals("deadline")) {
@@ -36,7 +38,8 @@ public class TaskFactory {
                 LocalDate deadlineDate = LocalDate.parse(deadlineStr);
                 return new Deadline(taskDescription, deadlineDate);
             } catch (Exception e) {
-                throw new IllegalFormatException("Ja ammi se deadline banane ka format seekh ke aa!");
+                throw new IllegalFormatException
+                        ("Ja ammi se deadline banane ka format seekh ke aa!");
             }
         } else if(taskStr.substring(0, 5).equals("event")) {
             //create an event
@@ -46,10 +49,12 @@ public class TaskFactory {
                 String timeSlot = taskStr.substring(slashIndex + 4);
                 return new Event(taskDescription, timeSlot);
             } catch (Exception e) {
-                throw new IllegalFormatException("Ja ammi se event banane ka format seekh ke aa!");
+                throw new IllegalFormatException
+                        ("Ja ammi se event banane ka format seekh ke aa!");
             }
         } else {
-            throw new InvalidCommandException("Kya likhra h hero??");
+            throw new InvalidCommandException("Kya likhra h hero??" +
+                    "(Invalid command)");
         }
     }
 }

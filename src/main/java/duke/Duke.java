@@ -15,8 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.application.Platform;
 
-import java.util.concurrent.TimeUnit;
-
 public class Duke extends Application {
     public static boolean conversationState;
 
@@ -89,7 +87,7 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         //load list of tasks
-        TaskListCsvHandler.loadAll();
+        StorageHandler.loadAll();
         //greeting
         greetUser();
     }
@@ -107,7 +105,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(goodbye, new ImageView(duke))
         );
         userInput.clear();
-        boolean isStoreSuccessful = TaskListCsvHandler.insertTasks();
+        boolean isStoreSuccessful = StorageHandler.insertTasks();
         assert isStoreSuccessful == true : "couldn't store tasks";
         Platform.exit();
     }
@@ -129,6 +127,6 @@ public class Duke extends Application {
 
     private String getResponse(String input) {
         DukeMessage msg = MessageFactory.createMessage(input);
-        return msg.display();
+        return msg.createMessageString();
     }
 }

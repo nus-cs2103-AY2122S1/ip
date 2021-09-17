@@ -7,16 +7,20 @@ import java.util.ArrayList;
 /**
  * Represents Duke' response when the user searches for a keyword.
  */
-public class FindMessage extends DukeMessage {
+public class FindTasksMessage extends DukeMessage {
     private String searchStr;
+    private ArrayList<Task> searchResults = new ArrayList<>();
 
-    public FindMessage(String searchStr) {
+    public FindTasksMessage(String searchStr) {
         this.searchStr = searchStr;
     }
 
-    public String display() {
+    /**
+     * Stores a list of tasks that match the given key-word or date
+     * in searchResults.
+     */
+    private void findTasks() {
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
-        ArrayList<Task> searchResults = new ArrayList<>();
 
         if (searchStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
             String dateQuery =
@@ -25,17 +29,21 @@ public class FindMessage extends DukeMessage {
             for (Task task : taskList) {
                 String taskStr = task.getTaskString();
                 if (taskStr.contains(dateQuery)) {
-                    searchResults.add(task);
+                    this.searchResults.add(task);
                 }
             }
         } else {
             for (Task task : taskList) {
                 String taskStr = task.getTaskString();
                 if (taskStr.contains(searchStr)) {
-                    searchResults.add(task);
+                    this.searchResults.add(task);
                 }
             }
         }
+    }
+
+    public String createMessageString() {
+        findTasks();
         int count = 1;
         String reply = "Here are the matching tasks in your list:\n";
         for(Task task : searchResults) {
