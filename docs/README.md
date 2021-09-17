@@ -16,7 +16,11 @@ A todo is a task with a description and no deadline. <br>
 An event is a task with a description and needs to be done before a specific deadline.<br>
 A deadline is a task with a description and starts at a specific deadline. <br>
 
-Format: [task] [description] /[deadline]
+Format: [task] [description] /[time preposition] [deadline]
+<br>
+Date format: yyyy-mm-dd
+<br>
+Time format: hh:mm
 <hr>
 
 
