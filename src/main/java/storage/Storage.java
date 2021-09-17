@@ -43,13 +43,17 @@ public class Storage {
         try {
             processFileByLine(taskList);
         } catch (FileNotFoundException e) {
-            File directory = new File("data");
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
+            createDirectoryIfNotFound("data");
             writeToFile("data/tasks.txt", "");
         }
         return taskList;
+    }
+
+    private void createDirectoryIfNotFound(String filepath) {
+        File directory = new File(filepath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
 
     private void processFileByLine(ArrayList<Task> taskList) throws InvalidDateFormat, FileNotFoundException {
