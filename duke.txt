@@ -1,3 +1,3 @@
-D | 1 | finish ip | Sep 17 2021
-E | 0 | party | Sep 18 2021
-T | 0 | ip tasks
+T | 0 | read book
+D | 0 | finish iP | Sep 17 2021
+E | 0 | post iP party | Sep 18 2021

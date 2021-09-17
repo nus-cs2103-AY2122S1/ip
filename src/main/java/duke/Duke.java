@@ -14,14 +14,15 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke() { }
+    public Duke() {
+    }
 
     /**
      * Constructor for Duke.
      *
      * @param filePath Path of the .txt file the tasks are stored in.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException, DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -60,7 +61,7 @@ public class Duke {
      *
      * @param args The command line arguments.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DukeException {
         new Duke("duke.txt").run();
     }
 

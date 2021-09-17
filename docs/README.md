@@ -1,33 +1,51 @@
 # User Guide
 
+Duke helps you keep track of your todos, deadlines and events.
+
 ## Features 
 
-### Keep track of your tasks with Duke's todo list!
+### 1. Keep track of your tasks with Duke's todo list!
 
 Duke supports 3 types of tasks:
-1. **todo**: Tasks to be completed in your own time.
-2. **deadline**: Tasks to be completed by a deadline.
-3. **event**: Events that occur on an event date.
+A. **todo**: Tasks to be completed in your own time.
+B. **deadline**: Tasks to be completed by a deadline.
+C. **event**: Events that occur on an event date.
 
-### Mark tasks as done
+
+### 2. Mark tasks as done
 
 Checks off the tasks that you have marked as done.
 
-### List
 
-Lists all your current tasks.
-
-### Delete tasks
+### 3. Delete tasks
 
 Delete the tasks that are no longer relevant.
 
-### Search among tasks
+
+### 4. List
+
+Lists all your current tasks.
+
+
+### 5. Search among tasks
 
 Search for tasks containing a keyword of your choice.
 
+
+### 6. Save
+
+Automatically save task to your hard disk.
+
+
+### 7. Exit
+
+Close the program with a single command.
+
+
+
 ## Usage
 
-### `todo` - Add a todo task
+### 1A. `todo` - Add a todo task
 
 Add a todo task to the current task list.
 
@@ -46,7 +64,7 @@ Now you have 1 task in the list.
 ```
 
 
-### `deadline` - Add a deadline task
+### 1B. `deadline` - Add a deadline task
 
 Add a deadline task to the current task list.
 
@@ -65,7 +83,7 @@ Now you have 2 tasks in the list.
 ```
 
 
-### `event` - Add an event task
+### 1C. `event` - Add an event task
 
 Add an event task to the current task list.
 
@@ -84,7 +102,7 @@ Now you have 3 tasks in the list.
 ```
 
 
-### `done` - Mark tasks as done
+### 2. `done` - Mark tasks as done
 
 Check task off in the task list to represent it as done. Able to check multiple tasks off at once.
 
@@ -103,7 +121,7 @@ Nice! I've marked these tasks as done:
 ```
 
 
-### `delete` - Delete tasks of your choice
+### 3. `delete` - Delete tasks of your choice
 
 Delete tasks off the task list. Able to delete multiple tasks at once.
 
@@ -123,7 +141,7 @@ Now you have 1 tasks in the list.
 ```
 
 
-### `list` - Display current task list
+### 4. `list` - Display current task list
 
 Display current task list.
 
@@ -148,7 +166,7 @@ Here are the tasks in your list:
 
 
 
-### `find` - Search for tasks containing keyword
+### 5. `find` - Search for tasks containing keyword
 
 Display tasks containing any keyword, phrase or letter of the user's choice.
 
@@ -166,7 +184,12 @@ Here are tasks that contain the keyword 'book':
 ```
 
 
-### `bye` - Close the application
+### 6. Save tasks to disk
+
+Automatically save the tasks to disk.
+
+
+### 7. `bye` - Close the application
 
 Terminate and close the application.
 
@@ -178,10 +201,6 @@ _Expected outcome:_
 
 Terminate and close the application.
 
-
-### Save tasks to disk
-
-Automatically save the tasks to disk.
 
 
 ## Acknowledgements:

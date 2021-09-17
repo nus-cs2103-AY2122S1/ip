@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import duke.task.Deadline;
@@ -11,7 +13,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
 
 
 /**
@@ -27,12 +28,13 @@ public class Storage {
      *
      * @param filePath Path for the .txt file that the tasks are stored in.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws IOException, DukeException {
         this.filePath = filePath;
+        this.ls = this.load();
     }
 
     /**
-     * Rewrites the .txt file according to the updated TaskList.
+     * Rewrites the duke.txt file according to the updated TaskList.
      *
      * @param ls The current TaskList.
      */
@@ -100,35 +102,52 @@ public class Storage {
             Todo tTask = new Todo(taskDesc);
             return tTask;
         } else if (input.startsWith("D")) {
-            String taskDesc = input.substring(7);
+            String taskDesc = getDesc(input.substring(7));
             String taskDate = getDate(input);
             Deadline dTask = new Deadline(taskDesc, taskDate);
             return dTask;
         } else {
-            String taskDesc = input.substring(7);
+            String taskDesc = getDesc(input.substring(7));
             String taskDate = getDate(input);
             Event eTask = new Event(taskDesc, taskDate);
             return eTask;
         }
     }
 
+    public String getDesc(String input) {
+        int endIndex = 0;
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '|') {
+                count++;
+                if (count == 1) {
+                    endIndex = i;
+                }
+            }
+        }
+        return input.substring(0, endIndex);
+    }
+
     /**
      * Gets the date of the tasks for Deadlines and Events.
      *
      * @param input String representation of the task.
-     * @return String representation of the date of the task.
+     * @return String representation of the date of the task in yyyy-mm-dd format.
      */
     public String getDate(String input) {
         int endIndex = 0;
         int count = 0;
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == '|') {
+                count++;
                 if (count == 3) {
-                    endIndex = i;
+                    endIndex = i + 2;
                 }
             }
         }
-        return input.substring(endIndex);
+        String oldDate = input.substring(endIndex);
+        String newDate = LocalDate.parse(oldDate, DateTimeFormatter.ofPattern( "MMM dd yyyy"))
+                .format(DateTimeFormatter.ofPattern( "uuuu-MM-dd"));
+        return newDate;
     }
-
 }
