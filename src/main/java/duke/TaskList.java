@@ -8,7 +8,6 @@ public class TaskList {
     int curSize;
     ArrayList<String[]> data;
 
-
     public TaskList(ArrayList<String[]> data){
         this.list = new ArrayList<>();
         this.curSize = 0;
@@ -20,6 +19,7 @@ public class TaskList {
     }
 
     public void LoadTask(ArrayList<String[]> data) throws InputNotValidError{
+
         for (String[] each : data){
             String[] actions = new String[2];
             String actionName = each[0];
@@ -40,7 +40,6 @@ public class TaskList {
             Parser hitoryData = new Parser(actions[0] + " " + actions[1]);
             this.actionHalder(hitoryData, done, true);
         }
-
     }
 
     public String addTask(Task task, boolean fromdata){
@@ -70,8 +69,6 @@ public class TaskList {
         return item;
 
     }
-
-
 
     public String actionHalder(Parser actionList, boolean done, boolean fromData) throws InputNotValidError{
         boolean validCommand = false;
@@ -127,6 +124,7 @@ public class TaskList {
     public String addDeadline(String action, boolean done, boolean fromdata){
         String actionlist[] = action.split("/by");
         action = actionlist[0];
+        assert action.length() >= 0;
         String date = actionlist[1];
         Deadline newTask = new Deadline(action, done, date, "D");
         return this.addTask(newTask, fromdata);
@@ -135,6 +133,7 @@ public class TaskList {
     public String addEvent(String action, boolean done, boolean fromdata){
         String actionlist[] = action.split("/at");
         action = actionlist[0];
+        assert action.length() >= 0;
         String date = actionlist[1];
         Event newTask = new Event(action, done, date, "E");
         return this.addTask(newTask, fromdata);
