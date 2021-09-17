@@ -1,0 +1,3 @@
+Todo / 1 / read book
+Event / 1 / meeting / 2021-08-30T13:55
+Deadline / 1 / submit assignment / 2021-09-04
