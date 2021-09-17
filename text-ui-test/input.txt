@@ -1,0 +1,25 @@
+taskList
+todo finish iP
+todo suanlafen
+taskList
+event finish iP /at NOW
+deadline finish iP /by TONIGHT
+taskList
+done 2
+taskList
+todo
+done 0
+done 10
+event
+event test iP
+event test iP /by
+taskList
+deadline
+deadline /by
+blah blah
+delete 0
+delete 10
+taskList
+delete 3
+taskList
+Bye!
