@@ -29,6 +29,11 @@ public class Task {
             this.symbol = symbol;
         }
 
+        /**
+         * Returns the symbol corresponding to the type of task.
+         *
+         * @return The symbol of the task.
+         */
         public String getSymbol() {
             return this.symbol;
         }

@@ -17,10 +17,20 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Returns the size of the task list.
+     *
+     * @return The number of tasks.
+     */
     public int getSize() {
         return taskList.size();
     }
 
+    /**
+     * Adds a given task into the task list.
+     *
+     * @param task The task to be added.
+     */
     public void addToList(Task task) {
         taskList.add(task);
     }
@@ -73,7 +83,14 @@ public class TaskList {
         return result;
     }
 
-    public void update(int index, Task task) throws DukeException {
+    /**
+     * Updates the task at a specified index with a given task.
+     *
+     * @param index The index of the task to be updated.
+     * @param task The new task that is to replace the previous task.
+     * @throws OutOfBoundsException The exception thrown when the index given is invalid.
+     */
+    public void update(int index, Task task) throws OutOfBoundsException {
         if (index >= taskList.size() || index < 0) {
             throw new OutOfBoundsException(index, this);
         }

@@ -27,9 +27,11 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /** The user's profile picture */
     private final Image userImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/user.png")));
 
+    /** Duke's profile picture */
     private final Image dukeImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/duke.png")));
 
@@ -38,6 +40,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the instance of Duke used.
+     *
+     * @param d The instance of Duke.
+     */
     public void setDuke(Duke d) {
         duke = d;
         // greet the user once the application is opened

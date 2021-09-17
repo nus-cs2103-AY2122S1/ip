@@ -36,11 +36,23 @@ public class Ui {
                 + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
+    /**
+     * Returns the message to be displayed when a given task is marked as done.
+     *
+     * @param task The task that is marked as done.
+     * @return The message.
+     */
     public String getDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n"
                 + "  " + task;
     }
 
+    /**
+     * Returns the message to be displayed when the task list is listed.
+     *
+     * @param taskList The task list that is listed.
+     * @return The message.
+     */
     public String getListMessage(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
         if (tasks == null || tasks.isEmpty()) {
@@ -73,6 +85,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns the message to be displayed when a task at a given index is updated.
+     *
+     * @param index The index of the task to be updated.
+     * @param task The task after being updated.
+     * @return The message.
+     */
     public String getUpdateMessage(int index, Task task) {
         return "Nice! I've updated this task:\n"
                 + index + ". " + task;

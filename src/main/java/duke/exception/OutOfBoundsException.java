@@ -2,6 +2,10 @@ package duke.exception;
 
 import duke.TaskList;
 
+/**
+ * The exception thrown when the user attempts to invoke the Mark Command, Done Command, Delete Command or Update
+ * Command with in invalid index.
+ */
 public class OutOfBoundsException extends DukeException {
 
     private final int index;

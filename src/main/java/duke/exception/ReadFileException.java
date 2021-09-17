@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * The exception thrown when there are issues reading the myTasks.txt file.
+ */
 public class ReadFileException extends DukeException {
     @Override
     public String getMessage() {

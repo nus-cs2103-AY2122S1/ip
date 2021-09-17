@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * The exception thrown when the user attempts to invoke the Update Command with an invalid input.
+ */
 public class UpdateException extends DukeException {
     @Override
     public String getMessage() {

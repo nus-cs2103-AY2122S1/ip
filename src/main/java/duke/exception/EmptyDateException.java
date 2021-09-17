@@ -2,6 +2,9 @@ package duke.exception;
 
 import duke.Task;
 
+/**
+ * The exception thrown when the user attempts to create a Deadline or an Event without providing a date.
+ */
 public class EmptyDateException extends DukeException {
     private final Task.Type type;
 

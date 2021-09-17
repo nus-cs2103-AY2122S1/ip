@@ -51,10 +51,18 @@ public class Duke {
         return ui.greet();
     }
 
+    /**
+     * Determines whether the user wants to close duke.
+     *
+     * @return Whether the user wants to close Duke.
+     */
     public boolean isExit() {
         return exit;
     }
 
+    /**
+     * Closes Duke by executing an ExitCommand.
+     */
     public void exit() {
         new ExitCommand().execute(taskList, ui, storage);
     }

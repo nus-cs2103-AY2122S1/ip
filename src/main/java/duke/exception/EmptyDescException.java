@@ -2,6 +2,9 @@ package duke.exception;
 
 import duke.Task;
 
+/**
+ * The exception thrown when the user attempts to create a task without providing a non-empty description.
+ */
 public class EmptyDescException extends DukeException {
     private final Task.Type type;
 
