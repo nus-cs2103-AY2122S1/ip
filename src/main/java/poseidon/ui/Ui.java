@@ -36,6 +36,17 @@ public class Ui {
     private static final String ERROR_INTRO_MSG = "Oops... Something's wrong.\n";
     private static final String STORAGE_ERROR_MSG = "File for storage of tasks could not be accessed or written.";
     private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
+    private static final String HELP_MSG = "Here's a list of all the commands I can understand:\n\n"
+            + "FOR HELP - help\n\n"
+            + "ADD TODO - todo 'description'\n\n"
+            + "ADD DEADLINE - deadline 'description' /by 'yyyy MM dd HHmm'\n\n"
+            + "ADD EVENT - event 'description' /from 'yyyy MM dd HHmm' to 'yyyy MM dd HHmm'\n\n"
+            + "MARK TASK DONE - done 'int'\n\n"
+            + "DELETE TASK - delete 'int'\n\n"
+            + "LIST TASKS - list\n\n"
+            + "SORT TASKS - list -s\n\n"
+            + "FIND CONTENT - find 'content'\n\n"
+            + "EXIT - bye\n";
 
     /**
      * Constructs a Ui object.
@@ -136,5 +147,14 @@ public class Ui {
      */
     public String showGoodbye() {
         return GOODBYE_MSG;
+    }
+
+    /**
+     * Returns a {@code String} that contains a list of all the commands as a help to the User.
+     *
+     * @return {@code String} help message.
+     */
+    public String showHelp() {
+        return HELP_MSG;
     }
 }

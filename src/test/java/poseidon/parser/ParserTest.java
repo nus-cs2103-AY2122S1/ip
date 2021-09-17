@@ -164,9 +164,9 @@ public class ParserTest {
 
     @Test
     public void parse_sortCommand_correctStringArray() {
-        String sortCommand1 = "sort";
-        String sortCommand2 = "SORT    ";
-        String sortCommand3 = "SorT                  ";
+        String sortCommand1 = "list -s";
+        String sortCommand2 = "LIST -S    ";
+        String sortCommand3 = "LisT     -S      ";
 
         String[] sortCommandArray = new String[]{"sort"};
 

@@ -34,6 +34,7 @@ public class Poseidon {
     private static final String ADD_TODO_CMD = "todo";
     private static final String ADD_DEADLINE_CMD = "deadline";
     private static final String ADD_EVENT_CMD = "event";
+    private static final String HELP_CMD = "help";
 
     /** {@code Storage} object that reads from and writes onto the hard disk  */
     private Storage storage;
@@ -79,6 +80,8 @@ public class Poseidon {
         try {
             String[] parsedCommand = Parser.parse(newCommand);
             switch (parsedCommand[0]) {
+            case HELP_CMD:
+                return ui.showHelp();
             case BYE_CMD:
                 return ui.showGoodbye();
             case LIST_CMD:

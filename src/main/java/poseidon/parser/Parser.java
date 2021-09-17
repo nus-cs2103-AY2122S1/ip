@@ -25,6 +25,7 @@ public class Parser {
     private static final String CMD_EVENT = "(?i)event.*";
     private static final String CMD_FIND = "(?i)find.*";
     private static final String CMD_SORT = "(?i)list\\s*-s\\s*";
+    private static final String CMD_HELP = "(?i)help\\s*";
 
     /**
      * Returns a {@code String} array that contains the useful and necessary parts of a command to be executed.
@@ -33,7 +34,9 @@ public class Parser {
      * @return {@code String} array.
      */
     public static String[] parse(String newCommand) {
-        if (Pattern.compile(CMD_BYE).matcher(newCommand).matches()) {
+        if (Pattern.compile(CMD_HELP).matcher(newCommand).matches()) {
+            return new String[]{"help"};
+        } else if (Pattern.compile(CMD_BYE).matcher(newCommand).matches()) {
             return new String[]{"bye"};
         } else if (Pattern.compile(CMD_LIST).matcher(newCommand).matches()) {
             return new String[]{"list"};
