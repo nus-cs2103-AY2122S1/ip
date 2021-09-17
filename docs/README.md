@@ -90,6 +90,7 @@ Now you have 6 tasks in the list.
 Adds an Event task to the task list. An Event contains a description and a datetime.
 
 Format: `event [DESC] /at [DATETIME]`
+- DATETIME should be entered in this format: `dd-mm-yyyy hh:mm`
 
 Example of usage:
 
@@ -110,6 +111,7 @@ Now you have 7 tasks in the list.
 Adds a Deadline task to the task list. A deadline contains a description and a datetime.
 
 Format: `deadline [DESC] /by [DATETIME]`
+- DATETIME should be entered in this format: `dd-mm-yyyy hh:mm`
 
 Example of usage:
 
@@ -133,6 +135,7 @@ Format: `edit INDEX /desc [DESC] /date [DATETIME]`
 - The index refers to the number shown in the displayed task list.
 - At least one of the fields (desc or date) must be provided
 - Existing values will be updated to the input values
+- DATETIME should be entered in this format: `dd-mm-yyyy hh:mm`
 
 Example of usage:
 
