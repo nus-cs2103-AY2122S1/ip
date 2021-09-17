@@ -88,6 +88,7 @@ public class TaskStorage implements Storage<Task> {
      * @param path The file to create.
      * @throws IOException If an IOException is thrown when creating the file.
      */
+    @SuppressWarnings("UnusedReturnValue")
     private static void createFileIfNotExist(String path) throws IOException {
         File file = new File(path);
         file.createNewFile();
