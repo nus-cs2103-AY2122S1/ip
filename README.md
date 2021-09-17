@@ -184,7 +184,7 @@ Exiting the Abyss. We look forward to your return.
 
 # Credits
 
-The user interface theme and backgrounds are inspired by [Little Nightmares](https://en.bandainamcoent.eu/little-nightmares/little-nightmares) and the images used are taken from the sources below:
+The user interface theme is inspired by [Little Nightmares](https://en.bandainamcoent.eu/little-nightmares/little-nightmares) and the images used are taken from the sources below:
 
 * [Abyss icon](https://igoutu.cn/icon/RKGFNVsfSVzt/little-nightmares)
 * [Abyss profile image](https://www.subpng.com/png-pgi8cv/)
