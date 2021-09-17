@@ -16,10 +16,8 @@ import java.util.Stack;
 public class Lebron {
     public static final String FILE_PATH = "./build/libs/data/lebron.txt";
     private final Storage storage;
-    private TaskList taskList;
     private final Ui ui;
     private Stack<TaskList> previousStates = new Stack<>();
-    private boolean wasUndo = false;
 
     /**
      * Available commands that the bot can understand.
@@ -66,7 +64,6 @@ public class Lebron {
         this.ui = new Ui();
         this.storage = new Storage(FILE_PATH);
         ArrayList<Task> loadList = storage.loadFileContents(FILE_PATH);
-        //this.taskList = new TaskList(loadList);
         this.previousStates.push(new TaskList(loadList));
     }
 
@@ -125,6 +122,15 @@ public class Lebron {
     }
 
     /**
+     * Retrieves the TaskList at the top of the stack, which is the current state.
+     *
+     * @return the TaskList at the top of the stack.
+     */
+    private TaskList getLatestState() {
+        return previousStates.peek();
+    }
+
+    /**
      * Handles the case where commandWord is Bye.
      *
      * @return the response from the bot
@@ -143,14 +149,13 @@ public class Lebron {
     }
 
     /**
-     * Handles the case where commandWord is Undo.
+     * Handles the case where commandWord is Undo. Will remove the current state of the TaskList from the stack.
      */
     private void commandUndo() throws LebronException {
+        if (previousStates.size() == 1) {
+            throw new LebronException("    I can't undo any further!");
+        }
         try {
-//            if (!this.wasUndo) {
-//                //First remove the current state, which is at the top of the stack
-//                this.previousStates.pop();
-//            }
             this.previousStates.pop();
             storage.saveToFile(getLatestState());
         } catch (EmptyStackException e) {
@@ -158,13 +163,6 @@ public class Lebron {
         }
     }
 
-    private TaskList getLatestState() {
-        if (previousStates.isEmpty()) {
-            return new TaskList(new ArrayList<>());
-        } else {
-            return previousStates.peek();
-        }
-    }
 
     /**
      * Handles the case where commandWord is Done.
@@ -300,10 +298,9 @@ public class Lebron {
         }
         assert splitWords.length == 2 : "There should be 2 items to specify which task to delete.";
         int pos = Integer.parseInt(splitWords[1]);
-        TaskList newTaskList = new TaskList(getLatestState().getLst());
+        TaskList newTaskList = getLatestState().getCopy(getLatestState());
         Task task = newTaskList.delete(pos - 1);
         previousStates.push(newTaskList);
-        this.wasUndo = false;
         storage.saveToFile(newTaskList);
         return ui.replyDelete(task, newTaskList.getSize());
     }

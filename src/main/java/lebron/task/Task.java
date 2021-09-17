@@ -1,5 +1,7 @@
 package lebron.task;
 
+import lebron.exception.LebronException;
+
 /**
  * This class represents a Task the user gives to the bot.
  *
@@ -63,10 +65,13 @@ public class Task {
         return " | " + getDoneValue() + " | " + name;
     }
 
+    public Task makeCopy() throws LebronException {
+        return new Task(this.getName());
+    }
+
     @Override
     public String toString() {
         String format = String.format("[%s] ", this.getStatusIcon());
         return format + this.name;
     }
-
 }

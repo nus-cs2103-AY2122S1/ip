@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
  * @author Nigel Tan
  */
 public class Event extends Task {
-
+    private final String strTime;
+    private final String strDate;
     private final LocalDate date;
     private final LocalTime time;
 
@@ -27,6 +28,8 @@ public class Event extends Task {
     public Event(String description, String date, String time) throws LebronException {
         super(description);
         try {
+            this.strDate = date;
+            this.strTime = time;
             this.date = LocalDate.parse(date);
             this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
         } catch (DateTimeParseException e) {
@@ -50,5 +53,16 @@ public class Event extends Task {
     public String getStringForFile() {
         return "E | " + super.getDoneValue() + " | " + super.getName() + "| " + this.date + " " +
                 time.format(DateTimeFormatter.ofPattern("HHmm"));
+    }
+
+    /**
+     * Overrides the makeCopy() method in Task.
+     *
+     * @return the copied task.
+     * @throws LebronException if the date/time is in wrong format.
+     */
+    @Override
+    public Event makeCopy() throws LebronException {
+        return new Event(this.getName(), this.strDate, this.strTime);
     }
 }

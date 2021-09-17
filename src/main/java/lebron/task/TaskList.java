@@ -99,7 +99,17 @@ public class TaskList {
      * @param taskList the TaskList to copy.
      * @return the copied TaskList.
      */
-    public TaskList getCopy(TaskList taskList) {
-        return new TaskList(taskList.getLst());
+    public TaskList getCopy(TaskList taskList) throws LebronException {
+        ArrayList<Task> lst = new ArrayList<>();
+        for (int i = 0; i < taskList.getSize(); i++) {
+            Task task = taskList.getItem(i);
+            Task newTask = task.makeCopy();
+            //if done
+            if (task.getDoneValue().equals("1")) {
+                newTask.markAsDone();
+            }
+            lst.add(newTask);
+        }
+        return new TaskList(lst);
     }
 }
