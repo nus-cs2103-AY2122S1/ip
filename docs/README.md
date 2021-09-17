@@ -1,6 +1,6 @@
 # User Guide for Project Wednesday Dude
 
-Wednesday Duke is an application made to help users keep track of various tasks they want to do. The application takes all input through typing out text and is optimized for use through Command Line Interface (CLI) 
+Wednesday Dude is an application made to help users keep track of various tasks they want to do. The application takes all input through typing out text and is optimized for use through Command Line Interface (CLI) 
 
 ![Image of Ui](https://github.com/mukundrs/ip/blob/master/docs/Ui.png)
 
