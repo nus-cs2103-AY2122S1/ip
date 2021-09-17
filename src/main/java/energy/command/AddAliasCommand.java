@@ -12,7 +12,7 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'addalias'.
+ * A class that represents the command when the user wants to add an alias.
  */
 public class AddAliasCommand extends Command {
 

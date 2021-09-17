@@ -6,7 +6,8 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'find'.
+ * A class that represents the command when the user wants to find all tasks containing
+ * a certain keyword or keyphrase.
  */
 public class FindCommand extends Command {
 

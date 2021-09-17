@@ -26,6 +26,12 @@ public class TaskList {
     private static final int DEADLINE_EXTRA_LENGTH = 3;
     private static final int EVENT_EXTRA_LENGTH = 4;
 
+    private static final int DELETE_COMMAND_LENGTH = 2;
+    private static final int DONE_COMMAND_LENGTH = 2;
+    private static final int DUE_COMMAND_LENGTH = 2;
+    private static final int FIND_COMMAND_LENGTH = 2;
+    private static final int ONDATE_COMMAND_LENGTH = 2;
+
     private final List<Task> tasks;
 
     /**
@@ -180,7 +186,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
-     * Index of deleted task depends on the input.
+     * The index of the deleted task depends on the input.
      *
      * @param ui    Object that handles printing/formatting of messages.
      * @param input String containing user input.
@@ -189,11 +195,31 @@ public class TaskList {
      * @throws EnergyException If input is in an invalid format, or specified index is out of bounds.
      */
     public Pair<TaskList, String> deleteTask(Ui ui, String input) throws EnergyException {
-        String[] splitInputs = input.split(" ");
-        if (splitInputs.length != 2) {
-            throw new EnergyException("Input should be of the format: delete [taskNumber]");
-        }
         List<Task> newTasks = new ArrayList<>(tasks);
+        int taskIndex = verifyDeleteCommandInput(input);
+        Task removedTask = newTasks.remove(taskIndex);
+        TaskList newTaskList = new TaskList(newTasks);
+        String message = ui.showDeleteTaskMessage(newTasks.size(), removedTask);
+        return new Pair<>(newTaskList, message);
+    }
+
+    /**
+     * Verifies that the input for the delete command is valid.
+     *
+     * @param input String containing user input.
+     * @return An integer representing the task index to be deleted.
+     * @throws EnergyException If input is in an invalid format, or specified index is out of bounds.
+     */
+    private int verifyDeleteCommandInput(String input) throws EnergyException {
+        String[] splitInputs = input.split(" ");
+        if (tasks.size() == 0) {
+            throw new EnergyException("You have no tasks to delete.");
+        }
+
+        if (splitInputs.length != DELETE_COMMAND_LENGTH) {
+            throw new EnergyException("Input should be of the format: delete [taskNumber].");
+        }
+
         String taskNumberString = splitInputs[1];
 
         boolean isNumber = taskNumberString.matches("\\d+");
@@ -209,16 +235,12 @@ public class TaskList {
                             1, tasks.size());
             throw new EnergyException(outOfBoundsErrorString);
         }
-
-        Task removedTask = newTasks.remove(taskIndex);
-        TaskList newTaskList = new TaskList(newTasks);
-        String message = ui.showDeleteTaskMessage(newTasks.size(), removedTask);
-        return new Pair<>(newTaskList, message);
+        return taskIndex;
     }
 
     /**
      * Marks a task as done on in the task list.
-     * Index of marked task depends on the input.
+     * The index of the marked task depends on the input.
      *
      * @param ui    Object that handles user interface functionality. (e.g. printing)
      * @param input String containing user input.
@@ -227,13 +249,32 @@ public class TaskList {
      * @throws EnergyException If input is in an invalid format, or specified index is out of bounds.
      */
     public Pair<TaskList, String> markTask(Ui ui, String input) throws EnergyException {
+        List<Task> newTasks = new ArrayList<>(tasks);
+        int taskIndex = verifyDoneCommandInput(input);
+        Task doneTask = newTasks.get(taskIndex).markAsDone();
+        newTasks.set(taskIndex, doneTask);
+        TaskList newTaskList = new TaskList(newTasks);
+        String message = ui.showDoneTaskMessage(doneTask);
+        return new Pair<>(newTaskList, message);
+    }
+
+    /**
+     * Verifies that the input for the done command is valid.
+     *
+     * @param input String containing user input.
+     * @return An integer representing the task index to be marked as done.
+     * @throws EnergyException If input is in an invalid format, or specified index is out of bounds.
+     */
+    private int verifyDoneCommandInput(String input) throws EnergyException {
         String[] splitInputs = input.split(" ");
-        if (splitInputs.length != 2) {
+        if (tasks.size() == 0) {
+            throw new EnergyException("You have no tasks to mark as done.");
+        }
+        if (splitInputs.length != DONE_COMMAND_LENGTH) {
             throw new EnergyException("Input should be of the format: done [taskNumber]");
         }
-        List<Task> newTasks = new ArrayList<>(tasks);
-        String taskNumberString = splitInputs[1];
 
+        String taskNumberString = splitInputs[1];
         boolean isNumber = taskNumberString.matches("\\d+");
         if (!isNumber) {
             throw new EnergyException("Please type in a valid task number to mark as done.");
@@ -247,12 +288,7 @@ public class TaskList {
                             1, tasks.size());
             throw new EnergyException(outOfBoundsErrorString);
         }
-
-        Task doneTask = newTasks.get(taskIndex).markAsDone();
-        newTasks.set(taskIndex, doneTask);
-        TaskList newTaskList = new TaskList(newTasks);
-        String message = ui.showDoneTaskMessage(doneTask);
-        return new Pair<>(newTaskList, message);
+        return taskIndex;
     }
 
     /**
@@ -264,7 +300,7 @@ public class TaskList {
      */
     public TaskList findTasks(String input) throws EnergyException {
         String[] splitInputs = input.split(" ");
-        if (splitInputs.length < 2) {
+        if (splitInputs.length < FIND_COMMAND_LENGTH) {
             throw new EnergyException("Input should be of the format: find [keyphrase]");
         }
         int keyphraseIndex = splitInputs[0].length();
@@ -283,17 +319,7 @@ public class TaskList {
      * @throws EnergyException If input is in an invalid format.
      */
     public TaskList getDueTasks(String input) {
-        String[] splitInputs = input.split(" ");
-        if (splitInputs.length != 2) {
-            throw new EnergyException("Command must be of the form: due [integer][h/d/m] "
-                    + "(h = hours, d = days, m = months)");
-        }
-        String dueRange = splitInputs[1];
-        boolean isValidInput = dueRange.matches("[0-9]+[hdm]");
-        if (!isValidInput) {
-            throw new EnergyException("Command must be of the form: due [integer][h/d/m] "
-                    + "(h = hours, d = days, m = months)");
-        }
+        String dueRange = verifyDueCommandInput(input);
         // Gets the number of hours/days/months from the input range
         String offset = dueRange.substring(0, dueRange.length() - 1);
         LocalDateTime dateTime = LocalDateTime.now();
@@ -321,6 +347,28 @@ public class TaskList {
     }
 
     /**
+     * Verifies that the input for the due command is valid.
+     *
+     * @param input String containing user input.
+     * @return A string that represents the input due range.
+     * @throws EnergyException If input is in an invalid format.
+     */
+    private String verifyDueCommandInput(String input) throws EnergyException {
+        String[] splitInputs = input.split(" ");
+        if (splitInputs.length != DUE_COMMAND_LENGTH) {
+            throw new EnergyException("Command must be of the form: due [integer][h/d/m] "
+                    + "(h = hours, d = days, m = months)");
+        }
+        String dueRange = splitInputs[1];
+        boolean isValidInput = dueRange.matches("[0-9]+[hdm]");
+        if (!isValidInput) {
+            throw new EnergyException("Command must be of the form: due [integer][h/d/m] "
+                    + "(h = hours, d = days, m = months)");
+        }
+        return dueRange;
+    }
+
+    /**
      * Gets all tasks occurring on a given date, depending on the user's input.
      *
      * @param input String containing user input.
@@ -329,7 +377,7 @@ public class TaskList {
      */
     public TaskList getOnDateTasks(String input) {
         String[] splitInputs = input.split(" ");
-        if (splitInputs.length != 2) {
+        if (splitInputs.length != ONDATE_COMMAND_LENGTH) {
             throw new EnergyException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
         }
         String dateString = splitInputs[1];

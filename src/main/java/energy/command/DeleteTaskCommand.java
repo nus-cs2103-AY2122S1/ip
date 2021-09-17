@@ -10,7 +10,7 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'delete'.
+ * A class that represents the command when the user wants to delete a task.
  */
 public class DeleteTaskCommand extends Command {
 

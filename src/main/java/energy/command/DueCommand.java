@@ -6,7 +6,8 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'due'.
+ * A class that represents the command when the user wants to get all tasks due within
+ * a certain timeframe.
  */
 public class DueCommand extends Command {
 

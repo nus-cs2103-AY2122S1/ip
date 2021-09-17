@@ -12,7 +12,7 @@ import energy.util.Ui;
 
 
 /**
- * A class that represents the command when the user types in 'todo', 'deadline' or 'event'.
+ * A class that represents the command when the user wants to add a task.
  */
 public class AddTaskCommand extends Command {
 

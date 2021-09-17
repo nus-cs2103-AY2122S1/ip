@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the specified file path. Called when Energy starts.
+     * Loads tasks from the specified file path.
      *
      * @return The TaskList object containing a list of tasks loaded from the save file.
      * @throws FileNotFoundException If the file does not exist.
@@ -82,7 +82,7 @@ public class Storage {
     }
 
     /**
-     * Saves tasks to the file path given at instantiation. Called when list is modified.
+     * Saves tasks to the file path given at instantiation.
      *
      * @param taskList The list of tasks to be saved.
      * @throws IOException If the saving process fails.
@@ -101,7 +101,7 @@ public class Storage {
     }
 
     /**
-     * Loads aliases from the specified file path. Called when Energy starts.
+     * Loads aliases from the specified file path.
      *
      * @return The AliasHandler object containing a list aliases loaded from the config file.
      * @throws FileNotFoundException If the file does not exist.
@@ -122,8 +122,7 @@ public class Storage {
     }
 
     /**
-     * Saves aliases to the file path given at instantiation. Called when the alias list is
-     * modified. (e.g. When the user adds/deletes an alias)
+     * Saves aliases to the file path given at instantiation.
      *
      * @param aliasHandler An object containing the aliases to be saved.
      * @throws IOException If the saving process fails.

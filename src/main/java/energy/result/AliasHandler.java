@@ -15,6 +15,9 @@ import energy.util.Ui;
  * including adding, deleting and listing them.
  */
 public class AliasHandler {
+    private static final int ADDALIAS_COMMAND_LENGTH = 3;
+    private static final int DELETEALIAS_COMMAND_LENGTH = 2;
+
     // Stores aliases in the form of: alias(key):command(value)
     private final HashMap<String, String> aliasHashMap;
 
@@ -40,7 +43,7 @@ public class AliasHandler {
      * will be returned.
      *
      * @param input A string representing the command for which the aliases are being checked.
-     * @return The command string that the alias corresponds to, or the input alias
+     * @return The command string that the alias corresponds to, or the input string
      * if there is no such association.
      */
     public String convertAlias(String input) {
@@ -65,11 +68,29 @@ public class AliasHandler {
      */
     public Pair<AliasHandler, String> addAlias(Ui ui, String input) throws EnergyException {
         HashMap<String, String> newAliasHashMap = new HashMap<>(this.aliasHashMap);
+        String[] aliasCommandArray = verifyAddAliasCommandInput(input);
+        String alias = aliasCommandArray[0];
+        String command = aliasCommandArray[1];
+        newAliasHashMap.put(alias, command);
+        AliasHandler newAliasHandler = new AliasHandler(newAliasHashMap);
+        String message = ui.showAddAliasMessage(alias, command);
+        return new Pair<>(newAliasHandler, message);
+    }
+
+    /**
+     * Verifies that the input for the add alias command is valid.
+     *
+     * @param input String containing user input.
+     * @return A string array, with index 0 corresponding to an alias, and index 1
+     * corresponding to a command.
+     * @throws EnergyException If input contains |, or is in an invalid format.
+     */
+    private String[] verifyAddAliasCommandInput(String input) throws EnergyException {
         if (input.contains("|")) {
             throw new EnergyException("Input contains |, which is an invalid/reserved character.");
         }
         String[] splitInputs = input.split(" ");
-        if (splitInputs.length != 3) {
+        if (splitInputs.length != ADDALIAS_COMMAND_LENGTH) {
             throw new EnergyException("Input should be of the format: addalias [command] [alias]");
         }
         String alias = splitInputs[2].toLowerCase();
@@ -84,11 +105,7 @@ public class AliasHandler {
         String command = convertAlias(splitInputs[1]);
         // If the command given is invalid, this throws a EnergyException
         Parser.parseCommandFromInput(command);
-
-        newAliasHashMap.put(alias, command);
-        AliasHandler newAliasHandler = new AliasHandler(newAliasHashMap);
-        String message = ui.showAddAliasMessage(alias, command);
-        return new Pair<>(newAliasHandler, message);
+        return new String[]{alias, command};
     }
 
     /**
@@ -130,7 +147,7 @@ public class AliasHandler {
     public Pair<AliasHandler, String> deleteAlias(Ui ui, String input) throws EnergyException {
         HashMap<String, String> newAliasHashMap = new HashMap<>(this.aliasHashMap);
         String[] splitInputs = input.split(" ");
-        if (splitInputs.length != 2) {
+        if (splitInputs.length != DELETEALIAS_COMMAND_LENGTH) {
             throw new EnergyException("Input should be of the format: deletealias [alias]");
         }
         String alias = splitInputs[1].toLowerCase();
@@ -182,7 +199,32 @@ public class AliasHandler {
         if (aliases.length == 0) {
             return "No aliases found.";
         }
+        HashMap<String, List<String>> commandHashMap = convertHashMap(aliases);
         StringBuilder dataString = new StringBuilder();
+        // Using the commandHashMap, print out all aliases, grouped by whatever
+        // command they correspond to
+        String[] commands = commandHashMap.keySet().toArray(new String[0]);
+        for (String command : commands) {
+            dataString.append(command)
+                    .append(":\n");
+            List<String> aliasList = commandHashMap.get(command);
+            for (int i = 0; i < aliasList.size(); i++) {
+                String aliasString = String.format("\t%d. %s\n", i + 1, aliasList.get(i));
+                dataString.append(aliasString);
+            }
+        }
+        return dataString.toString().trim();
+    }
+
+    /**
+     * Converts the AliasHandler hashmap (key: alias, value: command)
+     * into a hashmap in which the key is the command, and the value is a list
+     * of corresponding aliases.
+     *
+     * @param aliases An array of aliases.
+     * @return A hashmap that links commands to aliases.
+     */
+    private HashMap<String, List<String>> convertHashMap(String[] aliases) {
         // Group up all aliases by the command they correspond to
         HashMap<String, List<String>> commandHashMap = new HashMap<>();
         for (String alias : aliases) {
@@ -197,17 +239,6 @@ public class AliasHandler {
             aliasList.add(alias);
             commandHashMap.put(command, aliasList);
         }
-
-        String[] commands = commandHashMap.keySet().toArray(new String[0]);
-        for (String command : commands) {
-            dataString.append(command)
-                    .append(":\n");
-            List<String> aliasList = commandHashMap.get(command);
-            for (int i = 0; i < aliasList.size(); i++) {
-                String aliasString = String.format("\t%d. %s\n", i + 1, aliasList.get(i));
-                dataString.append(aliasString);
-            }
-        }
-        return dataString.toString().trim();
+        return commandHashMap;
     }
 }

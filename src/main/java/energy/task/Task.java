@@ -38,8 +38,8 @@ public class Task {
      * @return True if the task name contains this phrase, false otherwise.
      */
     public boolean containsPhrase(String phrase) {
-        String capsInsensitiveTaskName = taskName.toLowerCase();
-        return capsInsensitiveTaskName.contains(phrase.toLowerCase());
+        String capsInsensitiveTaskName = taskName.toLowerCase().trim();
+        return capsInsensitiveTaskName.contains(phrase.toLowerCase().trim());
     }
 
     /**

@@ -8,7 +8,7 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'listalias'.
+ * A class that represents the command when the user wants a list of all aliases.
  */
 public class ListAliasCommand extends Command {
 

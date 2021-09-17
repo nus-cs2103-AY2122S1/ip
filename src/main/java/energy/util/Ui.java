@@ -15,7 +15,7 @@ public class Ui {
     }
 
     /**
-     * Displays the greeting message. Called when the chat bot starts up.
+     * Displays the greeting message.
      */
     public String showIntroduction() {
         return String.format(FORMAT, "Hello there, I'm Energy!")
@@ -33,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Displays a formatted message. Called when a new task is added.
+     * Displays a formatted message which remarks that a task has been added.
      *
      * @param taskListSize The size of the TaskList object containing the new task.
      * @param newTask The new task that has been added.
@@ -48,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * Displays a formatted message. Called when a task is deleted.
+     * Displays a formatted message which remarks that a task has been deleted.
      *
      * @param taskListSize The size of the TaskList object containing the new task.
      * @param removedTask The task that has been deleted.
@@ -63,7 +63,7 @@ public class Ui {
     }
 
     /**
-     * Displays a formatted message. Called when a task is marked as done.
+     * Displays a formatted message which remarks that a task has been marked as done.
      *
      * @param doneTask The task that has been marked as done.
      * @return A formatted string.
@@ -74,7 +74,7 @@ public class Ui {
     }
 
     /**
-     * Displays a formatted message. Called when a new alias is added.
+     * Displays a formatted message which remarks that an alias has been added.
      *
      * @param alias The alias being added.
      * @param command The command that corresponds to the alias being added.
@@ -87,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * Displays a formatted message. Called when an alias is deleted.
+     * Displays a formatted message which remarks that an alias has been deleted.
      *
      * @param alias The alias being deleted.
      * @param command The command that corresponds to the alias being deleted.
@@ -110,7 +110,7 @@ public class Ui {
     }
 
     /**
-     * Returns a formatted error string. Is called if the save file does not exist.
+     * Returns a formatted error string which remarks that the save file does not exist.
      *
      * @return A formatted error string.
      */
@@ -120,7 +120,7 @@ public class Ui {
     }
 
     /**
-     * Returns a formatted error string. Is called if the config file does not exist.
+     * Returns a formatted error string which remarks that the config file does not exist.
      *
      * @return A formatted error string.
      */
@@ -129,7 +129,7 @@ public class Ui {
     }
 
     /**
-     * Returns a formatted error string. Is called if the save file contains incorrectly
+     * Returns a formatted error string which remarks that the save file contains incorrectly
      * formatted data.
      *
      * @return A formatted error string.
@@ -142,7 +142,7 @@ public class Ui {
     }
 
     /**
-     * Returns a formatted error string. Is called if the config file contains incorrectly
+     * Returns a formatted error string which remarks that the config file contains incorrectly
      * formatted data.
      *
      * @return A formatted error string.

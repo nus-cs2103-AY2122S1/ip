@@ -10,7 +10,7 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'done'.
+ * A class that represents the command when the user wants to mark a task as done.
  */
 public class DoneCommand extends Command {
 

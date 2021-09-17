@@ -6,7 +6,7 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'bye'.
+ * A class that represents the command when the user wants to exit the program.
  */
 public class ByeCommand extends Command {
 

@@ -34,14 +34,33 @@ public class Energy {
     private boolean hasException = false;
 
     /**
+     * Creates a Energy chat bot instance, using a default file path for loading/saving.
+     */
+    public Energy() {
+        this(Paths.get(System.getProperty("user.dir"), "data", "tasks.txt"),
+                Paths.get(System.getProperty("user.dir"), "data", "config.txt"));
+    }
+
+    /**
      * Creates an Energy chat bot instance, using a file path for loading/saving.
      *
      * @param saveFilePath Relative path to the location of the save file.
+     * @param configFilePath Relative path to the location of the config file.
      */
     public Energy(Path saveFilePath, Path configFilePath) {
         this.ui = new Ui();
         this.storage = new Storage(saveFilePath, configFilePath);
-        // Load saved tasks from data file
+        loadTasksFromFile(saveFilePath);
+        loadAliasesFromFile(configFilePath);
+        initMessage += ui.showIntroduction();
+    }
+
+    /**
+     * Load tasks from the specified save file.
+     *
+     * @param saveFilePath Relative path to the location of the save file.
+     */
+    private void loadTasksFromFile(Path saveFilePath) {
         try {
             if (!Files.exists(saveFilePath)) {
                 initMessage += ui.showSaveFileNotFoundError();
@@ -55,7 +74,14 @@ public class Energy {
             initMessage += ui.showSaveFileLoadingError(e.getMessage());
             taskList = new TaskList();
         }
-        // Load saved aliases from config file
+    }
+
+    /**
+     * Load aliases from the specified config file.
+     *
+     * @param configFilePath Relative path to the location of the config file.
+     */
+    private void loadAliasesFromFile(Path configFilePath) {
         try {
             // Initialize Parser to recognize aliases for commands
             AliasHandler aliasHandler = new AliasHandler();
@@ -71,15 +97,6 @@ public class Energy {
             initMessage += ui.showConfigLoadingError(e.getMessage());
             taskList = new TaskList();
         }
-        initMessage += ui.showIntroduction();
-    }
-
-    /**
-     * Creates a Energy chat bot instance, using a default file path for loading/saving.
-     */
-    public Energy() {
-        this(Paths.get(System.getProperty("user.dir"), "data", "tasks.txt"),
-                Paths.get(System.getProperty("user.dir"), "data", "config.txt"));
     }
 
     /**

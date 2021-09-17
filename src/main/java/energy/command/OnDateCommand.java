@@ -6,7 +6,8 @@ import energy.util.Storage;
 import energy.util.Ui;
 
 /**
- * A class that represents the command when the user types in 'ondate'.
+ * A class that represents the command when the user wants to get all tasks occurring
+ * on a given date.
  */
 public class OnDateCommand extends Command {
 
