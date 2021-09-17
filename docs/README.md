@@ -102,7 +102,7 @@ List current tasks |```list```|```list```
 Mark a task as done | ```done TASK_INDEX``` | ```done 1```
 Delete task | ```delete TASK_INDEX``` |```delete 1```
 Find a task | ```find KEYWORD [MORE_KEYWORDS]```| ```find birthday```
-Tag a task | <code>tag TASK_INDEX1 ... /| TAG_KEYWORD1 ... </code>| ```tag 1 2 | pain hell ```
+Tag a task | <code>tag TASK_INDEX1 ... &#124; TAG_KEYWORD1 ...</code>| <code>tag 1 2 &#124; pain hell </code>
 Exit Duke | ```bye``` | ```bye``` 
 
 
