@@ -54,13 +54,9 @@ management app for you.
 Notes for all commands:
 
 * Words within rounded brackets specify parameters that the user will have to input. Do not include the brackets in your
-  input.
-
-  Example: For `todo (description)`, a valid input would be `todo Task 1`.
-* The format for parameters are specified within square brackets.
-
-  Example: For `deadline (description) /by (date[YYYY-MM-DD]) (time[HH:MM])`, the format for time is HH:MM.
-* | is a reserved character. Parameters that include the | symbol will be rejected.
+  input. <br/> Example: For `todo (description)`, a valid input would be `todo Task 1`.
+* The format for parameters are specified within square brackets. <br/> Example: For `deadline (description) /by (date[YYYY-MM-DD]) (time[HH:MM])`, the format for time is HH:MM.
+* `|` is a reserved character. Parameters that include the `|` symbol will be rejected.
 * When supplying parameters to commands, you must follow the format given exactly.
   (Do not exclude parameters, include any extra parameters or reorder the parameters.)
 * Parameters for commands that do not take in any parameters such as `bye` or `list`
@@ -228,7 +224,7 @@ run.
 
 Alias data is saved in the file [JAR file location]/data/config.txt. Advanced users can edit this file directly to
 add/delete aliases. If any changes made cause the format to the invalid, Energy will start with no aliases on the next
-run .
+run.
 
 ---
 
