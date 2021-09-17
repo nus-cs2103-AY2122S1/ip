@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Duke extends Application {
     private ScrollPane scrollPane;
@@ -62,6 +63,44 @@ public class Duke extends Application {
         System.out.flush();
         System.setOut(old);
 
+        // initialize stage
+        createScene(stage);
+
+        // display stage
+        stage.setScene(scene);
+        stage.show();
+
+        // setup other items
+        setAnchors();
+        setListeners();
+
+        // when need to scroll, shows the latest comments
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Chatbot's welcome message
+        displaySplashScreenMessage(baos);
+    }
+
+    private void displaySplashScreenMessage(ByteArrayOutputStream baos) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(baos.toString()), new ImageView((duke))));
+    }
+
+    private void setListeners() {
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
+
+    /**
+     * Creates scene for other JavaFX nodes.
+     *
+     * @param stage the stage of Application.
+     */
+    private void createScene(Stage stage) {
         // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -74,9 +113,6 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
 
         // styling the stage
         stage.setTitle("Duke");
@@ -98,7 +134,9 @@ public class Duke extends Application {
         userInput.setPrefWidth(425.0);
 
         sendButton.setPrefWidth(75.0);
+    }
 
+    private void setAnchors() {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -106,20 +144,6 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        // when need to scroll, shows the latest comments
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        // Chatbot's welcome message
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(baos.toString()), new ImageView((duke))));
     }
 
     /**
@@ -138,7 +162,9 @@ public class Duke extends Application {
 
         // closes app when user decides to leave
         if (!isChatting) {
-            Platform.exit();
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
         }
     }
 
