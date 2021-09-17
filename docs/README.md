@@ -2,6 +2,27 @@
 
 **Duke** is an app that helps you to manage all your tasks and deadlines through a Graphical User Interface.
 
+## Contents
+- [Features](#features)
+  - [Add Task](#add-task)
+  - [Edit Task](#edit-task)
+  - [Delete Task](#delete-task)
+  - [List Tasks](#list-tasks)
+  - [Mark Task as Done](#mark-task-as-done)
+  - [Find Tasks](#find-tasks-containing-keyword)
+  - [Save Tasks](#save-tasks)
+  - [Exit Program](#exit-program)
+- [Command Usage](#command-usage)
+  - [`todo`](#todo---add-todo-task)
+  - [`event`](#event---add-event-task)
+  - [`deadline`](#deadline---add-deadline-task)
+  - [`edit`](#edit---edit-task)
+  - [`delete`](#delete---delete-task)
+  - [`list`](#list---list-all-tasks)
+  - [`done`](#done---mark-task-done)
+  - [`find`](#find---find-tasks-containing-keyword)
+  - [`bye`](#bye---exit-program)
+
 ## Features 
 
 ### Add Task
@@ -13,10 +34,6 @@ Add a task to the task list in Duke.
 - Event: Contains description and date of event
 - Deadline: Contains description and deadline of task
 
-### List Tasks
-
-List all the tasks in the task list.
-
 ### Edit Task
 
 Edit an existing task in the task list. Either the description, date, or both can be edited.
@@ -24,6 +41,10 @@ Edit an existing task in the task list. Either the description, date, or both ca
 ### Delete Task
 
 Delete an existing task from the task list.
+
+### List Tasks
+
+List all the tasks in the task list.
 
 ### Mark Task as Done
 
@@ -33,11 +54,16 @@ Mark an existing task as done in the task list.
 
 Find all tasks that contain a specified keyword in their descriptions.
 
+### Save Tasks
+
+Duke automatically saves the list of tasks to the hard disc whenever it is updated. 
+There is no need to manually save the task list. 
+
 ### Exit Program
 
 Exit the Duke program.
 
-## Usage
+## Command Usage
 
 ### `todo` - Add Todo Task
 
@@ -99,27 +125,6 @@ Got it. I've added this task:
 Now you have 8 tasks in the list.
 ```
 
-### `list` - List All Tasks
-
-Displays all tasks in the task list.
-
-Example of usage:
-
-`list`
-
-Expected outcome:
-
-Displays all tasks in the task list.
-
-```
-Here are the tasks in your list:
-1. [T][ ] read book
-2. [D][X] return book (by: 13 Sep 2020 06:00 PM)
-3. [E][ ] project meeting (at: 10 Oct 2019 11:10 PM)
-4. [T][X] join sports club
-5. [E][ ] Attend CCA (at: 23 Jan 2021 02:30 PM)
-```
-
 ### `edit` - Edit Task
 
 Edits the task at the specified index. 
@@ -161,6 +166,27 @@ Shows deleted task and total number of tasks after deletion.
 Noted. I've removed this task:
 	[D][X] Submit 2103 quiz /date 20-01-2020 14:20 (by: 20 Jan 2020 02:20 PM)
 Now you have 8 tasks in the list.
+```
+
+### `list` - List All Tasks
+
+Displays all tasks in the task list.
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+Displays all tasks in the task list.
+
+```
+Here are the tasks in your list:
+1. [T][ ] read book
+2. [D][X] return book (by: 13 Sep 2020 06:00 PM)
+3. [E][ ] project meeting (at: 10 Oct 2019 11:10 PM)
+4. [T][X] join sports club
+5. [E][ ] Attend CCA (at: 23 Jan 2021 02:30 PM)
 ```
 
 ### `done` - Mark Task Done
