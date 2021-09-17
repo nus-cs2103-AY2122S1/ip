@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(taskToBeAdded);
         storage.addTaskToFile(taskToBeAdded);
-        TaskList taskList = new TaskList(new ArrayList<Task>());
+        TaskList taskList = new TaskList(new ArrayList<>());
         taskList.add(taskToBeAdded);
         ui.addReminder(taskList);
         return ui.addTask(taskToBeAdded, tasks.size());
@@ -29,11 +29,6 @@ public class AddCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AddCommand) {
-            return true;
-        } else {
-            return false;
-        }
+        return obj instanceof AddCommand;
     }
-
 }

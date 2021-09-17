@@ -9,13 +9,11 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkAsDoneCommand;
-import duke.exception.DukeException;
 import duke.exception.ParserException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
 
 /**
  * The class that Parses the command line from user.
@@ -29,10 +27,9 @@ public class Parser {
      *
      * @param input input string from user.
      * @return Command got from input string.
-     * @throws DukeException Exception that duke could generate.
+     * @throws ParserException Exception that generated during parsing.
      */
-    public Command parse(String input) throws DukeException {
-        String[] commands = input.split(" ");
+    public Command parse(String input) throws ParserException {
         if (input.equals("list")) {
             return new ListCommand();
         } else if (input.startsWith("done")) {
@@ -50,33 +47,56 @@ public class Parser {
         } else if (input.startsWith("event")) {
             return parseEvent(input);
         } else {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new ParserException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private Command parseMarkAsDoneCommand(String input) throws DukeException {
+    /**
+     * Parse the user input to a mark-as-done command.
+     *
+     * @param input Input String from the user.
+     * @return Mark task a done command.
+     * @throws ParserException Exception when user input doesn't
+     *                         contain task index or the task index is not a integer.
+     */
+    private Command parseMarkAsDoneCommand(String input) throws ParserException {
         try {
             int contentStartIndex = 5;
             int taskIndex = Integer.parseInt(input.substring(contentStartIndex));
             return new MarkAsDoneCommand(taskIndex - 1);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new DukeException("Please enter a number for task index");
+            throw new ParserException("Please enter a number for task index");
         }
     }
 
-    private Command parseDeleteCommand(String input) throws DukeException {
+    /**
+     * Parse the user input to a delete command.
+     *
+     * @param input Input String from the user.
+     * @return The delete command.
+     * @throws ParserException Exception when user input doesn't
+     *                         contain task index or the task index is not a integer.
+     */
+    private Command parseDeleteCommand(String input) throws ParserException {
         try {
             int contentStartIndex = 7;
             int deleteIndex = Integer.parseInt(input.substring(contentStartIndex));
             return new DeleteCommand(deleteIndex - 1);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new DukeException("Please enter a number for task index");
+            throw new ParserException("Please enter a number for task index");
         }
     }
 
-    private Command parseFindCommand(String input) throws DukeException {
+    /**
+     * Parse the user input to a find command.
+     *
+     * @param input Input String from the user.
+     * @return Find command.
+     * @throws ParserException Exception when there's no keyword in the user input.
+     */
+    private Command parseFindCommand(String input) throws ParserException {
         if (input.equals("find")) {
-            throw new DukeException("Please enter some keywords.");
+            throw new ParserException("Please enter some keywords.");
         }
         int keywordStartIndex = 5;
         String keywords = input.substring(keywordStartIndex);
@@ -84,17 +104,93 @@ public class Parser {
     }
 
     /**
-     * Parses the input string to ToDo task.
+     * Gets the task description from deadline task or event task.
      *
-     * @param input Input string from user.
-     * @return ToDo task.
-     * @throws ParserException Exception generated while parsing the string.
+     * @param input    User input.
+     * @param taskType String of "deadline" or "event".
+     * @return The task description.
+     * @throws ParserException Exception generated if user input does not match the format.
+     */
+    private String getDeadlineEventDescription(String input, String taskType) throws ParserException {
+        String regex = taskType + " ";
+        String descriptionTaskTimeDivider = taskType.equals("deadline") ? "/by" : "/at";
+        if (input.split(regex).length < 2) {
+            throw new ParserException("The description of a " + taskType + " cannot be empty.");
+        }
+        String content = input.split(regex)[1];
+        if (!content.contains(descriptionTaskTimeDivider)) {
+            throw new ParserException("Please enter "
+                    + descriptionTaskTimeDivider
+                    + " followed by a deadline.");
+        }
+        String description = content.substring(0, content.indexOf(descriptionTaskTimeDivider));
+        if (description.equals("")) {
+            throw new ParserException("The description of a " + taskType + " cannot be empty.");
+        }
+        return description;
+    }
+
+    /**
+     * Gets the deadline or event task time.
+     *
+     * @param input    User input.
+     * @param taskType String of "deadline" or "event".
+     * @return The task happening time.
+     * @throws ParserException Exception generated if user input does not match the format.
+     */
+    private String getTaskTime(String input, String taskType) throws ParserException {
+        String regex = taskType + " ";
+        String content = input.split(regex)[1];
+        String descriptionTaskTimeDivider = taskType.equals("deadline") ? "/by" : "/at";
+        int timeStartIndex = content.indexOf(descriptionTaskTimeDivider) + 4;
+        int timeEndIndex = taskType.equals("deadline")
+                ? content.indexOf(descriptionTaskTimeDivider) + 19
+                : content.indexOf(descriptionTaskTimeDivider) + 37;
+        if (timeEndIndex >= content.length()) {
+            String errorMessage = "Invalid date, "
+                    + "please enter a valid date and time in the format: ";
+            errorMessage += taskType.equals("deadline")
+                    ? "yyyy/MM/dd HH:mm"
+                    : "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm";
+            throw new ParserException(errorMessage);
+        }
+        String taskTime = content.substring(timeStartIndex, timeEndIndex + 1);
+        return taskTime;
+    }
+
+    /**
+     * Gets reminder time from input string.
+     *
+     * @param input User input.
+     * @return Reminder time.
+     * @throws ParserException Exception generated if user input does not match the format.
+     */
+    private String getReminderTime(String input) throws ParserException {
+        String reminderTime = "";
+        if (input.contains("/reminder")) {
+            int reminderTimeStartIndex = input.indexOf("/reminder ") + 10;
+            int reminderTimeEndIndex = input.indexOf("/reminder ") + 25;
+            if (reminderTimeEndIndex >= input.length()) {
+                throw new ParserException("Invalid date, "
+                        + "please enter a valid reminder time in the format: "
+                        + "yyyy/MM/dd HH:mm");
+            }
+            reminderTime = input.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
+        }
+        return reminderTime;
+    }
+
+    /**
+     * Parses the user input to an add ToDo command.
+     *
+     * @param input Input string from the user.
+     * @return Add ToDo command.
+     * @throws ParserException Exception generated if user input does not match the format.
      */
     private Command parseToDo(String input) throws ParserException {
         if (input.split("todo ").length < 2) {
             throw new ParserException("The description of a todo cannot be empty.");
         }
-
         String content = input.split("todo ")[1];
         if (content.contains("/reminder ")) {
             if (content.split("/reminder ").length < 2 || content.split("/reminder ")[0].length() == 0) {
@@ -107,7 +203,7 @@ public class Parser {
                 return new AddCommand(task);
             } catch (DateTimeParseException e) {
                 throw new ParserException("Invalid date, "
-                        + "please enter a valid date in the format: "
+                        + "please enter a valid reminder time in the format: "
                         + "yyyy/MM/dd HH:mm");
             }
         } else {
@@ -117,49 +213,17 @@ public class Parser {
     }
 
     /**
-     * Parses the input string to Deadline task.
+     * Parses the user input to an add Deadline command.
      *
      * @param input Input string from user.
-     * @return Deadline task.
-     * @throws ParserException Exception generated while parsing the string.
+     * @return Add Deadline command.
+     * @throws ParserException Exception generated if user input does not match the format.
      */
     private Command parseDeadline(String input) throws ParserException {
-        /* Gets description */
-        if (input.split("deadline ").length < 2) {
-            throw new ParserException("The description of a deadline cannot be empty.");
-        }
-        String content = input.split("deadline ")[1];
-        if (!content.contains("/by")) {
-            throw new ParserException("Please enter /by followed by a deadline.");
-        }
-        String description = content.substring(0, content.indexOf("/by"));
-        if (description.equals("")) {
-            throw new ParserException("The description of a deadline cannot be empty.");
-        }
+        String description = getDeadlineEventDescription(input, "deadline");
+        String deadline = getTaskTime(input, "deadline");
+        String reminderTime = getReminderTime(input);
 
-        /* Gets deadline */
-        int deadlineStartIndex = content.indexOf("/by") + 4;
-        int deadlineEndIndex = content.indexOf("/by") + 19;
-        if (deadlineEndIndex >= content.length()) {
-            throw new ParserException("Invalid date, "
-                    + "please enter a valid time period in the format: "
-                    + "yyyy/MM/dd HH:mm");
-        }
-        String deadline = content.substring(deadlineStartIndex, deadlineEndIndex + 1);
-
-        /* Gets reminder time */
-        String reminderTime = "";
-        if (content.contains("/reminder ")) {
-            int reminderTimeStartIndex = content.indexOf("/reminder ") + 10;
-            int reminderTimeEndIndex = content.indexOf("/reminder ") + 25;
-            if (reminderTimeEndIndex >= content.length()) {
-                throw new ParserException("Invalid date, "
-                        + "please enter a valid time period in the format: "
-                        + "yyyy/MM/dd HH:mm");
-            }
-            reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
-        }
-        /* Creates deadline task */
         try {
             Task task;
             if (reminderTime.equals("")) {
@@ -170,54 +234,23 @@ public class Parser {
             return new AddCommand(task);
         } catch (DateTimeParseException e) {
             throw new ParserException("Invalid date, "
-                    + "please enter a valid time period in the format: "
+                    + "please enter a valid date and time in the format: "
                     + "yyyy/MM/dd HH:mm");
         }
     }
 
     /**
-     * Parses the input string to Event task.
+     * Parses the user input to an add Event command.
      *
      * @param input Input string from user.
-     * @return Event task.
-     * @throws ParserException Exception generated while parsing the string.
+     * @return Add Event command.
+     * @throws ParserException Exception generated if user input does not match the format.
      */
     private Command parseEvent(String input) throws ParserException {
-        /* Gets event description */
-        if (input.split("event ").length < 2) {
-            throw new ParserException("The description of an event cannot be empty.");
-        }
-        String content = input.split("event ")[1];
-        if (!content.contains("/at")) {
-            throw new ParserException("Please enter /at followed by an event period.");
-        }
-        String description = content.substring(0, content.indexOf("/at"));
-        if (description.equals("")) {
-            throw new ParserException("The description of an event cannot be empty.");
-        }
+        String description = getDeadlineEventDescription(input, "event");
+        String eventPeriod = getTaskTime(input, "event");
+        String reminderTime = getReminderTime(input);
 
-        /* Gets event time */
-        int eventStartIndex = content.indexOf("/at") + 4;
-        int eventEndIndex = content.indexOf("/at") + 37;
-        if (eventEndIndex >= content.length()) {
-            throw new ParserException("please enter a valid time in the format: "
-                    + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
-        }
-        String eventPeriod = content.substring(eventStartIndex, eventEndIndex + 1);
-
-        /* Gets reminder time */
-        String reminderTime = "";
-        if (content.contains("/reminder ")) {
-            int reminderTimeStartIndex = content.indexOf("/reminder ") + 10;
-            int reminderTimeEndIndex = content.indexOf("/reminder ") + 25;
-            if (reminderTimeEndIndex >= content.length()) {
-                throw new ParserException("please enter a valid time in the format: "
-                        + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
-            }
-            reminderTime = content.substring(reminderTimeStartIndex, reminderTimeEndIndex + 1);
-        }
-
-        /* Creates an event task */
         try {
             Task task;
             String[] startingEndingTime = eventPeriod.split("--");
@@ -232,7 +265,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new ParserException("Invalid date, "
                     + "please enter a valid time period in the format: "
-                    + "yyyy/MM/dd HH:mm");
+                    + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
         }
     }
 }
