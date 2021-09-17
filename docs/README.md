@@ -50,7 +50,7 @@ Got it. Added the following task
 [E][ ] [DESCRIPTION] (at: [DD/MM/YYYY])
 ```
 
-### `deadline` - Creates an event
+### `deadline` - Creates a deadline
 
 Adds deadline that needs to be completed by a certain time.
 
