@@ -419,3 +419,17 @@ delete | To delete a task from the list | `delete TASK_NUMBER`
 find | To find and show tasks with matching keywords | `find KEYWORD`
 list | To show all the tasks present in the task list  | `list`
 view | To show the tasks scheduled for the date entered | `view DD/MM/YYYY`
+
+---
+## Acknowledgments
+* Retriever Photo:
+![](../src/main/resources/images/RetrieverCircular.png)
+File: src/main/resources/images/RetrieverCircular.png
+
+Source: [Popsugar](https://www.popsugar.com/pets/what-kind-health-problems-do-golden-retrievers-have-46909974)
+
+* User Photo:
+![](../src/main/resources/images/User.png)
+File: src/main/resources/images/User.png
+
+Source: [Pinterest](https://www.pinterest.com/pin/811210951621719706/)
