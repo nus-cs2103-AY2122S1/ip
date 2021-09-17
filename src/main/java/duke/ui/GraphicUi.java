@@ -48,7 +48,6 @@ public class GraphicUi {
             case "bye":
                 c = new ByeCommand();
                 System.out.print(c.execute(des, tList));
-                Ui.printLine();
                 System.exit(0);
                 break;
             case "help":

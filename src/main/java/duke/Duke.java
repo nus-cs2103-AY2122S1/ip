@@ -1,6 +1,5 @@
 package duke;
 import duke.ui.GraphicUi;
-import duke.ui.Ui;
 
 /**
  * Duke class used to run the duke.Duke chat-bot.
@@ -8,16 +7,6 @@ import duke.ui.Ui;
  * (i)    initialises the Ui class and runs the chat-bot.
  */
 public class Duke {
-    /**
-     * Initialises the chatBot and runs the Duke chatBot.
-     *
-     * @param args Arguments for main method.
-     */
-    public static void main(String[] args) {
-        Ui chatBot = new Ui();
-        chatBot.run();
-    }
-
     /**
      * Returns response from Duke chat-bot for a given input.
      *

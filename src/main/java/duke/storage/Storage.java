@@ -30,7 +30,7 @@ import duke.tasks.ToDo;
  */
 public class Storage {
     /**
-     * The createFile() method creates a folder data and a file, tasks.txt, if file is not found in the directory.
+     * Creates a folder data and a file, tasks.txt, if file is not found in the directory.
      */
     public static void createFile() {
         File dir = new File("data/");

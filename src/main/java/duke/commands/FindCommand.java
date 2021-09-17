@@ -29,7 +29,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Return String representation of relevant tasks that match the keywords being searched.
+     * Returns String representation of relevant tasks that match the keywords being searched.
      *
      * @param des User input into the Duke chat-box.
      * @param tList TaskList object used to keep track of all tasks.

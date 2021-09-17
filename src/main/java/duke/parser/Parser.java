@@ -21,21 +21,9 @@ public class Parser {
         } else if (des.equals("list")) {
             return "list";
         } else if (des.contains("done") && des.startsWith("done")) {
-            try {
-                String stringNumber = des.substring(des.indexOf(' ') + 1);
-                Integer.parseInt(stringNumber);
-                return "done";
-            } catch (NumberFormatException e) {
-                return null;
-            }
+            return checkDoneDescription(des);
         } else if (des.contains("delete") && des.startsWith("delete")) {
-            try {
-                String stringNumber = des.substring(des.indexOf(' ') + 1);
-                Integer.parseInt(stringNumber);
-                return "delete";
-            } catch (NumberFormatException e) {
-                return null;
-            }
+            return checkDeleteDescription(des);
         } else if (des.contains("deadline") && des.startsWith("deadline")) {
             return "deadline";
         } else if (des.contains("event") && des.startsWith("event")) {
@@ -43,16 +31,62 @@ public class Parser {
         } else if (des.contains("todo") && des.startsWith("todo")) {
             return "todo";
         } else if (des.contains("doafter") && des.startsWith("doafter")) {
-            try {
-                String stringNumber = des.substring(des.lastIndexOf(' ') + 1);
-                Integer.parseInt(stringNumber);
-                return "doafter";
-            } catch (NumberFormatException e) {
-                return null;
-            }
+            return checkDoAfterDescription(des);
         } else if (des.contains("find") && des.startsWith("find")) {
             return "find";
         } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns "done" keyword if user input is valid.
+     * If user input not valid, null is returned.
+     *
+     * @param des User input into the Duke chat-box.
+     * @return String object representing done keyword.
+     */
+    private String checkDoneDescription(String des) {
+        try {
+            String stringNumber = des.substring(des.indexOf(' ') + 1);
+            Integer.parseInt(stringNumber);
+            return "done";
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Returns "delete" keyword if user input is valid.
+     * If user input not valid, null is returned.
+     *
+     * @param des User input into the Duke chat-box.
+     * @return String object representing delete keyword.
+     */
+    private String checkDeleteDescription(String des) {
+        try {
+            String stringNumber = des.substring(des.indexOf(' ') + 1);
+            Integer.parseInt(stringNumber);
+            return "delete";
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Returns "doafter" keyword if user input is valid.
+     * If user input not valid, null is returned.
+     *
+     * @param des User input into the Duke chat-box.
+     * @return String object representing doafter keyword.
+     */
+    private String checkDoAfterDescription(String des) {
+        try {
+            String stringNumber
+                    = des.substring(des.lastIndexOf(' ') + 1);
+            Integer.parseInt(stringNumber);
+            return "doafter";
+        } catch (NumberFormatException e) {
             return null;
         }
     }
