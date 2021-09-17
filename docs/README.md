@@ -99,8 +99,6 @@ Examples:
 * `event Christmas party at my neighbour's /at 2021-12-25`
 * `event Grab Delivery collection /at 2021-12-25 23:59`
 
-![Event](Event.png?raw=true)
-
 ### 4.6 Finding entries: `find KEYWORD [MORE KEYWORDS]`
 Finds entries with certain keywords in them.
 
