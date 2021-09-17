@@ -73,7 +73,7 @@ public class TaskList {
      * @param keyword Keyword used to find Task.
      */
     public String findTasks(String keyword) {
-        StringBuilder response = new StringBuilder("Matching task(s) are:");
+        StringBuilder response = new StringBuilder("Matching task(s) are:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             String name = t.getName();
