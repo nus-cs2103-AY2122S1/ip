@@ -1,11 +1,11 @@
-# User Guide for Duke
+# User Guide for Hyddd Chatbot
 
-Welcome to your best task manager **Duke**! 
+Welcome to your best task manager **Hyddd**! 
 
-Duke is a **desktop chatbot for managing tasks**. You can ask duke to help you remember your tasks.
+Hyddd is a **desktop chatbot for managing tasks**. You can ask duke to help you remember your tasks.
 
 ## Introduction
-Duke frees you from worry of taking care of everything. It is:
+Hyddd frees you from worry of taking care of everything. It is:
 
 * Text-based!
 * Easy to understand!
@@ -25,7 +25,7 @@ Able to search a specific task using keyword of time or taskInfo.
 
 ### 3.AddNewTask
 
-Able to add a task of type "todo", "event", "deadline" into Duke.
+Able to add a task of type "todo", "event", "deadline" into Hyddd.
 
 ### 4.DeleteTask
 
@@ -39,7 +39,7 @@ Able to mark a finished task as done.
 
 ### 1.`list` - list all the tasks
 
-Duke displays the list of tasks stored.
+Hyddd displays the list of tasks stored.
 
 Example of usage: 
 
@@ -47,7 +47,7 @@ Example of usage:
 
 Expected outcome:
 
-A list of all tasks stored in Duke.
+A list of all tasks stored in Hyddd.
 
 ```
 Here are all the tasks in your list:
@@ -59,7 +59,7 @@ Here are all the tasks in your list:
 
 ### 2.`done <index>` - Mark a task as done 
 
-Duke marks a finished task as done. 
+Hyddd marks a finished task as done. 
 
 Example of usage: 
 
@@ -74,9 +74,9 @@ Nice! I've marked this task as done:
 [D][] return book (by: Dec 02 2019 18:00)
 ```
 
-### 3.`delete <index>` - Delete a task in Duke 
+### 3.`delete <index>` - Delete a task in Hyddd 
 
-Duke deletes a task user no longer needs. 
+Hyddd deletes a task user no longer needs. 
 
 Example of usage: 
 
@@ -96,7 +96,7 @@ Now you have 3 tasks in the list.
 
 ### 4.`tell <time>` - Find tasks with keyword of time. 
 
-Duke tells tasks user hope to search on a specific time. 
+Hyddd tells tasks user hope to search on a specific time. 
 
 Example of usage: 
 
@@ -104,7 +104,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks match the keyword of time in Duke.
+All tasks match the keyword of time in Hyddd.
 
 ```
 Here are all the tasks taking place on the date you give me:
@@ -113,7 +113,7 @@ Here are all the tasks taking place on the date you give me:
 
 ### 5.`find <task>` - Find tasks with keyword of taskInfo. 
 
-Duke finds tasks user hope to search by keywords of the taskInfo. 
+Hyddd finds tasks user hope to search by keywords of the taskInfo. 
 
 Example of usage: 
 
@@ -121,7 +121,7 @@ Example of usage:
 
 Expected outcome:
 
-All tasks match the keyword of taskInfo in Duke.
+All tasks match the keyword of taskInfo in Hyddd.
 
 ```
 Here are all the matching tasks in your list:
@@ -131,7 +131,7 @@ Here are all the matching tasks in your list:
 
 ### 6.`todo <task>` - Add a task of type todo. 
 
-Duke creates a new task of type todo and adds it into the list. 
+Hyddd creates a new task of type todo and adds it into the list. 
 
 Example of usage: 
 
@@ -139,7 +139,7 @@ Example of usage:
 
 Expected outcome:
 
-Adds a new task of todo type into taskList in Duke.
+Adds a new task of todo type into taskList in Hyddd.
 
 ```
 Got it. I've added this task:
@@ -150,7 +150,7 @@ Now you have 5 tasks in the list.
 
 ### 7.`deadline <task> /by <time>` - Add a task of type deadline. 
 
-Duke creates a new task of type deadline and adds it into the list. 
+Hyddd creates a new task of type deadline and adds it into the list. 
 
 Example of usage: 
 
@@ -158,7 +158,7 @@ Example of usage:
 
 Expected outcome:
 
-Adds a new task of deadline type into taskList in Duke.
+Adds a new task of deadline type into taskList in Hyddd.
 
 ```
 Got it. I've added this task:
@@ -169,7 +169,7 @@ Now you have 6 tasks in the list.
 
 ### 8.`event <task> /at <time>` - Add a task of type event. 
 
-Duke creates a new task of type event and adds it into the list. 
+Hyddd creates a new task of type event and adds it into the list. 
 
 Example of usage: 
 
@@ -177,7 +177,7 @@ Example of usage:
 
 Expected outcome:
 
-Adds a new task of event type into taskList in Duke.
+Adds a new task of event type into taskList in Hyddd.
 
 ```
 Got it. I've added this task:
@@ -188,7 +188,7 @@ Now you have 7 tasks in the list.
 
 ### 9.`undo` - Undo a most recent operation 
 
-Duke undose a mostly executed command.
+Hyddd undose a mostly executed command.
 
 It can be:
 1. Undo adding a task.
@@ -201,7 +201,7 @@ Example of usage:
 
 Expected outcome:
 
-Undo a most recent operation in Duke.
+Undo a most recent operation in Hyddd.
 
 ```
 Okay, I have helped undo your most recent command!
@@ -210,7 +210,7 @@ Good! I have undone your newly added task!
 
 ### 10.`help` - Print a simple version of User Guide. 
 
-Duke gives user a brief introduction of his features and points to note.
+Hyddd gives user a brief introduction of his features and points to note.
 
 Example of usage: 
 
@@ -239,11 +239,11 @@ I support the following commands:
 3) yy-mm-dd time format is supported.
 4) dd/mm/yy hhmm time format is supported.
 
-Hope you enjoy your experience in Duke!
+Hope you enjoy your experience in Hyddd!
 ```
 
 ## Points to note: ✋
-* Duke only supports time format of: 
+* Hyddd only supports time format of: 
 
   **1. yy-mm-dd.**
   
@@ -251,4 +251,4 @@ Hope you enjoy your experience in Duke!
 * Deadline should have "/by" as prefix.
 * Event should have "/at" as prefix. 
 
-**Hope you enjoy your experience in Duke!**
+**Hope you enjoy your experience in Hyddd!**
