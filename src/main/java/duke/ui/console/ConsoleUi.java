@@ -5,7 +5,7 @@ import duke.ui.Ui;
 import java.util.Scanner;
 
 public class ConsoleUi extends Ui {
-    private Scanner in;
+    private final Scanner in;
 
     public ConsoleUi(Scanner in) {
         this.in = in;

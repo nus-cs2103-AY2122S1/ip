@@ -9,7 +9,7 @@ import duke.task.Task;
 import duke.ui.Ui;
 
 public class DeleteTaskCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Creates a command that deletes a task.
@@ -34,7 +34,7 @@ public class DeleteTaskCommand extends Command {
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
-     * @throws Exception when unable to find task or when unable to save tasks.
+     * @throws DukeException when unable to find task or when unable to save tasks.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

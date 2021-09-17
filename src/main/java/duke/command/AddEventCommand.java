@@ -12,8 +12,8 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 
 public class AddEventCommand extends Command {
-    private String description;
-    private LocalDateTime time;
+    private final String description;
+    private final LocalDateTime time;
 
     /**
      * Creates a command that adds a {@link Event} to the user's tasks.
@@ -57,7 +57,7 @@ public class AddEventCommand extends Command {
         taskList.addTask(event);
 
         storage.saveTasks(taskList);
-        ui.printMessage("Added the following task:\n    " + event.toString() + "\n" + "You now have "
+        ui.printMessage("Added the following task:\n    " + event + "\n" + "You now have "
                 + taskList.size() + " tasks in your list.");
     }
 

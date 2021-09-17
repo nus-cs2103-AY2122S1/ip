@@ -16,7 +16,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class Storage {
-    private File tasksFile;
+    private final File tasksFile;
 
     /**
      * Creates a Storage object to store data at the provided filepath.

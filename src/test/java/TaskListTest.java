@@ -1,7 +1,3 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +7,13 @@ import duke.TaskList;
 import duke.task.Task;
 import duke.task.Todo;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TaskListTest {
     @Test
     public void removeTask() {
         Task todo1 = new Todo("TODO 1");
-        List<Task> list = new ArrayList<Task>();
+        List<Task> list = new ArrayList<>();
         list.add(todo1);
         TaskList taskList = new TaskList(list);
 
@@ -30,7 +28,7 @@ public class TaskListTest {
     public void getTask() {
         Task todo1 = new Todo("TODO 1");
         Task todo2 = new Todo("TODO 2");
-        List<Task> list = new ArrayList<Task>();
+        List<Task> list = new ArrayList<>();
         list.add(todo1);
         list.add(todo2);
         TaskList taskList = new TaskList(list);
@@ -43,7 +41,7 @@ public class TaskListTest {
     public void filterTasks() {
         Task todo1 = new Todo("TODO 1");
         Task todo2 = new Todo("test 2");
-        List<Task> list = new ArrayList<Task>();
+        List<Task> list = new ArrayList<>();
         list.add(todo1);
         list.add(todo2);
         TaskList taskList = new TaskList(list);
@@ -66,6 +64,6 @@ public class TaskListTest {
     public void items() {
         TaskList taskList = new TaskList(new ArrayList<>());
 
-        assertTrue(taskList.items() != taskList.items(), "TaskList.items() should return different copies");
+        assertNotSame(taskList.items(), taskList.items(), "TaskList.items() should return different copies");
     }
 }

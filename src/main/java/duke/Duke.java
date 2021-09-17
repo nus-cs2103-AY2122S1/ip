@@ -6,14 +6,14 @@ import duke.ui.Ui;
 
 public class Duke {
     private Ui ui;
-    private TaskList taskList;
-    private Storage storage;
+    private final TaskList taskList;
+    private final Storage storage;
 
     /**
      * Initializes an instance of Duke.
      *
      * @param filePath The storage location for Duke's tasklist.
-     * @throws Exception
+     * @throws DukeException if unable to set up storage.
      */
     public Duke(String filePath) throws DukeException {
         super();

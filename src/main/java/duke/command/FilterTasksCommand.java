@@ -7,7 +7,7 @@ import duke.task.Task;
 import duke.ui.Ui;
 
 public class FilterTasksCommand extends Command {
-    private String searchInput;
+    private final String searchInput;
 
     /**
      * Creates a command that filters a user's tasklist by the search string.

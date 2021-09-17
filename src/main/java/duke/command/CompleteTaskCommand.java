@@ -9,7 +9,7 @@ import duke.task.Task;
 import duke.ui.Ui;
 
 public class CompleteTaskCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Creates a command that marks a task as completed.
@@ -47,7 +47,7 @@ public class CompleteTaskCommand extends Command {
         }
 
         storage.saveTasks(taskList);
-        ui.printMessage("Marking task as completed:\n    " + task.toString());
+        ui.printMessage("Marking task as completed:\n    " + task);
     }
 
     @Override

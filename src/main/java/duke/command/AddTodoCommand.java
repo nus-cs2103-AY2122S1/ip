@@ -9,7 +9,7 @@ import duke.task.Todo;
 import duke.ui.Ui;
 
 public class AddTodoCommand extends Command {
-    private String description;
+    private final String description;
 
     /**
      * Creates a command that adds a {@link Todo} to the user's tasks.
@@ -39,7 +39,7 @@ public class AddTodoCommand extends Command {
         taskList.addTask(todo);
 
         storage.saveTasks(taskList);
-        ui.printMessage("Added the following task:\n    " + todo.toString() + "\n" + "You now have "
+        ui.printMessage("Added the following task:\n    " + todo + "\n" + "You now have "
                 + taskList.size() + " tasks in your list.");
     }
 

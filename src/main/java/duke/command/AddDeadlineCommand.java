@@ -12,8 +12,8 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 
 public class AddDeadlineCommand extends Command {
-    private String description;
-    private LocalDateTime time;
+    private final String description;
+    private final LocalDateTime time;
 
     /**
      * Creates a command that adds a {@link Deadline} to the user's tasks.
@@ -57,7 +57,7 @@ public class AddDeadlineCommand extends Command {
         taskList.addTask(deadline);
 
         storage.saveTasks(taskList);
-        ui.printMessage("Added the following task:\n    " + deadline.toString() + "\n" + "You now have "
+        ui.printMessage("Added the following task:\n    " + deadline + "\n" + "You now have "
                 + taskList.size() + " tasks in your list.");
     }
 
