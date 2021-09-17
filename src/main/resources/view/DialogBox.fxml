@@ -10,7 +10,7 @@
   <children>
     <Label fx:id="dialog" minHeight="-Infinity" text="Label" translateX="-5.0" wrapText="true">
          <font>
-            <Font name="Franklin Gothic Demi Cond" size="13.0" />
+            <Font name="Calibri Bold" size="13.0" />
          </font>
          <HBox.margin>
             <Insets />

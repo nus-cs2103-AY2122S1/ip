@@ -23,6 +23,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            scene.getRoot().setStyle("-fx-font-family: 'Calibri Bold'");
+            stage.setTitle("Gary");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showLogo();
             stage.show();

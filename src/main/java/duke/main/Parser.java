@@ -157,8 +157,7 @@ public class Parser {
      */
     private void findTask(String input) {
         String searchTerm = input.split(" ", 2)[1];
-        System.out.println("These tasks have descriptions that contain the phrase:\n"
-                + "'" + searchTerm + "'\n");
+        System.out.println("These tasks have descriptions that contain the phrase: " + "'" + searchTerm + "'\n");
         this.taskList.printAllContains(searchTerm);
     }
 

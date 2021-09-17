@@ -34,15 +34,8 @@ public class Duke {
      *
      * @return String representing the logo of Gary.
      */
-    public String getLogo() {
-        String greeting = "Meow! My name is \n";
-        String logo = "  _______              __               _____      __             __    _\n"
-                + "|      ____|          /  ^  \\         |      _    \\   \\  \\        /  /  |  |\n"
-                + "|    |  ___          /  /_\\  \\      |    |_|    |   \\  \\  /  /     |  |\n"
-                + "|    ||_    |      /      __     \\    |    __    <        \\      /        |_|\n"
-                + "|    |__| |    /      /    \\     \\  |    |  \\    \\        |   |            _  \n"
-                + "|______|  /__/        \\__\\|_ |       \\_\\     |_|         |_|\n";
-        return greeting + logo;
+    public String getGreeting() {
+        return "Meow! My name is Gary, how can I help you?";
     }
 
     /**

@@ -35,10 +35,10 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Adds a DialogBox to the VBox containg the logo.
+     * Adds a DialogBox to the VBox containing the logo.
      */
     public void showLogo() {
-        dialogContainer.getChildren().add(DialogBox.getGaryDialog(duke.getLogo(), garyImage));
+        dialogContainer.getChildren().add(DialogBox.getGaryDialog(duke.getGreeting(), garyImage));
     }
 
     /**
