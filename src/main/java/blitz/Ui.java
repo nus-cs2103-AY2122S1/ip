@@ -1,7 +1,7 @@
 package blitz;
 
 public class Ui {
-    
+
     private static String greetingMessage = "Hola! I'm Blitz :)"
             + "\nHere are the tasks in your list:";
     private static String goodbyeMessage = "Adiós. Hope to see you again soon!"
@@ -111,6 +111,7 @@ public class Ui {
 
     /**
      * Displays syntax and use of given command
+     * 
      * @param command command to seek help for
      * @return syntax and use of given command
      */
