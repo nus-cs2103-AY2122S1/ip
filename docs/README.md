@@ -44,7 +44,7 @@ Adds a deadline to be completed by a certain date and time to the list.
 
 Format : `deadline NAME /by DATE TIME`
 
-**:information_source: Note:**<br>
+**Note:**<br>
 * DATE should be in dd/mm/yyyy format
 * TIME should be in 24 hour format
 
@@ -63,7 +63,7 @@ Adds an event schedules for a certain date and time to the list.
 
 Format : `event NAME /on DATE TIME`
 
-**:information_source: Note:**<br>
+**Note:**<br>
 * DATE should be in dd/mm/yyyy format
 * TIME should be in 24 hour format
 
