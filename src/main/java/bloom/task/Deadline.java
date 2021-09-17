@@ -60,6 +60,6 @@ public class Deadline extends Task {
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         String month = months[m - 1];
 
-        return month + " " + d + " " + y;
+        return month + " " + d + " " + y + " " + by.getHour() + ":" + by.getMinute();
     }
 }
