@@ -1,6 +1,6 @@
 # User Guide
 ###
-##Bob
+## Bob
 
 Bob is a sarcastic and slightly annoying yet helpful chatbot that helps you keep track of all the things you need to do.
 If you are a quick typer, Bob allows you to manage your tasks much faster than regular to-do-list applications.
@@ -186,7 +186,7 @@ Okay task yeeted away :D
 Yay 3 tasks!
 ```
 #
-##Acknowledgements
+## Acknowledgements
 
 GUI inspiration from Fantasia by @soaza
 
