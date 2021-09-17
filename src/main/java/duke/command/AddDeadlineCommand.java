@@ -1,24 +1,54 @@
 package duke.command;
 
+import duke.DateTime;
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.ui.Ui;
 
+import java.time.LocalDateTime;
+
 public class AddDeadlineCommand extends Command {
-    private String arguments;
+    private String description;
+    private LocalDateTime time;
 
     /**
      * Creates a command that adds a {@link Deadline} to the user's tasks.
      *
      * @param arguments Command arguments.
      */
-    public AddDeadlineCommand(String arguments) throws Exception {
+    public AddDeadlineCommand(String arguments) throws DukeException {
         if (arguments.length() == 0) {
-            throw new Exception("Command `deadline` requires arguments");
+            throw new InvalidCommandException("Command `deadline` requires arguments");
         }
-        this.arguments = arguments;
+
+        String[] deadlineInputs = arguments.trim().split("\\s+/by\\s+", 2);
+
+        if (deadlineInputs.length == 1) {
+            if (deadlineInputs[0].length() == 0) {
+                throw new InvalidCommandException("Deadline must have description and time");
+            } else {
+                throw new InvalidCommandException("Deadline must have time");
+            }
+        }
+
+        if (deadlineInputs.length != 2) {
+            throw new InvalidCommandException("Deadline must have description and time");
+        }
+
+        String description = deadlineInputs[0];
+        LocalDateTime time;
+        try {
+            time = DateTime.parse(deadlineInputs[1]);
+        } catch(Exception e) {
+            throw new InvalidCommandException("Unable to parse deadline time");
+        }
+
+        this.description = description;
+        this.time = time;
     }
 
     /**
@@ -31,7 +61,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
-        Task deadline = Deadline.fromInput(arguments);
+        Task deadline = new Deadline(description, time);
         taskList.addTask(deadline);
 
         storage.saveTasks(taskList);
