@@ -1,4 +1,4 @@
-# Duke User Guide :robot:
+# Duke User Guide
 
 Duke is a chat bot that enables you to mange your tasks. It is based on **CommandLine Interface**(CLI) and also has a **Graphical User Interface(GUI)**.
 
