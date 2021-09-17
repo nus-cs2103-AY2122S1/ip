@@ -425,12 +425,13 @@ view | To show the tasks scheduled for the date entered | `view DD/MM/YYYY`
 
 * Retriever Photo:
 
-File: src/main/resources/images/RetrieverCircular.png
+  File: src/main/resources/images/RetrieverCircular.png
 
-Source: [Popsugar](https://www.popsugar.com/pets/what-kind-health-problems-do-golden-retrievers-have-46909974)
+  Source: [Popsugar](https://www.popsugar.com/pets/what-kind-health-problems-do-golden-retrievers-have-46909974)
+
 
 * User Photo:
 
-File: src/main/resources/images/User.png
+  File: src/main/resources/images/User.png
 
-Source: [Pinterest](https://www.pinterest.com/pin/811210951621719706/)
+  Source: [Pinterest](https://www.pinterest.com/pin/811210951621719706/)
