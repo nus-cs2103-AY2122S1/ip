@@ -63,14 +63,18 @@ public class Parser {
         String[] editDescParts = taskDetails.split("/desc", 2);
         String[] editDateParts = taskDetails.split("/date", 2);
         if (editDescParts.length < 2 && editDateParts.length < 2) {
-            throw new DukeException("Nothing to edit.");
+            throw new DukeException("Nothing to edit. Usage of edit command: edit [taskIndex] /desc [new desc]"
+                    + "/date [new date]\n" + "eg. edit 1 /desc Submit IP /date 17-9-2021 23:59");
         }
 
         if (editDateParts.length >= 2 && editDescParts.length >= 2) {
+            // both description and date should be edited
             return new EditCommand(taskIndex, editDescParts[1].trim(), editDateParts[1].trim());
         } else if (editDateParts.length >= 2) {
+            // only date should be edited
             return new EditCommand(taskIndex, null, editDateParts[1].trim());
         } else {
+            // only description should be edited
             return new EditCommand(taskIndex, editDescParts[1].trim(), null);
         }
     }
