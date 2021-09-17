@@ -23,7 +23,6 @@ public class CompleteTaskMessage extends DukeMessage{
                 (ArrayList<Task>) TaskList.getTaskList().getTasks();
         for (Task task : taskList) {
             int currTaskId = task.getRefId();
-            System.out.println(currTaskId);
             if (currTaskId == refId) {
                 this.queriedTask = task;
             }

@@ -30,7 +30,7 @@ public class MessageFactory {
             } else if (userStr.length() >= 6 && userStr.substring(0,6).equals("delete")) {
                 int len = userStr.length();
                 int taskIndex = userStr.charAt(len - 1) - 48;
-                if (taskIndex >= TaskList.getTaskList().getTasks().size())
+                if (taskIndex > TaskList.getTaskList().getTasks().size())
                     throw new ArrayIndexOutOfBoundsException();
                 return new DeleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("find")) {
