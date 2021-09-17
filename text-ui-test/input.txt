@@ -1,0 +1,21 @@
+todo read book
+deadline return book /by 23/08/2021 0000
+event project meeting /at 2021-08-23 1400 1600
+event lecture /at 20-08-2021 16:00 1800
+done 1
+list
+todo graduate
+done 2
+done 3
+list
+check 23/08/2021
+find re
+todo
+deadline submit assignment
+event x'mas /at 25/12/2021 0000 2500
+done 5
+baka
+delete 1
+list
+delete 4
+bye

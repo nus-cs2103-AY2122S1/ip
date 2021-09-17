@@ -1,0 +1,17 @@
+/*
+Reused from Uluk Biy - https://stackoverflow.com/questions/9738146/javafx-how-to-set-scene-background-image
+and from oliviajohansen - https://github.com/oliviajohansen/ip/blob/master/src/main/resources/view/application.css
+*/
+#pane{
+    -fx-background-image: url('/images/backgroundImage.jpeg');
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
