@@ -1,10 +1,10 @@
 
-import Duke.DukeException;
+import Wonderland.DukeException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import Duke.task.TaskList;
-import Duke.Command;
+import Wonderland.task.TaskList;
+import Wonderland.Command;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

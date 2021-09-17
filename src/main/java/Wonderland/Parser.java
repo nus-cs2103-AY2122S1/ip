@@ -1,4 +1,4 @@
-package Duke;
+package Wonderland;
 
 public class Parser {
     /**

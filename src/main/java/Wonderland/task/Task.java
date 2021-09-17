@@ -1,17 +1,17 @@
-package Duke.task;
+package Wonderland.task;
 
 /**
- * The Duke.Duke.task.Task class encapsulates a Duke.Duke.task with a String description
- * and a boolean representing if Duke.Duke.task is done.
+ * The Wonderland.Wonderland.task.Task class encapsulates a Wonderland.Wonderland.task with a String description
+ * and a boolean representing if Wonderland.Wonderland.task is done.
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for Duke.Duke.task and takes in Duke.Duke.task description.
+     * Constructor for Wonderland.Wonderland.task and takes in Wonderland.Wonderland.task description.
      *
-     * @param description description of Duke.Duke.task.
+     * @param description description of Wonderland.Wonderland.task.
      */
     public Task(String description) {
         this.description = description;
@@ -28,7 +28,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks Duke.Duke.task as done.
+     * Marks Wonderland.Wonderland.task as done.
      */
     public void markAsDone() {
         isDone = true;
@@ -37,9 +37,9 @@ public abstract class Task {
     public abstract String toFileEntry();
 
     /**
-     * Returns string representation of Duke.Duke.task object.
+     * Returns string representation of Wonderland.Wonderland.task object.
      *
-     * @return string representation of Duke.Duke.task object.
+     * @return string representation of Wonderland.Wonderland.task object.
      */
     @Override
     public String toString() {

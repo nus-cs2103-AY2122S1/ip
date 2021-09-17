@@ -1,4 +1,4 @@
-package Duke;
+package Wonderland;
 
 public enum Keyword {
     LIST ("list"),

@@ -1,11 +1,11 @@
-package Duke;
+package Wonderland;
 
-import Duke.task.TaskList;
+import Wonderland.task.TaskList;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke {
+public class Wonderland {
     private Command commands = new Command();
     private Storage storage;
     private TaskList tasks;
@@ -14,9 +14,9 @@ public class Duke {
     private final String STORAGE_ERROR_MESSAGE = "Error in saving data to storage";
 
     /**
-     * Constructor for Duke.Duke.
+     * Constructor for Wonderland.
      */
-    public Duke() {
+    public Wonderland() {
         this.file_path = "./data.txt";
         try {
             this.storage = new Storage(file_path);
@@ -28,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * Returns the response from Duke given the user input to be shown on the GUI.
+     * Returns the response from Wonderland given the user input to be shown on the GUI.
      */
     public String getResponse(String input) {
         final String errorMessage = "Not a valid command!!";
@@ -207,7 +207,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke();
+        Wonderland bot = new Wonderland();
         bot.start();
     }
 }

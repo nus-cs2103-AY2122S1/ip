@@ -1,10 +1,10 @@
-package Duke;
+package Wonderland;
 
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.task.Todo;
+import Wonderland.task.Deadline;
+import Wonderland.task.Event;
+import Wonderland.task.Task;
+import Wonderland.task.TaskList;
+import Wonderland.task.Todo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -76,7 +76,7 @@ public class Storage {
     /**
      * Update tasks record in fixed file.
      *
-     * @param tasks Duke.Duke.task.TaskList of existing tasks.
+     * @param tasks Wonderland.Wonderland.task.TaskList of existing tasks.
      * @throws IOException
      */
     public void writeToFile(TaskList tasks) throws IOException {

@@ -1,6 +1,6 @@
-import Duke.DukeException;
-import Duke.Keyword;
-import Duke.Parser;
+import Wonderland.DukeException;
+import Wonderland.Keyword;
+import Wonderland.Parser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

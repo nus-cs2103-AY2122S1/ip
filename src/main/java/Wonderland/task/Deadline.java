@@ -1,10 +1,10 @@
-package Duke.task;
+package Wonderland.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Duke.Duke.task.Deadline class extends Duke.Duke.task.Task class and encapsulate a deadline Duke.Duke.task
+ * The Wonderland.Wonderland.task.Deadline class extends Wonderland.Wonderland.task.Task class and encapsulate a deadline Wonderland.Wonderland.task
  * that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
@@ -23,9 +23,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string for saving deadline Duke.Duke.task to data file.
+     * Returns string for saving deadline Wonderland.Wonderland.task to data file.
      *
-     * @return string for saving deadline Duke.Duke.task to data file.
+     * @return string for saving deadline Wonderland.Wonderland.task to data file.
      */
     @Override
     public String toFileEntry() {

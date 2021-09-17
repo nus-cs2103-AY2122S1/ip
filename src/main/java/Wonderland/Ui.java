@@ -1,4 +1,4 @@
-package Duke;
+package Wonderland;
 
 public class Ui {
     private static final String GREET_MESSAGE = "Welcome to Wonderland! What do you want?\n\t" +
@@ -41,7 +41,7 @@ public class Ui {
     /**
      * Prints message for missing date in proper format.
      *
-     * @param keyword Duke.Keyword to show which message to print.
+     * @param keyword Wonderland.Keyword to show which message to print.
      */
     public static void missingDate(Keyword keyword) {
         if (keyword.equals(Keyword.EVENT)) {
