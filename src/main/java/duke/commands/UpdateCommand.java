@@ -15,7 +15,7 @@ public class UpdateCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        String response = "";
+        String response;
         if (commands.matches("\\d+")) {
             Task item = tasks.getItem(Integer.parseInt(commands) - 1);
             if (item != null) {

@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes task from tasklist and storage and returns string
+     * Deletes task from TaskList and storage and returns string
      * format of deleted task.
      * @param location index to be deleted.
      * @param tasks TaskList of tasks to be updated.
@@ -59,7 +59,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException when there is an invalid index.
      */
     private String deleteTask(int location, TaskList tasks, Storage storage) throws DukeException {
-        String response = "";
+        String response;
         int index = location - 1;
         if (index >= 0 && index < tasks.getLength()) {
             Task task = tasks.deleteTask(index);

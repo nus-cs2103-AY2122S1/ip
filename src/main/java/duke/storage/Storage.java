@@ -25,7 +25,7 @@ public class Storage {
     }
 
     /**
-     * Loads the tasklist stored in text format in the user's hard drive when Duke is run.
+     * Loads the TaskList stored in text format in the user's hard drive when Duke is run.
      *
      * @return Arraylist of task objects loaded from the file stored on the hard drive.
      * @throws DukeException
@@ -57,8 +57,8 @@ public class Storage {
     /**
      * Initialise Task object and adds it to the arraylist.
      *
-     * @param taskDetails
-     * @param listOfTasks
+     * @param taskDetails information on a particular task.
+     * @param listOfTasks ArrayList of tasks to be returned by load().
      */
     private void initialiseTask(String[] taskDetails, ArrayList<Task> listOfTasks) {
         Task t;
@@ -89,7 +89,7 @@ public class Storage {
     /**
      * Updates the txt file containing the list of tasks.
      *
-     * @param l current tasklist that would be saved in the txt file.
+     * @param l current TaskList that would be saved in the txt file.
      */
     public static void updateFile(TaskList l) {
         try {

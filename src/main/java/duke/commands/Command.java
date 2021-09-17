@@ -23,9 +23,9 @@ public abstract class Command {
     /**
      * Executes the user's command.
      *
-     * @param tasks Current tasklist.
+     * @param tasks Current TaskList.
      * @param storage Storage object which updates the local file.
-     * @throws DukeException
+     * @throws DukeException when user input is incorrect.
      */
     public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 }

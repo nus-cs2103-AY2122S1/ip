@@ -1,3 +1,6 @@
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,10 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,8 +23,8 @@ public class MainWindow extends AnchorPane {
     private ArchDuke duke;
     private boolean isExit = false;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpeg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpeg"));
 
     /**
      * Initialises MainWindow page.
@@ -52,9 +51,9 @@ public class MainWindow extends AnchorPane {
         }
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        String[] dukeResponse = response.split(" ");
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
         // checks if error message thrown
+        String[] dukeResponse = response.split(" ");
         DialogBox dukeDialog;
         if (dukeResponse[0].equals("☹")) {
             dukeDialog = DialogBox.getErrorDialog(response, dukeImage);
@@ -67,7 +66,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        // prints bye message and close app
+        // prints goodbye message and close app
         if (response.equals("Bye. Hope to see you again soon!")) {
             isExit = true;
             exit();
@@ -92,7 +91,7 @@ public class MainWindow extends AnchorPane {
     /**
      * generates welcome message when app is loaded.
      *
-     * @return Weclome message.
+     * @return Welcome message.
      */
     public String showWelcome() {
         String name = "ARCHDUKE!";

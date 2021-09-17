@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Completes the tasl by setting completed to true
+     * Completes the task by setting completed to true
      *
      * @return String that states that the task has been completed
      */

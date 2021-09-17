@@ -6,19 +6,27 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     private LocalDate at;
+    private boolean isTimeIncluded;
 
     /**
      * Constructor for Event.
      *
      * @param input event title.
      * @param at date/time of event.
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException if date format is incorrect.
      */
 
     public Event(String input, String at) throws DateTimeParseException {
         super(input);
         int space = at.indexOf(" ");
-        String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy";
+        String format;
+        if (space > 0) {
+            format = "d/MM/yyyy HHmm";
+            isTimeIncluded = true;
+        } else {
+            format = "d/MM/yyyy";
+            isTimeIncluded = false;
+        }
         this.at = LocalDate.parse(at.trim(), DateTimeFormatter.ofPattern(format));
         if (this.at.isBefore(LocalDate.now())) {
             super.completeItem();
@@ -37,6 +45,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + "(at: " + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        String format = isTimeIncluded ? "MMM dd yyyy HH:mm" : "MMM dd yyyy";
+        return "[E] " + super.toString() + "(at: " + this.at.format(DateTimeFormatter.ofPattern(format)) + ")";
     }
 }

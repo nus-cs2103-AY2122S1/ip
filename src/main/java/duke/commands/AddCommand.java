@@ -12,6 +12,8 @@ import duke.task.ToDo;
 public class AddCommand extends Command {
     private TaskType type;
     private String commands;
+    private Storage storage;
+    private TaskList tasks;
 
     /**
      * Constructor for AddCommand object.
@@ -26,16 +28,18 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+        this.storage = storage;
+        this.tasks = tasks;
         String response = "";
         switch (type) {
         case TO_DO: {
-            return addToDo(storage, tasks);
+            return addToDo();
         }
         case DEADLINE: {
-            return addDeadline(storage, tasks);
+            return addDeadline();
         }
         case EVENT: {
-            return addEvent(storage, tasks);
+            return addEvent();
         }
         default: {
             return response;
@@ -43,7 +47,7 @@ public class AddCommand extends Command {
         }
     }
 
-    private String addToDo(Storage storage, TaskList tasks) throws DukeException {
+    private String addToDo() throws DukeException {
         if (commands.length() > 0) {
             ToDo td = new ToDo(commands);
             tasks.addToList(td);
@@ -54,7 +58,7 @@ public class AddCommand extends Command {
         }
     }
 
-    private String addDeadline(Storage storage, TaskList tasks) throws DukeException {
+    private String addDeadline() throws DukeException {
         if (commands.length() > 0) {
             try {
                 String[] details = commands.split("/by ");
@@ -75,7 +79,7 @@ public class AddCommand extends Command {
         }
     }
 
-    private String addEvent(Storage storage, TaskList tasks) throws DukeException {
+    private String addEvent() throws DukeException {
         if (commands.length() > 0) {
             try {
                 String[] details = commands.split("/at ");

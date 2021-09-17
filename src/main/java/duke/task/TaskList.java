@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Adds new task to tasklist.
+     * Adds new task to TaskList.
      *
      * @param input task to be added.
      */
@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a particualr task from the list.
+     * Deletes a particular task from the list.
      *
      * @param index index of a particular task.
      * @return deleted task.
@@ -63,9 +63,9 @@ public class TaskList {
     }
 
     /**
-     * Formats the tasks and the tasklist as a whole into a string form that will be stored on the users' hard drive
+     * Formats the tasks and the TaskList as a whole into a string form that will be stored on the users' hard drive
      *
-     * @return String representation of all the tasks in the tasklist.
+     * @return String representation of all the tasks in the TaskList.
      */
     public String format() {
         String x = "";
@@ -76,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieves tasks form the tasklist that have the same date as the input.
+     * Retrieves tasks form the TaskList that have the same date as the input.
      *
      * @param date Date of tasks to be searched for
      * @return array of tasks that are on the same date as the inputted date.
@@ -86,8 +86,8 @@ public class TaskList {
         try {
             LocalDate search = LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
             // use stream filter function to find results based on inputted date
-            Task[] filtered = this.list.stream().filter(task -> task.compareDate(search)).toArray(Task[]::new);
-            return filtered;
+            return this.list.stream().filter(task -> task.compareDate(search)).toArray(Task[]::new);
+
         } catch (DateTimeParseException e) {
             throw new DukeException("☹ OOPS!!! Invalid date format");
         }
@@ -101,12 +101,14 @@ public class TaskList {
      */
     public Task[] findByKeyword(String search) {
         // use stream filter function to find results based on keyword
-        Task[] filtered = this.list.stream().filter(task -> task.compareKeyword(search)).toArray(Task[]::new);
-        return filtered;
+        return this.list.stream().filter(task -> task.compareKeyword(search)).toArray(Task[]::new);
     }
 
     @Override
     public String toString() {
+        if (list.isEmpty()) {
+            return "No tasks added yet!";
+        }
         String l = "Here are the tasks on your list:";
         for (Task s : list) {
             l += "\n" + (list.indexOf(s) + 1) + ". " + s;

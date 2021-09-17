@@ -26,10 +26,10 @@ public class FindCommand extends Command {
         try {
             switch (type) {
             case FIND_BY_DATE: {
-                return findByDate(tasks, storage);
+                return findByDate(tasks);
             }
             case FIND: {
-                return findByKeyword(tasks, storage);
+                return findByKeyword(tasks);
             }
             default: {
                 return "";
@@ -41,7 +41,7 @@ public class FindCommand extends Command {
 
     }
 
-    private String findByDate(TaskList tasks, Storage storage) throws DukeException {
+    private String findByDate(TaskList tasks) throws DukeException {
         String response = "Here are the tasks on that date:\n";
         try {
             Task[] tasksOnDate = tasks.tasksOnDate(commands);
@@ -54,7 +54,7 @@ public class FindCommand extends Command {
         return response;
     }
 
-    private String findByKeyword(TaskList tasks, Storage storage) {
+    private String findByKeyword(TaskList tasks) {
         String response = "Here are the matching results:\n";
         Task[] searchResults = tasks.findByKeyword(commands);
         for (Task task : searchResults) {
