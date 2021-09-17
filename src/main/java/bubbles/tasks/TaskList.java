@@ -363,7 +363,7 @@ public class TaskList {
                             Clock cl = Clock.systemUTC();
 
                             LocalDate now = LocalDate.now(cl);
-                            LocalDate limit = now.plusDays(7);
+                            LocalDate limit = now.plusDays(8);
 
                             LocalDate taskDate = task.getDate();
 

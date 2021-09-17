@@ -1,3 +1,4 @@
 D | 1 | sign the form | by 2021-09-15
 E | 0 | birthday dinner | at 2021-09-22
 T | 0 | buy groceries
+E | 0 | hot pot celebration | at 2021-09-21
