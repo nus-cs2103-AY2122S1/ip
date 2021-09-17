@@ -16,7 +16,7 @@ Try it out [here](https://github.com/ykwei7/ip/releases/download/A-Release/duke.
  - Existing tasks can be filtered via their task names or their tagged categories. 
  
 3. **List** tasks
-  -Provides an overview of all tasks and their current status.
+ - Provides an overview of all tasks and their current status.
 
 ## Usage
 
@@ -88,7 +88,15 @@ Usage: `list`
 
 Displays all the task alongside their completion status.
 
+<hr />
 
+### Exit/Save 
+
+- #### `bye` - Exits program and saves tasklist to local memory
+
+Usage: `bye`
+
+Tasklist is stored in local memory
 
 
 
