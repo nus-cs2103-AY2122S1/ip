@@ -79,7 +79,6 @@ Here are the tasks in your list:
 
 ###Secret command
 Duke has a **secret command** which is up to you to figure out!</br>
-#####FAQ
 >Q: *How do I get started?* </br>
 A: Try out each of the commands until you see something suspicious! </br></br>
 Q: *What's this secret command useful for?* </br>
