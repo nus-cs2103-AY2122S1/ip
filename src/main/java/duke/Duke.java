@@ -94,8 +94,9 @@ public class Duke {
         return Duke.state.peek();
     }
 
-    public static void deleteLastState() {
+    public static void deleteLastState() throws DukeException {
         Duke.state.pop();
+        Storage.saveToFile();
     }
 
     public static int stateSize() {
