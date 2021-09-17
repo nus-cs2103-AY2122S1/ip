@@ -161,9 +161,9 @@ Syntax: `update + { task's index number } + { full syntax for either todo, deadl
 
 Example of usage: 
 
-`update 1 todo run at least 3km`
-`update 2 event CS2103T Lecture /at 2021-09-17`
-`update 3 deadline CS2103T IP submission /by 2021-09-18`
+- `update 1 todo run at least 3km`
+- `update 2 event CS2103T Lecture /at 2021-09-17`
+- `update 3 deadline CS2103T IP submission /by 2021-09-18`
 
 Expected outcome: The task given at the specified index number is changed accordingly to the new task
 
