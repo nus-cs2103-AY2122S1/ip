@@ -1,6 +1,6 @@
-package duke.ui;
+package duke.ui.graphical;
 
-import duke.DialogBox;
+import duke.ui.Ui;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
