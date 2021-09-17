@@ -9,30 +9,32 @@ Duke is a cute todo app that helps you manage tasks.
 
 ## Features
 
-###Add tasks
+### Add tasks
 Duke supports 3 kinds of tasks: *Todos*, *Events* and *Deadlines*. After being added, tasks
 are displayed in the following format: </br>
 ```[Task type][Completion status] Task details``` </br></br>
 For instance, </br>
 ```[T][X] wash the dishes``` indicates the task is a ```todo``` that has been marked as done.
 
-####Add a Todo task
+#### Add a Todo task
 - ```todo``` tasks are tasks which are not time-sensitive. To add one,
 say ```todo [task description]```
 - You can replace ```todo``` with ```t```.
 - E.g. ```t wash the dishes```
-####Add an Event task
+
+#### Add an Event task
 - ```event``` tasks are tasks with a specific date and time. To add one,
   say  </br> ```event [event name] /at [yyyy-mm-dd HH_MM]```
 - You can replace ```event``` with ```e```.
 - E.g. ```e CS3241 finals /at 2021-12-01 13:00```
-####Add a Deadline task
+
+#### Add a Deadline task
 - ```deadline``` tasks are due on a specific date. To add one,
   say  </br> ```deadline [deadline name] /by [yyyy-mm-dd]```
 - You can replace ```deadline``` with ```dl```.
 - E.g. ```dl catch up on CS3241 /by 2021-09-26```
 
-###List tasks
+### List tasks
 - List all tasks in your task list by saying ```list```
 - You can replace ```list``` with ```ls``` </br>
 - Example outcome:
@@ -77,13 +79,13 @@ Here are the tasks in your list:
 ### View supported commands
 - Say ```help``` to see all supported commands.
 
-###Secret command
+### Secret command
 Duke has a **secret command** which is up to you to figure out!</br>
 >Q: *How do I get started?* </br>
 A: Try out each of the commands until you see something suspicious! </br></br>
 Q: *What's this secret command useful for?* </br>
 A: Absolutely nothing
 
-##Acknowledgements
+## Acknowledgements
 Duke is made for entertainment purposes only. All image and GIF rights go to San-X.
 </br> Images and GIFs used can be found [here](https://www.line-stickers.com/corocoro-coronya/).
