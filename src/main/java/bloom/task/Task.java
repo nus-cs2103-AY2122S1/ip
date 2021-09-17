@@ -73,4 +73,11 @@ public abstract class Task {
     }
 
     public abstract LocalDateTime getDate();
+
+    /**
+     * Prints date of a task.
+     *
+     * @return a string date of format MMM dd yyyy
+     */
+    protected abstract String printDate();
 }

@@ -28,7 +28,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + printDate() + ")";
     }
 
     /**
@@ -43,5 +43,23 @@ public class Deadline extends Task {
 
     public LocalDateTime getDate() {
         return by;
+    }
+
+    /**
+     * Prints date of a deadline.
+     *
+     * @return a string date of format MMM dd yyyy
+     */
+    @Override
+    public String printDate() {
+        int y = by.getYear();
+        int m = by.getMonthValue();
+        int d = by.getDayOfMonth();
+
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        String month = months[m - 1];
+
+        return month + " " + d + " " + y;
     }
 }

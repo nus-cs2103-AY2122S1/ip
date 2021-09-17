@@ -82,8 +82,14 @@ public class Parser {
         String time = parse[1];
 
         int[] separators = new int[2];
-        separators[0] = date.indexOf("/");
-        separators[1] = date.indexOf("/", separators[0] + 1);
+        char separator;
+        if (dateInput.contains("-")) {
+            separator = '-';
+        } else { // assumes separator can be '-' or '/' only
+            separator = '/';
+        }
+        separators[0] = date.indexOf(separator);
+        separators[1] = date.indexOf(separator, separators[0] + 1);
         String y = date.substring(separators[1] + 1);
         String m = date.substring(separators[0] + 1, separators[1]);
         String d = date.substring(0, separators[0]);

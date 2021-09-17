@@ -37,4 +37,14 @@ public class ToDo extends Task {
     public LocalDateTime getDate() {
         return null;
     }
+
+    /**
+     * Prints date of a deadline.
+     *
+     * @return a null string
+     */
+    @Override
+    public String printDate() {
+        return null;
+    }
 }

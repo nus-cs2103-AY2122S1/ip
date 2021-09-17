@@ -28,7 +28,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + printDate() + ")";
     }
 
     /**
@@ -41,7 +41,26 @@ public class Event extends Task {
         return "E | " + super.toDb() + " | " + this.at;
     }
 
+
     public LocalDateTime getDate() {
         return at;
+    }
+
+    /**
+     * Prints date of an event.
+     *
+     * @return a string date of format MMM dd yyyy
+     */
+    @Override
+    public String printDate() {
+        int y = at.getYear();
+        int m = at.getMonthValue();
+        int d = at.getDayOfMonth();
+
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        String month = months[m - 1];
+
+        return month + " " + d + " " + y;
     }
 }
