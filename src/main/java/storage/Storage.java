@@ -13,8 +13,6 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-
-
 /**
  * Storage class allows access to the local storage file that contains the data saved.
  * Filepath to the local file is required.
@@ -43,25 +41,7 @@ public class Storage {
     public ArrayList<Task> load() throws InvalidDateFormat {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(new File(filePath));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] output = line.split("\\s\\|\\s");
-                switch (output[0]) {
-                case "T":
-                    loadTodo(taskList, output);
-                    break;
-                case "D":
-                    loadDeadline(taskList, output);
-                    break;
-                case "E":
-                    loadEvent(taskList, output);
-                    break;
-                default:
-                    System.out.println("Detected invalid task type. Please check...");
-                    break;
-                }
-            }
+            processFileByLine(taskList);
         } catch (FileNotFoundException e) {
             File directory = new File("data");
             if (!directory.exists()) {
@@ -70,6 +50,28 @@ public class Storage {
             writeToFile("data/tasks.txt", "");
         }
         return taskList;
+    }
+
+    private void processFileByLine(ArrayList<Task> taskList) throws InvalidDateFormat, FileNotFoundException {
+        Scanner scanner = new Scanner(new File(filePath));
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] output = line.split("\\s\\|\\s");
+            switch (output[0]) {
+            case "T":
+                loadTodo(taskList, output);
+                break;
+            case "D":
+                loadDeadline(taskList, output);
+                break;
+            case "E":
+                loadEvent(taskList, output);
+                break;
+            default:
+                System.out.println("Detected invalid task type. Please check...");
+                break;
+            }
+        }
     }
 
     private void loadTodo(ArrayList<Task> taskList, String[] output) {
