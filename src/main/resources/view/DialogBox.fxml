@@ -14,6 +14,13 @@
         <font>
             <Font name="Courier New" size="12"/>
         </font>
+        <padding>
+            <Insets left="20.0" right="20.0"/>
+        </padding>
     </Label>
-    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+        <HBox.margin>
+            <Insets left="5.0" right="5.0"/>
+        </HBox.margin>
+    </ImageView>
 </fx:root>
