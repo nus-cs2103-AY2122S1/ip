@@ -78,10 +78,10 @@ public class TaskList {
 
     }
     /**
-     * Finds blitz.tasks which contain the given keyword.
+     * Finds tasks which contain the given keyword.
      *
      * @param keyword specifies keyword to be searched for.
-     * @return list of blitz.tasks that contain the given keyword.
+     * @return list of tasks that contain the given keyword.
      */
     public TaskList findMatchingTasks(String keyword) throws BlitzException {
         if (size() == 0) {

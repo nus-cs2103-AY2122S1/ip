@@ -117,7 +117,7 @@ public class Parser {
      * required action.
      *
      * @param command command entered by the user.
-     * @param tasks current list of blitz.tasks
+     * @param tasks current list of tasks
      *
      */
     public static String parseCommand(String command, TaskList tasks, Ui ui) {

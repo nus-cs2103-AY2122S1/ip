@@ -25,7 +25,7 @@ public class Storage {
     /**
      * Loads contents from the file and stores data in a list.
      *
-     * @return list containing blitz.tasks from the file.
+     * @return list containing tasks from the file.
      */
     public ArrayList<Task> loadFileContents() throws BlitzException {
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -69,9 +69,9 @@ public class Storage {
     }
 
     /**
-     * Saves the updates list of blitz.tasks to the file.
+     * Saves the updates list of tasks to the file.
      *
-     * @param tasks list of blitz.tasks to be saved onto the file.
+     * @param tasks list of tasks to be saved onto the file.
      * @throws IOException if the program cannot create or
      *     write to the file indicated.
      */

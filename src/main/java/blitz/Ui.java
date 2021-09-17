@@ -1,14 +1,15 @@
 package blitz;
 
 public class Ui {
-    private static String greetingMessage = "Hola! I'm blitz.Blitz :)"
+    
+    private static String greetingMessage = "Hola! I'm Blitz :)"
             + "\nHere are the tasks in your list:";
     private static String goodbyeMessage = "Adiós. Hope to see you again soon!"
             + "\n\n--Press enter to exit application--";
     private static String loadErrorMessage = "Error loading contents from file!!";
     private static String commandNotFoundMessage = "Sorry, but I don't know what that means :-(";
-    private static String listMessage = "Here are the blitz.tasks in your list:";
-    private static String matchingListMessage = "Here are the matching blitz.tasks in your list:";
+    private static String listMessage = "Here are the tasks in your list:";
+    private static String matchingListMessage = "Here are the matching tasks in your list:";
     private static String incorrectDateTimeFormatMessage = "Incorrect date/time format! Please enter "
             + "deadline date/time in \"d M yyyy HHmm\" format";
     private static String invalidCommandFormatMessage = "Invalid command format!!";
@@ -55,19 +56,19 @@ public class Ui {
     }
 
     /**
-     * Returns message to be displayed before printing the list of blitz.tasks.
+     * Returns message to be displayed before printing the list of tasks.
      *
-     * @return message to be displayed before printing the list of blitz.tasks.
+     * @return message to be displayed before printing the list of tasks.
      */
     public static String getListMessage() {
         return listMessage;
     }
 
     /**
-     * Returns message to be displayed before printing the list of blitz.tasks matching
+     * Returns message to be displayed before printing the list of tasks matching
      * a given keyword.
      *
-     * @return message to be displayed before printing the list of blitz.tasks matching
+     * @return message to be displayed before printing the list of tasks matching
      *     a given keyword.
      */
     public static String getMatchingListMessage() {
@@ -109,13 +110,13 @@ public class Ui {
     }
 
     /**
-     *
-     * @param firstKeyword
-     * @return
+     * Displays syntax and use of given command
+     * @param command command to seek help for
+     * @return syntax and use of given command
      */
-    public String help(String firstKeyword) {
+    public String help(String command) {
         String helpMessage = "Syntax: ";
-        switch (firstKeyword) {
+        switch (command) {
         case "list":
             helpMessage = helpMessage.concat("list\nWhat it does: displays list of existing tasks.");
             break;
@@ -130,7 +131,8 @@ public class Ui {
                     + "tasks containing the given keyword.");
             break;
         case "todo" :
-            helpMessage = helpMessage.concat("todo <task name>\nWhat it does: adds a todo task with the given name.");
+            helpMessage = helpMessage.concat("todo <task name>\nWhat it does: adds a todo task "
+                    + "with the given name.");
             break;
         case "deadline":
             helpMessage = helpMessage.concat("deadline <task name> /by <date> <time>\nWhat it does: "
@@ -148,10 +150,6 @@ public class Ui {
         return helpMessage;
     }
 
-    /**
-     *
-     * @return
-     */
     public static String getHelpPrompt() {
         return helpPrompt;
     }
