@@ -150,7 +150,7 @@ Shows updated task.
 
 ```
 Task 2 has been successfully edited to:
-	[D][X] Submit 2103 quiz /date 20-01-2020 14:20 (by: 20 Jan 2020 02:20 PM)
+	[D][X] Submit 2103 quiz (by: 20 Jan 2020 02:20 PM)
 ```
 
 ### `delete` - Delete Task
@@ -171,7 +171,7 @@ Shows deleted task and total number of tasks after deletion.
 
 ```
 Noted. I've removed this task:
-	[D][X] Submit 2103 quiz /date 20-01-2020 14:20 (by: 20 Jan 2020 02:20 PM)
+	[D][X] Submit 2103 quiz (by: 20 Jan 2020 02:20 PM)
 Now you have 8 tasks in the list.
 ```
 
