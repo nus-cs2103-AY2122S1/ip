@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Command {
 
     /**
-     * Method to add a task to our list.
+     * Add a task to the list.
      * @param task The string of the task.
      * @param type The type of the task: event, deadline, or other type.
      */
@@ -24,8 +24,8 @@ public class Command {
     }
 
     /**
-     * Method to check the task off as done in the list.
-     * @param taskNumber The number of the task in our list.
+     * Check task off as done in the list.
+     * @param taskNumber index of task in list.
      */
     public static String doneTask(int taskNumber, List<Task> tasks) {
         taskNumber--;
@@ -38,8 +38,8 @@ public class Command {
     }
 
     /**
-     * Method to delete the task from the list.
-     * @param taskNumber The number of the task in our list.
+     * Delete task from the list.
+     * @param taskNumber index of task in list.
      */
     public static String deleteTask(int taskNumber, List<Task> tasks) {
         taskNumber--;

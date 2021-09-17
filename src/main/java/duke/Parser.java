@@ -29,22 +29,20 @@ public class Parser {
             if (tokens.length < 3) {
                 throw new FileParseErrorException();
             }
-            Boolean done = false;
-
+            Boolean isDone = false;
             if (tokens[1].equals("0")) {
-                done = false;
+                isDone = false;
             } else if (tokens[1].equals("1")) {
-                done = true;
+                isDone = true;
             } else {
                 throw new FileParseErrorException();
             }
-
             if (tokens[0].equals("D") && tokens.length == 4) {
-                loadDeadlineTask(tokens, finalTasks, done);
+                loadDeadlineTask(tokens, finalTasks, isDone);
             } else if (tokens[0].equals("E") && tokens.length == 4) {
-                loadEventTask(tokens, finalTasks, done);
+                loadEventTask(tokens, finalTasks, isDone);
             } else if (tokens[0].equals("T") && tokens.length == 3) {
-                loadTodoTask(tokens, finalTasks, done);
+                loadTodoTask(tokens, finalTasks, isDone);
             } else {
                 throw new FileParseErrorException();
             }
@@ -52,27 +50,27 @@ public class Parser {
         return finalTasks;
     }
 
-    private static void loadTodoTask(String[] tokens, List<Task> tasks, Boolean done) {
+    private static void loadTodoTask(String[] tokens, List<Task> tasks, Boolean isDone) {
         Type type = Type.TODO;
         String interpretedString = tokens[2];
         LocalDateTime localDateTime = null;
-        Task task = TaskList.initialiseByType(interpretedString, type, done, localDateTime);
+        Task task = TaskList.initialiseByType(interpretedString, type, isDone, localDateTime);
         tasks.add(task);
     }
 
-    private static void loadDeadlineTask(String[] tokens, List<Task> tasks, Boolean done) {
+    private static void loadDeadlineTask(String[] tokens, List<Task> tasks, Boolean isDone) {
         Type type = Type.DEADLINE;
         String interpretedString = tokens[2];
         LocalDateTime localDateTime = parseDate(tokens[3]);
-        Task task = TaskList.initialiseByType(interpretedString, type, done, localDateTime);
+        Task task = TaskList.initialiseByType(interpretedString, type, isDone, localDateTime);
         tasks.add(task);
     }
 
-    private static void loadEventTask(String[] tokens, List<Task> tasks, Boolean done) {
+    private static void loadEventTask(String[] tokens, List<Task> tasks, Boolean isDone) {
         Type type = Type.EVENT;
         String interpretedString = tokens[2];
         LocalDateTime localDateTime = parseDate(tokens[3]);
-        Task task = TaskList.initialiseByType(interpretedString, type, done, localDateTime);
+        Task task = TaskList.initialiseByType(interpretedString, type, isDone, localDateTime);
         tasks.add(task);
     }
 
@@ -97,8 +95,7 @@ public class Parser {
      */
     public static String interpretInput(String input, List<Task> tasks) throws DukeException {
         String response = "";
-        // Use Java Assertions to check for unacceptable commands
-        Boolean valid = true;
+        Boolean isValid = true;
         Storage.createFile();
         try {
             if (input.equals("bye")) {
@@ -109,14 +106,11 @@ public class Parser {
                 response = helloResponse();
             } else if (input.startsWith("done ")) {
                 response = doneResponse(input, tasks);
-            } else if (input.startsWith(addWhiteSpace(TODO_STRING))
-                    || (input.startsWith(TODO_STRING))) {
+            } else if (input.startsWith(addWhiteSpace(TODO_STRING)) || (input.startsWith(TODO_STRING))) {
                 response = todoResponse(input, tasks);
-            } else if (input.startsWith(addWhiteSpace(DEADLINE_STRING))
-                    || (input.startsWith(DEADLINE_STRING))) {
+            } else if (input.startsWith(addWhiteSpace(DEADLINE_STRING)) || (input.startsWith(DEADLINE_STRING))) {
                 response = deadlineResponse(input, tasks);
-            } else if (input.startsWith(addWhiteSpace(EVENT_STRING))
-                    || input.startsWith(EVENT_STRING)) {
+            } else if (input.startsWith(addWhiteSpace(EVENT_STRING)) || input.startsWith(EVENT_STRING)) {
                 response = eventResponse(input, tasks);
             } else if (input.startsWith("delete ")) {
                 response = deleteResponse(input, tasks);
@@ -126,10 +120,9 @@ public class Parser {
                     || input.startsWith("sort deadlines and events")) {
                 response = sortResponse(tasks);
             } else {
-                valid = false;
+                isValid = false;
             }
-            assert valid : "COMMAND NOT FOUND";
-
+            assert isValid : "COMMAND NOT FOUND";
             writeToStorage(tasks);
             System.out.println(response);
             return response;

@@ -34,17 +34,17 @@ public class TaskList {
      * Initialise event subclass by type.
      * @param task duke.Task string.
      * @param type duke.Type enum.
-     * @param done Whether task is done or not Bool.
+     * @param isDone Whether task is done or not Bool.
      * @param localDateTime Datetime object.
      * @return duke.Task of requisite type.
      */
-    public static Task initialiseByType(String task, Type type, Boolean done, LocalDateTime localDateTime) {
+    public static Task initialiseByType(String task, Type type, Boolean isDone, LocalDateTime localDateTime) {
         if (type == Type.TODO) {
-            return new Todo(task, type, done);
+            return new Todo(task, type, isDone);
         } else if (type == Type.EVENT) {
-            return new Event(task, type, done, localDateTime);
+            return new Event(task, type, isDone, localDateTime);
         } else {
-            return new Deadline(task, type, done, localDateTime);
+            return new Deadline(task, type, isDone, localDateTime);
         }
     }
 

@@ -9,7 +9,7 @@ public abstract class Task {
     private String task;
 
     /** The done status of the task */
-    private Boolean done;
+    private Boolean isDone;
 
     /** The type of the task, defined by the enum duke.Type */
     private Type type;
@@ -24,7 +24,7 @@ public abstract class Task {
      */
     public Task(String task, Type type) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
         this.type = type;
         this.datetime = null;
     }
@@ -33,11 +33,11 @@ public abstract class Task {
      * Constructor with 3 params
      * @param task Task string.
      * @param type Type enum.
-     * @param done Boolean done.
+     * @param isDone Boolean done.
      */
-    public Task(String task, Type type, Boolean done) {
+    public Task(String task, Type type, Boolean isDone) {
         this.task = task;
-        this.done = done;
+        this.isDone = isDone;
         this.type = type;
         this.datetime = null;
     }
@@ -46,12 +46,12 @@ public abstract class Task {
      * Constructor with 3 params
      * @param task Task string.
      * @param type Type enum.
-     * @param done Boolean done.
+     * @param isDone Boolean done.
      * @param datetime Datetime datetime.
      */
-    public Task(String task, Type type, Boolean done, LocalDateTime datetime) {
+    public Task(String task, Type type, Boolean isDone, LocalDateTime datetime) {
         this.task = task;
-        this.done = done;
+        this.isDone = isDone;
         this.type = type;
         this.datetime = null;
     }
@@ -61,7 +61,7 @@ public abstract class Task {
      */
     public Task() {
         this.task = "";
-        this.done = false;
+        this.isDone = false;
         this.type = Type.TODO;
         this.datetime = null;
     }
@@ -71,15 +71,15 @@ public abstract class Task {
      * @return Boolean about whether the task is done.
      */
     public Boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
      * Setter to set the task as done or not done.
-     * @param done Boolean about whether the task is done.
+     * @param isDone Boolean about whether the task is done.
      */
-    public void setDone(Boolean done) {
-        this.done = done;
+    public void setDone(Boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**

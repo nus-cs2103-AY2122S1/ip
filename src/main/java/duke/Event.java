@@ -8,11 +8,11 @@ public class Event extends Task {
      * Constructor to initialise the task.
      * @param task The task itself.
      * @param type The type of the task defined by the enum duke.Type.
-     * @param done The status of the task.
+     * @param isDone The status of the task.
      * @param datetime The time for task.
      */
-    public Event(String task, Type type, Boolean done, LocalDateTime datetime) {
-        super(task, type, done, datetime);
+    public Event(String task, Type type, Boolean isDone, LocalDateTime datetime) {
+        super(task, type, isDone, datetime);
         this.setDatetime(datetime);
     }
 
