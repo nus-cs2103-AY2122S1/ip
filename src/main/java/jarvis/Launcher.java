@@ -14,6 +14,7 @@ public class Launcher {
     public static void main(String... args) {
         if (args.length == 0) {
             Launcher.launchGui();
+            return;
         }
 
         switch (args[0].toLowerCase()) {
