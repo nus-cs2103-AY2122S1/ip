@@ -7,6 +7,7 @@ capable of keeping track of tasks and contacts given by the user.
 
 
 * [Features](#features)
+* [Usage](#usage)
     * [Help](#help-help)
     * [Adding a ToDo](#adding-a-todo-todo)
     * [Adding an Event](#adding-an-event-event)
