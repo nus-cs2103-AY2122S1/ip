@@ -15,7 +15,7 @@ import duke.tasks.Task;
  */
 public class DeadlineCommand extends Command {
 
-    private static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>\\S+) /by (?<by>.*)");
+    private static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>.*?) /by (?<by>.*)");
 
     private final String description;
     private final String by;

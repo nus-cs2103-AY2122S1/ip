@@ -44,9 +44,9 @@ public class MainWindow extends AnchorPane {
 
     private void showWelcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Welcome to Duke!\n"
+                DialogBox.getDukeDialog("Welcome to Duck!\n"
                         + "Please enter the tasks (todo/event/deadline) to be added to the list.\n"
-                        + "(Enter 'list' to view the list, or 'bye' to exit.)", dukeImage)
+                        + "(Enter 'list' to view the list, or 'exit' to exit.)", dukeImage)
         );
     }
 

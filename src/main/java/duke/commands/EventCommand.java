@@ -15,7 +15,7 @@ import duke.tasks.Task;
  */
 public class EventCommand extends Command {
 
-    private static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>\\S+) /at (?<at>.*)");
+    private static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>.*?) /at (?<at>.*)");
 
     private final String description;
     private final String at;
