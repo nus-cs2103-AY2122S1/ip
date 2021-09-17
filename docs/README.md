@@ -82,8 +82,6 @@ Deletes the specified task from the list.
 
 Format : `delete NUMBER`
 
-(Where NUMBER is the task number to be deleted.)
-
 Examples:
 * `delete 4`
 
