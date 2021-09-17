@@ -1,29 +1,71 @@
 # User Guide
-
+Duke is a desktop application for managing and tracking different types of tasks.
 ## Features 
 
-### Feature-ABC
+### Listing all tasks: `list`
 
-Description of the feature.
+Shows the list of tasks.
 
-### Feature-XYZ
+Format: `list`
 
-Description of the feature.
+Example: ![List Example](./images/listexample.png)
 
-## Usage
+### Adding todo task: `todo`
 
-### `Keyword` - Describe action
+Adds a todo task to the task list.
 
-Describe the action and its outcome.
+Format: `todo TASK_DESCRPTION`
 
-Example of usage: 
+Example: `todo assignment`
+![Todo Example](./images/todoexample.png)
 
-`keyword (optional arguments)`
+### Adding deadline task: `deadline`
 
-Expected outcome:
+Adds a deadline task to the task list.
 
-Description of the outcome.
+Format: `deadline TASK_DESCRPTION /by YYYY-MM-DD`
 
-```
-expected output
-```
+Example: `deadline return book /by 2021-09-20`
+![Deadline Example](./images/deadlineexample.png)
+
+### Adding event task: `event`
+
+Adds an event task to the task list.
+
+Format: `event TASK_DESCRPTION /at YYYY-MM-DD`
+
+Example: `event meeting /at 2021-09-21`
+![Event Example](./images/eventexample.png)
+
+### Marking task as done: `done`
+
+Marks the task specified by user as done.
+
+Format: `done TASK_NUMBER`
+
+Example: `done 3`
+![Done Example](./images/doneexample.png)
+
+### Deleting task: `delete`
+
+Deletes the task specified by user from list of tasks.
+
+Format: `delete TASK_NUMBER`
+
+Example: `delete 2`
+![Delete Example](./images/deleteexample.png)
+
+### Exiting duke: `bye`
+
+Exits the duke application.
+
+Format: `bye`
+
+Example:
+![Exit Example](./images/exitexample.png)
+
+### Saving the data
+
+By default, duke automatically saves the task list data into /data/duke.txt.
+
+
