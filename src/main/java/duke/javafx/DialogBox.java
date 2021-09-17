@@ -1,4 +1,4 @@
-package duke.javafx;
+package javafx;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -17,7 +17,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -48,6 +47,7 @@ public class DialogBox extends HBox {
                 new CornerRadii(5.0), Insets.EMPTY)));
         dialog.setMinSize(100, 80);
         dialog.setText(text);
+        dialog.setFont(Font.font("Arial", FontWeight.BOLD, 13));
         displayPicture.setImage(img);
     }
 
@@ -69,7 +69,7 @@ public class DialogBox extends HBox {
      * @return a dialogbox corresponding to the user
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.setFillHeight(true);
         return db;
     }
@@ -82,7 +82,7 @@ public class DialogBox extends HBox {
      * @return a dialogbox corresponding to Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         db.setFillHeight(true);
         return db;
