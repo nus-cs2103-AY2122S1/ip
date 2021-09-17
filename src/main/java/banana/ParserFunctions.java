@@ -103,4 +103,24 @@ public class ParserFunctions {
             return "";
         }
     }
+
+    /**
+     * Checks if index is in bounds
+     *
+     * @param input the user input
+     * @param size  the number of list items
+     * @return whether index is out of bounds
+     */
+    public static boolean isOutOfBounds(String input, int size) {
+        String[] splitInput = input.split(" ");
+        if (splitInput.length == 2) {
+            int index = Integer.parseInt(splitInput[1]);
+            if (index < 1 || index > size) {
+                return true;
+            }
+        } else if (splitInput.length == 1) {
+            return true;
+        }
+        return false;
+    }
 }
