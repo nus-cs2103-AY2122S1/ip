@@ -28,11 +28,15 @@ Usage: `todo TASKNAME`
 
 Creates a task of name `TASKNAME`.
 
+<hr />
+
 - #### `deadline` - Adds a task with a deadline
 
 Usage: `deadline TASKNAME /by DEADLINE`
 
 Remarks: `DEADLINE` if placed in the YYYY-MM-DD format translates to the alphabetical version.
+
+<hr />
 
 - #### `event` - Adds a task with specific event details
 
@@ -44,11 +48,15 @@ Remarks: `EVENT_DETAILS` if placed in the YYYY-MM-DD format translates to the al
 
 Creates a task of name `TASKNAME` at `EVENT_DETAILS`.
 
+<hr />
+
 - ####  `delete` - Removes the task
 
 Usage: `delete 2`
 
 Second item on the list is deleted, displays an error if second item does not exists.
+
+<hr />
 
 - #### `done` - Mark task as completed
 
@@ -56,11 +64,15 @@ Usage: `done 2`
 
 Second item on list is marked as completed, displays an error if it is already completed.
 
+<hr />
+
 - ####  `delete` - Deletes the task 
 
 Usage: `delete 2`
 
 Expected outcome: Second item on the list is deleted, displays an error if second item does not exists.
+
+<hr />
 
 ### **Search via** (task name)
 
@@ -69,6 +81,8 @@ Expected outcome: Second item on the list is deleted, displays an error if secon
 Usage: `find KEYWORD`
 
 Expected outcome: Displays all the task that include `KEYWORD` in their task name.
+
+<hr />
 
 ### List 
 
