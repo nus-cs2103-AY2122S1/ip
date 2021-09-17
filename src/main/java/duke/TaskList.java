@@ -68,10 +68,10 @@ public class TaskList {
                 newTaskArray.add(new Todo(description, isDone));
                 break;
             }
-            default: { 
+            default: {
                 throw new DukeException(ERROR_UNKNOWN_FILE_COMMAND);
-            }  
-        } 
+            }
+            }
         }
         return newTaskArray;
     }
@@ -97,7 +97,7 @@ public class TaskList {
      *
      * @param newTask
      */
-    public String handleAddHelper(Task newTask) throws DukeException{
+    public String handleAddHelper(Task newTask) throws DukeException {
         taskArray.add(newTask);
         try {
             return Formatter.getResponseString(
@@ -111,7 +111,7 @@ public class TaskList {
     /**
      * Creates a Todo Task.
      *
-     * @param command
+     * @param commands
      */
     public String handleAddToDo(String[] commands) throws DukeException {
         String newTaskDescription = Formatter.getTaskName(commands);
@@ -122,7 +122,7 @@ public class TaskList {
     /**
      * Creates a deadline task.
      *
-     * @param command
+     * @param commands
      */
     public String handleAddDeadline(String[] commands) throws DukeException {
         String newTaskDescription = Formatter.getTaskName(commands);
@@ -134,7 +134,7 @@ public class TaskList {
     /**
      * Creates a event task.
      *
-     * @param command
+     * @param commands
      */
     public String handleAddEvent(String[] commands) throws DukeException {
         String newTaskDescription = Formatter.getTaskName(commands);
@@ -148,11 +148,11 @@ public class TaskList {
      *
      * @param taskIndex
      */
-    public String handleDone(int taskIndex) throws DukeException{
+    public String handleDone(int taskIndex) throws DukeException {
         try {
             Task indexedTask = this.taskArray.get(taskIndex - 1);
             String output = indexedTask.setTaskAsDone();
-            return Formatter.getResponseString(output);    
+            return Formatter.getResponseString(output);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ERROR_DONE_INVALID_INDEX);
         }
@@ -166,10 +166,10 @@ public class TaskList {
      */
     public String handleDelete(int taskIndex) throws DukeException {
         try {
-        Task deletedTask = taskArray.remove(taskIndex - 1);
-        return Formatter.getResponseString(
-            Formatter.deleteTaskString(deletedTask.toString(), Integer.toString(taskArray.size()))
-        );
+            Task deletedTask = taskArray.remove(taskIndex - 1);
+            return Formatter.getResponseString(
+                Formatter.deleteTaskString(deletedTask.toString(), Integer.toString(taskArray.size()))
+            );
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ERROR_DELETE_INVALID_INDEX);
         }
@@ -214,7 +214,7 @@ public class TaskList {
 
         return Formatter.getNumberedListResponse(MESSAGE_FIND, tasksFound);
     }
-    
+
     /**
      * Resets the arrayList of chatbot.
      */

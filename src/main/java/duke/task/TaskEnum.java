@@ -9,8 +9,8 @@ import duke.exception.DukeException;
 public enum TaskEnum {
     TODO("todo"), EVENT("event"), DEADLINE("deadline");
 
-    private final String taskType;
     private static final String ERROR_INVALID_TASK_COMMAND = "OOPS!!! This is an invalid task type.";
+    private final String taskType;
 
     TaskEnum(String taskType) {
         this.taskType = taskType;
@@ -31,5 +31,4 @@ public enum TaskEnum {
     }
 
 }
-
 //@@author

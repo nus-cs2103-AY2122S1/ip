@@ -51,11 +51,9 @@ abstract class Formatter {
     /**
      * Parses the commands for task name from user-input.
      *
-     * @param task The formatted string of a task.
-     * @param totalTasks The total number of tasks.
      * @return
      */
-    public static String getTaskName(String[] commands) throws DukeException {                
+    public static String getTaskName(String[] commands) throws DukeException {
         int indexOfDateSeparator = IntStream
             .range(0, commands.length)
             .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
@@ -71,8 +69,6 @@ abstract class Formatter {
     /**
      * Parses the commands for task date from user-input.
      *
-     * @param task The formatted string of a task.
-     * @param totalTasks The total number of tasks.
      * @return
      */
     public static String getTaskDate(String[] commands) throws DukeException {

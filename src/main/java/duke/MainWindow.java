@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final long SECOND_IN_MILLISECONDS = 1000;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -31,7 +34,6 @@ public class MainWindow extends AnchorPane {
     private Image angryBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenAngry200.png"));
     private Image sleepBotImage = new Image(this.getClass().getResourceAsStream("/images/PusheenSleep200.png"));
 
-    private static final long SECOND_IN_MILLISECONDS = 1000;
 
     @FXML
     public void initialize() {
@@ -61,7 +63,7 @@ public class MainWindow extends AnchorPane {
         String responseOutput = response.getMessage();
 
         Image botImage = response.hasError() ? angryBotImage : happyBotImage;
-        botImage = response.isTerminate() ? sleepBotImage: botImage;
+        botImage = response.isTerminate() ? sleepBotImage : botImage;
         boolean isTerminate = response.isTerminate();
 
 
@@ -70,14 +72,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (isTerminate) {
-                Timer timer = new Timer();
-                TimerTask task = new TimerTask(){
-                    @Override
-                    public void run() {
-                        System.exit(0);
-                    }
-                };
-                timer.schedule(task, SECOND_IN_MILLISECONDS * 3);
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            timer.schedule(task, SECOND_IN_MILLISECONDS * 3);
         }
     }
 }

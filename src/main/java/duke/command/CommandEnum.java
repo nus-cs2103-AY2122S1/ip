@@ -8,9 +8,9 @@ import duke.exception.DukeException;
 
 public enum CommandEnum {
 
-//@@author {FergusMok}--reused
-//{The following code is reused from Bryan Loh's repository. It is an exemplary method of implementing enums.}
-//{https://github.com/Anonymxtrix/ip/blob/master/src/main/java/duke/request/Command.java}
+    //@@author {FergusMok}--reused
+    //{The following code is reused from Bryan Loh's repository. It is an exemplary method of implementing enums.}
+    //{https://github.com/Anonymxtrix/ip/blob/master/src/main/java/duke/request/Command.java}
 
     BYE("bye"),
     LIST("list"),
@@ -24,8 +24,8 @@ public enum CommandEnum {
     DEADLINE("deadline"),
     TODO("todo");
 
-    private final String commandType;
     private static final String ERROR_INVALID_COMMAND_TYPE = "OOPS!!! This is an invalid command type.";
+    private final String commandType;
 
     CommandEnum(String commandType) {
         this.commandType = commandType;
@@ -57,5 +57,4 @@ public enum CommandEnum {
     }
 
 }
-
 //@@author

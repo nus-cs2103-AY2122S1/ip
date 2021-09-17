@@ -34,10 +34,10 @@ public class Event extends DatedTask {
         return output;
     }
 
-    @Override
     /**
      * Returns proper format to write to txt file.
      */
+    @Override
     public String toWriteString() {
         String output = COMMAND_EVENT;
         output += super.toWriteString();

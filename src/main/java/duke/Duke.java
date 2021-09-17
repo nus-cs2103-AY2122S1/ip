@@ -8,13 +8,15 @@ import duke.command.CommandEnum;
 import duke.exception.DukeException;
 
 public class Duke {
-    
+
     private static final String STORAGE_DIRECTORY = "FergusChatBot.txt";
 
-    private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded. Enter 'list' to view";
+    private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded. "
+            + "Enter 'list' to view";
     private static final String READ_FAILURE = "No saved file has been found :(";
 
-    private static final List<String> GREETING = new ArrayList<>(Arrays.asList("Hello! I'm Fergus' Chatbot!", "What can I do for you?"));
+    private static final List<String> GREETING = new ArrayList<>(
+            Arrays.asList("Hello! I'm Fergus' Chatbot!", "What can I do for you?"));
     private static final String FAREWELL = "Bye. Hope to see you again soon! The program will close in 3 seconds!";
     private static final String ERROR_UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
@@ -92,7 +94,7 @@ public class Duke {
             case HELP: {
                 message = this.taskArray.handleHelp();
                 break;
-            }    
+            }
             default: {
                 throw new DukeException(ERROR_UNKNOWN_COMMAND);
             }
