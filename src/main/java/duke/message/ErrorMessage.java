@@ -11,6 +11,7 @@ public class ErrorMessage extends DukeMessage{
         this.errMsg = errMsg;
     }
 
+    @Override
     public String createMessageString() {
         return errMsg;
     }

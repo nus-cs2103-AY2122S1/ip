@@ -20,16 +20,16 @@ public class MessageFactory {
     public static DukeMessage createMessage(String userStr) {
         try {
             if (userStr.equals("list")) {
-                return new GetTasksMessage();
+                return new GetAllTasksMessage();
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("done")) {
                 int len = userStr.length();
-                int taskIndex = userStr.charAt(len - 1) - 49;
+                int taskIndex = userStr.charAt(len - 1) - 48;
                 if (taskIndex >= TaskList.getTaskList().getTasks().size() || taskIndex < 0)
                     throw new ArrayIndexOutOfBoundsException();
                 return new CompleteTaskMessage(taskIndex);
             } else if (userStr.length() >= 6 && userStr.substring(0,6).equals("delete")) {
                 int len = userStr.length();
-                int taskIndex = userStr.charAt(len - 1) - 49;
+                int taskIndex = userStr.charAt(len - 1) - 48;
                 if (taskIndex >= TaskList.getTaskList().getTasks().size())
                     throw new ArrayIndexOutOfBoundsException();
                 return new DeleteTaskMessage(taskIndex);

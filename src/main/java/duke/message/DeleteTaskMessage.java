@@ -3,6 +3,8 @@ package duke.message;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
+
 /**
  * Represents Duke' response after a task is deleted from the list.
  */
@@ -16,11 +18,32 @@ public class DeleteTaskMessage extends DukeMessage {
                 .remove(taskIndex);
     }
 
+    /**
+     * Finds the task with a given reference id
+     */
+    private void findTask(int refId) {
+        ArrayList<Task> taskList =
+                (ArrayList<Task>) TaskList.getTaskList().getTasks();
+        for (Task task : taskList) {
+            int currTaskId = task.getRefId();
+            if (currTaskId == refId) {
+                this.deletedTask = task;
+            }
+        }
+    }
+
+    @Override
     public String createMessageString() {
-        String reply = "Theek h bhai... ye task hata diya\n"
-                + deletedTask.getTaskString()
-                + "\nAb " + TaskList.getTaskList().getSize()
-                + " tasks bache list mein.\n";
+        String reply;
+        findTask(this.taskIndex);
+        if(deletedTask != null) {
+            deletedTask.markAsDone();
+            reply = "Theek hai... ye task khatam!\n"
+                    + deletedTask.getTaskString() + "\n";
+        } else {
+            reply = "Bhai dekh ke index daal!(no such index)";
+        }
+
         return reply;
     }
 }
