@@ -13,7 +13,7 @@ public class Parser {
      * @return A command which determines how the program should react.
      */
     public ICommand getInput(String input) {
-        //String input = sc.nextLine();
+        assert(input != null && input != "");
 
         // Exit
         if (input.equals("bye")) {

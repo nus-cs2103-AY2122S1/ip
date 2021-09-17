@@ -8,7 +8,6 @@ import duke.task.Task;
 import duke.task.TaskManager;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +18,7 @@ public class DukeTest {
     ResponseManager responseManager = new ResponseManager();
 
     @Test
-    public void addEventCommandTest() {
+    public void addEventCommand_validInput_eventAdded() {
         String addEvent = "event test event /2020-02-02 20:20";
         AddEventCommand command = new AddEventCommand(addEvent);
         command.execute(tm, responseManager, storage);
@@ -28,7 +27,7 @@ public class DukeTest {
     }
 
     @Test
-    public void addDeadlineCommandTest() {
+    public void addDeadline_validInput_deadlineAdded() {
         String addDeadline = "deadline test deadline /2020-02-02 20:20";
         AddDeadlineCommand command = new AddDeadlineCommand(addDeadline);
         command.execute(tm, responseManager, storage);
@@ -37,7 +36,7 @@ public class DukeTest {
     }
 
     @Test
-    public void addToDoCommandTest() {
+    public void addToDo_valid_input_todoAdded() {
         String addDeadline = "todo test todo";
         AddToDoCommand command = new AddToDoCommand(addDeadline);
         command.execute(tm, responseManager, storage);
@@ -46,10 +45,9 @@ public class DukeTest {
     }
 
     @Test
-    public void responseManagerTest() {
+    public void testResponseManager_anyInput_correctResponseGiven() {
         TaskManager tm = new TaskManager(new ArrayList<>());
         ResponseManager rm = new ResponseManager();
-
 
         // Dummy tasks to be used for testing
         Task.ToDo dummyTodo;
@@ -111,7 +109,5 @@ public class DukeTest {
 
         assertEquals("\u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \u26A0 \n" +
                 "You don't have that many tasks!", rm.getInvalidIndexMessage());
-
     }
-
 }

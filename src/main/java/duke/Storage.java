@@ -25,6 +25,7 @@ public class Storage {
      * @param saveFileLocation A string which denotes the path to the save file.
      */
     public Storage(String saveFileLocation) {
+        assert (saveFileLocation != null && saveFileLocation != "");
         this.SAVE_FILE_LOCATION = saveFileLocation;
     }
 
