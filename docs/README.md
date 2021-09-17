@@ -14,6 +14,7 @@ its GUI or command line.
 
 ## Quick start [here](UserGuide.md#quick-start)
 
+## User Guide [here](UserGuide.md)
  
 __Acknowledgements__
 
