@@ -37,8 +37,8 @@ public class TaskList {
     }
 
     /**
-     * TaskListener that accepts any input from the user (except "bye") and
-     * handles the input by calling other methods/throwing an exception to indicate
+     * Accepts any input from the user (except "bye") and handles the
+     * input by calling other methods/throwing an exception to indicate
      * that such command does not exist.
      *
      * @param input A String input by the user.
@@ -320,7 +320,7 @@ public class TaskList {
         if (recentTasks.size() == 0) {
             message.append("Good news! You don't have any deadlines/events coming up in the next 7 days!\n");
         } else {
-            message.append("Here are the upcoming deadlines and events coming up soon!\n");
+            message.append(Message.UPCOMING);
 
             int n = 1;
             for (Task t : recentTasks) {
@@ -337,7 +337,7 @@ public class TaskList {
         List<Task> overdueTasks = findOverdueTasks();
 
         if (overdueTasks.size() > 0) {
-            message.append("But umm... you have a few overdue tasks...\n");
+            message.append(Message.OVERDUE);
 
             int n = 1;
             for (Task t : overdueTasks) {

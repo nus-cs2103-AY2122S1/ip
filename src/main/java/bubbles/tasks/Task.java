@@ -38,8 +38,7 @@ public class Task {
     }
 
     /**
-     * Parent method for format() of a basic Task Object, simply
-     * returns the String representation of the Task.
+     * Returns the String representation of the Task.
      *
      * @return The String representation of the task.
      */

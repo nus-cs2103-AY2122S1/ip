@@ -30,30 +30,6 @@ public class Bubbles {
     }
 
     /**
-     * Main method for the Bubbles bot.
-     * Creates a new Bubbles object and gets the bot running.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Bubbles().run();
-    }
-
-    /**
-     * Runs the program.
-     */
-    private void run() {
-        System.out.println(Message.WELCOME);
-
-        String input;
-        while (!(input = ui.readCommand()).equals("bye")) {
-            System.out.println(taskList.taskListener(input));
-        }
-
-        ui.exit();
-    }
-
-    /**
      * Handles the command from the user and returns the message that is the result
      * of executing the command.
      *

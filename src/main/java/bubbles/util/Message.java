@@ -6,17 +6,13 @@ package bubbles.util;
  */
 public enum Message {
     FORMAT_LINE("--------------------------------------------------"),
-    LOGO("Hello from\n"
-            + " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n"),
     ADD("Received order! I've added this task:\n"),
     DELETE("Noted! I've removed this task:\n"),
     DONE("Good job! I've marked this task as done:\n"),
     REWARD("Bubbles will reward you with a piece of candy!"),
     REMIND("Need a reminder? Bubbles' got you!\n"),
+    OVERDUE("But umm... you have a few overdue tasks...\n"),
+    UPCOMING("Here are the upcoming deadlines and events coming up soon!\n"),
     WELCOME("You should do what you want to do!\n"
             + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?"),
     HELP("Don't worry, Bubbles is here to help!\n\n"
