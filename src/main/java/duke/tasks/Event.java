@@ -33,6 +33,11 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Parses the Event to a format appropriate for saving.
+     *
+     * @return a string containing only important information of the Event to be saved.
+     */
     @Override
     public String parseToSave() {
         return "E|" + super.parseToSave() + "|" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

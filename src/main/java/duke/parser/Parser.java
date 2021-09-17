@@ -254,9 +254,8 @@ public class Parser {
         return result;
     }
 
-
     /**
-     * Logic for handling different commands and executing the appropriate methods for the inputted command.
+     * Handles logic for different commands and executes the appropriate methods for the inputted command.
      * Throws appropriate exceptions for its respective error.
      *
      * @param input user input.

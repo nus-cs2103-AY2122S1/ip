@@ -35,6 +35,11 @@ public class Task {
         expenses = new HashMap<>();
     }
 
+    /**
+     * Shows if Task is done.
+     *
+     * @return returns an icon to determine if Task is done.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -163,7 +168,7 @@ public class Task {
     }
 
     /**
-     * Boolean to determine if this task currently contains any expenses.
+     * Determines if this task currently contains any expenses.
      *
      * @return boolean which says if this task currently contains any expenses.
      */
@@ -174,7 +179,7 @@ public class Task {
     /**
      * Parses the Task to a format to be saved.
      *
-     * @return a string containing only important information of the task to be saved.
+     * @return a string containing only important information of the Task to be saved.
      */
     public String parseToSave() {
         return getStatusIcon() + "|" + description;

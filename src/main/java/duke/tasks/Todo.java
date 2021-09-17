@@ -14,6 +14,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Parses the Todo to a format appropriate for saving.
+     *
+     * @return a string containing only important information of the Todo to be saved.
+     */
     @Override
     public String parseToSave() {
         return "T|" + super.parseToSave();

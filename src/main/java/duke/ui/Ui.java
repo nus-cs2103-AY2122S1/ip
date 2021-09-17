@@ -10,6 +10,7 @@ import duke.tasks.Task;
  */
 public class Ui {
 
+    /** Takes in user input. */
     private final Scanner sc;
 
     /**
@@ -19,6 +20,11 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Gets the next line of user inputs.
+     *
+     * @return next line of user inputs.
+     */
     public String getNextLine() {
         return sc.nextLine().trim();
     }
