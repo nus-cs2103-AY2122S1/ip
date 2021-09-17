@@ -2,6 +2,8 @@
 
 Wednesday Dude is an application made to help users keep track of various tasks they want to do. The application takes all input through typing out text and is optimized for use through Command Line Interface (CLI) 
 
+Adopted and modified from [Project Duke](https://github.com/nus-cs2103-AY2122S1/ip)
+
 ![Image of Ui](https://github.com/mukundrs/ip/blob/master/docs/Ui.png)
 
 * [1. Features](#Features)
