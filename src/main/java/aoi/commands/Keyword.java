@@ -11,11 +11,11 @@ import java.util.Map;
  */
 public enum Keyword {
     ADD("TODO", "EVENT", "DEADLINE"),
-    LIST("LIST"),
-    DONE("DONE"),
-    DELETE("DELETE"),
+    LIST("LIST", "LS"),
+    DONE("DONE", "D"),
+    DELETE("DELETE", "DEL", "RM"),
     FIND("FIND"),
-    EXIT("BYE");
+    EXIT("BYE", "EXIT", "QUIT");
 
     private final Map<String, Keyword> aliases = new HashMap<>();
 
