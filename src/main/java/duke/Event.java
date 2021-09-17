@@ -60,4 +60,13 @@ public class Event extends Task{
     public String toString() {
         return "[" + EVENT_LABEL + "]" + super.toString() + " (at: " + date + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Event) {
+            Event event = (Event) obj;
+            return event.date.equals(this.date) && event.description.equals(this.description);
+        }
+        return false;
+    }
 }

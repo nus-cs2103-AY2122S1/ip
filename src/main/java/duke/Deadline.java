@@ -62,4 +62,13 @@ public class Deadline extends Task{
     public String toString() {
         return "[" + DEADLINE_LABEL + "]" + super.toString() + " (by: " + date + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline deadline = (Deadline) obj;
+            return deadline.date.equals(this.date) && deadline.description.equals(this.description);
+        }
+        return false;
+    }
 }
