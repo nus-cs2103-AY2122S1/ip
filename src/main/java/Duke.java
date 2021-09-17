@@ -61,6 +61,7 @@ public class Duke extends Application {
         Scene scene = new Scene(helloWorld, Color.CYAN); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
+        scene.getRoot().setStyle("-fx-font-family: 'Courier New'");
         stage.show(); // Render the stage.
 
         //The container for the content of the chat to scroll.
@@ -153,6 +154,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
+
 
         return textToAdd;
     }
