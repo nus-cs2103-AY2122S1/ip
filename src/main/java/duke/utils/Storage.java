@@ -74,7 +74,6 @@ public class Storage {
     public void saveData(TaskList taskList) throws IOException {
         List<String> lines = new ArrayList<>();
         Ui ui = new Ui();
-        assert taskList.getSize() > 0 : "Task List has nothing and shouldn't be saved";
         for (int i = 0; i < taskList.getSize(); i++) {
             try {
                 Task task = taskList.get(i);
