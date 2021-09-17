@@ -15,9 +15,11 @@ public class Ui {
      */
     public static String welcomeMessage() {
         return "Hello!\n"
-                + "1. Type a task (todo/event/deadline) to be added into your task list,\n"
-                + "   followed by the time for events and due date for deadlines \n"
-                + "   in form of yyyy-mm-dd for date and hh:mm for time.\n"
+                + "1. Type a task to be added into your task list, in form of: \n"
+                + "   - todo [description]\n"
+                + "   - event [description] /at [time]\n"
+                + "   - deadline [description /by [time]\n"
+                + "([time] is in form of yyyy-mm-dd for date and hh:mm for time)\n"
                 + "2. Type 'list' if you want to generate your task list.\n"
                 + "3. Type 'done [task number]' to mark a task as done.\n"
                 + "4. Type 'delete [task number]' to delete a task.\n"
