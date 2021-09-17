@@ -36,6 +36,9 @@ public abstract class Command {
         case FIND:
             cmd = new FindCommand(tokens);
             break;
+        case HELP:
+            cmd = new HelpCommand();
+            break;
         case EXIT:
             cmd = new ExitCommand();
             break;

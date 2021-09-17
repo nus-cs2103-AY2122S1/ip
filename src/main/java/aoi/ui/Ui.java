@@ -51,6 +51,16 @@ public class Ui {
     }
 
     /**
+     * Returns a Help message.
+     *
+     * @return A String representation of a Help message.
+     */
+    public static String showHelpMsg() {
+        String message = "For help, kindly visit the user guide:";
+        return message;
+    }
+
+    /**
      * Returns a Deleted Task message.
      *
      * @return A String representation of a Deleted Task message.

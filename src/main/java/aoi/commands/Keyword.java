@@ -15,6 +15,7 @@ public enum Keyword {
     DONE("DONE", "D"),
     DELETE("DELETE", "DEL", "RM"),
     FIND("FIND"),
+    HELP("HELP"),
     EXIT("BYE", "EXIT", "QUIT");
 
     private final Map<String, Keyword> aliases = new HashMap<>();

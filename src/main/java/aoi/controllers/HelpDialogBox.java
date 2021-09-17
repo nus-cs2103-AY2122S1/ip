@@ -19,19 +19,21 @@ import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * This control represents a help dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class HelpDialogBox extends HBox {
     @FXML
     private Label dialog;
+    @FXML
+    private Hyperlink hyperlink;
     @FXML
     private ImageView displayPicture;
     private final Hyperlink link = new Hyperlink("https://mslevis.github.io/ip/");
 
-    private DialogBox(String text, Image img) {
+    private HelpDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/HelpDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -41,9 +43,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.getStyleClass().add("dialog-box");
-//        if (text.contains(link.getText())) {
-//            dialog.getChildren().add(link);
-//        }
+        hyperlink.getStyleClass().add("dialog-box");
         this.setHgrow(dialog, Priority.ALWAYS);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 40, 40));
@@ -59,12 +59,8 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getAoiDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static HelpDialogBox getHelpDialog(String text, Image img) {
+        var db = new HelpDialogBox(text, img);
         db.flip();
         return db;
     }

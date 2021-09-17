@@ -1,14 +1,10 @@
 package aoi;
 
-import java.io.IOException;
-
 import aoi.controllers.MainWindow;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
