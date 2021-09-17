@@ -1,0 +1,19 @@
+.duke-dialog-background {
+    -fx-background-color: #ffc9c9;
+    -fx-background-radius: 20px;
+}
+
+.user-dialog-background {
+    -fx-background-color: #fdfdc9;
+    -fx-background-radius: 20px;
+}
+
+.error-dialog-background {
+    -fx-background-color: #ff9999;
+    -fx-background-radius: 20px;
+}
+
+.archives-dialog-background {
+    -fx-background-color: #dcfffb;
+    -fx-background-radius: 20px;
+}
