@@ -1,10 +1,10 @@
 package duke;
 
-import java.io.IOException;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Storage {
 
     private final String PROJECT_ROOT = System.getProperty("user.dir");
-    private final Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT,"data");
+    private final Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT, "data");
 
     private Path dataPath;
     private File dukeData;
@@ -32,7 +32,7 @@ public class Storage {
      * Saves all Entries from entries into memory.
      *
      * @param entries EntryList of all entries to be saved.
-     * @throws DukeException Erro thrown if data file is corrupted/missing.
+     * @throws DukeException Error thrown if data file is corrupted/missing.
      */
     public void saveEntries(EntryList entries) throws DukeException {
         Path dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
@@ -40,7 +40,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(dukeData);
             BufferedWriter dukeWriter = new BufferedWriter(fw);
-            for (Entry entry : entries){
+            for (Entry entry : entries) {
                 String nextEntry = entry.saveString();
                 dukeWriter.write(nextEntry);
                 dukeWriter.write("\n");
@@ -84,19 +84,19 @@ public class Storage {
             Entry nextEntry = new Todo("");
             boolean hasNextEntry = true;
             switch (entryType) {
-                case "T":
-                    nextEntry = new Todo(entryData);
-                    break;
-                case "D":
-                    nextEntry = new Deadline(entryData, fileScanner.next()); //fileScanner.next() will contain timing
-                    break;
-                case "E":
-                    nextEntry = new Event(entryData, fileScanner.next()); //fileScanner.next() will contain timing
-                    break;
-                default:
-                    //Corrupted Entry Case
-                    hasNextEntry = false;
-                    break;
+            case "T":
+                nextEntry = new Todo(entryData);
+                break;
+            case "D":
+                nextEntry = new Deadline(entryData, fileScanner.next()); //fileScanner.next() will contain timing
+                break;
+            case "E":
+                nextEntry = new Event(entryData, fileScanner.next()); //fileScanner.next() will contain timing
+                break;
+            default:
+                //Corrupted Entry Case
+                hasNextEntry = false;
+                break;
             }
             if (hasNextEntry) {
                 if (isDone) {

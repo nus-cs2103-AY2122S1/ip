@@ -23,22 +23,35 @@ public class Parser {
     public ArrayList<String> parseInput(String input) throws DukeException, AssertionError {
         ArrayList<String> terms = new ArrayList<>();
         this.parseString(input, terms);
+        String command = checkFirstTerm(terms);
+        assert isValidCommand(command) : "Invalid Command! Duke can't understand what you mean :(";
+        this.parseEntry(terms);
+        String entry = getEntryFromTerms(terms);
+        String timing = getTimingFromTerms(terms);
+        return new ArrayList<>(Arrays.asList(command, entry, timing));
+    }
+
+    private String getEntryFromTerms(ArrayList<String> terms) {
+        return terms.isEmpty() ? "" : terms.remove(0);
+    }
+
+    private String getTimingFromTerms(ArrayList<String> terms) {
+        return terms.isEmpty() ? "" : this.parseTiming(terms);
+    }
+
+    private String checkFirstTerm(ArrayList<String> terms) throws DukeException {
         String command = "";
         if (terms.isEmpty()) {
             throw new DukeException("Duke can't find any commands :(");
         } else {
             command = terms.remove(0);
         }
-        assert isValidCommand(command) : "Invalid Command! Duke can't understand what you mean :(";
-        this.parseEntry(terms);
-        String entry = terms.isEmpty() ? "" : terms.remove(0);
-        String timing = terms.isEmpty() ? "" : this.parseTiming(terms);
-        return new ArrayList<>(Arrays.asList(command, entry, timing));
+        return command;
     }
 
     private boolean isValidCommand(String command) {
         boolean isValid = false;
-        for (String knownCommand : Duke.commands) {
+        for (String knownCommand : Duke.COMMANDS) {
             if (knownCommand.equals(command)) {
                 isValid = true;
                 break;
@@ -70,7 +83,7 @@ public class Parser {
             StringBuilder timing = new StringBuilder();
             int len = terms.size();
             for (int i = 0; i < len; i++) {
-                if (i != len - 1){
+                if (i != len - 1) {
                     timing.append(terms.get(i)).append(" ");
                 } else {
                     timing.append(terms.get(i));
@@ -91,7 +104,7 @@ public class Parser {
             for (String term : termsCopy) {
                 if (term.startsWith("/")) {
                     String entryDesc = entry.toString();
-                    terms.add(0, entryDesc.substring(0, entryDesc.length()-1));
+                    terms.add(0, entryDesc.substring(0, entryDesc.length() - 1));
                     return;
                 } else {
                     entry.append(term).append(' ');
@@ -99,7 +112,7 @@ public class Parser {
                 }
             }
             String entryDesc = entry.toString();
-            terms.add(0, entryDesc.substring(0, entryDesc.length()-1));
+            terms.add(0, entryDesc.substring(0, entryDesc.length() - 1));
         }
     }
 }

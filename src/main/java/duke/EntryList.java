@@ -51,6 +51,13 @@ public class EntryList extends ArrayList<Entry> {
         }
     }
 
+    /**
+     * Function written for CLI-based Duke.
+     * Finds a given keyword in the EntryList.
+     *
+     * @param keyword The keyword to find.
+     * @param ui The Ui object to pass messages.
+     */
     public void findEntry(String keyword, Ui ui) {
         int len = super.size();
         int count = 1;
@@ -92,6 +99,7 @@ public class EntryList extends ArrayList<Entry> {
     }
 
     /**
+     * Function written for CLI-based Duke.
      * Marks a given entry number as done.
      *
      * @param entryNumber The number of the entry to be marked.
@@ -142,6 +150,7 @@ public class EntryList extends ArrayList<Entry> {
     }
 
     /**
+     * Function written for CLI-based Duke.
      * Adds given Entry to the List.
      * Prints Success Message if Successful.
      *
@@ -151,7 +160,7 @@ public class EntryList extends ArrayList<Entry> {
      * @throws DukeException Error thrown if Entry is empty.
      */
     public void addEntry(Entry entry, String command, Ui ui) throws DukeException {
-        if (!entry.isEmpty()){
+        if (!entry.isEmpty()) {
             super.add(numberOfEntries++, entry);
             ui.addEntry(entry, numberOfEntries);
         } else {
@@ -170,7 +179,7 @@ public class EntryList extends ArrayList<Entry> {
      */
     public String getAddEntry(Entry entry, String command, Ui ui) throws DukeException {
         StringBuilder output = new StringBuilder();
-        if (!entry.isEmpty()){
+        if (!entry.isEmpty()) {
             super.add(numberOfEntries++, entry);
             output.append(ui.getAddEntry(entry, numberOfEntries));
         } else {
@@ -180,6 +189,7 @@ public class EntryList extends ArrayList<Entry> {
     }
 
     /**
+     * Function written for CLI-based Duke.
      * Deletes entry by index.
      *
      * @param index Index of Entry to be deleted.

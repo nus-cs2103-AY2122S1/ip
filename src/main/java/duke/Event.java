@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Class that inherits from Entry to encapsulate Events.
  */
-public class Event extends Entry{
+public class Event extends Entry {
 
     private LocalDate event;
 

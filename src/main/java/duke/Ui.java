@@ -1,9 +1,5 @@
 package duke;
 
-import javafx.scene.image.Image;
-
-import java.util.Objects;
-
 /**
  * Class that implements methods to present the Duke.
  */
@@ -25,6 +21,7 @@ public class Ui {
         "___________________________________________________________________";
 
     /**
+     * Function written for CLI-Based Duke.
      * Prints out a welcome message.
      */
     public void welcomeUser() {
@@ -52,8 +49,8 @@ public class Ui {
      * @param id The #id of the newly-added entry.
      */
     public String getAddEntry(Entry entry, int id) {
-        return "I've added entry to your list!" +
-        this.getPrintEntry(entry, id);
+        return "I've added entry to your list!"
+                + this.getPrintEntry(entry, id);
     }
 
     /**
@@ -80,6 +77,7 @@ public class Ui {
     }
 
     /**
+     * Function written for CLI-Based Duke.
      * Prints out given entry.
      *
      * @param entry Entry to be printed.
@@ -101,6 +99,7 @@ public class Ui {
     }
 
     /**
+     * Function written for CLI-Based Duke.
      * Prints out farewell message.
      */
     public void printGoodByeUser() {
@@ -118,6 +117,7 @@ public class Ui {
     }
 
     /**
+     * Function written for CLI-Based Duke.
      * Prints out the Error Message received when Parsing.
      *
      * @param parsingError Error encountered while parsing input.
@@ -152,17 +152,26 @@ public class Ui {
      */
     public String getCommands() {
         StringBuilder helpPage = new StringBuilder("These are the available commands:\n");
-        for (String command : Duke.commands) {
+        for (String command : Duke.COMMANDS) {
             helpPage.append(command).append("\n");
         }
         return helpPage.toString();
     }
 
-
+    /**
+     * Returns String when an Entry is Marked.
+     *
+     * @return String message for when an entry is marked.
+     */
     public String getMarkedEntry() {
         return "Nice! I've marked this entry as done:\n";
     }
 
+    /**
+     * Returns String when an Entry is Marked.
+     *
+     * @return String message for when an entry is marked.
+     */
     public String getEntryThatIsMarked() {
         return "Entry is already marked as done!";
     }

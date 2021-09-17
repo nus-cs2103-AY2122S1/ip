@@ -26,14 +26,6 @@ public abstract class Entry {
         this.isDone = false;
     }
 
-/**
-     * Method to revert the isDone status of the Entry.
-     */
-    public void revertDone() {
-        this.isDone = !this.isDone;
-    }
-
-
     /**
      * Method to set the isDone status to true of an Entry.
      *
@@ -70,6 +62,12 @@ public abstract class Entry {
         return "," + isDoneString + "," + this.ENTRY;
     }
 
+    /**
+     * Checks whether the given keyword is in the Entry text.
+     *
+     * @param keyword The keyword to check.
+     * @return Boolean that is true only if the ENTRY contains the keyword.
+     */
     public boolean contains(String keyword) {
         return this.ENTRY.contains(keyword);
     }

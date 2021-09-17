@@ -1,14 +1,13 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
+
 import javafx.application.Application;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -36,7 +35,7 @@ public class Duke extends Application {
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String FIND_COMMAND = "find";
     public static final String HELP_COMMAND = "help";
-    public static final List<String> commands =
+    public static final List<String> COMMANDS =
             List.of(TERMINATION_COMMAND, LIST_ENTRIES_COMMAND,
                     MARK_ENTRY_DONE_COMMAND, DELETE_ENTRY_COMMAND,
                     TODO_COMMAND, EVENT_COMMAND, DEADLINE_COMMAND,
@@ -58,6 +57,10 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Overrides the Application start method to initialise JavaFX components.
+     * @param stage The JavaFX stage to use.
+     */
     @Override
     public void start(Stage stage) {
         VBox dukeContainer = new VBox();
@@ -65,6 +68,13 @@ public class Duke extends Application {
         configureSendButton(dukeContainer, dukeInput, stage);
     }
 
+    /**
+     * Configuring the send button.
+     *
+     * @param dukeContainer The Vertical Box for Duke Messages.
+     * @param dukeInput The Input Field containing Duke's input.
+     * @param stage The JavaFX stage to use.
+     */
     private void configureSendButton(VBox dukeContainer, TextField dukeInput, Stage stage) {
         Button sendButton = new Button();
         sendButton.setPrefWidth(200.0);
@@ -74,9 +84,11 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing USER input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the USER input after processing.
+     * Function to translate response from Duke to visible output.
+     *
+     * @param dialogContainer The Vertical Box with all Dialogues.
+     * @param userInput The Field containing user input.
+     * @param stage The JavaFX stage.
      */
     private void handleUserInput(VBox dialogContainer, TextField userInput, Stage stage) {
         String response = getResponse(userInput.getText());
@@ -92,6 +104,9 @@ public class Duke extends Application {
 
     /**
      * Function to get response from Duke.
+     *
+     * @param input The input String.
+     * @return String response from Duke.
      */
     public String getResponse(String input) {
         if (input.equals(TERMINATION_COMMAND)) {
@@ -115,43 +130,33 @@ public class Duke extends Application {
         String entry = parsedTerms.get(1);
         String timing = parsedTerms.get(2);
         String output = "";
-
-        //Process Command
-        switch(command) {
-            case LIST_ENTRIES_COMMAND:
-                output = entries.getEntries();
-                break;
-
-            case MARK_ENTRY_DONE_COMMAND:
-                output = entries.getEntryAsDone(Integer.parseInt(entry), this.dukeUi);
-                break;
-
-            case TODO_COMMAND:
-                output = entries.getAddEntry(new Todo(entry), command, this.dukeUi);
-                break;
-
-            case EVENT_COMMAND:
-                output = entries.getAddEntry(new Event(entry, timing), command, this.dukeUi);
-                break;
-
-            case DEADLINE_COMMAND:
-                output = entries.getAddEntry(new Deadline(entry, timing), command, this.dukeUi);
-                break;
-
-            case DELETE_ENTRY_COMMAND:
-                output = entries.getDeleteEntry(Integer.parseInt(entry), this.dukeUi);
-                break;
-
-            case FIND_COMMAND:
-                output = entries.getFindEntry(entry, this.dukeUi);
-                break;
-
-            case HELP_COMMAND:
-                output = this.dukeUi.getCommands();
-                break;
-
-            default:
-                throw new DukeException("Sorry! Duke can't understand what that means");
+        switch(command) { // Process the Command
+        case LIST_ENTRIES_COMMAND:
+            output = entries.getEntries();
+            break;
+        case MARK_ENTRY_DONE_COMMAND:
+            output = entries.getEntryAsDone(Integer.parseInt(entry), this.dukeUi);
+            break;
+        case TODO_COMMAND:
+            output = entries.getAddEntry(new Todo(entry), command, this.dukeUi);
+            break;
+        case EVENT_COMMAND:
+            output = entries.getAddEntry(new Event(entry, timing), command, this.dukeUi);
+            break;
+        case DEADLINE_COMMAND:
+            output = entries.getAddEntry(new Deadline(entry, timing), command, this.dukeUi);
+            break;
+        case DELETE_ENTRY_COMMAND:
+            output = entries.getDeleteEntry(Integer.parseInt(entry), this.dukeUi);
+            break;
+        case FIND_COMMAND:
+            output = entries.getFindEntry(entry, this.dukeUi);
+            break;
+        case HELP_COMMAND:
+            output = this.dukeUi.getCommands();
+            break;
+        default:
+            throw new DukeException("Sorry! Duke can't understand what that means");
         }
         return output;
     }
@@ -160,7 +165,7 @@ public class Duke extends Application {
      * Runs Duke and returns output String.
      *
      * @param input String containing user input.
-     * @return output String with
+     * @return output String with the result from Duke.
      */
     public String run(String input) {
         String output = "";

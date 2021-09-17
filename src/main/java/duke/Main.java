@@ -1,12 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 /**
  * Re-factored Main Class to separate Duke Logic form Ui.
@@ -16,6 +17,11 @@ public class Main extends Application {
 
     private final Duke DUKE = new Duke();
 
+    /**
+     * Overrides the Application's start method.
+     *
+     * @param stage The JavaFX stage to use.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -25,6 +31,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(DUKE);
             fxmlLoader.<MainWindow>getController().setStage(stage);
+            stage.setTitle("Duke by Vishnu");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
