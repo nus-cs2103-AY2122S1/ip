@@ -28,7 +28,7 @@ having the benefits of a Graphical User Interface (GUI).
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](Ui.png)
 
 1. Refer to the [Features](#features) below for details on how to use the app.
 
