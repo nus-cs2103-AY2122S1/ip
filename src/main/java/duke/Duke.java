@@ -20,7 +20,7 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
-    private static final String FILE_PATH = String.valueOf(Paths.get(System.getProperty("user.home"), "data", "dukeFile.txt"));
+    private static final String FILE_PATH = String.valueOf(Paths.get("data", "dukeFile.txt"));
 
     public Duke() {
         ui = new Ui();
