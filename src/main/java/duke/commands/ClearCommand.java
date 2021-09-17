@@ -15,6 +15,7 @@ public class ClearCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.clearTasks();
+        storage.write(taskList);
         return ui.showTasklistClear();
     }
 }
