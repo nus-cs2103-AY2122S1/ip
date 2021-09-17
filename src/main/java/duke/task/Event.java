@@ -34,32 +34,6 @@ public class Event extends Task {
         return this.time;
     }
 
-    /**
-     * Constructs a new Event object from an input string.
-     *
-     * @param input Input string used to create Event object.
-     */
-    public static Event fromInput(String input) throws Exception {
-        String[] eventInputs = input.trim().split("\\s+/at\\s+", 2);
-
-        if (eventInputs.length == 1) {
-            if (eventInputs[0].length() == 0) {
-                throw new Exception("Event must have description and time");
-            } else {
-                throw new Exception("Event must have time");
-            }
-        }
-
-        if (eventInputs.length != 2) {
-            throw new Exception("Event must have description and time");
-        }
-
-        String description = eventInputs[0];
-        LocalDateTime time = DateTime.parse(eventInputs[1]);
-
-        return new Event(description, time);
-    }
-
     @Override
     public String toString() {
         String timeStr = DateTime.stringify(this.time);
