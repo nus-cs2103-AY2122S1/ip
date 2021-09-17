@@ -1,0 +1,50 @@
+A-JavaDoc
+↳ Add JavaDoc comments
+
+Add JavaDoc comments to the code.
+
+Minimal: Add header comments to at least half of the non-private classes/methods.
+Stretch goal: Add header comments to all non-private classes/methods, and non-trivial private methods.
+
+Javadoc of class members can be specified on a single line as follows:
+
+/** Number of connections to this database */
+private int connectionCount;
+
+
+A minimal JavaDoc comment example for classes:
+
+package ...
+
+import ...
+
+/**
+ * Represents a location in a 2D space. A <code>Point</code> object corresponds to
+ * a coordinate represented by two integers e.g., <code>3,6</code>
+ */
+public class Point {
+    // ...
+}
+
+A minimal JavaDoc comment example for methods:
+
+/**
+ * Returns lateral location of the specified position.
+ * If the position is unset, NaN is returned.
+ *
+ * @param x X coordinate of position.
+ * @param y Y coordinate of position.
+ * @param zone Zone of position.
+ * @return Lateral location.
+ * @throws IllegalArgumentException If zone is <= 0.
+ */
+public double computeLocation(double x, double y, int zone)
+    throws IllegalArgumentException {
+    // ...
+}
+
+How should i start first:
+
+1. Start with gnosis package
+
+

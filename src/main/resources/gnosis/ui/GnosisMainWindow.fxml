@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane minHeight="700.0" minWidth="470.0" prefHeight="700.0" prefWidth="470.0" stylesheets="@MainWindowStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gnosis.ui.GnosisUI">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="634.0" minHeight="10.0" prefHeight="598.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="637.0" prefWidth="475.0" GridPane.rowIndex="1">
+                <VBox fx:id="dialogContainer" alignment="CENTER" minWidth="0.0" prefHeight="636.0" prefWidth="467.0" />
+        </ScrollPane>
+
+    <HBox alignment="CENTER" prefWidth="470.0" GridPane.rowIndex="2">
+      <ComboBox fx:id="commandComboBox" onAction="#commandComboBoxHandler" prefHeight="37.0" prefWidth="150.0" />
+                <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="37.0" prefWidth="227.0">
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin></TextField>
+                <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="67.0" text="Send" />
+            <padding>
+                <Insets bottom="10.0" top="10.0" />
+            </padding>
+    </HBox>
+    <MenuBar>
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem fx:id="closeMenu" mnemonicParsing="false" onAction="#setCloseMenuListener" text="Close"/>
+        </Menu>
+
+        <Menu mnemonicParsing="false" text="Export">
+            <MenuItem mnemonicParsing="false" onAction="#setExportCsvListener" text="places"/>
+            <MenuItem mnemonicParsing="false" onAction="#setExportCsvListener" text="tasks"/>
+        </Menu>
+    </MenuBar>
+</GridPane>

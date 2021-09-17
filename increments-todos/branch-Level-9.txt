@@ -1,0 +1,18 @@
+Level 9. Find
+Give users a way to find a task by searching for a keyword.
+
+
+Example:
+
+find book
+    ____________________________________________________________
+     Here are the matching tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: June 6th)
+    ____________________________________________________________
+
+
+What i need to do to accomplish:
+
+1. new command -> find
+        --> update COMMAND, GnosisController, GnosisUI, TaskManager

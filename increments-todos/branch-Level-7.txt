@@ -1,0 +1,38 @@
+Level 7. Save
+Save the tasks in the hard disk automatically whenever the gnosis.task list changes. Load the data from the hard disk when Duke starts up. You may hard-code the file name and location e.g., [project_root]/data/duke.txt
+
+The format of the file is up to you. Example:
+
+T | 1 | read book
+D | 0 | return book | June 6th
+E | 0 | project meeting | Aug 6th 2-4pm
+T | 1 | join sports club
+ If you use file paths in your code,
+
+remember to use relative paths rather than absolute paths such as C:\data. If not, your app can cause unpredictable results when used in another computer.
+remember to specify file paths in an OS-independent way. If not, your app might not work when used on a different OS.
+ Your code must handle the case where the data file doesn't exist at the start. Reason: when someone else takes your Duke and runs it for the first time, the required file might not exist in their computer.
+ Similarly, if you expect the data file to be in as specific folder (e.g., ./data/), you must also handle the folder-does-not-exist-yet case.
+
+ Tasks to achieve level-7: (commit to branch-Level-7)
+
+
+
+File format to save -> .csv
+
+save in file under: [project_root]/gnosisData/gnosis.txt folder
+
+1. Create a gnosis.task.TaskStorageManager to read/write CSV files - DONE
+    --> use relative path
+    --> handle case -> where file data doesn't exits -> create default file for them
+    --> handle case -> folder does not exist -> create folder + file alongside
+
+    --> able to read csv file and convert to list of gnosis.main.model.gnosis.task - Done
+    --> able to write to csv file from list of gnosis.main.model.gnosis.task - Done
+
+2. Update gnosis.main.model.gnosis.task classes: - DONE
+    --> to include char variable to store type of gnosis.task
+    --> getter and setters
+    --> update classes
+
+3. Print message of saving and loading to User

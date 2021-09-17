@@ -1,0 +1,38 @@
+Add the ability to store whatever text entered by the user and display them back to the user when requested.
+
+Example:
+
+    ____________________________________________________________
+     Hello! I'm Duke
+     What can I do for you?
+    ____________________________________________________________
+
+read book
+    ____________________________________________________________
+     added: read book
+    ____________________________________________________________
+
+return book
+    ____________________________________________________________
+     added: return book
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     1. read book
+     2. return book
+    ____________________________________________________________
+bye
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
+
+There is no need to save the data to the hard disk.
+Assume there will be no more than 100 tasks. If you wish, you may use a fixed size array (e.g., String[100]) to store the items.
+
+Tasks to achieve level-2:
+
+1. Save text of user input - Done
+    - Use ArrayList to store texts of user input (String type)
+2. List all text stored - Done
+    - Iterate through String arraylist of stored text

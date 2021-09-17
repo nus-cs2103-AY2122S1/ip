@@ -1,0 +1,27 @@
+A-JUnit
+↳ Add JUnit tests
+
+Add JUnit tests to test the behavior of the code.
+
+Requirements:
+
+Minimum: More than two test methods, preferably targeting more than one class (if you have multiple classes)
+Stretch goal: test methods to target all public methods of all classes
+Refer to the JUnit tutorial @se-edu/guides to find how to use JUnit.
+
+
+what I should test:
+
+-- UI
+    -- test whether output is what was intented
+
+-- GnosisController
+    -- test whether commands are logically handled
+
+--TaskCommandManger
+    -- specific commands do what they say
+
+method body convention:
+whatIsBeingTested_descriptionOfTestInputs_expectedOutcome
+
+

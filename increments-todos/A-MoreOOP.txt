@@ -1,0 +1,30 @@
+Refactor the code to extract out closely related code as classes.
+
+Minimal: Extract the following classes:
+Ui: deals with interactions with the user
+Storage: deals with loading tasks from the file and saving tasks in the file
+Parser: deals with making sense of the user command
+TaskList: contains the gnosis.task list e.g., it has operations to add/delete tasks in the list
+
+
+what I need to achieve for increment:
+
+gnosis.ui.GnosisUI:
+-- all the UI related contexts
+--  greet user
+--- show error messages
+--- get user input
+--- respond to User
+
+GnsosiController:
+-- Handles logic between UI and gnosis.main.model flow
+
+GnosisStorage:
+-- aka fileManager for saving/loading
+
+GnosisParser:
+-- aka logic gnosis.controller for reciving user command
+
+GnsosisTaskManager:
+-- gnosis.main.model.gnosis.task Manager handling logic
+
