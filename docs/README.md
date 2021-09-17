@@ -6,7 +6,7 @@
    - [Add, update, track completion, and delete tasks](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#add-update-track-completion-and-delete-tasks)
    - [View task and task date](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#view-task-and-task-date)
    - [Load and save](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#load-and-save)
-3. Usage
+2. Usage
    - [`help` - Getting help](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#help---getting-help)
    - [`todo` - Add a task of type TODO](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#todo---add-a-task-of-type-todo)
    - [`deadline` - Add a task of type DEADLINE](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#deadline---add-a-task-of-type-deadline)
@@ -17,6 +17,10 @@
    - [`find` - Query a task in your list](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#find---query-a-task-in-your-list)
    - [`list` - View all the current tasks you are having](https://github.com/hmanhduc2k/ip/blob/master/docs/README.md#list---view-all-the-current-tasks-you-are-having)
    - [`bye` - Exit the program](https://github.com/hmanhduc2k/ip/blob/master/docs/README.me#bye---exit-the-program)
+3. Command Summary
+   - [Summary table](https://github.com/hmanhduc2k/ip/blob/master/docs/README.me#command-summary)
+
+</br>
 
 ## Features 
 
@@ -34,14 +38,19 @@ What can you do with DuC? You can:
 - Mark a task as completed (if it is done, mark it X rightaway!)
 - Or delete a task at will (the list is too long? Delete it and save some spaces!)
 
+</br>
+
 ### View task and task date
 
 View the list of all ongoing task on the list, and the date associated with them
+
+</br>
 
 ### Load and Save
 
 Want to visit the list later? We save everything for you, just reload the app again and see your previously-saved list
 
+</br>
 
 ## Usage
 
@@ -54,7 +63,7 @@ Syntax: `help`
 
 Expected outcome: Shortened user guide to detail all command syntax for DuC
 
-
+</br>
 
 ### `todo` - Add a task of type TODO
 
@@ -75,7 +84,7 @@ Now you have 1 task in your list
 
 ```
 
-
+</br>
 
 ### `deadline` - Add a task of type DEADLINE
 
@@ -98,7 +107,7 @@ Nice! I've added the following task to your list:
 Now you have 2 tasks in your list
 ```
 
-
+</br>
 
 ### `event` - Add a task of type EVENT
 
@@ -120,7 +129,7 @@ Nice! I've added the following task to your list:
 Now you have 3 tasks in your list
 ```
 
-
+</br>
 
 ### `done` - Mark a task in the list as completed
 
@@ -140,7 +149,7 @@ Nice! I've marked this task as done:
 [D][X] CS2103T IP Submission (by Sep 17 2021)
 ```
 
-
+</br>
 
 ### `update` - Change the description of a specified task in the list
 
@@ -163,7 +172,7 @@ Noted, I have updated the task at position 1 as:
 [T][ ] run at least 3km
 ```
 
-
+</br>
 
 ### `delete` - Delete a task from the list
 
@@ -183,7 +192,7 @@ Noted! I've deleted the following task:
 [E][ ] NUS Career Fair (at Sep 10 2021)
 ```
 
-
+</br>
 
 ### `find` - Query a task in your list
 
@@ -204,7 +213,7 @@ The following task(s) matches given query 'CS2103T':
 [D][X] CS2103T IP Submission (by Sep 17 2021)
 ```
 
-
+</br>
 
 ### `list` - View all the current tasks you are having
 
@@ -220,7 +229,7 @@ Here's the list of all tasks:
 [E][ ] NUS Career Fair (at Sep 10 2021)
 ```
 
-
+</br>
 
 ### `bye` - Exit the program
 
@@ -229,3 +238,20 @@ Exit DuC, stop the chat bot, and save everything into the file.
 Syntax: `bye`
 
 Expected outcome: A goodbye message and the app exiting in 3 seconds.
+
+</br>
+
+## Command Summary
+
+Command | Syntax
+------------ | -------------
+Seeking help | `help`
+Add a todo task | `todo + { task name }`
+Add a deadline task | `deadline + { task name } + /by + { date in YYYY-MM-DD }`
+Add an event task | `event + { task name } + /at + { date in YYYY-MM-DD }`
+Mark a task as completed | `done + { task's index number }` or `done all`
+Update/Replace a task | `update + { task's index number } + { add task syntax }`
+Delete a task from list | `delete + { task's index numebr }` or `delete all`
+Find a task with query | `find + { query }`
+List down all tasks | `list`
+Exit the program | `bye`
