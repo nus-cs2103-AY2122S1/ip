@@ -125,6 +125,21 @@ Here are the matching tasks in your list:
 ``` 
 Shows the tasks with description matching your search query.
 
+### `tag` - Find matching tasks
+
+Use this command and tag your tasks.
+
+Sample usage:
+
+`tag 1 important`
+
+Sample outcome:
+```
+Got it. I've tagged this task:
+1.[D][ ] Duke#important(by: Sep 17 2021) 
+``` 
+Shows the tasks with description matching your search query.
+
 ### `bye` - Exit
 
 Exit the program.
