@@ -59,21 +59,20 @@ public class Parser {
                         + "Try again.");
             case ("delete"):
                 throw new DukeException("Please ensure that there is a number after the command 'delete'. Try again.");
-            case ("deletenote"):
-                throw new DukeException("Please ensure that there is a number after the command 'deletenote'. "
+            case ("notedelete"):
+                throw new DukeException("Please ensure that there is a number after the command 'notedelete'. "
                         + "Try again.");
             case ("find"):
                 throw new DukeException("Please ensure that there is a search term after the command 'find'. "
                         + "Try again.");
-            case ("findnote"):
-                throw new DukeException("Please ensure that there is a search term after the command 'findnote'. "
+            case ("notefind"):
+                throw new DukeException("Please ensure that there is a search term after the command 'notefind'. "
                         + "Try again.");
             case ("note"):
                 throw new DukeException("Please ensure that there is a note description after the command 'note'. "
                         + "Try again.");
             default:
-                throw new DukeException("I didn't quite get what you meant. To add a task, begin with "
-                        + "'deadline', 'event' or 'todo'.");
+                throw new DukeException("I didn't quite get what you meant. Please enter a valid command.");
             }
         } else {
             switch (firstParameter) {
@@ -157,26 +156,25 @@ public class Parser {
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("Please add a number after the command 'delete'. Try again.");
                 }
-            case ("deletenote"):
+            case ("notedelete"):
                 String toDeleteNoteIndexString = words[1];
                 try {
                     int toDeleteNoteIndex = Integer.parseInt(toDeleteNoteIndexString);
                     return noteList.deleteNote(toDeleteNoteIndex);
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Please make sure only a number follows the command 'deletenote'. "
+                    throw new DukeException("Please make sure only a number follows the command 'notedelete'. "
                             + "Try again.");
                 } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException("Please add a number after the command 'deletenote'. Try again.");
+                    throw new DukeException("Please add a number after the command 'notedelete'. Try again.");
                 }
             case ("find"):
                 String searchTerm = words[1];
                 return list.printFilteredTasks(searchTerm);
-            case ("findnote"):
+            case ("notefind"):
                 String noteSearchTerm = words[1];
                 return noteList.printFilteredNotes(noteSearchTerm);
             default:
-                throw new DukeException("I didn't quite get what you meant. To add a task, begin with "
-                        + "'deadline', 'event' or 'todo'.");
+                throw new DukeException("I didn't quite get what you meant. Please enter a valid command.");
             }
         }
     }

@@ -39,7 +39,7 @@ public class NoteList {
      */
     public String printNotes() throws DukeException {
         if (this.list.size() < 1) {
-            throw new DukeException("You haven't added any notes to the list yet! Try adding something.");
+            throw new DukeException("You haven't added any notes to the list yet! Please add a note.");
         } else {
             assert !list.isEmpty() : "NoteList should not be empty, tried to print!";
             String noteQuantifier;
@@ -65,8 +65,8 @@ public class NoteList {
      */
     public String deleteNote(int index) throws DukeException {
         if (this.list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something before "
-                    + "deleting.");
+            throw new DukeException("You haven't added any notes to the list yet! Please add notes before"
+                    + " deleting.");
         } else if (index <= this.list.size() && index >= 1) {
             assert !list.isEmpty() : "NoteList should not be empty, tried to delete!";
             Note toDelete = list.get(index - 1);
@@ -74,7 +74,8 @@ public class NoteList {
             return ("Noted. I've removed this note:\n" + "  " + toDelete + "\n" + "Now you have "
                     + list.size() + " note" + (list.size() == 1 ? "" : "s") + " in the list.");
         } else {
-            throw new DukeException("Couldn't find that note in the list! Try again.");
+            throw new DukeException("Couldn't find that note in the list! Please ensure that the index is valid. "
+                    + "Try again.");
         }
     }
 
@@ -102,7 +103,7 @@ public class NoteList {
             }
         }
         if (filteredList.size() < 1) {
-            throw new DukeException("I couldn't find any notes with that particular search term. Try again.");
+            throw new DukeException("I couldn't find any notes with that particular search term. Please try again.");
         } else {
             assert !filteredList.isEmpty() : "Filtered NoteList should not be empty, tried to print!";
             assert filteredList.size() <= list.size() : "Filtered NoteList should not be larger than original list!";
