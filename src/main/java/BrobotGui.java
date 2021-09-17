@@ -26,7 +26,9 @@ public class BrobotGui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    //Credit: https://i.redd.it/riqy6l7invo61.jpg
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
+    //Credit: https://www.google.com/url?sa=i&url=https%3A%2F%2Fknowyourmeme.com%2Fmemes%2Fgigachad&psig=AOvVaw0wIu3mOqDnIOp3kIowOyz8&ust=1631945255774000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPDzoPyrhfMCFQAAAAAdAAAAABAD
     private final Image brobot = new Image(this.getClass().getResourceAsStream("/images/brobot.jpeg"));
 
     /**
