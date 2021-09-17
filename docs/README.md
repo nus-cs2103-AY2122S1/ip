@@ -8,7 +8,8 @@ Shows the list of tasks.
 
 Format: `list`
 
-Example: 
+Example:
+
 ![List Example](./images/listexample.png)
 
 ### Adding todo task: `todo`
