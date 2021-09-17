@@ -17,7 +17,10 @@ import javafx.scene.text.Font;
 
 import java.io.IOException;
 
-
+/**
+ * Creates the text and image to
+ * be displayed on the stage.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -53,12 +56,12 @@ public class DialogBox extends HBox {
      * Sets the label text and the image
      * display.
      *
-     * @param f the font of the text
-     * @param c the color of the text
+     * @param font  the font of the text
+     * @param color the color of the text
      */
-    public void setDialogBox(Font f, Color c) {
-        dialog.setFont(f);
-        dialog.setTextFill(c);
+    public void setDialogBox(Font font, Color color) {
+        dialog.setFont(font);
+        dialog.setTextFill(color);
         dialog.setText(text);
         dialog.setMinSize(USE_PREF_SIZE, USE_PREF_SIZE);
         dialog.setStyle("-fx-background-color : #CBCACA;");
@@ -76,7 +79,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setDialogBox(new Font("American Typewriter", 16),
+        db.setDialogBox(new Font("American Typewriter", 15),
                 Color.SADDLEBROWN);
         return db;
     }
@@ -93,7 +96,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setDialogBox(new Font("American Typewriter", 14),
+        db.setDialogBox(new Font("American Typewriter", 15),
                 Color.DARKBLUE);
         return db;
     }
