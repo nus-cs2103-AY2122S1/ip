@@ -184,6 +184,9 @@ public class Lebron {
         if (Integer.parseInt(splitWords[1]) > getLatestState().getSize()) {
             throw new LebronException("    :( OOPS! The task is not yet created!");
         }
+        if (Integer.parseInt(splitWords[1]) < 1) {
+            throw new LebronException("    :( OOPS! The number you provide must be more than 1");
+        }
         assert splitWords.length == 2 : "There should be 2 items to specify which task is done.";
         try {
             int pos = Integer.parseInt(splitWords[1]);
@@ -300,6 +303,9 @@ public class Lebron {
         }
         if (Integer.parseInt(splitWords[1]) - 1 > getLatestState().getSize()) {
             throw new LebronException("    :( OOPS! The task is not yet created!");
+        }
+        if (Integer.parseInt(splitWords[1]) < 1) {
+            throw new LebronException("    :( OOPS! The number you provide must be more than 1");
         }
         assert splitWords.length == 2 : "There should be 2 items to specify which task to delete.";
         int pos = Integer.parseInt(splitWords[1]);

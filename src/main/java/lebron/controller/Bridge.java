@@ -20,7 +20,7 @@ public class Bridge extends Application {
     private Lebron lebron;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         lebron = new Lebron();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Bridge.class.getResource("/view/MainWindow.fxml"));

@@ -1,7 +1,6 @@
 package lebron.controller;
 
-import java.io.IOException;
-
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -56,6 +55,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String userText = userInput.getText();
         String lebronText = getResponse(userInput.getText());
+        if (userText.equals("bye")) {
+            Platform.exit();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(lebronText, lebronImage)
