@@ -20,7 +20,6 @@ public abstract class Task {
         T, E, D;
     }
 
-
     /**
      * Constructor of task.
      *
@@ -31,7 +30,6 @@ public abstract class Task {
         this.name = s;
         this.isDone = false;
     }
-
 
     /**
      * The method to check if the Task is
@@ -50,16 +48,6 @@ public abstract class Task {
      * @return The encoded task;
      */
     public abstract String encode();
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Marks when the task is done.
@@ -166,8 +154,6 @@ public abstract class Task {
                 : Task.NOT_FINISHED;
         return checkBox + " " + this.name;
     }
-
-
 
     @Override
     public boolean equals(Object obj) {

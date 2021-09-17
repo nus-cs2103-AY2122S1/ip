@@ -6,16 +6,8 @@ import sariel.util.windows.Main;
 public class Messages {
 
 
-    public static final String OLDLOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String GREETINGS = "Greetings! I'm Sariel\nWhat can I do for you?";
     public static final String HLINE = "\t----------------------------";
-
-
-
     public static final String LOGO = "\n"
             + " _____            _      _ \n"
             + "/  ___|          (_)    | |\n"

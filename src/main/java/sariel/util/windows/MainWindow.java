@@ -139,10 +139,6 @@ public class MainWindow extends AnchorPane {
 
     }
 
-
-
-
-
     /**
      * Handle the removal of tasks through the GUI
      *

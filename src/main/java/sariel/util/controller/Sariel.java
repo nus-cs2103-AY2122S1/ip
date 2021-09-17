@@ -35,8 +35,6 @@ import sariel.util.windows.DialogBox;
  */
 public class Sariel {
     private static final String saveDirectory = "data/";
-    private static final String saveFilePath = "save.txt";
-    private static final String tempFilePath = "temp.txt";
     private static ListView<Task> out;
 
     private final Parser parser;
@@ -211,7 +209,11 @@ public class Sariel {
         Sariel.out.setItems(FXCollections.observableArrayList(this.displayTasks));
     }
 
-
+    /**
+     * Sets the ListView to put the tasks on.
+     *
+     * @param viewer The listview to put the tasks on.
+     */
     public static void setOut(ListView<Task> viewer) {
         Sariel.out = viewer;
     }

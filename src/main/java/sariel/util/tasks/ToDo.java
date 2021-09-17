@@ -5,7 +5,6 @@ public class ToDo extends Task {
 
     private static String label = "[T]";
 
-
     private ToDo(String s) {
         super(s.trim());
 

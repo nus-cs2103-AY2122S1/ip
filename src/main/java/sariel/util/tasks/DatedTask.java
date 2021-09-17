@@ -8,7 +8,10 @@ import java.util.HashMap;
 import sariel.util.parser.Parser;
 
 
-
+/**
+ * An abstract class representing a Task that has a date.
+ *
+ */
 public abstract class DatedTask extends Task {
     protected LocalDate localDate;
 

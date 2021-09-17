@@ -48,7 +48,6 @@ public class Ui {
         return String.format(Messages.TASK_ADDED, t.toString(), i);
     }
 
-
     /**
      * The output when a task is removed.
      *
@@ -59,11 +58,6 @@ public class Ui {
     public String getOutputFromTaskDeleted(Task t, int i) {
         return String.format(Messages.TASK_DELETED, t.toString(), i);
     }
-
-
-
-
-
 
     /**
      * Method to print the Logo for Duke.
@@ -103,7 +97,6 @@ public class Ui {
      * Obtains the input from the user.
      *
      */
-
     public String getInput() {
         return this.sc.nextLine();
     }

@@ -14,8 +14,6 @@ import java.util.function.Predicate;
  */
 public class TaskList extends ArrayList<Task> {
 
-
-
     /**
      * Method for checking if a given task is in an ArrayList.
      *
@@ -33,7 +31,6 @@ public class TaskList extends ArrayList<Task> {
         }
         return false;
     }
-
 
     /**
      * Function that returns a TaskList of all the tasks that satisfies the

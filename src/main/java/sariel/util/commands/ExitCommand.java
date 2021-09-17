@@ -4,7 +4,7 @@ package sariel.util.commands;
 import sariel.util.controller.Sariel;
 
 /**
- * When this command runs, the Duke stops working.
+ * When this command runs, the Sariel stops working.
  *
  */
 public class ExitCommand implements Command {
