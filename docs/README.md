@@ -148,6 +148,12 @@ Here are the tasks to be done before they are due:
 2.[E][ ] project meeting (at: 6 Oct 2021)
 ```
 
+### `bye` - Exiting the program
+
+Exits the program.
+
+Format: `bye`
+
 ### Saving the data
 
 Duke data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
