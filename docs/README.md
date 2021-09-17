@@ -5,15 +5,15 @@
 [Features](#features)
 
 [Usage](#usage)
-- [help](#help---Get-command-syntax)
-- list
-- todo
-- deadline
-- event
-- done
-- delete
-- find
-- by
+- [help](#help---get-command-syntax)
+- [list](#list---list-tasks-in-to-do-list)
+- [todo](#todo---create-a-todo-task)
+- [deadline](#deadline---create-a-deadline-task)
+- [event](#event---create-an-event-task)
+- [done](#done---mark-task-as-complete)
+- [delete](#delete---delete-a-task)
+- [find](#find---find-task)
+- [bye](#bye---exit-program)
 
 ## Features
 
