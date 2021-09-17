@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Method to add a new Task into the TaskList, adds to the back of the list.
+     * Adds a new Task into the TaskList, adds to the back of the list.
      *
      * @param task The task to be added.
      */
@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Method to mark the task at the specified index as done.
+     * Marks the task at the specified index as done.
      *
      * @param index The index of the task to be marked as done.
      */
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Method to delete the task at the specified index.
+     * Deletes the task at the specified index.
      *
      * @param index The index of the task to be deleted.
      */
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Method to retrieve a task at the specified index.
+     * Retrieves a task at the specified index.
      *
      * @param index The index of the task to be retrieved.
      * @return Task The task that is retrieved based on the index.
@@ -57,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * Method to retrieve the whole ArrayList of task stored in the TaskList object.
+     * Retrieves the whole ArrayList of task stored in the TaskList object.
      *
      * @return ArrayList The ArrayList of tasks that are stored in the TaskList object.
      */
@@ -66,7 +66,7 @@ public class TaskList {
     }
 
     /**
-     * Overridden toString method which creates a String representation of all the tasks in the TaskList.
+     * Creates a String representation of all the tasks in the TaskList.
      *
      * @return String The String representation of all the tasks in the TaskList.
      */
@@ -86,7 +86,7 @@ public class TaskList {
     }
 
     /**
-     * Method that returns the size of the ArrayList in TaskList.
+     * Returns the size of the ArrayList in TaskList.
      *
      * @return int The number of tasks in the TaskList.
      */
@@ -95,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Method which finds all the Task in the TaskList that match the keyword given.
+     * Finds all the Task in the TaskList that match the keyword given.
      *
      * @param keyword The keyword entered by the user.
      * @return TaskList The resultant TaskList that contains all the Task that match the keyword.

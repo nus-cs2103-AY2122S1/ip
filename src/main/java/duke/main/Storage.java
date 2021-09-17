@@ -28,7 +28,7 @@ public class Storage {
     }
 
     /**
-     * Method which searches for the data file and reads each line of the file, converting it into an ArrayList of Task
+     * Searches for the data file and reads each line of the file, converting it into an ArrayList of Task
      * and returns it.
      *
      * @return ArrayList The ArrayList of tasks that was stored in the data file.
@@ -112,7 +112,7 @@ public class Storage {
     }
 
     /**
-     * Method that takes in an ArrayList of task and writes it into the data file.
+     * Writes ArrayList of Task into the data file.
      *
      * @param tasks The ArrayList of task to be written.
      * @throws IOException On Input writing to file failure.
@@ -126,7 +126,7 @@ public class Storage {
     }
 
     /**
-     * Method that creates a data file in the specified file path in the Storage object's filePath field.
+     * Creates a data file in the specified file path in the Storage object's filePath field.
      */
     public void createDataFile() {
         File data = new File(this.filePath);
