@@ -6,6 +6,7 @@ import duke.DukeArgumentException;
 import duke.DukeDateParseException;
 import duke.DukeIoException;
 import duke.DukeTaskException;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
