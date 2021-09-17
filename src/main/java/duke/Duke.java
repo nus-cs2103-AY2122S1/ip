@@ -39,8 +39,7 @@ public class Duke extends Application {
      * Ui initialization is delayed to accept dialogContainer.
      */
     public Duke() {
-        String userPath = System.getProperty("user.dir")
-                + "\\data\\save.txt";
+        String userPath = "data/save.txt";
         storage = new Storage(userPath);
         tasks = storage.load();
     }
@@ -62,8 +61,7 @@ public class Duke extends Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        String userPath = System.getProperty("user.dir")
-                + "\\data\\save.txt";
+        String userPath = "data/save.txt";
         new Duke(userPath).run();
     }
 
