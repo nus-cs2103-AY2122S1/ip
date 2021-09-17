@@ -124,7 +124,7 @@ public class TaskList {
         StringBuilder resultString = new StringBuilder();
         int counter = 1;
         for (Task task: tasks) {
-            resultString.append(counter + "." + task + "\n");
+            resultString.append(counter + ". " + task + "\n");
             counter++;
         }
         if (counter == 1) {
