@@ -6,7 +6,7 @@ If you can type fast, Duke can manage your todo list faster than traditional GUI
 
 ##Quick start
 1. Ensure you have Java 11 or above installed in your computer 
-2. Download the latest Duke.jar from [here](LINK TO JAVAFILE)
+2. Download the latest Duke.jar from [here](https://github.com/yucheng11122017/ip/blob/master/duke.jar)
 3. Copy the file to the folder you want to use as the *home folder* for Duke
 4. Double-click the file to start the file. The GUI similiar to below should appear in a few seconds.
    (INSERT PHOTO HERE)
