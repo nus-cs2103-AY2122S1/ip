@@ -44,7 +44,6 @@ public class MyJournal extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             tasks = new TaskList();
         }
     }
