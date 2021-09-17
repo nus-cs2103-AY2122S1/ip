@@ -18,26 +18,56 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Ui {
-    private ScrollPane scrollPane = new ScrollPane();
-    private VBox dialogContainer = new VBox();
-    private TextField userInput = new TextField();
-    private Button sendButton = new Button("Send");
+    public static final String USER_IMAGE_FILEPATH = "/images/DaUser.png";
+    public static final String DUKE_IMAGE_FILEPATH = "/images/DaDuke.png";
+    public static final String APP_NAME = "DukeMaster";
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user;
+    private Image duke;
+
+    /**
+     * Constructor for UI.
+     * @param stage FX Stage for UI.
+     */
     public Ui(Stage stage) {
+        AnchorPane mainLayout = createComponents();
+        createScene(mainLayout);
+        displayStage(stage);
+        setProperties(stage, mainLayout);
+    }
+
+    private AnchorPane createComponents() {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        user = new Image(this.getClass().getResourceAsStream(USER_IMAGE_FILEPATH));
+        duke = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE_FILEPATH));
+
         scrollPane.setContent(dialogContainer);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        return mainLayout;
+    }
 
+    private void createScene(AnchorPane mainLayout) {
         scene = new Scene(mainLayout);
+    }
 
+    private void displayStage(Stage stage) {
         stage.setScene(scene);
         stage.show();
+    }
 
-        stage.setTitle("Duke");
+    private void setProperties(Stage stage, AnchorPane mainLayout) {
+        stage.setTitle(APP_NAME);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -70,20 +100,24 @@ public class Ui {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private void showResponse(String response) {
+    private void showResponse(boolean isError, String response) {
         Label dukeText = new Label(response);
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke), isError)
         );
     }
 
-    private void showResponse(String ... response) {
+    private void showResponse(boolean isError, String... response) {
         Label dukeText = new Label(String.join("\n", response));
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke), isError)
         );
     }
 
+    /**
+     * Displays the user's command in the UI.
+     * @param command The command to display.
+     */
     public void showFullCommand(String command) {
         Label userText = new Label(command);
         dialogContainer.getChildren().add(
@@ -91,14 +125,21 @@ public class Ui {
         );
     }
 
+    /**
+     * Displays that undo command is successfully completed.
+     * @param lastHistoryState Previous History State.
+     */
     public void showUndone(HistoryState lastHistoryState) {
         Command previousCommand = lastHistoryState.getCommand();
         TaskList previousTaskList = lastHistoryState.getTaskList();
-        showResponse("Successfully undone previous command: " + previousCommand);
-        showResponse("Task List after undoing: ");
+        showResponse(false, "Successfully undone previous command: " + previousCommand);
+        showResponse(false, "Task List after undoing: ");
         showTaskList(previousTaskList);
     }
 
+    /**
+     * Clears user's input box.
+     */
     public void clearInput() {
         userInput.clear();
         assert readCommand().equals("") : "Should have cleared input field";
@@ -117,54 +158,82 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        showResponse("Error loading data file, starting with empty duke.TaskList.");
+        showResponse(false, "Error loading data file, starting with empty duke.TaskList.");
     }
 
     public void showError(String errorMessage) {
-        showResponse("Oops! " + errorMessage);
+        showResponse(true, "Oops! " + errorMessage);
     }
 
     public void showWelcome() {
-        showResponse("Welcome to DukeMaster", "What can I do for you?");
+        showResponse(false, "Welcome to " + APP_NAME, "What can I do for you?");
     }
 
+    /**
+     * Displays new task added.
+     * @param task Task added.
+     * @param tasks TaskList after addition of task.
+     */
     public void showAddedNewTask(Task task, TaskList tasks) {
         assert tasks.doesContain(task) : "Task should be in the TaskList";
-        showResponse("Got it. I've added this task:", task.toString(), numberOfTasksToString(tasks));
+        showResponse(false, "Got it. I've added this task:", task.toString(), numberOfTasksToString(tasks));
     }
 
+    /**
+     * Displays task removed.
+     * @param task Task removed.
+     * @param tasks TaskList after removal of task.
+     */
     public void showRemovedTask(Task task, TaskList tasks) {
         assert !tasks.doesContain(task) : "Task should have been removed from the TaskList";
-        showResponse("Noted. I've removed this task:", task.toString(), numberOfTasksToString(tasks));
+        showResponse(false, "Noted. I've removed this task:", task.toString(), numberOfTasksToString(tasks));
     }
 
+    /**
+     * Displays task marked as done.
+     * @param task Task marked as done.
+     */
     public void showMarkedAsDone(Task task) {
         assert task.getDoneStatus() : "Task should have been done";
-        showResponse("Nice! I've marked this task as done:", task.toString());
+        showResponse(false, "Nice! I've marked this task as done:", task.toString());
     }
 
+    /**
+     * Displays task list.
+     * @param tasks Task list to display.
+     */
     public void showTaskList(TaskList tasks) {
         StringBuilder response = new StringBuilder();
         for (int i = 0; i < tasks.getLength(); i++) {
             response.append((i + 1) + "." + tasks.getTask(i).toString() + "\n");
         }
-        showResponse(response.toString());
+        showResponse(false, response.toString());
     }
 
+    /**
+     * Displays the tasks occurring on the date.
+     * @param date Query date.
+     * @param tasks Entire task list.
+     */
     public void showOccurringTasks(LocalDate date, TaskList tasks) {
         ArrayList<Task> relevantTasks = tasks.getTasksOccurringOn(date);
-        showResponse("Tasks occurring on "
+        showResponse(false, "Tasks occurring on "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ":", tasksToString(relevantTasks));
     }
 
     public void showGoodbye() {
-        showResponse("Bye. Hope to see you again soon!");
+        showResponse(false, "Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays matching tasks based on query.
+     * @param query The query.
+     * @param tasks Entire task list.
+     */
     public void showMatchingTasks(String query, TaskList tasks) {
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(query);
-        showResponse("Here are the matching tasks in your list:", tasksToString(matchingTasks));
+        showResponse(false, "Here are the matching tasks in your list:", tasksToString(matchingTasks));
     }
 
     private String numberOfTasksToString(TaskList tasks) {

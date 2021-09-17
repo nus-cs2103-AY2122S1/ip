@@ -4,6 +4,10 @@ public class Task implements Cloneable {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     * @param description Task's description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

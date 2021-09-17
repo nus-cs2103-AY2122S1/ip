@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.Objects;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.util.Objects;
 
 /**
  * The Duke Application.

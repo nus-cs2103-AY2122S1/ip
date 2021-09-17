@@ -20,6 +20,11 @@ public class TaskList implements Cloneable {
         tasks.add(task);
     }
 
+    /**
+     * Removed the task at index.
+     * @param index Index of task to remove.
+     * @return
+     */
     public Task removeTask(int index) {
         assert tasks.size() > index && index >= 0 : "index should have been valididated";
         return tasks.remove(index);

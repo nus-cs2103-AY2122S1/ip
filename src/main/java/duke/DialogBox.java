@@ -12,12 +12,18 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     * @param l Label for dialog box.
+     * @param iv ImageView for dialog box.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -48,10 +54,11 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    public static DialogBox getDukeDialog(Label l, ImageView iv, boolean isError) {
         var db = new DialogBox(l, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(8), Insets.EMPTY)));
+        Paint backgroundColor = isError ? Color.LIGHTPINK : Color.WHITE;
+        db.setBackground(new Background(new BackgroundFill(backgroundColor, new CornerRadii(8), Insets.EMPTY)));
         return db;
     }
 }

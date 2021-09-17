@@ -66,48 +66,65 @@ public class Parser {
         if (inputList.length != 2) {
             throw new DukeException("Please provide the target task index!");
         }
-        return Integer.parseInt(inputList[1]) - 1;
+        try {
+            return Integer.parseInt(inputList[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please provide a valid number as the task index!");
+        }
     }
 
     private static String getTodoDescription(String input) {
         return input.replaceFirst(Pattern.quote("todo"), "").trim();
     }
 
-    private static LocalDate getQueryDate(String[] inputList) {
+    private static LocalDate getQueryDate(String[] inputList) throws DukeException {
+        if (inputList.length != 2) {
+            throw new DukeException("Please provide the query date!");
+        }
         return LocalDate.parse(inputList[1]);
     }
 
-    private static String getQuery(String[] inputList) {
+    private static String getQuery(String[] inputList) throws DukeException {
+        if (inputList.length < 2) {
+            throw new DukeException("Please provide the query!");
+        }
         return String.join(" ",
                 Arrays.copyOfRange(inputList, 1, inputList.length));
     }
 
-    private static String getEventDescription(String input) {
+    private static String getEventDescription(String input) throws DukeException {
         String[] eventInfo = extractEventInfo(input);
         return eventInfo[0].trim();
     }
 
-    private static LocalDate getEventDate(String input) {
+    private static LocalDate getEventDate(String input) throws DukeException {
         String[] eventInfo = extractEventInfo(input);
         return LocalDate.parse(eventInfo[1].trim());
     }
 
-    private static String getDeadlineDescription(String input) {
+    private static String getDeadlineDescription(String input) throws DukeException {
         String[] deadlineInfo = extractDeadlineInfo(input);
         return deadlineInfo[0].trim();
     }
 
-    private static LocalDate getDeadlineDate(String input) {
+    private static LocalDate getDeadlineDate(String input) throws DukeException {
         String[] deadlineInfo = extractDeadlineInfo(input);
         return LocalDate.parse(deadlineInfo[1].trim());
     }
 
-    private static String[] extractEventInfo(String input) {
-        return input.replaceFirst(Pattern.quote("event"), "").split("/at", 2);
+    private static String[] extractEventInfo(String input) throws DukeException {
+        String[] eventInfo = input.replaceFirst(Pattern.quote("event"), "").split("/at", 2);
+        if (eventInfo.length < 2) {
+            throw new DukeException("Please provide the description and the date!");
+        }
+        return eventInfo;
     }
 
-    private static String[] extractDeadlineInfo(String input) {
-        return input.replaceFirst(Pattern.quote("deadline"), "").split("/by", 2);
-
+    private static String[] extractDeadlineInfo(String input) throws DukeException {
+        String[] deadlineInfo = input.replaceFirst(Pattern.quote("deadline"), "").split("/by", 2);
+        if (deadlineInfo.length < 2) {
+            throw new DukeException("Please provide the description and the date!");
+        }
+        return deadlineInfo;
     }
 }

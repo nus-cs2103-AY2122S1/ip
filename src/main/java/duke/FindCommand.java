@@ -3,6 +3,11 @@ package duke;
 public class FindCommand extends Command {
     private String query;
 
+    /**
+     * Constructor for FindCommand.
+     * @param query Query string to find.
+     * @throws DukeException
+     */
     public FindCommand(String query) throws DukeException {
         if (query.equals("")) {
             throw new DukeException("Query should not be empty.");
