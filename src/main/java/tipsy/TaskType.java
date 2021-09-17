@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 public enum TaskType {
     TODO, DEADLINE, EVENT;

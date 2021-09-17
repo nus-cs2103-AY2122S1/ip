@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 public class ToDo extends Task {
     public ToDo(String taskName, boolean isDone) {

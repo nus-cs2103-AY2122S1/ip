@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 /**
  * Ui is the class that deals with all output messages to the user.
@@ -11,7 +11,7 @@ public class Ui {
      * @return A String object containing the start-up message.
      */
     public String printStartInteractionsMessage() {
-        return "Hello, I'm Duke. What may I do for you?";
+        return "Hello, I'm Tipsy. What may I do for you?";
     }
 
     /**
