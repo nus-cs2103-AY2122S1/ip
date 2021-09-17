@@ -160,13 +160,13 @@ public class Parser {
         } else if (input.matches("delete\\s[0-9][0-9]?")) {
             List<String> args = getArgs(CommandType.DELETE, input);
             return createCommandFromArgs(CommandType.DELETE, args);
-        } else if (input.matches("todo(.*?)")) {
+        } else if (input.matches("todo\\s(.*?)")) {
             List<String> args = getArgs(CommandType.ADD_TODO, input);
             return createCommandFromArgs(CommandType.ADD_TODO, args);
-        } else if (input.matches("deadline(.*?)/by(.*?)")) {
+        } else if (input.matches("deadline\\s(.*?)/by(.*?)")) {
             List<String> args = getArgs(CommandType.ADD_DEADLINE, input);
             return createCommandFromArgs(CommandType.ADD_DEADLINE, args);
-        } else if (input.matches("event(.*?)/at(.*?)")) {
+        } else if (input.matches("event\\s(.*?)/at(.*?)")) {
             List<String> args = getArgs(CommandType.ADD_EVENT, input);
             return createCommandFromArgs(CommandType.ADD_EVENT, args);
         } else if (input.matches("find\\s(.*?)")) {

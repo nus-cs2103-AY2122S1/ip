@@ -18,7 +18,6 @@ public class AddTodo extends Command {
      * @param taskName The name of the todo task.
      */
     public AddTodo(String taskName) {
-        System.out.println(taskName);
         this.taskName = taskName;
     }
 
