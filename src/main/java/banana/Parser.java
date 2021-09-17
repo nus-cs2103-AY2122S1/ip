@@ -203,7 +203,7 @@ public class Parser {
             String[] splitInput = input.split(" ");
             if (splitInput.length == 2) {
                 int index = Integer.parseInt(splitInput[1]);
-                if (index < 0 || index >= tasks.getSize()) {
+                if (index < 1 || index > tasks.getSize()) {
                     throw new DukeException(" OOPS!!! That index "
                             + "is out of bounds :-(");
                 }
