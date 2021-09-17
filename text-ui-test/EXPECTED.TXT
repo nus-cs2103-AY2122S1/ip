@@ -1,7 +1,85 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ____________________________________
+    Hello from
+     ____        _
+    |  _ \ _   _| | _____
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
 
+    ------------------------------------
+    ____________________________________
+    Here are the tasks in your list:
+    1: [E][] party (at: house)
+    2: [E][] work (at: night)
+
+    ------------------------------------
+    ____________________________________
+    Invalid input!
+        Available commands: [todo, deadline, event, list, bye]
+    ------------------------------------
+    ____________________________________
+    todo command syntax: 'todo <meap.task>'
+    ------------------------------------
+    ____________________________________
+    Got it! I've added this meap.task:
+     [T][] readme
+    Now you have 3 tasks in the list.
+    ------------------------------------
+    ____________________________________
+    Here are the tasks in your list:
+    1: [E][] party (at: house)
+    2: [E][] work (at: night)
+    3: [T][] readme
+
+    ------------------------------------
+    ____________________________________
+    Invalid date & time passed ('yesterday')
+
+    deadline command syntax:
+        'deadline <meap.task> /by dd-MM-yyyy HHmm'
+    Eg. 'deadline project /by 01-01-2020 2359'
+    ------------------------------------
+    ____________________________________
+    Invalid input!
+        Available commands: [todo, deadline, event, list, bye]
+    ------------------------------------
+    ____________________________________
+    Got it! I've added this meap.task:
+     [E][] zoomMeeting (at: tonight)
+    Now you have 4 tasks in the list.
+    ------------------------------------
+    ____________________________________
+    Here are the tasks in your list:
+    1: [E][] party (at: house)
+    2: [E][] work (at: night)
+    3: [T][] readme
+    4: [E][] zoomMeeting (at: tonight)
+
+    ------------------------------------
+    ____________________________________
+    Nice! I've marked this meap.task as done:
+        [E][X] work (at: night)
+    ------------------------------------
+    ____________________________________
+    Here are the tasks in your list:
+    1: [E][] party (at: house)
+    2: [E][X] work (at: night)
+    3: [T][] readme
+    4: [E][] zoomMeeting (at: tonight)
+
+    ------------------------------------
+    ____________________________________
+    Noted. I've removed this meap.task:
+        [E][] party (at: house)
+    Now you have 3 tasks in the list.
+    ------------------------------------
+    ____________________________________
+    Here are the tasks in your list:
+    1: [E][X] work (at: night)
+    2: [T][] readme
+    3: [E][] zoomMeeting (at: tonight)
+
+    ------------------------------------
+    ____________________________________
+    Bye, hope to see you again! :)
+    ------------------------------------

@@ -1,0 +1,26 @@
+.root {
+    -fx-font-size: 13px;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #ffffff;
+}
+
+.dialog-box-section {
+    -fx-border-radius: 25px;
+}
+
+.button:focused {
+    -fx-background-color: black;
+}
+
+.dialog-box-section Label {
+    -fx-font-size: 13px;
+    -fx-font-family: "Courier New";
+    -fx-background-color: #FDFEFE;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+/* If not using circle clipping, this will show */
+.dialog-box-section ImageView {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}

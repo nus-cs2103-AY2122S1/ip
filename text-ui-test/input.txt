@@ -1,0 +1,14 @@
+list
+nonsene text
+todo
+todo readme
+list
+deadline projSubmission /by yesterday
+event zoomMeeting \at tonight
+event zoomMeeting /at tonight
+list
+done 2
+list
+delete 1
+list
+bye
