@@ -24,7 +24,7 @@ public class ExitDukeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        this.setExitTrue();
         ui.showClosingMessage();
+        this.setExitTrue();
     }
 }

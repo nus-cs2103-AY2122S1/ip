@@ -10,9 +10,4 @@ public class DukeTest {
     public void dummyTest() {
         assertEquals(2, 2);
     }
-
-    @Test
-    public void getLocalStorageLocation_correctValue() {
-        assertEquals(Duke.getLocalStorageLocation(), "/LocalStorage.txt");
-    }
 }

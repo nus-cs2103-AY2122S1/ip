@@ -1,4 +1,4 @@
-package javafx;
+package duke.javafx;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -39,7 +44,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.9),
+                new CornerRadii(5.0), Insets.EMPTY)));
+        dialog.setMinSize(100, 80);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -54,12 +61,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Sets the dialog for user
+     *
+     * @param text the text that the user entered
+     * @param img the image for the user
+     * @return a dialogbox corresponding to the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setFillHeight(true);
         return db;
     }
 
+    /**
+     * Sets the dialog for Duke
+     *
+     * @param text the reply from Duke
+     * @param img the Duke image
+     * @return a dialogbox corresponding to Duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

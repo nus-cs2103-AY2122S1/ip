@@ -39,45 +39,84 @@ public class AddTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("t")) {
-            if (parsedUserInput.length == 1) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            Task newTask = new ToDo(parsedUserInput[1]);
-            addTaskToList(newTask, ui, tasks, storage);
+            addTodo(tasks, ui, storage, parsedUserInput);
         } else if (parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("d")) { // Add deadline
-            if (parsedUserInput.length == 1) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } else if (!parsedUserInput[1].contains("/by")) {
-                throw new DukeException("Please include the keyword \"/by\" if you want to add a deadline.");
-            } else {
-                String[] parsedDeadlineInput = parsedUserInput[1].split("/by ", 2);
-                String date = parsedDeadlineInput[1];
-                LocalDate localDate;
-                try {
-                    localDate = LocalDate.parse(date, formatFromInput);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please write the date in this format: dd/MM/yyyy");
-                }
-                Task newTask = new Deadline(parsedDeadlineInput[0], localDate);
-                addTaskToList(newTask, ui, tasks, storage);
-            }
+            addDeadline(tasks, ui, storage, parsedUserInput);
         } else if (parsedUserInput[0].equals("event") || parsedUserInput[0].equals("e")) { // Add event
-            if (parsedUserInput.length == 1) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-            } else if (!parsedUserInput[1].contains("/at")) {
-                throw new DukeException("Please include the keyword \"/at\" if you want to add an event.");
-            } else {
-                String[] parsedDeadlineInput = parsedUserInput[1].split("/at ", 2);
-                String date = parsedDeadlineInput[1];
-                LocalDate localDate;
-                try {
-                    localDate = LocalDate.parse(date, formatFromInput);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please write the date in this format: dd/MM/yyyy");
-                }
-                Task newTask = new Event(parsedDeadlineInput[0], localDate);
-                addTaskToList(newTask, ui, tasks, storage);
+            addEvent(tasks, ui, storage, parsedUserInput);
+        }
+    }
+
+    /**
+     * Adds the todo to the tasks
+     * If the input is not parsable, a DukeException is thrown
+     *
+     * @param tasks contains the task list
+     * @param ui deals with interactions with the user
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     * @throws DukeException If user input is incorrect
+     */
+    private void addTodo(TaskList tasks, Ui ui, Storage storage, String[] parsedUserInput) throws DukeException {
+        if (parsedUserInput.length == 1) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        Task newTask = new ToDo(parsedUserInput[1]);
+        addTaskToList(newTask, ui, tasks, storage);
+    }
+
+    /**
+     * Adds the Deadline to the tasks
+     * If the input is not parsable, a DukeException is thrown
+     *
+     * @param tasks contains the task list
+     * @param ui deals with interactions with the user
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     * @throws DukeException If user input is incorrect
+     */
+    private void addDeadline(TaskList tasks, Ui ui, Storage storage, String[] parsedUserInput) throws DukeException {
+        if (parsedUserInput.length == 1) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if (!parsedUserInput[1].contains("/by")) {
+            throw new DukeException("Please include the keyword \"/by\" if you want to add a deadline.");
+        } else {
+            String[] parsedDeadlineInput = parsedUserInput[1].split("/by ", 2);
+            String date = parsedDeadlineInput[1];
+            LocalDate localDate;
+            try {
+                localDate = LocalDate.parse(date, formatFromInput);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write the date in this format: dd/MM/yyyy");
             }
+            Task newTask = new Deadline(parsedDeadlineInput[0], localDate);
+            addTaskToList(newTask, ui, tasks, storage);
+        }
+    }
+
+    /**
+     * Adds the Event to the tasks
+     * If the input is not parsable, a DukeException is thrown
+     *
+     * @param tasks contains the task list
+     * @param ui deals with interactions with the user
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     * @throws DukeException If user input is incorrect
+     */
+    private void addEvent(TaskList tasks, Ui ui, Storage storage, String[] parsedUserInput) throws DukeException {
+        if (parsedUserInput.length == 1) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        } else if (!parsedUserInput[1].contains("/at")) {
+            throw new DukeException("Please include the keyword \"/at\" if you want to add an event.");
+        } else {
+            String[] parsedDeadlineInput = parsedUserInput[1].split("/at ", 2);
+            String date = parsedDeadlineInput[1];
+            LocalDate localDate;
+            try {
+                localDate = LocalDate.parse(date, formatFromInput);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+            }
+            Task newTask = new Event(parsedDeadlineInput[0], localDate);
+            addTaskToList(newTask, ui, tasks, storage);
         }
     }
 

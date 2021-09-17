@@ -1,15 +1,19 @@
-package javafx;
+package duke.javafx;
 
 import java.util.Objects;
 
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 /**
@@ -22,21 +26,33 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
     private Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/user.png")));
+            this.getClass().getResourceAsStream("/images/SmolAnkaa.png")));
     private Image dukeImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/Apollo.jpg")));
+    private Image bgImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/Background.png")));
 
+    /**
+     * Initialises the MainWindow
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(new Background(new BackgroundImage(this.bgImage, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello, welcome to Duke!", dukeImage)
+        );
     }
 
+    /**
+     * Sets the local variable of class Duke to the instance of Duke
+     * @param d the current instance of Duke
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

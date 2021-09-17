@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Ui {
 
     private String currentResponse;
@@ -34,29 +32,6 @@ public class Ui {
         this.reply(message);
     }
 
-    /**
-     * Prints out the welcome message
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String toPrint = ("Hello from \n" + logo + "What can I do for you?");
-        this.reply(toPrint);
-    }
-
-    /**
-     * Returns the next user input
-     *
-     * @return next user input in String
-     */
-    public String readCommand() {
-        System.out.println("\nInput:");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
 
     /**
      * Prints the closing String

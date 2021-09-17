@@ -1,4 +1,4 @@
-package javafx;
+package duke.javafx;
 
 import javafx.application.Application;
 

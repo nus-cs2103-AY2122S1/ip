@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.Duke;
+import duke.Storage;
 
 public class Deadline extends Task {
 
@@ -35,6 +35,6 @@ public class Deadline extends Task {
      * @return string representation of the due date
      */
     public String getTimeString() {
-        return "(by: " + this.time.format(Duke.getFormatter()) + ")";
+        return "(by: " + this.time.format(Storage.getFormatter()) + ")";
     }
 }

@@ -20,7 +20,7 @@ public abstract class Command {
     }
 
     /**
-     * The method to be overriden
+     * The method to be overridden
      *
      * @param tasks contains the task list
      * @param ui deals with interactions with the user
