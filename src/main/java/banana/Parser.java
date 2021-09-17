@@ -93,7 +93,6 @@ public class Parser {
             undoText = " This command does not change the tasklist,"
                     + "so there is nothing to undo.";
         }
-
         return undoText;
     }
 
@@ -158,12 +157,10 @@ public class Parser {
     public String deadlineOrEventCommand(TaskList tasks) {
         assert input.contains("deadline") || input.contains("event");
         if (input.contains("deadline")) {
-            assert input.contains("/by");
             String[] info = input.substring(9).split(" /by ");
             tasks.addTask(ParserFunctions.getDateAndTime(
                     info, "deadline"));
         } else {
-            assert input.contains("/at");
             String[] info = input.substring(6).split(" /at ");
             tasks.addTask(ParserFunctions.getDateAndTime(
                     info, "event"));
@@ -187,27 +184,27 @@ public class Parser {
      */
     public void exceptionCommand(TaskList tasks) throws DukeException {
         if (input.equals("todo") || input.equals("event")
-                || input.equals("deadline")) {
-            throw new DukeException(" OOPS!!! The description of "
-                    + "a todo cannot be empty.");
-        } else if (input.equals("done") || input.equals("done ")) {
-            throw new DukeException(" OOPS!!! The completed task "
-                    + "number must be given.");
-        } else if (input.equals("delete") || input.equals("delete ")) {
+                || input.equals("deadline") || input.equals("")) {
+            throw new DukeException(" OOPS!!! The description of"
+                    + "\n a task cannot be empty.");
+        } else if (input.equals("done")) {
+            throw new DukeException(" OOPS!!! The completed task"
+                    + "\n number must be given.");
+        } else if (input.equals("delete")) {
             throw new DukeException(" OOPS!!! You need to specify which"
-                    + " task you want to delete.");
+                    + "\n task you want to delete.");
         } else if (input.equals("blah")) {
             throw new DukeException(" OOPS!!! I'm sorry, but I don't know"
-                    + " what that means :-(");
-        } else {
-            String[] splitInput = input.split(" ");
-            if (splitInput.length == 2) {
-                int index = Integer.parseInt(splitInput[1]);
-                if (index < 1 || index > tasks.getSize()) {
-                    throw new DukeException(" OOPS!!! That index "
-                            + "is out of bounds :-(");
-                }
+                    + "\n what that means :-(");
+        } else if (input.contains("delete") || input.contains("done")) {
+            if (ParserFunctions.isOutOfBounds(input, tasks.getSize())) {
+                throw new DukeException(" OOPS!!! Your index"
+                        + "\n is invalid :-(");
             }
+        } else if (input.contains("deadline") && !input.contains("/by  ")
+                  || input.contains("event") && !input.contains("/at  ")) {
+            throw new DukeException(" OOPS!!! You need to specify"
+                    + "\n when the occasion is happening :-(");
         }
     }
 
