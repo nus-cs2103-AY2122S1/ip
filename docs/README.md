@@ -12,10 +12,10 @@ capable of keeping track of tasks and contacts given by the user.
     * [Adding an Event](#adding-an-event-event)
     * [Adding a Deadline](#adding-a-deadline-deadline)
     * [Adding a Contact](#adding-a-contact-contact)
-    * [Deleting tasks/contacts](#deleting-a-task/contact-delete)
-    * [Marking task as done](#marking-task-as-done-done)
-    * [Finding tasks/contacts](#finding-task(s)-find)
-    * [Listing tasks/contacts](#list-tasks/contacts-list)
+    * [Deleting tasks/contacts](#deleting-a-task-or-contact-delete)
+    * [Marking task as done](#mark-task-as-done-done)
+    * [Finding tasks/contacts](#finding-tasks-or-contacts-find)
+    * [Listing tasks/contacts](#list-tasks-and-contacts-list)
     * [Saving the data](#saving-data)
     * [Exiting the program](#exiting-Cynthius-bye)
 * [Command summary](#command-summary)
@@ -87,7 +87,7 @@ Information added successfully!
 ```
 <hr>
 
-### Deleting a task/contact: `delete`
+### Deleting a task or contact: `delete`
 Removes a task/contact from the list.
 
 Format: `delete CONTACT/TASK INDEX`
@@ -118,7 +118,7 @@ Task marked as done!
 ```
 <hr>
 
-### Finding task(s): `find`
+### Finding tasks or contacts: `find`
 Searches for task(s) and contact(s) that contain the keyword(s)
 
 Format: `find KEYWORD(S)`
@@ -142,7 +142,7 @@ No contacts found!
 ```
 <hr>
 
-### List tasks/contacts: `list`
+### List tasks and contacts: `list`
 Lists all tasks/contacts currently saved.
 
 Format: `list`
