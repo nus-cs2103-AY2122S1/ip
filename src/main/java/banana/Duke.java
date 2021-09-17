@@ -31,7 +31,7 @@ public class Duke {
             tasks = storage.load(
                     new File(storage.getFilePath()));
             this.filePath = filePath;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
