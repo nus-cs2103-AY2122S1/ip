@@ -3,7 +3,10 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
+    public static final String UI_ERROR_HEADING = "Oops, Error detected:";
+
     private final Scanner sc;
+
 
     public Ui() {
         sc = new Scanner(System.in);

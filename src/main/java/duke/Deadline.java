@@ -28,7 +28,7 @@ public class Deadline extends Task {
             throws IllegalArgumentException, DateTimeParseException {
         int sepIndex = newCommand.indexOf("/by");
         int cmdLen = newCommand.length();
-        if (sepIndex == -1 || cmdLen < 9 || 9 > sepIndex-1 || cmdLen < sepIndex+4) {
+        if (cmdLen < 9 || 9 > sepIndex - 1 || cmdLen < sepIndex + 4) {
             throw new IllegalArgumentException("Invalid command for a new deadline.");
         }
 

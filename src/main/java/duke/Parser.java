@@ -54,7 +54,7 @@ class Parser {
         case CMD_FIND:
             return new FindCommand(fullCommand);
         default:
-            throw new DukeException("Sorry, Yiyang-bot doesn't know what does that mean.");
+            throw new DukeException("Yiyang-bot doesn't understand that command.");
         }
     }
 }

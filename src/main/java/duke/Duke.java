@@ -13,17 +13,32 @@ public class Duke {//} extends Application {
     private TaskList tasks;
     private Ui ui;
 
+    private List<String> preCommandErrors;
+
     private static final String FILE_URL = "data/storedList.txt";
 
     /**
      * Empty constructor for Launcher to call
      */
     public Duke() {
+        preCommandErrors = null;
         ui = new Ui();
-        storage = new Storage(FILE_URL);
 
-        List<Task>[] storedLists = storage.loadStorage();
-        tasks = new TaskList(storedLists[0], storedLists[1]);
+        List<Task>[] storedLists = new List[2];
+        storedLists[0] = new ArrayList<>();
+        storedLists[1] = new ArrayList<>();
+
+        try {
+            storage = new Storage(FILE_URL);
+            storedLists = storage.loadStorage();
+
+        } catch (DukeException e) {
+            preCommandErrors = new ArrayList<>();
+            preCommandErrors.add(Ui.UI_ERROR_HEADING);
+            preCommandErrors.add("\t" + e.getMessage());
+        } finally {
+            tasks = new TaskList(storedLists[0], storedLists[1]);
+        }
     }
 
     /**
@@ -38,14 +53,20 @@ public class Duke {//} extends Application {
             Command c = Parser.parse(input);
             linesOfOutput.addAll(c.execute(tasks, ui, storage));
             isExit = c.isExit();
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
+        } catch (DukeException | IllegalArgumentException | IndexOutOfBoundsException e) {
+            linesOfOutput = new ArrayList<String>();
+            linesOfOutput.add(Ui.UI_ERROR_HEADING);
+            linesOfOutput.add("\t" + e.getMessage());
         }
 
         return new ResponseMessage(String.join("\n", linesOfOutput), isExit);
     }
 
     public String greetToGui() {
-        return ui.displayGreetings();
+        if (preCommandErrors == null) {
+            return ui.displayGreetings();
+        } else {
+            return ui.displayGreetings() + "\n" + String.join("\n", preCommandErrors);
+        }
     }
 }

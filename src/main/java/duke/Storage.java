@@ -20,7 +20,7 @@ public class Storage {
      * Loads the task list from file storage.
      * @return the loaded task list.
      */
-    public List<Task>[] loadStorage() {
+    public List<Task>[] loadStorage() throws DukeException {
         File file = new File(filePath);
 
         List<Task>[] results = new List[2];
@@ -36,16 +36,7 @@ public class Storage {
         try {
             return readFromFile(file);
         } catch (FileNotFoundException e) {
-            // create empty file, prepare for saving later
-            System.err.println("Unable to read from the file");
-            results[0] = new ArrayList<>();
-            results[1] = new ArrayList<>();
-            return results;
-        } catch (DukeException e) {
-            System.err.println(e.getMessage());
-            results[0] = new ArrayList<>();
-            results[1] = new ArrayList<>();
-            return results;
+            throw new DukeException("Yiyang-bot cannot read the storage file");
         }
     }
 
@@ -91,12 +82,12 @@ public class Storage {
         return results;
     }
 
-    private void createEmptyFile(File f) {
+    private void createEmptyFile(File f) throws DukeException {
         try {
             f.getParentFile().mkdirs();
             f.createNewFile();
         } catch (IOException e) {
-            System.err.println("Unable to initialise an empty file for duke.Storage.");
+            throw new DukeException("Yiyang-bot cannot initialise an empty file for duke.Storage.");
         }
     }
 

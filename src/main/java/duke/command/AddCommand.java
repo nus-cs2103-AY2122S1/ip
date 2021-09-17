@@ -35,9 +35,11 @@ public class AddCommand extends Command{
             }
             return taskList.addTask(newTask);
         } catch (IllegalArgumentException | DateTimeParseException | IndexOutOfBoundsException | DukeException e) {
-            System.err.println("\tOops :( " + e);
+            ArrayList<String> resp = new ArrayList<>();
+            resp.add(Ui.UI_ERROR_HEADING);
+            resp.add("\t" + e.getMessage());
+            return resp;
         }
-        return null;
     }
 
     @Override
