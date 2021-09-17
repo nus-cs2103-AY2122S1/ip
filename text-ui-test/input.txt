@@ -1,0 +1,5 @@
+todo borrow book
+event hehe /at 2/2/2021 2222
+snooze 1 /to 3/3/2021
+snooze 2 /to 3/3/2021
+deadline wat /by 2/3/2022 1231
