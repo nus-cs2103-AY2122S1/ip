@@ -8,7 +8,8 @@
 package duke.command;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
@@ -51,8 +52,8 @@ public class Command {
             throws EmptyDescriptionException, IOException, DateNotAcceptedException {
         Parser parser = new Parser(userCommand);
         String deadlineInfo = parser.getDeadlineInfo();
-        LocalDate date = parser.getDeadlineDate();
-        Deadline deadline = new Deadline(deadlineInfo, date);
+        LocalDateTime dateTime = parser.getDeadlineDateTime();
+        Deadline deadline = new Deadline(deadlineInfo, dateTime);
 
         taskList.add(deadline);
         storage.addTask(taskList.getLastStatusString());
@@ -68,11 +69,12 @@ public class Command {
      * @throws IOException
      */
     public String addEvent(String userCommand, TaskList taskList)
-            throws EmptyDescriptionException, IOException {
+            throws EmptyDescriptionException, IOException, DateNotAcceptedException {
         Parser parser = new Parser(userCommand);
         String eventInfo = parser.getEventInfo();
-        String eventDetails = parser.getEventLocation();
-        Event event = new Event(eventInfo, eventDetails);
+        LocalDateTime eventStartDateTime = parser.getEventStartDateTime();
+        LocalTime eventEndTime = parser.getEventEndTime();
+        Event event = new Event(eventInfo, eventStartDateTime, eventEndTime);
 
         taskList.add(event);
         storage.addTask(taskList.getLastStatusString());

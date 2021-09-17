@@ -6,11 +6,15 @@
  */
 package duke.tasks;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Event extends Task {
 
-    protected final String eventDetails;
+    protected final LocalDateTime dateTimeOf;
+    protected final LocalTime timeEnd;
     protected boolean isDone;
     protected ArrayList<String> tags = new ArrayList<>();
 
@@ -18,11 +22,13 @@ public class Event extends Task {
      * Constructs an Event object.
      *
      * @param description Description of new Event object.
-     * @param eventDetails Details of new Event object.
+     * @param dateTimeOf Details of new Event object.
      */
-    public Event(String description, String eventDetails, boolean isDone, ArrayList<String> tags) {
+    public Event(String description, LocalDateTime dateTimeOf, LocalTime timeEnd,
+                 boolean isDone, ArrayList<String> tags) {
         super(description);
-        this.eventDetails = eventDetails;
+        this.dateTimeOf = dateTimeOf;
+        this.timeEnd = timeEnd;
         this.isDone = isDone;
         this.tags = tags;
     }
@@ -31,11 +37,12 @@ public class Event extends Task {
      * Constructs an Event object.
      *
      * @param description Description of new Event object.
-     * @param eventDetails Details of new Event object.
+     * @param dateTimeOf Details of new Event object.
      */
-    public Event(String description, String eventDetails) {
+    public Event(String description, LocalDateTime dateTimeOf, LocalTime timeEnd) {
         super(description);
-        this.eventDetails = eventDetails;
+        this.dateTimeOf = dateTimeOf;
+        this.timeEnd = timeEnd;
         this.isDone = false;
     }
 
@@ -46,7 +53,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s%s (at: %s) %s", super.toString(), description, eventDetails,
+        return String.format("[E]%s%s (at: %s - %s) %s", super.toString(), description,
+                dateTimeOf.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mm a")),
+                timeEnd.format(DateTimeFormatter.ofPattern("h:mm a")),
                 getTags(this.tags));
     }
 
@@ -57,9 +66,19 @@ public class Event extends Task {
      */
     @Override
     public String getStatusString() {
-        return String.format("E@%d@%s@%s@%s@", (isDone ? 1 : 0),
-                this.description, this.eventDetails, getTagsForStorage(this.tags));
-        // "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.eventDetails"";
+        return String.format("E@%d@%s@%s~%s@%s@", (isDone ? 1 : 0),
+                this.description, this.dateTimeOf.toString(), this.timeEnd.toString(),
+                getTagsForStorage(this.tags));
+    }
+
+    /**
+     * Returns a String representation of the tags to any event.
+     *
+     * @param tagInfo The information associated with a tag.
+     */
+    @Override
+    public void addTag(String tagInfo) {
+        this.tags.add(tagInfo);
     }
 
 }

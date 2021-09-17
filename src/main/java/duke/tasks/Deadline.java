@@ -7,13 +7,15 @@
 
 package duke.tasks;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Deadline extends Task {
 
     protected ArrayList<String> tags = new ArrayList<>();
-    private final LocalDate dateBy;
+    private final LocalDateTime dateTime;
+
 
     // This is used only for loading from the storage
     /**
@@ -21,11 +23,11 @@ public class Deadline extends Task {
      *
      * @param description Description of Deadline object
      * @param isDone whether the task has been completed
-     * @param dateBy The date the deadline task is due by.
+     * @param dateTimeBy The date the deadline task is due by.
      */
-    public Deadline(String description, LocalDate dateBy, boolean isDone, ArrayList<String> tags) {
+    public Deadline(String description, LocalDateTime dateTimeBy, boolean isDone, ArrayList<String> tags) {
         super(description);
-        this.dateBy = dateBy;
+        this.dateTime = dateTimeBy;
         this.isDone = isDone;
         this.tags = tags;
     }
@@ -34,11 +36,11 @@ public class Deadline extends Task {
      * Constructs a Deadline object.
      *
      * @param description Description of Deadline object
-     * @param dateBy The date the deadline task is due by.
+     * @param dateTime The date and time the deadline task is due by.
      */
-    public Deadline(String description, LocalDate dateBy) {
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
-        this.dateBy = dateBy;
+        this.dateTime = dateTime;
         this.isDone = false;
     }
 
@@ -49,10 +51,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s%s (by: %d %s %d) %s", super.toString(), description, dateBy.getDayOfMonth(),
-                dateBy.getMonth().toString(), dateBy.getYear(), getTags(this.tags));
-//        return "[D]" + super.toString() + description + " (by: " + dateBy.getDayOfMonth()
-//                + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";
+        return String.format("[D]%s%s (by: %s) %s", super.toString(), description,
+                dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mm a")), getTags(this.tags));
     }
 
     /**
@@ -62,7 +62,17 @@ public class Deadline extends Task {
      */
     @Override
     public String getStatusString() {
-        return String.format("D@%d@%s@%s@%s@", (isDone ? 1 : 0), this.description, this.dateBy.toString(),
+        return String.format("D@%d@%s@%s@%s@", (isDone ? 1 : 0), this.description, this.dateTime.toString(),
                 getTagsForStorage(this.tags));
+    }
+
+    /**
+     * Returns a String representation of the tags to any event.
+     *
+     * @param tagInfo The information associated with a tag.
+     */
+    @Override
+    public void addTag(String tagInfo) {
+        this.tags.add(tagInfo);
     }
 }

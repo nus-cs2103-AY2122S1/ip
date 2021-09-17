@@ -17,16 +17,16 @@
 Adds a Deadline task to the list of tasks.
 
 **Format**  
-`deadline DEADLINE_NAME /by DATE`  
-( Note that DATE must be in format : `YYYY-MM-DD`)
+`deadline DEADLINE_NAME /by DATE TIME`  
+(Note that the "DATE TIME" must be in format : `YYYY-MM-DD HH:MM`)
 
 **Example**  
-Input : `deadline finish episode /by 2021-05-21`  
+Input : `deadline finish episode /by 2021-05-21 23:59`  
 Output : 
 ```
 Okay! I've added the following:
-[D][ ] finish episode (by: 21 May 2021)
-2 more tasks to go!
+[D][ ] finish episode (by: 21 May 2021 11.59 pm)
+1 more tasks to go!
 ```
 ___
 
@@ -34,14 +34,15 @@ ___
 Adds an Event task to the list of tasks.
 
 **Format**  
-`event EVENT_NAME /at EVENT_DESCRIPTION`
+`event EVENT_NAME /at EVENT_DESCRIPTION DATE START_TIME~END_TIME`
+(Note that the dates must be in format : `YYYY-MM-DD`, and times in format: `HH:MM`)
 
 **Example**  
-Input : `event afa /at suntec`
+Input : `event afa /at 2019-11-27 15:00~20:00`
 ```
 Okay! I've added the following:
-[E][ ] afa (at: suntec)
-3 more tasks to go!
+[E][ ] afa (at: 27 Nov 2019 3:00 pm - 8:00 pm)
+2 more tasks to go!
 ```
 ___
 
@@ -57,7 +58,7 @@ Output:
 ```
 Okay! I've added the following:
 [T][ ] watch anime
-2 more tasks to go!
+3 more tasks to go!
 ```
 ---
 
@@ -72,9 +73,9 @@ Input : `list`
 Output :
 ```
 Here are your tasks:
-1. [T][ ] watch anime
-2. [D][ ] finish episode (by: 21 MAY 2021)
-3. [E][ ] afa (at: suntec)
+1. [D][ ] finish episode (by: 21 May 2021 11.59 pm)
+2. [E][ ] afa (at: 27 Nov 2019 3:00 pm - 8:00 pm)
+3. [T][ ] watch anime
 ```
 ---
 
@@ -88,7 +89,7 @@ Mark a task as done.
 Input : `done 1`  
 Output : 
 ```
-Yay good job! [T][X] watch anime has been completed
+Yay good job! [D][X] finish episode (by: 21 May 2021 11.59 pm) has been completed
 ```
 ---
 ### Tag Task: `tag`
@@ -98,11 +99,11 @@ Tag tasks with additional descriptions.
 `tag INDEX TAG_DESCRIPTION`
 
 **Example**  
-Input: `tag 1 fun`  
+Input: `tag 3 fun`  
 Output:
 ```
 Oki! The tag fun has been added. Here is the modified task!
-[T][X] watch anime #fun
+[T][ ] watch anime #fun
 ```
 
 ---
@@ -113,11 +114,11 @@ Delete tasks from list of tasks.
 `delete INDEX`
 
 **Example**  
-Input : `delete 3`  
+Input : `delete 2`  
 Output :
 ```
 Oki! I have removed this task:
-[E][ ] afa (at: suntec)
+[E][ ] afa (at: 27 Nov 2019 3:00 pm - 8:00 pm)
 2 more tasks to go!
 ```
 ---
@@ -128,11 +129,11 @@ Search for tasks that match the given keyword.
 `find KEYWORD`
 
 **Example**  
-Input : `find book`  
+Input : `find episode`  
 Output:
 ```
 Here are the matching tasks in your list:
-2.  [D][ ] finish episode (by: 21 MAY 2021)
+2.  [D][ ] finish episode (by: 21 May 2021)
 3.  [T][ ] watch lecture episode
 Good luck!
 ```
@@ -145,6 +146,9 @@ Format:
 
 ---
 ## FAQ  
+Q: What version of Java should I use?  
+A: Please use Java 11 or a later version.
+
 Q: How do I save my progress?  
 A: Data is automatically saved in your computer :)
 
@@ -156,5 +160,5 @@ Q: Why does my JAR file not run?
 A: It is likely that the save file has been corrupted. 
 Check the duke.txt file saved in the data folder for any noticeable errors.
 If all else fails, clear the file or delete the folder.   
-Do note that doing so erases your progress.  
+Do note that doing so erases your progress.
 

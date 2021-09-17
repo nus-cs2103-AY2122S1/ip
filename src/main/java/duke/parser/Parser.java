@@ -8,7 +8,9 @@
 
 package duke.parser;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 import duke.exceptions.DateNotAcceptedException;
 import duke.exceptions.EmptyDescriptionException;
@@ -110,11 +112,11 @@ public class Parser {
     /**
      * Returns the date of a Deadline task.
      *
-     * @return The date of a Deadline task
+     * @return The date and time of a Deadline task
      * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      * @throws DateNotAcceptedException If there is an error with the date inputted.
      */
-    public LocalDate getDeadlineDate() throws EmptyDescriptionException, DateNotAcceptedException {
+    public LocalDateTime getDeadlineDateTime() throws EmptyDescriptionException, DateNotAcceptedException {
 
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("deadline");
@@ -122,10 +124,13 @@ public class Parser {
 
         String allDetails = this.command.split(" ", 2)[1];
         try {
-            return LocalDate.parse(allDetails.split("/by", 2)[1].strip());
+            return LocalDateTime.parse(allDetails.split("/by ", 2)[1].replace(" ", "T"));
 
-        } catch (Exception e) {
-            throw new DateNotAcceptedException(e.getMessage());
+        } catch (DateTimeParseException e) {
+            throw new DateNotAcceptedException("Please recheck your date and time inputs!");
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException("There isn't enough information :(");
         }
     }
 
@@ -146,18 +151,52 @@ public class Parser {
     }
 
     /**
-     * Returns the location/additional information of an Event task.
+     * Returns the starting date and time of an Event task.
      *
-     * @return The location/context of an Event task
+     * @return The starting time and date of an Event task.
      * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
-    public String getEventLocation() throws EmptyDescriptionException {
+    public LocalDateTime getEventStartDateTime() throws EmptyDescriptionException, DateNotAcceptedException {
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("event");
         }
 
         String allDetails = this.command.split(" ", 2)[1];
-        return allDetails.split("/at", 2)[1];
+
+        try {
+            return LocalDateTime.parse(allDetails.split("/at ", 2)[1]
+                    .split("~", 2)[0].replace(" ", "T"));
+
+        } catch (DateTimeParseException e) {
+            throw new DateNotAcceptedException("Please recheck your date and time inputs!");
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException("There isn't enough information :(");
+        }
+    }
+
+    /**
+     * Returns the end time information of an Event task.
+     *
+     * @return The end time of an Event task
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
+     */
+    public LocalTime getEventEndTime() throws EmptyDescriptionException, DateNotAcceptedException {
+        if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
+            throw new EmptyDescriptionException("event");
+        }
+
+        String allDetails = this.command.split(" ", 2)[1];
+        try {
+            return LocalTime.parse(allDetails.split("/at ", 2)[1]
+                    .split("~", 2)[1]);
+
+        } catch (DateTimeParseException e) {
+            throw new DateNotAcceptedException("Please recheck your date and time inputs!");
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException("There isn't enough information :(");
+        }
     }
 
     /**

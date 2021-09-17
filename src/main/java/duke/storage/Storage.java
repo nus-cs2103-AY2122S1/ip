@@ -11,7 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -62,42 +63,12 @@ public class Storage {
     }
 
     /**
-     * Adds a Task parsed from the save file (data/duke.txt) into an ArrayList of tasks.
+     * Reads the saved file and adds tasks to the tasklist.
      *
-     * @param tasks The ArrayList of tasks to which the saved task will be added.
-     * @param taskType The type of task to be added.
-     * @param taskState Whether the task has been completed.
-     * @param taskInfo Description of the task.
-     * @param moreTaskInfo Additional task information. dateBy for Deadline; eventDetails for Events; Empty for Todo
-     * @param taskTags Tags attached to the task.
-     * @throws DukeDataLoadException The exception is thrown when the task is not recognised.
+     * @return An ArrayList of tasks read from the save file.
+     * @throws FileNotFoundException If saved file cannot be found.
+     * @throws DukeDataLoadException If the data could not be loaded.
      */
-    private void addExistingTask(ArrayList<Task> tasks, String taskType, boolean taskState, String taskInfo,
-                                 String moreTaskInfo, ArrayList<String> taskTags) throws DukeDataLoadException {
-        // Checks the task type (i.e. deadline, todo or event) and add them to tasks respectively
-        switch (taskType) {
-        case "T": {
-            tasks.add(new Todo(taskInfo, taskState, taskTags));
-            break;
-
-        }
-        case "D": {
-            // String dateBy = txtFileCmd[3];
-            tasks.add(new Deadline(taskInfo, LocalDate.parse(moreTaskInfo), taskState, taskTags));
-            break;
-
-        }
-        case "E": {
-            // String eventDetails = txtFileCmd[3];
-            tasks.add(new Event(taskInfo, moreTaskInfo, taskState, taskTags));
-            break;
-        }
-        default:
-            throw new DukeDataLoadException("The task is not recognized!");
-
-        }
-    }
-
     private ArrayList<Task> readFileAddTasks() throws FileNotFoundException, DukeDataLoadException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner fileSc = new Scanner(file);
@@ -110,15 +81,57 @@ public class Storage {
             String taskType = txtFileCmd[0];
             boolean taskState = Integer.parseInt(txtFileCmd[1]) != 0; // 0 for not done, 1 for done
             String taskInfo = txtFileCmd[2];
-            String moreTaskInfo = txtFileCmd[3];
+            String dateTime = txtFileCmd[3];
             ArrayList<String> taskTags = formTagList(txtFileCmd[4]);
 
-            addExistingTask(tasks, taskType, taskState, taskInfo, moreTaskInfo, taskTags);
+            addExistingTask(tasks, taskType, taskState, taskInfo, dateTime, taskTags);
             commandsSaved.add(nextLine);
         }
 
         fileSc.close();
         return tasks;
+    }
+
+
+    /**
+     * Adds a Task parsed from the save file (data/duke.txt) into an ArrayList of tasks.
+     *
+     * @param tasks The ArrayList of tasks to which the saved task will be added.
+     * @param taskType The type of task to be added.
+     * @param taskState Whether the task has been completed.
+     * @param taskInfo Description of the task.
+     * @param dateTime Additional task information. dateBy for Deadline; eventDetails for Events; Empty for Todo
+     * @param taskTags Tags attached to the task.
+     * @throws DukeDataLoadException The exception is thrown when the task is not recognised.
+     */
+    private void addExistingTask(ArrayList<Task> tasks, String taskType, boolean taskState, String taskInfo,
+                                 String dateTime, ArrayList<String> taskTags) throws DukeDataLoadException {
+
+        // Checks the task type (i.e. deadline, todo or event) and add them to tasks respectively
+        switch (taskType) {
+        case "T": {
+            tasks.add(new Todo(taskInfo, taskState, taskTags));
+            break;
+
+        }
+        case "D": {
+            // String dateBy = txtFileCmd[3];
+            tasks.add(new Deadline(taskInfo, LocalDateTime.parse(dateTime), taskState, taskTags));
+            break;
+
+        }
+        case "E": {
+            // String eventDetails = txtFileCmd[3];
+            String startDateTime = dateTime.split("~")[0];
+            String endTime = dateTime.split("~")[1];
+
+            tasks.add(new Event(taskInfo, LocalDateTime.parse(startDateTime), LocalTime.parse(endTime),
+                    taskState, taskTags));
+            break;
+        }
+        default:
+            throw new DukeDataLoadException("The task is not recognized!");
+        }
     }
 
     /**

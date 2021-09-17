@@ -15,6 +15,7 @@ public class DateNotAcceptedException extends DukeExceptions {
      * @param message Message shown by the exception.
      */
     public DateNotAcceptedException(String message) {
-        super("There was an error with the Date inputted. Please recheck and input a date as YYYY-MM-DD!\n" + message);
+        super("There was an error with the Date inputted. Please recheck and input in the form "
+                + "\"YYYY-MM-DD HH:MM\" for Deadlines or  \"YYYY-MM-DD HH:MM~HH:MM\" for Events!\n" + message);
     }
 }
