@@ -30,25 +30,25 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString() {
-        String result = "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        result += this.hasReminder()
-                ? ", remind at" + this.getReminderTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
-                : "";
-        result += ")";
-
-        return result;
-    }
-
-    @Override
     public String getIcon() {
         return "D";
     }
 
     @Override
     public String getTaskTime() {
-        return by.format(Task.getDateTimeFormatter());
+        return by.format(getDateTimeFormatter());
+    }
+
+    @Override
+    public String toString() {
+        String result = super.toString() + " (by: "
+                + by.format(getOutputDateTimeFormatter());
+        result += this.hasReminder()
+                ? ", reminds at " + this.getReminderTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                : "";
+        result += ")";
+
+        return result;
     }
 
     @Override

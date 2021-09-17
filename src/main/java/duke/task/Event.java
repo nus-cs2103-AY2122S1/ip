@@ -36,12 +36,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String result = "[E]" + super.toString() + " (at: "
-                + from.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        String result = super.toString() + " (at: "
+                + from.format(getOutputDateTimeFormatter())
                 + " -- "
-                + to.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                + to.format(getOutputDateTimeFormatter());
         result += this.hasReminder()
-                ? ", remind at" + this.getReminderTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                ? ", reminds at " + this.getReminderTime().format(getOutputDateTimeFormatter())
                 : "";
         result += ")";
 

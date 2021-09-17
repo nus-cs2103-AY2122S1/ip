@@ -109,7 +109,7 @@ public class Storage {
             throw new DukeException("Can't understand the task icon '" + taskType + "'");
         }
         if (status.equals("1")) {
-            task.done();
+            task.markTaskAsDone();
         }
         return task;
     }
@@ -144,7 +144,7 @@ public class Storage {
             String reminderTime = task.hasReminder()
                     ? task.getReminderTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
                     : "";
-            String output = task.getIcon() + "&&" + task.getStatus() + "&&" + task.getDescription()
+            String output = task.getIcon() + "&&" + task.getDoneStatus() + "&&" + task.getDescription()
                     + "&&" + task.getTaskTime() + "&&" + reminderTime + "\n";
             fileWriter.write(output);
             fileWriter.close();

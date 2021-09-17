@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
-
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -14,9 +12,9 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String result = "[T]" + super.toString();
+        String result = super.toString();
         result += this.hasReminder()
-                ? ", remind at" + this.getReminderTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                ? ", reminds at " + this.getReminderTime().format(getOutputDateTimeFormatter())
                 : "";
 
         return result;
@@ -25,6 +23,11 @@ public class ToDo extends Task {
     @Override
     public String getIcon() {
         return "T";
+    }
+
+    @Override
+    public String getTaskTime() {
+        return "";
     }
 
     @Override

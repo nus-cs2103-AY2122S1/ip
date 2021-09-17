@@ -11,7 +11,7 @@ public class StorageTest {
     @Test
     void convertTaskStringToTask() {
         Task task = new ToDo("hello world!");
-        task.done();
+        task.markTaskAsDone();
         try {
             assertEquals(task, Storage.convertTaskStringToTask("T&&1&&hello world!&&"));
         } catch (Exception e) {

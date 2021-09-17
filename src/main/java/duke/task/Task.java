@@ -6,22 +6,14 @@ import java.time.format.DateTimeFormatter;
 /**
  * The task object.
  */
-public class Task {
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+public abstract class Task {
+    private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+    private static final DateTimeFormatter outputDateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     private String description;
     private boolean isDone;
     private boolean hasReminder;
     private LocalDateTime reminderTime;
-
-    /**
-     * Constructs a default Task.
-     */
-    public Task() {
-        this.description = "";
-        this.isDone = false;
-        hasReminder = false;
-    }
 
     /**
      * Constructs Task.
@@ -48,19 +40,42 @@ public class Task {
     }
 
     /**
-     * Marks this task as done.
+     * Gets the standard date time formatter for tasks.
+     *
+     * @return The date time formatter.
      */
-    public void done() {
-        this.isDone = true;
+    public static DateTimeFormatter getDateTimeFormatter() {
+        return dateTimeFormat;
     }
 
     /**
-     * Returns the task status icon.
+     * Gets the standard date time formatter to print in front of users.
      *
-     * @return Icon indicating whether this task is done or not.
+     * @return Date time format that is going to be shown to the user.
      */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+    public static DateTimeFormatter getOutputDateTimeFormatter() {
+        return outputDateTimeFormat;
+    }
+
+    /**
+     * Returns this task's icon.
+     *
+     * @return This task's icon.
+     */
+    public abstract String getIcon();
+
+    /**
+     * Shows the time that the task will happen.
+     *
+     * @return The task's deadline or data.
+     */
+    public abstract String getTaskTime();
+
+    /**
+     * Marks this task as done.
+     */
+    public void markTaskAsDone() {
+        this.isDone = true;
     }
 
     /**
@@ -68,13 +83,8 @@ public class Task {
      *
      * @return Integer with 1 indicating task has been done and 0 has not been done.
      */
-    public int getStatus() {
+    public int getDoneStatus() {
         return isDone ? 1 : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
@@ -84,24 +94,6 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
-    }
-
-    /**
-     * Shows the time that the task will happen.
-     *
-     * @return The task's deadline or data.
-     */
-    public String getTaskTime() {
-        return "";
-    }
-
-    /**
-     * Returns this task's icon.
-     *
-     * @return This task's icon.
-     */
-    public String getIcon() {
-        return "";
     }
 
     /**
@@ -122,12 +114,11 @@ public class Task {
         return reminderTime;
     }
 
-    /**
-     * Gets the standard date time formatter for tasks.
-     *
-     * @return The date time formatter.
-     */
-    public static DateTimeFormatter getDateTimeFormatter() {
-        return dateTimeFormatter;
+    @Override
+    public String toString() {
+        String doneStatus = isDone ? "[X]" : "[ ]";
+        String taskType = "[" + getIcon() + "]";
+        String description = " " + getDescription();
+        return doneStatus + taskType + description;
     }
 }

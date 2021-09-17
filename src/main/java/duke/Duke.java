@@ -14,6 +14,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private MainWindow main;
+    private boolean isExit = false;
 
     /**
      * Constructor for Duke bot
@@ -55,5 +56,14 @@ public class Duke {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
+    }
+
+    /**
+     * Shows whether duke need to exit.
+     *
+     * @return Value indicating whether duke need to exit.
+     */
+    public boolean isExit() {
+        return ui.getExitStatus();
     }
 }

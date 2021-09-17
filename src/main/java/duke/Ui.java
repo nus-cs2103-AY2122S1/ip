@@ -14,6 +14,7 @@ import javafx.application.Platform;
  */
 public class Ui {
     private MainWindow mainWindow;
+    private boolean isExit = false;
 
     /**
      * Says welcome to the user when they open duke bot.
@@ -23,10 +24,20 @@ public class Ui {
     }
 
     /**
+     * Shows whether duke need to exit.
+     *
+     * @return Value indicating whether duke need to exit.
+     */
+    public boolean getExitStatus() {
+        return isExit;
+    }
+
+    /**
      * Says GoodBye to the user when they leave.
      */
     public String bye() {
-        return "Click close button on the top right corner to exit the bot.";
+        this.isExit = true;
+        return "GoodBye";
     }
 
     /**
@@ -83,7 +94,7 @@ public class Ui {
     public String deleteTask(Task task, int taskListSize) {
         return "Successfully deleted task"
                 + task.toString()
-                + "\nNow you have" + taskListSize + " tasks in the list.";
+                + "\nNow you have " + taskListSize + " tasks in the list.";
     }
 
     /**
@@ -108,7 +119,7 @@ public class Ui {
                 @Override
                 public void run() {
                     Platform.runLater(() -> {
-                        mainWindow.displayReminder("reminder!" + task.toString());
+                        mainWindow.displayReminder("reminder! " + task.toString());
                     });
                 }
             };

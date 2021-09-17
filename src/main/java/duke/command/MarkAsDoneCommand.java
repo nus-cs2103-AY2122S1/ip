@@ -16,7 +16,7 @@ public class MarkAsDoneCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.get(doneListIndex).done();
+        tasks.get(doneListIndex).markTaskAsDone();
         storage.convertTaskListToFile(tasks);
         return ui.markAsDone(tasks.get(doneListIndex));
     }
