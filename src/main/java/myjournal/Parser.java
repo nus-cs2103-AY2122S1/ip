@@ -6,7 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import myjournal.exception.*;
+import myjournal.exception.EmptyDescriptionException;
+import myjournal.exception.InvalidCommandException;
+import myjournal.exception.InvalidTaskNumberException;
+import myjournal.exception.MyJournalException;
 import myjournal.task.Deadline;
 import myjournal.task.Event;
 import myjournal.task.Task;
