@@ -2,8 +2,10 @@
 
 ## Contents page
 
-Commands
-- help
+[Features](#features)
+
+[Usage](#usage)
+- [help](#help---Get-command-syntax)
 - list
 - todo
 - deadline
