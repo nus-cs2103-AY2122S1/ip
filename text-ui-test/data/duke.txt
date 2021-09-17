@@ -1,0 +1,2 @@
+T | X | borrow book
+D | X | return book | Oct 10 2021 | 14:55
