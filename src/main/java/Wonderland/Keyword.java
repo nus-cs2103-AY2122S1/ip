@@ -13,5 +13,10 @@ public enum Keyword {
     Keyword(String command) {
         this.command = command;
     }
+
+    @Override
+    public String toString() {
+        return command;
+    }
 }
 

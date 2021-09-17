@@ -91,7 +91,7 @@ public class TaskList {
 
         for (int i = 0; i < records.size(); i++) {
             Task current = records.get(i);
-            if (current.description.contains(keyword)) {
+            if (current.description.toLowerCase().contains(keyword.toLowerCase())) {
                 result.add(current);
             }
         }

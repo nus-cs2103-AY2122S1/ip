@@ -1,4 +1,4 @@
-package Duke;
+package Wonderland;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,9 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 
+/**
+ * This control represents a dialog box consisting of an ImageView to represent the speaker and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -20,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    public DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -30,10 +35,15 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        Circle clip = new Circle(50,40,40);
         dialog.setText(text);
         displayPicture.setImage(image);
+        displayPicture.setClip(clip);
     }
 
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);

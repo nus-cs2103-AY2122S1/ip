@@ -1,4 +1,4 @@
-package Duke;
+package Wonderland;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,12 +21,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-    private static final String GREET_MESSAGE = "Hihi! This is halp! How can I help?";
+    private Wonderland wonderland;
+    private static final String GREET_MESSAGE = "Welcome to Wonderland! What do you want? " +
+            "\nI'm running late so make it quick.";
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rabbit.png"));
 
+    /**
+     * Sets up the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -34,26 +39,21 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Wonderland d) {
+        wonderland = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Wonderland's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         DialogBox userDialogBox = DialogBox.getUserDialog(userInput.getText(), userImage);
-        DialogBox dukeDialogBox = DialogBox.getDukeDialog(getResponse(userInput.getText()),dukeImage);
+        DialogBox dukeDialogBox = DialogBox.getDukeDialog(wonderland.getResponse(userInput.getText()), dukeImage);
         dialogContainer.getChildren().addAll(
                 userDialogBox, dukeDialogBox
         );
         userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        Duke duke = new Duke();
-        return duke.getResponse(input);
     }
 }

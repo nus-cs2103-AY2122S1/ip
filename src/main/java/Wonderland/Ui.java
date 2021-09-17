@@ -1,6 +1,9 @@
 package Duke;
 
 public class Ui {
+    private static final String GREET_MESSAGE = "Welcome to Wonderland! What do you want?\n\t" +
+            "I'm running late so make it quick.\n\t";
+    private static final String BYE_MESSAGE = "No time to say 'hello, goodbye,' I'm late, I'm late, I'm late!\n\t";
     /**
      * Returns formatted output string for bot message.
      *
@@ -16,15 +19,14 @@ public class Ui {
      * Prints greeting message for bot.
      */
     public static void greet() {
-        String greet = "Hihi! This is halp! \n\tHow can I help?\n\t";
-        System.out.println(format(greet));
+        System.out.println(format(GREET_MESSAGE));
     }
 
     /**
      * Prints ending message for bot.
      */
     public static void end() {
-        System.out.println(format("Bye bye!\n\t"));
+        System.out.println(format(BYE_MESSAGE));
     }
 
     /**

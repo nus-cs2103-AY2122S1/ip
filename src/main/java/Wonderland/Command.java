@@ -19,8 +19,11 @@ public class Command {
      * @throws DukeException if description is empty.
      */
     public String todo(String description, TaskList tasks) throws DukeException {
-        assert !description.isEmpty() : "OOPS!!! The description of a todo cannot be empty.";
+        if (description.isEmpty()) {
+            throw new DukeException("The description of a todo cannot be empty. If you don't think, you shouldn't talk!");
+        }
         return tasks.addTodo(description);
+
     }
 
     /**
@@ -34,7 +37,7 @@ public class Command {
      */
     public String event(String description, String at, TaskList tasks) throws DukeException {
         if (description.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("The description of an event cannot be empty. If you don't think, you shouldn't talk!");
         }
 
         LocalDate date;
@@ -58,7 +61,7 @@ public class Command {
      */
     public String deadline(String description, String by, TaskList tasks) throws DukeException {
         if (description.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty. If you don't think, you shouldn't talk!");
         }
 
         LocalDate date;
@@ -88,10 +91,14 @@ public class Command {
      * @param tasks Duke.Duke.task.TaskList of list of existing tasks.
      * @return delete message for bot.
      */
-    public String delete(int index, TaskList tasks) {
-        assert index >= 0 : "OOPS!!! Index must be greater than 0";
-        assert index < tasks.length() : String.format("OOPS!!! You only have %1$d tasks",tasks.length());
-        return tasks.delete(index);
+    public String delete(int index, TaskList tasks) throws DukeException {
+        if (index <= 0) {
+            throw new DukeException("Index must be greater than 0!! " +
+                    "\n Just get it right and stop wasting time! I'm late!");
+        } else if (index > tasks.length()) {
+            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",tasks.length()));
+        }
+        return tasks.delete(index - 1);
     }
 
     /**
@@ -101,11 +108,13 @@ public class Command {
      * @param tasks TaskList of list of existing tasks.
      * @return Task mark as done message.
      */
-    public String done(int index, TaskList tasks) {
-        assert index >= 0 : "OOPS!!! Index must be greater than 0";
-        assert index < tasks.length() : String.format("OOPS!!! You only have %1$d tasks",tasks.length());
-
-        Task done = tasks.getTask(index);
+    public String done(int index, TaskList tasks) throws DukeException {
+        if (index <= 0) {
+            throw new DukeException("Index must be greater than 0!! \n Just get it right and stop wasting time! I'm late!");
+        } else if (index > tasks.length()) {
+            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",tasks.length()));
+        }
+        Task done = tasks.getTask(index - 1);
         done.markAsDone();
         return String.format("Nice! I've marked this task as done:\n\t %1$s \n\t", done.toString());
     }
