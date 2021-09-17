@@ -71,7 +71,7 @@ public class Storage {
     }
 
     /**
-     * Add task into file
+     * Adds task into file
      *
      * @param data
      * @throws IOException

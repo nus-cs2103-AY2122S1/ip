@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Parse date into MMM dd yyyy format
+     * Parses date into MMM dd yyyy format
      *
      * @return date in MMM dd yyyy format
      */
