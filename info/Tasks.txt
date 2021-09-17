@@ -1,3 +1,4 @@
 D ~ Yes ~ finish hw ~ 6pm
 D ~ Yes ~ eat food ~ 7pm
 T ~ Yes ~ call friend
+T ~ Yes ~ finish poster
