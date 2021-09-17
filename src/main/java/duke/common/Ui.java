@@ -1,8 +1,11 @@
 package duke.common;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.common.task.Task;
+import javafx.application.Platform;
 
 /**
  * UI handles processes string responses from Duke before passing them on to be displayed in the app.
@@ -29,6 +32,16 @@ public class Ui {
      * @return bye message
      */
     public String terminate() {
+        // @@author Vaibhav G
+        // Reused from https://stackoverflow.com/questions/35512648/adding-a-timer-to-my-program-javafx
+        // with minor modifications
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                Platform.exit();
+            }
+        };
+        timer.schedule(task,500);
         return "Bye. Hope to see you again soon!";
     }
 
