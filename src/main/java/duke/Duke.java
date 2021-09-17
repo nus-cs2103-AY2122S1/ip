@@ -34,26 +34,36 @@ public class Duke {
         storage.loadInto(taskList);
         ui.displayWelcomeMessage();
         Scanner myObj = new Scanner(System.in);
+
         // String input
         while(true) {
             String input = myObj.nextLine();
-            Task newTask = new Task(input);
+
             if (parser.isMarkDoneCommand(input)) {
                 taskList.markDone(input);
                 continue;
             }
+
             if (parser.isDeleteTaskCommand(input)) {
                 taskList.deleteTask(input);
                 continue;
             }
-            if (!parser.isEnd(input) && !parser.isDisplay(input)) {
+
+            if (!parser.isEnd(input) && !parser.isDisplay(input) && !parser.isFindTask(input)) {
                 taskList.addTaskFromInput(input);
                 continue;
             }
+
             if (parser.isDisplay(input)) {
                 taskList.displayAllTasks();
                 continue;
             }
+
+            if (parser.isFindTask(input)) {
+                taskList.displayFindTasks(input);
+                continue;
+            }
+
             if (parser.isEnd(input)) {
                 ui.displayExitMessage();
                 break;

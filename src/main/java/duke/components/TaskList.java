@@ -174,4 +174,28 @@ public class TaskList {
         ui.displayLinebreak();
     }
 
+    /**
+     * Finds and displays all tasks matched with user input.
+     *
+     * @param input User input used to find matching tasks.
+     */
+    public void displayFindTasks(String input) {
+        String toBeFound = input.substring(5);
+        ArrayList<Task> tasksFound = new ArrayList<>();
+
+        for (int i = 0; i < inputs.size(); i++) {
+            Task element = inputs.get(i);
+            if (element.toString().contains(toBeFound)) {
+                tasksFound.add(element);
+            }
+        }
+
+        System.out.println("Here are the matching tasks in your list: ");
+        for (int i = 0; i < tasksFound.size(); i++) {
+            int index = i + 1;
+            System.out.println(index + ". " + tasksFound.get(i).toString());
+        }
+        ui.displayLinebreak();
+    }
+
 }

@@ -10,24 +10,18 @@ import java.util.regex.Pattern;
  * Represents a parser that will make sense of user input.
  */
 public class Parser {
-    private final String end;
-    private final String display;
-    private final String markDone;
-    private final String deleteTask;
-    private final String taskTodo;
-    private final String taskDdl;
-    private final String taskEve;
-    private final DateTimeFormatter formatter;
+    private static final String END = "bye";
+    private static final String DISPLAY = "list";
+    private static final String MARK_DONE = "done";
+    private static final String DELETE_TASK = "delete";
+    private static final String TASK_TODO = "todo";
+    private static final String TASK_DEADLINE = "deadline";
+    private static final String TASK_EVENT = "event";
+    private static final String FIND = "find";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(
+            "dd/MM/yyyy kk:mm", Locale.ENGLISH);
 
     public Parser() {
-        this.end = "bye";
-        this.display = "list";
-        this.markDone = "done";
-        this.deleteTask = "delete";
-        this.taskTodo = "todo";
-        this.taskDdl = "deadline";
-        this.taskEve = "event";
-        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm", Locale.ENGLISH);
     }
 
     /**
@@ -37,7 +31,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "bye".
      */
     public boolean isEnd(String input) {
-        return input.equals(end);
+        return input.equals(END);
     }
 
     /**
@@ -47,7 +41,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "list".
      */
     public boolean isDisplay(String input) {
-        return input.equals(display);
+        return input.equals(DISPLAY);
     }
 
     /**
@@ -57,7 +51,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "done".
      */
     public boolean isDone(String input) {
-        return input.equals(markDone);
+        return input.equals(MARK_DONE);
     }
 
     /**
@@ -67,7 +61,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "delete".
      */
     public boolean isDelete(String input) {
-        return input.equals(deleteTask);
+        return input.equals(DELETE_TASK);
     }
 
     /**
@@ -77,7 +71,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "todo".
      */
     public boolean isTodo(String input) {
-        return input.equals(taskTodo);
+        return input.equals(TASK_TODO);
     }
 
     /**
@@ -87,7 +81,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "deadline".
      */
     public boolean isDeadline(String input) {
-        return input.equals(taskDdl);
+        return input.equals(TASK_DEADLINE);
     }
 
     /**
@@ -97,7 +91,7 @@ public class Parser {
      * @return Boolean that represents whether the user input is "event".
      */
     public boolean isEvent(String input) {
-        return input.equals(taskEve);
+        return input.equals(TASK_EVENT);
     }
 
     /**
@@ -106,7 +100,7 @@ public class Parser {
      * @return The DateTimeFormatter used in Duke.
      */
     public DateTimeFormatter getFormatter() {
-        return this.formatter;
+        return FORMATTER;
     }
 
     /**
@@ -131,5 +125,18 @@ public class Parser {
         Pattern patternDelete = Pattern.compile("delete\\s\\d+");
         Matcher matcherDelete = patternDelete.matcher(input);
         return matcherDelete.find();
+    }
+
+    /**
+     * Checks if user input is "find".
+     *
+     * @param input The user input.
+     * @return Boolean that represents whether the user input is "find".
+     */
+    public boolean isFindTask(String input) {
+        if (input.length() >= 5) {
+            return input.substring(0, 4).equals(FIND);
+        }
+        return false;
     }
 }
