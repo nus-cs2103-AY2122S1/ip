@@ -10,8 +10,6 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-    // Already uses Gradle
-
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
