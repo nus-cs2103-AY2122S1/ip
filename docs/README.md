@@ -6,6 +6,7 @@ The name Gnosis means knowledge in Greek.
 Why I named it Gnosis?
 Simply, because my aim in CS2103 (and of course in my other mods) is to expand my knowledge and learning.
 
+## Download v0.2 [here](https://github.com/pss-coder/ip/releases/download/A-Release/Gnosis.jar)
 
 ```
 Welcome, I am Gnosis.
