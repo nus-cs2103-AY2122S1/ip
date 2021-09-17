@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 /**
  * The main class which runs the Duke chatbot.
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList taskList;
@@ -23,7 +23,7 @@ public class Duke extends Application {
     public Duke() {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage("data/tasks.txt");
+        storage = new Storage("tasks.txt");
         try {
             taskList = storage.load();
         } catch (Exception e) {
@@ -69,15 +69,6 @@ public class Duke extends Application {
      */
     public Ui getUi() {
         return ui;
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 
     public static void main(String[] args) {
