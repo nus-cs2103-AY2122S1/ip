@@ -1,0 +1,4 @@
+theme: jekyll-theme-modernist
+title: Duke
+description: A Task Management Chat Application, built for CS2103T Software Engineering.
+show_downloads: true

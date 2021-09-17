@@ -1,0 +1,40 @@
+list
+todo declare temperature later
+list
+done 1
+list
+deadline finish tutorial /by today 2359
+list
+deadline review cs2100 lecture /by 15 Aug 8AM
+list
+done 3
+list
+event cs2101 tutorial /at Mon 12PM
+list
+event hackerschool /at Sat 10AM
+list
+done 5
+delete 2
+list
+todo
+deadline
+deadline noDeadlineTest
+deadline multipleDeadlineTest /by 12AM /by 2AM
+event
+event noDateTimeTest
+event multipleDateTimeTest /at 12AM /at 2Am
+done -1
+done 1000
+done
+done abc123
+delete
+delete -1
+delete 1000
+delete abc123
+asdf
+deadline test /by 2021-08-09 2100
+deadline test /by 2021-08-09
+event test /at 2021-08-09 2100
+event test /at 2021-08-09
+list
+exit
