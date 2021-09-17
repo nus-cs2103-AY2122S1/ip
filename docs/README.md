@@ -10,7 +10,8 @@ Data of the tasks are saved in the `/data` folder in the current directory.
 4. list
 5. done 
 6. delete
-7. bye
+7. find
+8. bye
 
 ## Features 
 
