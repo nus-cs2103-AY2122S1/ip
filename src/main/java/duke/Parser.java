@@ -9,6 +9,8 @@ import duke.command.CompleteTaskCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.FilterTasksCommand;
 import duke.command.ListTasksCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 
 public class Parser {
     public enum CommandType {
@@ -20,9 +22,9 @@ public class Parser {
      *
      * @param fullCommand The full command string input by the user.
      * @return The new parsed {@link Command}.
-     * @throws An exception if the input is not a valid command.
+     * @throws DukeException An exception if the input is not a valid command.
      */
-    public static Command parse(String fullCommand) throws Exception {
+    public static Command parse(String fullCommand) throws DukeException {
         String[] commandArguments = fullCommand.split("\\s+", 2);
 
         String commandString = commandArguments[0];
@@ -32,11 +34,9 @@ public class Parser {
         try {
             commandType = CommandType.valueOf(commandString.toUpperCase());
         } catch (IllegalArgumentException e) {
-            String fullInput = commandString + " " + arguments;
-            throw new Exception("Command not recognized: " + fullInput);
+            throw new InvalidCommandException("Command not recognized: " + fullCommand);
         }
 
-        // TODO: shift parsing into parser instead of individual commands.
         switch (commandType) {
         case BYE:
             return new ByeCommand(arguments);
@@ -63,7 +63,7 @@ public class Parser {
             return new AddEventCommand(arguments);
 
         default:
-            throw new Exception("No command found");
+            throw new InvalidCommandException("Command not recognized: " + fullCommand);
         }
     }
 }

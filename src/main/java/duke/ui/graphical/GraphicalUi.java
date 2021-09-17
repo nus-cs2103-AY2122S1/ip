@@ -1,12 +1,12 @@
-package duke.ui;
+package duke.ui.graphical;
 
-import duke.DialogBox;
+import duke.ui.Ui;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 public class GraphicalUi extends Ui {
-    private VBox dialogContainer;
-    private Image dukeImage;
+    private final VBox dialogContainer;
+    private final Image dukeImage;
 
     /**
      * Initializes a graphical UI instance using JavaFX.

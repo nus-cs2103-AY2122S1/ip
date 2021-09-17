@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import duke.task.Task;
 
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;

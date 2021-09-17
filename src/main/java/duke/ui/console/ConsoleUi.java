@@ -1,9 +1,11 @@
-package duke.ui;
+package duke.ui.console;
 
 import java.util.Scanner;
 
+import duke.ui.Ui;
+
 public class ConsoleUi extends Ui {
-    private Scanner in;
+    private final Scanner in;
 
     public ConsoleUi(Scanner in) {
         this.in = in;

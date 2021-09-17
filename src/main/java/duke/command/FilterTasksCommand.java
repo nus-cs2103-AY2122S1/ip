@@ -2,20 +2,21 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.ui.Ui;
 
 public class FilterTasksCommand extends Command {
-    private String searchInput;
+    private final String searchInput;
 
     /**
      * Creates a command that filters a user's tasklist by the search string.
      *
      * @param arguments Command arguments.
      */
-    public FilterTasksCommand(String arguments) throws Exception {
+    public FilterTasksCommand(String arguments) throws InvalidCommandException {
         if (arguments.length() == 0) {
-            throw new Exception("Command `find` requires an argument");
+            throw new InvalidCommandException("Command `find` requires an argument");
         }
         this.searchInput = arguments;
     }
@@ -35,7 +36,7 @@ public class FilterTasksCommand extends Command {
         int numTasks = filteredTaskList.size();
 
         if (numTasks == 0) {
-            ui.printMessage("Couldn't find any tasks matchin: " + searchInput);
+            ui.printMessage("Couldn't find any tasks matching: " + searchInput);
         } else {
             builder.append("Here are the matching tasks:\n");
 
