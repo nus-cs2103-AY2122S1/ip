@@ -41,7 +41,7 @@ public class Ui {
                 Platform.exit();
             }
         };
-        timer.schedule(task,500);
+        timer.schedule(task, 500);
         return "Bye. Hope to see you again soon!";
     }
 

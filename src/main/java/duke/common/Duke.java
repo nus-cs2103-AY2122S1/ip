@@ -17,6 +17,9 @@ public class Duke {
 
     private String taskListFileName;
 
+    /**
+     * Default Duke constructor with default storage filepath provided.
+     */
     public Duke() {
         this("data/duke.txt");
     }

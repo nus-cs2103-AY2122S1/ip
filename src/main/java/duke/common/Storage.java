@@ -16,6 +16,11 @@ public class Storage {
     private String taskListFileName;
     private File taskListFile;
 
+    /**
+     * Default Storage constructor. Configures storage to use a given file to retrieve and store tasklists.
+     *
+     * @param taskListFileName path to given file.
+     */
     public Storage(String taskListFileName) {
         assert taskListFileName != "" : "Filename should not be empty.";
         assert !taskListFileName.contains(" ") : "Filename should not contain whitespaces.";

@@ -13,6 +13,12 @@ import duke.common.enums.TaskField;
 public class Deadline extends Task {
     private LocalDate deadline;
 
+    /**
+     * Default Deadline task constructor.
+     *
+     * @param description description of task.
+     * @param deadline when the task must be completed by.
+     */
     public Deadline(String description, String deadline) {
         super(description);
         try {

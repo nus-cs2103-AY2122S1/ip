@@ -9,6 +9,12 @@ import duke.common.enums.TaskField;
 public class Event extends Task {
     private String eventTime;
 
+    /**
+     * Default Event task constructor.
+     *
+     * @param description description of task.
+     * @param eventTime when the event will occur.
+     */
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
