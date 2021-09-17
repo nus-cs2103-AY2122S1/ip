@@ -5,7 +5,8 @@ package duke;
  */
 public class Ui {
 
-    private static final String LINE = "--------------------------------------------------------------------------------------";
+    private static final String LINE =
+            "--------------------------------------------------------------------------------------";
 
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -112,66 +113,6 @@ public class Ui {
     }
 
     /**
-     * Shows message after successfully marking task as complete.
-     */
-    public static void showCompletedMessage() {
-        String message = "Nice! I've marked this task as done:";
-        showToUser(LINE, message);
-    }
-
-    /**
-     * Shows line divider.
-     */
-    public static void showLine() {
-        System.out.println(LINE);
-    }
-
-    /**
-     * Shows added task, along with uodated number of tasks in list.
-     *
-     * @param taskName Task to be added.
-     * @param numTasks Number of tasks in the arraylist.
-     */
-    public static void showAddedTask(String taskName, int numTasks) {
-        String successfulMessage = "Got it. I've added this task:";
-        String updatedListNumber = "Now you have " + numTasks + " task(s) in the list.";
-        showToUser(LINE, successfulMessage, taskName, updatedListNumber, LINE);
-    }
-
-    /**
-     * Shows list of all the tasks that have not been deleted.
-     */
-    public static void showList() {
-        String message = "Here are the tasks in your list:";
-        showToUser(LINE, message);
-    }
-
-    /**
-     * Shows message if number does not correspond to any task.
-     */
-    public static void showNoTask() {
-        String message = "No such task exists.";
-        showToUser(LINE, message, LINE);
-    }
-
-    /**
-     * Show message upon successfully deleting a task.
-     */
-    public static void showSuccessfulDelete() {
-        String successfulMessage = "Noted I've removed this task:";
-        showToUser(LINE, successfulMessage);
-    }
-
-    /**
-     * Shows updated number of tasks in the list.
-     * @param numTasks Number of tasks in the arraylist.
-     */
-    public static void showUpdatedNumber(int numTasks) {
-        String updatedListNumber = "Now you have " + numTasks + " task(s) in the list.";
-        showToUser(updatedListNumber, LINE);
-    }
-
-    /**
      * Shows message that warns user that due date of a deadline cannot be empty.
      */
     public static void showMissingDeadline() {
@@ -189,28 +130,6 @@ public class Ui {
         System.out.println("OOPS!!! The details of an event cannot be empty.");
         System.out.println("Please input time, day, or - if details unknown.");
         System.out.println("---------------------------------------------");
-    }
-
-    /**
-     * Shows message upon successful search of keyword.
-     */
-    public static void showSuccessfulFind() {
-        String message = "Here are the matching tasks in your list:";
-        showToUser(LINE, message);
-    }
-
-    /**
-     * Shows message upon unsuccessful search of keyword.
-     */
-    public static void showUnsuccessfulFind() {
-        showToUser("There are no tasks with this keyword.");
-    }
-
-    /**
-     * Shows all tasks with keyword.
-     */
-    public static void showResults(int count, String description) {
-        System.out.println(count + ". " + description);
     }
 
     /**

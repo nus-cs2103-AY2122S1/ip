@@ -33,7 +33,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(this.toString());
 
     }
 

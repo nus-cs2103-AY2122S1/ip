@@ -26,9 +26,7 @@ public class TaskList {
      * @param taskID Task index as shown to the user.
      */
     public void completeTask(int taskID) {
-        // Ui.showCompletedMessage();
         this.tasks.get(taskID - 1).markAsDone();
-        // Ui.showLine();
     }
 
     /**
@@ -38,20 +36,17 @@ public class TaskList {
      */
     public void addTask(Task newTask) {
         this.tasks.add(newTask);
-        // Ui.showAddedTask(newTask.toString(), this.tasks.size());
     }
 
     /**
      * Lists all the items in the list if they have not been deleted.
      */
     public void listItems() {
-        //Ui.showList();
         for (int i = 0; i < this.tasks.size(); i++) {
             int j = i + 1;
             System.out.println("     " + j + ". "
                     + this.tasks.get(i).toString());
         }
-        //Ui.showLine();
     }
 
     /**
@@ -62,14 +57,10 @@ public class TaskList {
      */
     public void deleteTask(int taskID) throws IndexOutOfBoundsException{
         if (taskID <=0 || taskID > this.tasks.size()) {
-            //Ui.showNoTask();
             Response.showNoTask();
             throw new IndexOutOfBoundsException();
         } else {
-            // Ui.showSuccessfulDelete();
-            System.out.println(this.tasks.get(taskID - 1).toString());
             this.tasks.remove(taskID - 1);
-            // Ui.showUpdatedNumber(this.tasks.size());
         }
     }
 
@@ -110,7 +101,6 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         int count = 0;
-        // Ui.showSuccessfulFind();
         String output = Response.showSuccessfulFind() +"\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             String taskDescription = this.getIndividualTask(i).toString();
@@ -119,13 +109,11 @@ public class TaskList {
 
             if (index != -1) {
                 count += 1;
-                // Ui.showResults(count, taskDescription);
                 output = Response.showResults(output, count, taskDescription);
             }
         }
 
         if (count == 0) {
-            // Ui.showUnsuccessfulFind();
             output = Response.showUnsuccessfulFind();
         }
         return output;

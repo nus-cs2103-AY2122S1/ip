@@ -38,7 +38,6 @@ public class Deadline extends Task {
     @Override
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(this.toString());
     }
 
     /**

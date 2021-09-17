@@ -30,7 +30,6 @@ public class Event extends Task {
     @Override
     public void markAsDone() {
         this.isDone = true;
-        System.out.println(this.toString());
     }
 
     /**
