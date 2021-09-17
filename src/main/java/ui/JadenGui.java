@@ -14,7 +14,7 @@ public class JadenGui {
 
     private final static String SEPARATOR = "_____________________________________________________________________";
 
-    public <T> String getListAsString(List<T> list) {
+    public static <T> String getListAsString(List<T> list) {
         String outString = "";
         for (int i = 0; i < list.size(); i++) {
             outString += (i+1) + ". " + list.get(i).toString() + "\n";
