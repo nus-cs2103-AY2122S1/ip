@@ -1,12 +1,16 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.InvalidInputException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
+import javafx.application.Platform;
 
 import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Duke {
 
