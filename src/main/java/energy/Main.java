@@ -21,7 +21,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             Image energyImage =
-                    new Image(getClass().getResourceAsStream("../images/GivePLZTransparent.png"));
+                    new Image(getClass().getResourceAsStream("/images/GivePLZTransparent.png"));
             fxmlLoader.setRoot(new MainWindow());
             stage = fxmlLoader.load();
             fxmlLoader.<MainWindow>getController().setEnergy(energy);
