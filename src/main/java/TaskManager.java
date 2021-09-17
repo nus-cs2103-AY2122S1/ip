@@ -240,7 +240,7 @@ public class TaskManager {
     }
 
     private String errorUnknownCommandMessage() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 
     private String byeMessage() {
@@ -248,7 +248,7 @@ public class TaskManager {
     }
 
     private String errorEmptyMessage(String task) {
-        return "☹ OOPS!!! The description of a " + task + " cannot be empty.";
+        return "OOPS!!! The description of a " + task + " cannot be empty.";
     }
 
     private String errorInvalidTaskNo() {
