@@ -66,7 +66,7 @@ Examples:
 
 ![Image of Yaktocat](../src/main/resources/images/findDemo.png)
 
-##FAQ
+## FAQ
 **Q**: How do I transfer my data to another Computer?  
 **A**: Install the app in the other computer and overwrite the empty data file it 
 creates with the file that contains the data of your previous DukeMaster home folder.
