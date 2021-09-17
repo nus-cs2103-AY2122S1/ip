@@ -1,0 +1,14 @@
+todo Say good morning ArchDuke!
+list
+deadline Say Good morning /by 1159am today
+list
+event Good Afternoon ArchDuke /at 12pm tomorrow
+list
+done 2
+list
+done 1
+list
+delete 2
+list
+bye
+
