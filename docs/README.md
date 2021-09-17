@@ -2,7 +2,7 @@
 # PATS: User Guide
 
 PATS stands for "Primitive Aegir Terminal Service". It is a task manager that helps you to manage todos, events and 
-deadlines.
+deadlines. 
 
 --------------------------------------------------------------------------------------------------------------------
 
