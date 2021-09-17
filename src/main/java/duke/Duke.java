@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Command currentCommand;
     private ArrayList<Command> commandHistory;
 
     /**
@@ -23,7 +22,7 @@ public class Duke {
      *
      */
     public Duke() {
-        storage = new Storage(".\\src\\main\\level-7.txt");
+        storage = new Storage(".\\level-7.txt");
         commandHistory = new ArrayList<>();
         try {
             tasks = new TaskList(storage.load());
@@ -65,7 +64,6 @@ public class Duke {
             } else {
                 throw new InvalidCommandException();
             }
-            currentCommand = command;
             commandHistory.add(command);
             result += command.run();
             storage.updateFile(tasks);

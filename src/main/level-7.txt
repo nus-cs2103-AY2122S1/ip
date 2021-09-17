@@ -1,4 +1,0 @@
-T | 1 | shower baby
-T | 0 | shower
-T | 0 | hello
-E | 0 | party  | 2012-10-11 09:00-10:00
