@@ -6,7 +6,7 @@ package duke.tasks;
  *
  * @author Lethicia
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -44,9 +44,7 @@ public class Task {
      *
      * @return formatted string containing task details
      */
-    public String getText() {
-        return String.format("%s,%s\n", this.isDone, this.description);
-    }
+    public abstract String getText();
 
     /**
      * Represents the task description and status
