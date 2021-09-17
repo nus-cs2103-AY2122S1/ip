@@ -33,6 +33,7 @@ public class TaskManager {
             if (!txtFile.exists()) {
                 txtFile.createNewFile();
                 this.txtFile = txtFile;
+                assert txtFile != null : "text file is null";
             } else {
                 BufferedReader br = new BufferedReader(new FileReader(txtFile));
                 String txtLine;
@@ -60,6 +61,7 @@ public class TaskManager {
      * @return Joker bot's response to command entered
      */
     public String executeCommand(String inData) {
+        assert inData != null : "assertion error";
         int inDataLength = inData.length();
         if (!Objects.equals(inData.toLowerCase(), "bye")) {
             if (Objects.equals(inData, "list")) {
