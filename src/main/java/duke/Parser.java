@@ -50,7 +50,7 @@ public class Parser {
     private void parseString(String input, ArrayList<String> terms) throws AssertionError {
         // Function to store all terms in input as separate Strings (separated by space in the input)
         int length = input.length();
-        assert length >= 1 : "Invalid String Input";
+        assert length >= 1 : "Don't just press send like that!";
         StringBuilder currentWord = new StringBuilder();
         for (int i = 0; i < length; i++) {
             char currentChar = input.charAt(i);

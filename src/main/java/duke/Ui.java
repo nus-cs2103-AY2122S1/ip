@@ -1,15 +1,6 @@
 package duke;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.Objects;
 
@@ -17,9 +8,6 @@ import java.util.Objects;
  * Class that implements methods to present the Duke.
  */
 public class Ui {
-
-    private final Image USER = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image DUKE = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
     /**
      * Constructor to create a UI object.
