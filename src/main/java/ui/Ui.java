@@ -87,6 +87,7 @@ public class Ui {
             tasklist.findString(input.trim());
             break;
         case "addTag":
+            // input should be in the form of taskNum and tagName
             tasklist.addTagToTask(input);
             break;
         case "findTag":
@@ -148,6 +149,16 @@ public class Ui {
             break;
         case "find":
             msg = tasklist.findString(input.trim());
+            break;
+        case "addTag":
+            // input should be in the form of taskNum and tagName
+            msg = tasklist.addTagToTask(input);
+            break;
+        case "findTag":
+            msg = tasklist.findTag(input);
+            break;
+        case "viewTag":
+            msg = tasklist.viewTagOfTask(input);
             break;
         default:
             try {

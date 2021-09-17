@@ -51,6 +51,10 @@ public class Duke {
         }
     }
 
+    /**
+     *
+     * @return Ui that was initialized with Duke
+     */
     public Ui getUi() {
         return ui;
     }

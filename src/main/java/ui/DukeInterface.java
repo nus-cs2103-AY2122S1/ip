@@ -14,6 +14,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.plaf.LabelUI;
+
 public class DukeInterface extends Application {
 
     private ScrollPane scrollPane;
@@ -28,20 +30,7 @@ public class DukeInterface extends Application {
     private Image userImg = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    @Override
-    public void start(Stage stage) {
-
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        //Step 2. Formatting the window to look as expected
+    private void formatWindow(Stage stage, AnchorPane mainLayout, ScrollPane scrollPane) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -55,8 +44,9 @@ public class DukeInterface extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+    }
 
-        // You will need to import `javafx.scene.layout.Region` for this.
+    private void setLayout(VBox dialogContainer, TextField userInput, Button sendButton, ScrollPane scrollPane) {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -70,10 +60,10 @@ public class DukeInterface extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-
-        Label startupMsg = new Label(Ui.start());
-
+    private void setFunctionality(Label startupMsg, VBox dialogContainer,
+                                  TextField userInput, Button sendButton, ScrollPane scrollPane) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getFlippedDukeDialog(startupMsg, new ImageView(dukeImg))
         );
@@ -89,6 +79,32 @@ public class DukeInterface extends Application {
 
         dialogContainer.heightProperty().addListener((observable) ->
                 scrollPane.setVvalue(1.0));
+    }
+
+    @Override
+    public void start(Stage stage) {
+
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        // Format window
+        formatWindow(stage, mainLayout, scrollPane);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        setLayout(dialogContainer, userInput, sendButton, scrollPane);
+
+        //Set functionality
+        Label startupMsg = new Label(Ui.start());
+
+        setFunctionality(startupMsg, dialogContainer,
+                userInput, sendButton, scrollPane);
 
         // Creating scene
         scene = new Scene(mainLayout);

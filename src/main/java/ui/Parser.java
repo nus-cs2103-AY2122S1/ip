@@ -22,16 +22,14 @@ public class Parser {
      */
     public static Task parseStringIntoTask(String taskName, String taskType, boolean isDone, LogMessage returnMsg) {
         String split = "";
+
         try {
             if (taskName.equals("")) {
                 String errorMsg = String.format("Oops!!! %s cannot be empty", taskType.toUpperCase());
-
                 throw new DukeException.InsufficientArgumentsException(errorMsg);
             }
         } catch (DukeException e) {
-            returnMsg.add(e.getMessage());
-            System.out.println(e.getMessage());
-            Ui.printBreakline();
+            logError(e, returnMsg);
             return null;
         }
 
@@ -49,33 +47,44 @@ public class Parser {
                 throw new DukeException.TaskTypeNotFoundException("TaskType cannot be found");
             }
 
-            if (!taskName.contains(split)) {
-                String errorMsg = String.format("Oops!!! %s cannot be found in %s.", split, taskType);
-                throw new DukeException.InsufficientArgumentsException(errorMsg);
-            }
-
-            String[] nameNTime = taskName.split(split);
-            String name = nameNTime[0];
-            String time;
-            try {
-                time = LocalDate.parse(nameNTime[1]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-            } catch (DateTimeParseException e) {
-                time = nameNTime[1];
-            }
-            Task task = null;
-
-            if (taskType.equals("deadline")) {
-                task = new Deadline(name, time, isDone);
-            } else if (taskType.equals("event")) {
-                task = new Event(name, time, isDone);
-            }
+            Task task = Parser.createTask(taskName, split, taskType, isDone);
             return task;
+
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            returnMsg.add(e.getMessage());
-            Ui.printBreakline();
+            logError(e, returnMsg);
             return null;
         }
-
     }
+
+    private static Task createTask(String taskName, String split, String taskType, boolean isDone) throws DukeException {
+        if (!taskName.contains(split)) {
+            String errorMsg = String.format("Oops!!! %s cannot be found in %s.", split, taskType);
+            throw new DukeException.InsufficientArgumentsException(errorMsg);
+        }
+
+        String[] nameNTime = taskName.split(split);
+        String name = nameNTime[0];
+        String time;
+        try {
+            time = LocalDate.parse(nameNTime[1]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException e) {
+            time = nameNTime[1];
+        }
+        Task task = null;
+
+        if (taskType.equals("deadline")) {
+            task = new Deadline(name, time, isDone);
+        } else if (taskType.equals("event")) {
+            task = new Event(name, time, isDone);
+        }
+        return task;
+    }
+
+    private static void logError(DukeException e, LogMessage returnMsg) {
+        returnMsg.add(e.getMessage());
+        System.out.println(e.getMessage());
+        Ui.printBreakline();
+    }
+
 }
+
