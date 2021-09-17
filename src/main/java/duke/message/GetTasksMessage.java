@@ -1,6 +1,8 @@
-package duke;
+package duke.message;
 
+import duke.task.TaskList;
 import java.util.ArrayList;
+import duke.task.Task;
 
 /**
  * Represents Duke' response when the user requests for list of tasks.

@@ -1,4 +1,7 @@
-package duke;
+package duke.message;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents Duke' response after a task is deleted from the list.

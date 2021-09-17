@@ -1,8 +1,10 @@
-package duke;
+package duke.message;
 
+import duke.task.TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import duke.task.Task;
 
 /**
  * Represents Duke' response when the user searches for a keyword.

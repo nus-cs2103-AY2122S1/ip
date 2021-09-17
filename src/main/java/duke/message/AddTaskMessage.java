@@ -1,4 +1,12 @@
-package duke;
+package duke.message;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.IllegalFormatException;
+import duke.exception.InvalidCommandException;
+import duke.task.Task;
+import duke.task.TaskFactory;
+import duke.task.TaskList;
+
 /**
  * Represents Duke's response after a task is added to the
  * list.

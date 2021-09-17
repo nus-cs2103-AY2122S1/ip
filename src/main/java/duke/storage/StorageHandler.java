@@ -1,11 +1,17 @@
-package duke;
+package duke.storage;
 
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Task;
+import duke.task.Event;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 
 public class StorageHandler {
     private static String path = "src/main/data/TaskList.txt";

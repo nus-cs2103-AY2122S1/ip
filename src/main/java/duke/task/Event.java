@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents the Events that are added to TaskList. Extends Task.

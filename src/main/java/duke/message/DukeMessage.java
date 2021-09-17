@@ -1,4 +1,4 @@
-package duke;
+package duke.message;
 /**
  * Represents all messages sent by Duke.
  */

@@ -1,4 +1,9 @@
-package duke;
+package duke.message;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidCommandException;
+import duke.exception.IllegalFormatException;
+import duke.task.TaskList;
 
 /**
  * The factory class responsible for instantiating the right sub-type of DukeMessage.

@@ -1,6 +1,9 @@
-package duke;
+package duke.ui;
 
 
+import duke.message.DukeMessage;
+import duke.message.MessageFactory;
+import duke.storage.StorageHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
