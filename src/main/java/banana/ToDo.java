@@ -5,8 +5,7 @@ package banana;
  * types of tasks.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 class ToDo extends Task {
 
     /**

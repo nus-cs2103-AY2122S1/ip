@@ -8,7 +8,6 @@ import java.util.ArrayList;
  *
  * @author: Ravi Ananya
  **/
-
 public class Parser {
 
     private String input;
@@ -24,6 +23,13 @@ public class Parser {
         this.input = input;
     }
 
+    /**
+     * Sets the previous input to be
+     * handled in case of the user input
+     * being "undo".
+     *
+     * @param prevInput the user's previous input.
+     */
     public static void setPrevInput(String prevInput) {
         Parser.prevInput = prevInput;
     }
@@ -33,7 +39,7 @@ public class Parser {
      * input command.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      * @throws DukeException if the input was invalid.
      */
     public String parseInput(TaskList tasks) throws DukeException {
@@ -60,7 +66,7 @@ public class Parser {
      * action.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String undoCommand(TaskList tasks) {
         String undoText = "";
@@ -96,7 +102,7 @@ public class Parser {
      * list of tasks.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String listCommand(TaskList tasks) {
         String itemCollection = ParserFunctions.getItems(tasks);
@@ -109,7 +115,7 @@ public class Parser {
      * Indicates a task as done.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
@@ -123,7 +129,7 @@ public class Parser {
      * Adds a task or the subclass ToDo.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String addTaskCommand(TaskList tasks) {
         if (input.contains("todo")) {
@@ -147,7 +153,7 @@ public class Parser {
      * if necessary.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String deadlineOrEventCommand(TaskList tasks) {
         assert input.contains("deadline") || input.contains("event");
@@ -176,7 +182,7 @@ public class Parser {
      * commands/inputs have been entered.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      * @throws DukeException the exception.
      */
     public void exceptionCommand(TaskList tasks) throws DukeException {
@@ -209,7 +215,7 @@ public class Parser {
      * Delete a task from the list.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
@@ -229,7 +235,7 @@ public class Parser {
      * or matches the user's input.
      *
      * @param tasks the list of tasks.
-     * @return the label.
+     * @return the correct output.
      */
     public String findCommand(TaskList tasks) {
         String outputText = " No matching tasks, sorry";

@@ -7,8 +7,7 @@ import java.util.Scanner;
  * the user inputs.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 public class Ui {
 
     protected Scanner scanVar;

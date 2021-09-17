@@ -9,14 +9,21 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 /**
- * A GUI for Duke using FXML.
+ * Sets the stage of the program.
  */
 public class Main extends Application {
 
     private Duke duke = new Duke(
             "/Users/ravi57004/ip/src/main/java/Tasks.txt");
 
+    /**
+     * Loads the FXMLLoader object
+     * and sets the stage title.
+     *
+     * @param stage the stage
+     */
     @Override
     public void start(Stage stage) {
         try {

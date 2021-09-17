@@ -4,7 +4,7 @@ package banana;
  * The Task class handles tasks.
  *
  * @author: Ravi Ananya
- **/
+ */
 class Task {
 
     protected String description;

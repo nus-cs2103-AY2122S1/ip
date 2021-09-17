@@ -12,8 +12,7 @@ import java.util.Scanner;
  * to be assigned to the tasks.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 public class Storage {
 
     protected String filePath;

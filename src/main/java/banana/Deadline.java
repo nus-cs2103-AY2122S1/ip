@@ -9,8 +9,7 @@ import java.time.LocalDate;
  * types of tasks.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 class Deadline extends Task {
 
     protected String deadline;

@@ -6,7 +6,7 @@ package banana;
  * throws specialised Duke exceptions.
  *
  * @author: Ravi Ananya
- **/
+ */
 class DukeException extends Exception {
 
     private String errorMessage;
