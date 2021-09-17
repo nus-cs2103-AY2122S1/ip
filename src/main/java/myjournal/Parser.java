@@ -51,7 +51,7 @@ public class Parser {
                 tasks.addTask(Parser.parseDeadline(line));
                 return ui.taskAddPrint(tasks);
             default:
-                throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
+                throw new InvalidCommandException("OOPS!!! Please enter a valid command!");
             }
         } catch (InvalidTypeException e) {
             return e.toString();
@@ -89,6 +89,7 @@ public class Parser {
             while (taskName.hasNext()) {
                 if (taskName.next().equals(find)) {
                     newList.addTask(currTask);
+                    break;
                 }
             }
         }
@@ -132,7 +133,7 @@ public class Parser {
         String taskToBeEdited = line.nextLine();
         String[] arrEdit = taskToBeEdited.split(" ");
         if (!isInteger(arrEdit[1])) {
-            throw new InvalidTaskNumberException("OOPS!!! Please specify the task number of the task"
+            throw new InvalidTaskNumberException("OOPS!!! Please specify the task number of the task "
                     + "that needs to be edited!");
         }
         int index = Integer.parseInt(arrEdit[1]) - 1;
@@ -146,11 +147,28 @@ public class Parser {
         if (!(infoToBeEdited.equals("time") || infoToBeEdited.equals("description"))) {
             throw new InvalidCommandException("Please specify whether you want to edit time or description.");
         }
+        return edit(infoToBeEdited, index, arrEdit, tasks);
+    }
+
+    /**
+     * Edits the time or description of a task.
+     *
+     * @param infoToBeEdited The new information.
+     * @param index The index of the task that needs to be edited.
+     * @param arrEdit The user input.
+     * @param tasks The list of tasks.
+     * @return The edited task.
+     */
+    public static Task edit(String infoToBeEdited, int index, String[] arrEdit, TaskList tasks) {
         String newInfo = "";
         for (int i = 0; i < arrEdit.length - 3; i++) {
             newInfo = newInfo + arrEdit[i + 3] + " ";
         }
         if (infoToBeEdited.equals("time")) {
+            if (tasks.getTask(index) instanceof Todo) {
+                throw new InvalidCommandException("Todo does not have a time description! "
+                        + "Try editing the time of an Event or Deadline instead:)");
+            }
             Scanner time = new Scanner(newInfo);
             tasks.getTask(index).setTime(getTimeDate(time));
         } else {

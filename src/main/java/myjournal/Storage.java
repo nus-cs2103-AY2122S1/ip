@@ -64,11 +64,11 @@ public class Storage {
                 todo.setState(isDone);
                 tasks.add(todo);
             } else if (currLine.charAt(0) == 'E') {
-                Event event = new Event(description, arr[1]);
+                Event event = new Event(description, (arr.length == 1 ? " " : arr[1]));
                 event.setState(isDone);
                 tasks.add(event);
             } else {
-                Deadline deadline = new Deadline(description, arr[1]);
+                Deadline deadline = new Deadline(description, (arr.length == 1 ? " " : arr[1]));
                 deadline.setState(isDone);
                 tasks.add(deadline);
             }
