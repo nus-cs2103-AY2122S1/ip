@@ -10,6 +10,7 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    // For storing information of last action, use for undo method
     private Action lastAction = Action.NONE;
     private Task lastTask;
     private ArrayList<Task> lastTaskList;
@@ -72,7 +73,7 @@ public class TaskList {
     /** Marks previously marked task as not done. */
     private String undoMarkDone() {
         assert lastAction.equals(Action.DONE);
-        lastTask.unmarkDone();
+        lastTask.markNotDone();
         lastAction = Action.NONE;
         save();
         return "I have mark the task back to undone: \n" + lastTask + "\n";
