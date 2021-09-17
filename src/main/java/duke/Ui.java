@@ -90,4 +90,19 @@ public class Ui {
     public void sayBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
+    /**
+     * Prints the matching tasks in the list with the keyword.
+     *
+     * @param list List of matching tasks.
+     */
+    public void sayFind(ArrayList<Task> list) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            int num = i + 1;
+            if (list.get(i) != null) {
+                System.out.println(num + "." + list.get(i).toString());
+            }
+        }
+    }
 }
