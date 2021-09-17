@@ -1,29 +1,42 @@
-# User Guide
-
+# Duke User Guide
+A great companion to help you organize your life.
+Download it 
 ## Features 
-
-### Feature-ABC
-
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
+* Manage your todos, events and deadlines
+* Search for any tasks with a keyword or data
 
 ## Usage
 
-### `Keyword` - Describe action
+### Adding new tasks
+* Add a new event
+`event meeting /at tonight`
 
-Describe the action and its outcome.
+* Add a new todo
+`todo read book`
 
-Example of usage: 
+* Add a new deadline
+`deadline submit report /by 12-11-2021`
 
-`keyword (optional arguments)`
+### Viewing all your tasks
+* List all tasks
+`list`
 
-Expected outcome:
+### Searching for a task
+* Find a task
+`find meeting`
 
-Description of the outcome.
+* Search by date
+`find 12-11-2021`
 
-```
-expected output
-```
+### Completing a task
+* Mark a task as complete
+First, list all tasks by either using the `list` command or the `find` command.
+Then, type `done` followed by the index of the task
+`done 1`
+
+### Deleting a task
+* Delete a task
+First, list all tasks by either using the `list` command or the `find` command.
+Then, type `delete` followed by the index of the task
+`delete 1`
+
