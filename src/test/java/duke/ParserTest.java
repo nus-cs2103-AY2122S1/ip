@@ -9,7 +9,7 @@ public class ParserTest {
 
     @Test
     public void testParseExit() throws DukeException {
-        Command c = new Parser().parse("bye");
+        Command c = new Parser().parse("exit");
         assertTrue(c.isExit());
     }
 
