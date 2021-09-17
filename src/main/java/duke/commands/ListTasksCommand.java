@@ -1,11 +1,11 @@
 package duke.commands;
 
-import duke.Duke;
-import duke.ui.UserInput;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import duke.Duke;
+import duke.ui.UserInput;
 
 class ListTasksCommand extends Command {
     private static final Set<String> KEYWORDS = new HashSet<>(List.of("list", "ls"));

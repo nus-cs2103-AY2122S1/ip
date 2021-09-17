@@ -43,6 +43,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Displays the given message to the user.
+     *
+     * @param message The message to display.
+     */
     public void say(String message) {
         assert ui != null;
         ui.addDukeMessage(message);

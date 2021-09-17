@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.util.Set;
+
 import duke.Duke;
 import duke.DukeException;
 import duke.task.InvalidTaskException;
 import duke.ui.UserInput;
-
-import java.util.Set;
 
 /**
  * An instruction, possibly with arguments, to be executed.
@@ -13,18 +13,18 @@ import java.util.Set;
  * @author cai
  */
 public abstract class Command {
+    protected static final String TASKS_COUNT_MESSAGE = "Now you have %d tasks in the list.";
+
     /** List of possible commands to run */
     private static final Command[] COMMAND_LIST = {
-            new ExitCommand(),
-            new AddTaskCommand(),
-            new ListTasksCommand(),
-            new FindTaskCommand(),
-            new DoneTaskCommand(),
-            new RemoveTaskCommand()
+        new ExitCommand(),
+        new AddTaskCommand(),
+        new ListTasksCommand(),
+        new FindTaskCommand(),
+        new DoneTaskCommand(),
+        new RemoveTaskCommand()
     };
-
     private static final String INVALID_TASK_NUMBER_FORMAT_MESSAGE = "\"%s\" is not a valid task number.";
-    protected static final String TASKS_COUNT_MESSAGE = "Now you have %d tasks in the list.";
 
     /**
      * Returns the command matching the specified user input.
@@ -52,7 +52,7 @@ public abstract class Command {
      * @param input The user input that triggered this command.
      * @throws DukeException If a DukeException was thrown when running the command.
      */
-    abstract public void run(Duke duke, UserInput input) throws DukeException;
+    public abstract void run(Duke duke, UserInput input) throws DukeException;
 
     /**
      * Returns a list of keywords to match against.
@@ -60,7 +60,7 @@ public abstract class Command {
      *
      * @return The list of keywords corresponding to this command.
      */
-    abstract protected Set<String> getKeywords();
+    protected abstract Set<String> getKeywords();
 
     /**
      * Parses the task number in the user input as an integer.

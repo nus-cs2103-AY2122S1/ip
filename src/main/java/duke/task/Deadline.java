@@ -8,6 +8,14 @@ public class Deadline extends Task {
 
     private final LocalDate endDate;
 
+    /**
+     * Constructs a new Deadline object.
+     *
+     * @param description The description of the task.
+     * @param endDate The date to complete the task by.
+     * @param isDone The completion status of the task.
+     * @throws InvalidTaskException If description or endDate is invalid;
+     */
     public Deadline(String description, LocalDate endDate, boolean isDone) throws InvalidTaskException {
         super(description, isDone);
         if (endDate == null) {

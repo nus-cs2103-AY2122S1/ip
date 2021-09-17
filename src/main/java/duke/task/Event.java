@@ -8,6 +8,14 @@ public class Event extends Task {
 
     private final LocalDate at;
 
+    /**
+     * Constructs a new Event object.
+     *
+     * @param description The description of the task.
+     * @param at The date of the event.
+     * @param isDone The completion status of the task.
+     * @throws InvalidTaskException If description or at is invalid;
+     */
     public Event(String description, LocalDate at, boolean isDone) throws InvalidTaskException {
         super(description, isDone);
         if (at == null) {

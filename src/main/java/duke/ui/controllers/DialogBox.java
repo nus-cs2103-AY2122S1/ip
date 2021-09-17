@@ -16,13 +16,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class DialogBox extends HBox {
+    private static final String USER_IMAGE_NAME = "user.png";
+    private static final String DUKE_IMAGE_NAME = "duke.png";
+
     @FXML
     private Text dialog;
     @FXML
     private ImageView displayPicture;
-
-    private static final String USER_IMAGE_NAME = "user.png";
-    private static final String DUKE_IMAGE_NAME = "duke.png";
 
     private DialogBox(String text, Image img, boolean flipped) {
         try {

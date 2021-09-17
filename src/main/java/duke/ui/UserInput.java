@@ -8,7 +8,9 @@ import java.util.Objects;
  * @author cai
  */
 public class UserInput {
-    private final String raw, keyword, args;
+    private final String raw;
+    private final String keyword;
+    private final String args;
 
     UserInput(String raw, String keyword, String args) {
         this.raw = raw;

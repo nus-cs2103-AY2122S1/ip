@@ -1,12 +1,12 @@
 package duke.commands;
 
-import duke.Duke;
-import duke.task.Task;
-import duke.ui.UserInput;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import duke.Duke;
+import duke.task.Task;
+import duke.ui.UserInput;
 
 class FindTaskCommand extends Command {
     private static final Set<String> KEYWORDS = new HashSet<>(List.of("find", "search", "/"));

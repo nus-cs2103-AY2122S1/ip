@@ -1,14 +1,15 @@
 package duke.task;
 
-import duke.storage.Storage;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.storage.Storage;
 
 public class TaskListTest {
     @Test
@@ -38,6 +39,7 @@ public class TaskListTest {
                         new Todo("homework")
                 );
             } catch (InvalidTaskException ignored) {
+                // we are not expecting any exceptions here since we create the tasks ourselves
             }
         }
 

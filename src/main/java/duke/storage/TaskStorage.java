@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.InvalidTaskException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +11,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.InvalidTaskException;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * A storage of tasks on the hard disk.
@@ -96,7 +96,7 @@ public class TaskStorage implements Storage<Task> {
 
     /**
      * Parses the string argument as a Task.
-     * The string is expected to be in the format "[T|D|E],[0|1],<description>,<date>",
+     * The string is expected to be in the format "[T|D|E],[0|1],< description >,< date >",
      * where `[T|D|E]` represents the type of task and `[0|1]` represents the completion status.
      *
      * @param data The string to be parsed.
@@ -116,17 +116,17 @@ public class TaskStorage implements Storage<Task> {
 
         try {
             switch (type) {
-                case Todo.TASK_TYPE_ICON:
-                    if (date.length() > 0) {
-                        throw new FileFormatException("Unexpected date for task type todo");
-                    }
-                    return new Todo(description, isDone);
-                case Deadline.TASK_TYPE_ICON:
-                    return new Deadline(description, LocalDate.parse(date), isDone);
-                case Event.TASK_TYPE_ICON:
-                    return new Event(description, LocalDate.parse(date), isDone);
-                default:
-                    throw new FileFormatException(String.format("Unrecognized task type \"%s\"", type));
+            case Todo.TASK_TYPE_ICON:
+                if (date.length() > 0) {
+                    throw new FileFormatException("Unexpected date for task type todo");
+                }
+                return new Todo(description, isDone);
+            case Deadline.TASK_TYPE_ICON:
+                return new Deadline(description, LocalDate.parse(date), isDone);
+            case Event.TASK_TYPE_ICON:
+                return new Event(description, LocalDate.parse(date), isDone);
+            default:
+                throw new FileFormatException(String.format("Unrecognized task type \"%s\"", type));
             }
         } catch (InvalidTaskException e) {
             throw new FileFormatException("", e);
@@ -160,7 +160,7 @@ public class TaskStorage implements Storage<Task> {
 
     /**
      * Returns the specified task as a string.
-     * The string is in the format "[T|D|E],[0|1],<description>,<date>",
+     * The string is in the format "[T|D|E],[0|1],< description >,< date >",
      * where `[T|D|E]` represents the type of task and `[0|1]` represents the completion status.
      *
      * @param task The task to encode.
@@ -169,8 +169,10 @@ public class TaskStorage implements Storage<Task> {
     private static String encodeTask(Task task) {
         assert task != null;
 
-        String type = task.getTaskTypeIcon(), completionStatus = task.isDone() ? "1" : "0",
-                description = task.getDescription(), date = "";
+        String type = task.getTaskTypeIcon();
+        String completionStatus = task.isDone() ? "1" : "0";
+        String description = task.getDescription();
+        String date = "";
 
         if (task instanceof Deadline) {
             date = ((Deadline) task).getEndDate().toString();

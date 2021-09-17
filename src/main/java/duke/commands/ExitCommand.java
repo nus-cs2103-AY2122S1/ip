@@ -1,15 +1,15 @@
 package duke.commands;
 
-import duke.Duke;
-import duke.ui.Ui;
-import duke.ui.UserInput;
-import javafx.application.Platform;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import duke.Duke;
+import duke.ui.Ui;
+import duke.ui.UserInput;
+import javafx.application.Platform;
 
 class ExitCommand extends Command {
     private static final Set<String> KEYWORDS = new HashSet<>(List.of("exit", "bye", "quit", "q"));

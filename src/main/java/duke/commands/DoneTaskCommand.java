@@ -1,13 +1,13 @@
 package duke.commands;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import duke.Duke;
 import duke.task.InvalidTaskException;
 import duke.task.TaskList;
 import duke.ui.UserInput;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 class DoneTaskCommand extends Command {
     private static final Set<String> KEYWORDS = new HashSet<>(List.of("done", "do"));

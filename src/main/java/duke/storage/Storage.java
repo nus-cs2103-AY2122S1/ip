@@ -6,8 +6,8 @@ import java.util.List;
 /**
  * A store of a certain type of elements.
  *
- * @param <T> The type of elements in this storage.
  * @author cai
+ * @param <T> The type of elements in this storage.
  */
 public interface Storage<T> {
     /**
