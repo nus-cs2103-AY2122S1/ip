@@ -21,7 +21,8 @@ public class StorageTest {
                     new Storage("tasks.txt").load().get(0).getTaskStatus());
             assertEquals("[D][X] return book (by: Dec 02 2019 18:00)",
                     new Storage("tasks.txt").load().get(1).getTaskStatus());
-            assertEquals("[E][X] project meeting (at: I don't know the time.)",
+            assertEquals("[E][X] project meeting (at: I don't know the time. "
+                            + "Maybe your format is in correct!)",
                     new Storage("tasks.txt").load().get(2).getTaskStatus());
         } catch (HydddException e) {
             //Should not reach this.

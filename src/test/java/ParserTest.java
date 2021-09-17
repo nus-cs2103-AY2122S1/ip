@@ -27,7 +27,8 @@ public class ParserTest {
     public void testGetSaveTask() {
         assertEquals("borrow book", new Parser("T | 0 | borrow book").getSaveTask());
         assertEquals("return book", new Parser("D | 0 | return book | 2/12/2019 1800").getSaveTask());
-        assertEquals("project meeting", new Parser("E | 0 | project meeting | I don't know the time").getSaveTask());
+        assertEquals("project meeting", new Parser("E | 0 | project meeting | I don't know the time. "
+                + "Maybe your format is in correct!").getSaveTask());
         assertEquals("project splashdown", new Parser("E | 0 | project splashdown | 15/10/2019 0000").getSaveTask());
     }
 
@@ -35,7 +36,8 @@ public class ParserTest {
     public void testGetSaveTime() {
         assertEquals("", new Parser("T | 0 | borrow book").getSaveTime());
         assertEquals("2/12/2019 1800", new Parser("D | 0 | return book | 2/12/2019 1800").getSaveTime());
-        assertEquals("", new Parser("E | 0 | project meeting | I don't know the time").getSaveTime());
+        assertEquals("", new Parser("E | 0 | project meeting | I don't know the time. "
+                + "Maybe your format is in correct!").getSaveTime());
         assertEquals("15/10/2019 0000", new Parser("E | 0 | project splashdown | 15/10/2019 0000").getSaveTime());
     }
 

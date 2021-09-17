@@ -1,5 +1,7 @@
 package hyddd.logics;
 
+import java.util.regex.Pattern;
+
 import hyddd.exceptions.ExceptionType;
 import hyddd.exceptions.HydddException;
 import hyddd.task.TaskList;
@@ -112,11 +114,26 @@ public class ParserExceptionDetector {
     /**
      * Returns a boolean value of whether there is no index given to parser.
      *
-     * @return Boolean value indicates whether there is no value for index.
+     * @return Boolean value indicates whether there is no value for index
+     * or wrong format.
      */
     public boolean detectIndexException() {
-        boolean isCorrectFormat = input.contains(SPACE) && (input.startsWith(DONE) || input.startsWith(DELETE));
+        boolean isCorrectStart;
+        boolean hasSpace;
+        boolean hasMultipleSpace;
+        boolean isValidNumber;
+        Pattern pattern;
 
-        return isCorrectFormat;
+        isCorrectStart = (input.startsWith(DONE) || input.startsWith(DELETE));
+        hasSpace = input.contains(SPACE);
+
+        if (!(isCorrectStart && hasSpace)) {
+            return false;
+        }
+        hasMultipleSpace = input.indexOf(SPACE) != input.lastIndexOf(SPACE);
+        pattern = Pattern.compile("^-?[0-9]+");
+        isValidNumber = pattern.matcher(input.substring(input.indexOf(SPACE) + 1)).matches();
+
+        return !hasMultipleSpace && isValidNumber;
     }
 }
