@@ -1,4 +1,4 @@
-package duke;
+package poseidon.storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,17 +10,25 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import poseidon.exception.PoseidonException;
+import poseidon.task.Deadline;
+import poseidon.task.Event;
+import poseidon.task.Task;
+import poseidon.task.Todo;
 
+/**
+ * Represents a {@code Storage} object for all operations related to storage such as reading and writing
+ * to a local file on the hard disk.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
+ */
 public class Storage {
 
     private File taskDataFile;
 
     /**
-     * Constructs a Storage object and initializes the taskDataFile File object.
+     * Constructs a {@code Storage} object and initializes the {@code taskDataFile} {@code File} object.
      */
     public Storage() {
         try {
@@ -34,7 +42,7 @@ public class Storage {
             }
             this.taskDataFile = taskDataFile;
         } catch (IOException ex) {
-            throw new DukeException(ex.getMessage() + "\n"
+            throw new PoseidonException(ex.getMessage() + "\n"
                     + "Couldn't access/create necessary file to store tasks."
                     + "Please exit the bot if you don't want to lose new tasks.");
         }
@@ -42,9 +50,10 @@ public class Storage {
     }
 
     /**
-     * Returns a list containing all the tasks after reading through a text file saved on the hard disk.
+     * Returns a {@code ArrayList} containing all the {@code Task}s after reading through a text {@code File}
+     * saved on the hard disk.
      *
-     * @return List containing all the saved tasks.
+     * @return {@code ArrayList} containing all the saved {@code Task}s.
      */
     public ArrayList<Task> load() {
         try {
@@ -71,16 +80,16 @@ public class Storage {
             loadScan.close();
             return tasks;
         } catch (IOException ex) {
-            throw new DukeException(ex.getMessage() + "\n"
+            throw new PoseidonException(ex.getMessage() + "\n"
                     + "Couldn't load data from stored file."
                     + "Please exit the bot if you don't want to lose new tasks.");
         }
     }
 
     /**
-     * Writes a new Task to the storage document of Duke.
+     * Writes a new {@code Task} to the storage document of the Bot.
      *
-     * @param taskStorage Storage string version of the new Task.
+     * @param taskStorage Storage {@code String} version of the new {@code Task}.
      * @throws IOException If file access or modification is obstructed.
      */
     public void storeAdd(String taskStorage) throws IOException {
@@ -90,10 +99,10 @@ public class Storage {
     }
 
     /**
-     * Writes an existing Task as done in the storage document of Duke.
+     * Writes an existing {@code Task} as done in the storage document of the Bot.
      *
-     * @param index Index of the Task to be modified.
-     * @param taskStorage Storage string version of the modified Task.
+     * @param index Index of the {@code Task} to be modified.
+     * @param taskStorage Storage {@code String} version of the modified {@code Task}.
      * @throws IOException If file access or modification is obstructed.
      */
     public void storeDone(int index, String taskStorage) throws IOException {
@@ -123,9 +132,9 @@ public class Storage {
     }
 
     /**
-     * Deletes a Task from the storage document of Duke.
+     * Deletes a {@code Task} from the storage document of Bot.
      *
-     * @param index Index of the deleted Task.
+     * @param index Index of the deleted {@code Task}.
      * @throws IOException If file access or modification is obstructed.
      */
     public void storeDelete(int index) throws IOException {

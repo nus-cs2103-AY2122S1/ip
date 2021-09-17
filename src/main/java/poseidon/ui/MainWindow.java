@@ -1,4 +1,4 @@
-package duke;
+package poseidon.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,31 +10,45 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import poseidon.Poseidon;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Represents a controller for {@code MainWindow} used by JavaFX in creating the GUI.
+ * Also provides the layout for the other controls.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
  */
 public class MainWindow extends AnchorPane {
 
-    private static final Font USER_FONT = Font.loadFont(DialogBox.class.getResource("/fonts/JetBrainsMono-Italic.ttf")
+    // Font to be used for the user input box.
+    private static final Font USER_INPUT_FONT = Font.loadFont(DialogBox.class
+                    .getResource("/fonts/JetBrainsMono-Italic.ttf")
                     .toExternalForm(),
             15);
+
+    // Images to be used for DialogBox(es) and send button.
     private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/UserIcon.jpg"));
     private static final Image BOT_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/BotIcon.png"));
     private static final Image SEND_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/SendIcon.png"));
 
+    // The scrollable vertical space containing all the dialog boxes.
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
+
+    // User input box.
     @FXML
     private TextField userInput;
+
+    // Send button and icon used.
     @FXML
     private Button sendButton;
     @FXML
     private ImageView sendButtonImage;
 
-    private Duke duke;
+    private Poseidon poseidon;
 
     @FXML
     public void initialize() {
@@ -42,29 +56,35 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * @param d Duke to be set as logical unit for the GUI.
+     * @param pos {@code Poseidon} to be set as logical unit for the GUI.
      */
-    public void setDuke(Duke d) {
-        duke = d;
-        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(duke.runWelcome(), BOT_IMAGE));
+    public void setPoseidon(Poseidon pos) {
+        poseidon = pos;
+        dialogContainer.getChildren().addAll(DialogBox.getBotDialog(poseidon.runWelcome(), BOT_IMAGE));
         sendButtonImage.setImage(SEND_IMAGE);
-        userInput.setFont(USER_FONT);
+        userInput.setFont(USER_INPUT_FONT);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two {@code DialogBox}es, one echoing the user input and the other containing the Bot's reply and
+     * then appends them to the dialog container. Also clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
+        final String emptyString = "";
+
         String input = userInput.getText();
 
-        if (duke.isBye(input)) {
+        if (input.equals(emptyString)) {
+            return;
+        }
+
+        if (poseidon.isBye(input)) {
             Platform.exit();
             return;
         }
 
-        String response = duke.run(input);
+        String response = poseidon.run(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE),
                 DialogBox.getBotDialog(response, BOT_IMAGE)

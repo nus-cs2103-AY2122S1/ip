@@ -1,10 +1,18 @@
-package duke;
+package poseidon.parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+import poseidon.exception.PoseidonException;
+
+/**
+ * Represents a {@code Parser} object for all parsing related operations.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
+ */
 public class Parser {
 
     // Regex versions of all the possible commands
@@ -16,19 +24,24 @@ public class Parser {
     private static final String CMD_DEADLINE = "(?i)deadline.*";
     private static final String CMD_EVENT = "(?i)event.*";
     private static final String CMD_FIND = "(?i)find.*";
-    private static final String CMD_SORT = "(?i)sort\\s*";
+    private static final String CMD_SORT = "(?i)list\\s*-s\\s*";
+    private static final String CMD_HELP = "(?i)help\\s*";
 
     /**
-     * Returns a String array that contains the useful and necessary parts of a command to be executed.
+     * Returns a {@code String} array that contains the useful and necessary parts of a command to be executed.
      *
-     * @param newCommand String version of a command.
-     * @return String array.
+     * @param newCommand {@code String} version of a command.
+     * @return {@code String} array.
      */
     public static String[] parse(String newCommand) {
-        if (Pattern.compile(CMD_BYE).matcher(newCommand).matches()) {
+        if (Pattern.compile(CMD_HELP).matcher(newCommand).matches()) {
+            return new String[]{"help"};
+        } else if (Pattern.compile(CMD_BYE).matcher(newCommand).matches()) {
             return new String[]{"bye"};
         } else if (Pattern.compile(CMD_LIST).matcher(newCommand).matches()) {
             return new String[]{"list"};
+        } else if (Pattern.compile(CMD_SORT).matcher(newCommand).matches()) {
+            return new String[]{"sort"};
         } else if (Pattern.compile(CMD_DONE).matcher(newCommand).matches()) {
             return new String[]{"done", newCommand.substring(4).trim()};
         } else if (Pattern.compile(CMD_DELETE).matcher(newCommand).matches()) {
@@ -41,18 +54,16 @@ public class Parser {
             return parseEvent(newCommand);
         } else if (Pattern.compile(CMD_FIND).matcher(newCommand).matches()) {
             return parseFind(newCommand);
-        } else if (Pattern.compile(CMD_SORT).matcher(newCommand).matches()) {
-            return new String[]{"sort"};
         } else {
             return new String[]{"fail"};
         }
     }
 
     /**
-     * Returns a LocalDateTime object after parsing a string version of date and time.
+     * Returns a {@code LocalDateTime} object after parsing a string version of date and time.
      *
-     * @param dateTime String version of date and time.
-     * @return LocalDateTime object.
+     * @param dateTime {@code String} version of date and time.
+     * @return {@code LocalDateTime} object.
      */
     public static LocalDateTime parseDateTime(String dateTime) {
         final String dateFormat = "yyyy MM dd HHmm";
@@ -63,26 +74,26 @@ public class Parser {
             deadlineDT = LocalDateTime.parse(dateTime, formatter);
             return deadlineDT;
         } catch (DateTimeException ex) {
-            throw new DukeException(ex.getMessage() + "\n"
+            throw new PoseidonException(ex.getMessage() + "\n"
                     + "Please try again.");
         }
     }
 
     /**
-     * Returns the integer version of a string number.
+     * Returns the {@code Integer} version of a {@code String} number.
      *
-     * @param intString String version of a number.
-     * @return integer version of the given number.
+     * @param intString {@code String} version of a number.
+     * @return {@code Integer} version of the given number.
      */
     public static int parseIndex(String intString) {
         return Integer.parseInt(intString.trim());
     }
 
     /**
-     * Returns true if the given user string input is a valid "bye" command by pattern matching.
+     * Returns true if the given user {@code String} input is a valid "bye" command by pattern matching.
      *
-     * @param newCommand String user input.
-     * @return Boolean validation result.
+     * @param newCommand {@code String} user input.
+     * @return {@code Boolean} validation result.
      */
     public static boolean isParsedBye(String newCommand) {
         return Pattern.compile(CMD_BYE).matcher(newCommand).matches();
@@ -93,24 +104,24 @@ public class Parser {
         String[] strArr = Pattern.compile(validTodo).split(newCommand, 2);
 
         if (strArr.length == 1 && strArr[0].length() > 4) {
-            throw new DukeException("There appears to be a typo in your TODO command.\n"
+            throw new PoseidonException("There appears to be a typo in your TODO command.\n"
                     + "The command should be of the form:\n"
                     + "  todo 'description'\n"
                     + "Please try again.");
         }
 
         if (strArr.length == 1 || strArr[1].length() == 0) {
-            throw new DukeException("The description of a TODO task cannot be empty.\nPlease try again.");
+            throw new PoseidonException("The description of a TODO task cannot be empty.\nPlease try again.");
         }
 
-        return new String[]{"add", "todo", strArr[1]};
+        return new String[]{"add", "todo", strArr[1].trim()};
     }
 
     private static String[] parseDeadline(String newCommand) {
         final String validDeadline = "(?i)(deadline ).*\\S+.*( /by )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}";
 
         if (!Pattern.compile(validDeadline).matcher(newCommand).matches()) {
-            throw new DukeException("There appears to be a typo in your DEADLINE command.\n"
+            throw new PoseidonException("There appears to be a typo in your DEADLINE command.\n"
                     + "The command should be of the form:\n"
                     + "  deadline 'description' /by 'yyyy mm dd hhmm'\n"
                     + "Please try again.");
@@ -125,7 +136,7 @@ public class Parser {
                 + "( to )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}";
 
         if (!Pattern.compile(validEvent).matcher(newCommand).matches()) {
-            throw new DukeException("There appears to be a typo in your EVENT command.\n"
+            throw new PoseidonException("There appears to be a typo in your EVENT command.\n"
                     + "The command should be of the form:\n"
                     + "  event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'\n"
                     + "Please try again.");
@@ -141,14 +152,14 @@ public class Parser {
         String[] strArr = Pattern.compile(validFind).split(newCommand, 2);
 
         if (strArr.length == 1 && strArr[0].length() > 4) {
-            throw new DukeException("There appears to be a typo in your FIND command.\n"
+            throw new PoseidonException("There appears to be a typo in your FIND command.\n"
                     + "The command should be of the form:\n"
                     + "  find 'content'\n"
                     + "Please try again.");
         }
 
         if (strArr.length == 1 || strArr[1].length() == 0) {
-            throw new DukeException("The contents of a FIND command cannot be empty.\nPlease try again.");
+            throw new PoseidonException("The contents of a FIND command cannot be empty.\nPlease try again.");
         }
 
         return new String[]{"find", strArr[1].trim()};

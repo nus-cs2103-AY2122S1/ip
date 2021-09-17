@@ -1,9 +1,12 @@
-package duke;
+package poseidon;
 
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Represents a launcher class to workaround classpath issues.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
  */
 public class Launcher {
 

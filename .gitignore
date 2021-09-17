@@ -17,5 +17,5 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # personal files
-/src/main/java/duke/Test.java
+/src/main/java/poseidon/Test.java
 /data/

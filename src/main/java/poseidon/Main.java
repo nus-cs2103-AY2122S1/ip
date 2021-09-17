@@ -1,4 +1,4 @@
-package duke;
+package poseidon;
 
 import java.io.IOException;
 
@@ -8,14 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import poseidon.ui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * Represents a GUI for {@code Poseidon} using JavaFX and FXML.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
  */
 public class Main extends Application {
 
+    // Icon for application window.
     private static final Image BOT_ICON = new Image(Main.class.getResourceAsStream("/images/BotIcon.png"));
-    private Duke duke = new Duke();
+    private Poseidon poseidon = new Poseidon();
 
     @Override
     public void start(Stage stage) {
@@ -25,7 +30,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.getIcons().add(BOT_ICON);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setPoseidon(poseidon);
             stage.show();
             stage.setResizable(false);
         } catch (IOException e) {

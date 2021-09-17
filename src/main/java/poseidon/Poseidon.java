@@ -1,36 +1,59 @@
-package duke;
+package poseidon;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import poseidon.exception.PoseidonException;
+import poseidon.parser.Parser;
+import poseidon.storage.Storage;
+import poseidon.task.Deadline;
+import poseidon.task.Event;
+import poseidon.task.Task;
+import poseidon.task.Todo;
+import poseidon.tasklist.TaskList;
+import poseidon.ui.Ui;
 
 
-public class Duke {
+/**
+ * Represents a {@code Poseidon} object that executes the user commands.
+ *
+ * @author Yeluri Ketan
+ * @version CS2103T AY21/22 Sem 1 iP
+ */
+public class Poseidon {
 
-    private static final String NON_EXISTENT_TASK = "That task doesn't exist.\nPlease Try again.";
+    private static final String NON_EXISTENT_TASK_MSG = "That task doesn't exist.\nPlease Try again.";
+    private static final String BYE_CMD = "bye";
+    private static final String LIST_CMD = "list";
+    private static final String ADD_CMD = "add";
+    private static final String DONE_CMD = "done";
+    private static final String DELETE_CMD = "delete";
+    private static final String FIND_CMD = "find";
+    private static final String SORT_CMD = "sort";
+    private static final String FAIL_CMD = "fail";
+    private static final String ADD_TODO_CMD = "todo";
+    private static final String ADD_DEADLINE_CMD = "deadline";
+    private static final String ADD_EVENT_CMD = "event";
+    private static final String HELP_CMD = "help";
 
-    /** Storage object that reads from and writes onto the hard disk  */
+    /** {@code Storage} object that reads from and writes onto the hard disk  */
     private Storage storage;
 
-    /** TaskList object that maintains and updates the list of tasks */
+    /** {@code TaskList} object that maintains and updates the list of tasks */
     private TaskList taskList;
 
-    /** Ui object to be used to interact with the user via the command line interface */
+    /** {@code Ui} object to be used to generate responses to User commands */
     private Ui ui;
 
     /**
-     * Constructs a Duke object and initialises the class members.
+     * Constructs a {@code Poseidon} object and initialises the class members.
      */
-    public Duke() {
+    public Poseidon() {
         ui = new Ui();
         try {
             storage = new Storage();
             taskList = new TaskList(storage.load());
-        } catch (DukeException ex) {
+        } catch (PoseidonException ex) {
             ui.showStorageError();
             storage = null;
             taskList = new TaskList();
@@ -38,45 +61,47 @@ public class Duke {
     }
 
     /**
-     * Returns a string representation of a welcome message as prepared by Ui class.
+     * Returns a {@code String} representation of a welcome message as prepared by {@code Ui} class.
      *
-     * @return String welcome message.
+     * @return {@code String} welcome message.
      */
     public String runWelcome() {
         return ui.getWelcomeMessage();
     }
 
     /**
-     * Returns a string representation of the bot's response to the given new user command.
+     * Returns a {@code String} representation of the Bot's response to the given new User command.
      *
-     * @param newCommand String version of the user input.
-     * @return String response.
+     * @param newCommand {@code String} version of the User input.
+     * @return {@code String} response.
      */
     public String run(String newCommand) {
         String errorMessage = "";
         try {
             String[] parsedCommand = Parser.parse(newCommand);
             switch (parsedCommand[0]) {
-            case "bye":
+            case HELP_CMD:
+                return ui.showHelp();
+            case BYE_CMD:
                 return ui.showGoodbye();
-            case "list":
+            case LIST_CMD:
                 return ui.getListMessage(taskList.getList());
-            case "add":
+            case ADD_CMD:
                 return addTask(parsedCommand);
-            case "done":
+            case DONE_CMD:
                 return markTaskDone(parsedCommand);
-            case "delete":
+            case DELETE_CMD:
                 return deleteTask(parsedCommand);
-            case "find":
+            case FIND_CMD:
                 return ui.showFindList(taskList.findTasks(parsedCommand[1]));
-            case "sort":
+            case SORT_CMD:
                 return ui.getListMessage(taskList.sortTasks());
-            case "fail":
+            case FAIL_CMD:
                 return ui.showCommandFail();
             default:
                 break;
             }
-        } catch (DukeException | IOException ex) {
+        } catch (PoseidonException | IOException ex) {
             errorMessage = ui.showError(ex.getMessage());
         }
         assert errorMessage.length() != 0 : "Error message supposed to contain readable text";
@@ -84,10 +109,10 @@ public class Duke {
     }
 
     /**
-     * Returns true is the given user input is a "bye" command.
+     * Returns true if the given user input is a "bye" command.
      *
-     * @param newCommand String version of the user input.
-     * @return Boolean validation result.
+     * @param newCommand {@code String} version of the user input.
+     * @return {@code Boolean} validation result.
      */
     public boolean isBye(String newCommand) {
         return Parser.isParsedBye(newCommand);
@@ -97,14 +122,14 @@ public class Duke {
         Task newTask = null;
 
         switch (parsedCommand[1]) {
-        case "todo":
+        case ADD_TODO_CMD:
             newTask = new Todo(parsedCommand[2]);
             break;
-        case "deadline":
+        case ADD_DEADLINE_CMD:
             LocalDateTime by = Parser.parseDateTime(parsedCommand[3]);
             newTask = new Deadline(parsedCommand[2], by);
             break;
-        case "event":
+        case ADD_EVENT_CMD:
             LocalDateTime from = Parser.parseDateTime(parsedCommand[3]);
             LocalDateTime to = Parser.parseDateTime(parsedCommand[3]);
             newTask = new Event(parsedCommand[2], from, to);
@@ -126,7 +151,7 @@ public class Duke {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
 
         if (!taskList.isIndexValid(taskIndex)) {
-            throw new DukeException(NON_EXISTENT_TASK);
+            throw new PoseidonException(NON_EXISTENT_TASK_MSG);
         }
 
         String message = taskList.markTaskDone(taskIndex);
@@ -139,7 +164,7 @@ public class Duke {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
 
         if (!taskList.isIndexValid(taskIndex)) {
-            throw new DukeException(NON_EXISTENT_TASK);
+            throw new PoseidonException(NON_EXISTENT_TASK_MSG);
         }
 
         String message = taskList.deleteTask(taskIndex);
