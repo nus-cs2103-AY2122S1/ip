@@ -10,7 +10,7 @@
 
 Skeltal is a chatbot that can help you manage your tasks and expenses!
 
-##Features
+## Features
 
 ### *Task Management*
 ### `event` 
