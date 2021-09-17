@@ -1,15 +1,15 @@
 package kermit.command;
 
+import kermit.Response;
 import kermit.Storage;
 import kermit.TaskList;
-import kermit.Ui;
 
 /**
- * List command displays tasks in task list.
+ * Lists command displays tasks in task list.
  */
 public class ListTasksCommand extends Command {
     /**
-     * ListTasks command constructor.
+     * Constructs ListTasks command.
      */
     public ListTasksCommand() {}
 
@@ -17,12 +17,12 @@ public class ListTasksCommand extends Command {
      * Executes exit command.
      * List tasks including their short form, completion status and date associated with task
      * @param taskList Instance of task list used.
-     * @param ui       Instance of Ui used.
+     * @param response       Instance of Ui used.
      * @param storage  Instance of storage class used.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.getListItems(taskList);
+    public String execute(TaskList taskList, Response response, Storage storage) {
+        return response.getListItems(taskList);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ListTasksCommand extends Command {
     }
 
     /**
-     * Return syntax for list command.
+     * Returns syntax for list command.
      *
      * @return Syntax for how list command is used.
      */

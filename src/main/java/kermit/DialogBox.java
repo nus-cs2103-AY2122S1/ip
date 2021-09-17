@@ -21,7 +21,6 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     private static final int FONT_SIZE = 16;
-    private static final int PADDING = 5;
     private static final String LIGHT_GREEN_HEX_VALUE = "#42cb5f";
     private static final String GREY_HEX_VALUE = "#e9e9eB";
 
@@ -29,9 +28,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-
-
 
     private DialogBox(String text, Image img) {
         try {
@@ -47,11 +43,13 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+
     /*
      * Border radius adapted from
      * José Pereda
      * https://stackoverflow.com/questions/43557722/javafx-border-radius-background-color
      */
+    // Code duplication for 2 DialogBoxes due to setStyle overriding previously set styles.
     private DialogBox(String text, Image img, String backgroundColor) {
         this(text, img);
         dialog.setStyle("-fx-font-family: Times New Roman;"
@@ -86,10 +84,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates dialogBox for user.
+     *
+     * @param text user input.
+     * @param img User image.
+     * @return DialogBox containing user image and text.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, GREY_HEX_VALUE);
     }
 
+    /**
+     * Creates dialogBox for Kermit.
+     *
+     * @param text Kermit's response
+     * @param img Kermit's image.
+     * @return DialogBox containing Kermit's image and response.
+     */
     public static DialogBox getKermitDialog(String text, Image img) {
         var db = new DialogBox(text, img, LIGHT_GREEN_HEX_VALUE, "white");
         db.flip();

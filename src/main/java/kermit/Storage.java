@@ -27,7 +27,7 @@ public class Storage {
 
 
     /**
-     * Storage Constructor.
+     * Constructs storage.
      *
      * @param filePath The relative path where the data should be read/ saved to.
      */
@@ -65,7 +65,6 @@ public class Storage {
                     boolean isCompleted = commands[1].equals("1");
                     String description = commands[2];
 
-                    // todo
                     LocalDate date = LocalDate.now();
                     if (taskShortForm.equals("E") || taskShortForm.equals("D")) {
                         try {

@@ -11,7 +11,7 @@ public abstract class DateDependentTask extends Task {
     private LocalDate date;
 
     /**
-     * DateDependentTask constructor.
+     * Constructs DateDependentTask.
      *
      * @param description Description of task.
      * @param date Date related to task.
@@ -23,7 +23,7 @@ public abstract class DateDependentTask extends Task {
 
 
     /**
-     * DateDependentTask constructor.
+     * Constructs DateDependentTask.
      *
      * @param description Description of task.
      * @param date Date related to task.
@@ -35,7 +35,7 @@ public abstract class DateDependentTask extends Task {
     }
 
     /**
-     * Get string representation of date associated to task.
+     * Gets string representation of date associated to task.
      *
      * @return Stringified date in form YYYY-MM-DD.
      */
@@ -44,7 +44,7 @@ public abstract class DateDependentTask extends Task {
     }
 
     /**
-     * Get string representation of date associated to task.
+     * Gets string representation of date associated to task.
      *
      * @return Stringified date in form MMM DD YYYY, MMM is the first 3 letters of the month.
      */

@@ -5,7 +5,7 @@ import kermit.tasks.ToDo;
 
 public class AddToDoCommand extends AddTaskCommand {
     /**
-     * AddToDo command constructor.
+     * Constructs AddToDoCommand.
      * Adds todo task to a list when executed
      *
      * @param description Description of task.
@@ -16,7 +16,7 @@ public class AddToDoCommand extends AddTaskCommand {
     }
 
     /**
-     * Return syntax for command.
+     * Returns syntax for command.
      *
      * @return Syntax for how command is used.
      */

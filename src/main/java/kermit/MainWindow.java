@@ -31,9 +31,12 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user-profile-pic.png"));
     private Image kermitImage = new Image(this.getClass().getResourceAsStream("/images/kermit-profile-pic.png"));
 
-    private final String WELCOME_MESSAGE = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\n" +
-            "What can I do for you?";
+    private final String WELCOME_MESSAGE = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\n"
+            + "What can I do for you?";
 
+    /**
+     * Initialises Main Gui window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -42,13 +45,19 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets Kermit instance used by Gui.
+     *
+     * @param k Kermit instance.
+     */
     public void setKermit(Kermit k) {
         kermit = k;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Display user response and compute Kermit's response.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

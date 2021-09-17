@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Event extends DateDependentTask {
     /**
-     * Event constructor.
+     * Constructs event task.
      *
      * @param description Description of task.
      * @param at Date that task occurs at.
@@ -17,7 +17,7 @@ public class Event extends DateDependentTask {
     }
 
     /**
-     * Event constructor.
+     * Constructs event task.
      *
      * @param description Description of task.
      * @param at Date that task occurs at.
@@ -28,7 +28,7 @@ public class Event extends DateDependentTask {
     }
 
     /**
-     * Get abbreviation of task, usually first letter.
+     * Gets abbreviation of task, usually first letter.
      *
      * @return String abbreviation of task.
      */
@@ -38,7 +38,7 @@ public class Event extends DateDependentTask {
     }
 
     /**
-     * Get string representation of event task including its short form,
+     * Gets string representation of event task including its short form,
      * completion status and the date it occurs at.
      *
      * @return Stringified task.

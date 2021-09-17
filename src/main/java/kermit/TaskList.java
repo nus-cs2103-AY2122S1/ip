@@ -11,7 +11,7 @@ import kermit.tasks.Task;
 public class TaskList extends ArrayList<Task> {
 
     /**
-     * Task list constructor.
+     * Constructs TaskList.
      * Initialises with no tasks.
      */
     public TaskList() {
@@ -19,7 +19,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Task list constructor.
+     * Constructs TaskList.
      * Initialises list with tasks.
      *
      * @param taskArr Tasks to initialise task list.
@@ -42,7 +42,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Delete task from task list using its index.
+     * Deletes task from task list using its index.
      * List is zero-indexed.
      *
      * @param index Index of task to delete.
@@ -74,7 +74,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * String representation of task list.
+     * Returns string representation of task list.
      *
      * @return String representation of task list.
      */

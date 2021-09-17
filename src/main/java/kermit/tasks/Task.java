@@ -8,7 +8,7 @@ public abstract class Task {
     private boolean isCompleted = false;
 
     /**
-     * Task constructor.
+     * Constructs task.
      *
      * @param description Description of task.
      */
@@ -17,7 +17,7 @@ public abstract class Task {
     }
 
     /**
-     * Task constructor.
+     * Constructs task.
      *
      * @param description Description of task.
      * @param isCompleted Boolean to set if task is completed.
@@ -54,14 +54,14 @@ public abstract class Task {
     }
 
     /**
-     * Get abbreviation of task, usually first letter.
+     * Gets abbreviation of task, usually first letter.
      *
      * @return String abbreviation of task.
      */
     public abstract String getShortForm();
 
     /**
-     * Get string representation of a task including its short form and
+     * Gets string representation of a task including its short form and
      * completion status
      *
      * @return Stringified task.

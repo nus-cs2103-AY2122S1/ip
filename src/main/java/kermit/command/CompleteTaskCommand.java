@@ -3,7 +3,7 @@ package kermit.command;
 import kermit.KermitException;
 import kermit.Storage;
 import kermit.TaskList;
-import kermit.Ui;
+import kermit.Response;
 import kermit.tasks.Task;
 
 /**
@@ -14,7 +14,7 @@ public class CompleteTaskCommand extends Command {
     private int taskNum;
 
     /**
-     * Complete task command constructor.
+     * Constructs CompleteTaskCommand.
      *
      * @param taskNum Task number to mark as complete (one-indexed).
      * @throws KermitException if string is not a valid integer that cannot be parsed.
@@ -29,20 +29,20 @@ public class CompleteTaskCommand extends Command {
     }
 
     /**
-     * Execute complete task command.
+     * Executes complete task command.
      * Tries to mark task as complete, notifies user and saves the task list.
      *
      * @param taskList Instance of task list used.
-     * @param ui       Instance of Ui used.
+     * @param response       Instance of Ui used.
      * @param storage  Instance of storage class used.
      * @throws KermitException if error completing task or saving task list.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
+    public String execute(TaskList taskList, Response response, Storage storage) throws KermitException {
         try {
             Task task = taskList.markTaskAsComplete(taskNum);
             storage.save(taskList);
-            return ui.getCompleteTaskMessage(task);
+            return response.getCompleteTaskMessage(task);
         } catch (IndexOutOfBoundsException e) {
             throw new KermitException("That is an invalid task!");
         }
@@ -59,7 +59,7 @@ public class CompleteTaskCommand extends Command {
     }
 
     /**
-     * Return syntax for command.
+     * Returns syntax for command.
      *
      * @return Syntax for how command is used.
      */

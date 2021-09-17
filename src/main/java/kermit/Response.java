@@ -3,9 +3,9 @@ package kermit;
 import kermit.tasks.Task;
 
 /**
- * Ui handles interface with user such as receiving user input and printing messages to user.
+ * Response handles interface with user such as receiving user input and printing messages to user.
  */
-public class Ui {
+public class Response {
     private static final String listText = "Here are the tasks in your list:";
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
     private static final String filteredTaskText = "Here are the matching tasks in your list:";
@@ -15,13 +15,13 @@ public class Ui {
     private static final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
 
     /**
-     * Constructor for Ui.
+     * Constructs Response.
      */
-    public Ui() {
+    public Response() {
     }
 
     /**
-     * Return message to exit chat.
+     * Returns message to exit chat.
      *
      * @return String to exit chat.
      */
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Return message of list of items in task list.
+     * Returns message of list of items in task list.
      * Message includes their statuses, completion status and additional information.
      *
      * @return Items in task list.
@@ -40,7 +40,7 @@ public class Ui {
     }
 
     /**
-     * Return message when task is added.
+     * Returns message when task is added.
      *
      * @param task Task that is added to list.
      * @param list List that task was added to.
@@ -84,7 +84,7 @@ public class Ui {
     }
 
     /**
-     * Return error message when loading save file.
+     * Returns error message when loading save file.
      *
      * @return Error message.
      */
@@ -93,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * Return message for tasks that match filter.
+     * Returns message for tasks that match filter.
      *
      * @return String of tasks that match filter
      */

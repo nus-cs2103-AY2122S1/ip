@@ -6,13 +6,24 @@ import java.time.format.DateTimeParseException;
 import kermit.KermitException;
 import kermit.tasks.DateDependentTask;
 
+/**
+ * AddDateDependentTaskCommand is an abstract class for DateDependentTasks.
+ */
 public abstract class AddDateDependentTaskCommand extends AddTaskCommand {
+    /**
+     * Constructs AddDateDependentTaskCommand.
+     *
+     * @param task task that has been created.
+     * @param description description of task.
+     * @throws KermitException if task is not valid.
+     */
     protected AddDateDependentTaskCommand(DateDependentTask task, String description) throws KermitException {
         super(task, description);
     }
 
     /**
-     * Parse dates in form dd-mm-yyyy to yyyy-mm-dd, the format LocalDate is compatible with.
+     * Parses dates in form dd-mm-yyyy.
+     * Parses date from dd-mm-yyyy to  yyyy-mm-dd, the format LocalDate is compatible with.
      *
      * @param dateString  date string in form dd-mm-yyyy.
      * @return LocalDate object.

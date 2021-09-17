@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Deadline extends DateDependentTask {
     /**
-     * Deadline constructor.
+     * Constructs Deadline task.
      *
      * @param description Description of task.
      * @param by Date to finish task by.
@@ -17,7 +17,7 @@ public class Deadline extends DateDependentTask {
     }
 
     /**
-     * Deadline constructor.
+     * Constructs Deadline task.
      *
      * @param description Description of task.
      * @param by Date to finish task by.
@@ -28,7 +28,7 @@ public class Deadline extends DateDependentTask {
     }
 
     /**
-     * Get abbreviation of task, usually first letter.
+     * Gets abbreviation of task, usually first letter.
      *
      * @return String abbreviation of task.
      */
@@ -38,7 +38,7 @@ public class Deadline extends DateDependentTask {
     }
 
     /**
-     * Get string representation of deadline task including its short form,
+     * Gets string representation of deadline task including its short form,
      * completion status and its due date.
      *
      * @return Stringified task.

@@ -1,9 +1,9 @@
 package kermit.command;
 
 import kermit.KermitException;
+import kermit.Response;
 import kermit.Storage;
 import kermit.TaskList;
-import kermit.Ui;
 
 public class HelpCommand extends Command {
     private static final String INVALID_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means :-(";
@@ -20,12 +20,12 @@ public class HelpCommand extends Command {
      * Tells user how to use a command
      *
      * @param taskList Instance of task list used.
-     * @param ui       Instance of Ui used.
+     * @param response       Instance of Ui used.
      * @param storage  Instance of storage class used.
      * @throws KermitException if error completing task or saving task list.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
+    public String execute(TaskList taskList, Response response, Storage storage) throws KermitException {
         switch (command) {
         case "bye":
             return ExitCommand.getSyntax();
@@ -52,13 +52,18 @@ public class HelpCommand extends Command {
         }
     }
 
+    /**
+     * Returns if command is the exit command.
+     *
+     * @return Always returns false.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Return syntax for command.
+     * Returns syntax for command.
      *
      * @return Syntax for how command is used.
      */

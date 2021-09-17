@@ -6,7 +6,7 @@ package kermit.tasks;
  */
 public class ToDo extends Task {
     /**
-     * ToDo constructor.
+     * Constructs ToDo task.
      *
      * @param description Description of task.
      */
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * ToDo constructor.
+     * Constructs ToDo task.
      *
      * @param description Description of task.
      * @param isCompleted Boolean to set if task is completed.
@@ -26,7 +26,7 @@ public class ToDo extends Task {
 
 
     /**
-     * Get abbreviation of task, usually first letter.
+     * Gets abbreviation of task, usually first letter.
      *
      * @return String abbreviation of task.
      */

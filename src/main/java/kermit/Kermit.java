@@ -8,7 +8,7 @@ import kermit.command.Command;
 public class Kermit {
     private final Storage storage;
     private TaskList taskList;
-    private final Ui ui;
+    private final Response response;
 
     /**
      * Constructor for Kermit.
@@ -16,7 +16,7 @@ public class Kermit {
      * @param filePath File path for where data for task list should be stored.
      */
     public Kermit(String filePath) {
-        ui = new Ui();
+        response = new Response();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
@@ -25,13 +25,19 @@ public class Kermit {
         }
     }
 
+    /**
+     * Parses user input, processes it and get Kermit's response.
+     *
+     * @param input user input.
+     * @return String of what kermit says.
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
             assert command != null : "Parser returned a null command";
-            return command.execute(taskList, ui, storage);
+            return command.execute(taskList, response, storage);
         } catch (KermitException e) {
-            return ui.getErrorMessage(e.getMessage());
+            return response.getErrorMessage(e.getMessage());
         }
     }
 }

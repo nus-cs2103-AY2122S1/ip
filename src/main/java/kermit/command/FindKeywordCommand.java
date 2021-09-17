@@ -3,38 +3,47 @@ package kermit.command;
 import kermit.KermitException;
 import kermit.Storage;
 import kermit.TaskList;
-import kermit.Ui;
+import kermit.Response;
 
+/**
+ * Command used to filter tasks with keyword.
+ */
 public class FindKeywordCommand extends Command {
     private String filterText;
 
+    /**
+     * Constructs FindKeywordCommand.
+     *
+     * @param filterText Text used to match description
+     */
     public FindKeywordCommand(String filterText) {
         this.filterText = filterText;
     }
+
     /**
-     * Execute command and process action.
+     * Executes command and process action.
      *
      * @param taskList Instance of task list used.
-     * @param ui Instance of Ui used.
+     * @param response Instance of Ui used.
      * @param storage Instance of storage class used.
      * @throws KermitException if there are any errors while performing action.
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Response response, Storage storage) {
         TaskList filteredTasks = taskList.filter(filterText);
-        return ui.getFilteredTasks(filteredTasks);
+        return response.getFilteredTasks(filteredTasks);
     }
 
     /**
-     * If command is exit command
+     * Returns boolean if command is the exit command.
      *
-     * @return true if it is an instanceOf Exit, otherwise returns false
+     * @return Always returns false.
      */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Return syntax for find command.
+     * Returns syntax for find command.
      *
      * @return Syntax for how find command is used.
      */
