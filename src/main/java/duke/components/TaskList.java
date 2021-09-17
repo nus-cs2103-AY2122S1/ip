@@ -1,13 +1,12 @@
 package duke.components;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDateTime;
-
-import java.util.ArrayList;
 
 /**
  * Represents a Task List that contains all tasks.
@@ -18,6 +17,13 @@ public class TaskList {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Creates a TaskList object.
+     *
+     * @param storage The Storage of Duke.
+     * @param ui The UI of Duke.
+     * @param parser The Parser of Duke.
+     */
     public TaskList(Storage storage, Ui ui, Parser parser) {
         inputs = new ArrayList<>();
         this.storage = storage;

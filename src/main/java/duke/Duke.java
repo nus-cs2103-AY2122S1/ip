@@ -1,12 +1,11 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.components.Parser;
 import duke.components.Storage;
 import duke.components.TaskList;
 import duke.components.Ui;
-import duke.task.Task;
-
-import java.util.Scanner;
 
 /**
  * Duke is an application that can store Tasks for users.
@@ -14,12 +13,17 @@ import java.util.Scanner;
  * They can also mark a task as completed and view all tasks they have.
  */
 public class Duke {
+    private static final String FILE_PATH = "./data/data.txt";
     private Ui ui;
     private Storage storage;
     private Parser parser;
     private TaskList taskList;
-    private static final String FILE_PATH = "./data/data.txt";
 
+    /**
+     * Creates a Duke object.
+     *
+     * @param filePath The file path to the data file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -36,7 +40,7 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
 
         // String input
-        while(true) {
+        while (true) {
             String input = myObj.nextLine();
 
             if (parser.isMarkDoneCommand(input)) {

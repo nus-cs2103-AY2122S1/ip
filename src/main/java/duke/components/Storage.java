@@ -1,23 +1,20 @@
 package duke.components;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Represents the storage file that Duke can read from and write to.
@@ -26,6 +23,11 @@ public class Storage {
     private final File dataFile;
     private final String filePath;
 
+    /**
+     * Creates a Storage object.
+     *
+     * @param filePath The file path to the data file.
+     */
     public Storage(String filePath) {
         this.dataFile = new File(filePath); // "./data/data.txt"
         this.filePath = filePath;
