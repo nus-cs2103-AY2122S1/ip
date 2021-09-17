@@ -66,6 +66,9 @@ public class Storage {
                     Event event = (Event) task;
                     taskToFile = "Event" + SEPARATE + taskStatus + SEPARATE + event.getTaskDescription()
                             + SEPARATE + event.getAt();
+                    break;
+                default:
+                    assert false : "There should not be other cases of tasks!";
                 }
 
                 // Save the newly text version of the task into the file
@@ -110,9 +113,11 @@ public class Storage {
                     LocalDateTime at = LocalDateTime.parse(taskBreakdown[3]);
                     task = new Event(taskBreakdown[2], at);
                     break;
+                default:
+                    assert false : "There should not be other cases of tasks!";
                 }
 
-                assert task != null : "The task should not be null here";
+                assert (task != null) : "The task should not be null here";
 
                 if (taskBreakdown[1].equals("1")) {
                     task.completeTask();
