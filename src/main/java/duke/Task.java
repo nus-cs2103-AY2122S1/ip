@@ -83,9 +83,14 @@ public class Task {
          * @param status Completion status of task
          * @param by Deadline of task in YYYY-MM-DD format
          */
-        public Deadline(String description, boolean status, String by) {
+        public Deadline(String description, boolean status, String by) throws DukeException {
             super(description, status);
-            this.by = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
+            try {
+                this.by = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter date in format YYYY-MM-DD");
+            }
+
         }
 
         @Override
@@ -126,9 +131,13 @@ public class Task {
          * @param status Completion status of task
          * @param at Deadline of task in YYYY-MM-DD format
          */
-        public Event(String description, boolean status, String at) {
+        public Event(String description, boolean status, String at) throws DukeException {
             super(description, status);
-            this.at = LocalDate.parse(at, DateTimeFormatter.ISO_LOCAL_DATE);
+            try {
+                this.at = LocalDate.parse(at, DateTimeFormatter.ISO_LOCAL_DATE);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter date in format YYYY-MM-DD");
+            }
         }
 
         @Override

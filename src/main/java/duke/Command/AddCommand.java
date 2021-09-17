@@ -44,15 +44,27 @@ public class AddCommand extends Command {
             break;
         case deadline:
             String[] temp1 = description.split("by ");
-            task = new Task.Deadline(temp1[0], false, temp1[1]);
+            try {
+                task = new Task.Deadline(temp1[0], false, temp1[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Format of deadline command is: 'deadline DESCRIPTION by DATE'");
+            }
             break;
         case event:
             String[] temp2 = description.split("at ");
-            task = new Task.Event(temp2[0], false, temp2[1]);
+            try {
+                task = new Task.Event(temp2[0], false, temp2[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Format of event command is: 'event DESCRIPTION at DATE'");
+            }
             break;
         case within:
             String[] temp3 = description.split("between | and ");
-            task = new Task.Within(temp3[0], false, temp3[1], temp3[2]);
+            try {
+                task = new Task.Within(temp3[0], false, temp3[1], temp3[2]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Format of within command is: 'within DESCRIPTION between DATE and DATE'");
+            }
             break;
         default:
         }
