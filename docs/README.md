@@ -33,7 +33,7 @@ Got it. I've added this task:
 Now you have 1 task in the list
 ```
 
-### `deadline <task description> /by <date of deadline formatted YYYY-MM-DD>` - Creates deadline task
+### `deadline <task description> /by <YYYY-MM-DD>` - Creates deadline task
 
 Duke will create a deadline-type task, populated with provided <task description> and <date of deadline>.
 
