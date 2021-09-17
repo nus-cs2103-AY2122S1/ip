@@ -25,8 +25,8 @@ import duke.exceptions.DukeException;
 public class Storage {
     private String path;
     private String directory;
-    ArrayList<Task> listOfTasks;
-    ArrayList<Note> listOfNotes;
+    private ArrayList<Task> listOfTasks;
+    private ArrayList<Note> listOfNotes;
 
     /**
      * Creates an object of the Storage class to store all tasks on the hard disk.
@@ -146,10 +146,12 @@ public class Storage {
                     Event event = new Event(eventTask, eventAt);
                     listOfTasks.add(event);
                     event.setTaskCompletionStatus(indicationOfTaskCompletion);
-                } else {
+                } else if(typeOfData.equals("N")) {
                     String noteDescription = data.split("/")[1];
                     Note note = new Note(noteDescription);
                     listOfNotes.add(note);
+                } else {
+                    assert false;
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
