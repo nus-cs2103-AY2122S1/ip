@@ -43,8 +43,8 @@ public class DeadlineCommand extends Command {
         LocalDate byDate = LocalDate.parse(dueDate);
 
         Deadline deadline = new Deadline(taskDescription, byDate);
-        String output = ui.showTaskAdded(deadline, taskList);
         taskList.storeTask(deadline);
+        String output = ui.showTaskAdded(deadline, taskList);
         storage.saveFile(taskList.getAllTasks());
         return output;
 
