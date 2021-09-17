@@ -207,7 +207,9 @@ public class Ui {
         for (int i = 0; i < tasks.getLength(); i++) {
             response.append((i + 1) + "." + tasks.getTask(i).toString() + "\n");
         }
-        showResponse(false, response.toString());
+        boolean isTaskListEmpty = tasks.getLength() == 0;
+        String responseMessage = isTaskListEmpty ? "Your task list is empty." : response.toString();
+        showResponse(false, responseMessage);
     }
 
     /**
