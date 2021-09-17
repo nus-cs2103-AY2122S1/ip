@@ -3,7 +3,7 @@ Duke is a chatbot help you remember and manage your task. It is:
 * text-based
 * easy to use
 * fast
-#
+
 ## Features
 
 ### Listing all tasks: `list`
