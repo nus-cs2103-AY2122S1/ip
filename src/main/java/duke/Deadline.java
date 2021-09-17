@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * @Deadline are Tasks that have an attached date as the time a Task needs to be completed by.
+ * @author spdpnd98.
  */
 public class Deadline extends Task{
     private Date date;

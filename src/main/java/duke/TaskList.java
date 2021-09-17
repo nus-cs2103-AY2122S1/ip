@@ -3,6 +3,10 @@ package duke;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @TaskList represents a TaskList but doesn't allow explicit modification to each items in the list.
+ */
+
 public class TaskList {
     private List<Task> tasks;
 
