@@ -1,6 +1,6 @@
-package duke;
+package tipsy;
 
-public class Duke {
+public class Tipsy {
 
     private Ui ui;
     private Storage storage;
@@ -8,29 +8,29 @@ public class Duke {
 
     /**
      * Class constructor.
-     * Sets save file path to "./data/duke.txt" by default.
+     * Sets save file path to "./data/tipsy.txt" by default.
      */
-    public Duke() {
-        this("data/duke.txt");
+    public Tipsy() {
+        this("data/tipsy.txt");
     }
 
     /**
      * Class constructor specifying the save file's path.
      *
-     * @param filepath The file path to the save file for Duke.
+     * @param filepath The file path to the save file for Tipsy.
      */
-    public Duke(String filepath) {
+    public Tipsy(String filepath) {
         ui = new Ui();
 
         try {
             setStoragePath(filepath);
-        } catch (DukeException e) {
+        } catch (TipsyException e) {
             tasks = new TaskList();
         }
     }
 
     /**
-     * Returns the message informing that Duke has started up.
+     * Returns the message informing that Tipsy has started up.
      *
      * @return A String object containing the start-up message.
      */
@@ -53,19 +53,19 @@ public class Duke {
     }
 
     /**
-     * Gets the response from Duke to the command inputted by the user.
+     * Gets the response from Tipsy to the command inputted by the user.
      *
-     * @return A String object containing Duke's response.
+     * @return A String object containing Tipsy's response.
      */
     public String getResponse(String userInput) {
         try {
             return executeCommand(userInput);
-        } catch (DukeException e) {
+        } catch (TipsyException e) {
             return ui.printErrorMessage(e.getMessage());
         }
     }
 
-    private String executeCommand(String userInput) throws DukeException {
+    private String executeCommand(String userInput) throws TipsyException {
         // First, extract the command type inputted by the user.
         // parseCommandType() will throw an UnsupportedOperationException if
         // no valid command types was inputted by the user.
@@ -148,7 +148,7 @@ public class Duke {
         try {
             setStoragePath(newPath);
             return ui.printNewStoragePath(storage, tasks);
-        } catch (DukeException e) {
+        } catch (TipsyException e) {
             return ui.printErrorMessage(e.getMessage());
         }
     }

@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 import java.time.LocalDate;
 import java.util.Scanner;

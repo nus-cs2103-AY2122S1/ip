@@ -3,16 +3,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.CommandType;
-import duke.DukeException;
-import duke.MissingInputException;
-import duke.Parser;
-import duke.Task;
-import duke.TaskList;
-import duke.ToDo;
-import duke.UnsupportedOperationException;
+import tipsy.CommandType;
+import tipsy.MissingInputException;
+import tipsy.Parser;
+import tipsy.Task;
+import tipsy.TaskList;
+import tipsy.TipsyException;
+import tipsy.ToDo;
+import tipsy.UnsupportedOperationException;
 
-public class DukeTest {
+public class TipsyTest {
 
     @Test
     public void taskListTest() {
@@ -42,7 +42,7 @@ public class DukeTest {
             assertEquals(Parser.parseCommandType("DeadLine :((( "), CommandType.ADD_TASK);
             assertEquals(Parser.parseCommandType(" delete afeascs"), CommandType.DELETE_TASK);
             assertThrows(UnsupportedOperationException.class, () -> Parser.parseCommandType(" bleh"));
-        } catch (DukeException e) {
+        } catch (TipsyException e) {
             e.printStackTrace();
         }
     }

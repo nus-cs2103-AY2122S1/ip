@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 /**
  * Task is the abstract class that describes the basic details of all tasks.

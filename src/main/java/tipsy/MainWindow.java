@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,39 +22,39 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Tipsy tipsy;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/Images/User_DP.png"));
     // Image taken from https://myanimelist.net/character/103091/Tippy/pics
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Tipsy_DP.png"));
+    private Image tipsyImage = new Image(this.getClass().getResourceAsStream("/Images/Tipsy_DP.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setTipsy(Tipsy t) {
+        tipsy = t;
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(d.getStartUpMessage(), dukeImage));
+                DialogBox.getTipsyDialog(t.getStartUpMessage(), tipsyImage));
 
-        if (!d.getTasksLoadedMessage().equals("")) {
+        if (!t.getTasksLoadedMessage().equals("")) {
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(d.getTasksLoadedMessage(), dukeImage));
+                    DialogBox.getTipsyDialog(t.getTasksLoadedMessage(), tipsyImage));
         }
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Tipsy's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = tipsy.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getTipsyDialog(response, tipsyImage)
         );
         userInput.clear();
     }

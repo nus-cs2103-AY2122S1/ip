@@ -1,4 +1,4 @@
-package duke;
+package tipsy;
 
 import javafx.application.Application;
 
