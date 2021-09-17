@@ -126,7 +126,7 @@ public class Parser {
     }
 
     /**
-     * Checks if 'reverse' is entered by user.
+     * Checks if user specifies to sort in reverse.
      *
      * @param input Raw user input.
      * @return True if 'reverse' is entered, false otherwise.
