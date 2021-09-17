@@ -1,15 +1,34 @@
 package duke;
 
+/**
+ * DukeException is a class for exceptions related to Duke.
+ *
+ * @author Samuel Lau
+ */
 public class DukeException extends IllegalArgumentException {
     private Type type;
 
+    /**
+     * Types of Duke Exceptions.
+     */
     public enum Type {
         LOADING, TODO, INVALID, DATE
     }
+
+    /**
+     * Constructor for DukeException.
+     *
+     * @param t Type of DukeException to be constructed.
+     */
     public DukeException(Type t) {
         type = t;
     }
 
+    /**
+     * Returns the message related to the type of Duke Exception.
+     *
+     * @return Message string.
+     */
     @Override
     public String getMessage() {
         switch(type) {
