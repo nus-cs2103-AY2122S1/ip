@@ -24,9 +24,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    // Image credits to Rhaennys from https://rhaennys.itch.io/pixel-art
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/Images/Cecilia.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/ItemShopNPC.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/Images/User_DP.png"));
+    // Image taken from https://myanimelist.net/character/103091/Tippy/pics
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Tipsy_DP.png"));
 
     @FXML
     public void initialize() {
