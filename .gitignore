@@ -15,7 +15,3 @@ bin/
 
 # User data
 /data
-
-# Tests
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
