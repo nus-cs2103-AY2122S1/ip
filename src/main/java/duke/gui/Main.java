@@ -26,7 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Saitama");
+            stage.setTitle("SaitamaChat");
             stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(stage);
             stage.show();

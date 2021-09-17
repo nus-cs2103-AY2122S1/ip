@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is a **desktop app for managing tasks, optimized for use
+SaitamaChat is a **desktop app for managing tasks, optimized for use
 via a Command Line Interface** (CLI) while still having the benefits
 of a Graphical User Interface (GUI). You can keep track of all the
 tasks you have using this app!
@@ -9,7 +9,7 @@ tasks you have using this app!
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
-2. Download the latest duke.jar from [here](https://github.com/xiangjunn/ip/releases).
+2. Download the latest SaitamaChat.jar from [here](https://github.com/xiangjunn/ip/releases).
 
 3. Copy the file to the folder you want to use as the home folder
 for your Duke app.
