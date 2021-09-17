@@ -5,16 +5,16 @@ This application presents a interactive user interface to create, tag and list o
 
 ## Key Features
 
-1. **Task Management** - Add, delete and complete tasks of the following categories:
+1. [**Task Management**](https://github.com/ykwei7/ip/tree/master/docs#task-management) - Add, delete and complete tasks of the following categories:
  - Todo
  - Deadline
  - Event
 
-2. **Search via** (task name)
+2. [**Search via**](https://github.com/ykwei7/ip/tree/master/docs#search-via-task-name) (task name)
 
  - Existing tasks can be filtered via their task names or their tagged categories. 
 
-3. **List** tasks
+3. [**List**](https://github.com/ykwei7/ip/tree/master/docs#list) tasks
 
  - Provides an overview of all tasks and their current status.
 
