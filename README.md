@@ -1,7 +1,7 @@
 # Wednesday Dude
 > “It's wednesday my dudes” – Wednesday dude
 
-Wednesday Dude is an application that allows you to manage your tasks more efficiently!!! 😄
+**Wednesday Dude** is an application that allows you to manage your tasks more _efficiently_!!! 😄
 
 * Text-based
 * Quick and easy to use
@@ -34,3 +34,4 @@ public class Launcher {
     }
 }
 ```
+Adopted and modified from [Project Duke](https://github.com/nus-cs2103-AY2122S1/ip)
