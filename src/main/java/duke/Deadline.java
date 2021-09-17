@@ -38,6 +38,16 @@ public class Deadline extends Task{
         }
     }
 
+    protected Deadline(String isDone, String description, String date) throws DukeDateParseException{
+        super(description);
+        try {
+            this.date = (new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy")).parse(date);
+            this.isDone = Boolean.valueOf(isDone);
+        }catch (ParseException e) {
+            throw new DukeDateParseException(e);
+        }
+    }
+
     @Override
     protected String getTaskType() {
         return DEADLINE_LABEL;

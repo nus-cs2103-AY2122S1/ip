@@ -7,6 +7,11 @@ public class ToDo extends Task{
         super(str);
     }
 
+    protected ToDo(String isDoneStr, String descriptionStr) {
+        super(descriptionStr);
+        this.isDone = Boolean.valueOf(isDoneStr);
+    }
+
     @Override
     protected String getTaskType() {
         return TODO_LABEL;

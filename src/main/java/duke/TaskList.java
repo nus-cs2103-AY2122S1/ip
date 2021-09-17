@@ -10,6 +10,10 @@ public class TaskList {
         this.tasks = new LinkedList<>();
     }
 
+    protected void addTask(Task t) {
+        this.tasks.add(t);
+    }
+
     protected Chatbot.ChatContinue addTask(Chatbot.TaskCommands command, String input, Ui ui, FileDB fileDB) throws DukeIOException, DukeDateParseException {
         switch (command) {
         case TASK_COMMAND_DONE:
@@ -100,5 +104,17 @@ public class TaskList {
             ui.showAllTasks(this.tasks);
         }
         return Chatbot.ChatContinue.CHAT_CONTINUE;
+    }
+
+    protected void saveAll(FileDB fileDB) throws DukeIOException{
+        fileDB.clearAll();
+        for(int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            fileDB.save(t);
+        }
+    }
+
+    public int size() {
+        return tasks.size();
     }
 }

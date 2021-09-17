@@ -1,8 +1,8 @@
-import duke.Chatbot;
+//import duke.Chatbot;
+import javafx.application.Application;
 
 public class DukeRunner {
     public static void main(String[] args) {
-        Chatbot dukeChatbot = new Chatbot();
-        dukeChatbot.chat();
+        Application.launch(Duke.class, args);
     }
 }

@@ -13,7 +13,7 @@ public class Chatbot {
      */
     private enum ChatCommands {
         CHAT_COMMAND_BYE("bye"),
-        CHAT_COMMAND_LIST("list");
+        CHAT_COMMAND_LIST("list"),
         CHAT_COMMAND_FIND("find");
 
         private final String command;
@@ -64,7 +64,7 @@ public class Chatbot {
     /**
      * @ChatContinue are enumerations to indicate if a chat should continue or terminate.
      */
-    protected enum ChatContinue {
+    public enum ChatContinue {
         CHAT_CONTINUE,
         CHAT_END,
     }
@@ -83,9 +83,11 @@ public class Chatbot {
         this.taskList = new TaskList();
         try {
             this.ui.showLoadingFile();
-            this.fileDB = new FileDB();
+            this.fileDB = new FileDB(this.taskList);
         } catch (DukeIOException e) {
             // File already exists
+            System.out.println(e.getMessage());
+        } catch (DukeDateParseException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -121,11 +123,24 @@ public class Chatbot {
      */
     private ChatContinue interpret() throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String input = scanner.nextLine();
+        return guiInterpret(input);
+    }
+
+    /**
+     * @guiInterpret contains the logic to understand user inputs.
+     *
+     * @return ChatContinue enum to indicate if the chat should continue or terminate.
+     * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
+     * @throws DukeDateParseException thrown by TaskList.addTask method, if fails to parse the date.
+     * @throws DukeArgumentException if not enough arguments are given to TaskCommand methods.
+     */
+    public ChatContinue guiInterpret(String input) throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String[] parseInput = input.split(" ", 2);
         ChatCommands command = ChatCommands.toEnum(parseInput[0]);
         if (command != null) {
             return builtInCommands(command, parseInput.length == 1 ? "" : parseInput[1]);
         }
+
         TaskCommands taskCommand = TaskCommands.toEnum(input);
         if (taskCommand != null) {
             String[] arguments = input.split(" ", 2);
@@ -143,17 +158,16 @@ public class Chatbot {
      * @param command the user's input.
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue builtInCommands(ChatCommands command) {
+    private ChatContinue builtInCommands(ChatCommands command, String argument) throws DukeIOException{
         switch (command) {
         case CHAT_COMMAND_BYE:
             return this.farewell();
         case CHAT_COMMAND_LIST:
             return this.taskList.list(this.ui);
         case CHAT_COMMAND_FIND:
-                TaskList findTaskList = this.taskList.findTasks(argument);
-                System.out.println(findTaskList.tasks.size());
-                System.out.println(findTaskList.list(this.ui));
-                return ChatContinue.CONTINUE;
+            TaskList findTaskList = this.taskList.findTasks(argument);
+            System.out.println(findTaskList.list(this.ui));
+            return ChatContinue.CHAT_CONTINUE;
         default:
             this.ui.showNotSupported();
             return ChatContinue.CHAT_END;
@@ -165,8 +179,9 @@ public class Chatbot {
      *
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue farewell() {
+    private ChatContinue farewell() throws DukeIOException{
         this.ui.showFarewell();
+        this.taskList.saveAll(this.fileDB);
         return ChatContinue.CHAT_END;
     }
 }
