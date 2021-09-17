@@ -48,6 +48,7 @@ public class DialogBox extends HBox {
         dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,
                 new CornerRadii(5), Insets.EMPTY)));
         dialog.setPadding(new Insets(10));
+        setSpacing(10);
     }
 
     /**
