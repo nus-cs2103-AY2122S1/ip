@@ -1,7 +1,7 @@
-# Duke
-> “Your mind is for having ideas, not holding them.” – David Allen
+# Wednesday Dude
+> “It's wednesday my dudes” – Wednesday dude
 
-Duke is an application that allows you to manage your tasks more efficiently!!! 😄
+Wednesday Dude is an application that allows you to manage your tasks more efficiently!!! 😄
 
 * Text-based
 * Quick and easy to use
@@ -20,27 +20,17 @@ Duke is an application that allows you to manage your tasks more efficiently!!! 
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Click [here](https://github.com/mukundrs/ip/releases/tag/A-Jar) and download the jar file.
+1. Click [here](https://github.com/mukundrs/ip/releases/tag/A-BetterGui) and download the jar file.
 2. Run java -jar ip.jar in command prompt. Yoou should see this output: 
-   ```
-   _______________________________________________
-   Hello!
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   
-   I'm Duke! How can I help you?
-   _______________________________________________
-   ```
+  
+![Image of Ui](https://github.com/mukundrs/ip/blob/master/docs/Ui.png)
 
 
-
-If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+If you Java programmer, you can use it to practice Java too. Here's the `Launcher` class:
 ```java
-public static void main(String[] args) {
-        Duke duke = new Duke("tasklist.txt");
-        duke.run();
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
+}
 ```
