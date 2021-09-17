@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- solution adapted from Dialog box https://github.com/xyliew25/ip/blob/master/src/main/resources/view/DialogBox.fxml
-but with circular dialog boxes-->
+<!-- Credits to https://github.com/xyliew25/ip/blob/master/src/main/resources/view/DialogBox.fxml
+and circular dialog boxes from -->
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
