@@ -8,6 +8,7 @@ C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\EventCommand.ja
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\ExitCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\FindCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\ListCommand.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\SortCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\TodoCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\exception\DukeException.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\exception\EmptyDescriptionException.java
@@ -25,6 +26,7 @@ C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\task\Todo.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\ui\DialogBox.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\ui\Launcher.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\ui\MainWindow.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\DateSorter.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\Parser.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\Storage.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\TaskList.java
