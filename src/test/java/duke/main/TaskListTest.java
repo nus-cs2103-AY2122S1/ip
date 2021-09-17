@@ -4,6 +4,8 @@ import duke.exceptions.DucException;
 import duke.exceptions.DucOutOfBoundException;
 import duke.exceptions.DucWrongCommandException;
 import duke.task.Task;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,9 @@ public class TaskListTest {
     public void setup() {
         this.taskList = new TaskList();
         Storage.loadData(new File("taskFile/testFile1.txt"), taskList);
+        taskList.addTask("play the piano", Task.Type.TODO);
+        taskList.addTask("CS2103T IP submission /by 2021-09-17", Task.Type.DEADLINE);
+        taskList.addTask("CS2103T Lecture /at 2021-09-17", Task.Type.EVENT);
     }
 
     @Test
@@ -65,5 +70,10 @@ public class TaskListTest {
                 () -> taskList.addTask("play Liszt", Task.Type.DEADLINE));
         assertThrows(DucWrongCommandException.class,
                 () -> taskList.addTask("play Liszt", Task.Type.EVENT));
+    }
+
+    @AfterEach
+    public void finish() {
+        this.taskList.deleteAll();
     }
 }

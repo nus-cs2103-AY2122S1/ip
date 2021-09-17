@@ -1,5 +1,6 @@
-[D][ ] geq1000 Computational Quiz (by 2021-09-18)
+[D][X] geq1000 Computational Quiz (by 2021-09-18)
 [T][X] acc1701x tutorial and self-study
 [T][X] finish my ACC1701X presentation draft
 [E][ ] NUS Career Fair (at 2021-09-08)
-[T][ ] play some games
+[T][ ] play games
+[D][ ] IP submission (by 2021-09-17)

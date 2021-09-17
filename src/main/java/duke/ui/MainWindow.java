@@ -56,7 +56,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {
-            String promptQuestion = "How can I take your order?";
+            String promptQuestion = "How can I take your order?\n" +
+                    "Type in 'help' if you don't know where to start.";
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(promptQuestion, dukeImage));
         });
         pause.play();

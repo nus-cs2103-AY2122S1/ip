@@ -57,15 +57,7 @@ public class TaskList {
         }
     }
 
-    /**
-     * Mark multiple tasks inside a task list as completed
-     * @param indices all tasks to be marked
-     */
-    public void done(int...indices) {
-        for (int i : indices) {
-            done(i);
-        }
-    }
+
     /**
      * Indicate that all tasks are completed
      */
@@ -84,16 +76,6 @@ public class TaskList {
         } else {
             index--;
             return taskList.remove(index);
-        }
-    }
-
-    /**
-     * Delete a number of tasks on the list
-     * @param indices all tasks to be deleted
-     */
-    public void delete(int...indices) {
-        for (int i : indices) {
-            delete(i);
         }
     }
 

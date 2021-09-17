@@ -2,7 +2,7 @@ package duke.task;
 
 public abstract class Task {
     private final String taskName;
-    private boolean status;
+    private boolean taskStatus;
 
     /**
      * Types of Task available
@@ -17,7 +17,7 @@ public abstract class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.status = false;
+        this.taskStatus = false;
     }
 
 
@@ -25,13 +25,13 @@ public abstract class Task {
      * Mark a task status as completed
      */
     public void markAsCompleted() {
-        this.status = true;
+        this.taskStatus = true;
     }
 
     public abstract Task completedTask();
 
     public boolean isCompleted() {
-        return this.status;
+        return this.taskStatus;
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if (status) {
+        if (taskStatus) {
             return "[X] " + this.taskName;
         } else {
             return "[ ] " + this.taskName;

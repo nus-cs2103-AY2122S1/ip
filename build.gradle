@@ -52,7 +52,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "duke.DukeRunner"
+    mainClassName = "duke.DuCRunner"
 }
 
 run {

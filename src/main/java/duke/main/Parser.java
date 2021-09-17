@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import duke.command.Command;
-import duke.command.DateOfCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
@@ -64,8 +63,6 @@ public class Parser {
             return new DeleteCommand(description, taskList);
         case "find":
             return new FindCommand(description, taskList);
-        case "date-of":
-            return new DateOfCommand(description, taskList);
         case "update":
             return new UpdateCommand(description, taskList);
         default:

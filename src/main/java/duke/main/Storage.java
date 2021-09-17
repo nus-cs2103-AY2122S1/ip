@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.exceptions.DucException;
+import duke.exceptions.DucSyntaxErrorException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -46,46 +46,37 @@ public class Storage {
                 char type = (taskString.length() < 1) ? ' ' : taskString.trim().charAt(1);
                 char status = (taskString.length() < 4) ? '?' : taskString.trim().charAt(4);
                 String[] taskArray = taskString.split("] ", 2);
-                String taskDescription = (taskArray.length < 2) ? "" : taskArray[1];
-                Task curr;
-                switch (type) {
-                case 'T':
-                    taskDescription = taskDescription.trim();
-                    curr = new Todo(taskDescription);
-                    if (status == 'X') {
-                        curr.markAsCompleted();
-                    }
-                    taskList.addTask(curr);
-                    break;
-                case 'D':
-                    taskDescription = taskDescription.trim()
-                            .replaceAll("\\(", "/")
-                            .replaceAll("\\)", "");
-                    curr = new Deadline(taskDescription);
-                    if (status == 'X') {
-                        curr.markAsCompleted();
-                    }
-                    taskList.addTask(curr);
-                    break;
-                case 'E':
-                    taskDescription = taskDescription
-                            .replaceAll("\\(", "/")
-                            .replaceAll("\\)", "");
-                    curr = new Event(taskDescription);
-                    if (status == 'X') {
-                        curr.markAsCompleted();
-                    }
-                    taskList.addTask(curr);
-                    break;
-                default:
-                    break;
+                String taskDescription = (taskArray.length < 2) ? "" : taskArray[1].trim();
+                Task curr = processData(type, taskDescription);
+                if (status == 'X') {
+                    curr.markAsCompleted();
                 }
+                taskList.addTask(curr);
             }
-            sc.close();
         } catch (IOException e) {
             System.out.println("Cannot find file specified");
-        } catch (DucException e) {
-            System.out.println(e.getMessage());
         }
+    }
+
+    private static Task processData(char taskType, String taskDescription) {
+        Task processedTask;
+        switch (taskType) {
+        case 'T':
+            processedTask = new Todo(taskDescription);
+            break;
+        case 'D':
+            taskDescription = taskDescription.replaceAll("\\(", "/")
+                    .replaceAll("\\)", "");
+            processedTask = new Deadline(taskDescription);
+            break;
+        case 'E':
+            taskDescription = taskDescription.replaceAll("\\(", "/")
+                    .replaceAll("\\)", "");
+            processedTask = new Event(taskDescription);
+            break;
+        default:
+            throw new DucSyntaxErrorException(String.valueOf(taskType));
+        }
+        return processedTask;
     }
 }
