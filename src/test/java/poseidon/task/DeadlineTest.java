@@ -3,6 +3,8 @@ package poseidon.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,10 @@ public class DeadlineTest {
     public void toString_deadlineObject_stringRep() {
         LocalDateTime deadlineDT = Parser.parseDateTime("2021 08 30 2359");
         Deadline deadline = new Deadline("finish all tasks", deadlineDT);
-        assertEquals("[D][ ] finish all tasks (by: 30 Aug 2021, 11:59 PM)", deadline.toString());
+        String expectedToString = "[D][ ] finish all tasks (by: "
+                + deadlineDT.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))
+                + ")";
+        assertEquals(expectedToString, deadline.toString());
     }
 
     @Test
