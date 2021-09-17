@@ -7,7 +7,7 @@ import duke.task.Task;
 
 public class Ui {
     private static String welcomeMsg = "Hello! I'm Duke\nSay 'help' to see how I can help you.";
-    private static String goodbyeMsg = "See you next time!";
+    private static String goodbyeMsg = "See you next time! <3";
     private static String secretCmdKey = new String(Base64.getDecoder().decode("aGVhZHBhdA==")); //Look away please
     private static Scanner sc = new Scanner(System.in);
 
