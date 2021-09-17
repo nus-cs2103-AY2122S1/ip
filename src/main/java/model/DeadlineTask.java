@@ -22,4 +22,9 @@ public class DeadlineTask extends Task {
     public String toString() {
         return super.toString() + " " + "(by: " + this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
+
+    @Override
+    public String getTaskStatusForStorage() {
+        return "D " + super.getTaskStatusForStorage();
+    }
 }

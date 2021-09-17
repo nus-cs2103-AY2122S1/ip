@@ -18,8 +18,16 @@ public class Task {
         return this.done ? "[X] " : "[ ] ";
     }
 
+    public String getTaskStatusForStorage() {
+        return this.done ? "X" : "O";
+    }
+
     @Override
     public String toString() {
-        return this.getTaskStatus() + "TTT " + this.description;
+        return this.getTaskStatus() + this.description;
+    }
+
+    public String storageString() {
+        return  this.getTaskStatusForStorage() + " " + this.description;
     }
 }

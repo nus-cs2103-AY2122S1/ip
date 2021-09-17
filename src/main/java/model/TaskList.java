@@ -1,5 +1,7 @@
 package model;
 
+import ui.JadenGui;
+
 import java.util.ArrayList;
 
 public class TaskList {

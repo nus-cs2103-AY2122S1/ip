@@ -18,4 +18,9 @@ public class EventTask extends Task {
     public String toString() {
         return super.toString() + " " + "(at: " + this.eventDuration + ")";
     }
+
+    @Override
+    public String getTaskStatusForStorage() {
+        return "E " + super.getTaskStatusForStorage();
+    }
 }

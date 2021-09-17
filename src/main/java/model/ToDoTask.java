@@ -10,4 +10,9 @@ public class ToDoTask extends Task {
     public String getTaskStatus() {
         return "[T]" + super.getTaskStatus();
     }
+
+    @Override
+    public String getTaskStatusForStorage() {
+        return "T " + super.getTaskStatusForStorage();
+    }
 }
