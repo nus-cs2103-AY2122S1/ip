@@ -75,6 +75,11 @@ public class Duke {
                             ui.sayDeletes(toDelete, list.size());
                             command = s.nextLine();
                             break;
+                        case "find":
+                            ArrayList<Task> keyTasks = Parser.parseFind(list, command);
+                            ui.sayFind(keyTasks);
+                            command = s.nextLine();
+                            break;
                         default:
                             ui.sayWrongInput();
                             command = s.nextLine();

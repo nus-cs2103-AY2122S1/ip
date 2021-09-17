@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Parser {
 
     public static String parseCommand(String command) {
@@ -45,5 +47,23 @@ public class Parser {
                 return d;
         }
         return null;
+    }
+
+    /**
+     * Returns ArrayList of tasks that matches the keyword to be found.
+     *
+     * @param list ArrayList of tasks in Duke.
+     * @param command Command from the CLI.
+     * @return ArrayList with matching tasks.
+     */
+    public static ArrayList<Task> parseFind(ArrayList<Task> list, String command) {
+        String keyword = command.split(" ", 2)[1];
+        ArrayList<Task> keyTasks = new ArrayList<>();
+        for (Task t : list) {
+            if (t.toString().contains(keyword)) {
+                keyTasks.add(t);
+            }
+        }
+        return keyTasks;
     }
 }
