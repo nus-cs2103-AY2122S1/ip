@@ -61,7 +61,6 @@ public class Ui {
      * Prints Ui for setting task as done.
      *
      * @param tasklist TaskList of tasks to be set as done.
-     * @param newListSize New number of items on the TaskList.
      */
     public String setTaskAsDone(TaskList tasklist) {
         assert !tasklist.equals(null) : "task does not exist";
@@ -116,7 +115,7 @@ public class Ui {
      * @return String representation of the Tasks that include the keyword.
      */
     public String printListWithKeyword(TaskList ls, String word, Find find) {
-        String result = "";
+        String result = "Here are tasks that contain the keyword '" + word + "':\n";
         int count = 1;
         for (int i = 0; i < ls.getSize(); i++) {
             Task task = ls.getTask(i);
