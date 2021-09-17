@@ -90,7 +90,7 @@ public class TaskList implements Serializable {
         if (taskNumber > this.tasks.size() || taskNumber <= 0) {
             return "Sorry, that task does not exist!\n";
         }
-        return "Updated task\n " + tasks.get(taskNumber - 1).update(taskField, newItem) + "\n";
+        return "Updated Task:\n  " + tasks.get(taskNumber - 1).update(taskField, newItem) + "\n";
     }
 
     /**
