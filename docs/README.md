@@ -220,3 +220,9 @@ Your current tasks are:
 ### `bb` or `bye` - Exits the program.
 
 This shuts down the application.
+
+
+# Acknowledgement
+
+Picture under "src/main/resources/images/DukeAvatar_Exceptions.png" retrieved from
+South Park Studios "Your Intellect and My Balls".
