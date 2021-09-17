@@ -138,8 +138,10 @@ public class TaskList {
      *
      * @param taskIndex Index of Task to be updated in tasks ArrayList.
      * @param updatedTask Updated Task to replace original Task.
+     * @throws DukeException If taskIndex is negative or more than or equal to size of array.
      */
-    public void editTask(int taskIndex, Task updatedTask) {
+    public void editTask(int taskIndex, Task updatedTask) throws DukeException {
+        validateTaskIndex(taskIndex);
         tasks.set(taskIndex, updatedTask);
     }
 
@@ -148,7 +150,7 @@ public class TaskList {
         if (taskCount == 0) {
             throw new DukeException("There are no tasks in the list.");
         } else if (taskIndex >= taskCount) {
-            throw new DukeException("Invalid task number. There are only " + taskCount + "tasks in the list");
+            throw new DukeException("Invalid task number. There are only " + taskCount + " tasks in the list");
         }
         assert taskIndex >= 0 && taskIndex < taskCount : "Invalid task index";
     }
@@ -173,8 +175,10 @@ public class TaskList {
      *
      * @param taskIndex Index of Task in tasks ArrayList to be returned.
      * @return Task in TaskList at specified index.
+     * @throws DukeException If taskIndex is negative or more than or equal to size of array.
      */
-    public Task getTask(int taskIndex) {
+    public Task getTask(int taskIndex) throws DukeException {
+        validateTaskIndex(taskIndex);
         return tasks.get(taskIndex);
     }
 }

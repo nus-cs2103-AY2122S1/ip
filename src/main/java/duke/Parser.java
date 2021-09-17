@@ -63,13 +63,13 @@ public class Parser {
     private static String getCommandDetails(String input) {
         String commandDetails = "";
         if (input.contains(" ")) {
-            commandDetails = input.substring(input.indexOf(" ") + 1);
+            commandDetails = input.substring(input.indexOf(" ") + 1).trim();
         }
         return commandDetails;
     }
 
     private static EditCommand parseEditCommand(String commandDetails) throws DukeException {
-        final String EDIT_USAGE = "Usage of edit command:\nedit [taskIndex] /desc [new desc] "
+        String editMessage = "Usage of edit command:\nedit [taskIndex] /desc [new desc] "
                 + "/date [new date]\neg. edit 1 /desc Submit IP /date 17-9-2021 23:59";
         int taskIndex = getTaskIndex(commandDetails);
         try {
@@ -77,7 +77,7 @@ public class Parser {
             String[] editDescParts = detailsWithoutIndex.split("/desc", 2);
             String[] editDateParts = detailsWithoutIndex.split("/date", 2);
             if (editDescParts.length < 2 && editDateParts.length < 2) {
-                throw new DukeException(EDIT_USAGE);
+                throw new DukeException(editMessage);
             }
 
             if (editDateParts.length >= 2 && editDescParts.length >= 2) {
@@ -97,7 +97,7 @@ public class Parser {
                 return new EditCommand(taskIndex, editedDescription, null);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(EDIT_USAGE);
+            throw new DukeException(editMessage);
         }
     }
 
