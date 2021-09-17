@@ -1,5 +1,0 @@
-D | 1 | return book  | Jan 02 2020, 06:00 PM | once
-D | 0 | return book  | Jan 20 2020, 06:00 PM | weekly
-D | 0 | return book  | Apr 02 2020, 06:00 PM | monthly
-D | 0 | return book  | Dec 02 2019, 06:00 PM | once
-E | 0 | return book  | Dec 23 2019, 06:00 PM | weekly

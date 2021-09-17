@@ -6,7 +6,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="1.7976931348623157E308"
+         maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <TextFlow style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;">
          <children>
@@ -19,7 +21,7 @@
             <Insets left="10.0" right="10.0" />
          </HBox.margin>
       </TextFlow>
-      <Circle fx:id="displayPicture" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="displayPicture" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
