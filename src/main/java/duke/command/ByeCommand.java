@@ -22,4 +22,14 @@ public class ByeCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         return Ui.getGoodbyeMessage();
     }
+
+    /**
+     * Returns true for a bye command and false otherwise.
+     *
+     * @return a boolean representing if the command is a bye command.
+     */
+    @Override
+    public boolean isBye() {
+        return true;
+    }
 }

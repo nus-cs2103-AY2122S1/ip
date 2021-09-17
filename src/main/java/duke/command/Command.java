@@ -6,6 +6,7 @@ import duke.task.TaskList;
 /** Represents a command that can be executed. */
 public abstract class Command {
 
+
     /**
      * Executes the command a returns the resulting message
      *
@@ -14,4 +15,13 @@ public abstract class Command {
      * @return A message resulting from the execution of the command.
      */
     public abstract String execute(TaskList tasks, Storage storage);
+
+    /**
+     * Returns true for a bye command and false otherwise
+     *
+     * @return a boolean representing if the command is a bye command.
+     */
+    public boolean isBye() {
+        return false;
+    }
 }

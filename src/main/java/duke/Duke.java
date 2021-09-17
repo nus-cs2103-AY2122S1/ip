@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.TaskList;
+import javafx.application.Platform;
 
 
 /**
@@ -35,26 +36,24 @@ public class Duke {
      * Runs Duke using the CLI.
      */
     private void run() {
-        //Welcome message
         ui.printWelcomeMessage();
 
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks);
         boolean hasUserEnd = false;
 
-        //Main functionality of Duke
         while (!hasUserEnd) {
-            String command = "";
+            String input = "";
             if (sc.hasNextLine()) {
-                command = sc.nextLine().trim();
+                input = sc.nextLine().trim();
             }
-            if (command.equalsIgnoreCase("bye")) {
+            if (input.equalsIgnoreCase("bye")) {
                 hasUserEnd = true;
                 ui.printGoodbyeMessage();
                 storage.save(tasks);
             } else {
                 try {
-                    Command commandObject = parser.parse(command);
+                    Command commandObject = parser.parse(input);
                     String message = commandObject.execute(tasks, storage);
                     ui.printMessage(message);
                 } catch (DukeException e) {
@@ -66,17 +65,20 @@ public class Duke {
     }
 
     /**
-     * Used by JavaFX to process the user's commands and execute accordingly.
+     * Gets user's commands and is used by JavaFX to process the user's commands and execute accordingly.
      *
-     * @param command The command input by the user.
+     * @param input The user's input to Duke.
      * @return A String containing the message to be shown to the user in the GUI.
      */
-    public String getResponse(String command) {
+    public String getResponse(String input) {
         Parser parser = new Parser(tasks);
 
         try {
-            Command commandObject = parser.parse(command);
-            return commandObject.execute(tasks, storage);
+            Command command = parser.parse(input);
+            if (command.isBye()) {
+                Platform.exit();
+            }
+            return command.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
