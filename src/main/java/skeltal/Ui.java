@@ -24,7 +24,9 @@ public class Ui {
      * @return A String reply from Skeltal.
      */
     public static String skeltalReply(String userInput) {
-        return Parser.parse(userInput);
+        String temp =Parser.parse(userInput);
+        System.out.println(temp);
+        return temp;
     }
 
     /**

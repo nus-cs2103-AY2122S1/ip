@@ -33,7 +33,7 @@ public class ExpenseList {
     }
 
     public static String deleteExpense(String index) throws SkeltalException {
-        String reply = "";
+        String reply = "Removed this expense from the list:\n";
         int i = Integer.parseInt(index) - 1;
         if (outOfRange(i)) {
             throw new SkeltalException("Choose a positive number that is within the range of the list!");

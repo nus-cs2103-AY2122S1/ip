@@ -1,2 +1,2 @@
-T | 0 | ajlskdasd
-T | 0 | asdkjhasdkjha
+D | 1 | homework  | 12 Dec 20
+T | 0 | make study guide
