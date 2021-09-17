@@ -43,7 +43,7 @@ public class EntryList extends ArrayList<Entry> {
         StringBuilder entryList = new StringBuilder();
         if (numberOfEntries > 0) {
             for (int i = 0; i < numberOfEntries; i++) {
-                entryList.append(super.get(i)).append("\n");
+                entryList.append(i + 1).append(". ").append(super.get(i)).append("\n");
             }
             return entryList.toString();
         } else {
@@ -100,7 +100,7 @@ public class EntryList extends ArrayList<Entry> {
     public void markEntryAsDone(int entryNumber) throws DukeException {
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
             if (super.get(entryNumber - 1).setDone()) {
-                System.out.println("Nice! I've marked this entry as done:");
+                System.out.println("Nice! I've marked this entry as done:\n");
                 System.out.println("\t" + super.get(entryNumber - 1));
             } else {
                 System.out.println("Entry is already marked as done!");
@@ -117,14 +117,14 @@ public class EntryList extends ArrayList<Entry> {
      * @return String for marked entry.
      * @throws DukeException Error thrown when no entry exists for the given entryNumber.
      */
-    public String getEntryAsDone(int entryNumber) throws DukeException {
+    public String getEntryAsDone(int entryNumber, Ui ui) throws DukeException {
         StringBuilder output = new StringBuilder();
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
             if (super.get(entryNumber - 1).setDone()) {
-                output.append("Nice! I've marked this entry as done:");
-                output.append("\t").append(super.get(entryNumber - 1));
+                output.append(ui.getMarkedEntry());
+                output.append("\t").append(ui.getPrintEntry(super.get(entryNumber - 1), entryNumber));
             } else {
-                output.append("Entry is already marked as done!");
+                output.append(ui.getEntryThatIsMarked());
             }
             return output.toString();
         } else {

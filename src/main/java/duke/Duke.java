@@ -79,15 +79,13 @@ public class Duke extends Application {
      * the dialog container. Clears the USER input after processing.
      */
     private void handleUserInput(VBox dialogContainer, TextField userInput, Stage stage) {
-        Label userText = new Label(userInput.getText());
         String response = getResponse(userInput.getText());
         if (response.isEmpty()) {
             stage.close();
         }
-        Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(USER)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(DUKE))
+                DialogBox.getUserDialog(userInput.getText(), USER),
+                DialogBox.getDukeDialog(response, DUKE)
         );
         userInput.clear();
     }
@@ -125,7 +123,7 @@ public class Duke extends Application {
                 break;
 
             case MARK_ENTRY_DONE_COMMAND:
-                output = entries.getEntryAsDone(Integer.parseInt(entry));
+                output = entries.getEntryAsDone(Integer.parseInt(entry), this.dukeUi);
                 break;
 
             case TODO_COMMAND:

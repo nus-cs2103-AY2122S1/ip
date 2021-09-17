@@ -68,15 +68,15 @@ public class Ui {
     }
 
     public String getListMatches() {
-        return "Looking for matching tasks in your list..";
+        return "Looking for matching tasks in your list..\n";
     }
 
     public void foundMatches() {
-        System.out.println("Here are the matching tasks in your list..");
+        System.out.println("Here are the matching tasks in your list:\n");
     }
 
     public String getFoundMatches() {
-        return "Here are the matching tasks in your list..";
+        return "Here are the matching tasks in your list..\n";
     }
 
     /**
@@ -158,6 +158,14 @@ public class Ui {
         return helpPage.toString();
     }
 
+
+    public String getMarkedEntry() {
+        return "Nice! I've marked this entry as done:\n";
+    }
+
+    public String getEntryThatIsMarked() {
+        return "Entry is already marked as done!";
+    }
 
     /**
      * Prints out the Error Message received when loading data from memory.

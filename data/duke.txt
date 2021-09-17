@@ -1,4 +1,5 @@
-T,0,hello
-T,0,bye
-T,0,goobye
-T,0,fix this!
+T,1,hello
+T,1,bye
+T,1,goobye
+D,0,fix this,2021-10-21
+T,0,helloooooooooooooooooo

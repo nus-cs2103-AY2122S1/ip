@@ -2,11 +2,9 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,8 +29,10 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Stage stage;
 
-    private final Image USER_IMAGE = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image DUKE_IMAGE = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
+    private final Image USER_IMAGE =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private final Image DUKE_IMAGE =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
     @FXML
     public void initialize() {
@@ -58,13 +58,9 @@ public class MainWindow extends AnchorPane {
         if (response.isEmpty()) {
             stage.close();
         }
-        ImageView userImageView = new ImageView();
-        ImageView dukeImageView = new ImageView();
-        userImageView.setImage(USER_IMAGE);
-        dukeImageView.setImage(DUKE_IMAGE);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(new Label(input), userImageView),
-                DialogBox.getDukeDialog(new Label(response), dukeImageView)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
     }
