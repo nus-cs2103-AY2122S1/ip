@@ -103,16 +103,28 @@ public class Storage {
     private static Task formatToRead(String s) throws DukeException {
         String[] info = s.split(" \\| ");
         Task task;
+        String[] tags;
         String letter = info[0];
+        System.out.println(info.length);
+        System.out.println(letter);
+        if ((letter.equals("D") || letter.equals("E")) && (info.length == 5)) {
+            tags = info[4].split("\\>");
+        } else if ((letter.equals("T")) && (info.length == 4)) {
+            System.out.println("tags");
+            tags = info[3].split("\\>");
+        } else {
+            System.out.println("gg");
+            tags = new String[0];
+        }
         switch (letter) {
         case "D":
-            task = new Deadline(info[2], info[3]);
+            task = new Deadline(info[3], info[2], tags);
             break;
         case "E":
-            task = new Event(info[2], info[3]);
+            task = new Event(info[3], info[2], tags);
             break;
         case "T":
-            task = new Todo(info[2]);
+            task = new Todo(info[2], tags);
             break;
         default:
             throw new DukeException("Error unknown value: " + info[0]);

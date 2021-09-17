@@ -54,7 +54,15 @@ public class Task {
      * @return A string representing the task in the desirable format.
      */
     public String formatToWrite() {
-        return String.format("%d | %s", (this.isDone ? 1 : 0), this.description);
+        String formattedTags = "";
+        int index = 0;
+        for (String tag : tags) {
+            formattedTags += tag;
+            if (index++ != tags.size() - 1) {
+                formattedTags += ">";
+            }
+        }
+        return String.format("%s | %s", this.description, formattedTags);
     }
 
     /**

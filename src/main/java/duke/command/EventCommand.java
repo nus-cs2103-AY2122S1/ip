@@ -36,7 +36,7 @@ public class EventCommand extends Command {
         }
         try {
             String[] infoArray = input.substring(minCommandLength + 1).split("/at ", 2);
-            Event e = new Event(infoArray[0], infoArray[1]);
+            Event e = new Event(infoArray[0], infoArray[1], new String[0]);
             return taskList.addTask(e);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());

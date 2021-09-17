@@ -77,6 +77,7 @@ public class TaskList {
         }
         Task item = list.get(taskNum - 1);
         item.addTag(tag);
+        this.updateFile();
         return Ui.getAddTagMsg(item.toString());
 
     }

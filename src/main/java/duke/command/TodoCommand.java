@@ -34,7 +34,7 @@ public class TodoCommand extends Command {
         if (input.length() == minCommandLength) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("todo"));
         }
-        Todo t = new Todo(input.substring(minCommandLength + 1));
+        Todo t = new Todo(input.substring(minCommandLength + 1), new String[0]);
         return taskList.addTask(t);
     }
 

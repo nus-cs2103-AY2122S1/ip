@@ -13,8 +13,11 @@ public class Todo extends Task {
      *
      * @param description Description of the task.
      */
-    public Todo(String description) {
+    public Todo(String description, String[] tags) {
         super(description);
+        for (String tag: tags) {
+            super.addTag(tag);
+        }
     }
 
     /**
@@ -33,6 +36,6 @@ public class Todo extends Task {
      * @return A string representing the event task in the desirable format.
      */
     public String formatToWrite() {
-        return String.format("T | %s", super.formatToWrite());
+        return String.format("T | %d | %s", (super.isDone ? 1 : 0), super.formatToWrite());
     }
 }

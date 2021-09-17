@@ -37,7 +37,7 @@ public class DeadlineCommand extends Command {
         }
         try {
             String[] infoArray = input.substring(minCommandLength + 1).split("/by ", 2);
-            Deadline d = new Deadline(infoArray[0], infoArray[1]);
+            Deadline d = new Deadline(infoArray[0], infoArray[1], new String[0]);
             return super.taskList.addTask(d);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());

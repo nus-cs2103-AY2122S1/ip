@@ -15,9 +15,12 @@ public class Event extends Task {
      * @param description Description of the task.
      * @param at Date of the event.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at, String[] tags) {
         super(description);
         this.at = at;
+        for (String tag: tags) {
+            super.addTag(tag);
+        }
     }
 
     /**
@@ -36,6 +39,6 @@ public class Event extends Task {
      * @return A string representing the event task in the desirable format.
      */
     public String formatToWrite() {
-        return String.format("E | %s | %s", super.formatToWrite(), this.at);
+        return String.format("E | %d | %s | %s", (super.isDone ? 1 : 0), this.at, super.formatToWrite());
     }
 }

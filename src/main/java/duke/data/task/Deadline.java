@@ -22,9 +22,12 @@ public class Deadline extends Task {
      * @param description Description of the task.
      * @param by Date the task is due.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by, String[] tags) {
         super(description);
-        this.by = parseStringToDate(by);
+        this.by = by;
+        for (String tag: tags) {
+            super.addTag(tag);
+        }
     }
 
     /**
@@ -34,7 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        return "[D]" + super.toString() + "(by: " + parseStringToDate(by) + ")";
     }
 
     /**
@@ -43,7 +46,8 @@ public class Deadline extends Task {
      * @return A string representing the deadline task in the desirable format.
      */
     public String formatToWrite() {
-        return String.format("D | %s | %s", super.formatToWrite(), this.by);
+        return String.format("D | %d | %s | %s", (super.isDone ? 1 : 0), this.by,
+                super.formatToWrite());
     }
 
     /**
@@ -74,4 +78,6 @@ public class Deadline extends Task {
         return convertedTime;
 
     }
+
+
 }
