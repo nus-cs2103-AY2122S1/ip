@@ -5,7 +5,7 @@
 1. Download the latest `Duke.jar` from [here](https://github.com/cookiedan42/ip/releases).
 1. Copy the file to the folder you want to use as the home folder for your Duke task manager.
 1. Double-click the file to start the app. A gui similar to this will be shown  
-   ![UI demo image](UI.png)
+   ![UI demo image](Ui.png)
 1. Type `list` to view sample data 
 1. Type `help` to view version-specific built-in guide
 
