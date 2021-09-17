@@ -1,11 +1,11 @@
 package duke.utils;
 
-import duke.exceptions.DukeException;
-import duke.tasks.ToDo;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+import duke.tasks.ToDo;
 
 public class ParserTest {
     @Test
@@ -13,8 +13,8 @@ public class ParserTest {
         TaskList taskList = new TaskList();
         Parser parser = new Parser();
         parser.parseInput(taskList, "todo make lunch");
-        String expected = "List:\n" + "---------------\n" +
-                "ToDo: make lunch [ ]";
+        String expected = "List:\n" + "---------------\n"
+                + "ToDo: make lunch [ ]";
         assertEquals(expected, taskList.toString());
     }
 

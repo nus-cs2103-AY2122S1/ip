@@ -2,18 +2,19 @@ package duke.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import org.junit.jupiter.api.Test;
 
 
 public class TaskListTest {
 
     @Test
-    public void taskList_AddCommand_success() throws DukeException {
+    public void taskList_addCommand_success() throws DukeException {
         TaskList taskList = new TaskList();
         Task todo = new ToDo("brush teeth");
         taskList.add(todo);
@@ -27,8 +28,8 @@ public class TaskListTest {
         Task todo = new ToDo("brush teeth");
         taskList.add(todo);
         taskList.markAsCompleted(0);
-        String expected = "List:\n" + "---------------\n" +
-                "ToDo: brush teeth [X]";
+        String expected = "List:\n" + "---------------\n"
+                + "ToDo: brush teeth [X]";
         assertEquals(expected, taskList.toString());
     }
 
