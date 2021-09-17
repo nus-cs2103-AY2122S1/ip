@@ -32,7 +32,7 @@ public class TaskList {
     public TaskList filterTasks(String searchStr) {
         String searchInput = searchStr.toLowerCase();
         ArrayList<Task> tasks = this.tasks.stream()
-                .filter(task -> task.getDescription().contains(searchInput))
+                .filter(task -> task.getDescription().toLowerCase().contains(searchInput))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return new TaskList(tasks);
