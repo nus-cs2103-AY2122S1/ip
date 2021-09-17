@@ -148,7 +148,7 @@ Examples:
 Expected outcome:
 The syntax and purpose of the find command is displayed.
 
-<img src ="\https://github.com/aishh12/ip/blob/master/src/main/resources/images/help.png?raw=true" width = "500" height = "300">
+<img src ="https://github.com/aishh12/ip/blob/master/src/main/resources/images/help.png?raw=true" width = "500" height = "300">
 
 
 
