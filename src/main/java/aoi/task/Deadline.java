@@ -1,7 +1,8 @@
 package aoi.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import aoi.parser.Parser;
 
 /**
  * Encapsulates a Deadline object that implements a Task and has a deadline.
@@ -64,9 +65,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         String dateString = by.format(format);
-        return "[D]" + super.toString() + " (by: " + dateString + ")" + "\n  Notes: " + notes;
+        String str = "[D]" + super.toString() + " (by: " + dateString + ")";
+        if (!notes.equals("")) {
+            str += "\n  Notes: " + notes;
+        }
+        return str;
     }
 
     /**
@@ -76,8 +80,7 @@ public class Deadline extends Task {
      */
     @Override
     public String printInSaveFormat() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        String dateString = by.format(format);
+        String dateString = by.format(Parser.FORMAT);
         String[] info = {"D", isDone ? "1" : "0", description, dateString, notes};
         return String.join(" | ", info);
     }

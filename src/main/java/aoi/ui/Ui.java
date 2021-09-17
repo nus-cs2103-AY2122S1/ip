@@ -10,17 +10,6 @@ import aoi.task.Task;
  * @version aoi.Aoi Level-9
  */
 public class Ui {
-    private TaskList tasks;
-
-    /**
-     * Public constructor for Ui.
-     *
-     * @param tasks Associated TaskList.
-     */
-    public Ui(TaskList tasks) {
-        this.tasks = tasks;
-    }
-
     /**
      * Returns a greeting message.
      *
@@ -46,7 +35,7 @@ public class Ui {
      *
      * @return A String representation of a AddTask message.
      */
-    public String showAddTaskMsg(Task text) {
+    public static String showAddTaskMsg(Task text) {
         String message = "Sure thing! I've added this task:\n  " + text + "\n";
         return message;
     }
@@ -56,7 +45,7 @@ public class Ui {
      *
      * @return A String representation of a Task completed message.
      */
-    public String showCompleteTaskMsg(Task text) {
+    public static String showCompleteTaskMsg(Task text) {
         String message = "Nice! I've marked this task as done:\n  " + text + "\n";
         return message;
     }
@@ -66,7 +55,7 @@ public class Ui {
      *
      * @return A String representation of a Deleted Task message.
      */
-    public String showDeleteTaskMsg(Task text) {
+    public static String showDeleteTaskMsg(Task text) {
         String message = "Noted! I've removed this task:\n  " + text + "\n";
         return message;
     }
@@ -74,7 +63,7 @@ public class Ui {
     /**
      * Prints number of tasks in TaskList.
      */
-    public String showListCountMsg() {
+    public static String showListCountMsg(TaskList tasks) {
         String message;
         int len = tasks.getLength();
         if (len == 1) {

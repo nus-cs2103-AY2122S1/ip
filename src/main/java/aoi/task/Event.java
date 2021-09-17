@@ -1,7 +1,8 @@
 package aoi.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import aoi.parser.Parser;
 
 /**
  * Encapsulates an Event object that implements a Task and has an event time.
@@ -64,9 +65,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         String dateString = at.format(format);
-        return "[E]" + super.toString() + " (at: " + dateString + ")" + "\n  Notes: " + notes;
+        String str = "[E]" + super.toString() + " (at: " + dateString + ")";
+        if (!notes.equals("")) {
+            str += "\n  Notes: " + notes;
+        }
+        return str;
     }
 
     /**
@@ -76,8 +80,7 @@ public class Event extends Task {
      */
     @Override
     public String printInSaveFormat() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        String dateString = at.format(format);
+        String dateString = at.format(Parser.FORMAT);
         String[] info = {"E", isDone ? "1" : "0", description, dateString, notes};
         return String.join(" | ", info);
     }

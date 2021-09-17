@@ -54,7 +54,11 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() + "\n  Notes: " + notes;
+        String str = "[T]" + super.toString();
+        if (!notes.equals("")) {
+            str += "\n  Notes: " + notes;
+        }
+        return str;
     }
 
     /**

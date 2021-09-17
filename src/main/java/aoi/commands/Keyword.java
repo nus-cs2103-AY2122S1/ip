@@ -14,17 +14,24 @@ public enum Keyword {
     LIST("LIST"),
     DONE("DONE"),
     DELETE("DELETE"),
-    FIND("FIND");
+    FIND("FIND"),
+    EXIT("BYE");
 
     private final Map<String, Keyword> aliases = new HashMap<>();
 
-    private Keyword(String... input) {
+    Keyword(String... input) {
         for (final String alias: input) {
             aliases.put(alias, this);
         }
     }
 
-    public Keyword forAlias(String alias) {
-        return aliases.get(alias);
+    public static Keyword getKeyword(String alias) throws IllegalArgumentException {
+        for (Keyword keyword : Keyword.values()) {
+            Keyword kw = keyword.aliases.get(alias);
+            if (kw != null) {
+                return kw;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 }

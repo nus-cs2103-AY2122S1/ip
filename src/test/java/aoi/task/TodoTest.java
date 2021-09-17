@@ -14,7 +14,7 @@ public class TodoTest {
     @Test
     public void toStringTest() {
         Task todo = new Todo("do homework", true);
-        assertEquals("[T][X] do homework\n  Notes: ", todo.toString());
+        assertEquals("[T][X] do homework", todo.toString());
     }
 
     @Test

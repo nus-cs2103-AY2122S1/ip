@@ -2,23 +2,22 @@ package aoi.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 import aoi.data.TaskList;
 import aoi.exceptions.AoiException;
-import aoi.ui.Ui;
-
-import org.junit.jupiter.api.Test;
+import aoi.storage.Storage;
 
 
 public class ParserTest {
     @Test
     public void deadlineTest() {
         TaskList taskList = new TaskList();
-        Ui ui = new Ui(taskList);
-        Parser parser = new Parser(taskList, ui);
+        Storage storage = new Storage("data/tasks.txt", taskList);
         try {
             String cmd = "deadline return book /by 06/12/2019 1800";
-            parser.parse(cmd);
-            assertEquals("[D][ ] return book (by: Dec 06 2019 18:00)\n  Notes: ", taskList.get(0).toString());
+            Parser.parse(cmd).execute(taskList, storage);
+            assertEquals("[D][ ] return book (by: Dec 06 2019 18:00)", taskList.get(0).toString());
         } catch (AoiException e) {
             System.out.println(e.getMessage());
         }
@@ -27,13 +26,12 @@ public class ParserTest {
     @Test
     public void deleteTest() {
         TaskList taskList = new TaskList();
-        Ui ui = new Ui(taskList);
-        Parser parser = new Parser(taskList, ui);
+        Storage storage = new Storage("data/tasks.txt", taskList);
         try {
             String cmd = "deadline return book /by 06/12/2019 1800";
-            parser.parse(cmd);
+            Parser.parse(cmd).execute(taskList, storage);
             cmd = "delete 1";
-            parser.parse(cmd);
+            Parser.parse(cmd).execute(taskList, storage);
             assertEquals(0, taskList.getLength());
         } catch (AoiException e) {
             System.out.println(e.getMessage());

@@ -1,19 +1,19 @@
 package aoi.commands;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import aoi.data.TaskList;
 import aoi.exceptions.AoiException;
+import aoi.parser.Parser;
 import aoi.storage.Storage;
 import aoi.task.Deadline;
 import aoi.task.Event;
 import aoi.task.Task;
 import aoi.task.Todo;
+import aoi.ui.Ui;
 
 /**
  * Encapsulates a Command for Adding Tasks to Aoi.
@@ -28,9 +28,9 @@ public class AddCommand extends Command {
      * Constructor for AddCommand.
      *
      * @param tokens User input.
-     * @throws IllegalArgumentException
+     * @throws AoiException
      */
-    public AddCommand(String[] tokens) throws IllegalArgumentException {
+    public AddCommand(String[] tokens) throws AoiException {
         String description;
         String notes = getNotes(tokens);
         LocalDateTime dateTime;
@@ -50,23 +50,21 @@ public class AddCommand extends Command {
             task = new Event(description, dateTime, notes);
             break;
         default:
-            throw new IllegalArgumentException("Unknown AddCommand");
+            throw new AoiException("Unknown AddCommand");
         }
     }
+
+    /**
+     * Adds the associated Task to TaskList.
+     *
+     * @param tasks TaskList associated to Aoi.
+     * @param storage Storage associated to Aoi.
+     * @return A string that shows the Task has been added.
+     */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         tasks.add(task);
-    }
-
-    private String[] processTokens(String[] tokens, String... args) {
-        ArrayList<String> details = new ArrayList<>();
-        List list = Arrays.asList(args);
-        List tokensList = Arrays.asList(tokens);
-        int notesIndex = Arrays.asList(tokens).indexOf("/notes");
-        String description = getDescription(tokens, args);
-        details.add(description)
-
-        String notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
+        return Ui.showAddTaskMsg(task);
     }
 
     private String getDescription(String[] tokens, String... args) {
@@ -88,7 +86,6 @@ public class AddCommand extends Command {
     }
 
     private LocalDateTime getDateTime(String[] tokens, String... args) throws AoiException {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         int notesIndex = Arrays.asList(tokens).indexOf("/notes");
         String dateString;
         int argIndex = Arrays.asList(tokens).indexOf(args[0]);
@@ -100,7 +97,7 @@ public class AddCommand extends Command {
 
         LocalDateTime dateTime;
         try {
-            dateTime = LocalDateTime.parse(dateString, format);
+            dateTime = LocalDateTime.parse(dateString, Parser.FORMAT);
         } catch (DateTimeParseException e) {
             throw new AoiException("Please enter a date in the following format: dd/MM/yyyy HHmm");
         }

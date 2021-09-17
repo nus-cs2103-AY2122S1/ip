@@ -1,5 +1,7 @@
 package aoi.task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Encapsulates a Task that has a description and a completion state isDone.
  * To be implemented by Deadline, Event and Todo.
@@ -11,6 +13,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String notes;
+    protected DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     /**
      * Constructor for Task.

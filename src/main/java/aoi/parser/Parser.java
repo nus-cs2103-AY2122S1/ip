@@ -3,15 +3,14 @@ package aoi.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
-import aoi.data.TaskList;
+import aoi.commands.Command;
+import aoi.commands.Keyword;
 import aoi.exceptions.AoiException;
 import aoi.task.Deadline;
 import aoi.task.Event;
 import aoi.task.Task;
 import aoi.task.Todo;
-import aoi.ui.Ui;
 
 /**
  * Encapsulates a Parser object that reads in and executes commands based on user's input.
@@ -20,26 +19,15 @@ import aoi.ui.Ui;
  * @version aoi.Aoi Level-9
  */
 public class Parser {
-    private TaskList tasks;
-    private Ui ui;
-
-    /**
-     * Commands from user's input
-     */
-    public enum Keyword {
-        TODO, LIST, DEADLINE, EVENT, DONE, DELETE, FIND
-    }
-
-    /**
-     * Public constructor for Parser.
-     *
-     * @param tasks A list of tasks.
-     * @param ui Ui for aoi.Aoi.
-     */
-    public Parser(TaskList tasks, Ui ui) {
-        this.tasks = tasks;
-        this.ui = ui;
-    }
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final int MAX_LENGTH_T = 4;
+    private static final int MAX_LENGTH_D = 5;
+    private static final int MAX_LENGTH_E = 5;
+    private static final int taskPos = 0;
+    private static final int isDonePos = 1;
+    private static final int descriptionPos = 2;
+    private static final int addInfoPos = 3;
+    private static final int notesPos = 4;
 
     /**
      * Reads in and executes user's input based on string given.
@@ -47,113 +35,18 @@ public class Parser {
      * @param cmd String from user's input.
      * @throws AoiException
      */
-    public String parse(String cmd) throws AoiException {
+    public static Command parse(String cmd) throws AoiException {
         String[] tokens = cmd.split(" ");
-        Keyword command = validateCommand(tokens);
-
-        int argIndex;
-        int notesIndex;
-        int index;
-        String description;
-        String dateString;
-        String notes = "";
-        LocalDateTime at;
-        LocalDateTime by;
-        Task task;
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-
-        StringBuilder message = new StringBuilder();
-
-        switch (command) {
-        case LIST:
-            message.append(this.tasks.printTaskList());
-            break;
-        case TODO:
-            notesIndex = Arrays.asList(tokens).indexOf("/notes");
-            if (notesIndex == -1) {
-                task = new Todo(cmd.substring(5));
-            } else {
-                description = String.join(" ", Arrays.copyOfRange(tokens, 1, notesIndex));
-                notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
-                task = new Todo(description, notes);
-            }
-            this.tasks.add(task);
-            message.append(ui.showAddTaskMsg(task));
-            break;
-        case DEADLINE:
-            argIndex = Arrays.asList(tokens).indexOf("/by");
-            notesIndex = Arrays.asList(tokens).indexOf("/notes");
-            if (argIndex == -1) {
-                throw new AoiException("Missing deadline.");
-            }
-            description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
-            if (notesIndex == -1) {
-                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
-            } else {
-                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, notesIndex));
-                notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
-            }
-            try {
-                by = LocalDateTime.parse(dateString, format);
-                task = new Deadline(description, by, notes);
-                this.tasks.add(task);
-                message.append(ui.showAddTaskMsg(task));
-            } catch (DateTimeParseException e) {
-                throw new AoiException("Please enter a date in the following format: dd/MM/yyyy HHmm");
-            }
-            break;
-        case EVENT:
-            argIndex = Arrays.asList(tokens).indexOf("/at");
-            notesIndex = Arrays.asList(tokens).indexOf("/notes");
-            if (argIndex == -1) {
-                throw new AoiException("Missing time of event.");
-            }
-            description = String.join(" ", Arrays.copyOfRange(tokens, 1, argIndex));
-            if (notesIndex == -1) {
-                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, tokens.length));
-            } else {
-                dateString = String.join(" ", Arrays.copyOfRange(tokens, argIndex + 1, notesIndex));
-                notes = String.join(" ", Arrays.copyOfRange(tokens, notesIndex + 1, tokens.length));
-            }
-            try {
-                at = LocalDateTime.parse(dateString, format);
-                task = new Event(description, at, notes);
-                this.tasks.add(task);
-                message.append(ui.showAddTaskMsg(task));
-            } catch (DateTimeParseException e) {
-                throw new AoiException("Please enter a date in the following format: dd/MM/yyyy HHmm");
-            }
-            break;
-        case DONE:
-            index = Integer.parseInt(tokens[1]) - 1;
-            task = this.tasks.get(index);
-            this.tasks.complete(index);
-            message.append(ui.showCompleteTaskMsg(task));
-            break;
-        case DELETE:
-            index = Integer.parseInt(tokens[1]) - 1;
-            task = this.tasks.get(index);
-            this.tasks.delete(index);
-            message.append(ui.showDeleteTaskMsg(task));
-            message.append(ui.showListCountMsg());
-            break;
-        case FIND:
-            String keyword = cmd.substring(5);
-            message.append(tasks.printMatchingTasks(keyword));
-            break;
-        default:
-            throw new AoiException("Unknown command passed.");
-        }
-        return message.toString();
+        Keyword keyword = validateCommand(tokens);
+        return Command.of(keyword, tokens);
     }
 
     private static Keyword validateCommand(String[] cmd) throws AoiException {
         Keyword keyword;
         try {
-            keyword = Keyword.valueOf(cmd[0].toUpperCase());
-            if ((keyword.equals(Keyword.TODO) || keyword.equals(Keyword.DEADLINE) || keyword.equals(Keyword.EVENT))
-                    && cmd.length < 2) {
-                throw new AoiException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", keyword));
+            keyword = Keyword.getKeyword(cmd[0].toUpperCase());
+            if (keyword.equals(Keyword.ADD) && cmd.length < 2) {
+                throw new AoiException(String.format("☹ OOPS!!! The description cannot be empty.", keyword));
             }
             if ((keyword.equals(Keyword.DONE) || keyword.equals(Keyword.DELETE) || keyword.equals(Keyword.FIND))
                     && (cmd.length < 2)) {
@@ -163,5 +56,43 @@ public class Parser {
             throw new AoiException("Brother! What are you saying?");
         }
         return keyword;
+    }
+
+    /**
+     * Parses string and creates a Task associated to the string.
+     *
+     * @param task String from text file.
+     * @return Task associated to the string.
+     */
+    public static Task parseTask(String task) {
+        // Format to Parse: T | 0 | description | addInfo | notes (optional)
+        String[] tokens = task.split(" \\| ");
+        boolean isDone = tokens[isDonePos].equals("1");
+        LocalDateTime timestamp = null;
+        assert tokens[0].equals("T") || tokens[0].equals("D") || tokens[0].equals("E");
+        String notes;
+        Task taskCreated = null;
+        try {
+            switch (tokens[taskPos]) {
+            case "T":
+                notes = tokens.length == MAX_LENGTH_T ? tokens[MAX_LENGTH_T - 1] : "";
+                taskCreated = new Todo(tokens[descriptionPos], isDone, notes);
+                break;
+            case "D":
+                timestamp = LocalDateTime.parse(tokens[addInfoPos], FORMAT);
+                notes = tokens.length == MAX_LENGTH_D ? tokens[notesPos] : "";
+                taskCreated = new Deadline(tokens[descriptionPos], isDone, timestamp, notes);
+                break;
+            case "E":
+                timestamp = LocalDateTime.parse(tokens[3], FORMAT);
+                notes = tokens.length == MAX_LENGTH_E ? tokens[notesPos] : "";
+                taskCreated = new Event(tokens[descriptionPos], isDone, timestamp, notes);
+                break;
+            default:
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Error parsing task from saved file");
+        }
+        return taskCreated;
     }
 }

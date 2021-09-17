@@ -1,10 +1,10 @@
 package aoi;
 
+import aoi.commands.Command;
 import aoi.data.TaskList;
 import aoi.exceptions.AoiException;
 import aoi.parser.Parser;
 import aoi.storage.Storage;
-import aoi.ui.Ui;
 
 /**
  * Encapsulates a bot that manages tasks for users.
@@ -15,8 +15,6 @@ import aoi.ui.Ui;
 public class Aoi {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
 
     /**
      * Constructor for aoi.Aoi.
@@ -25,9 +23,7 @@ public class Aoi {
      */
     public Aoi(String filepath) {
         tasks = new TaskList();
-        ui = new Ui(tasks);
         storage = new Storage(filepath, tasks);
-        parser = new Parser(tasks, ui);
         storage.load();
     }
 
@@ -36,15 +32,12 @@ public class Aoi {
      *
      * @return A string representation of Aoi's response to user's input.
      */
-    public String getResponse(String cmd) {
+    public String getResponse(String input) {
         String response;
-        assert cmd != null : "Input is null";
-        if (cmd.equals("bye")) {
-            return ui.showFarewellMsg();
-        }
-
+        assert input != null : "Input is null";
         try {
-            response = parser.parse(cmd);
+            Command command = Parser.parse(input);
+            response = command.execute(tasks, storage);
             storage.save();
         } catch (AoiException e) {
             response = e.getMessage();
