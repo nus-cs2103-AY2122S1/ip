@@ -1,17 +1,14 @@
 package banana;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.*;
 
 /**
  * The TaskList class stores
  * all the tasks.
  *
  * @author: Ravi Ananya
- **/
-
+ */
 public class TaskList {
 
     private ArrayList<Task> allTasks;
@@ -82,9 +79,6 @@ public class TaskList {
      */
     public void removeTasks(TaskList otherTasks) {
         allTasks.removeAll(otherTasks.getTasks());
-        /*for (Task t : otherTasks.getTasks()) {
-            allTasks.remove(t);
-        }*/
     }
 
     /**
