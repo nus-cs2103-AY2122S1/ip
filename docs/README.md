@@ -17,7 +17,11 @@ Format: ```list```
 - ```[D]``` is a task icon that stands for a Deadline task.
 - ```[E]``` is a task icon that stands for an Event task. 
 - ```[X]``` is a done status indicating the task is done. 
-- ```[ ]``` is a done status indicating the task has not been done yet.
+- ```[]``` is a done status indicating the task has not been done yet.
+
+Example:
+- ```[E][] dinner (at: September 17 2021 6:00pm)```
+- ```[D][X] homework (by: September 17 2021 11:59pm)```
 
 ### Exiting the program: ```bye```
 
