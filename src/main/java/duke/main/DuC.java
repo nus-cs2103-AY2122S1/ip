@@ -9,7 +9,7 @@ public class DuC {
     private final File file;
 
     /**
-     * Constructor for DuC - initializing task list from
+     * Constructor for DuC - initializes task list from
      * preprocessed file and initializing UI component
      */
     public DuC(String fileName) {
@@ -19,7 +19,7 @@ public class DuC {
     }
 
     /**
-     * Construct a respond for any user input coming in
+     * Constructs a respond for any user input coming in
      * @param input user input on DuC
      * @return response and action being done
      */

@@ -2,8 +2,8 @@ package duke.command;
 
 public abstract class Command {
     /**
-     * Indicate what DuC will respond after each enter
-     * command cycle
+     * Indicates what DuC will respond after each entered
+     * command by user - common method to all subclasses.
      * @return the response of Duke
      */
     public abstract String reply();

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import duke.exceptions.DucIncompleteException;
 import duke.exceptions.DucInvalidFormatException;
 import duke.exceptions.DucWrongCommandException;
@@ -12,10 +13,10 @@ import duke.exceptions.DucWrongCommandException;
 public class TestDeadline {
 
     /**
-     * Test a workable Deadline object
+     * Tests a valid Deadline object
      */
     @Test
-    public void test1() {
+    public void testValidDeadline() {
         Deadline deadlineTestObject1 = new Deadline("Complete CS2103T IP /by 2021-09-17");
         assertDoesNotThrow(() -> {
             Deadline deadlineTestObject2 = new Deadline("Complete CS2100 assignment /by 2021-09-15");
@@ -32,10 +33,10 @@ public class TestDeadline {
     }
 
     /**
-     * Test a throwable Deadline object
+     * Tests an invalid Deadline Object
      */
     @Test
-    public void test2() {
+    public void testInvalidDeadline() {
         assertThrows(DucIncompleteException.class, () -> {
             Deadline deadlineTestObject2 = new Deadline("");
         });

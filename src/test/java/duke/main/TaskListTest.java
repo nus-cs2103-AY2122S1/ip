@@ -1,17 +1,20 @@
 package duke.main;
 
-import duke.exceptions.DucException;
-import duke.exceptions.DucOutOfBoundException;
-import duke.exceptions.DucWrongCommandException;
-import duke.task.Task;
-import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
-import static org.junit.jupiter.api.Assertions.*;
+import duke.exceptions.DucException;
+import duke.exceptions.DucOutOfBoundException;
+import duke.exceptions.DucWrongCommandException;
+import duke.task.Task;
 
 public class TaskListTest {
 
@@ -26,6 +29,9 @@ public class TaskListTest {
         taskList.addTask("CS2103T Lecture /at 2021-09-17", Task.Type.EVENT);
     }
 
+    /**
+     * Tests the size command of DuC task list
+     */
     @Test
     public void testSize() {
         assertEquals(3, taskList.size());
@@ -35,6 +41,9 @@ public class TaskListTest {
         assertEquals(3, taskList.size());
     }
 
+    /**
+     * Tests the completion making of DuC task objects
+     */
     @Test
     public void testDone() {
         assertThrows(DucException.class, () -> taskList.done(10));
@@ -46,6 +55,9 @@ public class TaskListTest {
         assertTrue(taskList.get(3).isCompleted());
     }
 
+    /**
+     * Tests the deletion of a task from the list
+     */
     @Test
     public void testDelete() {
         assertThrows(DucException.class, () -> taskList.delete(10));
@@ -56,6 +68,9 @@ public class TaskListTest {
         assertEquals(0, taskList.size());
     }
 
+    /**
+     * Tests the addition of a task to the list
+     */
     @Test
     public void testAddTask() {
         taskList.addTask("walk 10000 steps", Task.Type.TODO);
@@ -66,10 +81,10 @@ public class TaskListTest {
         assertEquals(5, taskList.size());
         taskList.addTask("cs2101 OP 1 /at 2021-08-30", Task.Type.EVENT);
         assertEquals(6, taskList.size());
-        assertThrows(DucWrongCommandException.class,
-                () -> taskList.addTask("play Liszt", Task.Type.DEADLINE));
-        assertThrows(DucWrongCommandException.class,
-                () -> taskList.addTask("play Liszt", Task.Type.EVENT));
+        assertThrows(DucWrongCommandException.class, () ->
+                taskList.addTask("play Liszt", Task.Type.DEADLINE));
+        assertThrows(DucWrongCommandException.class, () ->
+                taskList.addTask("play Liszt", Task.Type.EVENT));
     }
 
     @AfterEach

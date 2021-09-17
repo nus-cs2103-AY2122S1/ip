@@ -11,7 +11,7 @@ public abstract class DucException extends RuntimeException {
     }
 
     /**
-     * Indicating the message error for each type of Duke Exception used
+     * Indicates the message error for each type of Duke Exception used
      * @return message error of Duke Exception
      */
     @Override

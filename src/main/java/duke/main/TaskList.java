@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * return the TaskList itself
+     * Returns the TaskList itself
      * @return task list
      */
     public List<Task> getTaskList() {
@@ -41,7 +41,7 @@ public class TaskList {
 
 
     /**
-     * Indicate that a task in the list is finished
+     * Indicates that a task in the list is finished
      * @param index index number of the queried task
      * @return confirmation that the task is completed
      */
@@ -59,14 +59,14 @@ public class TaskList {
 
 
     /**
-     * Indicate that all tasks are completed
+     * Indicates that all tasks in the list are completed
      */
     public void doneAll() {
         taskList = taskList.stream().map(Task::completedTask).collect(Collectors.toList());
     }
 
     /**
-     * Delete a specified task on the task list
+     * Deletes a specified task on the task list
      * @param index index of the task queried from the list
      * @return Confirmation that the specified task is deleted from the list
      */
@@ -89,7 +89,7 @@ public class TaskList {
     }
 
     /**
-     * Delete all tasks and reset the Task List to empty
+     * Deletes all tasks and reset the Task List to empty
      */
     public void deleteAll() {
         taskList.clear();
@@ -97,7 +97,7 @@ public class TaskList {
     }
 
     /**
-     * Add a particular task into the list
+     * Adds a particular task into the list
      * @param task details of the task being added
      * @param type type of task being added (TODO, DEADLINE, or EVENT)
      * @return Confirmation that a task is added
@@ -120,7 +120,7 @@ public class TaskList {
     }
 
     /**
-     * Add a Task object to the list (for shortcutting purposes)
+     * Adds a Task object to the list (for shortcutting purposes)
      * @param task the task being added
      */
     public void addTask(Task task) {
@@ -128,7 +128,7 @@ public class TaskList {
     }
 
     /**
-     * Update a task at a specify index number
+     * Updates a task at a specify index number
      * @param task Task description to be replaced
      * @param type Type of task being replaced
      * @param index Index number indicated
@@ -157,6 +157,10 @@ public class TaskList {
         return newTask;
     }
 
+    /**
+     * Represents a task list by string
+     * @return String representation of a task list
+     */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder("Here is the list of all tasks: \n");

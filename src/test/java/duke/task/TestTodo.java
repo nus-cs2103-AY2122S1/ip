@@ -11,10 +11,10 @@ import duke.exceptions.DucWrongCommandException;
 public class TestTodo {
 
     /**
-     * Test a Todo Task object
+     * Tests a valid To-Do task object and its features
      */
     @Test
-    public void test1() {
+    public void testValidTodo() {
         Todo testObject1 = new Todo("Go to gym");
         String expected1 = "[T][ ] Go to gym";
         assertEquals(expected1, testObject1.toString());
@@ -27,10 +27,10 @@ public class TestTodo {
     }
 
     /**
-     * Test a Todo object that would throw exception
+     * Tests an invalid To-Do object and its feature
      */
     @Test
-    public void test2() {
+    public void testInvalidTodo() {
         assertThrows(DucIncompleteException.class, () -> {
             Todo testObject2 = new Todo("");
         });

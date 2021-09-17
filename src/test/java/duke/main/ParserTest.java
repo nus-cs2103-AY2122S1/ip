@@ -1,16 +1,20 @@
 package duke.main;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 
 public class ParserTest {
-
-
+    /**
+     * Tests conversion of YYYY-MM-DD date to MMM DD YYYY date
+     */
     @Test
     public void testDateConversion() {
         LocalDate today = LocalDate.now();
@@ -23,6 +27,9 @@ public class ParserTest {
                 Parser.convert(LocalDate.parse("08/10/2021")));
     }
 
+    /**
+     * Tests reversion of MMM DD YYYY date back to YYYY-MM-DD date
+     */
     @Test
     public void testDateReversion() {
         assertEquals("2021-08-26", Parser.reverse("Aug 26 2021"));
@@ -31,6 +38,9 @@ public class ParserTest {
         assertEquals("1945-09-02", Parser.reverse("Sep 02 1945"));
     }
 
+    /**
+     * Tests the Parser of DuC, whether it can analyze the correct command or not.
+     */
     @Test
     public void testParser() {
         assertTrue(Parser.parse("help", new TaskList()).reply()
@@ -51,9 +61,9 @@ public class ParserTest {
         taskList.delete(2);
         assertEquals(2, taskList.size());
         assertEquals(Parser.parse("todo walk 10000 steps", taskList).reply(),
-                "Nice! I've added the following task to your list:\n" +
-                        taskList.get(3) +
-                        "\nNow you have " + taskList.size() + " tasks in your list");
+                "Nice! I've added the following task to your list:\n"
+                        + taskList.get(3)
+                        + "\nNow you have " + taskList.size() + " tasks in your list");
     }
 
 }

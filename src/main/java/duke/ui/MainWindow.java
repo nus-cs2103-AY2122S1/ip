@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
             .getResourceAsStream("/images/mac.jpg")));
 
     /**
-     * Initialize DuC program with custom message
+     * Initializes DuC program with custom message
      */
     @FXML
     public void initialize() {
@@ -45,9 +45,12 @@ public class MainWindow extends AnchorPane {
         this.duC = duC;
     }
 
+    /**
+     * Constructs initial messages and suggestions to DuC
+     */
     private void promptDialog() {
-        String welcomeMessage = "Hello from\n" +
-                " ____       _________ \n"
+        String welcomeMessage = "Hello from\n"
+                + " ____       _________ \n"
                 + "|  _ \\ _   _| |______/\n"
                 + "| | | | | | | |     \n"
                 + "| |_| | |_| | |______|\n"
@@ -56,13 +59,16 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {
-            String promptQuestion = "How can I take your order?\n" +
-                    "Type in 'help' if you don't know where to start.";
+            String promptQuestion = "How can I take your order?\n"
+                    + "Type in 'help' if you don't know where to start.";
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(promptQuestion, dukeImage));
         });
         pause.play();
     }
 
+    /**
+     * Constructs exit dialog for DuC
+     */
     private void exitDialog() {
         String exitMessage = "Bye, hope that you can pronounce my name now :)";
         PauseTransition pause1 = new PauseTransition(Duration.seconds(1.5));
@@ -73,6 +79,10 @@ public class MainWindow extends AnchorPane {
         pause1.play();
     }
 
+    /**
+     * Constructs and returns the reply for each user input to DuC, or
+     * exit the program otherwise.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -89,7 +99,6 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
         });
         pause1.play();
-
         PauseTransition pause2 = new PauseTransition(Duration.seconds(3));
         pause2.setOnFinished(event -> {
             String promptQuestion = "What else can I help you with?";

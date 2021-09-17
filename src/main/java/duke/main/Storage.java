@@ -15,7 +15,7 @@ import duke.task.Todo;
 public class Storage {
 
     /**
-     * Update current task list content to file
+     * Updates current task list content to file
      * @param file a file that saved the task entered and date
      * @param taskList task list
      */
@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Load and preprocess data to task list from file
+     * Loads and preprocesses data to task list from file
      * @param file a file that contains previously entered tasks and dates
      * @param taskList task list
      */
@@ -58,6 +58,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes saved data to initialize DuC
+     * @param taskType type of task being processed
+     * @param taskDescription description of the task
+     * @return new task being created from the processed data
+     */
     private static Task processData(char taskType, String taskDescription) {
         Task processedTask;
         switch (taskType) {

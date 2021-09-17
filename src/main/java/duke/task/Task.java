@@ -22,12 +22,16 @@ public abstract class Task {
 
 
     /**
-     * Mark a task status as completed
+     * Marks a task status as completed
      */
     public void markAsCompleted() {
         this.taskStatus = true;
     }
 
+    /**
+     * Returns completed state of a task
+     * @return completed state of a task
+     */
     public abstract Task completedTask();
 
     public boolean isCompleted() {
@@ -47,10 +51,23 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Reverses the Task representation to saved state
+     * @return saved state to load to file
+     */
     public abstract String save();
 
+    /**
+     * Returns the date associated with a task
+     * @return date of a task
+     */
     public abstract String getDate();
 
+    /**
+     * Checks whether a task contains a certain query
+     * @param query query entered
+     * @return whether task contains query
+     */
     public boolean contains(String query) {
         return this.taskName.contains(query);
     }

@@ -17,7 +17,7 @@ import duke.task.Task;
 public class Parser {
 
     /**
-     * Convert YYYY-MM-DD format to MMM dd YYY format (for representing time in DuC)
+     * Converts YYYY-MM-DD format to MMM dd YYY format (for representing time in DuC)
      * @param date date in (yyyy-mm-dd) format
      * @return date in MMM dd YYY format
      */
@@ -26,7 +26,7 @@ public class Parser {
     }
 
     /**
-     * Convert MMM dd YYY format to YYYY-MM-DD format (for saving time to file)
+     * Converts MMM dd YYY format to YYYY-MM-DD format (for saving time to file)
      * @param date Date entered in (MMM dd yyyy) format
      * @return Date in (YYYY-MM-DD) format
      */
@@ -36,7 +36,7 @@ public class Parser {
     }
 
     /**
-     * Parse and analyze user input, handling proper respond by redirecting
+     * Parses and analyzes user input, handling proper respond by redirecting
      * Duke to the appropriate Command object
      * @param command command being parsed
      * @param taskList task list to be modified

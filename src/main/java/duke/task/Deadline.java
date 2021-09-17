@@ -40,7 +40,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Save task description to file on the initial date format
+     * Saves task description to file on the initial date format
      * @return a String that represents user initial input
      */
     @Override

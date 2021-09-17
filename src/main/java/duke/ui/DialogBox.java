@@ -6,14 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
@@ -23,9 +22,9 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Dialog Box for Duke, in customization
-     * @param text txt
-     * @param image txt
+     * Constructs the Dialog Box for DuC
+     * @param text Text to add to the dialog box
+     * @param image user profile image
      */
     public DialogBox(String text, Image image) {
         try {
@@ -45,6 +44,9 @@ public class DialogBox extends HBox {
         this.setSpacing(10);
     }
 
+    /**
+     * Flips the dialog box - user profile on the right and text on the left
+     */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> temp = FXCollections

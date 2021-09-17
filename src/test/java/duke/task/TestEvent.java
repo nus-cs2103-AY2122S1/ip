@@ -11,10 +11,10 @@ import duke.exceptions.DucWrongCommandException;
 
 public class TestEvent {
     /**
-     * Test a workable Deadline object
+     * Tests a valid Event object
      */
     @Test
-    public void test1() {
+    public void testValidEvent() {
         Event eventTestObject1 = new Event("CS2103T lecture /at 2021-09-10");
         assertDoesNotThrow(() -> {
             Event eventTestObject2 = new Event("CS2100 lecture /at 2021-09-14");
@@ -31,10 +31,10 @@ public class TestEvent {
     }
 
     /**
-     * Test a throwable Deadline object
+     * Tests an invalid Event object
      */
     @Test
-    public void test2() {
+    public void testInvalidEvent() {
         assertThrows(DucIncompleteException.class, () -> {
             Event eventTestObject1 = new Event("");
         });
