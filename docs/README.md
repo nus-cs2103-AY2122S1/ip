@@ -129,3 +129,15 @@ Example of usage:
 
 Example Outcome:
 1.[D][ ] taskName (by: Dec 3 2021)
+
+### `find`
+
+Find a task which has a description matching to the given keyword.
+Format: `remind {keyword}`
+
+Example of usage:
+
+`find name`
+
+Example Outcome:
+1.[D][ ] taskName (by: Dec 3 2021)
