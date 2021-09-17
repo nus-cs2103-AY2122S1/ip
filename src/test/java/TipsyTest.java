@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import tipsy.TipsyException;
 import org.junit.jupiter.api.Test;
 
 import tipsy.CommandType;
@@ -9,6 +8,7 @@ import tipsy.MissingInputException;
 import tipsy.Parser;
 import tipsy.Task;
 import tipsy.TaskList;
+import tipsy.TipsyException;
 import tipsy.ToDo;
 import tipsy.UnsupportedOperationException;
 
