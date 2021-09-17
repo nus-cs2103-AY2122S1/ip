@@ -47,11 +47,11 @@ public class TaskList {
         this.list.add(task);
         this.curSize++;
         String item = "\n" +
-                "   ____________________________________________________________\n" +
+                "   ____________________________________________\n" +
                 "   Got it. I've added this task: \n" +
                 "       " + task +  "\n" +
                 "   Now you have " + curSize + " tasks in the list.\n" +
-                "   ____________________________________________________________";
+                "   _____________________________________________";
         if (!fromdata){
             return item;
         }
@@ -63,10 +63,10 @@ public class TaskList {
         task.doneTask();
         this.list.set(num  - 1, task);
         String item = "\n" +
-                "   ____________________________________________________________\n" +
+                "   ____________________________________________\n" +
                 "   nice Nice! I've marked this task as done: \n" +
                 "       " + task.toString() + "\n" +
-                "   ____________________________________________________________";
+                "   ____________________________________________";
         return item;
 
     }
@@ -81,9 +81,9 @@ public class TaskList {
         }
         catch(InputNotValidError e){
             String error =
-                    "   ____________________________________________________________\n" +
-                            "   " + e.getMessage() + '\n' +
-                            "   ____________________________________________________________";
+                    "   ____________________________________________\n" +
+                    "   " + e.getMessage() + '\n' +
+                    "   ____________________________________________";
             res = error;
         }
         if (validCommand){
@@ -144,11 +144,11 @@ public class TaskList {
         Task deleted = this.list.remove(num - 1);
         this.curSize--;
         String item = "\n" +
-                "   ____________________________________________________________\n" +
+                "   ____________________________________________\n" +
                 "   Noted. I've removed this task:: \n" +
                 "       " + deleted.toString() + "\n" +
                 "   Now you have " + curSize + " tasks in the list.\n" +
-                "   ____________________________________________________________";
+                "   ____________________________________________";
         return item;
     }
 
@@ -160,14 +160,14 @@ public class TaskList {
             }
         }
         String res = "";
-        res += "    ____________________________________________________________\n" +
+        res += "    ____________________________________________\n" +
                 "   Here are the matching tasks in your list:\n";
         for (int i = 0; i < mathingList.size(); i++){
             Task eachTask = mathingList.get(i);
             String each = String.valueOf(i + 1) + ". " + eachTask.toString();
             res += each + "\n";
         }
-        res += "    ____________________________________________________________";
+        res += "    ____________________________________________";
         return res;
     }
 
@@ -177,20 +177,18 @@ public class TaskList {
 
     public String toString(){
         String res = "";
-        res += "    ____________________________________________________________\n" +
+        res += "    ____________________________________________\n" +
                 "   Here are the tasks in your list:\n";
         for (int i = 0; i < curSize; i++){
             Task eachTask = this.list.get(i);
             String each = String.valueOf(i + 1) + ". " + eachTask.toString();
             res += each + "\n";
         }
-        res += "    ____________________________________________________________";
+        res += "    ____________________________________________";
         return res;
     }
 
     public ArrayList<Task> returnTaskList(){
         return this.list;
     }
-
-
 }

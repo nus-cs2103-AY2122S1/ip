@@ -64,9 +64,8 @@ public class Duke {
         Parser commandpraser = new Parser(input);
         String out = "";
         if(commandpraser.getAction() == Action.BYE){
-            System.out.println(this.ui.byeSent());
             this.storage.saveData(this.tasklist.returnTaskList());
-            return "quit";
+            return this.ui.byeSent();
         }else{
             out = tasklist.actionHalder(commandpraser, false, false);
         }

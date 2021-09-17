@@ -43,8 +43,8 @@ public class Storage {
     try (BufferedReader br = new BufferedReader(new FileReader(this.filepath))) {
         String line;
         while ((line = br.readLine()) != null) {
-            String[] splited = line.split("\\|");
-            res.add(splited);
+            String[] spliced = line.split("\\|");
+            res.add(spliced);
         }
     } catch (IOException e) {
         e.printStackTrace();
