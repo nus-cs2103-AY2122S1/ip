@@ -1,0 +1,10 @@
+1.E|NotDone a (at: )
+2.E|NotDone b (by: boiboi)
+3.E|NotDone b (at: )
+4.E|NotDone a (by:  Value(ClockHourOfAmPm,2)' 'Value(MinuteOfHour,2))
+5.E|NotDone a (by:  10:29)
+6.E|NotDone b (by:  10:20 AM)
+7.E|NotDone b (by:  12:00 AM)
+8.E|NotDone a (by:  Oct 10 2020)
+9.E|NotDone bbb (by: oi)
+10.T|NotDone a 
