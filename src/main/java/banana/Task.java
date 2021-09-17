@@ -7,8 +7,8 @@ package banana;
  */
 class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task.

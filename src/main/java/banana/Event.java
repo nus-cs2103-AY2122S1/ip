@@ -12,10 +12,10 @@ import java.time.LocalDate;
  */
 class Event extends Task {
 
-    protected LocalDate date;
-    protected String timing;
-    protected String symbol;
-    protected String dateFormat;
+    private LocalDate date;
+    private String timing;
+    private String symbol;
+    private String dateFormat;
 
     /**
      * Constructor for Event.

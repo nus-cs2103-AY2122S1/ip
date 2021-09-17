@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    protected Scanner scanVar;
+    private Scanner scanVar;
 
     /**
      * Constructor for the Ui class.

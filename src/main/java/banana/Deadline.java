@@ -12,10 +12,10 @@ import java.time.LocalDate;
  */
 class Deadline extends Task {
 
-    protected String deadline;
-    protected LocalDate date;
-    protected String symbol;
-    protected String dateFormat;
+    private String deadline;
+    private LocalDate date;
+    private String symbol;
+    private String dateFormat;
 
     /**
      * Constructor for Deadline.
