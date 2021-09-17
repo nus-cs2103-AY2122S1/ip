@@ -81,7 +81,7 @@ public class DialogBox extends HBox {
      * (Taken from @yourally2)
      */
     private void cropToCircle() {
-        Circle circle = new Circle(displayPicture.getFitWidth() / 2, displayPicture.getFitHeight() / 2, 20);
+        Circle circle = new Circle(displayPicture.getFitWidth() / 2, displayPicture.getFitHeight() / 2, 40);
         displayPicture.setClip(circle);
     }
 }
