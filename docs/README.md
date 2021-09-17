@@ -1,43 +1,51 @@
 # User Guide
-###
+
+
 ## Bob
 
 Bob is a sarcastic and slightly annoying yet helpful chatbot that helps you keep track of all the things you need to do.
 If you are a quick typer, Bob allows you to manage your tasks much faster than regular to-do-list applications.
 
 
-#
+
 ## Features 
 
 ### Managing regular tasks
 
 Add and delete todo tasks, and mark them as completed.
-###
+
+
 ### Managing deadlines
 
 Add and delete deadlines, and mark them as completed.
-###
+
+
 ### Managing events
 
 Add and delete events, and mark them as completed.
-###
+
+
 ### Viewing all tasks
 
 View all saved tasks.
-###
+
+
 ### Searching for tasks
 
 View tasks containing a specific keyword.
-###
+
+
 ### Viewing help
 
 Be directed to this User Guide.
-###
+
+
 ### Saving data
 
 Automatically save task list in text file, and reload data the next time Bob is launched.
 
-#
+
+
 ## Commands
 
 ### `help` - Viewing help
@@ -57,7 +65,8 @@ HA HA do you not know how to talk to me?
 Click on this message to view my guide then! 
 (You'll need internet access though :p)
 ```
-##
+
+
 ### `todo` - Adding todo task
 
 Add a new task to keep track of that has no specific date or deadline.
@@ -75,7 +84,8 @@ Okay okay I've added the task:
 [T] [ ] eat bread
 Yay 2 tasks!
 ```
-##
+
+
 ### `deadline` - Adding deadline task
 
 Add a new task to keep track of that has a specific deadline.
@@ -93,7 +103,8 @@ Okay okay I've added the task:
 [D] [ ] review bread (by: Feb 9 2021)
 Yay 3 tasks!
 ```
-##
+
+
 ### `event` - Adding event task
 
 Add a new task to keep track of that has a specific date.
@@ -111,7 +122,8 @@ Okay okay I've added the task:
 [E] [ ] make bread (at: Feb 12 2021)
 Yay 4 tasks!
 ```
-##
+
+
 ### `list` - Displaying all tasks
 
 Displays all the tasks in the list.
@@ -131,7 +143,8 @@ Here's your tasks! Wow I'm so helpful!
 3.[D] [ ] review bread (by: Feb 9 2021)
 4.[E] [ ] make bread (at: Feb 12 2021)
 ```
-##
+
+
 ### `find` - Searching for tasks
 
 Search for all the tasks in the list that contain a specific keyword.
@@ -150,7 +163,8 @@ Are any of these tasks the one you're looking for?
 2.[D] [ ] review bread (by: Feb 9 2021)
 3.[E] [ ] make bread (at: Feb 12 2021)
 ```
-##
+
+
 ### `done` - Completing task
 
 Mark a task in the list as completed.
@@ -167,7 +181,8 @@ Marks the task with index number 2 in the list as a completed task.
 Wow you finally did something productive!
 [T] [X] eat bread
 ```
-##
+
+
 ### `delete` - Removing task
 
 Delete a task from the list.
@@ -185,7 +200,9 @@ Okay task yeeted away :D
 [T] [ ] drink milo
 Yay 3 tasks!
 ```
-#
+
+
+
 ## Acknowledgements
 
 GUI inspiration from Fantasia by @soaza
