@@ -18,7 +18,8 @@ Wait, did I forget to mention the best part? It's **FREE**! :partying_face:
 
 Currently we have the following features:
 - [x] Task Management
-- [ ] Reminders (Coming soon!)
+- [x] Auto Storage
+- [x] Wrong Input Warning 
 
 If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 ```java
