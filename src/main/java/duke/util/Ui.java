@@ -26,6 +26,9 @@ public class Ui {
      * @return Result content
      */
     public String showList(String input) {
+        if (input == null || input.equals("")) {
+            return "Your list is EMPTY!";
+        }
         String words = "Here is your task list:\n";
         return words + input;
     }
@@ -82,6 +85,9 @@ public class Ui {
      * @return result content
      */
     public String showFind(ArrayList<Task> results) {
+        if (results == null || results.size() == 0) {
+            return "Sorry! Duke can NOT find any matched item for you!";
+        }
         String words = "Here are the matching tasks in your list:";
         for (int i = 1; i <= results.size(); i++) {
             words = words + "\n    " + i + ". " + results.get(i - 1);
@@ -118,4 +124,8 @@ public class Ui {
         return manual + other;
     }
 
+
+    public String showError(String errorMessage) {
+        return "OOPS!!!" + errorMessage;
+    }
 }

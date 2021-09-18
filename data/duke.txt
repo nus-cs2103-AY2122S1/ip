@@ -1,6 +1,8 @@
 E & 1 &  1 & return book & 16/09/2021 0400
-E & 0 &  1 & meeting & 20/09/2021 0200
 D & 1 &  1 & return book & 02/02/2021 0600
+T & 1 &  1 & buy milk
+E & 0 &  1 & meeting & 02/12/2020 1200
+D & 0 &  1 & return book & 02/02/2019 0600
 T & 0 &  1 & buy milk
 E & 0 &  1 & meeting & 02/12/2020 1200
 D & 0 &  1 & return book & 02/02/2019 0600

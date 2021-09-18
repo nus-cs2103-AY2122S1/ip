@@ -6,7 +6,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
 /**
  * Represents a dealer to process a full command.
  */
@@ -40,7 +39,7 @@ public class Parser {
      * @return result content
      */
     public String parse(String input) {
-        String lowerCase = input.toLowerCase();
+        String lowerCase = input.toLowerCase().trim();
         if (lowerCase.equals("bye")) {
             return commandBye();
         } else if (lowerCase.equals("help")) {
@@ -115,10 +114,13 @@ public class Parser {
             assert input.length() >= 20 : "The Deadline command should be 'deadline description /by dd/mm/yyyy hhmm'";
             Task deadline = new Deadline(item, by);
             taskList.add(deadline);
-            storage.add(deadline);
+            storage.addData(deadline);
             return ui.showNewTask(deadline);
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("OOPS! You didn't follow the format: 'deadline description /by dd/mm/yyyy hhmm'");
+        } catch (Exception e) {
+            throw new DukeException("OOPS! Something wrong happened!\n\n"
+                    + "It's most likely due to an INVALID input!");
         }
     }
 
@@ -133,10 +135,13 @@ public class Parser {
             assert input.length() >= 17 : "The Event command should be like 'event description /at dd/mm/yyyy (hhmm)'";
             Task event = new Event(item, at);
             taskList.add(event);
-            storage.add(event);
+            storage.addData(event);
             return ui.showNewTask(event);
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("OOPS! You didn't follow the format: 'event description /at dd/mm/yyyy hhmm'");
+        } catch (Exception e) {
+            throw new DukeException("OOPS! Something wrong happened!\n\n"
+                    + "It's most likely due to an INVALID input!");
         }
     }
 
@@ -146,24 +151,30 @@ public class Parser {
             assert input.length() >= 6 : "The Todo command should be like 'todo description'";
             Task todo = new Todo(item);
             taskList.add(todo);
-            storage.add(todo);
+            storage.addData(todo);
             return ui.showNewTask(todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS! Something wrong happened!\n\n"
+                    + "It's most likely due to an INVALID input!");
         }
     }
 
     private String commandDone(String input) {
         try {
             int item = Integer.parseInt(input.substring(5, 6));
+            if (taskList.length() < item || item <= 0) {
+                return ui.showError("This is an INVALID input!");
+            }
             assert input.length() >= 6 : "The length of input should be longer than 5";
             taskList.done(item - 1);
-            storage.done(item - 1);
+            storage.doneData(item - 1);
             return ui.showDone(taskList.get(item - 1));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The target of finished duke.task cannot be empty.");
+            throw new DukeException("OOPS!!! The target of finished duke task cannot be empty.");
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! The format of input is wrong. It should be like 'delete 5'");
+            throw new DukeException("OOPS!!! This is an INVALID input!");
         }
     }
 
@@ -173,7 +184,7 @@ public class Parser {
             assert input.length() >= 8 : "The length of input should be longer than 7";
             Task task = taskList.get(item - 1);
             taskList.delete(item - 1);
-            storage.delete(item - 1);
+            storage.deleteData(item - 1);
             return ui.showDelete(task, taskList.length());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
@@ -198,13 +209,16 @@ public class Parser {
             } else {
                 throw new DukeException("OOPS!!! If you want to mark a task with priority, "
                         + "Please command 'mark taskIndex &important/&ordinary/&unimportant'."
-                        + "\nFor example, command 'mark 15 &important' to mark fifteenth task with high priority");
+                        + "\n\nFor example, command 'mark 15 &important' to mark fifteenth task with high priority");
             }
             return ui.showPriority(taskList.get(item - 1));
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! If you want to mark a task with priority, "
                     + "Please command 'mark taskIndex &important/&ordinary/&unimportant'."
-                    + "\nFor example, command 'mark 15 &important' to mark fifteenth task with high priority");
+                    + "\n\nFor example, command 'mark 15 &important' to mark fifteenth task with high priority");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Something Wrong happened...\n\n"
+                    + "It's most likely due to an INVALID input!");
         }
     }
 
