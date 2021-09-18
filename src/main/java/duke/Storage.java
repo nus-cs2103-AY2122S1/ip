@@ -62,7 +62,7 @@ public class Storage {
                     taskList.add(new TodoTask(taskName, isDone));
                     break;
                 case "E":
-                    taskList.add(new EventTask(taskName, isDone, line[3]));
+                    taskList.add(new EventTask(taskName, isDone, line[3], line[4]));
                     break;
                 case "D":
                     taskList.add(new DeadlineTask(taskName, isDone, line[3]));

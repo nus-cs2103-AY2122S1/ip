@@ -16,11 +16,19 @@ public class Ui {
     }
 
     /**
-     * Prints a given String to console.
+     * Sets the next response to user as a given String.
      * @param message message to be printed to console.
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Appends a string to the next message.
+     * @param appendix String to append to existing message.
+     */
+    public void appendMessage(String appendix) {
+        this.message += appendix;
     }
 
 

@@ -19,8 +19,9 @@ public class Parser {
     private Storage storage;
     private Ui ui;
 
-    private static final String TIME_MARKER = "/at";
-    private static final String DEADLINE_MARKER = "/by";
+    private static final String START_MARKER = " /from ";
+    private static final String END_MARKER = " /to ";
+    private static final String DEADLINE_MARKER = " /by ";
 
     /**
      * Constructor for a Parser for Duke.
@@ -105,22 +106,24 @@ public class Parser {
     private Command addEvent(String[] input) throws InvalidInputException {
         assert input != null : "addEvent: input cannot be null";
 
+        EventTask event;
+
         try {
-            String[] taskAndTime = input[1].split(TIME_MARKER, 2);
-            EventTask event;
-            if (taskAndTime.length > 1) {
-                event = new EventTask(taskAndTime[0], taskAndTime[1]);
-                return new AddTaskCommand(taskList, storage, ui, event);
-            } else {
-                throw new InvalidInputException("Need to specify event name and time." +
-                        "\nexample:\nevent meeting /at Tuesday 12pm");
-            }
+            String[] taskAndTime = input[1].split(START_MARKER, 2);
+            String[] startAndEnd = taskAndTime[1].split(END_MARKER, 2);
+            String start = startAndEnd[0];
+            String end = startAndEnd[1];
+            event = new EventTask(taskAndTime[0], start, end);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidInputException("Description for Event cannot be empty." +
-                    "\nexample:\nevent meeting /at Tuesday 12pm");
+            throw new InvalidInputException("Invalid format, need to specify event name, start and end time."
+                    + "\nexample:\nevent meeting /from 2021-09-11 09:00 /to 2021-09-11 10:30");
         } catch (DateTimeException e) {
-            throw new InvalidInputException("Unsupported date format, must be in format yyyy-mm-dd.");
+            throw new InvalidInputException("Unsupported date time format, must be in format yyyy-MM-dd HH:mm.");
+        } catch (InvalidInputException e) {
+            throw e;
         }
+
+        return new AddTaskCommand(taskList, storage, ui, event);
     }
 
     /**
@@ -138,12 +141,12 @@ public class Parser {
                 return new AddTaskCommand(taskList, storage, ui, deadlineTask);
             } else {
                 throw new InvalidInputException("Need to specify task name and deadline." +
-                        "\nexample:\ndeadline return book /by Sunday");
+                        "\nexample:\ndeadline return book /by 2021-09-11");
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidInputException("Description for deadline cannot be empty.\" +\n" +
-                    "\nexample:\ndeadline return book /by Sunday");
+                    "\nexample:\ndeadline return book /by 2021-09-11");
         } catch (DateTimeException e) {
             throw new InvalidInputException("Unsupported date format, must be in format yyyy-mm-dd.");
         }
