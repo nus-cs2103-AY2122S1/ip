@@ -1,0 +1,21 @@
+todo borrow book
+deadline return book /by 06/06/2021 1600
+event project meeting /at 06/08/2021 1400
+done 1
+done 2
+done 3
+list
+find book
+delete 3
+delete 2
+todo
+deadline
+event
+delete
+done
+delete 2
+done 2
+invalidcommand
+deadline return book /by 6-6-2021 1600
+deadline asdfgh
+find cat
