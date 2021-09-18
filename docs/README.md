@@ -17,8 +17,8 @@ Format:
 3. `event DESCRIPTION /by DATE_TIME`
 
 * Adds a task with the specified `DESCRIPTION` and `DATE_TIME`.
-* DATE must be in the format `yyyy-mm-dd`.
-* TIME must be in the format `hh:mm`.
+* `DATE` must be in the format `yyyy-mm-dd`.
+* `TIME` must be in the format `hh:mm`.
 
 Examples:
 * `todo run` adds `[T][] run` into the task list.
