@@ -27,7 +27,7 @@ public class Ui {
     }
 
     public String retrieveList() {
-        ArrayList<Task> list = TaskList.getTodoList();
+        ArrayList<Task> list = TaskList.getTaskList();
         if (list.size() == 0) {
             return "You currently have no tasks!";
         } else {
@@ -41,7 +41,7 @@ public class Ui {
 
     public String addTask(Task task) {
         return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.",
-                task.toString(), TaskList.getTodoList().size());
+                task.toString(), TaskList.getTaskList().size());
     }
 
     /**
@@ -62,7 +62,7 @@ public class Ui {
      */
     public String deleteTask(Task task) {
         return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.",
-                task.toString(), TaskList.getTodoList().size());
+                task.toString(), TaskList.getTaskList().size());
     }
 
     public String getError(String e) {
@@ -76,7 +76,7 @@ public class Ui {
      * @return the list of tasks containing the keyword specified by the user
      */
     public String findTask(String keyword) {
-        ArrayList<Task> list = TaskList.getTodoList();
+        ArrayList<Task> list = TaskList.getTaskList();
         if (list.size() == 0) {
             return "You currently have no tasks!";
         } else {

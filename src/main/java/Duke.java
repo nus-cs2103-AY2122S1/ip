@@ -1,7 +1,13 @@
-import duke.*;
+import duke.CommandHandler;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
+import duke.UnknownInputException;
 
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -9,10 +15,17 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * List of input commands the user can use.
+     */
     public enum InputCommands {
-        bye, list, done, delete, todo, deadline, event
+        bye, list, done, delete, todo, deadline, event, find
     }
 
+    /**
+     * Constructor for Duke.
+     * Creates a new storage file to store tasks inputted by the user.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
@@ -42,7 +55,6 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-
 
     public void run () {
         System.out.println(ui.greet());

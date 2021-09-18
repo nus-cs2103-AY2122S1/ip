@@ -17,7 +17,6 @@ public class Storage {
 
     /**
      * Saves existing tasks to the storage file.
-     *
      */
     public void saveTasksToFile() {
         // @author aakanshanarain - reused
@@ -26,7 +25,7 @@ public class Storage {
         try {
             BufferedWriter taskWriter = new BufferedWriter(new FileWriter(filePath));
             String tasks = "";
-            for (Task task : TaskList.getTodoList()) {
+            for (Task task : TaskList.getTaskList()) {
                 tasks += task.toStringForStorage() + "\n";
             }
             taskWriter.write(tasks);
@@ -82,7 +81,7 @@ public class Storage {
             if (isTaskDone.equals("true")) {
                 task.markAsDone();
             }
-            TaskList.getTodoList().add(task);
+            TaskList.getTaskList().add(task);
         }
         sc.close();
     }
