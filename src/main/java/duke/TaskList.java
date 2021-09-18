@@ -23,7 +23,7 @@ public class TaskList {
         for (String[] each : data){
             String[] actions = new String[2];
             String actionName = each[0];
-            Boolean done = true;
+            boolean done = true;
             if(each[1].equals(" 0 ")){
                 done = false;
             }
