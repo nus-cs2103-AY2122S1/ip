@@ -26,11 +26,11 @@ Shows tasks that fall on a certain date.
 
 ### `todo` - Add a todo task
 
-Add a todo with a task description to the list.
+Add a todo with a task description to the list. Format of command: `todo <task description>`.
 
 Example of usage: 
 
-`todo <task description>`
+* `todo buy groceries`
 
 Expected outcome:
 
@@ -44,12 +44,13 @@ Now you have x tasks in the list.
 
 ### `deadline` - Add a deadline task
 
-Add a deadline with a task description and the date and time of the deadline to the list.
-
+Add a deadline with a task description and the date and time of the deadline to the list. Format of command: `deadline <task description> /by MMM dd yyyy HH:mm` or 
+`deadline <task description> /by yyyy-MM-dd HH:mm`.
+  
 Example of usage: 
 
-* `deadline <task description> /by MMM dd yyyy HH:mm`
-* `deadline <task description> /by yyyy-MM-dd HH:mm`
+* `deadline report /by Aug 20 2021 18:00`
+* `deadline project submission /by 2021-08-20 17:00`
 
 Expected outcome:
 
@@ -63,12 +64,13 @@ Now you have x tasks in the list.
 
 ### `event` - Add an event task
 
-Add an event with a task description and the date and time of the event to the list.
+Add an event with a task description and the date and time of the event to the list. Format of command: `event <task description> /at MMM dd yyyy HH:mm` or 
+`event <task description> /at yyyy-MM-dd HH:mm`.
 
 Example of usage: 
 
-* `event <task description> /at MMM dd yyyy HH:mm`
-* `event <task description> /at yyyy-MM-dd HH:mm`
+* `event birthday party /at Sep 20 2021 18:00`
+* `event prom /at 2021-10-28 19:00`
 
 Expected outcome:
 
@@ -100,11 +102,11 @@ Here are the tasks in your list:
 
 ### `done` - Mark a specific task as done
 
-Marks the task at the given index in the list as done.
+Marks the task at the given index in the list as done. Format of command: `done <idx>`.
 
 Example of usage: 
 
-`done <idx>`
+* `done 2`
 
 Expected outcome:
 
@@ -117,11 +119,11 @@ Nice! I've marked this task as done
 
 ### `delete` - Removes a specific task from the list
 
-Removes the task at the given index from the list.
+Removes the task at the given index from the list. Format of command: `delete <idx>`.
 
 Example of usage: 
 
-`delete <idx>`
+* `delete 2`
 
 Expected outcome:
 
@@ -135,11 +137,12 @@ Now you have x tasks in the list.
 
 ### `find` - Finds tasks that match the given keyword
 
-Finds tasks that match the given keyword and displays them in a list format.
+Finds tasks that match the given keyword and displays them in a list format. Format of command: `find <keyword>`.
 
 Example of usage: 
 
-`find <keyword>`
+* `find party`
+* `find project`
 
 Expected outcome:
 
@@ -153,11 +156,12 @@ Here are the matching tasks in your list:
 
 ### `view` - Shows tasks that fall under the given date
 
-Shows tasks that fall under the given date and displays them in a list format.
+Shows tasks that fall under the given date and displays them in a list format. Format of command: `view <MMM dd yyyy>`.
 
 Example of usage: 
 
-`view <MMM dd yyyy>`
+* `view Aug 20 2021`
+* `view Jan 14 2020`
 
 Expected outcome:
 
