@@ -76,15 +76,15 @@ public class Duke {
                     System.out.println(commandHandler.handleDelete(userCommand));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("todo")) {
-                    Task todoTask = Parser.parserForTodoTasks(userCommand);
+                    Task todoTask = Parser.parseTodoTasks(userCommand);
                     System.out.println(commandHandler.handleTodo(todoTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("deadline")) {
-                    Task deadlineTask = Parser.parserForDeadlineTasks(userCommand);
+                    Task deadlineTask = Parser.parseDeadlineTasks(userCommand);
                     System.out.println(commandHandler.handleDeadline(deadlineTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("event")) {
-                    Task eventTask = Parser.parserForEventTasks(userCommand);
+                    Task eventTask = Parser.parseEventTasks(userCommand);
                     System.out.println(commandHandler.handleEvent(eventTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.equals("listInputs")) {
@@ -120,15 +120,15 @@ public class Duke {
                 return commandHandler.handleDelete(input);
             } else if (input.startsWith("todo")) {
                 storage.saveTasksToFile();
-                Task todoTask = Parser.parserForTodoTasks(input);
+                Task todoTask = Parser.parseTodoTasks(input);
                 return commandHandler.handleTodo(todoTask);
             } else if (input.startsWith("deadline")) {
                 storage.saveTasksToFile();
-                Task deadlineTask = Parser.parserForDeadlineTasks(input);
+                Task deadlineTask = Parser.parseDeadlineTasks(input);
                 return commandHandler.handleDeadline(deadlineTask);
             } else if (input.startsWith("event")) {
                 storage.saveTasksToFile();
-                Task eventTask = Parser.parserForEventTasks(input);
+                Task eventTask = Parser.parseEventTasks(input);
                 return commandHandler.handleEvent(eventTask);
             } else if (input.startsWith("find")) {
                 storage.saveTasksToFile();

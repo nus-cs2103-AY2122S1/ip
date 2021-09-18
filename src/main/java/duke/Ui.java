@@ -47,8 +47,8 @@ public class Ui {
     /**
      * Returns a message to the user indicating the task has been marked as done.
      *
-     * @param task
-     * @return
+     * @param task The task to be marked as done.
+     * @return A message to the user indicating the task has been marked as done.
      */
     public String doneTask (Task task) {
         return String.format("Nice! I've marked this task as done:\n %s", task.toString());
@@ -57,8 +57,8 @@ public class Ui {
     /**
      * Returns a message to the user indicating the task has been deleted.
      *
-     * @param task
-     * @return
+     * @param task The task to be deleted.
+     * @return A message to the user indicating the task has been deleted.
      */
     public String deleteTask(Task task) {
         return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.",
@@ -72,8 +72,8 @@ public class Ui {
     /**
      * UI message for the find command.
      *
-     * @param keyword
-     * @return the list of tasks containing the keyword specified by the user
+     * @param keyword The keyword to match tasks in the task list against.
+     * @return The list of tasks containing the keyword specified by the user.
      */
     public String findTask(String keyword) {
         ArrayList<Task> list = TaskList.getTaskList();
