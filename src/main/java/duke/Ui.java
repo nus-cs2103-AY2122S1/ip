@@ -95,7 +95,7 @@ public class Ui {
      */
     public String getTasksAfterTask(TaskList tasks, Task refTask) {
         String listOfTasksToDoAfter = tasks.numOfTasks() == 0
-                ? "\nYou have no task to do"
+                ? "\nYou have no task to start"
                 : "\nYou need to do the following tasks:" + tasks.toString();
         return "After this task:\n  " + refTask.toString() + listOfTasksToDoAfter;
     }
@@ -109,7 +109,7 @@ public class Ui {
      */
     public String getTasksAfterDateTime(TaskList tasks, LocalDateTime refDateTime) {
         String listOfTasksToDoAfter = tasks.numOfTasks() == 0
-                ? "\nYou have no task to do"
+                ? "\nYou have no task to start"
                 : "\nYou need to do the following tasks:" + tasks.toString();
         return "After:\n  " + refDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
                 + listOfTasksToDoAfter;

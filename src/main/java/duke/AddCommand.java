@@ -23,72 +23,110 @@ public class AddCommand implements Command {
     /**
      * Adds a "to do" task to the TaskList and returns a response.
      *
-     * @param s name of the task
+     * @param userInput user input
      * @param tasks the Tasklist where the task will be added
      * @param ui the Ui
      * @return the corresponding response upon successfully adding the task
      * @throws DukeException if user input is invalid
      */
-    public static String addToDoResponse(String s, TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            Task curr = new ToDo(s.substring(5));
-            tasks.addTask(curr);
-            storage.saveTasks(tasks);
-            return ui.getAddTaskMessage(curr, tasks.numOfTasks());
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description of a todo cannot be empty.");
+    private static String addToDoResponse(String userInput, TaskList tasks, Ui ui,
+            Storage storage) throws DukeException {
+
+        String todoFormat =
+                "Correct format for adding a todo:\ntodo TODO_DESCRIPTION";
+
+        String description = userInput.substring(4).trim();
+
+        if (description.length() == 0) {
+            throw new DukeException("The description of a todo cannot be empty\n\n" + todoFormat);
         }
+
+        Task curr = new ToDo(description);
+        tasks.addTask(curr);
+        storage.saveTasks(tasks);
+
+        return ui.getAddTaskMessage(curr, tasks.numOfTasks());
     }
 
     /**
      * Adds an "event" task to the TaskList and returns a response.
      *
-     * @param s name of the task
+     * @param userInput user input
      * @param tasks the Tasklist where the task will be added
      * @param ui the Ui
      * @return the corresponding response upon successfully adding the task
      * @throws DukeException if user input is invalid
      */
-    public static String addEventResponse(String s, TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    private static String addEventResponse(String userInput, TaskList tasks, Ui ui,
+            Storage storage) throws DukeException {
+
+        String eventFormat =
+                "Correct format for adding an event:\nevent EVENT_DESCRIPTION /at yyyy-MM-dd HH:mm";
+
+        if (!userInput.contains("/at")) {
+            throw new DukeException("Please specify the time with /at\n\n" + eventFormat);
+        }
+
+        String[] eventData = (userInput + " ").split("/at");
+        String description = eventData[0].substring(5).trim();
+        String dateTime = eventData[1].trim();
+
+        if (description.length() == 0) {
+            throw new DukeException("The description of an event cannot be empty\n\n" + eventFormat);
+        }
+
         try {
-            int at = s.lastIndexOf(" /at ");
             Task curr = new Event(
-                    s.substring(6, at),
-                    LocalDateTime.parse(s.substring(at + 5), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                    description,
+                    LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
             );
             tasks.addTask(curr);
             storage.saveTasks(tasks);
+
             return ui.getAddTaskMessage(curr, tasks.numOfTasks());
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description and time of an event cannot be empty.");
         } catch (DateTimeParseException e) {
-            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
+            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm\n\n" + eventFormat);
         }
     }
 
     /**
      * Adds a "deadline" task to the TaskList and returns a response.
      *
-     * @param s name of the task
+     * @param userInput user input
      * @param tasks the Tasklist where the task will be added
      * @param ui the Ui
      * @return the corresponding response upon successfully adding the task
      * @throws DukeException if user input is invalid
      */
-    public static String addDeadlineResponse(String s, TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    private static String addDeadlineResponse(String userInput, TaskList tasks, Ui ui,
+            Storage storage) throws DukeException {
+
+        String deadlineFormat =
+                "Correct format for adding a deadline:\ndeadline DEADLINE_DESCRIPTION /by yyyy-MM-dd HH:mm";
+
+        if (!userInput.contains("/by")) {
+            throw new DukeException("Please specify the time with /by\n\n" + deadlineFormat);
+        }
+
+        String[] deadlineData = (userInput + " ").split("/by");
+        String description = deadlineData[0].substring(8).trim();
+        String dateTime = deadlineData[1].trim();
+
+        if (description.length() == 0) {
+            throw new DukeException("The description of a deadline cannot be empty\n\n" + deadlineFormat);
+        }
+
         try {
-            int by = s.lastIndexOf(" /by ");
             Task curr = new Deadline(
-                    s.substring(9, by),
-                    LocalDateTime.parse(s.substring(by + 5), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                    description,
+                    LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
             );
             tasks.addTask(curr);
             storage.saveTasks(tasks);
+
             return ui.getAddTaskMessage(curr, tasks.numOfTasks());
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description and time of a deadline cannot be empty.");
         } catch (DateTimeParseException e) {
-            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
+            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm\n\n" + deadlineFormat);
         }
     }
 
