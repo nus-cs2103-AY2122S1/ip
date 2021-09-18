@@ -6,7 +6,7 @@ package duke.task;
  */
 public abstract class Task {
 	private String name;
-	private boolean done = false;
+	private boolean isDone = false;
 
 	/**
 	 * Constructs a new Task with the given name.
@@ -19,23 +19,23 @@ public abstract class Task {
 	 * Returns whether the task is marked as done.
 	 */
 	public boolean isDone() {
-		return done;
+		return isDone;
 	}
 
 	/**
 	 * Set the task as done or not.
 	 *
-	 * @param done whether the task is done
+	 * @param isDone whether the task is done
 	 */
-	public void setDone(boolean done) {
-		this.done = done;
+	public void setDone(boolean isDone) {
+		this.isDone = isDone;
 	}
 
 	/**
 	 * Returns the string representation of the completeness of the task.
 	 */
 	public String getCheckBox() {
-        return (done ? "[X] " : "[ ] "); // mark done task with X
+        return (isDone ? "[X] " : "[ ] "); // mark done task with X
     }
 
 	@Override
