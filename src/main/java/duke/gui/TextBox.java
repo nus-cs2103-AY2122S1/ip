@@ -1,5 +1,6 @@
 //@@author wengYing227-reused
 //Reused from https://github.com/chan-j-d/ip
+// and from https://github.com/lll-jy/ip
 // with minor modifications
 
 package duke.gui;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Font;
 
 /**
  * A JavaFX node representing a text box as is usually seen in apps like Telegram and Messenger.
@@ -49,6 +51,7 @@ public class TextBox extends VBox {
         textLabel.setWrapText(true);
         textLabel.setBackground(getDefaultBackground(left));
         textLabel.setPadding(getDefaultPadding());
+        textLabel.setFont(Font.font("Times New Roman", 13));
 
         //Adds a small triangle to the appropriate side to mimic a text box
         HBox hBox = new HBox();
@@ -66,7 +69,18 @@ public class TextBox extends VBox {
 
         Rectangle verticalGap = new Rectangle(0, BUFFER_TOP);
         getChildren().addAll(verticalGap, hBox);
+        setFitHeight(textLabel);
+    }
 
+
+    private void setFitHeight(Label textLabel) {
+        int lineNum = textLabel.getText().endsWith("\n") ? 1 : 0;
+        String[] strings = textLabel.getText().split("\n");
+        lineNum += strings.length + 1;
+        for (String str : strings) {
+            lineNum += str.length() / 32;
+        }
+        this.setMinHeight(lineNum * 15 + 30);
     }
 
     /** Returns a background to fill up the text box with a colour and shape */
