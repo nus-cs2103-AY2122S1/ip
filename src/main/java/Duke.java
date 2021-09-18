@@ -30,7 +30,7 @@ public class Duke {
     }
 
     /**
-     * A method to get the chat box's response from a user input.
+     * Returns the chat box's response from a user input.
      *
      * @param input user input to be fed into the chat box
      * @return a String that is the chat box's response

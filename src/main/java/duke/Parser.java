@@ -8,7 +8,7 @@ import javafx.application.Platform;
 public class Parser {
 
     /**
-     * A method that parses the user input and returns the corresponding Command.
+     * Parses the user input and returns the corresponding Command.
      *
      * @param userInput the input the user keys in
      * @return a Command object

@@ -22,7 +22,7 @@ public class Storage {
     }
 
     /**
-     * A method to load tasks from storage and return the list of tasks.
+     * Loads tasks from storage and return the list of tasks.
      *
      * @return an ArrayList of Task
      * @throws DukeException if file cannot be loaded
@@ -168,7 +168,7 @@ public class Storage {
     }
 
     /**
-     * A method to continuously save the current list of tasks.
+     * Saves the current list of tasks.
      *
      * @param tasks a TaskList to be saved
      */
