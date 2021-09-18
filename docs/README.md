@@ -146,4 +146,9 @@ Expected outcome:
 * As such there is a specific way that Dukes reads this file and any interferences can cause Duke to crash.
 * You should only edit your tasks through the Duke application with the commands given above.
 
+
+## Duke Demo
+
+![DukeDemoGif](https://user-images.githubusercontent.com/85099754/133879098-185386a3-e86c-4b91-adf6-80c85bdc18b5.gif)
+
 *Have fun using Duke!*
