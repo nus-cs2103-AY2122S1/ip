@@ -13,6 +13,16 @@ Hyddd frees you from worry of taking care of everything. It is:
 
 ![alt text](https://hangzelin.github.io/ip/Ui.png)
 
+#Setup
+
+1. Ensure you have Java `11` or above installed in your Computer.
+
+1. Download the jar package `Hyddd.jar` from the release **Hyddd v0.2**.
+
+1. Copy the file to the folder you want to use as the home folder
+
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+
 ## Features 
 
 ### 1.Save&Load
@@ -250,5 +260,22 @@ Hope you enjoy your experience in Hyddd!
   **2. dd/mm/yy hhmm(minute).**
 * Deadline should have "/by" as prefix.
 * Event should have "/at" as prefix. 
+
+## Command summary
+
+Operation | Format
+--------|------------------
+**list** | `list`
+**done** | `done 1`
+**delete** | `delete 1`
+**tell** | `tell 17/9/2021`
+**find** | `find finish assignment`
+**todo** | `todo finish assignemnt`
+**deadline** | `deadline Submit Ip /by 17/9/2021 2359`
+**event** | `event Attend Lecture /at 2021-9-23`
+**undo** | `undo`
+**help** | `help`
+**bye** | `bye`
+
 
 **Hope you enjoy your experience in Hyddd!**
