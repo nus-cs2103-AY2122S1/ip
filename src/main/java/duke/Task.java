@@ -31,4 +31,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    public String toStringForStorage() {
+        return this.description;
+    }
 }

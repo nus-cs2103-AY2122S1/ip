@@ -65,8 +65,8 @@ public class Ui {
                 task.toString(), TaskList.getTodoList().size());
     }
 
-    public void getError(String e) {
-        System.out.println(e);
+    public String getError(String e) {
+        return e;
     }
 
     /**
@@ -92,5 +92,9 @@ public class Ui {
             return "Here are the matching tasks in your list:\n" + tasksWithKeywordList;
         }
 
+    }
+
+    public void showLoadingError() {
+        System.out.println("Sorry! There was an error loading your tasks! Please try again!");
     }
 }
