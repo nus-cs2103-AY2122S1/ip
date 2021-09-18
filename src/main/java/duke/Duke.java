@@ -28,7 +28,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("data/data.txt");
         tasks = storage.load();
     }
 

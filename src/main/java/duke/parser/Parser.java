@@ -28,10 +28,10 @@ public class Parser {
             "Please input a task number instead.";
     private static final String INVALID_DEADLINE_FORMAT =
             "You've entered the deadline command in a invalid format!"
-                    + "\nIt should be in the form: deadline /by yyyy-mm-dd hrs:mins";
+                    + "\nIt should be in the form: deadline DESCRIPTION /by yyyy-mm-dd hrs:mins";
     private static final String INVALID_EVENT_FORMAT =
             "You've entered the event command in a invalid format!"
-                    + "\nIt should be in the form: event /at yyyy-mm-dd hrs:mins";
+                    + "\nIt should be in the form: event DESCRIPTION /at yyyy-mm-dd hrs:mins";
     private static final String INVALID_COMMAND_MESSAGE =
             "You have entered an invalid command, please try again!";
 

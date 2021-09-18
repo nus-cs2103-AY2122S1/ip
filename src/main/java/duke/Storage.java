@@ -72,6 +72,8 @@ public class Storage {
 
         try {
             File file = new File(filepath);
+            File dataDir = new File("data");
+            dataDir.mkdir();
 
             if (file.createNewFile()) {
                 return new TaskList();
