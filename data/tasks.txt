@@ -1,4 +1,4 @@
-todo a lot of things/ false
-event meet people | 8/ true
-deadline sleep | 10/ false
-todo read/ false
+event x | 12-03-2019 1200/ false
+todo x/ true
+todo y/ false
+deadline z | 20-10-2021 0700/ false

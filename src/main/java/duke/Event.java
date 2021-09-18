@@ -1,18 +1,24 @@
 package duke;
 
+import java.time.LocalDateTime;
+
 public class Event extends Task {
 
+    private LocalDateTime atAsDate;
     private String at;
+    private String dateAsString;
 
 
     public Event(String description, String at) {
         super(description);
         this.at = at;
+        this.atAsDate = DateTimeConversion.textToDate(at);
+        dateAsString = DateTimeConversion.dateToText(this.atAsDate);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + dateAsString + ")";
     }
 
     @Override
