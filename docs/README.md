@@ -1,4 +1,4 @@
-![Picture of the UI](UI.png)
+![Picture of the UI](Ui.png)
 
 # User Guide
 
