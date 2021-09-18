@@ -33,6 +33,7 @@
    - `todo try app` Add a Todo task with description `try app`
    - `bye`: Exit the app
 6. Refer to the [Features](#features) sections for more features of Duke.
+
 ## Features 
 
 ### List All Tasks
