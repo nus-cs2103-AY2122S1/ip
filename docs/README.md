@@ -47,6 +47,7 @@ Format: `deadline {DESCRIPTION} /by {DEADLINE_DATE}`
 Examples:
 - `deadline Assignment 1 /by 2021-11-02`
 - `deadline School Project /by 2022-01-02`
+
 ![Screen-shot of deadline usage](images/deadline.png)
 
 ### `event` - Adding an event happening at a certain date
@@ -60,6 +61,7 @@ Format: `event {DESCRIPTION} /at {EVENT_DATE}`
 Examples:
 - `event Intern Interview /at 2021-12-03`
 - `event Computing Conference /at 2022-07-05`
+
 ![Screen-shot of event usage](images/event.png)
 
 ### `tag` - Add a tag to a task
@@ -73,7 +75,8 @@ Format: `tag {INDEX} #{TAG}`
 Examples:
 - `tag 2 #Due Soon`
 - `tag 4 #Important`
-  ![Screen-shot of tag usage](images/tag.png)
+
+![Screen-shot of tag usage](images/tag.png)
 
 ### `done` Mark a task as done
 
