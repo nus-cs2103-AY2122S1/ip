@@ -155,4 +155,4 @@ Data is automatically saved to the relevant files after each command.
 
 ### Editing the data files
 
-Tasks and Notes data are saved as text files `[JAR file location]/data/notes.txt` or `[JAR file location]/data/notes.txt`. Advanced users are welcome to update data directly by editing that data file.
+Tasks and Notes data are saved as text files `[JAR file location]/data/tasks.txt` and `[JAR file location]/data/notes.txt` respectively. Advanced users are welcome to update data directly by editing that data file.
