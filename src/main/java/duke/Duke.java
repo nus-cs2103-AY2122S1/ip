@@ -1,7 +1,9 @@
 package duke;
 
-import duke.command.Command;
+import duke.ui.MainWindow;
 import duke.ui.UserInterface;
+import javafx.stage.Stage;
+import duke.command.Command;
 
 import java.time.format.DateTimeFormatter;
 
@@ -13,11 +15,6 @@ import java.nio.file.Paths;
  */
 public class Duke {
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
     private UserInterface ui;
     private DateTimeFormatter dtformatter;
     private Storage storage;
@@ -26,13 +23,22 @@ public class Duke {
     /**
      * Class constructor.
      */
-    public Duke() {
-        ui = new UserInterface();
+    public Duke(MainWindow mw) {
+        ui = new UserInterface(mw);
         dtformatter = DateTimeFormatter.ISO_DATE;
         String home = System.getProperty("user.home");
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
         storage = new Storage(dukePath);
         taskList = storage.load(ui);
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public void respond(String input) {
+        Command command = Parser.parse(input);
+        command.execute(taskList, ui);
     }
 
     /**

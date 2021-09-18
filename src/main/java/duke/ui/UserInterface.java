@@ -1,5 +1,8 @@
 package duke.ui;
 
+import duke.Main;
+import javafx.stage.Stage;
+
 import java.util.Scanner;
 
 /**
@@ -7,12 +10,14 @@ import java.util.Scanner;
  */
 public class UserInterface {
     Scanner stdin;
+    private MainWindow mainWindow;
 
     /**
      * Class constructor.
      */
-    public UserInterface() {
+    public UserInterface(MainWindow mainWindow) {
         stdin = new Scanner(System.in);
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -24,19 +29,15 @@ public class UserInterface {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("----------------------");
-        System.out.println("Hello from\n" + logo);
-        System.out.println("----------------------");
-        System.out.println("What can I do for you?");
+        String greetingMessage = "Hello from\n" + logo;
+        mainWindow.print(greetingMessage);
     }
 
     /**
      * Writes a farewell message.
      */
     public void displayFarewell() {
-        System.out.println("----------------------");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("----------------------");
+        mainWindow.print("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -44,7 +45,7 @@ public class UserInterface {
      * @param message The message to be written
      */
     public void print(String message) {
-        System.out.println(message);
+        mainWindow.print(message);
     }
 
     /**
@@ -52,7 +53,7 @@ public class UserInterface {
      * @param error The error message to be written
      */
     public void displayError(String error) {
-        System.err.println(error);
+        mainWindow.print(error);
     }
 
     /**
