@@ -100,7 +100,6 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("OOPS!! Something went wrong");
         }
-
         return dataFile;
     }
 
@@ -127,6 +126,8 @@ public class Storage {
             String type = t.getType();
             String description = t.getDescription();
             String isDone = t.getStatusIcon().equals("X") ? "1" : "0";
+
+            assert type.equals("T") || type.equals("D") || type.equals("E"): "invalid task type";
 
             String line = type + "/" + isDone + "/" + description;
 
