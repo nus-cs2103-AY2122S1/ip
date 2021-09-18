@@ -2,6 +2,11 @@
 
 ## Features 
 
+#### Notes about command format:
+* Words in UPPER_CASE are the parameters to be supplied by the user.  
+e.g. in `done INDEX`, `INDEX` is a parameter which can be used as `done 2`.
+* Usage of items in square brackets are dependent on the desired command.  
+
 ### Adding tasks: `todo`/`deadline`/`event`
 
 Adds the task of specified task type to the user's task list.
@@ -124,7 +129,7 @@ There is no need to save manually.
 &nbsp;  
 &nbsp;  
 
-### Editing the data file.
+### Editing the data file
 
 Duke's task list data is saved as a .txt file `[JAR file location]/data/data.txt`.  
 Users are encouraged *NOT* to update the data file unless they are sure of the valid format. If changes  
