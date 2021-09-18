@@ -19,6 +19,8 @@ public class Task{
     boolean compleated;
     String type;
     Date date;
+    Priority priority;
+
 
     /**
      * Defult constructor,
@@ -28,10 +30,11 @@ public class Task{
      * @param type action type 
      * @param date Date object of the task
      */
-    public Task(String actionName, boolean compleated, String type, String date){
+    public Task(String actionName, boolean compleated, String type, String date, Priority priority){
         this.actionName = actionName;
         this.compleated = compleated;
         this.type = type;
+        this.priority = priority;
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             this.date = format.parse(date);
@@ -79,6 +82,12 @@ public class Task{
     public Date getDate(){
         return this.date;
     }
+
+     /**
+      * To return the priority of the task.
+      * @return Priority of task
+      */
+     public Priority getPriority(){ return this.priority; }
 
     /**
      * Defult to String.

@@ -11,8 +11,8 @@ public class ToDo extends Task{
      * Defult constructor,
      * no need the date info so justput ramdom.
      */
-    public ToDo(String actionName, boolean compleated, String type) {
-        super(actionName, compleated, type, "1/1/2000 0000");
+    public ToDo(String actionName, boolean compleated, String type, Priority p) {
+        super(actionName, compleated, type, "1/1/2000 0000", p);
     }
 
     /**
@@ -25,6 +25,6 @@ public class ToDo extends Task{
         if (this.compleated){
             check = "[X]";
         }
-        return "[T] " + check + " " + this.actionName;
+        return "[T] " + check + " " + this.actionName + "#" + this.priority.toString();
     }
 }

@@ -1,13 +1,13 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
 
     ArrayList<Task> list;
     int curSize;
     ArrayList<String[]> data;
-
 
     public TaskList(ArrayList<String[]> data){
         this.list = new ArrayList<>();
@@ -20,10 +20,13 @@ public class TaskList {
     }
 
     public void LoadTask(ArrayList<String[]> data) throws InputNotValidError{
+
         for (String[] each : data){
+            System.out.println(Arrays.toString(each));
             String[] actions = new String[2];
             String actionName = each[0];
             boolean done = true;
+            String priority = each[each.length - 1 ];
             if(each[1].equals(" 0 ")){
                 done = false;
             }
@@ -32,15 +35,15 @@ public class TaskList {
                 actions[1] = each[2].substring(1, each[2].length());
             }else if(actionName.equals("E ")){
                 actions[0] = "event";
-                actions[1] = each[2].substring(1) + "/at"  + each[3].substring(1, each[3].length());
+                actions[1] = each[2].substring(1) + "/at "  + each[3].substring(1, each[3].length());
             }else if(actionName.equals("D ")){
                 actions[0] = "deadline";
-                actions[1] = each[2].substring(1) + "/by" + each[3].substring(1, each[3].length());
+                actions[1] = each[2].substring(1) + "/by " + each[3].substring(1, each[3].length());
             }
-            Parser hitoryData = new Parser(actions[0] + " " + actions[1]);
+            System.out.println(actions[0] + " " + actions[1] + " #" + priority);
+            Parser hitoryData = new Parser(actions[0] + " " + actions[1] + " #" + priority);
             this.actionHalder(hitoryData, done, true);
         }
-
     }
 
     public String addTask(Task task, boolean fromdata){
@@ -68,10 +71,7 @@ public class TaskList {
                 "       " + task.toString() + "\n" +
                 "   ____________________________________________";
         return item;
-
     }
-
-
 
     public String actionHalder(Parser actionList, boolean done, boolean fromData) throws InputNotValidError{
         boolean validCommand = false;
@@ -97,13 +97,13 @@ public class TaskList {
                     res =  this.done(num);
                     break;
                 case TODO:
-                    res =  this.addToDo(actionList.getActionList(), done, fromData);
+                    res =  this.addToDo(actionList.getActionList(), done, fromData, actionList.getPriority());
                     break;
                 case DEADLINE:
-                    res = this.addDeadline(actionList.getActionList(), done, fromData);
+                    res = this.addDeadline(actionList.getActionList(), done, fromData, actionList.getPriority());
                     break;
                 case EVENT:
-                    res =  this.addEvent(actionList.getActionList(), done, fromData);
+                    res =  this.addEvent(actionList.getActionList(), done, fromData, actionList.getPriority());
                     break;
                 case DELETE:
                     int num2 = Integer.parseInt(actionList.getActionList());
@@ -119,24 +119,26 @@ public class TaskList {
         return res;
     }
 
-    public String addToDo(String action, boolean done, boolean fromdata){
-        ToDo newTask = new ToDo(action, done, "T");
+    public String addToDo(String action, boolean done, boolean fromdata, Priority p){
+        ToDo newTask = new ToDo(action, done, "T", p);
         return this.addTask(newTask, fromdata);
     }
 
-    public String addDeadline(String action, boolean done, boolean fromdata){
+    public String addDeadline(String action, boolean done, boolean fromdata, Priority p){
         String actionlist[] = action.split("/by");
         action = actionlist[0];
+        assert action.length() >= 0;
         String date = actionlist[1];
-        Deadline newTask = new Deadline(action, done, date, "D");
+        Deadline newTask = new Deadline(action, done, date, "D", p);
         return this.addTask(newTask, fromdata);
     }
 
-    public String addEvent(String action, boolean done, boolean fromdata){
+    public String addEvent(String action, boolean done, boolean fromdata, Priority p){
         String actionlist[] = action.split("/at");
         action = actionlist[0];
+        assert action.length() >= 0;
         String date = actionlist[1];
-        Event newTask = new Event(action, done, date, "E");
+        Event newTask = new Event(action, done, date, "E", p);
         return this.addTask(newTask, fromdata);
     }
 
@@ -181,7 +183,7 @@ public class TaskList {
                 "   Here are the tasks in your list:\n";
         for (int i = 0; i < curSize; i++){
             Task eachTask = this.list.get(i);
-            String each = String.valueOf(i + 1) + ". " + eachTask.toString();
+            String each = String.valueOf(i + 1) + ". " + eachTask.toString() ;
             res += each + "\n";
         }
         res += "    ____________________________________________";

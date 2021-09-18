@@ -12,8 +12,8 @@ public class Deadline extends Task{
     /**
      * Defult constructor,
      */
-    public Deadline(String actionName, boolean compleated, String date, String type) {
-        super(actionName, compleated, type, date);
+    public Deadline(String actionName, boolean compleated, String date, String type, Priority p) {
+        super(actionName, compleated, type, date, p);
     }
     
     /**
@@ -29,7 +29,7 @@ public class Deadline extends Task{
         if (this.compleated){
             check = "[X]";
         }
-        return "[D] " + check + " " + this.actionName + "(by: " + dateFormat.format(date) + ")";
+        return "[D] " + check + " " + this.actionName + "(by: " + dateFormat.format(date) + ")" + "#" + this.priority.toString();
     }
 }
 

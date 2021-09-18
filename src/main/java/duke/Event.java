@@ -11,8 +11,8 @@ public class Event extends Task{
     /**
      * Defult constructor,
      */
-    public Event(String actionName, boolean compleated, String date, String type){
-        super(actionName, compleated, type, date);
+    public Event(String actionName, boolean compleated, String date, String type, Priority p){
+        super(actionName, compleated, type, date, p);
     }
 
     /**
@@ -27,6 +27,6 @@ public class Event extends Task{
         if (this.compleated){
             check = "[X]";
         }
-        return "[E] " + check + " " + this.actionName + "(at: " + dateFormat.format(date) + ")";
+        return "[E] " + check + " " + this.actionName + "(at: " + dateFormat.format(date) + ")"  + "#" + this.priority.toString();
     }
 }

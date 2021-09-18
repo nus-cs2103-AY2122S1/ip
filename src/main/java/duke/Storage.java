@@ -19,7 +19,6 @@ import java.util.Date;
   * this class is to deal with 
   * loading tasks from the file and saving tasks in the file.
   * </pre>
-  * @param <String> Filepath path to the data txt file
   */
 public class Storage {
 
@@ -68,17 +67,18 @@ public class Storage {
             String type = eachtask.getType();
             String done = "0";
             String output;
+            String priority = eachtask.getPriority().toString();
  
             if (compleated){
                 done = "1";
             }
 
             if(type.equals("T")){
-                output = type + " | " + done + " | " + actionname;
+                output = type + " | " + done + " | " + actionname + "|" + priority;
             }else{
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
                 Date date = eachtask.getDate();
-                output = type + " | " + done + " | " + actionname + " | " + dateFormat.format(date) ;
+                output = type + " | " + done + " | " + actionname + " | " + dateFormat.format(date) + "|" + priority;;
             }
             bw.write(output);
             bw.newLine();

@@ -32,7 +32,7 @@ public class Parser {
             return Action.BYE;
         }else if(action1.equals("find")){
             return Action.FIND;
-        } else{
+        }else{
             return Action.UNKNOWN;
         }
     }
@@ -47,8 +47,25 @@ public class Parser {
     }
 
     public String getActionList(){
-        String[] splited = this.command.split(" ", 2);
-        return splited[1];
+        String[] split = this.command.split(" ", 2);
+        String[] finalSplit = split[1].split("#", 2);
+        return finalSplit[0];
+    }
+
+    public Priority getPriority(){
+        String[] split = this.command.split(" ", 2);
+        String[] finalSplit = split[1].split("#", 2);
+        Priority priority;
+        if (finalSplit[1].equals("HIGH")){
+            priority = Priority.HIGH;
+        }else if(finalSplit[1].equals("MID")){
+            priority = Priority.MID;
+        }else if(finalSplit[1].equals("LOW")){
+            priority = Priority.LOW;
+        }else{
+            priority = Priority.UNKNOWN;
+        }
+        return priority;
     }
 
     public boolean isValid() throws InputNotValidError{
