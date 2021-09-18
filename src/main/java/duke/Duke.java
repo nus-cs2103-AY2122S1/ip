@@ -70,18 +70,14 @@ public class Duke {
      * @param input The user's input to Duke.
      * @return A String containing the message to be shown to the user in the GUI.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         Parser parser = new Parser(tasks);
 
-        try {
-            Command command = parser.parse(input);
-            if (command.isBye()) {
-                Platform.exit();
-            }
-            return command.execute(tasks, storage);
-        } catch (DukeException e) {
-            return e.getMessage();
+        Command command = parser.parse(input);
+        if (command.isBye()) {
+            Platform.exit();
         }
+        return command.execute(tasks, storage);
     }
 
     public static void main(String[] args) {

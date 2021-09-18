@@ -41,9 +41,9 @@ public class UpdateParser {
 
 
             switch (updateMethod) {
-            case "datetime":
+            case "dt":
                 return updateDateTimeParse(updateContent);
-            case "description":
+            case "desc":
                 return updateDescriptionParse(updateContent);
             case "full":
                 return updateFullParse(updateContent);

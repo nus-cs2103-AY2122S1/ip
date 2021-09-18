@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -35,13 +36,13 @@ public class DoneCommand extends Command {
      * as done.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             Task completedTask = tasks.markDone(taskNumber);
             storage.save(tasks);
             return Ui.getDoneMessage(completedTask);
         } catch (IndexOutOfBoundsException e) {
-            return INVALID_TASK_NUMBER_MESSAGE;
+            throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
         }
     }
 }

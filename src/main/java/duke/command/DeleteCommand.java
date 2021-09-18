@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -35,13 +36,13 @@ public class DeleteCommand extends Command {
      * deleted and also shows the number of tasks left in the task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             Task removedTask = tasks.deleteTask(taskNumber);
             storage.save(tasks);
             return Ui.getDeleteMessage(removedTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {
-            return INVALID_TASK_NUMBER_MESSAGE;
+            throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
         }
     }
 }
