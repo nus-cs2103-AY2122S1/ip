@@ -1,4 +1,5 @@
-event x | 12-03-2019 1200/ false
-todo x/ true
-todo y/ false
-deadline z | 20-10-2021 0700/ false
+event hey | 21-10-1978 1300/ true
+deadline x | 21-10-2018 1500/ true
+todo read book/ true
+todo write book/ false
+todo xyz/ false

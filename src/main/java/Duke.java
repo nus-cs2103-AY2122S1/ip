@@ -9,46 +9,6 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
-    public String getResponse(String input) {
-        try {
-            if (input.equals("bye")) {
-                storage.saveTasksToFile();
-                return ui.exit();
-            } else if (input.equals("list")) {
-                storage.saveTasksToFile();
-                return ui.retrieveList();
-            } else if (input.startsWith("done")) {
-                storage.saveTasksToFile();
-                InputHandler doneInputHandler = new DoneInput(ui, taskList);
-                return doneInputHandler.handle(input);
-            } else if (input.startsWith("delete")) {
-                storage.saveTasksToFile();
-                InputHandler deleteInputHandler = new DeleteInput(ui, taskList);
-                return deleteInputHandler.handle(input);
-            } else if (input.startsWith("todo")) {
-                storage.saveTasksToFile();
-                InputHandler todoInputHandler = new TodoInput(ui, taskList);
-                return todoInputHandler.handle(input);
-            } else if (input.startsWith("deadline")) {
-                storage.saveTasksToFile();
-                InputHandler deadlineInputHandler = new DeadlineInput(ui, taskList);
-                return deadlineInputHandler.handle(input);
-            } else if (input.startsWith("event")) {
-                storage.saveTasksToFile();
-                InputHandler eventInputHandler = new EventInput(ui, taskList);
-                return eventInputHandler.handle(input);
-            } else if (input.startsWith("find")) {
-                storage.saveTasksToFile();
-                InputHandler findInputHandler = new FindInput(ui, taskList);
-                return findInputHandler.handle(input);
-            } else {
-                throw new UnknownInputException("error");
-            }
-        } catch (DukeException e) {
-            return ui.getError(e.getMessage());
-        }
-    }
-
     public enum InputCommands {
         bye, list, done, delete, todo, deadline, event
     }
@@ -67,7 +27,7 @@ public class Duke {
 
     /**
      * Constructor for Duke.
-     * Loads if there are any existing tasks in storage.
+     * Loads existing tasks to the file (if any).
      *
      * @param filePath filepath
      */
@@ -90,6 +50,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String userCommand = ui.echoCommand();
+                CommandHandler commandHandler = new CommandHandler(ui, taskList);
                 if (userCommand.equals("bye")) {
                     System.out.println(ui.exit());
                     isExit = true;
@@ -97,32 +58,29 @@ public class Duke {
                     System.out.println(ui.retrieveList());
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("done")) {
-                    InputHandler doneInputHandler = new DoneInput(ui, taskList);
-                    System.out.println(doneInputHandler.handle(userCommand));
+                    System.out.println(commandHandler.handleDone(userCommand));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("delete")) {
-                    InputHandler deleteInputHandler = new DeleteInput(ui, taskList);
-                    System.out.println(deleteInputHandler.handle(userCommand));
+                    System.out.println(commandHandler.handleDelete(userCommand));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("todo")) {
-                    InputHandler todoInputHandler = new TodoInput(ui, taskList);
-                    System.out.println(todoInputHandler.handle(userCommand));
+                    Task todoTask = Parser.parserForTodoTasks(userCommand);
+                    System.out.println(commandHandler.handleTodo(todoTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("deadline")) {
-                    InputHandler deadlineInputHandler = new DeadlineInput(ui, taskList);
-                    System.out.println(deadlineInputHandler.handle(userCommand));
+                    Task deadlineTask = Parser.parserForDeadlineTasks(userCommand);
+                    System.out.println(commandHandler.handleDeadline(deadlineTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("event")) {
-                    InputHandler eventInputHandler = new EventInput(ui, taskList);
-                    System.out.println(eventInputHandler.handle(userCommand));
+                    Task eventTask = Parser.parserForEventTasks(userCommand);
+                    System.out.println(commandHandler.handleEvent(eventTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.equals("listInputs")) {
                     for (InputCommands inputs : InputCommands.values()) {
                         System.out.println(inputs);
                     }
                 } else if (userCommand.startsWith("find")) {
-                    InputHandler findInputHandler = new FindInput(ui, taskList);
-                    System.out.println(findInputHandler.handle(userCommand));
+                    System.out.println(commandHandler.handleFind(userCommand));
                     storage.saveTasksToFile();
                 } else {
                     throw new UnknownInputException("error");
@@ -130,6 +88,44 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(ui.getError(e.getMessage()));
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            CommandHandler commandHandler = new CommandHandler(ui, taskList);
+            if (input.equals("bye")) {
+                storage.saveTasksToFile();
+                return ui.exit();
+            } else if (input.equals("list")) {
+                storage.saveTasksToFile();
+                return ui.retrieveList();
+            } else if (input.startsWith("done")) {
+                storage.saveTasksToFile();
+                return commandHandler.handleDone(input);
+            } else if (input.startsWith("delete")) {
+                storage.saveTasksToFile();
+                return commandHandler.handleDelete(input);
+            } else if (input.startsWith("todo")) {
+                storage.saveTasksToFile();
+                Task todoTask = Parser.parserForTodoTasks(input);
+                return commandHandler.handleTodo(todoTask);
+            } else if (input.startsWith("deadline")) {
+                storage.saveTasksToFile();
+                Task deadlineTask = Parser.parserForDeadlineTasks(input);
+                return commandHandler.handleDeadline(deadlineTask);
+            } else if (input.startsWith("event")) {
+                storage.saveTasksToFile();
+                Task eventTask = Parser.parserForEventTasks(input);
+                return commandHandler.handleEvent(eventTask);
+            } else if (input.startsWith("find")) {
+                storage.saveTasksToFile();
+                return commandHandler.handleFind(input);
+            } else {
+                throw new UnknownInputException("error");
+            }
+        } catch (DukeException e) {
+            return ui.getError(e.getMessage());
         }
     }
 

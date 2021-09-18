@@ -12,8 +12,8 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
-        this.atAsDate = DateTimeConversion.textToDate(at);
-        dateAsString = DateTimeConversion.dateToText(this.atAsDate);
+        this.atAsDate = Parser.textToDate(at);
+        dateAsString = Parser.dateToText(this.atAsDate);
     }
 
     @Override

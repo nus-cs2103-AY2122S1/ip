@@ -12,8 +12,8 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.byAsDate = DateTimeConversion.textToDate(by);
-        dateAsString = DateTimeConversion.dateToText(this.byAsDate);
+        this.byAsDate = Parser.textToDate(by);
+        dateAsString = Parser.dateToText(this.byAsDate);
     }
 
     @Override
