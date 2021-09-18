@@ -62,17 +62,7 @@ public class TaskList {
 
         // Case Todo
         if (parser.isTodo(group[0]) && group.length > 1) {
-            String todoToAdd = input.substring(5); // name of the task is after "todo" and space
-            Task newTodo = new Todo(todoToAdd);
-            inputs.add(newTodo);
-
-            storage.writeTaskToFile(inputs.get(0).toString() + System.lineSeparator());
-
-            for (int i = 1; i < inputs.size(); i++) {
-                storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
-            }
-
-            return ui.displayAddTaskMessage(newTodo) + "\n" + ui.displayTaskNumber(this);
+            return addTodo(input, inputs, storage, ui);
         }
         if (parser.isTodo(group[0]) && group.length == 1) {
             return ui.displayTodoEmptyMessage();
@@ -80,38 +70,12 @@ public class TaskList {
 
         // Case Deadline
         if (parser.isDeadline(group[0]) && input.contains(" /by ")) {
-            String[] ddlGroup = input.split(" /by ");
-            String ddlToAdd = ddlGroup[0].substring(9); // name of the task is after "deadline" and space
-            String ddlByTime = ddlGroup[1];
-            LocalDateTime dateTime = LocalDateTime.parse(ddlByTime, parser.getFormatter());
-            Task newDeadline = new Deadline(ddlToAdd, dateTime);
-            inputs.add(newDeadline);
-
-            storage.writeTaskToFile(inputs.get(0).toString() + System.lineSeparator());
-
-            for (int i = 1; i < inputs.size(); i++) {
-                storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
-            }
-
-            return ui.displayAddTaskMessage(newDeadline) + ui.displayTaskNumber(this);
+            return addDeadline(input, inputs, storage, ui);
         }
 
         // Case Event
         if (parser.isEvent(group[0]) && input.contains(" /at ")) {
-            String[] eveGroup = input.split(" /at ");
-            String eveToAdd = eveGroup[0].substring(6); // name of the task is after "event" and space
-            String eveAtTime = eveGroup[1];
-            LocalDateTime dateTime = LocalDateTime.parse(eveAtTime, parser.getFormatter());
-            Task newEvent = new Event(eveToAdd, dateTime);
-            inputs.add(newEvent);
-
-            storage.writeTaskToFile(inputs.get(0).toString() + System.lineSeparator());
-
-            for (int i = 1; i < inputs.size(); i++) {
-                storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
-            }
-
-            return ui.displayAddTaskMessage(newEvent) + ui.displayTaskNumber(this);
+            return addEvent(input, inputs, storage, ui);
         }
 
         assert !group[0].equals("todo") && !group[0].equals("deadline") && !group[0].equals("event");
@@ -208,4 +172,78 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Adds a Todo object to the TaskList.
+     *
+     * @param input The user input.
+     * @param inputs An ArrayList of Tasks.
+     * @param storage The storage of Duke.
+     * @param ui The ui of Duke.
+     * @return The Duke's response.
+     */
+    private String addTodo(String input, ArrayList<Task> inputs, Storage storage, Ui ui) {
+        String todoToAdd = input.substring(5); // name of the task is after "todo" and space
+        Task newTodo = new Todo(todoToAdd);
+        inputs.add(newTodo);
+
+        storage.writeTaskToFile(inputs.get(0).toString() + System.lineSeparator());
+
+        for (int i = 1; i < inputs.size(); i++) {
+            storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
+        }
+
+        return ui.displayAddTaskMessage(newTodo) + "\n" + ui.displayTaskNumber(this);
+    }
+
+    /**
+     * Adds a Deadline object to the TaskList.
+     *
+     * @param input The user input.
+     * @param inputs An ArrayList of Tasks.
+     * @param storage The storage of Duke.
+     * @param ui The ui of Duke.
+     * @return The Duke's response.
+     */
+    private String addDeadline(String input, ArrayList<Task> inputs, Storage storage, Ui ui) {
+        String[] ddlGroup = input.split(" /by ");
+        String ddlToAdd = ddlGroup[0].substring(9); // name of the task is after "deadline" and space
+        String ddlByTime = ddlGroup[1];
+        LocalDateTime dateTime = LocalDateTime.parse(ddlByTime, parser.getFormatter());
+        Task newDeadline = new Deadline(ddlToAdd, dateTime);
+        inputs.add(newDeadline);
+
+        storage.writeTaskToFile(inputs.get(0).toString() + System.lineSeparator());
+
+        for (int i = 1; i < inputs.size(); i++) {
+            storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
+        }
+
+        return ui.displayAddTaskMessage(newDeadline) + ui.displayTaskNumber(this);
+    }
+
+    /**
+     * Adds an Event object to the TaskList.
+     *
+     * @param input The user input.
+     * @param inputs An ArrayList of Tasks.
+     * @param storage The storage of Duke.
+     * @param ui The ui of Duke.
+     * @return The Duke's response.
+     */
+    private String addEvent(String input, ArrayList<Task> inputs, Storage storage, Ui ui) {
+        String[] eveGroup = input.split(" /at ");
+        String eveToAdd = eveGroup[0].substring(6); // name of the task is after "event" and space
+        String eveAtTime = eveGroup[1];
+        LocalDateTime dateTime = LocalDateTime.parse(eveAtTime, parser.getFormatter());
+        Task newEvent = new Event(eveToAdd, dateTime);
+        inputs.add(newEvent);
+
+        storage.writeTaskToFile(inputs.get(0).toString() + System.lineSeparator());
+
+        for (int i = 1; i < inputs.size(); i++) {
+            storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
+        }
+
+        return ui.displayAddTaskMessage(newEvent) + ui.displayTaskNumber(this);
+    }
 }
