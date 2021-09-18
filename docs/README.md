@@ -269,3 +269,28 @@ Expected Outcome:
 ```
 poof!
 ```
+
+
+
+## Acknowledgements
+
+Parts of the code base are either reused or inspired by the following sources
+
+### Reused from 
+
+[Jeffry Lum](https://se-education.org/guides/tutorials/javaFxPart4.html)
+1. MainWindow.java
+2. DialogBox.java
+3. MainWindow.fxml
+4. DialogBox.fxml
+
+### Inspired by 
+
+[Gan Hong Yao](https://github.com/nus-cs2103-AY2122S1/ip/pull/81/files#)
+1. DialogBox.fxml
+
+[Ivan](https://github.com/wpinrui/ip/blob/master/README.md)
+1. For the acknowledgements part in user guide
+
+[Tan Zheng Jie, Dickson](https://github.com/nus-cs2103-AY2122S1/ip/pull/51/files#)
+1. Splitting user input from addEvent and addDeadline in TaskList.java
