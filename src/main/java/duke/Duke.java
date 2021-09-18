@@ -30,16 +30,7 @@ public class Duke extends Application {
     private final Storage storage;
     private final TaskList tasks;
     private final Gui gui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-    private final Image userimg = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeimg = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
-
+    
     public enum RequestType {
         DEFAULT,
         FIND,
@@ -109,11 +100,11 @@ public class Duke extends Application {
                 case UPDATE:
                     return updateTask(input);
                 case DEADLINE:
-                    return deadline(input);
+                    return makeDeadlineTask(input);
                 case EVENT:
-                    return event(input);
+                    return makeEventTask(input);
                 case TODO:
-                    return todo(input);
+                    return makeTodoTask(input);
                 default:
                     return tasks.list();
             }
@@ -127,7 +118,7 @@ public class Duke extends Application {
      * @param userInput Name of task
      * @param actionType Type of action
      */
-    public String echo(String userInput, String actionType) {
+    public String sayAction(String userInput, String actionType) {
         assert actionType.equals("removed") || actionType.equals("added")  || actionType.equals("updated")
                 : "Unknown action type found in echo";
         return gui.dukeResponse("Got it sir, I have " + actionType + " this task:\n "
@@ -160,7 +151,7 @@ public class Duke extends Application {
             int task = Integer.parseInt(userInput.substring(7));
             if(task > 0 && task <= tasks.getSize()){
                 Task t = tasks.deleteTask(task);
-                return echo(t.toString(), "removed");
+                return sayAction(t.toString(), "removed");
             } else {
                 return gui.dukeResponse("You have entered an invalid task number Sir, please input again.\n");
             }
@@ -209,11 +200,11 @@ public class Duke extends Application {
                 if(index == tasks.getSize() + 1){
                     tasks.addTask(t);
                     storage.addNewTask(t);
-                    return echo(t.toString(), "added");
+                    return sayAction(t.toString(), "added");
                 } else {
                     tasks.updateTask(t, index);
                     storage.writeToFile(tasks);
-                    return echo(t.toString(), "updated");
+                    return sayAction(t.toString(), "updated");
                 }
                 
             } catch (Exception e) {
@@ -224,7 +215,7 @@ public class Duke extends Application {
         }
     }
     
-    private String deadline(String userInput) {
+    private String makeDeadlineTask(String userInput) {
         return updateDeadline(userInput, tasks.getSize() + 1);
     }
     
@@ -240,17 +231,17 @@ public class Duke extends Application {
             if (index == tasks.getSize() + 1) {
                 tasks.addTask(t);
                 storage.addNewTask(t);
-                return echo(t.toString(), "added");
+                return sayAction(t.toString(), "added");
             } else {
                 tasks.updateTask(t, index);
                 storage.writeToFile(tasks);
-                return echo(t.toString(), "updated");
+                return sayAction(t.toString(), "updated");
             }
 
         }
     }
     
-    private String event(String userInput) {
+    private String makeEventTask(String userInput) {
         return updateEvent(userInput, tasks.getSize() + 1);
     }
     
@@ -262,11 +253,11 @@ public class Duke extends Application {
             if (index == tasks.getSize() + 1) {
                 tasks.addTask(t);
                 storage.addNewTask(t);
-                return echo(t.toString(), "added");
+                return sayAction(t.toString(), "added");
             } else {
                 tasks.updateTask(t, index);
                 storage.writeToFile(tasks);
-                return echo(t.toString(), "updated");
+                return sayAction(t.toString(), "updated");
             }
         } catch (DukeException e) {
             return gui.dukeResponse(e.getMessage());
@@ -277,7 +268,7 @@ public class Duke extends Application {
         }
     }
     
-    private String todo(String userInput) {
+    private String makeTodoTask(String userInput) {
         return updateTodo(userInput, tasks.getSize() + 1);
     }
     
