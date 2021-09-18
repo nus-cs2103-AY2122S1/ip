@@ -4,21 +4,16 @@ Duke is a program that helps you to manage your tasks via a GUI interface.
 ## Features 
 Duke supports 3 types of tasks, `To-Do`, `Deadline` and `Event`.
 <br>
-Duke also saves the list to storage.
-### Feature-ABC
-
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
+Duke also saves the list to storage. Users can also mark tasks as 
+<br>
+done, delete tasks, tag tasks and see all the tasks in a list.
 
 ## Usage
-````
-Notes about the command format: Words surrounded by `{}` are parameters<br>
-provided by the user. Example: todo {DESCRIPTION}, where DESCRIPTION <br>
+```
+Notes about the command format: Words surrounded by `{}` are parameters
+provided by the user. Example: todo {DESCRIPTION}, where DESCRIPTION 
 is a parameter provided by the user as the description of the To-Do task.
-````
+```
 ### `list` - View the full list of tasks.
 
 Displays the current list of tasks.
