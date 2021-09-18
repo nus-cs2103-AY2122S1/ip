@@ -47,12 +47,6 @@ Prints the help manual, with details on usage.
 - `help d`
 - `help`
 
-### `greet` - Duke welcomes you
-
-Duke welcomes you to use DukeAgain.
-
-**Usage**: `greet`
-
 ### `todo` or `t` - Add todo
 
 Adds an todo task with a *description*.
