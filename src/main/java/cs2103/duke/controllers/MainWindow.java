@@ -1,6 +1,7 @@
 package cs2103.duke.controllers;
 
-import cs2103.duke.DukeException;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import cs2103.duke.Duke;
+import javafx.util.Duration;
 
 /**
  * Controller for cs2103.duke.controllers.MainWindow. Provides the layout for the other controls.
@@ -51,10 +53,29 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        if (input.equals("bye")) {
+            addDialog(input, response);
+            // solution for delay before closing the window adapted from:
+            // https://github.com/felissaf/ip/blob/master/src/main/java/myjournal/MainWindow.java.
+            PauseTransition goodbyePause = new PauseTransition(Duration.seconds(2));
+            goodbyePause.setOnFinished(event -> Platform.exit());
+            goodbyePause.play();
+        } else {
+            addDialog(input, response);
+            userInput.clear();
+        }
+    }
+
+    /**
+     * A helper method to add dialog for the user and duke.
+     *
+     * @param input    The user's input.
+     * @param response The duke's response.
+     */
+    private void addDialog(String input, String response) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+                DialogBox.getDukeDialog(response, dukeImage));
     }
 }

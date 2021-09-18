@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Duke {
     private TaskList tasks;
     private Ui ui;
+    private boolean canExit = false;
 
     public Duke() {
         Storage storage = new Storage();

@@ -29,19 +29,6 @@ public class Ui {
     }
 
     /**
-     * This method takes an input string and formats it by including horizontal lines above
-     * and below the input string.
-     *
-     * @param str Input string to be sandwiched.
-     * @return The original string sandwiched between two horizontal lines.
-     */
-    public static String sandwich(String str) {
-        return "______________________________________\n"
-                + str + "\n"
-                + "______________________________________";
-    }
-
-    /**
      * Shows the welcome message when the user runs Duke.
      *
      * @return the welcome message to the user.
@@ -72,7 +59,6 @@ public class Ui {
         // Goodbye message
         String goodbye = "Thank you for using Duke: Level " + lv + "\n"
                 + "See you soon!";
-
         return goodbye;
     }
 
