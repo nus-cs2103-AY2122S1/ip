@@ -73,7 +73,7 @@ Format: `tag {INDEX} #{TAG}`
 Examples:
 - `tag 2 #Due Soon`
 - `tag 4 #Important`
-  ![Screen-shot of tag usage](tag/event.png)
+  ![Screen-shot of tag usage](images/tag.png)
 
 ### `done` Mark a task as done
 
