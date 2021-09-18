@@ -87,13 +87,15 @@ public class Duke {
                     Task eventTask = Parser.parseEventTasks(userCommand);
                     System.out.println(commandHandler.handleEvent(eventTask));
                     storage.saveTasksToFile();
+                } else if (userCommand.startsWith("find")) {
+                    System.out.println(commandHandler.handleFind(userCommand));
+                    storage.saveTasksToFile();
+                } else if (userCommand.startsWith("tag")) {
+                    System.out.println(commandHandler.handleTag(userCommand));
                 } else if (userCommand.equals("listInputs")) {
                     for (InputCommands inputs : InputCommands.values()) {
                         System.out.println(inputs);
                     }
-                } else if (userCommand.startsWith("find")) {
-                    System.out.println(commandHandler.handleFind(userCommand));
-                    storage.saveTasksToFile();
                 } else {
                     throw new UnknownInputException("error");
                 }
@@ -133,6 +135,9 @@ public class Duke {
             } else if (input.startsWith("find")) {
                 storage.saveTasksToFile();
                 return commandHandler.handleFind(input);
+            } else if (input.startsWith("tag")) {
+                storage.saveTasksToFile();
+                return commandHandler.handleTag(input);
             } else {
                 throw new UnknownInputException("error");
             }

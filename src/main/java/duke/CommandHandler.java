@@ -122,4 +122,21 @@ public class CommandHandler {
         return ui.doneTask(taskAtIndex);
     }
 
+    public String handleTag(String tagCommand) throws EmptyDescriptionException {
+        if (tagCommand.length() < 7) {
+            throw new EmptyDescriptionException("error");
+        }
+
+        assert (tagCommand.length() > 7);
+
+        char indexOfTask = tagCommand.charAt(4);
+        int index = Integer.parseInt(String.valueOf(indexOfTask));
+
+        Task taskAtIndex = taskList.getTask(index);
+
+        String tag = tagCommand.substring(6);
+        taskAtIndex.setTag(tag);
+
+        return ui.taggedTask(taskAtIndex);
+    }
 }

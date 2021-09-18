@@ -39,9 +39,8 @@ public class Parser {
         int isDoneIndex = storedTodoTask.indexOf("/");
         String isTaskDone = storedTodoTask.substring(isDoneIndex + 2);
         Task todoTask = new Todo(storedTodoTask.substring(5, isDoneIndex));
-        if (isTaskDone.equals("true")) {
-            todoTask.markAsDone();
-        }
+        setDoneStatusToStoredTask(isTaskDone, todoTask);
+        setTagToStoredTask(storedTodoTask, todoTask);
         return todoTask;
     }
 
@@ -82,10 +81,8 @@ public class Parser {
         String isTaskDone = storedDeadlineTask.substring(isDoneIndex + 2);
 
         Task deadlineTask = new Deadline(deadlineTaskDescription, by);
-
-        if (isTaskDone.equals("true")) {
-            deadlineTask.markAsDone();
-        }
+        setDoneStatusToStoredTask(isTaskDone, deadlineTask);
+        setTagToStoredTask(storedDeadlineTask, deadlineTask);
         return deadlineTask;
     }
 
@@ -126,12 +123,36 @@ public class Parser {
 
         String isTaskDone = storedEventTask.substring(isDoneIndex + 2);
 
-        Task eventTask = new Deadline(eventTaskDescription, at);
-
-        if (isTaskDone.equals("true")) {
-            eventTask.markAsDone();
-        }
+        Task eventTask = new Event(eventTaskDescription, at);
+        setDoneStatusToStoredTask(isTaskDone, eventTask);
+        setTagToStoredTask(storedEventTask, eventTask);
         return eventTask;
+    }
+
+    /**
+     * Sets the status of whether the stored task was marked at done or not by the user.
+     *
+     * @param isTaskDone True or false string value as set by the user for the stored task.
+     * @param task The task loaded based on the stored task.
+     */
+    public static void setDoneStatusToStoredTask(String isTaskDone, Task task) {
+        if (isTaskDone.equals("true")) {
+            task.markAsDone();
+        }
+    }
+
+    /**
+     * Sets the tag for the stored task as tagged by the user.
+     *
+     * @param storedTask The stored task.
+     * @param task The task loaded based on the stored task.
+     */
+    public static void setTagToStoredTask(String storedTask, Task task) {
+        if (storedTask.contains("#")) {
+            int indexOfTag = storedTask.indexOf("#");
+            String tag = storedTask.substring(indexOfTag);
+            task.setTag(tag);
+        }
     }
 
     /**

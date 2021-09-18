@@ -8,11 +8,19 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        if (this.getTag() != null) {
+            return "[T]" + super.toString() + " " + this.getTag();
+        } else {
+            return "[T]" + super.toString();
+        }
     }
 
     @Override
     public String toStringForStorage() {
-        return "todo " + super.toStringForStorage() + "/ " + super.isDone;
+        if (this.getTag() != null) {
+            return "todo " + super.toStringForStorage() + "/ " + super.isDone + " " + this.getTag();
+        } else {
+            return "todo " + super.toStringForStorage() + "/ " + super.isDone;
+        }
     }
 }

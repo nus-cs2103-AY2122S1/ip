@@ -18,11 +18,19 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateAsString + ")";
+        if (this.getTag() != null) {
+            return "[D]" + super.toString() + " (by: " + dateAsString + ")" + " " + this.getTag();
+        } else {
+            return "[D]" + super.toString() + " (by: " + dateAsString + ")";
+        }
     }
 
     @Override
     public String toStringForStorage() {
-        return "deadline " + super.toStringForStorage() + " | " + by + "/ " + super.isDone;
+        if (this.getTag() != null) {
+            return "deadline " + super.toStringForStorage() + " | " + by + "/ " + super.isDone + " " + this.getTag();
+        } else {
+            return "deadline " + super.toStringForStorage() + " | " + by + "/ " + super.isDone;
+        }
     }
 }

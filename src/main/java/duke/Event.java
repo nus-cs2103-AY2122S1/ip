@@ -18,11 +18,19 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateAsString + ")";
+        if (this.getTag() != null) {
+            return "[E]" + super.toString() + " (at: " + dateAsString + ")" + " " + this.getTag();
+        } else {
+            return "[E]" + super.toString() + " (at: " + dateAsString + ")";
+        }
     }
 
     @Override
     public String toStringForStorage() {
-        return "event " + super.toStringForStorage() + " | " + at + "/ " + super.isDone;
+        if (this.getTag() != null) {
+            return "event " + super.toStringForStorage() + " | " + at + "/ " + super.isDone + " " + this.getTag();
+        } else {
+            return "event " + super.toStringForStorage() + " | " + at + "/ " + super.isDone;
+        }
     }
 }

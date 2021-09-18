@@ -1,5 +1,5 @@
-event hey | 21-10-1978 1300/ true
-deadline x | 21-10-2018 1500/ true
-todo read book/ true
-todo write book/ false
+todo book stuff/ false #book
+todo more book stuff/ false
+event book meet | 24-05-2021 1400/ false
 todo xyz/ false
+todo abc/ false

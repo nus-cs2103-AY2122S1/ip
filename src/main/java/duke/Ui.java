@@ -97,4 +97,9 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("Sorry! There was an error loading your tasks! Please try again!");
     }
+
+    public String taggedTask(Task taskAtIndex) {
+        return String.format("I've tagged this task as:\n %s\n",
+                taskAtIndex.toString());
+    }
 }
