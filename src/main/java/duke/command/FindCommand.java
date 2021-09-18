@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.UI;
+import duke.error.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -17,7 +18,6 @@ public class FindCommand extends Command {
      * @param keyword Keyword used in searching the tasks.
      */
     public FindCommand(String keyword) {
-        super(false);
         this.keyword = keyword;
     }
 
@@ -30,7 +30,11 @@ public class FindCommand extends Command {
      * @return The execution result.
      */
     @Override
-    public String execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        if (keyword.equals("")) {
+            throw new DukeException("OOPS!! find needs a keyword.");
+        }
+
         String list = "";
 
         for (int i = 0; i < tasks.getSize(); i++) {

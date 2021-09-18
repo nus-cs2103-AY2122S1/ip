@@ -19,7 +19,6 @@ public class DoneCommand extends Command {
      * @param index Index of the task to be marked as done.
      */
     public DoneCommand(int index) {
-        super(false);
         this.index = index;
     }
 

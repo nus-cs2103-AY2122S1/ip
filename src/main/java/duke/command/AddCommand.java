@@ -21,7 +21,6 @@ public class AddCommand extends Command {
      * @param description Task description.
      */
     public AddCommand(String type, String description) {
-        super(false);
         this.type = type;
         this.description = description;
     }
@@ -37,12 +36,22 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        if (type.equals("todo")) {
+        if (description.equals("")) {
+            throw new DukeException("OOPS!! the description of add cannot be empty.");
+        }
+
+        switch (type) {
+        case "todo":
             tasks.addTodoTask(description);
-        } else if (type.equals("deadline")) {
+            break;
+        case "deadline":
             tasks.addDeadlineTask(description);
-        } else {
+            break;
+        case "event":
             tasks.addEventtask(description);
+            break;
+        default:
+            throw new DukeException("OOPS!! invalid task type");
         }
 
         try {

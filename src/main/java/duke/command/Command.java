@@ -9,17 +9,6 @@ import duke.task.TaskList;
  * Represents a command object.
  */
 public abstract class Command {
-    private boolean isExit;
-
-    /**
-     * Constructs a Command object.
-     *
-     * @param isExit
-     */
-    public Command (boolean isExit) {
-        this.isExit = isExit;
-    }
-
     /**
      * Executes the command
      *
@@ -30,13 +19,4 @@ public abstract class Command {
      * @throws DukeException If any errors occur.
      */
     public abstract String execute(TaskList tasks, UI ui, Storage storage) throws DukeException;
-
-    /**
-     * Check whether this command is an exit command.
-     *
-     * @return True if the command is an exit command. Otherwise, returns false.
-     */
-    public boolean isExitCommand() {
-        return isExit;
-    }
 }

@@ -8,14 +8,6 @@ import duke.task.TaskList;
  * Represents a command which lists the current tasks in the list.
  */
 public class ListCommand extends Command {
-
-    /**
-     * Constructs a ListCommand object.
-     */
-    public ListCommand() {
-        super(false);
-    }
-
     /**
      * Returns the current tasks in the list.
      *
