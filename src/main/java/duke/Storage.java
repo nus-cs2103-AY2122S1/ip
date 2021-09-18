@@ -58,28 +58,15 @@ public class Storage {
         while (sc.hasNext()) {
             String savedTask = sc.nextLine();
             Task task;
-            int isDoneIndex = savedTask.indexOf("/");
-            String isTaskDone = savedTask.substring(isDoneIndex + 2);
             if (savedTask.startsWith("todo")) {
-                task = new Todo(savedTask.substring(5, isDoneIndex));
+                task = Parser.parseStoredTodoTasks(savedTask);
             } else if (savedTask.startsWith("deadline")) {
-                int charIndex = savedTask.indexOf("|");
-                int byIndex = charIndex + 2;
-                String by = savedTask.substring(byIndex, isDoneIndex);
-                String deadlineTask = savedTask.substring(9, charIndex - 1);
-                task = new Deadline(deadlineTask, by);
+                task = Parser.parseStoredDeadlineTasks(savedTask);
             } else if (savedTask.startsWith("event")) {
-                int charIndex = savedTask.indexOf("|");
-                int atIndex = charIndex + 2;
-                String at = savedTask.substring(atIndex, isDoneIndex);
-                String eventTask = savedTask.substring(6, charIndex - 1);
-                task = new Event(eventTask, at);
+                task = Parser.parseStoredEventTasks(savedTask);
             } else {
                 System.out.println("Sorry! There was an error loading your tasks!");
                 break;
-            }
-            if (isTaskDone.equals("true")) {
-                task.markAsDone();
             }
             TaskList.getTaskList().add(task);
         }
