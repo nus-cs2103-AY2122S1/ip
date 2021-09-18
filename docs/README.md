@@ -20,13 +20,13 @@ Items can be filtered using a keyword filter.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo [description]` - Add ToDo
 
-Describe the action and its outcome.
+Adds a ToDo item into the list. It will contain a description string.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo buy groceries`
 
 Expected outcome:
 
@@ -35,3 +35,60 @@ Description of the outcome.
 ```
 expected output
 ```
+
+
+### `deadline [description] /by [YYYY-MM-DD]` - Add Deadline
+
+Adds a Deadline item into the list. It will contain a description string and the specified deadline.
+
+Example of usage:
+
+`deadline submit work /by 2021-09-20`
+
+### `event [description] /at [YYYY-MM-DD]` - Add Event
+
+Adds an Event item into the list. It will contain a description string and the specified time.
+
+Example of usage:
+
+`event celebration /at 2021-09-20`
+
+### `list` - List Items
+
+Displays all items in the todo-list, including those marked as done {see: done} but excluding those deleted.
+
+Example of usage:
+
+`list`
+
+### `find [string]` - Find Items
+
+Shows items with string matching description.
+
+Example of usage:
+
+`find work`
+
+### `done [index]` - Mark Item as Done
+
+Marks item by index as done. Index is as shown when calling `list` command.
+
+Example of usage:
+
+`done 2`
+
+### `delete [index]` - Delete Item
+
+Deletes item at index. Index is as shown when calling `list` command.
+
+Example of usage:
+
+`delete 2`
+
+### `tag [index] [tag]` - Tag Item
+
+Adds specified tag to item at index. Index is as shown when calling `list` command.
+
+Example of usage:
+
+`tag 2 missed`
