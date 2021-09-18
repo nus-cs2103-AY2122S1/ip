@@ -14,7 +14,7 @@ public class Ui {
      */
     public String showWelcome() {
         String words1 = "Hello! This is Duke~\n";
-        String words2 = "What can I help you today?\n";
+        String words2 = "What can I help you today?\n\n";
         String words3 = "Type 'help' for more commands info.";
         return words1 + words2 + words3;
     }
@@ -102,24 +102,24 @@ public class Ui {
      */
     public String showHelp() {
         String manual = "Here are Duke commands:\n"
-                + "- Show all the tasks in the list:"
-                + "  list\n"
-                + "- Search keyword:"
-                + "  find [keyword]\n"
-                + "- Add a new Todo item:"
-                + "  todo ...\n"
+                + "- Show all the tasks in the list:\n"
+                + "  list\n\n"
+                + "- Search keyword:\n"
+                + "  find [keyword]\n\n"
+                + "- Add a new Todo item:\n"
+                + "  todo ...\n\n"
                 + "- Add a new Event item:\n"
-                + "  event ... /at [DD/MM/YYYY (HHMM)]\n"
+                + "  event ... /at [DD/MM/YYYY (HHMM)]\n\n"
                 + "- Add a new deadline item:\n"
-                + "  deadline ... /by [DD/MM/YYYY (HHMM)]\n"
-                + "- Mark an item as DONE:"
-                + "  done [index]\n"
+                + "  deadline ... /by [DD/MM/YYYY (HHMM)]\n\n"
+                + "- Mark an item as DONE:\n"
+                + "  done [index]\n\n"
                 + "- Mark priority:\n"
-                + "  mark [index] &important OR &unimportant OR &ordinary\n"
-                + "- Delete an item:"
-                + "  delete [index]\n"
-                + "- Exit Duke:"
-                + "  bye\n";
+                + "  mark [index] &important OR &unimportant OR &ordinary\n\n"
+                + "- Delete an item:\n"
+                + "  delete [index]\n\n"
+                + "- Exit Duke:\n"
+                + "  bye\n\n";
         String other = "If you need other help, please contact the author.";
         return manual + other;
     }

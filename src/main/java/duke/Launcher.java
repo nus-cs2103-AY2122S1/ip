@@ -1,3 +1,4 @@
+// Solution below are adapted from https://se-education.org/guides/tutorials/javaFx.html
 package duke;
 
 import javafx.application.Application;

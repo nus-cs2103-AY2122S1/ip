@@ -27,9 +27,8 @@ Note the following about command format:
 4. Fields in square brackets such as `[&important OR &unimportant OR &ordinary]` are for you to choose one as input.
 ### Viewing help: `help`
 
-Shows a message explaning all commands used to execute the app.
-
-<img src="img_1.png" alt="sample" width="300"/>
+Shows a message explaining all commands used to execute the app.
+<img src="img_1.png" alt="sample" width="350"/>
 
 Format: `help`
 
