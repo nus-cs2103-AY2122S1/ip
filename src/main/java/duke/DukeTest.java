@@ -4,12 +4,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 public class DukeTest {
 

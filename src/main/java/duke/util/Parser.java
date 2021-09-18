@@ -5,6 +5,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
 
@@ -29,6 +31,13 @@ public class Parser {
         String[] fullCommand = input.split(" ", 2);
         Command command = null;
         switch (fullCommand[0]) {
+        case "help":
+            if (fullCommand.length > 2) {
+                command = new WrongCommand("You cannot put anything behind the keyword \"bye\".");
+            } else {
+                command = new HelpCommand(input);
+            }
+            break;
         case "bye":
             if (fullCommand.length > 1) {
                 command = new WrongCommand("You cannot put anything behind the keyword \"bye\".");

@@ -34,7 +34,9 @@ public class FindCommand extends Command {
                     output += (j + 1) + ". " + tasks.get(j).toString() + "\n";
                 }
             }
-            return output;
+            return output.equals("")
+                    ? "There are no tasks matching that keyword. Try another keyword."
+                    : output;
         }
     }
 

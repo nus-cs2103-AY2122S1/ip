@@ -40,7 +40,8 @@ public class Ui {
 //                        + "|    |\\   \\   |    |   / ___  \\   /    __)  |  V  ___)  /  ___   \\ \n"
 //                        + "|    |  \\   \\ |    |  |     ___/  |    (__   |     /      (    |__|    )\n"
 //                        + "|___|    \\_____|   \\______)   \\____)  |___|         \\  ___  /  ()\n";
-        return "Hello. My name is:\n" + necroLogoMono + "\n\nWhat do you want me to do for you on this horrible day?";
+        return "Hello. My name is:\n" + necroLogoMono + "\n\nWhat do you want me to do for you on this horrible day?\n\n" +
+                "If you require any assistance, type \"help\", press enter, and depending on my mood, I may or may not reluctantly help you out.";
     }
 
     /**
@@ -68,7 +69,7 @@ public class Ui {
         try {
             throw new InvalidInputException(errorMessage);
         } catch (InvalidInputException e) {
-            return e.getMessage();
+            return e.getMessage() + "\n\n" + "If you are unsure and need assistance with my commands, type \"help\" and press enter.";
         }
     }
 

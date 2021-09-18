@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
                     int taskNumber = Integer.parseInt(strings[1]) - 1;
                     if (taskNumber < tasks.size()) {
                         if (tasks.get(taskNumber).checkCompletion()) {
-                            ui.textBox("The task has already been completed, please be more attentive.");
+                            return ui.textBox("The task has already been completed, please be more attentive.");
                         } else {
                             String list = "\n\n";
                             for (int j = 0; j < tasks.size(); j++) {
@@ -52,7 +52,6 @@ public class DoneCommand extends Command {
                 return ex.getMessage();
             }
         }
-        return null;
     }
 
     @Override
