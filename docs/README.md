@@ -25,8 +25,8 @@ Example:
 
 Expected reply:
 ```
-Got it. I've added this task: <br>
-[T][ ] go for a run<br>
+Got it. I've added this task:
+[T][ ] go for a run
 Now you have 1 task in the list
 ```
 
@@ -39,8 +39,8 @@ Example:
 
 Expected reply:
 ```
-Got it. I've added this task: <br>
-[E][ ] cs2103 tutorial (at: 17 Sep 2021 1100)<br>
+Got it. I've added this task:
+[E][ ] cs2103 tutorial (at: 17 Sep 2021 1100)
 Now you have 2 task in the list
 ```
 
@@ -53,8 +53,8 @@ Example:
 
 Expected reply:
 ```
-Got it. I've added this task: <br>
-[D][ ] cs2103 Ip submission (by: 16 Sep 2021 2359)<br>
+Got it. I've added this task:
+[D][ ] cs2103 Ip submission (by: 16 Sep 2021 2359)
 Now you have 3 task in the list
 ```
 
@@ -68,8 +68,8 @@ Example:
 
 Expected reply:
 ```
-Nice! I've marked this task as done: <br>
-[T][X] go for a run<br>
+Nice! I've marked this task as done:
+[T][X] go for a run
 ```
 
 ### `delete`- Deletes a task in the list
@@ -81,8 +81,8 @@ Example:
 
 Expected reply:
 ```
-Noted I've removed this task: <br>
-[T][X] go for a run<br>
+Noted I've removed this task:
+[T][X] go for a run
 Now you have 2 tasks in the list.
  ```
 
@@ -122,7 +122,7 @@ Example:
 
 Expected reply:
 ```
-Noted I've edited this task: <br>
+Noted I've edited this task: 
 [E][ ] cs2100 lab (at: 17 Sep 2021 1100)
 ```
 
