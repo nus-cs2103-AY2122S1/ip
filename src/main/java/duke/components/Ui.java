@@ -48,9 +48,8 @@ public class Ui {
      *
      * @param newTask The new task user added.
      */
-    public void displayAddTaskMessage(Task newTask) {
-        System.out.println("Roger! Added the task: ");
-        System.out.println("    " + newTask.toString());
+    public String displayAddTaskMessage(Task newTask) {
+        return "Roger! Added the task: \n" + "    " + newTask.toString();
     }
 
     /**
@@ -58,22 +57,22 @@ public class Ui {
      *
      * @param taskList The task list that user is enquiring.
      */
-    public void displayTaskNumber(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getSize() + " tasks in your list.");
+    public String displayTaskNumber(TaskList taskList) {
+        return "Now you have " + taskList.getSize() + " tasks in your list.";
     }
 
     /**
      * Display a linebreak.
      */
-    public void displayLinebreak() {
-        System.out.println(lineBreak + "\n");
+    public String displayLinebreak() {
+        return lineBreak + "\n";
     }
 
     /**
      * Display a message when description of a todo is empty.
      */
-    public void displayTodoEmptyMessage() {
-        System.out.println(" OOPS!!! The description of a todo cannot be empty.");
+    public String displayTodoEmptyMessage() {
+        return " OOPS!!! The description of a todo cannot be empty.";
     }
 
     /**
@@ -81,23 +80,21 @@ public class Ui {
      *
      * @param taskMarkDone The task that is done.
      */
-    public void displayMarkDoneMessage(String taskMarkDone) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(taskMarkDone);
+    public String displayMarkDoneMessage(String taskMarkDone) {
+        return "Nice! I've marked this task as done: \n" + taskMarkDone;
     }
 
     /**
      * Display a message when user is exiting Duke.
      */
-    public void displayExitMessage() {
-        System.out.println("     Bye! See you next time! :)" + "\n" + lineBreak + "\n");
+    public String displayExitMessage() {
+        return "     Bye! See you next time! :)" + "\n" + lineBreak + "\n";
     }
 
     /**
      * Display a message when user input is not standard.
      */
-    public void displayOtherInputsMessage() {
-        System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(lineBreak + "\n");
+    public String displayOtherInputsMessage() {
+        return " OOPS!!! I'm sorry, but I don't know what that means :-( \n" + lineBreak + "\n";
     }
 }

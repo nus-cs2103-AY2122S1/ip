@@ -55,7 +55,7 @@ public class TaskList {
      *
      * @param input User input used to create a task.
      */
-    public void addTaskFromInput(String input) {
+    public String addTaskFromInput(String input) {
 
         String[] group = input.split(" ");
 
@@ -71,13 +71,10 @@ public class TaskList {
                 storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
             }
 
-            ui.displayAddTaskMessage(newTodo);
-            ui.displayTaskNumber(this);
-            ui.displayLinebreak();
+            return ui.displayAddTaskMessage(newTodo) + "\n" + ui.displayTaskNumber(this);
         }
         if (parser.isTodo(group[0]) && group.length == 1) {
-            ui.displayTodoEmptyMessage();
-            ui.displayLinebreak();
+            return ui.displayTodoEmptyMessage();
         }
 
         // Case Deadline
@@ -95,9 +92,7 @@ public class TaskList {
                 storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
             }
 
-            ui.displayAddTaskMessage(newDeadline);
-            ui.displayTaskNumber(this);
-            ui.displayLinebreak();
+            return ui.displayAddTaskMessage(newDeadline) + ui.displayTaskNumber(this);
         }
 
         // Case Event
@@ -115,10 +110,10 @@ public class TaskList {
                 storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
             }
 
-            ui.displayAddTaskMessage(newEvent);
-            ui.displayTaskNumber(this);
-            ui.displayLinebreak();
+            return ui.displayAddTaskMessage(newEvent) + ui.displayTaskNumber(this);
         }
+
+        return "Sorry I don't understand that.";
     }
 
     /**
@@ -126,13 +121,13 @@ public class TaskList {
      *
      * @param input User input used to delete a task.
      */
-    public void deleteTask(String input) {
+    public String deleteTask(String input) {
         String[] parts = input.split(" ");
         int index = Integer.parseInt(parts[1]) - 1;
+        System.out.println(index);
         if (parser.isDelete(parts[0]) && index < inputs.size()) {
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(inputs.get(index).toString());
-            inputs.remove(index);
+
+            Task deleted = inputs.remove(index);
 
             if (inputs.size() == 0) {
                 storage.eraseFileContent();
@@ -143,8 +138,10 @@ public class TaskList {
                 }
             }
 
-            ui.displayLinebreak();
+            return "Noted. I've removed this task: \n" + deleted.toString();
+
         }
+        return "Sorry I don't understand that.";
     }
 
     /**
@@ -152,7 +149,7 @@ public class TaskList {
      *
      * @param input User input used to mark a task as done.
      */
-    public void markDone(String input) {
+    public String markDone(String input) {
         String[] parts = input.split(" ");
         int index = Integer.parseInt(parts[1]) - 1;
         if (parser.isDone(parts[0]) && index < inputs.size()) {
@@ -163,21 +160,21 @@ public class TaskList {
                 storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
             }
 
-            ui.displayMarkDoneMessage(inputs.get(index).toString());
-            ui.displayLinebreak();
+            return ui.displayMarkDoneMessage(inputs.get(index).toString());
         }
+        return "Sorry I don't understand that.";
     }
 
     /**
      * Display all tasks in task list.
      */
-    public void displayAllTasks() {
-        System.out.println("Here are the tasks in your list: ");
+    public String displayAllTasks() {
+        String allTasks = "Here are the tasks in your list: \n";
         for (int i = 0; i < inputs.size(); i++) {
             int index = i + 1;
-            System.out.println(index + ". " + inputs.get(i).toString());
+            allTasks += index + ". " + inputs.get(i).toString() + "\n";
         }
-        ui.displayLinebreak();
+        return allTasks;
     }
 
     /**
@@ -185,7 +182,7 @@ public class TaskList {
      *
      * @param input User input used to find matching tasks.
      */
-    public void displayFindTasks(String input) {
+    public String displayFindTasks(String input) {
         String toBeFound = input.substring(5);
         ArrayList<Task> tasksFound = new ArrayList<>();
 
@@ -197,12 +194,12 @@ public class TaskList {
             }
         }
 
-        System.out.println("Here are the matching tasks in your list: ");
+        String tasks = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < tasksFound.size(); i++) {
             int index = i + 1;
-            System.out.println(index + ". " + tasksFound.get(i).toString());
+            tasks += index + ". " + tasksFound.get(i).toString();
         }
-        ui.displayLinebreak();
+        return tasks;
     }
 
 }
