@@ -20,27 +20,31 @@ This feature allows you to add events at some date and/or time.
 
 ## Usage
 
-### `list` - List all added tasks
-### `todo <task>` - Add to-do task
-  Example: `todo work`
+### 1. `todo <task>` - Add to-do task
+  Example: `todo work` --> Adds a task called "work"
 
-### `deadline <task> /by <yyyy-mm-dd>` - Add deadline task
-  Example: `deadline essay /by 2021-09-17`
+### 2. `deadline <task> /by <yyyy-mm-dd>` - Add deadline task
+  Example: `deadline essay /by 2021-09-17` --> Adds a deadline task called "essay" to be completed by 17 Sep 2021
 
-### `event <task> /at <date/time>` - Add event task
-  Example: `event tp meeting /at Sunday 3.30pm`
+### 3. `event <task> /at <date/time>` - Add event task
+  Example: `event tp meeting /at Sunday 3.30pm` --> Adds an event called "tp meeting" at Sunday 3.30pm
+  
+### 4. `list` - List all added tasks
 
-### `done <task_number>` - Mark task as done
-  Example: `done 3`
+### 5. `done <task_number>` - Mark task as done
+  Example: `done 3` --> Marks task number 3 as done
 
-### `delete <task_number> (task_number_1 ... task_number_n)` - Delete task from list
+### 6. `delete <task_number> (task_number_1 ... task_number_n)` - Delete task(s) from list
+  To delete a single task, specify the task number. To delete multiple tasks, specify the task numbers separated by spaces.
+  
   Examples of usage: 
 
-  `delete 3` ➡️  deletes task 3
+  Delete single task: `delete 3` --> deletes task 3
 
-  `delete 1 2` ➡️  deletes tasks 1 and 2
+  Delete multiple tasks: `delete 1 2` --> deletes tasks 1 and 2
 
-### `bye` - Say bye to Duke!
+### 7. `bye` - Say bye to Duke!
+  ❗ Note: Saying 'bye' to Duke will not close the GUI application. This is by design so as to allow the user to restart a conversation with Duke easily without havnig to restart the application.
 
 
 
