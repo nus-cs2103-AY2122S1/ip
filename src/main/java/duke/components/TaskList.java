@@ -58,6 +58,7 @@ public class TaskList {
     public String addTaskFromInput(String input) {
 
         String[] group = input.split(" ");
+        assert group.length > 0;
 
         // Case Todo
         if (parser.isTodo(group[0]) && group.length > 1) {
@@ -77,6 +78,7 @@ public class TaskList {
             return addEvent(input, inputs, storage, ui);
         }
 
+        assert !group[0].equals("todo") && !group[0].equals("deadline") && !group[0].equals("event");
         return "Sorry I don't understand that.";
     }
 
@@ -88,7 +90,6 @@ public class TaskList {
     public String deleteTask(String input) {
         String[] parts = input.split(" ");
         int index = Integer.parseInt(parts[1]) - 1;
-        System.out.println(index);
         if (parser.isDelete(parts[0]) && index < inputs.size()) {
 
             Task deleted = inputs.remove(index);
@@ -105,6 +106,8 @@ public class TaskList {
             return "Noted. I've removed this task: \n" + deleted.toString();
 
         }
+
+        assert !parts[0].equals("delete") : "should not be delete command";
         return "Sorry I don't understand that.";
     }
 
@@ -126,6 +129,8 @@ public class TaskList {
 
             return ui.displayMarkDoneMessage(inputs.get(index).toString());
         }
+
+        assert !parts[0].equals("done");
         return "Sorry I don't understand that.";
     }
 
@@ -156,6 +161,7 @@ public class TaskList {
             if (element.toString().contains(toBeFound)) {
                 tasksFound.add(element);
             }
+            assert !element.toString().contains(toBeFound);
         }
 
         String tasks = "Here are the matching tasks in your list: \n";

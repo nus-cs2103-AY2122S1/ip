@@ -87,8 +87,6 @@ public class Duke {
      */
     public String getResponse(String input) {
 
-        //storage.loadInto(taskList);
-
         if (parser.isMarkDoneCommand(input)) {
             return taskList.markDone(input);
         }
