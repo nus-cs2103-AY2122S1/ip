@@ -1,12 +1,14 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
 
 /**
  * Class includes methods required to read and write for saving a file.
@@ -19,7 +21,7 @@ public class CompilationOfFiles {
      *
      * @param filepath path of the file
      */
-    public CompilationOfFiles( String filepath) {
+    public CompilationOfFiles(String filepath) {
         this.filepath = filepath;
     }
 
@@ -28,7 +30,7 @@ public class CompilationOfFiles {
      *
      * @param tasks list of tasks
      */
-    public static void loadAndSaveFile( ListOfTasks tasks) {
+    public static void loadAndSaveFile(ListOfTasks tasks) {
         try {
             Files.createDirectories(Paths.get("data/"));
             File newFile = new File(filepath);
@@ -74,7 +76,7 @@ public class CompilationOfFiles {
      *
      * @param list list of tasks
      */
-    public static void updateFile( ArrayList<Task> list) {
+    public static void updateFile(ArrayList<Task> list) {
         try {
             FileWriter newFileWriter = new FileWriter(filepath);
             newFileWriter.write("");

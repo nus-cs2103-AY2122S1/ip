@@ -190,7 +190,7 @@ public class ListOfTasks {
         similarTasks.add("\t Here are the matching tasks in your list:");
 
         int index = 1;
-        for (Task task :  this.tasks) {
+        for (Task task : this.tasks) {
             if (task.isContainingSimilarInformation(searchString)) {
                 similarTasks.add("\t" + index + "." + task);
                 index++;

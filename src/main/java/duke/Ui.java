@@ -48,7 +48,7 @@ public class Ui {
      *
      * @param count represents number of tasks
      */
-    public void  printNumberOfTasks(int count) {
+    public void printNumberOfTasks(int count) {
         System.out.println("     Now you have " + count
                 + " task" + ((count > 1) ? "s" : "") + " in the list.");
 
@@ -60,7 +60,7 @@ public class Ui {
      * @param currTask current task
      */
     public void printCurrentTask(Task currTask) {
-         System.out.println("       " + currTask.toString());
+        System.out.println("       " + currTask.toString());
     }
 
     /**
@@ -105,7 +105,7 @@ public class Ui {
      * Method provides message for deleting task.
      */
     public void printDeletedMessage() {
-         System.out.println("     Noted. I've removed this task:");
+        System.out.println("     Noted. I've removed this task:");
     }
 
     /**
