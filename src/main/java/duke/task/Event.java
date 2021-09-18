@@ -44,9 +44,7 @@ public class Event extends Task {
         if (this.isDone) {
             done = 1;
         }
-        return "E | " + done + " | " +  this.description
+        return "E | " + done + " | " + this.description
                 + " | " + this.at + "\n";
     }
-
-
 }

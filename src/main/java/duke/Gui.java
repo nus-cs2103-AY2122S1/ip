@@ -1,7 +1,5 @@
 package duke;
 
-import javafx.scene.control.Label;
-
 /**
  * Class responsible for displaying the output messages the bot gives.
  *

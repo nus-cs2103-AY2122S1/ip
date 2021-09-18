@@ -61,10 +61,9 @@ public class Duke extends Application {
         } else {
             userRequest = duke.Parser.parse(input);
             switch (userRequest) {
-            case DEFAULT:
-                return TASKS.list();
             case FIND:
-                return TASKS.find(input.substring(5));
+                int taskNumber = 5;
+                return TASKS.find(input.substring(taskNumber));
             case UNUSUAL:
                 return GUI.unusualRequest();
             case DONE:
@@ -104,10 +103,10 @@ public class Duke extends Application {
             int task = Integer.parseInt(userInput.substring(5));
             if (task > 0 && task <= TASKS.getSize()) {
                 TASKS.markDone(task - 1);
-                String r;
-                r = GUI.dukeResponse("One task down sir. Here is the task I checked off:\n");
-                r = r + GUI.dukeResponse("    " + TASKS.getTask(task).toString() + "\n");
-                return r;
+                String response;
+                response = GUI.dukeResponse("One task down sir. Here is the task I checked off:\n");
+                response = response + GUI.dukeResponse("    " + TASKS.getTask(task).toString() + "\n");
+                return response;
             } else {
                 return GUI.dukeResponse("You have entered an invalid task number Sir, please input again.\n");
             }
@@ -120,7 +119,8 @@ public class Duke extends Application {
 
     private String deleteTask(String userInput) {
         try {
-            int task = Integer.parseInt(userInput.substring(7));
+            int taskCharAt = 7;
+            int task = Integer.parseInt(userInput.substring(taskCharAt));
             if (task > 0 && task <= TASKS.getSize()) {
                 Task t = TASKS.deleteTask(task);
                 return sayAction(t.toString(), "removed");
@@ -134,7 +134,8 @@ public class Duke extends Application {
 
     private String updateTask(String userInput) {
         try {
-            int task = Integer.parseInt(userInput.substring(userInput.indexOf("/no") + 4));
+            int taskNumberCharacter = 4;
+            int task = Integer.parseInt(userInput.substring(userInput.indexOf("/no") + taskNumberCharacter));
             if (task > 0 && task <= TASKS.getSize()) {
                 String newTask = userInput.substring(7, userInput.indexOf("/no") - 1);
                 RequestType taskType = duke.Parser.parse(newTask);
@@ -177,7 +178,7 @@ public class Duke extends Application {
             String by = userInput.substring(userInput.indexOf("/by") + 4);
 
             try {
-                LocalDate time = LocalDate.parse(by);
+                LocalDate.parse(by);
                 Task t = new Deadline(description, by);
                 return taskStatus(index, t);
             } catch (Exception e) {

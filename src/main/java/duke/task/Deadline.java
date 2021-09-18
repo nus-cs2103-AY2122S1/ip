@@ -32,8 +32,8 @@ public class Deadline extends Task {
      * @param done Status of whether task was done or not
      */
     public Deadline(String description, String by, int done) {
-      super(description, done);
-      this.by = by;
+        super(description, done);
+        this.by = by;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Deadline extends Task {
         if (this.isDone) {
             done = 1;
         }
-        return "D | " + done + " | " +  this.description
+        return "D | " + done + " | " + this.description
                 + " | " + this.by + "\n";
     }
 }

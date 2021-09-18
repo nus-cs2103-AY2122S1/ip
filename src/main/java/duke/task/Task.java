@@ -10,7 +10,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-   /**
+    /**
     * Constructor of task
     *
     * @param description Description of task.
@@ -20,13 +20,13 @@ public class Task {
         this.isDone = false;
     }
 
-   /**
+    /**
     * Constructor of task
     *
     * @param description Description of task.
     * @param done Status of Task
     */
-    public Task(String description, int done){
+    public Task(String description, int done) {
         this.description = description;
         this.isDone = done == 1;
     }
@@ -76,6 +76,6 @@ public class Task {
         if (this.isDone) {
             done = 1;
         }
-        return "T | " + done +  " | " +  this.description + "\n";
+        return "T | " + done + " | " + this.description + "\n";
     }
 }

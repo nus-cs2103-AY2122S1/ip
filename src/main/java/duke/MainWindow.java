@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,9 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,10 +27,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Gui gui = new Gui();
-    
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
 
+    /**
+     * Initializes a dialog box, with the height, and the image.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -55,18 +58,17 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
-                    
             );
             userInput.clear();
             userInput.setEditable(false);
             timer.schedule(new TimerTask() {
-                               @Override
-                               public void run() {
-                                   // Your database code here
-                                   Platform.exit();
-                                   System.exit(0);
-                               }
-                           }, 2*1000);
+                @Override
+                public void run() {
+                    // Your database code here
+                    Platform.exit();
+                    System.exit(0);
+                }
+                }, 2 * 1000);
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
@@ -75,5 +77,4 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
         }
     }
-    
 }

@@ -1,10 +1,9 @@
 package duke.task;
 
-import duke.Gui;
-import duke.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.Gui;
 
 /**
  * Active list structure used to store all active tasks.
@@ -12,9 +11,8 @@ import java.util.List;
  * @author mrmrinal
  */
 public class TaskList {
-    
+
     private List<Task> items = new ArrayList<>(100);
-    private final Ui ui = new Ui();
     private final Gui gui = new Gui();
 
     /**
@@ -30,7 +28,7 @@ public class TaskList {
      * Lists all the Tasks down in numerical form.
      */
     public String list() {
-        if(items.size() < 1){
+        if (items.size() < 1) {
             return "There are no tasks for you sir";
         } else {
             String r = "";
@@ -76,7 +74,7 @@ public class TaskList {
      * @param task Position of task that user wants to obtain
      * @return task that the user queried for
      */
-    public Task getTask(int task){
+    public Task getTask(int task) {
         return items.get(task - 1);
     }
 
@@ -89,29 +87,27 @@ public class TaskList {
 
     /**
      * Update a specific task on the list.
-     * 
      * @param task The task which is to be updated
      * @param number the position which has to be updated
      */
-    public void updateTask(Task task, int number){
+    public void updateTask(Task task, int number) {
         items.set(number - 1, task);
     }
 
     /**
      * Returns user the tasks that he/she searched for.
-     * 
      * @param substring the user search request
      */
-    public String find(String substring){
+    public String find(String substring) {
         StringBuilder r = new StringBuilder();
         int list = 1;
-        for(int i = 1; i <= items.size(); i++){
-            if(this.getTask(i).description.contains(substring)){
-                r.append(gui.dukeResponse(list + ". " + items.get(i - 1)  + "\n"));
+        for (int i = 1; i <= items.size(); i++) {
+            if (this.getTask(i).description.contains(substring)) {
+                r.append(gui.dukeResponse(list + ". " + items.get(i - 1) + "\n"));
                 list++;
             }
         }
-        if(list == 1){
+        if (list == 1) {
             return gui.dukeResponse("No such tasks found");
         }
         return r + gui.dukeResponse("");
