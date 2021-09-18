@@ -149,6 +149,7 @@ Expected outcome:
 
 ## Duke Demo
 
-![DukeDemoGif](https://user-images.githubusercontent.com/85099754/133879098-185386a3-e86c-4b91-adf6-80c85bdc18b5.gif)
+![DukeDemoGif](https://user-images.githubusercontent.com/85099754/133879352-980365da-f243-4893-883d-e71ca47ccdbe.gif)
+
 
 *Have fun using Duke!*
