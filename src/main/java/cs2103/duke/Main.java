@@ -1,6 +1,7 @@
 package cs2103.duke;
 
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,14 +15,19 @@ import cs2103.duke.controllers.MainWindow;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private final Duke duke = new Duke();
+
+    public Main() {
+    }
 
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            stage.setTitle("Duke");
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getRoot().setStyle("-fx-font-family: 'Courier New'");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

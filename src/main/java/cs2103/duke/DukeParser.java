@@ -45,7 +45,6 @@ public class DukeParser {
     public static ArrayList<Task> parse(String toParse) {
         ArrayList<Task> result = new ArrayList<>();
         Scanner ps = new Scanner(toParse); // passes whole file into the scanner
-//        [[T][ ] 1, [E][ ] 2 (at: 2), [D][ ] 3 (by: 3)]
         while (ps.hasNextLine()) {
             String nLine = ps.nextLine(); // parse one line at a time
             int ref = 3; // reference point
@@ -54,7 +53,7 @@ public class DukeParser {
             int strLength = nLine.length();
             switch (taskType) {
             case 'T':
-                String todoName = nLine.substring(ref + 5, strLength);
+                String todoName = nLine.substring(ref + 5, strLength).trim();
                 Task newestTodo = new ToDo(result.size(), todoName);
                 if (isDone) {
                     newestTodo.markAsDone();
@@ -64,8 +63,8 @@ public class DukeParser {
             case 'D':
                 String deadlineInfo = nLine.substring(ref + 5, strLength);
                 String[] arrD = deadlineInfo.split("\\(by: ", 2);
-                String deadlineName = arrD[0];
-                String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1);
+                String deadlineName = arrD[0].trim();
+                String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1).trim();
                 deadlineReminder = parseDate(deadlineReminder);
                 Task newestDeadline = new Deadline(result.size(), deadlineName, deadlineReminder);
                 result.add(newestDeadline);
@@ -76,8 +75,8 @@ public class DukeParser {
             case 'E':
                 String eventInfo = nLine.substring(ref + 5, strLength);
                 String[] arrE = eventInfo.split("\\(at: ", 2);
-                String eventName = arrE[0];
-                String eventReminder = arrE[1].substring(0, arrE[1].length() - 1);
+                String eventName = arrE[0].trim();
+                String eventReminder = arrE[1].substring(0, arrE[1].length() - 1).trim();
                 eventReminder = parseDate(eventReminder);
                 Task newestEvent = new Event(result.size(), eventName, eventReminder);
                 result.add(newestEvent);

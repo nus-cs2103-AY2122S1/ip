@@ -10,33 +10,31 @@ import java.util.ArrayList;
  * performs the initialization for the duke.txt and its parent folder, if they are not already present.
  */
 public class Storage {
-    private static ArrayList<Task> taskArrayList = new ArrayList<>();
-    private final String filePath;
+    String dukeFileDirectoryPath = "./data";
+    String dukeFilePath = "./data/duke.txt";
 
-    public Storage(String dukeFilePath) {
-        this.filePath = dukeFilePath;
+    public Storage() {
+        initialize();
     }
 
     /**
      * Checks the dukeFilePath for the existence of duke.txt, if the file or the folder containing it
      * does not exist, create them.
-     *
-     * @throws IOException If an invalid input is detected.
      */
-    public void initialize() throws IOException {
-        String dukeFileDirectoryPath = "./data";
-        String dukeFilePath = "./data/duke.txt";
+    public void initialize() {
         File dukeFileDirectory = new File(dukeFileDirectoryPath);
         File dukeFile = new File(dukeFilePath);
         // creates directory if it does not exist
         if (dukeFileDirectory.mkdir()) {
-            // dukeFile.mkdir();
             System.out.println("folder: 'data/' has been created");
         }
         // creates file if it does not exist
-        if (dukeFile.createNewFile()) {
-            // dukeFile.createNewFile();
-            System.out.println("'duke.txt' has been created in the 'data/' folder ");
+        try {
+            if (dukeFile.createNewFile()) {
+                System.out.println("'duke.txt' has been created in the 'data/' folder ");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -50,20 +48,19 @@ public class Storage {
         // initialize
         initialize();
         // load the data from the hard disk for dukeFile
-        DukeParser p = new DukeParser(filePath);
+        DukeParser p = new DukeParser(dukeFilePath);
         return p.copyFileContents();
     }
 
     /**
      * This method overwrites the file.
      *
-     * @param filePath     The path to the file to append to.
      * @param textToAppend The text to append.
      * @throws IOException If filePath does not exist.
      */
 
-    public void overwriteFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, false); // create a FileWriter in append mode
+    public void overwriteFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(dukeFilePath, false); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }

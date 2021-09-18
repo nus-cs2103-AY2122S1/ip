@@ -48,6 +48,6 @@ public class Task {
      * @return String representation of Task.
      */
     public String toString() {
-        return ("[" + getStatusIcon() + "]" + description);
+        return ("[" + getStatusIcon() + "] " + description);
     }
 }

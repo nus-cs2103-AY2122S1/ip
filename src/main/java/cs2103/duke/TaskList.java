@@ -26,19 +26,6 @@ public class TaskList {
     }
 
     /**
-     * This method takes an input string and formats it by including horizontal lines above
-     * and below the input string.
-     *
-     * @param str Input string to be sandwiched.
-     * @return The original string sandwiched between two horizontal lines.
-     */
-    public static String sandwich(String str) {
-        return "____________________________________________________________\n"
-                + str + "\n"
-                + "____________________________________________________________";
-    }
-
-    /**
      * This method takes the user's input list and beautifies it for display.
      *
      * @return The beautified string to display.
@@ -138,33 +125,33 @@ public class TaskList {
             }
             Task newestTodo = new ToDo(taskArrayList.size(), name);
             taskArrayList.add(newestTodo);
-            return (sandwich("New todo task added:\n"
+            return ("New todo task added:\n"
                     + newestTodo
                     + "\nYou now have "
                     + taskArrayList.size()
-                    + " item(s) in your task list."));
+                    + " item(s) in your task list.");
         case "deadline":
             if (!isValidDate(description)) {
                 throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
             }
             Task newestDeadline = new Deadline(taskArrayList.size(), name, description);
             taskArrayList.add(newestDeadline);
-            return (sandwich("New deadline task added:\n"
+            return ("New deadline task added:\n"
                     + newestDeadline
                     + "\nYou now have "
                     + taskArrayList.size()
-                    + " item(s) in your task list."));
+                    + " item(s) in your task list.");
         case "event":
             if (!isValidDate(description)) {
                 throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
             }
             Task newestEvent = new Event(taskArrayList.size(), name, description);
             taskArrayList.add(newestEvent);
-            return (sandwich("New deadline task added:\n"
+            return ("New deadline task added:\n"
                     + newestEvent
                     + "\nYou now have "
                     + taskArrayList.size()
-                    + " item(s) in your task list."));
+                    + " item(s) in your task list.");
         default:
             throw new DukeException("Unknown task type");
         }
@@ -176,7 +163,7 @@ public class TaskList {
      * @return A string representing all tasks in the TaskList.
      */
     public String listTasks() {
-        return (sandwich(listBeautify()));
+        return (listBeautify());
     }
 
     /**
@@ -191,8 +178,8 @@ public class TaskList {
             throw new DukeException("This task index is not in the task list!");
         }
         taskArrayList.get(index - 1).markAsDone();
-        return (sandwich("Congratulations! You have finished this task:\n"
-                + taskArrayList.get(index - 1).toString()));
+        return ("Congratulations! You have finished this task:\n"
+                + taskArrayList.get(index - 1).toString());
     }
 
     /**
@@ -206,11 +193,11 @@ public class TaskList {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
-        String deleteMessage = (sandwich("Got it, I have deleted this task:\n"
+        String deleteMessage = ("Got it, I have deleted this task:\n"
                 + taskArrayList.get(index - 1).toString()
                 + "\nYou now have "
                 + (taskArrayList.size() - 1)
-                + " item(s) in your task list."));
+                + " item(s) in your task list.");
         // actual logic of deletion
         taskArrayList.remove(index - 1);
         return deleteMessage;
@@ -238,7 +225,7 @@ public class TaskList {
                 return ("No matches found for keyword: " + keyword.trim());
             }
             TaskList matchedTaskList = new TaskList(subList);
-            return sandwich("Here are the matching tasks in your list:\n"
+            return ("Here are the matching tasks in your list:\n"
                     + matchedTaskList.listBeautify()
             );
         }
