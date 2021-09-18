@@ -37,7 +37,7 @@ public class Duke {
      *
      * @param input the command the user typed
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         String response;
         try {
             response = Parser.parse(input);
@@ -69,7 +69,6 @@ public class Duke {
                 ui.printFormattedMessage(e.getMessage());
             }
         }
-        assert (isExit);
         sc.close();
     }
 
