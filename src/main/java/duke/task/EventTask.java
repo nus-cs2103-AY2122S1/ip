@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
 
-    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH':'mm");
 
     private LocalDateTime start;
     private LocalDateTime end;
@@ -67,8 +67,17 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("d MMM yyyy H':'mm");
+        DateTimeFormatter justTime = DateTimeFormatter.ofPattern("H':'mm");
+
         String startTime = this.start.format(dateTimeFormat);
-        String endTime = this.end.format(dateTimeFormat);
+
+        String endTime;
+        if (this.end.toLocalDate().equals(this.start.toLocalDate())) {
+            endTime = this.end.format(justTime);
+        } else {
+            endTime = this.end.format(dateTimeFormat);
+        }
+
         return "[E]" + super.toString() + " (" + startTime + " - " + endTime + ")";
     }
 }

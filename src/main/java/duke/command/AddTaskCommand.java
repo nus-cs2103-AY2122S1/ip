@@ -75,7 +75,7 @@ public class AddTaskCommand extends Command {
             if (t instanceof EventTask) {
                 @SuppressWarnings("unchecked")
                 EventTask other = (EventTask) t;
-                if ((eventTask.overlapsWith(other))) {
+                if (!eventTask.equals(other) && eventTask.overlapsWith(other)) {
                     clashes.add(other);
                 }
             } else {
