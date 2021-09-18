@@ -55,7 +55,7 @@ application {
 
 shadowJar {
     archiveBaseName = "misaki"
-    archiveVersion = "v3.0.0"
+    archiveVersion = "v3.3.0"
     archiveClassifier = null
 }
 

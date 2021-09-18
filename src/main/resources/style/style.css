@@ -1,8 +1,13 @@
 .scroll-pane .viewport {
-    -fx-background-image: url('../Images/bkgd.png');
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
+}
+
+.background {
+    -fx-background-image: url('../Images/bkgd.png');
+    -fx-background-size: 100% 180%;
+    -fx-background-position: bottom center;
 }
 
 .scroll-bar .thumb {

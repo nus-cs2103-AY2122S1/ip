@@ -155,7 +155,7 @@ public class Parser {
     public boolean isValidDateTime(String date) {
         Boolean isValid = true;
         try {
-            date = date.replace("T", " ");
+            date = date.replace(" ", "T");
             LocalDateTime dateTime = LocalDateTime.parse(date);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
             dateTime.format(formatter);
