@@ -128,8 +128,9 @@ Example of usage:
 
 delete 1
 
-```Expected outcome:
+Expected outcome:
 
+```
 Success message indicating that the task has been successfully deleted.
 
 Noted. I've removed this task:
