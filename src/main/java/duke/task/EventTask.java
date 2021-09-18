@@ -39,6 +39,10 @@ public class EventTask extends Task {
         return time;
     }
 
+    public void setTime(String newTime) {
+        time = newTime;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (at: " + this.time + ")";

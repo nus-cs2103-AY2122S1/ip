@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.error.DukeException;
 
 /**
@@ -38,6 +32,8 @@ public class Parser {
             return new DeleteCommand(getIndex());
         case "find":
             return new FindCommand(description);
+        case "update":
+            return new UpdateCommand(getIndex(), description);
         case "todo":
         case "event":
         case "deadline":
@@ -55,19 +51,23 @@ public class Parser {
      * @throws DukeException If there is no specified index or the input is not a number.
      */
     private static int getIndex() throws DukeException {
-        int index;
-
         if (description.equals("")) {
             throw new DukeException("OOPS!! " + command + " needs the index of the task.");
         }
 
+        String index = description;
+
+        if (description.contains(" ")) {
+            int spaceIdx = description.indexOf(" ");
+            index = description.substring(0, spaceIdx);
+            description = description.substring(spaceIdx + 1);
+        }
+
         try {
-            index = Integer.parseInt(description);
+            return Integer.parseInt(index) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!! the index needs to be a number.");
         }
-
-        return index;
     }
 
     /**

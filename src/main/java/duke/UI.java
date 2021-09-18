@@ -89,6 +89,16 @@ public class UI {
     }
 
     /**
+     * Returns the message after executing an update command.
+     *
+     * @param task The task that was added.
+     * @return Update command response.
+     */
+    public String updateResponse(Task task) {
+        return String.format("Got it. I've updated the task to be:\n%s\n", task);
+    }
+
+    /**
      * Prints the error message.
      *
      * @param message Error message.

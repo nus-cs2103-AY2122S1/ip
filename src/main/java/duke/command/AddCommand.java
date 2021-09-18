@@ -48,7 +48,7 @@ public class AddCommand extends Command {
             tasks.addDeadlineTask(description);
             break;
         case "event":
-            tasks.addEventtask(description);
+            tasks.addEventTask(description);
             break;
         default:
             throw new DukeException("OOPS!! invalid task type");

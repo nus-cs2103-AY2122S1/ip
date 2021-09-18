@@ -10,23 +10,20 @@ import duke.error.DukeException;
  * Represent a deadline task which stores a date for the deadline.
  */
 public class DeadlineTask extends Task {
-    protected LocalDate time;
+    protected LocalDate date;
 
     /**
      * Constructs a DeadlineTask object.
      *
      * @param description Description of the task.
-     * @param time Deadline date in the format yyyy-mm-dd.
+     * @param date Deadline date in the format yyyy-mm-dd.
      * @throws DukeException If the date format is wrong.
      */
-    public DeadlineTask(String description, String time) throws DukeException {
+    public DeadlineTask(String description, String date) throws DukeException {
         super(description);
         this.type = "D";
-        try {
-            this.time = LocalDate.parse(time);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!! wrong date format.\nthe format should be:\n\tyyyy-mm-dd");
-        }
+        this.date = parseDateString(date);
+
     }
 
     /**
@@ -34,12 +31,12 @@ public class DeadlineTask extends Task {
      *
      * @param description Description of the task.
      * @param isDone The status of the task.
-     * @param time Deadline date.
+     * @param date Deadline date.
      */
-    public DeadlineTask(String description, boolean isDone, String time) {
+    public DeadlineTask(String description, boolean isDone, String date) {
         super(description, isDone);
         this.type = "D";
-        this.time = LocalDate.parse(time);
+        this.date = LocalDate.parse(date);
     }
 
     /**
@@ -47,13 +44,38 @@ public class DeadlineTask extends Task {
      *
      * @return Deadline date.
      */
-    public String getTime() {
-        return time.toString();
+    public String getDate() {
+        return date.toString();
+    }
+
+    /**
+     * Change the date.
+     *
+     * @param newDate New date.
+     * @throws DukeException If the date format is wrong.
+     */
+    public void setDate(String newDate) throws DukeException{
+        date = parseDateString(newDate);
+    }
+
+    /**
+     * Parses the date string into a LocalDate object.
+     *
+     * @param date String format of the date.
+     * @return The LocalDate object.
+     * @throws DukeException
+     */
+    public LocalDate parseDateString(String date) throws DukeException {
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!! wrong date format.\nthe format should be:\n\tyyyy-mm-dd");
+        }
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }

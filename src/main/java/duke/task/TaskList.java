@@ -72,7 +72,7 @@ public class TaskList {
      * @param description Description of the event task.
      * @throws DukeException If the format of the command is incorrect.
      */
-    public void addEventtask(String description) throws DukeException {
+    public void addEventTask(String description) throws DukeException {
         int timeIdxStart = description.indexOf("/");
 
         if (timeIdxStart == -1) {

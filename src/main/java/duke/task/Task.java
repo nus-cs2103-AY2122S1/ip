@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.error.DukeException;
+
 /**
  * Represents a task object.
  */
@@ -29,6 +31,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public Task() {
+
+    }
+
     /**
      * Returns the done status of the task.
      *
@@ -52,6 +58,20 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Change the description.
+     *
+     * @param newDescription The new description.
+     * @throws DukeException If newDescription is empty.
+     */
+    public void setDescription(String newDescription) throws DukeException {
+        if (newDescription.equals("")) {
+            throw new DukeException("OOPS!! description cannot be empty");
+        }
+
+        description = newDescription;
     }
 
     /**

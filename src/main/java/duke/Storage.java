@@ -133,7 +133,7 @@ public class Storage {
 
             if (type.equals("D")) {
                 DeadlineTask dt = (DeadlineTask) t;
-                line += "/" + dt.getTime();
+                line += "/" + dt.getDate();
             } else if (type.equals("E")) {
                 EventTask et = (EventTask) t;
                 line += "/" + et.getTime();

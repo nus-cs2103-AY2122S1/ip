@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.error.DukeException;
+
 /**
  * Represents a todo task.
  */
