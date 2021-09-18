@@ -16,7 +16,7 @@ import duke.task.Todo;
  * Represents a hard disk.
  */
 public class Database {
-    private File file;
+    private String filePath;
 
     /**
      * Represents a database for Duke.
@@ -24,7 +24,12 @@ public class Database {
      */
     public Database(String filePath) {
         try {
-            file = new File(filePath);
+            this.filePath = filePath;
+            File file = new File(filePath);
+            File directory = file.getParentFile();
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -41,14 +46,15 @@ public class Database {
     public ArrayList<Task> readData() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
+            File file = new File(filePath);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
-                String s = scanner.nextLine();
-                Task t = parse(s);
+                String taskString = scanner.nextLine();
+                Task t = parse(taskString);
                 tasks.add(t);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("OOPS!!!Can't read data from the file\n" + e.getMessage());
         }
         return tasks;
     }
@@ -60,14 +66,15 @@ public class Database {
      */
     public void addData(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter(file, true);
-            String out = "\n";
+            FileWriter fileWriter = new FileWriter(filePath, true);
 
+            String out = "";
             out += addTaskName(task);
             out += addDoneString(task);
             out += addPriorityString(task);
             out += addDescription(task);
             out += addTimeline(task);
+            out += "\n";
 
             fileWriter.write(out);
             fileWriter.close();
@@ -84,7 +91,7 @@ public class Database {
      */
     public void entireWriteData (ArrayList<Task> tasks) {
         try {
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(filePath);
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 String out;

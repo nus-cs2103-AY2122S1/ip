@@ -194,7 +194,7 @@ public class Parser {
                 storage.markAsLowPriority(item - 1);
             } else if (priority.equals("ordinary")) {
                 taskList.markAsMediumPriority(item - 1);
-                storage.markAsLowPriority(item - 1);
+                storage.markAsMediumPriority(item - 1);
             } else {
                 throw new DukeException("OOPS!!! If you want to mark a task with priority, "
                         + "Please command 'mark taskIndex &important/&ordinary/&unimportant'."
