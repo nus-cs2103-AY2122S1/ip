@@ -75,14 +75,14 @@ public class Storage {
         String time = task.length == 4 ? task[3] : null;
 
         switch (taskType) {
-        case "T":
-            return new TodoTask(description, isDone);
-        case "D":
-            return new DeadlineTask(description, isDone, time);
-        case "E":
-            return new EventTask(description, isDone, time);
-        default :
-            throw new DukeException("OOPS!! Something went wrong");
+            case "T":
+                return new TodoTask(description, isDone);
+            case "D":
+                return new DeadlineTask(description, isDone, time);
+            case "E":
+                return new EventTask(description, isDone, time);
+            default :
+                throw new DukeException("OOPS!! Something went wrong");
         }
     }
 
