@@ -26,8 +26,8 @@ public class Storage {
      * @param fileName Name of data file.
      */
     public Storage(String filePath, String fileName) {
-        String current_dir = new File("").getAbsolutePath();
-        this.filePath = current_dir.concat(filePath);
+        String currentDir = new File("").getAbsolutePath();
+        this.filePath = currentDir.concat(filePath);
         this.fileName = fileName;
     }
 
