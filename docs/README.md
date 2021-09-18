@@ -111,9 +111,6 @@ to `[D][] homework (by: Oct 10 2021 12:00 AM)`.
 
 Exits the application.
 
-&nbsp;  
-&nbsp;  
-
 Format: `bye`
 
 &nbsp;  
