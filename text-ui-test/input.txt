@@ -1,0 +1,12 @@
+todo
+read a book
+deadline
+CS2103T IP
+Thursday 2359
+event
+CS2101 Lesson
+Tmr 10AM
+list
+done
+2
+bye

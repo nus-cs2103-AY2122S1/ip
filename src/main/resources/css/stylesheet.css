@@ -1,0 +1,37 @@
+#dialog{
+    -fx-font-size: medium;
+    -fx-font-family: Damascus;
+    -fx-background-radius: 30px;
+    -fx-background-color: black;
+    -fx-background-insets: 5px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-text-alignment: left;
+    -fx-text-fill: #f99e1a;
+}
+
+#dialogBox{
+    
+}
+
+#displayPicture {
+    -fx-translate-y: 10px;
+}
+
+#userInput {
+    -fx-background-color: #f99e1a;
+    -fx-font-size: large;
+    -fx-font-family: Damascus;
+    -fx-background-insets: 3px;
+}
+
+#sendButton {
+    -fx-background-color: #f99e1a;
+    -fx-font-size: large;
+    -fx-font-family: Damascus;
+    -fx-background-insets: 3px;
+}
+
+
+#dialogContainer {
+    -fx-background-color: #43484c;
+}
