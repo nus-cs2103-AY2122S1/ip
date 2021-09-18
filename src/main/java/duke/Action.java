@@ -8,6 +8,7 @@ public enum Action {
     DELETE,
     BYE,
     FIND,
+    HELP,
     UNKNOWN
 }
   

@@ -112,6 +112,8 @@ public class TaskList {
                 case FIND:
                     res =  this.find(actionList.getActionList());
                     break;
+                case HELP:
+                    res = "Adding task\n type todo, event or delete to add\n type list to see all the tasks";
                 default:
                     res =  "";
             }
