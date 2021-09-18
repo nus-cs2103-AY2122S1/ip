@@ -1,0 +1,8 @@
+diff a/src/main/java/duke/MainWindow.java b/src/main/java/duke/MainWindow.java	(rejected hunks)
+@@ -1,5 +1,6 @@
+ package duke;
+ 
++import javafx.application.Platform;
+ import javafx.fxml.FXML;
+ import javafx.scene.control.Button;
+ import javafx.scene.control.ScrollPane;
