@@ -32,8 +32,7 @@ public class Parser {
             return Action.BYE;
         }else if(action1.equals("find")){
             return Action.FIND;
-        }
-        else{
+        } else{
             return Action.UNKNOWN;
         }
     }
