@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
+
 import duke.exception.DukeException;
+import duke.task.TaskList;
 
 public class Parser {
     private String userInput;
@@ -19,11 +18,11 @@ public class Parser {
     }
 
     private static boolean isValidDate(String date) {
-        try{
+        try {
             String year = date.substring(0, 3);
             String month = date.substring(5, 6);
             String day = date.substring(8, 9);
-            Integer.parseInt(year); 
+            Integer.parseInt(year);
             Integer.parseInt(month);
             Integer.parseInt(day);
             return date.charAt(4) == '-' && date.charAt(7) == '-';
@@ -39,7 +38,7 @@ public class Parser {
     public String getOperationType() throws DukeException {
         String operation = userInput.split(" ")[0];
 
-        if (Arrays.asList(TaskList.OperationType).contains(operation)) {
+        if (TaskList.isValidOperation(operation)) {
             return operation;
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -70,8 +69,10 @@ public class Parser {
     public String getTask() throws DukeException {
         String taskDescription;
 
-        if (this.getOperationType().equals("deadline") || this.getOperationType().equals("event") ||
-                this.getOperationType().equals("todo") || this.getOperationType().equals("find")) {
+        if (this.getOperationType().equals("deadline")
+                || this.getOperationType().equals("event")
+                || this.getOperationType().equals("todo")
+                || this.getOperationType().equals("find")) {
             if (userInput.contains("/")) {
                 if (userInput.indexOf(" ") < userInput.indexOf("/")) {
                     taskDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/") - 1);
@@ -80,7 +81,9 @@ public class Parser {
                 }
             } else {
                 if (!userInput.contains(" ")) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + this.getOperationType() + " cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a "
+                            + this.getOperationType()
+                            + " cannot be empty.");
                 } else {
                     taskDescription = userInput.substring(userInput.indexOf(" ") + 1);
                 }
@@ -102,7 +105,7 @@ public class Parser {
             } else {
                 throw new DukeException("I'm sorry, but the format of deadline is wrong :-(");
             }
-        } else if (this.getOperationType().equals("event")){
+        } else if (this.getOperationType().equals("event")) {
             if (userInput.contains("/at")) {
                 time = userInput.substring(userInput.indexOf("/at") + 4);
             } else {

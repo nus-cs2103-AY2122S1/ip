@@ -1,7 +1,7 @@
 package duke.ui;
 
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class Ui {
     private static final String line = "____________________________________________________________";
@@ -9,18 +9,18 @@ public class Ui {
     /**
      * Send a greeting to the user.
      */
-    public static void Greet() {
-        System.out.println( line + "\n" +
-                "Hello I'm Duke\n" +
-                "What can I do for you?\n" +
-                line);
+    public static void greet() {
+        System.out.println(line + "\n"
+                + "Hello I'm Duke\n"
+                + "What can I do for you?\n"
+                + line);
     }
 
     /**
      * Say goodbye to the user.
      */
     public static void bye() {
-        System.out.println(line +"\nBye. Hope to see you again soon!\n" + line);
+        System.out.println(line + "\nBye. Hope to see you again soon!\n" + line);
     }
 
     /**
@@ -31,7 +31,7 @@ public class Ui {
     public static void list(TaskList tasks) {
         System.out.println(line);
         System.out.println("Here are tasks in your list:");
-        for(int index = 1; index <= tasks.size(); index++) {
+        for (int index = 1; index <= tasks.size(); index++) {
             System.out.println(index + "." + tasks.get(index - 1).toString());
         }
         System.out.println(line);
@@ -75,6 +75,12 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Print out the list of task info searched by user using a keyword
+     *
+     * @param taskList A list of task.
+     * @param keyword keyword user want to search by.
+     */
     public static void find(TaskList taskList, String keyword) {
         System.out.println(line);
         System.out.println("Here are the matching tasks in your list:");
@@ -82,6 +88,9 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Tell user a error occur while loading local data
+     */
     public void showLoadingError() {
         System.out.println(line);
         System.out.println("Cannot Load From Data.\n");

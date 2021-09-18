@@ -1,16 +1,9 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    public static String[] OperationType = new String[]{"bye", "done", "delete", "list",
-            "todo", "deadline", "event", "find"};
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -19,6 +12,20 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
+
+    /**
+     * Check if the given operation is valid.
+     *
+     * @param operation Operation input by user
+     * @return A boolean - true if the user input operation is valid.
+     */
+    public static boolean isValidOperation(String operation) {
+        String[] operationType = new String[]{"bye", "done", "delete", "list",
+            "todo", "deadline", "event", "find"};
+
+        return operation.contains(operation);
+    }
+
 
     public void markDone (int index) {
         this.tasks.get(index).markDone();
@@ -36,16 +43,28 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    /**
+     * Return a list of task containing given keyword.
+     *
+     * @param keyword Keyword input by user
+     * @return List of task containing the given keyword.
+     */
     public String find(String keyword) {
         StringBuilder result = new StringBuilder();
         final int[] count = {0};
 
-        tasks.stream().
-                filter(task -> task.toString().contains(keyword)).
-                forEach(task -> result.append(++count[0]).append(".")
-                        .append(task.toString()).append("\n"));
+        tasks.stream()
+                .filter(task -> task
+                        .toString()
+                        .contains(keyword))
+                .forEach(task -> result
+                        .append(++count[0])
+                        .append(".")
+                        .append(task
+                                .toString())
+                        .append("\n"));
 
-        if (count[0] == 0){
+        if (count[0] == 0) {
             return "";
         }
         return result.toString();

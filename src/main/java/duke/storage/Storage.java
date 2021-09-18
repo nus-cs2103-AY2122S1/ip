@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import duke.task.Task;
-import duke.task.Todo;
+
+import duke.command.Parser;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.exception.DukeException;
-import duke.command.Parser;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
     private String filePath;
@@ -23,7 +24,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.tasks= new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -34,8 +35,8 @@ public class Storage {
             File f = new File(filePath);
             Scanner fileInput = new Scanner(f);
             while (fileInput.hasNext()) {
-                String Data = fileInput.nextLine();
-                ProcessFileData(Data);
+                String data = fileInput.nextLine();
+                processFileData(data);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("Cannot Load From Data.");
@@ -46,12 +47,12 @@ public class Storage {
     /**
      * Parse the local data.
      */
-    public void ProcessFileData(String Data) {
-        char taskType = Data.charAt(0);
-        char status = Data.charAt(4);
+    public void processFileData(String data) {
+        char taskType = data.charAt(0);
+        char status = data.charAt(4);
         Task task;
         String description;
-        Parser parser = new Parser(Data);
+        Parser parser = new Parser(data);
 
         if (taskType == 'T') {
             description = parser.getFileTask();
@@ -80,7 +81,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
 
             for (Task task: tasks) {
-                fw.write( task.formatForFile()+ "\n");
+                fw.write(task.formatForFile() + "\n");
             }
             fw.close();
         } catch (IOException e) {

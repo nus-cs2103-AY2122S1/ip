@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
 
-
 public class ParserTest {
     @Test
     public void testGetOperationType() {

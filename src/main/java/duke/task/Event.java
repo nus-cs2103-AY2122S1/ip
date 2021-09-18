@@ -2,12 +2,18 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Event extends Task {
 
     protected LocalDate at;
 
+    /**
+     * Constructor for Event class
+     * initializing a Event instance with the given task description and time.
+     *
+     * @param description Task description
+     * @param at Time of event
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;

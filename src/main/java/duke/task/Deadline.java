@@ -4,9 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-
     protected LocalDate by;
 
+    /**
+     * Constructor for Deadline class
+     * initializing a Deadline instance with the given task description and deadline.
+     *
+     * @param description Task description
+     * @param by Task deadline
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
