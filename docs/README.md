@@ -36,7 +36,7 @@ Format: `list`
 
 Example:  
 &nbsp;  
-![list example](list.png)  
+![list example](https://moley456.github.io/ip/docs/list.png)  
 A `list` command with some sample data.
 
 
