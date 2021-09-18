@@ -46,7 +46,7 @@ Adds a new deadline task.
 Syntax: `deadline <description> /by <date time>`
 > If the description or the date/time is empty, an error message will be displayed.
 > 
-> You can refer to [Date Time Format](https://random689.github.io/ip/#Date-Time-Format) for the allowed date-time format.
+> You can refer to Date Time Format for the allowed date-time format.
 
 ----
 
@@ -57,7 +57,7 @@ Adds a new event task.
 Syntax: `event <description> /at <date time>`
 > If the description or the date/time is empty, an error message will be displayed.
 >
-> You can refer to [Date Time Format](https://random689.github.io/ip/#Date-Time-Format) for the allowed date-time format.
+> You can refer to Date Time Format for the allowed date-time format.
 
 ----
 

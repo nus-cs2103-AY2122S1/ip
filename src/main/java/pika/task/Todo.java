@@ -23,7 +23,7 @@ public class Todo extends Task {
     public String write() {
         String tags = " |" + getTags();
         if (tags.equals(" |")) {
-            return "D " + super.write();
+            return "T " + super.write();
         } else {
             return "T " + super.write() + " |" + getTags();
         }
