@@ -155,11 +155,11 @@ Behavior varies based on user input. Can add, delete and sum expenses within a T
 sum all expenses in the Task list.
 
 Format: 
-* `expense INDEX DESCRIPTION $AMOUNT`
-* `expense INDEX /sum`
-* `expense /listall`
-* `expense /sumall`
-* `expense INDEX /delete`
+1. `expense INDEX DESCRIPTION $AMOUNT`
+2. `expense INDEX /sum`
+3. `expense /listall`
+4. `expense /sumall`
+5. `expense INDEX /delete`
 
 Examples of usage:
 1. `expense 1 buy pillow $50`
@@ -169,6 +169,7 @@ Examples of usage:
 5. `expense 1 /delete 1`
 
 Expected outcome: An Event of `DESCRIPTION` and appropriate date and time will be added to the Task list.
+
 1.
 ```
 I added buy bolster: $50.00 to [T][ ] sleep!
