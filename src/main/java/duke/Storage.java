@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,10 +36,14 @@ public class Storage {
 
             ArrayList<Task> tasks = new ArrayList<>();
 
+            ArrayList<Integer> tasksToStartAfter = new ArrayList<>();
+
             while (savedTasks.hasNextLine()) {
                 String storedTask = savedTasks.nextLine();
-                parseStoredTask(storedTask, tasks);
+                parseStoredTask(storedTask, tasks, tasksToStartAfter);
             }
+
+            setTaskAfterTaskForAll(tasks, tasksToStartAfter);
 
             return tasks;
 
@@ -47,17 +52,20 @@ public class Storage {
         }
     }
 
-    private void parseStoredTask(String storedTask, ArrayList<Task> tasks) throws DukeException {
+    private void parseStoredTask(String storedTask, ArrayList<Task> tasks,
+            ArrayList<Integer> tasksToStartAfter
+    ) throws DukeException {
         if (storedTask.startsWith("[T]")) {
-            addToDo(storedTask, tasks);
+            addToDo(storedTask, tasks, tasksToStartAfter);
         } else if (storedTask.startsWith("[E]")) {
-            addEvent(storedTask, tasks);
+            addEvent(storedTask, tasks, tasksToStartAfter);
         } else if (storedTask.startsWith("[D]")) {
-            addDeadline(storedTask, tasks);
+            addDeadline(storedTask, tasks, tasksToStartAfter);
         }
     }
 
-    private void addToDo(String storedTask, ArrayList<Task> tasks) throws DukeException {
+    private void addToDo(String storedTask, ArrayList<Task> tasks,
+            ArrayList<Integer> tasksToStartAfter) throws DukeException {
         String[] taskDetails = storedTask.split(" / ");
         String taskDescription = taskDetails[0];
 
@@ -67,12 +75,14 @@ public class Storage {
             currentTask.markAsDone();
         }
 
-        setAfter(storedTask, currentTask, tasks);
+        setTaskAfterDateTime(storedTask, currentTask);
+        registerTaskAfterTask(storedTask, tasksToStartAfter);
 
         tasks.add(currentTask);
     }
 
-    private void addEvent(String storedTask, ArrayList<Task> tasks) throws DukeException {
+    private void addEvent(String storedTask, ArrayList<Task> tasks,
+            ArrayList<Integer> tasksToStartAfter) throws DukeException {
         int at = storedTask.lastIndexOf(" (at: ");
         int end = storedTask.lastIndexOf(")");
         assert at != -1;
@@ -87,12 +97,14 @@ public class Storage {
             currentTask.markAsDone();
         }
 
-        setAfter(storedTask, currentTask, tasks);
+        setTaskAfterDateTime(storedTask, currentTask);
+        registerTaskAfterTask(storedTask, tasksToStartAfter);
 
         tasks.add(currentTask);
     }
 
-    private void addDeadline(String storedTask, ArrayList<Task> tasks) throws DukeException {
+    private void addDeadline(String storedTask, ArrayList<Task> tasks,
+            ArrayList<Integer> tasksToStartAfter) throws DukeException {
         int by = storedTask.lastIndexOf(" (by: ");
         int end = storedTask.lastIndexOf(")");
         assert by != -1;
@@ -107,24 +119,51 @@ public class Storage {
             currentTask.markAsDone();
         }
 
-        setAfter(storedTask, currentTask, tasks);
+        setTaskAfterDateTime(storedTask, currentTask);
+        registerTaskAfterTask(storedTask, tasksToStartAfter);
 
         tasks.add(currentTask);
     }
 
-    private void setAfter(String storedTask, Task currentTask, ArrayList<Task> tasks) throws DukeException {
-        String[] taskDetails = storedTask.split(" / ");
+    private void setTaskAfterDateTime(String storedTask, Task currentTask) throws DukeException {
+        try {
+            String[] taskDetails = storedTask.split(" / ");
 
-        String afterDateTime = taskDetails[taskDetails.length - 2];
-        LocalDateTime refDateTime = LocalDateTime.parse(
-                afterDateTime,
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        currentTask.setDoAfterDateTime(refDateTime);
+            String afterDateTime = taskDetails[taskDetails.length - 2];
+            LocalDateTime refDateTime = LocalDateTime.parse(
+                    afterDateTime,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            currentTask.setDoAfterDateTime(refDateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Storage Date Time parse error");
+        }
+    }
 
-        String[] afterTasks = taskDetails[taskDetails.length - 1].split(" ");
-        for (int i = 1; i < afterTasks.length; i++) {
-            int taskNum = Integer.parseInt(afterTasks[i]);
-            currentTask.setDoAfterTask(tasks.get(taskNum - 1));
+
+    private void registerTaskAfterTask(String storedTask, ArrayList<Integer> tasksToStartAfter) throws DukeException {
+        try {
+            String[] taskDetails = storedTask.split(" / ");
+
+            int refTask = Integer.parseInt(taskDetails[taskDetails.length - 1]);
+
+            tasksToStartAfter.add(refTask);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Storage Task parse error");
+        }
+    }
+
+    private void setTaskAfterTaskForAll(ArrayList<Task> tasks,
+            ArrayList<Integer> tasksToStartAfter) throws DukeException {
+        for (int i = 0; i < tasks.size(); i++) {
+            int taskNumToStartAfter = tasksToStartAfter.get(i);
+            Task taskToDoAfter = tasks.get(i);
+
+            if (taskNumToStartAfter == 0) {
+                taskToDoAfter.setDoAfterTask(EmptyTask.EMPTY_TASK);
+            } else {
+                Task taskToDoBefore = tasks.get(taskNumToStartAfter - 1);
+                taskToDoAfter.setDoAfterTask(taskToDoBefore);
+            }
         }
     }
 

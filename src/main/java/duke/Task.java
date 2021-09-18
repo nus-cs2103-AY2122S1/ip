@@ -3,22 +3,22 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
-    private LocalDateTime doAfterDateTime;
-    private TaskList doAfterTasks;
+    private LocalDateTime dateTimeToStartAfter;
+    private Task taskToStartAfter;
 
     /**
      * A constructor method for a Task object.
      *
      * @param description the name of the Task
      */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
-        doAfterTasks = new TaskList();
-        doAfterDateTime = LocalDateTime.MAX;
+        taskToStartAfter = EmptyTask.EMPTY_TASK;
+        dateTimeToStartAfter = LocalDateTime.MAX;
     }
 
     /**
@@ -66,17 +66,14 @@ public class Task {
     public String toStorageString(TaskList tasks) {
         return this.toString()
                 + " / "
-                + doAfterDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
-                + " / tasks"
-                + afterTasksNums(tasks, doAfterTasks);
+                + dateTimeToStartAfter.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                + " / "
+                + taskNumToStartAfter(tasks, taskToStartAfter);
     }
 
-    private String afterTasksNums(TaskList tasks, TaskList afterTasks) {
-        String taskNumsToReturn = "";
-        for (int i = 0; i < afterTasks.numOfTasks(); i++) {
-            taskNumsToReturn = taskNumsToReturn + " " + tasks.getTaskNum(afterTasks.getTask(i));
-        }
-        return taskNumsToReturn;
+    private int taskNumToStartAfter(TaskList tasks, Task taskToStartAfter) {
+        int taskNumToReturn = tasks.getTaskNum(taskToStartAfter);
+        return taskNumToReturn == -1 ? 0 : taskNumToReturn;
     }
 
     /**
@@ -86,7 +83,7 @@ public class Task {
      */
     public void setDoAfterTask(Task task) throws DukeException {
         if (this != task) {
-            this.doAfterTasks.addTask(task);
+            this.taskToStartAfter = task;
         } else {
             throw new DukeException("");
         }
@@ -98,7 +95,7 @@ public class Task {
      * @param dateTime this task should be done after this date and time
      */
     public void setDoAfterDateTime(LocalDateTime dateTime) {
-        this.doAfterDateTime = dateTime;
+        this.dateTimeToStartAfter = dateTime;
     }
 
     /**
@@ -108,7 +105,7 @@ public class Task {
      * @return true if this Task is after the specified Task
      */
     public boolean isAfterTask(Task task) {
-        return this.doAfterTasks.containsTask(task);
+        return this.taskToStartAfter == task;
     }
 
     /**
@@ -118,6 +115,13 @@ public class Task {
      * @return true if this Task is after the specified date and time
      */
     public boolean isAfterDateTime(LocalDateTime dateTime) {
-        return this.doAfterDateTime.compareTo(dateTime) < 1;
+        return this.dateTimeToStartAfter.compareTo(dateTime) < 1;
     }
+
+    /**
+     * Checks if this Task is an EmptyTask.
+     *
+     * @return true if this Task is an EmptyTask
+     */
+    public abstract boolean isEmptyTask();
 }

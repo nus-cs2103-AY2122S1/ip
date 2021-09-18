@@ -94,9 +94,10 @@ public class Ui {
      * @return the tasks to do after the referenced task
      */
     public String getTasksAfterTask(TaskList tasks, Task refTask) {
-        return "After this task:\n  " + refTask.toString()
-                + "\nYou need to do the following tasks:\n"
-                + tasks.toString();
+        String listOfTasksToDoAfter = tasks.numOfTasks() == 0
+                ? "\nYou have no task to do"
+                : "\nYou need to do the following tasks:" + tasks.toString();
+        return "After this task:\n  " + refTask.toString() + listOfTasksToDoAfter;
     }
 
     /**
@@ -107,10 +108,11 @@ public class Ui {
      * @return the tasks to do after the referenced date and time
      */
     public String getTasksAfterDateTime(TaskList tasks, LocalDateTime refDateTime) {
-        return "After:\n  "
-                + refDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
-                + "\nYou need to do the following tasks:"
-                + tasks.toString();
+        String listOfTasksToDoAfter = tasks.numOfTasks() == 0
+                ? "\nYou have no task to do"
+                : "\nYou need to do the following tasks:" + tasks.toString();
+        return "After:\n  " + refDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))
+                + listOfTasksToDoAfter;
     }
 
     /**

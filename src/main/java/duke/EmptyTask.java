@@ -1,17 +1,19 @@
 package duke;
 
 /**
- * A class to represent a ToDo task.
+ * A class to represent an EmptyTask.
  */
-public class ToDo extends Task {
+public class EmptyTask extends Task {
 
     /**
-     * Constructor for a ToDo object.
-     * @param description name of the task
+     * Constructor for an EmptyTask object.
      */
-    public ToDo(String description) {
-        super(description);
+    private EmptyTask() {
+        super("");
     }
+
+    public static EmptyTask EMPTY_TASK = new EmptyTask();
+
 
     /**
      * Returns the task information
@@ -30,6 +32,6 @@ public class ToDo extends Task {
      */
     @Override
     public boolean isEmptyTask() {
-        return false;
+        return true;
     }
 }

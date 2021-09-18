@@ -33,4 +33,14 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: "
                 + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
+
+    /**
+     * Checks if the Task is an EmptyTask.
+     *
+     * @return true if this Task is an EmptyTask, false otherwise
+     */
+    @Override
+    public boolean isEmptyTask() {
+        return false;
+    }
 }

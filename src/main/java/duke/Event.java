@@ -33,4 +33,14 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: "
                 + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
+
+    /**
+     * Checks if the Task is an EmptyTask.
+     *
+     * @return true if this Task is an EmptyTask, false otherwise
+     */
+    @Override
+    public boolean isEmptyTask() {
+        return false;
+    }
 }
