@@ -13,6 +13,10 @@ public class Duke {
         isExit = false;
     }
 
+    public String getResponse(String input) {
+        return "Hello";
+    }
+
     public enum InputCommands {
         bye, list, done, delete, todo, deadline, event
     }
