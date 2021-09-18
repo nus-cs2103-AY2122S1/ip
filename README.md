@@ -2,7 +2,7 @@
 
 Losing track of your tasks? Aoi Todo Bot is a todo list app to manage your daily tasks with ease.
 
-[![CI Status](https://github.com/mslevis/docs/actions/workflows/gradle.yml/badge.svg)
+![CI Status](https://github.com/mslevis/ip/actions/workflows/gradle.yml/badge.svg)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mslevis/ip)
 ---
 * [About](#about)
