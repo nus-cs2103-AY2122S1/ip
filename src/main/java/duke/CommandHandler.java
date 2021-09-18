@@ -26,6 +26,8 @@ public class CommandHandler {
      * @return A message to the UI after handling the event task.
      */
     public String handleEvent(Task eventTask) {
+        assert (eventTask.getDescription() != null);
+
         taskList.add(eventTask);
         return ui.addTask(eventTask);
     }
@@ -37,6 +39,8 @@ public class CommandHandler {
      * @return A message to the UI after handling the deadline task.
      */
     public String handleDeadline(Task deadlineTask) {
+        assert (deadlineTask.getDescription() != null);
+
         taskList.add(deadlineTask);
         return ui.addTask(deadlineTask);
     }
@@ -48,6 +52,8 @@ public class CommandHandler {
      * @return A message to the UI after handling the todo task.
      */
     public String handleTodo(Task toDoTask) {
+        assert (toDoTask.getDescription() != null);
+
         taskList.add(toDoTask);
         return ui.addTask(toDoTask);
     }
@@ -55,31 +61,36 @@ public class CommandHandler {
     /**
      * Handles the find command.
      *
-     * @param input The keyword specified to find certain tasks.
+     * @param keyword The keyword specified to find certain tasks.
      * @return A message to the UI with all the tasks that contain the keyword specified.
      * @throws EmptyDescriptionException If the keyword is not specified.
      */
-    public String handleFind(String input) throws EmptyDescriptionException {
-        if (input.length() == 4) {
+    public String handleFind(String keyword) throws EmptyDescriptionException {
+        if (keyword.length() == 4) {
             throw new EmptyDescriptionException("error");
         }
 
-        String keyword = input.substring(5);
-        return ui.findTask(keyword);
+        assert (keyword.length() > 4);
+
+        String keywordToMatch = keyword.substring(5);
+        return ui.findTask(keywordToMatch);
     }
 
     /**
      * Handles the delete command.
      *
-     * @param input The task number to be deleted.
+     * @param taskNumber The task number to be deleted.
      * @return A message to the UI after deleting the task.
      * @throws EmptyDescriptionException If the task number is not specified.
      */
-    public String handleDelete(String input) throws EmptyDescriptionException {
-        if (input.length() == 6) {
+    public String handleDelete(String taskNumber) throws EmptyDescriptionException {
+        if (taskNumber.length() == 6) {
             throw new EmptyDescriptionException("error");
         }
-        char taskIndex = input.charAt(7);
+
+        assert (taskNumber.length() > 6);
+
+        char taskIndex = taskNumber.charAt(7);
         int index = Integer.parseInt(String.valueOf(taskIndex));
 
         Task taskAtIndex = taskList.getTask(index);
@@ -91,16 +102,18 @@ public class CommandHandler {
     /**
      * Handles the done command.
      *
-     * @param input The task number to be marked as done.
+     * @param taskNumber The task number to be marked as done.
      * @return A message to the UI after marking the task as done.
      * @throws EmptyDescriptionException If the task number is not specified.
      */
-    public String handleDone(String input) throws EmptyDescriptionException {
-        if (input.length() == 4) {
+    public String handleDone(String taskNumber) throws EmptyDescriptionException {
+        if (taskNumber.length() == 4) {
             throw new EmptyDescriptionException("error");
         }
 
-        char indexOfTask = input.charAt(5);
+        assert (taskNumber.length() > 4);
+
+        char indexOfTask = taskNumber.charAt(5);
         int index = Integer.parseInt(String.valueOf(indexOfTask));
 
         Task taskAtIndex = taskList.getTask(index);
