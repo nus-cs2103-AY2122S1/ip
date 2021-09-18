@@ -10,7 +10,7 @@ public class UI {
      * @param taskList The List of Tasks in Duke
      * @return The String equivalent of all the Task List
      */
-    public String printTaskList(TaskList taskList) {
+    public String printTaskList(TaskList taskList) throws DukeException {
         String output = "";
         if ((taskList != null) && (taskList.getTaskListLength() > 0)) {
             output += "Here are the tasks in your list:\n";
@@ -18,7 +18,7 @@ public class UI {
                 output += (i + 1) + "." + taskList.getTask(i) + "\n";
             }
         } else {
-            output += "The Task List is Empty";
+            throw new DukeException("The Task List is Empty");
         }
         return output;
     }

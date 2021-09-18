@@ -87,18 +87,18 @@ public class Storage {
     /**
      * Method to return the Type of Command to be stored
      *
-     * @param command The Command Passed for comparing to the different types of Commands
+     * @param command The Command Passed for comparing to the different types of CommandTypes
      * @return The Type of Command Received
      */
-    public Command.Commands getCommand(String command) {
+    public Command.CommandTypes getCommand(String command) {
         try {
             if (command != null) {
-                return Command.Commands.valueOf(command.toUpperCase());
+                return Command.CommandTypes.valueOf(command.toUpperCase());
             } else {
-                return Command.Commands.UNKNOWN;
+                return Command.CommandTypes.UNKNOWN;
             }
         } catch (IllegalArgumentException e) {
-            return Command.Commands.UNKNOWN;
+            return Command.CommandTypes.UNKNOWN;
         }
     }
 

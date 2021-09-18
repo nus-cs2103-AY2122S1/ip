@@ -20,7 +20,6 @@ public class TaskList {
 
     /**
      * Constructor to initialize the Task List
-     *
      * @param storedTasks The Tasks initially Stored in the Duke
      */
     public TaskList(List<Task> storedTasks) {
@@ -30,7 +29,6 @@ public class TaskList {
 
     /**
      * Method to add a Task to the Task List
-     *
      * @param task The Task to be added in the Task List
      */
     public void addTask(Task task) {
@@ -39,7 +37,6 @@ public class TaskList {
 
     /**
      * Method to return the deleted Task at the specified index
-     *
      * @param index The Index of the Task to be deleted
      * @return The deleted Task which was initially at the given Index
      */
@@ -49,7 +46,6 @@ public class TaskList {
 
     /**
      * Method to return the Task at the specified Index
-     *
      * @param index The Index of the Task to be returned
      * @return The Task at the specified Index
      */
@@ -59,7 +55,6 @@ public class TaskList {
 
     /**
      * Method to return the number of Tasks in the Task List
-     *
      * @return The number of Tasks in the Task List
      */
     public int getTaskListLength() {
@@ -68,16 +63,21 @@ public class TaskList {
 
     /**
      * Method to Mark the Task at the specified Index as Complete
-     *
      * @param index The Index of the Task to be Marked as Complete
      */
     public void completeTask(int index) {
         taskList.get(index).markAsCompleted();
     }
 
+    /**
+     * Method to find all the tasks of with the given search String
+     * @param description The String to be searched
+     * @return A list of tasks having the given search String
+     */
     public TaskList searchTaskList(String description) {
         TaskList matchingTasks = new TaskList();
         for (Task task : taskList) {
+            System.out.println(task);
             if (task.getDescription().contains(description)) {
                 matchingTasks.addTask(task);
             }

@@ -17,7 +17,6 @@ public class Duke {
      * Constructor for the Duke class
      */
     public Duke() {
-
         storage = new Storage("data/duke.txt");
         tasks = new TaskList(storage.load());
         parser = new Parser();

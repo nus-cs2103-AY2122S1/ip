@@ -1,0 +1,21 @@
+.background {
+    -fx-background-color: #000000;
+}
+
+.dialog-box {
+    -fx-padding: 10;
+    -fx-background-color: #25D366;
+    -fx-background-radius: 8.0;
+    -fx-text-fill: #000000;
+}
+
+.send-button {
+    -fx-background-color: #34B751;
+    -fx-background-radius: 0;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+}
+
+.text-field {
+    -fx-background-color: #DCF8C6;
+}

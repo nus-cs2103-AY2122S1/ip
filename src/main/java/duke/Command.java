@@ -11,9 +11,9 @@ import duke.task.ToDoTask;
  */
 public class Command {
     /**
-     * Enum to encapsulate the type of Commands
+     * Enum to encapsulate the type of CommandTypes
      */
-    public enum Commands {
+    public enum CommandTypes {
         BYE,
         DEADLINE,
         DELETE,
@@ -25,7 +25,7 @@ public class Command {
         UNKNOWN
     }
 
-    private final Commands typeOfCommand;
+    private final CommandTypes typeOfCommand;
     private final String taskDetails;
 
     /**
@@ -34,38 +34,38 @@ public class Command {
      * @param type The type of Command
      * @param taskDetails The String describing the various attributes for the command
      */
-    public Command(Commands type, String taskDetails) {
+    public Command(CommandTypes type, String taskDetails) {
         if (type != null) {
             switch (type) {
             case BYE:
-                this.typeOfCommand = Commands.BYE;
+                this.typeOfCommand = CommandTypes.BYE;
                 break;
             case DEADLINE:
-                this.typeOfCommand = Commands.DEADLINE;
+                this.typeOfCommand = CommandTypes.DEADLINE;
                 break;
             case DELETE:
-                this.typeOfCommand = Commands.DELETE;
+                this.typeOfCommand = CommandTypes.DELETE;
                 break;
             case DONE:
-                this.typeOfCommand = Commands.DONE;
+                this.typeOfCommand = CommandTypes.DONE;
                 break;
             case EVENT:
-                this.typeOfCommand = Commands.EVENT;
+                this.typeOfCommand = CommandTypes.EVENT;
                 break;
             case FIND:
-                this.typeOfCommand = Commands.FIND;
+                this.typeOfCommand = CommandTypes.FIND;
                 break;
             case LIST:
-                this.typeOfCommand = Commands.LIST;
+                this.typeOfCommand = CommandTypes.LIST;
                 break;
             case TODO:
-                this.typeOfCommand = Commands.TODO;
+                this.typeOfCommand = CommandTypes.TODO;
                 break;
             default:
-                this.typeOfCommand = Commands.UNKNOWN;
+                this.typeOfCommand = CommandTypes.UNKNOWN;
             }
         } else {
-            this.typeOfCommand = Commands.UNKNOWN;
+            this.typeOfCommand = CommandTypes.UNKNOWN;
         }
         this.taskDetails = taskDetails;
     }
@@ -217,7 +217,7 @@ public class Command {
         if (searchDetails != null && !searchDetails.equals("")) {
             output += ui.printTaskList(tasks.searchTaskList(searchDetails));
         } else {
-            throw new DukeException("OOPS! I'm sorry, but I don't know that command");
+            throw new DukeException("Incorrect Format of the Find Command!!,\nCorrect Format --> find <search_string>");
         }
         return output;
     }
