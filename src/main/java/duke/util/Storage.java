@@ -96,10 +96,10 @@ public class Storage {
 	}
 
 	/**
-	 * Extract the String datetime from the datetime part of the command.
+	 * Extracts the String datetime from the datetime part of the command.
 	 *
 	 * @param dateTimeDetails the datetime part of the command
-	 * @return the datetime
+	 * @return the datetime as a string
 	 */
 	public String getDateTime(String dateTimeDetails) {
 		return dateTimeDetails.substring(1, dateTimeDetails.length() - 1);

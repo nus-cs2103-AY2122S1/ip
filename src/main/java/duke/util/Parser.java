@@ -18,11 +18,9 @@ public class Parser {
 	public static String parse(String command) throws DukeException {
 		String response;
 		if (command.startsWith("bye")) {
-			response = "Bye. Hope to see you again soon!\n";
-			return response;
+			return "Bye. Hope to see you again soon!\n";
 		} else if (command.startsWith("list")) {
-			response = TaskList.printTasks("");
-			return response;
+			return TaskList.printTasks("");
 		} else if (command.startsWith("find")) {
 			response = TaskList.findTasks(command);
 		} else if (command.startsWith("done")) {

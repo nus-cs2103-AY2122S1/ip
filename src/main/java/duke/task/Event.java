@@ -14,6 +14,11 @@ public class Event extends Task {
 		this.dateTime = dateTime;
 	}
 
+	/**
+	 * Gets the datetime.
+	 *
+	 * @return the datetime string
+	 */
 	public String getDateTime() {
 		return dateTime;
 	}

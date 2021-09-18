@@ -15,10 +15,6 @@ public abstract class Task {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
-	
 	/**
 	 * Returns whether the task is marked as done.
 	 */
@@ -26,10 +22,11 @@ public abstract class Task {
 		return done;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	/**
+	 * Set the task as done or not.
+	 *
+	 * @param done whether the task is done
+	 */
 	public void setDone(boolean done) {
 		this.done = done;
 	}

@@ -17,10 +17,20 @@ public class Deadline extends Task {
 		this.deadline = deadline;
 	}
 
+	/**
+	 * Gets the deadline of the task.
+	 *
+	 * @return the deadline
+	 */
 	public LocalDate getDeadline() {
 		return deadline;
 	}
 
+	/**
+	 * Gets the formatted deadline in MMM d yyyy format.
+	 *
+	 * @return the formatted deadline String
+	 */
 	public String getFormattedDeadline() {
 		return this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")); // -> Oct 15 2019
 	}

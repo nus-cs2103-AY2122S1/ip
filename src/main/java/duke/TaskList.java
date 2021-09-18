@@ -125,7 +125,9 @@ public class TaskList {
      * Handles task deletion.
      * 
      * @param command user input to parse
-     * @throws DukeTaskNotFoundException if task not specified
+     * @throws DukeTaskNotFoundException            if task not specified
+     * @throws DukeInvalidTaskNumberFormatException if task in wrong format
+     * @throws DukeTaskNumberOutOfBoundsException   if task number not valid
      */
     public static String handleDelete(String command)
             throws DukeTaskNotFoundException, DukeInvalidTaskNumberFormatException, DukeTaskNumberOutOfBoundsException {
@@ -191,8 +193,8 @@ public class TaskList {
             throw new DukeException("You need to specify which event you want to add!\n");
         }
 
-        final int eventStartIdx = 6;
-        String eventDetails = command.substring(eventStartIdx);
+        final int EVENT_START_IDX = 6;
+        String eventDetails = command.substring(EVENT_START_IDX);
         String[] commandSplit = splitCommand(eventDetails, "/at"); // "taskName /at datetime"
         String task = getTask(commandSplit);
         String dateTime = getDateTime(commandSplit); // dateTime is the 2nd part of the command
@@ -203,15 +205,15 @@ public class TaskList {
      * Adds deadline task with date/time.
      *
      * @param command User input to extract task and datetime
-     * @throws DukeException Task not specified
+     * @throws DukeException Task not specified or wrong format
      */
     public static String addDeadline(String command) throws DukeException {
         if (command.equals("deadline")) {
             throw new DukeException("You need to specify which deadline you want to add!\n");
         }
 
-        final int deadlineStartIdx = 9;
-        String taskDetails = command.substring(deadlineStartIdx);
+        final int DEADLINE_START_IDX = 9;
+        String taskDetails = command.substring(DEADLINE_START_IDX);
         String[] commandSplit = splitCommand(taskDetails, "/by");
         String task = getTask(commandSplit);
         String dateTime = getDateTime(commandSplit);
@@ -231,6 +233,7 @@ public class TaskList {
      * @param command User input to extract task and dateTime
      * @param by      The string to split the command by
      * @return The task and dateTime in a String array
+     * @throws DukeException if Duke specific error
      */
     private static String[] splitCommand(String command, String by) throws DukeException {
         String[] commandSplit = command.split(by);
@@ -245,6 +248,9 @@ public class TaskList {
 
     /**
      * Gets the task from the split original command.
+     *
+     * @param commandSplit the String array of the split command
+     * @throws DukeException if task not specified
      */
     private static String getTask(String[] commandSplit) throws DukeException {
         String task = commandSplit[0].trim(); // Trim the first part of the original command
