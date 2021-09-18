@@ -56,7 +56,7 @@ public class Duke {
         }
     }
 
-    public void run () {
+    public void run() {
         System.out.println(ui.greet());
         boolean isExit = false;
         while (!isExit) {

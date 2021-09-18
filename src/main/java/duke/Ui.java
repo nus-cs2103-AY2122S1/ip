@@ -14,15 +14,15 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public String greet () {
+    public String greet() {
         return GREET;
     }
 
-    public String exit () {
+    public String exit() {
         return EXIT;
     }
 
-    public String echoCommand () {
+    public String echoCommand() {
         return sc.nextLine();
     }
 

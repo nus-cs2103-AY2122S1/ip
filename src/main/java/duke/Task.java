@@ -22,12 +22,12 @@ public class Task {
         return this.description;
     }
 
-    public void markAsDone () {
+    public void markAsDone() {
         this.isDone = true;
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
