@@ -19,9 +19,9 @@ public class Ui {
      * @param lst
      */
     void greet(TaskList lst) {
-        System.out.println("Ad astra abyssosque! "
+        this.say("Ad astra abyssosque! "
                 + "I am Katheryne, the receptionist here at the Adventurers' Guild.");
-        System.out.println("How may I assist?");
+        this.say("How may I assist?");
         if (!lst.isEmpty()) {
             System.out.println("I still have your list of tasks from last time. "
                 + "The number of tasks you have is " + lst.getSize() + ".");
