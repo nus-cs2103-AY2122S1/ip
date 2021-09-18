@@ -44,7 +44,7 @@ This feature allows you to add events at some date and/or time.
   Delete multiple tasks: `delete 1 2` --> deletes tasks 1 and 2
 
 ### 7. `bye` - Say bye to Duke!
-  ❗ Note: Saying 'bye' to Duke will not close the GUI application. This is by design so as to allow the user to restart a conversation with Duke easily without havnig to restart the application.
+❗ Note: Saying 'bye' to Duke will not close the GUI application. This is by design to allow the user to resume a conversation with Duke easily without having to restart the application.
 
 
 
