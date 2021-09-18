@@ -59,9 +59,6 @@ public class Parser {
         // Update a task
         Matcher updateMatcher = updatePattern.matcher(input);
         if (updateMatcher.find()) {
-            System.out.println(updateMatcher.group(1));
-            System.out.println(updateMatcher.group(2));
-            System.out.println(updateMatcher.group(3));
             try {
                 int taskNumber = Integer.parseInt(updateMatcher.group(1));
                 if (updateMatcher.group(2).equals("/desc")) {
