@@ -1,0 +1,54 @@
+**Command List**
+> bye
+DESCRIPTION
+ Quits DukeAgain.
+____________________________________________________________
+> clear
+DESCRIPTION
+ Clears the current task list.
+____________________________________________________________
+> deadline DESC /by DATE_TIME [ / OTHER_INFO ]
+ALIAS
+> d ...
+DESCRIPTION
+ Set a deadline task. DATE_TIME must be formatted as a date
+ (yyyy-MM-dd) or time (HH:mm) or both, separated by a space
+ (yyyy-MM-dd HH:mm).
+EXAMPLES
+ deadline MA1231 Assignment 2 /by 2021-10-03 23:59
+ deadline Report /by 2021-11-21 15:20 / finalize bibliography
+____________________________________________________________
+> delete INDEX
+DESCRIPTION
+ Deletes the task at index. CANNOT BE UNDONE.
+____________________________________________________________
+> done INDEX
+DESCRIPTION
+ Marks the task at index as complete.
+____________________________________________________________
+> event DESC /at START ~ END [ / OTHER_INFO ]
+ALIAS
+> e ...
+DESCRIPTION
+ Set a event task. START and END must be 
+ formatted as a date (yyyy-MM-dd) or time (HH:mm) or both, 
+ separated by a space (yyyy-MM-dd HH:mm).
+EXAMPLES
+ event Singapore International Film Festival /at 2021-11-03 11:50
+ event Oral Presentation /by 2021-11-21 15:20 /at memorize script
+____________________________________________________________
+> greet
+DESCRIPTION
+ Greets the user.
+____________________________________________________________
+> list 
+DESCRIPTION
+ Displays the whole list of tasks.
+____________________________________________________________
+> todo DESC
+ALIAS
+> t ...
+DESCRIPTION
+ Set a todo task.
+EXAMPLES
+ todo bake cake

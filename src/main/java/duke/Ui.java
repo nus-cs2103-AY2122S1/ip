@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Ui {
     private static File HELP;
-    private static String DEFAULT_HELP_PATH = "help.txt";
+    private static String DEFAULT_HELP_PATH = Ui.class.getResource("help/help.txt").getPath();
     private final static String BORDERS = "\t____________________________________________________________";
 
     /**
@@ -42,7 +42,7 @@ public class Ui {
             }
             return sb.toString();
         } catch (FileNotFoundException e) {
-            throw new DukeException("help.txt not found @ " + HELP);
+            throw new DukeException("help.txt not found @ " + HELP + e.toString());
         }
     }
     

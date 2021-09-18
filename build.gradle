@@ -55,7 +55,7 @@ shadowJar {
 sourceSets {
     main {
         resources {
-            srcDirs "src/main/resources" 
+            srcDirs "src/main/resources/duke"
         }
     }
 }

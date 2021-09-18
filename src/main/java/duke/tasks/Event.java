@@ -4,7 +4,6 @@ import duke.utils.DukeDateTime;
 import duke.utils.DukeException;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private DukeDateTime end = new DukeDateTime();
