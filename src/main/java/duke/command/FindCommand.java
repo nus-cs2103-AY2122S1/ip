@@ -34,7 +34,7 @@ public class FindCommand implements Command {
                 .reduce("", (previousTask, thisTask) -> previousTask + thisTask + "\n");
 
         if (output.equals("")) {
-            return "No matching tasks";
+            return "No matched tasks";
         }
 
         return output;

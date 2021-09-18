@@ -7,7 +7,7 @@ import duke.util.Ui;
 public class HelpCommand implements Command {
     /** Displays help information */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String helpMessage = "bye: end the program \n"
+        String helpMessage = "    bye: end the program \n"
                     + "    delete: delete a task \n"
                     + "    done: mark a task as done \n"
                     + "    find: find a task \n"

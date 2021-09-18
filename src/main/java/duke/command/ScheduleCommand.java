@@ -29,6 +29,10 @@ public class ScheduleCommand implements Command {
         LocalDate date;
 
         assert inputs.length >= 2 : "Wrong length of inputs.";
+
+        if (tasks.size() == 0) {
+            return "No matched tasks :/";
+        }
         date = LocalDate.parse(inputs[1]);
         for (Task t : tasks) {
             if (date.equals(t.getDate())) {
