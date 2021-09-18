@@ -26,8 +26,6 @@ public class CommandHandler {
      * @return A message to the UI after handling the event task.
      */
     public String handleEvent(Task eventTask) {
-        assert (eventTask.getDescription() != null);
-
         taskList.add(eventTask);
         return ui.addTask(eventTask);
     }
@@ -39,8 +37,6 @@ public class CommandHandler {
      * @return A message to the UI after handling the deadline task.
      */
     public String handleDeadline(Task deadlineTask) {
-        assert (deadlineTask.getDescription() != null);
-
         taskList.add(deadlineTask);
         return ui.addTask(deadlineTask);
     }
@@ -68,8 +64,6 @@ public class CommandHandler {
             throw new EmptyDescriptionException("error");
         }
 
-        assert (input.length() > 4);
-
         String keyword = input.substring(5);
         return ui.findTask(keyword);
     }
@@ -85,9 +79,6 @@ public class CommandHandler {
         if (input.length() == 6) {
             throw new EmptyDescriptionException("error");
         }
-
-        assert (input.length() > 6);
-
         char taskIndex = input.charAt(7);
         int index = Integer.parseInt(String.valueOf(taskIndex));
 
@@ -108,8 +99,6 @@ public class CommandHandler {
         if (input.length() == 4) {
             throw new EmptyDescriptionException("error");
         }
-
-        assert (input.length() > 4);
 
         char indexOfTask = input.charAt(5);
         int index = Integer.parseInt(String.valueOf(indexOfTask));
