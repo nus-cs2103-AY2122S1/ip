@@ -34,8 +34,9 @@ Lists all the tasks in the user's task list.
 
 Format: `list`
 
-Example:
-![list example](https://github.com/Moley456/ip/tree/master/docs/list.png)  
+Example:  
+&nbsp;  
+![list example](https://github.com/Moley456/ip/blob/master/docs/list.png)  
 A `list` command with some sample data.
 
 
