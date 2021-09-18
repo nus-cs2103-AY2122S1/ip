@@ -1,9 +1,0 @@
-T, true, submit iP
-D, true, submit /by 2020-01-12T23:39
-T, false, read me
-T, true, submit assignment
-T, false, add assignment
-T, false, add assignment
-T, false, add task
-T, true, add assignment
-T, false, yes

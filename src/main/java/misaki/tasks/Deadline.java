@@ -2,6 +2,7 @@ package misaki.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task that has a deadline.
@@ -17,8 +18,8 @@ public class Deadline extends Task {
      * A constructor for the Deadline.
      *
      * @param description User input task description.
-     * @param deadline User input task deadline date.
-     * @param isDone Status of the task.
+     * @param deadline    User input task deadline date.
+     * @param isDone      Status of the task.
      */
     public Deadline(String description, String deadline, Boolean isDone) {
         super(description + " /by " + deadline, isDone, "D");
@@ -31,7 +32,7 @@ public class Deadline extends Task {
      *
      * @return String representation of the deadline task.
      */
-    public String getTask() {
+    public String getTask() throws DateTimeParseException {
         LocalDateTime dateTime = LocalDateTime.parse(deadline);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
 

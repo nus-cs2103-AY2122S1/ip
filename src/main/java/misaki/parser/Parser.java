@@ -155,12 +155,12 @@ public class Parser {
     public boolean isValidDateTime(String date) {
         Boolean isValid = true;
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             date = date.replace("T", " ");
-            LocalDateTime dateTime = LocalDateTime.from(formatter.parse(date));
+            LocalDateTime dateTime = LocalDateTime.parse(date);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
+            dateTime.format(formatter);
         } catch (DateTimeParseException e) {
             isValid = false;
-            System.out.println(isValid);
         }
         return isValid;
     }
