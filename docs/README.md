@@ -149,6 +149,8 @@ Expected outcome:
 
 ## Duke Demo
 
+The inputs entered here are from the examples given above. Feel free to try Duke with your own inputs!
+
 ![DukeDemoGif](https://user-images.githubusercontent.com/85099754/133879352-980365da-f243-4893-883d-e71ca47ccdbe.gif)
 
 
