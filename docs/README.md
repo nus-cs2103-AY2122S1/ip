@@ -1,5 +1,6 @@
 # User Guide
 
+
 ## Features 
 
 #### Notes about command format:
@@ -37,7 +38,7 @@ Format: `list`
 
 Example:  
 &nbsp;  
-![list example](https://user-images.githubusercontent.com/77235032/133895078-14e2c093-ae65-4971-8f92-8085bd952613.PNG)  
+![list example](https://user-images.githubusercontent.com/77235032/133895200-e9431a4f-a1f3-41e6-9bee-4f7825eb2b87.PNG)  
 A `list` command with some sample data.
 
 
