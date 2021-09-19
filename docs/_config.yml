@@ -1,0 +1,6 @@
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme
+title: DukeBot
+description: A task manager - Type away to schedule your day
+logo: PageLogo.png

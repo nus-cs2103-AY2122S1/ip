@@ -1,0 +1,26 @@
+list
+todo borrow book
+todo read book
+deadline discuss book /by 23-08-2021 1100
+event team meeting /at 27-08-2021 1700 to 27-08-2021 1900
+done 2
+list
+done 2
+list
+delete 1
+list
+bow and arrows
+list all tasks!
+done
+done no task all day...
+done -5
+delete
+delete my life
+delete 4
+todo
+deadline
+deadline NewDeadline /by June 12 /by June 15
+event
+event NewEvent
+bye bye
+bye

@@ -1,0 +1,31 @@
+#dialogContainer {
+    -fx-background-color: royalblue
+}
+
+#sendButton {
+    -fx-border-color: purple;
+    -fx-border-width: 3;
+    -fx-border-radius: 6;
+    -fx-background-color: lavender
+}
+
+#userInput {
+    -fx-border-width: 3;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-border-color: teal;
+    -fx-background-color: powderblue;
+    -fx-font-family: "Lucida Grande";
+}
+
+#dialog {
+    -fx-text-alignment: right;
+    -fx-fill: plum;
+    -fx-font-family: Menlo;
+    -fx-font-size: 12;
+}
+
+#userInput {
+    -fx-prompt-text-fill: rgba(128, 128, 128, 0.64);
+}
+

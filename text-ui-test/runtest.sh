@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete saved data from previous run
+if [ -e "./duke.txt" ]
+then
+    rm duke.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
 then
