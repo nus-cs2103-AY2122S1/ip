@@ -4,7 +4,7 @@
 Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while 
 still having the benefits of a Graphical User Interface (GUI).
 
-##Note about the command format
+###Note about the command format
 * Words in ```UPPER_CASE``` are the parameters to be supplied by the user.
   e.g. ```todo TASK```, ```TASK``` is a parameter which can be used as ```todo eat dinner```.
   
