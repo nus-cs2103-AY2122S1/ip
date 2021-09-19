@@ -1,0 +1,30 @@
+
+blah
+list
+todo
+todo read book
+done
+done blah
+done 42
+done 1
+deadline
+deadline return book
+deadline return book /by
+deadline return book /by 2022/6/6 1800
+deadline do homework /by 9999/12/31 2359
+event
+event project meeting
+event project meeting /at
+event project meeting /at 2022/8/6 1400
+event graduation /at 2024/06/30 2359
+list
+find
+find book
+find homework
+find ti
+delete
+delete blah
+delete 42
+delete 4
+list
+bye
