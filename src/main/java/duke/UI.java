@@ -1,30 +1,18 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 
 /**
  * Deals with interactions with the user.
  */
 public class UI {
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String DIVIDER = "____________________________________________________________\n";
-
-    private Scanner sc = new Scanner(System.in);
-
     /**
      * Returns the welcome message when the program starts.
      *
      * @return Welcome message.
      */
     public String welcomeResponse() {
-        return "Hello from\n" + LOGO + "\n\nHello I'm Duke\nWhat can I do for you?\n";
+        return "Hello I'm Duke\nWhat can I do for you?\n";
     }
 
     /**
