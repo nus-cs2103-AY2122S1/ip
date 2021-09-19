@@ -80,7 +80,7 @@ Now you have 7 tasks in the list.
 
 Add a deadline task containing description and deadline in dd/MM/yyyy format
 
-#### `deadline <desc> /at <deadline>` - add a deadline task to the storage
+#### `deadline <desc> /by <deadline>` - add a deadline task to the storage
 
 Example of usage:
 
@@ -168,5 +168,5 @@ Name | Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs
 `done` | Mark the task as done by supplying the index as shown by `list` <br> e.g. `done <index>`
 `todo` | Create a todo task (with description) <br> e.g. `todo <desc>`
 `event` | Create a new event task (with description and timing in dd/MM/yyyy format) <br> e.g. `event <desc> /at <dd/MM/yyyy>`
-`deadline` | Create a new deadline task (with description and deadline in dd/MM/yyyy format) <br> e.g. `event <desc> /by <dd/MM/yyyy>`
+`deadline` | Create a new deadline task (with description and deadline in dd/MM/yyyy format) <br> e.g. `deadline <desc> /by <dd/MM/yyyy>`
 `delete` | Delete a task by the index as shown by list <br> e.g. `delete <index>`
