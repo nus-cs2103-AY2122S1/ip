@@ -19,10 +19,10 @@ public class Ui {
      * Greets users.
      */
     public void showWelcome() {
-        String welcome = "    ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + "    ____________________________________________________________\n";
+        String welcome = "____________________________________________________________\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "____________________________________________________________\n";
         System.out.println(welcome);
     }
 
