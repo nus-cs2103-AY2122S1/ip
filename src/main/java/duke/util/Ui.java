@@ -21,25 +21,6 @@ public class Ui {
                     + "|  | \\  \\|  || (__) ||  /   |  /   |  / \\  |\n"
                     + "|  |  \\     ||  ____||  \\__ |  |   |  \\_/  |\n"
                     + "|__|   \\____| \\_____) \\____)|__|    \\_____/\n";
-//        String necroLogoMonoFilled =
-//                " ____     __\n"
-//                        + "|NNNN\\   |NN|\n"
-//                        + "|NNNNN\\  |NN|  ____    ____    ____  _____\n"
-//                        + "|NN|\\NN\\ |NN| /e__e\\  /  __)|\\/  __)/  _  \\\n"
-//                        + "|NN| \\NN\\|NN||e(__)e||  /   |  /   |  / \\  |\n"
-//                        + "|NN|  \\NNNNN||ee____||  \\__ |  |   |  \\_/  |\n"
-//                        + "|__|   \\____| \\_____) \\____)|__|    \\_____/\n";
-//                " ___    _                \n"
-//                        + "|   \\  | |   _____     ___    _  __     _____  \n"
-//                        + "| |\\ \\ | |  / __  \\  /   _|  | v __|  /  ___  \\ \n"
-//                        + "| | \\ \\| | |    __/  |  <_   |  /    |   |_|   |\n"
-//                        + "|_|  \\___|  \\_____|  \\____|  |__|     \\  ___  / \n";
-//        String necroLogo =
-//                "_____       ___               \n"
-//                        + "|       \\     |    |      ____       ____   __  ____      _____  \n"
-//                        + "|    |\\   \\   |    |   / ___  \\   /    __)  |  V  ___)  /  ___   \\ \n"
-//                        + "|    |  \\   \\ |    |  |     ___/  |    (__   |     /      (    |__|    )\n"
-//                        + "|___|    \\_____|   \\______)   \\____)  |___|         \\  ___  /  ()\n";
         return "Hello. My name is:\n" + necroLogoMono + "\n\nWhat do you want me to do for you on this horrible day?\n\n" +
                 "If you require any assistance, type \"help\", press enter, and depending on my mood, I may or may not reluctantly help you out.";
     }
@@ -87,9 +68,12 @@ public class Ui {
      * @param listSize The size of the TaskList.
      */
     public String showAdd(String taskString, int listSize) {
+        String lastLine = (listSize == 1)
+                ? "\nSatisfied now? You have " + listSize + " item in your list: \n\n"
+                : "\nSatisfied now? You have " + listSize + " items in your list: \n\n";
         return textBox("Fine. I've added this meaningless task to your list: \n",
                 " --> " + listSize + ". " + taskString,
-                "\nSatisfied now? You have " + listSize + " items in your list: \n\n");
+                lastLine);
     }
 
     /**
@@ -102,24 +86,6 @@ public class Ui {
                 taskString,
                 "\nAre you happy now? This is your updated list:");
     }
-
-//    /**
-//     * Shows a Task deleted message.
-//     *
-//     * @param taskString The String representation of the Task.
-//     */
-//    public String showDelete(String taskString) {
-//        return textBox("Since you are so lazy, I've helped you delete this task:",
-//                taskString,
-//                "Go do something useful with your life.");
-//    }
-
-//    /**
-//     * Shows the farewell message.
-//     */
-//    public static String showGoodbye() {
-//        return "Farewell, may we never meet again.";
-//    }
 
     /**
      * A template for the formatted text box.

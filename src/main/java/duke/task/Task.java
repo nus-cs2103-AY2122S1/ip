@@ -40,7 +40,10 @@ public abstract class Task {
 
     public abstract String toString();
 
+    //@@author huizhuansam-reused
+    //General method as well as overridden methods were adapted from his repo
     public abstract JSONObject toJsonObject();
+    //@@author
 
     /**
      * Converts a JSON Object into a Task.
@@ -49,6 +52,8 @@ public abstract class Task {
      * @return The task as a Task.
      * @throws InvalidInputException If the input is deemed invalid.
      */
+    //@@author huizhuansam-reused
+    //Used for his ip
     public static Task fromJsonObject(JSONObject obj) throws InvalidInputException {
         Task task;
         String taskType = (String) obj.get("type");
@@ -71,5 +76,6 @@ public abstract class Task {
         }
         return task;
     }
+    //@@author
 
 }

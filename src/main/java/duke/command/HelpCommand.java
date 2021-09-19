@@ -40,6 +40,8 @@ public class HelpCommand extends Command {
             return Help.format(Help.deleteHelp());
         case "find":
             return Help.format(Help.findHelp());
+        case "exit":
+            return Help.format(Help.exitHelp());
         case "excess":
             return "You have entered too many arguments. Follow instructions.";
         default:

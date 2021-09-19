@@ -17,7 +17,7 @@ public class Help {
     public static Help generalHelp() {
         information = "You can search for help for any of the following commands: \n" +
                 "- list\n- todo\n- deadline\n- event\n- done\n- delete\n- find\n- exit\n\n";
-        format = "Just type \"help\" followed by a space and any of the above keywords, then hit enter.";
+        format = "Just type \"help\" followed by a space and any of the above keywords, then hit enter.\n\n";
         example = "Example: \"help deadline\"\n\n";
         return null;
     }
@@ -25,7 +25,7 @@ public class Help {
     public static Help listHelp() {
         information = "The List command lists out all your current tasks.\n\n";
         format = "Simply type \"list\" and hit enter.\n\n";
-        extraHelp = "Take note that there should be items in your list before using this command.";
+        extraHelp = "Take note that there should be items in your list before using this command.\n\n";
         return null;
     }
 
@@ -76,6 +76,14 @@ public class Help {
         format = "To find tasks, type \"find\" followed by a space, then the keyword you want to search for.\n\n";
         example = "Example: \"find homework\"\n\n";
         extraHelp = "Take note that the keyword is used in at least one task.\n\n";
+        return null;
+    }
+
+    public static Help exitHelp() {
+        information = "The Exit command saves all your tasks in the data file and exits the program.\n\n";
+        format = "To exit, type \"bye\" and press Enter.\n\n";
+        example = "Example: \"bye\"\n\n";
+        extraHelp = "To open the app again, simply double click on the icon again.\n\n";
         return null;
     }
 

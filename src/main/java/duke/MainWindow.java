@@ -15,6 +15,7 @@ import java.util.Objects;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

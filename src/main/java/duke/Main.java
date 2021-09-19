@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  * A GUI for Duke using FXML.
  */
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 public class Main extends Application {
 
     private final Duke duke = new Duke("./data/tasks.json");

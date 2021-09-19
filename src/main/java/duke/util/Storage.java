@@ -54,6 +54,8 @@ public class Storage {
      *
      * @param tasks The TaskList to convert into JSON file format.
      */
+    //@@author huizhuansam-reused
+    //Original methods were modified, now write returns a String so that it can output to the chatbot
     @SuppressWarnings("unchecked")
     public String write(TaskList tasks) {
         String output = "";
@@ -95,5 +97,6 @@ public class Storage {
             throw new FileNotFoundException();
         }
     }
+    //@@author huizhuansam
 
 }
