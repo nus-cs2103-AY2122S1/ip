@@ -5,6 +5,8 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
+
 /**
  * This class encapsulates a command to find a Task in a TaskList.
  * Extends Command class.
@@ -31,7 +33,7 @@ public class FindCommand extends Command {
     @Override
     public void execute() {
         String result = "Here's a list of the stuff I've found that match what you're looking for:\n";
-        TaskList resultList = new TaskList();
+        ArrayList<String> resultList = new ArrayList<>();
         for (int i = 1; i <= taskList.getSize(); i++) {
             boolean isMatch = false;
             Task task = taskList.get(i);
@@ -39,7 +41,7 @@ public class FindCommand extends Command {
             for (String keyword : searchInput) {
                 for (String word: taskWords) {
                     if (keyword.equalsIgnoreCase(word)) {
-                        resultList.add(task);
+                        resultList.add(i + ". " + task.toString());
                         isMatch = true;
                         break;
                     }
@@ -50,7 +52,11 @@ public class FindCommand extends Command {
                 }
             }
         }
-        ui.setMessage(result + resultList);
+
+        for (String searchResult: resultList) {
+            result += searchResult + "\n";
+        }
+        ui.setMessage(result);
     }
 
 }
