@@ -1,24 +1,41 @@
-# Duke project template
+# Nekobot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> “When I try to talk to people, it’s like time has stopped and nobody answers. 
+> Wait, so I guess this is what they call magic…”
 
-## Setting up in Intellij
+Don't fret! Now this cute cat bot will respond to your task queries!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+<img width="301" alt="nekobot" src="https://user-images.githubusercontent.com/77230723/132122679-ff5ec85f-9d8b-44d3-88cd-72e6a308709a.png">
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+
+Maybe you've heard of that other task management app. But here's why you can count on Nekobot to be so much better!
+
+* text-based
+* easy to use
+* cute cat greets you on startup
+
+## Downloading Nekobot
+1. Go to Releases page
+2. Download the latest release
+3. Open it and feel blessed :relaxed:
+
+The best part of it: Nekobot is free!
+
+## Features
+- [x] Manage Todos, Deadlines, Events
+- [x] Understand (some) natural dates and time (e.g. Tomorrow, Next mon, Four days)
+- [x] Prevents adding duplicate tasks of the same name
+- [ ] Display upcoming events (possible future feature!)
+
+
+
+### To run using source code:
+Run this main method in the Launcher class.
+
+```
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}
+```

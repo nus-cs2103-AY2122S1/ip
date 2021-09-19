@@ -1,0 +1,13 @@
+todo feed cat
+deadline write an essay on cats /by 27Dec
+event cat appreciation club /at 30Nov 6pm
+deadline return book /by 1998-12-22 2359
+event christmas day /at 25/12
+list
+done 1
+done 2
+done 3
+done 4
+list
+save
+bye
