@@ -30,6 +30,7 @@ public class Ui {
 
     /**
      * Prints welcome message.
+     * @return Message to be shown to the user.
      */
     public String welcome() {
         String message = " Hello! I'm Duke\n"
@@ -44,6 +45,7 @@ public class Ui {
     /**
      * Prints a list of all the tasks
      * @param tasks TaskList containing the tasks.
+     * @return Message to be shown to the user.
      */
     public String listTasks(TaskList tasks) {
         String message = String.format(" Here are the tasks in your list:\n%s", tasks.toString());
@@ -52,6 +54,7 @@ public class Ui {
 
     /**
      * Prints terminating message.
+     * @return Message to be shown to the user.
      */
     public String terminateMessage() {
         String message = " Bye. Hope to see you again soon!";
@@ -60,6 +63,7 @@ public class Ui {
 
     /**
      * Prints message to confirm all tasks has been cleared.
+     * @return Message to be shown to the user.
      */
     public String clearMessage() {
         String message = " List is cleared!";
@@ -70,6 +74,7 @@ public class Ui {
      * Prints message indicating task has been added successfully.
      * @param task Task that was added
      * @param tasks TaskList
+     * @return Message to be shown to the user.
      */
     public String addMessage(Task task, TaskList tasks) {
         String message = " Got it. I've added this task:\n   "
@@ -81,6 +86,7 @@ public class Ui {
     /**
      * Prints message indicating that task has been marked as done.
      * @param task Task to be marked as done.
+     * @return Message to be shown to the user.
      */
     public String doneMessage(Task task) {
         String message = " Nice! I've marked this task as done:\n"
@@ -92,6 +98,7 @@ public class Ui {
      * Prints message indicating that task has been completed.
      * @param task Task to be deleted.
      * @param tasks TaskList.
+     * @return Message to be shown to the user.
      */
     public String deleteMessage(Task task, TaskList tasks) {
         String message = " Noted. I've removed this task:\n   "
@@ -103,6 +110,7 @@ public class Ui {
     /**
      * Prints tasks containing specified keyword.
      * @param tasks TaskList containing filtered tasks.
+     * @return Message to be shown to the user.
      */
     public String findMessage(TaskList tasks) {
         String message = " Here are the matching tasks in your list:"
@@ -113,6 +121,7 @@ public class Ui {
     /**
      * Prints tasks containing specified keyword.
      * @param task TaskList containing filtered tasks.
+     * @return Message to be shown to the user.
      */
     public String setPriorityMessage(Task task) {
         String message = " I've changed the priority level of this task:\n"
@@ -123,6 +132,7 @@ public class Ui {
     /**
      * Prints the appropriate error handling message.
      * @param e Exception caught.
+     * @return Error message to be shown to the user.
      */
     public String handleException(Exception e) {
         String message;

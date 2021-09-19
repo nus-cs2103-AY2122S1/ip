@@ -30,6 +30,7 @@ public class Parser {
      * @param ui UI object to render output to user.
      * @param tasks TaskList object that contains the tasks.
      * @param input Input that user entered.
+     * @return Message to be shown to the user.
      * @throws DukeException If an error occurs.
      */
     public String executeCommand(Ui ui, TaskList tasks, String input) throws DukeException {
@@ -92,6 +93,7 @@ public class Parser {
     /**
      * Terminates the Duke Personal Assistant Chatbot.
      * @param ui UI object to render output to user.
+     * @return Message to be shown to the user.
      */
     public String terminate(Ui ui) {
         this.isTerminated = true;
@@ -102,6 +104,7 @@ public class Parser {
      * Clears all tasks in the TaskList.
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
+     * @return Message to be shown to the user.
      */
     public String clear(TaskList tasks, Ui ui) {
         tasks.clear();
@@ -114,6 +117,7 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
+     * @return Message to be shown to the user.
      * @throws ToDoDescriptionNotFoundException If user did not enter a task description.
      */
     public String addTodo(TaskList tasks, Ui ui, String input) throws ToDoDescriptionNotFoundException {
@@ -141,6 +145,7 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
+     * @return Message to be shown to the user.
      * @throws DeadlineDescriptionNotFoundException If user did not enter a task description.
      * @throws DeadlineNotFoundException If user did not enter a deadline.
      */
@@ -175,6 +180,7 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
+     * @return Message to be shown to the user.
      * @throws EventDescriptionNotFoundException If user did not enter a task description.
      * @throws EventTimeNotFoundException If user did not enter date and time of event.
      */
@@ -209,6 +215,7 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param index Index of the task to be marked as done.
+     * @return Message to be shown to the user.
      * @throws TaskIndexOutOfBoundException If no task bears the index.
      */
     public String markDone(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException {
@@ -225,6 +232,7 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param index Index of the task to be deleted.
+     * @return Message to be shown to the user.
      * @throws TaskIndexOutOfBoundException If no task bears the index.
      */
     public String delete(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException {
@@ -241,11 +249,21 @@ public class Parser {
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param keyword Keyword to be searched.
+     * @return Message to be shown to the user.
      */
     public String findTasks(TaskList tasks, Ui ui, String keyword) {
         return ui.findMessage(tasks.findTasks(keyword));
     }
 
+    /**
+     * Updates the priority level of a task.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param index Index of the task to be deleted.
+     * @param priority Priority level to be updated.
+     * @return Message to be shown to the user.
+     * @throws TaskIndexOutOfBoundException If no task bears the index.
+     */
     public String setPriority(TaskList tasks, Ui ui, int index, int priority) throws TaskIndexOutOfBoundException {
         if (index >= tasks.getListSize()) {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");

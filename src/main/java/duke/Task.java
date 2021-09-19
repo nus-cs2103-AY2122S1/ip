@@ -23,6 +23,7 @@ public abstract class Task {
      * Class constructor specifying the task description and the task type.
      * @param task Task description.
      * @param taskType Task type.
+     * @param priority Priority level of the task.
      */
     public Task(String task, String taskType, int priority) {
         this.task = task;
@@ -36,6 +37,7 @@ public abstract class Task {
      * @param task Task description.
      * @param isCompleted Whether the task is completed.
      * @param taskType Task type.
+     * @param priority Priority level of the task.
      */
     public Task(String task, boolean isCompleted, String taskType, int priority) {
         this.task = task;
@@ -84,7 +86,7 @@ public abstract class Task {
 
     /**
      * Checks if task description contains keyword.
-     * @param keyword Keyward to be found.
+     * @param keyword Keyword to be found.
      * @return true if task description contains keyword, else false.
      */
     public boolean containsKeyword(String keyword) {

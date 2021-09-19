@@ -9,12 +9,13 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private static final String DATE_TIME_FORMAT = "dd MMM yyyy HH:mm";
     private static final String TASK_TYPE = "E";
-    private LocalDateTime time;
+    private final LocalDateTime time;
 
     /**
      * Class constructor specifying the task and the event date and time.
      * @param task Event to attend.
      * @param time Date and time of event.
+     * @param priority Priority level of the task
      */
     public Event(String task, LocalDateTime time, int priority) {
         super(task, TASK_TYPE, priority);
@@ -26,6 +27,7 @@ public class Event extends Task {
      * @param task Event to attend.
      * @param completed Whether the event has been attended.
      * @param time Date and time of event.
+     * @param priority Priority level of the task.
      */
     public Event(String task, boolean completed, LocalDateTime time, int priority) {
         super(task, completed, TASK_TYPE, priority);

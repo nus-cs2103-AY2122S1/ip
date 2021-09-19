@@ -15,6 +15,7 @@ public class Deadline extends Task {
      * Class constructor specifying the task and the deadline.
      * @param task Task to be done.
      * @param date Deadline by which the task needs to be done.
+     * @param priority Priority level of the task
      */
     public Deadline(String task, LocalDate date, int priority) {
         super(task, TASK_TYPE, priority);
@@ -26,6 +27,7 @@ public class Deadline extends Task {
      * @param task Task to be done.
      * @param completed Whether the task has been completed.
      * @param date Deadline by which the task needs to be done.
+     * @param priority Priority level of the task
      */
     public Deadline(String task, boolean completed, LocalDate date, int priority) {
         super(task, completed, TASK_TYPE, priority);

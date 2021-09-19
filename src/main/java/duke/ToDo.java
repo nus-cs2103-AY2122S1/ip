@@ -9,6 +9,7 @@ public class ToDo extends Task {
     /**
      * Class constructor specifying the task description.
      * @param task Task description.
+     * @param priority Priority level of the task.
      */
     public ToDo(String task, int priority) {
         super(task, TASK_TYPE, priority);
@@ -18,6 +19,7 @@ public class ToDo extends Task {
      * Class constructor specifying the task description and if the task has been completed.
      * @param task Task description
      * @param completed Whether the task has been completed.
+     * @param priority Priority level of the task.
      */
     public ToDo(String task, boolean completed, int priority) {
         super(task, completed, TASK_TYPE, priority);

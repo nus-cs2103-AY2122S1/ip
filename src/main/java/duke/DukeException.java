@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents exceptions thrown by Duke Personal Assistant Chatbot.
+ * Represents exceptions thrown by Duke Personal Assistant Chat-bot.
  */
 public class DukeException extends Exception {
 

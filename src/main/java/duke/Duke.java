@@ -1,18 +1,13 @@
 package duke;
 
-import javafx.scene.image.Image;
-
 /**
- * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * Represents a Personal Assistant Chat-bot that helps a person to keep track of various things.
  */
 public class Duke {
 
     private final TaskList tasks;
     private final Ui ui;
     private final Parser parser;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Class constructor.
@@ -24,7 +19,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke Personal Assistant Chatbot.
+     * Runs the Duke Personal Assistant Chat-bot.
      */
     public void run() {
         boolean isTerminated = false;
@@ -47,14 +42,19 @@ public class Duke {
         return ui.welcome();
     }
 
+    /**
+     * Starts the program
+     * @param args User input arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response message from the parser after parsing the command
+     * @param input Command from user.
+     * @return Response message.
      */
     protected String getResponse(String input) {
         try {
