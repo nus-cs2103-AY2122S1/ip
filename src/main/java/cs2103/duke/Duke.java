@@ -22,7 +22,7 @@ public class Duke {
     }
 
     /**
-     * Generate a response given an input from user.
+     * Generates a response given an input from user.
      *
      * @param input The user input received.
      * @return A string representing the response to the user.

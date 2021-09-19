@@ -144,7 +144,7 @@ public class Ui {
     }
 
     /**
-     * Alert the user if the duke.txt could not be loaded.
+     * Alerts the user if the duke.txt could not be loaded.
      *
      * @return A string alerting the user of the error.
      */
