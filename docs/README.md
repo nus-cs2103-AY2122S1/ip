@@ -62,7 +62,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
-###`event <taskDescription> /at <yyyy-mm-dd> <hhmm>` - Adds event task to your list 
+### `event <taskDescription> /at <yyyy-mm-dd> <hhmm>` - Adds event task to your list 
 
 #### Example of usage:
 `event myEvent /at 2021-09-15 1200`
@@ -76,7 +76,7 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ```
 
-###`delete <taskIndex>` - Deletes task at the given index in the list
+### `delete <taskIndex>` - Deletes task at the given index in the list
 
 #### Example of usage:
 `delete 3`
