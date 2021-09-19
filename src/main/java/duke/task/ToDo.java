@@ -7,6 +7,8 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    private static final String TASK_TYPE = "T";
+
     /**
      * Creates new Todo task
      *
@@ -28,6 +30,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String taskDisplay = "[" + TASK_TYPE + "]";
+        return taskDisplay + super.toString();
     }
 }

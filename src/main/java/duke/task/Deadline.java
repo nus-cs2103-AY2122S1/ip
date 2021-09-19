@@ -4,14 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class that is used in order to create a new.
+ * Class that is used in order to create a new deadline task.
  *
  * @author mrmrinal
  */
 public class Deadline extends Task {
 
-    private String by;
-    private LocalDate time;
+    private static final String TASK_TYPE = "D";
+    private final String by;
+
     /**
      * Constructor to instantiate new deadline object
      *
@@ -20,8 +21,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.time = LocalDate.parse(by);
-        this.by = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        LocalDate time = LocalDate.parse(by);
+        this.by = time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -43,7 +44,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        String taskDisplay = "[" + TASK_TYPE + "]";
+        String timing = " (by: " + this.by + ")";
+        return taskDisplay + super.toString() + timing;
     }
 
     @Override
@@ -52,7 +55,8 @@ public class Deadline extends Task {
         if (this.isDone) {
             done = 1;
         }
-        return "D | " + done + " | " + this.description
-                + " | " + this.by + "\n";
+        String newLine = "\n";
+        return TASK_TYPE + SEPARATOR + done + SEPARATOR + this.description
+                + SEPARATOR + this.by + newLine;
     }
 }

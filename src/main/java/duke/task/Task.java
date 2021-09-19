@@ -7,6 +7,7 @@ package duke.task;
  */
 public class Task {
 
+    static final String SEPARATOR = " | ";
     protected String description;
     protected boolean isDone;
 
@@ -76,6 +77,8 @@ public class Task {
         if (this.isDone) {
             done = 1;
         }
-        return "T | " + done + " | " + this.description + "\n";
+        String taskDisplay = "T";
+        String newLine = "\n";
+        return taskDisplay + SEPARATOR + done + SEPARATOR + this.description + newLine;
     }
 }

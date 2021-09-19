@@ -26,10 +26,10 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Gui gui = new Gui();
+    private final Gui gui = new Gui();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
 
     /**
      * Initializes a dialog box, with the height, and the image.

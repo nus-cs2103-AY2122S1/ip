@@ -7,6 +7,7 @@ package duke.task;
  */
 public class Event extends Task {
 
+    private static final String TASK_TYPE = "E";
     private final String at;
 
     /**
@@ -34,8 +35,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (at: " + this.at + ")";
+        String taskDisplay = "[" + TASK_TYPE + "]";
+        String timing = " (at: " + this.at + ")";
+        return taskDisplay + super.toString()
+                + timing;
     }
 
     @Override
@@ -44,7 +47,9 @@ public class Event extends Task {
         if (this.isDone) {
             done = 1;
         }
-        return "E | " + done + " | " + this.description
-                + " | " + this.at + "\n";
+        String newLine = "\n";
+        String taskDisplay = TASK_TYPE + SEPARATOR;
+        return taskDisplay + done + SEPARATOR + this.description
+                + SEPARATOR + this.at + newLine;
     }
 }

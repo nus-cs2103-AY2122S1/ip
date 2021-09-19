@@ -31,14 +31,18 @@ public class TaskList {
         if (items.size() < 1) {
             return "There are no tasks for you sir";
         } else {
-            String r = "";
-            for (int i = 1; items.size() >= i; i++) {
-                r = r + gui.dukeResponse(i + ". "
-                        + items.get(i - 1) + "\n".toString());
-            }
-            r = r + gui.dukeResponse("");
-            return r;
+            return listOutput();
         }
+    }
+
+    private String listOutput() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 1; items.size() >= i; i++) {
+            output.append(gui.dukeResponse(i + ". "
+                    + items.get(i - 1) + "\n"));
+        }
+        output.append(gui.dukeResponse(""));
+        return output.toString();
     }
 
     /**
@@ -99,18 +103,20 @@ public class TaskList {
      * @param substring the user search request
      */
     public String find(String substring) {
-        StringBuilder r = new StringBuilder();
+        StringBuilder foundTasks = new StringBuilder();
         int list = 1;
         for (int i = 1; i <= items.size(); i++) {
             if (this.getTask(i).description.contains(substring)) {
-                r.append(gui.dukeResponse(list + ". " + items.get(i - 1) + "\n"));
+                foundTasks.append(gui.dukeResponse(list + ". " + items.get(i - 1) + "\n"));
                 list++;
             }
         }
         if (list == 1) {
             return gui.dukeResponse("No such tasks found");
         }
-        return r + gui.dukeResponse("");
+        String emptyLine = gui.dukeResponse("");
+        String output = foundTasks + emptyLine;
+        return output;
     }
 
 }

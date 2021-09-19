@@ -53,7 +53,7 @@ public class Duke extends Application {
      * @param input the input for which the bot has to make a response
      * @return The string that dukebot outputs
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         RequestType userRequest;
         if (input.equals("bye")) {
             STORAGE.writeToFile(TASKS);
@@ -99,17 +99,7 @@ public class Duke extends Application {
 
     private String makeDone(String userInput) {
         try {
-            assert userInput.substring(0, 4).equals("done") : "first 4 characters should be done";
-            int task = Integer.parseInt(userInput.substring(5));
-            if (task > 0 && task <= TASKS.getSize()) {
-                TASKS.markDone(task - 1);
-                String response;
-                response = GUI.dukeResponse("One task down sir. Here is the task I checked off:\n");
-                response = response + GUI.dukeResponse("    " + TASKS.getTask(task).toString() + "\n");
-                return response;
-            } else {
-                return GUI.dukeResponse("You have entered an invalid task number Sir, please input again.\n");
-            }
+            return makeDoneHelper(userInput);
         } catch (NumberFormatException e) {
             return GUI.dukeResponse("Task number formatted incorrectly. Try again\n");
         } catch (StringIndexOutOfBoundsException e) {
@@ -117,18 +107,39 @@ public class Duke extends Application {
         }
     }
 
+    private String makeDoneHelper(String userInput) {
+        int doneFirstChar = 0;
+        int doneLastChar = 4;
+        assert userInput.substring(doneFirstChar, doneLastChar).equals("done") : "first 4 characters should be done";
+        int task = Integer.parseInt(userInput.substring(5));
+        int zeroTasks = 0;
+        if (task > zeroTasks && task <= TASKS.getSize()) {
+            TASKS.markDone(task - 1);
+            String response;
+            response = GUI.dukeResponse("One task down sir. Here is the task I checked off:\n");
+            response = response + GUI.dukeResponse("    " + TASKS.getTask(task).toString() + "\n");
+            return response;
+        } else {
+            String invalidTaskError = "You have entered an invalid task number Sir, please input again.\n";
+            return GUI.dukeResponse(invalidTaskError);
+        }
+    }
+
     private String deleteTask(String userInput) {
         try {
             int taskCharAt = 7;
             int task = Integer.parseInt(userInput.substring(taskCharAt));
-            if (task > 0 && task <= TASKS.getSize()) {
+            int zeroTasks = 0;
+            if (task > zeroTasks && task <= TASKS.getSize()) {
                 Task t = TASKS.deleteTask(task);
                 return sayAction(t.toString(), "removed");
             } else {
-                return GUI.dukeResponse("You have entered an invalid task number Sir, please input again.\n");
+                String invalidTaskNumber = "You have entered an invalid task number Sir, please input again.\n";
+                return GUI.dukeResponse(invalidTaskNumber);
             }
         } catch (NumberFormatException e) {
-            return GUI.dukeResponse("Task number formatted incorrectly. Try again\n");
+            String formattedIncorrectlyError = "Task number formatted incorrectly. Try again\n";
+            return GUI.dukeResponse(formattedIncorrectlyError);
         }
     }
 
@@ -136,33 +147,39 @@ public class Duke extends Application {
         try {
             int taskNumberCharacter = 4;
             int task = Integer.parseInt(userInput.substring(userInput.indexOf("/no") + taskNumberCharacter));
-            if (task > 0 && task <= TASKS.getSize()) {
-                String newTask = userInput.substring(7, userInput.indexOf("/no") - 1);
-                RequestType taskType = duke.Parser.parse(newTask);
-                if (taskType == RequestType.DEADLINE) {
-                    return updateDeadline(newTask, task);
-                } else if (taskType == RequestType.TODO) {
-                    return updateTodo(newTask, task);
-                } else if (taskType == RequestType.EVENT) {
-                    return updateEvent(newTask, task);
-                }
-                return "Enter a valid task";
-            }
+            return updateTaskHelper(task, userInput);
         } catch (Exception e) {
             return "Error with input";
         }
+    }
+
+    private String updateTaskHelper(int task, String userInput) {
+        if (task > 0 && task <= TASKS.getSize()) {
+            int taskCharAt = 7;
+            String newTask = userInput.substring(taskCharAt, userInput.indexOf("/no") - 1);
+            RequestType taskType = duke.Parser.parse(newTask);
+            if (taskType == RequestType.DEADLINE) {
+                return updateDeadline(newTask, task);
+            } else if (taskType == RequestType.TODO) {
+                return updateTodo(newTask, task);
+            } else if (taskType == RequestType.EVENT) {
+                return updateEvent(newTask, task);
+            }
+            return "Enter a valid task";
+        }
+
         return "Error with input. Please try again";
     }
 
-    private String taskStatus(int index, Task t) {
+    private String taskStatus(int index, Task task) {
         if (index == TASKS.getSize() + 1) {
-            TASKS.addTask(t);
-            STORAGE.addNewTask(t);
-            return sayAction(t.toString(), "added");
+            TASKS.addTask(task);
+            STORAGE.addNewTask(task);
+            return sayAction(task.toString(), "added");
         } else {
-            TASKS.updateTask(t, index);
+            TASKS.updateTask(task, index);
             STORAGE.writeToFile(TASKS);
-            return sayAction(t.toString(), "updated");
+            return sayAction(task.toString(), "updated");
         }
     }
 
@@ -174,18 +191,23 @@ public class Duke extends Application {
         } else if (userInput.length() <= userInput.indexOf("/by") + 4) {
             return GUI.dukeResponse("Enter a valid deadline time\n");
         } else {
-            String description = userInput.substring(9, userInput.indexOf("/by") - 1);
-            String by = userInput.substring(userInput.indexOf("/by") + 4);
+            int deadlineTaskCharAt = 9;
+            int deadlineTimeCharAt = 4;
+            String description = userInput.substring(deadlineTaskCharAt, userInput.indexOf("/by") - 1);
+            String by = userInput.substring(userInput.indexOf("/by") + deadlineTimeCharAt);
+            return updateDeadlineHelper(description, by, index);
+        }
+    }
 
-            try {
-                LocalDate.parse(by);
-                Task t = new Deadline(description, by);
-                return taskStatus(index, t);
-            } catch (Exception e) {
-                assert e.toString().startsWith("java.time.format.DateTimeParseException:")
-                        : e.toString();
-                return GUI.dukeResponse("Enter a valid date in the format yyyy-mm-dd\n");
-            }
+    private String updateDeadlineHelper(String description, String by, int index) {
+        try {
+            LocalDate.parse(by);
+            Task t = new Deadline(description, by);
+            return taskStatus(index, t);
+        } catch (Exception e) {
+            assert e.toString().startsWith("java.time.format.DateTimeParseException:")
+                    : e.toString();
+            return GUI.dukeResponse("Enter a valid date in the format yyyy-mm-dd\n");
         }
     }
 
@@ -194,13 +216,16 @@ public class Duke extends Application {
     }
 
     private String updateEvent(String userInput, int index) {
-        if (userInput.indexOf("/at") < 8) {
+        int insufficientDescriptionChar = 8;
+        int invalidTimeChar = 4;
+        if (userInput.indexOf("/at") < insufficientDescriptionChar) {
             return GUI.dukeResponse("Enter a valid event activity description\n");
-        } else if (userInput.length() <= userInput.indexOf("/at") + 4) {
+        } else if (userInput.length() <= userInput.indexOf("/at") + invalidTimeChar) {
             return GUI.dukeResponse("Enter a valid event time\n");
         } else {
-            String description = userInput.substring(6, userInput.indexOf("/at") - 1);
-            String at = userInput.substring(userInput.indexOf("/at") + 4);
+            int descriptionStartChar = 6;
+            String description = userInput.substring(descriptionStartChar, userInput.indexOf("/at") - 1);
+            String at = userInput.substring(userInput.indexOf("/at") + invalidTimeChar);
             Task t = new Event(description, at);
             return taskStatus(index, t);
         }
@@ -211,15 +236,16 @@ public class Duke extends Application {
     }
 
     private String updateTodo(String userInput, int index) {
+        int todoDescriptionCharAt = 5;
         try {
-            readActivity(userInput.substring(5));
-            String description = userInput.substring(5);
+            readActivity(userInput.substring(todoDescriptionCharAt));
+            String description = userInput.substring(todoDescriptionCharAt);
             Task t = new ToDo(description);
             return taskStatus(index, t);
         } catch (DukeException e) {
             return GUI.dukeResponse(e.getMessage());
         } catch (StringIndexOutOfBoundsException e) {
-            assert userInput.length() < 6
+            assert userInput.length() < todoDescriptionCharAt + 1
                     : "todo request was supposed to be smaller than 6 characters";
             return GUI.dukeResponse("Enter a valid todo activity\n");
         }
@@ -231,7 +257,8 @@ public class Duke extends Application {
 
     private static void readActivity(String userTask) throws DukeException {
         if (userTask.length() <= 1) {
-            throw new DukeException("Enter valid " + "todo" + " activity description\n");
+            String invalidActivityError = "Enter valid " + "todo" + " activity description\n";
+            throw new DukeException(invalidActivityError);
         }
     }
 }
