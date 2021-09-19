@@ -57,7 +57,6 @@ public class DialogBox extends HBox {
      * Method to get the Dialog Box for the given text and image
      * @param text The String to be displayed in the Dialog Box
      * @param img The image of the User shown for the Dialog box
-     *
      * @return A new Dialog Box with the given inputs
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -68,7 +67,6 @@ public class DialogBox extends HBox {
      * Method to get the Dialog box for the Duke output
      * @param text The Sting message to be displayed in the Dialog Box
      * @param img The image of the Duke
-     *
      * @return A new Dialog Box with the given inputs
      */
     public static DialogBox getDukeDialog(String text, Image img) {

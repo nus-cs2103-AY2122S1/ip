@@ -259,7 +259,6 @@ public class Command {
     }
     /**
      * Method to check for the List Command and render the UI
-     *
      * @param taskDetails The String describing the various attributes for the command
      * @param tasks The Object to contain the List of the Tasks
      * @return The Message to be displayed for the List Command
@@ -278,7 +277,6 @@ public class Command {
 
     /**
      * Method to check for the ToDO Command and render the UI
-     *
      * @param taskDetails The String describing the various attributes for the command
      * @param tasks The Object to contain the List of the Tasks
      * @return The Message to be displayed for the Todo command
@@ -300,7 +298,6 @@ public class Command {
 
     /**
      * Method to check the type of the Command and distribute to the specific type of Command Handler.
-     *
      * @param tasks The Object to contain the List of the Tasks
      * @param storage The Object to save the List of the Tasks
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid

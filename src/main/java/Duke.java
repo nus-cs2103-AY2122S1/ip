@@ -22,10 +22,6 @@ public class Duke {
         parser = new Parser();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input);

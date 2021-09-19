@@ -14,7 +14,6 @@ public class Parser {
 
     /**
      * Method to return the Type of Command parsed
-     *
      * @param command The Command Passed for comparing to the different types of CommandTypes
      * @return The Type of Command Received
      */

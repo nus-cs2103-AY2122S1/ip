@@ -24,7 +24,6 @@ public class Storage {
 
     /**
      * Constructor for the Storage Class
-     *
      * @param filePath The path of the file
      */
     public Storage(String filePath) {
@@ -35,7 +34,6 @@ public class Storage {
 
     /**
      * Method to save the Task List in the File
-     *
      * @param tasks The Task List of the Duke
      */
     public void saveTaskList(TaskList tasks) {
@@ -93,7 +91,6 @@ public class Storage {
 
     /**
      * Method to return the Type of Command to be stored
-     *
      * @param command The Command Passed for comparing to the different types of CommandTypes
      * @return The Type of Command Received
      */
@@ -111,7 +108,6 @@ public class Storage {
 
     /**
      * Method to get the List of Tasks stored in the file
-     *
      * @return A list of Tasks which are stored in the file
      */
     public List<Task> load() {
