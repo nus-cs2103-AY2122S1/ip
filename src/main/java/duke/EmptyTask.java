@@ -5,14 +5,14 @@ package duke;
  */
 public class EmptyTask extends Task {
 
+    public static final EmptyTask EMPTY_TASK = new EmptyTask();
+
     /**
      * Constructor for an EmptyTask object.
      */
     private EmptyTask() {
         super("");
     }
-
-    public static EmptyTask EMPTY_TASK = new EmptyTask();
 
 
     /**

@@ -13,7 +13,7 @@ public class DeadlineTest {
             LocalDateTime.parse("2021-08-24 23:59", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 
     @Test
-    public void testing(){
+    public void addDeadlineTask_validInput_showSuccess() {
         assertEquals(test.toString(), "[D][ ] Homework (by: Aug 24 2021 23:59)");
     }
 }

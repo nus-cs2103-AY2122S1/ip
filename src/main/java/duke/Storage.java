@@ -34,7 +34,7 @@ public class Storage {
             File storage = new File(filePath);
             if (storage.createNewFile()) {
                 return tasks;
-            };
+            }
 
             Scanner savedTasks = new Scanner(storage);
 

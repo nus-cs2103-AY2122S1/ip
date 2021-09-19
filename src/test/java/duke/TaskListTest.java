@@ -13,7 +13,7 @@ public class TaskListTest {
             LocalDateTime.parse("2021-08-24 23:59", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 
     @Test
-    public void testTaskList() {
+    public void addATaskToTaskList_validDeadlineTask_showSuccess() {
         tasks.addTask(test);
         assertEquals("\n1.[D][ ] Homework (by: Aug 24 2021 23:59)", tasks.toString());
     }
