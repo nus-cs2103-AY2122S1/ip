@@ -18,6 +18,7 @@ public class Parser {
      * @return String representation of type of command.
      */
     public static String parseCommand(String command) {
+        assert command != null : "command cannot be null";
         return command.split(" ")[0];
     }
 
@@ -28,6 +29,7 @@ public class Parser {
      * @return Integer representing task location in the ArrayList.
      */
     public static int parseNumber(String command) {
+        assert command != null : "command cannot be null";
         return Integer.parseInt(command.split(" ")[1]) - 1;
     }
 
@@ -39,6 +41,7 @@ public class Parser {
      * @return Description of the to-do task.
      */
     public static String parseTodo(String command) {
+        assert command != null : "command cannot be null";
         return command.split(" ", 2)[1];
     }
 
@@ -50,6 +53,7 @@ public class Parser {
      * @return Array containing description and date of the deadline task.
      */
     public static String[] parseDeadline(String command) {
+        assert command != null : "command cannot be null";
         return command.split(" ", 2)[1].split(" /by ", 2);
     }
 
@@ -61,6 +65,7 @@ public class Parser {
      * @return Array containing description and date of the event task.
      */
     public static String[] parseEvent(String command) {
+        assert command != null : "command cannot be null";
         return command.split(" ", 2)[1].split(" /at ", 2);
     }
 
