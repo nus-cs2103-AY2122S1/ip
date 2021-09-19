@@ -1,0 +1,12 @@
+E|1| hangout with friends | Sat, Sep 18 2021 12:00 pm
+T|1| text friends 
+T|0| do laundry 
+D|1| do hw | Mon, Oct 04 2021 12:00 pm
+E|0| go concert | Mon, Oct 18 2021 12:00 pm
+E|0| read | 
+T|0| swim 
+T|0| swim swim swim 
+T|0| swim /at 2021-09-16 
+E|0| watch / 12:00 | 
+E|0| watch | 12:00 pm
+D|0| do hw | Thu, Sep 09 2021

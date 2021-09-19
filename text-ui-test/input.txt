@@ -1,0 +1,13 @@
+list
+todo read book
+event watch movie /at 6pm monday
+deadline do homework /by 7pm tuesday
+event watch /on monday
+deadline /at 9pm
+list
+delete
+done 2
+delete 1
+hello
+todo
+bye

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.89"
+         prefWidth="400.0" style=" -fx-background-radius: 23; -fx-padding: 10;" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" minHeight="-Infinity" style="-fx-background-color: #d0b5c1; -fx-text-fill: #400f51;
+        -fx-label-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5;" text="Label" wrapText="true">
+            <HBox.margin>
+                <Insets right="5.0" left="5.0"/>
+            </HBox.margin></Label>
+        <Circle fx:id="displayPicture" fill="#ffffff" radius="30.0" stroke="#ffffff" strokeLineCap="ROUND"
+                strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="0.5" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+   <effect>
+      <ColorAdjust />
+   </effect>
+</fx:root>
