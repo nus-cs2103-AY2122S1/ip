@@ -21,6 +21,24 @@ public class Event extends Task {
         this.eveDateTime = atTime;
     }
 
+    /**
+     * Returns the name of this Event object.
+     *
+     * @return The Event name.
+     */
+    public String getEventName() {
+        return this.taskName;
+    }
+
+    /**
+     * Returns the date and time of this Event object.
+     *
+     * @return The Event date and time.
+     */
+    public LocalDateTime getEventDateTime() {
+        return this.eveDateTime;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + formatter.format(eveDateTime) + ")";

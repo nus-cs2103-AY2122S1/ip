@@ -62,6 +62,9 @@ public class TaskList {
 
         // Case Todo
         if (parser.isTodo(group[0]) && group.length > 1) {
+            if (isDuplicateTodo(input, inputs)) {
+                return "This Todo is already in the task list.";
+            }
             return addTodo(input, inputs, storage, ui);
         }
         if (parser.isTodo(group[0]) && group.length == 1) {
@@ -70,11 +73,17 @@ public class TaskList {
 
         // Case Deadline
         if (parser.isDeadline(group[0]) && input.contains(" /by ")) {
+            if (isDuplicateDeadline(input, inputs)) {
+                return "This Deadline is already in the task list.";
+            }
             return addDeadline(input, inputs, storage, ui);
         }
 
         // Case Event
         if (parser.isEvent(group[0]) && input.contains(" /at ")) {
+            if (isDuplicateEvent(input, inputs)) {
+                return "This Event is already in the task list.";
+            }
             return addEvent(input, inputs, storage, ui);
         }
 
@@ -160,8 +169,9 @@ public class TaskList {
             Task element = inputs.get(i);
             if (element.toString().contains(toBeFound)) {
                 tasksFound.add(element);
+            } else {
+                assert !element.toString().contains(toBeFound);
             }
-            assert !element.toString().contains(toBeFound);
         }
 
         String tasks = "Here are the matching tasks in your list: \n";
@@ -196,6 +206,21 @@ public class TaskList {
     }
 
     /**
+     * Check if a Todo object is a duplicate of an existing task.
+     *
+     * @param input The user input.
+     * @param inputs The ArrayList of Tasks.
+     * @return A boolean representing whether the Todo object is a duplicate.
+     */
+    private boolean isDuplicateTodo(String input, ArrayList<Task> inputs) {
+        String todoToCheck = input.substring(5);
+        for (Task element : inputs) {
+            return element instanceof Todo && todoToCheck.equals(((Todo) element).getTodoName());
+        }
+        return false;
+    }
+
+    /**
      * Adds a Deadline object to the TaskList.
      *
      * @param input The user input.
@@ -222,6 +247,28 @@ public class TaskList {
     }
 
     /**
+     * Checks if a Deadline object is a duplicate of an existing Task.
+     *
+     * @param input The user input.
+     * @param inputs The ArrayList of Tasks.
+     * @return A boolean representing whether the Deadline object is a duplicate.
+     */
+    private boolean isDuplicateDeadline(String input, ArrayList<Task> inputs) {
+        String[] ddlGroup = input.split(" /by ");
+        String ddlToCheck = ddlGroup[0].substring(9); // name of the task is after "deadline" and space
+        String ddlByTime = ddlGroup[1];
+        LocalDateTime dateTime = LocalDateTime.parse(ddlByTime, parser.getFormatter());
+        for (Task element : inputs) {
+            if (element instanceof Deadline
+                    && ddlToCheck.equals(((Deadline) element).getDeadlineName())
+                    && dateTime.isEqual(((Deadline) element).getDeadlineDateTime())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an Event object to the TaskList.
      *
      * @param input The user input.
@@ -245,5 +292,27 @@ public class TaskList {
         }
 
         return ui.displayAddTaskMessage(newEvent) + ui.displayTaskNumber(this);
+    }
+
+    /**
+     * Checks if an Event object is a duplicate of an existing Task.
+     *
+     * @param input The user input.
+     * @param inputs The ArrayList of Tasks.
+     * @return A boolean representing whether the Event object is a duplicate.
+     */
+    private boolean isDuplicateEvent(String input, ArrayList<Task> inputs) {
+        String[] eveGroup = input.split(" /at ");
+        String eveToCheck = eveGroup[0].substring(6); // name of the task is after "event" and space
+        String eveAtTime = eveGroup[1];
+        LocalDateTime dateTime = LocalDateTime.parse(eveAtTime, parser.getFormatter());
+        for (Task element : inputs) {
+            if (element instanceof Event
+                    && eveToCheck.equals(((Event) element).getEventName())
+                    && dateTime.isEqual(((Event) element).getEventDateTime())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

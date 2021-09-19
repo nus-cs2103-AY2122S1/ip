@@ -8,6 +8,15 @@ public class Todo extends Task {
         super(todoName);
     }
 
+    /**
+     * Returns the name of this Todo object.
+     *
+     * @return The Todo name.
+     */
+    public String getTodoName() {
+        return this.taskName;
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

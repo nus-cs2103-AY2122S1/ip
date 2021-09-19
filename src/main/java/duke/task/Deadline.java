@@ -21,6 +21,24 @@ public class Deadline extends Task {
         this.ddlDateTime = byTime;
     }
 
+    /**
+     * Returns the name of this Deadline object.
+     *
+     * @return The Deadline name.
+     */
+    public String getDeadlineName() {
+        return this.taskName;
+    }
+
+    /**
+     * Returns the date and time of this Deadline object.
+     *
+     * @return The Deadline date and time.
+     */
+    public LocalDateTime getDeadlineDateTime() {
+        return this.ddlDateTime;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + formatter.format(ddlDateTime) + ")";
