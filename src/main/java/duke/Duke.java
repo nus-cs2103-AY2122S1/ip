@@ -1,18 +1,22 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Contains main() method for Duke chatbot for IP of CS2103 2021.
  *
  * author: Ren Weilin A0216723J
  */
-public class Duke{
+public class Duke extends Application {
 
     private final UI userInterface;
     private final TaskList taskList;
 
     /**
-     * Constructor which initializes the necessary components for Duke to function.
+     * Initializes the necessary components for Duke to function.
      */
     public Duke() {
         Parser parser = new Parser();
@@ -22,7 +26,7 @@ public class Duke{
     }
 
     /**
-     * Start of Duke chatbot.
+     * Starts Duke chatbot.
      *
      * @param args CMD arguments.
      */
@@ -35,6 +39,20 @@ public class Duke{
         } finally {
             dukeInstance.userInterface.start();
         }
+    }
+
+    /**
+     * Enters
+     *
+     * @param stage The stage for Duke UI.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
 }
