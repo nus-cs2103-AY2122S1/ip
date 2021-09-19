@@ -33,17 +33,19 @@ public class Storage {
         }
     }
 
-    public void saveTasksToStorage(ArrayList<Task> tasks) {
+    public void saveTasksToStorage(TaskList tasks) {
         try {
-            String tasksinstring = tasks.stream().map(Task::toString).reduce("",
-                    (x, y) -> x + "\n" + y);
-            Files.write(taskListPath, tasksinstring.getBytes());
+            String newFile = tasks.toString();
+            this.writeStringToFile(newFile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
+    public void writeStringToFile(String newFile) throws IOException {
+        Files.write(taskListPath, newFile.getBytes());
+    }
 
-    public void loadDataToTasks(ArrayList<Task> tasks) {
+    public void loadDataToTasks(TaskList tasks) {
         java.nio.file.Path dirpath = Paths.get("data");
         Path taskListPath = Paths.get("data", "DukeTask.txt");
         boolean directoryExists = Files.exists(dirpath);
@@ -91,7 +93,7 @@ public class Storage {
 
                         currTask = new Deadline(desc.substring(0, index), done, LocalDate.parse(date));
                     }
-                    tasks.add(currTask);
+                    tasks.addTask(currTask);
                 }
 
             } catch (FileNotFoundException e) {

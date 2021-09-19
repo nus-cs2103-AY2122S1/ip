@@ -2,27 +2,23 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static TaskList tasks = new TaskList();
 
     public static void run() {
         Storage storage = new Storage();
         storage.loadDataToTasks(tasks);
         String userInput = "";
-        System.out.println("Hello, What Can I do for you ?\n -------------------------------");
+        Ui.displayGreeting();
         Scanner scanner = new Scanner(System.in);
+        userInput = Ui.takeInput();
         while(!userInput.equals("bye")) {
-            userInput = scanner.nextLine();
             Parser.handleInput(userInput, tasks);
+            userInput = Ui.takeInput();
+
         }
         storage.saveTasksToStorage(tasks);
     }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         Duke.run();
     }
 }

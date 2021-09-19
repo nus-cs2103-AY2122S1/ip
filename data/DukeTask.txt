@@ -1,5 +1,6 @@
 
-[T][ ]         eat bread
-[T][ ]      find books
-[T][ ]   kill humans
-[T][ ]  kill pokemon
+[T][ ] eat bread
+[T][ ] find books
+[T][ ] kill humans
+[T][ ] kill pokemon
+[E][ ] Dance (at: 2020-01-01)

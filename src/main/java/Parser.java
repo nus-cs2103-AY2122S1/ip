@@ -7,54 +7,48 @@ public class Parser {
     Parser(String userInput) {
         this.userInput = userInput;
     }
-    public static void handleInput(String userInput, ArrayList<Task> tasks) {
+    public static void handleInput(String userInput, TaskList tasks) {
         if (userInput.equals("bye")) {
-            System.out.println("Duke : Bye, Hope to see you again soon !");
+            Ui.displayQuitMessage();
             return;
         } else if (userInput.equals("list")) {
-            int numberOfTasks = tasks.size();
-            for (int i = 0; i < numberOfTasks; i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i));
-            }
-            System.out.println("\n ----------------------------------");
-
+            Ui.displayTaskList(tasks);
         } else if (userInput.startsWith("done")) {
             int id = Integer.parseInt(userInput.substring(5));
             Task currTask = null;
             try {
-                currTask = tasks.get(id - 1);
+                currTask = tasks.getTaskById(id - 1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
             }
             if (currTask != null) {
                 currTask.markAsDone();
-                System.out.println("Nice! I've marked this task as done: \n" + currTask);
-                System.out.println("\n ----------------------------------");
+                Ui.displayMarkedTaskAsDone(currTask);
             }
 
         } else if (userInput.startsWith("delete")) {
             int id = Integer.parseInt(userInput.substring(7));
 
             try {
-                Task removedTask = tasks.get(id - 1);
-                tasks.remove(id);
-                System.out.println("Successfully removed task : " + removedTask);
+                Task removedTask = tasks.getTaskById(id - 1);
+                tasks.removeTaskById(id);
+                Ui.displaySuccessfulRemoval(removedTask);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Ui.displayErrorMessage(e);
             }
         } else {
             Task newTask = null;
             try {
                 newTask = handleTaskInput(userInput);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                Ui.displayErrorMessage(e);
             }
             if (newTask != null) {
-                tasks.add(newTask);
+                tasks.addTask(newTask);
                 System.out.println("Duke: Added Task " + userInput);
 
             }
-            System.out.println("\n ----------------------------------");
+            Ui.displayLineBreak();
         }
     }
 
@@ -70,11 +64,12 @@ public class Parser {
         } else if(userInput.startsWith("deadline")) {
             int start_id = userInput.indexOf("deadline");
             int task_id = userInput.indexOf("/by");
-            String task = userInput.substring(start_id + 9, task_id);
-            String date = userInput.substring(task_id + 3);
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /by !");
             }
+            String task = userInput.substring(start_id + 9, task_id);
+            String date = userInput.substring(task_id + 3);
+
             if(task.replaceAll("\\s+","").equals("")){
                 //if remaining string is whitespace or empty
                 throw new DukeException("Task needs to have description !");
@@ -87,12 +82,12 @@ public class Parser {
         } else if(userInput.startsWith("event")) {
             int start_id = userInput.indexOf("event");
             int task_id = userInput.indexOf("/at");
-            String task = userInput.substring(start_id + 6, task_id);
-            String date = userInput.substring(task_id + 3);
-
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /at !");
             }
+            String task = userInput.substring(start_id + 6, task_id);
+            String date = userInput.substring(task_id + 3);
+
             return new Event(task, false, LocalDate.parse(date.trim()));
         } else {
             throw new DukeException("I don't understand what you are talking about !");
