@@ -9,9 +9,9 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="208.0" prefWidth="376.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        //@@author zognin-reused
-        //Reused from https://github.com/nus-cs2103-AY2122S1/forum/issues/148
-        // Solution for Height
+<!--        @@author zognin-reused-->
+<!--        Reused from https://github.com/nus-cs2103-AY2122S1/forum/issues/148-->
+<!--         Solution for Height-->
         <Label fx:id="dialog" maxHeight="Infinity" minHeight="-Infinity" style="-fx-alignment: top-left;" text="Label" textAlignment="JUSTIFY" wrapText="true">
          <font>
             <Font size="18.0" />
