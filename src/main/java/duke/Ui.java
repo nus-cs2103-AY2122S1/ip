@@ -2,13 +2,18 @@ package duke;
 
 import duke.utils.DukeException;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
 import java.util.Scanner;
 
 public class Ui {
     private static File HELP;
-    private static String DEFAULT_HELP_PATH = Ui.class.getResource("help/help.txt").getPath();
+    private static final String DEFAULT_HELP_PATH = "help.txt";
     private final static String BORDERS = "\t____________________________________________________________";
 
     /**
@@ -31,18 +36,18 @@ public class Ui {
      */
     public static String help() throws DukeException {
         try {
-            if (HELP == null) {
-                HELP = new File(DEFAULT_HELP_PATH);
-            }
+            InputStream in = Ui.class.getResourceAsStream(DEFAULT_HELP_PATH);
+            BufferedReader sc = new BufferedReader(new InputStreamReader(in));
             StringBuilder sb = new StringBuilder();
-            Scanner sc = new Scanner(HELP);
-            while (sc.hasNext()) {
-                sb.append(sc.nextLine());
+            while (sc.ready()) {
+                sb.append(sc.readLine());
                 sb.append("\n\t ");
             }
             return sb.toString();
         } catch (FileNotFoundException e) {
-            throw new DukeException("help.txt not found @ " + HELP + e.toString());
+            throw new DukeException("help.txt not found @ " + HELP);
+        } catch (IOException e) {
+            throw new DukeException(e.toString());
         }
     }
     
@@ -55,14 +60,12 @@ public class Ui {
      */
     public static String help(String cmd) throws DukeException {
         try {
-            if (HELP == null) {
-                HELP = new File(DEFAULT_HELP_PATH);
-            }
+            InputStream in = Ui.class.getResourceAsStream(DEFAULT_HELP_PATH);
+            BufferedReader sc = new BufferedReader(new InputStreamReader(in));
             StringBuilder sb = new StringBuilder();
-            Scanner sc = new Scanner(HELP);
             boolean isFound = false;
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
+            while (sc.ready()) {
+                String line = sc.readLine();
                 if (line.contains("> " + cmd)) {
                     isFound = true;
                     sb.append(line);
@@ -70,8 +73,8 @@ public class Ui {
                 }
             }
             String sep = BORDERS.substring(1);
-            while (isFound && sc.hasNext()) {
-                String line = sc.nextLine();
+            while (isFound && sc.ready()) {
+                String line = sc.readLine();
                 if (line.contains(sep)) {
                     break;
                 }
@@ -84,6 +87,8 @@ public class Ui {
             return sb.toString();
         } catch (FileNotFoundException e) {
             throw new DukeException("help.txt not found at file location: " + HELP);
+        } catch (IOException e) {
+            throw new DukeException(e.toString());
         }
     }
 }

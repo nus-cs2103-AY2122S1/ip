@@ -52,14 +52,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/main/resources/duke"
-        }
-    }
-}
-
 jar {
     manifest {
         attributes 'Main-Class': 'duke.Launcher'

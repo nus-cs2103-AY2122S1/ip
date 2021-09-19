@@ -35,7 +35,7 @@ DESCRIPTION
  separated by a space (yyyy-MM-dd HH:mm).
 EXAMPLES
  event Singapore International Film Festival /at 2021-11-03 11:50
- event Oral Presentation /by 2021-11-21 15:20 /at memorize script
+ event Oral Presentation /at 2021-11-21 15:20 ~ 16:00 / memorize script
 ____________________________________________________________
 > greet
 DESCRIPTION

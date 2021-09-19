@@ -6,9 +6,9 @@ DukeAgain is a desktop app for managing your tasks.
 To run DukeAgain, 
 
 1. Ensure Java Runtime Environment (JRE) `11` or above is installed on your device.
-2. Download and extract `duke_again.zip` from [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+2. Download `duke.jar` from [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 3. To run:
-    - [Windows] Double-click the `duke.jar` to start the app, or run `duke -jar duke.jar` in the terminal to start DukeAgain.
+    - [Windows] Double-click `duke.jar` to start the app, or run `duke -jar duke.jar` in the terminal to start DukeAgain.
     - [Mac] Navigate Terminal to the folder containing `duke.jar` and run `java -jar duke.jar`.
 
 ### Essential commands
