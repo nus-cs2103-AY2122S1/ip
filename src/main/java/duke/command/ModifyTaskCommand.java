@@ -52,7 +52,7 @@ public class ModifyTaskCommand extends Command {
         case UNDONE: {
             taskList.undoneTask(item);
             storage.refreshTask(taskList);
-            return Ui.taskDoneMessage(task);
+            return Ui.taskUndoneMessage(task);
         }
         case DELETE: {
             taskList.removeTask(item);

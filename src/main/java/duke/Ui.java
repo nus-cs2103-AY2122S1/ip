@@ -78,4 +78,13 @@ public class Ui {
     public static String taskDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n    " + task;
     }
+
+    /**
+     * Returns a message when a task is undone.
+     *
+     * @param task The task list to be undone.
+     */
+    public static String taskUndoneMessage(Task task) {
+        return "Alright. I've undone this task:\n    " + task;
+    }
 }
