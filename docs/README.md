@@ -14,6 +14,8 @@ Duke provides you with many features to optimise your task management. Here's a 
 6. Tag a task
 7. Exit Duke
 8. View stored tasks from a previous session
+
+
 ### Add different types of tasks
 
 You can input 3 types of tasks; ```todo```, ```deadline``` and ```event```.
