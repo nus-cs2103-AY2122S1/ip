@@ -52,6 +52,24 @@ public class TaskList {
     }
 
     /**
+     * Finds all Tasks containing a supplied String.
+     * If multiple are present, the first one is returned.
+     * @param keyword The name of the Task to find
+     * @return A Task with the same name, or <code>null</code> if none was found.
+     */
+    public TaskList match(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.getName().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return new TaskList(matchingTasks);
+    }
+
+
+
+    /**
      * Removes a Task with the same name as a supplied String
      * If multiple are present, the first is deleted
      * @param taskName The name of the Task to be deleted

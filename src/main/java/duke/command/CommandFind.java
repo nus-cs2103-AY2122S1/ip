@@ -14,12 +14,7 @@ public class CommandFind extends Command {
 
     @Override
     public void execute(TaskList taskList, UserInterface ui) {
-        TaskList matchingTasks = new TaskList();
-        for (Task task: taskList.getTasks()) {
-            if (task.getName().contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
+        TaskList matchingTasks = taskList.match(keyword);
         ui.print(matchingTasks.toString());
     }
 }
