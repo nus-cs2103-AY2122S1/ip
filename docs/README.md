@@ -22,11 +22,11 @@
 ## Usage
 
 ### `list` - list out all your added tasks
-####Example of usage:
+#### Example of usage:
 
 `list`
 
-####Expected outcome:
+#### Expected outcome:
 ```
 Here are the tasks in your list:
 1. [T][X] hello
@@ -36,11 +36,11 @@ Describe the action and its outcome.
 
 ### `todo <taskDescription>` - Adds todo task to your list
 
-####Example of usage: 
+#### Example of usage: 
 
 `todo myTodo`
 
-####Expected outcome:
+#### Expected outcome:
 ```
 Got it. I've added this task:
 
@@ -50,10 +50,10 @@ Now you have 3 tasks in the list.
 ```
 
 ### `deadline <deadlineDescription> /by <yyyy-mm-dd> <hhmm>`- Adds deadline task to your list
-####Example of usage:
+#### Example of usage:
 `deadline myDeadline /by 2021-09-15 1800`
  
-####Expected outcome:
+#### Expected outcome:
 ```
 Got it. I've added this task:
 
@@ -64,10 +64,10 @@ Now you have 4 tasks in the list.
 
 ###`event <taskDescription> /at <yyyy-mm-dd> <hhmm>` - Adds event task to your list 
 
-####Example of usage:
+#### Example of usage:
 `event myEvent /at 2021-09-15 1200`
 
-####Expected outcome:
+#### Expected outcome:
 ```
 Got it. I've added this task:
 
@@ -78,10 +78,10 @@ Now you have 5 tasks in the list.
 
 ###`delete <taskIndex>` - Deletes task at the given index in the list
 
-####Example of usage:
+#### Example of usage:
 `delete 3`
 
-###Expected outcome:
+### Expected outcome:
 ```
 Noted. I've removed this task:
 
@@ -90,12 +90,12 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list.
 ```
 
-###`undo` - Undo the most recent action if it is undo-able
+### `undo` - Undo the most recent action if it is undo-able
 
-####Example of usage:
+#### Example of usage:
 `undo`
 
-####Expected outcome:
+#### Expected outcome:
 ```
 Got it. I've added this task:
 
@@ -103,12 +103,12 @@ Got it. I've added this task:
 
 Now you have 5 tasks in the list.
 ```
-###`done <taskIndex>` - Marks the task with the given taskIndex as done
+### `done <taskIndex>` - Marks the task with the given taskIndex as done
 
-####Example of usage:
+#### Example of usage:
 `done 3`
 
-####Expected outcome:
+#### Expected outcome:
 ```
 Nice! I've marked this task as done:
 
