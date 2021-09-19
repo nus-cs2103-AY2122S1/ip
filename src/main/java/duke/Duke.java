@@ -1,9 +1,10 @@
 package duke;
 
-import duke.controller.MainWindow;
-import duke.task.TaskList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import duke.controller.MainWindow;
+import duke.task.TaskList;
 
 /**
  * Duke.
@@ -40,6 +41,9 @@ public class Duke {
         ui.init(mainWindow);
     }
 
+    /**
+     * Marks the program for shutdown.
+     */
     public void exitProgram() {
         mainWindow.setAcceptingInput(false);
 
