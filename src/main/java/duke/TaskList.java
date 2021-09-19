@@ -57,13 +57,11 @@ public class TaskList {
      * @return The deleted Task, or <code>null</code> if none were deleted
      */
     public Task delete(String taskName) {
-        for (Task task: taskList) {
-            if (task.getName().equals(taskName)) {
-                taskList.remove(task);
-                return task;
-            }
+        Task taskToDelete = find(taskName);
+        if (taskToDelete != null){
+            taskList.remove(taskToDelete);
         }
-        return null;
+        return taskToDelete;
     }
 
     /**
