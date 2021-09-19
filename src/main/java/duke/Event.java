@@ -1,14 +1,12 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 /**Child class that extends parent 'Task' class and handles
  * operations for the Event task.
  * */
 public class Event extends Task{
-    protected LocalDate at;
-    private String dateForObject;
+    private LocalDateTime at;
 
     /**
      * Constructor for the Event class.
@@ -16,14 +14,32 @@ public class Event extends Task{
      * @param description The description of the task
      * @param at The date on which the task must be executed
      */
-    public Event(String description, LocalDate at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
-        this.dateForObject = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Converts the date of the object from type LocalDateTime
+     * to String for easy manipulation
+     *
+     * @param dateTime The time of the task stored in list as LocalDateTime
+     * @return The manipulated string of the object's date and time
+     */
+    public String getEventDateTimeString(LocalDateTime dateTime) {
+        String dateTimeString = dateTime.toString();
+        String[] splitDateAndTime = dateTimeString.split("T");
+        String DateTime = splitDateAndTime[0] + " " + splitDateAndTime[1];
+        return DateTime;
+    }
+
+    /**
+     * toString() method for event object
+     *
+     * @return The task printed in the correct format
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " at: " + this.at;
+        return "[E]" + super.toString() + "at: " + getEventDateTimeString(this.at);
     }
 }

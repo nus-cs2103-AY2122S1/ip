@@ -11,7 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private File file;
-    private Parser p;
+    private Parser parser;
     private Ui ui;
 
     public Duke() {
@@ -32,7 +32,7 @@ public class Duke {
             this.tasks = new TaskList(filePath);
         }
         ui = new Ui(this.tasks, this.storage);
-        p = new Parser();
+        parser = new Parser();
         this.file = new File(filePath);
         this.tasks.readFromFile();
     }
@@ -46,12 +46,12 @@ public class Duke {
         System.out.println("Hello! This is Duke, your very own chat bot.");
         System.out.println("What can I help you with ?");
         while (true) {
-            String fullCommand = ui.input();
-            if (!fullCommand.equals("bye")) {
+            String userCommand = ui.input();
+            if (!userCommand.equals("bye")) {
                 try {
-                    p.parse(fullCommand, this.tasks, this.storage);
+                    parser.parse(userCommand, this.tasks, this.storage);
                 } catch (DukeException e) {
-                    System.out.println(e.getMsg());
+                    System.out.println(e.getErrorMessage());
                 }
             } else {
                 System.out.println("It's sad to see you go :(");
@@ -61,13 +61,16 @@ public class Duke {
         }
     }
 
+    /** main method */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the appropriate response according to user input
+     *
+     * @param input The input entered by the user
+     * @return The output matching the input request of the user
      */
     public String getResponse(String input) {
         while (!input.equals("bye")) {
@@ -78,7 +81,7 @@ public class Duke {
                 this.tasks = new TaskList("./data/duke.txt");
             }
             this.tasks.readFromFile();
-            return p.parse(input, this.tasks, this.storage);
+            return parser.parse(input, this.tasks, this.storage);
         }
         return "It's sad to see you go :(";
     }

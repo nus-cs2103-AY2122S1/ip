@@ -34,10 +34,16 @@ public class Task {
      *
      * @return void
      */
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns the type of the task
+     *
+     * @return the type of task - either T for to-do, D for deadline
+     * or E for event
+     */
     public String getType() {
         return this.toString().substring(1,2);
     }

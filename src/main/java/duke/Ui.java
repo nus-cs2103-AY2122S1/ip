@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Class that handles the interaction with the user
  */
 public class Ui {
-    Scanner scan;
-    private String str;
+    Scanner scanner;
+    private String errorString;
     private static TaskList listOfTasks;
     private static Storage storage;
 
@@ -18,13 +18,13 @@ public class Ui {
      * @param s The Storage class that gets written to
      */
     public Ui(TaskList t, Storage s) {
-        scan = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         this.listOfTasks = t;
         this.storage = s;
     }
 
     public Ui() {
-        str = "There has been a loading error";
+        errorString = "There has been a loading error";
     }
 
     /**
@@ -33,9 +33,10 @@ public class Ui {
      * @return String The string that displays the input of the user
      */
     public String input() {
-        if (scan.hasNextLine()) {
-            String str = scan.nextLine();
-            return str;
+        //below code adapted from https://www.javatpoint.com/how-to-get-input-from-user-in-java
+        if (scanner.hasNextLine()) {
+            String inputString = scanner.nextLine();
+            return inputString;
         }
         return "";
     }
@@ -47,6 +48,6 @@ public class Ui {
      * @return void
      */
     public String showLoadingError() {
-        return this.str;
+        return this.errorString;
     }
 }

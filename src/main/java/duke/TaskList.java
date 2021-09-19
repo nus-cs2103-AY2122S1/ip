@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,7 +60,7 @@ public class TaskList {
      * @param description The string that contains the description of the task.
      * @param date The date mentioned in the task initialization.
      */
-    public void addDeadline(String description, LocalDate date) {
+    public void addDeadline(String description, LocalDateTime date) {
         tasks.add(new Deadline(description, date));
     }
 
@@ -69,7 +70,7 @@ public class TaskList {
      * @param description The string that contains the description of the task.
      * @param date The date mentioned in the task initialization.
      */
-    public void addEvent(String description, LocalDate date) {
+    public void addEvent(String description, LocalDateTime date) {
         tasks.add(new Event(description, date));
     }
 
@@ -85,7 +86,7 @@ public class TaskList {
     /**
      * Returns the entire task list as a whole as an ArrayList
      *
-     * @return ArrayList<Task> A collection of Task objects
+     * @return A collection of Task objects
      */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
@@ -99,15 +100,15 @@ public class TaskList {
             Scanner r = new Scanner(this.file);
             while (r.hasNextLine()) {
                 String userInput = r.nextLine();
-                String[] split = userInput.substring(7).split(" ");
+                String[] splitUserInput = userInput.substring(7).split(" ");
                 String description = "";
-                for (int i = 0; i < split.length - 2; i++) {
-                    description = description + split[i] + " ";
+                for (int i = 0; i < splitUserInput.length - 3; i++) {
+                    description = description + splitUserInput[i] + " ";
                 }
                 if (userInput.substring(0,3).equals("[T]")) {
                     String descriptionTodo = "";
-                    for (int i = 0; i < split.length; i++) {
-                        descriptionTodo = descriptionTodo + split[i] + " ";
+                    for (int i = 0; i < splitUserInput.length; i++) {
+                        descriptionTodo = descriptionTodo + splitUserInput[i] + " ";
                     }
                     readTodo(userInput, descriptionTodo);
                 } else if (userInput.substring(0,3).equals("[D]")) {
@@ -119,6 +120,7 @@ public class TaskList {
             r.close();
         } catch (FileNotFoundException e) {
             try {
+                //below file creation adapted from https://www.w3schools.com/java/java_files_create.asp
                 String path = "data/";
                 File makeFile = new File("data/duke.txt");
                 Files.createDirectories(Paths.get(path));
@@ -139,7 +141,7 @@ public class TaskList {
         this.addTodo(description);
         int index = this.size();
         if (userInput.substring(3,6).equals("[X]")) {
-            this.get(index-1).markAsDone();
+            this.get(index-1).setDone();
         }
     }
 
@@ -150,13 +152,20 @@ public class TaskList {
      * @param description The description of the task
      */
     public void readDeadline(String userInput, String description) {
-        String[] temp = userInput.split("by:");
-        assert temp[1].length() > 0 : "Date cannot be empty";
-        LocalDate date1 = LocalDate.parse(temp[1].substring(1));
-        this.addDeadline(description, date1);
+        String[] splitDateAndDescription = userInput.split("by:");
+        assert splitDateAndDescription[1].length() > 0 : "Date cannot be empty";
+        String deadlineDate = splitDateAndDescription[1].substring(1);
+        String[] dateComponents = deadlineDate.split(" ");
+        String date = dateComponents[0];
+        String hour = dateComponents[1].substring(0,2);
+        String minutes = dateComponents[1].substring(3);
+        String dateTimeString = date + " " + hour + minutes;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime finalDeadlineDateTime = LocalDateTime.parse(dateTimeString, formatter);
+        this.addDeadline(description, finalDeadlineDateTime);
         int index = this.size();
         if (userInput.substring(3,6).equals("[X]")) {
-            this.get(index-1).markAsDone();
+            this.get(index-1).setDone();
         }
     }
 
@@ -167,13 +176,20 @@ public class TaskList {
      * @param description The description of the task
      */
     public void readEvent(String userInput, String description) {
-        String[] tempEvent = userInput.split("at:");
-        assert tempEvent[1].length() > 0 : "Date cannot be empty";
-        LocalDate date1 = LocalDate.parse(tempEvent[1].substring(1));
-        this.addEvent(description, date1);
+        String[] splitDateAndString = userInput.split("at:");
+        assert splitDateAndString[1].length() > 0 : "Date cannot be empty";
+        String str = splitDateAndString[1].substring(1);
+        String[] dateComponents = str.split(" ");
+        String date = dateComponents[0];
+        String hour = dateComponents[1].substring(0,2);
+        String minutes = dateComponents[1].substring(3);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        String dateTime = date + " " + hour + minutes;
+        LocalDateTime eventDateTime = LocalDateTime.parse(dateTime, formatter);
+        this.addEvent(description, eventDateTime);
         int index = this.size();
         if (userInput.substring(3,6).equals("[X]")) {
-            this.get(index-1).markAsDone();
+            this.get(index-1).setDone();
         }
     }
 }

@@ -34,6 +34,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String welcomeMessage = "Hello! This is Duke, your very own chat bot. Type 'help' to see the list of commands available! Or if you're a pro, get started by adding some tasks!";
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
     public void setDuke(Duke d) {

@@ -1,11 +1,10 @@
-deadline return book /by Monday
-deadline meet Mark /by Tuesday
 deadline return book /by 2/12/2019 1800
 event test code /at 3/11/2018 1400
+todo return novel
 list
 event project meeting /at 15/10/2015 1600
 event project water /at 15/10/2015 1600
-event project call /at Tue 2-4pm
+event call /at Tue 2-4pm
 list
 done 3
 list
