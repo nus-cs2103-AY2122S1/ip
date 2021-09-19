@@ -1,7 +1,7 @@
 # User Guide
 Welcome to Duke! Duke is your personal desktop-based task manager, available both on the command line, as well as on Graphical User Interface (GUI).
 
-![Homepage](/docs/Homepage.png)
+![Homepage](https://github.com/aakanshanarain/ip/blob/master/docs/Homepage.png)
 
 Continue reading to find out more.
 ## Features 
@@ -14,48 +14,49 @@ Duke provides you with many features to optimise your task management. Here's a 
 6. Tag a task
 7. Exit Duke
 8. View stored tasks from a previous session
+
 ### Add different types of tasks
 
 You can input 3 types of tasks; ```todo```, ```deadline``` and ```event```.
 > For deadline and event tasks, you will need to specify a date and time as well.
 
-![addTask](/docs/addTask.png)
+![addTask](https://github.com/aakanshanarain/ip/blob/master/docs/addTask.png)
 
 ### List all the tasks in the task list
 
 You can ask Duke to list all the tasks in your task list at a particular time.
 
-![showTasks](/docs/showTasks.png)
+![showTasks](https://github.com/aakanshanarain/ip/blob/b90d9b5f2775607a7580d5e7c6c204b2d5b20518/docs/showTasks.png)
 
 ### Mark a task as done
 
 You can check off a task once you've finished it.
 
-![doneTask](/docs/doneTask.png)
+![doneTask](https://github.com/aakanshanarain/ip/blob/master/docs/doneTask.png)
 
 ### Delete a task
 
 You can ask Duke to delete a task from your list.
 
-![deleteTask](/docs/deleteTask.png)
+![deleteTask](https://github.com/aakanshanarain/ip/blob/master/docs/deleteTask.png)
 
 ### Find tasks that contain a keyword
 
 Ask Duke to find all your tasks that contain a specific keyword.
 
-![findTask](/docs/findTask.png)
+![findTask](https://github.com/aakanshanarain/ip/blob/master/docs/findTask.png)
 
 ### Tag a task
 
 You can also tag tasks.
 
-![tagTask](/docs/tagTask.png)
+![tagTask](https://github.com/aakanshanarain/ip/blob/master/docs/tagTask.png)
 
 ### View stored tasks from a previous session
 
 Duke will automatically save your tasks, so the next time you want to view your list, your tasks will be right there for you.
 
-![storedTasks](/docs/storedTasks.png)
+![storedTasks](https://github.com/aakanshanarain/ip/blob/master/docs/storedTasks.png)
 
 ## Usage
 
