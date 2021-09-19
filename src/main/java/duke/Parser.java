@@ -180,6 +180,9 @@ public class Parser {
             case "done": {
                 return new ModifyTaskCommand(ModifyTaskCommand.CommandType.DONE, description);
             }
+            case "undone": {
+                return new ModifyTaskCommand(ModifyTaskCommand.CommandType.UNDONE, description);
+            }
             case "delete": {
                 return new ModifyTaskCommand(ModifyTaskCommand.CommandType.DELETE, description);
             }

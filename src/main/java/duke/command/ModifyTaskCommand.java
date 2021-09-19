@@ -49,6 +49,11 @@ public class ModifyTaskCommand extends Command {
             storage.refreshTask(taskList);
             return Ui.taskDoneMessage(task);
         }
+        case UNDONE: {
+            taskList.undoneTask(item);
+            storage.refreshTask(taskList);
+            return Ui.taskDoneMessage(task);
+        }
         case DELETE: {
             taskList.removeTask(item);
             storage.refreshTask(taskList);
@@ -61,6 +66,6 @@ public class ModifyTaskCommand extends Command {
     }
 
     public enum CommandType {
-        DONE, DELETE
+        DONE, DELETE, UNDONE
     }
 }

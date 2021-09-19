@@ -97,6 +97,26 @@ public class TaskList {
     }
 
     /**
+     * Undone a completed task in the list.
+     *
+     * @param item The index of the task item to be undone.
+     * @throws DukeException If the task is not done yet or the index is invalid.
+     */
+    public void undoneTask(int item) throws DukeException {
+        if (item <= 0) {
+            throw new IndexMismatchException();
+        }
+        if (item > this.taskList.size()) {
+            throw new IndexOutOfBoundException();
+        }
+        Task task = this.taskList.get(item - 1);
+        if (!task.isDone()) {
+            throw new DukeException("OOPS!!! The task is not done yet!");
+        }
+        task.setDone(false);
+    }
+
+    /**
      * Transforms the list to a string list and store it in the {@code StringBuilder}. If the list is empty, then it
      * will store the {@code emptyMessage} instead.
      *
