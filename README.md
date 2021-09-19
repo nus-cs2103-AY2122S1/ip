@@ -9,7 +9,7 @@ This chat box is,
 * ~~EASY~~ SUPERCALIFRAGILISTICEXPIALIDOCIOUSLY EASY to use
 
 All you need to do is,
-1. Download DukePro Max Plus Ultra [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) :wink:
+1. Download DukePro Max Plus Ultra [here](https://github.com/ErnestCuong/ip/releases/tag/A-Release) :wink:
 2. Double-click it
 3. Add your tasks
 4. Magic!
