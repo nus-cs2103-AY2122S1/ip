@@ -82,7 +82,7 @@ public class Message {
      * @return
      */
     public static String addEvent(Event e, TaskList lst) {
-        return "Deadline '" + e.getDescription() + "' added to your list, scheduled for " + e.getStringAt()
+        return "Event '" + e.getDescription() + "' added to your list, scheduled for " + e.getStringAt()
                 + NEW_LINE + COUNT_TASKS.replace(NUMBER_OF_TASKS_PLACEHOLDER,lst.getSize() +"");
     }
 
@@ -94,7 +94,7 @@ public class Message {
      * @return
      */
     public static String addTodo(Todo t, TaskList lst) {
-        return "Deadline '" + t.getDescription() + "' added to your list"
+        return "Todo '" + t.getDescription() + "' added to your list"
                 + NEW_LINE + COUNT_TASKS.replace(NUMBER_OF_TASKS_PLACEHOLDER,lst.getSize() +"");
     }
 

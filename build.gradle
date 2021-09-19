@@ -52,13 +52,13 @@ test {
 }
 
 application {
-    mainClassName = "katheryne.Katheryne"
+    mainClassName = "katheryne.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "katheryne"
     archiveClassifier = null
-    archiveVersion.set('v0.1-w3')
+    archiveVersion.set('v0.2-w4')
 }
 
 checkstyle {
