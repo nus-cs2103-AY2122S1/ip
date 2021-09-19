@@ -54,8 +54,8 @@ public class Storage {
      */
     public Tasklist fileToTasklist() throws DukeException {
         try {
-            File file = new File(System.getProperty("user.dir") + filepath);
-            System.out.println(System.getProperty("user.dir") + filepath);
+            File file = new File(filepath);
+            System.out.println(filepath);
             Tasklist tasklist = new Tasklist();
             if (!file.exists()) {
                 file.createNewFile();
