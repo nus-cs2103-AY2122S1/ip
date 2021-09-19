@@ -1,4 +1,4 @@
-#Duke User Guide
+# Duke User Guide
 
 Duke is an application designed to help you keep track and manage your various tasks.
 
