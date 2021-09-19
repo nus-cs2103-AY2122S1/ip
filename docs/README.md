@@ -163,7 +163,6 @@ Here are the matching tasks in your list:
 
 Name | Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 -------|-------------------
-
 `bye` | Exits the programme <br> e.g. `bye`
 `todo` | Adds a Todo task with a description <br> e.g. `todo do 2103 project`
 `event` | Adds an Event task with a description and time in yyyy-MM-dd <br> e.g. `event project meeting /at 2020-01-15`
