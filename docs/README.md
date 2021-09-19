@@ -1,18 +1,14 @@
 # User Guide
+# 🧞‍♂️
 
-
-Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while 
+Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while
 still having the benefits of a Graphical User Interface (GUI).
 
-
-
-
-
-##Notes about the command format
+## Notes about the command format
 
 * Words in ```UPPER_CASE``` are the parameters to be supplied by the user.
   e.g. ```todo TASK```, ```TASK``` is a parameter which can be used as ```todo eat dinner```.
-  
+
 
 ![overview](images/main.png)
 
@@ -27,12 +23,12 @@ still having the benefits of a Graphical User Interface (GUI).
   * [Show all commands](#show-all-commands-help)
   * [Show tasks of certain priority](#show-tasks-of-certain-priority-show-priority-level)
   * [Exiting the program](#exiting-the-program-bye)
-  
-  
+
+
 
 ## Features
 
-The Genie is powerful enough to help you do the following: 
+The Genie is powerful enough to help you do the following:
 
 * Add a new tasks to you task list
 * View all the tasks you have
@@ -98,14 +94,14 @@ List all the genie.tasks that are both completed and not completed.
 
 ![overview](images/list.png)
 
-###Marking a task as done: ```done INDEX```
+### Marking a task as done: ```done INDEX```
 
 Mark task as done.
 
 Format: ```done INDEX```
 
 * Mask the task at the specified index as done.
-* Index must be a positive integer greater than 0. 
+* Index must be a positive integer greater than 0.
 * The index refers to the number in the list.
 
 *Examples*
@@ -114,7 +110,7 @@ Format: ```done INDEX```
 
 ![overview](images/list.png)
 
-###Deleting a task: ```delete INDEX```
+### Deleting a task: ```delete INDEX```
 
 Deleting a specified task from the list.
 
@@ -138,7 +134,7 @@ Find genie.tasks that contains the given index.
 
 *Examples*
 
-* ```find Jasmine``` 
+* ```find Jasmine```
 
 ![overview](images/find.png)
 
@@ -148,7 +144,7 @@ Show all the available commands and formats for the user input that the genie.Ge
 
 *Format:* ```help```
 
-Expected outcome: 
+Expected outcome:
 
 ![overview](images/help.png)
 
@@ -175,6 +171,6 @@ Format: ```bye```
 
 ### Saving the data
 
-All the genie.tasks added to the list are automatically saved to the hard drive, 
-no manual editing is needed. The next time the app is opened, your genie.tasks 
+All the genie.tasks added to the list are automatically saved to the hard drive,
+no manual editing is needed. The next time the app is opened, your genie.tasks
 will still appear when you enter the ```list``` command.
