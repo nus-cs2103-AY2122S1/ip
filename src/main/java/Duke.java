@@ -56,6 +56,7 @@ public class Duke {
         }
     }
 
+    //Solution below adapted from https://github.com/Wincenttjoi/CS2103T-Duke-chatbot
     public void run () {
         System.out.println(ui.greet());
         boolean isExit = false;
@@ -105,6 +106,7 @@ public class Duke {
         }
     }
 
+    //Solution below adapted from https://github.com/Wincenttjoi/CS2103T-Duke-chatbot
     public String getResponse(String input) {
         try {
             CommandHandler commandHandler = new CommandHandler(ui, taskList);
