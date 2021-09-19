@@ -40,8 +40,9 @@ public class Storage {
      * @param taskList The Task List of Duke to receive tasks from data file.
      */
     public void loadInto(TaskList taskList) {
-        createDatafile();
-
+        if (!new File(filePath).isFile()) {
+            createDatafile();
+        }
         // a List to store all Tasks read from data.txt
         ArrayList<String> dataRead = new ArrayList<>();
 
@@ -206,7 +207,7 @@ public class Storage {
             Files.createFile(path);
             System.out.println("Directories for data.txt are created.");
         } catch (IOException e) {
-            System.out.println("Failed to create data directories (they may already exist)" + e.getMessage());
+            System.out.println("Failed to create data directories " + e.getMessage());
         }
     }
 
