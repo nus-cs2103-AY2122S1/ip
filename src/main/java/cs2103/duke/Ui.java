@@ -29,28 +29,6 @@ public class Ui {
     }
 
     /**
-     * Shows the welcome message when the user runs Duke.
-     *
-     * @return the welcome message to the user.
-     */
-    public String showWelcome() {
-        // populating featuresCombined so each level has all elements of levels before it
-        StringBuilder featuresCombined = new StringBuilder();
-        for (int count = 0; count <= lv; count++) {
-            featuresCombined.append(features[count]);
-        }
-
-        // Welcome message
-        String welcome = "Hello! I'm Duke: Level " + lv + "\n"
-                + "What would you like to do today?\n"
-                + "My current features are: " + featuresCombined + "\n"
-                + "Here are your tasks: " + "\n"
-                + taskArrayList.listBeautify();
-
-        return welcome;
-    }
-
-    /**
      * Shows the goodbye message when the user exits Duke.
      *
      * @return The goodbye message to the user.

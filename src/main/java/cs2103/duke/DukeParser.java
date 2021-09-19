@@ -25,6 +25,7 @@ public class DukeParser {
      * @throws IOException If filePath does not exist.
      */
     public ArrayList<Task> copyFileContents() throws IOException {
+        assert filePath != null;
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         StringBuilder targetBuilder = new StringBuilder();
@@ -103,7 +104,6 @@ public class DukeParser {
         String year = input.substring(0, 4);
         String month = input.substring(5, 7);
         String day = input.substring(8, 10);
-
         return year + "-" + month + "-" + day;
     }
 
