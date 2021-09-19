@@ -61,7 +61,7 @@ public class Parser {
 
         try {
             if (input.equals(COMMAND_EXIT)) {
-                //TO-DO
+                return ui.exit();
             } else if (input.equals(COMMAND_LIST)) {
                 result = taskList.listTasks();
             } else if (input.startsWith(COMMAND_DONE)) {
