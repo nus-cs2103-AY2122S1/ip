@@ -43,7 +43,9 @@ public class Storage {
      * @throws KatheryneException
      */
     void loadTasks(TaskList lst, String pathName) throws KatheryneException {
+        assert !pathName.isEmpty() : "Cannot load from a filepath which is blank!";
         if (Files.isReadable(Paths.get(pathName))) {
+            assert Files.isReadable(Paths.get(pathName));
             try {
                 lst.addAll(Arrays.asList(this.mapper.readValue(
                         Paths.get(pathName).toFile(),
@@ -61,6 +63,7 @@ public class Storage {
      * @param pathName Location to store tasks.
      */
     public void saveTasks(TaskList lst, String pathName) throws KatheryneException {
+        assert !pathName.isEmpty() : "Cannot save to a filepath which is blank!";
         try {
             Files.write(Paths.get(pathName), writer.writeValueAsString(lst.getList()).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {

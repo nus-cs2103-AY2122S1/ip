@@ -1,6 +1,8 @@
 package katheryne;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            String pathToFxmlLoader = "/view/MainWindow.fxml";
+            assert Files.isReadable(Paths.get(pathToFxmlLoader)): "fxml file must exist";
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(pathToFxmlLoader));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
