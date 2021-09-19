@@ -67,6 +67,7 @@ public class Storage {
     public void writeAll(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(filePath);
+            assert tasks.list != null : "List must exist";
             for (Task task : tasks.list) {
                 writer.write(task.toWrite());
             }
