@@ -19,10 +19,10 @@ public class Command {
         DEADLINE,
         DELETE,
         DONE,
+        DO_WITHIN_PERIOD,
         EVENT,
         FIND,
         LIST,
-        DO_WITHIN_PERIOD,
         TODO,
         UNKNOWN
     }
@@ -32,7 +32,6 @@ public class Command {
 
     /**
      * Constructor for the Class Command
-     *
      * @param type The type of Command
      * @param taskDetails The String describing the various attributes for the command
      */
@@ -51,6 +50,9 @@ public class Command {
             case DONE:
                 this.typeOfCommand = CommandTypes.DONE;
                 break;
+            case DO_WITHIN_PERIOD:
+                this.typeOfCommand = CommandTypes.DO_WITHIN_PERIOD;
+                break;
             case EVENT:
                 this.typeOfCommand = CommandTypes.EVENT;
                 break;
@@ -59,9 +61,6 @@ public class Command {
                 break;
             case LIST:
                 this.typeOfCommand = CommandTypes.LIST;
-                break;
-            case DO_WITHIN_PERIOD:
-                this.typeOfCommand = CommandTypes.DO_WITHIN_PERIOD;
                 break;
             case TODO:
                 this.typeOfCommand = CommandTypes.TODO;
@@ -77,7 +76,6 @@ public class Command {
 
     /**
      * Method to check for the Bye Command and return the message to be displayed
-     *
      * @param taskDetails The String describing the various attributes for the command
      * @return The String Message for the Bye Command
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
@@ -94,7 +92,6 @@ public class Command {
 
     /**
      * Method to check for the Deadline Command and return the message to be displayed
-     *
      * @param taskDetails The String describing the various attributes for the command
      * @param tasks The Object to contain the List of the Tasks
      * @return The Message to be displayed for the Deadline Command
@@ -123,7 +120,6 @@ public class Command {
 
     /**
      * Method to check for the Delete Command and render the UI
-     *
      * @param taskDetails The String describing the various attributes for the command
      * @param tasks The Object to contain the List of the Tasks
      * @return The Message to be displayed for the Delete Command
@@ -152,7 +148,6 @@ public class Command {
 
     /**
      * Method to check for the Done Command and render the UI
-     *
      * @param taskDetails The String describing the various attributes for the command
      * @param tasks The Object to contain the List of the Tasks
      * @return The Message to be displayed for the Done Command
@@ -181,10 +176,47 @@ public class Command {
     }
 
     /**
-     * Method to check for the Event Command and render the UI
-     *
+     * Method to check for the Do Within Period Command and render the UI
      * @param taskDetails The String describing the various attributes for the command
      * @param tasks The Object to contain the List of the Tasks
+     * @return The String result of adding a Do Within Period Task
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
+    private String addDoWithinPeriod(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
+        if ((taskDetails == null) || !(taskDetails.contains(" /between "))) {
+            throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                    + "do_within_period <Description> /between <dd/MM/yyyy HHmm> and\n"
+                    + "<dd/MM/yyyy HHmm>");
+        } else {
+            String[] values = taskDetails.split(" /between ", 2);
+            if (!values[1].trim().contains(" and ")) {
+                throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                        + "do_within_period <Description> /between <dd/MM/yyyy HHmm> and\n"
+                        + "<dd/MM/yyyy HHmm>");
+            }
+            String[] deadlineDateTimes = values[1].trim().split(" and ");
+            try {
+                DoWithinPeriodTask doWithinPeriod = new DoWithinPeriodTask(values[0], deadlineDateTimes[0],
+                        deadlineDateTimes[1]);
+                tasks.addTask(doWithinPeriod);
+                output += "Got it. I've added this task:\n";
+                output += "  " + doWithinPeriod + "\n";
+                output += "Now you have " + tasks.getTaskListLength() + " tasks in the list.";
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                        + "do_within_period <Description> /between <dd/MM/yyyy HHmm> and\n"
+                        + "<dd/MM/yyyy HHmm>");
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Method to check for the Event Command and render the UI
+     * @param taskDetails The String describing the various attributes for the command
+     * @param tasks The Object to contain the List of the Tasks
+     * @return The String result of adding an Event Task
      * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
     private String addEvent(String taskDetails, TaskList tasks) throws DukeException {
@@ -210,7 +242,6 @@ public class Command {
 
     /**
      * Method to check for the Task with the given String in the Task List
-     *
      * @param searchDetails The String to be Searched in the Task List
      * @param tasks The Object to contain the List of the Tasks
      * @return The String displaying all the Tasks with the given input string
@@ -241,36 +272,6 @@ public class Command {
             output += ui.printTaskList(tasks, false);
         } else {
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
-        }
-        return output;
-    }
-
-    private String addDoWithinPeriod(String taskDetails, TaskList tasks) throws DukeException {
-        String output = "";
-        if ((taskDetails == null) || !(taskDetails.contains(" /within "))) {
-            throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
-                    + "do_within_period <Description> /within <dd/MM/yyyy HHmm> and\n"
-                    + "<dd/MM/yyyy HHmm>");
-        } else {
-            String[] values = taskDetails.split(" /within ", 2);
-            if (!values[1].trim().contains(" and ")) {
-                throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
-                        + "do_within_period <Description> /within <dd/MM/yyyy HHmm> and\n"
-                        + "<dd/MM/yyyy HHmm>");
-            }
-            String[] deadlineDateTimes = values[1].trim().split(" and ");
-            try {
-                DoWithinPeriodTask doWithinPeriod = new DoWithinPeriodTask(values[0], deadlineDateTimes[0],
-                        deadlineDateTimes[1]);
-                tasks.addTask(doWithinPeriod);
-                output += "Got it. I've added this task:\n";
-                output += "  " + doWithinPeriod + "\n";
-                output += "Now you have " + tasks.getTaskListLength() + " tasks in the list.";
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
-                        + "do_within_period <Description> /within <dd/MM/yyyy HHmm> and\n"
-                        + "<dd/MM/yyyy HHmm>");
-            }
         }
         return output;
     }
@@ -315,14 +316,14 @@ public class Command {
             return deleteTask(taskDetails, tasks);
         case DONE:
             return markTaskAsCompleted(taskDetails, tasks);
+        case DO_WITHIN_PERIOD:
+            return addDoWithinPeriod(taskDetails, tasks);
         case EVENT:
             return addEvent(taskDetails, tasks);
         case FIND:
             return searchAndDisplayTaskList(taskDetails, tasks);
         case LIST:
             return displayTaskList(taskDetails, tasks);
-        case DO_WITHIN_PERIOD:
-            return addDoWithinPeriod(taskDetails, tasks);
         case TODO:
             return addTodo(taskDetails, tasks);
         case UNKNOWN:

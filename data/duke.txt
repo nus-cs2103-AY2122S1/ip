@@ -1,4 +1,0 @@
-TODO | 1 | Go to the Bookstore
-TODO | 1 | Rent The Da Vinci Code
-DEADLINE | 0 | Return The Da Vinci Code | 25/08/2000 2359
-EVENT | 0 | Abhishek's Wedding | 01/09/2000 1800

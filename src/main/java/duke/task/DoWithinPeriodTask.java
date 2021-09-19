@@ -1,6 +1,9 @@
 package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.DukeException;
 
 public class DoWithinPeriodTask extends Task {
     private final LocalDateTime deadlineStart;
@@ -12,10 +15,15 @@ public class DoWithinPeriodTask extends Task {
      * @param deadlineStart The starting due date and time of the Task
      * @param deadlineEnd The ending due date and time of the Task
      */
-    public DoWithinPeriodTask(String description, String deadlineStart, String deadlineEnd) {
+    public DoWithinPeriodTask(String description, String deadlineStart, String deadlineEnd) throws DukeException {
         super(description);
         this.deadlineStart = LocalDateTime.parse(deadlineStart, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
         this.deadlineEnd = LocalDateTime.parse(deadlineEnd, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        if (!(this.deadlineStart.isBefore(this.deadlineEnd))) {
+            throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                    + "do_within_period <Description> /between <dd/MM/yyyy HHmm> and\n"
+                    + "<dd/MM/yyyy HHmm>");
+        }
     }
 
     /**
@@ -24,10 +32,16 @@ public class DoWithinPeriodTask extends Task {
      * @param deadlineStart The starting due date and time of the Task
      * @param deadlineEnd The ending due date and time of the Task
      */
-    public DoWithinPeriodTask(String isCompleted, String description, String deadlineStart, String deadlineEnd) {
+    public DoWithinPeriodTask(String isCompleted, String description, String deadlineStart, String deadlineEnd) throws
+            DukeException {
         super(isCompleted, description);
         this.deadlineStart = LocalDateTime.parse(deadlineStart, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
         this.deadlineEnd = LocalDateTime.parse(deadlineEnd, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        if (!(this.deadlineStart.isBefore(this.deadlineEnd))) {
+            throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                    + "do_within_period <Description> /between <dd/MM/yyyy HHmm> and\n"
+                    + "<dd/MM/yyyy HHmm>");
+        }
     }
 
     public String getDeadlineStart() {

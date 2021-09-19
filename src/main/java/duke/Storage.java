@@ -175,7 +175,7 @@ public class Storage {
                 DoWithinPeriodTask doWithinPeriodTask = new DoWithinPeriodTask(data[1], data[2], data[3], data[4]);
                 tasks.add(doWithinPeriodTask);
             }
-        } catch (DateTimeParseException ignored) {
+        } catch (DateTimeParseException | DukeException ignored) {
             // Don't need to display or return anything since this task is corrupted and won't be added to the TaskList
         }
     }

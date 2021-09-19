@@ -21,7 +21,28 @@ public class Parser {
     private Command.CommandTypes getCommand(String command) {
         try {
             if (command != null) {
-                return Command.CommandTypes.valueOf(command.toUpperCase());
+                switch (command) {
+                case "bye":
+                    return Command.CommandTypes.BYE;
+                case "deadline":
+                    return Command.CommandTypes.DEADLINE;
+                case "delete":
+                    return Command.CommandTypes.DELETE;
+                case "done":
+                    return Command.CommandTypes.DONE;
+                case "do_within_period":
+                    return Command.CommandTypes.DO_WITHIN_PERIOD;
+                case "event":
+                    return Command.CommandTypes.EVENT;
+                case "find":
+                    return Command.CommandTypes.FIND;
+                case "list":
+                    return Command.CommandTypes.LIST;
+                case "todo":
+                    return Command.CommandTypes.TODO;
+                default:
+                    return Command.CommandTypes.UNKNOWN;
+                }
             } else {
                 return Command.CommandTypes.UNKNOWN;
             }
