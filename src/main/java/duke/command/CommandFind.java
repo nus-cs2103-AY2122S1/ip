@@ -20,8 +20,6 @@ public class CommandFind extends Command {
                 matchingTasks.add(task);
             }
         }
-        for (Task task: matchingTasks.getTasks()) {
-            ui.print(task.toString());
-        }
+        ui.print(matchingTasks.toString());
     }
 }

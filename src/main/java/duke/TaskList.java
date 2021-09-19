@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of any number of Tasks, including zero.
@@ -70,5 +71,11 @@ public class TaskList {
      */
     public List<Task> getTasks() {
         return new ArrayList<Task>(taskList);
+    }
+    @Override
+    public String toString() {
+        return String.join("\n", taskList.stream()
+                .map(task -> task.toString())
+                .collect(Collectors.toList()));
     }
 }
