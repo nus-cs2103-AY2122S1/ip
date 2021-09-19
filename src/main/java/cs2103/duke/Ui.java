@@ -114,9 +114,8 @@ public class Ui {
             case "find":
                 if (remainingInput == null) {
                     throw new DukeException("unspecified keyword to search for");
-                } else {
-                    return tasks.findTasks(remainingInput);
                 }
+                return tasks.findTasks(remainingInput);
             default:
                 throw new DukeException("Unknown Input"); // unknown input
         }

@@ -49,40 +49,15 @@ public class DukeParser {
             String nLine = ps.nextLine(); // parse one line at a time
             int ref = 3; // reference point
             char taskType = nLine.charAt(ref);
-            boolean isDone = nLine.charAt(ref + 3) == 'X';
-            int strLength = nLine.length();
             switch (taskType) {
             case 'T':
-                String todoName = nLine.substring(ref + 5, strLength).trim();
-                Task newestTodo = new ToDo(result.size(), todoName);
-                if (isDone) {
-                    newestTodo.markAsDone();
-                }
-                result.add(newestTodo);
+                parseTodo(ref, nLine, result);
                 break;
             case 'D':
-                String deadlineInfo = nLine.substring(ref + 5, strLength);
-                String[] arrD = deadlineInfo.split("\\(by: ", 2);
-                String deadlineName = arrD[0].trim();
-                String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1).trim();
-                deadlineReminder = parseDate(deadlineReminder);
-                Task newestDeadline = new Deadline(result.size(), deadlineName, deadlineReminder);
-                result.add(newestDeadline);
-                if (isDone) {
-                    newestDeadline.markAsDone();
-                }
+                parseDeadline(ref, nLine, result);
                 break;
             case 'E':
-                String eventInfo = nLine.substring(ref + 5, strLength);
-                String[] arrE = eventInfo.split("\\(at: ", 2);
-                String eventName = arrE[0].trim();
-                String eventReminder = arrE[1].substring(0, arrE[1].length() - 1).trim();
-                eventReminder = parseDate(eventReminder);
-                Task newestEvent = new Event(result.size(), eventName, eventReminder);
-                result.add(newestEvent);
-                if (isDone) {
-                    newestEvent.markAsDone();
-                }
+                parseEvent(ref, nLine, result);
                 break;
             default:
                 System.out.println("Unknown input");
@@ -90,6 +65,47 @@ public class DukeParser {
             }
         }
         return result;
+    }
+
+    public static void parseTodo(int ref, String input, ArrayList<Task> result) {
+        int strLength = input.length();
+        boolean isDone = input.charAt(ref + 3) == 'X';
+        String todoName = input.substring(ref + 5, strLength).trim();
+        Task newestTodo = new ToDo(result.size(), todoName);
+        if (isDone) {
+            newestTodo.markAsDone();
+        }
+        result.add(newestTodo);
+    }
+
+    public static void parseDeadline(int ref, String input, ArrayList<Task> result) {
+        int strLength = input.length();
+        boolean isDone = input.charAt(ref + 3) == 'X';
+        String deadlineInfo = input.substring(ref + 5, strLength);
+        String[] arrD = deadlineInfo.split("\\(by: ", 2);
+        String deadlineName = arrD[0].trim();
+        String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1).trim();
+        deadlineReminder = parseDate(deadlineReminder);
+        Task newestDeadline = new Deadline(result.size(), deadlineName, deadlineReminder);
+        result.add(newestDeadline);
+        if (isDone) {
+            newestDeadline.markAsDone();
+        }
+    }
+
+    public static void parseEvent(int ref, String input, ArrayList<Task> result) {
+        int strLength = input.length();
+        boolean isDone = input.charAt(ref + 3) == 'X';
+        String eventInfo = input.substring(ref + 5, strLength);
+        String[] arrE = eventInfo.split("\\(at: ", 2);
+        String eventName = arrE[0].trim();
+        String eventReminder = arrE[1].substring(0, arrE[1].length() - 1).trim();
+        eventReminder = parseDate(eventReminder);
+        Task newestEvent = new Event(result.size(), eventName, eventReminder);
+        result.add(newestEvent);
+        if (isDone) {
+            newestEvent.markAsDone();
+        }
     }
 
     /**
