@@ -1,0 +1,24 @@
+.root{
+    -fx-font-size: 10pt;
+    -fx-font-family: "Georgia";
+}
+
+.dialog-container{
+    -fx-background-image: url("/images/cat_background.jpg");
+    -fx-padding: 10;
+}
+
+.dialog-box{
+    -fx-background-color: white;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+.user-dialog-box{
+    -fx-background-color: white;
+}
+
+.duke-dialog-box{
+    -fx-background-color: lightgrey;
+}

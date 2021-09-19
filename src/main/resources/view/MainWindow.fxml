@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0"
+         prefWidth="450.0" type="AnchorPane" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TextField fx:id="userInput" layoutY="610.0" onAction="#handleUserInput" prefHeight="40.0" prefWidth="370.0"
+                   AnchorPane.bottomAnchor="1.0"/>
+        <Button fx:id="sendButton" layoutX="370.0" layoutY="610.0" mnemonicParsing="false" onAction="#handleUserInput"
+                prefHeight="40.0" prefWidth="80.0" text="Send"/>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="610.0" prefWidth="450.0"
+                    vvalue="1.0" stylesheets="/view/style.css">
+            <content>
+                <VBox fx:id="dialogContainer" styleClass="dialog-container" prefHeight="610.0" prefWidth="450.0"
+                      stylesheets="/view/style.css"/>
+            </content>
+        </ScrollPane>
+    </children>
+
+</fx:root>
