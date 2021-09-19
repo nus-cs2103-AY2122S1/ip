@@ -23,7 +23,7 @@ public class ListCommand extends Command {
     ListCommand() throws KatheryneException {}
 
     @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
-        return Message.listTasks(taskList);
+        return Message.getListTasksMessage(taskList);
     }
     
     /**

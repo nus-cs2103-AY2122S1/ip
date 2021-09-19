@@ -59,33 +59,27 @@ public class Parser {
         try {
             // Process as needed per command, throw errors if command format is wrong
             switch (commandWord) {
-            case ExitCommand.COMMAND:
-            case ListCommand.COMMAND:
+            case ExitCommand.COMMAND: case ListCommand.COMMAND:
                 return new String[0];
-            case DoneCommand.COMMAND:
-            case DeleteCommand.COMMAND:
+            case DoneCommand.COMMAND: case DeleteCommand.COMMAND:
                 if (processedRemainingText.length == 1 || processedRemainingText[1].split(" ").length > 1) {
                     throw new KatheryneException("Just tell me the command and what index, nothing else.");
                 }
                 processedRemainingText = new String[]{input.split(" ", 2)[1]};
                 break;
-            case TodoCommand.COMMAND:
-            case FindCommand.COMMAND:
+            case TodoCommand.COMMAND: case FindCommand.COMMAND:
                 processedRemainingText = new String[]{processedRemainingText[1]};
                 break;
             case EventCommand.COMMAND:
                 processedRemainingText = processedRemainingText[1].split("/at");
                 if (processedRemainingText.length != 2) {
-                    throw new KatheryneException(
-                            "An event needs a description and a single /at time when it occurs in the format "
-                                    + "2007-12-03");
+                    throw new KatheryneException(Message.EVENT_HELP);
                 }
                 break;
             case DeadlineCommand.COMMAND:
                 processedRemainingText = processedRemainingText[1].split("/by");
                 if (processedRemainingText.length != 2) {
-                    throw new KatheryneException(
-                            "A deadline needs a description and a /by time in the format 2007-12-03.");
+                    throw new KatheryneException(Message.DEADLINE_HELP);
                 }
                 break;
             default:
@@ -95,7 +89,6 @@ public class Parser {
             // When there is no second parameter, but there was expected to be one.
             throw new UnknownCommandException();
         }
-
         return cleanParameters(processedRemainingText);
     }
 

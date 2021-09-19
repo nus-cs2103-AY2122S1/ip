@@ -32,11 +32,15 @@ public class EventCommand extends Command {
         try {
             this.atAsDate = LocalDate.parse(processedRemainingText[1]);
         } catch (DateTimeParseException e) {
-            throw new KatheryneException(
-                    "The at time is in the wrong format. It must be in the format YYYY-MM-DD");
+            throw new KatheryneException(Message.ERROR_EVENT_DATE);
         }
     }
 
+    /**
+     * 
+     * @return
+     * @throws KatheryneException
+     */
     @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
         Event event = new Event(description, atAsDate);
         taskList.add(event);

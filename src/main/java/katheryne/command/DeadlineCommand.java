@@ -33,8 +33,7 @@ public class DeadlineCommand extends Command {
         try {
             this.atByDate = LocalDate.parse(processedRemainingText[1]);
         } catch (DateTimeParseException e) {
-            throw new KatheryneException(
-                    "The by time is in the wrong format. It must be in the format YYYY-MM-DD");
+            throw new KatheryneException(Message.ERROR_DEADLINE_DATE);
         }
     }
 
