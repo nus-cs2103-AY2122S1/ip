@@ -29,12 +29,14 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
+            ArrayList<Task> tasks = new ArrayList<>();
+
             File storage = new File(filePath);
-            storage.createNewFile();
+            if (storage.createNewFile()) {
+                return tasks;
+            };
 
             Scanner savedTasks = new Scanner(storage);
-
-            ArrayList<Task> tasks = new ArrayList<>();
 
             ArrayList<Integer> tasksToStartAfter = new ArrayList<>();
 
