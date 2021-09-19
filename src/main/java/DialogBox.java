@@ -32,7 +32,7 @@ public class DialogBox extends HBox {
      * @param text Text is the String value that needs to be displayed in the dialog box
      * @param img It is the image of the speaker that needs to be displayed
      */
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String dialogBoxColor) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(DIALOG_BOX_FXML_FILE));
             fxmlLoader.setController(this);
@@ -42,6 +42,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialog.setStyle("-fx-background-color: " + dialogBoxColor);
         dialog.setText(text);
         displayPicture.setImage(img);
         displayPicture.setClip(this.cropImage());
@@ -65,7 +66,7 @@ public class DialogBox extends HBox {
      * @return A new Dialog Box with the given inputs
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "#25D366");
     }
 
     /**
@@ -76,7 +77,7 @@ public class DialogBox extends HBox {
      * @return A new Dialog Box with the given inputs
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "#128C7E");
         db.flip();
         return db;
     }
