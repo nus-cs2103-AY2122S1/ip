@@ -72,30 +72,30 @@ public class TaskList {
             return false;
         } else {
             switch (Integer.parseInt(month)) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                maxDay = 31;
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                maxDay = 30;
-                break;
-            case 2:
-                if (isLeapYear) {
-                    maxDay = 29;
-                } else {
-                    maxDay = 28;
-                }
-                break;
-            default:
-                return false;
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    maxDay = 31;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    maxDay = 30;
+                    break;
+                case 2:
+                    if (isLeapYear) {
+                        maxDay = 29;
+                    } else {
+                        maxDay = 28;
+                    }
+                    break;
+                default:
+                    return false;
             }
         }
 
@@ -108,53 +108,79 @@ public class TaskList {
     }
 
     /**
-     * Adds a task into the task list.
+     * Adds a todo task into the task list.
      *
-     * @param type        The type of task to be added.
-     * @param name        The name of task to be added.
-     * @param description The description of the task.
-     * @return String representing the newly added task.
+     * @param input The input containing the remaining user input after the command.
+     * @return String representing the newly added todo task.
      * @throws DukeException if the user input is invalid.
-
      */
-    public String addTask(String type, String name, String description) throws DukeException {
-        switch (type) {
-        case "todo":
-            if (name.trim().equals("")) {
-                throw new DukeException("No task name");
-            }
-            Task newestTodo = new ToDo(taskArrayList.size(), name);
-            taskArrayList.add(newestTodo);
-            return ("New todo task added:\n"
-                    + newestTodo
-                    + "\nYou now have "
-                    + taskArrayList.size()
-                    + " item(s) in your task list.");
-        case "deadline":
-            if (!isValidDate(description)) {
-                throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
-            }
-            Task newestDeadline = new Deadline(taskArrayList.size(), name, description);
-            taskArrayList.add(newestDeadline);
-            return ("New deadline task added:\n"
-                    + newestDeadline
-                    + "\nYou now have "
-                    + taskArrayList.size()
-                    + " item(s) in your task list.");
-        case "event":
-            if (!isValidDate(description)) {
-                throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
-            }
-            Task newestEvent = new Event(taskArrayList.size(), name, description);
-            taskArrayList.add(newestEvent);
-            return ("New deadline task added:\n"
-                    + newestEvent
-                    + "\nYou now have "
-                    + taskArrayList.size()
-                    + " item(s) in your task list.");
-        default:
-            throw new DukeException("Unknown task type");
+    public String addTodo(String input) throws DukeException {
+        if (input.trim().equals("")) {
+            throw new DukeException("No task name");
         }
+        Task newestTodo = new ToDo(taskArrayList.size(), input);
+        taskArrayList.add(newestTodo);
+        return ("New todo task added:\n"
+                + newestTodo
+                + "\nYou now have "
+                + taskArrayList.size()
+                + " item(s) in your task list.");
+    }
+
+    /**
+     * Adds a deadline task into the task list.
+     *
+     * @param input The input containing the remaining user input after the command.
+     * @return String representing the newly added deadline task.
+     * @throws DukeException if the user input is invalid.
+     */
+    public String addDeadline(String input) throws DukeException {
+        String[] deadlineTokens = input.split("\\s*/by\\s*");
+        if (deadlineTokens.length == 0) {
+            throw new DukeException("No task description");
+        } else if (deadlineTokens.length == 1) {
+            throw new DukeException("No task deadline");
+        }
+        String name = deadlineTokens[0];
+        String description = deadlineTokens[1];
+        if (!isValidDate(description)) {
+            throw new DukeException("Invalid Deadline Date, please follow the format YYYY-MM-DD");
+        }
+        Task newestDeadline = new Deadline(taskArrayList.size(), name, description);
+        taskArrayList.add(newestDeadline);
+        return ("New deadline task added:\n"
+                + newestDeadline
+                + "\nYou now have "
+                + taskArrayList.size()
+                + " item(s) in your task list.");
+    }
+
+    /**
+     * Adds an event task into the task list.
+     *
+     * @param input The input containing the remaining user input after the command.
+     * @return String representing the newly added event task.
+     * @throws DukeException if the user input is invalid.
+     */
+    public String addEvent(String input) throws DukeException {
+        String[] eventTokens = input.split("\\s*/at\\s*");
+        if (eventTokens.length == 0) {
+            throw new DukeException("No task description");
+        } else if (eventTokens.length == 1) {
+            throw new DukeException("No task duration");
+        }
+        String name = eventTokens[0];
+        String description = eventTokens[1];
+        if (!isValidDate(description)) {
+            throw new DukeException("Invalid Event Date, please follow the format YYYY-MM-DD");
+        }
+        Task newestEvent = new Event(taskArrayList.size(), name, description);
+        taskArrayList.add(newestEvent);
+        return ("New deadline task added:\n"
+                + newestEvent
+                + "\nYou now have "
+                + taskArrayList.size()
+                + " item(s) in your task list.");
     }
 
     /**
@@ -200,7 +226,6 @@ public class TaskList {
                 + "\nYou now have "
                 + (taskArrayList.size() - 1)
                 + " item(s) in your task list.");
-        // actual logic of deletion
         taskArrayList.remove(index - 1);
         return deleteMessage;
     }
@@ -217,20 +242,19 @@ public class TaskList {
         // if 'keyword' contains more than one word or any spaces
         if (keyword.trim().split("\\s+").length > 1) {
             throw new DukeException("Invalid keyword, please enter only one keyword without blanks");
-        } else {
-            ArrayList<Task> subList = new ArrayList<>();
-            for (Task task : taskArrayList) { // for each task in the taskArrayList
-                if (task.description.contains(keyword)) { // add task to subList if contains keyword
-                    subList.add(task);
-                }
-            }
-            if (subList.isEmpty()) {
-                return ("No matches found for keyword: " + keyword.trim());
-            }
-            TaskList matchedTaskList = new TaskList(subList);
-            return ("Here are the matching tasks in your list:\n"
-                    + matchedTaskList.listBeautify()
-            );
         }
+        ArrayList<Task> subList = new ArrayList<>();
+        for (Task task : taskArrayList) {
+            if (task.description.contains(keyword)) {
+                subList.add(task);
+            }
+        }
+        if (subList.isEmpty()) {
+            return ("No matches found for keyword: " + keyword.trim());
+        }
+        TaskList matchedTaskList = new TaskList(subList);
+        return ("Here are the matching tasks in your list:\n"
+                + matchedTaskList.listBeautify()
+        );
     }
 }

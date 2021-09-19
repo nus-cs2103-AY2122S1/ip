@@ -64,19 +64,4 @@ public class Storage {
         fw.write(textToAppend);
         fw.close();
     }
-
-    /**
-     * This method appends to the file instead of overwrites.
-     *
-     * @param filePath     The path to the file to append to.
-     * @param textToAppend The text to append.
-     * @throws IOException If filePath does not exist.
-     */
-
-    public void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
-
 }

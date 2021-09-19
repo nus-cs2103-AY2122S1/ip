@@ -24,7 +24,7 @@ public class TaskListTest {
                         + "[T][ ]test1\n"
                         + "You now have 1 item(s) in your task list.\n"
                         + "____________________________________________________________",
-                tl.addTask("todo", "test1", ""));
+                tl.addTodo("test1"));
     }
 
     @Test
@@ -35,14 +35,14 @@ public class TaskListTest {
                         + "[D][ ]ms3 (by: 2021 07 20)\n"
                         + "You now have 1 item(s) in your task list.\n"
                         + "____________________________________________________________",
-                tl.addTask("deadline", "ms3", "2021-07-20"));
+                tl.addDeadline("ms3 2021-07-20"));
     }
 
     @Test
     public void testFindTask() throws DukeException {
         TaskList tl = new TaskList();
-        tl.addTask("todo", "test1", "");
-        tl.addTask("deadline", "ms3", "2021-07-20");
+        tl.addTodo("test1");
+        tl.addDeadline("ms3 2021-07-20");
         assertEquals("____________________________________________________________\n"
                 + "Here are the matching tasks in your list:\n"
                 + "1.[T][ ]test1\n"

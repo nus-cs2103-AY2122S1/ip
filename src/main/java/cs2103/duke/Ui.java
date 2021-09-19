@@ -66,63 +66,41 @@ public class Ui {
             case "done":  // first input is done, check second input for integer
                 if (remainingInput == null) {
                     throw new DukeException("unspecified task to mark as done");
-                } else {
-                    try {
-                        int taskNumber = Integer.parseInt(remainingInput);
-                        return tasks.finishTask(taskNumber);
-                    } catch (NumberFormatException ex) {
-                        ex.printStackTrace();
-                    }
+                }
+                try {
+                    int taskNumber = Integer.parseInt(remainingInput);
+                    return tasks.finishTask(taskNumber);
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
                 }
             case "delete":
                 if (remainingInput == null) {
                     throw new DukeException("unspecified task to delete");
-                } else {
-                    try {
-                        int taskNumber = Integer.parseInt(remainingInput);
-                        return tasks.deleteTask(taskNumber);
-                    } catch (NumberFormatException ex) {
-                        ex.printStackTrace();
-                    }
+                }
+                try {
+                    int taskNumber = Integer.parseInt(remainingInput);
+                    return tasks.deleteTask(taskNumber);
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
                 }
             case "todo":
-                if (remainingInput.trim().equals("")) {
-                    throw new DukeException("No task description");
-                }
-                return tasks.addTask("todo", remainingInput, "");
+                return tasks.addTodo(remainingInput);
             case "deadline":
-                String[] deadlineTokens = remainingInput.split("\\s*/by\\s*");
-                if (deadlineTokens.length == 0) {
-                    throw new DukeException("No task description");
-                } else if (deadlineTokens.length == 1) {
-                    throw new DukeException("No task deadline");
-                }
-                String deadlineName = deadlineTokens[0];
-                String deadlineReminder = deadlineTokens[1];
-                return tasks.addTask("deadline", deadlineName, deadlineReminder);
+                return tasks.addDeadline(remainingInput);
             case "event":
-                String[] eventTokens = remainingInput.split("\\s*/at\\s*");
-                if (eventTokens.length == 0) {
-                    throw new DukeException("No task description");
-                } else if (eventTokens.length == 1) {
-                    throw new DukeException("No task duration");
-                }
-                String eventName = eventTokens[0];
-                String eventReminder = eventTokens[1];
-                return tasks.addTask("event", eventName, eventReminder);
+                return tasks.addEvent(remainingInput);
             case "find":
                 if (remainingInput == null) {
                     throw new DukeException("unspecified keyword to search for");
-                } else {
-                    return tasks.findTasks(remainingInput);
                 }
+                return tasks.findTasks(remainingInput);
             default:
                 throw new DukeException("Unknown Input"); // unknown input
         }
     }
 
     /**
-     * Alert the user if the duke.txt could not be loaded.
+     * Alerts the user if the duke.txt could not be loaded.
      *
      * @return A string alerting the user of the error.
      */
