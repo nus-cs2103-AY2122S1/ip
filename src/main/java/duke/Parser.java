@@ -70,6 +70,18 @@ public class Parser {
     }
 
     /**
+     * Parse command to get description and period for the  periodTask
+     * to be created.
+     *
+     * @param command Command from the CLI.
+     * @return Array containing description and dates of the period for the task.
+     */
+    public static String[] parsePeriod(String command) {
+        assert command != null : "command cannot be null";
+        return command.split(" ", 2)[1].split(" /from ", 2);
+    }
+
+    /**
      * Returns the task to be added to the TaskList from
      * a line of text in the loaded text file.
      *
@@ -97,6 +109,12 @@ public class Parser {
                 d.markAsDone();
             }
             return d;
+        case("P"):
+            PeriodTask p = new PeriodTask(split[2], split[3]);
+            if (!split[1].equals("0")) {
+                p.markAsDone();
+            }
+            return p;
         default:
             return null;
         }
@@ -159,6 +177,13 @@ public class Parser {
                 Event newEvent = new Event(descriptionOfEvent, dateOfEvent);
                 tasks.add(newEvent);
                 return ui.sayUpdates(newEvent, list.size());
+            case "taskPeriod":
+                String[] splitP = Parser.parsePeriod(command);
+                String descriptionOfPeriodTask = splitP[0];
+                String period = splitP[1];
+                PeriodTask newPeriodTask = new PeriodTask(descriptionOfPeriodTask, period);
+                tasks.add(newPeriodTask);
+                return ui.sayUpdates(newPeriodTask, list.size());
             case "delete":
                 int del = Parser.parseNumber(command);
                 Task toDelete = list.get(del);

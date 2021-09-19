@@ -12,7 +12,7 @@ public class DukeException extends IllegalArgumentException {
      * Types of Duke Exceptions.
      */
     public enum Type {
-        LOADING, TODO, INVALID, DATE
+        LOADING, TODO, INVALID, DATE, PERIOD
     }
 
     /**
@@ -40,6 +40,8 @@ public class DukeException extends IllegalArgumentException {
             return "☹ OOPS!!! Your input is invalid. Try again";
         case DATE:
             return "☹ OOPS!!! Wrong format for date. Should be in yyyy-mm-dd";
+        case PERIOD:
+            return "☹ OOPS!!! Start-date cannot be later than End-date for taskPeriod";
         default:
             return super.getMessage();
         }
