@@ -69,7 +69,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         File nekoData = new File(this.filePath);
         if (!nekoData.exists()) {
-            nekoData.getParentFile().mkdir();
+            nekoData.getParentFile().mkdirs();
             nekoData.createNewFile();
         } else {
             Scanner scanner = new Scanner(nekoData);

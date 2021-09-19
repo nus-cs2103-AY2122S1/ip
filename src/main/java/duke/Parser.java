@@ -95,6 +95,8 @@ public class Parser {
         case "friend" : {
             if (userInput.length() == 6) {
                 throw new DukeException("OOPS!!! The name of a contact cannot be empty.");
+            } else if (!userInput.contains(":")) {
+                throw new DukeException("Please follow the format for adding a contact!");
             }
             String friendName = userInput.substring(7).split(":")[0];
             String contactNumber = userInput.substring(7).split(":")[1];
