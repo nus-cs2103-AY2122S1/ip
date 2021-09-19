@@ -1,7 +1,7 @@
 # User Guide
 
 
-:genie_man: Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while 
+Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while 
 still having the benefits of a Graphical User Interface (GUI).
 
 ##Note about the command format
