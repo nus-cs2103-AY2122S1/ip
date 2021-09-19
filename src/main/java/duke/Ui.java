@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.controller.MainWindow;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -11,13 +12,43 @@ import duke.task.TaskList;
  * @author Thomas Hogben
  */
 public class Ui {
+    private Duke duke;
+    private MainWindow mainWindow;
+    private ArrayList<Exception> startupErrorLog;
+    private boolean isInitialised = false;
+
+    public Ui(Duke duke) {
+        this.duke = duke;
+        startupErrorLog = new ArrayList<>();
+    }
+
     /**
      * Displays a message in the Ui.
      *
      * @param msg The message to be displayed.
      */
     public void display(String msg) {
-        System.out.println(msg);
+        if (!isInitialised) {
+            return;
+        }
+
+        assert mainWindow != null : "Duke's MainWindow cannot be null";
+        mainWindow.addDukeDialog(msg);
+    }
+
+    /**
+     * Displays an error message in the Ui.
+     *
+     * @param e The exception to be displayed.
+     */
+    public void display(Exception e) {
+        if (!isInitialised) {
+            startupErrorLog.add(e);
+            return;
+        }
+
+        String msg = formatError(e);
+        display(msg);
     }
 
     /**
@@ -95,16 +126,17 @@ public class Ui {
      * @return The generated message to display.
      */
     public String listTasks(TaskList taskList) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
+
         if (taskList.size() == 0) {
-            result = "is no tasks today.";
+            result.append("is no tasks today.");
         } else {
             for (int i = 0; i < taskList.size(); i++) {
-                String taskDescription = taskList.getTask(i).toString();
-                result += (i + 1) + "." + taskDescription + ".\n";
+                String formattedTask = formatTaskWithNumber(i, taskList.getTask(i));
+                result.append(formattedTask);
             }
         }
-        return result;
+        return result.toString();
     }
 
     /**
@@ -116,47 +148,53 @@ public class Ui {
      * @return The generated message to display.
      */
     public String find(TaskList taskList, String str) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         ArrayList<String> tasksFound = new ArrayList<>();
 
         for (int i = 0; i < taskList.size(); i++) {
-            String taskDescription = taskList.getTask(i).toString();
-            boolean hasKeyword = taskDescription.toUpperCase().contains(str.toUpperCase());
+            String formattedTask = formatTaskWithNumber(i, taskList.getTask(i));
+            boolean hasKeyword = formattedTask.toUpperCase().contains(str.toUpperCase());
             if (hasKeyword) {
-                tasksFound.add((i + 1) + "." + taskDescription + ".");
+                tasksFound.add(formattedTask);
             }
         }
 
         if (tasksFound.size() == 0) {
-            result = "is didn't find matching task.";
+            result.append("is didn't find matching task.");
         } else {
-            for (int i = 0; i < tasksFound.size(); i++) {
-                result += tasksFound.get(i).toString() + "\n";
+            for (String s : tasksFound) {
+                result.append(s);
             }
         }
 
-        return result;
+        return result.toString();
     }
 
     /**
-     * Generates the initialisation message for Duke.
+     * Intialises the Ui and displays the initialisation messages for Duke.
      */
-    public String init() {
+    public void init(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        isInitialised = true;
+        displayStartupErrorLog();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String result = "Behold; The Great, The Mighty\n" + logo;
+        String result = "Behold; The GREAT, The MIGHTY\n" + logo;
         result += "\nhello name is duke\n";
-        result += "how is help today; （´・｀ ）♡";
-        return result;
+        result += "how is help today;";
+        display(result);
     }
 
     /**
-     * Generates the exit message for Duke.
+     * Generates the exit message and tells Duke to shut down the program.
+     * Also disables user input.
      */
     public String exit() {
+        duke.exitProgram();
         return "okay is bye!!";
     }
 
@@ -175,5 +213,35 @@ public class Ui {
                       : "task";
 
         return i + " " + noun;
+    }
+
+    /**
+     * Formats the task suitable for display in a list.
+     *
+     * @param i The index of the task to be displayed.
+     * @param task The task to be displayed.
+     * @return The formatted task, ie. "1. [T] abc."
+     */
+    private String formatTaskWithNumber(int i, Task task) {
+        return (i + 1) + ". " + task + ".\n";
+    }
+
+    /**
+     * Displays all the error messages prior to Ui initialisation.
+     */
+    private void displayStartupErrorLog() {
+        if (startupErrorLog.size() == 0) {
+            return;
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (Exception e : startupErrorLog) {
+            String errorMsg = e.getMessage();
+            result.append(errorMsg)
+                  .append("\n");
+        }
+
+        display(result.toString());
     }
 }

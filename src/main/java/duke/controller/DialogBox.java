@@ -12,13 +12,25 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
+    private static final BackgroundFill dukeBackgroundFill = new BackgroundFill(Color.NAVAJOWHITE,
+                                                                                new CornerRadii(15),
+                                                                          null);
+    private static final Background dukeBackground = new Background(dukeBackgroundFill);
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
+    private Circle circleClip = new Circle(50, 50, 50);
 
     private DialogBox(String text, Image img) {
         try {
@@ -32,6 +44,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(circleClip);
     }
 
     /**
@@ -51,6 +64,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setBackground(dukeBackground);
         return db;
     }
 }
