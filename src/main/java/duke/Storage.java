@@ -43,6 +43,7 @@ public class Storage {
 
     /**
      * Reads the TaskList from local storage.
+     *
      * @return List containing the tasks.
      */
     public static List<Task> readData() {
@@ -85,6 +86,7 @@ public class Storage {
 
     /**
      * Writes the TaskList into local storage.
+     *
      * @param list List of tasks.
      */
     public static void writeData(List<Task> list) {

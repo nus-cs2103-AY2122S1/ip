@@ -27,6 +27,7 @@ public class Parser {
 
     /**
      * Parses and executes the command that the user input.
+     *
      * @param ui UI object to render output to user.
      * @param tasks TaskList object that contains the tasks.
      * @param input Input that user entered.
@@ -92,6 +93,7 @@ public class Parser {
 
     /**
      * Terminates the Duke Personal Assistant Chatbot.
+     *
      * @param ui UI object to render output to user.
      * @return Message to be shown to the user.
      */
@@ -102,6 +104,7 @@ public class Parser {
 
     /**
      * Clears all tasks in the TaskList.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @return Message to be shown to the user.
@@ -114,6 +117,7 @@ public class Parser {
 
     /**
      * Adds a ToDo task to the TaskList.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
@@ -142,6 +146,7 @@ public class Parser {
 
     /**
      * Adds a Deadline task to the TaskList.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
@@ -177,6 +182,7 @@ public class Parser {
 
     /**
      * Adds an Event task to the TaskList.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
@@ -212,6 +218,7 @@ public class Parser {
 
     /**
      * Marks a task as done.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param index Index of the task to be marked as done.
@@ -229,6 +236,7 @@ public class Parser {
 
     /**
      * Deletes a task.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param index Index of the task to be deleted.
@@ -246,6 +254,7 @@ public class Parser {
 
     /**
      * Finds tasks that contains keyword.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param keyword Keyword to be searched.
@@ -257,6 +266,7 @@ public class Parser {
 
     /**
      * Updates the priority level of a task.
+     *
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param index Index of the task to be deleted.

@@ -44,6 +44,7 @@ public class Duke {
 
     /**
      * Starts the program
+     *
      * @param args User input arguments.
      */
     public static void main(String[] args) {
@@ -53,6 +54,7 @@ public class Duke {
 
     /**
      * Gets the response message from the parser after parsing the command
+     *
      * @param input Command from user.
      * @return Response message.
      */

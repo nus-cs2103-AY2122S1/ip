@@ -34,6 +34,7 @@ public class TaskList {
 
     /**
      * Marks a task as complete
+     *
      * @param index Index of the task in the TaskList
      * @return Completed Task
      */
@@ -55,6 +56,7 @@ public class TaskList {
 
     /**
      * Returns a String indicating the number of tasks in the TaskList
+     *
      * @return String representation of the number of tasks
      */
     public String getListSizeString() {
@@ -68,6 +70,7 @@ public class TaskList {
 
     /**
      * Finds tasks that contains the keyword.
+     *
      * @param keyword Keyword to be found.
      * @return TaskList containing filtered tasks.
      */

@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Class constructor specifying the task and the event date and time.
+     *
      * @param task Event to attend.
      * @param time Date and time of event.
      * @param priority Priority level of the task
@@ -24,6 +25,7 @@ public class Event extends Task {
 
     /**
      * Class constructor specifying the task and the event date and time
+     *
      * @param task Event to attend.
      * @param completed Whether the event has been attended.
      * @param time Date and time of event.
@@ -36,6 +38,7 @@ public class Event extends Task {
 
     /**
      * Returns the date and time of the event in a pre-defined format.
+     *
      * @return Date and time of Event.
      */
     public String getTime() {

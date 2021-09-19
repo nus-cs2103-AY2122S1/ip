@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Class constructor specifying the task and the deadline.
+     *
      * @param task Task to be done.
      * @param date Deadline by which the task needs to be done.
      * @param priority Priority level of the task
@@ -24,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * Class constructor specifying the task, whether the task was completed and the deadline.
+     *
      * @param task Task to be done.
      * @param completed Whether the task has been completed.
      * @param date Deadline by which the task needs to be done.
@@ -36,6 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the dateline of the task in a pre-defined format.
+     *
      * @return Deadline of task.
      */
     public String getDate() {

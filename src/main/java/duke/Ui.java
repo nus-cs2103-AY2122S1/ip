@@ -20,6 +20,7 @@ public class Ui {
 
     /**
      * Prints message.
+     *
      * @param message to be printed.
      */
     public void printMessage(String message) {
@@ -30,6 +31,7 @@ public class Ui {
 
     /**
      * Prints welcome message.
+     *
      * @return Message to be shown to the user.
      */
     public String welcome() {
@@ -44,6 +46,7 @@ public class Ui {
 
     /**
      * Prints a list of all the tasks
+     *
      * @param tasks TaskList containing the tasks.
      * @return Message to be shown to the user.
      */
@@ -54,6 +57,7 @@ public class Ui {
 
     /**
      * Prints terminating message.
+     *
      * @return Message to be shown to the user.
      */
     public String terminateMessage() {
@@ -63,6 +67,7 @@ public class Ui {
 
     /**
      * Prints message to confirm all tasks has been cleared.
+     *
      * @return Message to be shown to the user.
      */
     public String clearMessage() {
@@ -72,6 +77,7 @@ public class Ui {
 
     /**
      * Prints message indicating task has been added successfully.
+     *
      * @param task Task that was added
      * @param tasks TaskList
      * @return Message to be shown to the user.
@@ -85,6 +91,7 @@ public class Ui {
 
     /**
      * Prints message indicating that task has been marked as done.
+     *
      * @param task Task to be marked as done.
      * @return Message to be shown to the user.
      */
@@ -96,6 +103,7 @@ public class Ui {
 
     /**
      * Prints message indicating that task has been completed.
+     *
      * @param task Task to be deleted.
      * @param tasks TaskList.
      * @return Message to be shown to the user.
@@ -109,6 +117,7 @@ public class Ui {
 
     /**
      * Prints tasks containing specified keyword.
+     *
      * @param tasks TaskList containing filtered tasks.
      * @return Message to be shown to the user.
      */
@@ -120,6 +129,7 @@ public class Ui {
 
     /**
      * Prints tasks containing specified keyword.
+     *
      * @param task TaskList containing filtered tasks.
      * @return Message to be shown to the user.
      */
@@ -131,6 +141,7 @@ public class Ui {
 
     /**
      * Prints the appropriate error handling message.
+     *
      * @param e Exception caught.
      * @return Error message to be shown to the user.
      */

@@ -8,6 +8,7 @@ public class ToDo extends Task {
 
     /**
      * Class constructor specifying the task description.
+     *
      * @param task Task description.
      * @param priority Priority level of the task.
      */
@@ -17,6 +18,7 @@ public class ToDo extends Task {
 
     /**
      * Class constructor specifying the task description and if the task has been completed.
+     *
      * @param task Task description
      * @param completed Whether the task has been completed.
      * @param priority Priority level of the task.
