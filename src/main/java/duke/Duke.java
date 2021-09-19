@@ -2,11 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.gui.DialogBox;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -32,20 +30,6 @@ public class Duke {
     }
 
     /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Gets the program output give the user input.
      *
      * @param input User input
@@ -63,8 +47,4 @@ public class Duke {
         }
     }
 
-
-    //    public static void main(String[] args) {
-    //        new Duke("Data\\taskList.txt").run();
-    //    }
 }

@@ -134,7 +134,7 @@ public class Storage {
      */
     public void addTask(Task task) {
         try {
-            FileWriter writer = new FileWriter(this.filePath);
+            FileWriter writer = new FileWriter(this.filePath, true);
             if (task instanceof Todo) {
                 writer.write(getTodoString(task, "0") + "\n");
             } else if (task instanceof Deadline) {
