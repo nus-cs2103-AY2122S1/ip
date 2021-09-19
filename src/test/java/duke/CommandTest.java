@@ -74,8 +74,8 @@ public class CommandTest {
         tasks.addTask(new EventTask("Abhishek's Wedding", "01/09/2000 1800"));
         try {
             assertEquals(new Command(Command.CommandTypes.FIND, "Abhishek's Wedding")
-                    .execute(tasks, new Storage("data/duke.txt")), "Here are the tasks in your list:\n"
-                    + "1.[E][ ] Abhishek's Wedding (at: Sep 01 2000, 18:00)\n");
+                    .execute(tasks, new Storage("data/duke.txt")), "These are the tasks matching the "
+                    + "Search String:\n1.[E][ ] Abhishek's Wedding (at: Sep 01 2000, 18:00)\n");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

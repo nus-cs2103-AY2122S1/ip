@@ -130,7 +130,7 @@ public class Command {
             int index = Integer.parseInt(taskDetails) - 1;
             if ((index >= 0) && (index < tasks.getTaskListLength())) {
                 output += "Noted. I've removed this task:\n";
-                output += "  " + tasks.deleteTaskAtIndex(index).toString();
+                output += "  " + tasks.deleteTask(index).toString();
             } else {
                 int numberOfTasks = tasks.getTaskListLength();
                 if (numberOfTasks == 0) {
@@ -215,7 +215,7 @@ public class Command {
         String output = "";
         UI ui = new UI();
         if (searchDetails != null && !searchDetails.equals("")) {
-            output += ui.printTaskList(tasks.searchTaskList(searchDetails));
+            output += ui.printTaskList(tasks.searchTaskList(searchDetails), true);
         } else {
             throw new DukeException("Incorrect Format of the Find Command!!,\nCorrect Format --> find <search_string>");
         }
@@ -233,7 +233,7 @@ public class Command {
         String output = "";
         UI ui = new UI();
         if (taskDetails != null && taskDetails.equals("")) {
-            output += ui.printTaskList(tasks);
+            output += ui.printTaskList(tasks, false);
         } else {
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
