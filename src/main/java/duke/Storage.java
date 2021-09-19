@@ -94,9 +94,10 @@ public class Storage {
      * @throws DukeException If the task is corrupt, ie. the format of the save line is invalid.
      */
     private Task getTaskFromSave(String nextTask) throws DukeException {
-        char taskType = nextTask.charAt(0);
+        char taskType;
         boolean isDone;
         try {
+            taskType = nextTask.charAt(0);
             isDone = Integer.parseInt(nextTask.substring(1, 2)) == 1;
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw DukeException.CORRUPT_TASK;
