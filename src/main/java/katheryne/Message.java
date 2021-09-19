@@ -27,10 +27,17 @@ public class Message {
     
     // Error messages:
     // DateTimeParseError (Deadline)
-    private static final String ERROR_DEADLINE_DATE = "The by time is in the wrong format. It must be in the format " 
+    public static final String ERROR_DEADLINE_DATE = "The by time is in the wrong format. It must be in the format " 
             + "YYYY-MM-DD";
-    private static final String ERROR_EVENT_DATE = "The at time is in the wrong format. It must be in the " 
+    // DateTimeParseError (Event)
+    public static final String ERROR_EVENT_DATE = "The at time is in the wrong format. It must be in the " 
             + "format YYYY-MM-DD";
+    
+    // Event help text
+    public static final String EVENT_HELP = "An event needs a description and a single /at time when it occurs in the format "
+            + "2007-12-03";
+    public static final String DEADLINE_HELP = "A deadline needs a description and a /by time in the format " 
+            + "2007-12-03.";
     // No tasks found with keyword
     private static final String NO_TASKS_FOUND = "I couldn't find any tasks containing '" + KEYWORD_PLACEHOLDER 
             + "'. Try another word?";
@@ -81,6 +88,7 @@ public class Message {
 
     /**
      * Get confirmation message for adding a todo.
+     * 
      * @param t
      * @param lst
      * @return
@@ -90,7 +98,7 @@ public class Message {
                 + NEW_LINE + COUNT_TASKS.replace(NUMBER_OF_TASKS_PLACEHOLDER,lst.getSize() +"");
     }
 
-    public static String listTasks(TaskList lst) {
+    public static String getListTasksMessage(TaskList lst) {
         String tasks = "";
         for (int i = 1; i <= lst.getSize(); i++) {
             tasks += i + ") " + lst.getTask(i - 1) + NEW_LINE;

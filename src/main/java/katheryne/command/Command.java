@@ -10,7 +10,6 @@ import katheryne.UnknownCommandException;
  * Abstract command class for other commands to inherit from. Also has the factory method to create new commands.
  */
 public abstract class Command {
-
     /**
      * Factory method which creates a command.
      *
@@ -41,7 +40,14 @@ public abstract class Command {
             throw new UnknownCommandException();
         }
     }
-    
+
+    /**
+     * Generates a response to user input so that it can be rendered via the GUI.
+     * 
+     * @param taskList Katheryne's current taskList
+     * @param storage Katheryne's current storage
+     * @throws KatheryneException
+     */
     public abstract String getResponse(TaskList taskList, Storage storage) throws KatheryneException;
 
     /**
