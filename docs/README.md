@@ -11,7 +11,7 @@
 * TODO
 * BYE
 
-
+*All the files are stored locally on a text file*
 
 ## Usage
 
