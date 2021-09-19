@@ -5,7 +5,7 @@
 ### Adding tasks
 
 Duke allows you to add 3 types of tasks:
-- ToDo
+- Todo
 - Deadline
 - Event
 
@@ -29,6 +29,7 @@ Duke lets you undo your last undo-able command, say goodbye to accidentally dele
 
 Duke lets you see everything on your task list at a glance.
 
+
 ## Usage
 
 ### `todo` - Adds a todo task
@@ -47,6 +48,7 @@ New todo task added:
 You now have x item(s) in your task list.
 ```
 
+
 ### `deadline` - Adds a deadline task
 
 Example of usage:
@@ -62,6 +64,7 @@ New deadline task added:
 [D][ ] ip due (by: 2021 09 20)
 You now have x item(s) in your task list.
 ```
+
 
 ### `event` - Adds an event task
 
@@ -79,6 +82,7 @@ New event task added:
 You now have x item(s) in your task list.
 ```
 
+
 ### `bye` - Saves tasks and exits the program
 
 Example of usage:
@@ -92,6 +96,7 @@ Description of the outcome.
 ```
 expected output
 ```
+
 
 ### `delete` - Deletes a task from your task list
 
@@ -110,6 +115,7 @@ Description of the outcome.
 2.[D][ ] ip submit (by: 2021 09 20)
 ```
 
+
 ### `done` - Marks a task as done
 
 Marks the task at the indicated index as done with an 'X'.
@@ -126,6 +132,7 @@ The task at the indicated index will be marked as done.
 Congratulations! You have finished this task:
 [T][X] nap
 ```
+
 
 ### `undo` - Undoes the last command
 
@@ -147,6 +154,7 @@ Here is your current task list:
 2.[D][ ] ip due (by: 2021 09 20)
 3.[E][ ] family meal (at: 2021 09 21)
 ```
+
 
 ### `list` - Lists all tasks in the task list.
 
