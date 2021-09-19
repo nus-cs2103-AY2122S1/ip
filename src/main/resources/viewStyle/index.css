@@ -9,13 +9,12 @@
     -fx-text-fill: #000000;
 }
 
-.send-button {
-    -fx-background-color: #34B751;
-    -fx-background-radius: 0;
-    -fx-text-fill: #fff;
-    -fx-cursor: hand;
-}
-
 .text-field {
     -fx-background-color: #DCF8C6;
+}
+
+.send-button {
+    -fx-background-color: #34B751;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
 }

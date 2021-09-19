@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -23,7 +22,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final int imageRadius = 40;
 
     /**
      * Constuctor to create new Dialog Boxes
@@ -43,7 +41,6 @@ public class DialogBox extends HBox {
         dialog.setStyle("-fx-background-color: " + dialogBoxColor);
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(this.cropImage());
     }
 
     /**
@@ -78,18 +75,5 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img, "#128C7E");
         db.flip();
         return db;
-    }
-
-    /**
-     * Crops image to a circle shape.
-     *
-     * @return Circle object.
-     */
-    private Circle cropImage() {
-        Circle circle = new Circle(imageRadius);
-        circle.setStrokeWidth(5);
-        circle.setCenterX(displayPicture.getFitWidth() / 2);
-        circle.setCenterY(displayPicture.getFitHeight() / 2);
-        return circle;
     }
 }
