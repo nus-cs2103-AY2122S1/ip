@@ -28,7 +28,7 @@ public class DukeException extends Exception {
             new DukeException("is formatted time wrong. is please try again.\n"
                     + "format is hhmm (24h time)");
     public static final DukeException INVALID_TASK_NUMBER =
-            new DukeException("what kind of number is (||'︵'.)");
+            new DukeException("what kind of number is >:(");
     public static final DukeException INVALID_TASK_TYPE =
             new DukeException("is the wrong task type for that. is try again?");
 
