@@ -4,7 +4,12 @@
 Genie is a **desktop app for managing your genie.tasks, optimised used via a Command Line Interface (CLI)** while 
 still having the benefits of a Graphical User Interface (GUI).
 
-###Note about the command format
+
+
+
+
+##Notes about the command format
+
 * Words in ```UPPER_CASE``` are the parameters to be supplied by the user.
   e.g. ```todo TASK```, ```TASK``` is a parameter which can be used as ```todo eat dinner```.
   
@@ -27,15 +32,15 @@ still having the benefits of a Graphical User Interface (GUI).
 
 ## Features
 
-The genie.Genie is powerful enough to help you do the following: 
+The Genie is powerful enough to help you do the following: 
 
-* Add a new genie.tasks to you task list
-* View all the genie.tasks you have
+* Add a new tasks to you task list
+* View all the tasks you have
 * Mark a task as completed
 * Delete a task
 * Find task(s) based on keywords
-* Save and load your genie.tasks automatically from your hard drive
-* Add priority to genie.tasks
+* Save and load your tasks automatically from your hard drive
+* Add priority to tasks
 * View task list by priority level
 
 [comment]: <> (## Usage )
