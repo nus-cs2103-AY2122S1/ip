@@ -2,7 +2,7 @@
 
 ## Quick Start 
 1. Ensure that you have `Java 11` installed on your computer. 
-2. Download the latest `duke.jar`. 
+2. Download the latest `duke.jar` [here](https://github.com/greyguy21/ip/releases/download/A-Release/duke.jar). 
 3. Copy the file to the folder you want to use as the *home address* for Duke. 
 4. Double-click the file to start the app. Alternatively, open your terminal and run the following    command: `java -jar duke.jar` to start the program. 
 5. Refer below for features and usage of the program. 
