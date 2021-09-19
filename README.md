@@ -14,7 +14,7 @@ It manages your tasks for you so you can focus on more important stuff.
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest `duke.jar` from here.
+2. Download the latest `duke.jar` from [here](https://github.com/charliemoweng/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the home folder for the Duke.
 4. Double-click the file to start the app. The GUI similar to the one above should appear in a few seconds.
 5. Type the command in the command box and press Enter to execute it.
@@ -23,7 +23,8 @@ It manages your tasks for you so you can focus on more important stuff.
      - `todo task1`: add a Todo called task1.
      - `delete 3`: delete the 3rd task in your list.
      - `bye`: exit the Duke application.
-6. Refer to the Features below for details of each command.
+6. Refer to the [Features](https://github.com/charliemoweng/ip#features) below for details of each command.
+7. Refer to the [Format](https://github.com/charliemoweng/ip#format) below for an explanation of the format for a Duke task.
 
 
 ## Features
