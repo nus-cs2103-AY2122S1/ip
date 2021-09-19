@@ -156,17 +156,19 @@ sum all expenses in the Task list.
 
 Format: 
 1. `expense INDEX DESCRIPTION $AMOUNT`
-2. `expense INDEX /sum`
-3. `expense /listall`
-4. `expense /sumall`
-5. `expense INDEX /delete`
+2. `expense INDEX`
+3. `expense INDEX /sum`
+4. `expense /listall`
+5. `expense /sumall`
+6. `expense INDEX /delete`
 
 Examples of usage:
 1. `expense 1 buy pillow $50`
-2. `expense 1 /sum`
-3. `expense /listall`
-4. `expense /sumall`
-5. `expense 1 /delete 1`
+2. `expense 1`
+3. `expense 1 /sum`
+4. `expense /listall`
+5. `expense /sumall`
+6. `expense 1 /delete 1`
 
 Expected outcome: An Event of `DESCRIPTION` and appropriate date and time will be added to the Task list.
 
@@ -177,22 +179,28 @@ I added buy bolster: $50.00 to [T][ ] sleep!
 
 2.
 ```
-$50.00 spent on [T][ ] sleep!
+[T][ ] sleep:
+    1. buy bolster: $50.00|
 ```
 
 3.
+```
+$50.00 spent on [T][ ] sleep!
+```
+
+4.
 ```
 1. [T][ ] sleep:
     1. buy bolster: $50.00|
 2. [D][ ] sleep (at: Feb 2 2020, 2:00 AM - 12:00 PM):
 ```
 
-4.
+5.
 ```
 $50.00
 ```
 
-5.
+6.
 ```
 I deleted:
 buy bolster
