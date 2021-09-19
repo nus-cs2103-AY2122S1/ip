@@ -8,7 +8,7 @@ Welcome to DukePro. This app houses Duke, a friendly chat bot who can help you m
 
 **Prerequisite: Ensure that you have already installed Java 11.**
 
-1. Download DukePro [here](https://github.com/ErnestCuong/ip/releases/tag/v0.2)
+1. Download DukePro [here](https://github.com/ErnestCuong/ip/releases/tag/A-Release)
 2. Move the jar file `duke.jar` to the folder that you want to be the home folder for DukePro
 3. Open this folder in command window
 4. Run this command `java -jar duke.jar`
