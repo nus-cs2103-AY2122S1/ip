@@ -20,7 +20,7 @@ public class Storage {
      */
     public void saveTasksToFile() {
         // @author aakanshanarain - reused
-        // Reused from https://github.com/Wincenttjoi/CS2103T-duke-chatbot
+        // Reused from https://github.com/Wincenttjoi/CS2103T-Duke-chatbot
         // with minor modifications
         try {
             BufferedWriter taskWriter = new BufferedWriter(new FileWriter(filePath));
@@ -42,7 +42,7 @@ public class Storage {
      */
     public void loadTasksToUI() throws IOException {
         // @author aakanshanarain - solution inspired by
-        // https://github.com/Wincenttjoi/CS2103T-duke-chatbot
+        // https://github.com/Wincenttjoi/CS2103T-Duke-chatbot
         File file = new File(this.filePath);
 
         // creates data directory if it does not exist

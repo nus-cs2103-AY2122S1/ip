@@ -1,5 +1,4 @@
-todo book stuff/ false #book
-todo more book stuff/ false
-event book meet | 24-05-2021 1400/ false
-todo xyz/ false
-todo abc/ false
+deadline CS2103T iP | 17-09-2021 2359/ false #essay
+event CS2103T Group meeting | 20-09-2021 2000/ true
+deadline Write essay for GEH1049 | 23-09-2021 1600/ false
+todo Research for essay/ false
