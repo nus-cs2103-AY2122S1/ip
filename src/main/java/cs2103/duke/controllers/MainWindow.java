@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-
+        assert input != null;
         if (input.equals("bye")) {
             addDialog(input, response);
             // solution for delay before closing the window adapted from:
@@ -74,6 +74,8 @@ public class MainWindow extends AnchorPane {
      * @param response The duke's response.
      */
     private void addDialog(String input, String response) {
+        assert userImage != null;
+        assert dukeImage != null;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));
