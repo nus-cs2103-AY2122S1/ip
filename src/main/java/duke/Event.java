@@ -16,8 +16,8 @@ public class Event extends Task {
      * @param task Event to attend.
      * @param time Date and time of event.
      */
-    public Event(String task, LocalDateTime time) {
-        super(task, TASK_TYPE);
+    public Event(String task, LocalDateTime time, int priority) {
+        super(task, TASK_TYPE, priority);
         this.time = time;
     }
 
@@ -27,8 +27,8 @@ public class Event extends Task {
      * @param completed Whether the event has been attended.
      * @param time Date and time of event.
      */
-    public Event(String task, boolean completed, LocalDateTime time) {
-        super(task, completed, TASK_TYPE);
+    public Event(String task, boolean completed, LocalDateTime time, int priority) {
+        super(task, completed, TASK_TYPE, priority);
         this.time = time;
     }
 
@@ -42,13 +42,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)", this.getTaskType(), this.getCompletedMarker(),
-                this.getTask(), this.getTime());
+        return String.format("[%s][%s][%s] %s (at: %s)", this.getTaskType(), this.getCompletedMarker(),
+                this.getPriorityMarker(), this.getTask(), this.getTime());
     }
 
     @Override
     public String parseForStorage() {
-        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getIsCompleted() ? 1 : 0,
-                this.getTask(), this.getTime());
+        return String.format("%s | %d | %d | %s | %s", this.getTaskType(), this.getIsCompleted() ? 1 : 0,
+                this.getPriority(), this.getTask(), this.getTime());
     }
 }

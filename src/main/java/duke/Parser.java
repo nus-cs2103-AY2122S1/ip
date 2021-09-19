@@ -9,11 +9,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
-    private static final String DATE_FORMAT = "dd MMM yyyy";
-    private static final String DATE_TIME_FORMAT = "dd MMM yyyy HH:mm";
+    private static final String DATE_FORMAT = "dd-MM-yyyy";
+    private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HHmm";
 
-    public enum Command { BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND }
-    private boolean toTerminate = false;
+    public enum Command { BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND, PRIORITY }
+    private boolean isTerminated = false;
 
     /**
      * Class constructor.
@@ -21,8 +21,8 @@ public class Parser {
     public Parser() {
     }
 
-    public boolean getToTerminate() {
-        return this.toTerminate;
+    public boolean canTerminate() {
+        return this.isTerminated;
     }
 
     /**
@@ -75,6 +75,13 @@ public class Parser {
         case FIND:
             message = this.findTasks(tasks, ui, parsedInput[1]);
             break;
+        case PRIORITY:
+            if (parsedInput.length <= 1) {
+                throw new TaskIndexOutOfBoundException("Missing Task Number!");
+            }
+            message = this.setPriority(tasks, ui, Integer.parseInt(parsedInput[1]) - 1,
+                    Integer.parseInt(parsedInput[2]));
+            break;
         default:
             throw new InvalidCommandException("Invalid Command");
         }
@@ -87,7 +94,7 @@ public class Parser {
      * @param ui UI object to render output to user.
      */
     public String terminate(Ui ui) {
-        this.toTerminate = true;
+        this.isTerminated = true;
         return ui.terminateMessage();
     }
 
@@ -113,8 +120,17 @@ public class Parser {
         if (input.length() <= 5 || input.substring(5).stripLeading().length() <= 0) {
             throw new ToDoDescriptionNotFoundException("Missing Description!");
         }
-        String toDo = input.substring(5);
-        ToDo newToDo = new ToDo(toDo);
+        String toDo;
+        int priority;
+        if (input.contains(" /p ")) {
+            int delimiterPriority = input.indexOf(" /p ");
+            toDo = input.substring(5, delimiterPriority);
+            priority = Integer.parseInt(input.substring(delimiterPriority + 4));
+        } else {
+            toDo = input.substring(5);
+            priority = 3;
+        }
+        ToDo newToDo = new ToDo(toDo, priority);
         tasks.addTask(newToDo);
         assert tasks.getList().contains(newToDo) : "New Todo should be added";
         return ui.addMessage(newToDo, tasks);
@@ -135,11 +151,20 @@ public class Parser {
         } else if (!input.contains(" /by ")) {
             throw new DeadlineNotFoundException("Deadline Missing!");
         }
-        int delimiter = input.indexOf(" /by ");
-        String task = input.substring(9, delimiter);
-        String date = input.substring(delimiter + 5);
+        int delimiterDate = input.indexOf(" /by ");
+        String task = input.substring(9, delimiterDate);
+        String date;
+        int priority;
+        if (input.contains(" /p ")) {
+            int delimiterPriority = input.indexOf(" /p ");
+            date = input.substring(delimiterDate + 5, delimiterPriority);
+            priority = Integer.parseInt(input.substring(delimiterPriority + 4));
+        } else {
+            date = input.substring(delimiterDate + 5);
+            priority = 3;
+        }
         LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
-        Deadline newDeadline = new Deadline(task, parsedDate);
+        Deadline newDeadline = new Deadline(task, parsedDate, priority);
         tasks.addTask(newDeadline);
         assert tasks.getList().contains(newDeadline) : "New Deadline should be added";
         return ui.addMessage(newDeadline, tasks);
@@ -160,11 +185,20 @@ public class Parser {
         } else if (!input.contains(" /at ")) {
             throw new EventTimeNotFoundException("Event Time Missing!");
         }
-        int delimiter = input.indexOf(" /at ");
-        String task = input.substring(6, delimiter);
-        String time = input.substring(delimiter + 5);
+        int delimiterTime = input.indexOf(" /at ");
+        String task = input.substring(6, delimiterTime);
+        String time;
+        int priority;
+        if (input.contains(" /p ")) {
+            int delimiterPriority = input.indexOf(" /p ");
+            time = input.substring(delimiterTime + 5, delimiterPriority);
+            priority = Integer.parseInt(input.substring(delimiterPriority + 4));
+        } else {
+            time = input.substring(delimiterTime + 5);
+            priority = 3;
+        }
         LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-        Event newEvent = new Event(task, parsedTime);
+        Event newEvent = new Event(task, parsedTime, priority);
         tasks.addTask(newEvent);
         assert tasks.getList().contains(newEvent) : "New Event should be added";
         return ui.addMessage(newEvent, tasks);
@@ -210,5 +244,13 @@ public class Parser {
      */
     public String findTasks(TaskList tasks, Ui ui, String keyword) {
         return ui.findMessage(tasks.findTasks(keyword));
+    }
+
+    public String setPriority(TaskList tasks, Ui ui, int index, int priority) throws TaskIndexOutOfBoundException {
+        if (index >= tasks.getListSize()) {
+            throw new TaskIndexOutOfBoundException("Task index is invalid!");
+        }
+        Task task = tasks.setPriority(index, priority);
+        return ui.setPriorityMessage(task);
     }
 }

@@ -27,15 +27,15 @@ public class Duke {
      * Runs the Duke Personal Assistant Chatbot.
      */
     public void run() {
-        boolean terminate = false;
+        boolean isTerminated = false;
         ui.printMessage(this.onStart());
 
-        while (!terminate) {
+        while (!isTerminated) {
             String message;
             try {
                 String input = ui.readInput();
                 message = parser.executeCommand(ui, tasks, input);
-                terminate = parser.getToTerminate();
+                isTerminated = parser.canTerminate();
             } catch (Exception e) {
                 message = ui.handleException(e);
             }

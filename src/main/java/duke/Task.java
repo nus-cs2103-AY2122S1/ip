@@ -7,6 +7,7 @@ public abstract class Task {
     private String task;
     private boolean isCompleted;
     private String taskType;
+    private int priority;
 
     /**
      * Class constructor specifying the task description.
@@ -23,10 +24,11 @@ public abstract class Task {
      * @param task Task description.
      * @param taskType Task type.
      */
-    public Task(String task, String taskType) {
+    public Task(String task, String taskType, int priority) {
         this.task = task;
         this.isCompleted = false;
         this.taskType = taskType;
+        this.priority = priority;
     }
 
     /**
@@ -35,10 +37,11 @@ public abstract class Task {
      * @param isCompleted Whether the task is completed.
      * @param taskType Task type.
      */
-    public Task(String task, boolean isCompleted, String taskType) {
+    public Task(String task, boolean isCompleted, String taskType, int priority) {
         this.task = task;
         this.isCompleted = isCompleted;
         this.taskType = taskType;
+        this.priority = priority;
     }
 
     public boolean getIsCompleted() {
@@ -53,8 +56,30 @@ public abstract class Task {
         return (this.isCompleted ? "X" : " ");
     }
 
+    public String getPriorityMarker() {
+        switch (priority) {
+        case 1:
+            return "!";
+        case 2:
+            return "*";
+        case 3:
+            return " ";
+        default:
+            return "?";
+        }
+    }
+
     public String getTaskType() {
         return this.taskType;
+    }
+
+    public int getPriority() {
+        return this.priority;
+    }
+
+    public int setPriority(int priority) {
+        this.priority = priority;
+        return priority;
     }
 
     /**

@@ -9,15 +9,15 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private static final String DATE_FORMAT = "dd MMM yyyy";
     private static final String TASK_TYPE = "D";
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * Class constructor specifying the task and the deadline.
      * @param task Task to be done.
      * @param date Deadline by which the task needs to be done.
      */
-    public Deadline(String task, LocalDate date) {
-        super(task, TASK_TYPE);
+    public Deadline(String task, LocalDate date, int priority) {
+        super(task, TASK_TYPE, priority);
         this.date = date;
     }
 
@@ -27,8 +27,8 @@ public class Deadline extends Task {
      * @param completed Whether the task has been completed.
      * @param date Deadline by which the task needs to be done.
      */
-    public Deadline(String task, boolean completed, LocalDate date) {
-        super(task, completed, TASK_TYPE);
+    public Deadline(String task, boolean completed, LocalDate date, int priority) {
+        super(task, completed, TASK_TYPE, priority);
         this.date = date;
     }
 
@@ -42,13 +42,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", this.getTaskType(), this.getCompletedMarker(),
-                this.getTask(), this.getDate());
+        return String.format("[%s][%s][%s] %s (by: %s)", this.getTaskType(), this.getCompletedMarker(),
+                this.getPriorityMarker(), this.getTask(), this.getDate());
     }
 
     @Override
     public String parseForStorage() {
-        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getIsCompleted() ? 1 : 0,
-                this.getTask(), this.getDate());
+        return String.format("%s | %d | %d | %s | %s", this.getTaskType(), this.getIsCompleted() ? 1 : 0,
+                this.getPriority(), this.getTask(), this.getDate());
     }
 }
