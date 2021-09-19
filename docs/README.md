@@ -19,7 +19,7 @@ This project was built from Project Duke.
 
 ## Usage
 
-##1. Add task
+### 1. Add task
 
 Add a todo, deadline, or event task to the list of tasks. Each task type has a different command.
 
@@ -71,7 +71,7 @@ Now you have 3 tasks in the list
 ```
 ---
 
-##2. Delete task
+### 2. Delete task
 
 #### `delete` - Deletes a task from the list
 Command format: `delete [task index]`
@@ -88,7 +88,7 @@ Now you have 2 tasks in the list
 ```
 ---
 
-##3. List tasks
+### 3. List tasks
 
 #### `list` - Lists out the current tasks
 Command format: `list`
@@ -103,7 +103,7 @@ Here are the tasks in your list:
 ```
 ---
 
-##4. Marks task as done
+### 4. Marks task as done
 
 #### `done` - Marks a task in the list as done
 Command format: `done [task index]`
@@ -119,7 +119,7 @@ Nice! I've marked this task as done:
 ```
 ---
 
-##5. Find task
+### 5. Find task
 
 #### `find` - Finds tasks with a specific keyword in the list
 Command format: `find [keyword]`
@@ -135,7 +135,7 @@ Here are the matching tasks in your list:
 ```
 ---
 
-##6. Update task
+### 6. Update task
 
 #### `updates` - Updates an attribute of a task
 Command format: `update [task index] [attribute] /[new value]`
@@ -155,7 +155,7 @@ Got it. I've updated the task to be:
 ```
 ---
 
-##7. Exit
+### 7. Exit
 
 #### `bye` - Exits the application
 Command format: `bye`
