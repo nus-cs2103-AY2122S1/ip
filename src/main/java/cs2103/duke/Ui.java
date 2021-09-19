@@ -35,7 +35,7 @@ public class Ui {
      */
     public String showGoodbye() {
         // Goodbye message
-        String goodbye = "Thank you for using Duke: Level " + lv + "\n"
+        String goodbye = "Thank you for using Duke,\n"
                 + "See you soon!";
         return goodbye;
     }
