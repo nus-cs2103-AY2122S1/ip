@@ -55,15 +55,17 @@ public class Storage {
                 char firstLetter = toAdd.charAt(1);
 
                 switch (firstLetter) {
-                    case 'T':
-                        taskList.addTaskFromDataFile(addTodo(toAdd));
-                        break;
-                    case 'D':
-                        taskList.addTaskFromDataFile(addDeadline(toAdd));
-                        break;
-                    case 'E':
-                        taskList.addTaskFromDataFile(addEvent(toAdd));
-                        break;
+                case 'T':
+                    taskList.addTaskFromDataFile(addTodo(toAdd));
+                    break;
+                case 'D':
+                    taskList.addTaskFromDataFile(addDeadline(toAdd));
+                    break;
+                case 'E':
+                    taskList.addTaskFromDataFile(addEvent(toAdd));
+                    break;
+                default:
+                    System.out.println("Not a task.");
                 }
             }
         } catch (FileNotFoundException e) {
