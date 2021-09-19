@@ -58,7 +58,7 @@ public class Storage {
                 Task newTask = getTaskFromSave(sc.nextLine());
                 tasks.add(newTask);
             } catch (DukeException e) {
-                //ui.display(e);
+                ui.display(e);
             }
         }
         return tasks;
@@ -98,7 +98,7 @@ public class Storage {
         boolean isDone;
         try {
             isDone = Integer.parseInt(nextTask.substring(1, 2)) == 1;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw DukeException.CORRUPT_TASK;
         }
 
