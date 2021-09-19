@@ -13,6 +13,30 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final String LINE_BREAK = "------------------------------";
+
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke.\n"
+            + "How can I help you today?\n"
+            + LINE_BREAK + "\n"
+            + "You can create Tasks here.\n"
+            + "To add a Todo, \n"
+            + " simply key in `todo` followed by the name;\n"
+            + "To add a Deadline, \n"
+            + " simply key in `deadline` followed by its name, `/by` and the deadline;\n"
+            + "To add an Event, \n"
+            + " simply key in `event` followed by its name, `/at` and its time.\n"
+            + "Please key in the date and time in the format of `26/08/2021 20:20`.\n"
+            + LINE_BREAK + "\n"
+            + "To display the current list, \n"
+            + " simply enter 'list'.\n"
+            + "To delete a task, \n"
+            + " simply enter 'delete' and space, followed by the task index.\n"
+            + "To mark a task as done, \n"
+            + " simple enter 'done' and space, followed by the task index.\n"
+            + "To exit, \n"
+            + " simply enter 'bye'.\n";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,29 +51,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private String lineBreak = "------------------------------";
-
-    private final String WELCOME_MESSAGE = "Hello! I'm Duke.\n"
-            + "How can I help you today?\n"
-            + lineBreak + "\n"
-            + "You can create Tasks here.\n"
-            + "To add a Todo, \n"
-            + " simply key in `todo` followed by the name;\n"
-            + "To add a Deadline, \n"
-            + " simply key in `deadline` followed by its name, `/by` and the deadline;\n"
-            + "To add an Event, \n"
-            + " simply key in `event` followed by its name, `/at` and its time.\n"
-            + "Please key in the date and time in the format of `26/08/2021 20:20`.\n"
-            + lineBreak + "\n"
-            + "To display the current list, \n"
-            + " simply enter 'list'.\n"
-            + "To delete a task, \n"
-            + " simply enter 'delete' and space, followed by the task index.\n"
-            + "To mark a task as done, \n"
-            + " simple enter 'done' and space, followed by the task index.\n"
-            + "To exit, \n"
-            + " simply enter 'bye'.\n";
-
+    /**
+     * Initialises the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
