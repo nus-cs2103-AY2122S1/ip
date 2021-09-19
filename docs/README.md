@@ -23,7 +23,7 @@ Duke lets you mark any task on your task list as complete, without deleting them
 
 ### Undoing previous command
 
-Duke lets you undo your last undo-able command, say goodbye to accidentally deleting a task! :grin:
+Duke lets you undo your last undo-able command, say goodbye to accidentally deleting a task!
 
 ### List tasks on your task list
 
