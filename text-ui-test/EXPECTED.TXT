@@ -1,3 +1,4 @@
+Save file found!
 Hello from
  ____        _        
 |  _ \ _   _| | _____ 
@@ -5,3 +6,47 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke!
+What can I do for you today?
+I've added this task:
+[T] [ ] Read Book
+Now you have 1 tasks in the list!
+I've added this task:
+[D] [ ] Return Book (by: Aug 21 2021)
+Now you have 2 tasks in the list!
+I've added this task:
+[E] [ ] CS2103 tutorial (at: Aug 21 2021)
+Now you have 3 tasks in the list!
+[D] [ ] Return Book (by: Aug 21 2021)
+[E] [ ] CS2103 tutorial (at: Aug 21 2021)
+Here are the tasks in your list:
+1. [T] [ ] Read Book
+2. [D] [ ] Return Book (by: Aug 21 2021)
+3. [E] [ ] CS2103 tutorial (at: Aug 21 2021)
+Nice! I've marked this task as done:
+[T] [X] Read Book
+Nice! I've marked this task as done:
+[D] [X] Return Book (by: Aug 21 2021)
+Nice! I've marked this task as done:
+[E] [X] CS2103 tutorial (at: Aug 21 2021)
+Here are the tasks in your list:
+1. [T] [X] Read Book
+2. [D] [X] Return Book (by: Aug 21 2021)
+3. [E] [X] CS2103 tutorial (at: Aug 21 2021)
+Here are the matching tasks in your list:
+1. [T] [X] Read Book
+2. [D] [X] Return Book (by: Aug 21 2021)
+Alright! I've removed this task:
+[T] [X] Read Book
+Now you have 2 tasks left in the list!
+Here are the tasks in your list:
+1. [D] [X] Return Book (by: Aug 21 2021)
+2. [E] [X] CS2103 tutorial (at: Aug 21 2021)
+Alright! I've removed this task:
+[D] [X] Return Book (by: Aug 21 2021)
+Now you have 1 tasks left in the list!
+Alright! I've removed this task:
+[E] [X] CS2103 tutorial (at: Aug 21 2021)
+Now you have 0 tasks left in the list!
+No tasks in your list! Add one using todo, deadline or event!
+Bye! Hope to see you again soon!
