@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
 
     public void setKatheryne(Katheryne k) {
         katheryne = k;
+        dialogContainer.getChildren().add(
+                DialogBox.getKatheryneDialog(Message.greet(katheryne.lst), katheryneImage)
+        );
     }
 
     /**

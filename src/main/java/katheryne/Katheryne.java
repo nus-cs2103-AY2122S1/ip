@@ -18,7 +18,10 @@ public class Katheryne {
     Storage storage;
     Ui ui;
     TaskList lst;
-    
+
+    /**
+     * Constructor for Katheryne.
+     */
     public Katheryne() {
         this.storage = new Storage();
         this.ui = new Ui();
@@ -33,7 +36,7 @@ public class Katheryne {
     }
 
     /**
-     * Generates a response to user input so that it can be rendered via the GUI
+     * Generates a response to user input so that it can be rendered via the GUI.
      */
     protected String getResponse(String input) {
         try {

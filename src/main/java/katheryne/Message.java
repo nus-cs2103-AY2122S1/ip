@@ -42,8 +42,8 @@ public class Message {
      * @return
      */
     public static final String greet(TaskList lst) {
-        String intro =  CATCHPHRASE + NEW_LINE + "I am Katheryne, the receptionist here at the Adventurers' Guild. " 
-                + "How may I assist?" + NEW_LINE;
+        String intro =  CATCHPHRASE + NEW_LINE + NEW_LINE + "I am Katheryne, the receptionist here at the " 
+                + "Adventurers' Guild. How may I assist?" + NEW_LINE + NEW_LINE;
         String yourTasks;
         if (!lst.isEmpty()) {
             yourTasks = "I still have your list of tasks from last time. " + COUNT_TASKS.replace(NUMBER_OF_TASKS_PLACEHOLDER,
