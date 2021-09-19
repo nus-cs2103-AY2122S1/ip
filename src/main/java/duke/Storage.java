@@ -37,8 +37,7 @@ public class Storage {
      * @param tasks The Task List of the Duke
      */
     public void saveTaskList(TaskList tasks) {
-        assert tasks != null : "Tasklist is not initialized!";
-        UI ui = new UI();
+        assert tasks != null : "Tasks is not initialized!";
         try {
             File dir = new File("data");
             boolean isDeleted = false;
@@ -53,36 +52,39 @@ public class Storage {
                 isCreated = data.createNewFile();
             }
             if (isCreated) {
-                FileWriter storeData = new FileWriter(data);
-                Task task;
-                for (int i = 0; i < tasks.getTaskListLength(); i++) {
-                    task = tasks.getTask(i);
-                    if (task instanceof DeadlineTask) {
-                        DeadlineTask deadline = (DeadlineTask) task;
-                        storeData.write(deadline.writeToFile());
-                    } else if (task instanceof EventTask) {
-                        EventTask event = (EventTask) task;
-                        storeData.write(event.writeToFile());
-                    } else if (task instanceof ToDoTask) {
-                        ToDoTask todo = (ToDoTask) task;
-                        storeData.write(todo.writeToFile());
-                    }
-                }
-                storeData.close();
+                writeToFile(tasks, data);
             }
         } catch (IOException e) {
             File deletedFile = new File("data/duke.txt");
             boolean isDeleted = deletedFile.delete();
-            boolean shouldShow = false;
 
             if (isDeleted) {
-                shouldShow = deletedFile.exists();
-            }
-
-            if (shouldShow) {
-                return;
+                boolean value = deletedFile.exists();
+                if (value) {
+                    return;
+                }
             }
         }
+    }
+
+    private void writeToFile(TaskList tasks, File data) throws IOException {
+        assert tasks != null : "Tasks is not initialized!";
+        FileWriter storeData = new FileWriter(data);
+        Task task;
+        for (int i = 0; i < tasks.getTaskListLength(); i++) {
+            task = tasks.getTask(i);
+            if (task instanceof DeadlineTask) {
+                DeadlineTask deadline = (DeadlineTask) task;
+                storeData.write(deadline.writeToFile());
+            } else if (task instanceof EventTask) {
+                EventTask event = (EventTask) task;
+                storeData.write(event.writeToFile());
+            } else if (task instanceof ToDoTask) {
+                ToDoTask todo = (ToDoTask) task;
+                storeData.write(todo.writeToFile());
+            }
+        }
+        storeData.close();
     }
 
     /**
@@ -109,48 +111,61 @@ public class Storage {
      * @return A list of Tasks which are stored in the file
      */
     public List<Task> load() {
-        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         try {
             Scanner dataInput = new Scanner(storageFile);
             String[] data;
             while (dataInput.hasNextLine()) {
-                try {
-                    data = dataInput.nextLine().split(" [|] ");
-                    switch (getCommand(data[0])) {
-                    case DEADLINE:
-                        if (data.length != 4) {
-                            continue;
-                        } else {
-                            DeadlineTask deadline = new DeadlineTask(data[1], data[2], data[3]);
-                            taskList.add(deadline);
-                        }
-                        break;
-                    case EVENT:
-                        if (data.length != 4) {
-                            continue;
-                        } else {
-                            EventTask event = new EventTask(data[1], data[2], data[3]);
-                            taskList.add(event);
-                        }
-                        break;
-                    case TODO:
-                        if (data.length != 3) {
-                            continue;
-                        } else {
-                            ToDoTask todo = new ToDoTask(data[1], data[2]);
-                            taskList.add(todo);
-                        }
-                        break;
-                    case UNKNOWN:
-                    default:
-                    }
-                } catch (DateTimeParseException ignored) {
-                    ignored.getMessage();
+                data = dataInput.nextLine().split(" [|] ");
+                switch (getCommand(data[0])) {
+                case DEADLINE:
+                    addDeadline(data, tasks);
+                    break;
+                case EVENT:
+                    addEvent(data, tasks);
+                    break;
+                case TODO:
+                    addTodo(data, tasks);
+                    break;
+                case UNKNOWN:
+                default:
                 }
             }
         } catch (FileNotFoundException ignored) {
-            ignored.getMessage();
+            // Don't need to display or return anything since file not found is equivalent to no tasks in the TaskList
         }
-        return taskList;
+        return tasks;
+    }
+
+    private void addDeadline(String[] data, List<Task> tasks) {
+        assert data != null : "data has not been initialised";
+        try {
+            if (data.length == 4) {
+                DeadlineTask deadline = new DeadlineTask(data[1], data[2], data[3]);
+                tasks.add(deadline);
+            }
+        } catch (DateTimeParseException ignored) {
+            // Don't need to display or return anything since this task is corrupted and won't be added to the TaskList
+        }
+    }
+
+    private void addEvent(String[] data, List<Task> tasks) {
+        assert data != null : "data has not been initialised";
+        try {
+            if (data.length == 4) {
+                EventTask event = new EventTask(data[1], data[2], data[3]);
+                tasks.add(event);
+            }
+        } catch (DateTimeParseException ignored) {
+            // Don't need to display or return anything since this task is corrupted and won't be added to the TaskList
+        }
+    }
+
+    private void addTodo(String[] data, List<Task> tasks) {
+        assert data != null : "data has not been initialised";
+        if (data.length == 3) {
+            ToDoTask todo = new ToDoTask(data[1], data[2]);
+            tasks.add(todo);
+        }
     }
 }

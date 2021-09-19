@@ -44,7 +44,7 @@ public class Parser {
             String taskDetails;
             String[] task = taskDescription.split(" ", 2);
             taskObjective = task[0];
-            taskDetails = task.length > 1 ? task[1].trim() : "";
+            taskDetails = (task.length > 1) ? task[1].trim() : "";
             return new Command(getCommand(taskObjective), taskDetails);
         }
     }
