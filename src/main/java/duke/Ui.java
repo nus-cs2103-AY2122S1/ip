@@ -62,7 +62,7 @@ public class Ui {
     }
 
     /**
-     * Returns the new Deadline task created
+     * Returns the new Deadline task created.
      *
      * @param description the description for the deadline task
      */
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Returns the new Event task created
+     * Returns the new Event task created.
      *
      * @param description the description for the Event task
      */
@@ -88,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Returns the appropriate message upon adding a task
+     * Returns the appropriate message upon adding a task.
      *
      * @param addedTask the task which is added to the list
      */
@@ -101,7 +101,7 @@ public class Ui {
     }
 
     /**
-     * Returns the appropriate message upon deleting a task
+     * Returns the appropriate message upon deleting a task.
      *
      * @param deletedTask the task which is deleted from the list
      */
@@ -113,8 +113,21 @@ public class Ui {
         return str.toString();
     }
 
+    /**
+     * Returns the appropriate message upon updating a task.
+     *
+     * @param updatedTask the task which is updated from the list
+     */
+    String displayUpdateMessage(Task updatedTask) {
+        StringBuilder str = new StringBuilder();
+        str.append(LINES + "\n");
+        str.append("Noted. I've updated this task:\n");
+        str.append(updatedTask + "\n");
+        str.append(LINES + "\n");
+        return str.toString();
+    }
 
-     /** Returns the appropriate response as per the command given
+     /** Returns the appropriate response as per the command given.
      * @param command           the command entered
      * @param description       the description of the task
      * @return                  response from duke
@@ -156,11 +169,29 @@ public class Ui {
                     String keyword = description.substring(1);
                     ArrayList<Task> foundTasks = Tasklist.find(keyword);
                     return showFoundDukeList(foundTasks);
+                } else if (command.equals("update")){
+                    boolean hasNewDescription = description.contains("d/");
+                    boolean hasNewTime = description.contains("t/");
+                    System.out.println(description);
+                    System.out.println(hasNewDescription+ " "+ hasNewTime);
+                    int taskIndex = Integer.parseInt(description.substring(1,2)) - 1;
+                    System.out.println(taskIndex);
+
+                    if (hasNewDescription) {
+                        String newDescription = Parser.getNewUpdatedDescription(description);
+                        Tasklist.updateDescription(taskIndex,newDescription);
+                    }
+                    if (hasNewTime) {
+                        String newTime = Parser.getNewUpdatedTime(description);
+                        Tasklist.updateTime(taskIndex,newTime);
+                    }
+                    Task updatedTask = Tasklist.dukeList.get(taskIndex);
+                    str.append(displayUpdateMessage(updatedTask));
                 } else {
                     throw new DukeUnknownCommandException();
                 }
 
-                if (!command.equals("find")) {
+                if (!command.equals("find") && !command.equals("update")) {
                     str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
                     str.append(LINES + "\n");
                 }
@@ -176,7 +207,7 @@ public class Ui {
     }
 
     /**
-     * Shows the completion message for the Task marked done
+     * Shows the completion message for the Task marked done.
      *
      * @param toBeCompleted the Task which is to be marked done
      */

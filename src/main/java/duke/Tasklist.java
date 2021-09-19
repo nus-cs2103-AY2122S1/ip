@@ -48,4 +48,32 @@ public class Tasklist {
         return foundTasks;
     }
 
+    /**
+     * Updates the description of the task.
+     *
+     * @param taskIndex index of the task to be updated
+     * @param newDescription new description of the task
+     */
+    public static void updateDescription(int taskIndex, String newDescription) {
+        Task currentTask = dukeList.get(taskIndex);
+        currentTask.description = newDescription;
+    }
+
+    /**
+     * Updates the time of the task.
+     *
+     * @param taskIndex index of the task to be updated
+     * @param newTime new time of the task
+     */
+    public static void updateTime(int taskIndex, String newTime) {
+        Task currentTask = dukeList.get(taskIndex);
+        if (currentTask instanceof ToDo) {
+            // error
+        } else if (currentTask instanceof Event) {
+            ((Event)currentTask).time = newTime;
+        } else if(currentTask instanceof Deadline) {
+            ((Deadline)currentTask).time = newTime;
+        }
+    }
+
 }

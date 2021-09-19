@@ -46,4 +46,34 @@ public class Parser {
         String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return time;
     }
+
+    /**
+     * Extracts the new input from the input
+     * @param description the input entered by the user
+     * @return
+     */
+    public static String getNewUpdatedTime(String description) {
+        int timeIndex = description.indexOf("t/");
+        String extractedTime = description.substring(timeIndex+2);
+        LocalDate localDate = LocalDate.parse(extractedTime);
+        String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return time;
+    }
+
+    /**
+     * Extracts the new description from the input
+     * @param description the input entered by the user
+     * @return
+     */
+    public static String getNewUpdatedDescription(String description) {
+        int descriptionIndex = description.indexOf("d/");
+        int timeIndex = description.indexOf("t/");
+        String extractedDescription = "";
+        if(timeIndex != -1) {
+            extractedDescription = description.substring(descriptionIndex+2, timeIndex);
+        } else {
+            extractedDescription = description.substring(descriptionIndex+2);
+        }
+        return extractedDescription;
+    }
 }
