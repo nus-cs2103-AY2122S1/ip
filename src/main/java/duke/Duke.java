@@ -2,9 +2,9 @@ package duke;
 
 
 /**
- * Contains main() method for Duke chatbot for IP of CS2103 2021
+ * Contains main() method for Duke chatbot for IP of CS2103 2021.
  *
- * @author: Ren Weilin A0216723J
+ * author: Ren Weilin A0216723J
  */
 public class Duke{
 
@@ -24,11 +24,17 @@ public class Duke{
     /**
      * Start of Duke chatbot.
      *
-     * @param args
+     * @param args CMD arguments.
      */
     public static void main(String[] args) {
         Duke dukeInstance = new Duke();
-        dukeInstance.userInterface.start();
+        try {
+            dukeInstance.userInterface.start();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            dukeInstance.userInterface.start();
+        }
     }
 
 }
