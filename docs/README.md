@@ -154,9 +154,48 @@ Dude will list all the tasks available
 2. [T][ ] do homework
 ```
 
+### Delete a task
+
+Delete a task from the list
+
+#### `delete <index>` - delete a task based on the index found using `list` command
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+Dude will delete the task if the index if valid, else ignored
+
+```
+Noted. I've removed this task:
+   [E][X] task (date)
+Now you have 1 tasks in the list. 
+```
+
+### Find a list of tasks
+
+Find a list of tasks from the list using description as the keyword
+
+#### `find <description>` - find a list of tasks filtered by desc
+
+Example of usage:
+
+`find something`
+
+Expected outcome:
+
+Dude will list all the tasks whose descriptions contain those keywords
+
+```
+1. [E][ ] something (date) 
+```
+
 ### Reminder
 
-Dude has a daily reminder job that will reminder the user of the daily task to be performed on that day if any (this task will be auto run at **00:00 AM** everyday
+Dude has a daily reminder job that will reminder the user of the daily task to be performed on that day if any (this
+task will be auto run at **00:00 AM** everyday
 
 ## Command Summary
 
@@ -170,3 +209,5 @@ Name | Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs
 `event` | Create a new event task (with description and timing in dd/MM/yyyy format) <br> e.g. `event <desc> /at <dd/MM/yyyy>`
 `deadline` | Create a new deadline task (with description and deadline in dd/MM/yyyy format) <br> e.g. `deadline <desc> /by <dd/MM/yyyy>`
 `delete` | Delete a task by the index as shown by list <br> e.g. `delete <index>`
+`find` | Find a list of tasks by description <br> e.g. `find <keyword>`
+
