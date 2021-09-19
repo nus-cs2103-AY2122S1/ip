@@ -20,7 +20,7 @@ public class FindCommand extends Command {
                 .filter(t -> t.getTaskText().contains(args[0]))
                 .collect(Collectors.toList());
         List<String> taskStrings = new ArrayList<String>(Arrays.asList(ListCommand.commandsToStrings(matchingTasks)));
-        taskStrings.add(0, "Here are the matching tasks in your list:");
+        taskStrings.add(0, matchingTasks.size() > 0 ? "heer r ze metching taskz:" : "no metches :(");
         return taskStrings.toArray(new String[0]);
     }
 

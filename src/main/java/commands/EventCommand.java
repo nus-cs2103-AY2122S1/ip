@@ -1,6 +1,7 @@
 package commands;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import bot.Bot;
 import bot.Ui;
@@ -31,9 +32,14 @@ public class EventCommand extends Command {
      */
     public void validateArgs(String[] args) throws InvalidArgumentsException {
         if (args[0].equals("")) {
-            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "The description of an event cannot be empty.");
+            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "decription cannot b emtee.");
         } else if (args.length < 2) {
-            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "Events require /at arguments");
+            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "niid /at arguments... and moni for colleg");
+        }
+        try {
+            LocalDateTime.parse(args[1].trim(), Task.INPUT_TIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "Datetime mus be in DD/MM/YYYY HHMM formatz");
         }
     }
 

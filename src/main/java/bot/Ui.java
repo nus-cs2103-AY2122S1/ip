@@ -9,18 +9,12 @@ public class Ui {
     public static final String TEXT_BLOCK_MARGIN = " ";
     public static final String DIVIDER = "_________________________________________________";
     public static final String[] START_MESSAGES = {
-        "Hello I'm Duke",
-        "     _       _        ",
-        "  __| |_   _| | _____ ",
-        " / _` | | | | |/ / _ \\",
-        "| (_| | |_| |   <  __/",
-        " \\__,_|\\__,_|_|\\_\\___|",
-        "What can I do for you?"
+        "hOI!!! i'm tEMMIE!!",
     };
     public static final String[] END_MESSAGES = {
-        "Bye. Hope to see you again!"
+        "baiii thenn"
     };
-    public static final String ERROR_SIGNATURE = "☹ OOPS!!! ";
+    public static final String ERROR_SIGNATURE = "owoWOWOWOW! ";
 
     /**
      * Prints welcome message dialogue

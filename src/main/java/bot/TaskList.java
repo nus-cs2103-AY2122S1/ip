@@ -55,9 +55,9 @@ public class TaskList {
         assert newTask != null : "Task added cannot be null";
         this.taskList.add(newTask);
         return new String[]{
-            "Got it. I've added this task:",
+            "owoWOWOWOW taskz added:",
             Ui.TEXT_BLOCK_MARGIN + newTask.toString(),
-            String.format("Now you have %d task(s) in the list", taskList.size())
+            String.format("u naw hv %d taskz in ze lizt", taskList.size())
         };
     }
 
@@ -74,9 +74,9 @@ public class TaskList {
         Task task = getTaskAt(index);
         this.taskList.remove(index);
         return new String[]{
-            "Noted. I've removed this task:",
+            "awwAaa i'v remoooved this task:",
             Ui.TEXT_BLOCK_MARGIN + task.toString(),
-            String.format("Now you have %d task(s) in the list", taskList.size())
+            String.format("u naw hv %d taskz in ze lizt", taskList.size())
         };
     }
 

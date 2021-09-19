@@ -1,9 +1,14 @@
 package gui;
 
+import java.util.Optional;
+
 import bot.Bot;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -14,8 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-public class Test extends Application {
+public class Gui extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -37,7 +41,7 @@ public class Test extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Lmao");
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -110,12 +114,25 @@ public class Test extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label((String.join("\n", bot.getOutput(userInput.getText()))));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        String userInputText = userInput.getText();
+        if (userInputText.equals("bye")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Exit Duke");
+            alert.setHeaderText("You are about to exit Duke");
+            alert.setContentText("Are you sure you want exit?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                Platform.exit();
+            }
+        } else {
+            Label userText = new Label(userInputText);
+            Label dukeText = new Label((String.join("\n", bot.getOutput(userInput.getText()))));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+        }
         userInput.clear();
     }
 

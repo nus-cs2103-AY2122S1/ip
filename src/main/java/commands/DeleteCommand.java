@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
      */
     public void validateArgs(Integer ind, Bot bot) throws InvalidTaskException {
         if (ind < 0 || ind >= bot.getTaskList().size()) {
-            throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
+            throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "task dos nat exizt in ze taskz lizt!");
         }
     }
 

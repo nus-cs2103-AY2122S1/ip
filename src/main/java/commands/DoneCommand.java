@@ -39,7 +39,7 @@ public class DoneCommand extends Command {
      */
     public void validateArgs(int arg, Bot bot) throws InvalidTaskException {
         if (arg < 0 || arg >= bot.getTaskList().size()) {
-            throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
+            throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "task dos nat exizt in ze taskz lizt!");
         }
     }
 
@@ -51,7 +51,7 @@ public class DoneCommand extends Command {
      */
     public String[] getTaskDoneMessage(Task task) {
         return new String[]{
-            "Nice! I've marked this task as done:",
+            "diz iz marked donez:",
             Ui.TEXT_BLOCK_MARGIN + task.toString()
         };
     }

@@ -26,7 +26,7 @@ public class TodoCommand extends Command {
      */
     public void validateArgs(String[] args) throws InvalidArgumentsException {
         if (args[0].equals("")) {
-            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "The description of a todo cannot be empty.");
+            throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "decription cannot b emtee.");
         }
     }
 
