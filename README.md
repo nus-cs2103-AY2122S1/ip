@@ -53,6 +53,8 @@ deadlines and events is need to specify a date and time. is use the format `yyyy
 
 is cannot use the '|' character anywhere in the descriptions, is afraid. is forbidden by duke's master.
 
+if is want to leave description blank, duke is allow but is must use space characters. `event   /at ...`. is 3 space characters there.
+
 
 ## list tasks.
 is list current tasks by typing:
@@ -115,3 +117,11 @@ find sep     // searches for deadlines/events in september, or just tasks with t
 
 find 1800    // searches for deadlines/events at 1800
 ```
+## exit duke.
+is... goodbye? 🥺
+
+is remember to say bye okay?
+
+`bye`
+
+is don't just click the x button! is can. but is will be sad.
