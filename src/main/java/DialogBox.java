@@ -23,9 +23,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private final int Image_Radius = 40;
-    private final String DIALOG_BOX_FXML_FILE = "/view/DialogBox.fxml";
+    private final int imageRadius = 40;
 
     /**
      * Constuctor to create new Dialog Boxes
@@ -34,7 +32,7 @@ public class DialogBox extends HBox {
      */
     private DialogBox(String text, Image img, String dialogBoxColor) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(DIALOG_BOX_FXML_FILE));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -88,7 +86,7 @@ public class DialogBox extends HBox {
      * @return Circle object.
      */
     private Circle cropImage() {
-        Circle circle = new Circle(Image_Radius);
+        Circle circle = new Circle(imageRadius);
         circle.setStrokeWidth(5);
         circle.setCenterX(displayPicture.getFitWidth() / 2);
         circle.setCenterY(displayPicture.getFitHeight() / 2);

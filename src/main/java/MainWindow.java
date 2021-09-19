@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     private static final String GREETING = "Hello! I'm Duke, what can I do for you?";
-    private static final String FAREWELL = "Bye. Hope to see you again soon! \\_(\"v\")_/";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -47,39 +46,36 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InterruptedException {
-        if (!isLastInput) {
-            String input = userInput.getText();
-            if (!input.trim().equals("")) {
-                String response = duke.getResponse(input);
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
-                );
-            }
+    private void handleUserInput() {
+        if (isLastInput) {
             userInput.clear();
-            if (input.trim().equals("bye")) {
-                isLastInput = true;
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        Platform.exit();
-                        System.exit(0);
-                    }
-                }, 3000);
-            }
-        } else {
-            userInput.clear();
+            return;
         }
+        String input = userInput.getText();
+        if (input.trim().equals("")) {
+            userInput.clear();
+            return;
+        }
+        if (input.trim().equals("bye")) {
+            isLastInput = true;
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 3000);
+        }
+        String response = duke.getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
     }
 
     @FXML
     private void showWelcome() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(GREETING, dukeImage));
-    }
-
-    @FXML
-    private void showGoodbye() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
     }
 }
