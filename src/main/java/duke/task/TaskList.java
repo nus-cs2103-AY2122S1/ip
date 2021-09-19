@@ -84,10 +84,10 @@ public class TaskList {
      * Prints out all the tasks in the entire TaskList object.
      */
     public String showList() {
-        String fullList = "     " + "Here are the tasks in your list:";
+        String fullList = "Here are the tasks in your list:";
 
         for (int i = 0; i < list.size(); i++) {
-            String taskItem = "\n" + "     " + (i + 1) + "." + "["
+            String taskItem = "\n" + (i + 1) + "." + "["
                     + list.get(i).showType() + "]"
                     + list.get(i).checkDone() + " "
                     + list.get(i).checkNotes() + " "
