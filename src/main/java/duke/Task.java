@@ -17,6 +17,7 @@ public abstract class Task {
      * @param isTimed Whether this Task has a timed entry or not
      */
     public Task(String name, boolean isTimed){
+        assert !name.equals(""); // Name should not ever be empty
         this.name = name;
         this.isTimed = isTimed;
         this.isDone = false;
@@ -28,6 +29,7 @@ public abstract class Task {
      * @param isTimed Whether this Task has a timed entry or not
      */
     public Task(String name, boolean isTimed, boolean isDone){
+        assert !name.equals("");
         this.name = name;
         this.isDone = isDone;
     }
