@@ -111,6 +111,16 @@ public class Ui {
     }
 
     /**
+     * Prints tasks containing specified keyword.
+     * @param task TaskList containing filtered tasks.
+     */
+    public String setPriorityMessage(Task task) {
+        String message = " I've changed the priority level of this task:\n"
+                + task.toString();
+        return message;
+    }
+
+    /**
      * Prints the appropriate error handling message.
      * @param e Exception caught.
      */

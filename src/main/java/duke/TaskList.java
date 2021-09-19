@@ -76,6 +76,11 @@ public class TaskList {
                 .collect(Collectors.toList()));
     }
 
+    public Task setPriority(int index, int priority) {
+        this.list.get(index).setPriority(priority);
+        return this.list.get(index);
+    }
+
     @Override
     public String toString() {
         String str = "";
