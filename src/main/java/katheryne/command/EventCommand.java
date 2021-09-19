@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -36,6 +37,12 @@ public class EventCommand extends Command {
         }
     }
 
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        Event event = new Event(description, atAsDate);
+        taskList.add(event);
+        return Message.addEvent(event, taskList);
+    }
+
     /**
      * Adds an event to the task list, prints a confirmation message.
      *
@@ -52,4 +59,5 @@ public class EventCommand extends Command {
                 + event.getStringAt());
         ui.countTasksInList(taskList);
     }
+
 }

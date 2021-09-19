@@ -1,6 +1,7 @@
 package katheryne.command;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -24,6 +25,12 @@ public class TodoCommand extends Command {
      */
     TodoCommand(String[] processedRemainingText) {
         this.description = processedRemainingText[0];
+    }
+
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        Todo todo = new Todo(description);
+        taskList.add(todo);
+        return Message.addTodo(todo, taskList);
     }
 
     /**

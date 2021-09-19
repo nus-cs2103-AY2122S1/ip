@@ -1,6 +1,7 @@
 package katheryne.command;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -29,6 +30,16 @@ public class DeleteCommand extends Command {
         try {
             this.index = Integer.parseInt(processedRemainingText[0]) - 1;
         } catch (NumberFormatException e) {
+            throw new WrongIndexException();
+        }
+    }
+
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        try { 
+            Task taskToDelete = taskList.getTask(index);
+            taskList.deleteTask(index);
+            return Message.getDeleteTasksMessage(taskToDelete);
+        } catch (IndexOutOfBoundsException e) {
             throw new WrongIndexException();
         }
     }

@@ -1,6 +1,7 @@
 package katheryne.command;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -21,6 +22,10 @@ public class ListCommand extends Command {
      */
     ListCommand() throws KatheryneException {}
 
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        return Message.listTasks(taskList);
+    }
+    
     /**
      * Prints out the tasks in the tasklist.
      *

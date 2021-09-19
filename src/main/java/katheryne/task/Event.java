@@ -22,7 +22,7 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate dateAt) {
         super(description);
-        this.stringAt = dateAt.format(DateTimeFormatter.ofPattern("d MM yyyy"));
+        this.stringAt = dateAt.format(DateTimeFormatter.ofPattern("d MMM, YYYY"));
         this.dateAt = dateAt;
     }
 

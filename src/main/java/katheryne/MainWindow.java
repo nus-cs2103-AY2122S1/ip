@@ -1,5 +1,9 @@
 package katheryne;
 
+import static java.lang.Thread.interrupted;
+import static java.lang.Thread.sleep;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -48,6 +52,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getKatheryneDialog(response, katheryneImage)
         );
         userInput.clear();
+        if (response.equals(Message.goodbye())) {
+            try {
+                sleep(400);
+            } catch (InterruptedException e) {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getKatheryneDialog("That was interrupted. What were you saying?", katheryneImage)
+                );
+            } finally {
+                Platform.exit();
+            }
+        }
     }
     
 }

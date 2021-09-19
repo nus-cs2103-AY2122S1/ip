@@ -1,6 +1,7 @@
 package katheryne.command;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -15,6 +16,15 @@ public class ExitCommand extends Command {
     public static final String COMMAND = "BYE";
 
     ExitCommand() throws KatheryneException {
+    }
+
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        try {
+            storage.saveTasks(taskList, "tasks.json");
+            return Message.goodbye();
+        } catch (KatheryneException e) {
+            return e.getMessage();
+        }
     }
 
     /**

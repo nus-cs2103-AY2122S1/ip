@@ -18,10 +18,11 @@ public class Katheryne {
     Storage storage;
     Ui ui;
     TaskList lst;
+    
     public Katheryne() {
-        Storage storage = new Storage();
-        Ui ui = new Ui();
-        TaskList lst = new TaskList();
+        this.storage = new Storage();
+        this.ui = new Ui();
+        this.lst = new TaskList();
         
         // load from existing file
         try {
@@ -31,46 +32,47 @@ public class Katheryne {
         }
     }
 
-//    /**
-//     * Main method for running Katheryne via CLI.
-//     *
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        Katheryne k = new Katheryne();
-//        k.run();
-//    }
-//    
-//    public void run() {
-//        ui.greet(lst);
-//
-//        while (ui.getIsRunning()) {
-//            try {
-//                String userInput = ui.readCommand();
-//                Command c = Parser.parse(userInput);
-//                c.execute(lst, ui, storage);
-//            } catch (UnknownCommandException e) {
-//                System.out.println(e.getMessage());
-//            } catch (KatheryneException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//    }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input so that it can be rendered via the GUI
      */
     protected String getResponse(String input) {
         try {
-            String userInput = ui.readCommand();
-            Command c = Parser.parse(userInput);
-//            c.execute(lst, ui, storage);
+            Command c = Parser.parse(input);
+            return c.getResponse(lst, storage);
         } catch (UnknownCommandException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (KatheryneException e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
-        return "Katheryne heard: " + input;
+    }
+
+    /**
+     * Runs Katheryne via CLI. Is deprecated.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Katheryne k = new Katheryne();
+        k.run();
+    }
+
+    /**
+     * Runs Katheryne, for use with CLI, by continuously reading userInputs and responding.
+     * Is deprecated.
+     */
+    public void run() {
+        ui.greet(lst);
+
+        while (ui.getIsRunning()) {
+            try {
+                String userInput = ui.readCommand();
+                Command c = Parser.parse(userInput);
+                c.execute(lst, ui, storage);
+            } catch (UnknownCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (KatheryneException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

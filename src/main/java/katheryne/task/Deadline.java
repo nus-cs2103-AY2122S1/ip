@@ -20,7 +20,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate dateDueBy) {
         super(description);
-        this.stringDueBy = dateDueBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.stringDueBy = dateDueBy.format(DateTimeFormatter.ofPattern("d MMM YYYY"));
         this.dateDueBy = dateDueBy;
     }
 

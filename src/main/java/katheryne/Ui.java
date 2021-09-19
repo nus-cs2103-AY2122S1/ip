@@ -3,7 +3,7 @@ package katheryne;
 import java.util.Scanner;
 
 /**
- * Deals with user interactions.
+ * Deals with user interactions in the CLI.
  */
 public class Ui {
     private boolean isRunning;

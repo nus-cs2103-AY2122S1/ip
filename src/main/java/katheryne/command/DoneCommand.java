@@ -1,6 +1,7 @@
 package katheryne.command;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -28,6 +29,15 @@ public class DoneCommand extends Command {
         try {
             this.index = Integer.parseInt(processedRemainingText[0]) - 1;
         } catch (NumberFormatException e) {
+            throw new WrongIndexException();
+        }
+    }
+
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        boolean isDone = taskList.doTask(index);
+        if (isDone) {
+            return Message.getDoneMessage(taskList.getTask(index));
+        } else {
             throw new WrongIndexException();
         }
     }

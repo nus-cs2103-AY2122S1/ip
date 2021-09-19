@@ -1,6 +1,7 @@
 package katheryne.command;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -22,6 +23,15 @@ public class FindCommand extends Command {
         this.keyword = processedRemainingText[0];
     }
 
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        TaskList subList = taskList.tasksContaining(keyword);
+        if (subList.isEmpty()) {
+            return Message.getTasksNotFoundMessage(keyword);
+        } else {
+            return Message.getFoundTasksMessage(subList, keyword);
+        }
+    }
+    
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws KatheryneException {
         TaskList subList = taskList.tasksContaining(keyword);
@@ -32,7 +42,6 @@ public class FindCommand extends Command {
                     + "The number of tasks is " + subList.getSize() + ".");
             ui.listTasks(subList);
         }
-
     }
 
 }

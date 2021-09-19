@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import katheryne.KatheryneException;
+import katheryne.Message;
 import katheryne.Storage;
 import katheryne.TaskList;
 import katheryne.Ui;
@@ -35,6 +36,12 @@ public class DeadlineCommand extends Command {
             throw new KatheryneException(
                     "The by time is in the wrong format. It must be in the format YYYY-MM-DD");
         }
+    }
+
+    @Override public String getResponse(TaskList taskList, Storage storage) throws KatheryneException {
+        Deadline deadline = new Deadline(description, atByDate);
+        taskList.add(deadline);
+        return Message.addDeadline(deadline, taskList);
     }
 
     /**

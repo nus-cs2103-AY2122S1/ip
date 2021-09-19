@@ -41,9 +41,11 @@ public abstract class Command {
             throw new UnknownCommandException();
         }
     }
+    
+    public abstract String getResponse(TaskList taskList, Storage storage) throws KatheryneException;
 
     /**
-     * Executes the command.
+     * Executes the command. For use with CLI; deprecated.
      *
      * @param taskList A container for tasks which contains Katheryne's tasks.
      * @param ui The Ui used for the user interface.
