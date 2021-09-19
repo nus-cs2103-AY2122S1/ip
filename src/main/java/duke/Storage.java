@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.task.DeadlineTask;
+import duke.task.DoWithinPeriodTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
+
 
 /**
  * Class to abstract the storing of commands
@@ -42,8 +44,7 @@ public class Storage {
             File dir = new File("data");
             boolean isDeleted = false;
             boolean isCreated = false;
-            boolean isDirectory = dir.mkdirs();
-
+            boolean isDirectory = dir.exists() ? true : dir.mkdirs();
             File data = new File(dir, "duke.txt");
             if (isDirectory && data.exists()) {
                 isDeleted = data.delete();
@@ -79,6 +80,9 @@ public class Storage {
             } else if (task instanceof EventTask) {
                 EventTask event = (EventTask) task;
                 storeData.write(event.writeToFile());
+            } else if (task instanceof DoWithinPeriodTask) {
+                DoWithinPeriodTask doWithinPeriodTask = (DoWithinPeriodTask) task;
+                storeData.write(doWithinPeriodTask.writeToFile());
             } else if (task instanceof ToDoTask) {
                 ToDoTask todo = (ToDoTask) task;
                 storeData.write(todo.writeToFile());
@@ -124,8 +128,11 @@ public class Storage {
                 case EVENT:
                     addEvent(data, tasks);
                     break;
+                case DO_WITHIN_PERIOD:
+                    addDoWithinPeriod(data, tasks);
+                    break;
                 case TODO:
-                    addTodo(data, tasks);
+                    addToDo(data, tasks);
                     break;
                 case UNKNOWN:
                 default:
@@ -161,7 +168,19 @@ public class Storage {
         }
     }
 
-    private void addTodo(String[] data, List<Task> tasks) {
+    private void addDoWithinPeriod(String[] data, List<Task> tasks) {
+        assert data != null : "data has not been initialised";
+        try {
+            if (data.length == 5) {
+                DoWithinPeriodTask doWithinPeriodTask = new DoWithinPeriodTask(data[1], data[2], data[3], data[4]);
+                tasks.add(doWithinPeriodTask);
+            }
+        } catch (DateTimeParseException ignored) {
+            // Don't need to display or return anything since this task is corrupted and won't be added to the TaskList
+        }
+    }
+
+    private void addToDo(String[] data, List<Task> tasks) {
         assert data != null : "data has not been initialised";
         if (data.length == 3) {
             ToDoTask todo = new ToDoTask(data[1], data[2]);

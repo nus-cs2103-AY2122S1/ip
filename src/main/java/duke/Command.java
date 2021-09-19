@@ -3,6 +3,7 @@ package duke;
 import java.time.format.DateTimeParseException;
 
 import duke.task.DeadlineTask;
+import duke.task.DoWithinPeriodTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
 
@@ -21,6 +22,7 @@ public class Command {
         EVENT,
         FIND,
         LIST,
+        DO_WITHIN_PERIOD,
         TODO,
         UNKNOWN
     }
@@ -57,6 +59,9 @@ public class Command {
                 break;
             case LIST:
                 this.typeOfCommand = CommandTypes.LIST;
+                break;
+            case DO_WITHIN_PERIOD:
+                this.typeOfCommand = CommandTypes.DO_WITHIN_PERIOD;
                 break;
             case TODO:
                 this.typeOfCommand = CommandTypes.TODO;
@@ -240,6 +245,36 @@ public class Command {
         return output;
     }
 
+    private String addDoWithinPeriod(String taskDetails, TaskList tasks) throws DukeException {
+        String output = "";
+        if ((taskDetails == null) || !(taskDetails.contains(" /within "))) {
+            throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                    + "do_within_period <Description> /within <dd/MM/yyyy HHmm> and\n"
+                    + "<dd/MM/yyyy HHmm>");
+        } else {
+            String[] values = taskDetails.split(" /within ", 2);
+            if (!values[1].trim().contains(" and ")) {
+                throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                        + "do_within_period <Description> /within <dd/MM/yyyy HHmm> and\n"
+                        + "<dd/MM/yyyy HHmm>");
+            }
+            String[] deadlineDateTimes = values[1].trim().split(" and ");
+            try {
+                DoWithinPeriodTask doWithinPeriod = new DoWithinPeriodTask(values[0], deadlineDateTimes[0],
+                        deadlineDateTimes[1]);
+                tasks.addTask(doWithinPeriod);
+                output += "Got it. I've added this task:\n";
+                output += "  " + doWithinPeriod + "\n";
+                output += "Now you have " + tasks.getTaskListLength() + " tasks in the list.";
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Incorrect Format of the DoWithinPeriod Command!!, \nCorrect Format --> "
+                        + "do_within_period <Description> /within <dd/MM/yyyy HHmm> and\n"
+                        + "<dd/MM/yyyy HHmm>");
+            }
+        }
+        return output;
+    }
+
     /**
      * Method to check for the ToDO Command and render the UI
      *
@@ -286,6 +321,8 @@ public class Command {
             return searchAndDisplayTaskList(taskDetails, tasks);
         case LIST:
             return displayTaskList(taskDetails, tasks);
+        case DO_WITHIN_PERIOD:
+            return addDoWithinPeriod(taskDetails, tasks);
         case TODO:
             return addTodo(taskDetails, tasks);
         case UNKNOWN:
