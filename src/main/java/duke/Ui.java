@@ -26,14 +26,15 @@ public class Ui {
      * @return string of list.
      */
     public String sayList(ArrayList<Task> list) {
-        String str = "Here are the tasks in your tasks:\n";
+        StringBuilder string = new StringBuilder();
+        string.append("Here are the tasks in your tasks:\n");
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
             if (list.get(i) != null) {
-                str = str + num + "." + list.get(i).toString() + "\n";
+                string.append(num).append(".").append(list.get(i).toString()).append("\n");
             }
         }
-        return str;
+        return string.toString();
     }
 
     /**
@@ -110,13 +111,14 @@ public class Ui {
      * @return String representing the tasks.
      */
     public String sayFind(ArrayList<Task> list) {
-        String str = "Here are the matching tasks in your list:\n";
+        StringBuilder string = new StringBuilder();
+        string.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
             if (list.get(i) != null) {
-                str = str + num + "." + list.get(i).toString() + "\n";
+                string.append(num).append(".").append(list.get(i).toString()).append("\n");
             }
         }
-        return str;
+        return string.toString();
     }
 }

@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke("./Data/Duke.txt");
 
+    /**
+     * Starts the fxml for the GUI of Duke.
+     *
+     * @param stage The stage of the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {
