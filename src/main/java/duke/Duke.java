@@ -53,4 +53,8 @@ public class Duke {
         } while(command.shouldExecuteNext());
         storage.save(ui, taskList);
     }
+
+    public void save() {
+        storage.save(ui, taskList);
+    }
 }
