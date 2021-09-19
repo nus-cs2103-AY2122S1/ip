@@ -47,7 +47,7 @@ Format: `event DESCRIPTION /at DATE`
 Examples: 
 
 - `event Yeri concert /at 2022-01-11` (date format supported)
-- `deadline Lunch with Wendy /at 1pm tomorrow` (date is treated as a string)
+- `event Lunch with Wendy /at 1pm tomorrow` (date is treated as a string)
 
 
 
