@@ -200,6 +200,7 @@ public class TaskList {
      * @throws DukeException If the user specified an invalid index.
      */
     public String finishTask(int index) throws DukeException {
+        assert index > 0;
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
@@ -216,6 +217,7 @@ public class TaskList {
      * @throws DukeException If the user specified an invalid index.
      */
     public String deleteTask(int index) throws DukeException {
+        assert index > 0;
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
@@ -236,6 +238,7 @@ public class TaskList {
      * @throws DukeException If keyword is invalid.
      */
     public String findTasks(String keyword) throws DukeException {
+        assert keyword != null;
         // if 'keyword' contains more than one word or any spaces
         if (keyword.trim().split("\\s+").length > 1) {
             throw new DukeException("Invalid keyword, please enter only one keyword without blanks");

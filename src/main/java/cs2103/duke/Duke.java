@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Duke {
     private TaskList tasks;
     private Ui ui;
-    private boolean canExit = false;
 
     public Duke() {
         Storage storage = new Storage();
@@ -28,6 +27,7 @@ public class Duke {
      * @return A string representing the response to the user.
      */
     public String getResponse(String input) {
+        assert input != null;
         String result;
         try {
             return ui.handleInput(input, tasks);
