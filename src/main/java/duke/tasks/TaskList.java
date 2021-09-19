@@ -19,7 +19,7 @@ import duke.ui.Ui;
  */
 public class TaskList {
 
-    /** The list of Task. */
+    /** The list of Tasks. */
     private final ArrayList<Task> taskList;
 
     /**

@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * Abstract command class.
  */
 public abstract class Command {
-    /** indicates when Duke should terminate. */
+    /** Indicates when Duke should terminate. */
     protected boolean isExit = false;
 
     /**
