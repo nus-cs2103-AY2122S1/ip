@@ -35,6 +35,9 @@ public class Ui {
             throw new EmptyDescriptionException("deadline");
         }
         String task = input.substring(len + 1, input.indexOf('/') - 1);
+        if (!input.substring(input.indexOf('/') + 1, input.indexOf('/') + 4).equals("by ")) {
+            throw new InvalidCommandException(input);
+        }
         String by = input.substring(input.indexOf('/') + 4);
         Deadline addition = new Deadline(task, by);
         if (arListTask.contains(addition)) {
@@ -62,6 +65,9 @@ public class Ui {
             throw new EmptyDescriptionException("event");
         }
         String task = input.substring(len + 1, input.indexOf('/') - 1);
+        if (!input.substring(input.indexOf('/') + 1, input.indexOf('/') + 4).equals("at ")) {
+            throw new InvalidCommandException(input);
+        }
         String at = input.substring(input.indexOf('/') + 4);
         Event addition = new Event(task, at);
         if (arListTask.contains(addition)) {
