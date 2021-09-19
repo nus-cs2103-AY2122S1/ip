@@ -1,6 +1,16 @@
-# Duke project template
+# Project Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a task manager application with a chatbot-like interface. 
+
+It manages your tasks for you so you can focus on more important stuff.
+
+<img width="400" alt="Ui" src="https://user-images.githubusercontent.com/68073477/133919775-ff4d2fe7-8c61-4b27-8b9b-cead14975c09.png">
+
+# User Guide
+
+## Quick start
+
+
 
 ## Setting up in Intellij
 
