@@ -1,0 +1,4 @@
+T/1/get book
+T/0/return book
+E/0/attend event /Sunday, 4pm
+T/0/get groceries

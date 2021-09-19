@@ -15,3 +15,8 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+src/main/java/TodoTask.class
+src/main/java/DeadlineTask.class
+src/main/java/Duke.class
+src/main/java/EventTask.class
+src/main/java/Task.class
