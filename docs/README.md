@@ -38,6 +38,7 @@ If a task is done, the box will be `[x]`, else `[]`.
 
 Types are T, D and E, where T is task, D is deadline, E is event.
 </div>
+<br>
 
 ### Adding a task: `todo`,`deadline` and `event` <a name="add"/>
 Since there are three types of tasks, there are three different commands to add the three different types of tasks.
