@@ -37,6 +37,7 @@ public class Storage {
      * @param tasks The Task List of the Duke
      */
     public void saveTaskList(TaskList tasks) {
+        assert tasks != null : "Tasklist is not initialized!";
         UI ui = new UI();
         try {
             File dir = new File("data");

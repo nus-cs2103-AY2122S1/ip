@@ -9,13 +9,13 @@ import duke.task.Task;
  */
 public class TaskList {
 
-    private final List<Task> taskList;
+    private final List<Task> tasks;
 
     /**
      * Constructor to initialize the Task List
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -23,8 +23,8 @@ public class TaskList {
      * @param storedTasks The Tasks initially Stored in the Duke
      */
     public TaskList(List<Task> storedTasks) {
-        this.taskList = new ArrayList<>();
-        taskList.addAll(storedTasks);
+        this.tasks = new ArrayList<>();
+        tasks.addAll(storedTasks);
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @param task The Task to be added in the Task List
      */
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -40,8 +40,9 @@ public class TaskList {
      * @param index The Index of the Task to be deleted
      * @return The deleted Task which was initially at the given Index
      */
-    public Task deleteTaskAtIndex(int index) {
-        return taskList.remove(index);
+    public Task deleteTask(int index) {
+        assert ((index >= 0) && (index < tasks.size()));
+        return tasks.remove(index);
     }
 
     /**
@@ -50,7 +51,8 @@ public class TaskList {
      * @return The Task at the specified Index
      */
     public Task getTask(int index) {
-        return taskList.get(index);
+        assert ((index >= 0) && (index < tasks.size())) : "Index out of limit (0 - Size)";
+        return tasks.get(index);
     }
 
     /**
@@ -58,7 +60,7 @@ public class TaskList {
      * @return The number of Tasks in the Task List
      */
     public int getTaskListLength() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -66,7 +68,8 @@ public class TaskList {
      * @param index The Index of the Task to be Marked as Complete
      */
     public void completeTask(int index) {
-        taskList.get(index).markAsCompleted();
+        assert ((index >= 0) && (index < tasks.size())) : "Index out of limit (0 - Size)";
+        tasks.get(index).markAsCompleted();
     }
 
     /**
@@ -76,8 +79,7 @@ public class TaskList {
      */
     public TaskList searchTaskList(String description) {
         TaskList matchingTasks = new TaskList();
-        for (Task task : taskList) {
-            System.out.println(task);
+        for (Task task : tasks) {
             if (task.getDescription().contains(description)) {
                 matchingTasks.addTask(task);
             }
