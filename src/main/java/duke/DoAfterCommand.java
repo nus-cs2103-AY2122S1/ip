@@ -21,6 +21,12 @@ public class DoAfterCommand implements Command {
 
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String format = "Correct format do... after... :\n"
+                + "To set a task to begin after another task:\n"
+                + "  do x after task y (x and y are task numbers)\n"
+                + "To set a task to begin after a date and time:\n"
+                + "  do x after yyyy-MM-dd HH:mm";
+
         try {
             String[] words = userInput.split(" ");
             int taskNum = Integer.parseInt(words[1]);
@@ -32,20 +38,22 @@ public class DoAfterCommand implements Command {
                 taskToDoAfter.setDoAfterTask(taskToDoBefore);
                 storage.saveTasks(tasks);
                 return ui.getSetAfterTaskMessage(taskToDoAfter, taskToDoBefore);
-            } else {
+            } else if (words.length > 4) {
                 LocalDateTime refDateTime = LocalDateTime.parse(
                         words[3] + " " + words[4],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                 taskToDoAfter.setDoAfterDateTime(refDateTime);
                 storage.saveTasks(tasks);
                 return ui.getSetAfterDateTimeMessage(taskToDoAfter, refDateTime);
+            } else {
+                throw new DukeException("Please enter a date and time behind 'after'\n\n" + format);
             }
         } catch (NumberFormatException nfe) {
-            throw new DukeException("Please only enter an integer after command 'do' and 'after task'!");
+            throw new DukeException("Please only enter an integer after command 'do' and 'after task'!\n\n" + format);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("One of the task entered does not exist!");
         } catch (DateTimeParseException e) {
-            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
+            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm\n\n" + format);
         }
     }
 

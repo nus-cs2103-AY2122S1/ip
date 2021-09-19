@@ -85,7 +85,7 @@ public abstract class Task {
         if (this != task) {
             this.taskToStartAfter = task;
         } else {
-            throw new DukeException("");
+            throw new DukeException("A task cannot be set to begin after itself!");
         }
     }
 

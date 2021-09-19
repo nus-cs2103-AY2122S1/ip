@@ -21,6 +21,12 @@ public class AfterCommand implements Command {
 
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String format = "Correct format after... :\n"
+                + "To see the tasks to begin after another task:\n"
+                + "  after task x (x is a task number)\n"
+                + "To see the tasks to begin after a date and time:\n"
+                + "  after yyyy-MM-dd HH:mm";
+
         try {
             if (this.userInput.startsWith("after task")) {
                 int taskNum = Integer.parseInt(userInput.substring(11));
@@ -35,11 +41,11 @@ public class AfterCommand implements Command {
                 return ui.getTasksAfterDateTime(tasksToDoAfter, refDateTime);
             }
         } catch (NumberFormatException nfe) {
-            throw new DukeException("Please only enter an integer after command 'after task'!");
+            throw new DukeException("Please only enter an integer after command 'after task'!\n\n" + format);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number " + userInput.substring(11) + " does not exist!");
         } catch (DateTimeParseException e) {
-            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm");
+            throw new DukeException("The time must be in this format: yyyy-MM-dd HH:mm\n\n" + format);
         }
     }
 
