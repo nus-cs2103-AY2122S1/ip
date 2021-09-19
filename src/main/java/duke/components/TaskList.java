@@ -177,7 +177,7 @@ public class TaskList {
         String tasks = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < tasksFound.size(); i++) {
             int index = i + 1;
-            tasks += index + ". " + tasksFound.get(i).toString();
+            tasks += index + ". " + tasksFound.get(i).toString() + "\n";
         }
         return tasks;
     }
@@ -243,7 +243,7 @@ public class TaskList {
             storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
         }
 
-        return ui.displayAddTaskMessage(newDeadline) + ui.displayTaskNumber(this);
+        return ui.displayAddTaskMessage(newDeadline) + "\n" + ui.displayTaskNumber(this);
     }
 
     /**
@@ -291,7 +291,7 @@ public class TaskList {
             storage.appendTaskToFile(inputs.get(i).toString() + System.lineSeparator());
         }
 
-        return ui.displayAddTaskMessage(newEvent) + ui.displayTaskNumber(this);
+        return ui.displayAddTaskMessage(newEvent) + "\n" + ui.displayTaskNumber(this);
     }
 
     /**
