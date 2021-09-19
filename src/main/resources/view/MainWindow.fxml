@@ -9,10 +9,9 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="duke.javafx.MainWindow">
-    <TextField fx:id="userInput" layoutY="558.0" mouseTransparent="true" onAction="#handleUserInput" prefHeight="42.0"
-               prefWidth="724.0" promptText="Message..." style="-fx-border-radius: 20; -fx-background-radius: 20;"
-               AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="86.0"
-               AnchorPane.topAnchor="555.0">
+    <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="724.0"
+               style="-fx-border-radius: 20; -fx-background-radius: 20;" AnchorPane.bottomAnchor="10.0"
+               AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="555.0">
         <padding>
             <Insets left="10.0" right="10.0"/>
         </padding>

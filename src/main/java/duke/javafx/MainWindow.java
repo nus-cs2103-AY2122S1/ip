@@ -43,6 +43,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(greet, dukeImage, false)
         );
+        userInput.setPromptText("Message...");
     }
 
     /**
