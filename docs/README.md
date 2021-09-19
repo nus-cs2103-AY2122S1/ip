@@ -1,7 +1,7 @@
 # User Guide
 Welcome to Duke! Duke is your personal desktop-based task manager, available both on the command line, as well as on Graphical User Interface (GUI).
 
-![homePage](/docs/Homepage.png)
+![Homepage](/docs/Homepage.png)
 
 Continue reading to find out more.
 ## Features 
@@ -19,19 +19,19 @@ Duke provides you with many features to optimise your task management. Here's a 
 You can input 3 types of tasks; ```todo```, ```deadline``` and ```event```.
 > For deadline and event tasks, you will need to specify a date and time as well.
 
-![addTasks](/docs/addTask.png)
+![addTask](/docs/addTask.png)
 
 ### List all the tasks in the task list
 
 You can ask Duke to list all the tasks in your task list at a particular time.
 
-![listTasks](/docs/showTasks.png)
+![showTasks](/docs/showTasks.png)
 
 ### Mark a task as done
 
 You can check off a task once you've finished it.
 
-![markDone](/docs/doneTask.png)
+![doneTask](/docs/doneTask.png)
 
 ### Delete a task
 
