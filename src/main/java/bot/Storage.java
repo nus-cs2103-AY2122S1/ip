@@ -24,6 +24,13 @@ public class Storage {
      */
     private static void write(List<String> texts) {
         try {
+            // Create save file if not present
+            File f = new File(getAbsolutePath());
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+
             FileWriter writer = new FileWriter(getAbsolutePath());
             for (String s : texts) {
                 writer.write(s + System.lineSeparator());

@@ -19,9 +19,10 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
+     * Constructor for DialogBox
      *
-     * @param l
-     * @param iv
+     * @param l label with text for dialog box
+     * @param iv image for dialog box
      */
     public DialogBox(Label l, ImageView iv, String colorHex) {
         text = l;
@@ -29,7 +30,6 @@ public class DialogBox extends HBox {
 
         text.setWrapText(true);
         text.setFont(Font.font("Cambria", 16));
-        // FontMetrics metrics = Toolkit.getToolkit().getFontLoader().getFontMetrics(text.getFont());
         text.setPadding(new Insets(0, 10, 0, 10));
 
         displayPicture.setFitWidth(100.0);
@@ -50,11 +50,25 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Factory method for user dialog box
+     *
+     * @param l text label
+     * @param iv dialog image
+     * @return user dialog box
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
 
         return new DialogBox(l, iv, DialogBox.USER_BG_COLOR);
     }
 
+    /**
+     * Factory method for duke dialog box
+     *
+     * @param l text label
+     * @param iv dialog image
+     * @return duke dialog box
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv, DialogBox.DUKE_BG_COLOR);
         db.flip();

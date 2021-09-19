@@ -50,7 +50,7 @@ public class DoneCommand extends Command {
      * @return task done message
      */
     public String[] getTaskDoneMessage(Task task) {
-        return new String[]{
+        return new String[] {
             "diz iz marked donez:",
             Ui.TEXT_BLOCK_MARGIN + task.toString()
         };

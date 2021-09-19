@@ -3,6 +3,7 @@ package gui;
 import java.util.Optional;
 
 import bot.Bot;
+import bot.Ui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -33,7 +34,6 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -51,7 +51,6 @@ public class Gui extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // more code to be added here later
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -81,7 +80,7 @@ public class Gui extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //
+        // Set up listeners
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -90,32 +89,25 @@ public class Gui extends Application {
             handleUserInput();
         });
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Display hello message
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(
+                        new Label(String.join(",", Ui.START_MESSAGES)),
+                        new ImageView(duke))
+        );
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         String userInputText = userInput.getText();
         if (userInputText.equals("bye")) {
+            // Handle bye popup
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Exit Duke");
             alert.setHeaderText("You are about to exit Duke");
@@ -126,6 +118,7 @@ public class Gui extends Application {
                 Platform.exit();
             }
         } else {
+            // Regular chat flow
             Label userText = new Label(userInputText);
             Label dukeText = new Label((String.join("\n", bot.getOutput(userInput.getText()))));
             dialogContainer.getChildren().addAll(
@@ -134,14 +127,6 @@ public class Gui extends Application {
             );
         }
         userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 
 }

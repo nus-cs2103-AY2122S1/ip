@@ -24,22 +24,6 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye message dialogue
-     */
-    public static void printGoodbye() {
-        print(END_MESSAGES);
-    }
-
-    /**
-     * Prints given input string in the bot dialogue
-     *
-     * @param input string to print in dialogue
-     */
-    public static void printEcho(String input) {
-        print(new String[]{input});
-    }
-
-    /**
      * Prints given messages in sequence in the bot
      * dialogue
      *
@@ -52,15 +36,6 @@ public class Ui {
             System.out.println(RESPONSE_BLOCK_MARGIN + TEXT_BLOCK_MARGIN + message);
         }
         System.out.println(RESPONSE_BLOCK_MARGIN + DIVIDER);
-    }
-
-    /**
-     * Prints given message without dividers
-     *
-     * @param message message to print
-     */
-    public static void printNoDivider(String message) {
-        System.out.println(RESPONSE_BLOCK_MARGIN + TEXT_BLOCK_MARGIN + message);
     }
 
 }

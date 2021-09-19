@@ -110,12 +110,12 @@
             <property name="severity" value="warning"/>
         </module>
 
-        <module name="StaticVariableName">
-            <!-- Validates static, non-final fields against the supplied expression. -->
-            <metadata name="altname" value="StaticVariableName"/>
-            <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>
-            <property name="severity" value="warning"/>
-        </module>
+<!--        <module name="StaticVariableName">-->
+<!--            &lt;!&ndash; Validates static, non-final fields against the supplied expression. &ndash;&gt;-->
+<!--            <metadata name="altname" value="StaticVariableName"/>-->
+<!--            <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>-->
+<!--            <property name="severity" value="warning"/>-->
+<!--        </module>-->
 
 <!--        <module name="MemberName">-->
 <!--            &lt;!&ndash; Validates non-static members against the supplied expression. &ndash;&gt;-->
