@@ -6,14 +6,7 @@ import duke.task.Task;
  * A class in charge of the interaction to {@code Duke} users.
  */
 public class Ui {
-    private static final String LOGO = "____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String GREETING_TEXT = "Hello from \n"
-            + LOGO
+    private static final String GREETING_TEXT = "Hello, I'm Duke!\n"
             + "How can I help you?";
 
     private static final String FAREWELL_TEXT = "Why do you choose to leave me!";

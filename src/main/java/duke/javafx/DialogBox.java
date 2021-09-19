@@ -11,9 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -21,12 +22,11 @@ import javafx.scene.paint.Color;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private final boolean isWarning;
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
-
-    private final boolean isWarning;
+    private Circle circle;
 
     private DialogBox(String text, Image img, boolean isWarning) {
         try {
@@ -44,17 +44,7 @@ public class DialogBox extends HBox {
         if (this.isWarning) {
             dialog.setTextFill(Color.color(1, 0, 0));
         }
-        displayPicture.setImage(img);
-    }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        circle.setFill(new ImagePattern(img));
     }
 
     public static DialogBox getUserDialog(String text, Image img, boolean isWarning) {
@@ -65,5 +55,17 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img, isWarning);
         db.flip();
         return db;
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
+        dialog.setStyle("-fx-border-radius: 0 10 10 10; -fx-border-color: #A0E7E5; -fx-border-width: 2; "
+                + "-fx-background-color: white; -fx-background-radius: 0 10 10 10;");
     }
 }
