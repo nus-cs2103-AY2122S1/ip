@@ -9,18 +9,22 @@ public class Ui {
     /**
      * Send a greeting to the user.
      */
-    public static void greet() {
-        System.out.println(line + "\n"
+    public static String greet() {
+        String greet = line + "\n"
                 + "Hello I'm Duke\n"
                 + "What can I do for you?\n"
-                + line);
+                + line;
+        System.out.println(greet);
+        return greet;
     }
 
     /**
      * Say goodbye to the user.
      */
-    public static void bye() {
-        System.out.println(line + "\nBye. Hope to see you again soon!\n" + line);
+    public static String bye() {
+        String bye = line + "\nBye. Hope to see you again soon!\n" + line;
+        System.out.println(bye);
+        return bye;
     }
 
     /**
@@ -28,13 +32,15 @@ public class Ui {
      *
      * @param tasks List of tasks.
      */
-    public static void list(TaskList tasks) {
-        System.out.println(line);
-        System.out.println("Here are tasks in your list:");
+    public static String list(TaskList tasks) {
+        String list = line + "\n" + "Here are tasks in your list:\n";
+
         for (int index = 1; index <= tasks.size(); index++) {
-            System.out.println(index + "." + tasks.get(index - 1).toString());
+            list += index + "." + tasks.get(index - 1).toString() + "\n";
         }
-        System.out.println(line);
+        list += line + "\n";
+        System.out.println(list);
+        return list;
     }
 
     /**
@@ -42,10 +48,10 @@ public class Ui {
      *
      * @param task A Task be done by user.
      */
-    public static void done(Task task) {
-        System.out.println(line);
-        System.out.println("done:\n" + task.toString());
-        System.out.println(line);
+    public static String done(Task task) {
+        String done = line + "\n" + "done:\n" + task.toString() + line + "\n";
+        System.out.println(done);
+        return done;
     }
 
     /**
@@ -53,11 +59,12 @@ public class Ui {
      *
      * @param task A Task be deleted by user.
      */
-    public static void delete(TaskList tasks, Task task) {
-        System.out.println(line);
-        System.out.println("removed:\n" + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println(line);
+    public static String delete(TaskList tasks, Task task) {
+        String delete = line + "\n" + "removed:\n" + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n"
+                + line + "\n";
+        System.out.println(delete);
+        return delete;
     }
 
     /**
@@ -67,12 +74,13 @@ public class Ui {
      * @param tasks A list of task.
      * @param task A Task be added by user.
      */
-    public static void add(TaskList tasks, Task task) {
-        System.out.println(line);
-        System.out.println("added: " + task
+    public static String add(TaskList tasks, Task task) {
+        String add = line + "\n" + "added: " + task
                 + "\nNow you have " + tasks.size() + ""
-                + " tasks in the list.");
-        System.out.println(line);
+                + " tasks in the list.\n"
+                + line + "\n";
+      System.out.println(add);
+      return add;
     }
 
     /**
@@ -81,20 +89,23 @@ public class Ui {
      * @param taskList A list of task.
      * @param keyword keyword user want to search by.
      */
-    public static void find(TaskList taskList, String keyword) {
-        System.out.println(line);
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(taskList.find(keyword));
-        System.out.println(line);
+    public static String find(TaskList taskList, String keyword) {
+        String find = line + "\n" + "Here are the matching tasks in your list:\n"
+                + taskList.find(keyword)
+                + line + "\n";
+        System.out.println(find);
+        return find;
     }
 
     /**
      * Tell user a error occur while loading local data
      */
-    public void showLoadingError() {
-        System.out.println(line);
-        System.out.println("Cannot Load From Data.\n");
-        System.out.println(line);
+    public String showLoadingError() {
+        String showLoadingError = line + "\n"
+                + "Cannot Load From Data.\n"
+                + line + "\n";
+        System.out.println(showLoadingError);
+        return showLoadingError;
     }
 
 }

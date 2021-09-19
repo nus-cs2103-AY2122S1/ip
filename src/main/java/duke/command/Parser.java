@@ -145,7 +145,7 @@ public class Parser {
         String time;
         LocalDate parsedTime;
         time = userInput.substring(userInput.lastIndexOf("|") + 2);
-        parsedTime = LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        parsedTime = LocalDate.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return parsedTime;
     }
 

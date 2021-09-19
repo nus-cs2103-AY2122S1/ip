@@ -31,6 +31,21 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Initializes the duke.Duke chatbot program for the duke.Launcher
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/tasks.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
     /**
      * Run the programme of Duke.
      */
@@ -39,37 +54,49 @@ public class Duke {
         ui.greet();
         Scanner keyboardIn = new Scanner(System.in);
         do {
-            try {
-                input = keyboardIn.nextLine();
-                Parser parser = new Parser(input);
-                String operation = parser.getOperationType();
-                switch (operation) {
+            input = keyboardIn.nextLine();
+            getResponse(input);
+
+        } while (!input.equals("bye"));
+        storage.updateData();
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            Parser parser = new Parser(input);
+            String operation = parser.getOperationType();
+            switch (operation) {
                 case "bye": {
-                    ui.bye();
+                    output = ui.bye();
                     break;
                 }
                 case "list": {
-                    ui.list(tasks);
+                    output = ui.list(tasks);
                     break;
                 }
                 case "done": {
                     int index = parser.getIndex();
                     tasks.markDone(index - 1);
-                    ui.done(tasks.get(index - 1));
+                    output = ui.done(tasks.get(index - 1));
                     break;
                 }
                 case "delete": {
                     int index = parser.getIndex();
                     Task task = tasks.get(index - 1);
                     tasks.delete(index - 1);
-                    ui.delete(tasks, task);
+                    output = ui.delete(tasks, task);
                     break;
                 }
                 case "todo": {
                     String description = parser.getTask();
                     Task task = new Todo(description);
                     tasks.add(task);
-                    ui.add(tasks, task);
+                    output = ui.add(tasks, task);
                     break;
                 }
                 case "event": {
@@ -77,7 +104,7 @@ public class Duke {
                     LocalDate time = parser.getTime();
                     Task task = new Event(description, time);
                     tasks.add(task);
-                    ui.add(tasks, task);
+                    output = ui.add(tasks, task);
                     break;
                 }
                 case "deadline": {
@@ -85,28 +112,21 @@ public class Duke {
                     LocalDate time = parser.getTime();
                     Task task = new Deadline(description, time);
                     tasks.add(task);
-                    ui.add(tasks, task);
+                    output = ui.add(tasks, task);
                     break;
                 }
                 case "find": {
                     String keyword = parser.getTask();
-                    ui.find(tasks, keyword);
+                    output = ui.find(tasks, keyword);
                     break;
                 }
                 default:
-                }
-
-            } catch (DukeException e) {
-                System.out.println(e.toString());
             }
-        } while (!input.equals("bye"));
-        storage.updateData();
-    }
-
-
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+            return output;
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -23,7 +24,12 @@ public class TaskList {
         String[] operationType = new String[]{"bye", "done", "delete", "list",
             "todo", "deadline", "event", "find"};
 
-        return operation.contains(operation);
+        for (String str : operationType) {
+            if (str.equals(operation)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

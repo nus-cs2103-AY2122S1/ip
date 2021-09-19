@@ -21,11 +21,11 @@ public class Event extends Task {
 
     @Override
     public String formatForFile() {
-        return "E " + super.formatForFile() + " | " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "E " + super.formatForFile() + " | " + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
     }
 }
