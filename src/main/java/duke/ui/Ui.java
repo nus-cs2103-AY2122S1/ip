@@ -39,9 +39,7 @@ public class Ui {
                 + "       " + "[" + type + "]"
                 + doneStatus + " "
                 + taskDescription + "\n"
-                + "     Now you have " + tList.length() + " tasks in the list.\n"
-                + "     If you would like to add notes for this task,\n"
-                + "     Use the command \"notes [task name] / [contents of notes]\"";
+                + "     Now you have " + tList.length() + " tasks in the list.\n";
     }
 
     /**

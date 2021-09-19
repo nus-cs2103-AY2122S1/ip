@@ -50,7 +50,8 @@ public class Parser {
         tList.addTask(newEvent);
 
         String textToAppend = newEvent.showType() + " | "
-                + ((newEvent.checkDone()).equals("[X]") ? "1" : "0") + " | "
+                + (newEvent.checkDone().equals("[X]") ? "1" : "0") + " | "
+                + (newEvent.checkNotes().equals("[N]") ? "N" : "X") + " | "
                 + newEvent.showTaskName() + " | "
                 + newEvent.showWhen() + "\n";
 
@@ -80,7 +81,8 @@ public class Parser {
         tList.addTask(newDeadline);
 
         String textToAppend = newDeadline.showType() + " | "
-                + ((newDeadline.checkDone()).equals("[X]") ? "1" : "0") + " | "
+                + (newDeadline.checkDone().equals("[X]") ? "1" : "0") + " | "
+                + (newDeadline.checkNotes().equals("[N]") ? "N" : "X") + " | "
                 + newDeadline.showTaskName() + " | "
                 + newDeadline.showWhen() + "\n";
 
@@ -111,6 +113,7 @@ public class Parser {
 
         String textToAppend = newToDo.showType() + " | "
                 + (newToDo.checkDone().equals("[X]") ? "1" : "0") + " | "
+                + (newToDo.checkNotes().equals("[N]") ? "N": "X") + " | "
                 + newToDo.showFullDescription() + "\n";
         try {
             this.storage.save(textToAppend, true);
