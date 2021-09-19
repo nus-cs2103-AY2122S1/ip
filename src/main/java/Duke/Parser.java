@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -109,7 +111,7 @@ public class Parser {
                 }
                 String task = input.split(" ")[1];
                 Todo todo = new Todo(task);
-                // arr.add(new Todo(task));
+                // arr.add(new Duke.Todo(task));
                 try {
                     Scanner reader = new Scanner(storage.getFile());
                     List<String> lines = new ArrayList<>();
@@ -149,7 +151,7 @@ public class Parser {
             }
         } else if (input.startsWith("deadline")) {
             String[] n = input.split(" ", 2)[1].split(" /by ");
-            // arr.add(new Deadline(n[0], n[1]));
+            // arr.add(new Duke.Deadline(n[0], n[1]));
             String task = n[0];
             LocalDate time = LocalDate.parse(n[1]);
             Deadline deadline = new Deadline(task, time);
@@ -189,7 +191,7 @@ public class Parser {
             System.out.println(reply);
         } else if (input.startsWith("event")) {
             String[] n = input.split(" ", 2)[1].split(" /at ");
-            // arr.add(new Event(n[0], n[1]));
+            // arr.add(new Duke.Event(n[0], n[1]));
             String task = n[0];
             LocalDate time = LocalDate.parse(n[1]);
             Event event = new Event(task, time);
@@ -229,7 +231,7 @@ public class Parser {
             System.out.println(reply);
         } else if (input.startsWith("delete")) {
             int pos = Integer.parseInt(input.split(" ")[1]);
-            //Task task = arr.get(pos-1);
+            //Duke.Task task = arr.get(pos-1);
             //arr.remove(pos-1);
             count--;
             String s = "";
