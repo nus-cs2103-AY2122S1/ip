@@ -26,6 +26,10 @@ public class Task {
         return index;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Getter method for status using isDone.
      *
@@ -36,10 +40,17 @@ public class Task {
     }
 
     /**
-     * Setter method for isDone of a Task object.
+     * Sets a Task object as done.
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Sets a Task object as not done.
+     */
+    public void markAsNotDone() {
+        this.isDone = false;
     }
 
     /**

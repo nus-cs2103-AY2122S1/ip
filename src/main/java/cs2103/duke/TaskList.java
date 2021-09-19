@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> taskArrayList;
+    protected String previousInput;
+    protected ArrayList<Task> previousTaskList;
 
     /**
      * This constructor instantiates a new Tasklist with no tasks inside.
@@ -119,6 +121,8 @@ public class TaskList {
             throw new DukeException("No task name");
         }
         Task newestTodo = new ToDo(taskArrayList.size(), input);
+        // using copy by value, store current taskArrayList in a buffer, in case of an undo command later.
+        previousTaskList = new ArrayList<>(taskArrayList);
         taskArrayList.add(newestTodo);
         return ("New todo task added:\n"
                 + newestTodo
@@ -147,6 +151,8 @@ public class TaskList {
             throw new DukeException("Invalid Deadline Date, please follow the format YYYY-MM-DD");
         }
         Task newestDeadline = new Deadline(taskArrayList.size(), name, description);
+        // using copy by value, store current taskArrayList in a buffer, in case of an undo command later.
+        previousTaskList = new ArrayList<>(taskArrayList);
         taskArrayList.add(newestDeadline);
         return ("New deadline task added:\n"
                 + newestDeadline
@@ -175,6 +181,8 @@ public class TaskList {
             throw new DukeException("Invalid Event Date, please follow the format YYYY-MM-DD");
         }
         Task newestEvent = new Event(taskArrayList.size(), name, description);
+        // using copy by value, store current taskArrayList in a buffer, in case of an undo command later.
+        previousTaskList = new ArrayList<>(taskArrayList);
         taskArrayList.add(newestEvent);
         return ("New deadline task added:\n"
                 + newestEvent
@@ -195,7 +203,7 @@ public class TaskList {
     /**
      * This method marks a task as finished, and returns a string informing the user of the change.
      *
-     * @param index The index of the task to be marked, the first task will have an index of 1.
+     * @param index The index of the task to be marked as finished, the first task will have an index of 1.
      * @return A string informing the user of the change.
      * @throws DukeException If the user specified an invalid index.
      */
@@ -206,6 +214,23 @@ public class TaskList {
         }
         taskArrayList.get(index - 1).markAsDone();
         return ("Congratulations! You have finished this task:\n"
+                + taskArrayList.get(index - 1).toString());
+    }
+
+    /**
+     * This method marks a task as unfinished, and returns a string informing the user of the change.
+     *
+     * @param index The index of the task to be marked as unfinished, the first task will have an index of 1.
+     * @return A string informing the user of the change.
+     * @throws DukeException If the user specified an invalid index.
+     */
+    public String unFinishTask(int index) throws DukeException {
+        assert index > 0;
+        if (index > taskArrayList.size()) {
+            throw new DukeException("This task index is not in the task list!");
+        }
+        taskArrayList.get(index - 1).markAsNotDone();
+        return ("Got it, marking this task as unfinished:\n"
                 + taskArrayList.get(index - 1).toString());
     }
 
@@ -221,6 +246,8 @@ public class TaskList {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
+        // using copy by value, store current taskArrayList in a buffer, in case of an undo command later.
+        previousTaskList = new ArrayList<>(taskArrayList);
         String deleteMessage = ("Got it, I have deleted this task:\n"
                 + taskArrayList.get(index - 1).toString()
                 + "\nYou now have "
@@ -256,5 +283,68 @@ public class TaskList {
         return ("Here are the matching tasks in your list:\n"
                 + matchedTaskList.listBeautify()
         );
+    }
+
+    /**
+     * This method undoes the user's previous command, if it can be undone.
+     *
+     * @return A string representing if the previous command was deleted.
+     * @throws DukeException If previous command cannot be undone.
+     */
+    public String undo() throws DukeException {
+        if (previousInput == null) {
+            throw new DukeException("Nothing to Undo");
+        }
+        // parse out the first word from input as the user's command
+        String[] userPreviousInputs = previousInput.split("\\s+", 2);
+        String previousCommand = userPreviousInputs[0];
+        String remainingPreviousInput = "";
+        if (userPreviousInputs.length > 1) {
+            remainingPreviousInput = userPreviousInputs[1];
+        }
+
+        switch (previousCommand) {
+            case "todo":
+            case "deadline":
+            case "event":
+            case "delete":
+                taskArrayList = new ArrayList<>(previousTaskList);
+                String undoMessage = "I undid your previous command: \n"
+                        + previousInput
+                        + "\nhere is your current task list:\n"
+                        + listBeautify();
+                previousTaskList = new ArrayList<>();
+                previousInput = "";
+                return undoMessage;
+            case "done":
+                // finishTask() manipulates the Task objects directly, a shallow copy of task ArrayList is not enough
+                undoDoneCommand(remainingPreviousInput);
+                String undoMessageDone = "I undid your previous command: \n"
+                        + previousInput
+                        + "\nhere is your current task list:\n"
+                        + listBeautify();
+                previousTaskList = new ArrayList<>();
+                previousInput = "";
+                return undoMessageDone;
+            default:
+                throw new DukeException("Cannot undo this command");
+        }
+    }
+
+    /**
+     * This method is a helper method to handle the undo-ing of marking a task as done.
+     *
+     * @param input The remaining parts of the user's previous command without the command word.
+     */
+    public void undoDoneCommand(String input) throws DukeException {
+        if (input == null) {
+            throw new DukeException("unspecified task to mark as done");
+        }
+        try {
+            int taskNumber = Integer.parseInt(input);
+            unFinishTask(taskNumber);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
     }
 }

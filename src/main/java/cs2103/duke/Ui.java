@@ -57,6 +57,14 @@ public class Ui {
             remainingInput = userInputs[1];
         }
 
+        if (command.equals("undo")) {
+            if (userInputs.length > 1) {
+                throw new DukeException("Undo must be called on its own");
+            }
+            return tasks.undo();
+        }
+
+        tasks.previousInput = input;
         switch (command) {
             case "bye":
                 storage.overwriteFile(taskArrayList.listBeautify());
