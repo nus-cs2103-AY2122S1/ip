@@ -49,10 +49,6 @@ public class Task {
         return taskName;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public void setDone() {
         this.isDone = true;
     }

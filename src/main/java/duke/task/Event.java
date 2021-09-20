@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.util.DukeException;
 
 /**
  * Class that encapsulates an Event task.
@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param eventName The user input.
      */
     public Event(String eventName) throws DukeException {
-        super(eventName,6, eventName.indexOf("/at") - 1);
+        super(eventName, 6, eventName.indexOf("/at") - 1);
         int start = eventName.indexOf("/at");
         this.eventDate = LocalDate.parse(eventName.substring(start + 4));
     }
@@ -54,8 +54,13 @@ public class Event extends Task {
                 + ")";
     }
 
+    /**
+     * Overrides the equals method in Object.
+     * @param o The Object to compare to.
+     * @return If the objects are equal.
+     */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (o instanceof Event) {
             Event e = (Event) o;
             return e.getTaskName().equals(this.getTaskName())

@@ -1,18 +1,29 @@
 package duke.command;
 
-import duke.gui.Ui;
-import duke.task.*;
-import duke.util.DukeException;
-import duke.util.Storage;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class EditCommand extends Command {
-    private int taskNo;
-    private char fieldToEdit;
-    private String thingToChangeTo;
+import duke.gui.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.util.DukeException;
+import duke.util.Storage;
 
+public class EditCommand extends Command {
+    private final int taskNo;
+    private final char fieldToEdit;
+    private final String thingToChangeTo;
+
+    /**
+     * Constructor for a new EditCommand object.
+     * @param taskNo The number of the task to edit.
+     * @param fieldToEdit The field of the task to edit.
+     * @param thingToChangeTo The new name or date to change to.
+     * @throws DukeException If the task number is invalid.
+     */
     public EditCommand(String taskNo, char fieldToEdit, String thingToChangeTo) throws DukeException {
         try {
             this.taskNo = Integer.parseInt(taskNo);
@@ -38,15 +49,31 @@ public class EditCommand extends Command {
         case 'd':
             return changeDate(task, ui);
         default:
-            throw new DukeException("Invalid input! Enter edit n to change the name of the task or edit d to change the date of the task!");
+            throw new DukeException("Invalid input! "
+                    + "Enter edit n to change the name of the task or edit d to change the date of the task!");
         }
     }
 
+    /**
+     * Changes the name of the given task.
+     *
+     * @param task The given task.
+     * @param ui The Ui object.
+     * @return String that shows that the task name was changed.
+     */
     public String changeName(Task task, Ui ui) {
         task.setTaskName(thingToChangeTo);
         return ui.showChangedTask(task);
     }
 
+    /**
+     * Changes the date of the given task.
+     *
+     * @param task The given task.
+     * @param ui The Ui object.
+     * @return String that shows that the task date was changed.
+     * @throws DukeException when a Todo is passed into the method.
+     */
     public String changeDate(Task task, Ui ui) throws DukeException {
         if (task instanceof Todo) {
             throw new DukeException("Task does not have a date!");

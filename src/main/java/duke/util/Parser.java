@@ -1,6 +1,16 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EditCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.OccurringOnCommand;
+import duke.command.UnknownCommand;
 
 /**
  * Class that parses the user's input.
@@ -10,7 +20,7 @@ public class Parser {
     /**
      * Parses the user's input.
      * @param command The user's input.
-     * @return The command to be executed.
+     * @return The Command object to be executed.
      * @throws DukeException If the command is invalid.
      */
     public static Command parse(String command) throws DukeException {

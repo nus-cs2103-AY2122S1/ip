@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.util.DukeException;
 
 /**
  * Class that encapsulates a Deadline task.
@@ -54,8 +54,13 @@ public class Deadline extends Task {
                 + ")";
     }
 
+    /**
+     * Overrides the equals method in Object.
+     * @param o The Object to compare to.
+     * @return If the objects are equal.
+     */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (o instanceof Deadline) {
             Deadline d = (Deadline) o;
             return d.getTaskName().equals(this.getTaskName())

@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * @param storage The Storage object.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        storage.saveFile(tasks.saveList());
+        Storage.saveFile(tasks.saveList());
         return ui.showFarewell();
     }
 

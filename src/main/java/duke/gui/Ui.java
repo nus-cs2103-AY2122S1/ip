@@ -15,6 +15,7 @@ import duke.util.Storage;
 public class Ui {
     /**
      * Displays the welcome message.
+     * @return The welcome message.
      */
     public static String showWelcome() {
         String welcome = "Hi Dumbo! I'm Timothy Q. Mouse,\nWhat can I do for you?";
@@ -30,6 +31,7 @@ public class Ui {
     /**
      * Display task done message.
      * @param task The completed task.
+     * @return The task done message.
      */
     public String showTaskDone(Task task) {
         return "Nice! I've marked this task as done:\n" + task.toString();
@@ -39,6 +41,7 @@ public class Ui {
      * Displays add task message.
      * @param tasks The list of tasks to add task to.
      * @param task The added task.
+     * @return The add task message.
      */
     public String showAddTask(TaskList tasks, Task task) {
         int taskNo = tasks.getSize();
@@ -56,6 +59,7 @@ public class Ui {
      * @param task The deleted task.
      * @param tasksLeft Number of tasks left.
      * @param t "task" or "tasks"
+     * @return The delete task message.
      */
     public String showDeleteTask(Task task, int tasksLeft, String t) {
         return "Noted. I've removed this task:\n"
@@ -72,23 +76,25 @@ public class Ui {
      * @param date Specified date.
      * @param num Number of tasks.
      * @param tasks List of tasks occurring on that date.
+     * @return The list of tasks on the specific date.
      */
     public String showTasksOnDate(LocalDate date, int num, List<Task> tasks) {
         String d = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String s = num == 0
+        StringBuilder s = new StringBuilder(num == 0
                 ? "You have 0 tasks occurring on " + d + ".\n"
                 : num == 1
                 ? "You have 1 task occurring on " + d + ":\n"
-                : "You have " + num + " tasks occurring on " + d + ":\n";
+                : "You have " + num + " tasks occurring on " + d + ":\n");
         for (Task task : tasks) {
-            s += task + "\n";
+            s.append(task).append("\n");
         }
-        return s;
+        return s.toString();
     }
 
     /**
      * Displays all the tasks in the list.
      * @param tasks List of the tasks.
+     * @return The tasks in the list.
      */
     public String printList(TaskList tasks) throws DukeException {
         return "Here are the tasks in your list:\n"
@@ -98,6 +104,7 @@ public class Ui {
     /**
      * Displays tasks in the list that matches a keyword.
      * @param tasks The list of matching tasks.
+     * @return The tasks that match the keyword.
      */
     public String showMatchingTasks(TaskList tasks) throws DukeException {
         return "Here are the matching tasks in your list:\n"
@@ -106,6 +113,7 @@ public class Ui {
 
     /**
      * Displays all the accepted commands.
+     * @return The list of accepted commands.
      */
     public String showHelp() {
         return "Here is the list of commands I can understand:\n"
@@ -123,18 +131,26 @@ public class Ui {
 
     /**
      * Displays the farewell message.
+     * @return The farewell message.
      */
     public String showFarewell() {
         return "Bye little dude! Remember, the very things that hold you down are gonna carry you up and up and up!";
     }
 
+    /**
+     * Displays the duplicate task message.
+     * @return The duplicate task message.
+     */
     public String showDuplicate() {
         return "This task already exists!";
     }
 
+    /**
+     * Displays the task changed message.
+     * @param task The task that was changed.
+     * @return The task changed message.
+     */
     public String showChangedTask(Task task) {
         return "Okay! I've updated your task to \n" + task;
     }
-
-
 }

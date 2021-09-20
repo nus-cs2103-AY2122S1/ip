@@ -139,6 +139,11 @@ public class TaskList {
         return ui.showTasksOnDate(date, num, foundTasks);
     }
 
+    /**
+     * Checks if two tasks are duplicates.
+     * @param task The other task to compare to.
+     * @return If the two tasks are duplicates.
+     */
     public boolean isDuplicate(Task task) {
         return tasks.contains(task);
     }

@@ -33,8 +33,13 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Overrides the equals method in Object.
+     * @param o The Object to compare to.
+     * @return If the objects are equal.
+     */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if (o instanceof Todo) {
             Todo t = (Todo) o;
             return t.getTaskName().equals(this.getTaskName());
