@@ -15,10 +15,10 @@ all is need to do is,
 4.  let is manage your tasks for you. 
 
 is can:
-- [X] manage tasks
-- [X] manage deadlines
-- [X] manage events
-- [X] is all is same code really.
+- [X]  manage tasks
+- [X]  manage deadlines
+- [X]  manage events
+- [X]  is all is same code really.
 
 
 ![Duke UI](https://github.com/BananaTechs/ip/blob/master/src/main/resources/images/Ui.png?raw=true)
