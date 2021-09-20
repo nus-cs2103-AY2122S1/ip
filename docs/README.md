@@ -117,7 +117,7 @@ Here are the tasks in your list:
 
 Struggling to find a particular task ? Use this feature to search for a task by using a keyword
 
-#### `find <keyword>` - add a todo task
+#### `find <keyword>` - search for a task using keyword
 
 Example of usage:
 
@@ -160,7 +160,7 @@ Here is a sample task list to demonstrate this feature:
 [E][ ] attend party at: 2022-03-07 15:00
 ```
 
-#### `schedule on <date in dd/mm/yyyy>` - get the list of tasks on a particular date
+#### `schedule on <date in dd/mm/yyyy>` - get the list of tasks _on_ a particular date
 
 Example of usage:
 
@@ -173,7 +173,7 @@ Here are the list of tasks scheduled on 16/08/2021:
 1. [E][ ] make pasta at: 2021-08-16 13:00
 2. [D][ ] submit ip by: 2021-08-16 23:59
 ```
-#### `schedule until <date in dd/mm/yyyy>` - get the list of tasks until a particular date
+#### `schedule until <date in dd/mm/yyyy>` - get the list of tasks _until_ a particular date
 
 Example of usage:
 
@@ -188,7 +188,7 @@ Here are the list of tasks scheduled until 16/12/2021:
 3. [D][ ] submit ip by: 2021-08-16 23:59
 ```
 
-#### `schedule after <date in dd/mm/yyyy>` - get the list of tasks after a particular date
+#### `schedule after <date in dd/mm/yyyy>` - get the list of tasks _after_ a particular date
 
 Example of usage:
 
@@ -213,6 +213,12 @@ If you ever forget the format for the commands or want to refresh your memory on
 
 #### `help` - get a list of Duke command formats
 
+### Exit the application
+
+If you are done, use this to exit the application! 
+
+#### `bye` - to exit the application. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -229,3 +235,4 @@ Action | Format, Examples
 **Schedule After** | `schedule after <date in dd/mm/yyyy>` <br> e.g., `schedule after 16/08/2021`
 **Show Task List** | `list`
 **Help** | `help`
+**Bye** | `bye`
