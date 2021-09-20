@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * The status of the task is set to completed.
+     * Sets the status of the task to Completed
      */
     public void completeTask() {
         this.isDone = true;

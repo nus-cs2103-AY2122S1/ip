@@ -14,4 +14,9 @@ public class TaskTest {
     public void testDeadlineCreation() {
         assertEquals("[D] [ ] read book (by: Sunday)", (new Deadline("read book", "Sunday")).toString());
     }
+
+    @Test
+    public void testEventCreation() {
+        assertEquals("[E] [ ] Dance class (at: Sunday)", (new Event("Dance class", "Sunday")).toString());
+    }
 }
