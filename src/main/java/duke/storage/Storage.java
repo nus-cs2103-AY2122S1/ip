@@ -110,6 +110,7 @@ public class Storage {
 
     private void writeToFile(ArrayList<Task> taskList, FileWriter writer) throws IOException {
         try {
+            assert taskList != null;
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
                 String isDone = task.getIsDone() ? "1" : "0";
@@ -133,6 +134,7 @@ public class Storage {
      * @param task the task to be added to the file.
      */
     public void addTask(Task task) {
+        assert task != null;
         try {
             FileWriter writer = new FileWriter(this.filePath, true);
             if (task instanceof Todo) {

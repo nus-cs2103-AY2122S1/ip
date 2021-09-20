@@ -5,9 +5,6 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import javafx.application.Platform;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 
 
 public class Duke {

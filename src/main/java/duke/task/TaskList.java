@@ -33,7 +33,7 @@ public class TaskList {
      */
     public Task removeTask(int taskNum, Storage storage) {
         Task task = getTask(taskNum);
-        taskList.remove(task);
+        this.taskList.remove(task);
         storage.save(this.taskList);
         return task;
     }
@@ -47,6 +47,7 @@ public class TaskList {
      */
     public Task markTaskAsDone(int taskNum, Storage storage) {
         Task task = getTask(taskNum);
+        assert task != null;
         task.markAsDone();
         storage.save(this.taskList);
         return task;
@@ -89,6 +90,7 @@ public class TaskList {
         Task task = getTask(taskNum);
         task = task.update(update);
         this.taskList.set(taskNum - 1, task);
+        assert this.taskList != null;
         storage.save(this.taskList);
         return task;
     }

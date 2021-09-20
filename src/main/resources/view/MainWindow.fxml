@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+
 <AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #BBDEF0;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
     <children>
       <HBox layoutY="558.4000244140625" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -15,12 +16,12 @@
               <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
          </children>
       </HBox>
-      <HBox AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="558.0" prefWidth="1958.0" vvalue="1.0">
-                  <content>
-                      <VBox fx:id="dialogContainer" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="398.0" style="-fx-background-color: #BBDEF0;" />
-                  </content>
+              <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hvalue="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vvalue="1.0" HBox.hgrow="ALWAYS">
+               <content>
+                      <VBox fx:id="dialogContainer" maxWidth="1.7976931348623157E308" prefHeight="556.0" prefWidth="398.0" style="-fx-background-color: #BBDEF0;" />
+               </content>
               </ScrollPane>
          </children>
       </HBox>
