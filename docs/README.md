@@ -21,6 +21,8 @@ is can:
 - [X]  is all is same code really.
 
 
+![Duke UI](https://github.com/BananaTechs/ip/blob/ed3a3c568bd125a96a44ed8188b153860e18ca95/src/main/resources/images/Ui.png)
+
 # how is to use?
 
 is show you.
@@ -61,7 +63,7 @@ is list current tasks by typing:
 
 `list`
 
-unfortunately is no display tasks unless is use the `list` command. is would like to display all the time but javafx is be difficult for duke to code with.
+unfortunately is no display tasks unless is use the `list` command. is would like to display all the time but javafx is be difficult for duke to work with.
 
 
 ## complete a task.
