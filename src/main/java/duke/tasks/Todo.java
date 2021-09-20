@@ -14,18 +14,18 @@ public class Todo extends Task {
      * @param description - the description of the task
      * @param isDone - determines if the task has been completed or not
      */
-    public Todo (String description, boolean isDone) {
-        super(description, isDone);
+    public Todo (String description, boolean isDone, boolean isHighOrLow) {
+        super(description, isDone, isHighOrLow);
     }
 
     @Override
     public String showTask(){
-        return "[T][" + (isDone ? "✗" : " ") + "] " + description;
+        return "[T][" + (isDone ? "✗" : " ") + "] " +  "["+ (isHighOrLow ? "High" : "Low") + " ] " + description;
     }
 
     @Override
     public String saveTask() {
-        return "T | " + (isDone ? 1 : 0) + " | " + description;
+        return "T | " + (isDone ? 1 : 0) + " | " + (isHighOrLow ? 1 : 0) + " | " + description;
 
     }
 }

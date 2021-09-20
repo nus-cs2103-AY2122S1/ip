@@ -1,12 +1,3 @@
-T | 1 | new
-T | 0 | fly
-T | 1 | new
-T | 0 | return book
-T | 0 | remove book
-T | 1 | enjoy food
-E | 1 | something | 02/08/2021 1600
-D | 1 | eat | 02/08/2021 1600
-E | 0 | running  | 01/09/2021 1800
-T | 1 | milk
-T | 0 | resume 
-T | 0 | dancing
+T | 0 | 0 | dance
+D | 0 | 1 | jogging| 28/09/2021 1600
+E | 0 | 0 | gym | 26/10/2021 1300
