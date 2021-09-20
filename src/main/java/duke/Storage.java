@@ -15,7 +15,7 @@ public class Storage {
     /**
      * Constructor for storage, includes hardcoded file path for duke.txt.
      *
-     * @param taskList
+     * @param taskList Fills taskList at initialization and saves taskList data as .txt file.
      */
     public Storage(TaskList taskList) {
         this.taskList = taskList;
@@ -77,7 +77,7 @@ public class Storage {
     /**
      * Writes data down into duke.txt on 'bye' command.
      *
-     * @throws IOException
+     * @throws IOException When data writing fails.
      */
     public void writeData() throws IOException {
         FileWriter writer = new FileWriter(dataFile.getPath());

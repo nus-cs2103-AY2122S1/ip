@@ -14,9 +14,9 @@ public class UI {
     /**
      * Fields for commands to be executed.
      *
-     * @param parser
-     * @param storage
-     * @param taskList
+     * @param parser allows for call to parser to fetch needed command data.
+     * @param storage allows for storage on 'bye' command.
+     * @param taskList allows for taskList to be updated as commands are executed.
      */
     public UI(Parser parser, Storage storage, TaskList taskList) {
         this.parser = parser;
@@ -27,7 +27,7 @@ public class UI {
     /**
      * Main method to be constantly taking in commands until "bye".
      * 
-     * @throws DukeException
+     * @throws DukeException On errors encountered when command cannot be executed correctly.
      */
     public String start(CommandType command) throws DukeException{
 

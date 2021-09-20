@@ -42,6 +42,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the search key entered by user.
+     *
+     * @return String object of search term.
+     */
     public String getSearchTerm() {
         return currentInput.split(" ")[1];
     }
@@ -81,7 +86,7 @@ public class Parser {
     }
 
     /**
-     * Only called in event of Delete/Done.
+     * Returns index of task indicated by the user.
      *
      * @return int Index of task to be deleted/marked as complete.
      */

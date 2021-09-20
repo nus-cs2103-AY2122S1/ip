@@ -9,9 +9,9 @@ public class ToDo extends Task{
     }
 
     /**
-     * String representation of todo task.
+     * Represents Todo task as a String object.
      *
-     * @return String form of todo task.
+     * @return String form of Todo task.
      */
     @Override
     public String toString() {

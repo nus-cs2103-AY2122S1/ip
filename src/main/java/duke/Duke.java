@@ -18,7 +18,12 @@ public class Duke {
         userInterface = new UI(parser, storage, taskList);
     }
 
-
+    /**
+     * Runs Duke logic through parser to get string response from UI.
+     *
+     * @param input String command by user.
+     * @return Duke response to be sent to GUI components to be generated.
+     */
     public String getResponse(String input) {
         CommandType command = this.parser.nextCommand(input);
         try {

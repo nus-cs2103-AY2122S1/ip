@@ -2,8 +2,6 @@ package duke;
 
 /**
  * Parent task class as abstraction for ToDo, Deadline, Event.
- *
- * @author Ren Weilin
  */
 public class Task {
     protected String description;
@@ -19,7 +17,7 @@ public class Task {
     public String markAsDone() {
         if (!isDone) {
             isDone = true;
-            return "Nice! I've marked this task as done:\n" + this.toString();
+            return "Nice! I've marked this task as done:\n" + this;
         }
         return "Task has already been marked as complete!";
     }

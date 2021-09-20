@@ -27,7 +27,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of deadline task.
+     * Represents deadline task as a String object.
      *
      * @return String form of deadline task.
      */
