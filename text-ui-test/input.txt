@@ -1,0 +1,17 @@
+deadline reading /by 2026-02-02
+event marathon /at Saturday 2-5
+todo send email to mom
+list
+done 1
+done 1
+done 2
+done 2
+list
+deadline /by 530
+event /at 6
+todo
+deadline cs2103 ip /by 2025-02-02
+event tutorial /at
+delete 1
+list
+bye
