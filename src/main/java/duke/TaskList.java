@@ -1,9 +1,14 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 
 public class TaskList {
@@ -36,6 +41,38 @@ public class TaskList {
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return new TaskList(tasks);
+    }
+
+    /**
+     * Filters tasks to a specific date.
+     * @param date The date for which available tasks will be displayed.
+     */
+    public TaskList filterDate(LocalDate date) {
+        ArrayList<Task> tasks = this.tasks.stream()
+                .filter(task -> {
+                    LocalDateTime time = getTaskDateTime(task);
+                    if (time == null) {
+                        return false;
+                    }
+
+                    return time.toLocalDate().isEqual(date);
+                })
+                .sorted(Comparator.comparing(this::getTaskDateTime))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return new TaskList(tasks);
+    }
+
+    private LocalDateTime getTaskDateTime(Task task) {
+        if (task instanceof Deadline) {
+            return ((Deadline) task).getTime();
+        }
+
+        if (task instanceof Event) {
+            return ((Event) task).getTime();
+        }
+
+        return null;
     }
 
     public int size() {

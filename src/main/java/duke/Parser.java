@@ -1,20 +1,12 @@
 package duke;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.CompleteTaskCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.FilterTasksCommand;
-import duke.command.ListTasksCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 
 public class Parser {
     public enum CommandType {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND,
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND, SCHEDULE
     }
 
     /**
@@ -52,6 +44,9 @@ public class Parser {
 
         case FIND:
             return new FilterTasksCommand(arguments);
+
+        case SCHEDULE:
+            return new ViewScheduleCommand(arguments);
 
         case TODO:
             return new AddTodoCommand(arguments);

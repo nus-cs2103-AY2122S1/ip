@@ -40,7 +40,7 @@ public class AddDeadlineCommand extends Command {
         }
 
         this.description = deadlineInputs[0];
-        this.time = DateTime.parse(deadlineInputs[1]);
+        this.time = DateTime.parseDateTime(deadlineInputs[1]);
     }
 
     /**

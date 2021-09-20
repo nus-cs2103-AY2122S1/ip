@@ -40,7 +40,7 @@ public class AddEventCommand extends Command {
         }
 
         this.description = eventInputs[0];
-        this.time = DateTime.parse(eventInputs[1]);
+        this.time = DateTime.parseDateTime(eventInputs[1]);
     }
 
     /**
