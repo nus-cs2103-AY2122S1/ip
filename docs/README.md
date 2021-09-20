@@ -273,5 +273,6 @@ find | ```find <keyword>``` | ```find assignment```
 edit task | ```edit <task index>/task <new task command>``` | ```edit 2/task deadline worksheet/by 2021-10-10 1000```
 edit description | ```edit <task index>/description <new description>``` | ```edit 1/description CS2103T iP```
 edit date and/or time | ```edit <task index>/datetime <yyyy-MM-dd> <HHmm>``` | ```edit 3/datetime 2022-03-08 2300```
+clone | ```clone <task index>``` | ```clone 1```
 bye | ```bye``` | ```bye```
  
