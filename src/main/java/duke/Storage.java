@@ -3,9 +3,6 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Scanner;
 
 public class Storage {
@@ -15,7 +12,7 @@ public class Storage {
     /**
      * Constructor for storage, includes hardcoded file path for duke.txt.
      *
-     * @param taskList
+     * @param taskList Fills taskList at initialization and saves taskList data as .txt file.
      */
     public Storage(TaskList taskList) {
         this.taskList = taskList;
@@ -25,7 +22,7 @@ public class Storage {
         try {
             loadData();
         } catch (IOException e) {
-            System.out.println("Error loading duke.txt");
+            e.printStackTrace();
         }
     }
 
@@ -34,31 +31,22 @@ public class Storage {
         while (scanner.hasNext()) {
             String taskString = scanner.nextLine();
             boolean isDone = taskString.charAt(4) != ' ';
-            String description;
-            String dateTime;
-            int timeStart;
-            LocalDate date;
-            switch (taskString.charAt(1)) {
-            case 'T':
-                description = taskString.substring(7) + " ";
-                taskList.addTask(new ToDo(description, isDone));
-                break;
-            case 'E':
-                timeStart = taskString.indexOf("at: ");
-                description = taskString.substring(7, timeStart - 2) + " ";
-                dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
-                date = LocalDate.parse(dateTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
-                taskList.addTask(new Event(description, date, isDone));
-                break;
-            case 'D':
-                timeStart = taskString.indexOf("by: ");
-                description = taskString.substring(7, timeStart - 2) + " ";
-                dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
-                date = LocalDate.parse(dateTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
-                taskList.addTask(new Deadline(description, date, isDone));
-            default:
-                break;
-            }
+            char taskType = taskString.charAt(1);
+            taskList.addTask(generateTask(taskString, isDone, taskType));
+
+        }
+    }
+
+    private Task generateTask(String taskString, boolean isDone, char taskType) {
+        switch (taskType) {
+        case 'T':
+            return ToDo.create(taskString, isDone);
+        case 'E':
+            return Event.create(taskString, isDone);
+        case 'D':
+            return Deadline.create(taskString, isDone);
+        default:
+            return null;
         }
     }
 
@@ -78,7 +66,7 @@ public class Storage {
     /**
      * Writes data down into duke.txt on 'bye' command.
      *
-     * @throws IOException
+     * @throws IOException When data writing fails.
      */
     public void writeData() throws IOException {
         FileWriter writer = new FileWriter(dataFile.getPath());

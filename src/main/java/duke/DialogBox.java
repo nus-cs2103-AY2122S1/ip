@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a dialog box GUI Node based on user input.
+     *
+     * @param text User input.
+     * @param img Icon representing user.
+     * @return GUI node for user chat.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a dialog box GUI Node based on Duke output.
+     *
+     * @param text Duke's string response.
+     * @param img Icon representing Duke.
+     * @return GUi node for Duke chat.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

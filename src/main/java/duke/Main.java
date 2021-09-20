@@ -15,6 +15,12 @@ public class Main extends Application {
 
     private final Duke duke = new Duke();
 
+
+    /**
+     * Executes the initialization of GUI window for Duke Chatbot.
+     *
+     * @param stage Stage for the pane of DukeBot to take as parent.
+     */
     @Override
     public void start(Stage stage) {
         try {

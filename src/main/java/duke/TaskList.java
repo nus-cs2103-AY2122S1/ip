@@ -9,7 +9,7 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Initial capacity of 100 (Given default number)
+     * Initializes task list with capacity of 100 (Given default number).
      */
     public TaskList() {
         tasks = new ArrayList<>(100);
@@ -18,7 +18,7 @@ public class TaskList {
     /**
      * Adds task to the list.
      *
-     * @param task
+     * @param task Task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -27,7 +27,7 @@ public class TaskList {
     /**
      * Deletes task at index from the list.
      *
-     * @param index
+     * @param index Indicates which task is to be deleted.
      */
     public void deleteTask(int index) {
         tasks.remove(index);
@@ -36,7 +36,7 @@ public class TaskList {
     /**
      * Marks the task at index as done.
      *
-     * @param index
+     * @param index Indicates which task is to be marked as completed.
      */
     public String markAsDone(int index) {
         return tasks.get(index).markAsDone();
@@ -54,7 +54,7 @@ public class TaskList {
     /**
      * Gets the string representation of task at index.
      *
-     * @param index
+     * @param index Indicates which task is to be retrieved.
      * @return String toString() of task at index.
      */
     public String getTaskString(int index) {
