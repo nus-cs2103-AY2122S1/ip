@@ -72,7 +72,7 @@ public class Parser {
                     n++;
                     String data = reader.nextLine();
                     if (task == n) {
-                        String update = data.substring(0,4)+'1'+data.substring(5);
+                        String update = data.substring(0, 4) + '1' + data.substring(5);
                         // System.out.println(update);
                         // System.out.println(data);
                         lines.add(update);
@@ -253,5 +253,3 @@ public class Parser {
         }
     }
 }
-
-//
