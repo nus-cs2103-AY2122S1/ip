@@ -1,5 +1,8 @@
+package duke;
 import java.util.Scanner;
 import java.util.ArrayList;
+import duke.Task.TaskList;
+
 
 public class Duke {
     private static TaskList tasks = new TaskList();

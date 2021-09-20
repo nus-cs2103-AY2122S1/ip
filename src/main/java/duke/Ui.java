@@ -1,5 +1,7 @@
+package duke;
 import java.util.Scanner;
-import java.util.ArrayList;
+
+import duke.Task.*;
 
 public class Ui {
     public static void displayGreeting() {

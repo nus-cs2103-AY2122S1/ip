@@ -1,3 +1,4 @@
+package duke;
 import java.io.BufferedWriter;
 import java.nio.file.Path;
 import java.util.Scanner;

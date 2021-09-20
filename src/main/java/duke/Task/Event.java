@@ -1,7 +1,8 @@
+package duke.Task;
 import java.time.LocalDate;
 public class Event extends Task {
     private LocalDate date;
-    Event(String description, boolean isDone, LocalDate date) {
+    public Event(String description, boolean isDone, LocalDate date) {
         super(description, isDone);
         this.date = date;
     }
