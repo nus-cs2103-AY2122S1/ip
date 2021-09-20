@@ -1,0 +1,33 @@
+.scroll-pane .viewport {
+    -fx-background-image: url('../images/Sky.png');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.userInput {
+    -fx-background-color: white;
+    -fx-border-color: rgb(209, 240, 255);
+    -fx-border-width: 0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.sendBtn {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: lightgrey;
+    -fx-border-radius: 10px;
+}
+
+.textBox {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-max-height: Infinity;
+}
+
+.text-box:focused {
+    -fx-background-color: transparent, -fx-box-border, -fx-control-inner-background;
+    -fx-border-color: lightgrey;
+}
