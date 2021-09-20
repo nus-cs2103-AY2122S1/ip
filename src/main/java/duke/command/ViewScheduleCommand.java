@@ -5,7 +5,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateTimeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -21,16 +20,12 @@ public class ViewScheduleCommand extends Command {
      *
      * @param arguments Command arguments.
      */
-    public ViewScheduleCommand(String arguments) throws InvalidCommandException {
+    public ViewScheduleCommand(String arguments) throws DukeException {
         if (arguments.length() == 0) {
             throw new InvalidCommandException("Command `schedule` requires an arguments");
         }
 
-        try {
-            this.date = DateTime.parseDate(arguments);
-        } catch (InvalidDateTimeException e) {
-            throw new InvalidCommandException("Unable to parse date from arguments: " + arguments);
-        }
+        this.date = DateTime.parseDate(arguments);
     }
 
     /**
@@ -59,7 +54,7 @@ public class ViewScheduleCommand extends Command {
                 Task item = filteredTaskList.getTask(i);
                 builder.append(i + 1)
                         .append(". ")
-                        .append(taskSchedule(item));
+                        .append(getTaskScheduleDescription(item));
                 if (i < numTasks - 1) {
                     builder.append("\n");
                 }
@@ -69,7 +64,7 @@ public class ViewScheduleCommand extends Command {
         ui.printMessage(builder.toString());
     }
 
-    private String taskSchedule(Task task) {
+    private String getTaskScheduleDescription(Task task) {
         if (task instanceof Event) {
             return DateTime.stringifyTime(((Event) task).getTime()) + ": " + task.getDescription() + " (Event)"
                     + (task.getIsCompleted() ? " (Done)" : "");
