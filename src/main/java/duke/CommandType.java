@@ -12,5 +12,6 @@ public enum CommandType {
     Error,
     AddToDo,
     AddDeadline,
-    AddEvent
+    AddEvent,
+    Archive
 }
