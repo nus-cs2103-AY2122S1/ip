@@ -41,9 +41,7 @@ public class Storage {
     public void save(UserInterface ui, TaskList taskList) {
         try {
             PrintWriter dukeWriter = new PrintWriter(file);
-            for (Task task : taskList.getTasks()) {
-                dukeWriter.println(task.toCsvRow());
-            }
+            dukeWriter.print(taskList.toCsvString());
             dukeWriter.close();
             ui.print("File successfully saved to " + file.getPath());
         } catch (FileNotFoundException e) {

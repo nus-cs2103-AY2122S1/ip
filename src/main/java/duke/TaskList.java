@@ -84,12 +84,23 @@ public class TaskList {
     }
 
     /**
+     * Converts this TaskList to a String in CSV format
+     * @return A CSV representation of this TaskList
+     */
+    public String toCsvString() {
+        return String.join("\n", taskList.stream()
+                .map(task -> task.toCsvRow())
+                .collect(Collectors.toList()));
+    }
+
+    /**
      * Returns all tasks in this TaskList
      * @return A shallow copy of the Tasks in this Tasklist
      */
     public List<Task> getTasks() {
         return new ArrayList<Task>(taskList);
     }
+
     @Override
     public String toString() {
         return String.join("\n", taskList.stream()
