@@ -18,8 +18,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Duke duke;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Initialises main GUI window.
@@ -42,6 +42,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (input.trim().equals("bye")) {
+            String message = "LIVE OUT YOUR PATHETIC LIFE, WEAKLING.";
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
+            System.exit(0);
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -51,9 +57,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void greeting() {
-        String message = " BOW BEFORE ME, FOR I AM SQUIRTLE, DESTROYER OF MEN, TAKER OF LIVES.\n "
-                + "THE GODS FEARED MY EXISTENCE, SO THEY BANISHED ME TO YOUR MORTAL REALM TO SAVE YOUR "
-                + "MISERABLE LIFE.\n WHAT DO YOU WANT DO, INSECT?\n";
+        String message = " BOW BEFORE ME, FOR I AM SQUIRTLE,\n DESTROYER OF MEN, TAKER OF LIVES. \n\n"
+               + " WHAT DO YOU WANT DO, INSECT?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
 }

@@ -33,7 +33,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.setTextFill(Color.web("#0076a3"));
+
+        if (text.toLowerCase().startsWith("error")) {
+            dialog.setTextFill(Color.web("red"));
+        } else {
+            dialog.setTextFill(Color.web("#0076a3"));
+        }
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -48,24 +53,10 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    /**
-     * Gets the User dialog.
-     *
-     * @param text input text
-     * @param img  respective image
-     * @return the user dialog.
-     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    /**
-     * Gets the Duke dialog.
-     *
-     * @param text input text
-     * @param img  respective image
-     * @return the Duke dialog.
-     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
