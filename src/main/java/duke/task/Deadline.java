@@ -13,12 +13,9 @@ import duke.main.TaskDate;
  * @version CS2103T, Semester 1
  */
 public class Deadline extends Task {
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String DEADLINE_MARKER = "D";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String DEADLINE_KEYWORD = "deadline ";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String BY_CONNECTOR = "by ";
+    private static final String DEADLINE_MARKER = "D";
+    private static final String DEADLINE_KEYWORD = "deadline ";
+    private static final String BY_CONNECTOR = "by ";
     private String deadlineDescription;
     private TaskDate deadlineDate;
     private String dateString;
@@ -29,7 +26,6 @@ public class Deadline extends Task {
      * @param description consisting of duke.task description and deadline date.
      */
     public Deadline(String description) throws DukeException {
-        super();
         int startOfDescriptionIndex = getStartingIndexAfter(description, DEADLINE_KEYWORD);
         int startOfTimingIndex = getStartingIndexAfter(description, BY_CONNECTOR);
         deadlineDescription = getSubString(description, startOfDescriptionIndex,
@@ -79,7 +75,7 @@ public class Deadline extends Task {
      * @return storage format of the duke.task.
      */
     public String formatToStore() {
-        return String.format("%s | %s | %s | %s | %s", DEADLINE_MARKER, getStatusIcon() == " " ? 1 : 0,
+        return String.format("%s %s %s | %s %s", DEADLINE_MARKER, super.formatToStore(),
             deadlineDescription, dateString, deadlineTag.getTagInStoreFormat());
     }
     /**

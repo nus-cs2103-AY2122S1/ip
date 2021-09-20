@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.util.ArrayList;
 import duke.main.DukeException;
 
 /**
@@ -12,7 +11,6 @@ import duke.main.DukeException;
 
 public class Task {
     protected boolean isDone;
-    private ArrayList<String> taskTag;
 
     /**
      * Class constructor for Duke.Task class.
@@ -20,9 +18,31 @@ public class Task {
      */
     public Task() {
         this.isDone = false;
-        this.taskTag = new ArrayList<>();
     }
 
+    /**
+     * Creates a subclass of task using the description, date and tag provided from storage file.
+     *
+     * @param taskType the name of the tasktype given. For example, "T" for todo.
+     * @param description of the task.
+     * @param tag used to tag the task.
+     * @param date of the task due, not used for todo.
+     * @return either a deadline, event or todo task.
+     * @throws DukeException thrown when an invalid tasktype is given.
+     */
+    public static Task createTask(String taskType, String description, String tag, String ... date)
+                throws DukeException {
+        switch (taskType) {
+        case "D":
+            return new Deadline(description, date[0], tag);
+        case "E":
+            return new Event(description, date[0], tag);
+        case "T":
+            return new Todo(description, tag);
+        default:
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
+        }
+    }
     /**
      * Returns the status icon of the duke.task.
      *
@@ -56,7 +76,7 @@ public class Task {
      * @return storage format of the duke.task.
      */
     public String formatToStore() {
-        return String.format("%s |", getStatusIcon() == " " ? 1 : 0);
+        return String.format("| %s |", isDone ? "1" : "0");
     }
 
     /**

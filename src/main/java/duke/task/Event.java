@@ -69,8 +69,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s %s (at: %s)", EVENT_MARKER, super.toString(), eventDescription,
-                dateString);
+        return String.format("[%s]%s %s (at: %s) %s", EVENT_MARKER, super.toString(), eventDescription,
+                dateString, eventTag.getTag());
     }
     /**
      * Formats the task in to the storage format.
@@ -78,8 +78,8 @@ public class Event extends Task {
      * @return storage format of the task.
      */
     public String formatToStore() {
-        return String.format("%s | %s | %s | %s", EVENT_MARKER, getStatusIcon() == " " ? 1 : 0,
-            eventDescription, dateString);
+        return String.format("%s %s %s | %s %s", EVENT_MARKER, super.formatToStore(),
+            eventDescription, dateString, eventTag.getTagInStoreFormat());
     }
     /**
      * Checks if given datetime matches the tasks date time.
