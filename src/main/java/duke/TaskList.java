@@ -93,14 +93,6 @@ public class TaskList {
                 .collect(Collectors.toList()));
     }
 
-    /**
-     * Returns all tasks in this TaskList
-     * @return A shallow copy of the Tasks in this Tasklist
-     */
-    public List<Task> getTasks() {
-        return new ArrayList<Task>(taskList);
-    }
-
     @Override
     public String toString() {
         return String.join("\n", taskList.stream()
