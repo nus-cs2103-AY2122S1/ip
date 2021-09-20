@@ -67,11 +67,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        userInput.clear();
         if (input.equals("bye")) {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    userInput.clear();
                     Platform.exit();
                     System.exit(0);
                 }
