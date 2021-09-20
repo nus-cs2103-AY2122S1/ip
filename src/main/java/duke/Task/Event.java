@@ -1,5 +1,9 @@
 package duke.Task;
 import java.time.LocalDate;
+
+/**
+ * Type of task that has description and date
+ */
 public class Event extends Task {
     private LocalDate date;
     public Event(String description, boolean isDone, LocalDate date) {

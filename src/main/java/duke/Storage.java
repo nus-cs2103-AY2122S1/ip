@@ -9,10 +9,21 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import duke.Task.*;
 
-public class Storage {
-    java.nio.file.Path dirpath;
-    Path taskListPath;
+/**
+ * Class to handle storing and loading of file
+ */
 
+public class Storage {
+    /**Path to current directory in which the app is run*/
+    private java.nio.file.Path dirpath;
+    /**Path to tasklist*/
+    private Path taskListPath;
+
+
+    /**<p>Constructor for the Storage class. Creates a directory named data and file named DukeTask.txt
+     * if it does not exist.</p>
+     *
+     */
     Storage() {
         this.dirpath = Paths.get("data");
         this.taskListPath = Paths.get("data", "DukeTask.txt");
@@ -34,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**Write the specified task list in argument to the file DukeTask.txt
+     *
+     * @param tasks tasks to be written to the file
+     */
+
     public void saveTasksToStorage(TaskList tasks) {
         try {
             String newFile = tasks.toString();
@@ -42,10 +58,22 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Write string to the path of the storage file.
+     * @param newFile string to be added
+     * @throws IOException if there is a failure in writing the file.
+     */
     public void writeStringToFile(String newFile) throws IOException {
         Files.write(taskListPath, newFile.getBytes());
     }
 
+    /**
+     * Loads data of tasks from the storage to a TaskList. Method will append all the data
+     * to the supplied task list.
+     *
+     * @param tasks Task list that will be appended with data.
+     */
     public void loadDataToTasks(TaskList tasks) {
         java.nio.file.Path dirpath = Paths.get("data");
         Path taskListPath = Paths.get("data", "DukeTask.txt");

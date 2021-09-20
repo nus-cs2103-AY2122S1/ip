@@ -1,4 +1,8 @@
 package duke.Task;
+
+/**
+ * Class describing the task object
+ */
 public class Task {
     private String taskDescription;
     private boolean isDone;
