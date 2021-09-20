@@ -1,0 +1,12 @@
+list
+todo finish this assignment
+deadline submit /by Thursday
+event lecture /at Friday
+list
+done 7
+delete 7
+delete 6
+list
+done 5
+list
+bye
