@@ -37,8 +37,9 @@ public class Storage {
                     || (task.startsWith("event") && task.contains("/at "))
                     || (task.startsWith("todo"))) {
                 str += TaskList.addSpecificTask(task);
-//                System.out.println(TaskList.getLast().toString());
-//                writer.write(TaskList.getLast().toString() + "\n");
+                assert TaskList.getSize() > 0;
+                System.out.println(TaskList.getLast().toString());
+                writer.write(TaskList.getLast().toString() + "\n");
             }
             writer.close();
             FileWriter fWriter = new FileWriter(text, true);

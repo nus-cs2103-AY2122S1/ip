@@ -11,6 +11,8 @@ public class Parser {
     }
 
     public String parseTask(String task) throws DukeException, IOException {
+        assert task.length() > 1;
+
         if (task.equals("list")) {
             return TaskList.printList();
         } else if (task.startsWith("done")) {

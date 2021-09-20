@@ -97,7 +97,6 @@ public final class TaskList {
         String str = "";
         for (Tasks task : taskList) {
             str = task.toString() + "\n";
-            System.out.println(task);
         }
         return str;
     }
@@ -108,10 +107,11 @@ public final class TaskList {
      */
     public static Tasks getLast() {
         int size = taskList.size();
-        if (size == 0 || size == 1) {
-            return new Todo("nothing");
-        }
-        return taskList.get(taskList.size() - 1);
+        return taskList.get(size - 1);
+    }
+
+    public static int getSize() {
+        return taskList.size();
     }
 
     /**
