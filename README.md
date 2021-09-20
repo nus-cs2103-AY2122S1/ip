@@ -2,9 +2,9 @@
 
 <div align="center">
    <img src="/docs/Duke.png" width=400/>
+   <p>    This is a project based on a greenfield Java project named after the Java mascot _Duke_. </p>
 </div>
 
-This is a project based on a greenfield Java project named after the Java mascot _Duke_. 
 
 <div align="center">
    <img src="https://user-images.githubusercontent.com/40263305/133960735-95a3f33b-691f-4a64-b314-4dd6cb819f7c.gif" width="400" height="600"/>
