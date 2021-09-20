@@ -33,7 +33,7 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         try {
-            this.storage.mkdir();
+            this.storage.getParentFile().mkdirs();
             this.storage.createNewFile();
         } catch (IOException error) {
             throw new DukeException("there was a error creating a file!");
