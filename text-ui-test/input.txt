@@ -6,12 +6,4 @@ event project meeting /at 15/10/2015 1600
 event project water /at 15/10/2015 1600
 event call /at Tue 2-4pm
 list
-done 3
-list
-done 4
-list
-delete 3
-done 2
-delete 2
-list
 bye

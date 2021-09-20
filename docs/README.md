@@ -9,7 +9,7 @@ You can add 3 types of tasks (Todo, Deadline, Event) and use a whole range of fe
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `duke.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `duke.jar` from [here](https://github.com/loose-bus-change/ip/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
@@ -212,6 +212,8 @@ Here are the list of tasks scheduled after 16/08/2021:
 If you ever forget the format for the commands or want to refresh your memory on what commands are available, use this feature to have Duke remind you! 
 
 #### `help` - get a list of Duke command formats
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 

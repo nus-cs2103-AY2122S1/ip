@@ -1,5 +1,4 @@
 [T][ ] read book 
-[E][ ] project meeting at: 2021-10-15 19:00
-[E][ ] make pasta at: 2021-08-16 13:00
+[E][X] project meeting at: 2021-10-15 19:00
+[E][X] make pasta at: 2021-08-16 13:00
 [D][ ] submit ip by: 2021-08-16 23:59
-[E][ ] attend party at: 2022-03-07 15:00
