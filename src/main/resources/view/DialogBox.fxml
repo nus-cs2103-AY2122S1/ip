@@ -19,7 +19,7 @@
                 <Insets left="10.0" right="10.0" />
             </HBox.margin>
         </TextFlow>
-        <Circle fx:id="displayPicture" fill="WHITE" radius="40.0" stroke="#e2aab5" strokeType="INSIDE" />
+        <Circle fx:id="displayPicture" fill="WHITE" radius="40.0" stroke="#FFFFFF" strokeType="INSIDE" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
