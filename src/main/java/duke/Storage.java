@@ -113,7 +113,8 @@ public class Storage {
     }
 
     /**
-     * Writing the data into the file
+     * Writes data into the file that stores the list of tasks.
+     * the taskList argument must specify the list of tasks.
      * @param taskList - the list of tasks
      * @throws IOException - Standard Input Output Exception
      */
@@ -126,7 +127,8 @@ public class Storage {
     }
 
     /**
-     * Writing the data into the file
+     * Writes data into the file that stores the list of tasks.
+     * the taskList argument must specify the list of tasks.
      * @param taskList - the list of tasks
      * @return - empty String
      */

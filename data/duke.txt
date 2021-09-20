@@ -9,3 +9,4 @@ D | 1 | eat | 02/08/2021 1600
 E | 0 | running  | 01/09/2021 1800
 T | 1 | milk
 T | 0 | resume 
+T | 0 | dancing
