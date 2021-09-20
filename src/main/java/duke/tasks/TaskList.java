@@ -107,6 +107,10 @@ public final class TaskList {
      * @return most recent Task
      */
     public static Tasks getLast() {
+        int size = taskList.size();
+        if (size == 0 || size == 1) {
+            return new Todo("nothing");
+        }
         return taskList.get(taskList.size() - 1);
     }
 
@@ -119,7 +123,7 @@ public final class TaskList {
         int count = 1;
         for (Tasks task : taskList) {
             if (task.toString().contains(key)) {
-                str += "\n" + count + ". " + task.toString();
+                str += "\n" + count + ". " + task;
                 count++;
             }
         }

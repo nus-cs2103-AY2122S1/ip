@@ -6,7 +6,11 @@ import java.io.IOException;
  * Parses the user's input.
  */
 public class Parser {
-    public static String parseTask(String task) throws DukeException, IOException {
+
+    public Parser() {
+    }
+
+    public String parseTask(String task) throws DukeException, IOException {
         if (task.equals("list")) {
             return TaskList.printList();
         } else if (task.startsWith("done")) {

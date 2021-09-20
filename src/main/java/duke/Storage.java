@@ -14,19 +14,30 @@ public class Storage {
     private static final String text = "./data/duke.txt";
     private static BufferedWriter writer;
 
+    static {
+        try {
+            writer = new BufferedWriter(new FileWriter(text, true));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Storage() {
+    }
+
     /**
      * Takes in a task and adds it to the tasklist, while writing it to the file
      * @param task Task ot be added.
      * @throws IOException if an error while reading has occurred.
      */
-    static String writeToFile(String task) throws IOException {
+    public static String writeToFile(String task) throws IOException {
         String str = "";
         try {
             if (task.startsWith("deadline")
                     || (task.startsWith("event") && task.contains("/at "))
                     || (task.startsWith("todo"))) {
                 str += TaskList.addSpecificTask(task);
-                System.out.println(TaskList.getLast().toString());
+//                System.out.println(TaskList.getLast().toString());
 //                writer.write(TaskList.getLast().toString() + "\n");
             }
             writer.close();
@@ -43,14 +54,12 @@ public class Storage {
      * Loads the task list from the duke.txt file and returns void.
      * @throws IOException if an error while reading has occurred.
      */
-    static void readFromFile() throws IOException {
+    public static void readFromFile() throws IOException {
         try {
             //create a BufferedReader which loads the data when duke.Duke starts up
             String line;
             FileReader fReader = new FileReader(text);
             BufferedReader reader = new BufferedReader(fReader);
-            FileWriter fWriter = new FileWriter(text, true);
-            writer = new BufferedWriter(fWriter);
 
             //reading data
             while ((line = reader.readLine()) != null) {
