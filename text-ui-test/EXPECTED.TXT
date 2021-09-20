@@ -11,20 +11,20 @@ You now have 1 tasks in your list.
 
 > ------------------------------------------------
 Added the following task:
-    [E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
+    [E][ ] mcdonald's interview (at: Aug 20 2021 14:00:00)
 You now have 2 tasks in your list.
 ------------------------------------------------
 
 > ------------------------------------------------
 Added the following task:
-    [D][ ] fail test (by: exam week)
+    [D][ ] fail test (by: Aug 20 2021 14:00:00)
 You now have 3 tasks in your list.
 ------------------------------------------------
 
 > ------------------------------------------------
 1. [T][ ] drop CS2103T
-2. [E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
-3. [D][ ] fail test (by: exam week)
+2. [E][ ] mcdonald's interview (at: Aug 20 2021 14:00:00)
+3. [D][ ] fail test (by: Aug 20 2021 14:00:00)
 ------------------------------------------------
 
 > ------------------------------------------------
@@ -35,7 +35,7 @@ You now have 4 tasks in your list.
 
 > ------------------------------------------------
 Marking task as completed:
-    [E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
+    [E][X] mcdonald's interview (at: Aug 20 2021 14:00:00)
 ------------------------------------------------
 
 > ------------------------------------------------
@@ -45,15 +45,34 @@ Marking task as completed:
 
 > ------------------------------------------------
 1. [T][X] drop CS2103T
-2. [E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
-3. [D][ ] fail test (by: exam week)
+2. [E][X] mcdonald's interview (at: Aug 20 2021 14:00:00)
+3. [D][ ] fail test (by: Aug 20 2021 14:00:00)
 4. [T][ ] dropout university
 ------------------------------------------------
 
 > ------------------------------------------------
+Here are the matching tasks:
+1. [E][X] mcdonald's interview (at: Aug 20 2021 14:00:00)
+------------------------------------------------
+
+> ------------------------------------------------
+Removed the following task:
+    [T][X] drop CS2103T
+You now have 3 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
 Added the following task:
-    [E][ ] prof ben leong's lecture (at: 24 Aug 2021 1-3pm)
-You now have 5 tasks in your list.
+    [E][ ] prof ben leong's lecture (at: Aug 20 2021 13:00:00)
+You now have 4 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
+Schedule for 2021-08-20
+
+1. 13:00:00: prof ben leong's lecture (Event)
+2. 14:00:00: mcdonald's interview (Event) (Done)
+3. 14:00:00: fail test (Deadline)
 ------------------------------------------------
 
 > ------------------------------------------------
