@@ -10,7 +10,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Represents a constructor for the Command class where the user command is initialized.
+     * Represents a constructor for the Task class where variables are initialized.
      *
      * @param description Description of the task.
      */
@@ -38,7 +38,12 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-    
+
+    /**
+     * Checks if the task is done or not.
+     * 
+     * @return true or false.
+     */
     public boolean isDone() {
         return this.isDone;
     }

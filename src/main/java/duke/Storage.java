@@ -54,6 +54,7 @@ public class Storage {
                 
                 addTaskToTaskList(parts, taskList, taskType);
             }
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -95,6 +96,7 @@ public class Storage {
                 fw.write(num + ". " + taskList.getTask(i).getTaskListOnDisk() + "\n");
             }
             fw.close();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

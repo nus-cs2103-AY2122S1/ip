@@ -33,11 +33,12 @@ public class InvalidCommand extends Command {
      * Returns an error message when the user enters an invalid command.
      *
      * @param taskList TaskList that stores the tasks.
-     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.   
+     * @return String response to an invalid command.
      */
     public String execute(TaskList taskList, Storage storage) {
         String response = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n" + "Please refer to the"
-                + " user guide to view all the possible commands!";
+                + " user guide to view all the possible commands and their formats!";
         Ui.printInput(response);
         return response;
     }

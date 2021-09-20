@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an event task in the task list.
+ * Represents a task of type event in the task list.
  */
 public class Event extends Task {
     protected LocalDateTime at;
@@ -23,10 +23,6 @@ public class Event extends Task {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
         String formattedDtf = this.at.format(dtf);
         this.formattedDtf = formattedDtf;
-    }
-
-    public LocalDateTime getDate() {
-        return at;
     }
     
     /**
@@ -50,5 +46,9 @@ public class Event extends Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public LocalDateTime getDate() {
+        return this.at;
     }
 }

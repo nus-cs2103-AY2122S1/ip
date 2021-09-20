@@ -46,7 +46,8 @@ public class DeadlineCommand extends Command {
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
      * @return String representation of the new deadline task as well as the number of tasks in the task list.
-     * @throws DukeException If user doesn't provide a description for the command or enters the command in invalid format.
+     * @throws DukeException If user doesn't provide a description for the command or enters the command in an 
+     * invalid format.
      */
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (command.trim().length() <= 8) {

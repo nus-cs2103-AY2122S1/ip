@@ -3,9 +3,10 @@ package duke.task;
 import java.time.LocalDateTime;
 
 /**
- * Represents a todo task in the task list.
+ * Represents a task of type todo in the task list.
  */
 public class Todo extends Task {
+    
     /**
      * Represents a constructor for the Todo class where the description of task is initialized.
      *

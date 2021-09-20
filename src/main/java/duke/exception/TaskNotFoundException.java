@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Encapsulates the exception when the user enters tries to find a task that doesn't exist.
+ * Encapsulates the exception when the user tries to find a task that doesn't exist.
  */
 public class TaskNotFoundException extends DukeException {
 
@@ -9,7 +9,7 @@ public class TaskNotFoundException extends DukeException {
      * Represents a constructor for the TaskNotFoundException class.
      */
     public TaskNotFoundException() {
-        super("Sorry, no such task exists!");
+        super("Sorry, the task you are looking for doesn't exist!");
     }
 
     /**

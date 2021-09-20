@@ -10,7 +10,7 @@ public class EmptyDescriptionException extends DukeException {
      */
     public EmptyDescriptionException() {
         super("OOPS!!! The description of this command cannot be empty. Refer to the user guide to view " +
-                "the correct format!");
+                "the correct format of this command!");
     }
 
     /**

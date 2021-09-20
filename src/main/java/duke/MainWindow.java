@@ -36,11 +36,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        
         TaskList taskList = new TaskList();
         Storage storage = new Storage("./duke.txt");
         storage.loadTaskListData(taskList);
+        
         Ui ui = new Ui(taskList, storage);
         String welcomeMessage = ui.showWelcome();
+        
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
@@ -62,9 +65,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        
         if (input.equals("bye")) {
             exitIfByeInput();
         }
+        
         userInput.clear();
     }
     

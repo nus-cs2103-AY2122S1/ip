@@ -76,6 +76,7 @@ public class EventCommand extends Command {
             Ui ui = new Ui(taskList, storage);
             String response = ui.taskResponse(task);
             return response;
+            
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
         }

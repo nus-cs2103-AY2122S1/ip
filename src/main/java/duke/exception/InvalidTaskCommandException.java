@@ -9,7 +9,7 @@ public class InvalidTaskCommandException extends DukeException {
      * Represents a constructor for the InvalidTaskCommandException class.
      */
     public InvalidTaskCommandException() {
-        super("Your command is not in the right format! Please refer to the user guide to view the" 
+        super("Your command is not in the right format! Please refer to the user guide to view" 
                 + " the correct format for various types of task commands!");
     }
 

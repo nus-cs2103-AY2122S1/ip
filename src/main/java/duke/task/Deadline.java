@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a deadline task in the task list.
+ * Represents a task of type deadline in the task list.
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
@@ -23,10 +23,6 @@ public class Deadline extends Task {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
         String formattedDtf = this.by.format(dtf);
         this.formattedDtf = formattedDtf;
-    }
-    
-    public LocalDateTime getDate() {
-        return by;
     }
 
     /**
@@ -50,5 +46,9 @@ public class Deadline extends Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public LocalDateTime getDate() {
+        return by;
     }
 }

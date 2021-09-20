@@ -1,6 +1,16 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.EditCommand;
+import duke.command.InvalidCommand;
+import duke.command.CloneCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.EventCommand;
+import duke.command.TodoCommand;
+import duke.command.ListCommand;
 
 /**
  * Deals with making sense of the user command.

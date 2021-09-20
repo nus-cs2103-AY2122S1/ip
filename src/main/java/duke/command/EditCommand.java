@@ -76,9 +76,11 @@ public class EditCommand extends Command {
     private String editTask(String[] parts, TaskList taskList) throws DukeException {
         String str = parts[1].substring(5);
         int index = Integer.parseInt(parts[0].substring(5).trim());
+        
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String[] furtherParts = str.split("/", 2);
         Task newTask = null;
+        
         try {
             if (str.startsWith("deadline")) {
                 LocalDateTime dateTime = LocalDateTime.parse(furtherParts[1].substring(3).trim(), dtf);
@@ -156,12 +158,9 @@ public class EditCommand extends Command {
                 throw new InvalidDateTimeException();
             }
             
-        } else if (oldTask.toString().startsWith("[T]")) {
-            return "A todo task doesn't have a DateTime attribute!";
-            
         } else {
             throw new InvalidTaskCommandException();
-        }
+        } 
 
         if (isDone) {
             newTask.markAsDone();
@@ -180,7 +179,6 @@ public class EditCommand extends Command {
             
         } else if (oldTask.toString().startsWith("[E]")) {
             newTask = new Event(description, dateTime);
-            
         }
         return newTask;
     }

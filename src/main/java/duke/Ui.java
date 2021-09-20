@@ -135,7 +135,7 @@ public class Ui {
     /**
      * Returns the string response to the find command.
      *
-     * @param wordToFind Task class.
+     * @param wordToFind String value of the keyword.
      * @param taskList TaskList object.
      * @return String representation of the tasks in the task list that contain the wordToFind string.
      */
@@ -168,7 +168,7 @@ public class Ui {
     }
 
     /**
-     * Returns the string response to the find command.
+     * Returns the string response to the clone command.
      *
      * @param value Number that the task is associated to in the task list.
      * @return String representation of the updated task list containing the cloned item.
@@ -176,23 +176,25 @@ public class Ui {
     public String cloneResponse(int value) {
         String response = "Task " + value + " from the task list has been cloned!" + " Here is the latest task " 
                 + "list: \n" + taskList.printList();
+        printInput(response);
         return response;
     }
 
     /**
-     * Returns the string response to the find command.
+     * Returns the string response to the edit task command.
      *
      * @param value Number that the task is associated to in the task list.
-     * @return String representation of the tasks in the task list that contain the wordToFind string.
+     * @return String representation of the updated task list containing the new task.
      */
     public String editTaskResponse(int value) {
         String response = "Task " + value + " in your task list has been updated! Here is your latest list: \n"
                 + taskList.printList();
+        printInput(response);
         return response;
     }
 
     /**
-     * Returns the string response to the find command.
+     * Returns the string response to the edit description command.
      *
      * @param value Number that the task is associated to in the task list.
      * @return String representation of the task list with updated description.
@@ -200,11 +202,12 @@ public class Ui {
     public String editDescriptionResponse(int value) {
         String response = "The description of Task " + value + " in your task list has been updated! Here is your " 
                 + "latest list: " + "\n" + taskList.printList();
+        printInput(response);
         return response;
     }
 
     /**
-     * Returns the string response to the find command.
+     * Returns the string response to the edit datetime command.
      *
      * @param value Number that the task is associated to in the task list.
      * @return String representation of the task list with updated date and time attributes.
@@ -212,6 +215,7 @@ public class Ui {
     public String editDateTimeResponse(int value) {
         String response = "The DateTime of Task " + value + " in your task list has been updated! Here is your latest list: "
                 + "\n" + taskList.printList();
+        printInput(response);
         return response;
     }
 }

@@ -20,7 +20,7 @@ public class TaskList {
     /**
      * Returns every task in the task list.
      * 
-     * @return String representation of the various tasks (if any) in the task list
+     * @return String representation of the various tasks (if any) in the task list.
      */
     public String printList() {
         if (userList.isEmpty()) {
@@ -51,7 +51,7 @@ public class TaskList {
     /**
      * Returns the task at the specified index (val) from the task list.
      *
-     * @param val Index value;
+     * @param val Index value.
      * @return Task object.
      */
     public Task getTask(int val) {
@@ -61,7 +61,7 @@ public class TaskList {
     /**
      * Adds the specified task to the task list.
      *
-     * @param task Task object;
+     * @param task Task object.
      */
     public void addTask(Task task) {
         userList.add(task);
@@ -70,7 +70,7 @@ public class TaskList {
     /**
      * Removes the task at the specified index (val) from the task list.
      *
-     * @param val Index value;
+     * @param val Index value.
      */
     public void removeTask(int val) {
         userList.remove(val);
@@ -79,8 +79,8 @@ public class TaskList {
     /**
      * Checks if the specified task is present in the task list.
      *
-     * @param task Task object;
-     * @return true or false
+     * @param task Task object.
+     * @return true or false.
      */
     public boolean isTaskPresent(Task task) {
         for (int i = 0; i < userList.size(); i++) {
@@ -90,7 +90,13 @@ public class TaskList {
         }
         return false;
     }
-    
+
+    /**
+     * Modifies a specified task in a specific index in the task list.
+     *
+     * @param task Task object.
+     * @param index Integer position of the task in the task list that is to be modified. 
+     */
     public void modifyTask(Task task, int index) {
         userList.set(index, task);
     }

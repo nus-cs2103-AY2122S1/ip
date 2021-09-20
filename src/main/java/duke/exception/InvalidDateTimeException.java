@@ -9,7 +9,7 @@ public class InvalidDateTimeException extends DukeException {
      * Represents a constructor for the InvalidDateTimeException class.
      */
     public InvalidDateTimeException() {
-        super("The format of your date is incorrect! It should be <yyyy-mm-dd HHmm>");
+        super("The format of your date and time is incorrect! It should be <yyyy-mm-dd HHmm>");
     }
 
     /**

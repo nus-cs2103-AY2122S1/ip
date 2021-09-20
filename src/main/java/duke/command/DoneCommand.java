@@ -62,6 +62,5 @@ public class DoneCommand extends Command {
         Ui ui = new Ui(taskList, storage);
         String response = ui.doneResponse(task);
         return response;
-        
     }
 }

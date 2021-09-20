@@ -29,10 +29,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns the task list when the user enters the list command
+     * Returns the task list when the user enters the list command.
      * 
      * @param taskList TaskList that stores the tasks.
-     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
+     * @return String representation of the task list.
      */
     public String execute(TaskList taskList, Storage storage) {
         String response = taskList.printList();
