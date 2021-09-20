@@ -36,7 +36,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String timeStr = DateTime.stringify(this.time);
+        String timeStr = DateTime.stringifyDateTime(this.time);
 
         return "[E]" + super.toString() + " (at: " + timeStr + ")";
     }

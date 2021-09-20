@@ -93,14 +93,14 @@ public class Storage {
             if (components.length != 4) {
                 throw new StorageException("Invalid storage file format");
             }
-            tasks.add(new Event(description, DateTime.parse(components[3]), isCompleted));
+            tasks.add(new Event(description, DateTime.parseDateTime(components[3]), isCompleted));
             break;
         }
         case "D": {
             if (components.length != 4) {
                 throw new StorageException("Invalid storage file format");
             }
-            tasks.add(new Deadline(description, DateTime.parse(components[3]), isCompleted));
+            tasks.add(new Deadline(description, DateTime.parseDateTime(components[3]), isCompleted));
             break;
         }
         default:
@@ -148,7 +148,7 @@ public class Storage {
             writer.write(" | ");
             writer.write(escapeString(task.getDescription()));
             writer.write(" | ");
-            writer.write(DateTime.stringify(((Event) task).getTime()));
+            writer.write(DateTime.stringifyDateTime(((Event) task).getTime()));
             writer.write(System.lineSeparator());
         } else if (task instanceof Deadline) {
             writer.write("D | ");
@@ -156,7 +156,7 @@ public class Storage {
             writer.write(" | ");
             writer.write(escapeString(task.getDescription()));
             writer.write(" | ");
-            writer.write(DateTime.stringify(((Deadline) task).getTime()));
+            writer.write(DateTime.stringifyDateTime(((Deadline) task).getTime()));
             writer.write(System.lineSeparator());
         }
     }

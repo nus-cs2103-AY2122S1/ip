@@ -36,7 +36,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String timeStr = DateTime.stringify(this.time);
+        String timeStr = DateTime.stringifyDateTime(this.time);
 
         return "[D]" + super.toString() + " (by: " + timeStr + ")";
     }
