@@ -32,15 +32,15 @@ recorded and available for subsequent action.
 ### Description of the outcome.
 
 Message shows that the task has been record.
-Format [Type][isdone] *input action*
+Format [Type][isdone] input action
 Then shows how many existing task in the list
 
 ```
 expected output
 
 Got it, I've added this task:
-	[T][] *input action*
-Now you have *1* tasks in the list.
+	[T][] input action
+Now you have 1 tasks in the list.
 ```
 
 ### `Keyword` - Deadline *input action param* /by *input date param*
@@ -60,8 +60,8 @@ Then shows how many existing task in the list
 expected output
 
 Got it, I've added this task:
-	[D][] *input action* *inpute date*
-Now you have *1* tasks in the list.
+	[D][] input action inpute date
+Now you have 1 tasks in the list.
 ```
 ### `Keyword` - Events *input action param* /at *input date param* *input day*
 
@@ -80,8 +80,8 @@ Then shows how many existing task in the list
 expected output
 
 Got it, I've added this task:
-	[D][] *input action* *inpute date* *input day*
-Now you have *1* tasks in the list.
+	[D][] input action inpute date input day
+Now you have 1 tasks in the list.
 ```
 
 ### `Keyword` - list
@@ -97,7 +97,7 @@ A list of all the task in their displayed format
 ```
 expected output
 
-1. [D][] *input action* *inpute date*
+1. [D][] input action inpute date
 ```
 
 ### `Keyword` - done *input index*
@@ -114,7 +114,7 @@ Specific task will have its second box crossed to indicate done.
 ```
 expected output
 
-Nice! I've marked this task as done: [D][*X*] *input action* *inpute date*
+Nice! I've marked this task as done: [D][X] input action inpute date
 
 ```
 ### `Keyword` - delete *input index*
@@ -131,7 +131,7 @@ Specific task will no longer be present in the list
 ```
 expected output
 
-Now you have *n* tasks in the list. 
+Now you have n tasks in the list. 
 ```
 
 ### `Keyword` - bye
