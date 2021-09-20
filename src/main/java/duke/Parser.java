@@ -76,29 +76,29 @@ public class Parser {
             Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
             char temp = packagedHistory.get(0).charAt(eventTypeIndex);
             switch (packagedHistory.get(0).charAt(eventTypeIndex)) {
-                case 'T':
-                    eventType = Task.TaskType.TODO;
-                    packagedHistory.remove(0);
-                    break;
-                case 'E':
-                    eventType = Task.TaskType.EVENT;
-                    packagedHistory.remove("[E][X]");
-                    packagedHistory.add(packagedHistory.size() - 2 , "/at");
-                    break;
-                case 'D':
-                    eventType = Task.TaskType.DEADLINE;
-                    packagedHistory.remove("[D][X]");
-                    packagedHistory.add(packagedHistory.size() - 2 , "/by");
-                    break;
-                case 'N':
-                    eventType = Task.TaskType.NOTAPPLICABLE;
-                    break;
-                default:
-                    break;
+            case 'T':
+                eventType = Task.TaskType.TODO;
+                packagedHistory.remove(0);
+                break;
+            case 'E':
+                eventType = Task.TaskType.EVENT;
+                packagedHistory.remove("[E][X]");
+                packagedHistory.add(packagedHistory.size() - 2 , "/at");
+                break;
+            case 'D':
+                eventType = Task.TaskType.DEADLINE;
+                packagedHistory.remove("[D][X]");
+                packagedHistory.add(packagedHistory.size() - 2 , "/by");
+                break;
+            case 'N':
+                eventType = Task.TaskType.NOTAPPLICABLE;
+                break;
+            default:
+                break;
             }
             Command command = new Command(eventType, packagedHistory, String.join(" ", packagedHistory));
             preloadedList.add(command);
-            assert !eventType.equals(Task.TaskType.NOTAPPLICABLE): "Task type should not be N.A";
+            assert !eventType.equals(Task.TaskType.NOTAPPLICABLE) : "Task type should not be N.A";
         }
         return preloadedList;
     }

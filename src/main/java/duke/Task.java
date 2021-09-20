@@ -44,7 +44,7 @@ public class Task {
     public String toString() {
         String status;
         if (isCompleteStatus) {
-            status = "[✓] ";
+            status = "[done] ";
         } else {
             status = "[X] ";
         }

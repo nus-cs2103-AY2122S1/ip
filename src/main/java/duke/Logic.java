@@ -34,7 +34,7 @@ public class Logic {
                 return processDone(packagedCommand, listOfCommandInputs, loggedCommand);
             } else if (listOfCommandInputs.contains("find")) {
                 return processFind(packagedCommand, listOfCommandInputs, loggedCommand);
-            } else if (listOfCommandInputs.get(0).equals("help")){
+            } else if (listOfCommandInputs.get(0).equals("help")) {
                 return processHelp(listOfCommandInputs);
             } else {
                 processTask(packagedCommand, true);
