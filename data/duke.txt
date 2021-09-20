@@ -6,4 +6,6 @@ T | 0 | remove book
 T | 1 | enjoy food
 E | 1 | something | 02/08/2021 1600
 D | 1 | eat | 02/08/2021 1600
-T | 0 | running
+E | 0 | running  | 01/09/2021 1800
+T | 1 | milk
+T | 0 | resume 

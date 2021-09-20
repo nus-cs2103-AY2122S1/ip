@@ -67,7 +67,7 @@ public class TaskManager {
         // Create new duke.tasks.Todo instance an add it to end taskList
         tasks.add(new Todo(userInput));
 
-        return getAcknowledgement(PrintType.TASK_DELETED_LINE.getPrintType(), tasks.size() - 1)
+        return getAcknowledgement(PrintType.TASK_ADDED_LINE.getPrintType(), tasks.size() - 1)
                 + "\n" + getNumOfTask();
     }
 
@@ -211,6 +211,9 @@ public class TaskManager {
         return foundList;
     }
 
+    public String goodBye() throws NoGoodByeException {
+        return PrintType.BYE_LINE.getPrintType();
+    }
 
     /**
      * Clear the list of all the tasks
