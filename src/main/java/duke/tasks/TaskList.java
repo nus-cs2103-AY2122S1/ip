@@ -17,7 +17,7 @@ public final class TaskList {
      * Adds a task to the list and returns the addition.
      * @param task Task to be added
      */
-    public static String add(Tasks task) {
+    public static String addTask(Tasks task) {
         taskString.add(taskNumber + ". ");
         taskList.add(task);
         taskNumber++;
@@ -34,14 +34,14 @@ public final class TaskList {
         if (task.startsWith("deadline")) {
             String[] input = task.split(" /by ", 2);
             LocalDateTime dueTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            str += TaskList.add(new Deadline(task, dueTime));
+            str += TaskList.addTask(new Deadline(task, dueTime));
         } else if (task.startsWith("event") && task.contains("/at ")) {
             String[] input = task.split(" /at ", 2);
             LocalDateTime startTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            str += TaskList.add(new Event(task, startTime));
+            str += TaskList.addTask(new Event(task, startTime));
         } else if (task.startsWith("todo")) {
             String[] input = task.split("todo ", 2);
-            str += TaskList.add(new Todo(input[1]));
+            str += TaskList.addTask(new Todo(input[1]));
         }
         return str;
     }
@@ -97,7 +97,6 @@ public final class TaskList {
         String str = "";
         for (Tasks task : taskList) {
             str = task.toString() + "\n";
-            System.out.println(task);
         }
         return str;
     }
@@ -108,10 +107,11 @@ public final class TaskList {
      */
     public static Tasks getLast() {
         int size = taskList.size();
-        if (size == 0 || size == 1) {
-            return new Todo("nothing");
-        }
-        return taskList.get(taskList.size() - 1);
+        return taskList.get(size - 1);
+    }
+
+    public static int getSize() {
+        return taskList.size();
     }
 
     /**
