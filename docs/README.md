@@ -9,7 +9,7 @@ duke frees mind of is having to remember things. is;
 
 all is need to do is,
 
-1.  download from [here.](https://github.com/BananaTechs/ip/releases)
+1.  download from [here.](https://github.com/BananaTechs/ip/releases/tag/A-Release)
 2.  double-click.
 3.  add tasks.
 4.  let is manage your tasks for you. 
