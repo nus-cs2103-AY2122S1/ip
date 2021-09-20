@@ -31,11 +31,13 @@ public class Storage {
      * @throws IOException if an error while reading has occurred.
      */
     public static String writeToFile(String task) throws IOException {
+        boolean isDeadline = task.startsWith("deadline") && task.contains("/by ");
+        boolean isEvent = task.startsWith("event") && task.contains("/at ");
+        boolean isTodo = task.startsWith("todo");
+
         String str = "";
         try {
-            if (task.startsWith("deadline")
-                    || (task.startsWith("event") && task.contains("/at "))
-                    || (task.startsWith("todo"))) {
+            if (isDeadline || isEvent || isTodo) {
                 str += TaskList.addSpecificTask(task);
                 assert TaskList.getSize() > 0;
                 System.out.println(TaskList.getLast().toString());
@@ -71,20 +73,14 @@ public class Storage {
                 switch (curr[1]) {
                 case "T":
                     TaskList.addSpecificTask("todo " + curr[2]);
-                    if (curr[1].equals("X")) {
-                        TaskList.getLast().markAsDone();
-                    }
                 case "E":
                     TaskList.addSpecificTask("event " + curr[2]);
-                    if (curr[1].equals("X")) {
-                        TaskList.getLast().markAsDone();
-                    }
                 case "D":
                     TaskList.addSpecificTask("deadline " + curr[2]);
-                    if (curr[1].equals("X")) {
-                        TaskList.getLast().markAsDone();
-                    }
                 default: break;
+                }
+                if (curr[1].equals("X")) {
+                    TaskList.getLast().markAsDone();
                 }
                 reader.close();
             }
