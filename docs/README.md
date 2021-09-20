@@ -27,6 +27,14 @@ is can:
 
 is show you.
 
+here is things is can do:
+- add tasks
+- list tasks
+- complete tasks
+- edit tasks
+- search tasks
+- exit program.
+
 ## add task.
 is can add tasks really easy.
 
