@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,7 +46,7 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws DukeException {
+    public void start(Stage stage) throws DukeException, IOException, InterruptedException {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -92,6 +93,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        storage.fetchData();
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -122,6 +125,8 @@ public class Duke extends Application {
                 e.printStackTrace();
             }
         });
+
+
     }
 
     /**
@@ -151,6 +156,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
     }
 
     /**
@@ -168,6 +174,7 @@ public class Duke extends Application {
             String response = ui.executeCommand(command, description);
             return response;
         } else {
+            storage.saveData();
             return ui.showByeMessage();
         }
 

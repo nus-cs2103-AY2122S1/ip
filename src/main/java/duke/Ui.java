@@ -162,8 +162,6 @@ public class Ui {
                 } else if (command.equals("delete")) {
                     int taskIndex = Integer.parseInt(description.substring(1)) - 1;
                     assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
-                    str.append(LINES + "\n");
-                    str.append("Noted. I've removed this task:\n");
                     Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
                     str.append(displayDeleteMessage(taskToBeDeleted));
                     deleteTask(taskIndex);
@@ -174,10 +172,7 @@ public class Ui {
                 } else if (command.equals("update")) {
                     boolean hasNewDescription = description.contains("d/");
                     boolean hasNewTime = description.contains("t/");
-                    System.out.println(description);
-                    System.out.println(hasNewDescription + " " + hasNewTime);
                     int taskIndex = Integer.parseInt(description.substring(1, 2)) - 1;
-                    System.out.println(taskIndex);
 
                     if (hasNewDescription) {
                         String newDescription = Parser.getNewUpdatedDescription(description);
