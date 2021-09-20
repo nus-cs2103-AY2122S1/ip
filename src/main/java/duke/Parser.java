@@ -1,28 +1,22 @@
 package duke;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 /**
  * Contains logic and methods relating to parsing user input from CLI.
  */
 public class Parser {
-    private final Scanner scanner;
-    private String currentCommand;
+    private String currentInput;
     private CommandType currentType;
-
-    public Parser() {
-        scanner = new Scanner(System.in);
-    }
 
     /**
      * Matches first word of line of input with current available commands.
      *
      * @return CommandType The command type of the next line of input
      */
-    public CommandType nextCommand() {
-        currentCommand = scanner.nextLine();
-        String command = currentCommand.split(" ")[0];
+    public CommandType nextCommand(String input) {
+        this.currentInput = input;
+        String command = currentInput.split(" ")[0];
         switch (command) {
         case "bye":
             return CommandType.Exit;
@@ -49,33 +43,33 @@ public class Parser {
     }
 
     public String getSearchTerm() {
-        return currentCommand.split(" ")[1];
+        return currentInput.split(" ")[1];
     }
 
     /**
      * Uses current command type to decide how to parse the description of task.
      *
      * @return Task Either ToDo/Deadline/Event task based on command.
-     * @throws DukeException
+     * @throws DukeException In case of incorrect instruction format.
      */
     public Task generateTask() throws DukeException {
         if (currentType == CommandType.AddToDo) {
-            String description = currentCommand.split("/by ")[0].substring(5);
+            String description = currentInput.split("/by ")[0].substring(5);
             if (description.isBlank()) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             return new ToDo(description, false);
         } else if (currentType == CommandType.AddDeadline) {
-            String description = currentCommand.split("/by ")[0].substring(9);
-            String by = currentCommand.split("/by ")[1];
+            String description = currentInput.split("/by ")[0].substring(9);
+            String by = currentInput.split("/by ")[1];
             LocalDate deadline  = LocalDate.parse(by);
             if (description.isBlank()) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
             return new Deadline(description, deadline, false);
         } else if (currentType == CommandType.AddEvent) {
-            String description = currentCommand.split("/at ")[0].substring(6);
-            String by = currentCommand.split("/at ")[1];
+            String description = currentInput.split("/at ")[0].substring(6);
+            String by = currentInput.split("/at ")[1];
             LocalDate eventDate  = LocalDate.parse(by);
             if (description.isBlank()) {
                 throw new DukeException("OOPS!!! The description of an event cannot be empty.");
@@ -92,6 +86,6 @@ public class Parser {
      * @return int Index of task to be deleted/marked as complete.
      */
     public int getIndex() {
-        return Integer.parseInt(currentCommand.split(" ")[1]) - 1;
+        return Integer.parseInt(currentInput.split(" ")[1]) - 1;
     }
 }
