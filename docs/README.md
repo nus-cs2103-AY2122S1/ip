@@ -14,7 +14,7 @@ the files locally.
 
 ![DukeBotUI](Ui.png)
 
-## :wFeatures
+## Features
 
 ### Help command
 Dukebot supports the usage of help command. This help command is intended to act as a quick 
