@@ -41,6 +41,12 @@ public class UI {
                 return "Error saving file";
             }
             return exitMsg();
+        case Archive:
+            try {
+                return String.format("Task list archived at: %s", storage.archiveData());
+            } catch (IOException e) {
+                return "Error archiving file";
+            }
         case List:
             return listMsg();
         case DeleteTask:

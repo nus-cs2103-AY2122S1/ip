@@ -38,6 +38,8 @@ public class Parser {
             return CommandType.MarkAsDone;
         case "find":
             return CommandType.Find;
+        case "archive":
+            return CommandType.Archive;
         default:
             return CommandType.Error;
         }

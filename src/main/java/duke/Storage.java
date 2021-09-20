@@ -3,6 +3,12 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
 
 public class Storage {
@@ -74,5 +80,24 @@ public class Storage {
             writer.write(task.toString() + System.lineSeparator());
         }
         writer.close();
+    }
+
+    /**
+     * Archives the current list of tasks and cleans the task list for new start.
+     *
+     * @throws IOException when data writing fails.
+     */
+    public String archiveData() throws IOException {
+        writeData();
+        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+        PrintWriter writer = new PrintWriter(dataFile);
+        writer.close();
+        taskList.getTasks().clear();
+        return copyFile(dataFile, retrieveFile("data", String.format("%s.txt", dateTime)));
+    }
+
+    private String copyFile(File source, File dest) throws IOException {
+        Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        return dest.getName();
     }
 }
