@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -46,6 +47,7 @@ public class Duke extends Application {
         }
 
         startBot = new Button("Enter to Chat"); // enter chat with bot
+        startBot.setStyle("-fx-background-radius: 30px");
         chatHistory = new VBox(10); // chat history
         chatHistory.setAlignment(Pos.CENTER);
         chatHistory.setPrefWidth(WIDTH - 20);
@@ -66,11 +68,13 @@ public class Duke extends Application {
         this.primaryStage = primaryStage;
         rootNode = new BorderPane();
         rootNode.setCenter(createWelcomeScreen());
+        rootNode.setStyle("-fx-background-color: black;");
         Scene scene = new Scene(rootNode, WIDTH, HEIGHT);
         primaryStage.setMaxWidth(WIDTH);
         primaryStage.setMinWidth(WIDTH);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Duke");
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/1.png")));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
@@ -109,15 +113,13 @@ public class Duke extends Application {
         row2.setPercentHeight(10);
 
         GridPane container = new GridPane();
-        container.getRowConstraints().addAll(row1, row2);
+        container.getRowConstraints().addAll( row1, row2);
 
         ScrollPane chatScroll = new ScrollPane();
         chatScroll.setFitToWidth(true);
-
         chatScroll.setContent(chatHistory);
         chatScroll.vvalueProperty().bind(chatHistory.heightProperty()); // auto scroll
         container.add(chatScroll, 0, 0);
-
 
         chatMessage.setPrefColumnCount(35);
         chatMessage.setPrefHeight(45);

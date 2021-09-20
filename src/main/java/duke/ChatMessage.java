@@ -38,13 +38,13 @@ public class ChatMessage extends BorderPane {
             this.setRight(imageView);
             message.setAlignment(Pos.BASELINE_LEFT);
             message.setTextAlignment(TextAlignment.LEFT);
-            this.setStyle("-fx-border-color: green; -fx-border-radius: 10px; -fx-background-color: linear-gradient(to bottom right, #ccffff 0%, #99ccff 100%);");
+            this.setStyle("-fx-background-radius: 10px; -fx-border-color: green; -fx-border-radius: 10px; -fx-background-color: linear-gradient(to bottom right, #ccffff 0%, #99ccff 100%);");
         } else {
             imageView.setImage(image2);
             this.setLeft(imageView);
             message.setAlignment(Pos.BASELINE_RIGHT);
             message.setTextAlignment(TextAlignment.LEFT);
-            this.setStyle("-fx-border-color: gray; -fx-border-radius: 10px; -fx-background-color: snow;");
+            this.setStyle("-fx-background-radius: 10px; -fx-border-color: gray; -fx-border-radius: 10px; -fx-background-color: snow;");
         }
     }
 }
