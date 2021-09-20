@@ -9,6 +9,12 @@ import java.util.Arrays;
  */
 public class Parser {
 
+    public static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty";
+    public static final String UNKNOWN_COMMAND_MESSAGE = "Command not recognised";
+    public static final String EMPTY_TASK_SUFFIX = " must have a name";
+    public static final String MISSING_TIME_MESSAGE = " must be %s at a certain time";
+    public static final String NO_ARGUMENTS_EXPECTED_SUFFIX = " command should not have any other arguments";
+
     /**
      * Reads a String, and parses it into a Command. 
      * @param fullCommand A string containing a command to be parsed
@@ -18,28 +24,28 @@ public class Parser {
         try {
             String[] tokens = fullCommand.split(" ");
             if (tokens.length == 0){
-                throw new IllegalArgumentException("Command cannot be empty");
+                throw new IllegalArgumentException(EMPTY_COMMAND_MESSAGE);
             }
             String commandStr = tokens[0];
             String[] otherTokens = Arrays.copyOfRange(tokens, 1, tokens.length);
-            if (commandStr.equals("todo")) {
+            if (commandStr.equals(ToDo.TODO_NAME)) {
                 return parseToDo(otherTokens);
-            } else if (commandStr.equals("event")) {
+            } else if (commandStr.equals(Event.EVENT_NAME)) {
                 return parseEvent(otherTokens);
-            } else if (commandStr.equals("deadline")) {
+            } else if (commandStr.equals(Deadline.DEADLINE_NAME)) {
                 return parseDeadline(otherTokens);
-            } else if (commandStr.equals("list")) {
+            } else if (commandStr.equals(CommandShowList.SHOW_LIST_NAME)) {
                 return parseShowList(otherTokens);
-            } else if (commandStr.equals("delete")) {
+            } else if (commandStr.equals(CommandDelete.DELETE_NAME)) {
                 return parseDelete(otherTokens);
-            } else if (commandStr.equals("done")) {
+            } else if (commandStr.equals(CommandDone.DONE_NAME)) {
                 return parseDone(otherTokens);
-            } else if (commandStr.equals("exit")) {
+            } else if (commandStr.equals(CommandExit.EXIT_NAME)) {
                 return parseExit(otherTokens);
-            } else if (commandStr.equals("find")) {
+            } else if (commandStr.equals(CommandFind.FIND_NAME)) {
                 return parseFind(otherTokens);
             } else {
-                throw new IllegalArgumentException("Command not recognised");
+                throw new IllegalArgumentException(UNKNOWN_COMMAND_MESSAGE);
             }
         } catch (IllegalArgumentException ex) {
             return new CommandError(ex.getMessage());
@@ -52,11 +58,13 @@ public class Parser {
     }
 
     private static CommandAdd parseEvent(String[] tokens) {
-        int atIdx = Arrays.asList(tokens).indexOf("/at");
+        int atIdx = Arrays.asList(tokens).indexOf("/" + Event.EVENT_TIME_MARKER);
         if (atIdx == -1) {
-            throw new IllegalArgumentException("Event must be at a certain time");
-        } else if (atIdx == 1) {
-            throw new IllegalArgumentException("Event must have a name");
+            throw new IllegalArgumentException(Event.EVENT_NAME + String.format(
+                    MISSING_TIME_MESSAGE, Event.EVENT_TIME_MARKER
+            ));
+        } else if (atIdx == 0) {
+            throw new IllegalArgumentException(Event.EVENT_NAME + EMPTY_TASK_SUFFIX);
         } else {
             String taskName = String.join(" ",
                     Arrays.copyOfRange(tokens, 0, atIdx));
@@ -68,17 +76,19 @@ public class Parser {
 
     private static CommandShowList parseShowList(String[] tokens) {
         if (tokens.length > 0) {
-            throw new IllegalArgumentException("List command should not have any other arguments");
+            throw new IllegalArgumentException(CommandShowList.SHOW_LIST_NAME + NO_ARGUMENTS_EXPECTED_SUFFIX);
         }
         return new CommandShowList();
     }
 
     private static CommandAdd parseDeadline(String[] tokens) {
-        int byIdx = Arrays.asList(tokens).indexOf("/by");
+        int byIdx = Arrays.asList(tokens).indexOf("/" + Deadline.DEADLINE_TIME_MARKER);
         if (byIdx == -1) {
-            throw new IllegalArgumentException("Deadline must be by a certain time");
-        } else if (byIdx == 1) {
-            throw new IllegalArgumentException("Deadline must have a name");
+            throw new IllegalArgumentException(Deadline.DEADLINE_NAME + EMPTY_TASK_SUFFIX);
+        } else if (byIdx == 0) {
+            throw new IllegalArgumentException(Deadline.DEADLINE_NAME + String.format(
+                    MISSING_TIME_MESSAGE, Deadline.DEADLINE_TIME_MARKER
+            ));
         } else {
             String taskName = String.join(" ",
                     Arrays.copyOfRange(tokens, 0, byIdx));
@@ -100,7 +110,7 @@ public class Parser {
 
     private static CommandExit parseExit(String[] tokens) {
         if (tokens.length > 0) {
-            throw new IllegalArgumentException("Exit command should not have any other arguments");
+            throw new IllegalArgumentException(CommandExit.EXIT_NAME + NO_ARGUMENTS_EXPECTED_SUFFIX);
         }
         return new CommandExit();
     }

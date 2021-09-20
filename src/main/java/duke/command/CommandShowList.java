@@ -5,6 +5,7 @@ import duke.TaskList;
 import duke.ui.UserInterface;
 
 public class CommandShowList extends Command {
+    public static final String SHOW_LIST_NAME = "list";
 
     public CommandShowList () {
         super();

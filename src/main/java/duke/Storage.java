@@ -10,6 +10,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
+    public static final String SAVE_SUCCESSFUL_PREFIX = "File successfully saved to ";
+    public static final String SAVE_FAILURE_MESSAGE = "Error: Could not save file";
+    public static final String LOAD_FAILURE_MESSAGE = "File could not be found";
+    public static final String INVALID_TASK_MESSAGE = "Invalid task found";
     private File file;
     public Storage(Path filepath) {
         file = filepath.toFile();
@@ -25,7 +29,7 @@ public class Storage {
                 taskList.add(task);
             }
         } catch (FileNotFoundException e) {
-            ui.displayError("File could not be found");
+            ui.displayError(LOAD_FAILURE_MESSAGE);
         }
         return taskList;
     }
@@ -34,14 +38,14 @@ public class Storage {
         String[] tokens = taskStr.split(",");
         String type = tokens[0];
         String[] otherTokens = Arrays.copyOfRange(tokens, 1, tokens.length);
-        if (type.equals("todo")) {
+        if (type.equals(ToDo.TODO_NAME)) {
             return parseToDo(otherTokens);
-        } else if (type.equals("event")) {
+        } else if (type.equals(Event.EVENT_NAME)) {
             return parseEvent(otherTokens);
-        } else if (type.equals("deadline")) {
+        } else if (type.equals(Deadline.DEADLINE_NAME)) {
             return parseDeadline(otherTokens);
         } else {
-            throw new IllegalArgumentException("Invalid task found");
+            throw new IllegalArgumentException(INVALID_TASK_MESSAGE);
         }
     }
 
@@ -62,9 +66,9 @@ public class Storage {
             PrintWriter dukeWriter = new PrintWriter(file);
             dukeWriter.print(taskList.toCsvString());
             dukeWriter.close();
-            ui.print("File successfully saved to " + file.getPath());
+            ui.print(SAVE_SUCCESSFUL_PREFIX + file.getPath());
         } catch (FileNotFoundException e) {
-            System.err.println("Error: Could not save file");
+            ui.displayError(SAVE_FAILURE_MESSAGE);
         } finally {
             ui.displayFarewell();
         }

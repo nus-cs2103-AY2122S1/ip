@@ -5,6 +5,7 @@ import duke.TaskList;
 import duke.ui.UserInterface;
 
 public class CommandFind extends Command {
+    public static final String FIND_NAME = "find";
 
     private String keyword;
 

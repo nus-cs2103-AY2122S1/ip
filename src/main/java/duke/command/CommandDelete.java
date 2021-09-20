@@ -5,6 +5,7 @@ import duke.TaskList;
 import duke.ui.UserInterface;
 
 public class CommandDelete extends Command{
+    public static final String DELETE_NAME = "delete";
     private String taskName;
 
     public CommandDelete(String taskName) {
