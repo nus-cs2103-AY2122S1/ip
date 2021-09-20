@@ -13,7 +13,7 @@ Start chatting with this adorable Japanese bot to manage your tasks effectively!
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `misaki-v3.0.0.jar` from [here](https://github.com/hsiaotingluv/ip/releases/tag/misaki-v3.0.0).
+2. Download the latest `misaki-v3.4.0.jar` from [here](https://github.com/hsiaotingluv/ip/releases/tag/misaki-v3.0.0).
 
 3. Copy the file to the folder you want to use as the home folder for your Misaki.
 
@@ -30,10 +30,10 @@ Some example commands you can try:
 
    ☘️ **`todo`**`complete assignment`: Adds a todo task `complete assignment` to the list.<br>
    
-   🌼 **`deadline`**`submit iP /by 2021-09-17 23:59`: Adds a deadline task `submit iP (by: 17 Sep 2020 23:59pm)` to the
+   🌼 **`deadline`**`submit iP /by 2021-09-17 23:59`: Adds a deadline task `submit iP (by: 17 Sep 2020 23:59 pm)` to the
    list.<br>
 
-   ☘️ **`event`**`birthday party /at 2021-09-19 18:00`: Adds an event task `birthday party (at: 19 Sep 2021 18:00pm)` to
+   ☘️ **`event`**`birthday party /at 2021-09-19 18:00`: Adds an event task `birthday party (at: 19 Sep 2021 18:00 pm)` to
    the list.<br>
 
    🌼 **`list`**: Lists all the tasks in the list.<br>
