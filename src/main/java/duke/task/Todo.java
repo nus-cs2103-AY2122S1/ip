@@ -10,41 +10,39 @@ import duke.main.DukeException;
  */
 public class Todo extends Task {
 
-    private final String TODO_MARKER = "T";
-    private final String TODO_KEYWORD = "todo ";
+    private static final String TODO_MARKER = "T";
+    private static final String TODO_KEYWORD = "todo ";
     private String todoDescription;
     private TaskTag todoTag;
 
     /**
      * Class constructor.
      *
-     * @param description the duke.task description.
+     * @param description the todo description.
      * @throws DukeException cause by exception handled in DukeException class.
      */
     public Todo(String description) throws DukeException {
         super();
         try {
             int startOfDescriptionIndex = getStartingIndexAfter(description, TODO_KEYWORD);
-	    assert startOfDescriptionIndex != -1 : "TASK KEYWORD must be in the description.";
-            todoDescription = getSubString(description, startOfDescriptionIndex);
-            if (todoDescription.equals("")) {
-                throw new StringIndexOutOfBoundsException();
-            }
-            int startOfTag = getStartingIndexAfter(description, TaskTag.getTagSymbol());
-            String tag = getSubString(description, startOfTag - TaskTag.getTagSymbol().length());
-            todoTag = new TaskTag(tag);
+            int startOfTodoTagIndex = getStartingIndexAfter(description,
+                TaskTag.getTagSymbol()) - TaskTag.getTagSymbol().length();
+            assert startOfDescriptionIndex != -1 : "todo must be in the description.";
+            this.todoDescription = getSubString(description, startOfDescriptionIndex,
+                    startOfTodoTagIndex);
+            todoTag = new TaskTag(getSubString(description, startOfTodoTagIndex));
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
         }
     }
 
     /**
-     * Class constructor used when reading storage file.
+     * Class constructor for loading task from storage.
      *
-     * @param todoDescription description of the todo file.
-     * @param tag tag used to tag the task.
+     * @param todoDescription description of the todo task.
+     * @param tag tag use to tag the todo task.
      */
-    public Todo(String todoDescription, String tag) {
+    public Todo(String todoDescription, String tag) throws DukeException {
         this.todoDescription = todoDescription;
         this.todoTag = new TaskTag(tag);
     }
@@ -66,7 +64,7 @@ public class Todo extends Task {
      * @return storage format of the duke.task.
      */
     public String formatToStore() {
-        return String.format("%s | %s | %s", TODO_MARKER, getStatusIcon().equals(" ") ? 1 : 0,
+        return String.format("%s %s %s %s", TODO_MARKER, super.formatToStore(),
             todoDescription, todoTag.getTagInStoreFormat());
     }
 }

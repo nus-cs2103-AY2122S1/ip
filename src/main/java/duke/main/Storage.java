@@ -6,11 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.TaskTag;
 
 /**
  * Represents a file to store data, operations to write on the file.
@@ -52,9 +50,6 @@ public class Storage {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            if (file.length() == 0) {
-                return tasks;
-            }
         } catch (IOException e) {
             file = new File(filePath);
             throw new DukeException(DukeException.Exceptions.IOException);
@@ -92,31 +87,48 @@ public class Storage {
     private Task createNewTask(String taskString) throws DukeException {
         Task task;
         if (taskString.contains("D |")) {
-            String[] taskDescriptionAndDate = getTaskDescriptionAndDate(taskString, "| D | ", "by ");
-            task = new Deadline(taskDescriptionAndDate[0], taskDescriptionAndDate[1]);
+            String[] taskDescriptionTagAndDate = getTaskDescriptionTagAndDate(taskString, "| D | ",
+                    "by ");
+
+            task = Task.createTask("D", taskDescriptionTagAndDate[0], taskDescriptionTagAndDate[2],
+                    taskDescriptionTagAndDate[1]);
         } else if (taskString.contains("E |")) {
-            String[] taskDescriptionAndDate = getTaskDescriptionAndDate(taskString, "| E | ", "at ");
-            task = new Event(taskDescriptionAndDate[0], taskDescriptionAndDate[1]);
+            String[] taskDescriptionDateAndTag = getTaskDescriptionTagAndDate(taskString, "| E | ",
+                    "at ");
+            task = Task.createTask("E", taskDescriptionDateAndTag[0], taskDescriptionDateAndTag[2],
+                    taskDescriptionDateAndTag[1]);
         } else {
             // todo tasks have no dates, so only take task description.
-            String taskDescription = getTaskDescriptionAndDate(taskString, "| T | ")[0];
-            task = new Todo(taskDescription);
+            String[] taskDescriptionAndTag = getTaskDescriptionTagAndDate(taskString, "| T | ");
+            task = Task.createTask("T", taskDescriptionAndTag[0], taskDescriptionAndTag[1]);
         }
         if (taskString.contains("| 0 |")) {
             task.markAsDone();
         }
         return task;
     }
-    private String[] getTaskDescriptionAndDate(String taskString, String taskTag, String ... timeTag) {
-        int startOfTaskDescriptionIndex = getStartingIndex(taskString, taskTag);
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private String[] getTaskDescriptionTagAndDate(String taskString, String taskMarker, String ... timeMarker) {
+        String divider = " | ";
+        int startOfTaskDescriptionIndex = getStartingIndex(taskString, taskMarker);
         int startOfTaskDateIndex = -1;
-        if (timeTag != null) {
-            startOfTaskDateIndex = getStartingIndex(taskString, timeTag[0]);
+        String taskTagSymbol = TaskTag.getStorageTagSymbol();
+        if (timeMarker != null) {
+            startOfTaskDateIndex = getStartingIndex(taskString, timeMarker[0]);
         }
         String taskDescription = taskString.substring(startOfTaskDescriptionIndex,
                 startOfTaskDateIndex);
-        String taskDate = taskDescription.substring(startOfTaskDateIndex);
-        return new String[]{taskDescription, taskDate};
+        String taskDate;
+        String taskTag;
+        if (!taskDescription.contains(TaskTag.getStorageTagSymbol())) {
+            taskDate = taskDescription.substring(startOfTaskDateIndex);
+            taskTag = "";
+        } else {
+            int startOfTagIndex = getStartingIndex(taskString, taskTagSymbol);
+            taskDate = taskDescription.substring(startOfTaskDateIndex, startOfTagIndex - taskTagSymbol.length());
+            taskTag = taskTagSymbol.substring(startOfTagIndex - divider.length());
+        }
+        return new String[]{taskDescription, taskTag, taskDate};
     }
     private int getStartingIndex(String string, String stringSlicer) {
         return string.indexOf(stringSlicer) + stringSlicer.length();
