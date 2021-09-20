@@ -25,6 +25,7 @@ public class Parser {
      */
     public String dispatch(TaskList tasks, String input) {
         String[] cmd = input.split(" ", 2);
+        assert cmd != null : "Input String cannot be empty";
         return functions.getOrDefault(cmd[0], (a, b) -> "FOOLISH MORTAL, I CAN'T EXECUTE THAT COMMAND. TRY AGAIN:")
                 .apply(tasks, cmd.length > 1 ? cmd[1] : "");
     }
@@ -58,6 +59,7 @@ public class Parser {
     }
 
     private String findTasks(TaskList tasks, String input) throws DukeException {
+        assert input != null : "Input String cannot be empty";
         if (tasks.isEmpty()) {
             throw new DukeException("YOU HAVE NO TASKS YOU FOOL.");
         }
@@ -65,6 +67,7 @@ public class Parser {
     }
 
     private String deleteTask(TaskList tasks, String input) throws DukeException {
+        assert input != null : "Input String cannot be empty";
         if (tasks.isEmpty()) {
             throw new DukeException("YOU HAVE NO TASKS YOU FOOL.");
         }
@@ -83,6 +86,7 @@ public class Parser {
     }
 
     private String addToDo(TaskList tasks, String taskName) throws DukeException {
+        assert taskName != null : "taskName String cannot be empty";
         if (taskName.equals("")) {
             throw new DukeException("NAME YOUR TASK. DON'T WASTE MY TIME.");
         }
