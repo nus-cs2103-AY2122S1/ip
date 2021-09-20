@@ -36,7 +36,7 @@ public class InvalidCommand extends Command {
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
      */
     public String execute(TaskList taskList, Storage storage) {
-        String response = "OOPS!!! I'm sorry, but I don't know what that means :-( \n" + "Please refer to the"
+        String response = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n" + "Please refer to the"
                 + " user guide to view all the possible commands!";
         Ui.printInput(response);
         return response;

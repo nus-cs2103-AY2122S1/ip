@@ -1,5 +1,11 @@
 # User Guide
 
+Duke is a personal assistant chatbot that will help you  keep track of various things
+It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical 
+User Interface (GUI).
+
+
+
 ## Features 
 
 ### Feature-ABC
