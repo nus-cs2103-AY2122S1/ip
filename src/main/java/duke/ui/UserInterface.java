@@ -1,10 +1,5 @@
 package duke.ui;
 
-import duke.Main;
-import javafx.stage.Stage;
-
-import java.util.Scanner;
-
 /**
  * Represents an interface between the program and the user.
  */

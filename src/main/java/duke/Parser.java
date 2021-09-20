@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandAdd;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandError;
+import duke.command.CommandExit;
+import duke.command.CommandFind;
+import duke.command.CommandShowList;
 
 import java.util.Arrays;
 

@@ -2,7 +2,6 @@ package duke;
 
 import duke.ui.MainWindow;
 import duke.ui.UserInterface;
-import javafx.stage.Stage;
 import duke.command.Command;
 
 import java.time.format.DateTimeFormatter;
