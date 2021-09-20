@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
@@ -20,22 +21,40 @@ public class Storage {
             Scanner fileReader = new Scanner(file);
             while (fileReader.hasNext()) {
                 String row = fileReader.nextLine();
-                String[] tokens = row.split(",");
-                if (tokens[0].equals("todo")) {
-                    Task task = new ToDo(tokens[1]);
-                    taskList.add(task);
-                } else if (tokens[0].equals("event")) {
-                    Task task = new Event(tokens[1], tokens[2]);
-                    taskList.add(task);
-                } else if (tokens[0].equals("deadline")) {
-                    Task task = new Deadline(tokens[1], tokens[2]);
-                    taskList.add(task);
-                }
+                Task task = parseTask(row);
+                taskList.add(task);
             }
         } catch (FileNotFoundException e) {
             ui.displayError("File could not be found");
         }
         return taskList;
+    }
+
+    private Task parseTask(String taskStr) {
+        String[] tokens = taskStr.split(",");
+        String type = tokens[0];
+        String[] otherTokens = Arrays.copyOfRange(tokens, 1, tokens.length);
+        if (type.equals("todo")) {
+            return parseToDo(otherTokens);
+        } else if (type.equals("event")) {
+            return parseEvent(otherTokens);
+        } else if (type.equals("deadline")) {
+            return parseDeadline(otherTokens);
+        } else {
+            throw new IllegalArgumentException("Invalid task found");
+        }
+    }
+
+    private Task parseToDo(String[] tokens) {
+        return new ToDo(tokens[0], Boolean.parseBoolean(tokens[1]));
+    }
+
+    private Task parseEvent(String[] tokens) {
+        return new Event(tokens[0], tokens[1], Boolean.parseBoolean(tokens[2]));
+    }
+
+    private Task parseDeadline(String[] tokens) {
+        return new Deadline(tokens[0], tokens[1], Boolean.parseBoolean(tokens[2]));
     }
 
     public void save(UserInterface ui, TaskList taskList) {
