@@ -5,7 +5,7 @@ package duke.task;
  * A task object has a name, and can be done or not.
  */
 public abstract class Task {
-	private String name;
+	private final String name;
 	private boolean isDone = false;
 
 	/**
