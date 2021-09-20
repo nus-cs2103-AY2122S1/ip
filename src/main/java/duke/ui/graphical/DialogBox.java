@@ -35,8 +35,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        setMinHeight(USE_PREF_SIZE);
+        getStyleClass().add("dialog");
         dialog.setText(text);
+        dialog.getStyleClass().add("text");
         displayPicture.setImage(img);
+        displayPicture.getStyleClass().add("picture");
+
     }
 
     /**
@@ -50,12 +55,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.getStyleClass().add("user");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.getStyleClass().add("duke");
         return db;
     }
 }

@@ -19,7 +19,10 @@ public class GraphicalApplication extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(GraphicalApplication.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("css/styles.css");
             stage.setScene(scene);
+            stage.setTitle("Duke");
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (Exception e) {

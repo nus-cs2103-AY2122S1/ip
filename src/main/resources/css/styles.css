@@ -1,0 +1,19 @@
+.dialog {
+    -fx-padding: 0;
+}
+
+.duke {
+    -fx-background-color: lightgrey;
+    -fx-alignment: center-left;
+}
+
+.user {
+    -fx-background-color: white;
+    -fx-alignment: center-right;
+}
+
+.text {
+    -fx-padding: 16;
+    -fx-font-size: 16;
+    -fx-wrap-text: true;
+}
