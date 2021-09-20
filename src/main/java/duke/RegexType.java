@@ -10,8 +10,8 @@ public enum RegexType {
     DEADLINE_REGEX(".+/by.+"),
     TASK_ADDED_LINE("Got it. I've added this task:"),
     SPLIT_REGEX("\\s\\|\\s"),
-    TODO_REGEX("T\\s\\|\\s[01]\\s\\|.+"),
-    EVENT_DEADLINE_REGEX("[ED]\\s\\|\\s[01]\\s\\|.+\\|.+"),
+    TODO_REGEX("T\\s\\|\\s[01]\\s\\|\\s[01]\\s\\|.+"),
+    EVENT_DEADLINE_REGEX("[ED]\\s\\|\\s[01]\\s\\|\\s[01]\\s\\|.+\\|.+"),
     EVENT_REGEX(".+/at.+");
 
 

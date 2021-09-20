@@ -26,18 +26,18 @@ public class Event extends Task {
      * @param timeAt - the event time
      * @param isDone - determines if the task has been completed or not
      */
-    public Event (String description, String timeAt, boolean isDone) {
-        super(description, isDone);
+    public Event (String description, String timeAt, boolean isDone, boolean isHighOrLow) {
+        super(description, isDone, isHighOrLow);
         this.timeAt = LocalDateTime.parse(timeAt, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     @Override
     public String showTask() {
-        return "[E][" + (isDone ? "✗" : " ") + "] " + description + " (at: " + timeAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm")) + ")";
+        return "[E][" + (isDone ? "✗" : " ") + "] " +  "["+ (isHighOrLow ? "High" : "Low") + " ] " + description + " (at: " + timeAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm")) + ")";
     }
 
     @Override
     public String saveTask() {
-        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + timeAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        return "E | " + (isDone ? 1 : 0) + " | " + (isHighOrLow ? 1 : 0) + " | " +  description + " | " + timeAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 }

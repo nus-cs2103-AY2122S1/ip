@@ -55,21 +55,22 @@ public class Storage {
             String[] entrySplit= entry.split(RegexType.SPLIT_REGEX.getRegexType());
             String taskType = entrySplit[0];
             boolean isDone = entrySplit[1].equals("1");
-            String description = entrySplit[2];
-            String atBy = entrySplit.length >= 4 ? entrySplit[3] : "";
+            boolean isHighOrLow = entrySplit[2].equals("1");
+            String description = entrySplit[3];
+            String atBy = entrySplit.length >= 5 ? entrySplit[4] : "";
 
 
             switch (taskType) {
                 case "T":
-                    taskList.tasks.add(new Todo(description, isDone));
+                    taskList.tasks.add(new Todo(description, isDone, isHighOrLow));
 
                     break;
                 case "D":
-                    taskList.tasks.add(new Deadline(description, atBy, isDone));
+                    taskList.tasks.add(new Deadline(description, atBy, isDone, isHighOrLow));
 
                     break;
                 case "E":
-                    taskList.tasks.add(new Event(description, atBy, isDone));
+                    taskList.tasks.add(new Event(description, atBy, isDone, isHighOrLow));
 
                     break;
             }

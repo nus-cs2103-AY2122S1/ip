@@ -15,7 +15,7 @@ public class Parser {
     public Command parseCommand(TaskManager taskList, String userInput){
 
         // Get command from the userInput
-        final String[] splitLine = userInput.split(" ", 2);
+        final String[] splitLine = userInput.split(" ", 3);
         final String command = splitLine[0];
 
         // Remove command from userInput
@@ -40,6 +40,9 @@ public class Parser {
         }
         if (command.equals(InputType.DONE.getInputType()) ) {
             return new MarkAsDoneCommand(taskList, arguments);
+        }
+        if(command.equals(InputType.HIGH.getInputType())) {
+            return new PriorityCommand(taskList, arguments);
         }
         if (command.equals(InputType.FIND.getInputType())) {
             return new FindCommand(taskList, arguments);
