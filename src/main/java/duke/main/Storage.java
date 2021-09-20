@@ -16,11 +16,11 @@ import duke.exceptions.DukeException;
  * Represents as class that handles saving/loading tasks to/from hard disk
  */
 public class Storage {
-    private static final String DONE = "1";
-    private static final String NOT_DONE = "0";
-    private static final String DELIMITER = " | ";
-    private static final String DELIMITER_REGEX = " \\| ";
-    private static final String NUM_TASK_DONE = "Number of tasks done";
+    public static final String DONE = "1";
+    public static final String NOT_DONE = "0";
+    public static final String DELIMITER = " | ";
+    public static final String DELIMITER_REGEX = " \\| ";
+    public static final String NUM_TASK_DONE = "Number of tasks done";
     private String filePath;
     private int numTaskDone;
     /**
@@ -32,7 +32,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    private StorageElement fileLineToStorageElement(String fileLine) {
+    /**
+     * Convert fileLine from txt storage to StorageElement
+     * @param fileLine fileLine to be converted
+     * @return converted storageElement
+     */
+    public StorageElement fileLineToStorageElement(String fileLine) {
         String[] dataList = fileLine.split(Storage.DELIMITER_REGEX);
         String taskIcon = dataList[0];
         Boolean isDone = Integer.parseInt(dataList[1]) == 1;
@@ -47,7 +52,12 @@ public class Storage {
         return null;
     }
 
-    private String storageElementToFileLine(StorageElement storageElement) {
+    /**
+     * Convert storage element to file string to be saved
+     * @param storageElement storage element to be converted
+     * @return string form of storage element
+     */
+    public String storageElementToFileLine(StorageElement storageElement) {
         List<String> stringList = new ArrayList<>();
         stringList.add(storageElement.getTaskIcon());
         stringList.add(storageElement.getDone() ? DONE : NOT_DONE);
