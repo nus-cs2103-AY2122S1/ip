@@ -1,12 +1,13 @@
 package duke.parser;
 
-import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UpdateCommand;
@@ -24,6 +25,9 @@ public class Parser {
         String[] commandWord = input.split("\\s+");
         Command command;
         switch (commandWord[0]) {
+        case "help":
+            command = new HelpCommand();
+            break;
         case "list":
             command = new ListCommand();
             break;
@@ -49,7 +53,8 @@ public class Parser {
             command = new UpdateCommand();
             break;
         case "bye":
-            command = new ByeCommand();
+        case "exit":
+            command = new ExitCommand();
             break;
         default:
             throw new DukeException(DukeException.Type.InvalidCommand);

@@ -12,10 +12,6 @@ import javafx.scene.image.Image;
 
 public class Duke {
 
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
     private Storage storage;
     private TaskList taskList;
 
@@ -36,9 +32,6 @@ public class Duke {
      * @return Duke's response
      */
     public String getResponse(String input) {
-        if (input.equals("exit")) {
-            Platform.exit();
-        }
         try {
             Command command = Parser.parse(input);
             return command.execute(this.taskList, input, this.storage);

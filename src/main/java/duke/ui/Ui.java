@@ -6,7 +6,7 @@ import duke.task.TaskList;
 public class Ui {
 
     /**
-     * Prints the welcome message of the duke chat bot.
+     * Returns the welcome message of the duke chat bot.
      *
      * @return welcome message.
      */
@@ -15,7 +15,7 @@ public class Ui {
     }
 
     /**
-     * Prints the goodbye message of the duke chat bot.
+     * Returns the goodbye message of the duke chat bot.
      *
      * @return goodbye message.
      */
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Prints message that contains all the tasks in the user's task list.
+     * Returns message that contains all the tasks in the user's task list.
      *
      * @param taskList the user's task list.
      * @return string that contains all the tasks in the user's task list.
@@ -43,7 +43,7 @@ public class Ui {
     }
 
     /**
-     * Prints message that confirms the task has been marked done.
+     * Returns message that confirms the task has been marked done.
      *
      * @param task the task that has been completed.
      * @return string that confirms the task has been marked done.
@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Prints message that confirms the creation of the task.
+     * Returns message that confirms the creation of the task.
      *
      * @param task the task taht has been created.
      * @param numTasks the total number of tasks in the user's task list.
@@ -66,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Prints message that confirms the task has been deleted.
+     * Returns message that confirms the task has been deleted.
      *
      * @param task the task that has been deleted.
      * @param numTasks the total number of tasks in the task list.
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     /**
-     * Prints message that confirms the task has been updated.
+     * Returns message that confirms the task has been updated.
      *
      * @param task the task that has been updated.
      * @return string that confirms the update of the task.
@@ -89,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Prints message that contains all the tasks that match the user's query.
+     * Returns message that contains all the tasks that match the user's query.
      *
      * @param matchingTasks the tasks that match the user's query.
      * @return string that lists all the tasks that matches the user's query.
@@ -105,6 +105,26 @@ public class Ui {
             }
             return output.toString();
         }
+    }
+
+    /**
+     * Returns message explaining how to use the duke bot.
+     *
+     * @return message explaining how to use the duke bot.s
+     */
+    public static String printHelpMessage() {
+        String helpMessage = "Try these commands: \n\n";
+        helpMessage += "View help: help \n\n";
+        helpMessage += "Listing all tasks: list \n\n";
+        helpMessage += "Adding a todo: todo <description> \n\n";
+        helpMessage += "Adding a deadline: deadline <description> /by <any input or date in format yyyy-mm-dd> \n\n";
+        helpMessage += "Adding an event: event <description> /at <any input or date in format yyyy-mm-dd> \n\n";
+        helpMessage += "Deleting a task: delete <task number> \n\n";
+        helpMessage += "Updating a task: update <task number> <description> (/at or /by if applicable) "
+                + "<any input or date in format yyyy-mm-dd> \n\n";
+        helpMessage += "Finding a task: find <query> \n\n";
+        helpMessage += "Exiting: exit or bye";
+        return helpMessage;
     }
 
 }

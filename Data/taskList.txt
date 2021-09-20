@@ -1,7 +1,6 @@
-T | 1 | asdjfkl;
 T | 0 | fdjsklf
-T | 0 | sdfjkls
 T | 0 | asdjfkl;
 T | 0 | asdjfkl;
 T | 0 | fajskdlfs;
 T | 0 | asdfjkls;
+T | 1 | borrow book
