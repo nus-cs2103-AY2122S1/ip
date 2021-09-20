@@ -9,14 +9,12 @@ import java.util.Scanner;
  * Represents an interface between the program and the user.
  */
 public class UserInterface {
-    Scanner stdin;
     private MainWindow mainWindow;
 
     /**
      * Class constructor.
      */
     public UserInterface(MainWindow mainWindow) {
-        stdin = new Scanner(System.in);
         this.mainWindow = mainWindow;
     }
 
@@ -54,17 +52,5 @@ public class UserInterface {
      */
     public void displayError(String error) {
         mainWindow.print(error);
-    }
-
-    /**
-     * Gets a nonempty line of user input
-     * @return A string containing the user input
-     */
-    public String getResponse() {
-        String response = "";
-        while (response.equals("")) {
-            response = stdin.nextLine();
-        }
-        return response;
     }
 }
