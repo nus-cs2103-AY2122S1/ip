@@ -47,7 +47,7 @@ Provide in-App guidance to users
 
 Format:
 
-`event <description> /at <datetime>`
+`event <name> /at dd/MM/yyyy HHmm`
 
 Example of usage:
 
@@ -55,7 +55,7 @@ Example of usage:
 
 Expected outcome:
 
-Adds a Event task with the description "return book" and the date "02 Dec 2021" into the list.
+Adds a Event task with the name "return book" and the date "02 Dec 2021 1800" into the list.
 
 <br>
 
@@ -63,7 +63,7 @@ Adds a Event task with the description "return book" and the date "02 Dec 2021" 
 
 Format:
 
-`deadline <description> /by <date>`
+`deadline <name> /by <date>`
 
 Example of usage:
 
@@ -71,7 +71,7 @@ Example of usage:
 
 Expected outcome:
 
-Adds a deadline task with the description "return book" and the date "02 Dec 2021" into the list.
+Adds a deadline task with the name "return book" and the date "02 Dec 2021 1800" into the list.
 
 <br>
 
@@ -79,7 +79,7 @@ Adds a deadline task with the description "return book" and the date "02 Dec 202
 
 Format:
 
-`todo <description>`
+`todo <name>`
 
 Example of usage:
 
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome:
 
-Adds a ToDo task with the description "join sports club" to the list.
+Adds a ToDo task with the name "join sports club" to the list.
 
 <br>
 
