@@ -4,12 +4,19 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final TaskList taskList;
     private final Ui textUi;
     private final int taskIndex;
 
-
+    /**
+     * Constructor of DeleteCommand class. Initialize a DeleteCommand instance
+     * from a given TaskList, Ui, taskIndex.
+     *
+     * @param taskList A list of tasks
+     * @param ui A user interface
+     * @param index Index of the deleted task in taskList
+     */
     public DeleteCommand(TaskList taskList, Ui ui, int index) {
         assert index > 0: "Invalid index";
         this.taskList = taskList;
