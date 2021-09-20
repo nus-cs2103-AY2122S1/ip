@@ -22,7 +22,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as completed.
+     * Marks the task as completed.
      */
     public void markAsCompleted() {
         this.isCompleted = true;
