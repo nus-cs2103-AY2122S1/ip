@@ -12,6 +12,8 @@ Features:
 - [x] Search for tasks
 - [x] Check for duplicate tasks
 
+![DukeDemoGif](https://user-images.githubusercontent.com/85099754/133879352-980365da-f243-4893-883d-e71ca47ccdbe.gif)
+
 ## Requirements
 
 Prerequisites: You will require [JDK 11](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) to run Duke.
