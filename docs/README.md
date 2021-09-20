@@ -32,7 +32,7 @@ Mark tasks as done once the task is completed.
 
 ## Usage
 
-### Adding a todo: `<description>`
+### Adding a todo: `todo <description>`
 
 Adds a task of type todo to the task list.
 
@@ -50,7 +50,7 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-### Adding a deadline: `<description>/by <yyyy-MM-dd> <HHmm>`
+### Adding a deadline: `deadline <description>/by <yyyy-MM-dd> <HHmm>`
 
 Adds a task of type deadline to the task list.
 
@@ -68,7 +68,7 @@ Got it. I've added this task:
 Now you have 2 task(s) in the list.
 ```
 
-### Adding an event: `<description>/at <yyyy-MM-dd> <HHmm>`
+### Adding an event: `event <description>/at <yyyy-MM-dd> <HHmm>`
 
 Adds a task of type event to the task list.
 
@@ -106,7 +106,7 @@ The task list is printed on the screen.
 
 ### Finding tasks with a keyword: `find <keyword>`
 
-Finds task in the task list that contain the keyword.
+Finds task(s) in the task list that contain the keyword.
 
 Example of usage:
 
@@ -114,7 +114,7 @@ Example of usage:
 
 Expected outcome:
 
-Tasks containing the keyword 'laptop' in the description will be displayed.
+Tasks containing the keyword 'laptop' in their description will be displayed.
 
 ```
 Here are the matching task(s) in your list:
@@ -268,8 +268,8 @@ event | ```event <description>/at <yyyy-MM-dd> <HHmm>``` | ```event concert/at 2
 deadline | ```deadline <description>/by <yyyy-MM-dd> <HHmm>``` | ```deadline assignment/by 2021-09-20 2359```
 list | ```list``` | ```list```
 done | ```done <task index>``` | ```done 2```
-delete | ```delete <task index>``` | ```delete 2>```
-find | ```find <task index>``` | ```find assignment```
+delete | ```delete <task index>``` | ```delete 2```
+find | ```find <keyword>``` | ```find assignment```
 edit task | ```edit <task index>/task <new task command>``` | ```edit 2/task deadline worksheet/by 2021-10-10 1000```
 edit description | ```edit <task index>/description <new description>``` | ```edit 1/description CS2103T iP```
 edit date and/or time | ```edit <task index>/datetime <yyyy-MM-dd> <HHmm>``` | ```edit 3/datetime 2022-03-08 2300```
