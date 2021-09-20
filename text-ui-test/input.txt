@@ -1,0 +1,26 @@
+list
+blah
+todo
+event
+event Rehearsal
+deadline
+deadline Submit CS2103T hw
+blah blah blah
+list
+done
+delete
+done 1
+delete 1
+todo Implement Automated Text UI Testing
+event Run away from problems /at 18-08-2021 01:00
+deadline Submit IP /by 19-8-2021 23:59
+list
+done 2
+list
+delete 1
+list
+delete 3
+done 3
+bye
+lala
+
