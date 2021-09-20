@@ -97,6 +97,7 @@ public class TaskManager {
 
     /**
      * Adds the Event task to the list of tasks
+     *
      * @param userInput - the user input of the Event task
      * @return - the message of acknowledgement in String form
      * @throws EventException - if the format is incorrect
@@ -122,6 +123,7 @@ public class TaskManager {
     /**
      * Returns the message of deletion of task after deleting the task.
      * The userInput argument gives the index and the details of the task
+     *
      * @param userInput - the user input to delete which task
      * @return - the message of acknowledgement in String form
      * @throws DeleteFormatException - the format of delete command is incorrect
@@ -153,6 +155,7 @@ public class TaskManager {
      * Returns the completed status of the task.
      * The userInput argument gives the index and the details of the particular task to be
      * changed from incomplete to complete
+     *
      * @param userInput - the user input of the task that has to be added in the list
      * @return - the message of about the status of the task in the String format
      * @throws DoneFormatException  - the format is incorrect
@@ -189,6 +192,7 @@ public class TaskManager {
     /**
      * Returns the list of similar tasks which the user wants in String format.
      * The arguments argument helps in finding the list of tasks
+     *
      * @param arguments - the user input
      * @return - the list of tasks found in the String form
      * @throws NotFoundException - the task has not been found
@@ -206,7 +210,7 @@ public class TaskManager {
             }
         }
 
-        if (numFound == 0){
+        if (numFound == 0) {
             throw new NotFoundException();
         }
         return foundList;
