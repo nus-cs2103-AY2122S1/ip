@@ -1,0 +1,33 @@
+todo
+todo 
+todo one
+deadline
+deadline 
+deadline two
+deadline two 
+deadline two /by
+deadline two /by 
+deadline two /by 2021-08-25
+event
+event 
+event three
+event three 
+event three /at
+event three /at 
+event three /at 2021-08-25
+list
+done
+done 
+done 0
+done 4
+done 1
+done 2
+done 3
+delete
+delete 
+delete 0
+delete 4
+delete 1
+list
+byebye
+bye
