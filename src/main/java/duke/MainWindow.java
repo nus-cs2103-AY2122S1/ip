@@ -11,6 +11,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.*;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,6 +59,16 @@ public class MainWindow extends AnchorPane {
             VBox.setVgrow(child, Priority.ALWAYS);
         }
         userInput.clear();
+        if (input.equals("bye")) {
+            final Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Main.exit();
+                    timer.cancel();
+                }
+            }, 2000);
+        }
     }
 
     /**

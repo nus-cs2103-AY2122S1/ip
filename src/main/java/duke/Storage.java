@@ -92,12 +92,12 @@ public class Storage {
         String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
         PrintWriter writer = new PrintWriter(dataFile);
         writer.close();
-        taskList.getTasks().clear();
         return copyFile(dataFile, retrieveFile("data", String.format("%s.txt", dateTime)));
     }
 
     private String copyFile(File source, File dest) throws IOException {
         Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        taskList.getTasks().clear();
         return dest.getName();
     }
 }
