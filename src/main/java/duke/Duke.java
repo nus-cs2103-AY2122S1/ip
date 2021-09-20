@@ -30,11 +30,11 @@ public class Duke {
     }
 
     public String getResponse(String command) {
-        String response = "Timothy Q. Mouse:\n";
+        String response;
         try {
-            response += Parser.parse(command).execute(tasks, ui, storage);
+            response = Parser.parse(command).execute(tasks, ui, storage);
         } catch (DukeException e) {
-            response += e.getMessage();
+            response = e.getMessage();
         }
         return response;
     }

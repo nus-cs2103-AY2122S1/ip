@@ -17,7 +17,7 @@ public class Ui {
      * Displays the welcome message.
      */
     public static String showWelcome() {
-        String welcome = "Hello! I'm Timothy Q. Mouse,\nWhat can I do for you?";
+        String welcome = "Hi Dumbo! I'm Timothy Q. Mouse,\nWhat can I do for you?";
         try {
             Storage.load();
         } catch (DukeException e) {
@@ -125,7 +125,7 @@ public class Ui {
      * Displays the farewell message.
      */
     public String showFarewell() {
-        return "Bye dude! Hope to see you again soon!";
+        return "Bye little dude! Remember, the very things that hold you down are gonna carry you up and up and up!";
     }
 
     public String showDuplicate() {
