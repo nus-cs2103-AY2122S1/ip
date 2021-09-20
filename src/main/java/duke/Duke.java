@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,8 +22,9 @@ import javafx.scene.image.ImageView;
 
 public class Duke extends Application{
     private TaskList tasks;
-//    private String filePath = "data/tasks.txt";
-//    private String directoryName = "data";
+    private Scene scene;
+    private Storage storage;
+    private Ui ui;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DukeCoin.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DukeSmaug.png"));
@@ -32,9 +32,6 @@ public class Duke extends Application{
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
-    private Scene scene;
-    private Storage storage;
-    private Ui ui;
 
     private AnchorPane createContainer() {
         //The container for the content of the chat to scroll. Designing layout.
@@ -189,13 +186,13 @@ public class Duke extends Application{
                 }
                 Task newE = Event.parseCommand(parsedCommand[1]);
                 return tasks.addTask(newE);
+
             case "recur":
                 if (parsedCommand.length == 1) {
                     throw new TaskException("The description of an event cannot be empty");
                 }
                 Task newR = RecurTask.parseCommand(parsedCommand[1]);
                 return tasks.addTask(newR);
-
 
             default:
                 throw new DukeException();
@@ -213,6 +210,7 @@ public class Duke extends Application{
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            System.out.println(tasks);
         } catch (IOException e) {
             System.out.println(e.getMessage());
             tasks = new TaskList();

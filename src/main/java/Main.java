@@ -11,8 +11,9 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private final String FILE_PATH = "data/tasks.txt";
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke(FILE_PATH);
 
     @Override
     public void start(Stage stage) {

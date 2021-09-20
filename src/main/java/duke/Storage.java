@@ -10,10 +10,11 @@ import java.util.ArrayList;
  * Reads and Writes data to the tasks' database
  */
 public class Storage {
-    private String filePath;
+    private final String FILE_PATH;
+    private final String DIRECTORY = "data";
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILE_PATH = filePath;
     }
 
     /**
@@ -24,11 +25,11 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<String> load() throws IOException {
-        File directory = new File("data");
+        File directory = new File(DIRECTORY);
         if (!directory.exists()) {
             directory.mkdir();
         }
-        File data = new File(filePath);
+        File data = new File(FILE_PATH);
         data.createNewFile();
         Scanner s = new Scanner(data);
         ArrayList<String> tasks = new ArrayList<>();
@@ -45,7 +46,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveTask(TaskList list) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(FILE_PATH);
         for (Task t : list.getList()) {
             fw.write(t.toSavedAs() + System.lineSeparator());
         }
