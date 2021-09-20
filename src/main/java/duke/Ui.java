@@ -49,7 +49,8 @@ public class Ui {
      */
     public String listAll(TaskList taskList) {
         return "Here are the tasks in your list:\n"
-                + taskList;
+                + taskList
+                + "\n";
     }
 
     /**
