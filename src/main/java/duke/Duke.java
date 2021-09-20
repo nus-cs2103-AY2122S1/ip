@@ -28,9 +28,9 @@ public class Duke implements ChatbotUI, Parser {
     private static final String COMPLETE_TASK_COMMAND = "done";
     private static final String FIND_TASK_COMMAND = "find";
     private static final String DELETE_TASK_COMMAND = "delete";
-    private static final String CREATE_TODO_COMMAND = "todo";
-    private static final String CREATE_EVENT_COMMAND = "event";
-    private static final String CREATE_DEADLINE_COMMAND = "deadline";
+    private static final String CREATE_TODO_COMMAND = "t";
+    private static final String CREATE_EVENT_COMMAND = "e";
+    private static final String CREATE_DEADLINE_COMMAND = "d";
 
     private TaskList taskList;
     private Storage storage;
