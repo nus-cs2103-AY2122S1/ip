@@ -170,3 +170,5 @@ Action | Format, Examples
 **done** | `done TASK_NO` <br> e.g., `done 1`
 **delete** | `delete TASK_NO`<br> e.g.,`delete 5`
 **bye** | `bye`
+
+Thank you!
