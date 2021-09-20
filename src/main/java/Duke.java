@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 import duke.DukeException;
@@ -8,28 +6,22 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class Duke {
     private Parser parser;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Constructor for Duke class.
-     * @throws IOException If there is an input error for the commands/Tasklist.
-     * @throws DukeException If there is a generic Duke Exception.
      */
-    public Duke() throws IOException, DukeException {
+    public Duke() {
         this.ui = new Ui();
         this.parser = new Parser();
         this.tasks = new TaskList(new Storage());
     }
 
-    private void serve() throws DukeException {
+    private void serve() {
         this.ui.greet();
         Scanner input = new Scanner(System.in);
 
@@ -58,19 +50,16 @@ public class Duke extends Application {
         try {
             Duke squirtle = new Duke();
             squirtle.serve();
-        } catch (FileNotFoundException e) {
-            throw new DukeException("FILE ERROR YOU FOOL");
-        } catch (IOException e) {
-            throw new DukeException("YOU DID SOMETHING UNEXPECTED YOU FOOL. TRY AGAIN.");
+        } catch (Exception e) {
+            throw new DukeException("ERROR WITH PROGRAM YOU FOOL");
         }
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

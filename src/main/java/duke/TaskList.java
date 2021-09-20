@@ -12,11 +12,9 @@ public class TaskList {
     /**
      * Constructor for TaskList class.
      * @param storage
-     * @throws FileNotFoundException
-     * @throws IOException
      * @throws DukeException
      */
-    public TaskList(Storage storage) throws DukeException {
+    public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = this.storage.getTasksFromFile();
     }
@@ -26,7 +24,7 @@ public class TaskList {
      * @param task Task to be added.
      * @throws DukeException If there is a generic Duke Exception.
      */
-    public void add(Task task) throws DukeException {
+    public void add(Task task) {
         this.tasks.add(task);
         this.storage.saveToFile(tasks);
     }
@@ -47,7 +45,7 @@ public class TaskList {
      * Sets a task as done for a given index.
      * @param idx Index of task to be marked as done.
      */
-    public void setDone(int idx) throws DukeException {
+    public void setDone(int idx) {
         tasks.get(idx).setDone(true);
         storage.saveToFile(tasks);
     }
@@ -57,7 +55,7 @@ public class TaskList {
      * @param idx Index of task to be removed.
      * @throws DukeException If there is a generic Duke Exception.
      */
-    public void remove(int idx) throws DukeException {
+    public void remove(int idx) {
         this.tasks.remove(idx);
         this.storage.saveToFile(tasks);
     }

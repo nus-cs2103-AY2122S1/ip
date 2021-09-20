@@ -14,9 +14,8 @@ public class Storage {
     /**
      * Loads List of tasks from the file in [project_root]/data/duke.txt
      * @return List of Tasks to be processed by the TaskList class.
-     * @throws DukeException If there is a FileNotFoundException, DateTimeParseException or generic Exception.
      */
-    public List<Task> getTasksFromFile() throws DukeException {
+    public List<Task> getTasksFromFile() {
         List<Task> tasks = new ArrayList<>();
         try {
             File taskFile = new File("../../../data", "duke.txt");
@@ -48,8 +47,7 @@ public class Storage {
         } catch (DateTimeParseException e) {
             throw new RuntimeException("FORMAT YOUR FILE DATETIMES PROPERLY YOU FOOL.");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new DukeException("COULDN'T GET YOUR MISERABLE FILE. TRY AGAIN.");
+            System.out.println("COULDN'T GET YOUR MISERABLE FILE. TRY AGAIN.");
         }
         return tasks;
     }
@@ -57,9 +55,8 @@ public class Storage {
     /**
      * Saves List of tasks from the file in [project_root]/data/duke.txt
      * @param tasks List of Tasks to be saved.
-     * @throws DukeException If there is a generic Duke Exception.
      */
-    public void saveToFile(List<Task> tasks) throws DukeException {
+    public void saveToFile(List<Task> tasks) {
         try {
             // create directory if it does not exist
             File directory = new File("../../../data");
@@ -72,7 +69,7 @@ public class Storage {
             }
             dukeWriter.close();
         } catch (IOException e) {
-            throw new DukeException("SAVING THE FILE FAILED YOU IDIOT. JUST GIVE UP.");
+            System.out.println("SAVING THE FILE FAILED YOU IDIOT. JUST GIVE UP.");
         }
 
     }
