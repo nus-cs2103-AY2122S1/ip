@@ -38,7 +38,17 @@ public class Parser {
             } catch (Exception e) {
                 Ui.displayErrorMessage(e);
             }
-        } else {
+        } else if(userInput.startsWith("find")) {
+            String keyword = userInput.substring(5);
+            keyword = keyword.trim();
+            try {
+                TaskList filteredTask = tasks.find(keyword);
+                Ui.displayTaskList(filteredTask);
+            } catch (Exception e) {
+                Ui.displayErrorMessage(e);
+            }
+        }
+        else {
             Task newTask = null;
             try {
                 newTask = handleTaskInput(userInput);
