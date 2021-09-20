@@ -42,6 +42,11 @@ public class Storage {
                f.createNewFile();
         }
         Scanner sc = new Scanner(f);
+        addTasks(taskList, sc);
+        return taskList;
+    }
+
+    private void addTasks(ArrayList<Task> taskList, Scanner sc) {
         while (sc.hasNext()) {
             String task = sc.nextLine();
             String[] taskArr = task.split("///");
@@ -70,7 +75,6 @@ public class Storage {
                 taskList.add(e);
             }
         }
-        return taskList;
     }
 
     /**
@@ -81,6 +85,11 @@ public class Storage {
     public static void writeFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(pathName);
         ArrayList<Task> task = tasks.getTasks();
+        writeTask(tasks, fw, task);
+        fw.close();
+    }
+
+    private static void writeTask(TaskList tasks, FileWriter fw, ArrayList<Task> task) throws IOException {
         for (int i = 0; i < tasks.size(); i++) {
             Task t = task.get(i);
             assert t.label.equals("T") || t.label.equals("D") || t.label.equals("E")
@@ -118,7 +127,6 @@ public class Storage {
             }
             fw.write(text);
         }
-        fw.close();
     }
 }
 

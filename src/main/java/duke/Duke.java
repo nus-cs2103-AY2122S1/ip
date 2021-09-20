@@ -53,7 +53,7 @@ public class Duke extends Application {
         chatHistory.setMinWidth(WIDTH - 20);
         chatHistory.setPadding(new Insets(10));
         chatMessage = new TextField(); // area to type command
-        sendMessage = new Button("Send");   // send command button
+        sendMessage = new Button("Send");
     }
 
     public static void main(String[] args) {
