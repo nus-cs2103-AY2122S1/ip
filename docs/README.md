@@ -1,29 +1,22 @@
-# User Guide
+    _____            _      _ 
+    /  ___|          (_)    | |
+    \ `--.  __ _ _ __ _  ___| |
+     `--. \/ _` | '__| |/ _ \ |
+    /\__/ / (_| | |  | |  __/ |
+    \____/ \__,_|_|  |_|\___|_|
+    
+# Sariel
 
-## Features 
+![UI](Ui.png)
 
-### Feature-ABC
+Sariel is a desktop application for managing tasks through  
+its GUI or command line.
 
-Description of the feature.
+## Quick start [here](UserGuide.md#quick-start)
 
-### Feature-XYZ
+## User Guide [here](UserGuide.md)
+ 
+__Acknowledgements__
 
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+ * Libraries used: [JavaFx](https://openjfx.io/), [JUnit](https://github.com/junit-team/junit5)
+ * images used: [Duke image](https://unsplash.com/photos/E1e6Ucv9ONk), [User image](https://unsplash.com/photos/-oVaYMgBMbs)

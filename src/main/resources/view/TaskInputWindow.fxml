@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sariel.util.windows.TaskInputWindow">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Add Todo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="27.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="74.0390625" />
+                        <TextField fx:id="todoDescription" layoutX="27.0" layoutY="39.0" onAction="#handleAddTodo" prefHeight="22.0" prefWidth="181.0" />
+                        <Button layoutX="465.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddTodo" text="Submit" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="deadline" text="Add Deadline">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="600.0">
+                     <children>
+                        <DatePicker fx:id="deadlineDate" layoutX="27.0" layoutY="101.0" />
+                        <Text layoutX="27.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date by" />
+                        <Button layoutX="465.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddDeadline" text="Submit" />
+                        <Text layoutX="27.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="74.0390625" />
+                        <TextField fx:id="deadlineDescription" layoutX="27.0" layoutY="39.0" onAction="#handleAddDeadline" prefHeight="22.0" prefWidth="181.0" />
+                        <Text fx:id="deadlineErrorMessage" fill="RED" layoutX="27.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="5.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="event" text="Add Event">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <DatePicker fx:id="eventDate" layoutX="27.0" layoutY="101.0" />
+                        <Text layoutX="27.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date by" />
+                        <Button layoutX="465.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleAddEvent" text="Submit" />
+                        <Text layoutX="27.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="74.0390625" />
+                        <TextField fx:id="eventDescription" layoutX="27.0" layoutY="39.0" onAction="#handleAddEvent" prefHeight="22.0" prefWidth="181.0" />
+                        <Text fx:id="eventErrorMessage" fill="RED" layoutX="25.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="5.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

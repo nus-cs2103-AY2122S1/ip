@@ -1,0 +1,8 @@
+title: "Sariel"
+theme: jekyll-theme-minimal
+description: Sariel is a multiplatform task management application
+show_downloads: true
+markdown: kramdown
+repository: "Gabau/ip"
+github_icon: "images/github-icon.png"
+
