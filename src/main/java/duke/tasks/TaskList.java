@@ -140,11 +140,11 @@ public final class TaskList {
         } else if (isEvent) {
             String[] event = task.split(" /at ", 2);
             LocalDateTime startTime = LocalDateTime.parse(event[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            taskList.set(count - 1, new Event(input[1], startTime));
+            taskList.set(count - 1, new Event("event " + input[1] + "/at ", startTime));
         } else {
             String[] deadline = task.split(" /at ", 2);
             LocalDateTime dueTime = LocalDateTime.parse(deadline[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-            taskList.set(count - 1, new Deadline(input[1], dueTime));
+            taskList.set(count - 1, new Deadline("deadline " + input[1] + "by ", dueTime));
         }
         return "Task " + count + " has been updated to: \n" + input[1];
     }
