@@ -32,6 +32,7 @@ public class Message {
     // DateTimeParseError (Event)
     public static final String ERROR_EVENT_DATE = "The at time is in the wrong format. It must be in the " 
             + "format YYYY-MM-DD";
+    public static final String ERROR_DUPLICATE_TASK = "You have already added this task to your list.";
     
     // Event help text
     public static final String EVENT_HELP = "An event needs a description and a single /at time when it occurs in the format "

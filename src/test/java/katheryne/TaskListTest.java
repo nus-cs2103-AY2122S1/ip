@@ -14,7 +14,7 @@ import katheryne.task.Todo;
 
 public class TaskListTest {
     @Test
-    public void addAll_twoTasks_sameAsAddIndividually() {
+    public void addAll_twoTasks_sameAsAddIndividually() throws KatheryneException {
         TaskList taskListAddIndividually = new TaskList();
         TaskList taskListAddAll = new TaskList();
         ArrayList<Task> taskArr = new ArrayList<>();
@@ -32,7 +32,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void add_addEvent() {
+    public void add_addEvent() throws KatheryneException {
         Event event = new Event("An event task, second", LocalDate.parse("2021-03-14"));
         TaskList taskList = new TaskList();
         taskList.add(new Event("An event task, second", LocalDate.parse("2021-03-14")));

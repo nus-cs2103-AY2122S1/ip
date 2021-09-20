@@ -1,7 +1,10 @@
 package katheryne;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import katheryne.task.Task;
 
@@ -15,17 +18,31 @@ public class TaskList {
 
     }
 
-    void addAll(List<Task> tasks) {
-        lst.addAll(tasks);
-    }
-
     /**
      * Adds a task to this list
      *
      * @param t
      */
-    public void add(Task t) {
+    public void add(Task t) throws KatheryneException {
+        boolean hasDuplicates = checkForDuplicates(t);
+        if (hasDuplicates) {
+            throw new KatheryneException(Message.ERROR_DUPLICATE_TASK);
+        }
         lst.add(t);
+    }
+
+    void addAll(List<Task> tasks) {
+        Set<Task> tasksToAdd = new HashSet<>(tasks);
+        tasksToAdd.removeIf(this::checkForDuplicates);
+        lst.addAll(tasksToAdd);
+    }
+    
+    // abstracted method to check if duplicates in the task list exist
+    private boolean checkForDuplicates(Task t) {
+        return !lst.stream()
+                .filter(task -> task.equals(t))
+                .collect(Collectors.toList())
+                .isEmpty();
     }
 
     /**
@@ -64,7 +81,7 @@ public class TaskList {
      * @param keyword
      * @return a TaskList of the tasks found.
      */
-    public TaskList tasksContaining(String keyword) {
+    public TaskList tasksContaining(String keyword) throws KatheryneException {
         TaskList taskWithKeyword = new TaskList();
         for (int i = 1; i <= this.getSize(); i++) {
             Task t = this.getTask(i - 1);
