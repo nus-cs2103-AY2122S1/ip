@@ -13,7 +13,7 @@ Start chatting with this adorable Japanese bot to manage your tasks effectively!
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `misaki-v3.4.0.jar` from [here](https://github.com/hsiaotingluv/ip/releases/tag/misaki-v3.0.0).
+2. Download the latest `misaki-v3.4.0.jar` from [here](https://github.com/hsiaotingluv/ip/releases/tag/misaki-v3.4.0).
 
 3. Copy the file to the folder you want to use as the home folder for your Misaki.
 
