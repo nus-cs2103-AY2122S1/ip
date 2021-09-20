@@ -13,7 +13,7 @@ import javafx.scene.text.TextAlignment;
  */
 public class ChatMessage extends BorderPane {
 
-    Label message;
+    private Label message;
 
     public ChatMessage(String msg, boolean sender) {
 
@@ -33,7 +33,7 @@ public class ChatMessage extends BorderPane {
         ImageView imageView = new ImageView();
         imageView.setPreserveRatio(true);
 
-        if(sender) {
+        if (sender) {
             imageView.setImage(image1);
             this.setRight(imageView);
             message.setAlignment(Pos.BASELINE_LEFT);

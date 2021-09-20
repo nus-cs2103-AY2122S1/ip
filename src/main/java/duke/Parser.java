@@ -16,50 +16,41 @@ public class Parser {
         } else if (response.equals("bye")) {
             return new ExitCommand();
         } else if (response.contains("done")) {
-            String[] str = response.split(" ");
-            String task = str[0];
-            int num = Integer.parseInt(str[1]);
-            return new DoneCommand(num);
+            return new DoneCommand(indexOfString(response));
         } else if (response.contains("todo")) {
-            if (response.length() > 4) {
-                String[] str = response.split(" ");
-                String task = str[0];
-                String command = str[1];
-                command = response.substring(response.indexOf(" ") + 1);
-                return new AddCommand(new Todo(command));
-            } else {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
-            }
+                return new AddCommand(new Todo(commandDescription(response)));
         } else if (response.contains("deadline")) {
-            int tLabelFirst = response.indexOf(" ") + 1;
-            int tTimeFirst = response.indexOf("/");
-            String tLabel = response.substring(tLabelFirst, tTimeFirst - 1);
-            String tTime = response.substring(tTimeFirst + 4);
-            return new AddCommand(new Deadline(tLabel, tTime));
+            String [] deadlineDescription = deadlineEventDescription(response);
+            return new AddCommand(new Deadline(deadlineDescription[0], deadlineDescription[1]));
         } else if (response.contains("event")) {
-            int tLabelFirst = response.indexOf(" ") + 1;
-            int tTimeFirst = response.indexOf("/");
-            String tLabel = response.substring(tLabelFirst, tTimeFirst - 1);
-            String tTime = response.substring(tTimeFirst + 4);
-            return new AddCommand(new Event(tLabel, tTime));
-
+            String [] eventDescription = deadlineEventDescription(response);
+            return new AddCommand(new Event(eventDescription[0], eventDescription[1]));
         } else if (response.contains("delete")) {
-            String[] str = response.split(" ");
-            String task = str[0];
-            int num = Integer.parseInt(str[1]);
-            return new DeleteCommand(num);
+            return new DeleteCommand(indexOfString(response));
         } else if (response.contains("find")) {
-            if (response.length() > 4) {
-                String[] str = response.split(" ");
-                String task = str[0];
-                String keyword = str[1];
-                return new FindCommand(keyword);
-            } else {
-                throw new DukeException("☹ OOPS!!! The description of a find cannot be empty.");
-            }
+                return new FindCommand(commandDescription(response));
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "Try todo, event, or deadline");
         }
+    }
+    public static int indexOfString(String command){
+        String[] str = command.split(" ");
+        int num = Integer.parseInt(str[1]);
+        return num;
+    }
+    public static String commandDescription(String command) throws DukeException{
+        if(!command.contains(" ")){
+            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+        }
+        return command.substring(command.indexOf(" ") + 1);
+    }
+    public static String[] deadlineEventDescription(String command){
+        String[] description = new String[2];
+        int tLabelFirst = command.indexOf(" ") + 1;
+        int tTimeFirst = command.indexOf("/");
+       description[0] = command.substring(tLabelFirst, tTimeFirst - 1);
+       description[1] = command.substring(tTimeFirst + 4);
+       return description;
     }
 }
