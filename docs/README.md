@@ -57,10 +57,10 @@ Tasks can be completed to show the user that the command has been executed alrea
 **Completed Commands are automatically deleted to prevent long text**
 The format for done command is done {insert task number here}
 
-Precompleted tasklist:
+Precompleted tasklist:\
 ![preCompletedTasklist](./Assets/doneCommandAction.png)
 
-After done command:
+After done command:\
 ![afterDonelist](./Assets/doneCompletedAction.png)
 
 ###Delete tasks
@@ -68,19 +68,20 @@ Tasks can be deleted to prevent long text fields. The format for deleting tasks 
 delete {insert task number here}
 
 
-Precompleted tasklist:
+Precompleted tasklist:\
 ![preCompletedTaskList](./Assets/deleteCommandAcknowledge.png)
 
-Completed delete command:
+Completed delete command:\
 ![completedDeleteCommand](./Assets/deleteCommandCompleted.png)
 
 
 ### Find command
 The find command can be used to search for certain tasks to see the deadline.
 
+Before find Command List:\
 ![findPrelist](./Assets/findPreList.png)
 
-After find command:
+After find command:\
 ![findPostList](./Assets/findCommandCompleted.png)
 
 
