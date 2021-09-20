@@ -14,6 +14,7 @@ public class Parser {
             put("event", (tasks, input) -> addEvent(tasks, input));
             put("delete", (tasks, input) -> deleteTask(tasks, input));
             put("find", (tasks, input) -> findTasks(tasks, input));
+            put("help", (tasks, input) -> help());
         }
     };
 
@@ -124,5 +125,10 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException("FORMAT YOUR DATETIME PROPERLY YOU FOOL");
         }
+    }
+
+    private String help() {
+        String message = "For further help, please see: https://github.com/se-edu/duke \nfor issues with Duke.";
+        return message;
     }
 }
