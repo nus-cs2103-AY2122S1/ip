@@ -1,40 +1,30 @@
 package duke;
 
-
 /**
- * Contains main() method for Duke chatbot for IP of CS2103 2021.
- *
- * author: Ren Weilin A0216723J
+ * Runs the initialization process for Duke chatbot for IP of CS2103 2021.
  */
-public class Duke{
+public class Duke {
 
     private final UI userInterface;
-    private final TaskList taskList;
+    private final Parser parser;
 
     /**
-     * Constructor which initializes the necessary components for Duke to function.
+     * Initializes the necessary components for Duke to function.
      */
     public Duke() {
-        Parser parser = new Parser();
-        taskList = new TaskList();
+        parser = new Parser();
+        TaskList taskList = new TaskList();
         Storage storage = new Storage(taskList);
         userInterface = new UI(parser, storage, taskList);
     }
 
-    /**
-     * Start of Duke chatbot.
-     *
-     * @param args CMD arguments.
-     */
-    public static void main(String[] args) {
-        Duke dukeInstance = new Duke();
+
+    public String getResponse(String input) {
+        CommandType command = this.parser.nextCommand(input);
         try {
-            dukeInstance.userInterface.start();
+            return this.userInterface.start(command);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            dukeInstance.userInterface.start();
+            return e.getMessage();
         }
     }
-
 }

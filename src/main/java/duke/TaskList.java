@@ -38,8 +38,8 @@ public class TaskList {
      *
      * @param index
      */
-    public void markAsDone(int index) {
-        tasks.get(index).markAsDone();
+    public String markAsDone(int index) {
+        return tasks.get(index).markAsDone();
     }
 
     /**

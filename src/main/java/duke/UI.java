@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Main logic of Duke chatbot on responding to commands and showing output to user.
+ * Main logic of Duke chatbot on responding to command and showing output to user.
  */
 public class UI {
     private final Parser parser;
@@ -12,14 +12,13 @@ public class UI {
     private final TaskList taskList;
 
     /**
-     * Necessary fields for commands to be executed.
+     * Fields for commands to be executed.
      *
      * @param parser
      * @param storage
      * @param taskList
      */
     public UI(Parser parser, Storage storage, TaskList taskList) {
-        //Greet
         this.parser = parser;
         this.storage = storage;
         this.taskList = taskList;
@@ -30,129 +29,86 @@ public class UI {
      * 
      * @throws DukeException
      */
-    public void start() throws DukeException{
-        welcomeMsg();
+    public String start(CommandType command) throws DukeException{
 
-        boolean isExit = false;
-        while (!isExit) {
-            CommandType command = parser.nextCommand();
+        int taskIndex;
+        String searchTerm;
+        Task newTask;
 
-            int taskIndex;
-            String searchTerm;
-            Task newTask;
-
-            switch (command) {
-            case Exit:
-                isExit = true;
-                exitMsg();
-                try {
-                    storage.writeData();
-                } catch (IOException e) {
-                    System.out.println("Error saving file");
-                }
-                break;
-            case List:
-                listMsg();
-                break;
-            case DeleteTask:
-                taskIndex = parser.getIndex();
-                deleteMsg(taskIndex);
-                taskList.deleteTask(taskIndex);
-                break;
-            case MarkAsDone:
-                taskIndex = parser.getIndex();
-                printBreakLine();
-                taskList.markAsDone(taskIndex);
-                printBreakLine();
-                break;
-            case AddToDo:
-            case AddEvent:
-            case AddDeadline:
-                try {
-                    newTask = parser.generateTask();
-                    taskList.addTask(newTask);
-                    addTaskMsg(newTask);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case Find:
-                searchTerm = parser.getSearchTerm();
-                ArrayList<Task> matchingTasks = new ArrayList<>();
-                for (Task task : taskList.getTasks()) {
-                    if (task.description.indexOf(searchTerm) >= 0) {
-                        matchingTasks.add(task);
-                    }
-                }
-                findMsg(matchingTasks);
-                break;
-            case Error:
-                printBreakLine();
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            default:
-                break;
+        switch (command) {
+        case Exit:
+            try {
+                storage.writeData();
+            } catch (IOException e) {
+                return "Error saving file";
             }
+            return exitMsg();
+        case List:
+            return listMsg();
+        case DeleteTask:
+            taskIndex = parser.getIndex();
+            taskList.deleteTask(taskIndex);
+            return deleteMsg(taskIndex);
+        case MarkAsDone:
+            taskIndex = parser.getIndex();
+            return taskList.markAsDone(taskIndex);
+        case AddToDo:
+        case AddEvent:
+        case AddDeadline:
+            try {
+                newTask = parser.generateTask();
+                taskList.addTask(newTask);
+                return addTaskMsg(newTask);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        case Find:
+            searchTerm = parser.getSearchTerm();
+            ArrayList<Task> matchingTasks = new ArrayList<>();
+            for (Task task : taskList.getTasks()) {
+                if (task.description.contains(searchTerm)) {
+                    matchingTasks.add(task);
+                }
+            }
+            return findMsg(matchingTasks);
+        case Error:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        default:
+            return "Command error encountered, please inform Duke maintainers!";
         }
     }
 
-    private void addTaskMsg(Task newTask) {
-        printBreakLine();
-        System.out.println("  Got it. I've added this task: ");
-        System.out.println("  " + newTask.toString());
-        System.out.printf("  Now you have %d tasks in the list.%n", taskList.getListSize());
-        printBreakLine();
+    private String addTaskMsg(Task newTask) {
+        return "Got it. I've added this task: \n" +
+                newTask.toString() + "\n" +
+                String.format("Now you have %d tasks in the list.%n", taskList.getListSize());
     }
 
-    private void exitMsg() {
-        printBreakLine();
-        System.out.println(" Bye. Hope to see you again soon!");
-        printBreakLine();
+    private String exitMsg() {
+        return " Bye. Hope to see you again soon!";
     }
 
-    private void welcomeMsg() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        printBreakLine();
-        System.out.println("  Hello! I'm Duke");
-        System.out.println("  What can I do for you?");
-        printBreakLine();
-    }
-
-    private void listMsg() {
-        printBreakLine();
-        System.out.println("  Here are the tasks in your list:");
+    private String listMsg() {
+        StringBuilder response = new StringBuilder("  Here are the tasks in your list:\n");
         for (int i = 1; i < taskList.getListSize() + 1; i++) {
-            System.out.printf("  %d. %s%n", i, taskList.getTaskString(i - 1));
+            response.append(String.format("  %d. %s%n", i, taskList.getTaskString(i - 1)));
         }
-        printBreakLine();
+        return response.toString();
     }
 
-    private void findMsg(ArrayList<Task> tasks) {
-        printBreakLine();
-        System.out.println("  Here are the matching tasks in your list:");
+    private String findMsg(ArrayList<Task> tasks) {
+        StringBuilder response = new StringBuilder("  Here are the matching tasks in your list:\n");
         for (int i = 1; i < tasks.size() + 1; i++) {
-            System.out.printf("  %d. %s%n", i, tasks.get(i - 1).toString());
+            response.append(String.format("  %d. %s%n", i, tasks.get(i - 1).toString()));
         }
-        printBreakLine();
+        return response.toString();
     }
 
-    private void deleteMsg(int index) {
-        printBreakLine();
-        System.out.println("  Noted. I've removed this task:");
-        System.out.println("  " + taskList.getTaskString(index));
-        System.out.printf("  Now you have %d tasks in the list.%n", taskList.getListSize() - 1);
-        printBreakLine();
+    private String deleteMsg(int index) {
+        return "  Noted. I've removed this task:\n" +
+                "\n" + taskList.getTaskString(index) + "\n" +
+                String.format("Now you have %d tasks in the list.%n", taskList.getListSize() - 1);
     }
 
-    private void printBreakLine() {
-        for (int i = 0; i < 12; i++) {
-            System.out.print("===");
-        }
-        System.out.println();
-    }
 }
