@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.Duke;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,28 +36,31 @@ public class Storage {
      * @throws DukeException If the task is of an unexpected type.
      */
     public static Task parseTask(String input) throws DukeException {
-        char taskType = input.charAt(4);
-        boolean isDone = input.charAt(7) == 'X';
-        String taskName = input.substring(10);
-        Task newTask;
+        try {
+            char taskType = input.charAt(4);
+            boolean isDone = input.charAt(7) == 'X';
+            String taskName = input.substring(10);
+            Task newTask;
 
-        assert taskType == 'T' || taskType == 'D' || taskType == 'E' : "Unexpected task type in save file";
+            assert taskType == 'T' || taskType == 'D' || taskType == 'E' : "Unexpected task type in save file";
 
-        switch (taskType) {
-        case 'T':
-            newTask = new Todo(taskName, isDone);
-            break;
-        case 'D':
-            newTask = new Deadline(taskName, isDone);
-            break;
-        case 'E':
-            newTask = new Event(taskName, isDone);
-            break;
-        default:
-            throw new DukeException("OOPS! Unexpected task type: " + taskType);
+            switch (taskType) {
+            case 'T':
+                newTask = new Todo(taskName, isDone);
+                break;
+            case 'D':
+                newTask = new Deadline(taskName, isDone);
+                break;
+            case 'E':
+                newTask = new Event(taskName, isDone);
+                break;
+            default:
+                throw new DukeException("OOPS! Unexpected task type: " + taskType);
+            }
+            return newTask;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Corrupted file");
         }
-
-        return newTask;
     }
 
     /**
