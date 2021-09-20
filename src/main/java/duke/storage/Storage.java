@@ -35,7 +35,9 @@ public class Storage {
      * @return Task List
      */
     public TaskList load() {
+        assert taskFile.exists() : "there is no such file";
         try {
+            taskFile.getParentFile().mkdirs();
             if (!taskFile.createNewFile()) {
                 Scanner fileReader = new Scanner(taskFile);
                 this.taskList = loadList(this.taskList, fileReader);

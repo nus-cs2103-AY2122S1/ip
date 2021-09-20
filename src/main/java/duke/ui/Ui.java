@@ -85,7 +85,7 @@ public class Ui {
      * @return string that confirms the update of the task.
      */
     public static String printTaskUpdated(Task task) {
-        return "Your task has been updated!\n" + task;
+        return "Your task has been updated!\n    " + task;
     }
 
     /**
