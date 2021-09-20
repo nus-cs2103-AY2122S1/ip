@@ -189,6 +189,12 @@ public class Duke extends Application{
                 }
                 Task newE = Event.parseCommand(parsedCommand[1]);
                 return tasks.addTask(newE);
+            case "recur":
+                if (parsedCommand.length == 1) {
+                    throw new TaskException("The description of an event cannot be empty");
+                }
+                Task newR = RecurTask.parseCommand(parsedCommand[1]);
+                return tasks.addTask(newR);
 
 
             default:

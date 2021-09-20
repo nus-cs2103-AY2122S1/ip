@@ -6,6 +6,7 @@ import duke.Task;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.lang.StringBuilder;
 
 /**
@@ -37,6 +38,10 @@ public class TaskList {
             case "E": {
                 this.loadTask(new Event(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
                 break;
+            }
+
+            case "R": {
+                this.loadTask(new RecurTask(array[2], LocalDate.parse(array[3]), Boolean.parseBoolean(array[1])));
             }
             }
         }
