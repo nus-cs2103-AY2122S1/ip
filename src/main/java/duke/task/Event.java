@@ -40,9 +40,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String formattedTimeDue = this.timeDue == null
+        String formattedTimeDue = timeDue == null
                 ? ""
-                : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                : timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + String.format(" (at: %s)", formattedTimeDue);
     }
 }
