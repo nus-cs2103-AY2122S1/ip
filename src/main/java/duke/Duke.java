@@ -36,6 +36,9 @@ public class Duke {
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
+        } catch (Exception e) {
+            return "Sorry, Something is wrong!"
+                    + "The handling of this error is not required by minimum iP requirements";
         }
     }
 }
