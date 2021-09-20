@@ -19,8 +19,13 @@ public class TaskList {
 
     }
 
+    public void sort() {
+        this.arrayList.sort(null);
+    }
+
     public String add(Task task) {
         this.arrayList.add(task);
+        this.arrayList.sort(null);
         String type = "";
         switch (task.getType()) {
             case TODO:

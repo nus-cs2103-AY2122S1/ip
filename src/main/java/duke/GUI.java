@@ -20,11 +20,10 @@ public class GUI {
     private String processInput(String str) {
         assert !str.equals("");
         Task newTask = Parser.parseInput(str);
-
         if (newTask == null) {
             if (str.equals("bye")) {
                 taskList.save();
-                return "Tasklist saved; Exit command not implemented yet!";
+                return "Tasklist saved; Click the exit button to exit instead!";
 
             } else if (str.equals("list")) {
                 return taskList.list();

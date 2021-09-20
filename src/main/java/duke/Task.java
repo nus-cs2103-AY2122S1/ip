@@ -3,9 +3,9 @@ package duke;
 /**
  * Abstract class inherited by the ToDo, DeadLine and Event classes.
  */
-abstract public class Task {
+abstract public class Task implements Comparable<Task>{
     private final String description;
-    private boolean isDone;
+    protected boolean isDone;
     protected char type;
 
     public Task(String description) {
@@ -43,5 +43,9 @@ abstract public class Task {
     public TaskType getType() {
         return null;
     }
+
+    @Override
+    abstract public int compareTo(Task other);
+
 
 }

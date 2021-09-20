@@ -28,4 +28,9 @@ public class Event extends Task{
     public TaskType getType() {
         return TaskType.EVENT;
     }
+
+    @Override
+    public int compareTo(Task other) {
+        return 0;
+    }
 }

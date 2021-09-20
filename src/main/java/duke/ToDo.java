@@ -13,4 +13,9 @@ public class ToDo extends Task{
     public TaskType getType() {
         return TaskType.TODO;
     }
+
+    @Override
+    public int compareTo(Task other) {
+        return -1;
+    }
 }

@@ -1,6 +1,7 @@
-1. [T][x] abc
-2. [D][x] def (by: 123)
-3. [E][x] ghi (at: 456)
-4. [D][x] d (by: tmr)
-5. [D][x] y (by: today)
-6. [T][x] defg
+1. [T][ ] xyz
+2. [T][x] defg
+3. [T][x] abc
+4. [D][x] def (by: 123)
+5. [E][x] ghi (at: 456)
+6. [D][x] d (by: tmr)
+7. [D][x] y (by: today)

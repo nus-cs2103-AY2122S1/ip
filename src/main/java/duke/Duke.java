@@ -26,12 +26,17 @@ public class Duke {
 
         DataFile dataFile = new DataFile("./duke_data.txt");
         TaskList taskList = new TaskList(dataFile);
+        taskList.sort();
         System.out.println("What can I do for you?");
 
+        System.out.println(taskList.list());
+        /*
         while (isRunning) {
             String input = getPrompt(stdIn);
             isRunning = processInput(input, taskList);
         }
+        */
+
     }
 
     static String getPrompt(Scanner sc) {
