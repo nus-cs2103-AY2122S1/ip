@@ -1,7 +1,9 @@
-DukePro
+Duke
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes))
 
-DukePro frees your mind of having to remember things you need to do. It's,
+Duke is a chatbot that is also a task manager that helps you to keep track your tasklist, ranging from todos, events, deadlines and fixed duration tasks.
+
+Duke frees your mind of having to remember things you need to do. It's,
 
 * text-based
 * easy to learn
@@ -9,7 +11,7 @@ DukePro frees your mind of having to remember things you need to do. It's,
 
 All you need to do is,
 
-1. download it from [here](https://github.com/RachelCheah/ip/releases/tag/A-Packages).
+1. download it from [here](https://github.com/RachelCheah/ip/releases/tag/A-Release).
 2. double-click it.
 3. add your tasks.
 4. let it manage your tasks for you 😉
@@ -17,9 +19,9 @@ All you need to do is,
 
 Features:
 
-- [x] Managing tasks
-- [ ] Managing deadlines (coming soon)
-- [ ] Reminders (coming soon)
+- [x] Managing todos
+- [x] Managing deadlines 
+- [x] Managing events
 
 
 If you Java programmer, you can use it to practice Java too. Here's the main method:
