@@ -130,7 +130,22 @@ public final class TaskList {
         return str;
     }
 
-    public static int getSize() {
-        return taskList.size();
+    public static String update(String task) {
+        String[] input = task.split(" ",2);
+        int count = Integer.parseInt(input[0]);
+        boolean isTodo = taskList.get(count - 1).toString().charAt(1) == 'T';
+        boolean isEvent = taskList.get(count - 1).toString().charAt(1) == 'E';
+        if (isTodo) {
+            taskList.set(count - 1, new Todo(input[1]));
+        } else if (isEvent) {
+            String[] event = task.split(" /at ", 2);
+            LocalDateTime startTime = LocalDateTime.parse(event[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            taskList.set(count - 1, new Event(input[1], startTime));
+        } else {
+            String[] deadline = task.split(" /at ", 2);
+            LocalDateTime dueTime = LocalDateTime.parse(deadline[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            taskList.set(count - 1, new Deadline(input[1], dueTime));
+        }
+        return "Task " + count + " has been updated to: \n" + input[1];
     }
 }

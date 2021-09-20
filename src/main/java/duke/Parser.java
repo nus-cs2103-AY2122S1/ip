@@ -22,6 +22,11 @@ public class Parser {
         } else if (task.startsWith("find")) {
             String[] input = task.split("find ", 2);
             return TaskList.find(input[1]);
+        } else if (task.startsWith("update")) {
+            String[] input = task.split("update ", 2);
+            String text = TaskList.update(input[1]);
+            Storage.overwrite();
+            return text;
         } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
             switch (task) {
             case "deadline":
