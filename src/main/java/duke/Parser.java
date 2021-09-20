@@ -11,6 +11,14 @@ public class Parser {
 
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HHmm";
+    private static final int TODO_INPUT_START = 5;
+    private static final int DEADLINE_INPUT_START = 9;
+    private static final int EVENT_INPUT_START = 6;
+    private static final int DATE_TIME_FLAG_LENGTH = 5;
+    private static final int PRIORITY_FLAG_LENGTH = 4;
+    private static final String PRIORITY_FLAG = " /p ";
+    private static final String DATE_FLAG = " /by ";
+    private static final String TIME_FLAG = " /at ";
 
     public enum Command { BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND, PRIORITY }
     private boolean isTerminated = false;
@@ -92,7 +100,7 @@ public class Parser {
     }
 
     /**
-     * Terminates the Duke Personal Assistant Chatbot.
+     * Terminates the Duke Personal Assistant Chat-bot.
      *
      * @param ui UI object to render output to user.
      * @return Message to be shown to the user.
@@ -124,20 +132,13 @@ public class Parser {
      * @return Message to be shown to the user.
      * @throws ToDoDescriptionNotFoundException If user did not enter a task description.
      */
-    public String addTodo(TaskList tasks, Ui ui, String input) throws ToDoDescriptionNotFoundException {
-        if (input.length() <= 5 || input.substring(5).stripLeading().length() <= 0) {
+    public String addTodo(TaskList tasks, Ui ui, String input) throws ToDoDescriptionNotFoundException,
+            InvalidPriorityException {
+        if (input.length() <= TODO_INPUT_START || input.substring(5).stripLeading().length() <= 0) {
             throw new ToDoDescriptionNotFoundException("Missing Description!");
         }
-        String toDo;
-        int priority;
-        if (input.contains(" /p ")) {
-            int delimiterPriority = input.indexOf(" /p ");
-            toDo = input.substring(5, delimiterPriority);
-            priority = Integer.parseInt(input.substring(delimiterPriority + 4));
-        } else {
-            toDo = input.substring(5);
-            priority = 3;
-        }
+        String toDo = parseTask(input, TODO_INPUT_START, input.indexOf(PRIORITY_FLAG));
+        int priority = parsePriority(input);
         ToDo newToDo = new ToDo(toDo, priority);
         tasks.addTask(newToDo);
         assert tasks.getList().contains(newToDo) : "New Todo should be added";
@@ -155,24 +156,17 @@ public class Parser {
      * @throws DeadlineNotFoundException If user did not enter a deadline.
      */
     public String addDeadline(TaskList tasks, Ui ui, String input) throws DeadlineDescriptionNotFoundException,
-            DeadlineNotFoundException {
-        if (input.length() <= 9 || input.substring(9).stripLeading().length() <= 0) {
+            DeadlineNotFoundException, InvalidPriorityException {
+        if (input.length() <= DEADLINE_INPUT_START || input.substring(DEADLINE_INPUT_START)
+                .stripLeading().length() <= 0) {
             throw new DeadlineDescriptionNotFoundException("Missing Description!");
-        } else if (!input.contains(" /by ")) {
+        } else if (!input.contains(DATE_FLAG)) {
             throw new DeadlineNotFoundException("Deadline Missing!");
         }
-        int delimiterDate = input.indexOf(" /by ");
-        String task = input.substring(9, delimiterDate);
-        String date;
-        int priority;
-        if (input.contains(" /p ")) {
-            int delimiterPriority = input.indexOf(" /p ");
-            date = input.substring(delimiterDate + 5, delimiterPriority);
-            priority = Integer.parseInt(input.substring(delimiterPriority + 4));
-        } else {
-            date = input.substring(delimiterDate + 5);
-            priority = 3;
-        }
+        int delimiterDate = input.indexOf(DATE_FLAG);
+        String task = parseTask(input, DEADLINE_INPUT_START, delimiterDate);
+        String date = parseDateTime(input, delimiterDate);
+        int priority = parsePriority(input);
         LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
         Deadline newDeadline = new Deadline(task, parsedDate, priority);
         tasks.addTask(newDeadline);
@@ -191,29 +185,72 @@ public class Parser {
      * @throws EventTimeNotFoundException If user did not enter date and time of event.
      */
     public String addEvent(TaskList tasks, Ui ui, String input) throws EventDescriptionNotFoundException,
-            EventTimeNotFoundException {
-        if (input.length() <= 6 || input.substring(6).stripLeading().length() <= 0) {
+            EventTimeNotFoundException, InvalidPriorityException {
+        if (input.length() <= EVENT_INPUT_START || input.substring(EVENT_INPUT_START).stripLeading().length() <= 0) {
             throw new EventDescriptionNotFoundException("Missing Description!");
-        } else if (!input.contains(" /at ")) {
+        } else if (!input.contains(TIME_FLAG)) {
             throw new EventTimeNotFoundException("Event Time Missing!");
         }
-        int delimiterTime = input.indexOf(" /at ");
-        String task = input.substring(6, delimiterTime);
-        String time;
-        int priority;
-        if (input.contains(" /p ")) {
-            int delimiterPriority = input.indexOf(" /p ");
-            time = input.substring(delimiterTime + 5, delimiterPriority);
-            priority = Integer.parseInt(input.substring(delimiterPriority + 4));
-        } else {
-            time = input.substring(delimiterTime + 5);
-            priority = 3;
-        }
+        int delimiterTime = input.indexOf(TIME_FLAG);
+        String task = parseTask(input, EVENT_INPUT_START, delimiterTime);
+        String time = parseDateTime(input, delimiterTime);
+        int priority = parsePriority(input);
         LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
         Event newEvent = new Event(task, parsedTime, priority);
         tasks.addTask(newEvent);
         assert tasks.getList().contains(newEvent) : "New Event should be added";
         return ui.addMessage(newEvent, tasks);
+    }
+
+    /**
+     * Gets the task from the input
+     * @param input Input that user entered.
+     * @param start Start index of task.
+     * @param end End index of task.
+     * @return Task.
+     */
+    public String parseTask(String input, int start, int end) {
+        if (end == -1) {
+            return input.substring(start);
+        } else {
+            return input.substring(start, end);
+        }
+    }
+
+    /**
+     * Gets the task priority from the input.
+     * @param input Input that user entered.
+     * @return Task priority.
+     */
+    public int parsePriority(String input) throws InvalidPriorityException {
+        int priority;
+        if (!input.contains(PRIORITY_FLAG)) {
+            priority = 3;
+        } else {
+            int delimiterPriority = input.indexOf(PRIORITY_FLAG);
+            priority = Integer.parseInt(input.substring(delimiterPriority + PRIORITY_FLAG_LENGTH));
+            if (priority > 3 || priority < 1) {
+                throw new InvalidPriorityException("Priority level is invalid!");
+            }
+        }
+        return priority;
+    }
+
+    /**
+     * Gets String version of date or time from the input
+     * @param input Input that the user entered.
+     * @param delimiter Index where the date or time starts in input.
+     * @return String version of date or time.
+     */
+    public String parseDateTime(String input, int delimiter) {
+        String dateTime;
+        if (input.contains(PRIORITY_FLAG)) {
+            int delimiterPriority = input.indexOf(PRIORITY_FLAG);
+            dateTime = input.substring(delimiter + DATE_TIME_FLAG_LENGTH, delimiterPriority);
+        } else {
+            dateTime = input.substring(delimiter + DATE_TIME_FLAG_LENGTH);
+        }
+        return dateTime;
     }
 
     /**

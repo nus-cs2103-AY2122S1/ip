@@ -22,6 +22,11 @@ public class Storage {
     private static final String FILE_PATH = "./data/duke.txt";
     private static final String DATE_FORMAT = "dd MMM yyyy";
     private static final String DATE_TIME_FORMAT = "dd MMM yyyy HH:mm";
+    private static final int COMMAND_INDEX = 0;
+    private static final int COMPLETED_INDEX = 1;
+    private static final int PRIORITY_INDEX = 2;
+    private static final int TASK_INDEX = 3;
+    private static final int DATE_TIME_INDEX = 4;
 
     /**
      * Creates directory and file to store the TaskList if it is not found.
@@ -55,23 +60,27 @@ public class Storage {
                 String task = sc.nextLine();
                 String[] values = task.split(" \\| ");
                 assert values.length >= 4 : "Data should be read correctly";
-                assert values[1].equals("1") || values[1].equals("0") : "Done should be 1 or 0";
-                assert values[0].equals("T") || values[0].equals("E") || values[0].equals("D")
+                assert values[COMPLETED_INDEX].equals("1")
+                        || values[COMPLETED_INDEX].equals("0")
+                        : "Done should be 1 or 0";
+                assert values[COMMAND_INDEX].equals("T")
+                        || values[COMMAND_INDEX].equals("E")
+                        || values[COMMAND_INDEX].equals("D")
                         : "Task type should be T, D or E";
-                String taskItem = values[3];
-                boolean isCompleted = values[1].equals("1");
-                int priority = Integer.parseInt(values[2]);
-                switch(values[0]) {
+                String taskItem = values[TASK_INDEX];
+                boolean isCompleted = values[COMPLETED_INDEX].equals("1");
+                int priority = Integer.parseInt(values[PRIORITY_INDEX]);
+                switch(values[COMMAND_INDEX]) {
                 case "T":
                     list.add(new ToDo(taskItem, isCompleted, priority));
                     break;
                 case "E":
-                    LocalDateTime dateTime = LocalDateTime.parse(values[4], DateTimeFormatter
+                    LocalDateTime dateTime = LocalDateTime.parse(values[DATE_TIME_INDEX], DateTimeFormatter
                             .ofPattern(DATE_TIME_FORMAT));
                     list.add(new Event(taskItem, isCompleted, dateTime, priority));
                     break;
                 case "D":
-                    LocalDate date = LocalDate.parse(values[4], DateTimeFormatter.ofPattern(DATE_FORMAT));
+                    LocalDate date = LocalDate.parse(values[DATE_TIME_INDEX], DateTimeFormatter.ofPattern(DATE_FORMAT));
                     list.add(new Deadline(taskItem, isCompleted, date, priority));
                     break;
                 default:

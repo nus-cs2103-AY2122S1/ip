@@ -149,3 +149,18 @@ class InvalidTaskTypeException extends DukeException {
         return "InvalidTaskTypeException: " + this.getMessage();
     }
 }
+
+/**
+ * Represents exception where priority level is invalid.
+ */
+class InvalidPriorityException extends DukeException {
+
+    InvalidPriorityException(String message) {
+        super(message);
+    }
+
+    @Override
+    public String toString() {
+        return "InvalidPriorityException: " + this.getMessage();
+    }
+}

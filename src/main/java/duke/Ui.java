@@ -122,7 +122,7 @@ public class Ui {
      * @return Message to be shown to the user.
      */
     public String findMessage(TaskList tasks) {
-        String message = " Here are the matching tasks in your list:"
+        String message = " Here are the matching tasks in your list:\n"
                 + tasks.toString();
         return message;
     }
@@ -163,8 +163,10 @@ public class Ui {
             message = " ☹ OOPS!!! The task number is invalid.";
         } else if (e instanceof DateTimeParseException) {
             message = " ☹ OOPS!!! The date is in the wrong format. Please use the following format\n"
-                            + " For event: dd-MM-yyyy HHmm\n"
-                            + " For deadline: dd-MM-yyyy";
+                    + " For event: dd-MM-yyyy HHmm\n"
+                    + " For deadline: dd-MM-yyyy";
+        } else if (e instanceof InvalidPriorityException || e instanceof NumberFormatException) {
+            message = " ☹ OOPS!!! The priority value is invalid. It should be 1, 2, or 3.";
         } else {
             message = " ☹ OOPS!!! An unknown error has occurred!";
         }
