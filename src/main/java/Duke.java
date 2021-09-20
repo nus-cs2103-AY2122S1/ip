@@ -16,13 +16,6 @@ public class Duke {
     private Storage storage;
 
     /**
-     * List of input commands the user can use.
-     */
-    public enum InputCommands {
-        bye, list, done, delete, todo, deadline, event, find, tag
-    }
-
-    /**
      * Constructor for Duke.
      * Creates a new storage file to store tasks inputted by the user.
      */

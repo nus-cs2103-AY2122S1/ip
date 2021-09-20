@@ -98,9 +98,15 @@ public class Ui {
         System.out.println("Sorry! There was an error loading your tasks! Please try again!");
     }
 
-    public String taggedTask(Task taskAtIndex) {
+    /**
+     * Returns a message to the user for when a task has been tagged.
+     *
+     * @param taskToBeTagged The task to be tagged.
+     * @return A message to the user indicating the task has tagged with the specified tag.
+     */
+    public String taggedTask(Task taskToBeTagged) {
         return String.format("I've tagged this task as:\n %s\n",
-                taskAtIndex.toString());
+                taskToBeTagged.toString());
     }
 
     public String help() {
