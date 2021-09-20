@@ -14,9 +14,9 @@ the files locally.
 
 ![DukeBotUI](Ui.png)
 
-##Features
+## :wFeatures
 
-###Help command
+### Help command
 Dukebot supports the usage of help command. This help command is intended to act as a quick 
 reference to users.
 
@@ -27,7 +27,7 @@ or the word.
 
 ![helpOneCommand](./Assets/helpOneCommand.png)
 
-###Add and manage your tasks
+### Add and manage your tasks
 Dukebot supports the use of three tasks. Creation of these tasks would be added to log 
 of the bot.
 
@@ -45,13 +45,13 @@ deadline {insert task name here} {/by DD/MM/YYYY HH/MM}.
 * Event: A task with a time that it is conducted at. The format is 
 deadline {insert task name here} {/by DD/MM/YYYY HH/MM}.
 
-###List tasks
+### List tasks
 We are able to list the tasks in the log using the list command. Previously created tasks
 will be displayed here.
 
 ![listCommand](./Assets/listCommand.png)
 
-###Complete Tasks
+### Complete Tasks
 
 Tasks can be completed to show the user that the command has been executed already.
 **Completed Commands are automatically deleted to prevent long text**
@@ -63,7 +63,8 @@ Precompleted tasklist:\
 After done command:\
 ![afterDonelist](./Assets/doneCompletedAction.png)
 
-###Delete tasks
+### Delete tasks
+
 Tasks can be deleted to prevent long text fields. The format for deleting tasks is
 delete {insert task number here}
 
