@@ -83,6 +83,8 @@ public class Storage {
         ArrayList<Task> task = tasks.getTasks();
         for (int i = 0; i < tasks.size(); i++) {
             Task t = task.get(i);
+            assert t.label.equals("T") || t.label.equals("D") || t.label.equals("E")
+                    : "Task type appears to be invalid.";
             String text = "";
 
             if (t.label.equals("T")) {
