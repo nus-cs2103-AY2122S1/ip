@@ -36,6 +36,7 @@ public class Duke {
     public String getResponse(String input) {
         Parser parser = new Parser(input);
 
+        assert (this.tasks.noOfTask() >= 0) : "Number of tasks cannot be negative";
         try {
             if (parser.isList()) {
                 // Run based on list command
@@ -46,6 +47,8 @@ public class Duke {
                     // Run based on done command
                     this.tasks.done(parser.getSecondPartInInt());
                     this.storage.save(parser.getCommand());
+
+                    this.storage.assertFile();
                     return ui.doneTask(this.tasks.getMostRecent());
 
                 } catch (DukeException e) {
@@ -57,6 +60,8 @@ public class Duke {
                     // Run based on todo command
                     ToDo task = new ToDo(parser.getSecondPart());
                     this.tasks.add(task);
+
+                    this.storage.assertFile();
                     this.storage.save(parser.getCommand());
                     return ui.addTask(this.tasks.getMostRecent(), this.tasks);
 
@@ -72,6 +77,8 @@ public class Duke {
                             parser.splitSecondPartForDeadline()[1]);
                     this.tasks.add(task);
                     this.storage.save(parser.getCommand());
+
+                    this.storage.assertFile();
                     return ui.addTask(this.tasks.getMostRecent(), this.tasks);
 
                 } catch (DukeException e) {
@@ -86,6 +93,8 @@ public class Duke {
                             parser.splitSecondPartForEvent()[1]);
                     this.tasks.add(task);
                     this.storage.save(parser.getCommand());
+
+                    this.storage.assertFile();
                     return ui.addTask(this.tasks.getMostRecent(), this.tasks);
 
                 } catch (DukeException e) {
@@ -121,6 +130,7 @@ public class Duke {
             return ui.showError(e);
 
         }
+
     }
 
     /**
