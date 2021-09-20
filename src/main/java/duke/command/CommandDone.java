@@ -5,6 +5,7 @@ import duke.TaskList;
 import duke.ui.UserInterface;
 
 public class CommandDone extends Command {
+    public static String DONE_NAME = "done";
     private String taskName;
     public CommandDone(String taskName) {
         this.taskName = taskName;

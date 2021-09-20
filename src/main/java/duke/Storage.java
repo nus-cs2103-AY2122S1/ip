@@ -6,9 +6,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
+    public static final String SAVE_SUCCESSFUL_PREFIX = "File successfully saved to ";
+    public static final String SAVE_FAILURE_MESSAGE = "Error: Could not save file";
+    public static final String LOAD_FAILURE_MESSAGE = "File could not be found";
+    public static final String INVALID_TASK_MESSAGE = "Invalid task found";
     private File file;
     public Storage(Path filepath) {
         file = filepath.toFile();
@@ -20,34 +25,50 @@ public class Storage {
             Scanner fileReader = new Scanner(file);
             while (fileReader.hasNext()) {
                 String row = fileReader.nextLine();
-                String[] tokens = row.split(",");
-                if (tokens[0].equals("todo")) {
-                    Task task = new ToDo(tokens[1]);
-                    taskList.add(task);
-                } else if (tokens[0].equals("event")) {
-                    Task task = new Event(tokens[1], tokens[2]);
-                    taskList.add(task);
-                } else if (tokens[0].equals("deadline")) {
-                    Task task = new Deadline(tokens[1], tokens[2]);
-                    taskList.add(task);
-                }
+                Task task = parseTask(row);
+                taskList.add(task);
             }
         } catch (FileNotFoundException e) {
-            ui.displayError("File could not be found");
+            ui.displayError(LOAD_FAILURE_MESSAGE);
         }
         return taskList;
+    }
+
+    private Task parseTask(String taskStr) {
+        String[] tokens = taskStr.split(",");
+        String type = tokens[0];
+        String[] otherTokens = Arrays.copyOfRange(tokens, 1, tokens.length);
+        if (type.equals(ToDo.TODO_NAME)) {
+            return parseToDo(otherTokens);
+        } else if (type.equals(Event.EVENT_NAME)) {
+            return parseEvent(otherTokens);
+        } else if (type.equals(Deadline.DEADLINE_NAME)) {
+            return parseDeadline(otherTokens);
+        } else {
+            throw new IllegalArgumentException(INVALID_TASK_MESSAGE);
+        }
+    }
+
+    private Task parseToDo(String[] tokens) {
+        return new ToDo(tokens[0], Boolean.parseBoolean(tokens[1]));
+    }
+
+    private Task parseEvent(String[] tokens) {
+        return new Event(tokens[0], tokens[1], Boolean.parseBoolean(tokens[2]));
+    }
+
+    private Task parseDeadline(String[] tokens) {
+        return new Deadline(tokens[0], tokens[1], Boolean.parseBoolean(tokens[2]));
     }
 
     public void save(UserInterface ui, TaskList taskList) {
         try {
             PrintWriter dukeWriter = new PrintWriter(file);
-            for (Task task : taskList.getTasks()) {
-                dukeWriter.println(task.toCsvRow());
-            }
+            dukeWriter.print(taskList.toCsvString());
             dukeWriter.close();
-            ui.print("File successfully saved to " + file.getPath());
+            ui.print(SAVE_SUCCESSFUL_PREFIX + file.getPath());
         } catch (FileNotFoundException e) {
-            System.err.println("Error: Could not save file");
+            ui.displayError(SAVE_FAILURE_MESSAGE);
         } finally {
             ui.displayFarewell();
         }

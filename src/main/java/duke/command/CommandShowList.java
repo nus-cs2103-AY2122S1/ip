@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Task;
 import duke.TaskList;
 import duke.ui.UserInterface;
 
 public class CommandShowList extends Command {
+    public static final String SHOW_LIST_NAME = "list";
 
     public CommandShowList () {
         super();
@@ -12,8 +12,6 @@ public class CommandShowList extends Command {
 
     @Override
     public void execute(TaskList taskList, UserInterface ui){
-        for (Task task: taskList.getTasks()) {
-            ui.print(task.toString());
-        }
+        ui.print(taskList.toString());
     }
 }
