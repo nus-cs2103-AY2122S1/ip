@@ -166,25 +166,49 @@ public class Ui {
         printInput(findMessage);
         return findMessage;
     }
-    
+
+    /**
+     * Returns the string response to the find command.
+     *
+     * @param value Number that the task is associated to in the task list.
+     * @return String representation of the updated task list containing the cloned item.
+     */
     public String cloneResponse(int value) {
         String response = "Task " + value + " from the task list has been cloned!" + " Here is the latest task " 
                 + "list: \n" + taskList.printList();
         return response;
     }
 
+    /**
+     * Returns the string response to the find command.
+     *
+     * @param value Number that the task is associated to in the task list.
+     * @return String representation of the tasks in the task list that contain the wordToFind string.
+     */
     public String editTaskResponse(int value) {
         String response = "Task " + value + " in your task list has been updated! Here is your latest list: \n"
                 + taskList.printList();
         return response;
     }
 
+    /**
+     * Returns the string response to the find command.
+     *
+     * @param value Number that the task is associated to in the task list.
+     * @return String representation of the task list with updated description.
+     */
     public String editDescriptionResponse(int value) {
         String response = "The description of Task " + value + " in your task list has been updated! Here is your " 
                 + "latest list: " + "\n" + taskList.printList();
         return response;
     }
 
+    /**
+     * Returns the string response to the find command.
+     *
+     * @param value Number that the task is associated to in the task list.
+     * @return String representation of the task list with updated date and time attributes.
+     */
     public String editDateTimeResponse(int value) {
         String response = "The DateTime of Task " + value + " in your task list has been updated! Here is your latest list: "
                 + "\n" + taskList.printList();
