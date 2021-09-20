@@ -102,4 +102,16 @@ public class Ui {
         return String.format("I've tagged this task as:\n %s\n",
                 taskAtIndex.toString());
     }
+
+    public String help() {
+        return "Here are the commands you can enter to Duke:\n1. list: list all your tasks\n" +
+                "2. todo: add a todo task\n" +
+                "3. deadline: add a deadline task\n" +
+                "4. event: add an event task\n" +
+                "5. done: mark a task as done\n" +
+                "6. delete: delete a task\n" +
+                "7. find: find tasks containing a keyword\n" +
+                "8. tag: tag a task\n" +
+                "9. bye: exit Duke";
+    }
 }

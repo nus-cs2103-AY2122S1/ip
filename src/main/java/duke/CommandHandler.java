@@ -139,4 +139,8 @@ public class CommandHandler {
 
         return ui.taggedTask(taskAtIndex);
     }
+
+    public String help() {
+        return ui.help();
+    }
 }

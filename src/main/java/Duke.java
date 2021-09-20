@@ -19,7 +19,7 @@ public class Duke {
      * List of input commands the user can use.
      */
     public enum InputCommands {
-        bye, list, done, delete, todo, deadline, event, find
+        bye, list, done, delete, todo, deadline, event, find, tag
     }
 
     /**
@@ -93,7 +93,7 @@ public class Duke {
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("tag")) {
                     System.out.println(commandHandler.handleTag(userCommand));
-                } else if (userCommand.equals("listInputs")) {
+                } else if (userCommand.equals("help")) {
                     for (InputCommands inputs : InputCommands.values()) {
                         System.out.println(inputs);
                     }
@@ -140,6 +140,9 @@ public class Duke {
             } else if (input.startsWith("tag")) {
                 storage.saveTasksToFile();
                 return commandHandler.handleTag(input);
+            } else if (input.equals("help")) {
+                storage.saveTasksToFile();
+                return commandHandler.help();
             } else {
                 throw new UnknownInputException("error");
             }
