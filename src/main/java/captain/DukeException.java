@@ -55,4 +55,10 @@ public class DukeException extends Exception {
             super("Are you sure you've typed in a valid task index...?");
         }
     }
+
+    public static class InvalidDateException extends DukeException {
+        public InvalidDateException() {
+            super("Please input the date in the following format: dd/mm/yyyy!");
+        }
+    }
 }
