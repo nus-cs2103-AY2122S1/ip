@@ -1,6 +1,7 @@
 package duke;
 import duke.tasks.TaskList;
 import java.io.IOException;
+import javafx.application.Platform;
 
 /**
  * Parses the user's input.
@@ -12,10 +13,17 @@ public class Parser {
 
     public String parseTask(String task) throws DukeException, IOException {
         assert task.length() > 1;
-
-        if (task.equals("list")) {
-            return TaskList.printList();
-        } else if (task.startsWith("done")) {
+        switch (task) {
+            case "list": return TaskList.printList();
+            case "bye":
+                String str = "Beep boop! Battery low. Commencing shutdown!";
+                Platform.exit();
+                return str;
+            case "hi": return "Hi, I am BMO! Who wants to play video games?";
+            case "me": return "Bad user! Input some tasks now to be productive!";
+            default: break;
+        }
+        if (task.startsWith("done")) {
             String str = TaskList.complete(task);
             Storage.overwrite();
             return str;
@@ -30,11 +38,11 @@ public class Parser {
         } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
             switch (task) {
             case "deadline":
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("Invalid input! The description of a deadline cannot be empty.");
             case "event":
-                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("Invalid input! The description of a event cannot be empty.");
             case "todo":
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("Invalid input! The description of a todo cannot be empty.");
             default:
                 return Storage.writeToFile(task);
             }
@@ -45,7 +53,7 @@ public class Parser {
             Storage.overwrite();
             return str;
         } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("You have entered an invalid input! :-(");
         }
     }
 }
