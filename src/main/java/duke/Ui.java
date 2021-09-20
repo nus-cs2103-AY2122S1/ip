@@ -15,14 +15,15 @@ public class Ui {
     /**
      * Displays welcome message.
      */
-    public void welcome() {
+    public String welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        return "Hello from\n"
+                + logo + "\n"
+                + "What can I do for you?";
     }
 
     /**
@@ -30,25 +31,25 @@ public class Ui {
      *
      * @param error DukeException that was caught.
      */
-    public void showError(DukeException error) {
-        System.out.println(error);
+    public String showError(DukeException error) {
+        return error.toString();
     }
 
     /**
      * Displays bye message.
      */
-    public void bye() {
-        System.out.println("Bye! Hope to see you again soon!");
+    public String bye() {
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
      * Displays the tasks in the TaskList.
      *
-     * @param tasklist TaskList to be displayed.
+     * @param taskList TaskList to be displayed.
      */
-    public void list(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(taskList);
+    public String listAll(TaskList taskList) {
+        return "Here are the tasks in your list:\n"
+                + taskList;
     }
 
     /**
@@ -56,47 +57,47 @@ public class Ui {
      *
      * @param task The task that was done.
      */
-    public void done(Task task) {
-        System.out.println("Nice! I have marked this task as done!");
-        System.out.println(task);
+    public String doneTask(Task task) {
+        return "Nice! I have marked this task as done!\n"
+                + task;
     }
 
     /**
      * Displays message that a task is added and also informs how many tasks are in the list after.
      *
      * @param task The task that is added.
-     * @param tasklist TaskList that the task is added to.
+     * @param taskList TaskList that the task is added to.
      */
-    public void addTask(Task task, TaskList taskList) {
+    public String addTask(Task task, TaskList taskList) {
         int length = taskList.noOfTask();
 
-        System.out.println("Added task:");
-        System.out.println(task);
-        System.out.println("You have " + length + " tasks in the list");
+        return "Added task:\n"
+                + task + "\n"
+                + "You have " + length + " tasks in the list";
     }
 
     /**
      * Displays message that a task is deleted and also informs how many tasks are in the list after.
      *
      * @param task The task that is deleted.
-     * @param tasklist TaskList that the task is deleted from.
+     * @param taskList TaskList that the task is deleted from.
      */
-    public void deleteTask(Task task, TaskList taskList) {
+    public String deleteTask(Task task, TaskList taskList) {
         int length = taskList.noOfTask();
 
-        System.out.println("Ok! I have removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + length + " tasks in the list.");
+        return "Ok! I have removed this task:\n"
+                + task + "\n"
+                + "Now you have " + length + " tasks in the list.";
     }
 
-    public void findTask(TaskList taskList) {
+    public String findTask(TaskList taskList) {
         int length = taskList.noOfTask();
 
         if (length != 0) {
-            System.out.println("Here are the matching tasks in your list:");
-            System.out.println(taskList);
+            return "Here are the matching tasks in your list:\n"
+                    + taskList;
         } else {
-            System.out.println("Oh no there are no matching tasks in your list :((");
+            return "Oh no there are no matching tasks in your list :((";
         }
 
     }
