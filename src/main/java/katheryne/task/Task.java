@@ -21,14 +21,28 @@ public abstract class Task {
 
     }
 
+    /**
+     * Constructor for the task.
+     * 
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
     }
 
+    /**
+     * Mark a task as complete. This currently cannot be undone.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Checks if the keyword is in the description
+     * 
+     * @param keyword
+     * @return
+     */
     public boolean find(String keyword) {
         return this.description.contains(keyword);
     }

@@ -22,6 +22,7 @@ public class TaskList {
      * Adds a task to this list
      *
      * @param t
+     * @throws KatheryneException if there are duplicates.
      */
     public void add(Task t) throws KatheryneException {
         boolean hasDuplicates = checkForDuplicates(t);
@@ -31,10 +32,10 @@ public class TaskList {
         lst.add(t);
     }
 
-    void addAll(List<Task> tasks) {
-        Set<Task> tasksToAdd = new HashSet<>(tasks);
-        tasksToAdd.removeIf(this::checkForDuplicates);
-        lst.addAll(tasksToAdd);
+    void addAll(List<Task> tasks) throws KatheryneException {
+        for (Task t : tasks) {
+            add(t);
+        }
     }
     
     // abstracted method to check if duplicates in the task list exist
