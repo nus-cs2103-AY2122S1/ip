@@ -90,4 +90,8 @@ public class TaskList {
         }
         return false;
     }
+    
+    public void modifyTask(Task task, int index) {
+        userList.set(index, task);
+    }
 }

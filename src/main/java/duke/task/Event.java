@@ -24,6 +24,10 @@ public class Event extends Task {
         String formattedDtf = this.at.format(dtf);
         this.formattedDtf = formattedDtf;
     }
+
+    public LocalDateTime getDate() {
+        return at;
+    }
     
     /**
      * Returns the string representation of the event task that is stored on duke.txt.
@@ -42,5 +46,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + formattedDtf + ")";
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

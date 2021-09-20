@@ -2,8 +2,8 @@ package duke.exception;
 
 public class InvalidTaskCommandException extends DukeException {
     public InvalidTaskCommandException() {
-        super("Your command is not in the right format! It should be <task type> <task description>/by " 
-                + "<yyyy-mm-dd HHmm>");
+        super("Your command is not in the right format! Please refer to the user guide to view the" 
+                + " the correct format for various types of task commands!");
     }
 
     @Override

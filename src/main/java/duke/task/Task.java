@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents the various types of tasks that can be added to the task list.
  */
@@ -26,11 +28,19 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
+    public abstract LocalDateTime getDate();
+    
+    public abstract String getDescription();
+
     /**
      * Marks the task as completed.
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+    
+    public boolean isDone() {
+        return this.isDone;
     }
     
     /**

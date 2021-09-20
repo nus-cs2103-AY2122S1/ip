@@ -24,6 +24,10 @@ public class Deadline extends Task {
         String formattedDtf = this.by.format(dtf);
         this.formattedDtf = formattedDtf;
     }
+    
+    public LocalDateTime getDate() {
+        return by;
+    }
 
     /**
      * Returns the string representation of the deadline task that is stored on duke.txt.
@@ -42,5 +46,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + formattedDtf + ")";
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

@@ -149,7 +149,7 @@ public class Ui {
             String[] furtherBreakdownIntoParts = partsBeforeSlash[0].split(" ");
             
             if (isWordPresent(furtherBreakdownIntoParts, wordToFind)) {
-                response += count + ". " + task + "\n"; 
+                response += (i + 1) + ". " + task + "\n"; 
                 System.lineSeparator();
                 count++;
             }
