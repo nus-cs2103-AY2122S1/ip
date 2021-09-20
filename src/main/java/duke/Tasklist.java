@@ -46,8 +46,12 @@ public class Tasklist {
         return tasks.size();
     }
 
-    public Task getTask(int index) {
-        return tasks.get(index);
+    public Task getTask(int index) throws NoSuchTaskException{
+        try {
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchTaskException("Task index is out of bounds");
+        }
     }
 
 

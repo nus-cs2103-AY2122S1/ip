@@ -49,7 +49,7 @@ public class Duke extends Application {
             String result = command.execute(tasks, ui, storage);
             return result;
         } catch (NoSuchCommandException | NoSuchTaskException | IOException ex) {
-            return "Something went wrong";
+            return "Something went wrong: \n" + ex.getMessage();
         }
     };
     @Override

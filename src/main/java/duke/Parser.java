@@ -68,7 +68,7 @@ public class Parser {
                 throw new NoSuchCommandException("Invalid Command");
             }
         } catch (NullPointerException | NoSuchCommandException ex) {
-            throw new NoSuchCommandException("Command");
+            throw new NoSuchCommandException("Invalid Command");
         }
     }
 

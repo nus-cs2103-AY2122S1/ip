@@ -6,15 +6,14 @@ Duke is a chatbot that is also a task manager that helps you to keep track your 
 - [User Guide](#user-guide)
   - [Quick Start](#quick-start)
   - [Features](#features)
-    - [`todo` - Creates a ToDo Task](#todo---creates-a-todo-task)
-    - [`event` - Creates an Event Task](#event---creates-an-event-task)
-    - [`deadline` - Creates an Deadline Task](#deadline---creates-an-deadline-task)
-    - [`fixedduration` - Creates an Fixed Duration Task](#fixedduration---creates-an-fixed-duration-task)
-    - [`list` - Lists all Tasks in Tasklist](#list---lists-all-tasks-in-tasklist)
-    - [`find` - Searches for Tasks that matches keyword](#find---searches-for-tasks-that-matches-keyword)
-    - [`done` - Marks Task in Tasklist as done](#done---marks-task-in-tasklist-as-done)
-    - [`bye` - Exits the Application](#bye---exits-the-application)
-    - [`list` - Lists all Tasks in Tasklist](#list---lists-all-tasks-in-tasklist-1)
+    - [Creates a ToDo Task - `todo`](#creates-a-todo-task---todo)
+    - [Creates an Event Task - `event`](#creates-an-event-task---event)
+    - [Creates an Deadline Task - `deadline`](#creates-an-deadline-task---deadline)
+    - [Creates an Fixed Duration Task - `fixed`](#creates-an-fixed-duration-task---fixed)
+    - [Lists all Tasks in Tasklist - `list`](#lists-all-tasks-in-tasklist---list)
+    - [Searches for Tasks that matches keyword - `find`](#searches-for-tasks-that-matches-keyword---find)
+    - [Marks Task in Tasklist as done - `done`](#marks-task-in-tasklist-as-done---done)
+    - [Exits the Application `bye`](#exits-the-application-bye)
   - [Command Summary](#command-summary)
   
 ## Quick Start
@@ -23,7 +22,7 @@ Duke is a chatbot that is also a task manager that helps you to keep track your 
 3. Copy the file to the folder you want to use as the home folder for your Duke Program.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 
-![UI](https://i.imgur.com/Q0F4Zc1.png)
+![Ui](https://imgur.com/AT6DuS9)
 
 5. Type the command in the command box and press Enter to execute it.
 Some example commands you can try:
@@ -57,11 +56,11 @@ todo Read book
 
 Adds a event task to the tasklist.
 
-Format: `event DESCRIPTION /at yyyy-mm-dd`
+Format: `event DESCRIPTION /at yyyy-MM-dd (HH:mm)`
 
 Example: 
 ```
-event job interview /at 2021-08-08 1200
+event ruby's birthday /at 2021-08-13 0000
 ```  
 &nbsp;
 
@@ -69,23 +68,23 @@ event job interview /at 2021-08-08 1200
 
 Adds a deadline task to the tasklist.
 
-Format: `deadline DESCRIPTION /by yyyy-mm-dd`
+Format: `deadline DESCRIPTION /by yyyy-MM-dd (HH:mm)`
 
 Example: 
 ```
-deadline return book /by 2021-08-08 1200
+deadline finish assignment /by 2021-08-08 1200
 ```  
 &nbsp;
 
-### Creates an Fixed Duration Task - `fixedduration` 
+### Creates an Fixed Duration Task - `fixed` 
 
 Adds a fixed duration task that does not have a fixed start/end time to the tasklist.
 
-Format: `fixedduration DESCRIPTION /duration DURATION`
+Format: `fixed DESCRIPTION /duration DURATION`
 
 Example: 
 ```
-fixedduration eat /duration 2 hours
+fixed eat /duration 20 minutes
 ```
 &nbsp;
 
@@ -132,9 +131,9 @@ Format: `bye`
 
 ## Command Summary
 * Create a ToDo Task: `todo DESCRIPTION`
-* Create an Event Task: `event DESCRIPTION /at yyyy-mm-dd`
-* Create an Deadline Task: `deadline DESCRIPTION /by yyyy-mm-dd`
-* Create an Fixed Duration Task: `fixedduration DESCRIPTION /duration DURATION`
+* Create an Event Task: `event DESCRIPTION /at yyyy-MM-dd (HH:mm)`
+* Create an Deadline Task: `deadline DESCRIPTION /by yyyy-MM-dd (HH:mm)`
+* Create an Fixed Duration Task: `fixed DESCRIPTION /duration DURATION`
 * Lists all Tasks in Tasklist: `list`
 * Search for Tasks that matches keyword: `find KEYWORD`
 * Marks Task in Tasklist as done: `done TASK_INDEX`

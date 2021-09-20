@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -13,16 +14,16 @@ import duke.exceptions.NoSuchCommandException;
 public class Task {
 
     private final String name;
-    private boolean done;
+    private boolean isDone;
 
     Task(String name, boolean done) {
         assert name != "";
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public boolean isMatch(String input) {
@@ -35,16 +36,16 @@ public class Task {
     }
 
     public void markUndone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", (this.done) ? "X" : " ", this.name);
+        return String.format("[%s] %s", (this.isDone) ? "X" : " ", this.name);
     }
 
     public String toStringOutput() {
-        return String.format("[%s] %s", (this.done) ? "X" : " ", this.name);
+        return String.format("[%s] %s", (this.isDone) ? "X" : " ", this.name);
     }
 
     String getName() {
@@ -52,7 +53,7 @@ public class Task {
     }
 
     Boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public static void isLegitFindInput(String input) throws NoSuchCommandException {
@@ -88,8 +89,15 @@ public class Task {
     }
 
     public static String parseDateTime(String input) {
-        LocalDate dateTime = LocalDate.parse(input);
-        return dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        if (input.contains(" ")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+            return dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+
+        } else {
+            LocalDate dateTime = LocalDate.parse(input);
+            return dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
     }
 
 }

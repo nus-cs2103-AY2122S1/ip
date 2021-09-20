@@ -12,14 +12,14 @@ public class Ui {
     }
     
 
-    public String showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String result = "Hello from\n" + logo + "\n";
-        result += "Hello! I'm Duke\n" + // Welcome Message
+    public static String showWelcomeMessage() {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        String result = "Hello from\n" + logo + "\n";
+        String result = "Hello! I'm Duke!~\n" + // Welcome Message
                 "What can I do for you?";
         return result;
     }

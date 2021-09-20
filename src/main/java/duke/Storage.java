@@ -50,6 +50,7 @@ public class Storage {
      * Create a storage class that stores the filepath and handles converting between
      * file and Tasklist
      *
+     * @return Tasklist
      * @throws DukeException If scanner is not working as intended or input is not the right format
      */
     public Tasklist fileToTasklist() throws DukeException {
