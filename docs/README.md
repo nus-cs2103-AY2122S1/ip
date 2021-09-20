@@ -1,5 +1,6 @@
 # User Guide
 
+![Image of UI](./UI.png)
 ## Features 
 
 ### Feature-ABC
