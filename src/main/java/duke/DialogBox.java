@@ -43,6 +43,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        this.setStyle("-fx-border-color: black; -fx-border-style: hidden hidden solid hidden;");
     }
 
     /**
