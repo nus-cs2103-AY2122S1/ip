@@ -129,4 +129,8 @@ public final class TaskList {
         }
         return str;
     }
+
+    public static int getSize() {
+        return taskList.size();
+    }
 }
