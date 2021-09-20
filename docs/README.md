@@ -1,7 +1,7 @@
 # User Guide
 Welcome to Duke! Duke is your personal desktop-based task manager, available both on the command line, as well as on Graphical User Interface (GUI).
 
-![Homepage](https://github.com/aakanshanarain/ip/blob/master/docs/Homepage.png)
+![Homepage](https://raw.githubusercontent.com/aakanshanarain/ip/master/docs/Homepage.png)
 
 Continue reading to find out more.
 ## Features 
