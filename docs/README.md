@@ -164,8 +164,7 @@ Action | Format, Examples
 **todo** | `todo DESCRIPTION` <br> e.g., `todo cooking lunch`
 **deadline** | `deadline DESCRIPTION /by YYYY-MM-DD` <br> e.g., `deadline buy shoes /by 2020-10-10`
 **event** | `event DESCRIPTION /at YYYY-MM-DD` <br> e.g., `event wedding /at 2020-08-07`
-**taskPeriod** | `taskPeriod DESCRIPTION /from YYYY-MM-DD /to YYYY-MM-DD` <br> e.g.,
-`taskPeriod massive discount/from 2020-09-09 /to 2020-10-01`
+**taskPeriod** | `taskPeriod DESCRIPTION /from YYYY-MM-DD /to YYYY-MM-DD` <br> e.g.,`taskPeriod massive discount/from 2020-09-09 /to 2020-10-01`
 **list** | `list`
 **find** | `find KEYWORD` <br> e.g., `find book`
 **done** | `done TASK_NO` <br> e.g., `done 1`
