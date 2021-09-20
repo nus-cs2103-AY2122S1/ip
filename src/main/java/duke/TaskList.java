@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    static private ArrayList<Task> storage;
+    private static ArrayList<Task> storage;
 
     /**
      * Constructor for the TaskList if there already is an existing Storage.
@@ -44,7 +44,7 @@ public class TaskList {
         Todo newToDo = new Todo(todoTitle);
         storage.add(newToDo);
         duke.Ui.print("Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
-                + " tasks in the list" );
+                + " tasks in the list");
     }
 
     /**
@@ -68,8 +68,8 @@ public class TaskList {
             deadlineDate = Time.changeDateFormat(deadlineDate);
             Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
             storage.add(newDeadline);
-            duke.Ui.print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
-                    + " tasks in the list" );
+            duke.Ui.print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are "
+                    + storage.size() + " tasks in the list");
         } else {
             throw new DukeException("Sorry ☹, please enter the deadline in the correct format! (DD/MM/YYYY)");
         }
@@ -97,8 +97,8 @@ public class TaskList {
             String eventTitle = eventEntry.substring(6, indexOfSlash);
             Event newEvent = new Event(eventTitle, eventDate);
             storage.add(newEvent);
-            duke.Ui.print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
-                    + " tasks in the list" );
+            duke.Ui.print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are "
+                    + storage.size() + " tasks in the list");
         } else {
             throw new DukeException("Sorry ☹, please enter the event in the correct format! (DD/MM/YYYY)");
         }
@@ -110,7 +110,7 @@ public class TaskList {
      * @throws DukeException if the task number is invalid.
      */
     public static void delete(String deleteInput) throws DukeException {
-        int taskNumber = Integer.parseInt(deleteInput.substring(7,8));
+        int taskNumber = Integer.parseInt(deleteInput.substring(7, 8));
         if (taskNumber > storage.size()) {
             throw new DukeException("Sorry ☹, please enter a valid task to delete!");
         }

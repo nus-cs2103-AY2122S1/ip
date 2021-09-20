@@ -56,6 +56,11 @@ public class Parser {
         return input.length() >= 7 && input.substring(0, 7).equals("delete ");
     }
 
+    /**
+     * Returns an array of strings that contains the created Deadline from the Storage class.
+     * @param input the title of the deadline.
+     * @return an array of strings that contains the title and date of Deadline.
+     */
     public String[] storageDeadline(String input) {
         int indexOfOpenBracketD = input.indexOf("(");
         int indexOfCloseBracketD = input.indexOf(")");
@@ -65,6 +70,11 @@ public class Parser {
         return deadlineWords;
     }
 
+    /**
+     * Returns an array of strings that contains the created Event from the Storage class.
+     * @param input the title of the deadline.
+     * @return an array of strings that contains the title and date of Event.
+     */
     public String[] storageEvent(String input) {
         int indexOfOpenBracketE = input.indexOf("(");
         int indexOfCloseBracketE = input.indexOf(")");

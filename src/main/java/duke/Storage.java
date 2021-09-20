@@ -12,10 +12,11 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    private static File dir;
+    private static File tmp;
+    private static Parser parser = new Parser();
     private String filePath;
-    static private File dir;
-    static private File tmp;
-    static private Parser parser = new Parser();
+
 
     /**
      * Constructor for the Storage.

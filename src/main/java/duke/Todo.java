@@ -1,5 +1,4 @@
 package duke;
-import duke.Task;
 
 /**
  * Represents the Todo type of Task.

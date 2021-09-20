@@ -1,5 +1,4 @@
 package duke;
-import java.util.ArrayList;
 
 /**
  * Class to contain all the UI elements of Duke.
@@ -29,7 +28,7 @@ public class Ui {
      * @throws DukeException if the task number inputted is invalid.
      */
     public static void done(String doneEntry) throws DukeException {
-        int taskNumber = Integer.parseInt(doneEntry.substring(5,6));
+        int taskNumber = Integer.parseInt(doneEntry.substring(5, 6));
         if (taskNumber > TaskList.noOfTasks()) {
             throw new DukeException("Sorry ☹, please enter a valid task to complete!");
         }
@@ -64,6 +63,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Used to find matching tasks using the keyword inputted.
+     * @param findWord key word that wants to be found.
+     */
     public static void find(String findWord) {
         String word = findWord.substring(5);
         int len = TaskList.noOfTasks();
