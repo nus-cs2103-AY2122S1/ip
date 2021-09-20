@@ -4,9 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Parser {
@@ -72,24 +80,13 @@ public class Parser {
         String taskDescription;
 
         if (this.getOperationType().equals("deadline")
-                || this.getOperationType().equals("event")
-                || this.getOperationType().equals("todo")
+                || this.getOperationType().equals("event")) {
+            assert userInput.indexOf(" ") < userInput.indexOf("/") : "The description cannot be empty.";
+            taskDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/") - 1);
+        } else if (this.getOperationType().equals("todo")
                 || this.getOperationType().equals("find")) {
-            if (userInput.contains("/")) {
-                if (userInput.indexOf(" ") < userInput.indexOf("/")) {
-                    taskDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/") - 1);
-                } else {
-                    throw new DukeException("The description of a " + this.getOperationType() + " cannot be empty.");
-                }
-            } else {
-                if (!userInput.contains(" ")) {
-                    throw new DukeException("OOPS!!! The description of a "
-                            + this.getOperationType()
-                            + " cannot be empty.");
-                } else {
-                    taskDescription = userInput.substring(userInput.indexOf(" ") + 1);
-                }
-            }
+            assert userInput.contains(" ") : "The description cannot be empty.";
+            taskDescription = userInput.substring(userInput.indexOf(" ") + 1);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -151,54 +148,60 @@ public class Parser {
         return parsedTime;
     }
 
-    public Command parse(TaskList taskList, Ui textUi) throws DukeException{
+    /**
+     * Parse user command and return a Command instance corresponding to userInput.
+     *
+     * @param taskList A list of tasks
+     * @param textUi User interface
+     */
+    public Command parse(TaskList taskList, Ui textUi) throws DukeException {
         Command command;
         try {
             String operation = this.getOperationType();
             switch (operation) {
-                case "bye": {
-                    command = new ByeCommand(textUi);
-                    break;
-                }
-                case "list": {
-                    command = new ListCommand(taskList, textUi);
-                    break;
-                }
-                case "done": {
-                    int index = this.getIndex();
-                    command = new DoneCommand(taskList, textUi, index);
-                    break;
-                }
-                case "delete": {
-                    int index = this.getIndex();
-                    command = new DeleteCommand(taskList, textUi, index);
-                    break;
-                }
-                case "todo": {
-                    String taskInfo = this.getTask();
-                    command = new TodoCommand(taskList, textUi, taskInfo);
-                    break;
-                }
-                case "event": {
-                    String taskInfo = this.getTask();
-                    LocalDate taskTime = this.getTime();
-                    command = new EventCommand(taskList, textUi, taskInfo, taskTime);
-                    break;
-                }
-                case "deadline": {
-                    String taskInfo = this.getTask();
-                    LocalDate taskTime = this.getTime();
-                    command = new DeadlineCommand(taskList, textUi, taskInfo, taskTime);
-                    break;
-                }
-                case "find": {
-                    String keyword = this.getTask();
-                    command = new FindCommand(taskList, textUi, keyword);
-                    break;
-                }
-                default: {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                }
+            case "bye": {
+                command = new ByeCommand(textUi);
+                break;
+            }
+            case "list": {
+                command = new ListCommand(taskList, textUi);
+                break;
+            }
+            case "done": {
+                int index = this.getIndex();
+                command = new DoneCommand(taskList, textUi, index);
+                break;
+            }
+            case "delete": {
+                int index = this.getIndex();
+                command = new DeleteCommand(taskList, textUi, index);
+                break;
+            }
+            case "todo": {
+                String taskInfo = this.getTask();
+                command = new TodoCommand(taskList, textUi, taskInfo);
+                break;
+            }
+            case "event": {
+                String taskInfo = this.getTask();
+                LocalDate taskTime = this.getTime();
+                command = new EventCommand(taskList, textUi, taskInfo, taskTime);
+                break;
+            }
+            case "deadline": {
+                String taskInfo = this.getTask();
+                LocalDate taskTime = this.getTime();
+                command = new DeadlineCommand(taskList, textUi, taskInfo, taskTime);
+                break;
+            }
+            case "find": {
+                String keyword = this.getTask();
+                command = new FindCommand(taskList, textUi, keyword);
+                break;
+            }
+            default: {
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
             }
             return command;
         } catch (DukeException e) {

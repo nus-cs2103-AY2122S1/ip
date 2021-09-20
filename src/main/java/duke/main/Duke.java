@@ -1,17 +1,12 @@
 package duke.main;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 import duke.command.Command;
-import duke.parser.Parser;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 import duke.ui.Ui;
 
 public class Duke {
