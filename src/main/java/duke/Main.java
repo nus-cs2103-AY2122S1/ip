@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author Samay Sagar
+ * @version CS2103 AY21/22 Sem 1
  */
 public class Main extends Application {
 
@@ -22,7 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("PokeTaskList");
+            stage.setTitle("PokéTaskList");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

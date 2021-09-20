@@ -14,10 +14,24 @@ import java.util.Scanner;
  * @author Samay Sagar
  * @version CS2103 AY21/22 Sem 1
  */
+//Solution below adapted from https://github.com/jovyntls/ip
 public class Storage {
     private final String dataStoragePath;
 
+    /**
+     * Constructor for Storage class that initializes
+     * a new file if the file doesn't exist beforehand.
+     * @param dataStoragePath the path to the storage file.
+     */
     public Storage(String dataStoragePath) {
+        // https://stackoverflow.com/questions/26239151/
+        File file = new File("data/duke_storage.txt");
+        try {
+            file.getParentFile().mkdirs(); // Create data folder if not exists
+            file.createNewFile(); // Create data file if not exists
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         this.dataStoragePath = dataStoragePath;
     }
 

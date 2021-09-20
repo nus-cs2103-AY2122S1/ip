@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  * @author Samay Sagar
  * @version CS2103 AY21/22 Sem 1
  */
+//Solution below adapted from https://github.com/jovyntls/ip
 public class Event extends Task {
 
     /**

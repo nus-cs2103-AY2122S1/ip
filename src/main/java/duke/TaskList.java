@@ -16,6 +16,7 @@ import duke.task.ToDo;
  * @author Samay Sagar
  * @version CS2103 AY21/22 Sem 1
  */
+//Solution below adapted from https://github.com/jovyntls/ip
 public class TaskList {
     private ArrayList<Task> tasks;
     /**
@@ -58,12 +59,21 @@ public class TaskList {
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
-    public String addNewDeadline(String taskTitle) {
+    public String addNewDeadline(String taskTitle) throws DukeException {
+        if (taskTitle.equals("d")) {
+            throw new DukeException("You need to specify which event you want to add!\n");
+        }
+
+        final int eventStartId = 2;
+        String eventDetails = taskTitle.substring(eventStartId);
+        String[] commandSplit = splitCommand(eventDetails, "/by"); // "taskName /at datetime"
+        String task = getTask(commandSplit);
+
         int delimiter = taskTitle.indexOf("/by ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
-        Deadline task = new Deadline(taskTitle.substring(0, delimiter), due);
-        tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
+        Deadline deadline = new Deadline(taskTitle.substring(0, delimiter), due);
+        tasks.add(deadline);
+        return "Got it. I've added this task:\n\t" + deadline.toString() + countTasks();
     }
 
     /**
@@ -71,22 +81,80 @@ public class TaskList {
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
-    public String addNewEvent(String taskTitle) {
+    public String addNewEvent(String taskTitle) throws DukeException {
+        if (taskTitle.equals("e")) {
+            throw new DukeException("You need to specify which event you want to add!\n");
+        }
+
+        final int eventStartId = 2;
+        String eventDetails = taskTitle.substring(eventStartId);
+        String[] commandSplit = splitCommand(eventDetails, "/at"); // "taskName /at datetime"
+        String task = getTask(commandSplit);
+
         int delimiter = taskTitle.indexOf("/at ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
-        Event task = new Event(taskTitle.substring(0, delimiter), due);
-        tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
+        Event event = new Event(taskTitle.substring(0, delimiter), due);
+        tasks.add(event);
+        return "Got it. I've added this task:\n\t" + event.toString() + countTasks();
     }
+
+    /**
+     * Splits the command into task and datetime.
+     *
+     * @param command User input to extract task and dateTime
+     * @param by      The string to split the command by
+     * @return The task and dateTime in a String array
+     * @throws DukeException if Duke specific error
+     */
+    private static String[] splitCommand(String command, String by) throws DukeException {
+        String[] commandSplit = command.split(by);
+
+        // If cannot split the command
+        if (commandSplit.length <= 1) {
+            throw new DukeException("You need to provide a date/time! Format: YYYY-MM-DD" + "\n");
+        }
+
+        return commandSplit;
+    }
+
+    /**
+     * Gets the task from the split original command.
+     *
+     * @param commandSplit the String array of the split command
+     * @throws DukeException if task not specified
+     */
+    private static String getTask(String[] commandSplit) throws DukeException {
+        String task = commandSplit[0].trim(); // Trim the first part of the original command
+
+        if (task.isEmpty()) {
+            throw new DukeException("You need to provide a task!" + "\n");
+        }
+
+        return task;
+    }
+
+    /**
+     * Gets the datetime from the split original command.
+     *
+     * @param commandSplit the original command split into 2 parts
+     * @return the datetime in String format
+     */
+    private static String getDateTime(String[] commandSplit) {
+        assert commandSplit.length > 1;
+        return commandSplit[1].trim(); // Get the 2nd part of the command
+    }
+
     /**
      * Given the index number of a task, marks that task as completed.
      *
      * @param taskNumber an int representing the index of the task
      * @return the String representation of the completed task
      */
-    public String completeTask(int taskNumber) {
+    public String completeTask (int taskNumber) throws DukeException {
         int taskIndex = taskNumber - 1;
-        // Assumes that the task exists.
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new DukeException("The task you are trying to mark done does not exist. :(");
+        }
         Task task = tasks.get(taskIndex);
         task.completeTask();
         return "Nice! I've marked this task as done:\n\t" + task.toString();

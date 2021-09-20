@@ -6,6 +6,7 @@ package duke.task;
  * @author Samay Sagar
  * @version CS2103 AY21/22 Sem 1
  */
+//Solution below adapted from https://github.com/jovyntls/ip
 public class ToDo extends Task {
     /**
      * A constructor for a To-do.

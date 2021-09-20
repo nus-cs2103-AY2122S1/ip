@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 /**
  * ChatbotUI accepts user input, and outputs a given message.
+ * Mainly used for parser error.
  *
- * @author Jovyn Tan
+ * @author Samay Sagar
  * @version CS2103 AY21/22 Sem 1
  */
+//Solution below adapted from https://github.com/jovyntls/ip
 public interface ChatbotUI {
     /**
     * Takes in a single line of input from the user.
