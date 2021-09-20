@@ -22,7 +22,7 @@ public class TaskList {
      * A constructor for a duke.TaskList which contains Tasks.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      */
     public String toSaveData() {
         String data = "";
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             data += task.toSaveData();
         }
         return data;
@@ -41,7 +41,7 @@ public class TaskList {
      * @param task The task to be added to the list of tasks.
      */
     public void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
     /**
      * Given a string, creates a To-do from that string and adds it to the list of task.
@@ -50,8 +50,8 @@ public class TaskList {
      */
     public String addNewTodo(String taskTitle) {
         ToDo task = new ToDo(taskTitle);
-        this.tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
+        tasks.add(task);
+        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
     }
     /**
      * Given a string, creates a Deadline from that string and adds it to the list of task.
@@ -62,8 +62,8 @@ public class TaskList {
         int delimiter = taskTitle.indexOf("/by ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
         Deadline task = new Deadline(taskTitle.substring(0, delimiter), due);
-        this.tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
+        tasks.add(task);
+        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
     }
 
     /**
@@ -75,8 +75,8 @@ public class TaskList {
         int delimiter = taskTitle.indexOf("/at ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
         Event task = new Event(taskTitle.substring(0, delimiter), due);
-        this.tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
+        tasks.add(task);
+        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
     }
     /**
      * Given the index number of a task, marks that task as completed.
@@ -87,7 +87,7 @@ public class TaskList {
     public String completeTask(int taskNumber) {
         int taskIndex = taskNumber - 1;
         // Assumes that the task exists.
-        Task task = this.tasks.get(taskIndex);
+        Task task = tasks.get(taskIndex);
         task.completeTask();
         return "Nice! I've marked this task as done:\n\t" + task.toString();
     }
@@ -97,7 +97,7 @@ public class TaskList {
      * @return A string that contains the number of tasks in the list.
      */
     public String countTasks() {
-        return String.format("\nNow you have %d tasks in the list.", this.tasks.size());
+        return String.format("\nNow you have %d tasks in the list.", tasks.size());
     }
 
     /**
@@ -107,12 +107,13 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         TaskList filteredList = new TaskList();
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             if (task.titleContains(keyword)) {
                 filteredList.addTask(task);
             }
         }
-        return String.format("I've filtered tasks containing '%s'.\n", keyword) + filteredList.toString();
+        return String.format("I've filtered tasks containing '%s'.\n", keyword)
+                + filteredList.toString();
     }
 
     /**
@@ -121,12 +122,14 @@ public class TaskList {
      * @param taskNumber an int representing the index of the task
      * @return the String representation of the deleted task
      */
-    public String deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) throws DukeException {
         int taskIndex = taskNumber - 1;
-        // Assumes that the task exists.
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new DukeException("The task you are trying to delete does not exist. :(");
+        }
         return "Noted. I've removed this task:\n\t"
-                + this.tasks.remove(taskIndex).toString()
-                + this.countTasks();
+                + tasks.remove(taskIndex).toString()
+                + countTasks();
     }
     /**
      * Returns a string representing the list of tasks.
@@ -136,9 +139,9 @@ public class TaskList {
     @Override
     public String toString() {
         String output = "Here are the tasks in your list:";
-        for (int i = 0; i < this.tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int index = i + 1;
-            output += "\n" + index + "." + this.tasks.get(i).toString();
+            output += "\n" + index + "." + tasks.get(i).toString();
         }
         return output;
     }

@@ -86,19 +86,19 @@ public class Task {
      * @return a String that represents its saved state
      */
     public String toSaveData() {
-        int doneIndicator = this.isDone ? 1 : 0;
-        String timeDueString = this.timeDue == null
+        int doneIndicator = isDone ? 1 : 0;
+        String timeDueString = timeDue == null
                 ? ""
-                : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                : timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return String.format("%s%s%s|%s\n",
-                this.type, doneIndicator, timeDueString, this.description);
+                type, doneIndicator, timeDueString, description);
     }
 
     /**
      * Marks a task as done.
      */
     public void completeTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -107,7 +107,7 @@ public class Task {
      * @return a boolean representing whether or not the task contains the keyword.
      */
     public boolean titleContains(String keyword) {
-        return this.description.contains(keyword);
+        return description.contains(keyword);
     }
 
     /**
@@ -117,8 +117,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.isDone ? "x" : " ";
-        return String.format("[%s][%s] %s", type, doneIndicator, this.description);
+        String doneIndicator = isDone ? "x" : " ";
+        return String.format("[%s][%s] %s", type, doneIndicator, description);
     }
 
     /**
