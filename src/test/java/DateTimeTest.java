@@ -1,13 +1,14 @@
-import duke.Command;
-import duke.Deadline;
-import duke.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.Command;
+import duke.Deadline;
+import duke.Task;
 
 public class DateTimeTest {
 

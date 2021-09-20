@@ -1,23 +1,21 @@
-import duke.Deadline;
-import duke.HelpCommand;
-import duke.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
-/**
- * Class to handle testing for the dukeBot.
- */
+import duke.Deadline;
+import duke.HelpCommand;
+import duke.Todo;
+
 public class DukeTest {
 
     /**
      * To test the creation and writing of the todo class. Checks if to string is correct
      */
     @Test
-    public void TodoTest() {
+    public void todoTest() {
         Todo todoDummy = new Todo("Test dummy");
         String incompleteTodoDummyString = "[T][X] Test dummy";
 
@@ -34,7 +32,7 @@ public class DukeTest {
      * To test the creation and string representation of deadline class
      */
     @Test
-    public void DeadlineTest() {
+    public void deadlineTest() {
         LocalDateTime testDeadlineDateTime = LocalDateTime.of(2020, 2, 28, 23, 00);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         Deadline deadlineDummy = new Deadline("Test deadline", testDeadlineDateTime);
@@ -43,7 +41,7 @@ public class DukeTest {
     }
 
     @Test
-    public void HelpCommandTest() {
+    public void helpCommandTest() {
         assertEquals(HelpCommand.getCommand(0), HelpCommand.getCommand("generalHelp"));
     }
 }
