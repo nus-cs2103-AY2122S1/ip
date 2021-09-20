@@ -12,7 +12,7 @@ public class Parser {
 
     /**
      * Splits the input line into description and time for the deadline
-     * or event
+     * or event.
      *
      * @param string the input line
      * @return array containing the description and time info
@@ -23,7 +23,7 @@ public class Parser {
     }
 
     /**
-     * Extracts the description after splitting using splitDescriptionAndTime
+     * Extracts the description after splitting using splitDescriptionAndTime.
      *
      * @param description_and_time array after splitting the input line
      * @return the description of the Task
@@ -34,7 +34,7 @@ public class Parser {
     }
 
     /**
-     * Extracts the description after splitting using splitDescriptionAndTime
+     * Extracts the description after splitting using splitDescriptionAndTime.
      *
      * @param description_and_time array after splitting the input line
      * @return the description of the Task
@@ -48,20 +48,22 @@ public class Parser {
     }
 
     /**
-     * Extracts the new input from the input
+     * Extracts the new input from the input.
+     *
      * @param description the input entered by the user
      * @return
      */
     public static String getNewUpdatedTime(String description) {
         int timeIndex = description.indexOf("t/");
-        String extractedTime = description.substring(timeIndex+2);
+        String extractedTime = description.substring(timeIndex + 2);
         LocalDate localDate = LocalDate.parse(extractedTime);
         String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return time;
     }
 
     /**
-     * Extracts the new description from the input
+     * Extracts the new description from the input.
+     *
      * @param description the input entered by the user
      * @return
      */
@@ -69,10 +71,10 @@ public class Parser {
         int descriptionIndex = description.indexOf("d/");
         int timeIndex = description.indexOf("t/");
         String extractedDescription = "";
-        if(timeIndex != -1) {
-            extractedDescription = description.substring(descriptionIndex+2, timeIndex);
+        if (timeIndex != -1) {
+            extractedDescription = description.substring(descriptionIndex + 2, timeIndex);
         } else {
-            extractedDescription = description.substring(descriptionIndex+2);
+            extractedDescription = description.substring(descriptionIndex + 2);
         }
         return extractedDescription;
     }

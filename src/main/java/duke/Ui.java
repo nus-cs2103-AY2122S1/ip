@@ -127,10 +127,12 @@ public class Ui {
         return str.toString();
     }
 
-     /** Returns the appropriate response as per the command given.
-     * @param command           the command entered
-     * @param description       the description of the task
-     * @return                  response from duke
+    /**
+     * Returns the appropriate response as per the command given.
+     *
+     * @param command     the command entered
+     * @param description the description of the task
+     * @return response from duke
      */
     String executeCommand(String command, String description) throws DukeException {
         try {
@@ -160,7 +162,7 @@ public class Ui {
                 } else if (command.equals("delete")) {
                     int taskIndex = Integer.parseInt(description.substring(1)) - 1;
                     assert taskIndex < Tasklist.dukeList.size() : "Index cannot be greater than the size of list";
-                    str.append(LINES+"\n");
+                    str.append(LINES + "\n");
                     str.append("Noted. I've removed this task:\n");
                     Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
                     str.append(displayDeleteMessage(taskToBeDeleted));
@@ -169,21 +171,21 @@ public class Ui {
                     String keyword = description.substring(1);
                     ArrayList<Task> foundTasks = Tasklist.find(keyword);
                     return showFoundDukeList(foundTasks);
-                } else if (command.equals("update")){
+                } else if (command.equals("update")) {
                     boolean hasNewDescription = description.contains("d/");
                     boolean hasNewTime = description.contains("t/");
                     System.out.println(description);
-                    System.out.println(hasNewDescription+ " "+ hasNewTime);
-                    int taskIndex = Integer.parseInt(description.substring(1,2)) - 1;
+                    System.out.println(hasNewDescription + " " + hasNewTime);
+                    int taskIndex = Integer.parseInt(description.substring(1, 2)) - 1;
                     System.out.println(taskIndex);
 
                     if (hasNewDescription) {
                         String newDescription = Parser.getNewUpdatedDescription(description);
-                        Tasklist.updateDescription(taskIndex,newDescription);
+                        Tasklist.updateDescription(taskIndex, newDescription);
                     }
                     if (hasNewTime) {
                         String newTime = Parser.getNewUpdatedTime(description);
-                        Tasklist.updateTime(taskIndex,newTime);
+                        Tasklist.updateTime(taskIndex, newTime);
                     }
                     Task updatedTask = Tasklist.dukeList.get(taskIndex);
                     str.append(displayUpdateMessage(updatedTask));

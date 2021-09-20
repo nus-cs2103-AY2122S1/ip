@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * duke.Event class to create Events for the duke list
+ * duke.Event class to create Events for the duke list.
  */
 
 public class Event extends Task {
@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the time of the event stored in the list
+     * Returns the time of the event stored in the list.
      *
      * @return time of the event
      */

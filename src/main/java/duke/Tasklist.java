@@ -16,7 +16,7 @@ public class Tasklist {
     /**
      * Adds a task to the list of tasks.
      *
-     * @param task - the task which is to be added in the list
+     * @param task the task which is to be added in the list
      */
     public static void add(Task task) {
         dukeList.add(task);
@@ -25,7 +25,7 @@ public class Tasklist {
     /**
      * Removes a task from the list of the tasks.
      *
-     * @param taskIndex - the index of the task to be deleted
+     * @param taskIndex the index of the task to be deleted
      */
     public static void delete(int taskIndex) {
         dukeList.remove(taskIndex);
@@ -51,7 +51,7 @@ public class Tasklist {
     /**
      * Updates the description of the task.
      *
-     * @param taskIndex index of the task to be updated
+     * @param taskIndex      index of the task to be updated
      * @param newDescription new description of the task
      */
     public static void updateDescription(int taskIndex, String newDescription) {
@@ -63,16 +63,16 @@ public class Tasklist {
      * Updates the time of the task.
      *
      * @param taskIndex index of the task to be updated
-     * @param newTime new time of the task
+     * @param newTime   new time of the task
      */
     public static void updateTime(int taskIndex, String newTime) {
         Task currentTask = dukeList.get(taskIndex);
         if (currentTask instanceof ToDo) {
             // error
         } else if (currentTask instanceof Event) {
-            ((Event)currentTask).time = newTime;
-        } else if(currentTask instanceof Deadline) {
-            ((Deadline)currentTask).time = newTime;
+            ((Event) currentTask).time = newTime;
+        } else if (currentTask instanceof Deadline) {
+            ((Deadline) currentTask).time = newTime;
         }
     }
 
