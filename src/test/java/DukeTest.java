@@ -26,7 +26,7 @@ public class DukeTest {
 
         //Test completed dummy with output string result
         todoDummy.completeTask();
-        String completedTodoDummyString = "[T][✓] Test dummy";
+        String completedTodoDummyString = "[T][done] Test dummy";
         assertEquals(completedTodoDummyString, todoDummy.toString());
     }
 
