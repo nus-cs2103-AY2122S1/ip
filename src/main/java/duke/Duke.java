@@ -3,6 +3,18 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import duke.task.Task;
 
 
@@ -13,6 +25,14 @@ import duke.task.Task;
  * @version CS2103 AY21/22 Sem 1
  */
 public class Duke implements ChatbotUI, Parser {
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return taskMode(input);
+    }
+
     private static final String GREETING_MESSAGE = "Hello! I'm duke.Duke\nWhat can I do for you?";
     private static final String FAREWELL_MESSAGE = "See you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
@@ -32,9 +52,9 @@ public class Duke implements ChatbotUI, Parser {
     /**
      * A constructor for duke.Duke chatbot.
      */
-    public Duke(String dataStorage) {
+    public Duke() {
         this.taskList = new TaskList();
-        this.storage = new Storage(dataStorage);
+        this.storage = new Storage("../../../../data/duke_storage.txt");
         this.loadData();
         this.sc = new Scanner(System.in);
     }
@@ -51,11 +71,13 @@ public class Duke implements ChatbotUI, Parser {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Duke duke = new Duke("../../data/duke_storage.txt");
+        Duke duke = new Duke();
 
         duke.greet();
-        duke.taskMode();
+        duke.run();
     }
+
+
 
 
 
@@ -94,54 +116,46 @@ public class Duke implements ChatbotUI, Parser {
     public void greet() {
         ChatbotUI.printMessage(GREETING_MESSAGE);
     }
-    /**
-     * Echoes the user's input, until the user says "bye".
-     */
-    public void echo() {
-        String message = ChatbotUI.acceptUserInput(this.sc);
-        if (message.equals("bye")) {
-            ChatbotUI.printMessage(FAREWELL_MESSAGE);
-        } else {
-            ChatbotUI.printMessage(message);
-            echo();
-        }
+
+    public void run() {
+        String msg = ChatbotUI.acceptUserInput(this.sc).trim();
+        String output = taskMode(msg);
+        ChatbotUI.printMessage(output);
+        run();
     }
 
     /**
      * Handles the logic for managing a user's tasks.
      */
-    public void taskMode() {
-        String msg = ChatbotUI.acceptUserInput(this.sc).trim();
+    public String taskMode(String msg) {
         if (msg.equals(FAREWELL_COMMAND)) {
             this.endDuke();
-            return;
+            return "I've saved the tasks. You can close Duke now!";
         }
         try {
             String output;
             TaskList tasks = this.taskList;
             if (msg.equals(LIST_COMMAND)) {
-                output = tasks.toString();
+                return tasks.toString();
             } else if (msg.startsWith(COMPLETE_TASK_COMMAND)) {
-                output = tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
+                return tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(FIND_TASK_COMMAND)) {
-                output = tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
+                return tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
             } else if (msg.startsWith(DELETE_TASK_COMMAND)) {
-                output = tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
+                return tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(CREATE_TODO_COMMAND)) {
-                output = tasks.addNewTodo(Parser.getStringFrom(CREATE_TODO_COMMAND, msg));
+                return tasks.addNewTodo(Parser.getStringFrom(CREATE_TODO_COMMAND, msg));
             } else if (msg.startsWith(CREATE_EVENT_COMMAND)) {
-                output = tasks.addNewEvent(Parser.getStringFrom(CREATE_EVENT_COMMAND, msg));
+                return tasks.addNewEvent(Parser.getStringFrom(CREATE_EVENT_COMMAND, msg));
             } else if (msg.startsWith(CREATE_DEADLINE_COMMAND)) {
-                output = tasks.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
+                return tasks.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
             } else {
                 throw new DukeException("I don't know what that command means."
                         + "\nPlease input a valid command.");
             }
-            ChatbotUI.printMessage(output);
         } catch (DukeException e) {
-            ChatbotUI.printMessage(e.getMessage());
-        } finally {
-            taskMode();
+            return e.getMessage();
         }
     }
+
 }
