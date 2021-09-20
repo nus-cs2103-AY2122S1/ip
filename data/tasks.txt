@@ -1,4 +1,0 @@
-todo x/ false
-event go for vacc | 31-11-2021 1200/ false #vaccination
-todo get vacc record/ false
-deadline vacc record collection | 21-09-2021 0600/ false
