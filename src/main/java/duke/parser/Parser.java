@@ -4,15 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -60,7 +52,7 @@ public class Parser {
      */
     public int getIndex() throws DukeException {
         String[] allWords = userInput.split(" ");
-        if (allWords.length == 2) {
+        if (allWords.length >= 2) {
             try {
                 int index = Integer.parseInt(allWords[1]);
                 return index;
@@ -109,6 +101,13 @@ public class Parser {
                 time = userInput.substring(userInput.indexOf("/at") + 4);
             } else {
                 throw new DukeException("I'm sorry, but the format of event is wrong :-(");
+            }
+        } else if (this.getOperationType().equals("snooze")) {
+            String[] allWords = userInput.split(" ");
+            if (allWords.length == 3) {
+                time = allWords[2];
+            } else {
+                throw new DukeException("I'm sorry, but the format of snooze command is wrong :-(");
             }
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -199,8 +198,14 @@ public class Parser {
                 command = new FindCommand(taskList, textUi, keyword);
                 break;
             }
+            case "snooze": {
+                int index = this.getIndex();
+                LocalDate newTiming = this.getTime();
+                command = new SnoozeCommand(taskList, textUi, index, newTiming);
+                break;
+            }
             default: {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry but, I don't know what that means :-(");
             }
             }
             return command;

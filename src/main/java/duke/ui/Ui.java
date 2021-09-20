@@ -3,6 +3,8 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.time.LocalDate;
+
 public class Ui {
     private static final String line = "____________________________________________________________";
 
@@ -105,6 +107,16 @@ public class Ui {
         System.out.println(find);
         System.out.println(line);
         return find;
+    }
+
+    public static String snooze(TaskList taskList, int index) {
+        String snooze = "You have successfully postpone a task!!!"
+                + "\n Here are the delayed task with new timing:\n"
+                + taskList.get(index).toString();
+        System.out.println(line);
+        System.out.println(snooze);
+        System.out.println(line);
+        return snooze;
     }
 
     /**

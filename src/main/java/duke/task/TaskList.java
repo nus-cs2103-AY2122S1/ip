@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -21,7 +24,7 @@ public class TaskList {
      */
     public static boolean isValidOperation(String operation) {
         String[] operationType = new String[]{"bye", "done", "delete", "list",
-            "todo", "deadline", "event", "find"};
+            "todo", "deadline", "event", "find", "snooze"};
 
         for (String str : operationType) {
             if (str.equals(operation)) {
@@ -77,5 +80,18 @@ public class TaskList {
 
     public int size () {
         return this.tasks.size();
+    }
+
+    public void snooze(int index, LocalDate time) throws DukeException {
+        Task task = this.get(index);
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            tasks.set(index, event.changeTime(time));
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            tasks.set(index, deadline.changeTime(time));
+        } else {
+            throw new DukeException("Sorry Todo type class cannot be snoozed");
+        }
     }
 }

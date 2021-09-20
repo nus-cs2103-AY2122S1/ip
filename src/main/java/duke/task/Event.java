@@ -19,6 +19,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event changeTime(LocalDate newTiming) {
+        return new Event(this.description, newTiming);
+    }
+
     @Override
     public String formatForFile() {
         return "E " + super.formatForFile() + " | " + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

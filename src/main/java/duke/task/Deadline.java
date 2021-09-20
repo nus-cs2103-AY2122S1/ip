@@ -18,6 +18,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline changeTime(LocalDate newTiming) {
+        return new Deadline(this.description, newTiming);
+    }
+
     @Override
     public String formatForFile() {
         return "D " + super.formatForFile() + " | " + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
