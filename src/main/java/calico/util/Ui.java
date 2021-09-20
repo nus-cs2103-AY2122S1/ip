@@ -1,12 +1,12 @@
-package duke.util;
+package calico.util;
 
 // import java packages
 import java.util.ArrayList;
 
 // import duke packages
-import duke.DukeException;
-import duke.task.Task;
-import duke.task.TaskList;
+import calico.CalicoException;
+import calico.task.Task;
+import calico.task.TaskList;
 
 /**
  * Deals with interactions with the user
@@ -137,7 +137,7 @@ public class Ui {
      * @param e DukeException to be displayed.
      * @return DukeException message
      */
-    public String showDukeError(DukeException e) {
+    public String showDukeError(CalicoException e) {
         String message = "";
         message += line + newline;
         message += e + newline;

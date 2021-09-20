@@ -1,9 +1,9 @@
-package duke.task;
+package calico.task;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import duke.DukeException;
+import calico.CalicoException;
 
 /**
  * Represents a list of tasks to be completed. Supports operations on the tasks.
@@ -68,9 +68,9 @@ public class TaskList {
      * Adds a task to the list of tasks.
      *
      * @param t Task to be added.
-     * @throws DukeException when duplicate task exists.
+     * @throws CalicoException when duplicate task exists.
      */
-    public void add(Task t) throws DukeException {
+    public void add(Task t) throws CalicoException {
         checkDuplicates(t);
         tasks.add(t);
     }
@@ -142,7 +142,7 @@ public class TaskList {
      *
      * @param t Task to be checked.
      */
-    private void checkDuplicates(Task t) throws DukeException {
+    private void checkDuplicates(Task t) throws CalicoException {
         tasks.add(t);
         // Convert to HashSet to check for duplicates
         HashSet<Task> set = new HashSet<>(tasks);
@@ -150,7 +150,7 @@ public class TaskList {
         // Check if there are duplicates using length of ArrayLists.
         if (tasks.size() != result.size()) {
             tasks.remove(tasks.size() - 1);
-            throw new DukeException("task has already been added");
+            throw new CalicoException("task has already been added");
         }
         tasks.remove(tasks.size() - 1);
     }

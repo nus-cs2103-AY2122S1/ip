@@ -1,4 +1,4 @@
-package duke.gui;
+package calico.gui;
 
 import javafx.application.Application;
 

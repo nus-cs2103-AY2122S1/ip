@@ -1,8 +1,8 @@
-package duke.gui;
+package calico.gui;
 
 import java.io.IOException;
 
-import duke.Duke;
+import calico.Calico;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt");
+    private Calico calico = new Calico("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {
@@ -28,7 +28,7 @@ public class Main extends Application {
             stage.setTitle("Calico");
             stage.setResizable(false);
             scene.setFill(Color.TRANSPARENT);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setCalico(calico);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

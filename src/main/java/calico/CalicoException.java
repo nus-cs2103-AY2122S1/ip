@@ -1,15 +1,15 @@
-package duke;
+package calico;
 
 /**
  * Deals with exceptions thrown in the Duke chatbot.
  */
-public class DukeException extends Exception {
+public class CalicoException extends Exception {
     /**
      * Creates a DukeException.
      *
      * @param message Description about the exception.
      */
-    public DukeException(String message) {
+    public CalicoException(String message) {
         super(message);
     }
 

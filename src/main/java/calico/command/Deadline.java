@@ -1,4 +1,4 @@
-package duke.command;
+package calico.command;
 
 // import java packages
 import java.text.ParseException;
@@ -9,42 +9,45 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 // import duke packages
-import duke.DukeException;
-import duke.task.Task;
+import calico.CalicoException;
+import calico.task.Task;
 
 /**
- * Represents a task that is about to happen on an upcoming date.
- * A <code>Event</code> consists of a description and a date.
+ * Represents a task that has to be completed by a due date.
+ * A <code>Deadline</code> consists of a description and a due date.
  */
-public class Event extends Task {
-    protected String atOriginal;
-    protected LocalDate at;
+public class Deadline extends Task {
+    protected String byOriginal;
+    protected LocalDate by;
     protected Date time;
 
     /**
-     * Creates an Event task.
+     * Creates a Deadline task.
      *
      * @param description Description about the task.
-     * @param at Date of the task.
-     * @throws DukeException If time is not formatted properly.
+     * @param by Due date of the task.
+     * @throws CalicoException If time is not formatted properly.
      */
-    public Event(String description, String at) throws DukeException {
-        super(description, 'E');
-        this.name = "event";
-        atOriginal = at;
+    public Deadline(String description, String by) throws CalicoException {
+        super(description, 'D');
+        this.name = "deadline";
+        byOriginal = by;
 
-        String[] temp = at.split(" ", 2);
+        String[] temp = by.split(" ", 2);
+        if (temp.length == 1) {
+            throw new CalicoException("time has to be in the format yyyy-mm-dd HHmm instead of " + by);
+        }
         try {
-            this.at = LocalDate.parse(temp[0]);
+            this.by = LocalDate.parse(temp[0]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("time has to be in the format yyyy-mm-dd HHmm instead of " + at);
+            throw new CalicoException("time has to be in the format yyyy-mm-dd HHmm instead of " + by);
         }
 
         try {
             SimpleDateFormat parseFormat = new SimpleDateFormat("HHmm");
             this.time = parseFormat.parse(temp[1]);
         } catch (ParseException e) {
-            throw new DukeException("time has to be in the format yyyy-mm-dd HHmm instead of " + at);
+            throw new CalicoException("time has to be in the format yyyy-mm-dd HHmm instead of " + by);
         }
     }
 
@@ -55,7 +58,7 @@ public class Event extends Task {
      */
     protected String dateToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return formatter.format(at);
+        return formatter.format(by);
     }
 
     /**
@@ -75,16 +78,16 @@ public class Event extends Task {
      */
     @Override
     public String getDueTime() {
-        return atOriginal;
+        return byOriginal;
     }
 
     /**
-     * Converts Event task to string format.
+     * Converts Deadline task to string format.
      *
-     * @return Event as a string.
+     * @return Deadline as a string.
      */
     @Override
     public String toString() {
-        return "[" + this.getCat() + "]" + super.toString() + " (at: " + dateToString() + " " + timeToString() + ")";
+        return "[" + this.getCat() + "]" + super.toString() + " (by: " + dateToString() + " " + timeToString() + ")";
     }
 }

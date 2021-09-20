@@ -1,7 +1,7 @@
-package duke.command;
+package calico.command;
 
 // import duke packages
-import duke.task.Task;
+import calico.task.Task;
 
 /**
  * Represents a task that is pending completion.

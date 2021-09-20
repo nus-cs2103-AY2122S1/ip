@@ -1,4 +1,4 @@
-package duke.util;
+package calico.util;
 
 // import java packages
 import java.io.File;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // import duke packages
-import duke.DukeException;
-import duke.command.Deadline;
-import duke.command.Event;
-import duke.command.Todo;
-import duke.task.Task;
+import calico.CalicoException;
+import calico.command.Deadline;
+import calico.command.Event;
+import calico.command.Todo;
+import calico.task.Task;
 
 /**
  * Stores the tasks in an external file.
@@ -38,9 +38,9 @@ public class Storage {
      * Save tasks to storage.
      *
      * @param tasks Tasks to be saved.
-     * @throws DukeException If unable to write to file.
+     * @throws CalicoException If unable to write to file.
      */
-    public void saveTasks(ArrayList<Task> tasks) throws DukeException {
+    public void saveTasks(ArrayList<Task> tasks) throws CalicoException {
         try {
             // create a blank new file to write to
             if (f.exists()) {
@@ -57,7 +57,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new CalicoException(e.getMessage());
         }
     }
 
@@ -65,9 +65,9 @@ public class Storage {
      * Load tasks from storage.
      *
      * @return ArrayList of tasks saved in file.
-     * @throws DukeException If unable to create a file for saving.
+     * @throws CalicoException If unable to create a file for saving.
      */
-    public ArrayList<Task> loadTasks() throws DukeException {
+    public ArrayList<Task> loadTasks() throws CalicoException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
@@ -91,7 +91,7 @@ public class Storage {
                     t = new Event(taskParts[2], taskParts[3]);
                     break;
                 default:
-                    throw new DukeException("Invalid task type when loading: " + taskParts[0]);
+                    throw new CalicoException("Invalid task type when loading: " + taskParts[0]);
                 }
 
                 // Check if task is completed
@@ -107,7 +107,7 @@ public class Storage {
                 assert f.exists() : "File f should be created";
             } catch (IOException g) {
                 // throws error if file cannot be created
-                throw new DukeException(g.getMessage());
+                throw new CalicoException(g.getMessage());
             }
         }
 

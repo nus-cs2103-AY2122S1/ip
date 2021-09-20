@@ -1,6 +1,6 @@
-package duke.gui;
+package calico.gui;
 
-import duke.Duke;
+import calico.Calico;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Calico calico;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -38,10 +38,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setCalico(Calico d) {
+        calico = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.intro(), dukeImage)
+                DialogBox.getDukeDialog(calico.intro(), dukeImage)
         );
     }
 
@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = calico.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

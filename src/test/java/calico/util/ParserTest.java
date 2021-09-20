@@ -1,4 +1,4 @@
-package duke.util;
+package calico.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

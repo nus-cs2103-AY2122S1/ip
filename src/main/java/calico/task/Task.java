@@ -1,6 +1,4 @@
-package duke.task;
-
-import duke.command.Deadline;
+package calico.task;
 
 import java.util.Objects;
 

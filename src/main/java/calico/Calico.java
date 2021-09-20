@@ -1,20 +1,20 @@
-package duke;
+package calico;
 
 // import java packages
 import java.util.ArrayList;
 
 // import duke packages
-import duke.command.Todo;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.Ui;
+import calico.command.Todo;
+import calico.task.Task;
+import calico.task.TaskList;
+import calico.util.Parser;
+import calico.util.Storage;
+import calico.util.Ui;
 
 /**
  * A chatbot that stores tasks given by a user.
  */
-public class Duke {
+public class Calico {
     private Storage storage;
     private TaskList commandList;
     private Ui ui;
@@ -25,12 +25,12 @@ public class Duke {
      *
      * @param filePath Filepath to save tasks and load tasks.
      */
-    public Duke(String filePath) {
+    public Calico(String filePath) {
         ui = new Ui("", "");
         storage = new Storage(filePath);
         try {
             commandList = new TaskList(storage.loadTasks());
-        } catch (DukeException e) {
+        } catch (CalicoException e) {
             ui.showLoadingError();
             commandList = new TaskList();
         }
@@ -74,7 +74,7 @@ public class Duke {
             } else {
                 processInvalidCmd(cmd);
             }
-        } catch (DukeException e) {
+        } catch (CalicoException e) {
             return ui.showDukeError(e);
         }
         // should not happen
@@ -95,9 +95,9 @@ public class Duke {
      *
      * @param cmd Command to be processed.
      * @return Output of command.
-     * @throws DukeException If task to be marked completed cannot be found.
+     * @throws CalicoException If task to be marked completed cannot be found.
      */
-    private String processDoneCmd(String cmd) throws DukeException {
+    private String processDoneCmd(String cmd) throws CalicoException {
         int itemNo = Parser.parseDoneCmd(cmd);
 
         // Make sure itemNo is within limit
@@ -106,7 +106,7 @@ public class Duke {
             storage.saveTasks(commandList.getTasks());
         } else {
             // throw exception when itemNo not within limit
-            throw new DukeException("i cant seem to find the task you're looking for");
+            throw new CalicoException("i cant seem to find the task you're looking for");
         }
         return ui.showTaskDone(commandList, itemNo - 1);
     }
@@ -116,15 +116,15 @@ public class Duke {
      *
      * @param cmd Task command to be processed.
      * @return Output of command.
-     * @throws DukeException If unable to process task properly.
+     * @throws CalicoException If unable to process task properly.
      */
-    private String processValidCmd(String cmd) throws DukeException {
+    private String processValidCmd(String cmd) throws CalicoException {
         String task = Parser.getTaskName(cmd);
         String desc = Parser.getDesc(cmd);
         if (Parser.isMissingArg(cmd)) {
             // when desc is not empty
             // case when only a whitespace follows a command
-            throw new DukeException("the description of a " + task + " cannot be empty");
+            throw new CalicoException("the description of a " + task + " cannot be empty");
         } else {
             // Separate into cases
             switch (task) {
@@ -139,7 +139,7 @@ public class Duke {
                 break;
             default:
                 // should not happen
-                throw new DukeException("the name of task is not valid");
+                throw new CalicoException("the name of task is not valid");
             }
             storage.saveTasks(commandList.getTasks());
             count++;
@@ -152,9 +152,9 @@ public class Duke {
      *
      * @param cmd Command to be processed.
      * @return Output of command.
-     * @throws DukeException If task to be deleted cannot be found.
+     * @throws CalicoException If task to be deleted cannot be found.
      */
-    private String processDeleteCmd(String cmd) throws DukeException {
+    private String processDeleteCmd(String cmd) throws CalicoException {
         int itemNo = Parser.parseDeleteCmd(cmd);
 
         // Make sure itemNo is within limit
@@ -167,7 +167,7 @@ public class Duke {
             return deletionMessage;
         } else {
             // throw exception when itemNo not within limit
-            throw new DukeException("i cant seem to find the task you're looking for");
+            throw new CalicoException("i cant seem to find the task you're looking for");
         }
     }
 
@@ -176,14 +176,14 @@ public class Duke {
      *
      * @param cmd Command to be processed.
      * @return Output of command.
-     * @throws DukeException If description of command is empty.
+     * @throws CalicoException If description of command is empty.
      */
-    private String processFindCmd(String cmd) throws DukeException {
+    private String processFindCmd(String cmd) throws CalicoException {
         String desc = Parser.getDesc(cmd);
         if (Parser.isMissingArg(cmd)) {
             // when desc is not empty
             // case when only a whitespace follows a command
-            throw new DukeException("the description of a find cannot be empty");
+            throw new CalicoException("the description of a find cannot be empty");
         }
         ArrayList<Task> matchingTasks = commandList.find(desc);
         if (matchingTasks.isEmpty()) {
@@ -197,15 +197,15 @@ public class Duke {
      * Processes an invalid command.
      *
      * @param cmd Command to be processed.
-     * @throws DukeException If task description is missing or command is not recognised.
+     * @throws CalicoException If task description is missing or command is not recognised.
      */
-    private void processInvalidCmd(String cmd) throws DukeException {
+    private void processInvalidCmd(String cmd) throws CalicoException {
         // throw exception when command not found
         // Error handling for todo, deadline & event
         if (Parser.isEmptyTask(cmd)) {
-            throw new DukeException("the description of a " + Parser.getTaskName(cmd) + " cannot be empty");
+            throw new CalicoException("the description of a " + Parser.getTaskName(cmd) + " cannot be empty");
         } else {
-            throw new DukeException("im sorry, but i dont know what that means :(");
+            throw new CalicoException("im sorry, but i dont know what that means :(");
         }
     }
 }

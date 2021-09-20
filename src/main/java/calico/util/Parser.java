@@ -1,8 +1,8 @@
-package duke.util;
+package calico.util;
 
-import duke.DukeException;
-import duke.command.Deadline;
-import duke.command.Event;
+import calico.CalicoException;
+import calico.command.Deadline;
+import calico.command.Event;
 
 /**
  * Parses the commands given by a user.
@@ -206,9 +206,9 @@ public class Parser {
      *
      * @param desc Description of task.
      * @return Deadline Task.
-     * @throws DukeException If unable to parse description properly.
+     * @throws CalicoException If unable to parse description properly.
      */
-    public static Deadline getDeadlineTask(String desc) throws DukeException {
+    public static Deadline getDeadlineTask(String desc) throws CalicoException {
         String deadlineInfo = Parser.getDeadlineInfo(desc);
         String deadlineDue = Parser.getDeadlineDue(desc);
         return new Deadline(deadlineInfo, deadlineDue);
@@ -219,9 +219,9 @@ public class Parser {
      *
      * @param desc Description of task.
      * @return Event Task.
-     * @throws DukeException If unable to parse description properly.
+     * @throws CalicoException If unable to parse description properly.
      */
-    public static Event getEventTask(String desc) throws DukeException {
+    public static Event getEventTask(String desc) throws CalicoException {
         String eventInfo = Parser.getEventInfo(desc);
         String eventDue = Parser.getEventDue(desc);
         return new Event(eventInfo, eventDue);

@@ -1,4 +1,4 @@
-package duke;
+package calico;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Task;
-import duke.util.Storage;
+import calico.task.Task;
+import calico.util.Storage;
 
 /**
  * Unit test for Storage class.
@@ -22,7 +22,7 @@ public class StorageTest {
             o.saveTasks(new ArrayList<>());
 
             assertTrue(o.toString().equals("file path is thisfile/doesnot.exist"));
-        } catch (DukeException e) {
+        } catch (CalicoException e) {
             fail(); // should not have exception
         }
     }
@@ -36,7 +36,7 @@ public class StorageTest {
 
             assertTrue(o.toString().equals("file path is thisfile/doesnot.exist"));
             assertTrue(tasks.equals(new ArrayList<>()));
-        } catch (DukeException e) {
+        } catch (CalicoException e) {
             fail(); // should not have exception
         }
     }
