@@ -39,7 +39,7 @@ Some example commands you can try:
 ## Features
 
 
-### `todo` - Creates a ToDo Task
+### Creates a ToDo Task - `todo` 
 
 Adds a todo task to the tasklist.
 
@@ -48,11 +48,12 @@ Format: `todo DESCRIPTION`
 Example: 
  ```
 todo Read book
-```
+```  
+&nbsp;
 
 
 
-### `event` - Creates an Event Task
+### Creates an Event Task - `event` 
 
 Adds a event task to the tasklist.
 
@@ -61,10 +62,10 @@ Format: `event DESCRIPTION /at yyyy-mm-dd`
 Example: 
 ```
 event job interview /at 2021-08-08 1200
-```
+```  
+&nbsp;
 
-
-### `deadline` - Creates an Deadline Task
+### Creates an Deadline Task - `deadline` 
 
 Adds a deadline task to the tasklist.
 
@@ -73,10 +74,10 @@ Format: `deadline DESCRIPTION /by yyyy-mm-dd`
 Example: 
 ```
 deadline return book /by 2021-08-08 1200
-```
+```  
+&nbsp;
 
-
-### `fixedduration` - Creates an Fixed Duration Task
+### Creates an Fixed Duration Task - `fixedduration` 
 
 Adds a fixed duration task that does not have a fixed start/end time to the tasklist.
 
@@ -86,17 +87,17 @@ Example:
 ```
 fixedduration eat /duration 2 hours
 ```
+&nbsp;
 
-
-### `list` - Lists all Tasks in Tasklist
+### Lists all Tasks in Tasklist - `list` 
 
 Shows the user a list of all the current Tasks in the task list
 
 Format: `list`
+&nbsp;
 
 
-
-### `find` - Searches for Tasks that matches keyword
+### Searches for Tasks that matches keyword - `find` 
 
 Adds a deadline task to the tasklist.
 
@@ -106,9 +107,9 @@ Example:
 ```
 find read
 ```
+&nbsp;
 
-
-### `done` - Marks Task in Tasklist as done
+### Marks Task in Tasklist as done - `done` 
 
 Marks the specified task as done.
 
@@ -118,21 +119,15 @@ Example:
 ```
 done 2
 ```
+&nbsp;
 
-
-### `bye` - Exits the Application
+### Exits the Application `bye`
 
 Exits the Application
 
 Format: `bye`
+&nbsp;
 
-
-
-### `list` - Lists all Tasks in Tasklist
-
-Shows the user a list of all the current Tasks in the task list
-
-Format: `list`
 
 
 ## Command Summary
