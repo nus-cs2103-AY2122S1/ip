@@ -11,6 +11,11 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public boolean contains(String keyword) {
+        return this.taskDescription.contains(keyword);
+    }
+
     @Override
     public String toString() {
         String done = isDone ? "X" : " ";
