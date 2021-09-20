@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.task.TaskList;
 import duke.main.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents a duke.command to exit Duke.
@@ -14,14 +14,11 @@ import duke.main.Ui;
  * @version CS2103T, Semester 2
  */
 public class ExitCommand extends Command {
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final boolean IS_EXIT;
-
+    private static final boolean IS_EXIT = false;
     /**
      * Class constructor.
      */
     public ExitCommand() {
-        IS_EXIT = true;
         assert isExit() : "isExist must return true";
     }
 

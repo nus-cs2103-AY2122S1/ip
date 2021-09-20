@@ -3,8 +3,8 @@ package duke.command;
 import duke.main.DukeException;
 import duke.main.Storage;
 import duke.main.TaskDate;
-import duke.task.TaskList;
 import duke.main.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents a command to filter out tasks that fall on a specific date.
@@ -19,9 +19,8 @@ public class FilterCommand extends Command {
     /**
      * Class constructor.
      *
-     * @param dateOfInterest the date of interest.
+     * @param dateString the date of interest.
      */
-
     public FilterCommand(String dateString) throws DukeException {
         super();
         date = new TaskDate(dateString);
@@ -39,7 +38,7 @@ public class FilterCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList matchingTasks = findMatchingTasks(tasks);
-	assert matchingTasks != null : "matching task list cannot be null";
+        assert matchingTasks != null : "matching task list cannot be null";
         String headerMessage = generateHeaderMessage();
         return ui.showMatchingTasks(matchingTasks, headerMessage);
     }

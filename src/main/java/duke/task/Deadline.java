@@ -1,10 +1,7 @@
 package duke.task;
 
-import java.text.ParseException;
-
 import duke.main.DukeException;
 import duke.main.TaskDate;
-
 
 /**
  * Represents tasks with deadline.
@@ -29,14 +26,14 @@ public class Deadline extends Task {
         int startOfDescriptionIndex = getStartingIndexAfter(description, DEADLINE_KEYWORD);
         int startOfTimingIndex = getStartingIndexAfter(description, BY_CONNECTOR);
         deadlineDescription = getSubString(description, startOfDescriptionIndex,
-            startOfTimingIndex - BY_CONNECTOR.length());
+                startOfTimingIndex - BY_CONNECTOR.length());
         String descriptionDate = getSubString(description, startOfTimingIndex);
         deadlineDate = new TaskDate(descriptionDate);
         dateString = getDateString();
         int startOfDeadlineTag = getStartingIndexAfter(description, TaskTag.getTagSymbol());
         String tag = getSubString(description, startOfDeadlineTag - TaskTag.getTagSymbol().length());
         deadlineTag = new TaskTag(tag);
-	    assert !isDone : false;
+        assert !isDone : false;
     }
 
     /**
@@ -45,7 +42,7 @@ public class Deadline extends Task {
      * @param deadlineDescription description of deadline duke.task.
      * @param dateOfTask          date of the deadline duke.task.
      * @param tag variable number of tags used to tag this task.
-     * @throws ParseException due to improper date format.
+     * @throws DukeException due to improper date format.
      */
     public Deadline(String deadlineDescription, String dateOfTask, String tag) throws DukeException {
         super();
@@ -66,7 +63,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[%s]%s %s (by: %s) %s", DEADLINE_MARKER, super.toString(), deadlineDescription,
-            dateString, deadlineTag.getTag());
+                dateString, deadlineTag.getTag());
     }
 
     /**
@@ -76,7 +73,7 @@ public class Deadline extends Task {
      */
     public String formatToStore() {
         return String.format("%s %s %s | %s %s", DEADLINE_MARKER, super.formatToStore(),
-            deadlineDescription, dateString, deadlineTag.getTagInStoreFormat());
+                deadlineDescription, dateString, deadlineTag.getTagInStoreFormat());
     }
     /**
      * Checks if given datetime matches the tasks date time.
@@ -86,15 +83,14 @@ public class Deadline extends Task {
      */
     @Override
     public boolean isSameDateAs(String dateString) throws DukeException {
-	assert deadlineDate != null : "deadline date must not be unassigned";
+        assert deadlineDate != null : "deadline date must not be unassigned";
         return this.deadlineDate.equals(dateString);
     }
-
     /**
      * Overrides contains in task by adding an additional check for date, if the search phrase is a date.
      *
      * @param searchPhrase the phrase or word or date of interest.
-     * @return
+     * @return true if this deadline task contains the search phrase.
      */
     @Override
     public boolean contains(String searchPhrase) {

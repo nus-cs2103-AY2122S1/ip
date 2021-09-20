@@ -89,7 +89,6 @@ public class Storage {
         if (taskString.contains("D |")) {
             String[] taskDescriptionTagAndDate = getTaskDescriptionTagAndDate(taskString, "| D | ",
                     "by ");
-
             task = Task.createTask("D", taskDescriptionTagAndDate[0], taskDescriptionTagAndDate[2],
                     taskDescriptionTagAndDate[1]);
         } else if (taskString.contains("E |")) {

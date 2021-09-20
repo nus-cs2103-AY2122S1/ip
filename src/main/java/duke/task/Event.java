@@ -12,14 +12,11 @@ import duke.main.TaskDate;
  * @version CS2103T, Semester 2
  */
 public class Event extends Task {
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String EVENT_MARKER = "E";
+    private static final String EVENT_MARKER = "E";
+    private static final String TASK_KEYWORD = "event ";
+    private static final String AT_CONNECTOR = "at ";
     private String eventDescription;
     private TaskDate eventDate;
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String TASK_KEYWORD = "event ";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String AT_CONNECTOR = "at ";
     private String dateString;
     private TaskTag eventTag;
     /**
@@ -39,7 +36,7 @@ public class Event extends Task {
         int startOfEventTags = getStartingIndexAfter(description, TaskTag.getTagSymbol());
         String tag = getSubString(description, startOfEventTags - TaskTag.getTagSymbol().length());
         eventTag = new TaskTag(tag);
-	    assert !isDone : false;
+        assert !isDone : false;
     }
     /**
      * Class constructor for loading tasks from storage file.
@@ -90,7 +87,7 @@ public class Event extends Task {
     @Override
     public boolean isSameDateAs(String dateString) throws DukeException {
         assert eventDate != null : "even date must not be unassigned";
-	return eventDate.equals(dateString);
+        return eventDate.equals(dateString);
     }
 
     /**

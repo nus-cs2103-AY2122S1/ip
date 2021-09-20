@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.task.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents a duke.command to mark a duke.task as done.
@@ -14,7 +14,7 @@ import duke.task.Task;
  */
 public class MarkDoneCommand extends Command {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final int TASK_NUM;
+    private int taskNum;
     /**
      * Class constructor.
      *
@@ -22,11 +22,11 @@ public class MarkDoneCommand extends Command {
      */
     public MarkDoneCommand(String taskNumber) throws DukeException {
         try {
-            this.TASK_NUM = Integer.parseInt(taskNumber);
+            this.taskNum = Integer.parseInt(taskNumber);
         } catch (NumberFormatException e) {
             throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
-	assert TASK_NUM >= 1 : "TASK_NUM must be a cardinal value";
+        assert taskNum >= 1 : "TASK_NUM must be a cardinal value";
         assert !isExit() : "isExit should return false";
     }
 
@@ -38,7 +38,7 @@ public class MarkDoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task task = tasks.markDone(TASK_NUM - 1);
+            Task task = tasks.markDone(taskNum - 1);
             assert task != null : "task cannot be null";
             return ui.showMarkTaskDone(task);
         } catch (IndexOutOfBoundsException e) {

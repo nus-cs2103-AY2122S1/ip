@@ -12,26 +12,22 @@ import duke.task.TaskList;
  * @version CS2103T
  */
 public class Ui {
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private String logo = " ____        _        \n"
+    private static String logo = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
-    private String padding = "~";
-    private String firstLine = " Hello! I'm Duke.Duke ";
-    private String secondLine = " What do you wanna do today? ";
-    private int bufferLength = 5;
-    private int width = Integer.max(firstLine.length(), secondLine.length()) + bufferLength;
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String FAREWELL = "@@@@ Till we meet again, my friend @@@@";
-    private String buffer1 = padding.repeat((width - firstLine.length()) / 2);
-    private String buffer2 = padding.repeat((width - secondLine.length()) / 2);
-    private String welcomeMessage = buffer1 + firstLine + buffer1 + "\n" + buffer2 + secondLine + buffer2 + "\n";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String GREETING = "Hello from\n" + logo + welcomeMessage;
+    private static String padding = "~";
+    private static String firstLine = " Hello! I'm Duke.Duke ";
+    private static String secondLine = " What do you wanna do today? ";
+    private static int bufferLength = 5;
+    private static int width = Integer.max(firstLine.length(), secondLine.length()) + bufferLength;
+    private static final String FAREWELL = "@@@@ Till we meet again, my friend @@@@";
+    private static String buffer1 = padding.repeat((width - firstLine.length()) / 2);
+    private static String buffer2 = padding.repeat((width - secondLine.length()) / 2);
+    private static String welcomeMessage = buffer1 + firstLine + buffer1 + "\n" + buffer2 + secondLine + buffer2 + "\n";
+    private static final String GREETING = "Hello from\n" + logo + welcomeMessage;
     private Scanner sc;
-    private String command;
 
     /**
      * Class constructor.
@@ -53,7 +49,7 @@ public class Ui {
      * @return user commands as a string.
      */
     public String readCommand() {
-        command = sc.nextLine();
+        String command = sc.nextLine();
         return command;
     }
 
@@ -126,8 +122,8 @@ public class Ui {
     private String generateNotificationMessage(String headerMessage, Task task, int taskNum) {
         String notificationMessage = String.format("%s\n", headerMessage);
         notificationMessage += String.format("~~%S~~\n", task.toString());
-        notificationMessage += String.format("Now you have %s %s remaining.", taskNum,
-                (taskNum > 1 ? "tasks" : "task"));
+        notificationMessage += String.format("Now you have %s %s remaining.", taskNum, (
+            taskNum > 1 ? "tasks" : "task"));
         return notificationMessage;
     }
     /**
@@ -153,7 +149,7 @@ public class Ui {
         String listOfTasksDisplay = String.format("%s\n", headerMessage);
         String taskString;
         for (int i = 0; i < tasks.getNumTasks(); i++) {
-            assert i < tasks.getNumTasks(): "index should be less than number of tasks";
+            assert i < tasks.getNumTasks() : "index should be less than number of tasks";
             taskString = tasks.getTask(i).toString();
             listOfTasksDisplay += String.format("%s.%s\n", i + 1, taskString);
         }

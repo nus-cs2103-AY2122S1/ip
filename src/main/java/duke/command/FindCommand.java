@@ -1,8 +1,8 @@
 package duke.command;
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.task.TaskList;
 import duke.main.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents a command to filter out tasks that fall on a specific date.
@@ -11,11 +11,9 @@ import duke.main.Ui;
  * @version CS2103T, Semester 2
  */
 public class FindCommand extends Command {
-
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String KEYWORD = "find ";
+    private static final String KEYWORD = "find ";
+    private static final String EXECUTION_MESSAGE = "Here are the matching tasks in your list:\n";
     private String searchPhrase;
-    private final String EXECUTION_MESSAGE = "Here are the matching tasks in your list:\n";
     /**
      * Class constructor.
      *
@@ -24,9 +22,9 @@ public class FindCommand extends Command {
      */
     public FindCommand(String userCommand) throws DukeException {
         super();
-	assert !isExit() : "isExit should return false";
+        assert !isExit() : "isExit should return false";
         int startingIndex = findStartingIndex(userCommand);
-	assert startingIndex != -1 : "starting index should not be -1, the keyword should be in userCommand";
+        assert startingIndex != -1 : "starting index should not be -1, the keyword should be in userCommand";
         this.searchPhrase = getSearchPhrase(userCommand, startingIndex);
         if (searchPhrase.equals("")) {
             throw new DukeException(DukeException.Exceptions.StringIndexOutOfBoundsException);
@@ -47,7 +45,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findMatchingTasks(searchPhrase);
-	assert matchingTasks != null : "matching tasks cannot be null";
+        assert matchingTasks != null : "matching tasks cannot be null";
         return ui.showMatchingTasks(matchingTasks, EXECUTION_MESSAGE);
     }
 }

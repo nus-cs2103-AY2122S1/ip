@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.main.DukeException;
 import duke.main.Storage;
-import duke.task.TaskList;
 import duke.main.Ui;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Represents a duke.command to delete a duke.task.
@@ -14,18 +14,17 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final int TASK_NUM;
+    private int taskNum;
 
     /**
      * Class constructor.
      *
      * @param taskNumber the serial number of the duke.task.
      */
-        
     public DeleteCommand(String taskNumber) throws DukeException {
-	assert !isExit() : "isExit should return false";
+        assert !isExit() : "isExit should return false";
         try {
-            this.TASK_NUM = Integer.parseInt(taskNumber);
+            this.taskNum = Integer.parseInt(taskNumber);
         } catch (NumberFormatException e) {
             throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
@@ -42,7 +41,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task deletedTask = tasks.delete(TASK_NUM - 1);
+            Task deletedTask = tasks.delete(taskNum - 1);
             assert deletedTask != null : "the deleted task cannot be null";
             int numTasksRemaining = tasks.getNumTasks();
             return ui.showTaskDeleted(deletedTask, numTasksRemaining);

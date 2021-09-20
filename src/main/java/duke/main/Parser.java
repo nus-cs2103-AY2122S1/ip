@@ -1,6 +1,5 @@
 package duke.main;
 
-import com.sun.prism.shader.Solid_RadialGradient_REFLECT_AlphaTest_Loader;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -12,7 +11,7 @@ import duke.command.MarkDoneCommand;
 
 /**
  * Represents a abstraction to read user input.
- * 
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -31,21 +30,21 @@ public class Parser {
         try {
             switch (commandAction) {
             case "done":
-                    return new MarkDoneCommand(splitActionAndDetails(userInput)[1]);
+                return new MarkDoneCommand(splitActionAndDetails(userInput)[1]);
             case "list":
-                    return new ListCommand();
+                return new ListCommand();
             case "delete":
-                    return new DeleteCommand(splitActionAndDetails(userInput)[1]);
+                return new DeleteCommand(splitActionAndDetails(userInput)[1]);
             case "filter":
-                    return new FilterCommand(splitActionAndDetails(userInput)[1]);
+                return new FilterCommand(splitActionAndDetails(userInput)[1]);
             case "find":
-                    return new FindCommand(userInput);
+                return new FindCommand(userInput);
             case "bye":
-                    return new ExitCommand();
+                return new ExitCommand();
             case "deadline" :
             case "event" :
             case "todo" :
-                    return new AddCommand(userInput);
+                return new AddCommand(userInput);
             default:
                 assert commandAction != "bye" : "action is not bye";
                 throw new IllegalArgumentException();
