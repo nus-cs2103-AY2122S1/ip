@@ -20,13 +20,15 @@ public interface ChatbotUI {
     }
 
     /**
-    * Prints out a given message in a pretty format.
-    *
-    * @param message The message to be printed out.
-    */
-    static void printMessage(String message) {
+     * Prints out a given message in a pretty format.
+     *
+     * @param messages The messages to be printed out.
+     */
+    static void printMessage(String ... messages) {
         System.out.println("---------------------------------------------------------");
-        System.out.println("\t" + message.replace("\n", "\n\t"));
+        for (String msg : messages) {
+            System.out.println("\t" + msg);
+        }
         System.out.println("---------------------------------------------------------");
     }
 }
