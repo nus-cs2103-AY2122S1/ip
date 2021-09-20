@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DateTime;
 import duke.Storage;
 import duke.TaskList;
@@ -9,8 +11,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
 
 public class ViewScheduleCommand extends Command {
     private final LocalDate date;
@@ -77,7 +77,7 @@ public class ViewScheduleCommand extends Command {
 
         return "";
     }
-    
+
     @Override
     public boolean shouldExit() {
         return false;
