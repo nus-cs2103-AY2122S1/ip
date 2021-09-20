@@ -20,6 +20,7 @@ public class TaskManager {
      * @return - the message to be displayed in the String form along with the index of the task
      */
     public String getAcknowledgement(String line, int index) {
+        assert ((index >=0) && (index < tasks.size())) : "Index out of limit (0 - Size)";
         return line + "\n " + tasks.get(index).showTask();
     }
 
@@ -137,6 +138,7 @@ public class TaskManager {
         }
 
         int index = Integer.parseInt(userInput) - 1;
+        assert ((index >=0) && (index < tasks.size())) : "Index out of limit (0 - Size)";
 
         if (index >= tasks.size()) {
             throw new DeleteRangeException();
@@ -172,9 +174,7 @@ public class TaskManager {
         }
 
         int index = Integer.parseInt(userInput) - 1;
-        if (index >= tasks.size()) {
-            throw new DoneRangeException();
-        }
+        assert ((index >=0) && (index < tasks.size())) : "Index out of limit (0 - Size)";
         // Check if task is already done
         if (tasks.get(index).isDone()) {
             throw new DoneAlreadyException();
