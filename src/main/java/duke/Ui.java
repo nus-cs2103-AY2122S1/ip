@@ -1,12 +1,10 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Class that deals with the user interface of Duke bot.
  */
 public class Ui {
-    Duke duke;
+    private Duke duke;
 
     public Ui(Duke duke) {
         this.duke = duke;
@@ -14,18 +12,23 @@ public class Ui {
 
     public void greetUser() {
         duke.showMessage("Hello! I'm Duke\n"
-                + "What can I do for you?", true);
+                        + "What can I do for you?", true);
     }
 
     public void displayTaskAdded(Task td, int ctr) {
         ctr++;
-        duke.showMessage("Got it! I've added this task: \n" + td.toString() + "\nNow you have " + ctr + " tasks in the list.", true);
+        duke.showMessage("Got it! I've added this task: \n"
+                        + td.toString()
+                        + "\nNow you have "
+                        + ctr + " tasks in the list.", true);
 
     }
 
     public void displayTaskRemoved(Task td, int ctr) {
         ctr--;
-        duke.showMessage("Noted. I've now removed this task: \n" + td + "Now you have " + ctr+ " tasks in the list.", true);
+        duke.showMessage("Noted. I've now removed this task: \n"
+                        + td + "Now you have "
+                        + ctr + " tasks in the list.", true);
     }
     public void displayTaskDone(Task td) {
         duke.showMessage("Nice! I've marked this task as done: \n" + td, true);

@@ -26,7 +26,6 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
     private static final String filePath = "./data/tasks.txt";
-    ////////////////////////////////
 
     private Stage primaryStage; // reference of current stage
     private static final int WIDTH = 470, HEIGHT = 500;
@@ -97,7 +96,7 @@ public class Duke extends Application {
     }
 
     /**
-     * creates andreturns a chat window
+     * Creates and returns a chat window
      *
      * @return chat window
      */
@@ -143,7 +142,6 @@ public class Duke extends Application {
             try {
                 Thread.sleep(500);
             } catch (Exception ex) {
-
             }
             handleInput(command); // handle query
         };
