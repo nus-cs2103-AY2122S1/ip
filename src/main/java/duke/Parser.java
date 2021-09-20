@@ -43,6 +43,7 @@ public class Parser {
     }
 
     public String getSearchTerm() {
+        assert currentInput.split(" ")[0] == "find" : "Command should be find";
         return currentInput.split(" ")[1];
     }
 
@@ -55,12 +56,14 @@ public class Parser {
     public Task generateTask() throws DukeException {
         if (currentType == CommandType.AddToDo) {
             String description = currentInput.split("/by ")[0].substring(5);
+            assert currentInput.split(" ")[0] == "todo" : "Command should be todo";
             if (description.isBlank()) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             return new ToDo(description, false);
         } else if (currentType == CommandType.AddDeadline) {
             String description = currentInput.split("/by ")[0].substring(9);
+            assert currentInput.split(" ")[0] == "deadline" : "Command should be deadline";
             String by = currentInput.split("/by ")[1];
             LocalDate deadline  = LocalDate.parse(by);
             if (description.isBlank()) {
@@ -69,6 +72,7 @@ public class Parser {
             return new Deadline(description, deadline, false);
         } else if (currentType == CommandType.AddEvent) {
             String description = currentInput.split("/at ")[0].substring(6);
+            assert currentInput.split(" ")[0] == "event" : "Command should be event";
             String by = currentInput.split("/at ")[1];
             LocalDate eventDate  = LocalDate.parse(by);
             if (description.isBlank()) {
@@ -86,6 +90,8 @@ public class Parser {
      * @return int Index of task to be deleted/marked as complete.
      */
     public int getIndex() {
+        assert currentInput.split(" ")[0] == "delete" || currentInput.split(" ")[0] == "done"
+                : "Command should be delete/done";
         return Integer.parseInt(currentInput.split(" ")[1]) - 1;
     }
 }

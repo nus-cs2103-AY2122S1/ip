@@ -71,6 +71,7 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert dataFile != null : "File should be created automatically if it doesn't yet exist";
         return dataFile;
     }
 
