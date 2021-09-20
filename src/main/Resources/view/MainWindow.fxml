@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="465.7" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml" fx:controller="duke.gui.MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="651.0" onAction="#handleUserInput" prefHeight="47.83" prefWidth="378.0"  />
+        <Button fx:id="sendButton" layoutX="378.0" layoutY="651.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="47.8" prefWidth="88.7" text="Send" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="649.8" prefWidth="466.7" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefWidth="452.7" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

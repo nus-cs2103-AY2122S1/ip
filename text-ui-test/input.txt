@@ -1,0 +1,7 @@
+todo todoTask1
+deadline go to school /by Thursday 2pm
+event even1 /at Friday 2pm-4pm
+list
+done 1
+list
+bye
