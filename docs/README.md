@@ -8,6 +8,8 @@ Duke is a console/GUI app that lets you track upcoming tasks. To start using Duk
 - Run `java -jar duke.jar` in the terminal to open the GUI app
 - Or run `java -jar duke.jar --console` for console mode
 
+## Screenshot
+
 ![Screenshot of Duke's UI](Ui.png)
 
 ## Features 
