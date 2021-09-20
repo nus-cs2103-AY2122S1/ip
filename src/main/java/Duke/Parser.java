@@ -244,6 +244,8 @@ public class Parser {
                     "Now you have " + count + " task" + s + " in the list.\n" +
                     "____________________________________________________________";
             System.out.println(reply);
+        } else if (input.startsWith("find")) {
+            String task = input.split(" ")[1];
         } else {
             System.out.println(new DukeException("____________________________________________________________\n" +
                     "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
