@@ -94,9 +94,7 @@ public class Duke {
                 } else if (userCommand.startsWith("tag")) {
                     System.out.println(commandHandler.handleTag(userCommand));
                 } else if (userCommand.equals("help")) {
-                    for (InputCommands inputs : InputCommands.values()) {
-                        System.out.println(inputs);
-                    }
+                    System.out.println(commandHandler.help());
                 } else {
                     throw new UnknownInputException("error");
                 }
