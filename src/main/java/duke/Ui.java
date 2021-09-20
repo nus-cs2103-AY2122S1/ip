@@ -92,7 +92,7 @@ public class Ui {
      */
     public String taskResponse(Task task) {
         String taskMessage = "Got it. I've added this task:" + System.lineSeparator() + task.toString() 
-                + System.lineSeparator() + "Now you have " + taskList.getSize() + " tasks in the list.";
+                + System.lineSeparator() + "Now you have " + taskList.getSize() + " task(s) in the list.";
         printInput(taskMessage);
         return taskMessage;
     }
@@ -118,7 +118,7 @@ public class Ui {
      */
     public String deleteResponse(Task task) {
         String deleteMessage = "Noted. I've removed this task:" + System.lineSeparator() + task.toString() 
-                + System.lineSeparator() + "Now you have " + taskList.getSize() + " tasks in the list.";
+                + System.lineSeparator() + "Now you have " + taskList.getSize() + " task(s) in the list.";
         printInput(deleteMessage);
         return deleteMessage;
     }
@@ -162,8 +162,32 @@ public class Ui {
             return message;
         }
         
-        String findMessage = "Here are the matching tasks in your list:" + System.lineSeparator() + response;
+        String findMessage = "Here are the matching task(s) in your list:" + System.lineSeparator() + response;
         printInput(findMessage);
         return findMessage;
+    }
+    
+    public String cloneResponse(int value) {
+        String response = "Task " + value + " from the task list has been cloned!" + " Here is the latest task " 
+                + "list: \n" + taskList.printList();
+        return response;
+    }
+
+    public String editTaskResponse(int value) {
+        String response = "Task " + value + " in your task list has been updated! Here is your latest list: \n"
+                + taskList.printList();
+        return response;
+    }
+
+    public String editDescriptionResponse(int value) {
+        String response = "The description of Task " + value + " in your task list has been updated! Here is your " 
+                + "latest list: " + "\n" + taskList.printList();
+        return response;
+    }
+
+    public String editDateTimeResponse(int value) {
+        String response = "The DateTime of Task " + value + " in your task list has been updated! Here is your latest list: "
+                + "\n" + taskList.printList();
+        return response;
     }
 }

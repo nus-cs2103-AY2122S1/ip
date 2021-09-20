@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -16,14 +17,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the user command when the user adds a deadline to the task list.
+ * Represents the user command when the user edits an item in the task list.
  */
 public class EditCommand extends Command {
     private String command;
     private Storage storage;
 
     /**
-     * Represents a constructor for the DeadlineCommand class where the user command is initialized.
+     * Represents a constructor for the EditCommand class where the user command is initialized.
      *
      * @param command Command entered by the user.
      */
@@ -42,13 +43,12 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Executes the response when the user enters a deadline command and updates the task list and storage 
-     * file (duke.txt)
+     * Executes the response when the user enters an edit command to edit a task in the task list.
      *
      * @param taskList TaskList that stores the tasks.
      * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.
-     * @return String representation of the new deadline task as well as the number of tasks in the task list.
-     * @throws DukeException If user doesn't provide a description for the command or enters the command in invalid format.
+     * @return String representation of the updated task list.
+     * @throws DukeException If there is an error.
      */
     public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (command.trim().length() <= 4) {
@@ -102,8 +102,8 @@ public class EditCommand extends Command {
         
         storage.writeToFile("./duke.txt", taskList);
         
-        return "Task " + index + " in your task list has been updated! Here is your latest list: \n" 
-                + taskList.printList();
+        Ui ui = new Ui(taskList, storage);
+        return ui.editTaskResponse(index);
     }
 
     private String editDescription(String[] parts, TaskList taskList) throws InvalidTaskCommandException {
@@ -130,9 +130,9 @@ public class EditCommand extends Command {
         }
 
         storage.writeToFile("./duke.txt", taskList);
-        
-        return "The description of Task " + index + " in your task list has been updated! Here is your latest list: " 
-                + "\n" + taskList.printList();
+
+        Ui ui = new Ui(taskList, storage);
+        return ui.editDescriptionResponse(index);
     }
 
     private String editDateTime(String[] parts, TaskList taskList) throws DukeException {
@@ -168,9 +168,9 @@ public class EditCommand extends Command {
         }
         
         storage.writeToFile("./duke.txt", taskList);
-        
-        return "The DateTime of Task " + index + " in your task list has been updated! Here is your latest list: "
-                + "\n" + taskList.printList();
+
+        Ui ui = new Ui(taskList, storage);
+        return ui.editDateTimeResponse(index);
     }
     
     private Task assignNewTask(Task oldTask, String description, LocalDateTime dateTime) {

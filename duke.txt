@@ -1,4 +1,8 @@
-1. duke.task.Deadline | | cs2102 project | by: Nov 15 2021, 11 PM
+1. duke.task.Event | | football match | at: Dec 3 2021, 7 PM
 2. duke.task.Todo | | play cricket
 3. duke.task.Event |X| birthday party | at: Oct 21 2021, 6 PM
-4. duke.task.Todo | | eg2301 assignment 
+4. duke.task.Todo | | eg2301 assignment
+5. duke.task.Deadline | | CS2103T iP | by: Sep 20 2021, 11 PM
+6. duke.task.Event | | concert | at: Sep 25 2021, 6 PM
+7. duke.task.Deadline | | cs2102 project | by: Nov 15 2021, 11 PM
+8. duke.task.Event | | football match | at: Dec 3 2021, 7 PM
