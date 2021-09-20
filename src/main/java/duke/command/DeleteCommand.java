@@ -11,6 +11,7 @@ public class DeleteCommand extends Command{
 
 
     public DeleteCommand(TaskList taskList, Ui ui, int index) {
+        assert index > 0: "Invalid index";
         this.taskList = taskList;
         this.textUi = ui;
         this.taskIndex = index;

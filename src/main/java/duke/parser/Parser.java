@@ -24,9 +24,9 @@ public class Parser {
             String year = date.substring(0, 3);
             String month = date.substring(5, 6);
             String day = date.substring(8, 9);
-            Integer.parseInt(year);
-            Integer.parseInt(month);
-            Integer.parseInt(day);
+            assert Integer.parseInt(month) >= 0:"Not Valid";
+            assert Integer.parseInt(month) <= 12:"Not Valid";
+            assert Integer.parseInt(day) <= 31:"Not Valid";
             return date.charAt(4) == '-' && date.charAt(7) == '-';
 
         } catch (Exception e) {

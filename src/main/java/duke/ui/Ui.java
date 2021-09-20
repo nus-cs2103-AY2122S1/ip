@@ -97,6 +97,8 @@ public class Ui {
      * @param keyword keyword user want to search by.
      */
     public static String find(TaskList taskList, String keyword) {
+        assert keyword != null:"Invalid keyword";
+
         String find = "Here are the matching tasks in your list:\n"
                 + taskList.find(keyword);
         System.out.println(line);
