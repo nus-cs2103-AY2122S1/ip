@@ -51,7 +51,6 @@ public class UI {
             return listMsg();
         case DeleteTask:
             taskIndex = parser.getIndex();
-            taskList.deleteTask(taskIndex);
             return deleteMsg(taskIndex);
         case MarkAsDone:
             taskIndex = parser.getIndex();
@@ -110,9 +109,11 @@ public class UI {
     }
 
     private String deleteMsg(int index) {
+        String taskString = taskList.getTaskString(index);
+        taskList.deleteTask(index);
         return "  Noted. I've removed this task:\n" +
-                "\n" + taskList.getTaskString(index) + "\n" +
-                String.format("Now you have %d tasks in the list.%n", taskList.getListSize() - 1);
+                "\n" + taskString + "\n" +
+                String.format("Now you have %d tasks in the list.%n", taskList.getListSize());
     }
 
 }
