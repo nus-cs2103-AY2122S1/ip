@@ -3,11 +3,18 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import duke.Task.TaskList;
 
-
+/**
+ * Main class of the chatbot, provide start of the application
+ */
 public class Duke {
-    private static TaskList tasks = new TaskList();
+    /** Task list for an instance of duke*/
+    private TaskList tasks = new TaskList();
 
-    public static void run() {
+    /**
+     * Start the application and the chatbot
+     *
+     */
+    public void run() {
         Storage storage = new Storage();
         storage.loadDataToTasks(tasks);
         String userInput = "";
@@ -22,6 +29,6 @@ public class Duke {
         storage.saveTasksToStorage(tasks);
     }
     public static void main(String[] args) {
-        Duke.run();
+        new Duke().run();
     }
 }
