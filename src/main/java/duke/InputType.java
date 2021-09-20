@@ -9,6 +9,7 @@ public enum InputType {
     EVENT("event"),
     DELETE("delete"),
     FIND("find"),
+    HIGH("high"),
     DONE("done");
 
     public final String str;

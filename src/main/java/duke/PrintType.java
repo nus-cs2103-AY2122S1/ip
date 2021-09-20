@@ -5,6 +5,7 @@ public enum PrintType {
     BYE_LINE("Bye. Hope to see you again soon!"),
     TASK_ADDED_LINE("Got it. I've added this task:"),
     TASK_DONE_LINE("Nice! I've marked this task as done: "),
+    TASK_SET_PRIORITY_HIGH("I've given HIGH priority to this task"),
     TASK_DELETED_LINE("Noted. I've removed this task:"),
     LIST_INTRO_LINE("Here are the tasks in your list"),
     NOT_RECOGNISED_LINE(":( Oh no! Command not recognized"),

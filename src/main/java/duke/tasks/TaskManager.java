@@ -188,6 +188,22 @@ public class TaskManager {
 
     }
 
+    public String markAsHigh(String userInput) throws DoneFormatException, DoneAlreadyException {
+        if(!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())) {
+            throw new DoneFormatException();
+        }
+
+        int index = Integer.parseInt(userInput) - 1;
+        assert ((index >=0) && (index < tasks.size())) : "Index out of limit (0 - Size)";
+        if (tasks.get(index).isHighOrLow()) {
+            throw new DoneAlreadyException();
+        }
+
+        tasks.get(index).markAsHigh();
+        return getAcknowledgement(PrintType.TASK_SET_PRIORITY_HIGH.getPrintType(), index);
+
+    }
+
 
     /**
      * Returns the list of similar tasks which the user wants in String format.
@@ -198,7 +214,7 @@ public class TaskManager {
      * @throws NotFoundException - the task has not been found
      */
     public String findTask(String arguments) throws NotFoundException {
-        String foundList = PrintType.FIND_INTRO_LINE.getPrintType() + arguments + "'";
+        StringBuilder foundList = new StringBuilder(PrintType.FIND_INTRO_LINE.getPrintType() + arguments + "");
 
         int numFound = 0;
 
@@ -206,14 +222,14 @@ public class TaskManager {
         for (int i = 1; i <= tasks.size(); ++i) {
             if (tasks.get(i - 1).getDescription().toLowerCase().contains(arguments.toLowerCase())) {
                 numFound += 1;
-                foundList = foundList + "\n" + i + ". " + tasks.get(i - 1).showTask();
+                foundList.append("\n").append(i).append(". ").append(tasks.get(i - 1).showTask());
             }
         }
 
         if (numFound == 0) {
             throw new NotFoundException();
         }
-        return foundList;
+        return foundList.toString();
     }
 
     /**
