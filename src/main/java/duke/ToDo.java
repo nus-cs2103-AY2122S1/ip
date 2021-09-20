@@ -17,4 +17,15 @@ public class ToDo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+
+    /**
+     * Creates a ToDo task from given task string.
+     *
+     * @return ToDo task.
+     */
+    public static ToDo create(String taskString, boolean isDone) {
+        String description = taskString.substring(7) + " ";
+        return new ToDo(description, isDone);
+    }
 }

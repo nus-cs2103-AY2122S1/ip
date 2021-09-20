@@ -27,7 +27,7 @@ public class Duke {
     public String getResponse(String input) {
         CommandType command = this.parser.nextCommand(input);
         try {
-            return this.userInterface.start(command);
+            return this.userInterface.takeInput(command);
         } catch (DukeException e) {
             return e.getMessage();
         }

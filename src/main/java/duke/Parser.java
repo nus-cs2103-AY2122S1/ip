@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Parser {
     private String currentInput;
-    private CommandType currentType;
+    private CommandType currentCommandType;
 
     /**
      * Matches first word of line of input with current available commands.
@@ -25,13 +25,13 @@ public class Parser {
         case "list":
             return CommandType.List;
         case "todo":
-            currentType = CommandType.AddToDo;
+            currentCommandType = CommandType.AddToDo;
             return CommandType.AddToDo;
         case "deadline":
-            currentType = CommandType.AddDeadline;
+            currentCommandType = CommandType.AddDeadline;
             return CommandType.AddDeadline;
         case "event":
-            currentType = CommandType.AddEvent;
+            currentCommandType = CommandType.AddEvent;
             return CommandType.AddEvent;
         case "done":
             return CommandType.MarkAsDone;
@@ -57,31 +57,31 @@ public class Parser {
      * @return Task Either ToDo/Deadline/Event task based on command.
      * @throws DukeException In case of incorrect instruction format.
      */
-    public Task generateTask() throws DukeException {
-        if (currentType == CommandType.AddToDo) {
-            String description = currentInput.split("/by ")[0].substring(5);
-            if (description.isBlank()) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
+    public Task generateNewTask() throws DukeException {
+        if (currentCommandType == CommandType.AddToDo) {
+            String description = currentInput.substring(5);
+            descriptionCheck(description);
             return new ToDo(description, false);
-        } else if (currentType == CommandType.AddDeadline) {
+        } else if (currentCommandType == CommandType.AddDeadline) {
             String description = currentInput.split("/by ")[0].substring(9);
             String by = currentInput.split("/by ")[1];
             LocalDate deadline  = LocalDate.parse(by);
-            if (description.isBlank()) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            }
+            descriptionCheck(description);
             return new Deadline(description, deadline, false);
-        } else if (currentType == CommandType.AddEvent) {
+        } else if (currentCommandType == CommandType.AddEvent) {
             String description = currentInput.split("/at ")[0].substring(6);
             String by = currentInput.split("/at ")[1];
             LocalDate eventDate  = LocalDate.parse(by);
-            if (description.isBlank()) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-            }
+            descriptionCheck(description);
             return new Event(description, eventDate, false);
         } else {
             throw new DukeException("Generate task called with wrong command type");
+        }
+    }
+
+    private void descriptionCheck(String description) throws DukeException {
+        if (description.isBlank()) {
+            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
         }
     }
 

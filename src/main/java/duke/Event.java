@@ -35,4 +35,17 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + "(at: " + formatDate() + ")";
     }
+
+    /**
+     * Creates an Event task from given task string.
+     *
+     * @return Event task.
+     */
+    public static Event create(String taskString, boolean isDone) {
+        int timeStart = taskString.indexOf("at: ");
+        String description = taskString.substring(7, timeStart - 2) + " ";
+        String dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
+        LocalDate date = LocalDate.parse(dateTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return new Event(description, date, isDone);
+    }
 }

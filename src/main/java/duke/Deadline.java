@@ -35,4 +35,17 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + "(by: " + formatDate() + ")";
     }
+
+    /**
+     * Creates a Deadline task from given task string.
+     *
+     * @return Deadline task.
+     */
+    public static Deadline create(String taskString, boolean isDone) {
+        int timeStart = taskString.indexOf("by: ");
+        String description = taskString.substring(7, timeStart - 2) + " ";
+        String dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
+        LocalDate date = LocalDate.parse(dateTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return new Deadline(description, date, isDone);
+    }
 }

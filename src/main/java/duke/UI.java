@@ -29,10 +29,8 @@ public class UI {
      * 
      * @throws DukeException On errors encountered when command cannot be executed correctly.
      */
-    public String start(CommandType command) throws DukeException{
-
+    public String takeInput(CommandType command) throws DukeException{
         int taskIndex;
-        String searchTerm;
         Task newTask;
 
         switch (command) {
@@ -55,27 +53,27 @@ public class UI {
         case AddToDo:
         case AddEvent:
         case AddDeadline:
-            try {
-                newTask = parser.generateTask();
-                taskList.addTask(newTask);
-                return addTaskMsg(newTask);
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
+            newTask = parser.generateNewTask();
+            taskList.addTask(newTask);
+            return addTaskMsg(newTask);
         case Find:
-            searchTerm = parser.getSearchTerm();
-            ArrayList<Task> matchingTasks = new ArrayList<>();
-            for (Task task : taskList.getTasks()) {
-                if (task.description.contains(searchTerm)) {
-                    matchingTasks.add(task);
-                }
-            }
-            return findMsg(matchingTasks);
+            return findMsg(findMatchingTasks());
         case Error:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         default:
-            return "Command error encountered, please inform Duke maintainers!";
+            throw new DukeException("Command error encountered, please inform Duke maintainers!");
         }
+    }
+
+    private ArrayList<Task> findMatchingTasks() {
+        String searchTerm = parser.getSearchTerm();
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : taskList.getTasks()) {
+            if (task.description.contains(searchTerm)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 
     private String addTaskMsg(Task newTask) {
