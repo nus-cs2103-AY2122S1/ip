@@ -40,6 +40,8 @@ public class Storage {
     public void loadData(TaskManager taskList)
             throws FileNotFoundException, FileFormatException {
 
+        assert taskList != null : "Tasklist is empty and has not been initialized";
+
         Scanner s = new Scanner(f);
         while (s.hasNext()){
             String entry = s.nextLine();
