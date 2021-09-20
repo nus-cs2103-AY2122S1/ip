@@ -2,7 +2,6 @@ package luke;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.List;
 
 import javafx.application.Application;
@@ -22,10 +21,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * Class to encapsulate Duke Chatbot.
+ * Class to encapsulate Luke Chatbot.
  */
 public class Luke extends Application {
-    
+
     private final Ui lukeUi;
     private final Parser lukeParser;
     private final Storage lukeStorage;
@@ -68,14 +67,14 @@ public class Luke extends Application {
     @Override
     public void start(Stage stage) {
         VBox lukeContainer = new VBox();
-        TextField dukeInput = new TextField();
+        TextField lukeInput = new TextField();
         ScrollPane scrollPane = configureScrollPane(lukeContainer);
         Button sendButton = configureSendButton(lukeContainer, lukeInput, stage);
         Label sideLabel = configureSideLabel();
         HBox topRow = configureTopRow(scrollPane, sideLabel);
         AnchorPane container = configureAnchorPane(scrollPane, sendButton, lukeInput, topRow);
         Scene scene = new Scene(container);
-        configureLukeContainerAndInput(lukeContainer, lukeInput, scrollPane, stage);
+        configureLukeContainerAndLukeInput(lukeContainer, lukeInput, scrollPane, stage);
         configureStage(scene, stage);
         stage.show();
     }
@@ -123,7 +122,7 @@ public class Luke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing USER input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing USER input and the other containing Luke's reply and then appends them to
      * the dialog container. Clears the USER input after processing.
      */
     private void handleUserInput(VBox dialogContainer, TextField userInput, Stage stage) {
@@ -131,13 +130,13 @@ public class Luke extends Application {
         Label lukeText = new Label(getResponse(userInput.getText(), stage));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(USER)).padDialog(10),
-                DialogBox.getLukeDialog(dukeText, new ImageView(LUKE)).padDialog(10)
+                DialogBox.getLukeDialog(lukeText, new ImageView(LUKE)).padDialog(10)
         );
         userInput.clear();
     }
 
     /**
-     * Function to get response from Duke.
+     * Function to get response from Luke.
      */
     private String getResponse(String input, Stage stage) {
         if (input.equals(TERMINATION_COMMAND)) {
@@ -194,7 +193,7 @@ public class Luke extends Application {
      */
     private String processInput(ArrayList<String> parsedTerms) throws LukeException {
         if (parsedTerms.size() < 3) {
-            throw new LukeException("Luke Cannot Understand Your Entry!");
+            throw new LukeException("Luke cannot understand your entry :/\nType 'help' for assistance");
         }
         String command = parsedTerms.get(0);
         String entry = parsedTerms.get(1);
@@ -236,7 +235,7 @@ public class Luke extends Application {
                 break;
 
             default:
-                throw new LukeException("Sorry! Luke can't understand what that means");
+                throw new LukeException("Sorry! Luke can't understand that\nType 'help' for assistance");
         }
         return output;
     }

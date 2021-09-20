@@ -27,3 +27,7 @@ Description of the outcome.
 ```
 expected output
 ```
+
+###Credits
+
+Photos by Generated Photos

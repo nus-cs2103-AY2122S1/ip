@@ -18,8 +18,10 @@ import javafx.stage.Stage;
  */
 public class Ui {
 
-    private final Image USER = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/UserImage.jpg")));
-    private final Image LUKE = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/LukeImage.jpg")));
+    private final Image USER =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/UserImage.jpg")));
+    private final Image LUKE =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/LukeImage.jpg")));
 
     /**
      * Constructor to create a UI object.
@@ -61,7 +63,7 @@ public class Ui {
     /**
      * Prints out the added entry.
      *
-     * @param entry THe newly-added entry.
+     * @param entry The newly-added entry.
      * @param id The #id of the newly-added entry.
      */
     public String getAddEntry(Entry entry, int id) {

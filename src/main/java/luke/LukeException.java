@@ -2,6 +2,9 @@ package luke;
 
 public class LukeException extends Exception {
 
+    public static final LukeException INVALID_DATE_FORMAT_EXCEPTION =
+            new LukeException("Sorry I can't read that! Enter dates in YYYY-MM-DD format");
+
     /**
      * Constructor for LukeException.
      */

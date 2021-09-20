@@ -32,7 +32,7 @@ public class Event extends Entry{
             this.event = LocalDate.parse(event);
         } catch (DateTimeParseException e) {
             this.event = LocalDate.now();
-            throw new LukeException("Sorry I can't read that! Enter dates in YYYY-MM-DD format");
+            throw LukeException.INVALID_DATE_FORMAT_EXCEPTION;
         }
     }
 
