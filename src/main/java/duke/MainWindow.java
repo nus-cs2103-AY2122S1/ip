@@ -25,8 +25,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/penguin.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/soccat.png"));
+    private Image dukeImageError = new Image(this.getClass().getResourceAsStream("/images/soccat_sad.png"));
 
     @FXML
     public void initialize() {
@@ -56,9 +57,10 @@ public class MainWindow extends AnchorPane {
         } else {
             input = userInput.getText();
             response = duke.getResponse(input);
+            Image dukeImageRender = response.contains("OOPS!!!") ? dukeImageError : dukeImage;
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getDukeDialog(response, dukeImageRender)
             );
         }
 
