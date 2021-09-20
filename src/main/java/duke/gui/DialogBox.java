@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -43,6 +44,9 @@ public class DialogBox extends HBox {
 
 
         dialog.setText(text);
+        dialog.setWrapText(true);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+
         displayPicture.setClip(circleMask);
         displayPicture.setImage(img);
     }

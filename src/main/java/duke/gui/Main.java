@@ -26,6 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Calico");
+            stage.setResizable(false);
             scene.setFill(Color.TRANSPARENT);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
