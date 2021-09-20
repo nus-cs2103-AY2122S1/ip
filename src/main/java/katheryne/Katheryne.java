@@ -10,7 +10,8 @@ import katheryne.command.Command;
 @JsonTypeInfo(use = NAME, include = PROPERTY)
 
 /**
- * Chat bot Katheryne, used for simple todo lists.
+ * Chat bot Katheryne, used for simple todo lists. Note that Katheryne is based off of the Genshin Impact 
+ * character of the same name. Images used in Katheryne belong to Mihoyo.
  */
 public class Katheryne {
 
