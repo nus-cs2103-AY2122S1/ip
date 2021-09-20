@@ -26,17 +26,17 @@ public class Parser {
                 return parseToDo(otherTokens);
             } else if (commandStr.equals("event")) {
                 return parseEvent(otherTokens);
-            } else if (tokens[0].equals("deadline")) {
+            } else if (commandStr.equals("deadline")) {
                 return parseDeadline(otherTokens);
-            } else if (tokens[0].equals("list")) {
+            } else if (commandStr.equals("list")) {
                 return parseShowList(otherTokens);
-            } else if (tokens[0].equals("delete")) {
+            } else if (commandStr.equals("delete")) {
                 return parseDelete(otherTokens);
-            } else if (tokens[0].equals("done")) {
+            } else if (commandStr.equals("done")) {
                 return parseDone(otherTokens);
-            } else if (tokens[0].equals("exit")) {
+            } else if (commandStr.equals("exit")) {
                 return parseExit(otherTokens);
-            } else if (tokens[0].equals("find")) {
+            } else if (commandStr.equals("find")) {
                 return parseFind(otherTokens);
             } else {
                 throw new IllegalArgumentException("Command not recognised");
