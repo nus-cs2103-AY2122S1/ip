@@ -18,7 +18,7 @@ public class Ui {
     }
 
     public void printPrompt(){
-        System.out.print("  > ");
+        System.out.print(" ---> ");
     }
 
     // Prints the greet statement
