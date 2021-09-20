@@ -3,7 +3,8 @@ package duke.main;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import duke.command.Parser;
+import duke.command.Command;
+import duke.parser.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -66,63 +67,10 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        String output = "";
+        Parser parser = new Parser(input);
         try {
-            Parser parser = new Parser(input);
-            String operation = parser.getOperationType();
-            switch (operation) {
-                case "bye": {
-                    output = ui.bye();
-                    break;
-                }
-                case "list": {
-                    output = ui.list(tasks);
-                    break;
-                }
-                case "done": {
-                    int index = parser.getIndex();
-                    tasks.markDone(index - 1);
-                    output = ui.done(tasks.get(index - 1));
-                    break;
-                }
-                case "delete": {
-                    int index = parser.getIndex();
-                    Task task = tasks.get(index - 1);
-                    tasks.delete(index - 1);
-                    output = ui.delete(tasks, task);
-                    break;
-                }
-                case "todo": {
-                    String description = parser.getTask();
-                    Task task = new Todo(description);
-                    tasks.add(task);
-                    output = ui.add(tasks, task);
-                    break;
-                }
-                case "event": {
-                    String description = parser.getTask();
-                    LocalDate time = parser.getTime();
-                    Task task = new Event(description, time);
-                    tasks.add(task);
-                    output = ui.add(tasks, task);
-                    break;
-                }
-                case "deadline": {
-                    String description = parser.getTask();
-                    LocalDate time = parser.getTime();
-                    Task task = new Deadline(description, time);
-                    tasks.add(task);
-                    output = ui.add(tasks, task);
-                    break;
-                }
-                case "find": {
-                    String keyword = parser.getTask();
-                    output = ui.find(tasks, keyword);
-                    break;
-                }
-                default:
-            }
-            return output;
+            Command command = parser.parse(tasks, ui);
+            return command.execute();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             return e.getMessage();

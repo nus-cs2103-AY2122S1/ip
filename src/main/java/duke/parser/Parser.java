@@ -1,11 +1,13 @@
-package duke.command;
+package duke.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.command.*;
 import duke.exception.DukeException;
-import duke.task.TaskList;
+import duke.task.*;
+import duke.ui.Ui;
 
 public class Parser {
     private String userInput;
@@ -33,7 +35,7 @@ public class Parser {
     }
 
     /**
-     * Return the operation type of user command.
+     * Return the operation type of user parser.
      */
     public String getOperationType() throws DukeException {
         String operation = userInput.split(" ")[0];
@@ -46,7 +48,7 @@ public class Parser {
     }
 
     /**
-     * Returns the index info in a line of command.
+     * Returns the index info in a line of parser.
      */
     public int getIndex() throws DukeException {
         String[] allWords = userInput.split(" ");
@@ -55,15 +57,15 @@ public class Parser {
                 int index = Integer.parseInt(allWords[1]);
                 return index;
             } catch (NumberFormatException e) {
-                throw new DukeException("The format of command is wrong");
+                throw new DukeException("The format of parser is wrong");
             }
         } else {
-            throw new DukeException("The format of command is wrong");
+            throw new DukeException("The format of parser is wrong");
         }
     }
 
     /**
-    * Returns the task info in a line of command.
+    * Returns the task info in a line of parser.
     */
 
     public String getTask() throws DukeException {
@@ -95,7 +97,7 @@ public class Parser {
     }
 
     /**
-     * Returns the time info in a line of command in LocalDate type.
+     * Returns the time info in a line of parser in LocalDate type.
      */
     public LocalDate getTime() throws DukeException {
         String time;
@@ -147,6 +149,61 @@ public class Parser {
         time = userInput.substring(userInput.lastIndexOf("|") + 2);
         parsedTime = LocalDate.parse(time, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return parsedTime;
+    }
+
+    public Command parse(TaskList taskList, Ui textUi) throws DukeException{
+        Command command;
+        try {
+            String operation = this.getOperationType();
+            switch (operation) {
+                case "bye": {
+                    command = new ByeCommand(textUi);
+                    break;
+                }
+                case "list": {
+                    command = new ListCommand(taskList, textUi);
+                    break;
+                }
+                case "done": {
+                    int index = this.getIndex();
+                    command = new DoneCommand(taskList, textUi, index);
+                    break;
+                }
+                case "delete": {
+                    int index = this.getIndex();
+                    command = new DeleteCommand(taskList, textUi, index);
+                    break;
+                }
+                case "todo": {
+                    String taskInfo = this.getTask();
+                    command = new TodoCommand(taskList, textUi, taskInfo);
+                    break;
+                }
+                case "event": {
+                    String taskInfo = this.getTask();
+                    LocalDate taskTime = this.getTime();
+                    command = new EventCommand(taskList, textUi, taskInfo, taskTime);
+                    break;
+                }
+                case "deadline": {
+                    String taskInfo = this.getTask();
+                    LocalDate taskTime = this.getTime();
+                    command = new DeadlineCommand(taskList, textUi, taskInfo, taskTime);
+                    break;
+                }
+                case "find": {
+                    String keyword = this.getTask();
+                    command = new FindCommand(taskList, textUi, keyword);
+                    break;
+                }
+                default: {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            }
+            return command;
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
 }

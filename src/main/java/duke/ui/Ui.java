@@ -10,11 +10,11 @@ public class Ui {
      * Send a greeting to the user.
      */
     public static String greet() {
-        String greet = line + "\n"
-                + "Hello I'm Duke\n"
-                + "What can I do for you?\n"
-                + line;
+        String greet = "Hello I'm Duke\n"
+                + "What can I do for you?";
+        System.out.println(line);
         System.out.println(greet);
+        System.out.println(line);
         return greet;
     }
 
@@ -22,8 +22,10 @@ public class Ui {
      * Say goodbye to the user.
      */
     public static String bye() {
-        String bye = line + "\nBye. Hope to see you again soon!\n" + line;
+        String bye = "Bye. Hope to see you again soon!";
+        System.out.println(line);
         System.out.println(bye);
+        System.out.println(line);
         return bye;
     }
 
@@ -33,13 +35,14 @@ public class Ui {
      * @param tasks List of tasks.
      */
     public static String list(TaskList tasks) {
-        String list = line + "\n" + "Here are tasks in your list:\n";
+        String list = "Here are tasks in your list: \n";
 
         for (int index = 1; index <= tasks.size(); index++) {
             list += index + "." + tasks.get(index - 1).toString() + "\n";
         }
-        list += line + "\n";
+        System.out.println(line);
         System.out.println(list);
+        System.out.println(line);
         return list;
     }
 
@@ -49,8 +52,10 @@ public class Ui {
      * @param task A Task be done by user.
      */
     public static String done(Task task) {
-        String done = line + "\n" + "done:\n" + task.toString() + line + "\n";
+        String done = "done:\n" + task.toString();
+        System.out.println(line);
         System.out.println(done);
+        System.out.println(line);
         return done;
     }
 
@@ -60,10 +65,11 @@ public class Ui {
      * @param task A Task be deleted by user.
      */
     public static String delete(TaskList tasks, Task task) {
-        String delete = line + "\n" + "removed:\n" + task.toString() + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.\n"
-                + line + "\n";
+        String delete = "removed:\n" + task.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
+        System.out.println(line);
         System.out.println(delete);
+        System.out.println(line);
         return delete;
     }
 
@@ -75,12 +81,13 @@ public class Ui {
      * @param task A Task be added by user.
      */
     public static String add(TaskList tasks, Task task) {
-        String add = line + "\n" + "added: " + task
+        String add = "added: " + task
                 + "\nNow you have " + tasks.size() + ""
-                + " tasks in the list.\n"
-                + line + "\n";
-      System.out.println(add);
-      return add;
+                + " tasks in the list.";
+        System.out.println(line);
+        System.out.println(add);
+        System.out.println(line);
+        return add;
     }
 
     /**
@@ -90,10 +97,11 @@ public class Ui {
      * @param keyword keyword user want to search by.
      */
     public static String find(TaskList taskList, String keyword) {
-        String find = line + "\n" + "Here are the matching tasks in your list:\n"
-                + taskList.find(keyword)
-                + line + "\n";
+        String find = "Here are the matching tasks in your list:\n"
+                + taskList.find(keyword);
+        System.out.println(line);
         System.out.println(find);
+        System.out.println(line);
         return find;
     }
 
@@ -101,10 +109,10 @@ public class Ui {
      * Tell user a error occur while loading local data
      */
     public String showLoadingError() {
-        String showLoadingError = line + "\n"
-                + "Cannot Load From Data.\n"
-                + line + "\n";
+        String showLoadingError = "Cannot Load From Data.";
+        System.out.println(line);
         System.out.println(showLoadingError);
+        System.out.println(line);
         return showLoadingError;
     }
 
