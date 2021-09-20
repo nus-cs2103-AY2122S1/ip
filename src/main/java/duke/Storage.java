@@ -62,6 +62,7 @@ public class Storage {
                     newStorage.add(newEvent);
                     break;
                 default:
+                    assert false : "Task type is wrong!";
                     break;
                 }
                 System.out.println("    " + data);

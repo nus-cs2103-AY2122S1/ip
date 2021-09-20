@@ -59,6 +59,7 @@ public class Duke {
                 } else if (parser.parseDelete(input)) {
                     TaskList.delete(input);
                 } else {
+                    assert false : "Input is wrong!";
                     Ui.invalidInput();
                 }
                 duke.Storage.writeTasks();
