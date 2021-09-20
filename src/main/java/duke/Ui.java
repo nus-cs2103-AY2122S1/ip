@@ -28,12 +28,6 @@ public class Ui {
     }
 
     public void showHelpMessage() {
-        String logo = "These are the commands that you can use:\n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
     }
 
     public String showAddMessage(Task task, Tasklist tasklist) {
