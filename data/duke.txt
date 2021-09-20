@@ -1,2 +1,5 @@
-[D][ ] return book by: 2021-12-02 18:00
-[D][X] read book by: 2021-10-15 18:00
+[T][ ] read book 
+[E][ ] project meeting at: 2021-10-15 19:00
+[E][ ] make pasta at: 2021-08-16 13:00
+[D][ ] submit ip by: 2021-08-16 23:59
+[E][ ] attend party at: 2022-03-07 15:00

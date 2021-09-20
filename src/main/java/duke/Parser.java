@@ -101,9 +101,9 @@ public class Parser {
             String firstTodo = input.substring(5);
             t.addTodo(firstTodo);
             s.appendListToFile(t);
-            returnString = returnString + "Got it. I've added this task: " + "\n";
+            returnString = returnString + "Got it! I've added this task: " + "\n";
             returnString = returnString + new Todo(firstTodo).toString() + "\n";
-            returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
+            returnString = returnString + "Now you have " + t.size() + " task(s) in the list" + "\n";
             return returnString;
         }
     }
@@ -125,9 +125,9 @@ public class Parser {
             LocalDateTime deadlineDate = getDate(wordsInTaskDescription, timeString);
             t.addDeadline(deadlineDescription, deadlineDate);
             s.appendListToFile(t);
-            returnString = returnString + "Got it. I've added this task: " + "\n";
+            returnString = returnString + "Got it! I've added this task: " + "\n";
             returnString = returnString + new Deadline(deadlineDescription, deadlineDate).toString() + "\n";
-            returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
+            returnString = returnString + "Now you have " + t.size() + " task(s) in the list" + "\n";
             return returnString;
         }
     }
@@ -148,9 +148,9 @@ public class Parser {
             String eventDescription = wordsInEventDescription[0].substring(6);
             LocalDateTime eventDate = getDate(wordsInEventDescription, timeString);
             t.addEvent(eventDescription, eventDate);
-            returnString = returnString + "Got it. I've added this task: " + "\n";
+            returnString = returnString + "Got it! I've added this task: " + "\n";
             returnString = returnString + new Event(eventDescription, eventDate).toString() + "\n";
-            returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
+            returnString = returnString + "Now you have " + t.size() + " task(s) in the list" + "\n";
             s.appendListToFile(t);
             return returnString;
         }
@@ -175,7 +175,7 @@ public class Parser {
         t.delete(taskIndex - 1);
         returnString = returnString + "Noted. I've removed this task: " + "\n";
         returnString = returnString + removedTask.toString() + "\n";
-        returnString = returnString + "Now you have " + t.size() + " tasks in the list" + "\n";
+        returnString = returnString + "Now you have " + t.size() + " task(s) in the list" + "\n";
         s.appendListToFile(t);
         return returnString;
     }
@@ -191,7 +191,7 @@ public class Parser {
         String returnString = "";
         int count = 0;
         for (Task task : t.getTaskList()) {
-            String taskDescription = task.description.substring(0, task.description.length() - 4);
+            String taskDescription = task.description.substring(0, task.description.length());
             String[] wordsInTaskDescription = taskDescription.split(" ");
             for (String str : wordsInTaskDescription) {
                 if (str.equals(keyword)) {
@@ -231,9 +231,11 @@ public class Parser {
         String year = splitDateComponents[2];
         String month = splitDateComponents[1];
         String currentDate = splitDateComponents[0];
-        int dateInteger = Integer.parseInt(currentDate);
-        if (dateInteger < 10) {
+        if (currentDate.length() == 1) {
             currentDate = "0" + currentDate;
+        }
+        if (month.length() == 1) {
+            month = "0" + month;
         }
         String finalDateFormat = year + "-" + month + "-" + currentDate;
         String finalDateTimeFormat = finalDateFormat + " " + time;
