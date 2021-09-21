@@ -1,13 +1,13 @@
 package duke.gui;
 
 import duke.main.Duke;
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -21,19 +21,43 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
+    private BackgroundImage backgroundImage;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/RanRan.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/NaiLin.png"));
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private void setBackgroundImage() {
+        BackgroundSize backgroundSize;
+
+        backgroundSize = new BackgroundSize(400, 600,
+                false, false, true, false);
+        backgroundImage = new BackgroundImage(new Image("/images/Asoul.jpg"),
+                null, null, null, backgroundSize);
+    }
+
+    private void isQuit(String input) {
+        if (input.contains("bye")) {
+            System.exit(0);
+        }
+    }
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        this.setBackgroundImage();
+        dialogContainer.setBackground(new Background(backgroundImage));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        Ui textUi = new Ui();
+        String greet = textUi.greet();
+        dialogContainer
+                .getChildren()
+                .addAll(DialogBox
+                        .getDukeDialog(greet, dukeImage));
     }
 
     /**
@@ -49,5 +73,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        isQuit(input);
     }
 }

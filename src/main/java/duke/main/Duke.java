@@ -69,7 +69,7 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             return e.getMessage();
-        } final {
+        } finally {
             storage.updateData();
         }
     }
