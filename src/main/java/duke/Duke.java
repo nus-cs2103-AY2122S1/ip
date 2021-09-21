@@ -2,7 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
-
+/**
+ * Currently, this is the remnant of the 
+ */
 public class Duke {
     // Source : https://patorjk.com/software/taag/#p=display&f=Standard&t=Dude
     private static final String LOGO = " ____            _      \n"

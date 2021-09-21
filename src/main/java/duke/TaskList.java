@@ -2,7 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 
-
 public class TaskList {
 
     private final ArrayList<Task> arrayList;
@@ -19,13 +18,14 @@ public class TaskList {
 
     }
 
-    public void sort() {
-        this.arrayList.sort(null);
-    }
-
+    /**
+     * Adds a Task to this TaskList.
+     *
+     * @param task The Task to be added to this TaskList.
+     * @return The String message to be displayed on the UI to the user.
+     */
     public String add(Task task) {
         this.arrayList.add(task);
-        this.arrayList.sort(null);
         String type = "";
         switch (task.getType()) {
             case TODO:

@@ -21,18 +21,20 @@ abstract public class Task implements Comparable<Task>{
     }
 
     /**
-     * Getter method for the description of this task
+     * Getter method for the description of this Task.
      *
-     * @return The description field of this Task
+     * @return The description field of this Task.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * The toString method of this Task
+     * Returns the string representation of this Task.
+     * Carries information about the type of this Task, and whether it has been
+     * marked as done, along with the description.
      *
-     * @return 
+     * @return String representation of this Task.
      */
     @Override
     public String toString() {
@@ -56,9 +58,13 @@ abstract public class Task implements Comparable<Task>{
         }
     }
 
-    public TaskType getType() {
-        return null;
-    }
+    /**
+     * Returns the type of this Task.
+     * Concrete implementation is done by child classes ToDo, Event and DeadLine.
+     *
+     * @return The type of this Task.
+     */
+    abstract public TaskType getType();
 
     @Override
     abstract public int compareTo(Task other);
