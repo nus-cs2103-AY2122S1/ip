@@ -10,17 +10,13 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public static void parse(String input, Storage storage) {
+    public static String parse(String input, Storage storage) {
         int count = 0; //tmp
         if (input.equals("bye")) {
-            String bye = "____________________________________________________________\n" +
-                    "Bye. Hope to see you again soon!\n" +
-                    "____________________________________________________________";
-            System.out.println(bye);
-            return;
+            String bye = "Bye. Hope to see you again soon!";
+            return bye;
         } else if (input.equals("list")) {
-            System.out.println("____________________________________________________________");
-            System.out.println("Here are the tasks in your list:");
+            String reply = "Here are the tasks in your list:\n";
 /*
                 for (int i = 0; i < count; i++) {
                     System.out.println("  " + (i + 1) + "." + arr.get(i).toString());
@@ -42,25 +38,25 @@ public class Parser {
                         if (parsed[1].equals("1")) {
                             todo.markAsDone();
                         }
-                        System.out.println("  " + (n) + "." + todo.toString());
+                        reply += "  " + (n) + "." + todo.toString() + "\n";
                     } else if (type.equals("D")) {
                         Deadline deadline = new Deadline(description, LocalDate.parse(parsed[3]));
                         if (parsed[1].equals("1")) {
                             deadline.markAsDone();
                         }
-                        System.out.println("  " + (n) + "." + deadline.toString());
+                        reply += "  " + (n) + "." + deadline.toString() + "\n";
                     } else if (type.equals("E")) {
                         Event event = new Event(description, LocalDate.parse(parsed[3]));
                         if (parsed[1].equals("1")) {
                             event.markAsDone();
                         }
-                        System.out.println("  " + (n) + "." + event.toString());
+                        reply += "  " + (n) + "." + event.toString() + "\n";
                     }
                 }
             } catch (FileNotFoundException e) {
                 System.out.println(e);
             }
-            System.out.println("____________________________________________________________");
+            return reply;
         } else if (input.startsWith("done ")) {
             int task = Integer.parseInt(input.split(" ")[1]);
             int n = 0;
@@ -140,12 +136,10 @@ public class Parser {
                 if (count > 1 && count != 0) {
                     s = "s";
                 }
-                String reply = "____________________________________________________________\n" +
-                        "Got it. I've added this task:\n  " +
+                String reply = "Got it. I've added this task:\n  " +
                         todo.toString() + "\n" +
-                        "Now you have " + count + " task" + s + " in the list.\n" +
-                        "____________________________________________________________";
-                System.out.println(reply);
+                        "Now you have " + count + " task" + s + " in the list.";
+                return reply;
             } catch (DukeException e) {
                 System.out.println(e);
             }
@@ -183,12 +177,10 @@ public class Parser {
             if (count > 1 && count != 0) {
                 s = "s";
             }
-            String reply = "____________________________________________________________\n" +
-                    "Got it. I've added this task:\n  " +
+            String reply = "Got it. I've added this task:\n  " +
                     deadline.toString() + "\n" +
-                    "Now you have " + count + " task" + s + " in the list.\n" +
-                    "____________________________________________________________";
-            System.out.println(reply);
+                    "Now you have " + count + " task" + s + " in the list.";
+            return reply;
         } else if (input.startsWith("event")) {
             String[] n = input.split(" ", 2)[1].split(" /at ");
             // arr.add(new Duke.Event(n[0], n[1]));
@@ -223,12 +215,10 @@ public class Parser {
             if (count > 1 && count != 0) {
                 s = "s";
             }
-            String reply = "____________________________________________________________\n" +
-                    "Got it. I've added this task:\n  " +
+            String reply = "Got it. I've added this task:\n  " +
                     event.toString() + "\n" +
-                    "Now you have " + count + " task" + s + " in the list.\n" +
-                    "____________________________________________________________";
-            System.out.println(reply);
+                    "Now you have " + count + " task" + s + " in the list.";
+            return reply;
         } else if (input.startsWith("delete")) {
             int pos = Integer.parseInt(input.split(" ")[1]);
             //Duke.Task task = arr.get(pos-1);
@@ -238,12 +228,10 @@ public class Parser {
             if (count > 1 && count != 0) {
                 s = "s";
             }
-            String reply = "____________________________________________________________\n" +
-                    "Noted. I've removed this task:\n  " +
+            String reply = "Noted. I've removed this task:\n  " +
                     //task + "\n" +
-                    "Now you have " + count + " task" + s + " in the list.\n" +
-                    "____________________________________________________________";
-            System.out.println(reply);
+                    "Now you have " + count + " task" + s + " in the list.\n";
+            return reply;
         } else if (input.startsWith("find")) {
             String task = input.split(" ")[1];
         } else {
@@ -251,5 +239,6 @@ public class Parser {
                     "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                     "____________________________________________________________"));
         }
+        return "test";
     }
 }

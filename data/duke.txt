@@ -4,4 +4,4 @@ E | 1 | project meeting | 2012-01-03
 T | 1 | join sports club
 D | 1 | return book | 2015-03-03
 E | 1 | run | 2013-03-03
-T | 0 | sleep
+T | 1 | sleep
