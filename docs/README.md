@@ -2,14 +2,14 @@
 
 > Let's make a slight change to create a big difference
 
-
+### Screenshots:
 <div>
     <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_1.png?raw=true" style="width:33%">
     <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_2.png?raw=true" style="width:33%"/>
     <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_3.png?raw=true" style="width:33%"/>
 
 </div>
-
+<br>
 Alice is a virtual assistant started off as Duke task manager before evolving in to her own form.
 
 This User Guide contains:
