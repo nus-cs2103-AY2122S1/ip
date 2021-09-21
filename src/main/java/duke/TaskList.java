@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class that deals with task operations.
@@ -78,6 +79,17 @@ public class TaskList {
             }
         }
         return output;
+    }
+    public void sortDeadlineList(){
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+
+        for (int i = tasks.size() - 1; i >= 0; i--) {
+            if (tasks.get(i).label.contains("D")) {
+                deadlines.add((Deadline) tasks.remove(i));
+            }
+        }
+        Collections.sort(deadlines);
+        tasks.addAll(deadlines);
     }
 
     @Override

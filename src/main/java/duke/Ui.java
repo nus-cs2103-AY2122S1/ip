@@ -39,6 +39,9 @@ public class Ui {
     public void displayFoundList(String keyword) {
         duke.showMessage(keyword, true);
     }
+    public void displaySortedTaskList(TaskList t) {
+        duke.showMessage("Here are the tasks on your list: \n" + t, true);
+    }
     public void sayBye() {
         duke.showMessage("Bye! Hope to see you again soon!", true);
     }

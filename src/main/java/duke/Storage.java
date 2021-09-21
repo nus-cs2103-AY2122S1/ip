@@ -49,7 +49,7 @@ public class Storage {
     private void addTasks(ArrayList<Task> taskList, Scanner sc) {
         while (sc.hasNext()) {
             String task = sc.nextLine();
-            String[] taskArr = task.split("///");
+            String[] taskArr = task.split("/");
             if (taskArr[0].equals("T")) {
                 Todo td = new Todo(taskArr[2]);
                 if (taskArr[1].equals("1")) {
@@ -97,33 +97,33 @@ public class Storage {
             String text = "";
 
             if (t.label.equals("T")) {
-                text = text.concat("T|");
+                text = text.concat("T/");
                 if (t.isDone) {
-                    text = text.concat("1|");
+                    text = text.concat("1/");
                 } else {
-                    text = text.concat("0|");
+                    text = text.concat("0/");
                 }
                 text = text.concat(t.description + "\n");
             }
 
             if (t.label.equals("D")) {
-                text = text.concat("D|");
+                text = text.concat("D/");
                 if (t.isDone) {
-                    text = text.concat("1|");
+                    text = text.concat("1/");
                 } else {
-                    text = text.concat("0|");
+                    text = text.concat("0/");
                 }
-                text = text.concat(t.description + "|" + ((Deadline) t).time + "\n");
+                text = text.concat(t.description + "/" + ((Deadline) t).time + "\n");
             }
 
             if (t.label.equals("E")) {
-                text = text.concat("E|");
+                text = text.concat("E/");
                 if (t.isDone) {
-                    text = text.concat("1|");
+                    text = text.concat("1/");
                 } else {
-                    text = text.concat("0|");
+                    text = text.concat("0/");
                 }
-                text = text.concat(t.description + "|" + ((Event) t).by + "\n");
+                text = text.concat(t.description + "/" + ((Event) t).by + "\n");
             }
             fw.write(text);
         }

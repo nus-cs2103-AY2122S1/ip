@@ -13,6 +13,8 @@ public class Parser {
     public static Command parse(String response) throws DukeException {
         if (response.equals("list")) {
             return new ListCommand();
+        } else if (response.equals("L sort items")) {
+            return new ListSortedCommand();
         } else if (response.equals("bye")) {
             return new ExitCommand();
         } else if (response.contains("done")) {
@@ -53,4 +55,5 @@ public class Parser {
        description[1] = command.substring(tTimeFirst + 4);
        return description;
     }
+
 }
