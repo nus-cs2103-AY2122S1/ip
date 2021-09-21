@@ -26,6 +26,7 @@ public class Main extends Application {
             stage.setTitle("Duke");
             stage.getIcons().add(new Image("/images/PoopEmoji.png"));
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setStage(stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
