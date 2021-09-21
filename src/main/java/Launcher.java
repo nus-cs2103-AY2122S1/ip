@@ -1,5 +1,3 @@
-package ashy;
-
 import javafx.application.Application;
 
 /**

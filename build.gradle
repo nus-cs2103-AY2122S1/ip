@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "ashy.Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {

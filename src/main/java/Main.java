@@ -1,7 +1,7 @@
-package ashy;
-
 import java.io.IOException;
 
+import ashy.Ashy;
+import ashy.MainWindow;
 import ashy.util.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
