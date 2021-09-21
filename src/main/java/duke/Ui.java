@@ -2,6 +2,7 @@ package duke;
 
 import duke.exceptions.DukeEmptyTodoDescriptionException;
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeTodoTimeException;
 import duke.exceptions.DukeUnknownCommandException;
 
 /**
@@ -194,7 +195,7 @@ public class Ui {
                 }
                 return str.toString();
             }
-        } catch (DukeEmptyTodoDescriptionException | DukeUnknownCommandException e) {
+        } catch (DukeEmptyTodoDescriptionException | DukeUnknownCommandException | DukeTodoTimeException e) {
             StringBuilder str = new StringBuilder();
             str.append(LINES + "\n");
             str.append(e.getMessage() + "\n");

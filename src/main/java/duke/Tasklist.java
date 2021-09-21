@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exceptions.DukeTodoTimeException;
+
 import java.util.ArrayList;
 
 /**
@@ -65,10 +67,10 @@ public class Tasklist {
      * @param taskIndex index of the task to be updated
      * @param newTime   new time of the task
      */
-    public static void updateTime(int taskIndex, String newTime) {
+    public static void updateTime(int taskIndex, String newTime) throws DukeTodoTimeException {
         Task currentTask = dukeList.get(taskIndex);
         if (currentTask instanceof ToDo) {
-            // error
+            throw new DukeTodoTimeException();
         } else if (currentTask instanceof Event) {
             ((Event) currentTask).time = newTime;
         } else if (currentTask instanceof Deadline) {
