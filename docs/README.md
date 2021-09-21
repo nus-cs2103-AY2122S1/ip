@@ -1,7 +1,11 @@
-# User Guide
+# Dude User Guide
 
 ![Image of UI](./Ui.png)
-## Features 
+## Features
+1. Add different types of tasks, ToDo, DeadLine and Event tasks.
+2. Set deadlines or times for DeadLine and Event tasks.
+3. Tries to parse dates automatically, but silently defaults to storing their raw string values to allow users to use any format they choose
+
 
 ### Feature-ABC
 
