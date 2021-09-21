@@ -1,9 +1,9 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 repositories {
@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    String javaFxVersion = '11'
+    String javaFxVersion = '11.0.2'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -45,11 +45,6 @@ test {
 
 application {
     mainClassName = "duke.Launcher"
-}
-
-javafx {
-    version = "15.0.1"
-    modules = [ 'javafx.controls' ]
 }
 
 shadowJar {
