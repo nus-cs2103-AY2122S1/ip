@@ -29,8 +29,5 @@ public class Event extends Task{
         return TaskType.EVENT;
     }
 
-    @Override
-    public int compareTo(Task other) {
-        return 0;
-    }
+
 }

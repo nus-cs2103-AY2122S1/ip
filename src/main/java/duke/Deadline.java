@@ -28,9 +28,6 @@ public class Deadline extends Task{
         return TaskType.DEADLINE;
     }
 
-    @Override
-    public int compareTo(Task other) {
-        return 0;
-    }
+
 
 }
