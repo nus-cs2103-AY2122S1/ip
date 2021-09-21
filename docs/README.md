@@ -1,6 +1,6 @@
 # User Guide
 
-![Image of UI](./UI.png)
+![Image of UI](./Ui.png)
 ## Features 
 
 ### Feature-ABC

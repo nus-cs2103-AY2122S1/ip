@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.strip() == "") {
+        if (input.strip().equals("")) {
             return;
         }
         String response = gui.getResponse(input);
