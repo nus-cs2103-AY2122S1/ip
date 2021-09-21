@@ -1,5 +1,11 @@
 package duke;
 
+/**
+ * Controls the main logic of the application.
+ * Performs command parsing, and handles the interaction with TaskList and
+ * DataFile objects.
+ *
+ */
 public class GUI {
 
     private TaskList taskList;
@@ -18,9 +24,10 @@ public class GUI {
         Task newTask = Parser.parseInput(str);
         if (newTask == null) {
             if (str.equals("bye")) {
+                return "Click the exit button to exit instead!";
+            } else if (str.equals("save")) {
                 taskList.save();
-                return "Tasklist saved; Click the exit button to exit instead!";
-
+                return "TaskList saved!";
             } else if (str.equals("list")) {
                 return taskList.list();
             } else if (str.startsWith("done")) {
