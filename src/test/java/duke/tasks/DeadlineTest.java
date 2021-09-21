@@ -23,6 +23,6 @@ public class DeadlineTest {
         LocalTime time = LocalTime.parse("20:00");
         LocalDate date = LocalDate.parse("2012-03-12");
         Deadline task = new Deadline(des, date, time);
-        assertEquals("[D][ ] deadline submit assignment (by: Mar 12 2012 8:00pm)", task.formatString());
+        assertEquals("[D][ ] deadline submit assignment (by: Mar 12 2012 8:00PM)", task.formatString());
     }
 }

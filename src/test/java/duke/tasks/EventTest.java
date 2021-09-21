@@ -25,7 +25,7 @@ public class EventTest {
         LocalTime end = LocalTime.parse("23:00");
         LocalDate date = LocalDate.parse("2012-03-12");
         Event task = new Event(des, date, start, end);
-        assertEquals("[E][ ] event zoom meeting (at: Mar 12 2012 8:00am to 11:00pm)", task.formatString());
+        assertEquals("[E][ ] event zoom meeting (at: Mar 12 2012 8:00AM to 11:00PM)", task.formatString());
     }
 }
 
