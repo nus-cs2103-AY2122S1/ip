@@ -1,10 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * CommandHandler manages all the commands the user can input.
  * It is an intermediary between the user inputs and the output UI messages.
  */
 public class CommandHandler {
+
     protected Ui ui;
     protected TaskList taskList;
 
@@ -23,7 +26,7 @@ public class CommandHandler {
      * Handles an event task command.
      *
      * @param eventTask The event task after the user's string was parsed.
-     * @return A message to the UI after handling the event task.
+     * @return A UI message after handling the event task.
      */
     public String handleEvent(Task eventTask) {
         assert (eventTask.getDescription() != null);
@@ -36,7 +39,7 @@ public class CommandHandler {
      * Handles a deadline task command.
      *
      * @param deadlineTask The deadline task after the user's string was parsed.
-     * @return A message to the UI after handling the deadline task.
+     * @return A UI message after handling the deadline task.
      */
     public String handleDeadline(Task deadlineTask) {
         assert (deadlineTask.getDescription() != null);
@@ -49,7 +52,7 @@ public class CommandHandler {
      * Handles a todo task command.
      *
      * @param toDoTask The todo task after the user's string was parsed.
-     * @return A message to the UI after handling the todo task.
+     * @return A UI message after handling the todo task.
      */
     public String handleTodo(Task toDoTask) {
         assert (toDoTask.getDescription() != null);
@@ -61,38 +64,30 @@ public class CommandHandler {
     /**
      * Handles the find command.
      *
-     * @param keyword The keyword specified to find certain tasks.
-     * @return A message to the UI with all the tasks that contain the keyword specified.
-     * @throws EmptyDescriptionException If the keyword is not specified.
+     * @param keyword The find command which includes the keyword specified to find certain tasks.
+     * @return A UI message with all the tasks that contain the keyword specified.
      */
-    public String handleFind(String keyword) throws EmptyDescriptionException {
-        if (keyword.length() == 4) {
-            throw new EmptyDescriptionException("error");
+    public String handleFind(String keyword) {
+        ArrayList<Task> list = TaskList.getTaskList();
+        String tasksWithKeywordList = "";
+        int index = 0;
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                index++;
+                tasksWithKeywordList = tasksWithKeywordList + (index)
+                        + ". " + task.toString() + "\n";
+            }
         }
-
-        assert (keyword.length() > 4);
-
-        String keywordToMatch = keyword.substring(5);
-        return ui.findTask(keywordToMatch);
+        return ui.findTask(tasksWithKeywordList);
     }
 
     /**
      * Handles the delete command.
      *
-     * @param taskNumber The task number to be deleted.
-     * @return A message to the UI after deleting the task.
-     * @throws EmptyDescriptionException If the task number is not specified.
+     * @param index The index of the task to be deleted.
+     * @return A UI message after deleting the task.
      */
-    public String handleDelete(String taskNumber) throws EmptyDescriptionException {
-        if (taskNumber.length() == 6) {
-            throw new EmptyDescriptionException("error");
-        }
-
-        assert (taskNumber.length() > 6);
-
-        char taskIndex = taskNumber.charAt(7);
-        int index = Integer.parseInt(String.valueOf(taskIndex));
-
+    public String handleDelete(int index) {
         Task taskAtIndex = taskList.getTask(index);
 
         taskList.removeTask(index);
@@ -102,39 +97,26 @@ public class CommandHandler {
     /**
      * Handles the done command.
      *
-     * @param taskNumber The task number to be marked as done.
-     * @return A message to the UI after marking the task as done.
-     * @throws EmptyDescriptionException If the task number is not specified.
+     * @param index The index of the task to be marked as done.
+     * @return A UI message after marking the task as done.
      */
-    public String handleDone(String taskNumber) throws EmptyDescriptionException {
-        if (taskNumber.length() == 4) {
-            throw new EmptyDescriptionException("error");
-        }
-
-        assert (taskNumber.length() > 4);
-
-        char indexOfTask = taskNumber.charAt(5);
-        int index = Integer.parseInt(String.valueOf(indexOfTask));
-
+    public String handleDone(int index) {
         Task taskAtIndex = taskList.getTask(index);
         taskAtIndex.markAsDone();
 
         return ui.doneTask(taskAtIndex);
     }
 
-    public String handleTag(String tagCommand) throws EmptyDescriptionException {
-        if (tagCommand.length() < 7) {
-            throw new EmptyDescriptionException("error");
-        }
+    /**
+     * Handles the tag command.
+     *
+     * @param indexOfTaskToBeTagged The index of the task to be tagged in the list.
+     * @param tag The tag.
+     * @return A UI message after tagging the task.
+     */
+    public String handleTag(int indexOfTaskToBeTagged, String tag) {
 
-        assert (tagCommand.length() > 7);
-
-        char indexOfTask = tagCommand.charAt(4);
-        int index = Integer.parseInt(String.valueOf(indexOfTask));
-
-        Task taskAtIndex = taskList.getTask(index);
-
-        String tag = tagCommand.substring(6);
+        Task taskAtIndex = taskList.getTask(indexOfTaskToBeTagged);
         taskAtIndex.setTag(tag);
 
         return ui.taggedTask(taskAtIndex);

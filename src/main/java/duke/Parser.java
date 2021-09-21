@@ -37,10 +37,14 @@ public class Parser {
      */
     public static Task parseStoredTodoTasks(String storedTodoTask) {
         int isDoneIndex = storedTodoTask.indexOf("/");
+
         String isTaskDone = storedTodoTask.substring(isDoneIndex + 2);
+
         Task todoTask = new Todo(storedTodoTask.substring(5, isDoneIndex));
+
         setDoneStatusToStoredTask(isTaskDone, todoTask);
         setTagToStoredTask(storedTodoTask, todoTask);
+
         return todoTask;
     }
 
@@ -60,6 +64,7 @@ public class Parser {
 
         int charIndex = deadlineTask.indexOf("/" );
         int byIndex = charIndex + 4;
+
         String by = deadlineTask.substring(byIndex);
         String task = deadlineTask.substring(9, charIndex - 1);
 
@@ -76,13 +81,16 @@ public class Parser {
         int isDoneIndex = storedDeadlineTask.indexOf("/");
         int charIndex = storedDeadlineTask.indexOf("|");
         int byIndex = charIndex + 2;
+
         String by = storedDeadlineTask.substring(byIndex, isDoneIndex);
         String deadlineTaskDescription = storedDeadlineTask.substring(9, charIndex - 1);
         String isTaskDone = storedDeadlineTask.substring(isDoneIndex + 2);
 
         Task deadlineTask = new Deadline(deadlineTaskDescription, by);
+
         setDoneStatusToStoredTask(isTaskDone, deadlineTask);
         setTagToStoredTask(storedDeadlineTask, deadlineTask);
+
         return deadlineTask;
     }
 
@@ -102,6 +110,7 @@ public class Parser {
 
         int charIndex = eventTask.indexOf("/");
         int atIndex = charIndex + 4;
+
         String at = eventTask.substring(atIndex);
         String task = eventTask.substring(6, charIndex - 1);
 
@@ -118,14 +127,16 @@ public class Parser {
         int isDoneIndex = storedEventTask.indexOf("/");
         int charIndex = storedEventTask.indexOf("|");
         int atIndex = charIndex + 2;
+
         String at = storedEventTask.substring(atIndex, isDoneIndex);
         String eventTaskDescription = storedEventTask.substring(6, charIndex - 1);
-
         String isTaskDone = storedEventTask.substring(isDoneIndex + 2);
 
         Task eventTask = new Event(eventTaskDescription, at);
+
         setDoneStatusToStoredTask(isTaskDone, eventTask);
         setTagToStoredTask(storedEventTask, eventTask);
+
         return eventTask;
     }
 
@@ -153,6 +164,97 @@ public class Parser {
             String tag = storedTask.substring(indexOfTag);
             task.setTag(tag);
         }
+    }
+
+    /**
+     * Parses a find task input by identifying the keyword in the input.
+     *
+     * @param findTask The user's find command.
+     * @return The keyword in the command to be found in the list of tasks.
+     * @throws EmptyDescriptionException If the keyword is missing.
+     */
+    public static String parseFindTasks(String findTask) throws EmptyDescriptionException {
+        if (findTask.length() == 4) {
+            throw new EmptyDescriptionException("error");
+        }
+
+        assert (findTask.length() > 4);
+
+        return findTask.substring(5);
+    }
+
+    /**
+     * Parses a done task input by identifying the index specified by the user.
+     *
+     * @param doneTask The user's done command.
+     * @return The index of the task to be marked done.
+     * @throws EmptyDescriptionException If the index is not specified.
+     */
+    public static int parseDoneTasks(String doneTask) throws EmptyDescriptionException {
+        if (doneTask.length() == 4) {
+            throw new EmptyDescriptionException("error");
+        }
+
+        assert (doneTask.length() > 4);
+
+        char indexOfTask = doneTask.charAt(5);
+
+        return Integer.parseInt(String.valueOf(indexOfTask));
+    }
+
+    /**
+     * Parses a delete task input by identifying the index specified by the user.
+     *
+     * @param deleteTask The user's delete command.
+     * @return The index of the task to be deleted.
+     * @throws EmptyDescriptionException If the index is not specified.
+     */
+    public static int parseDeleteTasks(String deleteTask) throws EmptyDescriptionException {
+        if (deleteTask.length() == 6) {
+            throw new EmptyDescriptionException("error");
+        }
+
+        assert (deleteTask.length() > 6);
+
+        char taskIndex = deleteTask.charAt(7);
+
+        return Integer.parseInt(String.valueOf(taskIndex));
+    }
+
+    /**
+     * Parses a tag task input by identifying the index specified by the user.
+     *
+     * @param tagTask The user's tag command.
+     * @return The index of the task to be tagged.
+     * @throws EmptyDescriptionException If the index is not specified.
+     */
+    public static int parseTagTasksForIndexOfTask(String tagTask) throws EmptyDescriptionException {
+        if (tagTask.length() < 4) {
+            throw new EmptyDescriptionException("error");
+        }
+
+        assert (tagTask.length() > 4);
+
+        char indexOfTask = tagTask.charAt(4);
+
+        return Integer.parseInt(String.valueOf(indexOfTask));
+    }
+
+    /**
+     * Parses a tag task input by identifying the tag.
+     *
+     * @param tagTask The user's tag command.
+     * @return The tag for the task
+     * @throws EmptyDescriptionException If the tag is not specified.
+     */
+    public static String parseTagTasksForTag(String tagTask) throws EmptyDescriptionException {
+        if (tagTask.length() < 7) {
+            throw new EmptyDescriptionException("error");
+        }
+
+        assert (tagTask.length() > 7);
+
+        return tagTask.substring(6);
     }
 
     /**

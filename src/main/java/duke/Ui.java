@@ -40,8 +40,14 @@ public class Ui {
     }
 
     public String addTask(Task task) {
-        return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.",
-                task.toString(), TaskList.getTaskList().size());
+        int taskListSize = TaskList.getTaskList().size();
+        if (taskListSize == 1) {
+            return String.format("Got it. I've added this task:\n %s\nNow you have 1 task in the list.",
+                    task.toString());
+        } else {
+            return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.",
+                    task.toString(), taskListSize);
+        }
     }
 
     /**
@@ -65,37 +71,18 @@ public class Ui {
                 task.toString(), TaskList.getTaskList().size());
     }
 
-    public String getError(String e) {
-        return e;
-    }
-
     /**
      * UI message for the find command.
      *
-     * @param keyword The keyword to match tasks in the task list against.
-     * @return The list of tasks containing the keyword specified by the user.
+     * @param tasksWithKeywordList The list of tasks with the keyword specified.
+     * @return The UI message for the list of tasks containing the keyword specified by the user.
      */
-    public String findTask(String keyword) {
-        ArrayList<Task> list = TaskList.getTaskList();
-        if (list.size() == 0) {
+    public String findTask(String tasksWithKeywordList) {
+        if (tasksWithKeywordList.length() == 0) {
             return "You currently have no tasks!";
         } else {
-            String tasksWithKeywordList = "";
-            int index = 0;
-            for (Task task : list) {
-                if (task.getDescription().contains(keyword)) {
-                    index++;
-                    tasksWithKeywordList = tasksWithKeywordList + (index)
-                            + ". " + task.toString() + "\n";
-                }
-            }
             return "Here are the matching tasks in your list:\n" + tasksWithKeywordList;
         }
-
-    }
-
-    public void showLoadingError() {
-        System.out.println("Sorry! There was an error loading your tasks! Please try again!");
     }
 
     /**
@@ -108,6 +95,26 @@ public class Ui {
         return String.format("I've tagged this task as:\n %s\n",
                 taskToBeTagged.toString());
     }
+
+    public String getError(String e) {
+        return e;
+    }
+
+    public void showLoadingError() {
+        System.out.println("Sorry! There was an error loading your tasks! Please try again!");
+    }
+
+    /**
+     * Returns the error message for incorrect date and time input.
+     *
+     * @param message The DateTimeParseException error.
+     * @return The error message to the user indicating incorrect date and time input.
+     */
+    public String getDateTimeErrorMessage(String message) {
+        return "There was an error with the format of your command!\n" +
+                "Please enter the date as dd-MM-yyy along with the time as HHmm.";
+    }
+
 
     public String help() {
         return "Here are the commands you can enter to Duke:\n1. list: list all your tasks\n" +

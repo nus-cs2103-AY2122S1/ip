@@ -8,6 +8,7 @@ import duke.Ui;
 import duke.UnknownInputException;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -64,10 +65,12 @@ public class Duke {
                     System.out.println(ui.retrieveList());
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("done")) {
-                    System.out.println(commandHandler.handleDone(userCommand));
+                    int indexOfTaskToBeMarkedDone = Parser.parseDoneTasks(userCommand);
+                    System.out.println(commandHandler.handleDone(indexOfTaskToBeMarkedDone));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("delete")) {
-                    System.out.println(commandHandler.handleDelete(userCommand));
+                    int indexOfTaskToDelete = Parser.parseDeleteTasks(userCommand);
+                    System.out.println(commandHandler.handleDelete(indexOfTaskToDelete));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("todo")) {
                     Task todoTask = Parser.parseTodoTasks(userCommand);
@@ -82,15 +85,20 @@ public class Duke {
                     System.out.println(commandHandler.handleEvent(eventTask));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("find")) {
-                    System.out.println(commandHandler.handleFind(userCommand));
+                    String keyword = Parser.parseFindTasks(userCommand);
+                    System.out.println(commandHandler.handleFind(keyword));
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("tag")) {
-                    System.out.println(commandHandler.handleTag(userCommand));
+                    int indexOfTaskToBeTagged = Parser.parseTagTasksForIndexOfTask(userCommand);
+                    String tag = Parser.parseTagTasksForTag(userCommand);
+                    System.out.println(commandHandler.handleTag(indexOfTaskToBeTagged, tag));
                 } else if (userCommand.equals("help")) {
                     System.out.println(commandHandler.help());
                 } else {
                     throw new UnknownInputException("error");
                 }
+            } catch (DateTimeParseException e) {
+                System.out.println(ui.getDateTimeErrorMessage(e.getMessage()));
             } catch (DukeException e) {
                 System.out.println(ui.getError(e.getMessage()));
             }
@@ -109,10 +117,12 @@ public class Duke {
                 return ui.retrieveList();
             } else if (input.startsWith("done")) {
                 storage.saveTasksToFile();
-                return commandHandler.handleDone(input);
+                int indexOfTaskToBeMarkedDone = Parser.parseDoneTasks(input);
+                return commandHandler.handleDone(indexOfTaskToBeMarkedDone);
             } else if (input.startsWith("delete")) {
                 storage.saveTasksToFile();
-                return commandHandler.handleDelete(input);
+                int indexOfTaskToDelete = Parser.parseDeleteTasks(input);
+                return commandHandler.handleDelete(indexOfTaskToDelete);
             } else if (input.startsWith("todo")) {
                 storage.saveTasksToFile();
                 Task todoTask = Parser.parseTodoTasks(input);
@@ -127,16 +137,21 @@ public class Duke {
                 return commandHandler.handleEvent(eventTask);
             } else if (input.startsWith("find")) {
                 storage.saveTasksToFile();
-                return commandHandler.handleFind(input);
+                String keyword = Parser.parseFindTasks(input);
+                return commandHandler.handleFind(keyword);
             } else if (input.startsWith("tag")) {
                 storage.saveTasksToFile();
-                return commandHandler.handleTag(input);
+                int indexOfTaskToBeTagged = Parser.parseTagTasksForIndexOfTask(input);
+                String tag = Parser.parseTagTasksForTag(input);
+                return commandHandler.handleTag(indexOfTaskToBeTagged, tag);
             } else if (input.equals("help")) {
                 storage.saveTasksToFile();
                 return commandHandler.help();
             } else {
                 throw new UnknownInputException("error");
             }
+        } catch (DateTimeParseException e) {
+            return ui.getDateTimeErrorMessage(e.getMessage());
         } catch (DukeException e) {
             return ui.getError(e.getMessage());
         }
