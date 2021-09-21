@@ -1,4 +1,6 @@
 package duke;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 import duke.Task.TaskList;
@@ -9,14 +11,16 @@ import duke.Task.TaskList;
 public class Duke {
     /** Task list for an instance of duke*/
     private TaskList tasks = new TaskList();
-
+    private Storage storage = new Storage();
+    public Duke(){
+        storage.loadDataToTasks(tasks);
+    }
     /**
      * Start the application and the chatbot
      *
      */
     public void run() {
-        Storage storage = new Storage();
-        storage.loadDataToTasks(tasks);
+
         String userInput = "";
         Ui.displayGreeting();
         Scanner scanner = new Scanner(System.in);
@@ -27,6 +31,20 @@ public class Duke {
 
         }
         storage.saveTasksToStorage(tasks);
+    }
+
+    public String getResponse(String userInput){
+        PrintStream standardOut = System.out;
+        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+        System.setOut(new PrintStream(outputStreamCaptor));
+
+        Parser.handleInput(userInput, tasks);
+
+        String response = outputStreamCaptor.toString();
+        System.setOut(standardOut);
+        return response;
+
     }
     public static void main(String[] args) {
         new Duke().run();
