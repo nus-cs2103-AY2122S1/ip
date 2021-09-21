@@ -62,7 +62,7 @@ public class Duke {
                     System.out.println(ui.exit());
                     isExit = true;
                 } else if (userCommand.equals("list")) {
-                    System.out.println(ui.retrieveList());
+                    System.out.println(commandHandler.handleList());
                     storage.saveTasksToFile();
                 } else if (userCommand.startsWith("done")) {
                     int indexOfTaskToBeMarkedDone = Parser.parseDoneTasks(userCommand);
@@ -114,7 +114,7 @@ public class Duke {
                 return ui.exit();
             } else if (input.equals("list")) {
                 storage.saveTasksToFile();
-                return ui.retrieveList();
+                return commandHandler.handleList();
             } else if (input.startsWith("done")) {
                 storage.saveTasksToFile();
                 int indexOfTaskToBeMarkedDone = Parser.parseDoneTasks(input);

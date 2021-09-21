@@ -26,16 +26,11 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public String retrieveList() {
-        ArrayList<Task> list = TaskList.getTaskList();
-        if (list.size() == 0) {
+    public String retrieveList(String listOfTasks) {
+        if (listOfTasks.length() == 0) {
             return "You currently have no tasks!";
         } else {
-            String userList = "";
-            for (Task task : list) {
-                userList =  userList + (list.indexOf(task) + 1) + ". " + task.toString() + "\n";
-            }
-            return "Here are the tasks in your list:\n" + userList;
+            return "Here are the tasks in your list:\n" + listOfTasks;
         }
     }
 

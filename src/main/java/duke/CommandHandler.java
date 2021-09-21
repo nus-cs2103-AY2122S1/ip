@@ -122,6 +122,15 @@ public class CommandHandler {
         return ui.taggedTask(taskAtIndex);
     }
 
+    public String handleList() {
+        ArrayList<Task> list = TaskList.getTaskList();
+        String listOfTasks = "";
+        for (Task task : list) {
+            listOfTasks =  listOfTasks + (list.indexOf(task) + 1) + ". " + task.toString() + "\n";
+        }
+        return ui.retrieveList(listOfTasks);
+    }
+
     public String help() {
         return ui.help();
     }
