@@ -10,6 +10,8 @@ Duke frees your mind of having to remember things you need to do. It's,
 * easy to learn
 * SUPER FAST to use
 
+![GitHub Logo](/docs/Ui.png)
+
 ## Features 
 
 ### 1. Feature-AddNewTask
