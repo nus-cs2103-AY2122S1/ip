@@ -12,8 +12,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    private Captain captain = new Captain();
+    private static final String FILEPATH = "./data/taskdata.txt";
+    private Captain captain = new Captain(FILEPATH);
 
     @Override
     public void start(Stage stage) {

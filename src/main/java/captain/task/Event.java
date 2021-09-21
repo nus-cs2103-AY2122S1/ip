@@ -1,5 +1,8 @@
 package captain.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import captain.DukeException.MissingDescriptionException;
 
 /**
@@ -8,19 +11,19 @@ import captain.DukeException.MissingDescriptionException;
  * @author Adam Ho
  */
 public class Event extends Task {
-    protected String at;
+    protected LocalDate at;
 
     /**
      * Creates an event with the specified description and date.
      * @param description The task description.
      * @param at The date of event.
      */
-    public Event(String description, String at) throws MissingDescriptionException {
+    public Event(String description, LocalDate at) throws MissingDescriptionException {
         super(description);
         this.at = at;
     }
 
-    public String getAt() {
+    public LocalDate getAtDate() {
         return at;
     }
 
@@ -30,6 +33,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

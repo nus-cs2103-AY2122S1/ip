@@ -7,10 +7,15 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import captain.task.*;
+import captain.task.Deadline;
+import captain.task.Event;
+import captain.task.Task;
+import captain.task.TaskList;
+import captain.task.Todo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -56,7 +61,7 @@ public class Storage {
         } else {
             Event event = (Event) task;
             taskDetails = "E" + BAR + done + BAR + event.getDescription()
-                    + BAR + event.getAt() + "\n";
+                    + BAR + event.getAtDate().format(DateTimeFormatter.ofPattern("d/M/yyyy")) + "\n";
         }
         return taskDetails;
     }
@@ -89,7 +94,8 @@ public class Storage {
             LocalDate byDate = formatDate(taskFormat[3]);
             t = new Deadline(taskFormat[2], byDate);
         } else {
-            t = new Event(taskFormat[2], taskFormat[3]);
+            LocalDate atDate = formatDate(taskFormat[3]);
+            t = new Event(taskFormat[2], atDate);
         }
         t.setDone(taskFormat[1].equals("1"));
         return t;

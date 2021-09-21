@@ -55,8 +55,4 @@ public class TaskList {
     public void clearTaskList() {
         taskList.clear();
     }
-
-    public boolean containsTask(Task t) {
-        return taskList.contains(t);
-    }
 }

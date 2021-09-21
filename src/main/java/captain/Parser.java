@@ -62,7 +62,8 @@ public class Parser {
             return new AddCommand(new Deadline(taskDescriptions[0], date));
         case EVENT:
             taskDescriptions = getTaskDescriptions(userDescription, AT_SPECIFIER);
-            return new AddCommand(new Event(taskDescriptions[0], taskDescriptions[1]));
+            date = formatDate(taskDescriptions[1]);
+            return new AddCommand(new Event(taskDescriptions[0], date));
         case DONE:
             return new DoneCommand(toTaskIndex(userDescription));
         case DELETE:
