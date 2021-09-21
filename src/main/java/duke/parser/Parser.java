@@ -82,8 +82,7 @@ public class Parser {
      */
     private String checkDoAfterDescription(String des) {
         try {
-            String stringNumber
-                    = des.substring(des.lastIndexOf(' ') + 1);
+            String stringNumber = des.substring(des.lastIndexOf(' ') + 1);
             Integer.parseInt(stringNumber);
             return "doafter";
         } catch (NumberFormatException e) {
