@@ -20,8 +20,8 @@ public class MainWindow extends AnchorPane {
 
     private GUI gui;
 
-    private Image userImage = new Image("file:./DaUser.png");
-    private Image dukeImage = new Image("file:./DaDuke.png");
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private static final String WELCOME_MESSAGE = "Welcome! I am Dude.";
 

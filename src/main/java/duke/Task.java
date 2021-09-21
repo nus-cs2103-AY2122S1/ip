@@ -8,16 +8,32 @@ abstract public class Task implements Comparable<Task>{
     protected boolean isDone;
     protected char type;
 
+    /**
+     * Public constructor meant to be used by called by child classes to set
+     * the description field.
+     *
+     * @param description String containing the description of this task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.type = ' ';
     }
 
+    /**
+     * Getter method for the description of this task
+     *
+     * @return The description field of this Task
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * The toString method of this Task
+     *
+     * @return 
+     */
     @Override
     public String toString() {
         return "[" + this.type + "]" + (this.isDone ? "[x] " : "[ ] ") + this.description;
