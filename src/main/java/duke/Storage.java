@@ -16,7 +16,7 @@ public class Storage {
     /**
      * The filepath used to track where the data is being saved to.
      **/
-    private static final String FILE_LOCATION = "data\\duke.txt";
+    private static final String FILE_LOCATION = "data/duke.txt";
 
     /**
      * Constructor for Storage object.
@@ -98,12 +98,13 @@ public class Storage {
             return new TaskList(newList);
         } catch (FileNotFoundException e) {
             // Creating new parent directory if does not exist
-            File dukeFile = new File(FILE_LOCATION);
-            File parentDir = dukeFile.getParentFile();
+            File test = new File(FILE_LOCATION);
+            File parentDir = test.getParentFile();
             if (!parentDir.exists()) {
                 parentDir.mkdirs();
             }
-            System.out.println("Failed to create storage file: " + e.getMessage());
+            File dukeFile = new File(FILE_LOCATION);
+            writeFile();
             return new TaskList(new ArrayList<>());
         }
     }
