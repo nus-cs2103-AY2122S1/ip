@@ -1,7 +1,9 @@
 # User Guide
 This is a project template for a greenfield Java project.
 
-It's named after the Java mascot Duke. Given below are instructions on how to use it.
+It's named after the Java mascot Duke. Given below are instructions on how to use it. 
+
+You can download it from [Here](https://github.com/Kimowarui/ip/releases)
 
 ## Introduction
 Duke frees your mind of having to remember things you need to do. It's,
@@ -10,7 +12,7 @@ Duke frees your mind of having to remember things you need to do. It's,
 * easy to learn
 * SUPER FAST to use
 
-![GitHub Logo](/docs/Ui.png)
+![Ui](/docs/Ui.png)
 
 ## Features 
 
