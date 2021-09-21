@@ -1,37 +1,151 @@
-## Welcome to GitHub Pages
+# User Guide
 
-You can use the [editor on GitHub](https://github.com/sj1999-BIT/ip/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## Features 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Feature - Store history
 
-### Markdown
+Able to *store* previously inputs and *load* them upon next opening
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Feature - AddTask
 
-```markdown
-Syntax highlighted code block
+Able to *add* new task 
 
-# Header 1
-## Header 2
-### Header 3
+### Feature - DeleteTask
 
-- Bulleted
-- List
+Able to *delete* tasks that have been done
 
-1. Numbered
-2. List
+### Feature-prevent duplicate
 
-**Bold** and _Italic_ and `Code` text
+Able to *recognise* and *remove duplicated task* to prevent unnecessary task present in the note.
 
-[Link](url) and ![Image](src)
+
+
+## Usage
+
+### `Keyword` - Todo *input action param*
+
+### Expected outcome:
+
+Programs adds the *input action* to the a list object. Its
+recorded and available for subsequent action.
+
+### Description of the outcome.
+
+Message shows that the task has been record.
+Format [Type][isdone] input action
+Then shows how many existing task in the list
+
+```
+expected output
+
+Got it, I've added this task:
+	[T][] input action
+Now you have 1 tasks in the list.
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### `Keyword` - Deadline *input action param* /by *input date param*
 
-### Jekyll Themes
+### Expected outcome:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/sj1999-BIT/ip/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Programs adds the *input action* to the a list object. Its
+recorded and available for subsequent action.
 
-### Support or Contact
+### Description of the outcome.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Message shows that the task has been record.
+Format [Type][isdone] *input action* *date*
+Then shows how many existing task in the list
+
+```
+expected output
+
+Got it, I've added this task:
+	[D][] input action inpute date
+Now you have 1 tasks in the list.
+```
+### `Keyword` - Events *input action param* /at *input date param* *input day*
+
+### Expected outcome:
+
+Programs adds the *input action* to the a list object. Its
+recorded and available for subsequent action.
+
+### Description of the outcome.
+
+Message shows that the task has been record.
+Format [Type][isdone] *input action* *date* *day*
+Then shows how many existing task in the list
+
+```
+expected output
+
+Got it, I've added this task:
+	[D][] input action inpute date input day
+Now you have 1 tasks in the list.
+```
+
+### `Keyword` - list
+
+### Expected outcome:
+
+Programs displays a list of all the recorded task
+
+### Description of the outcome.
+
+A list of all the task in their displayed format
+
+```
+expected output
+
+1. [D][] input action inpute date
+```
+
+### `Keyword` - done *input index*
+
+### Expected outcome:
+
+The specific recorded task with the index will be
+labelled as done.
+
+### Description of the outcome.
+
+Specific task will have its second box crossed to indicate done.
+
+```
+expected output
+
+Nice! I've marked this task as done: [D][X] input action inpute date
+
+```
+### `Keyword` - delete *input index*
+
+### Expected outcome:
+
+The specific recorded task with the index will be
+removed.
+
+### Description of the outcome.
+
+Specific task will no longer be present in the list
+
+```
+expected output
+
+Now you have n tasks in the list. 
+```
+
+### `Keyword` - bye
+
+### Expected outcome:
+
+Player exits the progam. Current list will be saved for subsequent opening.
+
+### Description of the outcome.
+
+Duke wishes goodbye.
+
+```
+expected output
+
+bye. Hope to see you again soon!
+```
