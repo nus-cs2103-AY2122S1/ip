@@ -44,7 +44,9 @@ public class DeleteCommand extends Command {
                                 list += (j) + ". " + tasks.get(j).toString() + "\n";
                             }
                         }
-                        return tasks.delete(taskIndex) + list;
+                        return (tasks.size() == 1)
+                                ? tasks.delete(taskIndex)
+                                : tasks.delete(taskIndex)+ list;
                     } else {
                         return ui.textBox("You have entered an invalid task number. Fool.");
                     }

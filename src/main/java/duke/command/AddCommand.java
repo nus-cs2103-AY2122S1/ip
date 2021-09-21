@@ -6,6 +6,9 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 public class AddCommand extends Command {
 
     private Task task;
@@ -30,12 +33,16 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
-        String list = "";
-        tasks.add(task);
-        for (int j = 0; j < tasks.size(); j++) {
-            list += (j + 1) + ". " + tasks.get(j).toString() + "\n";
+        try {
+            String list = "";
+            tasks.add(task);
+            for (int j = 0; j < tasks.size(); j++) {
+                list += (j + 1) + ". " + tasks.get(j).toString() + "\n";
+            }
+            return ui.showAdd(task.toString(), tasks.size()) + list;
+        } catch (DateTimeParseException e) {
+            return Ui.showError("Your date/time format is wrong. Please follow the format DD/MM/YYYY HHMM.");
         }
-        return ui.showAdd(task.toString(), tasks.size()) + list;
     }
 
     @Override

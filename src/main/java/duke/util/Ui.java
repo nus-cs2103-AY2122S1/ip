@@ -58,7 +58,8 @@ public class Ui {
      * Shows a message when the TaskList is empty.
      */
     public String showEmptyList() {
-        return textBox("There are currently no tasks, fool.");
+        return textBox("There are currently no tasks, fool." +
+                "\n\nIf you don't know how to create new tasks, simply type in \"help\" and press enter.");
     }
 
     /**

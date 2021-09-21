@@ -53,8 +53,13 @@ public class TaskList {
         try {
             String taskString = (index + 1) + ". " + list.get(index).toString();
             list.remove(index);
-            return "Since you are so lazy, I've helped you delete this task:\n\n" + taskString +
-                    "\n\nGo do something useful with your life, like maybe some of your remaining tasks:";
+            if (list.size() == 0) {
+                return "Since you are so lazy, I've helped you delete this task:\n\n" + taskString +
+                        "\n\nCongratulations. You have completed all your tasks. Do you feel accomplished yet?";
+            } else {
+                return "Since you are so lazy, I've helped you delete this task:\n\n" + taskString +
+                        "\n\nGo do something useful with your life, like maybe some of your remaining tasks:";
+            }
         } catch (IndexOutOfBoundsException e) {
             return e.getMessage();
         }
