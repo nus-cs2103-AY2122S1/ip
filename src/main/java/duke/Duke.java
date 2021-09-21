@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,6 +34,8 @@ public class Duke extends Application {
     private TextField chatMessage;
     private Button startBot, sendMessage;
 
+    public Duke(){
+    }
     public void init() {
         ui = new Ui(this);
         storage = new Storage(filePath);

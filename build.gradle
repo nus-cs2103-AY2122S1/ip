@@ -3,16 +3,12 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.openjfx.javafxplugin' version '0.0.5'
-}
-
-repositories {
-    mavenCentral()
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.0'
 }
 
 test {
@@ -30,7 +26,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Main"
 }
 
 shadowJar {
@@ -50,6 +46,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.testng:testng:7.1.0'
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -68,4 +65,13 @@ dependencies {
 
 javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+mainClassName='duke.Main'
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

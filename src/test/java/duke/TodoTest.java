@@ -1,12 +1,12 @@
 package duke;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class TodoTest {
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         assertEquals("[T][ ] do assignment", new Todo("do assignment").toString());
     }
 }

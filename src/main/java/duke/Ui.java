@@ -25,9 +25,8 @@ public class Ui {
     }
 
     public void displayTaskRemoved(Task td, int ctr) {
-        ctr--;
         duke.showMessage("Noted. I've now removed this task: \n"
-                        + td + "Now you have "
+                        + td + "\nNow you have "
                         + ctr + " tasks in the list.", true);
     }
     public void displayTaskDone(Task td) {
