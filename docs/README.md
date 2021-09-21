@@ -4,38 +4,38 @@
 
 ### Screenshots:
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_1.png?raw=true" style="width:33%">
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_2.png?raw=true" style="width:33%"/>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_3.png?raw=true" style="width:33%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_1.png?raw=true" style="width:32%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_2.png?raw=true" style="width:32%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_3.png?raw=true" style="width:32%"/>
 
 </div>
 <br>
 Alice is a virtual assistant started off as Duke task manager before evolving in to her own form.
 
-This User Guide contains:
+## This User Guide contains:
 
 - **Features:**
 
     **Alice Start Page**
 
-    -   [Create, Open, Delete multiple save files for different occasions]()
-    -   [Navigating to different save files]()
+    -   [Create, Open, Delete multiple save files for different occasions](#create-open-delete-save-files-for-different-occasions-in-the-start-page)
+    -   [Navigating to different save files](#navigating-to-different-save-files-through-start-page)
 
     ---
-
+ 
     **Alice Chat Page**
 
-    -   [Add **Todo** task]()
-    -   [Add **event** task]()
-    -   [Add **deadline** task]()
-    -   [Mark task as done]()
-    -   [Delete task]()
-    -   [Search certain tasks using date to find upcoming task till that date]()
-    -   [Search certain tasks using "keywords"]()
-    -   [Teach Alice to learn how to respond to certain vocabulary or sentences]()
-    -   [Tell Alice to unlearn certain vocabulary or sentences]()
-    -   [Asking Alice to list out all the commands]()
-    -   [Saving file and continue editing other save files]()
+    -   [Add **Todo** task](#add-todo-task)
+    -   [Add **event** task](#add-event-task)
+    -   [Add **deadline** task](#add-deadline-task)
+    -   [Mark task as **done**](#mark-task-as-done)
+    -   [**Delete** task](#delete-task)
+    -   [Search certain tasks using **date** to find upcoming task till that date](#search-certain-tasks-using-date-to-find-upcoming-task-till-that-date)
+    -   [Search certain tasks using **"keywords"**](#search-certain-tasks-using-keywords)
+    -   [Teach Alice to **learn** how to respond to certain vocabulary or sentences](#teach-alice-to-learn-how-to-respond-to-certain-vocabulary-or-sentences)
+    -   [Tell Alice to **unlearn** certain vocabulary or sentences](#tell-alice-to-unlearn-certain-vocabulary-or-sentences)
+    -   [Asking Alice to **list** out all the commands](#asking-alice-to-list-out-all-the-commands)
+    -   [**Saving** file and continue editing other save files](#saving-file-and-continue-editing-other-save-files)
 
 ## **Features:**
 
@@ -67,11 +67,12 @@ To organize the task into different save file location so that the user can visu
 - Create save file for tasks to do with family
 - Create save file for tasks to do with different projects, or work from different modules
 
+[GO BACK TO THE TOP](#this-user-guide-contains)
 
 <div>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/create_file_demo.gif?raw=true" style="width:33%">
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/enter_file_demo.gif?raw=true" style="width:33%"/>
-    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/delete_file_demo.gif?raw=true" style="width:33%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/create_file_demo.gif?raw=true" style="width:32%">
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/enter_file_demo.gif?raw=true" style="width:32%"/>
+    <img align="center" src="https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/delete_file_demo.gif?raw=true" style="width:32%"/>
 </div>
 
 
@@ -98,6 +99,9 @@ To allow user to continue editing different save files without having to close t
 
 - Edit tasks in 'home' save file and then navigating back to start page before choosing a new save file to start editing 'school' save file
 - Edit tasks in 'home' save file and then navigating back to start page before creating a new save file of new tasks that user could suddenly think of
+  
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
 
 <div>
@@ -135,8 +139,13 @@ Therefore, user may consider to use this command to input task in which they hav
 
 `todo revise resume` will add a todo task to the list with description **'revise resume'**
 
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
+
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/todo_demo2.gif?raw=true)
+
+
 ---
 
 ### Add **event** task
@@ -160,6 +169,9 @@ will add an event to the list with description **'Jason Recital'** and the time 
 `event Interview with Stephanie /at 2021-10-21`
 
 will add an event to the list with description **'Interview with Stephanie'** and the time at **'Oct 21 2021'**
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/event_demo.gif?raw=true)
 ---
@@ -185,6 +197,8 @@ will add a deadline to the list with description **'finish CS2103T submission'**
 `deadline finish reading NO RULES RULES by REED HASTINGS /by 2021-10-30`
 
 will add a deadline to the list with description **'finish reading NO RULES RULES by REED HASTINGS'** with deadline on **'Oct 30 2021'**
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/deadline_demo2.gif?raw=true)
@@ -224,7 +238,11 @@ will mark task 2 as done
 1. [T][✔] do laundry
 2. [D][✔] finish CS2103T submission (by: Nov 17 2021)
 ```
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
+
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/done_demo2.gif?raw=true)
 ---
 
@@ -254,7 +272,11 @@ will delete the second task and shift the third task to index 2
 1. [T][✘] do laundry
 2. [E][✘] Jason Recital (at: Nov 8 2021)
 ```
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
+
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/delete_demo.gif?raw=true)
 ---
 
@@ -305,11 +327,14 @@ will filter out the event and deadline happening **after** Nov 11 2021
 2. [E][✘] Jason Recital (at: Nov 8 2021)
 3. [D][✘] Make a pull request - CS2103T (by: Nov 10 2021)
 ```
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
+
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/date_demo.gif?raw=true)
 ---
 
-### Search certain tasks using **"keyword"**
+### Search certain tasks using **keywords**
 
 **Format: `find <keyword>`**
 
@@ -336,7 +361,11 @@ will filter out other tasks that do not have matching keyword
 1. [D][✘] finish CS2103T submission (by: Nov 17 2021)
 2. [D][✘] Make a pull request - CS2103T (by: Nov 10 2021)
 ```
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
+
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/find_demo.gif?raw=true)
 ---
 
@@ -376,6 +405,8 @@ Alice will respond with
 
 `Hello Prof Damith! Isn't it a beautiful day~`
 
+[GO BACK TO THE TOP](#this-user-guide-contains)
+
 <br>
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/learn_demo.gif?raw=true)
 ---
@@ -400,6 +431,7 @@ Alice cannot unlearn the phrase which has the same spelling as the default comma
 
 will make Alice forget how to respond to **'say hi to prof'** and will respond that she doesn't know  how to respond to the given command instead
 
+[GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/unlearn_demo.gif?raw=true)
@@ -420,6 +452,8 @@ To remind the user of what they can do with Alice or ask her what she can do
 `commands` or `help` or `?`
 
 will have Alice list out all the possible commands
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/commands_demo.gif?raw=true)
@@ -444,6 +478,8 @@ The task list will not be saved unless the user use the command **`bye`** and ex
 `bye`
 
 will have Alice save the current task list in to the current save file and exit to Start Page
+
+[GO BACK TO THE TOP](#this-user-guide-contains)
 
 <br>
 ![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/bye_demo.gif?raw=true)
