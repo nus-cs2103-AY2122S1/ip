@@ -13,11 +13,7 @@ public class GUI {
         taskList = new TaskList(dataFile);
     }
 
-    public String getResponse(String s) {
-        return processInput(s);
-    }
-
-    private String processInput(String str) {
+    public String getResponse(String str) {
         assert !str.equals("");
         Task newTask = Parser.parseInput(str);
         if (newTask == null) {
@@ -44,7 +40,6 @@ public class GUI {
         } else {
             return taskList.add(newTask);
         }
-
     }
-    
+
 }
