@@ -28,7 +28,8 @@ public class Main {
     }
 }
 ```
-![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/enter_file_demo.gif?raw=true)
+![alice_0.03](https://github.com/kanjitp/ip/blob/master/src/main/resources/screenshots/alice_0.03_2_demo.gif?raw=true)
 
 ## Acknowledgement
 - DialogBox model by: [se-education.org](https://se-education.org/guides/tutorials/javaFx.html)
