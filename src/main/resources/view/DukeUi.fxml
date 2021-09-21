@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0"
+            prefWidth="450.0" style="-fx-background-color: #EAEDF1;" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="duke.controller.DukeController">
+    <children>
+        <ScrollPane fx:id="chatPane" layoutX="60.0" layoutY="40.0" prefHeight="470.0" prefWidth="390.0"
+                    style="-fx-background-color: #EAEDF1 #EAEDF1;" fitToWidth="true" vbarPolicy="NEVER" pannable="true">
+            <content>
+                <VBox>
+                    <VBox fx:id="dialogContainer"/>
+                    <padding>
+                        <Insets bottom="10.0"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Pane prefHeight="550.0" prefWidth="60.0" style="-fx-background-color: #10232A;">
+            <children>
+                <Line endX="13.0" layoutX="32.0" layoutY="19.0" startX="-18.0" stroke="WHITE" strokeLineCap="ROUND"
+                      strokeWidth="3.0"/>
+                <Pane layoutY="8.0" prefHeight="40.0" prefWidth="60.0"/>
+                <Line endX="13.0" layoutX="32.0" layoutY="28.0" startX="-18.0" stroke="WHITE" strokeLineCap="ROUND"
+                      strokeWidth="3.0"/>
+                <Line endX="13.0" layoutX="32.0" layoutY="37.0" startX="-18.0" stroke="WHITE" strokeLineCap="ROUND"
+                      strokeWidth="3.0"/>
+            </children>
+        </Pane>
+        <Separator layoutX="60.0" layoutY="40.0" prefHeight="3.0" prefWidth="390.0"/>
+        <Label layoutX="70.0" layoutY="10.0" text="HolmesJJ の Duke">
+            <font>
+                <Font name="System Bold" size="15.0"/>
+            </font>
+        </Label>
+        <Label fx:id="comingTasks" layoutX="250.0" layoutY="10.0" text="0 coming task in 3 hours!"
+               style="-fx-text-fill: red">
+            <font>
+                <Font name="System Bold" size="15.0"/>
+            </font>
+        </Label>
+        <Pane layoutX="60.0" layoutY="510.0" prefHeight="40.0" prefWidth="390.0" style="-fx-background-color: #FFFFFF;">
+            <children>
+                <ImageView fx:id="ivSend" fitHeight="25.0" fitWidth="25.0" layoutX="350.0" layoutY="8.0"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/send.png"/>
+                    </image>
+                </ImageView>
+                <TextField fx:id="tfInput" layoutX="10.0" layoutY="5.0" prefHeight="30.0" prefWidth="320.0"
+                           promptText="Type your command..." disable="true"
+                           style="-fx-background-color: -fx-control-inner-background;">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </TextField>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
