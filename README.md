@@ -10,16 +10,16 @@ Alice is a virtual assistant started off as Duke task manager before evolving in
 
 ## Features
 
-- [X] Create local save files location for alice.Alice to remember the task
-- [X] Fetch certain deadlines and other tasks using the yyyy-MM-dd format
-- [X] Fetch certain deadlines and other tasks using "keywords"
-- [X] GUI 
+- [X] Create local save files location for Alice to remember the task
+- [X] Fetch certain deadlines, events and other tasks using the yyyy-MM-dd format
+- [X] Fetch certain deadlines, events and other tasks using "keywords"
+- [X] Customize your Alice by teaching her your own vocabulary
+- [X] GUI (now enhanced!)
 - [x] Create, Save, Delete save files
-- [ ] Integration with Website (Coming Soon)
 
 > Let's make a slight change to create big difference
 
-alice.Alice is aimed to be implmeneted into a website in the future with 
+Alice is aimed to be implmeneted into a website in the future with 
 continuously improving UI, UX, and backend.
 ```java
 public class Main {
