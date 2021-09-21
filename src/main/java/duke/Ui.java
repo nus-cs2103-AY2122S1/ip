@@ -10,37 +10,22 @@ public class Ui {
     /**
      * Method provides message for starting the application.
      */
-    public void start() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________"
-                + "________________________________");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("_____________________________"
-                + "_______________________________");
+    public String start() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Method provides message for ending the application.
      */
-    public void end() {
-        System.out.println("    ________________________________"
-                + "____________________________");
-        System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println("    ______________________________"
-                + "______________________________");
+    public static String end() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Method provides message for adding a task.
      */
-    public void addTaskMessage() {
-        System.out.println("     Got it. I've added this task:");
+    public String addTaskMessage() {
+        return "Got it. I've added this task:";
     }
 
     /**
@@ -48,10 +33,9 @@ public class Ui {
      *
      * @param count represents number of tasks
      */
-    public void printNumberOfTasks(int count) {
-        System.out.println("     Now you have " + count
-                + " task" + ((count > 1) ? "s" : "") + " in the list.");
-
+    public String printNumberOfTasks(int count) {
+        return "     Now you have " + count
+                + " task" + ((count > 1) ? "s" : "") + " in the list.";
     }
 
     /**
@@ -59,53 +43,59 @@ public class Ui {
      *
      * @param currTask current task
      */
-    public void printCurrentTask(Task currTask) {
-        System.out.println("       " + currTask.toString());
+    public String printCurrentTask(Task currTask) {
+        return "       " + currTask.toString();
     }
 
     /**
      * Method provides message for listing tasks.
      */
-    public void listTaskMessage() {
-        System.out.println("     Here are the tasks in your list:");
+    public String listTaskMessage() {
+        return "Here are the tasks in your list:";
     }
 
     /**
-     * Method provides message for listing each task.
+     * Method provides message for listing all tasks.
      *
      * @param xs list of tasks
-     * @param a index of task
+     * @param count number of tasks
      */
-    public void listEachTask(ArrayList<Task> xs, int a) {
-        System.out.println("     " + (a + 1) + ". " + xs.get(a).toString());
+    public String listAllTasks(ArrayList<Task> xs, int count) {
+        String tasksAsString = "";
+        int a = 0;
+        while (a < count) {
+            tasksAsString = tasksAsString + (a + 1) + ". " + xs.get(a).toString() + "\n";
+            a = a + 1;
+        }
+        return tasksAsString;
     }
 
     /**
      * Method provides message for invalid input.
      */
-    public void printInvalidInput() {
-        System.out.println("    Invalid Input. Please try again.");
+    public String printInvalidInput() {
+        return "Invalid Input. Please try again.";
     }
 
     /**
      * Method provides message for invalid task number.
      */
-    public void printInvalidTaskNumber() {
-        System.out.println("     Invalid task number. Please try again.");
+    public String printInvalidTaskNumber() {
+        return "Invalid task number. Please try again.";
     }
 
     /**
      * Method provides message for completing task.
      */
-    public void printDoneMessage() {
-        System.out.println("     Nice! I've marked this task as done!");
+    public String printDoneMessage() {
+        return "Nice! I've marked this task as done!";
     }
 
     /**
      * Method provides message for deleting task.
      */
-    public void printDeletedMessage() {
-        System.out.println("     Noted. I've removed this task:");
+    public String printDeletedMessage() {
+        return "Noted. I've removed this task:";
     }
 
     /**
@@ -113,10 +103,12 @@ public class Ui {
      *
      * @param similarTasks represents arraylist with common tasks
      */
-    public void printSimilarTasks(ArrayList<String> similarTasks) {
+    public String printSimilarTasks(ArrayList<String> similarTasks) {
+        String similarTasksAsString = "";
         for (int i = 0; i < similarTasks.size(); i++) {
-            System.out.println(similarTasks.get(i));
+            similarTasksAsString = similarTasksAsString + similarTasks.get(i) + "\n";
         }
+        return  similarTasksAsString;
     }
 
 }

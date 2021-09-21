@@ -42,27 +42,23 @@ public class ListOfTasks {
      * This method manages adding a task.
      *
      * @param information represents the information regarding task to be added
+     * @return the text for when the task is added
      */
-    public void addTask(String information) {
-        ui.addTaskMessage();
+    public String addTask(String information) {
+        int oldCount = count;
         information = removeVal(information, "todo");
         tasks.add(count, new ToDo(information, "TODO"));
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "TODO");
-        ui.printCurrentTask(tasks.get(count));
         count++;
-        ui.printNumberOfTasks(count);
+        return ui.addTaskMessage() + "\n" + ui.printCurrentTask(tasks.get(oldCount))
+                + "\n"+ ui.printNumberOfTasks(count);
     }
 
     /**
      * This method manages listing out the tasks.
      */
-    public void listOut() {
-        ui.listTaskMessage();
-        int a = 0;
-        while (a < count) {
-            ui.listEachTask(tasks, a);
-            a = a + 1;
-        }
+    public String listOut() {
+        return ui.listTaskMessage() + "\n" + ui.listAllTasks(tasks,count);
     }
 
     /**
@@ -70,7 +66,7 @@ public class ListOfTasks {
      *
      * @param command represents command given by user to mark a task as done
      */
-    public void markDone(String command) {
+    public String markDone(String command) {
         try {
             command = removeVal(command, "done");
             int a;
@@ -79,13 +75,12 @@ public class ListOfTasks {
             if (a < count && a >= 0) {
                 this.tasks.get(a).markDone();
                 CompilationOfFiles.updateFile(this.tasks);
-                ui.printDoneMessage();
-                ui.printCurrentTask(this.tasks.get(a));
+                return ui.printDoneMessage() + "\n" + ui.printCurrentTask(this.tasks.get(a));
             } else {
-                ui.printInvalidTaskNumber();
+                return ui.printInvalidTaskNumber();
             }
         } catch (NumberFormatException e) {
-            ui.printInvalidTaskNumber();
+            return ui.printInvalidTaskNumber();
         }
     }
 
@@ -94,7 +89,7 @@ public class ListOfTasks {
      *
      * @param command represents command given by user to delete a task.
      */
-    public void delete(String command) {
+    public String delete(String command) {
         try {
             command = removeVal(command, "delete");
             int a;
@@ -104,15 +99,14 @@ public class ListOfTasks {
             if (a < count && a >= 0) {
                 Task deletedVal = this.tasks.remove(a);
                 CompilationOfFiles.updateFile(this.tasks);
-                ui.printDeletedMessage();
-                System.out.println("       " + deletedVal.toString());
                 count--;
-                ui.printNumberOfTasks(count);
+                return ui.printDeletedMessage() + "\n" + deletedVal.toString()
+                        + "\n" + ui.printNumberOfTasks(count);
             } else {
-                ui.printInvalidTaskNumber();
+                return ui.printInvalidTaskNumber();
             }
         } catch (NumberFormatException e) {
-            ui.printInvalidTaskNumber();
+            return ui.printInvalidTaskNumber();
         }
     }
 
@@ -136,13 +130,11 @@ public class ListOfTasks {
      *
      * @param information represents information pertaining event.
      */
-    public void addEvent(String information) {
-
+    public String addEvent(String information) {
+        int oldCount = count;
         if (!information.contains("/at")) {
-            ui.printInvalidInput();
-            return;
+            return ui.printInvalidInput();
         }
-        ui.addTaskMessage();
 
         information = removeVal(information, "event");
         String[] moreInformation = information.split("/at", 2);
@@ -150,9 +142,10 @@ public class ListOfTasks {
         this.tasks.add(count, new Event(moreInformation[0],
                 moreInformation[1].strip(), "EVENT"));
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "EVENT");
-        ui.printCurrentTask(this.tasks.get(count));
         count = count + 1;
-        ui.printNumberOfTasks(count);
+        return ui.addTaskMessage()
+        + "\n" + ui.printCurrentTask(this.tasks.get(oldCount))
+        + "\n" +  ui.printNumberOfTasks(count);
     }
 
     /**
@@ -160,11 +153,10 @@ public class ListOfTasks {
      *
      * @param information represents information pertaining deadline.
      */
-    public void addDeadline(String information) {
-
+    public String addDeadline(String information) {
+        int oldCount = count;
         if (!information.contains("/by")) {
-            ui.printInvalidInput();
-            return;
+            return ui.printInvalidInput();
         }
 
         information = removeVal(information, "deadline");
@@ -173,10 +165,10 @@ public class ListOfTasks {
         this.tasks.add(count, new Deadline(moreInformation2[0],
                 moreInformation2[1].strip(), "DEADLINE"));
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "DEADLINE");
-        System.out.println("     Got it. I've added this task:");
-        ui.printCurrentTask(this.tasks.get(count));
         count = count + 1;
-        ui.printNumberOfTasks(count);
+        return ui.addTaskMessage()
+                + "\n" + ui.printCurrentTask(this.tasks.get(oldCount))
+                + "\n" +  ui.printNumberOfTasks(count);
     }
     /**
      * This method manages listing out similar tasks.
@@ -184,7 +176,7 @@ public class ListOfTasks {
      * @param searchString represents information we
      *                     are using to find similar tasks.
      */
-    public void findSimilarTasks(String searchString) {
+    public String findSimilarTasks(String searchString) {
         searchString = removeVal(searchString, "find");
         ArrayList<String> similarTasks = new ArrayList<String>();
         similarTasks.add("\t Here are the matching tasks in your list:");
@@ -196,8 +188,7 @@ public class ListOfTasks {
                 index++;
             }
         }
-        System.out.println(searchString);
-        ui.printSimilarTasks(similarTasks);
+        return ui.printSimilarTasks(similarTasks);
     }
 
 
