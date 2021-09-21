@@ -99,7 +99,7 @@ public class Parser {
             throw new DukeException("Sorry, no such task of index " + taskIndex + ".");
         }
         Task taskToSetPriority = this.tasks.get(taskIndex - 1);
-        taskToSetPriority.setPriority(priorityToSet);
+        taskToSetPriority.setPriority(priorityToSet.toUpperCase());
         return "Nice! I've marked this task as " + taskToSetPriority.getPriority()
                 + " priority :\n  " + taskToSetPriority;
     }

@@ -66,13 +66,13 @@ public abstract class Task {
      */
     public void setPriority(String priority) throws DukeException {
         switch (priority) {
-        case "low":
+        case "LOW":
             this.priority = Priority.LOW;
             break;
-        case "medium":
+        case "MEDIUM":
             this.priority = Priority.MEDIUM;
             break;
-        case "high":
+        case "HIGH":
             this.priority = Priority.HIGH;
             break;
         default:

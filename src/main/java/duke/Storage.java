@@ -73,7 +73,7 @@ public class Storage {
                 if (doneStatus.equals("1")) {
                     importedTask.markAsDone();
                 }
-                importedTask.setPriority(priority.toLowerCase());
+                importedTask.setPriority(priority);
                 tasks.add(importedTask);
             }
             fileReader.close();
