@@ -11,6 +11,7 @@ import duke.Duke;
 /**
  * A GUI for Duke using FXML.
  */
+//Class code reused from JavaFX tutorial of this module https://se-education.org/guides/tutorials/javaFx.html
 public class Main extends Application {
 
     private Duke duke = new Duke();
