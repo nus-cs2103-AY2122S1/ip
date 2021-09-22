@@ -10,27 +10,12 @@ import duke.Task.TaskList;
  */
 public class Duke {
     /** Task list for an instance of duke*/
-    private TaskList tasks = new TaskList();
-    private Storage storage = new Storage();
+    private TaskList tasks;
+    private Storage storage;
     public Duke(){
+        this.tasks = new TaskList();
+        this.storage = new Storage();
         storage.loadDataToTasks(tasks);
-    }
-    /**
-     * Start the application and the chatbot in the commandline.
-     *
-     */
-    public void run() {
-
-        String userInput = "";
-        Ui.displayGreeting();
-        Scanner scanner = new Scanner(System.in);
-        userInput = Ui.takeInput();
-        while(!userInput.equals("bye")) {
-            Parser.handleInput(userInput, tasks);
-            userInput = Ui.takeInput();
-
-        }
-        storage.saveTasksToStorage(tasks);
     }
 
     public String getResponse(String userInput){
@@ -46,8 +31,5 @@ public class Duke {
         storage.saveTasksToStorage(tasks);
         return response;
 
-    }
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

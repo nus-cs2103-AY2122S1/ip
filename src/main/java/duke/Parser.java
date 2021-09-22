@@ -34,7 +34,9 @@ public class Parser {
             }
 
         } else if (userInput.startsWith("delete")) {
-            int id = Integer.parseInt(userInput.substring(7));
+            int DELETE_CHARACTER_LENGTH = 6;
+
+            int id = Integer.parseInt(userInput.substring(DELETE_CHARACTER_LENGTH).trim());
 
             try {
                 Task removedTask = tasks.getTaskById(id - 1);
@@ -44,6 +46,7 @@ public class Parser {
                 Ui.displayErrorMessage(e);
             }
         } else if(userInput.startsWith("find")) {
+            int FIND_CHARACTER_LENGTH = 4;
             String keyword = userInput.substring(5);
             keyword = keyword.trim();
             try {
@@ -81,7 +84,8 @@ public class Parser {
     public static Task handleTaskInput(String userInput) throws DukeException{
         assert userInput != null : "should have user Input";
         if(userInput.startsWith("todo")) {
-            int id = userInput.indexOf("todo") + 4;
+            int TODO_COMMAND_LENGTH = 4;
+            int id = userInput.indexOf("todo") + TODO_COMMAND_LENGTH;
             String task = userInput.substring(id);
             if(task.replaceAll("\\s+","").equals("")){
                 //if remaining string is whitespace or empty
@@ -91,11 +95,13 @@ public class Parser {
         } else if(userInput.startsWith("deadline")) {
             int start_id = userInput.indexOf("deadline");
             int task_id = userInput.indexOf("/by");
+            int DEADLINE_COMMAND_LENGTH = 9;
+            int BY_SPECIFIER_LENGTH = 3;
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /by !");
             }
-            String task = userInput.substring(start_id + 9, task_id);
-            String date = userInput.substring(task_id + 3);
+            String task = userInput.substring(start_id + DEADLINE_COMMAND_LENGTH, task_id);
+            String date = userInput.substring(task_id + BY_SPECIFIER_LENGTH);
 
             if(task.replaceAll("\\s+","").equals("")){
                 //if remaining string is whitespace or empty
@@ -109,11 +115,13 @@ public class Parser {
         } else if(userInput.startsWith("event")) {
             int start_id = userInput.indexOf("event");
             int task_id = userInput.indexOf("/at");
+            int EVENT_COMMAND_LENGTH = 6;
+            int AT_SPECIFIER_LENGTH = 3;
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /at !");
             }
-            String task = userInput.substring(start_id + 6, task_id);
-            String date = userInput.substring(task_id + 3);
+            String task = userInput.substring(start_id + EVENT_COMMAND_LENGTH, task_id);
+            String date = userInput.substring(task_id + AT_SPECIFIER_LENGTH);
 
             return new Event(task, false, LocalDate.parse(date.trim()));
         } else {
