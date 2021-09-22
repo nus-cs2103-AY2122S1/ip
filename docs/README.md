@@ -27,7 +27,7 @@
 3. Copy the file to the folder you want to use as the home folder for you Duke.
 4. Run `java -jar duke.jar` in the terminal at the folder. The GUI should appear and look like something below
    after a few commands.  
-   ![QuickStart of Duke](https://github.com/lizchow/ip/blob/master/docs/QuickStart.png)
+   ![QuickStart of Duke](../docs/QuickStart.png)
 5. Type in some command in the input box and press Enter. Here are some example commands:
    - `list`: List all the tasks
    - `todo try app` Add a Todo task with description `try app`
