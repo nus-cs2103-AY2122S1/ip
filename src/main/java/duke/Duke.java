@@ -37,6 +37,7 @@ public class Duke {
      */
     public void respond(String input) {
         Command command = Parser.parse(input);
+        assert command != null;
         command.execute(taskList, ui);
     }
 
