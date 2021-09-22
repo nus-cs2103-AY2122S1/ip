@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * or without one to start from scratch with an empty TaskList
  *
  * Implements 3 getter methods getList(), getSize() and getTask(index)
- * and 4 other methods add(task), delete(index), markDone(index) and printAllTasks()
+ * and 4 other methods add(task), delete(index), markDone(index) and returnAllTasks()
  */
 public class TaskList{
     //contains the list of tasks and operations to the list.
@@ -50,11 +50,18 @@ public class TaskList{
         this.tasks.get(index).setDone();
     }
 
-    //print all tasks, used for "list" command.
-    public void printAllTasks() {
+    /**
+     * <code>returnAllTasks()</code> returns a response string of all tasks in the current TaskList.
+     *
+     * @return output string of all tasks in the current TaskList concatenated together.
+     */
+    public String returnAllTasks() {
+        String output = "";
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println(this.tasks.get(i));
+            output += this.tasks.get(i).toString();
+            output += "\n";
         }
+        return output;
     }
 
 }

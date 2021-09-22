@@ -13,44 +13,54 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * <code>Parser</code> class contains main bot logic to parse user commands
- * Has a ui attribute to print out specific messages according to user command.
- * parseCommand(input,list) is the sole method of the class.
+ * The constructor does not take in any parameters, and the Storage and taskList
+ * attributes are initialised automatically upon creation.
+ *
+ * Parser contains several backend methods such as deleteTask(int index) or makeDeadline(int index)
+ * for specific user commands/inputs
  */
 
 public class Parser{
 
     private final String FILEPATH = "./duke.txt";
     private final Storage storage = new Storage(FILEPATH);
+    private final TaskList tasks = new TaskList(storage.load());
 
-    private TaskList tasks = new TaskList(storage.load());
-
-    public Parser(){
-    }
-
-    private String sayBye(){
-        return "Bye! *Poof!*";
-    }
-
+    /**
+     * <code>help()</code> shows a list of usable commands that the user can enter into the bot.
+     *
+     * @return helpDialog, a string which shows the list of possible user commands
+     */
     private String help(){
 
-        String dialog = "I'm Mr Meeseeks look at me! :)\n"
+        String helpDialog = "I'm Mr Meeseeks look at me! :)\n"
                 + "Type in \"todo\", \"deadline\" or \"event\" and I will keep track of a task!\n"
                 + "Type \"list\" to show all tasks so far\n"
                 + "Type \"done\" to mark a task as done\n"
                 + "Type \"find\" to search for a task by keywords\n"
                 + "Type \"bye\" to exit";
 
-        return dialog;
+        return helpDialog;
     }
-
+    /**
+     * <code>list()</code> reads the current TaskList and shows a list of tasks the user has so far.
+     *
+     * @return listDialog, a string which shows the current list of tasks
+     */
     private String list(){
-        String dialog = "Okay! Here's a list of your tasks so far:\n";
-        for (int i = 0; i < tasks.getSize(); i++){
-            dialog += tasks.getTask(i).toString() + "\n";
-        }
-        return dialog;
+        String listDialog = "Okay! Here's a list of your tasks so far:\n";
+        listDialog += tasks.returnAllTasks();
+        return listDialog;
     }
 
+    /**
+     * <code>markTaskAsDone(String input)</code> marks a task at a specific index as done
+     *
+     * @param input input string in the GUI, should contain the index for the task to be marked as done
+     *
+     * @return a dialog string showing the task marked as done,
+     * shows an error message if there are no tasks or task number is invalid.
+     */
     private String markTaskAsDone(String input){
 
         if (tasks.getSize() == 0) {
@@ -68,13 +78,20 @@ public class Parser{
         }
 
     }
-
+    /**
+     * <code>deleteTask(String input)</code> deletes a task at a specific index
+     *
+     * @param input input string in the GUI, should contain the index for the task to be deleted
+     *
+     * @return a dialog string showing the task that got deleted,
+     * shows an error message if there are no tasks or task number is invalid.
+     */
     private String deleteTask(String input){
         if (tasks.getSize() == 0) {
             return "Oops! There are no tasks to delete...";
         }
         try {
-            int index = Integer.parseInt(input.substring(8));
+            int index = Integer.parseInt(input.substring(7));
             String deletedTask = tasks.getTask(index-1).toString();
             tasks.delete(index-1);
             storage.save(tasks.getList());
@@ -86,6 +103,13 @@ public class Parser{
         }
     }
 
+    /**
+     * <code>makeToDo(String input)</code> creates a ToDo task from user input
+     *
+     * @param input input string in the GUI, should contain a description for the new todo task
+     * @return a dialog string showing the new todo task created,
+     * shows an error message if there is no description in the input.
+     */
     private String makeToDo(String input){
         try {
             String description = input.substring(5);
@@ -100,6 +124,15 @@ public class Parser{
         }
     }
 
+    /**
+     * <code>makeDeadline(String input)</code> creates a Deadline task from user input
+     *
+     * @param input input string in the GUI, should contain a description,
+     * as well as a Date and Time for the new Deadline task
+     *
+     * @return a dialog string showing the new Deadline task created,
+     * shows an error message if there is no description in the input or the date/time is invalid
+     */
     private String makeDeadline(String input){
         int endIndex = input.length()-1;
 
@@ -125,6 +158,16 @@ public class Parser{
 
     }
 
+    /**
+     * <code>makeEvent(String input)</code> creates an Event task from user input
+     *
+     * @param input input string in the GUI, should contain a description,
+     * a Date, start Time and end Time for the new Event task
+     *
+     * @return a dialog string showing the new Event task created,
+     * shows an error message if there is no description in the input or the date/time strings are invalid
+     */
+
     private String makeEvent(String input){
         int endIndex = input.length()-1;
 
@@ -132,10 +175,6 @@ public class Parser{
             String endTimeString = input.substring(endIndex-4);
             String startTimeString = input.substring(endIndex-10,endIndex-5);
             String dateString = input.substring(endIndex-21, endIndex-11);
-
-            System.out.println(endTimeString);
-            System.out.println(startTimeString);
-            System.out.println(dateString);
 
             LocalTime endTime = LocalTime.from(DateTimeFormatter.ISO_LOCAL_TIME.parse(endTimeString));
             LocalTime startTime = LocalTime.from(DateTimeFormatter.ISO_LOCAL_TIME.parse(startTimeString));
@@ -155,13 +194,29 @@ public class Parser{
         }
     }
 
+    /**
+     * <code>findTask(String input)</code> finds all tasks which match a target description in the input
+     *
+     * @param input input string in the GUI, should contain a target description for the method to search for
+     *
+     * @return a dialog string showing all tasks with description that match what the user keyed in,
+     * shows an error message if there is no description in the input.
+     */
+
     private String findTask(String input){
         if (tasks.getSize() == 0) {
             return "Oops! There are no tasks to search for.";
         }
 
-        String target = input.substring(5);
-        String output = "Ok! Here are the tasks that match your query: " + target + "\n";
+        String target;
+
+        try {
+            target = input.substring(5);
+        } catch(Exception e){
+            return "Oops! Please enter a target description for me to find";
+        }
+
+        String output = "Ok! Here are the tasks that match your query description: \"" + target + "\"\n";
 
         for (int i = 0; i < tasks.getSize(); i++){
             Task task = tasks.getTask(i);
@@ -174,18 +229,18 @@ public class Parser{
     }
 
     /**
-     * Takes a user input command string and processes it
-     * Updates the referenced input TaskList where applicable
-     * Prints invalidInput if input is not a recognised command
+     * Takes in an input string and processes it based on the command type (first word in the string)
+     * Shows an error message if the command type is not recognised.
      *
-     * @param input input String which corresponds to a user command
+     * @param input input String which corresponds to a user command,
+     * plus other info which will be used in the backend methods
+     *
+     * @return string which shows an update of the program state and will be shown to the user in the GUI
      */
 
     public String parseCommand(String input) {
 
-        if (input.equals("bye")) {
-            return sayBye();
-        } else if (input.equals("help")||input.equals("start")) {
+        if (input.equals("help")||input.equals("start")) {
             return help();
         } else if (input.equals("list")) {
             return list();
