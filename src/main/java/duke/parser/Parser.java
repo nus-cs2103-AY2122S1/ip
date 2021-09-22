@@ -53,9 +53,12 @@ public class Parser{
 
     private String markTaskAsDone(String input){
 
-        if (tasks.getSize() == 0) {
+        try{
+            assert tasks.getSize() > 0;
+        } catch (AssertionError e){
             return "Oops! There are no tasks to mark as done...";
         }
+
         try {
             int index = Integer.parseInt(input.substring(5));
             tasks.markDone(index-1);
@@ -70,7 +73,9 @@ public class Parser{
     }
 
     private String deleteTask(String input){
-        if (tasks.getSize() == 0) {
+        try{
+            assert tasks.getSize() > 0;
+        } catch (AssertionError e){
             return "Oops! There are no tasks to delete...";
         }
         try {
@@ -156,8 +161,10 @@ public class Parser{
     }
 
     private String findTask(String input){
-        if (tasks.getSize() == 0) {
-            return "Oops! There are no tasks to search for.";
+        try{
+            assert tasks.getSize() > 0;
+        } catch (AssertionError e){
+            return "Oops! There are no tasks to search for...";
         }
 
         String target = input.substring(5);
