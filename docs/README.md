@@ -20,28 +20,45 @@
 3. Double click on the .jar file provided. 
 4. If double clicking does not work, open a terminal at the directory containing the duke.jar file and run `java -jar duke.jar`.
 
+## Usage
+
 ### Adding tasks
 
 To add a task, enter `task_type` followed by the arguments. Further details are specified below.
 
 #### ToDo tasks
 
-ToDo tasks are specified simply by its textual description. Simply enter `todo description`.
+ToDo tasks are specified simply by its textual description. Simply enter 
 
-## Usage
+`todo {description}`.
 
-### `Keyword` - Describe action
+#### DeadLine tasks
 
-Describe the action and its outcome.
+DeadLine tasks are specified by a textual description field as well as a deadline, as follows : 
 
-Example of usage: 
+`deadline {description} /by {deadline}`
 
-`keyword (optional arguments)`
+#### Event tasks
 
-Expected outcome:
+Event tasks are specified by a textual description field as well as a time, as follows : 
 
-Description of the outcome.
+`event {description} /at {time}`
 
-```
-expected output
-```
+### Date format parsing 
+
+
+### Viewing tasks
+
+
+### Saving tasks
+
+
+### Marking tasks as done
+
+
+### Searchiing for task by keyword
+
+
+### Deleting tasks
+
+
