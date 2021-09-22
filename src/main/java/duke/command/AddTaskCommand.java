@@ -15,7 +15,14 @@ import duke.task.ToDo;
 
 public class AddTaskCommand extends Command {
 
-    private DateTimeFormatter formatFromInput = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    private final DateTimeFormatter FORMAT_FROM_INPUT = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+    private final String TODO_NAME = "todo";
+    private final String DEADLINE_NAME = "deadline";
+    private final String EVENT_NAME = "event";
+
+    private final String ERROR_MESSAGE_WRONG_DATE_FORMAT = "Please write the date in this format: dd/MM/yyyy";
+    
 
     /**
      * Constructor for class AddTaskCommand
@@ -38,12 +45,19 @@ public class AddTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
-        if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("t")) {
-            addTodo(tasks, ui, storage, parsedUserInput);
-        } else if (parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("d")) { // Add deadline
-            addDeadline(tasks, ui, storage, parsedUserInput);
-        } else if (parsedUserInput[0].equals("event") || parsedUserInput[0].equals("e")) { // Add event
-            addEvent(tasks, ui, storage, parsedUserInput);
+        switch (parsedUserInput[0]) {
+            case TODO_NAME:
+            case "t":
+                addTodo(tasks, ui, storage, parsedUserInput);
+                break;
+            case DEADLINE_NAME:
+            case "d":  // Add deadline
+                addDeadline(tasks, ui, storage, parsedUserInput);
+                break;
+            case EVENT_NAME:
+            case "e":  // Add event
+                addEvent(tasks, ui, storage, parsedUserInput);
+                break;
         }
     }
 
@@ -83,9 +97,9 @@ public class AddTaskCommand extends Command {
             String date = parsedDeadlineInput[1];
             LocalDate localDate;
             try {
-                localDate = LocalDate.parse(date, formatFromInput);
+                localDate = LocalDate.parse(date, FORMAT_FROM_INPUT);
             } catch (DateTimeParseException e) {
-                throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+                throw new DukeException(ERROR_MESSAGE_WRONG_DATE_FORMAT);
             }
             Task newTask = new Deadline(parsedDeadlineInput[0], localDate);
             addTaskToList(newTask, ui, tasks, storage);
@@ -111,9 +125,9 @@ public class AddTaskCommand extends Command {
             String date = parsedDeadlineInput[1];
             LocalDate localDate;
             try {
-                localDate = LocalDate.parse(date, formatFromInput);
+                localDate = LocalDate.parse(date, FORMAT_FROM_INPUT);
             } catch (DateTimeParseException e) {
-                throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+                throw new DukeException(ERROR_MESSAGE_WRONG_DATE_FORMAT);
             }
             Task newTask = new Event(parsedDeadlineInput[0], localDate);
             addTaskToList(newTask, ui, tasks, storage);
@@ -132,6 +146,6 @@ public class AddTaskCommand extends Command {
         tasks.getTasks().add(newTask);
         storage.updateLocalStorage(tasks.getTasks());
         ui.reply("Got it. I've added this task: \n" + newTask.toString()
-                + "     \nNow you have " + tasks.getTasks().size() + " tasks in the list.");
+                + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }
