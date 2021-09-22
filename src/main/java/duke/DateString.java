@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  * java.time.LocalDate object that outputs the date in a standardised pattern,
  * but silently falls back to using a string if the input cannot be parsed.
  */
-public class DateString implements Comparable<DateString>{
+public class DateString{
     private final String dateString;
     private LocalDate localDate;
 
@@ -39,19 +39,6 @@ public class DateString implements Comparable<DateString>{
             return localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
             return this.dateString;
-        }
-    }
-
-    @Override
-    public int compareTo(DateString other) {
-        if ((this.localDate == null) && (other.localDate == null)) {
-            return 0;
-        } else if (this.localDate == null) {
-            return -1;
-        } else if (other.localDate == null) {
-            return 1;
-        } else {
-            return this.localDate.compareTo(other.localDate);
         }
     }
 
