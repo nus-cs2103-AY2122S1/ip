@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -57,6 +58,9 @@ public class MainWindow extends AnchorPane {
         ui = new Ui();
         dialogContainer.setStyle("-fx-background-image: url(\"/images/Ailurus_bg.png\"); ");
         dialogContainer.getChildren().add(DialogBox.getAilurusDialog(ui.showWelcome(), ailurusImage));
+        sendButton.disableProperty().bind(
+                Bindings.isEmpty(userInput.textProperty())
+        );
     }
 
     /**
@@ -65,24 +69,29 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = ailurus.getResponse(input);
-        assert response.length() != 0 : "response should not be empty";
-        assert userImage != null : "userImage should not be null";
-        assert ailurusImage != null : "ailurusImage should not be null";
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getAilurusDialog(response, ailurusImage)
-        );
-        userInput.clear();
-        if (Ailurus.isExit()) {
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            }, 1000);
+        if (userInput.getText().trim().length() != 0) {
+            String input = userInput.getText();
+            String response = ailurus.getResponse(input);
+            assert response.length() != 0 : "response should not be empty";
+            assert userImage != null : "userImage should not be null";
+            assert ailurusImage != null : "ailurusImage should not be null";
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getAilurusDialog(response, ailurusImage)
+            );
+            userInput.clear();
+            if (Ailurus.isExit()) {
+                userInput.setDisable(true);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.exit();
+                        System.exit(0);
+                    }
+                }, 1000);
+            }
+        } else {
+            userInput.clear();
         }
     }
 }
