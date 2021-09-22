@@ -36,8 +36,12 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public void respond(String input) {
-        Command command = Parser.parse(input);
-        command.execute(taskList, ui);
+        try {
+            Command command = Parser.parse(input);
+            command.execute(taskList, ui);
+        } catch (Exception ex) {
+            ui.displayError(ex.getMessage());
+        }
     }
 
     public void save() {
