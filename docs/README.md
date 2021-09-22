@@ -28,23 +28,27 @@ To add a task, enter `task_type` followed by the arguments. Further details are 
 
 #### ToDo tasks
 
-ToDo tasks are specified simply by its textual description. Simply enter:
+ToDo tasks are specified simply by its textual description. Simply enter `todo {description}`, such as:
 
-`todo {description}`.
+`todo CS2103 iP Final Submission`
 
 #### DeadLine tasks
 
-DeadLine tasks are specified by a textual description field as well as a deadline, as follows: 
+DeadLine tasks are specified by a textual description field as well as a deadline (i.e. `deadline {description} /by {deadline}`), as follows: 
 
-`deadline {description} /by {deadline}`
+`deadline CS2103 iP Final Submission /by today midnight`
 
 #### Event tasks
 
-Event tasks are specified by a textual description field as well as a time, as follows: 
+Event tasks are specified similarly to DeadLine tasks, except that the `/by` token is replaced by the `/by` option, as follows:
 
-`event {description} /at {time}`
+`event CS2103 iP Final Submission /at 22nd September 2021 2359HRS`
 
 ### Date format parsing 
+
+If the deadline or time field of a DeadLine or Event task is entered in `yyyy-mm-dd` format, it is automatically recognised, parsed and converted into `MMM dd yyyy` format. Or else, the deadline field silently defaults to storing the string as-is without any modifications:
+
+`deadline CS2103 iP Final Submission /by 2021-22-09`
 
 
 ### Viewing tasks
@@ -53,11 +57,15 @@ To view the list of tasks added to Dude, enter:
 
 `list`
 
+The tasks are displayed in a list according to the order they are added to Dude, and identified by their index in this list.
+
 ### Saving tasks
 
 To save the current list of tasks, use the command:
 
 `save`
+
+This writes to a `dude_data.txt` file.
 
 ### The following commands recognise a task by its index on the task list
 
