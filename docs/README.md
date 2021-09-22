@@ -215,6 +215,7 @@ Calico window closes.
 
 
 ## Command summary
+
 Action 	 | Format, Examples
 ------------ | -------------
 todo | `todo TASK_NAME` e.g., `todo borrow books`
