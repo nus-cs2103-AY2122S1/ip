@@ -10,9 +10,11 @@ import duke.Task.TaskList;
  */
 public class Duke {
     /** Task list for an instance of duke*/
-    private TaskList tasks = new TaskList();
-    private Storage storage = new Storage();
+    private TaskList tasks;
+    private Storage storage;
     public Duke(){
+        this.tasks = new TaskList();
+        this.storage = new Storage();
         storage.loadDataToTasks(tasks);
     }
 
