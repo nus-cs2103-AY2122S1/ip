@@ -121,7 +121,7 @@ public class Ui {
      * Returns message for listing similar tasks.
      *
      * @param similarTasks represents arraylist with common tasks
-     * @return list of simialr tasks in string format
+     * @return list of similar tasks in string format
      */
     public String produceSimilarTasks(ArrayList<String> similarTasks) {
         String similarTasksAsString = "";

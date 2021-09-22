@@ -11,6 +11,14 @@ public class Parser {
     public static boolean isValid() {
         return isValidCommand;
     }
+    private static String helpMessage = "Quick help for actions you can perform: \n" +
+            "1. Add todo using format “todo <task>” (e.g. todo math)\n" +
+            "2. Add event using format “event <task> /at <time>” (e.g. event run /at Mon 2-4pm)\n" +
+            "3. Add deadline using format “deadline <task> /by <date>” (e.g. deadline do work /by 2021-02-11)\n" +
+            "4. Mark task as done with the task’s index using format “done <index of task>”  (e.g. done 2)\n" +
+            "5. Delete task with the task’s index using format “delete <index of task>” (e.g. delete 2)\n" +
+            "6. Find tasks similar to a keyword you entered using format “find <your input>” (e.g. find math)\n" +
+            "7. View all tasks in task list using command “list”";
 
     /**
      * Handles commands given by user.
@@ -23,6 +31,7 @@ public class Parser {
     public static String handleCommand(String command, ListOfTasks tasks) {
         while (!command.equalsIgnoreCase("bye")) {
             try {
+                message = "";
                 if (command.equalsIgnoreCase("list")) {
                     message = tasks.listOut();
                 } else if (command.contains("done")) {
@@ -121,6 +130,8 @@ public class Parser {
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
+                } else if (command.contains("help")) {
+                    message = helpMessage;
                 } else {
                     message = "OOPS!!! I'm sorry, but "
                             + "I don't know what that means :-(";
