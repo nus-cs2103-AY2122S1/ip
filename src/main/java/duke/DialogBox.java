@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.shape.Circle;
 import javafx.geometry.Insets;
 
 
@@ -37,6 +38,9 @@ public class DialogBox extends HBox {
         text = l;
         displayPicture = iv;
 
+        final Circle clip = new Circle(50, 50, 50);
+        displayPicture.setClip(clip);
+
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
@@ -45,5 +49,6 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
         this.setPadding(new Insets(10));
+        this.setStyle("-fx-background-color: #F7FFFF;");
     }
 }
