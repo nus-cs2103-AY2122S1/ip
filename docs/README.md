@@ -28,19 +28,19 @@ To add a task, enter `task_type` followed by the arguments. Further details are 
 
 #### ToDo tasks
 
-ToDo tasks are specified simply by its textual description. Simply enter 
+ToDo tasks are specified simply by its textual description. Simply enter:
 
 `todo {description}`.
 
 #### DeadLine tasks
 
-DeadLine tasks are specified by a textual description field as well as a deadline, as follows : 
+DeadLine tasks are specified by a textual description field as well as a deadline, as follows: 
 
 `deadline {description} /by {deadline}`
 
 #### Event tasks
 
-Event tasks are specified by a textual description field as well as a time, as follows : 
+Event tasks are specified by a textual description field as well as a time, as follows: 
 
 `event {description} /at {time}`
 
@@ -49,16 +49,25 @@ Event tasks are specified by a textual description field as well as a time, as f
 
 ### Viewing tasks
 
+To view the list of tasks added to Dude, enter:
+
+`list`
 
 ### Saving tasks
 
+To save the current list of tasks, use the command:
 
-### Marking tasks as done
+`save`
+
+### The following commands recognise a task by its index on the task list
+
+#### Marking tasks as done
 
 
-### Searchiing for task by keyword
+
+#### Searchiing for task by keyword
 
 
-### Deleting tasks
+#### Deleting tasks
 
 
