@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Represents a list of any number of Tasks, including zero.
+ * Represents a list of any number of Tasks with different names, including zero.
  */
 public class TaskList {
+    public static final String DUPLICATE_TASK_MESSAGE_SUFFIX = " already exists in the TaskList";
     private List<Task> taskList;
 
     /**
@@ -33,12 +34,14 @@ public class TaskList {
      * @param task The Task to be added to this TaskList
      */
     public void add(Task task) {
+        if (find(task.getName()) != null) {
+            throw new IllegalArgumentException(task.getName() + DUPLICATE_TASK_MESSAGE_SUFFIX);
+        }
         taskList.add(task);
     }
 
     /**
-     * Finds a Task with the same name as a supplied String.
-     * If multiple are present, the first one is returned.
+     * Finds the Task with the same name as a supplied String, if any.
      * @param taskName The name of the Task to find
      * @return A Task with the same name, or <code>null</code> if none was found.
      */
@@ -53,9 +56,9 @@ public class TaskList {
 
     /**
      * Finds all Tasks containing a supplied String.
-     * If multiple are present, the first one is returned.
      * @param keyword The name of the Task to find
-     * @return A Task with the same name, or <code>null</code> if none was found.
+     * @return A TaskList containing all Tasks from this list
+     * with <code>keyword</code> as a substring
      */
     public TaskList match(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
@@ -70,8 +73,7 @@ public class TaskList {
 
 
     /**
-     * Removes a Task with the same name as a supplied String
-     * If multiple are present, the first is deleted
+     * Removes the Task with the same name as a supplied String, if any.
      * @param taskName The name of the Task to be deleted
      * @return The deleted Task, or <code>null</code> if none were deleted
      */
