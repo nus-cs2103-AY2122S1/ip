@@ -1,6 +1,6 @@
 # Alexa User Guide
 
-![Alexa Preview](https://github.com/DonnyS57/ip/blob/master/docs/Ui.png.png)
+![Alexa Preview](https://github.com/DonnyS57/ip/blob/master/docs/Ui.png)
 
 Alexa is a free and easy-to-use chat bot that acts as a personal assistant. It can help you keep track of your tasks with up to 3 different types of tasks available!
 
