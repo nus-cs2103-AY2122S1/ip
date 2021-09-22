@@ -96,4 +96,8 @@ public class Storage {
             throw new DukeException(e.getMessage());
         }
     }
+
+    public void assertFile() {
+        assert this.storage.exists() : "File should exist when there is data to be saved";
+    }
 }
