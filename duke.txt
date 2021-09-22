@@ -1,0 +1,3 @@
+T | 0 | read book
+D | 0 | finish ip | Sep 17 2021
+E | 0 | post ip partyy | Sep 18 2021
