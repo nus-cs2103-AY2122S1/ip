@@ -195,7 +195,7 @@ public class Parser {
             default:
                 return ui.sayWrongInput();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(DukeException.Type.INVALID);
         } catch (DateTimeException e) {
             throw new DukeException(DukeException.Type.DATE);
