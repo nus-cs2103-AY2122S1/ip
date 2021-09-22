@@ -36,15 +36,15 @@ public class TaskList {
      * @param todoEntry description for the Todo task.
      * @throws DukeException if the User leaves the description blank.
      */
-    public static void todo(String todoEntry) throws DukeException {
+    public static String todo(String todoEntry) throws DukeException {
         if (todoEntry.length() == 5) {
-            throw new DukeException("Sorry ☹, please enter a description!");
+            throw new DukeException("Sorry, please enter a description!");
         }
         String todoTitle = todoEntry.substring(5);
         Todo newToDo = new Todo(todoTitle);
         storage.add(newToDo);
-        duke.Ui.print("Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
-                + " tasks in the list");
+        return "Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
+                + " tasks in the list";
     }
 
     /**
@@ -53,13 +53,13 @@ public class TaskList {
      * @throws DukeException if the user does not enter a description or does not enter a deadline or provided the
      *      deadline in the wrong format.
      */
-    public static void deadline(String deadlineEntry) throws DukeException {
+    public static String deadline(String deadlineEntry) throws DukeException {
         if (deadlineEntry.length() == 9) {
-            throw new DukeException("Sorry ☹, please enter a description!");
+            throw new DukeException("Sorry, please enter a description!");
         }
         int indexOfSlash = deadlineEntry.indexOf("/");
         if (indexOfSlash == -1) {
-            throw new DukeException("Sorry ☹, please enter a deadline!");
+            throw new DukeException("Sorry, please enter a deadline!");
         }
         String deadlineDate = deadlineEntry.substring(indexOfSlash + 4);
 
@@ -68,10 +68,10 @@ public class TaskList {
             deadlineDate = Time.changeDateFormat(deadlineDate);
             Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
             storage.add(newDeadline);
-            duke.Ui.print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are "
-                    + storage.size() + " tasks in the list");
+            return "Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are "
+                    + storage.size() + " tasks in the list";
         } else {
-            throw new DukeException("Sorry ☹, please enter the deadline in the correct format! (DD/MM/YYYY)");
+            throw new DukeException("Sorry, please enter the deadline in the correct format! (DD/MM/YYYY)");
         }
 
     }
@@ -82,13 +82,13 @@ public class TaskList {
      * @throws DukeException if the user does not enter a description or does not enter an event date or provided the
      *      event date in the wrong format.
      */
-    public static void event(String eventEntry) throws DukeException {
+    public static String event(String eventEntry) throws DukeException {
         if (eventEntry.length() == 6) {
-            throw new DukeException("Sorry ☹, please enter a description!");
+            throw new DukeException("Sorry, please enter a description!");
         }
         int indexOfSlash = eventEntry.indexOf("/");
         if (indexOfSlash == -1) {
-            throw new DukeException("Sorry ☹, please enter an event time!");
+            throw new DukeException("Sorry, please enter an event time!");
         }
 
         String eventDate = eventEntry.substring(indexOfSlash + 4);
@@ -97,10 +97,10 @@ public class TaskList {
             String eventTitle = eventEntry.substring(6, indexOfSlash);
             Event newEvent = new Event(eventTitle, eventDate);
             storage.add(newEvent);
-            duke.Ui.print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are "
-                    + storage.size() + " tasks in the list");
+            return "Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are "
+                    + storage.size() + " tasks in the list";
         } else {
-            throw new DukeException("Sorry ☹, please enter the event in the correct format! (DD/MM/YYYY)");
+            throw new DukeException("Sorry, please enter the event in the correct format! (DD/MM/YYYY)");
         }
     }
 
@@ -109,14 +109,14 @@ public class TaskList {
      * @param deleteInput contains the task number that the User wants to delete.
      * @throws DukeException if the task number is invalid.
      */
-    public static void delete(String deleteInput) throws DukeException {
+    public static String delete(String deleteInput) throws DukeException {
         int taskNumber = Integer.parseInt(deleteInput.substring(7, 8));
         if (taskNumber > storage.size()) {
-            throw new DukeException("Sorry ☹, please enter a valid task to delete!");
+            throw new DukeException("Sorry, please enter a valid task to delete!");
         }
         duke.Task deletedTask = storage.remove(taskNumber - 1);
-        duke.Ui.print("Okay! I have deleted the task for you.\n  " + deletedTask.toString()
-                + "\nNow there are " + storage.size() + " tasks in the list");
+        return "Okay! I have deleted the task for you.\n  " + deletedTask.toString()
+                + "\nNow there are " + storage.size() + " tasks in the list";
     }
 
 

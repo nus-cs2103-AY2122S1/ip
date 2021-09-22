@@ -47,19 +47,20 @@ public class Storage {
                 hasNoTask = false;
                 String data = myReader.nextLine();
                 String taskType = data.substring(3, 4);
+                boolean taskStatus = data.charAt(6) == 'X';
                 switch (taskType) {
                 case "T":
-                    Todo newToDo = new Todo(data.substring(9));
+                    Todo newToDo = new Todo(data.substring(9), taskStatus);
                     newStorage.add(newToDo);
                     break;
                 case "D":
                     String[] deadlineData = parser.storageDeadline(data);
-                    Deadline newDeadline = new Deadline(deadlineData[0], deadlineData[1]);
+                    Deadline newDeadline = new Deadline(deadlineData[0], deadlineData[1], taskStatus);
                     newStorage.add(newDeadline);
                     break;
                 case "E":
                     String[] eventData = parser.storageEvent(data);
-                    Event newEvent = new Event(eventData[0], eventData[1]);
+                    Event newEvent = new Event(eventData[0], eventData[1], taskStatus);
                     newStorage.add(newEvent);
                     break;
                 default:

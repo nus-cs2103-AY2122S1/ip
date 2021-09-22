@@ -65,8 +65,8 @@ public class Parser {
         int indexOfOpenBracketD = input.indexOf("(");
         int indexOfCloseBracketD = input.indexOf(")");
         String deadlineDate = input.substring(indexOfOpenBracketD + 4, indexOfCloseBracketD);
-        String deadlineTitle = input.substring(9, indexOfOpenBracketD);
-        String[] deadlineWords = {deadlineDate, deadlineTitle};
+        String deadlineTitle = input.substring(9, indexOfOpenBracketD - 1);
+        String[] deadlineWords = {deadlineTitle, deadlineDate};
         return deadlineWords;
     }
 
@@ -79,8 +79,8 @@ public class Parser {
         int indexOfOpenBracketE = input.indexOf("(");
         int indexOfCloseBracketE = input.indexOf(")");
         String eventDate = input.substring(indexOfOpenBracketE + 4, indexOfCloseBracketE);
-        String eventTitle = input.substring(9, indexOfOpenBracketE);
-        String[] eventWords = {eventDate, eventTitle};
+        String eventTitle = input.substring(9, indexOfOpenBracketE - 1);
+        String[] eventWords = {eventTitle, eventDate};
         return eventWords;
     }
 

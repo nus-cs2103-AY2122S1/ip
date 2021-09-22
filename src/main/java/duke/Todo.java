@@ -14,6 +14,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean status) {
+        super(description, status);
+    }
+
     /**
      * Returns a string form of the Todo task.
      * @return returns the Todo task in string form.

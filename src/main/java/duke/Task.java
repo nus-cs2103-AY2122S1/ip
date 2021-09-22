@@ -17,6 +17,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean status) {
+        this.description = description;
+        this.isDone = status;
+    }
+
     /**
      * Returns the status icon of the task.
      * @return the status icon of the task based on whether the task has been done or not.

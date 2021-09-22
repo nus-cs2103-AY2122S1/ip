@@ -19,12 +19,17 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(String description, String deadline, boolean status) {
+        super(description, status);
+        this.deadline = deadline;
+    }
+
     /**
      * Returns the deadline in string form.
      * @return Deadline in string form.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by:" + deadline + ")";
     }
 }
