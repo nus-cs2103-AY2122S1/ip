@@ -20,6 +20,7 @@ public class Main extends Application {
         Scene scene = new Scene(ap);
         stage.setScene(scene);
         stage.show();
+        duke.showGreeting();
     }
 
     @Override

@@ -40,6 +40,10 @@ public class Duke {
         command.execute(taskList, ui);
     }
 
+    public void showGreeting() {
+        ui.displayGreeting();
+    }
+
     public void save() {
         storage.save(ui, taskList);
     }
