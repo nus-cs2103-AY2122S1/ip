@@ -1,0 +1,28 @@
+todo read book
+todo borrow book
+done 2
+list
+deadline return book /by Sunday
+done 2
+done 1
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
+done 4
+list
+delete 1
+delete 3
+list
+todo
+deadline
+deadline a
+deadline /at
+deadline /at a
+event
+event a
+event /by
+event /by a
+done 0
+done 100
+delete 0
+delete 100
+bye
