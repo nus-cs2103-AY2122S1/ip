@@ -15,6 +15,7 @@ import javafx.util.Duration;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+//Class code reused from JavaFX tutorial of this module https://se-education.org/guides/tutorials/javaFx.html
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

@@ -16,7 +16,7 @@ public class Duke {
         storage.loadDataToTasks(tasks);
     }
     /**
-     * Start the application and the chatbot
+     * Start the application and the chatbot in the commandline.
      *
      */
     public void run() {
@@ -43,6 +43,7 @@ public class Duke {
 
         String response = outputStreamCaptor.toString();
         System.setOut(standardOut);
+        storage.saveTasksToStorage(tasks);
         return response;
 
     }

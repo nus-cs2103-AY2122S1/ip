@@ -75,60 +75,40 @@ public class Storage {
      * @param tasks Task list that will be appended with data.
      */
     public void loadDataToTasks(TaskList tasks) {
-        java.nio.file.Path dirpath = Paths.get("data");
-        Path taskListPath = Paths.get("data", "DukeTask.txt");
-        boolean directoryExists = Files.exists(dirpath);
-        boolean fileExist = Files.exists(taskListPath);
-        if (!directoryExists) {
-            try {
-                Files.createDirectory(dirpath);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        if (!fileExist) {
-            try {
-                Files.createFile(taskListPath);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        } else {
-            try {
-                File taskList = new File(taskListPath.toString());
-                Scanner scanner = new Scanner(taskList);
-                while (scanner.hasNext()) {
-
-                    Task currTask = null;
-                    String curr = scanner.nextLine();
-                    if (curr.equals("")) {
-                        continue;
-                    }
-                    Character tasktype = curr.charAt(1);
-                    Character isDone = curr.charAt(4);
-                    String desc = curr.substring(6);
-                    desc = desc.trim();
-                    boolean done = isDone == 'X';
-                    if (tasktype == 'T') {
-                        currTask = new Todo(desc, done);
-                    } else if (tasktype == 'E') {
-                        int index = desc.indexOf("at:");
-                        int n = desc.length();
-                        String date = desc.substring(index + 4, n - 1);
-                        currTask = new Event(desc.substring(0, index), done, LocalDate.parse(date));
-                    } else if (tasktype == 'D') {
-                        int index = desc.indexOf("by:");
-                        int n = desc.length();
-                        String date = desc.substring(index + 4, n - 1);
-
-                        currTask = new Deadline(desc.substring(0, index), done, LocalDate.parse(date));
-                    }
-                    tasks.addTask(currTask);
+        try {
+            File taskList = new File(taskListPath.toString());
+            Scanner scanner = new Scanner(taskList);
+            while (scanner.hasNext()) {
+                Task currTask = null;
+                String curr = scanner.nextLine();
+                if (curr.equals("")) {
+                    continue;
                 }
+                Character tasktype = curr.charAt(1);
+                Character isDone = curr.charAt(4);
+                String desc = curr.substring(6);
+                desc = desc.trim();
+                boolean done = isDone == 'X';
+                if (tasktype == 'T') {
+                    currTask = new Todo(desc, done);
+                } else if (tasktype == 'E') {
+                    int index = desc.indexOf("at:");
+                    int n = desc.length();
+                    String date = desc.substring(index + 4, n - 1);
+                    currTask = new Event(desc.substring(0, index - 1), done, LocalDate.parse(date));
+                } else if (tasktype == 'D') {
+                    int index = desc.indexOf("by:");
+                    int n = desc.length();
+                    String date = desc.substring(index + 4, n - 1);
 
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
-            }
-
+                    currTask = new Deadline(desc.substring(0, index), done, LocalDate.parse(date));
+                }
+                tasks.addTask(currTask);
         }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
