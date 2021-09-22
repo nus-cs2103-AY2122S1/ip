@@ -21,7 +21,7 @@ is can:
 - [X]  is all is same code really.
 
 
-![Duke UI](https://github.com/BananaTechs/ip/blob/master/src/main/resources/images/Ui.png?raw=true)
+![Duke UI](https://github.com/BananaTechs/ip/blob/master/docs/Ui.png?raw=true)
 
 # how is to use?
 
