@@ -14,6 +14,7 @@ public class Parser {
      * @param tasks task list to be modified accordingly
      */
     public static void handleInput(String userInput, TaskList tasks) {
+        assert userInput != null : "should have user Input";
         if (userInput.equals("bye")) {
             Ui.displayQuitMessage();
             return;
@@ -78,6 +79,7 @@ public class Parser {
      */
 
     public static Task handleTaskInput(String userInput) throws DukeException{
+        assert userInput != null : "should have user Input";
         if(userInput.startsWith("todo")) {
             int id = userInput.indexOf("todo") + 4;
             String task = userInput.substring(id);

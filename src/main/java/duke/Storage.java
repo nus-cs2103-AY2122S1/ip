@@ -65,6 +65,7 @@ public class Storage {
      * @throws IOException if there is a failure in writing the file.
      */
     public void writeStringToFile(String newFile) throws IOException {
+        assert taskListPath != null : "File path must exist";
         Files.write(taskListPath, newFile.getBytes());
     }
 
@@ -75,6 +76,7 @@ public class Storage {
      * @param tasks Task list that will be appended with data.
      */
     public void loadDataToTasks(TaskList tasks) {
+        assert taskListPath != null : "File path must exist";
         try {
             File taskList = new File(taskListPath.toString());
             Scanner scanner = new Scanner(taskList);
