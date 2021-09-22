@@ -6,16 +6,16 @@ public class Parser {
         if (input.startsWith("todo")) {
             String substr = input.replaceFirst("todo", "").stripLeading();
             return new ToDo(substr);
-            // System.out.println(taskList.addToDo(substr));
+
         } else if (input.startsWith("deadline")) {
             String substr = input.replaceFirst("deadline", "").stripLeading();
             String[] substrArray = substr.split(" /by ", 2);
-            // System.out.println(taskList.addDeadLine(substrArray[0], substrArray[1]));
+
             return new Deadline(substrArray[0], substrArray[1]);
         } else if (input.startsWith("event")) {
             String substr = input.replaceFirst("event", "").stripLeading();
             String[] substrArray = substr.split(" /at ", 2);
-            // System.out.println(taskList.addEvent(substrArray[0], substrArray[1]));
+
             return new Event(substrArray[0], substrArray[1]);
         } else {
             return null;
