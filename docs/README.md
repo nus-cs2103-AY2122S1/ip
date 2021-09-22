@@ -28,19 +28,19 @@ To add a task, enter `task_type` followed by the arguments. Further details are 
 
 #### ToDo tasks
 
-ToDo tasks are specified simply by its textual description. Simply enter `todo {description}`, such as:
+ToDo tasks are specified simply by its textual description and identified with `[E]`. Simply enter `todo {description}`, such as:
 
 `todo CS2103 iP Final Submission`
 
 #### DeadLine tasks
 
-DeadLine tasks are specified by a textual description field as well as a deadline (i.e. `deadline {description} /by {deadline}`), as follows: 
+DeadLine tasks are specified by a textual description field as well as a deadline (i.e. `deadline {description} /by {deadline}`). They are indicated by a `[D]` identifier:
 
 `deadline CS2103 iP Final Submission /by today midnight`
 
 #### Event tasks
 
-Event tasks are specified similarly to DeadLine tasks, except that the `/by` token is replaced by the `/by` option, as follows:
+Event tasks are specified similarly to DeadLine tasks, except that the `/by` token is replaced by the `/by` option and that they are identified with `[E]` instead of `[D]`, as follows:
 
 `event CS2103 iP Final Submission /at 22nd September 2021 2359HRS`
 
@@ -71,9 +71,11 @@ This writes to a `dude_data.txt` file.
 
 #### Marking tasks as done
 
+A task that is marked as done has the `[ ]` column replaced by `[X]`. To do so, run the following command:
 
+`done {task number}`
 
-#### Searchiing for task by keyword
+#### Searching for task by keyword
 
 
 #### Deleting tasks
