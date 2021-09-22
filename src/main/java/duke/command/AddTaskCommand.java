@@ -22,7 +22,8 @@ public class AddTaskCommand extends Command {
     private final String EVENT_NAME = "event";
 
     private final String ERROR_MESSAGE_WRONG_DATE_FORMAT = "Please write the date in this format: dd/MM/yyyy";
-    
+    private final String ERROR_WRONG_INPUT_FORMAT = "OOWOOPS!!! I'm sowwie, but I don't know what that mweans :-(";
+
 
     /**
      * Constructor for class AddTaskCommand
@@ -46,18 +47,20 @@ public class AddTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         switch (parsedUserInput[0]) {
-            case TODO_NAME:
-            case "t":
-                addTodo(tasks, ui, storage, parsedUserInput);
-                break;
-            case DEADLINE_NAME:
-            case "d":  // Add deadline
-                addDeadline(tasks, ui, storage, parsedUserInput);
-                break;
-            case EVENT_NAME:
-            case "e":  // Add event
-                addEvent(tasks, ui, storage, parsedUserInput);
-                break;
+        case TODO_NAME:
+        case "t":
+            addTodo(tasks, ui, storage, parsedUserInput);
+            break;
+        case DEADLINE_NAME:
+        case "d": // Add deadline
+            addDeadline(tasks, ui, storage, parsedUserInput);
+            break;
+        case EVENT_NAME:
+        case "e": // Add event
+            addEvent(tasks, ui, storage, parsedUserInput);
+            break;
+        default:
+            throw new DukeException(ERROR_WRONG_INPUT_FORMAT);
         }
     }
 

@@ -8,20 +8,18 @@ import duke.command.ExitDukeCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 
-import java.nio.channels.ClosedByInterruptException;
-
-
 public class Parser {
 
     private static final String BYE_NAME = "bye";
     private static final String LIST_NAME = "list";
     private static final String DONE_NAME = "done";
     private static final String FIND_NAME = "find";
-    private static final String DELETE_NAME= "delete";
+    private static final String DELETE_NAME = "delete";
     private static final String TODO_NAME = "todo";
     private static final String DEADLINE_NAME = "deadline";
     private static final String EVENT_NAME = "event";
-    private static final String ERROR_WRONG_INPUT_FORMAT = "OOWOOPS!!! I'm sowwie, but I don't know what that mweans :-(";
+    private static final String ERROR_WRONG_INPUT_FORMAT = "OOWOOPS!!!"
+            + "I'm sowwie, but I don't know what that mweans :-(";
 
     /**
      * Parses user input and returns the appropriate Command
@@ -37,21 +35,21 @@ public class Parser {
         } else {
             String[] parsedUserInput = fullCommand.split(" ", 2);
             switch (parsedUserInput[0]) {
-                case DONE_NAME:
-                    return new DoneCommand(fullCommand);
-                case FIND_NAME:
-                    return new FindCommand(fullCommand);
-                case DELETE_NAME:
-                    return new DeleteCommand(fullCommand);
-                case TODO_NAME:
-                case "t":
-                case DEADLINE_NAME:
-                case "d":
-                case EVENT_NAME:
-                case "e":
-                    return new AddTaskCommand(fullCommand);
-                default:
-                    throw new DukeException(ERROR_WRONG_INPUT_FORMAT);
+            case DONE_NAME:
+                return new DoneCommand(fullCommand);
+            case FIND_NAME:
+                return new FindCommand(fullCommand);
+            case DELETE_NAME:
+                return new DeleteCommand(fullCommand);
+            case TODO_NAME:
+            case "t":
+            case DEADLINE_NAME:
+            case "d":
+            case EVENT_NAME:
+            case "e":
+                return new AddTaskCommand(fullCommand);
+            default:
+                throw new DukeException(ERROR_WRONG_INPUT_FORMAT);
             }
         }
     }
