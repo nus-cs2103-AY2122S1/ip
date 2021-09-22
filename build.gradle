@@ -57,11 +57,6 @@ shadowJar {
 //    checkstyleTest.enabled = false
 //}
 
-javafx {
-    version = "15.0.1"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 run{
     standardInput = System.in
 }
