@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
-    public void createTodoTest(){
+    public void createTodoTest() {
         Todo todo = new Todo("say hi");
         assertEquals("[T][ ] say hi", todo.toString());
     }

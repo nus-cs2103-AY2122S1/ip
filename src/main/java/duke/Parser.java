@@ -1,6 +1,8 @@
 package duke;
-import duke.tasks.TaskList;
+
 import java.io.IOException;
+
+import duke.tasks.TaskList;
 import javafx.application.Platform;
 
 /**
@@ -11,17 +13,24 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * Parses the user input and returns a String.
+     * @param task user input
+     * @return response to user input
+     * @throws DukeException exception
+     * @throws IOException exception
+     */
     public String parseTask(String task) throws DukeException, IOException {
         assert task.length() > 1;
         switch (task) {
-            case "list": return TaskList.printList();
-            case "bye":
-                String str = "Beep boop! Battery low. Commencing shutdown!";
-                Platform.exit();
-                return str;
-            case "hi": return "Hi, I am BMO! Who wants to play video games?";
-            case "me": return "Bad user! Input some tasks now to be productive!";
-            default: break;
+        case "list": return TaskList.printList();
+        case "bye":
+            String str = "Beep boop! Battery low. Commencing shutdown!";
+            Platform.exit();
+            return str;
+        case "hi": return "Hi, I am BMO! Who wants to play video games?";
+        case "me": return "Bad user! Input some tasks now to be productive!";
+        default: break;
         }
         if (task.startsWith("done")) {
             String str = TaskList.complete(task);

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.Storage;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -11,9 +12,13 @@ public class Duke {
     private static Storage storage;
     private static final String LINE = "-----------------------------------------";
 
-    public Duke() {
+    /**
+     * Constructor for Duke.
+     */
+    public Duke() throws IOException {
         parser = new Parser();
-        storage = new Storage();
+        storage = new Storage("data/duke.txt");
+        storage.readFromFile();
     }
 
     /**

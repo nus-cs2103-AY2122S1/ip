@@ -90,14 +90,16 @@ public final class TaskList {
     }
 
     /**
-     * Rewrites the duke.txt file with the new list of tasks.
+     * Returns the list of tasks as how it should be inputted in the duke.txt file.
      * @return a String representation of the task list
      */
     public static String overwrite() {
+        taskList.forEach(System.out::println);
         String str = "";
-        for (Tasks task : taskList) {
-            str = task.toString() + "\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            str = taskList.get(i).toString() + "\n";
         }
+        System.out.println("\n" + str);
         return str;
     }
 
@@ -107,7 +109,10 @@ public final class TaskList {
      */
     public static Tasks getLast() {
         int size = taskList.size();
-        return taskList.get(size - 1);
+        if (size > 0) {
+            return taskList.get(size - 1);
+        }
+        return new Todo("dummy task");
     }
 
     public static int getSize() {
@@ -130,8 +135,13 @@ public final class TaskList {
         return str;
     }
 
+    /**
+     * Updates an existing task.
+     * @param task task to be updated
+     * @return response after update
+     */
     public static String update(String task) {
-        String[] input = task.split(" ",2);
+        String[] input = task.split(" ", 2);
         int count = Integer.parseInt(input[0]);
         boolean isTodo = taskList.get(count - 1).toString().charAt(1) == 'T';
         boolean isEvent = taskList.get(count - 1).toString().charAt(1) == 'E';

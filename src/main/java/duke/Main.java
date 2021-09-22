@@ -1,8 +1,8 @@
 package duke;
 
-import duke.ui.MainWindow;
 import java.io.IOException;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private final Duke duke = new Duke();
+
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage stage) {

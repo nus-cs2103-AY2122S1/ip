@@ -1,28 +1,82 @@
 package duke;
 
 import duke.tasks.TaskList;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 
 /**
  * Represents the file containing the list of tasks.
  */
 public class Storage {
-    private static final String text = "./data/duke.txt";
     private static BufferedWriter writer;
+    private final String dataStoragePath;
 
     static {
         try {
-            writer = new BufferedWriter(new FileWriter(text, true));
+            writer = new BufferedWriter(new FileWriter("data/duke.txt", true));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Storage() {
+    /**
+     * Constructor for a Storage object.
+     * @param dataStoragePath path
+     */
+    public Storage(String dataStoragePath) {
+        // https://stackoverflow.com/questions/26239151/
+        File file = new File("data/duke.txt");
+        try {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        this.dataStoragePath = dataStoragePath;
+    }
+
+    /**
+     * Loads the task list from the duke.txt file and returns void.
+     * @throws IOException if an error while reading has occurred.
+     */
+    public void readFromFile() throws IOException {
+        try {
+            //create a BufferedReader which loads the data when duke.Duke starts up
+            String line;
+            FileReader fReader = new FileReader(this.dataStoragePath);
+            BufferedReader reader = new BufferedReader(fReader);
+
+            //reading data
+            while ((line = reader.readLine()) != null) {
+                String[] curr = new String[4];
+                curr[0] = line.substring(1, 2);
+                curr[1] = line.substring(4, 5);
+                curr[2] = line.substring(7);
+                if (line.contains("[T]")) {
+                    TaskList.addSpecificTask("todo " + curr[2]);
+                } else if (line.contains("[E]")) {
+                    TaskList.addSpecificTask("event " + curr[2]);
+                } else if (line.contains("[D]")) {
+                    TaskList.addSpecificTask("deadline " + curr[2]);
+                }
+                if (line.contains("[X]")) {
+                    TaskList.getLast().markAsDone();
+                }
+                reader.close();
+            }
+        } catch (IOException e) {
+            FileWriter fWriter = new FileWriter("data/duke.txt", true);
+            writer = new BufferedWriter(fWriter);
+        }
     }
 
     /**
@@ -44,7 +98,7 @@ public class Storage {
                 writer.write(TaskList.getLast().toString() + "\n");
             }
             writer.close();
-            FileWriter fWriter = new FileWriter(text, true);
+            FileWriter fWriter = new FileWriter("data/duke.txt", true);
             writer = new BufferedWriter(fWriter);
             return str;
         } catch (IOException e) {
@@ -54,51 +108,14 @@ public class Storage {
     }
 
     /**
-     * Loads the task list from the duke.txt file and returns void.
-     * @throws IOException if an error while reading has occurred.
-     */
-    public static void readFromFile() throws IOException {
-        try {
-            //create a BufferedReader which loads the data when duke.Duke starts up
-            String line;
-            FileReader fReader = new FileReader(text);
-            BufferedReader reader = new BufferedReader(fReader);
-
-            //reading data
-            while ((line = reader.readLine()) != null) {
-                String[] curr = new String[4];
-                curr[0] = line.substring(1, 2);
-                curr[1] = line.substring(4, 5);
-                curr[2] = line.substring(7);
-                switch (curr[1]) {
-                case "T":
-                    TaskList.addSpecificTask("todo " + curr[2]);
-                case "E":
-                    TaskList.addSpecificTask("event " + curr[2]);
-                case "D":
-                    TaskList.addSpecificTask("deadline " + curr[2]);
-                default: break;
-                }
-                if (curr[1].equals("X")) {
-                    TaskList.getLast().markAsDone();
-                }
-                reader.close();
-            }
-        } catch (IOException e) {
-            FileWriter fWriter = new FileWriter(text, true);
-            writer = new BufferedWriter(fWriter);
-        }
-    }
-
-    /**
      * Rewrites the duke.txt file with the new list of tasks.
      */
     public static void overwrite() throws IOException {
-        FileWriter fWriter = new FileWriter(text, false);
+        FileWriter fWriter = new FileWriter("data/duke.txt", false);
         writer = new BufferedWriter(fWriter);
         writer.write(TaskList.overwrite());
         writer.close();
-        FileWriter newWriter = new FileWriter(text, true);
+        FileWriter newWriter = new FileWriter("data/duke.txt", true);
         writer = new BufferedWriter(newWriter);
     }
 }

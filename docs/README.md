@@ -15,22 +15,6 @@ Todo: `todo [description]` \
 Event: `event [description] /at [dd-MM-yyyy h:mma]` \
 Deadline: `deadline [description] /by [dd-MM-yyyy h:mma]`
 
-Example of usage: `event b /at 11-11-1111 1111`
-
-Expected output:
-```
-Got it. I've added this task:
-[E][ ] b (at: Nov 11 1111 1111)
-```
-
-Example of usage: `todo ip`
-
-Expected output:
-```
-Got it. I've added this task:
-[T][ ] ip
-```
-
 ### Update Task
 
 Updates an existing task to the new user input. The task type does not have to be specified.
@@ -42,7 +26,7 @@ Example of usage: `update 2 tp`
 
 Expected output:
 ```
-Task 2 has been updated to:
+Nice! I've marked this task as done:
 2. [T][X] tp
 ```
 
