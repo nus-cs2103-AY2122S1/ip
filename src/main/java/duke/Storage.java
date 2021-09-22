@@ -16,6 +16,7 @@ import duke.Task.*;
 public class Storage {
     /**Path to current directory in which the app is run*/
     private java.nio.file.Path dirpath;
+
     /**Path to tasklist*/
     private Path taskListPath;
 
@@ -25,8 +26,10 @@ public class Storage {
      *
      */
     Storage() {
-        this.dirpath = Paths.get("data");
-        this.taskListPath = Paths.get("data", "DukeTask.txt");
+        String DIRECTORY = "data";
+        String FILENAME = "DukeTask.txt";
+        this.dirpath = Paths.get(DIRECTORY);
+        this.taskListPath = Paths.get(DIRECTORY, FILENAME);
         boolean directoryExists = Files.exists(dirpath);
         boolean fileExist = Files.exists(taskListPath);
         if (!directoryExists) {
@@ -84,24 +87,29 @@ public class Storage {
                 if (curr.equals("")) {
                     continue;
                 }
-                Character tasktype = curr.charAt(1);
-                Character isDone = curr.charAt(4);
-                String desc = curr.substring(6);
+                int TASK_TYPE_INDEX = 1;
+                int TASK_DONE_SIGN_INDEX = 4;
+                int TASK_DESCRIPTION_INDEX = 6;
+                Character taskType = curr.charAt(TASK_TYPE_INDEX);
+                Character isDone = curr.charAt(TASK_DONE_SIGN_INDEX);
+                String desc = curr.substring(TASK_DESCRIPTION_INDEX);
                 desc = desc.trim();
                 boolean done = isDone == 'X';
-                if (tasktype == 'T') {
+                if (taskType == 'T') {
                     currTask = new Todo(desc, done);
-                } else if (tasktype == 'E') {
-                    int index = desc.indexOf("at:");
-                    int n = desc.length();
-                    String date = desc.substring(index + 4, n - 1);
-                    currTask = new Event(desc.substring(0, index - 1), done, LocalDate.parse(date));
-                } else if (tasktype == 'D') {
-                    int index = desc.indexOf("by:");
-                    int n = desc.length();
-                    String date = desc.substring(index + 4, n - 1);
+                } else if (taskType == 'E') {
+                    int AT_SPECIFIER_LENGTH = 4;
+                    int dateIndex = desc.indexOf("at:") + AT_SPECIFIER_LENGTH;
+                    int descriptionLength = desc.length();
+                    String date = desc.substring(dateIndex, descriptionLength - 1);
+                    currTask = new Event(desc.substring(0, dateIndex - AT_SPECIFIER_LENGTH - 1), done, LocalDate.parse(date));
+                } else if (taskType == 'D') {
+                    int BY_SPECIFIER_LENGTH = 4;
+                    int dateIndex = desc.indexOf("by:") + BY_SPECIFIER_LENGTH;
+                    int descriptionLength = desc.length();
+                    String date = desc.substring(dateIndex, descriptionLength - 1);
 
-                    currTask = new Deadline(desc.substring(0, index), done, LocalDate.parse(date));
+                    currTask = new Deadline(desc.substring(0, dateIndex - BY_SPECIFIER_LENGTH - 1), done, LocalDate.parse(date));
                 }
                 tasks.addTask(currTask);
         }

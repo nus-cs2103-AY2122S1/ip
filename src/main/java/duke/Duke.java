@@ -15,23 +15,6 @@ public class Duke {
     public Duke(){
         storage.loadDataToTasks(tasks);
     }
-    /**
-     * Start the application and the chatbot in the commandline.
-     *
-     */
-    public void run() {
-
-        String userInput = "";
-        Ui.displayGreeting();
-        Scanner scanner = new Scanner(System.in);
-        userInput = Ui.takeInput();
-        while(!userInput.equals("bye")) {
-            Parser.handleInput(userInput, tasks);
-            userInput = Ui.takeInput();
-
-        }
-        storage.saveTasksToStorage(tasks);
-    }
 
     public String getResponse(String userInput){
         PrintStream standardOut = System.out;
@@ -46,8 +29,5 @@ public class Duke {
         storage.saveTasksToStorage(tasks);
         return response;
 
-    }
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

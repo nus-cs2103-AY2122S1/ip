@@ -1,4 +1,5 @@
 package duke;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import duke.Task.*;
@@ -20,16 +21,6 @@ public class Ui {
         System.out.println("Hello, What Can I do for you ?\n -------------------------------");
     }
 
-    /**
-     * Takes in input string of the user
-     * @return user input as string
-     */
-    public static String takeInput() {
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
-        userInput = scanner.nextLine();
-        return userInput;
-    }
 
     public static void displayQuitMessage() {
         System.out.println("Duke : Bye, Hope to see you again soon !");
