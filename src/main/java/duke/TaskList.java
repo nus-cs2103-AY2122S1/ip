@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
  * Represents a list of any number of Tasks, including zero.
  */
 public class TaskList {
+    public static final String DUPLICATE_TASK_MESSAGE_SUFFIX = " already exists in the TaskList";
     private List<Task> taskList;
 
     /**
@@ -33,6 +34,9 @@ public class TaskList {
      * @param task The Task to be added to this TaskList
      */
     public void add(Task task) {
+        if (find(task.getName()) != null) {
+            throw new IllegalArgumentException(task.getName() + DUPLICATE_TASK_MESSAGE_SUFFIX);
+        }
         taskList.add(task);
     }
 
