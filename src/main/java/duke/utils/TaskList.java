@@ -1,8 +1,11 @@
 package duke.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import duke.task.Task;
 
 /**
@@ -14,14 +17,7 @@ import duke.task.Task;
  */
 public class TaskList {
 
-    private final List<Task> taskList;
-
-    /**
-     * Class Constructor that initiates a new Task List
-     */
-    public TaskList() {
-        taskList = new ArrayList<>();
-    }
+    private List<Task> taskList;
 
     /**
      * Class Constructor that initiates a Task List from a given Storage File
@@ -31,20 +27,36 @@ public class TaskList {
      * @param storageFile provided storage file
      */
     public TaskList(File storageFile) {
-        this();
+        try {
+            Scanner sc = new Scanner(storageFile);
+            sc.useDelimiter(" | ");
+            taskList = new ArrayList<>();
+            while(sc.hasNext()) {
+                System.out.println(sc.next());
+            }
+        } catch (FileNotFoundException e) {
+            taskList = new ArrayList<>();
+        }
+    }
+
+    /**
+     * Class Constructor that initiates a new Task List
+     */
+    public TaskList() {
+        taskList = new ArrayList<>();
     }
 
     /**
      * Adds a Task into the Task List
      */
-    public void add(Task t){
+    public void add(Task t) {
         taskList.add(t);
     }
 
     /**
      * Removes a Task from the Task List
      */
-    public void remove(int index){
+    public void remove(int index) {
         taskList.remove(index);
     }
 
@@ -53,7 +65,7 @@ public class TaskList {
      *
      * @return size of the task list
      */
-    public int size(){
+    public int size() {
         return taskList.size();
     }
 
@@ -63,7 +75,23 @@ public class TaskList {
      * @param index target index within the Task List
      * @return Task at the specified index
      */
-    public Task get(int index){
+    public Task get(int index) {
         return taskList.get(index);
+    }
+
+    /**
+     * Retrieves a Task array containing the provided string
+     *
+     * @param txt target text to search for within text
+     * @return Task array of tasks containing the provided text string
+     */
+    public TaskList find(String txt) {
+        TaskList lst = new TaskList();
+        for (Task t : taskList) {
+            if (t.getDescription().contains(txt)) {
+                lst.add(t);
+            }
+        }
+        return lst;
     }
 }

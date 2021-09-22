@@ -1,25 +1,22 @@
 package duke;
 
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.application.Application;
 
-public class Duke extends Application {
+public class Duke {
 
     private boolean activated;
     private final TaskList tasks;
@@ -30,7 +27,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
         this("/data", "data.txt");
@@ -43,9 +41,9 @@ public class Duke extends Application {
         tasks = new TaskList(storage.getFile());
     }
 
-    private void run() {
-        Scanner scannerObj = new Scanner(System.in);
-        ui.greet();
+    /*public String getResponse(String input) {
+        Scanner scannerObj = new Scanner(input);
+        String out = "";
         while (activated) {
             String nextIn;
 
@@ -60,22 +58,22 @@ public class Duke extends Application {
             switch (selector) {
             case 0:
                 activated = false;
-                ui.exit();
+                out = ui.exit();
                 break;
             case 1:
-                ui.list(tasks);
+                out = ui.list(tasks);
                 break;
             case 2:
                 int index = scannerObj.nextInt() - 1;
                 tasks.get(index).setDone();
-                ui.done(tasks.get(index));
+                out = ui.done(tasks.get(index));
                 break;
             case 3:
                 try {
                     nextTask = new Todo(scannerObj.nextLine());
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
-                    ui.todo(nextTask, tasks.size());
+                    out = ui.todo(nextTask, tasks.size());
                     break;
                 } catch (NoSuchElementException e) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -104,12 +102,12 @@ public class Duke extends Application {
                     nextTask = new Deadline(desc, var);
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
-                    ui.deadline(nextTask, tasks.size());
+                    out = ui.deadline(nextTask, tasks.size());
                 } else {
                     nextTask = new Event(desc, var);
                     tasks.add(nextTask);
                     storage.saveEntry(nextTask);
-                    ui.event(nextTask, tasks.size());
+                    out = ui.event(nextTask, tasks.size());
                 }
                 break;
             case 6:
@@ -117,44 +115,30 @@ public class Duke extends Application {
                 Task t = tasks.get(index);
                 tasks.remove(index);
                 storage.deleteEntry(t);
-                ui.delete(t, tasks.size());
+                out = ui.delete(t, tasks.size());
                 break;
             case 7:
                 nextTask = new Task(scannerObj.nextLine());
                 tasks.add(nextTask);
                 storage.saveEntry(nextTask);
-                ui.add(nextTask.toString());
+                out = ui.add(nextTask.toString());
                 break;
             case 8:
                 String phrase = scannerObj.nextLine();
-                // Task [] res = tasks.find(phrase);
-                // ui.find(res);
+                TaskList res = tasks.find(phrase);
+                out = ui.list(res);
                 break;
             default:
-                ui.echo();
+                out = ui.echo();
             }
         }
+        return out;
+    }*/
+
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
-    public void main(String[] args) {
-        new Duke().run();
-    }
 
-    @Override
-    public void start(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-    }
 }

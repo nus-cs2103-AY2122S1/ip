@@ -1,10 +1,10 @@
 package duke.utils;
 
-import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import duke.task.Deadline;
@@ -20,8 +20,8 @@ import duke.task.Task;
  */
 public class Storage {
 
-    private final File storageFile;
     private static final String tempFileName = "temp.txt";
+    private final File storageFile;
     private final String fileName;
     private final String folderPath;
     private final String storagePath;
@@ -48,14 +48,14 @@ public class Storage {
      */
     public File getFile() {
         try {
-            createFile(folderPath,fileName);
+            createFile(folderPath, fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return new File(storagePath);
     }
 
-    private void createFile(String folderPath, String fileName) throws IOException{
+    private void createFile(String folderPath, String fileName) throws IOException {
         File folder = new File(folderPath);
         if (!folder.exists()) {
             if (!folder.mkdirs()) {
@@ -80,7 +80,7 @@ public class Storage {
      */
     public void saveEntry(Task t) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile,true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile, true));
             writer.write(t.getType().name()
                 .concat(" | ")
                 .concat(Boolean.toString(t.getState()))
@@ -111,7 +111,7 @@ public class Storage {
                     .concat("\\")
                     .concat(tempFileName)
             );
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile,true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true));
             BufferedReader reader = new BufferedReader(new FileReader(storageFile));
             String toDelete = t.getType().name()
                     .concat(" | ")
@@ -119,7 +119,7 @@ public class Storage {
                     .concat(" | ")
                     .concat(t.getDescription());
             String curr;
-            while(true){
+            while (true) {
                 curr = reader.readLine();
                 if (curr == null) {
                     break;
