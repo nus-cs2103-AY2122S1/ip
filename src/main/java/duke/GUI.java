@@ -8,14 +8,16 @@ package duke;
  */
 public class GUI {
 
-    private TaskList taskList;
+    private final TaskList taskList;
+
+    private final String DATA_FILE_PATH = "./dude_data.txt";
 
     public static void main(String[] args) {
         Launcher.main(args);
     }
 
     public GUI() {
-        DataFile dataFile = new DataFile("./duke_data.txt");
+        DataFile dataFile = new DataFile(DATA_FILE_PATH);
         taskList = new TaskList(dataFile);
     }
 
