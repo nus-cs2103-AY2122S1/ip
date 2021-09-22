@@ -48,6 +48,6 @@ public class UserInterface {
      * @param error The error message to be written
      */
     public void displayError(String error) {
-        mainWindow.print(error);
+        mainWindow.displayError(error);
     }
 }
