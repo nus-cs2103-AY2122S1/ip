@@ -6,9 +6,9 @@
 User is able to add a task to the task list.
 The following is the type of tasks available : 
 
-*Todo : This task contains description and marker specifying if it has been done or not.
-*Event : This task contains description and marker, as well as date specified by 'at'
-*Deadline : This task contains description and marker, as well as date of the deadline specified by 'by'
+* Todo : This task contains description and marker specifying if it has been done or not.
+* Event : This task contains description and marker, as well as date specified by 'at'
+* Deadline : This task contains description and marker, as well as date of the deadline specified by 'by'
 
 
 ### Delete Task
@@ -37,7 +37,7 @@ Add a task of type Todo in the list with the specified description
 
 Example of usage: 
 
-todo help clean
+``` todo help clean ```
 
 
 
@@ -47,7 +47,7 @@ Shows the current task list
 
 Example of usage: 
 
-list
+``` list ```
 
 Expected outcome:
 
@@ -59,7 +59,7 @@ Add a task of type event in the list with the specified description and date
 
 Example of usage: 
 
-event party /at 2020-10-10
+``` event party /at 2020-10-10 ```
 
 Expected outcome:
 
@@ -72,7 +72,7 @@ Add a task of type deadline in the list with the specified description and date
 
 Example of usage: 
 
-deadline assignment /by 2001-10-10
+``` deadline assignment /by 2001-10-10 ```
 
 Expected outcome:
 
@@ -85,7 +85,7 @@ Mark a task to be done specified by the task id
 
 Example of usage: 
 
-done 1
+``` done 1 ```
 
 Expected outcome:
 
@@ -99,8 +99,8 @@ Deletes the task based on the specified task id.
 
 Example of usage: 
 
-delete 1
-
+``` delete 1 ```
+ 
 Expected outcome:
 
 task numbered 1 will be deleted
@@ -113,7 +113,7 @@ Sorts the task list by chronological order
 
 Example of usage: 
 
-sort
+``` sort ```
 
 Expected outcome:
 
@@ -125,7 +125,7 @@ Shows a list with tasks containing the keyword
 
 Example of usage: 
 
-find party
+``` find party ```
 
 Expected outcome:
 
@@ -135,3 +135,4 @@ List showing tasks with the keyword party
 
 Exits the program and close the window
 
+``` bye ```
