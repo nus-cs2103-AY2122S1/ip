@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke;
+    public static final String APP_NAME = "BTDuke";
 
     @Override
     public void start(Stage stage) {
@@ -19,6 +20,7 @@ public class Main extends Application {
         ap.setDuke(duke);
         Scene scene = new Scene(ap);
         stage.setScene(scene);
+        stage.setTitle(APP_NAME);
         stage.show();
         duke.showGreeting();
     }
