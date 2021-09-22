@@ -37,10 +37,15 @@ public class TaskList {
      * @throws DukeException if the User leaves the description blank.
      */
     public static String todo(String todoEntry) throws DukeException {
-        if (todoEntry.length() == 5) {
+        if (todoEntry.length() == 5 || todoEntry.length() == 2) {
             throw new DukeException("Sorry, please enter a description!");
         }
-        String todoTitle = todoEntry.substring(5);
+        String todoTitle;
+        if (todoEntry.substring(0, 5).equals("todo ")) {
+            todoTitle = todoEntry.substring(5);
+        } else {
+            todoTitle = todoEntry.substring(2);
+        }
         Todo newToDo = new Todo(todoTitle);
         storage.add(newToDo);
         return "Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
@@ -54,7 +59,7 @@ public class TaskList {
      *      deadline in the wrong format.
      */
     public static String deadline(String deadlineEntry) throws DukeException {
-        if (deadlineEntry.length() == 9) {
+        if (deadlineEntry.length() == 9 || deadlineEntry.length() == 2) {
             throw new DukeException("Sorry, please enter a description!");
         }
         int indexOfSlash = deadlineEntry.indexOf("/");
@@ -64,7 +69,12 @@ public class TaskList {
         String deadlineDate = deadlineEntry.substring(indexOfSlash + 4);
 
         if (Time.validateJavaDate(deadlineDate)) {
-            String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
+            String deadlineTitle;
+            if (deadlineEntry.substring(0, 9).equals("deadline ")) {
+                deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
+            } else {
+                deadlineTitle = deadlineEntry.substring(2, indexOfSlash);
+            }
             deadlineDate = Time.changeDateFormat(deadlineDate);
             Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
             storage.add(newDeadline);
@@ -73,7 +83,6 @@ public class TaskList {
         } else {
             throw new DukeException("Sorry, please enter the deadline in the correct format! (DD/MM/YYYY)");
         }
-
     }
 
     /**
@@ -83,7 +92,7 @@ public class TaskList {
      *      event date in the wrong format.
      */
     public static String event(String eventEntry) throws DukeException {
-        if (eventEntry.length() == 6) {
+        if (eventEntry.length() == 6 || eventEntry.length() == 2) {
             throw new DukeException("Sorry, please enter a description!");
         }
         int indexOfSlash = eventEntry.indexOf("/");
@@ -94,7 +103,12 @@ public class TaskList {
         String eventDate = eventEntry.substring(indexOfSlash + 4);
 
         if (Time.validateJavaDate(eventDate)) {
-            String eventTitle = eventEntry.substring(6, indexOfSlash);
+            String eventTitle;
+            if (eventEntry.substring(0, 6).equals("event ")) {
+                eventTitle = eventEntry.substring(6, indexOfSlash);
+            } else {
+                eventTitle = eventEntry.substring(2, indexOfSlash);
+            }
             Event newEvent = new Event(eventTitle, eventDate);
             storage.add(newEvent);
             return "Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are "

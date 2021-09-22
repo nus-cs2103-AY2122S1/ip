@@ -33,7 +33,8 @@ public class Parser {
      * @return boolean of whether Todo input was correct.
      */
     public boolean parseToDo(String input) {
-        return input.length() >= todoConstant && input.substring(0, 5).equals("todo ");
+        return input.length() >= todoConstant && input.substring(0, 5).equals("todo ")
+                || input.substring(0, 2).equals("t ");
     }
 
     /**
@@ -42,7 +43,8 @@ public class Parser {
      * @return boolean of whether Deadline input was correct.
      */
     public boolean parseDeadline(String input) {
-        return input.length() >= deadlineConstant && input.substring(0, 9).equals("deadline ");
+        return input.length() >= deadlineConstant && input.substring(0, 9).equals("deadline ")
+                || input.substring(0, 2).equals("d ");
     }
 
     /**
@@ -51,7 +53,8 @@ public class Parser {
      * @return boolean of whether Event input was correct.
      */
     public boolean parseEvent(String input) {
-        return input.length() >= eventConstant && input.substring(0, 6).equals("event ");
+        return input.length() >= eventConstant && input.substring(0, 6).equals("event ")
+                || input.substring(0, 2).equals("e ");
     }
 
     /**
