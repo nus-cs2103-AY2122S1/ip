@@ -9,21 +9,6 @@ public class Ui {
      * Class constructor that constructs a Ui object.
      */
     public Ui() {
-
-    }
-
-    /**
-     * Displays welcome message.
-     */
-    public String welcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n"
-                + logo + "\n"
-                + "What can I do for you?";
     }
 
     /**
@@ -33,13 +18,6 @@ public class Ui {
      */
     public String showError(DukeException error) {
         return error.toString();
-    }
-
-    /**
-     * Displays bye message.
-     */
-    public String bye() {
-        return "Bye! Hope to see you again soon!";
     }
 
     /**

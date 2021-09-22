@@ -11,6 +11,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private static final int DESCRIPTION = 0;
+    private static final int DATE_TIME = 1;
     /**
      * Class constructor that constructs a Duke object.
      *
@@ -28,8 +30,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to the user input given.
+     *
+     * @param input Input given by user.
+     * @return Response to the input given.
      */
     public String getResponse(String input) {
         Parser parser = new Parser(input);
@@ -37,94 +41,97 @@ public class Duke {
         assert (this.tasks.noOfTask() >= 0) : "Number of tasks cannot be negative";
         try {
             if (parser.isList()) {
-                return this.ui.listAll(this.tasks);
+                return respondToList(parser);
             } else if (parser.isDone()) {
-                try {
-                    // Run based on done command
-                    this.tasks.done(parser.getSecondPartInInt());
-                    this.storage.save(parser.getCommand());
-
-                    this.storage.assertFile();
-                    return ui.doneTask(this.tasks.getMostRecent());
-
-                } catch (DukeException e) {
-                    return ui.showError(e);
-
-                }
+                return respondToDone(parser);
             } else if (parser.isToDo()) {
-                try {
-                    // Run based on todo command
-                    ToDo task = new ToDo(parser.getSecondPart());
-                    this.tasks.add(task);
-
-                    this.storage.assertFile();
-                    this.storage.save(parser.getCommand());
-                    return ui.addTask(this.tasks.getMostRecent(), this.tasks);
-
-                } catch (DukeException e) {
-                    // Display error
-                    return ui.showError(e);
-
-                }
+                return respondToToDo(parser);
             } else if (parser.isDeadline()) {
-                try {
-                    // Run based on deadline command
-                    Deadline task = new Deadline(parser.splitSecondPartForDeadline()[0],
-                            parser.splitSecondPartForDeadline()[1]);
-                    this.tasks.add(task);
-                    this.storage.save(parser.getCommand());
-
-                    this.storage.assertFile();
-                    return ui.addTask(this.tasks.getMostRecent(), this.tasks);
-
-                } catch (DukeException e) {
-                    // Display error
-                    return ui.showError(e);
-
-                }
+                return respondToDeadline(parser);
             } else if (parser.isEvent()) {
-                try {
-                    // Run based on event command
-                    Event task = new Event(parser.splitSecondPartForEvent()[0],
-                            parser.splitSecondPartForEvent()[1]);
-                    this.tasks.add(task);
-                    this.storage.save(parser.getCommand());
-
-                    this.storage.assertFile();
-                    return ui.addTask(this.tasks.getMostRecent(), this.tasks);
-
-                } catch (DukeException e) {
-                    // Display error
-                    return ui.showError(e);
-
-                }
+                return respondToEvent(parser);
             } else if (parser.isDelete()) {
-                try {
-                    // Run based on delete command
-                    this.tasks.delete(parser.getSecondPartInInt());
-                    return ui.deleteTask(this.tasks.getMostRecent(), this.tasks);
-
-                } catch (DukeException e) {
-                    // Display error
-                    return ui.showError(e);
-
-                }
+                return respondToDelete(parser);
             } else if (parser.isFind()) {
-                try {
-                    TaskList taskList = this.tasks.find(parser.getSecondPart());
-                    return ui.findTask(taskList);
-
-                } catch (DukeException e) {
-                    return ui.showError(e);
-
-                }
+                return respondToFind(parser);
             } else {
                 throw new DukeException("I do not know what you want to do!");
             }
         } catch (DukeException e) {
-            // Display error
             return ui.showError(e);
+        }
+    }
 
+    private String respondToList(Parser parser) {
+        return this.ui.listAll(this.tasks);
+    }
+
+    private String respondToDone(Parser parser) {
+        try {
+            this.tasks.done(parser.getSecondPartInInt());
+            this.storage.save(parser.getCommand());
+            this.storage.assertFile();
+            return this.ui.doneTask(this.tasks.getMostRecent());
+        } catch (DukeException e) {
+            return this.ui.showError(e);
+        }
+    }
+
+    private String respondToToDo(Parser parser) {
+        try {
+            ToDo task = new ToDo(parser.getSecondPart());
+            this.tasks.add(task);
+            this.storage.save(parser.getCommand());
+            this.storage.assertFile();
+            return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
+        } catch (DukeException e) {
+            return this.ui.showError(e);
+        }
+    }
+
+    private String respondToDeadline(Parser parser) {
+        try {
+            Deadline task = new Deadline(parser.splitSecondPartForDeadline()[DESCRIPTION],
+                    parser.splitSecondPartForDeadline()[DATE_TIME]);
+            this.tasks.add(task);
+            this.storage.save(parser.getCommand());
+            this.storage.assertFile();
+            return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
+        } catch (DukeException e) {
+            return this.ui.showError(e);
+        }
+    }
+
+    private String respondToEvent(Parser parser) {
+        try {
+            Event task = new Event(parser.splitSecondPartForEvent()[DESCRIPTION],
+                    parser.splitSecondPartForEvent()[DATE_TIME]);
+            this.tasks.add(task);
+            this.storage.save(parser.getCommand());
+            this.storage.assertFile();
+            return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
+
+        } catch (DukeException e) {
+            return this.ui.showError(e);
+        }
+    }
+
+    private String respondToDelete(Parser parser) {
+        try {
+            this.tasks.delete(parser.getSecondPartInInt());
+            return this.ui.deleteTask(this.tasks.getMostRecent(), this.tasks);
+        } catch (DukeException e) {
+            return this.ui.showError(e);
+        }
+    }
+
+    private String respondToFind(Parser parser) {
+        try {
+            TaskList taskList = this.tasks.find(parser.getSecondPart());
+            return this.ui.findTask(taskList);
+
+        } catch (DukeException e) {
+            return this.ui.showError(e);
         }
 
     }
