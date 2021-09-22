@@ -1,0 +1,11 @@
+list
+todo buy bk
+event meeting /at 4pm
+deadline finish hw /by thu 11pm
+todo sell bk
+list
+done 2
+done 1
+list
+done 3
+bye

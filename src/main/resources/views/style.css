@@ -1,0 +1,40 @@
+#dialogContainer {
+     -fx-background-color : #e5e5e5;
+}
+
+.sendButton {
+    -fx-background-color : #05071F;
+    -fx-text-fill : white;
+    -fx-border : #95d0d0;
+}
+
+.sendButton:hover {
+    -fx-background-color : #35393e;
+}
+
+#userInput {
+    -fx-background-color: #35393e;
+    -fx-text-fill: white;
+}
+
+.scroll-bar{
+    -fx-background-color: #10165F;
+    -fx-background-insets: 0 0 0 0;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #d3d3d3;
+    -fx-background-radius: 10em;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #35393e;
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 10.0em;
+}
