@@ -38,7 +38,7 @@ public class Duke {
     public String getResponse(String input) {
         Parser parser = new Parser(input);
 
-        assert (this.tasks.noOfTask() >= 0) : "Number of tasks cannot be negative";
+        assert (this.tasks.getNoOfTasks() >= 0) : "Number of tasks cannot be negative";
         try {
             if (parser.isList()) {
                 return respondToList(parser);
@@ -71,7 +71,7 @@ public class Duke {
             this.tasks.done(parser.getSecondPartInInt());
             this.storage.save(parser.getCommand());
             this.storage.assertFile();
-            return this.ui.doneTask(this.tasks.getMostRecent());
+            return this.ui.doneTask(this.tasks);
         } catch (DukeException e) {
             return this.ui.showError(e);
         }
@@ -83,7 +83,7 @@ public class Duke {
             this.tasks.add(task);
             this.storage.save(parser.getCommand());
             this.storage.assertFile();
-            return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
+            return this.ui.addTask(this.tasks);
         } catch (DukeException e) {
             return this.ui.showError(e);
         }
@@ -96,7 +96,7 @@ public class Duke {
             this.tasks.add(task);
             this.storage.save(parser.getCommand());
             this.storage.assertFile();
-            return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
+            return this.ui.addTask(this.tasks);
         } catch (DukeException e) {
             return this.ui.showError(e);
         }
@@ -109,7 +109,7 @@ public class Duke {
             this.tasks.add(task);
             this.storage.save(parser.getCommand());
             this.storage.assertFile();
-            return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
+            return this.ui.addTask(this.tasks);
 
         } catch (DukeException e) {
             return this.ui.showError(e);
@@ -119,7 +119,7 @@ public class Duke {
     private String respondToDelete(Parser parser) {
         try {
             this.tasks.delete(parser.getSecondPartInInt());
-            return this.ui.deleteTask(this.tasks.getMostRecent(), this.tasks);
+            return this.ui.deleteTask(this.tasks);
         } catch (DukeException e) {
             return this.ui.showError(e);
         }

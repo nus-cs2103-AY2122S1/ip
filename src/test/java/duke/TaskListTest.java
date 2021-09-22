@@ -10,14 +10,18 @@ public class TaskListTest {
     @Test
     void testStringConversion() {
         duke.TaskList tasklist = new duke.TaskList();
-        duke.Deadline deadline = new duke.Deadline("return book", "02/02/2022 1800");
-        duke.Event event = new duke.Event("date with Mary Jane", "05/11/2024 2000");
-        duke.ToDo todo1 = new duke.ToDo("go for a run");
-        duke.ToDo todo2 = new duke.ToDo("eat dinner");
-        tasklist.add(deadline);
-        tasklist.add(event);
-        tasklist.add(todo1);
-        tasklist.add(todo2);
+        try {
+            duke.Deadline deadline = new duke.Deadline("return book", "02/02/2022 1800");
+            duke.Event event = new duke.Event("date with Mary Jane", "05/11/2024 2000");
+            duke.ToDo todo1 = new duke.ToDo("go for a run");
+            duke.ToDo todo2 = new duke.ToDo("eat dinner");
+            tasklist.add(deadline);
+            tasklist.add(event);
+            tasklist.add(todo1);
+            tasklist.add(todo2);
+        } catch (DukeException e) {
+            //there should not be an exception here.
+        }
         try {
             tasklist.done(3);
         } catch (DukeException e) {
@@ -33,22 +37,26 @@ public class TaskListTest {
     @Test
     void testNumberOfTasks() {
         duke.TaskList tasklist1 = new duke.TaskList();
-        duke.Deadline deadline = new duke.Deadline("return book", "02/02/2022 1800");
-        duke.Event event = new duke.Event("date with Mary Jane", "05/11/2024 2000");
-        duke.ToDo todo1 = new duke.ToDo("go for a run");
-        duke.ToDo todo2 = new duke.ToDo("eat dinner");
-        tasklist1.add(deadline);
-        tasklist1.add(event);
-        tasklist1.add(todo1);
-        tasklist1.add(todo2);
+        try {
+            duke.Deadline deadline = new duke.Deadline("return book", "02/02/2022 1800");
+            duke.Event event = new duke.Event("date with Mary Jane", "05/11/2024 2000");
+            duke.ToDo todo1 = new duke.ToDo("go for a run");
+            duke.ToDo todo2 = new duke.ToDo("eat dinner");
+            tasklist1.add(deadline);
+            tasklist1.add(event);
+            tasklist1.add(todo1);
+            tasklist1.add(todo2);
+        } catch (DukeException e) {
+            //there should not be an exception here.
+        }
         try {
             tasklist1.done(3);
         } catch (DukeException e) {
             fail();
         }
         duke.TaskList tasklist2 = new duke.TaskList();
-        assertEquals(4, tasklist1.noOfTask());
-        assertEquals(0, tasklist2.noOfTask());
+        assertEquals(4, tasklist1.getNoOfTasks());
+        assertEquals(0, tasklist2.getNoOfTasks());
     }
 
 }

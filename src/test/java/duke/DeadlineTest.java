@@ -8,7 +8,12 @@ public class DeadlineTest {
 
     @Test
     void testStringConversion() {
-        duke.Deadline deadline = new duke.Deadline("return book", "02/02/2022 1800");
+        Deadline deadline = null;
+        try {
+            deadline = new Deadline("return book", "02/02/2022 1800");
+        } catch (DukeException e) {
+            //there should not be an exception here.
+        }
         assertEquals("[D][ ] return book (by: 02 Feb 2022 06:00PM)", deadline.toString());
     }
 }

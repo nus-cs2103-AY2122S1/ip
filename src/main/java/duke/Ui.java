@@ -6,7 +6,7 @@ package duke;
 public class Ui {
 
     /**
-     * Class constructor that constructs a Ui object.
+     * Class constructor that constructs an Ui object.
      */
     public Ui() {
     }
@@ -20,6 +20,16 @@ public class Ui {
         return error.toString();
     }
 
+    private String showReminder(TaskList taskList) {
+        if (taskList.getNoOfReminders() == 0) {
+            return "\n\nYou did not set any reminders for yourself thus far!!";
+        } else {
+            return "\n\nAlso, please be reminded to do these tasks by the deadline!!\n"
+                    + taskList.reminderToString()
+                    + "\n";
+        }
+    }
+
     /**
      * Displays the tasks in the TaskList.
      *
@@ -28,49 +38,50 @@ public class Ui {
     public String listAll(TaskList taskList) {
         return "Here are the tasks in your list:\n"
                 + taskList
-                + "\n";
+                + showReminder(taskList);
     }
 
     /**
      * Displays done message with the associated task.
      *
-     * @param task The task that was done.
+     * @param taskList The taskList that is being processed, task will be obtained from the most recent.
      */
-    public String doneTask(Task task) {
+    public String doneTask(TaskList taskList) {
         return "Nice! I have marked this task as done!\n"
-                + task;
+                + taskList.getMostRecent()
+                + showReminder(taskList);
     }
 
     /**
      * Displays message that a task is added and also informs how many tasks are in the list after.
      *
-     * @param task The task that is added.
      * @param taskList TaskList that the task is added to.
      */
-    public String addTask(Task task, TaskList taskList) {
-        int length = taskList.noOfTask();
+    public String addTask(TaskList taskList) {
+        int length = taskList.getNoOfTasks();
 
         return "Added task:\n"
-                + task + "\n"
-                + "You have " + length + " tasks in the list";
+                + taskList.getMostRecent() + "\n"
+                + "You have " + length + " tasks in the list"
+                + showReminder(taskList);
     }
 
     /**
      * Displays message that a task is deleted and also informs how many tasks are in the list after.
      *
-     * @param task The task that is deleted.
      * @param taskList TaskList that the task is deleted from.
      */
-    public String deleteTask(Task task, TaskList taskList) {
-        int length = taskList.noOfTask();
+    public String deleteTask(TaskList taskList) {
+        int length = taskList.getNoOfTasks();
 
         return "Ok! I have removed this task:\n"
-                + task + "\n"
-                + "Now you have " + length + " tasks in the list.";
+                + taskList.getMostRecent() + "\n"
+                + "Now you have " + length + " tasks in the list."
+                + showReminder(taskList);
     }
 
     public String findTask(TaskList taskList) {
-        int length = taskList.noOfTask();
+        int length = taskList.getNoOfTasks();
 
         if (length != 0) {
             return "Here are the matching tasks in your list:\n"
