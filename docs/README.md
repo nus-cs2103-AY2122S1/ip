@@ -70,7 +70,7 @@ This writes to a `dude_data.txt` file.
 
 #### Marking tasks as done
 
-The command `done {task number}` marks a task as done, causing the `[ ]` column to be replaced by `[X]`.
+The command `done {task number}` marks a task as done, causing the `[ ]` column to be replaced by `[x]`.
 
 #### Deleting tasks
 
