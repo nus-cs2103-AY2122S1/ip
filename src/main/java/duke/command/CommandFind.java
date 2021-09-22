@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Task;
 import duke.TaskList;
 import duke.ui.UserInterface;
 
 public class CommandFind extends Command {
+    public static final String FIND_NAME = "find";
 
     private String keyword;
 
@@ -14,14 +14,7 @@ public class CommandFind extends Command {
 
     @Override
     public void execute(TaskList taskList, UserInterface ui) {
-        TaskList matchingTasks = new TaskList();
-        for (Task task: taskList.getTasks()) {
-            if (task.getName().contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
-        for (Task task: matchingTasks.getTasks()) {
-            ui.print(task.toString());
-        }
+        TaskList matchingTasks = taskList.match(keyword);
+        ui.print(matchingTasks.toString());
     }
 }

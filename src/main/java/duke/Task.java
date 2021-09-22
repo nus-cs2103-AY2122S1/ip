@@ -43,7 +43,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark this task as finished
+     * Marks this task as finished
      */
     public void markDone(){
         this.isDone = true;
@@ -56,7 +56,7 @@ public abstract class Task {
     public abstract String toCsvRow();
 
     /**
-     * Whether this Task is timed or not
+     * Returns whether this Task is timed or not
      * @return <code>isTimed</code>
      */
     public boolean isTimed(){

@@ -2,7 +2,6 @@ package duke;
 
 import duke.ui.MainWindow;
 import duke.ui.UserInterface;
-import javafx.stage.Stage;
 import duke.command.Command;
 
 import java.time.format.DateTimeFormatter;
@@ -41,16 +40,7 @@ public class Duke {
         command.execute(taskList, ui);
     }
 
-    /**
-     * Runs this Duke program.
-     */
-    public void run() {
-        ui.displayGreeting();
-        Command command;
-        do {
-            command = Parser.parse(ui.getResponse());
-            command.execute(taskList, ui);
-        } while(command.shouldExecuteNext());
+    public void save() {
         storage.save(ui, taskList);
     }
 }

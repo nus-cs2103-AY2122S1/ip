@@ -3,14 +3,18 @@ package duke;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends TimedTask {
+    public static final String EVENT_NAME = "event";
+    public static final String EVENT_INITIAL = "E";
+    public static final String EVENT_TIME_MARKER = "at";
+
     public Event(String name, String time){
         super(name, time);
     }
 
     @Override
     public String format(DateTimeFormatter dtformatter){
-        return String.format("[E][%s] %s (at: %s)",
-                this.isDone ? "X" : " ", name, dtformatter.format(time));
+        return String.format("[%s][%s] %s (at: %s)",
+                EVENT_INITIAL, this.isDone ? "X" : " ", name, dtformatter.format(time));
     }
 
     public Event(String name, String time, boolean isDone){
@@ -19,12 +23,13 @@ public class Event extends TimedTask {
 
     @Override
     public String toCsvRow() {
-        return String.join(",", "event", name, time.toString(), String.valueOf(isDone));
+        return String.join(
+                ",", EVENT_NAME, name, time.toString(), String.valueOf(isDone));
     }
 
     @Override
     public String toString(){
-        return String.format("[E][%s] %s (at: %s)",
-                this.isDone ? "X" : " ", name, time);
+        return String.format("[%s][%s] %s (at: %s)",
+                EVENT_INITIAL, this.isDone ? "X" : " ", getName(), time);
     }
 }

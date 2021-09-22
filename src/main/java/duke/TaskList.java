@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of any number of Tasks, including zero.
@@ -51,26 +52,51 @@ public class TaskList {
     }
 
     /**
+     * Finds all Tasks containing a supplied String.
+     * If multiple are present, the first one is returned.
+     * @param keyword The name of the Task to find
+     * @return A Task with the same name, or <code>null</code> if none was found.
+     */
+    public TaskList match(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.getName().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return new TaskList(matchingTasks);
+    }
+
+
+
+    /**
      * Removes a Task with the same name as a supplied String
      * If multiple are present, the first is deleted
      * @param taskName The name of the Task to be deleted
      * @return The deleted Task, or <code>null</code> if none were deleted
      */
     public Task delete(String taskName) {
-        for (Task task: taskList) {
-            if (task.getName().equals(taskName)) {
-                taskList.remove(task);
-                return task;
-            }
+        Task taskToDelete = find(taskName);
+        if (taskToDelete != null){
+            taskList.remove(taskToDelete);
         }
-        return null;
+        return taskToDelete;
     }
 
     /**
-     * Returns all tasks in this TaskList
-     * @return A shallow copy of the Tasks in this Tasklist
+     * Converts this TaskList to a String in CSV format
+     * @return A CSV representation of this TaskList
      */
-    public List<Task> getTasks() {
-        return new ArrayList<Task>(taskList);
+    public String toCsvString() {
+        return String.join("\n", taskList.stream()
+                .map(task -> task.toCsvRow())
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public String toString() {
+        return String.join("\n", taskList.stream()
+                .map(task -> task.toString())
+                .collect(Collectors.toList()));
     }
 }
