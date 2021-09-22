@@ -11,14 +11,14 @@ public class Event extends TimedTask {
         super(name, time);
     }
 
+    public Event(String name, String time, boolean isDone){
+        super(name, time, isDone);
+    }
+
     @Override
     public String format(DateTimeFormatter dtformatter){
         return String.format("[%s][%s] %s (at: %s)",
                 EVENT_INITIAL, this.isDone ? "X" : " ", name, dtformatter.format(time));
-    }
-
-    public Event(String name, String time, boolean isDone){
-        super(name, time, isDone);
     }
 
     @Override
