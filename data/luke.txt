@@ -1,1 +1,2 @@
-T,0,Get help
+T,0,Study CS
+D,1,CS2100 Assignment 1,2021-10-21

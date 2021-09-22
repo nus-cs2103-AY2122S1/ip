@@ -70,7 +70,7 @@ public class Luke extends Application {
         TextField lukeInput = new TextField();
         ScrollPane scrollPane = configureScrollPane(lukeContainer);
         Button sendButton = configureSendButton(lukeContainer, lukeInput, stage);
-        Label sideLabel = configureSideLabel();
+        VBox sideLabel = configureSideLabel();
         HBox topRow = configureTopRow(scrollPane, sideLabel);
         AnchorPane container = configureAnchorPane(scrollPane, sendButton, lukeInput, topRow);
         Scene scene = new Scene(container);
@@ -147,7 +147,7 @@ public class Luke extends Application {
         }
     }
 
-    private HBox configureTopRow(ScrollPane scrollPane, Label sideLabel) {
+    private HBox configureTopRow(ScrollPane scrollPane, VBox sideLabel) {
         HBox topRow = new HBox();
         topRow.getChildren().addAll(scrollPane, sideLabel);
         return topRow;
@@ -164,25 +164,20 @@ public class Luke extends Application {
         return scrollPane;
     }
 
-    private Label configureSideLabel() {
-        Label sideLabel = new Label("LUKE");
-        sideLabel.setTextFill(Color.color(1,1,1));
-        sideLabel.setFont(new Font("Arial", 45));
-        sideLabel.setStyle("-fx-start-margin: 100");
+    private VBox configureSideLabel() {
+        Label title = new Label(" LUKE ");
+        title.setTextFill(Color.color(1,1,1));
+        title.setFont(new Font("Georgia", 45));
+        title.setStyle("-fx-start-margin: 100");
+
+        Label description = new Label(this.toString());
+        description.setTextFill(Color.color(1,1,1));
+        description.setFont(new Font("Georgia", 24));
+        description.setStyle("-fx-start-margin: 100");
+
+        VBox sideLabel = new VBox();
+        sideLabel.getChildren().addAll(title, description);
         return sideLabel;
-    }
-
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
@@ -265,8 +260,11 @@ public class Luke extends Application {
      */
     @Override
     public String toString() {
-        return "Hello! I'm Luke, your slightly useful personal assistant!\n"
-                + "I can help you remember tasks and other things :D";
+        return " Hello! I'm Luke, \n"
+                + " your slightly useful \n"
+                + " personal assistant! \n"
+                + " I can help you remember \n"
+                + " tasks and other things :D ";
     }
 }
 

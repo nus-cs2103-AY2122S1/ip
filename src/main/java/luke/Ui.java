@@ -51,18 +51,6 @@ public class Ui {
     /**
      * Prints out the added entry.
      *
-     * @param entry THe newly-added entry.
-     * @param id The #id of the newly-added entry.
-     */
-    public void addEntry(Entry entry, int id) {
-        System.out.println("I've added this entry to your list!");
-        this.printEntry(entry, id);
-        System.out.println(HORIZONTAL_DIVIDE);
-    }
-
-    /**
-     * Prints out the added entry.
-     *
      * @param entry The newly-added entry.
      * @param id The #id of the newly-added entry.
      */
@@ -71,23 +59,8 @@ public class Ui {
         this.getPrintEntry(entry, id);
     }
 
-    /**
-     * Prints out a horizontal line at the end of some operation.
-     */
-    public void endCommand() {
-        System.out.println(HORIZONTAL_DIVIDE);
-    }
-
-    public void listMatches() {
-        System.out.println("Looking for matching tasks in your list...");
-    }
-
     public String getListMatches() {
         return "Looking for matching tasks in your list...";
-    }
-
-    public void foundMatches() {
-        System.out.println("Here are the matching tasks in your list: ");
     }
 
     public String getFoundMatches() {
@@ -117,29 +90,11 @@ public class Ui {
 
     /**
      * Prints out farewell message.
-     */
-    public void printGoodByeUser() {
-        System.out.println("Bye! Hope to see you again soon :D");
-        System.out.println(HORIZONTAL_DIVIDE);
-    }
-
-    /**
-     * Prints out farewell message.
      *
      * @return String to say farewell to USER.
      */
     public String getGoodByeUser() {
         return "Bye! Hope to see you again soon :D";
-    }
-
-    /**
-     * Prints out the Error Message received when Parsing.
-     *
-     * @param parsingError Error encountered while parsing input.
-     */
-    public void handleParsingError(LukeException parsingError) {
-        System.out.println(parsingError.getMessage());
-        System.out.println(HORIZONTAL_DIVIDE);
     }
 
     /**
@@ -181,16 +136,6 @@ public class Ui {
      */
     public void handleLoadingError(LukeException loadingError) {
         System.out.println(loadingError.getMessage());
-        System.out.println(HORIZONTAL_DIVIDE);
-    }
-
-    /**
-     * Prints out entry just after deletion.
-     *
-     * @param deletedEntry Entry that has just been deleted.
-     */
-    public void showDeletedEntry(Entry deletedEntry) {
-        System.out.println("Removed entry\n" + deletedEntry);
         System.out.println(HORIZONTAL_DIVIDE);
     }
 

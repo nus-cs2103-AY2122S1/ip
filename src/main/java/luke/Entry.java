@@ -27,14 +27,6 @@ public abstract class Entry {
     }
 
     /**
-     * Method to revert the isDone status of the Entry.
-     */
-    public void revertDone() {
-        this.isDone = !this.isDone;
-    }
-
-
-    /**
      * Method to set the isDone status to true of an Entry.
      *
      * @return Boolean if successful operation.
