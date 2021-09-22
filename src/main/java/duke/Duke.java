@@ -38,6 +38,7 @@ public class Duke {
     public void respond(String input) {
         try {
             Command command = Parser.parse(input);
+            assert command != null;
             command.execute(taskList, ui);
         } catch (Exception ex) {
             ui.displayError(ex.getMessage());
