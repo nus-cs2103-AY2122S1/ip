@@ -1,5 +1,5 @@
 
 [T][ ] eat bread
-[E][ ] Dance (at: 2020-01-01)
+[T][ ]  kill
+[E][ ] pinus-eat (at: 2020-10-01)
 [D][ ] pinus-tech (by: 2021-11-11)
-[T][ ] kill pokemon

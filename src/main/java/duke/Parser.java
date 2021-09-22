@@ -1,6 +1,6 @@
 package duke;
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import duke.Task.*;
 
 /**
@@ -40,7 +40,7 @@ public class Parser {
 
             try {
                 Task removedTask = tasks.getTaskById(id - 1);
-                tasks.removeTaskById(id);
+                tasks.removeTaskById(id - 1);
                 Ui.displaySuccessfulRemoval(removedTask);
             } catch (Exception e) {
                 Ui.displayErrorMessage(e);
@@ -55,8 +55,10 @@ public class Parser {
             } catch (Exception e) {
                 Ui.displayErrorMessage(e);
             }
-        }
-        else {
+        } else if(userInput.startsWith("sort")){
+            tasks.sort();
+            Ui.displayTaskList(tasks);
+        } else {
             Task newTask = null;
             try {
                 newTask = handleTaskInput(userInput);
