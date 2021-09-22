@@ -137,8 +137,8 @@ public class EventTask extends Task {
 
             return new EventTask(actionDescription, isDone, date, startTime, endTime);
         } catch (InvalidNumOfStringPartsException | InvalidDateTimeFormatException e) {
-            String expectedFormat = String.format("[ ] <description> %s %s %s",
-                    SPLITTER_ACTION_TIME, dateFormat, timeFormat);
+            String expectedFormat = String.format("[ ] <description> %s %s %s %s",
+                    SPLITTER_ACTION_TIME, dateFormat, timeFormat, timeFormat);
             throw new InvalidFormatInStorageException(description, expectedFormat);
         }
     }
