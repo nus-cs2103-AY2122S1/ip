@@ -29,6 +29,7 @@ public abstract class Task {
      */
     public Task(String name, boolean isTimed, boolean isDone){
         this.name = name;
+        this.isTimed = isTimed;
         this.isDone = isDone;
     }
 

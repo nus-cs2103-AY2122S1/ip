@@ -9,7 +9,7 @@ public class ToDo extends Task {
     }
 
     public ToDo(String name, boolean isDone){
-        super(name, isDone);
+        super(name, false, isDone);
     }
 
     @Override
