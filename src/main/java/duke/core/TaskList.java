@@ -44,12 +44,12 @@ public class TaskList {
         return output;
     }
 
-    public void findAndListTasks(String keyword) {
+    public String findAndListTasks(String keyword) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int index = 1;
-        String regex = " ";
+        final String REGEX = " ";
         for (Task task : listOfTasks) {
-            String[] splittedTaskString = task.toString().split(regex);
+            String[] splittedTaskString = task.toString().split(REGEX);
             for (String s : splittedTaskString) {
                 // Check whether final character of string is ')'. If so, remove the ')'.
                 if (s.charAt(s.length() - 1) == ')') {
@@ -62,7 +62,9 @@ public class TaskList {
                 }
             }
         }
-        Ui.formatAndPrint(sb.substring(0, sb.length() - 1));
+
+        // Remove the last \n for a nicer output
+        return sb.substring(0, sb.length() - 1);
     }
 
     /**
@@ -73,6 +75,7 @@ public class TaskList {
      * @return The message to be displayed by Duke.
      */
     public String markAsDone(int index) {
+        assert index > 0: "Index of completed task should be at least 1.";
         Task taskToMark = listOfTasks.get(index - 1);
         taskToMark.setCompleted();
         String outputLine1 = "Nice! I've marked this task as done:\n";
@@ -87,6 +90,7 @@ public class TaskList {
      * @return The message to be displayed by Duke.
      */
     public String delete(int index) {
+        assert index > 0: "Index of task to delete should be at least 1.";
         Task taskToRemove = listOfTasks.get(index - 1);
         listOfTasks.remove(index - 1);
         String outputLine1 = "Noted. I've removed this task: \n";

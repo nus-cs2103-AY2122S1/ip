@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
      * @param indexToDelete Index of the task to be deleted.
      */
     public DeleteCommand(int indexToDelete) {
+        assert indexToDelete > 0: "Index to delete should be at least 1";
         this.indexToDelete = indexToDelete;
     }
 
