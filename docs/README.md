@@ -1,8 +1,10 @@
 # Dude User Guide
 
 ![Image of UI](./Ui.png)
+
 ## Features
-1. Cross platform compactible, only Java 11 JRE without any third party libraries is needed to run the same .jar executable
+
+1. Cross platform compactible (Windows, MacOS and Linux), only Java 11 JRE without any third party libraries is needed to run the same .jar executable
 2. Add different types of tasks, ToDo, DeadLine and Event tasks.
 3. Set deadlines or times for DeadLine and Event tasks.
 4. View all tasks added to the list.
@@ -10,9 +12,6 @@
 6. Mark tasks as done according to the list index
 7. Delete tasks by their list index
 8. Search for tasks matching a keyword
-
-
-### Cross platform compactible
 
 #### Instructions for running Dude
 1. Ensure Java 11 JRE or JDK is installed on your computer.
@@ -71,13 +70,17 @@ This writes to a `dude_data.txt` file.
 
 #### Marking tasks as done
 
-A task that is marked as done has the `[ ]` column replaced by `[X]`. To do so, run the following command:
-
-`done {task number}`
-
-#### Searching for task by keyword
-
+The command `done {task number}` marks a task as done, causing the `[ ]` column to be replaced by `[X]`.
 
 #### Deleting tasks
 
+To delete a task, enter `delete {task number}`.  
+
+### Searching for task by keyword
+
+Entering the `find` command with any keyword will prompt Dude to search the task list for any tasks that contain matching keywords.
+
+### Exiting Dude
+
+Unfortunately, exiting Dude via a command is currently not supported. Please click on the exit button on Dude's window to exit instead.
 
