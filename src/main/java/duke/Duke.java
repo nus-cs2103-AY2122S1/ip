@@ -38,6 +38,7 @@ public class Duke {
     public String getResponse(String input) {
         Parser parser = new Parser(input);
 
+        assert (this.tasks.noOfTask() >= 0) : "Number of tasks cannot be negative";
         try {
             if (parser.isList()) {
                 return respondToList(parser);
@@ -69,6 +70,7 @@ public class Duke {
         try {
             this.tasks.done(parser.getSecondPartInInt());
             this.storage.save(parser.getCommand());
+            this.storage.assertFile();
             return this.ui.doneTask(this.tasks.getMostRecent());
         } catch (DukeException e) {
             return this.ui.showError(e);
@@ -80,6 +82,7 @@ public class Duke {
             ToDo task = new ToDo(parser.getSecondPart());
             this.tasks.add(task);
             this.storage.save(parser.getCommand());
+            this.storage.assertFile();
             return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
         } catch (DukeException e) {
             return this.ui.showError(e);
@@ -92,6 +95,7 @@ public class Duke {
                     parser.splitSecondPartForDeadline()[DATE_TIME]);
             this.tasks.add(task);
             this.storage.save(parser.getCommand());
+            this.storage.assertFile();
             return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
         } catch (DukeException e) {
             return this.ui.showError(e);
@@ -104,6 +108,7 @@ public class Duke {
                     parser.splitSecondPartForEvent()[DATE_TIME]);
             this.tasks.add(task);
             this.storage.save(parser.getCommand());
+            this.storage.assertFile();
             return this.ui.addTask(this.tasks.getMostRecent(), this.tasks);
 
         } catch (DukeException e) {
@@ -128,5 +133,6 @@ public class Duke {
         } catch (DukeException e) {
             return this.ui.showError(e);
         }
+
     }
 }
