@@ -39,12 +39,7 @@ public class Storage {
         try {
             boolean successfulCreate = tmp.createNewFile();
             Scanner myReader = new Scanner(tmp);
-            boolean hasNoTask = true;
             while (myReader.hasNextLine()) {
-                if (hasNoTask) {
-                    System.out.println("Welcome back! Here are your last saved tasks!\n");
-                }
-                hasNoTask = false;
                 String data = myReader.nextLine();
                 String taskType = data.substring(3, 4);
                 boolean taskStatus = data.charAt(6) == 'X';
@@ -68,9 +63,6 @@ public class Storage {
                     break;
                 }
                 System.out.println("    " + data);
-            }
-            if (hasNoTask) {
-                throw new DukeException("    Nice! You have no pending tasks!");
             }
             myReader.close();
         } catch (IOException e) {

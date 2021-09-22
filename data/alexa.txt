@@ -1,4 +1,1 @@
-1.[T][X] whatever
-2.[T][X] wantutri
-3.[D][ ] test  (by:21 Feb 2021)
-
+1.[T][X] Exercise
