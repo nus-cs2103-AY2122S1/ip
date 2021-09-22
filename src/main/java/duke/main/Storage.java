@@ -106,7 +106,6 @@ public class Storage {
         }
         return task;
     }
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private String[] getTaskDescriptionTagAndDate(String taskString, String taskMarker, String ... timeMarker) {
         String divider = " | ";
         int startOfTaskDescriptionIndex = getStartingIndex(taskString, taskMarker);
@@ -138,14 +137,18 @@ public class Storage {
      * @param tasks an arraylist of tasks.
      * @throws IOException exception caused in creating new file.
      */
-    public void store(TaskList tasks) throws IOException {
-        fileWriter = new FileWriter(file, false);
-        String data = "";
-        for (int i = 0; i < tasks.getNumTasks(); i++) {
-            data = data.concat(tasks.getTask(i).formatToStore() + "\n");
+    public void store(TaskList tasks) throws DukeException {
+        try {
+            fileWriter = new FileWriter(loadStorageFile(), false);
+            String data = "";
+            for (int i = 0; i < tasks.getNumTasks(); i++) {
+                data = data.concat(tasks.getTask(i).formatToStore() + "\n");
+            }
+            fileWriter.write(data);
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DukeException(DukeException.Exceptions.IOException);
         }
-        fileWriter.write(data);
-        fileWriter.close();
     }
 
 }

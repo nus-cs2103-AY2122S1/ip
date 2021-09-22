@@ -1,9 +1,2 @@
-D | 0 | bake chocolate cake | Jan 06
-E | 1 | attend seminar | Jan 16
-T | 1 | read book
-D | 1 | return book | Jun 21
-E | 1 | project meeting | Aug 12
-T | 1 | join sports club
-T | 1 | create group chat
-D | 1 | set up meeting date | Aug 31
-E | 1 | project meeting | Sep 30
+T | 0 | buy cards  | #cool
+D | 0 | submit SEP form  | Sep 26 | #Travel

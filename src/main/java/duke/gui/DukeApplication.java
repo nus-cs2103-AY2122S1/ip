@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.command.Command;
+import duke.main.Duke;
 import duke.main.DukeException;
 import duke.main.Parser;
 import duke.main.Storage;
@@ -72,7 +73,6 @@ public class DukeApplication extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -98,7 +98,7 @@ public class DukeApplication extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+        new Duke("data", "duke.txt").run();
     }
 
     /**

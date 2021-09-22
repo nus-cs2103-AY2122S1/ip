@@ -14,12 +14,11 @@ import duke.task.TaskList;
  * @version CS2103T, Semester 2
  */
 public class ExitCommand extends Command {
-    private static final boolean IS_EXIT = false;
+    private static boolean IS_EXIT = true;
     /**
      * Class constructor.
      */
     public ExitCommand() {
-        assert isExit() : "isExist must return true";
     }
 
     /**
@@ -31,12 +30,8 @@ public class ExitCommand extends Command {
      * @throws DukeException exception handled by DukeException class
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            storage.store(tasks);
-            return ui.showFarewell();
-        } catch (IOException e) {
-            throw new DukeException(DukeException.Exceptions.IOException);
-        }
+        storage.store(tasks);
+        return ui.showFarewell();
     }
 
     /**
@@ -46,6 +41,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public boolean isExit() {
+        assert IS_EXIT : "IS_EXIT must be true";
         return IS_EXIT;
     }
 }

@@ -20,7 +20,6 @@ public abstract class Command {
      */
     public Command() {
         isExitCommand = false;
-        assert !isExit() : "isExit should return false";
     }
 
     /**

@@ -22,7 +22,7 @@ public class Ui {
     private static String secondLine = " What do you wanna do today? ";
     private static int bufferLength = 5;
     private static int width = Integer.max(firstLine.length(), secondLine.length()) + bufferLength;
-    private static final String FAREWELL = "@@@@ Till we meet again, my friend @@@@";
+    private static final String FAREWELL = "@@ Till we meet again, my friend @@";
     private static String buffer1 = padding.repeat((width - firstLine.length()) / 2);
     private static String buffer2 = padding.repeat((width - secondLine.length()) / 2);
     private static String welcomeMessage = buffer1 + firstLine + buffer1 + "\n" + buffer2 + secondLine + buffer2 + "\n";
