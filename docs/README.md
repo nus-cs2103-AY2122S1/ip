@@ -7,7 +7,7 @@
 3. Copy the file to the folder you want to use for your **Carrot Task Manager**.
 4. Double-click the file to start the app. You will see a window like this:  
   
-   ![Image](https://github.com/chingh20/ip/blob/a45ff7c92df8f3fd03943f313b67aed5f197a1ef/src/main/resources/images/StartUpPage.png)
+   ![Image](https://github.com/chingh20/ip/blob/master/src/main/resources/images/StartUpPage.png)
   
 5. Type any command in the text box and press Enter on your keyboard or click Send to execute it.  
    Some sample commands you might want to try is:   
