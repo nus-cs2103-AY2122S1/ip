@@ -1,6 +1,8 @@
 package ailurus;
 
 import java.io.InputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -74,7 +76,13 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (Ailurus.isExit()) {
-            Platform.exit();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 1000);
         }
     }
 }

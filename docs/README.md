@@ -6,6 +6,7 @@ Ailurus can get your tasks done faster than traditional GUI apps.
 
 ## Table of Content
 - [User Guide for Ailurus](#user-guide-for-ailurus)
+  - [Table of Content](#table-of-content)
   - [Quick start](#quick-start)
   - [Features](#features)
     - [Add, delete and list tasks](#add-delete-and-list-tasks)

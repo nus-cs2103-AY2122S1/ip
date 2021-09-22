@@ -1,6 +1,8 @@
 package ailurus;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,11 +36,5 @@ public class Main extends Application {
     @Override
     public void stop() {
         Ailurus.unloadStorage();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        Platform.exit();
     }
 }
