@@ -42,6 +42,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert storage != null : "Storage needs to be initialised";
+        assert ui != null : "Ui needs to be initialised";
         return Parser.handleCommand(input,tasks);
     }
 

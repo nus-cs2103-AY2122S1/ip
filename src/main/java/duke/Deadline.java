@@ -24,6 +24,7 @@ public class Deadline extends Task {
         this.completionDate = LocalDate.parse(by);
         this.type = type;
         this.by = by;
+        assert completionDate != null : "Deadline needs to have a date";
     }
 
     /**

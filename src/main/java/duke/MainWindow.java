@@ -40,6 +40,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert duke != null : "Duke needs to be initialized to proceed";
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (response.equals(Ui.end())) {

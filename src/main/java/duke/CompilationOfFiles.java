@@ -38,6 +38,7 @@ public class CompilationOfFiles {
                 System.out.println("A new file has been created "
                         + "as there are no saved files.");
             } else {
+                assert newFile != null : "File should not be empty";
                 Scanner sc = new Scanner(newFile);
                 while (sc.hasNext()) {
                     String[] line = sc.nextLine().split("/");
