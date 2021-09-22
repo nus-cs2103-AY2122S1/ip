@@ -1,5 +1,6 @@
 package duke.Task;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -11,6 +12,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
 
     public Task getTaskById(int id) {
         return tasks.get(id);
@@ -50,4 +52,7 @@ public class TaskList {
         return tasksInStringFormatted;
     }
 
+    public void sort(){
+        Collections.sort(this.tasks);
+    }
 }
