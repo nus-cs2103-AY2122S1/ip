@@ -11,6 +11,7 @@ import java.util.List;
 public final class TaskList {
     private static final List<String> taskString = new ArrayList<>();
     private static final List<Tasks> taskList = new ArrayList<>();
+    //initialise task number to start at 1
     private static int taskNumber = 1;
 
     /**
@@ -53,12 +54,12 @@ public final class TaskList {
     public static String complete(String task) {
         String str = "Nice! I've marked this task as done: \n";
         String numString = task.replaceAll("[^0-9]", "");
-        int num = Integer.parseInt(numString);
+        int index = Integer.parseInt(numString) - 1;
         for (int counter = 0; counter < taskString.size(); counter++) {
-            if (counter == num - 1) {
-                taskList.get(num - 1).markAsDone();
-                int index = counter + 1;
-                str += index + ". " + taskList.get(num - 1).toString();
+            if (counter == index) {
+                taskList.get(index).markAsDone();
+                int num = counter + 1;
+                str += num + ". " + taskList.get(index).toString();
             }
         }
         return str;
@@ -93,13 +94,11 @@ public final class TaskList {
      * Returns the list of tasks as how it should be inputted in the duke.txt file.
      * @return a String representation of the task list
      */
-    public static String overwrite() {
-        taskList.forEach(System.out::println);
+    public static String stringList() {
         String str = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            str = taskList.get(i).toString() + "\n";
+        for (Tasks tasks : taskList) {
+            str += tasks.toString() + "\n";
         }
-        System.out.println("\n" + str);
         return str;
     }
 
@@ -136,7 +135,7 @@ public final class TaskList {
     }
 
     /**
-     * Updates an existing task.
+     * Updates an existing task. If task was originally done, the update will change it to an incomplete task.
      * @param task task to be updated
      * @return response after update
      */
@@ -148,14 +147,15 @@ public final class TaskList {
         if (isTodo) {
             taskList.set(count - 1, new Todo(input[1]));
         } else if (isEvent) {
-            String[] event = task.split(" /at ", 2);
+            String[] event = task.split("/at ", 2);
             LocalDateTime startTime = LocalDateTime.parse(event[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
             taskList.set(count - 1, new Event("event " + input[1] + "/at ", startTime));
         } else {
-            String[] deadline = task.split(" /at ", 2);
+            //is a deadline
+            String[] deadline = task.split("/at ", 2);
             LocalDateTime dueTime = LocalDateTime.parse(deadline[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
             taskList.set(count - 1, new Deadline("deadline " + input[1] + "by ", dueTime));
         }
-        return "Task " + count + " has been updated to: \n" + input[1];
+        return "Task " + count + " has been updated to: \n" + taskList.get(count - 1);
     }
 }

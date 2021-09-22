@@ -28,8 +28,6 @@ public class Duke {
      */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-
-        Ui.sayHello();
         String task = sc.nextLine();
         storage.readFromFile();
 
@@ -48,8 +46,7 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from Duke tothe user input.
      */
     public String getResponse(String input) throws DukeException, IOException {
         try {

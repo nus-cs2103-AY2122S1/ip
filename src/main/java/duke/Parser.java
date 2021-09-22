@@ -9,6 +9,11 @@ import javafx.application.Platform;
  * Parses the user's input.
  */
 public class Parser {
+    public static final String HI_STRING = "Hi, I am BMO! Who wants to play video games?";
+    public static final String ME_STRING = "Bad user! Input some tasks now to be productive!";
+    public static final String HELP_STRING = "Try one of these commands to begin: todo, event, deadline, update, " +
+            "done, find, delete, list";
+    public static final String BYE_STRING = "Beep boop! Battery low. Commencing shutdown!";
 
     public Parser() {
     }
@@ -25,11 +30,11 @@ public class Parser {
         switch (task) {
         case "list": return TaskList.printList();
         case "bye":
-            String str = "Beep boop! Battery low. Commencing shutdown!";
             Platform.exit();
-            return str;
-        case "hi": return "Hi, I am BMO! Who wants to play video games?";
-        case "me": return "Bad user! Input some tasks now to be productive!";
+            return BYE_STRING;
+        case "hi": return HI_STRING;
+        case "me": return ME_STRING;
+        case "help": return HELP_STRING;
         default: break;
         }
         if (task.startsWith("done")) {

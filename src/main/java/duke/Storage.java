@@ -8,16 +8,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
+import java.io.FileNotFoundException;
 
 /**
  * Represents the file containing the list of tasks.
  */
 public class Storage {
     private static BufferedWriter writer;
-    private final String dataStoragePath;
+    private static String dataStoragePath;
 
     static {
         try {
@@ -37,6 +35,8 @@ public class Storage {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file found. Creating the file now!");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -52,7 +52,7 @@ public class Storage {
         try {
             //create a BufferedReader which loads the data when duke.Duke starts up
             String line;
-            FileReader fReader = new FileReader(this.dataStoragePath);
+            FileReader fReader = new FileReader(dataStoragePath);
             BufferedReader reader = new BufferedReader(fReader);
 
             //reading data
@@ -71,8 +71,8 @@ public class Storage {
                 if (line.contains("[X]")) {
                     TaskList.getLast().markAsDone();
                 }
-                reader.close();
             }
+            reader.close();
         } catch (IOException e) {
             FileWriter fWriter = new FileWriter("data/duke.txt", true);
             writer = new BufferedWriter(fWriter);
@@ -92,12 +92,13 @@ public class Storage {
         String str = "";
         try {
             if (isDeadline || isEvent || isTodo) {
+                writer = new BufferedWriter(new FileWriter(dataStoragePath, true));
                 str += TaskList.addSpecificTask(task);
                 assert TaskList.getSize() > 0;
                 System.out.println(TaskList.getLast().toString());
                 writer.write(TaskList.getLast().toString() + "\n");
+                writer.close();
             }
-            writer.close();
             FileWriter fWriter = new FileWriter("data/duke.txt", true);
             writer = new BufferedWriter(fWriter);
             return str;
@@ -113,7 +114,7 @@ public class Storage {
     public static void overwrite() throws IOException {
         FileWriter fWriter = new FileWriter("data/duke.txt", false);
         writer = new BufferedWriter(fWriter);
-        writer.write(TaskList.overwrite());
+        writer.write(TaskList.stringList());
         writer.close();
         FileWriter newWriter = new FileWriter("data/duke.txt", true);
         writer = new BufferedWriter(newWriter);
