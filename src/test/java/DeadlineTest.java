@@ -16,6 +16,6 @@ public class DeadlineTest {
     @Test
     @DisplayName("Adding a new Deadline should work")
     public void testTodoToString() {
-        assertEquals("[D][ ] Assignment (by: 23/09/2021)", testDeadline.toString());
+        assertEquals("[D][ ] Assignment (by:23/09/2021)", testDeadline.toString());
     }
 }

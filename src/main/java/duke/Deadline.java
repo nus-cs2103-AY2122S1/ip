@@ -19,6 +19,13 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * The constructor of the Deadline with status.
+     *
+     * @param description description of Deadline.
+     * @param deadline deadline of Deadline.
+     * @param status status of Deadline.
+     */
     public Deadline(String description, String deadline, boolean status) {
         super(description, status);
         this.deadline = deadline;

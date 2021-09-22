@@ -7,14 +7,12 @@ package duke;
 
 public class Parser {
 
-    private final static int doneConstant = 5;
-    private final static int todoConstant = 5;
-    private final static int deadlineConstant = 9;
-    private final static int eventConstant = 6;
-    private final static int deleteConstant = 7;
-    private final static int storageConstant = 9;
-
-
+    private static final int doneConstant = 5;
+    private static final int todoConstant = 5;
+    private static final int deadlineConstant = 9;
+    private static final int eventConstant = 6;
+    private static final int deleteConstant = 7;
+    private static final int storageConstant = 9;
 
     public Parser() {
 

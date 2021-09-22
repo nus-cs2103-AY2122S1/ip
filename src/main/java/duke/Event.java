@@ -20,6 +20,12 @@ public class Event extends Task {
         this.date = date;
     }
 
+    /**
+     * Constructor for the Event class with status.
+     * @param description description for the Event.
+     * @param date date for the Event.
+     * @param status status for the Event.
+     */
     public Event(String description, String date, boolean status) {
         super(description, status);
         this.date = date;

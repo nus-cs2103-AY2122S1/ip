@@ -17,6 +17,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructor for the task class with status.
+     * @param description the description for the Task.
+     * @param status the status of the task.
+     */
     public Task(String description, boolean status) {
         this.description = description;
         this.isDone = status;
