@@ -10,12 +10,18 @@ import duke.parser.Parser;
 
 public class Duke{
 
-    private Parser parser = new Parser();
+    private final Parser parser = new Parser();
+
+    /**
+     * <code>getResponse(String input)</code> parses an input string using the Duke parser
+     * It then runs back-end code and returns an output response String to show to the user.
+     *
+     * @param input String input by the user in the JavaFX GUI
+     * @return response returned by Duke after parsing the user input
+     */
 
     public String getResponse(String input) {
-
-        String output = parser.parseCommand(input);
-        return output;
+        return parser.parseCommand(input);
     }
     
 }
