@@ -1,7 +1,15 @@
 package duke;
 
 public class Parser {
-
+    /**
+     * Static method that attempts to parse user input to form a new task.
+     * If unsuccessful, it returns a null value, meaning the command does not
+     * involve creating a new task, and is handled by the caller.
+     *
+     * @param input the input entered by the user
+     * @return The task if applicable, or null if the command does not involve
+     * creating a task.
+     */
     public static Task parseInput(String input) {
         if (input.startsWith("todo")) {
             String substr = input.replaceFirst("todo", "").stripLeading();
