@@ -6,7 +6,13 @@ package duke;
 public class Parser {
     private String command;
     private String[] twoPart;
-    private String[] time;
+
+    private static final int SIZE_OF_TWO_PART = 2;
+    private static final int FIRST_WORD = 0;
+    private static final int REST_OF_COMMAND = 1;
+
+    private static final String DEADLINE_COMMAND = " /by ";
+    private static final String EVENT_COMMAND = " /at ";
 
     /**
      * Class constructor that constructs a Parser object. It also stores a String[] that splits the command into 2 parts
@@ -16,7 +22,7 @@ public class Parser {
      */
     public Parser(String command) {
         this.command = command;
-        this.twoPart = this.command.split(" ", 2);
+        this.twoPart = this.command.split(" ", SIZE_OF_TWO_PART);
     }
 
     /**
@@ -37,7 +43,7 @@ public class Parser {
      */
     public int getSecondPartInInt() throws DukeException {
         try {
-            return Integer.valueOf(this.twoPart[1]);
+            return Integer.valueOf(this.twoPart[REST_OF_COMMAND]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("which specific task from the list? Give a number!");
         } catch (NumberFormatException e) {
@@ -53,7 +59,7 @@ public class Parser {
      */
     public String getSecondPart() throws DukeException {
         try {
-            return this.twoPart[1];
+            return this.twoPart[REST_OF_COMMAND];
         } catch (ArrayIndexOutOfBoundsException error) {
             throw new DukeException("do remember to add your description!");
         }
@@ -65,7 +71,7 @@ public class Parser {
      * @return String array which contains components for a Deadline object.
      */
     public String[] splitSecondPartForDeadline() {
-        return this.twoPart[1].split(" /by ", 2);
+        return this.twoPart[REST_OF_COMMAND].split(DEADLINE_COMMAND, SIZE_OF_TWO_PART);
     }
 
     /**
@@ -74,20 +80,7 @@ public class Parser {
      * @return String array which contains components for a Event object.
      */
     public String[] splitSecondPartForEvent() {
-        return this.twoPart[1].split(" /at ", 2);
-    }
-
-    /**
-     * Checks if the user command is bye.
-     *
-     * @return True if user command is bye.
-     */
-    public boolean isBye() {
-        if (this.command.equals("bye")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[REST_OF_COMMAND].split(EVENT_COMMAND, SIZE_OF_TWO_PART);
     }
 
     /**
@@ -96,11 +89,7 @@ public class Parser {
      * @return True if user command is list.
      */
     public boolean isList() {
-        if (this.command.equals("list")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.command.equals("list");
     }
 
     /**
@@ -109,11 +98,7 @@ public class Parser {
      * @return True if user command is done.
      */
     public boolean isDone() {
-        if (this.twoPart[0].equals("done")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[FIRST_WORD].equals("done");
     }
 
     /**
@@ -122,11 +107,7 @@ public class Parser {
      * @return True if user command is todo.
      */
     public boolean isToDo() {
-        if (this.twoPart[0].equals("todo")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[FIRST_WORD].equals("todo");
     }
 
     /**
@@ -135,11 +116,7 @@ public class Parser {
      * @return True if user command is deadline.
      */
     public boolean isDeadline() {
-        if (this.twoPart[0].equals("deadline")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[FIRST_WORD].equals("deadline");
     }
 
     /**
@@ -148,11 +125,7 @@ public class Parser {
      * @return True if user command is event.
      */
     public boolean isEvent() {
-        if (this.twoPart[0].equals("event")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[FIRST_WORD].equals("event");
     }
 
     /**
@@ -161,18 +134,15 @@ public class Parser {
      * @return True if user command is delete.
      */
     public boolean isDelete() {
-        if (this.twoPart[0].equals("delete")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[FIRST_WORD].equals("delete");
     }
 
+    /**
+     * Checks if the user command is find.
+     *
+     * @return True if user command is find.
+     */
     public boolean isFind() {
-        if (this.twoPart[0].equals("find")) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.twoPart[FIRST_WORD].equals("find");
     }
 }

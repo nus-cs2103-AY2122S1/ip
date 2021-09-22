@@ -19,8 +19,8 @@ public class Event extends Task {
     public Event(String description, String dateTime) {
         super(description);
 
-        DateTimeFormatter scanned = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        this.dateTime = LocalDateTime.parse(dateTime, scanned);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        this.dateTime = LocalDateTime.parse(dateTime, dateFormat);
     }
 
     /**
