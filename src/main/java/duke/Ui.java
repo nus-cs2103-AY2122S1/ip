@@ -1,5 +1,4 @@
 package duke;
-import java.util.ArrayList;
 
 /**
  * Class to contain all the UI elements of Duke.
@@ -28,14 +27,14 @@ public class Ui {
      * @param doneEntry input for the task to be marked as done.
      * @throws DukeException if the task number inputted is invalid.
      */
-    public static void done(String doneEntry) throws DukeException {
-        int taskNumber = Integer.parseInt(doneEntry.substring(5,6));
+    public static String done(String doneEntry) throws DukeException {
+        int taskNumber = Integer.parseInt(doneEntry.substring(5, 6));
         if (taskNumber > TaskList.noOfTasks()) {
-            throw new DukeException("Sorry ☹, please enter a valid task to complete!");
+            throw new DukeException("Sorry, please enter a valid task to complete!");
         }
         duke.Task doneTask = TaskList.getCurrentTask(taskNumber - 1);
         doneTask.markAsDone();
-        print("Congratulations on finishing this task!\n [X] " + doneTask.getDescription());
+        return "Congratulations on finishing this task!\n [X] " + doneTask.getDescription();
     }
 
     /**
@@ -43,13 +42,13 @@ public class Ui {
      * @throws DukeException if the input entered by the user is invalid.
      */
     public static void invalidInput() throws DukeException {
-        throw new DukeException("Sorry ☹, please enter a valid command!");
+        throw new DukeException("Sorry, please enter a valid command!");
     }
 
     /**
      * Prints out the list of tasks that the User currently has.
      */
-    public static void list() {
+    public static String list() {
         int len = TaskList.noOfTasks();
         String sentence = "";
         for (int i = 1; i < len + 1; i++) {
@@ -57,14 +56,18 @@ public class Ui {
             sentence = sentence + i + "." + currentTask.toString() + "\n";
         }
         if (len == 0) {
-            print("You currently have no pending tasks!");
+            return "You currently have no pending tasks!";
         } else {
             sentence = "Here are your current tasks!" + "\n" + sentence;
-            print(sentence);
+            return sentence;
         }
     }
 
-    public static void find(String findWord) {
+    /**
+     * Used to find matching tasks using the keyword inputted.
+     * @param findWord key word that wants to be found.
+     */
+    public static String find(String findWord) {
         String word = findWord.substring(5);
         int len = TaskList.noOfTasks();
         String sentence = "";
@@ -76,10 +79,14 @@ public class Ui {
             }
         }
         if (sentence.equals("")) {
-            print("Sorry! I can't find any task that matches your keyword ☹");
+            return "Sorry! I can't find any task that matches your keyword";
         } else {
             sentence = "Here are the matching tasks I found:" + "\n" + sentence;
-            print(sentence);
+            return sentence;
         }
+    }
+
+    public static String alexaGreeting() {
+        return "Hello! My name is Alexa \nHow can I help you today?";
     }
 }

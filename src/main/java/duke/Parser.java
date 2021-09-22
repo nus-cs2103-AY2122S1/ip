@@ -65,21 +65,31 @@ public class Parser {
         return input.length() >= deleteConstant && input.substring(0, 7).equals("delete ");
     }
 
+    /**
+     * Returns an array of strings that contains the created Deadline from the Storage class.
+     * @param input the title of the deadline.
+     * @return an array of strings that contains the title and date of Deadline.
+     */
     public String[] storageDeadline(String input) {
         int indexOfOpenBracketD = input.indexOf("(");
         int indexOfCloseBracketD = input.indexOf(")");
         String deadlineDate = input.substring(indexOfOpenBracketD + 4, indexOfCloseBracketD);
-        String deadlineTitle = input.substring(storageConstant, indexOfOpenBracketD);
-        String[] deadlineWords = {deadlineDate, deadlineTitle};
+        String deadlineTitle = input.substring(storageConstant, indexOfOpenBracketD - 1);
+        String[] deadlineWords = {deadlineTitle, deadlineDate};
         return deadlineWords;
     }
 
+    /**
+     * Returns an array of strings that contains the created Event from the Storage class.
+     * @param input the title of the deadline.
+     * @return an array of strings that contains the title and date of Event.
+     */
     public String[] storageEvent(String input) {
         int indexOfOpenBracketE = input.indexOf("(");
         int indexOfCloseBracketE = input.indexOf(")");
         String eventDate = input.substring(indexOfOpenBracketE + 4, indexOfCloseBracketE);
-        String eventTitle = input.substring(storageConstant, indexOfOpenBracketE);
-        String[] eventWords = {eventDate, eventTitle};
+        String eventTitle = input.substring(storageConstant, indexOfOpenBracketE - 1);
+        String[] eventWords = {eventTitle, eventDate};
         return eventWords;
     }
 

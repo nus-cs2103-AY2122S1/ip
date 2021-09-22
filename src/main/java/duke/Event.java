@@ -20,6 +20,11 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(String description, String date, boolean status) {
+        super(description, status);
+        this.date = date;
+    }
+
     /**
      * Returns a string form of the Event task.
      * @return returns the Event task in string form.
