@@ -17,7 +17,7 @@ public class CompilationOfFiles {
     private static String filepath;
 
     /**
-     * Constructor for path where file is saved.
+     * Creates for path where file is saved.
      *
      * @param filepath path of the file
      */
@@ -26,7 +26,7 @@ public class CompilationOfFiles {
     }
 
     /**
-     * This is the main method for loading and saving files.
+     * Loads and saves files.
      *
      * @param tasks list of tasks
      */
@@ -38,31 +38,11 @@ public class CompilationOfFiles {
                 System.out.println("A new file has been created "
                         + "as there are no saved files.");
             } else {
+                assert newFile != null : "File should not be empty";
                 Scanner sc = new Scanner(newFile);
                 while (sc.hasNext()) {
                     String[] line = sc.nextLine().split("/");
-                    if ((line[0]).equals("TODO")) {
-                        Task t = new ToDo(line[2], "TODO");
-                        if (line[1].equals("1")) {
-                            t.markDone();
-                        }
-                        tasks.includeAdditionalTask(t);
-                    } else if ((line[0]).equals("DEADLINE")) {
-                        Deadline d = new Deadline(line[2], line[3], "DEADLINE");
-                        if (line[1].equals("1")) {
-                            d.markDone();
-                        }
-                        tasks.includeAdditionalTask(d);
-                    } else if ((line[0]).equals("EVENT")) {
-                        Event e = new Event(line[2], line[3], "EVENT");
-                        if (line[1].equals("1")) {
-                            e.markDone();
-                        }
-                        tasks.includeAdditionalTask(e);
-                    } else {
-                        System.out.println("    OOPS!!! I'm sorry, "
-                                + "but I don't know what that means :-(");
-                    }
+                    addTaskFromFile(line,tasks);
                 }
             }
         } catch (IOException e) {
@@ -72,7 +52,38 @@ public class CompilationOfFiles {
     }
 
     /**
-     * This is the method for updating the list of files due to changes.
+     * Adds tasks from file to list.
+     *
+     * @param arr refers to scanner
+     * @param taskList list of tasks
+     */
+    public static void addTaskFromFile(String[] arr, ListOfTasks taskList) {
+        if ((arr[0]).equals("TODO")) {
+            Task t = new ToDo(arr[2], "TODO");
+            if (arr[1].equals("1")) {
+                t.markDone();
+            }
+            taskList.includeAdditionalTask(t);
+        } else if ((arr[0]).equals("DEADLINE") ) {
+            Deadline d = new Deadline(arr[2], arr[3], "DEADLINE");
+            if (arr[1].equals("1")) {
+                d.markDone();
+            }
+            taskList.includeAdditionalTask(d);
+        } else if ((arr[0]).equals("EVENT") ) {
+            Event e = new Event(arr[2], arr[3], "EVENT");
+            if (arr[1].equals("1")) {
+                e.markDone();
+            }
+            taskList.includeAdditionalTask(e);
+        } else {
+            System.out.println("    OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");
+        }
+    }
+
+    /**
+     * Updates the list of files due to changes.
      *
      * @param list list of tasks
      */
@@ -89,7 +100,7 @@ public class CompilationOfFiles {
     }
 
     /**
-     * This is the method for updating a specific file according to changes.
+     * Updates a specific file according to changes.
      *
      * @param t list of tasks
      * @param taskType type of task being saved
@@ -111,4 +122,3 @@ public class CompilationOfFiles {
     }
 
 }
-

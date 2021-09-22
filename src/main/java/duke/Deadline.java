@@ -13,7 +13,7 @@ public class Deadline extends Task {
     private LocalDate completionDate;
 
     /**
-     * Constructor for creating a deadline.
+     * Creates a deadline.
      *
      * @param information refers to details of deadline
      * @param by refers to when task should be completed
@@ -24,10 +24,12 @@ public class Deadline extends Task {
         this.completionDate = LocalDate.parse(by);
         this.type = type;
         this.by = by;
+        assert completionDate != null : "Deadline needs to have a date";
     }
 
     /**
      * Returns the type of task.
+     *
      * @return task type
      */
     public String getType() {

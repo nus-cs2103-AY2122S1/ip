@@ -13,7 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for creating duke.
+     * Creates an instance of duke.
      *
      * @param filepath refers to path of the file
      */
@@ -24,7 +24,7 @@ public class Duke {
         storage.loadAndSaveFile(tasks);
     }
     /**
-     * This method is required for running the file.
+     * Runs the file.
      */
     public void run() {
         ui.start();
@@ -38,15 +38,20 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Obtains response from parser.
+     *
+     * @param input refers to input typed by user
+     * @return response from Duke
+     *
      */
     public String getResponse(String input) {
+        assert storage != null : "Storage needs to be initialised";
+        assert ui != null : "Ui needs to be initialised";
         return Parser.handleCommand(input,tasks);
     }
 
     /**
-     * This is the main method.
+     * Creates instance of duke and runs it.
      *
      * @param args required for main method
      */

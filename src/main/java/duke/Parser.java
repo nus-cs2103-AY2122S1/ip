@@ -13,7 +13,7 @@ public class Parser {
     }
 
     /**
-     * This method handling commands given by user.
+     * Handles commands given by user.
      *
      * @param command represents command given by user
      * @param tasks represents list of tasks
@@ -32,7 +32,7 @@ public class Parser {
                                     + "cannot be empty.";
                             throw new DukeException(
                                     "OOPS!!! The task number "
-                                    + "cannot be empty.");
+                                            + "cannot be empty.");
                         } else {
                             message = tasks.markDone(command);
                         }

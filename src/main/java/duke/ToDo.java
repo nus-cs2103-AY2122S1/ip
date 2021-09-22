@@ -8,7 +8,7 @@ public class ToDo extends Task {
     private String type;
 
     /**
-     * Constructor for creating a todoTask.
+     * Creates a todoTask.
      *
      * @param information refers to details of task
      * @param type refers to type of task

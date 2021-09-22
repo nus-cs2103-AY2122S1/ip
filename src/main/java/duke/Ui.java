@@ -8,57 +8,68 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * Method provides message for starting the application.
+     * Returns message for starting the application.
+     *
+     * @return starting message in string format
      */
     public String start() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
-     * Method provides message for ending the application.
+     * Returns message for ending the application.
+     *
+     * @return ending message in string format
      */
     public static String end() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Method provides message for adding a task.
+     * Returns message for adding a task.
+     *
+     * @return introduction message for adding a task in string format
      */
     public String addTaskMessage() {
         return "Got it. I've added this task:";
     }
 
     /**
-     * Method provides message for returning number of tasks.
+     * Returns message for returning number of tasks.
      *
      * @param count represents number of tasks
+     * @return number of tasks in string format
      */
-    public String printNumberOfTasks(int count) {
+    public String produceNumberOfTasks(int count) {
         return "     Now you have " + count
                 + " task" + ((count > 1) ? "s" : "") + " in the list.";
     }
 
     /**
-     * Method provides message for returning current task.
+     * Returns message for returning current task.
      *
      * @param currTask current task
+     * @return specific task in string format
      */
-    public String printCurrentTask(Task currTask) {
+    public String produceCurrentTask(Task currTask) {
         return "       " + currTask.toString();
     }
 
     /**
-     * Method provides message for listing tasks.
+     * Returns message for listing tasks.
+     *
+     * @return introduction message for listing tasks in string format
      */
     public String listTaskMessage() {
         return "Here are the tasks in your list:";
     }
 
     /**
-     * Method provides message for listing all tasks.
+     * Returns message for listing all tasks.
      *
      * @param xs list of tasks
      * @param count number of tasks
+     * @return list of tasks in string format
      */
     public String listAllTasks(ArrayList<Task> xs, int count) {
         String tasksAsString = "";
@@ -71,39 +82,48 @@ public class Ui {
     }
 
     /**
-     * Method provides message for invalid input.
+     * Returns message for invalid input.
+     *
+     * @return invalid input message
      */
-    public String printInvalidInput() {
+    public String produceInvalidInput() {
         return "Invalid Input. Please try again.";
     }
 
     /**
-     * Method provides message for invalid task number.
+     * Returns message for invalid task number.
+     *
+     * @return invalid task number message
      */
-    public String printInvalidTaskNumber() {
+    public String produceInvalidTaskNumber() {
         return "Invalid task number. Please try again.";
     }
 
     /**
-     * Method provides message for completing task.
+     * Returns message for completing task.
+     *
+     * @return introduction message for completing a task
      */
-    public String printDoneMessage() {
+    public String produceDoneMessage() {
         return "Nice! I've marked this task as done!";
     }
 
     /**
-     * Method provides message for deleting task.
+     * Returns message for deleting task.
+     *
+     * @return introduction message for deleting a task
      */
-    public String printDeletedMessage() {
+    public String produceDeletedMessage() {
         return "Noted. I've removed this task:";
     }
 
     /**
-     * Method provides message for list of similar tasks.
+     * Returns message for listing similar tasks.
      *
      * @param similarTasks represents arraylist with common tasks
+     * @return list of simialr tasks in string format
      */
-    public String printSimilarTasks(ArrayList<String> similarTasks) {
+    public String produceSimilarTasks(ArrayList<String> similarTasks) {
         String similarTasksAsString = "";
         for (int i = 0; i < similarTasks.size(); i++) {
             similarTasksAsString = similarTasksAsString + similarTasks.get(i) + "\n";

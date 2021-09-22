@@ -10,7 +10,7 @@ public class Task {
     private String type;
 
     /**
-     * Constructor for creating a task.
+     * Creates a task.
      *
      * @param information refers to details of task
      */
@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Method marks task as done.
+     * Marks task as done.
      */
     public void markDone() {
         this.isCompletedTask = true;

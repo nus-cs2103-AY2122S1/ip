@@ -11,7 +11,7 @@ public class ListOfTasks {
     private Ui ui;
 
     /**
-     * Constructor for creating a list of tasks.
+     * Creates a list of tasks.
      */
     public ListOfTasks() {
         ui = new Ui();
@@ -29,7 +29,7 @@ public class ListOfTasks {
     }
 
     /**
-     * This method manages adding a task.
+     * Adds a task to list of tasks.
      *
      * @param newTask represents the new task to be added
      */
@@ -39,32 +39,35 @@ public class ListOfTasks {
     }
 
     /**
-     * This method manages adding a task.
+     * Adds a task to list of tasks.
      *
-     * @param information represents the information regarding task to be added
-     * @return the text for when the task is added
+     * @param information represents the information regarding task to be added.
+     * @return the text for when the task is added.
      */
-    public String addTask(String information) {
+    public String addTask(String information){
         int oldCount = count;
         information = removeVal(information, "todo");
         tasks.add(count, new ToDo(information, "TODO"));
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "TODO");
         count++;
-        return ui.addTaskMessage() + "\n" + ui.printCurrentTask(tasks.get(oldCount))
-                + "\n"+ ui.printNumberOfTasks(count);
+        return ui.addTaskMessage() + "\n" + ui.produceCurrentTask(tasks.get(oldCount))
+                + "\n" + ui.produceNumberOfTasks(count);
     }
 
     /**
-     * This method manages listing out the tasks.
+     * Lists all tasks in the list.
+     *
+     * @return list of tasks in string format
      */
     public String listOut() {
         return ui.listTaskMessage() + "\n" + ui.listAllTasks(tasks,count);
     }
 
     /**
-     * This method manages marking a task as done.
+     * Marks a completed task as done.
      *
      * @param command represents command given by user to mark a task as done
+     * @return done task in string format
      */
     public String markDone(String command) {
         try {
@@ -75,19 +78,20 @@ public class ListOfTasks {
             if (a < count && a >= 0) {
                 this.tasks.get(a).markDone();
                 CompilationOfFiles.updateFile(this.tasks);
-                return ui.printDoneMessage() + "\n" + ui.printCurrentTask(this.tasks.get(a));
+                return ui.produceDoneMessage() + "\n" + ui.produceCurrentTask(this.tasks.get(a));
             } else {
-                return ui.printInvalidTaskNumber();
+                return ui.produceInvalidTaskNumber();
             }
         } catch (NumberFormatException e) {
-            return ui.printInvalidTaskNumber();
+            return ui.produceInvalidTaskNumber();
         }
     }
 
     /**
-     * This method manages deleting task.
+     * Deletes a task from list of tasks.
      *
      * @param command represents command given by user to delete a task.
+     * @return deleted task in string format
      */
     public String delete(String command) {
         try {
@@ -100,18 +104,18 @@ public class ListOfTasks {
                 Task deletedVal = this.tasks.remove(a);
                 CompilationOfFiles.updateFile(this.tasks);
                 count--;
-                return ui.printDeletedMessage() + "\n" + deletedVal.toString()
-                        + "\n" + ui.printNumberOfTasks(count);
+                return ui.produceDeletedMessage() + "\n" + deletedVal.toString()
+                        + "\n" + ui.produceNumberOfTasks(count);
             } else {
-                return ui.printInvalidTaskNumber();
+                return ui.produceInvalidTaskNumber();
             }
         } catch (NumberFormatException e) {
-            return ui.printInvalidTaskNumber();
+            return ui.produceInvalidTaskNumber();
         }
     }
 
     /**
-     * This method manages removing a value.
+     * Removes redundant value from command.
      *
      * @param command represents command given to remove value
      * @param val represents value to be removed
@@ -126,14 +130,15 @@ public class ListOfTasks {
     }
 
     /**
-     * This method manages adding an event to list of tasks.
+     * Adds an event to list of tasks.
      *
      * @param information represents information pertaining event.
+     * @return added Event in string format
      */
     public String addEvent(String information) {
         int oldCount = count;
         if (!information.contains("/at")) {
-            return ui.printInvalidInput();
+            return ui.produceInvalidInput();
         }
 
         information = removeVal(information, "event");
@@ -144,19 +149,20 @@ public class ListOfTasks {
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "EVENT");
         count = count + 1;
         return ui.addTaskMessage()
-        + "\n" + ui.printCurrentTask(this.tasks.get(oldCount))
-        + "\n" +  ui.printNumberOfTasks(count);
+                + "\n" + ui.produceCurrentTask(this.tasks.get(oldCount))
+                + "\n" + ui.produceNumberOfTasks(count);
     }
 
     /**
-     * This method manages adding a deadline to list of tasks.
+     * Adds a deadline to list of tasks.
      *
      * @param information represents information pertaining deadline.
+     * @return added deadline in string format
      */
     public String addDeadline(String information) {
         int oldCount = count;
         if (!information.contains("/by")) {
-            return ui.printInvalidInput();
+            return ui.produceInvalidInput();
         }
 
         information = removeVal(information, "deadline");
@@ -167,14 +173,16 @@ public class ListOfTasks {
         CompilationOfFiles.updateSavedFile(this.tasks.get(count), "DEADLINE");
         count = count + 1;
         return ui.addTaskMessage()
-                + "\n" + ui.printCurrentTask(this.tasks.get(oldCount))
-                + "\n" +  ui.printNumberOfTasks(count);
+                + "\n" + ui.produceCurrentTask(this.tasks.get(oldCount))
+                + "\n" + ui.produceNumberOfTasks(count);
     }
+
     /**
-     * This method manages listing out similar tasks.
+     * Lists out similar tasks from list of tasks.
      *
      * @param searchString represents information we
      *                     are using to find similar tasks.
+     * @return list of similar tasks in string format
      */
     public String findSimilarTasks(String searchString) {
         searchString = removeVal(searchString, "find");
@@ -188,12 +196,9 @@ public class ListOfTasks {
                 index++;
             }
         }
-        return ui.printSimilarTasks(similarTasks);
+        return ui.produceSimilarTasks(similarTasks);
     }
 
 
 }
-
-
-
 

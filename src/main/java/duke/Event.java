@@ -9,7 +9,7 @@ public class Event extends Task {
     private String type;
 
     /**
-     * Constructor for creating an event.
+     * Creates an event.
      *
      * @param information refers to details of event
      * @param time refers to time event has occurred
