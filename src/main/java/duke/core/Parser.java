@@ -49,7 +49,7 @@ public class Parser {
                 return validEventHandler(input);
             default:
                 // This is for any other erroneous input we did not catch from checkValidity
-                DukeException e = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                DukeException e = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means");
                 return new ExceptionalCommand(e);
             }
         } catch (DukeException e) {
