@@ -57,8 +57,8 @@ public class TaskList{
      */
     public String returnAllTasks() {
         String output = "";
-        for (int i = 0; i < this.tasks.size(); i++) {
-            output += this.tasks.get(i).toString();
+        for (Task t : tasks) {
+            output += t.toString();
             output += "\n";
         }
         return output;
