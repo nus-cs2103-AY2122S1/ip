@@ -120,7 +120,7 @@ public class TaskList {
      * @return The total number of tasks.
      */
     public int getTotalTasksNumber() {
-        return tasks.size();
+        return tasks.isEmpty() ? 0: tasks.size();
     }
 
     /**

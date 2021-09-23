@@ -24,7 +24,7 @@ public class Parser {
         String[] inputs = input.split(" ", 2);
         String key = inputs[0];
 
-        //todo use enum here
+        // todo use enum here
         // can make key.toUpper and pass in the values.
         switch (key) {
         case "bye":

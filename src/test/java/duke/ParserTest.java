@@ -23,6 +23,7 @@ public class ParserTest {
     public void execute_doneInvalidNumber_exceptionThrown() {
         ChatBot bot = new ChatBot();
         Parser p = new Parser();
+        bot.start();
         try {
             p.parse("done -1", bot);
         } catch (DukeException e) {
