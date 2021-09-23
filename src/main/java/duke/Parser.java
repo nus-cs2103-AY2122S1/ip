@@ -54,6 +54,12 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Handles the case where the user inputs 'todo'
+     *
+     * @param name name of task
+     * @return the appropriate command
+     */
     private static Command handleToDo(String name) {
         try {
             return new ToDoCommand(name);
@@ -62,6 +68,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user inputs 'event'
+     *
+     * @param task name of task
+     * @return the appropriate command
+     */
     private static Command handleEvent(String task) {
         try {
             String[] furtherSplitEvent = task.trim().split("/at ");
@@ -75,6 +87,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user inputs 'deadline'
+     *
+     * @param task name of task
+     * @return the appropriate command
+     */
     private static Command handleDeadline(String task) {
         try {
             String[] furtherSplitDeadline = task.trim().split("/by ");
@@ -88,6 +106,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user inputs 'done'
+     *
+     * @param indexStr index of the item to be completed
+     * @return the appropriate command
+     */
     private static Command handleDone(String indexStr) {
         try {
             int index = Integer.parseInt(indexStr);
@@ -99,6 +123,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user inputs 'delete'
+     *
+     * @param indexStr index of the item to be deleted
+     * @return the appropriate command
+     */
     private static Command handleDelete(String indexStr) {
         try {
             int index = Integer.parseInt(indexStr);
@@ -110,6 +140,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user inputs 'find'
+     *
+     * @param keyword keyword to be searched
+     * @return the appropriate command
+     */
     private static Command handleFind(String keyword) {
         try {
             return new FindCommand(keyword);
@@ -118,6 +154,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user inputs 'tag'
+     *
+     * @param tag tag to be added
+     * @return the appropriate command
+     */
     private static Command handleTag(String tag) {
         try {
             String[] furtherSplitTag = tag.trim().split("#");

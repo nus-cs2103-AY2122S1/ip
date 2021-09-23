@@ -74,6 +74,7 @@ public class Task {
      * Marks the task as done.
      *
      * @param shouldPrint determines if the task being marked as done should be printed.
+     * @return output
      */
     public String doneTask(boolean shouldPrint) {
         this.isDone = true;
@@ -98,7 +99,7 @@ public class Task {
     /**
      * Adds to the list of tags for the task
      *
-     * @param tag
+     * @param tag tag to be added
      */
     public void tag(String tag) {
         if (!isTagged) {
@@ -126,6 +127,13 @@ public class Task {
         return str;
     }
 
+    /**
+     * Method overloaded toString method for subclasses to use.
+     *
+     * @param date date
+     * @param type type of subclass
+     * @return String representation
+     */
     public String toString(LocalDateTime date, String type) {
         String str = (isDone ? "[X] " : "[ ] ") + this.taskName;
         if (tags.size() == 0) {

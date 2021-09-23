@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand, which takes in the index of the task on the array list.
      *
-     * @param index
+     * @param index index of the item to be deleted
      */
     public DeleteCommand(int index) {
         this.index = index;

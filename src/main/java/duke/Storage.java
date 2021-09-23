@@ -112,6 +112,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Handles the case where the current line in the saved file starts with a "T"
+     *
+     * @param lst given tasklist
+     * @param taskName name of task
+     * @param isDone boolean if the task is done
+     * @param isTagged boolean if the task is tagged
+     * @param data contains all necessary data to be loaded
+     */
     private void handleTodo(TaskList lst, String taskName, String isDone, String isTagged, String[] data) {
         Task eventTodo = new ToDo(taskName);
         if (isDone.contains("1")) {
@@ -126,6 +135,15 @@ public class Storage {
         lst.add(eventTodo, false);
     }
 
+    /**
+     * Handles the case where the current line in the saved file starts with a "E"
+     *
+     * @param lst given tasklist
+     * @param taskName name of task
+     * @param isDone boolean if the task is done
+     * @param isTagged boolean if the task is tagged
+     * @param data contains all necessary data to be loaded
+     */
     private void handleEvent(TaskList lst, String taskName, String isDone, String isTagged, String[] data) {
         String time = data[5].substring(1);
         Event eventEvent = new Event(taskName, LocalDateTime.parse(time, formatter));
@@ -141,6 +159,16 @@ public class Storage {
         lst.add(eventEvent, false);
     }
 
+
+    /**
+     * Handles the case where the current line in the saved file starts with a "E"
+     *
+     * @param lst given tasklist
+     * @param taskName name of task
+     * @param isDone boolean if the task is done
+     * @param isTagged boolean if the task is tagged
+     * @param data contains all necessary data to be loaded
+     */
     private void handleDeadline(TaskList lst, String taskName, String isDone, String isTagged, String[] data) {
         String deadline = data[5].substring(1);
         Deadline eventDeadline = new Deadline(taskName, LocalDateTime.parse(deadline, formatter));
