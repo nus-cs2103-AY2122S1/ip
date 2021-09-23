@@ -55,8 +55,7 @@ public class Parser {
             return new ErrorCommand("Fix your command!\n" +
                     "Type \"help\" if you need help.");
         }
-
-
+        
     }
 
     /**
@@ -68,6 +67,9 @@ public class Parser {
     Command parseNonAddingCommand(String command) {
         String[] commandArr = command.split(" ");
         try {
+            if (commandArr.length > 2) {
+                return new ErrorCommand("I can only process 1 task at a time");
+            }
             int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
             switch (commandArr[0]) {
             case "done":

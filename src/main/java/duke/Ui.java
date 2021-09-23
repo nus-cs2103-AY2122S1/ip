@@ -10,7 +10,8 @@ public class Ui {
      */
     public String showWelcome() {
         return "Guten Tag. I'm Dwight Schrute.\n" +
-                "Type \"help\" if you are clueless.";
+                "Type \"help\" if you are clueless.\n" +
+                "Remember to save before you exit!";
     }
 
     /**
