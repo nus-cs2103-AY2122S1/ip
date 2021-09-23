@@ -29,13 +29,15 @@ public class Storage {
      */
     public static String writeFile() {
         ArrayList<Task> currList = TaskList.getList();
-        for (Task content : currList) {
-            try {
-                FileWriter fw = new FileWriter(FILE_LOCATION);
-                fw.write(content.printTask());
-                fw.close();
-            } catch (IOException e) {
-                return Ui.failToWriteFileMessage(e.getMessage());
+        if (currList != null) {
+            for (Task content : currList) {
+                try {
+                    FileWriter fw = new FileWriter(FILE_LOCATION);
+                    fw.write(content.printTask());
+                    fw.close();
+                } catch (IOException e) {
+                    return Ui.failToWriteFileMessage(e.getMessage());
+                }
             }
         }
         return Ui.successfulWriteFileMessage();
@@ -103,7 +105,6 @@ public class Storage {
             if (!parentDir.exists()) {
                 parentDir.mkdirs();
             }
-            File dukeFile = new File(FILE_LOCATION);
             writeFile();
             return new TaskList(new ArrayList<>());
         }
