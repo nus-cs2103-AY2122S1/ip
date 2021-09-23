@@ -20,7 +20,7 @@ public class TaskListTest {
             tasklist.add(todo1);
             tasklist.add(todo2);
         } catch (DukeException e) {
-            //there should not be an exception here.
+            fail();
         }
         try {
             tasklist.done(3);
@@ -47,7 +47,7 @@ public class TaskListTest {
             tasklist1.add(todo1);
             tasklist1.add(todo2);
         } catch (DukeException e) {
-            //there should not be an exception here.
+            fail();
         }
         try {
             tasklist1.done(3);
