@@ -55,18 +55,32 @@ public class Parser {
      * @return The deadline task corresponding to the user's string input.
      * @throws EmptyDescriptionException If the description of the task is empty.
      */
-    public static Task parseDeadlineTasks(String deadlineTask) throws EmptyDescriptionException {
-        if (deadlineTask.length() == 8) {
-            throw new EmptyDescriptionException("error" );
+    public static Task parseDeadlineTasks(String deadlineTask) throws EmptyDescriptionException,
+            EmptyDateTimeException {
+        if (deadlineTask.length() <= 9) {
+            throw new EmptyDescriptionException("error");
         }
 
-        assert (deadlineTask.length() > 8);
+        if (!deadlineTask.contains("/by")) {
+            throw new EmptyDateTimeException("error");
+        }
 
-        int charIndex = deadlineTask.indexOf("/" );
+        assert (deadlineTask.length() > 10);
+
+        int charIndex = deadlineTask.indexOf("/");
+
+        if (charIndex == 9) {
+            throw new EmptyDescriptionException("error");
+        }
+
         int byIndex = charIndex + 4;
 
         String by = deadlineTask.substring(byIndex);
         String task = deadlineTask.substring(9, charIndex - 1);
+
+        if (task.isBlank()) {
+            throw new EmptyDescriptionException("error");
+        }
 
         return new Deadline(task, by);
     }
@@ -101,18 +115,32 @@ public class Parser {
      * @return The event task corresponding to the user's string input.
      * @throws EmptyDescriptionException If the description of the task is empty.
      */
-    public static Task parseEventTasks(String eventTask) throws EmptyDescriptionException {
-        if (eventTask.length() == 5) {
+    public static Task parseEventTasks(String eventTask) throws EmptyDescriptionException,
+            EmptyDateTimeException {
+        if (eventTask.length() <= 6) {
             throw new EmptyDescriptionException("error");
         }
 
-        assert (eventTask.length() > 5);
+        if (!eventTask.contains("/at")) {
+            throw new EmptyDateTimeException("error");
+        }
+
+        assert (eventTask.length() > 7);
 
         int charIndex = eventTask.indexOf("/");
+
+        if (charIndex == 6) {
+            throw new EmptyDescriptionException("error");
+        }
+
         int atIndex = charIndex + 4;
 
         String at = eventTask.substring(atIndex);
         String task = eventTask.substring(6, charIndex - 1);
+
+        if (task.isBlank()) {
+            throw new EmptyDescriptionException("error");
+        }
 
         return new Event(task, at);
     }
