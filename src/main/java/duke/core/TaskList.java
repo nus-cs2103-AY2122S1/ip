@@ -1,6 +1,5 @@
 package duke.core;
 
-import duke.gui.Ui;
 import duke.task.Task;
 
 import java.io.File;
