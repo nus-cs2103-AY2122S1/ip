@@ -116,6 +116,11 @@ public class Parser{
      * shows an error message if there is no description in the input.
      */
     private String makeToDo(String input){
+        try{
+            assert tasks.getSize() <= 100;
+        } catch (AssertionError e){
+            return "Oops! Max task list size of 100 reached";
+        }
         try {
             String description = input.substring(5);
             Task todo = new ToDo(description, false);
@@ -139,6 +144,12 @@ public class Parser{
      * shows an error message if there is no description in the input or the date/time is invalid
      */
     private String makeDeadline(String input){
+        try{
+            assert tasks.getSize() <= 100;
+        } catch (AssertionError e){
+            return "Oops! Max task list size of 100 reached";
+        }
+
         int endIndex = input.length()-1;
 
         try {
@@ -174,6 +185,12 @@ public class Parser{
      */
 
     private String makeEvent(String input){
+        try{
+            assert tasks.getSize() <= 100;
+        } catch (AssertionError e){
+            return "Oops! Max task list size of 100 reached";
+        }
+
         int endIndex = input.length()-1;
 
         try {
