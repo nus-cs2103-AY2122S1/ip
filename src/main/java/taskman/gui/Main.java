@@ -54,6 +54,7 @@ public class Main extends Application {
     private void setupMainWindow() {
         fxmlLoader.<MainWindow>getController().setDuke(taskMan);
         fxmlLoader.<MainWindow>getController().setScrollPane();
+        fxmlLoader.<MainWindow>getController().setTaskManSize();
     }
 
     /**

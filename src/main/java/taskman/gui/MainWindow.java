@@ -17,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,6 +38,10 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private AnchorPane anchorPane;
 
     private TaskMan taskMan;
 
@@ -61,6 +66,13 @@ public class MainWindow extends AnchorPane {
                 .addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.autosize();
         userInput.setPromptText("Say Something to TaskMan");
+    }
+
+    public void setTaskManSize() {
+        borderPane.prefHeightProperty().bind(anchorPane.heightProperty());
+        borderPane.prefWidthProperty().bind(anchorPane.widthProperty());
+        dialogContainer.prefHeightProperty().bind(scrollPane.heightProperty());
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
     }
 
     /**
