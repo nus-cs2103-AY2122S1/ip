@@ -1,10 +1,6 @@
 package duke;
 
 import duke.task.TASK_TYPE;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
 import org.junit.Test;
 import org.junit.Assert;
 

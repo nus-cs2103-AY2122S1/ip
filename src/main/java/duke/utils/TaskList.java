@@ -1,22 +1,19 @@
 package duke.utils;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TASK_TYPE;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Task;
-
-/**
- * @author Dr-Octavius
- *
- * Class that represents Task List of Tasks
- *
- * @version 1.0
- */
 public class TaskList {
-
+    // Level-6 -> A-Collections: Task List
     private List<Task> taskList;
 
     /**
@@ -29,10 +26,24 @@ public class TaskList {
     public TaskList(File storageFile) {
         try {
             Scanner sc = new Scanner(storageFile);
-            sc.useDelimiter(" | ");
+            sc.useDelimiter(",");
             taskList = new ArrayList<>();
-            while(sc.hasNext()) {
-                System.out.println(sc.next());
+            while (sc.hasNext()) {
+                String taskType = sc.next();
+                String x1,x2,x3;
+                if (taskType.equals(TASK_TYPE.T.name())) {
+                    Task t = new Todo(Boolean.parseBoolean(sc.next()),sc.next());
+                    add(t);
+                    sc.nextLine();
+                } else if (taskType.equals(TASK_TYPE.D.name())) {
+                    Task t = new Deadline(Boolean.parseBoolean(sc.next()),sc.next(),sc.next());
+                    add(t);
+                    sc.nextLine();
+                } else {
+                    Task t = new Event(Boolean.parseBoolean(sc.next()),sc.next(),sc.next(),sc.next());
+                    add(t);
+                    sc.nextLine();
+                }
             }
         } catch (FileNotFoundException e) {
             taskList = new ArrayList<>();

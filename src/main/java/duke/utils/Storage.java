@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import duke.task.Deadline;
 import duke.task.TASK_TYPE;
 import duke.task.Task;
 
@@ -82,17 +81,19 @@ public class Storage {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile, true));
             writer.write(t.getType().name()
-                .concat(" | ")
-                .concat(Boolean.toString(t.getState()))
-                .concat(" | ")
-                .concat(t.getDescription())
+                    .concat(",")
+                    .concat(Boolean.toString(t.getState()))
+                    .concat(",")
+                    .concat(t.getDescription())
             );
-            if (t.getBy() != null) {
-                writer.write(" | ".concat(t.getBy().toString()));
+            if (t.getType().equals(TASK_TYPE.D)) {
+                writer.write(",".concat(t.getBy()));
             }
-            if (t.getAt() != null) {
-                writer.write(" | ".concat(t.getAt()));
-            }
+            if (t.getType().equals(TASK_TYPE.E)) {
+                writer.write(",".concat(t.getDate()));
+                writer.write(",".concat(t.getTime()));
+            };
+            writer.write(",");
             writer.newLine();
             writer.close();
         } catch (IOException e) {
@@ -114,10 +115,11 @@ public class Storage {
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true));
             BufferedReader reader = new BufferedReader(new FileReader(storageFile));
             String toDelete = t.getType().name()
-                    .concat(" | ")
+                    .concat(",")
                     .concat(Boolean.toString(t.getState()))
-                    .concat(" | ")
-                    .concat(t.getDescription());
+                    .concat(",")
+                    .concat(t.getDescription())
+                    .concat(",");
             String curr;
             while (true) {
                 curr = reader.readLine();
