@@ -10,7 +10,7 @@ public class InvalidFormatException extends DukeException {
      *
      * @param errorDetails Exception to display error made by using in regards to format in general
      */
-    public InvalidFormatException(String errorDetails){
+    public InvalidFormatException(String errorDetails) {
         super(errorDetails);
     }
 }

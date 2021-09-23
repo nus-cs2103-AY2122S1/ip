@@ -12,7 +12,7 @@ import taskman.exception.InvalidFormatException;
 /**
  * Event Task class that sets description of task, date, time
  */
-public class Event extends Task{
+public class Event extends Task {
 
     /**
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance

@@ -34,7 +34,7 @@ public class Task {
      * Empty task constructor
      * @return Task empty task
      */
-    public static Task empty(){
+    public static Task empty() {
         return new Task(false);
     }
 
@@ -58,7 +58,7 @@ public class Task {
      * @throws DukeException
      */
     protected void setDateTime(String input) throws DukeException {
-        if (input == null){
+        if (input == null) {
             this.date = null;
             this.time = -1;
             return;
@@ -79,13 +79,13 @@ public class Task {
     /**
      * Retrieves task description from the formatted user input
      *
-     * @param formattedInput
-     * @return
+     * @param formattedInput List of string that containes the user input
+     * @return String that describes the task details
      * @throws DukeException
      */
     private String retrieveTaskDescription(List<String> formattedInput) throws DukeException {
         String taskDetails = formattedInput.get(0);
-        if (taskDetails.equals("")){
+        if (taskDetails.equals("")) {
             throw new EmptyDescriptionException("\nMissing description");
         }
         return taskDetails;
@@ -94,8 +94,8 @@ public class Task {
     /**
      * Retrieves date and time from the formatted user input
      *
-     * @param formattedInput
-     * @return
+     * @param formattedInput List of string that containes the user input
+     * @return String that describes the date time details of task
      */
     private String retrieveDateTimeDetails(List<String> formattedInput) {
         return formattedInput.get(1);
@@ -118,7 +118,7 @@ public class Task {
      * @throws InvalidTimeException
      */
     private void check24HourFormat (int hoursMins) throws InvalidTimeException {
-        if (!(hoursMins <2400 && hoursMins > 0 && hoursMins%100 <60)) {
+        if (!(hoursMins < 2400 && hoursMins > 0 && hoursMins % 100 < 60)) {
             throw new InvalidTimeException("Invalid time format (use 24hr format)");
         }
     }
@@ -159,7 +159,7 @@ public class Task {
     private void setState(boolean isDone) {
         this.isDone = isDone;
     }
-    public Task setDone(){
+    public Task setDone() {
         this.isDone = true;
         return this;
     }
@@ -171,10 +171,10 @@ public class Task {
         check24HourFormat(hoursMins);
         this.time = hoursMins;
     }
-    private void setTaskType(String input){
+    private void setTaskType(String input) {
         this.taskType = input;
     }
-    protected void setDescription(String input){
+    protected void setDescription(String input) {
         this.description = input;
     }
     protected String getSaveDate() {
@@ -186,7 +186,7 @@ public class Task {
     protected String getFormatDate() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time + " hrs";
     }
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 }

@@ -8,7 +8,7 @@ import taskman.util.TaskList;
 /**
  * Command that list out all the task based on input order
  */
-public class ListCommand  extends Command{
+public class ListCommand extends Command {
 
     /**
      * Basic Constructor
@@ -16,7 +16,7 @@ public class ListCommand  extends Command{
      * @param storage StorageTxt object to save
      * @param taskList Tasklist to add task to
      */
-    public ListCommand(Storage storage, TaskList taskList){
+    public ListCommand(Storage storage, TaskList taskList) {
         super(storage, taskList, false);
     }
 

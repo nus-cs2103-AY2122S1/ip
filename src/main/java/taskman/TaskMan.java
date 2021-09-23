@@ -1,10 +1,15 @@
 package taskman;
 
+import java.util.Scanner;
+
 import taskman.command.Command;
 import taskman.exception.DukeException;
-import taskman.util.*;
+import taskman.util.Parser;
+import taskman.util.Storage;
+import taskman.util.StorageCsv;
+import taskman.util.TaskList;
 
-import java.util.Scanner;
+
 
 /**
  * Main TaskMan class
@@ -21,7 +26,7 @@ public class TaskMan {
      *
      * @throws DukeException
      */
-    public TaskMan(){
+    public TaskMan() {
         parser.loadTask();
     }
 

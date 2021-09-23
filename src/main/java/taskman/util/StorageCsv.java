@@ -17,10 +17,11 @@ import taskman.tasktypes.Task;
  */
 public class StorageCsv implements Storage {
 
+    private static final String COMMA_DELIMITER = ",";
+    private static final int NUMBER_CSV_COLUMN = 6;
+    private static final String HEADER = "Task Type,Done,Description,Splitter,Date,Time";
     private File csvFile;
-    private final static String COMMA_DELIMITER = ",";
-    private final static int NUMBER_CSV_COLUMN = 6;
-    private final static String HEADER = "Task Type,Done,Description,Splitter,Date,Time";
+
 
     /**
      * Constructor for StorageCSV and sets the file that contains previous state
@@ -33,7 +34,7 @@ public class StorageCsv implements Storage {
         dir.mkdirs();
         File csvFile = new File(filePath + "/savedOutput.csv");
         if (!csvFile.exists()) {
-            try{
+            try {
                 csvFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -47,7 +48,7 @@ public class StorageCsv implements Storage {
      *
      * @throws DukeException
      */
-    public List<String> loadSaved() throws DukeException{
+    public List<String> loadSaved() throws DukeException {
         List<String> pastCommand = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(csvFile);
@@ -68,7 +69,7 @@ public class StorageCsv implements Storage {
      * @param scanner
      */
     private void avoidReadingCsvHeaderLine(Scanner scanner) {
-        if (scanner.hasNextLine()){
+        if (scanner.hasNextLine()) {
             scanner.nextLine();
         }
     }
@@ -101,7 +102,7 @@ public class StorageCsv implements Storage {
         for (String k : rowDetails) {
             row = row + " " + k;
         }
-        return  row.trim();
+        return row.trim();
     }
 
     /**
@@ -131,14 +132,14 @@ public class StorageCsv implements Storage {
         String[] currentState = taskList.saveStateCsv();
         try {
             // Deletes past history
-            FileWriter fileWriter = new FileWriter(csvFile,false);
+            FileWriter fileWriter = new FileWriter(csvFile, false);
             fileWriter.write(System.lineSeparator());
 
             // Updates the history with current state of taskList
             fileWriter = new FileWriter(csvFile, true);
             fileWriter.write(HEADER);
             fileWriter.write(System.lineSeparator());
-            for( String msg : currentState){
+            for (String msg : currentState) {
                 fileWriter.write(msg);
                 fileWriter.write(System.lineSeparator());
             }

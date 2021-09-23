@@ -8,7 +8,7 @@ import taskman.util.TaskList;
 /**
  * Command that contains details when user inputs Bye
  */
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
     private final String divider = "----------------------------------------------\n";
     private final String helpMessage = "Here is a quick guide on the Command line Commands: \n"
             + divider + "Viewing help : help \n"
@@ -27,7 +27,7 @@ public class HelpCommand extends Command{
      * @param storage Storage object to save
      * @param taskList Tasklist to add task to
      */
-    public HelpCommand(Storage storage, TaskList taskList){
+    public HelpCommand(Storage storage, TaskList taskList) {
         super(storage, taskList, false);
     }
 

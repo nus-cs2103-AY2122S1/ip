@@ -1,16 +1,15 @@
 package taskman.util;
 
-import taskman.exception.DukeException;
-import taskman.exception.FileNotFoundException;
-import taskman.tasktypes.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import taskman.exception.DukeException;
+import taskman.exception.FileNotFoundException;
+import taskman.tasktypes.Task;
 
 
 /**
@@ -31,7 +30,7 @@ public class StorageTxt implements Storage {
         dir.mkdirs();
         File savedOutput = new File(filePath + "/savedOutput.txt");
         if (!savedOutput.exists()) {
-            try{
+            try {
                 savedOutput.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,7 +91,7 @@ public class StorageTxt implements Storage {
 
             // Update with the new State
             fileWriter = new FileWriter(savedOutput, true);
-            for( String msg : currentState){
+            for (String msg : currentState) {
                 fileWriter.write(msg);
                 fileWriter.write(System.lineSeparator());
             }

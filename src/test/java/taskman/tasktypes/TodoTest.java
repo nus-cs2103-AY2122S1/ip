@@ -1,13 +1,12 @@
 package taskman.tasktypes;
 
-import taskman.exception.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import taskman.exception.DukeException;
+import taskman.exception.InvalidFormatException;
 
 /**
  * Deadline test class
@@ -22,14 +21,13 @@ class TodoTest {
     }
 
     @Test
-    public void todoToString_invalidInputHasDeadline_InvalidFormatException() {
-        assertThrows(InvalidFormatException.class, () -> new Todo("todo2 /by", false)) ;
+    public void todoToString_invalidInputHasDeadline_invalidFormatException() {
+        assertThrows(InvalidFormatException.class, () -> new Todo("todo2 /by", false));
     }
 
     @Test
-    public void todoToString_invalidInputHasEvent_InvalidFormatException() {
-        assertThrows(InvalidFormatException.class, () -> new Todo("todo1 /at", false)) ;
+    public void todoToString_invalidInputHasEvent_invalidFormatException() {
+        assertThrows(InvalidFormatException.class, () -> new Todo("todo1 /at", false));
     }
-
 
 }

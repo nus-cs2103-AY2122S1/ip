@@ -3,12 +3,13 @@ package taskman.gui;
 
 import java.io.IOException;
 
-import taskman.TaskMan;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import taskman.TaskMan;
+
 
 /**
  * Main Stage of the application
@@ -26,10 +27,10 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-            setPrimaryScene(primaryStage);
-            setupMainWindow();
-            primaryStage.setOnHiding( event ->  setupCloseEvent());
-            primaryStage.show();
+        setPrimaryScene(primaryStage);
+        setupMainWindow();
+        primaryStage.setOnHiding(event -> setupCloseEvent());
+        primaryStage.show();
     }
 
     /**

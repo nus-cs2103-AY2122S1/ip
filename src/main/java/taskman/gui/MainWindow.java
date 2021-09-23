@@ -1,21 +1,27 @@
 package taskman.gui;
 
-import taskman.TaskMan;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-
-
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+import taskman.TaskMan;
 
 /**
  * Main Window
@@ -113,7 +119,7 @@ public class MainWindow extends AnchorPane {
      *
      * @return String containing task details from the popup
      */
-    private String popupDialogAddNewTask(){
+    private String popupDialogAddNewTask() {
         Dialog<String> dialog = new Dialog<>();
         setupDialogTaskTypeDescription(dialog);
         Optional<String> result = dialog.showAndWait();
@@ -150,7 +156,8 @@ public class MainWindow extends AnchorPane {
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("Add Task", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-        dialog.setResultConverter(dialogButtonPressTaskTypeDescription(buttonTypeOk, taskTypeDropDownOption, descriptionText));
+        dialog.setResultConverter(dialogButtonPressTaskTypeDescription(buttonTypeOk,
+                taskTypeDropDownOption, descriptionText));
     }
 
     /**
@@ -180,8 +187,8 @@ public class MainWindow extends AnchorPane {
      */
     private void setupDialogDateTime(Dialog dialog, String taskType) {
         dialog.setTitle("Add time");
-        dialog.setHeaderText("This is a custom dialog. Enter info and \n" +
-                "press Okay (or click title bar 'X' for cancel).");
+        dialog.setHeaderText("This is a custom dialog. Enter info and \n"
+                + "press Okay (or click title bar 'X' for cancel).");
         dialog.setResizable(true);
         TextField date = new TextField();
         TextField timee = new TextField();
@@ -195,10 +202,10 @@ public class MainWindow extends AnchorPane {
         Label label4 = new Label("24 hour format");
         grid.add(label1, 1, 1);
         grid.add(date, 2, 1);
-        grid.add(label2, 3,1);
+        grid.add(label2, 3, 1);
         grid.add(label3, 1, 2);
         grid.add(timee, 2, 2);
-        grid.add(label4, 3,2);
+        grid.add(label4, 3, 2);
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("Okay", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
@@ -225,9 +232,9 @@ public class MainWindow extends AnchorPane {
             public String call(ButtonType b) {
                 if (b == buttonTypeOk) {
                     boolean ifNeedDate = checkIfNeedDate((String) taskType.getValue());
-                    if (ifNeedDate){
+                    if (ifNeedDate) {
                         String dateTime = popupDialogDateTime((String) taskType.getValue());
-                        return taskType.getValue() + " " + description.getText()  + dateTime;
+                        return taskType.getValue() + " " + description.getText() + dateTime;
                     }
                     return taskType.getValue() + " " + description.getText();
                 }

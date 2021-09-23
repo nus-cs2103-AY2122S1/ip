@@ -1,18 +1,18 @@
 package taskman.util;
 
-import taskman.exception.DukeException;
-import taskman.exception.InvalidFormatException;
-import taskman.tasktypes.Deadline;
-import taskman.tasktypes.Event;
-import taskman.tasktypes.Task;
-import taskman.tasktypes.Todo;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import taskman.exception.DukeException;
+import taskman.exception.InvalidFormatException;
+import taskman.tasktypes.Deadline;
+import taskman.tasktypes.Event;
+import taskman.tasktypes.Task;
+import taskman.tasktypes.Todo;
 
 /**
  * contains the task list that has operations to add/delete tasks in the list
@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Basic constructor for Task list
      */
-    public TaskList(){
+    public TaskList() {
         mapper = new LinkedHashMap<>();
         listLen = 0;
     }
@@ -49,13 +49,15 @@ public class TaskList {
             Task pastTask = Task.empty();
             switch (formattedTask[0]) {
             case "T" :
-                pastTask = new Todo(formattedTask[2], isDone );
+                pastTask = new Todo(formattedTask[2], isDone);
                 break;
             case "E" :
                 pastTask = new Event(formattedTask[2], isDone);
                 break;
             case "D" :
                 pastTask = new Deadline(formattedTask[2], isDone);
+                break;
+            default:
                 break;
             }
             mapper.put(pastTask.getDescription(), pastTask);
@@ -71,9 +73,9 @@ public class TaskList {
      */
     public Task done(String input) throws DukeException {
         try {
-            int list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
+            int listNo = Integer.parseInt(input.trim()); //possible NumberFormatException
             Collection<Task> values = mapper.values();
-            Task second = values.stream().skip(list_no-1).findFirst().orElse(null); // possible for task to be null
+            Task second = values.stream().skip(listNo - 1).findFirst().orElse(null); // possible for task to be null
             String key = second.getDescription();
             mapper.put(key, mapper.get(key).setDone());
             return mapper.get(key);
@@ -93,9 +95,9 @@ public class TaskList {
      */
     public Task delete(String input) throws DukeException {
         try {
-            int list_no = Integer.parseInt(input.trim());
+            int listNo = Integer.parseInt(input.trim());
             Collection<Task> values = mapper.values();
-            Task deleted = values.stream().skip(list_no-1).findFirst().orElse(null); // possible for task to be null
+            Task deleted = values.stream().skip(listNo - 1).findFirst().orElse(null); // possible for task to be null
             String key = deleted.getDescription();
             mapper.remove(key);
             return deleted;
@@ -163,9 +165,9 @@ public class TaskList {
         Iterator<Task> look = values.iterator();
         String check = "";
         int pos = 0;
-        while (look.hasNext()){
-            String listPos = pos+1 + ". ";
-            check = check + listPos + look.next().toString() +"\n";
+        while (look.hasNext()) {
+            String listPos = pos + 1 + ". ";
+            check = check + listPos + look.next().toString() + "\n";
             pos++;
         }
         return check;
@@ -186,7 +188,7 @@ public class TaskList {
 
         int pos = 1;
 
-        while (look.hasNext()){
+        while (look.hasNext()) {
             Task curr = look.next();
             Matcher m = p.matcher(curr.getDescription());
 

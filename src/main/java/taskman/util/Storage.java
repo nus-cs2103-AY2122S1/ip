@@ -1,9 +1,9 @@
 package taskman.util;
 
+import java.util.List;
+
 import taskman.exception.DukeException;
 import taskman.tasktypes.Task;
-
-import java.util.List;
 
 public interface Storage {
     List<String> loadSaved() throws DukeException;

@@ -12,7 +12,7 @@ import taskman.exception.InvalidFormatException;
 /**
  * Deadline Task class that sets description of task, date, time
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /**
      * Deadline Constructor, main method that formats input and sets details of deadline

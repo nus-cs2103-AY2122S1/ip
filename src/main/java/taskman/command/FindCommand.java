@@ -36,9 +36,9 @@ public class FindCommand extends Command {
 
         String keysFound = taskList.find(key);
 
-        if (keysFound.equals("")){
-            return "Sorry, there is no task with keyword: " + key ;
+        if (keysFound.equals("")) {
+            return "Sorry, there is no task with keyword: " + key;
         }
-        return successFindMessage + key +"\n" + keysFound;
+        return successFindMessage + key + "\n" + keysFound;
     }
 }

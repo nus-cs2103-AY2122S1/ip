@@ -29,7 +29,7 @@ public class Parser {
      * @param taskList tasklist object
      */
     public Parser(Storage storage, TaskList taskList) {
-        this.storage= storage;
+        this.storage = storage;
         this.taskList = taskList;
     }
 
@@ -41,7 +41,7 @@ public class Parser {
             List<String> prevState = storage.loadSaved();
             taskList.insertPast(prevState);
         } catch (DukeException e) {
-            System.out.println(e.toString() + "\nPlease try again" );
+            System.out.println(e.toString() + "\nPlease try again");
         }
     }
 

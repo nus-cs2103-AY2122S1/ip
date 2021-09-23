@@ -10,7 +10,7 @@ import taskman.exception.InvalidFormatException;
 /**
  * Task class that sets description of task, date, time
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
 
     // Constructor
