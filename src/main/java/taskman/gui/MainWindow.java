@@ -47,10 +47,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Settiing the TaskMan within main window
      *
-     * @param d TaskMan
+     * @param taskMan TaskMan object
      */
-    public void setDuke(TaskMan d) {
-        this.taskMan = d;
+    public void setDuke(TaskMan taskMan) {
+        this.taskMan = taskMan;
     }
 
     /**
