@@ -12,6 +12,8 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.helpful_functions.HelpfulFunctions;
 
+import java.util.Arrays;
+
 /**
  * Parser is a class that provides useful method(s) to make sense of and translate user input into Command.
  */
@@ -92,57 +94,60 @@ public class Parser {
         return true;
     }
 
+    private static int numOfComponentsExclCommand(String input, String regex) {
+        String[] splittedInput = input.split(" ", 2);
+        // This means input contains only one word, the command
+        if (splittedInput.length < 2) {
+            return 0;
+        }
+        String inputWithoutCommand = splittedInput[1];
+        long numOfComponents
+                = Arrays.stream(inputWithoutCommand.strip().split(regex)).filter(e -> e.length() > 0).count();
+        return (int) numOfComponents;
+    }
+
     private static void checkValidityTodo(String input) throws DukeException {
         final int NUM_OF_ARGUMENTS = 1;
-        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "todo");
+        final String REGEX = " ";
+        if (numOfComponentsExclCommand(input, REGEX) < 1) {
+            throw new DukeException(":( OOPS!!! Description of todo cannot be empty!");
+        }
     }
 
     private static void checkValidityDeadline(String input) throws DukeException {
         final String REGEX_FOR_DATE = "/by";
-        checkPresenceOfDate(input, REGEX_FOR_DATE);
-        final int NUM_OF_ARGUMENTS = 2;
-        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "deadline");
+        if (numOfComponentsExclCommand(input, REGEX_FOR_DATE) < 2) {
+            throw new DukeException(":( OOPS!!! A deadline task requires both name and date!");
+        }
     }
 
     private static void checkValidityEvent(String input) throws DukeException {
         final String REGEX_FOR_DATE = "/at";
-        checkPresenceOfDate(input, REGEX_FOR_DATE);
-        final int NUM_OF_ARGUMENTS = 2;
-        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "event");
+        if (numOfComponentsExclCommand(input, REGEX_FOR_DATE) < 2) {
+            throw new DukeException(":( OOPS!!! An event task requires both name and date!");
+        }
     }
 
     private static void checkValidityFind(String input) throws DukeException {
         final int NUM_OF_ARGUMENTS = 1;
-        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "find");
+        final String REGEX = " ";
+        int numOfComponents = numOfComponentsExclCommand(input, REGEX);
+        if (numOfComponents < 1) {
+            throw new DukeException(":( OOPS!!! Please specify what you want to find.");
+        } else if (numOfComponents > 1) {
+            throw new DukeException(":( OOPS!!! Duke only supports finding by a single keyword.");
+        }
     }
 
     private static void checkValidityDoneOrDelete(String input, TaskList taskList, String commandType)
             throws DukeException {
         final int NUM_OF_ARGUMENTS = 1;
-        checkNumOfArguments(input, NUM_OF_ARGUMENTS, commandType);
 
         final String REGEX = " ";
         String[] splittedInput = input.split(REGEX);
 
         String indexArgument = splittedInput[1];
         checkIndexArgument(indexArgument, taskList);
-    }
-
-    private static void checkNumOfArguments(String input, int numOfArguments, String commandType) throws DukeException {
-        int length;
-        final String REGEX_FOR_INPUTS_WITHOUT_DATE = " ";
-        if (commandType.equals("deadline") || commandType.equals("event")) {
-            final String REGEX_TO_SPLIT_DATE = commandType.equals("deadline") ? "/by" : "/at";
-            String inputWithoutDate = trimDate(input, REGEX_TO_SPLIT_DATE);
-            length = inputWithoutDate.split(" ").length + 1;
-        } else {
-            length = input.split(REGEX_FOR_INPUTS_WITHOUT_DATE).length;
-        }
-
-        if (length != numOfArguments + 1) {
-            throw new DukeException(
-                    String.format(":( OOPS!!! There should be %s argument(s) in a %s command.", numOfArguments, commandType));
-        }
     }
 
     private static void checkIndexArgument(String indexArgument, TaskList taskList) throws DukeException {
@@ -170,7 +175,7 @@ public class Parser {
 
         // If the second condition is met, it means that no date is written after the regexIndex
         if (!containsRegex || regexIndex == splittedInput.length - 1) {
-            throw new DukeException(":( OOPS!!! Please specify a date using " + regexForDate);
+            throw new DukeException(":( OOPS!!! Please specify a date");
         }
     }
 
