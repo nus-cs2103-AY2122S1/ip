@@ -159,19 +159,4 @@ public class Ui {
                         + taskType + " cannot be empty.";
     }
 
-    /**
-     * Returns the error message for not being able to
-     * find the file.
-     *
-     * @return The string containing the error message.
-     */
-    public String loadingError() {
-
-        return "OH NO :( The file cannot be found...";
-    }
-
-
-
-
-
 }

@@ -184,11 +184,11 @@ public class Parser {
     public Command checkDeleteAndDone(String input) throws DukeException {
         String[] splitInput = input.trim().split(" +");
         boolean isDelete = splitInput[0].equals("delete");
-        String errorCommand = isDelete ? "deleted" : " marked done";
+        String errorCommand = isDelete ? " deleted" : " marked done";
 
         if (splitInput.length != 2) {
             throw new DukeException("OOPS!!! The task to be"
-                    + errorCommand + "is not indicated properly!!");
+                    + errorCommand + " is not indicated properly!!");
         }
 
         int taskNum = Integer.valueOf(splitInput[1]);

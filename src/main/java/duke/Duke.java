@@ -31,7 +31,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.loadingError();
             tasks = new TaskList();
         }
         parser = new Parser(ui, tasks);
