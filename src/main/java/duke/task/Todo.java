@@ -1,9 +1,16 @@
 package duke.task;
 
+/**
+ * Encapsulates a to-do task.
+ */
 public class Todo extends Task {
     private String taskName;
     private String taskSymbol = "T";
 
+    /**
+     * Constructs a Todo object.
+     * @param taskName
+     */
     public Todo(String taskName) {
         this.taskName = taskName;
     }

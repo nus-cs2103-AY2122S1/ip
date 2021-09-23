@@ -1,10 +1,18 @@
 package duke.task;
 
+/**
+ * Encapsulates a task with a deadline.
+ */
 public class Deadline extends Task {
     private String taskName;
     private String time;
     private String taskSymbol = "D";
 
+    /**
+     * Constructs a deadline object.
+     * @param taskName Name of the deadline task.
+     * @param time Deadline of the task.
+     */
     public Deadline(String taskName, String time) {
         this.taskName = taskName;
         this.time = time;
