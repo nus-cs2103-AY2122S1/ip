@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
-
 /**
  * @author Dr-Octavius
  *
@@ -16,12 +14,25 @@ public class Task {
     protected TASK_TYPE type;
 
     /**
+     * Class Constructor that takes 3 parameters
+     *
+     * @param description Task description
+     * @param state whether state is Done
+     * @param type Type of Task
+     */
+    public Task(TASK_TYPE type,String description, boolean state) {
+        this(description);
+        this.type = type;
+        isDone = state;
+    }
+
+    /**
      * Class Constructor that takes 2 parameters
      *
      * @param description Task description
      * @param type Type of Task
      */
-    public Task(String description, TASK_TYPE type) {
+    public Task(TASK_TYPE type,String description) {
         this(description);
         this.type = type;
         isDone = false;
@@ -35,7 +46,6 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        isDone = false;
     }
 
     private String getStatusIcon() {
@@ -99,8 +109,8 @@ public class Task {
      *
      * @return current date
      */
-    public LocalDate getBy() {
-        return LocalDate.now();
+    public String getBy() {
+        return null;
     }
 
     /**
@@ -108,8 +118,17 @@ public class Task {
      *
      * @return Blank String
      */
-    public String getAt() {
-        return " ";
+    public String getDate() {
+        return null;
+    }
+
+    /**
+     * Placeholder for Overriding methods
+     *
+     * @return Blank String
+     */
+    public String getTime() {
+        return null;
     }
 
     /**
