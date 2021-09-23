@@ -128,40 +128,46 @@ public class Storage {
         }
     }
 
-    private boolean checkStoredTodoValidity(String[] splittedLine, int lineNumber) throws DukeException {
+    /**
+     * Throws an exception if number of elements of splittedLine is less than expected. It will not throw an
+     * exception if more components than expected was present, as the regex might be part of the task name as well.
+     * @param splittedLine The result of the storage line splitted by regex.
+     * @param lineNumber Line number of the storage line.
+     * @param numSegments Number of elements of splittedLine one would normally expect.
+     * @throws DukeException DukeException is thrown if there are less elements in splittedLine than expected.
+     */
+    private static void checkSplittedLineLen(String[] splittedLine, int lineNumber, int numSegments) throws DukeException {
         String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
-        if (splittedLine.length != 3) {
+        String errorTail = "\nLine will subsequently be removed.";
+        if (splittedLine.length < numSegments) {
             throw new DukeException(errorHeading
-                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_TODO));
+                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_TODO)
+                    + errorTail);
         }
+    }
+
+    private static void checkCompletionStatusFormat(String[] splittedLine, int lineNumber) throws DukeException {
+        String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
+        String errorTail = "\nLine will subsequently be removed.";
         if (!(splittedLine[1].equals("0") || splittedLine[1].equals("1"))) {
-            throw new DukeException(errorHeading + "Completion status should be 0 or 1");
+            throw new DukeException(errorHeading + "Completion status should be 0 or 1" + errorTail);
         }
+    }
+    private boolean checkStoredTodoValidity(String[] splittedLine, int lineNumber) throws DukeException {
+        checkSplittedLineLen(splittedLine, lineNumber, N_SEGMENTS_IN_TODO);
+        checkCompletionStatusFormat(splittedLine, lineNumber);
         return true;
     }
 
     private boolean checkStoredEventValidity(String[] splittedLine, int lineNumber) throws DukeException {
-        String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
-        if (splittedLine.length != N_SEGMENTS_IN_EVENT) {
-            throw new DukeException(errorHeading
-                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_EVENT));
-        }
-        if (!(splittedLine[1].equals("0") || splittedLine[1].equals("1"))) {
-            throw new DukeException(errorHeading + "Completion status should be 0 or 1");
-        }
+        checkSplittedLineLen(splittedLine, lineNumber, N_SEGMENTS_IN_EVENT);
+        checkCompletionStatusFormat(splittedLine, lineNumber);
         return true;
     }
 
     private boolean checkStoredDeadlineValidity(String[] splittedLine, int lineNumber) throws DukeException {
-        String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
-        if (splittedLine.length != N_SEGMENTS_IN_DEADLINE) {
-            throw new DukeException(errorHeading
-                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_DEADLINE));
-        }
-        if (!(splittedLine[1].equals("0") || splittedLine[1].equals("1"))) {
-            throw new DukeException(errorHeading + "Completion status should be 0 or 1");
-        }
+        checkSplittedLineLen(splittedLine, lineNumber, N_SEGMENTS_IN_DEADLINE);
+        checkCompletionStatusFormat(splittedLine, lineNumber);
         return true;
     }
-
 }
