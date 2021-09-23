@@ -52,6 +52,7 @@ public class MainWindow extends AnchorPane {
 
         String[] dukeResponseAndExitStatus = duke.getResponseAndExitStatus(userInputText);
         String dukeResponseInString = dukeResponseAndExitStatus[0];
+        assert dukeResponseAndExitStatus[1] == "0" || dukeResponseAndExitStatus[1] == "1";
         boolean dukeShouldExit = dukeResponseAndExitStatus[1] == "1" ? true : false;
         Label dukeResponse = new Label(dukeResponseInString);
 
