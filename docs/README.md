@@ -1,29 +1,83 @@
-# User Guide
+# User Guide for Duke
 
 ## Features 
 
-### Feature-ABC
+### Adding task to be done: `todo`
 
-Description of the feature.
+Adds a task to be done to Duke.
 
-### Feature-XYZ
+Format: `todo TASK_TO_BE_DONE`
 
-Description of the feature.
+Examples:
+- `todo running`
+- `todo wash the dishes`
 
-## Usage
+### Adding event to attend: `event`
 
-### `Keyword` - Describe action
+Adds an event to be attended to Duke.
 
-Describe the action and its outcome.
+Format: `event EVENT_TO_ATTEND /at DATE_TIME`
+- DATE_TIME is to be in the format of dd/mm/yyyy HHmm, time will follow the 24hour clock format.
 
-Example of usage: 
+Examples:
+- `event project meeting /at 25/09/2021 2200`
+- `event concert /at 25/12/2022 1500`
 
-`keyword (optional arguments)`
+### Adding deadline to be completed: `deadline`
 
-Expected outcome:
+Adds a task with a deadline to be completed by to Duke. It will also be added as a reminder.
 
-Description of the outcome.
+Format: `deadline TASK_TO_COMPLETED_BY_DEADLINE /at DATE_TIME`
+- DATE_TIME is to be in the format of dd/mm/yyyy HHmm, time will follow the 24hour clock format.
 
-```
-expected output
-```
+Examples:
+- `deadline project /by 25/09/2021 2200`
+- `deadline buy presents /by 25/12/2022 1200`
+
+### Listing all tasks and reminders for deadlines to be completed: `list`
+
+Shows a list of all tasks in Duke and also shows a list of all deadlines to be completed as a reminder.
+
+Format: `list`
+
+Examples: `list`
+![Example](ExampleList.png)
+
+### Marking task as done: `done`
+
+Marks a task in Duke as done. If the task has a deadline, it will be removed from the reminder list in Duke.
+
+Format: `done INDEX`
+- Deletes the task at the specified `INDEX`.
+- The index refers to the index number shown in the displayed task list.
+- The index **must be a positive integer** 1, 2, 3, ...
+
+Example:
+- `done 2` marks the second task in the task list as done.
+  ![Example](ExampleDone.png)
+
+### Deleting task from Duke: `delete`
+
+Deletes a task from the task list in Duke. If the task has a deadline, it will be removed from the reminder 
+list in Duke.
+
+Format: `delete INDEX`
+- Deletes the task at the specified `INDEX`.
+- The index refers to the index number shown in the displayed task list.
+- The index **must be a positive integer** 1, 2, 3, ...
+
+Examples:
+- `delete 2` removes the second task in the task list. If it
+has a deadline, remove it from the reminder list too.
+![Example](ExampleDelete.png)
+
+### Finding tasks from Duke: `find`
+
+Finds tasks which descriptions contain the given String.
+
+Format: `find ANY_STRING`
+- Description of the tasks does not include the date and time of the task.
+
+Examples:
+- `find Tom` returns a list of tasks that contains the string Tom.
+![Example](ExampleFind.png)
