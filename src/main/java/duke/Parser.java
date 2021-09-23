@@ -103,7 +103,6 @@ public class Parser {
             }
             return bot.handleSort(inputs[1].trim());
         default:
-            System.out.println("i reached here");
             return bot.handleWrongCommand();
         }
     }

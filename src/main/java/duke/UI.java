@@ -11,14 +11,14 @@ public class UI {
      * Returns the starting message of Duke.
      */
     public String showStartMessage() {
-        return "Hello! I'm Duke\n" + "What can I do for you?\n";
+        return "Hello! I'm TaskMe!\n" + "Task me with any command!\n";
     }
 
     /**
      * Returns the exiting message of Duke.
      */
     public String showExitMessage() {
-        return "Goodbye! for now...\n";
+        return "TaskMe says goodbye!\n";
     }
 
     /**
@@ -28,7 +28,7 @@ public class UI {
      * @param size The total number of tasks.
      */
     public String showAddTaskMessage(Task t, int size) {
-        return "I've added this task:\n" + t
+        return "TaskMe has added this task:\n" + t
                 + "\n" + "You have " + size + " tasks left!\n";
     }
 
@@ -38,7 +38,7 @@ public class UI {
      * @param t The task that was completed.
      */
     public String showCompleteTaskMessage(Task t) {
-        return "Well done! You finally completed " + t.getName() + "!\n";
+        return "TaskMe is impressed! You finally completed" + t.getName() + "!\n";
     }
 
     /**
@@ -48,7 +48,7 @@ public class UI {
      * @param size The total number of tasks.
      */
     public String showDeleteTaskMessage(Task t, int size) {
-        return "The task has been removed:\n" + t
+        return "TaskMe has removed task:\n" + t
                 + "\n" + "You have " + size + " tasks left!\n";
     }
 
@@ -58,7 +58,7 @@ public class UI {
      * @param tasklist The TaskList object where all the tasks are stored.
      */
     public String getListMessage(TaskList tasklist) {
-        String message = "Here are your tasks... if you choose to do it...\n";
+        String message = "Here are your tasks! TaskMe wishes you good luck!\n";
         String listMessage = tasklist.getAllTasks();
         return message + listMessage;
     }
@@ -67,7 +67,7 @@ public class UI {
      * Returns the the list of all commands available to Duke.
      */
     public String showListOfCommands() {
-        return "Unknown Command!\n";
+        return "TaskMe does not understand that command!\n";
     }
 
     /**
@@ -85,11 +85,11 @@ public class UI {
      * @param tasks String input of the tasks found.
      */
     public String showFoundTask(String tasks) {
-        return "Here are the matching tasks in your list:"
+        return "TaskMe found these tasks in your list:"
                 + tasks;
     }
 
     public String showSortedTask(String tasks) {
-        return "Here are your sorted tasks:\n" + tasks;
+        return "TaskMe has sorted your tasks!:\n" + tasks;
     }
 }
