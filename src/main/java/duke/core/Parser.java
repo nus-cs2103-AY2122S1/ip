@@ -29,8 +29,10 @@ public class Parser {
             checkValiditiy(input, taskList);
 
             // Return a Command based on the input type (determined by first word of input)
-            String[] splittedInput = input.split(" ");
-            switch (splittedInput[0]) {
+            final String REGEX = " ";
+            String[] splittedInput = input.split(REGEX);
+            String commandType = splittedInput[0];
+            switch (commandType) {
             case "list":
                 return new ListCommand();
             case "done":
@@ -49,22 +51,23 @@ public class Parser {
                 return validEventHandler(input);
             default:
                 // This is for any other erroneous input we did not catch from checkValidity
-                DukeException e = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                DukeException e = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means");
                 return new ExceptionalCommand(e);
             }
         } catch (DukeException e) {
             return new ExceptionalCommand(e);
         }
-
     }
 
     private static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
-        String[] splittedInput = input.split(" ");
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
+        String commandType = splittedInput[0];
         if (input.length() == 0) {
             throw new DukeException(":( OOPS!!! The input cannot be empty.");
         }
 
-        switch (splittedInput[0]) {
+        switch (commandType) {
         case "todo":
             checkValidityTodo(input);
             break;
@@ -75,85 +78,130 @@ public class Parser {
             checkValidityEvent(input);
             break;
         case "done":
-            checkValidityDone(input, taskList);
+            checkValidityDoneOrDelete(input, taskList, "done");
             break;
         case "delete":
-            checkValidityDelete(input, taskList);
+            checkValidityDoneOrDelete(input, taskList, "delete");
             break;
+        case "find":
+            checkValidityFind(input);
+            break;
+        default:
+            // No action needed due to the default case in parse()
         }
         return true;
     }
 
     private static void checkValidityTodo(String input) throws DukeException {
-        String[] splittedInput = input.split(" ");
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
-        }
+        final int NUM_OF_ARGUMENTS = 1;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "todo");
     }
 
     private static void checkValidityDeadline(String input) throws DukeException {
-        String[] splittedInput = input.split(" ");
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty.");
-        }
+        final String REGEX_FOR_DATE = "/by";
+        checkPresenceOfDate(input, REGEX_FOR_DATE);
+        final int NUM_OF_ARGUMENTS = 2;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "deadline");
     }
 
     private static void checkValidityEvent(String input) throws DukeException {
-        String[] splittedInput = input.split(" ");
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! The description of an event cannot be empty.");
+        final String REGEX_FOR_DATE = "/at";
+        checkPresenceOfDate(input, REGEX_FOR_DATE);
+        final int NUM_OF_ARGUMENTS = 2;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "event");
+    }
+
+    private static void checkValidityFind(String input) throws DukeException {
+        final int NUM_OF_ARGUMENTS = 1;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, "find");
+    }
+
+    private static void checkValidityDoneOrDelete(String input, TaskList taskList, String commandType)
+            throws DukeException {
+        final int NUM_OF_ARGUMENTS = 1;
+        checkNumOfArguments(input, NUM_OF_ARGUMENTS, commandType);
+
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX);
+
+        String indexArgument = splittedInput[1];
+        checkIndexArgument(indexArgument, taskList);
+    }
+
+    private static void checkNumOfArguments(String input, int numOfArguments, String commandType) throws DukeException {
+        int length;
+        final String REGEX_FOR_INPUTS_WITHOUT_DATE = " ";
+        if (commandType.equals("deadline") || commandType.equals("event")) {
+            final String REGEX_TO_SPLIT_DATE = commandType.equals("deadline") ? "/by" : "/at";
+            String inputWithoutDate = trimDate(input, REGEX_TO_SPLIT_DATE);
+            length = inputWithoutDate.split(" ").length + 1;
+        } else {
+            length = input.split(REGEX_FOR_INPUTS_WITHOUT_DATE).length;
+        }
+
+        if (length != numOfArguments + 1) {
+            throw new DukeException(
+                    String.format(":( OOPS!!! There should be %s argument(s) in a %s command.", numOfArguments, commandType));
         }
     }
 
-    private static void checkValidityDone(String input, TaskList taskList) throws DukeException {
-        String[] splittedInput = input.split(" ");
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! You must specify an index");
-        } else {
-            if (HelpfulFunctions.isInteger(splittedInput[1])) {
-                int index = Integer.parseInt(splittedInput[1]);
-                if (index < 1 || index > taskList.getSize()) {
-                    throw new DukeException(":( OOPS!!! Your index is out of range");
-                }
-            } else {
-                throw new DukeException(":( OOPS!!! Your second argument must be an integer");
+    private static void checkIndexArgument(String indexArgument, TaskList taskList) throws DukeException {
+        if (HelpfulFunctions.isInteger(indexArgument)) {
+            int index = Integer.parseInt(indexArgument);
+            if (index < 1 || index > taskList.getSize()) {
+                throw new DukeException(":( OOPS!!! Your index is out of range");
             }
+        } else {
+            throw new DukeException(":( OOPS!!! Your second argument must be an integer");
         }
     }
 
-    private static void checkValidityDelete(String input, TaskList taskList) throws DukeException {
+    private static void checkPresenceOfDate(String input, String regexForDate) throws DukeException {
+        boolean containsRegex = false;
+        int regexIndex = -1;
         String[] splittedInput = input.split(" ");
-        if (splittedInput.length == 1) {
-            throw new DukeException(":( OOPS!!! You must specify an index");
-        } else {
-            if (HelpfulFunctions.isInteger(splittedInput[1])) {
-                int index = Integer.parseInt(splittedInput[1]);
-                if (index < 1 || index > taskList.getSize()) {
-                    throw new DukeException(":( OOPS!!! Your index is out of range");
-                }
-            } else {
-                throw new DukeException(":( OOPS!!! Your second argument must be an integer");
+        for (int i = 0; i < splittedInput.length; i++) {
+            if (splittedInput[i].equals(regexForDate)) {
+                containsRegex = true;
+                regexIndex = i;
+                break;
             }
+        }
+
+        // If the second condition is met, it means that no date is written after the regexIndex
+        if (!containsRegex || regexIndex == splittedInput.length - 1) {
+            throw new DukeException(":( OOPS!!! Please specify a date using " + regexForDate);
         }
     }
 
     private static Command validTodoHandler(String input) {
-        String[] splittedInput = input.split(" ", 2);
+        final String REGEX = " ";
+        String[] splittedInput = input.split(REGEX, 2);
         return new TodoCommand(splittedInput[1]);
     }
 
     private static Command validDeadlineHandler(String input) {
-        String details = input.split(" ", 2)[1];
-        String regexForDetails = "/by";
-        String splittedDetails[] = details.split(regexForDetails);
-        return new DeadlineCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
+        final String REGEX_FOR_INPUT = " ";
+        String details = input.split(REGEX_FOR_INPUT, 2)[1];
+
+        final String REGEX_TO_SPLIT_DATE = "/by";
+        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE);
+
+        return new DeadlineCommand(splittedByDate[0].trim(), splittedByDate[1].trim());
     }
 
     private static Command validEventHandler(String input) {
-        String details = input.split(" ", 2)[1];
-        String regexForDetails = "/at";
-        String splittedDetails[] = details.split(regexForDetails);
-        return new EventCommand(splittedDetails[0].trim(), splittedDetails[1].trim());
+        final String REGEX_FOR_INPUT = " ";
+        String details = input.split(REGEX_FOR_INPUT, 2)[1];
+
+        final String REGEX_TO_SPLIT_DATE = "/at";
+        String splittedByDate[] = details.split(REGEX_TO_SPLIT_DATE);
+
+        return new EventCommand(splittedByDate[0].trim(), splittedByDate[1].trim());
+    }
+
+    private static String trimDate(String input, String regex) {
+        return input.split(regex)[0].trim();
     }
 
 }
