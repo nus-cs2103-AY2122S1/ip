@@ -11,17 +11,17 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
-    protected TASK_TYPE type;
+    protected TASKTYPE type;
 
     /**
      * Class Constructor that takes 3 parameters
      *
+     * @param type Type of Task
      * @param description Task description
      * @param state whether state is Done
-     * @param type Type of Task
      */
-    public Task(TASK_TYPE type,String description, boolean state) {
-        this(description);
+    public Task(TASKTYPE type, String description, boolean state) {
+        this(TASKTYPE.D, description);
         this.type = type;
         isDone = state;
     }
@@ -29,10 +29,10 @@ public class Task {
     /**
      * Class Constructor that takes 2 parameters
      *
-     * @param description Task description
      * @param type Type of Task
+     * @param description Task description
      */
-    public Task(TASK_TYPE type,String description) {
+    public Task(TASKTYPE type, String description) {
         this(description);
         this.type = type;
         isDone = false;
@@ -41,6 +41,7 @@ public class Task {
     /**
      * Class Constructor that takes 1 parameters
      * Task type is not set with this constructor
+     * Completion Status is not set with this constructor
      *
      * @param description Task description
      */
@@ -81,14 +82,14 @@ public class Task {
     }
 
     /**
-     * Returns TASK_TYPE Enum of the Task
+     * Returns TASKTYPE Enum of the Task
      * If Event Task, E Enum is returned
      * If Deadline Task, D Enum is returned
      * If Todo Task, T Enum is returned
      *
-     * @return Task's TASK_TYPE Enum
+     * @return Task's TASKTYPE Enum
      */
-    public TASK_TYPE getType() {
+    public TASKTYPE getType() {
         return type;
     }
 

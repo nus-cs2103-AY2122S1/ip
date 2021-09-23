@@ -1,9 +1,9 @@
 package duke.utils;
 
-import duke.task.TASK_TYPE;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.task.TASKTYPE;
 
 /**
  * Class that contains methods to make sense of the user command
@@ -30,33 +30,33 @@ public class Parser {
     public static int decoder(String userInput) {
         int res;
         switch (userInput) {
-            case "bye":
-                res = 0;
-                break;
-            case "list":
-                res = 1;
-                break;
-            case "done":
-                res = 2;
-                break;
-            case "todo":
-                res = 3;
-                break;
-            case "deadline":
-                res = 4;
-                break;
-            case "event":
-                res = 5;
-                break;
-            case "delete":
-                res = 6;
-                break;
-            case "find":
-                res = 7;
-                break;
-            default:
-                res = 8;
-                break;
+        case "bye":
+            res = 0;
+            break;
+        case "list":
+            res = 1;
+            break;
+        case "done":
+            res = 2;
+            break;
+        case "todo":
+            res = 3;
+            break;
+        case "deadline":
+            res = 4;
+            break;
+        case "event":
+            res = 5;
+            break;
+        case "delete":
+            res = 6;
+            break;
+        case "find":
+            res = 7;
+            break;
+        default:
+            res = 8;
+            break;
         }
         return res;
     }
@@ -66,7 +66,7 @@ public class Parser {
         String out = "";
         for (int i = 0; i < arr.length; i++) {
             out = out.concat(arr[i]);
-            if (i == arr.length-1) {
+            if (i == arr.length - 1) {
                 continue;
             }
             if (arr[i].equals("")) {
@@ -77,23 +77,23 @@ public class Parser {
         return out;
     }
 
-    public static boolean isNotValid(String input, TASK_TYPE t) {
+    public static boolean isNotValid(String input, TASKTYPE t) {
         String[] arr = input.split(" ");
         if (arr.length == 1) {
             return true;
         }
-        if (t.equals(TASK_TYPE.T)) {
+        if (t.equals(TASKTYPE.T)) {
             return false;
         }
         int c = 0;
         for (String s : arr) {
-            if (s.equals("/by") && t.equals(TASK_TYPE.D)) {
-                return !DformatCheck(arr, c += 1);
-            } else if (s.equals("/at") && t.equals(TASK_TYPE.E)) {
-                return !EformatCheck(arr, c += 1);
-            } else if (s.equals("/at") && t.equals(TASK_TYPE.D)){
+            if (s.equals("/by") && t.equals(TASKTYPE.D)) {
+                return !dFormatCheck(arr, c += 1);
+            } else if (s.equals("/at") && t.equals(TASKTYPE.E)) {
+                return !eFormatCheck(arr, c += 1);
+            } else if (s.equals("/at") && t.equals(TASKTYPE.D)) {
                 return true;
-            } else if (s.equals("/by") && t.equals(TASK_TYPE.E)){
+            } else if (s.equals("/by") && t.equals(TASKTYPE.E)) {
                 return true;
             } else {
                 c++;
@@ -102,8 +102,8 @@ public class Parser {
         return false;
     }
 
-    private static boolean DformatCheck(String[] arr, int index) {
-        if (index != arr.length-1) {
+    private static boolean dFormatCheck(String[] arr, int index) {
+        if (index != arr.length - 1) {
             return false;
         }
         try {
@@ -114,13 +114,13 @@ public class Parser {
         }
     }
 
-    private static boolean EformatCheck(String[] arr, int index) {
-        if (index != arr.length-2) {
+    private static boolean eFormatCheck(String[] arr, int index) {
+        if (index != arr.length - 2) {
             return false;
         }
         try {
             LocalDate.parse(arr[index]);
-            LocalDate.parse(arr[index+1]);
+            LocalDate.parse(arr[index + 1]);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -161,7 +161,7 @@ public class Parser {
             if (s.equals("")) {
                 continue;
             }
-            if (i == arr.length-1) {
+            if (i == arr.length - 1) {
                 index++;
             }
             if (res[index] == null) {

@@ -26,7 +26,7 @@ public class Event extends Task {
      * @param time Time when the Event will take place
      */
     public Event(boolean state, String description, String date, String time) {
-        super(TASK_TYPE.E,description,state);
+        super(TASKTYPE.E, description, state);
         this.date = LocalDate.parse(date);
         this.time = LocalTime.parse(time);
     }
@@ -39,7 +39,7 @@ public class Event extends Task {
      * @param time Time when the Event will take place
      */
     public Event(String description, String date, String time) {
-        super(TASK_TYPE.E,description);
+        super(TASKTYPE.E, description);
         this.date = LocalDate.parse(date);
         this.time = LocalTime.parse(time);
     }

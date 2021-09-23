@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import duke.task.TASK_TYPE;
+import duke.task.TASKTYPE;
 import duke.task.Task;
 
 /**
@@ -86,13 +86,13 @@ public class Storage {
                     .concat(",")
                     .concat(t.getDescription())
             );
-            if (t.getType().equals(TASK_TYPE.D)) {
+            if (t.getType().equals(TASKTYPE.D)) {
                 writer.write(",".concat(t.getBy()));
             }
-            if (t.getType().equals(TASK_TYPE.E)) {
+            if (t.getType().equals(TASKTYPE.E)) {
                 writer.write(",".concat(t.getDate()));
                 writer.write(",".concat(t.getTime()));
-            };
+            }
             writer.write(",");
             writer.newLine();
             writer.close();

@@ -1,35 +1,31 @@
 package duke;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TASK_TYPE;
+import duke.task.TASKTYPE;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-import javafx.scene.image.Image;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
 
 public class Duke {
 
     private final TaskList tasks;
     private final Storage storage;
     private final Ui ui;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image bot = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
         this("/data", "data.txt");
     }
 
-    public Duke(String storagePath, String fileName) {
+    private Duke(String storagePath, String fileName) {
         ui = new Ui();
         storage = new Storage(storagePath, fileName);
         tasks = new TaskList(storage.getFile());
@@ -39,7 +35,7 @@ public class Duke {
         InputStream stream = new ByteArrayInputStream(input.getBytes());
 
         Scanner scannerObj = new Scanner(stream);
-        String out = "";
+        String out;
         String nextIn;
 
         try {
@@ -64,7 +60,7 @@ public class Duke {
             break;
         case 3:
             nextIn = scannerObj.nextLine();
-            if (Parser.isNotValid(nextIn, TASK_TYPE.T)) {
+            if (Parser.isNotValid(nextIn, TASKTYPE.T)) {
                 out = "☹ OOPS!!! The description of a todo cannot be empty.";
                 break;
             }
@@ -76,7 +72,7 @@ public class Duke {
         case 4:
             String[] res;
             nextIn = scannerObj.nextLine();
-            if (Parser.isNotValid(nextIn, TASK_TYPE.D)) {
+            if (Parser.isNotValid(nextIn, TASKTYPE.D)) {
                 out = "☹ OOPS!!! Please supply a description and/or date in the format yyyy-mm-dd!";
                 break;
             }
@@ -89,7 +85,7 @@ public class Duke {
         case 5:
             String[] ins;
             nextIn = scannerObj.nextLine();
-            if (Parser.isNotValid(nextIn, TASK_TYPE.E)) {
+            if (Parser.isNotValid(nextIn, TASKTYPE.E)) {
                 out = "☹ OOPS!!! Please supply a description and/or a date & time in the format yyyy-mm-dd HH:MM(24 hour clock)!";
                 break;
             }
@@ -97,7 +93,7 @@ public class Duke {
             nextTask = new Event(ins[0], ins[1], ins[2]);
             tasks.add(nextTask);
             storage.saveEntry(nextTask);
-            out = ui.deadline(nextTask, tasks.size());
+            out = ui.event(nextTask, tasks.size());
             break;
         case 6:
             index = scannerObj.nextInt() - 1;

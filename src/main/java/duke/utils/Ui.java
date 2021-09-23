@@ -46,13 +46,6 @@ public class Ui {
         String out = " Bye. Hope to see you again soon!";
         return out;
     }
-    /**
-     * Prints out message when new Task has been added
-     */
-    public String add(String text) {
-        String out = "added: ".concat(text);
-        return out;
-    }
 
     /**
      * Prints out message when a todo has been added

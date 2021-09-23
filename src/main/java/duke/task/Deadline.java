@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * @param by Actual Deadline of Dealine Task
      */
     public Deadline(boolean state, String description, String by) {
-        super(TASK_TYPE.D,description,state);
+        super(TASKTYPE.D, description, state);
         this.by = LocalDate.parse(by);
     }
 
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @param by Actual Deadline of Dealine Task
      */
     public Deadline(String description, String by) {
-        super(TASK_TYPE.D,description);
+        super(TASKTYPE.D, description);
         this.by = LocalDate.parse(by);
     }
 

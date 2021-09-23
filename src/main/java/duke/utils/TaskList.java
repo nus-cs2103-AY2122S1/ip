@@ -1,16 +1,16 @@
 package duke.utils;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TASK_TYPE;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TASKTYPE;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class TaskList {
     // Level-6 -> A-Collections: Task List
@@ -30,17 +30,16 @@ public class TaskList {
             taskList = new ArrayList<>();
             while (sc.hasNext()) {
                 String taskType = sc.next();
-                String x1,x2,x3;
-                if (taskType.equals(TASK_TYPE.T.name())) {
-                    Task t = new Todo(Boolean.parseBoolean(sc.next()),sc.next());
+                if (taskType.equals(TASKTYPE.T.name())) {
+                    Task t = new Todo(Boolean.parseBoolean(sc.next()), sc.next());
                     add(t);
                     sc.nextLine();
-                } else if (taskType.equals(TASK_TYPE.D.name())) {
-                    Task t = new Deadline(Boolean.parseBoolean(sc.next()),sc.next(),sc.next());
+                } else if (taskType.equals(TASKTYPE.D.name())) {
+                    Task t = new Deadline(Boolean.parseBoolean(sc.next()), sc.next(), sc.next());
                     add(t);
                     sc.nextLine();
                 } else {
-                    Task t = new Event(Boolean.parseBoolean(sc.next()),sc.next(),sc.next(),sc.next());
+                    Task t = new Event(Boolean.parseBoolean(sc.next()), sc.next(), sc.next(), sc.next());
                     add(t);
                     sc.nextLine();
                 }

@@ -1,6 +1,6 @@
 package duke.task;
 
 // A-Enums: Set Enums for Task type
-public enum TASK_TYPE {
-    T,D,E
+public enum TASKTYPE {
+    T, D, E
 }

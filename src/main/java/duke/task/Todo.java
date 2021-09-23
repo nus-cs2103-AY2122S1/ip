@@ -16,7 +16,7 @@ public class Todo extends Task {
      * @param description Task description
      */
     public Todo(boolean state, String description) {
-        super(TASK_TYPE.T,description,state);
+        super(TASKTYPE.T, description, state);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Todo extends Task {
      * @param description Task description
      */
     public Todo(String description) {
-        super(TASK_TYPE.T,description);
+        super(TASKTYPE.T, description);
     }
 
 }
