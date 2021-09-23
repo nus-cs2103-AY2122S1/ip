@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.core.Storage;
 import duke.core.TaskList;
-import duke.gui.Ui;
 
 /**
  * Encapsulates a command to be returned by Parser.parse() when it encounters an exception while parsing.

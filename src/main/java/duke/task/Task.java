@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * An abstraction for Tasks.
+ */
 public abstract class Task {
     private boolean completed;
 
@@ -15,6 +18,10 @@ public abstract class Task {
         completed = true;
     }
 
+    /**
+     * Retrieves the icon that marks whether a task is completed.
+     * @return "X" if the task has been completed, else " ".
+     */
     public String getStatusIcon() {
         return completed ? "X" : " ";
     }
@@ -45,6 +52,10 @@ public abstract class Task {
         return String.join(REGEX, splittedTime);
     }
 
+    /**
+     * Returns the storage format of the task.
+     * @return The storage format of the task.
+     */
     public abstract String toStorageFormat();
 
 }
