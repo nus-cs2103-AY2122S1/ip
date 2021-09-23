@@ -75,6 +75,7 @@ public class TaskList {
      * @return The message to be displayed by Duke.
      */
     public String markAsDone(int index) {
+        assert index > 0: "Index of completed task should be at least 1.";
         Task taskToMark = listOfTasks.get(index - 1);
         taskToMark.setCompleted();
         String outputLine1 = "Nice! I've marked this task as done:\n";
@@ -89,6 +90,7 @@ public class TaskList {
      * @return The message to be displayed by Duke.
      */
     public String delete(int index) {
+        assert index > 0: "Index of task to delete should be at least 1.";
         Task taskToRemove = listOfTasks.get(index - 1);
         listOfTasks.remove(index - 1);
         String outputLine1 = "Noted. I've removed this task: \n";
