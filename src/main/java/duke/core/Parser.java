@@ -35,20 +35,25 @@ public class Parser {
             String[] splittedInput = input.split(REGEX);
             String commandType = splittedInput[0];
             switch (commandType) {
+            case "l":
             case "list":
                 return new ListCommand();
             case "done":
                 return new DoneCommand(Integer.valueOf(splittedInput[1]));
             case "delete":
                 return new DeleteCommand(Integer.valueOf(splittedInput[1]));
+            case "f":
             case "find":
                 return new FindCommand(splittedInput[1]);
+            case "b":
             case "bye":
                 return new ByeCommand();
+            case "t":
             case "todo":
                 return validTodoHandler(input);
             case "deadline":
                 return validDeadlineHandler(input);
+            case "e":
             case "event":
                 return validEventHandler(input);
             default:
@@ -70,12 +75,14 @@ public class Parser {
         }
 
         switch (commandType) {
+        case "t":
         case "todo":
             checkValidityTodo(input);
             break;
         case "deadline":
             checkValidityDeadline(input);
             break;
+        case "e":
         case "event":
             checkValidityEvent(input);
             break;
@@ -85,6 +92,7 @@ public class Parser {
         case "delete":
             checkValidityDoneOrDelete(input, taskList, "delete");
             break;
+        case "f":
         case "find":
             checkValidityFind(input);
             break;
