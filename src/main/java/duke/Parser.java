@@ -4,7 +4,9 @@ public class Parser {
     /**
      * Static method that attempts to parse user input to form a new task.
      * If unsuccessful, it returns a null value, meaning the command does not
-     * involve creating a new task, and is handled by the caller.
+     * involve creating a new task, and is handled by the caller. This method
+     * is static because Parser does not require storing any state or configuration
+     * related to a specific instance.
      *
      * @param input the input entered by the user
      * @return The task if applicable, or null if the command does not involve
@@ -30,6 +32,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input from an existing DataFile instead of interactive user input.
+     * Creates the correct type of task and sets the deadline/time field if
+     * applicable, and checks to see if it has already been marked as done.
+     *
+     * @param fileLine A single line from the existing DataFile.
+     * @return The task from 1 line from the existing DataFile.
+     */
     public static Task parseFileLine(String fileLine) {
         Task newTask;
         if (fileLine.startsWith("[T]", 3)) {

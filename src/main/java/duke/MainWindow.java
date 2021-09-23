@@ -60,6 +60,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(MainWindow.WELCOME_MESSAGE, dukeImage));
     }
 
+    /**
+     * A convenience method used to start program execution from multiple points,
+     * instead of only from the Launcher class.
+     *
+     * @param args Command line arguments supplied when launching the application, unused.
+     */
     public static void main(String[] args) {
         Launcher.main(args);
     }

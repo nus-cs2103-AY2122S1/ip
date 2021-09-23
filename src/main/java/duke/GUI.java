@@ -12,15 +12,37 @@ public class GUI {
 
     private final String DATA_FILE_PATH = "./dude_data.txt";
 
+    /**
+     * A convenience method used to start program execution from multiple points,
+     * instead of only from the Launcher class.
+     *
+     * @param args Command line arguments supplied when launching the application, unused.
+     */
     public static void main(String[] args) {
         Launcher.main(args);
     }
 
+    /**
+     * Constructor for that properly initialises the taskList field with a
+     * DataFile.
+     *
+     */
     public GUI() {
         DataFile dataFile = new DataFile(DATA_FILE_PATH);
         taskList = new TaskList(dataFile);
     }
 
+    /**
+     * Parses user input and executes the appropriate response.
+     * Initially passes the input to Parser to attempt to parse a new Task. If
+     * a new Task object is returned, it is added into the taskList. If null is
+     * returned instead, the command involves interacting with existing tasks,
+     * and the correct response behaviour is directly implemented here. In future,
+     * Command classes will be used to handle this in a more elegant fashion.
+     *
+     * @param str The input given by the user.
+     * @return The string response to be sent to the user via the GUI interface.
+     */
     public String getResponse(String str) {
         assert !str.equals("");
         Task newTask = Parser.parseInput(str);
