@@ -1,0 +1,18 @@
+todo eat lunch
+deadline finish IP /by 28/8/2021 2359
+event sleep /at tonight 2359
+done 1
+deadline do homework /by 27/08/2021 2359
+list
+done 2
+done 3
+done
+list
+delete 5
+delete 4
+delete 1
+delete
+delete 1
+delete 1
+list
+bye
