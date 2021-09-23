@@ -88,17 +88,15 @@ public class Parser {
      * @return The boolean value of the result of the check.
      *
      */
-    public boolean hasDescriptionAndDate(String descriptionAndDate, String taskType) {
+    public boolean hasDescription(String descriptionAndDate, String taskType) {
         boolean isMissingDescription;
 
         switch (taskType) {
         case "deadline":
-            isMissingDescription = descriptionAndDate.startsWith("/by")
-                    && descriptionAndDate.endsWith("/by");
+            isMissingDescription = descriptionAndDate.startsWith("/by");
             break;
         case "event":
-            isMissingDescription = descriptionAndDate.startsWith("/at")
-                    && descriptionAndDate.endsWith("/at");
+            isMissingDescription = descriptionAndDate.startsWith("/at");
             break;
         default:
             isMissingDescription = false;
@@ -159,7 +157,7 @@ public class Parser {
 
         String descriptionAndDate = splitInputWords[1].trim();
         if (taskType.equals("deadline") || taskType.equals("event")) {
-            boolean hasDescription = hasDescriptionAndDate(descriptionAndDate,
+            boolean hasDescription = hasDescription(descriptionAndDate,
                     taskType);
             boolean hasDateCommand = hasDateCommand(descriptionAndDate,
                     taskType);
