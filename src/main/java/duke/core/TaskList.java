@@ -50,16 +50,19 @@ public class TaskList {
         for (Task task : listOfTasks) {
             String[] splittedTaskString = task.toString().split(REGEX);
             for (String s : splittedTaskString) {
-                // Check whether final character of string is ')'. If so, remove the ')'.
+                if (s.length() == 0) {
+                    continue;
+                }
+                // Check whether final character of string is ')'. If so, remove the ')'
                 if (s.charAt(s.length() - 1) == ')') {
                     s = s.substring(0, s.length() - 1);
                 }
                 if (s.equals(keyword)) {
                     sb.append(String.format("%s. %s\n", index, task));
-                    index++;
                     break;
                 }
             }
+            index++;
         }
 
         // Remove the last \n for a nicer output
