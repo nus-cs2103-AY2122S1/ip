@@ -12,7 +12,7 @@ import duke.main.TaskDate;
  * @version CS2103T, Semester 2
  */
 public class Event extends Task {
-    private static final String EVENT_MARKER = "E";
+    public static final String EVENT_MARKER = "E";
     private static final String TASK_KEYWORD = "event ";
     private static final String AT_CONNECTOR = "at ";
     private String eventDescription;
@@ -43,15 +43,13 @@ public class Event extends Task {
      *
      * @param eventDescription description of event task.
      * @param dateOfTask date of the event task.
-     * @param tag tag used to tag the task.
      * @throws ParseException due to improper date format.
      */
-    public Event(String eventDescription, String dateOfTask, String tag) throws DukeException {
+    public Event(String eventDescription, String dateOfTask) throws DukeException {
         super();
         this.eventDescription = eventDescription;
         eventDate = TaskDate.convertDateStringToDate(dateOfTask);
         dateString = getDateString();
-        this.eventTag = new TaskTag(tag);
     }
 
     private String getDateString() {

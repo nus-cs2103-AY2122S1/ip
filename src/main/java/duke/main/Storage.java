@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 import duke.task.TaskTag;
 
 /**
@@ -21,6 +24,7 @@ public class Storage {
     private String fileName;
     private File file;
     private FileWriter fileWriter;
+    private final String DIVIDER = " | ";
 
     /**
      * Class constructor.
@@ -86,50 +90,43 @@ public class Storage {
     }
     private Task createNewTask(String taskString) throws DukeException {
         Task task;
-        if (taskString.contains("D |")) {
-            String[] taskDescriptionTagAndDate = getTaskDescriptionTagAndDate(taskString, "| D | ",
-                    "by ");
-            task = Task.createTask("D", taskDescriptionTagAndDate[0], taskDescriptionTagAndDate[2],
-                    taskDescriptionTagAndDate[1]);
-        } else if (taskString.contains("E |")) {
-            String[] taskDescriptionDateAndTag = getTaskDescriptionTagAndDate(taskString, "| E | ",
-                    "at ");
-            task = Task.createTask("E", taskDescriptionDateAndTag[0], taskDescriptionDateAndTag[2],
-                    taskDescriptionDateAndTag[1]);
-        } else {
-            // todo tasks have no dates, so only take task description.
-            String[] taskDescriptionAndTag = getTaskDescriptionTagAndDate(taskString, "| T | ");
-            task = Task.createTask("T", taskDescriptionAndTag[0], taskDescriptionAndTag[1]);
+        String[] taskComponents= splitIntoTaskComponents(taskString);
+        String taskMarker = taskComponents[0];
+        switch (taskMarker) {
+        case Deadline.DEADLINE_MARKER:
+            task = new Deadline(taskComponents[2], taskComponents[3]);
+            break;
+        case Event.EVENT_MARKER:
+            task = new Event(taskComponents[2], taskComponents[3]);
+            break;
+        case Todo.TODO_MARKER:
+            task = new Todo(taskComponents[2]);
+            break;
+        default:
+            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
         }
-        if (taskString.contains("| 0 |")) {
+        task = checkAndMarkTask(task, taskComponents[1]);
+        task = checkAndAddTag(task, taskString, taskComponents);
+        return task;
+    }
+
+    // returns an string array containing taskMarker, done status, description, date and tag.
+    private String[] splitIntoTaskComponents(String taskString) {
+        return taskString.split("\\s\\|\\s");
+    }
+    // checks if the taskString contains a tag and adds the tags the task if so.
+    private Task checkAndMarkTask(Task task, String taskDoneStatus) {
+        String markedDone = "| 0 |";
+        if (taskDoneStatus == markedDone) {
             task.markAsDone();
         }
         return task;
     }
-    private String[] getTaskDescriptionTagAndDate(String taskString, String taskMarker, String ... timeMarker) {
-        String divider = " | ";
-        int startOfTaskDescriptionIndex = getStartingIndex(taskString, taskMarker);
-        int startOfTaskDateIndex = -1;
-        String taskTagSymbol = TaskTag.getStorageTagSymbol();
-        if (timeMarker != null) {
-            startOfTaskDateIndex = getStartingIndex(taskString, timeMarker[0]);
+    private Task checkAndAddTag(Task task, String taskString, String[] taskComponents) throws DukeException {
+        if (taskString.contains(TaskTag.getTagSymbol())) {
+            task.addTag(taskComponents[-1]);
         }
-        String taskDescription = taskString.substring(startOfTaskDescriptionIndex,
-                startOfTaskDateIndex);
-        String taskDate;
-        String taskTag;
-        if (!taskDescription.contains(TaskTag.getStorageTagSymbol())) {
-            taskDate = taskDescription.substring(startOfTaskDateIndex);
-            taskTag = "";
-        } else {
-            int startOfTagIndex = getStartingIndex(taskString, taskTagSymbol);
-            taskDate = taskDescription.substring(startOfTaskDateIndex, startOfTagIndex - taskTagSymbol.length());
-            taskTag = taskTagSymbol.substring(startOfTagIndex - divider.length());
-        }
-        return new String[]{taskDescription, taskTag, taskDate};
-    }
-    private int getStartingIndex(String string, String stringSlicer) {
-        return string.indexOf(stringSlicer) + stringSlicer.length();
+        return task;
     }
     /**
      * Stores all the tasks from the tasks array into the storage file.

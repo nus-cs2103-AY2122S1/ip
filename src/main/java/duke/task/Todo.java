@@ -10,7 +10,7 @@ import duke.main.DukeException;
  */
 public class Todo extends Task {
 
-    private static final String TODO_MARKER = "T";
+    public static final String TODO_MARKER = "T";
     private static final String TODO_KEYWORD = "todo ";
     private String todoDescription;
     private TaskTag todoTag;
@@ -40,11 +40,9 @@ public class Todo extends Task {
      * Class constructor for loading task from storage.
      *
      * @param todoDescription description of the todo task.
-     * @param tag tag use to tag the todo task.
      */
-    public Todo(String todoDescription, String tag) throws DukeException {
-        this.todoDescription = todoDescription;
-        this.todoTag = new TaskTag(tag);
+    public Todo(String ...todoDescription) {
+        this.todoDescription = todoDescription[0];
     }
     /**
      * Prints out the duke.task.

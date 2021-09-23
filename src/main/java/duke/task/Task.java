@@ -11,37 +11,13 @@ import duke.main.DukeException;
 
 public class Task {
     protected boolean isDone;
-
+    private TaskTag tag;
     /**
      * Class constructor for Duke.Task class.
      * Sets isDone to false, meaning duke.task is not done.
      */
     public Task() {
         this.isDone = false;
-    }
-
-    /**
-     * Creates a subclass of task using the description, date and tag provided from storage file.
-     *
-     * @param taskType the name of the tasktype given. For example, "T" for todo.
-     * @param description of the task.
-     * @param tag used to tag the task.
-     * @param date of the task due, not used for todo.
-     * @return either a deadline, event or todo task.
-     * @throws DukeException thrown when an invalid tasktype is given.
-     */
-    public static Task createTask(String taskType, String description, String tag, String ... date)
-                throws DukeException {
-        switch (taskType) {
-        case "D":
-            return new Deadline(description, date[0], tag);
-        case "E":
-            return new Event(description, date[0], tag);
-        case "T":
-            return new Todo(description, tag);
-        default:
-            throw new DukeException(DukeException.Exceptions.EXCEPTIONS);
-        }
     }
     /**
      * Returns the status icon of the duke.task.
@@ -117,5 +93,14 @@ public class Task {
             return taskDescription.substring(startAndEndIndex[0]);
         }
         return taskDescription.substring(startAndEndIndex[0], startAndEndIndex[1]);
+    }
+
+    /**
+     * adds a tag to the task
+     *
+     * @param tag tag used to tag the task.
+     */
+    public void addTag(String tag) throws DukeException {
+        this.tag = new TaskTag(tag);
     }
 }

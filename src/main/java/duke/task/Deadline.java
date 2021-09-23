@@ -10,7 +10,7 @@ import duke.main.TaskDate;
  * @version CS2103T, Semester 1
  */
 public class Deadline extends Task {
-    private static final String DEADLINE_MARKER = "D";
+    public static final String DEADLINE_MARKER = "D";
     private static final String DEADLINE_KEYWORD = "deadline ";
     private static final String BY_CONNECTOR = "by ";
     private String deadlineDescription;
@@ -41,16 +41,15 @@ public class Deadline extends Task {
      *
      * @param deadlineDescription description of deadline duke.task.
      * @param dateOfTask          date of the deadline duke.task.
-     * @param tag variable number of tags used to tag this task.
      * @throws DukeException due to improper date format.
      */
-    public Deadline(String deadlineDescription, String dateOfTask, String tag) throws DukeException {
+    public Deadline(String deadlineDescription, String dateOfTask) throws DukeException {
         super();
         this.deadlineDescription = deadlineDescription;
         this.deadlineDate = TaskDate.convertDateStringToDate(dateOfTask);
         dateString = getDateString();
-        this.deadlineTag = new TaskTag(tag);
     }
+
     private String getDateString() {
         return deadlineDate.toString();
     }
