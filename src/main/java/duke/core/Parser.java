@@ -150,10 +150,12 @@ public class Parser {
     private static void checkValidityDoneOrDelete(String input, TaskList taskList, String commandType)
             throws DukeException {
         final int NUM_OF_ARGUMENTS = 1;
-
         final String REGEX = " ";
-        String[] splittedInput = input.split(REGEX);
+        if (numOfComponentsExclCommand(input, REGEX) != 1) {
+            throw new DukeException(":( OOPS!!! Please specify one and only one argument for " + commandType);
+        }
 
+        String[] splittedInput = input.split(REGEX);
         String indexArgument = splittedInput[1];
         checkIndexArgument(indexArgument, taskList);
     }
