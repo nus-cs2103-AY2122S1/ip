@@ -8,15 +8,62 @@ import duke.task.Event;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 
 public class StorageHandler {
-    private static String path = "src/main/data/TaskList.txt";
+    private static final String DATA_FOLDER_PATH = "./data";
+    private static final String TASK_LIST_PATH = "./TaskList.txt";
+
+    private static final String path = Paths.get(DATA_FOLDER_PATH,
+            TASK_LIST_PATH).normalize().toString();
     private static String fileNewLine = System.lineSeparator();
 
+    /**
+     * Parses a string to create a Task
+     *
+     * @return Task Corresponding to the string
+     */
+    private static Task parseTaskString(String data) {
+        char taskType = 'x';
+        char done = ' ';
+        String description = "";
+        String dateString = "";
+        taskType = data.charAt(1);
+        done = data.charAt(4);
+        if(taskType == 'E' || taskType == 'D') {
+            int slashIndex = taskType == 'E'
+                    ? data.indexOf("(at:")
+                    : data.indexOf("(by:");
+            description = data.substring(7, slashIndex - 1);
+            dateString = data.substring(slashIndex + 5, data.length() - 1);
+        } else {
+            description = data.substring(7);
+        }
+        Task task;
+        if (taskType == 'E') {
+            task = new Event(description, dateString);
+            if (done == 'X')
+                task.markAsDone();
+            return task;
+        } else if (taskType == 'D') {
+            LocalDate deadlineDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            task = new Deadline(description, deadlineDate);
+            if (done == 'X')
+                task.markAsDone();
+            return task;
+        } else {
+            task = new ToDo(description);
+            if (done == 'X')
+                task.markAsDone();
+            return task;
+        }
+    }
     /**
      * Loads list of tasks from TaskList.txt file into TaskList.
      *
@@ -24,7 +71,15 @@ public class StorageHandler {
      */
     public static boolean loadAll() {
         try {
-            File taskListCSV = new File("src/main/data/TaskList.txt");
+            Path dataFolderPath = Paths.get(DATA_FOLDER_PATH);
+            if (Files.notExists(dataFolderPath)) {
+                dataFolderPath = Files.createDirectory(dataFolderPath);
+            }
+
+            Path taskListPath = Paths.get(dataFolderPath.toString(),
+                    TASK_LIST_PATH);
+
+            File taskListCSV = taskListPath.toFile();
             boolean fileExists = taskListCSV.createNewFile();
             if (fileExists) {
                 //new file created
@@ -33,41 +88,9 @@ public class StorageHandler {
                 //file was there alr
                 //load data into TaskList
                 Scanner myReader = new Scanner(taskListCSV);
-                char taskType = 'x';
-                char done = ' ';
-                String description = "";
-                String dateString = "";
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine();
-                    taskType = data.charAt(1);
-                    done = data.charAt(4);
-                    if(taskType == 'E' || taskType == 'D') {
-                        int slashIndex = taskType == 'E'
-                                ? data.indexOf("(at:")
-                                : data.indexOf("(by:");
-                        description = data.substring(7, slashIndex - 1);
-                        dateString = data.substring(slashIndex + 5, data.length() - 1);
-                    } else {
-                        description = data.substring(7);
-                    }
-                    Task task;
-                    if (taskType == 'E') {
-                        task = new Event(description, dateString);
-                        if (done == 'X')
-                            task.markAsDone();
-                        TaskList.getTaskList().addTask(task);
-                    } else if (taskType == 'D') {
-                        LocalDate deadlineDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                        task = new Deadline(description, deadlineDate);
-                        if (done == 'X')
-                            task.markAsDone();
-                        TaskList.getTaskList().addTask(task);
-                    } else {
-                        task = new ToDo(description);
-                        if (done == 'X')
-                            task.markAsDone();
-                        TaskList.getTaskList().addTask(task);
-                    }
+                    TaskList.getTaskList().addTask(parseTaskString(data));
                 }
                 myReader.close();
             }
