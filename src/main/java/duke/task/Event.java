@@ -1,7 +1,6 @@
 package duke.task;
 
-import duke.Duke;
-
+import java.util.Comparator;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,7 +10,7 @@ import java.time.LocalTime;
  * The [E] in toString() identifies an Event object
  */
 
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event>{
     protected LocalDate date;
     protected LocalTime startTime;
     protected LocalTime endTime;
@@ -23,6 +22,19 @@ public class Event extends Task {
         this.startTime = startTime;
         this.endTime =  endTime;
 
+    }
+
+    private LocalDate getDate(){
+        return date;
+    }
+
+    private LocalTime getStartTime(){
+        return startTime;
+    }
+    @Override
+    public int compareTo(Event e) {
+        return Comparator.comparing(Event::getDate)
+                .thenComparing(Event::getStartTime).compare(this, e);
     }
 
     @Override

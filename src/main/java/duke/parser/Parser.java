@@ -7,6 +7,9 @@ import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,32 +25,29 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser{
 
-    private final String FILEPATH = "./duke.txt";
+    private final String FILEPATH = "./tasks.txt";
     private final Storage storage = new Storage(FILEPATH);
-    private final TaskList tasks = new TaskList(storage.load());
+    private TaskList tasks = new TaskList(storage.load());
 
     /**
      * <code>help()</code> shows a list of usable commands that the user can enter into the bot.
      *
-     * @return helpDialog, a string which shows the list of possible user commands
+     * @return a string which shows the list of possible user commands
      */
-    private String help(){
-
-        String helpDialog = "I'm Mr Meeseeks look at me! :)\n"
+    private String showHelp(){
+        return "I'm Mr Meeseeks look at me! :)\n"
                 + "Type in \"todo\", \"deadline\" or \"event\" and I will keep track of a task!\n"
                 + "Type \"list\" to show all tasks so far\n"
                 + "Type \"done\" to mark a task as done\n"
                 + "Type \"find\" to search for a task by keywords\n"
                 + "Type \"bye\" to exit";
-
-        return helpDialog;
     }
     /**
      * <code>list()</code> reads the current TaskList and shows a list of tasks the user has so far.
      *
      * @return listDialog, a string which shows the current list of tasks
      */
-    private String list(){
+    private String listTasks(){
         String listDialog = "Okay! Here's a list of your tasks so far:\n";
         listDialog += tasks.returnAllTasks();
         return listDialog;
@@ -236,6 +236,48 @@ public class Parser{
     }
 
     /**
+     * <code>sortTask()</code> sorts the taskList.
+     * Tasks are sorted by type first: ToDos, Deadlines then Events
+     * Following which Deadlines are sorted chronologically by date then by time
+     * Events are sorted chronologically by date and then by startTime
+     *
+     * @return a dialog string showing the new sorted task.
+     */
+    private String sortTasks(){
+        try{
+            assert tasks.getSize() > 0;
+        } catch (AssertionError e) {
+            return "Oops! There are no tasks to search for...";
+        }
+
+        ArrayList<Task> sortedTasks = new ArrayList<>();
+        ArrayList<ToDo> todos = new ArrayList<>();
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+
+        for (int i = 0; i < tasks.getSize(); i++){
+            Task task = tasks.getTask(i);
+            if (task instanceof ToDo){
+                todos.add( (ToDo) task);
+            } else if (task instanceof Deadline){
+                deadlines.add( (Deadline) task);
+            } else{
+                events.add( (Event) task);
+            }
+        }
+
+        Collections.sort(deadlines);
+        Collections.sort(events);
+
+        sortedTasks.addAll(todos);
+        sortedTasks.addAll(deadlines);
+        sortedTasks.addAll(events);
+
+        tasks = new TaskList(sortedTasks);
+        return "Ok! I've sorted the task list. Here's the new list!\n" + tasks.returnAllTasks();
+    }
+
+    /**
      * Takes in an input string and processes it based on the command type (first word in the string)
      * Shows an error message if the command type is not recognised.
      *
@@ -246,11 +288,13 @@ public class Parser{
      */
 
     public String parseCommand(String input) {
-
-        if (input.equals("help")||input.equals("start")) {
-            return help();
+        
+        if (input.equals("help") || input.equals("start")) {
+            return showHelp();
         } else if (input.equals("list")) {
-            return list();
+            return listTasks();
+        } else if (input.equals("sort")) {
+            return sortTasks();
         } else if (input.startsWith("done")) {
             return markTaskAsDone(input);
         } else if (input.startsWith("delete")) {
@@ -268,6 +312,5 @@ public class Parser{
                 + "Type \"help\" for a list of commands\n"
                 + "Make sure to check for spaces and invalid characters/case";
         }
-
     }
 }
