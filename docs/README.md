@@ -12,19 +12,19 @@
 Sora is a desktop application for managing Tasks. The main mode of input is via Command Line Interface (CLI) with a
 Graphical User Interface (GUI) to show the output.
 
-* [Features](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#features)
-    * [Viewing Help: `help`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#viewing-help-help)
-    * [Exiting the program : `bye`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#exiting-the-program--bye)
-    * [Listing all tasks : `list`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list)
-    * [Adding a task](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#adding-a-task)
-        * [Todo: `todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo)
-        * [Deadline: `deadline`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline)
-        * [Event: `event`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#event-event)
-    * [Marking a task as done: `done`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#marking-a-task-as-done-done)
-    * [Deleting a task: `delete`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deleting-a-task-delete)
-    * [Finding a task: `find`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#finding-a-task-find)
-    * [Sorting the list of tasks: `sort`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#sorting-the-list-of-tasks-sort)
-* [Command Summary](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#command-summary)
+* [Features](#features)
+    * [Viewing Help: `help`](#viewing-help-help)
+    * [Exiting the program : `bye`](#exiting-the-program--bye)
+    * [Listing all tasks : `list`](#listing-all-tasks--list)
+    * [Adding a task](#adding-a-task)
+        * [Todo: `todo`](#todo-todo)
+        * [Deadline: `deadline`](#deadline-deadline)
+        * [Event: `event`](#event-event)
+    * [Marking a task as done: `done`](#marking-a-task-as-done-done)
+    * [Deleting a task: `delete`](#deleting-a-task-delete)
+    * [Finding a task: `find`](#finding-a-task-find)
+    * [Sorting the list of tasks: `sort`](#sorting-the-list-of-tasks-sort)
+* [Command Summary](#command-summary)
 
 ## Features
 
@@ -129,8 +129,7 @@ Format: `done [task number]`
 Note:
 
 1. `task number` **must be a positive integer** 1, 2, 3, ...
-2. The `task number` refers to the `task number` shown by
-   the [`list`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list) command
+2. The `task number` refers to the `task number` shown by the [`list`](#listing-all-tasks--list) command
 3. This command has no effect on a `Task` that is already marked as `done`
 
 <br/>
@@ -144,8 +143,7 @@ Format: `delete [task number]`
 Note:
 
 1. `task number` **must be a positive integer** 1, 2, 3, ...
-2. The `task number` refers to the `task number` shown by
-   the [`list`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list) command
+2. The `task number` refers to the `task number` shown by the [`list`](#listing-all-tasks--list) command
 
 <br/>
 
@@ -158,8 +156,7 @@ Format: `find [keyword]`
 Note:
 
 1. Only description and type of task is searched (e.g. `deadline` will match all tasks of
-   type [`Deadline`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline) and tasks
-   containing `deadline` in their description)
+   type [`Deadline`](#deadline-deadline) and tasks containing `deadline` in their description)
 2. Partial matching of description is possible (e.g. `t` will match tasks with description of `task` and `test`)
 3. `keyword` is _case-insensitive_
 
@@ -174,10 +171,8 @@ Format: `sort <-r>`
 Note:
 
 1. The sort is done by date and time, with the earliest on top
-2. Since [`Todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) does not have a time, it will
-   be the last
-    1. Note that supplying a `-r` flag will
-       cause [`Todo`](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) tasks to be at the top
+2. Since [`Todo`](#todo-todo) does not have a time, it will be the last
+    1. Note that supplying a `-r` flag will cause [`Todo`](#todo-todo) tasks to be at the top
 3. To sort by reverse order, input the `-r` flag
 4. The `-r` flag is optional
 
@@ -185,13 +180,13 @@ Note:
 
 Command | Format
 ------- | ------
-[List](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#listing-all-tasks--list) | `list`
-[Add Todo](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#todo-todo) | `todo [description]`
-[Add Deadline](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deadline-deadline) | `deadline [description] /by [dd/MM/yy] [HHmm]`
-[Add Event](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#event-event) | `event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]`
-[Done](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#marking-a-task-as-done-done) | `done [task number]`
-[Delete](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#deleting-a-task-delete) | `delete [task number]`
-[Find](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#finding-a-task-find) | `find [keyword]`
-[Sort](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#sorting-the-list-of-tasks-sort) | `sort <-r>`
-[Exit](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#exiting-the-program--bye) | `bye`
-[Help](https://github.com/SkyBlaise99/ip/blob/master/docs/README.md#viewing-help-help) | `help`
+[List](#listing-all-tasks--list) | `list`
+[Add Todo](#todo-todo) | `todo [description]`
+[Add Deadline](#deadline-deadline) | `deadline [description] /by [dd/MM/yy] [HHmm]`
+[Add Event](#event-event) | `event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]`
+[Done](#marking-a-task-as-done-done) | `done [task number]`
+[Delete](#deleting-a-task-delete) | `delete [task number]`
+[Find](#finding-a-task-find) | `find [keyword]`
+[Sort](#sorting-the-list-of-tasks-sort) | `sort <-r>`
+[Exit](#exiting-the-program--bye) | `bye`
+[Help](#viewing-help-help) | `help`
