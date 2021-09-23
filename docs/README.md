@@ -134,7 +134,7 @@ Here are the matching tasks in your list:
 1.[T][X] math homework
 ```
 
-### `list` - List all tasks
+### `list` - Lists all tasks
 
 Lists out all tasks present in list of tasks.
 
