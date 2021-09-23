@@ -21,19 +21,8 @@ public class Deadline extends Task {
      * @param description Deadline Task description
      * @param by Actual Deadline of Dealine Task
      */
-    public Deadline(boolean state, String description, String by) {
-        super(TASK_TYPE.D,description,state);
-        this.by = LocalDate.parse(by);
-    }
-
-    /**
-     * Class Constructor that takes 2 parameters
-     *
-     * @param description Deadline Task description
-     * @param by Actual Deadline of Dealine Task
-     */
     public Deadline(String description, String by) {
-        super(TASK_TYPE.D,description);
+        super(description,TASK_TYPE.D);
         this.by = LocalDate.parse(by);
     }
 
@@ -43,8 +32,8 @@ public class Deadline extends Task {
      * @return String description of where Task will be done
      */
     @Override
-    public String getBy() {
-        return by.toString();
+    public LocalDate getBy() {
+        return by;
     }
 
     /**
@@ -55,7 +44,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
-        String data = by.format(df);
+        String data = this.by.format(df);
         return super.toString().concat(" (by: ".concat(data).concat(")"));
     }
 }

@@ -11,21 +11,12 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Class Constructor that takes 2 parameter
-     *
-     * @param description Task description
-     */
-    public Todo(boolean state, String description) {
-        super(TASK_TYPE.T,description,state);
-    }
-
-    /**
-     * Class Constructor that takes 1 parameter
+     * Class Constructor
      *
      * @param description Task description
      */
     public Todo(String description) {
-        super(TASK_TYPE.T,description);
+        super(description,TASK_TYPE.T);
     }
 
 }
