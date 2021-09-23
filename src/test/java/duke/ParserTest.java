@@ -9,7 +9,7 @@ import duke.exception.DukeException;
 public class ParserTest {
 
     @Test
-    public void parse_doneCommand_missingNumber_exceptionThrown() {
+    public void execute_doneMissingNumber_exceptionThrown() {
         ChatBot bot = new ChatBot();
         Parser p = new Parser();
         try {
@@ -20,7 +20,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_doneCommand_invalidNumber_exceptionThrown() {
+    public void execute_doneInvalidNumber_exceptionThrown() {
         ChatBot bot = new ChatBot();
         Parser p = new Parser();
         try {
@@ -31,7 +31,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deadlineCommand_missingDescription_exceptionThrown() {
+    public void execute_deadlineMissingDescription_exceptionThrown() {
         ChatBot bot = new ChatBot();
         Parser p = new Parser();
         try {
@@ -42,7 +42,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deadlineCommand_missingDeadline_exceptionThrown() {
+    public void execute_deadlineMissingDeadline_exceptionThrown() {
         ChatBot bot = new ChatBot();
         Parser p = new Parser();
         try {
@@ -53,7 +53,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deadlineCommand_invalidDeadlineFormat_exceptionThrown() {
+    public void execute_deadlineInvalidDeadlineFormat_exceptionThrown() {
         ChatBot bot = new ChatBot();
         Parser p = new Parser();
         try {

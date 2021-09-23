@@ -1,13 +1,12 @@
 package duke.tasks;
 
-import duke.exception.DukeException;
-
-import duke.util.sort.SortByName;
-import duke.util.sort.SortByType;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import duke.exception.DukeException;
+import duke.util.sort.SortByName;
+import duke.util.sort.SortByType;
 
 /**
  * The TaskList class the abstracts a list of tasks.
@@ -98,7 +97,6 @@ public class TaskList {
      * @return String representation of all the tasks in the list.
      */
     public String getAllTasks() {
-//        Collections.sort(tasks, new SortByMarker());
         String listMessage = "";
         for (int i = 0; i < tasks.size(); i++) {
             listMessage = listMessage + (i + 1) + "." + tasks.get(i).toString() + "\n";
@@ -148,9 +146,15 @@ public class TaskList {
         return foundTask;
     }
 
+    /**
+     * Sorts all tasks based on user input sorting keyword.
+     *
+     * @param sortName User input sorting keyword.
+     * @return String representation of all task that match keyword.
+     */
     public String sortTask(String sortName) throws DukeException {
         String key = sortName;
-        switch (key){
+        switch (key) {
         case "name":
             Collections.sort(tasks, new SortByName());
             return getAllTasks();

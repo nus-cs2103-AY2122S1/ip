@@ -1,8 +1,8 @@
 package duke.util.sort;
 
-import duke.tasks.Task;
-
 import java.util.Comparator;
+
+import duke.tasks.Task;
 
 public class SortByName implements Comparator<Task> {
 

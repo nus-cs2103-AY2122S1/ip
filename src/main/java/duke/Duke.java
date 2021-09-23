@@ -1,7 +1,6 @@
 package duke;
 
 import duke.exception.DukeException;
-
 import duke.util.Status;
 import javafx.application.Platform;
 
@@ -15,6 +14,9 @@ public class Duke {
     private ChatBot bot;
     private Parser parser;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         bot = new ChatBot();
         parser = new Parser();
@@ -61,7 +63,7 @@ public class Duke {
      *
      */
     public void exit() {
-        if (getExitStatus() == Status.STOP)  {
+        if (getExitStatus() == Status.STOP) {
             new Thread() { //inspiration from Lim PeiYuan
                 @Override
                 public void run() {

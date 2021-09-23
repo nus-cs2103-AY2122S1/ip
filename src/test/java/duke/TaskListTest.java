@@ -2,12 +2,11 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -18,8 +17,6 @@ import duke.tasks.Todo;
 public class TaskListTest {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private LocalDateTime testDate = LocalDateTime.parse("22/08/2021 1830".trim(), formatter);
-
-
 
     @Test
     public void addTodo_oneTodo_success() {

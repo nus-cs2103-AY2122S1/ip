@@ -131,6 +131,11 @@ public class ChatBot {
         return ui.showFoundTask(findTask);
     }
 
+    /**
+     * Sorts the tasks by the given sorting keyword.
+     *
+     * @param sortName User input keyword to sort by.
+     */
     public String handleSort(String sortName) throws DukeException {
         String sortedList = tasklist.sortTask(sortName);
         return ui.showSortedTask(sortedList);

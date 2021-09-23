@@ -5,10 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +21,7 @@ import duke.tasks.Todo;
  */
 public class Storage {
 
-    final String STRING_TERMINATOR = "/@";
+    public static final String TERMINATOR = "/@";
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
@@ -115,11 +113,11 @@ public class Storage {
                 Task current = tasklist.getTask(i);
                 //todo change this code block to a method
                 s.append(current.getMarker());
-                s.append(STRING_TERMINATOR);
+                s.append(TERMINATOR);
                 s.append(current.getDone());
-                s.append(STRING_TERMINATOR);
+                s.append(TERMINATOR);
                 s.append(current.getName());
-                s.append(STRING_TERMINATOR);
+                s.append(TERMINATOR);
                 s.append(current.getTime());
 
                 String temp = s.toString();
